@@ -25,7 +25,7 @@ phasicFlow uses CMake as the build system. you need to have CMake-3.22 or higher
   
 # Extentions in future
 ### parallelization 
-* Enabling OpenMPTarget backend to include more GPUs for off-loading calculations. 
+* Extending the code for using OpenMPTarget backend to include more GPUs for off-loading the computations. 
 * Extending high-level parallelization and impelmenting spacial partitioning and load balancing for muilti-GPU computations and running phasicFlow on distributed memory super-computers 
  
 ### basic features 
