@@ -10,8 +10,10 @@ phasicFlow should work with every gnu compiler that implements C++17 standards. 
 * CPU builds: It requires gcc-6.x or higher. 
 * GPU (CUDA): NVCC-10.x or higher.
 
+You also need to have CMake installed on your computer. At the moment CMake-3.22 or higher is needed. 
+
 # How to build? 
-phasicFlow uses CMake as the build system. you need to have CMake-3.22 or higher installed on your machine. 
+phasicFlow uses CMake as the build system. you need to have CMake-3.22 or higher installed on your machine. you can either use the command line for setting-up the build system, or use `cmake-gui` to setup your build system through the GUI. 
 
 ### build for serial execution
  
@@ -23,7 +25,7 @@ phasicFlow uses CMake as the build system. you need to have CMake-3.22 or higher
   
 # Extentions in future
 ### parallelization 
-* Enabling other backends, HIP (amd-GPUs) and HPC (CPU), for phasicFlow
+* Enabling OpenMPTarget backend to include more GPUs for off-loading calculations. 
 * Extending high-level parallelization and impelmenting spacial partitioning and load balancing for muilti-GPU computations and running phasicFlow on distributed memory super-computers 
  
 ### basic features 
