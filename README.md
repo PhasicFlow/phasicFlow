@@ -8,7 +8,7 @@ phasicFlow uses [Kokkos]( https://github.com/kokkos/kokkos) as the backend for p
 # Requirements
 phasicFlow should work with every gnu compiler that implements C++17 standards. For now, it is tested on Ubuntu distribution of linux operating systems. If the minimum requirements are met, there should not be any problem with compiling the code. However, there are always compiler bugs from one version to another that may need you extra attempts for upgrading to newer versions or downgrading to prior versions of the compiler.
 * CPU builds: It requires gcc-6.x or higher. 
-* GPU (CUDA): NVCC-10.x or higher.
+* GPU (CUDA-enabled): NVCC-10.x or higher.
 
 You also need to have CMake installed on your computer. At the moment CMake-3.22 or higher is needed. 
 
