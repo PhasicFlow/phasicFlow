@@ -2,7 +2,7 @@
 #include "iIstream.H"
 
 
-void dFlow::iIstream::putBack(const token& tok)
+void pFlow::iIstream::putBack(const token& tok)
 {
     if (bad())
     {
@@ -24,7 +24,7 @@ void dFlow::iIstream::putBack(const token& tok)
 }
 
 
-bool dFlow::iIstream::getBack(token& tok)
+bool pFlow::iIstream::getBack(token& tok)
 {
     
     if (bad())
@@ -43,7 +43,7 @@ bool dFlow::iIstream::getBack(token& tok)
 }
 
 
-bool dFlow::iIstream::peekBack(token& tok)
+bool pFlow::iIstream::peekBack(token& tok)
 {
     if (putBack_)
     {
@@ -57,7 +57,7 @@ bool dFlow::iIstream::peekBack(token& tok)
     return putBack_;
 }
 
-bool dFlow::iIstream::findToken( const word & w )
+bool pFlow::iIstream::findToken( const word & w )
 {
     rewind();
     token next;
@@ -82,7 +82,7 @@ bool dFlow::iIstream::findToken( const word & w )
     return false;
 }
 
-bool dFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
+bool pFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
 {
     rewind();
     token next;
@@ -104,7 +104,7 @@ bool dFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
     return false;   
 }
 
-bool dFlow::iIstream::findTokenAndNext
+bool pFlow::iIstream::findTokenAndNext
 ( 
     const word& w,
     word& nextW,
@@ -151,7 +151,7 @@ bool dFlow::iIstream::findTokenAndNext
     return false;
 }
 
-bool dFlow::iIstream::findTokenAndNextSilent(const word& w, word& nextW, int32 limitLine)
+bool pFlow::iIstream::findTokenAndNextSilent(const word& w, word& nextW, int32 limitLine)
 {
     if( findTokenSilent(w, limitLine) )
     {
@@ -186,7 +186,7 @@ bool dFlow::iIstream::findTokenAndNextSilent(const word& w, word& nextW, int32 l
 }
 
 
-bool dFlow::iIstream::readBegin(const char* funcName)
+bool pFlow::iIstream::readBegin(const char* funcName)
 {   
     
     const token delimiter(*this);
@@ -206,7 +206,7 @@ bool dFlow::iIstream::readBegin(const char* funcName)
 }
 
 
-bool dFlow::iIstream::readEnd(const char* funcName)
+bool pFlow::iIstream::readEnd(const char* funcName)
 {
     const token delimiter(*this);
 
@@ -225,7 +225,7 @@ bool dFlow::iIstream::readEnd(const char* funcName)
     return true;
 }
 
-bool dFlow::iIstream::readBeginSquare(const char* funcName)
+bool pFlow::iIstream::readBeginSquare(const char* funcName)
 {
 	const token delimiter(*this);
 
@@ -244,7 +244,7 @@ bool dFlow::iIstream::readBeginSquare(const char* funcName)
     return true;
 }
 	    
-bool dFlow::iIstream::readEndSquare(const char* funcName)
+bool pFlow::iIstream::readEndSquare(const char* funcName)
 {
 	const token delimiter(*this);
 
@@ -263,7 +263,7 @@ bool dFlow::iIstream::readEndSquare(const char* funcName)
     return true;
 }
 
-char dFlow::iIstream::readBeginList(const char* funcName)
+char pFlow::iIstream::readBeginList(const char* funcName)
 {
     const token delimiter(*this);
 
@@ -284,7 +284,7 @@ char dFlow::iIstream::readBeginList(const char* funcName)
 }
 
 
-char dFlow::iIstream::readEndList(const char* funcName)
+char pFlow::iIstream::readEndList(const char* funcName)
 {
     const token delimiter(*this);
 
@@ -307,7 +307,7 @@ char dFlow::iIstream::readEndList(const char* funcName)
 }
 
 
-char dFlow::iIstream::readEndStatement(const char* funcName)
+char pFlow::iIstream::readEndStatement(const char* funcName)
 {
     CONSUME_PARAM(funcName);
     const token delimiter(*this);
@@ -325,7 +325,7 @@ char dFlow::iIstream::readEndStatement(const char* funcName)
     return delimiter.pToken();
 }
 
-dFlow::iIstream& dFlow::iIstream::operator()() const
+pFlow::iIstream& pFlow::iIstream::operator()() const
 {
     if (!good())
     {

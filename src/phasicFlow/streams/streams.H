@@ -13,7 +13,7 @@
 
 #include "iTstream.H"
 
-namespace dFlow
+namespace pFlow
 {
 
 
@@ -34,16 +34,16 @@ namespace dFlow
 #define cyanText(text) 		cyanColor<<text<<defaultColor
 #define boldText(text) 		boldChar<<text<<defaultColor
 
-#define Info dFlow::output<<boldChar<<magentaColor<<"> Info: "<<defaultColor<<magentaColor
-#define endInfo defaultColor<<dFlow::nl
+#define Info pFlow::output<<boldChar<<magentaColor<<"> Info: "<<defaultColor<<magentaColor
+#define endInfo defaultColor<<pFlow::nl
 
-#define Report(n) dFlow::output.space(2*n)
-#define endReport dFlow::nl
+#define Report(n) pFlow::output.space(2*n)
+#define endReport pFlow::nl
 
-#define Warning dFlow::output<<boldChar<<yellowColor<<"> Warning\n"<<defaultColor<<yellowColor<<"  " 
-#define endWarning defaultColor<<dFlow::nl
+#define Warning pFlow::output<<boldChar<<yellowColor<<"> Warning\n"<<defaultColor<<yellowColor<<"  " 
+#define endWarning defaultColor<<pFlow::nl
 
-#define Err dFlow::output<<boldChar<<redColor<<"> Error\n"<<defaultColor<<redColor<<"  " 
-#define endErr defaultColor<<dFlow::nl
+#define Err pFlow::output<<boldChar<<redColor<<"> Error\n"<<defaultColor<<redColor<<"  " 
+#define endErr defaultColor<<pFlow::nl
 
 #endif

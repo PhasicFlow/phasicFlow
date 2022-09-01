@@ -1,8 +1,8 @@
 #include "streams.H"
 
 
-dFlow::Ostream dFlow::output(std::cout, "dFlow Ostream");
+pFlow::Ostream pFlow::output(std::cout, "pFlow Ostream");
 
-dFlow::Istream dFlow::input( std::cin, "sFlow Istream"); 
+pFlow::Istream pFlow::input( std::cin, "sFlow Istream"); 
 
-dFlow::Ostream dFlow::errReport( std::cerr, "dFlow error report stream");
+pFlow::Ostream pFlow::errReport( std::cerr, "pFlow error report stream");

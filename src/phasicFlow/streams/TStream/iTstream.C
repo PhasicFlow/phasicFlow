@@ -3,17 +3,17 @@
 #include "error.H"
 #include "iOstream.H"
 
-bool dFlow::iTstream::isLastToken()
+bool pFlow::iTstream::isLastToken()
 {
     return currentToken_ == tokenList_.end();
 }
  
-void dFlow::iTstream::setFirstToken() 
+void pFlow::iTstream::setFirstToken() 
 {
     currentToken_ = tokenList_.begin();
 }
 
-void dFlow::iTstream::validate()
+void pFlow::iTstream::validate()
 {
 	for (auto it = tokenList_.begin(); it != tokenList_.end(); )
 	{
@@ -28,7 +28,7 @@ void dFlow::iTstream::validate()
     }
 }
 
-dFlow::iTstream::iTstream
+pFlow::iTstream::iTstream
 (
     const word& streamName
 )
@@ -43,7 +43,7 @@ dFlow::iTstream::iTstream
     rewind();
 }
 
-dFlow::iTstream::iTstream
+pFlow::iTstream::iTstream
 (
     const word& streamName,
     const tokenList& tList
@@ -61,7 +61,7 @@ dFlow::iTstream::iTstream
     rewind();
 }
 
-dFlow::iTstream::iTstream
+pFlow::iTstream::iTstream
 (
     const word& streamName,
     tokenList&& tList
@@ -81,7 +81,7 @@ dFlow::iTstream::iTstream
 }
 
 // copy assignment from tokenList
-void dFlow::iTstream::operator=(const tokenList& tList)
+void pFlow::iTstream::operator=(const tokenList& tList)
 {
     tokenList_ = tList;
     validate();
@@ -89,25 +89,25 @@ void dFlow::iTstream::operator=(const tokenList& tList)
 }
     
 // move assignment from tokenList
-void dFlow::iTstream::operator=(tokenList&& tList)
+void pFlow::iTstream::operator=(tokenList&& tList)
 {
     tokenList_ = std::move(tList);
     validate();
     rewind();
 }
 
-const dFlow::word& dFlow::iTstream::name() const
+const pFlow::word& pFlow::iTstream::name() const
 {
     return name_;
 }
 
-dFlow::word& dFlow::iTstream::name()
+pFlow::word& pFlow::iTstream::name()
 {
     return name_;
 }
 
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     token& t
 )
@@ -164,7 +164,7 @@ dFlow::iIstream& dFlow::iTstream::read
 
 
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     char& c
 )
@@ -176,7 +176,7 @@ dFlow::iIstream& dFlow::iTstream::read
 }
 
     
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     word& str
 )
@@ -188,7 +188,7 @@ dFlow::iIstream& dFlow::iTstream::read
 }
 
  
-dFlow::iIstream& dFlow::iTstream::readString
+pFlow::iIstream& pFlow::iTstream::readString
 (
     word& str
 )
@@ -200,7 +200,7 @@ dFlow::iIstream& dFlow::iTstream::readString
 }
 
  
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     int64& val
 )
@@ -211,7 +211,7 @@ dFlow::iIstream& dFlow::iTstream::read
     return *this;
 }
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     int32& val
 )
@@ -222,7 +222,7 @@ dFlow::iIstream& dFlow::iTstream::read
     return *this;
 }
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     int16& val
 )
@@ -233,7 +233,7 @@ dFlow::iIstream& dFlow::iTstream::read
     return *this;
 }
  
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     int8& val
 )
@@ -244,7 +244,7 @@ dFlow::iIstream& dFlow::iTstream::read
     return *this;
 }
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     label& val
 )
@@ -255,7 +255,7 @@ dFlow::iIstream& dFlow::iTstream::read
     return *this;
 }
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     uint32& val
 )
@@ -266,7 +266,7 @@ dFlow::iIstream& dFlow::iTstream::read
     return *this;
 }
 
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     uint16& val
 )
@@ -278,7 +278,7 @@ dFlow::iIstream& dFlow::iTstream::read
 }
 
  
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     float& val
 )
@@ -290,7 +290,7 @@ dFlow::iIstream& dFlow::iTstream::read
 }
 
  
-dFlow::iIstream& dFlow::iTstream::read
+pFlow::iIstream& pFlow::iTstream::read
 (
     double& val
 )
@@ -304,7 +304,7 @@ dFlow::iIstream& dFlow::iTstream::read
 
 
 
-void dFlow::iTstream::rewind()
+void pFlow::iTstream::rewind()
 {
     iIstream::resetPutBack();
     setFirstToken();
@@ -312,7 +312,7 @@ void dFlow::iTstream::rewind()
 }
 
 
-void dFlow::iTstream::reset()
+void pFlow::iTstream::reset()
 {
     iIstream::resetPutBack();
     tokenList_.clear();
@@ -320,22 +320,22 @@ void dFlow::iTstream::reset()
     setGood();
 }
 
-const dFlow::tokenList& dFlow::iTstream::tokens()const
+const pFlow::tokenList& pFlow::iTstream::tokens()const
 {
     return tokenList_;
 }
 
-size_t dFlow::iTstream::size()const 
+size_t pFlow::iTstream::size()const 
 {
     return tokenList_.size();
 }
 
-size_t dFlow::iTstream::numTokens()const
+size_t pFlow::iTstream::numTokens()const
 {
     return tokenList_.size();
 }
 
-void dFlow::iTstream::appendTokens
+void pFlow::iTstream::appendTokens
 (
     const tokenList & tList
 )
@@ -348,7 +348,7 @@ void dFlow::iTstream::appendTokens
     rewind();
 }
 
-void dFlow::iTstream::appendToken
+void pFlow::iTstream::appendToken
 (
     const token& t
 )

@@ -1,0 +1,142 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
+
+#ifndef __stridedRange_H__
+#define __stridedRange_H__ 
+
+#include "types.H"
+#include "typeInfo.H"
+#include "dictionary.H"
+
+
+namespace pFlow
+{
+
+template<typename T>
+class
+stridedRange
+{
+protected:
+
+	T 		begin_;
+
+	T 		end_;
+
+	T 		stride_;
+
+	static inline const T maxVal = largestPositive<T>();
+	static inline const T minVal = largestNegative<T>();
+
+public:
+
+	TypeNameTemplateNV("stridedRange",T);
+
+	stridedRange(T begin, T end, T stride)
+	:
+		begin_(begin),
+		end_(end),
+		stride_(stride)
+	{}
+
+	stridedRange(T begin, T stride)
+	:
+		begin_(begin),
+		end_(maxVal),
+		stride_(stride)
+	{}
+
+
+	// it should be in the form of begin:stride:end
+	stridedRange(const word& rangeString)
+	{
+		if(!parseRange(rangeString,begin_,end_, stride_))
+		{
+			fatalErrorInFunction<<
+			"bad input for the range. It should have the form of  begin:stride:end \n";
+			fatalExit;
+		}
+	}
+
+	stridedRange(const dictionary& dict)
+	:
+		begin_(dict.getVal<label>("begin")),
+		end_(dict.getVal<label>("end")),
+		stride_(dict.getVal<label>("stride"))
+	{}
+		
+	inline 
+	T begin()const
+	{
+		return begin_;
+	}
+
+	T end()const
+	{
+		return end_;
+	}
+
+	T stride()const
+	{
+		return stride_;
+	}
+	inline
+	bool isMember(T val, T epsilon = 0)const
+	{
+		if(equal(val,begin_))return true;
+		if(equal(val,end_))return true;
+		if(abs(mod(val-begin_,stride_))<= epsilon) return true;
+		return false;
+	}
+
+	static
+	bool parseRange(const word& rangeString, T& begin, T& end, T& stride)
+	{
+		if(std::count(
+			rangeString.begin(),
+			rangeString.end(), 
+			':') != 2)
+			return false;
+
+		auto col1 = rangeString.find_first_of(":");
+
+		if(col1 == 0 || col1==std::string::npos)return false;
+
+		auto beginCh = rangeString.substr(0,col1);
+    
+	    auto col2 = rangeString.find_first_of(":",col1+1);
+
+	    if(col1 == col2 || col2==std::string::npos)return false;
+
+    	auto strideCh = rangeString.substr(col1+1,col2-col1-1);
+    
+    	auto endCh = rangeString.substr(col2+1);
+
+    	if(!readValue(beginCh,begin))return false;
+    	if(!readValue(strideCh, stride))return false;
+    	if(!readValue(endCh, end))return false;
+    
+	return true;
+
+	}
+};
+
+}
+
+#endif  //__stridedRange_H__ 
