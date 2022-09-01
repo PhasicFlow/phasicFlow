@@ -27,7 +27,7 @@ Licence:
 #include <iostream>
 
 
-namespace dFlow
+namespace pFlow
 {
 
 
@@ -162,7 +162,7 @@ public:
 
 
 
-} // dFlow
+} // pFlow
 
 
 #endif

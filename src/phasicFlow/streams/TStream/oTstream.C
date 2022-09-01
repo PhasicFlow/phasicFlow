@@ -2,7 +2,7 @@
 #include "oTstream.H"
 #include "error.H"
 
-dFlow::oTstream::oTstream
+pFlow::oTstream::oTstream
 (
     const word& nm
 )
@@ -15,7 +15,7 @@ dFlow::oTstream::oTstream
     setGood();
 }
 
-dFlow::oTstream::oTstream
+pFlow::oTstream::oTstream
 (
     const oTstream& src
 )
@@ -29,19 +29,19 @@ dFlow::oTstream::oTstream
 }
 
 
-const dFlow::tokenList& dFlow::oTstream::tokens()const
+const pFlow::tokenList& pFlow::oTstream::tokens()const
 {
     return tokenList_;
 }
 
 
-dFlow::tokenList& dFlow::oTstream::tokens()
+pFlow::tokenList& pFlow::oTstream::tokens()
 {
     return tokenList_;
 }
 
 
-bool dFlow::oTstream::write(const token& tok)
+bool pFlow::oTstream::write(const token& tok)
 {
     if (tok.good())
     {
@@ -53,7 +53,7 @@ bool dFlow::oTstream::write(const token& tok)
 }
 
 
-dFlow::iOstream& dFlow::oTstream::write(const char c)
+pFlow::iOstream& pFlow::oTstream::write(const char c)
 {
     if (!std::isspace(c) && std::isprint(c))
     {
@@ -65,7 +65,7 @@ dFlow::iOstream& dFlow::oTstream::write(const char c)
 }
 
 
-dFlow::iOstream& dFlow::oTstream::write(const char* str)
+pFlow::iOstream& pFlow::oTstream::write(const char* str)
 {
     
     append(token(word(str)));
@@ -74,7 +74,7 @@ dFlow::iOstream& dFlow::oTstream::write(const char* str)
 }
 
 
-dFlow::iOstream& dFlow::oTstream::write(const word& str)
+pFlow::iOstream& pFlow::oTstream::write(const word& str)
 {
     append(token(str)); // tokenType::WORD
 
@@ -82,7 +82,7 @@ dFlow::iOstream& dFlow::oTstream::write(const word& str)
 }
 
 
-dFlow::iOstream& dFlow::oTstream::writeQuoted
+pFlow::iOstream& pFlow::oTstream::writeQuoted
 (
     const word& str,
     const bool quoted
@@ -94,14 +94,14 @@ dFlow::iOstream& dFlow::oTstream::writeQuoted
     return *this;
 }
 
-dFlow::iOstream& dFlow::oTstream::write(const int64 val)
+pFlow::iOstream& pFlow::oTstream::write(const int64 val)
 {
     append(token(val)); // tokenType::INT64
 
     return *this;
 }
 
-dFlow::iOstream& dFlow::oTstream::write(const int32 val)
+pFlow::iOstream& pFlow::oTstream::write(const int32 val)
 {
     append(token(val)); // tokenType::INT64
 
@@ -111,21 +111,21 @@ dFlow::iOstream& dFlow::oTstream::write(const int32 val)
 
 
 
-dFlow::iOstream& dFlow::oTstream::write(const label val)
+pFlow::iOstream& pFlow::oTstream::write(const label val)
 {
     append(token(static_cast<int64>(val))); // tokenType::INT64
 
     return *this;
 }
 
-dFlow::iOstream& dFlow::oTstream::write(const uint32 val)
+pFlow::iOstream& pFlow::oTstream::write(const uint32 val)
 {
     append(token(static_cast<int64>(val))); // tokenType::INT64
 
     return *this;
 }
 
-dFlow::iOstream& dFlow::oTstream::write(const uint16 val)
+pFlow::iOstream& pFlow::oTstream::write(const uint16 val)
 {
     append(token(static_cast<int64>(val))); // tokenType::INT64
 
@@ -133,7 +133,7 @@ dFlow::iOstream& dFlow::oTstream::write(const uint16 val)
 }
 
 
-dFlow::iOstream& dFlow::oTstream::write(const float val)
+pFlow::iOstream& pFlow::oTstream::write(const float val)
 {
     append(token(val)); // tokenType::FLOAT
 
@@ -141,7 +141,7 @@ dFlow::iOstream& dFlow::oTstream::write(const float val)
 }
 
 
-dFlow::iOstream& dFlow::oTstream::write(const double val)
+pFlow::iOstream& pFlow::oTstream::write(const double val)
 {
     append(token(val)); // tokenType::DOUBLE
 
@@ -150,14 +150,14 @@ dFlow::iOstream& dFlow::oTstream::write(const double val)
 
 
 
-void dFlow::oTstream::append(const token& tok)
+void pFlow::oTstream::append(const token& tok)
 {
     
     if( validTokenForStream(tok) )
     	tokenList_.push_back(tok);
 }
 
-void dFlow::oTstream::append(const tokenList& tLisk)
+void pFlow::oTstream::append(const tokenList& tLisk)
 {
     for(auto& e:tLisk)
     {
@@ -165,13 +165,13 @@ void dFlow::oTstream::append(const tokenList& tLisk)
     }
 }
 
-void dFlow::oTstream::reset()
+void pFlow::oTstream::reset()
 {
     this->rewind();
 }
 
 //- Rewind the output stream
-void dFlow::oTstream::rewind()
+void pFlow::oTstream::rewind()
 {
     tokenList_.clear();
     setGood();

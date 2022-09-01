@@ -21,7 +21,7 @@ Licence:
 #ifndef __bTypesFunctions_H__
 #define __bTypesFunctions_H__
 
-#include "dFlowMacros.H"
+#include "pFlowMacros.H"
 #include "numericConstants.H"
 #include "builtinTypes.H"
 #include "math.H"

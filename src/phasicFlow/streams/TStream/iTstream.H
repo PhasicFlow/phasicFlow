@@ -7,7 +7,7 @@
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-namespace dFlow
+namespace pFlow
 {
 
 // helper functions declearation
