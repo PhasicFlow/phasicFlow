@@ -1,0 +1,8 @@
+// the configured options and settings for Tutorial
+#define phasicFlow_VERSION_MAJOR @phasicFlow_VERSION_MAJOR@
+#define phasicFlow_VERSION_MINOR @phasicFlow_VERSION_MINOR@
+#cmakedefine BUILD_SHARED_LIBS
+#cmakedefine pFlow_Build_Serial
+#cmakedefine pFlow_Build_OpenMP
+#cmakedefine pFlow_Build_Cuda
+#cmakedefine USE_STD_PARALLEL_ALG

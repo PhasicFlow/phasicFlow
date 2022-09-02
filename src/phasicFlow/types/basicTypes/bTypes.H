@@ -1,4 +1,4 @@
-/*------------------------------- phasicFlow --------------------------------
+/*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
@@ -18,42 +18,16 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __builtinTypes_H__
-#define __builtinTypes_H__
 
-#include <string>
+#ifndef __bTypes_H__
+#define __bTypes_H__
 
-
-namespace pFlow
-{
-
-#define useDouble 1
-
-// scalars
-#if useDouble
-	using real 	= double;
-#else
-	using real 	= float;
-#endif
-
-using int8 		= 	signed char;
-
-using int16 	=	short int;
-
-using int32 	=	int;
-
-using int64 	=	long long int;
-
-using uint16  = unsigned short int  ;
-
-using uint32 	=	unsigned int;
-
-using label   = std::size_t;
-
-using word 		= std::string;
+#include "builtinTypes.H"
+#include "bTypesFunctions.H"
+#include "Logical.H"
+#include "math.H"
 
 
-} // end of pFlow
 
 
 #endif

@@ -1,0 +1,31 @@
+
+export pFlow_PROJECT_VERSION=v0.1
+
+export pFlow_PROJECT=phasicFlow-$pFlow_PROJECT_VERSION
+
+
+projectDir="$HOME/PhasicFlow" 
+kokkosDir="$HOME/Kokkos/kokkos"
+
+export pFlow_PROJECT_DIR="$projectDir/$pFlow_PROJECT"
+
+# [WM_PROJECT_USER_DIR] - Location of user files
+export pFlow_PROJECT_USER_DIR="$projectDir/$USER-$pFlow_PROJECT_VERSION"
+
+export pFlow_LIB_DIR="$pFlow_PROJECT_DIR/lib"
+
+export pFlow_BIN_DIR="$pFlow_PROJECT_DIR/bin"
+
+export pFlow_SRC_DIR="$pFlow_PROJECT_DIR/src"
+
+export Kokkos_DIR="$kokkosDir"
+
+# Cleanup variables (done as final statement for a clean exit code)
+unset projectDir
+
+export PATH="$pFlow_BIN_DIR:$PATH"
+
+export LD_LIBRARY_PATH="$pFlow_LIB_DIR:$LD_LIBRARY_PATH"
+
+
+#------------------------------------------------------------------------------
