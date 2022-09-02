@@ -63,7 +63,9 @@ Follow one of the followings to build PhasicFlow for one mode of execution.
 #### Serial build for CPU
 Open a new terminal and enter the following commands:
 ```
-cd ~/PhasicFlow/phasicFlow/build
+cd ~/PhasicFlow/phasicFlow
+mkdir build
+cd build
 cmake ../ -DpFlow_Build_Serial=On
 make install
 ```
