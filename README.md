@@ -13,7 +13,14 @@ phasicFlow should work with every gnu compiler that implements C++17 standards. 
 phasicFlow uses [Kokkos]( https://github.com/kokkos/kokkos) as the backend for parallelization. So, you need to  have the code in the local machine alongside phasicFlow. The make system is adjusted in a way so you do not need to compile Kokkos separately and the required source code files from Kokkos are compiled alongside the phasicFlow.
 
 ### CMake
-You also need to have CMake installed on your computer. At the moment CMake-3.22 or higher is needed. 
+You also need to have CMake installed on your computer. At the moment CMake-3.22 or higher is needed.
+
+### tbb
+For now, some parallel algorithms rely on tbb parallel library (C++ parallel backend). This dependency will be removed soon. Use the following commands to install it:
+
+`sudo apt update`
+
+`sudo apt install libtbb-dev`
 
 # How to build? 
 phasicFlow uses CMake as the build system. you need to have CMake-3.22 or higher installed on your machine. you can either use the command line for setting-up the build system, or use `cmake-gui` to setup your build system through the GUI. 
