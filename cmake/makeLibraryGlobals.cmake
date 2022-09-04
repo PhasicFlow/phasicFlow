@@ -1,4 +1,4 @@
-#add a library to dFlow with source files and target_link_libs (thouse under the main CMakeLists.txt)
+#add a library to pFlow with source files and target_link_libs (thouse under the main CMakeLists.txt)
 macro(pFlow_add_library_install target_name src_files target_link_libs)
 
 set(source_files ${${src_files}})
