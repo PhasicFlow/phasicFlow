@@ -88,7 +88,15 @@ public:
 		word description,
 		word opText = "");
 
+	word productName()const
+	{
+		return versionName;
+	}
 
+	word productNameCopyright()const
+	{
+		return versoinCopyright;
+	}
 
 };
 
