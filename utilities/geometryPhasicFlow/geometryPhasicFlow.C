@@ -47,12 +47,12 @@ int main( int argc, char* argv[] )
 	(
 		objectFile
 		(
-			"createGeometryDict",
+			"geometryDict",
 			Control.settings().path(),
 			objectFile::READ_ALWAYS,
 			objectFile::WRITE_NEVER
 		),
-		"createGeometryDict",
+		"geometryDict",
 		true
 	);
 
