@@ -1,0 +1,11 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+
+objectName interaction;
+objectType dicrionary;
+
+materials      (wallMat);    // a list of materials names
+densities      (1000.0);   // density of materials [kg/m3]
+

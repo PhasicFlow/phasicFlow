@@ -32,7 +32,7 @@ bool pFlow::stlWall::readSTLWall
 	auto fileName = dict.getVal<word>("file");
 
 	
-	fileSystem file("",fileName);
+	fileSystem file("./stl",fileName);
 
 	stlFile stl(file);
 	if(!stl.read())
