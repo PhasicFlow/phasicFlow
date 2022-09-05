@@ -70,7 +70,7 @@ add_subdirectory(${Kokkos_Source_DIR} ${phasicFlow_BINARY_DIR}/kokkos)
 
 add_subdirectory(src)
 
-#add_subdirectory(solvers)
+add_subdirectory(solvers)
 
 #add_subdirectory(utilities)
 
