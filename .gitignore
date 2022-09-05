@@ -36,3 +36,4 @@ build/**
 include/**
 bin/**
 lib/**
+**/**notnow

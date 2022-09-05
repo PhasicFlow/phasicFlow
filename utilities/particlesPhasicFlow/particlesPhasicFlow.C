@@ -1,0 +1,195 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
+
+
+#include "positionParticles.H"
+#include "pointStructure.H"
+#include "setFields.H"
+#include "systemControl.H"
+#include "commandLine.H"
+
+using pFlow::output;
+using pFlow::endl;
+using pFlow::dictionary;
+using pFlow::uniquePtr;
+using pFlow::IOobject;
+using pFlow::objectFile;
+using pFlow::fileSystem;
+using pFlow::pointStructure;
+using pFlow::pointStructureFile__;
+using pFlow::positionParticles;
+using pFlow::commandLine;
+using pFlow::setFieldList;
+
+int main( int argc, char* argv[] )
+{
+
+	commandLine cmds(
+		"createParticles",
+		"Read the dictionary createParticles and create particles"
+		" based on the two sub-dictionaries positionParticles and setFields.\n"
+		"First executespositionParticles and then setFields, except "
+		"otherwise selected in the command line.");
+
+			
+	bool positionOnly = false;
+	cmds.add_flag(
+		"--positionParticles-only",
+		positionOnly,
+		"Exectue the positionParticles part only and store the created "
+		"pointStructure in the time folder.");
+	
+	bool setOnly = false;
+	cmds.add_flag("--setFields-only",
+		setOnly,
+		"Exectue the setFields part only. Read the pointStructure from "
+		"time folder and setFields and save the result in the same time folder.");
+
+
+	if(!cmds.parse(argc, argv)) return 0;
+	
+	if(setOnly && positionOnly)
+	{
+		Err<<
+		"Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n"<<endErr;
+		return 1;
+	}	
+
+// this should be palced in each main 
+#include "initialize_Control.H"
+
+	auto objCPDict = IOobject::make<dictionary>
+	(
+		objectFile
+		(
+			"createParticles",
+			Control.settings().path(),
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
+		),
+		"createParticles",
+		true
+	);
+
+	auto& cpDict = objCPDict().getObject<dictionary>();
+
+	uniquePtr<IOobject> pStructObj{nullptr};
+
+	if(!setOnly)
+	{
+
+		// position particles based on the dict content 
+		Report(0)<< "Positioning points . . . \n"<<endReport;
+		auto pointPosition = positionParticles::create(cpDict.subDict("positionParticles"));
+
+		fileSystem pStructPath = Control.time().path()+pointStructureFile__;
+
+		auto finalPos = pointPosition().getFinalPosition();
+
+		
+		pStructObj = IOobject::make<pointStructure>
+		(
+			objectFile
+			(
+				pointStructureFile__,
+				Control.time().path(),
+				objectFile::READ_NEVER,
+				objectFile::WRITE_ALWAYS			
+			),
+			finalPos
+		);
+
+		auto& pSruct = pStructObj().getObject<pointStructure>();
+
+		Report(1)<< "Created pStruct with "<< pSruct.size() << " points and capacity "<<
+		pSruct.capacity()<<" . . ."<< endReport;
+
+		Report(1)<< "Writing pStruct to " << pStructObj().path() << endReport<<endl<<endl;
+
+		if( !pStructObj().write())
+		{
+			fatalErrorInFunction<<
+			"Error in writing to file. \n ";
+			return 1; 
+		}
+	}else
+	{
+		pStructObj = IOobject::make<pointStructure>
+		(
+			objectFile
+			(
+				pointStructureFile__,
+				Control.time().path(),
+				objectFile::READ_ALWAYS,
+				objectFile::WRITE_NEVER			
+			)
+		);
+	}
+
+	
+
+	if(!positionOnly)
+	{
+
+		auto& pStruct = pStructObj().getObject<pointStructure>();
+
+		auto& sfDict = cpDict.subDict("setFields");
+
+		setFieldList defValueList(sfDict.subDict("defaultValue"));
+
+		for(auto& sfEntry: defValueList)
+		{
+			if( !sfEntry.setPointFieldDefaultValueNewAll(Control.time(), pStruct, true))
+			{
+				Err<< "\n error occured in setting default value fields.\n"<<endErr;
+				return 1;
+			}
+		}
+		
+		output<<endl;
+
+		auto& selectorsDict = sfDict.subDict("selectors");
+
+		auto selNames = selectorsDict.dictionaryKeywords();
+
+		for(auto name: selNames)
+		{
+			Report(1)<< "Applying selector " << greenText(name) <<endReport;
+			
+			if(
+				!applySelector(Control, pStruct, selectorsDict.subDict(name))
+			 )
+			{
+				Err<<"\n error occured in setting selector. \n"<<endErr;
+				return 1;
+			}
+			output<<endl;
+		}
+	}
+
+	Control.time().write(true);
+	Report(0)<< greenText("\nFinished successfully.\n")<<endReport;
+
+
+// this should be palced in each main 
+#include "finalize.H"
+
+	return 0;
+} 
