@@ -79,12 +79,12 @@ int main( int argc, char* argv[] )
 	(
 		objectFile
 		(
-			"createParticles",
+			"particlesDict",
 			Control.settings().path(),
 			objectFile::READ_ALWAYS,
 			objectFile::WRITE_ALWAYS
 		),
-		"createParticles",
+		"particlesDict",
 		true
 	);
 
