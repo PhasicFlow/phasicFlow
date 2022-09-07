@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __box_H__
-#define __box_H__
+#ifndef __cylinder_H__
+#define __cylinder_H__
 
 #include "types.H"
 #include "dictionary.H"
@@ -29,63 +29,106 @@ Licence:
 namespace pFlow
 {
 
-class box
+class cylinder
 {
 protected:
 	
-	// - min point
-	realx3 	min_;
+	// - begin point
+	realx3 	p1_;
 	
-	// - max point 
-	realx3 	max_;
+	// - end point 
+	realx3 	p2_;
+
+	// - radius^2
+	real  	radius2_;
+
+	realx3  axisVector_;
+
+	real 		axisVector2_;
+
+	FUNCTION_H
+	bool calculateParams();
 
 public:
 
 	// - type info
-	TypeNameNV("box");
+	TypeNameNV("cylinder");
 
 	//// - Constructors 
-		FUNCTION_HD 
-		box(const realx3& minP, const realx3& maxP);
+		FUNCTION_H 
+		cylinder(const realx3& p1, const realx3& p2, const real radius);
 
 		FUNCTION_H
-		box(const dictionary& dict);
+		cylinder(const dictionary& dict);
 
 		FUNCTION_H
-		box(iIstream& is);
+		cylinder(iIstream& is);
 
 		FUNCTION_HD
-		box(const box&) = default;
+		cylinder(const cylinder&) = default;
 
 		FUNCTION_HD
-		box(box&&) = default;
+		cylinder(cylinder&&) = default;
 
 		FUNCTION_HD
-		box& operator=(const box&) = default;
+		cylinder& operator=(const cylinder&) = default;
 
 		FUNCTION_HD
-		box& operator=(box&&) = default;
+		cylinder& operator=(cylinder&&) = default;
 
-		~box()=default;
+		~cylinder()=default;
 
 	//// - Methods 
 
 		INLINE_FUNCTION_HD
 		bool isInside(const realx3& point)const
 		{
-			return point > min_ && point <max_;
+			auto p1Point = point-p1_;
+			auto H = cross(p1Point , axisVector_);
+			auto H2 = dot(H,H);
+			if( H2 < radius2_*axisVector2_)
+			{
+				real t = dot(p1Point, axisVector_)/axisVector2_;
+				if(t >= 0.0 && t <= 1.0)
+					return true;
+				else
+					return false;
+			}
+			else
+			{
+				return false;
+			}	
+
+		}
+
+		INLINE_FUNCTION_HD
+		const realx3& p1()const
+		{
+			return p1_;
+		}
+
+		INLINE_FUNCTION_HD
+		const realx3& p2()const
+		{
+			return p2_;
 		}
 
 		INLINE_FUNCTION_HD
 		realx3 minPoint()const
 		{
-			return min_;
+			return min( p1_ - realx3(radius()), p2_ - realx3(radius())); // should be improved
 		}
 
 		INLINE_FUNCTION_HD
 		realx3 maxPoint()const
 		{
-			return max_;
+			return max( p1_ + realx3(radius()), p2_ + realx3(radius())); // should be improved
+		}
+
+		INLINE_FUNCTION_HD
+		real radius()const
+		{
+			return sqrt(radius2_);
 		}
 
 	//// - IO operation 
@@ -103,13 +146,13 @@ public:
 };
 
 FUNCTION_H
-iIstream& operator >>(iIstream& is, box& b);
+iIstream& operator >>(iIstream& is, cylinder& b);
 
 FUNCTION_H
-iOstream& operator << (iOstream& os, const box& b);
+iOstream& operator << (iOstream& os, const cylinder& b);
 
 
-}
+} // pFlow
 
 
-#endif
+#endif // __cylinder_H__

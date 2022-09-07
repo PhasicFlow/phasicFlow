@@ -82,15 +82,19 @@ bool pFlow::positionOrdered::positionPointsOrdered()
 	position_.clear();
 
 	realx3 dl(diameter_);
-	auto minP = static_cast<real>(0.5)*dl + box_.minPoint();
-	auto maxP = static_cast<real>(0.5)*dl + box_.maxPoint();
+	auto minP =  region_->minPoint();
+	auto maxP =  region_->maxPoint();
 
 	auto cntr = minP;
 
 	size_t n = 0;
 	while( n < numPoints_ )
 	{
-		position_.push_back(cntr);
+		if(region_->isInside(cntr))
+		{
+			position_.push_back(cntr);
+			n++;
+		}
 
 		cntr += dl*uVector1_;
 		
@@ -111,7 +115,7 @@ bool pFlow::positionOrdered::positionPointsOrdered()
 				}
 			}
 		}
-		n++;
+		
 	}
 
 	return true;
@@ -139,10 +143,6 @@ pFlow::positionOrdered::positionOrdered
 	(
 		poDict_.getValOrSet("axisOrder", wordList{"x", "y", "z"})
 	),
-	box_
-	(
-		poDict_.subDict("box")
-	),
 	position_
 	(
 		maxNumberOfParticles_, RESERVE()
@@ -151,6 +151,13 @@ pFlow::positionOrdered::positionOrdered
 	
 	if( !findAxisIndex() )
 	{
+		fatalExit;
+	}
+
+	if(!region_)
+	{
+		fatalErrorInFunction<<"You must provided a region (box, cylinder, ...) for positioning particles in dictionary "<<
+		dict.globalName()<<endl;
 		fatalExit;
 	}
 

@@ -324,7 +324,8 @@ bool convertTimeFolderPointFields(
 	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
 	auto* pos = posVec.data();
 
-	Report(1)<<"Writing pointStructure to vtk file."<<endReport;
+	Report(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
+					 <<" active particles"<<endReport;
 	addUndstrcuturedGridField(
 		vtk(),
 		pStruct.numActive(),

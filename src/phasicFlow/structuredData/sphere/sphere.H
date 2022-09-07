@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __box_H__
-#define __box_H__
+#ifndef __sphere_H__
+#define __sphere_H__
 
 #include "types.H"
 #include "dictionary.H"
@@ -29,63 +29,80 @@ Licence:
 namespace pFlow
 {
 
-class box
+class sphere
 {
 protected:
 	
-	// - min point
-	realx3 	min_;
+	// - center
+	realx3 	center_;
 	
-	// - max point 
-	realx3 	max_;
+	// - radius^2
+	real  	radius2_;
+
 
 public:
 
 	// - type info
-	TypeNameNV("box");
+	TypeNameNV("sphere");
 
 	//// - Constructors 
-		FUNCTION_HD 
-		box(const realx3& minP, const realx3& maxP);
+		FUNCTION_H 
+		sphere(const realx3& center, const real radius);
 
 		FUNCTION_H
-		box(const dictionary& dict);
+		sphere(const dictionary& dict);
 
 		FUNCTION_H
-		box(iIstream& is);
+		sphere(iIstream& is);
 
 		FUNCTION_HD
-		box(const box&) = default;
+		sphere(const sphere&) = default;
 
 		FUNCTION_HD
-		box(box&&) = default;
+		sphere(sphere&&) = default;
 
 		FUNCTION_HD
-		box& operator=(const box&) = default;
+		sphere& operator=(const sphere&) = default;
 
 		FUNCTION_HD
-		box& operator=(box&&) = default;
+		sphere& operator=(sphere&&) = default;
 
-		~box()=default;
+		~sphere()=default;
 
 	//// - Methods 
 
 		INLINE_FUNCTION_HD
 		bool isInside(const realx3& point)const
 		{
-			return point > min_ && point <max_;
+			auto cPoint = point-center_;
+			auto dist2 = dot(cPoint,cPoint);
+			return dist2 < radius2_;
+
 		}
 
 		INLINE_FUNCTION_HD
+		const realx3& center()const
+		{
+			return center_;
+		}
+
+		
+		INLINE_FUNCTION_HD
 		realx3 minPoint()const
 		{
-			return min_;
+			return center_ - realx3(radius());
 		}
 
 		INLINE_FUNCTION_HD
 		realx3 maxPoint()const
 		{
-			return max_;
+			return center_ + realx3(radius());
+		}
+
+		INLINE_FUNCTION_HD
+		real radius()const
+		{
+			return sqrt(radius2_);
 		}
 
 	//// - IO operation 
@@ -103,13 +120,13 @@ public:
 };
 
 FUNCTION_H
-iIstream& operator >>(iIstream& is, box& b);
+iIstream& operator >>(iIstream& is, sphere& b);
 
 FUNCTION_H
-iOstream& operator << (iOstream& os, const box& b);
+iOstream& operator << (iOstream& os, const sphere& b);
 
 
-}
+} // pFlow
 
 
-#endif
+#endif // __sphere_H__
