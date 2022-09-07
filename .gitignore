@@ -36,6 +36,7 @@ build/**
 include/**
 bin/**
 lib/**
+test*/**
 **/**notnow
 # all possible time folders
 **/[0-9]

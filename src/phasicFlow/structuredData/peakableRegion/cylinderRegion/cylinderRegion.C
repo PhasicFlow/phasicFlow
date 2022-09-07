@@ -18,67 +18,56 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "sphereRegion.H"
-#include "dictionary.H"
+#include "cylinderRegion.H"
 
-pFlow::sphereRegion::sphereRegion
+
+pFlow::cylinderRegion::cylinderRegion
 (
 	const dictionary& dict
 )
 :
-	sphere_(dict),
+	cylinder_(dict),
 	random_()
 {
 
 }
 
-bool pFlow::sphereRegion::isInside
+bool pFlow::cylinderRegion::isInside
 (
 	const realx3& p
 ) const
 {
-	return sphere_.isInside(p);
+	return cylinder_.isInside(p);
 }
 
-pFlow::realx3 pFlow::sphereRegion::peek()const
+pFlow::realx3 pFlow::cylinderRegion::peek()const
 {
-	for(int32 i=0; i<100; ++i)
+	for(int32 i=0; i<100;i++)
 	{
-		auto p = random_.randomNumber(
-				sphere_.center() - realx3(sphere_.radius()),
-				sphere_.center() + realx3(sphere_.radius()));
-		if(sphere_.isInside(p)) return p;
+		auto p = 
+		random_.randomNumber(cylinder_.minPoint(), cylinder_.maxPoint());
+		if( cylinder_.isInside(p)) return p;
 	}
-		
+
 	fatalErrorInFunction<<
-	"cannot peek a random point from sphereRegion. \n";
+	"cannot peek a random point from cylinderRegion. \n";
 	fatalExit;
 	return 0;
-
 }
 
 
-bool pFlow::sphereRegion::read
+bool pFlow::cylinderRegion::read
 (
 	const dictionary& dict
 )
 {
-	sphere_.read(dict);
-	
-	return true;
+	return cylinder_.read(dict);
 }
 
-bool pFlow::sphereRegion::write
+bool pFlow::cylinderRegion::write
 (
 	dictionary& dict
 )const
 {
-	if(!sphere_.write(dict))
-	{
-		fatalErrorInFunction<<
-		"  error in writing sphere data to dictionary "<<dict.globalName()<<endl;
-		return false;
-	}
-
-	return true;
+	return cylinder_.write(dict);
 }

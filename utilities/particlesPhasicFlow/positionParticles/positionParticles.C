@@ -19,6 +19,9 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "positionParticles.H"
+#include "box.H"
+#include "cylinder.H"
+#include "sphere.H"
 #include "cells.H"
 #include "contactSearchFunctions.H"
 
@@ -78,7 +81,20 @@ pFlow::positionParticles::positionParticles
 {
 	maxNumberOfParticles_ = dict.getValOrSet("maxNumberOfParticles", static_cast<size_t>(10000));
 	
-	mortonSorting_ = dict.getValOrSet("mortonSorting", Logical("Yes"));	
+	mortonSorting_ = dict.getValOrSet("mortonSorting", Logical("Yes"));
+
+	if( dict.containsDictionay("box") )	
+	{
+		region_ = makeUnique<region<box>>(dict.subDict("box"));
+	}
+	else if(dict.containsDictionay("cylinder"))
+	{
+		region_ = makeUnique<region<cylinder>>(dict.subDict("cylinder"));
+	}
+	else if(dict.containsDictionay("sphere"))
+	{
+		region_ = makeUnique<region<sphere>>(dict.subDict("sphere"));
+	}
 }
 
 

@@ -28,10 +28,76 @@ Licence:
 namespace pFlow
 {
 
+class regionBase
+{
+public:
+	
+	regionBase() = default;
+	
+	regionBase(const regionBase&) = default;
+
+	regionBase& operator =(const regionBase&) = default;
+	
+	virtual ~regionBase() = default;
+
+	virtual bool isInside(const realx3 point)const = 0;
+
+	virtual realx3 minPoint()const =0;
+
+	virtual realx3 maxPoint()const =0;
+
+
+};
+
+template<typename T>
+class region
+:
+	public regionBase
+{
+	protected:
+
+		T 		region_;
+
+	public:
+		
+		region(const T& rgn)
+		:
+			region_(rgn)
+		{}
+
+		region(const dictionary& dict)
+		:
+			region_(dict)
+		{}
+
+		region(const region&) = default;
+		
+		region& operator =(const region&) = default;
+
+		virtual ~region()=default;
+
+		bool isInside(const realx3 point) const override
+		{
+			return region_.isInside(point);
+		}
+
+		realx3 minPoint()const override
+		{
+			return region_.minPoint();
+		}
+
+		realx3 maxPoint()const override
+		{
+			return region_.maxPoint();
+		}
+
+};
 
 class positionParticles
 {
 protected:
+
+	uniquePtr<regionBase> 		region_ = nullptr;
 
 	size_t  		maxNumberOfParticles_ = 10000;
 

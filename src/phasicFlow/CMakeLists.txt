@@ -44,6 +44,8 @@ repository/IOobject/IOobject.C
 repository/IOobject/IOfileHeader.C
 
 structuredData/box/box.C
+structuredData/cylinder/cylinder.C
+structuredData/sphere/sphere.C
 structuredData/iBox/iBoxs.C
 structuredData/line/line.C
 structuredData/pointStructure/pointStructure.C
@@ -54,6 +56,7 @@ structuredData/trisurfaceStructure/triSurface.C
 structuredData/trisurfaceStructure/multiTriSurface.C
 structuredData/trisurfaceStructure/stlFile.C
 structuredData/peakableRegion/sphereRegion/sphereRegion.C
+structuredData/peakableRegion/cylinderRegion/cylinderRegion.C
 structuredData/peakableRegion/boxRegion/boxRegion.C
 structuredData/peakableRegion/peakableRegion/peakableRegion.C
 structuredData/peakableRegion/peakableRegions.C

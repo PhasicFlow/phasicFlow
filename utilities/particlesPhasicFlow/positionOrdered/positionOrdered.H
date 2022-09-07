@@ -22,7 +22,6 @@ Licence:
 #define __positionOrdered_H__
 
 #include "positionParticles.H"
-#include "box.H"
 
 namespace pFlow
 {
@@ -41,8 +40,6 @@ protected:
 	size_t 		numPoints_;
 	
 	wordList 	axisOrder_;
-
-	box 		box_;
 
 	// - unit vector of the first axis
 	realx3 		uVector1_;

@@ -22,6 +22,7 @@ Licence:
 #define __sphereRegion_H__
 
 #include "types.H"
+#include "sphere.H"
 #include "uniformRandomReal.H"
 
 namespace pFlow
@@ -33,9 +34,7 @@ class sphereRegion
 {
 protected:
 	
-	realx3 			  center_;
-
-	real 			  radius_;
+	sphere 		sphere_;
 
 	mutable uniformRandomReal random_;
 public:

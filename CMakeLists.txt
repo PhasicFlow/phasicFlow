@@ -75,7 +75,7 @@ add_subdirectory(solvers)
 
 add_subdirectory(utilities)
 
-#add_subdirectory(test)
+add_subdirectory(test_newFeatures)
 
 
 install(FILES "${PROJECT_BINARY_DIR}/phasicFlowConfig.H"

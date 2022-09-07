@@ -19,37 +19,37 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#include "box.H"
+#include "sphere.H"
 
-FUNCTION_HD
-pFlow::box::box
-(
-	const realx3& minP,
-	const realx3& maxP
-)
-:
-	min_(minP),
-	max_(maxP)
-{}
 
 FUNCTION_H
-pFlow::box::box
+pFlow::sphere::sphere(
+	const realx3& center,
+	const real radius)
+:
+	center_(center),
+	radius2_(radius*radius)
+{
+	
+}
+
+FUNCTION_H
+pFlow::sphere::sphere
 (
 	const dictionary & dict
 )
 :
-	min_
+	center_
 	(
-		dict.getVal<realx3>("min")
-	),
-	max_
-	(
-		dict.getVal<realx3>("max")
+		dict.getVal<realx3>("center")
 	)
-{}
+{
+	auto rad = dict.getVal<real>("radius");
+	radius2_= rad*rad;
+}
 
 FUNCTION_H
-pFlow::box::box
+pFlow::sphere::sphere
 (
 	iIstream& is
 )
@@ -57,56 +57,60 @@ pFlow::box::box
 	if( !read(is))
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
-		"error in reading box from file. \n";
+		"error in reading sphere from file. \n";
 		fatalExit;
 	}
 }
 
 
 FUNCTION_H
-bool pFlow::box::read(iIstream & is)
+bool pFlow::sphere::read(iIstream & is)
 {
-	if(!is.nextData<realx3>("min", min_)) return false;
-	if(!is.nextData<realx3>("max", max_)) return false;
+	if(!is.nextData<realx3>("center", center_)) return false;
+	real rad;
+	if(!is.nextData<real>("radius", rad)) return false;
+	radius2_ =rad*rad;
 	return true;
 }
 
 FUNCTION_H
-bool pFlow::box::write(iOstream& os)const
+bool pFlow::sphere::write(iOstream& os)const
 {
-	os.writeWordEntry("min", min_);
-	os.writeWordEntry("max", max_);
+	os.writeWordEntry("center", center_);
+	os.writeWordEntry("radius", sqrt(radius2_));
 	return os.check(FUNCTION_NAME);
 }
 
 FUNCTION_H
-bool pFlow::box::read
+bool pFlow::sphere::read
 (
 	const dictionary& dict
 )
 {
-	min_ = dict.getVal<realx3>("min");
-	max_ = dict.getVal<realx3>("max");
+	center_ = dict.getVal<realx3>("center");
+	auto rad = dict.getVal<real>("radius");
+	radius2_ = rad*rad;
 	return true;
 }
 
 FUNCTION_H
-bool pFlow::box::write
+bool pFlow::sphere::write
 (
 	dictionary& dict
 )const
 {
-	if(!dict.add("min", min_))
+	if(!dict.add("center", center_))
 	{
 		fatalErrorInFunction<<
-		"  error in writing min to dictionary "<<dict.globalName()<<endl;
+		"  error in writing center to dictionary "<<dict.globalName()<<endl;
 		return false;
 	}
 
-	if(!dict.add("max", max_))
+
+	if(!dict.add("radius", sqrt(radius2_)) )
 	{
 		fatalErrorInFunction<<
-		"  error in writing max to dictionary "<<dict.globalName()<<endl;
+		"  error in writing radius to dictionary "<<dict.globalName()<<endl;
 		return false;
 	}
 	
@@ -114,25 +118,25 @@ bool pFlow::box::write
 }
 
 FUNCTION_H
-pFlow::iIstream& pFlow::operator >>(iIstream& is, box& b)
+pFlow::iIstream& pFlow::operator >>(iIstream& is, sphere& b)
 {
 	if(! b.read(is))
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
-		"error in reading box. \n";
+		"error in reading sphere. \n";
 		fatalExit;
 	}
 	return is;
 }
 
 FUNCTION_H
-pFlow::iOstream& pFlow::operator <<(iOstream& os, const box& b)
+pFlow::iOstream& pFlow::operator << (iOstream& os, const sphere& b)
 {
 	
 	if(! b.write(os))
 	{
 		ioErrorInFile(os.name(), os.lineNumber())<<
-		"error in writing box. \n";
+		"error in writing sphere. \n";
 		fatalExit;
 	}
 	return os;	
