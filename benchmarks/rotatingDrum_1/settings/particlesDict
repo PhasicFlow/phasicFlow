@@ -25,7 +25,7 @@ positionParticles
 {
 	method positionOrdered;     		
 
-	maxNumberOfParticles 	746002; 
+	maxNumberOfParticles 	1000000; 
 	mortonSorting 			Yes;    
 
 	cylinder  // box for positioning particles 
@@ -38,7 +38,7 @@ positionParticles
 	positionOrderedInfo
 	{
 		diameter 0.006; 	// minimum space between centers of particles
-		numPoints 440000; 	// number of particles in the simulation 
+		numPoints 240000; 	// number of particles in the simulation 
 		axisOrder (z x y);  // axis order for filling the space with particles
 	}
 }

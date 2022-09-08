@@ -16,11 +16,6 @@ model
    contactForceModel nonLinearLimited;
    rollingFrictionModel normal;
 
-   /*
-   Property (glassMat-glassMat      glassMat-wallMat
-                                    wallMat-wallMat);
-   */
-
    Yeff (1.0e6 1.0e6  // Young modulus [Pa]
                1.0e6);
    
@@ -46,8 +41,8 @@ model
 
 contactSearch
 {
-   method         NBS;           // method for broad search particle-particle
-   wallMapping    cellsSimple;   // method for broad search particle-wall 
+   method         NBS;           
+   wallMapping    cellsSimple;   
 
    NBSInfo
    {

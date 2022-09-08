@@ -19,10 +19,6 @@ timePrecision   5;			// maximum number of digits for time folder
 
 g 				(0 -9.8 0); // gravity vector (m/s2) 
 
-/*
-	Simulation domain 
-	every particles that goes outside this domain is deleted.
-*/
 domain 
 {
 	min (-0.21 -0.21 -0.01);
@@ -31,6 +27,6 @@ domain
 
 integrationMethod 		AdamsBashforth3; 	// integration method 
 
-timersReport 			Yes;  	// report timers?
+timersReport 			Yes;  	
 
-timersReportInterval   	0.01;	// time interval for reporting timers
+timersReportInterval   	0.01;	
