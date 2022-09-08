@@ -34,17 +34,16 @@ positionParticles
 	maxNumberOfParticles 40000; // maximum number of particles in the simulation
 	mortonSorting Yes;          // perform initial sorting based on morton code?   
 
+	box  // box for positioning particles 
+	{
+		min (-0.08 -0.08 0.015);    // lower corner point of the box 
+		max ( 0.08  0.08 0.098);	// upper corner point of the box 
+	}
+
 	positionOrderedInfo
 	{
-		box  // box for positioning particles 
-		{
-			min (-0.08 -0.08 0.015);    // lower corner point of the box 
-			max ( 0.08  0.08 0.098);	// upper corner point of the box 
-		}
-
 		diameter 0.004; 	// minimum space between centers of particles
 		numPoints 30000; 	// number of particles in the simulation 
 		axisOrder (z y x);  // axis order for filling the space with particles
-
 	}
 }
