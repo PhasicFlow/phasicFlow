@@ -21,8 +21,8 @@ g 				(0 -9.8 0); // gravity vector (m/s2)
 
 domain 
 {
-	min (-0.21 -0.21 -0.01);
-	max ( 0.21  0.21  0.81);
+	min (-0.2 -0.2 -0.0);
+	max ( 0.2  0.2  1.6);
 }
 
 integrationMethod 		AdamsBashforth3; 	// integration method 

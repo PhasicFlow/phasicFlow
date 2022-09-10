@@ -15,7 +15,7 @@ surfaces
 	{
 		type cylinderWall;  
 		p1 (0.0 0.0 0.0);   
-		p2 (0.0 0.0 0.8);  
+		p2 (0.0 0.0 1.6);  
 		radius1 0.2;		
 		radius2 0.2;		
 		resolution 24;      
@@ -41,10 +41,10 @@ surfaces
 	wall2
 	{
 		type planeWall;
-		p1 (-0.2 -0.2 0.8);
-		p2 ( 0.2 -0.2 0.8);
-		p3 ( 0.2  0.2 0.8);
-		p4 (-0.2  0.2 0.8);
+		p1 (-0.2 -0.2 1.6);
+		p2 ( 0.2 -0.2 1.6);
+		p3 ( 0.2  0.2 1.6);
+		p4 (-0.2  0.2 1.6);
 		material wallMat;
 		motion rotAxis;
 	}

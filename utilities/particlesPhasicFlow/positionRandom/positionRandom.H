@@ -24,11 +24,13 @@ Licence:
 
 #include "positionParticles.H"
 #include "VectorSingles.H"
+#include "VectorDuals.H"
 
-#include "box.H"
 
 namespace pFlow
 {
+
+
 
 class positionRandom
 :
@@ -41,8 +43,6 @@ protected:
 	real 		diameter_;
 
 	size_t 		numPoints_;
-	
-	box 		box_;
 
 	size_t 		maxIterations_;
 	
@@ -55,6 +55,11 @@ protected:
 	bool positionPointsRandom();
 
 	bool inCollision(const realx3 &cntr, real diam);
+
+	void fillPoints(
+		uint numPoints,
+		realx3Vector_HD& points,
+		int32Vector_HD& flags );
 
 public:
 

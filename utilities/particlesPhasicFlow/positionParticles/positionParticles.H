@@ -46,6 +46,7 @@ public:
 
 	virtual realx3 maxPoint()const =0;
 
+	virtual word name()const =0;
 
 };
 
@@ -89,6 +90,11 @@ class region
 		realx3 maxPoint()const override
 		{
 			return region_.maxPoint();
+		}
+
+		word name()const override
+		{
+			return region_.typeName();
 		}
 
 };

@@ -7,5 +7,5 @@ objectName 	sphereDict;
 objectType 	sphereShape;
 
 names 		(glassBead); 	// names of shapes 
-diameters 	(0.006);		// diameter of shapes 
+diameters 	(0.003);		// diameter of shapes 
 materials	(glassMat);		// material names for shapes 
