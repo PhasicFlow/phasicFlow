@@ -21,10 +21,9 @@ Licence:
 
 #include "positionRandom.H"
 #include "uniformRandomReal.H"
-#include "VectorSingles.H"
-#include "VectorDuals.H"
 #include "NBS.H"
 #include "unsortedPairs.H"
+#include "box.H"
 
 
 
@@ -35,12 +34,6 @@ using SearchType = NBS<DefaultExecutionSpace, int32> ;
 using ContainerType = unsortedPairs<DefaultExecutionSpace, int32>;
 
 
-void fillPoints(
-		uint numPoints,
-		realx3 minP,
-		realx3 maxP,
-		realx3Vector_HD& points,
-		int32Vector_HD& flags );
 
 int32 findCollisions(
 		ContainerType& pairs,
@@ -70,11 +63,11 @@ bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
 	int32Vector_HD  flagHD(startNum, 0);
 	realx3Vector_HD positionHD(startNum);
 	
-	auto minP = box_.minPoint() + static_cast<real>(0.5)*realx3(diameter_);
-	auto maxP = box_.maxPoint() - static_cast<real>(0.5)*realx3(diameter_);
+	auto minP = region_->minPoint();
+	auto maxP = region_->maxPoint();
 
 	SearchType search(
-					box_,
+					box(minP, maxP),
 					diameter_,
 					positionHD.deviceVectorAll(),
 					diameter.deviceVectorAll());
@@ -85,7 +78,7 @@ bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
 		greenText("(Pass #"<< pass+1<<")")<< 
 		": started with "<< startNum <<" points."<<endReport;
 	
-	fillPoints(startNum, minP, maxP, positionHD, flagHD);
+	fillPoints(startNum, positionHD, flagHD);
 		
 	search.broadSearch(pairs, range(0, startNum), true);
 
@@ -181,10 +174,6 @@ pFlow::positionRandom::positionRandom
 	(
 		prDict_.getVal<size_t>("numPoints")
 	),
-	box_
-	(
-		prDict_.subDict("box")
-	),
 	maxIterations_
 	(
 		prDict_.getValOrSet("maxIterations", 10)
@@ -201,24 +190,53 @@ pFlow::positionRandom::positionRandom
 	{
 		fatalExit;
 	}
+
+	if(!region_)
+	{
+		fatalErrorInFunction<<"You must provided a region (box, cylinder, ...) for positioning particles in dictionary "<<
+		dict.globalName()<<endl;
+		fatalExit;
+	}
+
 }
 
-void pFlow::fillPoints(
+void pFlow::positionRandom::fillPoints(
 	uint numPoints,
-	realx3 minP,
-	realx3 maxP,
 	realx3Vector_HD& points,
 	int32Vector_HD& flags )
 {
 
 	uniformRandomReal rand;
 	
+	auto minP = region_().minPoint();
+	auto maxP = region_().maxPoint();
 
 	for(size_t i=0; i<numPoints; i++)
 	{
 		if(flags[i] == 0)
 		{
-			points[i] =rand(minP, maxP);	
+			bool loop=true;
+			size_t n=0;
+			while (loop)
+			{
+
+				auto pos = rand(minP, maxP);
+				if( region_().isInside(pos))
+				{
+					points[i] =pos;
+					loop = false;		
+				}
+				n++;
+
+				if(n>100)
+				{
+					fatalErrorInFunction<< 
+					"could not find a point inside region"<<region_->name()<<endl;
+					fatalExit;
+				}
+				
+			}
+			
 		}
 	}
 	points.modifyOnHost();
