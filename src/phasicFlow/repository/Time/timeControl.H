@@ -103,6 +103,12 @@ public:
 		return currentTime_;
 	}
 
+	word currentTimeWord() const
+	{
+		word ctw = real2Word( currentTime(), timePrecision());
+		return ctw;
+	}
+
 	int32 currentIter()const
 	{
 		return currentIter_;
@@ -132,7 +138,7 @@ public:
 		currentTime_ += dt_;
 		if(screenReport())
 		{
-			Report(0)<<"Time (s): "<<cyanText(currentTime_)<<endReport;
+			Report(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endReport;
 		}
 		// switch outputToFile_ on/off
 		checkForOutputToFile();

@@ -59,8 +59,7 @@ public:
 	//// -  Methods
 		virtual fileSystem localPath()const
 		{
-			real ct = currentTime();
-			word lp = real2Word( ct, timePrecision());
+			word lp = currentTimeWord();
 			return lp;
 		}
 	
