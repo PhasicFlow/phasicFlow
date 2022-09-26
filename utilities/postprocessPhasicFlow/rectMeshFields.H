@@ -17,45 +17,29 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM dictionary, with some modifications/simplifications
-// to be tailored to our needs
 
+#ifndef __rectMeshFields_H__
+#define __rectMeshFields_H__
 
-#include "twoPartEntry.H"
+#include "rectMeshField.H"
 
-
-pFlow::twoPartEntry::twoPartEntry
-(
-	dataEntry entry
-)
-:
-	keyword_(entry.keyword()),
-	secondPart_(keyword_)
+namespace pFlow
 {
-	iTstream& iT = entry.stream();
 
-	iT >> firstPart_;
+template<typename T>
+using rectMeshField_H 		= rectMeshField<T,HostSpace>;
 
-	
-	if(iT.eof()) return;
-		
-	token t;
-	while(true)
-	{
-		if( !iT.read(t) )
-		{
-			fatalErrorInFunction<<"attemps to read from token stream failed \n";
-			fatalExit;
-		}
-		secondPart_.appendToken(t);
-		if(iT.eof())break;
-	}
+using int8RectMeshField_H  = rectMeshField<int8, HostSpace>;
+
+using int32RectMeshField_H 	= rectMeshField<int32, HostSpace>;
+
+using int64RectMeshField_H  = rectMeshField<int64, HostSpace>;
+
+using realRectMeshField_H	= rectMeshField<real, HostSpace>;
+
+using realx3RectMeshField_H	= rectMeshField<realx3, HostSpace>;
 
 }
 
-bool pFlow::isTwoPartEntry(pFlow::dataEntry entry)
-{
-	twoPartEntry tpEntry(entry);
-	if(tpEntry.secondPart().size() == 0) return false;
-	return true;
-}
+
+#endif // __rectMeshFields_H__

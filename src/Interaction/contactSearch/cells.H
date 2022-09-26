@@ -38,12 +38,12 @@ public:
 protected:
 
 	// - domain 
-	box 		domain_;
+	box 		domain_{realx3(0.0), realx3(1.0)};
 
 	// - cell size 
-	real 		cellSize_;
+	realx3 		cellSize_{1,1,1};
 
-	CellType 	numCells_;
+	CellType 	numCells_{1,1,1};
 
 	
 	// - protected methods
@@ -69,11 +69,28 @@ public:
 		calculate();
 	}
 
+ 
+	INLINE_FUNCTION_H
+	cells(const box& domain, int32 nx, int32 ny, int32 nz)
+	:
+		domain_(domain),
+		cellSize_(
+			(domain_.maxPoint() - domain_.minPoint())/realx3(nx, ny,  nz)
+			),
+		numCells_(nx, ny, nz)
+	{}
+
 	INLINE_FUNCTION_HD
 	cells(const cells&) = default;
 
 	INLINE_FUNCTION_HD
 	cells& operator = (const cells&) = default;
+
+	INLINE_FUNCTION_HD
+	cells(cells &&) = default;
+
+	INLINE_FUNCTION_HD
+	cells& operator=(cells&&) = default;
 
 	cells getCells()const
 	{
@@ -87,8 +104,15 @@ public:
 		calculate();
 	}
 
+	INLINE_FUNCTION_H
+	void setCellSize(realx3 cellSize)
+	{
+		cellSize_ = cellSize;
+		calculate();
+	}
+
 	INLINE_FUNCTION_HD
-	real cellSize()const
+	realx3 cellSize()const
 	{
 		return cellSize_;
 	}
@@ -123,6 +147,11 @@ public:
 		return  static_cast<int64>(numCells_.x())*
 				static_cast<int64>(numCells_.y())*
 				static_cast<int64>(numCells_.z());
+	}
+
+	const auto& domain()const
+	{
+		return domain_;
 	}
 	
 	INLINE_FUNCTION_HD
@@ -221,9 +250,6 @@ public:
 			min( domain_.maxPoint().z(), max(domain_.minPoint().z(),p.z()))
 			);
 	}
-
-
-
 };	
 
 

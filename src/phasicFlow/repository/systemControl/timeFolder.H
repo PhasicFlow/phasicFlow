@@ -57,6 +57,17 @@ public:
 		return currentFolder_->second;
 	}
 
+	word timeName()const
+	{
+		auto tName = tailName(folder().wordPath(), '/');
+		return tName;
+	}
+
+	fileSystem localFolder()const
+	{
+		return fileSystem(timeName());
+	}
+
 	bool operator ++(int)
 	{
 		if(!finished()) currentFolder_++;

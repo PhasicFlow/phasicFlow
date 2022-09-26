@@ -24,6 +24,7 @@ Licence:
 
 #include "cells.H"
 #include "contactSearchFunctions.H"
+#include "baseAlgorithms.H"
 
 namespace pFlow
 {
@@ -76,7 +77,7 @@ protected:
 
 	ViewType1D<int32, memory_space> 		next_;
 
-
+	
 	INLINE_FUNCTION_H
 	void nullify()
 	{
@@ -85,13 +86,13 @@ protected:
 			range(0,this->nx()),
 			range(0,this->ny()),
 			range(0,this->nz()),
-			-1
+			static_cast<int32>(-1)
 			);
 
 		fill(
 			next_,
 			range(0,capacity_),
-			-1
+			static_cast<int32>(-1)
 			);
 	}
 
@@ -102,13 +103,13 @@ protected:
 			range(0,this->nx()),
 			range(0,this->ny()),
 			range(0,this->nz()),
-			-1
+			static_cast<int32>(-1)
 			);
 
 		fill(
 			next_,
 			nextRng,
-			-1
+			static_cast<int32>(-1)
 			);
 	}
 
@@ -180,6 +181,24 @@ public:
 		}
 
 		NBS(
+			const 	box& domain,
+			int32 	nx,
+			int32 	ny,
+			int32 	nz,
+			const 	ViewType1D<realx3, memory_space>& position,
+			const 	ViewType1D<real, memory_space>& diam,
+			int32   initialContainerSize = 1)
+		:
+			Cells(domain, nx, ny, nz),
+			pointPosition_(position),
+			diameter_(diam),
+			head_("NBS::head_",nx,ny,nz), //, this->nx(), this->ny(), this->nz()),
+			next_("NBS::next_",1) //,position.size()),
+		{
+			checkAllocateNext(pointPosition_.size());
+		}
+
+		NBS(
 			dictionary dict,
 			const 	box& domain,
 			real 	cellSize,
@@ -225,6 +244,16 @@ public:
 	bool performedSearch()const
 	{
 		return performedSearch_;
+	}
+
+	const auto& Head()const
+	{
+		return head_;
+	}
+
+	const auto& Next()const
+	{
+		return next_;
 	}
 
 	// - Perform the broad search to find pairs
@@ -332,6 +361,74 @@ public:
 
 	}
 
+	// - build based on all points in range [0, numPoints_)
+	INLINE_FUNCTION_H
+	void buildCheckInDomain(range activeRange)
+	{
+		checkAllocateNext(activeRange.second);
+		nullify(activeRange);
+		
+		Cells cellIndex = static_cast<Cells>(*this);
+		auto points = pointPosition_;
+		auto next = next_;
+		auto head = head_;
+
+		Kokkos::RangePolicy<
+			Kokkos::IndexType<int32>,
+			Kokkos::Schedule<Kokkos::Static>,
+			ExecutionSpace> rPolicy(activeRange.first, activeRange.second);
+		
+		Kokkos::parallel_for(
+			"NBS::buildCheckInDomain",
+			rPolicy,
+			LAMBDA_HD(int32 i){
+			
+				CellType ind;
+				if( cellIndex.pointIndexInDomain(points[i], ind) )
+				{
+					int32 old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
+					next[i] = old;	
+				}
+				
+			}
+			);
+		Kokkos::fence();
+
+	}
+
+	template<typename IncludeFunction>
+	INLINE_FUNCTION_H
+	void buildCheckInDomain(range activeRange, IncludeFunction incld)
+	{
+		checkAllocateNext(activeRange.second);
+		nullify(activeRange);
+
+		Cells cellIndex = static_cast<Cells>(*this);
+		auto points = pointPosition_;
+		auto next = next_;
+		auto head = head_;
+
+		Kokkos::RangePolicy<
+			Kokkos::IndexType<int32>,
+			Kokkos::Schedule<Kokkos::Dynamic>,
+			ExecutionSpace> rPolicy(activeRange.first, activeRange.second);
+
+		Kokkos::parallel_for(
+			"NBS::buildCheckInDomain",
+			rPolicy,
+			LAMBDA_HD(int32 i){
+				
+				CellType ind;
+				if( incld(i) && cellIndex.pointIndexInDomain(points[i], ind) )
+				{
+					auto old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
+					next[i] = old;
+				}
+			});
+		Kokkos::fence();
+	}
+
+
 	template<typename PairsContainer>	
 	INLINE_FUNCTION_H
 	bool findPairs(PairsContainer& pairs)
@@ -383,94 +480,6 @@ public:
 		return true;
 	}
 	
-	/*INLINE_FUNCTION_HD
-	void operator()(
-		TagFindPairs,
-		int32 i,
-		int32 j,
-		int32 k,
-		int32& getFullUpdate)const 
-	{
-
-		int32 m = head_(i,j,k);
-		CellType currentCell(i,j,k);
-		int32 n = -1;
-
-		while( m > -1 )
-		{
-			
-			auto p_m = pointPosition_[m];
-			auto d_m = sizeRatio_* diameter_[m];
-			
-			// the same cell
-			n = next_(m);
-			
-			while(n >-1)
-			{
-				
-				auto p_n = pointPosition_[n];
-				auto d_n = sizeRatio_*diameter_[n];
-				
-				if( sphereSphereCheck(p_m, p_n, d_m, d_n) )
-				{
-					auto ln = n;
-					auto lm = m;
-					if(lm>ln) Swap(lm,ln);
-					if( auto res = pairs_.insert(lm,ln); res <0)
-					{
-						getFullUpdate++;
-					}
-				}
-				
-				n = next_(n);
-			}
-
-			// neighbor cells
-			CellType neighborCell;
-			for(int32 ni=0; ni<13; ni++)
-			{
-				if(ni==0)		neighborCell = currentCell + CellType( 0, 0,-1);
-				else if(ni==1)	neighborCell = currentCell + CellType(-1, 0,-1);
-				else if(ni==2)	neighborCell = currentCell + CellType(-1, 0, 0); 
-				else if(ni==3)	neighborCell = currentCell + CellType(-1, 0, 1); 
-				else if(ni==4)	neighborCell = currentCell + CellType( 0,-1,-1); 
-				else if(ni==5)	neighborCell = currentCell + CellType( 0,-1, 0); 
-				else if(ni==6)	neighborCell = currentCell + CellType( 0,-1, 1); 
-				else if(ni==7)	neighborCell = currentCell + CellType(-1,-1,-1); 
-				else if(ni==8)	neighborCell = currentCell + CellType(-1,-1, 0); 
-				else if(ni==9)	neighborCell = currentCell + CellType(-1,-1, 1);
-				else if(ni==10)	neighborCell = currentCell + CellType( 1,-1,-1);  
-				else if(ni==11)	neighborCell = currentCell + CellType( 1,-1, 0);  
-				else if(ni==12)	neighborCell = currentCell + CellType( 1,-1, 1);  
-				 
-				if( this->isInRange(neighborCell) )
-				{
-					
-					n = head_(neighborCell.x(), neighborCell.y(), neighborCell.z());
-					while( n>-1)
-					{
-						
-						auto p_n = pointPosition_[n];
-						auto d_n = sizeRatio_*diameter_[n];
-						
-						if(sphereSphereCheck(p_m, p_n, d_m, d_n))
-						{
-							auto ln = n;
-							auto lm = m;
-							if(lm>ln) Swap(lm,ln);
-							if( auto res = pairs_.insert(lm,ln); res <0)
-							{
-								getFullUpdate++;
-							}
-						}
-						n = next_[n];
-					}
-				}
-
-			}
-			m = next_[m];
-		}
-	}*/
 
 	template <typename PairsContainer, typename teamMemberType>
 	INLINE_FUNCTION_HD

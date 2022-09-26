@@ -17,63 +17,78 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM dictionary, with some modifications/simplifications
-// to be tailored to our needs
+
+#ifndef __postprocess_H__ 
+#define __postprocess_H__
 
 
-#ifndef __twoPartEntry_H__
-#define __twoPartEntry_H__
-
-
-
-#include "dataEntry.H"
-
+#include "MapPtr.H"
+#include "systemControl.H"
+#include "pointRectCell.H"
+#include "processField.H"
+	
 
 namespace pFlow
 {
 
+class timeFolder;
 
-class twoPartEntry
+
+class postprocess
 {
 protected:
-	word 		keyword_;
-	word 		firstPart_;
-	mutable iTstream	secondPart_; 
+
+	systemControl& 			control_;
+
+	dictionary 				dict_;
+
+	wordList 				numberBasedDictNames_;
+
+	wordList 				weightBasedDictNames_;
+
+	uniquePtr<repository> 	timeFolderReposiory_ {nullptr};
+
+	uniquePtr<pointRectCell>	pointToCell_ {nullptr};
+
+	//uniquePtr<repository> 	processedRepository_ {nullptr};
+
+	ListPtr<processField> 	processedFields_;
+
+	real 					time_=0.0;
+
+	//orderedMapPtr<real, repository> 	timeFolderRepositories_;
+
+
+	Logical 	saveTimes{"No"};
+
+	Logical		saveTimeFolders{"No"};
+
+
+	auto& timeFolderReposiory()
+	{
+		return timeFolderReposiory_();
+	}
+
 public:
 
-	twoPartEntry(dataEntry entry);
+	postprocess(systemControl& control);
 
-	const word& keyword()const
-	{
-		return keyword_;
-	}
 
-	const word& firstPart()const
-	{
-		return firstPart_;
-	}
 
-	iTstream& secondPart()
-	{
-		return secondPart_;
-	}
+	bool processTimeFolder(real time, const word& tName, const fileSystem& localFolder);
 
-	template<typename T>
-	T	secondPartVal()const
-	{
-		T val;
-		secondPart_.rewind();
-		secondPart_ >> val;
-		return val;
-	}
+	bool processTimeFolder(const timeFolder& tFolder);
+
+
+	bool writeToVTK(fileSystem path, word bName)const;
+
 
 };
+
 	
 
-bool isTwoPartEntry(dataEntry entry);
+} 
 
 
 
-}
-
-#endif
+#endif //__postprocess_H__
