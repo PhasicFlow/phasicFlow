@@ -17,45 +17,17 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM dictionary, with some modifications/simplifications
-// to be tailored to our needs
+
+#include "ProcessField.H"
 
 
-#include "twoPartEntry.H"
+template class pFlow::ProcessField<pFlow::int8>;
 
+template class pFlow::ProcessField<pFlow::int32>;
 
-pFlow::twoPartEntry::twoPartEntry
-(
-	dataEntry entry
-)
-:
-	keyword_(entry.keyword()),
-	secondPart_(keyword_)
-{
-	iTstream& iT = entry.stream();
+template class pFlow::ProcessField<pFlow::int64>;
 
-	iT >> firstPart_;
+template class pFlow::ProcessField<pFlow::real>;
 
-	
-	if(iT.eof()) return;
-		
-	token t;
-	while(true)
-	{
-		if( !iT.read(t) )
-		{
-			fatalErrorInFunction<<"attemps to read from token stream failed \n";
-			fatalExit;
-		}
-		secondPart_.appendToken(t);
-		if(iT.eof())break;
-	}
+template class pFlow::ProcessField<pFlow::realx3>;
 
-}
-
-bool pFlow::isTwoPartEntry(pFlow::dataEntry entry)
-{
-	twoPartEntry tpEntry(entry);
-	if(tpEntry.secondPart().size() == 0) return false;
-	return true;
-}

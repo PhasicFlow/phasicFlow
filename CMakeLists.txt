@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 # set the project name and version
 project(phasicFlow VERSION 0.1 )
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17 CACHE STRING "" FORCE)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_INSTALL_PREFIX ${phasicFlow_SOURCE_DIR} CACHE PATH "Install path of phasicFlow" FORCE)
 set(CMAKE_BUILD_TYPE Release CACHE STRING "build type" FORCE)
@@ -75,7 +75,7 @@ add_subdirectory(solvers)
 
 add_subdirectory(utilities)
 
-add_subdirectory(test_newFeatures)
+#add_subdirectory(test_newFeatures)
 
 
 install(FILES "${PROJECT_BINARY_DIR}/phasicFlowConfig.H"

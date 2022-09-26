@@ -29,6 +29,15 @@ Licence:
 namespace pFlow
 {
 
+template<typename T>
+  using pointField_H = pointField<VectorSingle, T, HostSpace>;
+
+template<typename T>
+  using pointField_D = pointField<VectorSingle, T>;
+
+template<typename T>
+  using pointField_HD = pointField<VectorDual, T>;
+
 
 using int8PointField_D 		= pointField<VectorSingle, int8>;
 

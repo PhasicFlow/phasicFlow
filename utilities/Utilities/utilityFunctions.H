@@ -17,45 +17,29 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM dictionary, with some modifications/simplifications
-// to be tailored to our needs
+
+#ifndef __utilityFunctions_H__
+#define __utilityFunctions_H__
+
+#include <regex>
 
 
-#include "twoPartEntry.H"
-
-
-pFlow::twoPartEntry::twoPartEntry
-(
-	dataEntry entry
-)
-:
-	keyword_(entry.keyword()),
-	secondPart_(keyword_)
+namespace pFlow::utilities
 {
-	iTstream& iT = entry.stream();
 
-	iT >> firstPart_;
-
-	
-	if(iT.eof()) return;
-		
-	token t;
-	while(true)
-	{
-		if( !iT.read(t) )
-		{
-			fatalErrorInFunction<<"attemps to read from token stream failed \n";
-			fatalExit;
-		}
-		secondPart_.appendToken(t);
-		if(iT.eof())break;
-	}
-
-}
-
-bool pFlow::isTwoPartEntry(pFlow::dataEntry entry)
+bool inline pointFieldGetType(std::string TYPENAME, std::string& fieldType, std::string& fieldSpace)
 {
-	twoPartEntry tpEntry(entry);
-	if(tpEntry.secondPart().size() == 0) return false;
+	std::regex match("pointField\\<([A-Za-z1-9_]*)\\,([A-Za-z1-9_]*)\\>");
+    std::smatch search;
+	if(!std::regex_match(TYPENAME, search, match)) return false;
+    if(search.size()!= 3) return false;
+    fieldType  = search[1];
+    fieldSpace = search[2];
 	return true;
 }
+
+
+}
+
+
+#endif //__utilityFunctions_H__

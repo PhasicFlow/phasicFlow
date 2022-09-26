@@ -46,6 +46,7 @@ const inline char* motionModelFile__        = "motionModel";
 const inline char* contactSearchFile__		= "contactSearch";
 const inline char* propertyFile__ 			= "interaction";
 const inline char* interactionFile__		= "interaction";
+const inline char* postprocessFile__    = "postprocessDict";
 
 
 const inline char* uniform__ 		= "uniform";

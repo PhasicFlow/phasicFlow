@@ -7,4 +7,7 @@ add_subdirectory(geometryPhasicFlow)
 
 add_subdirectory(pFlowToVTK)
 
+add_subdirectory(Utilities)
+
+add_subdirectory(postprocessPhasicFlow)
 

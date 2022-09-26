@@ -62,6 +62,7 @@ Licence:
 		{ return word(tName)+"<"+Type::TYPENAME()+">";} 						\
 	else																	\
 		return word(tName)+"<"+basicTypeName<Type>()+">";						\
+	return "noTYPE"; 														\
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
@@ -73,6 +74,7 @@ Licence:
 		{ return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+">";}	\
 	else																	\
 		return word(tName)+"<"+basicTypeName<Type1>()+","+Type2::TYPENAME()+">";\
+	return "noTYPE"; 														\
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
@@ -101,7 +103,7 @@ Licence:
 	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
+	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
 		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
 	else																	\
 		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
