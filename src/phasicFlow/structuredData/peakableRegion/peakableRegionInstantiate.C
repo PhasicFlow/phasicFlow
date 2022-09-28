@@ -20,8 +20,11 @@ Licence:
 
 #include "boxRegion.H"
 #include "sphereRegion.H"
+#include "cylinderRegion.H"
 
 
 template class pFlow::PeakableRegion<pFlow::boxRegion>;
 
 template class pFlow::PeakableRegion<pFlow::sphereRegion>;
+
+template class pFlow::PeakableRegion<pFlow::cylinderRegion>;

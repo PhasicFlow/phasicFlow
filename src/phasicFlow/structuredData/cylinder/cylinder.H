@@ -46,6 +46,10 @@ protected:
 
 	real 		axisVector2_;
 
+	realx3 	minPoint_;
+
+	realx3 	maxPoint_;
+
 	FUNCTION_H
 	bool calculateParams();
 
@@ -116,13 +120,13 @@ public:
 		INLINE_FUNCTION_HD
 		realx3 minPoint()const
 		{
-			return min( p1_ - realx3(radius()), p2_ - realx3(radius())); // should be improved
+			return minPoint_;
 		}
 
 		INLINE_FUNCTION_HD
 		realx3 maxPoint()const
 		{
-			return max( p1_ + realx3(radius()), p2_ + realx3(radius())); // should be improved
+			return maxPoint_;
 		}
 
 		INLINE_FUNCTION_HD

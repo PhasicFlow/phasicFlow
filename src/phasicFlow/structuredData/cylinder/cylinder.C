@@ -20,6 +20,7 @@ Licence:
 
 
 #include "cylinder.H"
+#include "zAxis.H"
 
 FUNCTION_H
 bool pFlow::cylinder::calculateParams()
@@ -31,11 +32,21 @@ bool pFlow::cylinder::calculateParams()
 	{
 		axisVector2_ 		= dot(p1p2,p1p2);
 		axisVector_ = p1p2;
-		return true;
+
 	}else
 	{
 		return false;
 	}
+
+	zAxis zA(p1_,p2_);
+
+	realx3 minPinZ(-sqrt(radius2_), -sqrt(radius2_), 0.0);
+	realx3 maxPinZ( sqrt(radius2_),  sqrt(radius2_), sqrt(axisVector2_));
+
+	minPoint_ = zA.transferBackZ(minPinZ);
+	maxPoint_ = zA.transferBackZ(maxPinZ);
+
+	return true;
 }
 
 FUNCTION_H
