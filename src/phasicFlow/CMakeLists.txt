@@ -48,6 +48,7 @@ structuredData/cylinder/cylinder.C
 structuredData/sphere/sphere.C
 structuredData/iBox/iBoxs.C
 structuredData/line/line.C
+structuredData/zAxis/zAxis.C
 structuredData/pointStructure/pointStructure.C
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.C
 structuredData/pointStructure/selectors/boxAll/boxAll.C
