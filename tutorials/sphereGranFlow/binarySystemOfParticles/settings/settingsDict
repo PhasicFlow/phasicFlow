@@ -5,7 +5,7 @@
 objectName 	settingsDict;
 objectType 	dictionary;;
 
-run 			postprocessSegregation;
+run 			binarySystemofParticles;
 
 dt 				0.00001; 	// time step for integration (s)
 
@@ -15,7 +15,7 @@ endTime 		10; 		// end time for simulation
 
 saveInterval 	0.1; 		// time interval for saving the simulation
 
-timePrecision   4;			// maximum number of digits for time folder 
+timePrecision   6;			// maximum number of digits for time folder 
 
 g 				(0 -9.8 0); // gravity vector (m/s2) 
 
