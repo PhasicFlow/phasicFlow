@@ -110,13 +110,13 @@ public:
 		}else if(action() == "average")
 		{
 
-			pointField_H<real> oneFld(field_.pStruct(), 1.0, 1.0);
+			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
 
 			denomerator = sumOp(oneFld, this->pointToCell());
 
 		}else if(action() == "averageMask")
 		{
-			pointField_H<real> oneFld(field_.pStruct(), 1.0, 1.0);
+			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
 
 			denomerator = sumMaksOp(oneFld, this->pointToCell(), incMask);
 		}else
