@@ -1,0 +1,52 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	postprocessDict;
+objectType 	dictionary;;
+
+rectMesh
+{
+	min (-0.12 -0.12 0.0);  //minimum corner point 
+	max (0.12   0.12 0.1);  //maximum corner point 
+	nx 24; 		// number of divisions in x direction
+	ny 24; 		// number of divisions in y direction
+	nz 5; 		// number of divisions in z direction 
+}
+
+
+numberBased
+{
+	// num particles in a cell 
+	numParticles
+	{
+		field 		real 1.0; // uniform field with value 1 
+		action 		sum; 	  // sum over all particles in a cell 
+		includeMask all; 	  // select all
+	}
+
+	// concentration of small particles (number based)
+	smallConc
+	{
+		field 		real 1.0; 	// uniform field with value 1 
+		action 		average;	// average over all particles in a cell	
+		threshold 	1; 			// exclude cells with number of particles less than 1
+		includeMask lessThan;   // include mask 
+		lessThanInfo
+		{ 
+			field diameter;     // include particles with diameter less than 0.004
+			value 0.004;
+		}
+	}
+
+	// average velocity of particles 
+	avVelocity
+	{
+		field 	    velocity;   // read velocity field from time folder 
+		action 		average;    // average over all particles in the cell
+		threshold   3; 			// exclude cells with number of particles less than 3
+		includeMask all;		// select all
+		
+	}
+	
+}
