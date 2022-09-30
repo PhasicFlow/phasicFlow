@@ -51,8 +51,9 @@ structuredData/line/line.C
 structuredData/zAxis/zAxis.C
 structuredData/pointStructure/pointStructure.C
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.C
-structuredData/pointStructure/selectors/boxAll/boxAll.C
-structuredData/pointStructure/selectors/rangeAll/rangeAll.C 
+structuredData/pointStructure/selectors/selectBox/selectBox.C
+structuredData/pointStructure/selectors/selectRange/selectRange.C 
+structuredData/pointStructure/selectors/selectRandom/selectRandom.C
 structuredData/trisurfaceStructure/triSurface.C
 structuredData/trisurfaceStructure/multiTriSurface.C
 structuredData/trisurfaceStructure/stlFile.C

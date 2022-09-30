@@ -20,6 +20,7 @@ option(USE_STD_PARALLEL_ALG "Use TTB std parallel algorithms" ON)
 option(pFlow_Build_Serial "Build phasicFlow and backends for serial execution" OFF)
 option(pFlow_Build_OpenMP "Build phasicFlow and backends for OpenMP execution" OFF)
 option(pFlow_Build_Cuda   "Build phasicFlow and backends for Cuda execution" OFF)
+option(pFlow_Build_Double "Build phasicFlow with double precision variables" ON)
 
 set(BUILD_SHARED_LIBS ON CACHE BOOL "Build using shared libraries" FORCE)
 

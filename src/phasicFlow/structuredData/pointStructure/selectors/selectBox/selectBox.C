@@ -19,10 +19,10 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#include "boxAll.H"
+#include "selectBox.H"
 
 
-void pFlow::boxAll::selectAllPointsInBox()
+void pFlow::selectBox::selectAllPointsInBox()
 {
 	// to reduct allocations
 	selectedPoints_.reserve
@@ -39,7 +39,7 @@ void pFlow::boxAll::selectAllPointsInBox()
 	}
 }
 
-pFlow::boxAll::boxAll
+pFlow::selectBox::selectBox
 (
 	const pointStructure& pStruct,
 	const dictionary& dict
@@ -51,7 +51,7 @@ pFlow::boxAll::boxAll
 	),
 	box_
 	(
-		dict.subDict("boxAllInfo")
+		dict.subDict("selectBoxInfo")
 	)
 {
 	selectAllPointsInBox();
