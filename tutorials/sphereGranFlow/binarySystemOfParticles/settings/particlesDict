@@ -48,8 +48,8 @@ setFields
 	{
 		shapeAssigne
 		{
-			selector 	rangeAll; // type of point selector
-			rangeAllInfo
+			selector 	selectRange; // type of point selector
+			selectRangeInfo
 			{
 				begin 	0;			// begin index of points
 				end 	30000;		// end index of points 
