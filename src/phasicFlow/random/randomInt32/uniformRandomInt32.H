@@ -18,70 +18,62 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __uniformRandomInt32_H__
+#define __uniformRandomInt32_H__
 
-#ifndef __rangeAll_H__
-#define __rangeAll_H__
+#include <random>
 
-#include "pStructSelector.H"
-#include "pointStructure.H"
-
+#include "types.H"
+#include "typeInfo.H"
 
 namespace pFlow
 {
 
-class dictionary;
-
-class rangeAll
-:
-	public pStructSelector
+class uniformRandomInt32
 {
 protected:
-	
-	int32Vector selectedPoints_;
 
-	// begin index
-	int32 	begin_;
+ 	std::mt19937_64 engineGen_;
 
-	// end index
-	int32 	end_;
+ 	std::uniform_int_distribution<int32> distrbution_;
 
-	// stride
-	int32 	stride_;
-
-	void selectAllPointsInRange();
-	
 public:
 
-	// - type info
-	TypeName("rangeAll");
+	// type info
+	TypeNameNV("uniform");
 
+	explicit uniformRandomInt32(int32 min, int32 max)
+	:
+		engineGen_(std::random_device()()),
+		distrbution_(min, max)
+	{}
 
-		rangeAll(const pointStructure& pStruct, const dictionary& dict);
+	~uniformRandomInt32()= default;
 
-		add_vCtor
+	inline real  randomNumber() 
+	{
+		return  distrbution_(engineGen_);
+	}
+	
+	inline int32x3 randomNumber3()
+	{
+		return int32x3
 		(
-			pStructSelector,
-			rangeAll,
-			dictionary
+			randomNumber(),
+			randomNumber(),
+			randomNumber()
 		);
+	}	
 
-		virtual ~rangeAll() = default;
+	inline realx3 operator()()
+	{
+		return randomNumber();
+	}
 
-	//// - Methods
-
-		virtual const int32Vector& selectedPoinsts()const override
-		{
-			return selectedPoints_;
-		}
-
-		virtual int32Vector& selectedPoinsts() override
-		{
-			return selectedPoints_;
-		}
+	
 
 };
 
-} // pFlow
+}
 
-
-#endif //__pStructSelector_H__
+#endif

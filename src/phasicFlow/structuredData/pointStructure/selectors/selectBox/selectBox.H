@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __boxAll_H__
-#define __boxAll_H__
+#ifndef __selectBox_H__
+#define __selectBox_H__
 
 #include "pStructSelector.H"
 #include "pointStructure.H"
@@ -32,7 +32,7 @@ namespace pFlow
 
 class dictionary;
 
-class boxAll
+class selectBox
 :
 	public pStructSelector
 {
@@ -47,19 +47,19 @@ protected:
 public:
 
 	// - type info
-	TypeName("boxAll");
+	TypeName("selectBox");
 
 
-		boxAll(const pointStructure& pStruct, const dictionary& dict);
+		selectBox(const pointStructure& pStruct, const dictionary& dict);
 
 		add_vCtor
 		(
 			pStructSelector,
-			boxAll,
+			selectBox,
 			dictionary
 		);
 
-		virtual ~boxAll() = default;
+		virtual ~selectBox() = default;
 
 	//// - Methods
 

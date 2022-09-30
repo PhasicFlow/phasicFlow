@@ -6,3 +6,4 @@
 #cmakedefine pFlow_Build_OpenMP
 #cmakedefine pFlow_Build_Cuda
 #cmakedefine USE_STD_PARALLEL_ALG
+#cmakedefine pFlow_Build_Double

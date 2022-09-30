@@ -1,4 +1,4 @@
-/*------------------------------- phasicFlow --------------------------------
+/*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
@@ -18,47 +18,70 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __builtinTypes_H__
-#define __builtinTypes_H__
 
-#include <string>
+#ifndef __selectRandom_H__
+#define __selectRandom_H__
 
-#include "phasicFlowConfig.H"
+#include "pStructSelector.H"
+#include "pointStructure.H"
+
 
 namespace pFlow
 {
 
-#ifdef pFlow_Build_Double 
-  #define useDouble 1
-#else
-  #define useDouble 0
-#endif
+class dictionary;
 
-// scalars
-#if useDouble
-	using real 	= double;
-#else
-	using real 	= float;
-#endif
+class selectRandom
+:
+	public pStructSelector
+{
+protected:
+	
+	int32Vector selectedPoints_;
 
-using int8 		= signed char;
+	// begin index
+	int32 	begin_;
 
-using int16 	=	short int;
+	// end index
+	int32 	end_;
 
-using int32 	=	int;
+	// stride
+	int32 	number_;
 
-using int64 	=	long long int;
+	bool selectAllPointsInRange();
+	
+public:
 
-using uint16  = unsigned short int  ;
-
-using uint32 	=	unsigned int;
-
-using label   = std::size_t;
-
-using word 		= std::string;
+	// - type info
+	TypeName("selectRandom");
 
 
-} // end of pFlow
+		selectRandom(const pointStructure& pStruct, const dictionary& dict);
+
+		add_vCtor
+		(
+			pStructSelector,
+			selectRandom,
+			dictionary
+		);
+
+		virtual ~selectRandom() = default;
+
+	//// - Methods
+
+		virtual const int32Vector& selectedPoinsts()const override
+		{
+			return selectedPoints_;
+		}
+
+		virtual int32Vector& selectedPoinsts() override
+		{
+			return selectedPoints_;
+		}
+
+};
+
+} // pFlow
 
 
-#endif
+#endif //__pStructSelector_H__

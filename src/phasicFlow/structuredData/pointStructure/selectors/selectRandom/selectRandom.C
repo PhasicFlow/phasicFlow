@@ -19,25 +19,67 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#include "rangeAll.H"
+#include "selectRandom.H"
 #include "dictionary.H"
+#include "uniformRandomInt32.H"
+#include "Set.H"
 
-void pFlow::rangeAll::selectAllPointsInRange()
+
+bool pFlow::selectRandom::selectAllPointsInRange()
 {
 	// to reduct allocations
-	int32 maxNum = (end_ - begin_)/stride_+2;
+	int32 maxNum = number_+1;
 	
 	selectedPoints_.reserve	(maxNum);
 
 	selectedPoints_.clear();
-		
-	for(int32 i = begin_; i<end_; i+= stride_)
-	{
-		selectedPoints_.push_back(i);
-	}
-}
+	
+	uniformRandomInt32 intRand (begin_, end_);
 
-pFlow::rangeAll::rangeAll
+
+	int32 n = 0;
+	int32 iter = 0;
+	bool finished = false;
+
+	Set<int32> selctedIndices;
+
+	while( iter < number_*100)
+	{
+		int32 newInd = intRand.randomNumber();
+
+		if( auto [it, inserted] = selctedIndices.insert(newInd); inserted )
+		{
+			n++;
+
+			if(n == number_)
+			{
+				finished = true;
+				break;
+			}
+		}
+		iter++;
+	}
+
+	
+	if(finished)
+	{
+		for(auto& ind:selctedIndices)
+		{
+			selectedPoints_.push_back(ind);
+		}
+
+		return true;
+
+	}else
+	{
+		fatalErrorInFunction<< "Could not find random indices in the range."<<endl;
+		return false;	
+	}
+
+	
+}
+	
+pFlow::selectRandom::selectRandom
 (
 	const pointStructure& pStruct,
 	const dictionary& dict
@@ -49,20 +91,32 @@ pFlow::rangeAll::rangeAll
 	),
 	begin_
 	(
-		dict.subDict("rangeAllInfo").getVal<int32>("begin")
+		dict.subDict("selectRandomInfo").getVal<int32>("begin")
 	),
 	end_
 	(
-		dict.subDict("rangeAllInfo").getValOrSet("end", pStruct.size())
+		dict.subDict("selectRandomInfo").getValOrSet("end", pStruct.size())
 	),
-	stride_
+	number_
 	(
-		dict.subDict("rangeAllInfo").getValOrSet("stride", 1)
+		dict.subDict("selectRandomInfo").getValOrSet("number", 1)
 	)
 {
 	begin_ 	= max(begin_,1);
 	end_ 	= min(end_, static_cast<int32>(pStruct.size()));
-	stride_ = max(stride_,1);
+	number_ = max(number_,0);
+	if(end_-begin_ < number_)
+	{
 
-	selectAllPointsInRange();
+		warningInFunction<< "In dictionary " << dict.globalName()<<
+		" number is greater than the interval defined by begine and end ["<<
+		begin_<<" "<<end_<<"), resetting it to "<<end_-begin_<<endl;
+
+		number_ = end_-begin_;
+	}
+
+	if(!selectAllPointsInRange())
+	{
+		fatalExit;
+	}
 }

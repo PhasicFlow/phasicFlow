@@ -1,4 +1,4 @@
-/*------------------------------- phasicFlow --------------------------------
+/*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
@@ -18,47 +18,51 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __builtinTypes_H__
-#define __builtinTypes_H__
 
-#include <string>
+#include "selectRange.H"
+#include "dictionary.H"
 
-#include "phasicFlowConfig.H"
-
-namespace pFlow
+void pFlow::selectRange::selectAllPointsInRange()
 {
+	// to reduct allocations
+	int32 maxNum = (end_ - begin_)/stride_+2;
+	
+	selectedPoints_.reserve	(maxNum);
 
-#ifdef pFlow_Build_Double 
-  #define useDouble 1
-#else
-  #define useDouble 0
-#endif
+	selectedPoints_.clear();
+		
+	for(int32 i = begin_; i<end_; i+= stride_)
+	{
+		selectedPoints_.push_back(i);
+	}
+}
 
-// scalars
-#if useDouble
-	using real 	= double;
-#else
-	using real 	= float;
-#endif
+pFlow::selectRange::selectRange
+(
+	const pointStructure& pStruct,
+	const dictionary& dict
+)
+:
+	pStructSelector
+	(
+		pStruct, dict
+	),
+	begin_
+	(
+		dict.subDict("selectRangeInfo").getVal<int32>("begin")
+	),
+	end_
+	(
+		dict.subDict("selectRangeInfo").getValOrSet("end", pStruct.size())
+	),
+	stride_
+	(
+		dict.subDict("selectRangeInfo").getValOrSet("stride", 1)
+	)
+{
+	begin_ 	= max(begin_,1);
+	end_ 	= min(end_, static_cast<int32>(pStruct.size()));
+	stride_ = max(stride_,1);
 
-using int8 		= signed char;
-
-using int16 	=	short int;
-
-using int32 	=	int;
-
-using int64 	=	long long int;
-
-using uint16  = unsigned short int  ;
-
-using uint32 	=	unsigned int;
-
-using label   = std::size_t;
-
-using word 		= std::string;
-
-
-} // end of pFlow
-
-
-#endif
+	selectAllPointsInRange();
+}
