@@ -41,6 +41,7 @@ if(!cmds.parse(argc, argv)) return 0;
 
 	output<<endl;
 	Report(1)<< "You are using "<<yellowText(cmds.productNameCopyright())<<endReport;
+  Report(1)<< yellowText(pFlow::floatingPointDescription())<<endReport;
 	
 
 // this should be palced in each main 

@@ -30,9 +30,12 @@ namespace pFlow
 
 #ifdef pFlow_Build_Double 
   #define useDouble 1
+inline const char* floatingPointType__ = "double";
 #else
   #define useDouble 0
+inline const char* floatingPointType__ = "float";
 #endif
+
 
 // scalars
 #if useDouble
@@ -57,6 +60,12 @@ using label   = std::size_t;
 
 using word 		= std::string;
 
+inline 
+auto floatingPointDescription()
+{
+  return word("In this build, ") + word(floatingPointType__) +
+         word(" is used for floating point operations.");
+}
 
 } // end of pFlow
 
