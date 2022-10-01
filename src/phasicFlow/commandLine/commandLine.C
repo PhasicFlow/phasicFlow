@@ -36,10 +36,11 @@ pFlow::commandLine::commandLine(word appName, word disptn)
 {
 	
 	CLI::App::add_flag_callback(
-		"--discription",
+		"--description",
 		[disptn, appName]() {
-			output<<"\n"<<yellowText(versoinCopyright)<<endl<<endl;
-			output<<"Discription for "<< boldText(appName)<<":\n";
+			output<<"\n"<<yellowText(versoinCopyright)<<endl;
+			output<<yellowText(floatingPointDescription())<<endl<<endl;
+			output<<"Description for "<< boldText(appName)<<":\n";
 			output<<"  "<<disptn<<endl;
 		},
 		"What does this app do?"
@@ -52,7 +53,7 @@ bool pFlow::commandLine::parse(
 {
 	try {                       
         CLI::App::parse(argc, argv);
-        if(CLI::App::count("--discription")) return false;
+        if(CLI::App::count("--description")) return false;
         return true;
     } catch(const ParseError &e) {                                                                                
         CLI::App::exit(e);
