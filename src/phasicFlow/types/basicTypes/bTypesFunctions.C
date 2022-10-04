@@ -72,6 +72,38 @@ pFlow::word pFlow::int322Word(const int32 & v)
     return ss.str();
 }
 
+pFlow::word pFlow::removeDecimalZeros(const word& str)
+{
+    auto dec = str.find('.');
+    if(dec == word::npos) return str;
+    
+    auto len = str.size();
+    if(len == word::npos) return str;
+    
+    auto  firstZero = word::npos;
+    for(auto n=len-1; n>dec;n--)
+    {
+        if( str[n] == '0' ) 
+        {
+            firstZero = n;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if(firstZero == dec+1) firstZero = dec;
+    
+    return str.substr(0,firstZero);
+}
+
+pFlow::word pFlow::real2FixedStripZeros(const real & v, int32 numPrecision)
+{
+    word strVal = real2Fixed(v, numPrecision);
+    return removeDecimalZeros(strVal);
+}
+
 pFlow::word pFlow::toUpper(const word & inStr)
 {
     word oStr(inStr);
