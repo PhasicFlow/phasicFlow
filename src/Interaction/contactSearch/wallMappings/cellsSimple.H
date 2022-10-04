@@ -257,7 +257,7 @@ public:
 		while (getFull)
 		{
 			
-			getFull = findPairsElementRange(pairs, particleMap);
+			getFull = findPairsElementRangeModified(pairs, particleMap);
 			
 			if(getFull)
 			{
@@ -280,7 +280,7 @@ public:
 		return true;
 	}
 
-	template<typename PairsContainer, typename particleMapType>
+	/*template<typename PairsContainer, typename particleMapType>
 	int32 findPairsElementRange(PairsContainer& pairs, particleMapType& particleMap) 
 	{
 		int32 getFull =0;
@@ -296,6 +296,7 @@ public:
 				const typename tpPWContactSearch::member_type & teamMember,
 				int32& valueToUpdate){
 				int32 i  = teamMember.league_rank();
+				printf("league size %d , league rank %d , team size %d and team rank %d \n", teamMember.league_size(), i, teamMember.team_size(), teamMember.team_rank());
 				IdType id = i;
 				const auto triBox = elementBox[i];
 				
@@ -311,9 +312,43 @@ public:
 			);
 
 		return getFull;
+	}*/
+
+	template<typename PairsContainer, typename particleMapType>
+	int32 findPairsElementRangeModified(PairsContainer& pairs, particleMapType& particleMap)
+	{
+		Kokkos::RangePolicy<
+			Kokkos::IndexType<int32>,
+			Kokkos::Schedule<Kokkos::Dynamic>,
+			ExecutionSpace> rPolicy(0,numElements_);
+
+		int32 getFull =0;
+		
+		const auto pwPairs = pairs;
+		const auto elementBox = elementBox_;
+		//printf("we are in modified version \n");
+		Kokkos::parallel_reduce(
+			"cellsSimple::findPairsElementRangeModified",
+			rPolicy,
+			LAMBDA_HD(
+				int32 i,
+				int32& valueToUpdate){
+				
+				IdType id = i;
+				const auto triBox = elementBox[i];
+				
+				valueToUpdate +=
+					particleMap.addPointsInBoxToListModified(
+						id,
+						triBox,
+						pwPairs
+						);
+			},
+			getFull
+			);
+		return getFull;
 	}
 
-	
 	INLINE_FUNCTION_HD
 	void operator()(TagFindCellRange2, int32 i) const
 	{

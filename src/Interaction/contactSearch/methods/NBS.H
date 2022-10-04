@@ -481,7 +481,7 @@ public:
 	}
 	
 
-	template <typename PairsContainer, typename teamMemberType>
+	/*template <typename PairsContainer, typename teamMemberType>
 	INLINE_FUNCTION_HD
 	int32 addPointsInBoxToList( 
 		const teamMemberType& teamMember,
@@ -520,6 +520,40 @@ public:
 			getFull
 			);
 
+		return getFull;
+
+	}*/
+
+	template <typename PairsContainer>
+	INLINE_FUNCTION_HD
+	int32 addPointsInBoxToListModified( 
+		IdType id,
+		const iBox<IndexType>& triBox,
+		const PairsContainer& pairs)const
+	{
+		int32 getFull = 0;
+
+		auto bExtent = boxExtent(triBox);
+		int32 numCellBox = bExtent.x()*bExtent.y()*bExtent.z();
+
+		const auto head = head_;
+		const auto next = next_;
+
+		for(int32 linIndex=0; linIndex<numCellBox; linIndex++)
+		{
+				CellType cell;
+				indexToCell(linIndex, triBox, cell);
+
+				int32 n = head_(cell.x(),cell.y(),cell.z());
+				while( n>-1)
+				{
+					// id is wall id the pair is (particle id, wall id)
+					if( pairs.insert(static_cast<IdType>(n), id) < 0 )
+						getFull++;
+					n = next_(n);
+				}
+		}
+		
 		return getFull;
 
 	}
