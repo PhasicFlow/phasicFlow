@@ -57,6 +57,10 @@ word real2Fixed(const real & v, int32 numPrecision = 6);
 
 word real2Word(const real & v, int32 numPrecision = 6);
 
+word removeDecimalZeros(const word& str);
+
+word real2FixedStripZeros(const real & v, int32 numPrecision = 6);
+
 word int322Word(const int32 & v);
 
  

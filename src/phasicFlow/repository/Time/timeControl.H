@@ -105,8 +105,7 @@ public:
 
 	word currentTimeWord() const
 	{
-		word ctw = real2Word( currentTime(), timePrecision());
-		return ctw;
+		return real2FixedStripZeros( currentTime(), timePrecision());;
 	}
 
 	int32 currentIter()const
