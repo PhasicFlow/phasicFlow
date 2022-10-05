@@ -84,4 +84,3 @@ You can navigate into tutorials folder in the phasicFlow folder to see some simu
 * Extending the code for using OpenMPTarget backend to include more GPUs for off-loading the computations. 
 * Extending high-level parallelization and implementing space partitioning and load balancing for muilti-GPU computations and running PhasicFlow on distributed memory super-computers 
  
-### basic features
