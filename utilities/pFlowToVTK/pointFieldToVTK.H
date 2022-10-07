@@ -354,6 +354,93 @@ bool convertTimeFolderPointFields(
 
 	return true;
 }
+
+
+
+bool convertTimeFolderPointFieldsSelected( 
+	fileSystem 			timeFolder,
+	real 				time,
+	fileSystem 			destPath,
+	word 				bName,
+	wordVector 			fieldsName,
+	bool 				mustExist)
+{
+
+	// check if pointStructure exist in this folder 
+	IOfileHeader pStructHeader(
+		objectFile(
+			pointStructureFile__,
+			timeFolder,
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS)
+		);
+
+	if( !pStructHeader.headerOk(true) )
+	{
+		output<<yellowColor<<"Time folder "<< timeFolder <<
+		" does not contain any pStructure data file. Skipping this folder . . ."
+		<<defaultColor<<nl;
+		return true;
+	}
+
+	vtkFile vtk(destPath, bName, time);
+
+	if(!vtk) return false;
+
+	auto pStructObjPtr = IOobject::make<pointStructure>(pStructHeader);
+	auto& pStruct = pStructObjPtr().getObject<pointStructure>();
+
+	// get a list of files in this timeFolder;
+
+	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
+	auto* pos = posVec.data();
+
+	Report(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
+					 <<" active particles"<<endReport;
+	addUndstrcuturedGridField(
+		vtk(),
+		pStruct.numActive(),
+		pos,
+		pStruct.activePointsMaskH());
+
+	auto fileList = containingFiles(timeFolder);
+
+
+	for(auto& fname:fieldsName)
+	{
+		fileSystem fieldAddress = timeFolder+fname;
+		
+		IOfileHeader fieldHeader(
+			objectFile(
+			fieldAddress.wordPath(),
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS) );
+
+		if( fieldHeader.headerOk(true) )
+		{
+			convertIntTypesPointField(vtk(), fieldHeader, pStruct);
+			convertRealTypePointField(vtk(), fieldHeader, pStruct);
+			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
+		}
+		else
+		{
+			if(mustExist)
+			{
+				fatalErrorInFunction<<"Field " << fieldAddress << 
+				" does not exist."<<endl;
+				return false;
+			}
+			else
+			{
+				Report(1)<<"Could not find "<<yellowText(fieldAddress) <<" skipping . . ."<<endReport;
+			}
+		}
+	}
+
+	return true;
+}
+
  
 }
 
