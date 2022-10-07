@@ -67,10 +67,17 @@ int main(int argc, char** argv )
 		"path to output folder of VTK",
 		"path");
 
+	wordVector fields;
+	bool 			 allFields = true;
+	cmds.addOption("-f,--fields",
+		fields.vectorField(),
+		"a space-separated list of fields names to be converted to VTK",
+		"word");
+
 	cmds.addOption(
 		"-t,--time",
 		times.vectorField(),
-		"a space separated lits of time folders, or a strided range begin:stride:end, or an interval begin:end",
+		"a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end",
 		" ");
 
 	if(!cmds.parse(argc, argv)) return 0;
@@ -84,6 +91,12 @@ int main(int argc, char** argv )
 	fileSystem destFolder = fileSystem(outFolder)/geometryFolder__;
 	fileSystem destFolderField = fileSystem(outFolder);
 	wordList geomfiles{"triSurface"};
+
+
+	if(cmds.count("--fields"))
+	{
+		allFields = false;
+	}
 
 	realCombinedRange validRange;
 	if( cmds.count("--time") )
@@ -116,14 +129,31 @@ int main(int argc, char** argv )
 
 		if(!noParticle)
 		{
-			if( !pFlow::PFtoVTK::convertTimeFolderPointFields(
-				folders.folder(),
-				folders.time(),
-				destFolderField,
-				"sphereFields" )
-			)
+			
+			if(allFields)
 			{
-				fatalExit;
+				if( !pFlow::PFtoVTK::convertTimeFolderPointFields(
+					folders.folder(),
+					folders.time(),
+					destFolderField,
+					"sphereFields" )
+				)
+				{
+					fatalExit;
+				}
+			}else
+			{
+				if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
+					folders.folder(),
+					folders.time(),
+					destFolderField,
+					"sphereFields",
+					fields,
+					!pFlow::equal(folders.time(),static_cast<pFlow::real>(0.0)) )
+				)
+				{
+					fatalExit;
+				}
 			}	
 		}
 		
