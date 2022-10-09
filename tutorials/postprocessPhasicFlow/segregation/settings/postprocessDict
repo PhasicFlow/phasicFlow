@@ -11,7 +11,7 @@ rectMesh
 	max (0.12   0.12 0.1);  //maximum corner point 
 	nx 24; 		// number of divisions in x direction
 	ny 24; 		// number of divisions in y direction
-	nz 5; 		// number of divisions in z direction 
+	nz 10; 		// number of divisions in z direction 
 }
 
 

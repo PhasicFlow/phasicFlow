@@ -48,12 +48,12 @@ setFields
 	{
 		shapeAssigne
 		{
-			selector 	selectRange; // type of point selector
-			selectRangeInfo
+			selector 	selectRandom; // type of point selector
+			selectRandomInfo
 			{
 				begin 	0;			// begin index of points
 				end 	30000;		// end index of points 
-				stride  3;			// stride for selector 
+				number  29999;			// stride for selector 
 			}
 			fieldValue  // fields that the selector is applied to 
 			{
