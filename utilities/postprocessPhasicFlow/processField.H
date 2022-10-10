@@ -50,7 +50,7 @@ protected:
 
 	word  	fieldType_;
 
-	word 	action_;
+	word 	operation_;
 
 	word  	includeMaskType_;
 
@@ -125,9 +125,9 @@ public:
 		return fieldName_ == "uniformField";
 	}
 
-	const word& action()const
+	const word& operation()const
 	{
-		return action_;
+		return operation_;
 	}
 
 	auto& timeFolder()

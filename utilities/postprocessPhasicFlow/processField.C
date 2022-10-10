@@ -33,7 +33,7 @@ pFlow::processField::processField(
 	pointToCell_(pToCell),
 	timeFolder_(rep),
 	processedFieldName_(dict.name()),
-	action_(dict.getVal<word>("action")),
+	operation_(dict.getVal<word>("operation")),
 	includeMaskType_(dict.getVal<word>("includeMask")),
 	threshold_(dict.getValOrSet<int32>("threshold", 1))
 {

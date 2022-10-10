@@ -103,25 +103,25 @@ public:
 		
 		rectMeshField_H<real> denomerator( this->mesh(), real{} );
 
-		if(action() == "sum")
+		if(operation() == "sum")
 		{
 			denomerator = rectMeshField_H<real>(this->mesh(), static_cast<real>(1.0));
 
-		}else if(action() == "average")
+		}else if(operation() == "average")
 		{
 
 			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
 
 			denomerator = sumOp(oneFld, this->pointToCell());
 
-		}else if(action() == "averageMask")
+		}else if(operation() == "averageMask")
 		{
 			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
 
 			denomerator = sumMaksOp(oneFld, this->pointToCell(), incMask);
 		}else
 		{
-			fatalErrorInFunction<<"action is not known: "<< action()<<endl;
+			fatalErrorInFunction<<"operation is not known: "<< operation()<<endl;
 			fatalExit;
 		}
 
