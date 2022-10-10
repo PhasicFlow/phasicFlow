@@ -21,7 +21,7 @@ numberBased
 	numParticles
 	{
 		field 		real 1.0; // uniform field with value 1 
-		action 		sum; 	  // sum over all particles in a cell 
+		operation	sum; 	  // sum over all particles in a cell 
 		includeMask all; 	  // select all
 	}
 
@@ -29,7 +29,7 @@ numberBased
 	smallConc
 	{
 		field 		real 1.0; 	// uniform field with value 1 
-		action 		average;	// average over all particles in a cell	
+		operation	average;	// average over all particles in a cell	
 		threshold 	1; 			// exclude cells with number of particles less than 1
 		includeMask lessThan;   // include mask 
 		lessThanInfo
@@ -43,7 +43,7 @@ numberBased
 	avVelocity
 	{
 		field 	    velocity;   // read velocity field from time folder 
-		action 		average;    // average over all particles in the cell
+		operation   average;    // average over all particles in the cell
 		threshold   3; 			// exclude cells with number of particles less than 3
 		includeMask all;		// select all
 		
