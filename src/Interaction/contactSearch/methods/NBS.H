@@ -57,6 +57,35 @@ public:
 
 	struct TagFindPairs{};
 
+	class cellIterator
+	{
+	private:
+		ViewType3D<int32, memory_space> 		head_;
+
+		ViewType1D<int32, memory_space> 		next_;
+
+	public:
+
+		cellIterator(ViewType3D<int32, memory_space> head, ViewType1D<int32, memory_space> next)
+		:
+			head_(head),
+			next_(next)
+		{}
+
+		INLINE_FUNCTION_HD
+		Cells cellsSize()const {
+			return Cells(head_.extent(0), head_.extent(1), head_.extent(2));}
+
+		INLINE_FUNCTION_HD
+		int32 start(indexType i, indexType j, indexType k)const {
+			return head_(i,j,k); }
+
+		INLINE_FUNCTION_HD
+		int32 getNext(int32 n)const {
+			if(n<0) return n;
+			return next_(n); }
+	};
+
 protected:
 
 	int32 		capacity_		= 1;
@@ -254,6 +283,11 @@ public:
 	const auto& Next()const
 	{
 		return next_;
+	}
+
+	cellIterator getCellIterator()const
+	{
+		return cellIterator(head_, next_);
 	}
 
 	// - Perform the broad search to find pairs
@@ -478,84 +512,6 @@ public:
 	{
 		checkAllocateNext(newSize);
 		return true;
-	}
-	
-
-	/*template <typename PairsContainer, typename teamMemberType>
-	INLINE_FUNCTION_HD
-	int32 addPointsInBoxToList( 
-		const teamMemberType& teamMember,
-		IdType id,
-		const iBox<IndexType>& triBox,
-		const PairsContainer& pairs)const
-	{
-		int32 getFull = 0;
-
-		auto bExtent = boxExtent(triBox);
-		int32 numCellBox = bExtent.x()*bExtent.y()*bExtent.z();
-
-		const auto head = head_;
-		const auto next = next_;
-
-		// perform a loop over all cells in the triBox
-		Kokkos::parallel_reduce(
-			Kokkos::TeamThreadRange(teamMember,numCellBox),
-			[=](int32 linIndex, int32& valToUpdate){
-
-				CellType cell;
-				indexToCell(linIndex, triBox, cell);
-
-				int32 n = head(cell.x(),cell.y(),cell.z());
-				
-				while( n>-1)
-				{
-					
-					// id is wall id the pair is (particle id, wall id)
-					if( pairs.insert(static_cast<IdType>(n), id) < 0 )
-						valToUpdate++;
-					n = next(n);
-				}
-
-			},
-			getFull
-			);
-
-		return getFull;
-
-	}*/
-
-	template <typename PairsContainer>
-	INLINE_FUNCTION_HD
-	int32 addPointsInBoxToListModified( 
-		IdType id,
-		const iBox<IndexType>& triBox,
-		const PairsContainer& pairs)const
-	{
-		int32 getFull = 0;
-
-		auto bExtent = boxExtent(triBox);
-		int32 numCellBox = bExtent.x()*bExtent.y()*bExtent.z();
-
-		const auto head = head_;
-		const auto next = next_;
-
-		for(int32 linIndex=0; linIndex<numCellBox; linIndex++)
-		{
-				CellType cell;
-				indexToCell(linIndex, triBox, cell);
-
-				int32 n = head_(cell.x(),cell.y(),cell.z());
-				while( n>-1)
-				{
-					// id is wall id the pair is (particle id, wall id)
-					if( pairs.insert(static_cast<IdType>(n), id) < 0 )
-						getFull++;
-					n = next_(n);
-				}
-		}
-		
-		return getFull;
-
 	}
 
 };
