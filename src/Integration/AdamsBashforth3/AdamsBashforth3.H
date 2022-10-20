@@ -78,7 +78,7 @@ protected:
 	//realx3PointField_D& dy2_;
 
 	//  this is a device 
-	HistoryFieldType history_;
+	HistoryFieldType& history_;
 
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,

@@ -18,11 +18,11 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "AdamsBashforth4.H"
+#include "AdamsBashforth5.H"
 
 
 
-pFlow::AdamsBashforth4::AdamsBashforth4
+pFlow::AdamsBashforth5::AdamsBashforth5
 (
 	const word& baseName,
 	repository& owner,
@@ -34,18 +34,18 @@ pFlow::AdamsBashforth4::AdamsBashforth4
 	history_(
 		owner.emplaceObject<HistoryFieldType>(
 			objectFile(
-				groupNames(baseName,"AB4History"),
+				groupNames(baseName,"AB5History"),
 				"",
 				objectFile::READ_IF_PRESENT,
 				objectFile::WRITE_ALWAYS),
 			pStruct,
-			AB4History({zero3,zero3, zero3})))
+			AB5History({zero3,zero3, zero3})))
 
 {
 
 }
 
-bool pFlow::AdamsBashforth4::predict
+bool pFlow::AdamsBashforth5::predict
 (
 	real UNUSED(dt),
 	realx3Vector_D& UNUSED(y),
@@ -56,7 +56,7 @@ bool pFlow::AdamsBashforth4::predict
 	return true;
 }
 
-bool pFlow::AdamsBashforth4::correct
+bool pFlow::AdamsBashforth5::correct
 (
 	real dt,
 	realx3Vector_D& y,
@@ -76,7 +76,7 @@ bool pFlow::AdamsBashforth4::correct
 	return true;
 }
 
-bool pFlow::AdamsBashforth4::intAll(
+bool pFlow::AdamsBashforth5::intAll(
 	real dt, 
 	realx3Vector_D& y, 
 	realx3Vector_D& dy, 
@@ -87,20 +87,17 @@ bool pFlow::AdamsBashforth4::intAll(
 	auto d_history = history_.deviceVectorAll();
 
 	Kokkos::parallel_for(
-		"AdamsBashforth4::correct",
+		"AdamsBashforth5::correct",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){				
 			d_y[i] += dt*( 
-						static_cast<real>(55.0 / 24.0) * d_dy[i]
-					- static_cast<real>(59.0 / 24.0) * d_history[i].dy1_ 
-					+ static_cast<real>(37.0 / 24.0) * d_history[i].dy2_
-					- static_cast<real>( 9.0 / 24.0) * d_history[i].dy3_
-					);
-			d_history[i].dy3_ = d_history[i].dy2_;
-			d_history[i].dy2_ = d_history[i].dy1_;
-			d_history[i].dy1_ = d_dy[i];
-			
-
+				  static_cast<real>(1901.0 / 720.0) * d_dy[i]
+				- static_cast<real>(2774.0 / 720.0) * d_history[i].dy1_ 
+				+ static_cast<real>(2616.0 / 720.0) * d_history[i].dy2_
+				- static_cast<real>(1274.0 / 720.0) * d_history[i].dy3_
+				+ static_cast<real>( 251.0 / 720.0) * d_history[i].dy4_
+				);
+			d_history[i] = {d_dy[i] ,d_history[i].dy1_, d_history[i].dy2_, d_history[i].dy3_};
 		});
 	Kokkos::fence();
 
