@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __AdamsBashforth3_H__
-#define __AdamsBashforth3_H__
+#ifndef __AdamsBashforth4_H__
+#define __AdamsBashforth4_H__
 
 
 #include "integration.H"
@@ -28,24 +28,26 @@ Licence:
 namespace pFlow
 {
 
-struct AB3History
+struct AB4History
 {
 	realx3 dy1_={0,0,0};
 	realx3 dy2_={0,0,0};
+	realx3 dy3_={0,0,0};
 
-	TypeNameNV("AB3History");
+	TypeNameNV("AB4History");
 };
 
 
 INLINE_FUNCTION
-iIstream& operator>>(iIstream& str, AB3History& ab3)
+iIstream& operator>>(iIstream& str, AB4History& ab4)
 {
-	str.readBegin("AB3History");
+	str.readBegin("AB4History");
 
-    str >> ab3.dy1_;
-    str >> ab3.dy2_;
+    str >> ab4.dy1_;
+    str >> ab4.dy2_;
+    str >> ab4.dy3_;
     
-    str.readEnd("AB3History");
+    str.readEnd("AB4History");
 
     str.check(FUNCTION_NAME);
 
@@ -54,10 +56,11 @@ iIstream& operator>>(iIstream& str, AB3History& ab3)
 }
 
 INLINE_FUNCTION
-iOstream& operator<<(iOstream& str, const AB3History& ab3)
+iOstream& operator<<(iOstream& str, const AB4History& ab4)
 {
-	str << token::BEGIN_LIST << ab3.dy1_
-	    << token::SPACE << ab3.dy2_
+	str << token::BEGIN_LIST << ab4.dy1_
+	    << token::SPACE << ab4.dy2_
+	    << token::SPACE << ab4.dy3_
 		<< token::END_LIST;	    
 
 	str.check(FUNCTION_NAME);
@@ -66,16 +69,18 @@ iOstream& operator<<(iOstream& str, const AB3History& ab3)
 }
 
 
-class AdamsBashforth3
+class AdamsBashforth4
 :
 	public integration
 {
 protected:
 
-	using HistoryFieldType = pointField<VectorSingle,AB3History>;
+	using HistoryFieldType = pointField<VectorSingle,AB4History>;
 	//realx3PointField_D& dy1_;
 
 	//realx3PointField_D& dy2_;
+
+
 
 	//  this is a device 
 	HistoryFieldType& history_;
@@ -89,21 +94,21 @@ protected:
 public:
 
 	// type info
-	TypeName("AdamsBashforth3");
+	TypeName("AdamsBashforth4");
 
 	//// - Constructors
-		AdamsBashforth3(
+		AdamsBashforth4(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
 
-		virtual ~AdamsBashforth3()=default;
+		virtual ~AdamsBashforth4()=default;
 
 		// - add a virtual constructor 
 		add_vCtor(
 			integration,
-			AdamsBashforth3,
+			AdamsBashforth4,
 			word);
 
 
@@ -132,7 +137,7 @@ public:
 
 
 template<typename activeFunctor>
-bool pFlow::AdamsBashforth3::intRange(
+bool pFlow::AdamsBashforth4::intRange(
 	real dt, 
 	realx3Vector_D& y,
 	realx3Vector_D& dy,
@@ -144,16 +149,21 @@ bool pFlow::AdamsBashforth3::intRange(
 	auto activeRng = activeP.activeRange();
 
 	Kokkos::parallel_for(
-		"AdamsBashforth3::correct",
+		"AdamsBashforth4::correct",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){
 			if( activeP(i))
 			{
-				auto ldy = d_dy[i];
-				d_y[i] += dt*( static_cast<real>(23.0 / 12.0) * ldy 
-						- static_cast<real>(16.0 / 12.0) * d_history[i].dy1_ 
-						+ static_cast<real>(5.0 / 12.0) * d_history[i].dy2_);
-				d_history[i] = {ldy ,d_history[i].dy1_};
+				
+				d_y[i] += dt*( 
+							static_cast<real>(55.0 / 24.0) * d_dy[i]
+						- static_cast<real>(59.0 / 24.0) * d_history[i].dy1_ 
+						+ static_cast<real>(37.0 / 24.0) * d_history[i].dy2_
+						- static_cast<real>( 9.0 / 24.0) * d_history[i].dy3_
+						);
+				d_history[i].dy3_ = d_history[i].dy2_;
+				d_history[i].dy2_ = d_history[i].dy1_;
+				d_history[i].dy1_ = d_dy[i];
 			}
 		});
 	Kokkos::fence();
