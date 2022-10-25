@@ -42,6 +42,7 @@ while( m > -1 )
 		{
 			auto ln = n;
 			auto lm = m;
+			//output<<"lm "<< lm <<" ln "<< ln << " i j k "<< int32x3(i,j,k)<<endl;
 			if(lm>ln) Swap(lm,ln);
 			if( auto res = pairs.insert(lm,ln); res <0)
 			{

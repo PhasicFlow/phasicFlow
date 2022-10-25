@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __AdamsBashforth4_H__
-#define __AdamsBashforth4_H__
+#ifndef __AdamsMoulton3_H__
+#define __AdamsMoulton3_H__
 
 
 #include "integration.H"
@@ -28,99 +28,49 @@ Licence:
 namespace pFlow
 {
 
-struct AB4History
-{
-	realx3 dy1_={0,0,0};
-	realx3 dy2_={0,0,0};
-	realx3 dy3_={0,0,0};
 
-	TypeNameNV("AB4History");
-};
-
-
-INLINE_FUNCTION
-iIstream& operator>>(iIstream& str, AB4History& ab4)
-{
-	str.readBegin("AB4History");
-
-    str >> ab4.dy1_;
-    str >> ab4.dy2_;
-    str >> ab4.dy3_;
-    
-    str.readEnd("AB4History");
-
-    str.check(FUNCTION_NAME);
-
-	return str;
-	
-}
-
-INLINE_FUNCTION
-iOstream& operator<<(iOstream& str, const AB4History& ab4)
-{
-	str << token::BEGIN_LIST << ab4.dy1_
-	    << token::SPACE << ab4.dy2_
-	    << token::SPACE << ab4.dy3_
-		<< token::END_LIST;	    
-
-	str.check(FUNCTION_NAME);
-
-	return str;
-}
-
-
-class AdamsBashforth4
+class AdamsMoulton3
 :
 	public integration
 {
 protected:
 
-	using HistoryFieldType = pointField<VectorSingle,AB4History>;
-	//realx3PointField_D& dy1_;
+	realx3PointField_D& y0_;
 
-	//realx3PointField_D& dy2_;
+	realx3PointField_D& dy0_;
 
-
-
-	//  this is a device 
-	HistoryFieldType& history_;
+	realx3PointField_D& dy1_;
 
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
 			Kokkos::IndexType<int32>
 			>;
-
 public:
 
 	// type info
-	TypeName("AdamsBashforth4");
+	TypeName("AdamsMoulton3");
 
 	//// - Constructors
-		AdamsBashforth4(
+		AdamsMoulton3(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
 
-		virtual ~AdamsBashforth4()=default;
+		virtual ~AdamsMoulton3()=default;
 
 		// - add a virtual constructor 
 		add_vCtor(
 			integration,
-			AdamsBashforth4,
+			AdamsMoulton3,
 			word);
 
 
 	//// - Methods
-		bool predict(
-			real UNUSED(dt),
-			realx3Vector_D & UNUSED(y),
-			realx3Vector_D& UNUSED(dy)) override;
+		bool predict(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
 
-		bool correct(real dt, 
-			realx3Vector_D & y,
-			realx3Vector_D& dy) override;
+		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,
@@ -128,30 +78,29 @@ public:
 
 		bool needSetInitialVals()const override
 		{
-			return false;
+			return true;
 		}
 
 		uniquePtr<integration> clone()const override
 		{
-			return makeUnique<AdamsBashforth4>(*this);
+			return makeUnique<AdamsMoulton3>(*this);
 		}
 
-		bool intAll(real dt, 
-			realx3Vector_D& y, 
-			realx3Vector_D& dy, 
-			range activeRng);
+		bool predictAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
 
 		template<typename activeFunctor>
-		bool intRange(real dt,
-			realx3Vector_D& y,
-			realx3Vector_D& dy,
-			activeFunctor activeP );
+		bool predictRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP);
+
+		bool intAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
+
+		template<typename activeFunctor>
+		bool intRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP );
 
 };
 
 
 template<typename activeFunctor>
-bool pFlow::AdamsBashforth4::intRange(
+bool AdamsMoulton3::predictRange(
 	real dt, 
 	realx3Vector_D& y,
 	realx3Vector_D& dy,
@@ -159,28 +108,68 @@ bool pFlow::AdamsBashforth4::intRange(
 {
 	auto d_dy = dy.deviceVectorAll();
 	auto d_y  = y.deviceVectorAll();
-	auto d_history = history_.deviceVectorAll();
+	auto d_y0 = y0_.deviceVectorAll();
+	auto d_dy0 = dy0_.deviceVectorAll();
+	auto d_dy1= dy1_.deviceVectorAll();
+	
 	auto activeRng = activeP.activeRange();
 
 	Kokkos::parallel_for(
-		"AdamsBashforth4::correct",
+		"AdamsMoulton3::predictRange",
+		rpIntegration (activeRng.first, activeRng.second),
+		LAMBDA_HD(int32 i){
+			if(activeP(i))
+			{
+				d_dy0[i] = d_dy[i];
+				d_y[i] = d_y0[i] + 
+				dt*
+				(
+					static_cast<real>(3.0 / 2.0) * d_dy[i] 
+					- static_cast<real>(1.0 / 2.0) * d_dy1[i]
+				);
+			}
+		});
+	Kokkos::fence();
+
+	return true;
+
+}
+
+
+template<typename activeFunctor>
+bool pFlow::AdamsMoulton3::intRange(
+	real dt, 
+	realx3Vector_D& y,
+	realx3Vector_D& dy,
+	activeFunctor activeP )
+{
+
+	auto d_dy = dy.deviceVectorAll();
+	auto d_y  = y.deviceVectorAll();
+
+	auto d_dy0 = dy0_.deviceVectorAll();
+	auto d_y0  = y0_.deviceVectorAll();
+	auto d_dy1 = dy1_.deviceVectorAll();
+
+	auto activeRng = activeP.activeRange();
+
+	Kokkos::parallel_for(
+		"AdamsMoulton3::correct",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){
 			if( activeP(i))
 			{
-				
-				d_y[i] += dt*( 
-							static_cast<real>(55.0 / 24.0) * d_dy[i]
-						- static_cast<real>(59.0 / 24.0) * d_history[i].dy1_ 
-						+ static_cast<real>(37.0 / 24.0) * d_history[i].dy2_
-						- static_cast<real>( 9.0 / 24.0) * d_history[i].dy3_
-						);
-				d_history[i].dy3_ = d_history[i].dy2_;
-				d_history[i].dy2_ = d_history[i].dy1_;
-				d_history[i].dy1_ = d_dy[i];
+				auto corrct_y = d_y0[i] + dt*(
+					  static_cast<real>(5.0/12.0)*d_dy[i] 
+					+ static_cast<real>(8.0/12.0)*d_dy0[i] 
+					- static_cast<real>(1.0/12.0)*d_dy1[i]);
+				d_y[i]  = corrct_y;
+				d_y0[i] = corrct_y;
+				d_dy1[i]= d_dy0[i];
 			}
 		});
 	Kokkos::fence();
+
 
 	return true;
 }

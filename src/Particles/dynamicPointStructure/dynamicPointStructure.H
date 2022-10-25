@@ -31,12 +31,15 @@ namespace pFlow
 {
 
 class dynamicPointStructure
+:
+	//public pointStructure
+public eventObserver
 {
 protected:
 
 	Time& time_;
 
-	const word 			integrationMethod_;
+	word 			integrationMethod_;
 
 	pointStructure& 	pStruct_;
 
@@ -52,7 +55,35 @@ public:
 
 	dynamicPointStructure(Time& time, const word& integrationMethod);
 
+	dynamicPointStructure(const dynamicPointStructure& ps) = default;
+
+	/*dynamicPointStructure(const dynamicPointStructure& ps):
+		pointStructure(ps),
+		time_(ps.time_),
+		integrationMethod_(ps.integrationMethod_),
+		velocity_(ps.velocity_),
+		integrationPos_(ps.integrationPos_->clone()),
+		integrationVel_(ps.integrationVel_->clone())
+	{
+
+	}*/
+
+		
+		// - no move construct 
+	dynamicPointStructure(dynamicPointStructure&&) = delete;
+
+	// - copy assignment 
+	//
+	//   should be changed, may causs undefined behavior 
+	//////////////////////////////////////////////////////////////
+	dynamicPointStructure& operator=(const dynamicPointStructure&) = default;
+
+	// - no move assignment 
+	dynamicPointStructure& operator=(dynamicPointStructure&&) = delete;
+
+	// - destructor 
 	virtual ~dynamicPointStructure() = default;
+
 
 	inline pointStructure& pStruct() 
 	{
@@ -78,6 +109,19 @@ public:
 
 	bool correct(real dt, realx3PointField_D& acceleration);
 
+
+	// - update data structure by inserting/setting new points 
+	//   Notifies all the fields in the registered list of data structure
+	//   and exclude the fields that re in the exclusionList
+	//   retrun nullptr if it fails 
+	/*FUNCTION_H
+	virtual uniquePtr<int32IndexContainer> insertPoints(
+		const realx3Vector& pos,
+		const List<eventObserver*>& exclusionList={nullptr}
+	)override;*/
+
+	bool update(const eventMessage& msg) override;
+	
 
 };
 

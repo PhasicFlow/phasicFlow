@@ -162,7 +162,9 @@ public:
 		}
 		else
 			return false;
-		
+		//output<<" ContactSearch::broadSearch::PP fater.\n";
+
+		//output<<" ContactSearch::broadSearch::PW before.\n";
 		if(wallMapping_)
 		{
 			sphereWallTimer_.start();
@@ -171,6 +173,8 @@ public:
 		}
 		else
 			return false;
+
+		//output<<" ContactSearch::broadSearch::PW after.\n";
 		
 		return true;
 	}

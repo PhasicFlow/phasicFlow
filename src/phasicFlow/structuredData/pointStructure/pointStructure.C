@@ -21,6 +21,7 @@ Licence:
 
 #include "pointStructure.H"
 #include "pointStructureKernels.H"
+#include "setFieldList.H"
 #include "error.H"
 #include "iOstream.H"
 #include "Time.H"
@@ -298,9 +299,12 @@ FUNCTION_H
 pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 (
 	const realx3Vector& pos,
+	const setFieldList& setField,
+	repository& owner,
 	const List<eventObserver*>& exclusionList
 )
 {
+
 
 	auto numNew = pos.size();
 	if( numNew==0)
@@ -312,26 +316,52 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 
 	if(!newPointsPtr)return nullptr;
 
-	auto oldSize = size();
-	auto oldCapacity = capacity();
-	auto oldRange = activeRange();
+	auto oldSize 			= size();
+	auto oldCapacity 	= capacity();
+	auto oldRange 		= activeRange();
 
 	tobeInsertedIndex_ = newPointsPtr();
-	
+
 	// set the position of new points
-	if(!pointPosition_.insertSetElement(newPointsPtr(), pos))return nullptr;
-	
-	if(!pointFlag_.insertSetElement( newPointsPtr(), static_cast<int8>(PointFlag::ACTIVE)))return nullptr;
-	
+
+	if(!pointPosition_.insertSetElement(
+		newPointsPtr(),
+		pos)
+		)return nullptr;
+
+	if(!pointFlag_.insertSetElement(
+		newPointsPtr(),
+		static_cast<int8>(PointFlag::ACTIVE))
+		)return nullptr;
+
+
 
 	setNumMaxPoints();
 	auto minInd = newPointsPtr().min();
 	auto maxInd = newPointsPtr().max();
 
+
+	List<eventObserver*> localExlusion(exclusionList);
+
+	for(auto sfEntry:setField)
+	{
+		if(void* fieldPtr = 
+			sfEntry.setPointFieldSelectedAll( 
+				owner, 
+				newPointsPtr(), 
+				false );
+			fieldPtr)
+
+			localExlusion.push_back( 
+				static_cast<eventObserver*>(fieldPtr)
+				);
+		else
+			return nullptr;
+	}
+
 	// changes the active rage based on the new inserted points 
 	activeRange_ = { min(activeRange_.first, minInd ),
 					max(activeRange_.second, maxInd+1)};
-
 
 	numActivePoints_ += numNew;
 
@@ -347,7 +377,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 		msg.add(eventMessage::CAP_CHANGED);
 	
 	// notify all the registered objects except the exclusionList 
-	if( !this->notify(msg, exclusionList) ) return nullptr;
+	if( !this->notify(msg, localExlusion) ) return nullptr;
 
 	return newPointsPtr;
 }

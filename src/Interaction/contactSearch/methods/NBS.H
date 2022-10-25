@@ -302,11 +302,13 @@ public:
 		performedSearch_ = false;
 
 		if( !performSearch() ) return true;
-		
+		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) before build"<<endInfo;
 		build(activeRange);
+		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) after build"<<endInfo;
 			
+		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) before findPairs"<<endInfo;
 		findPairs(pairs);
-		
+		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) after findPairs"<<endInfo;
 		performedSearch_ = true;		
 		return true;
 	}

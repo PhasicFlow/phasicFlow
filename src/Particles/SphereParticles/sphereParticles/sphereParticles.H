@@ -157,11 +157,8 @@ public:
 		shapes_.diameterMinMax(minDiam, maxDiam);
 	}
 
-	bool update(const eventMessage& msg) override
-	{
-		CONSUME_PARAM(msg);
-		return true;
-	}
+	bool update(const eventMessage& msg) override;
+	
 	
 	realx3PointField_D& rAcceleration() override
 	{

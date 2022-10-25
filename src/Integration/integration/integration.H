@@ -78,6 +78,14 @@ public:
 
 		virtual bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
 
+		virtual bool setInitialVals(
+				const int32IndexContainer& newIndices,
+				const realx3Vector& y) = 0;
+
+		virtual bool needSetInitialVals()const = 0;
+
+		virtual uniquePtr<integration> clone()const=0;
+
 		const word& baseName()const
 		{
 			return baseName_;

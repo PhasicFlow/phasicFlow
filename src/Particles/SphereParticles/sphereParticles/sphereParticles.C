@@ -83,8 +83,15 @@ bool pFlow::sphereParticles::beforeIteration()
 	particles::beforeIteration();
 	
 	intPredictTimer_.start();
+	
+	//Info<<"before dyn predict"<<endInfo;
 		dynPointStruct_.predict(this->dt(), accelertion_);
+	//Info<<"after dyn predict"<<endInfo;
+
+	//Info<<"before revel predict"<<endInfo;
 		rVelIntegration_().predict(this->dt(),rVelocity_, rAcceleration_);
+	//Info<<"after rvel predict"<<endInfo;
+
 	intPredictTimer_.end();
 
 	return true;
@@ -93,7 +100,9 @@ bool pFlow::sphereParticles::beforeIteration()
 
 bool pFlow::sphereParticles::iterate() 
 {
+
 	accelerationTimer_.start();
+	//Info<<"before accelerationTimer_ "<<endInfo;
 		pFlow::sphereParticlesKernels::acceleration(
 			control().g(),
 			mass().deviceVectorAll(),
@@ -107,8 +116,11 @@ bool pFlow::sphereParticles::iterate()
 	accelerationTimer_.end();
 	
 	intCorrectTimer_.start();
+	//Info<<"before correct dyn "<<endInfo;
 		dynPointStruct_.correct(this->dt(), accelertion_);
+	//Info<<"after correct dyn "<<endInfo;
 		rVelIntegration_().correct(this->dt(), rVelocity_, rAcceleration_);
+	//Info<<"after correct rvel "<<endInfo;
 	intCorrectTimer_.end();
 	
 	return true;
@@ -285,6 +297,28 @@ pFlow::sphereParticles::sphereParticles(
 		fatalExit;
 	}
 
+	
+	if(rVelIntegration_->needSetInitialVals())
+	{
+		
+		auto [minInd, maxInd] = pStruct().activeRange();
+		int32IndexContainer indexHD(minInd, maxInd);
+	
+		auto n = indexHD.size();
+		auto index = indexHD.indicesHost();
+
+		realx3Vector rvel(n,RESERVE());
+		const auto hrVel = rVelocity_.hostVector();
+
+		for(auto i=0; i<n; i++)
+		{
+			rvel.push_back( hrVel[index(i)]);
+		}
+		
+		Report(2)<< "Initializing the required vectors for rotational velocity integratoin\n "<<endReport;
+		rVelIntegration_->setInitialVals(indexHD, rvel);
+
+	}
 
 	if(!initializeParticles())
 	{
@@ -293,6 +327,32 @@ pFlow::sphereParticles::sphereParticles(
 	
 } 
 
+bool pFlow::sphereParticles::update(const eventMessage& msg) 
+{
+	
+	if(rVelIntegration_->needSetInitialVals())
+	{
+		
+		
+		auto indexHD = pStruct().insertedPointIndex();
+	
+		auto n = indexHD.size();
+		auto index = indexHD.indicesHost();
+
+		realx3Vector rvel(n,RESERVE());
+		const auto hrVel = rVelocity_.hostVector();
+
+		for(auto i=0; i<n; i++)
+		{
+			rvel.push_back( hrVel[index(i)]);
+		}
+		
+		rVelIntegration_->setInitialVals(indexHD, rvel);
+
+	}	
+
+	return true;
+}
 
 bool pFlow::sphereParticles::insertParticles
 (
@@ -312,7 +372,7 @@ bool pFlow::sphereParticles::insertParticles
 
 	auto exclusionListAllPtr = getFieldObjectList(); 
 
-	auto newInsertedPtr = pStruct().insertPoints( position, exclusionListAllPtr());
+	auto newInsertedPtr = pStruct().insertPoints( position, setField, time(), exclusionListAllPtr());
 	
 	if(!newInsertedPtr)
 	{
@@ -337,10 +397,6 @@ bool pFlow::sphereParticles::insertParticles
 		return false;
 	}
 	
-	for(auto sfEntry:setField)
-	{
-		if(!sfEntry.setPointFieldSelectedAll( time(), newInserted, false ))return false;
-	}
 
 	auto activeR = this->activeRange();
 

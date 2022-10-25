@@ -38,6 +38,8 @@ namespace pFlow
 
 //forward
 class box;
+class setFieldList;
+class repository;
 
 class pointStructure
 :
@@ -319,6 +321,8 @@ public:
 		FUNCTION_H
 		virtual uniquePtr<int32IndexContainer> insertPoints(
 			const realx3Vector& pos,
+			const setFieldList& setField,
+			repository& owner,
 			const List<eventObserver*>& exclusionList={nullptr}
 		);
 
