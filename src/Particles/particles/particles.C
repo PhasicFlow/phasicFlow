@@ -31,10 +31,21 @@ pFlow::particles::particles
 	demParticles(control),
 	time_(control.time()),
 	integrationMethod_(integrationMethod),
+	/*dynPointStruct_(
+		time_.emplaceObject<dynamicPointStructure>(
+			objectFile(
+				pointStructureFile__,
+				"",
+				objectFile::READ_ALWAYS,
+				objectFile::WRITE_ALWAYS			
+				),
+			control.time(),
+			integrationMethod
+			)
+		),*/
 	dynPointStruct_(
 		control.time(),
-		integrationMethod
-		),
+		integrationMethod),
 	shapeName_(
 		control.time().emplaceObject<wordPointField>(
 			objectFile(

@@ -76,6 +76,13 @@ bool pFlow::AdamsBashforth4::correct
 	return true;
 }
 
+bool pFlow::AdamsBashforth4::setInitialVals(
+	const int32IndexContainer& newIndices,
+	const realx3Vector& y)
+{
+	return true;
+}
+
 bool pFlow::AdamsBashforth4::intAll(
 	real dt, 
 	realx3Vector_D& y, 

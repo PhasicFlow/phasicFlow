@@ -60,7 +60,7 @@ pFlow::AdamsBashforth3::AdamsBashforth3
 			AB3History({zero3,zero3})))
 
 {
-
+	
 }
 
 bool pFlow::AdamsBashforth3::predict
@@ -91,6 +91,13 @@ bool pFlow::AdamsBashforth3::correct
 		return intRange(dt, y, dy, this->pStruct().activePointsMaskD());
 	}
 
+	return true;
+}
+
+bool pFlow::AdamsBashforth3::setInitialVals(
+	const int32IndexContainer& newIndices,
+	const realx3Vector& y)
+{
 	return true;
 }
 

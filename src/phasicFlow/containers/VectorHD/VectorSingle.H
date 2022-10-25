@@ -559,6 +559,8 @@ public:
 		INLINE_FUNCTION_H
 		bool insertSetElement(const int32IndexContainer& indices, const Vector<T>& vals)
 		{
+
+			//Info<<"start of insertSetElement vecotsingle"<<endInfo;
 			if(indices.size() == 0)return true;
 			if(indices.size() != vals.size())return false;
 
@@ -569,38 +571,27 @@ public:
 				resize(maxInd+1);
 			} 
 
-			if constexpr (isHostAccessible_)
-			{
-				// TODO: remove const_cast
-				hostViewType1D<T> dVecVals( const_cast<T*>(vals.data()), vals.size());
+				
+			hostViewType1D<const T> hVecVals( vals.data(), vals.size());
+			deviceViewType1D<T> dVecVals("dVecVals", indices.size());
 
+			copy(dVecVals, hVecVals);
 
-				pFlow::algorithms::KOKKOS::fillSelected<T, int32, execution_space>(
-					deviceVectorAll().data(),
-					indices.hostView().data(),
-					dVecVals.data(),
-					indices.size());
+			using policy = Kokkos::RangePolicy<
+			execution_space,
+			Kokkos::IndexType<int32> >;
+			auto dVec = deviceVectorAll();
+			auto dIndex = indices.deviceView();
+		
+			Kokkos::parallel_for(
+				"insertSetElement",
+				policy(0,indices.size()), LAMBDA_HD(int32 i){	
+				dVec(dIndex(i))= dVecVals(i);
+				});
+			Kokkos::fence();
 
-				return true;
+			return true;
 			
-			}else
-			{
-				
-				// TODO: remove const_cast
-				hostViewType1D<T> hVecVals( const_cast<T*>(vals.data()), vals.size());
-				deviceViewType1D<T> dVecVals("dVecVals", indices.size());
-				copy(dVecVals, hVecVals);
-
-				
-				pFlow::algorithms::KOKKOS::fillSelected<T, int32, execution_space>(
-					deviceVectorAll().data(),
-					indices.deviceView().data(),
-					dVecVals.data(),
-					indices.size());
-				return true;
-			}
-
-			return false;
 		}
 
 		INLINE_FUNCTION_H

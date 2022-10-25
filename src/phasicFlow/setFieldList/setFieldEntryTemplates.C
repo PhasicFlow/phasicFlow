@@ -37,7 +37,7 @@ bool pFlow::setFieldEntry::checkForTypeAndValue()const
 }
 
 template <typename Type>
-bool pFlow::setFieldEntry::setPointFieldDefaultValueNew
+void* pFlow::setFieldEntry::setPointFieldDefaultValueNew
 (
 	repository& owner,
 	pointStructure& pStruct,
@@ -45,7 +45,7 @@ bool pFlow::setFieldEntry::setPointFieldDefaultValueNew
 )
 {
 
-	if( !checkForType<Type>() ) return false;
+	if( !checkForType<Type>() ) return nullptr;
 	
 	Type defValue = entry_.secondPartVal<Type>();
 	
@@ -54,6 +54,7 @@ bool pFlow::setFieldEntry::setPointFieldDefaultValueNew
 	             " in repository "<< owner.name() <<endReport;
 
 	
+	auto& field = 
 	owner.emplaceObject<pointField<VectorSingle,Type>>
 	(
 		objectFile
@@ -67,11 +68,11 @@ bool pFlow::setFieldEntry::setPointFieldDefaultValueNew
 		defValue
 	);
 
-	return true;
+	return &field;
 }
 
 template <typename Type>
-bool pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
+void* pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
 (
 	repository& owner,
 	pointStructure& pStruct,
@@ -79,7 +80,7 @@ bool pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
 )
 {
 
-	if( !checkForType<Type>() ) return false;
+	if( !checkForType<Type>() ) return nullptr;
 	
 	Type defValue = entry_.secondPartVal<Type>();
 	
@@ -88,6 +89,7 @@ bool pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
 	             " in repository "<< owner.name() <<endReport;
 
 	// by default we perform operations on host
+	auto& field = 
 	owner.emplaceObject<pointField<Vector,Type, vecAllocator<Type>>>
 	(
 		objectFile
@@ -101,18 +103,18 @@ bool pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
 		defValue
 	);
 
-	return true;
+	return &field;
 }
 
 template <typename Type>
-bool pFlow::setFieldEntry::setPointFieldSelected
+void* pFlow::setFieldEntry::setPointFieldSelected
 (
 	repository& owner,
 	int32IndexContainer& selected,
 	bool verbose
 )
 {
-	if( !checkForType<Type>() ) return false;
+	if( !checkForType<Type>() ) return nullptr;
 
 	
 	auto fName = fieldName();
@@ -121,7 +123,7 @@ bool pFlow::setFieldEntry::setPointFieldSelected
 	{
 		fatalErrorInFunction<<
 		"Cannot find "<< fName << " in repository " << owner.name() << ". \n";
-		return false;
+		return nullptr;
 	}
 
 	Type value = entry_.secondPartVal<Type>();
@@ -137,31 +139,40 @@ bool pFlow::setFieldEntry::setPointFieldSelected
 	{
 		
 		auto& field = owner.lookupObject<pointField<VectorSingle,Type>>(fName);
-		return field.insertSetElement(selected, value);	
+		if(field.insertSetElement(selected, value))
+			return &field;
+		else
+			return nullptr;
 	}
 
 	if( pointField<VectorSingle,Type, HostSpace>::TYPENAME() == fieldTypeName )
 	{
 		
 		auto& field = owner.lookupObject<pointField<VectorSingle,Type,HostSpace>>(fName);
-		return field.insertSetElement(selected, value);	
+		if(field.insertSetElement(selected, value))
+			return &field;
+		else
+			return nullptr;
 	}
 
 	if( pointField<VectorDual,Type>::TYPENAME() == fieldTypeName )
 	{
 		
 		auto& field = owner.lookupObject<pointField<VectorDual,Type>>(fName);
-		return field.insertSetElement(selected, value);	
+		if(field.insertSetElement(selected, value))
+			return &field;
+		else
+			return nullptr;
 	}
 
 	fatalErrorInFunction<<
 	fieldTypeName<< " is not a supported field type for setFieldEntry.\n";
-	return false;
+	return nullptr;
 	
 }
 
 template <typename Type>
-bool pFlow::setFieldEntry::setPointFieldSelectedStd
+void* pFlow::setFieldEntry::setPointFieldSelectedStd
 (
 	repository& owner,
 	int32IndexContainer& selected,
@@ -169,7 +180,7 @@ bool pFlow::setFieldEntry::setPointFieldSelectedStd
 )
 {
 	
-	if( !checkForType<Type>() ) return false;
+	if( !checkForType<Type>() ) return nullptr;
 
 	
 	auto fName = fieldName();
@@ -178,7 +189,7 @@ bool pFlow::setFieldEntry::setPointFieldSelectedStd
 	{
 		fatalErrorInFunction<<
 		"  Cannot find "<< fName << " in repository " << owner.name() << ". \n";
-		return false;
+		return nullptr;
 	}
 
 	
@@ -194,9 +205,11 @@ bool pFlow::setFieldEntry::setPointFieldSelectedStd
 	if( pointField<Vector, Type, vecAllocator<Type>>::TYPENAME() == fieldTypeName )
 	{
 		auto& field = owner.lookupObject<pointField<Vector,Type, vecAllocator<Type>>>(fName);
-		return field.insertSetElement(selected, value);	
+		if(field.insertSetElement(selected, value))
+			return &field;
+		else
+			return nullptr;
 	}
 
-
-	return false;
+	return nullptr;
 }

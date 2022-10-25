@@ -134,19 +134,26 @@ public:
 
 	bool iterate() override
 	{
-		
+
+//Info<<"before contact search"<<endInfo;
 		if(this->contactSearch_)
 		{
+
 			if( this->contactSearch_().ppEnterBroadSearch())
 			{
+				//Info<<" before ppEnterBroadSearch"<<endInfo;
 				ppContactList_().beforeBroadSearch();
+				//Info<<" after ppEnterBroadSearch"<<endInfo;
 			}
 
 			if(this->contactSearch_().pwEnterBroadSearch())
 			{
+				//Info<<" before pwEnterBroadSearch"<<endInfo;
 				pwContactList_().beforeBroadSearch();
+				//Info<<" after pwEnterBroadSearch"<<endInfo;
 			}
 
+			//Info<<" before broadSearch"<<endInfo;
 			if( !contactSearch_().broadSearch(
 					ppContactList_(),
 					pwContactList_()) )
@@ -156,26 +163,37 @@ public:
 				fatalExit;
 			}
 
+			//Info<<" before broadSearch"<<endInfo;
+
+
 			if(this->contactSearch_().ppPerformedBroadSearch())
 			{
+				//Info<<" before afterBroadSearch"<<endInfo;
 				ppContactList_().afterBroadSearch();
+				//Info<<" after afterBroadSearch"<<endInfo;
 			}
 
 			if(this->contactSearch_().pwPerformedBroadSearch())
 			{
+				//Info<<" before pwContactList_().afterBroadSearch()"<<endInfo;
 				pwContactList_().afterBroadSearch();
+				//Info<<" after pwContactList_().afterBroadSearch()"<<endInfo;
 			}
 		}
+//Info<<"after contact search"<<endInfo;
 
 		if( sphParticles_.numActive()<=0)return true;
-
+//Info<<"before sphereSphereInteraction "<<endInfo;
 		ppInteractionTimer_.start();
 			sphereSphereInteraction();
 		ppInteractionTimer_.end();
-		
+//Info<<"after sphereSphereInteraction "<<endInfo;
+
+//Info<<"before sphereWallInteraction "<<endInfo;
 		pwInteractionTimer_.start();
 			sphereWallInteraction();
 		pwInteractionTimer_.end();
+//Info<<"after sphereWallInteraction "<<endInfo;
 		
 		return true;
 	}

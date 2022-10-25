@@ -68,6 +68,20 @@ public:
 
 		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
 
+		bool setInitialVals(
+			const int32IndexContainer& newIndices,
+			const realx3Vector& y) override;
+
+		bool needSetInitialVals()const override
+		{
+			return false;
+		}
+
+		uniquePtr<integration> clone()const override
+		{
+			return makeUnique<AdamsBashforth2>(*this);
+		}
+
 		bool intAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
 
 		template<typename activeFunctor>
