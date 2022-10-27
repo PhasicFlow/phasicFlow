@@ -18,11 +18,11 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "AdamsMoulton3.H"
+#include "AdamsMoulton4.H"
 
 //const real AB2_coef[] = { 3.0 / 2.0, 1.0 / 2.0};
 
-pFlow::AdamsMoulton3::AdamsMoulton3
+pFlow::AdamsMoulton4::AdamsMoulton4
 (
 	const word& baseName,
 	repository& owner,
@@ -64,12 +64,23 @@ pFlow::AdamsMoulton3::AdamsMoulton3
 			pStruct,
 			zero3
 			)
+		),
+	dy2_(
+		owner.emplaceObject<realx3PointField_D>(
+			objectFile(
+				groupNames(baseName,"dy2"),
+				"",
+				objectFile::READ_IF_PRESENT,
+				objectFile::WRITE_ALWAYS),
+			pStruct,
+			zero3
+			)
 		)
 {
 
 }
 
-bool pFlow::AdamsMoulton3::predict
+bool pFlow::AdamsMoulton4::predict
 (
 	real dt,
 	realx3Vector_D& y,
@@ -89,7 +100,7 @@ bool pFlow::AdamsMoulton3::predict
 	return true;
 }
 
-bool pFlow::AdamsMoulton3::correct
+bool pFlow::AdamsMoulton4::correct
 (
 	real dt,
 	realx3Vector_D& y,
@@ -108,7 +119,7 @@ bool pFlow::AdamsMoulton3::correct
 	return true;
 }
 
-bool pFlow::AdamsMoulton3::setInitialVals(
+bool pFlow::AdamsMoulton4::setInitialVals(
 	const int32IndexContainer& newIndices,
 	const realx3Vector& y)
 {
@@ -117,33 +128,37 @@ bool pFlow::AdamsMoulton3::setInitialVals(
 	return true;
 }
 
-bool pFlow::AdamsMoulton3::predictAll(
+bool pFlow::AdamsMoulton4::predictAll(
 	real dt, 
 	realx3Vector_D& y, 
 	realx3Vector_D& dy, 
 	range activeRng)
 {
 
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
-	auto d_y0 = y0_.deviceVectorAll();
+	auto d_dy  = dy.deviceVectorAll();
+	auto d_y   = y.deviceVectorAll();
+
+	auto d_y0  = y0_.deviceVectorAll();
 	auto d_dy0 = dy0_.deviceVectorAll();
-	auto d_dy1= dy1_.deviceVectorAll();
+	auto d_dy1 = dy1_.deviceVectorAll();
+	auto d_dy2 = dy2_.deviceVectorAll();
 
 	Kokkos::parallel_for(
-		"AdamsMoulton3::predict",
+		"AdamsMoulton4::predict",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){
 			d_dy0[i] = d_dy[i];
-			d_y[i] = d_y0[i] + dt*(static_cast<real>(3.0 / 2.0) * d_dy[i] - static_cast<real>(1.0 / 2.0) * d_dy1[i]);
-			
+			d_y[i] = d_y0[i] + dt*(
+				  static_cast<real>(23.0 /12.0 ) * d_dy[i] 
+				- static_cast<real>(16.0 / 12.0) * d_dy1[i]
+				+ static_cast<real>( 5.0 / 12.0) * d_dy2[i]);
 		});
 	Kokkos::fence();
 
 	return true;	
 }
 
-bool pFlow::AdamsMoulton3::intAll(
+bool pFlow::AdamsMoulton4::intAll(
 	real dt, 
 	realx3Vector_D& y, 
 	realx3Vector_D& dy, 
@@ -156,18 +171,22 @@ bool pFlow::AdamsMoulton3::intAll(
 	auto d_dy0 = dy0_.deviceVectorAll();
 	auto d_y0  = y0_.deviceVectorAll();
 	auto d_dy1 = dy1_.deviceVectorAll();
+	auto d_dy2 = dy2_.deviceVectorAll();
 
 	Kokkos::parallel_for(
-		"AdamsMoulton3::correct",
+		"AdamsMoulton4::correct",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){
 			auto corrct_y = d_y0[i] + dt*(
-				  static_cast<real>(5.0/12.0)*d_dy[i] 
-				+ static_cast<real>(8.0/12.0)*d_dy0[i] 
-				- static_cast<real>(1.0/12.0)*d_dy1[i]);
-			d_y[i]  = corrct_y;
-			d_y0[i] = corrct_y;
+				  static_cast<real>(9.0/24.0)*d_dy[i] 
+				+ static_cast<real>(19.0/24.0)*d_dy0[i] 
+				- static_cast<real>( 5.0/24.0)*d_dy1[i]
+				+ static_cast<real>( 1.0/24.0)*d_dy2[i]);
+			
+			d_dy2[i]= d_dy1[i];
 			d_dy1[i]= d_dy0[i];
+			d_y0[i] = corrct_y;
+			d_y[i]  = corrct_y;
 		});
 	Kokkos::fence();
 	

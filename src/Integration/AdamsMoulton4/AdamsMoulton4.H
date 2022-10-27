@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __AdamsMoulton3_H__
-#define __AdamsMoulton3_H__
+#ifndef __AdamsMoulton4_H__
+#define __AdamsMoulton4_H__
 
 
 #include "integration.H"
@@ -29,7 +29,7 @@ namespace pFlow
 {
 
 
-class AdamsMoulton3
+class AdamsMoulton4
 :
 	public integration
 {
@@ -41,6 +41,8 @@ protected:
 
 	realx3PointField_D& dy1_;
 
+	realx3PointField_D& dy2_;
+
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
@@ -49,21 +51,21 @@ protected:
 public:
 
 	// type info
-	TypeName("AdamsMoulton3");
+	TypeName("AdamsMoulton4");
 
 	//// - Constructors
-		AdamsMoulton3(
+		AdamsMoulton4(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
 
-		virtual ~AdamsMoulton3()=default;
+		virtual ~AdamsMoulton4()=default;
 
 		// - add a virtual constructor 
 		add_vCtor(
 			integration,
-			AdamsMoulton3,
+			AdamsMoulton4,
 			word);
 
 
@@ -83,7 +85,7 @@ public:
 
 		uniquePtr<integration> clone()const override
 		{
-			return makeUnique<AdamsMoulton3>(*this);
+			return makeUnique<AdamsMoulton4>(*this);
 		}
 
 		bool predictAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
@@ -100,7 +102,7 @@ public:
 
 
 template<typename activeFunctor>
-bool AdamsMoulton3::predictRange(
+bool AdamsMoulton4::predictRange(
 	real dt, 
 	realx3Vector_D& y,
 	realx3Vector_D& dy,
@@ -108,25 +110,25 @@ bool AdamsMoulton3::predictRange(
 {
 	auto d_dy = dy.deviceVectorAll();
 	auto d_y  = y.deviceVectorAll();
+
 	auto d_y0 = y0_.deviceVectorAll();
 	auto d_dy0 = dy0_.deviceVectorAll();
-	auto d_dy1= dy1_.deviceVectorAll();
+	auto d_dy1 = dy1_.deviceVectorAll();
+	auto d_dy2 = dy2_.deviceVectorAll();
 	
 	auto activeRng = activeP.activeRange();
 
 	Kokkos::parallel_for(
-		"AdamsMoulton3::predictRange",
+		"AdamsMoulton4::predictRange",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){
 			if(activeP(i))
 			{
 				d_dy0[i] = d_dy[i];
-				d_y[i] = d_y0[i] + 
-				dt*
-				(
-					static_cast<real>(3.0 / 2.0) * d_dy[i] 
-					- static_cast<real>(1.0 / 2.0) * d_dy1[i]
-				);
+				d_y[i] = d_y0[i] + dt*(
+				  static_cast<real>(23.0 /12.0 ) * d_dy[i] 
+				- static_cast<real>(16.0 / 12.0) * d_dy1[i]
+				+ static_cast<real>( 5.0 / 12.0) * d_dy2[i]);
 			}
 		});
 	Kokkos::fence();
@@ -137,7 +139,7 @@ bool AdamsMoulton3::predictRange(
 
 
 template<typename activeFunctor>
-bool pFlow::AdamsMoulton3::intRange(
+bool pFlow::AdamsMoulton4::intRange(
 	real dt, 
 	realx3Vector_D& y,
 	realx3Vector_D& dy,
@@ -150,19 +152,23 @@ bool pFlow::AdamsMoulton3::intRange(
 	auto d_dy0 = dy0_.deviceVectorAll();
 	auto d_y0  = y0_.deviceVectorAll();
 	auto d_dy1 = dy1_.deviceVectorAll();
+	auto d_dy2 = dy2_.deviceVectorAll();
 
 	auto activeRng = activeP.activeRange();
 
 	Kokkos::parallel_for(
-		"AdamsMoulton3::correct",
+		"AdamsMoulton4::correct",
 		rpIntegration (activeRng.first, activeRng.second),
 		LAMBDA_HD(int32 i){
 			if( activeP(i))
 			{
 				auto corrct_y = d_y0[i] + dt*(
-					  static_cast<real>(5.0/12.0)*d_dy[i] 
-					+ static_cast<real>(8.0/12.0)*d_dy0[i] 
-					- static_cast<real>(1.0/12.0)*d_dy1[i]);
+					  static_cast<real>(9.0/24.0)*d_dy[i] 
+					+ static_cast<real>(19.0/24.0)*d_dy0[i] 
+					- static_cast<real>( 5.0/24.0)*d_dy1[i]
+					+ static_cast<real>( 1.0/24.0)*d_dy2[i]);
+				
+				d_dy2[i]= d_dy1[i];
 				d_dy1[i]= d_dy0[i];
 				d_y0[i] = corrct_y;
 				d_y[i]  = corrct_y;
