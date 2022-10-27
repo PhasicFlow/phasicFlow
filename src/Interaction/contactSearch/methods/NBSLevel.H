@@ -23,19 +23,22 @@ public:
 
 protected:
 
-	int32x3 								gridExtent_;
+	int32x3 								numCells_{1,1,1};
 
 	ViewType3D<int32, memory_space> 		head_;
 
-	int8 									level_ = 1;
+	int8 									level_ = 0;
 
 	
 public:
 	
-	NBSLevel(int8 lvl, int32x3 gridExtent)
+	NBSLevel()
+	{}
+
+	NBSLevel(int8 lvl, int32x3 numCells)
 	:
-		gridExtent_(gridExtent),
-		head_("NBSLevel::head", gridExtent.x(), gridExtent.y(), gridExtent.z()),
+		numCells_(gridExtent),
+		head_("NBSLevel::head", numCells_.x(), numCells_.y(), numCells_.z()),
 		level_(lvl)
 	{}
 
@@ -58,13 +61,31 @@ public:
 	}
 
 	INLINE_FUNCION_HD
-	const auto& gridExtent()const
+	const auto& numCells()const
 	{
 		return gridExtent_;
 	}
-
+	 
+	void nullify()
+	{
+		fill(
+			head_,
+			range(0,numCells_.x()),
+			range(0,numCells_.y()),
+			range(0,numCells_.z()),
+			static_cast<int32>(-1)
+			);
+	}
 };
 
+INLINE_FUNCION_HD
+int32x3 mapIndexLevels( int32x3 ind, int32 lowerLevel, int32 upperLevel)
+{
+	int32 a = pow(2, static_cast<int32>(upperLevel-lowerLevel));
+	return ind/a;
+}
 
+
+}
 
 #endif

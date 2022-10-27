@@ -124,6 +124,13 @@ public:
 		INLINE_FUNCTION_HD
 		~NBSLevel0()=default;
 
+
+	INLINE_FUNCTION_HD
+	auto sizeRatio()const
+	{
+		return sizeRatio_;
+	}
+
 	// - Perform the broad search to find pairs
 	//	 with force = true, perform broad search regardless of 
 	//   updateFrequency_ value
