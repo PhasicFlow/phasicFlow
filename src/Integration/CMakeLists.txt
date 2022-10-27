@@ -6,6 +6,7 @@ AdamsBashforth4/AdamsBashforth4.C
 AdamsBashforth3/AdamsBashforth3.C
 AdamsBashforth2/AdamsBashforth2.C
 AdamsMoulton3/AdamsMoulton3.C
+AdamsMoulton4/AdamsMoulton4.C
 )
 
 set(link_libs Kokkos::kokkos phasicFlow)
