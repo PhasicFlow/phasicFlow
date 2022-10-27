@@ -78,6 +78,42 @@ void reallocFill( ViewType1D<Type,Properties...>& view, int32 len, Type val)
 }
 
 
+template <
+	typename Type,
+	typename... Properties>
+INLINE_FUNCTION_H
+void realloc( ViewType3D<Type,Properties...>& view, int32 len1, int32 len2, int32 len3)
+{
+	Kokkos::realloc(view, len1, len2, len3);
+}
+
+template <
+	typename Type,
+	typename... Properties>
+INLINE_FUNCTION_H
+void reallocNoInit(ViewType3D<Type,Properties...>& view, int32 len1, int32 len2, int32 len3)
+{
+	using ViewType = ViewType3D<Type,Properties...>;
+	word vl = view.label();
+	view = ViewType();  // Deallocate first
+  	view = ViewType( 
+  		Kokkos::view_alloc(
+  			Kokkos::WithoutInitializing,
+  			vl), 
+  		len1, len2, len3);
+}
+
+template <
+	typename Type,
+	typename... Properties>
+INLINE_FUNCTION_H
+void reallocFill( ViewType3D<Type,Properties...>& view, int32 len1, int32 len2, int32 len3, Type val)
+{
+	reallocNoInit(view, len1, len2, len3);
+	Kokkos::deep_copy(view, val);
+}
+
+
 template<typename ViewType>
 INLINE_FUNCTION_H
 void swapViews(ViewType& v1, ViewType &v2)

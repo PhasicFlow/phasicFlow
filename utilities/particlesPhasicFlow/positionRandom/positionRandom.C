@@ -21,7 +21,7 @@ Licence:
 
 #include "positionRandom.H"
 #include "uniformRandomReal.H"
-#include "NBS.H"
+#include "NBSLevel0.H"
 #include "unsortedPairs.H"
 #include "box.H"
 
@@ -30,7 +30,7 @@ Licence:
 namespace pFlow
 {
 
-using SearchType = NBS<DefaultExecutionSpace, int32> ;
+using SearchType = NBSLevel0<DefaultExecutionSpace> ;
 using ContainerType = unsortedPairs<DefaultExecutionSpace, int32>;
 
 
@@ -80,7 +80,7 @@ bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
 	
 	fillPoints(startNum, positionHD, flagHD);
 		
-	search.broadSearch(pairs, range(0, startNum), true);
+	search.broadSearch(pairs, range(0, startNum));
 
 	
 	int32 numCollisions = findCollisions(pairs, flagHD);

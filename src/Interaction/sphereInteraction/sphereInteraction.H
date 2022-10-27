@@ -136,6 +136,7 @@ public:
 	{
 
 //Info<<"before contact search"<<endInfo;
+		////Info<<"interaction iterrate start"<<endInfo;
 		if(this->contactSearch_)
 		{
 

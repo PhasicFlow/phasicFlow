@@ -35,6 +35,7 @@ rectMeshField_H<T> sumOp( const pointField_H<T> field, const pointRectCell& poin
 {
 	// create field
 	const auto& mesh = pointToCell.mesh();
+	auto iterator = pointToCell.getCellIterator();
 
 	rectMeshField_H<T> results(mesh, T(0));
 
@@ -44,12 +45,12 @@ rectMeshField_H<T> sumOp( const pointField_H<T> field, const pointRectCell& poin
 		{
 			for(int32 k=0; k<mesh.nz(); k++)
 			{
-				auto n = pointToCell.Head(i,j,k);	
+				auto n = iterator.start(i,j,k);	
 				T res (0);
 				while(n>-1)
 				{
 					res += field[n];
-					n = pointToCell.Next(n);
+					n = iterator.getNext(n);
 				}
 
 				results(i,j,k) = res;
@@ -65,6 +66,7 @@ rectMeshField_H<T> sumMaksOp( const pointField_H<T> field, const pointRectCell& 
 {
 	// create field
 	const auto& mesh = pointToCell.mesh();
+	auto iterator = pointToCell.getCellIterator();
 
 	rectMeshField_H<T> results(mesh, T(0));
 
@@ -75,7 +77,7 @@ rectMeshField_H<T> sumMaksOp( const pointField_H<T> field, const pointRectCell& 
 			for(int32 k=0; k<mesh.nz(); k++)
 			{
 				//auto [loop, n] = pointToCell.startLoop(i,j,k);
-				auto n = pointToCell.Head(i,j,k);	
+				auto n = iterator.start(i,j,k);	
 				T res (0);
 				
 				while(n>-1)
@@ -86,7 +88,7 @@ rectMeshField_H<T> sumMaksOp( const pointField_H<T> field, const pointRectCell& 
 						res += field[n];
 					}
 
-					n = pointToCell.Next(n);
+					n = iterator.getNext(n);
 				}
 		
 				results(i,j,k) = res;

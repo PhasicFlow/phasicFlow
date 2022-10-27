@@ -19,30 +19,30 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-int32 m = head_(i,j,k);
+int32 m = this->head_(i,j,k);
 CellType currentCell(i,j,k);
 int32 n = -1;
 
 while( m > -1 )
 {
 	
-	auto p_m = pointPosition_[m];
+	auto p_m = this->pointPosition_[m];	
 	auto d_m = sizeRatio_* diameter_[m];
 	
 	// the same cell
-	n = next_(m);
+	n = this->next_(m);
 	
 	while(n >-1)
 	{
 		
-		auto p_n = pointPosition_[n];
+		auto p_n = this->pointPosition_[n];
 		auto d_n = sizeRatio_*diameter_[n];
 		
 		if( sphereSphereCheck(p_m, p_n, d_m, d_n) )
 		{
 			auto ln = n;
 			auto lm = m;
-			//output<<"lm "<< lm <<" ln "<< ln << " i j k "<< int32x3(i,j,k)<<endl;
+
 			if(lm>ln) Swap(lm,ln);
 			if( auto res = pairs.insert(lm,ln); res <0)
 			{
@@ -50,7 +50,7 @@ while( m > -1 )
 			}
 		}
 		
-		n = next_(n);
+		n = this->next_(n);
 	}
 
 	// neighbor cells
@@ -74,11 +74,11 @@ while( m > -1 )
 		if( this->isInRange(neighborCell) )
 		{
 			
-			n = head_(neighborCell.x(), neighborCell.y(), neighborCell.z());
+			n = this->head_(neighborCell.x(), neighborCell.y(), neighborCell.z());
 			while( n>-1)
 			{
 				
-				auto p_n = pointPosition_[n];
+				auto p_n = this->pointPosition_[n];
 				auto d_n = sizeRatio_*diameter_[n];
 				
 				if(sphereSphereCheck(p_m, p_n, d_m, d_n))
@@ -91,11 +91,11 @@ while( m > -1 )
 						getFullUpdate++;
 					}
 				}
-				n = next_[n];
+				n = this->next_[n];
 			}
 		}
 
 	}
-	m = next_[m];
+	m = this->next_[m];
 }
 
