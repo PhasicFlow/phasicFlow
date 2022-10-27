@@ -21,7 +21,7 @@ Licence:
 #ifndef __pointRectCell_H__
 #define __pointRectCell_H__
 
-#include "NBS.H"
+#include "mapperNBS.H"
 #include "rectMeshFields.H"
 #include "pointStructure.H"
 
@@ -33,7 +33,7 @@ class pointRectCell
 {
 public:
 
-	using mapType = NBS<DefaultHostExecutionSpace, int32>;
+	using mapType = mapperNBS<DefaultHostExecutionSpace>;
 
 	using memory_space = typename mapType::memory_space;
 
@@ -47,9 +47,6 @@ protected:
 	const pointStructure& 	pStruct_;
 
 	ViewType1D<realx3, memory_space> 		pointPosition_;
-
-	ViewType1D<real, memory_space>			diameter_;
-
 
 	mapType 				map_;
 
@@ -79,14 +76,12 @@ public:
 		),
 		pStruct_(pStruct),
 		pointPosition_(pStruct_.pointPosition().hostVectorAll()),
-		diameter_("diameter", pStruct_.capacity()),
 		map_( 
 			mesh_.domain(), 
 			mesh_.nx(),
 			mesh_.ny(),
 			mesh_.nz(),
-			pointPosition_,
-			diameter_),
+			pointPosition_),
 		nPointInCell_(mesh_, 0)
 	{
 
@@ -111,9 +106,9 @@ public:
 		
 		map_.buildCheckInDomain(activeRange, activeMask);
 		
+		auto iterator = map_.getCellIterator();
 		
-		const auto& Next = map_.Next();
-		const auto& Head = map_.Head();
+	
 		for(int32 i=0; i<map_.nx(); i++)
 		{
 			for(int32 j=0; j<map_.ny(); j++)
@@ -122,11 +117,11 @@ public:
 				{
 
 					int32 res = 0;
-					int32 n = Head(i,j,k);
+					int32 n = iterator.start(i,j,k);
 					while( n>-1)
 					{
 						res+=1;
-						n = Next[n];
+						n = iterator.getNext(n);
 					}
 					nPointInCell_(i,j,k) = res;
 
@@ -136,20 +131,16 @@ public:
 
 	}
 
+	auto getCellIterator()const
+	{
+		return map_.getCellIterator();
+	}
+
 	int32 nPointInCell(int32 i, int32 j, int32 k)const 
 	{
 		return nPointInCell_(i,j,k);
 	}
 
-	auto inline Head(int32 i, int32 j, int32 k)const
-	{
-		return map_.Head()(i,j,k);
-	}
-
-	auto inline Next(int32 n)const
-	{
-		return map_.Next()(n);
-	}
 	//auto
 };
 

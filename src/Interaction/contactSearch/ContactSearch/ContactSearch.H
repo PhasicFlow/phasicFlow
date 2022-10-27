@@ -30,7 +30,7 @@ namespace pFlow
 {
 
 template<
-	template<class, class, class> class BaseMethod,
+	template<class> class BaseMethod,
 	template<class, class, class> class WallMapping	
 >
 class ContactSearch
@@ -49,10 +49,7 @@ public:
 
 	using ParticleContactSearchType = 
 		BaseMethod<
-			ExecutionSpace,
-			IdType,
-			IndexType
-			>;
+			ExecutionSpace>;
 
 	using WallMappingType =
 		WallMapping<
@@ -141,7 +138,7 @@ public:
 		bool force = false) override
 	{
 
-		//output<<" ContactSearch::broadSearch::PP before.\n";
+		
 		if(particleContactSearch_)
 		{
 			auto activeRange = this->Particles().activeRange();
@@ -149,11 +146,11 @@ public:
 			sphereSphereTimer_.start();
 
 			if(this->Particles().allActive())
-			{
+			{		
 				particleContactSearch_().broadSearch(ppPairs, activeRange, force);
 			}
 			else
-			{	
+			{		
 				particleContactSearch_().broadSearch(ppPairs, activeRange, this->Particles().activePointsMaskD(), force);
 			}
 
@@ -162,9 +159,7 @@ public:
 		}
 		else
 			return false;
-		//output<<" ContactSearch::broadSearch::PP fater.\n";
-
-		//output<<" ContactSearch::broadSearch::PW before.\n";
+		
 		if(wallMapping_)
 		{
 			sphereWallTimer_.start();
@@ -174,7 +169,7 @@ public:
 		else
 			return false;
 
-		//output<<" ContactSearch::broadSearch::PW after.\n";
+		
 		
 		return true;
 	}

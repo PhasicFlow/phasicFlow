@@ -22,75 +22,35 @@ Licence:
 #ifndef __NBS_H__
 #define __NBS_H__
 
-#include "cells.H"
-#include "contactSearchFunctions.H"
-#include "baseAlgorithms.H"
+#include "NBSLevel0.H"
 
 namespace pFlow
 {
 
 
-template<
-	typename executionSpace,
-	typename idType,
-	typename indexType=int32
-	>
+template<typename executionSpace>
 class NBS
-:
-	public cells<indexType>
 {
 public:
 
-	using IdType 		= idType;
-	
-	using IndexType 	= indexType;
+	using NBSLevel0Type	= NBSLevel0<executionSpace>;
 
-	using Cells 		= cells<IndexType>;
+	using IdType 		= typename NBSLevel0Type::IdType;
+	
+	using IndexType 	= typename NBSLevel0Type::IndexType;
+
+	using Cells 		= typename NBSLevel0Type::Cells;
 
 	using CellType 		= typename Cells::CellType;
 
-	using ExecutionSpace= executionSpace;
+	using execution_space 	= typename NBSLevel0Type::execution_space;
 
-	using memory_space 	= typename ExecutionSpace::memory_space;
+	using memory_space 		= typename NBSLevel0Type::memory_space;
 
-	struct TagBuild{};
-
-	struct TagFindPairs{};
-
-	class cellIterator
-	{
-	private:
-		ViewType3D<int32, memory_space> 		head_;
-
-		ViewType1D<int32, memory_space> 		next_;
-
-	public:
-
-		cellIterator(ViewType3D<int32, memory_space> head, ViewType1D<int32, memory_space> next)
-		:
-			head_(head),
-			next_(next)
-		{}
-
-		INLINE_FUNCTION_HD
-		Cells cellsSize()const {
-			return Cells(head_.extent(0), head_.extent(1), head_.extent(2));}
-
-		INLINE_FUNCTION_HD
-		int32 start(indexType i, indexType j, indexType k)const {
-			return head_(i,j,k); }
-
-		INLINE_FUNCTION_HD
-		int32 getNext(int32 n)const {
-			if(n<0) return n;
-			return next_(n); }
-	};
 
 protected:
 
-	int32 		capacity_		= 1;
-
-	real 		sizeRatio_ 		= 1.0;
+	real 		sizeRatio_ = 1.0;
 
 	int32 		updateFrequency_= 1;
 
@@ -98,73 +58,9 @@ protected:
 
 	bool 		performedSearch_ = false;
 
-	ViewType1D<realx3, memory_space> 		pointPosition_;
-
-	ViewType1D<real, memory_space>			diameter_;
-
-	ViewType3D<int32, memory_space> 		head_;
-
-	ViewType1D<int32, memory_space> 		next_;
-
-	
-	INLINE_FUNCTION_H
-	void nullify()
-	{
-		fill(
-			head_,
-			range(0,this->nx()),
-			range(0,this->ny()),
-			range(0,this->nz()),
-			static_cast<int32>(-1)
-			);
-
-		fill(
-			next_,
-			range(0,capacity_),
-			static_cast<int32>(-1)
-			);
-	}
-
-	void nullify(range nextRng)
-	{
-		fill(
-			head_,
-			range(0,this->nx()),
-			range(0,this->ny()),
-			range(0,this->nz()),
-			static_cast<int32>(-1)
-			);
-
-		fill(
-			next_,
-			nextRng,
-			static_cast<int32>(-1)
-			);
-	}
-
-	using mdrPolicyFindPairs = 
-		Kokkos::MDRangePolicy<
-			Kokkos::Rank<3>,
-			Kokkos::Schedule<Kokkos::Dynamic>,
-			ExecutionSpace>;
+	NBSLevel0Type NBSLevel0_;
 
 private:
-
-	void checkAllocateNext(int newCap)
-	{	
-		
-		if( capacity_ < newCap)
-		{
-			capacity_ = newCap;	
-			Kokkos::realloc(next_, capacity_);
-		}
-		
-	}
-
-	void allocateHead()
-	{
-		Kokkos::realloc(head_, this->nx(), this->ny(), this->nz());
-	}
 
 	bool performSearch()
 	{
@@ -180,79 +76,34 @@ private:
 		}
 	}
 
-	static INLINE_FUNCTION_HD
-	void Swap(int32& x, int32& y)
-	{
-		int32 tmp = x;
-		x = y;
-		y = tmp;
-	}
-
 public:
 
 	TypeNameNV("NBS");
 
 		NBS(
-			const 	box& domain,
-			real 	cellSize,
-			const 	ViewType1D<realx3, memory_space>& position,
-			const 	ViewType1D<real, memory_space>& diam,
-			int32   initialContainerSize = 1)
-		:
-			Cells(domain, cellSize),
-			pointPosition_(position),
-			diameter_(diam),
-			head_("NBS::head_",1,1,1), //, this->nx(), this->ny(), this->nz()),
-			next_("NBS::next_",1) //,position.size()),
-		{
-			checkAllocateNext(pointPosition_.size());
-			allocateHead();
-		}
-
-		NBS(
-			const 	box& domain,
-			int32 	nx,
-			int32 	ny,
-			int32 	nz,
-			const 	ViewType1D<realx3, memory_space>& position,
-			const 	ViewType1D<real, memory_space>& diam,
-			int32   initialContainerSize = 1)
-		:
-			Cells(domain, nx, ny, nz),
-			pointPosition_(position),
-			diameter_(diam),
-			head_("NBS::head_",nx,ny,nz), //, this->nx(), this->ny(), this->nz()),
-			next_("NBS::next_",1) //,position.size()),
-		{
-			checkAllocateNext(pointPosition_.size());
-		}
-
-		NBS(
 			dictionary dict,
 			const 	box& domain,
-			real 	cellSize,
+			real 	maxSize,
 			const 	ViewType1D<realx3, memory_space>& position,
-			const 	ViewType1D<real, memory_space>& diam,
-			int32   initialContainerSize = 1
-			)
+			const 	ViewType1D<real, memory_space>& diam)
 		:
-			Cells(domain, cellSize),
-			pointPosition_(position),
-			diameter_(diam),
-			head_("NBS::head_",1,1,1), //, this->nx(), this->ny(), this->nz()),
-			next_("NBS::next_",1) //,position.size()),
-		{
-			
-			updateFrequency_ = max( 
-				dict.getVal<int32>("updateFrequency"),1 );
-
-			sizeRatio_ = max(dict.getVal<real>(
-				"sizeRatio"),1.0);
-
-			this->setCellSize(cellSize*sizeRatio_);
-			checkAllocateNext(pointPosition_.size());
-			allocateHead();
-		}
+			sizeRatio_( 
+				max(
+					dict.getValOrSet<real>("sizeRatio", 1.0),
+					1.0
+					)),
+			updateFrequency_(
+				max( 
+					dict.getValOrSet<int32>("updateFrequency", 1),
+					1
+					)),
+			NBSLevel0_(
+				domain, 
+				maxSize*sizeRatio_,
+				sizeRatio_,
+				position,
+				diam)
+		{}
 			
 		INLINE_FUNCTION_HD
 		NBS(const NBS&) = default;
@@ -275,19 +126,20 @@ public:
 		return performedSearch_;
 	}
 
-	const auto& Head()const
+	auto getCellIterator()const
 	{
-		return head_;
+		return NBSLevel0_.getCellIterator();
 	}
 
-	const auto& Next()const
+	auto getCells()const
 	{
-		return next_;
+		return NBSLevel0_.getCells();
 	}
 
-	cellIterator getCellIterator()const
+	bool objectSizeChanged(int32 newSize)
 	{
-		return cellIterator(head_, next_);
+		NBSLevel0_.checkAllocateNext(newSize);
+		return true;
 	}
 
 	// - Perform the broad search to find pairs
@@ -302,13 +154,12 @@ public:
 		performedSearch_ = false;
 
 		if( !performSearch() ) return true;
-		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) before build"<<endInfo;
-		build(activeRange);
-		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) after build"<<endInfo;
-			
-		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) before findPairs"<<endInfo;
-		findPairs(pairs);
-		//Info<<"NBS::broadSearch(PairsContainer& pairs, range activeRange, bool force=false) after findPairs"<<endInfo;
+		
+		
+		NBSLevel0_.build(activeRange);
+		
+		NBSLevel0_.findPairs(pairs);
+		
 		performedSearch_ = true;		
 		return true;
 	}
@@ -325,194 +176,11 @@ public:
 
 		if( !performSearch() ) return true;
 
-		build(activeRange, incld);
+		NBSLevel0_.build(activeRange, incld);
 	
-		findPairs(pairs);
+		NBSLevel0_.findPairs(pairs);
 		
 		performedSearch_ = true;
-		return true;
-	}
-
-	// - build based on all points in range [0, numPoints_)
-	INLINE_FUNCTION_H
-	void build(range activeRange)
-	{
-		checkAllocateNext(activeRange.second);
-		nullify(activeRange);
-		
-		Cells cellIndex = static_cast<Cells>(*this);
-		auto points = pointPosition_;
-		auto next = next_;
-		auto head = head_;
-
-		Kokkos::RangePolicy<
-			Kokkos::IndexType<int32>,
-			Kokkos::Schedule<Kokkos::Static>,
-			ExecutionSpace> rPolicy(activeRange.first, activeRange.second);
-		
-		Kokkos::parallel_for(
-			"NBS::build",
-			rPolicy,
-			LAMBDA_HD(int32 i){
-				
-				CellType ind = cellIndex.pointIndex(points[i]);	
-				int32 old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
-				next[i] = old;
-			});
-		Kokkos::fence();
-
-	}
-
-
-	template<typename IncludeFunction>
-	INLINE_FUNCTION_H
-	void build(range activeRange, IncludeFunction incld)
-	{
-		checkAllocateNext(activeRange.second);
-		nullify(activeRange);
-
-		Cells cellIndex = static_cast<Cells>(*this);
-		auto points = pointPosition_;
-		auto next = next_;
-		auto head = head_;
-
-		Kokkos::RangePolicy<
-			Kokkos::IndexType<int32>,
-			Kokkos::Schedule<Kokkos::Dynamic>,
-			ExecutionSpace> rPolicy(activeRange.first, activeRange.second);
-
-		Kokkos::parallel_for(
-			"NBS::build",
-			rPolicy,
-			LAMBDA_HD(int32 i){
-				
-				if( incld(i) )
-				{
-					CellType ind = cellIndex.pointIndex(points[i]);
-					auto old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
-					next[i] = old;
-				}
-			});
-		Kokkos::fence();
-
-	}
-
-	// - build based on all points in range [0, numPoints_)
-	INLINE_FUNCTION_H
-	void buildCheckInDomain(range activeRange)
-	{
-		checkAllocateNext(activeRange.second);
-		nullify(activeRange);
-		
-		Cells cellIndex = static_cast<Cells>(*this);
-		auto points = pointPosition_;
-		auto next = next_;
-		auto head = head_;
-
-		Kokkos::RangePolicy<
-			Kokkos::IndexType<int32>,
-			Kokkos::Schedule<Kokkos::Static>,
-			ExecutionSpace> rPolicy(activeRange.first, activeRange.second);
-		
-		Kokkos::parallel_for(
-			"NBS::buildCheckInDomain",
-			rPolicy,
-			LAMBDA_HD(int32 i){
-			
-				CellType ind;
-				if( cellIndex.pointIndexInDomain(points[i], ind) )
-				{
-					int32 old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
-					next[i] = old;	
-				}
-				
-			}
-			);
-		Kokkos::fence();
-
-	}
-
-	template<typename IncludeFunction>
-	INLINE_FUNCTION_H
-	void buildCheckInDomain(range activeRange, IncludeFunction incld)
-	{
-		checkAllocateNext(activeRange.second);
-		nullify(activeRange);
-
-		Cells cellIndex = static_cast<Cells>(*this);
-		auto points = pointPosition_;
-		auto next = next_;
-		auto head = head_;
-
-		Kokkos::RangePolicy<
-			Kokkos::IndexType<int32>,
-			Kokkos::Schedule<Kokkos::Dynamic>,
-			ExecutionSpace> rPolicy(activeRange.first, activeRange.second);
-
-		Kokkos::parallel_for(
-			"NBS::buildCheckInDomain",
-			rPolicy,
-			LAMBDA_HD(int32 i){
-				
-				CellType ind;
-				if( incld(i) && cellIndex.pointIndexInDomain(points[i], ind) )
-				{
-					auto old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
-					next[i] = old;
-				}
-			});
-		Kokkos::fence();
-	}
-
-
-	template<typename PairsContainer>	
-	INLINE_FUNCTION_H
-	bool findPairs(PairsContainer& pairs)
-	{
-		mdrPolicyFindPairs
-			mdrPolicy(
-				{0,0,0},
-				{this->nx(),this->ny(),this->nz()} );
-
-		int32 getFull = 1;
-				
-		// loop until the container size fits the numebr of contact pairs
-		while (getFull > 0)
-		{
-
-			getFull = 0;
-			
-			Kokkos::parallel_reduce	(
-				"NBS::broadSearch",
-				mdrPolicy,
-				CLASS_LAMBDA_HD(int32 i, int32 j, int32 k, int32& getFullUpdate){
-					#include "NBSLoop.H"
-				}, getFull);
-						
-			if(getFull)
-			{
-				// - resize the container
-				//   note that getFull now shows the number of failed insertions.
-				uint32 len = max(getFull,50) ;
-				
-				auto oldCap = pairs.capacity();
-				
-				pairs.increaseCapacityBy(len);
-
-				Info<< "The contact pair container capacity increased from "<<
-				oldCap << " to "<<pairs.capacity()<<" in NBS."<<endInfo;
-				
-			}
-
-			Kokkos::fence();
-		}
-		
-		return true;
-	}
-
-	bool objectSizeChanged(int32 newSize)
-	{
-		checkAllocateNext(newSize);
 		return true;
 	}
 
