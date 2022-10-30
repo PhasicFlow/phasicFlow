@@ -18,57 +18,48 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __cellsSimple_H__
-#define __cellsSimple_H__
+#ifndef __cellsWallLevel0_H__
+#define __cellsWallLevel0_H__
 
 #include "types.H"
 #include "KokkosTypes.H"	
 #include "cells.H"
 #include "iBox.H"
-#include "dictionary.H"
+
 
 
 namespace pFlow
 {
 
 template<
-	typename executionSpace,
-	typename idType,
-	typename indexType = int32
+	typename executionSpace
 	>
-class cellsSimple
+class cellsWallLevel0
 :
-	public cells<indexType>
+	public cells<int32>
 {
 public:
 
-	using IdType 		= idType;
+	using IdType		= int32;
 
-	using IndexType 	= indexType;
+	using IndexType 	= int32;
 
 	using Cells 		= cells<IndexType>;
 
 	using CellType 		= typename Cells::CellType;
 
-	using ExecutionSpace = executionSpace;
+	using execution_space = executionSpace;
 
-	using memory_space 	= typename ExecutionSpace::memory_space;
+	using memory_space 	= typename execution_space::memory_space;
 
-	using iBoxType = iBox<IndexType>;	
+	using iBoxType 		= iBox<IndexType>;	
 
-	bool constexpr static LOOP_ELEMENT_RANGE = true;
-	
 	class TagFindCellRange2{};
+
 protected:
 
 	// - box extent
-	real 			cellExtent_ = 0.6;
-
-	// - update frequency 
-	int32 			updateFrequency_=1;
-
-
-	int32 			currentIter_ = 0;
+	real 			cellExtent_ = 0.5;
 
 	// - number of triangle elements 
 	int32			numElements_ = 0;
@@ -76,13 +67,10 @@ protected:
 	// - number of points
 	int32 			numPoints_ = 0;
 
-	/// a broad search has been occured during last pass?
-	bool 			performedSearch_ = false;
-
-	// - ref to vectices 
+	// - ref to vectices (borrowed)
 	ViewType1D<int32x3, memory_space> 	vertices_;
 
-	// - ref to points in the trisurface 
+	// - ref to points in the trisurface (borrowed)
 	ViewType1D<realx3, memory_space> 	points_;
 
 	// cell range of element/triangle bounding box
@@ -90,53 +78,40 @@ protected:
 	
 
 	using tpPWContactSearch = Kokkos::TeamPolicy<
-			ExecutionSpace,
+			execution_space,
 			Kokkos::Schedule<Kokkos::Dynamic>,
 			Kokkos::IndexType<int32>
 			>;
 
 	using rpFindCellRange2Type =
-		Kokkos::RangePolicy<TagFindCellRange2, ExecutionSpace, Kokkos::IndexType<int32>>;
+		Kokkos::RangePolicy<TagFindCellRange2, execution_space, Kokkos::IndexType<int32>>;
 
 	
 	FUNCTION_H
 	void allocateArrays()
 	{
-		Kokkos::realloc( elementBox_, numElements_);
-	}
-
-private:
-
-	bool performSearch()
-	{
-		if(currentIter_ % updateFrequency_ == 0)
-		{
-			currentIter_++;
-			return true;
-
-		}else
-		{
-			currentIter_++;
-			return false;
-		}
+		reallocNoInit( elementBox_, numElements_);
 	}
 
 public:
 
-	TypeNameNV("cellsSimple");
+	TypeNameNV("cellsWallLevel0");
+
+	INLINE_FUNCTION_HD
+	cellsWallLevel0(){}
 
 	FUNCTION_H
-	cellsSimple(
-		Cells 		ppCells,
-		real 		cellExtent,
-		int32 		numPoints,
-		int32 		numElements,
+	cellsWallLevel0(
+		const Cells& 		ppCells,
+		real 						cellExtent,
+		int32 					numPoints,
+		int32 					numElements,
 		const ViewType1D<realx3,memory_space>& 		points, 
 		const ViewType1D<int32x3,memory_space>& 	vertices
 		)
 	:
 		Cells(ppCells),
-		cellExtent_( max(cellExtent, 0.6 ) ),
+		cellExtent_( max(cellExtent, 0.5 ) ),
 		numElements_(numElements),
 		numPoints_(numPoints),
 		vertices_(vertices),
@@ -146,45 +121,11 @@ public:
 		allocateArrays();
 	}
 
-	cellsSimple(
-		dictionary  dict,
-		Cells 		ppCells,
-		int32 		numPoints,
-		int32 		numElements,
-		const ViewType1D<realx3,memory_space>& 		points, 
-		const ViewType1D<int32x3,memory_space>& 	vertices
-		)
-	:
-		Cells(ppCells),
-		numElements_(numElements),
-		numPoints_(numPoints),
-		vertices_(vertices),
-		points_(points)
-	{
-
-		updateFrequency_ = dict.getVal<int32>(
-			"updateFrequency" );
-		updateFrequency_ = max(updateFrequency_,1);
-
-		cellExtent_ = dict.getVal<real>(
-			"cellExtent");
-
-		cellExtent_ = max(cellExtent_,0.6);
-
-		allocateArrays();
-		
-	}
-
-	constexpr bool loopElementRange()const
-	{
-		return LOOP_ELEMENT_RANGE;
-	}
-
+	
 	// - host call
 	//   reset triangle elements if they have changed
-	FUNCTION_H
 	bool resetElements( 
-		int32 		numElements,
+		int32 			numElements,
 		int32       numPoints,
 		ViewType1D<realx3, memory_space>& points, 
 		ViewType1D<int32x3, memory_space>& vertices	)
@@ -212,29 +153,17 @@ public:
 		return numElements_;
 	}
 
-	bool enterBoadSearch()const
-	{
-		return currentIter_%updateFrequency_==0;
-	}
-
-	bool performedSearch()const
-	{
-		return performedSearch_;
-	}
+	
 		
 	template<typename PairsContainer, typename particleMapType>
-	bool broadSearch(PairsContainer& pairs, particleMapType& particleMap, bool force=false)
+	bool broadSearch(PairsContainer& pairs, particleMapType& particleMap)
 	{
-		if(force) currentIter_ = 0;
-		performedSearch_= false;
-		if(!performSearch())return true;
 	
 		// map walls onto the cells
 		this->build();
 		
 		this->particleWallFindPairs(pairs, particleMap);
 		
-		performedSearch_ = true;
 		return true;
 	}
 
@@ -257,7 +186,7 @@ public:
 		while (getFull)
 		{
 			
-			getFull = findPairsElementRange(pairs, particleMap);
+			getFull = findPairsElementRangeCount(pairs, particleMap.getCellIterator(0));
 			
 			if(getFull)
 			{
@@ -269,7 +198,7 @@ public:
 
 				Info<<"Contact pair container capacity increased from "<<
 						oldCap << " to " 
-						<< pairs.capacity() <<" in cellsSimple."<<endInfo;
+						<< pairs.capacity() <<" in cellsWallLevel0."<<endInfo;
 				
 				Kokkos::fence();
 			}
@@ -279,21 +208,20 @@ public:
 	}
 
 
-	template<typename PairsContainer, typename particleMapType>
-	int32 findPairsElementRange(PairsContainer& pairs, particleMapType& particleMap) 
+	template<typename PairsContainer, typename CellIteratorType>
+	int32 findPairsElementRangeCount(PairsContainer& pairs, CellIteratorType cellIter) 
 	{
 		int32 getFull =0;
 		
 		const auto pwPairs = pairs;
 		const auto elementBox = elementBox_;
-
-		auto cellIter = particleMap.getCellIterator();
 		
 		Kokkos::parallel_reduce(
 			"cellsSimple::findPairsElementRangeModified2",
 			tpPWContactSearch(numElements_, Kokkos::AUTO),
 			LAMBDA_HD(
-				const typename tpPWContactSearch::member_type & teamMember,	int32& valueToUpdate){
+				const typename tpPWContactSearch::member_type & teamMember,
+				int32& valueToUpdate){
 				
 				const int32 iTri = teamMember.league_rank();
 
@@ -349,9 +277,9 @@ public:
 
 	}
 
-};
+}; // cellsWallLevel0
 
-}
+} // pFlow
 
 
-#endif 
+#endif // __cellsWallLevel0_H__

@@ -1,51 +1,58 @@
 #ifndef __NBSLevels_H__
 #define __NBSLevels_H__
 
-
+#include "NBSLevel.H"
+#include "NBSLevel0.H"
+#include "KokkosTypes.H"
 
 namespace pFlow
 {
 
 template<typename executionSpace>
 class NBSLevels
-:
-	public NBSLevel0<executionSpace>
 {
 
 public:
 
-	using NBSLevel0Type	= NBSLevel0<executionSpace>;
+	using NBSLevelType 	= NBSLevel<executionSpace>;
 
-	using IdType 		= typename NBSLevel0Type::IdType;
+	using cellIterator 	= typename NBSLevelType::cellIterator;
+
+	using IdType 		= typename NBSLevelType::IdType;
 	
-	using IndexType 	= typename NBSLevel0Type::IndexType;
+	using IndexType 	= typename NBSLevelType::IndexType;
 
-	using Cells 		= typename NBSLevel0Type::Cells;
+	using Cells 		= typename NBSLevelType::Cells;
 
 	using CellType 		= typename Cells::CellType;
 
-	using execution_space 	= typename NBSLevel0Type::execution_space;
+	using execution_space 	= typename NBSLevelType::execution_space;
 
-	using memory_space 		= typename NBSLevel0Type::memory_space;
+	using memory_space 		= typename NBSLevelType::memory_space;
 
 	using realRange 	= kPair<real,real>;
 
 protected:
-
 	
 	real 		minSize_;
 
 	real 		maxSize_;
 	
-	int32 								numLevles_=1;
+	int32 		numLevels_=1;
 
-	ViewType1D<NBSLevel, memory_space> 	nbsSuperLevels_;
+	Vector<NBSLevelType> 					nbsLevels_;
 
-	ViewType1D<realRange, memory_space> sizeRangeLevels_;
+	ViewType1D<realRange, memory_space> 	sizeRangeLevels_;
 
-	ViewTypeID<int8, memory_space> 		particleLevel_;
+	ViewType1D<realRange, HostSpace> 		sizeRangeLevelsHost_;
 
-	range 								activeRange_;
+	ViewType1D<real, memory_space> 			maxSizeLevels_;
+
+	ViewType1D<real, HostSpace> 			maxSizeLevelsHost_;
+
+	ViewType1D<int8, memory_space> 			particleLevel_;
+
+	range 									activeRange_{0,0};
 
 	using rangePolicyType	=
 		Kokkos::RangePolicy<
@@ -53,76 +60,115 @@ protected:
 			Kokkos::Schedule<Kokkos::Static>,
 			execution_space>;
 
-	bool setNumLevels()
+	int32 setNumLevels()
 	{
 
 		int32 maxOvermin = static_cast<int32>(maxSize_/minSize_);
 
 		if (maxOvermin <=1)
-			numLevles_ = 1;
+			return 1;
 		else if(maxOvermin<=3)
-			numLevles_ = 2;
+			return 2;
 		else if(maxOvermin<=7)
-			numLevles_ = 3;
+			return 3;
 		else if(maxOvermin<15)
-			numLevles_ = 4;
+			return 4;
 		else if(maxOvermin<31)
-			numLevles_ = 5;
+			return 5;
 		else if(maxOvermin<63)
-			numLevles_ = 6;
+			return 6;
 		else if(maxOvermin <127)
-			numLevles_ = 7;
+			return 7;
 		else
 		{
 			fatalErrorInFunction<<
 			"size ratio is not valid for multi-grid NBS "<< maxOvermin<<endl;
-			return false;
+			fatalExit;
 		}
 
-		return true;
+		return -1;
 	}
 
-	bool setDiameterRange()
+	bool setDiameterRange(real sizeRatio)
 	{
-		auto sizeRatio = this->sizeRatio();
-		real lvl_minD  = 0.1*minSize_;
-		real lvl_maxD  = sizeRatio* minSize_;
-		reallocNoInit(sizeRangeLevels_, numLevles_);
+		real lvl_maxD  = sizeRatio* maxSize_;
+		real lvl_minD  = lvl_maxD/2.0;		
 
-		for(int32 i=0; i<numLevles_; i++)
+		for(int32 lvl=numLevels_-1; lvl>=0; lvl--)
 		{
-			sizeRangeLevels_[i] = {lvl_minD, lvl_maxD};
-			lvl_minD = lvl_maxD;
-			lvl_maxD *= 2.0;
+
+			if(lvl == 0 ) lvl_minD = 0.01*minSize_;
+			
+			sizeRangeLevelsHost_[lvl] = {lvl_minD, lvl_maxD};
+			maxSizeLevelsHost_[lvl] = lvl_maxD;
+			lvl_maxD = lvl_minD;
+			lvl_minD /= 2.0;
 		}
-
-		return true;
-	}
-
-	bool initSuperLevels()
-	{
-		if(numLevles_== 1) return true;
-		reallocNoInit(nbsSuperLevels_, numLevles_);
-
-		if(int lvl = 1; lvl<numLevles_-1; lvl++)
-		{
-			Cells lvlCells(this->domain(), sizeRangeLevels_[lvl].second);
-			nbsSuperLevels_[lvl] = NBSLevle(lvl, lvlCells.numCells());
-		}
-
-		return true;
-	}
-
-	INLINE_FUNCTION_H
-	void nullify()
-	{
-		// level 0
-		NBSLevel0Type::nullify(activeRange_);
 		
-		// super levels
-		for(int32 lvl=1; lvl<numLevles_; lvl++)
+		copy(sizeRangeLevels_, sizeRangeLevelsHost_);
+		copy(maxSizeLevels_, maxSizeLevelsHost_);
+
+		Report(2)<<"Grids with "<< yellowText(numLevels_)<< " levels have been created."<<endReport;
+		for(int32 lvl=0; lvl<numLevels_; lvl++)
 		{
-			nbsSuperLevels_[lvl].nullify();
+			Report(3)<<"Cell gird No "<< yellowText(lvl)<<" with size range ("
+				<<sizeRangeLevelsHost_[lvl].first<<","<<sizeRangeLevelsHost_[lvl].second<<"]."<<endReport;
+		}
+		
+		return true;
+	}
+
+	bool initLevels(
+		const 	box& domain,
+		real 	sizeRatio,
+		const 	ViewType1D<realx3, memory_space>& position,
+		const 	ViewType1D<real, memory_space>& diam)
+	{
+		
+
+		for(int32 lvl = 0; lvl<numLevels_; lvl++)
+		{
+			nbsLevels_[lvl] = NBSLevelType(
+				lvl, 
+				domain, 
+				maxSizeLevelsHost_[lvl]*sizeRatio,
+				sizeRatio,
+				position,
+				diam );
+		}
+
+		auto next0 = nbsLevels_[0].next();
+		for(int32 lvl=1; lvl<numLevels_; lvl++)
+		{
+			nbsLevels_[lvl].setNext(next0);
+		}
+
+		return true;
+	}
+
+
+	void manageAllocateNext(range active)
+	{
+		activeRange_ = active;
+
+		if(activeRange_.second > nbsLevels_[0].capacity())
+		{
+			nbsLevels_[0].checkAllocateNext(activeRange_.second);
+
+			auto next0 = nbsLevels_[0].next();
+
+			for(int32 lvl=1; lvl<numLevels_; lvl++)
+			{
+				nbsLevels_[lvl].setNext(next0);
+			}
+		}
+	}
+
+	void nullify( range active)
+	{
+		for(int32 lvl=0; lvl<numLevels_; lvl++)
+		{
+			nbsLevels_[lvl].nullify(active);
 		}
 	}
 
@@ -134,66 +180,152 @@ public:
 		real 	maxSize,
 		real 	sizeRatio,
 		const 	ViewType1D<realx3, memory_space>& position,
-		const 	ViewType1D<real, memory_space>& diam),
-		range 	active
+		const 	ViewType1D<real, memory_space>& diam)
 	:
-	NBSLevel0Type(
-		domain, 
-		sizeRatio*minSize,
-		position,
-		diam),
 	minSize_(minSize),
 	maxSize_(maxSize),
-	activeRange_(active)
+	numLevels_(setNumLevels()),
+	nbsLevels_("nbsLevels", numLevels_, numLevels_, RESERVE()),
+	sizeRangeLevels_("sizeRangeLevels", numLevels_),
+	sizeRangeLevelsHost_("sizeRangeLevelsHost", numLevels_),
+	maxSizeLevels_("maxSizeLevels", numLevels_),
+	maxSizeLevelsHost_("maxSizeLevelsHost", numLevels_)
 	{
-		if(!setNumLevels())
-		{
-			fatalExit;
-		}
 
-		setDiameterRange();
+		setDiameterRange(sizeRatio);
 
-		initSuperLevels();
-
-		findParticleLevel(activeRange_.first, activeRange_.last);
+		initLevels(domain, sizeRatio, position, diam);
 	}
 
+	auto getCellIterator(int32 lvl)const
+	{
+		return nbsLevels_[lvl].getCellIterator();
+	}
+
+	int32 numLevels()const
+	{
+		return numLevels_;
+	}
+
+	Cells getCells(int32 lvl)const
+	{
+		return nbsLevels_[lvl].getCells();
+	}
+
+	template<typename PairsContainer>	
+	INLINE_FUNCTION_H
+	bool findPairs(PairsContainer& pairs)
+	{
+		
+		int32 getFull = 1;
+		
+		// loop until the container size fits the numebr of contact pairs
+		while (getFull > 0)
+		{
+
+			getFull = findPairsCount(pairs);		
+		
+			if(getFull)
+			{
+				// - resize the container
+				//   note that getFull now shows the number of failed insertions.
+				uint32 len = max(getFull,100) ;
+				
+				auto oldCap = pairs.capacity();
+				
+				pairs.increaseCapacityBy(len);
+
+				Info<< "The contact pair container capacity increased from "<<
+				oldCap << " to "<<pairs.capacity()<<" in NBSLevels."<<endInfo;
+				
+			}
+
+			Kokkos::fence();
+		}
+		
+		return true;
+	}
+
+
+	template<typename PairsContainer>	
+	INLINE_FUNCTION_H
+	int32 findPairsCount(PairsContainer& pairs)
+	{
+
+		int32 notInsertedCount = 0;
+
+		for(int32 lvl=0; lvl<numLevels_; lvl++)
+		{
+			
+			// the same level
+			notInsertedCount+= nbsLevels_[lvl].findPairsCount(pairs);
+			
+			for(int32 crsLvl = lvl+1; crsLvl<numLevels_; crsLvl++)
+			{
+				// cross levels 
+				notInsertedCount+= 
+					nbsLevels_[lvl].findPairsCountCross(pairs, nbsLevels_[crsLvl]);
+				
+			}
+		
+		return notInsertedCount;
+	}
 
 	INLINE_FUNCTION_H
 	void build(range activeRange)
 	{
 				
-		// check for active ragne************************************************************************
-		checkAllocateNext(activeRange.second);
-		nullify();
+		// nullify next and heads
+		findParticleLevel(activeRange.first, activeRange.second);
+		manageAllocateNext(activeRange);
+		nullify(activeRange);
+		
 		//
 
 		rangePolicyType rPolicy(activeRange.first, activeRange.second);
 		
+		auto nbsLevel0 = nbsLevels_[0];
+		auto pointPosition = nbsLevel0.pointPosition();
+		auto particleLevel = particleLevel_;
+		auto next = nbsLevel0.next();
+		auto head0 = nbsLevel0.head();
+		
+		typename NBSLevelType::HeadType head1, head2, head3, head4, head5, head6;
+
+		if(numLevels_>1) head1 = nbsLevels_[1].head();
+		if(numLevels_>2) head2 = nbsLevels_[2].head();
+		if(numLevels_>3) head3 = nbsLevels_[3].head();
+		if(numLevels_>4) head4 = nbsLevels_[4].head();
+		if(numLevels_>5) head5 = nbsLevels_[5].head();
+		if(numLevels_>6) head6 = nbsLevels_[6].head();
+
+
+		
 		Kokkos::parallel_for(
 			"NBSLevels::build",
 			rPolicy,
-			CLASS_LAMBDA_HD(int32 i){
-				CellType ind = this->pointIndex(points[i]);	
-				int8 lvl = particleLevel_[i];
+			LAMBDA_HD(int32 i){
+				
+				int8 lvl = particleLevel[i];
+				auto ind = nbsLevel0.pointIndex(pointPosition[i]);
+				ind = mapIndexLevels(ind, 0, lvl);
 				int32 old;
-				if( lvl == 0)
-				{
-					int32 old = 
-						Kokkos::atomic_exchange(
-							&this->head_(ind.x(), ind.y(), ind.z()), 
-							i);
-					this->next_[i] = old;
-				}
-				else
-				{
-					ind = upper.mapIndexUpperLevel(ind, 0, lvl);      
-					int32 old = 
-						Kokkos::atomic_exchange(
-							&nbsSuperLevels_[lvl].head()(ind.x(), ind.y(), ind.z()),
-							i);
-					this->next_[i] = old;
-				}
+				if(lvl==0)
+					old =Kokkos::atomic_exchange(&head0(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==1)
+					old =Kokkos::atomic_exchange(&head1(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==2)
+					old =Kokkos::atomic_exchange(&head2(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==3)
+					old =Kokkos::atomic_exchange(&head3(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==4)
+					old =Kokkos::atomic_exchange(&head4(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==5)
+					old =Kokkos::atomic_exchange(&head5(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==6)
+					old =Kokkos::atomic_exchange(&head6(ind.x(), ind.y(), ind.z()),i);
+
+				next(i) = old;
 			});
 
 		Kokkos::fence();
@@ -203,57 +335,79 @@ public:
 	INLINE_FUNCTION_H
 	void build(range activeRange, IncludeFunction incld)
 	{
-		// check for active ragne************************************************************************
-		checkAllocateNext(activeRange.second);
-		nullify();
-		//
+		// nullify next and heads
+		findParticleLevel(activeRange.first, activeRange.second);
+		manageAllocateNext(activeRange);
+		nullify(activeRange);
+		
 
 		rangePolicyType rPolicy(activeRange.first, activeRange.second);
+
+		auto nbsLevel0 = nbsLevels_[0];
+		auto pointPosition = nbsLevel0.pointPosition();
+		auto particleLevel = particleLevel_;
+		auto next = nbsLevel0.next();
+		auto head0 = nbsLevel0.head();
+
+		typename NBSLevelType::HeadType head1, head2, head3, head4, head5, head6;
+
+		if(numLevels_>1) head1 = nbsLevels_[1].head();
+		if(numLevels_>2) head2 = nbsLevels_[2].head();
+		if(numLevels_>3) head3 = nbsLevels_[3].head();
+		if(numLevels_>4) head4 = nbsLevels_[4].head();
+		if(numLevels_>5) head5 = nbsLevels_[5].head();
+		if(numLevels_>6) head6 = nbsLevels_[6].head();
 
 		Kokkos::parallel_for(
 			"NBSLevels::build",
 			rPolicy,
-			CLASS_LAMBDA_HD(int32 i){
-				if(incld(i))
-				{
-					CellType ind = this->pointIndex(points[i]);	
-					int8 lvl = particleLevel_[i];
-					int32 old;
-					if( lvl == 0)
-					{
-						int32 old = 
-						Kokkos::atomic_exchange(
-							&this->head_(ind.x(), ind.y(), ind.z()),
-							i);
-						this->next_[i] = old;
-					}
-					else
-					{
-						ind = upper.mapIndexUpperLevel(ind, 0, lvl);      
-						int32 old = 
-							Kokkos::atomic_exchange(
-								&nbsSuperLevels_[lvl].head()(ind.x(), ind.y(), ind.z()),
-								i);
-						this->next_[i] = old;
-					}
-				}
+			LAMBDA_HD(int32 i){
+				if(!incld(i)) return;
+				
+				int8 lvl = particleLevel[i];
+				auto ind = nbsLevel0.pointIndex(pointPosition[i]);
+				
+				ind = mapIndexLevels(ind, 0, lvl);
+				int32 old;
+				if(lvl==0)
+					old =Kokkos::atomic_exchange(&head0(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==1)
+					old =Kokkos::atomic_exchange(&head1(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==2)
+					old =Kokkos::atomic_exchange(&head2(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==3)
+					old =Kokkos::atomic_exchange(&head3(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==4)
+					old =Kokkos::atomic_exchange(&head4(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==5)
+					old =Kokkos::atomic_exchange(&head5(ind.x(), ind.y(), ind.z()),i);
+				else if(lvl==6)
+					old =Kokkos::atomic_exchange(&head6(ind.x(), ind.y(), ind.z()),i);
+				
+				next(i) = old;
+				
 			});
 
 		Kokkos::fence();
 
 	}
 
-
 	bool findParticleLevel(int32 first, int32 last)
 	{
-		auto diameter  = this->diameter_;
-		auto sizeRange = sizeRangeLevels_;
+
+		if(last > particleLevel_.size())
+		{
+			reallocNoInit(particleLevel_,last);
+		}
+
+		auto diameter  = nbsLevels_[0].diameter();
+		auto maxSizes = maxSizeLevels_;
 		auto particleLevel = particleLevel_;
 
 		int8 maxLvl = sizeRangeLevels_.size();
 
 		rangePolicyType rPolicy(first, last);
-		
+
 		Kokkos::parallel_for(
 			"NBSLevels::findParticleLevel",
 			rPolicy,
@@ -261,13 +415,15 @@ public:
 			{
 				for(int8 lvl = 0; lvl<maxLvl; lvl++)
 				{
-					if( diameter[i]<= sizeRange[lvl].second )
+					if( diameter[i]<= maxSizes[lvl] )
 					{
 						particleLevel[i] = lvl;
-						break;
+						return;
 					}
 				}
+				particleLevel[i] = static_cast<int8>(-1);
 			});
+		Kokkos::fence();
 
 		return true;
 	}

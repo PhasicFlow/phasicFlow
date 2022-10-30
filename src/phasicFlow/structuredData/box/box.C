@@ -21,16 +21,6 @@ Licence:
 
 #include "box.H"
 
-FUNCTION_HD
-pFlow::box::box
-(
-	const realx3& minP,
-	const realx3& maxP
-)
-:
-	min_(minP),
-	max_(maxP)
-{}
 
 FUNCTION_H
 pFlow::box::box

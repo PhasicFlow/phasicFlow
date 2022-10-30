@@ -31,7 +31,7 @@ namespace pFlow
 
 template<
 	template<class> class BaseMethod,
-	template<class, class, class> class WallMapping	
+	template<class> class WallMapping	
 >
 class ContactSearch
 :
@@ -53,10 +53,7 @@ public:
 
 	using WallMappingType =
 		WallMapping<
-			ExecutionSpace,
-			IdType,
-			IndexType
-			>;
+			ExecutionSpace>;
 
 protected:
 	
@@ -83,7 +80,7 @@ public:
 		auto method = dict().getVal<word>("method");
 		auto wmMethod = dict().getVal<word>("wallMapping");
 		
-		auto nbDict = dict().subDictOrCreate(method+"Info");
+		auto nbDict = dict().subDict(method+"Info");
 
 		real minD, maxD;
 		this->Particles().boundingSphereMinMax(minD, maxD);
@@ -96,6 +93,7 @@ public:
 			(
 				nbDict,
 				this->domain(),
+				minD,
 				maxD,
 				position,
 				diam
@@ -104,7 +102,7 @@ public:
 				 greenText(particleContactSearch_().typeName())<<endReport;
 
 
-		auto wmDict = dict().subDictOrCreate(wmMethod+"Info");
+		auto wmDict = dict().subDict(wmMethod+"Info");
 
 		int32 wnPoints = this->Geometry().numPoints();
 		int32 wnTri    = this->Geometry().size();
@@ -115,7 +113,8 @@ public:
 		wallMapping_ = 
 			makeUnique<WallMappingType>(
 				wmDict,
-				particleContactSearch_().getCells(),
+				particleContactSearch_().numLevels(),
+				particleContactSearch_().getCellsLevels(),
 				wnPoints,
 				wnTri, 
 				wPoints,
