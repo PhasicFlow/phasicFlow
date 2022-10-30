@@ -48,12 +48,16 @@ public:
 
 	using memory_space 		= typename execution_space::memory_space;
 
+	using HeadType 		= ViewType3D<int32, memory_space>;
+
+	using NextType 		= ViewType1D<int32, memory_space>;	
+
 	class cellIterator
 	{
 	private:
-		ViewType3D<int32, memory_space> 		head_;
+		HeadType 		head_;
 
-		ViewType1D<int32, memory_space> 		next_;
+		NextType 		next_;
 
 	public:
 
@@ -85,38 +89,32 @@ protected:
 
 	ViewType1D<int32, memory_space> 		next_;
 
+	bool 									nextOwner_ = true;
+
 	// borrowed ownership
 	ViewType1D<realx3, memory_space> 		pointPosition_;
-	
+
+	using rangePolicyType	=
+		Kokkos::RangePolicy<
+			Kokkos::IndexType<int32>,
+			Kokkos::Schedule<Kokkos::Static>,
+			execution_space>;
 	
 	INLINE_FUNCTION_H
-	void nullify()
+	void nullifyHead()
 	{
 		fill(
 			head_,
 			range(0,this->nx()),
 			range(0,this->ny()),
 			range(0,this->nz()),
-			static_cast<int32>(-1)
-			);
-
-		fill(
-			next_,
-			range(0,capacity_),
 			static_cast<int32>(-1)
 			);
 	}
 
-	void nullify(range nextRng)
+	void nullifyNext(range nextRng)
 	{
-		fill(
-			head_,
-			range(0,this->nx()),
-			range(0,this->ny()),
-			range(0,this->nz()),
-			static_cast<int32>(-1)
-			);
-
+		if(!nextOwner_)return;
 		fill(
 			next_,
 			nextRng,
@@ -124,19 +122,27 @@ protected:
 			);
 	}
 
-	using rangePolicyType	=
-		Kokkos::RangePolicy<
-			Kokkos::IndexType<int32>,
-			Kokkos::Schedule<Kokkos::Static>,
-			execution_space>;
+	void nullify()
+	{
+		nullifyHead();
 
-private:
+		nullifyNext(range(0,capacity_));
+	}
+
+	void nullify(range nextRng)
+	{
+		nullifyHead();
+
+		nullifyNext(nextRng);
+	}
+	
 
 	void checkAllocateNext(int newCap)
-	{		
+	{
 		if( capacity_ < newCap)
 		{
 			capacity_ = newCap;	
+			if(!nextOwner_)return;
 			reallocNoInit(next_, capacity_);
 		}
 	}
@@ -145,15 +151,21 @@ private:
 	{
 		reallocNoInit(head_, this->nx(), this->ny(), this->nz());
 	}
+
+
 	
 public:
 
 	TypeNameNV("mapperNBS");
 
+		INLINE_FUNCTION_HD
+		mapperNBS(){}
+
 		mapperNBS(
 			const 	box& domain,
-			real 		cellSize,
-			const 	ViewType1D<realx3, memory_space>& position)
+			real 	cellSize,
+			const 	ViewType1D<realx3, memory_space>& position,
+			bool 	nextOwner = true)
 		:
 			Cells(domain, cellSize),
 			pointPosition_(position),
@@ -163,7 +175,8 @@ public:
 				this->ny(),
 				this->nz()
 				), 
-			next_("mapperNBS::next_",1) //,position.size()),
+			next_("mapperNBS::next_",1), //,position.size()),
+			nextOwner_(nextOwner)
 		{
 			checkAllocateNext(pointPosition_.size());
 		}
@@ -173,12 +186,14 @@ public:
 			int32 	nx,
 			int32 	ny,
 			int32 	nz,
-			const 	ViewType1D<realx3, memory_space>& position)
+			const 	ViewType1D<realx3, memory_space>& position,
+			bool 	nextOwner = true)
 		:
 			Cells(domain, nx, ny, nz),
 			pointPosition_(position),
-			head_("mapperNBS::head_",nx,ny,nz), //, this->nx(), this->ny(), this->nz()),
-			next_("mapperNBS::next_",1) //,position.size()),
+			head_("mapperNBS::head_",nx,ny,nz), 
+			next_("mapperNBS::next_",1),
+			nextOwner_(nextOwner)
 		{
 			checkAllocateNext(pointPosition_.size());
 		}
@@ -205,11 +220,53 @@ public:
 		return cellIterator(head_, next_);
 	}
 
-	bool particlesSizeChanged(int32 newSize)
+	bool particlesCapcityChanged(int32 newCap)
 	{
-		checkAllocateNext(newSize);
+		checkAllocateNext(newCap);
 		return true;
 	}
+
+	INLINE_FUNCTION_HD
+	auto& head()
+	{
+		return head_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto& next()
+	{
+		return next_;
+	}
+
+	INLINE_FUNCTION_HD
+	const auto& head()const
+	{
+		return head_;
+	}
+
+	INLINE_FUNCTION_HD
+	const auto& next()const
+	{
+		return next_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto& pointPosition()
+	{
+		return pointPosition_;
+	}
+
+	INLINE_FUNCTION_H
+	void setNext(ViewType1D<int32, memory_space>& next)
+	{
+		if(!nextOwner_)
+		{
+			next_ = next;
+			capacity_ = next.size();
+		}
+	}
+
+	
 
 	// - build based on all points in active range
 	INLINE_FUNCTION_H

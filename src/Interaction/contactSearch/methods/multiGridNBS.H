@@ -19,35 +19,35 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __NBS_H__
-#define __NBS_H__
+#ifndef __multiGridNBS_H__
+#define __multiGridNBS_H__
 
-#include "NBSLevel0.H"
+#include "NBSLevels.H"
 
 namespace pFlow
 {
 
 
 template<typename executionSpace>
-class NBS
+class multiGridNBS
 {
 public:
 
-	using NBSLevel0Type	= NBSLevel0<executionSpace>;
+	using NBSLevelsType	= NBSLevels<executionSpace>;
 
-	using cellIterator 	= typename NBSLevel0Type::cellIterator;
+	using cellIterator 	= typename NBSLevelsType::cellIterator;
 
-	using IdType 		= typename NBSLevel0Type::IdType;
+	using IdType 		= typename NBSLevelsType::IdType;
 	
-	using IndexType 	= typename NBSLevel0Type::IndexType;
+	using IndexType 	= typename NBSLevelsType::IndexType;
 
-	using Cells 		= typename NBSLevel0Type::Cells;
+	using Cells 		= typename NBSLevelsType::Cells;
 
 	using CellType 		= typename Cells::CellType;
 
-	using execution_space 	= typename NBSLevel0Type::execution_space;
+	using execution_space 	= typename NBSLevelsType::execution_space;
 
-	using memory_space 		= typename NBSLevel0Type::memory_space;
+	using memory_space 		= typename NBSLevelsType::memory_space;
 
 
 protected:
@@ -60,7 +60,7 @@ protected:
 
 	bool 		performedSearch_ = false;
 
-	NBSLevel0Type NBSLevel0_;
+	NBSLevelsType NBSLevels_;
 
 private:
 
@@ -80,42 +80,43 @@ private:
 
 public:
 
-	TypeNameNV("NBS");
+	TypeNameNV("multiGridNBS");
 
-		NBS(
-			const dictionary& dict,
+		multiGridNBS(
+			const 	dictionary& dict,
 			const 	box& domain,
-			real  minSize,
+			real 	minSize,
 			real 	maxSize,
 			const 	ViewType1D<realx3, memory_space>& position,
 			const 	ViewType1D<real, memory_space>& diam)
 		:
 			sizeRatio_( 
 				max(
-					dict.getValOrSet<real>("sizeRatio", 1.0),
+					dict.getVal<real>("sizeRatio"),
 					1.0
 					)),
 			updateFrequency_(
 				max( 
-					dict.getValOrSet<int32>("updateFrequency", 1),
+					dict.getVal<int32>("updateFrequency"),
 					1
 					)),
-			NBSLevel0_(
+			NBSLevels_(
 				domain, 
-				maxSize*sizeRatio_,
+				minSize,
+				maxSize,
 				sizeRatio_,
 				position,
 				diam)
 		{}
 			
 		INLINE_FUNCTION_HD
-		NBS(const NBS&) = default;
+		multiGridNBS(const multiGridNBS&) = default;
 
 		INLINE_FUNCTION_HD
-		NBS& operator = (const NBS&) = default;
+		multiGridNBS& operator = (const multiGridNBS&) = default;
 
 		INLINE_FUNCTION_HD
-		~NBS()=default;
+		~multiGridNBS()=default;
 
 	//// - Methods 
 
@@ -129,34 +130,36 @@ public:
 		return performedSearch_;
 	}
 
-	Vector<cellIterator> getCellIteratorLevels()
+	int32 numLevels()const
 	{
-		return Vector<cellIterator>("cellIterator", 1, NBSLevel0_.getCellIterator());
+		return NBSLevels_.numLevels();
+	}
+
+	auto getCellsLevels()const
+	{
+		Vector<Cells> cellsLvl("cells", numLevels(), numLevels(), RESERVE());
+
+		for(int32 lvl=0; lvl<numLevels(); lvl++)
+		{
+			cellsLvl[lvl] = NBSLevels_.getCells(lvl) ;
+		}
+
+		return cellsLvl;
+	}
+
+	auto getCells(int32 lvl)const
+	{
+		return NBSLevels_.getCells(lvl);
 	}
 
 	auto getCellIterator(int32 lvl)const
 	{
-		return NBSLevel0_.getCellIterator();
-	}
-
-	int32 numLevels()const
-	{
-		return 1;
-	}
-
-	Vector<Cells> getCellsLevels()const
-	{
-		return Vector<Cells>("Cells", 1, NBSLevel0_.getCells());
-	}
-
-	auto getCells()const
-	{
-		return NBSLevel0_.getCells();
+		return NBSLevels_.getCellIterator(lvl);	
 	}
 
 	bool objectSizeChanged(int32 newSize)
 	{
-		NBSLevel0_.checkAllocateNext(newSize);
+		NBSLevels_.checkAllocateNext(newSize);
 		return true;
 	}
 
@@ -174,9 +177,10 @@ public:
 		if( !performSearch() ) return true;
 		
 		
-		NBSLevel0_.build(activeRange);
+		NBSLevels_.build(activeRange);
 		
-		NBSLevel0_.findPairs(pairs);
+		NBSLevels_.findPairs(pairs);
+		
 		
 		performedSearch_ = true;		
 		return true;
@@ -194,9 +198,9 @@ public:
 
 		if( !performSearch() ) return true;
 
-		NBSLevel0_.build(activeRange, incld);
+		NBSLevels_.build(activeRange, incld);
 	
-		NBSLevel0_.findPairs(pairs);
+		NBSLevels_.findPairs(pairs);
 		
 		performedSearch_ = true;
 		return true;

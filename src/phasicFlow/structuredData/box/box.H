@@ -34,10 +34,10 @@ class box
 protected:
 	
 	// - min point
-	realx3 	min_;
+	realx3 	min_{0,0,0};
 	
 	// - max point 
-	realx3 	max_;
+	realx3 	max_{1,1,1};
 
 public:
 
@@ -45,8 +45,16 @@ public:
 	TypeNameNV("box");
 
 	//// - Constructors 
-		FUNCTION_HD 
-		box(const realx3& minP, const realx3& maxP);
+		INLINE_FUNCTION_HD 
+		box(){}
+
+		INLINE_FUNCTION_HD 
+		box(const realx3& minP, const realx3& maxP)
+		:
+			min_(minP),
+			max_(maxP)
+		{}
+		
 
 		FUNCTION_H
 		box(const dictionary& dict);

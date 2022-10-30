@@ -35,19 +35,25 @@ class NBSLevel0
 {
 public:
 
-	using MapperType 	= mapperNBS<executionSpace>;
+	using MapperType 		= mapperNBS<executionSpace>;
+
+	using cellIterator  	= typename MapperType::cellIterator;
 
 	using IdType 			= typename MapperType::IdType;
 	
-	using IndexType 	= typename MapperType::IndexType;
+	using IndexType 		= typename MapperType::IndexType;
 
 	using Cells 			= typename MapperType::Cells;
 
-	using CellType 		= typename Cells::CellType;
+	using CellType 			= typename Cells::CellType;
 
-	using execution_space = typename MapperType::execution_space;
+	using execution_space 	= typename MapperType::execution_space;
 
 	using memory_space 		= typename MapperType::memory_space;
+
+	using HeadType 			= typename MapperType::HeadType;
+
+	using NextType 			= typename MapperType::NextType;	
 
 	struct TagFindPairs{};
 
@@ -66,9 +72,6 @@ protected:
 			Kokkos::Schedule<Kokkos::Dynamic>,
 			execution_space>;
 
-private:
-
-
 	static INLINE_FUNCTION_HD
 	void Swap(int32& x, int32& y)
 	{
@@ -80,6 +83,9 @@ private:
 public:
 
 	TypeNameNV("NBSLevel0");
+
+		INLINE_FUNCTION_HD
+		NBSLevel0(){}
 
 		NBSLevel0(
 			const 	box& domain,
@@ -108,9 +114,10 @@ public:
 			real 		cellSize,
 			real 		sizeRatio,
 			const 	ViewType1D<realx3, memory_space>& position,
-			const 	ViewType1D<real, memory_space>& diam)
+			const 	ViewType1D<real, memory_space>& diam,
+			bool 		nextOwner = true)
 		:
-			MapperType(domain, cellSize, position),
+			MapperType(domain, cellSize, position, nextOwner),
 			sizeRatio_(sizeRatio),
 			diameter_(diam)
 		{}
@@ -123,6 +130,19 @@ public:
 
 		INLINE_FUNCTION_HD
 		~NBSLevel0()=default;
+
+
+	INLINE_FUNCTION_HD
+	auto sizeRatio()const
+	{
+		return sizeRatio_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto& diameter()
+	{
+		return diameter_;
+	}
 
 	// - Perform the broad search to find pairs
 	//	 with force = true, perform broad search regardless of 
@@ -159,10 +179,7 @@ public:
 	INLINE_FUNCTION_H
 	bool findPairs(PairsContainer& pairs)
 	{
-		mdrPolicyFindPairs
-			mdrPolicy(
-				{0,0,0},
-				{this->nx(),this->ny(),this->nz()} );
+		
 
 		int32 getFull = 1;
 		
@@ -171,15 +188,7 @@ public:
 		while (getFull > 0)
 		{
 
-			getFull = 0;
-			
-			Kokkos::parallel_reduce	(
-				"NBSLevel0::findPairs",
-				mdrPolicy,
-				CLASS_LAMBDA_HD(int32 i, int32 j, int32 k, int32& getFullUpdate){
-					#include "NBSLoop.H"
-				}, getFull);
-			
+			getFull = findPairsCount(pairs);		
 		
 			if(getFull)
 			{
@@ -202,7 +211,27 @@ public:
 		return true;
 	}
 
-	
+	template<typename PairsContainer>	
+	INLINE_FUNCTION_H
+	int32 findPairsCount(PairsContainer& pairs)
+	{
+		mdrPolicyFindPairs
+			mdrPolicy(
+				{0,0,0},
+				{this->nx(),this->ny(),this->nz()} );
+
+		int32 notInsertedPairs;
+			
+		Kokkos::parallel_reduce	(
+			"NBSLevel0::findPairs",
+			mdrPolicy,
+			CLASS_LAMBDA_HD(int32 i, int32 j, int32 k, int32& getFullUpdate){
+				#include "NBSLoop.H"
+			}, notInsertedPairs);
+			
+		return notInsertedPairs;
+			
+	}
 
 };
 

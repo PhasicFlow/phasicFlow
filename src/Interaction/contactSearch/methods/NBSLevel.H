@@ -2,69 +2,126 @@
 #define __NBSLevel_H__
 
 
-#include "cells.H"
-#include "contactSearchFunctions.H"
+#include "NBSLevel0.H"
+
+
+namespace pFlow
+{
+
+INLINE_FUNCTION_HD
+int32x3 mapIndexLevels(const int32x3& ind, int32 lowerLevel, int32 upperLevel);
 
 template<typename executionSpace>
 class
 NBSLevel
+:
+	public NBSLevel0<executionSpace>
 {
 public:
 
+	using NBSLevel0Type	= NBSLevel0<executionSpace>;
 
-	using execution_space= executionSpace;
+	using cellIterator 	= typename NBSLevel0Type::cellIterator;
 
-	using memory_space 	= typename execution_space::memory_space;
+	using IdType 		= typename NBSLevel0Type::IdType;
+	
+	using IndexType 	= typename NBSLevel0Type::IndexType;
 
-	using rangePolicy = Kokkos::RangePolicy<
-			Kokkos::IndexType<int32>,
-			Kokkos::Schedule<Kokkos::Static>,
-			execution_space>
+	using Cells 		= typename NBSLevel0Type::Cells;
+
+	using CellType 		= typename Cells::CellType;
+
+	using execution_space 	= typename NBSLevel0Type::execution_space;
+
+	using memory_space 		= typename NBSLevel0Type::memory_space;
+
+	using mdrPolicyFindPairs = typename NBSLevel0Type::mdrPolicyFindPairs;
+
+	using HeadType 			= typename NBSLevel0Type::HeadType;
+
+	using NextType 			= typename NBSLevel0Type::NextType;
+
+	template<typename exeSpace>
+	friend class NBSLevels;
 
 protected:
 
-	int32x3 								gridExtent_;
-
-	ViewType3D<int32, memory_space> 		head_;
-
-	int8 									level_ = 1;
+	int32 									level_ = 0;
 
 	
 public:
 	
-	NBSLevel(int8 lvl, int32x3 gridExtent)
+	TypeNameNV("NBSLevel0");
+
+	INLINE_FUNCTION_HD
+	NBSLevel(){}
+
+	NBSLevel(
+		int32 	lvl,
+		const 	box& domain,
+		real 	cellSize,
+		real 	sizeRatio,
+		const 	ViewType1D<realx3, memory_space>& position,
+		const 	ViewType1D<real, memory_space>& diam)
 	:
-		gridExtent_(gridExtent),
-		head_("NBSLevel::head", gridExtent.x(), gridExtent.y(), gridExtent.z()),
+		NBSLevel0Type(
+			domain,
+			cellSize,
+			sizeRatio,
+			position,
+			diam,
+			lvl==0),
 		level_(lvl)
 	{}
 
-	INLINE_FUNCION_HD
-	auto& head(int32 i, int32 j, int32 k)
-	{
-		return head_(i,j,k);
-	}
+	INLINE_FUNCTION_HD
+	NBSLevel(const NBSLevel&) = default;
+	
+	INLINE_FUNCTION_HD
+	NBSLevel& operator = (const NBSLevel&) = default;
 
-	INLINE_FUNCION_HD
-	auto& head()
-	{
-		return head_;
-	}
+	INLINE_FUNCTION_HD
+	~NBSLevel() = default;
 
-	INLINE_FUNCION_HD
+	INLINE_FUNCTION_HD
 	auto level()const
 	{
 		return level_;
 	}
 
-	INLINE_FUNCION_HD
-	const auto& gridExtent()const
+	template<typename PairsContainer>	
+	INLINE_FUNCTION_H
+	int32 findPairsCountCross(PairsContainer& pairs, NBSLevel& upperLevel)
 	{
-		return gridExtent_;
-	}
 
+		mdrPolicyFindPairs
+			mdrPolicy(
+				{0,0,0},
+				{this->nx(),this->ny(),this->nz()} );
+
+		int32 notInsertedPairs;
+
+		Kokkos::parallel_reduce	(
+			"NBSLevel::findPairsCountCross",
+			mdrPolicy,
+			CLASS_LAMBDA_HD(int32 i, int32 j, int32 k, int32& getFullUpdate){
+				#include "NBSCrossLoop.H"
+			}, notInsertedPairs);
+			
+		return notInsertedPairs;	
+	}
+	 
+	
 };
 
+INLINE_FUNCTION_HD
+int32x3 mapIndexLevels( const int32x3& ind, int32 lowerLevel, int32 upperLevel)
+{
+	int32 a = pow(2, static_cast<int32>(upperLevel-lowerLevel));
+	return ind/a;
+}
 
+
+}
 
 #endif
