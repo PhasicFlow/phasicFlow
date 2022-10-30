@@ -47,7 +47,7 @@ model
 contactSearch
 {
    method         NBS;           // method for broad search particle-particle
-   wallMapping    cellsSimple;   // method for broad search particle-wall 
+   wallMapping    cellMapping;   // method for broad search particle-wall 
 
    NBSInfo
    {
@@ -55,7 +55,7 @@ contactSearch
       sizeRatio      1.1;        // bounding box size to particle diameter (max)
    }
 
-   cellsSimpleInfo
+   cellMappingInfo
    {
       updateFrequency 20;        // each 20 timesteps, update neighbor list  
       cellExtent     0.6;        // bounding box for particle-wall search (> 0.5)
