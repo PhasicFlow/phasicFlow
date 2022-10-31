@@ -563,7 +563,7 @@ pFlow::iIstream& pFlow::Istream::read(token& t)
                 else
                 {
                     real realVal;
-
+                    
                     if (readReal(buf, realVal))
                     {
                         // A scalar or too big to fit as a unit
