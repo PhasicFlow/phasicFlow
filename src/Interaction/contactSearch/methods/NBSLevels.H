@@ -267,6 +267,7 @@ public:
 					nbsLevels_[lvl].findPairsCountCross(pairs, nbsLevels_[crsLvl]);
 				
 			}
+		}
 		
 		return notInsertedCount;
 	}
@@ -401,8 +402,9 @@ public:
 		}
 
 		auto diameter  = nbsLevels_[0].diameter();
-		auto maxSizes = maxSizeLevels_;
+		auto const maxSizes = maxSizeLevels_;
 		auto particleLevel = particleLevel_;
+		auto const sizeRatio = 0.999*nbsLevels_[0].sizeRatio();
 
 		int8 maxLvl = sizeRangeLevels_.size();
 
@@ -415,7 +417,7 @@ public:
 			{
 				for(int8 lvl = 0; lvl<maxLvl; lvl++)
 				{
-					if( diameter[i]<= maxSizes[lvl] )
+					if( sizeRatio*diameter[i]<= maxSizes[lvl] )
 					{
 						particleLevel[i] = lvl;
 						return;

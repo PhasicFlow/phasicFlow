@@ -310,12 +310,16 @@ bool pFlow::readInt8( const char* buf, int8 & val)
     word w(buf);
     return readInt8(w, val);
 }
-
+#include <iostream>
 bool pFlow::readReal( const word& w, real & val)
 {
     try{
         val = std::stod(w);
         
+    }
+    catch (std:: out_of_range& e)
+    {
+        val = static_cast<real>( std::stold(w) );
     }
     catch (...){
         return false;
@@ -325,8 +329,22 @@ bool pFlow::readReal( const word& w, real & val)
 
 bool pFlow::readReal( const char* buf, real & val )
 {
-    word w(buf);
-    return readReal(w, val);
+    char* c;
+    
+    val = std::strtod(buf, &c);
+    if(val == HUGE_VAL)
+    {
+        val = static_cast<real>( std::strtold(buf, &c) );  
+        if(val == HUGE_VAL || c==buf)
+            return false;
+    }
+    else if(c == buf)    
+    {
+        return false;
+    }
+    
+    
+    return true;
 }
 
 
