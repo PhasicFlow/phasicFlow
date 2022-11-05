@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __nonLinearCF_H__
-#define __nonLinearCF_H__
+#ifndef __nonLinearModCF_H__
+#define __nonLinearModCF_H__
 
 #include "types.H"
 
@@ -27,7 +27,7 @@ namespace pFlow::cfModels
 {
 
 template<bool limited=true>
-class nonLinear
+class nonLinearMod
 {
 public:
 
@@ -76,7 +76,7 @@ protected:
 		auto Yeff = dict.getVal<realVector>("Yeff");
 		auto Geff = dict.getVal<realVector>("Geff");
 		auto nu = dict.getVal<realVector>("nu");
-		auto en = dict.getVal<realVector>("en");
+		auto etha_n = dict.getVal<realVector>("etha_n");
 		auto mu = dict.getVal<realVector>("mu");
 
 		auto nElem = Yeff.size();
@@ -88,10 +88,10 @@ protected:
 			return false;
 		}
 
-		if(nElem != en.size())
+		if(nElem != etha_n.size())
 		{
 			fatalErrorInFunction<<
-			"sizes of Yeff("<<nElem<<") and en("<<en.size()<<") do not match.\n";
+			"sizes of Yeff("<<nElem<<") and etha_n("<<etha_n.size()<<") do not match.\n";
 			return false;
 		}
 
@@ -121,22 +121,6 @@ protected:
 		}
 
 
-		realVector etha_n(nElem);
-		
-		forAll(i , en)
-		{
-			//K_hertz = 4.0/3.0*Yeff*sqrt(Reff); 
-			//-2.2664*log(en)*sqrt(meff*K_hertz)/sqrt( log(en)**2 + 10.1354);
-
-			// we take out sqrt(meff*K_hertz) here and then consider this term 
-			// when calculating damping part. 
-			etha_n[i] = -2.2664*log(en[i])/
-					sqrt(pow(log(en[i]),2.0)+ pow(Pi,2.0));
-
-			// no damping for tangential part 
-
-		}
-
 		Vector<nonLinearProperties> prop(nElem);
 		forAll(i,Yeff)
 		{
@@ -153,11 +137,11 @@ protected:
 	{
 		if constexpr (limited)
 		{
-			return "nonLinearLimited";
+			return "nonLinearModLimited";
 		}
 		else
 		{
-			return "nonLinearNonLimited";
+			return "nonLinearModNonLimited";
 		}
 		return "";
 	}
@@ -167,9 +151,9 @@ public:
 	TypeNameNV(modelName());
 
 	INLINE_FUNCTION_HD
-	nonLinear(){}
+	nonLinearMod(){}
 
-	nonLinear(
+	nonLinearMod(
 		int32 nMaterial,
 		const ViewType1D<real>& rho,
 		const dictionary& dict)
@@ -187,20 +171,20 @@ public:
 	}
 	
 	INLINE_FUNCTION_HD
-	nonLinear(const nonLinear&) = default;
+	nonLinearMod(const nonLinearMod&) = default;
 
 	INLINE_FUNCTION_HD
-	nonLinear(nonLinear&&) = default;
+	nonLinearMod(nonLinearMod&&) = default;
 
 	INLINE_FUNCTION_HD
-	nonLinear& operator=(const nonLinear&) = default;
+	nonLinearMod& operator=(const nonLinearMod&) = default;
 
 	INLINE_FUNCTION_HD
-	nonLinear& operator=(nonLinear&&) = default;
+	nonLinearMod& operator=(nonLinearMod&&) = default;
 
 
 	INLINE_FUNCTION_HD
-	~nonLinear()=default;
+	~nonLinearMod()=default;
 
 	INLINE_FUNCTION_HD
 	int32 numMaterial()const
@@ -245,9 +229,9 @@ public:
 		real sqrt_meff_K_hertz = sqrt((mi*mj)/(mi+mj) * K_hertz);
 
 		FCn = (static_cast<real>(-4.0/3.0) * prop.Yeff_ * sqrt(Reff)* pow(ovrlp_n,static_cast<real>(1.5)) - 
-			   sqrt_meff_K_hertz*prop.ethan_*pow(ovrlp_n,static_cast<real>(0.25))*vrn)*Nij;
+			   prop.ethan_*pow(ovrlp_n,static_cast<real>(0.5))*vrn)*Nij;
 
-		FCt = (- static_cast<real>(8.0) * prop.Geff_ * sqrt(Reff*ovrlp_n) ) * history.overlap_t_;
+		FCt = (- static_cast<real>(16.0/3.0) * prop.Geff_ * sqrt(Reff*ovrlp_n) ) * history.overlap_t_;
 
 		real ft = length(FCt);
 		real ft_fric = prop.mu_ * length(FCn);
@@ -259,7 +243,7 @@ public:
 			{
 				if constexpr (limited)
 				{
-					real kt = static_cast<real>(8.0) * prop.Geff_ * sqrt(Reff*ovrlp_n);
+					real kt = static_cast<real>(16.0/3.0) * prop.Geff_ * sqrt(Reff*ovrlp_n);
 					FCt *= (ft_fric/ft);
                 	history.overlap_t_ = - (FCt/kt);
 				}
@@ -282,4 +266,4 @@ public:
 
 } //pFlow::CFModels
 
-#endif
+#endif //__nonLinearModCF_H__
