@@ -25,6 +25,7 @@ Licence:
 #include "linearCF.H"
 #include "nonLinearCF.H"
 #include "normalRolling.H"
+#include "nonLinearMod.H"
 
 
 namespace pFlow::cfModels 
@@ -36,6 +37,9 @@ using nonLimitedLinearNormalRolling = normalRolling<linear<false>>;
 
 using limitedNonLinearNormalRolling 	= normalRolling<nonLinear<true>>;
 using nonLimitedNonLinearNormalRolling 	= normalRolling<nonLinear<false>>;
+
+using limitedNonLinearModNormalRolling   = normalRolling<nonLinearMod<true>>;
+using nonLimitedNonLinearModNormalRolling  = normalRolling<nonLinearMod<false>>;
 
 }
 
