@@ -1,4 +1,5 @@
 #include "cylinderWall.H"
+#include "line.H"
 
 
 bool pFlow::cylinderWall::readCylinderWall(const dictionary& dict)
@@ -9,9 +10,29 @@ bool pFlow::cylinderWall::readCylinderWall(const dictionary& dict)
 	auto radius2 = dict.getVal<real>("radius2") ;
 
 	int32 resolution = dict.getValOrSet("resolution", 24 );
+	int32 zResolution = dict.getValOrSet("zResolution", 1);
+
+	
+	triangles_.clear();
+	triangles_.reserve(2*resolution*zResolution);
 
 
-	return createCylinder(p1, p2, radius1, radius2, resolution);
+	line cylAxis(p1, p2);
+	auto lp1 = p1;
+
+	auto dt = static_cast<real>(1.0/zResolution);
+	real t = 0;
+	for(int32 i=0; i<zResolution; i++)
+	{
+		t += dt;
+		auto lp2 = cylAxis.point(t);
+		if(!createCylinder(lp1, lp2, radius1, radius2, resolution))
+			return false;
+
+		lp1 = lp2;
+	}
+
+	return true;
 }
 
 bool pFlow::cylinderWall::createCylinder(
@@ -26,10 +47,7 @@ bool pFlow::cylinderWall::createCylinder(
 	
 	real L = zAx.length();
 
-	// number of wall elements will be twice numDiv
-	triangles_.clear();
-	triangles_.reserve(2 * numDiv);
-
+	
 	realx3Vector r1P(numDiv + 1), r2P(numDiv + 1);
 	real dTheta = 2 * Pi / numDiv;
 	real theta = 0;
