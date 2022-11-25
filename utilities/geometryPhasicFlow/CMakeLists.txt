@@ -5,6 +5,7 @@ Wall/Wall.C
 planeWall/planeWall.C 
 stlWall/stlWall.C
 cylinderWall/cylinderWall.C
+cuboidWall/cuboidWall.C
 )
 set(link_lib phasicFlow Geometry Kokkos::kokkos)
 
