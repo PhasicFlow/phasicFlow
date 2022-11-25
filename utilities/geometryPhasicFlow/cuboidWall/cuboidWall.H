@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __planeWall_H__
-#define __planeWall_H__
+#ifndef __cuboidWall_H__
+#define __cuboidWall_H__
 
 
 #include "Wall.H"
@@ -29,32 +29,26 @@ Licence:
 namespace pFlow
 {
 
-class planeWall
+class cuboidWall
 :
 	public Wall
 {
 protected:
 
-	bool readPlaneWall(const dictionary& dict);
+	bool readcuboidWall(const dictionary& dict);
 
 public:
 
-	TypeName("planeWall");
+	TypeName("cuboidWall");
 
-	planeWall();
+	cuboidWall();
 
-	planeWall(const dictionary& dict);
-
-	planeWall(
-		const realx3& p1,
-		const realx3& p2,
-		const realx3& p3,
-		const realx3& p4);
+	cuboidWall(const dictionary& dict);
 
 	add_vCtor
 	(
 		Wall,
-		planeWall,
+		cuboidWall,
 		dictionary
 	);
 

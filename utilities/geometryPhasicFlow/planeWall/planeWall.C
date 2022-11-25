@@ -58,6 +58,7 @@ bool pFlow::planeWall::readPlaneWall
 	
 }
 
+
 pFlow::planeWall::planeWall()
 {}
 
@@ -70,6 +71,34 @@ pFlow::planeWall::planeWall
 {
 	if(!readPlaneWall(dict))
 	{
+		fatalExit;
+	}
+}
+
+pFlow::planeWall::planeWall(
+		const realx3& p1,
+		const realx3& p2,
+		const realx3& p3,
+		const realx3& p4)
+{
+
+	if( Wall::checkTrianlge(p1,p2,p3) )
+	{
+		triangles_.push_back(realx3x3(p1,p2,p3));
+	}else
+	{
+		fatalErrorInFunction << 
+		"points p1, p2 and p3 do not form a plane wall "<<endl;
+		fatalExit;
+	}
+
+	if( Wall::checkTrianlge(p3,p4,p1) )
+	{
+		triangles_.push_back(realx3x3(p3,p4,p1));
+	}else
+	{
+		fatalErrorInFunction << 
+		"points p3, p4 and p1 do not form a plane wallendl";
 		fatalExit;
 	}
 }
