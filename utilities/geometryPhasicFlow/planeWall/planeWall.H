@@ -37,6 +37,26 @@ protected:
 
 	bool readPlaneWall(const dictionary& dict);
 
+	bool addWall4(
+		const realx3& p1,
+		const realx3& p2,
+		const realx3& p3,
+		const realx3& p4);
+
+	bool checkFlatness(
+		const realx3& p1,
+		const realx3& p2,
+		const realx3& p3,
+		const realx3& p4);
+
+	bool addPlaneWall(
+		const realx3& p1,
+		const realx3& p2,
+		const realx3& p3,
+		const realx3& p4,
+		int32 numDiv12 = 1,
+		int32 numDiv23 = 1);
+
 public:
 
 	TypeName("planeWall");
@@ -49,7 +69,9 @@ public:
 		const realx3& p1,
 		const realx3& p2,
 		const realx3& p3,
-		const realx3& p4);
+		const realx3& p4,
+		int32 numDiv12 = 1,
+		int32 numDiv23 = 1);
 
 	add_vCtor
 	(
@@ -57,6 +79,7 @@ public:
 		planeWall,
 		dictionary
 	);
+
 
 };
 
