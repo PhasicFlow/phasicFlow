@@ -32,6 +32,9 @@ bool pFlow::cuboidWall::readcuboidWall
 	
 	auto 	center = dict.getVal<realx3>("center");
 	auto 	edgeLength= dict.getVal<realx3>("edgeLength");
+	auto numDivs = dict.getValOrSet<int32x3>("numDivs", int32x3(1,1,1));
+
+	numDivs = max(numDivs, int32x3(1,1,1));
 
 	realx3 p1,p2,p3,p4;
 
@@ -41,7 +44,7 @@ bool pFlow::cuboidWall::readcuboidWall
 	p3 = center + edgeLength*realx3(-0.5, 0.5, 0.5);
 	p4 = center + edgeLength*realx3(-0.5,-0.5, 0.5);
 
-	planeWall left(p1,p2,p3,p4);
+	planeWall left(p1,p2,p3,p4, numDivs.y(), numDivs.z());
 
 	for(const auto& t:left.triangles())
 	{
@@ -54,7 +57,7 @@ bool pFlow::cuboidWall::readcuboidWall
 	p3 = center + edgeLength*realx3( 0.5, 0.5, 0.5);
 	p4 = center + edgeLength*realx3( 0.5, 0.5,-0.5);
 
-	planeWall right(p1,p2,p3,p4);
+	planeWall right(p1,p2,p3,p4, numDivs.z(), numDivs.y());
 
 	for(const auto& t:right.triangles())
 	{
@@ -67,7 +70,7 @@ bool pFlow::cuboidWall::readcuboidWall
 	p3 = center + edgeLength*realx3( 0.5,-0.5, 0.5);
 	p4 = center + edgeLength*realx3( 0.5,-0.5,-0.5);
 
-	planeWall bottom(p1,p2,p3,p4);
+	planeWall bottom(p1,p2,p3,p4, numDivs.z(), numDivs.x());
 
 	for(const auto& t:bottom.triangles())
 	{
@@ -80,7 +83,7 @@ bool pFlow::cuboidWall::readcuboidWall
 	p3 = center + edgeLength*realx3( 0.5, 0.5, 0.5);
 	p4 = center + edgeLength*realx3(-0.5, 0.5, 0.5);
 
-	planeWall top(p1,p2,p3,p4);
+	planeWall top(p1,p2,p3,p4, numDivs.x(), numDivs.z());
 
 	for(const auto& t:top.triangles())
 	{
@@ -93,7 +96,8 @@ bool pFlow::cuboidWall::readcuboidWall
 	p3 = center + edgeLength*realx3( 0.5, 0.5,-0.5);
 	p4 = center + edgeLength*realx3(-0.5, 0.5,-0.5);
 
-	planeWall back(p1,p2,p3,p4);
+
+	planeWall back(p1,p2,p3,p4, numDivs.x(), numDivs.y());
 
 	for(const auto& t:back.triangles())
 	{
@@ -107,7 +111,7 @@ bool pFlow::cuboidWall::readcuboidWall
 	p3 = center + edgeLength*realx3( 0.5, 0.5, 0.5);
 	p4 = center + edgeLength*realx3( 0.5,-0.5, 0.5);
 
-	planeWall front(p1,p2,p3,p4);
+	planeWall front(p1,p2,p3,p4, numDivs.y(), numDivs.x());
 
 	for(const auto& t:front.triangles())
 	{

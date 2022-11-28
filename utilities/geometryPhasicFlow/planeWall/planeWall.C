@@ -20,8 +20,7 @@ Licence:
 
 
 #include "planeWall.H"
-
-
+#include "line.H"
 
 bool pFlow::planeWall::readPlaneWall
 (
@@ -33,24 +32,21 @@ bool pFlow::planeWall::readPlaneWall
 	auto p3 = dict.getVal<realx3>("p3");
 	auto p4 = dict.getVal<realx3>("p4");
 
-	
-	if( Wall::checkTrianlge(p1,p2,p3) )
-	{
-		triangles_.push_back(realx3x3(p1,p2,p3));
-	}else
+	auto numDiv12 = max(dict.getValOrSet<int32>("numDiv12",1),1);
+	auto numDiv23 = max(dict.getValOrSet<int32>("numDiv23",1),1);
+
+
+	if(!checkFlatness(p1,p2,p3,p4))
 	{
 		fatalErrorInFunction << 
-		"points p1, p2 and p3 do not form a plane wall in dictionary " << dict.globalName()<<endl;
-		return false;
+		"points p1, p2, p3 and p4 do not form a plane wall in dictionary " << dict.globalName()<<endl;
+		return false;	
 	}
 
-	if( Wall::checkTrianlge(p3,p4,p1) )
+	if(!addPlaneWall(p1,p2,p3,p4,numDiv12,numDiv23))
 	{
-		triangles_.push_back(realx3x3(p3,p4,p1));
-	}else
-	{
-		fatalErrorInFunction << 
-		"points p3, p4 and p1 do not form a plane wall in dictionary " << dict.globalName()<<endl;
+		fatalErrorInFunction<<
+		"could not create plane wall from dictionary "<< dict.globalName()<<endl;
 		return false;
 	}
 
@@ -58,6 +54,81 @@ bool pFlow::planeWall::readPlaneWall
 	
 }
 
+
+bool pFlow::planeWall::addWall4(
+		const realx3& p1,
+		const realx3& p2,
+		const realx3& p3,
+		const realx3& p4)
+{
+
+	if(!checkFlatness(p1,p2,p3,p4))return false;
+	
+	triangles_.push_back(realx3x3(p1,p2,p3));
+	triangles_.push_back(realx3x3(p3,p4,p1));
+	
+	return true;
+}
+
+bool pFlow::planeWall::checkFlatness(
+		const realx3& p1,
+		const realx3& p2,
+		const realx3& p3,
+		const realx3& p4)
+{
+	if( !Wall::checkTrianlge(p1,p2,p3) ) return false;
+	if( !Wall::checkTrianlge(p3,p4,p1) ) return false;
+	return true;
+}
+
+bool pFlow::planeWall::addPlaneWall(
+	const realx3& p1,
+	const realx3& p2,
+	const realx3& p3,
+	const realx3& p4,
+	int32 numDiv12,
+	int32 numDiv23 )
+{
+	real dt12 = 1.0/numDiv12;
+	real dt23 = 1.0/numDiv23;
+
+	real t12 = 0;
+	
+
+	line line12(p1,p2);
+	line line43(p4,p3);
+
+	for(int32 i=0; i<numDiv12; i++)
+	{
+
+		auto lp1 = line12.point(t12);
+		auto lp4 = line43.point(t12);
+		auto lp2 = line12.point(t12+dt12);
+		auto lp3 = line43.point(t12+dt12);
+
+		line line14(lp1,lp4);
+		line line23(lp2,lp3);
+		real t23 = 0;
+		for(int32 j=0; j<numDiv23; j++)
+		{
+			if(
+				!addWall4(
+					line14.point(t23),
+					line23.point(t23),
+					line23.point(t23+dt23),
+					line14.point(t23+dt23) )
+				)
+			{
+				return false;
+			}
+			t23+=dt23;
+		}
+		t12+=dt12;
+	}
+
+
+	return true;
+}
 
 pFlow::planeWall::planeWall()
 {}
@@ -79,26 +150,24 @@ pFlow::planeWall::planeWall(
 		const realx3& p1,
 		const realx3& p2,
 		const realx3& p3,
-		const realx3& p4)
+		const realx3& p4,
+		int32 numDiv12,
+		int32 numDiv23 )
 {
 
-	if( Wall::checkTrianlge(p1,p2,p3) )
+	if(!checkFlatness(p1,p2,p3,p4))
 	{
-		triangles_.push_back(realx3x3(p1,p2,p3));
-	}else
-	{
-		fatalErrorInFunction << 
-		"points p1, p2 and p3 do not form a plane wall "<<endl;
+		fatalErrorInFunction<<
+		"the input points p1, p2, p3, and p4 are not in the same plane "<<endl;
 		fatalExit;
 	}
 
-	if( Wall::checkTrianlge(p3,p4,p1) )
+	if(!addPlaneWall(p1,p2,p3,p4, numDiv12, numDiv23))
 	{
-		triangles_.push_back(realx3x3(p3,p4,p1));
-	}else
-	{
-		fatalErrorInFunction << 
-		"points p3, p4 and p1 do not form a plane wallendl";
+		fatalErrorInFunction<<
+		"could not create plane wall from input points "<<endl;
 		fatalExit;
 	}
+
 }
+
