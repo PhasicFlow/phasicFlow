@@ -439,6 +439,16 @@ inline bool pFlow::token::isEndStatement() const
 }
 
 
+inline bool pFlow::token::isEndBlock() const
+{
+    if( type_ == tokenType::PUNCTUATION )
+    {
+        return pToken() == punctuationToken::END_BLOCK;
+    }
+
+    return false;
+}
+
 inline pFlow::token::punctuationToken pFlow::token::pToken() const
 {
     if (type_ == tokenType::PUNCTUATION)

@@ -55,6 +55,14 @@ public:
 	// Constructor with owner and settings dict
 	Time( repository* owner,  const dictionary& setiingsDict);
 
+	Time( 
+		repository* owner, 
+		dictionary& setiingsDict,
+		real startTime, 
+		real endTime, 
+		real saveInterval, 
+		word startTimeName);
+
 
 	//// -  Methods
 		virtual fileSystem localPath()const

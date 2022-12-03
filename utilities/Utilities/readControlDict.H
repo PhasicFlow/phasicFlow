@@ -18,75 +18,70 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __readControlDict_H__
+#define __readControlDict_H__
 
-#include "Time.H"
-#include "dictionary.H"
-#include "vocabs.H"
+#include "fileSystem.H"
 
-pFlow::Time::Time
-(
-	repository* owner,
-	const dictionary& setiingsDict
-)
-:
-	repository("Time", "", owner),
-	timeControl(setiingsDict),
-	geometry_
-	(
-		geometryRepository_,
-		geometryFolder__,
-		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
-	)
+
+namespace pFlow
 {
+
+class
+readControlDict
+{
+protected:
 	
-}
+	fileSystem rootPath_;
 
-pFlow::Time::Time( 
-		repository* owner, 
-		dictionary& setiingsDict,
-		real startTime, 
-		real endTime, 
-		real saveInterval, 
-		word startTimeName)
-:
-	repository("Time", "", owner),
-	timeControl(
-		setiingsDict,
-		startTime,
-		endTime,
-		saveInterval,
-		startTimeName),
-	geometry_
-	(
-		geometryRepository_,
-		geometryFolder__,
-		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
-	)
-{
+	fileSystem cdPath_;
+
+	real startTime_;
 	
-}
+	real endTime_;
+	
+	real saveInterval_;
 
-bool pFlow::Time::write
-(
-	bool verbose
-) const
-{
-	if(outputToFile())
+	word formatType_;
+
+	int32 precision_;
+
+	inline static fileSystem defaultRootPath = CWD();
+	inline static fileSystem defaultCDPath = CWD()/"system"+"controlDict";
+	
+	word convertTimeToName(const real t, const int32 precision)const;
+
+	bool read();
+
+public:
+
+	readControlDict(
+		const fileSystem& rootPath = defaultRootPath, 
+		const fileSystem& cdPath = defaultCDPath);
+
+	auto startTime()const
 	{
-		Report(0)<<"\nWriting to file at time: "<< cyanText(currentTimeWord())<<endReport;
-		return repository::write(verbose);
+		return startTime_;
 	}
-	return true;
+
+	auto endTime()const
+	{
+		return endTime_;
+	}
+
+	auto saveInterval()const
+	{
+		return saveInterval_;
+	}
+
+	auto startTimeName()const
+	{
+		return convertTimeToName(startTime_, precision_);
+	}
+
+};
+
 }
+
+#endif //__readControlDict_H__
+

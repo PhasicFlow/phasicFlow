@@ -191,12 +191,33 @@ bool pFlow::validWord(char c)
     );
 }
 
+bool pFlow::validWordWithQuote(char c)
+{
+    return
+    (
+     !isspace(c)
+     && c != ';'   // end statement
+     && c != '{'   // beg subdict
+     && c != '}'   // end subdict
+    );
+}
+
 bool pFlow::validWord(const word& w)
 {
     for(auto wi:w)
     {   
         char c = wi;
         if ( !validWord(c) ) return false;
+    }
+    return true;
+}
+
+bool pFlow::validWordWithQuote(const word& w)
+{
+    for(auto wi:w)
+    {   
+        char c = wi;
+        if ( !validWordWithQuote(c) ) return false;
     }
     return true;
 }

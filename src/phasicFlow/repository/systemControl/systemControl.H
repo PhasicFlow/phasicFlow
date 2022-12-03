@@ -61,6 +61,10 @@ protected:
 	// - time repository
 	Time 			Time_;
 
+	// - if time control is managed externaly
+
+	bool 			externalTimeControl_ = false;
+
 	// - acceleration 
 	realx3 			g_;
 
@@ -78,10 +82,18 @@ protected:
 	
 	static word getTopFolder(const fileSystem& path);
 
+
 public:
 
-	systemControl( const fileSystem path = CWD() );
-	
+	systemControl(const fileSystem path = CWD());
+		
+	systemControl(
+		const real startTime, 
+		const real endTime,
+		const real saveInterval,
+		const word startTimeName,
+		const fileSystem path = CWD() );
+
 	const repository& settings() const{
 		return settings_;
 	}
@@ -159,7 +171,12 @@ public:
 
 	bool operator ++(int);
 
-	Map<real, fileSystem> getTimeFolders()const;
+	void setSaveTimeFolder(
+		bool saveToFile, 
+		const word& timeName = "wrongTimeFolder")
+	{
+		Time_.setSaveTimeFolder(saveToFile, timeName);
+	}
 
 };
 

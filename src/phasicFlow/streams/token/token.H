@@ -313,6 +313,8 @@ public:
         //- Tolen is end statement 
         inline bool isEndStatement() const;
 
+        inline bool isEndBlock()const;
+
         //- Token is INT64
         inline bool isInt64() const;
 

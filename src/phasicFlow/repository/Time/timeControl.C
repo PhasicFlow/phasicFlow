@@ -63,13 +63,47 @@ pFlow::timeControl::timeControl
 	)
 
 {
+	checkForOutputToFile();
+}
 
+pFlow::timeControl::timeControl(
+		dictionary& dict,
+		real startTime,
+		real endTime,
+		real saveInterval,
+		word startTimeName)
+:
+	dt_
+	(
+		dict.getVal<real>("dt")
+	),
+	startTime_(startTime),
+	endTime_(endTime),
+	currentTime_(startTime_),
+	saveInterval_(saveInterval),
+	lastSaved_(startTime_),
+	currentIter_(0),
+	timePrecision_
+	(
+		dict.getValOrSet("timePrecision", 4)
+	),
+	managedExternaly_(true),
+	timeName_(startTimeName),
+	timersReportInterval_
+	(
+		startTime_,
+		dict.getValOrSet("timersReportInterval", 0.04)
+	)	
+{
 	checkForOutputToFile();
 }
 
 
 void pFlow::timeControl::checkForOutputToFile()
 {
+	
+	if(managedExternaly_) return;
+
 	bool save = false;
 	
 	if ( abs(currentTime_ - lastSaved_ - saveInterval_) < 0.5 * dt_ )
@@ -92,4 +126,14 @@ bool pFlow::timeControl::timersReportTime()const
 	return timersReportInterval_.isMember(currentTime_, dt_);
 }
 
+void pFlow::timeControl::setSaveTimeFolder(
+	bool saveToFile, 
+	const word& timeName)
+{
+	if(managedExternaly_)
+	{
+		outputToFile_ = saveToFile;
+		timeName_ = timeName;
+	}
+}
 

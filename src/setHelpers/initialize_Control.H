@@ -25,6 +25,25 @@ Licence:
 #include "initialize.H"
 
 Report(0)<<"\nCreating Control repository . . ."<<endReport;
-pFlow::systemControl Control;
+pFlow::uniquePtr<pFlow::systemControl> ControlPtr = nullptr;
+
+if(isCoupling)
+{
+	pFlow::readControlDict controlDict;
+	
+	ControlPtr = pFlow::makeUnique<pFlow::systemControl>
+	(
+		controlDict.startTime(),
+		controlDict.endTime(),
+		controlDict.saveInterval(),
+		controlDict.startTimeName()
+	);	
+}
+else
+{
+  	ControlPtr = pFlow::makeUnique<pFlow::systemControl>();
+}
+
+auto& Control = ControlPtr();
 
 #endif

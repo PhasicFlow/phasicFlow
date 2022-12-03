@@ -20,11 +20,27 @@ Licence:
 
 #include "systemControl.H"
 #include "geometryMotion.H"
+#include "commandLine.H"
+#include "readControlDict.H"
 
-
+using pFlow::commandLine;
 
 int main( int argc, char* argv[] )
 {
+
+commandLine cmds(
+    "iterateGeometry",
+    "Performs simulation without particles, only geometry is solved");
+
+
+  bool isCoupling = false;
+  cmds.add_flag(
+    "-c,--coupling",
+    isCoupling,
+    "Is this a fluid-particle coupling simulation?");
+
+  if(!cmds.parse(argc, argv)) return 0;
+   
 
 // this should be palced in each main 
 #include "initialize_Control.H"

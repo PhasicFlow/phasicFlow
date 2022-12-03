@@ -65,6 +65,10 @@ protected:
 	// - time precision for output time folders
 	int32 timePrecision_;
 
+	bool  managedExternaly_ = false;
+
+	word  timeName_ = "wrongSettings";
+
 	realStridedRange  timersReportInterval_;
 
 	int32StridedRagne screenReportInterval_ ={0,100};
@@ -78,6 +82,13 @@ protected:
 public:
 
 	timeControl(const dictionary& dict);
+
+	timeControl(
+		dictionary& dict,
+		real startTime,
+		real endTime,
+		real saveInterval,
+		word startTimeName);
 	
 	virtual ~timeControl()
 	{}
@@ -103,9 +114,19 @@ public:
 		return currentTime_;
 	}
 
-	word currentTimeWord() const
+	word currentTimeWord(bool forSave = true)const
 	{
-		return real2FixedStripZeros( currentTime(), timePrecision());;
+		if(forSave)
+		{
+			if(!managedExternaly_)
+				return real2FixedStripZeros( currentTime(), timePrecision());
+			else
+				return timeName_;
+		}
+		else
+		{
+			return real2FixedStripZeros( currentTime(), timePrecision());
+		}
 	}
 
 	int32 currentIter()const
@@ -145,6 +166,9 @@ public:
 		return true;
 	}
 
+	void setSaveTimeFolder(
+		bool saveToFile, 
+		const word& timeName = "wrongTimeFolder");
 	
 	int32 timePrecision()const
 	{

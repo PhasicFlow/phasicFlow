@@ -23,6 +23,8 @@ Licence:
 #include "Wall.H"
 #include "multiTriSurface.H"
 #include "geometryMotion.H"
+#include "commandLine.H"
+#include "readControlDict.H"
 
 using pFlow::output;
 using pFlow::endl;
@@ -33,9 +35,24 @@ using pFlow::wordVector;
 using pFlow::Wall;
 using pFlow::geometry;
 using pFlow::multiTriSurface;
+using pFlow::commandLine;
 
 int main( int argc, char* argv[] )
 {
+
+	commandLine cmds(
+    	"geometryPhasicFlow",
+    	"Converts the supplied informaiton for sufraces in"
+    	" geometryDict into PhasicFlow geometry data structure");
+
+
+  bool isCoupling = false;
+  cmds.add_flag(
+    "-c,--coupling",
+    isCoupling,
+    "Is this a fluid-particle coupling simulation?");
+
+  if(!cmds.parse(argc, argv)) return 0;
 
 // this should be palced in each main 
 #include "initialize_Control.H"

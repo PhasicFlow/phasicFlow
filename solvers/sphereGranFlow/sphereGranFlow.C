@@ -26,6 +26,7 @@ Licence:
 #include "contactSearch.H"
 #include "sphereInteraction.H"
 #include "commandLine.H"
+#include "readControlDict.H"
 
 using pFlow::output;
 using pFlow::endl;
@@ -46,6 +47,8 @@ commandLine cmds(
 		"sphereGranFlow",
 		"DEM solver for non-cohesive spherical particles with particle insertion "
 		"mechanism and moving geometry");
+
+bool isCoupling = false;
 
 if(!cmds.parse(argc, argv)) return 0;
 

@@ -154,6 +154,75 @@ pFlow::systemControl::systemControl
 	writeToFileTimer_("Write to file", &timers_)	
 {}
 
+pFlow::systemControl::systemControl(
+		const real startTime, 
+		const real endTime,
+		const real saveInterval,
+		const word startTimeName,
+		const fileSystem path)
+:
+	repository
+	(
+		"systemControl",
+		path, 		// local path
+		nullptr    // no owner
+	),
+	runName_
+	(
+		getRunName(path)
+	),
+	topLevelFolder_
+	(	
+		getTopFolder(path)
+	),
+	settings_
+	(
+		settingsRepository__,
+		settingsFolder__,
+		this
+	),
+	caseSetup_
+	(
+		caseSetupRepository__,
+		caseSetupFolder__,
+		this
+	),
+	settingsDict_
+	(
+		settings().emplaceObject<dictionary>
+		(
+			objectFile
+			(
+				settingsFile__,
+				"",
+				objectFile::READ_ALWAYS,
+				objectFile::WRITE_NEVER
+			),
+			settingsFile__,
+			true
+		)
+	),
+	Time_
+	(
+		this,
+		settingsDict_
+	),
+	externalTimeControl_(true),
+	g_(
+		settingsDict_.getVal<realx3>("g")
+	),
+	domain_(
+		settingsDict_.subDict("domain")
+	),
+	timers_(runName_),
+	timersReport_
+	(
+		settingsDict_.getValOrSet("timersReport", Logical("Yes"))
+	),
+	writeToFileTimer_("Write to file", &timers_)	
+{}
+
+
 bool pFlow::systemControl::operator ++(int)
 {
 
@@ -188,27 +257,4 @@ bool pFlow::systemControl::operator ++(int)
 
 }
 
-pFlow::Map<pFlow::real, pFlow::fileSystem> 
-	pFlow::systemControl::getTimeFolders()const
-{
-	Map<real, fileSystem> tFolders;
 
-	auto subDirs = subDirectories(this->path());
-
-	for(auto& subD: subDirs)
-	{
-		auto timeName = tailName(subD.wordPath(), '/');
-		real TIME;
-		if( auto success = readReal(timeName, TIME); success)
-		{
-			if(!tFolders.insertIf(TIME, subD))
-			{
-				fatalErrorInFunction<<
-				" duplicate time folder! time = " << TIME <<endl;
-				fatalExit;
-			}
-		}
-	}
-
-	return tFolders;
-}
