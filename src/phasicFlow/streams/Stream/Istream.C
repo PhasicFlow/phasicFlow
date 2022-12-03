@@ -447,7 +447,7 @@ pFlow::iIstream& pFlow::Istream::read(token& t)
             putback(c);
 
             word val;
-            if (read(val).bad())
+            if (readString(val).bad())
             {
                 t.setBad();
             }

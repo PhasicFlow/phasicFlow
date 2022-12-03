@@ -25,6 +25,8 @@ Licence:
 #include "timeFolder.H"
 #include "commandLine.H"
 #include "ranges.H"
+#include "readControlDict.H"
+
 
 using pFlow::word;
 using pFlow::wordVector;
@@ -79,6 +81,8 @@ int main(int argc, char** argv )
 		times.vectorField(),
 		"a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end",
 		" ");
+
+	bool isCoupling = false;
 
 	if(!cmds.parse(argc, argv)) return 0;
 	

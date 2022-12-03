@@ -24,6 +24,7 @@ Licence:
 #include "setFields.H"
 #include "systemControl.H"
 #include "commandLine.H"
+#include "readControlDict.H"
 
 using pFlow::output;
 using pFlow::endl;
@@ -45,7 +46,7 @@ int main( int argc, char* argv[] )
 		"createParticles",
 		"Read the dictionary createParticles and create particles"
 		" based on the two sub-dictionaries positionParticles and setFields.\n"
-		"First executespositionParticles and then setFields, except "
+		"First executes positionParticles and then setFields, except "
 		"otherwise selected in the command line.");
 
 			
@@ -62,6 +63,11 @@ int main( int argc, char* argv[] )
 		"Exectue the setFields part only. Read the pointStructure from "
 		"time folder and setFields and save the result in the same time folder.");
 
+	bool isCoupling = false;
+	cmds.add_flag(
+		"-c,--coupling",
+		isCoupling,
+		"Is this a fluid-particle coupling simulation");
 
 	if(!cmds.parse(argc, argv)) return 0;
 	

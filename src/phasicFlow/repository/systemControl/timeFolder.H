@@ -27,13 +27,13 @@ Licence:
 namespace pFlow
 {
 
+Map<real, fileSystem> getTimeFolders(const fileSystem& path);
 
 class timeFolder
 {
 	using timeList = Map<real, fileSystem>;
 protected:
-	const systemControl& control_;
-
+	
 	timeList 			folders_;
 	
 	timeList::iterator currentFolder_;
@@ -41,11 +41,18 @@ protected:
 	
 public:
 
-	timeFolder(const systemControl& control ):
-		control_(control),
-		folders_(control.getTimeFolders()),
-		currentFolder_(folders_.begin())
+	timeFolder(const systemControl& control )
+	:
+		timeFolder(control.path())
 	{}
+
+	timeFolder(const fileSystem& path)
+	:
+		folders_(getTimeFolders(path)),
+		currentFolder_(folders_.begin())
+	{
+
+	}
 
 	real time()const
 	{
@@ -107,6 +114,32 @@ public:
 		return t;
 	}
 };
+
+inline
+Map<real, fileSystem> getTimeFolders(const fileSystem& path)
+{
+	Map<real, fileSystem> tFolders;
+
+	auto subDirs = subDirectories(path);
+
+	for(auto& subD: subDirs)
+	{
+		auto timeName = tailName(subD.wordPath(), '/');
+		real TIME;
+		if( auto success = readReal(timeName, TIME); success)
+		{
+			if(!tFolders.insertIf(TIME, subD))
+			{
+				fatalErrorInFunction<<
+				" duplicate time folder! time = " << TIME <<endl;
+				fatalExit;
+			}
+		}
+	}
+
+	return tFolders;
+}
+
 
 
 } // pFlow

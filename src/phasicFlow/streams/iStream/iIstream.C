@@ -61,6 +61,7 @@ bool pFlow::iIstream::findToken( const word & w )
 {
     rewind();
     token next;
+    bool isFirstToken = true;
 
     while( !eof() && good() )
     {
@@ -73,10 +74,17 @@ bool pFlow::iIstream::findToken( const word & w )
             return false;
         }
 
-        if( next.isWord() )
+
+
+        if( next.isWord() && isFirstToken)
         {   
-            if(next.wordToken() == w) return true;   
+            if(next.wordToken() == w ) return true;   
         }
+
+        if(next.isEndStatement()|| next.isEndBlock())
+            isFirstToken = true;
+        else
+            isFirstToken = false;
     }
 
     return false;
@@ -86,6 +94,7 @@ bool pFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
 {
     rewind();
     token next;
+    bool isFirstToken = true;
 
     while( !eof() && good() && lineNumber()<limitLine )
     {
@@ -95,10 +104,15 @@ bool pFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
             return false;
         }
 
-        if( next.isWord() )
+        if( next.isWord() && isFirstToken)
         {   
             if(next.wordToken() == w) return true;   
         }
+
+        if(next.isEndStatement()|| next.isEndBlock())
+            isFirstToken = true;
+        else
+            isFirstToken = false;
     }
 
     return false;   

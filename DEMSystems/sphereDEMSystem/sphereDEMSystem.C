@@ -18,75 +18,10 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#include "sphereDEMSystem.H"
 
-#include "Time.H"
-#include "dictionary.H"
-#include "vocabs.H"
 
-pFlow::Time::Time
-(
-	repository* owner,
-	const dictionary& setiingsDict
-)
-:
-	repository("Time", "", owner),
-	timeControl(setiingsDict),
-	geometry_
-	(
-		geometryRepository_,
-		geometryFolder__,
-		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
-	)
+pFlow::sphereDEMSystem::sphereDEMSystem()
 {
-	
-}
 
-pFlow::Time::Time( 
-		repository* owner, 
-		dictionary& setiingsDict,
-		real startTime, 
-		real endTime, 
-		real saveInterval, 
-		word startTimeName)
-:
-	repository("Time", "", owner),
-	timeControl(
-		setiingsDict,
-		startTime,
-		endTime,
-		saveInterval,
-		startTimeName),
-	geometry_
-	(
-		geometryRepository_,
-		geometryFolder__,
-		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
-	)
-{
-	
-}
-
-bool pFlow::Time::write
-(
-	bool verbose
-) const
-{
-	if(outputToFile())
-	{
-		Report(0)<<"\nWriting to file at time: "<< cyanText(currentTimeWord())<<endReport;
-		return repository::write(verbose);
-	}
-	return true;
 }

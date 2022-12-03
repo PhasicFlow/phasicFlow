@@ -18,75 +18,69 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __sphereDEMSystem_H__
+#define __sphereDEMSystem_H__
 
-#include "Time.H"
-#include "dictionary.H"
-#include "vocabs.H"
+#include "systemControl.H"
+#include "property.H"
+#include "uniquePtr.H"
+#include "geometry.H"
+#include "sphereParticles.H"
+#include "interaction.H"
+#include "Insertions.H"
 
-pFlow::Time::Time
-(
-	repository* owner,
-	const dictionary& setiingsDict
-)
-:
-	repository("Time", "", owner),
-	timeControl(setiingsDict),
-	geometry_
-	(
-		geometryRepository_,
-		geometryFolder__,
-		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
-	)
+
+namespace pFlow
 {
-	
-}
 
-pFlow::Time::Time( 
-		repository* owner, 
-		dictionary& setiingsDict,
-		real startTime, 
-		real endTime, 
-		real saveInterval, 
-		word startTimeName)
-:
-	repository("Time", "", owner),
-	timeControl(
-		setiingsDict,
-		startTime,
-		endTime,
-		saveInterval,
-		startTimeName),
-	geometry_
-	(
-		geometryRepository_,
-		geometryFolder__,
-		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
-	)
+class sphereDEMSystem
 {
-	
-}
+protected:
 
-bool pFlow::Time::write
-(
-	bool verbose
-) const
-{
-	if(outputToFile())
+	systemControl 							Control_;
+
+	uniquePtr<property> 				property_ = nullptr;
+
+	uniquePtr<geometry> 			  geometry_ = nullptr;
+
+	uniquePtr<sphereParticles> 	particles_ = nullptr;
+
+	uniquePtr<interaction> 			interaction_ = nullptr;
+
+	uniquePtr<sphereInsertion> 	insertion_ = nullptr;
+
+	auto& Control()
 	{
-		Report(0)<<"\nWriting to file at time: "<< cyanText(currentTimeWord())<<endReport;
-		return repository::write(verbose);
+		return Control_;
 	}
-	return true;
-}
+
+	auto& Property()
+	{
+		return property_();
+	}
+
+	auto& Geometry()
+	{
+		return geometry_();
+	}
+
+	auto& Particles()
+	{
+		return particles_();
+	}
+
+	auto& Interaction()
+	{
+		return interaction_();
+	} 
+
+public:
+
+	sphereDEMSystem();
+
+};
+
+
+} // pFlow
+
+#endif

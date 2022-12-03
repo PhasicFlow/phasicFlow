@@ -133,11 +133,11 @@ public:
         virtual bool findToken( const word & w );
 
 
-        // - search for all tokesn and find the first word token tbat matchs 
+        // - search for all tokesn and find the first word token that matchs 
         virtual bool findTokenSilent( const word & w, int32 limitLine = 100 );
 
         // - search for all tokens and find the first word token and also next word token
-        //   chekck if it i seneded with end statement ;
+        //   chekck if it is eneded with end statement ;
         virtual bool findTokenAndNext( const word& w, word& nextW, bool checkEndStatement = true);
 
 

@@ -22,6 +22,7 @@ Licence:
 #include "timeFolder.H"
 #include "commandLine.H"
 #include "ranges.H"
+#include "readControlDict.H"
 
 #include "postprocess.H"
 
@@ -64,6 +65,8 @@ int main(int argc, char** argv )
 		"-z, --zeroFolder",
 		withZeroFolder,
 		"Do NOT exclude zero folder from processing time folders");
+
+	bool isCoupling = false;
 
 	if(!cmds.parse(argc, argv)) return 0;
 

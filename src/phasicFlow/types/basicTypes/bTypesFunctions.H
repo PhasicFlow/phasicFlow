@@ -81,9 +81,12 @@ word tailName(const word& w, char sep = '.');
 // is the character valid for a word name  
 bool validWord(char c);
 
+bool validWordWithQuote(char c);
+
 
 bool validWord(const word& w);
 
+bool validWordWithQuote(const word& c);
 
 
 bool readLabel( const word& w, label & val);
