@@ -38,7 +38,7 @@ auto& sphInsertion =
 
 
 
-Report(0)<<"\nCreating interation model for sphere-sphere contact and sphere-wall contact . . ."<<endReport;
+Report(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endReport;
 auto interactionPtr = interaction::create(
 	Control,
 	sphParticles,

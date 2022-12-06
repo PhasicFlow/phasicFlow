@@ -21,6 +21,8 @@ Licence:
 #ifndef __sphereDEMSystem_H__
 #define __sphereDEMSystem_H__
 
+#include <array>
+
 #include "systemControl.H"
 #include "property.H"
 #include "uniquePtr.H"
@@ -28,6 +30,9 @@ Licence:
 #include "sphereParticles.H"
 #include "interaction.H"
 #include "Insertions.H"
+#include "readControlDict.H"
+
+
 
 
 namespace pFlow
@@ -36,8 +41,10 @@ namespace pFlow
 class sphereDEMSystem
 {
 protected:
+	
+	readControlDict 						ControlDict_;
 
-	systemControl 							Control_;
+	uniquePtr<systemControl>		Control_ = nullptr;
 
 	uniquePtr<property> 				property_ = nullptr;
 
@@ -45,13 +52,15 @@ protected:
 
 	uniquePtr<sphereParticles> 	particles_ = nullptr;
 
+	uniquePtr<sphereInsertion> 	insertion_ = nullptr;
+
 	uniquePtr<interaction> 			interaction_ = nullptr;
 
-	uniquePtr<sphereInsertion> 	insertion_ = nullptr;
+	
 
 	auto& Control()
 	{
-		return Control_;
+		return Control_();
 	}
 
 	auto& Property()
@@ -76,7 +85,22 @@ protected:
 
 public:
 
-	sphereDEMSystem();
+	sphereDEMSystem(int argc, char* argv[]);
+
+	~sphereDEMSystem();
+
+	sphereDEMSystem(const sphereDEMSystem&)=delete;
+
+	sphereDEMSystem& operator = (const sphereDEMSystem&)=delete;
+
+	
+	std::array<double,3> g()const
+	{
+		return {
+			Control_->g().x(), 
+			Control_->g().y(), 
+			Control_->g().z()};
+	}
 
 };
 
