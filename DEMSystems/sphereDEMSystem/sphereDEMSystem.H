@@ -56,8 +56,14 @@ protected:
 
 	uniquePtr<interaction> 			interaction_ = nullptr;
 
-	
 
+	int32 									numDomains_;
+
+	VectorDual<box> 				domains_;
+
+	Vector<int32Vector_H> 	parIndexInDomain_;
+
+	
 	auto& Control()
 	{
 		return Control_();
@@ -100,6 +106,11 @@ public:
 			Control_->g().x(), 
 			Control_->g().y(), 
 			Control_->g().z()};
+	}
+
+	bool inline usingDoulle()const
+	{
+		return pFlow::usingDouble__;
 	}
 
 };
