@@ -1,80 +1,80 @@
 
 list(APPEND SourceFiles 
-types/basicTypes/bTypesFunctions.C
-types/basicTypes/Logical.C
-types/types.C
+types/basicTypes/bTypesFunctions.cpp
+types/basicTypes/Logical.cpp
+types/types.cpp
 
-globals/error.C
+globals/error.cpp
 
-streams/token/tokenIO.C
-streams/token/token.C
-streams/iStream/IOstream.C
-streams/iStream/iIstream.C
-streams/iStream/iOstream.C
-streams/Stream/Istream.C
-streams/Stream/Ostream.C
-streams/Fstream/iFstream.C
-streams/Fstream/oFstream.C
-streams/Fstream/fileStream.C 
-streams/TStream/iTstream.C
-streams/TStream/oTstream.C
-streams/streams.C 
+streams/token/tokenIO.cpp
+streams/token/token.cpp
+streams/iStream/IOstream.cpp
+streams/iStream/iIstream.cpp
+streams/iStream/iOstream.cpp
+streams/Stream/Istream.cpp
+streams/Stream/Ostream.cpp
+streams/Fstream/iFstream.cpp
+streams/Fstream/oFstream.cpp
+streams/Fstream/fileStream.cpp 
+streams/TStream/iTstream.cpp
+streams/TStream/oTstream.cpp
+streams/streams.cpp 
 
-dictionary/dictionary.C
-dictionary/entry/iEntry.C
-dictionary/entry/dataEntry.C 
-dictionary/twoPartEntry/twoPartEntry.C
+dictionary/dictionary.cpp
+dictionary/entry/iEntry.cpp
+dictionary/entry/dataEntry.cpp 
+dictionary/twoPartEntry/twoPartEntry.cpp
 
-fileSystem/fileSystem.C
+fileSystem/fileSystem.cpp
 
-commandLine/commandLine.C
+commandLine/commandLine.cpp
 
-random/randomReal/randomReal.C
-random/randomReal/randomReals.C
+random/randomReal/randomReal.cpp
+random/randomReal/randomReals.cpp
 
-Timer/Timer.C
-Timer/Timers.C
+Timer/Timer.cpp
+Timer/Timers.cpp
 
-repository/Time/Time.C
-repository/Time/timeControl.C
-repository/systemControl/systemControl.C
-repository/repository/repository.C
-repository/IOobject/objectFile.C
-repository/IOobject/IOobject.C
-repository/IOobject/IOfileHeader.C
+repository/Time/Time.cpp
+repository/Time/timeControl.cpp
+repository/systemControl/systemControl.cpp
+repository/repository/repository.cpp
+repository/IOobject/objectFile.cpp
+repository/IOobject/IOobject.cpp
+repository/IOobject/IOfileHeader.cpp
 
-structuredData/box/box.C
-structuredData/cylinder/cylinder.C
-structuredData/sphere/sphere.C
-structuredData/iBox/iBoxs.C
-structuredData/line/line.C
-structuredData/zAxis/zAxis.C
-structuredData/pointStructure/pointStructure.C
-structuredData/pointStructure/selectors/pStructSelector/pStructSelector.C
-structuredData/pointStructure/selectors/selectBox/selectBox.C
-structuredData/pointStructure/selectors/selectRange/selectRange.C 
-structuredData/pointStructure/selectors/selectRandom/selectRandom.C
-structuredData/trisurfaceStructure/triSurface.C
-structuredData/trisurfaceStructure/multiTriSurface.C
-structuredData/trisurfaceStructure/stlFile.C
-structuredData/peakableRegion/sphereRegion/sphereRegion.C
-structuredData/peakableRegion/cylinderRegion/cylinderRegion.C
-structuredData/peakableRegion/boxRegion/boxRegion.C
-structuredData/peakableRegion/peakableRegion/peakableRegion.C
-structuredData/peakableRegion/peakableRegions.C
+structuredData/box/box.cpp
+structuredData/cylinder/cylinder.cpp
+structuredData/sphere/sphere.cpp
+structuredData/iBox/iBoxs.cpp
+structuredData/line/line.cpp
+structuredData/zAxis/zAxis.cpp
+structuredData/pointStructure/pointStructure.cpp
+structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
+structuredData/pointStructure/selectors/selectBox/selectBox.cpp
+structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
+structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
+structuredData/trisurfaceStructure/triSurface.cpp
+structuredData/trisurfaceStructure/multiTriSurface.cpp
+structuredData/trisurfaceStructure/stlFile.cpp
+structuredData/peakableRegion/sphereRegion/sphereRegion.cpp
+structuredData/peakableRegion/cylinderRegion/cylinderRegion.cpp
+structuredData/peakableRegion/boxRegion/boxRegion.cpp
+structuredData/peakableRegion/peakableRegion/peakableRegion.cpp
+structuredData/peakableRegion/peakableRegions.cpp
 
-containers/Vector/Vectors.C
-containers/Field/Fields.C
-containers/symArrayHD/symArrays.C
-containers/triSurfaceField/triSurfaceFields.C
-containers/bitsetHD/bitsetHDs.C
-containers/indexContainer/indexContainer.C
+containers/Vector/Vectors.cpp
+containers/Field/Fields.cpp
+containers/symArrayHD/symArrays.cpp
+containers/triSurfaceField/triSurfaceFields.cpp
+containers/bitsetHD/bitsetHDs.cpp
+containers/indexContainer/indexContainer.cpp
 
-setFieldList/setFieldList.C
-setFieldList/setFieldEntry.C
+setFieldList/setFieldList.cpp
+setFieldList/setFieldEntry.cpp
 
-eventSubscriber/eventSubscriber.C
-eventSubscriber/eventObserver.C)
+eventSubscriber/eventSubscriber.cpp
+eventSubscriber/eventObserver.cpp)
 
 set(link_libs Kokkos::kokkos tbb)
 

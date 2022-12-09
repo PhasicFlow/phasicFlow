@@ -1,9 +1,9 @@
 
 set(SourceFiles 
-contactSearch/contactSearch/contactSearch.C
-contactSearch/ContactSearch/ContactSearchs.C
-interaction/interaction.C
-sphereInteraction/sphereInteractions.C
+contactSearch/contactSearch/contactSearch.cpp
+contactSearch/ContactSearch/ContactSearchs.cpp
+interaction/interaction.cpp
+sphereInteraction/sphereInteractions.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow Property Particles Geometry)

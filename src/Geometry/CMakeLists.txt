@@ -1,7 +1,7 @@
 
 list(APPEND SourceFiles 
-geometry/geometry.C
-geometryMotion/geometryMotions.C
+geometry/geometry.cpp
+geometryMotion/geometryMotions.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow MotionModel Property)

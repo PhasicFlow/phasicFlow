@@ -1,6 +1,6 @@
 
 set(source_files 
-checkPhasicFlow.C
+checkPhasicFlow.cpp
 )
 set(link_lib phasicFlow Kokkos::kokkos)
 

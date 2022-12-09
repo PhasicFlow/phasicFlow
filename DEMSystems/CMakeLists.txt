@@ -1,6 +1,6 @@
 
 set(SourceFiles 
-sphereDEMSystem/sphereDEMSystem.C
+sphereDEMSystem/sphereDEMSystem.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow Particles Geometry Property Interaction Interaction Utilities)

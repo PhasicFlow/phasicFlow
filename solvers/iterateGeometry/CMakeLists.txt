@@ -1,6 +1,6 @@
 
 set(source_files
-iterateGeometry.C
+iterateGeometry.cpp
 )
 set(link_lib phasicFlow Geometry MotionModel Kokkos::kokkos Utilities)
 

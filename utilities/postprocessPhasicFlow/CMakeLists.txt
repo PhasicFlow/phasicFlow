@@ -1,11 +1,11 @@
 
 set(source_files 
-postprocessPhasicFlow.C 
-postprocess.C
-processField.C
-ProcessFields.C
-includeMask.C
-IncludeMasks.C
+postprocessPhasicFlow.cpp 
+postprocess.cpp
+processField.cpp
+ProcessFields.cpp
+includeMask.cpp
+IncludeMasks.cpp
 
 )
 set(link_lib phasicFlow Interaction Kokkos::kokkos Utilities)
