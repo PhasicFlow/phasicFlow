@@ -21,11 +21,12 @@ Licence:
 #ifndef __combinedRange_H__
 #define __combinedRange_H__
 
+#include <vector>
 
 #include "stridedRange.H"
 #include "intervalRange.H"
 #include "Lists.H"
-#include "Vectors.H"
+
 #include "Set.H"
 
 namespace pFlow
@@ -52,7 +53,7 @@ public:
 	
 	combinedRange(){}
 
-	combinedRange(const wordVector& strRanges)
+	combinedRange(const std::vector<word>& strRanges)
 	{
 		if(!addRanges(strRanges))
 		{
@@ -60,7 +61,7 @@ public:
 		}
 	}
 
-	bool addRanges(const wordVector& strRanges)
+	bool addRanges(const std::vector<word>& strRanges)
 	{
 		for(auto& sR: strRanges)
 		{

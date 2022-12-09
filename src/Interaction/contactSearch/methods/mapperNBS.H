@@ -25,6 +25,7 @@ Licence:
 #include "cells.H"
 #include "contactSearchFunctions.H"
 #include "baseAlgorithms.H"
+#include "ViewAlgorithms.H"
 
 namespace pFlow
 {

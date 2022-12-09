@@ -18,6 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#include "KokkosUtilities.H"
 #include "systemControl.H"
 #include "timeFolder.H"
 #include "commandLine.H"

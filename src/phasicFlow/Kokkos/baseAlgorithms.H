@@ -23,6 +23,7 @@ Licence:
 
 
 #include "numericConstants.H"
+#include "KokkosUtilities.H"
 
 inline const size_t sizeToSerial__ = 64;
 

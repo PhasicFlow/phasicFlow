@@ -23,6 +23,8 @@ Licence:
 
 
 #include "KokkosTypes.H"
+#include "pFlowMacros.H"
+#include "types.H"
 
 
 namespace pFlow

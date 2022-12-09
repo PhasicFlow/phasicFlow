@@ -18,7 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "KokkosTypes.H"
 #include "systemControl.H"
 #include "commandLine.H"
 
