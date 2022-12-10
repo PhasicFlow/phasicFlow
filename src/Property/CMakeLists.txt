@@ -1,6 +1,6 @@
 
 set(SourceFiles 
-property.C
+property.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow)

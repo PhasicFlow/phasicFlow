@@ -1,13 +1,13 @@
 
 list(APPEND SourceFiles 
-integration/integration.C 
-AdamsBashforth5/AdamsBashforth5.C
-AdamsBashforth4/AdamsBashforth4.C
-AdamsBashforth3/AdamsBashforth3.C
-AdamsBashforth2/AdamsBashforth2.C
-AdamsMoulton3/AdamsMoulton3.C
-AdamsMoulton4/AdamsMoulton4.C
-AdamsMoulton5/AdamsMoulton5.C
+integration/integration.cpp 
+AdamsBashforth5/AdamsBashforth5.cpp
+AdamsBashforth4/AdamsBashforth4.cpp
+AdamsBashforth3/AdamsBashforth3.cpp
+AdamsBashforth2/AdamsBashforth2.cpp
+AdamsMoulton3/AdamsMoulton3.cpp
+AdamsMoulton4/AdamsMoulton4.cpp
+AdamsMoulton5/AdamsMoulton5.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow)

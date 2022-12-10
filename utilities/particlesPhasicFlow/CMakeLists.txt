@@ -1,10 +1,10 @@
 
 set(source_files
-particlesPhasicFlow.C
-positionParticles/positionParticles.C 
-positionOrdered/positionOrdered.C 
-positionRandom/positionRandom.C
-empty/empty.C
+particlesPhasicFlow.cpp
+positionParticles/positionParticles.cpp 
+positionOrdered/positionOrdered.cpp 
+positionRandom/positionRandom.cpp
+empty/empty.cpp
 )
 set(link_lib phasicFlow Kokkos::kokkos Interaction Utilities)
 

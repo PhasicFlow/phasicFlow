@@ -75,7 +75,6 @@ add_subdirectory(src)
 add_subdirectory(solvers)
 
 add_subdirectory(utilities)
-
 #add_subdirectory(test_newFeatures)
 
 
@@ -88,3 +87,4 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "${phasicFlow_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${phasicFlow_VERSION_MINOR}")
 include(CPack)
+

@@ -1,8 +1,8 @@
 
 list(APPEND SourceFiles 
-entities/rotatingAxis/rotatingAxis.C
-fixedWall/fixedWall.C
-rotatingAxisMotion/rotatingAxisMotion.C
+entities/rotatingAxis/rotatingAxis.cpp
+fixedWall/fixedWall.cpp
+rotatingAxisMotion/rotatingAxisMotion.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow)

@@ -1,8 +1,8 @@
 
 set(SourceFiles 
-vtkFile.C
-readFromTimeFolder.C
-readControlDict.C
+vtkFile.cpp
+readFromTimeFolder.cpp
+readControlDict.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow Particles Geometry)

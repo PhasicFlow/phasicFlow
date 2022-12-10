@@ -1,6 +1,6 @@
 
 set(source_files
-sphereGranFlow.C
+sphereGranFlow.cpp
 )
 set(link_lib Kokkos::kokkos phasicFlow Particles Geometry Property Interaction Interaction Utilities)
 
