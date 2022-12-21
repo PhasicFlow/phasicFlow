@@ -35,7 +35,7 @@ model
 contactSearch
 {
    method         multiGridNBS;           // method for broad search particle-particle
-   wallMapping    cellMapping;   // method for broad search particle-wall 
+   wallMapping    multiGridMapping;   // method for broad search particle-wall 
 
    multiGridNBSInfo
    {
@@ -43,7 +43,7 @@ contactSearch
       sizeRatio      1.1;        // bounding box size to particle diameter (max)
    }
 
-   cellMappingInfo
+   multiGridMappingInfo
    {
       updateFrequency 10;        // each 10 timesteps, update neighbor list  
       cellExtent     0.6;        // bounding box for particle-wall search (> 0.5)
