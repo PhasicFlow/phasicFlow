@@ -40,8 +40,8 @@ if(!cmds.parse(argc, argv)) return 0;
 #include "initialize.hpp"
 
 	output<<endl;
-	Report(1)<< "You are using "<<yellowText(cmds.productNameCopyright())<<endReport;
-  Report(1)<< yellowText(pFlow::floatingPointDescription())<<endReport;
+	REPORT(1)<< "You are using "<<yellowText(cmds.productNameCopyright())<<endREPORT;
+  REPORT(1)<< yellowText(pFlow::floatingPointDescription())<<endREPORT;
 	
 
 // this should be palced in each main 

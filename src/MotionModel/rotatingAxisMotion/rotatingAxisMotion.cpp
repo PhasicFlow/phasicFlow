@@ -96,7 +96,7 @@ bool pFlow::rotatingAxisMotion::writeDictionary
 
 	auto& motionInfo = dict.subDictOrCreate("rotatingAxisMotionInfo");
 	
-	forAll(i, axis_)
+	ForAll(i, axis_)
 	{
 		
 		auto& axDict = motionInfo.subDictOrCreate(axisName_[i]);

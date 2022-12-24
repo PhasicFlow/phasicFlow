@@ -21,37 +21,37 @@ Licence:
 #include "sphereDEMSystem.hpp"
 
 
-pFlow::sphereDEMSystem::sphereDEMSystem(int argc, char* argv[])
+pFlow::coupling::sphereDEMSystem::sphereDEMSystem(
+		word  demSystemName,
+		int32 numDomains, 
+		const std::vector<box>& domains,
+		int argc, 
+		char* argv[])
 :
-	ControlDict_()
+	DEMSystem(demSystemName, numDomains, domains, argc, argv)
 {
   
-	Report(0)<<"Initializing host/device execution spaces . . . \n";
-	Report(1)<<"Host execution space is "<< greenText(DefaultHostExecutionSpace::name())<<endReport;
-	Report(1)<<"Device execution space is "<<greenText(DefaultExecutionSpace::name())<<endReport;
+	REPORT(0)<<"Initializing host/device execution spaces . . . \n";
+	REPORT(1)<<"Host execution space is "<< greenText(DefaultHostExecutionSpace::name())<<endREPORT;
+	REPORT(1)<<"Device execution space is "<<greenText(DefaultExecutionSpace::name())<<endREPORT;
 
  	// initialize Kokkos
 	Kokkos::initialize( argc, argv );  
   
-	Report(0)<<"\nCreating Control repository . . ."<<endReport;
-	Control_ = makeUnique<systemControl>(
-		ControlDict_.startTime(),
-		ControlDict_.endTime(),
-		ControlDict_.saveInterval(),
-		ControlDict_.startTimeName());
+	
 
-	Report(0)<<"\nReading proprties . . . "<<endReport;
+	REPORT(0)<<"\nReading proprties . . . "<<endREPORT;
 	property_ = makeUnique<property>(
     	Control().caseSetup().path()+propertyFile__);
 
-	Report(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<endReport;
+	REPORT(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<endREPORT;
 	geometry_ = geometry::create(Control(), Property());
 
-	Report(0)<<"\nReading sphere particles . . ."<<endReport;
+	REPORT(0)<<"\nReading sphere particles . . ."<<endREPORT;
 	particles_ = makeUnique<sphereParticles>(Control(), Property());
 
 
-	//Report(0)<<"\nCreating particle insertion for spheres. . ."<<endReport;
+	//REPORT(0)<<"\nCreating particle insertion for spheres. . ."<<endREPORT;
 	/*insertion_ = 
 	Control().caseSetup().emplaceObject<sphereInsertion>(
 		objectFile(
@@ -64,15 +64,20 @@ pFlow::sphereDEMSystem::sphereDEMSystem(int argc, char* argv[])
 		sphParticles.shapes()
 	);*/
 
-	Report(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endReport;
+	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
 	interaction_ = interaction::create(
 		Control(),
 		Particles(),
 		Geometry());
 
+	real minD, maxD;
+	particles_->boundingSphereMinMax(minD, maxD);
+
+	particleDistribution_ = makeUnique<domainDistribute>(numDomains, domains, maxD);
+
 }
 
-pFlow::sphereDEMSystem::~sphereDEMSystem()
+pFlow::coupling::sphereDEMSystem::~sphereDEMSystem()
 {
 	interaction_.reset();
 	insertion_.reset();
@@ -85,3 +90,42 @@ pFlow::sphereDEMSystem::~sphereDEMSystem()
 	Kokkos::finalize();
 }
 
+
+
+pFlow::int32 
+	pFlow::coupling::sphereDEMSystem::numParInDomain(int32 di)const
+{
+	return particleDistribution_().numParInDomain(di);
+}
+
+std::vector<pFlow::int32> 
+	pFlow::coupling::sphereDEMSystem::numParInDomain()const
+{
+	const auto& distribute = particleDistribution_();
+	int32 numDomains = distribute.numDomains();
+	std::vector<int32> nums(numDomains);
+	for(int32 i=0; i<numDomains; i++)
+	{
+		nums[i] = distribute.numParInDomain(i);
+	}
+
+	return nums;
+}
+
+
+bool pFlow::coupling::sphereDEMSystem::iterate(
+	int32 n, 
+	real timeToWrite, 
+	word timeName) 
+{
+	return true;
+}
+
+pFlow::real 
+	pFlow::coupling::sphereDEMSystem::maxBounndingSphereSize()const
+{
+	real minD, maxD;
+	particles_->boundingSphereMinMax(minD, maxD);
+
+	return maxD;
+}

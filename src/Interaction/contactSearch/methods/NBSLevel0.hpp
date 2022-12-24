@@ -200,8 +200,8 @@ public:
 				
 				pairs.increaseCapacityBy(len);
 
-				Info<< "The contact pair container capacity increased from "<<
-				oldCap << " to "<<pairs.capacity()<<" in NBSLevel0."<<endInfo;
+				INFORMATION<< "The contact pair container capacity increased from "<<
+				oldCap << " to "<<pairs.capacity()<<" in NBSLevel0."<<endINFO;
 				
 			}
 

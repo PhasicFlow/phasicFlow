@@ -45,7 +45,7 @@ public:
 			nextId_ = 0; 
 			id.modifyOnHost();
 
-			forAll(i,id)
+			ForAll(i,id)
 			{
 				if(id.isActive(i))
 				{

@@ -73,8 +73,8 @@ int main( int argc, char* argv[] )
 	
 	if(setOnly && positionOnly)
 	{
-		Err<<
-		"Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n"<<endErr;
+		ERR<<
+		"Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n"<<endERR;
 		return 1;
 	}	
 
@@ -102,7 +102,7 @@ int main( int argc, char* argv[] )
 	{
 
 		// position particles based on the dict content 
-		Report(0)<< "Positioning points . . . \n"<<endReport;
+		REPORT(0)<< "Positioning points . . . \n"<<endREPORT;
 		auto pointPosition = positionParticles::create(cpDict.subDict("positionParticles"));
 
 		fileSystem pStructPath = Control.time().path()+pointStructureFile__;
@@ -124,15 +124,15 @@ int main( int argc, char* argv[] )
 
 		auto& pSruct = pStructObj().getObject<pointStructure>();
 
-		Report(1)<< "Created pStruct with "<< pSruct.size() << " points and capacity "<<
-		pSruct.capacity()<<" . . ."<< endReport;
+		REPORT(1)<< "Created pStruct with "<< pSruct.size() << " points and capacity "<<
+		pSruct.capacity()<<" . . ."<< endREPORT;
 
-		Report(1)<< "Writing pStruct to " << pStructObj().path() << endReport<<endl<<endl;
+		REPORT(1)<< "Writing pStruct to " << pStructObj().path() << endREPORT<<endl<<endl;
 
 		if( !pStructObj().write())
 		{
 			fatalErrorInFunction<<
-			"Error in writing to file. \n ";
+			"ERRor in writing to file. \n ";
 			return 1; 
 		}
 	}else
@@ -164,7 +164,7 @@ int main( int argc, char* argv[] )
 		{
 			if( !sfEntry.setPointFieldDefaultValueNewAll(Control.time(), pStruct, true))
 			{
-				Err<< "\n error occured in setting default value fields.\n"<<endErr;
+				ERR<< "\n error occured in setting default value fields.\n"<<endERR;
 				return 1;
 			}
 		}
@@ -177,13 +177,13 @@ int main( int argc, char* argv[] )
 
 		for(auto name: selNames)
 		{
-			Report(1)<< "Applying selector " << greenText(name) <<endReport;
+			REPORT(1)<< "Applying selector " << greenText(name) <<endREPORT;
 			
 			if(
 				!applySelector(Control, pStruct, selectorsDict.subDict(name))
 			 )
 			{
-				Err<<"\n error occured in setting selector. \n"<<endErr;
+				ERR<<"\n error occured in setting selector. \n"<<endERR;
 				return 1;
 			}
 			output<<endl;
@@ -191,7 +191,7 @@ int main( int argc, char* argv[] )
 	}
 
 	Control.time().write(true);
-	Report(0)<< greenText("\nFinished successfully.\n")<<endReport;
+	REPORT(0)<< greenText("\nFinished successfully.\n")<<endREPORT;
 
 
 // this should be palced in each main 

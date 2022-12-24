@@ -100,7 +100,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer>
 
 	newPoints.clear();
 	int32 numAdded = 0;
-	forAll(i, pointFlag_)
+	ForAll(i, pointFlag_)
 	{
 		if(!isActive(i))
 		{
@@ -469,7 +469,7 @@ pFlow::pointStructure::newPointsIndices(
 	// otherwise scan the points from first to the end to find empty spaces 
 	newPoints.clear();
 	int32 numAdded = 0;
-	forAll(i, pointFlag_)
+	ForAll(i, pointFlag_)
 	{
 		if(!isActive(i))
 		{

@@ -18,57 +18,58 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#include "DEMSystem.hpp"
 
-#include "particles.hpp"
-#include "dictionary.hpp"
-#include "insertion.hpp"
-#include "streams.hpp"
 
-bool pFlow::insertion::readInsertionDict
-(
-	const dictionary& dict
-)
-{
-
-	active_ = dict.getVal<Logical>("active");
-
-	if(active_)
-		REPORT(1)<< "Particle insertion mechanism is "<<
-		yellowText("active")<<" in the simulation."<<endREPORT;
-	else
-		REPORT(1)<< "Particle insertion mechanism is "<<
-		yellowText("not active")<<" in the simulation."<<endREPORT;
-
-	
-	return true;
-}
-
-bool pFlow::insertion::writeInsertionDict
-(
-	dictionary& dict
-)const
-{
-	if(!dict.add("active", active_) )
-	{
-		fatalErrorInFunction<<
-		"  error in writing active to dictionary "<<dict.globalName()<<endl;
-		return false;
-	}
-
-	if(!dict.add("checkForCollision", checkForCollision_) )
-	{
-		fatalErrorInFunction<<
-		"  error in writing checkForCollision to dictionary "<<dict.globalName()<<endl;
-		return false;
-	}
-
-	return true;
-}
-
-pFlow::insertion::insertion
-(
-	particles& prtcl
-)
+pFlow::coupling::DEMSystem::DEMSystem(
+	word  demSystemName,
+	int32 numDomains, 
+	const std::vector<box>& domains, 
+	int argc, 
+	char* argv[])
 :
-	particles_(prtcl)
+	ControlDict_(),
+	domains_(domains)
+{
+  
+	REPORT(0)<<"\nCreating Control repository . . ."<<endREPORT;
+	Control_ = makeUnique<systemControl>(
+		ControlDict_.startTime(),
+		ControlDict_.endTime(),
+		ControlDict_.saveInterval(),
+		ControlDict_.startTimeName());
+
+}
+
+pFlow::coupling::DEMSystem::~DEMSystem()
 {}
+
+
+pFlow::uniquePtr<pFlow::coupling::DEMSystem>
+	pFlow::coupling::DEMSystem::create(
+		word  demSystemName,
+		int32 numDomains, 
+		const std::vector<box>& domains, 
+		int argc, 
+		char* argv[]
+		)
+{
+	if( wordvCtorSelector_.search(demSystemName) )
+	{
+		return wordvCtorSelector_[demSystemName] (demSystemName, numDomains, domains, argc, argv);
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< demSystemName << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			wordvCtorSelector_
+		);
+		return nullptr;
+	}
+
+	return nullptr;
+}
+

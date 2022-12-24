@@ -196,9 +196,9 @@ public:
 				auto oldCap = pairs.capacity();
 				pairs.increaseCapacityBy(len);
 
-				Info<<"Contact pair container capacity increased from "<<
+				INFORMATION<<"Contact pair container capacity increased from "<<
 						oldCap << " to " 
-						<< pairs.capacity() <<" in cellsWallLevel0."<<endInfo;
+						<< pairs.capacity() <<" in cellsWallLevel0."<<endINFO;
 				
 				Kokkos::fence();
 			}

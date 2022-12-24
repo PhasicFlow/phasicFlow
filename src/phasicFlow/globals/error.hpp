@@ -41,10 +41,10 @@ namespace pFlow
 
 #define fatalErrorInFunction fatalErrorIn(FUNCTION_NAME)
 
-#define notImplemented(functionName) \
+#define Not_Implemented(functionName) \
     notImplementedErrorMessage ((functionName), __FILE__, __LINE__ )
         
-#define notImplementedFunction notImplemented(FUNCTION_NAME);
+#define notImplementedFunction Not_Implemented(FUNCTION_NAME);
 
 #define ioErrorInFile( fileName, lineNumber) \
 	ioErrorMessage( fileName, lineNumber, FUNCTION_NAME, __FILE__, __LINE__ )

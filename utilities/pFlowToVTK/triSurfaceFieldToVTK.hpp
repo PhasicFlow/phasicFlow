@@ -168,7 +168,7 @@ bool convertRealx3TypetriSurfaceField(
 
 	realx3* data = Field.hostVectorAll().data();
 	
-	Report(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endReport;
+	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endREPORT;
 
 	return addRealx3TriSurfaceField(
 		os,
@@ -209,7 +209,7 @@ bool convertTimeFolderTriSurfaceFields(
 	auto& tSurface = triSurfaceObjPtr().getObject<multiTriSurface>();
 
 	// get a list of files in this timeFolder;
-	Report(1)<<"Wrting triSurface mesh/Geometry to vtk file."<<endReport;
+	REPORT(1)<<"Wrting triSurface mesh/Geometry to vtk file."<<endREPORT;
 	if(!triDataToVTK(vtk(), tSurface))
 	{
 		fatalErrorInFunction<<

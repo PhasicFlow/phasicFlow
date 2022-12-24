@@ -62,7 +62,7 @@ template<typename T, typename... properties>
 	using ViewType1D = Kokkos::View<T*,properties...>;
 
 template<typename T, typename... properties>
-	using DualViewType1D = Kokkos::View<T*,properties...>;
+	using DualViewType1D = Kokkos::DualView<T*,properties...>;
 
 template<typename T, typename... properties>
 	using ViewType3D = Kokkos::View<T***,properties...>;

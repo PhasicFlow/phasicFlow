@@ -68,7 +68,7 @@ inline void sort(Vector<T, Allocator>& vec)
 template<typename T, typename Allocator>
 inline int64 find(Vector<T, Allocator>& vec, const T& val)
 {
-	forAll( i,vec)
+	ForAll( i,vec)
 	{
 		if ( vec[i] == val) return static_cast<int64>(i);
 	}

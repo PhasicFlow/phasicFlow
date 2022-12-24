@@ -45,7 +45,7 @@ bool geomObjectToVTK(IOfileHeader& header, real time, fileSystem destPath, word 
 
 	if(!vtk) return false;
 
-	Report(1)<<"Converting geometry to vtk."<<endReport;
+	REPORT(1)<<"Converting geometry to vtk."<<endREPORT;
 
 	if(!dataToVTK(vtk, data) )
 	{

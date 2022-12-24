@@ -37,7 +37,7 @@ pFlow::shapeMixture::shapeMixture
 pFlow::word pFlow::shapeMixture::getNextShapeName()
 {
 	
-	forAll(i, names_)
+	ForAll(i, names_)
 	{
 		if(current_[i]< number_[i])
 		{
@@ -116,7 +116,7 @@ bool pFlow::shapeMixture::read(const dictionary& dict)
     }
 
     current_.clear();
-    forAll(i, numberInserted_)
+    ForAll(i, numberInserted_)
     {
     	current_.push_back(numberInserted_[i]%number_[i]);
     }
@@ -130,7 +130,7 @@ bool pFlow::shapeMixture::write
 ) const
 {
 
-	forAll(i, names_)
+	ForAll(i, names_)
 	{
 		if(!dict.add(names_[i],number_[i]))
 		{

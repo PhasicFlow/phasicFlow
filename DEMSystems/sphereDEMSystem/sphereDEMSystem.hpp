@@ -21,54 +21,40 @@ Licence:
 #ifndef __sphereDEMSystem_hpp__
 #define __sphereDEMSystem_hpp__
 
-#include <array>
-
-#include "systemControl.hpp"
+#include "DEMSystem.hpp"
 #include "property.hpp"
 #include "uniquePtr.hpp"
 #include "geometry.hpp"
 #include "sphereParticles.hpp"
 #include "interaction.hpp"
 #include "Insertions.hpp"
-#include "readControlDict.hpp"
+#include "domainDistribute.hpp"
 
 
-
-
-namespace pFlow
+namespace pFlow::coupling
 {
 
 class sphereDEMSystem
+:
+	public DEMSystem
 {
 protected:
 	
-	readControlDict 						ControlDict_;
+	// protected members 
 
-	uniquePtr<systemControl>		Control_ = nullptr;
+	uniquePtr<property> 		property_ = nullptr;
 
-	uniquePtr<property> 				property_ = nullptr;
-
-	uniquePtr<geometry> 			  geometry_ = nullptr;
+	uniquePtr<geometry> 		geometry_ = nullptr;
 
 	uniquePtr<sphereParticles> 	particles_ = nullptr;
 
 	uniquePtr<sphereInsertion> 	insertion_ = nullptr;
 
-	uniquePtr<interaction> 			interaction_ = nullptr;
+	uniquePtr<interaction> 		interaction_ = nullptr;
 
+	uniquePtr<domainDistribute> particleDistribution_=nullptr;
 
-	int32 									numDomains_;
-
-	VectorDual<box> 				domains_;
-
-	Vector<int32Vector_H> 	parIndexInDomain_;
-
-	
-	auto& Control()
-	{
-		return Control_();
-	}
-
+//  protected member functions
 	auto& Property()
 	{
 		return property_();
@@ -91,27 +77,39 @@ protected:
 
 public:
 
-	sphereDEMSystem(int argc, char* argv[]);
+	TypeInfo("sphereDEMSystem");
 
-	~sphereDEMSystem();
+	sphereDEMSystem(
+		word  demSystemName,
+		int32 numDomains, 
+		const std::vector<box>& domains,
+		int argc, 
+		char* argv[]);
+
+	virtual ~sphereDEMSystem();
 
 	sphereDEMSystem(const sphereDEMSystem&)=delete;
 
 	sphereDEMSystem& operator = (const sphereDEMSystem&)=delete;
 
-	
-	std::array<double,3> g()const
-	{
-		return {
-			Control_->g().x(), 
-			Control_->g().y(), 
-			Control_->g().z()};
-	}
+	add_vCtor(
+		DEMSystem,
+		sphereDEMSystem,
+		word);
 
-	bool inline usingDoulle()const
-	{
-		return pFlow::usingDouble__;
-	}
+
+	 
+	int32 numParInDomain(int32 di)const override;
+
+	
+	std::vector<int32> numParInDomain()const override;
+	
+	
+	virtual 
+	bool iterate(int32 n, real timeToWrite, word timeName) override;
+	
+	virtual 
+	real maxBounndingSphereSize()const override;
 
 };
 

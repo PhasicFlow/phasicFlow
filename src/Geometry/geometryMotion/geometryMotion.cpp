@@ -53,7 +53,7 @@ bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 	triMotionIndex_.reserve( this->surface().capacity() );
 	triMotionIndex_.clear();
 
-	forAll( surfI, motionComponentName_)
+	ForAll( surfI, motionComponentName_)
 	{
 		auto mName = motionComponentName_[surfI];
 		auto mInd = motionModel_.nameToIndex(mName);
@@ -71,7 +71,7 @@ bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 	pointMotionIndex_.reserve(triSurface_.numPoints());
 	pointMotionIndex_.clear();
 
-	forAll(surfI, motionIndex_)
+	ForAll(surfI, motionIndex_)
 	{
 		auto nP = triSurface_.surfNumPoints(surfI);
 		for(int32 i=0; i<nP; i++)

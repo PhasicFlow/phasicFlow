@@ -98,8 +98,8 @@ public:
 				position,
 				diam
 			);
-		Report(2)<<"Contact search algorithm for particle-particle is "<<
-				 greenText(particleContactSearch_().typeName())<<endReport;
+		REPORT(2)<<"Contact search algorithm for particle-particle is "<<
+				 greenText(particleContactSearch_().typeName())<<endREPORT;
 
 
 		auto wmDict = dict().subDict(wmMethod+"Info");
@@ -120,8 +120,8 @@ public:
 				wPoints,
 				wVertices
 				);
-		Report(2)<<"Wall mapping algorithm for particle-wall is "<<
-				 greenText(wallMapping_().typeName())<< endReport;
+		REPORT(2)<<"Wall mapping algorithm for particle-wall is "<<
+				 greenText(wallMapping_().typeName())<< endREPORT;
 
 	}
 

@@ -30,7 +30,7 @@ bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactList
 
 	auto modelDict = this->fileDict().subDict("model");
 
-	Report(1)<<"Createing contact force model . . ."<<endReport;
+	REPORT(1)<<"Createing contact force model . . ."<<endREPORT;
 	forceModel_ = makeUnique<ContactForceModel>(
 		this->numMaterials(),
 		rhoD.deviceVector(),

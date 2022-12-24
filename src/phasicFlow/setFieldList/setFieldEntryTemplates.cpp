@@ -50,8 +50,8 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueNew
 	Type defValue = entry_.secondPartVal<Type>();
 	
 	if(verbose)
-		Report(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<endReport;
+		REPORT(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
+	             " in repository "<< owner.name() <<endREPORT;
 
 	
 	auto& field = 
@@ -85,8 +85,8 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
 	Type defValue = entry_.secondPartVal<Type>();
 	
 	if(verbose)
-		Report(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<endReport;
+		REPORT(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
+	             " in repository "<< owner.name() <<endREPORT;
 
 	// by default we perform operations on host
 	auto& field = 
@@ -129,8 +129,8 @@ void* pFlow::setFieldEntry::setPointFieldSelected
 	Type value = entry_.secondPartVal<Type>();
 
 	if(verbose)
-		Report(2)<< "Setting selected points of " << greenText(fName)
-		 		 << " to value " << cyanText(value) <<endReport;
+		REPORT(2)<< "Setting selected points of " << greenText(fName)
+		 		 << " to value " << cyanText(value) <<endREPORT;
 	
 	
 	auto fieldTypeName = owner.lookupObjectTypeName(fName);
@@ -196,8 +196,8 @@ void* pFlow::setFieldEntry::setPointFieldSelectedStd
 	Type value = entry_.secondPartVal<Type>();
 
 	if(verbose)
-		Report(2)<< "Setting selected points of " << greenText(fName)
-		 		 << " to value " << cyanText(value) <<endReport;
+		REPORT(2)<< "Setting selected points of " << greenText(fName)
+		 		 << " to value " << cyanText(value) <<endREPORT;
 	
 	
 	auto fieldTypeName = owner.lookupObjectTypeName(fName);

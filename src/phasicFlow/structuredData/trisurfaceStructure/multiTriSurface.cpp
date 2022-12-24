@@ -58,7 +58,7 @@ void pFlow::multiTriSurface::calculateVars()
 	
 	pointsStartPos_.push_back(0);
 
-	forAll( i, surfaceNumPoints_)
+	ForAll( i, surfaceNumPoints_)
 	{
 		if(i==0)continue;
 
@@ -72,7 +72,7 @@ void pFlow::multiTriSurface::calculateVars()
 	verticesStartPos_.clear();
 
 	verticesStartPos_.push_back(0);
-	forAll(i, surfaceNumVertices_)
+	ForAll(i, surfaceNumVertices_)
 	{
 		if(i==0)continue;
 		verticesStartPos_.push_back(verticesStartPos_[i-1] + surfaceNumVertices_[i-1]);

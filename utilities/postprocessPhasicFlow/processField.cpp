@@ -115,7 +115,7 @@ pFlow::processField::create(
 		auto objPtr = 
 			dictionaryvCtorSelector_[method]
 			(dict, pToCell, rep);
-		Report(2)<<"Processing/creating " << yellowText(dict.name())<< " with model "<<greenText(method)<<"."<<endReport;
+		REPORT(2)<<"Processing/creating " << yellowText(dict.name())<< " with model "<<greenText(method)<<"."<<endREPORT;
 		return objPtr;
 	}
 	else

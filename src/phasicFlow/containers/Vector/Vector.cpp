@@ -208,7 +208,7 @@ bool pFlow::Vector<T, Allocator>::insertSetElement(
 	
 	auto hIndices = indices.hostView();
 
-	forAll(i, indices)
+	ForAll(i, indices)
 	{
 		auto s = size();
 		auto idx = hIndices[i];
@@ -240,7 +240,7 @@ bool pFlow::Vector<T, Allocator>::insertSetElement(
 
 	auto hIndices = indices.hostView();
 	
-	forAll(i, indices)
+	ForAll(i, indices)
 	{
 		auto s = size();
 		auto idx = hIndices[i];
@@ -271,7 +271,7 @@ bool pFlow::Vector<T, Allocator>::insertSetElement
 {
 	if(indices.size() == 0)return true;
 	
-	forAll(i, indices)
+	ForAll(i, indices)
 	{
 		auto s = size();
 		auto idx = indices[i];
@@ -303,7 +303,7 @@ bool pFlow::Vector<T, Allocator>::insertSetElement
 	if(indices.size() == 0)return true;
 	if(indices.size() != vals.size())return false;
 
-	forAll(i, indices)
+	ForAll(i, indices)
 	{
 		auto s = size();
 		auto idx = indices[i];

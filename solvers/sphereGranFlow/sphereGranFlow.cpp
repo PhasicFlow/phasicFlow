@@ -61,7 +61,7 @@ if(!cmds.parse(argc, argv)) return 0;
 
 	#include "createDEMComponents.hpp"
 	
-	Report(0)<<"\nStart of time loop . . .\n"<<endReport;
+	REPORT(0)<<"\nStart of time loop . . .\n"<<endREPORT;
 
 	do 
 	{
@@ -98,7 +98,7 @@ if(!cmds.parse(argc, argv)) return 0;
 
 	}while(Control++);
 
-	Report(0)<<"\nEnd of time loop.\n"<<endReport;
+	REPORT(0)<<"\nEnd of time loop.\n"<<endREPORT;
 
 // this should be palced in each main 
 #include "finalize.hpp"

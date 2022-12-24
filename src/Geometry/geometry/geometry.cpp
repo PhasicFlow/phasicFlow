@@ -29,7 +29,7 @@ bool pFlow::geometry::findPropertyId()
 	propId.clear();
 
 	uint32 pId;
-	forAll(matI, materialName_)
+	ForAll(matI, materialName_)
 	{
 		
 		if( !wallProperty_.nameToIndex( materialName_[matI], pId ) )
@@ -249,11 +249,11 @@ pFlow::uniquePtr<pFlow::geometry>
 	
 	auto geomModel = angleBracketsNames("geometry", model);
 
-	Report(1)<< "Selecting geometry model . . ."<<endReport;
+	REPORT(1)<< "Selecting geometry model . . ."<<endREPORT;
 	if( systemControlvCtorSelector_.search(geomModel) )
 	{
 		auto objPtr = systemControlvCtorSelector_[geomModel] (control, prop);
-		Report(2)<<"Model "<< greenText(geomModel)<<" is created.\n"<<endReport;
+		REPORT(2)<<"Model "<< greenText(geomModel)<<" is created.\n"<<endREPORT;
 		return objPtr;
 	}
 	else
@@ -285,7 +285,7 @@ pFlow::uniquePtr<pFlow::geometry>
 
 	auto geomModel = angleBracketsNames("geometry", model);
 
-	Report(1)<< "Selecting geometry model . . ."<<endReport;
+	REPORT(1)<< "Selecting geometry model . . ."<<endREPORT;
 
 	if( dictionaryvCtorSelector_.search(geomModel) )
 	{
@@ -298,7 +298,7 @@ pFlow::uniquePtr<pFlow::geometry>
 				motionCompName,
 				propName
 			);
-		Report(2)<<"Model "<< greenText(geomModel)<<" is created.\n"<<endReport;
+		REPORT(2)<<"Model "<< greenText(geomModel)<<" is created.\n"<<endREPORT;
 		return objPtr;
 	}
 	else

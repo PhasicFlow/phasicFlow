@@ -37,7 +37,7 @@ bool pFlow::Insertion<ShapeType>::readInsertionDict
 
 	for(auto& name:regionDicNames)
 	{
-		Report(2)<<"reading insertion region "<< greenText(name)<<endReport;
+		REPORT(2)<<"reading insertion region "<< greenText(name)<<endREPORT;
 		regions_.push_backSafe(dict.subDict(name), shapes_);
 	}
 
@@ -54,7 +54,7 @@ bool pFlow::Insertion<ShapeType>::writeInsertionDict
 
 	if( !this->isActive() ) return true;
 
-	forAll(i,regions_)
+	ForAll(i,regions_)
 	{
 		auto& rgnDict = dict.subDictOrCreate(regions_[i].name());
 
@@ -92,7 +92,7 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 	if(!isActive()) return true;
 	
 
-	forAll(i,regions_)
+	ForAll(i,regions_)
 	{
 		bool insertionOccured = false;
 		auto& rgn = regions_[i];
@@ -106,9 +106,9 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 
 				if(insertionOccured)
 				{
-					Report(0)<<"\nParticle insertion from "<< greenText(rgn.name())<<endReport;
-					Report(1)<< cyanText(pos.size()) << " new particles is being inserted at Time: "<<
-						cyanText(currentTime) <<" s."<<endReport;
+					REPORT(0)<<"\nParticle insertion from "<< greenText(rgn.name())<<endREPORT;
+					REPORT(1)<< cyanText(pos.size()) << " new particles is being inserted at Time: "<<
+						cyanText(currentTime) <<" s."<<endREPORT;
 						
 					if(!particles_.insertParticles(pos, shapes, rgn.setFields()))
 					{
@@ -117,8 +117,8 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 						" to particles. \n";
 						return false;
 					}
-					Report(1)<<"Total number of particles inserted from this region is "<<
-						cyanText(rgn.totalInserted())<<'\n'<<endReport;
+					REPORT(1)<<"Total number of particles inserted from this region is "<<
+						cyanText(rgn.totalInserted())<<'\n'<<endREPORT;
 				}
 				else
 				{
@@ -130,8 +130,8 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 			{
 				if(insertionOccured)
 				{
-					Warning<< "\n fewer number of particles are inserted from region "<< rgn.name() <<
-					" than expected. You may stop the simulation to change settings."<<endWarning;
+					yWARNING<< "\n fewer number of particles are inserted from region "<< rgn.name() <<
+					" than expected. You may stop the simulation to change settings."<<endyWARNING;
 					continue;
 				}
 				else

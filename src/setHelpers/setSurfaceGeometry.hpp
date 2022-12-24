@@ -21,7 +21,7 @@ Licence:
 #ifndef __setSurfaceGeometry_hpp__
 #define __setSurfaceGeometry_hpp__
 
-Report(0)<< "\nCreating surface geometry . . . "<<endReport;
+REPORT(0)<< "\nCreating surface geometry . . . "<<endREPORT;
 auto surfGeometryPtr = pFlow::geometry::create(Control, proprties);
 auto& surfGeometry = surfGeometryPtr();
 

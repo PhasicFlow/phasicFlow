@@ -28,7 +28,7 @@ bool pFlow::InsertionRegion<ShapeType>::checkForContact
 )
 {
 
-	forAll(i, pos)
+	ForAll(i, pos)
 	{
 		if( length(pos[i]-p) < 0.5*(diams[i]+d) ) return true;
 	}
