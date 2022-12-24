@@ -135,7 +135,7 @@ protected:
 
 		realVector etha_n(nElem);
 		realVector etha_t(nElem);
-		forAll(i , kn)
+		ForAll(i , kn)
 		{
 			etha_n[i] = -2.0*log(en[i])*sqrt(kn[i])/
 					sqrt(pow(log(en[i]),2.0)+ pow(Pi,2.0));
@@ -145,7 +145,7 @@ protected:
 		}
 
 		Vector<linearProperties> prop(nElem);
-		forAll(i,kn)
+		ForAll(i,kn)
 		{
 			prop[i] = {kn[i], kt[i], etha_n[i], etha_t[i], mu[i]};
 		}

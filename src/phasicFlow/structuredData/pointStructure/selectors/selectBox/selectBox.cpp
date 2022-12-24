@@ -33,7 +33,7 @@ void pFlow::selectBox::selectAllPointsInBox()
 	selectedPoints_.clear();
 	auto pPos = pStruct().pointPosition().hostVector();
 	
-	forAll(i , pPos)
+	ForAll(i , pPos)
 	{
 		if( box_.isInside( pPos[i] )) selectedPoints_.push_back(i);
 	}

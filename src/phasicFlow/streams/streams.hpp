@@ -34,16 +34,17 @@ namespace pFlow
 #define cyanText(text) 		cyanColor<<text<<defaultColor
 #define boldText(text) 		boldChar<<text<<defaultColor
 
-#define Info pFlow::output<<boldChar<<magentaColor<<"> Info: "<<defaultColor<<magentaColor
-#define endInfo defaultColor<<pFlow::nl
+#define INFORMATION pFlow::output<<boldChar<<magentaColor<<"> INFO: "<<defaultColor<<magentaColor
+#define endINFO defaultColor<<pFlow::nl
 
-#define Report(n) pFlow::output.space(2*n)
-#define endReport pFlow::nl
+#define REPORT(n) pFlow::output.space(2*n)
+#define endREPORT pFlow::nl
 
-#define Warning pFlow::output<<boldChar<<yellowColor<<"> Warning\n"<<defaultColor<<yellowColor<<"  " 
-#define endWarning defaultColor<<pFlow::nl
 
-#define Err pFlow::output<<boldChar<<redColor<<"> Error\n"<<defaultColor<<redColor<<"  " 
-#define endErr defaultColor<<pFlow::nl
+#define yWARNING pFlow::output<<boldChar<<yellowColor<<"> WARNING\n"<<defaultColor<<yellowColor<<"  " 
+#define endyWARNING defaultColor<<pFlow::nl
+
+#define ERR pFlow::output<<boldChar<<redColor<<"> ERROR\n"<<defaultColor<<redColor<<"  " 
+#define endERR defaultColor<<pFlow::nl
 
 #endif

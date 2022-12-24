@@ -31,34 +31,36 @@ namespace pFlow
 #ifdef pFlow_Build_Double 
   #define useDouble 1
 inline const char* floatingPointType__ = "double";
+inline const bool usingDouble__ = true;
 #else
   #define useDouble 0
 inline const char* floatingPointType__ = "float";
+inline const bool usingDouble__ = false;
 #endif
 
 
 // scalars
 #if useDouble
-	using real 	= double;
+  using real  = double;
 #else
-	using real 	= float;
+  using real  = float;
 #endif
 
-using int8 		= signed char;
+using int8    = signed char;
 
-using int16 	=	short int;
+using int16   = short int;
 
-using int32 	=	int;
+using int32   = int;
 
-using int64 	=	long long int;
+using int64   = long long int;
 
 using uint16  = unsigned short int  ;
 
-using uint32 	=	unsigned int;
+using uint32  = unsigned int;
 
 using label   = std::size_t;
 
-using word 		= std::string;
+using word    = std::string;
 
 inline 
 auto floatingPointDescription()

@@ -123,7 +123,7 @@ protected:
 
 		realVector etha_n(nElem);
 		
-		forAll(i , en)
+		ForAll(i , en)
 		{
 			//K_hertz = 4.0/3.0*Yeff*sqrt(Reff); 
 			//-2.2664*log(en)*sqrt(meff*K_hertz)/sqrt( log(en)**2 + 10.1354);
@@ -138,7 +138,7 @@ protected:
 		}
 
 		Vector<nonLinearProperties> prop(nElem);
-		forAll(i,Yeff)
+		ForAll(i,Yeff)
 		{
 			prop[i] = {Yeff[i], Geff[i], etha_n[i], mu[i]};
 		}

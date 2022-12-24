@@ -22,9 +22,9 @@ Licence:
 #define __initialize_hpp__
 
 // initilized and finalize should be placed in onc scope 
-Report(0)<<"Initializing host/device execution spaces . . . \n";
-Report(1)<<"Host execution space is "<< greenText(pFlow::DefaultHostExecutionSpace::name())<<endReport;
-Report(1)<<"Device execution space is "<<greenText(pFlow::DefaultExecutionSpace::name())<<endReport;
+REPORT(0)<<"Initializing host/device execution spaces . . . \n";
+REPORT(1)<<"Host execution space is "<< greenText(pFlow::DefaultHostExecutionSpace::name())<<endREPORT;
+REPORT(1)<<"Device execution space is "<<greenText(pFlow::DefaultExecutionSpace::name())<<endREPORT;
 
 Kokkos::initialize( argc, argv );
 {

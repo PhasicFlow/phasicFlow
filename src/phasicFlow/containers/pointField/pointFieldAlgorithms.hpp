@@ -181,7 +181,7 @@ T maxActive(const pointField<VectorDual, T, MemorySpace>& pField)
 		fill_n(field, field.size(), val);
 		return;
 	}
-	forAll(i, field)
+	ForAll(i, field)
 	{
 		if(field.pStruct().isActive(i)) field[i] = val;
 	}
@@ -191,7 +191,7 @@ template<typename T>
 	void inline fillMarkedDelete( pointField<T>& field, const T& val)
 {
 	if(field.pStruct().allActive())return;
-	forAll(i,field)
+	ForAll(i,field)
 	{
 		if(!field.pStruct().isActive(i)) field[i] = val;
 	}
@@ -215,14 +215,14 @@ inline auto for_eachActive(pointField<T>& field, UnaryPredicate func)
 {
 	if(field.pStruct().allActive())
 	{
-		forAll(i,field)
+		ForAll(i,field)
 		{
 			func(i);
 		}
 	}
 	else
 	{
-		forAll(i, field)
+		ForAll(i, field)
 		{
 			if(field.pStruct().isActive(i)) func(i);
 		}
@@ -235,14 +235,14 @@ inline bool for_eachActiveBreak(pointField<T>& field, UnaryPredicate func)
 {
 	if(field.pStruct().allActive())
 	{
-		forAll(i,field)
+		ForAll(i,field)
 		{
 			if(!func(i))return false;
 		}
 	}
 	else
 	{
-		forAll(i, field)
+		ForAll(i, field)
 		{
 			if(field.pStruct().isActive(i))
 			{
@@ -258,7 +258,7 @@ inline auto for_eachMarkedDelete(pointField<T>& field, UnaryPredicate func)
 {
 	if(field.pStruct().allActive()) return func;
 		
-	forAll(i, field)
+	ForAll(i, field)
 	{
 		if(!field.pStruct().isActive(i)) func(i);
 	}

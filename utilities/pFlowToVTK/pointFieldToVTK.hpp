@@ -105,7 +105,7 @@ bool convertIntTypesPointField(
 
 	int64* data = Field.hostVectorAll().data();
 	
-	Report(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk.\n";
+	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk.\n";
 
 	return addInt64PointField(
 		os,
@@ -136,7 +136,7 @@ bool convertRealTypePointField(
 
 	real* data = Field.hostVectorAll().data();
 	
-	Report(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endReport;
+	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endREPORT;
 
 	return addRealPointField(
 		os,
@@ -166,7 +166,7 @@ bool convertRealx3TypePointField(
 
 	realx3* data = Field.hostVectorAll().data();
 	
-	Report(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endReport;
+	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endREPORT;
 
 	return addRealx3PointField(
 		os,
@@ -324,8 +324,8 @@ bool convertTimeFolderPointFields(
 	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
 	auto* pos = posVec.data();
 
-	Report(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
-					 <<" active particles"<<endReport;
+	REPORT(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
+					 <<" active particles"<<endREPORT;
 	addUndstrcuturedGridField(
 		vtk(),
 		pStruct.numActive(),
@@ -395,8 +395,8 @@ bool convertTimeFolderPointFieldsSelected(
 	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
 	auto* pos = posVec.data();
 
-	Report(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
-					 <<" active particles"<<endReport;
+	REPORT(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
+					 <<" active particles"<<endREPORT;
 	addUndstrcuturedGridField(
 		vtk(),
 		pStruct.numActive(),
@@ -433,7 +433,7 @@ bool convertTimeFolderPointFieldsSelected(
 			}
 			else
 			{
-				Report(1)<<"Could not find "<<yellowText(fieldAddress) <<" skipping . . ."<<endReport;
+				REPORT(1)<<"Could not find "<<yellowText(fieldAddress) <<" skipping . . ."<<endREPORT;
 			}
 		}
 	}

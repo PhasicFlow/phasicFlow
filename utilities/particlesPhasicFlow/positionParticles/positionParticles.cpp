@@ -54,7 +54,7 @@ pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& pos
 			ind++});
 	}
 
-	Info<<"Performing morton sorting."<<endInfo;
+	INFORMATION<<"Performing morton sorting."<<endINFO;
 	std::sort(
 		indMor.begin(),
 		indMor.end(),

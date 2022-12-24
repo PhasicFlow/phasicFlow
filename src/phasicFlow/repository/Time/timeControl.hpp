@@ -158,7 +158,7 @@ public:
 		currentTime_ += dt_;
 		if(screenReport())
 		{
-			Report(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endReport;
+			REPORT(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endREPORT;
 		}
 		// switch outputToFile_ on/off
 		checkForOutputToFile();

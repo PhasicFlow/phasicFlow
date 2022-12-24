@@ -74,9 +74,9 @@ bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
 
 	ContainerType pairs(3*startNum);
 		
-	Report(1)<< "Positioning "<<
+	REPORT(1)<< "Positioning "<<
 		greenText("(Pass #"<< pass+1<<")")<< 
-		": started with "<< startNum <<" points."<<endReport;
+		": started with "<< startNum <<" points."<<endREPORT;
 	
 	fillPoints(startNum, positionHD, flagHD);
 		
@@ -86,13 +86,13 @@ bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
 	int32 numCollisions = findCollisions(pairs, flagHD);
 	
 	
-	Report(2)<< "Positioned " << cyanText(startNum - numCollisions) <<
-	" without collision \n"<<endReport; 
+	REPORT(2)<< "Positioned " << cyanText(startNum - numCollisions) <<
+	" without collision \n"<<endREPORT; 
 
 	if(startNum-numCollisions >= numPoints_ )
 	{
 		
-		Report(1)<<"Selected "<< cyanText(numPoints_)<< " for the final field.\n"<<endReport;
+		REPORT(1)<<"Selected "<< cyanText(numPoints_)<< " for the final field.\n"<<endREPORT;
 
 		positionHD.syncViews();
 		position_.clear();

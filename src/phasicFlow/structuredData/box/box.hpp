@@ -116,6 +116,11 @@ iIstream& operator >>(iIstream& is, box& b);
 FUNCTION_H
 iOstream& operator << (iOstream& os, const box& b);
 
+INLINE_FUNCTION_HD
+box extendBox(const box& b, const realx3& dl)
+{
+	return box(b.minPoint()-dl , b.maxPoint()+dl);
+}
 
 }
 

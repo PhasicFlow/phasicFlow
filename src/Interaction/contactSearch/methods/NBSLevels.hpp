@@ -108,11 +108,11 @@ protected:
 		copy(sizeRangeLevels_, sizeRangeLevelsHost_);
 		copy(maxSizeLevels_, maxSizeLevelsHost_);
 
-		Report(2)<<"Grids with "<< yellowText(numLevels_)<< " levels have been created."<<endReport;
+		REPORT(2)<<"Grids with "<< yellowText(numLevels_)<< " levels have been created."<<endREPORT;
 		for(int32 lvl=0; lvl<numLevels_; lvl++)
 		{
-			Report(3)<<"Cell gird No "<< yellowText(lvl)<<" with size range ("
-				<<sizeRangeLevelsHost_[lvl].first<<","<<sizeRangeLevelsHost_[lvl].second<<"]."<<endReport;
+			REPORT(3)<<"Cell gird No "<< yellowText(lvl)<<" with size range ("
+				<<sizeRangeLevelsHost_[lvl].first<<","<<sizeRangeLevelsHost_[lvl].second<<"]."<<endREPORT;
 		}
 		
 		return true;
@@ -235,8 +235,8 @@ public:
 				
 				pairs.increaseCapacityBy(len);
 
-				Info<< "The contact pair container capacity increased from "<<
-				oldCap << " to "<<pairs.capacity()<<" in NBSLevels."<<endInfo;
+				INFORMATION<< "The contact pair container capacity increased from "<<
+				oldCap << " to "<<pairs.capacity()<<" in NBSLevels."<<endINFO;
 				
 			}
 

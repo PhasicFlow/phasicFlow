@@ -22,7 +22,7 @@ Licence:
 #ifndef __setProperty_hpp__
 #define __setProperty_hpp__
 
-Report(0)<<"\nReading proprties . . . "<<endReport;
+REPORT(0)<<"\nReading proprties . . . "<<endREPORT;
 
 auto proprties = pFlow::property(Control.caseSetup().path()+pFlow::propertyFile__);
 

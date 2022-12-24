@@ -68,7 +68,7 @@ Licence:
 #endif
 
 
-#define forAll(i, container) for(auto i=0; i < container.size(); ++i)
+#define ForAll(i, container) for(auto i=0; i < container.size(); ++i)
 
 #ifdef USE_STD_PARALLEL_ALG
 static inline const bool useStdParallel__ = true;

@@ -79,14 +79,14 @@ pFlow::uniquePtr<pFlow::interaction> pFlow::interaction::create
 			clType);
 
 
-	Report(1)<< "Selecting interaction model..."<<endReport;
+	REPORT(1)<< "Selecting interaction model..."<<endREPORT;
 	if( systemControlvCtorSelector_.search(interactionModel) )
 	{
 		auto objPtr = 
 			systemControlvCtorSelector_[interactionModel]
 			(control, prtcl, geom);
 
-		Report(2)<<"Model "<<greenText(interactionModel)<<" is created."<<endReport;
+		REPORT(2)<<"Model "<<greenText(interactionModel)<<" is created."<<endREPORT;
 		return objPtr;
 	}
 	else

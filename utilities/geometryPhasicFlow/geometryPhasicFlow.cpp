@@ -59,7 +59,7 @@ int main( int argc, char* argv[] )
 
 	#include "setProperty.hpp"
 
-	Report(0)<<"\nReading "<<"createGeometryDict"<<" . . ."<<endReport;
+	REPORT(0)<<"\nReading "<<"createGeometryDict"<<" . . ."<<endREPORT;
 	auto objDict = IOobject::make<dictionary>
 	(
 		objectFile
@@ -87,26 +87,26 @@ int main( int argc, char* argv[] )
 	
 	for(auto& name:wallsDictName)
 	{
-		Report(1)<<"Creating wall "<<greenText(name)<<" from file dictionary . . . "<<endReport;
+		REPORT(1)<<"Creating wall "<<greenText(name)<<" from file dictionary . . . "<<endREPORT;
 		auto wallPtr = Wall::create( surfacesDict.subDict(name));
 		auto& wall = wallPtr();
-		Report(1)<<"wall type is "<<greenText(wall.typeName())<<'\n'<<endReport;		
+		REPORT(1)<<"wall type is "<<greenText(wall.typeName())<<'\n'<<endREPORT;		
 
 		surface.addTriSurface(wall.name(), wall.triangles());
 		materials.push_back(wall.materialName());
 		motion.push_back(wall.motionName());
 	}
 
-	Report(1)<<"Selected wall materials are "<<cyanText(materials)<<'\n'<<endReport;
+	REPORT(1)<<"Selected wall materials are "<<cyanText(materials)<<'\n'<<endREPORT;
 		
-	Report(0)<< "\nCreating geometry . . ."<<endReport;
+	REPORT(0)<< "\nCreating geometry . . ."<<endREPORT;
 	auto geomPtr = geometry::create(Control, proprties, geometryDict, surface, motion, materials);
-	Report(1)<< "geometry type is "<< greenText(geomPtr().typeName())<<endReport;
+	REPORT(1)<< "geometry type is "<< greenText(geomPtr().typeName())<<endREPORT;
 	
-	Report(1)<< "Writing geometry to folder "<< geomPtr().path()<<endl;
+	REPORT(1)<< "Writing geometry to folder "<< geomPtr().path()<<endREPORT;
 	geomPtr().write();
 
-	Report(0)<< greenText("\nFinished successfully.\n");
+	REPORT(0)<< greenText("\nFinished successfully.\n");
 
 // this should be palced in each main 
 #include "finalize.hpp"

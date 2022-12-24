@@ -122,7 +122,7 @@ protected:
 
 
 		Vector<nonLinearProperties> prop(nElem);
-		forAll(i,Yeff)
+		ForAll(i,Yeff)
 		{
 			prop[i] = {Yeff[i], Geff[i], etha_n[i], mu[i]};
 		}

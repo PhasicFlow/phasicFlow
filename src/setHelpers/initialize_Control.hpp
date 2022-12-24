@@ -24,7 +24,7 @@ Licence:
 // initilized and finalize should be placed in onc scope 
 #include "initialize.hpp"
 
-Report(0)<<"\nCreating Control repository . . ."<<endReport;
+REPORT(0)<<"\nCreating Control repository . . ."<<endREPORT;
 pFlow::uniquePtr<pFlow::systemControl> ControlPtr = nullptr;
 
 if(isCoupling)

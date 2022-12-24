@@ -29,20 +29,20 @@ pFlow::postprocess::postprocess(systemControl& control)
 	control_(control),
 	dict_(postprocessFile__, control_.settings().path()+postprocessFile__)
 {
-	Report(1)<<"Reading numberBased dictionary ..."<<endReport;
+	REPORT(1)<<"Reading numberBased dictionary ..."<<endREPORT;
 	auto nbDict = dict_.subDictOrCreate("numberBased");
 
 	numberBasedDictNames_ = dict_.subDictOrCreate("numberBased").dictionaryKeywords();
 	if(!numberBasedDictNames_.empty())
 	{
-		Report(1)<< "numberBased dictionary contains " << yellowText(numberBasedDictNames_)<<endReport<<endl;	
+		REPORT(1)<< "numberBased dictionary contains " << yellowText(numberBasedDictNames_)<<endREPORT<<endl;	
 	}
 	
 
 	weightBasedDictNames_ = dict_.subDictOrCreate("weightBased").dictionaryKeywords();
 	if(!weightBasedDictNames_.empty())
 	{
-		Report(1)<< "numberBased dictionary contains " << yellowText(weightBasedDictNames_)<<endReport<<endl;	
+		REPORT(1)<< "numberBased dictionary contains " << yellowText(weightBasedDictNames_)<<endREPORT<<endl;	
 	}
 	
 
@@ -55,7 +55,7 @@ bool pFlow::postprocess::processTimeFolder(real time, const word& tName, const f
 	
 	time_ = time;
 
-	Report(0)<<"Working on time folder "<< cyanText(time)<<endReport; 
+	REPORT(0)<<"Working on time folder "<< cyanText(time)<<endREPORT; 
 	timeFolderReposiory_ = 
 		makeUnique<repository>
 		(
@@ -64,7 +64,7 @@ bool pFlow::postprocess::processTimeFolder(real time, const word& tName, const f
 			&control_
 		);
 	
-	Report(1)<<"Reading pointStructure"<<endReport;
+	REPORT(1)<<"Reading pointStructure"<<endREPORT;
 	timeFolderReposiory().emplaceObject<pointStructure>(
 		objectFile
 		(
@@ -75,7 +75,7 @@ bool pFlow::postprocess::processTimeFolder(real time, const word& tName, const f
 		));	
 
 	
-	Report(1)<<"Creating mesh and point to cell mapper"<<endReport;
+	REPORT(1)<<"Creating mesh and point to cell mapper"<<endREPORT;
 	pointToCell_ = makeUnique<pointRectCell>(
 		dict_.subDict("rectMesh"),
 		timeFolderReposiory().lookupObject<pointStructure>(pointStructureFile__),
@@ -125,11 +125,11 @@ bool pFlow::postprocess::writeToVTK(fileSystem destPath, word bName)const
 
 	if(!vtk) return false;
 
-	Report(1)<<"Writing processed fields to vtk file..."<<endReport;
+	REPORT(1)<<"Writing processed fields to vtk file..."<<endREPORT;
 	// mesh
 	pointToCell_->mesh().writeToVtk(vtk());
 
-	forAll( i, processedFields_)
+	ForAll( i, processedFields_)
 	{
 		
 		if( !processedFields_[i].writeToVTK(vtk()))

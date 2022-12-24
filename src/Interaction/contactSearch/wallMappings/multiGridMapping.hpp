@@ -115,8 +115,8 @@ public:
 			)
 	{
 
-		Report(3)<<"Multi-grid wall mapping with "<< 
-			yellowText(numLevels)<<" levels has been created."<<endReport;
+		REPORT(3)<<"Multi-grid wall mapping with "<< 
+			yellowText(numLevels)<<" levels has been created."<<endREPORT;
 	}
 
 

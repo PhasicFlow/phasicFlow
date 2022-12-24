@@ -84,13 +84,13 @@ bool pFlow::sphereParticles::beforeIteration()
 	
 	intPredictTimer_.start();
 	
-	//Info<<"before dyn predict"<<endInfo;
+	//INFO<<"before dyn predict"<<endINFO;
 		dynPointStruct_.predict(this->dt(), accelertion_);
-	//Info<<"after dyn predict"<<endInfo;
+	//INFO<<"after dyn predict"<<endINFO;
 
-	//Info<<"before revel predict"<<endInfo;
+	//INFO<<"before revel predict"<<endINFO;
 		rVelIntegration_().predict(this->dt(),rVelocity_, rAcceleration_);
-	//Info<<"after rvel predict"<<endInfo;
+	//INFO<<"after rvel predict"<<endINFO;
 
 	intPredictTimer_.end();
 
@@ -102,7 +102,7 @@ bool pFlow::sphereParticles::iterate()
 {
 
 	accelerationTimer_.start();
-	//Info<<"before accelerationTimer_ "<<endInfo;
+	//INFO<<"before accelerationTimer_ "<<endINFO;
 		pFlow::sphereParticlesKernels::acceleration(
 			control().g(),
 			mass().deviceVectorAll(),
@@ -116,11 +116,11 @@ bool pFlow::sphereParticles::iterate()
 	accelerationTimer_.end();
 	
 	intCorrectTimer_.start();
-	//Info<<"before correct dyn "<<endInfo;
+	//INFO<<"before correct dyn "<<endINFO;
 		dynPointStruct_.correct(this->dt(), accelertion_);
-	//Info<<"after correct dyn "<<endInfo;
+	//INFO<<"after correct dyn "<<endINFO;
 		rVelIntegration_().correct(this->dt(), rVelocity_, rAcceleration_);
-	//Info<<"after correct rvel "<<endInfo;
+	//INFO<<"after correct rvel "<<endINFO;
 	intCorrectTimer_.end();
 	
 	return true;
@@ -158,7 +158,7 @@ bool pFlow::sphereParticles::insertSphereParticles(
 	real d, m, I;
 	int8 pId;
 
-	forAll(i, names )
+	ForAll(i, names )
 	{
 		if (diameterMassInertiaPropId(names[i], d, m, I, pId))
 		{
@@ -280,8 +280,8 @@ pFlow::sphereParticles::sphereParticles(
 
 {
 
-	Report(1)<<"Creating integration method "<<greenText(this->integrationMethod())
-		  << " for rotational velocity."<<endReport;
+	REPORT(1)<<"Creating integration method "<<greenText(this->integrationMethod())
+		  << " for rotational velocity."<<endREPORT;
 		  
 	rVelIntegration_ = 
 		integration::create(
@@ -315,7 +315,7 @@ pFlow::sphereParticles::sphereParticles(
 			rvel.push_back( hrVel[index(i)]);
 		}
 		
-		Report(2)<< "Initializing the required vectors for rotational velocity integratoin\n "<<endReport;
+		REPORT(2)<< "Initializing the required vectors for rotational velocity integratoin\n "<<endREPORT;
 		rVelIntegration_->setInitialVals(indexHD, rvel);
 
 	}
@@ -400,9 +400,9 @@ bool pFlow::sphereParticles::insertParticles
 
 	auto activeR = this->activeRange();
 
-	Report(1)<< "Active range is "<<yellowText("["<<activeR.first<<", "<<activeR.second<<")")<<
+	REPORT(1)<< "Active range is "<<yellowText("["<<activeR.first<<", "<<activeR.second<<")")<<
 	" and number of active points is "<< cyanText(this->numActive())<<
-	" and pointStructure capacity is "<<cyanText(this->capacity())<<endReport;
+	" and pointStructure capacity is "<<cyanText(this->capacity())<<endREPORT;
 
 	return true;
 		

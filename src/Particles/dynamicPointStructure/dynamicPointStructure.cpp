@@ -56,8 +56,8 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 
 	this->subscribe(pStruct());
 
-	Report(1)<< "Creating integration method "<<
-		greenText(integrationMethod_)<<" for dynamicPointStructure."<<endReport;
+	REPORT(1)<< "Creating integration method "<<
+		greenText(integrationMethod_)<<" for dynamicPointStructure."<<endREPORT;
 
 	integrationPos_ = integration::create(
 		"pStructPosition",
@@ -110,10 +110,10 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 	//output<< "pos "<< pos<<endl;
 	//output<< "vel "<< vel<<endl;
 
-	Report(2)<< "Initializing the required vectors for position integratoin "<<endReport;
+	REPORT(2)<< "Initializing the required vectors for position integratoin "<<endREPORT;
 	integrationPos_->setInitialVals(indexHD, pos);
 
-	Report(2)<< "Initializing the required vectors for velocity integratoin\n "<<endReport;
+	REPORT(2)<< "Initializing the required vectors for velocity integratoin\n "<<endREPORT;
 	integrationVel_->setInitialVals(indexHD, vel);
 }
 
