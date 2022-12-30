@@ -21,81 +21,98 @@ Licence:
 #include "domainDistribute.hpp"
 
 
-
-pFlow::coupling::domainDistribute::domainDistribute(
-	int32 numDomains, 
-	const Vector<box>& domains_,
-	real maxBoundingBox)
-:
-numDomains_(numDomains),
-extDomains_("extDomains", numDomains),
-particlesInDomains_("particlesInDomains", numDomains),
-numParInDomain_("numParInDomain", numDomains, 0),
-maxBoundingBoxSize_(maxBoundingBox)
+void pFlow::domainDistribute::clcDomains(const std::vector<box>& domains)
 {
-
 	realx3 dl = domainExtension_ * maxBoundingBoxSize_;
 
 	for(int32 i=0; i<numDomains_; i++)
 	{
-		extDomains_[i] = extendBox(domains_[i], dl);
+		extDomains_[i] = extendBox(domains[i], dl);
 	}
 }
 
-bool pFlow::coupling::domainDistribute::locateParticles(
+
+pFlow::domainDistribute::domainDistribute(
+	const Vector<box>& domains,
+	real maxBoundingBox)
+:
+numDomains_(domains.size()),
+extDomains_("extDomains", numDomains_),
+particlesInDomains_("particlesInDomains", numDomains_),
+numParInDomain_("numParInDomain", numDomains_, 0),
+maxBoundingBoxSize_(maxBoundingBox)
+{
+
+	clcDomains(domains);
+}
+
+bool pFlow::domainDistribute::locateParticles(
 		ViewType1D<realx3,HostSpace> points, includeMask mask)
+{
+	range active = mask.activeRange();
+	auto numInDomain = numParInDomain_.deviceVectorAll();
+	auto numDomains = numDomains_;
+
+	using policy = Kokkos::RangePolicy<
+		DefaultHostExecutionSpace,
+		Kokkos::IndexType<int32> >;
+
+	Kokkos::parallel_for("locateParticles",
+		policy(active.first, active.second),
+		LAMBDA_HD(int32 i){
+			if(mask(i))
+			{
+				for(int32 di=0; di<numDomains; di++)
+				{
+					if(extDomains_[i].isInside(points[i]))
+						Kokkos::atomic_add(&numInDomain[di],1);
+				}
+			}
+		});
+	Kokkos::fence();
+
+	
+	for(int32 i=0; i<numDomains_; i++)
 	{
-		range active = mask.activeRange();
-		auto numInDomain = numParInDomain_.deviceVectorAll();
-		auto numDomains = numDomains_;
-
-		using policy = Kokkos::RangePolicy<
-			DefaultHostExecutionSpace,
-			Kokkos::IndexType<int32> >;
-
-		Kokkos::parallel_for("locateParticles",
-			policy(active.first, active.second),
-			LAMBDA_HD(int32 i){
-				if(mask(i))
-				{
-					for(int32 di=0; di<numDomains; di++)
-					{
-						if(extDomains_[i].isInside(points[i]))
-							Kokkos::atomic_add(&numInDomain[di],1);
-					}
-				}
-			});
-		Kokkos::fence();
-
-		
-		for(int32 i=0; i<numDomains_; i++)
-		{
-			particlesInDomains_[i].resize(numParInDomain_[i]);
-		}
-
-		numParInDomain_.fill(0);
-
-		auto particlesInDomainsPtr = particlesInDomains_.data();
-
-		Kokkos::parallel_for("locateParticles",
-			policy(active.first, active.second),
-			LAMBDA_HD(int32 i){
-				if(mask(i))
-				{
-					for(int32 di=0; di<numDomains; di++)
-					{
-						if(extDomains_[i].isInside(points[i]))
-						{
-
-							particlesInDomainsPtr[di][numInDomain[di]] = i;
-							Kokkos::atomic_add(&numInDomain[di],1);
-
-						}
-					}
-				}
-			});
-		Kokkos::fence();		
-
-
-		return true;
+		particlesInDomains_[i].resize(numParInDomain_[i]);
 	}
+
+	numParInDomain_.fill(0);
+
+	auto particlesInDomainsPtr = particlesInDomains_.data();
+
+	Kokkos::parallel_for("locateParticles",
+		policy(active.first, active.second),
+		LAMBDA_HD(int32 i){
+			if(mask(i))
+			{
+				for(int32 di=0; di<numDomains; di++)
+				{
+					if(extDomains_[i].isInside(points[i]))
+					{
+
+						particlesInDomainsPtr[di][numInDomain[di]] = i;
+						Kokkos::atomic_add(&numInDomain[di],1);
+
+					}
+				}
+			}
+		});
+	Kokkos::fence();		
+
+
+	return true;
+}
+
+bool pFlow::domainDistribute::changeDomainsSize(
+	const std::vector<box>& domains)
+{
+	if(domains.size()!= numDomains_)
+	{
+		fatalErrorInFunction<<"number of new domians differs"<<endl;
+		return false;
+	}
+
+	clcDomains(domains);
+	return true;
+}

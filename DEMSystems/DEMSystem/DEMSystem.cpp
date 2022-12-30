@@ -21,9 +21,8 @@ Licence:
 #include "DEMSystem.hpp"
 
 
-pFlow::coupling::DEMSystem::DEMSystem(
+pFlow::DEMSystem::DEMSystem(
 	word  demSystemName,
-	int32 numDomains, 
 	const std::vector<box>& domains, 
 	int argc, 
 	char* argv[])
@@ -39,16 +38,17 @@ pFlow::coupling::DEMSystem::DEMSystem(
 		ControlDict_.saveInterval(),
 		ControlDict_.startTimeName());
 
+	timers_ = makeUnique<Timers>(demSystemName, &Control_().timers());
+
 }
 
-pFlow::coupling::DEMSystem::~DEMSystem()
+pFlow::DEMSystem::~DEMSystem()
 {}
 
 
-pFlow::uniquePtr<pFlow::coupling::DEMSystem>
-	pFlow::coupling::DEMSystem::create(
+pFlow::uniquePtr<pFlow::DEMSystem>
+	pFlow::DEMSystem::create(
 		word  demSystemName,
-		int32 numDomains, 
 		const std::vector<box>& domains, 
 		int argc, 
 		char* argv[]
@@ -56,7 +56,7 @@ pFlow::uniquePtr<pFlow::coupling::DEMSystem>
 {
 	if( wordvCtorSelector_.search(demSystemName) )
 	{
-		return wordvCtorSelector_[demSystemName] (demSystemName, numDomains, domains, argc, argv);
+		return wordvCtorSelector_[demSystemName] (demSystemName, domains, argc, argv);
 	}
 	else
 	{
