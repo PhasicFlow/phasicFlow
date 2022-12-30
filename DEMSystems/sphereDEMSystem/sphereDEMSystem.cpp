@@ -21,14 +21,13 @@ Licence:
 #include "sphereDEMSystem.hpp"
 
 
-pFlow::coupling::sphereDEMSystem::sphereDEMSystem(
+pFlow::sphereDEMSystem::sphereDEMSystem(
 		word  demSystemName,
-		int32 numDomains, 
 		const std::vector<box>& domains,
 		int argc, 
 		char* argv[])
 :
-	DEMSystem(demSystemName, numDomains, domains, argc, argv)
+	DEMSystem(demSystemName, domains, argc, argv)
 {
   
 	REPORT(0)<<"Initializing host/device execution spaces . . . \n";
@@ -51,19 +50,6 @@ pFlow::coupling::sphereDEMSystem::sphereDEMSystem(
 	particles_ = makeUnique<sphereParticles>(Control(), Property());
 
 
-	//REPORT(0)<<"\nCreating particle insertion for spheres. . ."<<endREPORT;
-	/*insertion_ = 
-	Control().caseSetup().emplaceObject<sphereInsertion>(
-		objectFile(
-			insertionFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_ALWAYS
-			),
-		sphParticles,
-		sphParticles.shapes()
-	);*/
-
 	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
 	interaction_ = interaction::create(
 		Control(),
@@ -73,11 +59,11 @@ pFlow::coupling::sphereDEMSystem::sphereDEMSystem(
 	real minD, maxD;
 	particles_->boundingSphereMinMax(minD, maxD);
 
-	particleDistribution_ = makeUnique<domainDistribute>(numDomains, domains, maxD);
+	particleDistribution_ = makeUnique<domainDistribute>(domains, maxD);
 
 }
 
-pFlow::coupling::sphereDEMSystem::~sphereDEMSystem()
+pFlow::sphereDEMSystem::~sphereDEMSystem()
 {
 	interaction_.reset();
 	insertion_.reset();
@@ -93,13 +79,13 @@ pFlow::coupling::sphereDEMSystem::~sphereDEMSystem()
 
 
 pFlow::int32 
-	pFlow::coupling::sphereDEMSystem::numParInDomain(int32 di)const
+	pFlow::sphereDEMSystem::numParInDomain(int32 di)const
 {
 	return particleDistribution_().numParInDomain(di);
 }
 
 std::vector<pFlow::int32> 
-	pFlow::coupling::sphereDEMSystem::numParInDomain()const
+	pFlow::sphereDEMSystem::numParInDomain()const
 {
 	const auto& distribute = particleDistribution_();
 	int32 numDomains = distribute.numDomains();
@@ -112,8 +98,31 @@ std::vector<pFlow::int32>
 	return nums;
 }
 
+pFlow::span<const pFlow::int32> 
+pFlow::sphereDEMSystem::parIndexInDomain(int32 di)const
+{
+	return particleDistribution_->particlesInDomain(di);
+}
 
-bool pFlow::coupling::sphereDEMSystem::iterate(
+bool pFlow::sphereDEMSystem::changeDomainsSizeUpdateParticles(
+	const std::vector<box>& domains)
+{
+	if( !particleDistribution_->changeDomainsSize(domains))
+		return false;
+
+	// should update list of particles here 
+	//************************************************************************************************
+	notImplementedFunction;
+	return false;	
+}
+
+bool pFlow::sphereDEMSystem::updateParticles()
+{
+	notImplementedFunction;
+	return false;
+}
+
+bool pFlow::sphereDEMSystem::iterate(
 	int32 n, 
 	real timeToWrite, 
 	word timeName) 
@@ -122,7 +131,7 @@ bool pFlow::coupling::sphereDEMSystem::iterate(
 }
 
 pFlow::real 
-	pFlow::coupling::sphereDEMSystem::maxBounndingSphereSize()const
+	pFlow::sphereDEMSystem::maxBounndingSphereSize()const
 {
 	real minD, maxD;
 	particles_->boundingSphereMinMax(minD, maxD);

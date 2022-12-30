@@ -24,13 +24,14 @@ Licence:
 #include <vector>
 
 #include "types.hpp"
+#include "span.hpp"
 #include "virtualConstructor.hpp"
 #include "uniquePtr.hpp"
 #include "systemControl.hpp"
 #include "readControlDict.hpp"
 
 
-namespace pFlow::coupling
+namespace pFlow
 {
 
 
@@ -44,6 +45,7 @@ protected:
 
 	std::vector<box> 				domains_;
 
+	uniquePtr<Timers> 				timers_;
 
 	// methods 
 	auto& Control()
@@ -58,7 +60,6 @@ public:
 
 	DEMSystem(
 		word  demSystemName,
-		int32 numDomains, 
 		const std::vector<box>& domains, 
 		int argc, 
 		char* argv[]);
@@ -74,14 +75,12 @@ public:
 		word,
 		(
 			word  demSystemName,
-			int32 numDomains, 
 			const std::vector<box>& domains, 
 			int argc, 
 			char* argv[]
 		),
 		(
 			demSystemName,
-			numDomains, 
 			domains, 
 			argc, 
 			argv
@@ -97,6 +96,11 @@ public:
 		return pFlow::usingDouble__;
 	}
 
+	Timers& timers()
+	{
+		return Control_->timers();
+	}
+
 	virtual 
 	int32 numParInDomain(int32 di)const = 0;
 	
@@ -104,16 +108,26 @@ public:
 	std::vector<int32> numParInDomain()const = 0;
 
 	virtual 
-	bool iterate(int32 n, real timeToWrite, word timeName) = 0;
+	span<const int32> parIndexInDomain(int32 di)const = 0;
+
+	virtual 
+	bool changeDomainsSizeUpdateParticles(const std::vector<box>& domains) = 0;
+
+	virtual
+	bool updateParticles() = 0;
 	
 	virtual 
 	real maxBounndingSphereSize()const = 0;
+
+	virtual 
+	bool iterate(int32 n, real timeToWrite, word timeName) = 0;
+	
+	
 
 	static 
 	uniquePtr<DEMSystem>
 		create(
 			word  demSystemName,
-			int32 numDomains, 
 			const std::vector<box>& domains, 
 			int argc, 
 			char* argv[]);

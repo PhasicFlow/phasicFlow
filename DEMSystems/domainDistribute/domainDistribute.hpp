@@ -26,7 +26,7 @@ Licence:
 #include "VectorSingles.hpp"
 #include "pointStructure.hpp"
 
-namespace pFlow::coupling
+namespace pFlow
 {
 
 class domainDistribute
@@ -46,20 +46,17 @@ protected:
 
 	real maxBoundingBoxSize_;
 
-	int32 lastUpdateIter_ = 0;
-
-	int32 updateInterval_ = 1;
-
 	real domainExtension_ = 1.0;
 
 	using includeMask = typename pointStructure::activePointsHost;
 
+	void clcDomains(const std::vector<box>& domains);
+
 public:
 
 	domainDistribute(
-		int32 numDomains, 
-		const Vector<box>& domains_,
-		real maxBoundinBox);
+		const Vector<box>& domains,
+		real maxBoundingBox);
 
 	~domainDistribute()=default;
 
@@ -76,6 +73,18 @@ public:
 	{
 		return numParInDomain_[di];
 	}
+
+	span<const int32> particlesInDomain(int32 di)const
+	{
+		return
+		span<const int32>(
+			particlesInDomains_[di].hostVectorAll().data(),
+			numParInDomain_[di]
+			);
+	}
+
+	bool changeDomainsSize(const std::vector<box>& domains);
+	
 
 	//template<typename includeMask>
 	bool locateParticles(

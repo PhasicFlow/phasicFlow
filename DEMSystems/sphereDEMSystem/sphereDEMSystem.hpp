@@ -31,7 +31,7 @@ Licence:
 #include "domainDistribute.hpp"
 
 
-namespace pFlow::coupling
+namespace pFlow
 {
 
 class sphereDEMSystem
@@ -81,7 +81,6 @@ public:
 
 	sphereDEMSystem(
 		word  demSystemName,
-		int32 numDomains, 
 		const std::vector<box>& domains,
 		int argc, 
 		char* argv[]);
@@ -100,15 +99,17 @@ public:
 
 	 
 	int32 numParInDomain(int32 di)const override;
-
 	
 	std::vector<int32> numParInDomain()const override;
-	
-	
-	virtual 
+
+	span<const int32> parIndexInDomain(int32 di)const override;
+
+	bool changeDomainsSizeUpdateParticles(const std::vector<box>& domains) override;
+
+	bool updateParticles() override;	
+
 	bool iterate(int32 n, real timeToWrite, word timeName) override;
 	
-	virtual 
 	real maxBounndingSphereSize()const override;
 
 };

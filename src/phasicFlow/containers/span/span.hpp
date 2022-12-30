@@ -133,25 +133,25 @@ public:
     INLINE_FUNCTION_HD
     T& operator[](int32 i)
     {
-    	data_[i];
+    	return data_[i];
     }
 
     INLINE_FUNCTION_HD
     const T& operator[](int32 i)const
     {
-    	data_[i];
+    	return data_[i];
     }
 
     INLINE_FUNCTION_HD
     T& operator[](label i)
     {
-    	data_[i];
+    	return data_[i];
     }
 
     INLINE_FUNCTION_HD
     const T& operator[](label i)const
     {
-    	data_[i];
+    	return data_[i];
     }
 
 };
