@@ -83,7 +83,10 @@ public:
 			);
 	}
 
-	bool changeDomainsSize(const std::vector<box>& domains);
+	bool changeDomainsSize(
+		real extentFraction, 
+		real maxBoundingBoxSize, 
+		const std::vector<box>& domains);
 	
 
 	//template<typename includeMask>

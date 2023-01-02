@@ -108,6 +108,10 @@ public:
 		return tmp;
 	}
 
+	real startTime()const
+	{
+		return startTime_;
+	}
 
 	real currentTime() const 
 	{

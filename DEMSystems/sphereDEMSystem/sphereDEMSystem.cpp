@@ -28,17 +28,8 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 		char* argv[])
 :
 	DEMSystem(demSystemName, domains, argc, argv)
-{
-  
-	REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-	REPORT(1)<<"Host execution space is "<< greenText(DefaultHostExecutionSpace::name())<<endREPORT;
-	REPORT(1)<<"Device execution space is "<<greenText(DefaultExecutionSpace::name())<<endREPORT;
-
- 	// initialize Kokkos
-	Kokkos::initialize( argc, argv );  
-  
+{ 
 	
-
 	REPORT(0)<<"\nReading proprties . . . "<<endREPORT;
 	property_ = makeUnique<property>(
     	Control().caseSetup().path()+propertyFile__);
@@ -47,7 +38,7 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 	geometry_ = geometry::create(Control(), Property());
 
 	REPORT(0)<<"\nReading sphere particles . . ."<<endREPORT;
-	particles_ = makeUnique<sphereParticles>(Control(), Property());
+	particles_ = makeUnique<sphereFluidParticles>(Control(), Property());
 
 
 	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
@@ -65,18 +56,35 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 
 pFlow::sphereDEMSystem::~sphereDEMSystem()
 {
-	interaction_.reset();
-	insertion_.reset();
-	particles_.reset();
-	geometry_.reset();
-	property_.reset();
-	Control_.reset();
-
-	output<< "\nFinalizing host/device execution space ...."<<endl;
-	Kokkos::finalize();
+	
 }
 
+bool pFlow::sphereDEMSystem::updateParticleDistribution(
+	real extentFraction,
+	const std::vector<box> domains)
+{
 
+	if(!particleDistribution_->changeDomainsSize(
+		extentFraction,
+		maxBounndingSphereSize(),
+		domains))
+	{
+		fatalErrorInFunction<<
+		"cannot change the domain size"<<endl;
+		return false;
+	}
+
+	if(!particleDistribution_->locateParticles(
+			parPosition_, 
+			particles_->pStruct().activePointsMaskH()))
+	{
+		fatalErrorInFunction<<
+		"error in locating particles among sub-domains"<<endl;
+		return false;
+	}
+
+	return true;
+}
 
 pFlow::int32 
 	pFlow::sphereDEMSystem::numParInDomain(int32 di)const
@@ -104,23 +112,53 @@ pFlow::sphereDEMSystem::parIndexInDomain(int32 di)const
 	return particleDistribution_->particlesInDomain(di);
 }
 
-bool pFlow::sphereDEMSystem::changeDomainsSizeUpdateParticles(
-	const std::vector<box>& domains)
-{
-	if( !particleDistribution_->changeDomainsSize(domains))
-		return false;
-
-	// should update list of particles here 
-	//************************************************************************************************
-	notImplementedFunction;
-	return false;	
+pFlow::span<pFlow::real> pFlow::sphereDEMSystem::parDiameter() 
+{	
+	return span<real>(parDiameter_.data(), parDiameter_.size());
 }
 
-bool pFlow::sphereDEMSystem::updateParticles()
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parVelocity()  
 {
-	notImplementedFunction;
-	return false;
+	return span<realx3>(parVelocity_.data(), parVelocity_.size());
 }
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parPosition()  
+{
+	return span<realx3>(parPosition_.data(), parPosition_.size());
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidForce() 
+{
+	auto& hVec =  particles_->fluidTorqueHostAll();
+	return span<realx3>(hVec.data(), hVec.size());
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidTorque() 
+{
+	auto& hVec =  particles_->fluidForceHostAll();
+	return span<realx3>(hVec.data(), hVec.size());
+}
+
+bool pFlow::sphereDEMSystem::sendFluidForceToDEM() 
+{
+	particles_->fluidForceHostUpdatedSync();
+	return true;
+}
+
+bool pFlow::sphereDEMSystem::sendFluidTorqueToDEM()
+{
+	particles_->fluidTorqueHostUpdatedSync();
+	return true;
+}
+
+bool pFlow::sphereDEMSystem::beforeIteration()
+{
+	parVelocity_ = particles_->dynPointStruct().velocityHostAll();
+	parPosition_ = particles_->dynPointStruct().pointPositionHostAll();
+	parDiameter_ = particles_->diameter().hostVectorAll();
+	return true;
+}
+
 
 bool pFlow::sphereDEMSystem::iterate(
 	int32 n, 

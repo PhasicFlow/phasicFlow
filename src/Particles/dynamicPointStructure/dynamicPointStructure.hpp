@@ -100,6 +100,16 @@ public:
 		return velocity_;
 	}
 
+	inline auto velocityHostAll()
+	{
+		return velocity_.hostVectorAll();
+	}
+
+	inline auto pointPositionHostAll()
+	{
+		return pStruct_.pointPositionHostAll();
+	}
+
 	auto markDeleteOutOfBox(const box& domain)
 	{
 		return pStruct_.markDeleteOutOfBox(domain);

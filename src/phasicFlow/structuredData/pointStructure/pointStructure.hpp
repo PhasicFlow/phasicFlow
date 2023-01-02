@@ -255,6 +255,12 @@ public:
 		FUNCTION_H
 		const int8Field_HD& pointFlag()const;
 
+		INLINE_FUNCTION_H
+		auto pointPositionHostAll()
+		{
+			return pointPosition_.hostVectorAll();
+		}
+
 		// - size of data structure
 		FUNCTION_H
 		label size()const;

@@ -67,7 +67,7 @@ protected:
 	realx3PointField_D&     contactForce_;
 
 
-	realx3PointField_D&     contactTorque_;
+	realx3PointField_D&     contactTorque_;	
 
 	
 	// - object handling particle id
