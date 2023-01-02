@@ -18,6 +18,9 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+// from phasicFlow
+#include "KokkosTypes.hpp"
+
 #include "DEMSystem.hpp"
 
 
@@ -27,10 +30,16 @@ pFlow::DEMSystem::DEMSystem(
 	int argc, 
 	char* argv[])
 :
-	ControlDict_(),
-	domains_(domains)
+	ControlDict_()
 {
   
+  REPORT(0)<<"Initializing host/device execution spaces . . . \n";
+	REPORT(1)<<"Host execution space is "<< greenText(DefaultHostExecutionSpace::name())<<endREPORT;
+	REPORT(1)<<"Device execution space is "<<greenText(DefaultExecutionSpace::name())<<endREPORT;
+
+ 	// initialize Kokkos
+	Kokkos::initialize( argc, argv ); 
+
 	REPORT(0)<<"\nCreating Control repository . . ."<<endREPORT;
 	Control_ = makeUnique<systemControl>(
 		ControlDict_.startTime(),
@@ -43,7 +52,13 @@ pFlow::DEMSystem::DEMSystem(
 }
 
 pFlow::DEMSystem::~DEMSystem()
-{}
+{
+	
+	Control_.reset();
+
+	output<< "\nFinalizing host/device execution space ...."<<endl;
+	Kokkos::finalize();
+}
 
 
 pFlow::uniquePtr<pFlow::DEMSystem>

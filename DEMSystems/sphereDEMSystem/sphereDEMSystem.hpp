@@ -25,7 +25,7 @@ Licence:
 #include "property.hpp"
 #include "uniquePtr.hpp"
 #include "geometry.hpp"
-#include "sphereParticles.hpp"
+#include "sphereFluidParticles.hpp"
 #include "interaction.hpp"
 #include "Insertions.hpp"
 #include "domainDistribute.hpp"
@@ -46,13 +46,20 @@ protected:
 
 	uniquePtr<geometry> 		geometry_ = nullptr;
 
-	uniquePtr<sphereParticles> 	particles_ = nullptr;
+	uniquePtr<sphereFluidParticles> 	particles_ = nullptr;
 
 	uniquePtr<sphereInsertion> 	insertion_ = nullptr;
 
 	uniquePtr<interaction> 		interaction_ = nullptr;
 
 	uniquePtr<domainDistribute> particleDistribution_=nullptr;
+
+	// to be used for CPU communications 
+	ViewType1D<realx3, HostSpace>  parVelocity_;
+
+	ViewType1D<realx3, HostSpace>  parPosition_;
+
+	ViewType1D<real, HostSpace> parDiameter_;
 
 //  protected member functions
 	auto& Property()
@@ -97,6 +104,7 @@ public:
 		word);
 
 
+	bool updateParticleDistribution(real extentFraction, const std::vector<box> domains) override;
 	 
 	int32 numParInDomain(int32 di)const override;
 	
@@ -104,9 +112,21 @@ public:
 
 	span<const int32> parIndexInDomain(int32 di)const override;
 
-	bool changeDomainsSizeUpdateParticles(const std::vector<box>& domains) override;
+	span<real> parDiameter() override;
 
-	bool updateParticles() override;	
+	span<realx3> parVelocity() override;
+
+	span<realx3> parPosition() override;
+
+	span<realx3> parFluidForce() override;
+
+	span<realx3> parFluidTorque() override;
+
+	bool sendFluidForceToDEM() override;
+
+	bool sendFluidTorqueToDEM() override;
+
+	bool beforeIteration() override;
 
 	bool iterate(int32 n, real timeToWrite, word timeName) override;
 	

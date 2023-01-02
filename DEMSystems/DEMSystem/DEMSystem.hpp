@@ -43,15 +43,7 @@ protected:
 
 	uniquePtr<systemControl>		Control_ = nullptr;
 
-	std::vector<box> 				domains_;
-
 	uniquePtr<Timers> 				timers_;
-
-	// methods 
-	auto& Control()
-	{
-		return Control_();
-	}
 
 
 public:
@@ -91,6 +83,17 @@ public:
 		return Control_->g();
 	}
 
+	// methods 
+	auto& Control()
+	{
+		return Control_();
+	}
+
+	const auto& Control()const
+	{
+		return Control_();
+	}
+
 	auto inline constexpr usingDoulle()const
 	{
 		return pFlow::usingDouble__;
@@ -101,6 +104,9 @@ public:
 		return Control_->timers();
 	}
 
+	virtual
+	bool updateParticleDistribution(real extentFraction, const std::vector<box> domains) = 0;
+
 	virtual 
 	int32 numParInDomain(int32 di)const = 0;
 	
@@ -110,14 +116,32 @@ public:
 	virtual 
 	span<const int32> parIndexInDomain(int32 di)const = 0;
 
-	virtual 
-	bool changeDomainsSizeUpdateParticles(const std::vector<box>& domains) = 0;
+	virtual
+	span<real> parDiameter() = 0; 
 
 	virtual
-	bool updateParticles() = 0;
+	span<realx3> parVelocity() = 0;
+
+	virtual
+	span<realx3> parPosition() = 0;
+
+	virtual
+	span<realx3> parFluidForce() = 0;
+
+	virtual
+	span<realx3> parFluidTorque() = 0;
+
+	virtual 
+	bool sendFluidForceToDEM() = 0;
+
+	virtual
+	bool sendFluidTorqueToDEM() = 0;
 	
 	virtual 
 	real maxBounndingSphereSize()const = 0;
+
+	virtual 
+	bool beforeIteration() = 0;
 
 	virtual 
 	bool iterate(int32 n, real timeToWrite, word timeName) = 0;

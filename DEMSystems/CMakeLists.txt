@@ -2,6 +2,7 @@
 set(SourceFiles 
 DEMSystem/DEMSystem.cpp
 sphereDEMSystem/sphereDEMSystem.cpp
+sphereDEMSystem/sphereFluidParticles.cpp
 domainDistribute/domainDistribute.cpp
 )
 

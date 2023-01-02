@@ -49,6 +49,60 @@ maxBoundingBoxSize_(maxBoundingBox)
 bool pFlow::domainDistribute::locateParticles(
 		ViewType1D<realx3,HostSpace> points, includeMask mask)
 {
+	
+	range activeRange = mask.activeRange();
+
+	for(int32 di=0; di<numDomains_; di++)
+	{
+		particlesInDomains_[di].clear();
+	}
+
+	for(int32 i=activeRange.first; i<activeRange.second; i++)
+	{
+		if(mask(i))
+		{
+			for(int32 di=0; di<numDomains_; di++)
+			{
+				if(extDomains_[di].isInside(points[i]))
+				{
+					particlesInDomains_[di].push_back(i);
+				}
+			}
+		}
+	}
+
+	for(int32 di=0; di<numDomains_; di++)
+	{
+		numParInDomain_[di] = particlesInDomains_[di].size();
+	}
+
+	output<<" numParInDomain_ "<< numParInDomain_<<endl;
+
+	return true;
+}
+
+bool pFlow::domainDistribute::changeDomainsSize(
+		real extentFraction, 
+		real maxBoundingBoxSize, 
+		const std::vector<box>& domains)
+{
+	domainExtension_ = extentFraction;
+	maxBoundingBoxSize_ = maxBoundingBoxSize;
+
+	if(domains.size()!= numDomains_)
+	{
+		fatalErrorInFunction<<"number of new domians differs"<<endl;
+		return false;
+	}
+
+	clcDomains(domains);
+	return true;
+}
+
+
+/*bool pFlow::domainDistribute::locateParticles(
+		ViewType1D<realx3,HostSpace> points, includeMask mask)
+{
 	range active = mask.activeRange();
 	auto numInDomain = numParInDomain_.deviceVectorAll();
 	auto numDomains = numDomains_;
@@ -102,17 +156,4 @@ bool pFlow::domainDistribute::locateParticles(
 
 
 	return true;
-}
-
-bool pFlow::domainDistribute::changeDomainsSize(
-	const std::vector<box>& domains)
-{
-	if(domains.size()!= numDomains_)
-	{
-		fatalErrorInFunction<<"number of new domians differs"<<endl;
-		return false;
-	}
-
-	clcDomains(domains);
-	return true;
-}
+}*/
