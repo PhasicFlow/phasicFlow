@@ -24,10 +24,13 @@ Licence:
 #include "geometryMotion.hpp"
 #include "fixedWall.hpp"
 #include "rotatingAxisMotion.hpp"
+#include "vibratingMotion.hpp"
 
 
 namespace pFlow
 {
+
+typedef geometryMotion<vibratingMotion> vibratingMotionGeometry;
 
 typedef geometryMotion<rotatingAxisMotion> rotationAxisMotionGeometry;
 

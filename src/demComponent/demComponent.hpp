@@ -64,9 +64,16 @@ public:
 		return control_;
 	}
 
+	inline
 	real dt()const
 	{
 		return control_.time().dt();
+	}
+
+	inline
+	real currentTime()const
+	{
+		return control_.time().currentTime();
 	}
 
 	auto& timers(){
