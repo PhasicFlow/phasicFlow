@@ -23,9 +23,10 @@ bool pFlow::geometryMotion<MotionModel>::moveGeometry()
 {
 
 	real dt = this->dt();
+	real t = this->currentTime();
 
 	auto pointMIndex= pointMotionIndex_.deviceVector();
-	auto mModel = motionModel_.getModel();
+	auto mModel = motionModel_.getModel(t);
 	realx3* points = triSurface_.pointsData_D();
 	auto numPoints = triSurface_.numPoints();
 

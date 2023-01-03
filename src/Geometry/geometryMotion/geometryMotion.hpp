@@ -104,9 +104,9 @@ public:
 
 	//// - Methods
 
-	auto getModel()const
+	auto getModel(real t)const
 	{
-		return motionModel_.getModel();
+		return motionModel_.getModel(t);
 	}
 
 	word motionModelTypeName()const override

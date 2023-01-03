@@ -18,60 +18,85 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __rotatingAxis_hpp__
-#define __rotatingAxis_hpp__
+#ifndef __vibrating_hpp__
+#define __vibrating_hpp__
+
 
 #include "timeInterval.hpp"
-#include "line.hpp"
+
+#include "streams.hpp"
 
 namespace pFlow
 {
 
 class dictionary;
-class rotatingAxis;
+class vibrating;
 
-#include "rotatingAxisFwd.hpp"
 
-class rotatingAxis
+class vibrating
 :
-	public timeInterval,
-	public line
+	public timeInterval
 {
+
 protected:
 	
 	// rotation speed 
-	real 	omega_ = 0;
+	realx3	angularFreq_{0,0,0};
 
-	bool  rotating_ = false;
+	realx3 	phaseAngle_{0,0,0};
+
+	realx3  amplitude_{0,0,0};
+
+	realx3  velocity_{0,0,0};
+
+	realx3  velocity0_{0,0,0};
+
+	INLINE_FUNCTION_HD
+	void calculateVelocity()
+	{
+		if(inTimeRange())
+		{
+			velocity_ = amplitude_ * sin( angularFreq_*(time()-startTime() ) + phaseAngle_ );
+		}else
+		{
+			velocity_ = {0,0,0};
+		}
+	}
 
 public:
 
 	FUNCTION_HD
-	rotatingAxis(){}
+	vibrating(){}
 
 	FUNCTION_H
-	rotatingAxis(const dictionary& dict);
+	vibrating(const dictionary& dict);
 	
-	FUNCTION_HD
-	rotatingAxis(const realx3& p1, const realx3& p2, real omega = 0.0);
 
 	FUNCTION_HD
-	rotatingAxis(const rotatingAxis&) = default;
+	vibrating(const vibrating&) = default;
 
-	rotatingAxis& operator=(const rotatingAxis&) = default;
-
-	FUNCTION_HD
-	real setOmega(real omega);
-
+	vibrating& operator=(const vibrating&) = default;
 
 	INLINE_FUNCTION_HD
-	real omega()const 
+	void setTime(real t)
 	{
-		return omega_;
+		if( !equal(t, time()) ) velocity0_ = velocity_;
+		timeInterval::setTime(t);
+		calculateVelocity();
 	}
 
 	INLINE_FUNCTION_HD
-	realx3 linTangentialVelocityPoint(const realx3 &p)const;
+	realx3 linTangentialVelocityPoint(const realx3 &p)const
+	{
+		return velocity_;
+	}
+
+	INLINE_FUNCTION_HD
+	realx3 transferPoint(const realx3& p, real dt)
+	{
+		if(!inTimeRange()) return p;
+		return p + 0.5*dt*(velocity0_+velocity_);
+	}
 
 	// - IO operation
 	FUNCTION_H 
@@ -88,18 +113,18 @@ public:
 
 };
 
-inline iOstream& operator <<(iOstream& os, const rotatingAxis& ax)
+inline iOstream& operator <<(iOstream& os, const vibrating& obj)
 {
-	if(!ax.write(os))
+	if(!obj.write(os))
 	{
 		fatalExit;
 	}
 	return os;
 }
 
-inline iIstream& operator >>(iIstream& is, rotatingAxis& ax)
+inline iIstream& operator >>(iIstream& is, vibrating& obj)
 {
-	if( !ax.read(is) )
+	if( !obj.read(is) )
 	{
 		fatalExit;
 	}
@@ -108,7 +133,5 @@ inline iIstream& operator >>(iIstream& is, rotatingAxis& ax)
 
 }
 
-
-#include "rotatingAxisI.hpp"
 
 #endif

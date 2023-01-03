@@ -55,7 +55,8 @@ template<
 bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactListType>::
 	sphereSphereInteraction()
 {
-		
+	
+
 
 	auto lastItem = ppContactList_().loopCount();
 
@@ -95,14 +96,15 @@ bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactList
 {
 	
 	int32 lastItem = pwContactList_().loopCount();
-	
+	real t = this->currentTime();
+
 	pFlow::sphereInteractionKernels::pwInteractionFunctor
 		pwInteraction(
 			this->dt(),
 			this->forceModel_(),
 			pwContactList_(),
 			geometryMotion_.getTriangleAccessor(), 
-			geometryMotion_.getModel() , 
+			geometryMotion_.getModel(t) , 
 			sphParticles_.diameter().deviceVectorAll() ,
 			sphParticles_.propertyId().deviceVectorAll(),
 			sphParticles_.pointPosition().deviceVectorAll(),

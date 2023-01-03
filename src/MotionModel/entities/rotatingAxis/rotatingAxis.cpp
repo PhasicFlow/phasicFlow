@@ -21,13 +21,6 @@ Licence:
 #include "rotatingAxis.hpp"
 #include "dictionary.hpp"
 
-/*FUNCTION_HD
-pFlow::rotatingAxis::rotatingAxis()
-:
-	line(),
-	omega_(0.0),
-	rotating_(false)
-{}*/
 
 FUNCTION_H
 pFlow::rotatingAxis::rotatingAxis
@@ -52,6 +45,7 @@ pFlow::rotatingAxis::rotatingAxis
 	real omega
 )
 	:
+	timeInterval(),
 	line(p1, p2),
 	omega_(omega),
 	rotating_(!equal(omega,0.0))
@@ -60,7 +54,6 @@ pFlow::rotatingAxis::rotatingAxis
 }
 
 
-//rotatingAxis(const dictionary& dict);
 FUNCTION_HD
 pFlow::real pFlow::rotatingAxis::setOmega(real omega)
 {
@@ -76,6 +69,8 @@ bool pFlow::rotatingAxis::read
 	const dictionary& dict
 )
 {
+
+	if(!timeInterval::read(dict))return false;
 	if(!line::read(dict)) return false;
 		
 	real omega = dict.getValOrSet("omega", static_cast<real>(0.0));
@@ -90,6 +85,7 @@ bool pFlow::rotatingAxis::write
 	dictionary& dict
 ) const
 {
+	if( !timeInterval::write(dict) ) return false;
 	if( !line::write(dict) ) return false;
 	
 	if( !dict.add("omega", omega_) )
@@ -107,6 +103,7 @@ bool pFlow::rotatingAxis::read
 	iIstream& is
 )
 {
+	if( !rotatingAxis::timeInterval::read(is)) return false;
 	if( !rotatingAxis::line::read(is)) return false;
 
 	word omegaw;
@@ -137,6 +134,7 @@ bool pFlow::rotatingAxis::write
 	iOstream& os
 )const
 {
+	if( !rotatingAxis::timeInterval::write(os)) return false;
 	if( !rotatingAxis::line::write(os) ) return false;
 	
 	os.writeWordEntry("omega", omega());

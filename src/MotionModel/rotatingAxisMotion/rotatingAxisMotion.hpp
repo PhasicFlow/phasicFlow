@@ -129,8 +129,15 @@ public:
 	~rotatingAxisMotion() = default;
 
 
-	Model getModel()const
+	Model getModel(real t)
 	{
+		for(int32 i= 0; i<numAxis_; i++ )
+		{
+			axis_[i].setTime(t);
+		}
+		axis_.modifyOnHost();
+		axis_.syncViews();
+
 		return Model(axis_.deviceVector(), numAxis_);
 	}
 
@@ -167,15 +174,15 @@ public:
 	}
 
 	
-	INLINE_FUNCTION_D
+	/*INLINE_FUNCTION_D
 	realx3 pointVelocity(label n, const realx3& p)const 
 	{
 		return axis_.deviceVectorAll()[n].linTangentialVelocityPoint(p);
-	}
+	}*/
 
 	
 
-	INLINE_FUNCTION_D
+	/*INLINE_FUNCTION_D
 	realx3 transferPoint(label n, const realx3 p, real dt)const
 	{
 		return rotate(p, axis_.deviceVectorAll()[n], dt);
@@ -190,7 +197,7 @@ public:
 		rotate( pVec, numP, axis_.deviceVectorAll()[n], dt);
 
 		return true;		
-	}
+	}*/
 
 	INLINE_FUNCTION_HD
 	bool isMoving()const

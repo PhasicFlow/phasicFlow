@@ -21,6 +21,9 @@ Licence:
 INLINE_FUNCTION_HD
 pFlow::realx3 pFlow::rotatingAxis::linTangentialVelocityPoint(const realx3 &p)const
 {
+	
+	if(!inTimeRange()) return {0,0,0};
+
 	realx3 L = p - projectPoint(p);
 	return cross(omega_*unitVector(),L);
 }
@@ -28,6 +31,9 @@ pFlow::realx3 pFlow::rotatingAxis::linTangentialVelocityPoint(const realx3 &p)co
 INLINE_FUNCTION_HD
 pFlow::realx3 pFlow::rotate(const realx3& p, const rotatingAxis& ax, real dt)
 {
+	
+	if(!ax.inTimeRange()) return p;
+
 	realx3 nv = ax.unitVector();
 	real cos_tet = cos(ax.omega()*dt);
 	real sin_tet = sin(ax.omega()*dt);
@@ -60,7 +66,6 @@ pFlow::realx3 pFlow::rotate(const realx3& p, const rotatingAxis& ax, real dt)
 INLINE_FUNCTION_HD
 pFlow::realx3 pFlow::rotate(const realx3 &p, const line& ln, real theta)
 {
-
 
 	realx3 nv = ln.unitVector();
 	real cos_tet = cos(theta);
@@ -130,6 +135,8 @@ void pFlow::rotate(realx3* p, size_t n, const line& ln, real theta)
 INLINE_FUNCTION_HD
 void pFlow::rotate(realx3* p, size_t n, const rotatingAxis& ax, real dt)
 {
+	if(!ax.inTimeRange()) return;
+	
 	realx3 nv = ax.unitVector();
 	real cos_tet = cos(ax.omega()*dt);
 	real sin_tet = sin(ax.omega()*dt);

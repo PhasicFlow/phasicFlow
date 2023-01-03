@@ -18,14 +18,16 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __fixedWall_hpp__
-#define __fixedWall_hpp__
+#ifndef __vibratingMotion_hpp__
+#define __vibratingMotion_hpp__
 
 
 #include "types.hpp"
 #include "typeInfo.hpp"
+#include "VectorDual.hpp"
 #include "Vectors.hpp"
-#include "uniquePtr.hpp"
+#include "List.hpp"
+#include "vibrating.hpp"
 
 
 
@@ -34,54 +36,68 @@ namespace pFlow
 
 class dictionary;
 
-class fixedWall
+class vibratingMotion
 {
 public:
-
+	
 	// - this class shuold be decleared in every motion model with 
 	//   exact methods 
 	class Model
 	{
+	protected:
+		
+		deviceViewType1D<vibrating> 	components_;
+		int32 							numComponents_=0;
 
 	public:
 
 		INLINE_FUNCTION_HD
-		Model(){}
+		Model(deviceViewType1D<vibrating> comps, int32 numComps):
+			components_(comps),
+			numComponents_(numComps)
+		{}
 
 		INLINE_FUNCTION_HD
 		Model(const Model&) = default;
+		
 		
 		INLINE_FUNCTION_HD
 		Model& operator=(const Model&) = default;
 
 
 		INLINE_FUNCTION_HD
-		realx3 pointVelocity(int32 n, const realx3 p)const
+		realx3 pointVelocity(int32 n, const realx3& p)const
 		{
-			return 0.0;
+			return components_[n].linTangentialVelocityPoint(p);
 		}
 
 		INLINE_FUNCTION_HD
 		realx3 operator()(int32 n, const realx3& p)const
 		{
-			return 0.0;
+			return pointVelocity(n,p);
 		}
 
 		INLINE_FUNCTION_HD
 		realx3 transferPoint(int32 n, const realx3 p, real dt)const
 		{
-			return p;
+			return components_[n].transferPoint(p, dt);	
 		}
 
 		INLINE_FUNCTION_HD int32 numComponents()const
 		{
-			return 0;
+			return numComponents_;
 		}
 	};
 
 protected:
 
-	const word name_ = "none";
+	using axisVector_HD = VectorDual<vibrating>;
+
+	axisVector_HD 	components_;
+	
+	wordList  		componentName_;
+
+	label  			numComponents_= 0;
 
 	bool readDictionary(const dictionary& dict);
 
@@ -89,68 +105,98 @@ protected:
 
 public:
 	
-	TypeInfoNV("fixedWall");
+	TypeInfoNV("vibratingMotion");
 
 	// empty
-	fixedWall();
+	FUNCTION_H
+	vibratingMotion();
 
 	// construct with dictionary 
-	fixedWall(const dictionary& dict);
+	FUNCTION_H
+	vibratingMotion(const dictionary& dict);
 
-	fixedWall(const fixedWall&) = default;
+	// copy
+	FUNCTION_H
+	vibratingMotion(const vibratingMotion&) = default;
 
-	fixedWall(fixedWall&&) = default;
+	vibratingMotion(vibratingMotion&&) = delete;
 
-	fixedWall& operator=(const fixedWall&) = default;
+	FUNCTION_H
+	vibratingMotion& operator=(const vibratingMotion&) = default;
 
-	fixedWall& operator=(fixedWall&&) = default;
+	vibratingMotion& operator=(vibratingMotion&&) = delete;
 
-	~fixedWall() = default;
+	FUNCTION_H
+	~vibratingMotion() = default;
 
-	Model getModel(real t)const
+
+	Model getModel(real t)
 	{
-		return Model();
+		for(int32  i= 0; i<numComponents_; i++ )
+		{
+			components_[i].setTime(t);
+		}
+		components_.modifyOnHost();
+		components_.syncViews();
+
+		return Model(components_.deviceVectorAll(), numComponents_);
 	}
 
+	INLINE_FUNCTION_H
 	int32 nameToIndex(const word& name)const
 	{
-		return 0;
+		if( auto i = componentName_.findi(name); i == -1)
+		{
+			fatalErrorInFunction<<
+			"component name " << name << " does not exist. \n";
+			fatalExit;
+			return i;
+		}
+		else
+		{
+			return i;
+		}
+		
 	}
 
+	INLINE_FUNCTION_H
 	word indexToName(label i)const
 	{
-		return name_;
+		if(i < numComponents_ )
+			return componentName_[i];
+		else
+		{
+			fatalErrorInFunction<<
+			"out of range access to the list of axes " << i <<endl<<
+			" size of components_ is "<<numComponents_<<endl;
+			fatalExit;
+			return "";
+		}
 	}
 
 	
-	INLINE_FUNCTION_HD
+	INLINE_FUNCTION_H
 	realx3 pointVelocity(label n, const realx3& p)const 
 	{
-		return zero3;
+		return components_.hostVectorAll()[n].linTangentialVelocityPoint(p);
 	}
 
 	
 
-	INLINE_FUNCTION_HD
+	INLINE_FUNCTION_H
 	realx3 transferPoint(label n, const realx3 p, real dt)const
 	{
-		return p;
+		return components_.hostVectorAll()[n].transferPoint(p, dt);
 	}
 
 	
-
-	INLINE_FUNCTION_HD
-	bool transferPoint(label n, realx3* pVec, size_t numP, real dt)
-	{
-		return true;		
-	}
-
 	INLINE_FUNCTION_HD
 	bool isMoving()const
 	{
-		return false;
+		return true;
 	}
 
+	INLINE_FUNCTION_H
 	bool move(real dt)
 	{
 		return true;
@@ -167,4 +213,4 @@ public:
 
 } // pFlow
 
-#endif //__fixed_hpp__
+#endif //__rotatingAxisMotion_hpp__

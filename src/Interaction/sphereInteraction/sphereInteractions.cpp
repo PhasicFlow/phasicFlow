@@ -67,6 +67,27 @@ template class pFlow::sphereInteraction<
 	pFlow::sortedContactList>;
 
 
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::limitedLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::unsortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::limitedLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::sortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::nonLimitedLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::unsortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::nonLimitedLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::sortedContactList>;
+
+
 
 /// non-linear models 
 
@@ -111,8 +132,30 @@ template class pFlow::sphereInteraction<
 	pFlow::sortedContactList>;
 
 
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::limitedNonLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::unsortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::limitedNonLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::sortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::nonLimitedNonLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::unsortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::nonLimitedNonLinearNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::sortedContactList>;
+
+
+
 // - nonLinearMod models
-	template class pFlow::sphereInteraction<
+template class pFlow::sphereInteraction<
 	pFlow::cfModels::limitedNonLinearModNormalRolling,
 	pFlow::fixedGeometry,
 	pFlow::unsortedContactList>;
@@ -150,6 +193,27 @@ template class pFlow::sphereInteraction<
 template class pFlow::sphereInteraction<
 	pFlow::cfModels::nonLimitedNonLinearModNormalRolling,
 	pFlow::rotationAxisMotionGeometry,
+	pFlow::sortedContactList>;
+
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::limitedNonLinearModNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::unsortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::limitedNonLinearModNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::sortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::nonLimitedNonLinearModNormalRolling,
+	pFlow::vibratingMotionGeometry,
+	pFlow::unsortedContactList>;
+
+template class pFlow::sphereInteraction<
+	pFlow::cfModels::nonLimitedNonLinearModNormalRolling,
+	pFlow::vibratingMotionGeometry,
 	pFlow::sortedContactList>;
 
 
