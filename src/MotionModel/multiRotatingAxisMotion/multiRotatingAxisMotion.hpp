@@ -18,16 +18,15 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __rotatingAxisMotion_hpp__
-#define __rotatingAxisMotion_hpp__
+#ifndef __multiRotatingAxisMotion_hpp__
+#define __multiRotatingAxisMotion_hpp__
 
 
 #include "types.hpp"
 #include "typeInfo.hpp"
 #include "VectorDual.hpp"
-#include "Vectors.hpp"
 #include "List.hpp"
-#include "rotatingAxis.hpp"
+#include "multiRotatingAxis.hpp"
 
 
 namespace pFlow
@@ -35,7 +34,7 @@ namespace pFlow
 
 class dictionary;
 
-class rotatingAxisMotion
+class multiRotatingAxisMotion
 {
 public:
 	
@@ -45,13 +44,13 @@ public:
 	{
 	protected:
 		
-		deviceViewType1D<rotatingAxis> 	axis_;
-		int32 							numAxis_=0;
+		deviceViewType1D<multiRotatingAxis> 	axis_;
+		int32 									numAxis_=0;
 
 	public:
 
 		INLINE_FUNCTION_HD
-		Model(deviceViewType1D<rotatingAxis> axis, int32 numAxis):
+		Model(deviceViewType1D<multiRotatingAxis> axis, int32 numAxis):
 			axis_(axis),
 			numAxis_(numAxis)
 		{}
@@ -67,7 +66,7 @@ public:
 		INLINE_FUNCTION_HD
 		realx3 pointVelocity(int32 n, const realx3& p)const
 		{
-			return axis_[n].linTangentialVelocityPoint(p);
+			return axis_[n].pointTangentialVel(p);
 		}
 
 		INLINE_FUNCTION_HD
@@ -79,7 +78,7 @@ public:
 		INLINE_FUNCTION_HD
 		realx3 transferPoint(int32 n, const realx3 p, real dt)const
 		{
-			return rotate(p, axis_[n], dt);	
+			return axis_[n].transferPoint(p, dt);	
 		}
 
 		INLINE_FUNCTION_HD int32 numComponents()const
@@ -90,13 +89,17 @@ public:
 
 protected:
 
-	using axisVector_HD = VectorDual<rotatingAxis>;
+	using axisVector_HD = VectorDual<multiRotatingAxis>;
 
-	axisVector_HD 	axis_;
+	axisVector_HD 		axis_;
 	
-	wordList  		axisName_;
+	VectorDual<int32> 	sortedIndex_;
 
-	label  			numAxis_= 0;
+	wordList  			axisName_;
+
+	label  				numAxis_= 0;
+
+
 
 	bool readDictionary(const dictionary& dict);
 
@@ -104,29 +107,29 @@ protected:
 
 public:
 	
-	TypeInfoNV("rotatingAxisMotion");
+	TypeInfoNV("multiRotatingAxisMotion");
 
 	// empty
 	FUNCTION_H
-	rotatingAxisMotion();
+	multiRotatingAxisMotion();
 
 	// construct with dictionary 
 	FUNCTION_H
-	rotatingAxisMotion(const dictionary& dict);
+	multiRotatingAxisMotion(const dictionary& dict);
 
 	// copy
 	FUNCTION_H
-	rotatingAxisMotion(const rotatingAxisMotion&) = default;
+	multiRotatingAxisMotion(const multiRotatingAxisMotion&) = default;
 
-	rotatingAxisMotion(rotatingAxisMotion&&) = delete;
-
-	FUNCTION_H
-	rotatingAxisMotion& operator=(const rotatingAxisMotion&) = default;
-
-	rotatingAxisMotion& operator=(rotatingAxisMotion&&) = delete;
+	multiRotatingAxisMotion(multiRotatingAxisMotion&&) = delete;
 
 	FUNCTION_H
-	~rotatingAxisMotion() = default;
+	multiRotatingAxisMotion& operator=(const multiRotatingAxisMotion&) = default;
+
+	multiRotatingAxisMotion& operator=(multiRotatingAxisMotion&&) = delete;
+
+	FUNCTION_H
+	~multiRotatingAxisMotion() = default;
 
 
 	Model getModel(real t)
@@ -134,11 +137,25 @@ public:
 		for(int32 i= 0; i<numAxis_; i++ )
 		{
 			axis_[i].setTime(t);
+			axis_[i].setAxisList(getAxisListPtrDevice());
 		}
 		axis_.modifyOnHost();
 		axis_.syncViews();
 
 		return Model(axis_.deviceVector(), numAxis_);
+	}
+
+	INLINE_FUNCTION_H
+	multiRotatingAxis* getAxisListPtrHost()
+	{
+		return axis_.hostVectorAll().data();
+	}
+
+
+	INLINE_FUNCTION_H
+	multiRotatingAxis* getAxisListPtrDevice()
+	{
+		return axis_.deviceVectorAll().data();
 	}
 
 	INLINE_FUNCTION_H
@@ -173,31 +190,6 @@ public:
 		}
 	}
 
-	
-	/*INLINE_FUNCTION_D
-	realx3 pointVelocity(label n, const realx3& p)const 
-	{
-		return axis_.deviceVectorAll()[n].linTangentialVelocityPoint(p);
-	}*/
-
-	
-
-	/*INLINE_FUNCTION_D
-	realx3 transferPoint(label n, const realx3 p, real dt)const
-	{
-		return rotate(p, axis_.deviceVectorAll()[n], dt);
-	}
-
-	
-	INLINE_FUNCTION_D
-	bool transferPoint(label n, realx3* pVec, size_t numP, real dt)
-	{
-		if( n>=numAxis_)return false;
-		
-		rotate( pVec, numP, axis_.deviceVectorAll()[n], dt);
-
-		return true;		
-	}*/
 
 	INLINE_FUNCTION_HD
 	bool isMoving()const
@@ -205,11 +197,9 @@ public:
 		return true;
 	}
 
-	INLINE_FUNCTION_H
-	bool move(real t, real dt)
-	{
-		return true;
-	}
+	FUNCTION_H
+	bool move(real t, real dt);
+	
 
 	FUNCTION_H
 	bool read(iIstream& is);
@@ -222,4 +212,4 @@ public:
 
 } // pFlow
 
-#endif //__rotatingAxisMotion_hpp__
+#endif //__multiRotatingAxisMotion_hpp__

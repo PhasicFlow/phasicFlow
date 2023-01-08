@@ -71,6 +71,12 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
+	bool isRotating()const
+	{
+		return rotating_;
+	}
+
+	INLINE_FUNCTION_HD
 	realx3 linTangentialVelocityPoint(const realx3 &p)const;
 
 	// - IO operation

@@ -20,12 +20,13 @@ Licence:
 
 #include "fixedWall.hpp"
 #include "rotatingAxisMotion.hpp"
+#include "multiRotatingAxisMotion.hpp"
 #include "vibratingMotion.hpp"
 
 template class pFlow::geometryMotion<pFlow::fixedWall>;
 
 template class pFlow::geometryMotion<pFlow::rotatingAxisMotion>;
 
+template class pFlow::geometryMotion<pFlow::multiRotatingAxisMotion>;
+
 template class pFlow::geometryMotion<pFlow::vibratingMotion>;
-
-
