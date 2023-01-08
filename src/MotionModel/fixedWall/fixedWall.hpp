@@ -151,7 +151,7 @@ public:
 		return false;
 	}
 
-	bool move(real dt)
+	bool move(real t, real dt)
 	{
 		return true;
 	}

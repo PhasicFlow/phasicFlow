@@ -41,6 +41,9 @@ bool pFlow::geometryMotion<MotionModel>::moveGeometry()
 
 	Kokkos::fence();
 
+	// move the motion components 
+	motionModel_.move(t,dt);
+
 	// end of calculations 
 	moveGeomTimer_.end();
 

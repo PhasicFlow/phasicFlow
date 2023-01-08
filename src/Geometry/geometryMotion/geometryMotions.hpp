@@ -24,6 +24,7 @@ Licence:
 #include "geometryMotion.hpp"
 #include "fixedWall.hpp"
 #include "rotatingAxisMotion.hpp"
+#include "multiRotatingAxisMotion.hpp"
 #include "vibratingMotion.hpp"
 
 
@@ -34,7 +35,10 @@ typedef geometryMotion<vibratingMotion> vibratingMotionGeometry;
 
 typedef geometryMotion<rotatingAxisMotion> rotationAxisMotionGeometry;
 
+typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
+
 typedef geometryMotion<fixedWall> fixedGeometry;
+
 
 
 }
