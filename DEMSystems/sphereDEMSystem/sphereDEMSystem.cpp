@@ -20,6 +20,36 @@ Licence:
 
 #include "sphereDEMSystem.hpp"
 
+void pFlow::sphereDEMSystem::loop()
+{
+
+	do 
+	{
+		Control().timers().start();
+
+		geometry_->beforeIteration();
+		
+		interaction_->beforeIteration();
+
+		particles_->beforeIteration();
+		
+		
+		interaction_->iterate();
+
+		particles_->iterate();
+
+		geometry_->iterate();
+
+		particles_->afterIteration();
+		
+		geometry_->afterIteration();
+		
+
+		Control().timers().end();
+
+	}while(Control()++);
+
+}
 
 pFlow::sphereDEMSystem::sphereDEMSystem(
 		word  demSystemName,
@@ -161,10 +191,23 @@ bool pFlow::sphereDEMSystem::beforeIteration()
 
 
 bool pFlow::sphereDEMSystem::iterate(
-	int32 n, 
+	real upToTime, 
 	real timeToWrite, 
 	word timeName) 
 {
+
+	Control().time().setEndTime(upToTime);
+	Control().time().setOutputToFile(timeToWrite, timeName);
+	
+	loop();
+
+	return true;
+}
+
+bool pFlow::sphereDEMSystem::iterate(real upToTime)
+{
+	Control().time().setEndTime(upToTime);
+	loop();
 	return true;
 }
 

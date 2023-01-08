@@ -102,19 +102,27 @@ pFlow::timeControl::timeControl(
 void pFlow::timeControl::checkForOutputToFile()
 {
 	
-	if(managedExternaly_) return;
-
 	bool save = false;
-	
-	if ( abs(currentTime_ - lastSaved_ - saveInterval_) < 0.5 * dt_ )
-	{	
-		lastSaved_ = currentTime_;
-		save = true;
-	}
-	else if( abs(currentTime_ - lastSaved_) < min( pow(10.0,-1.0*timePrecision_), 0.5 *dt_) )
+	if(managedExternaly_)
 	{
-		lastSaved_ = currentTime_;
-		save = true;
+		if( abs(currentTime_-writeTime_) < 0.5*dt_)
+		{
+			save = true;
+			lastSaved_ = currentTime_;
+		}
+	}
+	else
+	{
+		if ( abs(currentTime_ - lastSaved_ - saveInterval_) < 0.5 * dt_ )
+		{	
+			lastSaved_ = currentTime_;
+			save = true;
+		}
+		else if( abs(currentTime_ - lastSaved_) < min( pow(10.0,-1.0*timePrecision_), 0.5 *dt_) )
+		{
+			lastSaved_ = currentTime_;
+			save = true;
+		}	
 	}
 
 	outputToFile_ = save;

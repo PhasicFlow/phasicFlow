@@ -144,7 +144,13 @@ public:
 	bool beforeIteration() = 0;
 
 	virtual 
-	bool iterate(int32 n, real timeToWrite, word timeName) = 0;
+	bool iterate(
+		real upToTime, 
+		real timeToWrite, 
+		word timeName) = 0;
+
+	virtual 
+	bool iterate(real upToTime) = 0;
 	
 	
 
