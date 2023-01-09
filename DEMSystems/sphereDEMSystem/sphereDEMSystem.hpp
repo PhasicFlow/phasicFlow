@@ -82,6 +82,8 @@ protected:
 		return interaction_();
 	} 
 
+	void loop();
+
 public:
 
 	TypeInfo("sphereDEMSystem");
@@ -128,7 +130,12 @@ public:
 
 	bool beforeIteration() override;
 
-	bool iterate(int32 n, real timeToWrite, word timeName) override;
+	bool iterate(
+		real upToTime, 
+		real timeToWrite, 
+		word timeName) override;
+
+	bool iterate(real upToTime) override;
 	
 	real maxBounndingSphereSize()const override;
 

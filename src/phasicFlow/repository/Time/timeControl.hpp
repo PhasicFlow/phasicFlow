@@ -67,7 +67,9 @@ protected:
 
 	bool  managedExternaly_ = false;
 
-	word  timeName_ = "wrongSettings";
+	word  timeName_ = "wrongSettings"; // for managedExternamly
+
+	real 	writeTime_ = 0; // for managedExternamly
 
 	realStridedRange  timersReportInterval_;
 
@@ -108,6 +110,15 @@ public:
 		return tmp;
 	}
 
+	void setEndTime(real eT)
+	{
+		if(managedExternaly_)
+		{
+			endTime_ = eT;
+		}
+
+	}
+
 	real startTime()const
 	{
 		return startTime_;
@@ -141,6 +152,7 @@ public:
 	bool finished()const
 	{
 		if( currentTime_ >= endTime_ ) return true;
+		if( abs(currentTime_-endTime_) < 0.5*dt_ )return true;
 		return false;
 	}
 
@@ -151,6 +163,15 @@ public:
 
 	bool timersReportTime()const;
 	
+	bool setOutputToFile(real writeTime, const word& timeName)
+	{
+		if(managedExternaly_)
+		{
+			timeName_ = timeName;
+			writeTime_ = writeTime;
+		}
+		return true;
+	}
 
 	bool operator ++(int)
 	{
