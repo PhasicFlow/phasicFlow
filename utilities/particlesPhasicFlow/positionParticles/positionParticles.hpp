@@ -145,24 +145,11 @@ public:
 	// - access to position 
 	virtual realx3Vector& position() = 0;
 	
-	virtual realx3Vector getFinalPosition()
-	{
-		if(mortonSorting_)
-		{
-			return sortByMortonCode(position());
-		}
-		else
-		{
-			realx3Vector vec(position().capacity(), RESERVE());
-			vec.assign( position().begin(), position().end());
-			
-			return std::move(vec);
-		}
-	}
-
+	virtual realx3Vector getFinalPosition();
 
 	static
 	uniquePtr<positionParticles> create(const dictionary & dict);
+	
 };	
 
 
