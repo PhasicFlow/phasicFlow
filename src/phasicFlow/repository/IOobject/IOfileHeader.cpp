@@ -31,7 +31,15 @@ pFlow::uniquePtr<pFlow::iFstream> pFlow::IOfileHeader::inStream()const
 
 pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 {
-	return makeUnique<oFstream>(path());
+	 auto osPtr = makeUnique<oFstream>(path());
+
+	 if(osPtr && owner_)
+	 {
+	 	auto outPrecision = owner_->outFilePrecision();
+	 	osPtr->precision(outPrecision);
+	 }
+
+	 return osPtr;
 }
 
 pFlow::IOfileHeader::IOfileHeader

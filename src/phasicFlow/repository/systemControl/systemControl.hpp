@@ -58,12 +58,15 @@ protected:
 	// - settingsDict fileDictionary
 	dictionary& 		settingsDict_;
 
+	// - precision for writing to file 
+	size_t 			outFilePrecision_ = 6;
+
 	// - time repository
 	Time 			Time_;
 
 	// - if time control is managed externaly
 
-	bool 			externalTimeControl_ = false;
+	bool 				externalTimeControl_ = false;
 
 	// - acceleration 
 	realx3 			g_;
@@ -176,6 +179,11 @@ public:
 		const word& timeName = "wrongTimeFolder")
 	{
 		Time_.setSaveTimeFolder(saveToFile, timeName);
+	}
+
+	size_t outFilePrecision() const override
+	{
+		return outFilePrecision_;
 	}
 
 };

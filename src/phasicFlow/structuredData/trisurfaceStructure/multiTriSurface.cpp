@@ -101,6 +101,7 @@ bool pFlow::multiTriSurface::addTriSurface
 
 	const auto& newPoints = tSurf.points();
 	const auto& newVertices = tSurf.vertices();
+	const auto& newAreas = tSurf.area();
 	
 	// 
 	
@@ -112,8 +113,14 @@ bool pFlow::multiTriSurface::addTriSurface
 	auto vOldSize = vertices_.size();
 	auto vNewSize =  vOldSize + newVertices.size();
 	vertices_.resize(vNewSize);
+	area_.resize(vNewSize);
+	
 	auto verVec = vertices_.deviceVectorAll();
+	auto areaVec = area_.deviceVectorAll();
+
 	auto newVerVec = newVertices.deviceVectorAll();
+	auto newArea = newAreas.deviceVectorAll();
+
 	auto maxIdx = maxIndex();
 
 	Kokkos::parallel_for(
@@ -121,6 +128,7 @@ bool pFlow::multiTriSurface::addTriSurface
 		newVertices.size(),
 		LAMBDA_HD(int32 i){
 			verVec[vOldSize+i] = newVerVec[i]+(maxIdx+1);
+			areaVec[vOldSize+i] = newArea[i];
 		}
 		);
 	Kokkos::fence();

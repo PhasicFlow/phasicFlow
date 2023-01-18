@@ -135,6 +135,9 @@ pFlow::systemControl::systemControl
 			true
 		)
 	),
+	outFilePrecision_(
+		settingsDict_.getValOrSet("outFilePrecision", static_cast<size_t>(6))
+		),
 	Time_
 	(
 		this,

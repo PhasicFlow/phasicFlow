@@ -229,6 +229,7 @@ public:
 			auto area = triSurface_.area().deviceVectorAll();
 			auto stress = stressWall_.deviceVectorAll();
 			auto numTri =triSurface_.size();
+			
 
 			Kokkos::parallel_for(
 				"geometry::calculateStress",
