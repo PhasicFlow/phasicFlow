@@ -153,7 +153,10 @@ public:
 		}
 		else
 		{
-			return position();
+			realx3Vector vec(position().capacity(), RESERVE());
+			vec.assign( position().begin(), position().end());
+			
+			return std::move(vec);
 		}
 	}
 
