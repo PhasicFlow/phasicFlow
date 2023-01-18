@@ -29,8 +29,7 @@ pFlow::empty::empty(
 	positionParticles(dict),
 	position_
 	(
-		maxNumberOfParticles_, RESERVE()
+		maxNumberOfParticles_, 0, RESERVE()
 	)
 {
-	position_.clear();
 }

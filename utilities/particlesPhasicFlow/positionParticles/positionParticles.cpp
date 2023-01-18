@@ -98,9 +98,23 @@ pFlow::positionParticles::positionParticles
 }
 
 
+pFlow::realx3Vector pFlow::positionParticles::getFinalPosition()
+{
+	if(mortonSorting_)
+	{
+		return sortByMortonCode(position());
+	}
+	else
+	{
+		realx3Vector vec(position().capacity(), RESERVE());
+		vec.assign( position().begin(), position().end());
+		
+		return std::move(vec);
+	}
+}
 
-
-pFlow::uniquePtr<pFlow::positionParticles> pFlow::positionParticles::create(const dictionary & dict)
+pFlow::uniquePtr<pFlow::positionParticles> 
+	pFlow::positionParticles::create(const dictionary & dict)
 {
 
 	word method = dict.getVal<word>("method");
