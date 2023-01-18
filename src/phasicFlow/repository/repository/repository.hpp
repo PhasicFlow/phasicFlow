@@ -178,6 +178,18 @@ public:
 		
 		// - return number of repositories 
 		size_t numRepositories()const;
+
+		virtual
+		size_t outFilePrecision() const
+		{
+			if(owner_)
+			{
+				return owner_->outFilePrecision();
+			}else
+			{
+				return 6;	
+			}
+		}
 		
 		// - return a ref to the underlaying data in the object 
 		template<typename T>

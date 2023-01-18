@@ -61,19 +61,46 @@ bool pFlow::stlFile::readSolid
 	if(!checkWordToken(is, tok, "solid")) return false;
 
 	// check if there is a name associated with solid 
+	name = "";
+	
+	
+	int32 nWords =0;
+	bool reachedFacet = false;
 	is >> tok;
-	if( badInput(is, tok) ) return false;
-	if(!tok.isWord()) return false;
 
-	if(tok.wordToken() != "facet" )
+	while (nWords < 20 )
 	{
-		name = tok.wordToken();
+		if( badInput(is, tok) ) return false;
+		//if(!tok.isWord()) return false;
+		nWords++;	
+		if(tok.isWord() && tok.wordToken() != "facet" )	
+		{
+			name += tok.wordToken();	
+		}
+		else if( tok.isNumber())
+		{
+			auto val = tok.number();
+			name += real2Word(val);
+		}
+		else if( tok.isPunctuation())
+		{
+			name += tok.pToken();
+		}
+		else if (tok.isWord() && tok.wordToken() == "facet")
+		{
+			is.putBack(tok);
+			reachedFacet = true;
+			break;	
+		}
+		else
+		{
+			return false;
+		}
+		is >> tok;
 	}
-	else
-	{
-		name = "";
-		is.putBack(tok);
-	}	
+
+	if(!reachedFacet) return false;
+		
 	vertecies.clear();
 	while(true )
 	{
