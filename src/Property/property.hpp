@@ -94,7 +94,7 @@ public:
 			return materials_;
 		}
 
-		// - densities
+		// - return densities
 		inline const auto& densities()const{
 			return densities_;
 		}
