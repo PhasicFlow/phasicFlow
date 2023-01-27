@@ -208,7 +208,11 @@ pFlow::systemControl::systemControl(
 	Time_
 	(
 		this,
-		settingsDict_
+		settingsDict_,
+		startTime, 
+		endTime, 
+		saveInterval, 
+		startTimeName
 	),
 	externalTimeControl_(true),
 	g_(
