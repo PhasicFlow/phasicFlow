@@ -1,0 +1,71 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+
+objectName particleInsertion;
+objectType dicrionary;
+
+
+active  yes;          // is insertion active?
+
+collisionCheck No;   // not implemented for yes
+
+/*
+five layers of particles are packed one-by-one using 5 insertion steps. 
+*/
+
+layer0
+{
+   type	          cylinderRegion; // type of insertion region
+   rate 	  5000;  // insertion rate (particles/s)
+   startTime 	  0;      // (s)
+   endTime   	  1;    // (s)
+   interval       0.025;  //s  
+
+   cylinderRegionInfo 
+   {
+   	p2 (-0.15 0.25 0.05); // (m,m,m)
+   	p1 (-0.15 0.24	0.05); // (m,m,m)
+   	radius 0.035;  // radius of cylinder (m)
+   }
+   
+   setFields
+   {
+     velocity    realx3 (0.0 -0.6 0.0); // initial velocity of inserted particles 
+   }
+   
+   mixture
+   {
+      lightSphere 1; // mixture composition of inserted particles 
+      
+   }
+}
+
+layer1
+{
+   type         cylinderRegion;
+   rate         7500; // (particles/s)
+   startTime    0; // (s)
+   endTime      1; // (s)
+   interval     0.025; //s  
+
+   cylinderRegionInfo 
+   {
+      p2 (-0.23	 0.25	0.05); // (m,m,m)
+      p1 (-0.23	 0.24	0.05); // (m,m,m)
+      radius 0.035;  // radius of cylinder (m)
+   }
+   
+   setFields
+   {
+     velocity    realx3 (0.0 -0.6 0.0);
+   }
+   
+   mixture
+   {
+      heavySphere 1; // only heavySphere
+      
+   }
+}
+
