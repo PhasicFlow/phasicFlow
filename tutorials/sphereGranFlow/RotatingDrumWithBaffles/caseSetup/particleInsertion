@@ -2,59 +2,74 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-
 objectName particleInsertion;
 objectType dicrionary;
+/*---------------------------------------------------------------------------*/
 
-
-active  yes;          // is insertion active?
-
-collisionCheck No;   // not implemented for yes
+// is insertion active?
+active  yes;          
+// not implemented for yes
+collisionCheck No;
 
 /*
-five layers of particles are packed one-by-one using 5 insertion steps. 
+Two layers of particles are packed one-by-one using 1 insertion steps. 
 */
 
-layer0
+// Right Layer Region
+   layerrightregion 
 {
-   type	          cylinderRegion; // type of insertion region
-   rate 	  5000;  // insertion rate (particles/s)
-   startTime 	  0;      // (s)
-   endTime   	  1;    // (s)
-   interval       0.025;  //s  
+// type of insertion region
+   type	          cylinderRegion;
+// insertion rate (particles/s)    
+   rate 	  12500;
+// Start time of LightParticles insertion (s)
+   startTime 	  0; 
+// End time of LightParticles insertion (s)      
+   endTime   	  1;
+// Time Interval of LightParticles insertion (s)
+   interval       0.025; 
 
    cylinderRegionInfo 
    {
-   	p2 (-0.15 0.25 0.05); // (m,m,m)
-   	p1 (-0.15 0.24	0.05); // (m,m,m)
-   	radius 0.035;  // radius of cylinder (m)
+// Coordinates of cylinderRegion (m,m,m)
+   	p2 (-0.15 0.25 0.05);
+   	p1 (-0.15 0.24	0.05);
+// radius of cylinder (m)
+   	radius 0.035;
    }
    
    setFields
    {
-     velocity    realx3 (0.0 -0.6 0.0); // initial velocity of inserted particles 
+// initial velocity of inserted particles
+     velocity    realx3 (0.0 -0.6 0.0);  
    }
    
    mixture
    {
-      lightSphere 1; // mixture composition of inserted particles 
-      
+// mixture composition of inserted particles
+      lightSphere 1;    
    }
 }
-
-layer1
+// Left Layer Region
+   layerleftregion
 {
    type         cylinderRegion;
-   rate         7500; // (particles/s)
-   startTime    0; // (s)
-   endTime      1; // (s)
-   interval     0.025; //s  
+//Left Region Particles Insertion Rate (particles/s)
+   rate         7500;
+// Start time of LightParticles insertion (s)
+   startTime    0;
+// End time of LightParticles insertion (s)  
+   endTime      1;
+// Time Interval of LightParticles insertion (s)
+   interval     0.025;
 
    cylinderRegionInfo 
    {
-      p2 (-0.23	 0.25	0.05); // (m,m,m)
-      p1 (-0.23	 0.24	0.05); // (m,m,m)
-      radius 0.035;  // radius of cylinder (m)
+// Coordinates of cylinderRegion (m,m,m)
+      p2 (-0.23	 0.25	0.05); 
+      p1 (-0.23	 0.24	0.05);
+// radius of cylinder (m)      
+      radius 0.035;
    }
    
    setFields
