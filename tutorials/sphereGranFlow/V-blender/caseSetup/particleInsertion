@@ -2,71 +2,100 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-
 objectName particleInsertion;
 objectType dicrionary;
+/* ------------------------------------------------------------------------- */
 
+// is insertion active?
+active  yes;
 
-active  yes;          // is insertion active?
-
-collisionCheck No;   // not implemented for yes
+// not implemented for yes
+collisionCheck No;
 
 /*
-one layer of particles are packed one-by-one using tho insertion steps. 
+two layers of particles are packed one-by-one using tho insertion steps. 
 */
 
-layer0
+rightregion
 {
-   type		  cylinderRegion; // type of insertion region
-   rate 	  5000;  // insertion rate (particles/s)
-   startTime 	  0.0;   // (s)
-   endTime   	  1;     // (s)
-   interval       0.025; //s  
+   // type of insertion region
+   type		  cylinderRegion;
+   
+   // insertion rate (particles/s)
+   rate 	  10000;
+   
+   // start time of small particles insertion (s)
+   startTime 	  0.0;
+   
+   // end time of small particles insertion (s)
+   endTime   	  1;
+   
+   // time interval of small particles insertion (s)
+   interval       0.025;  
 
    cylinderRegionInfo 
    {
-   	radius 	0.1;       // radius of cylinder (m)
-   	p1 ( 0.0950615  0.12 0.5011585 ); // (m,m,m)
-   	p2 ( 0.1150615  0.12 0.4811585); // (m,m,m)
+        // radius of cylinder (m)
+   	radius 	0.1;
+   	
+   	// coordinates of center of both ends of the insertion cylinder on 
+   	// the right side of the V-blender (m,m,m)
+   	p1 (0.0950615  0.12 0.5011585);
+   	p2 (0.1150615  0.12 0.4811585);
    }
    
    setFields
    {
-     velocity    realx3 (1.2 0.0 -1.2); // initial velocity of inserted particles 
+     // initial velocity of inserted particles
+     velocity    realx3 (1.2 0.0 -1.2); 
    }
    
    mixture
    {
-      lightSphere 1; // mixture composition of inserted particles 
+      // first layer of inserted particles
+      smallSphere 1;
       
    }
 }
 
-layer1
+leftregion
 {
+   // type of insertion region
    type         cylinderRegion;
-   rate         5000; // (particles/s)
-   startTime    0.0; // (s)
-   endTime      1; // (s)
-   interval     0.025; //s  
+   
+   // insertion rate (particles/s)
+   rate         10000;
+   
+   // start time of large particles insertion (s)
+   startTime    1.5;
+   
+   // end time of large particles insertion (s)
+   endTime      2.5;
+   
+   // time interval of large particles insertion (s)
+   interval     0.025;
 
    cylinderRegionInfo 
    {
+      // radius of cylinder (m)
       radius   0.1;
-      p1 ( 0.7562545  0.12 0.50079); // (m,m,m)
-      p2 ( 0.7362545  0.12 0.48079); // (m,m,m)
+      
+      // coordinates of center of both ends of the insertion cylinder on
+      // the left side of the V-blender (m,m,m)      
+      p1 ( 0.7562545  0.12 0.50079);
+      p2 ( 0.7362545  0.12 0.48079);
    }
    
    setFields
    {
+     // initial velocity of inserted particles
      velocity    realx3 (-1.2 0.0 -1.2);
    }
    
    mixture
    {
-      heavySphere 1; // only heavySphere
+      // second layer of inserted particles
+      largeSphere 1;
       
    }
 }
-
-

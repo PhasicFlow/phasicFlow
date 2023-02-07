@@ -2,9 +2,9 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-
 objectName 	geometryDict;
 objectType 	dictionary;
+/* ------------------------------------------------------------------------- */
 
 // motion model: rotating object around an axis
 motionModel rotatingAxisMotion; 
@@ -12,12 +12,19 @@ motionModel rotatingAxisMotion;
 surfaces
 {
 	
-	rod
+	body
 	{
-		type 	 stlWall;   // type of the wall
-		file 	 cone.stl;	// file name in stl folder
-		material prop1;   // material name of this wall
-		motion 	 rotAxis;	// motion component name 
+	        // type of the wall
+		type 	 stlWall;
+		
+		// file name in stl folder
+		file 	 body.stl;
+		
+		// material name of this wall
+		material wallMat;
+		
+		// motion component name
+		motion 	 rotAxis;
 	}
 
 	
@@ -28,10 +35,19 @@ rotatingAxisMotionInfo
 {
 	rotAxis 
 	{
-		p1 (0.128228 0.116446 0.297901);	// first point for the axis of rotation 
-		p2 (0.722596 0.116459 0.297901);	// second point for the axis of rotation
-		omega 3.14; 		// rotation speed (rad/s).
-		startTime 1.5;
+	        // first point for the axis of rotation
+		p1 (0.128228 0.116446 0.297901);
+		
+		// second point for the axis of rotation
+		p2 (0.722596 0.116459 0.297901);
+		
+		// rotation speed (rad/s)
+		omega 3.14;
+		
+		// start time of rotation
+		startTime 3;
+		
+		// end time of rotation
 		endTime 10;
 	}
 }
