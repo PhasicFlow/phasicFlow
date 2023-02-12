@@ -24,6 +24,8 @@ Licence:
 
 #include "Vectors.hpp"
 #include "hashMap.hpp"
+#include "fileSystem.hpp"
+#include "iFstream.hpp"
 
 namespace pFlow
 {

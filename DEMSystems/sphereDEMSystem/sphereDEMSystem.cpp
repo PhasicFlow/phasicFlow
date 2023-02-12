@@ -159,13 +159,14 @@ pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parPosition()
 
 pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidForce() 
 {
-	auto& hVec =  particles_->fluidTorqueHostAll();
+	auto& hVec =  particles_->fluidForceHostAll();
+	
 	return span<realx3>(hVec.data(), hVec.size());
 }
 
 pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidTorque() 
 {
-	auto& hVec =  particles_->fluidForceHostAll();
+	auto& hVec =  particles_->fluidTorqueHostAll();
 	return span<realx3>(hVec.data(), hVec.size());
 }
 

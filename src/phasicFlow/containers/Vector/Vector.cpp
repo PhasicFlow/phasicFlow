@@ -84,7 +84,6 @@ bool pFlow::Vector<T, Allocator>::readVector
 	return true;
 }
 
-#include "streams.hpp"
 
 template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::writeVector

@@ -22,6 +22,7 @@ Licence:
 #define __span_hpp__
 
 #include "types.hpp"
+#include "iOstream.hpp"
 
 namespace pFlow {
 
@@ -155,6 +156,23 @@ public:
     }
 
 };
+
+template<typename T>
+inline 
+iOstream& operator<<(iOstream& os, const span<T>& s)
+{
+    os << token::BEGIN_LIST;
+    for(size_t i=0; i<s.size(); i++)
+    {
+        os << s[i]<<token::NL;
+    }
+    
+    os << token::END_LIST;
+
+    os.check(FUNCTION_NAME);
+
+    return os;
+}
 
 } // pFlow
 
