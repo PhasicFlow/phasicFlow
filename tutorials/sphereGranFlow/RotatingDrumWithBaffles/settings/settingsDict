@@ -1,0 +1,36 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+
+objectName 	settingsDict;
+objectType 	dictionary;;
+/*---------------------------------------------------------------------------*/
+run 			RotatingDrumwithBaffles;
+
+// time step for integration (s)
+	dt 			 0.00001;
+// start time for simulation 	
+	startTime 	   	   0;
+// end time for simulation 
+	endTime 		  10;	 		
+// time interval for saving the simulation
+	saveInterval 	0.05; 		
+// maximum number of digits for time folder 
+	timePrecision      6;			
+// gravity vector (m/s2) 
+	g 		  (0 -9.8 0); 
+
+/*Simulation domain*/ 
+/* Every particles that goes outside this domain is deleted.*/
+domain 
+{
+	min (-0.328 0.095 -0.025);
+	max (-0.068  0.355 0.125);
+}
+// integration method 
+	integrationMethod 		AdamsBashforth3; 	
+// report timers?
+	timersReport 			Yes;  	
+// time interval for reporting timers
+	timersReportInterval   	0.01;	

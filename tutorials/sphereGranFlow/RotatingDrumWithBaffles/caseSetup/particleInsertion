@@ -1,0 +1,86 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName particleInsertion;
+objectType dicrionary;
+/*---------------------------------------------------------------------------*/
+
+// is insertion active?
+active  yes;          
+// not implemented for yes
+collisionCheck No;
+
+/*
+Two layers of particles are packed one-by-one using 1 insertion steps. 
+*/
+
+// Right Layer Region
+   layerrightregion 
+{
+// type of insertion region
+   type	          cylinderRegion;
+// insertion rate (particles/s)    
+   rate 	  12500;
+// Start time of LightParticles insertion (s)
+   startTime 	  0; 
+// End time of LightParticles insertion (s)      
+   endTime   	  1;
+// Time Interval of LightParticles insertion (s)
+   interval       0.025; 
+
+   cylinderRegionInfo 
+   {
+// Coordinates of cylinderRegion (m,m,m)
+   	p2 (-0.15 0.25 0.05);
+   	p1 (-0.15 0.24	0.05);
+// radius of cylinder (m)
+   	radius 0.035;
+   }
+   
+   setFields
+   {
+// initial velocity of inserted particles
+     velocity    realx3 (0.0 -0.6 0.0);  
+   }
+   
+   mixture
+   {
+// mixture composition of inserted particles
+      lightSphere 1;    
+   }
+}
+// Left Layer Region
+   layerleftregion
+{
+   type         cylinderRegion;
+//Left Region Particles Insertion Rate (particles/s)
+   rate         7500;
+// Start time of LightParticles insertion (s)
+   startTime    0;
+// End time of LightParticles insertion (s)  
+   endTime      1;
+// Time Interval of LightParticles insertion (s)
+   interval     0.025;
+
+   cylinderRegionInfo 
+   {
+// Coordinates of cylinderRegion (m,m,m)
+      p2 (-0.23	 0.25	0.05); 
+      p1 (-0.23	 0.24	0.05);
+// radius of cylinder (m)      
+      radius 0.035;
+   }
+   
+   setFields
+   {
+     velocity    realx3 (0.0 -0.6 0.0);
+   }
+   
+   mixture
+   {
+      heavySphere 1; // only heavySphere
+      
+   }
+}
+
