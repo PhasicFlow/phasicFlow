@@ -50,6 +50,9 @@ protected:
 	// - end time of simulation 
 	real endTime_;
 
+	// - stopAt
+	real stopAt_;
+
 	// - current time of simulation
 	real currentTime_;	
 
@@ -110,13 +113,12 @@ public:
 		return tmp;
 	}
 
-	void setEndTime(real eT)
+	void setStopAt(real sT)
 	{
 		if(managedExternaly_)
 		{
-			endTime_ = eT;
+			stopAt_ = sT;
 		}
-
 	}
 
 	real startTime()const
@@ -131,17 +133,18 @@ public:
 
 	word currentTimeWord(bool forSave = true)const
 	{
-		if(forSave)
+		return real2FixedStripZeros( currentTime(), timePrecision());
+		/*if(forSave)
 		{
 			if(!managedExternaly_)
-				return real2FixedStripZeros( currentTime(), timePrecision());
+				
 			else
 				return timeName_;
 		}
 		else
 		{
 			return real2FixedStripZeros( currentTime(), timePrecision());
-		}
+		}*/
 	}
 
 	int32 currentIter()const
@@ -149,10 +152,16 @@ public:
 		return currentIter_;
 	}
 
-	bool finished()const
+	bool finalTime()const
 	{
 		if( currentTime_ >= endTime_ ) return true;
 		if( abs(currentTime_-endTime_) < 0.5*dt_ )return true;
+		return false;	
+	}
+	bool reachedStopAt()const
+	{
+		if( currentTime_ >= stopAt_ ) return true;
+		if( abs(currentTime_-stopAt_) < 0.5*dt_ )return true;
 		return false;
 	}
 
@@ -176,7 +185,7 @@ public:
 	bool operator ++(int)
 	{
 
-		if( finished() ) return false;
+		if( reachedStopAt() ) return false;
 		// increament iteration number 
 		currentIter_++;
 

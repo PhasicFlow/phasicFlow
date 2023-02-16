@@ -45,6 +45,7 @@ pFlow::timeControl::timeControl
 	(
 		dict.getVal<real>("endTime")
 	),
+	stopAt_(endTime_),
 	currentTime_(startTime_),
 	saveInterval_
 	(
@@ -79,6 +80,7 @@ pFlow::timeControl::timeControl(
 	),
 	startTime_(startTime),
 	endTime_(endTime),
+	stopAt_(endTime_),
 	currentTime_(startTime_),
 	saveInterval_(saveInterval),
 	lastSaved_(startTime_),

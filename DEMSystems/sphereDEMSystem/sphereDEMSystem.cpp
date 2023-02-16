@@ -197,7 +197,7 @@ bool pFlow::sphereDEMSystem::iterate(
 	word timeName) 
 {
 
-	Control().time().setEndTime(upToTime);
+	Control().time().setStopAt(upToTime);
 	Control().time().setOutputToFile(timeToWrite, timeName);
 	
 	loop();
@@ -207,7 +207,7 @@ bool pFlow::sphereDEMSystem::iterate(
 
 bool pFlow::sphereDEMSystem::iterate(real upToTime)
 {
-	Control().time().setEndTime(upToTime);
+	Control().time().setStopAt(upToTime);
 	loop();
 	return true;
 }

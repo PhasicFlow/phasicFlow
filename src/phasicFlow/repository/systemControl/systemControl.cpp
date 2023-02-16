@@ -233,7 +233,9 @@ pFlow::systemControl::systemControl(
 bool pFlow::systemControl::operator ++(int)
 {
 
-	// skip writing to file for the first iteration 
+	// skip writing to file for the first iteration
+	auto finished = time()++; 
+	
 	writeToFileTimer_.start();
 	if(time().currentIter() != 0)
 	{
@@ -244,8 +246,9 @@ bool pFlow::systemControl::operator ++(int)
 			return false;
 		}
 	}
-	else if( time().finished() )
+	else if( time().finalTime() )
 	{
+		output<<"****************************************************************"<<endl;
 		if( !time().write() )
 		{
 			fatalErrorInFunction;
@@ -260,8 +263,7 @@ bool pFlow::systemControl::operator ++(int)
 		timers_.write(output, true);
 	}
 		
-	return time()++;
-
+	return finished;
 }
 
 
