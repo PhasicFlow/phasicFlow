@@ -3,6 +3,13 @@ The problem is to simulate a Rotating Drum with **6** Baffles with the diameter 
 * **12500** Particles with **4 mm** diameter
 * **7500** Particles with **5mm** diameter  
 
+<html>
+<body>
+<img src="https://github.com/omid-khosravi/DEMphasicFlow/blob/Pictures/Pictures/MixedparticlesRDB.png", width: 400px>
+
+</body>
+</html>
+
 ## Setting up the Case
 As it has been explained in the previous Cases, these Tutorials are based on text-based scripts. There are three parts in this case to study `caseSetup`, `setting` and `stl`.
 ## Particle Insertion
