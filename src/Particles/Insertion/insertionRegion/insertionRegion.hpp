@@ -18,97 +18,78 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __insertionRegion_hpp__
-#define __insertionRegion_hpp__
+#ifndef __InsertionRegion_hpp__
+#define __InsertionRegion_hpp__
 
-#include "timeFlowControl.hpp"
-#include "shapeMixture.hpp"
-#include "peakableRegions.hpp"
-#include "setFieldList.hpp"
+
+#include "insertionRegion.hpp"
+#include "dictionary.hpp"
 
 namespace pFlow
 {
 
-class dictionary;
-
-class insertionRegion
+template<typename ShapeType>
+class InsertionRegion
 :
-	public timeFlowControl
+	public insertionRegion
 {
 protected:
+	// - type of particle shapes 
+	const ShapeType& 	shapes_;
 
-	// - name of the region 
-	word  		name_;
-
-	// - type of insertion region
-	word		type_;
-
-	// peakable region of points
-	uniquePtr<peakableRegion>  	pRegion_ = nullptr;
-
-	// mixture of shapes 
-	uniquePtr<shapeMixture>  	mixture_ = nullptr;
-
-	// setFields for insertion region 
-	uniquePtr<setFieldList>     setFields_ = nullptr;
-
-
-	bool readInsertionRegion(const dictionary& dict);
-
-	bool writeInsertionRegion(dictionary& dict) const;
-
+	static bool checkForContact(
+				const realx3Vector& pos,
+				const realVector& diams,
+				const realx3& p,
+				const real& d);
 
 public:
 
-	TypeInfoNV("insertionRegion");
+	// - type info
+	TypeInfoTemplateNV("insertionRegion", ShapeType);
 
-	//// - Constructors
+	InsertionRegion(const dictionary& dict, const ShapeType& shapes);
 
-		insertionRegion(const dictionary& dict);
+	InsertionRegion(const InsertionRegion<ShapeType>& ) = default;
 
-		insertionRegion(const insertionRegion& src);
+	InsertionRegion(InsertionRegion<ShapeType>&&) = default;
 
-		insertionRegion(insertionRegion&&) = default;
+	InsertionRegion<ShapeType>& operator=(const InsertionRegion<ShapeType>& ) = default;
 
-		insertionRegion& operator=(const insertionRegion&);
-
-		insertionRegion& operator=(insertionRegion&&) = default;
-
-
-		~insertionRegion() = default;
+	InsertionRegion<ShapeType>& operator=(InsertionRegion<ShapeType>&&) = default;
 
 
-	//// - Methods 
-		const auto& setFields()const
-		{
-			return setFields_();
-		}
+	auto clone()const
+	{
+		return makeUnique<InsertionRegion<ShapeType>>(*this);
+	}
 
-		const auto& name()const
-		{
-			return name_;
-		}
+	auto clonePtr()const
+	{
+		return new InsertionRegion<ShapeType>(*this);
+	}
 
 
-	//// - IO operation
+	bool insertParticles
+	(
+		real currentTime,
+		real dt,
+		wordVector& names,
+		realx3Vector& pos,
+		bool& insertionOccured
+	);
 
-		bool read(const dictionary& dict)
-		{
-			if(!timeFlowControl::read(dict))return false;
+	//bool read(const dictionary& dict);
 
-			return readInsertionRegion(dict);
-		}
-
-		bool write(dictionary& dict)const
-		{
-			if(!timeFlowControl::write(dict)) return false;
-
-			return writeInsertionRegion(dict);
-		}
-
+	//bool write(dictionary& dict)const;
 
 };
 
-} //pFlow
 
-#endif //__insertionRegion_hpp__
+
+} // pFlow
+
+
+#include "InsertionRegion.cpp"
+
+#endif

@@ -18,50 +18,56 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __randomReal_hpp__
-#define __randomReal_hpp__
+#ifndef __RandomReal_hpp__
+#define __RandomReal_hpp__
 
-#include "types.hpp"
-#include "virtualConstructor.hpp"
+//#include <random>
+
+#include "randomReal.hpp"
+#include "uniformRandomReal.hpp"
+
 
 namespace pFlow
 {
 
-
-class randomReal
+template<typename DistributionType>
+class RandomReal
+:
+	public randomReal 
 {
-
 protected:
+
+ 	DistributionType distribution_;
 
 public:
 
-	TypeInfo("randomReal");
+	// type info
+	TypeInfoTemplate("randomReal", DistributionType);
 
-	randomReal(word UNUSED(distribution)){}
 
-	create_vCtor
+	RandomReal(word distribution);
+
+	add_vCtor
 	(
 		randomReal,
-		word,
-		(word distribution),
-		(distribution)
+		RandomReal,
+		word
 	);
 
-	virtual ~randomReal()= default;
+	virtual ~RandomReal()= default;
 
-	virtual real  randomNumber(real a, real b) = 0;
+	virtual real  randomNumber(real a, real b)override;
 
-	virtual realx3 randomNumber(realx3 a, realx3 b) = 0;
+	virtual realx3 randomNumber(realx3 a, realx3 b)override;
+	
 
-	
-	
-	
-	static
-	uniquePtr<randomReal> create(word distribution);
 };
 
 
-
 }
+
+#include "RandomReal.cpp"
+
+
 
 #endif

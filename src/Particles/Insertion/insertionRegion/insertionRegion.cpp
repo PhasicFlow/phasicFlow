@@ -18,122 +18,98 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
-#include "insertionRegion.hpp"
-#include "dictionary.hpp"
-
-bool pFlow::insertionRegion::readInsertionRegion
+template<typename ShapeType>
+bool pFlow::InsertionRegion<ShapeType>::checkForContact
 (
-	const dictionary& dict
+	const realx3Vector& pos,
+	const realVector& diams,
+	const realx3& p,
+	const real& d
 )
 {
 
-	name_ = dict.name();
-	type_ = dict.getVal<word>("type");
-	
-	pRegion_  = peakableRegion::create(type_, dict.subDict(type_+"Info"));
-	
-	mixture_ = makeUnique<shapeMixture>(dict.subDict("mixture"));
-
-	addToNumInserted(mixture_().totalInserted());
-
-	if( !dict.containsDictionay("setFields"))
+	ForAll(i, pos)
 	{
-		output<<"\n insertion region "<< name_ << " does not contain setFields dictionary."
-		" An empty dictoiinary is created for it. \n";
-		setFields_ = makeUnique<setFieldList>( dictionary("setFields") );
-	}
-	else
-	{
-		setFields_ = makeUnique<setFieldList>( dict.subDict("setFields") );
+		if( length(pos[i]-p) < 0.5*(diams[i]+d) ) return true;
 	}
 
-	for(auto& sfEntry:setFields_())
+	return false;
+}
+
+template<typename ShapeType>
+pFlow::InsertionRegion<ShapeType>::InsertionRegion
+(
+	const dictionary& dict,
+	const ShapeType& shapes
+)
+:
+	insertionRegion(dict),
+	shapes_(shapes)
+{
+
+}
+
+
+template<typename ShapeType>
+bool pFlow::InsertionRegion<ShapeType>::insertParticles
+(
+	real currentTime,
+	real dt,
+	wordVector& names,
+	realx3Vector& pos,
+	bool& insertionOccured
+)
+{
+	insertionOccured = false;
+
+	if(!insertionTime( currentTime, dt)) return true;
+
+	size_t newNum = numberToBeInserted(currentTime);
+	
+	if(newNum == 0) return true;
+
+	names.reserve(max(newNum,names.capacity()));
+	pos.reserve(max(newNum,pos.capacity()));
+	names.clear();
+	pos.clear();
+
+	realVector diams(newNum, RESERVE());
+
+	mixture_->getNextShapeNameN(newNum, names);
+
+	if(!shapes_.shapeToDiameter(names,diams))
 	{
-		if(!sfEntry.checkForTypeAndValueAll())
+		fatalErrorInFunction<<
+		"  error occured in insertion region "<< name() << 
+		" while converting shapes to diameter. \n";
+		return false;
+	}
+
+	size_t n = 0;
+
+	for(label iter=0; iter< 10*newNum ; ++iter)
+	{
+		if( !(n < newNum) ) 
 		{
-			fatalErrorInFunction<<
-			"   error in setFields dictionary "<< dict.globalName()<<endl;
-			return false;
+			addToNumInserted(newNum);
+			insertionOccured = true;
+			return true;
 		}
+		realx3 p = pRegion_().peek();
+		real d = diams[pos.size()];
+		if( !checkForContact(pos, diams, p, d) )
+		{
+			pos.push_back(p);
+			n++;
+		}
+
 	}
-	
-	return true;
+
+	fatalErrorInFunction<<
+	"  Cannot insert "<< newNum << " new particles from region "<< name()<<". \n"
+	"  pFlow could position only "<< n<< " particles in this region. \n";
+	addToNumInserted(n);
+	insertionOccured = false;
+	return false;
+
 }
-
-bool pFlow::insertionRegion::writeInsertionRegion
-(
-	dictionary& dict
-) const
-{
-	
-	if(!dict.add("type", type_)) return false;
-	
-
-	if(pRegion_)
-	{
-		auto& prDict = dict.subDictOrCreate(type_+"Info");
-		if(!pRegion_().write(prDict)) return false;
-	}
-
-	if(mixture_)
-	{
-		auto& mixDict = dict.subDictOrCreate("mixture");
-		if(!mixture_().write(mixDict)) return false;
-	}
-
-	if(setFields_)
-	{
-		auto& sfDict = dict.subDictOrCreate("setFields");
-		setFields_().write(sfDict);
-	}
-
-	return true;
-}
-
-pFlow::insertionRegion::insertionRegion
-(
-	const dictionary& dict
-)
-:
-	timeFlowControl(dict)
-{
-
-	if(!readInsertionRegion(dict))
-	{
-		fatalExit;
-	}
-}
-
-pFlow::insertionRegion::insertionRegion
-(
-	const insertionRegion& src
-)
-:
-	timeFlowControl(src),
-	name_(src.name_),
-	type_(src.type_),
-	pRegion_( src.pRegion_? src.pRegion_->clone(): nullptr),
-	mixture_( src.mixture_? src.mixture_->clone(): nullptr),
-	setFields_( src.setFields_? src.setFields_->clone(): nullptr)
-{}
-
-pFlow::insertionRegion& pFlow::insertionRegion::operator=
-(
-	const insertionRegion& src
-)
-{
-
-	if(&src == this)return *this;
-	timeFlowControl::operator=(src);
-
-	name_ = src.name_;
-	type_ = src.type_;
-	pRegion_ = (src.pRegion_? src.pRegion_->clone(): nullptr);
-	mixture_ = (src.mixture_? src.mixture_->clone(): nullptr);
-	setFields_ = (src.setFields_? src.setFields_->clone(): nullptr);
-
-	return *this;
-}
-
-

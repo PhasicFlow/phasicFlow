@@ -19,401 +19,291 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __iOstream_hpp__
-#define __iOstream_hpp__
+#ifndef __IOstream_hpp__
+#define __IOstream_hpp__
 
 // based on OpenFOAM stream, with some modifications/simplifications
 // to be tailored to our needs
 
+#include <iostream>
 
-#include "IOstream.hpp"
+#include "bTypesFunctions.hpp"
 
-const inline char* defaultColor = "\033[0m";
-const inline char* blackColor   = "\033[30m";
-const inline char* redColor     = "\033[31m";
-const inline char* greenColor   = "\033[32m";
-const inline char* yellowColor  = "\033[33m";
-const inline char* blueColor    = "\033[34m";
-const inline char* magentaColor = "\033[35m";
-const inline char* cyanColor    = "\033[36m";
-const inline char* whiteColor   = "\033[37m"; 
+using std::ios_base;
+using std::istream;
+using std::ostream;
 
-const inline char* boldChar     = "\033[1m";
+using std::cin;
+using std::cout;
+using std::cerr;
 
 
 
 namespace pFlow
 {
 
-// Forward Declarations
-class token;
-
-
-
-class iOstream
-:
-    public IOstream
+class IOstream
 {
+
+public:
+
+
+    enum streamAccess : char
+    {
+        CLOSED = 0,         //!< stream is not open
+        OPENED              //!< stream is open
+    };
+
+
+    //- Default precision
+    static unsigned int precision_;
+
 protected:
 
-    // Protected Data
+	//- Name for any generic stream - normally treat as readonly
+    static word staticName_;
 
-        //- Indentation of the entry from the start of the keyword
-        static constexpr const unsigned short entryIndentation_ = 16;
+    streamAccess openClosed_;
 
-        //- Number of spaces per indent level
-        unsigned short indentSize_ = 4;
+    ios_base::iostate ioState_;
 
-        //- Current indent level
-        unsigned short indentLevel_ = 0;
+  
+    //- The file line
+    int32 lineNumber_;
+
+
+    // Protected Member Functions
+   
+    //- Set stream opened
+    void setOpened()
+    {
+        openClosed_ = OPENED;
+    }
+
+    //- Set stream closed
+    void setClosed()
+    {
+        openClosed_ = CLOSED;
+    }
+
+    //- Set stream state
+    void setState(ios_base::iostate state)
+    {
+        ioState_ = state;
+    }
+
+    //- Set stream to be good
+    void setGood()
+    {
+        ioState_ = ios_base::iostate(0);
+    }
 
 
 public:
-    
 
-    // Constructor
-    explicit iOstream()
-    {}
+    // Constructors
+    explicit IOstream():
+        openClosed_(CLOSED),
+        ioState_(ios_base::iostate(0)),
+        lineNumber_(0)
+    {
+        setBad();
+    }
 
-    //- Copy construct
-    iOstream(const iOstream&) = default;
+    IOstream(const IOstream&) = default;
 
     //- Destructor
-    virtual ~iOstream() = default;
+    virtual ~IOstream() = default;
+      
+    
+    //// Member Functions
 
+    //- Return the name of the stream
+    virtual const word& name() const;
 
-    // Write Functions
+    //- Return non-const access to the name of the stream
+    virtual word& name();
 
-    //- Write token to stream or otherwise handle it.
-    //  \return false if the token type was not handled by this method
-    virtual bool write(const token& tok) = 0;
+    //- Check IOstream status for given operation.
+    //  Print IOstream state or generate a FatalIOError
+    //  when an error has occurred.
+    //  The base implementation is a fatalCheck
+    virtual bool check(const char* operation) const;
 
-    //- Write character
-    virtual iOstream& write(const char c) = 0;
+    //- Check IOstream status for given operation.
+    //  Generate a FatalIOError when an error has occurred.
+    bool fatalCheck(const char* operation) const;
 
-    //- Write character string
-    virtual iOstream& write(const char* str) = 0;
+    //- Return true if stream has been opened
+    bool opened() const
+    {
+        return openClosed_ == OPENED;
+    }
 
-    //- Write word
-    virtual iOstream& write(const word& str) = 0;
+    //- Return true if stream is closed
+    bool closed() const
+    {
+        return openClosed_ == CLOSED;
+    }
 
+    //- Return true if next operation might succeed
+    bool good() const
+    {
+        return ioState_ == 0;
+    }
 
-    //- Write std::string surrounded by quotes.
-    //  Optional write without quotes.
-    virtual iOstream& writeQuoted
+    //- Return true if end of input seen
+    bool eof() const
+    {
+        return ioState_ & ios_base::eofbit;
+    }
+
+    //- Return true if next operation will fail
+    bool fail() const
+    {
+        return ioState_ & (ios_base::badbit | ios_base::failbit);
+    }
+
+    //- Return true if stream is corrupted
+    bool bad() const
+    {
+        return ioState_ & ios_base::badbit;
+    }
+
+    //- Return true if the stream has not failed
+    explicit operator bool() const
+    {
+        return !fail();
+    }
+
+    //- Return true if the stream has failed
+    bool operator!() const
+    {
+        return fail();
+    }
+
+   
+    //- Const access to the current stream line number
+    int32 lineNumber() const
+    {
+        return lineNumber_;
+    }
+
+    //- Non-const access to the current stream line number
+    int32& lineNumber()
+    {
+        return lineNumber_;
+    }
+
+    //- Set the stream line number
+    //  \return the previous value
+    int32 lineNumber(const int32 num)
+    {
+        const int32 old(lineNumber_);
+        lineNumber_ = num;
+        return old;
+    }
+
+    //- Return flags of stream
+    virtual ios_base::fmtflags flags() const = 0;
+
+    //- Return the default precision
+    static unsigned int defaultPrecision()
+    {
+        return precision_;
+    }
+
+    //- Reset the default precision
+    //  \return the previous value
+    static unsigned int defaultPrecision(unsigned int prec)
+    {
+        unsigned int old(precision_);
+        precision_ = prec;
+        return old;
+    }
+
+    //- Set stream to have reached eof
+    void setEof()
+    {
+        ioState_ |= ios_base::eofbit;
+    }
+
+    //- Set stream to have failed
+    void setFail()
+    {
+        ioState_ |= ios_base::failbit;
+    }
+
+    //- Set stream to be bad
+    void setBad()
+    {
+        ioState_ |= ios_base::badbit;
+    }
+
+    //- Set flags of stream
+    virtual ios_base::fmtflags flags(const ios_base::fmtflags f) = 0;
+
+    //- Set flags of stream
+    ios_base::fmtflags setf(const ios_base::fmtflags f)
+    {
+        return flags(flags() | f);
+    }
+
+    //- Set flags of given field of stream
+    ios_base::fmtflags setf
     (
-        const word& str,
-        const bool quoted=true
-    ) = 0;
-
-    
-    //- Write int64
-    virtual iOstream& write(const int64 val) = 0;
-
-    //- Write int32
-    virtual iOstream& write(const int32 val) = 0;
-
-    //- Write label
-    virtual iOstream& write(const label val) = 0;
-
-    //- Write uint32
-    virtual iOstream& write(const uint32 val) = 0;
-
-    //- Write uint16
-    virtual iOstream& write(const uint16 val) = 0;
-
-    //- Write float
-    virtual iOstream& write(const float val) = 0;
-
-    //- Write double
-    virtual iOstream& write(const double val) = 0;
-   
-
-    
-    //- Add indentation characters
-    virtual void indent() = 0;
-
-    //- Return indent level
-    unsigned short indentSize() const
+        const ios_base::fmtflags f,
+        const ios_base::fmtflags mask
+    )
     {
-        return indentSize_;
+        return flags((flags() & ~mask) | (f & mask));
     }
 
-    //- Access to indent size
-    unsigned short& indentSize()
+    //- Unset flags of stream
+    void unsetf(const ios_base::fmtflags f)
     {
-        return indentSize_;
+        flags(flags() & ~f);
     }
 
-    //- Return indent level
-    unsigned short indentLevel() const
-    {
-        return indentLevel_;
-    }
 
-    //- Access to indent level
-    unsigned short& indentLevel()
-    {
-        return indentLevel_;
-    }
-
-    //- Increment the indent level
-    void incrIndent()
-    {
-        ++indentLevel_;
-    }
-
-    //- Decrement the indent level
-    void decrIndent();
-
-   
-
-    
-    //- Write begin block group with a name
-    //  Increments indentation, adds newline.
-    virtual iOstream& beginBlock(const word& kw);
-
-    //- Write begin block group without a name
-    //  Increments indentation, adds newline.
-    virtual iOstream& beginBlock();
-
-    //- Write end block group
-    //  Decrements indentation, adds newline.
-    virtual iOstream& endBlock();
-
-    //- Write begin list "("
-    virtual iOstream& beginList();
-
-    //- Write begin list with keyword "kw ("
-    virtual iOstream& beginList(const word& kw);
-
-    //- Write end list ")"
-    virtual iOstream& endList();
-
-    //- Write begin list "["
-    virtual iOstream& beginSquare();
-
-    //- Write begin list with keyword "kw ["
-    virtual iOstream& beginSquare(const word& kw);
-
-    //- Write end list "]"
-    virtual iOstream& endSquare();
-
-    //- Write end entry (';') followed by newline.
-    virtual iOstream& endEntry();
-
-    //- Write a newLine to stream
-    virtual iOstream& newLine();
-
-    //- Write space to stream
-    virtual iOstream& space(int32 n=1);
-
-    
-     //- Write the keyword followed by an appropriate indentation
-    virtual iOstream& writeWordKeyword(const word& kw);
-
-    //- Write a keyword/value entry.
-    template<class T>
-    iOstream& writeWordEntry(const word& key, const T& value)
-    {
-        writeWordKeyword(key) << value;
-        return endEntry();
-    }
-
-    //// Stream state functions
-
-    //- Flush stream
-    virtual void flush() = 0;
-
-    //- Add newline and flush stream
-    virtual void endl() = 0;
-
-    //- Get padding character
-    virtual char fill() const = 0;
-
-    //- Set padding character for formatted field up to field width
-    virtual char fill(const char fillch) = 0;
-
-    //- Get width of output field
-    virtual int width() const = 0;
-
-    //- Set width of output field (and return old width)
-    virtual int width(const int w) = 0;
-
-    //- Get precision of output field
-    virtual int precision() const = 0;
-
-    //- Set precision of output field (and return old precision)
-    virtual int precision(const int p) = 0;
+}; // end of IOstream
 
 
-    // Member Operators
+//- An IOstream manipulator
+typedef IOstream& (*IOstreamManip)(IOstream&);
 
-    //- Return a non-const reference to const iOstream
-    //  Needed for write functions where the stream argument is temporary:
-    //  e.g. thing thisThing(OFstream("thingFileName")());
-    iOstream& operator()() const
-    {
-        return const_cast<iOstream&>(*this);
-    }
-};
-
-
-
-//- An iOstream manipulator
-typedef iOstream& (*iOstreamManip)(iOstream&);
-
-
-//- operator<< handling for manipulators without arguments
-inline iOstream& operator<<(iOstream& os, iOstreamManip f)
+inline IOstream& dec(IOstream& io)
 {
-    return f(os);
+    io.setf(ios_base::dec, ios_base::dec|ios_base::hex|ios_base::oct);
+    return io;
 }
 
-//- operator<< handling for manipulators without arguments
-inline iOstream& operator<<(iOstream& os, IOstreamManip f)
+inline IOstream& hex(IOstream& io)
 {
-    f(os);
-    return os;
+    io.setf(ios_base::hex, ios_base::dec|ios_base::hex|ios_base::oct);
+    return io;
+}
+
+inline IOstream& oct(IOstream& io)
+{
+    io.setf(ios_base::oct, ios_base::dec|ios_base::hex|ios_base::oct);
+    return io;
+}
+
+inline IOstream& fixed(IOstream& io)
+{
+    io.setf(ios_base::fixed, ios_base::floatfield);
+    return io;
+}
+
+inline IOstream& scientific(IOstream& io)
+{
+    io.setf(ios_base::scientific, ios_base::floatfield);
+    return io;
 }
 
 
-//- Indent stream
-inline iOstream& indent(iOstream& os)
-{
-    os.indent();
-    return os;
-}
 
-//- Increment the indent level
-inline iOstream& incrIndent(iOstream& os)
-{
-    os.incrIndent();
-    return os;
-}
+} // pFlow
 
-//- Decrement the indent level
-inline iOstream& decrIndent(iOstream& os)
-{
-    os.decrIndent();
-    return os;
-}
-
-
-//- Flush stream
-inline iOstream& flush(iOstream& os)
-{
-    os.flush();
-    return os;
-}
-
-
-//- Add newline and flush stream
-inline iOstream& endl(iOstream& os)
-{
-    os.endl();
-    return os;
-}
-
-
-//- Write begin block group without a name
-//  Increments indentation, adds newline.
-inline iOstream& beginBlock(iOstream& os)
-{
-    os.beginBlock();
-    return os;
-}
-
-
-//- Write end block group
-//  Decrements indentation, adds newline.
-inline iOstream& endBlock(iOstream& os)
-{
-    os.endBlock();
-    return os;
-}
-
-
-//- Write end entry (';') followed by newline.
-inline iOstream& endEntry(iOstream& os)
-{
-    os.endEntry();
-    return os;
-}
-
-
-// overloading for basic types
-inline iOstream& operator<<( iOstream& os, const char c)
-{
-    return os.write(c);
-}
-
-inline iOstream& operator<<( iOstream& os, const char * buf)
-{
-    return os.write(buf);
-}
-
-inline iOstream& operator<<( iOstream& os, const word& w)
-{
-    return os.write(w);
-}
-
-
-inline iOstream& operator<<( iOstream& os, const int64& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const int32& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const int16& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const int8& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const label& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const uint32& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const uint16& val)
-{
-    return os.write(val);
-}
-
-inline iOstream& operator<<( iOstream& os, const float& val)
-{
-    return os.write(val);
-}
-
-
-inline iOstream& operator<<( iOstream& os, const double& val)
-{
-    return os.write(val);
-}
-// Useful aliases for tab and newline characters
-constexpr char tab = '\t';
-constexpr char nl = '\n';
-
-
-
-
-} //  pFlow
-
-
-#endif
-
-// ************************************************************************* //
+#endif  //  __IOstream__hpp__

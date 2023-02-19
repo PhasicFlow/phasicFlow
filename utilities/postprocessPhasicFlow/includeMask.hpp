@@ -18,86 +18,229 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __includeMask_hpp__
-#define __includeMask_hpp__
+#ifndef __IncludeMask_hpp__
+#define __IncludeMask_hpp__
 
-#include "virtualConstructor.hpp"
-#include "readFromTimeFolder.hpp"
-#include "dictionary.hpp"
 
+#include "includeMask.hpp"
 
 namespace pFlow
 {
 
 
-class includeMask
+template<typename T>
+struct greaterThanOp
+{
+	TypeInfoNV("greaterThan");
+
+ 	inline
+ 	bool operator()(const T &compVal, const T &val) const {
+   		return val > compVal; }
+};
+
+template<typename T>
+struct greaterThanEqOp
+{
+	TypeInfoNV("greaterThanEq");
+
+ 	inline
+ 	bool operator()(const T &compVal, const T &val) const {
+   		return val >= compVal; }
+};
+
+template<typename T>
+struct lessThanOp
+{
+	TypeInfoNV("lessThan");
+
+	inline
+	bool operator()(const T &compVal, const T &val) const {
+		return val < compVal; }
+};
+
+template<typename T>
+struct lessThanEqOp
+{
+	TypeInfoNV("lessThanEq");
+
+	inline
+	bool operator()(const T &compVal, const T &val) const {
+		return val <= compVal; }
+};
+
+template<typename T>
+struct equalOp
+{
+	TypeInfoNV("equal");
+
+	inline
+	bool operator()(const T &compVal, const T &val) const {
+		return equal(val , compVal); }
+};
+
+
+template<typename T>
+struct betweenOp
+{
+	TypeInfoNV("between");
+
+	inline
+	bool operator()(const T &compVal1, const T &compVal2 ,const T &val) const {
+		return val>compVal1 && val<compVal2; }
+};
+
+
+template<typename T>
+struct betweenEqOp
+{
+	TypeInfoNV("betweenEq");
+
+	inline
+	bool operator()(const T &compVal1, const T &compVal2 ,const T &val) const {
+		return val>=compVal1 && val<=compVal2; }
+};
+
+template<typename T>
+struct allOp
+{
+	TypeInfoNV("all");
+
+	inline
+	bool operator()() const {return true; }
+};
+
+
+
+template<typename T, template<class> class Operator>
+class compareOne
+{
+public:
+
+	using opertorType = Operator<T>;
+
+protected:
+	T 				compValue_{};
+	opertorType 	operator_{};
+public:
+
+	TypeInfoNV(Operator<T>::TYPENAME());
+
+	compareOne(const dictionary& dict)
+	:
+		compValue_(dict.getVal<T>("value"))
+	{}
+
+	bool operator()(const T& value)const
+	{
+		return operator_(compValue_, value);
+	}
+};
+
+template<typename T, template<class> class Operator>
+class compareTwo
+{
+public:
+	using opertorType = Operator<T>;
+protected:
+	T 				compValue1_;
+	T  				compValue2_;
+	opertorType 	operator_{};
+public:
+	
+	TypeInfoNV(opertorType::TYPENAME());
+
+	compareTwo(const dictionary& dict)
+	:
+		compValue1_(dict.getVal<T>("value1")),
+		compValue2_(dict.getVal<T>("value2"))
+	{}
+
+	bool operator()(const T& value)const
+	{
+		return operator_(compValue1_, compValue2_, value);
+	}
+};
+
+template<typename T, typename Operator>
+class compareZero
 {
 protected:
-	word 	fieldName_;
+	Operator 	operator_{};
+public:
 
-	word 	fieldType_;
+	TypeInfoNV(Operator::TYPENAME());
+	compareZero(const dictionary& dict);
 
-	word 	operatorType_;	
+	bool operator()(const T& value) const
+	{
+		return operator_();
+	}
+};
 
-	readFromTimeFolder& timeFolder_;
-
-	static
-	bool getFieldType(const dictionary& dict, readFromTimeFolder& timeFolder, word& fName, word& fType);
+template<typename T, typename Operator>
+class IncludeMask
+:
+	public includeMask
+{
+protected:
+		
+	Operator 				operator_;
+	
+	pointField_H<T> 		field_;
 
 public:
 
-	TypeInfo("includeMask");
+	TypeInfoTemplate2("IncludeMask", T, Operator);
 
-	includeMask(const dictionary& dict, const word& opType, readFromTimeFolder& timeFolder);
-
-	virtual ~includeMask() = default;
-
-	create_vCtor(
-		includeMask,
-		dictionary,
-		(
-			const dictionary& dict,
-			const word& opType,
-			readFromTimeFolder& timeFolder
-		),
-		(dict, opType, timeFolder)		
-		);
-
-	word fieldName()const
-	{
-		return   fieldName_;
-	}
-
-	word fieldType()const
-	{
-		return fieldType_;
-	}
-
-	word operatorType()const
-	{
-		return operatorType_;
-	}
-
-	auto& timeFolder()
-	{
-		return timeFolder_;
-	}
-
-	virtual bool isIncluded(int32 n) const = 0;
-
-	bool operator()(int32 n) const 
-	{
-		return isIncluded(n);
-	}
-
-	static 
-	uniquePtr<includeMask> create(
+	IncludeMask(
 		const dictionary& dict,
-		const word& opType,
-		readFromTimeFolder& timeFolder);
-	
+	 	const word& opType,
+	 	readFromTimeFolder& timeFolder)
+	:
+		includeMask(dict, opType, timeFolder),
+		operator_(dict),
+		field_(timeFolder.readPointField_H<T>(this->fieldName()))
+	{}
+
+	add_vCtor(
+		includeMask,
+		IncludeMask,
+		dictionary);
+
+	bool isIncluded(int32 n)const override
+	{
+		return operator_(field_[n]);
+	}
+
 };
 
+
+template<typename T>
+class IncludeMask<T,allOp<T>>
+:
+	public includeMask
+{
+public:
+	TypeInfoTemplate2("IncludeMask", T, allOp<int8>);
+
+	IncludeMask(
+		const dictionary& dict,
+	 	const word& opType,
+	 	readFromTimeFolder& timeFolder)
+	:
+		includeMask(dict, opType, timeFolder)
+	{}
+
+	add_vCtor(
+		includeMask,
+		IncludeMask,
+		dictionary);
+	
+	bool isIncluded(int32 n)const override
+	{
+		return true;
+	}
+};
 
 
 } // pFlow

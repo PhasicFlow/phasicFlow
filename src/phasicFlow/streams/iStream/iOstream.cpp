@@ -18,163 +18,43 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "IOstream.hpp"
 #include "iOstream.hpp"
-#include "token.hpp"
+#include "error.hpp"
 
-// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
-void pFlow::iOstream::decrIndent()
+unsigned int pFlow::IOstream::precision_ = 6;
+
+pFlow::word pFlow::IOstream::staticName_("IOstream");
+
+
+const pFlow::word& pFlow::IOstream::name() const
 {
-    if (!indentLevel_)
-    {
-        std::cerr
-            << "iOstream::decrIndent() : attempt to decrement 0 indent level\n";
-    }
-    else
-    {
-        --indentLevel_;
-    }
+    return staticName_;
 }
 
 
-pFlow::iOstream& pFlow::iOstream::writeWordKeyword(const word& kw)
+pFlow::word& pFlow::IOstream::name()
 {
-    
-    indent();
-    writeQuoted(kw, false);
-    
-    if (indentSize_ <= 1)
-    {
-        write(char(token::SPACE));
-        return *this;
-    }
+    return staticName_;
+}
 
-    int32 nSpaces = entryIndentation_ - int32(kw.size());   
+bool pFlow::IOstream::check(const char* operation) const
+{
+    return fatalCheck(operation);
+}
 
-    // Could also increment by indentSize_ ...
-    if (nSpaces < 1)
+
+bool pFlow::IOstream::fatalCheck(const char* operation) const
+{
+    const bool ok = !bad();
+
+    if (!ok)
     {
-        nSpaces = 1;
+    	fatalErrorInFunction
+            << "error in IOstream " << name() << " for operation " << operation;
+            fatalExit;
     }
 
-    while (nSpaces--)
-    {
-        write(char(token::SPACE));
-    }
-
-    return *this;
+    return ok;
 }
-
-
-pFlow::iOstream& pFlow::iOstream::beginBlock(const word& kw)
-{
-    indent(); write(kw); newLine();
-    beginBlock();
-
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::beginBlock()
-{
-    indent(); write(char(token::BEGIN_BLOCK)); newLine();
-    incrIndent();
-
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::endBlock()
-{
-    decrIndent();
-    indent(); write(char(token::END_BLOCK)); newLine();
-
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::endEntry()
-{
-    write(char(token::END_STATEMENT)); newLine();
-
-    return *this;
-}
-
-//- Write a newLine to stream
-pFlow::iOstream& pFlow::iOstream::newLine()
-{
-    write(char(token::NL));
-    return *this;
-}
-
-pFlow::iOstream& pFlow::iOstream::space
-(
-    int32 n
-)
-{
-    for(int32 i=0; i<n; i++)
-    {
-        write(char(token::SPACE));        
-    }
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::beginList
-(
-)
-{
-    write(char(token::BEGIN_LIST));
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::beginList
-(
-    const word& kw
-)
-{
-    writeWordKeyword(kw); beginList();
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::endList
-(
-)
-{
-    write(char(token::END_LIST));
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::beginSquare
-(
-)
-{
-    write(char(token::BEGIN_SQR));
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::beginSquare
-(
-    const word& kw
-)
-{
-    writeWordKeyword(kw); beginSquare();
-    return *this;
-}
-
-
-pFlow::iOstream& pFlow::iOstream::endSquare
-(
-)
-{
-    write(char(token::END_SQR));
-    return *this;
-}
-
-
-// ************************************************************************* //

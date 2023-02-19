@@ -19,115 +19,228 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __contactSearch_hpp__
-#define __contactSearch_hpp__
+#ifndef __ContactSearch_hpp__
+#define __ContactSearch_hpp__
 
 
-#include "interactionBase.hpp"
-#include "unsortedPairs.hpp"
+#include "contactSearch.hpp"
 #include "box.hpp"
-#include "dictionary.hpp"
 
 namespace pFlow
 {
 
-
-class contactSearch
+template<
+	template<class> class BaseMethod,
+	template<class> class WallMapping	
+>
+class ContactSearch
 :
-	public interactionBase
+	public contactSearch
 {
 public:
-	using IdType 			= typename interactionBase::IdType;
+	
+	using IdType 			= typename contactSearch::IdType;
 
-	using IndexType 		= typename interactionBase::IndexType;
+	using IndexType 		= typename contactSearch::IndexType;
 
-	using ExecutionSpace 	= typename interactionBase::ExecutionSpace;
+	using ExecutionSpace 	= typename contactSearch::ExecutionSpace;
 
-	using PairContainerType   = unsortedPairs<ExecutionSpace, IdType>;
+	using PairContainerType = typename contactSearch::PairContainerType;
+
+	using ParticleContactSearchType = 
+		BaseMethod<
+			ExecutionSpace>;
+
+	using WallMappingType =
+		WallMapping<
+			ExecutionSpace>;
 
 protected:
-
-	const box& 			domain_;
-
-	dictionary 	dict_;
-
-	Timer 		sphereSphereTimer_;
-
-	Timer 		sphereWallTimer_;
-
-	auto& dict()
-	{
-		return dict_;
-	}
 	
+
+	uniquePtr<ParticleContactSearchType> particleContactSearch_ = nullptr;
+
+	uniquePtr<WallMappingType> 			 wallMapping_ = nullptr;
+
 public:
 
-	TypeInfo("contactSearch");
+	TypeInfoTemplate2("ContactSearch", ParticleContactSearchType, WallMappingType);
 
-	contactSearch(
-		const dictionary& dict,
+	ContactSearch(
+		const dictionary& csDict,
 		const box& domain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
-	 	Timers& timers);
+	 	Timers& timers)
+	:
+		contactSearch(csDict, domain, prtcl, geom, timers)
+		
+	{
 
-	virtual ~contactSearch()=default;
+		auto method = dict().getVal<word>("method");
+		auto wmMethod = dict().getVal<word>("wallMapping");
+		
+		auto nbDict = dict().subDict(method+"Info");
+
+		real minD, maxD;
+		this->Particles().boundingSphereMinMax(minD, maxD);
+		
+		const auto& position = this->Particles().pointPosition().deviceVectorAll();
+		const auto& diam = this->Particles().boundingSphere().deviceVectorAll();
+
+		particleContactSearch_ = 
+			makeUnique<ParticleContactSearchType>
+			(
+				nbDict,
+				this->domain(),
+				minD,
+				maxD,
+				position,
+				diam
+			);
+		REPORT(2)<<"Contact search algorithm for particle-particle is "<<
+				 greenText(particleContactSearch_().typeName())<<endREPORT;
 
 
-	create_vCtor
-	(
+		auto wmDict = dict().subDict(wmMethod+"Info");
+
+		int32 wnPoints = this->Geometry().numPoints();
+		int32 wnTri    = this->Geometry().size();
+
+		const auto& wPoints = this->Geometry().points().deviceVectorAll();
+		const auto& wVertices = this->Geometry().vertices().deviceVectorAll();
+
+		wallMapping_ = 
+			makeUnique<WallMappingType>(
+				wmDict,
+				particleContactSearch_().numLevels(),
+				particleContactSearch_().getCellsLevels(),
+				wnPoints,
+				wnTri, 
+				wPoints,
+				wVertices
+				);
+		REPORT(2)<<"Wall mapping algorithm for particle-wall is "<<
+				 greenText(wallMapping_().typeName())<< endREPORT;
+
+	}
+
+
+	add_vCtor(
 		contactSearch,
-		dictionary,
-		(
-			const dictionary& dict,
-			const box& domain,
-		 	const particles& prtcl,
-		 	const geometry&  geom,
-		 	Timers& timers
-	 	),
-	 	(dict, domain, prtcl, geom, timers)
-	);
-
-	const auto& domain()const
-	{
-		return domain_;
-	}
-
-	const auto& dict()const
-	{
-		return dict_;
-	}
-
-
-	virtual 
+		ContactSearch,
+		dictionary);
+	
 	bool broadSearch(
 		PairContainerType& ppPairs,
 		PairContainerType& pwPairs,
-		bool force = false) = 0;
+		bool force = false) override
+	{
 
-	virtual 
-	bool ppEnterBroadSearch()const = 0;
+		
+		if(particleContactSearch_)
+		{
+			auto activeRange = this->Particles().activeRange();
 
-	virtual 
-	bool pwEnterBroadSearch()const = 0;
+			sphereSphereTimer_.start();
 
-	virtual 
-	bool ppPerformedBroadSearch()const = 0;
+			if(this->Particles().allActive())
+			{		
+				particleContactSearch_().broadSearch(ppPairs, activeRange, force);
+			}
+			else
+			{		
+				particleContactSearch_().broadSearch(ppPairs, activeRange, this->Particles().activePointsMaskD(), force);
+			}
 
-	virtual 
-	bool pwPerformedBroadSearch()const = 0;
+			sphereSphereTimer_.end();
+
+		}
+		else
+			return false;
+		
+		if(wallMapping_)
+		{
+			sphereWallTimer_.start();
+			wallMapping_().broadSearch(pwPairs, particleContactSearch_(), force);
+			sphereWallTimer_.end();
+		}
+		else
+			return false;
+
+		
+		
+		return true;
+	}
+
+
+	bool ppEnterBroadSearch()const override
+	{
+		if(particleContactSearch_)
+		{
+			return particleContactSearch_().enterBoadSearch(); 
+		}
+		return false;
+	}
+
+	bool pwEnterBroadSearch()const override
+	{
+		if(wallMapping_)
+		{
+			return wallMapping_().enterBoadSearch();
+		}
+		return false;
+	}
 	
 
-	static 
-	uniquePtr<contactSearch> create(
-		const dictionary& dict,
-		const box& domain,
-	 	const particles& prtcl,
-	 	const geometry& geom,
-	 	Timers& timers);
+	bool ppPerformedBroadSearch()const override
+	{
+		if(particleContactSearch_)
+		{
+			return particleContactSearch_().performedSearch();
+		}
+		return false;
+	}
 
+	
+	bool pwPerformedBroadSearch()const override
+	{
+		if(wallMapping_)
+		{
+			return wallMapping_().performedSearch();
+		}
+		return false;
+	}
+
+	/*bool update(const eventMessage& msg) 
+	{
+		if(msg.isSizeChanged() ) 
+		{
+			auto newSize = this->prtcl().size();
+			if(!particleContactSearch_().objectSizeChanged(newSize))
+			{
+				fatalErrorInFunction<<
+				"erro in changing the size for particleContactSearch_ \n";
+				return false;
+			}
+		}
+
+		if(msg.isCapacityChanged() ) 
+		{
+			auto newSize = this->prtcl().capacity();
+			if(!particleContactSearch_().objectSizeChanged(newSize))
+			{
+				fatalErrorInFunction<<
+				"erro in changing the capacity for particleContactSearch_ \n";
+				return false;
+			}
+		}	
+		
+		return true;
+	}*/
+	
+	
 };
-
 
 }
 

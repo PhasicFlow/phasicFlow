@@ -19,64 +19,72 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __peakableRegion_hpp__
-#define __peakableRegion_hpp__
+#ifndef __PeakableRegion_hpp__
+#define __PeakableRegion_hpp__
 
-#include "types.hpp"
-#include "virtualConstructor.hpp"
 
+#include "peakableRegion.hpp"
+#include "dictionary.hpp"
 
 namespace pFlow
 {
 
 
-class dictionary;
 
-class peakableRegion
+
+template<typename RegionType>
+class PeakableRegion
+:
+	public peakableRegion
 {
 protected:
 
-	
+	RegionType 		region_;
+
 public:
 
 	// type info
-	TypeInfo("peakableRegion");
+	TypeInfoTemplate("peakableRegion", RegionType);
 
-		peakableRegion(const word& type, const dictionary& dict);
+	//// - Constructors 
+		PeakableRegion(const word& type, const dictionary& dict);
 
-		create_vCtor(
+		add_vCtor(
 			peakableRegion,
-			word,
-			(const word& type, const dictionary& dict),
-			(type, dict)
+			PeakableRegion,
+			word
 			);
 
-		virtual uniquePtr<peakableRegion> clone()const = 0;
+		virtual uniquePtr<peakableRegion> clone()const override
+		{
+			return makeUnique<PeakableRegion<RegionType>>(*this);
+		}
 		
-		virtual peakableRegion* clonePtr()const = 0;
+		virtual peakableRegion* clonePtr()const override
+		{
+			return new PeakableRegion<RegionType>(*this);
+		}
 
-		virtual ~peakableRegion() = default;
+
+		virtual ~PeakableRegion() = default;
 
 	//// - Methods
 
-		virtual bool  isInside(const realx3& point)const = 0;
+		virtual bool  isInside(const realx3& point)const override;
 
-		virtual realx3 peek()const = 0;
+		virtual realx3 peek()const override;
 
 
 	//// - IO operatoins 
 
-		virtual bool read(const dictionary& dict) = 0;
+		virtual bool read(const dictionary& dict) override;
 
-		virtual bool write(dictionary& dict)const = 0;
-
-	// - static create 
-	static uniquePtr<peakableRegion> 
-		create(const word& type, const dictionary& dict);
+		virtual bool write(dictionary& dict)const override;
 
 };
 
 } // pFlow
 
+#include "PeakableRegion.cpp"
 
 #endif

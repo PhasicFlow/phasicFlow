@@ -19,42 +19,45 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#include "peakableRegion.hpp"
-#include "dictionary.hpp"
-
-pFlow::peakableRegion::peakableRegion
+template<typename RegionType>
+pFlow::PeakableRegion<RegionType>::PeakableRegion
 (
-	const word& type, const dictionary& dict
-)
-{
-	CONSUME_PARAM(type);
-	CONSUME_PARAM(dict);
-}
-
-
-pFlow::uniquePtr<pFlow::peakableRegion> pFlow::peakableRegion::create
-(
-	const word& type,
+	const word& type, 
 	const dictionary& dict
 )
+:
+	peakableRegion(type, dict),
+	region_(dict)
 {
-	word regionType = angleBracketsNames("peakableRegion", type);
-
-	if( wordvCtorSelector_.search(regionType) )
-	{
-		return wordvCtorSelector_[regionType] (type, dict);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< regionType << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			wordvCtorSelector_
-		);
-		fatalExit;
-	}
-
-	return nullptr;
+	
 }
+
+template<typename RegionType>
+bool  pFlow::PeakableRegion<RegionType>::isInside
+(
+	const realx3& point
+)const
+{
+	return region_.isInside(point);
+}
+
+
+template<typename RegionType>
+pFlow::realx3 pFlow::PeakableRegion<RegionType>::peek()const
+{
+	return region_.peek();
+}
+	
+template<typename RegionType>
+bool pFlow::PeakableRegion<RegionType>::read(const dictionary& dict)
+{
+	return region_.read(dict);
+}
+
+template<typename RegionType>
+bool pFlow::PeakableRegion<RegionType>::write(dictionary& dict)const
+{
+	return region_.write(dict);
+}
+
+

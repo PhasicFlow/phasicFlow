@@ -18,152 +18,147 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __processField_hpp__
-#define __processField_hpp__
+#ifndef __ProcessField_hpp__ 
+#define __ProcessField_hpp__
 
 
-#include "virtualConstructor.hpp"
-#include "dictionary.hpp"
-#include "readFromTimeFolder.hpp"
-#include "includeMask.hpp"
-#include "pointRectCell.hpp"
+#include "processField.hpp"
+#include "rectMeshFields.hpp"
+#include "twoPartEntry.hpp"
+#include "fieldOperations.hpp"
+#include "rectMeshFieldToVTK.hpp"
 
 namespace pFlow
 {
 
 
-class repository;
-
-class processField
+template<typename T>
+class ProcessField
+:
+	public processField
 {
+
 protected:
 
-	dictionary 					dict_;
+	pointField_H<T>& 	field_;
 
-	pointRectCell& 				pointToCell_;
-	
-	mutable readFromTimeFolder 	timeFolder_;
 
-	word 	processedFieldName_;
-
-	word  	fieldName_;
-
-	word  	fieldType_;
-
-	word 	operation_;
-
-	word  	includeMaskType_;
-
-	int32 	threshold_ = 1;
-
-	uniquePtr<includeMask> includeMask_ = nullptr;
-
-	bool static getFieldType(
-			const dictionary& dict,
-			readFromTimeFolder& timeFolder,
-			word& fieldName,
-			word& fieldType);
+	rectMeshField_H<T>& 	processedField_;
 
 public:
 
-	TypeInfo("processField");
-
-	processField(const dictionary& dict, pointRectCell& pToCell, repository& rep);
+	TypeInfoTemplate("ProcessField", T);
 
 
-	create_vCtor(
-			processField,
-			dictionary,
-			(const dictionary& dict,
-			 pointRectCell& pToCell,
-			 repository& rep),
-			(dict, pToCell, rep) );
-
-
-	const auto& mesh()const
-	{
-		return pointToCell_.mesh();
-	}
-
-	const auto& pointToCell()const
-	{
-		return pointToCell_;
-	}
-
-	auto& dict()
-	{
-		return dict_;
-	}
-
-	const auto& dict()const
-	{
-		return dict_;
-	}
-
-	auto& timeFolderRepository()
-	{
-		return timeFolder_.db();
-	}
-
-	auto& processedRepository()
-	{
-		return pointToCell_.processedRepository();
-	}
-
-	const word& fieldType()const
-	{
-		return fieldType_;
-	}
-	
-	const word& fieldName()const
-	{
-		return fieldName_;
-	}
-	
-	bool isUniform()const
-	{
-		return fieldName_ == "uniformField";
-	}
-
-	const word& operation()const
-	{
-		return operation_;
-	}
-
-	auto& timeFolder()
-	{
-		return timeFolder_;
-	}
-
-	const word& includeMaskType()const
-	{
-		return includeMaskType_;
-	}
-
-	auto threshold()const
-	{
-		return threshold_;
-	}
-	
-	const word& processedFieldName()const
-	{
-		return processedFieldName_;
-	}
-
-	// requires a class to read pointField from timefolder 
-	virtual bool process() = 0;
-
-	virtual bool writeToVTK(iOstream& is) const = 0;
-
-	static 
-	uniquePtr<processField> create(
+	ProcessField(
 		const dictionary& dict,
 		pointRectCell& pToCell,
-		repository& rep);
+		repository& rep)
+	:
+		processField(dict, pToCell, rep),
+		field_(
+			this->isUniform()?
+			timeFolder().createUniformPointField_H(this->fieldName(), getUniformValue() ):
+			timeFolder().readPointField_H<T>(this->fieldName()) 
+			),
+		processedField_
+		(
+			processedRepository().emplaceObject<rectMeshField_H<T>>
+			(
+				objectFile
+				(
+					processedFieldName(),
+					"",
+					objectFile::READ_NEVER,
+					objectFile::WRITE_ALWAYS
+				),
+				mesh(),
+				processedFieldName(),
+				T{}
+			)
+		)
+	{
+		
+	}
+
+	add_vCtor(
+		processField,
+		ProcessField,
+		dictionary);
+
+
+	T getUniformValue()const
+	{
+		const dataEntry& entry = dict().dataEntryRef("field");
+		twoPartEntry tpEntry(entry);
+		return tpEntry.secondPartVal<T>();
+	}
+
+	virtual bool process() override
+	{
+		
+		const includeMask& incMask = includeMask_();
+		
+		auto numerator = sumMaksOp( field_ , this->pointToCell(), incMask);
+		
+		rectMeshField_H<real> denomerator( this->mesh(), real{} );
+
+		if(operation() == "sum")
+		{
+			denomerator = rectMeshField_H<real>(this->mesh(), static_cast<real>(1.0));
+
+		}else if(operation() == "average")
+		{
+
+			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
+
+			denomerator = sumOp(oneFld, this->pointToCell());
+
+		}else if(operation() == "averageMask")
+		{
+			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
+
+			denomerator = sumMaksOp(oneFld, this->pointToCell(), incMask);
+		}else
+		{
+			fatalErrorInFunction<<"operation is not known: "<< operation()<<endl;
+			fatalExit;
+		}
+
+		
+		for(int32 i=0; i<this->mesh().nx(); i++ )
+		{
+			for(int32 j=0; j<this->mesh().ny(); j++ )
+			{
+				for(int32 k=0; k<this->mesh().nz(); k++ )
+				{
+					if( pointToCell().nPointInCell(i,j,k)>= threshold() )
+					{
+						processedField_(i,j,k) = numerator(i,j,k)/denomerator(i,j,k);
+					}
+					else
+					{
+						processedField_(i,j,k) = T{};
+					}
+				}		
+			}	
+		}
+
+
+		return true;
+	}
+
+
+	bool writeToVTK(iOstream& os)const override
+	{
+		return convertRectMeshField(os, processedField_);
+	}
+	
 };
 
 
-}
+} // pFlow
 
 
-#endif //__processField_hpp__
+
+#endif //__ProcessField_hpp__

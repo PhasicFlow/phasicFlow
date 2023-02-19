@@ -18,55 +18,53 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __insertion_hpp__
-#define __insertion_hpp__
+
+#ifndef __Insertion_hpp__
+#define __Insertion_hpp__
 
 
-#include "streams.hpp"
+#include "insertion.hpp"
+#include "ListPtr.hpp"
+#include "InsertionRegion.hpp"
+#include "particles.hpp"
 
 namespace pFlow
 {
 
-class particles;
-class dictionary;
-
-class insertion
+template<typename ShapeType>
+class Insertion
+:
+	public insertion
 {
 protected:
-	// - insertion active 
-	Logical 	active_ = "No";
 
-	// - check for collision / desabled for now 
-	Logical  	checkForCollision_ = "No";
+	const ShapeType& shapes_;
 
-	// - particles 
-	particles& 				  particles_;
+	// - insertion regions 
+	ListPtr<InsertionRegion<ShapeType>>  regions_;
 
-	
+
 	bool readInsertionDict(const dictionary& dict);
 
 	bool writeInsertionDict(dictionary& dict)const;
 
 public:
 
-	// type info
-	TypeInfo("insertion");
+	TypeInfoTemplateNV("Insertion",ShapeType);
 
-	insertion(particles& prtcl);
-
-	virtual ~insertion() = default;
-
-	bool isActive()const {
-		return active_();
-	}
+	Insertion(particles& prtcl, const ShapeType& shapes);
 
 
-	virtual bool read(iIstream& is) = 0;
+	bool insertParticles(real currentTime, real dt);
 
-	virtual bool write(iOstream& os)const = 0;
+	virtual bool read(iIstream& is) override;
 
+	virtual bool write(iOstream& os)const override;
 
 };
+
 }
+
+#include "Insertion.cpp"
 
 #endif

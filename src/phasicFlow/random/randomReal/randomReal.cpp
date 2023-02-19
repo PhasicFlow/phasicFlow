@@ -18,34 +18,36 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#include "RandomReal.hpp"
 
-#include "randomReal.hpp"
 
-
-pFlow::uniquePtr<pFlow::randomReal> pFlow::randomReal::create
+template<typename DistributionType>
+pFlow::RandomReal<DistributionType>::RandomReal
 (
 	word distribution
 )
+:
+	randomReal(distribution),
+	distribution_()
 {
-	word dist = angleBracketsNames("randomReal", distribution);
 
-	if( wordvCtorSelector_.search(dist) )
-	{
-		return wordvCtorSelector_[dist] (distribution);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< dist << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			wordvCtorSelector_
-		);
-		fatalExit();
-	}
-
-	return nullptr;
 }
 
+template<typename DistributionType>
+pFlow::real  pFlow::RandomReal<DistributionType>::randomNumber
+(
+	real a, real b
+)
+{
+	return distribution_.randomNumber(a,b);
+}
 
+template<typename DistributionType>
+pFlow::realx3 pFlow::RandomReal<DistributionType>::randomNumber
+(
+	realx3 a,
+	realx3 b
+)
+{
+	return	distribution_.randomNumber(a,b);	
+}
