@@ -5,7 +5,7 @@ The problem is to simulate a Rotating Drum with **6** Baffles with the diameter 
 
 <html>
 <body>
-<img src="https://github.com/omid-khosravi/DEMphasicFlow/blob/Pictures/Pictures/MixedparticlesRDB.png", width: 400px>
+<img src="https://github.com/PhasicFlow/phasicFlow/blob/media/media/MixedparticlesRDB.png", width: 400px>
 
 </body>
 </html>
