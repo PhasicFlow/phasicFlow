@@ -82,7 +82,7 @@ protected:
 		return interaction_();
 	} 
 
-	void loop();
+	bool loop();
 
 public:
 

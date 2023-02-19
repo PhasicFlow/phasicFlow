@@ -24,7 +24,7 @@ sphereParticles sphParticles(Control, proprties);
 
 //
 REPORT(0)<<"\nCreating particle insertion object . . ."<<endREPORT;
-auto& sphInsertion = 
+/*auto& sphInsertion = 
 	Control.caseSetup().emplaceObject<sphereInsertion>(
 		objectFile(
 			insertionFile__,
@@ -34,9 +34,12 @@ auto& sphInsertion =
 			),
 		sphParticles,
 		sphParticles.shapes()
-	);
+	);*/
 
-
+auto sphInsertion =  sphereInsertion(
+	Control.caseSetup().path()+insertionFile__, 
+	sphParticles, 
+	sphParticles.shapes());
 
 REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
 auto interactionPtr = interaction::create(

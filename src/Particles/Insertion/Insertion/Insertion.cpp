@@ -68,17 +68,33 @@ bool pFlow::Insertion<ShapeType>::writeInsertionDict
 }
 
 template<typename ShapeType>
-pFlow::Insertion<ShapeType>::Insertion
-(
+pFlow::Insertion<ShapeType>::Insertion(
 	particles& prtcl,
-	const ShapeType& shapes
-)
+	const ShapeType& shapes)
 :
 	insertion(prtcl),
 	shapes_(shapes)
 {
 
 	
+}
+
+template<typename ShapeType>
+pFlow::Insertion<ShapeType>::Insertion(
+	fileSystem file, 
+	particles& prtcl, 
+	const ShapeType& shapes)
+:
+	Insertion(prtcl, shapes)
+{
+	dictionary inDict(file.fileName(), file);
+
+	if(!readInsertionDict(inDict))
+	{
+		fatalErrorInFunction<< "could not read from file "<<
+		file<<endl;
+		fatalExit;
+	}
 }
 
 

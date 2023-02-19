@@ -248,7 +248,6 @@ bool pFlow::systemControl::operator ++(int)
 	}
 	else if( time().finalTime() )
 	{
-		output<<"****************************************************************"<<endl;
 		if( !time().write() )
 		{
 			fatalErrorInFunction;

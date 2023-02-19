@@ -54,6 +54,7 @@ public:
 
 	insertion(particles& prtcl);
 
+
 	virtual ~insertion() = default;
 
 	bool isActive()const {
