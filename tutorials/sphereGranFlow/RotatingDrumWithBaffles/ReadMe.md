@@ -3,6 +3,13 @@ The problem is to simulate a Rotating Drum with **6** Baffles with the diameter 
 * **12500** Particles with **4 mm** diameter
 * **7500** Particles with **5mm** diameter  
 
+<html>
+<body>
+<img src="https://github.com/omid-khosravi/DEMphasicFlow/blob/Pictures/Pictures/MixedparticlesRDB.png", width: 400px>
+
+</body>
+</html>
+
 ## Setting up the Case
 As it has been explained in the previous Cases, these Tutorials are based on text-based scripts. There are three parts in this case to study `caseSetup`, `setting` and `stl`.
 ## Particle Insertion
@@ -43,7 +50,42 @@ diameters 	(0.004 0.005);
 materials	(lightMat heavyMat);
 ```
 In this Case we have two types of Particle with 4mm and 5mm diameters.  
-At the end of `caseSetup`, the interaction between the particles and the Shell of Rotating Drum is defined. You can see the Coefficients of the Interactions between the particles and shell of Rotating Drum in `interaction`.
+At the end of `caseSetup`, the interaction between the particles and the Shell of Rotating Drum is defined. You can see the Coefficients of the Interactions between the particles and shell of Rotating Drum in `interaction`. Because we have 3 kind of interactions between these Particles and the Drum, we need to define a 3*3 Matrix.
+```C++
+ /*
+   Property (lightMat-lightMat   lightMat-heavyMat    lightMat-wallMat
+                                 heavyMat-heavyMat    heavyMat-wallMat
+                                                      wallMat-wallMat );
+ */
+// Young modulus [Pa]
+   Yeff (1.0e6 1.0e6 1.0e6  
+               1.0e6 1.0e6
+                     1.0e6);
+// Shear modulus [Pa]   
+   Geff (0.8e6 0.8e6 0.8e6  
+               0.8e6 0.8e6
+                     0.8e6);
+// Poisson's ratio [-]
+   nu    (0.25 0.25  0.25  
+               0.25  0.25
+                     0.25);
+// coefficient of normal restitution
+   en (0.97  0.97    0.85   
+             0.97    0.85
+                     1.00);
+// coefficient of tangential restitution
+   et (1.0   1.0  1.0    
+             1.0  1.0
+                  1.0);
+// dynamic friction 
+   mu (0.65   0.65 0.35   
+              0.65 0.35
+                   0.35);
+// rolling friction 
+   mur (0.1  0.1 0.1    
+             0.1 0.1
+                 0.1);      
+```
 ## Settings
 ### Geometry
 In the Settings folder the Specifications of our Rotating Drum and the information of rotating axis are brought. In this case we use two solid cylinders to keep our rotating drum isolated. This is to prevent particles, from being thrown out.  
