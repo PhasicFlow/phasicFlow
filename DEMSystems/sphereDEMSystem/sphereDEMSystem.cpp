@@ -27,6 +27,8 @@ bool pFlow::sphereDEMSystem::loop()
 	{
 		Control().timers().start();
 
+		//
+		
 		if(! insertion_().insertParticles( 
 			Control().time().currentTime(),
 			Control().time().dt()	) )
@@ -35,6 +37,7 @@ bool pFlow::sphereDEMSystem::loop()
 			"particle insertion failed in sphereDFlow solver.\n";
 			return false;
 		}
+		
 
 		geometry_->beforeIteration();
 		
@@ -58,6 +61,7 @@ bool pFlow::sphereDEMSystem::loop()
 
 	}while(Control()++);
 
+	return true;
 }
 
 pFlow::sphereDEMSystem::sphereDEMSystem(
@@ -213,7 +217,7 @@ bool pFlow::sphereDEMSystem::iterate(
 	Control().time().setStopAt(upToTime);
 	Control().time().setOutputToFile(timeToWrite, timeName);
 	
-	loop();
+	return loop();
 
 	return true;
 }
@@ -221,7 +225,7 @@ bool pFlow::sphereDEMSystem::iterate(
 bool pFlow::sphereDEMSystem::iterate(real upToTime)
 {
 	Control().time().setStopAt(upToTime);
-	loop();
+	return loop();
 	return true;
 }
 

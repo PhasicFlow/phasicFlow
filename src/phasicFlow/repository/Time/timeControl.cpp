@@ -147,3 +147,20 @@ void pFlow::timeControl::setSaveTimeFolder(
 	}
 }
 
+bool pFlow::timeControl::operator ++(int)
+{
+
+	if( reachedStopAt() ) return false;
+	// increament iteration number 
+	currentIter_++;
+
+	currentTime_ += dt_;
+	if(screenReport())
+	{
+		REPORT(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endREPORT;
+	}
+	// switch outputToFile_ on/off
+	checkForOutputToFile();
+
+	return true;
+}

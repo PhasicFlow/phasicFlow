@@ -139,10 +139,6 @@ public:
 	{
 		return true;
 	}
-
-	
-
-
 };
 
 
