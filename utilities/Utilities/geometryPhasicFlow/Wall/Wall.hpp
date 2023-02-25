@@ -22,9 +22,9 @@ Licence:
 #ifndef __Wall_hpp__
 #define __Wall_hpp__
 
+#include <vector>
 
 #include "virtualConstructor.hpp"
-#include "Vectors.hpp"
 #include "dictionary.hpp"
 
 namespace pFlow
@@ -42,7 +42,7 @@ class Wall
 {
 protected:
 
-	realx3x3Vector 	triangles_;
+	std::vector<realx3x3> 		triangles_;
 
 	word   			name_;
 
@@ -79,7 +79,7 @@ public:
 	//// - Methods
 
 		// - 
-		const realx3x3Vector& triangles()const
+		const auto& triangles()const
 		{
 			return triangles_;
 		}

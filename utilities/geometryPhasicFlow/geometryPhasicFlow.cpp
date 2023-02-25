@@ -21,6 +21,7 @@ Licence:
 
 #include "systemControl.hpp"
 #include "Wall.hpp"
+#include "Vectors.hpp"
 #include "multiTriSurface.hpp"
 #include "geometryMotion.hpp"
 #include "commandLine.hpp"
@@ -34,6 +35,7 @@ using pFlow::objectFile;
 using pFlow::wordVector;
 using pFlow::Wall;
 using pFlow::geometry;
+using pFlow::realx3x3Vector;
 using pFlow::multiTriSurface;
 using pFlow::commandLine;
 
@@ -92,7 +94,9 @@ int main( int argc, char* argv[] )
 		auto& wall = wallPtr();
 		REPORT(1)<<"wall type is "<<greenText(wall.typeName())<<'\n'<<endREPORT;		
 
-		surface.addTriSurface(wall.name(), wall.triangles());
+		realx3x3Vector trinalges(wall.name());
+		trinalges = wall.triangles();
+		surface.addTriSurface(wall.name(), trinalges);
 		materials.push_back(wall.materialName());
 		motion.push_back(wall.motionName());
 	}

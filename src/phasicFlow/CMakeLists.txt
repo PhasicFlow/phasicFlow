@@ -38,6 +38,7 @@ Timer/Timers.cpp
 repository/Time/Time.cpp
 repository/Time/timeControl.cpp
 repository/systemControl/systemControl.cpp
+repository/systemControl/dynamicLinkLibs.cpp
 repository/repository/repository.cpp
 repository/IOobject/objectFile.cpp
 repository/IOobject/IOobject.cpp

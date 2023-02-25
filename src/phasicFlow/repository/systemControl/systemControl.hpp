@@ -33,6 +33,7 @@ Licence:
 #include "dictionary.hpp"
 #include "box.hpp"
 #include "Timers.hpp"
+#include "dynamicLinkLibs.hpp"
 
 namespace pFlow
 {
@@ -49,6 +50,8 @@ protected:
 	// - path to top-level folder 
 	const fileSystem 	topLevelFolder_;
 
+
+
 	// - settings folder repository
 	repository 			settings_;
 
@@ -58,6 +61,9 @@ protected:
 	// - settingsDict fileDictionary
 	dictionary& 		settingsDict_;
 
+	// - extra libs to be loaded
+	dynamicLinkLibs 	libs_;
+	
 	// - precision for writing to file 
 	size_t 			outFilePrecision_ = 6;
 
