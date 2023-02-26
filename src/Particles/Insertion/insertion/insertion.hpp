@@ -52,7 +52,18 @@ public:
 
 	TypeInfoTemplateNV("Insertion",ShapeType);
 
+<<<<<<< HEAD
 	Insertion(particles& prtcl, const ShapeType& shapes);
+=======
+	insertion(particles& prtcl);
+
+
+	virtual ~insertion() = default;
+
+	bool isActive()const {
+		return active_();
+	}
+>>>>>>> 3bcfc31fd23a197b71377b16e95f41c1c0da2593
 
 
 	bool insertParticles(real currentTime, real dt);

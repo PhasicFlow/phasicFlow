@@ -74,6 +74,7 @@ pFlow::Insertion<ShapeType>::Insertion
 	const ShapeType& shapes
 )
 :
+<<<<<<< HEAD
 	insertion(prtcl),
 	shapes_(shapes)
 {
@@ -202,3 +203,7 @@ bool pFlow::Insertion<ShapeType>::write
 
 	return true;
 }
+=======
+	particles_(prtcl)
+{}
+>>>>>>> 3bcfc31fd23a197b71377b16e95f41c1c0da2593

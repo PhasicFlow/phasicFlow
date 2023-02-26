@@ -20,12 +20,21 @@ Licence:
 
 #include "sphereDEMSystem.hpp"
 
-void pFlow::sphereDEMSystem::loop()
+bool pFlow::sphereDEMSystem::loop()
 {
 
 	do 
 	{
 		Control().timers().start();
+
+		if(! insertion_().insertParticles( 
+			Control().time().currentTime(),
+			Control().time().dt()	) )
+		{
+			fatalError<<
+			"particle insertion failed in sphereDFlow solver.\n";
+			return false;
+		}
 
 		geometry_->beforeIteration();
 		
@@ -70,7 +79,11 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 	REPORT(0)<<"\nReading sphere particles . . ."<<endREPORT;
 	particles_ = makeUnique<sphereFluidParticles>(Control(), Property());
 
-
+	insertion_ = makeUnique<sphereInsertion>(
+		Control().caseSetup().path()+insertionFile__, 
+		particles_(), 
+		particles_().shapes());
+	
 	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
 	interaction_ = interaction::create(
 		Control(),

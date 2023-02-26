@@ -54,6 +54,8 @@ public:
 
 	Insertion(particles& prtcl, const ShapeType& shapes);
 
+	Insertion(fileSystem file, particles& prtcl, const ShapeType& shapes);
+
 
 	bool insertParticles(real currentTime, real dt);
 
