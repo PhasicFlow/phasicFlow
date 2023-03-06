@@ -1,11 +1,6 @@
 
 set(source_files 
 geometryPhasicFlow.cpp
-Wall/Wall.cpp 
-planeWall/planeWall.cpp 
-stlWall/stlWall.cpp
-cylinderWall/cylinderWall.cpp
-cuboidWall/cuboidWall.cpp
 )
 set(link_lib phasicFlow Geometry Kokkos::kokkos Utilities)
 

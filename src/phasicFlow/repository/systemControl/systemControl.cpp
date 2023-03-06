@@ -135,6 +135,7 @@ pFlow::systemControl::systemControl
 			true
 		)
 	),
+	libs_(settingsDict_),
 	outFilePrecision_(
 		settingsDict_.getValOrSet("outFilePrecision", static_cast<size_t>(6))
 		),
@@ -205,6 +206,7 @@ pFlow::systemControl::systemControl(
 			true
 		)
 	),
+	libs_(settingsDict_),
 	Time_
 	(
 		this,
@@ -234,6 +236,7 @@ bool pFlow::systemControl::operator ++(int)
 {
 
 	// skip writing to file for the first iteration
+	//output<< "time()++"<<endl;
 	auto finished = time()++; 
 	
 	writeToFileTimer_.start();
@@ -256,12 +259,14 @@ bool pFlow::systemControl::operator ++(int)
 	}
 	writeToFileTimer_.end();
 
+	//output<< "after finalTime()"<<endl;
+
 	if( time().timersReportTime() &&
 		timersReport() )
 	{
 		timers_.write(output, true);
 	}
-		
+	
 	return finished;
 }
 

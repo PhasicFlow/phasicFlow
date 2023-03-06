@@ -47,7 +47,7 @@ Two layers of particles are packed one-by-one using 1 insertion steps.
    mixture
    {
 // mixture composition of inserted particles
-      lightSphere 1;    
+      smallSphere 1;    
    }
 }
 // Left Layer Region
@@ -79,7 +79,7 @@ Two layers of particles are packed one-by-one using 1 insertion steps.
    
    mixture
    {
-      heavySphere 1; // only heavySphere
+      largeSphere 1; // only heavySphere
       
    }
 }

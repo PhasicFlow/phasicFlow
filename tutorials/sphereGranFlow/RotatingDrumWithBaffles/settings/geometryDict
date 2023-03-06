@@ -23,7 +23,7 @@ surfaces
 		motion 	 rotAxis;		 
 	}
 	/*	This is a Cylinder Wall at the rear of cylinder	*/
-	CylinderRear1
+	rearEnd
 	{
 		// type of the wall
 		type cylinderWall;
@@ -41,7 +41,7 @@ surfaces
 		motion rotAxis;			 
 	}
 	/*	This a cylinder Wall at the front of Cylinder */
-	CylinderFront2
+	frontEnd
 	{
 		// type of the wall
 		type cylinderWall;
