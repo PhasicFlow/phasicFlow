@@ -48,12 +48,24 @@ protected:
 	realx3PointField_HD& 	fluidTorque_;
 
 
+	void zeroFluidForce_H()
+	{
+		fluidForce_.fillHost(zero3);
+	}
+
+	void zeroFluidTorque_H()
+	{
+		fluidTorque_.fillHost(zero3);
+	}
+
 public:
 
 	/// construct from systemControl and property 
 	sphereFluidParticles(systemControl &control, const property& prop);
 	
-
+	/// before iteration step 
+	bool beforeIteration() override;
+	
 	/// iterate particles 
 	bool iterate() override;	
 

@@ -54,6 +54,13 @@ pFlow::sphereFluidParticles::sphereFluidParticles(
 		)
 {} 
 
+bool pFlow::sphereFluidParticles::beforeIteration()
+{
+	sphereParticles::beforeIteration();
+	zeroFluidForce_H();
+	zeroFluidTorque_H();
+	return true;
+}
 
 
 bool pFlow::sphereFluidParticles::iterate() 
