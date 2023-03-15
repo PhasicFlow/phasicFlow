@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __Timers_hpp__ 
-#define __Timers_hpp__
+#ifndef __Timerss_hpp__ 
+#define __Timerss_hpp__
 
 
 #include "Timer.hpp"
@@ -34,7 +34,7 @@ class Timers
 {
 protected:
 
-	List<Timer*> 	timers_;
+	List<pFlow::Timer*> 	timers_;
 
 	int32 			level_ = 0;
 

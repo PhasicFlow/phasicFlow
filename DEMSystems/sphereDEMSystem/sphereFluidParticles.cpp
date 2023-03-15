@@ -56,9 +56,8 @@ pFlow::sphereFluidParticles::sphereFluidParticles(
 
 bool pFlow::sphereFluidParticles::beforeIteration()
 {
-	sphereParticles::beforeIteration();
-	zeroFluidForce_H();
-	zeroFluidTorque_H();
+	return sphereParticles::beforeIteration();
+	
 	return true;
 }
 
