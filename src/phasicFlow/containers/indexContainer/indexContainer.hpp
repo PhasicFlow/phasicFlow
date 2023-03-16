@@ -26,6 +26,7 @@ Licence:
 #include "KokkosUtilities.hpp"
 #include "ViewAlgorithms.hpp"
 
+
 namespace pFlow
 {
 
@@ -79,8 +80,8 @@ public:
 		size_(end-begin),
 		views_("indexContainer", size_)
 	{
-		pFlow::fillSequence(views_.d_view, 0, size_, min_);
-		copy(views_.h_view, views_.d_view);
+		pFlow::fillSequence(views_.h_view, 0, size_, min_);
+		copy(views_.d_view, views_.h_view);
 	}
 
 

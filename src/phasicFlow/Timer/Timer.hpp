@@ -109,31 +109,40 @@ public:
 		accTime_ += lastTime_;
 	}
 
+	inline
 	bool timerActive()const
 	{
 		return numIteration_!=0;
 	}
 
+	inline
 	real lastTime()const
 	{
 		return lastTime_;
 	}
 
+	inline
 	real totalTime()const
 	{
 		return accTime_;
 	}
 
+	inline
 	real averageTime()const
 	{
 
 		return accTime_/max(numIteration_, 1);
 	}
 
+	virtual
+	real accTimersTotal()const
+	{
+		return totalTime();
+	}
+
 	//// - IO operations
 
 	virtual bool write(iOstream& os, bool subTree)const;
-	
 
 	virtual bool read(iIstream& is)
 	{

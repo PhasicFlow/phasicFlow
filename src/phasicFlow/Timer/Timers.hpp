@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __Timers_hpp__ 
-#define __Timers_hpp__
+#ifndef __Timerss_hpp__ 
+#define __Timerss_hpp__
 
 
 #include "Timer.hpp"
@@ -30,11 +30,11 @@ namespace pFlow
 
 class Timers
 :
-	public Timer
+	public pFlow::Timer
 {
 protected:
 
-	List<Timer*> 	timers_;
+	List<pFlow::Timer*> 	timers_;
 
 	int32 			level_ = 0;
 
@@ -92,6 +92,8 @@ public:
 	{
 		return true;
 	}
+
+	real accTimersTotal()const override;
 
 	virtual bool write(iOstream& os, bool subTree = true)const;
 	

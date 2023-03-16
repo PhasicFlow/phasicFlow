@@ -21,6 +21,27 @@ Licence:
 
 #include "Timers.hpp"
 
+pFlow::real pFlow::Timers::accTimersTotal()const
+{
+	// first this timer
+	real total = 0;
+	if(this->timerActive()) total += this->totalTime();
+
+	for(const auto tmr:timers_)
+	{
+		if(tmr -> master())
+		{
+			total += dynamic_cast<const Timers*>(tmr)->accTimersTotal();
+		}
+		else if(tmr->timerActive())
+		{
+			total += tmr->totalTime();
+		}
+	}
+
+	return total;
+}
+
 
 bool pFlow::Timers::write(iOstream& os, bool subTree)const
 {

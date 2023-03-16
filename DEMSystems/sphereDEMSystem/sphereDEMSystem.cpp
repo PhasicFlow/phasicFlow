@@ -25,8 +25,6 @@ bool pFlow::sphereDEMSystem::loop()
 
 	do 
 	{
-		Control().timers().start();
-
 		//
 		
 		if(! insertion_().insertParticles( 
@@ -55,9 +53,6 @@ bool pFlow::sphereDEMSystem::loop()
 		particles_->afterIteration();
 		
 		geometry_->afterIteration();
-		
-
-		Control().timers().end();
 
 	}while(Control()++);
 
@@ -80,8 +75,10 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 	REPORT(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<endREPORT;
 	geometry_ = geometry::create(Control(), Property());
 
+
 	REPORT(0)<<"\nReading sphere particles . . ."<<endREPORT;
 	particles_ = makeUnique<sphereFluidParticles>(Control(), Property());
+
 
 	insertion_ = makeUnique<sphereInsertion>(
 		Control().caseSetup().path()+insertionFile__, 

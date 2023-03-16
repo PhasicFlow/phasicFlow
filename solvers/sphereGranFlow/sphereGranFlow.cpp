@@ -65,7 +65,6 @@ if(!cmds.parse(argc, argv)) return 0;
 
 	do 
 	{
-		Control.timers().start();
 		
 		if(! sphInsertion.insertParticles( 
 			Control.time().currentTime(),
@@ -93,8 +92,6 @@ if(!cmds.parse(argc, argv)) return 0;
 		
 		surfGeometry.afterIteration();
 		
-
-		Control.timers().end();
 
 	}while(Control++);
 

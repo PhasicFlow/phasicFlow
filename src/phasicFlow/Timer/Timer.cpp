@@ -77,18 +77,24 @@ bool pFlow::Timer::write(iOstream& os, bool subTree)const
 	
 	if(lvl==0)
 		os<<greenColor<<boldChar;
+	else if(master())
+		os<<yellowColor;
+
 
 	os<<name_;
 
-	if(timerActive())
-		if(master())
-			os<<" execution time (s): total ("<<
-				totalTime()<<"), av. ("<<
-				averageTime()<<").";
-		else
-			os<<" execution time (s): total ("<<
-				cyanText(totalTime())<<"), av. ("<<
-				cyanText(averageTime())<<").";
+	auto tt = accTimersTotal();
+	if(abs(tt)>smallValue)
+	{
+		os<<" execution time (s): total ("<<
+			tt<<")";
+
+		if(!master())
+		{
+			os<<", av. ("<<
+			averageTime()<<").";	
+		}
+	}		
 
 	os<<defaultColor;
 	os<<'\n';

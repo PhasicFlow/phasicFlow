@@ -72,8 +72,11 @@ bool pFlow::sphereParticles::diameterMassInertiaPropId
 
 bool pFlow::sphereParticles::initializeParticles()
 {
-		
-	int32IndexContainer indices(0, shapeName_.size());
+	
+	int32IndexContainer indices(
+		0, 
+		static_cast<int32>(shapeName_.size()));
+	
 	return insertSphereParticles(shapeName_, indices);
 }
 
@@ -148,7 +151,7 @@ bool pFlow::sphereParticles::insertSphereParticles(
 	}
 
 	auto len = names.size();
-	
+		
 	realVector  diamVec(len, RESERVE());
 	realVector  massVec(len, RESERVE());
 	realVector  IVec(len, RESERVE());
@@ -160,6 +163,7 @@ bool pFlow::sphereParticles::insertSphereParticles(
 
 	ForAll(i, names )
 	{
+		
 		if (diameterMassInertiaPropId(names[i], d, m, I, pId))
 		{
 			diamVec.push_back(d);
@@ -297,7 +301,6 @@ pFlow::sphereParticles::sphereParticles(
 		fatalExit;
 	}
 
-	
 	if(rVelIntegration_->needSetInitialVals())
 	{
 		
@@ -320,6 +323,7 @@ pFlow::sphereParticles::sphereParticles(
 
 	}
 
+	
 	if(!initializeParticles())
 	{
 		fatalExit;
