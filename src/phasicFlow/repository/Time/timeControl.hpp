@@ -152,18 +152,9 @@ public:
 		return currentIter_;
 	}
 
-	bool finalTime()const
-	{
-		if( currentTime_ >= endTime_ ) return true;
-		if( abs(currentTime_-endTime_) < 0.5*dt_ )return true;
-		return false;	
-	}
-	bool reachedStopAt()const
-	{
-		if( currentTime_ >= stopAt_ ) return true;
-		if( abs(currentTime_-stopAt_) < 0.5*dt_ )return true;
-		return false;
-	}
+	bool finalTime()const;
+	
+	bool reachedStopAt()const;
 
 	bool outputToFile()const
 	{

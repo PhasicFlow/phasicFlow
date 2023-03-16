@@ -25,8 +25,6 @@ bool pFlow::sphereDEMSystem::loop()
 
 	do 
 	{
-		Control().timers().start();
-
 		//
 		
 		if(! insertion_().insertParticles( 
@@ -55,9 +53,6 @@ bool pFlow::sphereDEMSystem::loop()
 		particles_->afterIteration();
 		
 		geometry_->afterIteration();
-		
-
-		Control().timers().end();
 
 	}while(Control()++);
 

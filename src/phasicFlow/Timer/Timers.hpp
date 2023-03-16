@@ -30,7 +30,7 @@ namespace pFlow
 
 class Timers
 :
-	public Timer
+	public pFlow::Timer
 {
 protected:
 
@@ -92,6 +92,8 @@ public:
 	{
 		return true;
 	}
+
+	real accTimersTotal()const override;
 
 	virtual bool write(iOstream& os, bool subTree = true)const;
 	
