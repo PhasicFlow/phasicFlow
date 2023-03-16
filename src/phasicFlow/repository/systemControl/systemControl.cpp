@@ -235,11 +235,9 @@ pFlow::systemControl::systemControl(
 bool pFlow::systemControl::operator ++(int)
 {
 
-	// skip writing to file for the first iteration
-	//output<< "time()++"<<endl;
-	auto finished = time()++;
+	auto toContinue = time()++;
 
-	if(!finished)
+	if(toContinue)
 	{
 		writeToFileTimer_.start();
 		//if(time().currentIter() != 0 )
@@ -273,7 +271,7 @@ bool pFlow::systemControl::operator ++(int)
 		timers_.write(output, true);
 	}
 	
-	return finished;
+	return toContinue;
 }
 
 

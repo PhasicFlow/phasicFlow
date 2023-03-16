@@ -137,10 +137,13 @@ void pFlow::timeControl::checkForOutputToFile()
 		{
 			lastSaved_ = currentTime_;
 			save = true;
-		}	
+		}
+		
 	}
 
 	outputToFile_ = save;
+
+
 }
 
 bool pFlow::timeControl::timersReportTime()const
