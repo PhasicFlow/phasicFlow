@@ -67,8 +67,7 @@ public:
 	//// -  Methods
 		virtual fileSystem localPath()const
 		{
-			word lp = currentTimeWord();
-			return lp;
+			return timeName();
 		}
 	
 		// - geometry repository 

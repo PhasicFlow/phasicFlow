@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __Timer_hpp__
-#define __Timer_hpp__
+#ifndef __Timerr_hpp__
+#define __Timerr_hpp__
 
 
 #include <chrono>

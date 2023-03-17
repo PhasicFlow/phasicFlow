@@ -126,6 +126,8 @@ public:
 		return startTime_;
 	}
 
+	word timeName()const;	
+
 	real currentTime() const 
 	{
 		return currentTime_;

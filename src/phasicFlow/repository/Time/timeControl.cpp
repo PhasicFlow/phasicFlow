@@ -100,6 +100,14 @@ pFlow::timeControl::timeControl(
 	checkForOutputToFile();
 }
 
+pFlow::word pFlow::timeControl::timeName()const
+{
+	if(managedExternaly_)
+		return timeName_;
+	else
+		return currentTimeWord();
+}
+
 bool pFlow::timeControl::finalTime()const
 {
 	if( currentTime_ >= endTime_ ) return true;
@@ -171,7 +179,7 @@ bool pFlow::timeControl::operator ++(int)
 	currentIter_++;
 
 	currentTime_ += dt_;
-	if(screenReport())
+	if(screenReport() && !managedExternaly_)
 	{
 		REPORT(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endREPORT;
 	}
