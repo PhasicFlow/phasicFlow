@@ -9,7 +9,7 @@ The problem is to simulate a rotating drum with the diameter **0.24 m**, the len
 	a view of the drum while rotating 
 </div></b>
 <div align="center">
-<img src="https://github.com/PhasicFlow/phasicFlow/blob/media/media/MixedparticlesRDB.png", width=800px>
+<img src="https://github.com/PhasicFlow/phasicFlow/blob/media/media/rotatingDrumBffl.gif", width=700px>
 </div>
 </body>
 </html>
