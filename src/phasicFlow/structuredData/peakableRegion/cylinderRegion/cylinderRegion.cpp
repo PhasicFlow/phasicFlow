@@ -42,7 +42,7 @@ bool pFlow::cylinderRegion::isInside
 
 pFlow::realx3 pFlow::cylinderRegion::peek()const
 {
-	for(int32 i=0; i<100;i++)
+	for(int32 i=0; i<500;i++)
 	{
 		auto p = 
 		random_.randomNumber(cylinder_.minPoint(), cylinder_.maxPoint());

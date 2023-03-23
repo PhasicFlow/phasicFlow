@@ -17,8 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __property_hpp__
 #define __property_hpp__
 
@@ -30,82 +28,116 @@ Licence:
 namespace pFlow
 {
 
+// forward 
 class dictionary;
 
+/** 
+ * property holds the pure properties of materials.
+ * 
+ * This class holds a list of all materials name and their densities that are 
+ * used in the simulation: for walls and particles.  
+ */
 class property
 {
 protected:
 
-	uniquePtr<dictionary> dict_ = nullptr;
+	// - protected data members
 
-	// - name of materials
-	wordVector 		materials_;
+		/// pointer to the dictionary, if it is constructed from a file/dictionary
+		uniquePtr<dictionary> dict_ = nullptr;
 
-	// - density of materials 
-	realVector 		densities_;
+		/// list of name of materials
+		wordVector 		materials_;
 
-	// fast mapping from name to index
-	wordHashMap<uint32>		nameIndex_;
+		/// list of density of materials 
+		realVector 		densities_;
 
-	// - number of properties 
-	uint32 			numMaterials_ = 0;
+		/// rapid mapping from name to index
+		wordHashMap<uint32>		nameIndex_;
 
-	bool readDictionary(const dictionary& dict);
+		/// number of materials
+		uint32 			numMaterials_ = 0;
 
-	bool writeDictionary(dictionary& dict)const;
+	
+	// - protected member functions
 
-	bool makeNameIndex();
+		/// read from dict
+		bool readDictionary(const dictionary& dict);
+
+		/// write to dict
+		bool writeDictionary(dictionary& dict)const;
+
+		/// creates a mapp
+		bool makeNameIndex();
 
 public:
 
-	// type info
+	/// Type info
 	TypeInfoNV("property");
 
-		// - emptry, for reading from file 
+	
+	// - Constructors 
+
+		/// Emptry constructor, used for reading from a file 
 		property(){}
 
-		property(const wordVector& materils, const realVector& densities);
+		/// Constructe from materials and densities 
+		property(const wordVector& materials, const realVector& densities);
 
+		/// Construct from file
 		property(const fileSystem& file);	
 
+		/// Construct from dictionary dict
 		property(const dictionary& dict);
 
+		/// Default copy
 		property(const property& ) = default;
 
+		/// Default move
 		property(property&& ) = default;
 
+		/// Default copy assignment
 		property& operator= (const property&) = default;
 
+		/// Default move assignment
 		property& operator= (property&&) = default;
 
+		/// Default destructor 
 		~property() = default;
 
-	//// - Methods 
+	
+	// - Methods 
 
+		/// Return dictionary
 		inline const auto& dict()const
 		{
 			return dict_();
 		}
 
+		/// Return number of materials 
 		inline auto numMaterials()const
 		{
 			return numMaterials_;
 		}
 
+		/// Return list of material names
 		inline const auto& materials()const{
 			return materials_;
 		}
 
-		// - return densities
+		/// Return the list of densities
 		inline const auto& densities()const{
 			return densities_;
 		}
 
+		/// Return the material name of material i
 		inline const word& material(uint32 i)const
 		{
 			return materials_[i];
 		}
 
+		/// Get the name of material i.
+		/// Return true, if i is in the range and otherwise false
 		inline bool material(uint32 i, word& name)const
 		{
 			if(i<numMaterials_)
@@ -120,11 +152,14 @@ public:
 			}
 		}
 
+		/// Return density of material i
 		inline real density(uint32 i)const 
 		{
 			return densities_[i];
 		}
 
+		/// Get the density of material i.
+		/// Return true, if i is in the range and otherwise false
 		inline bool density(uint32 i, real& rho)const
 		{
 			if(i<numMaterials_)
@@ -138,7 +173,9 @@ public:
 				return false;
 			}	
 		}
-	
+		
+		/// Get the name of material in index idx
+		/// Return true, if the name found, otherwise false
 		inline bool nameToIndex(const word& name, uint32& idx)const
 		{
 			if(auto[iter, found] = nameIndex_.findIf(name); found )
@@ -155,13 +192,13 @@ public:
 		
 	//// - IO operatoins
 
-		// - read from dictionary 
+		/// Read from dictionary 
 		bool read(const dictionary& dict)
 		{
 			return readDictionary(dict);
 		}
 
-		// - write to dictionary 
+		/// Write to dictionary 
 		bool write(dictionary& dict)const
 		{
 			return writeDictionary(dict);
