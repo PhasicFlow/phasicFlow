@@ -60,7 +60,7 @@ contactSearch
 
    NBSInfo
    {
-    // each 20 timesteps, update neighbor list
+   // each 20 timesteps, update neighbor list
       updateFrequency 10;
    // bounding box size to particle diameter (max)           
       sizeRatio      1.1;        

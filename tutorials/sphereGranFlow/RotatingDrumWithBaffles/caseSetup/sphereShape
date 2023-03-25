@@ -6,7 +6,7 @@ objectName 	sphereDict;
 objectType 	sphereShape;
 /*---------------------------------------------------------------------------*/
 // names of shapes 
-names 		(lightSphere heavySphere);
+names 		(smallSphere largeSphere);
 // diameter of shapes (m) 	
 diameters 	(0.004 0.005);
 // material names for shapes 			
