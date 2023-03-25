@@ -1,0 +1,8 @@
+<map id="src/phasicFlow/Kokkos/ViewAlgorithms.hpp" name="src/phasicFlow/Kokkos/ViewAlgorithms.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="368,5,536,47"/>
+<area shape="rect" id="node2" href="$numericConstants_8hpp.html" title=" " alt="" coords="5,95,173,121"/>
+<area shape="rect" id="node3" href="$KokkosUtilities_8hpp.html" title=" " alt="" coords="197,95,344,121"/>
+<area shape="rect" id="node4" href="$kokkosAlgorithms_8hpp.html" title=" " alt="" coords="369,95,535,121"/>
+<area shape="rect" id="node5" href="$stdAlgorithms_8hpp.html" title=" " alt="" coords="560,95,701,121"/>
+<area shape="rect" id="node6" href="$cudaAlgorithms_8hpp.html" title=" " alt="" coords="725,95,877,121"/>
+</map>
