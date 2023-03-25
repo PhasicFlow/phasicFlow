@@ -13,66 +13,66 @@ surfaces
 {
 	body
 	{
-		// type of the wall
+// type of the wall
 		type 	 stlWall;
-		// file name in stl folder  	
+// file name in stl folder  	
 		file 	 Body.stl;
-		// material name of this wall		
+// material name of this wall		
 		material wallMat;
-		// motion component name   
+// motion component name   
 		motion 	 rotAxis;		 
 	}
 	/*	This is a Cylinder Wall at the rear of cylinder	*/
-	CylinderRear1
+	rearEnd
 	{
-		// type of the wall
+// type of the wall
 		type cylinderWall;
-		// first point for the axis of rotation			
+// first point for the axis of rotation			
 		p1 (-0.1974  0.2269  -0.001);
-		// second point for the axis of rotation	 
+// second point for the axis of rotation	 
 		p2 (-0.1974  0.2269   0.0);
-		// Radius of p1	
+// Radius of p1	
 		radius1 0.0001;
-		// Radius of p2
+// Radius of p2
 		radius2 0.12;
-		// material name of the wall
+// material name of the wall
 		material wallMat;
-		// motion component name          
+// motion component name          
 		motion rotAxis;			 
 	}
 	/*	This a cylinder Wall at the front of Cylinder */
-	CylinderFront2
+	frontEnd
 	{
-		// type of the wall
+// type of the wall
 		type cylinderWall;
-		// first point for the axis of rotation			
+// first point for the axis of rotation			
 		p1 (-0.1974  0.2269   0.0989);
-		// second point for the axis of rotation	 
+// second point for the axis of rotation	 
 		p2 (-0.1974  0.2269   0.0990);	
-		// Radius of p1
+// Radius of p1
 		radius1 0.0001;
-		// Radius of p2
+// Radius of p2
 		radius2 0.12;
-		// material name of the wall
+// material name of the wall
 		material wallMat; 
-		// motion component name          
+// motion component name          
 		motion rotAxis;			 
 	}
 }
-	// information for rotatingAxisMotion motion model 
+// information for rotatingAxisMotion motion model 
 rotatingAxisMotionInfo
 {
 	rotAxis 
 	{
-		// first point for the axis of rotation
+// first point for the axis of rotation
 		p1 (-0.1974  0.2269  0);
-		// second point for the axis of rotation	 
+// second point for the axis of rotation	 
 		p2 (-0.1974  0.2269  0.1);
-		// rotation speed (rad/s) => 15 rpm	
+// rotation speed (rad/s) => 15 rpm	
 		omega 2.38733;
-		// Start time of Geometry Rotating 		
+// Start time of Geometry Rotating 		
 		startTime 2;
-		// End time of Geometry Rotating
+// End time of Geometry Rotating
 		endTime 9.5;
 	}
 }
