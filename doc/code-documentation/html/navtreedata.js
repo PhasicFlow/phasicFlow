@@ -23,6 +23,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "PhasicFlow", "index.html", [
+    [ "PhasicFlow Features", "md_doc_mdDocs_phasicFlowFeatures.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -81,10 +82,10 @@ var NAVTREEINDEX =
 "dir_40d089f5b6543888409b0c9c3858ee92.html",
 "functions_type_h.html",
 "line_8cpp.html",
-"pointFieldAlgorithms_8hpp.html#af989fca768a41ce5a1fbe6ae48637d40",
-"sphereInteractions_8cpp_source.html",
-"symArrays_8hpp.html",
-"vocabs_8hpp.html#a9e12d96cf1434d9b7a03a2d53eee4af3"
+"pointFieldAlgorithms_8hpp.html#aba9b2125fa01a2bc1588b29e0b385b5a",
+"sphereInteractions_8cpp.html",
+"symArrays_8cpp_source.html",
+"vocabs_8hpp.html#a95336277204d1868085127ba9a1b6cea"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

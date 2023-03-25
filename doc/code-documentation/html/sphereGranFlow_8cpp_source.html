@@ -97,111 +97,113 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp_source.html',''); 
 <div class="title">sphereGranFlow.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="sphereGranFlow_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*------------------------------- phasicFlow ---------------------------------</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">      O        C enter of</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">     O O       E ngineering and</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    O   O      M ultiscale modeling of</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow       </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  Copyright (C): www.cemf.ir</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  email: hamid.r.norouzi AT gmail.com</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------  </span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">Licence:</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating </span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  granular and multiphase flows. You can redistribute it and/or modify it under</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions. </span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of </span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="property_8hpp.html">property.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="geometry_8hpp.html">geometry.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sphereParticles_8hpp.html">sphereParticles.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Insertions_8hpp.html">Insertions.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="contactSearch_8hpp.html">contactSearch.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sphereInteraction_8hpp.html">sphereInteraction.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;commandLine.hpp&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1property.html">pFlow::property</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1sphereParticles.html">pFlow::sphereParticles</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1objectFile.html">pFlow::objectFile</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#ae2e0749fbe2e30cbf9061410cfccf232">pFlow::sphereInsertion</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a62955dba3ac8eafe4cf89b83d917d38f">pFlow::insertionFile__</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a4a9012e5fd13ea2e176fb32ec9b50753">pFlow::interactionFile__</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1contactSearch.html">pFlow::contactSearch</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1interaction.html">pFlow::interaction</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using</span> pFlow::commandLine;</div>
+<a href="sphereGranFlow_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">/*------------------------------- phasicFlow ---------------------------------</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">      O        C enter of</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">     O O       E ngineering and</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    O   O      M ultiscale modeling of</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">   OOOOOOO     F luid flow       </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  Copyright (C): www.cemf.ir</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">  email: hamid.r.norouzi AT gmail.com</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">------------------------------------------------------------------------------  </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">Licence:</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  granular and multiphase flows. You can redistribute it and/or modify it under</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions. </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="property_8hpp.html">property.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="geometry_8hpp.html">geometry.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sphereParticles_8hpp.html">sphereParticles.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Insertions_8hpp.html">Insertions.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="contactSearch_8hpp.html">contactSearch.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sphereInteraction_8hpp.html">sphereInteraction.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;commandLine.hpp&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   43</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;commandLine cmds(</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="stringliteral">&quot;sphereGranFlow&quot;</span>,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="stringliteral">&quot;DEM solver for non-cohesive spherical particles with particle insertion &quot;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="stringliteral">&quot;mechanism and moving geometry&quot;</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">bool</span> isCoupling = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordflow">if</span>(!cmds.parse(argc, argv)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1property.html">pFlow::property</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1sphereParticles.html">pFlow::sphereParticles</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1objectFile.html">pFlow::objectFile</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#ae2e0749fbe2e30cbf9061410cfccf232">pFlow::sphereInsertion</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a62955dba3ac8eafe4cf89b83d917d38f">pFlow::insertionFile__</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a4a9012e5fd13ea2e176fb32ec9b50753">pFlow::interactionFile__</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1contactSearch.html">pFlow::contactSearch</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1interaction.html">pFlow::interaction</a>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">using</span> pFlow::commandLine;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">// this should be palced in each main </span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="setProperty_8hpp.html">setProperty.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="setSurfaceGeometry_8hpp.html">setSurfaceGeometry.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="createDEMComponents_8hpp.html">createDEMComponents.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt;<span class="stringliteral">&quot;\nStart of time loop . . .\n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   63</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">do</span> </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">if</span>(! <a class="code" href="createDEMComponents_8hpp.html#a84c40199c91da9a7888debd293f2d7b9">sphInsertion</a>.insertParticles( </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().currentTime(),</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().dt() ) )</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <a class="code" href="error_8hpp.html#adfe9ae1313e6913aca3f96d3eb67906e">fatalError</a>&lt;&lt;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="stringliteral">&quot;particle insertion failed in sphereDFlow solver.\n&quot;</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a>.beforeIteration();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#affb29a66c2605b3f871b00987e41053c">sphInteraction</a>.beforeIteration();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;commandLine cmds(</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="stringliteral">&quot;sphereGranFlow&quot;</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="stringliteral">&quot;DEM solver for non-cohesive spherical particles with particle insertion &quot;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="stringliteral">&quot;mechanism and moving geometry&quot;</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> isCoupling = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordflow">if</span>(!cmds.parse(argc, argv)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">// this should be palced in each main </span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="setProperty_8hpp.html">setProperty.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="setSurfaceGeometry_8hpp.html">setSurfaceGeometry.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles</a>.<a class="code" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32">beforeIteration</a>();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#affb29a66c2605b3f871b00987e41053c">sphInteraction</a>.iterate();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles</a>.<a class="code" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">iterate</a>();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a>.iterate();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles</a>.<a class="code" href="classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e">afterIteration</a>();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a>.afterIteration();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }<span class="keywordflow">while</span>(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>++);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="createDEMComponents_8hpp.html">createDEMComponents.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt;<span class="stringliteral">&quot;\nStart of time loop . . .\n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">do</span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span>(! <a class="code" href="createDEMComponents_8hpp.html#a84c40199c91da9a7888debd293f2d7b9">sphInsertion</a>.insertParticles( </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().currentTime(),</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().dt() ) )</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <a class="code" href="error_8hpp.html#adfe9ae1313e6913aca3f96d3eb67906e">fatalError</a>&lt;&lt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="stringliteral">&quot;particle insertion failed in sphereDFlow solver.\n&quot;</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt;<span class="stringliteral">&quot;\nEnd of time loop.\n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// this should be palced in each main </span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="finalize_8hpp.html">finalize.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}   </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a>.beforeIteration();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#affb29a66c2605b3f871b00987e41053c">sphInteraction</a>.beforeIteration();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles</a>.<a class="code" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32">beforeIteration</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#affb29a66c2605b3f871b00987e41053c">sphInteraction</a>.iterate();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles</a>.<a class="code" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">iterate</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a>.iterate();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles</a>.<a class="code" href="classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e">afterIteration</a>();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a>.afterIteration();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }<span class="keywordflow">while</span>(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>++);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt;<span class="stringliteral">&quot;\nEnd of time loop.\n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">// this should be palced in each main </span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="finalize_8hpp.html">finalize.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}   </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ainitialize__Control_8hpp_html"><div class="ttname"><a href="initialize__Control_8hpp.html">initialize_Control.hpp</a></div></div>
@@ -214,7 +216,7 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp_source.html',''); 
 <div class="ttc" id="asetSurfaceGeometry_8hpp_html"><div class="ttname"><a href="setSurfaceGeometry_8hpp.html">setSurfaceGeometry.hpp</a></div></div>
 <div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
 <div class="ttc" id="aInsertions_8hpp_html"><div class="ttname"><a href="Insertions_8hpp.html">Insertions.hpp</a></div></div>
-<div class="ttc" id="asphereGranFlow_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="sphereGranFlow_8cpp_source.html#l00043">sphereGranFlow.cpp:43</a></div></div>
+<div class="ttc" id="asphereGranFlow_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">DEM solver for simulating granular flow of cohesion-less particles.</div><div class="ttdef"><b>Definition:</b> <a href="sphereGranFlow_8cpp_source.html#l00063">sphereGranFlow.cpp:63</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a4a9012e5fd13ea2e176fb32ec9b50753"><div class="ttname"><a href="namespacepFlow.html#a4a9012e5fd13ea2e176fb32ec9b50753">pFlow::interactionFile__</a></div><div class="ttdeci">const char * interactionFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00048">vocabs.hpp:48</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00312">iOstream.hpp:312</a></div></div>
 <div class="ttc" id="asetSurfaceGeometry_8hpp_html_a195e279064ba2595c36f5f8d504822cb"><div class="ttname"><a href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a></div><div class="ttdeci">auto &amp; surfGeometry</div><div class="ttdef"><b>Definition:</b> <a href="setSurfaceGeometry_8hpp_source.html#l00026">setSurfaceGeometry.hpp:26</a></div></div>

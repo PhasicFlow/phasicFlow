@@ -1,3 +1,4 @@
+
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -17,6 +18,17 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+/** 
+ * \file sphereGranFlow.cpp
+ * \brief sphereGranFlow solver 
+ *
+ * This solver simulate granular flow of cohesion-less, spherical particles. 
+ * Particle insertion can be activated in the solver to gradually insert 
+ * particles into the simulation. Geometry can be defined generally with 
+ * built-in features of the code or through ASCII stl files or a combination
+ * of both. For more information refer to [tutorials/sphereGranFlow/]
+ * (https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow) folder.
+ */
 
 #include "property.hpp"
 #include "geometry.hpp"
@@ -40,6 +52,14 @@ using pFlow::contactSearch;
 using pFlow::interaction;
 using pFlow::commandLine;
 
+
+
+/**
+ * DEM solver for simulating granular flow of cohesion-less particles.
+ *
+ * In the root case directory just simply enter the following command to 
+ * run the simulation. For command line options use flag -h. 
+ */
 int main( int argc, char* argv[])
 {
 

@@ -99,12 +99,15 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp.html',''); initRes
 <div class="title">sphereGranFlow.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>sphereGranFlow solver  
+<a href="#details">More...</a></p>
 <div class="textblock"><div class="dynheader">
 Include dependency graph for sphereGranFlow.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="sphereGranFlow_8cpp__incl.png" border="0" usemap="#solvers_2sphereGranFlow_2sphereGranFlow_8cpp" alt=""/></div>
 <map name="solvers_2sphereGranFlow_2sphereGranFlow_8cpp" id="solvers_2sphereGranFlow_2sphereGranFlow_8cpp">
-<area shape="rect" title=" " alt="" coords="602,5,781,47"/>
+<area shape="rect" title="sphereGranFlow solver" alt="" coords="602,5,781,47"/>
 <area shape="rect" href="property_8hpp.html" title=" " alt="" coords="31,244,133,271"/>
 <area shape="rect" href="geometry_8hpp.html" title=" " alt="" coords="27,169,137,196"/>
 <area shape="rect" href="sphereParticles_8hpp.html" title=" " alt="" coords="183,169,333,196"/>
@@ -127,9 +130,15 @@ Include dependency graph for sphereGranFlow.cpp:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEM solver for simulating granular flow of cohesion-less particles.  <a href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">More...</a><br /></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>sphereGranFlow solver </p>
+<p>This solver simulate granular flow of cohesion-less, spherical particles. Particle insertion can be activated in the solver to gradually insert particles into the simulation. Geometry can be defined generally with built-in features of the code or through ASCII stl files or a combination of both. For more information refer to <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow">tutorials/sphereGranFlow/</a> folder. </p>
+
+<p class="definition">Definition in file <a class="el" href="sphereGranFlow_8cpp_source.html">sphereGranFlow.cpp</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&nbsp;</a></span>main()</h2>
 
@@ -156,7 +165,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sphereGranFlow_8cpp_source.html#l00043">43</a> of file <a class="el" href="sphereGranFlow_8cpp_source.html">sphereGranFlow.cpp</a>.</p>
+<p>DEM solver for simulating granular flow of cohesion-less particles. </p>
+<p>In the root case directory just simply enter the following command to run the simulation. For command line options use flag -h. </p>
+
+<p class="definition">Definition at line <a class="el" href="sphereGranFlow_8cpp_source.html#l00063">63</a> of file <a class="el" href="sphereGranFlow_8cpp_source.html">sphereGranFlow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="sphereParticles_8cpp_source.html#l00133">sphereParticles::afterIteration()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00084">sphereParticles::beforeIteration()</a>, <a class="el" href="initialize__Control_8hpp_source.html#l00047">Control</a>, <a class="el" href="streams_8hpp_source.html#l00041">endREPORT</a>, <a class="el" href="error_8hpp_source.html#l00036">fatalError</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00104">sphereParticles::iterate()</a>, <a class="el" href="streams_8hpp_source.html#l00040">REPORT</a>, <a class="el" href="createDEMComponents_8hpp_source.html#l00039">sphInsertion</a>, <a class="el" href="createDEMComponents_8hpp_source.html#l00051">sphInteraction</a>, <a class="el" href="createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f">sphParticles()</a>, and <a class="el" href="setSurfaceGeometry_8hpp_source.html#l00026">surfGeometry</a>.</p>
 <div class="dynheader">
@@ -164,7 +176,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="sphereGranFlow_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph.png" border="0" usemap="#sphereGranFlow_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph" alt=""/></div>
 <map name="sphereGranFlow_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph" id="sphereGranFlow_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph">
-<area shape="rect" title=" " alt="" coords="5,111,60,138"/>
+<area shape="rect" title="DEM solver for simulating granular flow of cohesion&#45;less particles." alt="" coords="5,111,60,138"/>
 <area shape="rect" href="classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e" title="after iteration step" alt="" coords="108,5,275,47"/>
 <area shape="rect" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32" title="before iteration step" alt="" coords="108,71,275,112"/>
 <area shape="rect" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559" title="iterate particles" alt="" coords="108,136,275,177"/>

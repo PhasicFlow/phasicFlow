@@ -17,7 +17,18 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
+/** 
+ * \file iterateGeometry.cpp
+ * \brief iterateGeometry solver 
+ *
+ * This solver only requires the information for geometry. It is used to test 
+ * the settings for wall definition and motion model to check if the walls move 
+ * as expected or not.
+ * For more information refer to [tutorials/iterateGeometry/]
+ * (https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/iterateGeometry)
+ * folder.
+ */
+ 
 #include "systemControl.hpp"
 #include "geometryMotion.hpp"
 #include "commandLine.hpp"

@@ -1,5 +1,5 @@
 <map id="src/setHelpers/setSurfaceGeometry.hpp" name="src/setHelpers/setSurfaceGeometry.hpp">
 <area shape="rect" id="node1" title=" " alt="" coords="103,5,291,47"/>
-<area shape="rect" id="node2" href="$iterateGeometry_8cpp.html" title=" " alt="" coords="5,95,187,136"/>
-<area shape="rect" id="node3" href="$sphereGranFlow_8cpp.html" title=" " alt="" coords="211,95,389,136"/>
+<area shape="rect" id="node2" href="$iterateGeometry_8cpp.html" title="iterateGeometry solver" alt="" coords="5,95,187,136"/>
+<area shape="rect" id="node3" href="$sphereGranFlow_8cpp.html" title="sphereGranFlow solver" alt="" coords="211,95,389,136"/>
 </map>
