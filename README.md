@@ -4,6 +4,8 @@ PhasicFlow is a parallel C++ code for performing DEM simulations. It can run on 
 # How to build?
 You can build PhasicFlow for CPU and GPU executions. [Here is a complete step-by-step procedure](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
 
+# Online code documentation
+You can find a full documentation of the code, its features, and other related materials on [online documentation of the code](https://github.com/satu0king/Github-Documentation-With-Doxygen)
 
 # How to use PhasicFlow?
 You can navigate into [tutorials folder](./tutorials) in the phasicFlow folder to see some simulation case setups. If you need more detailed discription, visit our [wiki page tutorials](https://github.com/PhasicFlow/phasicFlow/wiki/Tutorials).  
