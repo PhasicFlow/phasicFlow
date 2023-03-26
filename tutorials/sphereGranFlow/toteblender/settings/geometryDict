@@ -51,7 +51,7 @@ surfaces
 	// material name of this wall
 		material 	prop1;
 	// motion component name   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 
 	coneShelltop
@@ -71,7 +71,7 @@ surfaces
 	// material name of this wall      	
 		material 	prop1;
 	// motion component name   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 
 	cylinderShell
@@ -91,7 +91,7 @@ surfaces
 	// material name of this wall	      	
 		material 	prop1; 
 	// motion component name  	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 
 	coneShelldown
@@ -111,7 +111,7 @@ surfaces
 	// material name of this wall	      	
 		material 	prop1;
 	// motion component name   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 	/*
 	This is a plane wall at the exit of silo
@@ -134,7 +134,7 @@ surfaces
 	// material name of this wall	      	
 		material 	prop1;
 	// motion component name	   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 	exitGate
 	{
@@ -144,7 +144,7 @@ surfaces
 		p3 ( 0.05    0.05     0);
 		p4 (0.05     -0.05    0);
 		material prop1;
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 		
 }
