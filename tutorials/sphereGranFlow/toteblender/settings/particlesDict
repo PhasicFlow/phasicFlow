@@ -54,6 +54,6 @@ positionParticles
 // number of particles in the simulation 	 	
 		numPoints 20000;
 // axis order for filling the space with particles		 	
-		axisOrder (z y x);  
+		axisOrder (x y z);  
 	}
 }
