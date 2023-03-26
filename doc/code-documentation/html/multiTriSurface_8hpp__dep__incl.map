@@ -1,8 +1,0 @@
-<map id="src/phasicFlow/structuredData/trisurfaceStructure/multiTriSurface.hpp" name="src/phasicFlow/structuredData/trisurfaceStructure/multiTriSurface.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="435,5,623,61"/>
-<area shape="rect" id="node2" href="$geometry_8hpp.html" title=" " alt="" coords="5,117,183,158"/>
-<area shape="rect" id="node3" href="$multiTriSurface_8cpp.html" title=" " alt="" coords="207,109,395,165"/>
-<area shape="rect" id="node4" href="$geometryPhasicFlow_8cpp.html" title=" " alt="" coords="419,117,638,158"/>
-<area shape="rect" id="node5" href="$geometric_8hpp.html" title=" " alt="" coords="662,117,817,158"/>
-<area shape="rect" id="node6" href="$triSurfaceFieldToVTK_8hpp.html" title=" " alt="" coords="841,117,1029,158"/>
-</map>

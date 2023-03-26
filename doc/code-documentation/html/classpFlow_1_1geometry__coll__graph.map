@@ -1,9 +1,0 @@
-<map id="geometry" name="geometry">
-<area shape="rect" id="node1" title=" " alt="" coords="743,160,828,187"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1demGeometry.html" title=" " alt="" coords="388,5,504,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1property.html" title="property holds the pure properties of materials." alt="" coords="407,56,485,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1repository.html" title=" " alt="" coords="402,145,490,172"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1triSurfaceField.html" title=" " alt="" coords="343,197,549,238"/>
-<area shape="rect" id="node6" href="$classpFlow_1_1Field.html" title=" " alt="" coords="5,302,189,343"/>
-<area shape="rect" id="node7" href="$classpFlow_1_1multiTriSurface.html" title=" " alt="" coords="386,340,506,367"/>
-</map>

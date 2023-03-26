@@ -1,7 +1,0 @@
-<map id="src/phasicFlow/containers/triSurfaceField/triSurfaceFields.hpp" name="src/phasicFlow/containers/triSurfaceField/triSurfaceFields.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="298,5,551,47"/>
-<area shape="rect" id="node2" href="$geometry_8hpp.html" title=" " alt="" coords="5,95,183,136"/>
-<area shape="rect" id="node3" href="$demInteraction_8hpp.html" title=" " alt="" coords="207,95,397,136"/>
-<area shape="rect" id="node4" href="$triSurfaceFields_8cpp.html" title=" " alt="" coords="421,95,673,136"/>
-<area shape="rect" id="node5" href="$triSurfaceFieldToVTK_8hpp.html" title=" " alt="" coords="697,95,885,136"/>
-</map>

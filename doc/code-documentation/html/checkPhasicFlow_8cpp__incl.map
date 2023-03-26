@@ -1,8 +1,0 @@
-<map id="utilities/checkPhasicFlow/checkPhasicFlow.cpp" name="utilities/checkPhasicFlow/checkPhasicFlow.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="311,5,497,47"/>
-<area shape="rect" id="node2" href="$KokkosTypes_8hpp.html" title=" " alt="" coords="5,95,139,121"/>
-<area shape="rect" id="node3" href="$systemControl_8hpp.html" title=" " alt="" coords="163,95,309,121"/>
-<area shape="rect" id="node4" title=" " alt="" coords="333,95,475,121"/>
-<area shape="rect" id="node5" href="$initialize_8hpp.html" title=" " alt="" coords="500,95,607,121"/>
-<area shape="rect" id="node6" href="$finalize_8hpp.html" title=" " alt="" coords="631,95,729,121"/>
-</map>

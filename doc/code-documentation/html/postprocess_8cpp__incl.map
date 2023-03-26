@@ -1,8 +1,0 @@
-<map id="utilities/postprocessPhasicFlow/postprocess.cpp" name="utilities/postprocessPhasicFlow/postprocess.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="275,5,469,47"/>
-<area shape="rect" id="node2" href="$postprocess_8hpp.html" title=" " alt="" coords="5,95,133,121"/>
-<area shape="rect" id="node3" href="$timeFolder_8hpp.html" title=" " alt="" coords="158,95,277,121"/>
-<area shape="rect" id="node4" href="$pointStructure_8hpp.html" title=" " alt="" coords="301,95,443,121"/>
-<area shape="rect" id="node5" href="$vocabs_8hpp.html" title=" " alt="" coords="468,95,564,121"/>
-<area shape="rect" id="node6" href="$vtkFile_8hpp.html" title=" " alt="" coords="589,95,683,121"/>
-</map>
