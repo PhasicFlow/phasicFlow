@@ -7,7 +7,16 @@ objectType 	dictionary;
 /* ------------------------------------------------------------------------- */
 // motion model: rotating object around an axis
 motionModel rotatingAxisMotion; 
-
+// information for rotatingAxisMotion motion model 
+rotatingAxisMotionInfo
+{
+	axisOfRotation 
+	{
+		p1 (-0.1 0.0 0.15);	// first point for the axis of rotation 
+		p2 (0.1 0.0 0.15);	// second point for the axis of rotation
+		omega 1.5708; 		// rotation speed ==> 15 rad/s
+	}
+}
 surfaces
 {
 	enterGate
@@ -22,7 +31,7 @@ surfaces
 	// material of wall
 		material prop1;
 	// motion component name
-		motion rotAxis;	
+		motion axisOfRotation;	
 	}
 	
     cylinderinlet
@@ -138,14 +147,4 @@ surfaces
 		motion rotAxis;		
 	}
 		
-}
-// information for rotatingAxisMotion motion model 
-rotatingAxisMotionInfo
-{
-	rotAxis 
-	{
-		p1 (-0.1 0.0 0.15);	// first point for the axis of rotation 
-		p2 (0.1 0.0 0.15);	// second point for the axis of rotation
-		omega 3; 		// rotation speed (rad/s)
-	}
 }
