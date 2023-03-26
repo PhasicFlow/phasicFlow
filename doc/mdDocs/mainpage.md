@@ -2,7 +2,7 @@ PhasicFlow is an open-source, parallel, multi-artitecture code for discrete elem
 It solves the Newton's second law of motion and Euler's second law of motion for the translational and rotational motion of spherical particles. The code is not restricted to a specifict geometry or wall motion. It is designed in a way that additional features can be added to the code very easily.
 
 ## Explore more
-* [Features of PhasicFlow](https://github.com/PhasicFlow/phasicFlow/wiki/Features-of-PhasicFlow)
+* [Features of PhasicFlow](@ref phasicFlowFeatures)
 * [How to build PhasicFlow](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow)
 * How to setup and run granular flow simulations
 * [Benchmarks and performance tests](https://github.com/PhasicFlow/phasicFlow/wiki/Performance-of-phasicFlow)

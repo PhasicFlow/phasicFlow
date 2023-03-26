@@ -97,9 +97,50 @@ $(document).ready(function(){initNavTree('md_doc_mdDocs_phasicFlowFeatures.html'
 <div class="title">PhasicFlow Features </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1>General representation of walls</h1>
-<h1>Various contact force models</h1>
-<h1>High precision integeration methods</h1>
+<div class="textblock"><h1>Preprocessing tools</h1>
+<p>Preprocessing tools are used to facilitate the process of case setup. They include tools for defining initial state of particles and geometry conversion.</p><ul>
+<li><b>particlesPhasicFlow</b> tool can be used to define the initial position of particles (for example at t = 0 s) and to set the initial field values for particles (like velocity, orientation, acceleration and etc).</li>
+<li><b>geometryPhasicFlow</b> converts user inputs for walls into a data structures that is used by PhasicFlow.</li>
+</ul>
+<h1>Models and features for simulations</h1>
+<h2>General representation of walls</h2>
+<p>Walls can be defined in three ways in PhasicFlow:</p><ul>
+<li><b>Builtin walls</b> in PhasicFlow that include plane wall, cylinder/cone wall, cuboid, circle.</li>
+<li><b>stl wall</b> that reads the data of the wall from an ASCII stl file.</li>
+<li><b>foamPatch wall</b> that reads the OpenFOAM mesh and converts the boundary patches into PhasicFlow walls (this feature is only available when performing CFD-DEM simulation using OpenFOAM).</li>
+</ul>
+<p>Walls can be fixed or in motion during simulations. Various motion models are implemented to cover most of the wall motions in phasicFlow (<a href="./../../../src/MotionModel/">see the source code</a>):</p><ul>
+<li><b>fixedWall</b> model, in which all walls are fixed. This model is mostly useful for granular flow under gravity or gas-solid flows (CFD-DEM).</li>
+<li><b>rotatingAxisMotion</b> model, in which walls are rotating around an axis of rotation with specified rotation speed. This model covers a wide range of granular flows in which the whole or a part of geometry is rotating, like mixers.</li>
+<li><b>multiRotatingAxisMotion</b> model, in which a combination of rotations can be specified. One axis of rotation can itself have another axis of rotation, and so on. This creates the possibility of defining very complex motion pattern for walls, like what we see in Nauta blenders.</li>
+<li><b>vibratingMotion</b> model, in which walls vibrates based on a sinusoidal model with specified frequency and amplitude. In addition to these models, the user can add other motion models to the code based on their need.</li>
+</ul>
+<h2>High precision integeration methods</h2>
+<p>The precision of integration in a DEM simulation is very important. Since sudden changes in the interaction forces occur during simulations (when objects contact or when they rebound). High precision integration methods makes it possible to accurately track position and velocity of objects (specially when they are in contact). When using these methods, it is possible to choose larger time steps for integration without loosing accuracy and causing instability in the simulation. Although a high-precision integration requires more computations, but the benefits of choosing larger time steps in simulation can totally compensate it. Various integration methods are implemented in PhasicFlow:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Integration Method </th><th class="markdownTableHeadCenter">Order </th><th class="markdownTableHeadCenter">Type  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">AdamsBashforth2 </td><td class="markdownTableBodyCenter">2 </td><td class="markdownTableBodyCenter">one-step  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">AdamsBashforth3 </td><td class="markdownTableBodyCenter">3 </td><td class="markdownTableBodyCenter">one-step  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">AdamsBashforth4 </td><td class="markdownTableBodyCenter">4 </td><td class="markdownTableBodyCenter">one-step  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">AdamsBashforth5 </td><td class="markdownTableBodyCenter">5 </td><td class="markdownTableBodyCenter">one-step  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">AdamsMoulton3 </td><td class="markdownTableBodyCenter">3 </td><td class="markdownTableBodyCenter">predictor-corrector  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">AdamsMoulton4 </td><td class="markdownTableBodyCenter">4 </td><td class="markdownTableBodyCenter">predictor-corrector  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">AdamsMoulton5 </td><td class="markdownTableBodyCenter">5 </td><td class="markdownTableBodyCenter">predictor-corrector  </td></tr>
+</table>
+<h2>Contact force models</h2>
+<p>Linear and non-linear visco-elastic contact force models are considered in the simulation. In addition to these, limited and non-limited Coulomb's friction model can be used to account for the friction between objects. For spherical objects, rolling friction can also be specified between bodies in contact.</p>
+<h2>Particle insertion</h2>
+<p>Particles can be inserted during simulation from specified region at specified rate and time interval. Any number of insertion regions can be defined in a simulation. Various region types are considered here: box, cylinder and sphere. Particles are inserted into the simulation through the specified region.</p>
+<h2>restarting/resuming a simulation</h2>
+<h1>Postprocessing tools</h1>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

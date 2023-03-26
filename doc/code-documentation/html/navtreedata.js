@@ -23,7 +23,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "PhasicFlow", "index.html", [
-    [ "PhasicFlow Features", "md_doc_mdDocs_phasicFlowFeatures.html", null ],
+    [ "PhasicFlow Features", "phasicFlowFeatures.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
