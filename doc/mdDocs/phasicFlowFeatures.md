@@ -3,9 +3,9 @@
 ## Building options
 You can build PhasicFlow to be executed on multi-core CPUs or GPUs. It is also possible to select the type of floating point variables in PhasicFlow: double or float. float type requires less memory and mostly consumes less time of a processor to complete a mathematical operation. So, there is a benefit for using floats in DEM simulation specially when GPU is targeted for computations. 
 Build options for PhasicFlow:
-* **serial (double or sinlge type)**: execution on one cpu core
-* **OpenMp (double or single type)**: execution on multiple cores of a CPU
-* **cuda (double or sngle type)**: execution on cuda-enabled GPUs
+* **serial (double or float type)**: execution on one cpu core
+* **OpenMp (double or float type)**: execution on multiple cores of a CPU
+* **cuda (double or float type)**: execution on cuda-enabled GPUs
 
 
 
