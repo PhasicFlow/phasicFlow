@@ -38,7 +38,6 @@ bin/**
 lib/**
 test*/**
 **/**notnow
-doc/code-documentation/
 doc/DTAGS
 # all possible time folders
 **/[0-9]
