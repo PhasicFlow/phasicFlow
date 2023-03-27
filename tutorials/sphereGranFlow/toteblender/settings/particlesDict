@@ -39,12 +39,13 @@ positionParticles
 // perform initial sorting based on morton code? 
 	mortonSorting Yes;             
 // box for positioning particles 
-	box  
+	cylinder  
 	{
-// lower corner point of the box 	
-		min (-0.06 -0.06 0.08);
-// upper corner point of the box 
-		max (0.06 0.06 0.18);
+// Coordinates of cylinderRegion (m,m,m)x 	
+		p1 (0.03 0.06 0.08);
+		p2 (0.03 0.06 0.18);
+// radius of cylinder
+		radius 0.035;
 	}
 
 	positionOrderedInfo
