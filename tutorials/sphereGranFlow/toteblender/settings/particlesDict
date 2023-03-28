@@ -38,23 +38,23 @@ positionParticles
 	maxNumberOfParticles 40000;
 // perform initial sorting based on morton code? 
 	mortonSorting Yes;             
-// box for positioning particles 
-	cylinder  
+// cylinder for positioning particles 
+	cylinder
 	{
-// Coordinates of cylinderRegion (m,m,m)x 	
-		p1 (0.03 0.06 0.08);
-		p2 (0.03 0.06 0.18);
+// Coordinates of top cylinderRegion (m,m,m)	
+		p1 (0.05 0.0 0.12);
+		p2 (0.05 0.0 0.22);
 // radius of cylinder
-		radius 0.035;
+		radius 0.066;
 	}
 
 	positionOrderedInfo
 	{
 // minimum space between centers of particles
-		diameter 0.004;
+		diameter 0.003;
 // number of particles in the simulation 	 	
 		numPoints 20000;
 // axis order for filling the space with particles		 	
-		axisOrder (x y z);  
+		axisOrder (z y x);  
 	}
 }
