@@ -23,7 +23,7 @@ rotatingAxisMotionInfo
 }
 surfaces
 {
-	enterGate
+	topGate
 	{
 	// type of wall
 		type planeWall;
@@ -38,7 +38,7 @@ surfaces
 		motion axisOfRotation;	
 	}
 	
-    cylinderinlet
+    topCylinder
 	{
 	// type of the wall
 		type 		cylinderWall;
@@ -98,7 +98,7 @@ surfaces
 		motion axisOfRotation;		
 	}
 
-	coneShelldown
+	coneShellbottom
 	{
 	// type of the wall
 		type 		cylinderWall;
@@ -121,7 +121,7 @@ surfaces
 	This is a plane wall at the exit of silo
 	*/
 
-	    cylinderoutlet
+	    bottomCylinder
 	{
 	// type of the wall
 		type 		cylinderWall;  	
@@ -140,7 +140,7 @@ surfaces
 	// motion component name	   	
 		motion axisOfRotation;		
 	}
-	exitGate
+	bottomGate
 	{
 		type planeWall;
 		p1 (-0.05    -0.05    0);
