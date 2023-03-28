@@ -1,6 +1,6 @@
 # Problem Definition
-The problem is to simulate a double pedestal tote blender with the diameter **0.03 m** and **0.1 m** respectively, the length **0.3 m**, rotating at **28 rpm**. This blender is filled with **20000** Particles. The timestep for integration is **0.00001 s**. There is one type of Particle in this blender that are being inserted during simulation to fill the drum.
-* **20000** particles with **4 mm** diameter, at the rate of 20000 particles/s for 1 sec.
+The problem is to simulate a double pedestal tote blender with the diameter **0.03 m** and **0.1 m** respectively, the length **0.3 m**, rotating at **28 rpm**. This blender is filled with **20000** Particles. The timestep for integration is **0.00001 s**. There is one type of Particle in this blender that are being inserted during simulation to fill the blender.
+* **20000** particles with **4 mm** diameter, at the rate of 20000 particles/s for 1 sec. َAfter settling particles, this blender starts to rotate at t=**1s**. 
 
 <html>
 <body>
@@ -43,14 +43,26 @@ positionParticles
 	maxNumberOfParticles 40000;
 // perform initial sorting based on morton code? 
 	mortonSorting Yes;             
-// box for positioning particles 
-	box  
+// cylinder for positioning particles 
+	cylinder
 	{
-// lower corner point of the box 	
-		min (-0.06 -0.06 0.08);
-// upper corner point of the box 
-		max (0.06 0.06 0.18);
+// Coordinates of top cylinderRegion (m,m,m)	
+		p1 (0.05 0.0 0.12);
+		p2 (0.05 0.0 0.22);
+// radius of cylinder
+		radius 0.066;
 	}
+
+	positionOrderedInfo
+	{
+// minimum space between centers of particles
+		diameter 0.003;
+// number of particles in the simulation 	 	
+		numPoints 20000;
+// axis order for filling the space with particles		 	
+		axisOrder (z y x);  
+	}
+}
 ```
  ## Interaction between particles
  In `caseSetup/interaction` file, material names and properties and interaction parameters are defined: interaction between the particles of rotating drum. Since we are defining 1 material for simulation, the interaction matrix is 1x1 (interactions are symetric). 
@@ -92,7 +104,7 @@ In the `settings/geometryDict` file, the geometry and axis of rotation is define
 ```C++
 surfaces
 {
-	enterGate
+	topGate
 	{
 	// type of wall
 		type planeWall;
@@ -104,10 +116,10 @@ surfaces
 	// material of wall
 		material prop1;
 	// motion component name
-		motion rotAxis;	
+		motion axisOfRotation;	
 	}
 	
-    cylinderinlet
+    topCylinder
 	{
 	// type of the wall
 		type 		cylinderWall;
@@ -124,7 +136,7 @@ surfaces
 	// material name of this wall
 		material 	prop1;
 	// motion component name   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 
 	coneShelltop
@@ -144,7 +156,7 @@ surfaces
 	// material name of this wall      	
 		material 	prop1;
 	// motion component name   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 
 	cylinderShell
@@ -164,10 +176,10 @@ surfaces
 	// material name of this wall	      	
 		material 	prop1; 
 	// motion component name  	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 
-	coneShelldown
+	coneShellbottom
 	{
 	// type of the wall
 		type 		cylinderWall;
@@ -184,13 +196,13 @@ surfaces
 	// material name of this wall	      	
 		material 	prop1;
 	// motion component name   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 	/*
 	This is a plane wall at the exit of silo
 	*/
 
-	    cylinderoutlet
+	    bottomCylinder
 	{
 	// type of the wall
 		type 		cylinderWall;  	
@@ -207,9 +219,9 @@ surfaces
 	// material name of this wall	      	
 		material 	prop1;
 	// motion component name	   	
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
-	exitGate
+	bottomGate
 	{
 		type planeWall;
 		p1 (-0.05    -0.05    0);
@@ -217,7 +229,7 @@ surfaces
 		p3 ( 0.05    0.05     0);
 		p4 (0.05     -0.05    0);
 		material prop1;
-		motion rotAxis;		
+		motion axisOfRotation;		
 	}
 		
 }
@@ -225,13 +237,18 @@ surfaces
 ### Rotating Axis Info
 In this part of `geometryDict` the information of rotating axis and speed of rotation are defined. Unlike the previous cases, the rotation of this blender starts at time=**0 s**.
 ```C++
+// information for rotatingAxisMotion motion model 
 rotatingAxisMotionInfo
 {
-	rotAxis 
+	axisOfRotation 
 	{
 		p1 (-0.1 0.0 0.15);	// first point for the axis of rotation 
 		p2 (0.1 0.0 0.15);	// second point for the axis of rotation
-		omega 3; 		// rotation speed (rad/s)
+		omega 1.5708; 		// rotation speed ==> 15 rad/s
+	// Start time of Geometry Rotating (s) 		
+		startTime 1;
+	// End time of Geometry Rotating (s)
+		endTime 9.5;
 	}
 }
 ```
