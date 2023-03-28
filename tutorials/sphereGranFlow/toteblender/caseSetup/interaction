@@ -6,7 +6,7 @@ objectName interaction;
 objectType dicrionary;
 /* ------------------------------------------------------------------------- */
 // a list of materials names
-materials      (prop1);
+materials      (solidProperty);
 // density of materials [kg/m3]
 densities      (1000.0);   
 
@@ -17,7 +17,7 @@ model
    contactForceModel nonLinearNonLimited;
    rollingFrictionModel normal;
    /*
-   Property (prop1-prop1);
+   Property (solidProperty-solidProperty);
    */
 // Young modulus [Pa]
    Yeff  (1.0e6);       

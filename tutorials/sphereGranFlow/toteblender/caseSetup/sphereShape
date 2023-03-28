@@ -10,4 +10,4 @@ names 		(sphere1);
 // diameter of shapes (m)
 diameters 	(0.004);
 // material names for shapes 	
-materials	(prop1);	
+materials	(solidProperty);	

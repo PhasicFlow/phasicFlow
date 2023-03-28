@@ -33,7 +33,7 @@ surfaces
 		p3 ( 0.05    0.05     0.3);
 		p4 (0.05     -0.05    0.3);
 	// material of wall
-		material prop1;
+		material solidProperty;
 	// motion component name
 		motion axisOfRotation;	
 	}
@@ -53,7 +53,7 @@ surfaces
 	// number of divisions		
 		resolution 	36;
 	// material name of this wall
-		material 	prop1;
+		material 	solidProperty;
 	// motion component name   	
 		motion axisOfRotation;		
 	}
@@ -73,7 +73,7 @@ surfaces
 	// number of divisions		
 		resolution 	36;
 	// material name of this wall      	
-		material 	prop1;
+		material 	solidProperty;
 	// motion component name   	
 		motion axisOfRotation;		
 	}
@@ -93,7 +93,7 @@ surfaces
 	// number of divisions		
 		resolution 	36;
 	// material name of this wall	      	
-		material 	prop1; 
+		material 	solidProperty; 
 	// motion component name  	
 		motion axisOfRotation;		
 	}
@@ -113,7 +113,7 @@ surfaces
 	// number of divisions		
 		resolution 	36;
 	// material name of this wall	      	
-		material 	prop1;
+		material 	solidProperty;
 	// motion component name   	
 		motion axisOfRotation;		
 	}
@@ -136,7 +136,7 @@ surfaces
 	// number of divisions			
 		resolution 	36;
 	// material name of this wall	      	
-		material 	prop1;
+		material 	solidProperty;
 	// motion component name	   	
 		motion axisOfRotation;		
 	}
@@ -147,7 +147,7 @@ surfaces
 		p2 (-0.05    0.05     0);
 		p3 ( 0.05    0.05     0);
 		p4 (0.05     -0.05    0);
-		material prop1;
+		material solidProperty;
 		motion axisOfRotation;		
 	}
 		
