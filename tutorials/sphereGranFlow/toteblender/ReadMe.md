@@ -105,20 +105,24 @@ In the `settings/geometryDict` file, the geometry and axis of rotation is define
 surfaces
 {
 	topGate
+	topGate
 	{
 	// type of wall
-		type planeWall;
-	// coords of wall
-		p1 (-0.05    -0.05    0.3);
-		p2 (-0.05    0.05     0.3);
-		p3 ( 0.05    0.05     0.3);
-		p4 (0.05     -0.05    0.3);
+		type cylinderWall;
+	// begin point of cylinder axis 
+		p1 (0.0    0.0   0.299);
+	// end point of cylinder axis 
+		p2 (0.0    0.0   0.3);
+	// radius at p1  
+		radius1  0.03;
+	// radius at p2		
+		radius2	 0.0001;
 	// material of wall
-		material prop1;
+		material solidProperty;
 	// motion component name
 		motion axisOfRotation;	
 	}
-	
+
     topCylinder
 	{
 	// type of the wall
@@ -179,7 +183,7 @@ surfaces
 		motion axisOfRotation;		
 	}
 
-	coneShellbottom
+	coneShelldown
 	{
 	// type of the wall
 		type 		cylinderWall;
@@ -221,7 +225,7 @@ surfaces
 	// motion component name	   	
 		motion axisOfRotation;		
 	}
-	bottomGate
+	exitGate
 	{
 		type planeWall;
 		p1 (-0.05    -0.05    0);
