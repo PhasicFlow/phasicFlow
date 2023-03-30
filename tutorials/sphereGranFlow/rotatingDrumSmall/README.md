@@ -1,3 +1,4 @@
+# Simulating a small rotating drum {#rotatingDrumSmall}
 ## Problem definition
 The problem is to simulate a rotating drum with the diameter 0.24 m and the length 0.1 m rotating at 11.6 rpm. It is filled with 30,000 4-mm spherical particles. The timestep for integration is 0.00001 s.
 <div align="center"><b>

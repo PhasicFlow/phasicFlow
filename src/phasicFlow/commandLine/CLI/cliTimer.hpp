@@ -22,7 +22,7 @@
 namespace CLI {
 
 /// This is a simple timer with pretty printing. Creating the timer starts counting.
-class Timer {
+class cliTimer {
   protected:
     /// This is a typedef to make clocks easier to use
     using clock = std::chrono::steady_clock;
@@ -57,7 +57,7 @@ class Timer {
 
   public:
     /// Standard constructor, can set title and print function
-    explicit Timer(std::string title = "Timer", time_print_t time_print = Simple)
+    explicit cliTimer(std::string title = "cliTimer", time_print_t time_print = Simple)
         : title_(std::move(title)), time_print_(std::move(time_print)), start_(clock::now()) {}
 
     /// Time a function by running it multiple times. Target time is the len to target.
@@ -111,17 +111,17 @@ class Timer {
     std::string to_string() const { return time_print_(title_, make_time_str()); }
 
     /// Division sets the number of cycles to divide by (no graphical change)
-    Timer &operator/(std::size_t val) {
+    cliTimer &operator/(std::size_t val) {
         cycles = val;
         return *this;
     }
 };
 
 /// This class prints out the time upon destruction
-class AutoTimer : public Timer {
+class AutoTimer : public cliTimer {
   public:
     /// Reimplementing the constructor is required in GCC 4.7
-    explicit AutoTimer(std::string title = "Timer", time_print_t time_print = Simple) : Timer(title, time_print) {}
+    explicit AutoTimer(std::string title = "cliTimer", time_print_t time_print = Simple) : cliTimer(title, time_print) {}
     // GCC 4.7 does not support using inheriting constructors.
 
     /// This destructor prints the string
@@ -131,4 +131,4 @@ class AutoTimer : public Timer {
 }  // namespace CLI
 
 /// This prints out the time if shifted into a std::cout like stream.
-inline std::ostream &operator<<(std::ostream &in, const CLI::Timer &timer) { return in << timer.to_string(); }
+inline std::ostream &operator<<(std::ostream &in, const CLI::cliTimer &timer) { return in << timer.to_string(); }
