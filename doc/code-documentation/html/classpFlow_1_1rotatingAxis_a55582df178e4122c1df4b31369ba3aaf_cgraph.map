@@ -1,5 +1,5 @@
 <map id="linTangentialVelocityPoint" name="linTangentialVelocityPoint">
-<area shape="rect" id="node1" title=" " alt="" coords="5,93,196,120"/>
+<area shape="rect" id="node1" title="Linear tangential velocity at point p." alt="" coords="5,93,196,120"/>
 <area shape="rect" id="node2" href="$tripleFwd_8hpp.html#a7a724b824f9e21a646a965a99fff4b04" title=" " alt="" coords="305,5,361,32"/>
 <area shape="rect" id="node3" href="$classpFlow_1_1timeInterval.html#a690a47d7890165ea3dd242b11fafc07a" title=" " alt="" coords="259,57,407,98"/>
 <area shape="rect" id="node4" href="$classpFlow_1_1line.html#a03c6784ff46ffab948664762095b0c47" title=" " alt="" coords="244,123,423,149"/>

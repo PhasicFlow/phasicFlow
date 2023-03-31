@@ -118,15 +118,15 @@ $(document).ready(function(){initNavTree('iterateGeometry_8cpp_source.html','');
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="geometryMotion_8hpp.html">geometryMotion.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;commandLine.hpp&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using</span> pFlow::commandLine;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="iterateGeometry_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   39</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="iterateGeometry_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[] )</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;commandLine cmds(</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="classpFlow_1_1commandLine.html">commandLine</a> cmds(</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="stringliteral">&quot;iterateGeometry&quot;</span>,</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="stringliteral">&quot;Performs simulation without particles, only geometry is solved&quot;</span>);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('iterateGeometry_8cpp_source.html','');
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    isCoupling,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="stringliteral">&quot;Is this a fluid-particle coupling simulation?&quot;</span>);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">if</span>(!cmds.parse(argc, argv)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;   </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">// this should be palced in each main </span></div>
@@ -165,9 +165,12 @@ $(document).ready(function(){initNavTree('iterateGeometry_8cpp_source.html','');
 <div class="ttc" id="asetSurfaceGeometry_8hpp_html"><div class="ttname"><a href="setSurfaceGeometry_8hpp.html">setSurfaceGeometry.hpp</a></div></div>
 <div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
 <div class="ttc" id="aiterateGeometry_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="iterateGeometry_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="iterateGeometry_8cpp_source.html#l00039">iterateGeometry.cpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1commandLine_html"><div class="ttname"><a href="classpFlow_1_1commandLine.html">pFlow::commandLine</a></div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8hpp_source.html#l00036">commandLine.hpp:36</a></div></div>
 <div class="ttc" id="ageometryMotion_8hpp_html"><div class="ttname"><a href="geometryMotion_8hpp.html">geometryMotion.hpp</a></div></div>
 <div class="ttc" id="asetSurfaceGeometry_8hpp_html_a195e279064ba2595c36f5f8d504822cb"><div class="ttname"><a href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a></div><div class="ttdeci">auto &amp; surfGeometry</div><div class="ttdef"><b>Definition:</b> <a href="setSurfaceGeometry_8hpp_source.html#l00026">setSurfaceGeometry.hpp:26</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1commandLine_html_af199716992f3f8bb51c89ddcca847062"><div class="ttname"><a href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">pFlow::commandLine::parse</a></div><div class="ttdeci">bool parse(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8cpp_source.html#l00050">commandLine.cpp:50</a></div></div>
 <div class="ttc" id="areadControlDict_8hpp_html"><div class="ttname"><a href="readControlDict_8hpp.html">readControlDict.hpp</a></div></div>
+<div class="ttc" id="acommandLine_8hpp_html"><div class="ttname"><a href="commandLine_8hpp.html">commandLine.hpp</a></div></div>
 <div class="ttc" id="ainitialize__Control_8hpp_html_a4f5e4e852648762473ecd75a907417ca"><div class="ttname"><a href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a></div><div class="ttdeci">auto &amp; Control</div><div class="ttdef"><b>Definition:</b> <a href="initialize__Control_8hpp_source.html#l00047">initialize_Control.hpp:47</a></div></div>
 <div class="ttc" id="afinalize_8hpp_html"><div class="ttname"><a href="finalize_8hpp.html">finalize.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

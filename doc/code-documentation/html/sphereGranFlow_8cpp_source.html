@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp_source.html',''); 
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="contactSearch_8hpp.html">contactSearch.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sphereInteraction_8hpp.html">sphereInteraction.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;commandLine.hpp&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>;</div>
@@ -137,21 +137,21 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp_source.html',''); 
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a4a9012e5fd13ea2e176fb32ec9b50753">pFlow::interactionFile__</a>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1contactSearch.html">pFlow::contactSearch</a>;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1interaction.html">pFlow::interaction</a>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">using</span> pFlow::commandLine;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   63</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;commandLine cmds(</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<a class="code" href="classpFlow_1_1commandLine.html">commandLine</a> cmds(</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="stringliteral">&quot;sphereGranFlow&quot;</span>,</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="stringliteral">&quot;DEM solver for non-cohesive spherical particles with particle insertion &quot;</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="stringliteral">&quot;mechanism and moving geometry&quot;</span>);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> isCoupling = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordflow">if</span>(!cmds.parse(argc, argv)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">// this should be palced in each main </span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
@@ -217,11 +217,13 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp_source.html',''); 
 <div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
 <div class="ttc" id="aInsertions_8hpp_html"><div class="ttname"><a href="Insertions_8hpp.html">Insertions.hpp</a></div></div>
 <div class="ttc" id="asphereGranFlow_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="sphereGranFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">DEM solver for simulating granular flow of cohesion-less particles.</div><div class="ttdef"><b>Definition:</b> <a href="sphereGranFlow_8cpp_source.html#l00063">sphereGranFlow.cpp:63</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1commandLine_html"><div class="ttname"><a href="classpFlow_1_1commandLine.html">pFlow::commandLine</a></div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8hpp_source.html#l00036">commandLine.hpp:36</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a4a9012e5fd13ea2e176fb32ec9b50753"><div class="ttname"><a href="namespacepFlow.html#a4a9012e5fd13ea2e176fb32ec9b50753">pFlow::interactionFile__</a></div><div class="ttdeci">const char * interactionFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00048">vocabs.hpp:48</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00312">iOstream.hpp:312</a></div></div>
 <div class="ttc" id="asetSurfaceGeometry_8hpp_html_a195e279064ba2595c36f5f8d504822cb"><div class="ttname"><a href="setSurfaceGeometry_8hpp.html#a195e279064ba2595c36f5f8d504822cb">surfGeometry</a></div><div class="ttdeci">auto &amp; surfGeometry</div><div class="ttdef"><b>Definition:</b> <a href="setSurfaceGeometry_8hpp_source.html#l00026">setSurfaceGeometry.hpp:26</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a5ab4b6c611c3256e54f51bbfc484d58e"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e">pFlow::sphereParticles::afterIteration</a></div><div class="ttdeci">bool afterIteration() override</div><div class="ttdoc">after iteration step</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00133">sphereParticles.cpp:133</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html">pFlow::sphereParticles</a></div><div class="ttdoc">Class for managing spherical particles.</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8hpp_source.html#l00044">sphereParticles.hpp:44</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1commandLine_html_af199716992f3f8bb51c89ddcca847062"><div class="ttname"><a href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">pFlow::commandLine::parse</a></div><div class="ttdeci">bool parse(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8cpp_source.html#l00050">commandLine.cpp:50</a></div></div>
 <div class="ttc" id="asphereInteraction_8hpp_html"><div class="ttname"><a href="sphereInteraction_8hpp.html">sphereInteraction.hpp</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a86ae30c22a4ef4bc487b40ed52f4d2f9"><div class="ttname"><a href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a></div><div class="ttdeci">Ostream output</div></div>
 <div class="ttc" id="ageometry_8hpp_html"><div class="ttname"><a href="geometry_8hpp.html">geometry.hpp</a></div></div>
@@ -238,6 +240,7 @@ $(document).ready(function(){initNavTree('sphereGranFlow_8cpp_source.html',''); 
 <div class="ttc" id="acontactSearch_8hpp_html"><div class="ttname"><a href="contactSearch_8hpp.html">contactSearch.hpp</a></div></div>
 <div class="ttc" id="aproperty_8hpp_html"><div class="ttname"><a href="property_8hpp.html">property.hpp</a></div></div>
 <div class="ttc" id="areadControlDict_8hpp_html"><div class="ttname"><a href="readControlDict_8hpp.html">readControlDict.hpp</a></div></div>
+<div class="ttc" id="acommandLine_8hpp_html"><div class="ttname"><a href="commandLine_8hpp.html">commandLine.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1interaction_html"><div class="ttname"><a href="classpFlow_1_1interaction.html">pFlow::interaction</a></div><div class="ttdef"><b>Definition:</b> <a href="interaction_8hpp_source.html#l00034">interaction.hpp:34</a></div></div>
 <div class="ttc" id="ainitialize__Control_8hpp_html_a4f5e4e852648762473ecd75a907417ca"><div class="ttname"><a href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a></div><div class="ttdeci">auto &amp; Control</div><div class="ttdef"><b>Definition:</b> <a href="initialize__Control_8hpp_source.html#l00047">initialize_Control.hpp:47</a></div></div>
 <div class="ttc" id="afinalize_8hpp_html"><div class="ttname"><a href="finalize_8hpp.html">finalize.hpp</a></div></div>

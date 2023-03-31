@@ -171,12 +171,14 @@ $(document).ready(function(){initNavTree('howToBuildPhasicFlow.html',''); initRe
 <div class="line">$ cmake ../ -DpFlow_Build_Cuda=On</div>
 <div class="line">$ make install</div>
 </div><!-- fragment --><p>After building, <code>bin</code>, <code>include</code>, and <code>lib</code> folders will be created in <code>~/PhasicFlow/phasicFlow/</code> folder. Now you are ready to use PhasicFlow.</p>
-<p><b>note 1</b>: When compiling the code in parallel, you need to have enough RAM on your computer. As a rule, you need 1 GB free RAM per each processor in your computer for compiling in parallel. You may want to use fewer number of cores on your computer by using the following command: <code>$ make install -j 3</code> the above command uses only 3 cores for compiling.</p>
+<p><b>note 1</b>: When compiling the code in parallel, you need to have enough RAM on your computer. As a rule, you need 1 GB free RAM per each processor in your computer for compiling in parallel. You may want to use fewer number of cores on your computer by using the following command:</p>
+<p><code>$ make install -j 3</code></p>
+<p>the above command only uses 3 cores for compiling.</p>
 <p><b>note 2</b>: By default PhasicFlow is compiled with <b>double</b> as floating point variable. You can compile it with <b>float</b>. Just in the command line of camke added <code>-DpFlow_Build_Double=Off</code> flag to compile it with float. For example if you are building for cuda, you can enter the following command:</p>
-<p><code>$ cmake ../ -DpFlow_Build_Cuda=On --DpFlow_Build_Double=Off</code></p>
+<p><code>$ cmake ../ -DpFlow_Build_Cuda=On -DpFlow_Build_Double=Off</code></p>
 <h3>Step 6: Testing</h3>
 <p>In the current terminal or a new terminal enter the following command:</p>
-<p><code>$ ~checkPhasicFlow</code></p>
+<p><code>$ checkPhasicFlow</code></p>
 <p>This command shows the host and device environments and software version. If PhasicFlow was build correctly, you would get the following output: </p><div class="fragment"><div class="line">Initializing host/device execution spaces . . . </div>
 <div class="line">  Host execution space is Serial</div>
 <div class="line">  Device execution space is Cuda</div>

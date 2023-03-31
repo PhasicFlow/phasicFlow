@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('particlesPhasicFlow_8cpp_source.html',
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointStructure_8hpp.html">pointStructure.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="setFields_8hpp.html">setFields.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;commandLine.hpp&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>;</div>
@@ -135,13 +135,13 @@ $(document).ready(function(){initNavTree('particlesPhasicFlow_8cpp_source.html',
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a>;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pFlow::pointStructureFile__</a>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1positionParticles.html">pFlow::positionParticles</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">using</span> pFlow::commandLine;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   42</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[] )</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    commandLine cmds(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classpFlow_1_1commandLine.html">commandLine</a> cmds(</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="stringliteral">&quot;createParticles&quot;</span>,</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="stringliteral">&quot;Read the dictionary createParticles and create particles&quot;</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="stringliteral">&quot; based on the two sub-dictionaries positionParticles and setFields.\n&quot;</span></div>
@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('particlesPhasicFlow_8cpp_source.html',
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        isCoupling,</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="stringliteral">&quot;Is this a fluid-particle coupling simulation&quot;</span>);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span>(!cmds.parse(argc, argv)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span>(setOnly &amp;&amp; positionOnly)</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
@@ -306,11 +306,13 @@ $(document).ready(function(){initNavTree('particlesPhasicFlow_8cpp_source.html',
 <div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a735563036dced0b7d6cc98f97ea4978b"><div class="ttname"><a href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a></div><div class="ttdeci">#define ERR</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00047">streams.hpp:47</a></div></div>
 <div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1commandLine_html"><div class="ttname"><a href="classpFlow_1_1commandLine.html">pFlow::commandLine</a></div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8hpp_source.html#l00036">commandLine.hpp:36</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00312">iOstream.hpp:312</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a37a406f400cfe49d19e51bfcc34cd2d3"><div class="ttname"><a href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a></div><div class="ttdeci">#define greenText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00032">streams.hpp:32</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1IOobject_html"><div class="ttname"><a href="classpFlow_1_1IOobject.html">pFlow::IOobject</a></div><div class="ttdef"><b>Definition:</b> <a href="IOobject_8hpp_source.html#l00035">IOobject.hpp:35</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html"><div class="ttname"><a href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a></div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00044">pointStructure.hpp:44</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1commandLine_html_af199716992f3f8bb51c89ddcca847062"><div class="ttname"><a href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">pFlow::commandLine::parse</a></div><div class="ttdeci">bool parse(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8cpp_source.html#l00050">commandLine.cpp:50</a></div></div>
 <div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1setFieldList_html"><div class="ttname"><a href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a></div><div class="ttdef"><b>Definition:</b> <a href="setFieldList_8hpp_source.html#l00032">setFieldList.hpp:32</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a86ae30c22a4ef4bc487b40ed52f4d2f9"><div class="ttname"><a href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a></div><div class="ttdeci">Ostream output</div></div>
@@ -324,6 +326,7 @@ $(document).ready(function(){initNavTree('particlesPhasicFlow_8cpp_source.html',
 <div class="ttc" id="areadControlDict_8hpp_html"><div class="ttname"><a href="readControlDict_8hpp.html">readControlDict.hpp</a></div></div>
 <div class="ttc" id="asetFields_8hpp_html"><div class="ttname"><a href="setFields_8hpp.html">setFields.hpp</a></div></div>
 <div class="ttc" id="apositionParticles_8hpp_html"><div class="ttname"><a href="positionParticles_8hpp.html">positionParticles.hpp</a></div></div>
+<div class="ttc" id="acommandLine_8hpp_html"><div class="ttname"><a href="commandLine_8hpp.html">commandLine.hpp</a></div></div>
 <div class="ttc" id="apointStructure_8hpp_html"><div class="ttname"><a href="pointStructure_8hpp.html">pointStructure.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1dictionary_html"><div class="ttname"><a href="classpFlow_1_1dictionary.html">pFlow::dictionary</a></div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8hpp_source.html#l00038">dictionary.hpp:38</a></div></div>
 <div class="ttc" id="ainitialize__Control_8hpp_html_a4f5e4e852648762473ecd75a907417ca"><div class="ttname"><a href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a></div><div class="ttdeci">auto &amp; Control</div><div class="ttdef"><b>Definition:</b> <a href="initialize__Control_8hpp_source.html#l00047">initialize_Control.hpp:47</a></div></div>

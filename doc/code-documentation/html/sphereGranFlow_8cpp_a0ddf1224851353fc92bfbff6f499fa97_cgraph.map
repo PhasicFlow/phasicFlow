@@ -1,7 +1,8 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title="DEM solver for simulating granular flow of cohesion&#45;less particles." alt="" coords="5,111,60,138"/>
+<area shape="rect" id="node1" title="DEM solver for simulating granular flow of cohesion&#45;less particles." alt="" coords="5,143,60,170"/>
 <area shape="rect" id="node2" href="$classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e" title="after iteration step" alt="" coords="108,5,275,47"/>
 <area shape="rect" id="node3" href="$classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32" title="before iteration step" alt="" coords="108,71,275,112"/>
 <area shape="rect" id="node4" href="$classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559" title="iterate particles" alt="" coords="108,136,275,177"/>
-<area shape="rect" id="node5" href="$createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f" title=" " alt="" coords="141,202,241,229"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062" title=" " alt="" coords="111,201,271,243"/>
+<area shape="rect" id="node6" href="$createDEMComponents_8hpp.html#a87315fd3baecad18f39f203ffb15047f" title=" " alt="" coords="141,267,241,294"/>
 </map>

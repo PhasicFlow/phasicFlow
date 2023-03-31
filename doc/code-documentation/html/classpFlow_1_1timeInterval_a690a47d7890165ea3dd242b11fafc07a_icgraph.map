@@ -1,7 +1,7 @@
 <map id="inTimeRange" name="inTimeRange">
 <area shape="rect" id="node1" title=" " alt="" coords="252,107,360,134"/>
 <area shape="rect" id="node2" href="$classpFlow_1_1vibrating.html#a6a741ca4b36f2376aeb2650d274bc2b0" title=" " alt="" coords="8,5,201,47"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1rotatingAxis.html#a55582df178e4122c1df4b31369ba3aaf" title=" " alt="" coords="5,71,204,112"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1rotatingAxis.html#a55582df178e4122c1df4b31369ba3aaf" title="Linear tangential velocity at point p." alt="" coords="5,71,204,112"/>
 <area shape="rect" id="node4" href="$classpFlow_1_1timeInterval.html#a0c0f53f98461312b9cf461aa83d3de51" title=" " alt="" coords="67,137,142,163"/>
 <area shape="rect" id="node5" href="$classpFlow_1_1vibrating.html#a3b89f616e7744d1ea88bb39300fce4c4" title=" " alt="" coords="12,188,197,229"/>
 </map>

@@ -24,7 +24,12 @@ var NAVTREE =
 [
   [ "PhasicFlow", "index.html", [
     [ "How to build PhasicFlow", "howToBuildPhasicFlow.html", null ],
+    [ "How to use PhasicFlow", "howToUsePhasicFlow.html", null ],
     [ "PhasicFlow Features", "phasicFlowFeatures.html", null ],
+    [ "Problem definition", "md_tutorials_sphereGranFlow_binarySystemOfParticles_README.html", null ],
+    [ "Simulating a small rotating drum", "rotatingDrumSmall.html", null ],
+    [ "Problem Definition", "md_tutorials_sphereGranFlow_RotatingDrumWithBaffles_ReadMe.html", null ],
+    [ "Problem Definition", "md_tutorials_sphereGranFlow_toteblender_ReadMe.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -70,23 +75,23 @@ var NAVTREEINDEX =
 "classpFlow_1_1ProcessField.html#a047e772b9fbe3df7fd9bbdf00f739039",
 "classpFlow_1_1VectorSingle.html#a03df233f80912fb1260d1c1c5f3efb85",
 "classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22",
-"classpFlow_1_1dictionary.html#a4ec29cc19fce60018543fdd6d7ebf971",
-"classpFlow_1_1geometryMotion.html#a129b21a2dfc68f334219911d986e2f6a",
-"classpFlow_1_1indexContainer.html#a357c86d427ba736b27fbfab57197ed64",
-"classpFlow_1_1multiRotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91",
-"classpFlow_1_1pointField.html#aa8b686deb96050edefdcef6f22aab8f0",
-"classpFlow_1_1quadruple.html#a5d79288bbea547903426f668143b26df",
-"classpFlow_1_1selectRange.html#a399b6d1435b6457a5eb4f7d8ccffc0f3",
-"classpFlow_1_1sphereShape.html#a6a40de4ceed55b2f78cf3027739dfd91",
-"classpFlow_1_1token.html#a49280cb1d882b43a9ede4a6291728a01",
-"classpFlow_1_1twoPartEntry.html#a7ce6240a421692d112846f31793bcd85",
-"dir_40d089f5b6543888409b0c9c3858ee92.html",
-"functions_type_h.html",
-"kokkosAlgorithms_8hpp_source.html",
-"pointFieldAlgorithms_8hpp.html#ab590494217240fda35275327deeb9e5a",
-"sphereInteraction_8hpp_source.html",
-"symArrays_8cpp.html",
-"vocabs_8hpp.html#a848bdaed73601f3e073585ee847e63ba"
+"classpFlow_1_1demGeometry.html",
+"classpFlow_1_1geometry.html#aa51dfdf2226a32f80d368186cae16e2b",
+"classpFlow_1_1includeMask.html#a386c1f96fff1ed15624e9d6a80149173",
+"classpFlow_1_1multiRotatingAxis.html#a63fe7288eff3ba15e7a7533312d9c1d2",
+"classpFlow_1_1pointField.html#a1063c9fa94710fcea36468cd35295fe0",
+"classpFlow_1_1quadruple.html#a01567c05bafc802a133fd102654f7e79",
+"classpFlow_1_1selectBox.html#a7fb55a6c07a7befbe7ec4bd5c27a1b84",
+"classpFlow_1_1sphereRegion.html#a742999f822100111462c25118a0ce0fe",
+"classpFlow_1_1token.html#a16898cbd330b897996fc8c949605cdea",
+"classpFlow_1_1triple.html#aabd8c05e9853423dbe473f4b33b1be24",
+"dir_0c3a80554aed0998a56f0c0f2f30662a.html",
+"functions_func_s.html",
+"insertion_8hpp.html",
+"pStructSelector_8cpp.html",
+"setFieldList_8hpp.html",
+"structpFlow_1_1sphereInteractionKernels_1_1ppInteractionFunctor.html#ac492c7557600a8f3019b405c24a06a1b",
+"uniquePtr_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

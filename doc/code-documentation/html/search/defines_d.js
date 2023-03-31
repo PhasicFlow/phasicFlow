@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['redtext_5385',['redText',['../streams_8hpp.html#a6536dc902ef8c5e4e8eead6f3c5dc237',1,'streams.hpp']]],
-  ['report_5386',['REPORT',['../streams_8hpp.html#aeb765df06121339620670437d217fec8',1,'streams.hpp']]]
+  ['redtext_5430',['redText',['../streams_8hpp.html#a6536dc902ef8c5e4e8eead6f3c5dc237',1,'streams.hpp']]],
+  ['report_5431',['REPORT',['../streams_8hpp.html#aeb765df06121339620670437d217fec8',1,'streams.hpp']]]
 ];
