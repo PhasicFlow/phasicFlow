@@ -123,17 +123,19 @@ After building, `bin`, `include`, and `lib` folders will be created in `~/Phasic
 
 **note 1**: When compiling the code in parallel, you need to have enough RAM on your computer. As a rule, you need 1 GB free RAM per each processor in your computer for compiling in parallel.
 You may want to use fewer number of cores on your computer by using the following command:
+
 `$ make install -j 3`
-the above command uses only 3 cores for compiling. 
+
+the above command only uses 3 cores for compiling. 
 
 **note 2**: By default PhasicFlow is compiled with **double** as floating point variable. You can compile it with **float**. Just in the command line of camke added `-DpFlow_Build_Double=Off` flag to compile it with float. For example if you are building for cuda, you can enter the following command:
 
-`$ cmake ../ -DpFlow_Build_Cuda=On --DpFlow_Build_Double=Off`
+`$ cmake ../ -DpFlow_Build_Cuda=On -DpFlow_Build_Double=Off`
 
 ### Step 6: Testing
 In the current terminal or a new terminal enter the following command:
 
-`$ ~checkPhasicFlow`
+`$ checkPhasicFlow`
 
 This command shows the host and device environments and software version. If PhasicFlow was build correctly, you would get the following output:
 ```

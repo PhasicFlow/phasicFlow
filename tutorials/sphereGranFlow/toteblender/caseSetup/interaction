@@ -1,0 +1,76 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName interaction;
+objectType dicrionary;
+/* ------------------------------------------------------------------------- */
+
+// a list of materials names
+materials      (solidProperty);
+
+// density of materials [kg/m3]
+densities      (1000.0);   
+
+contactListType   sortedContactList; 
+
+model
+{
+   contactForceModel       nonLinearNonLimited;
+    
+   rollingFrictionModel    normal;
+   
+   /*
+   Property (solidProperty-solidProperty);
+   */
+    
+   // Young modulus [Pa]
+   Yeff  (1.0e6);       
+
+   // Shear modulus [Pa]
+   Geff  (0.8e6);       
+    
+   // Poisson's ratio [-]
+   nu    (0.25);        
+    
+   // coefficient of normal restitution
+   en    (0.7);         
+
+   // coefficient of tangential restitution
+   et    (1.0);          
+
+   // dynamic friction
+   mu    (0.3);          
+
+   // rolling friction
+   mur   (0.1);                  
+}
+
+contactSearch
+{
+
+   // method for broad search particle-particle
+   method         NBS;
+
+   // method for broad search particle-wall           
+   wallMapping    cellMapping;   
+
+   NBSInfo
+   {
+      // each 20 timesteps, update neighbor list 
+      updateFrequency 20; 
+   
+      // bounding box size to particle diameter (max)       
+      sizeRatio      1.1;        
+   }
+
+   cellMappingInfo
+   {
+      // each 20 timesteps, update neighbor list
+      updateFrequency 20;
+      
+      // bounding box for particle-wall search (> 0.5)          
+      cellExtent     0.7;        
+   }
+
+}

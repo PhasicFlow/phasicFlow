@@ -1,0 +1,69 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	particlesDict;
+objectType 	dictionary;
+/* ------------------------------------------------------------------------- */
+setFields
+{
+	/*
+	    Default value for fields defined for particles
+	These fields should always be defined for simulations with 
+	spherical particles.
+	*/
+	defaultValue 
+	{
+		// linear velocity (m/s)	
+		velocity 		realx3 	(0 0 0); 
+		
+		// linear acceleration (m/s2)		
+		acceleration 	realx3 	(0 0 0);
+		
+		// rotational velocity (rad/s)		 
+		rVelocity 		realx3 	(0 0 0);
+		
+		// name of the particle shape 		 
+		shapeName 		word	sphere1; 
+	}
+
+	selectors
+	{}
+}
+
+// positions particles 
+positionParticles
+{
+	// ordered positioning
+	method 	positionOrdered;     
+
+	// maximum number of particles in the simulation
+	maxNumberOfParticles 25001;
+	
+	// perform initial sorting based on morton code? 
+	mortonSorting 	Yes;             
+	
+	// cylinder for positioning particles 
+	cylinder
+	{
+		// Coordinates of top cylinderRegion (m,m,m)	
+		p1 (0.0 0.0 0.09);
+		
+		p2 (0.0 0.0 0.21);
+		
+		// radius of cylinder
+		radius 0.09;
+	}
+
+	positionOrderedInfo
+	{
+		// minimum space between centers of particles
+		diameter 0.005;
+		
+		// number of particles in the simulation 	 	
+		numPoints 24000;
+	
+		// axis order for filling the space with particles		 	
+		axisOrder (x y z);  
+	}
+}

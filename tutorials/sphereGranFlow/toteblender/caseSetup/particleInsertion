@@ -1,0 +1,15 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName particleInsertion;
+objectType dicrionary;
+/* ------------------------------------------------------------------------- */
+
+// is insertion active?
+active  no; 
+
+// not implemented for yes
+collisionCheck No;   
+
+
