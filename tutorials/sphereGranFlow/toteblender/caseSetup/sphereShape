@@ -5,9 +5,12 @@
 objectName 	sphereDict;
 objectType 	sphereShape;
 /* ------------------------------------------------------------------------- */
-// names of shapes 
+
+// name of shapes 
 names 		(sphere1); 	
+
 // diameter of shapes (m)
-diameters 	(0.004);
-// material names for shapes 	
+diameters 	(0.005);
+
+// material name for shapes 	
 materials	(solidProperty);	

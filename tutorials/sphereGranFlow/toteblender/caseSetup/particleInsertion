@@ -5,8 +5,10 @@
 objectName particleInsertion;
 objectType dicrionary;
 /* ------------------------------------------------------------------------- */
+
 // is insertion active?
-active  no;         
+active  no; 
+
 // not implemented for yes
 collisionCheck No;   
 
