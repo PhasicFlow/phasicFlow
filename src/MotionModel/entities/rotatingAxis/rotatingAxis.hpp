@@ -50,13 +50,13 @@ class rotatingAxis;
   	endTime 	5;
  } \endverbatim
  * 
- * | parameter | value type | discription | optional (default) |
- * |----| ---- | ---- | ---- |
+ * | Parameter | Type | Description | Optional [default value] |
+ * |----| :---: | ---- | ---- |
  * | p1 | realx3 | begin point of axis | No |
  * | p2 | realx3 | end point of axis | No |
  * | omega | real | rotation speed (rad/s) | No |
- * | startTime | real | start time of rotation (s) | Yes (0) |
- * | endTime | real | end time of rotation (s) | Yes (infinity) |
+ * | startTime | real | start time of rotation (s) | Yes [0] |
+ * | endTime | real | end time of rotation (s) | Yes [infinity] |
  * 
  */
 class rotatingAxis

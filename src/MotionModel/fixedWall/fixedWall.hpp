@@ -34,12 +34,26 @@ namespace pFlow
 
 class dictionary;
 
+/**
+ * Fixed wall motion model for walls
+ * 
+ * This class is used for geometries that are fixed during simulation.
+ * 
+ * 
+\verbatim
+// In geometryDict file, this will defines fixed walls during simulation
+...
+motionModel fixedWall; 
+...
+\endverbatim
+ */
 class fixedWall
 {
 public:
 
-	// - this class shuold be decleared in every motion model with 
-	//   exact methods 
+	/** Motion model class to be passed to computational units/kernels for
+	 *  transfing points and returning velocities at various positions
+	 */
 	class Model
 	{
 
@@ -80,89 +94,111 @@ public:
 	};
 
 protected:
-
+	
+	/// Name
 	const word name_ = "none";
 
+
+	/// Read from a dictionary 
 	bool readDictionary(const dictionary& dict);
 
+	/// write to a dictionary
 	bool writeDictionary(dictionary& dict)const;
 
 public:
 	
+	/// Type info
 	TypeInfoNV("fixedWall");
 
-	// empty
-	fixedWall();
+	// - Constructors 
 
-	// construct with dictionary 
-	fixedWall(const dictionary& dict);
+		/// Empty
+		fixedWall();
 
-	fixedWall(const fixedWall&) = default;
+		/// Constructor with dictionary 
+		fixedWall(const dictionary& dict);
 
-	fixedWall(fixedWall&&) = default;
+		/// Copy constructor
+		fixedWall(const fixedWall&) = default;
 
-	fixedWall& operator=(const fixedWall&) = default;
+		/// Move constructor
+		fixedWall(fixedWall&&) = default;
 
-	fixedWall& operator=(fixedWall&&) = default;
+		/// Copy assignment
+		fixedWall& operator=(const fixedWall&) = default;
 
-	~fixedWall() = default;
+		/// Move assignment 
+		fixedWall& operator=(fixedWall&&) = default;
 
-	Model getModel(real t)const
-	{
-		return Model();
-	}
+		/// Destructor 
+		~fixedWall() = default;
 
-	int32 nameToIndex(const word& name)const
-	{
-		return 0;
-	}
+	// - Methods 
 
-	word indexToName(label i)const
-	{
-		return name_;
-	}
+		/// Return motion model
+		/// t is the current simulation time 
+		Model getModel(real t)const
+		{
+			return Model();
+		}
 
-	
-	INLINE_FUNCTION_HD
-	realx3 pointVelocity(label n, const realx3& p)const 
-	{
-		return zero3;
-	}
+		/// Name of the motion component to index 
+		int32 nameToIndex(const word& name)const
+		{
+			return 0;
+		}
 
-	
+		/// Index of motion component to name 
+		word indexToName(label i)const
+		{
+			return name_;
+		}
 
-	INLINE_FUNCTION_HD
-	realx3 transferPoint(label n, const realx3 p, real dt)const
-	{
-		return p;
-	}
+		/// Velocity at point p
+		INLINE_FUNCTION_HD
+		realx3 pointVelocity(label n, const realx3& p)const 
+		{
+			return zero3;
+		}
 
-	
+		
+		/// Transfer point p for dt seconds according to motion component n
+		INLINE_FUNCTION_HD
+		realx3 transferPoint(label n, const realx3 p, real dt)const
+		{
+			return p;
+		}
 
-	INLINE_FUNCTION_HD
-	bool transferPoint(label n, realx3* pVec, size_t numP, real dt)
-	{
-		return true;		
-	}
+		/// Transfer a vector of point pVec for dt seconds according to motion
+		/// component n
+		INLINE_FUNCTION_HD
+		bool transferPoint(label n, realx3* pVec, size_t numP, real dt)
+		{
+			return true;		
+		}
 
-	INLINE_FUNCTION_HD
-	bool isMoving()const
-	{
-		return false;
-	}
+		/// Are walls moving 
+		INLINE_FUNCTION_HD
+		bool isMoving()const
+		{
+			return false;
+		}
 
-	bool move(real t, real dt)
-	{
-		return true;
-	}
+		/// Move points
+		bool move(real t, real dt)
+		{
+			return true;
+		}
 
-	FUNCTION_H
-	bool read(iIstream& is);
+	// - IO operations 
 
-	FUNCTION_H
-	bool write(iOstream& os)const;
+		/// Read from input stream is 
+		FUNCTION_H
+		bool read(iIstream& is);
 
-	
+		/// Write to output stream os 
+		FUNCTION_H
+		bool write(iOstream& os)const;	
 };
 
 } // pFlow
