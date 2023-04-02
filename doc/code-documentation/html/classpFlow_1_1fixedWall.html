@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -103,66 +110,98 @@ $(document).ready(function(){initNavTree('classpFlow_1_1fixedWall.html',''); ini
 <div class="title">fixedWall Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Fixed wall motion model for walls.  
+ <a href="classpFlow_1_1fixedWall.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall_1_1Model.html">Model</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion model class to be passed to computational units/kernels for transfing points and returning velocities at various positions.  <a href="classpFlow_1_1fixedWall_1_1Model.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae8f7bcb52c808abbf3357af6bfa0c510"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#ae8f7bcb52c808abbf3357af6bfa0c510">TypeInfoNV</a> (&quot;fixedWall&quot;)</td></tr>
+<tr class="memdesc:ae8f7bcb52c808abbf3357af6bfa0c510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1fixedWall.html#ae8f7bcb52c808abbf3357af6bfa0c510">More...</a><br /></td></tr>
 <tr class="separator:ae8f7bcb52c808abbf3357af6bfa0c510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad913d1760d10df18a4e86f565c8a9596"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#ad913d1760d10df18a4e86f565c8a9596">fixedWall</a> ()</td></tr>
+<tr class="memdesc:ad913d1760d10df18a4e86f565c8a9596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty.  <a href="classpFlow_1_1fixedWall.html#ad913d1760d10df18a4e86f565c8a9596">More...</a><br /></td></tr>
 <tr class="separator:ad913d1760d10df18a4e86f565c8a9596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e7eec7ac17bb9d1f3fda92b7efed0d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a8e7eec7ac17bb9d1f3fda92b7efed0d4">fixedWall</a> (const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict)</td></tr>
+<tr class="memdesc:a8e7eec7ac17bb9d1f3fda92b7efed0d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with dictionary.  <a href="classpFlow_1_1fixedWall.html#a8e7eec7ac17bb9d1f3fda92b7efed0d4">More...</a><br /></td></tr>
 <tr class="separator:a8e7eec7ac17bb9d1f3fda92b7efed0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5fc75c107c27aecafd92542950c6773"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#ad5fc75c107c27aecafd92542950c6773">fixedWall</a> (const <a class="el" href="classpFlow_1_1fixedWall.html">fixedWall</a> &amp;)=default</td></tr>
+<tr class="memdesc:ad5fc75c107c27aecafd92542950c6773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classpFlow_1_1fixedWall.html#ad5fc75c107c27aecafd92542950c6773">More...</a><br /></td></tr>
 <tr class="separator:ad5fc75c107c27aecafd92542950c6773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ebed07aaa047141da72dac3e60f253"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#ae0ebed07aaa047141da72dac3e60f253">fixedWall</a> (<a class="el" href="classpFlow_1_1fixedWall.html">fixedWall</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:ae0ebed07aaa047141da72dac3e60f253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="classpFlow_1_1fixedWall.html#ae0ebed07aaa047141da72dac3e60f253">More...</a><br /></td></tr>
 <tr class="separator:ae0ebed07aaa047141da72dac3e60f253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28b717c8a35f98bb46cecd765b0dc962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fixedWall.html">fixedWall</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a28b717c8a35f98bb46cecd765b0dc962">operator=</a> (const <a class="el" href="classpFlow_1_1fixedWall.html">fixedWall</a> &amp;)=default</td></tr>
+<tr class="memdesc:a28b717c8a35f98bb46cecd765b0dc962"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1fixedWall.html#a28b717c8a35f98bb46cecd765b0dc962">More...</a><br /></td></tr>
 <tr class="separator:a28b717c8a35f98bb46cecd765b0dc962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c61a5a82c61b9d1c78d36a4844a6635"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fixedWall.html">fixedWall</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a2c61a5a82c61b9d1c78d36a4844a6635">operator=</a> (<a class="el" href="classpFlow_1_1fixedWall.html">fixedWall</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a2c61a5a82c61b9d1c78d36a4844a6635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classpFlow_1_1fixedWall.html#a2c61a5a82c61b9d1c78d36a4844a6635">More...</a><br /></td></tr>
 <tr class="separator:a2c61a5a82c61b9d1c78d36a4844a6635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c6f880fba7c5d7aa47fea3832218671"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a1c6f880fba7c5d7aa47fea3832218671">~fixedWall</a> ()=default</td></tr>
+<tr class="memdesc:a1c6f880fba7c5d7aa47fea3832218671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1fixedWall.html#a1c6f880fba7c5d7aa47fea3832218671">More...</a><br /></td></tr>
 <tr class="separator:a1c6f880fba7c5d7aa47fea3832218671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3058fdf81ac29297d8d55af5785f465e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fixedWall_1_1Model.html">Model</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a3058fdf81ac29297d8d55af5785f465e">getModel</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t) const</td></tr>
+<tr class="memdesc:a3058fdf81ac29297d8d55af5785f465e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return motion model t is the current simulation time <br  />
+  <a href="classpFlow_1_1fixedWall.html#a3058fdf81ac29297d8d55af5785f465e">More...</a><br /></td></tr>
 <tr class="separator:a3058fdf81ac29297d8d55af5785f465e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8c3f014834cc9f4624fc72549a0b852"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#ac8c3f014834cc9f4624fc72549a0b852">nameToIndex</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name) const</td></tr>
+<tr class="memdesc:ac8c3f014834cc9f4624fc72549a0b852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the motion component to index.  <a href="classpFlow_1_1fixedWall.html#ac8c3f014834cc9f4624fc72549a0b852">More...</a><br /></td></tr>
 <tr class="separator:ac8c3f014834cc9f4624fc72549a0b852"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeceeb1f38a2a1761fb49e01622dbf01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#afeceeb1f38a2a1761fb49e01622dbf01">indexToName</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> i) const</td></tr>
+<tr class="memdesc:afeceeb1f38a2a1761fb49e01622dbf01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of motion component to name.  <a href="classpFlow_1_1fixedWall.html#afeceeb1f38a2a1761fb49e01622dbf01">More...</a><br /></td></tr>
 <tr class="separator:afeceeb1f38a2a1761fb49e01622dbf01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a68e2066fedf398ac9614958059169f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a6a68e2066fedf398ac9614958059169f">pointVelocity</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> <a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
+<tr class="memdesc:a6a68e2066fedf398ac9614958059169f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity at point p.  <a href="classpFlow_1_1fixedWall.html#a6a68e2066fedf398ac9614958059169f">More...</a><br /></td></tr>
 <tr class="separator:a6a68e2066fedf398ac9614958059169f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f913cb3f30d8c93334b0872662bd925"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a6f913cb3f30d8c93334b0872662bd925">transferPoint</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> <a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt) const</td></tr>
+<tr class="memdesc:a6f913cb3f30d8c93334b0872662bd925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transfer point p for dt seconds according to motion component n.  <a href="classpFlow_1_1fixedWall.html#a6f913cb3f30d8c93334b0872662bd925">More...</a><br /></td></tr>
 <tr class="separator:a6f913cb3f30d8c93334b0872662bd925"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cd80308d425051d690e508b2dd164dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a6cd80308d425051d690e508b2dd164dd">transferPoint</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> <a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> *pVec, size_t numP, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt)</td></tr>
+<tr class="memdesc:a6cd80308d425051d690e508b2dd164dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transfer a vector of point pVec for dt seconds according to motion component n.  <a href="classpFlow_1_1fixedWall.html#a6cd80308d425051d690e508b2dd164dd">More...</a><br /></td></tr>
 <tr class="separator:a6cd80308d425051d690e508b2dd164dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a226a2b5e6b2e18ee8a990c2c357bb036"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a226a2b5e6b2e18ee8a990c2c357bb036">isMoving</a> () const</td></tr>
+<tr class="memdesc:a226a2b5e6b2e18ee8a990c2c357bb036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Are walls moving.  <a href="classpFlow_1_1fixedWall.html#a226a2b5e6b2e18ee8a990c2c357bb036">More...</a><br /></td></tr>
 <tr class="separator:a226a2b5e6b2e18ee8a990c2c357bb036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a375f8854edf6e80df5a1991563054284"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a375f8854edf6e80df5a1991563054284">move</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt)</td></tr>
+<tr class="memdesc:a375f8854edf6e80df5a1991563054284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move points.  <a href="classpFlow_1_1fixedWall.html#a375f8854edf6e80df5a1991563054284">More...</a><br /></td></tr>
 <tr class="separator:a375f8854edf6e80df5a1991563054284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8e92ab47032ae811d1271161cb9b22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#aff8e92ab47032ae811d1271161cb9b22">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
+<tr class="memdesc:aff8e92ab47032ae811d1271161cb9b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from input stream is.  <a href="classpFlow_1_1fixedWall.html#aff8e92ab47032ae811d1271161cb9b22">More...</a><br /></td></tr>
 <tr class="separator:aff8e92ab47032ae811d1271161cb9b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
+<tr class="memdesc:a6a40de4ceed55b2f78cf3027739dfd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write to output stream os.  <a href="classpFlow_1_1fixedWall.html#a6a40de4ceed55b2f78cf3027739dfd91">More...</a><br /></td></tr>
 <tr class="separator:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3ee94dd32f4df1490653290d2919dc52"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#a3ee94dd32f4df1490653290d2919dc52">readDictionary</a> (const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict)</td></tr>
+<tr class="memdesc:a3ee94dd32f4df1490653290d2919dc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from a dictionary.  <a href="classpFlow_1_1fixedWall.html#a3ee94dd32f4df1490653290d2919dc52">More...</a><br /></td></tr>
 <tr class="separator:a3ee94dd32f4df1490653290d2919dc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad55987c0647186d3e7acad9cc4166034"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#ad55987c0647186d3e7acad9cc4166034">writeDictionary</a> (<a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict) const</td></tr>
+<tr class="memdesc:ad55987c0647186d3e7acad9cc4166034"><td class="mdescLeft">&#160;</td><td class="mdescRight">write to a dictionary  <a href="classpFlow_1_1fixedWall.html#ad55987c0647186d3e7acad9cc4166034">More...</a><br /></td></tr>
 <tr class="separator:ad55987c0647186d3e7acad9cc4166034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:afd780271a9c45061cfdc62f5c3fc9929"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fixedWall.html#afd780271a9c45061cfdc62f5c3fc9929">name_</a> = &quot;none&quot;</td></tr>
+<tr class="memdesc:afd780271a9c45061cfdc62f5c3fc9929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name.  <a href="classpFlow_1_1fixedWall.html#afd780271a9c45061cfdc62f5c3fc9929">More...</a><br /></td></tr>
 <tr class="separator:afd780271a9c45061cfdc62f5c3fc9929"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00037">37</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<div class="textblock"><p>Fixed wall motion model for walls. </p>
+<p>This class is used for geometries that are fixed during simulation.</p>
+<pre class="fragment">// In geometryDict file, this will defines fixed walls during simulation
+...
+motionModel fixedWall; 
+...
+</pre> 
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00050">50</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad913d1760d10df18a4e86f565c8a9596"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad913d1760d10df18a4e86f565c8a9596">&#9670;&nbsp;</a></span>fixedWall() <span class="overload">[1/4]</span></h2>
@@ -178,6 +217,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Empty. </p>
 
 <p class="definition">Definition at line <a class="el" href="fixedWall_8cpp_source.html#l00055">55</a> of file <a class="el" href="fixedWall_8cpp_source.html">fixedWall.cpp</a>.</p>
 
@@ -198,6 +239,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructor with dictionary. </p>
 
 <p class="definition">Definition at line <a class="el" href="fixedWall_8cpp_source.html#l00059">59</a> of file <a class="el" href="fixedWall_8cpp_source.html">fixedWall.cpp</a>.</p>
 
@@ -229,6 +272,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Copy constructor. </p>
+
 </div>
 </div>
 <a id="ae0ebed07aaa047141da72dac3e60f253"></a>
@@ -255,6 +300,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Move constructor. </p>
+
 </div>
 </div>
 <a id="a1c6f880fba7c5d7aa47fea3832218671"></a>
@@ -279,6 +326,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -307,6 +356,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read from a dictionary. </p>
+
 <p class="definition">Definition at line <a class="el" href="fixedWall_8cpp_source.html#l00026">26</a> of file <a class="el" href="fixedWall_8cpp_source.html">fixedWall.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="dictionary_8hpp_source.html#l00309">dictionary::getVal()</a>.</p>
@@ -315,7 +366,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1fixedWall_a3ee94dd32f4df1490653290d2919dc52_cgraph.png" border="0" usemap="#classpFlow_1_1fixedWall_a3ee94dd32f4df1490653290d2919dc52_cgraph" alt=""/></div>
 <map name="classpFlow_1_1fixedWall_a3ee94dd32f4df1490653290d2919dc52_cgraph" id="classpFlow_1_1fixedWall_a3ee94dd32f4df1490653290d2919dc52_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,124,32"/>
+<area shape="rect" title="Read from a dictionary." alt="" coords="5,5,124,32"/>
 <area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="360,5,456,32"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47" title=" " alt="" coords="172,27,312,69"/>
 </map>
@@ -347,6 +398,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>write to a dictionary </p>
+
 <p class="definition">Definition at line <a class="el" href="fixedWall_8cpp_source.html#l00044">44</a> of file <a class="el" href="fixedWall_8cpp_source.html">fixedWall.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="dictionary_8cpp_source.html#l00422">dictionary::add()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00634">dictionary::subDictOrCreate()</a>.</p>
@@ -355,7 +408,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1fixedWall_ad55987c0647186d3e7acad9cc4166034_cgraph.png" border="0" usemap="#classpFlow_1_1fixedWall_ad55987c0647186d3e7acad9cc4166034_cgraph" alt=""/></div>
 <map name="classpFlow_1_1fixedWall_ad55987c0647186d3e7acad9cc4166034_cgraph" id="classpFlow_1_1fixedWall_ad55987c0647186d3e7acad9cc4166034_cgraph">
-<area shape="rect" title=" " alt="" coords="5,35,128,61"/>
+<area shape="rect" title="write to a dictionary" alt="" coords="5,35,128,61"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a6ae2ea14b8b5e5661c2f207aae2d4bdc" title=" " alt="" coords="176,5,340,32"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#aa4d7322eaead3c887a9283546628de96" title=" " alt="" coords="188,57,328,98"/>
 </map>
@@ -378,6 +431,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Type info. </p>
 
 </div>
 </div>
@@ -405,6 +460,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Copy assignment. </p>
+
 </div>
 </div>
 <a id="a2c61a5a82c61b9d1c78d36a4844a6635"></a>
@@ -430,6 +487,8 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move assignment. </p>
 
 </div>
 </div>
@@ -457,7 +516,10 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00110">110</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Return motion model t is the current simulation time <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00140">140</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +547,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00115">115</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Name of the motion component to index. </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00146">146</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 </div>
 </div>
@@ -513,9 +577,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00120">120</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Index of motion component to name. </p>
 
-<p class="reference">References <a class="el" href="fixedWall_8hpp_source.html#l00084">fixedWall::name_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00152">152</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="fixedWall_8hpp_source.html#l00099">fixedWall::name_</a>.</p>
 
 </div>
 </div>
@@ -553,7 +619,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00127">127</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Velocity at point p. </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00159">159</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="types_8hpp_source.html#l00097">pFlow::zero3</a>.</p>
 
@@ -599,7 +667,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00135">135</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Transfer point p for dt seconds according to motion component n. </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00167">167</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 </div>
 </div>
@@ -649,7 +719,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00143">143</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Transfer a vector of point pVec for dt seconds according to motion component n. </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00175">175</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 </div>
 </div>
@@ -676,7 +748,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00149">149</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Are walls moving. </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00182">182</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 </div>
 </div>
@@ -714,7 +788,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00154">154</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Move points. </p>
+
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00188">188</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
 
 </div>
 </div>
@@ -734,6 +810,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Read from input stream is. </p>
+
 <p class="definition">Definition at line <a class="el" href="fixedWall_8cpp_source.html#l00070">70</a> of file <a class="el" href="fixedWall_8cpp_source.html">fixedWall.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="IOstream_8hpp_source.html#l00187">IOstream::lineNumber()</a>, <a class="el" href="vocabs_8hpp_source.html#l00045">pFlow::motionModelFile__</a>, <a class="el" href="IOstream_8cpp_source.html#l00031">IOstream::name()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00759">dictionary::read()</a>.</p>
@@ -742,7 +820,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1fixedWall_aff8e92ab47032ae811d1271161cb9b22_cgraph.png" border="0" usemap="#classpFlow_1_1fixedWall_aff8e92ab47032ae811d1271161cb9b22_cgraph" alt=""/></div>
 <map name="classpFlow_1_1fixedWall_aff8e92ab47032ae811d1271161cb9b22_cgraph" id="classpFlow_1_1fixedWall_aff8e92ab47032ae811d1271161cb9b22_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,56,57"/>
+<area shape="rect" title="Read from input stream is." alt="" coords="5,31,56,57"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="321,5,533,32"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title=" " alt="" coords="341,68,514,95"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="104,31,273,57"/>
@@ -767,6 +845,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Write to output stream os. </p>
+
 <p class="definition">Definition at line <a class="el" href="fixedWall_8cpp_source.html#l00091">91</a> of file <a class="el" href="fixedWall_8cpp_source.html">fixedWall.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="IOstream_8hpp_source.html#l00187">IOstream::lineNumber()</a>, <a class="el" href="vocabs_8hpp_source.html#l00045">pFlow::motionModelFile__</a>, <a class="el" href="IOstream_8cpp_source.html#l00031">IOstream::name()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00780">dictionary::write()</a>.</p>
@@ -775,7 +855,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1fixedWall_a6a40de4ceed55b2f78cf3027739dfd91_cgraph.png" border="0" usemap="#classpFlow_1_1fixedWall_a6a40de4ceed55b2f78cf3027739dfd91_cgraph" alt=""/></div>
 <map name="classpFlow_1_1fixedWall_a6a40de4ceed55b2f78cf3027739dfd91_cgraph" id="classpFlow_1_1fixedWall_a6a40de4ceed55b2f78cf3027739dfd91_cgraph">
-<area shape="rect" title=" " alt="" coords="5,37,60,63"/>
+<area shape="rect" title="Write to output stream os." alt="" coords="5,37,60,63"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="296,10,508,37"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title=" " alt="" coords="315,65,489,91"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="108,29,248,71"/>
@@ -805,9 +885,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00084">84</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+<p>Name. </p>
 
-<p class="reference">Referenced by <a class="el" href="fixedWall_8hpp_source.html#l00120">fixedWall::indexToName()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fixedWall_8hpp_source.html#l00099">99</a> of file <a class="el" href="fixedWall_8hpp_source.html">fixedWall.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fixedWall_8hpp_source.html#l00152">fixedWall::indexToName()</a>.</p>
 
 </div>
 </div>

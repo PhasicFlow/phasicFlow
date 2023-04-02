@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -110,7 +117,7 @@ Inheritance diagram for rotatingAxis:</div>
 <div class="center"><img src="classpFlow_1_1rotatingAxis__inherit__graph.png" border="0" usemap="#rotatingAxis_inherit__map" alt="Inheritance graph"/></div>
 <map name="rotatingAxis_inherit__map" id="rotatingAxis_inherit__map">
 <area shape="rect" title="An axis which rotates around itself at specified speed." alt="" coords="55,80,157,107"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html" title=" " alt="" coords="37,155,175,181"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html" title="Defines an axis of rotation that rotates around itself and rotates around another axis." alt="" coords="37,155,175,181"/>
 <area shape="rect" href="classpFlow_1_1timeInterval.html" title=" " alt="" coords="5,5,108,32"/>
 <area shape="rect" href="classpFlow_1_1line.html" title=" " alt="" coords="132,5,179,32"/>
 </map>
@@ -276,17 +283,17 @@ Protected Attributes</h2></td></tr>
     endTime     5;
 } </pre><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">parameter </th><th class="markdownTableHeadNone">value type </th><th class="markdownTableHeadNone">discription </th><th class="markdownTableHeadNone">optional (default)  </th></tr>
+<th class="markdownTableHeadNone">Parameter </th><th class="markdownTableHeadCenter">Type </th><th class="markdownTableHeadNone">Description </th><th class="markdownTableHeadNone">Optional [default value]  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">p1 </td><td class="markdownTableBodyNone">realx3 </td><td class="markdownTableBodyNone">begin point of axis </td><td class="markdownTableBodyNone">No  </td></tr>
+<td class="markdownTableBodyNone">p1 </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">begin point of axis </td><td class="markdownTableBodyNone">No  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">p2 </td><td class="markdownTableBodyNone">realx3 </td><td class="markdownTableBodyNone">end point of axis </td><td class="markdownTableBodyNone">No  </td></tr>
+<td class="markdownTableBodyNone">p2 </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">end point of axis </td><td class="markdownTableBodyNone">No  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">omega </td><td class="markdownTableBodyNone">real </td><td class="markdownTableBodyNone">rotation speed (rad/s) </td><td class="markdownTableBodyNone">No  </td></tr>
+<td class="markdownTableBodyNone">omega </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">rotation speed (rad/s) </td><td class="markdownTableBodyNone">No  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">startTime </td><td class="markdownTableBodyNone">real </td><td class="markdownTableBodyNone">start time of rotation (s) </td><td class="markdownTableBodyNone">Yes (0)  </td></tr>
+<td class="markdownTableBodyNone">startTime </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">start time of rotation (s) </td><td class="markdownTableBodyNone">Yes [0]  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">endTime </td><td class="markdownTableBodyNone">real </td><td class="markdownTableBodyNone">end time of rotation (s) </td><td class="markdownTableBodyNone">Yes (infinity)  </td></tr>
+<td class="markdownTableBodyNone">endTime </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">end time of rotation (s) </td><td class="markdownTableBodyNone">Yes [infinity]  </td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="rotatingAxis_8hpp_source.html#l00062">62</a> of file <a class="el" href="rotatingAxis_8hpp_source.html">rotatingAxis.hpp</a>.</p>
@@ -554,14 +561,14 @@ Here is the caller graph for this function:</div>
 
 <p class="reference">References <a class="el" href="rotatingAxis_8hpp_source.html#l00073">rotatingAxis::rotating_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00086">multiRotatingAxis::transferPoint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00135">multiRotatingAxis::transferPoint()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxis_a1cb78036cf201d23953494381997418a_icgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxis_a1cb78036cf201d23953494381997418a_icgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxis_a1cb78036cf201d23953494381997418a_icgraph" id="classpFlow_1_1rotatingAxis_a1cb78036cf201d23953494381997418a_icgraph">
 <area shape="rect" title="Is rotating." alt="" coords="239,13,327,39"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36" title=" " alt="" coords="5,5,191,47"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36" title="Translate point p for dt seconds based on the axis information." alt="" coords="5,5,191,47"/>
 </map>
 </div>
 
@@ -589,7 +596,7 @@ Here is the caller graph for this function:</div>
 
 <p class="reference">References <a class="el" href="tripleFwd_8hpp.html#a7a724b824f9e21a646a965a99fff4b04">cross()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00076">timeInterval::inTimeRange()</a>, <a class="el" href="rotatingAxis_8hpp_source.html#l00070">rotatingAxis::omega_</a>, <a class="el" href="line_8hpp_source.html#l00106">line::projectPoint()</a>, and <a class="el" href="line_8hpp_source.html#l00102">line::unitVector()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00068">multiRotatingAxis::pointTangentialVel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00118">multiRotatingAxis::pointTangentialVel()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -608,7 +615,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classpFlow_1_1rotatingAxis_a55582df178e4122c1df4b31369ba3aaf_icgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxis_a55582df178e4122c1df4b31369ba3aaf_icgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxis_a55582df178e4122c1df4b31369ba3aaf_icgraph" id="classpFlow_1_1rotatingAxis_a55582df178e4122c1df4b31369ba3aaf_icgraph">
 <area shape="rect" title="Linear tangential velocity at point p." alt="" coords="239,13,429,39"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#ad6acd46acac9585be092db485797e5a2" title=" " alt="" coords="5,5,191,47"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#ad6acd46acac9585be092db485797e5a2" title="Tangential velocity at point p." alt="" coords="5,5,191,47"/>
 </map>
 </div>
 

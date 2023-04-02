@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -101,6 +108,9 @@ $(document).ready(function(){initNavTree('classpFlow_1_1vibratingMotion_1_1Model
 <div class="title">vibratingMotion::Model Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Motion model class to be passed to computational units/kernels for transfing points and returning velocities at various positions.  
+ <a href="classpFlow_1_1vibratingMotion_1_1Model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,8 +137,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a1cdd6d8947b0b94764d8b6d373e677fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00045">45</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<div class="textblock"><p>Motion model class to be passed to computational units/kernels for transfing points and returning velocities at various positions. </p>
+
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00075">75</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8a64f615491ee8ba1f499ad4a3a2f026"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8a64f615491ee8ba1f499ad4a3a2f026">&#9670;&nbsp;</a></span>Model() <span class="overload">[1/2]</span></h2>
@@ -164,7 +175,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00055">55</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00085">85</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,11 +266,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00069">69</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00099">99</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="vibratingMotion_8hpp_source.html#l00049">vibratingMotion::Model::components_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
+<p class="reference">References <a class="el" href="vibratingMotion_8hpp_source.html#l00079">vibratingMotion::Model::components_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibratingMotion_8hpp_source.html#l00075">vibratingMotion::Model::operator()()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibratingMotion_8hpp_source.html#l00105">vibratingMotion::Model::operator()()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -306,9 +317,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00075">75</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00105">105</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="vibratingMotion_8hpp_source.html#l00069">vibratingMotion::Model::pointVelocity()</a>.</p>
+<p class="reference">References <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="vibratingMotion_8hpp_source.html#l00099">vibratingMotion::Model::pointVelocity()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -361,9 +372,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00081">81</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00111">111</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="vibratingMotion_8hpp_source.html#l00049">vibratingMotion::Model::components_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
+<p class="reference">References <a class="el" href="vibratingMotion_8hpp_source.html#l00079">vibratingMotion::Model::components_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
 
 </div>
 </div>
@@ -390,9 +401,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00086">86</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00116">116</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="vibratingMotion_8hpp_source.html#l00050">vibratingMotion::Model::numComponents_</a>.</p>
+<p class="reference">References <a class="el" href="vibratingMotion_8hpp_source.html#l00080">vibratingMotion::Model::numComponents_</a>.</p>
 
 </div>
 </div>
@@ -417,9 +428,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00049">49</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00079">79</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibratingMotion_8hpp_source.html#l00069">vibratingMotion::Model::pointVelocity()</a>, and <a class="el" href="vibratingMotion_8hpp_source.html#l00081">vibratingMotion::Model::transferPoint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibratingMotion_8hpp_source.html#l00099">vibratingMotion::Model::pointVelocity()</a>, and <a class="el" href="vibratingMotion_8hpp_source.html#l00111">vibratingMotion::Model::transferPoint()</a>.</p>
 
 </div>
 </div>
@@ -443,9 +454,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00050">50</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibratingMotion_8hpp_source.html#l00080">80</a> of file <a class="el" href="vibratingMotion_8hpp_source.html">vibratingMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibratingMotion_8hpp_source.html#l00086">vibratingMotion::Model::numComponents()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibratingMotion_8hpp_source.html#l00116">vibratingMotion::Model::numComponents()</a>.</p>
 
 </div>
 </div>

@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -102,12 +109,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1vibrating.html',''); ini
 <div class="title">vibrating Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Vibrating model for a wall.  
+ <a href="classpFlow_1_1vibrating.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for vibrating:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1vibrating__inherit__graph.png" border="0" usemap="#vibrating_inherit__map" alt="Inheritance graph"/></div>
 <map name="vibrating_inherit__map" id="vibrating_inherit__map">
-<area shape="rect" title=" " alt="" coords="17,80,97,107"/>
+<area shape="rect" title="Vibrating model for a wall." alt="" coords="17,80,97,107"/>
 <area shape="rect" href="classpFlow_1_1timeInterval.html" title=" " alt="" coords="5,5,108,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -116,7 +126,7 @@ Collaboration diagram for vibrating:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1vibrating__coll__graph.png" border="0" usemap="#vibrating_coll__map" alt="Collaboration graph"/></div>
 <map name="vibrating_coll__map" id="vibrating_coll__map">
-<area shape="rect" title=" " alt="" coords="82,153,162,180"/>
+<area shape="rect" title="Vibrating model for a wall." alt="" coords="82,153,162,180"/>
 <area shape="rect" href="classpFlow_1_1timeInterval.html" title=" " alt="" coords="5,5,108,32"/>
 <area shape="rect" href="classpFlow_1_1triple.html" title=" " alt="" coords="132,5,243,32"/>
 </map>
@@ -206,8 +216,37 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a2ce3cd3ca04a0e8bffa563b527d9e746 inherit pro_attribs_classpFlow_1_1timeInterval"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00036">36</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<div class="textblock"><p>Vibrating model for a wall. </p>
+<p>Creates a sinoidal virating model for a wall. The viration is defined by frequency, amplitude and phase angle. </p><p class="formulaDsp">
+\[ \vec{v}(t) = \vec{A} sin(\vec{\omega}(t-startTime)+\vec{\phi}) \]
+</p>
+ <pre class="fragment">// This creates sinoidal vibration on the wall in x-direction. The viration
+// starts at t = 0 s and ends at t = 10 s. 
+{
+    angularFreq     (10 0 0);
+    amplitude       ( 1 0 0);
+    phaseAngle      ( 0 0 0);
+    startTime       0;
+    endTime         10;
+} </pre><ul>
+<li><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Parameter </th><th class="markdownTableHeadCenter">Type </th><th class="markdownTableHeadNone">Description </th><th class="markdownTableHeadCenter">Optional [default value]  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">angularFreq </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">angular frequency of vibration (rad/s) </td><td class="markdownTableBodyCenter">No  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">amplitude </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">rotation speed (m/s) </td><td class="markdownTableBodyCenter">No  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">phaseAngle </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">phase angle (rad) </td><td class="markdownTableBodyCenter">Yes [(0 0 0)]  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">startTime </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">start time of rotation (s) </td><td class="markdownTableBodyCenter">Yes [0]  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">endTime </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">end time of rotation (s) </td><td class="markdownTableBodyCenter">Yes [infinity]  </td></tr>
+</table>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00065">65</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3a6da07d4af1a874177be0d6535c3511"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a6da07d4af1a874177be0d6535c3511">&#9670;&nbsp;</a></span>vibrating() <span class="overload">[1/3]</span></h2>
@@ -232,7 +271,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00069">69</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00098">98</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
 </div>
 </div>
@@ -319,11 +358,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00055">55</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00084">84</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="vibrating_8hpp_source.html#l00048">vibrating::amplitude_</a>, <a class="el" href="vibrating_8hpp_source.html#l00044">vibrating::angularFreq_</a>, <a class="el" href="timeInterval_8hpp_source.html#l00076">timeInterval::inTimeRange()</a>, <a class="el" href="vibrating_8hpp_source.html#l00046">vibrating::phaseAngle_</a>, <a class="el" href="math_8hpp_source.html#l00168">pFlow::sin()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00045">timeInterval::startTime()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00057">timeInterval::time()</a>, and <a class="el" href="vibrating_8hpp_source.html#l00050">vibrating::velocity_</a>.</p>
+<p class="reference">References <a class="el" href="vibrating_8hpp_source.html#l00077">vibrating::amplitude_</a>, <a class="el" href="vibrating_8hpp_source.html#l00073">vibrating::angularFreq_</a>, <a class="el" href="timeInterval_8hpp_source.html#l00076">timeInterval::inTimeRange()</a>, <a class="el" href="vibrating_8hpp_source.html#l00075">vibrating::phaseAngle_</a>, <a class="el" href="math_8hpp_source.html#l00168">pFlow::sin()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00045">timeInterval::startTime()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00057">timeInterval::time()</a>, and <a class="el" href="vibrating_8hpp_source.html#l00079">vibrating::velocity_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00081">vibrating::setTime()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00110">vibrating::setTime()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -398,9 +437,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00081">81</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00110">110</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="vibrating_8hpp_source.html#l00055">vibrating::calculateVelocity()</a>, <a class="el" href="bTypesFunctions_8hpp_source.html#l00188">pFlow::equal()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00063">timeInterval::setTime()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00057">timeInterval::time()</a>, <a class="el" href="vibrating_8hpp_source.html#l00052">vibrating::velocity0_</a>, and <a class="el" href="vibrating_8hpp_source.html#l00050">vibrating::velocity_</a>.</p>
+<p class="reference">References <a class="el" href="vibrating_8hpp_source.html#l00084">vibrating::calculateVelocity()</a>, <a class="el" href="bTypesFunctions_8hpp_source.html#l00188">pFlow::equal()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00063">timeInterval::setTime()</a>, <a class="el" href="timeInterval_8hpp_source.html#l00057">timeInterval::time()</a>, <a class="el" href="vibrating_8hpp_source.html#l00081">vibrating::velocity0_</a>, and <a class="el" href="vibrating_8hpp_source.html#l00079">vibrating::velocity_</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -440,9 +479,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00089">89</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00118">118</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="vibrating_8hpp_source.html#l00050">vibrating::velocity_</a>.</p>
+<p class="reference">References <a class="el" href="vibrating_8hpp_source.html#l00079">vibrating::velocity_</a>.</p>
 
 </div>
 </div>
@@ -480,9 +519,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00095">95</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00124">124</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="timeInterval_8hpp_source.html#l00076">timeInterval::inTimeRange()</a>, <a class="el" href="vibrating_8hpp_source.html#l00052">vibrating::velocity0_</a>, and <a class="el" href="vibrating_8hpp_source.html#l00050">vibrating::velocity_</a>.</p>
+<p class="reference">References <a class="el" href="timeInterval_8hpp_source.html#l00076">timeInterval::inTimeRange()</a>, <a class="el" href="vibrating_8hpp_source.html#l00081">vibrating::velocity0_</a>, and <a class="el" href="vibrating_8hpp_source.html#l00079">vibrating::velocity_</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -515,7 +554,7 @@ Here is the call graph for this function:</div>
 
 <p class="reference">References <a class="el" href="dictionary_8hpp_source.html#l00309">dictionary::getVal()</a>, <a class="el" href="dictionary_8hpp_source.html#l00325">dictionary::getValOrSet()</a>, and <a class="el" href="timeInterval_8cpp_source.html#l00017">timeInterval::read()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00125">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="vibrating_8cpp_source.html#l00026">vibrating::vibrating()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00154">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="vibrating_8cpp_source.html#l00026">vibrating::vibrating()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -560,7 +599,7 @@ Here is the caller graph for this function:</div>
 
 <p class="reference">References <a class="el" href="dictionary_8cpp_source.html#l00422">dictionary::add()</a>, <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="dictionary_8cpp_source.html#l00349">dictionary::globalName()</a>, and <a class="el" href="timeInterval_8cpp_source.html#l00026">timeInterval::write()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00116">pFlow::operator&lt;&lt;()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00145">pFlow::operator&lt;&lt;()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -661,9 +700,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00044">44</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00073">73</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00055">vibrating::calculateVelocity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00084">vibrating::calculateVelocity()</a>.</p>
 
 </div>
 </div>
@@ -687,9 +726,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00046">46</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00075">75</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00055">vibrating::calculateVelocity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00084">vibrating::calculateVelocity()</a>.</p>
 
 </div>
 </div>
@@ -713,9 +752,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00048">48</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00077">77</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00055">vibrating::calculateVelocity()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00084">vibrating::calculateVelocity()</a>.</p>
 
 </div>
 </div>
@@ -739,9 +778,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00050">50</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00079">79</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00055">vibrating::calculateVelocity()</a>, <a class="el" href="vibrating_8hpp_source.html#l00089">vibrating::linTangentialVelocityPoint()</a>, <a class="el" href="vibrating_8hpp_source.html#l00081">vibrating::setTime()</a>, and <a class="el" href="vibrating_8hpp_source.html#l00095">vibrating::transferPoint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00084">vibrating::calculateVelocity()</a>, <a class="el" href="vibrating_8hpp_source.html#l00118">vibrating::linTangentialVelocityPoint()</a>, <a class="el" href="vibrating_8hpp_source.html#l00110">vibrating::setTime()</a>, and <a class="el" href="vibrating_8hpp_source.html#l00124">vibrating::transferPoint()</a>.</p>
 
 </div>
 </div>
@@ -765,9 +804,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00052">52</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vibrating_8hpp_source.html#l00081">81</a> of file <a class="el" href="vibrating_8hpp_source.html">vibrating.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00081">vibrating::setTime()</a>, and <a class="el" href="vibrating_8hpp_source.html#l00095">vibrating::transferPoint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vibrating_8hpp_source.html#l00110">vibrating::setTime()</a>, and <a class="el" href="vibrating_8hpp_source.html#l00124">vibrating::transferPoint()</a>.</p>
 
 </div>
 </div>

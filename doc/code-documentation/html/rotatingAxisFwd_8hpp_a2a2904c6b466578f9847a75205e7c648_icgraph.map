@@ -1,5 +1,5 @@
 <map id="rotate" name="rotate">
 <area shape="rect" id="node1" title=" " alt="" coords="245,46,307,73"/>
 <area shape="rect" id="node2" href="$classpFlow_1_1rotatingAxisMotion_1_1Model.html#a116927621b80b5ed0a1ff95e376963a8" title=" " alt="" coords="5,5,197,47"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36" title=" " alt="" coords="9,71,194,112"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36" title="Translate point p for dt seconds based on the axis information." alt="" coords="9,71,194,112"/>
 </map>

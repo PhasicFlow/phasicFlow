@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -101,12 +108,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1multiRotatingAxis.html',
 <div class="title">multiRotatingAxis Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Defines an axis of rotation that rotates around itself and rotates around another axis.  
+ <a href="classpFlow_1_1multiRotatingAxis.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for multiRotatingAxis:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis__inherit__graph.png" border="0" usemap="#multiRotatingAxis_inherit__map" alt="Inheritance graph"/></div>
 <map name="multiRotatingAxis_inherit__map" id="multiRotatingAxis_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,144,107"/>
+<area shape="rect" title="Defines an axis of rotation that rotates around itself and rotates around another axis." alt="" coords="5,80,144,107"/>
 <area shape="rect" href="classpFlow_1_1rotatingAxis.html" title="An axis which rotates around itself at specified speed." alt="" coords="24,5,125,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -115,7 +125,7 @@ Collaboration diagram for multiRotatingAxis:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis__coll__graph.png" border="0" usemap="#multiRotatingAxis_coll__map" alt="Collaboration graph"/></div>
 <map name="multiRotatingAxis_coll__map" id="multiRotatingAxis_coll__map">
-<area shape="rect" title=" " alt="" coords="5,81,144,108"/>
+<area shape="rect" title="Defines an axis of rotation that rotates around itself and rotates around another axis." alt="" coords="5,81,144,108"/>
 <area shape="rect" href="classpFlow_1_1rotatingAxis.html" title="An axis which rotates around itself at specified speed." alt="" coords="24,5,125,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -123,30 +133,46 @@ Collaboration diagram for multiRotatingAxis:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af0b62abd886361864fbbac72e24f354d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#af0b62abd886361864fbbac72e24f354d">multiRotatingAxis</a> ()</td></tr>
+<tr class="memdesc:af0b62abd886361864fbbac72e24f354d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <a href="classpFlow_1_1multiRotatingAxis.html#af0b62abd886361864fbbac72e24f354d">More...</a><br /></td></tr>
 <tr class="separator:af0b62abd886361864fbbac72e24f354d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafff411fe6197736d9ea79b9bced7760"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#aafff411fe6197736d9ea79b9bced7760">multiRotatingAxis</a> (<a class="el" href="classpFlow_1_1multiRotatingAxisMotion.html">multiRotatingAxisMotion</a> *axisMotion)</td></tr>
+<tr class="memdesc:aafff411fe6197736d9ea79b9bced7760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty with list of axes.  <a href="classpFlow_1_1multiRotatingAxis.html#aafff411fe6197736d9ea79b9bced7760">More...</a><br /></td></tr>
 <tr class="separator:aafff411fe6197736d9ea79b9bced7760"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d3b3b07b1c42ccdc32677e283bcab9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a1d3b3b07b1c42ccdc32677e283bcab9d">multiRotatingAxis</a> (<a class="el" href="classpFlow_1_1multiRotatingAxisMotion.html">multiRotatingAxisMotion</a> *axisMotion, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict)</td></tr>
+<tr class="memdesc:a1d3b3b07b1c42ccdc32677e283bcab9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from dictionary and list of axes.  <a href="classpFlow_1_1multiRotatingAxis.html#a1d3b3b07b1c42ccdc32677e283bcab9d">More...</a><br /></td></tr>
 <tr class="separator:a1d3b3b07b1c42ccdc32677e283bcab9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a589957d7aed59ebb511815d055751"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a33a666cbe329b9d3d1d607ac93fc12b7">FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#af7a589957d7aed59ebb511815d055751">multiRotatingAxis</a> (const <a class="el" href="classpFlow_1_1multiRotatingAxis.html">multiRotatingAxis</a> &amp;)=default</td></tr>
+<tr class="memdesc:af7a589957d7aed59ebb511815d055751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classpFlow_1_1multiRotatingAxis.html#af7a589957d7aed59ebb511815d055751">More...</a><br /></td></tr>
 <tr class="separator:af7a589957d7aed59ebb511815d055751"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d15ccf8f0b4335f74b2871d048553b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a33a666cbe329b9d3d1d607ac93fc12b7">FUNCTION_HD</a> <a class="el" href="classpFlow_1_1multiRotatingAxis.html">multiRotatingAxis</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a9d15ccf8f0b4335f74b2871d048553b9">operator=</a> (const <a class="el" href="classpFlow_1_1multiRotatingAxis.html">multiRotatingAxis</a> &amp;)=default</td></tr>
+<tr class="memdesc:a9d15ccf8f0b4335f74b2871d048553b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1multiRotatingAxis.html#a9d15ccf8f0b4335f74b2871d048553b9">More...</a><br /></td></tr>
 <tr class="separator:a9d15ccf8f0b4335f74b2871d048553b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4168bafe56827925a282178be2b6e60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#ac4168bafe56827925a282178be2b6e60">~multiRotatingAxis</a> ()=default</td></tr>
+<tr class="memdesc:ac4168bafe56827925a282178be2b6e60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1multiRotatingAxis.html#ac4168bafe56827925a282178be2b6e60">More...</a><br /></td></tr>
+<tr class="separator:ac4168bafe56827925a282178be2b6e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6acd46acac9585be092db485797e5a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#ad6acd46acac9585be092db485797e5a2">pointTangentialVel</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
+<tr class="memdesc:ad6acd46acac9585be092db485797e5a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tangential velocity at point p.  <a href="classpFlow_1_1multiRotatingAxis.html#ad6acd46acac9585be092db485797e5a2">More...</a><br /></td></tr>
 <tr class="separator:ad6acd46acac9585be092db485797e5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56d51bacf319278cac71727b57b95c36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36">transferPoint</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt) const</td></tr>
+<tr class="memdesc:a56d51bacf319278cac71727b57b95c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate point p for dt seconds based on the axis information.  <a href="classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36">More...</a><br /></td></tr>
 <tr class="separator:a56d51bacf319278cac71727b57b95c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee053e90b0c25c42dbd3c50a362264e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#aee053e90b0c25c42dbd3c50a362264e7">hasParrent</a> () const</td></tr>
-<tr class="separator:aee053e90b0c25c42dbd3c50a362264e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b78ce37c8b6ddd455f0f66515f5fde9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a8b78ce37c8b6ddd455f0f66515f5fde9">hasParent</a> () const</td></tr>
+<tr class="memdesc:a8b78ce37c8b6ddd455f0f66515f5fde9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does this axis have a parent.  <a href="classpFlow_1_1multiRotatingAxis.html#a8b78ce37c8b6ddd455f0f66515f5fde9">More...</a><br /></td></tr>
+<tr class="separator:a8b78ce37c8b6ddd455f0f66515f5fde9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec6973746223be429e4b60609b6fdc3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#aec6973746223be429e4b60609b6fdc3a">parentAxisIndex</a> () const</td></tr>
+<tr class="memdesc:aec6973746223be429e4b60609b6fdc3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the index of parent axis.  <a href="classpFlow_1_1multiRotatingAxis.html#aec6973746223be429e4b60609b6fdc3a">More...</a><br /></td></tr>
 <tr class="separator:aec6973746223be429e4b60609b6fdc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d6678f1b49495463ee64cef890e5620"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a0d6678f1b49495463ee64cef890e5620">setAxisList</a> (<a class="el" href="classpFlow_1_1multiRotatingAxis.html">multiRotatingAxis</a> *axisList)</td></tr>
+<tr class="memdesc:a0d6678f1b49495463ee64cef890e5620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pointer to the list of all axes.  <a href="classpFlow_1_1multiRotatingAxis.html#a0d6678f1b49495463ee64cef890e5620">More...</a><br /></td></tr>
 <tr class="separator:a0d6678f1b49495463ee64cef890e5620"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4200ebd4752215e4dfbc46eac943b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9">move</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt)</td></tr>
+<tr class="memdesc:a5e4200ebd4752215e4dfbc46eac943b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the end points of the axis.  <a href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9">More...</a><br /></td></tr>
 <tr class="separator:a5e4200ebd4752215e4dfbc46eac943b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac70963b5d795997b3d042e73606604d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#ac70963b5d795997b3d042e73606604d4">read</a> (<a class="el" href="classpFlow_1_1multiRotatingAxisMotion.html">multiRotatingAxisMotion</a> *axisMotion, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict)</td></tr>
+<tr class="memdesc:ac70963b5d795997b3d042e73606604d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from dictionary.  <a href="classpFlow_1_1multiRotatingAxis.html#ac70963b5d795997b3d042e73606604d4">More...</a><br /></td></tr>
 <tr class="separator:ac70963b5d795997b3d042e73606604d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d67252b5aa9aad9090b4b605a393307"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a8d67252b5aa9aad9090b4b605a393307">write</a> (const <a class="el" href="classpFlow_1_1multiRotatingAxisMotion.html">multiRotatingAxisMotion</a> *axisMotion, <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict) const</td></tr>
+<tr class="memdesc:a8d67252b5aa9aad9090b4b605a393307"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write to dictionary.  <a href="classpFlow_1_1multiRotatingAxis.html#a8d67252b5aa9aad9090b4b605a393307">More...</a><br /></td></tr>
 <tr class="separator:a8d67252b5aa9aad9090b4b605a393307"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpFlow_1_1rotatingAxis"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1rotatingAxis')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1rotatingAxis.html">rotatingAxis</a></td></tr>
 <tr class="memitem:a5585ec037a9f0f8d0fb2726619cadd68 inherit pub_methods_classpFlow_1_1rotatingAxis"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a33a666cbe329b9d3d1d607ac93fc12b7">FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxis.html#a5585ec037a9f0f8d0fb2726619cadd68">rotatingAxis</a> ()</td></tr>
@@ -264,8 +290,10 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a63fe7288eff3ba15e7a7533312d9c1d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1multiRotatingAxis.html">multiRotatingAxis</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a63fe7288eff3ba15e7a7533312d9c1d2">axisList_</a></td></tr>
+<tr class="memdesc:a63fe7288eff3ba15e7a7533312d9c1d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is either host/device pointer to all axes.  <a href="classpFlow_1_1multiRotatingAxis.html#a63fe7288eff3ba15e7a7533312d9c1d2">More...</a><br /></td></tr>
 <tr class="separator:a63fe7288eff3ba15e7a7533312d9c1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83a70418474dc12b9e8c8455fe82eb03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiRotatingAxis.html#a83a70418474dc12b9e8c8455fe82eb03">parentAxisIndex_</a> = -1</td></tr>
+<tr class="memdesc:a83a70418474dc12b9e8c8455fe82eb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of parent axis.  <a href="classpFlow_1_1multiRotatingAxis.html#a83a70418474dc12b9e8c8455fe82eb03">More...</a><br /></td></tr>
 <tr class="separator:a83a70418474dc12b9e8c8455fe82eb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classpFlow_1_1rotatingAxis"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1rotatingAxis')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1rotatingAxis.html">rotatingAxis</a></td></tr>
 <tr class="memitem:a27e85702bf8a1c61f589ca982c52960c inherit pro_attribs_classpFlow_1_1rotatingAxis"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxis.html#a27e85702bf8a1c61f589ca982c52960c">omega_</a> = 0</td></tr>
@@ -290,8 +318,44 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7fb03b331bd0492fa75a44c0ac42994c inherit pro_attribs_classpFlow_1_1line"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00036">36</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<div class="textblock"><p>Defines an axis of rotation that rotates around itself and rotates around another axis. </p>
+<p>This axis rotates around itself and can have one axis of rotation, and that axis of rotation can have another axis of rotatoin and so on.</p>
+<pre class="fragment">// This creates an axis around x-axis. This axis rotates round itself at 
+// 1.57 rad/s and at the same time rotates around rotating axis axisName. 
+// axisName is separatly defined in the same dictionray. 
+axis1
+{
+    p1          (0 0 0);
+    p2          (1 0 0);
+    omega       1.57;
+    rotationAxis axisName;
+    startTime   1;
+    endTime     5;
+}
+
+axisName 
+{
+    p1          (0 0 0);
+    p2          (0 1 1);
+    omega       3.14;
+} </pre><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Parameter </th><th class="markdownTableHeadCenter">Type </th><th class="markdownTableHeadNone">Description </th><th class="markdownTableHeadCenter">Optional [default value]  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">p1 </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">begin point of axis </td><td class="markdownTableBodyCenter">No  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">p2 </td><td class="markdownTableBodyCenter">realx3 </td><td class="markdownTableBodyNone">end point of axis </td><td class="markdownTableBodyCenter">No  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">omega </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">rotation speed (rad/s) </td><td class="markdownTableBodyCenter">No  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">rotationAxis </td><td class="markdownTableBodyCenter">word </td><td class="markdownTableBodyNone">the axis rotates around this axis </td><td class="markdownTableBodyCenter">Yes [none]  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">startTime </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">start time of rotation (s) </td><td class="markdownTableBodyCenter">Yes [0]  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">endTime </td><td class="markdownTableBodyCenter">real </td><td class="markdownTableBodyNone">end time of rotation (s) </td><td class="markdownTableBodyCenter">Yes [infinity]  </td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00075">75</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af0b62abd886361864fbbac72e24f354d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0b62abd886361864fbbac72e24f354d">&#9670;&nbsp;</a></span>multiRotatingAxis() <span class="overload">[1/4]</span></h2>
@@ -316,7 +380,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00050">50</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Empty Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00093">93</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
 
 </div>
 </div>
@@ -335,6 +401,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Empty with list of axes. </p>
 
 <p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8cpp_source.html#l00027">27</a> of file <a class="el" href="multiRotatingAxis_8cpp_source.html">multiRotatingAxis.cpp</a>.</p>
 
@@ -366,6 +434,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct from dictionary and list of axes. </p>
+
 <p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8cpp_source.html#l00036">36</a> of file <a class="el" href="multiRotatingAxis_8cpp_source.html">multiRotatingAxis.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, and <a class="el" href="dictionary_8cpp_source.html#l00349">dictionary::globalName()</a>.</p>
@@ -374,7 +444,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_a1d3b3b07b1c42ccdc32677e283bcab9d_cgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_a1d3b3b07b1c42ccdc32677e283bcab9d_cgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_a1d3b3b07b1c42ccdc32677e283bcab9d_cgraph" id="classpFlow_1_1multiRotatingAxis_a1d3b3b07b1c42ccdc32677e283bcab9d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,35,144,61"/>
+<area shape="rect" title="Construct from dictionary and list of axes." alt="" coords="5,35,144,61"/>
 <area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="214,5,310,32"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632" title=" " alt="" coords="192,57,332,98"/>
 </map>
@@ -406,6 +476,35 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Copy constructor. </p>
+
+</div>
+</div>
+<a id="ac4168bafe56827925a282178be2b6e60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4168bafe56827925a282178be2b6e60">&#9670;&nbsp;</a></span>~multiRotatingAxis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="classpFlow_1_1multiRotatingAxis.html">multiRotatingAxis</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -433,6 +532,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Copy assignment. </p>
+
 </div>
 </div>
 <a id="ad6acd46acac9585be092db485797e5a2"></a>
@@ -459,17 +560,22 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00068">68</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Tangential velocity at point p. </p>
+<ul>
+<li>Methods </li>
+</ul>
 
-<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00043">multiRotatingAxis::axisList_</a>, <a class="el" href="rotatingAxisI_8hpp_source.html#l00022">rotatingAxis::linTangentialVelocityPoint()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00114">multiRotatingAxis::parentAxisIndex()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00118">118</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00082">multiRotatingAxis::axisList_</a>, <a class="el" href="rotatingAxisI_8hpp_source.html#l00022">rotatingAxis::linTangentialVelocityPoint()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00165">multiRotatingAxis::parentAxisIndex()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_ad6acd46acac9585be092db485797e5a2_cgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_ad6acd46acac9585be092db485797e5a2_cgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_ad6acd46acac9585be092db485797e5a2_cgraph" id="classpFlow_1_1multiRotatingAxis_ad6acd46acac9585be092db485797e5a2_cgraph">
-<area shape="rect" title=" " alt="" coords="5,42,148,69"/>
+<area shape="rect" title="Tangential velocity at point p." alt="" coords="5,42,148,69"/>
 <area shape="rect" href="classpFlow_1_1rotatingAxis.html#a55582df178e4122c1df4b31369ba3aaf" title="Linear tangential velocity at point p." alt="" coords="196,5,395,47"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#aec6973746223be429e4b60609b6fdc3a" title=" " alt="" coords="231,71,359,98"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#aec6973746223be429e4b60609b6fdc3a" title="Return the index of parent axis." alt="" coords="231,71,359,98"/>
 </map>
 </div>
 
@@ -509,17 +615,19 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00086">86</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Translate point p for dt seconds based on the axis information. </p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00043">multiRotatingAxis::axisList_</a>, <a class="el" href="rotatingAxis_8hpp_source.html#l00111">rotatingAxis::isRotating()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00045">multiRotatingAxis::parentAxisIndex_</a>, and <a class="el" href="rotatingAxisFwd_8hpp.html#a2a2904c6b466578f9847a75205e7c648">rotate()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00135">135</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00128">multiRotatingAxis::move()</a>.</p>
+<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00082">multiRotatingAxis::axisList_</a>, <a class="el" href="rotatingAxis_8hpp_source.html#l00111">rotatingAxis::isRotating()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00085">multiRotatingAxis::parentAxisIndex_</a>, and <a class="el" href="rotatingAxisFwd_8hpp.html#a2a2904c6b466578f9847a75205e7c648">rotate()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00185">multiRotatingAxis::move()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_cgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_cgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_cgraph" id="classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_cgraph">
-<area shape="rect" title=" " alt="" coords="5,42,112,69"/>
+<area shape="rect" title="Translate point p for dt seconds based on the axis information." alt="" coords="5,42,112,69"/>
 <area shape="rect" href="classpFlow_1_1rotatingAxis.html#a1cb78036cf201d23953494381997418a" title="Is rotating." alt="" coords="160,5,307,47"/>
 <area shape="rect" href="rotatingAxisFwd_8hpp.html#a2a2904c6b466578f9847a75205e7c648" title=" " alt="" coords="203,71,264,98"/>
 </map>
@@ -529,15 +637,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_icgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_icgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_icgraph" id="classpFlow_1_1multiRotatingAxis_a56d51bacf319278cac71727b57b95c36_icgraph">
-<area shape="rect" title=" " alt="" coords="112,5,219,32"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9" title=" " alt="" coords="5,5,64,32"/>
+<area shape="rect" title="Translate point p for dt seconds based on the axis information." alt="" coords="112,5,219,32"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9" title="Move the end points of the axis." alt="" coords="5,5,64,32"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="aee053e90b0c25c42dbd3c50a362264e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee053e90b0c25c42dbd3c50a362264e7">&#9670;&nbsp;</a></span>hasParrent()</h2>
+<a id="a8b78ce37c8b6ddd455f0f66515f5fde9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b78ce37c8b6ddd455f0f66515f5fde9">&#9670;&nbsp;</a></span>hasParent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -546,7 +654,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool hasParrent </td>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool hasParent </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -559,18 +667,20 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00108">108</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Does this axis have a parent. </p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00045">multiRotatingAxis::parentAxisIndex_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00158">158</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00128">multiRotatingAxis::move()</a>.</p>
+<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00085">multiRotatingAxis::parentAxisIndex_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00185">multiRotatingAxis::move()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classpFlow_1_1multiRotatingAxis_aee053e90b0c25c42dbd3c50a362264e7_icgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_aee053e90b0c25c42dbd3c50a362264e7_icgraph" alt=""/></div>
-<map name="classpFlow_1_1multiRotatingAxis_aee053e90b0c25c42dbd3c50a362264e7_icgraph" id="classpFlow_1_1multiRotatingAxis_aee053e90b0c25c42dbd3c50a362264e7_icgraph">
-<area shape="rect" title=" " alt="" coords="112,5,203,32"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9" title=" " alt="" coords="5,5,64,32"/>
+<div class="center"><img src="classpFlow_1_1multiRotatingAxis_a8b78ce37c8b6ddd455f0f66515f5fde9_icgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_a8b78ce37c8b6ddd455f0f66515f5fde9_icgraph" alt=""/></div>
+<map name="classpFlow_1_1multiRotatingAxis_a8b78ce37c8b6ddd455f0f66515f5fde9_icgraph" id="classpFlow_1_1multiRotatingAxis_a8b78ce37c8b6ddd455f0f66515f5fde9_icgraph">
+<area shape="rect" title="Does this axis have a parent." alt="" coords="112,5,199,32"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9" title="Move the end points of the axis." alt="" coords="5,5,64,32"/>
 </map>
 </div>
 
@@ -599,19 +709,21 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00114">114</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Return the index of parent axis. </p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00045">multiRotatingAxis::parentAxisIndex_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00165">165</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00128">multiRotatingAxis::move()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00068">multiRotatingAxis::pointTangentialVel()</a>.</p>
+<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00085">multiRotatingAxis::parentAxisIndex_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00185">multiRotatingAxis::move()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00118">multiRotatingAxis::pointTangentialVel()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_aec6973746223be429e4b60609b6fdc3a_icgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_aec6973746223be429e4b60609b6fdc3a_icgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_aec6973746223be429e4b60609b6fdc3a_icgraph" id="classpFlow_1_1multiRotatingAxis_aec6973746223be429e4b60609b6fdc3a_icgraph">
-<area shape="rect" title=" " alt="" coords="196,31,324,57"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9" title=" " alt="" coords="47,5,106,32"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#ad6acd46acac9585be092db485797e5a2" title=" " alt="" coords="5,56,148,83"/>
+<area shape="rect" title="Return the index of parent axis." alt="" coords="196,31,324,57"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a5e4200ebd4752215e4dfbc46eac943b9" title="Move the end points of the axis." alt="" coords="47,5,106,32"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#ad6acd46acac9585be092db485797e5a2" title="Tangential velocity at point p." alt="" coords="5,56,148,83"/>
 </map>
 </div>
 
@@ -641,9 +753,13 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00121">121</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Set the pointer to the list of all axes. </p>
+<p>This pointer is device pointer <br  />
+ </p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00043">multiRotatingAxis::axisList_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00173">173</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00082">multiRotatingAxis::axisList_</a>.</p>
 
 </div>
 </div>
@@ -671,21 +787,24 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00128">128</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Move the end points of the axis. </p>
+<p>This function moves the end points of this axis, if it has any parrents. It is assumed that the axis with deepest level (with more parrents) is moved first and then the axis with lower levels. </p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00043">multiRotatingAxis::axisList_</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00108">multiRotatingAxis::hasParrent()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00114">multiRotatingAxis::parentAxisIndex()</a>, <a class="el" href="line_8hpp_source.html#l00086">line::point1()</a>, <a class="el" href="line_8hpp_source.html#l00090">line::point2()</a>, <a class="el" href="line_8hpp_source.html#l00078">line::set()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00086">multiRotatingAxis::transferPoint()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00185">185</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="multiRotatingAxis_8hpp_source.html#l00082">multiRotatingAxis::axisList_</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00158">multiRotatingAxis::hasParent()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00165">multiRotatingAxis::parentAxisIndex()</a>, <a class="el" href="line_8hpp_source.html#l00086">line::point1()</a>, <a class="el" href="line_8hpp_source.html#l00090">line::point2()</a>, <a class="el" href="line_8hpp_source.html#l00078">line::set()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00135">multiRotatingAxis::transferPoint()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_a5e4200ebd4752215e4dfbc46eac943b9_cgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_a5e4200ebd4752215e4dfbc46eac943b9_cgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_a5e4200ebd4752215e4dfbc46eac943b9_cgraph" id="classpFlow_1_1multiRotatingAxis_a5e4200ebd4752215e4dfbc46eac943b9_cgraph">
-<area shape="rect" title=" " alt="" coords="5,132,64,159"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#aee053e90b0c25c42dbd3c50a362264e7" title=" " alt="" coords="137,5,228,32"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#aec6973746223be429e4b60609b6fdc3a" title=" " alt="" coords="119,56,247,83"/>
+<area shape="rect" title="Move the end points of the axis." alt="" coords="5,132,64,159"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a8b78ce37c8b6ddd455f0f66515f5fde9" title="Does this axis have a parent." alt="" coords="139,5,226,32"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#aec6973746223be429e4b60609b6fdc3a" title="Return the index of parent axis." alt="" coords="119,56,247,83"/>
 <area shape="rect" href="classpFlow_1_1line.html#a3e567d88cfb67880bd9b7bff731a1bca" title=" " alt="" coords="112,107,253,133"/>
 <area shape="rect" href="classpFlow_1_1line.html#a8be4546d19375c7bf44311fc5320b5ed" title=" " alt="" coords="112,157,253,184"/>
 <area shape="rect" href="classpFlow_1_1line.html#ac127bfac1d358476c57ace2ab7497ee4" title=" " alt="" coords="123,208,243,235"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36" title=" " alt="" coords="129,259,236,285"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxis.html#a56d51bacf319278cac71727b57b95c36" title="Translate point p for dt seconds based on the axis information." alt="" coords="129,259,236,285"/>
 </map>
 </div>
 
@@ -717,6 +836,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Read from dictionary. </p>
+
 <p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8cpp_source.html#l00056">56</a> of file <a class="el" href="multiRotatingAxis_8cpp_source.html">multiRotatingAxis.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="dictionary_8hpp_source.html#l00325">dictionary::getValOrSet()</a>.</p>
@@ -725,7 +846,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_ac70963b5d795997b3d042e73606604d4_cgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_ac70963b5d795997b3d042e73606604d4_cgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_ac70963b5d795997b3d042e73606604d4_cgraph" id="classpFlow_1_1multiRotatingAxis_ac70963b5d795997b3d042e73606604d4_cgraph">
-<area shape="rect" title=" " alt="" coords="5,13,56,39"/>
+<area shape="rect" title="Read from dictionary." alt="" coords="5,13,56,39"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a5585dc9a8b971fbfe2c99fdb75c5d647" title=" " alt="" coords="104,5,244,47"/>
 </map>
 </div>
@@ -758,17 +879,19 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Write to dictionary. </p>
+
 <p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8cpp_source.html#l00080">80</a> of file <a class="el" href="multiRotatingAxis_8cpp_source.html">multiRotatingAxis.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="dictionary_8cpp_source.html#l00422">dictionary::add()</a>, and <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00179">multiRotatingAxisMotion::indexToName()</a>.</p>
+<p class="reference">References <a class="el" href="dictionary_8cpp_source.html#l00422">dictionary::add()</a>, and <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00224">multiRotatingAxisMotion::indexToName()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1multiRotatingAxis_a8d67252b5aa9aad9090b4b605a393307_cgraph.png" border="0" usemap="#classpFlow_1_1multiRotatingAxis_a8d67252b5aa9aad9090b4b605a393307_cgraph" alt=""/></div>
 <map name="classpFlow_1_1multiRotatingAxis_a8d67252b5aa9aad9090b4b605a393307_cgraph" id="classpFlow_1_1multiRotatingAxis_a8d67252b5aa9aad9090b4b605a393307_cgraph">
-<area shape="rect" title=" " alt="" coords="5,35,60,61"/>
+<area shape="rect" title="Write to dictionary." alt="" coords="5,35,60,61"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a6ae2ea14b8b5e5661c2f207aae2d4bdc" title=" " alt="" coords="119,5,283,32"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxisMotion.html#a25f3d350ed015e91a764c51a6525e139" title=" " alt="" coords="108,57,293,98"/>
+<area shape="rect" href="classpFlow_1_1multiRotatingAxisMotion.html#a25f3d350ed015e91a764c51a6525e139" title="Index of motion component to component name." alt="" coords="108,57,293,98"/>
 </map>
 </div>
 
@@ -795,9 +918,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00043">43</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>This is either host/device pointer to all axes. </p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00128">multiRotatingAxis::move()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00068">multiRotatingAxis::pointTangentialVel()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00121">multiRotatingAxis::setAxisList()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00086">multiRotatingAxis::transferPoint()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00082">82</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00185">multiRotatingAxis::move()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00118">multiRotatingAxis::pointTangentialVel()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00173">multiRotatingAxis::setAxisList()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00135">multiRotatingAxis::transferPoint()</a>.</p>
 
 </div>
 </div>
@@ -821,9 +946,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00045">45</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+<p>Index of parent axis. </p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00108">multiRotatingAxis::hasParrent()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00114">multiRotatingAxis::parentAxisIndex()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00086">multiRotatingAxis::transferPoint()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxis_8hpp_source.html#l00085">85</a> of file <a class="el" href="multiRotatingAxis_8hpp_source.html">multiRotatingAxis.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxis_8hpp_source.html#l00158">multiRotatingAxis::hasParent()</a>, <a class="el" href="multiRotatingAxis_8hpp_source.html#l00165">multiRotatingAxis::parentAxisIndex()</a>, and <a class="el" href="multiRotatingAxis_8hpp_source.html#l00135">multiRotatingAxis::transferPoint()</a>.</p>
 
 </div>
 </div>

@@ -1,5 +1,6 @@
 var NAVTREEINDEX24 =
 {
+"uniquePtr_8hpp.html#a749e98187f5f69956743a978f81067dc":[9,0,2,6,12,0,1],
 "uniquePtr_8hpp_source.html":[9,0,2,6,12,0],
 "unsortedContactList_8hpp.html":[9,0,2,3,0,2],
 "unsortedContactList_8hpp_source.html":[9,0,2,3,0,2],

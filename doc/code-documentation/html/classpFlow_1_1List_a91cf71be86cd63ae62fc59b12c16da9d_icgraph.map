@@ -1,6 +1,6 @@
 <map id="findi" name="findi">
 <area shape="rect" id="node1" title=" " alt="" coords="245,78,296,105"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1rotatingAxisMotion.html#aa228b68325a8251f13734b8f2dc7367b" title=" " alt="" coords="5,5,197,47"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1vibratingMotion.html#aa228b68325a8251f13734b8f2dc7367b" title=" " alt="" coords="16,71,187,112"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1multiRotatingAxisMotion.html#aa228b68325a8251f13734b8f2dc7367b" title=" " alt="" coords="9,136,194,177"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1rotatingAxisMotion.html#aa228b68325a8251f13734b8f2dc7367b" title="Motion component name to index." alt="" coords="5,5,197,47"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1vibratingMotion.html#aa228b68325a8251f13734b8f2dc7367b" title="Name to component index." alt="" coords="16,71,187,112"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1multiRotatingAxisMotion.html#aa228b68325a8251f13734b8f2dc7367b" title="Name of motion component to index." alt="" coords="9,136,194,177"/>
 </map>

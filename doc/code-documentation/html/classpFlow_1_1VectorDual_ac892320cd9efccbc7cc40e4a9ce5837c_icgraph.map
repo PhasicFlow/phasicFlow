@@ -6,9 +6,9 @@
 <area shape="rect" id="node5" href="$classpFlow_1_1VectorDual.html#ae3f21fcefd35e2538e7da6e933c8baeb" title=" " alt="" coords="239,201,409,243"/>
 <area shape="rect" id="node6" href="$classpFlow_1_1positionRandom.html#ac82bb218c892d701cf99c2cdb5d6557a" title=" " alt="" coords="237,267,411,308"/>
 <area shape="rect" id="node7" href="$classpFlow_1_1positionRandom.html#a0bb3861a7abae95231a9e78e59e24de0" title=" " alt="" coords="5,296,180,337"/>
-<area shape="rect" id="node8" href="$classpFlow_1_1rotatingAxisMotion.html#ad154666086a654ab29cbb515fec9bf4e" title=" " alt="" coords="228,384,420,425"/>
-<area shape="rect" id="node9" href="$classpFlow_1_1vibratingMotion.html#ad154666086a654ab29cbb515fec9bf4e" title=" " alt="" coords="239,449,409,491"/>
-<area shape="rect" id="node10" href="$classpFlow_1_1multiRotatingAxisMotion.html#ad154666086a654ab29cbb515fec9bf4e" title=" " alt="" coords="231,515,417,556"/>
+<area shape="rect" id="node8" href="$classpFlow_1_1vibratingMotion.html#ad154666086a654ab29cbb515fec9bf4e" title="Return motion model at time t." alt="" coords="239,384,409,425"/>
+<area shape="rect" id="node9" href="$classpFlow_1_1rotatingAxisMotion.html#ad154666086a654ab29cbb515fec9bf4e" title="Return the motion model at time t." alt="" coords="228,449,420,491"/>
+<area shape="rect" id="node10" href="$classpFlow_1_1multiRotatingAxisMotion.html#ad154666086a654ab29cbb515fec9bf4e" title="Retrun motion model at time t." alt="" coords="231,515,417,556"/>
 <area shape="rect" id="node11" href="$classpFlow_1_1VectorDual.html#a34bb429dcb71153499f3ef45195b2071" title=" " alt="" coords="231,580,417,621"/>
 <area shape="rect" id="node12" href="$classpFlow_1_1VectorDual.html#a1441c238f4bf66d0b989d6929667dea8" title=" " alt="" coords="249,645,399,687"/>
 </map>

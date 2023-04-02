@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -104,12 +111,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1rotatingAxisMotion.html'
 <div class="title">rotatingAxisMotion Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Rotating axis motion model for walls.  
+ <a href="classpFlow_1_1rotatingAxisMotion.html#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for rotatingAxisMotion:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion__coll__graph.png" border="0" usemap="#rotatingAxisMotion_coll__map" alt="Collaboration graph"/></div>
 <map name="rotatingAxisMotion_coll__map" id="rotatingAxisMotion_coll__map">
-<area shape="rect" title=" " alt="" coords="123,95,269,121"/>
+<area shape="rect" title="Rotating axis motion model for walls." alt="" coords="123,95,269,121"/>
 <area shape="rect" href="classpFlow_1_1VectorDual.html" title=" " alt="" coords="5,5,208,32"/>
 <area shape="rect" href="classpFlow_1_1List.html" title=" " alt="" coords="232,5,339,32"/>
 </map>
@@ -118,39 +128,55 @@ Collaboration diagram for rotatingAxisMotion:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion_1_1Model.html">Model</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion model class to be passed to computational units/kernels for transfing points and returning velocities at various positions.  <a href="classpFlow_1_1rotatingAxisMotion_1_1Model.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a078c4e662c5bed3820846a06269e0bcd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a078c4e662c5bed3820846a06269e0bcd">TypeInfoNV</a> (&quot;rotatingAxisMotion&quot;)</td></tr>
+<tr class="memdesc:a078c4e662c5bed3820846a06269e0bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1rotatingAxisMotion.html#a078c4e662c5bed3820846a06269e0bcd">More...</a><br /></td></tr>
 <tr class="separator:a078c4e662c5bed3820846a06269e0bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaea4370bb273fbfa28ee1180977b4591"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#aaea4370bb273fbfa28ee1180977b4591">rotatingAxisMotion</a> ()</td></tr>
+<tr class="memdesc:aaea4370bb273fbfa28ee1180977b4591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty.  <a href="classpFlow_1_1rotatingAxisMotion.html#aaea4370bb273fbfa28ee1180977b4591">More...</a><br /></td></tr>
 <tr class="separator:aaea4370bb273fbfa28ee1180977b4591"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a9f52993b996660b77f4a2f0ce6c1b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a7a9f52993b996660b77f4a2f0ce6c1b3">rotatingAxisMotion</a> (const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict)</td></tr>
+<tr class="memdesc:a7a9f52993b996660b77f4a2f0ce6c1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct with dictionary.  <a href="classpFlow_1_1rotatingAxisMotion.html#a7a9f52993b996660b77f4a2f0ce6c1b3">More...</a><br /></td></tr>
 <tr class="separator:a7a9f52993b996660b77f4a2f0ce6c1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83a8ca1c7d89a552bd586a153711f260"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a83a8ca1c7d89a552bd586a153711f260">rotatingAxisMotion</a> (const <a class="el" href="classpFlow_1_1rotatingAxisMotion.html">rotatingAxisMotion</a> &amp;)=default</td></tr>
+<tr class="memdesc:a83a8ca1c7d89a552bd586a153711f260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classpFlow_1_1rotatingAxisMotion.html#a83a8ca1c7d89a552bd586a153711f260">More...</a><br /></td></tr>
 <tr class="separator:a83a8ca1c7d89a552bd586a153711f260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e99b62c5126a783a4530541cb7ab355"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a4e99b62c5126a783a4530541cb7ab355">rotatingAxisMotion</a> (<a class="el" href="classpFlow_1_1rotatingAxisMotion.html">rotatingAxisMotion</a> &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a4e99b62c5126a783a4530541cb7ab355"><td class="mdescLeft">&#160;</td><td class="mdescRight">No move constructor.  <a href="classpFlow_1_1rotatingAxisMotion.html#a4e99b62c5126a783a4530541cb7ab355">More...</a><br /></td></tr>
 <tr class="separator:a4e99b62c5126a783a4530541cb7ab355"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25cc3ad703b557e52e5370a1034c41d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> <a class="el" href="classpFlow_1_1rotatingAxisMotion.html">rotatingAxisMotion</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a25cc3ad703b557e52e5370a1034c41d9">operator=</a> (const <a class="el" href="classpFlow_1_1rotatingAxisMotion.html">rotatingAxisMotion</a> &amp;)=default</td></tr>
+<tr class="memdesc:a25cc3ad703b557e52e5370a1034c41d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1rotatingAxisMotion.html#a25cc3ad703b557e52e5370a1034c41d9">More...</a><br /></td></tr>
 <tr class="separator:a25cc3ad703b557e52e5370a1034c41d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91af9872cd7da892d1dc4de6d3b133ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html">rotatingAxisMotion</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a91af9872cd7da892d1dc4de6d3b133ea">operator=</a> (<a class="el" href="classpFlow_1_1rotatingAxisMotion.html">rotatingAxisMotion</a> &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a91af9872cd7da892d1dc4de6d3b133ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">No move assignment.  <a href="classpFlow_1_1rotatingAxisMotion.html#a91af9872cd7da892d1dc4de6d3b133ea">More...</a><br /></td></tr>
 <tr class="separator:a91af9872cd7da892d1dc4de6d3b133ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ccf8876dc49e9cfc00ef634a10ba3dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a9ccf8876dc49e9cfc00ef634a10ba3dd">~rotatingAxisMotion</a> ()=default</td></tr>
+<tr class="memdesc:a9ccf8876dc49e9cfc00ef634a10ba3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1rotatingAxisMotion.html#a9ccf8876dc49e9cfc00ef634a10ba3dd">More...</a><br /></td></tr>
 <tr class="separator:a9ccf8876dc49e9cfc00ef634a10ba3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad154666086a654ab29cbb515fec9bf4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1rotatingAxisMotion_1_1Model.html">Model</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#ad154666086a654ab29cbb515fec9bf4e">getModel</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t)</td></tr>
+<tr class="memdesc:ad154666086a654ab29cbb515fec9bf4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the motion model at time t.  <a href="classpFlow_1_1rotatingAxisMotion.html#ad154666086a654ab29cbb515fec9bf4e">More...</a><br /></td></tr>
 <tr class="separator:ad154666086a654ab29cbb515fec9bf4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa228b68325a8251f13734b8f2dc7367b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#aa228b68325a8251f13734b8f2dc7367b">nameToIndex</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name) const</td></tr>
+<tr class="memdesc:aa228b68325a8251f13734b8f2dc7367b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion component name to index.  <a href="classpFlow_1_1rotatingAxisMotion.html#aa228b68325a8251f13734b8f2dc7367b">More...</a><br /></td></tr>
 <tr class="separator:aa228b68325a8251f13734b8f2dc7367b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25f3d350ed015e91a764c51a6525e139"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a25f3d350ed015e91a764c51a6525e139">indexToName</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> i) const</td></tr>
+<tr class="memdesc:a25f3d350ed015e91a764c51a6525e139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion index to motion component name.  <a href="classpFlow_1_1rotatingAxisMotion.html#a25f3d350ed015e91a764c51a6525e139">More...</a><br /></td></tr>
 <tr class="separator:a25f3d350ed015e91a764c51a6525e139"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a226a2b5e6b2e18ee8a990c2c357bb036"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a226a2b5e6b2e18ee8a990c2c357bb036">isMoving</a> () const</td></tr>
+<tr class="memdesc:a226a2b5e6b2e18ee8a990c2c357bb036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Are walls moving.  <a href="classpFlow_1_1rotatingAxisMotion.html#a226a2b5e6b2e18ee8a990c2c357bb036">More...</a><br /></td></tr>
 <tr class="separator:a226a2b5e6b2e18ee8a990c2c357bb036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23b242e47f91767c189ea8193cca7f55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a23b242e47f91767c189ea8193cca7f55">move</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt)</td></tr>
+<tr class="memdesc:a23b242e47f91767c189ea8193cca7f55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move.  <a href="classpFlow_1_1rotatingAxisMotion.html#a23b242e47f91767c189ea8193cca7f55">More...</a><br /></td></tr>
 <tr class="separator:a23b242e47f91767c189ea8193cca7f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8e92ab47032ae811d1271161cb9b22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#aff8e92ab47032ae811d1271161cb9b22">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
+<tr class="memdesc:aff8e92ab47032ae811d1271161cb9b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from input stream is.  <a href="classpFlow_1_1rotatingAxisMotion.html#aff8e92ab47032ae811d1271161cb9b22">More...</a><br /></td></tr>
 <tr class="separator:aff8e92ab47032ae811d1271161cb9b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
+<tr class="memdesc:a6a40de4ceed55b2f78cf3027739dfd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write to output stream os.  <a href="classpFlow_1_1rotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91">More...</a><br /></td></tr>
 <tr class="separator:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
@@ -161,22 +187,45 @@ Protected Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3ee94dd32f4df1490653290d2919dc52"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a3ee94dd32f4df1490653290d2919dc52">readDictionary</a> (const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict)</td></tr>
+<tr class="memdesc:a3ee94dd32f4df1490653290d2919dc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from dictionary.  <a href="classpFlow_1_1rotatingAxisMotion.html#a3ee94dd32f4df1490653290d2919dc52">More...</a><br /></td></tr>
 <tr class="separator:a3ee94dd32f4df1490653290d2919dc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad55987c0647186d3e7acad9cc4166034"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#ad55987c0647186d3e7acad9cc4166034">writeDictionary</a> (<a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict) const</td></tr>
+<tr class="memdesc:ad55987c0647186d3e7acad9cc4166034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write to dictionary.  <a href="classpFlow_1_1rotatingAxisMotion.html#ad55987c0647186d3e7acad9cc4166034">More...</a><br /></td></tr>
 <tr class="separator:ad55987c0647186d3e7acad9cc4166034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2efd1b487367ae91274544274fef6876"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#ac9b1a00da3c54f8792cd29a0b60f2053">axisVector_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a2efd1b487367ae91274544274fef6876">axis_</a></td></tr>
+<tr class="memdesc:a2efd1b487367ae91274544274fef6876"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> to store axes.  <a href="classpFlow_1_1rotatingAxisMotion.html#a2efd1b487367ae91274544274fef6876">More...</a><br /></td></tr>
 <tr class="separator:a2efd1b487367ae91274544274fef6876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae203af35abd611539e7b9fdc1cbc2a1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ac2c8831a940f11de069cd73eb255b3ae">wordList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#ae203af35abd611539e7b9fdc1cbc2a1d">axisName_</a></td></tr>
+<tr class="memdesc:ae203af35abd611539e7b9fdc1cbc2a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Names of axes.  <a href="classpFlow_1_1rotatingAxisMotion.html#ae203af35abd611539e7b9fdc1cbc2a1d">More...</a><br /></td></tr>
 <tr class="separator:ae203af35abd611539e7b9fdc1cbc2a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52b85466a0a06d609df22c9b1c895134"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a52b85466a0a06d609df22c9b1c895134">numAxis_</a> = 0</td></tr>
+<tr class="memdesc:a52b85466a0a06d609df22c9b1c895134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of axes components.  <a href="classpFlow_1_1rotatingAxisMotion.html#a52b85466a0a06d609df22c9b1c895134">More...</a><br /></td></tr>
 <tr class="separator:a52b85466a0a06d609df22c9b1c895134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00038">38</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<div class="textblock"><p>Rotating axis motion model for walls. </p>
+<p>This class is used for simulaiton that at least one wall components is moving according to <a class="el" href="classpFlow_1_1rotatingAxis.html" title="An axis which rotates around itself at specified speed.">rotatingAxis</a> motion mode. One or more than one motion components can be defined in rotatingAxisMotionInfo dictionary</p>
+<pre class="fragment">// In geometryDict file, this will defines rotating walls during simulation
+...
+motionModel rotatingAxisMotion;
+
+rotatingAxisMotionInfo
+{
+    rotationAxis1
+    {
+        // the definition based on class rotatingAxis
+    }
+    rotatoinAxis2
+    {
+        // the definition based on calss rotatingAxis
+    }
+}
+...
+</pre> 
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00065">65</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ac9b1a00da3c54f8792cd29a0b60f2053"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9b1a00da3c54f8792cd29a0b60f2053">&#9670;&nbsp;</a></span>axisVector_HD</h2>
@@ -198,7 +247,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00093">93</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00121">121</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
 
 </div>
 </div>
@@ -217,6 +266,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Empty. </p>
 
 <p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00115">115</a> of file <a class="el" href="rotatingAxisMotion_8cpp_source.html">rotatingAxisMotion.cpp</a>.</p>
 
@@ -237,6 +288,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct with dictionary. </p>
 
 <p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00119">119</a> of file <a class="el" href="rotatingAxisMotion_8cpp_source.html">rotatingAxisMotion.cpp</a>.</p>
 
@@ -268,6 +321,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Copy constructor. </p>
+
 </div>
 </div>
 <a id="a4e99b62c5126a783a4530541cb7ab355"></a>
@@ -294,6 +349,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>No move constructor. </p>
+
 </div>
 </div>
 <a id="a9ccf8876dc49e9cfc00ef634a10ba3dd"></a>
@@ -318,6 +375,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -346,6 +405,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read from dictionary. </p>
+
 <p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00027">27</a> of file <a class="el" href="rotatingAxisMotion_8cpp_source.html">rotatingAxisMotion.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="dictionary_8cpp_source.html#l00721">dictionary::dictionaryKeywords()</a>, <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="dictionary_8hpp_source.html#l00309">dictionary::getVal()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00547">dictionary::subDict()</a>.</p>
@@ -354,7 +415,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_a3ee94dd32f4df1490653290d2919dc52_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_a3ee94dd32f4df1490653290d2919dc52_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_a3ee94dd32f4df1490653290d2919dc52_cgraph" id="classpFlow_1_1rotatingAxisMotion_a3ee94dd32f4df1490653290d2919dc52_cgraph">
-<area shape="rect" title=" " alt="" coords="5,101,124,127"/>
+<area shape="rect" title="Read from dictionary." alt="" coords="5,101,124,127"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a19ffc40573d3199c2368b9aac1b8129c" title=" " alt="" coords="172,5,323,47"/>
 <area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="371,130,467,157"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47" title=" " alt="" coords="177,123,317,164"/>
@@ -388,6 +449,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Write to dictionary. </p>
+
 <p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00091">91</a> of file <a class="el" href="rotatingAxisMotion_8cpp_source.html">rotatingAxisMotion.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="dictionary_8cpp_source.html#l00422">dictionary::add()</a>, <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00071">ForAll</a>, and <a class="el" href="dictionary_8cpp_source.html#l00634">dictionary::subDictOrCreate()</a>.</p>
@@ -396,7 +459,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_ad55987c0647186d3e7acad9cc4166034_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_ad55987c0647186d3e7acad9cc4166034_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_ad55987c0647186d3e7acad9cc4166034_cgraph" id="classpFlow_1_1rotatingAxisMotion_ad55987c0647186d3e7acad9cc4166034_cgraph">
-<area shape="rect" title=" " alt="" coords="5,56,128,83"/>
+<area shape="rect" title="Write to dictionary." alt="" coords="5,56,128,83"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a6ae2ea14b8b5e5661c2f207aae2d4bdc" title=" " alt="" coords="176,5,340,32"/>
 <area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="388,85,484,112"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#aa4d7322eaead3c887a9283546628de96" title=" " alt="" coords="188,107,328,149"/>
@@ -420,6 +483,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Type info. </p>
 
 </div>
 </div>
@@ -447,6 +512,8 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Copy assignment. </p>
+
 </div>
 </div>
 <a id="a91af9872cd7da892d1dc4de6d3b133ea"></a>
@@ -472,6 +539,8 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>No move assignment. </p>
 
 </div>
 </div>
@@ -499,15 +568,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00132">132</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Return the motion model at time t. </p>
 
-<p class="reference">References <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00095">rotatingAxisMotion::axis_</a>, <a class="el" href="VectorDual_8hpp_source.html#l00354">VectorDual&lt; T, MemorySpace &gt;::deviceVector()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00796">VectorDual&lt; T, MemorySpace &gt;::modifyOnHost()</a>, <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00099">rotatingAxisMotion::numAxis_</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00875">VectorDual&lt; T, MemorySpace &gt;::syncViews()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00173">173</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00124">rotatingAxisMotion::axis_</a>, <a class="el" href="VectorDual_8hpp_source.html#l00354">VectorDual&lt; T, MemorySpace &gt;::deviceVector()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00796">VectorDual&lt; T, MemorySpace &gt;::modifyOnHost()</a>, <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00130">rotatingAxisMotion::numAxis_</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00875">VectorDual&lt; T, MemorySpace &gt;::syncViews()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_ad154666086a654ab29cbb515fec9bf4e_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_ad154666086a654ab29cbb515fec9bf4e_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_ad154666086a654ab29cbb515fec9bf4e_cgraph" id="classpFlow_1_1rotatingAxisMotion_ad154666086a654ab29cbb515fec9bf4e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,78,88,105"/>
+<area shape="rect" title="Return the motion model at time t." alt="" coords="5,78,88,105"/>
 <area shape="rect" href="classpFlow_1_1VectorDual.html#ad4d9a3e6e96dda9aed8d84cbde0713ff" title=" " alt="" coords="136,5,283,47"/>
 <area shape="rect" href="classpFlow_1_1VectorDual.html#aebc916254a7f439d52da70d54009d36b" title=" " alt="" coords="136,71,283,112"/>
 <area shape="rect" href="classpFlow_1_1VectorDual.html#ac892320cd9efccbc7cc40e4a9ce5837c" title=" " alt="" coords="136,136,283,177"/>
@@ -540,15 +611,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00145">145</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Motion component name to index. </p>
 
-<p class="reference">References <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00097">rotatingAxisMotion::axisName_</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, and <a class="el" href="ListI_8hpp_source.html#l00109">List&lt; T &gt;::findi()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00187">187</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00127">rotatingAxisMotion::axisName_</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, and <a class="el" href="ListI_8hpp_source.html#l00109">List&lt; T &gt;::findi()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_aa228b68325a8251f13734b8f2dc7367b_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_aa228b68325a8251f13734b8f2dc7367b_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_aa228b68325a8251f13734b8f2dc7367b_cgraph" id="classpFlow_1_1rotatingAxisMotion_aa228b68325a8251f13734b8f2dc7367b_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,115,32"/>
+<area shape="rect" title="Motion component name to index." alt="" coords="5,5,115,32"/>
 <area shape="rect" href="classpFlow_1_1List.html#a91cf71be86cd63ae62fc59b12c16da9d" title=" " alt="" coords="163,5,289,32"/>
 </map>
 </div>
@@ -579,15 +652,17 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00162">162</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Motion index to motion component name. </p>
 
-<p class="reference">References <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00097">rotatingAxisMotion::axisName_</a>, <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, and <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00099">rotatingAxisMotion::numAxis_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00205">205</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00127">rotatingAxisMotion::axisName_</a>, <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, and <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00130">rotatingAxisMotion::numAxis_</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_a25f3d350ed015e91a764c51a6525e139_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_a25f3d350ed015e91a764c51a6525e139_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_a25f3d350ed015e91a764c51a6525e139_cgraph" id="classpFlow_1_1rotatingAxisMotion_a25f3d350ed015e91a764c51a6525e139_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,116,32"/>
+<area shape="rect" title="Motion index to motion component name." alt="" coords="5,5,116,32"/>
 <area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="164,5,260,32"/>
 </map>
 </div>
@@ -617,7 +692,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00203">203</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Are walls moving. </p>
+
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00222">222</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
 
 </div>
 </div>
@@ -655,7 +732,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00209">209</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Move. </p>
+
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00229">229</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
 
 </div>
 </div>
@@ -675,6 +754,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Read from input stream is. </p>
+
 <p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00130">130</a> of file <a class="el" href="rotatingAxisMotion_8cpp_source.html">rotatingAxisMotion.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="IOstream_8hpp_source.html#l00187">IOstream::lineNumber()</a>, <a class="el" href="vocabs_8hpp_source.html#l00045">pFlow::motionModelFile__</a>, <a class="el" href="IOstream_8cpp_source.html#l00031">IOstream::name()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00759">dictionary::read()</a>.</p>
@@ -683,7 +764,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_aff8e92ab47032ae811d1271161cb9b22_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_aff8e92ab47032ae811d1271161cb9b22_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_aff8e92ab47032ae811d1271161cb9b22_cgraph" id="classpFlow_1_1rotatingAxisMotion_aff8e92ab47032ae811d1271161cb9b22_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,56,57"/>
+<area shape="rect" title="Read from input stream is." alt="" coords="5,31,56,57"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="321,5,533,32"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title=" " alt="" coords="341,68,514,95"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="104,31,273,57"/>
@@ -708,6 +789,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Write to output stream os. </p>
+
 <p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00151">151</a> of file <a class="el" href="rotatingAxisMotion_8cpp_source.html">rotatingAxisMotion.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="IOstream_8hpp_source.html#l00187">IOstream::lineNumber()</a>, <a class="el" href="vocabs_8hpp_source.html#l00045">pFlow::motionModelFile__</a>, <a class="el" href="IOstream_8cpp_source.html#l00031">IOstream::name()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00780">dictionary::write()</a>.</p>
@@ -716,7 +799,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpFlow_1_1rotatingAxisMotion_a6a40de4ceed55b2f78cf3027739dfd91_cgraph.png" border="0" usemap="#classpFlow_1_1rotatingAxisMotion_a6a40de4ceed55b2f78cf3027739dfd91_cgraph" alt=""/></div>
 <map name="classpFlow_1_1rotatingAxisMotion_a6a40de4ceed55b2f78cf3027739dfd91_cgraph" id="classpFlow_1_1rotatingAxisMotion_a6a40de4ceed55b2f78cf3027739dfd91_cgraph">
-<area shape="rect" title=" " alt="" coords="5,37,60,63"/>
+<area shape="rect" title="Write to output stream os." alt="" coords="5,37,60,63"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="296,10,508,37"/>
 <area shape="rect" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title=" " alt="" coords="315,65,489,91"/>
 <area shape="rect" href="classpFlow_1_1dictionary.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="108,29,248,71"/>
@@ -746,9 +829,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00095">95</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p><a class="el" href="classpFlow_1_1Vector.html">Vector</a> to store axes. </p>
 
-<p class="reference">Referenced by <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00132">rotatingAxisMotion::getModel()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00124">124</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00173">rotatingAxisMotion::getModel()</a>.</p>
 
 </div>
 </div>
@@ -772,9 +857,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00097">97</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Names of axes. </p>
 
-<p class="reference">Referenced by <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00162">rotatingAxisMotion::indexToName()</a>, and <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00145">rotatingAxisMotion::nameToIndex()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00127">127</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00205">rotatingAxisMotion::indexToName()</a>, and <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00187">rotatingAxisMotion::nameToIndex()</a>.</p>
 
 </div>
 </div>
@@ -798,9 +885,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00099">99</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+<p>Number of axes components. </p>
 
-<p class="reference">Referenced by <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00132">rotatingAxisMotion::getModel()</a>, and <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00162">rotatingAxisMotion::indexToName()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00130">130</a> of file <a class="el" href="rotatingAxisMotion_8hpp_source.html">rotatingAxisMotion.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00173">rotatingAxisMotion::getModel()</a>, and <a class="el" href="rotatingAxisMotion_8hpp_source.html#l00205">rotatingAxisMotion::indexToName()</a>.</p>
 
 </div>
 </div>

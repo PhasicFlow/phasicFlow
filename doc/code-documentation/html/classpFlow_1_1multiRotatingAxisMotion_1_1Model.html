@@ -20,6 +20,13 @@
   $(document).ready(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -101,6 +108,9 @@ $(document).ready(function(){initNavTree('classpFlow_1_1multiRotatingAxisMotion_
 <div class="title">multiRotatingAxisMotion::Model Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Motion model class to be passed to computational units/kernels for transfing points and returning velocities at various positions.  
+ <a href="classpFlow_1_1multiRotatingAxisMotion_1_1Model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -127,8 +137,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a78ef04230ad102f729600a44e6a57394"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00043">43</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<div class="textblock"><p>Motion model class to be passed to computational units/kernels for transfing points and returning velocities at various positions. </p>
+
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00072">72</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab420192a9590610b4621c9710a523735"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab420192a9590610b4621c9710a523735">&#9670;&nbsp;</a></span>Model() <span class="overload">[1/2]</span></h2>
@@ -164,7 +175,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00053">53</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00082">82</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,11 +266,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00067">67</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00096">96</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00047">multiRotatingAxisMotion::Model::axis_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
+<p class="reference">References <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00076">multiRotatingAxisMotion::Model::axis_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00073">multiRotatingAxisMotion::Model::operator()()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00102">multiRotatingAxisMotion::Model::operator()()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -306,9 +317,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00073">73</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00102">102</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00067">multiRotatingAxisMotion::Model::pointVelocity()</a>.</p>
+<p class="reference">References <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00096">multiRotatingAxisMotion::Model::pointVelocity()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -361,9 +372,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00079">79</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00108">108</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00047">multiRotatingAxisMotion::Model::axis_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
+<p class="reference">References <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00076">multiRotatingAxisMotion::Model::axis_</a>, and <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>.</p>
 
 </div>
 </div>
@@ -390,9 +401,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00084">84</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00113">113</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00048">multiRotatingAxisMotion::Model::numAxis_</a>.</p>
+<p class="reference">References <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00077">multiRotatingAxisMotion::Model::numAxis_</a>.</p>
 
 </div>
 </div>
@@ -417,9 +428,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00047">47</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00076">76</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00067">multiRotatingAxisMotion::Model::pointVelocity()</a>, and <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00079">multiRotatingAxisMotion::Model::transferPoint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00096">multiRotatingAxisMotion::Model::pointVelocity()</a>, and <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00108">multiRotatingAxisMotion::Model::transferPoint()</a>.</p>
 
 </div>
 </div>
@@ -443,9 +454,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00048">48</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00077">77</a> of file <a class="el" href="multiRotatingAxisMotion_8hpp_source.html">multiRotatingAxisMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00084">multiRotatingAxisMotion::Model::numComponents()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="multiRotatingAxisMotion_8hpp_source.html#l00113">multiRotatingAxisMotion::Model::numComponents()</a>.</p>
 
 </div>
 </div>
