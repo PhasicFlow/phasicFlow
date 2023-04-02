@@ -822,8 +822,7 @@ WARN_LOGFILE           =
 INPUT                  = $(pFlow_PROJECT_DIR)/src \
                          $(pFlow_PROJECT_DIR)/utilities \
                          $(pFlow_PROJECT_DIR)/solvers \
-                         mdDocs \
-                         $(pFlow_PROJECT_DIR)/tutorials
+                         mdDocs
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1217,7 +1216,7 @@ HTML_EXTRA_FILES       =
 # Minimum value: 0, maximum value: 359, default value: 220.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_COLORSTYLE_HUE    = 134
+HTML_COLORSTYLE_HUE    = 200
 
 # The HTML_COLORSTYLE_SAT tag controls the purity (or saturation) of the colors
 # in the HTML output. For a value of 0 the output will use grayscales only. A
@@ -1264,7 +1263,7 @@ HTML_DYNAMIC_MENUS     = YES
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_DYNAMIC_SECTIONS  = NO
+HTML_DYNAMIC_SECTIONS  = YES
 
 # With HTML_INDEX_NUM_ENTRIES one can control the preferred number of entries
 # shown in the various tree structured indices initially; the user can expand
