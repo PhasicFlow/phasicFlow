@@ -35,12 +35,40 @@ namespace pFlow
 
 class dictionary;
 
+/**
+ * Rotating axis motion model for walls
+ * 
+ * This class is used for simulaiton that at least one wall components 
+ * is moving according to rotatingAxis motion mode. One or more than one
+ * motion components can be defined in rotatingAxisMotionInfo dictionary
+ * 
+\verbatim
+// In geometryDict file, this will defines rotating walls during simulation
+...
+motionModel rotatingAxisMotion;
+
+rotatingAxisMotionInfo
+{
+	rotationAxis1
+	{
+		// the definition based on class rotatingAxis
+	}
+	rotatoinAxis2
+	{
+		// the definition based on calss rotatingAxis
+	}
+}
+...
+\endverbatim
+ *
+ */
 class rotatingAxisMotion
 {
 public:
 	
-	// - this class shuold be decleared in every motion model with 
-	//   exact methods 
+	/** Motion model class to be passed to computational units/kernels for
+	 *  transfing points and returning velocities at various positions
+	 */
 	class Model
 	{
 	protected:
@@ -92,132 +120,126 @@ protected:
 
 	using axisVector_HD = VectorDual<rotatingAxis>;
 
+	/// Vector to store axes 
 	axisVector_HD 	axis_;
 	
+	/// Names of axes
 	wordList  		axisName_;
 
+	/// Number of axes components
 	label  			numAxis_= 0;
 
+	/// Read from dictionary 
 	bool readDictionary(const dictionary& dict);
 
+	/// Write to dictionary
 	bool writeDictionary(dictionary& dict)const;
 
 public:
 	
+	/// Type info
 	TypeInfoNV("rotatingAxisMotion");
 
-	// empty
-	FUNCTION_H
-	rotatingAxisMotion();
+	// - Constructors 
+	
+		/// Empty
+		FUNCTION_H
+		rotatingAxisMotion();
 
-	// construct with dictionary 
-	FUNCTION_H
-	rotatingAxisMotion(const dictionary& dict);
+		/// Construct with dictionary 
+		FUNCTION_H
+		rotatingAxisMotion(const dictionary& dict);
 
-	// copy
-	FUNCTION_H
-	rotatingAxisMotion(const rotatingAxisMotion&) = default;
+		/// Copy constructor 
+		FUNCTION_H
+		rotatingAxisMotion(const rotatingAxisMotion&) = default;
 
-	rotatingAxisMotion(rotatingAxisMotion&&) = delete;
+		/// No move constructor 
+		rotatingAxisMotion(rotatingAxisMotion&&) = delete;
 
-	FUNCTION_H
-	rotatingAxisMotion& operator=(const rotatingAxisMotion&) = default;
+		/// Copy assignment
+		FUNCTION_H
+		rotatingAxisMotion& operator=(const rotatingAxisMotion&) = default;
 
-	rotatingAxisMotion& operator=(rotatingAxisMotion&&) = delete;
+		/// No move assignment
+		rotatingAxisMotion& operator=(rotatingAxisMotion&&) = delete;
 
-	FUNCTION_H
-	~rotatingAxisMotion() = default;
+		/// Destructor 
+		FUNCTION_H
+		~rotatingAxisMotion() = default;
 
-
-	Model getModel(real t)
-	{
-		for(int32 i= 0; i<numAxis_; i++ )
+	// - Methods
+		/// Return the motion model at time t 
+		Model getModel(real t)
 		{
-			axis_[i].setTime(t);
-		}
-		axis_.modifyOnHost();
-		axis_.syncViews();
+			for(int32 i= 0; i<numAxis_; i++ )
+			{
+				axis_[i].setTime(t);
+			}
+			axis_.modifyOnHost();
+			axis_.syncViews();
 
-		return Model(axis_.deviceVector(), numAxis_);
-	}
+			return Model(axis_.deviceVector(), numAxis_);
+		}
 
-	INLINE_FUNCTION_H
-	int32 nameToIndex(const word& name)const
-	{
-		if( auto i = axisName_.findi(name); i == -1)
+		/// Motion component name to index
+		INLINE_FUNCTION_H
+		int32 nameToIndex(const word& name)const
 		{
-			fatalErrorInFunction<<
-			"axis name " << name << " does not exist. \n";
-			fatalExit;
-			return i;
+			if( auto i = axisName_.findi(name); i == -1)
+			{
+				fatalErrorInFunction<<
+				"axis name " << name << " does not exist. \n";
+				fatalExit;
+				return i;
+			}
+			else
+			{
+				return i;
+			}
+			
 		}
-		else
+
+		/// Motion index to motion component name 
+		INLINE_FUNCTION_H
+		word indexToName(label i)const
 		{
-			return i;
+			if(i < numAxis_ )
+				return axisName_[i];
+			else
+			{
+				fatalErrorInFunction<<
+				"out of range access to the list of axes " << i <<endl<<
+				" size of axes_ is "<<numAxis_<<endl;
+				fatalExit;
+				return "";
+			}
 		}
+
 		
-	}
-
-	INLINE_FUNCTION_H
-	word indexToName(label i)const
-	{
-		if(i < numAxis_ )
-			return axisName_[i];
-		else
+		/// Are walls moving 
+		INLINE_FUNCTION_HD
+		bool isMoving()const
 		{
-			fatalErrorInFunction<<
-			"out of range access to the list of axes " << i <<endl<<
-			" size of axes_ is "<<numAxis_<<endl;
-			fatalExit;
-			return "";
+			return true;
 		}
-	}
 
-	
-	/*INLINE_FUNCTION_D
-	realx3 pointVelocity(label n, const realx3& p)const 
-	{
-		return axis_.deviceVectorAll()[n].linTangentialVelocityPoint(p);
-	}*/
+		/// Move 
+		INLINE_FUNCTION_H
+		bool move(real t, real dt)
+		{
+			return true;
+		}
 
-	
+	// - IO operation 
+		/// Read from input stream is 
+		FUNCTION_H
+		bool read(iIstream& is);
 
-	/*INLINE_FUNCTION_D
-	realx3 transferPoint(label n, const realx3 p, real dt)const
-	{
-		return rotate(p, axis_.deviceVectorAll()[n], dt);
-	}
+		/// Write to output stream os
+		FUNCTION_H
+		bool write(iOstream& os)const;
 
-	
-	INLINE_FUNCTION_D
-	bool transferPoint(label n, realx3* pVec, size_t numP, real dt)
-	{
-		if( n>=numAxis_)return false;
-		
-		rotate( pVec, numP, axis_.deviceVectorAll()[n], dt);
-
-		return true;		
-	}*/
-
-	INLINE_FUNCTION_HD
-	bool isMoving()const
-	{
-		return true;
-	}
-
-	INLINE_FUNCTION_H
-	bool move(real t, real dt)
-	{
-		return true;
-	}
-
-	FUNCTION_H
-	bool read(iIstream& is);
-
-	FUNCTION_H
-	bool write(iOstream& os)const;
-
-	
 };
 
 } // pFlow

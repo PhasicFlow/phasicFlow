@@ -29,10 +29,39 @@ Licence:
 namespace pFlow
 {
 
+// forward
 class dictionary;
-class vibrating;
 
 
+/**
+ * Vibrating model for a wall
+ * 
+ * Creates a sinoidal virating model for a wall. The viration is defined by
+ * frequency, amplitude and phase angle. 
+ * \f[ 
+	\vec{v}(t) = \vec{A} sin(\vec{\omega}(t-startTime)+\vec{\phi}) 
+  \f]
+ \verbatim
+ // This creates sinoidal vibration on the wall in x-direction. The viration
+ // starts at t = 0 s and ends at t = 10 s. 
+ {
+  	angularFreq 	(10 0 0);
+  	amplitude 		( 1 0 0);
+  	phaseAngle		( 0 0 0);
+  	startTime 		0;
+  	endTime 		10;
+ } \endverbatim
+ * 
+ * * 
+ * | Parameter | Type | Description | Optional [default value] |
+ * |----| :---: | ---- | :---: |
+ * | angularFreq | realx3 | angular frequency of vibration (rad/s) | No |
+ * | amplitude | realx3 | rotation speed (m/s) | No |
+ * | phaseAngle | realx3 | phase angle (rad) | Yes [(0 0 0)] |
+ * | startTime | real | start time of rotation (s) | Yes [0] |
+ * | endTime | real | end time of rotation (s) | Yes [infinity] |
+ * 
+ */
 class vibrating
 :
 	public timeInterval
