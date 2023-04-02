@@ -26,10 +26,6 @@ var NAVTREE =
     [ "How to build PhasicFlow", "howToBuildPhasicFlow.html", null ],
     [ "How to use PhasicFlow", "howToUsePhasicFlow.html", null ],
     [ "PhasicFlow Features", "phasicFlowFeatures.html", null ],
-    [ "Problem definition", "md_tutorials_sphereGranFlow_binarySystemOfParticles_README.html", null ],
-    [ "Simulating a small rotating drum", "rotatingDrumSmall.html", null ],
-    [ "Problem Definition", "md_tutorials_sphereGranFlow_RotatingDrumWithBaffles_ReadMe.html", null ],
-    [ "Problem Definition", "md_tutorials_sphereGranFlow_toteblender_ReadMe.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -86,12 +82,12 @@ var NAVTREEINDEX =
 "classpFlow_1_1token.html#a1680baf2428512b1a45060f52f3ade28",
 "classpFlow_1_1triple.html#aab4e0deaeb2c516caa7906eaba9c0ea4",
 "dir_0be52b0d2f0bba84a72d3e4c1b25399f.html",
-"functions_func_r.html",
-"insertion_8cpp_source.html",
-"pLine_8hpp_source.html",
-"setFieldList_8cpp_source.html",
-"structpFlow_1_1sphereInteractionKernels_1_1ppInteractionFunctor.html#ab7c0e1c754daddef0aa990fccb8ef033",
-"uniquePtr_8hpp.html#a749e98187f5f69956743a978f81067dc"
+"functions_func_x.html",
+"integration_8hpp_source.html",
+"particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",
+"setProperty_8hpp.html#a1a3e0d42c5c87616718bc92f0aa24993",
+"structpFlow_1_1sphereInteractionKernels_1_1pwInteractionFunctor.html#a68c7887316681f8be493c5e8cdbe24ca",
+"vibratingMotion_8cpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

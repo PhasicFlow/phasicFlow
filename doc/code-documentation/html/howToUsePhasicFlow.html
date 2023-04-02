@@ -37,10 +37,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname"><a href="https://cemf.ir">PhasicFlow</a>
-   &#160;<span id="projectnumber"><a href="https://cemf.ir">v0.1</a></span>
+   <div id="projectname"><a href="www.github.com/PhasicFlow">PhasicFlow</a>
+   &#160;<span id="projectnumber"><a href="www.github.com/PhasicFlow">v0.1</a></span>
    </div>
-   <div id="projectbrief"><a href="www.github.com/PhasicFlow">www.cemf.ir</a></div>
+   <div id="projectbrief"><a href="https://cemf.ir">www.cemf.ir</a></div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -105,7 +105,23 @@ $(document).ready(function(){initNavTree('howToUsePhasicFlow.html',''); initResi
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Here you will learn how to use PhasicFlow to setup a granular flow simulation. The inputs for simulation are supplied through some text-based files, called file dictionary, located in two folders: <code>settings</code> and <code>caseSetup</code>. These folders are located under the root case directory. All the commands are performed through terminal in which the current working directory is root case directory (you see <code>settings</code> and <code>caseSetup</code> folders when <code>ls</code> command is entered). The states of geometry and particles are stored in time folders with names that represent the time. When simulation is finished, one case use post-processing tool pFlowToVTK to convert the stored results in the time folder into VTK file format. The VTK file format can be read by Paraview. A set of tutorials with detailed descriptions are provided to show you how to use PhasicFlow for various granular flow problems. Here is a list of them.</p><ul>
-<li><a class="el" href="rotatingDrumSmall.html">Small rotating drum</a> </li>
+<li>Tutorials based on sphereGranFlow solver<ul>
+<li>Small rotating drum <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/rotatingDrumSmall">(see on github.com)</a></li>
+<li>Rotating drum with baffles <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/RotatingDrumWithBaffles">(see on github.com)</a></li>
+<li>Layered silo filling <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/layeredSiloFilling">(see on github.com)</a></li>
+<li>Simulation of a V-blender <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/V-blender">(see on github.com)</a></li>
+<li>Granular flow of particles with two particlce sizes<a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/binarySystemOfParticles">(see on github.com)</a></li>
+<li>Simulation of a tote-blender <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/toteblender">(see on github.com)</a></li>
+</ul>
+</li>
+<li>Tutorials based on iterateGeometry solver<ul>
+<li>Defining an inclined screw conveyor <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/iterateGeometry/inclinedScrewConveyor">(see on github.com)</a></li>
+</ul>
+</li>
+<li>Tutorials based on postprocessPhasicFlow<ul>
+<li>Particle number fraction in a binray system <a href="https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/postprocessPhasicFlow/segregation">(see on github.com)</a> </li>
+</ul>
+</li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

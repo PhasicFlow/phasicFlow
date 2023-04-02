@@ -21,14 +21,16 @@
     font-size: 220%;
 }
 
+
 #projectname a
 {
+    text-decoration: none;
     color: rgba(0, 0, 0, 0.75);
 }
 
 #projectname a:hover, #projectbrief a:hover
 {
-    text-decoration: none;
+    text-decoration: underline;
     color: rgba(0, 0, 0, 1);
 }
 
