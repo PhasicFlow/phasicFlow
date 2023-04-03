@@ -744,7 +744,11 @@ public:
 			syncToHost();
 			modifyOnHost();
 			
-			if(size_ == capacity_) changeSize(capacity_);
+			if(size_ == capacity_) 
+			{
+				changeSize(evalCapacity(capacity_), true);
+
+			}
 			data()[size_++] = val;
 			subViewsUpdated_ = false;
 			
