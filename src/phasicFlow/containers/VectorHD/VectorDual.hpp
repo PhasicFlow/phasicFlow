@@ -128,7 +128,7 @@ protected:
 	// use actualCap = true only for reserve
 	INLINE_FUNCTION_H void changeSize(size_t n, bool actualCap=false)
 	{
-		if(n >= capacity_ )
+		if(n > capacity_ )
 		{
 			if(actualCap)
 				capacity_ = n;

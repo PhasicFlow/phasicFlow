@@ -28,6 +28,8 @@ Licence:
 #include "Vector.hpp"
 #include "indexContainer.hpp"
 
+#include "streams.hpp"
+
 #include "KokkosTypes.hpp"
 #include "ViewAlgorithms.hpp"
 
@@ -106,7 +108,7 @@ protected:
 	// use actualCap = true only for reserve
 	INLINE_FUNCTION_H void changeSize(size_t n, bool actualCap=false)
 	{
-		if(n >= capacity_ )
+		if(n > capacity_ )
 		{
 			if(actualCap)
 				capacity_ = n;
@@ -565,7 +567,8 @@ public:
 			if(indices.size() != vals.size())return false;
 
 			auto maxInd = indices.max(); 
-			
+			/*output<<"maxInd "<< maxInd<<endl;
+			output<<"size() "<< size()<<endl;*/
 			if(this->empty() || maxInd > size()-1 )
 			{
 				resize(maxInd+1);

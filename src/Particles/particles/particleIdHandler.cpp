@@ -18,33 +18,41 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __particleIdHandler_hpp__
-#define __particleIdHandler_hpp__
+#include "particleIdHandler.hpp"
 
 
-#include "pointFields.hpp"
 
-namespace pFlow
+pFlow::particleIdHandler::particleIdHandler(int32PointField_HD & id)
 {
+	int32 maxID = maxActive<DeviceSide>(id);
 
-class particleIdHandler
-{
-protected:
-	int32 nextId_=0;
-public:
-	particleIdHandler(int32PointField_HD & id);
-	
-	int32 getNextId()
+	if( maxID != -1 	 && id.size() == 0 )
 	{
-		return nextId_++;
+		nextId_ = 0;
 	}
-
-	int32 nextId() const
+	else if( maxID == -1 && id.size()>0 )
 	{
-		return nextId_;
-	}
-};
 
+		nextId_ = 0; 
+		id.modifyOnHost();
+
+		ForAll(i,id)
+		{
+			if(id.isActive(i))
+			{
+				id[i] = getNextId();	
+			}
+		}
+
+		id.syncViews();
+	}
+	else if( maxID >= static_cast<int32>(id.size()) )
+	{
+		nextId_ = maxID + 1;
+	}
+	else
+	{
+		nextId_ = id.size();
+	}
 }
 
-#endif

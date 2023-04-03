@@ -83,6 +83,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer>
 		return makeUnique<int32IndexContainer>(
 			activeRange_.second,
 			activeRange_.second+numNewPoints);
+
 	}
 
 	// second, check if there is space at the beginning
@@ -333,8 +334,6 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 		newPointsPtr(),
 		static_cast<int8>(PointFlag::ACTIVE))
 		)return nullptr;
-
-
 
 	setNumMaxPoints();
 	auto minInd = newPointsPtr().min();

@@ -78,7 +78,10 @@ protected:
 
 	bool initializeParticles();
 
-	bool insertSphereParticles(const wordVector& names, const int32IndexContainer& indices);
+	bool insertSphereParticles(
+		const wordVector& names, 
+		const int32IndexContainer& indices,
+		bool setId = true);
 
 	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const override;
 

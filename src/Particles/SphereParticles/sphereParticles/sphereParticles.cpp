@@ -77,7 +77,7 @@ bool pFlow::sphereParticles::initializeParticles()
 		0, 
 		static_cast<int32>(shapeName_.size()));
 	
-	return insertSphereParticles(shapeName_, indices);
+	return insertSphereParticles(shapeName_, indices, false);
 }
 
 
@@ -119,11 +119,11 @@ bool pFlow::sphereParticles::iterate()
 	accelerationTimer_.end();
 	
 	intCorrectTimer_.start();
-	//INFO<<"before correct dyn "<<endINFO;
+	
 		dynPointStruct_.correct(this->dt(), accelertion_);
-	//INFO<<"after correct dyn "<<endINFO;
+	
 		rVelIntegration_().correct(this->dt(), rVelocity_, rAcceleration_);
-	//INFO<<"after correct rvel "<<endINFO;
+	
 	intCorrectTimer_.end();
 	
 	return true;
@@ -138,7 +138,8 @@ bool pFlow::sphereParticles::afterIteration()
 
 bool pFlow::sphereParticles::insertSphereParticles(
 	const wordVector& names,
-	const int32IndexContainer& indices
+	const int32IndexContainer& indices,
+	bool setId
 	)
 {
 
@@ -170,7 +171,8 @@ bool pFlow::sphereParticles::insertSphereParticles(
 			massVec.push_back(m);
 			IVec.push_back(I);
 			pIdVec.push_back(pId);
-			IdVec.push_back(idHandler_.getNextId());
+			if(setId) IdVec.push_back(idHandler_.getNextId());
+			//output<<" we are in sphereParticles nextId "<< idHandler_.nextId()<<endl;
 		}
 		else
 		{
@@ -205,11 +207,15 @@ bool pFlow::sphereParticles::insertSphereParticles(
 		return false;
 	}
 
-	if(!id_.insertSetElement(indices, IdVec))
+	if(setId)
 	{
-		fatalErrorInFunction<< " failed to insert id to the id field. \n";
-		return false;
+		if( !id_.insertSetElement(indices, IdVec))
+		{
+			fatalErrorInFunction<< " failed to insert id to the id field. \n";
+			return false;
+		}	
 	}
+	
 
 	return true;
 

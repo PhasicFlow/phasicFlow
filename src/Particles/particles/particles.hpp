@@ -246,10 +246,7 @@ public:
 		auto domain = this->control().domain();
 
 		auto numMarked = dynPointStruct_.markDeleteOutOfBox(domain);
-		/*if(numMarked)
-		{
-			output<<"\nNumber of deleted points/particles that are out of domain box: "<<numMarked<<endl;
-		}*/
+		
 
 		this->zeroForce();
 		this->zeroTorque();
