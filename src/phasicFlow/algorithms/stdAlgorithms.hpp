@@ -195,8 +195,8 @@ void permuteSort(const Type* first, PermuteType* pFirst, int32 numElems)
 	};
 
 	compOperator compare{first};
-	fillSequence<Type, useParallel>(pFirst, numElems, static_cast<PermuteType>(0));
-	sort<Type, compOperator, useParallel>(pFirst, numElems, compare);
+	fillSequence<PermuteType, useParallel>(pFirst, numElems, static_cast<PermuteType>(0));
+	sort<PermuteType, compOperator, useParallel>(pFirst, numElems, compare);
 }
 
 

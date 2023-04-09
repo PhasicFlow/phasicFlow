@@ -559,6 +559,46 @@ public:
 		}
 
 		INLINE_FUNCTION_H
+		void sortItems(const int32IndexContainer& indices)
+		{
+			if(indices.size() == 0)
+			{
+				setSize(0);
+				return;
+			}
+			
+			size_t 		newSize = indices.size();
+			viewType 	sortedView("sortedView", newSize);
+
+			if constexpr (isHostAccessible_)
+			{
+				auto h_indices = indices.hostView();
+				Kokkos::parallel_for(
+				"sortItems",
+				newSize, 
+				LAMBDA_HD(int32 i){	
+					sortedView[i] = view_[h_indices[i]];
+				});
+			}else
+			{
+				auto d_indices = indices.deviceView();
+				Kokkos::parallel_for(
+				"sortItems",
+				newSize, 
+				LAMBDA_HD(int32 i){	
+					sortedView[i] = view_[d_indices[i]];
+				});
+			}
+
+			Kokkos::fence();
+			setSize(newSize);
+
+			copy(deviceVector(), sortedView);
+			return;
+
+		}
+
+		INLINE_FUNCTION_H
 		bool insertSetElement(const int32IndexContainer& indices, const Vector<T>& vals)
 		{
 

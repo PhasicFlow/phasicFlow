@@ -198,6 +198,26 @@ bool pFlow::Vector<T, Allocator>::deleteElement
 }
 
 template<typename T, typename Allocator>
+void pFlow::Vector<T, Allocator>::sortItems(
+	const int32IndexContainer& indices)
+{
+	if(indices.size() == 0)
+	{
+		this->resize(0);
+		return;
+	}
+	size_t newSize = indices.size();
+	auto hIndices = indices.hostView();
+	VectorType sortedVec(name(), capacity(), newSize, RESERVE());
+	
+	ForAll(i, hIndices)
+	{
+		sortedVec[i] = vectorType::operator[](i); 
+	}
+	*this = std::move(sortedVec);
+}
+
+template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::insertSetElement(
 	const  int32IndexContainer& indices,
 	const T& val)

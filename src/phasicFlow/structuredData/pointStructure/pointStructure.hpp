@@ -163,8 +163,11 @@ protected:
 		// index range of active points (half-open range)
 		range 					activeRange_;	
 
-		// - index vector for points to be inserted 
-		int32IndexContainer   		tobeInsertedIndex_;
+		/// Index vector for points to be inserted 
+		int32IndexContainer   	tobeInsertedIndex_;
+
+		/// Sorted index of particles based on morton code 
+		int32IndexContainer 	mortonSortedIndex_;
 	
 
 	//// - protected methods
@@ -298,6 +301,10 @@ public:
 		FUNCTION_H
 		virtual bool updateForDelete();
 
+
+		FUNCTION_H
+		virtual bool mortonSortPoints(const box& domain, real dx);
+
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		// - const access to points to be newly inserted
@@ -317,6 +324,13 @@ public:
 		auto insertedPointIndexD()const
 		{
 			return tobeInsertedIndex_.deviceView();
+		}
+
+
+		FUNCTION_H
+		auto mortonSortedIndex()const
+		{
+			return mortonSortedIndex_;
 		}
 
 

@@ -150,6 +150,35 @@ pFlow::particles::particles
 
 }
 
+bool pFlow::particles::beforeIteration() 
+{
+	auto domain = this->control().domain();
+
+	auto numMarked = dynPointStruct_.markDeleteOutOfBox(domain);
+	
+	if(time_.sortTime())
+	{
+		real min_dx, max_dx;
+		boundingSphereMinMax(min_dx, max_dx);
+		Timer t;
+		t.start();
+		REPORT(0)<<"Performing morton sorting on particles ...."<<endREPORT;
+		if(!pStruct().mortonSortPoints(domain, max_dx))
+		{
+			fatalErrorInFunction<<"Morton sorting was not successful"<<endl;
+			return false;
+		}
+		t.end();
+		REPORT(1)<<"Active range is "<< pStruct().activeRange()<<endREPORT;
+		REPORT(1)<<"It took "<< yellowText(t.totalTime())<<" seconds."<<endREPORT;
+	}
+
+	this->zeroForce();
+	this->zeroTorque();
+
+	return true;
+}
+
 pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
 pFlow::particles::getFieldObjectList()const
 {
