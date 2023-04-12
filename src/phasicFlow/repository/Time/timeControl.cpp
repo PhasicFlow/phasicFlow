@@ -61,8 +61,16 @@ pFlow::timeControl::timeControl
 	(
 		startTime_,
 		dict.getValOrSet("timersReportInterval", 0.04)
+	),
+	performSorting_
+	(
+		dict.getValOrSet("performSorting", Logical("No"))
+	),
+	sortingInterval_
+	(
+		startTime_,
+		dict.getValOrSet("sortingInterval", static_cast<real>(1.0))
 	)
-
 {
 	checkForOutputToFile();
 }
@@ -95,6 +103,15 @@ pFlow::timeControl::timeControl(
 	(
 		startTime_,
 		dict.getValOrSet("timersReportInterval", 0.04)
+	),
+	performSorting_
+	(
+		dict.getValOrSet("performSorting", Logical("No"))
+	),
+	sortingInterval_
+	(
+		startTime_,
+		dict.getValOrSet("sortingInterval", static_cast<real>(1.0))
 	)	
 {
 	checkForOutputToFile();
@@ -158,6 +175,11 @@ bool pFlow::timeControl::timersReportTime()const
 {
 	if(currentIter_<=1)return false;
 	return timersReportInterval_.isMember(currentTime_, dt_);
+}
+
+bool pFlow::timeControl::sortTime()const
+{
+	return performSorting_()&&sortingInterval_.isMember(currentTime_,dt_);
 }
 
 void pFlow::timeControl::setSaveTimeFolder(

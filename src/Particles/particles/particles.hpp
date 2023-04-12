@@ -241,18 +241,7 @@ public:
 		return shapeName_;
 	}
 
-	bool beforeIteration() override
-	{
-		auto domain = this->control().domain();
-
-		auto numMarked = dynPointStruct_.markDeleteOutOfBox(domain);
-		
-
-		this->zeroForce();
-		this->zeroTorque();
-
-		return true;
-	}
+	bool beforeIteration() override;
 
 	virtual
 	bool insertParticles
