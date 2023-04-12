@@ -3,7 +3,9 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
 objectName 	settingsDict;
-objectType 	dictionary;;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
 run 			layerdSiloFilling;
 
@@ -30,6 +32,8 @@ domain
 }
 
 integrationMethod 		AdamsBashforth3; 	// integration method 
+
+writeFormat				ascii;
 
 timersReport 			Yes;  	// report timers?
 

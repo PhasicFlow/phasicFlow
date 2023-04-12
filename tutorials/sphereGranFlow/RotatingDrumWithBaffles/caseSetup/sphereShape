@@ -4,7 +4,9 @@
 \* ------------------------------------------------------------------------- */ 
 objectName 	sphereDict;
 objectType 	sphereShape;
+fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 // names of shapes 
 names 		(smallSphere largeSphere);
 // diameter of shapes (m) 	
