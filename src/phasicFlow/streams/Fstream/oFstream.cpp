@@ -24,11 +24,13 @@ Licence:
 #include "oFstream.hpp"
 
 
-pFlow::oFstream::oFstream (const fileSystem& path)
+pFlow::oFstream::oFstream (const fileSystem& path, bool binary)
 :
-	fileStream(path, true),
-	Ostream( fileStream::outStream(), path.wordPath())
-{
-
-	
-}
+	fileStream(path, true, binary),
+	Ostream
+  ( 
+    fileStream::outStream(), 
+    path.wordPath(),
+    (binary)? BINARY : ASCII
+  )
+{}

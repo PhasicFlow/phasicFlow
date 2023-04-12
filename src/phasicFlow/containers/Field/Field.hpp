@@ -214,18 +214,18 @@ public:
 		}
 	
 	//// - IO operations 
-		bool readField(iIstream& is, const size_t len, bool readLength = true);
+		bool readField(iIstream& is, const size_t len, bool resume, bool readLength = true);
 		
 		
-		bool readField(iIstream& is );
+		bool readField(iIstream& is, bool resume );
 
 		
 		bool writeField(iOstream& os)const;
 
 		
-		bool read(iIstream& is)
+		bool read(iIstream& is, bool resume = false)
 		{
-			return readField(is);
+			return readField(is, resume);
 		}
 
 		bool write(iOstream& os)const
@@ -240,7 +240,7 @@ public:
 template<template<class, class> class VectorField, class T, class PropType>
 inline iIstream& operator >> (iIstream & is, Field<VectorField, T, PropType> & ifld )
 {
-	if( !ifld.readField(is) )
+	if( !ifld.readField(is, false) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;

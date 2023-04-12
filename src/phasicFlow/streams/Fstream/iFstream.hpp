@@ -40,7 +40,7 @@ class iFstream
 public:
 
 	// - Constructor 
-	iFstream (const fileSystem& path);
+	iFstream (const fileSystem& path, bool binary = false);
 
 	// no copy constructor
 	iFstream( const iFstream& src) = delete;

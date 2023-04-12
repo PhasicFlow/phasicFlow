@@ -24,7 +24,7 @@ Licence:
 #include "fileStream.hpp"
 #include "error.hpp"
 
-
+#include "streams.hpp"
 
 void pFlow::fileStream::openInFile
 (
@@ -39,7 +39,12 @@ void pFlow::fileStream::openInFile
 		fatalExit;
 	}
 
-	inStream_ = makeUnique<std::ifstream>( path.wordPath(), std::ios_base::in);
+	if(binary_)
+		inStream_ = makeUnique<std::ifstream>( 
+			path.wordPath(), std::ios_base::in | std::ios_base::binary);
+	else
+		inStream_ = makeUnique<std::ifstream>( 
+			path.wordPath(), std::ios_base::in);
 
 	if( !inStream_->is_open())
 	{
@@ -66,7 +71,15 @@ void pFlow::fileStream::openOutFile
 		dir.createDirs();
 	}
 	
-	outStream_ = makeUnique< std::ofstream>(path.wordPath(), std::ios_base::out);
+	if(binary_)
+	{
+		outStream_ = makeUnique< std::ofstream>(
+			path.wordPath(), std::ios_base::out| std::ios::binary);
+	}
+	else
+		outStream_ = makeUnique< std::ofstream>(
+			path.wordPath(), std::ios_base::out);
+
 
 	if(!outStream_->is_open())
 	{
@@ -92,11 +105,13 @@ void pFlow::fileStream::close()
 pFlow::fileStream::fileStream
 (
 	const fileSystem& path,
-	bool outStream
+	bool outStream,
+	bool binary
 )
 :
 	inStream_(nullptr),
-	outStream_(nullptr)
+	outStream_(nullptr),
+	binary_(binary)
 {
 
 	if(outStream)

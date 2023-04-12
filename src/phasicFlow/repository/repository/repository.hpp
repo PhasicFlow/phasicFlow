@@ -204,7 +204,15 @@ public:
 		// list of repository names in this repository 
 		wordList repositoryNames()const;
 
+
 	//// - IO operations 
+		virtual bool outFileBinary()const
+		{
+			if(owner_)
+				return owner_->outFileBinary();
+			else
+				return false;
+		}
 		virtual bool write(bool verbose = false) const;
 		
 };

@@ -65,8 +65,7 @@ public:
 
 
     //- Construct wrapper around std::istream, set stream status
-    Istream( std::istream& is, const word& streamName);
-
+    Istream( std::istream& is, const word& streamName, writeFormat wf = ASCII);
 
     //- Destructor
     virtual ~Istream() = default;
@@ -149,6 +148,8 @@ public:
 
     //- Read a double
     virtual iIstream& read(double& val) override;
+
+    iIstream& read(char* buffer, std::streamsize count) override;
 
     
     //- Rewind the stream so that it may be read again

@@ -65,9 +65,25 @@ bool pFlow::IOobject::read(bool rdHdr)
 
 	if( implyRead() )
 	{
-		if( auto ptrIS = inStream(); ptrIS )
+		if( rdHdr )
 		{	
-			return read( ptrIS(), rdHdr);
+			if( auto ptrIS = inStream(); ptrIS )
+			{
+				if(!readHeader(ptrIS()))return false;
+				ptrIS.reset(nullptr);
+			}
+			else
+			{
+				warningInFunction<<
+				"could not open file " << path() <<endl;
+				return false;
+			}
+		}
+
+		if( auto ptrIS = inStream(); ptrIS )
+		{
+			if(!read(ptrIS(), rdHdr))return false;
+			
 		}
 		else
 		{
@@ -75,7 +91,8 @@ bool pFlow::IOobject::read(bool rdHdr)
 			"could not open file " << path() <<endl;
 			return false;
 		}
-	}
+	}	
+	
 	return true;
 }
 

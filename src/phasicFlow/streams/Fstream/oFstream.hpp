@@ -41,7 +41,7 @@ class oFstream
 public:
 
 	// Constructor
-	oFstream (const fileSystem& path);
+	oFstream (const fileSystem& path, bool binary = false);
 
 	// no copy constructor
 	oFstream( const oFstream& src) = delete;

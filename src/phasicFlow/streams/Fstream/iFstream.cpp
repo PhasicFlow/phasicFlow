@@ -24,9 +24,17 @@ Licence:
 #include "iFstream.hpp"
 
 
-pFlow::iFstream::iFstream (const fileSystem& path)
+pFlow::iFstream::iFstream 
+(
+  const fileSystem& path,
+  bool binary)
 :
-	fileStream(path),
-	Istream( fileStream::inStream(), path.wordPath())
+	fileStream(path, false, binary),
+	Istream
+  ( 
+    fileStream::inStream(),
+    path.wordPath(),
+    (binary)? BINARY : ASCII
+  )
 {
 }

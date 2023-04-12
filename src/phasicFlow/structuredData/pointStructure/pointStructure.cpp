@@ -400,7 +400,7 @@ bool pFlow::pointStructure::readPointStructure
 		return false;	
 	}
 
-	if(! pointFlag_.read(is))
+	if(! pointFlag_.read(is, true))
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
 		"Error in reading pointFlag in pointStructure \n";

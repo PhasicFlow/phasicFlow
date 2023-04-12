@@ -58,219 +58,227 @@ protected:
 
     // Protected Data
 
-        //- Indentation of the entry from the start of the keyword
+        /// Indentation of the entry from the start of the keyword
         static constexpr const unsigned short entryIndentation_ = 16;
 
-        //- Number of spaces per indent level
+        /// Number of spaces per indent level
         unsigned short indentSize_ = 4;
 
-        //- Current indent level
+        /// Current indent level
         unsigned short indentLevel_ = 0;
 
 
 public:
     
 
-    // Constructor
-    explicit iOstream()
-    {}
+    // Constructors
 
-    //- Copy construct
-    iOstream(const iOstream&) = default;
+        /// Default
+        explicit iOstream()
+        {}
 
-    //- Destructor
-    virtual ~iOstream() = default;
+        /// Construct from writeFormat
+        explicit iOstream(writeFormat wF):
+            IOstream(wF)
+        {}
 
+        /// Copy construct
+        iOstream(const iOstream&) = default;
 
-    // Write Functions
-
-    //- Write token to stream or otherwise handle it.
-    //  \return false if the token type was not handled by this method
-    virtual bool write(const token& tok) = 0;
-
-    //- Write character
-    virtual iOstream& write(const char c) = 0;
-
-    //- Write character string
-    virtual iOstream& write(const char* str) = 0;
-
-    //- Write word
-    virtual iOstream& write(const word& str) = 0;
+        /// Destructor
+        virtual ~iOstream() = default;
 
 
-    //- Write std::string surrounded by quotes.
-    //  Optional write without quotes.
-    virtual iOstream& writeQuoted
-    (
-        const word& str,
-        const bool quoted=true
-    ) = 0;
+    /// Write Functions
 
+        /// Write token to stream or otherwise handle it.
+        /// return false if the token type was not handled by this method
+        virtual bool write(const token& tok) = 0;
+
+        /// Write character
+        virtual iOstream& write(const char c) = 0;
+
+        /// Write character string
+        virtual iOstream& write(const char* str) = 0;
+
+        /// Write word
+        virtual iOstream& write(const word& str) = 0;
+
+        /// Write std::string surrounded by quotes.
+        /// Optional write without quotes.
+        virtual iOstream& writeQuoted
+        (
+            const word& str,
+            const bool quoted=true
+        ) = 0;
+        
+        /// Write int64
+        virtual iOstream& write(const int64 val) = 0;
+
+        /// Write int32
+        virtual iOstream& write(const int32 val) = 0;
+
+        /// Write label
+        virtual iOstream& write(const label val) = 0;
+
+        /// Write uint32
+        virtual iOstream& write(const uint32 val) = 0;
+
+        /// Write uint16
+        virtual iOstream& write(const uint16 val) = 0;
+
+        /// Write float
+        virtual iOstream& write(const float val) = 0;
+
+        /// Write double
+        virtual iOstream& write(const double val) = 0;
+       
+        /// Write a block of binray data 
+        virtual iOstream& write(const char* binaryData, std::streamsize count) = 0;
+        
     
-    //- Write int64
-    virtual iOstream& write(const int64 val) = 0;
+    // - Indent 
 
-    //- Write int32
-    virtual iOstream& write(const int32 val) = 0;
+        /// Add indentation characters
+        virtual void indent() = 0;
 
-    //- Write label
-    virtual iOstream& write(const label val) = 0;
+        /// Return indent level
+        unsigned short indentSize() const
+        {
+            return indentSize_;
+        }
 
-    //- Write uint32
-    virtual iOstream& write(const uint32 val) = 0;
+        /// Access to indent size
+        unsigned short& indentSize()
+        {
+            return indentSize_;
+        }
 
-    //- Write uint16
-    virtual iOstream& write(const uint16 val) = 0;
+        /// Return indent level
+        unsigned short indentLevel() const
+        {
+            return indentLevel_;
+        }
 
-    //- Write float
-    virtual iOstream& write(const float val) = 0;
+        /// Access to indent level
+        unsigned short& indentLevel()
+        {
+            return indentLevel_;
+        }
 
-    //- Write double
-    virtual iOstream& write(const double val) = 0;
-   
+        /// Increment the indent level
+        void incrIndent()
+        {
+            ++indentLevel_;
+        }
 
+        /// Decrement the indent level
+        void decrIndent();
+
+    //- Punctuations
     
-    //- Add indentation characters
-    virtual void indent() = 0;
+        /// Write begin block group with a name
+        ///  Increments indentation, adds newline.
+        virtual iOstream& beginBlock(const word& kw);
 
-    //- Return indent level
-    unsigned short indentSize() const
-    {
-        return indentSize_;
-    }
+        /// Write begin block group without a name
+        ///  Increments indentation, adds newline.
+        virtual iOstream& beginBlock();
 
-    //- Access to indent size
-    unsigned short& indentSize()
-    {
-        return indentSize_;
-    }
+        /// Write end block group
+        ///  Decrements indentation, adds newline.
+        virtual iOstream& endBlock();
 
-    //- Return indent level
-    unsigned short indentLevel() const
-    {
-        return indentLevel_;
-    }
+        /// Write begin list "("
+        virtual iOstream& beginList();
 
-    //- Access to indent level
-    unsigned short& indentLevel()
-    {
-        return indentLevel_;
-    }
+        /// Write begin list with keyword "kw ("
+        virtual iOstream& beginList(const word& kw);
 
-    //- Increment the indent level
-    void incrIndent()
-    {
-        ++indentLevel_;
-    }
+        /// Write end list ")"
+        virtual iOstream& endList();
 
-    //- Decrement the indent level
-    void decrIndent();
+        /// Write begin list "["
+        virtual iOstream& beginSquare();
 
-   
+        /// Write begin list with keyword "kw ["
+        virtual iOstream& beginSquare(const word& kw);
 
-    
-    //- Write begin block group with a name
-    //  Increments indentation, adds newline.
-    virtual iOstream& beginBlock(const word& kw);
+        /// Write end list "]"
+        virtual iOstream& endSquare();
 
-    //- Write begin block group without a name
-    //  Increments indentation, adds newline.
-    virtual iOstream& beginBlock();
+        /// Write end entry (';') followed by newline.
+        virtual iOstream& endEntry();
 
-    //- Write end block group
-    //  Decrements indentation, adds newline.
-    virtual iOstream& endBlock();
+        /// Write a newLine to stream
+        virtual iOstream& newLine();
 
-    //- Write begin list "("
-    virtual iOstream& beginList();
+        /// Write space to stream
+        virtual iOstream& space(int32 n=1);
 
-    //- Write begin list with keyword "kw ("
-    virtual iOstream& beginList(const word& kw);
+        /// Write the keyword followed by an appropriate indentation
+        virtual iOstream& writeWordKeyword(const word& kw);
 
-    //- Write end list ")"
-    virtual iOstream& endList();
-
-    //- Write begin list "["
-    virtual iOstream& beginSquare();
-
-    //- Write begin list with keyword "kw ["
-    virtual iOstream& beginSquare(const word& kw);
-
-    //- Write end list "]"
-    virtual iOstream& endSquare();
-
-    //- Write end entry (';') followed by newline.
-    virtual iOstream& endEntry();
-
-    //- Write a newLine to stream
-    virtual iOstream& newLine();
-
-    //- Write space to stream
-    virtual iOstream& space(int32 n=1);
-
-    
-     //- Write the keyword followed by an appropriate indentation
-    virtual iOstream& writeWordKeyword(const word& kw);
-
-    //- Write a keyword/value entry.
-    template<class T>
-    iOstream& writeWordEntry(const word& key, const T& value)
-    {
-        writeWordKeyword(key) << value;
-        return endEntry();
-    }
-
-    //// Stream state functions
-
-    //- Flush stream
-    virtual void flush() = 0;
-
-    //- Add newline and flush stream
-    virtual void endl() = 0;
-
-    //- Get padding character
-    virtual char fill() const = 0;
-
-    //- Set padding character for formatted field up to field width
-    virtual char fill(const char fillch) = 0;
-
-    //- Get width of output field
-    virtual int width() const = 0;
-
-    //- Set width of output field (and return old width)
-    virtual int width(const int w) = 0;
-
-    //- Get precision of output field
-    virtual int precision() const = 0;
-
-    //- Set precision of output field (and return old precision)
-    virtual int precision(const int p) = 0;
+        /// Write a keyword/value entry.
+        template<class T>
+        iOstream& writeWordEntry(const word& key, const T& value)
+        {
+            writeWordKeyword(key) << value;
+            return endEntry();
+        }
 
 
-    // Member Operators
+    //- Stream state functions
 
-    //- Return a non-const reference to const iOstream
-    //  Needed for write functions where the stream argument is temporary:
-    //  e.g. thing thisThing(OFstream("thingFileName")());
-    iOstream& operator()() const
-    {
-        return const_cast<iOstream&>(*this);
-    }
+        /// Flush stream
+        virtual void flush() = 0;
+
+        /// Add newline and flush stream
+        virtual void endl() = 0;
+
+        /// Get padding character
+        virtual char fill() const = 0;
+
+        /// Set padding character for formatted field up to field width
+        virtual char fill(const char fillch) = 0;
+
+        /// Get width of output field
+        virtual int width() const = 0;
+
+        /// Set width of output field (and return old width)
+        virtual int width(const int w) = 0;
+
+        /// Get precision of output field
+        virtual int precision() const = 0;
+
+        /// Set precision of output field (and return old precision)
+        virtual int precision(const int p) = 0;
+
+
+    //- Member Operators
+
+        /// Return a non-const reference to const iOstream
+        /// Needed for write functions where the stream argument is temporary:
+        /// e.g. thing thisThing(OFstream("thingFileName")());
+        iOstream& operator()() const
+        {
+            return const_cast<iOstream&>(*this);
+        }
 };
 
 
 
-//- An iOstream manipulator
+/// An iOstream manipulator
 typedef iOstream& (*iOstreamManip)(iOstream&);
 
 
-//- operator<< handling for manipulators without arguments
+/// operator<< handling for manipulators without arguments
 inline iOstream& operator<<(iOstream& os, iOstreamManip f)
 {
     return f(os);
 }
 
-//- operator<< handling for manipulators without arguments
+/// operator<< handling for manipulators without arguments
 inline iOstream& operator<<(iOstream& os, IOstreamManip f)
 {
     f(os);
@@ -278,21 +286,21 @@ inline iOstream& operator<<(iOstream& os, IOstreamManip f)
 }
 
 
-//- Indent stream
+/// Indent stream
 inline iOstream& indent(iOstream& os)
 {
     os.indent();
     return os;
 }
 
-//- Increment the indent level
+/// Increment the indent level
 inline iOstream& incrIndent(iOstream& os)
 {
     os.incrIndent();
     return os;
 }
 
-//- Decrement the indent level
+/// Decrement the indent level
 inline iOstream& decrIndent(iOstream& os)
 {
     os.decrIndent();
@@ -300,7 +308,7 @@ inline iOstream& decrIndent(iOstream& os)
 }
 
 
-//- Flush stream
+/// Flush stream
 inline iOstream& flush(iOstream& os)
 {
     os.flush();
@@ -308,7 +316,7 @@ inline iOstream& flush(iOstream& os)
 }
 
 
-//- Add newline and flush stream
+/// Add newline and flush stream
 inline iOstream& endl(iOstream& os)
 {
     os.endl();
@@ -316,7 +324,7 @@ inline iOstream& endl(iOstream& os)
 }
 
 
-//- Write begin block group without a name
+/// Write begin block group without a name
 //  Increments indentation, adds newline.
 inline iOstream& beginBlock(iOstream& os)
 {
@@ -325,7 +333,7 @@ inline iOstream& beginBlock(iOstream& os)
 }
 
 
-//- Write end block group
+/// Write end block group
 //  Decrements indentation, adds newline.
 inline iOstream& endBlock(iOstream& os)
 {
@@ -334,7 +342,7 @@ inline iOstream& endBlock(iOstream& os)
 }
 
 
-//- Write end entry (';') followed by newline.
+/// Write end entry (';') followed by newline.
 inline iOstream& endEntry(iOstream& os)
 {
     os.endEntry();

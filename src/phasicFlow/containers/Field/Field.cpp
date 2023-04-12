@@ -83,17 +83,24 @@ bool pFlow::Field<VectorField, T, PropType>::readNonUniform
 	}
 
 	this->clear();
-	VectorType::read(is);
-	
-	is.readEndStatement("readField");
-
-	if(  this->size() != flen )
+	if(is.isBinary() && !std::is_same_v<T,word>)
 	{
-		ioErrorInFile( is.name(), is.lineNumber() ) <<
-		"  expected " << flen << " elements, but supplied "<<
-		this->size() << " elements in file "<< is.name() <<endl;
-		return false; 
+		this->resize(flen);
+		is.read(reinterpret_cast<char*>(this->data()), this->size()*sizeof(T));	
+		is.readEndStatement("readField");
 	}
+	else
+	{
+		VectorType::read(is);
+		is.readEndStatement("readField");
+		if(  this->size() != flen )
+		{
+			ioErrorInFile( is.name(), is.lineNumber() ) <<
+			"  expected " << flen << " elements, but supplied "<<
+			this->size() << " elements in file "<< is.name() <<endl;
+			return false; 
+		}
+	}	
 
 	return true;	
 }
@@ -104,10 +111,18 @@ bool pFlow::Field<VectorField, T, PropType>::readField
 (
 	iIstream& is,
 	const size_t len,
+	bool resume,
 	bool readLength
 )
 {
-	if( !is.findToken(fieldKey_) )
+	
+	bool tokenFound;
+	if( resume )
+		tokenFound = is.findTokenResume(fieldKey_);
+	else
+		tokenFound = is.findToken(fieldKey_);
+
+	if( !tokenFound )
 	{
 		ioErrorInFile( is.name(), is.lineNumber() ) <<
 		" error in searching for filedkey " << fieldKey_<<endl;
@@ -152,10 +167,11 @@ bool pFlow::Field<VectorField, T, PropType>::readField
 template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::readField
 (
-	iIstream& is
+	iIstream& is,
+	bool resume
 )
 {
-	return readField(is, 0, true);
+	return readField(is, 0, resume ,true);
 }
 
 
@@ -164,7 +180,15 @@ bool pFlow::Field<VectorField, T, PropType>::writeField(iOstream& os)const
 {
 	os.writeWordKeyword(fieldKey_) << nonUniform__<<endl;
 	os<< this->size()<<endl;
-	VectorType::write(os);
+	if( os.isBinary() && !std::is_same_v<T,word>)
+	{
+		os.write(reinterpret_cast<const char*>(this->data()), this->size()*sizeof(T));
+	}
+	else
+	{
+		VectorType::write(os);
+	}
 	os.endEntry();
 	return true;
 }
+

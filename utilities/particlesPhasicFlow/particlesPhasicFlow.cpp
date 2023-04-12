@@ -96,7 +96,120 @@ int main( int argc, char* argv[] )
 
 	auto& cpDict = objCPDict().getObject<dictionary>();
 
-	uniquePtr<IOobject> pStructObj{nullptr};
+	pointStructure* pStructPtr = nullptr;
+
+
+	if(!setOnly)
+	{
+
+		// position particles based on the dict content 
+		REPORT(0)<< "Positioning points . . . \n"<<endREPORT;
+		auto pointPosition = positionParticles::create(cpDict.subDict("positionParticles"));
+
+		fileSystem pStructPath = Control.time().path()+pointStructureFile__;
+
+		auto finalPos = pointPosition().getFinalPosition();
+
+		
+		auto& pStruct = Control.time().emplaceObject<pointStructure>
+		(
+			objectFile
+			(
+				pointStructureFile__,
+				Control.time().path(),
+				objectFile::READ_NEVER,
+				objectFile::WRITE_ALWAYS			
+			),
+			finalPos
+		);
+
+		pStructPtr = &pStruct;
+
+
+		REPORT(1)<< "Created pStruct with "<< pStruct.size() << " points and capacity "<<
+		pStruct.capacity()<<" . . ."<< endREPORT;
+
+		REPORT(1)<< "Writing pStruct to " << Control.time().path()+ pointStructureFile__<< endREPORT<<endl<<endl;
+
+		if( !Control.time().write())
+		{
+			fatalErrorInFunction<<
+			"ERRor in writing to file. \n ";
+			return 1; 
+		}
+	}else
+	{
+
+		auto& pStruct = Control.time().emplaceObject<pointStructure>
+		(
+			objectFile
+			(
+				pointStructureFile__,
+				Control.time().path(),
+				objectFile::READ_NEVER,
+				objectFile::WRITE_ALWAYS			
+			)
+		);
+
+		pStructPtr = &pStruct;
+
+	}
+
+	
+
+	if(!positionOnly)
+	{
+
+		auto& pStruct = *pStructPtr;
+
+		auto& sfDict = cpDict.subDict("setFields");
+
+		setFieldList defValueList(sfDict.subDict("defaultValue"));
+
+		for(auto& sfEntry: defValueList)
+		{
+			if( !sfEntry.setPointFieldDefaultValueNewAll(Control.time(), pStruct, true))
+			{
+				ERR<< "\n error occured in setting default value fields.\n"<<endERR;
+				return 1;
+			}
+		}
+		
+		output<<endl;
+
+		auto& selectorsDict = sfDict.subDict("selectors");
+
+		auto selNames = selectorsDict.dictionaryKeywords();
+
+		for(auto name: selNames)
+		{
+			REPORT(1)<< "Applying selector " << greenText(name) <<endREPORT;
+			
+			if(
+				!applySelector(Control, pStruct, selectorsDict.subDict(name))
+			 )
+			{
+				ERR<<"\n error occured in setting selector. \n"<<endERR;
+				return 1;
+			}
+			output<<endl;
+		}
+	}
+
+	Control.time().write(true);
+	REPORT(0)<< greenText("\nFinished successfully.\n")<<endREPORT;
+
+
+// this should be palced in each main 
+#include "finalize.hpp"
+
+	return 0;
+} 
+
+
+
+/*
+uniquePtr<IOobject> pStructObj{nullptr};
 
 	if(!setOnly)
 	{
@@ -189,13 +302,4 @@ int main( int argc, char* argv[] )
 			output<<endl;
 		}
 	}
-
-	Control.time().write(true);
-	REPORT(0)<< greenText("\nFinished successfully.\n")<<endREPORT;
-
-
-// this should be palced in each main 
-#include "finalize.hpp"
-
-	return 0;
-} 
+	*/

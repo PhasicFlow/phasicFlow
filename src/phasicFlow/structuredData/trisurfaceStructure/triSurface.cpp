@@ -193,14 +193,16 @@ bool pFlow::triSurface::readTriSurface
 )
 {
 
+	std::cout<<"triSurface file is binary "<< is.isBinary()<<std::endl;
+
 	is.fatalCheck(FUNCTION_NAME);
 
-	is >> points_;
-	is.fatalCheck(FUNCTION_NAME);
-
-	is >> vertices_;
-	is.fatalCheck(FUNCTION_NAME);
-
+	// from start of file
+	if(!points_.read(is)) return false;
+	
+	// from the current position
+	if(!vertices_.read(is, true)) return false;
+	
 	if( !check() )
 	{
 		ioErrorInFile( is.name(), is.lineNumber() ) <<
