@@ -2,9 +2,10 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-
 objectName 	particlesDict;
 objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
 setFields
 {

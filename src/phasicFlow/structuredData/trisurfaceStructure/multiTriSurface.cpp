@@ -214,14 +214,12 @@ bool pFlow::multiTriSurface::readMultiTriSurface
 {
 	if( !readTriSurface(is) )return false;
 
-	is >> lastPointIndex_;
-	if(!is.check(FUNCTION_NAME) ) return false;
+	// from current position
+	if(!lastPointIndex_.read(is, true)) return false;
 
-	is >> lastVertexIndex_;
-	if(!is.check(FUNCTION_NAME) ) return false;
+	if(!lastVertexIndex_.read(is, true) ) return false;
 
-	is >> surfaceNames_;
-	if( !is.check(FUNCTION_NAME)) return false;
+	if( !surfaceNames_.read(is, true)) return false;
 
 	calculateVars();
 

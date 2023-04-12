@@ -2,9 +2,11 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
+objectName  interaction;
+objectType  dicrionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
-objectName interaction;
-objectType dicrionary;
 
 materials      (prop1);    // a list of materials names
 densities      (1000.0);   // density of materials [kg/m3]

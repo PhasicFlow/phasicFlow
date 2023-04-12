@@ -43,6 +43,10 @@ public:
   	// - viewType of data on host
   	using HostViewType 		= typename DualViewType::t_host;
 
+  	using HostType 			= typename HostViewType::device_type;
+
+  	using DeviceType 		= typename DeviceViewType::device_type;
+
   	template<typename ViewType>
   	class IndexAccessor
   	{
@@ -99,7 +103,11 @@ public:
 
 	indexContainer(const indexContainer&) = default;
 
-	indexContainer& operator = (const indexContainer&) = default;	
+	indexContainer& operator = (const indexContainer&) = default;
+
+	indexContainer(indexContainer&&) = default;
+
+	indexContainer& operator = (indexContainer&&) = default;	
 
 	~indexContainer() = default;
 
@@ -150,6 +158,16 @@ public:
 		return views_.d_view;
 	}
 
+	HostViewType& hostView()
+	{
+		return views_.h_view;
+	}
+
+	DeviceViewType& deviceView()
+	{
+		return views_.d_view;
+	}
+
 	auto indicesHost()const
 	{
 		return IndexAccessor<HostViewType>(views_.h_view);
@@ -157,7 +175,45 @@ public:
 
 	auto indicesDevice()const
 	{
-		return IndexAccessor<DeviceViewType>(views_.d_veiw);
+		return IndexAccessor<DeviceViewType>(views_.d_view);
+	}
+
+	void modifyOnHost()
+	{
+		views_.modify_host();
+	}
+
+	void modifyOnDevice()
+	{
+		views_.modify_device();
+	}
+
+	void syncViews()
+	{
+		bool findMinMax = false;
+		if(views_.template need_sync<HostType>())
+		{
+			Kokkos::deep_copy(views_.d_view, views_.h_view);
+			findMinMax = true;
+		}
+		else if(views_.template need_sync<DeviceType>())
+		{
+			Kokkos::deep_copy(views_.h_view, views_.d_view);
+			findMinMax = true;
+		}
+
+		if(findMinMax)
+		{
+			min_ 	= pFlow::min(views_.d_view, 0, size_);
+			max_ 	= pFlow::max(views_.d_view, 0, size_);
+		}
+	}
+
+	size_t setSize(size_t ns)
+	{
+		auto tmp = size_;
+		size_ = ns;
+		return tmp;
 	}
 };
 

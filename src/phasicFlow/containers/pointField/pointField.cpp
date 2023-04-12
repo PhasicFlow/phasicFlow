@@ -123,6 +123,13 @@ bool pFlow::pointField<VectorField, T, MemorySpace>::update(const eventMessage& 
 		//Vector<T> vals( newElems.size(), defaultValue_);
 		return this->insertSetElement(newElems, defaultValue_);
 	}
+
+	if(msg.isRearranged())
+	{
+		auto sortedIndex = pStruct().mortonSortedIndex();
+		this->sortItems(sortedIndex);
+		return true;
+	}
 	
 	return true;
 }

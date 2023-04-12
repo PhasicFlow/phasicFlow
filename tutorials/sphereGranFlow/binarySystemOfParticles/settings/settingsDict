@@ -3,7 +3,10 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
 objectName 	settingsDict;
-objectType 	dictionary;;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
 
 run 			binarySystemofParticles;
 
@@ -30,6 +33,8 @@ domain
 }
 
 integrationMethod 		AdamsBashforth2; 	// integration method 
+
+writeFormat 			ascii;
 
 timersReport 			Yes;  	// report timers?
 

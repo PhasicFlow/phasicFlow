@@ -307,10 +307,11 @@ pFlow::Istream& pFlow::Istream::readVariable(word& str)
 pFlow::Istream::Istream
 (
     std::istream& is,
-    const word& streamName
+    const word& streamName,
+    writeFormat wf
 )
 :
-    iIstream(),
+    iIstream(wf),
     name_(streamName),
     is_(is)
 {
@@ -846,6 +847,26 @@ pFlow::iIstream& pFlow::Istream::read(double& val)
     return *this;
 }
 
+pFlow::iIstream& pFlow::Istream::read
+(
+    char* buffer, 
+    std::streamsize count
+)
+{
+    if ( !isBinary() )
+    {
+        fatalErrorInFunction<<"stream format is not binray. Stream name is "<<
+        name()<<'\n';
+        fatalExit;
+    }
+
+    readBegin("binaryBlock");
+    is_.read(buffer, count);
+    readEnd("binaryBlock");
+
+    setState(is_.rdstate());
+    return *this;
+}
 
 void pFlow::Istream::rewind()
 {

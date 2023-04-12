@@ -26,6 +26,8 @@ Licence:
 #include <Kokkos_DualView.hpp>
 #include <Kokkos_UnorderedMap.hpp>
 
+#include "iOstream.hpp"
+
 
 namespace pFlow
 {
@@ -51,9 +53,12 @@ using DefaultExecutionSpace 		= Kokkos::DefaultExecutionSpace;
 template<typename T1, typename T2>
 	using kPair = Kokkos::pair<T1,T2>;
 
-using range = kPair<int,int>;
+template<typename T>
+	using kRange = kPair<T,T>;
 
-using range64 = kPair<int long,int long>;
+using range = kRange<int>;
+
+using range64 = kRange<int long>;
 
 template<typename T, typename... properties>
 	using ViewTypeScalar = Kokkos::View<T,properties...>;
@@ -131,6 +136,13 @@ using deviceAtomicViewType3D =
 	Kokkos::View<
 	T***,
 	Kokkos::MemoryTraits<std::is_same<DefaultExecutionSpace,Serial>::value?0:Kokkos::Atomic>>;
+
+template<typename T>
+iOstream& operator <<(iOstream& os, const kRange<T>& rng)
+{
+	os<<"["<<rng.first<<" "<<rng.second<<")";
+	return os;
+}
 
 
 } // pFlow

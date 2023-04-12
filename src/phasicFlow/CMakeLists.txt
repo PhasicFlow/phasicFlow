@@ -45,12 +45,14 @@ repository/IOobject/IOobject.cpp
 repository/IOobject/IOfileHeader.cpp
 
 structuredData/box/box.cpp
+structuredData/cells/cells.cpp
 structuredData/cylinder/cylinder.cpp
 structuredData/sphere/sphere.cpp
 structuredData/iBox/iBoxs.cpp
 structuredData/line/line.cpp
 structuredData/zAxis/zAxis.cpp
 structuredData/pointStructure/pointStructure.cpp
+structuredData/pointStructure/mortonIndexing.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 

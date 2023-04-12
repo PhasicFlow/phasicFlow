@@ -148,6 +148,15 @@ pFlow::iOstream& pFlow::oTstream::write(const double val)
     return *this;
 }
 
+pFlow::iOstream& pFlow::oTstream::write
+(
+    const char* binaryData, 
+    std::streamsize count
+)
+{
+    notImplementedFunction;
+    return *this;
+}
 
 
 void pFlow::oTstream::append(const token& tok)

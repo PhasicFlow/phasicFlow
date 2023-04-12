@@ -2,9 +2,10 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-
 objectName interaction;
 objectType dicrionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
 materials   (glassMat wallMat); // a list of materials names
 densities   (2500.0 2500);      // density of materials [kg/m3]

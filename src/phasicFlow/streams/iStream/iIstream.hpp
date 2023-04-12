@@ -53,6 +53,11 @@ public:
 	        putBack_(false)	
 	    {}
 
+	    iIstream(writeFormat wf):
+	    	IOstream(wf),
+	    	putBack_(false)
+	    {}
+
 	    // - Copy construct
 	    iIstream(const iIstream&) = default;
 
@@ -122,6 +127,8 @@ public:
 	    //- Read a doubleScalar
 	    virtual iIstream& read(double&) = 0;
 
+	    virtual iIstream& read(char* buffer, std::streamsize count) =0;
+
 	    
 	    //- Rewind the stream so that it may be read again
 	    virtual void rewind() = 0;
@@ -132,9 +139,17 @@ public:
         // - search for all tokesn and find the first word token tbat matchs w
         virtual bool findToken( const word & w );
 
+        /// search for all tokesn after the current file position 
+        /// and find the first word token tbat matchs w
+        virtual bool findTokenResume(const word& w);
+
 
         // - search for all tokesn and find the first word token that matchs 
         virtual bool findTokenSilent( const word & w, int32 limitLine = 100 );
+
+        /// search for all tokesn after the current file position 
+        /// and find the first word token tbat matchs w
+        virtual bool findTokenResumeSilent( const word & w, int32 limitLine = 100 );
 
         // - search for all tokens and find the first word token and also next word token
         //   chekck if it is eneded with end statement ;

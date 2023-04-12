@@ -323,6 +323,9 @@ public:
 	//   return false if out of range
 	bool deleteElement(label index);
 
+	/// Sort elements based on the indices
+	void sortItems(const int32IndexContainer& indices);
+
 	// - set or insert new elements into the vector 
 	//   return false if it fails
 	bool insertSetElement(const  int32IndexContainer& indices, const T& val);

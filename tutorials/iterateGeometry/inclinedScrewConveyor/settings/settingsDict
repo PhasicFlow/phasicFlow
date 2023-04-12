@@ -4,6 +4,8 @@
 \* ------------------------------------------------------------------------- */  
 objectName 	settingsDict;
 objectType 	dictionary;;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
 run 			inclinedScrewConveyor;
 
@@ -30,6 +32,8 @@ domain
 }
 
 integrationMethod 		AdamsBashforth2; 	// integration method 
+
+writeFormat				ascii;
 
 timersReport 			Yes;  	// report timers?
 

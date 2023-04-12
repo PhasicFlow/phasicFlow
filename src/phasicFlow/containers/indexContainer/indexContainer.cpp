@@ -19,3 +19,6 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "indexContainer.hpp"
+
+
+template class pFlow::indexContainer<pFlow::int32>;

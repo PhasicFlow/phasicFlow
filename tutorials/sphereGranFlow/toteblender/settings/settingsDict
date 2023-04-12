@@ -4,7 +4,9 @@
 \* ------------------------------------------------------------------------- */  
 objectName 	settingsDict;
 objectType 	dictionary;;
+fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 run 			toteBlender;
 
 // time step for integration (s)
@@ -35,6 +37,8 @@ domain
 
 // integration method
 integrationMethod 		AdamsMoulton4; 	 
+
+writeFormat				ascii;
 
 // report timers?
 timersReport 			Yes;  	

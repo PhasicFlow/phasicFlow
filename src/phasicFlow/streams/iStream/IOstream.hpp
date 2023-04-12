@@ -50,226 +50,260 @@ public:
 
     enum streamAccess : char
     {
-        CLOSED = 0,         //!< stream is not open
-        OPENED              //!< stream is open
+        CLOSED = 0,         /// stream is not open
+        OPENED              /// stream is open
     };
 
+    enum writeFormat: char
+    {
+        ASCII = 0,          
+        BINARY
+    };
 
-    //- Default precision
+    /// Default precision, only works for ASCII
     static unsigned int precision_;
 
 protected:
 
-	//- Name for any generic stream - normally treat as readonly
+	/// Name for any generic stream - normally treat as readonly
     static word staticName_;
 
+    /// Is stream open or closed
     streamAccess openClosed_;
 
+    /// write format 
+    writeFormat writeFormat_ = ASCII;
+
+    /// state
     ios_base::iostate ioState_;
 
   
-    //- The file line
+    /// The file line
     int32 lineNumber_;
 
 
-    // Protected Member Functions
+    //- Protected Member Functions
    
-    //- Set stream opened
-    void setOpened()
-    {
-        openClosed_ = OPENED;
-    }
+        /// Set stream opened
+        void setOpened()
+        {
+            openClosed_ = OPENED;
+        }
 
-    //- Set stream closed
-    void setClosed()
-    {
-        openClosed_ = CLOSED;
-    }
+        /// Set stream closed
+        void setClosed()
+        {
+            openClosed_ = CLOSED;
+        }
 
-    //- Set stream state
-    void setState(ios_base::iostate state)
-    {
-        ioState_ = state;
-    }
+        /// Set stream state
+        void setState(ios_base::iostate state)
+        {
+            ioState_ = state;
+        }
 
-    //- Set stream to be good
-    void setGood()
-    {
-        ioState_ = ios_base::iostate(0);
-    }
+        void setWriteFormat(writeFormat wF)
+        {
+            writeFormat_ = wF;
+        }
 
+        /// Set stream to be good
+        void setGood()
+        {
+            ioState_ = ios_base::iostate(0);
+        }
 
 public:
 
-    // Constructors
-    explicit IOstream():
-        openClosed_(CLOSED),
-        ioState_(ios_base::iostate(0)),
-        lineNumber_(0)
-    {
-        setBad();
-    }
+    //- Constructors
 
-    IOstream(const IOstream&) = default;
+        /// Default
+        explicit IOstream():
+            openClosed_(CLOSED),
+            writeFormat_(ASCII),
+            ioState_(ios_base::iostate(0)),
+            lineNumber_(0)
+        {
+            setBad();
+        }
 
-    //- Destructor
-    virtual ~IOstream() = default;
-      
-    
-    //// Member Functions
+        /// Construct  and set write format 
+        explicit IOstream(writeFormat wF):
+            openClosed_(CLOSED),
+            writeFormat_(wF),
+            ioState_(ios_base::iostate(0)),
+            lineNumber_(0)
+        {
+            setBad();
+        }
 
-    //- Return the name of the stream
-    virtual const word& name() const;
+        /// Copy
+        IOstream(const IOstream&) = default;
 
-    //- Return non-const access to the name of the stream
-    virtual word& name();
+        /// Destructor
+        virtual ~IOstream() = default;
+          
+        
+    //- Member Functions
 
-    //- Check IOstream status for given operation.
-    //  Print IOstream state or generate a FatalIOError
-    //  when an error has occurred.
-    //  The base implementation is a fatalCheck
-    virtual bool check(const char* operation) const;
+        /// Return the name of the stream
+        virtual const word& name() const;
 
-    //- Check IOstream status for given operation.
-    //  Generate a FatalIOError when an error has occurred.
-    bool fatalCheck(const char* operation) const;
+        /// Return non-const access to the name of the stream
+        virtual word& name();
 
-    //- Return true if stream has been opened
-    bool opened() const
-    {
-        return openClosed_ == OPENED;
-    }
+        /// Check IOstream status for given operation.
+        ///  Print IOstream state or generate a FatalIOError
+        ///  when an error has occurred.
+        ///  The base implementation is a fatalCheck
+        virtual bool check(const char* operation) const;
 
-    //- Return true if stream is closed
-    bool closed() const
-    {
-        return openClosed_ == CLOSED;
-    }
+        /// Check IOstream status for given operation.
+        ///  Generate a FatalIOError when an error has occurred.
+        bool fatalCheck(const char* operation) const;
 
-    //- Return true if next operation might succeed
-    bool good() const
-    {
-        return ioState_ == 0;
-    }
+        /// Return true if stream has been opened
+        bool opened() const
+        {
+            return openClosed_ == OPENED;
+        }
 
-    //- Return true if end of input seen
-    bool eof() const
-    {
-        return ioState_ & ios_base::eofbit;
-    }
+        /// Return true if stream is closed
+        bool closed() const
+        {
+            return openClosed_ == CLOSED;
+        }
 
-    //- Return true if next operation will fail
-    bool fail() const
-    {
-        return ioState_ & (ios_base::badbit | ios_base::failbit);
-    }
+        /// Return true if stream format is binray 
+        bool isBinary()const
+        {
+            return writeFormat_ == BINARY;
+        }
 
-    //- Return true if stream is corrupted
-    bool bad() const
-    {
-        return ioState_ & ios_base::badbit;
-    }
+        /// Return true if next operation might succeed
+        bool good() const
+        {
+            return ioState_ == 0;
+        }
 
-    //- Return true if the stream has not failed
-    explicit operator bool() const
-    {
-        return !fail();
-    }
+        /// Return true if end of input seen
+        bool eof() const
+        {
+            return ioState_ & ios_base::eofbit;
+        }
 
-    //- Return true if the stream has failed
-    bool operator!() const
-    {
-        return fail();
-    }
+        /// Return true if next operation will fail
+        bool fail() const
+        {
+            return ioState_ & (ios_base::badbit | ios_base::failbit);
+        }
 
-   
-    //- Const access to the current stream line number
-    int32 lineNumber() const
-    {
-        return lineNumber_;
-    }
+        /// Return true if stream is corrupted
+        bool bad() const
+        {
+            return ioState_ & ios_base::badbit;
+        }
 
-    //- Non-const access to the current stream line number
-    int32& lineNumber()
-    {
-        return lineNumber_;
-    }
+        /// Return true if the stream has not failed
+        explicit operator bool() const
+        {
+            return !fail();
+        }
 
-    //- Set the stream line number
-    //  \return the previous value
-    int32 lineNumber(const int32 num)
-    {
-        const int32 old(lineNumber_);
-        lineNumber_ = num;
-        return old;
-    }
+        /// Return true if the stream has failed
+        bool operator!() const
+        {
+            return fail();
+        }
 
-    //- Return flags of stream
-    virtual ios_base::fmtflags flags() const = 0;
+       
+        /// Const access to the current stream line number
+        int32 lineNumber() const
+        {
+            return lineNumber_;
+        }
 
-    //- Return the default precision
-    static unsigned int defaultPrecision()
-    {
-        return precision_;
-    }
+        /// Non-const access to the current stream line number
+        int32& lineNumber()
+        {
+            return lineNumber_;
+        }
 
-    //- Reset the default precision
-    //  \return the previous value
-    static unsigned int defaultPrecision(unsigned int prec)
-    {
-        unsigned int old(precision_);
-        precision_ = prec;
-        return old;
-    }
+        /// Set the stream line number
+        /// return the previous value
+        int32 lineNumber(const int32 num)
+        {
+            const int32 old(lineNumber_);
+            lineNumber_ = num;
+            return old;
+        }
 
-    //- Set stream to have reached eof
-    void setEof()
-    {
-        ioState_ |= ios_base::eofbit;
-    }
+        /// Return flags of stream
+        virtual ios_base::fmtflags flags() const = 0;
 
-    //- Set stream to have failed
-    void setFail()
-    {
-        ioState_ |= ios_base::failbit;
-    }
+        /// Return the default precision
+        static unsigned int defaultPrecision()
+        {
+            return precision_;
+        }
 
-    //- Set stream to be bad
-    void setBad()
-    {
-        ioState_ |= ios_base::badbit;
-    }
+        /// Reset the default precision
+        /// return the previous value
+        static unsigned int defaultPrecision(unsigned int prec)
+        {
+            unsigned int old(precision_);
+            precision_ = prec;
+            return old;
+        }
 
-    //- Set flags of stream
-    virtual ios_base::fmtflags flags(const ios_base::fmtflags f) = 0;
+        /// Set stream to have reached eof
+        void setEof()
+        {
+            ioState_ |= ios_base::eofbit;
+        }
 
-    //- Set flags of stream
-    ios_base::fmtflags setf(const ios_base::fmtflags f)
-    {
-        return flags(flags() | f);
-    }
+        /// Set stream to have failed
+        void setFail()
+        {
+            ioState_ |= ios_base::failbit;
+        }
 
-    //- Set flags of given field of stream
-    ios_base::fmtflags setf
-    (
-        const ios_base::fmtflags f,
-        const ios_base::fmtflags mask
-    )
-    {
-        return flags((flags() & ~mask) | (f & mask));
-    }
+        /// Set stream to be bad
+        void setBad()
+        {
+            ioState_ |= ios_base::badbit;
+        }
 
-    //- Unset flags of stream
-    void unsetf(const ios_base::fmtflags f)
-    {
-        flags(flags() & ~f);
-    }
+        /// Set flags of stream
+        virtual ios_base::fmtflags flags(const ios_base::fmtflags f) = 0;
+
+        /// Set flags of stream
+        ios_base::fmtflags setf(const ios_base::fmtflags f)
+        {
+            return flags(flags() | f);
+        }
+
+        /// Set flags of given field of stream
+        ios_base::fmtflags setf
+        (
+            const ios_base::fmtflags f,
+            const ios_base::fmtflags mask
+        )
+        {
+            return flags((flags() & ~mask) | (f & mask));
+        }
+
+        /// Unset flags of stream
+        void unsetf(const ios_base::fmtflags f)
+        {
+            flags(flags() & ~f);
+        }
 
 
 }; // end of IOstream
 
 
-//- An IOstream manipulator
+/// An IOstream manipulator
 typedef IOstream& (*IOstreamManip)(IOstream&);
 
 inline IOstream& dec(IOstream& io)

@@ -24,22 +24,24 @@ Licence:
 pFlow::uniquePtr<pFlow::iFstream> pFlow::IOfileHeader::inStream()const
 {
 	if( fileExist() )
-		return makeUnique<iFstream>(path());
+		return makeUnique<iFstream>(path(), inFileBinary());
 	else
 		return nullptr;
 }
 
 pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 {
-	 auto osPtr = makeUnique<oFstream>(path());
 
-	 if(osPtr && owner_)
-	 {
+	
+	auto osPtr = makeUnique<oFstream>(path(), outFileBinary());
+	
+	if(osPtr && owner_)
+	{
 	 	auto outPrecision = owner_->outFilePrecision();
 	 	osPtr->precision(outPrecision);
-	 }
+	}
 
-	 return osPtr;
+	return osPtr;
 }
 
 pFlow::IOfileHeader::IOfileHeader
@@ -66,6 +68,19 @@ pFlow::fileSystem pFlow::IOfileHeader::path() const
 	}
 	f += name_;
 	return f;
+}
+
+bool pFlow::IOfileHeader::outFileBinary()const
+{
+	if(owner_)
+		return owner_->outFileBinary();
+	else
+		return false;
+}
+
+bool pFlow::IOfileHeader::inFileBinary()const
+{
+	return toUpper(fileFormat_) == "BINARY";
 }
 
 bool pFlow::IOfileHeader::headerOk(bool silent)
@@ -130,6 +145,15 @@ bool pFlow::IOfileHeader::writeHeader(iOstream& os, const word& typeName) const
 	os.writeWordEntry("objectName", name() );
 	os.fatalCheck("writing objectName");
 
+	word fileFormat;
+	if(outFileBinary())
+		fileFormat = "Binary";
+	else
+		fileFormat = "ASCII";
+
+	os.writeWordEntry("fileFormat", fileFormat);
+	os.fatalCheck("writing fileFormat");
+
 	writeSeparator(os);
 	return true;
 }
@@ -159,6 +183,18 @@ bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 		{
 			warningInFunction <<
 			"cannot find/error in reading objectType in file "<<
+			is.name()<<endl;
+		}
+		return false;
+	}
+
+
+	if( !is.findTokenAndNextSilent("fileFormat", fileFormat_) )
+	{
+		if(!silent)
+		{
+			warningInFunction <<
+			"cannot find/error in reading fileFormat in file "<<
 			is.name()<<endl;
 		}
 		return false;

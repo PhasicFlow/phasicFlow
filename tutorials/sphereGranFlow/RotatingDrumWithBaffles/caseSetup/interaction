@@ -4,7 +4,9 @@
 \* ------------------------------------------------------------------------- */ 
 objectName interaction;
 objectType dicrionary;
-/*----------------------------------------------------------------------------*/
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
 // a list of materials names
 materials   (lightMat heavyMat wallMat); 
 // density of materials [kg/m3]
