@@ -570,30 +570,25 @@ public:
 			size_t 		newSize = indices.size();
 			viewType 	sortedView("sortedView", newSize);
 
-			if constexpr (isHostAccessible_)
-			{
-				auto h_indices = indices.hostView();
-				Kokkos::parallel_for(
+			using policy = Kokkos::RangePolicy<
+			execution_space,
+			Kokkos::IndexType<int32> >;
+
+			auto d_indices = indices.deviceView();
+			auto d_view = view_;
+			Kokkos::parallel_for(
 				"sortItems",
 				newSize, 
 				LAMBDA_HD(int32 i){	
-					sortedView[i] = view_[h_indices[i]];
+					sortedView(i) = d_view(d_indices(i));
 				});
-			}else
-			{
-				auto d_indices = indices.deviceView();
-				Kokkos::parallel_for(
-				"sortItems",
-				newSize, 
-				LAMBDA_HD(int32 i){	
-					sortedView[i] = view_[d_indices[i]];
-				});
-			}
 
 			Kokkos::fence();
+
 			setSize(newSize);
 
 			copy(deviceVector(), sortedView);
+			
 			return;
 
 		}
@@ -835,14 +830,22 @@ public:
 	//// - IO operations
 
 		FUNCTION_H
-		bool read(iIstream& is)
+		bool readVector(
+			iIstream& is,
+			size_t len=0)
 		{
 			Vector<T> vecFromFile;
-			if( !vecFromFile.read(is) ) return false;
+			if( !vecFromFile.readVector(is,len) ) return false;
 
 			this->assign(vecFromFile);
 
 			return true;
+		}
+
+		FUNCTION_H
+		bool read(iIstream& is)
+		{
+			return readVector(is);
 		}
 
 		FUNCTION_H

@@ -291,6 +291,8 @@ public:
 		return *this;
 	}
 
+
+
 	const word& name()const
 	{
 		return name_;
@@ -372,9 +374,7 @@ public:
 	// from iIstream and free size
 	Vector(iIstream& is);
 
-	//bool readVector(iIstream & is, size_t len);
-
-	bool readVector(iIstream& is);
+	bool readVector(iIstream& is, size_t len=0);
 
 	bool writeVector(iOstream& os) const;
 

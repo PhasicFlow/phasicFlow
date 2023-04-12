@@ -82,25 +82,16 @@ bool pFlow::Field<VectorField, T, PropType>::readNonUniform
 		return false;	
 	}
 
-	this->clear();
-	if(is.isBinary() && !std::is_same_v<T,word>)
+	VectorType::readVector(is, flen);
+	is.readEndStatement("readField");
+	if(  this->size() != flen )
 	{
-		this->resize(flen);
-		is.read(reinterpret_cast<char*>(this->data()), this->size()*sizeof(T));	
-		is.readEndStatement("readField");
+		ioErrorInFile( is.name(), is.lineNumber() ) <<
+		"  expected " << flen << " elements, but supplied "<<
+		this->size() << " elements in file "<< is.name() <<endl;
+		return false; 
 	}
-	else
-	{
-		VectorType::read(is);
-		is.readEndStatement("readField");
-		if(  this->size() != flen )
-		{
-			ioErrorInFile( is.name(), is.lineNumber() ) <<
-			"  expected " << flen << " elements, but supplied "<<
-			this->size() << " elements in file "<< is.name() <<endl;
-			return false; 
-		}
-	}	
+		
 
 	return true;	
 }
@@ -178,17 +169,14 @@ bool pFlow::Field<VectorField, T, PropType>::readField
 template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::writeField(iOstream& os)const
 {
+
 	os.writeWordKeyword(fieldKey_) << nonUniform__<<endl;
 	os<< this->size()<<endl;
-	if( os.isBinary() && !std::is_same_v<T,word>)
-	{
-		os.write(reinterpret_cast<const char*>(this->data()), this->size()*sizeof(T));
-	}
-	else
-	{
-		VectorType::write(os);
-	}
+	
+	VectorType::write(os);
+	
 	os.endEntry();
+
 	return true;
 }
 

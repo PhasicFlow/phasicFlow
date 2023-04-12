@@ -567,6 +567,7 @@ public:
 					sortedView[i] = dVec[d_indices[i]];
 				}
 				);
+			
 			Kokkos::fence();
 			setSize(newSize);
 			copy(deviceVector(), sortedView);
@@ -931,14 +932,22 @@ public:
 
 	//// - IO operations
 		FUNCTION_H
-		bool read(iIstream& is)
+		bool readVector(
+			iIstream& is,
+			size_t len=0)
 		{
 			Vector<T> vecFromFile;
-			if( !vecFromFile.read(is) ) return false;
+			if( !vecFromFile.readVector(is,len) ) return false;
 			
 			this->assign(vecFromFile);
 
 			return true;
+		}
+
+		FUNCTION_H
+		bool read(iIstream& is)
+		{
+			return readVector(is);
 		}
 
 		FUNCTION_H

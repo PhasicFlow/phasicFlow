@@ -21,6 +21,7 @@ Licence:
 #include "mortonIndexing.hpp"
 #include "cells.hpp"
 
+#include "streams.hpp"
 
 bool pFlow::getSortedIndex(
 	box boundingBox,
@@ -37,6 +38,8 @@ bool pFlow::getSortedIndex(
 
 	ViewType1D<uint64_t> mortonCode("mortonCode", activeRange.second);
 
+	output<<"before first kernel"<<endl;;
+
 	using rpMorton = 
 		Kokkos::RangePolicy<Kokkos::IndexType<int32>>;
 	int32 numActive = 0;
@@ -52,13 +55,17 @@ bool pFlow::getSortedIndex(
 				sumToUpdate++;
 			}else
 			{
-				mortonCode[i] = xyzToMortonCode64(-1,-1,-1);
+				mortonCode[i] = xyzToMortonCode64
+				(
+					static_cast<uint64_t>(-1),
+					static_cast<uint64_t>(-1),
+					static_cast<uint64_t>(-1)
+				);
 			}
 		},
 		numActive
 	);
 	
-
 	permuteSort(
 		mortonCode, 
 		activeRange.first, 
