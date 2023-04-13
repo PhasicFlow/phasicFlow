@@ -76,30 +76,34 @@ bool checkFieldType(word objectType)
 	
 }
 
-bool convertInt32PointField
+template<typename T>
+bool convertIntPointField
 (
 	iOstream& os,
 	const IOfileHeader& header,
 	const pointStructure& pStruct
 )
 {
+
+	using PointFieldType = pointField<VectorSingle, T, HostSpace>;
+
 	word objectType = header.objectType();
 
-	if(!checkFieldType<int32>(objectType))
+	if(!checkFieldType<T>(objectType))
 	{
 		return false;
 	}
 
-	auto objField = IOobject::make<int32PointField_H>
+	auto objField = IOobject::make<PointFieldType>
 	(
 		header,
 		pStruct,
-		static_cast<int64>(0)
+		static_cast<T>(0)
 	);
 
-	auto& Field = objField().getObject<int32PointField_H>();
+	auto& Field = objField().template getObject<PointFieldType>();
 
-	auto* data = Field.hostVectorAll().data();
+	T* data = Field.deviceVectorAll().data();
 	
 	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk.\n";
 
@@ -111,44 +115,6 @@ bool convertInt32PointField
 		pStruct.activePointsMaskH() );
 }
 
-bool convertIntTypesPointField(
-	iOstream& os,
-	const IOfileHeader& header,
-	const pointStructure& pStruct )
-{
-	word objectType = header.objectType();
-
-	if( !(checkFieldType<int8>(objectType)  ||
-		checkFieldType<int16>(objectType) 	||
-		checkFieldType<int64>(objectType) 	||
-		checkFieldType<uint32>(objectType) 	||
-		checkFieldType<label>(objectType))
-		)
-	{
-		return false;
-	}
-
-	auto objField = IOobject::make<int64PointField_H>
-	(
-		header,
-		pStruct,
-		static_cast<int64>(0)
-	);
-
-	auto& Field = objField().getObject<int64PointField_H>();
-
-	int64* data = Field.hostVectorAll().data();
-	
-	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk.\n";
-
-	return addIntPointField(
-		os,
-		header.objectName(),
-		pStruct.numActive(),
-		data,
-		pStruct.activePointsMaskH() );
-
-}
 
 bool convertRealTypePointField(
 	iOstream& os,
@@ -218,8 +184,6 @@ bool addUndstrcuturedGridField(
 	realx3* 	position,
 	IncludeMaskType includeMask)
 {
-	
-	
 
 	auto [iFirst, iLast] = includeMask.activeRange();
 
@@ -380,7 +344,9 @@ bool convertTimeFolderPointFields(
 
 		if( fieldHeader.headerOk(true) )
 		{
-			convertInt32PointField(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int32>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int64>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int8>(vtk(), fieldHeader, pStruct);
 			convertRealTypePointField(vtk(), fieldHeader, pStruct);
 			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
 		}
@@ -453,7 +419,9 @@ bool convertTimeFolderPointFieldsSelected(
 
 		if( fieldHeader.headerOk(true) )
 		{
-			convertIntTypesPointField(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int32>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int64>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int8>(vtk(), fieldHeader, pStruct);
 			convertRealTypePointField(vtk(), fieldHeader, pStruct);
 			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
 		}
