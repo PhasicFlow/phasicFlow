@@ -23,6 +23,25 @@ Licence:
 #include "dictionary.hpp"
 #include "vocabs.hpp"
 
+
+bool pFlow::Time::readDictionary(const dictionary& dict)
+{
+	auto wF = toUpper(dict.getValOrSet<word>("writeFormat", "ASCII"));
+
+	if(wF == "ASCII") 
+		outFormatBinary_ = false;
+	else if(wF == "BINARY")
+		outFormatBinary_ = true;
+	else
+	{
+		fatalErrorInFunction<<
+		"Invalid writeFormat in file "<< dict.name()<<endl;
+		return false;
+	}
+
+	return true;
+}
+
 pFlow::Time::Time
 (
 	repository* owner,
@@ -45,6 +64,10 @@ pFlow::Time::Time
 	)
 {
 	
+	if(!readDictionary(setiingsDict))
+	{
+		fatalExit;
+	}
 }
 
 pFlow::Time::Time( 
@@ -75,7 +98,10 @@ pFlow::Time::Time(
 		this
 	)
 {
-	
+	if(!readDictionary(setiingsDict))
+	{
+		fatalExit;
+	}
 }
 
 bool pFlow::Time::write

@@ -49,6 +49,9 @@ protected:
 		// object type read from file 
 		word objectType_;
 
+		/// file format read from file 
+		word fileFormat_ = "ASCII";
+
 	//// - methods 
 
 		// - input file stream
@@ -82,6 +85,10 @@ public:
 
 	// - path to file name 
 	fileSystem path() const;
+
+	bool outFileBinary()const;
+
+	bool inFileBinary()const;
 
 	// - should be used for read operations 
 	//   check if the file exist,

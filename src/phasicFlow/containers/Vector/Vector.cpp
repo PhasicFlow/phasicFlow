@@ -28,58 +28,69 @@ pFlow::Vector<T, Allocator>::Vector(iIstream& is)
 template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::readVector
 (
-	iIstream& is
+	iIstream& is,
+	size_t len
 )
 {
-	this->clear();
+	
 
-	is.fatalCheck(FUNCTION_NAME);
-
-	token firstToken(is);
-
-	T val{};
-	if( firstToken.isPunctuation() ) // start of vector 
+	if(is.isBinary() && !std::is_same_v<T,word>)
 	{
-		if(firstToken != token::BEGIN_LIST)
+		this->resize(len);
+		is.read(reinterpret_cast<char*>(this->data()), this->size()*sizeof(T));	
+	}
+	else
+	{
+		this->clear();
+		is.fatalCheck(FUNCTION_NAME);
+
+		token firstToken(is);
+
+		T val{};
+		if( firstToken.isPunctuation() ) // start of vector 
+		{
+			if(firstToken != token::BEGIN_LIST)
+			{
+				warningInFunction
+				<< "expected token "<< token::BEGIN_LIST 
+				<< " but found "<< firstToken ;
+				return false;
+
+			}
+
+			token lastToken(is);
+			
+			
+			is.fatalCheck(FUNCTION_NAME);
+			
+			while 
+				( !(
+						lastToken.isPunctuation()
+	             	&& lastToken == token::END_LIST
+	             	 
+	             	) 
+	            )
+			{
+
+				is.putBack(lastToken);
+				
+				is >> val;
+				this->push_back(val);
+				
+				is >> lastToken;
+				is.fatalCheck(FUNCTION_NAME);
+			}
+
+		} else
 		{
 			warningInFunction
 			<< "expected token "<< token::BEGIN_LIST 
 			<< " but found "<< firstToken ;
 			return false;
-
 		}
-
-		token lastToken(is);
-		
-		
-		is.fatalCheck(FUNCTION_NAME);
-		
-		while 
-			( !(
-					lastToken.isPunctuation()
-             	&& lastToken == token::END_LIST
-             	 
-             	) 
-            )
-		{
-
-			is.putBack(lastToken);
-			
-			is >> val;
-			this->push_back(val);
-			
-			is >> lastToken;
-			is.fatalCheck(FUNCTION_NAME);
-		}
-
-	} else
-	{
-		warningInFunction
-		<< "expected token "<< token::BEGIN_LIST 
-		<< " but found "<< firstToken ;
-		return false;
-
 	}
+
+	
 
 	return true;
 }
@@ -91,30 +102,35 @@ bool pFlow::Vector<T, Allocator>::writeVector
 	iOstream& os
 ) const
 {
-
-	
-	auto len = size();
-	auto stride  = getVectorStride(len);
-
 	// start of 
-	os << token::BEGIN_LIST;
-	label i = 0;
-	while( i<len )
+	if( os.isBinary() && !std::is_same_v<T,word>)
+	{
+		os.write(reinterpret_cast<const char*>(this->data()), this->size()*sizeof(T));
+	}
+	else
 	{
 
-		os << this->operator[](i++);
-		for(label j=0; j<stride-1 && i<len; j++ )
+		auto len = size();
+		auto stride  = getVectorStride(len);
+		os << token::BEGIN_LIST;
+		label i = 0;
+		while( i<len )
 		{
-			os << token::SPACE << this->operator[](i++);	
+
+			os << this->operator[](i++);
+			for(label j=0; j<stride-1 && i<len; j++ )
+			{
+				os << token::SPACE << this->operator[](i++);	
+			}
+
+		 	if(i<len)
+		 		os<< token::NL;
 		}
+	    
+	    os << token::END_LIST;
 
-	 	if(i<len)
-	 		os<< token::NL;
+	    os.check(FUNCTION_NAME);
 	}
-    
-    os << token::END_LIST;
-
-    os.check(FUNCTION_NAME);
 
     return true;
 }
@@ -195,6 +211,26 @@ bool pFlow::Vector<T, Allocator>::deleteElement
 	}
 	else
 		return false;
+}
+
+template<typename T, typename Allocator>
+void pFlow::Vector<T, Allocator>::sortItems(
+	const int32IndexContainer& indices)
+{
+	if(indices.size() == 0)
+	{
+		this->resize(0);
+		return;
+	}
+	size_t newSize = indices.size();
+	auto hIndices = indices.hostView();
+	VectorType sortedVec(name(), capacity(), newSize, RESERVE());
+	
+	ForAll(i, hIndices)
+	{
+		sortedVec[i] = vectorType::operator[](i); 
+	}
+	*this = std::move(sortedVec);
 }
 
 template<typename T, typename Allocator>

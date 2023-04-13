@@ -4,6 +4,7 @@
 \* ------------------------------------------------------------------------- */ 
 objectName particleInsertion;
 objectType dicrionary;
+fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
 // is insertion active?

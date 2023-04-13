@@ -24,7 +24,8 @@ Licence:
 #include "setFieldList.hpp"
 #include "error.hpp"
 #include "iOstream.hpp"
-#include "Time.hpp"
+//#include "Time.hpp"
+#include "mortonIndexing.hpp"
 
 FUNCTION_H
 bool pFlow::pointStructure::evaluatePointStructure()
@@ -83,6 +84,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer>
 		return makeUnique<int32IndexContainer>(
 			activeRange_.second,
 			activeRange_.second+numNewPoints);
+
 	}
 
 	// second, check if there is space at the beginning
@@ -230,6 +232,55 @@ bool pFlow::pointStructure::allActive()const
 	return numActivePoints_ == numPoints_;
 }
 
+FUNCTION_H
+bool pFlow::pointStructure::mortonSortPoints(const box& domain, real dx)
+{
+	if( !getSortedIndex(
+		domain, 
+		dx, 
+		activeRange_,
+		pointPosition_.deviceVectorAll(),
+		pointFlag_.deviceVectorAll(),
+		mortonSortedIndex_) )
+	{
+		fatalErrorInFunction<<"failed to perform morton sorting!"<<endl;
+		return false;
+	}
+
+	pointPosition_.sortItems(mortonSortedIndex_);
+	pointFlag_.sortItems(mortonSortedIndex_);
+
+	auto oldSize 			= size();
+	auto oldCapacity 	= capacity();
+	auto oldRange 		= activeRange();
+
+	// update size, range, capacity
+	setNumMaxPoints();
+	activeRange_ = {0, static_cast<int>(mortonSortedIndex_.size())};
+	numActivePoints_ = mortonSortedIndex_.size();
+
+	eventMessage msg(eventMessage::REARRANGE);
+
+	if(oldSize != size() )
+	{
+		msg.add(eventMessage::SIZE_CHANGED);
+	}
+
+	if(oldCapacity != capacity())
+	{
+		msg.add(eventMessage::CAP_CHANGED);
+	}
+
+	if( oldRange != activeRange_)
+	{
+		msg.add(eventMessage::RANGE_CHANGED);
+	}
+
+	// notify all the registered objects except the exclusionList 
+	if( !this->notify(msg) ) return false;
+
+	return true;
+}
 
 FUNCTION_H
 size_t pFlow::pointStructure::markDeleteOutOfBox(const box& domain)
@@ -305,7 +356,6 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 )
 {
 
-
 	auto numNew = pos.size();
 	if( numNew==0)
 	{
@@ -334,8 +384,6 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 		static_cast<int8>(PointFlag::ACTIVE))
 		)return nullptr;
 
-
-
 	setNumMaxPoints();
 	auto minInd = newPointsPtr().min();
 	auto maxInd = newPointsPtr().max();
@@ -360,8 +408,8 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 	}
 
 	// changes the active rage based on the new inserted points 
-	activeRange_ = { min(activeRange_.first, minInd ),
-					max(activeRange_.second, maxInd+1)};
+	activeRange_ = { static_cast<int>(min(activeRange_.first, minInd )),
+					 static_cast<int>(max(activeRange_.second, maxInd+1))};
 
 	numActivePoints_ += numNew;
 
@@ -401,7 +449,7 @@ bool pFlow::pointStructure::readPointStructure
 		return false;	
 	}
 
-	if(! pointFlag_.read(is))
+	if(! pointFlag_.read(is, true))
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
 		"Error in reading pointFlag in pointStructure \n";

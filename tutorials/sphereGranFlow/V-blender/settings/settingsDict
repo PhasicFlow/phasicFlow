@@ -4,7 +4,8 @@
 \* ------------------------------------------------------------------------- */  
 objectName 	settingsDict;
 objectType 	dictionary;
-/* ------------------------------------------------------------------------- */
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
 run 		rotatingVblender;
 
@@ -39,6 +40,8 @@ domain
 
 // integration method
 integrationMethod 	AdamsBashforth2;
+
+writeFormat			ascii;
 
 // report timers?
 timersReport 		Yes;

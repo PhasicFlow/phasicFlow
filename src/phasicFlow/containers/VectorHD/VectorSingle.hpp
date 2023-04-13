@@ -28,6 +28,8 @@ Licence:
 #include "Vector.hpp"
 #include "indexContainer.hpp"
 
+#include "streams.hpp"
+
 #include "KokkosTypes.hpp"
 #include "ViewAlgorithms.hpp"
 
@@ -106,7 +108,7 @@ protected:
 	// use actualCap = true only for reserve
 	INLINE_FUNCTION_H void changeSize(size_t n, bool actualCap=false)
 	{
-		if(n >= capacity_ )
+		if(n > capacity_ )
 		{
 			if(actualCap)
 				capacity_ = n;
@@ -557,6 +559,41 @@ public:
 		}
 
 		INLINE_FUNCTION_H
+		void sortItems(const int32IndexContainer& indices)
+		{
+			if(indices.size() == 0)
+			{
+				setSize(0);
+				return;
+			}
+			
+			size_t 		newSize = indices.size();
+			viewType 	sortedView("sortedView", newSize);
+
+			using policy = Kokkos::RangePolicy<
+			execution_space,
+			Kokkos::IndexType<int32> >;
+
+			auto d_indices = indices.deviceView();
+			auto d_view = view_;
+			Kokkos::parallel_for(
+				"sortItems",
+				newSize, 
+				LAMBDA_HD(int32 i){	
+					sortedView(i) = d_view(d_indices(i));
+				});
+
+			Kokkos::fence();
+
+			setSize(newSize);
+
+			copy(deviceVector(), sortedView);
+			
+			return;
+
+		}
+
+		INLINE_FUNCTION_H
 		bool insertSetElement(const int32IndexContainer& indices, const Vector<T>& vals)
 		{
 
@@ -565,7 +602,8 @@ public:
 			if(indices.size() != vals.size())return false;
 
 			auto maxInd = indices.max(); 
-			
+			/*output<<"maxInd "<< maxInd<<endl;
+			output<<"size() "<< size()<<endl;*/
 			if(this->empty() || maxInd > size()-1 )
 			{
 				resize(maxInd+1);
@@ -707,7 +745,10 @@ public:
 			void>::type
 		push_back(const T& val)
 		{
-			if(size_ == capacity_) changeSize(capacity_);
+			if(size_ == capacity_) 
+			{
+				changeSize(evalCapacity(capacity_), true);
+			}
 			data()[size_++] = val;
 			subViewUpdated_ = false;
 		}
@@ -789,14 +830,22 @@ public:
 	//// - IO operations
 
 		FUNCTION_H
-		bool read(iIstream& is)
+		bool readVector(
+			iIstream& is,
+			size_t len=0)
 		{
 			Vector<T> vecFromFile;
-			if( !vecFromFile.read(is) ) return false;
+			if( !vecFromFile.readVector(is,len) ) return false;
 
 			this->assign(vecFromFile);
 
 			return true;
+		}
+
+		FUNCTION_H
+		bool read(iIstream& is)
+		{
+			return readVector(is);
 		}
 
 		FUNCTION_H

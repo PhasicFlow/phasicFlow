@@ -31,12 +31,12 @@ Licence:
 namespace pFlow::PFtoVTK
 {
 
-template<typename IncludeMaskType>
-bool addInt64PointField(
+template<typename IntType, typename IncludeMaskType>
+bool addIntPointField(
 	iOstream& 	os,
 	word 		fieldName,
 	int32 		numActivePoints,
-	int64* 		field,
+	IntType* 		field,
 	IncludeMaskType includeMask );
 
 template<typename IncludeMaskType>
@@ -76,45 +76,45 @@ bool checkFieldType(word objectType)
 	
 }
 
-bool convertIntTypesPointField(
+template<typename T>
+bool convertIntPointField
+(
 	iOstream& os,
 	const IOfileHeader& header,
-	const pointStructure& pStruct )
+	const pointStructure& pStruct
+)
 {
+
+	using PointFieldType = pointField<VectorSingle, T, HostSpace>;
+
 	word objectType = header.objectType();
 
-	if( !(checkFieldType<int8>(objectType)  ||
-		checkFieldType<int16>(objectType) 	||
-		checkFieldType<int32>(objectType) 	||
-		checkFieldType<int64>(objectType) 	||
-		checkFieldType<uint32>(objectType) 	||
-		checkFieldType<label>(objectType))
-		)
+	if(!checkFieldType<T>(objectType))
 	{
 		return false;
 	}
 
-	auto objField = IOobject::make<int64PointField_H>
+	auto objField = IOobject::make<PointFieldType>
 	(
 		header,
 		pStruct,
-		static_cast<int64>(0)
+		static_cast<T>(0)
 	);
 
-	auto& Field = objField().getObject<int64PointField_H>();
+	auto& Field = objField().template getObject<PointFieldType>();
 
-	int64* data = Field.hostVectorAll().data();
+	T* data = Field.deviceVectorAll().data();
 	
 	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk.\n";
 
-	return addInt64PointField(
+	return addIntPointField(
 		os,
 		header.objectName(),
 		pStruct.numActive(),
 		data,
 		pStruct.activePointsMaskH() );
-
 }
+
 
 bool convertRealTypePointField(
 	iOstream& os,
@@ -184,8 +184,6 @@ bool addUndstrcuturedGridField(
 	realx3* 	position,
 	IncludeMaskType includeMask)
 {
-	
-	
 
 	auto [iFirst, iLast] = includeMask.activeRange();
 
@@ -219,12 +217,12 @@ bool addUndstrcuturedGridField(
 }
 
 
-template<typename IncludeMaskType>
-bool addInt64PointField(
+template<typename IntType, typename IncludeMaskType>
+bool addIntPointField(
 	iOstream& 	os,
 	word 		fieldName,
 	int32 		numActivePoints,
-	int64* 		field,
+	IntType* 		field,
 	IncludeMaskType includeMask )
 {
 	if(numActivePoints==0) return true;
@@ -346,7 +344,9 @@ bool convertTimeFolderPointFields(
 
 		if( fieldHeader.headerOk(true) )
 		{
-			convertIntTypesPointField(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int32>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int64>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int8>(vtk(), fieldHeader, pStruct);
 			convertRealTypePointField(vtk(), fieldHeader, pStruct);
 			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
 		}
@@ -419,7 +419,9 @@ bool convertTimeFolderPointFieldsSelected(
 
 		if( fieldHeader.headerOk(true) )
 		{
-			convertIntTypesPointField(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int32>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int64>(vtk(), fieldHeader, pStruct);
+			convertIntPointField<int8>(vtk(), fieldHeader, pStruct);
 			convertRealTypePointField(vtk(), fieldHeader, pStruct);
 			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
 		}

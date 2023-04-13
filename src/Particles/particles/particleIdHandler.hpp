@@ -32,39 +32,8 @@ class particleIdHandler
 protected:
 	int32 nextId_=0;
 public:
-	particleIdHandler(int32PointField_HD & id)
-	{
-		int32 maxID = maxActive<DeviceSide>(id);
-
-		if( maxID != -1 	 && id.size() == 0 ) 
-		{
-			nextId_ = 0;
-		}
-		else if( maxID == -1 && id.size()>0 )
-		{
-			nextId_ = 0; 
-			id.modifyOnHost();
-
-			ForAll(i,id)
-			{
-				if(id.isActive(i))
-				{
-					id[i] = getNextId();
-				}
-			}
-
-			id.syncViews();
-		}
-		else if( maxID >= static_cast<int32>(id.size()) )
-		{
-			nextId_ = maxID + 1;
-		}
-		else
-		{
-			nextId_ = id.size();
-		}
-	}
-
+	particleIdHandler(int32PointField_HD & id);
+	
 	int32 getNextId()
 	{
 		return nextId_++;

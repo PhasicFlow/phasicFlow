@@ -102,6 +102,11 @@ public:
         //- Write double
         virtual iOstream& write(const double val) override;
 
+        /// Write a block of binray data
+        iOstream& write(
+            const char* binaryData, 
+            std::streamsize count) override;
+
         // - append token to the stream
         virtual void append(const token& tok);
         

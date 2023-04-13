@@ -128,7 +128,7 @@ protected:
 	// use actualCap = true only for reserve
 	INLINE_FUNCTION_H void changeSize(size_t n, bool actualCap=false)
 	{
-		if(n >= capacity_ )
+		if(n > capacity_ )
 		{
 			if(actualCap)
 				capacity_ = n;
@@ -546,6 +546,36 @@ public:
 		}
 
 		INLINE_FUNCTION_H
+		void sortItems(const int32IndexContainer& indices)
+		{
+			if(indices.size() == 0)
+			{
+				setSize(0);
+				return;
+			}
+			size_t newSize = indices.size();
+
+			deviceViewType 	sortedView("sortedView", newSize);
+			auto dVec = deviceVectorAll();
+
+			auto d_indices = indices.deviceView();
+			
+			Kokkos::parallel_for(
+				"sortItems",
+				newSize,
+				LAMBDA_HD(int32 i){
+					sortedView[i] = dVec[d_indices[i]];
+				}
+				);
+			
+			Kokkos::fence();
+			setSize(newSize);
+			copy(deviceVector(), sortedView);
+			modifyOnDevice();
+			syncViews();
+		}
+
+		INLINE_FUNCTION_H
 		bool insertSetElement(const int32IndexContainer& indices, const T& val)
 		{
 			if(indices.size() == 0)return true;
@@ -744,7 +774,11 @@ public:
 			syncToHost();
 			modifyOnHost();
 			
-			if(size_ == capacity_) changeSize(capacity_);
+			if(size_ == capacity_) 
+			{
+				changeSize(evalCapacity(capacity_), true);
+
+			}
 			data()[size_++] = val;
 			subViewsUpdated_ = false;
 			
@@ -898,14 +932,22 @@ public:
 
 	//// - IO operations
 		FUNCTION_H
-		bool read(iIstream& is)
+		bool readVector(
+			iIstream& is,
+			size_t len=0)
 		{
 			Vector<T> vecFromFile;
-			if( !vecFromFile.read(is) ) return false;
+			if( !vecFromFile.readVector(is,len) ) return false;
 			
 			this->assign(vecFromFile);
 
 			return true;
+		}
+
+		FUNCTION_H
+		bool read(iIstream& is)
+		{
+			return readVector(is);
 		}
 
 		FUNCTION_H

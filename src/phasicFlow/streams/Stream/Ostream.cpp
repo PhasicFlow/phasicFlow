@@ -28,10 +28,11 @@ Licence:
 pFlow::Ostream::Ostream
 (
     std::ostream& os,
-    const word& streamName
+    const word& streamName,
+    writeFormat wF
 )
 :
-    iOstream(),
+    iOstream(wF),
     name_(streamName),
     os_(os)
 {
@@ -229,6 +230,29 @@ pFlow::iOstream& pFlow::Ostream::write(const double val)
     setState(os_.rdstate());
     return *this;
 }
+
+pFlow::iOstream& pFlow::Ostream::write
+(
+    const char* binaryData, 
+    std::streamsize count
+)
+{
+    if ( !isBinary() )
+    {
+        fatalErrorInFunction<<"stream format is not binray. Stream name is "<<
+        name()<<'\n';
+        fatalExit;
+    }
+
+    os_ << token::BEGIN_LIST;
+    os_.write(binaryData, count);
+    os_ << token::END_LIST;
+
+    setState(os_.rdstate());
+
+    return *this;
+}
+
 
 
 

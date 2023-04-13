@@ -17,8 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __geometryMotion_hpp__
 #define __geometryMotion_hpp__
 
@@ -29,7 +27,11 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * 	A class that represent surfaces in the simulation and moves surfaces 
+ * based on the MotionModelType. MotionModelType can be any motion model. 
+ * 
+ */
 template<typename MotionModelType>
 class	geometryMotion 
 :
@@ -41,34 +43,34 @@ public:
 
 protected: 
 	
-
+	/// Ref to motion model 
 	MotionModel& 		motionModel_;
 	
-	// motion indext mapped on each surface 
+	/// motion indext mapped on each surface 
 	int32Vector_HD  	motionIndex_;
 
-	// motion index mapped on each triangle 
+	/// motion index mapped on each triangle 
 	int8Vector_HD 		triMotionIndex_; 
 
 	/// motion index mapped on each point 
 	int8Vector_HD		pointMotionIndex_;
 
-	// timer for moveGeometry
+	/// timer for moveGeometry
 	Timer 				moveGeomTimer_;			
 
-	
+	/// determine the motion index of each triangle 
 	bool findMotionIndex();
 	
 public:
 
-	// type info
+	/// Type info
 	TypeInfoTemplate("geometry", MotionModel);
 
-	//// - Constructors
+	// - Constructors
 		
 		geometryMotion(systemControl& control, const property& prop);
 
-		// construct from components 
+		
 		geometryMotion(
 			systemControl& control,
 			const property& prop,
@@ -77,17 +79,16 @@ public:
 			const wordVector& propName,
 			const MotionModel& motionModel);
 
-		// - construct from components and dictionary that contains 
-		//   motionModel
+		/// Construct from components and dictionary that contains 
+		/// motionModel
 		geometryMotion(systemControl& control,
 				 const property& prop,
 				 const dictionary& dict,
 				 const multiTriSurface& triSurface,
 				 const wordVector& motionCompName,
 				 const wordVector& propName);
-		
 
-
+		/// Add virtual constructor 
 		add_vCtor
 		(
 			geometry,
@@ -95,6 +96,7 @@ public:
 			systemControl
 		);
 
+		/// Add virtual constructor 
 		add_vCtor
 		(
 			geometry,
@@ -102,48 +104,47 @@ public:
 			dictionary
 		);
 
-	//// - Methods
+	// - Methods
 
-	auto getModel(real t)const
-	{
-		return motionModel_.getModel(t);
-	}
+		/// Obtain motion model at time t 
+		auto getModel(real t)const
+		{
+			return motionModel_.getModel(t);
+		}
 
-	word motionModelTypeName()const override
-	{
-		return motionModel_.typeName();
-	}
+		/// TypeName / TypeInfo of motion model 
+		word motionModelTypeName()const override
+		{
+			return motionModel_.typeName();
+		}
 
-	const int8Vector_HD& triMotionIndex()const override
-	{
-		return triMotionIndex_;
-	}
+		/// Access to motion model index of triangles 
+		const int8Vector_HD& triMotionIndex()const override
+		{
+			return triMotionIndex_;
+		}
 
-	const int8Vector_HD& pointMotionIndex()const override
-	{
-		return pointMotionIndex_;
-	}
+		/// Access to motion model index of points 
+		const int8Vector_HD& pointMotionIndex()const override
+		{
+			return pointMotionIndex_;
+		}
 
-	// - iterate
-	bool beforeIteration() override { 
-		geometry::beforeIteration();
-		return true;
-	}
+		/// Operations before each iteration 
+		bool beforeIteration() override;
 
-	bool iterate() override ;
+		/// Iterate geometry one time step  
+		bool iterate() override ;
 
-	bool afterIteration() override {
-		geometry::afterIteration();
-		return true;
-	}
+		/// Operations after each iteration 
+		bool afterIteration() override;
 
-
-	bool moveGeometry();
+		/// Move geometry 
+		bool moveGeometry();
 
 };
 
-
-}
+} // pFlow
 
 #include "geometryMotion.cpp"
 

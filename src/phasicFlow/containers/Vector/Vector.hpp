@@ -291,6 +291,8 @@ public:
 		return *this;
 	}
 
+
+
 	const word& name()const
 	{
 		return name_;
@@ -322,6 +324,9 @@ public:
 	// - delete elment with index 
 	//   return false if out of range
 	bool deleteElement(label index);
+
+	/// Sort elements based on the indices
+	void sortItems(const int32IndexContainer& indices);
 
 	// - set or insert new elements into the vector 
 	//   return false if it fails
@@ -369,9 +374,7 @@ public:
 	// from iIstream and free size
 	Vector(iIstream& is);
 
-	//bool readVector(iIstream & is, size_t len);
-
-	bool readVector(iIstream& is);
+	bool readVector(iIstream& is, size_t len=0);
 
 	bool writeVector(iOstream& os) const;
 

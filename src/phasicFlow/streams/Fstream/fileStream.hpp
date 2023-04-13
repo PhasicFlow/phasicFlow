@@ -43,6 +43,8 @@ protected:
 	// - out file stream
 	uniquePtr<std::ofstream> outStream_;
 
+	bool binary_ = false;
+	
 	// - open input file
 	void openInFile(const fileSystem& path);
 	
@@ -56,7 +58,7 @@ public:
 
 	// - Constructors
 
-	fileStream( const fileSystem& path, bool outStream = false);
+	fileStream( const fileSystem& path, bool outStream = false, bool binary = false);
 	
 	fileStream(const fileStream&)= delete;
 

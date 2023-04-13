@@ -60,6 +60,11 @@ bool pFlow::iIstream::peekBack(token& tok)
 bool pFlow::iIstream::findToken( const word & w )
 {
     rewind();
+    return findTokenResume(w);
+}
+
+bool pFlow::iIstream::findTokenResume(const word& w)
+{
     token next;
     bool isFirstToken = true;
 
@@ -73,8 +78,6 @@ bool pFlow::iIstream::findToken( const word & w )
             " at line number "<< lineNumber()<<endl;
             return false;
         }
-
-
 
         if( next.isWord() && isFirstToken)
         {   
@@ -93,6 +96,11 @@ bool pFlow::iIstream::findToken( const word & w )
 bool pFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
 {
     rewind();
+    return findTokenResumeSilent(w,limitLine);      
+}
+
+bool pFlow::iIstream::findTokenResumeSilent( const word & w, int32 limitLine )
+{
     token next;
     bool isFirstToken = true;
 
@@ -115,7 +123,7 @@ bool pFlow::iIstream::findTokenSilent( const word & w, int32 limitLine )
             isFirstToken = false;
     }
 
-    return false;   
+    return false;
 }
 
 bool pFlow::iIstream::findTokenAndNext

@@ -17,44 +17,42 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
+
+#include "particleIdHandler.hpp"
 
 
-#ifndef __oFstream_hpp__
-#define __oFstream_hpp__
 
-
-#include "fileSystem.hpp"
-#include "fileStream.hpp"
-#include "Ostream.hpp"
-
-namespace pFlow
+pFlow::particleIdHandler::particleIdHandler(int32PointField_HD & id)
 {
+	int32 maxID = maxActive<DeviceSide>(id);
 
+	if( maxID != -1 	 && id.size() == 0 )
+	{
+		nextId_ = 0;
+	}
+	else if( maxID == -1 && id.size()>0 )
+	{
 
-class oFstream
-:
-	public fileStream,
-	public Ostream
-{
-public:
+		nextId_ = 0; 
+		id.modifyOnHost();
 
-	// Constructor
-	oFstream (const fileSystem& path, bool binary = false);
+		ForAll(i,id)
+		{
+			if(id.isActive(i))
+			{
+				id[i] = getNextId();	
+			}
+		}
 
-	// no copy constructor
-	oFstream( const oFstream& src) = delete;
-
-	// no assignment
-	oFstream& operator = (const oFstream& rhs) = delete;
-
-	// Destructor
-	virtual ~oFstream() = default;
-
-};
-
+		id.syncViews();
+	}
+	else if( maxID >= static_cast<int32>(id.size()) )
+	{
+		nextId_ = maxID + 1;
+	}
+	else
+	{
+		nextId_ = id.size();
+	}
 }
 
-
-#endif

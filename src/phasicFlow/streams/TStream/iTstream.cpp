@@ -302,7 +302,15 @@ pFlow::iIstream& pFlow::iTstream::read
     return *this;
 }
 
-
+pFlow::iIstream& pFlow::iTstream::read
+(
+    char* buffer, 
+    std::streamsize count
+)
+{
+    notImplementedFunction;
+    return *this;
+}
 
 void pFlow::iTstream::rewind()
 {

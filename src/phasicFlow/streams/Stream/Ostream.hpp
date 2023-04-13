@@ -46,7 +46,7 @@ public:
 
     // Constructors
     
-    Ostream ( std::ostream& os, const word& streamName);
+    Ostream ( std::ostream& os, const word& streamName, writeFormat wf = ASCII);
 
     //- no copy construct 
     Ostream(const Ostream&) = delete;
@@ -75,79 +75,80 @@ public:
 
         //- Write token to stream or otherwise handle it.
         //  return false if the token type was not handled by this method
-        virtual bool write(const token& tok)override;
+        bool write(const token& tok)override;
 
         //- Write character
-        virtual iOstream& write(const char c)override;
+        iOstream& write(const char c)override;
 
         //- Write character string
-        virtual iOstream& write(const char* str)override;
+        iOstream& write(const char* str)override;
 
         //- Write word
-        virtual iOstream& write(const word& str)override;
+        iOstream& write(const word& str)override;
     
         //- Write std::string surrounded by quotes.
         //  Optional write without quotes.
-        virtual iOstream& writeQuoted ( const word& str, const bool quoted=true )override;
+        iOstream& writeQuoted ( const word& str, const bool quoted=true ) override;
 
         //- Write int64
-        virtual iOstream& write(const int64 val) override;
+        iOstream& write(const int64 val) override;
 
         //- Write int32
-        virtual iOstream& write(const int32 val) override;
-
+        iOstream& write(const int32 val) override;
 
         //- Write label
-        virtual iOstream& write(const label val) override;
+        iOstream& write(const label val) override;
 
         //- Write uint32
-        virtual iOstream& write(const uint32 val) override;
+        iOstream& write(const uint32 val) override;
 
         //- Write uint16
-        virtual iOstream& write(const uint16 val) override;
+        iOstream& write(const uint16 val) override;
 
         //- Write float
-        virtual iOstream& write(const float val) override;
+        iOstream& write(const float val) override;
 
         //- Write double
-        virtual iOstream& write(const double val) override;
+        iOstream& write(const double val) override;
+
+        /// Write a block of binray data 
+        iOstream& write(const char* binaryData, std::streamsize count) override;
 
         //- Add indentation characters
-        virtual void indent();
-
+        void indent() override;
 
         //- Set stream flags
-        virtual ios_base::fmtflags flags(const ios_base::fmtflags f);
+        ios_base::fmtflags flags(const ios_base::fmtflags f) override;
 
         //- Flush stream
-        virtual void flush();
+        void flush() override;
 
         //- Add newline and flush stream
-        virtual void endl();
+        void endl() override;
 
         //- Get the current padding character
-        virtual char fill() const;
+        char fill() const override;
 
         //- Set padding character for formatted field up to field width
         //  \return previous padding character
-        virtual char fill(const char fillch);
+        char fill(const char fillch) override;
 
         //- Get width of output field
-        virtual int width() const;
+        int width() const override;
 
         //- Set width of output field
         //  \return previous width
-        virtual int width(const int w);
+        int width(const int w) override;
 
         //- Get precision of output field
-        virtual int precision() const;
+        int precision() const override;
 
         //- Set precision of output field
         //  return old precision
-        virtual int precision(const int p);
+        int precision(const int p) override;
 
         //- Access to underlying std::ostream
-        virtual std::ostream& stdStream()
+        virtual std::ostream& stdStream() 
         {
             return os_;
         }

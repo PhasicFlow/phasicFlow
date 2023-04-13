@@ -44,11 +44,16 @@ class Time
 
 protected:
 
+	bool 					outFormatBinary_ = false;
+
 	// - geometry folder/repository 
 	repository 		geometry_;
 
 	// - integration folder/repository 
 	repository 		integration_;
+
+
+	bool readDictionary(const dictionary& dict);
 
 public:
 
@@ -90,6 +95,13 @@ public:
 		{
 			return integration_;
 		}
+		
+		/// Write to the file with binary format?
+		bool outFileBinary()const override
+		{
+			return outFormatBinary_;
+		}
+
 		// override the base write to manage write operation 
 		// based on the valid write time intervals 
 		virtual bool write(bool verbose = false) const;

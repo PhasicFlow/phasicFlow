@@ -4,7 +4,8 @@
 \* ------------------------------------------------------------------------- */  
 objectName 	geometryDict;
 objectType 	dictionary;
-/* ------------------------------------------------------------------------- */
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
 
 // motion model: all surfaces are fixed
 motionModel rotatingAxisMotion; 

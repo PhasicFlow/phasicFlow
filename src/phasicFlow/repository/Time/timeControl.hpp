@@ -74,9 +74,13 @@ protected:
 
 	real 	writeTime_ = 0; // for managedExternamly
 
-	realStridedRange  timersReportInterval_;
+	realStridedRange  	timersReportInterval_;
 
-	int32StridedRagne screenReportInterval_ ={0,100};
+	Logical				performSorting_;
+
+	realStridedRange 	sortingInterval_;
+
+	int32StridedRagne 	screenReportInterval_ ={0,100};
 
 	bool outputToFile_ = false;
 
@@ -164,6 +168,8 @@ public:
 	}
 
 	bool timersReportTime()const;
+
+	bool sortTime()const;
 	
 	bool setOutputToFile(real writeTime, const word& timeName)
 	{

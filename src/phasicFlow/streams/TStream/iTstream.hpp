@@ -123,6 +123,8 @@ public:
         //- Read a doubleScalar
         virtual iIstream& read(double&) override;
 
+        iIstream& read(char* buffer, std::streamsize count) override;
+
         // - Rewind the stream so that it may be read again
         virtual void rewind();
 

@@ -17,44 +17,5 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
-
-#ifndef __oFstream_hpp__
-#define __oFstream_hpp__
-
-
-#include "fileSystem.hpp"
-#include "fileStream.hpp"
-#include "Ostream.hpp"
-
-namespace pFlow
-{
-
-
-class oFstream
-:
-	public fileStream,
-	public Ostream
-{
-public:
-
-	// Constructor
-	oFstream (const fileSystem& path, bool binary = false);
-
-	// no copy constructor
-	oFstream( const oFstream& src) = delete;
-
-	// no assignment
-	oFstream& operator = (const oFstream& rhs) = delete;
-
-	// Destructor
-	virtual ~oFstream() = default;
-
-};
-
-}
-
-
-#endif
+#include "cells.hpp"

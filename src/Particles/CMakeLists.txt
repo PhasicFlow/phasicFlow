@@ -2,6 +2,7 @@
 set(SourceFiles 
 dynamicPointStructure/dynamicPointStructure.cpp
 particles/particles.cpp
+particles/particleIdHandler.cpp
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 Insertion/shapeMixture/shapeMixture.cpp

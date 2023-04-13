@@ -82,11 +82,8 @@ bool pFlow::Field<VectorField, T, PropType>::readNonUniform
 		return false;	
 	}
 
-	this->clear();
-	VectorType::read(is);
-	
+	VectorType::readVector(is, flen);
 	is.readEndStatement("readField");
-
 	if(  this->size() != flen )
 	{
 		ioErrorInFile( is.name(), is.lineNumber() ) <<
@@ -94,6 +91,7 @@ bool pFlow::Field<VectorField, T, PropType>::readNonUniform
 		this->size() << " elements in file "<< is.name() <<endl;
 		return false; 
 	}
+		
 
 	return true;	
 }
@@ -104,10 +102,18 @@ bool pFlow::Field<VectorField, T, PropType>::readField
 (
 	iIstream& is,
 	const size_t len,
+	bool resume,
 	bool readLength
 )
 {
-	if( !is.findToken(fieldKey_) )
+	
+	bool tokenFound;
+	if( resume )
+		tokenFound = is.findTokenResume(fieldKey_);
+	else
+		tokenFound = is.findToken(fieldKey_);
+
+	if( !tokenFound )
 	{
 		ioErrorInFile( is.name(), is.lineNumber() ) <<
 		" error in searching for filedkey " << fieldKey_<<endl;
@@ -152,19 +158,25 @@ bool pFlow::Field<VectorField, T, PropType>::readField
 template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::readField
 (
-	iIstream& is
+	iIstream& is,
+	bool resume
 )
 {
-	return readField(is, 0, true);
+	return readField(is, 0, resume ,true);
 }
 
 
 template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::writeField(iOstream& os)const
 {
+
 	os.writeWordKeyword(fieldKey_) << nonUniform__<<endl;
 	os<< this->size()<<endl;
+	
 	VectorType::write(os);
+	
 	os.endEntry();
+
 	return true;
 }
+

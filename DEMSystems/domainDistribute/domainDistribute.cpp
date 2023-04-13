@@ -52,11 +52,13 @@ bool pFlow::domainDistribute::locateParticles(
 	
 	range activeRange = mask.activeRange();
 
+
 	for(int32 di=0; di<numDomains_; di++)
 	{
 		particlesInDomains_[di].clear();
 	}
 
+	
 	for(int32 i=activeRange.first; i<activeRange.second; i++)
 	{
 		if(mask(i))
@@ -75,8 +77,6 @@ bool pFlow::domainDistribute::locateParticles(
 	{
 		numParInDomain_[di] = particlesInDomains_[di].size();
 	}
-
-	output<<" numParInDomain_ "<< numParInDomain_<<endl;
 
 	return true;
 }
