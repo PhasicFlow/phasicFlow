@@ -1,5 +1,5 @@
 <map id="interactionBase" name="interactionBase">
 <area shape="rect" id="node1" title=" " alt="" coords="39,95,163,121"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1geometry.html" title=" " alt="" coords="5,5,91,32"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1geometry.html" title="Base class for geometry for managing tri&#45;surfaces, geometry motion, and surface physical properties." alt="" coords="5,5,91,32"/>
 <area shape="rect" id="node3" href="$classpFlow_1_1particles.html" title=" " alt="" coords="115,5,194,32"/>
 </map>

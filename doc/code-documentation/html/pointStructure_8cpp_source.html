@@ -130,489 +130,537 @@ $(document).ready(function(){initNavTree('pointStructure_8cpp_source.html',''); 
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="setFieldList_8hpp.html">setFieldList.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="error_8hpp.html">error.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iOstream_8hpp.html">iOstream.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Time_8hpp.html">Time.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a78f7c96daeb567a221cd382f8e23f9ae">   30</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a78f7c96daeb567a221cd382f8e23f9ae">pFlow::pointStructure::evaluatePointStructure</a>()</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1pointStructure.html#ae2cb8869572656a6734c3c2806f5b320">pointFlag_</a>.<a class="code" href="classpFlow_1_1VectorDual.html#a334c2560412a3bc4fc1c215a77a48337">size</a>() != <a class="code" href="classpFlow_1_1pointStructure.html#a8ef76d271b8ab8c8b4f3af04f17e6f97">pointPosition_</a>.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>())</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="stringliteral">&quot;number of elements in pointFlag and pointPosition is not equal \n&quot;</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">setNumMaxPoints</a>();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> minActive, <a class="code" href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">maxActive</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a0858a722cbea1a0b22d3b90fd4f44e3e">numActivePoints_</a> = <a class="code" href="namespacepFlow_1_1pointStructureKernels.html#a36162ed116ea012f1507b41b7da0060f">pFlow::pointStructureKernels::scanPointFlag</a>(</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        0,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html#a359635c7fac59b5bfc19941fffb5cb34">numPoints_</a>,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a><span class="keyword">&gt;</span>(<a class="code" href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfa33cf1d8ef1d06ee698a7fabf40eb3a7f">pointStructure::ACTIVE</a>),</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html#ae2cb8869572656a6734c3c2806f5b320">pointFlag_</a>.<a class="code" href="classpFlow_1_1VectorDual.html#a36c25b92bd9a293baeda2c764016a27a">deviceVectorAll</a>(),</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        minActive,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">maxActive</a></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        );</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a6c02c190c595dadd863a3ecad6ccf4e6">activeRange_</a> = {minActive, <a class="code" href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">maxActive</a>};  </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">   57</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">pFlow::pointStructure::setNumMaxPoints</a>()</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    maxPoints_ = pointFlag_.capacity();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    numPoints_ = pointFlag_.size();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">   64</a></span>&#160;<a class="code" href="classpFlow_1_1Field.html">pFlow::realx3Field_D</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a>()</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> pointPosition_;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">   70</a></span>&#160;<a class="code" href="classpFlow_1_1Field.html">pFlow::int8Field_HD</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">pFlow::pointStructure::pointFlag</a>()</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> pointFlag_;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr&lt;pFlow::int32IndexContainer&gt;</a> </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43">   76</a></span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43">pFlow::pointStructure::getNewPointsIndices</a>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numNewPoints)<span class="keyword">const</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//#include &quot;Time.hpp&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mortonIndexing_8hpp.html">mortonIndexing.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a78f7c96daeb567a221cd382f8e23f9ae">   31</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a78f7c96daeb567a221cd382f8e23f9ae">pFlow::pointStructure::evaluatePointStructure</a>()</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1pointStructure.html#ae2cb8869572656a6734c3c2806f5b320">pointFlag_</a>.<a class="code" href="classpFlow_1_1VectorDual.html#a334c2560412a3bc4fc1c215a77a48337">size</a>() != <a class="code" href="classpFlow_1_1pointStructure.html#a8ef76d271b8ab8c8b4f3af04f17e6f97">pointPosition_</a>.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>())</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="stringliteral">&quot;number of elements in pointFlag and pointPosition is not equal \n&quot;</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">setNumMaxPoints</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> minActive, <a class="code" href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">maxActive</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a0858a722cbea1a0b22d3b90fd4f44e3e">numActivePoints_</a> = <a class="code" href="namespacepFlow_1_1pointStructureKernels.html#a36162ed116ea012f1507b41b7da0060f">pFlow::pointStructureKernels::scanPointFlag</a>(</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        0,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html#a359635c7fac59b5bfc19941fffb5cb34">numPoints_</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a><span class="keyword">&gt;</span>(<a class="code" href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfa33cf1d8ef1d06ee698a7fabf40eb3a7f">pointStructure::ACTIVE</a>),</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html#ae2cb8869572656a6734c3c2806f5b320">pointFlag_</a>.<a class="code" href="classpFlow_1_1VectorDual.html#a36c25b92bd9a293baeda2c764016a27a">deviceVectorAll</a>(),</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        minActive,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">maxActive</a></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        );</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a6c02c190c595dadd863a3ecad6ccf4e6">activeRange_</a> = {minActive, <a class="code" href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">maxActive</a>};  </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">   58</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">pFlow::pointStructure::setNumMaxPoints</a>()</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    maxPoints_ = pointFlag_.capacity();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    numPoints_ = pointFlag_.size();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">   65</a></span>&#160;<a class="code" href="classpFlow_1_1Field.html">pFlow::realx3Field_D</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a>()</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> pointPosition_;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">   71</a></span>&#160;<a class="code" href="classpFlow_1_1Field.html">pFlow::int8Field_HD</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">pFlow::pointStructure::pointFlag</a>()</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> pointFlag_;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr&lt;pFlow::int32IndexContainer&gt;</a> </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43">   77</a></span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43">pFlow::pointStructure::getNewPointsIndices</a>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numNewPoints)<span class="keyword">const</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span>( capacity() - activeRange_.second &gt;=  numNewPoints )</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">// fill the sequence starting from activeRange_.second-1</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            activeRange_.second,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            activeRange_.second+numNewPoints);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span>( capacity() - activeRange_.second &gt;=  numNewPoints )</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="comment">// fill the sequence starting from activeRange_.second-1</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            activeRange_.second,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            activeRange_.second+numNewPoints);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// second, check if there is space at the beginning</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span>( activeRange_.first &gt;= numNewPoints)</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            0,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            numNewPoints);  </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// otherwise scan the points from first to the end to find empty spaces </span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int32Vector</a> newPoints(</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        numNewPoints,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    newPoints.<a class="code" href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">clear</a>();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numAdded = 0;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a>(i, pointFlag_)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">if</span>(!isActive(i))</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            newPoints.push_back(<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(i));</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            numAdded++;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">if</span>(numAdded == numNewPoints)</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                newPoints.data(),</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                numNewPoints);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">// check if there is space at the end for the remaining of points</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">if</span>( numAdded &lt;numNewPoints &amp;&amp; capacity() - size() &gt;= numNewPoints - numAdded )</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> ind = size();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=numAdded; i&lt;numNewPoints; i++)</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            newPoints.push_back(ind);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            ind++;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            newPoints.data(),</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            numNewPoints);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;<span class="stringliteral">&quot;not enough capacity for inserting particles into the point structure\n&quot;</span>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">  142</a></span>&#160;<a class="code" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a>()</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;:</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="classpFlow_1_1eventSubscriber.html">eventSubscriber</a>(),  </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    pointFlag_(<span class="stringliteral">&quot;pointFlag&quot;</span>, <span class="stringliteral">&quot;pointFlag&quot;</span>, maxPoints_, 0 , <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    pointPosition_(<span class="stringliteral">&quot;pointPosition&quot;</span>, <span class="stringliteral">&quot;pointPosition&quot;</span>, maxPoints_, 0, <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    activeRange_(0,0)</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{}</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<a class="code" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a></div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a684952fa473b1820b5d9e1f85f43919b">  151</a></span>&#160;(</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">int8Vector</a>&amp; flgVec,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; posVec</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;:</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <a class="code" href="classpFlow_1_1eventSubscriber.html">eventSubscriber</a>(),  </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    maxPoints_(posVec.<a class="code" href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">capacity</a>()),</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    pointFlag_(<span class="stringliteral">&quot;pointFlag&quot;</span>, <span class="stringliteral">&quot;pointFlag&quot;</span>, maxPoints_, 0 , <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    pointPosition_(<span class="stringliteral">&quot;pointPosition&quot;</span>, <span class="stringliteral">&quot;pointPosition&quot;</span>, maxPoints_, 0, <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    activeRange_(0,0)</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;{</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    pointFlag_.assign(flgVec);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    pointPosition_.assign(posVec);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">// second, check if there is space at the beginning</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span>( activeRange_.first &gt;= numNewPoints)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            0,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            numNewPoints);  </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// otherwise scan the points from first to the end to find empty spaces </span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int32Vector</a> newPoints(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        numNewPoints,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    newPoints.<a class="code" href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">clear</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numAdded = 0;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a>(i, pointFlag_)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">if</span>(!isActive(i))</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            newPoints.push_back(<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(i));</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            numAdded++;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">if</span>(numAdded == numNewPoints)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                newPoints.data(),</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                numNewPoints);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">// check if there is space at the end for the remaining of points</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span>( numAdded &lt;numNewPoints &amp;&amp; capacity() - size() &gt;= numNewPoints - numAdded )</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> ind = size();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=numAdded; i&lt;numNewPoints; i++)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            newPoints.push_back(ind);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            ind++;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;(</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            newPoints.data(),</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            numNewPoints);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;<span class="stringliteral">&quot;not enough capacity for inserting particles into the point structure\n&quot;</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">  144</a></span>&#160;<a class="code" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a>()</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <a class="code" href="classpFlow_1_1eventSubscriber.html">eventSubscriber</a>(),  </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    pointFlag_(<span class="stringliteral">&quot;pointFlag&quot;</span>, <span class="stringliteral">&quot;pointFlag&quot;</span>, maxPoints_, 0 , <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    pointPosition_(<span class="stringliteral">&quot;pointPosition&quot;</span>, <span class="stringliteral">&quot;pointPosition&quot;</span>, maxPoints_, 0, <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    activeRange_(0,0)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;{}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<a class="code" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a></div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a684952fa473b1820b5d9e1f85f43919b">  153</a></span>&#160;(</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">int8Vector</a>&amp; flgVec,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; posVec</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;)</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="classpFlow_1_1eventSubscriber.html">eventSubscriber</a>(),  </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    maxPoints_(posVec.<a class="code" href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">capacity</a>()),</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    pointFlag_(<span class="stringliteral">&quot;pointFlag&quot;</span>, <span class="stringliteral">&quot;pointFlag&quot;</span>, maxPoints_, 0 , <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    pointPosition_(<span class="stringliteral">&quot;pointPosition&quot;</span>, <span class="stringliteral">&quot;pointPosition&quot;</span>, maxPoints_, 0, <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    activeRange_(0,0)</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;{</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    pointFlag_.assign(flgVec);</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">if</span>( !evaluatePointStructure() )</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    }</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<a class="code" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a></div>
-<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#ab70389f2567e6b6b3e2cf544d0e637d4">  174</a></span>&#160;(</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; posVec</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;:</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <a class="code" href="classpFlow_1_1eventSubscriber.html">eventSubscriber</a>(),  </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    maxPoints_(posVec.<a class="code" href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">capacity</a>()),</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    pointFlag_(<span class="stringliteral">&quot;pointFlag&quot;</span>, <span class="stringliteral">&quot;pointFlag&quot;</span>, maxPoints_, 0 , <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    pointPosition_(<span class="stringliteral">&quot;pointPosition&quot;</span>, <span class="stringliteral">&quot;pointPosition&quot;</span>, maxPoints_, 0, <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    activeRange_(0,0)</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;{</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    pointPosition_.assign(posVec);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    pointPosition_.assign(posVec);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">if</span>( !evaluatePointStructure() )</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<a class="code" href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a></div>
+<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#ab70389f2567e6b6b3e2cf544d0e637d4">  176</a></span>&#160;(</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; posVec</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;:</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <a class="code" href="classpFlow_1_1eventSubscriber.html">eventSubscriber</a>(),  </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    maxPoints_(posVec.<a class="code" href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">capacity</a>()),</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    pointFlag_(<span class="stringliteral">&quot;pointFlag&quot;</span>, <span class="stringliteral">&quot;pointFlag&quot;</span>, maxPoints_, 0 , <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    pointPosition_(<span class="stringliteral">&quot;pointPosition&quot;</span>, <span class="stringliteral">&quot;pointPosition&quot;</span>, maxPoints_, 0, <a class="code" href="structRESERVE.html">RESERVE</a>()),</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    activeRange_(0,0)</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;{</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    pointFlag_.resize(pointPosition_.size(), <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a><span class="keyword">&gt;</span>(<a class="code" href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfa33cf1d8ef1d06ee698a7fabf40eb3a7f">pointStructure::ACTIVE</a>) );</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="comment">//pointFlag_.syncViews();</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">if</span>( !evaluatePointStructure() )</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    }</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">pFlow::realx3Field_D</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">return</span> pointPosition_;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">pFlow::int8Field_HD</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">pFlow::pointStructure::pointFlag</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">return</span> pointFlag_;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">// - size of data structure</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a7fd505d804f671e5714194ca63a9155f">  210</a></span>&#160;<a class="code" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a> <a class="code" href="classpFlow_1_1pointStructure.html#a7fd505d804f671e5714194ca63a9155f">pFlow::pointStructure::size</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">return</span> numPoints_;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#aa7618651ffb027109126be4771bac4cc">  216</a></span>&#160;<a class="code" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a> <a class="code" href="classpFlow_1_1pointStructure.html#aa7618651ffb027109126be4771bac4cc">pFlow::pointStructure::capacity</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">return</span> maxPoints_;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#aa90bf675595664df833d4dfd361b3863">  222</a></span>&#160;<a class="code" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a> <a class="code" href="classpFlow_1_1pointStructure.html#aa90bf675595664df833d4dfd361b3863">pFlow::pointStructure::numActive</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordflow">return</span> numActivePoints_;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a2ce5480679b04413dd607e300cfd1d7b">  228</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a2ce5480679b04413dd607e300cfd1d7b">pFlow::pointStructure::allActive</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> numActivePoints_ == numPoints_;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;}</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda">  235</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda">pFlow::pointStructure::markDeleteOutOfBox</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1box.html">box</a>&amp; domain)</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;{</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordflow">if</span>(numPoints_==0) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> minRange, maxRange;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numMarked = </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <a class="code" href="namespacepFlow_1_1pointStructureKernels.html#a440c2b7765806a499f4248b4adb1f8ee">pFlow::pointStructureKernels::markDeleteOutOfBox</a>(</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        domain,</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        activeRange_.first,</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        activeRange_.second,</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfaae88752b9379248f07e2c3fdc064d998">pointStructure::DELETED</a>,</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        pointPosition_.deviceVectorAll(),</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        pointFlag_.deviceVectorAll(),</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        activePointsMaskD(),</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        minRange, maxRange );</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">if</span>(numMarked)</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    {</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        pointFlag_.modifyOnDevice();</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        pointFlag_.syncViews(); </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    pointPosition_.assign(posVec);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    pointFlag_.resize(pointPosition_.size(), <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a><span class="keyword">&gt;</span>(<a class="code" href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfa33cf1d8ef1d06ee698a7fabf40eb3a7f">pointStructure::ACTIVE</a>) );</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="comment">//pointFlag_.syncViews();</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">if</span>( !evaluatePointStructure() )</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;}</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">pFlow::realx3Field_D</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">return</span> pointPosition_;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;}</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">pFlow::int8Field_HD</a>&amp; <a class="code" href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">pFlow::pointStructure::pointFlag</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">return</span> pointFlag_;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">// - size of data structure</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a7fd505d804f671e5714194ca63a9155f">  212</a></span>&#160;<a class="code" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a> <a class="code" href="classpFlow_1_1pointStructure.html#a7fd505d804f671e5714194ca63a9155f">pFlow::pointStructure::size</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">return</span> numPoints_;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;}</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#aa7618651ffb027109126be4771bac4cc">  218</a></span>&#160;<a class="code" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a> <a class="code" href="classpFlow_1_1pointStructure.html#aa7618651ffb027109126be4771bac4cc">pFlow::pointStructure::capacity</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">return</span> maxPoints_;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#aa90bf675595664df833d4dfd361b3863">  224</a></span>&#160;<a class="code" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a> <a class="code" href="classpFlow_1_1pointStructure.html#aa90bf675595664df833d4dfd361b3863">pFlow::pointStructure::numActive</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordflow">return</span> numActivePoints_;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;}</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a2ce5480679b04413dd607e300cfd1d7b">  230</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a2ce5480679b04413dd607e300cfd1d7b">pFlow::pointStructure::allActive</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">return</span> numActivePoints_ == numPoints_;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a8bf7df9793ef588cc0c3b9c1aea3d2ea">  236</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a8bf7df9793ef588cc0c3b9c1aea3d2ea">pFlow::pointStructure::mortonSortPoints</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1box.html">box</a>&amp; domain, <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dx)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;{</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f">getSortedIndex</a>(</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        domain, </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        dx, </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        activeRange_,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        pointPosition_.deviceVectorAll(),</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        pointFlag_.deviceVectorAll(),</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        mortonSortedIndex_) )</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;<span class="stringliteral">&quot;failed to perform morton sorting!&quot;</span>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    pointPosition_.sortItems(mortonSortedIndex_);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    pointFlag_.sortItems(mortonSortedIndex_);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keyword">auto</span> oldSize            = size();</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keyword">auto</span> oldCapacity    = capacity();</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keyword">auto</span> oldRange       = activeRange();</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">if</span>( numMarked&lt;=numActivePoints_)</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    {</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        numActivePoints_ -= numMarked;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="stringliteral">&quot;number of points marked as delete (&quot;</span>&lt;&lt;numMarked&lt;&lt;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="stringliteral">&quot;) is greater than the activePoints (&quot;</span>&lt;&lt;numActivePoints_&lt;&lt;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="stringliteral">&quot;).\n&quot;</span>;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <a class="code" href="namespacepFlow.html#ad8085fcd475be6bdf841bcdd9b9225ee">range</a> newRange = {minRange, maxRange};</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordflow">if</span>( activeRange_ != newRange )</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        activeRange_ = newRange;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a> msg(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5">eventMessage::RANGE_CHANGED</a>);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="comment">// notify all the registered objects about active range change</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keywordflow">if</span>( !this-&gt;notify(msg) ) </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        {</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>&lt;&lt;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="stringliteral">&quot;something went wrong in notifying registered object about range change. \n&quot;</span>;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        }</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    }   </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">return</span> numMarked;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="comment">// update size, range, capacity</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    setNumMaxPoints();</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    activeRange_ = {0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(mortonSortedIndex_.size())};</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    numActivePoints_ = mortonSortedIndex_.size();</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a> msg(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aae36ef497367232ae09a9439e01165e7d">eventMessage::REARRANGE</a>);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">if</span>(oldSize != size() )</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aac455066f4d2132a3e1dcd414d4db3f7a">eventMessage::SIZE_CHANGED</a>);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">if</span>(oldCapacity != capacity())</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aa110cf5385e827397c5b50cbd59391654">eventMessage::CAP_CHANGED</a>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordflow">if</span>( oldRange != activeRange_)</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5">eventMessage::RANGE_CHANGED</a>);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    }</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="comment">// notify all the registered objects except the exclusionList </span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">if</span>( !this-&gt;notify(msg) ) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;}</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00286"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda">  286</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda">pFlow::pointStructure::markDeleteOutOfBox</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1box.html">box</a>&amp; domain)</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;{</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">if</span>(numPoints_==0) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31">  291</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31">pFlow::pointStructure::updateForDelete</a>()</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;{</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <a class="code" href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a>;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;}</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<a class="code" href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr&lt;pFlow::int32IndexContainer&gt;</a> <a class="code" href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190">pFlow::pointStructure::insertPoints</a></div>
-<div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190">  300</a></span>&#160;(</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; pos,</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1setFieldList.html">setFieldList</a>&amp; setField,</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <a class="code" href="classpFlow_1_1repository.html">repository</a>&amp; owner,</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1List.html">List&lt;eventObserver*&gt;</a>&amp; exclusionList</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;)</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;{</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> minRange, maxRange;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numMarked = </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <a class="code" href="namespacepFlow_1_1pointStructureKernels.html#a440c2b7765806a499f4248b4adb1f8ee">pFlow::pointStructureKernels::markDeleteOutOfBox</a>(</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        domain,</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        activeRange_.first,</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        activeRange_.second,</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfaae88752b9379248f07e2c3fdc064d998">pointStructure::DELETED</a>,</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        pointPosition_.deviceVectorAll(),</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        pointFlag_.deviceVectorAll(),</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        activePointsMaskD(),</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        minRange, maxRange );</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">if</span>(numMarked)</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        pointFlag_.modifyOnDevice();</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        pointFlag_.syncViews(); </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    }</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keyword">auto</span> numNew = pos.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>();</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">if</span>( numNew==0)</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;();</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keyword">auto</span> newPointsPtr = getNewPointsIndices( numNew );</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">if</span>(!newPointsPtr)<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keyword">auto</span> oldSize            = size();</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keyword">auto</span> oldCapacity    = capacity();</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">auto</span> oldRange       = activeRange();</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    tobeInsertedIndex_ = newPointsPtr();</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="comment">// set the position of new points</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordflow">if</span>(!pointPosition_.insertSetElement(</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        newPointsPtr(),</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        pos)</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        )<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordflow">if</span>(!pointFlag_.insertSetElement(</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        newPointsPtr(),</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a><span class="keyword">&gt;</span>(PointFlag::ACTIVE))</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        )<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordflow">if</span>( numMarked&lt;=numActivePoints_)</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        numActivePoints_ -= numMarked;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="stringliteral">&quot;number of points marked as delete (&quot;</span>&lt;&lt;numMarked&lt;&lt;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="stringliteral">&quot;) is greater than the activePoints (&quot;</span>&lt;&lt;numActivePoints_&lt;&lt;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="stringliteral">&quot;).\n&quot;</span>;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> newRange = {minRange, maxRange};</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">if</span>( activeRange_ != newRange )</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        activeRange_ = newRange;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a> msg(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5">eventMessage::RANGE_CHANGED</a>);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="comment">// notify all the registered objects about active range change</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">if</span>( !this-&gt;notify(msg) ) </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>&lt;&lt;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            <span class="stringliteral">&quot;something went wrong in notifying registered object about range change. \n&quot;</span>;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        }</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    }   </div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    setNumMaxPoints();</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keyword">auto</span> minInd = newPointsPtr().min();</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keyword">auto</span> maxInd = newPointsPtr().max();</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <a class="code" href="classpFlow_1_1List.html">List&lt;eventObserver*&gt;</a> localExlusion(exclusionList);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">return</span> numMarked;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;}</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31">  342</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31">pFlow::pointStructure::updateForDelete</a>()</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;{</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <a class="code" href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a>;</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> sfEntry:setField)</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordflow">if</span>(<span class="keywordtype">void</span>* fieldPtr = </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            sfEntry.setPointFieldSelectedAll( </div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                owner, </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                newPointsPtr(), </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                <span class="keyword">false</span> );</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            fieldPtr)</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            localExlusion.push_back( </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                <span class="keyword">static_cast&lt;</span><a class="code" href="classpFlow_1_1eventObserver.html">eventObserver</a>*<span class="keyword">&gt;</span>(fieldPtr)</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                );</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="comment">// changes the active rage based on the new inserted points </span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    activeRange_ = { <a class="code" href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">min</a>(activeRange_.first, minInd ),</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                    <a class="code" href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">max</a>(activeRange_.second, maxInd+1)};</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    numActivePoints_ += numNew;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a> msg(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aaa15c451953b2d2a93403afe786930d0f">eventMessage::INSERT</a>);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordflow">if</span>( oldRange != activeRange_ )</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5">eventMessage::RANGE_CHANGED</a>);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;}</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<a class="code" href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr&lt;pFlow::int32IndexContainer&gt;</a> <a class="code" href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190">pFlow::pointStructure::insertPoints</a></div>
+<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190">  351</a></span>&#160;(</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; pos,</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1setFieldList.html">setFieldList</a>&amp; setField,</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <a class="code" href="classpFlow_1_1repository.html">repository</a>&amp; owner,</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1List.html">List&lt;eventObserver*&gt;</a>&amp; exclusionList</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;)</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;{</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keyword">auto</span> numNew = pos.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>();</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keywordflow">if</span>( numNew==0)</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordflow">return</span> makeUnique&lt;int32IndexContainer&gt;();</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keyword">auto</span> newPointsPtr = getNewPointsIndices( numNew );</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordflow">if</span>(!newPointsPtr)<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keyword">auto</span> oldSize            = size();</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keyword">auto</span> oldCapacity    = capacity();</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keyword">auto</span> oldRange       = activeRange();</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">if</span>( oldSize != size() )</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aac455066f4d2132a3e1dcd414d4db3f7a">eventMessage::SIZE_CHANGED</a>);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <span class="keywordflow">if</span>( oldCapacity != capacity() )</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aa110cf5385e827397c5b50cbd59391654">eventMessage::CAP_CHANGED</a>);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    </div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="comment">// notify all the registered objects except the exclusionList </span></div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordflow">if</span>( !this-&gt;notify(msg, localExlusion) ) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    tobeInsertedIndex_ = newPointsPtr();</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="comment">// set the position of new points</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keywordflow">if</span>(!pointPosition_.insertSetElement(</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        newPointsPtr(),</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        pos)</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        )<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">return</span> newPointsPtr;</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;}</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">if</span>(!pointFlag_.insertSetElement(</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        newPointsPtr(),</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a><span class="keyword">&gt;</span>(PointFlag::ACTIVE))</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        )<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba">pFlow::pointStructure::readPointStructure</a></div>
-<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba">  389</a></span>&#160;(</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;)</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;{</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keyword">auto</span> psCapacity = is.<a class="code" href="classpFlow_1_1iIstream.html#a6b741dd8443f554f5de5b98897f2eb77">lookupDataOrSet</a>(<span class="stringliteral">&quot;pointStructureCapacity&quot;</span>, maxSizeDefault_);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    pointPosition_.reallocate(psCapacity);</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    pointFlag_.reallocate(psCapacity);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordflow">if</span>( !pointPosition_.read(is))</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="stringliteral">&quot;Error in reading pointPosition in pointStructure \n&quot;</span>;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;   </div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="keywordflow">if</span>(! pointFlag_.read(is))</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    {</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="stringliteral">&quot;Error in reading pointFlag in pointStructure \n&quot;</span>;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    }</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    </div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="keywordflow">return</span> evaluatePointStructure();</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;}</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa">pFlow::pointStructure::writePointStructure</a></div>
-<div class="line"><a name="l00417"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa">  417</a></span>&#160;(</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;)<span class="keyword">const</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;{</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    os.<a class="code" href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6">writeWordEntry</a>(<span class="stringliteral">&quot;pointStructureCapacity&quot;</span>, maxPoints_);</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <span class="keywordflow">if</span>(!pointPosition_.write(os))</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    {</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(os.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), os.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        <span class="stringliteral">&quot;error in writing pointPosition to file \n&quot;</span>;</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    }</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    setNumMaxPoints();</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keyword">auto</span> minInd = newPointsPtr().min();</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keyword">auto</span> maxInd = newPointsPtr().max();</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <a class="code" href="classpFlow_1_1List.html">List&lt;eventObserver*&gt;</a> localExlusion(exclusionList);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> sfEntry:setField)</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keywordflow">if</span>(<span class="keywordtype">void</span>* fieldPtr = </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            sfEntry.setPointFieldSelectedAll( </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                owner, </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                newPointsPtr(), </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                <span class="keyword">false</span> );</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            fieldPtr)</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            localExlusion.push_back( </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;                <span class="keyword">static_cast&lt;</span><a class="code" href="classpFlow_1_1eventObserver.html">eventObserver</a>*<span class="keyword">&gt;</span>(fieldPtr)</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                );</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    }</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="comment">// changes the active rage based on the new inserted points </span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    activeRange_ = { <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code" href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">min</a>(activeRange_.first, minInd )),</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                     <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code" href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">max</a>(activeRange_.second, maxInd+1))};</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    numActivePoints_ += numNew;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a> msg(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aaa15c451953b2d2a93403afe786930d0f">eventMessage::INSERT</a>);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keywordflow">if</span>( oldRange != activeRange_ )</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5">eventMessage::RANGE_CHANGED</a>);</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">if</span>( oldSize != size() )</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aac455066f4d2132a3e1dcd414d4db3f7a">eventMessage::SIZE_CHANGED</a>);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keywordflow">if</span>( oldCapacity != capacity() )</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        msg.<a class="code" href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">add</a>(<a class="code" href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aa110cf5385e827397c5b50cbd59391654">eventMessage::CAP_CHANGED</a>);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="comment">// notify all the registered objects except the exclusionList </span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">if</span>( !this-&gt;notify(msg, localExlusion) ) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="keywordflow">if</span>(!pointFlag_.write(os))</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    {</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(os.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), os.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <span class="stringliteral">&quot;error in writing pointFlag to file \n&quot;</span>;</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    }</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;}</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; </div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment">/*pFlow::uniquePtr&lt;pFlow::int32Vector&gt; </span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">pFlow::pointStructure::newPointsIndices(</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment">    int32 numNewPoints</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">)const</span></div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">{</span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">    auto newPointsPtr = makeUnique&lt;int32Vector&gt;(</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">        &quot;pointStructure::newPointsPtr&quot;,</span></div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">        numNewPoints);</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment">    auto&amp; newPoints = newPointsPtr();</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="comment">    // first, check if there is space at the end</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="comment">    if( capacity() - activeRange_.second &gt;=  numNewPoints )</span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">        // fill the sequence starting from activeRange_.second-1</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">        fillSequence(newPoints, activeRange_.second-1);</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment">        return newPointsPtr;</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment">    // second, check if there is space at the beggining</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="comment">    if( activeRange_.first &gt;= numNewPoints)</span></div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="comment">        // fill the sequence starting from 0</span></div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="comment">        fillSequence(newPoints, 0);</span></div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="comment">        return newPointsPtr;</span></div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="comment">    // otherwise scan the points from first to the end to find empty spaces </span></div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="comment">    newPoints.clear();</span></div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="comment">    int32 numAdded = 0;</span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="comment">    ForAll(i, pointFlag_)</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="comment">        if(!isActive(i))</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="comment">            newPoints.push_back(static_cast&lt;int32&gt;(i));</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="comment">            numAdded++;</span></div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="comment">        if(numAdded == numNewPoints)</span></div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="comment">            </span></div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="comment">            return newPointsPtr;</span></div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">    // check if there is space at the end for the remaining of points</span></div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment">    if( capacity() - size() &gt;= numNewPoints - numAdded )</span></div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">        int32 ind = size();</span></div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">        for(int32 i=numAdded; i&lt;numNewPoints; i++)</span></div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">            newPoints.push_back(ind);</span></div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">            ind++;</span></div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">        </span></div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment">        return newPointsPtr;</span></div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">    else</span></div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">        fatalErrorInFunction&lt;&lt;&quot;not enough capacity for inserting particles into the point structure\n&quot;;</span></div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">        return nullptr;</span></div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="comment">    return nullptr;</span></div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="comment">}*/</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="keywordflow">return</span> newPointsPtr;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;}</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160; </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba">pFlow::pointStructure::readPointStructure</a></div>
+<div class="line"><a name="l00437"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba">  437</a></span>&#160;(</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    <a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;)</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;{</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <span class="keyword">auto</span> psCapacity = is.<a class="code" href="classpFlow_1_1iIstream.html#a6b741dd8443f554f5de5b98897f2eb77">lookupDataOrSet</a>(<span class="stringliteral">&quot;pointStructureCapacity&quot;</span>, maxSizeDefault_);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    pointPosition_.reallocate(psCapacity);</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    pointFlag_.reallocate(psCapacity);</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keywordflow">if</span>( !pointPosition_.read(is))</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    {</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        <span class="stringliteral">&quot;Error in reading pointPosition in pointStructure \n&quot;</span>;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;   </div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    }</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keywordflow">if</span>(! pointFlag_.read(is, <span class="keyword">true</span>))</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    {</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        <span class="stringliteral">&quot;Error in reading pointFlag in pointStructure \n&quot;</span>;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    }</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="keywordflow">return</span> evaluatePointStructure();</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;}</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa">pFlow::pointStructure::writePointStructure</a></div>
+<div class="line"><a name="l00465"></a><span class="lineno"><a class="line" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa">  465</a></span>&#160;(</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;)<span class="keyword">const</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;{</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    os.<a class="code" href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6">writeWordEntry</a>(<span class="stringliteral">&quot;pointStructureCapacity&quot;</span>, maxPoints_);</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    <span class="keywordflow">if</span>(!pointPosition_.write(os))</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    {</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(os.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), os.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;        <span class="stringliteral">&quot;error in writing pointPosition to file \n&quot;</span>;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    }</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <span class="keywordflow">if</span>(!pointFlag_.write(os))</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    {</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(os.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), os.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;        <span class="stringliteral">&quot;error in writing pointFlag to file \n&quot;</span>;</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    }</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;}</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; </div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment">/*pFlow::uniquePtr&lt;pFlow::int32Vector&gt; </span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment">pFlow::pointStructure::newPointsIndices(</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment">    int32 numNewPoints</span></div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment">)const</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment">{</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="comment">    </span></div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="comment">    auto newPointsPtr = makeUnique&lt;int32Vector&gt;(</span></div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="comment">        &quot;pointStructure::newPointsPtr&quot;,</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="comment">        numNewPoints);</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">    auto&amp; newPoints = newPointsPtr();</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">    </span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="comment">    // first, check if there is space at the end</span></div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">    if( capacity() - activeRange_.second &gt;=  numNewPoints )</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="comment">        // fill the sequence starting from activeRange_.second-1</span></div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="comment">        fillSequence(newPoints, activeRange_.second-1);</span></div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="comment">        return newPointsPtr;</span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">    // second, check if there is space at the beggining</span></div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment">    if( activeRange_.first &gt;= numNewPoints)</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment">        // fill the sequence starting from 0</span></div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment">        fillSequence(newPoints, 0);</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment">        return newPointsPtr;</span></div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">    // otherwise scan the points from first to the end to find empty spaces </span></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">    newPoints.clear();</span></div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment">    int32 numAdded = 0;</span></div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="comment">    ForAll(i, pointFlag_)</span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment">        if(!isActive(i))</span></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment">            newPoints.push_back(static_cast&lt;int32&gt;(i));</span></div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="comment">            numAdded++;</span></div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="comment">        if(numAdded == numNewPoints)</span></div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;<span class="comment">            </span></div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;<span class="comment">            return newPointsPtr;</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;<span class="comment">    // check if there is space at the end for the remaining of points</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="comment">    if( capacity() - size() &gt;= numNewPoints - numAdded )</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;<span class="comment">        int32 ind = size();</span></div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<span class="comment">        for(int32 i=numAdded; i&lt;numNewPoints; i++)</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="comment">        {</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment">            newPoints.push_back(ind);</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment">            ind++;</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">        </span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">        return newPointsPtr;</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment">    else</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment">        fatalErrorInFunction&lt;&lt;&quot;not enough capacity for inserting particles into the point structure\n&quot;;</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment">        return nullptr;</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment">    return nullptr;</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="comment">}*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a78f7c96daeb567a221cd382f8e23f9ae"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a78f7c96daeb567a221cd382f8e23f9ae">pFlow::pointStructure::evaluatePointStructure</a></div><div class="ttdeci">FUNCTION_H bool evaluatePointStructure()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00030">pointStructure.cpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a78f7c96daeb567a221cd382f8e23f9ae"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a78f7c96daeb567a221cd382f8e23f9ae">pFlow::pointStructure::evaluatePointStructure</a></div><div class="ttdeci">FUNCTION_H bool evaluatePointStructure()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00031">pointStructure.cpp:31</a></div></div>
 <div class="ttc" id="aerror_8hpp_html_a6d29ef74f19f6d5a225841705985eb8b"><div class="ttname"><a href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a></div><div class="ttdeci">#define notImplementedFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00047">error.hpp:47</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1List_html"><div class="ttname"><a href="classpFlow_1_1List.html">pFlow::List</a></div><div class="ttdef"><b>Definition:</b> <a href="List_8hpp_source.html#l00039">List.hpp:39</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_a0858a722cbea1a0b22d3b90fd4f44e3e"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a0858a722cbea1a0b22d3b90fd4f44e3e">pFlow::pointStructure::numActivePoints_</a></div><div class="ttdeci">size_t numActivePoints_</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00161">pointStructure.hpp:161</a></div></div>
@@ -621,40 +669,45 @@ $(document).ready(function(){initNavTree('pointStructure_8cpp_source.html',''); 
 <div class="ttc" id="aclasspFlow_1_1iIstream_html_a6b741dd8443f554f5de5b98897f2eb77"><div class="ttname"><a href="classpFlow_1_1iIstream.html#a6b741dd8443f554f5de5b98897f2eb77">pFlow::iIstream::lookupDataOrSet</a></div><div class="ttdeci">T lookupDataOrSet(const word &amp;keyword, const T &amp;setVal)</div><div class="ttdef"><b>Definition:</b> <a href="iIstreamI_8hpp_source.html#l00068">iIstreamI.hpp:68</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html_a98ebfffbea52eb8a67326335b2ca8f9aaa15c451953b2d2a93403afe786930d0f"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aaa15c451953b2d2a93403afe786930d0f">pFlow::eventMessage::INSERT</a></div><div class="ttdeci">@ INSERT</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00035">eventMessage.hpp:35</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_a8ef76d271b8ab8c8b4f3af04f17e6f97"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a8ef76d271b8ab8c8b4f3af04f17e6f97">pFlow::pointStructure::pointPosition_</a></div><div class="ttdeci">realx3Field_D pointPosition_</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00158">pointStructure.hpp:158</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_a265edb5715625a3ea1510cccc80560dfaae88752b9379248f07e2c3fdc064d998"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfaae88752b9379248f07e2c3fdc064d998">pFlow::pointStructure::DELETED</a></div><div class="ttdeci">@ DELETED</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00052">pointStructure.hpp:52</a></div></div>
 <div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a304d8581876270871949bf5d4755036a"><div class="ttname"><a href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">pFlow::range</a></div><div class="ttdeci">kRange&lt; int &gt; range</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00059">KokkosTypes.hpp:59</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html"><div class="ttname"><a href="classpFlow_1_1eventMessage.html">pFlow::eventMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00029">eventMessage.hpp:29</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1eventMessage_html_a98ebfffbea52eb8a67326335b2ca8f9aae36ef497367232ae09a9439e01165e7d"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aae36ef497367232ae09a9439e01165e7d">pFlow::eventMessage::REARRANGE</a></div><div class="ttdeci">@ REARRANGE</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00036">eventMessage.hpp:36</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html_a16b5d7d13bf51d2ff4c0fba174666941"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a16b5d7d13bf51d2ff4c0fba174666941">pFlow::eventMessage::add</a></div><div class="ttdeci">void add(unsigned int msg)</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00068">eventMessage.hpp:68</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a5ed14c8dd71456ae98f9f3122bc36cda"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda">pFlow::pointStructure::markDeleteOutOfBox</a></div><div class="ttdeci">FUNCTION_H size_t markDeleteOutOfBox(const box &amp;domain)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00235">pointStructure.cpp:235</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a8c8fdb437cc5162b6a36acb35cad4c61"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">pFlow::pointStructure::pointFlag</a></div><div class="ttdeci">FUNCTION_H int8Field_HD &amp; pointFlag()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00070">pointStructure.cpp:70</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_addd0db43c233e851c7ef9b357a5fdeba"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba">pFlow::pointStructure::readPointStructure</a></div><div class="ttdeci">FUNCTION_H bool readPointStructure(iIstream &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00389">pointStructure.cpp:389</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a5ed14c8dd71456ae98f9f3122bc36cda"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda">pFlow::pointStructure::markDeleteOutOfBox</a></div><div class="ttdeci">FUNCTION_H size_t markDeleteOutOfBox(const box &amp;domain)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00286">pointStructure.cpp:286</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a8c8fdb437cc5162b6a36acb35cad4c61"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a8c8fdb437cc5162b6a36acb35cad4c61">pFlow::pointStructure::pointFlag</a></div><div class="ttdeci">FUNCTION_H int8Field_HD &amp; pointFlag()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00071">pointStructure.cpp:71</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_addd0db43c233e851c7ef9b357a5fdeba"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba">pFlow::pointStructure::readPointStructure</a></div><div class="ttdeci">FUNCTION_H bool readPointStructure(iIstream &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00437">pointStructure.cpp:437</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html_a98ebfffbea52eb8a67326335b2ca8f9aac455066f4d2132a3e1dcd414d4db3f7a"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aac455066f4d2132a3e1dcd414d4db3f7a">pFlow::eventMessage::SIZE_CHANGED</a></div><div class="ttdeci">@ SIZE_CHANGED</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00037">eventMessage.hpp:37</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_a265edb5715625a3ea1510cccc80560dfa33cf1d8ef1d06ee698a7fabf40eb3a7f"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a265edb5715625a3ea1510cccc80560dfa33cf1d8ef1d06ee698a7fabf40eb3a7f">pFlow::pointStructure::ACTIVE</a></div><div class="ttdeci">@ ACTIVE</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00053">pointStructure.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a329d7fb71b168b07c6536afeb97880fa"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa">pFlow::pointStructure::writePointStructure</a></div><div class="ttdeci">FUNCTION_H bool writePointStructure(iOstream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00417">pointStructure.cpp:417</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Vector_html_a10efdf47ffedbdc720f71c2f72b98d98"><div class="ttname"><a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">pFlow::Vector::size</a></div><div class="ttdeci">auto size() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00299">Vector.hpp:299</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a329d7fb71b168b07c6536afeb97880fa"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa">pFlow::pointStructure::writePointStructure</a></div><div class="ttdeci">FUNCTION_H bool writePointStructure(iOstream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00465">pointStructure.cpp:465</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_a10efdf47ffedbdc720f71c2f72b98d98"><div class="ttname"><a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">pFlow::Vector::size</a></div><div class="ttdeci">auto size() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00301">Vector.hpp:301</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a493862193d78c409ce4ddb2b4d49c17f"><div class="ttname"><a href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f">pFlow::getSortedIndex</a></div><div class="ttdeci">bool getSortedIndex(box boundingBox, real dx, range activeRange, ViewType1D&lt; realx3 &gt; pos, ViewType1D&lt; int8 &gt; flag, int32IndexContainer &amp;sortedIndex)</div><div class="ttdef"><b>Definition:</b> <a href="mortonIndexing_8cpp_source.html#l00026">mortonIndexing.cpp:26</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventObserver_html"><div class="ttname"><a href="classpFlow_1_1eventObserver.html">pFlow::eventObserver</a></div><div class="ttdef"><b>Definition:</b> <a href="eventObserver_8hpp_source.html#l00033">eventObserver.hpp:33</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Field_html"><div class="ttname"><a href="classpFlow_1_1Field.html">pFlow::Field&lt; VectorSingle, realx3 &gt;</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1pointStructureKernels_html_a36162ed116ea012f1507b41b7da0060f"><div class="ttname"><a href="namespacepFlow_1_1pointStructureKernels.html#a36162ed116ea012f1507b41b7da0060f">pFlow::pointStructureKernels::scanPointFlag</a></div><div class="ttdeci">int32 scanPointFlag(int32 start, int32 end, int8 activeFlag, deviceViewType1D&lt; int8 &gt; flags, int32 &amp;minRange, int32 &amp;maxRange)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructureKernels_8hpp_source.html#l00092">pointStructureKernels.hpp:92</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a9b3346d6a97542cabc9653282eda4a31"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31">pFlow::pointStructure::updateForDelete</a></div><div class="ttdeci">virtual FUNCTION_H bool updateForDelete()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00291">pointStructure.cpp:291</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_ab9d8d4992e2a55273f2a74397321ad81"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a></div><div class="ttdeci">FUNCTION_H realx3Field_D &amp; pointPosition()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00064">pointStructure.cpp:64</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_aa90bf675595664df833d4dfd361b3863"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#aa90bf675595664df833d4dfd361b3863">pFlow::pointStructure::numActive</a></div><div class="ttdeci">FUNCTION_H label numActive() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00222">pointStructure.cpp:222</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a9b3346d6a97542cabc9653282eda4a31"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31">pFlow::pointStructure::updateForDelete</a></div><div class="ttdeci">virtual FUNCTION_H bool updateForDelete()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00342">pointStructure.cpp:342</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_ab9d8d4992e2a55273f2a74397321ad81"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a></div><div class="ttdeci">FUNCTION_H realx3Field_D &amp; pointPosition()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00065">pointStructure.cpp:65</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_aa90bf675595664df833d4dfd361b3863"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#aa90bf675595664df833d4dfd361b3863">pFlow::pointStructure::numActive</a></div><div class="ttdeci">FUNCTION_H label numActive() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00224">pointStructure.cpp:224</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html_a4a0e2a760ea30cb5fe3d40c0cb3fe4a9"><div class="ttname"><a href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a></div><div class="ttdeci">#define FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00058">pFlowMacros.hpp:58</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a2ce5480679b04413dd607e300cfd1d7b"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a2ce5480679b04413dd607e300cfd1d7b">pFlow::pointStructure::allActive</a></div><div class="ttdeci">FUNCTION_H bool allActive() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00228">pointStructure.cpp:228</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a2ce5480679b04413dd607e300cfd1d7b"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a2ce5480679b04413dd607e300cfd1d7b">pFlow::pointStructure::allActive</a></div><div class="ttdeci">FUNCTION_H bool allActive() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00230">pointStructure.cpp:230</a></div></div>
 <div class="ttc" id="astructRESERVE_html"><div class="ttname"><a href="structRESERVE.html">RESERVE</a></div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00038">Vector.hpp:38</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1VectorDual_html_a36c25b92bd9a293baeda2c764016a27a"><div class="ttname"><a href="classpFlow_1_1VectorDual.html#a36c25b92bd9a293baeda2c764016a27a">pFlow::VectorDual::deviceVectorAll</a></div><div class="ttdeci">INLINE_FUNCTION_H deviceViewType &amp; deviceVectorAll()</div><div class="ttdef"><b>Definition:</b> <a href="VectorDual_8hpp_source.html#l00335">VectorDual.hpp:335</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00033">iIstream.hpp:33</a></div></div>
 <div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a8bf7df9793ef588cc0c3b9c1aea3d2ea"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a8bf7df9793ef588cc0c3b9c1aea3d2ea">pFlow::pointStructure::mortonSortPoints</a></div><div class="ttdeci">virtual FUNCTION_H bool mortonSortPoints(const box &amp;domain, real dx)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00236">pointStructure.cpp:236</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1pointStructureKernels_html_a440c2b7765806a499f4248b4adb1f8ee"><div class="ttname"><a href="namespacepFlow_1_1pointStructureKernels.html#a440c2b7765806a499f4248b4adb1f8ee">pFlow::pointStructureKernels::markDeleteOutOfBox</a></div><div class="ttdeci">int32 markDeleteOutOfBox(box domain, int32 start, int32 end, int8 deleteFlag, deviceViewType1D&lt; realx3 &gt; points, deviceViewType1D&lt; int8 &gt; flags, pointStructure::activePointsDevice activePoint, int32 &amp;minRange, int32 &amp;maxRange)</div><div class="ttdef"><b>Definition:</b> <a href="pointStructureKernels_8hpp_source.html#l00032">pointStructureKernels.hpp:32</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Vector_html_a234de5cb432c97fcb4b0f806bb86624e"><div class="ttname"><a href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">pFlow::Vector::capacity</a></div><div class="ttdeci">auto capacity() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00304">Vector.hpp:304</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_a234de5cb432c97fcb4b0f806bb86624e"><div class="ttname"><a href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">pFlow::Vector::capacity</a></div><div class="ttdeci">auto capacity() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00306">Vector.hpp:306</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1setFieldList_html"><div class="ttname"><a href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a></div><div class="ttdef"><b>Definition:</b> <a href="setFieldList_8hpp_source.html#l00032">setFieldList.hpp:32</a></div></div>
-<div class="ttc" id="aTime_8hpp_html"><div class="ttname"><a href="Time_8hpp.html">Time.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a3d039dd7281b12efe26e02f64c5a4a43"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43">pFlow::pointStructure::getNewPointsIndices</a></div><div class="ttdeci">FUNCTION_H uniquePtr&lt; int32IndexContainer &gt; getNewPointsIndices(int32 numNewPoints) const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00076">pointStructure.cpp:76</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a3d039dd7281b12efe26e02f64c5a4a43"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43">pFlow::pointStructure::getNewPointsIndices</a></div><div class="ttdeci">FUNCTION_H uniquePtr&lt; int32IndexContainer &gt; getNewPointsIndices(int32 numNewPoints) const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00077">pointStructure.cpp:77</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html_ac6c2cd1218587d4992ab1344890520d6"><div class="ttname"><a href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a></div><div class="ttdeci">#define ForAll(i, container)</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00071">pFlowMacros.hpp:71</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_a6c02c190c595dadd863a3ecad6ccf4e6"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a6c02c190c595dadd863a3ecad6ccf4e6">pFlow::pointStructure::activeRange_</a></div><div class="ttdeci">range activeRange_</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00164">pointStructure.hpp:164</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html_a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aad42d4e65313ad09ab5a38764524364b5">pFlow::eventMessage::RANGE_CHANGED</a></div><div class="ttdeci">@ RANGE_CHANGED</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00039">eventMessage.hpp:39</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_ac9b54653d0ec63ee05f64a185437b335"><div class="ttname"><a href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">pFlow::IOstream::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00031">IOstream.cpp:31</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_aa7618651ffb027109126be4771bac4cc"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#aa7618651ffb027109126be4771bac4cc">pFlow::pointStructure::capacity</a></div><div class="ttdeci">FUNCTION_H label capacity() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00216">pointStructure.cpp:216</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOstream_html_ac9b54653d0ec63ee05f64a185437b335"><div class="ttname"><a href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">pFlow::IOstream::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdoc">Return the name of the stream.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00031">IOstream.cpp:31</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_aa7618651ffb027109126be4771bac4cc"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#aa7618651ffb027109126be4771bac4cc">pFlow::pointStructure::capacity</a></div><div class="ttdeci">FUNCTION_H label capacity() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00218">pointStructure.cpp:218</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_ae14bf16748b3144baa1112f08c2a83b1"><div class="ttname"><a href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">pFlow::max</a></div><div class="ttdeci">T max(const Vector&lt; T, Allocator &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00164">VectorMath.hpp:164</a></div></div>
 <div class="ttc" id="apointStructureKernels_8hpp_html"><div class="ttname"><a href="pointStructureKernels_8hpp.html">pointStructureKernels.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Vector_html_a3e122a9f9c04a4e2dffdfabde2f1de50"><div class="ttname"><a href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">pFlow::Vector::clear</a></div><div class="ttdeci">auto clear()</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00248">Vector.hpp:248</a></div></div>
@@ -663,24 +716,24 @@ $(document).ready(function(){initNavTree('pointStructure_8cpp_source.html',''); 
 <div class="ttc" id="aerror_8hpp_html_a83efa053dfcfcef04cc0e721c0314ff3"><div class="ttname"><a href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a></div><div class="ttdeci">#define ioErrorInFile(fileName, lineNumber)</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00049">error.hpp:49</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html_a98ebfffbea52eb8a67326335b2ca8f9aa110cf5385e827397c5b50cbd59391654"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a98ebfffbea52eb8a67326335b2ca8f9aa110cf5385e827397c5b50cbd59391654">pFlow::eventMessage::CAP_CHANGED</a></div><div class="ttdeci">@ CAP_CHANGED</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00038">eventMessage.hpp:38</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a39f5f71474553bc78726494fa09dd0fb"><div class="ttname"><a href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a></div><div class="ttdeci">std::size_t label</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00061">builtinTypes.hpp:61</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a9d20becf23a4c5cb98ff7b4e05717190"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190">pFlow::pointStructure::insertPoints</a></div><div class="ttdeci">virtual FUNCTION_H uniquePtr&lt; int32IndexContainer &gt; insertPoints(const realx3Vector &amp;pos, const setFieldList &amp;setField, repository &amp;owner, const List&lt; eventObserver * &gt; &amp;exclusionList={nullptr})</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00300">pointStructure.cpp:300</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_aa4f0acc8c030ce3f2be8879899228d37"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a></div><div class="ttdeci">pointStructure()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00142">pointStructure.cpp:142</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a9d20becf23a4c5cb98ff7b4e05717190"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190">pFlow::pointStructure::insertPoints</a></div><div class="ttdeci">virtual FUNCTION_H uniquePtr&lt; int32IndexContainer &gt; insertPoints(const realx3Vector &amp;pos, const setFieldList &amp;setField, repository &amp;owner, const List&lt; eventObserver * &gt; &amp;exclusionList={nullptr})</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00351">pointStructure.cpp:351</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_aa4f0acc8c030ce3f2be8879899228d37"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#aa4f0acc8c030ce3f2be8879899228d37">pFlow::pointStructure::pointStructure</a></div><div class="ttdeci">pointStructure()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00144">pointStructure.cpp:144</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a07fb256c1077eea7a7726e948cc8ff0e"><div class="ttname"><a href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">pFlow::int8</a></div><div class="ttdeci">signed char int8</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00049">builtinTypes.hpp:49</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1repository_html"><div class="ttname"><a href="classpFlow_1_1repository.html">pFlow::repository</a></div><div class="ttdef"><b>Definition:</b> <a href="repository_8hpp_source.html#l00034">repository.hpp:34</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_a607efe5fb94edbe4cfa890c4907e76c3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">pFlow::IOstream::lineNumber</a></div><div class="ttdeci">int32 lineNumber() const</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00187">IOstream.hpp:187</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a7fd505d804f671e5714194ca63a9155f"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a7fd505d804f671e5714194ca63a9155f">pFlow::pointStructure::size</a></div><div class="ttdeci">FUNCTION_H label size() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00210">pointStructure.cpp:210</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOstream_html_a607efe5fb94edbe4cfa890c4907e76c3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">pFlow::IOstream::lineNumber</a></div><div class="ttdeci">int32 lineNumber() const</div><div class="ttdoc">Const access to the current stream line number.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00221">IOstream.hpp:221</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a7fd505d804f671e5714194ca63a9155f"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a7fd505d804f671e5714194ca63a9155f">pFlow::pointStructure::size</a></div><div class="ttdeci">FUNCTION_H label size() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00212">pointStructure.cpp:212</a></div></div>
 <div class="ttc" id="aiOstream_8hpp_html"><div class="ttname"><a href="iOstream_8hpp.html">iOstream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a334c2560412a3bc4fc1c215a77a48337"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00360">VectorSingle.hpp:360</a></div></div>
+<div class="ttc" id="amortonIndexing_8hpp_html"><div class="ttname"><a href="mortonIndexing_8hpp.html">mortonIndexing.hpp</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a334c2560412a3bc4fc1c215a77a48337"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00362">VectorSingle.hpp:362</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_a359635c7fac59b5bfc19941fffb5cb34"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a359635c7fac59b5bfc19941fffb5cb34">pFlow::pointStructure::numPoints_</a></div><div class="ttdeci">size_t numPoints_</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00149">pointStructure.hpp:149</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a901374af9bb829fbdb7b4b8f836da5e3"><div class="ttname"><a href="namespacepFlow.html#a901374af9bb829fbdb7b4b8f836da5e3">pFlow::maxActive</a></div><div class="ttdeci">T maxActive(const pointField&lt; VectorSingle, T, MemorySpace &gt; &amp;pField)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldAlgorithms_8hpp_source.html#l00100">pointFieldAlgorithms.hpp:100</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Vector_html"><div class="ttname"><a href="classpFlow_1_1Vector.html">pFlow::Vector&lt; int32 &gt;</a></div></div>
 <div class="ttc" id="apointStructure_8hpp_html"><div class="ttname"><a href="pointStructure_8hpp.html">pointStructure.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1VectorDual_html_a334c2560412a3bc4fc1c215a77a48337"><div class="ttname"><a href="classpFlow_1_1VectorDual.html#a334c2560412a3bc4fc1c215a77a48337">pFlow::VectorDual::size</a></div><div class="ttdeci">INLINE_FUNCTION_H size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorDual_8hpp_source.html#l00391">VectorDual.hpp:391</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_ad8085fcd475be6bdf841bcdd9b9225ee"><div class="ttname"><a href="namespacepFlow.html#ad8085fcd475be6bdf841bcdd9b9225ee">pFlow::range</a></div><div class="ttdeci">kPair&lt; int, int &gt; range</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00054">KokkosTypes.hpp:54</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a21c60a5f3cd7a26eb97fa28923cbaec6"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6">pFlow::iOstream::writeWordEntry</a></div><div class="ttdeci">iOstream &amp; writeWordEntry(const word &amp;key, const T &amp;value)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00217">iOstream.hpp:217</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a21c60a5f3cd7a26eb97fa28923cbaec6"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6">pFlow::iOstream::writeWordEntry</a></div><div class="ttdeci">iOstream &amp; writeWordEntry(const word &amp;key, const T &amp;value)</div><div class="ttdoc">Write a keyword/value entry.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00224">iOstream.hpp:224</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_aba2f2ccdd3d4a6b403a2c2d379198396"><div class="ttname"><a href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">pFlow::min</a></div><div class="ttdeci">T min(const Vector&lt; T, Allocator &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00138">VectorMath.hpp:138</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a0c647354823c504adcf32e65b70b46ff"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">pFlow::pointStructure::setNumMaxPoints</a></div><div class="ttdeci">FUNCTION_H void setNumMaxPoints()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00057">pointStructure.cpp:57</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a0c647354823c504adcf32e65b70b46ff"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a0c647354823c504adcf32e65b70b46ff">pFlow::pointStructure::setNumMaxPoints</a></div><div class="ttdeci">FUNCTION_H void setNumMaxPoints()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00058">pointStructure.cpp:58</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointStructure_html_ae2cb8869572656a6734c3c2806f5b320"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ae2cb8869572656a6734c3c2806f5b320">pFlow::pointStructure::pointFlag_</a></div><div class="ttdeci">int8Field_HD pointFlag_</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00155">pointStructure.hpp:155</a></div></div>
 <div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

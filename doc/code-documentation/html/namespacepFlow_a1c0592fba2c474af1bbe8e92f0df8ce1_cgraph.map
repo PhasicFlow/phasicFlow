@@ -1,6 +1,6 @@
 <map id="operator&gt;&gt;" name="operator&gt;&gt;">
 <area shape="rect" id="node1" title=" " alt="" coords="5,56,104,83"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="152,5,364,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title=" " alt="" coords="171,56,345,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1multiTriSurface.html#a9d66d68d90af555208a05211a3e85d65" title=" " alt="" coords="175,107,341,149"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title="Const access to the current stream line number." alt="" coords="152,5,365,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title="Return the name of the stream." alt="" coords="171,56,346,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1multiTriSurface.html#a9d66d68d90af555208a05211a3e85d65" title=" " alt="" coords="175,107,343,149"/>
 </map>

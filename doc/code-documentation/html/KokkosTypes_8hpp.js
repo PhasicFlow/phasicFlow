@@ -8,8 +8,9 @@ var KokkosTypes_8hpp =
     [ "DefaultHostExecutionSpace", "KokkosTypes_8hpp.html#a5cb29e471abf6b6665e7802212b56c37", null ],
     [ "DefaultExecutionSpace", "KokkosTypes_8hpp.html#aa3a14d3c76643399fc4edd8eca14944a", null ],
     [ "kPair", "KokkosTypes_8hpp.html#aa59ae59573e65855aee2d3fe25e6504a", null ],
-    [ "range", "KokkosTypes_8hpp.html#ad8085fcd475be6bdf841bcdd9b9225ee", null ],
-    [ "range64", "KokkosTypes_8hpp.html#a430d631c371ee0da9132843fefab61c1", null ],
+    [ "kRange", "KokkosTypes_8hpp.html#ae92ebfff4c8bfd55f457e2ff38179771", null ],
+    [ "range", "KokkosTypes_8hpp.html#a304d8581876270871949bf5d4755036a", null ],
+    [ "range64", "KokkosTypes_8hpp.html#a080e0c3aab8560aab0dee94a567cc9d0", null ],
     [ "ViewTypeScalar", "KokkosTypes_8hpp.html#a6fa4cf96d089d8cb2b3d0724b65b0b5b", null ],
     [ "ViewType1D", "KokkosTypes_8hpp.html#aca2b381231776d26ea7431837f78aa24", null ],
     [ "DualViewType1D", "KokkosTypes_8hpp.html#ae271b0fde8f5b0936d1f66c6badf94b9", null ],
@@ -27,5 +28,6 @@ var KokkosTypes_8hpp =
     [ "hostViewType1D", "KokkosTypes_8hpp.html#ad53198ba4452d5fdc966d861583fc70f", null ],
     [ "hostViewType2D", "KokkosTypes_8hpp.html#a85e375090d015571de56728963032099", null ],
     [ "deviceAtomicViewType1D", "KokkosTypes_8hpp.html#ab7f48408d37674c3e7649cb2f79aaea2", null ],
-    [ "deviceAtomicViewType3D", "KokkosTypes_8hpp.html#aef007f87766147fda1706da568a44e6c", null ]
+    [ "deviceAtomicViewType3D", "KokkosTypes_8hpp.html#aef007f87766147fda1706da568a44e6c", null ],
+    [ "operator<<", "KokkosTypes_8hpp.html#a89484152109cd2ff438cccfb300f1a55", null ]
 ];

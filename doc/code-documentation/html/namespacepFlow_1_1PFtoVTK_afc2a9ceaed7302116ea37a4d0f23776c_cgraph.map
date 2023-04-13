@@ -1,7 +1,7 @@
 <map id="addUndstrcuturedGridField" name="addUndstrcuturedGridField">
-<area shape="rect" id="node1" title=" " alt="" coords="5,81,201,108"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="261,5,357,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33" title=" " alt="" coords="249,56,368,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967" title=" " alt="" coords="249,107,368,133"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7" title=" " alt="" coords="250,157,367,184"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,200,108"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="259,5,356,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33" title=" " alt="" coords="248,56,367,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967" title=" " alt="" coords="248,107,367,133"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7" title=" " alt="" coords="248,157,367,184"/>
 </map>

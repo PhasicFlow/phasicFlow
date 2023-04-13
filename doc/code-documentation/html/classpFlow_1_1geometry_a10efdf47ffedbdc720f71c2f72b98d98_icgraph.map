@@ -1,4 +1,4 @@
 <map id="size" name="size">
-<area shape="rect" id="node1" title=" " alt="" coords="163,5,211,32"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1geometry.html#af8b4cc518ac3e2a143decb528f10a89c" title=" " alt="" coords="5,5,115,32"/>
+<area shape="rect" id="node1" title="Size of tri&#45;surface." alt="" coords="164,5,212,32"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1geometry.html#af8b4cc518ac3e2a143decb528f10a89c" title="Number of triangles in the set of surface walls." alt="" coords="5,5,116,32"/>
 </map>

@@ -1,6 +1,7 @@
 var classpFlow_1_1iIstream =
 [
     [ "iIstream", "classpFlow_1_1iIstream.html#a491a667af35a18f38b195789371e340b", null ],
+    [ "iIstream", "classpFlow_1_1iIstream.html#afb88b494b79ef3b9b544ce4039b6aac4", null ],
     [ "iIstream", "classpFlow_1_1iIstream.html#aeb259a4f962ddef4d3f0ee6291c011d2", null ],
     [ "~iIstream", "classpFlow_1_1iIstream.html#a7d655d719335af32c3bfd785add8fef5", null ],
     [ "putBack", "classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597", null ],
@@ -20,9 +21,12 @@ var classpFlow_1_1iIstream =
     [ "read", "classpFlow_1_1iIstream.html#a267687d1ff0fc07baa1964559ff5d034", null ],
     [ "read", "classpFlow_1_1iIstream.html#ae3e958fe42c8f3341d7eb507ae72fd24", null ],
     [ "read", "classpFlow_1_1iIstream.html#a07336185047bbed0698f7b2a9cbdac2f", null ],
+    [ "read", "classpFlow_1_1iIstream.html#a9daa3ef23c10da1b778db0b236713aa0", null ],
     [ "rewind", "classpFlow_1_1iIstream.html#acbf88ac063eb4598338671e603f36332", null ],
     [ "findToken", "classpFlow_1_1iIstream.html#a5f238bd4e73ce3b43b8a737a8f30ab78", null ],
+    [ "findTokenResume", "classpFlow_1_1iIstream.html#afde1855233ba897f4bb342285f94fc87", null ],
     [ "findTokenSilent", "classpFlow_1_1iIstream.html#a6492693f26c93565e98d42c8eae7b902", null ],
+    [ "findTokenResumeSilent", "classpFlow_1_1iIstream.html#a20e125024de459038323293b8529a99e", null ],
     [ "findTokenAndNext", "classpFlow_1_1iIstream.html#a734799e36d009aecd57d246eb3aeb421", null ],
     [ "findTokenAndNextSilent", "classpFlow_1_1iIstream.html#ae74a624bbb0665ed381b67cbda681031", null ],
     [ "findKeywordAndVal", "classpFlow_1_1iIstream.html#afb1243cec5833e96e8446abed4e3656c", null ],

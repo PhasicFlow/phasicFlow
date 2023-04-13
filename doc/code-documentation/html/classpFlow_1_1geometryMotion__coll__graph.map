@@ -1,7 +1,7 @@
 <map id="geometryMotion&lt; MotionModelType &gt;" name="geometryMotion&lt; MotionModelType &gt;">
 <area shape="rect" id="node1" title=" " alt="" coords="151,109,382,151"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1geometry.html" title=" " alt="" coords="5,5,91,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1VectorDual.html" title=" " alt="" coords="115,5,263,32"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1Timer.html" title=" " alt="" coords="315,5,375,32"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1VectorDual.html" title=" " alt="" coords="423,5,579,32"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1geometry.html" title="Base class for geometry for managing tri&#45;surfaces, geometry motion, and surface physical properties." alt="" coords="5,5,91,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1VectorDual.html" title=" " alt="" coords="115,5,264,32"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1Timer.html" title=" " alt="" coords="316,5,375,32"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1VectorDual.html" title=" " alt="" coords="423,5,580,32"/>
 </map>

@@ -408,65 +408,73 @@ $(document).ready(function(){initNavTree('iTstream_8cpp_source.html',''); initRe
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;}</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ab8734e666421c9fe3b6380a818c6c727">  307</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#ab8734e666421c9fe3b6380a818c6c727">pFlow::iTstream::rewind</a>()</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;{</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <a class="code" href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">iIstream::resetPutBack</a>();</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    setFirstToken();</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    setGood();</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;}</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<a class="code" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a>&amp; <a class="code" href="classpFlow_1_1iTstream.html#a2927b1d2adfb79cfbe30374f02109ac5">pFlow::iTstream::read</a></div>
+<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ae726f8108a5359ed31e60e44457a8c9a">  306</a></span>&#160;(</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordtype">char</span>* buffer, </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    std::streamsize <a class="code" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;)</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;{</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <a class="code" href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a>;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ad20897c5c8bd47f5d4005989bead0e55">  315</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#ad20897c5c8bd47f5d4005989bead0e55">pFlow::iTstream::reset</a>()</div>
+<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ab8734e666421c9fe3b6380a818c6c727">  315</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#ab8734e666421c9fe3b6380a818c6c727">pFlow::iTstream::rewind</a>()</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <a class="code" href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">iIstream::resetPutBack</a>();</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    tokenList_.clear();</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    setFirstToken();</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    setGood();</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;}</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    setFirstToken();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    setGood();</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;}</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a578844cadac20c3e23f6cf179ef2a1be">  323</a></span>&#160;<span class="keyword">const</span> <a class="code" href="classpFlow_1_1List.html">pFlow::tokenList</a>&amp; <a class="code" href="classpFlow_1_1iTstream.html#a578844cadac20c3e23f6cf179ef2a1be">pFlow::iTstream::tokens</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">return</span> tokenList_;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;}</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
-<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a259cb5a711406a8c3e5d937eb9350cca">  328</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="classpFlow_1_1iTstream.html#a259cb5a711406a8c3e5d937eb9350cca">pFlow::iTstream::size</a>()<span class="keyword">const </span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordflow">return</span> tokenList_.size();</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;}</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00333"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a99d95160c020bb50e55a25a4e178d2b5">  333</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="classpFlow_1_1iTstream.html#a99d95160c020bb50e55a25a4e178d2b5">pFlow::iTstream::numTokens</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordflow">return</span> tokenList_.size();</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;}</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af">pFlow::iTstream::appendTokens</a></div>
-<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af">  339</a></span>&#160;(</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1List.html">tokenList</a> &amp; tList</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;)</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; t:tList)</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    {</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="namespacepFlow.html#a0a312db11262484e0216af6c618d43dc">validTokenForStream</a>(t)) tokenList_.push_back(t);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    }</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    rewind();</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;}</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701">pFlow::iTstream::appendToken</a></div>
-<div class="line"><a name="l00352"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701">  352</a></span>&#160;(</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1token.html">token</a>&amp; t</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;)</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;{</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="namespacepFlow.html#a0a312db11262484e0216af6c618d43dc">validTokenForStream</a>(t)) tokenList_.push_back(t);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    rewind();</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;}</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">// ************************************************************************* //</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ad20897c5c8bd47f5d4005989bead0e55">  323</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#ad20897c5c8bd47f5d4005989bead0e55">pFlow::iTstream::reset</a>()</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;{</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <a class="code" href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">iIstream::resetPutBack</a>();</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    tokenList_.clear();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    setFirstToken();</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    setGood();</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;}</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a578844cadac20c3e23f6cf179ef2a1be">  331</a></span>&#160;<span class="keyword">const</span> <a class="code" href="classpFlow_1_1List.html">pFlow::tokenList</a>&amp; <a class="code" href="classpFlow_1_1iTstream.html#a578844cadac20c3e23f6cf179ef2a1be">pFlow::iTstream::tokens</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">return</span> tokenList_;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;}</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a259cb5a711406a8c3e5d937eb9350cca">  336</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="classpFlow_1_1iTstream.html#a259cb5a711406a8c3e5d937eb9350cca">pFlow::iTstream::size</a>()<span class="keyword">const </span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">return</span> tokenList_.size();</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;}</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a99d95160c020bb50e55a25a4e178d2b5">  341</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="classpFlow_1_1iTstream.html#a99d95160c020bb50e55a25a4e178d2b5">pFlow::iTstream::numTokens</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">return</span> tokenList_.size();</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;}</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af">pFlow::iTstream::appendTokens</a></div>
+<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af">  347</a></span>&#160;(</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1List.html">tokenList</a> &amp; tList</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;)</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;{</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; t:tList)</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="namespacepFlow.html#a0a312db11262484e0216af6c618d43dc">validTokenForStream</a>(t)) tokenList_.push_back(t);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    }</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    rewind();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;}</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701">pFlow::iTstream::appendToken</a></div>
+<div class="line"><a name="l00360"></a><span class="lineno"><a class="line" href="classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701">  360</a></span>&#160;(</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1token.html">token</a>&amp; t</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;)</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;{</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="namespacepFlow.html#a0a312db11262484e0216af6c618d43dc">validTokenForStream</a>(t)) tokenList_.push_back(t);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    rewind();</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;}</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment">// ************************************************************************* //</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_a578844cadac20c3e23f6cf179ef2a1be"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a578844cadac20c3e23f6cf179ef2a1be">pFlow::iTstream::tokens</a></div><div class="ttdeci">const tokenList &amp; tokens() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00323">iTstream.cpp:323</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_a578844cadac20c3e23f6cf179ef2a1be"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a578844cadac20c3e23f6cf179ef2a1be">pFlow::iTstream::tokens</a></div><div class="ttdeci">const tokenList &amp; tokens() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00331">iTstream.cpp:331</a></div></div>
 <div class="ttc" id="aerror_8hpp_html_a6d29ef74f19f6d5a225841705985eb8b"><div class="ttname"><a href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a></div><div class="ttdeci">#define notImplementedFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00047">error.hpp:47</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1List_html"><div class="ttname"><a href="classpFlow_1_1List.html">pFlow::List&lt; token &gt;</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_a3d513bfd3af0bb4907598c0ea696a433"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a3d513bfd3af0bb4907598c0ea696a433">pFlow::iTstream::isLastToken</a></div><div class="ttdeci">bool isLastToken()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00006">iTstream.cpp:6</a></div></div>
@@ -474,16 +482,16 @@ $(document).ready(function(){initNavTree('iTstream_8cpp_source.html',''); initRe
 <div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1token_html"><div class="ttname"><a href="classpFlow_1_1token.html">pFlow::token</a></div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00042">token.hpp:42</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00059">builtinTypes.hpp:59</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_ad20897c5c8bd47f5d4005989bead0e55"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ad20897c5c8bd47f5d4005989bead0e55">pFlow::iTstream::reset</a></div><div class="ttdeci">virtual void reset()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00315">iTstream.cpp:315</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_ad20897c5c8bd47f5d4005989bead0e55"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ad20897c5c8bd47f5d4005989bead0e55">pFlow::iTstream::reset</a></div><div class="ttdeci">virtual void reset()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00323">iTstream.cpp:323</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_a259cb5a711406a8c3e5d937eb9350cca"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a259cb5a711406a8c3e5d937eb9350cca">pFlow::iTstream::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00328">iTstream.cpp:328</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_a259cb5a711406a8c3e5d937eb9350cca"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a259cb5a711406a8c3e5d937eb9350cca">pFlow::iTstream::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00336">iTstream.cpp:336</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a94809bdb48183ff3ef62935d56f5c1e0"><div class="ttname"><a href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">pFlow::int64</a></div><div class="ttdeci">long long int int64</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00055">builtinTypes.hpp:55</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_ab8734e666421c9fe3b6380a818c6c727"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ab8734e666421c9fe3b6380a818c6c727">pFlow::iTstream::rewind</a></div><div class="ttdeci">virtual void rewind()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00307">iTstream.cpp:307</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_ab8734e666421c9fe3b6380a818c6c727"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ab8734e666421c9fe3b6380a818c6c727">pFlow::iTstream::rewind</a></div><div class="ttdeci">virtual void rewind()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00315">iTstream.cpp:315</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_ab80ea6b201ddac7c0635a047e84fb32b"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ab80ea6b201ddac7c0635a047e84fb32b">pFlow::iTstream::setFirstToken</a></div><div class="ttdeci">void setFirstToken()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00011">iTstream.cpp:11</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_accc0e99a8f0f82b23604038b591e5946"><div class="ttname"><a href="classpFlow_1_1iTstream.html#accc0e99a8f0f82b23604038b591e5946">pFlow::iTstream::operator=</a></div><div class="ttdeci">iTstream &amp; operator=(const iTstream &amp;)=default</div></div>
 <div class="ttc" id="anamespacepFlow_html_a0a312db11262484e0216af6c618d43dc"><div class="ttname"><a href="namespacepFlow.html#a0a312db11262484e0216af6c618d43dc">pFlow::validTokenForStream</a></div><div class="ttdeci">bool validTokenForStream(const token tok)</div></div>
 <div class="ttc" id="aclasspFlow_1_1token_html_ad20897c5c8bd47f5d4005989bead0e55"><div class="ttname"><a href="classpFlow_1_1token.html#ad20897c5c8bd47f5d4005989bead0e55">pFlow::token::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00245">tokenI.hpp:245</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_ab8e6218a25dd17573b727e6e3225d6af"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af">pFlow::iTstream::appendTokens</a></div><div class="ttdeci">void appendTokens(const tokenList &amp;tList)</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00339">iTstream.cpp:339</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_ab8e6218a25dd17573b727e6e3225d6af"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af">pFlow::iTstream::appendTokens</a></div><div class="ttdeci">void appendTokens(const tokenList &amp;tList)</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00347">iTstream.cpp:347</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a209decd2d9a8cd5f1697cdb6e00f1cd7"><div class="ttname"><a href="namespacepFlow.html#a209decd2d9a8cd5f1697cdb6e00f1cd7">pFlow::int16</a></div><div class="ttdeci">short int int16</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00051">builtinTypes.hpp:51</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_ab7078bf13036f3e78534da3ad4149dc2"><div class="ttname"><a href="namespacepFlow.html#ab7078bf13036f3e78534da3ad4149dc2">pFlow::uint16</a></div><div class="ttdeci">unsigned short int uint16</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00057">builtinTypes.hpp:57</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00033">iIstream.hpp:33</a></div></div>
@@ -492,12 +500,13 @@ $(document).ready(function(){initNavTree('iTstream_8cpp_source.html',''); initRe
 <div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_a1e95a6fa473cd29f5dde06a6d214026c"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a1e95a6fa473cd29f5dde06a6d214026c">pFlow::iTstream::tokenList_</a></div><div class="ttdeci">tokenList tokenList_</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8hpp_source.html#l00031">iTstream.hpp:31</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_a45e7cb2de6ec7890cec462bb57a3347d"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a45e7cb2de6ec7890cec462bb57a3347d">pFlow::iTstream::iTstream</a></div><div class="ttdeci">iTstream(const word &amp;streamName)</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00032">iTstream.cpp:32</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_ac9b54653d0ec63ee05f64a185437b335"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ac9b54653d0ec63ee05f64a185437b335">pFlow::iTstream::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00099">iTstream.cpp:99</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_ac9b54653d0ec63ee05f64a185437b335"><div class="ttname"><a href="classpFlow_1_1iTstream.html#ac9b54653d0ec63ee05f64a185437b335">pFlow::iTstream::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdoc">Return the name of the stream.</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00099">iTstream.cpp:99</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_a2927b1d2adfb79cfbe30374f02109ac5"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a2927b1d2adfb79cfbe30374f02109ac5">pFlow::iTstream::read</a></div><div class="ttdeci">virtual iIstream &amp; read(token &amp;t) override</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00111">iTstream.cpp:111</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_ab484dde689e0549b38dbaf95068150af"><div class="ttname"><a href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">pFlow::count</a></div><div class="ttdeci">auto count(const Vector&lt; T, Allocator &gt; &amp;vec, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> <a href="VectorAlgorithm_8hpp_source.html#l00026">VectorAlgorithm.hpp:26</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_a41d45236c37b75848f4b1667a11fb50e"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a41d45236c37b75848f4b1667a11fb50e">pFlow::iTstream::validate</a></div><div class="ttdeci">void validate()</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00016">iTstream.cpp:16</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iIstream_html_a13fa5dc14b25a1e1414e26d4d6473c7f"><div class="ttname"><a href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">pFlow::iIstream::resetPutBack</a></div><div class="ttdeci">void resetPutBack()</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00080">iIstream.hpp:80</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_a901e0a864d35fee71e969f18b6a3f701"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701">pFlow::iTstream::appendToken</a></div><div class="ttdeci">void appendToken(const token &amp;t)</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00352">iTstream.cpp:352</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iTstream_html_a99d95160c020bb50e55a25a4e178d2b5"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a99d95160c020bb50e55a25a4e178d2b5">pFlow::iTstream::numTokens</a></div><div class="ttdeci">size_t numTokens() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00333">iTstream.cpp:333</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iIstream_html_a13fa5dc14b25a1e1414e26d4d6473c7f"><div class="ttname"><a href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">pFlow::iIstream::resetPutBack</a></div><div class="ttdeci">void resetPutBack()</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00085">iIstream.hpp:85</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_a901e0a864d35fee71e969f18b6a3f701"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701">pFlow::iTstream::appendToken</a></div><div class="ttdeci">void appendToken(const token &amp;t)</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00360">iTstream.cpp:360</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iTstream_html_a99d95160c020bb50e55a25a4e178d2b5"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a99d95160c020bb50e55a25a4e178d2b5">pFlow::iTstream::numTokens</a></div><div class="ttdeci">size_t numTokens() const</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8cpp_source.html#l00341">iTstream.cpp:341</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html_aee00d54cd02615bc094de03967dde20d"><div class="ttname"><a href="pFlowMacros_8hpp.html#aee00d54cd02615bc094de03967dde20d">CONSUME_PARAM</a></div><div class="ttdeci">#define CONSUME_PARAM(x)</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00038">pFlowMacros.hpp:38</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iTstream_html_a16b92ead52b0e5d37f307ae80f5df8d5"><div class="ttname"><a href="classpFlow_1_1iTstream.html#a16b92ead52b0e5d37f307ae80f5df8d5">pFlow::iTstream::currentToken_</a></div><div class="ttdeci">tokenList::iterator currentToken_</div><div class="ttdef"><b>Definition:</b> <a href="iTstream_8hpp_source.html#l00034">iTstream.hpp:34</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a39f5f71474553bc78726494fa09dd0fb"><div class="ttname"><a href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">pFlow::label</a></div><div class="ttdeci">std::size_t label</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00061">builtinTypes.hpp:61</a></div></div>

@@ -130,19 +130,28 @@ $(document).ready(function(){initNavTree('iFstream_8cpp_source.html',''); initRe
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iFstream_8hpp.html">iFstream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpFlow_1_1iFstream.html#a145f81c90956fa0b8c9f2e695955407e">   27</a></span>&#160;<a class="code" href="classpFlow_1_1iFstream.html#a145f81c90956fa0b8c9f2e695955407e">pFlow::iFstream::iFstream</a> (<span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>&amp; path)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classpFlow_1_1fileStream.html">fileStream</a>(path),</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classpFlow_1_1Istream.html">Istream</a>( <a class="code" href="classpFlow_1_1fileStream.html">fileStream</a>::inStream(), path.wordPath())</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="classpFlow_1_1iFstream.html#a8707b807ad68cb8c8d81bd600db44bae">pFlow::iFstream::iFstream</a> </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classpFlow_1_1iFstream.html#a8707b807ad68cb8c8d81bd600db44bae">   28</a></span>&#160;(</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>&amp; path,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">bool</span> binary)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classpFlow_1_1fileStream.html">fileStream</a>(path, <span class="keyword">false</span>, binary),</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classpFlow_1_1Istream.html">Istream</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  ( </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    fileStream::inStream(),</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    path.<a class="code" href="classpFlow_1_1fileSystem.html#ad7cad1b82e1afeea66c2f0649de5d93f">wordPath</a>(),</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    (binary)? BINARY : ASCII</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  )</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Istream_html"><div class="ttname"><a href="classpFlow_1_1Istream.html">pFlow::Istream</a></div><div class="ttdef"><b>Definition:</b> <a href="Istream_8hpp_source.html#l00038">Istream.hpp:38</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1fileStream_html"><div class="ttname"><a href="classpFlow_1_1fileStream.html">pFlow::fileStream</a></div><div class="ttdef"><b>Definition:</b> <a href="fileStream_8hpp_source.html#l00036">fileStream.hpp:36</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iFstream_html_a8707b807ad68cb8c8d81bd600db44bae"><div class="ttname"><a href="classpFlow_1_1iFstream.html#a8707b807ad68cb8c8d81bd600db44bae">pFlow::iFstream::iFstream</a></div><div class="ttdeci">iFstream(const fileSystem &amp;path, bool binary=false)</div><div class="ttdef"><b>Definition:</b> <a href="iFstream_8cpp_source.html#l00028">iFstream.cpp:28</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileSystem_html_ad7cad1b82e1afeea66c2f0649de5d93f"><div class="ttname"><a href="classpFlow_1_1fileSystem.html#ad7cad1b82e1afeea66c2f0649de5d93f">pFlow::fileSystem::wordPath</a></div><div class="ttdeci">word wordPath() const</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00126">fileSystem.hpp:126</a></div></div>
 <div class="ttc" id="aiFstream_8hpp_html"><div class="ttname"><a href="iFstream_8hpp.html">iFstream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iFstream_html_a145f81c90956fa0b8c9f2e695955407e"><div class="ttname"><a href="classpFlow_1_1iFstream.html#a145f81c90956fa0b8c9f2e695955407e">pFlow::iFstream::iFstream</a></div><div class="ttdeci">iFstream(const fileSystem &amp;path)</div><div class="ttdef"><b>Definition:</b> <a href="iFstream_8cpp_source.html#l00027">iFstream.cpp:27</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_b13948a90891cb8a59f39ab8c50a8102.html">streams</a></li><li class="navelem"><a class="el" href="dir_1cabe3740960a39038ba2cb1fab9ec4c.html">Fstream</a></li><li class="navelem"><a class="el" href="iFstream_8cpp.html">iFstream.cpp</a></li>

@@ -1,5 +1,5 @@
 <map id="beginBlock" name="beginBlock">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,100,32"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b" title=" " alt="" coords="148,5,288,32"/>
-<area shape="rect" id="node3" href="$namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title=" " alt="" coords="163,56,273,83"/>
+<area shape="rect" id="node1" title="Write begin block group with a name Increments indentation, adds newline." alt="" coords="5,5,100,32"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b" title="Write begin block group without a name." alt="" coords="148,5,289,32"/>
+<area shape="rect" id="node3" href="$namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="163,56,274,83"/>
 </map>

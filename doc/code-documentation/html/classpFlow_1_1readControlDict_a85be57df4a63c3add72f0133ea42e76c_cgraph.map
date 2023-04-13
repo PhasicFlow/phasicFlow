@@ -1,6 +1,6 @@
 <map id="convertTimeToName" name="convertTimeToName">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,163,83"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="226,5,322,32"/>
-<area shape="rect" id="node3" href="$namespacepFlow.html#a010be5a80d29fca6b0ac9a68d9c94d32" title=" " alt="" coords="225,56,323,83"/>
-<area shape="rect" id="node4" href="$namespacepFlow.html#a4333d7bd717697fd94a3425351e1e4f2" title=" " alt="" coords="211,107,337,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,161,83"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="225,5,322,32"/>
+<area shape="rect" id="node3" href="$namespacepFlow.html#a010be5a80d29fca6b0ac9a68d9c94d32" title=" " alt="" coords="222,56,325,83"/>
+<area shape="rect" id="node4" href="$namespacepFlow.html#a4333d7bd717697fd94a3425351e1e4f2" title=" " alt="" coords="209,107,337,133"/>
 </map>

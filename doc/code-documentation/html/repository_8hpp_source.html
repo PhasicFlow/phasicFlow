@@ -306,15 +306,23 @@ $(document).ready(function(){initNavTree('repository_8hpp_source.html',''); init
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="comment">// list of repository names in this repository </span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <a class="code" href="classpFlow_1_1List.html">wordList</a> <a class="code" href="classpFlow_1_1repository.html#a001da2f7274cae96395f611284ce4192">repositoryNames</a>()<span class="keyword">const</span>;</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1repository.html#a4e7969c9e53d9007d5dbed9f18fc596a">write</a>(<span class="keywordtype">bool</span> verbose = <span class="keyword">false</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;};</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="repositoryTemplates_8cpp.html">repositoryTemplates.cpp</a>&quot;</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="preprocessor">#endif //__repository_hpp__</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classpFlow_1_1repository.html#adf86e34cfc6279c70c03cb31dcb77403">  209</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1repository.html#adf86e34cfc6279c70c03cb31dcb77403">outFileBinary</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1repository.html#a3beb7691ae0ce73e34e3bce1a0a7f988">owner_</a>)</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1repository.html#a3beb7691ae0ce73e34e3bce1a0a7f988">owner_</a>-&gt;<a class="code" href="classpFlow_1_1repository.html#adf86e34cfc6279c70c03cb31dcb77403">outFileBinary</a>();</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1repository.html#a4e7969c9e53d9007d5dbed9f18fc596a">write</a>(<span class="keywordtype">bool</span> verbose = <span class="keyword">false</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;};</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="repositoryTemplates_8cpp.html">repositoryTemplates.cpp</a>&quot;</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="preprocessor">#endif //__repository_hpp__</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="arepositoryTemplates_8cpp_html"><div class="ttname"><a href="repositoryTemplates_8cpp.html">repositoryTemplates.cpp</a></div></div>
@@ -330,6 +338,7 @@ $(document).ready(function(){initNavTree('repository_8hpp_source.html',''); init
 <div class="ttc" id="aclasspFlow_1_1repository_html_a1a4dac2a504055b06fcd8aed2a9bd4a0"><div class="ttname"><a href="classpFlow_1_1repository.html#a1a4dac2a504055b06fcd8aed2a9bd4a0">pFlow::repository::removeRepository</a></div><div class="ttdeci">bool removeRepository(repository *rep)</div><div class="ttdef"><b>Definition:</b> <a href="repository_8cpp_source.html#l00109">repository.cpp:109</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1repository_html_a3beb7691ae0ce73e34e3bce1a0a7f988"><div class="ttname"><a href="classpFlow_1_1repository.html#a3beb7691ae0ce73e34e3bce1a0a7f988">pFlow::repository::owner_</a></div><div class="ttdeci">repository * owner_</div><div class="ttdef"><b>Definition:</b> <a href="repository_8hpp_source.html#l00045">repository.hpp:45</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1repository_html_a92e3e6dedbdae1e0622e24c69846bcd1"><div class="ttname"><a href="classpFlow_1_1repository.html#a92e3e6dedbdae1e0622e24c69846bcd1">pFlow::repository::reportTypeError</a></div><div class="ttdeci">word reportTypeError(IOobject &amp;object)</div></div>
+<div class="ttc" id="aclasspFlow_1_1repository_html_adf86e34cfc6279c70c03cb31dcb77403"><div class="ttname"><a href="classpFlow_1_1repository.html#adf86e34cfc6279c70c03cb31dcb77403">pFlow::repository::outFileBinary</a></div><div class="ttdeci">virtual bool outFileBinary() const</div><div class="ttdef"><b>Definition:</b> <a href="repository_8hpp_source.html#l00209">repository.hpp:209</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1repository_html_a651d1bd631be4fb976c84af169b37869"><div class="ttname"><a href="classpFlow_1_1repository.html#a651d1bd631be4fb976c84af169b37869">pFlow::repository::repositories_</a></div><div class="ttdeci">wordMap&lt; repository * &gt; repositories_</div><div class="ttdef"><b>Definition:</b> <a href="repository_8hpp_source.html#l00052">repository.hpp:52</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1repository_html_aca2c9157494b4478a72f1c9466cb0501"><div class="ttname"><a href="classpFlow_1_1repository.html#aca2c9157494b4478a72f1c9466cb0501">pFlow::repository::~repository</a></div><div class="ttdeci">virtual ~repository()</div><div class="ttdef"><b>Definition:</b> <a href="repository_8cpp_source.html#l00043">repository.cpp:43</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1repository_html_a72f88f103879daa31190a58a237669b3"><div class="ttname"><a href="classpFlow_1_1repository.html#a72f88f103879daa31190a58a237669b3">pFlow::repository::owner</a></div><div class="ttdeci">const repository * owner() const</div><div class="ttdef"><b>Definition:</b> <a href="repository_8cpp_source.html#l00073">repository.cpp:73</a></div></div>

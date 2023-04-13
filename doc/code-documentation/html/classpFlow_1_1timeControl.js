@@ -17,6 +17,7 @@ var classpFlow_1_1timeControl =
     [ "reachedStopAt", "classpFlow_1_1timeControl.html#a75463b442578a00111678ff4b476d6f2", null ],
     [ "outputToFile", "classpFlow_1_1timeControl.html#ae8a94aa257125307d3df43083c280d53", null ],
     [ "timersReportTime", "classpFlow_1_1timeControl.html#a87c857adb25188138027cd40884e18ea", null ],
+    [ "sortTime", "classpFlow_1_1timeControl.html#ae34b594064f0532b96aeaf249a22e251", null ],
     [ "setOutputToFile", "classpFlow_1_1timeControl.html#a9f16eb3f9fc84652d5bd44c766572b4a", null ],
     [ "operator++", "classpFlow_1_1timeControl.html#ab591141c510c110635d0964bde7dff67", null ],
     [ "setSaveTimeFolder", "classpFlow_1_1timeControl.html#a0c6ee43740da4e029eb32b016c9575c4", null ],
@@ -34,6 +35,8 @@ var classpFlow_1_1timeControl =
     [ "timeName_", "classpFlow_1_1timeControl.html#ae0277279b00150a8515e9d2ccef0fb89", null ],
     [ "writeTime_", "classpFlow_1_1timeControl.html#a8e60bd8ba3f83c0eb098f5a8c241e981", null ],
     [ "timersReportInterval_", "classpFlow_1_1timeControl.html#a9567616e0a470e785c790c5d932d8cd2", null ],
+    [ "performSorting_", "classpFlow_1_1timeControl.html#a214198cb23e2284c47d1a939d2249f96", null ],
+    [ "sortingInterval_", "classpFlow_1_1timeControl.html#a6c6ad791b5a1f567d7766032d8f81261", null ],
     [ "screenReportInterval_", "classpFlow_1_1timeControl.html#a629ee1c73e573adcf0e691d5c13e5b33", null ],
     [ "outputToFile_", "classpFlow_1_1timeControl.html#ab859a194f5f26e6ef4361b8b0508d3a2", null ]
 ];

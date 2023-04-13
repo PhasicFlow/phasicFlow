@@ -1,6 +1,6 @@
 var classpFlow_1_1Istream =
 [
-    [ "Istream", "classpFlow_1_1Istream.html#ab9a414d452af8be20855560b91c3a34a", null ],
+    [ "Istream", "classpFlow_1_1Istream.html#ad48b8b290ed666fa5a63bc93b3a6d042", null ],
     [ "~Istream", "classpFlow_1_1Istream.html#aa87acab95f6b508c203a4509ca726bcf", null ],
     [ "nextValid", "classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3", null ],
     [ "readWordToken", "classpFlow_1_1Istream.html#a7e71f99e176c31f799cb199c7ff6d5b8", null ],
@@ -27,6 +27,7 @@ var classpFlow_1_1Istream =
     [ "read", "classpFlow_1_1Istream.html#a9883b86c3cc0efadac9c2c3b089483a4", null ],
     [ "read", "classpFlow_1_1Istream.html#a37687181bbda5c256b8f5031030a7496", null ],
     [ "read", "classpFlow_1_1Istream.html#a74a51f110ee3859191ffd704c2b4f141", null ],
+    [ "read", "classpFlow_1_1Istream.html#ae726f8108a5359ed31e60e44457a8c9a", null ],
     [ "rewind", "classpFlow_1_1Istream.html#ab8734e666421c9fe3b6380a818c6c727", null ],
     [ "flags", "classpFlow_1_1Istream.html#a5f4e9197238714c0ef19b6a9e9b9ad57", null ],
     [ "stdStream", "classpFlow_1_1Istream.html#a513d1fa6b29fa93acb75f0afe0a58dd5", null ],

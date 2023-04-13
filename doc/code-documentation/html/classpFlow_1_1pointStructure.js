@@ -33,9 +33,11 @@ var classpFlow_1_1pointStructure =
     [ "isActive", "classpFlow_1_1pointStructure.html#a785cd9cdbd48a18c6bddb623fa1740da", null ],
     [ "markDeleteOutOfBox", "classpFlow_1_1pointStructure.html#a5ed14c8dd71456ae98f9f3122bc36cda", null ],
     [ "updateForDelete", "classpFlow_1_1pointStructure.html#a9b3346d6a97542cabc9653282eda4a31", null ],
+    [ "mortonSortPoints", "classpFlow_1_1pointStructure.html#a8bf7df9793ef588cc0c3b9c1aea3d2ea", null ],
     [ "insertedPointIndex", "classpFlow_1_1pointStructure.html#a12826e5d1ae021ea1945fa6969d16086", null ],
     [ "insertedPointIndexH", "classpFlow_1_1pointStructure.html#ad4d8846f33f2c2d33873fc529b35f0b4", null ],
     [ "insertedPointIndexD", "classpFlow_1_1pointStructure.html#a01e096ba69cc9cf35320e827465f7337", null ],
+    [ "mortonSortedIndex", "classpFlow_1_1pointStructure.html#ad15c049e9dfa4017095e6a1c80c33431", null ],
     [ "insertPoints", "classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190", null ],
     [ "readPointStructure", "classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba", null ],
     [ "writePointStructure", "classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa", null ],
@@ -49,5 +51,6 @@ var classpFlow_1_1pointStructure =
     [ "pointPosition_", "classpFlow_1_1pointStructure.html#a8ef76d271b8ab8c8b4f3af04f17e6f97", null ],
     [ "numActivePoints_", "classpFlow_1_1pointStructure.html#a0858a722cbea1a0b22d3b90fd4f44e3e", null ],
     [ "activeRange_", "classpFlow_1_1pointStructure.html#a6c02c190c595dadd863a3ecad6ccf4e6", null ],
-    [ "tobeInsertedIndex_", "classpFlow_1_1pointStructure.html#a1be475213d1735ff93b694f9e87dcf9b", null ]
+    [ "tobeInsertedIndex_", "classpFlow_1_1pointStructure.html#a1be475213d1735ff93b694f9e87dcf9b", null ],
+    [ "mortonSortedIndex_", "classpFlow_1_1pointStructure.html#ad0908c3fd4c7f8f381c037d3e3ef8be3", null ]
 ];

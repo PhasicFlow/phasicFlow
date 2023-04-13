@@ -18,6 +18,7 @@ var classpFlow_1_1oTstream =
     [ "write", "classpFlow_1_1oTstream.html#a7e6df205da82ec7230d7678620483fe0", null ],
     [ "write", "classpFlow_1_1oTstream.html#a9f4f8b12e074652510a84c0ba51111ad", null ],
     [ "write", "classpFlow_1_1oTstream.html#a44e32a52d8dec9b952a6a018d02ef805", null ],
+    [ "write", "classpFlow_1_1oTstream.html#a30c2f2e600a35dcaebb70b2ad42b623b", null ],
     [ "append", "classpFlow_1_1oTstream.html#a3ebe3cf983e1255171dc04ea202c2e87", null ],
     [ "append", "classpFlow_1_1oTstream.html#af9502a9443b4d81f0fbec5fc897191ec", null ],
     [ "reset", "classpFlow_1_1oTstream.html#ad20897c5c8bd47f5d4005989bead0e55", null ],

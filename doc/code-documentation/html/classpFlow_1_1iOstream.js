@@ -1,6 +1,7 @@
 var classpFlow_1_1iOstream =
 [
     [ "iOstream", "classpFlow_1_1iOstream.html#a23526bd51aa20b0822272995e8db1cbe", null ],
+    [ "iOstream", "classpFlow_1_1iOstream.html#af225817097ed9a46fa605c401c8d921a", null ],
     [ "iOstream", "classpFlow_1_1iOstream.html#ac0ba482c100b36424e389a81168c2e56", null ],
     [ "~iOstream", "classpFlow_1_1iOstream.html#ab55acff18b8c2779c835f2b6205742c1", null ],
     [ "write", "classpFlow_1_1iOstream.html#a8da7514808d6493ccfd30582fc945aa1", null ],
@@ -15,6 +16,7 @@ var classpFlow_1_1iOstream =
     [ "write", "classpFlow_1_1iOstream.html#a21a6d1fdb487282b0c77e472165a1241", null ],
     [ "write", "classpFlow_1_1iOstream.html#a81f4ff39d4e5b2a102c38ab5edea0405", null ],
     [ "write", "classpFlow_1_1iOstream.html#afe32853bb554bc8c86197960948106a7", null ],
+    [ "write", "classpFlow_1_1iOstream.html#a1a7bd509fa8e7fe077bff6c4b36b31c4", null ],
     [ "indent", "classpFlow_1_1iOstream.html#a6f9f89f73f75f7dec4546766148b60d7", null ],
     [ "indentSize", "classpFlow_1_1iOstream.html#a50fd431a605cc8733cff59aa38561ac6", null ],
     [ "indentSize", "classpFlow_1_1iOstream.html#ad54d41159bfc69e58ea34396adb736ee", null ],

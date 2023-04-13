@@ -1,7 +1,7 @@
 <map id="checkWordToken" name="checkWordToken">
 <area shape="rect" id="node1" title=" " alt="" coords="5,81,136,108"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#a1da2c77e895df3330a9b2a421486be06" title=" " alt="" coords="235,5,314,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#af3418ac60d0d7a303478f29a387feb3c" title=" " alt="" coords="196,56,353,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1token.html#ace6d5ecd2736d19990a7c12e0fe5a745" title=" " alt="" coords="197,107,353,133"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1" title=" " alt="" coords="184,157,365,184"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#a1da2c77e895df3330a9b2a421486be06" title=" " alt="" coords="236,5,315,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#af3418ac60d0d7a303478f29a387feb3c" title="Return true if end of input seen." alt="" coords="196,56,355,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1token.html#ace6d5ecd2736d19990a7c12e0fe5a745" title=" " alt="" coords="196,107,355,133"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1" title=" " alt="" coords="184,157,367,184"/>
 </map>

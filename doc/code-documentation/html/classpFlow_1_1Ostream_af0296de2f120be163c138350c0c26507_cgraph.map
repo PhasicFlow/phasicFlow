@@ -1,6 +1,6 @@
 <map id="write" name="write">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,60,83"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1token.html#a60330c34e8555025752e615e0c73e99a" title=" " alt="" coords="128,5,269,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1" title=" " alt="" coords="108,56,289,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1Ostream.html#ad49e7395bb1832b095b5567656beae88" title=" " alt="" coords="147,107,250,133"/>
+<area shape="rect" id="node1" title="Write Functions." alt="" coords="5,56,60,83"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1token.html#a60330c34e8555025752e615e0c73e99a" title=" " alt="" coords="128,5,271,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1" title=" " alt="" coords="108,56,291,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1Ostream.html#ad49e7395bb1832b095b5567656beae88" title="Write std::string surrounded by quotes." alt="" coords="148,107,251,133"/>
 </map>

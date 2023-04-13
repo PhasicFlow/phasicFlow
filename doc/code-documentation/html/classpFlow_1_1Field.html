@@ -213,14 +213,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a06d22196b29698681102c8b374c29143"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae03507823e79fef9640057b290e69c67"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a> () const</td></tr>
 <tr class="separator:ae03507823e79fef9640057b290e69c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12716db8ee8e80c16504deb8061f25a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a12716db8ee8e80c16504deb8061f25a9">readField</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const size_t len, bool readLength=true)</td></tr>
-<tr class="separator:a12716db8ee8e80c16504deb8061f25a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a352b49008fcb89908214694239113a24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a352b49008fcb89908214694239113a24">readField</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
-<tr class="separator:a352b49008fcb89908214694239113a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b53a83f079c1c270e62b192d09068f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ab7b53a83f079c1c270e62b192d09068f">readField</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const size_t len, bool resume, bool readLength=true)</td></tr>
+<tr class="separator:ab7b53a83f079c1c270e62b192d09068f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a526f8a7b256bf1641fa30e476334996b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a526f8a7b256bf1641fa30e476334996b">readField</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, bool resume)</td></tr>
+<tr class="separator:a526f8a7b256bf1641fa30e476334996b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac550f175fb70daa183a4008bfd790f5f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ac550f175fb70daa183a4008bfd790f5f">writeField</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
 <tr class="separator:ac550f175fb70daa183a4008bfd790f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff8e92ab47032ae811d1271161cb9b22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aff8e92ab47032ae811d1271161cb9b22">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
-<tr class="separator:aff8e92ab47032ae811d1271161cb9b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1647e0ed184c652964aaccd3e15b3c04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a1647e0ed184c652964aaccd3e15b3c04">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, bool resume=false)</td></tr>
+<tr class="separator:a1647e0ed184c652964aaccd3e15b3c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
 <tr class="separator:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -1334,8 +1334,8 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 
 </div>
 </div>
-<a id="a12716db8ee8e80c16504deb8061f25a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12716db8ee8e80c16504deb8061f25a9">&#9670;&nbsp;</a></span>readField() <span class="overload">[1/2]</span></h2>
+<a id="ab7b53a83f079c1c270e62b192d09068f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b53a83f079c1c270e62b192d09068f">&#9670;&nbsp;</a></span>readField() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1356,6 +1356,12 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>resume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>readLength</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
@@ -1366,7 +1372,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00104">104</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00102">102</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00241">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="Field_8hpp_source.html#l00226">Field&lt; VectorDual, int8 &gt;::read()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -1374,18 +1380,18 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Field_a12716db8ee8e80c16504deb8061f25a9_icgraph.png" border="0" usemap="#classpFlow_1_1Field_a12716db8ee8e80c16504deb8061f25a9_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Field_a12716db8ee8e80c16504deb8061f25a9_icgraph" id="classpFlow_1_1Field_a12716db8ee8e80c16504deb8061f25a9_icgraph">
-<area shape="rect" title=" " alt="" coords="243,35,325,61"/>
-<area shape="rect" href="namespacepFlow.html#a66efa897c8bfc622e127b85c5394e58f" title=" " alt="" coords="27,5,173,32"/>
-<area shape="rect" href="classpFlow_1_1Field.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="5,57,195,98"/>
+<div class="center"><img src="classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph.png" border="0" usemap="#classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph" alt=""/></div>
+<map name="classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph" id="classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph">
+<area shape="rect" title=" " alt="" coords="244,35,325,61"/>
+<area shape="rect" href="namespacepFlow.html#a66efa897c8bfc622e127b85c5394e58f" title=" " alt="" coords="27,5,174,32"/>
+<area shape="rect" href="classpFlow_1_1Field.html#a1647e0ed184c652964aaccd3e15b3c04" title=" " alt="" coords="5,57,196,98"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a352b49008fcb89908214694239113a24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a352b49008fcb89908214694239113a24">&#9670;&nbsp;</a></span>readField() <span class="overload">[2/2]</span></h2>
+<a id="a526f8a7b256bf1641fa30e476334996b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a526f8a7b256bf1641fa30e476334996b">&#9670;&nbsp;</a></span>readField() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1394,13 +1400,23 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td class="memname">bool readField </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em></td><td>)</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>resume</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00154">154</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00160">160</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
 
 </div>
 </div>
@@ -1420,7 +1436,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00163">163</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00170">170</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00252">pFlow::operator&lt;&lt;()</a>, and <a class="el" href="Field_8hpp_source.html#l00231">Field&lt; VectorDual, int8 &gt;::write()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -1438,8 +1454,8 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 
 </div>
 </div>
-<a id="aff8e92ab47032ae811d1271161cb9b22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff8e92ab47032ae811d1271161cb9b22">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a1647e0ed184c652964aaccd3e15b3c04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1647e0ed184c652964aaccd3e15b3c04">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1451,8 +1467,18 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td class="memname">bool read </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em></td><td>)</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>resume</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

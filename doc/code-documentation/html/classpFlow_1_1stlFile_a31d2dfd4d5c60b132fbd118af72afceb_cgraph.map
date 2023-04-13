@@ -1,12 +1,12 @@
 <map id="writeFacet" name="writeFacet">
-<area shape="rect" id="node1" title=" " alt="" coords="5,208,95,235"/>
-<area shape="rect" id="node2" href="$tripleFwd_8hpp.html#a7a724b824f9e21a646a965a99fff4b04" title=" " alt="" coords="217,5,273,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd" title=" " alt="" coords="143,56,348,83"/>
-<area shape="rect" id="node4" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="197,107,293,133"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1iOstream.html#a79a5f541a96c769ad3b3bf66aff49115" title=" " alt="" coords="145,157,346,184"/>
-<area shape="rect" id="node6" href="$namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title=" " alt="" coords="191,208,300,235"/>
-<area shape="rect" id="node7" href="$namespacepFlow.html#ae66fd475dd6c1c6611e9451b715e6a77" title=" " alt="" coords="174,259,317,285"/>
-<area shape="rect" id="node8" href="$classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33" title=" " alt="" coords="186,309,305,336"/>
-<area shape="rect" id="node9" href="$classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967" title=" " alt="" coords="186,360,305,387"/>
-<area shape="rect" id="node10" href="$classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7" title=" " alt="" coords="187,411,304,437"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,208,96,235"/>
+<area shape="rect" id="node2" href="$tripleFwd_8hpp.html#a7a724b824f9e21a646a965a99fff4b04" title=" " alt="" coords="219,5,275,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd" title="Decrement the indent level." alt="" coords="144,56,351,83"/>
+<area shape="rect" id="node4" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="199,107,296,133"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1iOstream.html#a79a5f541a96c769ad3b3bf66aff49115" title="Increment the indent level." alt="" coords="146,157,349,184"/>
+<area shape="rect" id="node6" href="$namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="192,208,303,235"/>
+<area shape="rect" id="node7" href="$namespacepFlow.html#ae66fd475dd6c1c6611e9451b715e6a77" title=" " alt="" coords="175,259,319,285"/>
+<area shape="rect" id="node8" href="$classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33" title=" " alt="" coords="188,309,307,336"/>
+<area shape="rect" id="node9" href="$classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967" title=" " alt="" coords="188,360,307,387"/>
+<area shape="rect" id="node10" href="$classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7" title=" " alt="" coords="188,411,307,437"/>
 </map>

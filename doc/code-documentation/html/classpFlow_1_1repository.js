@@ -34,6 +34,7 @@ var classpFlow_1_1repository =
     [ "lookupRepository", "classpFlow_1_1repository.html#a500191802cd76acfc230739286e38e2c", null ],
     [ "objectNames", "classpFlow_1_1repository.html#a03094338dddf305b1dbabdac34922c34", null ],
     [ "repositoryNames", "classpFlow_1_1repository.html#a001da2f7274cae96395f611284ce4192", null ],
+    [ "outFileBinary", "classpFlow_1_1repository.html#adf86e34cfc6279c70c03cb31dcb77403", null ],
     [ "write", "classpFlow_1_1repository.html#a4e7969c9e53d9007d5dbed9f18fc596a", null ],
     [ "reportTypeError", "classpFlow_1_1repository.html#a41d2e6e5e832763e1d4e2cb23d2be4be", null ],
     [ "name_", "classpFlow_1_1repository.html#a50fd7d13a0f7a6007ca5027b3bb8765a", null ],

@@ -1,7 +1,7 @@
 <map id="points" name="points">
-<area shape="rect" id="node1" title=" " alt="" coords="237,97,300,123"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1multiTriSurface.html#ab3e1431127162c803c33ee76d1f2cbb3" title=" " alt="" coords="14,5,181,47"/>
-<area shape="rect" id="node3" href="$namespacepFlow.html#aaf677e2ac1decf3292aac36c9a1743b8" title=" " alt="" coords="29,71,166,98"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1geometry.html#a1aa7da69f2e95c6b2eb63738fc7e993d" title=" " alt="" coords="8,122,187,149"/>
-<area shape="rect" id="node5" href="$namespacepFlow_1_1TSFtoVTK.html#a8b044ce8ea2242e6b01fc7b02b26e3d8" title=" " alt="" coords="5,173,189,215"/>
+<area shape="rect" id="node1" title=" " alt="" coords="239,97,301,123"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1multiTriSurface.html#ab3e1431127162c803c33ee76d1f2cbb3" title=" " alt="" coords="14,5,182,47"/>
+<area shape="rect" id="node3" href="$namespacepFlow.html#aaf677e2ac1decf3292aac36c9a1743b8" title=" " alt="" coords="29,71,167,98"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1geometry.html#a1aa7da69f2e95c6b2eb63738fc7e993d" title="Access to the points." alt="" coords="9,122,187,149"/>
+<area shape="rect" id="node5" href="$namespacepFlow_1_1TSFtoVTK.html#a8b044ce8ea2242e6b01fc7b02b26e3d8" title=" " alt="" coords="5,173,191,215"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="write" name="write">
 <area shape="rect" id="node1" title=" " alt="" coords="5,83,60,109"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1dictionary.html#a6ae2ea14b8b5e5661c2f207aae2d4bdc" title=" " alt="" coords="304,5,468,32"/>
-<area shape="rect" id="node3" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="338,67,434,93"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632" title=" " alt="" coords="316,130,456,171"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1timeInterval.html#a279dae2ee3345fbb2b31e5af9ec0a5b4" title=" " alt="" coords="108,46,256,87"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1dictionary.html#a6ae2ea14b8b5e5661c2f207aae2d4bdc" title=" " alt="" coords="305,5,471,32"/>
+<area shape="rect" id="node3" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="339,67,437,93"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632" title=" " alt="" coords="317,130,459,171"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1timeInterval.html#a279dae2ee3345fbb2b31e5af9ec0a5b4" title=" " alt="" coords="108,46,257,87"/>
 </map>

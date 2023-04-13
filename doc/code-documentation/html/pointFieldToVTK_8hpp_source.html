@@ -137,12 +137,12 @@ $(document).ready(function(){initNavTree('pointFieldToVTK_8hpp_source.html','');
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html">   31</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow_1_1PFtoVTK.html">pFlow::PFtoVTK</a></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ad96f820d5174271fdc60bd7731fb9629">addInt64PointField</a>(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IntType, <span class="keyword">typename</span> IncludeMaskType&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ae003423c3937028067d2e2e0628a1be3">addIntPointField</a>(</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>*      field,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    IntType*        field,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> );</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
@@ -182,45 +182,45 @@ $(document).ready(function(){initNavTree('pointFieldToVTK_8hpp_source.html','');
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#a1e57b8c2d1ea59d162f1a5c252f89be2">   79</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a1e57b8c2d1ea59d162f1a5c252f89be2">convertIntTypesPointField</a>(</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a>&amp; header,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> )</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> objectType = header.<a class="code" href="classpFlow_1_1IOfileHeader.html#a67068cb6552c42a5ddb1c66bf6bbf6b3">objectType</a>();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span>( !(checkFieldType&lt;int8&gt;(objectType)  ||</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        checkFieldType&lt;int16&gt;(objectType)   ||</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        checkFieldType&lt;int32&gt;(objectType)   ||</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        checkFieldType&lt;int64&gt;(objectType)   ||</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        checkFieldType&lt;uint32&gt;(objectType)  ||</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        checkFieldType&lt;label&gt;(objectType))</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        )</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#af01af7b85b0054651af5f4cc164fe316">convertIntPointField</a></div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#af01af7b85b0054651af5f4cc164fe316">   81</a></span>&#160;(</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a>&amp; header,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">using</span> PointFieldType = <a class="code" href="classpFlow_1_1pointField.html">pointField&lt;VectorSingle, T, HostSpace&gt;</a>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> objectType = header.<a class="code" href="classpFlow_1_1IOfileHeader.html#a67068cb6552c42a5ddb1c66bf6bbf6b3">objectType</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span>(!checkFieldType&lt;T&gt;(objectType))</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> objField = IOobject::make&lt;int64PointField_H&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> objField = IOobject::make&lt;PointFieldType&gt;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    (</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        header,</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a><span class="keyword">&gt;</span>(0)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(0)</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    );</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">auto</span>&amp; <a class="code" href="classpFlow_1_1Field.html">Field</a> = objField().getObject&lt;<a class="code" href="classpFlow_1_1pointField.html">int64PointField_H</a>&gt;();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">auto</span>&amp; <a class="code" href="classpFlow_1_1Field.html">Field</a> = objField().template getObject&lt;PointFieldType&gt;();</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>* data = <a class="code" href="classpFlow_1_1Field.html">Field</a>.hostVectorAll().data();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    T* data = <a class="code" href="classpFlow_1_1Field.html">Field</a>.deviceVectorAll().data();</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(2)&lt;&lt;<span class="stringliteral">&quot;writing &quot;</span>&lt;&lt; <a class="code" href="iOstream_8hpp.html#a4fcac190f6e62656ac9a86d383b89f4e">greenColor</a> &lt;&lt;header.<a class="code" href="classpFlow_1_1IOfileHeader.html#a4ae6d6ea877ec8652d86076eaf333c12">objectName</a>()&lt;&lt;<a class="code" href="iOstream_8hpp.html#a08e5918c2f896d908122d37a353230c9">defaultColor</a>&lt;&lt;<span class="stringliteral">&quot; field to vtk.\n&quot;</span>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ad96f820d5174271fdc60bd7731fb9629">addInt64PointField</a>(</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ae003423c3937028067d2e2e0628a1be3">addIntPointField</a>(</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        os,</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        header.<a class="code" href="classpFlow_1_1IOfileHeader.html#a4ae6d6ea877ec8652d86076eaf333c12">objectName</a>(),</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.numActive(),</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        data,</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.activePointsMaskH() );</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#ab7531a0fecc141ba41ccd2d764ec2564">  119</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ab7531a0fecc141ba41ccd2d764ec2564">convertRealTypePointField</a>(</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os,</div>
@@ -290,169 +290,169 @@ $(document).ready(function(){initNavTree('pointFieldToVTK_8hpp_source.html','');
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="classpFlow_1_1triple.html">realx3</a>*     position,</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>)</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;{</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    os&lt;&lt; <span class="stringliteral">&quot;DATASET UNSTRUCTURED_GRID\n&quot;</span>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    os&lt;&lt; <span class="stringliteral">&quot;POINTS &quot;</span>&lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; float\n&quot;</span>; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    os&lt;&lt; <span class="stringliteral">&quot;DATASET UNSTRUCTURED_GRID\n&quot;</span>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    os&lt;&lt; <span class="stringliteral">&quot;POINTS &quot;</span>&lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; float\n&quot;</span>; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    </div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    {</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            os&lt;&lt; position[i].<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; position[i].<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt;position[i].<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>()&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    os&lt;&lt;<span class="stringliteral">&quot;CELLS &quot;</span>&lt;&lt; numActivePoints&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; 2*numActivePoints&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;numActivePoints; i++)</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        os&lt;&lt; 1 &lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; i&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            os&lt;&lt; position[i].<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; position[i].<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt;position[i].<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>()&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    os&lt;&lt;<span class="stringliteral">&quot;CELLS &quot;</span>&lt;&lt; numActivePoints&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; 2*numActivePoints&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;numActivePoints; i++)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        os&lt;&lt; 1 &lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; i&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    os&lt;&lt;<span class="stringliteral">&quot;CELL_TYPES &quot;</span>&lt;&lt; numActivePoints&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    os&lt;&lt;<span class="stringliteral">&quot;CELL_TYPES &quot;</span>&lt;&lt; numActivePoints&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;numActivePoints; i++)</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        os&lt;&lt; 1 &lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    }</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;POINT_DATA &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
-<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#ad96f820d5174271fdc60bd7731fb9629">  223</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ad96f820d5174271fdc60bd7731fb9629">addInt64PointField</a>(</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <a class="code" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>*      field,</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> )</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;{</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;numActivePoints; i++)</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        os&lt;&lt; 1 &lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;POINT_DATA &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;}</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IntType, <span class="keyword">typename</span> IncludeMaskType&gt;</div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#ae003423c3937028067d2e2e0628a1be3">  221</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ae003423c3937028067d2e2e0628a1be3">addIntPointField</a>(</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    IntType*        field,</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> )</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;FIELD FieldData 1\n&quot;</span>&lt;&lt;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    fieldName &lt;&lt; <span class="stringliteral">&quot; 1 &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; int\n&quot;</span>;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    {</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            os&lt;&lt; field[i] &lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
-<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#a572009305203cb57b4e901247dfae9ba">  246</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a572009305203cb57b4e901247dfae9ba">addRealPointField</a>(</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>*       field,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> )</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;{</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;FIELD FieldData 1\n&quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    fieldName &lt;&lt; <span class="stringliteral">&quot; 1 &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; int\n&quot;</span>;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            os&lt;&lt; field[i] &lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
+<div class="line"><a name="l00244"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#a572009305203cb57b4e901247dfae9ba">  244</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a572009305203cb57b4e901247dfae9ba">addRealPointField</a>(</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>*       field,</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> )</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;{</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;FIELD FieldData 1\n&quot;</span>&lt;&lt;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    fieldName &lt;&lt; <span class="stringliteral">&quot; 1 &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; float\n&quot;</span>;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    {</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            os&lt;&lt; field[i] &lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;}</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
-<div class="line"><a name="l00268"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#ae537fc84534474c6d7247a36336d174e">  268</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ae537fc84534474c6d7247a36336d174e">addRealx3PointField</a>(</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <a class="code" href="classpFlow_1_1triple.html">realx3</a>*     field,</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> )</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;{</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;FIELD FieldData 1\n&quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    fieldName &lt;&lt; <span class="stringliteral">&quot; 1 &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; float\n&quot;</span>;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            os&lt;&lt; field[i] &lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;}</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeMaskType&gt;</div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#ae537fc84534474c6d7247a36336d174e">  266</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ae537fc84534474c6d7247a36336d174e">addRealx3PointField</a>(</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp;   os,</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>        fieldName,</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>       numActivePoints,</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <a class="code" href="classpFlow_1_1triple.html">realx3</a>*     field,</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    IncludeMaskType <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a> )</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;{</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">if</span>(numActivePoints==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">auto</span> [iFirst, iLast] = <a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>.activeRange();</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;FIELD FieldData 1\n&quot;</span>&lt;&lt;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    fieldName &lt;&lt; <span class="stringliteral">&quot; 3 &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; float\n&quot;</span>;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            os&lt;&lt; field[i].<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; field[i].<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt;field[i].<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>()&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    }</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">  291</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">convertTimeFolderPointFields</a>( </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a>,</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> time,</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> destPath,</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> bName)</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;{</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="comment">// check if pointStructure exist in this folder </span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <a class="code" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a> pStructHeader(</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>,</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a>,</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d">objectFile::READ_ALWAYS</a>,</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">objectFile::WRITE_ALWAYS</a>)</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        );</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">if</span>( !pStructHeader.<a class="code" href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">headerOk</a>(<span class="keyword">true</span>) )</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt;<a class="code" href="iOstream_8hpp.html#a47b7813fed88060b439cf45acff0b1e1">yellowColor</a>&lt;&lt;<span class="stringliteral">&quot;Time folder &quot;</span>&lt;&lt; <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a> &lt;&lt;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="stringliteral">&quot; does not contain any pStructure data file. Skipping this folder . . .&quot;</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        &lt;&lt;<a class="code" href="iOstream_8hpp.html#a08e5918c2f896d908122d37a353230c9">defaultColor</a>&lt;&lt;<a class="code" href="namespacepFlow.html#afbf3861e53bc13fd6c82d9eae8f97378">nl</a>;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;FIELD FieldData 1\n&quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    fieldName &lt;&lt; <span class="stringliteral">&quot; 3 &quot;</span> &lt;&lt; numActivePoints &lt;&lt; <span class="stringliteral">&quot; float\n&quot;</span>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=iFirst; i&lt;iLast; ++i)</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    {</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1includeMask.html">includeMask</a>(i))</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            os&lt;&lt; field[i].<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt; field[i].<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>()&lt;&lt;<span class="charliteral">&#39; &#39;</span>&lt;&lt;field[i].<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>()&lt;&lt;<span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    }</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">  289</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">convertTimeFolderPointFields</a>( </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a>,</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> time,</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> destPath,</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> bName)</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;{</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="comment">// check if pointStructure exist in this folder </span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a> pStructHeader(</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>,</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a>,</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d">objectFile::READ_ALWAYS</a>,</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">objectFile::WRITE_ALWAYS</a>)</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        );</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keywordflow">if</span>( !pStructHeader.<a class="code" href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">headerOk</a>(<span class="keyword">true</span>) )</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt;<a class="code" href="iOstream_8hpp.html#a47b7813fed88060b439cf45acff0b1e1">yellowColor</a>&lt;&lt;<span class="stringliteral">&quot;Time folder &quot;</span>&lt;&lt; <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a> &lt;&lt;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="stringliteral">&quot; does not contain any pStructure data file. Skipping this folder . . .&quot;</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        &lt;&lt;<a class="code" href="iOstream_8hpp.html#a08e5918c2f896d908122d37a353230c9">defaultColor</a>&lt;&lt;<a class="code" href="namespacepFlow.html#afbf3861e53bc13fd6c82d9eae8f97378">nl</a>;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <a class="code" href="classpFlow_1_1vtkFile.html">vtkFile</a> vtk(destPath, bName, time);</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <a class="code" href="classpFlow_1_1vtkFile.html">vtkFile</a> vtk(destPath, bName, time);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordflow">if</span>(!vtk) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">if</span>(!vtk) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keyword">auto</span> pStructObjPtr = IOobject::make&lt;pointStructure&gt;(pStructHeader);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keyword">auto</span>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> = pStructObjPtr().getObject&lt;<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&gt;();</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keyword">auto</span> pStructObjPtr = IOobject::make&lt;pointStructure&gt;(pStructHeader);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keyword">auto</span>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> = pStructObjPtr().getObject&lt;<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&gt;();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="comment">// get a list of files in this timeFolder;</span></div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="comment">// get a list of files in this timeFolder;</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">auto</span> posVec = std::as_const(<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>).<a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pointPosition</a>().<a class="code" href="classpFlow_1_1VectorSingle.html#afd947e4fd626c211d08fb83380f3c63c">hostVectorAll</a>();</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keyword">auto</span>* pos = posVec.data();</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;Writing pointStructure to vtk file with &quot;</span>&lt;&lt; <a class="code" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a>(<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.numActive())</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                     &lt;&lt;<span class="stringliteral">&quot; active particles&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <a class="code" href="namespacepFlow_1_1PFtoVTK.html#afc2a9ceaed7302116ea37a4d0f23776c">addUndstrcuturedGridField</a>(</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        vtk(),</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.numActive(),</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        pos,</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.activePointsMaskH());</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keyword">auto</span> posVec = std::as_const(<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>).<a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pointPosition</a>().<a class="code" href="classpFlow_1_1VectorSingle.html#afd947e4fd626c211d08fb83380f3c63c">hostVectorAll</a>();</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keyword">auto</span>* pos = posVec.data();</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;Writing pointStructure to vtk file with &quot;</span>&lt;&lt; <a class="code" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a>(<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.numActive())</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                     &lt;&lt;<span class="stringliteral">&quot; active particles&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <a class="code" href="namespacepFlow_1_1PFtoVTK.html#afc2a9ceaed7302116ea37a4d0f23776c">addUndstrcuturedGridField</a>(</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        vtk(),</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.numActive(),</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        pos,</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.activePointsMaskH());</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keyword">auto</span> fileList = <a class="code" href="namespacepFlow.html#a79c4a81c7fb0a27aabdb1b4a73c750d8">containingFiles</a>(<a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a>);</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keyword">auto</span> fileList = <a class="code" href="namespacepFlow.html#a79c4a81c7fb0a27aabdb1b4a73c750d8">containingFiles</a>(<a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a>);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; file:fileList)</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <a class="code" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a> fieldHeader(</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            file.wordPath(),</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d">objectFile::READ_ALWAYS</a>,</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">objectFile::WRITE_ALWAYS</a>) );</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">if</span>( fieldHeader.<a class="code" href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">headerOk</a>(<span class="keyword">true</span>) )</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        {</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a1e57b8c2d1ea59d162f1a5c252f89be2">convertIntTypesPointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; file:fileList)</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    {</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <a class="code" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a> fieldHeader(</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            file.wordPath(),</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d">objectFile::READ_ALWAYS</a>,</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">objectFile::WRITE_ALWAYS</a>) );</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">if</span>( fieldHeader.<a class="code" href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">headerOk</a>(<span class="keyword">true</span>) )</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            convertIntPointField&lt;int32&gt;(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            convertIntPointField&lt;int64&gt;(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            convertIntPointField&lt;int8&gt;(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ab7531a0fecc141ba41ccd2d764ec2564">convertRealTypePointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a593cdbb62edd04ebb063f7f062c25013">convertRealx3TypePointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        }</div>
@@ -525,57 +525,60 @@ $(document).ready(function(){initNavTree('pointFieldToVTK_8hpp_source.html','');
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        <span class="keywordflow">if</span>( fieldHeader.<a class="code" href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">headerOk</a>(<span class="keyword">true</span>) )</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;        {</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a1e57b8c2d1ea59d162f1a5c252f89be2">convertIntTypesPointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ab7531a0fecc141ba41ccd2d764ec2564">convertRealTypePointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a593cdbb62edd04ebb063f7f062c25013">convertRealx3TypePointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        }</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        {</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            <span class="keywordflow">if</span>(mustExist)</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            {</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;<span class="stringliteral">&quot;Field &quot;</span> &lt;&lt; fieldAddress &lt;&lt; </div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                <span class="stringliteral">&quot; does not exist.&quot;</span>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            }</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            {</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;Could not find &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a>(fieldAddress) &lt;&lt;<span class="stringliteral">&quot; skipping . . .&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            }</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        }</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    }</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;}</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;}</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            convertIntPointField&lt;int32&gt;(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            convertIntPointField&lt;int64&gt;(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            convertIntPointField&lt;int8&gt;(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#ab7531a0fecc141ba41ccd2d764ec2564">convertRealTypePointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            <a class="code" href="namespacepFlow_1_1PFtoVTK.html#a593cdbb62edd04ebb063f7f062c25013">convertRealx3TypePointField</a>(vtk(), fieldHeader, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        }</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        {</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;            <span class="keywordflow">if</span>(mustExist)</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;            {</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;<span class="stringliteral">&quot;Field &quot;</span> &lt;&lt; fieldAddress &lt;&lt; </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                <span class="stringliteral">&quot; does not exist.&quot;</span>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            {</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;Could not find &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a>(fieldAddress) &lt;&lt;<span class="stringliteral">&quot; skipping . . .&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;            }</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        }</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    }</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;}</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;}</div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="preprocessor">#endif </span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_afed74f3e8fdc5e63c61b210f8fa1044c"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#afed74f3e8fdc5e63c61b210f8fa1044c">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected</a></div><div class="ttdeci">bool convertTimeFolderPointFieldsSelected(fileSystem timeFolder, real time, fileSystem destPath, word bName, wordVector fieldsName, bool mustExist)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00360">pointFieldToVTK.hpp:360</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1vtkFile_html"><div class="ttname"><a href="classpFlow_1_1vtkFile.html">pFlow::vtkFile</a></div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8hpp_source.html#l00033">vtkFile.hpp:33</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a7ce9af76cf5b5484f34c8e341dfe6416"><div class="ttname"><a href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pFlow::pointStructureFile__</a></div><div class="ttdeci">const char * pointStructureFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00042">vocabs.hpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html_a67068cb6552c42a5ddb1c66bf6bbf6b3"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html#a67068cb6552c42a5ddb1c66bf6bbf6b3">pFlow::IOfileHeader::objectType</a></div><div class="ttdeci">const word &amp; objectType() const</div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8hpp_source.html#l00072">IOfileHeader.hpp:72</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html_a67068cb6552c42a5ddb1c66bf6bbf6b3"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html#a67068cb6552c42a5ddb1c66bf6bbf6b3">pFlow::IOfileHeader::objectType</a></div><div class="ttdeci">const word &amp; objectType() const</div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8hpp_source.html#l00075">IOfileHeader.hpp:75</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a04db65a6cb5a45695ea75cce1b5d7a10"><div class="ttname"><a href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a></div><div class="ttdeci">#define endREPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00041">streams.hpp:41</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a572009305203cb57b4e901247dfae9ba"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a572009305203cb57b4e901247dfae9ba">pFlow::PFtoVTK::addRealPointField</a></div><div class="ttdeci">bool addRealPointField(iOstream &amp;os, word fieldName, int32 numActivePoints, real *field, IncludeMaskType includeMask)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00246">pointFieldToVTK.hpp:246</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a572009305203cb57b4e901247dfae9ba"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a572009305203cb57b4e901247dfae9ba">pFlow::PFtoVTK::addRealPointField</a></div><div class="ttdeci">bool addRealPointField(iOstream &amp;os, word fieldName, int32 numActivePoints, real *field, IncludeMaskType includeMask)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00244">pointFieldToVTK.hpp:244</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
 <div class="ttc" id="aIOobject_8hpp_html"><div class="ttname"><a href="IOobject_8hpp.html">IOobject.hpp</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ae023080fbd252680e73d5b2c4132edb2"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ae023080fbd252680e73d5b2c4132edb2">pFlow::PFtoVTK::regexCheck</a></div><div class="ttdeci">bool regexCheck(word TYPENAME, word fieldType)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00058">pointFieldToVTK.hpp:58</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_afd947e4fd626c211d08fb83380f3c63c"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#afd947e4fd626c211d08fb83380f3c63c">pFlow::VectorSingle::hostVectorAll</a></div><div class="ttdeci">const INLINE_FUNCTION_H auto hostVectorAll() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00320">VectorSingle.hpp:320</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ae537fc84534474c6d7247a36336d174e"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ae537fc84534474c6d7247a36336d174e">pFlow::PFtoVTK::addRealx3PointField</a></div><div class="ttdeci">bool addRealx3PointField(iOstream &amp;os, word fieldName, int32 numActivePoints, realx3 *field, IncludeMaskType includeMask)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00268">pointFieldToVTK.hpp:268</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_afd947e4fd626c211d08fb83380f3c63c"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#afd947e4fd626c211d08fb83380f3c63c">pFlow::VectorSingle::hostVectorAll</a></div><div class="ttdeci">const INLINE_FUNCTION_H auto hostVectorAll() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00322">VectorSingle.hpp:322</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ae003423c3937028067d2e2e0628a1be3"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ae003423c3937028067d2e2e0628a1be3">pFlow::PFtoVTK::addIntPointField</a></div><div class="ttdeci">bool addIntPointField(iOstream &amp;os, word fieldName, int32 numActivePoints, IntType *field, IncludeMaskType includeMask)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00221">pointFieldToVTK.hpp:221</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ae537fc84534474c6d7247a36336d174e"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ae537fc84534474c6d7247a36336d174e">pFlow::PFtoVTK::addRealx3PointField</a></div><div class="ttdeci">bool addRealx3PointField(iOstream &amp;os, word fieldName, int32 numActivePoints, realx3 *field, IncludeMaskType includeMask)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00266">pointFieldToVTK.hpp:266</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
 <div class="ttc" id="apointFields_8hpp_html"><div class="ttname"><a href="pointFields_8hpp.html">pointFields.hpp</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a79c4a81c7fb0a27aabdb1b4a73c750d8"><div class="ttname"><a href="namespacepFlow.html#a79c4a81c7fb0a27aabdb1b4a73c750d8">pFlow::containingFiles</a></div><div class="ttdeci">fileSystemList containingFiles(const fileSystem &amp;path)</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8cpp_source.html#l00335">fileSystem.cpp:335</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a94809bdb48183ff3ef62935d56f5c1e0"><div class="ttname"><a href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">pFlow::int64</a></div><div class="ttdeci">long long int int64</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00055">builtinTypes.hpp:55</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_af01af7b85b0054651af5f4cc164fe316"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#af01af7b85b0054651af5f4cc164fe316">pFlow::PFtoVTK::convertIntPointField</a></div><div class="ttdeci">bool convertIntPointField(iOstream &amp;os, const IOfileHeader &amp;header, const pointStructure &amp;pStruct)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00081">pointFieldToVTK.hpp:81</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1objectFile_html_a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">pFlow::objectFile::WRITE_ALWAYS</a></div><div class="ttdeci">@ WRITE_ALWAYS</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00046">objectFile.hpp:46</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00312">iOstream.hpp:312</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Field_html"><div class="ttname"><a href="classpFlow_1_1Field.html">pFlow::Field</a></div><div class="ttdef"><b>Definition:</b> <a href="Field_8hpp_source.html#l00033">Field.hpp:33</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1includeMask_html"><div class="ttname"><a href="classpFlow_1_1includeMask.html">pFlow::includeMask</a></div><div class="ttdef"><b>Definition:</b> <a href="includeMask_8hpp_source.html#l00033">includeMask.hpp:33</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_ab9d8d4992e2a55273f2a74397321ad81"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a></div><div class="ttdeci">FUNCTION_H realx3Field_D &amp; pointPosition()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00064">pointStructure.cpp:64</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_ab9d8d4992e2a55273f2a74397321ad81"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a></div><div class="ttdeci">FUNCTION_H realx3Field_D &amp; pointPosition()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00065">pointStructure.cpp:65</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1triple_html_a28d901cc27d3756a830e4de5a484b967"><div class="ttname"><a href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">pFlow::triple::y</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; y()</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00141">triple.hpp:141</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a593cdbb62edd04ebb063f7f062c25013"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a593cdbb62edd04ebb063f7f062c25013">pFlow::PFtoVTK::convertRealx3TypePointField</a></div><div class="ttdeci">bool convertRealx3TypePointField(iOstream &amp;os, const IOfileHeader &amp;header, const pointStructure &amp;pStruct)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00149">pointFieldToVTK.hpp:149</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
@@ -586,17 +589,15 @@ $(document).ready(function(){initNavTree('pointFieldToVTK_8hpp_source.html','');
 <div class="ttc" id="aiOstream_8hpp_html_a08e5918c2f896d908122d37a353230c9"><div class="ttname"><a href="iOstream_8hpp.html#a08e5918c2f896d908122d37a353230c9">defaultColor</a></div><div class="ttdeci">const char * defaultColor</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00031">iOstream.hpp:31</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a86ae30c22a4ef4bc487b40ed52f4d2f9"><div class="ttname"><a href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a></div><div class="ttdeci">Ostream output</div></div>
 <div class="ttc" id="aclasspFlow_1_1objectFile_html_a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d">pFlow::objectFile::READ_ALWAYS</a></div><div class="ttdeci">@ READ_ALWAYS</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00039">objectFile.hpp:39</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a1e57b8c2d1ea59d162f1a5c252f89be2"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a1e57b8c2d1ea59d162f1a5c252f89be2">pFlow::PFtoVTK::convertIntTypesPointField</a></div><div class="ttdeci">bool convertIntTypesPointField(iOstream &amp;os, const IOfileHeader &amp;header, const pointStructure &amp;pStruct)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00079">pointFieldToVTK.hpp:79</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ab7531a0fecc141ba41ccd2d764ec2564"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ab7531a0fecc141ba41ccd2d764ec2564">pFlow::PFtoVTK::convertRealTypePointField</a></div><div class="ttdeci">bool convertRealTypePointField(iOstream &amp;os, const IOfileHeader &amp;header, const pointStructure &amp;pStruct)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00119">pointFieldToVTK.hpp:119</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00033">objectFile.hpp:33</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1triple_html_a5c836d3919741edf1ba805c98dbd21b7"><div class="ttname"><a href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">pFlow::triple::z</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; z()</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00144">triple.hpp:144</a></div></div>
 <div class="ttc" id="asetPointStructure_8hpp_html_a385e32971df44b131e4498181a949a91"><div class="ttname"><a href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a></div><div class="ttdeci">auto &amp; pStruct</div><div class="ttdef"><b>Definition:</b> <a href="setPointStructure_8hpp_source.html#l00024">setPointStructure.hpp:24</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ad96f820d5174271fdc60bd7731fb9629"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ad96f820d5174271fdc60bd7731fb9629">pFlow::PFtoVTK::addInt64PointField</a></div><div class="ttdeci">bool addInt64PointField(iOstream &amp;os, word fieldName, int32 numActivePoints, int64 *field, IncludeMaskType includeMask)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00223">pointFieldToVTK.hpp:223</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1IOfileHeader_html"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html">pFlow::IOfileHeader</a></div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8hpp_source.html#l00035">IOfileHeader.hpp:35</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html_a1a248aa0488b774d5160449992ad31e5"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">pFlow::IOfileHeader::headerOk</a></div><div class="ttdeci">bool headerOk(bool silent=false)</div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8cpp_source.html#l00071">IOfileHeader.cpp:71</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html_a1a248aa0488b774d5160449992ad31e5"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">pFlow::IOfileHeader::headerOk</a></div><div class="ttdeci">bool headerOk(bool silent=false)</div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8cpp_source.html#l00086">IOfileHeader.cpp:86</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ad730e546f21d51aae51c6129acbe8dcd"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ad730e546f21d51aae51c6129acbe8dcd">pFlow::PFtoVTK::checkFieldType</a></div><div class="ttdeci">bool checkFieldType(word objectType)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00070">pointFieldToVTK.hpp:70</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html_a4ae6d6ea877ec8652d86076eaf333c12"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html#a4ae6d6ea877ec8652d86076eaf333c12">pFlow::IOfileHeader::objectName</a></div><div class="ttdeci">const word &amp; objectName() const</div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8hpp_source.html#l00066">IOfileHeader.hpp:66</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a43810217a8e7b2859a59b0ea17b02728"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">pFlow::PFtoVTK::convertTimeFolderPointFields</a></div><div class="ttdeci">bool convertTimeFolderPointFields(fileSystem timeFolder, real time, fileSystem destPath, word bName)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00291">pointFieldToVTK.hpp:291</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html_a4ae6d6ea877ec8652d86076eaf333c12"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html#a4ae6d6ea877ec8652d86076eaf333c12">pFlow::IOfileHeader::objectName</a></div><div class="ttdeci">const word &amp; objectName() const</div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8hpp_source.html#l00069">IOfileHeader.hpp:69</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a43810217a8e7b2859a59b0ea17b02728"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">pFlow::PFtoVTK::convertTimeFolderPointFields</a></div><div class="ttdeci">bool convertTimeFolderPointFields(fileSystem timeFolder, real time, fileSystem destPath, word bName)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00289">pointFieldToVTK.hpp:289</a></div></div>
 <div class="ttc" id="aiOstream_8hpp_html_a47b7813fed88060b439cf45acff0b1e1"><div class="ttname"><a href="iOstream_8hpp.html#a47b7813fed88060b439cf45acff0b1e1">yellowColor</a></div><div class="ttdeci">const char * yellowColor</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00035">iOstream.hpp:35</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1fileSystem_html_ad7cad1b82e1afeea66c2f0649de5d93f"><div class="ttname"><a href="classpFlow_1_1fileSystem.html#ad7cad1b82e1afeea66c2f0649de5d93f">pFlow::fileSystem::wordPath</a></div><div class="ttdeci">word wordPath() const</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00126">fileSystem.hpp:126</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1triple_html_a2f365146ce767d3de7ae125abd193b33"><div class="ttname"><a href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">pFlow::triple::x</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; x()</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00138">triple.hpp:138</a></div></div>
@@ -604,7 +605,7 @@ $(document).ready(function(){initNavTree('pointFieldToVTK_8hpp_source.html','');
 <div class="ttc" id="aclasspFlow_1_1triple_html"><div class="ttname"><a href="classpFlow_1_1triple.html">pFlow::triple&lt; real &gt;</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a71e567553baf2a24a11e442683cde599"><div class="ttname"><a href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a></div><div class="ttdeci">#define yellowText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00030">streams.hpp:30</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Vector_html"><div class="ttname"><a href="classpFlow_1_1Vector.html">pFlow::Vector&lt; word &gt;</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_afbf3861e53bc13fd6c82d9eae8f97378"><div class="ttname"><a href="namespacepFlow.html#afbf3861e53bc13fd6c82d9eae8f97378">pFlow::nl</a></div><div class="ttdeci">constexpr char nl</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00409">iOstream.hpp:409</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_afbf3861e53bc13fd6c82d9eae8f97378"><div class="ttname"><a href="namespacepFlow.html#afbf3861e53bc13fd6c82d9eae8f97378">pFlow::nl</a></div><div class="ttdeci">constexpr char nl</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00417">iOstream.hpp:417</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
 <div class="ttc" id="aiOstream_8hpp_html_a4fcac190f6e62656ac9a86d383b89f4e"><div class="ttname"><a href="iOstream_8hpp.html#a4fcac190f6e62656ac9a86d383b89f4e">greenColor</a></div><div class="ttdeci">const char * greenColor</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00034">iOstream.hpp:34</a></div></div>
 <div class="ttc" id="avtkFile_8hpp_html"><div class="ttname"><a href="vtkFile_8hpp.html">vtkFile.hpp</a></div></div>

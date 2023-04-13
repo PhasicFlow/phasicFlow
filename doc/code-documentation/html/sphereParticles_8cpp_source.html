@@ -183,7 +183,7 @@ $(document).ready(function(){initNavTree('sphereParticles_8cpp_source.html','');
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        0, </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(shapeName_.size()));</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> insertSphereParticles(shapeName_, indices);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> insertSphereParticles(shapeName_, indices, <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
@@ -225,11 +225,11 @@ $(document).ready(function(){initNavTree('sphereParticles_8cpp_source.html','');
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    accelerationTimer_.end();</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    intCorrectTimer_.start();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="comment">//INFO&lt;&lt;&quot;before correct dyn &quot;&lt;&lt;endINFO;</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        dynPointStruct_.correct(this-&gt;dt(), accelertion_);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="comment">//INFO&lt;&lt;&quot;after correct dyn &quot;&lt;&lt;endINFO;</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    </div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        rVelIntegration_().correct(this-&gt;dt(), rVelocity_, rAcceleration_);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="comment">//INFO&lt;&lt;&quot;after correct rvel &quot;&lt;&lt;endINFO;</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    intCorrectTimer_.end();</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    </div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
@@ -242,285 +242,291 @@ $(document).ready(function(){initNavTree('sphereParticles_8cpp_source.html','');
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#af38e902a6e8867893c7fafaeabf99578">  139</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1sphereParticles.html#af38e902a6e8867893c7fafaeabf99578">pFlow::sphereParticles::insertSphereParticles</a>(</div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#a95650ae58375201510b9d36fa846ed07">  139</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1sphereParticles.html#a95650ae58375201510b9d36fa846ed07">pFlow::sphereParticles::insertSphereParticles</a>(</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">wordVector</a>&amp; names,</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1indexContainer.html">int32IndexContainer</a>&amp; indices</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    )</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;{</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">if</span>(names.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()!= indices.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>())</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a> &lt;&lt;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="stringliteral">&quot;sizes of names (&quot;</span>&lt;&lt;names.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()&lt;&lt;<span class="stringliteral">&quot;) and indices (&quot;</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            &lt;&lt; indices.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>()&lt;&lt;<span class="stringliteral">&quot;) do not match \n&quot;</span>;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keyword">auto</span> len = names.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>();</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>  diamVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>  massVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>  IVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int8Vector</a>  pIdVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int32Vector</a> IdVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> d, <a class="code" href="NBSCrossLoop_8hpp.html#ae9d62983f13507bd8805be92eb61a2a4">m</a>, I;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a> pId;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <a class="code" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a>(i, names )</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    {</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">if</span> (diameterMassInertiaPropId(names[i], d, <a class="code" href="NBSCrossLoop_8hpp.html#ae9d62983f13507bd8805be92eb61a2a4">m</a>, I, pId))</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            diamVec.push_back(d);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            massVec.push_back(<a class="code" href="NBSCrossLoop_8hpp.html#ae9d62983f13507bd8805be92eb61a2a4">m</a>);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            IVec.push_back(I);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            pIdVec.push_back(pId);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            IdVec.push_back(idHandler_.getNextId());</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot;failed to calculate properties of shape &quot;</span> &lt;&lt;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;             names[i]&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        }</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">if</span>(!diameter_.insertSetElement(indices, diamVec))</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert diameters to the diameter field. \n&quot;</span>;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">if</span>(!mass_.insertSetElement(indices, massVec))</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert mass to the mass field. \n&quot;</span>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span>(!I_.insertSetElement(indices, IVec))</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    {</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert I to the I field. \n&quot;</span>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    }</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">if</span>(!propertyId_.insertSetElement(indices, pIdVec))</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    {</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert propertyId to the propertyId field. \n&quot;</span>;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">if</span>(!id_.insertSetElement(indices, IdVec))</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert id to the id field. \n&quot;</span>;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880">  219</a></span>&#160;<a class="code" href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880">pFlow::sphereParticles::sphereParticles</a>(</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;control,</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1property.html">property</a>&amp; prop</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;)</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;:</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="classpFlow_1_1particles.html">particles</a>(</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        control,</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        control.settingsDict().getValOrSet(</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="stringliteral">&quot;integrationMethod&quot;</span>,</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(<span class="stringliteral">&quot;AdamsBashforth3&quot;</span>)</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            )</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        ),</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    property_(prop),</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    shapes_(</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        control.caseSetup().emplaceObjectOrGet&lt;<a class="code" href="classpFlow_1_1sphereShape.html">sphereShape</a>&gt;(</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <a class="code" href="namespacepFlow.html#a48979f81009e9bd8c6324e71533025f8">sphereShapeFile__</a>,</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_ALWAYS,</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_NEVER</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                )</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            )</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        ),</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    I_(</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        this-&gt;time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realPointField_D</a>&gt;(</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                <span class="stringliteral">&quot;I&quot;</span>,</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_NEVER,</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_ALWAYS</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                ),</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            static_cast&lt;<a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&gt;(0.0000000001)</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            )</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        ),</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    rVelocity_(</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        this-&gt;time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&gt;(</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                <span class="stringliteral">&quot;rVelocity&quot;</span>,</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_IF_PRESENT,</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_ALWAYS</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                ),</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <a class="code" href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">zero3</a></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            )</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        ),</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    rAcceleration_(</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        this-&gt;time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&gt;(</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                <span class="stringliteral">&quot;rAcceleration&quot;</span>,</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_IF_PRESENT,</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_ALWAYS</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                ),</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <a class="code" href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">zero3</a></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            )</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        ),</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    accelerationTimer_(</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="stringliteral">&quot;Acceleration&quot;</span>, &amp;this-&gt;timers() ),</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    intPredictTimer_(</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="stringliteral">&quot;Integration-predict&quot;</span>, &amp;this-&gt;timers() ),</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    intCorrectTimer_(</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="stringliteral">&quot;Integration-correct&quot;</span>, &amp;this-&gt;timers() )</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;{</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;Creating integration method &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a>(this-&gt;<a class="code" href="classpFlow_1_1particles.html#a887c17e25e0e1482fa64676cfd8c8e0d">integrationMethod</a>())</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;          &lt;&lt; <span class="stringliteral">&quot; for rotational velocity.&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;          </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a> = </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <a class="code" href="classpFlow_1_1integration.html#abdb160904a366a4bf1704ceb1746775a">integration::create</a>(</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="stringliteral">&quot;rVelocity&quot;</span>,</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            this-&gt;<a class="code" href="classpFlow_1_1particles.html#a40f341a9cb1091ba9e3670f98cd002c3">time</a>().<a class="code" href="classpFlow_1_1integration.html">integration</a>(),</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            this-&gt;<a class="code" href="classpFlow_1_1particles.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>(),</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            this-&gt;<a class="code" href="classpFlow_1_1particles.html#a887c17e25e0e1482fa64676cfd8c8e0d">integrationMethod</a>());</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a> )</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="stringliteral">&quot;  error in creating integration object for rVelocity. \n&quot;</span>;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a>-&gt;needSetInitialVals())</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keyword">auto</span> [minInd, maxInd] = <a class="code" href="classpFlow_1_1particles.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>().activeRange();</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <a class="code" href="classpFlow_1_1indexContainer.html">int32IndexContainer</a> indexHD(minInd, maxInd);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = indexHD.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>();</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keyword">auto</span> index = indexHD.<a class="code" href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">indicesHost</a>();</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> rvel(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> hrVel = <a class="code" href="classpFlow_1_1sphereParticles.html#aa585c28b8d04890123cc3fc109b6c0ab">rVelocity_</a>.hostVector();</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        {</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            rvel.push_back( hrVel[index(i)]);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(2)&lt;&lt; <span class="stringliteral">&quot;Initializing the required vectors for rotational velocity integratoin\n &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a>-&gt;setInitialVals(indexHD, rvel);</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="classpFlow_1_1sphereParticles.html#a84343969d723c548f0f20fcd9294d351">initializeParticles</a>())</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    {</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1indexContainer.html">int32IndexContainer</a>&amp; indices,</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">bool</span> setId</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    )</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">if</span>(names.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()!= indices.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>())</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a> &lt;&lt;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="stringliteral">&quot;sizes of names (&quot;</span>&lt;&lt;names.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()&lt;&lt;<span class="stringliteral">&quot;) and indices (&quot;</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            &lt;&lt; indices.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>()&lt;&lt;<span class="stringliteral">&quot;) do not match \n&quot;</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">auto</span> len = names.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>();</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>  diamVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>  massVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>  IVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int8Vector</a>  pIdVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int32Vector</a> IdVec(len, <a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> d, <a class="code" href="NBSCrossLoop_8hpp.html#ae9d62983f13507bd8805be92eb61a2a4">m</a>, I;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a> pId;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <a class="code" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a>(i, names )</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    {</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">if</span> (diameterMassInertiaPropId(names[i], d, <a class="code" href="NBSCrossLoop_8hpp.html#ae9d62983f13507bd8805be92eb61a2a4">m</a>, I, pId))</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            diamVec.push_back(d);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            massVec.push_back(<a class="code" href="NBSCrossLoop_8hpp.html#ae9d62983f13507bd8805be92eb61a2a4">m</a>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            IVec.push_back(I);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            pIdVec.push_back(pId);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordflow">if</span>(setId) IdVec.push_back(idHandler_.getNextId());</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <span class="comment">//output&lt;&lt;&quot; we are in sphereParticles nextId &quot;&lt;&lt; idHandler_.nextId()&lt;&lt;endl;</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot;failed to calculate properties of shape &quot;</span> &lt;&lt;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;             names[i]&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">if</span>(!diameter_.insertSetElement(indices, diamVec))</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert diameters to the diameter field. \n&quot;</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">if</span>(!mass_.insertSetElement(indices, massVec))</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert mass to the mass field. \n&quot;</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">if</span>(!I_.insertSetElement(indices, IVec))</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    {</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert I to the I field. \n&quot;</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">if</span>(!propertyId_.insertSetElement(indices, pIdVec))</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert propertyId to the propertyId field. \n&quot;</span>;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">if</span>(setId)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">if</span>( !id_.insertSetElement(indices, IdVec))</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; <span class="stringliteral">&quot; failed to insert id to the id field. \n&quot;</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        }   </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880">  225</a></span>&#160;<a class="code" href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880">pFlow::sphereParticles::sphereParticles</a>(</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;control,</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1property.html">property</a>&amp; prop</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;)</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;:</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <a class="code" href="classpFlow_1_1particles.html">particles</a>(</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        control,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        control.settingsDict().getValOrSet(</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="stringliteral">&quot;integrationMethod&quot;</span>,</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(<span class="stringliteral">&quot;AdamsBashforth3&quot;</span>)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            )</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        ),</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    property_(prop),</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    shapes_(</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        control.caseSetup().emplaceObjectOrGet&lt;<a class="code" href="classpFlow_1_1sphereShape.html">sphereShape</a>&gt;(</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <a class="code" href="namespacepFlow.html#a48979f81009e9bd8c6324e71533025f8">sphereShapeFile__</a>,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_ALWAYS,</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_NEVER</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                )</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            )</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        ),</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    I_(</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        this-&gt;time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realPointField_D</a>&gt;(</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                <span class="stringliteral">&quot;I&quot;</span>,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_NEVER,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_ALWAYS</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                ),</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            static_cast&lt;<a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&gt;(0.0000000001)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            )</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        ),</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    rVelocity_(</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        this-&gt;time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&gt;(</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                <span class="stringliteral">&quot;rVelocity&quot;</span>,</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_IF_PRESENT,</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_ALWAYS</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                ),</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <a class="code" href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">zero3</a></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            )</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        ),</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    rAcceleration_(</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        this-&gt;time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&gt;(</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                <span class="stringliteral">&quot;rAcceleration&quot;</span>,</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::READ_IF_PRESENT,</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>::WRITE_ALWAYS</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                ),</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <a class="code" href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">zero3</a></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            )</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        ),</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    accelerationTimer_(</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="stringliteral">&quot;Acceleration&quot;</span>, &amp;this-&gt;timers() ),</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    intPredictTimer_(</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="stringliteral">&quot;Integration-predict&quot;</span>, &amp;this-&gt;timers() ),</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    intCorrectTimer_(</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="stringliteral">&quot;Integration-correct&quot;</span>, &amp;this-&gt;timers() )</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;{</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;Creating integration method &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a>(this-&gt;<a class="code" href="classpFlow_1_1particles.html#a887c17e25e0e1482fa64676cfd8c8e0d">integrationMethod</a>())</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;          &lt;&lt; <span class="stringliteral">&quot; for rotational velocity.&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;          </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a> = </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <a class="code" href="classpFlow_1_1integration.html#abdb160904a366a4bf1704ceb1746775a">integration::create</a>(</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            <span class="stringliteral">&quot;rVelocity&quot;</span>,</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            this-&gt;<a class="code" href="classpFlow_1_1particles.html#a40f341a9cb1091ba9e3670f98cd002c3">time</a>().<a class="code" href="classpFlow_1_1integration.html">integration</a>(),</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            this-&gt;<a class="code" href="classpFlow_1_1particles.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>(),</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            this-&gt;<a class="code" href="classpFlow_1_1particles.html#a887c17e25e0e1482fa64676cfd8c8e0d">integrationMethod</a>());</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a> )</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="stringliteral">&quot;  error in creating integration object for rVelocity. \n&quot;</span>;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a>-&gt;needSetInitialVals())</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keyword">auto</span> [minInd, maxInd] = <a class="code" href="classpFlow_1_1particles.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>().activeRange();</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <a class="code" href="classpFlow_1_1indexContainer.html">int32IndexContainer</a> indexHD(minInd, maxInd);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = indexHD.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>();</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keyword">auto</span> index = indexHD.<a class="code" href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">indicesHost</a>();</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> rvel(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> hrVel = <a class="code" href="classpFlow_1_1sphereParticles.html#aa585c28b8d04890123cc3fc109b6c0ab">rVelocity_</a>.hostVector();</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        {</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            rvel.push_back( hrVel[index(i)]);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(2)&lt;&lt; <span class="stringliteral">&quot;Initializing the required vectors for rotational velocity integratoin\n &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <a class="code" href="classpFlow_1_1sphereParticles.html#a1166eb30f8a6e6eb69bddb77706f122c">rVelIntegration_</a>-&gt;setInitialVals(indexHD, rvel);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;} </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#a98372d2b87e1c67d4b2eb0517336abf7">  334</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1sphereParticles.html#a98372d2b87e1c67d4b2eb0517336abf7">pFlow::sphereParticles::update</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a>&amp; msg) </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;{</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">if</span>(rVelIntegration_-&gt;needSetInitialVals())</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    {</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keyword">auto</span> indexHD = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().insertedPointIndex();</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="classpFlow_1_1sphereParticles.html#a84343969d723c548f0f20fcd9294d351">initializeParticles</a>())</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;} </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#a98372d2b87e1c67d4b2eb0517336abf7">  340</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1sphereParticles.html#a98372d2b87e1c67d4b2eb0517336abf7">pFlow::sphereParticles::update</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a>&amp; msg) </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;{</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = indexHD.size();</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keyword">auto</span> index = indexHD.indicesHost();</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> rvel(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> hrVel = rVelocity_.hostVector();</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            rvel.push_back( hrVel[index(i)]);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        }</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        rVelIntegration_-&gt;setInitialVals(indexHD, rvel);</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    }   </div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;}</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba">pFlow::sphereParticles::insertParticles</a></div>
-<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba">  362</a></span>&#160;(</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; position,</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">wordVector</a>&amp;  shapes,</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1setFieldList.html">setFieldList</a>&amp; setField</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; )</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">if</span>( position.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() != shapes.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() )</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="stringliteral">&quot;  size of vectors position (&quot;</span>&lt;&lt;position.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()&lt;&lt;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="stringliteral">&quot;) and shapes (&quot;</span>&lt;&lt;shapes.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()&lt;&lt;<span class="stringliteral">&quot;) are not the same. \n&quot;</span>;</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keyword">auto</span> exclusionListAllPtr = getFieldObjectList(); </div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keyword">auto</span> newInsertedPtr = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().insertPoints( position, setField, time(), exclusionListAllPtr());</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    </div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordflow">if</span>(!newInsertedPtr)</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    {</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <span class="stringliteral">&quot;  error in inserting points into pStruct. \n&quot;</span>;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    }</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keyword">auto</span>&amp; newInserted = newInsertedPtr();</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    </div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keywordflow">if</span>(!shapeName_.insertSetElement(newInserted, shapes))</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    {</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="stringliteral">&quot;  error in inserting shapes into sphereParticles system.\n&quot;</span>;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    }   </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordflow">if</span>( !insertSphereParticles(shapes, newInserted) )</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; </div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="stringliteral">&quot;error in inserting shapes into the sphereParticles. \n&quot;</span>;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="keyword">auto</span> activeR = this-&gt;activeRange();</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Active range is &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a>(<span class="stringliteral">&quot;[&quot;</span>&lt;&lt;activeR.first&lt;&lt;<span class="stringliteral">&quot;, &quot;</span>&lt;&lt;activeR.second&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>)&lt;&lt;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    <span class="stringliteral">&quot; and number of active points is &quot;</span>&lt;&lt; <a class="code" href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a>(this-&gt;numActive())&lt;&lt;</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="stringliteral">&quot; and pointStructure capacity is &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a>(this-&gt;capacity())&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">if</span>(rVelIntegration_-&gt;needSetInitialVals())</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keyword">auto</span> indexHD = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().insertedPointIndex();</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = indexHD.size();</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keyword">auto</span> index = indexHD.indicesHost();</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> rvel(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> hrVel = rVelocity_.hostVector();</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        {</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            rvel.push_back( hrVel[index(i)]);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        rVelIntegration_-&gt;setInitialVals(indexHD, rvel);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    }   </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;}</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba">pFlow::sphereParticles::insertParticles</a></div>
+<div class="line"><a name="l00368"></a><span class="lineno"><a class="line" href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba">  368</a></span>&#160;(</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; position,</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">wordVector</a>&amp;  shapes,</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1setFieldList.html">setFieldList</a>&amp; setField</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; )</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;{</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordflow">if</span>( position.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() != shapes.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() )</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="stringliteral">&quot;  size of vectors position (&quot;</span>&lt;&lt;position.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()&lt;&lt;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="stringliteral">&quot;) and shapes (&quot;</span>&lt;&lt;shapes.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()&lt;&lt;<span class="stringliteral">&quot;) are not the same. \n&quot;</span>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    }</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keyword">auto</span> exclusionListAllPtr = getFieldObjectList(); </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keyword">auto</span> newInsertedPtr = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().insertPoints( position, setField, time(), exclusionListAllPtr());</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    </div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordflow">if</span>(!newInsertedPtr)</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    {</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="stringliteral">&quot;  error in inserting points into pStruct. \n&quot;</span>;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keyword">auto</span>&amp; newInserted = newInsertedPtr();</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">if</span>(!shapeName_.insertSetElement(newInserted, shapes))</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="stringliteral">&quot;  error in inserting shapes into sphereParticles system.\n&quot;</span>;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    }   </div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordflow">if</span>( !insertSphereParticles(shapes, newInserted) )</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    {</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="stringliteral">&quot;error in inserting shapes into the sphereParticles. \n&quot;</span>;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    }</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    </div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        </div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;}</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keyword">auto</span> activeR = this-&gt;activeRange();</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Active range is &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">yellowText</a>(<span class="stringliteral">&quot;[&quot;</span>&lt;&lt;activeR.first&lt;&lt;<span class="stringliteral">&quot;, &quot;</span>&lt;&lt;activeR.second&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>)&lt;&lt;</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    <span class="stringliteral">&quot; and number of active points is &quot;</span>&lt;&lt; <a class="code" href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a>(this-&gt;numActive())&lt;&lt;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="stringliteral">&quot; and pointStructure capacity is &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a>(this-&gt;capacity())&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        </div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespacepFlow_html_a48979f81009e9bd8c6324e71533025f8"><div class="ttname"><a href="namespacepFlow.html#a48979f81009e9bd8c6324e71533025f8">pFlow::sphereShapeFile__</a></div><div class="ttdeci">const char * sphereShapeFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00041">vocabs.hpp:41</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1particles_html_ada71b97666fe3f66b31690bf12633c32"><div class="ttname"><a href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32">pFlow::particles::beforeIteration</a></div><div class="ttdeci">bool beforeIteration() override</div><div class="ttdef"><b>Definition:</b> <a href="particles_8hpp_source.html#l00244">particles.hpp:244</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particles_html_ada71b97666fe3f66b31690bf12633c32"><div class="ttname"><a href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32">pFlow::particles::beforeIteration</a></div><div class="ttdeci">bool beforeIteration() override</div><div class="ttdef"><b>Definition:</b> <a href="particles_8cpp_source.html#l00153">particles.cpp:153</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a04db65a6cb5a45695ea75cce1b5d7a10"><div class="ttname"><a href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a></div><div class="ttdeci">#define endREPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00041">streams.hpp:41</a></div></div>
 <div class="ttc" id="asetFieldList_8hpp_html"><div class="ttname"><a href="setFieldList_8hpp.html">setFieldList.hpp</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
@@ -530,27 +536,26 @@ $(document).ready(function(){initNavTree('sphereParticles_8cpp_source.html','');
 <div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_acdd3b34e25a44bec4f18b95e2440ff9a"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#acdd3b34e25a44bec4f18b95e2440ff9a">pFlow::sphereParticles::diameterMassInertiaPropId</a></div><div class="ttdeci">bool diameterMassInertiaPropId(const word &amp;shName, real &amp;diam, real &amp;mass, real &amp;I, int8 &amp;propIdx)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00037">sphereParticles.cpp:37</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a213e43875efd5fefe28d0da89432ff7a"><div class="ttname"><a href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a></div><div class="ttdeci">#define cyanText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00034">streams.hpp:34</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_af38e902a6e8867893c7fafaeabf99578"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#af38e902a6e8867893c7fafaeabf99578">pFlow::sphereParticles::insertSphereParticles</a></div><div class="ttdeci">bool insertSphereParticles(const wordVector &amp;names, const int32IndexContainer &amp;indices)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00139">sphereParticles.cpp:139</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1integration_html"><div class="ttname"><a href="classpFlow_1_1integration.html">pFlow::integration</a></div><div class="ttdef"><b>Definition:</b> <a href="integration_8hpp_source.html#l00035">integration.hpp:35</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00059">builtinTypes.hpp:59</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_af3a0e20c9660776af6f0b8118e89e880"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880">pFlow::sphereParticles::sphereParticles</a></div><div class="ttdeci">sphereParticles(systemControl &amp;control, const property &amp;prop)</div><div class="ttdoc">construct from systemControl and property</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00219">sphereParticles.cpp:219</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_af3a0e20c9660776af6f0b8118e89e880"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880">pFlow::sphereParticles::sphereParticles</a></div><div class="ttdeci">sphereParticles(systemControl &amp;control, const property &amp;prop)</div><div class="ttdoc">construct from systemControl and property</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00225">sphereParticles.cpp:225</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1systemControl_html"><div class="ttname"><a href="classpFlow_1_1systemControl.html">pFlow::systemControl</a></div><div class="ttdef"><b>Definition:</b> <a href="systemControl_8hpp_source.html#l00041">systemControl.hpp:41</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a9c4454c5f18c8245eaaebf2b4832eab0"><div class="ttname"><a href="namespacepFlow.html#a9c4454c5f18c8245eaaebf2b4832eab0">pFlow::printKeys</a></div><div class="ttdeci">iOstream &amp; printKeys(iOstream &amp;os, const wordHashMap&lt; T &gt; &amp;m)</div></div>
-<div class="ttc" id="aclasspFlow_1_1indexContainer_html_a7bb1be8d14aca7330e90c5b60493061b"><div class="ttname"><a href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">pFlow::indexContainer::size</a></div><div class="ttdeci">INLINE_FUNCTION_HD size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="indexContainer_8hpp_source.html#l00107">indexContainer.hpp:107</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1indexContainer_html_a7bb1be8d14aca7330e90c5b60493061b"><div class="ttname"><a href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">pFlow::indexContainer::size</a></div><div class="ttdeci">INLINE_FUNCTION_HD size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="indexContainer_8hpp_source.html#l00115">indexContainer.hpp:115</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a477d522d35403bd985ae105bd759e9d1"><div class="ttname"><a href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">pFlow::zero3</a></div><div class="ttdeci">const realx3 zero3(0.0)</div><div class="ttdef"><b>Definition:</b> <a href="types_8hpp_source.html#l00097">types.hpp:97</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Vector_html_a10efdf47ffedbdc720f71c2f72b98d98"><div class="ttname"><a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">pFlow::Vector::size</a></div><div class="ttdeci">auto size() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00299">Vector.hpp:299</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_a10efdf47ffedbdc720f71c2f72b98d98"><div class="ttname"><a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">pFlow::Vector::size</a></div><div class="ttdeci">auto size() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00301">Vector.hpp:301</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html_aea4493f25ef82d9338f4b7dd1059f675"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">pFlow::sphereParticlesKernels::acceleration</a></div><div class="ttdeci">void acceleration(realx3 g, deviceViewType1D&lt; real &gt; mass, deviceViewType1D&lt; realx3 &gt; force, deviceViewType1D&lt; real &gt; I, deviceViewType1D&lt; realx3 &gt; torque, IncludeFunctionType incld, deviceViewType1D&lt; realx3 &gt; lAcc, deviceViewType1D&lt; realx3 &gt; rAcc)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8hpp_source.html#l00034">sphereParticlesKernels.hpp:34</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventObserver_html"><div class="ttname"><a href="classpFlow_1_1eventObserver.html">pFlow::eventObserver</a></div><div class="ttdef"><b>Definition:</b> <a href="eventObserver_8hpp_source.html#l00033">eventObserver.hpp:33</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00312">iOstream.hpp:312</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1particles_html_a887c17e25e0e1482fa64676cfd8c8e0d"><div class="ttname"><a href="classpFlow_1_1particles.html#a887c17e25e0e1482fa64676cfd8c8e0d">pFlow::particles::integrationMethod</a></div><div class="ttdeci">auto integrationMethod() const</div><div class="ttdef"><b>Definition:</b> <a href="particles_8hpp_source.html#l00103">particles.hpp:103</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a8a46f36158973e7200555bc769846a8a"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a8a46f36158973e7200555bc769846a8a">pFlow::sphereParticles::getFieldObjectList</a></div><div class="ttdeci">virtual uniquePtr&lt; List&lt; eventObserver * &gt; &gt; getFieldObjectList() const override</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00026">sphereParticles.cpp:26</a></div></div>
 <div class="ttc" id="astreams_8hpp_html_a37a406f400cfe49d19e51bfcc34cd2d3"><div class="ttname"><a href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a></div><div class="ttdeci">#define greenText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00032">streams.hpp:32</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a98372d2b87e1c67d4b2eb0517336abf7"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a98372d2b87e1c67d4b2eb0517336abf7">pFlow::sphereParticles::update</a></div><div class="ttdeci">bool update(const eventMessage &amp;msg) override</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00334">sphereParticles.cpp:334</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a98372d2b87e1c67d4b2eb0517336abf7"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a98372d2b87e1c67d4b2eb0517336abf7">pFlow::sphereParticles::update</a></div><div class="ttdeci">bool update(const eventMessage &amp;msg) override</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00340">sphereParticles.cpp:340</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a5ab4b6c611c3256e54f51bbfc484d58e"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e">pFlow::sphereParticles::afterIteration</a></div><div class="ttdeci">bool afterIteration() override</div><div class="ttdoc">after iteration step</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00133">sphereParticles.cpp:133</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1particles_html_a40f341a9cb1091ba9e3670f98cd002c3"><div class="ttname"><a href="classpFlow_1_1particles.html#a40f341a9cb1091ba9e3670f98cd002c3">pFlow::particles::time</a></div><div class="ttdeci">const auto &amp; time() const</div><div class="ttdef"><b>Definition:</b> <a href="particles_8hpp_source.html#l00095">particles.hpp:95</a></div></div>
 <div class="ttc" id="asphereParticlesKernels_8hpp_html"><div class="ttname"><a href="sphereParticlesKernels_8hpp.html">sphereParticlesKernels.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a99cba4c27cdaa229242ccd3b22b04fba"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba">pFlow::sphereParticles::insertParticles</a></div><div class="ttdeci">bool insertParticles(const realx3Vector &amp;position, const wordVector &amp;shapes, const setFieldList &amp;setField) override</div><div class="ttdoc">Insert new particles in position with specified shapes.</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00362">sphereParticles.cpp:362</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a99cba4c27cdaa229242ccd3b22b04fba"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba">pFlow::sphereParticles::insertParticles</a></div><div class="ttdeci">bool insertParticles(const realx3Vector &amp;position, const wordVector &amp;shapes, const setFieldList &amp;setField) override</div><div class="ttdoc">Insert new particles in position with specified shapes.</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00368">sphereParticles.cpp:368</a></div></div>
 <div class="ttc" id="astructRESERVE_html"><div class="ttname"><a href="structRESERVE.html">RESERVE</a></div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00038">Vector.hpp:38</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00035">pointField.hpp:35</a></div></div>
 <div class="ttc" id="aNBSCrossLoop_8hpp_html_aad8b608072a1b6dcd9e91de38ee2925f"><div class="ttname"><a href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a></div><div class="ttdeci">int32 n</div><div class="ttdef"><b>Definition:</b> <a href="NBSCrossLoop_8hpp_source.html#l00024">NBSCrossLoop.hpp:24</a></div></div>
@@ -561,10 +566,11 @@ $(document).ready(function(){initNavTree('sphereParticles_8cpp_source.html','');
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a95775f9987ece054ee634ba2aa091040"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a95775f9987ece054ee634ba2aa091040">pFlow::sphereParticles::I_</a></div><div class="ttdeci">realPointField_D &amp; I_</div><div class="ttdoc">pointField of inertial of particles</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8hpp_source.html#l00057">sphereParticles.hpp:57</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1setFieldList_html"><div class="ttname"><a href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a></div><div class="ttdef"><b>Definition:</b> <a href="setFieldList_8hpp_source.html#l00032">setFieldList.hpp:32</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_ae8c7f45b1b39def821f63012151da10c"><div class="ttname"><a href="namespacepFlow.html#ae8c7f45b1b39def821f63012151da10c">pFlow::pow</a></div><div class="ttdeci">Vector&lt; T, Allocator &gt; pow(const Vector&lt; T, Allocator &gt; &amp;v, T e)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00109">VectorMath.hpp:109</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1particles_html_a2505bb9c917d337dddb089997023c0af"><div class="ttname"><a href="classpFlow_1_1particles.html#a2505bb9c917d337dddb089997023c0af">pFlow::particles::getFieldObjectList</a></div><div class="ttdeci">virtual uniquePtr&lt; List&lt; eventObserver * &gt; &gt; getFieldObjectList() const</div><div class="ttdef"><b>Definition:</b> <a href="particles_8cpp_source.html#l00154">particles.cpp:154</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particles_html_a2505bb9c917d337dddb089997023c0af"><div class="ttname"><a href="classpFlow_1_1particles.html#a2505bb9c917d337dddb089997023c0af">pFlow::particles::getFieldObjectList</a></div><div class="ttdeci">virtual uniquePtr&lt; List&lt; eventObserver * &gt; &gt; getFieldObjectList() const</div><div class="ttdef"><b>Definition:</b> <a href="particles_8cpp_source.html#l00183">particles.cpp:183</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html_ac6c2cd1218587d4992ab1344890520d6"><div class="ttname"><a href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a></div><div class="ttdeci">#define ForAll(i, container)</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00071">pFlowMacros.hpp:71</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1indexContainer_html_afc2c6b6e3530d1a891d4b2e94b94ff0b"><div class="ttname"><a href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">pFlow::indexContainer::indicesHost</a></div><div class="ttdeci">auto indicesHost() const</div><div class="ttdef"><b>Definition:</b> <a href="indexContainer_8hpp_source.html#l00153">indexContainer.hpp:153</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1indexContainer_html_afc2c6b6e3530d1a891d4b2e94b94ff0b"><div class="ttname"><a href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">pFlow::indexContainer::indicesHost</a></div><div class="ttdeci">auto indicesHost() const</div><div class="ttdef"><b>Definition:</b> <a href="indexContainer_8hpp_source.html#l00171">indexContainer.hpp:171</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_afa767bddda52eb71cea18f755e17d559"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">pFlow::sphereParticles::iterate</a></div><div class="ttdeci">bool iterate() override</div><div class="ttdoc">iterate particles</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00104">sphereParticles.cpp:104</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a95650ae58375201510b9d36fa846ed07"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a95650ae58375201510b9d36fa846ed07">pFlow::sphereParticles::insertSphereParticles</a></div><div class="ttdeci">bool insertSphereParticles(const wordVector &amp;names, const int32IndexContainer &amp;indices, bool setId=true)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00139">sphereParticles.cpp:139</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00033">objectFile.hpp:33</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1integration_html_abdb160904a366a4bf1704ceb1746775a"><div class="ttname"><a href="classpFlow_1_1integration.html#abdb160904a366a4bf1704ceb1746775a">pFlow::integration::create</a></div><div class="ttdeci">static uniquePtr&lt; integration &gt; create(const word &amp;baseName, repository &amp;owner, const pointStructure &amp;pStruct, const word &amp;method)</div><div class="ttdef"><b>Definition:</b> <a href="integration_8cpp_source.html#l00040">integration.cpp:40</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1sphereParticles_html_a84343969d723c548f0f20fcd9294d351"><div class="ttname"><a href="classpFlow_1_1sphereParticles.html#a84343969d723c548f0f20fcd9294d351">pFlow::sphereParticles::initializeParticles</a></div><div class="ttdeci">bool initializeParticles()</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticles_8cpp_source.html#l00073">sphereParticles.cpp:73</a></div></div>

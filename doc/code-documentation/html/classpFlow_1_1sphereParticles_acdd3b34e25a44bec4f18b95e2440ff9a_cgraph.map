@@ -1,6 +1,6 @@
 <map id="diameterMassInertiaPropId" name="diameterMassInertiaPropId">
 <area shape="rect" id="node1" title=" " alt="" coords="5,56,204,83"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="269,5,365,32"/>
-<area shape="rect" id="node3" href="$namespacepFlow.html#ae8c7f45b1b39def821f63012151da10c" title=" " alt="" coords="269,56,364,83"/>
-<area shape="rect" id="node4" href="$namespacepFlow.html#a9c4454c5f18c8245eaaebf2b4832eab0" title=" " alt="" coords="252,107,381,133"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="269,5,366,32"/>
+<area shape="rect" id="node3" href="$namespacepFlow.html#ae8c7f45b1b39def821f63012151da10c" title=" " alt="" coords="269,56,365,83"/>
+<area shape="rect" id="node4" href="$namespacepFlow.html#a9c4454c5f18c8245eaaebf2b4832eab0" title=" " alt="" coords="252,107,383,133"/>
 </map>

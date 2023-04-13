@@ -2,6 +2,9 @@ var dir_3104238dba096c99a27b6bccac80df1f =
 [
     [ "fieldOperations.hpp", "fieldOperations_8hpp.html", "fieldOperations_8hpp" ],
     [ "includeMask.cpp", "includeMask_8cpp.html", null ],
+    [ "includeMask.hpp", "includeMask_8hpp.html", [
+      [ "includeMask", "classpFlow_1_1includeMask.html", "classpFlow_1_1includeMask" ]
+    ] ],
     [ "IncludeMask.hpp", "IncludeMask_8hpp.html", [
       [ "greaterThanOp", "structpFlow_1_1greaterThanOp.html", "structpFlow_1_1greaterThanOp" ],
       [ "greaterThanEqOp", "structpFlow_1_1greaterThanEqOp.html", "structpFlow_1_1greaterThanEqOp" ],
@@ -16,9 +19,6 @@ var dir_3104238dba096c99a27b6bccac80df1f =
       [ "compareZero", "classpFlow_1_1compareZero.html", "classpFlow_1_1compareZero" ],
       [ "IncludeMask", "classpFlow_1_1IncludeMask.html", "classpFlow_1_1IncludeMask" ],
       [ "IncludeMask< T, allOp< T > >", "classpFlow_1_1IncludeMask_3_01T_00_01allOp_3_01T_01_4_01_4.html", "classpFlow_1_1IncludeMask_3_01T_00_01allOp_3_01T_01_4_01_4" ]
-    ] ],
-    [ "includeMask.hpp", "includeMask_8hpp.html", [
-      [ "includeMask", "classpFlow_1_1includeMask.html", "classpFlow_1_1includeMask" ]
     ] ],
     [ "IncludeMasks.cpp", "IncludeMasks_8cpp.html", null ],
     [ "pointRectCell.hpp", "pointRectCell_8hpp.html", [

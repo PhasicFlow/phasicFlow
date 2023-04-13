@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('classpFlow_1_1demComponent.html',''); 
 <div class="center"><img src="classpFlow_1_1demComponent__inherit__graph.png" border="0" usemap="#demComponent_inherit__map" alt="Inheritance graph"/></div>
 <map name="demComponent_inherit__map" id="demComponent_inherit__map">
 <area shape="rect" title=" " alt="" coords="143,5,269,32"/>
-<area shape="rect" href="classpFlow_1_1demGeometry.html" title=" " alt="" coords="5,80,121,107"/>
+<area shape="rect" href="classpFlow_1_1demGeometry.html" title="base for geometry that manages control" alt="" coords="5,80,121,107"/>
 <area shape="rect" href="classpFlow_1_1demInteraction.html" title=" " alt="" coords="145,80,267,107"/>
 <area shape="rect" href="classpFlow_1_1demParticles.html" title=" " alt="" coords="291,80,398,107"/>
 </map>
@@ -283,7 +283,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00038">demComponent::control_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="particles_8hpp_source.html#l00244">particles::beforeIteration()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="particles_8cpp_source.html#l00153">particles::beforeIteration()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -352,7 +352,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00068">68</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00038">demComponent::control_</a>, <a class="el" href="timeControl_8hpp_source.html#l00102">timeControl::dt()</a>, and <a class="el" href="systemControl_8hpp_source.html#l00123">systemControl::time()</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00038">demComponent::control_</a>, <a class="el" href="timeControl_8hpp_source.html#l00106">timeControl::dt()</a>, and <a class="el" href="systemControl_8hpp_source.html#l00123">systemControl::time()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
@@ -393,7 +393,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00074">74</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00038">demComponent::control_</a>, <a class="el" href="timeControl_8hpp_source.html#l00131">timeControl::currentTime()</a>, and <a class="el" href="systemControl_8hpp_source.html#l00123">systemControl::time()</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00038">demComponent::control_</a>, <a class="el" href="timeControl_8hpp_source.html#l00135">timeControl::currentTime()</a>, and <a class="el" href="systemControl_8hpp_source.html#l00123">systemControl::time()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
@@ -490,7 +490,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32">particles</a>, <a class="el" href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">geometry</a>, <a class="el" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32">sphereParticles</a>, <a class="el" href="classpFlow_1_1sphereInteraction.html#ada71b97666fe3f66b31690bf12633c32">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, and <a class="el" href="classpFlow_1_1geometryMotion.html#ada71b97666fe3f66b31690bf12633c32">geometryMotion&lt; MotionModelType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">geometry</a>, <a class="el" href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32">particles</a>, <a class="el" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32">sphereParticles</a>, <a class="el" href="classpFlow_1_1geometryMotion.html#ada71b97666fe3f66b31690bf12633c32">geometryMotion&lt; MotionModelType &gt;</a>, and <a class="el" href="classpFlow_1_1sphereInteraction.html#ada71b97666fe3f66b31690bf12633c32">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>.</p>
 
 </div>
 </div>
@@ -517,7 +517,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">sphereParticles</a>, <a class="el" href="classpFlow_1_1sphereInteraction.html#afa767bddda52eb71cea18f755e17d559">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, and <a class="el" href="classpFlow_1_1geometryMotion.html#afa767bddda52eb71cea18f755e17d559">geometryMotion&lt; MotionModelType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">sphereParticles</a>, <a class="el" href="classpFlow_1_1geometryMotion.html#afa767bddda52eb71cea18f755e17d559">geometryMotion&lt; MotionModelType &gt;</a>, and <a class="el" href="classpFlow_1_1sphereInteraction.html#afa767bddda52eb71cea18f755e17d559">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>.</p>
 
 </div>
 </div>

@@ -229,12 +229,20 @@ $(document).ready(function(){initNavTree('pointField_8cpp_source.html',''); init
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="comment">//Vector&lt;T&gt; vals( newElems.size(), defaultValue_);</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">return</span> this-&gt;insertSetElement(newElems, defaultValue_);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span>(msg.<a class="code" href="classpFlow_1_1eventMessage.html#a9cad61d8f402baa44e4dcd75635f9fc5">isRearranged</a>())</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keyword">auto</span> sortedIndex = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().mortonSortedIndex();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        this-&gt;sortItems(sortedIndex);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclasspFlow_1_1eventMessage_html_a9cad61d8f402baa44e4dcd75635f9fc5"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a9cad61d8f402baa44e4dcd75635f9fc5">pFlow::eventMessage::isRearranged</a></div><div class="ttdeci">bool isRearranged() const</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00092">eventMessage.hpp:92</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointField_html_aa8b686deb96050edefdcef6f22aab8f0"><div class="ttname"><a href="classpFlow_1_1pointField.html#aa8b686deb96050edefdcef6f22aab8f0">pFlow::pointField::writePointField</a></div><div class="ttdeci">bool writePointField(iOstream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="pointField_8cpp_source.html#l00034">pointField.cpp:34</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1eventMessage_html"><div class="ttname"><a href="classpFlow_1_1eventMessage.html">pFlow::eventMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00029">eventMessage.hpp:29</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointField_html_af594ba73474d415474d32afc783799b1"><div class="ttname"><a href="classpFlow_1_1pointField.html#af594ba73474d415474d32afc783799b1">pFlow::pointField::pStruct</a></div><div class="ttdeci">const pointStructure &amp; pStruct() const</div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00117">pointField.hpp:117</a></div></div>

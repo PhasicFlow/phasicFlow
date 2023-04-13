@@ -1,6 +1,6 @@
 <map id="readHeader" name="readHeader">
 <area shape="rect" id="node1" title=" " alt="" coords="5,64,104,91"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="199,5,295,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1iIstream.html#ae74a624bbb0665ed381b67cbda681031" title=" " alt="" coords="152,57,343,98"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title=" " alt="" coords="161,123,334,149"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="200,5,297,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1iIstream.html#ae74a624bbb0665ed381b67cbda681031" title=" " alt="" coords="152,57,345,98"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335" title="Return the name of the stream." alt="" coords="161,123,336,149"/>
 </map>

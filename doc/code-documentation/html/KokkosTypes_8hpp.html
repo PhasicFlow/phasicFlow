@@ -103,7 +103,8 @@ $(document).ready(function(){initNavTree('KokkosTypes_8hpp.html',''); initResiza
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">KokkosTypes.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -115,10 +116,11 @@ $(document).ready(function(){initNavTree('KokkosTypes_8hpp.html',''); initResiza
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="KokkosTypes_8hpp__incl.png" border="0" usemap="#src_2phasicFlow_2Kokkos_2KokkosTypes_8hpp" alt=""/></div>
 <map name="src_2phasicFlow_2Kokkos_2KokkosTypes_8hpp" id="src_2phasicFlow_2Kokkos_2KokkosTypes_8hpp">
-<area shape="rect" title=" " alt="" coords="161,5,329,47"/>
+<area shape="rect" title=" " alt="" coords="264,5,432,47"/>
 <area shape="rect" title=" " alt="" coords="5,95,139,121"/>
 <area shape="rect" title=" " alt="" coords="163,95,327,121"/>
 <area shape="rect" title=" " alt="" coords="351,95,550,121"/>
+<area shape="rect" href="iOstream_8hpp.html" title=" " alt="" coords="574,95,685,121"/>
 </map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -128,19 +130,19 @@ $(document).ready(function(){initNavTree('KokkosTypes_8hpp.html',''); initResiza
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="KokkosTypes_8hpp__dep__incl.png" border="0" usemap="#src_2phasicFlow_2Kokkos_2KokkosTypes_8hppdep" alt=""/></div>
 <map name="src_2phasicFlow_2Kokkos_2KokkosTypes_8hppdep" id="src_2phasicFlow_2Kokkos_2KokkosTypes_8hppdep">
-<area shape="rect" title=" " alt="" coords="1289,5,1457,47"/>
+<area shape="rect" title=" " alt="" coords="1292,5,1460,47"/>
 <area shape="rect" href="unsortedPairs_8hpp.html" title=" " alt="" coords="5,102,203,143"/>
 <area shape="rect" href="NBSLevels_8hpp.html" title=" " alt="" coords="227,102,437,143"/>
-<area shape="rect" href="cellsWallLevel0_8hpp.html" title=" " alt="" coords="461,102,710,143"/>
-<area shape="rect" href="multiRotatingAxis_8hpp.html" title=" " alt="" coords="734,95,970,151"/>
-<area shape="rect" href="kokkosAlgorithms_8hpp.html" title=" " alt="" coords="995,102,1187,143"/>
-<area shape="rect" href="bitsetHD_8hpp.html" title=" " alt="" coords="1211,102,1402,143"/>
-<area shape="rect" href="indexContainer_8hpp.html" title=" " alt="" coords="1478,199,1733,240"/>
-<area shape="rect" href="VectorSingle_8hpp.html" title=" " alt="" coords="1423,288,1623,329"/>
-<area shape="rect" href="symArrayHD_8hpp.html" title=" " alt="" coords="1528,102,1752,143"/>
-<area shape="rect" href="VectorDual_8hpp.html" title=" " alt="" coords="1777,102,1967,143"/>
-<area shape="rect" href="KokkosUtilities_8hpp.html" title=" " alt="" coords="1992,102,2160,143"/>
-<area shape="rect" href="checkPhasicFlow_8cpp.html" title=" " alt="" coords="2184,102,2371,143"/>
+<area shape="rect" href="cellsWallLevel0_8hpp.html" title=" " alt="" coords="461,102,712,143"/>
+<area shape="rect" href="multiRotatingAxis_8hpp.html" title=" " alt="" coords="737,95,973,151"/>
+<area shape="rect" href="kokkosAlgorithms_8hpp.html" title=" " alt="" coords="997,102,1189,143"/>
+<area shape="rect" href="bitsetHD_8hpp.html" title=" " alt="" coords="1214,102,1405,143"/>
+<area shape="rect" href="indexContainer_8hpp.html" title=" " alt="" coords="1480,199,1736,240"/>
+<area shape="rect" href="VectorSingle_8hpp.html" title=" " alt="" coords="1424,288,1627,329"/>
+<area shape="rect" href="symArrayHD_8hpp.html" title=" " alt="" coords="1531,102,1755,143"/>
+<area shape="rect" href="VectorDual_8hpp.html" title=" " alt="" coords="1779,102,1971,143"/>
+<area shape="rect" href="KokkosUtilities_8hpp.html" title=" " alt="" coords="1995,102,2163,143"/>
+<area shape="rect" href="checkPhasicFlow_8cpp.html" title=" " alt="" coords="2187,102,2373,143"/>
 </map>
 </div>
 </div>
@@ -173,10 +175,13 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aa59ae59573e65855aee2d3fe25e6504a"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
 <tr class="memitem:aa59ae59573e65855aee2d3fe25e6504a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#aa59ae59573e65855aee2d3fe25e6504a">kPair</a> = Kokkos::pair&lt; T1, T2 &gt;</td></tr>
 <tr class="separator:aa59ae59573e65855aee2d3fe25e6504a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8085fcd475be6bdf841bcdd9b9225ee"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#ad8085fcd475be6bdf841bcdd9b9225ee">range</a> = kPair&lt; int, int &gt;</td></tr>
-<tr class="separator:ad8085fcd475be6bdf841bcdd9b9225ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a430d631c371ee0da9132843fefab61c1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a430d631c371ee0da9132843fefab61c1">range64</a> = kPair&lt; int long, int long &gt;</td></tr>
-<tr class="separator:a430d631c371ee0da9132843fefab61c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae92ebfff4c8bfd55f457e2ff38179771"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae92ebfff4c8bfd55f457e2ff38179771"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#ae92ebfff4c8bfd55f457e2ff38179771">kRange</a> = kPair&lt; T, T &gt;</td></tr>
+<tr class="separator:ae92ebfff4c8bfd55f457e2ff38179771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304d8581876270871949bf5d4755036a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> = kRange&lt; int &gt;</td></tr>
+<tr class="separator:a304d8581876270871949bf5d4755036a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a080e0c3aab8560aab0dee94a567cc9d0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a080e0c3aab8560aab0dee94a567cc9d0">range64</a> = kRange&lt; int long &gt;</td></tr>
+<tr class="separator:a080e0c3aab8560aab0dee94a567cc9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fa4cf96d089d8cb2b3d0724b65b0b5b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... properties&gt; </td></tr>
 <tr class="memitem:a6fa4cf96d089d8cb2b3d0724b65b0b5b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a6fa4cf96d089d8cb2b3d0724b65b0b5b">ViewTypeScalar</a> = Kokkos::View&lt; T, properties... &gt;</td></tr>
 <tr class="separator:a6fa4cf96d089d8cb2b3d0724b65b0b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,6 +236,12 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aef007f87766147fda1706da568a44e6c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aef007f87766147fda1706da568a44e6c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#aef007f87766147fda1706da568a44e6c">deviceAtomicViewType3D</a> = Kokkos::View&lt; T ***, Kokkos::MemoryTraits&lt; std::is_same&lt; DefaultExecutionSpace, Serial &gt;::value?0:Kokkos::Atomic &gt; &gt;</td></tr>
 <tr class="separator:aef007f87766147fda1706da568a44e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a89484152109cd2ff438cccfb300f1a55"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a89484152109cd2ff438cccfb300f1a55"><td class="memTemplItemLeft" align="right" valign="top">iOstream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a89484152109cd2ff438cccfb300f1a55">operator&lt;&lt;</a> (iOstream &amp;os, const kRange&lt; T &gt; &amp;rng)</td></tr>
+<tr class="separator:a89484152109cd2ff438cccfb300f1a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

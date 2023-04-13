@@ -1,7 +1,7 @@
 <map id="read" name="read">
 <area shape="rect" id="node1" title=" " alt="" coords="5,81,56,108"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1IOstream.html#af3418ac60d0d7a303478f29a387feb3c" title=" " alt="" coords="117,5,274,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="335,107,547,133"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b" title=" " alt="" coords="114,107,277,133"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597" title=" " alt="" coords="104,157,287,184"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1IOstream.html#af3418ac60d0d7a303478f29a387feb3c" title="Return true if end of input seen." alt="" coords="117,5,275,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title="Const access to the current stream line number." alt="" coords="336,107,549,133"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b" title="Return the name of the stream." alt="" coords="114,107,278,133"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597" title=" " alt="" coords="104,157,288,184"/>
 </map>

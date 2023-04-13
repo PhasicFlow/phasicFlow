@@ -1,6 +1,6 @@
 <map id="dictionary" name="dictionary">
 <area shape="rect" id="node1" title=" " alt="" coords="5,56,92,83"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title=" " alt="" coords="198,5,294,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title=" " alt="" coords="140,56,352,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b" title=" " alt="" coords="165,107,327,133"/>
+<area shape="rect" id="node2" href="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="198,5,295,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3" title="Const access to the current stream line number." alt="" coords="140,56,353,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b" title="Return the name of the stream." alt="" coords="165,107,329,133"/>
 </map>

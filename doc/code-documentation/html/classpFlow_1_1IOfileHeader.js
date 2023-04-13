@@ -7,6 +7,8 @@ var classpFlow_1_1IOfileHeader =
     [ "objectType", "classpFlow_1_1IOfileHeader.html#a67068cb6552c42a5ddb1c66bf6bbf6b3", null ],
     [ "owner", "classpFlow_1_1IOfileHeader.html#a2c4e952d46d447c08664eeba4e791854", null ],
     [ "path", "classpFlow_1_1IOfileHeader.html#ae1921a7f20c43d1438221946e607c488", null ],
+    [ "outFileBinary", "classpFlow_1_1IOfileHeader.html#aefb380f32e3c6839d26dbc93ff4eb00a", null ],
+    [ "inFileBinary", "classpFlow_1_1IOfileHeader.html#a6e04bca1658d3c571a38d8ac1d62462e", null ],
     [ "headerOk", "classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5", null ],
     [ "implyRead", "classpFlow_1_1IOfileHeader.html#aac13e923e67df5e79d9a75f592b97da3", null ],
     [ "implyWrite", "classpFlow_1_1IOfileHeader.html#adfb03998f9b3b981631dc794cffd05a1", null ],
@@ -19,5 +21,6 @@ var classpFlow_1_1IOfileHeader =
     [ "writeSeparator", "classpFlow_1_1IOfileHeader.html#a7724614a5d68ca0d55beead4b79f6051", null ],
     [ "owner_", "classpFlow_1_1IOfileHeader.html#a7bb1f0bd1b5e54b7983dfafe4270b6d7", null ],
     [ "objectName_", "classpFlow_1_1IOfileHeader.html#a0fc09585fc6fa997b81807dff8b8236d", null ],
-    [ "objectType_", "classpFlow_1_1IOfileHeader.html#adf7afc3ea2cc179930f4e4f4ca48797c", null ]
+    [ "objectType_", "classpFlow_1_1IOfileHeader.html#adf7afc3ea2cc179930f4e4f4ca48797c", null ],
+    [ "fileFormat_", "classpFlow_1_1IOfileHeader.html#a4df46db2aad0395fac9c0522d8c409a9", null ]
 ];
