@@ -190,7 +190,7 @@ pFlow::geometry::geometry
 			objectFile(
 				"contactForceWall",
 				"",
-				objectFile::READ_IF_PRESENT,
+				objectFile::READ_NEVER,
 				objectFile::WRITE_ALWAYS),
 			surface(),
 			zero3) ),
@@ -199,7 +199,7 @@ pFlow::geometry::geometry
 			objectFile(
 				"stressWall",
 				"",
-				objectFile::READ_IF_PRESENT,
+				objectFile::READ_NEVER,
 				objectFile::WRITE_ALWAYS),
 			surface(),
 			zero3) )
@@ -269,6 +269,33 @@ pFlow::uniquePtr<pFlow::geometry>
 	}
 
 	return nullptr;
+}
+
+bool pFlow::geometry::beforeIteration()
+{ 
+	this->zeroForce();
+	return true;	
+}
+
+
+bool pFlow::geometry::afterIteration()
+{ 
+	
+	auto Force = contactForceWall_.deviceVectorAll();
+	auto area = triSurface_.area().deviceVectorAll();
+	auto stress = stressWall_.deviceVectorAll();
+	auto numTri =triSurface_.size();
+	
+
+	Kokkos::parallel_for(
+		"geometry::calculateStress",
+		numTri,
+		LAMBDA_HD(int32 i){
+			stress[i] = Force[i]/area[i];
+		});
+	Kokkos::fence();
+	return true;
+	
 }
 
 pFlow::uniquePtr<pFlow::geometry> 

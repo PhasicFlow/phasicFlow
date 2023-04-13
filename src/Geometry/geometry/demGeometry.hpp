@@ -27,13 +27,16 @@ Licence:
 namespace pFlow
 {
 
-
+/** base for geometry that manages control 
+ * 
+ */
 class demGeometry
 :
 	public demComponent
 {
 
 public:
+
 	demGeometry(systemControl& control)
 	:
 		demComponent("geometry", control)

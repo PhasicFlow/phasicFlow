@@ -19,38 +19,6 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 template<typename MotionModel>
-bool pFlow::geometryMotion<MotionModel>::moveGeometry()
-{
-
-	real dt = this->dt();
-	real t = this->currentTime();
-
-	auto pointMIndex= pointMotionIndex_.deviceVector();
-	auto mModel = motionModel_.getModel(t);
-	realx3* points = triSurface_.pointsData_D();
-	auto numPoints = triSurface_.numPoints();
-
-
-	Kokkos::parallel_for(
-		"geometryMotion<MotionModel>::movePoints",
-		numPoints,
-		LAMBDA_HD(int32 i){
-			auto newPos = mModel.transferPoint(pointMIndex[i], points[i], dt);
-			points[i] = newPos;
-		});
-
-	Kokkos::fence();
-
-	// move the motion components 
-	motionModel_.move(t,dt);
-
-	// end of calculations 
-	moveGeomTimer_.end();
-
-	return true;
-}
-
-template<typename MotionModel>
 bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 {
 	motionIndex_.clear();
@@ -87,6 +55,7 @@ bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 
 	return true;
 }
+
 
 template<typename MotionModel>
 pFlow::geometryMotion<MotionModel>::geometryMotion
@@ -181,6 +150,13 @@ pFlow::geometryMotion<MotionModel>::geometryMotion
 }
 
 template<typename MotionModel>
+bool pFlow::geometryMotion<MotionModel>::beforeIteration() 
+{ 
+	geometry::beforeIteration();
+	return true;
+}
+
+template<typename MotionModel>
 bool pFlow::geometryMotion<MotionModel>::iterate()
 {
 	if( motionModel_.isMoving() )
@@ -189,5 +165,44 @@ bool pFlow::geometryMotion<MotionModel>::iterate()
 		moveGeometry();
 		moveGeomTimer_.end();
 	}
+	return true;
+}
+
+template<typename MotionModel>
+bool pFlow::geometryMotion<MotionModel>::afterIteration() 
+{
+	geometry::afterIteration();
+	return true;
+}
+
+template<typename MotionModel>
+bool pFlow::geometryMotion<MotionModel>::moveGeometry()
+{
+
+	real dt = this->dt();
+	real t = this->currentTime();
+
+	auto pointMIndex= pointMotionIndex_.deviceVector();
+	auto mModel = motionModel_.getModel(t);
+	realx3* points = triSurface_.pointsData_D();
+	auto numPoints = triSurface_.numPoints();
+
+
+	Kokkos::parallel_for(
+		"geometryMotion<MotionModel>::movePoints",
+		numPoints,
+		LAMBDA_HD(int32 i){
+			auto newPos = mModel.transferPoint(pointMIndex[i], points[i], dt);
+			points[i] = newPos;
+		});
+
+	Kokkos::fence();
+
+	// move the motion components 
+	motionModel_.move(t,dt);
+
+	// end of calculations 
+	moveGeomTimer_.end();
+
 	return true;
 }

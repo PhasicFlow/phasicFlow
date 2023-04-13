@@ -34,51 +34,68 @@ Licence:
 namespace pFlow
 {
 
+
+/**
+ * Base class for geometry for managing tri-surfaces, geometry motion, 
+ * and surface physical properties. 
+ * 
+ */
 class geometry
 :
 	public demGeometry
 {
 protected:
 
-	const property& 	wallProperty_;
+	// - Protected members 
 
-	// - this object is owned by geometryRepository_ 
-	repository&  		geometryRepository_;
+		/// Const reference to physical property of materials 
+		const property& 	wallProperty_;
 
-	// all triangles of walls 
-	multiTriSurface&  	triSurface_;
+		/// Repository to store geometry data at each simulation moment
+		repository&  		geometryRepository_;
 
-	// 
-	wordField& 			motionComponentName_;
+		/// All triangles in the set of wall surfaces 
+		multiTriSurface&  	triSurface_;
 
-	// 
-	wordField&   		materialName_;
+		/// The name of motion component of each wall surface 
+		wordField& 			motionComponentName_;
+
+		/// Material name of each wall surface  
+		wordField&   		materialName_;
 		
-	int8TriSurfaceField_D& 		propertyId_;
+		/// Property id of each triangle in the set of wall surfaces
+		int8TriSurfaceField_D& 		propertyId_;
 
-	realx3TriSurfaceField_D& 	contactForceWall_;
+		/// Contact force on each triangle in the set of wall surfaces
+		realx3TriSurfaceField_D& 	contactForceWall_;
 
-	realx3TriSurfaceField_D&    stressWall_;
+		/// Stress on ech triangle in the set of wall surfaces 
+		realx3TriSurfaceField_D&    stressWall_;
 
-	bool findPropertyId();
+	// - Protected member functions
+	
+		/// Find property id of each triangle based on the supplied material name
+		/// and the surface wall that the triangle belongs to. 
+		bool findPropertyId();
 
-	void zeroForce()
-	{
-		contactForceWall_.fill(zero3);
-	}
+		/// Initialize contact force to zero 
+		void zeroForce()
+		{
+			contactForceWall_.fill(zero3);
+		}
 
 
 public:
 
-	// - type info
+	/// Type info
 	TypeInfo("geometry");
 
-	//// - Constructors 
+	// - Constructors 
 		
-		// - empty
+		/// Construct from controlSystem and property, for reading from file
 		geometry(systemControl& control, const property& prop);
 
-		// - from components
+		/// Construct from components
 		geometry(systemControl& control,
 				 const property& prop,
 				 const multiTriSurface& triSurface,
@@ -86,6 +103,8 @@ public:
 				 const wordVector& propName
 				);
 
+		/// Construct from components and dictionary that contains 
+		/// motionModel
 		geometry(systemControl& control,
 				 const property& prop,
 				 const dictionary& dict,
@@ -93,9 +112,10 @@ public:
 				 const wordVector& motionCompName,
 				 const wordVector& propName);
 
-
+		/// Destructor
 		virtual ~geometry() = default;
 
+		/// Virtual constructor 
 		create_vCtor
 		(
 			geometry,
@@ -107,6 +127,7 @@ public:
 			(control, prop)
 		);
 
+		/// Virtual constructor 
 		create_vCtor
 		(
 			geometry,
@@ -120,141 +141,141 @@ public:
 			(control, prop, dict, triSurface, motionCompName, propName)
 		);
 
-	////- Methods 
+	//- Methods 
 
+		/// Size of tri-surface 
 		inline
 		auto size()const
 		{
 			return triSurface_.size();
 		}
 
+		/// Number of points in the set of surface walls 
 		inline
 		auto numPoints()const
 		{
 			return triSurface_.numPoints();
 		}
 
+		/// Number of triangles in the set of surface walls 
 		inline
 		auto numTriangles()const
 		{
 			return size();
 		}
 
+		/// Access to the points
 		inline
 		const auto& points()const
 		{
 			return triSurface_.points();
 		}
 
+		/// Access to the vertices 
 		inline
 		const auto& vertices()const
 		{
 			return triSurface_.vertices();
 		}
 
+		/// Obtain an object for accessing triangles 
 		inline auto getTriangleAccessor()const
 		{
 			return triSurface_.getTriangleAccessor();
 		}
 
+		/// Surface 
 		inline auto& surface()
 		{
 			return triSurface_;
 		}
 
+		/// Surface 
 		inline const auto& surface()const
 		{
 			return triSurface_;
 		}
 
+		/// Access to contact force
 		inline
 		realx3TriSurfaceField_D& contactForceWall()
 		{
 			return contactForceWall_;
 		}
 
+		/// Access to contact force
 		inline
 		const realx3TriSurfaceField_D& contactForceWall() const
 		{
 			return contactForceWall_;
 		}
 
+		/// Access to property 
 		inline const auto& wallProperty()const
 		{
 			return wallProperty_;
 		}
 
-		// owner repository
+		/// Owner repository
 		inline
 		const repository& owner()const
 		{
 			return geometryRepository_;
 		}
 
+		/// Owner repository
 		inline
 		repository& owner()
 		{
 			return geometryRepository_;
 		}
 
+		/// Path to the repository folder 
 		inline auto path()
 		{
 			return owner().path();
 		}
 
+		/// The name of motion model 
 		virtual 
 		word motionModelTypeName()const = 0;
 
+		/// Motion model index of triangles 
 		virtual
 		const int8Vector_HD& 			triMotionIndex() const =0;
 
+		/// Motion model index of points 
 		virtual 
 		const int8Vector_HD& 			pointMotionIndex()const = 0;
 
+		/// Property ide of triangles 
 		const int8TriSurfaceField_D& 	propertyId() const
 		{
 			return propertyId_;
 		}
 
-		bool beforeIteration() override { 
-			
-			this->zeroForce();
-			return true;
-			
-		}
+		/// Operations before each iteration 
+		bool beforeIteration() override;
 
-		bool afterIteration() override { 
-			
-			auto Force = contactForceWall_.deviceVectorAll();
-			auto area = triSurface_.area().deviceVectorAll();
-			auto stress = stressWall_.deviceVectorAll();
-			auto numTri =triSurface_.size();
-			
+		/// Operations after each iteration
+		bool afterIteration() override;
 
-			Kokkos::parallel_for(
-				"geometry::calculateStress",
-				numTri,
-				LAMBDA_HD(int32 i){
-					stress[i] = Force[i]/area[i];
-				});
-			Kokkos::fence();
-			return true;
-			
-		}
+	//- IO
 
+		/// write 
 		bool write()const
 		{
 			return owner().write();
 		}
 
 
-		// static 
+	//- Static members 
 
 		static
-			uniquePtr<geometry> create(systemControl& control, const property& prop);
+		uniquePtr<geometry> create(systemControl& control, const property& prop);
 
 		static
-			uniquePtr<geometry> create(
+		uniquePtr<geometry> create(
 				systemControl& control,
 				const property& prop,
 				const dictionary& dict,
