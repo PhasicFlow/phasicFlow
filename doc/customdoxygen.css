@@ -1,7 +1,6 @@
 #titlearea
 {
     background-color: rgb(243, 243, 243);
-    height: 120px;
     padding-top: 8px;
 }
 
@@ -37,6 +36,7 @@
 #projectbrief
 {
     font-size: 150%;
+    padding-left: 15px;
 }
 
 #projectbrief a
