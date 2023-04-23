@@ -28,19 +28,27 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * Third order Adams-Moulton integration method for solving ODE
+ * 
+ * This is a predictor-corrector integration method.
+ */
 class AdamsMoulton3
 :
 	public integration
 {
 protected:
 
+	/// y at time t
 	realx3PointField_D& y0_;
 
+	/// dy at time t
 	realx3PointField_D& dy0_;
 
+	/// dy at time t-dt
 	realx3PointField_D& dy1_;
 
+	/// Range policy for integration kernel
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
@@ -48,29 +56,44 @@ protected:
 			>;
 public:
 
-	// type info
+	/// Type info
 	TypeInfo("AdamsMoulton3");
 
-	//// - Constructors
+	// - Constructors
+
+		/// Construct from components
 		AdamsMoulton3(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
 
+		uniquePtr<integration> clone()const override
+		{
+			return makeUnique<AdamsMoulton3>(*this);
+		}
+
+		/// Destructor 
 		virtual ~AdamsMoulton3()=default;
 
-		// - add a virtual constructor 
+		/// Add this to the virtual constructor table 
 		add_vCtor(
 			integration,
 			AdamsMoulton3,
 			word);
 
 
-	//// - Methods
-		bool predict(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
+	// - Methods
 
-		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
+		bool predict(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy) override;
+
+		bool correct(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy) override;
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,
@@ -81,20 +104,35 @@ public:
 			return true;
 		}
 
-		uniquePtr<integration> clone()const override
-		{
-			return makeUnique<AdamsMoulton3>(*this);
-		}
+		/// Prediction step on all points in the active range
+		bool predictAll(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			range activeRng);
 
-		bool predictAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
-
+		/// Prediction step on active points in the active range
 		template<typename activeFunctor>
-		bool predictRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP);
+		bool predictRange(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			activeFunctor activeP);
 
-		bool intAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
+		/// Integrate on all points in the active range
+		bool intAll(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			range activeRng);
 
+		/// Integrate on active points in the active range
 		template<typename activeFunctor>
-		bool intRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP );
+		bool intRange(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			activeFunctor activeP);
 
 };
 
@@ -104,7 +142,7 @@ bool AdamsMoulton3::predictRange(
 	real dt, 
 	realx3Vector_D& y,
 	realx3Vector_D& dy,
-	activeFunctor activeP )
+	activeFunctor activeP)
 {
 	auto d_dy = dy.deviceVectorAll();
 	auto d_y  = y.deviceVectorAll();
@@ -141,7 +179,7 @@ bool pFlow::AdamsMoulton3::intRange(
 	real dt, 
 	realx3Vector_D& y,
 	realx3Vector_D& dy,
-	activeFunctor activeP )
+	activeFunctor activeP)
 {
 
 	auto d_dy = dy.deviceVectorAll();
@@ -176,4 +214,4 @@ bool pFlow::AdamsMoulton3::intRange(
 
 } // pFlow
 
-#endif //__integration_hpp__
+#endif //

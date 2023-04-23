@@ -32,7 +32,7 @@ pFlow::AdamsBashforth4::AdamsBashforth4
 :
 	integration(baseName, owner, pStruct, method),
 	history_(
-		owner.emplaceObject<HistoryFieldType>(
+		owner.emplaceObject<pointField<VectorSingle,AB4History>>(
 			objectFile(
 				groupNames(baseName,"AB4History"),
 				"",
