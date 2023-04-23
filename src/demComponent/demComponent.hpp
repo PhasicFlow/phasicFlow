@@ -28,70 +28,132 @@ Licence:
 namespace pFlow
 {
 
+/**
+ * A base class for every main component of DEM system.
+ * 
+ * This class provides abstraction at a very high level for any solver/utility
+ * that forces the derived component (i.e. particles, geometry, and etc) to 
+ * advance over time when iterate is called in time a loop.
+ * 
+ */
 class demComponent
 {
 protected:
 
-	word 	componentName_;
+	// - Protected data members 
 
+		/// Name of the DEM component 
+		word 	componentName_;
 
-	systemControl& control_;
+		/// Reference to systemControl 
+		systemControl& control_;
 
-
-	Timers 	timers_;
+		/// All timers (if any) of this component
+		Timers 	timers_;
 
 public:
 
+	/// Type info
 	TypeInfo("demComponent");
 
-	demComponent(const word& name, systemControl& control)
-	:
-		componentName_(name),
-		control_(control),
-		timers_(name, &control.timers())
-	{}
+	// - Constructors
+	
+		/// construct from components
+		demComponent(const word& name, systemControl& control)
+		:
+			componentName_(name),
+			control_(control),
+			timers_(name, &control.timers())
+		{}
 
-	virtual ~demComponent() = default;
+		/// No copy constructor
+		demComponent(const demComponent&) = delete;
 
+		/// No move constructor 
+		demComponent(demComponent&&) = delete;
 
-	const auto& control()const
-	{
-		return control_;
-	}
+		/// No copy assignment
+		demComponent& operator = (const demComponent&) = delete;
 
-	auto& control()
-	{
-		return control_;
-	}
+		/// No move assignment 
+		demComponent& operator =(demComponent&&) = delete;
 
-	inline
-	real dt()const
-	{
-		return control_.time().dt();
-	}
+		/// destructor 
+		virtual ~demComponent() = default;
 
-	inline
-	real currentTime()const
-	{
-		return control_.time().currentTime();
-	}
+	
+	// - Member functions 
 
-	auto& timers(){
-		return timers_;
-	}
+		/// Const ref to systemControl
+		inline
+		const auto& control()const
+		{
+			return control_;
+		}
 
-	const auto& timers() const{
-		return timers_;
-	}
+		/// Ref to systemControl
+		inline
+		auto& control()
+		{
+			return control_;
+		}
 
+		/// Time step of integration
+		inline
+		real dt()const
+		{
+			return control_.time().dt();
+		}
 
-	virtual bool beforeIteration() = 0;
+		/// Current simulation time 
+		inline
+		real currentTime()const
+		{
+			return control_.time().currentTime();
+		}
 
+		/// Const ref to timers
+		inline
+		const auto& timers() const
+		{
+			return timers_;
+		}
 
-	virtual bool iterate() = 0;
+		/// Ref to timers
+		inline
+		auto& timers()
+		{
+			return timers_;
+		}
 
+		/// This is called before the start of time loop
+		virtual
+		bool beforeTimeLoop()
+		{
+			notImplementedFunction;
+			return false;
+		}
 
-	virtual bool afterIteration() = 0;
+		/// This is called in time loop, before iterate
+		virtual 
+		bool beforeIteration() = 0;
+
+		/// This is called in time loop. Perform the main calculations 
+		/// when the component should evolve along time.
+		virtual 
+		bool iterate() = 0;
+
+		/// This is called in time loop, after iterate.
+		virtual 
+		bool afterIteration() = 0;
+
+		/// This is called after the time loop
+		virtual
+		bool afterTimeLoop()
+		{
+			notImplementedFunction;
+			return false;
+		}
 
 };
 

@@ -31,32 +31,71 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * Base class for integrating the first order ODE (IVP) 
+ * 
+ * The ODE should be in the following form:
+ *\f[ 
+	 \frac{dy}{dt} = f(y,t)
+  \f]
+ * for example the equation of motion is in the following form:
+ *\f[ 
+	m\frac{d\vec{v}}{dt} = m\vec{g} + \sum \vec{f_c}(\vec{v},t)
+  \f]
+ *
+ * The integration method can be either one-step or predictor-corrector type.
+ * 
+ */
 class integration
 {
 protected:
 
-	repository& owner_;
+	// - Protected data members 
 
-	const word baseName_;
+		/// The owner repository that all fields are storred in
+		repository& owner_;
 
-	const pointStructure& pStruct_;
+		/// The base name for integration 
+		const word baseName_;
+
+		/// A reference to pointStructure
+		const pointStructure& pStruct_;
 
 public:
 
-	// type info
+	/// Type info
 	TypeInfo("integration");
 
-	//// - Constructors
+
+	// - Constructors
+
+		/// Construct from components
 		integration(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
 
+		/// Copy constructor 
+		integration(const integration&) = default;
+
+		/// Move constructor
+		integration(integration&&) = default;
+
+		/// Copy assignment 
+		integration& operator = (const integration&) = default;
+
+		/// Move assignment
+		integration& operator = (integration&&) = default;
+
+		/// Polymorphic copy/cloning
+		virtual 
+		uniquePtr<integration> clone()const=0;
+
+		/// Destructor 
 		virtual ~integration()=default;
 
-		// - add a virtual constructor 
+		/// Add a virtual constructor 
 		create_vCtor(
 			integration,
 			word,
@@ -67,35 +106,49 @@ public:
 			(baseName, owner, pStruct, method) );
 
 
-	//// - Methods
+	// - Methods
 
+		/// Const ref to pointStructure
+		inline
 		const auto& pStruct()const
 		{
 			return pStruct_;
 		}
 
-		virtual bool predict(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
-
-		virtual bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
-
-		virtual bool setInitialVals(
-				const int32IndexContainer& newIndices,
-				const realx3Vector& y) = 0;
-
-		virtual bool needSetInitialVals()const = 0;
-
-		virtual uniquePtr<integration> clone()const=0;
-
+		/// Base name
+		inline
 		const word& baseName()const
 		{
 			return baseName_;
 		}
 
+		/// Ref to the owner repository
+		inline
 		repository& owner()
 		{
 			return owner_;
 		}
 
+		/// Prediction step in integration
+		virtual 
+		bool predict(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
+
+		/// Correction/main integration step
+		virtual 
+		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
+
+		/// Set the initial values for new indices 
+		virtual 
+		bool setInitialVals(
+				const int32IndexContainer& newIndices,
+				const realx3Vector& y) = 0;
+
+		/// Check if the method requires any set initial vals
+		virtual 
+		bool needSetInitialVals()const = 0;
+
+
+	/// Create the polymorphic object based on inputs
 	static
 		uniquePtr<integration> create(
 			const word& baseName,
@@ -103,7 +156,7 @@ public:
 			const pointStructure& pStruct,
 			const word& method);
 
-};
+}; // integration
 
 } // pFlow
 

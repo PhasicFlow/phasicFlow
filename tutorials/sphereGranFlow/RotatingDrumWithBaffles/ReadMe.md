@@ -1,5 +1,5 @@
 # Problem Definition 
-The problem is to simulate a rotating drum with the diameter **0.24 m**, the length **0.1 m** and **6** Baffles, rotating at **15 rpm**. This drum is filled with **20000** Particles.The timestep for integration is **0.00001 s**. There are 2 types of Particles in this drum each are beining inserted during simulation to fill the drum.
+The problem is to simulate a rotating drum with the diameter **0.24 m**, the length **0.1 m** and **6** Baffles, rotating at **15 rpm**. This drum is filled with **20000** Particles.The timestep for integration is **0.00001 s**. There are 2 types of Particles in this drum each are being inserted during simulation to fill the drum.
 * **12500** Particles with **4 mm** diameter, at the rate of 12500 particles/s for 1 sec. 
 * **7500** Particles with **5mm** diameter, at the rate of 7500 particles/s for 1 sec.   
 

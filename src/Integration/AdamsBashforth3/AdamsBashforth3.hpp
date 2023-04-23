@@ -30,10 +30,10 @@ namespace pFlow
 
 struct AB3History
 {
+	TypeInfoNV("AB3History");
+
 	realx3 dy1_={0,0,0};
 	realx3 dy2_={0,0,0};
-
-	TypeInfoNV("AB3History");
 };
 
 
@@ -65,21 +65,21 @@ iOstream& operator<<(iOstream& str, const AB3History& ab3)
 	return str;
 }
 
-
+/**
+ * Third order Adams-Bashforth integration method for solving ODE
+ * 
+ * This is a one-step integration method and does not have prediction step.
+ */
 class AdamsBashforth3
 :
 	public integration
 {
 protected:
+	
+	/// Integration history
+	pointField<VectorSingle,AB3History>& history_;
 
-	using HistoryFieldType = pointField<VectorSingle,AB3History>;
-	//realx3PointField_D& dy1_;
-
-	//realx3PointField_D& dy2_;
-
-	//  this is a device 
-	HistoryFieldType& history_;
-
+	/// Range policy for integration kernel
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
@@ -91,23 +91,32 @@ public:
 	// type info
 	TypeInfo("AdamsBashforth3");
 
-	//// - Constructors
+	// - Constructors
+		
+		/// Construct from components
 		AdamsBashforth3(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
+		
+		uniquePtr<integration> clone()const override
+		{
+			return makeUnique<AdamsBashforth3>(*this);
+		}
 
+		/// Destructor 
 		virtual ~AdamsBashforth3()=default;
 
-		// - add a virtual constructor 
+		/// Add this to the virtual constructor table 
 		add_vCtor(
 			integration,
 			AdamsBashforth3,
 			word);
 
 
-	//// - Methods
+	// - Methods
+
 		bool predict(
 			real UNUSED(dt),
 			realx3Vector_D & UNUSED(y),
@@ -126,18 +135,17 @@ public:
 			return false;
 		}
 
-		uniquePtr<integration> clone()const override
-		{
-			return makeUnique<AdamsBashforth3>(*this);
-		}
-
-		bool intAll(real dt, 
+		/// Integrate on all points in the active range 
+		bool intAll(
+			real dt, 
 			realx3Vector_D& y, 
 			realx3Vector_D& dy, 
 			range activeRng);
 
+		/// Integrate on active points in the active range 
 		template<typename activeFunctor>
-		bool intRange(real dt,
+		bool intRange(
+			real dt,
 			realx3Vector_D& y,
 			realx3Vector_D& dy,
 			activeFunctor activeP );

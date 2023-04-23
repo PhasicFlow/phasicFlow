@@ -28,23 +28,33 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * Fifth order Adams-Moulton integration method for solving ODE
+ * 
+ * This is a predictor-corrector integration method.
+ */
 class AdamsMoulton5
 :
 	public integration
 {
 protected:
 
+	/// y at time t
 	realx3PointField_D& y0_;
 
+	/// dy at time t
 	realx3PointField_D& dy0_;
 
+	/// dy at time t-dt
 	realx3PointField_D& dy1_;
 
+	/// dy at time t-2*dt
 	realx3PointField_D& dy2_;
 
+	/// dy at time t-3*dt
 	realx3PointField_D& dy3_;
 
+	/// Range policy for integration kernel 
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
@@ -52,16 +62,24 @@ protected:
 			>;
 public:
 
-	// type info
+	/// Type info
 	TypeInfo("AdamsMoulton5");
 
-	//// - Constructors
+	// - Constructors
+		
+		/// Construct from components
 		AdamsMoulton5(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
+		
+		uniquePtr<integration> clone()const override
+		{
+			return makeUnique<AdamsMoulton5>(*this);
+		}
 
+		/// Destructor 
 		virtual ~AdamsMoulton5()=default;
 
 		// - add a virtual constructor 
@@ -71,10 +89,17 @@ public:
 			word);
 
 
-	//// - Methods
-		bool predict(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
+	// - Methods
+		
+		bool predict(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy) override;
 
-		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
+		bool correct(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy) override;
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,
@@ -85,20 +110,35 @@ public:
 			return true;
 		}
 
-		uniquePtr<integration> clone()const override
-		{
-			return makeUnique<AdamsMoulton5>(*this);
-		}
+		/// Prediction step on all points in the active range
+		bool predictAll(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			range activeRng);
 
-		bool predictAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
-
+		/// Prediction step on active points in the active range
 		template<typename activeFunctor>
-		bool predictRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP);
+		bool predictRange(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			activeFunctor activeP);
 
-		bool intAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
+		/// Integrate on all points in the active range
+		bool intAll(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			range activeRng);
 
+		/// Integrate on active points in the active range
 		template<typename activeFunctor>
-		bool intRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP );
+		bool intRange(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			activeFunctor activeP );
 
 };
 

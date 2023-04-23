@@ -30,11 +30,12 @@ namespace pFlow
 
 struct AB4History
 {
+	TypeInfoNV("AB4History");
+
 	realx3 dy1_={0,0,0};
 	realx3 dy2_={0,0,0};
 	realx3 dy3_={0,0,0};
-
-	TypeInfoNV("AB4History");
+	
 };
 
 
@@ -68,23 +69,21 @@ iOstream& operator<<(iOstream& str, const AB4History& ab4)
 	return str;
 }
 
-
+/**
+ * Fourth order Adams-Bashforth integration method for solving ODE
+ * 
+ * This is a one-step integration method and does not have prediction step.
+ */
 class AdamsBashforth4
 :
 	public integration
 {
 protected:
 
-	using HistoryFieldType = pointField<VectorSingle,AB4History>;
-	//realx3PointField_D& dy1_;
+	/// Integration history
+	pointField<VectorSingle,AB4History>& history_;
 
-	//realx3PointField_D& dy2_;
-
-
-
-	//  this is a device 
-	HistoryFieldType& history_;
-
+	/// Range policy for integration kernel
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
@@ -93,32 +92,42 @@ protected:
 
 public:
 
-	// type info
+	/// Type info
 	TypeInfo("AdamsBashforth4");
 
-	//// - Constructors
+	// - Constructors
+		
+		/// Construct from components
 		AdamsBashforth4(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
+		
+		uniquePtr<integration> clone()const override
+		{
+			return makeUnique<AdamsBashforth4>(*this);
+		}
 
+		/// Destructor
 		virtual ~AdamsBashforth4()=default;
 
-		// - add a virtual constructor 
+		/// Add a this to the virtual constructor table 
 		add_vCtor(
 			integration,
 			AdamsBashforth4,
 			word);
 
 
-	//// - Methods
+	// - Methods
+		
 		bool predict(
 			real UNUSED(dt),
 			realx3Vector_D & UNUSED(y),
 			realx3Vector_D& UNUSED(dy)) override;
 
-		bool correct(real dt, 
+		bool correct(
+			real dt, 
 			realx3Vector_D & y,
 			realx3Vector_D& dy) override;
 
@@ -131,18 +140,17 @@ public:
 			return false;
 		}
 
-		uniquePtr<integration> clone()const override
-		{
-			return makeUnique<AdamsBashforth4>(*this);
-		}
-
-		bool intAll(real dt, 
+		/// Integrate on all points in the active range 
+		bool intAll(
+			real dt, 
 			realx3Vector_D& y, 
 			realx3Vector_D& dy, 
 			range activeRng);
 
+		/// Integrate on active points in the active range 
 		template<typename activeFunctor>
-		bool intRange(real dt,
+		bool intRange(
+			real dt,
 			realx3Vector_D& y,
 			realx3Vector_D& dy,
 			activeFunctor activeP );

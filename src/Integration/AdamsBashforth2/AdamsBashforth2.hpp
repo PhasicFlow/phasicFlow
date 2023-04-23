@@ -28,45 +28,68 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * Second order Adams-Bashforth integration method for solving ODE
+ * 
+ * This is a one-step integration method and does not have prediction step.
+ * 
+ */
 class AdamsBashforth2
 :
 	public integration
 {
 protected:
 
+	/// dy at t-dt
 	realx3PointField_D& dy1_;
 
+	/// Range policy for integration kernel (alias)
 	using rpIntegration = Kokkos::RangePolicy<
 			DefaultExecutionSpace,
 			Kokkos::Schedule<Kokkos::Static>,
 			Kokkos::IndexType<int32>
 			>;
+
 public:
 
-	// type info
+	/// Type info
 	TypeInfo("AdamsBashforth2");
 
-	//// - Constructors
+	// - Constructors
+
+		/// Construct from components
 		AdamsBashforth2(
 			const word& baseName,
 			repository& owner,
 			const pointStructure& pStruct,
 			const word& method);
 
+		uniquePtr<integration> clone()const override
+		{
+			return makeUnique<AdamsBashforth2>(*this);
+		}
+
+		/// Destructor 
 		virtual ~AdamsBashforth2()=default;
 
-		// - add a virtual constructor 
+		/// Add this to the virtual constructor table 
 		add_vCtor(
 			integration,
 			AdamsBashforth2,
 			word);
 
 
-	//// - Methods
-		bool predict(real UNUSED(dt), realx3Vector_D& UNUSED(y), realx3Vector_D& UNUSED(dy)) override;
+	// - Methods
 
-		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) override;
+		bool predict(
+			real UNUSED(dt), 
+			realx3Vector_D& UNUSED(y), 
+			realx3Vector_D& UNUSED(dy)) override;
+
+		bool correct(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy) override;
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,
@@ -76,16 +99,21 @@ public:
 		{
 			return false;
 		}
+		
+		/// Integrate on all points in the active range 
+		bool intAll(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			range activeRng);
 
-		uniquePtr<integration> clone()const override
-		{
-			return makeUnique<AdamsBashforth2>(*this);
-		}
-
-		bool intAll(real dt, realx3Vector_D& y, realx3Vector_D& dy, range activeRng);
-
+		/// Integrate on active points in the active range 
 		template<typename activeFunctor>
-		bool intRange(real dt, realx3Vector_D& y, realx3Vector_D& dy, activeFunctor activeP );
+		bool intRange(
+			real dt, 
+			realx3Vector_D& y, 
+			realx3Vector_D& dy, 
+			activeFunctor activeP );
 
 };
 

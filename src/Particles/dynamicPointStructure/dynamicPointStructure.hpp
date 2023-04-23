@@ -24,7 +24,7 @@ Licence:
 
 #include "Time.hpp"
 #include "pointFields.hpp"
-#include "integrations.hpp"
+#include "integration.hpp"
 #include "uniquePtr.hpp"
 
 namespace pFlow
@@ -56,17 +56,6 @@ public:
 	dynamicPointStructure(Time& time, const word& integrationMethod);
 
 	dynamicPointStructure(const dynamicPointStructure& ps) = default;
-
-	/*dynamicPointStructure(const dynamicPointStructure& ps):
-		pointStructure(ps),
-		time_(ps.time_),
-		integrationMethod_(ps.integrationMethod_),
-		velocity_(ps.velocity_),
-		integrationPos_(ps.integrationPos_->clone()),
-		integrationVel_(ps.integrationVel_->clone())
-	{
-
-	}*/
 
 		
 		// - no move construct 

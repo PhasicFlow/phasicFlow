@@ -31,26 +31,8 @@ pFlow::AdamsBashforth3::AdamsBashforth3
 )
 :
 	integration(baseName, owner, pStruct, method),
-	/*dy1_(
-		owner.emplaceObject<realx3PointField_D>(
-			objectFile(
-				groupNames(baseName,"dy1"),
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS),
-			pStruct,
-			zero3)),
-	dy2_(
-		owner.emplaceObject<realx3PointField_D>(
-			objectFile(
-				groupNames(baseName,"dy2"),
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS),
-			pStruct,
-			zero3))*/
 	history_(
-		owner.emplaceObject<HistoryFieldType>(
+		owner.emplaceObject<pointField<VectorSingle,AB3History>>(
 			objectFile(
 				groupNames(baseName,"AB3History"),
 				"",
