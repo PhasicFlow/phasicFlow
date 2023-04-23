@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
-<meta name="description" content="PhasicFlow is an open-source parallel DEM package for simulating granular flow developed in C++ and can be exectued on both GPU (like cuda) and CPU.">
+<meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
 <title>PhasicFlow: AdamsMoulton5 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -110,6 +110,9 @@ $(document).ready(function(){initNavTree('classpFlow_1_1AdamsMoulton5.html','');
 <div class="title">AdamsMoulton5 Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Fifth order Adams-Moulton integration method for solving ODE.  
+ <a href="classpFlow_1_1AdamsMoulton5.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for AdamsMoulton5:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -117,8 +120,8 @@ $(document).ready(function(){initNavTree('classpFlow_1_1AdamsMoulton5.html','');
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1AdamsMoulton5__inherit__graph.png" border="0" usemap="#AdamsMoulton5_inherit__map" alt="Inheritance graph"/></div>
 <map name="AdamsMoulton5_inherit__map" id="AdamsMoulton5_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,133,107"/>
-<area shape="rect" href="classpFlow_1_1integration.html" title=" " alt="" coords="23,5,116,32"/>
+<area shape="rect" title="Fifth order Adams&#45;Moulton integration method for solving ODE." alt="" coords="5,80,133,107"/>
+<area shape="rect" href="classpFlow_1_1integration.html" title="Base class for integrating the first order ODE (IVP)" alt="" coords="23,5,116,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -128,92 +131,135 @@ $(document).ready(function(){initNavTree('classpFlow_1_1AdamsMoulton5.html','');
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1AdamsMoulton5__coll__graph.png" border="0" usemap="#AdamsMoulton5_coll__map" alt="Collaboration graph"/></div>
 <map name="AdamsMoulton5_coll__map" id="AdamsMoulton5_coll__map">
-<area shape="rect" title=" " alt="" coords="68,168,196,195"/>
-<area shape="rect" href="classpFlow_1_1integration.html" title=" " alt="" coords="5,13,99,39"/>
-<area shape="rect" href="classpFlow_1_1pointField.html" title=" " alt="" coords="123,5,301,47"/>
+<area shape="rect" title="Fifth order Adams&#45;Moulton integration method for solving ODE." alt="" coords="67,168,195,195"/>
+<area shape="rect" href="classpFlow_1_1integration.html" title="Base class for integrating the first order ODE (IVP)" alt="" coords="5,13,99,39"/>
+<area shape="rect" href="classpFlow_1_1pointField.html" title=" " alt="" coords="123,5,299,47"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a93700041b6e609e429801e569f554e4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a93700041b6e609e429801e569f554e4c">TypeInfo</a> (&quot;AdamsMoulton5&quot;)</td></tr>
+<tr class="memdesc:a93700041b6e609e429801e569f554e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1AdamsMoulton5.html#a93700041b6e609e429801e569f554e4c">More...</a><br /></td></tr>
 <tr class="separator:a93700041b6e609e429801e569f554e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84c490b65587b21f5666766e94a945bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a84c490b65587b21f5666766e94a945bc">AdamsMoulton5</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">baseName</a>, <a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">owner</a>, const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;method)</td></tr>
+<tr class="memdesc:a84c490b65587b21f5666766e94a945bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from components.  <a href="classpFlow_1_1AdamsMoulton5.html#a84c490b65587b21f5666766e94a945bc">More...</a><br /></td></tr>
 <tr class="separator:a84c490b65587b21f5666766e94a945bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f8a3197295f0ffa73d24bbacc6228c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1integration.html">integration</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a29f8a3197295f0ffa73d24bbacc6228c">clone</a> () const override</td></tr>
+<tr class="memdesc:a29f8a3197295f0ffa73d24bbacc6228c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polymorphic copy/cloning.  <a href="classpFlow_1_1AdamsMoulton5.html#a29f8a3197295f0ffa73d24bbacc6228c">More...</a><br /></td></tr>
+<tr class="separator:a29f8a3197295f0ffa73d24bbacc6228c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a205b69055b5aebe5b9c924e435365169"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a205b69055b5aebe5b9c924e435365169">~AdamsMoulton5</a> ()=default</td></tr>
+<tr class="memdesc:a205b69055b5aebe5b9c924e435365169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1AdamsMoulton5.html#a205b69055b5aebe5b9c924e435365169">More...</a><br /></td></tr>
 <tr class="separator:a205b69055b5aebe5b9c924e435365169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa18e539a33004e6d10e69a19ef0c5ddb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#aa18e539a33004e6d10e69a19ef0c5ddb">add_vCtor</a> (<a class="el" href="classpFlow_1_1integration.html">integration</a>, <a class="el" href="classpFlow_1_1AdamsMoulton5.html">AdamsMoulton5</a>, <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>)</td></tr>
 <tr class="separator:aa18e539a33004e6d10e69a19ef0c5ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a565b658e8641f9fd9a6a5c8e93089d5d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a565b658e8641f9fd9a6a5c8e93089d5d">predict</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;y, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;dy) override</td></tr>
+<tr class="memdesc:a565b658e8641f9fd9a6a5c8e93089d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prediction step in integration.  <a href="classpFlow_1_1AdamsMoulton5.html#a565b658e8641f9fd9a6a5c8e93089d5d">More...</a><br /></td></tr>
 <tr class="separator:a565b658e8641f9fd9a6a5c8e93089d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac755e4bf02c3732d1eb89de9e903ebdb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#ac755e4bf02c3732d1eb89de9e903ebdb">correct</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;y, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;dy) override</td></tr>
+<tr class="memdesc:ac755e4bf02c3732d1eb89de9e903ebdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Correction/main integration step.  <a href="classpFlow_1_1AdamsMoulton5.html#ac755e4bf02c3732d1eb89de9e903ebdb">More...</a><br /></td></tr>
 <tr class="separator:ac755e4bf02c3732d1eb89de9e903ebdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8da2088458d635dfa1fbe1823a3bfd6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a8da2088458d635dfa1fbe1823a3bfd6d">setInitialVals</a> (const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;newIndices, const <a class="el" href="namespacepFlow.html#aede0f5a4a44d271e4e260cdb01032a61">realx3Vector</a> &amp;y) override</td></tr>
+<tr class="memdesc:a8da2088458d635dfa1fbe1823a3bfd6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the initial values for new indices.  <a href="classpFlow_1_1AdamsMoulton5.html#a8da2088458d635dfa1fbe1823a3bfd6d">More...</a><br /></td></tr>
 <tr class="separator:a8da2088458d635dfa1fbe1823a3bfd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aceb0c803bb6e5c46a1695c4e5b6e641f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#aceb0c803bb6e5c46a1695c4e5b6e641f">needSetInitialVals</a> () const override</td></tr>
+<tr class="memdesc:aceb0c803bb6e5c46a1695c4e5b6e641f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the method requires any set initial vals.  <a href="classpFlow_1_1AdamsMoulton5.html#aceb0c803bb6e5c46a1695c4e5b6e641f">More...</a><br /></td></tr>
 <tr class="separator:aceb0c803bb6e5c46a1695c4e5b6e641f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f8a3197295f0ffa73d24bbacc6228c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1integration.html">integration</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a29f8a3197295f0ffa73d24bbacc6228c">clone</a> () const override</td></tr>
-<tr class="separator:a29f8a3197295f0ffa73d24bbacc6228c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa601d0785e68d2298567b2861996f956"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#aa601d0785e68d2298567b2861996f956">predictAll</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;y, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;dy, <a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> activeRng)</td></tr>
+<tr class="memdesc:aa601d0785e68d2298567b2861996f956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prediction step on all points in the active range.  <a href="classpFlow_1_1AdamsMoulton5.html#aa601d0785e68d2298567b2861996f956">More...</a><br /></td></tr>
 <tr class="separator:aa601d0785e68d2298567b2861996f956"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa8ac3ebc39d8702e08e1f71c5843974"><td class="memTemplParams" colspan="2">template&lt;typename activeFunctor &gt; </td></tr>
 <tr class="memitem:aaa8ac3ebc39d8702e08e1f71c5843974"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#aaa8ac3ebc39d8702e08e1f71c5843974">predictRange</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;y, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;dy, activeFunctor activeP)</td></tr>
+<tr class="memdesc:aaa8ac3ebc39d8702e08e1f71c5843974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prediction step on active points in the active range.  <a href="classpFlow_1_1AdamsMoulton5.html#aaa8ac3ebc39d8702e08e1f71c5843974">More...</a><br /></td></tr>
 <tr class="separator:aaa8ac3ebc39d8702e08e1f71c5843974"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a152b752a6b7b37e70fa5e7c99a484783"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a152b752a6b7b37e70fa5e7c99a484783">intAll</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;y, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;dy, <a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> activeRng)</td></tr>
+<tr class="memdesc:a152b752a6b7b37e70fa5e7c99a484783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate on all points in the active range.  <a href="classpFlow_1_1AdamsMoulton5.html#a152b752a6b7b37e70fa5e7c99a484783">More...</a><br /></td></tr>
 <tr class="separator:a152b752a6b7b37e70fa5e7c99a484783"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a191dc9197b587f09bb5ee7989b0ba43e"><td class="memTemplParams" colspan="2">template&lt;typename activeFunctor &gt; </td></tr>
 <tr class="memitem:a191dc9197b587f09bb5ee7989b0ba43e"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a191dc9197b587f09bb5ee7989b0ba43e">intRange</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;y, <a class="el" href="namespacepFlow.html#a648e9586ec15d127938511ea0e11b215">realx3Vector_D</a> &amp;dy, activeFunctor activeP)</td></tr>
+<tr class="memdesc:a191dc9197b587f09bb5ee7989b0ba43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate on active points in the active range.  <a href="classpFlow_1_1AdamsMoulton5.html#a191dc9197b587f09bb5ee7989b0ba43e">More...</a><br /></td></tr>
 <tr class="separator:a191dc9197b587f09bb5ee7989b0ba43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpFlow_1_1integration"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1integration')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1integration.html">integration</a></td></tr>
 <tr class="memitem:aa44247873627282e4f01578c6bc53426 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#aa44247873627282e4f01578c6bc53426">TypeInfo</a> (&quot;integration&quot;)</td></tr>
+<tr class="memdesc:aa44247873627282e4f01578c6bc53426 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1integration.html#aa44247873627282e4f01578c6bc53426">More...</a><br /></td></tr>
 <tr class="separator:aa44247873627282e4f01578c6bc53426 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1193beca9b8485866c972ed9faea6d5 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#ad1193beca9b8485866c972ed9faea6d5">integration</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">baseName</a>, <a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">owner</a>, const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;method)</td></tr>
+<tr class="memdesc:ad1193beca9b8485866c972ed9faea6d5 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from components.  <a href="classpFlow_1_1integration.html#ad1193beca9b8485866c972ed9faea6d5">More...</a><br /></td></tr>
 <tr class="separator:ad1193beca9b8485866c972ed9faea6d5 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a771a76739b176fbb83563986a897dbc6 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a771a76739b176fbb83563986a897dbc6">integration</a> (const <a class="el" href="classpFlow_1_1integration.html">integration</a> &amp;)=default</td></tr>
+<tr class="memdesc:a771a76739b176fbb83563986a897dbc6 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classpFlow_1_1integration.html#a771a76739b176fbb83563986a897dbc6">More...</a><br /></td></tr>
+<tr class="separator:a771a76739b176fbb83563986a897dbc6 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30aa8bdb5ce433dc44c3de44462b3d92 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a30aa8bdb5ce433dc44c3de44462b3d92">integration</a> (<a class="el" href="classpFlow_1_1integration.html">integration</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a30aa8bdb5ce433dc44c3de44462b3d92 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="classpFlow_1_1integration.html#a30aa8bdb5ce433dc44c3de44462b3d92">More...</a><br /></td></tr>
+<tr class="separator:a30aa8bdb5ce433dc44c3de44462b3d92 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c3d9b07075b6725eeb15aa37da388a inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1integration.html">integration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#aa5c3d9b07075b6725eeb15aa37da388a">operator=</a> (const <a class="el" href="classpFlow_1_1integration.html">integration</a> &amp;)=default</td></tr>
+<tr class="memdesc:aa5c3d9b07075b6725eeb15aa37da388a inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1integration.html#aa5c3d9b07075b6725eeb15aa37da388a">More...</a><br /></td></tr>
+<tr class="separator:aa5c3d9b07075b6725eeb15aa37da388a inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec2a99ef0f61788bb92c8a2d4dbd51fc inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1integration.html">integration</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#aec2a99ef0f61788bb92c8a2d4dbd51fc">operator=</a> (<a class="el" href="classpFlow_1_1integration.html">integration</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:aec2a99ef0f61788bb92c8a2d4dbd51fc inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classpFlow_1_1integration.html#aec2a99ef0f61788bb92c8a2d4dbd51fc">More...</a><br /></td></tr>
+<tr class="separator:aec2a99ef0f61788bb92c8a2d4dbd51fc inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a87be54ea9981257a8149088723c433 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a9a87be54ea9981257a8149088723c433">~integration</a> ()=default</td></tr>
+<tr class="memdesc:a9a87be54ea9981257a8149088723c433 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1integration.html#a9a87be54ea9981257a8149088723c433">More...</a><br /></td></tr>
 <tr class="separator:a9a87be54ea9981257a8149088723c433 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23da7cbc93e6d9968fcbe57cb08f78f3 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a23da7cbc93e6d9968fcbe57cb08f78f3">create_vCtor</a> (<a class="el" href="classpFlow_1_1integration.html">integration</a>, <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>,(const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">baseName</a>, <a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">owner</a>, const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;method),(<a class="el" href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">baseName</a>, <a class="el" href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">owner</a>, <a class="el" href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>, method))</td></tr>
+<tr class="memdesc:a23da7cbc93e6d9968fcbe57cb08f78f3 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a virtual constructor.  <a href="classpFlow_1_1integration.html#a23da7cbc93e6d9968fcbe57cb08f78f3">More...</a><br /></td></tr>
 <tr class="separator:a23da7cbc93e6d9968fcbe57cb08f78f3 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a622149e803f0fa292a95784c12a7b8 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a> () const</td></tr>
+<tr class="memdesc:a5a622149e803f0fa292a95784c12a7b8 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const ref to <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a>.  <a href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">More...</a><br /></td></tr>
 <tr class="separator:a5a622149e803f0fa292a95784c12a7b8 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e30df3927ef1cdd2490cd85018518f5 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">baseName</a> () const</td></tr>
+<tr class="memdesc:a4e30df3927ef1cdd2490cd85018518f5 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base name.  <a href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">More...</a><br /></td></tr>
 <tr class="separator:a4e30df3927ef1cdd2490cd85018518f5 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10329e18307a60d3fdb203bcbed2b295 inherit pub_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">owner</a> ()</td></tr>
+<tr class="memdesc:a10329e18307a60d3fdb203bcbed2b295 inherit pub_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ref to the owner repository.  <a href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">More...</a><br /></td></tr>
 <tr class="separator:a10329e18307a60d3fdb203bcbed2b295 inherit pub_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
 Protected Types</h2></td></tr>
 <tr class="memitem:ace46ff4fbe3c001c816dbc4f9f67606f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#ace46ff4fbe3c001c816dbc4f9f67606f">rpIntegration</a> = Kokkos::RangePolicy&lt; <a class="el" href="namespacepFlow.html#aa3a14d3c76643399fc4edd8eca14944a">DefaultExecutionSpace</a>, Kokkos::Schedule&lt; Kokkos::Static &gt;, Kokkos::IndexType&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &gt;</td></tr>
+<tr class="memdesc:ace46ff4fbe3c001c816dbc4f9f67606f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range policy for integration kernel.  <a href="classpFlow_1_1AdamsMoulton5.html#ace46ff4fbe3c001c816dbc4f9f67606f">More...</a><br /></td></tr>
 <tr class="separator:ace46ff4fbe3c001c816dbc4f9f67606f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6c02e0d25a1b849255e67e72d1a9d026"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a8b286cf0e92d888964d5691196b6c151">realx3PointField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a6c02e0d25a1b849255e67e72d1a9d026">y0_</a></td></tr>
+<tr class="memdesc:a6c02e0d25a1b849255e67e72d1a9d026"><td class="mdescLeft">&#160;</td><td class="mdescRight">y at time t  <a href="classpFlow_1_1AdamsMoulton5.html#a6c02e0d25a1b849255e67e72d1a9d026">More...</a><br /></td></tr>
 <tr class="separator:a6c02e0d25a1b849255e67e72d1a9d026"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a698a75833834ae70210d306e047cb196"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a8b286cf0e92d888964d5691196b6c151">realx3PointField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a698a75833834ae70210d306e047cb196">dy0_</a></td></tr>
+<tr class="memdesc:a698a75833834ae70210d306e047cb196"><td class="mdescLeft">&#160;</td><td class="mdescRight">dy at time t  <a href="classpFlow_1_1AdamsMoulton5.html#a698a75833834ae70210d306e047cb196">More...</a><br /></td></tr>
 <tr class="separator:a698a75833834ae70210d306e047cb196"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46c37b69200a2f4faef9c149a25bab60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a8b286cf0e92d888964d5691196b6c151">realx3PointField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a46c37b69200a2f4faef9c149a25bab60">dy1_</a></td></tr>
+<tr class="memdesc:a46c37b69200a2f4faef9c149a25bab60"><td class="mdescLeft">&#160;</td><td class="mdescRight">dy at time t-dt  <a href="classpFlow_1_1AdamsMoulton5.html#a46c37b69200a2f4faef9c149a25bab60">More...</a><br /></td></tr>
 <tr class="separator:a46c37b69200a2f4faef9c149a25bab60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09e936a903a062f6d1d045eb4fdbd8a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a8b286cf0e92d888964d5691196b6c151">realx3PointField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a09e936a903a062f6d1d045eb4fdbd8a5">dy2_</a></td></tr>
+<tr class="memdesc:a09e936a903a062f6d1d045eb4fdbd8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">dy at time t-2*dt  <a href="classpFlow_1_1AdamsMoulton5.html#a09e936a903a062f6d1d045eb4fdbd8a5">More...</a><br /></td></tr>
 <tr class="separator:a09e936a903a062f6d1d045eb4fdbd8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d535ef8716acc040282ffd37196ac6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a8b286cf0e92d888964d5691196b6c151">realx3PointField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1AdamsMoulton5.html#a79d535ef8716acc040282ffd37196ac6">dy3_</a></td></tr>
+<tr class="memdesc:a79d535ef8716acc040282ffd37196ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">dy at time t-3*dt  <a href="classpFlow_1_1AdamsMoulton5.html#a79d535ef8716acc040282ffd37196ac6">More...</a><br /></td></tr>
 <tr class="separator:a79d535ef8716acc040282ffd37196ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classpFlow_1_1integration"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1integration')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1integration.html">integration</a></td></tr>
 <tr class="memitem:af892b00fd39b71350cc908cd0e608264 inherit pro_attribs_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#af892b00fd39b71350cc908cd0e608264">owner_</a></td></tr>
+<tr class="memdesc:af892b00fd39b71350cc908cd0e608264 inherit pro_attribs_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">The owner repository that all fields are storred in.  <a href="classpFlow_1_1integration.html#af892b00fd39b71350cc908cd0e608264">More...</a><br /></td></tr>
 <tr class="separator:af892b00fd39b71350cc908cd0e608264 inherit pro_attribs_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4cf93fd25765a9c0816f3ace4e3b009 inherit pro_attribs_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#aa4cf93fd25765a9c0816f3ace4e3b009">baseName_</a></td></tr>
+<tr class="memdesc:aa4cf93fd25765a9c0816f3ace4e3b009 inherit pro_attribs_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base name for integration.  <a href="classpFlow_1_1integration.html#aa4cf93fd25765a9c0816f3ace4e3b009">More...</a><br /></td></tr>
 <tr class="separator:aa4cf93fd25765a9c0816f3ace4e3b009 inherit pro_attribs_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c62d7bde0e3c333317fabe4b8806bef inherit pro_attribs_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#a5c62d7bde0e3c333317fabe4b8806bef">pStruct_</a></td></tr>
+<tr class="memdesc:a5c62d7bde0e3c333317fabe4b8806bef inherit pro_attribs_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">A reference to <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a>.  <a href="classpFlow_1_1integration.html#a5c62d7bde0e3c333317fabe4b8806bef">More...</a><br /></td></tr>
 <tr class="separator:a5c62d7bde0e3c333317fabe4b8806bef inherit pro_attribs_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classpFlow_1_1integration"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classpFlow_1_1integration')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classpFlow_1_1integration.html">integration</a></td></tr>
 <tr class="memitem:abdb160904a366a4bf1704ceb1746775a inherit pub_static_methods_classpFlow_1_1integration"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1integration.html">integration</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1integration.html#abdb160904a366a4bf1704ceb1746775a">create</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a4e30df3927ef1cdd2490cd85018518f5">baseName</a>, <a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a10329e18307a60d3fdb203bcbed2b295">owner</a>, const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;<a class="el" href="classpFlow_1_1integration.html#a5a622149e803f0fa292a95784c12a7b8">pStruct</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;method)</td></tr>
+<tr class="memdesc:abdb160904a366a4bf1704ceb1746775a inherit pub_static_methods_classpFlow_1_1integration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the polymorphic object based on inputs.  <a href="classpFlow_1_1integration.html#abdb160904a366a4bf1704ceb1746775a">More...</a><br /></td></tr>
 <tr class="separator:abdb160904a366a4bf1704ceb1746775a inherit pub_static_methods_classpFlow_1_1integration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00032">32</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<div class="textblock"><p>Fifth order Adams-Moulton integration method for solving ODE. </p>
+<p>This is a predictor-corrector integration method. </p>
+
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00036">36</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ace46ff4fbe3c001c816dbc4f9f67606f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace46ff4fbe3c001c816dbc4f9f67606f">&#9670;&nbsp;</a></span>rpIntegration</h2>
@@ -235,7 +281,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00052">52</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>Range policy for integration kernel. </p>
+
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00062">62</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
 
 </div>
 </div>
@@ -278,6 +326,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct from components. </p>
+
 <p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8cpp_source.html#l00025">25</a> of file <a class="el" href="AdamsMoulton5_8cpp_source.html">AdamsMoulton5.cpp</a>.</p>
 
 </div>
@@ -305,6 +355,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Destructor. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -323,6 +375,39 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Type info. </p>
+
+</div>
+</div>
+<a id="a29f8a3197295f0ffa73d24bbacc6228c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29f8a3197295f0ffa73d24bbacc6228c">&#9670;&nbsp;</a></span>clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt;<a class="el" href="classpFlow_1_1integration.html">integration</a>&gt; clone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Polymorphic copy/cloning. </p>
+
+<p>Implements <a class="el" href="classpFlow_1_1integration.html#a7c3e74e4f9079ad465a2c538865b7ce8">integration</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00077">77</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
 
 </div>
 </div>
@@ -400,6 +485,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Prediction step in integration. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1integration.html#aee7d33216d5d180758eae4342235822d">integration</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8cpp_source.html#l00094">94</a> of file <a class="el" href="AdamsMoulton5_8cpp_source.html">AdamsMoulton5.cpp</a>.</p>
@@ -448,6 +535,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Correction/main integration step. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1integration.html#a24e7a2413d17e739a6fa143b18346f02">integration</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8cpp_source.html#l00114">114</a> of file <a class="el" href="AdamsMoulton5_8cpp_source.html">AdamsMoulton5.cpp</a>.</p>
@@ -490,11 +579,13 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set the initial values for new indices. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1integration.html#a6818fcc44008244dcd95c07d9df760fc">integration</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8cpp_source.html#l00132">132</a> of file <a class="el" href="AdamsMoulton5_8cpp_source.html">AdamsMoulton5.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="AdamsMoulton5_8hpp_source.html#l00038">AdamsMoulton5::y0_</a>.</p>
+<p class="reference">References <a class="el" href="AdamsMoulton5_8hpp_source.html#l00043">AdamsMoulton5::y0_</a>.</p>
 
 </div>
 </div>
@@ -521,38 +612,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Check if the method requires any set initial vals. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1integration.html#aeec9758e3ff149eb4837c2be8d4e6214">integration</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00083">83</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a29f8a3197295f0ffa73d24bbacc6228c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29f8a3197295f0ffa73d24bbacc6228c">&#9670;&nbsp;</a></span>clone()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt;<a class="el" href="classpFlow_1_1integration.html">integration</a>&gt; clone </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classpFlow_1_1integration.html#a7c3e74e4f9079ad465a2c538865b7ce8">integration</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00088">88</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00108">108</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
 
 </div>
 </div>
@@ -594,6 +658,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Prediction step on all points in the active range. </p>
+
 <p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8cpp_source.html#l00141">141</a> of file <a class="el" href="AdamsMoulton5_8cpp_source.html">AdamsMoulton5.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="VectorSingle_8hpp_source.html#l00297">VectorSingle&lt; T, MemorySpace &gt;::deviceVectorAll()</a>, and <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>.</p>
@@ -604,8 +670,8 @@ Additional Inherited Members</h2></td></tr>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1AdamsMoulton5_aa601d0785e68d2298567b2861996f956_cgraph.png" border="0" usemap="#classpFlow_1_1AdamsMoulton5_aa601d0785e68d2298567b2861996f956_cgraph" alt=""/></div>
 <map name="classpFlow_1_1AdamsMoulton5_aa601d0785e68d2298567b2861996f956_cgraph" id="classpFlow_1_1AdamsMoulton5_aa601d0785e68d2298567b2861996f956_cgraph">
-<area shape="rect" title=" " alt="" coords="5,13,89,39"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="137,5,287,47"/>
+<area shape="rect" title="Prediction step on all points in the active range." alt="" coords="5,13,89,39"/>
+<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="137,5,288,47"/>
 </map>
 </div>
 
@@ -649,9 +715,11 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00107">107</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>Prediction step on active points in the active range. </p>
 
-<p class="reference">References <a class="el" href="pointField_8hpp_source.html#l00138">pointField&lt; VectorField, T, MemorySpace &gt;::activeRange()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00297">VectorSingle&lt; T, MemorySpace &gt;::deviceVectorAll()</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00040">AdamsMoulton5::dy0_</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00042">AdamsMoulton5::dy1_</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00044">AdamsMoulton5::dy2_</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00046">AdamsMoulton5::dy3_</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>, and <a class="el" href="AdamsMoulton5_8hpp_source.html#l00038">AdamsMoulton5::y0_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00147">147</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="pointField_8hpp_source.html#l00138">pointField&lt; VectorField, T, MemorySpace &gt;::activeRange()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00297">VectorSingle&lt; T, MemorySpace &gt;::deviceVectorAll()</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00046">AdamsMoulton5::dy0_</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00049">AdamsMoulton5::dy1_</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00052">AdamsMoulton5::dy2_</a>, <a class="el" href="AdamsMoulton5_8hpp_source.html#l00055">AdamsMoulton5::dy3_</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>, and <a class="el" href="AdamsMoulton5_8hpp_source.html#l00043">AdamsMoulton5::y0_</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
@@ -659,9 +727,9 @@ Additional Inherited Members</h2></td></tr>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1AdamsMoulton5_aaa8ac3ebc39d8702e08e1f71c5843974_cgraph.png" border="0" usemap="#classpFlow_1_1AdamsMoulton5_aaa8ac3ebc39d8702e08e1f71c5843974_cgraph" alt=""/></div>
 <map name="classpFlow_1_1AdamsMoulton5_aaa8ac3ebc39d8702e08e1f71c5843974_cgraph" id="classpFlow_1_1AdamsMoulton5_aaa8ac3ebc39d8702e08e1f71c5843974_cgraph">
-<area shape="rect" title=" " alt="" coords="5,46,113,73"/>
-<area shape="rect" href="classpFlow_1_1pointField.html#afef304b4d4497e45857f6edef9b049e6" title=" " alt="" coords="166,5,306,47"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="161,71,311,112"/>
+<area shape="rect" title="Prediction step on active points in the active range." alt="" coords="5,46,113,73"/>
+<area shape="rect" href="classpFlow_1_1pointField.html#afef304b4d4497e45857f6edef9b049e6" title=" " alt="" coords="167,5,307,47"/>
+<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="161,71,312,112"/>
 </map>
 </div>
 
@@ -705,6 +773,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Integrate on all points in the active range. </p>
+
 <p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8cpp_source.html#l00174">174</a> of file <a class="el" href="AdamsMoulton5_8cpp_source.html">AdamsMoulton5.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="VectorSingle_8hpp_source.html#l00297">VectorSingle&lt; T, MemorySpace &gt;::deviceVectorAll()</a>, and <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>.</p>
@@ -715,8 +785,8 @@ Additional Inherited Members</h2></td></tr>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1AdamsMoulton5_a152b752a6b7b37e70fa5e7c99a484783_cgraph.png" border="0" usemap="#classpFlow_1_1AdamsMoulton5_a152b752a6b7b37e70fa5e7c99a484783_cgraph" alt=""/></div>
 <map name="classpFlow_1_1AdamsMoulton5_a152b752a6b7b37e70fa5e7c99a484783_cgraph" id="classpFlow_1_1AdamsMoulton5_a152b752a6b7b37e70fa5e7c99a484783_cgraph">
-<area shape="rect" title=" " alt="" coords="5,13,61,39"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="109,5,259,47"/>
+<area shape="rect" title="Integrate on all points in the active range." alt="" coords="5,13,61,39"/>
+<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="109,5,260,47"/>
 </map>
 </div>
 
@@ -760,7 +830,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00145">145</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>Integrate on active points in the active range. </p>
+
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00185">185</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="VectorSingle_8hpp_source.html#l00297">VectorSingle&lt; T, MemorySpace &gt;::deviceVectorAll()</a>, and <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -770,8 +842,8 @@ Additional Inherited Members</h2></td></tr>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1AdamsMoulton5_a191dc9197b587f09bb5ee7989b0ba43e_cgraph.png" border="0" usemap="#classpFlow_1_1AdamsMoulton5_a191dc9197b587f09bb5ee7989b0ba43e_cgraph" alt=""/></div>
 <map name="classpFlow_1_1AdamsMoulton5_a191dc9197b587f09bb5ee7989b0ba43e_cgraph" id="classpFlow_1_1AdamsMoulton5_a191dc9197b587f09bb5ee7989b0ba43e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,13,85,39"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="133,5,283,47"/>
+<area shape="rect" title="Integrate on active points in the active range." alt="" coords="5,13,85,39"/>
+<area shape="rect" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e" title=" " alt="" coords="133,5,284,47"/>
 </map>
 </div>
 
@@ -798,9 +870,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00038">38</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>y at time t </p>
 
-<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00107">AdamsMoulton5::predictRange()</a>, and <a class="el" href="AdamsMoulton5_8cpp_source.html#l00132">AdamsMoulton5::setInitialVals()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00043">43</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00147">AdamsMoulton5::predictRange()</a>, and <a class="el" href="AdamsMoulton5_8cpp_source.html#l00132">AdamsMoulton5::setInitialVals()</a>.</p>
 
 </div>
 </div>
@@ -824,9 +898,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00040">40</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>dy at time t </p>
 
-<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00107">AdamsMoulton5::predictRange()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00046">46</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00147">AdamsMoulton5::predictRange()</a>.</p>
 
 </div>
 </div>
@@ -850,9 +926,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00042">42</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>dy at time t-dt </p>
 
-<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00107">AdamsMoulton5::predictRange()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00049">49</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00147">AdamsMoulton5::predictRange()</a>.</p>
 
 </div>
 </div>
@@ -876,9 +954,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00044">44</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>dy at time t-2*dt </p>
 
-<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00107">AdamsMoulton5::predictRange()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00052">52</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00147">AdamsMoulton5::predictRange()</a>.</p>
 
 </div>
 </div>
@@ -902,9 +982,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00046">46</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+<p>dy at time t-3*dt </p>
 
-<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00107">AdamsMoulton5::predictRange()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="AdamsMoulton5_8hpp_source.html#l00055">55</a> of file <a class="el" href="AdamsMoulton5_8hpp_source.html">AdamsMoulton5.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AdamsMoulton5_8hpp_source.html#l00147">AdamsMoulton5::predictRange()</a>.</p>
 
 </div>
 </div>

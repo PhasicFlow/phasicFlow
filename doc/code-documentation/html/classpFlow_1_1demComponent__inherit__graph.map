@@ -1,5 +1,5 @@
 <map id="demComponent" name="demComponent">
-<area shape="rect" id="node1" title=" " alt="" coords="143,5,269,32"/>
+<area shape="rect" id="node1" title="A base class for every main component of DEM system." alt="" coords="143,5,269,32"/>
 <area shape="rect" id="node2" href="$classpFlow_1_1demGeometry.html" title="base for geometry that manages control" alt="" coords="5,80,121,107"/>
 <area shape="rect" id="node3" href="$classpFlow_1_1demInteraction.html" title=" " alt="" coords="145,80,267,107"/>
 <area shape="rect" id="node4" href="$classpFlow_1_1demParticles.html" title=" " alt="" coords="291,80,398,107"/>

@@ -1,4 +1,4 @@
 <map id="AdamsBashforth4" name="AdamsBashforth4">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,144,107"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1integration.html" title=" " alt="" coords="28,5,121,32"/>
+<area shape="rect" id="node1" title="Fourth order Adams&#45;Bashforth integration method for solving ODE." alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1integration.html" title="Base class for integrating the first order ODE (IVP)" alt="" coords="28,5,121,32"/>
 </map>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
-<meta name="description" content="PhasicFlow is an open-source parallel DEM package for simulating granular flow developed in C++ and can be exectued on both GPU (like cuda) and CPU.">
+<meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
 <title>PhasicFlow: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -156,11 +156,11 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 <li>openClosed_
 : <a class="el" href="classpFlow_1_1IOstream.html#aa17155fc05a45901f1fded81dea4c2d0">IOstream</a>
 </li>
-<li>OPENED
-: <a class="el" href="classpFlow_1_1IOstream.html#aacc935fd960fc1d7efe7f3820bb1db35a45c1c97bdcce420fc01045ee101a0cf2">IOstream</a>
-</li>
 <li>opened()
 : <a class="el" href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">IOstream</a>
+</li>
+<li>OPENED
+: <a class="el" href="classpFlow_1_1IOstream.html#aacc935fd960fc1d7efe7f3820bb1db35a45c1c97bdcce420fc01045ee101a0cf2">IOstream</a>
 </li>
 <li>openInFile()
 : <a class="el" href="classpFlow_1_1fileStream.html#a2202773d095b6ad3bd8186c6b4ef1458">fileStream</a>
@@ -300,6 +300,7 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 , <a class="el" href="structpFlow_1_1cfModels_1_1nonLinearMod_1_1nonLinearProperties.html#a059bff0b2bd59e38e7b2688571d1d999">nonLinearMod&lt; limited &gt;::nonLinearProperties</a>
 , <a class="el" href="classpFlow_1_1cfModels_1_1nonLinearMod.html#a5b4991b58cc701cf736ac29d8c88e446">nonLinearMod&lt; limited &gt;</a>
 , <a class="el" href="classpFlow_1_1cylinder.html#ab4075b903a6c38f3b80331dce69db96c">cylinder</a>
+, <a class="el" href="classpFlow_1_1demComponent.html#a95e1df66e5604c2920686b6a6c4e4c10">demComponent</a>
 , <a class="el" href="classpFlow_1_1dictionary.html#adc0d9e77818c0cbe8dc3b9d70626d65c">dictionary</a>
 , <a class="el" href="classpFlow_1_1dynamicPointStructure.html#a863bac136dc41feb56b5dcb59e58c3b0">dynamicPointStructure</a>
 , <a class="el" href="classpFlow_1_1Field.html#ae1323a235cdda69110dd6b61c0e0fa65">Field&lt; VectorField, T, PropType &gt;</a>
@@ -313,12 +314,13 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 , <a class="el" href="classpFlow_1_1indexContainer.html#a6e4ec7d2dc8bab5cc9aa766132060980">indexContainer&lt; IndexType &gt;</a>
 , <a class="el" href="classpFlow_1_1InsertionRegion.html#ae0c5078f30c9290e44b2479694bf615a">InsertionRegion&lt; ShapeType &gt;</a>
 , <a class="el" href="classpFlow_1_1insertionRegion.html#afa380e4b94afa07580a93e670ee73488">insertionRegion</a>
+, <a class="el" href="classpFlow_1_1integration.html#aa5c3d9b07075b6725eeb15aa37da388a">integration</a>
 , <a class="el" href="classpFlow_1_1Istream.html#a32b77186746c413f9a774962268d9f67">Istream</a>
 , <a class="el" href="classpFlow_1_1iTstream.html#accc0e99a8f0f82b23604038b591e5946">iTstream</a>
 , <a class="el" href="classpFlow_1_1line.html#ab2cf0d9d46d1b95cc36c67e72599c619">line</a>
 , <a class="el" href="classpFlow_1_1List.html#a942a136d42f56c4799b69c5f1fb5bf4c">List&lt; T &gt;</a>
 , <a class="el" href="classpFlow_1_1ListPtr.html#af79af8e9f2ade68a3ae7e9705a3eb485">ListPtr&lt; T &gt;</a>
-, <a class="el" href="classpFlow_1_1Logical.html#abd8e597efe175ef1b0c681297a98435e">Logical</a>
+, <a class="el" href="classpFlow_1_1Logical.html#ad9c9ebd469b3da505c0ba05a9f367094">Logical</a>
 , <a class="el" href="classpFlow_1_1Map.html#aceade2152c4f690da1a1a072f9f509e1">Map&lt; Key, T, Compare &gt;</a>
 , <a class="el" href="classpFlow_1_1mapperNBS.html#a77e648ddd6318349e834b18e9b0aa229">mapperNBS&lt; executionSpace &gt;</a>
 , <a class="el" href="classpFlow_1_1MapPtr.html#a92b869af4dac52bf603fa417a5f2090b">MapPtr&lt; Container, Key, T &gt;</a>
@@ -337,8 +339,8 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 , <a class="el" href="classpFlow_1_1pointStructure_1_1activePointsDevice.html#a0edd43c31e15862ea8465fe371a2ff33">pointStructure::activePointsDevice</a>
 , <a class="el" href="classpFlow_1_1pointStructure_1_1activePointsHost.html#a583889022d6dde9983ca6e9bb869119c">pointStructure::activePointsHost</a>
 , <a class="el" href="classpFlow_1_1pointStructure.html#a9e74d0b5a8fdbe326a0400e3d81d4ebf">pointStructure</a>
-, <a class="el" href="classpFlow_1_1property.html#ad244be1e48e5adafb1d973a96f12e7ae">property</a>
-, <a class="el" href="classpFlow_1_1quadruple.html#aee57ccdbbb3b896c8fddb669282ca48c">quadruple&lt; T &gt;</a>
+, <a class="el" href="classpFlow_1_1property.html#abdbddb96607bd14a9a43ab57c2feb810">property</a>
+, <a class="el" href="classpFlow_1_1quadruple.html#a0cb86149c9d625fefd25ce1af1137434">quadruple&lt; T &gt;</a>
 , <a class="el" href="classpFlow_1_1rectangleMesh.html#ad1461a909d4bfaaa18518d314a844f5b">rectangleMesh</a>
 , <a class="el" href="classpFlow_1_1rectMeshField.html#aefbec324e539b0b34678d1ccc5d1da71">rectMeshField&lt; T, MemorySpace &gt;</a>
 , <a class="el" href="classpFlow_1_1region.html#a4beb1eb821d2a0f42463f5d2d3abef84">region&lt; T &gt;</a>
@@ -349,7 +351,7 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 , <a class="el" href="classpFlow_1_1rotatingAxisMotion.html#a25cc3ad703b557e52e5370a1034c41d9">rotatingAxisMotion</a>
 , <a class="el" href="classpFlow_1_1setFieldEntry.html#a25dea98bbfb55e28c42bcf6ae1399995">setFieldEntry</a>
 , <a class="el" href="classpFlow_1_1setFieldList.html#a9fba605afca596177b9f96024b470772">setFieldList</a>
-, <a class="el" href="classpFlow_1_1shapeMixture.html#a5f408b2522402cfcdf8eb98ddd997896">shapeMixture</a>
+, <a class="el" href="classpFlow_1_1shapeMixture.html#abdbd4fa4a6104b73948d21f7790843b6">shapeMixture</a>
 , <a class="el" href="classpFlow_1_1span.html#a4941cdfb143d01712211d97d4efcb002">span&lt; T &gt;</a>
 , <a class="el" href="classpFlow_1_1sphere.html#a27012a3b79658a7bed448393d1c9627e">sphere</a>
 , <a class="el" href="classpFlow_1_1sphereParticles.html#a10bc64f8c1aef7d4c8e9e49d98a7a7f8">sphereParticles</a>
@@ -357,20 +359,20 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 , <a class="el" href="structpFlow_1_1sphTriInteraction_1_1triWall.html#a30088891de16abe0380722fdc2706dc1">triWall</a>
 , <a class="el" href="classpFlow_1_1symArray.html#a488250f0fbf2bd78fef8fe4eb9f5b091">symArray&lt; T, MemorySpace &gt;</a>
 , <a class="el" href="classpFlow_1_1timeInterval.html#a1cf7f793f9be291ce83223ac82c3dbdc">timeInterval</a>
-, <a class="el" href="classpFlow_1_1token.html#a186cf20ad1cea5b84b108df41c550458">token</a>
-, <a class="el" href="classpFlow_1_1triple.html#a3cc64716f8fa1d61aee877fa2b4512ab">triple&lt; T &gt;</a>
+, <a class="el" href="classpFlow_1_1token.html#aaa450c9d2d22e8fa26ffd019f73a6510">token</a>
+, <a class="el" href="classpFlow_1_1triple.html#a9e9c101cf96c422a92e5c3e3e9ab4096">triple&lt; T &gt;</a>
 , <a class="el" href="classpFlow_1_1triSurface_1_1triangleAccessor.html#ae72962adbcda5c34dc5179b7c9cca773">triSurface::triangleAccessor</a>
-, <a class="el" href="classpFlow_1_1triSurfaceField.html#a762e57872cc5f0eae8263b5a89d3449e">triSurfaceField&lt; VectorField, T, MemorySpace &gt;</a>
+, <a class="el" href="classpFlow_1_1triSurfaceField.html#ac7b440411e2dc5271f73be3a0c02a16e">triSurfaceField&lt; VectorField, T, MemorySpace &gt;</a>
 , <a class="el" href="classpFlow_1_1Vector.html#a93deae7c93320429258128246527c668">Vector&lt; T, Allocator &gt;</a>
-, <a class="el" href="classpFlow_1_1VectorDual.html#ad660bd9fffbab2cef979ed751845421b">VectorDual&lt; T, MemorySpace &gt;</a>
-, <a class="el" href="classpFlow_1_1VectorSingle.html#ac6835e58fe6c407b3c87719eed302e20">VectorSingle&lt; T, MemorySpace &gt;</a>
+, <a class="el" href="classpFlow_1_1VectorDual.html#aff0436c27e332929ffb54d281990f964">VectorDual&lt; T, MemorySpace &gt;</a>
+, <a class="el" href="classpFlow_1_1VectorSingle.html#a35e9e8d35406579427bfc8e3bbcc2a78">VectorSingle&lt; T, MemorySpace &gt;</a>
 , <a class="el" href="classpFlow_1_1vibrating.html#a2300ceff97957bb812e2ee03ecc97264">vibrating</a>
 , <a class="el" href="classpFlow_1_1vibratingMotion_1_1Model.html#a2f729f9d4266636fb08728e8a6c0f857">vibratingMotion::Model</a>
 , <a class="el" href="classpFlow_1_1vibratingMotion.html#a6405a8c8ba7ceaadf8953f372db462b2">vibratingMotion</a>
 </li>
 <li>operator==
 : <a class="el" href="classpFlow_1_1quadruple.html#a92a03d771ef97fcd2f4f796e1ddf73b0">quadruple&lt; T &gt;</a>
-, <a class="el" href="classpFlow_1_1token.html#ae5f3ad58e11abfd2be2125fcede7feaa">token</a>
+, <a class="el" href="classpFlow_1_1token.html#a20a49b3b7efc4bc22454dce6198cb67d">token</a>
 , <a class="el" href="classpFlow_1_1triple.html#a876b1737d5fd2b9ed17270220ec0d5a9">triple&lt; T &gt;</a>
 </li>
 <li>operator&gt;
@@ -384,13 +386,13 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 , <a class="el" href="classpFlow_1_1triple.html#a11ab5ddf1dfa33b5c0f7ffd274622c04">triple&lt; T &gt;</a>
 </li>
 <li>operator[]()
-: <a class="el" href="classpFlow_1_1List.html#abf949d6503bf19c5c4555cfe90446bf0">List&lt; T &gt;</a>
-, <a class="el" href="classpFlow_1_1ListPtr.html#ac27b3eea8389d77d07ba8311ec81d393">ListPtr&lt; T &gt;</a>
-, <a class="el" href="classpFlow_1_1MapPtr.html#ae8a3c8e67690b09424f6a1bdbf5f8f82">MapPtr&lt; Container, Key, T &gt;</a>
-, <a class="el" href="classpFlow_1_1span.html#a1ee5bd86811fbed196805dd72ee720ae">span&lt; T &gt;</a>
+: <a class="el" href="classpFlow_1_1List.html#a8f0a61dd9e694fa1ce1afec4f006e2c9">List&lt; T &gt;</a>
+, <a class="el" href="classpFlow_1_1ListPtr.html#a3c6ccfa567f9d2904529261796b4a00b">ListPtr&lt; T &gt;</a>
+, <a class="el" href="classpFlow_1_1MapPtr.html#a4e4be4d19c21322108cee6557427f782">MapPtr&lt; Container, Key, T &gt;</a>
+, <a class="el" href="classpFlow_1_1span.html#a4aa27cc7d48ecbc8f49f6aa1cc252a87">span&lt; T &gt;</a>
 , <a class="el" href="classpFlow_1_1triSurface_1_1triangleAccessor.html#ad9677b15888dc68e739b84d0cf69769e">triSurface::triangleAccessor</a>
-, <a class="el" href="classpFlow_1_1VectorDual.html#a9ee7afc92b7a145e899e6891d4686eec">VectorDual&lt; T, MemorySpace &gt;</a>
-, <a class="el" href="classpFlow_1_1VectorSingle.html#affbed80ac19bc7b9257450ba8a35eaf5">VectorSingle&lt; T, MemorySpace &gt;</a>
+, <a class="el" href="classpFlow_1_1VectorDual.html#aa28be7415e5a16f0234347b2bbf2910c">VectorDual&lt; T, MemorySpace &gt;</a>
+, <a class="el" href="classpFlow_1_1VectorSingle.html#a13e8f3497e3f151a94aec5a8bb422f4f">VectorSingle&lt; T, MemorySpace &gt;</a>
 </li>
 <li>operator_
 : <a class="el" href="classpFlow_1_1compareOne.html#ab69ecda75e2a1ea153958dae11f986d4">compareOne&lt; T, Operator &gt;</a>
@@ -424,7 +426,7 @@ $(document).ready(function(){initNavTree('functions_o.html',''); initResizable()
 : <a class="el" href="classpFlow_1_1vtkFile.html#a6027cf7f2b1878c20729940b2f2f0437">vtkFile</a>
 </li>
 <li>oTstream()
-: <a class="el" href="classpFlow_1_1oTstream.html#aa2c60dbf6e9df34e53e0b06114730f80">oTstream</a>
+: <a class="el" href="classpFlow_1_1oTstream.html#a0175c397bd351c501d68c7c0ff004af8">oTstream</a>
 </li>
 <li>outFileBinary()
 : <a class="el" href="classpFlow_1_1IOfileHeader.html#aefb380f32e3c6839d26dbc93ff4eb00a">IOfileHeader</a>

@@ -1,7 +1,7 @@
 <map id="src/Particles/dynamicPointStructure/dynamicPointStructure.hpp" name="src/Particles/dynamicPointStructure/dynamicPointStructure.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="117,5,379,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="113,5,375,47"/>
 <area shape="rect" id="node2" href="$Time_8hpp.html" title=" " alt="" coords="5,95,88,121"/>
-<area shape="rect" id="node3" href="$pointFields_8hpp.html" title=" " alt="" coords="113,95,234,121"/>
-<area shape="rect" id="node4" href="$integrations_8hpp.html" title=" " alt="" coords="259,95,387,121"/>
-<area shape="rect" id="node5" href="$uniquePtr_8hpp.html" title=" " alt="" coords="411,95,522,121"/>
+<area shape="rect" id="node3" href="$pointFields_8hpp.html" title=" " alt="" coords="112,95,232,121"/>
+<area shape="rect" id="node4" href="$integration_8hpp.html" title=" " alt="" coords="257,95,378,121"/>
+<area shape="rect" id="node5" href="$uniquePtr_8hpp.html" title=" " alt="" coords="403,95,515,121"/>
 </map>

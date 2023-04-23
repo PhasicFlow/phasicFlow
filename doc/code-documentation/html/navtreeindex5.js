@@ -1,8 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"classpFlow_1_1Ostream.html#af20ae96d3a771bd807d36aae8cfd0d4b":[4,0,0,104,32],
-"classpFlow_1_1Ostream.html#af77f129924f44cbdb7d5d002f7f0a61e":[4,0,0,104,25],
-"classpFlow_1_1PeakableRegion.html":[4,0,0,109],
 "classpFlow_1_1PeakableRegion.html#a2303ac8487ac7bec46a027338fccc448":[4,0,0,109,1],
 "classpFlow_1_1PeakableRegion.html#a645ae0ea826d85b0ee035476fd7ece76":[4,0,0,109,4],
 "classpFlow_1_1PeakableRegion.html#a66dadfa799c9079c53ec6bd664dcfb51":[4,0,0,109,7],
@@ -249,5 +246,8 @@ var NAVTREEINDEX5 =
 "classpFlow_1_1VectorDual.html#ab8a8c8498b1ee76b8cc76184c089062d":[4,0,0,172,78],
 "classpFlow_1_1VectorDual.html#abb53bf7be50f262454fa9e378074e0f1":[4,0,0,172,10],
 "classpFlow_1_1VectorDual.html#abb6cb3abc25cb420225d20551e82df94":[4,0,0,172,52],
-"classpFlow_1_1VectorDual.html#abdd160513aab643288381dc9005aa806":[4,0,0,172,77]
+"classpFlow_1_1VectorDual.html#abdd160513aab643288381dc9005aa806":[4,0,0,172,77],
+"classpFlow_1_1VectorDual.html#abe0f40b1e7fb40439167d8279159a953":[4,0,0,172,18],
+"classpFlow_1_1VectorDual.html#abe40d421593c70514fa34a3a3b5cf539":[4,0,0,172,43],
+"classpFlow_1_1VectorDual.html#ac8517ccc8a98e9d29639d48b538c8326":[4,0,0,172,64]
 };

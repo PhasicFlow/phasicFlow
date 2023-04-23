@@ -1,10 +1,10 @@
 <map id="integration" name="integration">
-<area shape="rect" id="node1" title=" " alt="" coords="5,157,99,184"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1AdamsBashforth2.html" title=" " alt="" coords="147,5,285,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1AdamsBashforth3.html" title=" " alt="" coords="147,56,285,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1AdamsBashforth4.html" title=" " alt="" coords="147,107,285,133"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1AdamsBashforth5.html" title=" " alt="" coords="147,157,285,184"/>
-<area shape="rect" id="node6" href="$classpFlow_1_1AdamsMoulton3.html" title=" " alt="" coords="152,208,280,235"/>
-<area shape="rect" id="node7" href="$classpFlow_1_1AdamsMoulton4.html" title=" " alt="" coords="152,259,280,285"/>
-<area shape="rect" id="node8" href="$classpFlow_1_1AdamsMoulton5.html" title=" " alt="" coords="152,309,280,336"/>
+<area shape="rect" id="node1" title="Base class for integrating the first order ODE (IVP)" alt="" coords="5,157,99,184"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1AdamsBashforth2.html" title="Second order Adams&#45;Bashforth integration method for solving ODE." alt="" coords="147,5,285,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1AdamsBashforth3.html" title="Third order Adams&#45;Bashforth integration method for solving ODE." alt="" coords="147,56,285,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1AdamsBashforth4.html" title="Fourth order Adams&#45;Bashforth integration method for solving ODE." alt="" coords="147,107,285,133"/>
+<area shape="rect" id="node5" href="$classpFlow_1_1AdamsBashforth5.html" title="Fifth order Adams&#45;Bashforth integration method for solving ODE." alt="" coords="147,157,285,184"/>
+<area shape="rect" id="node6" href="$classpFlow_1_1AdamsMoulton3.html" title="Third order Adams&#45;Moulton integration method for solving ODE." alt="" coords="152,208,280,235"/>
+<area shape="rect" id="node7" href="$classpFlow_1_1AdamsMoulton4.html" title="Fourth order Adams&#45;Moulton integration method for solving ODE." alt="" coords="152,259,280,285"/>
+<area shape="rect" id="node8" href="$classpFlow_1_1AdamsMoulton5.html" title="Fifth order Adams&#45;Moulton integration method for solving ODE." alt="" coords="152,309,280,336"/>
 </map>

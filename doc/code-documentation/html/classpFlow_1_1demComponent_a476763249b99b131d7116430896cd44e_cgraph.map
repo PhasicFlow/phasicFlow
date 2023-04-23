@@ -1,5 +1,5 @@
 <map id="currentTime" name="currentTime">
-<area shape="rect" id="node1" title=" " alt="" coords="5,46,107,73"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1timeControl.html#a476763249b99b131d7116430896cd44e" title=" " alt="" coords="163,5,309,47"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1systemControl.html#a0d94096809fe3376b29a2a29ca11bb18" title=" " alt="" coords="155,71,317,112"/>
+<area shape="rect" id="node1" title="Current simulation time." alt="" coords="5,46,105,73"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1timeControl.html#a476763249b99b131d7116430896cd44e" title=" " alt="" coords="162,5,309,47"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1systemControl.html#a0d94096809fe3376b29a2a29ca11bb18" title=" " alt="" coords="153,71,317,112"/>
 </map>

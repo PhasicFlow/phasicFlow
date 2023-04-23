@@ -1,5 +1,5 @@
 <map id="demInteraction" name="demInteraction">
 <area shape="rect" id="node1" title=" " alt="" coords="46,80,167,107"/>
 <area shape="rect" id="node2" href="$classpFlow_1_1property.html" title="property holds the pure properties of materials." alt="" coords="5,5,83,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1demComponent.html" title=" " alt="" coords="107,5,234,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1demComponent.html" title="A base class for every main component of DEM system." alt="" coords="107,5,234,32"/>
 </map>

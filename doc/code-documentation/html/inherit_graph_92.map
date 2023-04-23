@@ -1,4 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classpFlow_1_1processField.html" title=" " alt="" coords="5,5,108,32"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1ProcessField.html" title=" " alt="" coords="156,5,296,32"/>
+<area shape="rect" id="node1" href="$classpFlow_1_1pStructSelector.html" title=" " alt="" coords="5,56,127,83"/>
+<area shape="rect" id="node2" href="$classpFlow_1_1selectBox.html" title=" " alt="" coords="189,5,275,32"/>
+<area shape="rect" id="node3" href="$classpFlow_1_1selectRandom.html" title=" " alt="" coords="175,56,289,83"/>
+<area shape="rect" id="node4" href="$classpFlow_1_1selectRange.html" title=" " alt="" coords="181,107,283,133"/>
 </map>
