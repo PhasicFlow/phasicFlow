@@ -1,0 +1,41 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+
+objectName 	geometryDict;
+objectType 	dictionary;
+
+// motion model: rotating object around an axis
+motionModel rotatingAxisMotion; 
+
+surfaces
+{
+	gear
+	{
+		type 	 stlWall;       // type of the wall
+		file 	 gear.stl;	// file name in stl folder
+		material wallMat;       // material name of this wall
+		motion 	 rotAxis;	// motion component name 
+	}
+	surfaces
+	{
+		type 	 stlWall;  	// type of the wall
+		file 	 surfaces.stl;	// file name in stl folder		
+		material wallMat;       // material name of this wall
+		motion 	 none;	        // motion component name 
+	}
+}
+
+// information for rotatingAxisMotion motion model 
+rotatingAxisMotionInfo
+{
+	rotAxis 
+	{
+		p1 (0.561547 0.372714 0.000);	// first point for the axis of rotation 
+		p2 (0.561547 0.372714 0.010);	// second point for the axis of rotation
+		omega 2.1; 		        // rotation speed (rad/s)
+		startTime 1.25;
+		endTime 7;
+	}
+}
