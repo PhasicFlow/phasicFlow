@@ -373,17 +373,19 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 	tobeInsertedIndex_ = newPointsPtr();
 
 	// set the position of new points
-
+	
 	if(!pointPosition_.insertSetElement(
 		newPointsPtr(),
 		pos)
 		)return nullptr;
 
+	
 	if(!pointFlag_.insertSetElement(
 		newPointsPtr(),
 		static_cast<int8>(PointFlag::ACTIVE))
 		)return nullptr;
 
+	
 	setNumMaxPoints();
 	auto minInd = newPointsPtr().min();
 	auto maxInd = newPointsPtr().max();
@@ -393,6 +395,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::pointStructure::insertPoints
 
 	for(auto sfEntry:setField)
 	{
+
 		if(void* fieldPtr = 
 			sfEntry.setPointFieldSelectedAll( 
 				owner, 

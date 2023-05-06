@@ -158,6 +158,7 @@ void* pFlow::setFieldEntry::setPointFieldSelected
 	if( pointField<VectorDual,Type>::TYPENAME() == fieldTypeName )
 	{
 		
+		
 		auto& field = owner.lookupObject<pointField<VectorDual,Type>>(fName);
 		if(field.insertSetElement(selected, value))
 			return &field;

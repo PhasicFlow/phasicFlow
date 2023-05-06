@@ -544,18 +544,21 @@ public:
 				resize(maxInd+1);
 			}
 
-			if constexpr (isHostAccessible_)
-			{
-				fillSelected(deviceVectorAll(), indices.hostView(), indices.size(), val);
-				return true;
 			
-			}else
-			{
-				fillSelected(deviceVectorAll(), indices.deviceView(), indices.size(), val);
-				return true;
-			}
+			using policy = Kokkos::RangePolicy<
+			execution_space,
+			Kokkos::IndexType<int32> >;
+			auto dVec = deviceVectorAll();
+			auto dIndex = indices.deviceView();
+			
+			Kokkos::parallel_for(
+				"insertSetElement",
+				policy(0,indices.size()), LAMBDA_HD(int32 i){	
+				dVec(dIndex(i))= val;
+				});
+			Kokkos::fence();
 
-			return false;
+			return true;
 		}
 
 		INLINE_FUNCTION_H
@@ -597,13 +600,11 @@ public:
 		bool insertSetElement(const int32IndexContainer& indices, const Vector<T>& vals)
 		{
 
-			//Info<<"start of insertSetElement vecotsingle"<<endInfo;
 			if(indices.size() == 0)return true;
 			if(indices.size() != vals.size())return false;
 
 			auto maxInd = indices.max(); 
-			/*output<<"maxInd "<< maxInd<<endl;
-			output<<"size() "<< size()<<endl;*/
+			
 			if(this->empty() || maxInd > size()-1 )
 			{
 				resize(maxInd+1);
