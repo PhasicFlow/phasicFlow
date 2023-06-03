@@ -17,7 +17,7 @@ There is one type of particle in this blender. Particles are poured into the inl
 <img src="sample sample sample sample", width=700px>
 </div>
 <div align="center"><i>
-	particles are colored according to their velocity
+	particles are colored according to their id
 </div></i>
 </body>
 </html>
