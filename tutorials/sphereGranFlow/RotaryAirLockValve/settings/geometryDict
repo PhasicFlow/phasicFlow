@@ -49,7 +49,7 @@ surfaces
 		// motion component name 
 		motion 	 rotAxis;
 	}
-	surfaces
+surfaces
 	{
 		// type of the wall
 		type 	 stlWall;
