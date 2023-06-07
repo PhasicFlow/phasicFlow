@@ -13,7 +13,7 @@ The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rot
 <img src="https://github.com/PhasicFlow/phasicFlow/blob/media/media/rotaryAirLock.gif", width=700px>
 </div>
 <div align="center"><i>
-	particles are colored according to their id
+	particles are colored according to time of insertion
 </div></i>
 </body>
 </html>
