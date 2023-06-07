@@ -380,10 +380,13 @@ bool pFlow::sphereParticles::insertParticles
 		return false;
 	}
 
-	auto exclusionListAllPtr = getFieldObjectList(); 
 
+
+	auto exclusionListAllPtr = getFieldObjectList(); 
+	
 	auto newInsertedPtr = pStruct().insertPoints( position, setField, time(), exclusionListAllPtr());
 	
+
 	if(!newInsertedPtr)
 	{
 		fatalErrorInFunction<<
