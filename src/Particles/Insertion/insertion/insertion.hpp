@@ -21,49 +21,58 @@ Licence:
 #ifndef __insertion_hpp__
 #define __insertion_hpp__
 
-
-#include "streams.hpp"
+#include "types.hpp"
+#include "virtualConstructor.hpp"
 
 namespace pFlow
 {
 
+// forward
 class particles;
 class dictionary;
 
+/**
+ * Base class for particle insertion
+ */
 class insertion
 {
 protected:
-	// - insertion active 
+	
+	/// Is insertion active 
 	Logical 	active_ = "No";
 
-	// - check for collision / desabled for now 
+	/// Check for collision? It is not active now
 	Logical  	checkForCollision_ = "No";
 
-	// - particles 
+	/// Ref to particles 
 	particles& 				  particles_;
 
-	
+	/// Read from dictionary
 	bool readInsertionDict(const dictionary& dict);
 
+	/// Write to dictionary
 	bool writeInsertionDict(dictionary& dict)const;
 
 public:
 
-	// type info
+	/// Type info
 	TypeInfo("insertion");
 
+	/// Construct from component
 	insertion(particles& prtcl);
 
-
+	/// Destructor 
 	virtual ~insertion() = default;
 
+	/// is Insertion active 
 	bool isActive()const {
 		return active_();
 	}
 
-
+	/// read from iIstream
 	virtual bool read(iIstream& is) = 0;
 
+	/// write to iOstream
 	virtual bool write(iOstream& os)const = 0;
 
 

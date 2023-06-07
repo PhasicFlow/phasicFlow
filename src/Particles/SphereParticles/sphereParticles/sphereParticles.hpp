@@ -17,14 +17,13 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-/*! 
-   @class pFlow::sphereParticles
-    
-   @brief Class for managing spherical particles 
-   
-   This is a top-level class that contains the essential components for
-   defining spherical prticles in a DEM simulation.
+/** 
+ * @class pFlow::sphereParticles
+ *   
+ * @brief Class for managing spherical particles 
+ *  
+ * This is a top-level class that contains the essential components for
+ * defining spherical prticles in a DEM simulation.
  */
 
 #ifndef __sphereParticles_hpp__

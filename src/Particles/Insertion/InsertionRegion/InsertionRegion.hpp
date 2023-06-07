@@ -28,13 +28,18 @@ Licence:
 namespace pFlow
 {
 
+/**
+ * This manages insertion of particles from a region based on the ShapeType
+ *  
+ */
 template<typename ShapeType>
 class InsertionRegion
 :
 	public insertionRegion
 {
 protected:
-	// - type of particle shapes 
+
+	/// Ref to Shapes
 	const ShapeType& 	shapes_;
 
 	static bool checkForContact(
@@ -45,39 +50,52 @@ protected:
 
 public:
 
-	// - type info
+	/// Type info
 	TypeInfoTemplateNV("insertionRegion", ShapeType);
 
-	InsertionRegion(const dictionary& dict, const ShapeType& shapes);
+	// - Constructors
 
-	InsertionRegion(const InsertionRegion<ShapeType>& ) = default;
+		/// Construct from dictionary	
+		InsertionRegion(const dictionary& dict, const ShapeType& shapes);
 
-	InsertionRegion(InsertionRegion<ShapeType>&&) = default;
+		/// Copy
+		InsertionRegion(const InsertionRegion<ShapeType>& ) = default;
 
-	InsertionRegion<ShapeType>& operator=(const InsertionRegion<ShapeType>& ) = default;
+		/// Move
+		InsertionRegion(InsertionRegion<ShapeType>&&) = default;
 
-	InsertionRegion<ShapeType>& operator=(InsertionRegion<ShapeType>&&) = default;
+		/// Copy assignment
+		InsertionRegion<ShapeType>& operator=(const InsertionRegion<ShapeType>& ) = default;
 
+		/// Copy assignment
+		InsertionRegion<ShapeType>& operator=(InsertionRegion<ShapeType>&&) = default;
 
-	auto clone()const
-	{
-		return makeUnique<InsertionRegion<ShapeType>>(*this);
-	}
+		/// Clone
+		auto clone()const
+		{
+			return makeUnique<InsertionRegion<ShapeType>>(*this);
+		}
 
-	auto clonePtr()const
-	{
-		return new InsertionRegion<ShapeType>(*this);
-	}
+		/// Clone ptr
+		auto clonePtr()const
+		{
+			return new InsertionRegion<ShapeType>(*this);
+		}
 
-
-	bool insertParticles
-	(
-		real currentTime,
-		real dt,
-		wordVector& names,
-		realx3Vector& pos,
-		bool& insertionOccured
-	);
+	// - Methods
+		
+		/// Insert particles at currentTime
+		/// Check if currentTime is the right moment for 
+		/// particle insertion. Fill the vectors name, pos and signal
+		/// if particle insertion occured or not. 
+		bool insertParticles
+		(
+			real currentTime,
+			real dt,
+			wordVector& names,
+			realx3Vector& pos,
+			bool& insertionOccured
+		);
 
 	//bool read(const dictionary& dict);
 

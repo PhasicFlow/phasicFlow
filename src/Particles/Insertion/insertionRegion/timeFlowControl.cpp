@@ -21,6 +21,17 @@ Licence:
 #include "timeFlowControl.hpp"
 #include "dictionary.hpp"
 
+size_t pFlow::timeFlowControl::numberToBeInserted(real currentTime)
+{
+	if(currentTime<startTime_)return 0;
+	if(currentTime>endTime_) return 0;
+
+	return static_cast<size_t>
+	( 
+		(currentTime - startTime_ + interval_)*rate_ - numInserted_ 
+	);
+}
+
 bool pFlow::timeFlowControl::readTimeFlowControl
 (
 	const dictionary& dict
@@ -59,4 +70,14 @@ pFlow::timeFlowControl::timeFlowControl
 		fatalExit;
 	}
 
+}
+
+bool pFlow::timeFlowControl::insertionTime( real currentTime, real dt)
+{
+	if(currentTime < startTime_) return false;
+
+	if(currentTime > endTime_) return false;
+	if( mod(abs(currentTime-startTime_),interval_)/dt < 1 ) return true;
+
+	return false;
 }

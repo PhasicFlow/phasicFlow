@@ -31,6 +31,28 @@ Licence:
 namespace pFlow
 {
 
+/**
+ * This class manages all the insertion regions for particles insertion
+ * in the simulation.
+ * 
+ * Any number of insertion regions can be defined in a simulation. The
+ * data for particle insertion is provided in particleInsertion file, which 
+ * looks like this. A list of insertion regions (class insertionRegion) can be defined in this file. 
+ * For more information see file insertionRegion.hpp. 
+ * \verbatim
+active  yes;
+
+region1
+{
+	// the data for insertionRegion
+}
+
+region2
+{
+	// Data for insertionRegion
+}
+ \endverbatim
+ */
 template<typename ShapeType>
 class Insertion
 :

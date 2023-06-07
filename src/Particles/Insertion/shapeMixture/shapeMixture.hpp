@@ -29,70 +29,95 @@ namespace pFlow
 
 class dictionary;
 
+/**
+ * Defines a mixture of particles for particle insertion.
+ *
+ * The mixture composition is defined based on the integer numbers.
+ * For example, if there are 3 shape names in the simulaiotn
+ * (shape1, shape2, and shape3), the mixture composition can be defined as:
+ * \verbatim
+ {
+	shape1 4;
+	shape2 2;
+	shape3 6;
+ }
+ \endverbatim
+ * 
+ */
 class shapeMixture
 {
-
 protected:
-	// - list of shape names 
+
+	/// List of shape names 
 	wordVector 		names_;
 
-	// - number composition 
+	/// Number composition 
 	uint32Vector   	number_;
 
-	// - number inserted of each shape 
+	/// Number of inserted particles of each shape 
 	uint32Vector   	numberInserted_;
 
+	/// Current number of inserted
 	uint32Vector      current_;
 
 public:
 
-	//- type Info
+	/// Type info
 	TypeInfoNV("shapeMixture");
 
-	//// - constrcutores 
+	// - Constrcutors 
 		
-		//
+		/// Construct from dictionary
 		shapeMixture(const dictionary & dict);
 
+		/// Copy
 		shapeMixture(const shapeMixture&) = default;
 
+		/// Move
 		shapeMixture(shapeMixture&&) = default;
 
+		/// Copy assignment 
 		shapeMixture& operator=(const shapeMixture&) = default;
 
+		/// Move assignment
 		shapeMixture& operator=(shapeMixture&&) = default;
 
-
+		/// Polymorphic copy
 		uniquePtr<shapeMixture> clone()const
 		{
 			return makeUnique<shapeMixture>(*this);
 		}
 
+		/// Polymorphic copy
 		shapeMixture* clonePtr()const
 		{
 			return new shapeMixture(*this);
 		}
 
 
-		//
+		/// Destructor 
 		~shapeMixture() = default;
 
-	//// - Methods 
+	// - Methods 
+
+		/// The name of the next shape that should be inserted
 		word getNextShapeName();
 
-
+		/// The name of the n next shapes that should be inserted
 		void getNextShapeNameN(size_t n, wordVector& names);
 
-
+		/// Size of mixture (names)
 		auto size()const {
 			return names_.size();
 		}
 
+		/// Total number inserted particles
 		auto totalInserted()const {
 			return sum(numberInserted_);
 		}
 
-	//// - IO operatoins 
+	// - IO operatoins 
+	
 		bool read(const dictionary& dict);
 
 		bool write(dictionary& dict) const;

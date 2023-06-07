@@ -29,32 +29,40 @@ namespace pFlow
 
 class dictionary;
 
+/**
+ *  Time control for particle insertion
+ */
 class timeFlowControl
 {
 protected:
 
+	/// start time of insertion
 	real startTime_;
 
+	/// end time of insertion 
 	real endTime_;
 
+	/// time interval between each insertion
 	real interval_;
 
+	/// rate of insertion 
 	real rate_;
 
-	size_t numInserted_ = 0;
+	/// number of inserted particles
+	size_t numInserted_ = 0;	
 
+
+	/// Read dictionary
 	bool readTimeFlowControl(const dictionary& dict);
 
+	/// Write to dictionary 
 	bool writeTimeFlowControl(dictionary& dict) const;
 
-	size_t numberToBeInserted(real currentTime)
-	{
-		if(currentTime<startTime_)return 0;
-		if(currentTime>endTime_) return 0;
-
-		return static_cast<size_t>( (currentTime - startTime_ + interval_)*rate_ - numInserted_ );
-	}
-
+	/// Return number of particles to be inserted at time currentTime
+	size_t numberToBeInserted(real currentTime);
+	
+	/// Add to numInserted
+	inline
 	size_t addToNumInserted(size_t newInserted)
 	{
 		return numInserted_ += newInserted;
@@ -62,30 +70,25 @@ protected:
 
 public:
 
-
+	/// Construct from dictionary 
 	timeFlowControl(const dictionary& dict);
 
-
-	bool insertionTime( real currentTime, real dt)
-	{
-		if(currentTime < startTime_) return false;
-
-		if(currentTime > endTime_) return false;
-		if( mod(abs(currentTime-startTime_),interval_)/dt < 1 ) return true;
-
-		return false;
-	}
-
+	/// Is currentTime the insertion moment?
+	bool insertionTime( real currentTime, real dt);
+	
+	/// Total number inserted so far
 	size_t totalInserted()const
 	{
 		return numInserted_;
 	}
 
+	/// Read from dictionary
 	bool read(const dictionary& dict)
 	{
 		return readTimeFlowControl(dict);
 	}
 
+	/// Write to dictionary 
 	bool write(dictionary& dict)const
 	{
 		return writeTimeFlowControl(dict);
