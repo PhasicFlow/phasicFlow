@@ -1,12 +1,8 @@
 # Problem Definition
-The problem is to simulate a Rotary Air-Lock Valve with below diminsions:
-* Size of Cone:
-    * Cone Gate: 29.17 cm
-    * Cone Exit: 10.37 cm
-* Size of Outer Exit: 9.42 cm
-* External diameter of Circle: 20.74 cm
-There is one type of particle in this blender. Particles are poured into the inlet valve from t=**0** s.
-* **28000** particles with **5 mm** diameter poured into the valve with rate of **4000 particles/s**.
+The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rotor is about 21 cm. There is one type of particle in this simulation. Particles are inserted into the inlet of the valve from t=**0** s.
+* **28000** particles with **5 mm** diameter are inserted into the valve with the rate of **4000 particles/s**. 
+* The rotor starts its ortation at t = 1.25 s at the rate of 2.1 rad/s. 
+
 
 <html>
 <body>
@@ -14,7 +10,7 @@ There is one type of particle in this blender. Particles are poured into the inl
 	a view of the Rotary Air-Lock Valve while rotating 
 </div></b>
 <div align="center">
-<img src="sample sample sample sample", width=700px>
+<img src="https://github.com/PhasicFlow/phasicFlow/blob/media/media/rotaryAirLock.gif", width=700px>
 </div>
 <div align="center"><i>
 	particles are colored according to their id
@@ -23,11 +19,13 @@ There is one type of particle in this blender. Particles are poured into the inl
 </html>
 
 # Setting up the Case
-As it has been explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup files are stored into three folders: `caseSetup`, `setting`, `stl`  (see the above folders). See next the section for more information on how we can setup the geometry and its rotation.
+As it has been explained in the previous simulations, the simulation case setup is based on text-based scripts. Here, the simulation case setup files are stored into three folders: `caseSetup`, `setting`, and `stl`  (see the above folders). See next the section for more information on how we can setup the geometry and its rotation.
+  
 ## Geometry 
 
 ### Defining rotation axis
-In file `settings/geometryDict` the information of rotating axis and speed of rotation are defined. The rotation of this blender starts at time=**0 s** and ends at time=**7 s**.
+In file `settings/geometryDict` the information of rotating axis of rotor and its speed of rotation are defined. The rotation starts at t = **1.25 s** and ends at t = **7 s**.
+
 ```C++
 // information for rotatingAxisMotion motion model 
 rotatingAxisMotionInfo
@@ -53,7 +51,8 @@ rotatingAxisMotionInfo
 }
 ```
 ### Surfaces 
-In `settings/geometryDict` file, the surfaces component are defined to form a Rotating Air-Lock Valve.
+In `settings/geometryDict` file, the surfaces component are defined to form a Rotating Air-Lock Valve. All surface components are supplied in stl file format. All stl files should be stored under 'stl' folder. 
+
 ```C++
 surfaces
 {
@@ -71,7 +70,7 @@ surfaces
 		// motion component name 
 		motion 	 rotAxis;
 	}
-surfaces
+	surfaces
 	{
 		// type of the wall
 		type 	 stlWall;
@@ -104,25 +103,49 @@ diameters 	(0.005);
 // material names for shapes 
 materials	(sphereMat);
 ```
-### Particle positioning before start of simulation
+### Insertion of Particles 
+Insertion of particles starts from t = 0 s and ends at t = 7 s. A box is defined for the port from which particles are being inderted. The rate of insertion is 4000 particles per second. 
 
 <div align="center"> 
-in <b>settings/particlesDict</b> file
+in <b>settings/particleInsertion</b> file
 </div>
 
 ```C++
-// positions particles 
-positionParticles
+topRegion
 {
 
-	// creates the required fields with zero particles (empty).
-	method empty;
+	// type of insertion region
+	type  boxRegion;
 
-	// maximum number of particles in the simulation
-	maxNumberOfParticles 	50000;
+	// insertion rate (particles/s)
+	rate 	  4000;
 
-	// perform initial sorting based on morton code?
-	mortonSorting 		Yes;
+	// Start time of Particles insertion (s)
+	startTime 	  0;
+
+	// End time of Particles insertion (s)	
+	endTime   	  7;
+
+	// Time interval between each insertion (s)
+	interval       0.025;
+
+	// Coordinates of BoxRegion (m,m,m)
+	boxRegionInfo 
+	{
+		min ( 0.48 0.58 0.01 ); // (m,m,m)
+		max ( 0.64 0.59 0.05 ); // (m,m,m)
+	}
+
+	setFields
+	{
+		// initial velocity of inserted particles
+		velocity    realx3 (0.0 -0.6 0.0);  
+	}
+
+	mixture
+	{
+		sphere 1;  
+	}
 }
 ```
 
@@ -177,10 +200,10 @@ model
                 0.1);     
 }
 ```
-# Performing Simulation and previewing the results 
+# Performing simulation and seeing the results 
 To perform simulations, enter the following commands one after another in the terminal. 
 
-Enter `$ particlesPhasicFlow` command to create the initial fields for particles.  
+Enter `$ particlesPhasicFlow` command to create the initial fields for particles (here the simulaiton has no particle at the beginning).  
 Enter `$ geometryPhasicFlow` command to create the geometry.  
 At last, enter `$ sphereGranFlow` command to start the simulation.  
 After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder.
