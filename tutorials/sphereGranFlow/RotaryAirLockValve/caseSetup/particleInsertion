@@ -14,10 +14,9 @@ active  yes;
 collisionCheck No;
 
 /*
-one layer of particles is added using an insertion step. 
+one region is considered for inserting particles. 
 */
-//Insertion Layer
-layer0
+topRegion
 {
 
 	// type of insertion region
@@ -32,24 +31,24 @@ layer0
 	// End time of Particles insertion (s)	
 	endTime   	  7;
 
-	// Time Interval of Particles insertion (s)
+	// Time Interval between each insertion (s)
 	interval       0.025;
 
 	// Coordinates of BoxRegion (m,m,m)
 	boxRegionInfo 
 	{
-	min ( 0.48 0.58 0.01 ); // (m,m,m)
-	max ( 0.64 0.59 0.05 ); // (m,m,m)
+		min ( 0.48 0.58 0.01 ); // (m,m,m)
+		max ( 0.64 0.59 0.05 ); // (m,m,m)
 	}
 
 	setFields
 	{
-	// initial velocity of inserted particles
-	velocity    realx3 (0.0 -0.6 0.0);  
+		// initial velocity of inserted particles
+		velocity    realx3 (0.0 -0.6 0.0);  
 	}
 
 	mixture
 	{
-	sphere 1;  
+		sphere 1;  
 	}
 }
