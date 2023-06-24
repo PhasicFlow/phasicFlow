@@ -22,3 +22,19 @@ PhasicFlowPlus is and extension to PhasicFlow for simulating particle-fluid syst
 * [Kokkos](https://github.com/kokkos/kokkos) from National Technology & Engineering Solutions of Sandia, LLC (NTESS)
 * [CLI11 1.8](https://github.com/CLIUtils/CLI11) from University of Cincinnati.
 
+## How to cite PhasicFlow
+If you are using PhasicFlow in your research or industrial work, cite the following [article](https://www.sciencedirect.com/science/article/pii/S0010465523001662):
+```
+@article{NOROUZI2023108821,
+title = {PhasicFlow: A parallel, multi-architecture open-source code for DEM simulations},
+journal = {Computer Physics Communications},
+volume = {291},
+pages = {108821},
+year = {2023},
+issn = {0010-4655},
+doi = {https://doi.org/10.1016/j.cpc.2023.108821},
+url = {https://www.sciencedirect.com/science/article/pii/S0010465523001662},
+author = {H.R. Norouzi},
+keywords = {Discrete element method, Parallel computing, CUDA, GPU, OpenMP, Granular flow}
+}
+```
