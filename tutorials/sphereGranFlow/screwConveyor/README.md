@@ -33,27 +33,6 @@ positionParticles
 
 }
 ```
-In dictionary `setFields`, dictionary `defaultValue` defines the initial value for particle fields (here, `velocity`, `acceleration`, `rotVelocity`, and `shapeName`). Note that `shapeName` field should be consistent with the name of shape that you later set for shapes (here one shape with name `sphere1`).
-
-<div align="center"> 
-in <b>settings/particlesDict</b> file
-</div>
-
-```C++
-setFields
-{
-	defaultValue 
-	{
-		velocity 		realx3 	(0 0 0); 		// linear velocity (m/s)
-		acceleration 	realx3 	(0 0 0); 		// linear acceleration (m/s2)
-		rotVelocity 	realx3 	(0 0 0);  		// rotational velocity (rad/s)
-		shapeName 		word	lightSphere; 	// name of the particle shape 
-	}
-
-	selectors
-	{}
-}
-```
 
 Enter the following command in the terminal to create the particles and store them in `0` folder.
 
@@ -84,7 +63,7 @@ rotatingAxisMotionInfo
 }
 
 ```
-In the dictionary `surfaces` you can define all the surfaces (shell) in the simulation. Two main options are available: built-in geometries in PhasicFlow, and providing surfaces with stl file. Here we use built-in geometries. In `cylinder` dictionary, a cylindrical shell with end helix, `material` name `prop1`, `motion` component `none` is defined. `helix` define  plane helix at center of  cylindrical shell, `material` name `prop1` and `motion` component `rotAxis`.  
+In the dictionary `surfaces` you can define all the surfaces (shell) in the simulation. Two main options are available: built-in geometries in PhasicFlow, and providing surfaces with stl file. Here we use built-in geometries. In `cylinder` dictionary, a cylindrical shell with end helix, `material` name `prop1`, `motion` component `none` is defined. `helix` define  plane helix at center of  cylindrical shell, `material` name `prop1` and `motion` component `rotAxis`.'rotAxis' is use for helix because it is rotating and 'none' is use for shell because It is motionless.
 
 <div align="center"> 
 in <b>settings/geometryDict</b> file
@@ -112,6 +91,7 @@ surfaces
 }
 
 ```
+
 Enter the following command in the terminal to create the geometry and store it in `0/geometry` folder.
 
 `> geometryPhasicFlow`
@@ -186,7 +166,7 @@ in <b>caseSetup/sphereShape</b> file
 
 ```C++
 names 		(sphere1); 	// names of shapes 
-diameters 	(0.01);	// diameter of shapes 
+diameters 	(0.01);	        // diameter of shapes 
 materials	(prop1);	// material names for shapes 
 ```
 
@@ -197,12 +177,12 @@ in <b>settings/settingsDict</b> file
 </div>
 
 ```C++
-dt 				0.0001; 	// time step for integration (s)
-startTime 		0; 			// start time for simulation 
-endTime 		20;	 		// end time for simulation 
+dt 		0.0001; 	// time step for integration (s)
+startTime 	0; 		// start time for simulation 
+endTime 	20;	 	// end time for simulation 
 saveInterval 	0.05; 		// time interval for saving the simulation
-timePrecision   6;			// maximum number of digits for time folder 
-g 				(0 -9.8 0); // gravity vector (m/s2) 
+timePrecision   6;		// maximum number of digits for time folder 
+g 		(0 -9.8 0);     // gravity vector (m/s2) 
 
 domain 
 {
@@ -212,9 +192,9 @@ domain
 
 integrationMethod 		AdamsBashforth3; 	// integration method 
 
-timersReport 			Yes;  	// report timers?
+timersReport 			Yes;  	                // report timers?
 
-timersReportInterval   	0.01;	// time interval for reporting timers
+timersReportInterval    	0.01;	                // time interval for reporting timers
 ```
 
 ## Running the case 
