@@ -3,7 +3,9 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
 objectName 	settingsDict;
-objectType 	dictionary;;
+objectType 	dictionary;
+fileFormat 	ASCII;
+/*---------------------------------------------------------------------------*/
 
 run 			layerdSiloFilling;
 

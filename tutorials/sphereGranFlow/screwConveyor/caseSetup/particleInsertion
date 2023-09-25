@@ -2,9 +2,10 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-
 objectName particleInsertion;
 objectType dicrionary;
+fileFormat 	ASCII;
+/*---------------------------------------------------------------------------*/
 
 
 active  yes;          // is insertion active?
@@ -21,7 +22,7 @@ layer0
    rate 	      5000;  // insertion rate (particles/s)
    startTime 	  0;      // (s)
    endTime   	  100;    // (s)
-   interval       0.025;  //s  
+   interval       0.03;  //s  
 
    cylinderRegionInfo 
    {
