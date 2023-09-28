@@ -41,6 +41,29 @@ pFlow::int32 pFlow::countChar( const char* s, const char c)
     );
 }
 
+pFlow::word pFlow::toUpper(const word & inStr)
+{
+    word oStr(inStr);
+    transform(inStr.begin(), inStr.end(), oStr.begin(), ::toupper);
+    return oStr;
+}
+
+bool pFlow::isYes(const word & str)
+{
+    word s = toUpper(str);
+
+    if( s == "YES" || s=="Y" || s == "OK" || s == "TRUE" || s == "ON" || s=="T") return true;
+    return false;
+}
+
+bool pFlow::isNo(const word & str)
+{
+    word s = toUpper(str);
+
+    if( s == "NO" || s == "N" || "FALSE" || s == "OFF" || s == "F") return true;
+    return false;
+}
+
 pFlow::word pFlow::real2Fixed(const real & v, int32 numPrecision)
 {
     std::stringstream ss;
@@ -102,29 +125,6 @@ pFlow::word pFlow::real2FixedStripZeros(const real & v, int32 numPrecision)
 {
     word strVal = real2Fixed(v, numPrecision);
     return removeDecimalZeros(strVal);
-}
-
-pFlow::word pFlow::toUpper(const word & inStr)
-{
-    word oStr(inStr);
-    transform(inStr.begin(), inStr.end(), oStr.begin(), ::toupper);
-    return oStr;
-}
-
-bool pFlow::isYes(const word & str)
-{
-    word s = toUpper(str);
-
-    if( s == "YES" || s == "OK" || s == "TRUE" || s == "ON" || s=="T") return true;
-    return false;
-}
-
-bool pFlow::isNo(const word & str)
-{
-    word s = toUpper(str);
-
-    if( s == "NO" || s == "N" || "FALSE" || s == "OFF" || s == "F") return true;
-    return false;
 }
 
 
@@ -222,25 +222,6 @@ bool pFlow::validWordWithQuote(const word& w)
     return true;
 }
 
-
-bool pFlow::readLabel( const word& w, label & val)
-{
-    try{
-        val = std::stoull(w);
-    }
-    catch (...)
-    {
-        return false;
-    }
-    return true;
-}
-
-bool pFlow::readLabel( const char* buf, label & val)
-{
-    word w(buf);
-    return readLabel(w, val);
-}
-
 bool pFlow::readUint32( const word& w, uint32 & val)
 {
     try{
@@ -296,42 +277,13 @@ bool pFlow::readInt32( const char* buf, int32 & val)
 }
 
 
-bool pFlow::readInt16( const word& w, int16 & val)
-{
-    try{
-        val = static_cast<int16>(std::stoi(w));
-    }
-    catch (...)
-    {
-        return false;
-    }
-    return true;
-}
-
-bool pFlow::readInt16( const char* buf, int16 & val)
-{
-    word w(buf);
-    return readInt16(w, val);
-}
-
-bool pFlow::readInt8( const word& w, int8 & val)
-{
-    try{
-        val = static_cast<int8>(std::stoi(w));
-    }
-    catch (...)
-    {
-        return false;
-    }
-    return true;
-}
-
 bool pFlow::readInt8( const char* buf, int8 & val)
 {
     word w(buf);
     return readInt8(w, val);
 }
-#include <iostream>
+
+//#include <iostream>
 bool pFlow::readReal( const word& w, real & val)
 {
     try{
@@ -363,7 +315,6 @@ bool pFlow::readReal( const char* buf, real & val )
     {
         return false;
     }
-    
     
     return true;
 }

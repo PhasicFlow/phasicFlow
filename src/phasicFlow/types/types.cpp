@@ -25,15 +25,11 @@ namespace pFlow
 		
 	const realx3 zero3(0.0);
 	const realx3 one3(1.0);
-	const uint32x3 zeroU3(0);
-	const uint32x3 oneU3(1);
-
+	
 	const realx3x3   zero33(zero3);
 	const realx3x3   one33(one3);
-	const uint32x3x3 zeroU33(zeroU3);
-	const uint32x3x3 oneU33(oneU3);
-
-	const real4 zero4(zero);
+	
+	const realx4 zero4(zero);
 	
 
 } // pFlow

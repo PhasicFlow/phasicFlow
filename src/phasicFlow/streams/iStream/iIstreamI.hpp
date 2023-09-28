@@ -200,13 +200,6 @@ inline pFlow::iIstream& pFlow::operator>>( iIstream& is, int32& val)
     return is;
 }
 
-inline pFlow::iIstream& pFlow::operator>>( iIstream& is, int16& val)
-{
-    int64 lval(0);
-    is>>lval;
-    val = static_cast<int16>(lval);
-    return is;
-}
 
 inline pFlow::iIstream& pFlow::operator>>( iIstream& is, int8& val)
 {
@@ -216,11 +209,11 @@ inline pFlow::iIstream& pFlow::operator>>( iIstream& is, int8& val)
     return is;
 }
 
-inline pFlow::iIstream& pFlow::operator>>( iIstream& is, label& val)
+inline pFlow::iIstream& pFlow::operator>>( iIstream& is, uint64& val)
 {
     int64 lval(0);
     is>>lval;
-    val = static_cast<label>(lval);
+    val = static_cast<uint64>(lval);
     return is;
 }
 
@@ -232,11 +225,11 @@ inline pFlow::iIstream& pFlow::operator>>( iIstream& is, uint32& val)
     return is;
 }
 
-inline pFlow::iIstream& pFlow::operator>>( iIstream& is, uint16& val)
+inline pFlow::iIstream& pFlow::operator>>( iIstream& is, uint8& val)
 {
     int64 lval(0);
     is>>lval;
-    val = static_cast<uint16>(lval);
+    val = static_cast<uint8>(lval);
     return is;
 }
 

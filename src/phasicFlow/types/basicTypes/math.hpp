@@ -88,12 +88,12 @@ INLINE_FUNCTION_HD int32 mod(int32 x, int32 y)
 	return x%y;
 }
 
-INLINE_FUNCTION_HD int64 mod(label x, label y)
+INLINE_FUNCTION_HD int64 mod(uint64 x, uint64 y)
 {
 	return x%y;
 }
 
-INLINE_FUNCTION_HD int32 mod(uint32 x, uint32 y)
+INLINE_FUNCTION_HD auto mod(uint32 x, uint32 y)
 {
 	return x%y;
 }
@@ -319,7 +319,7 @@ INLINE_FUNCTION_HD int64 min(int64 x, int64 y)
 #endif
 }
 
-INLINE_FUNCTION_HD label min(label x, label y)
+INLINE_FUNCTION_HD uint64 min(uint64 x, uint64 y)
 {
 #ifdef __CUDACC__
 	return ::min(x, y);
@@ -338,14 +338,7 @@ INLINE_FUNCTION_HD uint32 min(uint32 x, uint32 y)
 #endif
 }
 
-INLINE_FUNCTION_HD uint32 min(uint16 x, uint16 y)
-{
-#ifdef __CUDACC__
-	return ::min(x, y);
-#else
-	return std::min(x, y);
-#endif
-}
+
 
 INLINE_FUNCTION_HD real max(real x, real y)
 {
@@ -374,7 +367,7 @@ INLINE_FUNCTION_HD int32 max(int32 x, int32 y)
 #endif
 }
 
-INLINE_FUNCTION_HD label max(label x, label y)
+INLINE_FUNCTION_HD uint64 max(uint64 x, uint64 y)
 {
 #ifdef __CUDACC__
 	return ::max(x, y);
@@ -393,15 +386,6 @@ INLINE_FUNCTION_HD uint32 max(uint32 x, uint32 y)
 #endif
 }
 
-INLINE_FUNCTION_HD uint32 max(uint16 x, uint16 y)
-{
-#ifdef __CUDACC__
-	return ::max(x, y);
-#else
-	return std::max(x, y);
-#endif
-
-}
 
 } // pFlow
 

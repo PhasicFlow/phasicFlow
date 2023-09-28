@@ -118,14 +118,17 @@ public:
         /// Write int32
         virtual iOstream& write(const int32 val) = 0;
 
-        /// Write label
-        virtual iOstream& write(const label val) = 0;
+        /// Write int8
+        virtual iOstream& write(const int8 val) = 0;
+
+        /// Write uint64
+        virtual iOstream& write(const uint64 val) = 0;
 
         /// Write uint32
         virtual iOstream& write(const uint32 val) = 0;
 
-        /// Write uint16
-        virtual iOstream& write(const uint16 val) = 0;
+        /// Write uint8
+        virtual iOstream& write(const uint8 val) = 0;
 
         /// Write float
         virtual iOstream& write(const float val) = 0;
@@ -377,17 +380,13 @@ inline iOstream& operator<<( iOstream& os, const int32& val)
     return os.write(val);
 }
 
-inline iOstream& operator<<( iOstream& os, const int16& val)
-{
-    return os.write(val);
-}
 
 inline iOstream& operator<<( iOstream& os, const int8& val)
 {
     return os.write(val);
 }
 
-inline iOstream& operator<<( iOstream& os, const label& val)
+inline iOstream& operator<<( iOstream& os, const uint64& val)
 {
     return os.write(val);
 }
@@ -397,7 +396,7 @@ inline iOstream& operator<<( iOstream& os, const uint32& val)
     return os.write(val);
 }
 
-inline iOstream& operator<<( iOstream& os, const uint16& val)
+inline iOstream& operator<<( iOstream& os, const uint8& val)
 {
     return os.write(val);
 }

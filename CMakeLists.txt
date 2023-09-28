@@ -72,11 +72,11 @@ include_directories(src/setHelpers src/demComponent "${PROJECT_BINARY_DIR}")
 
 add_subdirectory(src)
 
-add_subdirectory(solvers)
+#add_subdirectory(solvers)
 
-add_subdirectory(utilities)
+#add_subdirectory(utilities)
 
-add_subdirectory(DEMSystems)
+#add_subdirectory(DEMSystems)
 #add_subdirectory(testIO)
 
 install(FILES "${PROJECT_BINARY_DIR}/phasicFlowConfig.H"

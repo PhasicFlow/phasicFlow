@@ -29,7 +29,10 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ *  Interface input stream class 
+ * 
+ */
 class iIstream // interface class for input streams
 :
 	public IOstream
@@ -37,17 +40,17 @@ class iIstream // interface class for input streams
 
 	// Private Data
 
-    //- Has a token been put back on the stream?
+    /// Has a token been put back on the stream?
     bool putBack_;
 
-    //- The last token put back on the stream
+    /// The last token put back on the stream
     token putBackToken_;
 
 public:
 
-    //// - Constructors    
+    ///// Constructors    
 
-    	// - default
+    	/// default
 	    iIstream():
 			IOstream(),
 	        putBack_(false)	
@@ -58,85 +61,82 @@ public:
 	    	putBack_(false)
 	    {}
 
-	    // - Copy construct
+	    /// Copy construct
 	    iIstream(const iIstream&) = default;
 
-	    // - Destructor
+	    /// Destructor
 	    virtual ~iIstream() = default;
 
 
 
     //// member methods
 
-	    //- Put back token
-	    //  Only a single put back is permitted
+	    /// Put back token
+	    ///  Only a single put back is permitted
 	    void putBack(const token& tok);
 
-	    //- Get the put back token if there is one and return true.
-	    //  Return false if no put back token is available.
+	    /// Get the put back token if there is one and return true.
+	    ///  Return false if no put back token is available.
 	    bool getBack(token& tok);
 
-	    //- Peek at the put back token without removing it.
-	    //  Returns false if no put back token is available and set the
-	    //  token to undefined.
+	    /// Peek at the put back token without removing it.
+	    ///  Returns false if no put back token is available and set the
+	    ///  token to undefined.
 	    bool peekBack(token& tok);
 
-	    //- reset the put back token;
+	    /// reset the put back token;
 	    void resetPutBack()
 	    {
 	    	putBackToken_.reset();
 	    	putBack_ = false;
 	    }
 
-	    //- Return next token from stream
+	    /// Return next token from stream
 	    virtual iIstream& read(token&) = 0;
 
-	    //- Read a character
+	    /// Read a character
 	    virtual iIstream& read(char&) = 0;
 
-	    //- Read a string (including enclosing double-quotes)
+	    /// Read a string (including enclosing double-quotes)
 	    virtual iIstream& read(word&) = 0;
 
-	    //- Read a string 
+	    /// Read a string 
 	    virtual iIstream& readString(word&) = 0;    
 
-	    //- Read a int64
+	    /// Read a int64
 	    virtual iIstream& read(int64&) = 0;
 
-	    //- Read a int32
+	    /// Read a int32
 	    virtual iIstream& read(int32&) = 0;
 
-	    //- Read a int16
-	    virtual iIstream& read(int16&) = 0;
-
-	    //- Read a int8
+	    /// Read a int8
 	    virtual iIstream& read(int8&) = 0;
 
-	    //- Read a label
-	    virtual iIstream& read(label&) = 0;
+	    /// Read a uint64
+	    virtual iIstream& read(uint64&) = 0;
 
-	    //- Read a uin32
+	    /// Read a uin32
 	    virtual iIstream& read(uint32&) = 0;
 
-	    //- Read a uin16
-	    virtual iIstream& read(uint16&) = 0;
+	    /// Read a uint8
+	    virtual iIstream& read(uint8&) = 0;
 
-	    //- Read a floatScalar
+	    /// Read a floatScalar
 	    virtual iIstream& read(float&) = 0;
 
-	    //- Read a doubleScalar
+	    /// Read a doubleScalar
 	    virtual iIstream& read(double&) = 0;
 
 	    virtual iIstream& read(char* buffer, std::streamsize count) =0;
 
 	    
-	    //- Rewind the stream so that it may be read again
+	    /// Rewind the stream so that it may be read again
 	    virtual void rewind() = 0;
 
 
-    //// - find and lookups
+    ///// find and lookups
 
-        // - search for all tokesn and find the first word token tbat matchs w
+        /// search for all tokesn and find the first word token tbat matchs w
         virtual bool findToken( const word & w );
 
         /// search for all tokesn after the current file position 
@@ -144,69 +144,69 @@ public:
         virtual bool findTokenResume(const word& w);
 
 
-        // - search for all tokesn and find the first word token that matchs 
+        /// search for all tokesn and find the first word token that matchs 
         virtual bool findTokenSilent( const word & w, int32 limitLine = 100 );
 
         /// search for all tokesn after the current file position 
         /// and find the first word token tbat matchs w
         virtual bool findTokenResumeSilent( const word & w, int32 limitLine = 100 );
 
-        // - search for all tokens and find the first word token and also next word token
-        //   chekck if it is eneded with end statement ;
+        /// search for all tokens and find the first word token and also next word token
+        /// chekck if it is eneded with end statement ;
         virtual bool findTokenAndNext( const word& w, word& nextW, bool checkEndStatement = true);
 
 
         virtual bool findTokenAndNextSilent( const word& w, word& nextW, int32 limitLine = 100);
 
-        // - find a pair of keyword and data terminated by ;
-        //   keyword data;
-        //   return false if keyword does not exist or reading fails. 
+        /// find a pair of keyword and data terminated by ;
+        ///  keyword data;
+        ///  return false if keyword does not exist or reading fails. 
         template<typename T>
         bool findKeywordAndVal(const word& keyword, T& val, bool checkEndStatement = true);
 
-        // - lookup for keyword and data;
-        //   fatalExit if fails
+        /// lookup for keyword and data;
+        ///  fatalExit if fails
         template<typename T>
         T lookupData(const word& keyword);
 
-        // - lookup for keyword and data;
-        //   set to setVal if lookup fails. 
+        /// lookup for keyword and data;
+        ///  set to setVal if lookup fails. 
         template<typename T>
         T lookupDataOrSet(const word& keyword, const T& setVal);
         
-        // - read the data next to keword 
-        //   keyword    data; 
-        //   check the keyword is correct or not 
+        /// read the data next to keword 
+        /// keyword    data; 
+        /// check the keyword is correct or not 
         template<typename T>
         bool nextData(const word& keyword, T& data);
 
 	//// Read List punctuation tokens
 
-	    //- Begin read of data chunk, starts with '('.
-	    //  return true or FatalIOError
+	    /// Begin read of data chunk, starts with '('.
+	    /// return true or FatalIOError
 	    bool readBegin(const char* funcName);
 
-	    //- End read of data chunk, ends with ')'
-	    //  return true or FatalIOError
+	    /// End read of data chunk, ends with ')'
+	    /// return true or FatalIOError
 	    bool readEnd(const char* funcName);
 
-	    //- Begin read of data chunk, starts with '('.
-	    //  return true or FatalIOError
+	    /// Begin read of data chunk, starts with '('.
+	    /// return true or FatalIOError
 	    bool readBeginSquare(const char* funcName);
 
-	    //- Begin read of data chunk, starts with '('.
-	    //  return true or FatalIOError
+	    /// Begin read of data chunk, starts with '('.
+	    /// return true or FatalIOError
 	    bool readEndSquare(const char* funcName);
 
-	    //- Begin read of list data, starts with '(' or '{'
-	    //  return starting delimiter or FatalIOError
+	    /// Begin read of list data, starts with '(' or '{'
+	    /// return starting delimiter or FatalIOError
 	    char readBeginList(const char* funcName);
 
-	    //- End read of list data, ends with ')' or '}'
-	    //  return closing delimiter or FatalIOError
+	    /// End read of list data, ends with ')' or '}'
+	    /// return closing delimiter or FatalIOError
 	    char readEndList(const char* funcName);
 
-	    // End statement character ;
+	    /// End statement character ;
 	    char readEndStatement(const char* funcName);
 
     	
@@ -217,13 +217,13 @@ public:
 
 typedef iIstream& (*iIstreamManip)(iIstream&);
 
-//- operator>> handling for manipulators without arguments
+/// operator>> handling for manipulators without arguments
 inline iIstream& operator>>(iIstream& is, iIstreamManip f)
 {
     return f(is);
 }
 
-//- operator>> handling for manipulators without arguments
+/// operator>> handling for manipulators without arguments
 inline iIstream& operator>>(iIstream& is, IOstreamManip f)
 {
     f(is);
@@ -233,22 +233,19 @@ inline iIstream& operator>>(iIstream& is, IOstreamManip f)
 
 // read operation for basic types it gets from the 
 // token stream
-
 inline iIstream& operator>>( iIstream& is, word & w);
 
 inline iIstream& operator>>( iIstream& is, int64& val);
 
 inline iIstream& operator>>( iIstream& is, int32& val);
 
-inline iIstream& operator>>( iIstream& is, int16& val);
-
 inline iIstream& operator>>( iIstream& is, int8& val);
+
+inline iIstream& operator>>( iIstream& is, uint64& val);
 
 inline iIstream& operator>>( iIstream& is, uint32& val);
 
-inline iIstream& operator>>( iIstream& is, uint16& val);
-
-inline iIstream& operator>>( iIstream& is, label& val);
+inline iIstream& operator>>( iIstream& is, uint8& val);
 
 inline iIstream& operator>>( iIstream& is, float& val);
 

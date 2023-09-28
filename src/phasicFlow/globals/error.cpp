@@ -21,8 +21,15 @@ Licence:
 #include <iostream>
 #include <stdlib.h>
 
+#ifdef pFlow_Build_MPI
+	#include <mpi.h>
+#endif
+
+#include <Kokkos_Core.hpp>
+
 #include "error.hpp"
 #include "streams.hpp"
+
 
 
 static pFlow::Ostream& errorStream   = pFlow::errReport;
@@ -93,4 +100,22 @@ pFlow::iOstream& reportAndExit()
 	return errorStream;
 }
 
+int exitPhasicFlow()
+{
+// Kokkos should be finalized first
+Kokkos::finalize();
 
+#ifdef pFlow_Build_MPI
+	int flag=0;
+	MPI_Initialized(&flag)
+	if(flag == 1)
+	{
+		MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+		MPI_Finalize();
+    }
+    exit(EXIT_FAILURE);
+#else
+    exit(EXIT_FAILURE);
+#endif
+	return EXIT_FAILURE;
+}

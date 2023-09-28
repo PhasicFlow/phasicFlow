@@ -25,10 +25,7 @@ Licence:
 
 namespace pFlow
 {
-
-const inline double vectorGrowthFactor__ = 1.1;
-
-
+const inline double vectorGrowthFactor__ = 1.2;
 }
 
 

@@ -144,7 +144,7 @@ inline pFlow::token::token(punctuationToken p, int32 lineNumber)
     data_.punctuationVal = p;
 }
 
-inline pFlow::token::token(const label val, int32 lineNumber)
+inline pFlow::token::token(const uint64 val, int32 lineNumber)
 :
     data_(),
     type_(tokenType::INT64),

@@ -227,9 +227,8 @@ iIstream& operator >>(iIstream& is, List<T>& lst);
 
 using int64List 	= List<int64>;
 using int32List 	= List<int32>;
-using int16List 	= List<int16>;
 using int8List 		= List<int8>;
-using labelList 	= List<label>;
+using uint64List 	= List<uint64>;
 using uint32List 	= List<uint32>;
 
 using realList 		= List<real>;

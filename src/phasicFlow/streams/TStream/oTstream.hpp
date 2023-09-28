@@ -61,45 +61,47 @@ public:
 
     //// - Write
 
-        //- Write token to stream or otherwise handle it.
+        /// Write token to stream or otherwise handle it.
         //  return false if the token type was not handled by this method
         virtual bool write(const token& tok);
 
-        //- Write single character. Whitespace is suppressed.
+        /// Write single character. Whitespace is suppressed.
         virtual iOstream& write(const char c);
 
-        //- Write the word-characters of a character string.
+        /// Write the word-characters of a character string.
         //  Sends as a single char, or as word.
         virtual iOstream& write(const char* str);
 
-        //- Write word
+        /// Write word
         virtual iOstream& write(const word& str);
 
         
-        //- Write std::string surrounded by quotes.
+        /// Write std::string surrounded by quotes.
         //  Optional write without quotes.
         virtual iOstream& writeQuoted(const std::string& str, const bool quoted=true );
 
-        //- Write int64
+        /// Write int64
         virtual iOstream& write(const int64 val) override;
 
-        //- Write int32
+        /// Write int32
         virtual iOstream& write(const int32 val) override;
 
-        
-        //- Write label
-        virtual iOstream& write(const label val) override;
+        /// Write int8
+        virtual iOstream& write(const int8 val) override;
 
-        //- Write uint32
+        /// Write uint64
+        virtual iOstream& write(const uint64 val) override;
+
+        /// Write uint32
         virtual iOstream& write(const uint32 val) override;
 
-        //- Write uint16
-        virtual iOstream& write(const uint16 val) override;
+        /// Write uint8
+        virtual iOstream& write(const uint8 val) override;
 
-        //- Write float
+        /// Write float
         virtual iOstream& write(const float val) override;
 
-        //- Write double
+        /// Write double
         virtual iOstream& write(const double val) override;
 
         /// Write a block of binray data
@@ -107,80 +109,80 @@ public:
             const char* binaryData, 
             std::streamsize count) override;
 
-        // - append token to the stream
+        /// append token to the stream
         virtual void append(const token& tok);
         
-        // - append a list of tokens to the stream
+        /// append a list of tokens to the stream
         virtual void append(const tokenList& tLisk);
         
     
 
     //// - Stream state functions
 
-        //- Reset the output buffer and rewind the stream
+        /// Reset the output buffer and rewind the stream
         void reset();
 
-        //- Rewind the output stream
+        /// Rewind the output stream
         virtual void rewind();
 
-        //- Add indentation characters
+        /// Add indentation characters
         virtual void indent()
         {}
 
-        //- Flush stream
+        /// Flush stream
         virtual void flush()
         {}
 
-        //- Add newline and flush stream
+        /// Add newline and flush stream
         virtual void endl()
         {}
 
-        //- Get the current padding character
+        /// Get the current padding character
         //  \return previous padding character
         virtual char fill() const
         {
             return 0;
         }
 
-        //- Set padding character for formatted field up to field width
+        /// Set padding character for formatted field up to field width
         virtual char fill(const char)
         {
             return 0;
         }
 
-        //- Get width of output field
+        /// Get width of output field
         virtual int width() const
         {
             return 0;
         }
 
-        //- Set width of output field
+        /// Set width of output field
         //  \return previous width
         virtual int width(const int)
         {
              return 0;
         }
 
-        //- Get precision of output field
+        /// Get precision of output field
         virtual int precision() const
         {
              return 0;
         }
 
-        //- Set precision of output field
+        /// Set precision of output field
         //  \return old precision
         virtual int precision(const int)
         {
              return 0;
         }
 
-        //- Return flags of output stream
+        /// Return flags of output stream
         virtual ios_base::fmtflags flags() const
         {
             return ios_base::fmtflags(0);
         }
 
-        //- Set flags of stream
+        /// Set flags of stream
         ios_base::fmtflags flags(const ios_base::fmtflags)
         {
             return ios_base::fmtflags(0);

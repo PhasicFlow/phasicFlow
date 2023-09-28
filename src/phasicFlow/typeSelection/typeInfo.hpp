@@ -137,17 +137,17 @@ namespace pFlow
 	template<>
 	inline word basicTypeName<int32>(){ return "int32"; }
 
-	template<>
-	inline word basicTypeName<int16>(){ return "int16"; }
-
-	template<>
+		template<>
 	inline word basicTypeName<int8>(){ return "int8"; }
 
 	template<>
-	inline word basicTypeName<label>(){ return "label"; }
+	inline word basicTypeName<uint64>(){ return "uint64"; }
 
 	template<>
 	inline word basicTypeName<uint32>(){ return "uint32"; }
+
+	template<>
+	inline word basicTypeName<uint8>(){ return "uint8"; }
 
 	template<>
 	inline word basicTypeName<real>(){ return "real"; }

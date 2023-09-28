@@ -46,7 +46,7 @@ public:
 
     //// - Constructors 
 
-        //- construct with a name
+        /// construct with a name
         iTstream(const word& streamName);
 
         // - construct with name and copy
@@ -72,55 +72,52 @@ public:
         // move assignment from tokenList
         void operator=(tokenList&& tList);
 
-        //- Destructor
+        /// Destructor
         virtual ~iTstream() = default;
 
 
     //// Member Functions   
 
-        //- Return the name of the stream
+        /// Return the name of the stream
         virtual const word& name() const;
 
-        //- Return non-const access to the name of the stream
+        /// Return non-const access to the name of the stream
         virtual word& name();
 
-        //- Return next token from stream
+        /// Return next token from stream
         virtual iIstream& read(token& t)override;
 
-        //- Read a character
+        /// Read a character
         virtual iIstream& read(char& c)override;
 
-        //- Read a word
+        /// Read a word
         virtual iIstream& read(word& str)override;
 
-        //- Read a string
+        /// Read a string
         virtual iIstream& readString(word& str)override;
 
-       //- Read a int64
+        /// Read a int64
         virtual iIstream& read(int64&) override;
 
-        //- Read a int32
+        /// Read a int32
         virtual iIstream& read(int32&) override;
-
-        //- Read a int16
-        virtual iIstream& read(int16&) override;
-
-        //- Read a int8
+        
+        /// Read a int8
         virtual iIstream& read(int8&) override;
 
-        //- Read a label
-        virtual iIstream& read(label&) override;
+        /// Read a uint64
+        virtual iIstream& read(uint64&) override;
 
-        //- Read a uint32
+        /// Read a uint32
         virtual iIstream& read(uint32&) override;
 
-        //- Read a uint16
-        virtual iIstream& read(uint16&) override;
+        /// Read a uint8
+        virtual iIstream& read(uint8&) override;
 
-        //- Read a floatScalar
+        /// Read a floatScalar
         virtual iIstream& read(float&) override;
 
-        //- Read a doubleScalar
+        /// Read a doubleScalar
         virtual iIstream& read(double&) override;
 
         iIstream& read(char* buffer, std::streamsize count) override;
@@ -147,13 +144,13 @@ public:
         // - append token to the end of token and rewind the stream 
         void appendToken(const token& t);
    
-        //- Return flags of output stream
+        /// Return flags of output stream
         ios_base::fmtflags flags() const
         {
             return ios_base::fmtflags(0);
         }
 
-        //- Set flags of stream
+        /// Set flags of stream
         ios_base::fmtflags flags(const ios_base::fmtflags)
         {
             return ios_base::fmtflags(0);        

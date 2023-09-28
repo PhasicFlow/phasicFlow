@@ -17,28 +17,30 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
-
-
 #ifndef __token_hpp__
 #define __token_hpp__
 
 
 #include "bTypes.hpp"
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
 
 namespace pFlow
 {
 
-// Forward Declarations
+//- Forward Declarations
 class token;
 class iIstream;
 class iOstream;
+
 iOstream& operator<<(iOstream& os, const token& tok);
 
 
+/**
+ *  Token class 
+ *  based on OpenFOAM stream, with some modifications/simplifications
+ *  to be tailored to our needs 
+ */
 class token
 {
 public:
@@ -212,8 +214,8 @@ public:
     //- Construct punctuation character token
     inline explicit token(punctuationToken p, int32 lineNumber=0);
 
-    //- Construct label token
-    inline explicit token(const label val, int32 lineNumber=0);
+    //- Construct uint64 token
+    inline explicit token(const uint64 val, int32 lineNumber=0);
 
     //- Construct uint32 token
     inline explicit token(const uint32 val, int32 lineNumber=0);

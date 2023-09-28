@@ -48,22 +48,22 @@ inline const bool usingDouble__ = false;
 
 using int8    = signed char;
 
-using int16   = short int;
-
 using int32   = int;
 
 using int64   = long long int;
 
-using uint16  = unsigned short int  ;
+using uint8  = unsigned char  ;
 
 using uint32  = unsigned int;
 
-using label   = std::size_t;
+using uint64  = unsigned long long int;
+
+using size_t  = std::size_t;
 
 using word    = std::string;
 
 inline 
-auto floatingPointDescription()
+word floatingPointDescription()
 {
   return word("In this build, ") + word(floatingPointType__) +
          word(" is used for floating point operations.");

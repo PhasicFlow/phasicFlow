@@ -46,128 +46,125 @@ class Istream
     std::istream& is_;
 
 
-    //- Get the next valid character
+    /// Get the next valid character
     char nextValid();
 
-    //- Read a word token
+    /// Read a word token
     void readWordToken(token& t);
 
     
-    //- Read a variable name starting with '$'.
+    /// Read a variable name starting with '$'.
     //  Handles "$var" and "${var}" forms, permits '/' scoping character.
     Istream& readVariable(word& str);
 
-    //- No copy assignment
+    /// No copy assignment
     void operator=(const Istream&) = delete;
 
 
 public:
 
 
-    //- Construct wrapper around std::istream, set stream status
+    /// Construct wrapper around std::istream, set stream status
     Istream( std::istream& is, const word& streamName, writeFormat wf = ASCII);
 
-    //- Destructor
+    /// Destructor
     virtual ~Istream() = default;
 
 
     //// - Methods
 
-    //- Return the name of the stream
+    /// Return the name of the stream
     virtual const word& name() const
     {
         return name_;
     }
 
-    //- Return non-const access to the name of the stream
+    /// Return non-const access to the name of the stream
     virtual word& name()
     {
         return name_;
     }
 
-    //- Return flags of output stream
+    /// Return flags of output stream
     virtual ios_base::fmtflags flags() const;
 
 
     //// Read Functions
 
-    //- Raw, low-level get character function.
+    /// Raw, low-level get character function.
     Istream& get(char& c);
 
-    //- Raw, low-level peek function.
+    /// Raw, low-level peek function.
     //  Does not remove the character from the stream.
     //  Returns the next character in the stream or EOF if the
     //  end of file is read.
     int peek();
 
-    //- Raw, low-level getline (until delimiter) into a string.
+    /// Raw, low-level getline (until delimiter) into a string.
     Istream& getLine(word& str, char delim = '\n');
 
-    //- Low-level discard until delimiter
+    /// Low-level discard until delimiter
     //  return the number of characters extracted
     std::streamsize getLine(std::nullptr_t, char delim = '\n');
 
-    //- Raw, low-level putback character function.
+    /// Raw, low-level putback character function.
     Istream& putback(const char c);
 
-    //- Return next token from stream
+    /// Return next token from stream
     virtual iIstream& read(token& t) override;
 
-    //- Read a character
+    /// Read a character
     virtual iIstream& read(char& c) override;
 
-    //- Read a word
+    /// Read a word
     virtual iIstream& read(word& str) override;
 
-    //- Read a string
+    /// Read a string
     virtual iIstream& readString(word& str) override;
 
-    //- Read a int64
+    /// Read a int64
     virtual iIstream& read(int64&) override;
 
-    //- Read a int32
+    /// Read a int32
     virtual iIstream& read(int32&) override;
 
-    //- Read a int16
-    virtual iIstream& read(int16&) override;
-
-    //- Read a int8
+    /// Read a int8
     virtual iIstream& read(int8&) override;
 
-    //- Read a label
-    virtual iIstream& read(label&) override;
+    /// Read a uint64
+    virtual iIstream& read(uint64&) override;
 
-    //- Read a uint32
+    /// Read a uint32
     virtual iIstream& read(uint32&) override;
 
-    //- Read a uint16
-    virtual iIstream& read(uint16&) override;
+    /// Read a uint8
+    virtual iIstream& read(uint8&) override;
 
-    //- Read a float
+    /// Read a float
     virtual iIstream& read(float& val) override;
 
-    //- Read a double
+    /// Read a double
     virtual iIstream& read(double& val) override;
 
     iIstream& read(char* buffer, std::streamsize count) override;
 
     
-    //- Rewind the stream so that it may be read again
+    /// Rewind the stream so that it may be read again
     virtual void rewind();
 
 
-    //- Set stream flags
+    /// Set stream flags
     virtual ios_base::fmtflags flags(const ios_base::fmtflags flags);
 
 
 
-    //- Access to underlying std::istream
+    /// Access to underlying std::istream
     virtual std::istream& stdStream()
     {
         return is_;
     }
 
-    //- Const access to underlying std::istream
+    /// Const access to underlying std::istream
     virtual const std::istream& stdStream() const
     {
         return is_;
