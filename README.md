@@ -7,7 +7,7 @@
 
 **MPI** parallelization with dynamic load balancing is under development. With this level of parallelization, PhasicFlow can leverage the computational power of **multi-gpu** workstations or clusters with distributed memory CPUs. 
 In summary PhasicFlow can have 6 execution modes:
-1. Serial on a single CPU,
+1. Serial on a single CPU core,
 2. Parallel on a multi-core computer/node (using OpenMP),
 3. Parallel on an nvidia-GPU (using Cuda),
 4. Parallel on distributed memory workstation (Using MPI)
