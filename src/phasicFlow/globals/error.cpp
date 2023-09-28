@@ -21,13 +21,11 @@ Licence:
 #include <iostream>
 #include <stdlib.h>
 
-#ifdef pFlow_Build_MPI
-	#include <mpi.h>
-#endif
 
 #include <Kokkos_Core.hpp>
 
 #include "error.hpp"
+#include "processors.hpp"
 #include "streams.hpp"
 
 
@@ -93,29 +91,18 @@ pFlow::iOstream& warningMessage(const char* fnName, const char* fileName, int li
 	return errorStream;
 }
 
-pFlow::iOstream& reportAndExit()
+pFlow::iOstream& reportAndExit(int errorCode)
 {
 	errorStream<<"\n>>> phasicFlow is exiting . . ." << pFlow::endl;
-	exit(EXIT_FAILURE);
+	fatalExitPhasicFlow(errorCode);
 	return errorStream;
 }
 
-int exitPhasicFlow()
+int fatalExitPhasicFlow(int errorCode)
 {
-// Kokkos should be finalized first
-Kokkos::finalize();
+	// Kokkos should be finalized first
+	Kokkos::finalize();
 
-#ifdef pFlow_Build_MPI
-	int flag=0;
-	MPI_Initialized(&flag)
-	if(flag == 1)
-	{
-		MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-		MPI_Finalize();
-    }
-    exit(EXIT_FAILURE);
-#else
-    exit(EXIT_FAILURE);
-#endif
-	return EXIT_FAILURE;
+	pFlow::processors::abort(errorCode);
+	return errorCode;
 }

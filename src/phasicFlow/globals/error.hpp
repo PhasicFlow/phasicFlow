@@ -35,7 +35,7 @@ namespace pFlow
 //- Decleartions 
 
 /// Take actions to fatal exit phasicFlow
-int fatalExitPhasicFlow();
+int fatalExitPhasicFlow(int errorCode = EXIT_FAILURE);
 
 pFlow::iOstream& fatalErrorMessage(const char* fileName, int linNumber );
 pFlow::iOstream& fatalErrorInMessage(const char* fnName, const char* fileName, int linNumber );
@@ -43,7 +43,7 @@ pFlow::iOstream& notImplementedErrorMessage(const char*fnName, const char* fileN
 pFlow::iOstream& ioErrorMessage(const pFlow::word& fileName, int fileLineNumber, const char* fnName, const char* fName, int lNumber);
 pFlow::iOstream& ioErrorMessage(const char* fileName, int fileLineNumber, const char* fnName, const char* fName, int lNumber);
 pFlow::iOstream& warningMessage(const char* fnName, const char* fileName, int linNumber );
-pFlow::iOstream& reportAndExit();
+pFlow::iOstream& reportAndExit(int errorCode = EXIT_FAILURE);
 
 
 /// Report a fatal error and exit the applicaiton 

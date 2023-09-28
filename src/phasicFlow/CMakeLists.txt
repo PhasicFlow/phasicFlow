@@ -4,6 +4,8 @@ types/basicTypes/bTypesFunctions.cpp
 types/basicTypes/Logical.cpp
 types/types.cpp
 
+processors/processors.cpp
+
 globals/error.cpp)
 
 set(link_libs Kokkos::kokkos tbb)

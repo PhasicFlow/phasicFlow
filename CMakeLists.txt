@@ -58,6 +58,7 @@ endif()
 
 if(pFlow_Build_MPI)
 	find_package(MPI REQUIRED)
+	link_libraries(MPI::MPI_CXX)
 endif()
 
 
