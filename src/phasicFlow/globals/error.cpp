@@ -37,8 +37,8 @@ pFlow::iOstream& fatalErrorMessage(const char* fileName, int linNumber )
 {	
 	
 	errorStream<<"\n>>> Fatal error in phasicFlow\n" <<
-				 "Error occured in source file "<< redText(fileName) <<
-				 " at line "<<redText(linNumber)<<'\n';
+				 "Error occured in source file "<< Red_Text(fileName) <<
+				 " at line "<<Red_Text(linNumber)<<'\n';
 	return errorStream;
 
 }
@@ -47,9 +47,9 @@ pFlow::iOstream& fatalErrorInMessage(const char* fnName, const char* fileName, i
 {	
 
 	errorStream<<"\n>>> Fatal error in phasicFlow\n" <<
-	 			 " Error is issued in function " << redText(fnName)<<
-	 			 ", located in file "<< redText(fileName) <<
-	             " at line "<< redText(linNumber) << '\n';
+	 			 " Error is issued in function " << Red_Text(fnName)<<
+	 			 ", located in file "<< Red_Text(fileName) <<
+	             " at line "<< Red_Text(linNumber) << '\n';
 	return errorStream;
 }
 
@@ -57,9 +57,9 @@ pFlow::iOstream& notImplementedErrorMessage(const char*fnName, const char* fileN
 {
 
 	errorStream<<"\n>>> Fatal error in phasicFlow\n";
-	errorStream<<" Function "<< redText(fnName) << " has not implmented yet!\n" <<
-				 " Function definition is in source file "<< redText(fileName) << 
-	             " at line "<< redText(lineNumber) <<'\n';
+	errorStream<<" Function "<< Red_Text(fnName) << " has not implmented yet!\n" <<
+				 " Function definition is in source file "<< Red_Text(fileName) << 
+	             " at line "<< Red_Text(lineNumber) <<'\n';
 	return errorStream;
 }
 
@@ -68,10 +68,10 @@ pFlow::iOstream& ioErrorMessage(const char* fileName, int fileLineNumber, const 
 {
 	
 	errorStream<<"\n>>> Fatal IO file error\n"<<
-				 " IO error at number "<<redText(fileLineNumber)<<
-				 " of file " << redText(fileName)<<'\n';
-	errorStream<<" IO operation is peformed from function "<<redText(fnName) <<
-	             " in file "<< redText(fName)<< " at line "<< redText(lNumber) <<'\n';
+				 " IO error at number "<<Red_Text(fileLineNumber)<<
+				 " of file " << Red_Text(fileName)<<'\n';
+	errorStream<<" IO operation is peformed from function "<<Red_Text(fnName) <<
+	             " in file "<< Red_Text(fName)<< " at line "<< Red_Text(lNumber) <<'\n';
 	return errorStream;
 }
 
@@ -85,9 +85,9 @@ pFlow::iOstream& warningMessage(const char* fnName, const char* fileName, int li
 {
 	
 	errorStream<<"\n>>> Warning in phasicFlow\n"<<
-				 " Warning is issued in function " << yellowText(fnName)<<
-	             " in source file "<< yellowText(fileName) <<
-	             " at line "<< yellowText(linNumber) <<'\n';
+				 " Warning is issued in function " << Yellow_Text(fnName)<<
+	             " in source file "<< Yellow_Text(fileName) <<
+	             " at line "<< Yellow_Text(linNumber) <<'\n';
 	return errorStream;
 }
 

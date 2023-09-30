@@ -108,10 +108,17 @@ pFlow::iOstream& pFlow::oTstream::write(const int32 val)
     return *this;
 }
 
+pFlow::iOstream& pFlow::oTstream::write(const int8 val)
+{
+    append(token(val)); // tokenType::INT64
+
+    return *this;
+}
 
 
 
-pFlow::iOstream& pFlow::oTstream::write(const label val)
+
+pFlow::iOstream& pFlow::oTstream::write(const uint64 val)
 {
     append(token(static_cast<int64>(val))); // tokenType::INT64
 
@@ -125,7 +132,7 @@ pFlow::iOstream& pFlow::oTstream::write(const uint32 val)
     return *this;
 }
 
-pFlow::iOstream& pFlow::oTstream::write(const uint16 val)
+pFlow::iOstream& pFlow::oTstream::write(const uint8 val)
 {
     append(token(static_cast<int64>(val))); // tokenType::INT64
 

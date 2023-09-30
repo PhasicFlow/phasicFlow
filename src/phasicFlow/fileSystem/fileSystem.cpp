@@ -284,13 +284,13 @@ pFlow::fileSystem pFlow::operator +
 	return path;
 }
 
-pFlow::iOstream& pFlow::operator << (iOstream& os, fileSystem fs)
+pFlow::iOstream& pFlow::operator << (iOstream& os, const fileSystem& fs)
 {
 	os << fs.path_.c_str();
 	return os;
 }
 
-std::ostream& pFlow::operator << (std::ostream& os, fileSystem fs)
+std::ostream& pFlow::operator << (std::ostream& os, const fileSystem& fs)
 {
 	os << fs.path_.c_str();
 	return os;

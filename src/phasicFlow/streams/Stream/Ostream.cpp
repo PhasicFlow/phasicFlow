@@ -17,8 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
 #include "error.hpp"
 #include "token.hpp"
@@ -181,21 +179,14 @@ pFlow::iOstream& pFlow::Ostream::write(const int32 val)
     return *this;
 }
 
-/*pFlow::iOstream& pFlow::Ostream::write(const int16 val)
+pFlow::iOstream& pFlow::Ostream::write(const int8 val)
 {
     os_ << val;
     setState(os_.rdstate());
     return *this;
 }
 
-pFlow::iOstream& pFlow::Ostream::write(const int8 val)
-{
-    os_ << val;
-    setState(os_.rdstate());
-    return *this;
-}*/
-
-pFlow::iOstream& pFlow::Ostream::write(const label val)
+pFlow::iOstream& pFlow::Ostream::write(const uint64 val)
 {
     os_ << val;
     setState(os_.rdstate());
@@ -209,7 +200,7 @@ pFlow::iOstream& pFlow::Ostream::write(const uint32 val)
     return *this;
 }
 
-pFlow::iOstream& pFlow::Ostream::write(const uint16 val)
+pFlow::iOstream& pFlow::Ostream::write(const uint8 val)
 {
     os_ << val;
     setState(os_.rdstate());
@@ -253,9 +244,6 @@ pFlow::iOstream& pFlow::Ostream::write
     return *this;
 }
 
-
-
-
 void pFlow::Ostream::indent()
 {
     for (unsigned short i = 0; i < indentLevel_*indentSize_; ++i)
@@ -270,13 +258,11 @@ void pFlow::Ostream::flush()
     os_.flush();
 }
 
-
 void pFlow::Ostream::endl()
 {
     write('\n');
     os_.flush();
 }
-
 
 std::ios_base::fmtflags pFlow::Ostream::flags() const
 {

@@ -276,6 +276,17 @@ bool pFlow::readInt32( const char* buf, int32 & val)
     return readInt32(w, val);
 }
 
+bool pFlow::readInt8( const word& w, int8 & val)
+{
+    try{
+        val = std::stoi(w);
+    }
+    catch (...)
+    {
+        return false;
+    }
+    return true;   
+}
 
 bool pFlow::readInt8( const char* buf, int8 & val)
 {

@@ -17,76 +17,74 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
+#ifndef __processorOstream_hpp__
+#define __processorOstream_hpp__
 
-#ifndef __Ostream_hpp__
-#define __Ostream_hpp__
-
-#include "iOstream.hpp"
-#include <iostream>
-
+#include "Ostream.hpp"
 
 namespace pFlow
 {
 
 /**
- * Standard output stream for BINARY and ASCII formats
+ * Output stream for MPI parallel run, when we need to 
+ * know which the processor number in the output line. 
+ * The processor number is shown as a prefix for the output line. 
  * 
  * It is based on OpenFOAM stream, with some modifications/simplifications
- * to be tailored to our needs
+ * to be tailored to our needs.
  */
-class Ostream
+class processorOstream
 :
-    public iOstream
+    public Ostream
 {
-private:
+protected:
 
-    // - private data members 
+    /// Print prefix?
+    bool printPrefix_	= false;
 
-    /// Stream name 
-    word name_;
+    /// Prefix word  
+    word prefix_ 		= "";
 
-    /// Output stream 
-    std::ostream& os_;
-
+    /// Output the prefix if required. 
+    inline
+    void checkForPrefix()
+    {
+    	if(printPrefix_ && prefix_.size())
+    	{
+    		Ostream::write(prefix_.c_str());
+    		printPrefix_ = false;
+    	}
+    }
 
 public:
 
-    ///- Constructors
-    
-        /// Construct from components 
-        Ostream ( std::ostream& os, const word& streamName, writeFormat wf = ASCII);
+    //// - Constructors
+        
+        /// From components 
+        processorOstream(std::ostream& os, const word& streamName);
 
         /// No copy construct 
-        Ostream(const Ostream&) = delete;
+        processorOstream(const processorOstream&) = delete;
 
         /// No copy assignment
-        void operator=(const Ostream&) = delete;
+        void operator=(const processorOstream&) = delete;
 
 
     //// - Methods
 
-        /// Return the name of the stream
-        virtual const word& name() const
+        /// Set processor number to be used in the prefix. 
+        word setPrefixNum(int procNum)
         {
-            return name_;
+            prefix_ = word("[")+int322Word(procNum)+word("] ");
+            return prefix_;
         }
 
-        /// Return non-const access to the name of the stream
-        virtual word& name()
+        /// Activate prefix for this stream.
+        void activatePrefix()
         {
-            return name_;
+            printPrefix_ = true;
         }
-
-        /// Return flags of output stream
-        virtual ios_base::fmtflags flags() const;
-
-
-        /// Write token to stream or otherwise handle it.
-        ///  return false if the token type was not handled by this method
-        bool write(const token& tok)override;
-
+        
         /// Write character
         iOstream& write(const char c)override;
 
@@ -97,7 +95,7 @@ public:
         iOstream& write(const word& str)override;
     
         /// Write std::string surrounded by quotes.
-        ///  Optional write without quotes.
+        //  Optional write without quotes.
         iOstream& writeQuoted ( const word& str, const bool quoted=true ) override;
 
         /// Write int64
@@ -123,61 +121,19 @@ public:
 
         /// Write double
         iOstream& write(const double val) override;
-
+        
         /// Write a block of binray data 
         iOstream& write(const char* binaryData, std::streamsize count) override;
 
         /// Add indentation characters
         void indent() override;
 
-        /// Set stream flags
-        ios_base::fmtflags flags(const ios_base::fmtflags f) override;
 
-        /// Flush stream
-        void flush() override;
+}; // processorOstream
 
-        /// Add newline and flush stream
-        void endl() override;
-
-        /// Get the current padding character
-        char fill() const override;
-
-        /// Set padding character for formatted field up to field width
-        ///  \return previous padding character
-        char fill(const char fillch) override;
-
-        /// Get width of output field
-        int width() const override;
-
-        /// Set width of output field
-        ///  \return previous width
-        int width(const int w) override;
-
-        /// Get precision of output field
-        int precision() const override;
-
-        /// Set precision of output field
-        ///  return old precision
-        int precision(const int p) override;
-
-        /// Access to underlying std::ostream
-        virtual std::ostream& stdStream() 
-        {
-            return os_;
-        }
-
-        /// Const access to underlying std::ostream
-        virtual const std::ostream& stdStream() const
-        {
-            return os_;
-        }
-
-};
 
 
 } // pFlow
 
 
-#endif //__Ostream_hpp__
-
-
+#endif // __processorOstream_hpp__

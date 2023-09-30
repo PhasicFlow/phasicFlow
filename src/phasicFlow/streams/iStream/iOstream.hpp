@@ -17,17 +17,13 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __iOstream_hpp__
 #define __iOstream_hpp__
-
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
 
 #include "IOstream.hpp"
 
+/// char constants to alter output format and color 
 const inline char* defaultColor = "\033[0m";
 const inline char* blackColor   = "\033[30m";
 const inline char* redColor     = "\033[31m";
@@ -41,22 +37,25 @@ const inline char* whiteColor   = "\033[37m";
 const inline char* boldChar     = "\033[1m";
 
 
-
 namespace pFlow
 {
 
 // Forward Declarations
 class token;
 
-
-
+/**
+ * Interface class for any output stream. 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs
+ * 
+ */
 class iOstream
 :
     public IOstream
 {
 protected:
 
-    // Protected Data
+    //- Protected Data
 
         /// Indentation of the entry from the start of the keyword
         static constexpr const unsigned short entryIndentation_ = 16;
@@ -71,7 +70,7 @@ protected:
 public:
     
 
-    // Constructors
+    ////- Constructors
 
         /// Default
         explicit iOstream()
@@ -89,7 +88,7 @@ public:
         virtual ~iOstream() = default;
 
 
-    /// Write Functions
+    ////- Write Functions
 
         /// Write token to stream or otherwise handle it.
         /// return false if the token type was not handled by this method
@@ -140,7 +139,7 @@ public:
         virtual iOstream& write(const char* binaryData, std::streamsize count) = 0;
         
     
-    // - Indent 
+    //// - Indent 
 
         /// Add indentation characters
         virtual void indent() = 0;
@@ -178,7 +177,7 @@ public:
         /// Decrement the indent level
         void decrIndent();
 
-    //- Punctuations
+    ////- Punctuations
     
         /// Write begin block group with a name
         ///  Increments indentation, adds newline.
@@ -231,7 +230,7 @@ public:
         }
 
 
-    //- Stream state functions
+    ////- Stream state functions
 
         /// Flush stream
         virtual void flush() = 0;
@@ -258,7 +257,7 @@ public:
         virtual int precision(const int p) = 0;
 
 
-    //- Member Operators
+    ////- Member Operators
 
         /// Return a non-const reference to const iOstream
         /// Needed for write functions where the stream argument is temporary:
@@ -411,11 +410,10 @@ inline iOstream& operator<<( iOstream& os, const double& val)
 {
     return os.write(val);
 }
+
 // Useful aliases for tab and newline characters
 constexpr char tab = '\t';
 constexpr char nl = '\n';
-
-
 
 
 } //  pFlow
@@ -423,4 +421,3 @@ constexpr char nl = '\n';
 
 #endif
 
-// ************************************************************************* //

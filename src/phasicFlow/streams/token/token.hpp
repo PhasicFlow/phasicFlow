@@ -28,7 +28,7 @@ Licence:
 namespace pFlow
 {
 
-//- Forward Declarations
+/// Forward Declarations
 class token;
 class iIstream;
 class iOstream;
@@ -45,69 +45,69 @@ class token
 {
 public:
 
-    //- Enumeration defining the types of token.
-    //  Since these values are also used to tag content in Pstream,
-    //  the maximum number of types is limited to 30.
+    /// Enumeration defining the types of token.
+    /// Since these values are also used to tag content in Pstream,
+    /// the maximum number of types is limited to 30.
     enum tokenType
     {
         UNDEFINED = 0,    //!< An undefined token-type
 
         // Fundamental types
-        FLAG,             //!< stream flag (1-byte bitmask)
-        PUNCTUATION,      //!< single character punctuation
-        BOOL,             //!< boolean type
-        INT64,             //!< int64 (integer) type
-        FLOAT,            //!< float (single-precision) type
-        DOUBLE,           //!< double (double-precision) type
+        FLAG,             /// stream flag (1-byte bitmask)
+        PUNCTUATION,      /// single character punctuation
+        BOOL,             /// boolean type
+        INT64,            /// int64 (integer) type
+        FLOAT,            /// float (single-precision) type
+        DOUBLE,           /// double (double-precision) type
 
         // Pointer types
-        WORD,             //!< A pFlow::word
-        STRING, 		  //!< A string whth double quuote
-        DIRECTIVE,        //!< A dictionary \c \#directive (word variant)
-        VARIABLE,         //!< A dictionary \c \$variable (string variant)
+        WORD,             /// A pFlow::word
+        STRING, 		  /// A string whth double quuote
+        DIRECTIVE,        /// A dictionary \c \#directive (word variant)
+        VARIABLE,         /// A dictionary \c \$variable (string variant)
 
-        ERROR,            //!< A token error encountered
+        ERROR,            /// A token error encountered
     };
 
 
-    //**************- Stream or output control flags (1-byte width)
+    /// Stream or output control flags (1-byte width)
     enum flagType
     {
-        NO_FLAG = 0,   //!< No flags
-        ASCII   = 1,   //!< ASCII-mode stream
-        BINARY  = 2    //!< BINARY-mode stream
+        NO_FLAG = 0,   /// No flags
+        ASCII   = 1,   /// ASCII-mode stream
+        BINARY  = 2    /// BINARY-mode stream
     };
 
 
-    //- Standard punctuation tokens (a character)
+    /// Standard punctuation tokens (a character)
     enum punctuationToken : char
     {
-        NULL_TOKEN     = '\0',  //!< Nul character
-        SPACE          = ' ',   //!< Space [isspace]
-        TAB            = '\t',  //!< Tab [isspace]
-        NL             = '\n',  //!< Newline [isspace]
+        NULL_TOKEN     = '\0',  /// Nul character
+        SPACE          = ' ',   /// Space [isspace]
+        TAB            = '\t',  /// Tab [isspace]
+        NL             = '\n',  /// Newline [isspace]
 
-        END_STATEMENT  = ';',   //!< End entry [#isseparator]
-        BEGIN_LIST     = '(',   //!< Begin list [#isseparator]
-        END_LIST       = ')',   //!< End list [#isseparator]
-        BEGIN_SQR      = '[',   //!< Begin dimensions [#isseparator]
-        END_SQR        = ']',   //!< End dimensions [#isseparator]
-        BEGIN_BLOCK    = '{',   //!< Begin block [#isseparator]
-        END_BLOCK      = '}',   //!< End block [#isseparator]
-        COLON          = ':',   //!< Colon [#isseparator]
-        COMMA          = ',',   //!< Comma [#isseparator]
-        DOLLAR         = '$',   //!< Dollar - start variable
-        SQUOTE         = '\'',  //!< Single quote
-        DQUOTE         = '"',   //!< Double quote
+        END_STATEMENT  = ';',   /// End entry [#isseparator]
+        BEGIN_LIST     = '(',   /// Begin list [#isseparator]
+        END_LIST       = ')',   /// End list [#isseparator]
+        BEGIN_SQR      = '[',   /// Begin dimensions [#isseparator]
+        END_SQR        = ']',   /// End dimensions [#isseparator]
+        BEGIN_BLOCK    = '{',   /// Begin block [#isseparator]
+        END_BLOCK      = '}',   /// End block [#isseparator]
+        COLON          = ':',   /// Colon [#isseparator]
+        COMMA          = ',',   /// Comma [#isseparator]
+        DOLLAR         = '$',   /// Dollar - start variable
+        SQUOTE         = '\'',  /// Single quote
+        DQUOTE         = '"',   /// Double quote
 
-        SUBTRACT       = '-',   //!< Subtract or start of negative number
-        DIVIDE         = '/',   //!< Divide [#isseparator]
+        SUBTRACT       = '-',   /// Subtract or start of negative number
+        DIVIDE         = '/',   /// Divide [#isseparator]
 
-        BEGIN_STRING   = DQUOTE, //!< Begin string with double quote
-        END_STRING     = DQUOTE  //!< End string with double quote
+        BEGIN_STRING   = DQUOTE, /// Begin string with double quote
+        END_STRING     = DQUOTE  /// End string with double quote
     };
 
-    //- An undefined token
+    /// An undefined token
     static const inline token undefinedToken();
 
     static token endList()
@@ -157,7 +157,7 @@ public:
 
 private:
 
-    //- A %union of token types
+    /// A %union of token types
     union content
     {
         // Fundamental values. Largest first for any {} initialization.
@@ -174,279 +174,285 @@ private:
     };
 
 
-    // Private Data
+    //// -  Private Data
 
-    //- The data content (as a union).
+    /// The data content (as a union).
     //  For memory alignment this should appear as the first member.
     content data_;
 
-    //- The token type
+    /// The token type
     tokenType type_;
 
-    //- Line number in the file the token was read from
+    /// Line number in the file the token was read from
     int32 lineNumber_;
 
 
     // Private Member Functions
 
-    //- Set as UNDEFINED and zero the union content without any checking
+    /// Set as UNDEFINED and zero the union content without any checking
     inline void setUndefined();
 
-    // Parse error, expected 'expected', found ...
+    /// Parse error, expected 'expected', found ...
     void parseError(const char* expected) const;
 
 
 public:
 
-    // Static Data Members
 
-    // Constructors
+    //// - Constructors
 
-    //- Default construct, initialized to an UNDEFINED token.
-    inline constexpr token() noexcept;
+        /// Default construct, initialized to an UNDEFINED token.
+        inline constexpr token() noexcept;
 
-    //- Copy construct
-    inline token(const token& t);
+        /// Copy construct
+        inline token(const token& t);
 
-    //- Move construct. The original token is left as UNDEFINED.
-    inline token(token&& t);
+        /// Move construct. The original token is left as UNDEFINED.
+        inline token(token&& t);
 
-    //- Construct punctuation character token
-    inline explicit token(punctuationToken p, int32 lineNumber=0);
+        /// Construct punctuation character token
+        inline explicit token(punctuationToken p, int32 lineNumber=0);
 
-    //- Construct uint64 token
-    inline explicit token(const uint64 val, int32 lineNumber=0);
+        /// Construct int64 token
+        inline explicit token(const uint64 val, int32 lineNumber=0);
 
-    //- Construct uint32 token
-    inline explicit token(const uint32 val, int32 lineNumber=0);
+        /// Construct int64 token
+        inline explicit token(const uint32 val, int32 lineNumber=0);
 
-    //- Construct int64 token
-    inline explicit token(const int64 val, int32 lineNumber=0);
+        /// Construct int8 token
+        inline explicit token(const uint8 val, int32 lineNumber=0);
 
-    //- Construct int64 token
-    inline explicit token(const int32 val, int32 lineNumber=0);
+        /// Construct int64 token
+        inline explicit token(const int64 val, int32 lineNumber=0);
 
-    //- Construct float token
-    inline explicit token(const float val, int32 lineNumber=0);
+        /// Construct int64 token
+        inline explicit token(const int32 val, int32 lineNumber=0);
 
-    //- Construct double token
-    inline explicit token(const double val, int32 lineNumber=0);
+        /// Construct int64 token
+        inline explicit token(const int8 val, int32 lineNumber=0);
 
-    //- Copy construct word & string token
-    inline explicit token(const word& w, int32 lineNumber=0, bool isString = false);
+        /// Construct float token
+        inline explicit token(const float val, int32 lineNumber=0);
 
+        /// Construct double token
+        inline explicit token(const double val, int32 lineNumber=0);
 
-    //- Move construct word & string token
-    inline explicit token(word&& w, int32 lineNumber=0, bool isString = false);
-
-    //- Construct from iIstream
-    explicit token(iIstream& is);
+        /// Copy construct word & string token
+        inline explicit token(const word& w, int32 lineNumber=0, bool isString = false);
 
 
-    //- Destructor
-    inline ~token();
+        /// Move construct word & string token
+        inline explicit token(word&& w, int32 lineNumber=0, bool isString = false);
+
+        /// Construct from iIstream
+        explicit token(iIstream& is);
 
 
-    // Static Functions
+        /// Destructor
+        inline ~token();
 
-        //- Create a bool token.
+
+    //// - Static Functions
+
+        /// Create a bool token.
         inline static token boolean(bool on);
 
-        //- Create a token with stream flags, no sanity check
-        //
-        //  \param bitmask the flags to set
+        /// Create a token with stream flags, no sanity check
+        ///
+        ///  \param bitmask the flags to set
         inline static token flag(int bitmask);
 
-        //- True if the character is a punctuation separator (eg, in ISstream).
-        //  Since it could also start a number, SUBTRACT is not included as
-        //  a separator.
-        //
-        //  \param c the character to test, passed as int for consistency with
-        //      isdigit, isspace etc.
+        /// True if the character is a punctuation separator (eg, in ISstream).
+        ///  Since it could also start a number, SUBTRACT is not included as
+        ///  a separator.
+        ///
+        ///  \param c the character to test, passed as int for consistency with
+        ///      isdigit, isspace etc.
         inline static bool isseparator(int c);
 
 
-    // Member Functions
+    //// - Member Functions
 
-    // Status
+    // - Status
 
-        //- Return the name of the token type
+        /// Return the name of the token type
         word name() const;
 
-        //- Return the token type
+        /// Return the token type
         inline tokenType type() const;
 
-        //- Change the token type, for similar types.
-        //  This can be used to change between string-like variants
-        //  (eg, STRING, VARIABLE, etc)
-        //  To change types entirely (eg, STRING to DOUBLE),
-        //  use the corresponding assignment operator.
-        //
-        //  \return true if the change was successful or no change was required
+        /// Change the token type, for similar types.
+        ///  This can be used to change between string-like variants
+        ///  (eg, STRING, VARIABLE, etc)
+        ///  To change types entirely (eg, STRING to DOUBLE),
+        ///  use the corresponding assignment operator.
+        ///
+        ///  \return true if the change was successful or no change was required
         inline bool setType(const tokenType tokType);
 
-        //- The line number for the token
+        /// The line number for the token
         inline int32 lineNumber() const;
 
-        //- The line number for the token
+        /// The line number for the token
         inline int32& lineNumber();
 
-        //- True if token is not UNDEFINED or ERROR
+        /// True if token is not UNDEFINED or ERROR
         inline bool good() const;
 
-        //- Token is UNDEFINED
+        /// Token is UNDEFINED
         inline bool undefined() const;
 
-        //- Token is ERROR
+        /// Token is ERROR
         inline bool error() const;
 
-        //- Token is BOOL
+        /// Token is BOOL
         inline bool isBool() const;
 
-        //- Token is FLAG
+        /// Token is FLAG
         inline bool isFlag() const;
 
-        //- Token is PUNCTUATION
+        /// Token is PUNCTUATION
         inline bool isPunctuation() const;
 
-        //- Token is PUNCTUATION and isseparator
+        /// Token is PUNCTUATION and isseparator
         inline bool isSeparator() const;
 
-        //- Tolen is end statement 
+        /// Token is end statement 
         inline bool isEndStatement() const;
 
+        /// Token is end endBlock 
         inline bool isEndBlock()const;
 
-        //- Token is INT64
+        /// Token is int64
         inline bool isInt64() const;
 
-        //- Token is INT32
+        /// Token is int32
         inline bool isInt32() const;
 
-        //- Token is FLOAT
+        /// Token is float
         inline bool isFloat() const;
 
-        //- Token is DOUBLE
+        /// Token is double
         inline bool isDouble() const;
 
-        //- Token is FLOAT or DOUBLE
+        /// Token is float or double
         inline bool isReal() const;
 
-        //- Token is INT64, FLOAT or DOUBLE
+        /// Token is int, float or duble
         inline bool isNumber() const;
 
-        //- Token is WORD or DIRECTIVE word
+        /// Token is word or DIRECTIVE word
         inline bool isWord() const;
 
-        //- Token is DIRECTIVE (word variant)
+        /// Token is DIRECTIVE (word variant)
         inline bool isDirective() const;
 
-        //- Token is STRING, VARIABLE or VERBATIM string
+        /// Token is STRING, VARIABLE or VERBATIM string
         inline bool isString() const;
 
-        //- Token is VARIABLE (string variant)
+        /// Token is VARIABLE (string variant)
         inline bool isVariable() const;
 
-        //- Token is WORD, DIRECTIVE, STRING, VARIABLE or VERBATIM
+        /// Token is WORD, DIRECTIVE, STRING, VARIABLE or VERBATIM
         inline bool isStringType() const;
 
 
-    // Access
+    //- Access
 
-        //- Return boolean token value.
-        //  Report FatalIOError and return false if token is not BOOL or INT64
+        /// Return boolean token value.
+        ///  Report FatalIOError and return false if token is not BOOL or INT64
         inline bool boolToken() const;
 
-        //- Return flag bitmask value.
-        //  Report FatalIOError and return NO_FLAG if token is not FLAG
+        /// Return flag bitmask value.
+        ///  Report FatalIOError and return NO_FLAG if token is not FLAG
         inline int flagToken() const;
 
-        //- Return punctuation character.
-        //  Report FatalIOError and return \b \\0 if token is not PUNCTUATION
+        /// Return punctuation character.
+        ///  Report FatalIOError and return \b \\0 if token is not PUNCTUATION
         inline punctuationToken pToken() const;
 
-        //- Return int64 value.
+        /// Return int64 value.
         //  Report FatalIOError and return \b 0 if token is not INT64
         inline int64 int64Token() const;
 
-        //- Return int32 value.
-        //  Report FatalIOError and return \b 0 if token is not INT64
+        /// Return int32 value.
+        ///  Report FatalIOError and return \b 0 if token is not INT64
         inline int32 int32Token() const;
 
-        //- Return float value.
-        //  Report FatalIOError and return \b 0 if token is not FLOAT
+        /// Return float value.
+        ///  Report FatalIOError and return \b 0 if token is not FLOAT
         inline float floatToken() const;
 
-        //- Return double value.
-        //  Report FatalIOError and return \b 0 if token is not DOUBLE
+        /// Return double value.
+        ///  Report FatalIOError and return \b 0 if token is not DOUBLE
         inline double doubleToken() const;
 
-        //- Return float or double value.
-        //  Report FatalIOError and return \b 0 if token is not a
-        //  FLOAT or DOUBLE
+        /// Return float or double value.
+        ///  Report FatalIOError and return \b 0 if token is not a
+        ///  FLOAT or DOUBLE
         inline real realToken() const;
 
-        //- Return int64, float or double value.
-        //  Report FatalIOError and return \b 0 if token is not a
-        //  INT64, FLOAT or DOUBLE
+        /// Return int64, float or double value.
+        ///  Report FatalIOError and return \b 0 if token is not a
+        ///  INT64, FLOAT or DOUBLE
         inline real number() const;
 
-        //- Return const reference to the word contents.
-        //  Report FatalIOError and return \b "" if token is not a
-        //  WORD or DIRECTIVE
+        /// Return const reference to the word contents.
+        ///  Report FatalIOError and return \b "" if token is not a
+        ///  WORD or DIRECTIVE
         inline const word& wordToken() const;
 
-        //- Return const reference to the string contents.
-        //  Report FatalIOError and return \b "" if token is not a
-        //  STRING, VARIABLE, VERBATIM or an upcast WORD or DIRECTIVE
+        /// Return const reference to the string contents.
+        ///  Report FatalIOError and return \b "" if token is not a
+        ///  STRING, VARIABLE, VERBATIM or an upcast WORD or DIRECTIVE
         inline const word& stringToken() const;
 
 
-    // Edit
+    //- Edit
 
-        //- Reset token to UNDEFINED and clear any allocated storage
+        /// Reset token to UNDEFINED and clear any allocated storage
         inline void reset();
 
-        //- Clear token and set to be ERROR.
+        /// Clear token and set to be ERROR.
         inline void setBad();
 
-        //- Swap token contents: type, data, line-number
+        /// Swap token contents: type, data, line-number
         inline void swap(token& tok);
 
 
-    // Assignment
+    //- Assignment
 
-        //- Copy assign
+        /// Copy assign
         inline void operator=(const token& tok);
 
-        //- Move assign
+        /// Move assign
         inline void operator=(token&& tok);
 
-        //- Copy assign from punctuation
+        /// Copy assign from punctuation
         inline void operator=(const punctuationToken p);
 
-        //- Copy assign from int64
+        /// Copy assign from int64
         inline void operator=(const int64 val);
 
-         //- Copy assign from int32
+         /// Copy assign from int32
         inline void operator=(const int32 val);
 
-        //- Copy assign from float
+        /// Copy assign from float
         inline void operator=(const float val);
 
-        //- Copy assign from double
+        /// Copy assign from double
         inline void operator=(const double val);
 
-        //- Copy assign from word
+        /// Copy assign from word
         inline void operator=(const word& w);
 
                 
 
-        //- Move assign from word
+        /// Move assign from word
         inline void operator=(word&& w);
 
         
-    // Equality
+    //- Equality
 
         inline bool operator==(const token& tok) const;
         inline bool operator==(const punctuationToken p) const;
@@ -457,7 +463,7 @@ public:
         inline bool operator==(const word& w) const;
 
 
-    // Inequality
+    //- Inequality
 
         inline bool operator!=(const token& tok) const;
         inline bool operator!=(const punctuationToken p) const;
@@ -470,7 +476,8 @@ public:
         iOstream& printInfo(iOstream& os)const;
 
         std::ostream& printInfo(std::ostream& os)const;
-    // IOstream Operators
+    
+    //- IOstream Operators
 
         friend iOstream& operator<<(iOstream& os, const token& tok);
         friend iOstream& operator<<(iOstream& os, const punctuationToken& pt);
@@ -529,18 +536,10 @@ inline token newLineToken()
 }
 
 
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 } // End namespace pFlow
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #include "tokenI.hpp"
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 #endif
-
-// ************************************************************************* //

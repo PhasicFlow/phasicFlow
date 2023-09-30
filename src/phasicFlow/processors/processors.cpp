@@ -42,8 +42,12 @@ void pFlow::processors::initProcessors(int argc, char *argv[])
 
 		processors::globalSize_ = MPI::COMM_WORLD.Get_size();
 		processors::globalRank_ = MPI::COMM_WORLD.Get_rank();
-		//CheckMPI(MPI_comm_size( MPI_COMM_WORLD, &processors::globalSize_), true );
-		//CheckMPI(MPI_comm_rank( MPI_COMM_WORLD, &processors::globalRank_), true );
+		
+		pFlow::pOutput.activatePrefix();
+		pFlow::pOutput.setPrefixNum(processors::globalRank_);
+
+		pFlow::mOutput.setMasterSlave(processors::isMaster());
+		pFlow::errReport.setMasterSlave(processors::isMaster());
 	}
 #else
 

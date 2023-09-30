@@ -1,4 +1,22 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+-----------------------------------------------------------------------------*/
 #ifndef __oTstream_hpp__
 #define __oTstream_hpp__
 
@@ -6,20 +24,27 @@
 #include "iOstream.hpp"
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 namespace pFlow
 {
 
 
-// helper functions declearation
+//- Helper functions declearation
+
+/// Is tok a valid token for this stream?
 inline bool validTokenForStream(const token tok);
 
+/// Is tok a begin token?
 inline bool isBeginToken(const token& tok);
 
+/// Is tok an end token?
 inline bool isEndToken(const token& tok);
 
-
+/**
+ * Output token stream
+ * 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs.
+ */
 class oTstream
 :
     public iOstream
@@ -27,49 +52,49 @@ class oTstream
 
 protected:
 
-    // - name of stream
+    /// name of stream
     word    name_;
 
-    // - tokenList
+    /// tokenList
     tokenList  tokenList_;
 
 public:
     
     //// - Constructors
 
-        // - emtpy stream with a name
+        /// emtpy stream with a name
         oTstream(const word& nm);
         
-        // - copy construcotr 
+        /// copy construcotr 
         oTstream(const oTstream& src);
 
-        // - move construct 
+        /// move construct 
         oTstream(oTstream&&) = default;
 
-        // - destructor 
+        /// destructor 
         virtual ~oTstream() = default;
 
     
     //// -  Methods
     
-        // give const access 
+        // Give const access 
         const tokenList& tokens()const;
 
-        // give access 
+        // Give access 
         tokenList& tokens();
     
 
     //// - Write
 
         /// Write token to stream or otherwise handle it.
-        //  return false if the token type was not handled by this method
+        ///  return false if the token type was not handled by this method
         virtual bool write(const token& tok);
 
         /// Write single character. Whitespace is suppressed.
         virtual iOstream& write(const char c);
 
         /// Write the word-characters of a character string.
-        //  Sends as a single char, or as word.
+        ///  Sends as a single char, or as word.
         virtual iOstream& write(const char* str);
 
         /// Write word
@@ -77,7 +102,7 @@ public:
 
         
         /// Write std::string surrounded by quotes.
-        //  Optional write without quotes.
+        ///  Optional write without quotes.
         virtual iOstream& writeQuoted(const std::string& str, const bool quoted=true );
 
         /// Write int64
@@ -138,7 +163,7 @@ public:
         {}
 
         /// Get the current padding character
-        //  \return previous padding character
+        ///  \return previous padding character
         virtual char fill() const
         {
             return 0;
@@ -157,7 +182,7 @@ public:
         }
 
         /// Set width of output field
-        //  \return previous width
+        ///  \return previous width
         virtual int width(const int)
         {
              return 0;
@@ -170,7 +195,7 @@ public:
         }
 
         /// Set precision of output field
-        //  \return old precision
+        ///  \return old precision
         virtual int precision(const int)
         {
              return 0;
@@ -192,12 +217,9 @@ public:
 
 #include "helperTstream.hpp"
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 } // End namespace pFlow
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #endif
 
-// ************************************************************************* //

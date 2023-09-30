@@ -17,7 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __iIstream_hpp__
 #define __iIstream_hpp__
 
@@ -30,25 +29,27 @@ namespace pFlow
 {
 
 /**
- *  Interface input stream class 
+ * Interface class for any input stream  
  * 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs
  */
-class iIstream // interface class for input streams
+class iIstream
 :
 	public IOstream
 {
 
-	// Private Data
+	//- Private Data
 
-    /// Has a token been put back on the stream?
-    bool putBack_;
+	    /// Has a token been put back on the stream?
+	    bool putBack_;
 
-    /// The last token put back on the stream
-    token putBackToken_;
+	    /// The last token put back on the stream
+	    token putBackToken_;
 
 public:
 
-    ///// Constructors    
+    ////- Constructors    
 
     	/// default
 	    iIstream():
@@ -69,7 +70,7 @@ public:
 
 
 
-    //// member methods
+    ////- member methods
 
 	    /// Put back token
 	    ///  Only a single put back is permitted
@@ -134,7 +135,7 @@ public:
 	    virtual void rewind() = 0;
 
 
-    ///// find and lookups
+    ////- find and lookups
 
         /// search for all tokesn and find the first word token tbat matchs w
         virtual bool findToken( const word & w );
@@ -231,8 +232,7 @@ inline iIstream& operator>>(iIstream& is, IOstreamManip f)
 }
 
 
-// read operation for basic types it gets from the 
-// token stream
+// read operation for basic types it gets from the token stream
 inline iIstream& operator>>( iIstream& is, word & w);
 
 inline iIstream& operator>>( iIstream& is, int64& val);
@@ -259,4 +259,4 @@ inline iIstream& operator>>( iIstream& is, double& val);
 #include "iIstreamI.hpp"
 
 
-#endif
+#endif //__iIstream_hpp__

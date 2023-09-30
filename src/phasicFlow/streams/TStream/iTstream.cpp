@@ -222,16 +222,6 @@ pFlow::iIstream& pFlow::iTstream::read
     return *this;
 }
 
-pFlow::iIstream& pFlow::iTstream::read
-(
-    int16& val
-)
-{
-    notImplementedFunction;
-    fatalExit;
-    CONSUME_PARAM(val);
-    return *this;
-}
  
 pFlow::iIstream& pFlow::iTstream::read
 (
@@ -246,7 +236,7 @@ pFlow::iIstream& pFlow::iTstream::read
 
 pFlow::iIstream& pFlow::iTstream::read
 (
-    label& val
+    uint64& val
 )
 {
     notImplementedFunction;
@@ -268,7 +258,7 @@ pFlow::iIstream& pFlow::iTstream::read
 
 pFlow::iIstream& pFlow::iTstream::read
 (
-    uint16& val
+    uint8& val
 )
 {
     notImplementedFunction;

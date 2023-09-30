@@ -17,10 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
-
-
 #include "Istream.hpp"
 #include "token.hpp"
 #include "error.hpp"
@@ -797,12 +793,6 @@ pFlow::iIstream& pFlow::Istream::read(int32& val)
     return *this;
 }
 
-pFlow::iIstream& pFlow::Istream::read(int16& val)
-{
-    is_ >> val;
-    setState(is_.rdstate());
-    return *this;
-}
 
 pFlow::iIstream& pFlow::Istream::read(int8& val)
 {
@@ -811,7 +801,7 @@ pFlow::iIstream& pFlow::Istream::read(int8& val)
     return *this;
 }
 
-pFlow::iIstream& pFlow::Istream::read(label& val)
+pFlow::iIstream& pFlow::Istream::read(uint64& val)
 {
     is_ >> val;
     setState(is_.rdstate());
@@ -825,7 +815,7 @@ pFlow::iIstream& pFlow::Istream::read(uint32& val)
     return *this;
 }
 
-pFlow::iIstream& pFlow::Istream::read(uint16& val)
+pFlow::iIstream& pFlow::Istream::read(uint8& val)
 {
     is_ >> val;
     setState(is_.rdstate());

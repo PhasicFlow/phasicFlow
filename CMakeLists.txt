@@ -58,7 +58,6 @@ endif()
 
 if(pFlow_Build_MPI)
 	find_package(MPI REQUIRED)
-	link_libraries(MPI::MPI_CXX)
 endif()
 
 
@@ -78,7 +77,7 @@ add_subdirectory(src)
 #add_subdirectory(utilities)
 
 #add_subdirectory(DEMSystems)
-#add_subdirectory(testIO)
+add_subdirectory(testIO)
 
 install(FILES "${PROJECT_BINARY_DIR}/phasicFlowConfig.H"
   DESTINATION include)
