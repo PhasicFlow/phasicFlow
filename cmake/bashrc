@@ -20,12 +20,16 @@ export pFlow_SRC_DIR="$pFlow_PROJECT_DIR/src"
 
 export Kokkos_DIR="$kokkosDir"
 
+export Zoltan_DIR="$projectDir/Zoltan"
+
 # Cleanup variables (done as final statement for a clean exit code)
 unset projectDir
 
 export PATH="$pFlow_BIN_DIR:$PATH"
 
 export LD_LIBRARY_PATH="$pFlow_LIB_DIR:$LD_LIBRARY_PATH"
+
+export LD_LIBRARY_PATH="$Zoltan_DIR/build/lib:$LD_LIBRARY_PATH"
 
 
 #------------------------------------------------------------------------------
