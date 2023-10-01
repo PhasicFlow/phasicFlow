@@ -58,6 +58,8 @@ using uint32  = unsigned int;
 
 using uint64  = unsigned long long int;
 
+using id_t    = uint32;
+
 using size_t  = std::size_t;
 
 using word    = std::string;
