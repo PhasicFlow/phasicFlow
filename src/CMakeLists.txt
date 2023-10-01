@@ -14,4 +14,4 @@ add_subdirectory(phasicFlow)
 #add_subdirectory(Geometry)
 
 
-add_subdirectory(MPIParallelization)
+#add_subdirectory(MPIParallelization)

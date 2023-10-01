@@ -468,15 +468,6 @@ bool pFlow::dictionary::add
 	return addPtr(keyword, ptr);
 }
 
-bool pFlow::dictionary::add
-(
-	const word& keyword,
-	const int16& v
-)
-{
-	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this, token(v));
-	return addPtr(keyword, ptr);
-}
 
 bool pFlow::dictionary::add
 (
@@ -491,7 +482,7 @@ bool pFlow::dictionary::add
 bool pFlow::dictionary::add
 (
 	const word& keyword,
-	const label& v
+	const uint64& v
 )
 {
 	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this, token(v));
@@ -508,6 +499,15 @@ bool pFlow::dictionary::add
 	return addPtr(keyword, ptr);
 }
 
+bool pFlow::dictionary::add
+(
+	const word& keyword,
+	const uint8& v
+)
+{
+	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this, token(v));
+	return addPtr(keyword, ptr);
+}
 
 bool pFlow::dictionary::addDict
 (

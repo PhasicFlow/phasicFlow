@@ -27,6 +27,12 @@ streams/streams.cpp
 fileSystem/fileSystem.cpp
 
 processors/processors.cpp
+
+dictionary/dictionary.cpp
+dictionary/entry/iEntry.cpp
+dictionary/entry/dataEntry.cpp 
+dictionary/twoPartEntry/twoPartEntry.cpp
+
 )
 
 set(link_libs)
