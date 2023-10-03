@@ -43,9 +43,12 @@ void pFlow::processors::initProcessors(int argc, char *argv[])
 		processors::globalSize_ = MPI::COMM_WORLD.Get_size();
 		processors::globalRank_ = MPI::COMM_WORLD.Get_rank();
 		
-		pFlow::pOutput.activatePrefix();
-		pFlow::pOutput.setPrefixNum(processors::globalRank_);
-
+		if(processors::isParallel())
+		{
+			pFlow::pOutput.activatePrefix();
+			pFlow::pOutput.setPrefixNum(processors::globalRank_);	
+		}
+		
 		pFlow::mOutput.setMasterSlave(processors::isMaster());
 		pFlow::errReport.setMasterSlave(processors::isMaster());
 	}

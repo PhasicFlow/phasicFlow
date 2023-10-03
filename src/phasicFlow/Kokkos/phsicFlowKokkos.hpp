@@ -18,48 +18,13 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __phsicFlowKokkos_hpp__
+#define __phsicFlowKokkos_hpp__
 
-#ifndef __algorithmFunctions_hpp__
-#define __algorithmFunctions_hpp__
-
-#include "pFlowMacros.hpp"
-
-namespace pFlow::algorithms
-{
-
-template<typename T>
- struct greater
- {
-   INLINE_FUNCTION_HD
-   bool operator()(const T &lhs, const T &rhs) const {
-   	return lhs > rhs; }
- };
-
-template<typename T>
-struct less
-{
-   INLINE_FUNCTION_HD
-   bool operator()(const T &lhs, const T &rhs) const {
-    return lhs < rhs; }
-};
+#include "kokkosTypes.hpp"
+#include "KokkosUtilities.hpp"
+#include "ViewAlgorithms.hpp"
+#include "Range.hpp"
 
 
-template<typename T>
-struct maximum
-{
-  INLINE_FUNCTION_HD
-  bool operator()(const T &lhs, const T &rhs) const {
-    return lhs < rhs ? rhs : lhs; }
-};
-
-template<typename T>
-struct minimum
-{
-  INLINE_FUNCTION_HD
-  bool operator()(const T &lhs, const T &rhs) const {
-      return lhs < rhs ? lhs : rhs; }
-};
-
-} 
-
-#endif // __algorithmFunctions_hpp__
+#endif //  __phsicFlowKokkos_hpp__

@@ -213,17 +213,6 @@ void insertSetElementD
 
 }
 
-/*template<typename T, typename... properties>
-void fill
-(
-	ViewType1D<T, properties...>& view,
-	range range,
-	T val
-)
-{
-	auto subV = Kokkos::subview(view, range);
-	Kokkos::deep_copy(subV, val);
-}*/
 
 
 template<typename T, typename... properties>
