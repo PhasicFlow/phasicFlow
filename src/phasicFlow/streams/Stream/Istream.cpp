@@ -858,6 +858,36 @@ pFlow::iIstream& pFlow::Istream::read
     return *this;
 }
 
+size_t pFlow::Istream::findBinaryBlockStart()
+{
+    size_t pos = 0;
+    char getChar = 'a';
+    unsigned char bFlag = 255;
+    int numFound = 0;
+
+    while( is_.good() && !is_.eof() )
+    {
+        getChar = is_.get();
+        pos++;
+
+        if( numFound <3 &&
+         static_cast<unsigned char>(getChar) == bFlag ) 
+        {
+            numFound++;
+        }
+        else if(numFound == 3 && static_cast<unsigned char>(getChar) == 0 )
+        {
+            return pos;
+        }
+        else
+        {
+            numFound = 0;
+        }
+    }
+
+    return static_cast<size_t>(-1);
+}
+
 void pFlow::Istream::rewind()
 {
     lineNumber_ = 1;      // Reset line number

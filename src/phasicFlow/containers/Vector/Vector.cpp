@@ -20,12 +20,6 @@ Licence:
 
 
 template<typename T, typename Allocator>
-pFlow::Vector<T, Allocator>::Vector(iIstream& is)
-{
-	readVector(is);
-}
-
-template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::readVector
 (
 	iIstream& is,
@@ -33,7 +27,6 @@ bool pFlow::Vector<T, Allocator>::readVector
 )
 {
 	
-
 	if(is.isBinary() && !std::is_same_v<T,word>)
 	{
 		this->resize(len);
@@ -90,8 +83,6 @@ bool pFlow::Vector<T, Allocator>::readVector
 		}
 	}
 
-	
-
 	return true;
 }
 
@@ -102,8 +93,12 @@ bool pFlow::Vector<T, Allocator>::writeVector
 	iOstream& os
 ) const
 {
+	
+	span<T> s( const_cast<T*>(this->data()), this->size());
+	os<<s;
+
 	// start of 
-	if( os.isBinary() && !std::is_same_v<T,word>)
+	/*if( os.isBinary() && !std::is_same_v<T,word>)
 	{
 		os.write(reinterpret_cast<const char*>(this->data()), this->size()*sizeof(T));
 	}
@@ -113,12 +108,12 @@ bool pFlow::Vector<T, Allocator>::writeVector
 		auto len = size();
 		auto stride  = getVectorStride(len);
 		os << token::BEGIN_LIST;
-		label i = 0;
+		size_t i = 0;
 		while( i<len )
 		{
 
 			os << this->operator[](i++);
-			for(label j=0; j<stride-1 && i<len; j++ )
+			for(size_t j=0; j<stride-1 && i<len; j++ )
 			{
 				os << token::SPACE << this->operator[](i++);	
 			}
@@ -130,12 +125,12 @@ bool pFlow::Vector<T, Allocator>::writeVector
 	    os << token::END_LIST;
 
 	    os.check(FUNCTION_NAME);
-	}
+	}*/
 
     return true;
 }
 
-template<typename T, typename Allocator>
+/*template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::deleteElement_sorted
 (
 	const Vector<label>& indices
@@ -384,4 +379,4 @@ inline bool pFlow::Vector<T, Allocator>::insertSetElement
 	}
 	
 	return true;
-}
+}*/

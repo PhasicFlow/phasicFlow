@@ -64,6 +64,8 @@ using size_t  = std::size_t;
 
 using word    = std::string;
 
+inline const int  numBytesForReal__ = sizeof(real);
+
 inline 
 word floatingPointDescription()
 {

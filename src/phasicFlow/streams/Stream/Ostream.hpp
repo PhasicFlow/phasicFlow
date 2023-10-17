@@ -124,8 +124,13 @@ public:
         /// Write double
         iOstream& write(const double val) override;
 
+        /// Write size_t
+        iOstream& write(const size_t val) override;
+
         /// Write a block of binray data 
         iOstream& write(const char* binaryData, std::streamsize count) override;
+
+        iOstream& writeBinaryBlockFlag() override;
 
         /// Add indentation characters
         void indent() override;

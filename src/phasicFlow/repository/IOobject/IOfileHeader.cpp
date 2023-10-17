@@ -12,12 +12,12 @@ Licence:
   granular and multiphase flows. You can redistribute it and/or modify it under
   the terms of GNU General Public License v3 or any other later versions. 
  
-  phasicFlow is distributed to help others in their research in the field of 
+  phasicFlow is distribute+d to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
+#include "processors.hpp"
 #include "IOfileHeader.hpp"
 #include "repository.hpp"
 
@@ -133,9 +133,24 @@ bool pFlow::IOfileHeader::readIfPresent()const
 	return fileExist() && isReadIfPresent();
 }
 
-
-bool pFlow::IOfileHeader::writeHeader(iOstream& os, const word& typeName) const
+bool pFlow::IOfileHeader::writeHeader()const
 {
+	if( !this->readWriteHeader() ) return false;
+	if( !processors::isMaster() ) return false;
+	if( !implyWrite() ) return false;
+
+	return true;
+}
+
+bool pFlow::IOfileHeader::writeHeader
+(
+	iOstream& os, 
+	const word& typeName, 
+	bool forceWrite
+) const
+{
+
+	if(!forceWrite && !writeHeader()) return true;
 
 	writeBanner(os);
 
@@ -158,14 +173,22 @@ bool pFlow::IOfileHeader::writeHeader(iOstream& os, const word& typeName) const
 	return true;
 }
 
-bool pFlow::IOfileHeader::writeHeader(iOstream& os) const
+bool pFlow::IOfileHeader::writeHeader(iOstream& os, bool forceWrite) const
 {
-	return writeHeader(os, objectType_);
+	return writeHeader(os, objectType_, forceWrite);
+}
+
+bool pFlow::IOfileHeader::readHeader()const
+{
+	if( !this->readWriteHeader() ) return false;
+	return true;
 }
 
 bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 {
 	
+	if(!readHeader()) return true;
+
 	if( !is.findTokenAndNextSilent("objectName", objectName_) )
 	{
 		if(!silent)
@@ -200,6 +223,19 @@ bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 		return false;
 	}
 
+	return true;
+} 
+
+bool pFlow::IOfileHeader::writeData()const
+{
+	if( processors::isMaster() || this->differentDataOnProcessors())
+		return true;
+	else
+		return false;
+}
+
+bool pFlow::IOfileHeader::readData()const
+{
 	return true;
 }
 

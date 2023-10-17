@@ -64,16 +64,16 @@ protected:
 		bool copy(const ListPtrType& src);
 
 		// - return ith pointer
-		T* ptr(label i);
+		T* ptr(size_t i);
 
 		// - return ith const poiter
-		const T* ptr(label i)const;
+		const T* ptr(size_t i)const;
 
 		// - iterator position of ith element
-		auto pos(label i);
+		auto pos(size_t i);
 		
 		// - const iterator position of ith element
-		auto pos(label i) const;
+		auto pos(size_t i) const;
 
 public:
 
@@ -141,15 +141,15 @@ public:
 	//// - Methods 
 
 		// - set the ith element 
-		T* set(label i, T* ptr);
+		T* set(size_t i, T* ptr);
 		
 		// - set the ith element and take the ownership from uniquePtr
-		uniquePtr<T> set(label i, uniquePtr<T>& ptr );
+		uniquePtr<T> set(size_t i, uniquePtr<T>& ptr );
 		
 		// - create the object in-place and set the pointer in ith position
 		//   if oject creation fails, uniquePtr deletes the memeory
 		template<typename... Args>
-	    uniquePtr<T> setSafe(label i, Args&&... args);
+	    uniquePtr<T> setSafe(size_t i, Args&&... args);
 	    
 	    // - put the pointer at the end
 	    void push_back(T* ptr);
@@ -163,11 +163,11 @@ public:
 	    
 		// - access to ith element
 		//   fatalexit if out of range or nullptr    
-		T& operator[](label i);
+		T& operator[](size_t i);
 		
 		// - const access to ith element
 		//   fatalexit if out of range or nullptr    
-		const T& operator[](label i) const;
+		const T& operator[](size_t i) const;
 
 		// size of container
 	    size_t size()const;
@@ -176,13 +176,13 @@ public:
 		auto empty() const;
 
 		// release the ownership of ith pointer 
-		uniquePtr<T> release(label i);
+		uniquePtr<T> release(size_t i);
 		
 		// - clear the content of list and delete objects
 		void clear();
 		
 		// - clear the ith element
-		void clear(label i);	
+		void clear(size_t i);	
 		
 		// - clone the object 
 		

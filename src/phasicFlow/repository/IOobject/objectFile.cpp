@@ -25,10 +25,7 @@ pFlow::objectFile::objectFile
 	const word& name
 )
 :
-	name_(name),
-	rFlag_(READ_NEVER),
-	wFlag_(WRITE_NEVER),
-	localPath_("")
+	name_(name)
 {}
 
 pFlow::objectFile::objectFile
@@ -37,13 +34,15 @@ pFlow::objectFile::objectFile
 	const fileSystem& 		localPath,
 	const readFlag&   		rf, 
 	const writeFlag&  		wf,
-	bool  rwHeader
+	bool  diffDataOnProcessors,
+	bool  rwHdr
 )
 :
 	name_(name),
 	rFlag_(rf),
 	wFlag_(wf),
 	localPath_(localPath),
-	readWriteHeader_(rwHeader)
+	differentDataOnProcessors_(diffDataOnProcessors),
+	readWriteHeader_(rwHdr)	
 {
 }

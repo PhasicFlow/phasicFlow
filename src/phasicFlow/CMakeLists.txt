@@ -21,7 +21,8 @@ streams/TStream/iTstream.cpp
 streams/TStream/oTstream.cpp
 streams/Fstream/iFstream.cpp
 streams/Fstream/oFstream.cpp
-streams/Fstream/fileStream.cpp 
+streams/Fstream/fileStream.cpp
+streams/dataIO/dataIO.cpp 
 streams/streams.cpp 
 
 fileSystem/fileSystem.cpp
@@ -32,6 +33,12 @@ dictionary/dictionary.cpp
 dictionary/entry/iEntry.cpp
 dictionary/entry/dataEntry.cpp 
 dictionary/twoPartEntry/twoPartEntry.cpp
+
+containers/Vector/Vectors.cpp
+
+repository/IOobject/objectFile.cpp
+repository/IOobject/IOfileHeader.cpp
+repository/IOobject/IOobject.cpp
 
 )
 

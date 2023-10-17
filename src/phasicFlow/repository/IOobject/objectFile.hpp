@@ -49,18 +49,30 @@ public:
 
 protected:
 
-	// name of the entity
+	/// Name of the entity
 	word 	name_;
 
-	// read flag
-	readFlag  rFlag_;
+	/// Read flag
+	readFlag  rFlag_ = READ_NEVER;
 
-	// write flag
-	writeFlag wFlag_;
+	/// Write flag
+	writeFlag wFlag_ = WRITE_NEVER;
 
-	// local path of entity
-	fileSystem localPath_;
+	/// Local path of entity
+	fileSystem localPath_ = "";
 
+	/// Number of bytes used for writing/reading real variable (mostly used for binray)
+	int 		numBytesForReal_ = numBytesForReal__;
+	
+	/// All processors have the different set of data or not?
+	/// True: Each processor should read its own part of data from file and should write 
+	/// its own part of data to the file.  
+	/// Flase: All processors read the same data from file and in writing, only master data
+	/// write the data to the file. 
+
+	bool differentDataOnProcessors_ = true;
+
+	/// Does the objectFile write the header or not
 	bool readWriteHeader_ = true;
 
 public:
@@ -80,7 +92,8 @@ public:
 		const fileSystem& localPath,
 		const readFlag&   rf = READ_NEVER,
 		const writeFlag&  wf = WRITE_NEVER,
-		bool  rwHeader = true
+		bool  diffDataOnProcessors = true,
+		bool  rwHdr = true
 	);
 
 	// copy construct 
@@ -91,6 +104,7 @@ public:
 	objectFile& operator = (const objectFile & rhs) = default;
 
 	objectFile& operator = (objectFile && rhs) = default;
+
 
 	virtual ~objectFile()=default;
 
@@ -104,41 +118,55 @@ public:
 		return localPath_;
 	}
 
+	inline
 	readFlag rFlag()const
 	{
 		return rFlag_;
 	}
 
+	inline
 	writeFlag wFlag()const
 	{
 		return wFlag_;
 	}
 
+	inline
 	bool isReadAlways()const
 	{
 		return rFlag_ == READ_ALWAYS;
 	}
 
+	inline
 	bool isReadNever()const
 	{
 		return rFlag_ == READ_NEVER;
 	}
 
+	inline
 	bool isReadIfPresent()const
 	{
 		return rFlag_ == READ_IF_PRESENT;
 	}
 
+	inline
 	bool isWriteAlways()const
 	{
 		return wFlag_ == WRITE_ALWAYS;
 	}
 
+	inline
 	bool isWriteNever()const
 	{
 		return wFlag_ == WRITE_NEVER;
 	}
 
+	inline
+	bool differentDataOnProcessors()const
+	{
+		return differentDataOnProcessors_;
+	}
+
+	inline 
 	bool readWriteHeader()const
 	{
 		return readWriteHeader_;

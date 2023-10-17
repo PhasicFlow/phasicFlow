@@ -85,6 +85,14 @@ public:
             printPrefix_ = true;
         }
         
+        /// Write token to stream or otherwise handle it.
+        /// return false if the token type was not handled by this method
+        bool write(const token& tok)
+        // to prevent compiler warning, this method is overriden agian 
+        {
+            return Ostream::write(tok);
+        }
+
         /// Write character
         iOstream& write(const char c)override;
 
@@ -121,6 +129,9 @@ public:
 
         /// Write double
         iOstream& write(const double val) override;
+
+        /// Write double
+        iOstream& write(const size_t val) override;
         
         /// Write a block of binray data 
         iOstream& write(const char* binaryData, std::streamsize count) override;

@@ -21,32 +21,41 @@ Licence:
 #ifndef __indexContainer_hpp__ 
 #define __indexContainer_hpp__
 
-#include "span.hpp"
-#include "KokkosTypes.hpp"
-#include "KokkosUtilities.hpp"
-#include "ViewAlgorithms.hpp"
+#include <vector>
+
+#include "phasicFlowKokkos.hpp"
 
 
 namespace pFlow
 {
 
+/**
+ * It holds two vectors of indecis on Host and Device.
+ * Host vector should be used for threads running on
+ * Host and Device vector should be used for threads
+ * running on Device.
+ */
 template<typename IndexType>
 class indexContainer
 {
 public:
 	
-	using DualViewType 		= Kokkos::DualView<IndexType*>;
+	using DVType 					= DualViewType1D<IndexType>;
+	///  Device type on device 
+	using DeviceViewType 	= typename DVType::t_dev;
 
-	// - viewType of data on device 
-  	using DeviceViewType 	= typename DualViewType::t_dev;
+	/// Host type on device 
+	using HostViewType 		= typename DVType::t_host;
 
-  	// - viewType of data on host
-  	using HostViewType 		= typename DualViewType::t_host;
+	/// Host memory type
+	using HostType 			= typename HostViewType::device_type;
 
-  	using HostType 			= typename HostViewType::device_type;
+	/// Device memory ype
+	using DeviceType 		= typename DeviceViewType::device_type;
 
-  	using DeviceType 		= typename DeviceViewType::device_type;
-
+	/**
+	 * Helper class for accessing index on host or device 
+	 */
   	template<typename ViewType>
   	class IndexAccessor
   	{
@@ -58,168 +67,206 @@ public:
   		view_(v){}
 
   		INLINE_FUNCTION_HD
-  		IndexType operator()(int32 i)const
+  		IndexType operator()(uint32 i)const
   		{
   			return view_[i];
+  		}
+
+  		uint32 size()const
+  		{
+  			return view_.extent(0);
   		}
   	};
 
 protected:
 
-	int32 		min_  	= 0;
-	int32 		max_ 	= 0;
-	size_t 		size_	= 0; 	
+	/// min value in indices
+	IndexType 		min_  	= 0;
 
-	DualViewType 	views_;
+	/// max value in the indices
+	IndexType 		max_ 	= 0;
+
+	/// number/size of index vector 
+	uint32 			size_	= 0; 	
+
+	/// views to hold indices on Host and Device
+	DVType 			views_;
 
 public:
 
-	indexContainer(){}
+	//// - Constructors 
 
-	// half open [begin,end)
-	indexContainer(IndexType begin, IndexType end)
-	:
-		min_(begin),
-		max_(end-1),
-		size_(end-begin),
-		views_("indexContainer", size_)
-	{
-		pFlow::fillSequence(views_.h_view, 0, size_, min_);
-		copy(views_.d_view, views_.h_view);
-	}
+		/// Default
+		indexContainer(){}
 
+		/// Construct from a Range (half open)
+		template<typename T>
+		indexContainer(const Range<T>& rng)
+		:
+			indexContainer
+			(
+				static_cast<IndexType>(rng.begin()), 
+				static_cast<IndexType>(rng.end())
+			)
+		{}
 
-	indexContainer(IndexType* data, int32 numElems)
-	:
-		size_(numElems),
-		views_("indexContainer", numElems)
-	{
-		HostViewType hData(data, numElems);
-		copy(views_.h_view, hData);
-		copy(views_.d_view, views_.h_view);
-		min_ 	= pFlow::min(views_.d_view, 0, numElems);
-		max_ 	= pFlow::max(views_.d_view, 0, numElems);
-	}
-
-	indexContainer(const indexContainer&) = default;
-
-	indexContainer& operator = (const indexContainer&) = default;
-
-	indexContainer(indexContainer&&) = default;
-
-	indexContainer& operator = (indexContainer&&) = default;	
-
-	~indexContainer() = default;
-
-	INLINE_FUNCTION_HD
-	size_t size()const
-	{
-		return size_;
-	}
-
-	INLINE_FUNCTION_HD
-	size_t empty()const
-	{
-		return size_==0;
-	}
-	
-	INLINE_FUNCTION_HD
-	IndexType min()const
-	{
-		return min_;
-	}
-
-	INLINE_FUNCTION_HD
-	IndexType max()const
-	{
-		return max_;
-	}
-
-	template<typename executionSpace>
-	INLINE_FUNCTION_HD
-	IndexType operator()(selectSide<executionSpace>,int32 i)const
-	{	
-		if constexpr (isHostAccessible<executionSpace>())
+		/// Construct half open [begin,end)
+		indexContainer(IndexType begin, IndexType end)
+		:
+			min_(begin),
+			max_(end-1),
+			size_(end-begin),
+			views_("indexContainer", size_)
 		{
-			return views_.h_view(i);
-		}else
-		{
-			return views_.d_view(i);
-		}
-	}
-
-	const HostViewType& hostView()const
-	{
-		return views_.h_view;
-	}
-
-	const DeviceViewType& deviceView()const
-	{
-		return views_.d_view;
-	}
-
-	HostViewType& hostView()
-	{
-		return views_.h_view;
-	}
-
-	DeviceViewType& deviceView()
-	{
-		return views_.d_view;
-	}
-
-	auto indicesHost()const
-	{
-		return IndexAccessor<HostViewType>(views_.h_view);
-	}
-
-	auto indicesDevice()const
-	{
-		return IndexAccessor<DeviceViewType>(views_.d_view);
-	}
-
-	void modifyOnHost()
-	{
-		views_.modify_host();
-	}
-
-	void modifyOnDevice()
-	{
-		views_.modify_device();
-	}
-
-	void syncViews()
-	{
-		bool findMinMax = false;
-		if(views_.template need_sync<HostType>())
-		{
-			Kokkos::deep_copy(views_.d_view, views_.h_view);
-			findMinMax = true;
-		}
-		else if(views_.template need_sync<DeviceType>())
-		{
-			Kokkos::deep_copy(views_.h_view, views_.d_view);
-			findMinMax = true;
+			pFlow::fillSequence(views_.h_view, 0, size_, min_);
+			copy(views_.d_view, views_.h_view);
 		}
 
-		if(findMinMax)
+		/// From data and number of elements in data. 
+		/// data is a pointer in the Host memory 
+		indexContainer(IndexType* data, int32 numElems)
+		:
+			size_(numElems),
+			views_("indexContainer", numElems)
 		{
-			min_ 	= pFlow::min(views_.d_view, 0, size_);
-			max_ 	= pFlow::max(views_.d_view, 0, size_);
+			HostViewType hData(data, numElems);
+			copy(views_.h_view, hData);
+			copy(views_.d_view, views_.h_view);
+			min_ 	= pFlow::min(views_.d_view, 0, numElems);
+			max_ 	= pFlow::max(views_.d_view, 0, numElems);
 		}
-	}
 
-	size_t setSize(size_t ns)
-	{
-		auto tmp = size_;
-		size_ = ns;
-		return tmp;
-	}
+		indexContainer(std::vector<IndexType> &ind)
+		:
+			indexContainer(ind.data(), ind.size())
+		{}
+
+		/// Copy
+		indexContainer(const indexContainer&) = default;
+
+		/// Copy assignment
+		indexContainer& operator = (const indexContainer&) = default;
+
+		/// Move
+		indexContainer(indexContainer&&) = default;
+
+		/// Mover assignement 
+		indexContainer& operator = (indexContainer&&) = default;	
+
+		/// Destructor
+		~indexContainer() = default;
+
+	//// - Methods 
+
+		/// Size 
+		INLINE_FUNCTION_HD
+		auto size()const
+		{
+			return size_;
+		}
+
+		/// If the container empty
+		INLINE_FUNCTION_HD
+		bool empty()const
+		{
+			return size_==0;
+		}
+		
+		/// Min value of indices 
+		INLINE_FUNCTION_HD
+		IndexType min()const
+		{
+			return min_;
+		}
+
+		/// Max value of indices 
+		INLINE_FUNCTION_HD
+		IndexType max()const
+		{
+			return max_;
+		}
+
+		/// Return Host veiw
+		const HostViewType& hostView()const
+		{
+			return views_.h_view;
+		}
+
+		/// Return Device view
+		const DeviceViewType& deviceView()const
+		{
+			return views_.d_view;
+		}
+
+		/// Return Host veiw
+		HostViewType& hostView()
+		{
+			return views_.h_view;
+		}
+
+		/// Return Device veiw
+		DeviceViewType& deviceView()
+		{
+			return views_.d_view;
+		}
+
+		/// Return index accessor that works on Host
+		auto indicesHost()const
+		{
+			return IndexAccessor<HostViewType>(views_.h_view);
+		}
+
+		/// Return index accessor that works on Device 
+		auto indicesDevice()const
+		{
+			return IndexAccessor<DeviceViewType>(views_.d_view);
+		}
+
+		/// Mark host is modified 
+		void modifyOnHost()
+		{
+			views_.modify_host();
+		}
+
+		/// Mark device is modified
+		void modifyOnDevice()
+		{
+			views_.modify_device();
+		}
+
+		/// synchronize views 
+		void syncViews()
+		{
+			bool findMinMax = false;
+			if(views_.template need_sync<HostType>())
+			{
+				Kokkos::deep_copy(views_.d_view, views_.h_view);
+				views_.clear_sync_state();
+				findMinMax = true;
+			}
+			else if(views_.template need_sync<DeviceType>())
+			{
+				Kokkos::deep_copy(views_.h_view, views_.d_view);
+				views_.clear_sync_state();
+				findMinMax = true;
+			}
+
+			if(findMinMax)
+			{
+				min_ 	= pFlow::min(views_.d_view, 0, size_);
+				max_ 	= pFlow::max(views_.d_view, 0, size_);
+			}
+		}
+
 };
+
 
 
 using int32IndexContainer = indexContainer<int32>;
 using int64IndexContainer = indexContainer<int64>;
+
+using uint32IndexContainer = indexContainer<uint32>;
+using uint64IndexContainer = indexContainer<uint64>;
 
 
 }

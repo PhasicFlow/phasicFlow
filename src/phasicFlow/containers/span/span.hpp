@@ -51,7 +51,7 @@ protected:
 
     T* data_ 		= nullptr;
 
-    label 	size_ 	= 0;
+    uint32 	size_ 	= 0;
 
 public:
     
@@ -63,7 +63,7 @@ public:
 
 
     INLINE_FUNCTION_HD
-    span(T* data, label size)
+    span(T* data, uint32 size)
         : data_(data), size_(size)
     {}
 
@@ -98,7 +98,7 @@ public:
 
     /// Returns the number of elements in the span
     INLINE_FUNCTION_HD
-    label size() const
+    uint32 size() const
     {
         return size_;
     }
@@ -132,6 +132,18 @@ public:
     }
 
     INLINE_FUNCTION_HD
+    T& operator[](uint32 i)
+    {
+    	return data_[i];
+    }
+
+    INLINE_FUNCTION_HD
+    const T& operator[](uint32 i)const
+    {
+    	return data_[i];
+    }
+
+    INLINE_FUNCTION_HD
     T& operator[](int32 i)
     {
     	return data_[i];
@@ -143,16 +155,35 @@ public:
     	return data_[i];
     }
 
-    INLINE_FUNCTION_HD
-    T& operator[](label i)
+    /// Write in ASCII format, can be sued for all variable types
+    INLINE_FUNCTION_H
+    bool writeASCII(iOstream& os) const
     {
-    	return data_[i];
+        os << token::BEGIN_LIST;
+        if(size()>0)
+        {
+            for(uint32 i=0; i<size()-1; i++)
+            {
+                os << data_[i]<<token::NL;
+            }
+            os << data_[size()-1] << token::END_LIST;
+        }
+        else
+        {
+            os<< token::END_LIST;
+        }
+        
+        os.check(FUNCTION_NAME);
+        return true;
     }
 
-    INLINE_FUNCTION_HD
-    const T& operator[](label i)const
+    /// Write in Binray format, can be used for numeral types (Not word or similar ones)
+    INLINE_FUNCTION_H
+    bool writeBinary(iOstream& os) const
     {
-    	return data_[i];
+        os.write(reinterpret_cast<const char*>(data_), this->size()*sizeof(T));
+        os.check(FUNCTION_NAME);
+        return true;
     }
 
 };
@@ -161,15 +192,15 @@ template<typename T>
 inline 
 iOstream& operator<<(iOstream& os, const span<T>& s)
 {
-    os << token::BEGIN_LIST;
-    for(size_t i=0; i<s.size(); i++)
-    {
-        os << s[i]<<token::NL;
-    }
-    
-    os << token::END_LIST;
 
-    os.check(FUNCTION_NAME);
+    if( os.isBinary() && !std::is_same_v<T,word>)
+    {
+        s.writeBinary(os);
+    }
+    else
+    {
+        s.writeASCII(os);
+    }
 
     return os;
 }

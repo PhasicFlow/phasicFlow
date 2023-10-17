@@ -29,7 +29,7 @@ Licence:
 #include "error.hpp"
 #include "uniquePtr.hpp"
 #include "stdAlgorithms.hpp"
-#include "indexContainer.hpp"
+#include "span.hpp"
 #include "iOstream.hpp"
 #include "iIstream.hpp"
 
@@ -93,16 +93,6 @@ protected:
 	// - name of the vector  
 	word name_;
 
-	static inline size_t getVectorStride(const size_t& len)
-	{
-		size_t stride = 1;
-		if( len < 6 ) 		stride = len;
-		else if( len <16 )  stride = 3;
-		else if( len < 31)  stride = 2;
-		else				stride = 1;
-
-		return stride;
-	}
 
 	static constexpr bool  isHostAccessible_ = true;
 
@@ -119,37 +109,28 @@ public:
 
 	//// - Constructors
 
-		// - empty Vector
+		/// Empty Vector
 		inline Vector()
 		:
 			Vector("Vector")
 		{}
 
+
+		/// Empty Vector with a name 
 		inline Vector(const word& name)
 		:
 			name_(name)
 		{}
-		// - with sepcified length
-		inline Vector(const size_t len)
-		:
-			Vector("Vector",len)
-		{}
 
-		// - with specified length and name
+		
+		/// Vector with specified length and name
 		inline Vector(const word& name, size_t len)
 		:
 			vectorType(len),
 			name_(name)
-		{
-			
-		}
-
-		// - with length and value
-		inline Vector(size_t len, const T& val)
-		:
-			Vector("Vector", len, val)
 		{}
 
+		/// Vector with name, length and value
 		inline Vector(const word& name, size_t len, const T& val)
 		:
 			Vector(name, len)
@@ -157,20 +138,7 @@ public:
 			this->assign(len, val);
 		}
 
-		// - zero length with specified capacity, use Logical
-		//   to make it different from previous constructor.
-		inline Vector(const size_t cap, RESERVE ):
-			Vector("Vector", cap, 0, RESERVE())
-		{
-		}
-
-		inline Vector(const size_t cap, const size_t len, RESERVE )
-		:
-			Vector("Vector", cap, len, RESERVE())
-		{
-			
-		}
-
+		/// Vector with name, size and reserved capacity 
 		Vector(const word& name, size_t cap, size_t len, RESERVE ):
 			name_(name)
 		{
@@ -178,142 +146,157 @@ public:
 			this->resize(len);
 		}
 
-		inline Vector(const size_t cap, const size_t len, const T& val, RESERVE )
-		{
-			name_ = "Vector";
-			reserve(cap);
-			this->assign(len, val);
-		}
 
-
-		// from initializer list 
-		inline Vector(const initList &l)
+		/// Vector from name and initializer list 
+		inline Vector(const word& name, const initList &l)
 		:
-			vectorType(l)
+			vectorType(l),
+			name_(name)
 		{}
 
-		// - from src and a new name
+		/// Construct with a name and form std::vector (host memory)
+		inline Vector(const word& name, const vectorType& src)
+		:
+			vectorType(src),
+			name_(name)
+		{}
+
+		/// Construct with a name and form std::vector (host memory)
+		/// and with a desired capacity. 
+		inline Vector(const word& name, const vectorType& src, size_t cap)
+		:
+			Vector(name, cap, src.size(), RESERVE())
+		{
+			this->assign(src.begin(), src.end());
+		}
+
+		/// Copy construct 
+		inline Vector(const VectorType& src) = default;
+
+		/// Copy from src with a new name 
 		inline Vector(const word name, const Vector<T>& src):
 			vectorType(src),
 			name_(name)
 		{}
 
-		// copy construct 
-		inline Vector(const VectorType& src) = default;
-		
-		// move construct 
-		inline Vector( VectorType && mv) = default;
-
-		inline Vector(const vectorType& src)
-		:
-			vectorType(src),
-			name_("Vector")
-		{
-			
-		}
-		
-		// copy assignment
+		/// Copy assignment
 		inline VectorType& operator=( const VectorType& rhs ) = default;
 
+		/// Copy assignment from std::vector 
 		inline VectorType& operator=(const vectorType& rhs)
 		{
 			Vector::assign(rhs.begin(), rhs.end());
 			return *this;
 		}
-		
-		// move assignment 
+
+		/// Move construct 
+		inline Vector( VectorType && mv) = default;
+	
+		/// Move assignment 
 		inline VectorType& operator=( VectorType && mv) = default;
 	
-		// scalar assignment 
+		/// Scalar assignment 
 		inline void operator=(const T& val)
 		{
 			fill(val);
 		}
 
+		/// Destructor 
 		inline ~Vector()
 		{
 			vectorType::clear();
 		}
 
+		/// Clone as a uniquePtr
 		inline uniquePtr<VectorType> clone() const
 		{
 			return makeUnique<VectorType>(*this);
 		}
 
+		/// Clone as a pointer 
 		inline VectorType* clonePtr()const
 		{
 			return new VectorType(*this);
 		}
 
-	inline auto clear()
-	{
-		return vectorType::clear();
-	}
+	
+	//// - Methods 
 
-	// access to this, mostly used by derived classes 
-	const VectorType& VectorField() const
-	{
-		return *this;
-	}
- 
-	VectorType& VectorField()
-	{
-		return *this;
-	}
+		/// Access to this, mostly used by derived classes 
+		const VectorType& VectorField() const
+		{
+			return *this;
+		}
+	 
+		VectorType& VectorField()
+		{
+			return *this;
+		}
 
-	const vectorType& vectorField()const
-	{
-		return *this;
-	}
+		const vectorType& vectorField()const
+		{
+			return *this;
+		}
 
-	vectorType& vectorField()
-	{
-		return *this;
-	}
+		vectorType& vectorField()
+		{
+			return *this;
+		}
 
-	auto& deviceVectorAll()
-	{
-		return *this;
-	}
+		auto& deviceVectorAll()
+		{
+			return *this;
+		}
 
-	const auto& deviceVectorAll()const
-	{
-		return *this;
-	}
+		const auto& deviceVectorAll()const
+		{
+			return *this;
+		}
 
-	auto& deviceVector()
-	{
-		return *this;
-	}
+		auto& deviceVector()
+		{
+			return *this;
+		}
 
-	const auto& deviceVector()const
-	{
-		return *this;
-	}
+		const auto& deviceVector()const
+		{
+			return *this;
+		}
 
 
+		/// Name of the vector 
+		const word& name()const
+		{
+			return name_;
+		}
 
-	const word& name()const
-	{
-		return name_;
-	}
+		/// Size of the vector 
+		inline auto size()const
+		{
+			return vectorType::size();
+		}
 
-	inline auto size()const
-	{
-		return vectorType::size();
-	}
+		/// Capacity of the vector 
+		inline auto capacity()const
+		{
+			return vectorType::capacity();
+		}
 
-	inline auto capacity()const
-	{
-		return vectorType::capacity();
-	}
+		/// If vector is empty 
+		inline bool empty()const
+		{
+			return vectorType::empty();
+		}
 
-	inline auto reserve(label len)
-	{
-		return vectorType::reserve(len);
-	}
+		/// Reserve capacity for vector 
+		/// Preserve the content.
+		inline void reserve(size_t cap)
+		{
+			vectorType::reserve(cap);
+		}
 
-	// - delete elemens of vector based on sorted indices 
+
+	/*// - delete elemens of vector based on sorted indices 
 	//   return false if out of range
 	bool deleteElement_sorted(const Vector<label>& indices );
 
@@ -346,7 +329,7 @@ public:
 
 	// - set or insert a new element into the vecor 
 	//   return false if it fails 
-	inline bool insertSetElement(int32 idx, const T& val);
+	inline bool insertSetElement(int32 idx, const T& val);*/
 
 	// - fill the whole content of vector, [begin, end), with val 
 	inline void fill( const T& val);
@@ -368,12 +351,7 @@ public:
 
 	inline VectorType operator -()const;
 
-	// from iIstream and specified size 
-	//Vector(iIstream & is, size_t len);
-
-	// from iIstream and free size
-	Vector(iIstream& is);
-
+	
 	bool readVector(iIstream& is, size_t len=0);
 
 	bool writeVector(iOstream& os) const;

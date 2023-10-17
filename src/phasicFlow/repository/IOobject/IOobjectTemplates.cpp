@@ -18,6 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+
 template<typename T, typename... Args>
 auto pFlow::IOobject::make
 (
@@ -32,7 +33,7 @@ auto pFlow::IOobject::make
 }
 
 template<typename T, typename... Args>
-auto pFlow::IOobject::make_object_t(Args&&... args)
+pFlow::uniquePtr<pFlow::IOobject::iObject> pFlow::IOobject::make_object_t(Args&&... args)
 {
 	auto ptr = makeUnique<object_t<T>>(std::forward<Args>(args)...);
 	return ptr;
@@ -47,7 +48,7 @@ auto& pFlow::IOobject::getObject()
 		"accessing an invalid objecct "<< name() <<endl;
 		fatalExit;
 	}
-	return  dynamic_cast<object_t<T>&>(*object_).data_;
+	return  static_cast<object_t<T>&>(*object_).data();
 }
 
 
@@ -60,5 +61,5 @@ const auto& pFlow::IOobject::getObject()const
 		"accessing an invalid objecct "<< name() <<endl;
 		fatalExit;
 	}
-	return  dynamic_cast<const object_t<T>&>(*object_).data_;	
+	return  static_cast<const object_t<T>&>(*object_).data();	
 }

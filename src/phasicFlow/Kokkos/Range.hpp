@@ -129,6 +129,12 @@ public Kokkos::pair<T,T>
 			return end()-start();
 		}
 
+		INLINE_FUNCTION_HD
+		auto getPair()const
+		{
+			return Pair(this->first, this->second);
+		}
+
 };
 
 template<typename T>
@@ -142,6 +148,10 @@ iOstream& operator <<(iOstream& os, const Range<T>& rng)
 using range32 	= Range<int32>;
 
 using range64 	= Range<int64>;
+
+using rangeU32 	= Range<uint32>;
+
+using rangeU64 	= Range<uint64>;
 
 
 } // pFlow

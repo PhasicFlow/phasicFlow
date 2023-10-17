@@ -153,6 +153,8 @@ public:
         iIstream& read(char* buffer, std::streamsize count) override;
 
     
+    size_t findBinaryBlockStart()override;
+
     /// Rewind the stream so that it may be read again
     virtual void rewind();
 

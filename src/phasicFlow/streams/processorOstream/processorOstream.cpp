@@ -134,6 +134,11 @@ pFlow::iOstream& pFlow::processorOstream::write(const double val)
     return Ostream::write(val);
 }
 
+pFlow::iOstream& pFlow::processorOstream::write(const size_t val)
+{
+    checkForPrefix();
+    return Ostream::write(val);
+}
 
 pFlow::iOstream& pFlow::processorOstream::write
 (

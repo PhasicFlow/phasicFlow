@@ -153,6 +153,15 @@ pFlow::iOstream& pFlow::masterOstream::write(const double val)
     return *this; 
 }
 
+pFlow::iOstream& pFlow::masterOstream::write(const size_t val)
+{
+    if(showOutput())
+    {
+        Ostream::write(val);
+    }
+    return *this; 
+}
+
 
 pFlow::iOstream& pFlow::masterOstream::write
 (

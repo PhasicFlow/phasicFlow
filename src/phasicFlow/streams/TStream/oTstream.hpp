@@ -129,6 +129,9 @@ public:
         /// Write double
         virtual iOstream& write(const double val) override;
 
+        /// Write double
+        virtual iOstream& write(const size_t val) override;
+
         /// Write a block of binray data
         iOstream& write(
             const char* binaryData, 

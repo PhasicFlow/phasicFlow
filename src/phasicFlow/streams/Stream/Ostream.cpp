@@ -222,6 +222,13 @@ pFlow::iOstream& pFlow::Ostream::write(const double val)
     return *this;
 }
 
+pFlow::iOstream& pFlow::Ostream::write(const size_t val)
+{
+    os_ << val;
+    setState(os_.rdstate());
+    return *this;
+}
+
 pFlow::iOstream& pFlow::Ostream::write
 (
     const char* binaryData, 
@@ -239,10 +246,18 @@ pFlow::iOstream& pFlow::Ostream::write
     os_.write(binaryData, count);
     os_ << token::END_LIST;
 
-    setState(os_.rdstate());
-
     return *this;
 }
+
+pFlow::iOstream& pFlow::Ostream::writeBinaryBlockFlag()
+{
+    write( static_cast<char>(255));
+    write( static_cast<char>(255));
+    write( static_cast<char>(255));
+    write( static_cast<char>(0));
+    return *this;
+}
+
 
 void pFlow::Ostream::indent()
 {

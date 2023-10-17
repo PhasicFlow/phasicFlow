@@ -135,8 +135,14 @@ public:
         /// Write double
         virtual iOstream& write(const double val) = 0;
        
+        /// Write size_t
+        virtual iOstream& write(const size_t val) = 0;
+         
         /// Write a block of binray data 
         virtual iOstream& write(const char* binaryData, std::streamsize count) = 0;
+
+        /// Write the flag to indicate the start of a binary block
+        virtual iOstream& writeBinaryBlockFlag();
         
     
     //// - Indent 
@@ -407,6 +413,11 @@ inline iOstream& operator<<( iOstream& os, const float& val)
 
 
 inline iOstream& operator<<( iOstream& os, const double& val)
+{
+    return os.write(val);
+}
+
+inline iOstream& operator<<( iOstream& os, const size_t& val)
 {
     return os.write(val);
 }

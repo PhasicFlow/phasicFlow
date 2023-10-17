@@ -155,6 +155,14 @@ pFlow::iOstream& pFlow::oTstream::write(const double val)
     return *this;
 }
 
+pFlow::iOstream& pFlow::oTstream::write(const size_t val)
+{
+    append(token(static_cast<int64>(val))); // tokenType::INT64
+
+    return *this;
+}
+
+
 pFlow::iOstream& pFlow::oTstream::write
 (
     const char* binaryData, 

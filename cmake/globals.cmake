@@ -4,9 +4,9 @@ list(APPEND validFiles *.C *.cpp *.cxx *.c *.cu *.H *.hpp *.hxx *.h *.cuh)
 
 macro(Kokkos_cmake_settings)
 
-mark_as_advanced(FORCE var Kokkos_ENABLE_CUDA_LAMBDA)
+#mark_as_advanced(FORCE var Kokkos_ENABLE_CUDA_LAMBDA)
 mark_as_advanced(FORCE var Kokkos_CXX_STANDARD)
-mark_as_advanced(FORCE var Kokkos_ENABLE_CUDA_CONSTEXPR)
+#mark_as_advanced(FORCE var Kokkos_ENABLE_CUDA_CONSTEXPR)
 mark_as_advanced(FORCE var Kokkos_ENABLE_OPENMP)
 mark_as_advanced(FORCE var Kokkos_ENABLE_SERIAL)
 mark_as_advanced(FORCE var Kokkos_ENABLE_CUDA)

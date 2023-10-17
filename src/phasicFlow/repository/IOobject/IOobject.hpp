@@ -61,23 +61,25 @@ private:
 	:
 		public iObject
 	{
-	public:
+	protected:
 		dataType 	data_;
 
 	public:
 
 		template<typename... Args,
-          		typename = std::enable_if_t<!std::is_constructible<object_t, Args&&...>::value>>
+          		typename = std::enable_if_t<std::is_constructible<dataType, Args&&...>::value>>
 		object_t(Args&&... args)
 		:
 			data_(std::forward<Args>(args)...)
-		{}
+		{
+			/*constexpr word msg(dataType::TYPENAME()+"input is not a member function.")
+			static_assert(std::is_member_function_pointer<decltype(&dataType::write)>::value,
+                  msg.c_str());*/
+		}
 
 		// cunstruct by copying data
-		object_t(const dataType& data): data_(data){}
-
-		// construct by moving data
-		//object_t(dataType&& data): data_(std::move(data)){}
+		object_t(const dataType& data): data_(data)
+		{}
 
 		
 		virtual uniquePtr<iObject> clone() const
@@ -100,6 +102,16 @@ private:
 			return data_.write(os);
 		}
 
+		auto& data()
+		{
+			return data_;
+		}
+
+		const auto& data()const
+		{
+			return data_;
+		}
+
 	};
 
 protected:
@@ -107,8 +119,9 @@ protected:
 	//// - data members
 
 		// underlaying data object 
-		uniquePtr<iObject> object_;
+		uniquePtr<iObject> object_ = nullptr;
 
+		
 
 public:
 
@@ -127,6 +140,42 @@ public:
 		// - construct from components, transfer the ownership of IOobject to the owner (no read happens)
 		IOobject(const objectFile& objf, const repository* owner, uniquePtr<IOobject>&& obj);
 		
+		
+		template<typename T, 
+			typename = std::enable_if_t<
+				!std::is_same<T, uniquePtr<IOobject::iObject>>::value && 
+				!std::is_same<T, uniquePtr<IOobject>>::value>>
+		IOobject(const objectFile& objf, const repository* owner, const T& data)
+		:
+			IOfileHeader(objf, owner),
+			object_(makeUnique<object_t<T>>(data))
+		{
+			if(!read(this->readWriteHeader()))
+			{
+				fatalErrorInFunction<<
+				"error in reading " << name() << " from path " << path()<<endl;
+				fatalExit;
+			}
+		}
+
+		
+		template<typename T, 
+			typename = std::enable_if_t<
+				!std::is_same<T, uniquePtr<IOobject::iObject>>::value && 
+				!std::is_same<T, uniquePtr<IOobject>>::value>>
+		IOobject(const objectFile& objf, const repository* owner,  T&& data)
+		:
+			IOfileHeader(objf, owner),
+			object_(makeUnique<object_t<T>>(data))
+		{
+			if(!read(this->readWriteHeader()))
+			{
+				fatalErrorInFunction<<
+				"error in reading " << name() << " from path " << path()<<endl;
+				fatalExit;
+			}
+		}		
+
 		// - copy construct 
 		IOobject(const IOobject& src)=delete;	
 
@@ -142,7 +191,7 @@ public:
 		
 		// - construct object_t with the Args as the arguments of object constructor 
 		template<typename T, typename... Args>
-		static auto make_object_t(Args&&... args);
+		static uniquePtr<iObject> make_object_t(Args&&... args);
 		
 
 	//// - Access to data object 
@@ -158,7 +207,6 @@ public:
 		template<typename T>
 		const auto& getObject()const;
 	
-		
 
 	//// - IO operations 
 

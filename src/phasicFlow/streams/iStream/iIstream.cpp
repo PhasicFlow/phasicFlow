@@ -75,6 +75,12 @@ bool pFlow::iIstream::peekBack(token& tok)
     return putBack_;
 }
 
+size_t pFlow::iIstream::findBinaryBlockStart()
+{
+    notImplementedFunction;
+    return 0;
+}
+
 bool pFlow::iIstream::findToken( const word & w )
 {
     rewind();

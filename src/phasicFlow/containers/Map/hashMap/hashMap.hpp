@@ -140,7 +140,7 @@ template<typename T>
 using wordHashMap = hashMap<word,T>;
 
 template<typename T>
-using labelHashMap = hashMap<label,T>;
+using uint64HashMap = hashMap<uint64,T>;
 
 template<typename T>
 using uint32HashMap = hashMap<uint32,T>;
@@ -155,7 +155,7 @@ template<typename T>
 inline iOstream& printKeys(iOstream& os, const wordHashMap<T> & m);
 
 template<typename T>
-inline iOstream& printKeys(iOstream& os, const labelHashMap<T> & m);
+inline iOstream& printKeys(iOstream& os, const uint64HashMap<T> & m);
 
 template<typename T>
 inline iOstream& printKeys(iOstream& os, const uint32HashMap<T> & m);

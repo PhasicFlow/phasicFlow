@@ -25,6 +25,7 @@ Licence:
 #include "KokkosTypes.hpp"
 #include "pFlowMacros.hpp"
 #include "types.hpp"
+#include "span.hpp"
 #include "iOstream.hpp"
 
 namespace pFlow
@@ -41,7 +42,7 @@ template<typename ExecutionSpace>
 INLINE_FUNCTION_H
 bool constexpr isDeviceAccessible()
 {
-	return Kokkos::SpaceAccessibility<ExecutionSpace,DefaultExecutionSpace>::accessible;
+	return Kokkos::SpaceAccessibility<ExecutionSpace,DefaultExecutionSpace::memory_space>::accessible;
 }
 
 /// Is MemoerySpace accessible from ExecutionSpace
@@ -56,7 +57,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocInit( ViewType1D<Type,Properties...>& view, int32 len)
+void reallocInit( ViewType1D<Type,Properties...>& view, uint32 len)
 {
 	Kokkos::realloc(Kokkos::WithoutInitializing, view, len);	
 }
@@ -65,7 +66,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocNoInit(ViewType1D<Type,Properties...>& view, int32 len)
+void reallocNoInit(ViewType1D<Type,Properties...>& view, uint32 len)
 {
 	Kokkos::realloc(Kokkos::WithoutInitializing, view, len);
 }
@@ -74,7 +75,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocFill( ViewType1D<Type,Properties...>& view, int32 len, Type val)
+void reallocFill( ViewType1D<Type,Properties...>& view, uint32 len, Type val)
 {
 	reallocNoInit(view, len);
 	Kokkos::deep_copy(view, val);
@@ -84,7 +85,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocInit( ViewType2D<Type,Properties...>& view, int32 len1, int32 len2)
+void reallocInit( ViewType2D<Type,Properties...>& view, uint32 len1, uint32 len2)
 {
 	Kokkos::realloc(view, len1, len2);
 }
@@ -93,7 +94,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocNoInit(ViewType2D<Type,Properties...>& view, int32 len1, int32 len2)
+void reallocNoInit(ViewType2D<Type,Properties...>& view, uint32 len1, uint32 len2)
 {	
   	Kokkos::realloc(Kokkos::WithoutInitializing, view, len1, len2);
 }
@@ -102,7 +103,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocFill( ViewType2D<Type,Properties...>& view, int32 len1, int32 len2, Type val)
+void reallocFill( ViewType2D<Type,Properties...>& view, uint32 len1, uint32 len2, Type val)
 {
 	reallocNoInit(view, len1, len2);
 	Kokkos::deep_copy(view, val);
@@ -112,7 +113,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocInit( ViewType3D<Type,Properties...>& view, int32 len1, int32 len2, int32 len3)
+void reallocInit( ViewType3D<Type,Properties...>& view, uint32 len1, uint32 len2, uint32 len3)
 {
 	Kokkos::realloc(view, len1, len2, len3);
 }
@@ -121,7 +122,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocNoInit(ViewType3D<Type,Properties...>& view, int32 len1, int32 len2, int32 len3)
+void reallocNoInit(ViewType3D<Type,Properties...>& view, uint32 len1, uint32 len2, uint32 len3)
 {
 	
   	Kokkos::realloc(Kokkos::WithoutInitializing, view, len1, len2, len3);
@@ -131,7 +132,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void reallocFill( ViewType3D<Type,Properties...>& view, int32 len1, int32 len2, int32 len3, Type val)
+void reallocFill( ViewType3D<Type,Properties...>& view, uint32 len1, uint32 len2, uint32 len3, Type val)
 {
 	reallocNoInit(view, len1, len2, len3);
 	Kokkos::deep_copy(view, val);
@@ -141,7 +142,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void resizeInit(ViewType1D<Type,Properties...>& view, int32 newLen)
+void resizeInit(ViewType1D<Type,Properties...>& view, uint32 newLen)
 {
 	Kokkos::resize(view, newLen);
 }
@@ -150,7 +151,7 @@ template <
 	typename Type,
 	typename... Properties>
 INLINE_FUNCTION_H
-void resizeNoInit(ViewType1D<Type,Properties...>& view, int32 newLen)
+void resizeNoInit(ViewType1D<Type,Properties...>& view, uint32 newLen)
 {
 	Kokkos::resize(Kokkos::WithoutInitializing, view, newLen);
 }
@@ -176,6 +177,22 @@ iOstream& operator <<(iOstream& os, const Pair<T1,T2>& p)
 	os<<'('<<p.first<<" "<<p.second<<')';
 	return os;
 }
+
+template<typename T, typename... properties>
+INLINE_FUNCTION_H
+iOstream& operator <<(iOstream& os, const ViewType1D<T, properties...> & v)
+{
+	
+	using ExSpace = typename ViewType1D<T, properties...>::execution_space;
+
+	static_assert(isHostAccessible<ExSpace>(), "View memory is not accessible from Host");
+
+	span<T> spn(v.data(), v.size());
+	os<<spn;
+	
+	return os;
+}
+
 
 } // pFlow
 

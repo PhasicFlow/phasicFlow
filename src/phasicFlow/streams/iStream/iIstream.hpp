@@ -128,14 +128,19 @@ public:
 	    /// Read a doubleScalar
 	    virtual iIstream& read(double&) = 0;
 
+	    /// Write a block of binray data 
 	    virtual iIstream& read(char* buffer, std::streamsize count) =0;
-
 	    
 	    /// Rewind the stream so that it may be read again
 	    virtual void rewind() = 0;
 
 
     ////- find and lookups
+
+	    /// It seek for a character sequence that indicates the start of 
+	    /// a binary block
+	    /// char sequence is 255 255 255 0 
+	    virtual size_t findBinaryBlockStart();
 
         /// search for all tokesn and find the first word token tbat matchs w
         virtual bool findToken( const word & w );

@@ -21,7 +21,7 @@ Licence:
 #ifndef __phsicFlowKokkos_hpp__
 #define __phsicFlowKokkos_hpp__
 
-#include "kokkosTypes.hpp"
+#include "KokkosTypes.hpp"
 #include "KokkosUtilities.hpp"
 #include "ViewAlgorithms.hpp"
 #include "Range.hpp"

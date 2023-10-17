@@ -95,26 +95,45 @@ public:
 	//   read the header of the file to check if it is ok
 	bool headerOk(bool silent = false);
 	
-	// - imply read 
+	/// Imply read 
 	bool implyRead() const;
 
-	// - imply write 
+	/// Imply write 
 	bool implyWrite() const;
 	
-	// - check if file exists
+	/// Check if file exists
 	bool fileExist() const;
 	
-	// - check read if present 
+	/// Check read if present 
 	bool readIfPresent()const;
 
-	// - write the header in the  file , typeName comes from caller
-	bool writeHeader(iOstream& os, const word& typeName) const;
+	/// Check if the header should be written to file
+	/// True: on master + implyWrite + readWriteHeader = true
+	/// False: slave or NOT implyWrite
+	bool writeHeader()const;
 
-	// - write the header in the  file, typeName comes from the one read from file 
-	bool writeHeader(iOstream& os) const;
-	
-	// - read the header in the file 
+	/// Write the header to the file , typeName comes from caller
+	bool writeHeader(iOstream& os, const word& typeName, bool forceWrite = false ) const;
+
+	/// Write the header to the file, typeName comes from the one read from file 
+	bool writeHeader(iOstream& os, bool forceWrite = false) const;
+
+	/// Check if the data should be written to file 
+	/// True: on master or differentDataOnProcessor is true
+	/// False: otherwise 
+	bool writeData()const;
+
+	/// Check if header should be read from file
+	/// True: All processors, read the file header 
+	/// False: readWriteHeader = false
+	bool readHeader()const;
+
+	/// Read the header in the file
 	bool readHeader(iIstream& is, bool silent=false);
+
+	/// Check if data should be read from file 
+	/// Always return true
+	bool readData()const;
 	
 	// - write the banner 
 	bool writeBanner(iOstream& os)const;

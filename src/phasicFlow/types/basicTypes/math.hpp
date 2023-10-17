@@ -23,11 +23,15 @@ Licence:
 
 #include <cmath>
 
+#include "pFlowMacros.hpp"
+#include "builtinTypes.hpp"
+
+
 #ifdef __CUDACC__
 #include "math.h"
 #endif
 
-#include "builtinTypes.hpp"
+
 
 //* * * * * * * * * * *  List of functinos * * * * * * * * //
 // abs, mod, exp, log, log10, pow, sqrt, cbrt
