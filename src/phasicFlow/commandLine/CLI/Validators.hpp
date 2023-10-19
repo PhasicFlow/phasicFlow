@@ -11,7 +11,7 @@
 #include "TypeTools.hpp"
 
 // [CLI11:public_includes:set]
-#include <cmath>
+#include "math.hpp"
 #include <cstdint>
 #include <functional>
 #include <iostream>

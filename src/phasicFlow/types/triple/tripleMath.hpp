@@ -18,18 +18,22 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+namespace pFlow
+
+{
+
 #define T3Func(fnName) 									\
 template<typename T> 									\
-INLINE_FUNCTION_HD pFlow::triple<T> pFlow::fnName(const pFlow::triple<T>& v) 			\
+INLINE_FUNCTION_HD triple<T> fnName(const triple<T>& v) 			\
 {																\
-	return pFlow::triple<T>(fnName(v.x_), fnName(v.y_), fnName(v.z_));	\
+	return triple<T>(fnName(v.x_), fnName(v.y_), fnName(v.z_));	\
 }
 
 #define T3Func2(fnName)  															\
 template<typename T>																\
-INLINE_FUNCTION_HD pFlow::triple<T> pFlow::fnName(const pFlow::triple<T>& arg1, const pFlow::triple<T>& arg2)	\
+INLINE_FUNCTION_HD triple<T> fnName(const triple<T>& arg1, const triple<T>& arg2)	\
 {																					\
-	return pFlow::triple<T>(fnName(arg1.x_, arg2.x_), fnName(arg1.y_,arg2.y_), fnName(arg1.z_, arg2.z_)); \
+	return triple<T>(fnName(arg1.x_, arg2.x_), fnName(arg1.y_,arg2.y_), fnName(arg1.z_, arg2.z_)); \
 }
 
 //* * * * * * * * * * *  List of functinos * * * * * * * * //
@@ -68,21 +72,21 @@ T3Func2(max);
 
 // elements of t3 raised by e
 template<typename T>
-INLINE_FUNCTION_HD pFlow::triple<T> pFlow::pow(const pFlow::triple<T>& t3, T e)
+INLINE_FUNCTION_HD triple<T> pow(const triple<T>& t3, T e)
 {
-	return pFlow::triple<T>( pow(t3.x_, e), pow(t3.y_,e), pow(t3.z_,e));
+	return triple<T>( pow(t3.x_, e), pow(t3.y_,e), pow(t3.z_,e));
 }
 
 // return the min of 3 elements x, y, z
 template<typename T>
-INLINE_FUNCTION_HD T pFlow::min(const pFlow::triple<T>& t3)
+INLINE_FUNCTION_HD T min(const triple<T>& t3)
 {
 	return min( min(t3.x_, t3.y_), t3.z_);
 }
 
 // return the max of 3 elements x, y, z
 template<typename T>
-INLINE_FUNCTION_HD T pFlow::max(const pFlow::triple<T>& t3)
+INLINE_FUNCTION_HD T max(const triple<T>& t3)
 {
 	return max( max(t3.x_, t3.y_), t3.z_);
 }
@@ -91,3 +95,5 @@ INLINE_FUNCTION_HD T pFlow::max(const pFlow::triple<T>& t3)
 
 #undef T3Func
 #undef T3Func2
+
+}
