@@ -23,6 +23,7 @@ Licence:
 
 #include "types.hpp"
 #include "fileSystem.hpp"
+#include "IOPattern.hpp"
 
 
 namespace pFlow
@@ -47,6 +48,7 @@ public:
 		WRITE_NEVER
 	};
 
+
 protected:
 
 	/// Name of the entity
@@ -61,16 +63,10 @@ protected:
 	/// Local path of entity
 	fileSystem localPath_ = "";
 
-	/// Number of bytes used for writing/reading real variable (mostly used for binray)
+	/// Number of bytes used for writing/reading real variable (used for binray)
 	int 		numBytesForReal_ = numBytesForReal__;
 	
-	/// All processors have the different set of data or not?
-	/// True: Each processor should read its own part of data from file and should write 
-	/// its own part of data to the file.  
-	/// Flase: All processors read the same data from file and in writing, only master data
-	/// write the data to the file. 
-
-	bool differentDataOnProcessors_ = true;
+	IOPattern 	ioPattern_ = {IOPattern::MasterProcessor};
 
 	/// Does the objectFile write the header or not
 	bool readWriteHeader_ = true;
@@ -89,10 +85,10 @@ public:
 	objectFile
 	(
 		const word& name,
-		const fileSystem& localPath,
-		const readFlag&   rf = READ_NEVER,
-		const writeFlag&  wf = WRITE_NEVER,
-		bool  diffDataOnProcessors = true,
+		const fileSystem& 	localPath,
+		const readFlag&   	rf = READ_NEVER,
+		const writeFlag&  	wf = WRITE_NEVER,
+		IOPattern::IOType	ioType = IOPattern::MasterProcessor,
 		bool  rwHdr = true
 	);
 
@@ -160,10 +156,9 @@ public:
 		return wFlag_ == WRITE_NEVER;
 	}
 
-	inline
-	bool differentDataOnProcessors()const
+	const IOPattern& ioPattern()const
 	{
-		return differentDataOnProcessors_;
+		return ioPattern_;
 	}
 
 	inline 

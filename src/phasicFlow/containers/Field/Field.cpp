@@ -18,7 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<template<class, class> class VectorField, class T, class PropType>
+/*template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::readUniform
 ( 
 	iIstream& is,
@@ -94,10 +94,10 @@ bool pFlow::Field<VectorField, T, PropType>::readNonUniform
 		
 
 	return true;	
-}
+}*/
 
 
-template<template<class, class> class VectorField, class T, class PropType>
+/*template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::readField
 (
 	iIstream& is,
@@ -175,6 +175,50 @@ bool pFlow::Field<VectorField, T, PropType>::writeField(iOstream& os)const
 	
 	VectorType::write(os);
 	
+	os.endEntry();
+
+	return true;
+}*/
+
+
+template<template<class, class> class VectorField, class T, class PropType>
+bool pFlow::Field<VectorField, T, PropType>::read
+(
+	iIstream& is,
+	IOPattern::IOType iotype
+)
+{
+	
+	bool tokenFound;
+	tokenFound = is.findToken(fieldKey_);
+
+	if( !tokenFound )
+	{
+		ioErrorInFile( is.name(), is.lineNumber() ) <<
+		" error in searching for filedkey " << fieldKey_<<endl;
+		return false;
+	}
+	
+	if( !VectorType::read(is, iotype) )
+	{
+		ioErrorInFile(is.name(), is.lineNumber())<<
+		"error in reading field data from field "<< this->name()<<endl;
+	}
+	is.readEndStatement("Field::read");
+
+
+	return true;
+}
+
+template<template<class, class> class VectorField, class T, class PropType>
+bool pFlow::Field<VectorField, T, PropType>::write(
+	iOstream& os, 
+	IOPattern::IOType iotype)const
+{
+
+	
+	os.writeWordKeyword(fieldKey_)<<endl;
+	VectorType::write(os, iotype);
 	os.endEntry();
 
 	return true;

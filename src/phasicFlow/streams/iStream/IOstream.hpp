@@ -180,7 +180,7 @@ public:
         bool isBinary()const
         {
             return writeFormat_ == BINARY;
-        }
+        }    
 
         /// Return true if next operation might succeed
         bool good() const

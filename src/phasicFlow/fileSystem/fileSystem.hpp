@@ -71,19 +71,19 @@ public:
 protected:
 	
 	/// File path 
-	std::filesystem::path path_;
+	pathType 	path_;
 	
 	/// Is this a directory path?
-	bool isDir_;
+	bool 		isDir_;
 
 
 	/// Not premitted chars in file name 	
-	inline static word notPermittedCharsFile = word(" ") + word("\t\n\0;:?*/<>\"?\'");
+	inline static word notPermittedCharsFile = word(" ") + word("&\t\n;:?*/<>\"?\'");
 	
 	/// Is name is valid for a file? 
 	bool static validFileName(const word& name)
 	{
-		return name.find_first_of(notPermittedCharsFile);
+		return name.find_first_of(notPermittedCharsFile)==word::npos;
 	}
 
 	/// Is a valid file name?
@@ -107,13 +107,18 @@ public:
 			isDir_(true)
 		{}
 
+		/// From full path 
+		explicit
+		fileSystem(const word & wPath);
+
 		/// From dir and file name 
-		fileSystem( const word& dir, const word& file = "");
+		fileSystem( const word& dir, const word& file);
 		
 		/// From dir and file name 
-		fileSystem( const char* dir, const char* file = "");
+		fileSystem( const char* dir, const char* file="");
 
 		/// Copy
+		explicit
 		fileSystem( const pathType& path );
 
 		/// Copy 

@@ -134,6 +134,10 @@ public:
 	    /// Rewind the stream so that it may be read again
 	    virtual void rewind() = 0;
 
+	    virtual void seek(size_t pos) = 0;
+
+	    /// Return current position indicator 
+	    virtual size_t tell() = 0;
 
     ////- find and lookups
 

@@ -4,8 +4,6 @@ types/basicTypes/bTypesFunctions.cpp
 types/basicTypes/Logical.cpp
 types/types.cpp
 
-
-
 globals/error.cpp
 
 streams/token/tokenIO.cpp
@@ -35,10 +33,16 @@ dictionary/entry/dataEntry.cpp
 dictionary/twoPartEntry/twoPartEntry.cpp
 
 containers/Vector/Vectors.cpp
+containers/Field/Fields.cpp
 
 repository/IOobject/objectFile.cpp
 repository/IOobject/IOfileHeader.cpp
 repository/IOobject/IOobject.cpp
+repository/IOobject/IOPattern.cpp
+
+structuredData/line/line.cpp
+structuredData/infinitePlane/infinitePlane.cpp
+structuredData/plane/plane.cpp
 
 )
 

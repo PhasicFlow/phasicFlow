@@ -135,6 +135,7 @@ bool pFlow::IOfileHeader::readIfPresent()const
 
 bool pFlow::IOfileHeader::writeHeader()const
 {
+
 	if( !this->readWriteHeader() ) return false;
 	if( !processors::isMaster() ) return false;
 	if( !implyWrite() ) return false;
@@ -150,7 +151,10 @@ bool pFlow::IOfileHeader::writeHeader
 ) const
 {
 
-	if(!forceWrite && !writeHeader()) return true;
+	if(!forceWrite)
+	{
+		if(!writeHeader()) return true;
+	} 
 
 	writeBanner(os);
 
@@ -180,8 +184,9 @@ bool pFlow::IOfileHeader::writeHeader(iOstream& os, bool forceWrite) const
 
 bool pFlow::IOfileHeader::readHeader()const
 {
-	if( !this->readWriteHeader() ) return false;
-	return true;
+	if( !implyRead())return false;
+	if( !this->readWriteHeader() ) return false;  
+	return ioPattern().thisProcReadHeader();
 }
 
 bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
@@ -228,15 +233,14 @@ bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 
 bool pFlow::IOfileHeader::writeData()const
 {
-	if( processors::isMaster() || this->differentDataOnProcessors())
-		return true;
-	else
-		return false;
+	if(!implyWrite())return false;
+	return ioPattern().thisProcWriteData();
 }
 
 bool pFlow::IOfileHeader::readData()const
 {
-	return true;
+	if(!implyRead())return false;
+	return ioPattern().thisProcReadData();
 }
 
 bool pFlow::IOfileHeader::writeBanner(iOstream& os)const

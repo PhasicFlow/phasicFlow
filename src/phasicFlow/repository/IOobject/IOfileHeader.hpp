@@ -109,7 +109,7 @@ public:
 
 	/// Check if the header should be written to file
 	/// True: on master + implyWrite + readWriteHeader = true
-	/// False: slave or NOT implyWrite
+	/// False: otherwise
 	bool writeHeader()const;
 
 	/// Write the header to the file , typeName comes from caller
@@ -119,13 +119,9 @@ public:
 	bool writeHeader(iOstream& os, bool forceWrite = false) const;
 
 	/// Check if the data should be written to file 
-	/// True: on master or differentDataOnProcessor is true
-	/// False: otherwise 
 	bool writeData()const;
 
 	/// Check if header should be read from file
-	/// True: All processors, read the file header 
-	/// False: readWriteHeader = false
 	bool readHeader()const;
 
 	/// Read the header in the file
@@ -135,10 +131,10 @@ public:
 	/// Always return true
 	bool readData()const;
 	
-	// - write the banner 
+	/// write the banner 
 	bool writeBanner(iOstream& os)const;
 
-	// - wirte a separator line 
+	/// wirte a separator line 
 	bool writeSeparator(iOstream& os)const;
 
 };

@@ -24,22 +24,17 @@ Licence:
 #include "types.hpp"
 #include "Field.hpp"
 #include "VectorSingle.hpp"
-#include "VectorDual.hpp"
+//#include "VectorDual.hpp"
 
 
 namespace pFlow
 {
 
-
 using int8Field_D 		= Field<VectorSingle, int8>;
 
 using int8Field_H 		= Field<VectorSingle, int8, HostSpace>;
 
-using int16Field_D 		= Field<VectorSingle, int16>;
-
-using int16Field_H 		= Field<VectorSingle, int16, HostSpace>;
-
-using int32Field_D 		= Field<VectorSingle, int32>;
+/*using int32Field_D 		= Field<VectorSingle, int32>;
 
 using int32Field_H 		= Field<VectorSingle, int32, HostSpace>;
 
@@ -81,16 +76,14 @@ using int64x3Field_H 	= Field<VectorSingle, int64x3, HostSpace>;
 
 using realx3x3Field_D 	= Field<VectorSingle, realx3x3>;
 
-using realx3x3Field_H 	= Field<VectorSingle, realx3x3, HostSpace>;
+using realx3x3Field_H 	= Field<VectorSingle, realx3x3, HostSpace>;*/
 
 // - no typedef on device (since word does not compile on CUDA)
 using wordField_H 		= Field<VectorSingle, word, HostSpace>;
 
 
 // host device fields
-using int8Field_HD 		= Field<VectorDual, int8>;
-
-using int16Field_HD 	= Field<VectorDual, int16>;
+/*using int8Field_HD 		= Field<VectorDual, int8>;
 
 using int32Field_HD 	= Field<VectorDual, int32>;
 
@@ -104,15 +97,13 @@ using realField_HD 		= Field<VectorDual, real>;
 
 using realx3Field_HD 	= Field<VectorDual, realx3>;
 
-using uint16x3Field_HD 	= Field<VectorDual, uint32x3>;
-
 using uint32x3Field_HD  = Field<VectorDual, uint32x3>;
 
 using int32x3Field_HD 	= Field<VectorDual, int32x3>;
 
 using int64x3Field_HD 	= Field<VectorDual, int64x3>;
 
-using realx3x3Field_HD 	= Field<VectorDual, realx3x3>;
+using realx3x3Field_HD 	= Field<VectorDual, realx3x3>;*/
 
 
 using wordField 		= Field<Vector, word , vecAllocator<word>>; 

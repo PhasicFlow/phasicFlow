@@ -6,7 +6,7 @@
 
 #include "types.hpp"
 #include "span.hpp"
-#include "processors.hpp"
+#include "IOPattern.hpp"
 
 namespace pFlow
 {
@@ -19,79 +19,132 @@ class dataIO
 
 public:
 
-	/**
-	 * Type of input/output
-	 * MasterProcessor: Read or write is done on master processor
-	 *    and the data on master processor is affected.
-	 * AllProcessorsDifferent: Read or write is done on all processors, 
-	 *    and each processor munipulates its own data.
-	 * AllProcessorsSimilar: Read is done on all processors but the read data
-	 *    is similar on processors. Write is done on master processor, since 
-	 *    all processors have the same copy of data. 
-	 */
-	enum IOType : int
-	{
-		MasterProcessor,
-		AllProcessorsDifferent,
-		AllProcessorsSimilar
-	};
+
+	static inline const uint64 ErrorReturn = static_cast<uint64>(-1);
+	
 protected:
 
-	IOType IOType_;
+	IOPattern ioPattern_;
+
+	uint64 lastPosWrite_ = 0;
+
+	uint64 lastPosRead_  = 0;
 
 	
 	bool writeDataToFileEndSTD(
-		const fileSystem& filePath, 
+		const word& wordPath, 
 		const span<unsigned char>& data);
 
 	bool writeDataToFileEndMPI(
-		const fileSystem& filePath, 
+		const word& wordPath, 
 		const span<unsigned char>& data);
 	
 	bool readDataSTD(
-		const fileSystem& filePath,
+		const word& wordPath,
 		const std::vector<uint64> chunkSizes,
 		span<unsigned char>& data,
 		uint64 binaryBlockStart);
 	
 	bool readDataMPI(
-		const fileSystem& filePath, 
+		const word& wordPath, 
 		const std::vector<uint64> chunkSizes,
 		span<unsigned char>& data,
 		uint64 binaryBlockStart);
 
 	bool readMetaMPI(
-		const fileSystem& filePath, 
+		const word& wordPath, 
 		std::vector<uint64>& chunkSizes,
+		uint64 startPosSearch,
 		uint64 &startPosBinaryBlock);
 
 	bool readMetaSTD(
-		const fileSystem& filePath, 
+		const word& wordPath, 
 		std::vector<uint64>& chunkSizes,
+		uint64 startPosSearch,
 		uint64 &startPosBinaryBlock);
+
+	bool waitForAllMPI();
+
+	bool maxReduction( uint64& src, uint64& dst);
+
+	bool BcastPos(uint64 & pos);
 
 public:
 
-	dataIO(IOType ioT)
+	dataIO(IOPattern::IOType iotype)
 	:
-		IOType_(ioT)
+		ioPattern_(iotype)
 	{}
 
 	~dataIO()=default;
 
 	template<typename T> 
 	bool writeDataEnd(
-		const fileSystem& filePath,
+		const word& wordPath,
 		const span<T>& data);
 
 	template<typename T>
+	bool writeAsciiEnd(
+		iOstream& os,
+		const span<T>& data);
+
+	template<typename T>
+	bool readDataBinary(
+		const word& wordPath, 
+		std::vector<T>& data,
+		uint64 startPos = 0);
+
+	template<typename T>
+	bool readAscii(
+		iIstream& is,
+		std::vector<T>& vec	);
+
+	template<typename T>
 	bool readData(
-		const fileSystem& filePath, 
-		std::vector<T>& data);
+		iIstream& is, 
+		std::vector<T>& vec,
+		bool resume = false); // resume only works for binary
+							  // for ascii, by default it starts from the current position
+
+
+	template<typename T>
+	bool writeData(iOstream& os,
+		const span<T>& data);
 
 	
-
 };
+
+template<>
+inline
+bool pFlow::dataIO::writeData<pFlow::word>
+(
+	iOstream& os,
+	const span<word>& data
+)
+{
+	if( !writeAsciiEnd(os, data) )
+    {
+        fatalErrorInFunction;
+        return false;
+    }
+	return true;	
+}
+
+template<>
+inline
+bool pFlow::dataIO::readData<pFlow::word>(
+	iIstream& is, 
+	std::vector<word>& vec,
+	bool resume)
+{
+	if(!readAscii(is, vec))
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+	return true;
+}
+
 
 }
 

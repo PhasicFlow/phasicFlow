@@ -33,6 +33,8 @@ Licence:
 #include "iOstream.hpp"
 #include "iIstream.hpp"
 
+#include "stdVectorHelper.hpp"
+
 #ifndef __RESERVE__
 #define __RESERVE__
 	struct RESERVE{};
@@ -40,7 +42,7 @@ Licence:
 
 namespace pFlow
 {
-
+ 
 
 template<typename T, typename Allocator>
 class Vector;
@@ -48,18 +50,7 @@ class Vector;
 #include "VectorFwd.hpp"
 
 
-template <class T>
-class noConstructAllocator
-    : public std::allocator<T>
-{
-public:
-    using std::allocator<T>::allocator;
 
-    template <class U, class... Args> void construct(U*, Args&&...) {}
-};
-
-template<typename T>
-using vecAllocator = std::allocator<T>;
 
 template<typename T, typename Allocator = vecAllocator<T> >
 class Vector
@@ -351,19 +342,20 @@ public:
 
 	inline VectorType operator -()const;
 
-	
-	bool readVector(iIstream& is, size_t len=0);
+	/// Read vector (assume ASCII in input)
+	bool readVector(iIstream& is, IOPattern::IOType iotype);
 
-	bool writeVector(iOstream& os) const;
+	/// write vector 
+	bool writeVector(iOstream& os, IOPattern::IOType iotype) const;
 
-	bool read(iIstream& is)
+	bool read(iIstream& is, IOPattern::IOType iotype)
 	{
-		return readVector(is);
+		return readVector(is, iotype);
 	}
 
-	bool write(iOstream& os)const
+	bool write(iOstream& os, IOPattern::IOType iotype)const
 	{
-		return writeVector(os);
+		return writeVector(os, iotype);
 	}
 
 };
@@ -372,7 +364,7 @@ public:
 template<typename T, typename Allocator>
 inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
 {
-	if( !ivec.readVector(is) )
+	if( !ivec.readVector(is, IOPattern::MasterProcessor) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;
@@ -382,17 +374,14 @@ inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
 
 template<typename T, typename Allocator> 
 inline iOstream& operator << (iOstream& os, const Vector<T, Allocator>& ovec )
-{
-	
-	if( !ovec.writeVector(os) )
+{	
+	if( !ovec.writeVector(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber());
 		fatalExit;
 	}
-
 	return os; 
 }
-
 
 
 } // pFlow

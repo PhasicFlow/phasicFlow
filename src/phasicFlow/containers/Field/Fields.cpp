@@ -23,7 +23,7 @@ Licence:
 
 template class pFlow::Field<pFlow::VectorSingle, pFlow::int8>;
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>;
+/*template class pFlow::Field<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>;
 
 template class pFlow::Field<pFlow::VectorSingle, pFlow::int16>;
 
@@ -76,6 +76,6 @@ template class pFlow::Field<pFlow::VectorDual, pFlow::realx3>;
 template class pFlow::Field<pFlow::VectorDual, pFlow::realx3x3>;
 
 
-template class pFlow::Field<pFlow::Vector, pFlow::word, pFlow::vecAllocator<pFlow::word>>;
+template class pFlow::Field<pFlow::Vector, pFlow::word, pFlow::vecAllocator<pFlow::word>>;*/
 
 

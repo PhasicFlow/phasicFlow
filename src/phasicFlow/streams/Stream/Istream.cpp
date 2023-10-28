@@ -899,6 +899,28 @@ void pFlow::Istream::rewind()
     stdStream().rdbuf()->pubseekpos(0, std::ios_base::in);
 }
 
+void pFlow::Istream::seek(size_t pos)
+{
+    stdStream().clear();  // Clear the iostate error state flags
+    setGood();            // Sync local copy of iostate
+    resetPutBack();
+    // pubseekpos() rather than seekg() so that it works with gzstream
+    stdStream().rdbuf()->pubseekpos(pos, std::ios_base::in);
+}
+
+size_t pFlow::Istream::tell() 
+{
+
+    auto pos = static_cast<size_t>(stdStream().tellg());
+    if(stdStream().fail())
+    {
+        fatalErrorInFunction<<
+        "Error in getting current position from stream "<<
+        this->name()<<endl;
+        fatalExit;
+    }
+    return pos;
+}
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

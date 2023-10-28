@@ -23,111 +23,21 @@ template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::readVector
 (
 	iIstream& is,
-	size_t len
+	IOPattern::IOType iotype
 )
 {
-	
-	if(is.isBinary() && !std::is_same_v<T,word>)
-	{
-		this->resize(len);
-		is.read(reinterpret_cast<char*>(this->data()), this->size()*sizeof(T));	
-	}
-	else
-	{
-		this->clear();
-		is.fatalCheck(FUNCTION_NAME);
-
-		token firstToken(is);
-
-		T val{};
-		if( firstToken.isPunctuation() ) // start of vector 
-		{
-			if(firstToken != token::BEGIN_LIST)
-			{
-				warningInFunction
-				<< "expected token "<< token::BEGIN_LIST 
-				<< " but found "<< firstToken ;
-				return false;
-
-			}
-
-			token lastToken(is);
-			
-			
-			is.fatalCheck(FUNCTION_NAME);
-			
-			while 
-				( !(
-						lastToken.isPunctuation()
-	             	&& lastToken == token::END_LIST
-	             	 
-	             	) 
-	            )
-			{
-
-				is.putBack(lastToken);
-				
-				is >> val;
-				this->push_back(val);
-				
-				is >> lastToken;
-				is.fatalCheck(FUNCTION_NAME);
-			}
-
-		} else
-		{
-			warningInFunction
-			<< "expected token "<< token::BEGIN_LIST 
-			<< " but found "<< firstToken ;
-			return false;
-		}
-	}
-
-	return true;
+	return readStdVector(is, vectorField(), iotype);
 }
 
 
 template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::writeVector
 (
-	iOstream& os
+	iOstream& os,
+	IOPattern::IOType iotype
 ) const
 {
-	
-	span<T> s( const_cast<T*>(this->data()), this->size());
-	os<<s;
-
-	// start of 
-	/*if( os.isBinary() && !std::is_same_v<T,word>)
-	{
-		os.write(reinterpret_cast<const char*>(this->data()), this->size()*sizeof(T));
-	}
-	else
-	{
-
-		auto len = size();
-		auto stride  = getVectorStride(len);
-		os << token::BEGIN_LIST;
-		size_t i = 0;
-		while( i<len )
-		{
-
-			os << this->operator[](i++);
-			for(size_t j=0; j<stride-1 && i<len; j++ )
-			{
-				os << token::SPACE << this->operator[](i++);	
-			}
-
-		 	if(i<len)
-		 		os<< token::NL;
-		}
-	    
-	    os << token::END_LIST;
-
-	    os.check(FUNCTION_NAME);
-	}*/
-
-    return true;
+	return writeStdVector(os, vectorField(), iotype);	
 }
 
 /*template<typename T, typename Allocator>

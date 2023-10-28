@@ -26,7 +26,6 @@ Licence:
 
 
 #include "globalSettings.hpp"
-#include "typeInfo.hpp"
 #include "types.hpp"
 #include "error.hpp"
 #include "indexContainer.hpp"
@@ -35,7 +34,7 @@ Licence:
 #include "span.hpp"
 #include "Vector.hpp"
 #include "phasicFlowKokkos.hpp"
-
+#include "dataIO.hpp"
 
 
 #ifndef __RESERVE__
@@ -240,7 +239,7 @@ public:
 		:
 			VectorSingle(src.name(), src)
 		{	
-			copy(deviceVector(), src.deviceVector());
+			//copy(deviceVector(), src.deviceVector());
 		}
 
 		/// Copy construct with a new name (perform deep copy)
@@ -577,34 +576,27 @@ public:
 
 	//// - IO operations
 
-		/// Read vector from is stream (ASCII or Binary)
-		/// For binary read, len should be provided 
+		/// Read vector from stream (ASCII)
 		FUNCTION_H
-		bool readVector(iIstream& is,	size_t len=0)
+		bool read(iIstream& is, IOPattern::IOType iotype)
 		{
-			Vector<T> vecFromFile;
-			if( !vecFromFile.readVector(is,len) ) return false;
+			std::vector<T> vecFromFile;
+			if(! readStdVector(is, vecFromFile, iotype)) return false;
 
 			this->assign(vecFromFile);
 
 			return true;
 		}
 
-		/// Read vector from stream (ASCII)
+		/// Write the vector to os
 		FUNCTION_H
-		bool read(iIstream& is)
-		{
-			return readVector(is);
-		}
-
-		/// Write the vector to os (ASCII or Binary)
-		FUNCTION_H
-		bool write(iOstream& os)const
+		bool write(iOstream& os, IOPattern::IOType iotype)const
 		{
 			auto hVec = hostVector();
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
-			os<<sp;
-			return true;
+			
+			return writeSpan(os, sp, iotype);
+			
 		}
 
 }; // class VectorSingle
@@ -612,7 +604,7 @@ public:
 template<typename T, typename MemorySpace>
 inline iIstream& operator >> (iIstream & is, VectorSingle<T, MemorySpace> & ivec )
 {
-	if( !ivec.read(is) )
+	if( !ivec.read(is, IOPattern::MasterProcessor ) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;
@@ -624,7 +616,7 @@ template<typename T, typename MemorySpace>
 inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& ovec )
 {
 	
-	if( !ovec.write(os) )
+	if( !ovec.write(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber());
 		fatalExit;
@@ -632,8 +624,6 @@ inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& 
 
 	return os; 
 }
-
-
 
 
 } // - pFlow

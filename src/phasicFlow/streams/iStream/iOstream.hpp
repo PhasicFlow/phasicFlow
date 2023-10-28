@@ -144,7 +144,7 @@ public:
         /// Write the flag to indicate the start of a binary block
         virtual iOstream& writeBinaryBlockFlag();
         
-    
+        virtual void seek(size_t pos) = 0;
     //// - Indent 
 
         /// Add indentation characters
@@ -237,6 +237,12 @@ public:
 
 
     ////- Stream state functions
+
+        /// Add a new line and flush stream 
+        virtual void startOfBinaryStreaming() =0;
+
+        /// Reach end of file add a new line and flush stream 
+        virtual void endOfBinaryStreaming() = 0 ;
 
         /// Flush stream
         virtual void flush() = 0;

@@ -55,19 +55,27 @@ public:
 		FUNCTION_HD
 		line(const realx3 &lp1, const realx3 &lp2);
 
+		INLINE_FUNCTION_HD
+		line(const realx3 &v21, const realx3 &p1, bool)
+		:
+			v21_(v21),
+			p1_(p1)
+		{}
+
+
 		FUNCTION_H
 		line(const dictionary& dict);
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		line(const line& src) = default;
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		line(line&& src) = default;
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		line& operator = (const line&) = default;
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		line& operator = (line&&) = default;
 
 	

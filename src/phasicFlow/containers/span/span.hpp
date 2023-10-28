@@ -159,6 +159,7 @@ public:
     INLINE_FUNCTION_H
     bool writeASCII(iOstream& os) const
     {
+        os<< size()<<endl;
         os << token::BEGIN_LIST;
         if(size()>0)
         {
@@ -177,33 +178,21 @@ public:
         return true;
     }
 
-    /// Write in Binray format, can be used for numeral types (Not word or similar ones)
-    INLINE_FUNCTION_H
-    bool writeBinary(iOstream& os) const
-    {
-        os.write(reinterpret_cast<const char*>(data_), this->size()*sizeof(T));
-        os.check(FUNCTION_NAME);
-        return true;
-    }
 
 };
+
 
 template<typename T>
 inline 
 iOstream& operator<<(iOstream& os, const span<T>& s)
 {
 
-    if( os.isBinary() && !std::is_same_v<T,word>)
-    {
-        s.writeBinary(os);
-    }
-    else
-    {
-        s.writeASCII(os);
-    }
+    s.writeASCII(os);
 
     return os;
 }
+
+
 
 } // pFlow
 

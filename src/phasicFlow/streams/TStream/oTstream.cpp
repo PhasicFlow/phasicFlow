@@ -173,6 +173,10 @@ pFlow::iOstream& pFlow::oTstream::write
     return *this;
 }
 
+void pFlow::oTstream::seek(size_t pos) 
+{
+    notImplementedFunction;
+}
 
 void pFlow::oTstream::append(const token& tok)
 {

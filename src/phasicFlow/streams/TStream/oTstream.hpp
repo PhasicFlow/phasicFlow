@@ -132,6 +132,8 @@ public:
         /// Write double
         virtual iOstream& write(const size_t val) override;
 
+        void seek(size_t pos) override;
+
         /// Write a block of binray data
         iOstream& write(
             const char* binaryData, 
@@ -155,6 +157,14 @@ public:
 
         /// Add indentation characters
         virtual void indent()
+        {}
+
+        /// Add a new line and flush stream 
+        virtual void startOfBinaryStreaming()
+        {}
+
+        /// Reach end of file add a new line and flush stream 
+        virtual void endOfBinaryStreaming()
         {}
 
         /// Flush stream

@@ -130,7 +130,11 @@ public:
         iIstream& read(char* buffer, std::streamsize count) override;
 
         /// Rewind the stream so that it may be read again
-        virtual void rewind();
+        virtual void rewind()override;
+
+        void seek(size_t pos) override;
+
+        size_t tell() override;
 
         /// reset the iTstream and make the stream empty
         virtual void reset();

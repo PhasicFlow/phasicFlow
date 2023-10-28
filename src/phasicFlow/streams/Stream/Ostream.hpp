@@ -132,11 +132,19 @@ public:
 
         iOstream& writeBinaryBlockFlag() override;
 
+        void seek(size_t pos) override;
+
         /// Add indentation characters
         void indent() override;
 
         /// Set stream flags
         ios_base::fmtflags flags(const ios_base::fmtflags f) override;
+
+        /// Add a new line and flush stream 
+        void startOfBinaryStreaming() override;
+
+        /// Reach end of file add a new line and flush stream 
+        void endOfBinaryStreaming() override ;
 
         /// Flush stream
         void flush() override;

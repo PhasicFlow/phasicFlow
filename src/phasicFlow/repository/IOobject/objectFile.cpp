@@ -30,11 +30,11 @@ pFlow::objectFile::objectFile
 
 pFlow::objectFile::objectFile
 (
-	const word& 			name,
-	const fileSystem& 		localPath,
-	const readFlag&   		rf, 
-	const writeFlag&  		wf,
-	bool  diffDataOnProcessors,
+	const word& 		name,
+	const fileSystem& 	localPath,
+	const readFlag&   	rf, 
+	const writeFlag&  	wf,
+	IOPattern::IOType	ioType,
 	bool  rwHdr
 )
 :
@@ -42,7 +42,7 @@ pFlow::objectFile::objectFile
 	rFlag_(rf),
 	wFlag_(wf),
 	localPath_(localPath),
-	differentDataOnProcessors_(diffDataOnProcessors),
+	ioPattern_(ioType),
 	readWriteHeader_(rwHdr)	
 {
 }

@@ -41,6 +41,18 @@ bool pFlow::fileSystem::checkFileName(const word& name)
 }
 
 
+/// From full path 
+pFlow::fileSystem::fileSystem(const word & wPath)
+:
+	path_(wPath),
+	isDir_(std::filesystem::is_directory(path_))
+{
+	std::cout<<"file name is " << fileName()<<std::endl;
+	if( !isDir_ && !checkFileName(fileName()))
+	{
+		fatalExit;
+	}
+}
 
 pFlow::fileSystem::fileSystem( const word& dir, const word& file)
 {
@@ -74,10 +86,9 @@ pFlow::fileSystem::fileSystem( const char* dir, const char* file)
 
 pFlow::fileSystem::fileSystem( const pathType& path )
 :
-	path_(path)
-{
-	isDir_ = isDirectory(*this);
-}
+	path_(path),
+	isDir_(std::filesystem::is_directory(path_))
+{}
 
 pFlow::fileSystem pFlow::fileSystem::dirPath() const
 {
@@ -175,9 +186,7 @@ bool pFlow::fileSystem::dirExist
 	
 }
 
-bool pFlow::fileSystem::exist
-(
-)const
+bool pFlow::fileSystem::exist()const
 {
 	try
 	{
@@ -321,7 +330,7 @@ pFlow::fileSystemList pFlow::subDirectories
 		auto dOps = std::filesystem::directory_options::skip_permission_denied;
 		for( auto& subPath: std::filesystem::directory_iterator(path.path(), dOps) )
 		{
-			if(isDirectory( subPath.path() ) )
+			if(isDirectory( fileSystem(subPath.path()) ) )
 			{
 				dirs.emplace_back(subPath.path());
 			}

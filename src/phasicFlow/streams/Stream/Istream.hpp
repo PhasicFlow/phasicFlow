@@ -156,7 +156,12 @@ public:
     size_t findBinaryBlockStart()override;
 
     /// Rewind the stream so that it may be read again
-    virtual void rewind();
+    void rewind() override;
+
+    void seek(size_t pos) override;
+
+    /// Return current position indicator 
+    size_t tell() override;
 
 
     /// Set stream flags

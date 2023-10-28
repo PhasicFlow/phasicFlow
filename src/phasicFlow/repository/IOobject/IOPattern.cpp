@@ -17,25 +17,15 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#include "processors.hpp"
+#include "IOPattern.hpp"
 
-#include "Vectors.hpp"
-
-// instantiation just for numeral types 
-
-/*template class pFlow::Vector<pFlow::int8>;
-
-template class pFlow::Vector<pFlow::int32>;
-
-template class pFlow::Vector<pFlow::uint32>;
-
-template class pFlow::Vector<pFlow::real>;
-
-template class pFlow::Vector<pFlow::realx3>;
-
-template class pFlow::Vector<pFlow::realx3x3>;*/
-
-
-
- 
-
+pFlow::IOPattern::IOPattern( IOType iotype)
+:
+	ioType_(iotype),
+	globalSize_(processors::globalSize()),
+	globalRank_(processors::globalRank()),
+	isMaster_(processors::isMaster()),
+	isParallel_(processors::isParallel())
+{}
 

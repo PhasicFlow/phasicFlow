@@ -309,6 +309,10 @@ void pFlow::iTstream::rewind()
     setGood();
 }
 
+void pFlow::iTstream::seek(size_t pos) 
+{
+    notImplementedFunction;
+}
 
 void pFlow::iTstream::reset()
 {
@@ -316,6 +320,12 @@ void pFlow::iTstream::reset()
     tokenList_.clear();
     setFirstToken();
     setGood();
+}
+
+size_t pFlow::iTstream::tell() 
+{
+    notImplementedFunction;
+    return -1;
 }
 
 const pFlow::tokenList& pFlow::iTstream::tokens()const

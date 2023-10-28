@@ -82,14 +82,14 @@ public:
 	~processors();
 	
 	/// Master processors number (globaly in MPI).
-	static
+	static inline
 	int masterNo()
 	{
 		return 0;
 	}
 
 	/// Is this a parallel MPI run.
-	static
+	static inline
 	bool isParallel()
 	{
 		return processors::globalSize()>1;
@@ -104,21 +104,21 @@ public:
 	bool isFinalized();
 	
 	/// Is this processor the master processor?
-	static
+	static inline
 	bool isMaster()
 	{
 		return processors::globalRank() == processors::masterNo();
 	}
 	
 	/// Global size of processors
-	static
+	static inline
 	int globalSize()
 	{
 		return globalSize_;
 	}
 	
 	/// Rank of the processor in the global MPI
-	static
+	static inline
 	int globalRank()
 	{
 		return globalRank_;

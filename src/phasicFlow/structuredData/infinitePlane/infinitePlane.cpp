@@ -18,24 +18,47 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "Vectors.hpp"
+#include "infinitePlane.hpp"
 
-// instantiation just for numeral types 
+pFlow::infinitePlane::infinitePlane
+(
+  const realx3& p1, 
+  const realx3& p2, 
+  const realx3& p3
+)
+{
+	auto ln = cross(p2-p1, p3-p1);
 
-/*template class pFlow::Vector<pFlow::int8>;
+	if( equal(ln.length(),0.0) )
+	{
+		fatalErrorInFunction<<
+		"invalid input to form a infinte wall "<< realx3x3(p1,p2,p3)<<endl;
+		fatalExit;
+	}
+	normal_ = normalize(ln);
+	d_ = -dot(normal_, p1);
+}
 
-template class pFlow::Vector<pFlow::int32>;
+bool pFlow::infinitePlane::write(iOstream& os)const
+{
+	os.writeWordEntry("normal", normal_);
+	os.writeWordEntry("d", d_);
+	return os.check(FUNCTION_NAME);
+}
 
-template class pFlow::Vector<pFlow::uint32>;
+bool pFlow::infinitePlane::read(iIstream & is)
+{
+	if(!is.nextData<realx3>("normal", normal_)) return false;
+	if(!is.nextData<real>("d", d_)) return false;
+	return true;
+}
 
-template class pFlow::Vector<pFlow::real>;
-
-template class pFlow::Vector<pFlow::realx3>;
-
-template class pFlow::Vector<pFlow::realx3x3>;*/
-
-
-
- 
-
-
+bool pFlow::infinitePlane::validPlane3
+(
+  const realx3& p1, 
+  const realx3& p2, 
+  const realx3& p3
+)
+{
+  return !equal(cross(p2-p1, p3-p1).length(), 0.0);
+}

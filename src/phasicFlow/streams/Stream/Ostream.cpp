@@ -258,6 +258,10 @@ pFlow::iOstream& pFlow::Ostream::writeBinaryBlockFlag()
     return *this;
 }
 
+void pFlow::Ostream::seek(size_t pos)
+{
+    os_.seekp(pos, std::ios_base::cur);
+}
 
 void pFlow::Ostream::indent()
 {
@@ -267,6 +271,18 @@ void pFlow::Ostream::indent()
     }
 }
 
+void pFlow::Ostream::startOfBinaryStreaming()
+{
+    this->endl();
+    this->flush();
+}
+
+void pFlow::Ostream::endOfBinaryStreaming()
+{
+    os_.seekp(0, std::ios_base::end);
+    this->endl();
+    this->flush();
+}
 
 void pFlow::Ostream::flush()
 {

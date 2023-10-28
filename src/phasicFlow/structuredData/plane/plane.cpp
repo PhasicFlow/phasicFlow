@@ -18,24 +18,51 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "Vectors.hpp"
+#include "plane.hpp"
 
-// instantiation just for numeral types 
+pFlow::plane::plane
+(
+	const realx3& p1, 
+	const realx3& p2, 
+	const realx3& p3, 
+	const realx3& p4
+)
+:
+	infinitePlane(p1,p2,p3),
+	p1_(p1),
+	p2_(p2),
+	p3_(p3),
+	p4_(p4)
+{
 
-/*template class pFlow::Vector<pFlow::int8>;
-
-template class pFlow::Vector<pFlow::int32>;
-
-template class pFlow::Vector<pFlow::uint32>;
-
-template class pFlow::Vector<pFlow::real>;
-
-template class pFlow::Vector<pFlow::realx3>;
-
-template class pFlow::Vector<pFlow::realx3x3>;*/
+	if(!pointOnPlane(p4))
+	{
+		fatalErrorInFunction<<
+		"points "<< realx4x3(p1,p2,p3,p4)<<" do not form a planner surface"<<endl;
+		fatalExit;
+	}
+}
 
 
+pFlow::plane pFlow::plane::parallelPlane(real distance)const
+{
+	auto pp1 = line(normal_, p1_, true).point(distance);
+	auto pp2 = line(normal_, p2_, true).point(distance);
+	auto pp3 = line(normal_, p3_, true).point(distance);
+	auto pp4 = line(normal_, p4_, true).point(distance);
 
- 
+	return plane(pp1, pp2, pp3, pp4);
+}
 
-
+bool pFlow::plane::validPlane4
+(
+	const realx3& p1, 
+	const realx3& p2, 
+	const realx3& p3, 
+	const realx3& p4
+)
+{
+	if( !validPlane3(p1,p2,p3)) return false;
+	if( !infinitePlane(p1,p2,p3).pointOnPlane(p4)) return false;
+	return true;
+}
