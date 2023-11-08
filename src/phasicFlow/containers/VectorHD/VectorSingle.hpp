@@ -599,12 +599,38 @@ public:
 			
 		}
 
+		template<typename HostMask>
+		FUNCTION_H
+		bool write(iOstream& os, IOPattern::IOType iotype, const HostMask& mask)const
+		{
+			auto hVec = hostVector();
+			
+			auto numActive = mask.numActive();
+			std::vector<T> finalField;
+			finalField.clear();
+			finalField.reserve(numActive);
+			
+			uint32 start 	= mask.activeRange().start();
+			uint32 end 		= mask.activeRange().end();
+			
+			for(uint32 i=start; i<end; i++ )
+			{
+				if( mask() )
+					finalField.push_back(hVec[i]);
+			}
+
+			auto sp = span<T>( finalField.data(), finalField.size());
+
+			return writeSpan(os, sp, iotype);
+
+		}
+
 }; // class VectorSingle
 
 template<typename T, typename MemorySpace>
 inline iIstream& operator >> (iIstream & is, VectorSingle<T, MemorySpace> & ivec )
 {
-	if( !ivec.read(is, IOPattern::MasterProcessor ) )
+	if( !ivec.read(is, IOPattern::MasterProcessorOnly ) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;

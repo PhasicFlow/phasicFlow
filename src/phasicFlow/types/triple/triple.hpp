@@ -231,7 +231,17 @@ struct triple
 };
 
 template<typename T>
-bool INLINE_FUNCTION_HD equal( const triple<T>& opr1, const triple<T>& opr2 );
+bool INLINE_FUNCTION_HD equal( const triple<T>& opr1, const triple<T>& opr2);
+
+
+bool
+INLINE_FUNCTION_HD
+equal(const triple<real>& opr1, const triple<real>& opr2, real tol)
+{
+	return 	equal( opr1.x(), opr2.x(), tol ) && 
+			equal( opr1.y(), opr2.y(), tol ) && 
+			equal( opr1.z(), opr2.z(), tol );
+}
 
 
 } /// end of pFlow

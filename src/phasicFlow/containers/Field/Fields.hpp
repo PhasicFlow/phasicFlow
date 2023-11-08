@@ -34,7 +34,7 @@ using int8Field_D 		= Field<VectorSingle, int8>;
 
 using int8Field_H 		= Field<VectorSingle, int8, HostSpace>;
 
-/*using int32Field_D 		= Field<VectorSingle, int32>;
+using int32Field_D 		= Field<VectorSingle, int32>;
 
 using int32Field_H 		= Field<VectorSingle, int32, HostSpace>;
 
@@ -42,13 +42,17 @@ using int64Field_D 		= Field<VectorSingle, int64>;
 
 using int64Field_H 		= Field<VectorSingle, int64, HostSpace>;
 
+using uint8Field_D     = Field<VectorSingle, uint8>;
+
+using uint8Field_H     = Field<VectorSingle, uint8, HostSpace>;
+
 using uint32Field_D 	= Field<VectorSingle, uint32>;
 
 using uint32Field_H 	= Field<VectorSingle, uint32, HostSpace>;
 
-using labelField_D 		= Field<VectorSingle, label>;
+using uint64Field_D 		= Field<VectorSingle, uint64>;
 
-using labelField_H 		= Field<VectorSingle, label, HostSpace> ;
+using uint64Field_H 		= Field<VectorSingle, uint64, HostSpace> ;
 
 using realField_D 		= Field<VectorSingle, real>;
 
@@ -58,25 +62,9 @@ using realx3Field_D 	= Field<VectorSingle, realx3>;
 
 using realx3Field_H 	= Field<VectorSingle, realx3, HostSpace>;
 
-using uint16x3Field_D 	= Field<VectorSingle, uint16x3>;
-
-using uint16x3Field_H 	= Field<VectorSingle, uint16x3, HostSpace>;
-
-using uint32x3Field_D   = Field<VectorSingle, uint32x3>;
-
-using uint32x3Field_H   = Field<VectorSingle, uint32x3, HostSpace>;
-
-using int32x3Field_D 	= Field<VectorSingle, int32x3>;
-
-using int32x3Field_H 	= Field<VectorSingle, int32x3, HostSpace>;
-
-using int64x3Field_D 	= Field<VectorSingle, int64x3>;
-
-using int64x3Field_H 	= Field<VectorSingle, int64x3, HostSpace>;
-
 using realx3x3Field_D 	= Field<VectorSingle, realx3x3>;
 
-using realx3x3Field_H 	= Field<VectorSingle, realx3x3, HostSpace>;*/
+using realx3x3Field_H 	= Field<VectorSingle, realx3x3, HostSpace>;
 
 // - no typedef on device (since word does not compile on CUDA)
 using wordField_H 		= Field<VectorSingle, word, HostSpace>;

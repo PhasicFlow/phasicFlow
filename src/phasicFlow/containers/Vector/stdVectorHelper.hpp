@@ -57,9 +57,15 @@ bool writeSpan(
     IOPattern::IOType iotype)
 {
    
-   dataIO io(iotype);
+   auto ioPtr = dataIO::create(iotype, IOPattern::exeMode());
 
-   if(!io.writeData(os, sp))
+   if(!ioPtr)
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+   if(!ioPtr().writeData(os, sp))
    {
    		fatalErrorInFunction;
    		return false;
@@ -92,9 +98,15 @@ bool readStdVector
 	IOPattern::IOType iotype 
 )
 {
-	dataIO io(iotype);
+	auto ioPtr = dataIO::create(iotype, IOPattern::exeMode());
 
-	if(!io.readData(is, vec))
+	if(!ioPtr)
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+	if(!ioPtr().readData(is, vec))
 	{
 		fatalErrorInFunction;
 		return false;
@@ -118,7 +130,7 @@ iOstream& operator<<( iOstream& os, const std::vector<T,Allocator>& vec)
 template<typename T, typename Allocator>
 iIstream& operator>>(iIstream& is, std::vector<T,Allocator>& vec)
 {
-	if( !readStdVector(is,vec, IOPattern::MasterProcessor))
+	if( !readStdVector(is,vec, IOPattern::MasterProcessorOnly))
 	{
 		fatalErrorInFunction;
 		fatalExit;

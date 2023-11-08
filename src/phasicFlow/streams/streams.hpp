@@ -32,13 +32,6 @@ namespace pFlow
 
 }
 
-#define Red_Text(text)     	redColor<<text<<defaultColor
-#define Yellow_Text(text)  	yellowColor<<text<<defaultColor
-#define Blue_Text(text)    	blueColor<<text<<defaultColor
-#define Green_Text(text)   	greenColor<<text<<defaultColor
-#define Magenta_Text(text) 	magentaColor<<text<<defaultColor
-#define Cyan_Text(text) 		cyanColor<<text<<defaultColor
-#define Bold_Text(text) 		boldChar<<text<<defaultColor
 
 #define INFORMATION pFlow::mOutput<<boldChar<<magentaColor<<"> INFO: "<<defaultColor<<magentaColor
 #define END_INFO defaultColor<<pFlow::endl

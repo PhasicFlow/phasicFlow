@@ -49,11 +49,11 @@ public:
 
 	using iterator 		= typename listType::iterator;
 	
-	using constIterator = typename listType::const_iterator;
+	using const_iterator = typename listType::const_iterator;
 	
 	using reference 	= typename listType::reference;
 	
-	using constReference= typename listType::const_reference;
+	using const_reference= typename listType::const_reference;
 	
 	using initList 		= typename std::initializer_list<T>;
 	
@@ -62,12 +62,7 @@ public:
 
 protected:
 
-	// position of ith element
-	auto pos(size_t i);
-
-	// position of ith element 
-	const auto pos(size_t i)const;
-
+	
 	static inline size_t getListStride(const size_t& len)
 	{
 		size_t stride = 1;
@@ -114,30 +109,19 @@ public:
 
 
 		// - copy construct
-		List(const List& src):
-			listType(src)
-		{}
+		List(const List& src) = default;
+			
 
 		// - move construct
-		List( List && mv)
-		:
-			listType(std::move(mv))
-		{}
-
+		List( List && mv) = default;
+		
 		// - copy assignment
-		ListType& operator=(const ListType& rhs)
-		{
-			listType::operator=(rhs);
-			return *this;
-		}
+		ListType& operator=(const ListType& rhs) = default;
+		
 
 		// - move assignment
-		ListType& operator=(ListType&& rhs)
-		{
-			listType::operator=(std::move(rhs));
-			return *this;
-		}	
-
+		ListType& operator=(ListType&& rhs) = default;
+		
 
 		uniquePtr<ListType> clone()const{
 			return makeUnique<ListType>(*this);
@@ -162,6 +146,12 @@ public:
 		// - size of container
 		size_t size()const;
 		
+		// position of ith element
+		auto pos(size_t i, bool noError = false);
+
+		// position of ith element 
+		const auto pos(size_t i, bool noError = false)const;
+
 		// - access to ith element
 		//   fatal exit if out of range
 		T& operator[](size_t i);
@@ -172,7 +162,7 @@ public:
 		
 		// - find the position of the first element with value val
 		//   cend() if not found
-		constIterator find(const T& val) const;
+		const_iterator find(const T& val) const;
 		
 		// - find the position of the first element with value val
 		//    end() if not found

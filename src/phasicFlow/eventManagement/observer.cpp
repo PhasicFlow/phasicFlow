@@ -17,22 +17,43 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#include "processors.hpp"
-#include "IOPattern.hpp"
 
-pFlow::IOPattern::IOPattern( IOType iotype)
-:
-	ioType_(iotype),
-	globalSize_(processors::globalSize()),
-	globalRank_(processors::globalRank()),
-	isMaster_(processors::isMaster()),
-	isParallel_(processors::isParallel())
+#include "observer.hpp"
+#include "subscriber.hpp" 
+
+pFlow::observer::observer():
+	subscriber_(nullptr)
 {}
 
-pFlow::word pFlow::IOPattern::exeMode()
+pFlow::observer::observer
+(
+	const subscriber* subscrbr,
+	message msg
+)
+:
+	subscriber_(subscrbr),
+	message_(msg)
 {
-    if(processors::isParallel())
-    	return word("MPI");
-    else
-    	return word("NoMPI");
+	if(subscriber_)
+	{
+		if(!subscriber_->subscribe(msg, this))
+		{
+			fatalErrorInFunction<<
+			"error in subscribing an observer"<<endl;
+			fatalExit;
+		}
+	}
+}
+
+pFlow::observer::~observer()
+{
+	if( subscriber_)
+		subscriber_->unsubscribe(this);
+	invalidateSubscriber();
+}
+
+bool pFlow::observer::addToSubscriber(const subscriber& subscrbr)
+{
+	subscriber_ = &subscrbr;
+	return subscriber_->subscribe(message_, this);
 }

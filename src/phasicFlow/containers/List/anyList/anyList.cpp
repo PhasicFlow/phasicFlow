@@ -17,22 +17,27 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#include "processors.hpp"
-#include "IOPattern.hpp"
 
-pFlow::IOPattern::IOPattern( IOType iotype)
-:
-	ioType_(iotype),
-	globalSize_(processors::globalSize()),
-	globalRank_(processors::globalRank()),
-	isMaster_(processors::isMaster()),
-	isParallel_(processors::isParallel())
-{}
 
-pFlow::word pFlow::IOPattern::exeMode()
+#include "anyList.hpp"
+
+
+size_t pFlow::anyList::size()const
 {
-    if(processors::isParallel())
-    	return word("MPI");
-    else
-    	return word("NoMPI");
+	return anyList_.size();
+}
+
+bool pFlow::anyList::empty()const
+{
+	return size()==0;
+}
+
+bool pFlow::anyList::contains(const word& name)const
+{
+	return names_.search(name);
+}
+
+const pFlow::wordList& pFlow::anyList::names()const
+{
+	return names_;
 }

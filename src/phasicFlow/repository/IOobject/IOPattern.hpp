@@ -22,7 +22,8 @@ Licence:
 #define __IOPattern_hpp__
 
 
-#include "processors.hpp"
+
+#include "types.hpp"
 
 namespace pFlow
 {
@@ -52,7 +53,9 @@ public:
 	{
 		MasterProcessorOnly			= 0,
 		AllProcessorsSimilar 		= 1,
-		MasterProcessorDistribute	= 4
+		MasterProcessorDistribute	= 4,
+		AllProcessorsDifferent  = 8 // this is used for << and >> operators for 
+									// standard input and output streams 
 	};
 
 protected:
@@ -96,6 +99,12 @@ public:
 	}
 
 	inline
+	bool isAllProcessorsDifferent()const
+	{
+		return ioType_ == AllProcessorsDifferent;
+	}
+
+	inline
 	bool isMaster()const
 	{
 		return isMaster_;
@@ -110,7 +119,7 @@ public:
 	inline
 	bool thisProcReadData()const
 	{
-		if(isMasterProcessor() && !isMaster())return false;
+		if(isMasterProcessorOnly() && !isMaster())return false;
 		if(isMasterProcessorDistribute() && !isMaster()) return false;
 		return true;
 	}
@@ -118,6 +127,7 @@ public:
 	inline
 	bool thisProcWriteData()const
 	{
+		if(isAllProcessorsDifferent()) return true;
 		return isMaster();
 	}
 
@@ -144,6 +154,10 @@ public:
 	{
 		return globalRank_;
 	}
+
+	static 
+	word exeMode();
+
 
 };
 

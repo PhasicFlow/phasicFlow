@@ -364,7 +364,7 @@ public:
 template<typename T, typename Allocator>
 inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
 {
-	if( !ivec.readVector(is, IOPattern::MasterProcessor) )
+	if( !ivec.readVector(is, IOPattern::MasterProcessorOnly) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;

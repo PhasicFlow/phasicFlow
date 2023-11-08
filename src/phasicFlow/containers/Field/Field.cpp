@@ -216,10 +216,14 @@ bool pFlow::Field<VectorField, T, PropType>::write(
 	IOPattern::IOType iotype)const
 {
 
-	
 	os.writeWordKeyword(fieldKey_)<<endl;
-	VectorType::write(os, iotype);
+
+	if(!os.check(FUNCTION_NAME))return false;
+
+	if(!VectorType::write(os, iotype)) return false;
+
 	os.endEntry();
+	if(!os.check(FUNCTION_NAME))return false;
 
 	return true;
 }

@@ -18,100 +18,134 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __box_hpp__
-#define __box_hpp__
+#ifndef __domain_hpp__
+#define __domain_hpp__
 
-#include "types.hpp"
-#include "dictionary.hpp"
-#include "iIstream.hpp"
-#include "iOstream.hpp"
+
+#include "box.hpp"
+#include "plane.hpp"
 
 namespace pFlow
 {
 
-class box
+class domain
 {
 protected:
 	
-	// - min point
-	realx3 	min_{0,0,0};
-	
-	// - max point 
-	realx3 	max_{1,1,1};
+	box 		domainBox_;
+
+	/// -x
+	plane 		left_;
+
+	/// +x
+	plane 		right_;
+
+	/// -y
+	plane 		bottom_;
+
+	/// +y
+	plane		top_;
+
+	/// -z
+	plane 		rear_;
+
+	/// +z
+	plane 		front_;
+
 
 public:
 
 	// - type info
-	TypeInfoNV("box");
+	TypeInfoNV("domain");
 
 	//// - Constructors 
 		INLINE_FUNCTION_HD 
-		box(){}
+		domain(){}
 
-		INLINE_FUNCTION_HD 
-		box(const realx3& minP, const realx3& maxP)
-		:
-			min_(minP),
-			max_(maxP)
-		{}
+		FUNCTION_H 
+		domain(const box& db);
 		
-
-		FUNCTION_H
-		box(const dictionary& dict);
-
-		FUNCTION_H
-		box(iIstream& is);
+		INLINE_FUNCTION_HD
+		domain(const domain&) = default;
 
 		INLINE_FUNCTION_HD
-		box(const box&) = default;
+		domain(domain&&) = default;
 
 		INLINE_FUNCTION_HD
-		box(box&&) = default;
+		domain& operator=(const domain&) = default;
 
 		INLINE_FUNCTION_HD
-		box& operator=(const box&) = default;
+		domain& operator=(domain&&) = default;
 
 		INLINE_FUNCTION_HD
-		box& operator=(box&&) = default;
-
-		INLINE_FUNCTION_HD
-		~box()=default;
+		~domain()=default;
 
 	//// - Methods 
 
 		INLINE_FUNCTION_HD
-		bool isInside(const realx3& point)const
+		const auto& domainBox()const
 		{
-			return point > min_ && point <max_;
+			return domainBox_;
 		}
 
 		INLINE_FUNCTION_HD
-		const realx3& minPoint()const
+		const auto& left()const
 		{
-			return min_;
+			return left_;
 		}
 
 		INLINE_FUNCTION_HD
-		const realx3& maxPoint()const
+		const auto& right()const
 		{
-			return max_;
+			return right_;
 		}
 
-	//// - IO operation 
-		FUNCTION_H
-		bool read(iIstream & is);
+		INLINE_FUNCTION_HD
+		const auto& bottom()const
+		{
+			return bottom_;
+		}
 
-		FUNCTION_H
-		bool write(iOstream& os)const;
+		INLINE_FUNCTION_HD
+		const auto& top()const
+		{
+			return top_;
+		}
 
-		FUNCTION_H
-		bool read(const dictionary& dict);
+		INLINE_FUNCTION_HD
+		const auto& rear()const
+		{
+			return rear_;
+		}
 
-		FUNCTION_H
-		bool write(dictionary& dict)const;
-};
+		INLINE_FUNCTION_HD
+		const auto& front()const
+		{
+			return front_;
+		}
 
-FUNCTION_H
+	
+}; // domain
+
+INLINE_FUNCTION_HD
+bool equal(const domain& d1, const domain& d2)
+{
+	return equal(d1.domainBox(), d2.domainBox());
+}
+
+INLINE_FUNCTION_HD
+bool equal(const domain& d1, const domain& d2, real tol)
+{
+	return equal(d1.domainBox(), d2.domainBox(), tol);
+}
+
+INLINE_FUNCTION_HD
+bool operator ==(const domain& d1, const domain& d2)
+{
+	return equal(d1, d2);
+}
+
+/*FUNCTION_H
 iIstream& operator >>(iIstream& is, box& b);
 
 FUNCTION_H
@@ -121,7 +155,7 @@ INLINE_FUNCTION_HD
 box extendBox(const box& b, const realx3& dl)
 {
 	return box(b.minPoint()-dl , b.maxPoint()+dl);
-}
+}*/
 
 }
 

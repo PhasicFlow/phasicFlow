@@ -54,24 +54,20 @@ public:
 
 
 	template<typename... Args>
-    inline static uniquePtr<T> makeUnique(Args&&... args)
-    {
-    	return uniquePtr<T>(new T(std::forward<Args>(args)...));
-    }
+	inline static uniquePtr<T> makeUnique(Args&&... args)
+	{
+		return uniquePtr<T>(new T(std::forward<Args>(args)...));
+	}
 
-    void clear()
-    {
-    	if( ! (*this) )
-    	{
-    		auto p = this->release();
-    		delete p;
-    	}
-    }
+	void clear()
+	{
+		this->reset(nullptr);
+	}
 
-    // ref to the object of type T
+	// ref to the object of type T
 	T& operator ()()
 	{
-		if(!this->get())
+		if(!*this)
 		{
 			fatalErrorInFunction <<
 			"uniquePtr is empty, and you are trying to get its reference. \n" <<
@@ -84,14 +80,19 @@ public:
 	// const ref to the object of type T
 	const T& operator() () const
 	{
-		if(!this->get())
+		if(!*this)
 		{
 			fatalErrorInFunction <<
 			"uniquePtr is empty, and you are trying to get its reference. \n" <<
 			"Type name is "<< typeid(T).name()<<"\n";
 			fatalExit;
 		}
-		return const_cast<T&>(*this->get());
+		return static_cast<const T&>(*this->get());
+	}
+
+	explicit operator bool() const
+	{
+		return this->get()!= nullptr;
 	}
 
 };

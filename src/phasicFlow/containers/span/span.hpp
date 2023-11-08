@@ -77,11 +77,11 @@ public:
 
     /// move
     INLINE_FUNCTION_HD
-    span(span&&) = delete;
+    span(span&&) = default;
 
     /// assignment
     INLINE_FUNCTION_HD
-    span& operator=(span&) = delete;
+    span& operator=(span&) = default;
 
     
     INLINE_FUNCTION_HD

@@ -20,7 +20,8 @@ streams/TStream/oTstream.cpp
 streams/Fstream/iFstream.cpp
 streams/Fstream/oFstream.cpp
 streams/Fstream/fileStream.cpp
-streams/dataIO/dataIO.cpp 
+streams/dataIO/dataIO.cpp
+streams/dataIO/dataIONoMPI.cpp 
 streams/streams.cpp 
 
 fileSystem/fileSystem.cpp
@@ -34,15 +35,22 @@ dictionary/twoPartEntry/twoPartEntry.cpp
 
 containers/Vector/Vectors.cpp
 containers/Field/Fields.cpp
+containers/List/anyList/anyList.cpp
 
 repository/IOobject/objectFile.cpp
 repository/IOobject/IOfileHeader.cpp
 repository/IOobject/IOobject.cpp
 repository/IOobject/IOPattern.cpp
 
+eventManagement/subscriber.cpp
+eventManagement/observer.cpp
+
 structuredData/line/line.cpp
 structuredData/infinitePlane/infinitePlane.cpp
 structuredData/plane/plane.cpp
+structuredData/domain/domain.cpp
+structuredData/pointStructure/internalPoints.cpp
+structuredData/boundaries/boundaryBase/boundaryBase.cpp
 
 )
 

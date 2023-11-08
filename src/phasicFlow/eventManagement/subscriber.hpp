@@ -17,22 +17,52 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#include "processors.hpp"
-#include "IOPattern.hpp"
+#ifndef __subscriber_hpp__
+#define __subscriber_hpp__
 
-pFlow::IOPattern::IOPattern( IOType iotype)
-:
-	ioType_(iotype),
-	globalSize_(processors::globalSize()),
-	globalRank_(processors::globalRank()),
-	isMaster_(processors::isMaster()),
-	isParallel_(processors::isParallel())
-{}
 
-pFlow::word pFlow::IOPattern::exeMode()
+
+#include <array>
+
+#include "List.hpp"
+
+namespace pFlow
 {
-    if(processors::isParallel())
-    	return word("MPI");
-    else
-    	return word("NoMPI");
-}
+
+class observer;
+class message;
+class anyList;
+
+class subscriber
+{
+protected:
+
+	// - list of subsribed objectd that recieve updage messages 
+	mutable std::array<List<observer*>,16> observerList_;
+
+public:
+
+	subscriber()
+	{}
+
+	virtual ~subscriber();
+
+	virtual bool subscribe(message msg, observer* obsevr)const;
+
+	virtual bool unsubscribe(observer* obsevr)const;
+
+	//bool notify(const eventMessage& msg);
+
+	//bool notify(const eventMessage& msg, const List<eventObserver*>& exclutionList );
+
+	
+	bool notify(const message msg, const anyList& varList);
+	
+
+};
+
+} // pFlow
+
+
+
+#endif // __eventSubscriber_hpp__

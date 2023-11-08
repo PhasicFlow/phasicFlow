@@ -36,6 +36,13 @@ const inline char* whiteColor   = "\033[37m";
 
 const inline char* boldChar     = "\033[1m";
 
+#define Red_Text(text)      redColor<<text<<defaultColor
+#define Yellow_Text(text)   yellowColor<<text<<defaultColor
+#define Blue_Text(text)     blueColor<<text<<defaultColor
+#define Green_Text(text)    greenColor<<text<<defaultColor
+#define Magenta_Text(text)  magentaColor<<text<<defaultColor
+#define Cyan_Text(text)         cyanColor<<text<<defaultColor
+#define Bold_Text(text)         boldChar<<text<<defaultColor
 
 namespace pFlow
 {

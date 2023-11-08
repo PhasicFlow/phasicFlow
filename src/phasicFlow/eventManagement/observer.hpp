@@ -17,22 +17,60 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#include "processors.hpp"
-#include "IOPattern.hpp"
 
-pFlow::IOPattern::IOPattern( IOType iotype)
-:
-	ioType_(iotype),
-	globalSize_(processors::globalSize()),
-	globalRank_(processors::globalRank()),
-	isMaster_(processors::isMaster()),
-	isParallel_(processors::isParallel())
-{}
 
-pFlow::word pFlow::IOPattern::exeMode()
+#ifndef __observer_hpp__
+#define __observer_hpp__
+
+#include "message.hpp"
+
+namespace pFlow
 {
-    if(processors::isParallel())
-    	return word("MPI");
-    else
-    	return word("NoMPI");
-}
+
+class subscriber;
+class anyList;
+
+class observer
+{
+protected:
+	
+
+	/// pointer to subscriber 
+	const subscriber* 	subscriber_ = nullptr;
+	
+	/// list of events in the message 
+	const message 		message_;
+
+
+public:
+
+	observer();
+
+	observer(
+		const subscriber* subscrbr, 
+		message msg);
+
+	virtual 
+	~observer();
+
+	inline 
+	bool subscribed()const 
+	{
+		return subscriber_!=nullptr;
+	}
+
+	bool addToSubscriber(const subscriber& subscriber);
+	
+	inline void invalidateSubscriber()
+	{
+		subscriber_ = nullptr;
+	}
+
+
+	virtual bool update(const message& msg, const anyList& varList)=0;
+};
+
+} // pFlow
+
+
+#endif // __observer_hpp__

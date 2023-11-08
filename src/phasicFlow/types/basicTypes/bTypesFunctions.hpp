@@ -190,9 +190,9 @@ bool readValue(const word& w, bool& val)
 
 
 INLINE_FUNCTION_HD 
-bool equal(const real& s1, const real& s2)
+bool equal(const real& s1, const real& s2, real tol = smallValue)
 {
-    return abs(s1 - s2) <= smallValue;
+    return abs(s1 - s2) <= tol;
 }
 
 INLINE_FUNCTION_HD 

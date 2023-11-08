@@ -197,6 +197,26 @@ public:
 		
 
 		bool write(iOstream& os, IOPattern::IOType iotype )const;
+
+		template<typename HostMask>
+		bool write(
+			iOstream& os, 
+			IOPattern::IOType iotype, 
+			const HostMask& mask)const
+		{
+			
+			os.writeWordKeyword(fieldKey_)<<endl;
+
+			if(!os.check(FUNCTION_NAME))return false;
+
+			if(!VectorType::write(os, iotype)) return false;
+
+			os.endEntry();
+			if(!os.check(FUNCTION_NAME))return false;
+
+			return true;
+		}
+		
 			
 
 };
@@ -205,7 +225,7 @@ public:
 template<template<class, class> class VectorField, class T, class PropType>
 inline iIstream& operator >> (iIstream & is, Field<VectorField, T, PropType> & ifld )
 {
-	if( !ifld.read(is, IOPattern::MasterProcessor) )
+	if( !ifld.read(is, IOPattern::MasterProcessorOnly) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;

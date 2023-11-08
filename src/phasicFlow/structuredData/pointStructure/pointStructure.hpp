@@ -23,6 +23,8 @@ Licence:
 #define __pointStructure_hpp__
 
 
+#include "Lists.hpp"
+#include "internalPoints.hpp"
 
 #include "Vectors.hpp"
 #include "VectorSingles.hpp"
@@ -37,9 +39,8 @@ namespace pFlow
 {
 
 //forward
-class box;
-class setFieldList;
-class repository;
+class boundaryBase;
+
 
 class pointStructure
 :
@@ -47,152 +48,24 @@ class pointStructure
 {
 public:
 	
-	enum PointFlag: int8
-	{
-		DELETED 	= -1,
-		ACTIVE 		= 1
-	};
-
-	
-	inline static const size_t maxSizeDefault_ = 10000;
-
-	class activePointsDevice
-	{
-	protected:
-		ViewType1D<int8> 	flag_;
-
-		bool allActive_;
-
-		range activeRange_;
-
-	public:
-
-		INLINE_FUNCTION_H
-		activePointsDevice(bool allActive, range active, const ViewType1D<int8>& flag)
-		:
-			flag_(flag),
-			allActive_(allActive),
-			activeRange_(active)
-		{}
-
-		INLINE_FUNCTION_HD
-		activePointsDevice(const activePointsDevice&) = default;
-
-		INLINE_FUNCTION_HD
-		activePointsDevice& operator=(const activePointsDevice&) = default;
-
-		INLINE_FUNCTION_HD
-		bool operator()(int32 i)const {
-			if(i<activeRange_.second && flag_[i] == 1)return true;
-			return false;
-		}
-
-		INLINE_FUNCTION_HD
-		auto activeRange()const {
-			return activeRange_; 
-		}
-
-		INLINE_FUNCTION_HD
-		auto allActive()const {
-			return allActive_;
-		}
-
-	};
-
-	class activePointsHost
-	{
-	protected:
-		
-		ViewType1D<int8, HostSpace> 	flag_;
-
-		bool allActive_;
-
-		range activeRange_;
-
-	public:
-
-		INLINE_FUNCTION_H
-		activePointsHost(bool allActive, range active, const ViewType1D<int8, HostSpace>& flag)
-		:
-			flag_(flag),
-			allActive_(allActive),
-			activeRange_(active){}
-
-		INLINE_FUNCTION_H
-		activePointsHost(const activePointsHost&) = default;
-
-		INLINE_FUNCTION_H
-		activePointsHost& operator=(const activePointsHost&) = default;
-
-		INLINE_FUNCTION_H
-		bool operator()(int32 i)const {
-			if(i <activeRange_.second && flag_[i] == PointFlag::ACTIVE)return true;
-			return false;
-		}
-
-		INLINE_FUNCTION_H
-		auto activeRange()const{
-			return activeRange_;
-		}
-
-		INLINE_FUNCTION_H
-		bool allActive()const {
-			return allActive_;
-		}
-	};
+	using boundaryListType = ListPtr<boundaryBase>;
 
 protected:
 
 	//// - data members 
+		domain 				globalDomain_;
 
-		// number of points / size of structure
-		size_t 			numPoints_ 		= 0;	
+		domain 				thisDomain_;
 
-		// maximum number of points
-		size_t 			maxPoints_ 		= maxSizeDefault_;
+		internalPoints 		internal_;
 
-		// flag of points on device
-		int8Field_HD 			pointFlag_;
+		boundaryListType 	boundaries_;
 
-		// position of points on device
-		realx3Field_D 			pointPosition_;
-
-		// number of active points
-		size_t 					numActivePoints_ = 0;
-
-		// index range of active points (half-open range)
-		range 					activeRange_;	
-
-		/// Index vector for points to be inserted 
-		int32IndexContainer   	tobeInsertedIndex_;
-
-		/// Sorted index of particles based on morton code 
-		int32IndexContainer 	mortonSortedIndex_;
-	
-
-	//// - protected methods
-		FUNCTION_H
-		bool evaluatePointStructure();
-
-		FUNCTION_H
-		void setNumMaxPoints();
-
-		// - access to pointPosition
-		FUNCTION_H
-		realx3Field_D& pointPosition();
-		
-		// - access to pointFlag
-		FUNCTION_H
-		int8Field_HD& pointFlag();
-
-		FUNCTION_H
-		uniquePtr<int32IndexContainer> 
-			getNewPointsIndices(int32 numNewPoints)const;
+		wordList 			boundaryTypes_;	
 
 public:
 
-	friend class dynamicPointStructure;
-	
+		
 	// - type info
 	TypeInfo("pointStructure");
 	
@@ -228,41 +101,7 @@ public:
 		pointStructure& operator=(pointStructure&&) = delete;
 
 		// - destructor 
-		virtual ~pointStructure() = default;
-
-
-	//// - Methods
-		activePointsDevice activePointsMaskD()const
-		{
-			return activePointsDevice(
-				this->allActive(),
-				activeRange(),
-				pointFlag_.deviceVectorAll()
-				);
-		}
-
-		activePointsHost activePointsMaskH()const
-		{
-			return activePointsHost(
-				this->allActive(),
-				activeRange(),
-				pointFlag_.hostVectorAll()
-				);
-		}
-
-		// - const access pointPosition
-		FUNCTION_H
-		const realx3Field_D& pointPosition()const;
-		
-		// - const access to pointFlag
-		FUNCTION_H
-		const int8Field_HD& pointFlag()const;
-
-		INLINE_FUNCTION_H
-		auto pointPositionHostAll()
-		{
-			return pointPosition_.hostVectorAll();
-		}
+		virtual ~pointStructure() = default
 
 		// - size of data structure
 		FUNCTION_H
@@ -272,103 +111,37 @@ public:
 		FUNCTION_H
 		label capacity()const;
 		
-		// - number of active points 
-		FUNCTION_H
-		label numActive() const;
-				
-		// - if all points are active 
-		FUNCTION_H
-		bool allActive()const;
-
-		INLINE_FUNCTION_H
-		range activeRange()const
-		{
-			return activeRange_;
-		}
-
-		INLINE_FUNCTION_H
-		bool isActive(label i)const
-		{
-			return pointFlag_[i] == ACTIVE;
-		}
-
-		FUNCTION_H
-		size_t markDeleteOutOfBox(const box& domain);
-
-		// - update data structure by removing the marked points 
-		//   Notifies all the fields that are built based on this data structure
-		//   and then apply removing to the pointPosition_ and pointFlag_
-		FUNCTION_H
-		virtual bool updateForDelete();
-
-
-		FUNCTION_H
-		virtual bool mortonSortPoints(const box& domain, real dx);
-
-		///////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		// - const access to points to be newly inserted
-		FUNCTION_H 
-		auto insertedPointIndex()const
-		{
-			return tobeInsertedIndex_;
-		}
-
-		FUNCTION_H 
-		auto insertedPointIndexH()const
-		{
-			return tobeInsertedIndex_.hostView();
-		}
-
-		FUNCTION_H 
-		auto insertedPointIndexD()const
-		{
-			return tobeInsertedIndex_.deviceView();
-		}
-
-
-		FUNCTION_H
-		auto mortonSortedIndex()const
-		{
-			return mortonSortedIndex_;
-		}
-
-
 		// - update data structure by inserting/setting new points 
 		//   Notifies all the fields in the registered list of data structure
 		//   and exclude the fields that re in the exclusionList
 		//   retrun nullptr if it fails 
 		FUNCTION_H
-		virtual uniquePtr<int32IndexContainer> insertPoints(
+		/*virtual uniquePtr<int32IndexContainer> insertPoints(
 			const realx3Vector& pos,
 			const setFieldList& setField,
 			repository& owner,
 			const List<eventObserver*>& exclusionList={nullptr}
-		);
+		);*/
+
+		boundaryBase& boundary(size_t i)
+		{
+			return boundaries_[i];
+		}
+
+
+		const boundaryBase& boundary(size_t i)const
+		{
+			return boundaries_[i];
+		}
+
 
 	
 	//// - IO operations 
-		// - read pointStructure from is
-		FUNCTION_H
-		bool readPointStructure(iIstream& is);
+		
+		
 
-		// - write pointStructure to os
-		FUNCTION_H
-		bool writePointStructure(iOstream& os)const;
 
-		// - read 
-		FUNCTION_H
-		bool read(iIstream& is)
-		{
-			return readPointStructure(is);
-		}
-
-		// - write 
-		FUNCTION_H
-		bool write(iOstream& os)const
-		{
-			return writePointStructure(os);
-		}
 
 };
 
