@@ -24,11 +24,8 @@ Licence:
 #include "phasicFlowKokkos.hpp"
 #include "domain.hpp"
 
-
-
 namespace pFlow
 {
-
 
 template<typename ExecutionSpace>
 class pointFlag
@@ -61,7 +58,7 @@ protected:
 
 	rangeU32 	activeRange_ 	= {0,0};
 
-	bool 			isAllActive_	= false;
+	bool 		isAllActive_	= false;
 
 	uint32 		nLeft_ 	= 0;
 
@@ -161,22 +158,11 @@ public:
 		return flg > INTERNAL;
 	}
 
-	INLINE_FUNCTION_HD
-	bool isLeft(uint32 i)const
-	{
-		return (flags_[i]&LEFT) == LEFT;
-	}
-
+	
 	INLINE_FUNCTION_HD
 	bool isLeft(uint8 flg)const
 	{
 		return (flg&LEFT) == LEFT;
-	}
-
-	INLINE_FUNCTION_HD
-	bool isRight(uint32 i)const
-	{
-		return (flags_[i]&&RIGHT) == RIGHT;
 	}
 
 	INLINE_FUNCTION_HD
@@ -185,22 +171,11 @@ public:
 		return (flg&&RIGHT) == RIGHT;
 	}
 
-	INLINE_FUNCTION_HD
-	bool isBottom(uint32 i)const
-	{
-		return (flags_[i]&&BOTTOM) == BOTTOM;
-	}
 
 	INLINE_FUNCTION_HD
 	bool isBottom(uint8 flg)const
 	{
 		return (flg&&BOTTOM) == BOTTOM;
-	}
-
-	INLINE_FUNCTION_HD
-	bool isTop(uint32 i)const
-	{
-		return (flags_[i]&&TOP) == TOP;
 	}
 
 	INLINE_FUNCTION_HD
@@ -210,21 +185,9 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	bool isRear(uint32 i)const
-	{
-		return (flags_[i]&&REAR) == REAR;
-	}
-
-	INLINE_FUNCTION_HD
 	bool isRear(uint8 flg)const
 	{
 		return (flg&&REAR) == REAR;
-	}
-
-	INLINE_FUNCTION_HD
-	bool isFront(uint32 i)const
-	{
-		return (flags_[i]&&FRONT) == FRONT;
 	}
 
 	INLINE_FUNCTION_HD
@@ -232,7 +195,6 @@ public:
 	{
 		return (flg&&FRONT) == FRONT;
 	}
-
 
 	template<typename ExeSpace>
 	pointFlag<ExeSpace> clone()const
@@ -254,10 +216,15 @@ public:
 	
 	uint32 scanPointFlag();
 
-	uint32 markDeleteInDomain(
+	uint32 markPointRegions(
 		domain 								dm,
 		ViewType1D<realx3, memory_space> 	points,
-		real dist);
+		real leftLength,
+		real rightLength,
+		real bottomLength,
+		real topLength,
+		real rearLength,
+		real frontLength);
 
 	void fillNeighborsLists(
 		ViewType1D<uint32, memory_space> leftList,
@@ -266,6 +233,12 @@ public:
 		ViewType1D<uint32, memory_space> topList,
 		ViewType1D<uint32, memory_space> rearList,
 		ViewType1D<uint32, memory_space> frontList);
+
+	uint32 markDelete(
+		const plane& 		pln,
+		ViewType1D<realx3, memory_space> 	points,
+		ViewType1D<uint32, memory_space> 	indices,
+		ViewType1D<uint32, memory_space> 	onOff);
 
 
 

@@ -158,10 +158,11 @@ bool pFlow::positionRandom::inCollision
 
 pFlow::positionRandom::positionRandom
 (
+	systemControl& control,
 	const dictionary& dict
 )
 :
-	positionParticles(dict),
+	positionParticles(control, dict),
 	prDict_
 	(  
 		dict.subDict("positionRandomInfo")

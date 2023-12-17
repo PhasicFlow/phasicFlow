@@ -17,29 +17,23 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __internalPoints_hpp__
 #define __internalPoints_hpp__
 
+#include "subscriber.hpp"
+#include "Vectors.hpp"
 #include "Fields.hpp"
 #include "pointFlag.hpp"
 
 
 //#include "indexContainer.hpp"
 
-
-
 namespace pFlow
 {
 
-//forward
-/*class box;
-class setFieldList;
-class repository;*/
-
 class internalPoints
-
+:
+	public subscriber
 {
 public:
 	
@@ -47,11 +41,11 @@ public:
 
 	using pointsType 		= realx3Field_D;
 
-	using device_type 		= typename pointsType::deviceType;
+	using device_type 		= typename pointsType::device_type;
 
-	using memory_space 		= typename pointsType::memorySpace;
+	using memory_space 		= typename pointsType::memory_space;
 
-	using execution_space 	= typename pointsType::executionSpace;
+	using execution_space 	= typename pointsType::execution_space;
 
 	using pFlagTypeDevice 	= pointFlag<execution_space>;
 
@@ -62,22 +56,25 @@ protected:
 
 	//// - data members
 
-		// position of points on device
-		realx3Field_D 			pointPosition_;
+		/// Position of points on device
+		realx3Field_D 				pointPosition_;
 
-		// flag of points on device
-		mutable pFlagTypeDevice 		pFlagsD_;
+		/// flag of points on device
+		mutable pFlagTypeDevice 	pFlagsD_;
 
-		mutable pFlagTypeHost 			pFlagsH_;
+		/// flag of points on host
+		mutable pFlagTypeHost 		pFlagsH_;
 
-		mutable bool 					pFlagSync_ = false;
+		/// if both host and device flags sync
+		mutable bool 				pFlagSync_ = false;
 	
+	//// - protected members
 
-	void syncPFlag()const;
+		void syncPFlag()const;
 
 public:
 
-	friend class dynamicinternalPoints;
+	//friend class dynamicinternalPoints;
 	
 	// - type info
 	TypeInfo("internalPoints");
@@ -88,23 +85,21 @@ public:
 		// - an empty internalPoints, good for reading from file 
 		internalPoints();
 
-		/// Construct from components
-		//internalPoints(const int8Vector& flgVec, const realx3Vector& posVec);
-
+		
 		/// Construct from point positions, assume all points are active
-		internalPoints(const std::vector<realx3>& posVec);
+		internalPoints(const realx3Vector& posVec);
 
-		/// Copy construct
-		internalPoints(const internalPoints&) = default;
+		/// No Copy construct
+		internalPoints(const internalPoints&) = delete;
 
 		/// Move construct 
 		internalPoints(internalPoints&&) = default;
 
-		/// Copy assignment 
-		internalPoints& operator=(const internalPoints&) = default;
+		/// No Copy assignment 
+		internalPoints& operator=(const internalPoints&) = delete;
 
 		/// Move assignment 
-		internalPoints& operator=(internalPoints&&) = delete;
+		internalPoints& operator=(internalPoints&&) = default;
 
 		/// Destructor 
 		virtual ~internalPoints() = default;
@@ -116,7 +111,7 @@ public:
 
 
 		FUNCTION_H
-		const pFlagTypeHost& 	activePointsMaskH()const;
+		const pFlagTypeHost& activePointsMaskH()const;
 
 		// - Const access pointPosition
 		FUNCTION_H
@@ -166,7 +161,9 @@ public:
 
 		
 		FUNCTION_H
-		void updateFlag(const domain& dm, real dist);
+		void updateFlag(
+			const domain& dm, 
+			const std::array<real,6>& dist);
 
 		/*FUNCTION_H
 		size_t markDeleteOutOfBox(const box& domain);*/
@@ -227,6 +224,7 @@ public:
 
 };
 
+inline
 iOstream& operator<<(iOstream& os, const internalPoints& ip)
 {
 	if( !ip.write(os, IOPattern::AllProcessorsDifferent) )

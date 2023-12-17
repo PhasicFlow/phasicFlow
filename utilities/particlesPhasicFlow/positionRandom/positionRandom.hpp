@@ -66,7 +66,9 @@ public:
 	// - type Info
 	TypeInfo("positionRandom");
 
-	positionRandom(const dictionary& dict);
+	positionRandom(
+		systemControl& control,
+		const dictionary& dict);
 
 	// - add this class to vCtor selection table 
 	add_vCtor(
@@ -78,12 +80,12 @@ public:
 
 	//// - Methods 
 
-	virtual label numPoints()const
+	virtual uint64 numPoints()const
 	{
 		return position_.size();
 	}
 
-	virtual label size()const
+	virtual uint64 size()const
 	{
 		return position_.size();
 	}

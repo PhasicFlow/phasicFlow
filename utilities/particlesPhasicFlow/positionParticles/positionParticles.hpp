@@ -24,6 +24,7 @@ Licence:
 #include "virtualConstructor.hpp"
 #include "Vectors.hpp"
 #include "dictionary.hpp"
+#include "systemControl.hpp"
 
 namespace pFlow
 {
@@ -118,7 +119,9 @@ public:
 	// - type Info
 	TypeInfo("positionParticles");
 
-	positionParticles(const dictionary& dict);
+	positionParticles(
+		systemControl& control, 
+		const dictionary& dict);
 
 	create_vCtor
 	(
@@ -132,9 +135,9 @@ public:
 
 	//// - Methods 
 
-	virtual label numPoints()const = 0;
+	virtual uint64 numPoints()const = 0;
 
-	virtual label size()const = 0;
+	virtual uint64 size()const = 0;
 
 	virtual real maxDiameter() const = 0;
 

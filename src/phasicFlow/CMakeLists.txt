@@ -37,20 +37,35 @@ containers/Vector/Vectors.cpp
 containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
 
+Timer/Timer.cpp
+Timer/Timers.cpp
+
 repository/IOobject/objectFile.cpp
 repository/IOobject/IOfileHeader.cpp
 repository/IOobject/IOobject.cpp
 repository/IOobject/IOPattern.cpp
+repository/repository/repository.cpp
+repository/Time/Time.cpp
+repository/Time/timeControl.cpp
+repository/systemControl/systemControl.cpp
+repository/systemControl/dynamicLinkLibs.cpp
 
 eventManagement/subscriber.cpp
 eventManagement/observer.cpp
 
+structuredData/box/box.cpp
 structuredData/line/line.cpp
 structuredData/infinitePlane/infinitePlane.cpp
 structuredData/plane/plane.cpp
 structuredData/domain/domain.cpp
+structuredData/domain/simulationDomain.cpp
+structuredData/domain/regularSimulationDomain.cpp
+structuredData/pointStructure/boundaryList.cpp
 structuredData/pointStructure/internalPoints.cpp
+structuredData/pointStructure/pointStructure.cpp
 structuredData/boundaries/boundaryBase/boundaryBase.cpp
+structuredData/boundaries/boundaryExit/boundaryExit.cpp
+
 
 )
 

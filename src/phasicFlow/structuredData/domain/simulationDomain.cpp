@@ -18,16 +18,39 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __initialize_hpp__
-#define __initialize_hpp__
+#include "simulationDomain.hpp"
+#include "processors.hpp"
 
-// initilized and finalize should be placed in onc scope 
-REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-REPORT(1)<<"Host execution space is "<< Green_Text(pFlow::DefaultHostExecutionSpace::name())<<END_REPORT;
-REPORT(1)<<"Device execution space is "<<Green_Text(pFlow::DefaultExecutionSpace::name())<<END_REPORT;
-
-Kokkos::initialize( argc, argv );
+pFlow::simulationDomain::simulationDomain(const dictionary& dict)
+:
+    globalBox_(dict.subDict("globalBox")),
+    globalDomainDict_(dict)
 {
 
+}
 
-#endif
+pFlow::uniquePtr<pFlow::simulationDomain> 
+    pFlow::simulationDomain::create(const dictionary &dict)
+{
+    
+	word sType = angleBracketsNames(
+        "simulationDomain", 
+        processors::runTypeName());
+
+	if( dictionaryvCtorSelector_.search(sType) )
+	{
+		return dictionaryvCtorSelector_[sType] (dict);
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< sType << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			dictionaryvCtorSelector_
+		);
+		fatalExit;
+	}
+    return nullptr;
+}

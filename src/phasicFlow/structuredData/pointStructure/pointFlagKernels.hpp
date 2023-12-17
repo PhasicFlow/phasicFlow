@@ -81,11 +81,16 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::scanPointFlag()
 
 
 template<typename ExecutionSpace>
-pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markDeleteInDomain
+pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions
 (
 	domain 								dm,
 	ViewType1D<realx3, memory_space> 	points,
-	real dist)
+	real leftLength,
+	real rightLength,
+	real bottomLength,
+	real topLength,
+	real rearLength,
+	real frontLength)
 {
 	
 	using rpMark = Kokkos::RangePolicy<execution_space,  
@@ -134,37 +139,37 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markDeleteInDomain
 						minUpdate = min(minUpdate,i);
 						maxUpdate = max(maxUpdate,i);
 
-						if(dm.left().inPositiveDistance(p, dist))
+						if(dm.left().inPositiveDistance(p, leftLength))
 						{
 							flg += LEFT;
 							valLeft++;	
 						} 
 
-						if(dm.right().inPositiveDistance(p, dist))
+						if(dm.right().inPositiveDistance(p, rightLength))
 						{
 							flg += RIGHT;
 							valRight++;
 						}
 						
-						if(dm.bottom().inPositiveDistance(p, dist))
+						if(dm.bottom().inPositiveDistance(p, bottomLength))
 						{
 							flg += BOTTOM;
 							valBottom++;
 						} 
 
-						if(dm.top().inPositiveDistance(p, dist)) 
+						if(dm.top().inPositiveDistance(p, topLength)) 
 						{
 							flg += TOP;
 							valTop++;
 						}
 						
-						if(dm.rear().inPositiveDistance(p, dist)) 
+						if(dm.rear().inPositiveDistance(p, rearLength)) 
 						{
 							flg += REAR;
 							valRear++;
 						}
 
-						if(dm.front().inPositiveDistance(p, dist))
+						if(dm.front().inPositiveDistance(p, frontLength))
 						{
 							flg += FRONT;
 							valFront++;
@@ -255,6 +260,78 @@ void pFlow::pointFlag<ExecutionSpace>::fillNeighborsLists
 	}
 	
 
+}
+
+template<typename ExecutionSpace>
+pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markDelete
+(
+	const plane& 		pln,
+	ViewType1D<realx3, memory_space> 	points,
+	ViewType1D<uint32, memory_space> 	indices,
+	ViewType1D<uint32, memory_space> 	onOff
+)
+{
+	// if it is empty, do nothing
+	if(indices.size() == 0 )return 0;
+
+	using rpMark = Kokkos::RangePolicy<execution_space,  
+			Kokkos::IndexType<uint32>>;
+
+	uint32 start = activeRange().start();
+	uint32 end   = activeRange().end();
+
+	uint32 minRange = end;
+	uint32 maxRange = start;
+
+	uint32 numMarked = 0;
+
+	if(start<end)
+	{
+		Kokkos::parallel_reduce(
+			"pointFlagKernels::markDelete",
+			rpScanFlag(0, indices.size()),
+			CLASS_LAMBDA_HD(
+				uint32 i, 
+				uint32& minUpdate, 
+				uint32& maxUpdate, 
+				uint32& sumToUpdate)
+			{
+				auto indx = indices(i);
+				
+				if( pln.pointInNegativeSide(points(indx)))
+				{
+					flags_[indx] = DELETED;
+					sumToUpdate++;
+					onOff[i] = 0;
+				}
+				else
+				{
+					minUpdate = min(minUpdate,i);
+					maxUpdate = max(maxUpdate,i);
+					onOff[i] = 1;
+				}
+			},
+			Kokkos::Min<uint32>(minRange), 
+			Kokkos::Max<uint32>(maxRange),
+			numMarked);	
+	}
+
+	// means either range was empty or all points have been deleted.
+	if(minRange<start || maxRange>end)
+	{
+		minRange = 0;
+		maxRange = 0;
+	}
+	else
+	{
+		maxRange++; // add one to make it half
+	}
+
+	activeRange_ = {minRange, maxRange};
+	isAllActive_ = isAllActive_ && numMarked == 0; 
+	numActive_ 	-= numMarked;
+
+	return numMarked;
 }
 
 #endif // __pointFlagKernels_hpp__

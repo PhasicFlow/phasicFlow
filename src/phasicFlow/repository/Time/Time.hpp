@@ -72,7 +72,7 @@ public:
 	//// -  Methods
 		virtual fileSystem localPath()const
 		{
-			return timeName();
+			return fileSystem(timeName());
 		}
 	
 		// - geometry repository 

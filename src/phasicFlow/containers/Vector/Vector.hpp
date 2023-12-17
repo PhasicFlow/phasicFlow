@@ -65,19 +65,19 @@ public:
 
 	typedef typename vectorType::iterator 			iterator;
 	
-	typedef typename vectorType::const_iterator 	constIterator;
+	typedef typename vectorType::const_iterator 	const_iterator;
 	
 	typedef typename vectorType::reference 			reference;
 	
-	typedef typename vectorType::const_reference 	constReference;
+	typedef typename vectorType::const_reference 	const_reference;
 	
-	typedef  T 										valueType; 		
+	typedef  T 										value_type; 		
 
 	typedef  T* 									pointer;
 
-	typedef const T*  								constPointer;
+	typedef const T*  								const_pointer;
 
-	typedef typename std::initializer_list<T> 		initList;
+	typedef typename std::initializer_list<T> 		init_list;
 
 protected:
 
@@ -139,7 +139,7 @@ public:
 
 
 		/// Vector from name and initializer list 
-		inline Vector(const word& name, const initList &l)
+		inline Vector(const word& name, const init_list &l)
 		:
 			vectorType(l),
 			name_(name)
@@ -325,10 +325,24 @@ public:
 	// - fill the whole content of vector, [begin, end), with val 
 	inline void fill( const T& val);
 
+	inline
+	auto getSpan()
+	{
+		return span<T>(this->data(), this->size());
+	}
+	
+	inline 
+	auto getSpan()const
+	{
+		return span<const T>(this->data(), this->size());
+	}
+
 	static constexpr bool isHostAccessible()
 	{
 		return isHostAccessible_;
 	}
+
+	
 
 	inline void operator +=( const T& val);
 	inline void operator -=( const T& val);

@@ -22,46 +22,31 @@ Licence:
 #ifndef __pointStructure_hpp__
 #define __pointStructure_hpp__
 
-
-#include "Lists.hpp"
 #include "internalPoints.hpp"
-
-#include "Vectors.hpp"
-#include "VectorSingles.hpp"
-#include "VectorDuals.hpp"
-#include "Fields.hpp"
-#include "eventSubscriber.hpp"
-#include "indexContainer.hpp"
-
+#include "simulationDomain.hpp"
+#include "boundaryList.hpp"
+#include "uniquePtr.hpp"
 
 
 namespace pFlow
 {
 
-//forward
-class boundaryBase;
+class simulationDomain;
 
 
 class pointStructure
 :
-	public eventSubscriber
+	public internalPoints
 {
-public:
-	
-	using boundaryListType = ListPtr<boundaryBase>;
-
 protected:
 
 	//// - data members 
-		domain 				globalDomain_;
+	uniquePtr<simulationDomain> simulationDomain_ = nullptr;
 
-		domain 				thisDomain_;
-
-		internalPoints 		internal_;
-
-		boundaryListType 	boundaries_;
-
-		wordList 			boundaryTypes_;	
+	boundaryList 				boundaries_;
+		
+	
+	bool distributePoints(const realx3Vector& points);
 
 public:
 
@@ -73,21 +58,22 @@ public:
 	//// - Constructors 
 
 		// - an empty pointStructure, good for reading from file 
-		pointStructure();
+		pointStructure(const dictionary& domainDict);
 
 		// - construct from components
-		pointStructure(const int8Vector& flgVec, const realx3Vector& posVec);
+		//pointStructure(const int8Vector& flgVec, const realx3Vector& posVec);
 
-		// - construct from point positions, assume all points are active
-		pointStructure(const realx3Vector& posVec);
+		/// construct from point positions, assume all points are active
+		pointStructure(
+			const dictionary& domainDict, 
+			const realx3Vector& posVec);
 
 		// - copy construct
 		//
 		//   should be changed, may causs undefined behavior 
 		//////////////////////////////////////////////////////////////
-		pointStructure(const pointStructure&) = default;
+		pointStructure(const pointStructure&) = delete;
 
-		
 		// - no move construct 
 		pointStructure(pointStructure&&) = delete;
 
@@ -95,49 +81,25 @@ public:
 		//
 		//   should be changed, may causs undefined behavior 
 		//////////////////////////////////////////////////////////////
-		pointStructure& operator=(const pointStructure&) = default;
+		pointStructure& operator=(const pointStructure&) = delete;
 
 		// - no move assignment 
 		pointStructure& operator=(pointStructure&&) = delete;
 
 		// - destructor 
-		virtual ~pointStructure() = default
-
-		// - size of data structure
-		FUNCTION_H
-		label size()const;
+		virtual ~pointStructure() = default;
 		
-		// - maximum capacity of data structure 
+
+	/// Read 
 		FUNCTION_H
-		label capacity()const;
+		bool read(iIstream& is, IOPattern::IOType iotype);
+		
+
+		/// Write 
+		/*FUNCTION_H
+		bool write(iOstream& os, IOPattern::IOType iotype)const;	*/
 		
 		
-		// - update data structure by inserting/setting new points 
-		//   Notifies all the fields in the registered list of data structure
-		//   and exclude the fields that re in the exclusionList
-		//   retrun nullptr if it fails 
-		FUNCTION_H
-		/*virtual uniquePtr<int32IndexContainer> insertPoints(
-			const realx3Vector& pos,
-			const setFieldList& setField,
-			repository& owner,
-			const List<eventObserver*>& exclusionList={nullptr}
-		);*/
-
-		boundaryBase& boundary(size_t i)
-		{
-			return boundaries_[i];
-		}
-
-
-		const boundaryBase& boundary(size_t i)const
-		{
-			return boundaries_[i];
-		}
-
-
-	
-	//// - IO operations 
 		
 		
 

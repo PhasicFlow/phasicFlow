@@ -32,7 +32,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement(uint32IndexContainer i
 		resize(maxInd+1);
 	}
 
-	using policy = Kokkos::RangePolicy<executionSpace,Kokkos::IndexType<uint32>>;
+	using policy = Kokkos::RangePolicy<execution_space,Kokkos::IndexType<uint32>>;
 
 	if constexpr( isDeviceAccessible_ )
 	{
@@ -88,7 +88,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 		resize(maxInd+1);
 	} 
 	
-	using policy = Kokkos::RangePolicy<executionSpace,Kokkos::IndexType<uint32>>;
+	using policy = Kokkos::RangePolicy<execution_space,Kokkos::IndexType<uint32>>;
 
 	hostViewType1D<const T> hVals( vals.data(), vals.size());
 
@@ -153,7 +153,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::reorderItems(uint32IndexContainer indic
 
 	viewType 	sortedView(this->name(), newSize);
 
-	using policy = Kokkos::RangePolicy< executionSpace,Kokkos::IndexType<uint32>>;
+	using policy = Kokkos::RangePolicy< execution_space,Kokkos::IndexType<uint32>>;
 
 	if constexpr( isDeviceAccessible_)
 	{

@@ -144,7 +144,7 @@ pFlow::ListPtr<T>& pFlow::ListPtr<T>::operator=
 }
 
 template<typename T>
-T* pFlow::ListPtr<T>::set
+pFlow::uniquePtr<T> pFlow::ListPtr<T>::set
 (
 	size_t i, T* ptr
 )
@@ -158,7 +158,7 @@ template<typename T>
 pFlow::uniquePtr<T> pFlow::ListPtr<T>::set
 (
 	size_t i,
-	uniquePtr<T>& ptr
+	uniquePtr<T>&& ptr
 )
 {
 	if( i > size() )
@@ -171,10 +171,9 @@ pFlow::uniquePtr<T> pFlow::ListPtr<T>::set
 
 	auto iter = list_.begin();
 	std::advance(iter, i);
-	auto oldIter = iter;
+	T* oldPtr = *iter;
 	*iter = ptr.release();
-	return *oldIter;
-
+	return uniquePtr<T>(oldPtr);
 }
 
 
@@ -200,7 +199,7 @@ void pFlow::ListPtr<T>::push_back
 }
 
 template<typename T>
-void pFlow::ListPtr<T>::push_back(uniquePtr<T>& ptr)
+void pFlow::ListPtr<T>::push_back(uniquePtr<T>&& ptr)
 {
 	list_.push_back( ptr.release() );
 }
@@ -271,17 +270,23 @@ pFlow::uniquePtr<T> pFlow::ListPtr<T>::release
 	return p;
 }
 
+
+
 template<typename T>
 void pFlow::ListPtr<T>::clear()
 {
+	
+	int i =0;
 	for( auto iter = list_.begin(); iter != list_.end(); ++iter )
 	{
 		if(*iter != nullptr)
 		{
+	
 			delete *iter;
 			*iter = nullptr;
-		}
+		}	
 	}
+
 	list_.clear();
 }
 

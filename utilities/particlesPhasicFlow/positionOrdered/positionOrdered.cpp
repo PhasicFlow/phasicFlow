@@ -123,6 +123,7 @@ bool pFlow::positionOrdered::positionPointsOrdered()
 
 pFlow::positionOrdered::positionOrdered
 (
+	systemControl& control,
 	const dictionary& dict
 )
 :

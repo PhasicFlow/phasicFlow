@@ -18,16 +18,60 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __initialize_hpp__
-#define __initialize_hpp__
 
-// initilized and finalize should be placed in onc scope 
-REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-REPORT(1)<<"Host execution space is "<< Green_Text(pFlow::DefaultHostExecutionSpace::name())<<END_REPORT;
-REPORT(1)<<"Device execution space is "<<Green_Text(pFlow::DefaultExecutionSpace::name())<<END_REPORT;
+#ifndef __boundaryList_hpp__
+#define __boundaryList_hpp__
 
-Kokkos::initialize( argc, argv );
+#include "boundaryBase.hpp"
+#include "ListPtr.hpp"
+
+#include "streams.hpp"
+
+namespace pFlow
 {
 
+class simulationDomain;
 
-#endif
+class boundaryList
+{
+
+protected:
+
+	//// - data members
+        internalPoints& 		internal_;
+		
+        const simulationDomain& simDomain_;
+
+        ListPtr<boundaryBase> 	boundaryList_;
+
+        bool                    listSet_ = false;
+
+    
+
+public:
+	
+	/// type info
+	TypeInfo("boundaryList");
+	
+
+	//// - Constructors
+
+	boundaryList(
+		const simulationDomain& simD, 
+		internalPoints& internal);
+
+	//~boundaryList() = default;
+
+  ~boundaryList() = default;
+
+  bool updateLists();
+};
+
+} // pFlow
+
+
+
+
+#endif //__boundaryList_hpp__
+
+

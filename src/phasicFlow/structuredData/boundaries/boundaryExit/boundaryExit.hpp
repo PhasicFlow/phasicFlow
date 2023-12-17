@@ -18,16 +18,58 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __initialize_hpp__
-#define __initialize_hpp__
+#ifndef __boundaryExit_hpp__
+#define __boundaryExit_hpp__
 
-// initilized and finalize should be placed in onc scope 
-REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-REPORT(1)<<"Host execution space is "<< Green_Text(pFlow::DefaultHostExecutionSpace::name())<<END_REPORT;
-REPORT(1)<<"Device execution space is "<<Green_Text(pFlow::DefaultExecutionSpace::name())<<END_REPORT;
 
-Kokkos::initialize( argc, argv );
+#include "boundaryBase.hpp"
+
+namespace pFlow
 {
 
+class boundaryExit
+:
+ 	public boundaryBase
+{
+protected:
+
+	/// @brief Length of margin in the negative side of 
+	/// boundary to still allow points stay in the 
+	/// simulation. 
+	real 	exitMarginLength_ = 0;
+
+	/// @brief between successive check for particle exit
+	/// (iteration-based).
+	uint32 	checkForExitInterval_ = 1;
+
+public:
+
+	TypeInfo("boundary<exit>");
+
+	boundaryExit(
+		const dictionary& 	dict,
+		const plane&    	bplane,
+		internalPoints& 	internal);
+
+	virtual 
+	~boundaryExit() = default;
+	
+	add_vCtor
+	(
+		boundaryBase,
+		boundaryExit,
+		dictionary
+	);
+
+	bool beforeIteratoin(uint32 iterNum, real t) override;
+
+	bool iterate(uint32 iterNum, real t) override;
+
+	bool afterIteration(uint32 iterNum, real t) override;
+
+
+};
+
+}
 
 #endif

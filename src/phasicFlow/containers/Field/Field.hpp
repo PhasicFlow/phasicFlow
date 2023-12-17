@@ -48,17 +48,17 @@ public:
 
 	using iterator        = typename VectorType::iterator;
 
-  	using constIterator   = typename VectorType::constIterator;
+	using const_iterator   = typename VectorType::const_iterator;
 
 	using reference       = typename VectorType::reference;
   	
-  	using constReference  = typename VectorType::constReference;
+	using const_reference  = typename VectorType::const_reference;
 
-	using valueType       = typename VectorType::valueType;
+	using value_type       = typename VectorType::value_type;
   	
-  	using pointer         = typename VectorType::pointer;
+	using pointer         = typename VectorType::pointer;
   	
-  	using constPointer    = typename VectorType::constPointer;
+	using const_pointer    = typename VectorType::const_pointer;
   	
 
 protected:

@@ -175,9 +175,10 @@ public:
 		/// if dictionary is file dictionary, return false
 		virtual bool isFileDict()const;
 
-		/// add a pointer entry (dictionary/dataEntry)
-		//   replaces this entry with existing one
-		bool addPtr(const word& keyword, uniquePtr<iEntry>& etry );
+		/// @brief add a pointer entry (dictionary/dataEntry)
+		///   replaces this entry with existing one and issue a warning
+		bool addPtr(const word& keyword, uniquePtr<iEntry>& etry, bool warning = true );
+
 
 		/// add a float dataEntry 
 		bool add(const word& keyword, const float& v);
@@ -206,13 +207,16 @@ public:
 		/// add a uint8 dataEntry
 		bool add(const word& keyword, const uint8& v);
 
-		// add a dictionary with the specifiedd keyword
+		/// @brief add a dictionary with the specifiedd keyword, if 
+		/// it exists, replace it.
 		bool addDict(const word& keyword, const dictionary& dict);
 
 		/// add a dataEntry of type T
 		template<typename T>
 		bool add(const word& keyword, const T& v );
 
+		template<typename T>
+		bool addOrKeep(const word& keyword, const T& v);
 
 		void clear();
 
@@ -308,6 +312,19 @@ bool dictionary::add(const word& keyword, const T& v )
 	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this ,v);
 	return addPtr(keyword, ptr);
 		
+}
+
+
+template<typename T>
+bool dictionary::addOrKeep(const word& keyword, const T& v )
+{
+	if(!containsDataEntry(keyword))
+	{
+		uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this ,v);
+		return addPtr(keyword, ptr);
+	}
+	
+	return true;
 }
 
 

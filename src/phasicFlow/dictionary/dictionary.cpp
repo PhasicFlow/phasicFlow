@@ -378,7 +378,8 @@ bool pFlow::dictionary::isFileDict()const
 bool  pFlow::dictionary::addPtr
 (
 	const word& keyword,
-	uniquePtr<iEntry>& entry
+	uniquePtr<iEntry>& entry,
+	bool warning
 )
 {
 
@@ -390,9 +391,13 @@ bool  pFlow::dictionary::addPtr
 	// search all entries for repeated keyword
 	if(auto [ptr, exist] = entries_.find(keyword); exist )
 	{
-		warningInFunction <<
-		"keyword " << keyword << " already exists in the dicrionary " <<
-		this->globalName() << ". The old entry will be replaced by the new one. \n";
+		if(warning)
+		{
+			warningInFunction <<
+			"keyword " << keyword << " already exists in the dicrionary " <<
+			this->globalName() << ". The old entry will be replaced by the new one. \n";
+		}
+		
 		// store the old pointer to entry
 		oldEntryPtr = ptr;
 	}
@@ -400,6 +405,7 @@ bool  pFlow::dictionary::addPtr
 	
 	if( entries_.insertReplace(keyword, entry) )
 	{
+	
 		if(oldEntryPtr)
 		{
 			// this should be replaced 

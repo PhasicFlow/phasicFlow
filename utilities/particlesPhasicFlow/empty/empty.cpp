@@ -23,10 +23,11 @@ Licence:
 
 
 pFlow::empty::empty(
+  systemControl& control,
 	const dictionary& dict
 )
 :
-	positionParticles(dict),
+	positionParticles(control, dict),
 	position_
 	(
 		maxNumberOfParticles_, 0, RESERVE()

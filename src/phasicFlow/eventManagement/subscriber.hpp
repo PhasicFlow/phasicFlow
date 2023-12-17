@@ -40,10 +40,22 @@ protected:
 	// - list of subsribed objectd that recieve updage messages 
 	mutable std::array<List<observer*>,16> observerList_;
 
+	word subName_;
+
 public:
 
-	subscriber()
+	subscriber(const word& name)
+	:
+		subName_(name)
 	{}
+
+	subscriber(const subscriber&) = delete;
+
+	subscriber(subscriber&&) = default;
+
+	subscriber& operator = (const subscriber&) = delete;
+
+	subscriber& operator = (subscriber&&) = default;
 
 	virtual ~subscriber();
 
@@ -54,6 +66,7 @@ public:
 	//bool notify(const eventMessage& msg);
 
 	//bool notify(const eventMessage& msg, const List<eventObserver*>& exclutionList );
+
 
 	
 	bool notify(const message msg, const anyList& varList);

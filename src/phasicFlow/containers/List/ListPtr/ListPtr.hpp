@@ -30,7 +30,6 @@ Licence:
 #include "error.hpp"
 #include "iOstream.hpp"
 
-
 namespace pFlow
 {
 
@@ -91,7 +90,7 @@ public:
 		// - a list with initial length of len
 		ListPtr(size_t len)
 		:
-			list_(len)
+			list_(len, nullptr)
 		{}
 
 		// - copy construct, create new objects out of the pointers in the src 
@@ -141,10 +140,10 @@ public:
 	//// - Methods 
 
 		// - set the ith element 
-		T* set(size_t i, T* ptr);
+		uniquePtr<T> set(size_t i, T* ptr);
 		
 		// - set the ith element and take the ownership from uniquePtr
-		uniquePtr<T> set(size_t i, uniquePtr<T>& ptr );
+		uniquePtr<T> set(size_t i, uniquePtr<T>&& ptr );
 		
 		// - create the object in-place and set the pointer in ith position
 		//   if oject creation fails, uniquePtr deletes the memeory
@@ -155,7 +154,7 @@ public:
 	    void push_back(T* ptr);
 	    
 	    // - put the pointer at the end
-	    void push_back(uniquePtr<T>& ptr);
+	    void push_back(uniquePtr<T>&& ptr);
 	    
 	    // - safely create (in-place) and put the pointer at the end
 	    template<typename... Args>

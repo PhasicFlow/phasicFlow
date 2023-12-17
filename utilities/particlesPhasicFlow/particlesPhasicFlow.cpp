@@ -24,7 +24,7 @@ Licence:
 #include "setFields.hpp"
 #include "systemControl.hpp"
 #include "commandLine.hpp"
-#include "readControlDict.hpp"
+//#include "readControlDict.hpp"
 
 using pFlow::output;
 using pFlow::endl;

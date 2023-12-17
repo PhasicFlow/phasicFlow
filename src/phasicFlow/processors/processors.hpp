@@ -95,6 +95,18 @@ public:
 		return processors::globalSize()>1;
 	}
 	
+	static inline
+	const char* runTypeName()
+	{
+		if(isParallel())
+		{
+			return "MPI";
+		}
+		else
+		{
+			return "regular";
+		}
+	}
 	/// Is MPI initialized?
 	static
 	bool isInitialized();

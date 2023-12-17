@@ -62,27 +62,27 @@ public:
 
 		using iterator        = T*;
 
-		using constIterator   = const T*;
+		using const_iterator   = const T*;
 	  	
 		using reference       = T&;
 	  	
-	 	using constReference  = const T&;
+	 	using const_reference  = const T&;
 
-		using valueType       = T;
+		using value_type       = T;
 	  	
 		using pointer         = T*;
 	  	
-		using constPointer    = const T*;
+		using const_pointer    = const T*;
   	
 	//- typedefs related to memory management 
 
 		using viewType 			= ViewType1D<T, MemorySpace>;
 
-		using deviceType 		= typename viewType::device_type;
+		using device_type 		= typename viewType::device_type;
 
-		using memorySpace 		= typename viewType::memory_space;
+		using memory_space 		= typename viewType::memory_space;
 
-		using executionSpace 	= typename viewType::execution_space;
+		using execution_space 	= typename viewType::execution_space;
 
 protected:
 	
@@ -102,19 +102,19 @@ protected:
 
 		/// Is the memory of this vector accessible from Host
 		static constexpr 
-		bool  isHostAccessible_ = isHostAccessible<executionSpace>();
-			//Kokkos::SpaceAccessibility<executionSpace,HostSpace>::accessible;
+		bool  isHostAccessible_ = isHostAccessible<execution_space>();
+			//Kokkos::SpaceAccessibility<execution_space,HostSpace>::accessible;
 
 		/// Is the memory of this vector accessiple from Divce
 		static constexpr
-		bool isDeviceAccessible_ = isDeviceAccessible<executionSpace>();
+		bool isDeviceAccessible_ = isDeviceAccessible<execution_space>();
 
 
 		/// Name of the memory space
 	  	constexpr static inline 
 	  	const char* memoerySpaceName()
 	  	{
-	  		return memorySpace::name();
+	  		return memory_space::name();
 	  	}
 
 	  	/// Evaluate capacity based on the input size 
@@ -461,6 +461,17 @@ public:
 			assign(src, src.capacity());
 		}
 
+		INLINE_FUNCTION_H
+		auto getSpan()
+		{
+			return span<T>(view_.data(), size());
+		}
+		
+		INLINE_FUNCTION_H 
+		auto getSpan()const
+		{
+			return span<const T>(view_.data(), this->size());
+		}
 
 		INLINE_FUNCTION_H
 		bool insertSetElement(uint32IndexContainer indices, const T& val);
@@ -520,7 +531,7 @@ public:
 		}
 
 		INLINE_FUNCTION_H 
-		constPointer data()const{
+		const_pointer data()const{
 			return view_.data();
 		}
 
@@ -535,7 +546,7 @@ public:
 		/// Return begin iterator. it works when host is accessible.
 		template<bool Enable = true>
 		INLINE_FUNCTION_H 
-		typename std::enable_if_t<isHostAccessible_ && Enable,constIterator>
+		typename std::enable_if_t<isHostAccessible_ && Enable,const_iterator>
 		begin()const {
 			return data();
 		}
@@ -553,7 +564,7 @@ public:
 		/// Return end iterator. it works when host is accessible.
 		template<bool Enable = true>
 		INLINE_FUNCTION_H
-		typename std::enable_if_t<isHostAccessible_ && Enable,constIterator>
+		typename std::enable_if_t<isHostAccessible_ && Enable,const_iterator>
 		end()const{
 			return size_ > 0 ? data() + size_: data();
 		}
@@ -569,7 +580,7 @@ public:
 		/// Return reference to element i. it works when host is accessible.
 		template<bool Enable = true>
 		INLINE_FUNCTION_H 
-		typename std::enable_if_t<isHostAccessible_ && Enable,constReference>
+		typename std::enable_if_t<isHostAccessible_ && Enable,const_reference>
 		 operator[](size_t i)const{
 			return view_[i];
 		}

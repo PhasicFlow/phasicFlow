@@ -203,7 +203,7 @@ bool pFlow::timeControl::operator ++(int)
 	currentTime_ += dt_;
 	if(screenReport() && !managedExternaly_)
 	{
-		REPORT(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endREPORT;
+		REPORT(0)<<"Time (s): "<<Cyan_Text( currentTimeWord() )<<END_REPORT;
 	}
 	// switch outputToFile_ on/off
 	checkForOutputToFile();

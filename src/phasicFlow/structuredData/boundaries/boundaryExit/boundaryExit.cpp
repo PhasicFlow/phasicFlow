@@ -18,16 +18,47 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __initialize_hpp__
-#define __initialize_hpp__
+#include "boundaryExit.hpp"
+#include "dictionary.hpp"
 
-// initilized and finalize should be placed in onc scope 
-REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-REPORT(1)<<"Host execution space is "<< Green_Text(pFlow::DefaultHostExecutionSpace::name())<<END_REPORT;
-REPORT(1)<<"Device execution space is "<<Green_Text(pFlow::DefaultExecutionSpace::name())<<END_REPORT;
-
-Kokkos::initialize( argc, argv );
+pFlow::boundaryExit::boundaryExit
+(
+	const dictionary& dict,
+	const plane&      bplane,
+	internalPoints&   internal
+)
+:
+	boundaryBase(dict, bplane, internal)
 {
+	exitMarginLength_ = max( 
+		dict.getValOrSet("exitMarginLength",0.0), 0.0);
+	checkForExitInterval_ = max(
+		dict.getValOrSet("checkForExitInterval", 1), 1);
+}
 
+bool pFlow::boundaryExit::beforeIteratoin
+(
+	uint32 iterNum, 
+	real t
+)
+{
+	return true;
+}
 
-#endif
+bool pFlow::boundaryExit::iterate
+(
+	uint32 iterNum, 
+	real t
+)
+{
+	return true;
+}
+
+bool pFlow::boundaryExit::afterIteration
+(
+	uint32 iterNum, 
+	real t
+)
+{
+	return true;
+}

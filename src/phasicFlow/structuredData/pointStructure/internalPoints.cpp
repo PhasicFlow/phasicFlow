@@ -20,7 +20,7 @@ Licence:
 
 
 #include "internalPoints.hpp"
-
+#include "Vector.hpp"
 
 void pFlow::internalPoints::syncPFlag()const
 {
@@ -31,11 +31,6 @@ void pFlow::internalPoints::syncPFlag()const
 	}
 }
 
-/*#include "setFieldList.hpp"
-#include "error.hpp"
-#include "iOstream.hpp"
-
-#include "mortonIndexing.hpp"*/
 
 /*FUNCTION_H
 bool pFlow::internalPoints::evaluateinternalPoints()
@@ -153,6 +148,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer>
 
 pFlow::internalPoints::internalPoints()
 :
+	subscriber("internalPoints"),
 	pointPosition_("internalPoints", "internalPoints", initialCapacity_, 0, RESERVE()),
 	pFlagsD_(initialCapacity_, 0 , 0)
 {
@@ -162,9 +158,10 @@ pFlow::internalPoints::internalPoints()
 
 pFlow::internalPoints::internalPoints
 (
-	const std::vector<realx3>& posVec
+	const realx3Vector& posVec
 )
 :
+	subscriber("internalPoints"),
 	pointPosition_("internalPoints", "internalPoints", posVec.capacity(), 0, RESERVE()),
 	pFlagsD_(posVec.capacity(), 0, posVec.size())
 {
@@ -194,14 +191,19 @@ FUNCTION_H
 void pFlow::internalPoints::updateFlag
 (
 	const domain& dm, 
-	real dist
+	const std::array<real,6>& dist
 )
 {
-	pFlagsD_.markDeleteInDomain
+	pFlagsD_.markPointRegions
 	(
 		dm,
 		pointPosition_.deviceVectorAll(),
-		dist
+		dist[0],
+		dist[1],
+		dist[2],
+		dist[3],
+		dist[4],
+		dist[5]
 	);
 }
 
@@ -214,12 +216,19 @@ bool pFlow::internalPoints::read
 )
 {
 	
-	if( !pointPosition_.read(is, iotype))
+	Field<Vector, realx3 , vecAllocator<realx3>> fRead("internalPoints", "internalPoints");
+
+	if( !fRead.read(is, iotype))
 	{
 		fatalErrorInFunction<<
 		"Error in reading pointPosition from stream "<< is.name()<<endl;
 		return false;
 	}
+
+	/// here there should be some mechanism for field distribution between procesors
+	
+
+	pointPosition_.assign(fRead.vectorField());
 
 	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
 	pFlagSync_ = false;

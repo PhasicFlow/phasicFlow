@@ -111,7 +111,7 @@ bool pFlow::Time::write
 {
 	if(outputToFile())
 	{
-		REPORT(0)<<"\nWriting to file at time: "<< cyanText(timeName())<<endREPORT;
+		REPORT(0)<<"\nWriting to file at time: "<< Cyan_Text(timeName())<<END_REPORT;
 		return repository::write(verbose);
 	}
 	return true;

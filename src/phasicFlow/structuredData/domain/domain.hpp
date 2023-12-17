@@ -124,6 +124,17 @@ public:
 			return front_;
 		}
 
+		INLINE_FUNCTION_H
+		const auto& boundaryPlane(uint32 i)const 
+		{
+			if(i==0) return left_;
+			if(i==1) return right_;
+			if(i==2) return bottom_;
+			if(i==3) return top_;
+			if(i==4) return rear_;
+			return front_;
+		}
+
 	
 }; // domain
 

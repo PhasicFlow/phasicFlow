@@ -137,7 +137,7 @@ pFlow::systemControl::systemControl
 	),
 	libs_(settingsDict_),
 	outFilePrecision_(
-		settingsDict_.getValOrSet("outFilePrecision", static_cast<size_t>(6))
+		settingsDict_.getValOrSet("outFilePrecision", static_cast<uint64>(6))
 		),
 	Time_
 	(
@@ -231,6 +231,22 @@ pFlow::systemControl::systemControl(
 	writeToFileTimer_("Write to file", &timers_)	
 {}
 
+pFlow::dictionary& pFlow::systemControl::domainDict()
+{
+	return 
+	settings().emplaceObjectOrGet<dictionary>
+	(
+		objectFile
+		(
+			domainFile__,
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_NEVER
+		),
+		domainFile__,
+		true
+	);
+}
 
 bool pFlow::systemControl::operator ++(int)
 {

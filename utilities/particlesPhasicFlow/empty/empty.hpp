@@ -44,7 +44,9 @@ public:
 	// - type Info
 	TypeInfo("empty");
 
-	empty(const dictionary& dict);
+	empty(
+		systemControl& control,
+		const dictionary& dict);
 
 	// - add this class to vCtor selection table 
 	add_vCtor(
@@ -56,12 +58,12 @@ public:
 
 	//// - Methods 
 
-	virtual label numPoints()const
+	virtual uint64 numPoints()const
 	{
 		return 0;
 	}
 
-	virtual label size()const
+	virtual uint64 size()const
 	{
 		return 0;
 	}

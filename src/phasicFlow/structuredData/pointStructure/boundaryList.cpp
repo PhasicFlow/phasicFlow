@@ -18,16 +18,36 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __initialize_hpp__
-#define __initialize_hpp__
+#include "boundaryList.hpp"
+#include "simulationDomain.hpp"
 
-// initilized and finalize should be placed in onc scope 
-REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-REPORT(1)<<"Host execution space is "<< Green_Text(pFlow::DefaultHostExecutionSpace::name())<<END_REPORT;
-REPORT(1)<<"Device execution space is "<<Green_Text(pFlow::DefaultExecutionSpace::name())<<END_REPORT;
+pFlow::boundaryList::boundaryList
+(
+	const simulationDomain& simD,
+	internalPoints& internal
+)
+:
+	simDomain_(simD),
+	internal_(internal),
+	boundaryList_(simD.sizeOfBoundaries())
+{}
 
-Kokkos::initialize( argc, argv );
+bool pFlow::boundaryList::updateLists()
 {
 
-
-#endif
+	for(auto i=0; i<simDomain_.sizeOfBoundaries();i++)
+	{
+		boundaryList_.set
+		(
+			i,
+			boundaryBase::create
+			(
+				simDomain_.boundaryDict(i),
+				simDomain_.boundaryPlane(i),
+				internal_
+			)
+		);
+	}
+	listSet_ = true;
+	return true;
+}

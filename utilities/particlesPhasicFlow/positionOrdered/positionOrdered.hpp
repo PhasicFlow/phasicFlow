@@ -62,7 +62,9 @@ public:
 	// - type Info
 	TypeInfo("positionOrdered");
 
-	positionOrdered(const dictionary& dict);
+	positionOrdered(
+		systemControl& control,
+		const dictionary& dict);
 
 	// - add this class to vCtor selection table 
 	add_vCtor(

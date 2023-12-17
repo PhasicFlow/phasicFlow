@@ -76,6 +76,7 @@ pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& pos
 
 pFlow::positionParticles::positionParticles
 (
+	systemControl& control,
 	const dictionary& dict
 )
 {
@@ -95,6 +96,11 @@ pFlow::positionParticles::positionParticles
 	{
 		region_ = makeUnique<region<sphere>>(dict.subDict("sphere"));
 	}
+	else
+	{
+		region_ = makeUnique<region<box>>( control.domainDict().subDict("globalBox"));
+	}
+	
 }
 
 

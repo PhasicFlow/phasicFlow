@@ -76,9 +76,9 @@ public:
 
 	stridedRange(const dictionary& dict)
 	:
-		begin_(dict.getVal<label>("begin")),
-		end_(dict.getVal<label>("end")),
-		stride_(dict.getVal<label>("stride"))
+		begin_(dict.getVal<T>("begin")),
+		end_(dict.getVal<T>("end")),
+		stride_(dict.getVal<T>("stride"))
 	{}
 		
 	inline 

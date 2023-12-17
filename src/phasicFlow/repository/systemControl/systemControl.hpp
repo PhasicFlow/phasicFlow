@@ -52,25 +52,25 @@ protected:
 
 
 
-	// - settings folder repository
+	/// settings folder repository
 	repository 			settings_;
 
-	// - caseSetup folder repository
+	/// caseSetup folder repository
 	repository 			caseSetup_;
 
-	// - settingsDict fileDictionary
+	/// settingsDict fileDictionary
 	dictionary& 		settingsDict_;
 
-	// - extra libs to be loaded
+	/// extra libs to be loaded
 	dynamicLinkLibs 	libs_;
 	
-	// - precision for writing to file 
+	/// precision for writing to file 
 	size_t 			outFilePrecision_ = 6;
 
-	// - time repository
+	/// time repository
 	Time 			Time_;
 
-	// - if time control is managed externaly
+	/// if time control is managed externaly
 
 	bool 				externalTimeControl_ = false;
 
@@ -162,6 +162,9 @@ public:
 	dictionary& settingsDict(){
 		return settingsDict_;
 	}
+
+	dictionary& domainDict();
+	
 
 	virtual word runName() const
 	{

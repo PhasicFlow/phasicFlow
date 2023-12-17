@@ -24,10 +24,10 @@ Licence:
 // initilized and finalize should be placed in onc scope 
 #include "initialize.hpp"
 
-REPORT(0)<<"\nCreating Control repository . . ."<<endREPORT;
+REPORT(0)<<"\nCreating Control repository . . ."<<END_REPORT;
 pFlow::uniquePtr<pFlow::systemControl> ControlPtr = nullptr;
 
-if(isCoupling)
+/*if(isCoupling)
 {
 	pFlow::readControlDict controlDict;
 	
@@ -36,13 +36,13 @@ if(isCoupling)
 		controlDict.startTime(),
 		controlDict.endTime(),
 		controlDict.saveInterval(),
-		controlDict.startTimeName()
+		controlDict.startTimeNreseame()
 	);	
-}
-else
-{
+}*/
+/*else
+{*/
   	ControlPtr = pFlow::makeUnique<pFlow::systemControl>();
-}
+//}
 
 auto& Control = ControlPtr();
 
