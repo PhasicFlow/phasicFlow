@@ -17,43 +17,56 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __VectorSingleMath_hpp__
-#define __VectorSingleMath_hpp__
+#ifndef __boundaryFieldList_hpp__
+#define __boundaryFieldList_hpp__
 
-
-
+#include "boundaryField.hpp"
+#include "boundaryList.hpp"
+#include "ListPtr.hpp"
 
 namespace pFlow
 {
 
-template<typename T, typename MemorySpace>
-INLINE_FUNCTION_H 
-size_t count(const VectorSingle<T,MemorySpace>& vec, const T& val)
+template< template<class, class> class VectorField, class T, class MemorySpace = void >
+class boundaryFieldList
+:
+    ListPtr<boundaryField<VectorField, T, MemorySpace>>
 {
-	return count( vec.deviceVectorAll(), 0, vec.size(), val);
+public:
+
+    using boundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
+
+    using FieldType = typename boundaryFieldType::FieldType;
+
+protected:
+
+    const boundaryList&         boundaries_;
+
+public:
+
+    boundaryFieldList(const boundaryList& boundaries, FieldType& internal)
+    :
+        ListPtr<boundaryFieldType>(boundaries.size()),
+        boundaries_(boundaries)
+    {
+        for(auto i=0; i<boundaries.size(); i++)
+        {
+            this->set
+            (
+                i, 
+                makeUnique<boundaryFieldType>
+                (
+                    boundaries_[i], 
+                    internal
+                )
+            );
+        }
+    }
+
+
+
+};
+
 }
 
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T min( const VectorSingle<T,MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);	
-}
-
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T max( const VectorSingle<T, MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);		
-}
-
-
-
-}
-
-
-#endif // __VectorSingleMath_hpp__
+#endif

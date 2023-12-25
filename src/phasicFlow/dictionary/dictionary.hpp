@@ -84,7 +84,7 @@ protected:
 		/// ref to parrent dictionary
 		const dictionary& parDict_;
 
-		bool isGlobal_;
+		bool isGlobal_ = false;
 
 
 	///// protected methods 
@@ -106,6 +106,12 @@ protected:
 
 		/// write dictionary to stream - with keyword
 		bool writeDictionary(iOstream& os, bool withBlock = true)const;
+
+        /// construct an empty dictionary with keyword and make it global/fileDictionary (if true)
+		dictionary(const word& keyword, bool global);
+
+		/// construct a dictionary with name and read it from file 
+		dictionary(const word& keyword, const fileSystem& file);
 	
 
 public:
@@ -122,12 +128,6 @@ public:
 
 		/// construct an empty dictionary with keyword
 		dictionary(const word& keyword);
-
-		/// construct an empty dictionary with keyword and make it global/fileDictionary (if true)
-		dictionary(const word& keyword, bool global);
-
-		/// construct a dictionary with name and read it from file 
-		dictionary(const word& keyword, const fileSystem& file);
 
 		/// cunstruct an empty dictionary with keyword and parDict
 		dictionary(const word& keyword, const dictionary& parDict);

@@ -24,6 +24,8 @@ Licence:
 #include "setFields.hpp"
 #include "systemControl.hpp"
 #include "commandLine.hpp"
+#include "vocabs.hpp"
+
 //#include "readControlDict.hpp"
 
 using pFlow::output;
@@ -74,7 +76,7 @@ int main( int argc, char* argv[] )
 	if(setOnly && positionOnly)
 	{
 		ERR<<
-		"Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n"<<endERR;
+		"Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n"<<END_ERR;
 		return 1;
 	}	
 
@@ -103,8 +105,8 @@ int main( int argc, char* argv[] )
 	{
 
 		// position particles based on the dict content 
-		REPORT(0)<< "Positioning points . . . \n"<<endREPORT;
-		auto pointPosition = positionParticles::create(cpDict.subDict("positionParticles"));
+		REPORT(0)<< "Positioning points . . . \n"<<END_REPORT;
+		auto pointPosition = positionParticles::create(Control, cpDict.subDict("positionParticles"));
 
 		fileSystem pStructPath = Control.time().path()+pointStructureFile__;
 
@@ -120,16 +122,17 @@ int main( int argc, char* argv[] )
 				objectFile::READ_NEVER,
 				objectFile::WRITE_ALWAYS			
 			),
-			finalPos
+			Control,
+            finalPos
 		);
 
 		pStructPtr = &pStruct;
 
 
 		REPORT(1)<< "Created pStruct with "<< pStruct.size() << " points and capacity "<<
-		pStruct.capacity()<<" . . ."<< endREPORT;
+		pStruct.capacity()<<" . . ."<< END_REPORT;
 
-		REPORT(1)<< "Writing pStruct to " << Control.time().path()+ pointStructureFile__<< endREPORT<<endl<<endl;
+		REPORT(1)<< "Writing pStruct to " << Control.time().path()+ pointStructureFile__<< END_REPORT<<endl<<endl;
 
 		if( !Control.time().write())
 		{
@@ -148,7 +151,8 @@ int main( int argc, char* argv[] )
 				Control.time().path(),
 				objectFile::READ_NEVER,
 				objectFile::WRITE_ALWAYS			
-			)
+			),
+            Control
 		);
 
 		pStructPtr = &pStruct;
@@ -170,7 +174,7 @@ int main( int argc, char* argv[] )
 		{
 			if( !sfEntry.setPointFieldDefaultValueNewAll(Control.time(), pStruct, true))
 			{
-				ERR<< "\n error occured in setting default value fields.\n"<<endERR;
+				ERR<< "\n error occured in setting default value fields.\n"<<END_ERR;
 				return 1;
 			}
 		}
@@ -183,13 +187,13 @@ int main( int argc, char* argv[] )
 
 		for(auto name: selNames)
 		{
-			REPORT(1)<< "Applying selector " << greenText(name) <<endREPORT;
+			REPORT(1)<< "Applying selector " << Green_Text(name) <<END_REPORT;
 			
 			if(
 				!applySelector(Control, pStruct, selectorsDict.subDict(name))
 			 )
 			{
-				ERR<<"\n error occured in setting selector. \n"<<endERR;
+				ERR<<"\n error occured in setting selector. \n"<<END_ERR;
 				return 1;
 			}
 			output<<endl;
@@ -197,7 +201,7 @@ int main( int argc, char* argv[] )
 	}
 
 	Control.time().write(true);
-	REPORT(0)<< greenText("\nFinished successfully.\n")<<endREPORT;
+	REPORT(0)<< Green_Text("\nFinished successfully.\n")<<END_REPORT;
 
 
 // this should be palced in each main 

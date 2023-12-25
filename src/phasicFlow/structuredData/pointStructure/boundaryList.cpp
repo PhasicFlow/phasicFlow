@@ -27,9 +27,9 @@ pFlow::boundaryList::boundaryList
 	internalPoints& internal
 )
 :
+    ListPtr<boundaryBase>(simD.sizeOfBoundaries()),
 	simDomain_(simD),
-	internal_(internal),
-	boundaryList_(simD.sizeOfBoundaries())
+	internal_(internal)
 {}
 
 bool pFlow::boundaryList::updateLists()
@@ -37,7 +37,7 @@ bool pFlow::boundaryList::updateLists()
 
 	for(auto i=0; i<simDomain_.sizeOfBoundaries();i++)
 	{
-		boundaryList_.set
+		this->set
 		(
 			i,
 			boundaryBase::create

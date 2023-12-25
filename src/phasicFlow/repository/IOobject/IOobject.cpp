@@ -123,7 +123,7 @@ bool pFlow::IOobject::read(iIstream& is, bool rdHdr)
 	{
 		if(!readHeader(is))return false;
 	}
-	return object_->read_object_t(is);
+	return object_->read_object_t(is, ioPattern_);
 }
 
 
@@ -132,5 +132,5 @@ bool pFlow::IOobject::write(iOstream& os) const
 	if(this->readWriteHeader())
 		writeHeader(os, typeName());
 	
-	return (object_->write_object_t(os) && writeSeparator(os));
+	return (object_->write_object_t(os, ioPattern_) && writeSeparator(os));
 }

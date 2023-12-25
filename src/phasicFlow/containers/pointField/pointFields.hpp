@@ -35,21 +35,17 @@ template<typename T>
 template<typename T>
   using pointField_D = pointField<VectorSingle, T>;
 
-template<typename T>
-  using pointField_HD = pointField<VectorDual, T>;
+/*template<typename T>
+  using pointField_HD = pointField<VectorDual, T>;*/
 
 
 using int8PointField_D 		= pointField<VectorSingle, int8>;
 
 using int8PointField_H 		= pointField<VectorSingle, int8, HostSpace>;
 
-using int16PointField_D 	= pointField<VectorSingle, int16>;
-
-using int16PointField_H 	= pointField<VectorSingle, int16, HostSpace>;
-
 using int32PointField_D 	= pointField<VectorSingle, int32>;
 
-using int32PointField_H 	= pointField<VectorSingle, int32, HostSpace>;
+/*using int32PointField_H 	= pointField<VectorSingle, int32, HostSpace>;
 
 using int64PointField_D 	= pointField<VectorSingle, int64>;
 
@@ -89,7 +85,7 @@ using realPointField_HD 	= pointField<VectorDual, real>;
 
 using realx3PointField_HD 	= pointField<VectorDual, realx3>;
 
-using wordPointField 		= pointField<Vector, word, vecAllocator<word>>;
+using wordPointField 		= pointField<Vector, word, vecAllocator<word>>;*/
 
 }
 

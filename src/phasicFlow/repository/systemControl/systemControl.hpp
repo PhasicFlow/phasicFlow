@@ -30,7 +30,7 @@ Licence:
 
 #include "types.hpp"
 #include "Time.hpp"
-#include "dictionary.hpp"
+#include "fileDictionary.hpp"
 #include "box.hpp"
 #include "Timers.hpp"
 #include "dynamicLinkLibs.hpp"
@@ -59,7 +59,7 @@ protected:
 	repository 			caseSetup_;
 
 	/// settingsDict fileDictionary
-	dictionary& 		settingsDict_;
+	fileDictionary& 		settingsDict_;
 
 	/// extra libs to be loaded
 	dynamicLinkLibs 	libs_;
@@ -155,15 +155,15 @@ public:
 		return timersReport_();
 	}
 
-	const dictionary& settingsDict()const{
+	const fileDictionary& settingsDict()const{
 		return settingsDict_;
 	}
 
-	dictionary& settingsDict(){
+	fileDictionary& settingsDict(){
 		return settingsDict_;
 	}
 
-	dictionary& domainDict();
+	fileDictionary& domainDict();
 	
 
 	virtual word runName() const

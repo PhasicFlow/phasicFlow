@@ -18,8 +18,20 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 template<template<class, class> class VectorField, class T, class MemorySpace>
+pFlow::pointField<VectorField, T, MemorySpace>::pointField
+(
+    const pointStructure& pStruct, 
+    const T& defVal, 
+    message msg
+)
+:
+	boundaryFieldList_(pStruct.boundaries(), *this),
+	pStruct_(pStruct),
+	defaultValue_(defVal)
+{}
+
+/*template<template<class, class> class VectorField, class T, class MemorySpace>
 bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField
 (
 	iIstream& is
@@ -113,9 +125,7 @@ bool pFlow::pointField<VectorField, T, MemorySpace>::update(const eventMessage& 
  
 	if( msg.isDeleted() )
 	{
-		/*const auto& dp = pStruct_.markedDeletePoints();
-		return this->deleteElement(dp);
-		notImplementedFunction;*/
+		
 	}
 	else if( msg.isInsert())
 	{
@@ -132,5 +142,5 @@ bool pFlow::pointField<VectorField, T, MemorySpace>::update(const eventMessage& 
 	}
 	
 	return true;
-}
+}*/
 

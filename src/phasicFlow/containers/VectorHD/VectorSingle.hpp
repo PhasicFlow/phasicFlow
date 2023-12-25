@@ -17,23 +17,18 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __VectorSingle_hpp__
 #define __VectorSingle_hpp__
 
 #include <vector>
 
-
 #include "globalSettings.hpp"
+#include "phasicFlowKokkos.hpp"
 #include "types.hpp"
 #include "error.hpp"
 #include "indexContainer.hpp"
-#include "iOstream.hpp"
-#include "iIstream.hpp"
+#include "streams.hpp"
 #include "span.hpp"
-#include "Vector.hpp"
-#include "phasicFlowKokkos.hpp"
 #include "dataIO.hpp"
 
 
@@ -48,8 +43,6 @@ namespace pFlow
 //- Forward 
 template<typename T, typename MemorySpace>
 class VectorSingle;
-
-
 
 template<typename T, typename MemorySpace=void>
 class VectorSingle
@@ -103,7 +96,6 @@ protected:
 		/// Is the memory of this vector accessible from Host
 		static constexpr 
 		bool  isHostAccessible_ = isHostAccessible<execution_space>();
-			//Kokkos::SpaceAccessibility<execution_space,HostSpace>::accessible;
 
 		/// Is the memory of this vector accessiple from Divce
 		static constexpr
@@ -123,356 +115,177 @@ protected:
 			return static_cast<uint32>(n*growthFactor_+1);
 		}
 
-	/// Change size to n and preserve the conetent if realloc 
+	/// @brief Change size to n and preserve the conetent if realloc 
 	/// occurs 
 	INLINE_FUNCTION_H 
-	uint32 changeSize(uint32 n, bool withInit= false)
-	{
-		if(n > this->capacity() )
-		{
-			uint32 newCap = evalCapacity(n);
-			changeCapacity(newCap, withInit);
-		}
-		return setSize(n);
-	}
+	uint32 changeSize(uint32 n, bool withInit= false);
 
+    /// @brief Change the size and capacity of Vector
 	INLINE_FUNCTION_H
-	uint32 changeCapacitySize(uint32 actualCap, uint32 n, bool withInit= false)
-	{
-		changeCapacity(actualCap, withInit);
-		return setSize(n);
-	}
-
+	uint32 changeCapacitySize(uint32 actualCap, uint32 n, bool withInit= false);
+	
 	INLINE_FUNCTION_H
-	void changeCapacity(uint32 actualCap, bool withInit= false)
-	{
-		if(withInit)
-		{
-			resizeInit(view_, actualCap);
-		}
-		else
-		{
-			resizeNoInit(view_, actualCap);
-		}
-	}
-
+	void changeCapacity(uint32 actualCap, bool withInit= false);
+	
 	INLINE_FUNCTION_H
-	uint32 reallocateCapacitySize(uint32 cap, uint32 s)
-	{
-		reallocNoInit(view_, cap);
-		return setSize(s);
-	}
-
+	uint32 reallocateCapacitySize(uint32 cap, uint32 s);
+	
 	INLINE_FUNCTION_H 
-	uint32 setSize(uint32 n)
-	{
-		auto os = size_;
-		size_ = n;
-		return os;
-	}
+	uint32 setSize(uint32 n);
 	
 public:
 
-	// - type info
+	/// Type info
 	TypeInfoTemplateNV2("VectorSingle", T, memoerySpaceName());
 
 	//// - Constructors
 
 		/// Empty vector
-		VectorSingle()
-		:
-			VectorSingle("VectorSingle")
-		{}
-
-		/// Empty vector with a name 
-		VectorSingle(const word& name)
-		:
-			size_(0),
-			view_(name,2)
-		{}
-
+		VectorSingle();
+		
+		/// Empty vector with a name (capacity = 2) 
+		VectorSingle(const word& name);
 		
 		/// Vector with name and size n
-		VectorSingle(const word& name, uint32 n)
-		:
-			size_(n),
-			view_(name, evalCapacity(n))
-		{}
-
+		VectorSingle(const word& name, uint32 n);
 		
-
 		/// Vector with name, size and value
-		VectorSingle(const word& name, uint32 n, const T& val)
-		:
-			VectorSingle(name, n)
-		{
-			assign(n, val); 
-		}
-
+		VectorSingle(const word& name, uint32 n, const T& val);
 
 		/// Vector with name, size (n) and reserved capacity 
-		VectorSingle(const word& name, uint32 cap, uint32 n, RESERVE )
-		:
-			size_(n),
-			view_(name, cap)
-		{}
-
+		VectorSingle(const word& name, uint32 cap, uint32 n, RESERVE );
+		
 		/// Construct with a name and form std::vector (host memory)
-		VectorSingle(const word& name, const std::vector<T> & src) 
-		:
-			VectorSingle(name)
-		{
-			assign(src);
-		}
+		VectorSingle(const word& name, const std::vector<T> & src); 
 
-		/// Construct with a name and form std::vector (host memory)
-		/// and with a desired capacity. 
-		VectorSingle(const word& name, const std::vector<T> & src, uint32 cap) 
-		:
-			VectorSingle(name)
-		{
-			assign(src, cap);
-		}
-
+		/// Construct with a name and form std::vector (host memory) and with a desired capacity. 
+		VectorSingle(const word& name, const std::vector<T> & src, uint32 cap);
+		
 		/// Copy construct (performs deep copy)
-		VectorSingle(const VectorSingle& src)
-		:
-			VectorSingle(src.name(), src)
-		{	
-			//copy(deviceVector(), src.deviceVector());
-		}
-
-		/// Copy construct with a new name (perform deep copy)
-		VectorSingle(const word& name, const VectorSingle& src)
-		:
-			VectorSingle(name, src.capacity(), src.size(), RESERVE())
-		{
-			copy(deviceVector(), src.deviceVector());	
-		}
-
+		VectorSingle(const VectorSingle& src);
+		
+    	/// Copy construct with a new name (perform deep copy)
+		VectorSingle(const word& name, const VectorSingle& src);
+		
 		/// Copy assignment (perform deep copy from rhs to *this)
-		VectorSingle& operator = (const VectorSingle& rhs) 
-		{
-			if(&rhs == this) return *this;
-			VectorSingle temp(rhs);
-
-			size_ 	= temp.size();	
-			view_   = temp.view_;
-
-			return *this;
-		}
-
+		VectorSingle& operator = (const VectorSingle& rhs) ;
+		
 		/// Move construct
 		VectorSingle(VectorSingle&&) = default;   
 
 		/// Move assignment
 		VectorSingle& operator= (VectorSingle&&) = default; 
 
-		/// This may not destroy the underlying memory, sice view is 
+		/// @brief Descructor
+        /// This may not destroy the underlying memory, sice view is 
 		/// shared_ptr and maybe referenced by another object too 
-		~VectorSingle()
-		{
-			view_ = viewType();
-			size_ = 0;
-		}
+		~VectorSingle();
 
 		/// Clone as a uniquePtr (perform deep copy)
 		INLINE_FUNCTION_H 
-		uniquePtr<VectorSingle> clone() const  
-		{
-			return makeUnique<VectorSingle>( this->name(), *this);
-		}
+		uniquePtr<VectorSingle> clone() const;
 
 		/// Clone as a pointer (perform deep copy)
 		INLINE_FUNCTION_H
-		VectorSingle* clonePtr()const   
-		{
-			return new VectorSingle(this->name(), *this);
-		}
-
+		VectorSingle* clonePtr()const;
+	
 	//// - Methods
 
 		/// Return *this
 		INLINE_FUNCTION_H
-		VectorType& VectorField()
-		{
-			return *this;
-		}
+		VectorType& VectorField();
 
 		/// Return *this
 		INLINE_FUNCTION_H
-		const VectorType& VectorField()const
-		{
-			return *this;
-		}
+		const VectorType& VectorField()const;
 
 		/// Device vector range [0,capcity)
 		INLINE_FUNCTION_H 
-		viewType deviceVectorAll() const{
-			return view_;
-		}
+		auto deviceVectorAll() const;
 
 		///  Device vector range [0, size)
 		INLINE_FUNCTION_H 
-		viewType deviceVector()const
-		{
-			return Kokkos::subview(view_, Kokkos::make_pair(0,int(size_)));
-		}
+		auto deviceVector()const;
 
 		/// Return a vector accessible on Host in range [0,capacity)
 		INLINE_FUNCTION_H 
-		auto hostVectorAll()const
-		{
-			auto hView = Kokkos::create_mirror_view(view_);
-			copy(hView, view_);
-			return hView;
-		}
+		auto hostVectorAll()const;
+		
 
 		/// Return a vector accessible on Host in range [0,size)
 		INLINE_FUNCTION_H 
-		auto hostVector()const
-		{
-			auto hView = Kokkos::create_mirror_view(deviceVector());
-			copy(hView, deviceVector());
-			return hView;
-		}
+		auto hostVector()const;
 
 		/// Name of the vector 
 		INLINE_FUNCTION_H 
-		const word name()const
-		{
-			return view_.label();
-		}
+		word name()const;
+		
 		
 		/// Size of the vector 
 		INLINE_FUNCTION_H 
-		uint32 size()const
-		{
-			return size_;
-		}
+		uint32 size()const;
+		
 
 		// Capcity of the vector 
 		INLINE_FUNCTION_H 
-		uint32 capacity()const
-		{
-			return view_.extent(0);
-		}
-
+		uint32 capacity()const;
+		
 		/// If vector is empty 
 		INLINE_FUNCTION_H 
-		bool empty()const
-		{
-			return size_==0;
-		}
-
+		bool empty()const;
+		
 		/// Reserve capacity for vector 
 		/// Preserve the content.
 		INLINE_FUNCTION_H 
-		void reserve(uint32 cap) 
-		{
-			changeCapacity(cap);
-		}
+		void reserve(uint32 cap); 
 
 		/// Reallocate memory to new cap and set size to 0. 
 		INLINE_FUNCTION_H 
-		void reallocate(uint32 cap) 
-		{
-			reallocateCapacitySize(cap, 0);			
-		}
-
+		void reallocate(uint32 cap); 
+		
 		/// Reallocate memory to new cap and set size to newSize. 
 		/// Do not preserve the content
 		INLINE_FUNCTION_H 
-		void reallocate(uint32 cap, uint32 newSize) 
-		{
-			reallocateCapacitySize(cap, newSize);			
-		}
-
+		void reallocate(uint32 cap, uint32 newSize); 
+		
 		/// Resize the vector and preserve the content
 		INLINE_FUNCTION_H   
-		void resize(uint32 n){
-			changeSize(n);
-		}
+		void resize(uint32 n);
 
 		/// Resize the vector and assign the value to it. 
 		INLINE_FUNCTION_H  
-		void resize(uint32 n, const T& val) {
-			assign(n, val);
-		}
+		void resize(uint32 n, const T& val);
 
 		/// Clear the vector, but keep the allocated memory unchanged 
 		INLINE_FUNCTION_H 
-		void clear() 
-		{
-			 size_ = 0;
-		}
-
+		void clear();
+		
 		/// Fill the range [0,size) with val
 		INLINE_FUNCTION_H 
-		void fill(const T& val)
-		{
-			if(empty())return;
-			pFlow::fill(view_, rangeU32(0 ,size_) ,val);
-		}
+		void fill(const T& val);
 		
 		/// Change size of the vector and assign val to vector and 
 		INLINE_FUNCTION_H
-		void assign(size_t n, const T& val)
-		{
-			if( n > capacity() )
-			{
-				reallocateCapacitySize(evalCapacity(n), n);
-			}
-			else
-			{
-				setSize(n);	
-			}
-			this->fill(val);
-		}
-
+		void assign(size_t n, const T& val);
 		
 		/// Assign source vector with specified capacity.
 		/// The size of *this becomes the size of src. 
 		INLINE_FUNCTION_H 
-		void assign(const std::vector<T>& src, uint32 cap) 
-		{
-			uint32 srcSize = src.size();
-			
-			if(cap != capacity())
-			{
-				reallocateCapacitySize(cap, srcSize);
-			}
-			else
-			{
-				setSize(srcSize);
-			}
-			
-			// - unmanaged view in the host
-			hostViewType1D<const T> temp(src.data(), srcSize );
-			copy(deviceVector(), temp);
-		}
+		void assign(const std::vector<T>& src, uint32 cap); 
+		
 
 		/// Assign source vector.
 		/// The size of *this becomes the size of src. 
 		/// The capacity of *this becomes the capacity of src.
 		INLINE_FUNCTION_H 
-		void assign(const std::vector<T>& src) 
-		{
-			assign(src, src.capacity());
-		}
-
-		INLINE_FUNCTION_H
-		auto getSpan()
-		{
-			return span<T>(view_.data(), size());
-		}
+		void assign(const std::vector<T>& src);
 		
+		INLINE_FUNCTION_H
+		auto getSpan();
+				
 		INLINE_FUNCTION_H 
-		auto getSpan()const
-		{
-			return span<const T>(view_.data(), this->size());
-		}
-
+		auto getSpan()const;
+		
 		INLINE_FUNCTION_H
 		bool insertSetElement(uint32IndexContainer indices, const T& val);
 		
@@ -482,40 +295,8 @@ public:
 		INLINE_FUNCTION_H
 		bool reorderItems(uint32IndexContainer indices);
 
-
-		/*INLINE_FUNCTION_H
-		bool append(const deviceViewType1D<T>& dVec, size_t numElems)
-		{
-
-			if(numElems == 0 )return true;
-			auto oldSize = size_;
-			auto newSize = size_ + numElems;
-
-			if(this->empty() || newSize > capacity() )
-			{
-				resize(newSize);
-			}
-			else
-			{
-				size_ = size_+numElems;
-			}
-			
-			auto dSubView = Kokkos::subview(view_, Kokkos::make_pair(oldSize, newSize)); 
-			copy(dSubView, dVec);
-
-			return true;
-		}
-
-		INLINE_FUNCTION_H
-		bool append(const VectorSingle& Vec)
-		{
-			return append(Vec.deviceVector(), Vec.size());
-		}*/
-
-		// - host calls only
-		//   push a new element at the end
-		//   resize if necessary
-		//   works on host accessible vector 
+		/// @brief push a new element at the end (host call only)
+		///  resize if necessary and works on host accessible vector.
 		template<bool Enable = true>
 		INLINE_FUNCTION_H
 		typename std::enable_if<isHostAccessible_ && Enable, void>::type
@@ -535,7 +316,7 @@ public:
 			return view_.data();
 		}
 
-		/// Return begin iterator. it works when host is accessible.
+		/// Return begin iterator. It works when devices is host accessible.
 		template<bool Enable = true>
 		INLINE_FUNCTION_H 
 		typename std::enable_if_t<isHostAccessible_ && Enable,iterator>
@@ -666,8 +447,39 @@ inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& 
 } // - pFlow
 
 #include "VectorSingleAlgorithms.hpp"
-#include "VectorSingleI.hpp"
+#include "VectorSingle.cpp"
+
+
 
 
 #endif //__VectorSingle_hpp__
 
+
+/*INLINE_FUNCTION_H
+		bool append(const deviceViewType1D<T>& dVec, size_t numElems)
+		{
+
+			if(numElems == 0 )return true;
+			auto oldSize = size_;
+			auto newSize = size_ + numElems;
+
+			if(this->empty() || newSize > capacity() )
+			{
+				resize(newSize);
+			}
+			else
+			{
+				size_ = size_+numElems;
+			}
+			
+			auto dSubView = Kokkos::subview(view_, Kokkos::make_pair(oldSize, newSize)); 
+			copy(dSubView, dVec);
+
+			return true;
+		}
+
+		INLINE_FUNCTION_H
+		bool append(const VectorSingle& Vec)
+		{
+			return append(Vec.deviceVector(), Vec.size());
+		}*/

@@ -17,43 +17,16 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __VectorSingleMath_hpp__
-#define __VectorSingleMath_hpp__
 
+template<template<class, class> class VectorField, class T, class MemorySpace>
+pFlow::boundaryField<VectorField, T, MemorySpace>::boundaryField
+(
+	const boundaryBase& boundary,
+	FieldType &internal
+)
+:
+	observer(),
+	boundary_(boundary),
+	internal_(internal)
+{}
 
-
-
-namespace pFlow
-{
-
-template<typename T, typename MemorySpace>
-INLINE_FUNCTION_H 
-size_t count(const VectorSingle<T,MemorySpace>& vec, const T& val)
-{
-	return count( vec.deviceVectorAll(), 0, vec.size(), val);
-}
-
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T min( const VectorSingle<T,MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);	
-}
-
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T max( const VectorSingle<T, MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);		
-}
-
-
-
-}
-
-
-#endif // __VectorSingleMath_hpp__

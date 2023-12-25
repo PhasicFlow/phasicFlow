@@ -29,6 +29,7 @@ fileSystem/fileSystem.cpp
 processors/processors.cpp
 
 dictionary/dictionary.cpp
+dictionary/fileDictionary.cpp
 dictionary/entry/iEntry.cpp
 dictionary/entry/dataEntry.cpp 
 dictionary/twoPartEntry/twoPartEntry.cpp
@@ -36,6 +37,7 @@ dictionary/twoPartEntry/twoPartEntry.cpp
 containers/Vector/Vectors.cpp
 containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
+containers/pointField/pointFields.cpp
 
 Timer/Timer.cpp
 Timer/Timers.cpp
@@ -52,6 +54,8 @@ repository/systemControl/dynamicLinkLibs.cpp
 
 eventManagement/subscriber.cpp
 eventManagement/observer.cpp
+
+demComponent/demComponent.cpp
 
 structuredData/box/box.cpp
 structuredData/line/line.cpp

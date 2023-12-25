@@ -50,8 +50,8 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueNew
 	Type defValue = entry_.secondPartVal<Type>();
 	
 	if(verbose)
-		REPORT(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<endREPORT;
+		REPORT(2)<<"Creating pointField " << Green_Text(fieldName())<< " with default value " << cyanText(defValue)<<
+	             " in repository "<< owner.name() <<END_REPORT;
 
 	
 	auto& field = 
@@ -85,8 +85,8 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
 	Type defValue = entry_.secondPartVal<Type>();
 	
 	if(verbose)
-		REPORT(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<endREPORT;
+		REPORT(2)<<"Creating pointField " << Green_Text(fieldName())<< " with default value " << cyanText(defValue)<<
+	             " in repository "<< owner.name() <<END_REPORT;
 
 	// by default we perform operations on host
 	auto& field = 
@@ -129,8 +129,8 @@ void* pFlow::setFieldEntry::setPointFieldSelected
 	Type value = entry_.secondPartVal<Type>();
 
 	if(verbose)
-		REPORT(2)<< "Setting selected points of " << greenText(fName)
-		 		 << " to value " << cyanText(value) <<endREPORT;
+		REPORT(2)<< "Setting selected points of " << Green_Text(fName)
+		 		 << " to value " << cyanText(value) <<END_REPORT;
 	
 	
 	auto fieldTypeName = owner.lookupObjectTypeName(fName);
@@ -155,7 +155,7 @@ void* pFlow::setFieldEntry::setPointFieldSelected
 			return nullptr;
 	}
 
-	if( pointField<VectorDual,Type>::TYPENAME() == fieldTypeName )
+	/*if( pointField<VectorDual,Type>::TYPENAME() == fieldTypeName )
 	{
 		
 		
@@ -164,7 +164,7 @@ void* pFlow::setFieldEntry::setPointFieldSelected
 			return &field;
 		else
 			return nullptr;
-	}
+	}*/
 
 	fatalErrorInFunction<<
 	fieldTypeName<< " is not a supported field type for setFieldEntry.\n";
@@ -197,8 +197,8 @@ void* pFlow::setFieldEntry::setPointFieldSelectedStd
 	Type value = entry_.secondPartVal<Type>();
 
 	if(verbose)
-		REPORT(2)<< "Setting selected points of " << greenText(fName)
-		 		 << " to value " << cyanText(value) <<endREPORT;
+		REPORT(2)<< "Setting selected points of " << Green_Text(fName)
+		 		 << " to value " << cyanText(value) <<END_REPORT;
 	
 	
 	auto fieldTypeName = owner.lookupObjectTypeName(fName);

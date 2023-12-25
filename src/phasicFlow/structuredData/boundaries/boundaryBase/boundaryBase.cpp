@@ -20,6 +20,7 @@ Licence:
 
 #include "boundaryBase.hpp"
 #include "dictionary.hpp"
+#include "internalPoints.hpp"
 
 /*pFlow::boundaryBase::boundaryBase
 (
@@ -59,13 +60,30 @@ pFlow::boundaryBase::boundaryBase
 
 }
 
+typename pFlow::boundaryBase::pointFieldAccessType 
+    pFlow::boundaryBase::thisPoints()
+{
+    
+    return pointFieldAccessType
+    (
+        indexList_.size(),
+        indexList_.deviceVectorAll(),
+        internal_.pointPosition().deviceVectorAll()
+    );
+   
+}
 
-pFlow::uniquePtr<pFlow::boundaryBase> pFlow::boundaryBase::create
-(
-	const dictionary& 	dict,
-	const plane& 		bplane,
-	internalPoints& 	internal
-)
+typename pFlow::boundaryBase::pointFieldAccessType
+    pFlow::boundaryBase::neighborPoints()
+{
+    notImplementedFunction;
+    return pointFieldAccessType();
+}
+
+pFlow::uniquePtr<pFlow::boundaryBase> pFlow::boundaryBase::create(
+    const dictionary &dict,
+    const plane &bplane,
+    internalPoints &internal)
 {
 	word type = dict.getVal<word>("type");
 	word bType = angleBracketsNames("boundary", type);

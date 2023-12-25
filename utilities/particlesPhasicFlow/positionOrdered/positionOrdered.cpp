@@ -127,7 +127,7 @@ pFlow::positionOrdered::positionOrdered
 	const dictionary& dict
 )
 :
-	positionParticles(dict),
+	positionParticles(control, dict),
 	poDict_
 	(  
 		dict.subDict("positionOrderedInfo")
@@ -138,7 +138,7 @@ pFlow::positionOrdered::positionOrdered
 	),
 	numPoints_
 	(
-		poDict_.getVal<size_t>("numPoints")
+		poDict_.getVal<uint64>("numPoints")
 	),
 	axisOrder_
 	(
@@ -146,7 +146,7 @@ pFlow::positionOrdered::positionOrdered
 	),
 	position_
 	(
-		maxNumberOfParticles_, RESERVE()
+		"positionOrdered", maxNumberOfParticles_, numPoints_ ,RESERVE()
 	)
 {
 	

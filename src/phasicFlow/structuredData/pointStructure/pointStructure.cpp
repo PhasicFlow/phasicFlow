@@ -23,23 +23,6 @@ Licence:
 
 #include "streams.hpp"
 
-pFlow::pointStructure::pointStructure
-(
-  const dictionary& domainDict
-)
-:
-  internalPoints(),
-  simulationDomain_
-  (
-    simulationDomain::create(domainDict)
-  ),
-  boundaries_
-  (
-    simulationDomain_(),
-    *this
-  )
-{}
-
 bool pFlow::pointStructure::distributePoints
 (
 	const realx3Vector &points
@@ -85,15 +68,36 @@ bool pFlow::pointStructure::distributePoints
 
 }
 
+pFlow::pointStructure::pointStructure
+(
+    systemControl& control
+)
+:
+	demComponent("particlesCM", control),
+  	internalPoints(),
+	simulationDomain_
+	(
+		simulationDomain::create(control.domainDict())
+	),
+	boundaries_
+	(
+		simulationDomain_(),
+		*this
+	)
+{}
+
+
 pFlow::pointStructure::pointStructure(
-    const dictionary &domainDict,
+    systemControl& control,
     const realx3Vector &posVec)
-    : internalPoints(),
-      simulationDomain_(
-          simulationDomain::create(domainDict)),
-      boundaries_(
-          simulationDomain_(),
-          *this)
+:
+	demComponent("particlesCM", control), 
+	internalPoints(),
+	simulationDomain_(
+		simulationDomain::create(control.domainDict())),
+	boundaries_(
+		simulationDomain_(),
+		*this)
 {
     if(!simulationDomain_->updateDomains(posVec) )
     {
@@ -113,12 +117,24 @@ pFlow::pointStructure::pointStructure(
     
 }
 
-FUNCTION_H
-bool pFlow::pointStructure::read
-(
-    iIstream& is, 
-    IOPattern::IOType iotype
-)
+bool pFlow::pointStructure::beforeIteration()
+{
+    return true;
+}
+
+bool pFlow::pointStructure::iterate()
+{
+    return true;
+}
+
+bool pFlow::pointStructure::afterIteration()
+{
+    return true;
+}
+
+bool pFlow::pointStructure::read(
+    iIstream &is,
+    IOPattern::IOType iotype)
 {
     Field<Vector, realx3 , vecAllocator<realx3>> fRead("file_internalPoints", "internalPoints");
     

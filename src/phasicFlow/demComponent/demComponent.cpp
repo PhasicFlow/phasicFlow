@@ -17,43 +17,15 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __VectorSingleMath_hpp__
-#define __VectorSingleMath_hpp__
+
+#include "demComponent.hpp"
 
 
 
-
-namespace pFlow
-{
-
-template<typename T, typename MemorySpace>
-INLINE_FUNCTION_H 
-size_t count(const VectorSingle<T,MemorySpace>& vec, const T& val)
-{
-	return count( vec.deviceVectorAll(), 0, vec.size(), val);
-}
-
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T min( const VectorSingle<T,MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);	
-}
-
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T max( const VectorSingle<T, MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);		
-}
-
-
-
-}
-
-
-#endif // __VectorSingleMath_hpp__
+pFlow::demComponent::demComponent(const word& name, systemControl& control)
+:
+	componentName_(name),
+	control_(control),
+	time_(control.time()),
+	timers_(name, &control.timers())
+{}

@@ -33,6 +33,8 @@ namespace pFlow
 class simulationDomain;
 
 class boundaryList
+:
+    public ListPtr<boundaryBase>
 {
 
 protected:
@@ -41,8 +43,6 @@ protected:
         internalPoints& 		internal_;
 		
         const simulationDomain& simDomain_;
-
-        ListPtr<boundaryBase> 	boundaryList_;
 
         bool                    listSet_ = false;
 
@@ -65,6 +65,16 @@ public:
   ~boundaryList() = default;
 
   bool updateLists();
+
+  auto& boundary(size_t i)
+  {
+    return ListPtr<boundaryBase>::operator[](i);
+  }
+
+  const auto& boundary(size_t i)const
+  {
+    return ListPtr<boundaryBase>::operator[](i);
+  }
 };
 
 } // pFlow

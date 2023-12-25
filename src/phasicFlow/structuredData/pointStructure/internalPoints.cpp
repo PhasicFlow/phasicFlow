@@ -188,6 +188,12 @@ const pFlow::internalPoints::pFlagTypeHost&
 }
 
 FUNCTION_H
+pFlow::realx3Field_D &pFlow::internalPoints::pointPosition()
+{
+    return pointPosition_;
+}
+
+FUNCTION_H
 void pFlow::internalPoints::updateFlag
 (
 	const domain& dm, 

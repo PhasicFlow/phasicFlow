@@ -117,7 +117,8 @@ public:
 		FUNCTION_H
 		const realx3Field_D& pointPosition()const;
 		
-		
+		FUNCTION_H
+        realx3Field_D& pointPosition();
 
 		/*INLINE_FUNCTION_H
 		auto pointPositionHostAll()

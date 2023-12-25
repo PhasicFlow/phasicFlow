@@ -54,7 +54,7 @@ pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& pos
 			ind++});
 	}
 
-	INFORMATION<<"Performing morton sorting."<<endINFO;
+	INFORMATION<<"Performing morton sorting."<<END_INFO;
 	std::sort(
 		indMor.begin(),
 		indMor.end(),
@@ -120,7 +120,11 @@ pFlow::realx3Vector pFlow::positionParticles::getFinalPosition()
 }
 
 pFlow::uniquePtr<pFlow::positionParticles> 
-	pFlow::positionParticles::create(const dictionary & dict)
+	pFlow::positionParticles::create
+(
+    systemControl& control,
+    const dictionary & dict
+)
 {
 
 	word method = dict.getVal<word>("method");

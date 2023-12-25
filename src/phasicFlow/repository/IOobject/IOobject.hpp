@@ -50,9 +50,9 @@ private:
 
 		virtual word typeName()const = 0;
 
-		virtual bool read_object_t(iIstream& is) = 0;
+		virtual bool read_object_t(iIstream& is, IOPattern iop) = 0;
 
-		virtual bool write_object_t(iOstream& os)const = 0;
+		virtual bool write_object_t(iOstream& os, IOPattern iop)const = 0;
 
 	};
 
@@ -92,14 +92,14 @@ private:
 			return data_.typeName();
 		}
 
-		virtual bool read_object_t(iIstream& is)
+		bool read_object_t(iIstream& is, IOPattern iop) override
 		{
-			return data_.read(is);
+			return data_.read(is, iop);
 		}
 
-		virtual bool write_object_t(iOstream& os)const
+		bool write_object_t(iOstream& os, IOPattern iop)const override
 		{
-			return data_.write(os);
+			return data_.write(os, iop);
 		}
 
 		auto& data()

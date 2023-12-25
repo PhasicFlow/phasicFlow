@@ -24,7 +24,7 @@ Licence:
 
 template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8>; 
 
-template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>; 
+/*template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>; 
 
 template class pFlow::pointField<pFlow::VectorSingle, pFlow::int16>; 
 
@@ -52,7 +52,7 @@ template class pFlow::pointField<pFlow::VectorSingle, pFlow::real, pFlow::HostSp
 
 template class pFlow::pointField<pFlow::VectorSingle, pFlow::realx3>; 
 
-template class pFlow::pointField<pFlow::VectorSingle, pFlow::realx3, pFlow::HostSpace>;
+template class pFlow::pointField<pFlow::VectorSingle, pFlow::realx3, pFlow::HostSpace>;*/
 
 
 

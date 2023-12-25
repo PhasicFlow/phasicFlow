@@ -30,7 +30,7 @@ pFlow::empty::empty(
 	positionParticles(control, dict),
 	position_
 	(
-		maxNumberOfParticles_, 0, RESERVE()
+		"empty",maxNumberOfParticles_, 0, RESERVE()
 	)
 {
 }

@@ -9,14 +9,18 @@ namespace pFlow
 {
 
 
-template<typename T, typename ExecutionSpace>
+template<typename T, typename MemorySpace>
 class scatterFieldAccess
 {
 public:
 	
-	using execution_space 	= ExecutionSpace;
+	using viewType 			= ViewType1D<T, MemorySpace>;
 
-	using memory_space 		= typename execution_space::memory_space;
+    using device_type 		= typename viewType::device_type;
+
+    using memory_space 		= typename viewType::memory_space;
+
+    using execution_space 	= typename viewType::execution_space;
 
 protected:
 
@@ -24,12 +28,17 @@ protected:
 
 	ViewType1D<uint32, memory_space> 	indices_;
 
-	ViewType1D<T, memory_space> 		fieldVals_;
+	viewType 		fieldVals_;
 
 public:
 
+    scatterFieldAccess():
+        indices_(),
+        fieldVals_()    
+    {}
+
 	scatterFieldAccess(
-		uint32 	sz
+		uint32 	sz,
 		ViewType1D<uint32, memory_space> ind,
 		ViewType1D<T, memory_space> fVals)
 	:
@@ -50,31 +59,37 @@ public:
 
 	// - Methods
 
+    INLINE_FUNCTION_HD
 	T& operator()(uint32 i)
 	{
 		return fieldVals_(indices_(i));
 	}
 
+    INLINE_FUNCTION_HD
 	const T& operator()(uint32 i)const
 	{
 		return fieldVals_(indices_(i));
 	}
 
+    INLINE_FUNCTION_HD
 	T& operator[](uint32 i)
 	{
 		return fieldVals_(indices_(i));
 	}
 
+    INLINE_FUNCTION_HD
 	const T& operator[](uint32 i)const
 	{
 		return fieldVals_(indices_(i));
 	}
 
+    INLINE_FUNCTION_HD
 	uint32 	size()const
 	{
 		return size_;
 	}
 
+    INLINE_FUNCTION_HD
 	bool empty()const
 	{
 		return size_ == 0;

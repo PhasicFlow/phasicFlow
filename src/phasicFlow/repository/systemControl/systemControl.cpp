@@ -122,17 +122,17 @@ pFlow::systemControl::systemControl
 	),
 	settingsDict_
 	(
-		settings().emplaceObject<dictionary>
+		settings().emplaceObject<fileDictionary>
 		(
 			objectFile
 			(
 				settingsFile__,
 				"",
 				objectFile::READ_ALWAYS,
-				objectFile::WRITE_NEVER
+				objectFile::WRITE_NEVER,
+                IOPattern::AllProcessorsSimilar
 			),
-			settingsFile__,
-			true
+			settingsFile__
 		)
 	),
 	libs_(settingsDict_),
@@ -193,7 +193,7 @@ pFlow::systemControl::systemControl(
 	),
 	settingsDict_
 	(
-		settings().emplaceObject<dictionary>
+		settings().emplaceObject<fileDictionary>
 		(
 			objectFile
 			(
@@ -202,8 +202,7 @@ pFlow::systemControl::systemControl(
 				objectFile::READ_ALWAYS,
 				objectFile::WRITE_NEVER
 			),
-			settingsFile__,
-			true
+			settingsFile__
 		)
 	),
 	libs_(settingsDict_),
@@ -231,10 +230,10 @@ pFlow::systemControl::systemControl(
 	writeToFileTimer_("Write to file", &timers_)	
 {}
 
-pFlow::dictionary& pFlow::systemControl::domainDict()
+pFlow::fileDictionary& pFlow::systemControl::domainDict()
 {
 	return 
-	settings().emplaceObjectOrGet<dictionary>
+	settings().emplaceObjectOrGet<fileDictionary>
 	(
 		objectFile
 		(
@@ -243,8 +242,7 @@ pFlow::dictionary& pFlow::systemControl::domainDict()
 			objectFile::READ_ALWAYS,
 			objectFile::WRITE_NEVER
 		),
-		domainFile__,
-		true
+		domainFile__
 	);
 }
 

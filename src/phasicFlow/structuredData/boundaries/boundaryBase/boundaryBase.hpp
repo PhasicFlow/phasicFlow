@@ -25,6 +25,7 @@ Licence:
 #include "subscriber.hpp"
 #include "VectorSingles.hpp"
 #include "plane.hpp"
+#include "scatterFieldAccess.hpp"
 
 #include "streams.hpp"
 
@@ -41,6 +42,9 @@ class boundaryBase
 	public subscriber
 {
 public:
+
+    using pointFieldAccessType = 
+        scatterFieldAccess<realx3,DefaultExecutionSpace>;
 
 	enum DIRECTION: int8
 	{
@@ -106,11 +110,20 @@ public:
 		(dict, bplane, internal)
 	);
 
-	virtual bool beforeIteratoin(uint32 iterNum, real t) = 0 ;
+	virtual 
+    bool beforeIteratoin(uint32 iterNum, real t) = 0 ;
 
-	virtual bool iterate(uint32 iterNum, real t) = 0;
+	virtual 
+    bool iterate(uint32 iterNum, real t) = 0;
 
-	virtual bool afterIteration(uint32 iterNum, real t) = 0;
+	virtual 
+    bool afterIteration(uint32 iterNum, real t) = 0;
+
+    pointFieldAccessType thisPoints();
+
+    virtual
+    pointFieldAccessType neighborPoints();
+    
 
 	static
 	uniquePtr<boundaryBase> create

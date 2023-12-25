@@ -76,12 +76,12 @@ public:
 
 	//// - Methods 
 
-	virtual label numPoints()const
+	virtual uint64 numPoints()const
 	{
 		return position_.size();
 	}
 
-	virtual label size()const
+	virtual uint64 size()const
 	{
 		return position_.size();
 	}

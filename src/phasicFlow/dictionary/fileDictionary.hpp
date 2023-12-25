@@ -17,43 +17,37 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __VectorSingleMath_hpp__
-#define __VectorSingleMath_hpp__
 
-
+#include "dictionary.hpp"
 
 
 namespace pFlow
 {
 
-template<typename T, typename MemorySpace>
-INLINE_FUNCTION_H 
-size_t count(const VectorSingle<T,MemorySpace>& vec, const T& val)
+class IOPattern;
+
+class fileDictionary
+:
+    public dictionary
 {
-	return count( vec.deviceVectorAll(), 0, vec.size(), val);
-}
+public:
 
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T min( const VectorSingle<T,MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);	
-}
+    TypeInfo("fileDictionary");
 
-template<class T, class MemorySpace>
-INLINE_FUNCTION_H T max( const VectorSingle<T, MemorySpace>& vec) 
-{
-	return min(
-		vec.deviceVectorAll(),
-		0, vec.size()
-		);		
-}
+    /// construct an empty dictionary with keyword and make it global/fileDictionary
+	fileDictionary(const word& keyword);
+
+		/// construct a dictionary with name and read it from file 
+	fileDictionary(const word& keyword, const fileSystem& file);
 
 
+
+    /// read from stream
+	virtual bool read(iIstream& is, const IOPattern& iop);
+
+	/// write to stream
+	virtual bool write(iOstream& os, const IOPattern& iop) const;
+
+};
 
 }
-
-
-#endif // __VectorSingleMath_hpp__

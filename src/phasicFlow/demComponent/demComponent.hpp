@@ -22,7 +22,7 @@ Licence:
 #define __demComponent_hpp__
 
 #include "systemControl.hpp"
-
+#include "Time.hpp"
 
 
 namespace pFlow
@@ -46,7 +46,9 @@ protected:
 		word 	componentName_;
 
 		/// Reference to systemControl 
-		systemControl& control_;
+		systemControl& 	control_;
+
+		Time& 			time_;
 
 		/// All timers (if any) of this component
 		Timers 	timers_;
@@ -59,13 +61,8 @@ public:
 	// - Constructors
 	
 		/// construct from components
-		demComponent(const word& name, systemControl& control)
-		:
-			componentName_(name),
-			control_(control),
-			timers_(name, &control.timers())
-		{}
-
+		demComponent(const word& name, systemControl& control);
+		
 		/// No copy constructor
 		demComponent(const demComponent&) = delete;
 
@@ -102,15 +99,28 @@ public:
 		inline
 		real dt()const
 		{
-			return control_.time().dt();
+			return time_.dt();
 		}
 
 		/// Current simulation time 
 		inline
 		real currentTime()const
 		{
-			return control_.time().currentTime();
+			return time_.currentTime();
 		}
+
+		inline
+		const auto& time()const
+		{
+			return time_;
+		}
+
+		inline 
+		auto& time()
+		{
+			return time_;
+		}
+
 
 		/// Const ref to timers
 		inline

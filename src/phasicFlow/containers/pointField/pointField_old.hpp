@@ -21,18 +21,20 @@ Licence:
 #ifndef __pointField_hpp__
 #define __pointField_hpp__
 
-#include "boundaryFieldList.hpp"
-#include "pointStructure.hpp"
+
 #include "Field.hpp"
-#include "observer.hpp"
+#include "pointStructure.hpp"
+#include "error.hpp"
 
 namespace pFlow
 {
 
+
+
 template<template<class, class> class VectorField, class T, class MemorySpace=void>
 class pointField
 :
-	public observer,
+	public eventObserver,
 	public Field<VectorField, T, MemorySpace>
 {
 public:
@@ -40,36 +42,29 @@ public:
 	using pointFieldType 	= pointField<VectorField, T, MemorySpace>;
 	
 	using FieldType         = Field<VectorField, T, MemorySpace>;
-
-    using boundaryFieldListType = boundaryFieldList<VectorField, T, MemorySpace>;
   	
   	using VectorType  		= typename FieldType::VectorType;
 
 	using iterator        	= typename FieldType::iterator;
 
-  	using const_iterator   	= typename FieldType::const_iterator;
+  	using constIterator   	= typename FieldType::constIterator;
 
 	using reference       	= typename FieldType::reference;
   	
-  	using const_reference  	= typename FieldType::const_reference;
+  	using constReference  	= typename FieldType::constReference;
 
-	using value_type       	= typename FieldType::value_type;
+	using valueType       	= typename FieldType::valueType;
   	
   	using pointer         	= typename FieldType::pointer;
   	
-  	using const_pointer    	= typename FieldType::const_pointer;
+  	using constPointer    	= typename FieldType::constPointer;
 
 protected:
 
-    //// - data members 
+	////- data members
+		const pointStructure& pStruct_;
 
-        /// @brief list of boundaries
-        boundaryFieldListType       boundaryFieldList_;
-        
-		/// @brief  refrence to point structure 
-		const pointStructure&       pStruct_;
-
-		/// @brief value when a new item is added to field
+		// - value when a new item is added to field
 		T 	defaultValue_;
 
 
@@ -82,13 +77,10 @@ public:
 	//// - Constructors
 
 		// - construct a field from pointStructure and set defaultValue_ and field value to defVal
-		pointField( 
-            const pointStructure& pStruct, 
-            const T& defVal, 
-            message msg);
+		pointField( const pointStructure& pStruct, const T& defVal, bool subscribe = true);
 
 		// - construct from iIOEntity, pointStructure and a value
-		/*pointField( const pointStructure& pStruct, const T& val, const T& defVal, bool subscribe = true);
+		pointField( const pointStructure& pStruct, const T& val, const T& defVal, bool subscribe = true);
 
 		// - construct from another pointField
 		//   subscribe to events if true
@@ -167,10 +159,10 @@ public:
 		bool write(iOstream& os)const
 		{
 			return writePointField(os);
-		}*/
+		}
 };
 
-/*template<template<class, class> class VectorField, class T, class MemorySpace>
+template<template<class, class> class VectorField, class T, class MemorySpace>
 iIstream& operator >> (iIstream & is, pointField<VectorField, T, MemorySpace> & pF )
 {
 	if( !pF.read(is))
@@ -194,11 +186,11 @@ iOstream& operator << (iOstream& os, const pointField<VectorField, T, MemorySpac
 	}
 
 	return os;
-}*/
+}
 
 }
 
 #include "pointField.cpp"
-//#include "pointFieldAlgorithms.hpp"
+#include "pointFieldAlgorithms.hpp"
 
 #endif //  __pointField_hpp__
