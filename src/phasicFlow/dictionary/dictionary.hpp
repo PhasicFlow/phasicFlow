@@ -218,6 +218,9 @@ public:
 		template<typename T>
 		bool addOrKeep(const word& keyword, const T& v);
 
+        template<typename T>
+        bool addOrReplace(const word& keyword, const T& v);
+
 		void clear();
 
 		/// pointer to a subdictionary 
@@ -384,8 +387,20 @@ T dictionary::getValOrSet
 	}
 }
 
+template <typename T>
+inline bool dictionary::addOrReplace
+(
+    const word &keyword, 
+    const T &v
+)
+{
+    uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this ,v);
+    return addPtr(keyword, ptr, false);
+}
+
+
+
 
 } // pFlow
-
 
 #endif // __dictionary_hpp__

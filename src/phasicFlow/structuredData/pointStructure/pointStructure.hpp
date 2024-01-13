@@ -20,10 +20,12 @@ Licence:
 #ifndef __pointStructure_hpp__
 #define __pointStructure_hpp__
 
+#include "IOobject.hpp"
 #include "demComponent.hpp"
 #include "internalPoints.hpp"
 #include "simulationDomain.hpp"
 #include "boundaryList.hpp"
+#include "streams.hpp"
 
 
 
@@ -33,6 +35,7 @@ namespace pFlow
 
 class pointStructure
 :
+    public IOobject,
     public demComponent,
 	public internalPoints
 {
@@ -42,9 +45,11 @@ protected:
 	uniquePtr<simulationDomain> simulationDomain_ = nullptr;
 
 	boundaryList 				boundaries_;
-		
-	
-	bool distributePoints(const realx3Vector& points);
+    
+
+    bool setupPointStructure(const realx3Vector& points);
+
+    bool initializePoints(const realx3Vector& points);
 
 public:
 
@@ -63,19 +68,12 @@ public:
             systemControl& control,
 			const realx3Vector& posVec);
 
-		// - copy construct
-		//
-		//   should be changed, may causs undefined behavior 
-		//////////////////////////////////////////////////////////////
 		pointStructure(const pointStructure&) = delete;
 
 		// - no move construct 
 		pointStructure(pointStructure&&) = delete;
 
-		// - copy assignment 
-		//
-		//   should be changed, may causs undefined behavior 
-		//////////////////////////////////////////////////////////////
+		
 		pointStructure& operator=(const pointStructure&) = delete;
 
 		// - no move assignment 
@@ -122,15 +120,14 @@ public:
 
 		/// @brief read the point structure from the input stream.
 		/// @param is: input stream
-		/// @param iotype: type of input pattern
+		/// @param iop: type of input pattern
 		/// @return true on success
-		FUNCTION_H
-		bool read(iIstream& is, IOPattern::IOType iotype);
+		bool read(iIstream& is, const IOPattern& iop) override;
 		
 
 		/// Write 
-		/*FUNCTION_H
-		bool write(iOstream& os, IOPattern::IOType iotype)const;	*/
+		bool write(iOstream& os, const IOPattern& iop)const override;
+        
 		
 		
 		
@@ -140,6 +137,16 @@ public:
 
 };
 
+
+/*inline iOstream& operator << (iOstream& os, const pointStructure& ps )
+{	
+	if( !ps.write(os, IOPattern::AllProcessorsDifferent) )
+	{
+		ioErrorInFile(os.name(), os.lineNumber());
+		fatalExit;
+	}
+	return os; 
+}*/
 
 } // pFlow
 

@@ -17,22 +17,7 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-template <typename Type1>
-pFlow::word pFlow::repository::reportTypeError (IOobject& object)
-{
-	word err;
-	err = "The requested object " + object.name() + " with type " + Type1::TYPENAME() + ", while the type " +
-	  	object.typeName() + "is found in repository " + this->name();
-
-	return err;
-}
-
-template <typename Type>
-bool pFlow::repository::checkForObjectType(IOobject& object)
-{
-	return Type::TYPENAME() == object.typeName();
-}
+/*
 
 template<typename T, typename... Args>
 T& pFlow::repository::emplaceObject(const objectFile& objf, Args&&... args)
@@ -142,6 +127,25 @@ T& pFlow::repository::insertReplaceObject(const objectFile& objf, uniquePtr<IOob
 }
 
 
+*/
+
+template <typename Type1>
+pFlow::word pFlow::repository::reportTypeError(IOobject& object)
+{
+	word err;
+	err = "Object " + object.name() + " with type " + Type1::TYPENAME() + 
+    "is requested, while the type " +
+	  	object.typeName() + "is found in repository " + this->name()+".";
+
+	return err;
+}
+
+template <typename Type>
+bool pFlow::repository::checkForObjectType(IOobject& object)
+{
+	return Type::TYPENAME() == object.typeName();
+}
+
 template<typename T>
 T& pFlow::repository::lookupObject(const word& name)
 {
@@ -150,14 +154,15 @@ T& pFlow::repository::lookupObject(const word& name)
 
     	if( checkType<T>(iter->second) )
     	{
-    		return iter->second.template getObject<T>();
+    		return static_cast<T&>(iter->second);
+            
 
     	}else
     	{
     		fatalErrorInFunction << 
     		reportTypeError<T>(iter->second)<<endl;
     		fatalExit;
-    		return iter->second.template getObject<T>();
+    		return static_cast<T&>(iter->second);
     	}
         
     }

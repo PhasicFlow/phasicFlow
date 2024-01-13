@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "demComponent.hpp"
-
-
+#include "systemControl.hpp"
+#include "Time.hpp"
 
 pFlow::demComponent::demComponent(const word& name, systemControl& control)
 :
@@ -29,3 +29,13 @@ pFlow::demComponent::demComponent(const word& name, systemControl& control)
 	time_(control.time()),
 	timers_(name, &control.timers())
 {}
+
+pFlow::real pFlow::demComponent::dt()const
+{
+	return time_.dt();
+}
+
+pFlow::real pFlow::demComponent::currentTime()const
+{
+    return time_.currentTime();
+}

@@ -173,18 +173,46 @@ pFlow::internalPoints::internalPoints
 }
 
 
-const pFlow::internalPoints::pFlagTypeDevice& 
+const pFlow::pFlagTypeDevice& 
 	pFlow::internalPoints::activePointsMaskD() const 
 {
 	return pFlagsD_;
 }
 
 
-const pFlow::internalPoints::pFlagTypeHost&
+const pFlow::pFlagTypeHost&
 	pFlow::internalPoints::activePointsMaskH() const
 {
 	syncPFlag();
 	return pFlagsH_;
+}
+
+FUNCTION_H
+const pFlow::realx3Field_D& 
+    pFlow::internalPoints::pointPosition()const
+{
+    return pointPosition_;
+}
+
+pFlow::hostViewType1D<pFlow::realx3> 
+    pFlow::internalPoints::activePointsHost() const
+{
+    auto maskH = activePointsMaskH();
+    auto pointsH = pointPositionHost();
+
+    hostViewType1D<realx3> aPoints("Active pointst", maskH.numActive());
+    auto aRange = maskH.activeRange();
+    uint32 n = 0;
+    for(auto i=aRange.start(); i<aRange.end(); i++)
+    {
+        if( maskH.isActive(i) )
+        {
+            aPoints[n] = pointsH[i];
+            n++;
+        }
+    }
+
+    return aPoints;
 }
 
 FUNCTION_H
@@ -218,13 +246,13 @@ FUNCTION_H
 bool pFlow::internalPoints::read
 (
 	iIstream& is, 
-	IOPattern::IOType iotype
+	const IOPattern& iop
 )
 {
 	
 	Field<Vector, realx3 , vecAllocator<realx3>> fRead("internalPoints", "internalPoints");
 
-	if( !fRead.read(is, iotype))
+	if( !fRead.read(is, iop))
 	{
 		fatalErrorInFunction<<
 		"Error in reading pointPosition from stream "<< is.name()<<endl;
@@ -249,16 +277,16 @@ FUNCTION_H
 bool pFlow::internalPoints::write
 (
 	iOstream& os, 
-	IOPattern::IOType iotype
+	const IOPattern& iop
 )const
 {
 	if( pFlagsD_.isAllActive())
 	{
-		return pointPosition_.write(os, iotype);
+		return pointPosition_.write(os, iop);
 	}
 	else
 	{
-		return pointPosition_.write(os, iotype, activePointsMaskH());
+		return pointPosition_.write(os, iop, activePointsMaskH());
 	}
 }
 

@@ -192,6 +192,42 @@ iOstream& operator<<(iOstream& os, const span<T>& s)
     return os;
 }
 
+template<typename T, template<class> class Container>
+span<T> makeSpan(Container<T>& container)
+{
+    return span<T>(container.data(), container.size());
+}
+
+template<typename T, template<class> class Container>
+span<T> makeSpan(const Container<T>& container)
+{
+    return span<T>(
+        const_cast<T*>(container.data()), 
+        container.size());
+}
+
+
+template<typename T>
+inline
+span<char> charSpan(span<T> s)
+{
+    auto el = sizeof(T);
+    return span<char>(
+        reinterpret_cast<char*>(s.data()),
+        s.size()*el);
+}
+
+template<typename T>
+inline
+span<const char> charSpan(span<const T> s)
+{
+    auto el = sizeof(T);
+    return span<const char>(
+        reinterpret_cast<const char*>(s.data()),
+        s.size()*el);
+}
+
+
 
 
 } // pFlow

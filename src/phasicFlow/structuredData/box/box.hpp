@@ -97,6 +97,18 @@ public:
 			return max_;
 		}
 
+        INLINE_FUNCTION_HD
+        realx3& minPoint()
+        {
+            return min_;
+        }
+
+        INLINE_FUNCTION_HD
+        realx3& maxPoint()
+        {
+            return max_;
+        }
+
 	//// - IO operation 
 		FUNCTION_H
 		bool read(iIstream & is);

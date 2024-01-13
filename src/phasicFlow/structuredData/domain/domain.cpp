@@ -57,3 +57,24 @@ pFlow::domain::domain(const box& db)
 {
 
 }
+
+
+FUNCTION_H
+pFlow::iIstream& pFlow::operator >>(
+    pFlow::iIstream& is, 
+    pFlow::domain& d)
+{
+    box b;
+    is>>b; 
+    d = domain(b);
+    return is;
+}
+
+FUNCTION_H
+pFlow::iOstream& pFlow::operator << (
+    pFlow::iOstream& os, 
+    const pFlow::domain& d)
+{
+    os<< d.domainBox();
+    return os;
+}

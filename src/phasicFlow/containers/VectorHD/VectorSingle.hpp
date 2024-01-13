@@ -370,10 +370,10 @@ public:
 
 		/// Read vector from stream (ASCII)
 		FUNCTION_H
-		bool read(iIstream& is, IOPattern::IOType iotype)
+		bool read(iIstream& is, const IOPattern& iop)
 		{
 			std::vector<T> vecFromFile;
-			if(! readStdVector(is, vecFromFile, iotype)) return false;
+			if(! readStdVector(is, vecFromFile, iop)) return false;
 
 			this->assign(vecFromFile);
 
@@ -382,18 +382,18 @@ public:
 
 		/// Write the vector to os
 		FUNCTION_H
-		bool write(iOstream& os, IOPattern::IOType iotype)const
+		bool write(iOstream& os, const IOPattern& iop)const
 		{
 			auto hVec = hostVector();
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
 			
-			return writeSpan(os, sp, iotype);
+			return writeSpan(os, sp, iop);
 			
 		}
 
 		template<typename HostMask>
 		FUNCTION_H
-		bool write(iOstream& os, IOPattern::IOType iotype, const HostMask& mask)const
+		bool write(iOstream& os, const IOPattern& iop, const HostMask& mask)const
 		{
 			auto hVec = hostVector();
 			
@@ -413,7 +413,7 @@ public:
 
 			auto sp = span<T>( finalField.data(), finalField.size());
 
-			return writeSpan(os, sp, iotype);
+			return writeSpan(os, sp, iop);
 
 		}
 

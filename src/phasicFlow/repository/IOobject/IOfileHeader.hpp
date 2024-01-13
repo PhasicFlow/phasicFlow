@@ -40,9 +40,7 @@ protected:
 	
 
 	//// - data members 
-		// owner repository
-		const repository* 	owner_ = nullptr;
-		
+
 		// object name read from file 
 		word objectName_;
 
@@ -63,7 +61,7 @@ protected:
 public:
 
 	// with owner 
-	IOfileHeader(const objectFile& objf, const repository* owner = nullptr);
+	IOfileHeader(const objectFile& objf);
 
 	// - object name
 	const word& objectName()const
@@ -78,11 +76,12 @@ public:
 	}
 
 	// - pointer to owner repository 
-	const repository* owner()const 
-	{
-		return owner_;
-	}
-
+	virtual 
+    const repository* owner()const
+    {
+        return nullptr;
+    }
+	
 	// - path to file name 
 	fileSystem path() const;
 
@@ -118,18 +117,13 @@ public:
 	/// Write the header to the file, typeName comes from the one read from file 
 	bool writeHeader(iOstream& os, bool forceWrite = false) const;
 
-	/// Check if the data should be written to file 
-	bool writeData()const;
-
 	/// Check if header should be read from file
 	bool readHeader()const;
 
 	/// Read the header in the file
 	bool readHeader(iIstream& is, bool silent=false);
 
-	/// Check if data should be read from file 
-	/// Always return true
-	bool readData()const;
+	
 	
 	/// write the banner 
 	bool writeBanner(iOstream& os)const;

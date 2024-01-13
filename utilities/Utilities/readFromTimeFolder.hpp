@@ -20,7 +20,7 @@ Licence:
 #ifndef __readFromTimeFolder_hpp__
 #define __readFromTimeFolder_hpp__
 
-
+#include "vocabs.hpp"
 #include "repository.hpp"
 #include "pointFields.hpp"
 #include "utilityFunctions.hpp"

@@ -25,14 +25,11 @@ pFlow::IOPattern::IOPattern( IOType iotype)
 	ioType_(iotype),
 	globalSize_(processors::globalSize()),
 	globalRank_(processors::globalRank()),
-	isMaster_(processors::isMaster()),
-	isParallel_(processors::isParallel())
+	isMaster_(processors::globalMaster()),
+	isParallel_(processors::globalParallel())
 {}
 
 pFlow::word pFlow::IOPattern::exeMode()
 {
-    if(processors::isParallel())
-    	return word("MPI");
-    else
-    	return word("NoMPI");
+    return processors::globalRunTypeName();
 }

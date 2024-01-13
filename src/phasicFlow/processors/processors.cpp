@@ -21,7 +21,7 @@ Licence:
 #include "phasicFlowConfig.H"
 
 #ifdef pFlow_Build_MPI
-	#include <mpi.h>
+	#include "mpiCommunication.hpp"
 #endif
 
 // from PhasicFlow
@@ -29,7 +29,15 @@ Licence:
 #include "processors.hpp"
 #include "streams.hpp"
 
+static int numVarsInitialized__ = 0;
 
+#ifdef pFlow_Build_MPI
+
+    pFlow::MPI::DataType pFlow::MPI::realx3Type__;
+    pFlow::MPI::DataType pFlow::MPI::realx4Type__;
+    pFlow::MPI::DataType pFlow::MPI::int32x3Type__;
+    
+#endif
 
 void pFlow::processors::initProcessors(int argc, char *argv[])
 {
@@ -40,17 +48,31 @@ void pFlow::processors::initProcessors(int argc, char *argv[])
 		CheckMPI(MPI_Init(&argc, &argv), true);
 		isSelfInitialized_ = true;
 
-		processors::globalSize_ = MPI::COMM_WORLD.Get_size();
-		processors::globalRank_ = MPI::COMM_WORLD.Get_rank();
+        argc_ = argc;
+        argv_ = argv;
+
+		MPI_Comm_rank(MPI_COMM_WORLD, &processors::globalRank_);
+        MPI_Comm_size(MPI_COMM_WORLD, &processors::globalSize_);
+        
 		
-		if(processors::isParallel())
+		if(processors::globalParallel())
 		{
 			pFlow::pOutput.activatePrefix();
 			pFlow::pOutput.setPrefixNum(processors::globalRank_);	
 		}
 		
-		pFlow::mOutput.setMasterSlave(processors::isMaster());
-		pFlow::errReport.setMasterSlave(processors::isMaster());
+		pFlow::mOutput.setMasterSlave(processors::globalMaster());
+		pFlow::errReport.setMasterSlave(processors::globalMaster());
+
+        MPI_Type_contiguous(3, pFlow::MPI::Type<real>(), &pFlow::MPI::realx3Type__);
+		MPI_Type_commit(&pFlow::MPI::realx3Type__);
+
+        MPI_Type_contiguous(4, pFlow::MPI::Type<real>(), &pFlow::MPI::realx4Type__);
+		MPI_Type_commit(&pFlow::MPI::realx3Type__);
+
+		MPI_Type_contiguous(3, pFlow::MPI::Type<int32>(), &pFlow::MPI::int32x3Type__);
+		MPI_Type_commit(&pFlow::MPI::int32x3Type__);
+
 	}
 #else
 
@@ -64,6 +86,9 @@ void pFlow::processors::finalizeProcessors()
 #ifdef pFlow_Build_MPI
 	if(isSelfInitialized_ && !isFinalized())
 	{
+        MPI::TypeFree(&pFlow::MPI::realx3Type__);
+        MPI::TypeFree(&pFlow::MPI::realx4Type__);
+		MPI::TypeFree(&pFlow::MPI::int32x3Type__);
 		CheckMPI(MPI_Finalize(), true);
 	}
 #else
@@ -75,7 +100,7 @@ pFlow::processors::processors()
 {
 
 #ifdef pFlow_Build_MPI	
-	if(isParallel() && !isInitialized())
+	if(globalParallel() && !isInitialized())
 	{
 		fatalErrorInFunction<<
 		"MPI communication is not initialized yet!"<<endl;

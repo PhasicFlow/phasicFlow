@@ -70,10 +70,8 @@ public:
 
 
 	//// -  Methods
-		virtual fileSystem localPath()const
-		{
-			return fileSystem(timeName());
-		}
+		fileSystem localPath()const override;
+		
 	
 		// - geometry repository 
 		const repository& geometry()const

@@ -122,6 +122,7 @@ public:
 	// return the parallel plane to this plane 
 	plane parallelPlane(real distance)const;
 
+
 	static 
 	bool validPlane4(
 		const realx3& p1, 

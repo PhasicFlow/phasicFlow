@@ -21,7 +21,7 @@ Licence:
 
 #include "fileSystem.hpp"
 #include "error.hpp"
-#include "iOstream.hpp"
+#include "streams.hpp"
 
 
 bool pFlow::fileSystem::checkFileName(const word& name)
@@ -47,7 +47,6 @@ pFlow::fileSystem::fileSystem(const word & wPath)
 	path_(wPath),
 	isDir_(std::filesystem::is_directory(path_))
 {
-	std::cout<<"file name is " << fileName()<<std::endl;
 	if( !isDir_ && !checkFileName(fileName()))
 	{
 		fatalExit;
@@ -276,7 +275,7 @@ pFlow::fileSystem pFlow::operator /
 	const fileSystem& fs2 
 )
 {
-	fileSystem::pathType cmbPath(fs1.dirPath().path_ / fs2.dirPath().path_);
+	fileSystem::pathType cmbPath(fs1.dirPath().path_ / fs2.path_);
 
 	return fileSystem( cmbPath.c_str() );
 

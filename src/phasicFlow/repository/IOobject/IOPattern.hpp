@@ -54,13 +54,13 @@ public:
 		MasterProcessorOnly			= 0,
 		AllProcessorsSimilar 		= 1,
 		MasterProcessorDistribute	= 4,
-		AllProcessorsDifferent  = 8 // this is used for << and >> operators for 
+		AllProcessorsDifferent      = 8 // this is used for << and >> operators for 
 									// standard input and output streams 
 	};
 
 protected:
 
-	IOType 		ioType_;
+	IOType 		    ioType_;
 
 	int  			globalSize_ = 1;
 
@@ -116,11 +116,18 @@ public:
 		return isParallel_;
 	}
 
+    inline
+    bool thisCallRead()const
+    {
+        if(isMasterProcessorOnly() && !isMaster())return false;
+        return true;
+    }
+
 	inline
 	bool thisProcReadData()const
 	{
 		if(isMasterProcessorOnly() && !isMaster())return false;
-		if(isMasterProcessorDistribute() && !isMaster()) return false;
+        if(isMasterProcessorDistribute()&& !isMaster())return false; 
 		return true;
 	}
 
@@ -128,6 +135,7 @@ public:
 	bool thisProcWriteData()const
 	{
 		if(isAllProcessorsDifferent()) return true;
+        if(isMasterProcessorDistribute())return true;
 		return isMaster();
 	}
 

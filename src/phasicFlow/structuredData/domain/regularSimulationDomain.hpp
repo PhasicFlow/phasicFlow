@@ -13,7 +13,7 @@ class regularSimulationDomain
 {
 protected:
 
-	uint32 		thisNumPoints_=0;
+	uint32 		initialNumPoints_=0;
 
 	bool createBoundaryDicts() override;
 
@@ -35,16 +35,44 @@ public:
 		dictionary
 	);
 
-	bool updateDomains( 
-		const realx3Vector& pointPos)override;
+    bool initialUpdateDomains(span<realx3> pointPos) override;
 
-	uint32 thisNumPoints()const override;
+    uint32 initialNumberInThis()const override;
 
-	 
-	bool transferBlockData(
+	/*bool updateDomains(
+		span<realx3> pointPos,
+        pFlagTypeHost flags) override;*/
+   
+	uint32 numberToBeImported()const override;
+
+	uint32 numberToBeExported()const override;
+
+	bool initialTransferBlockData(
 		span<char> src, 
 		span<char> dst,
-		uint32 sizeOfBlock) override;
+		size_t sizeOfElement) override;
+
+
+    /// @brief 
+    /// @param src 
+    /// @param dst 
+    /// @return 
+    bool initialTransferBlockData(
+        span<realx3> src,
+        span<realx3> dst) override;
+
+    bool initialTransferBlockData(
+        span<real> src,
+        span<real> dst) override;
+
+    bool initialTransferBlockData(
+        span<uint32> src,
+        span<uint32> dst) override;
+
+    bool initialTransferBlockData(
+        span<int32> src,
+        span<int32> dst) override;
+    
 	
 	const dictionary& thisBoundaryDict()const override;
 

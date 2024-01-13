@@ -334,7 +334,7 @@ public:
 	inline 
 	auto getSpan()const
 	{
-		return span<const T>(this->data(), this->size());
+		return span<T>(const_cast<T*>(this->data()), this->size());
 	}
 
 	static constexpr bool isHostAccessible()
@@ -357,19 +357,19 @@ public:
 	inline VectorType operator -()const;
 
 	/// Read vector (assume ASCII in input)
-	bool readVector(iIstream& is, IOPattern::IOType iotype);
+	bool readVector(iIstream& is, const IOPattern& iop);
 
 	/// write vector 
-	bool writeVector(iOstream& os, IOPattern::IOType iotype) const;
+	bool writeVector(iOstream& os, const IOPattern& iop) const;
 
-	bool read(iIstream& is, IOPattern::IOType iotype)
+	bool read(iIstream& is, const IOPattern& iop)
 	{
-		return readVector(is, iotype);
+		return readVector(is, iop);
 	}
 
-	bool write(iOstream& os, IOPattern::IOType iotype)const
+	bool write(iOstream& os, const IOPattern& iop)const
 	{
-		return writeVector(os, iotype);
+		return writeVector(os, iop);
 	}
 
 };

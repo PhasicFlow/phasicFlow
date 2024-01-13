@@ -50,35 +50,29 @@ protected:
 	// - path to top-level folder 
 	const fileSystem 	topLevelFolder_;
 
+    /// settingsDict fileDictionary
+	uniquePtr<fileDictionary> 	settingsDict_;
 
+    /// time repository
+    Time 			            Time_;
 
 	/// settings folder repository
-	repository 			settings_;
+	uniquePtr<repository> 		settings_;
 
 	/// caseSetup folder repository
-	repository 			caseSetup_;
+	uniquePtr<repository>       caseSetup_;
 
-	/// settingsDict fileDictionary
-	fileDictionary& 		settingsDict_;
+    uniquePtr<fileDictionary>   domainDict_ = nullptr;
 
 	/// extra libs to be loaded
-	dynamicLinkLibs 	libs_;
+	dynamicLinkLibs 	        libs_;
 	
 	/// precision for writing to file 
 	size_t 			outFilePrecision_ = 6;
 
-	/// time repository
-	Time 			Time_;
 
 	/// if time control is managed externaly
-
-	bool 				externalTimeControl_ = false;
-
-	// - acceleration 
-	realx3 			g_;
-
-	// - domain for dem world
-	box  			domain_;
+	bool 			externalTimeControl_ = false;
 
 	// all timers
 	Timers 			timers_;
@@ -86,6 +80,8 @@ protected:
 	Logical			timersReport_;
 
 	Timer 			writeToFileTimer_;
+
+    bool readDomainDict();
 
 	static word getRunName( const fileSystem& path);
 	
@@ -104,25 +100,25 @@ public:
 		const fileSystem path = CWD() );
 
 	const repository& settings() const{
-		return settings_;
+		return settings_();
 	}
 
 	repository& settings(){
-		return settings_;
+		return settings_();
 	}
 
 	const repository& caseSetup()const{
-		return caseSetup_;
+		return caseSetup_();
 	}
 
 	repository& caseSetup(){
-		return caseSetup_;
+		return caseSetup_();
 	}
 
 	
 	const Time& time() const
 	{
-		return const_cast<Time&>(Time_);
+		return Time_;
 	}
 
 	Time& time()
@@ -156,11 +152,11 @@ public:
 	}
 
 	const fileDictionary& settingsDict()const{
-		return settingsDict_;
+		return settingsDict_();
 	}
 
 	fileDictionary& settingsDict(){
-		return settingsDict_;
+		return settingsDict_();
 	}
 
 	fileDictionary& domainDict();
@@ -171,14 +167,14 @@ public:
 		return runName_;
 	}
 
-	inline const realx3& g()const
+	inline const realx3 g()const
 	{
-		return g_;
+		return settingsDict_().getVal<realx3>("g");
 	}
 
-	inline const box& domain()const
+	inline box domain()
 	{
-		return domain_;
+		return box(domainDict().subDict("globalBox"));
 	}
 
 	bool operator ++(int);

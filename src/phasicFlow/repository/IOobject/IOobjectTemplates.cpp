@@ -19,7 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-template<typename T, typename... Args>
+/*template<typename T, typename... Args>
 auto pFlow::IOobject::make
 (
 	const objectFile& objf,
@@ -62,4 +62,4 @@ const auto& pFlow::IOobject::getObject()const
 		fatalExit;
 	}
 	return  static_cast<const object_t<T>&>(*object_).data();	
-}
+}*/

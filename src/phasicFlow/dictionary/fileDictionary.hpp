@@ -17,17 +17,18 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __fileDictionary_hpp__
+#define __fileDictionary_hpp__
 
 #include "dictionary.hpp"
-
+#include "IOobject.hpp"
 
 namespace pFlow
 {
 
-class IOPattern;
-
 class fileDictionary
 :
+    public IOobject,
     public dictionary
 {
 public:
@@ -35,19 +36,22 @@ public:
     TypeInfo("fileDictionary");
 
     /// construct an empty dictionary with keyword and make it global/fileDictionary
-	fileDictionary(const word& keyword);
+	fileDictionary(const objectFile & of, repository* owner = nullptr);
 
-		/// construct a dictionary with name and read it from file 
+	/// construct a dictionary with name and read it from file 
 	fileDictionary(const word& keyword, const fileSystem& file);
 
 
 
-    /// read from stream
-	virtual bool read(iIstream& is, const IOPattern& iop);
+    /// read from stream 
+    bool read(iIstream& is, const IOPattern& iop) override;
 
 	/// write to stream
-	virtual bool write(iOstream& os, const IOPattern& iop) const;
+	
+    bool write(iOstream& os, const IOPattern& iop) const override;
 
 };
 
 }
+
+#endif //__fileDictionary_hpp__

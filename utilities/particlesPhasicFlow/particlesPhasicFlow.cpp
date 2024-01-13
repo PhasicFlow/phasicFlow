@@ -21,25 +21,14 @@ Licence:
 
 #include "positionParticles.hpp"
 #include "pointStructure.hpp"
-#include "setFields.hpp"
+//#include "setFields.hpp"
 #include "systemControl.hpp"
 #include "commandLine.hpp"
 #include "vocabs.hpp"
 
 //#include "readControlDict.hpp"
 
-using pFlow::output;
-using pFlow::endl;
-using pFlow::dictionary;
-using pFlow::uniquePtr;
-using pFlow::IOobject;
-using pFlow::objectFile;
-using pFlow::fileSystem;
-using pFlow::pointStructure;
-using pFlow::pointStructureFile__;
-using pFlow::positionParticles;
-using pFlow::commandLine;
-using pFlow::setFieldList;
+using namespace pFlow;
 
 int main( int argc, char* argv[] )
 {
@@ -83,7 +72,7 @@ int main( int argc, char* argv[] )
 // this should be palced in each main 
 #include "initialize_Control.hpp"
 
-	auto objCPDict = IOobject::make<dictionary>
+	auto objCPDict = IOobject::make<fileDictionary>
 	(
 		objectFile
 		(
@@ -92,11 +81,10 @@ int main( int argc, char* argv[] )
 			objectFile::READ_ALWAYS,
 			objectFile::WRITE_ALWAYS
 		),
-		"particlesDict",
-		true
+		"particlesDict"
 	);
 
-	auto& cpDict = objCPDict().getObject<dictionary>();
+	auto& cpDict = objCPDict().getObject<fileDictionary>();
 
 	pointStructure* pStructPtr = nullptr;
 
@@ -128,19 +116,19 @@ int main( int argc, char* argv[] )
 
 		pStructPtr = &pStruct;
 
-
 		REPORT(1)<< "Created pStruct with "<< pStruct.size() << " points and capacity "<<
 		pStruct.capacity()<<" . . ."<< END_REPORT;
 
-		REPORT(1)<< "Writing pStruct to " << Control.time().path()+ pointStructureFile__<< END_REPORT<<endl<<endl;
-
-		if( !Control.time().write())
+		//REPORT(1)<< "Writing pStruct to " << Control.time().path()+ pointStructureFile__<< END_REPORT<<endl<<endl;
+        
+		/*if( !Control.time().write())
 		{
 			fatalErrorInFunction<<
 			"ERRor in writing to file. \n ";
 			return 1; 
-		}
-	}else
+		}*/
+	}
+    else
 	{
 
 		auto& pStruct = Control.time().emplaceObject<pointStructure>
@@ -163,8 +151,8 @@ int main( int argc, char* argv[] )
 
 	if(!positionOnly)
 	{
-
-		auto& pStruct = *pStructPtr;
+        WARNING<< "setFields is not active "<<END_WARNING;
+	/*	auto& pStruct = *pStructPtr;
 
 		auto& sfDict = cpDict.subDict("setFields");
 
@@ -197,10 +185,16 @@ int main( int argc, char* argv[] )
 				return 1;
 			}
 			output<<endl;
-		}
+		}*/
 	}
 
-	Control.time().write(true);
+	
+    if( !Control.time().write(true))
+    {
+        fatalErrorInFunction<<
+        "ERRor in writing to file. \n ";
+        return 1; 
+    }
 	REPORT(0)<< Green_Text("\nFinished successfully.\n")<<END_REPORT;
 
 

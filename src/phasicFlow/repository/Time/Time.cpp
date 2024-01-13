@@ -104,6 +104,11 @@ pFlow::Time::Time(
 	}
 }
 
+pFlow::fileSystem pFlow::Time::localPath()const
+{
+    return fileSystem(timeName());
+}
+
 bool pFlow::Time::write
 (
 	bool verbose

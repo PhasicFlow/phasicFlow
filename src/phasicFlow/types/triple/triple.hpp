@@ -146,6 +146,8 @@ struct triple
 		/// access component
 		INLINE_FUNCTION_HD const T & z()const { return z_; }
 
+        INLINE_FUNCTION_HD const T& comp(uint32 i) const {return *(this+i);}
+
 	//// methods
 
 		/// Dot product of two vectors

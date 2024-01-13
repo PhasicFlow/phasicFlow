@@ -38,10 +38,10 @@ pFlow::commandLine::commandLine(word appName, word disptn)
 	CLI::App::add_flag_callback(
 		"--description",
 		[disptn, appName]() {
-			output<<"\n"<<yellowText(versoinCopyright)<<endl;
-			output<<yellowText(floatingPointDescription())<<endl<<endl;
-			output<<"Description for "<< boldText(appName)<<":\n";
-			output<<"  "<<disptn<<endl;
+			mOutput<<"\n"<<Yellow_Text(versoinCopyright)<<endl;
+			mOutput<<Yellow_Text(floatingPointDescription())<<endl<<endl;
+			mOutput<<"Description for "<< Bold_Text(appName)<<":\n";
+			mOutput<<"  "<<disptn<<endl;
 		},
 		"What does this app do?"
 		)->configurable(false);

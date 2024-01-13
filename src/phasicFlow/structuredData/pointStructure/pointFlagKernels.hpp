@@ -258,8 +258,6 @@ void pFlow::pointFlag<ExecutionSpace>::fillNeighborsLists
 			});
 		Kokkos::fence();	
 	}
-	
-
 }
 
 template<typename ExecutionSpace>

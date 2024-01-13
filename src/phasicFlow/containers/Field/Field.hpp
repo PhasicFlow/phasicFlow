@@ -27,7 +27,7 @@ Licence:
 
 #include "types.hpp"
 #include "Vector.hpp"
-
+#include "streams.hpp"
 
 namespace pFlow
 {
@@ -193,15 +193,15 @@ public:
 		bool writeField(iOstream& os)const;*/
 
 		
-		bool read(iIstream& is, IOPattern::IOType iotype);
+		bool read(iIstream& is, const IOPattern& iop);
 		
 
-		bool write(iOstream& os, IOPattern::IOType iotype )const;
+		bool write(iOstream& os, const IOPattern& iop )const;
 
 		template<typename HostMask>
 		bool write(
 			iOstream& os, 
-			IOPattern::IOType iotype, 
+			const IOPattern& iop, 
 			const HostMask& mask)const
 		{
 			
@@ -209,7 +209,7 @@ public:
 
 			if(!os.check(FUNCTION_NAME))return false;
 
-			if(!VectorType::write(os, iotype)) return false;
+			if(!VectorType::write(os, iop)) return false;
 
 			os.endEntry();
 			if(!os.check(FUNCTION_NAME))return false;

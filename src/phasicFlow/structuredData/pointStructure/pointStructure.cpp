@@ -1,3 +1,4 @@
+
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -19,53 +20,61 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "pointStructure.hpp"
-#include "simulationDomain.hpp"
+#include "systemControl.hpp"
+#include "vocabs.hpp"
 
-#include "streams.hpp"
 
-bool pFlow::pointStructure::distributePoints
-(
-	const realx3Vector &points
-)
+bool pFlow::pointStructure::setupPointStructure(const realx3Vector &points)
 {
-	uint32 thisN = simulationDomain_->thisNumPoints();
+    if(!simulationDomain_->initialUpdateDomains(points.getSpan()))
+    {
+        fatalErrorInFunction<<
+        "error in updating domains"<<endl;
+        return false;
+    }
+    
+    uint32 thisN = simulationDomain_->initialNumberInThis();
 
-    Field<Vector, realx3 , vecAllocator<realx3>> internal(
+    Field<Vector, realx3 , vecAllocator<realx3>> internal
+    (
         "internalPoints", 
         "internalPoints", 
         thisN, 
         thisN, 
-        RESERVE());
+        RESERVE()
+    );
     
+    auto pSpan  = makeSpan(points); 
+    auto iSpan  = internal.getSpan();
     
-    auto l = sizeof(realx3);
-    auto pointsSpan = span<char>(
-        reinterpret_cast<char*>
-		(
-			const_cast<realx3*>(points.data())
-		), 
-        points.size()*l );
-
-    auto internalSpan = span<char>(reinterpret_cast<char*>(internal.data()), internal.size()*l);
-
-    if(!simulationDomain_->transferBlockData(pointsSpan, internalSpan, l))
+    if(!simulationDomain_->initialTransferBlockData(pSpan, iSpan))
     {
         fatalErrorInFunction<<
         "Error in transfering the block data "<<endl;
         return false;
     }
     
-    pointPosition_.assign(internal.vectorField());
+    if( !initializePoints(internal) )
+    {
+        fatalErrorInFunction;
+        return false;
+    }
 
-    
+    boundaries_.updateLists();
+
+    return false;
+}
+
+
+bool pFlow::pointStructure::initializePoints(const realx3Vector &points)
+{
+    pointPosition_.assign(points.vectorField());
+
     pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
     pFlagSync_ = false;
     syncPFlag();
-    
-    
 
     return true;
-
 }
 
 pFlow::pointStructure::pointStructure
@@ -73,7 +82,19 @@ pFlow::pointStructure::pointStructure
     systemControl& control
 )
 :
-	demComponent("particlesCM", control),
+    IOobject
+    (
+        objectFile
+        (
+            pointStructureFile__,
+            "",
+            objectFile::READ_ALWAYS,
+            objectFile::WRITE_ALWAYS
+        ),
+        IOPattern::MasterProcessorDistribute,
+        &control.time()
+    ),
+	demComponent("particlesCenterMass", control),
   	internalPoints(),
 	simulationDomain_
 	(
@@ -84,37 +105,52 @@ pFlow::pointStructure::pointStructure
 		simulationDomain_(),
 		*this
 	)
-{}
+{
+    REPORT(0)<< "Reading point structure from file"<<
+    IOobject::localPath()<<END_REPORT;
+
+    if( !IOobject::read() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::localPath()<<endl;
+    }
+}
 
 
 pFlow::pointStructure::pointStructure(
     systemControl& control,
     const realx3Vector &posVec)
 :
-	demComponent("particlesCM", control), 
-	internalPoints(),
-	simulationDomain_(
-		simulationDomain::create(control.domainDict())),
-	boundaries_(
+	IOobject
+    (
+        objectFile
+        (
+            pointStructureFile__,
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_ALWAYS
+        ),
+        IOPattern::MasterProcessorDistribute,
+        &control.time()
+    ),
+	demComponent("particlesCenterMass", control),
+  	internalPoints(),
+	simulationDomain_
+	(
+		simulationDomain::create(control.domainDict())
+	),
+	boundaries_
+	(
 		simulationDomain_(),
-		*this)
+		*this
+	)
 {
-    if(!simulationDomain_->updateDomains(posVec) )
+    if(!setupPointStructure(posVec))
     {
         fatalErrorInFunction<<
-        "Failed to update domains."<<endl;
+        "Error in seting up pointStructure"<<endl;
         fatalExit;
     }
-
-    boundaries_.updateLists();
-
-    if( !distributePoints(posVec) )
-    {
-        fatalErrorInFunction<<"Faild to distributes poinst"<<endl;
-        fatalExit;
-    }
-
-    
 }
 
 bool pFlow::pointStructure::beforeIteration()
@@ -134,28 +170,49 @@ bool pFlow::pointStructure::afterIteration()
 
 bool pFlow::pointStructure::read(
     iIstream &is,
-    IOPattern::IOType iotype)
+    const IOPattern& iop)
 {
-    Field<Vector, realx3 , vecAllocator<realx3>> fRead("file_internalPoints", "internalPoints");
     
-    
+    Field<Vector, realx3 , vecAllocator<realx3>> 
+        fRead("file_internalPoints", "internalPoints");   
 
-	if( !fRead.read(is, iotype))
+	if( !fRead.read(is, iop))
 	{
 		fatalErrorInFunction<<
 		"Error in reading pointPosition from stream "<< is.name()<<endl;
 		return false;
 	}
 
-    if(!simulationDomain_->updateDomains(fRead))
+    return setupPointStructure(fRead);
+}
+
+bool pFlow::pointStructure::write
+(
+    iOstream& os, 
+    const IOPattern& iop
+)const
+{
+    
+    hostViewType1D<realx3> pointsH;
+
+    if(isAllActive())
+    {
+        pointsH = pointPositionHost();
+    }
+    else
+    {
+        pointsH = activePointsHost();
+    }
+
+    auto data = span<realx3>(pointsH.data(), pointsH.size());
+    
+    if( !writeSpan(os, data, iop) )
     {
         fatalErrorInFunction<<
-        "error in updating domains"<<endl;
+        "Error in writing pointStructure in stream "<<
+        os.name()<<endl;
         return false;
     }
 
-    boundaries_.updateLists();
-
-	return distributePoints(fRead);
-    
+    return true;
 }

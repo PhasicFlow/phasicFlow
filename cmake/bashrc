@@ -29,7 +29,7 @@ export PATH="$pFlow_BIN_DIR:$PATH"
 
 export LD_LIBRARY_PATH="$pFlow_LIB_DIR:$LD_LIBRARY_PATH"
 
-export LD_LIBRARY_PATH="$Zoltan_DIR/build/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$Zoltan_DIR/lib:$LD_LIBRARY_PATH"
 
 
 #------------------------------------------------------------------------------

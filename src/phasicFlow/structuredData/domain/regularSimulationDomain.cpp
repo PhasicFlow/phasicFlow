@@ -50,37 +50,52 @@ bool pFlow::regularSimulationDomain::setThisDomain()
     return true;
 }
 
-pFlow::regularSimulationDomain::regularSimulationDomain(
-    const dictionary &dict)
-    : simulationDomain(dict)
-{
-}
-
-bool pFlow::regularSimulationDomain::updateDomains
+pFlow::regularSimulationDomain::regularSimulationDomain
 (
-	const realx3Vector& pointPos
+    const dictionary &dict
 )
+:
+    simulationDomain(dict)
+{}
+
+bool pFlow::regularSimulationDomain::initialUpdateDomains(span<realx3> pointPos)
 {
-	thisNumPoints_ = pointPos.size();
-	if(!createBoundaryDicts()) return false;
-	if(!setThisDomain()) return false;
-	
+    initialNumPoints_ = pointPos.size();
+    if(!setThisDomain()) return false;
+    if(!createBoundaryDicts()) return false;
     return true;
 }
 
-pFlow::uint32 pFlow::regularSimulationDomain::thisNumPoints() const
+pFlow::uint32 pFlow::regularSimulationDomain::initialNumberInThis() const
 {
-	return thisNumPoints_;	
+    return initialNumPoints_;
 }
 
-bool pFlow::regularSimulationDomain::transferBlockData
+/*bool pFlow::regularSimulationDomain::updateDomains(
+    span<realx3> pointPos,
+    pFlagTypeHost flags)
+{	
+    return true;
+}*/
+
+pFlow::uint32 pFlow::regularSimulationDomain::numberToBeImported() const
+{
+	return 0;	
+}
+
+pFlow::uint32 pFlow::regularSimulationDomain::numberToBeExported() const
+{
+    return 0;
+}
+
+bool pFlow::regularSimulationDomain::initialTransferBlockData
 (
 	span<char> src, 
 	span<char> dst,
-	uint32 sizeOfBlock
+	size_t sizeOfElement
 )
 {
-	size_t requiredSize = sizeOfBlock*thisNumPoints();
+	size_t requiredSize = sizeOfElement*initialNumberInThis();
 	if(dst.size() < requiredSize)
 	{
 		fatalErrorInFunction<< 
@@ -101,6 +116,54 @@ bool pFlow::regularSimulationDomain::transferBlockData
 	std::memcpy(dst.data(), src.data(), requiredSize);
 
     return true;
+}
+
+bool pFlow::regularSimulationDomain::initialTransferBlockData
+(
+    span<realx3> src, 
+    span<realx3> dst
+)
+{
+    return initialTransferBlockData(
+        charSpan(src), 
+        charSpan(dst), 
+        sizeof(realx3)); 
+}
+
+bool pFlow::regularSimulationDomain::initialTransferBlockData
+(
+    span<real> src, 
+    span<real> dst
+)
+{
+    return initialTransferBlockData(
+        charSpan(src), 
+        charSpan(dst), 
+        sizeof(real)); 
+}
+
+bool pFlow::regularSimulationDomain::initialTransferBlockData
+(
+    span<uint32> src, 
+    span<uint32> dst
+)
+{
+    return initialTransferBlockData(
+        charSpan(src), 
+        charSpan(dst), 
+        sizeof(uint32)); 
+}
+
+bool pFlow::regularSimulationDomain::initialTransferBlockData
+(
+    span<int32> src, 
+    span<int32> dst
+)
+{
+    return initialTransferBlockData(
+        charSpan(src), 
+        charSpan(dst), 
+        sizeof(int32)); 
 }
 
 const pFlow::dictionary &pFlow::regularSimulationDomain::thisBoundaryDict() const

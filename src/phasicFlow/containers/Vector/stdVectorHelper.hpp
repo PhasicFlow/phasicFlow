@@ -28,8 +28,8 @@ Licence:
 #include "span.hpp"
 #include "iOstream.hpp"
 #include "iIstream.hpp"
-#include "dataIO.hpp"
-
+#include "createDataIO.hpp"
+#include "pFlowProcessors.hpp"
 
 namespace pFlow
 {
@@ -54,11 +54,11 @@ inline
 bool writeSpan(
     iOstream& os, 
     const span<T>& sp, 
-    IOPattern::IOType iotype)
+    const IOPattern& iop)
 {
    
-   auto ioPtr = dataIO::create(iotype, IOPattern::exeMode());
-
+   auto ioPtr = createDataIO<T>(pFlowProcessors().localRunTypeName(), iop);
+    
    if(!ioPtr)
 	{
 		fatalErrorInFunction;
@@ -73,32 +73,27 @@ bool writeSpan(
     return true; 
 }
 
-
 template<typename T, typename Allocator>
 bool writeStdVector
 (
 	iOstream& os, 
 	const std::vector<T,Allocator>& vec,
-	IOPattern::IOType iotype 
+	const IOPattern& iop 
 )
 {
-	span<T> sp( const_cast<T*>(vec.data()), vec.size());
-
-	return writeSpan(os, sp, iotype);
+	auto sp = makeSpan(vec);
+	return writeSpan(os, sp, iop);
 }
-
-	
-
 
 template<typename T, typename Allocator>
 bool readStdVector
 (
 	iIstream& is, 
 	std::vector<T,Allocator>& vec,
-	IOPattern::IOType iotype 
+	const IOPattern& iop 
 )
 {
-	auto ioPtr = dataIO::create(iotype, IOPattern::exeMode());
+	auto ioPtr = createDataIO<T>(pFlowProcessors().localRunTypeName(), iop);
 
 	if(!ioPtr)
 	{

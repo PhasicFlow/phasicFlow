@@ -25,6 +25,24 @@ Licence:
 #include "systemControl.hpp"
 #include "vocabs.hpp"
 
+bool pFlow::systemControl::readDomainDict()
+{
+    if(!domainDict_)
+    {
+        domainDict_ = makeUnique<fileDictionary>
+        (
+            objectFile
+            (
+                domainFile__,
+                "",
+                objectFile::READ_ALWAYS,
+                objectFile::WRITE_NEVER
+            ),
+            &settings()
+        );
+    }
+    return true;
+}
 
 pFlow::word pFlow::systemControl::getRunName
 (
@@ -108,55 +126,58 @@ pFlow::systemControl::systemControl
 	(	
 		getTopFolder(path)
 	),
-	settings_
+    settingsDict_
 	(
-		settingsRepository__,
-		settingsFolder__,
-		this
-	),
-	caseSetup_
-	(
-		caseSetupRepository__,
-		caseSetupFolder__,
-		this
-	),
-	settingsDict_
-	(
-		settings().emplaceObject<fileDictionary>
-		(
-			objectFile
-			(
-				settingsFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_NEVER,
-                IOPattern::AllProcessorsSimilar
-			),
-			settingsFile__
-		)
-	),
-	libs_(settingsDict_),
-	outFilePrecision_(
-		settingsDict_.getValOrSet("outFilePrecision", static_cast<uint64>(6))
-		),
-	Time_
+        makeUnique<fileDictionary>
+        (
+            objectFile
+            (
+                settingsFile__,
+                settingsFolder__,
+                objectFile::READ_ALWAYS,
+                objectFile::WRITE_NEVER
+            ),
+            this   
+        )
+    ),
+    Time_
 	(
 		this,
-		settingsDict_
+		settingsDict_()
 	),
-	g_(
-		settingsDict_.getVal<realx3>("g")
+	settings_
+    (
+        makeUnique<repository>
+        (
+            settingsRepository__,
+            settingsFolder__,
+            this
+        )
+    ),
+	caseSetup_
+	(
+        makeUnique<repository>
+        (
+            caseSetupRepository__,
+            caseSetupFolder__,
+            this
+        )
 	),
-	domain_(
-		settingsDict_.subDict("domain")
+	
+	libs_(settingsDict_()),
+	outFilePrecision_
+    (
+		settingsDict_().getValOrSet("outFilePrecision", static_cast<uint64>(6))
 	),
 	timers_(runName_),
 	timersReport_
 	(
-		settingsDict_.getValOrSet("timersReport", Logical("Yes"))
+		settingsDict_().getValOrSet("timersReport", Logical("Yes"))
 	),
 	writeToFileTimer_("Write to file", &timers_)	
-{}
+{
+    readDomainDict();
+}
 
 pFlow::systemControl::systemControl(
 		const real startTime, 
@@ -179,71 +200,62 @@ pFlow::systemControl::systemControl(
 	(	
 		getTopFolder(path)
 	),
-	settings_
+    settingsDict_
 	(
-		settingsRepository__,
-		settingsFolder__,
-		this
-	),
-	caseSetup_
-	(
-		caseSetupRepository__,
-		caseSetupFolder__,
-		this
-	),
-	settingsDict_
-	(
-		settings().emplaceObject<fileDictionary>
-		(
-			objectFile
-			(
-				settingsFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_NEVER
-			),
-			settingsFile__
-		)
-	),
-	libs_(settingsDict_),
-	Time_
+        makeUnique<fileDictionary>
+        (
+            objectFile
+            (
+                settingsFile__,
+                settingsFolder__,
+                objectFile::READ_ALWAYS,
+                objectFile::WRITE_NEVER
+            ),
+            this   
+        )
+    ),
+    Time_
 	(
 		this,
-		settingsDict_,
+		settingsDict_(),
 		startTime, 
 		endTime, 
 		saveInterval, 
 		startTimeName
 	),
+	settings_
+    (
+        makeUnique<repository>
+        (
+            settingsRepository__,
+            settingsFolder__,
+            this
+        )
+    ),
+	caseSetup_
+	(
+        makeUnique<repository>
+        (
+            caseSetupRepository__,
+            caseSetupFolder__,
+            this
+        )
+	),
+	libs_(settingsDict_()),
 	externalTimeControl_(true),
-	g_(
-		settingsDict_.getVal<realx3>("g")
-	),
-	domain_(
-		settingsDict_.subDict("domain")
-	),
 	timers_(runName_),
 	timersReport_
 	(
-		settingsDict_.getValOrSet("timersReport", Logical("Yes"))
+		settingsDict_->getValOrSet("timersReport", Logical("Yes"))
 	),
 	writeToFileTimer_("Write to file", &timers_)	
-{}
+{
+    readDomainDict();
+}
 
 pFlow::fileDictionary& pFlow::systemControl::domainDict()
 {
-	return 
-	settings().emplaceObjectOrGet<fileDictionary>
-	(
-		objectFile
-		(
-			domainFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		domainFile__
-	);
+    return domainDict_();
 }
 
 bool pFlow::systemControl::operator ++(int)

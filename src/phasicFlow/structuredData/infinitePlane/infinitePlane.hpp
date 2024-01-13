@@ -29,7 +29,7 @@ Licence:
 namespace pFlow
 {
 
-class infinitePlane
+class  infinitePlane
 {
 protected:
 	
@@ -136,6 +136,33 @@ public:
 			real t = -(dot(normal_, p) + d_);
 			return t*normal_ + p;
 		}
+
+        INLINE_FUNCTION_HD
+        bool parallel(const infinitePlane& pln)const
+        {
+            return  equal(normal_, pln.normal_) ||
+                    equal(normal_,-pln.normal_);
+        }
+
+        INLINE_FUNCTION_HD
+        bool parallelTouch(const infinitePlane& pln)const
+        {
+            if(equal(normal_, pln.normal_) && equal(d_, pln.d_))return true;
+            if(equal(normal_,-pln.normal_) && equal(d_,-pln.d_))return true;
+            return false;
+        }
+
+        INLINE_FUNCTION_HD
+        const auto& normal()const
+        {
+            return normal_;
+        }
+
+        INLINE_FUNCTION_HD
+        const auto& d()const
+        {
+            return d_;
+        }
 
 	//// - IO operation 
 

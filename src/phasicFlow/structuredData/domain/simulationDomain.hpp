@@ -17,18 +17,21 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __simulationDomain_hpp__
 #define __simulationDomain_hpp__
 
-#include "domain.hpp"
-#include "virtualConstructor.hpp"
-#include "Vectors.hpp"
+#include <array>
 
+#include "domain.hpp"
+#include "span.hpp"
 #include "streams.hpp"
+#include "virtualConstructor.hpp"
+#include "pointFlag.hpp"
 
 namespace pFlow
 {
+
+//class pFlagTypeHost;
 
 class simulationDomain
 {
@@ -56,9 +59,9 @@ protected:
 
 	bool 			boundariesSet_ = false;
 	
-	virtual bool createBoundaryDicts() = 0;
+	virtual bool    createBoundaryDicts() = 0;
 
-	virtual bool setThisDomain() = 0;
+	virtual bool    setThisDomain() = 0;
 
 public:
 
@@ -84,23 +87,64 @@ public:
 	virtual 
 	const dictionary& thisBoundaryDict()const = 0;
 	
+    virtual 
+    bool initialUpdateDomains(span<realx3> pointPos) = 0;
 
-	virtual 
-	bool updateDomains(
-		const realx3Vector& pointPos) = 0;
+    virtual
+    uint32 initialNumberInThis()const = 0;
 
-	//virtual getImportExportList() = 0;
-
-	//virtual getNumberInThisList() = 0;
-
-	virtual
-	uint32 thisNumPoints()const = 0;
-
-	virtual 
-	bool transferBlockData(
+    virtual 
+	bool initialTransferBlockData(
 		span<char> src, 
 		span<char> dst,
-		uint32 sizeOfBlock) = 0;
+		size_t sizeOfElement) = 0;
+    
+    virtual 
+    bool initialTransferBlockData(
+        span<realx3> src,
+        span<realx3> dst) = 0;
+    
+    virtual
+    bool initialTransferBlockData(
+        span<real> src,
+        span<real> dst) = 0;
+
+    virtual
+    bool initialTransferBlockData(
+        span<uint32> src,
+        span<uint32> dst) = 0;
+    
+    virtual 
+    bool initialTransferBlockData(
+        span<int32> src,
+        span<int32> dst) = 0;
+    
+    
+    /*template<typename T>
+    bool initialTransferBlockData(
+        span<T> src,
+        span<T> dst )
+    {
+        size_t el=sizeof(T);
+        return initialTransferBlockData
+        (
+            charSpan(src), 
+            charSpan(dst), 
+            el
+        );
+    }*/  
+
+
+
+    /// @brief Number of points to be imported after updating domains 
+	/// @return number of points
+	virtual
+	uint32 numberToBeImported()const = 0;
+
+    virtual 
+    uint32 numberToBeExported()const = 0;
+
+	
 
 	virtual 
 	bool requiresDataTransfer() const = 0;

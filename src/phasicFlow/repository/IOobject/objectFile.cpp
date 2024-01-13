@@ -34,15 +34,13 @@ pFlow::objectFile::objectFile
 	const fileSystem& 	localPath,
 	const readFlag&   	rf, 
 	const writeFlag&  	wf,
-	IOPattern::IOType	ioType,
-	bool  rwHdr
+	bool  rwHeader
 )
 :
 	name_(name),
 	rFlag_(rf),
 	wFlag_(wf),
 	localPath_(localPath),
-	ioPattern_(ioType),
-	readWriteHeader_(rwHdr)	
+	readWriteHeader_(rwHeader)	
 {
 }

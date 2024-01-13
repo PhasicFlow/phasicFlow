@@ -106,10 +106,10 @@ public:
 		size_t size()const;
 		
 		// - vertecies of ith solid
-		const realx3x3Vector& solid(label i)const;
+		const realx3x3Vector& solid(uint64 i)const;
 
 		// - name of ith solid 
-		const word& name(label i)const;
+		const word& name(uint64 i)const;
 
 };
 

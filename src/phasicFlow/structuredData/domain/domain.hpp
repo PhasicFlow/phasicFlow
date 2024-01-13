@@ -156,17 +156,12 @@ bool operator ==(const domain& d1, const domain& d2)
 	return equal(d1, d2);
 }
 
-/*FUNCTION_H
-iIstream& operator >>(iIstream& is, box& b);
+FUNCTION_H
+iIstream& operator >>(iIstream& is, domain& d);
 
 FUNCTION_H
-iOstream& operator << (iOstream& os, const box& b);
+iOstream& operator << (iOstream& os, const domain& d);
 
-INLINE_FUNCTION_HD
-box extendBox(const box& b, const realx3& dl)
-{
-	return box(b.minPoint()-dl , b.maxPoint()+dl);
-}*/
 
 }
 

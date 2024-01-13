@@ -23,13 +23,9 @@ Licence:
 
 #include "types.hpp"
 #include "fileSystem.hpp"
-#include "IOPattern.hpp"
-
 
 namespace pFlow
 {
-
-
 
 class objectFile
 {
@@ -66,10 +62,8 @@ protected:
 	/// Number of bytes used for writing/reading real variable (used for binray)
 	int 		numBytesForReal_ = numBytesForReal__;
 	
-	IOPattern 	ioPattern_ = {IOPattern::MasterProcessorOnly};
-
-	/// Does the objectFile write the header or not
-	bool readWriteHeader_ = true;
+	/// Does the objectFile read & write the header?
+	bool        readWriteHeader_ = true;
 
 public:
 
@@ -88,8 +82,7 @@ public:
 		const fileSystem& 	localPath,
 		const readFlag&   	rf = READ_NEVER,
 		const writeFlag&  	wf = WRITE_NEVER,
-		IOPattern::IOType	ioType = IOPattern::MasterProcessorOnly,
-		bool  rwHdr = true
+		bool  rwHeader = true
 	);
 
 	// copy construct 
@@ -154,11 +147,6 @@ public:
 	bool isWriteNever()const
 	{
 		return wFlag_ == WRITE_NEVER;
-	}
-
-	const IOPattern& ioPattern()const
-	{
-		return ioPattern_;
 	}
 
 	inline 

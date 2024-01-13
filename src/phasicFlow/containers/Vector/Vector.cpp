@@ -23,10 +23,10 @@ template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::readVector
 (
 	iIstream& is,
-	IOPattern::IOType iotype
+	const IOPattern& iop
 )
 {
-	return readStdVector(is, vectorField(), iotype);
+	return readStdVector(is, vectorField(), iop);
 }
 
 
@@ -34,10 +34,10 @@ template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::writeVector
 (
 	iOstream& os,
-	IOPattern::IOType iotype
+	const IOPattern& iop
 ) const
 {
-	return writeStdVector(os, vectorField(), iotype);	
+	return writeStdVector(os, vectorField(), iop);	
 }
 
 /*template<typename T, typename Allocator>

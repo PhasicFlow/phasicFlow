@@ -30,7 +30,9 @@ Licence:
 
 
 
-static pFlow::Ostream& errorStream   = pFlow::errReport;
+//static pFlow::Ostream& errorStream   = pFlow::errReport;
+
+static pFlow::Ostream& errorStream   = pFlow::pOutput;
 
 
 pFlow::iOstream& fatalErrorMessage(const char* fileName, int linNumber )
@@ -57,9 +59,9 @@ pFlow::iOstream& notImplementedErrorMessage(const char*fnName, const char* fileN
 {
 
 	errorStream<<"\n>>> Fatal error in phasicFlow\n";
-	errorStream<<" Function "<< Red_Text(fnName) << " has not implmented yet!\n" <<
-				 " Function definition is in source file "<< Red_Text(fileName) << 
-	             " at line "<< Red_Text(lineNumber) <<'\n';
+	errorStream<<" Function "<< Red_Text(fnName) << " has not been implemented yet!\n" <<
+				 " File "<< Yellow_Text(fileName) << 
+	             " at line "<< Yellow_Text(lineNumber) <<'\n';
 	return errorStream;
 }
 

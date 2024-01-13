@@ -54,13 +54,11 @@ pFlow::plane pFlow::plane::parallelPlane(real distance)const
 	return plane(pp1, pp2, pp3, pp4);
 }
 
-bool pFlow::plane::validPlane4
-(
-	const realx3& p1, 
-	const realx3& p2, 
-	const realx3& p3, 
-	const realx3& p4
-)
+bool pFlow::plane::validPlane4(
+    const realx3 &p1,
+    const realx3 &p2,
+    const realx3 &p3,
+    const realx3 &p4)
 {
 	if( !validPlane3(p1,p2,p3)) return false;
 	if( !infinitePlane(p1,p2,p3).pointOnPlane(p4)) return false;

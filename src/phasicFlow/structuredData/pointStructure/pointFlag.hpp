@@ -244,6 +244,9 @@ public:
 
 };
 
+using pFlagTypeDevice 	= pointFlag<DefaultExecutionSpace>;
+
+using pFlagTypeHost 	= pointFlag<DefaultHostExecutionSpace>;
 
 }
 

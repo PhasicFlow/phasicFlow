@@ -17,7 +17,7 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#include "processors.hpp"
+
 #include "IOfileHeader.hpp"
 #include "repository.hpp"
 
@@ -31,13 +31,11 @@ pFlow::uniquePtr<pFlow::iFstream> pFlow::IOfileHeader::inStream()const
 
 pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 {
-
-	
 	auto osPtr = makeUnique<oFstream>(path(), outFileBinary());
 	
-	if(osPtr && owner_)
+	if(osPtr && owner())
 	{
-	 	auto outPrecision = owner_->outFilePrecision();
+	 	auto outPrecision = owner()->outFilePrecision();
 	 	osPtr->precision(outPrecision);
 	}
 
@@ -46,21 +44,19 @@ pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 
 pFlow::IOfileHeader::IOfileHeader
 (
-	const objectFile& objf,
-	const repository* owner
+	const objectFile& objf
 )
 :
-	objectFile(objf),
-	owner_(owner)
+	objectFile(objf)
 {}
 
 pFlow::fileSystem pFlow::IOfileHeader::path() const
 {
 	fileSystem f;
 
-	if( owner_ )
+	if( owner() )
 	{
-		f = owner_->path()/localPath();	
+		f = owner()->path()/localPath();	
 
 	}else
 	{
@@ -72,8 +68,8 @@ pFlow::fileSystem pFlow::IOfileHeader::path() const
 
 bool pFlow::IOfileHeader::outFileBinary()const
 {
-	if(owner_)
-		return owner_->outFileBinary();
+	if(owner())
+		return owner()->outFileBinary();
 	else
 		return false;
 }
@@ -137,7 +133,6 @@ bool pFlow::IOfileHeader::writeHeader()const
 {
 
 	if( !this->readWriteHeader() ) return false;
-	if( !processors::isMaster() ) return false;
 	if( !implyWrite() ) return false;
 
 	return true;
@@ -185,15 +180,15 @@ bool pFlow::IOfileHeader::writeHeader(iOstream& os, bool forceWrite) const
 bool pFlow::IOfileHeader::readHeader()const
 {
 	if( !implyRead())return false;
-	if( !this->readWriteHeader() ) return false;  
-	return ioPattern().thisProcReadHeader();
+	if( !this->readWriteHeader() ) return false;
+    return true;
 }
 
 bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 {
-	
-	if(!readHeader()) return true;
 
+	if(!readHeader()) return true;
+    
 	if( !is.findTokenAndNextSilent("objectName", objectName_) )
 	{
 		if(!silent)
@@ -230,18 +225,6 @@ bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 
 	return true;
 } 
-
-bool pFlow::IOfileHeader::writeData()const
-{
-	if(!implyWrite())return false;
-	return ioPattern().thisProcWriteData();
-}
-
-bool pFlow::IOfileHeader::readData()const
-{
-	if(!implyRead())return false;
-	return ioPattern().thisProcReadData();
-}
 
 bool pFlow::IOfileHeader::writeBanner(iOstream& os)const
 {

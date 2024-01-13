@@ -1,22 +1,50 @@
 #include "fileDictionary.hpp"
-#include "IOPattern.hpp"
 
 
-pFlow::fileDictionary::fileDictionary(const word &keyword)
+pFlow::fileDictionary::fileDictionary
+(
+    const objectFile & of, 
+    repository* owner
+)
 :
-    dictionary(keyword, true)
+    IOobject
+    (
+        of, 
+        IOPattern::IOPattern::AllProcessorsSimilar, 
+        owner
+    ),
+    dictionary
+    (
+        of.name(), 
+        true
+    )
 {
+    dictionary::name_ = IOobject::path().wordPath();
+    if(!IOobject::read())
+    {
+        fatalErrorInFunction<<
+        "Error in reading from dictionary "<< globalName()<<endl;
+        fatalExit;
+    }
 }
 
 pFlow::fileDictionary::fileDictionary(const word &keyword, const fileSystem &file)
 :
-    dictionary(keyword, file)
-{
-}
+    fileDictionary
+    (
+        objectFile
+        (
+            keyword,
+            file,
+            objectFile::READ_ALWAYS,
+            objectFile::WRITE_NEVER
+        ),
+        nullptr
+    )
+{}
 
 bool pFlow::fileDictionary::read(iIstream &is, const IOPattern &iop)
 {
-    
     return dictionary::read(is);
 }
 

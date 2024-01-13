@@ -23,7 +23,7 @@ Licence:
 
 // initilized and finalize should be placed in onc scope 
 }
-pFlow::output<< "\nFinalizing host/device execution space ...."<<pFlow::endl;
+REPORT(0)<< "\nFinalizing host/device execution space ...."<<END_REPORT;
 Kokkos::finalize();
 
 

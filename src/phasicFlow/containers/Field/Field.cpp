@@ -185,12 +185,14 @@ template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::read
 (
 	iIstream& is,
-	IOPattern::IOType iotype
+	const IOPattern& iop
 )
 {
 	
-	bool tokenFound;
-	tokenFound = is.findToken(fieldKey_);
+	bool tokenFound = true;
+	
+    if(iop.thisProcReadData())
+        tokenFound = is.findToken(fieldKey_);
 
 	if( !tokenFound )
 	{
@@ -199,12 +201,13 @@ bool pFlow::Field<VectorField, T, PropType>::read
 		return false;
 	}
 	
-	if( !VectorType::read(is, iotype) )
+	if( !VectorType::read(is, iop) )
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
 		"error in reading field data from field "<< this->name()<<endl;
 	}
-	is.readEndStatement("Field::read");
+    if(iop.thisProcReadData())
+	    is.readEndStatement("Field::read");
 
 
 	return true;
@@ -213,14 +216,14 @@ bool pFlow::Field<VectorField, T, PropType>::read
 template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::write(
 	iOstream& os, 
-	IOPattern::IOType iotype)const
+	const IOPattern& iop)const
 {
 
 	os.writeWordKeyword(fieldKey_)<<endl;
 
 	if(!os.check(FUNCTION_NAME))return false;
 
-	if(!VectorType::write(os, iotype)) return false;
+	if(!VectorType::write(os, iop)) return false;
 
 	os.endEntry();
 	if(!os.check(FUNCTION_NAME))return false;

@@ -19,23 +19,23 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "simulationDomain.hpp"
-#include "processors.hpp"
+#include "pFlowProcessors.hpp"
 
 pFlow::simulationDomain::simulationDomain(const dictionary& dict)
 :
     globalBox_(dict.subDict("globalBox")),
     globalDomainDict_(dict)
 {
-
+    
 }
 
 pFlow::uniquePtr<pFlow::simulationDomain> 
     pFlow::simulationDomain::create(const dictionary &dict)
 {
-    
 	word sType = angleBracketsNames(
         "simulationDomain", 
-        processors::runTypeName());
+        pFlowProcessors().localRunTypeName());
+
 
 	if( dictionaryvCtorSelector_.search(sType) )
 	{

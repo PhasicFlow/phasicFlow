@@ -415,7 +415,7 @@ template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
 auto pFlow::VectorSingle<T,MemorySpace>::getSpan()const
 {
-    return span<const T>(view_.data(), this->size());
+    return span<T>(const_cast<T*>(view_.data()), this->size());
 }
 
 template<typename T, typename MemorySpace>

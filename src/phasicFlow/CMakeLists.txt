@@ -6,6 +6,10 @@ types/types.cpp
 
 globals/error.cpp
 
+processors/processors.cpp
+processors/localProcessors.cpp
+processors/pFlowProcessors.cpp
+
 streams/token/tokenIO.cpp
 streams/token/token.cpp
 streams/iStream/IOstream.cpp
@@ -20,13 +24,9 @@ streams/TStream/oTstream.cpp
 streams/Fstream/iFstream.cpp
 streams/Fstream/oFstream.cpp
 streams/Fstream/fileStream.cpp
-streams/dataIO/dataIO.cpp
-streams/dataIO/dataIONoMPI.cpp 
 streams/streams.cpp 
 
 fileSystem/fileSystem.cpp
-
-processors/processors.cpp
 
 dictionary/dictionary.cpp
 dictionary/fileDictionary.cpp
@@ -38,6 +38,9 @@ containers/Vector/Vectors.cpp
 containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
 containers/pointField/pointFields.cpp
+
+#setFieldList/setFieldList.cpp
+#setFieldList/setFieldEntry.cpp
 
 Timer/Timer.cpp
 Timer/Timers.cpp
@@ -64,21 +67,58 @@ structuredData/plane/plane.cpp
 structuredData/domain/domain.cpp
 structuredData/domain/simulationDomain.cpp
 structuredData/domain/regularSimulationDomain.cpp
-structuredData/pointStructure/boundaryList.cpp
 structuredData/pointStructure/internalPoints.cpp
 structuredData/pointStructure/pointStructure.cpp
 structuredData/boundaries/boundaryBase/boundaryBase.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
+structuredData/pointStructure/boundaryList.cpp
+
+commandLine/commandLine.cpp
 
 
 )
 
 set(link_libs)
-if(MPI_FOUND)
-	set(link_libs Kokkos::kokkos tbb PRIVATE MPI::MPI_CXX)
+set(link_libs Kokkos::kokkos tbb)
+	
+
+
+if(pFlow_Build_MPI)
+
+	set(Zoltan_Install_DIR)
+	if(DEFINED ENV{Zoltan_DIR})
+	   set(Zoltan_Install_DIR $ENV{Zoltan_DIR})
+	else()
+	  set(Zoltan_Install_DIR $ENV{HOME}/PhasicFlow/Zoltan)
+	endif()
+	message(STATUS "Zoltan install directory is ${Zoltan_Install_DIR}")
+
+	set(ZOLTAN_PREFIX "${Zoltan_Install_DIR}" CACHE STRING "Zoltan install directory")
+
+	find_path(ZOLTAN_INCLUDE_DIR zoltan.h PATHS "${ZOLTAN_PREFIX}/include")
+
+	message(STATUS "Zoltan include path: ${ZOLTAN_INCLUDE_DIR}")
+
+	find_library(ZOLTAN_LIBRARY zoltan PATHS "${ZOLTAN_PREFIX}/lib")
+	message(STATUS "Zoltan lib path: ${ZOLTAN_LIBRARY}")
+	
+	list(APPEND SourceFiles
+	MPIParallelization/partitioning.cpp 
+	MPIParallelization/rcb1DPartitioning.cpp
+	MPIParallelization/domain/MPISimulationDomain.cpp
+    #MPIParallelization/dataIOMPI.cpp
+    MPIParallelization/procCommunication.cpp
+    MPIParallelization/boundaryProcessor.cpp
+    MPIParallelization/scatteredMasterDistributeChar.cpp
+	)
+	
+	list(APPEND link_libs MPI::MPI_CXX ${ZOLTAN_LIBRARY} -lm )
+	pFlow_add_library_install(phasicFlow SourceFiles link_libs)
+	target_include_directories(phasicFlow PUBLIC ./globals ${ZOLTAN_INCLUDE_DIR})
+
 else()
-	set(link_libs Kokkos::kokkos tbb)
+	pFlow_add_library_install(phasicFlow SourceFiles link_libs)
+	target_include_directories(phasicFlow PUBLIC ./globals)
 endif()
 
-pFlow_add_library_install(phasicFlow SourceFiles link_libs)
-target_include_directories(phasicFlow PUBLIC ./globals)
+

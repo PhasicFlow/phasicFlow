@@ -17,9 +17,9 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __processors_H__
 #define __processors_H__ 
+
 
 
 namespace pFlow
@@ -64,6 +64,12 @@ protected:
 	static inline
 	int globalSize_ = 1;
 
+    static inline
+    int argc_ = 0;
+
+    static inline 
+    char** argv_ = nullptr;
+
 public:
 
 	/// Initialize MPI processors
@@ -77,28 +83,27 @@ public:
 	/// Constructor 
 	processors();
 	
-
 	/// Destructor 
 	~processors();
 	
 	/// Master processors number (globaly in MPI).
 	static inline
-	int masterNo()
+	int globalMasterNo()
 	{
 		return 0;
 	}
 
 	/// Is this a parallel MPI run.
 	static inline
-	bool isParallel()
+	bool globalParallel()
 	{
 		return processors::globalSize()>1;
 	}
 	
 	static inline
-	const char* runTypeName()
+	const char* globalRunTypeName()
 	{
-		if(isParallel())
+		if(globalParallel())
 		{
 			return "MPI";
 		}
@@ -117,9 +122,9 @@ public:
 	
 	/// Is this processor the master processor?
 	static inline
-	bool isMaster()
+	bool globalMaster()
 	{
-		return processors::globalRank() == processors::masterNo();
+		return processors::globalRank() == processors::globalMasterNo();
 	}
 	
 	/// Global size of processors
@@ -136,9 +141,29 @@ public:
 		return globalRank_;
 	}
 
+    static inline
+    int argc()
+    {
+        return argc_;
+    }
+
+    static inline 
+    char** argv()
+    {
+        return argv_;
+    }
+
 	/// Abort MPI run or regular run
 	static
 	void abort(int error);
+
+/*#ifdef pFlow_Build_MPI
+    static inline 
+    auto worldCommunicator()
+    {
+      return pFlow::MPI::CommWorld;  
+    }
+#endif*/
 
 }; //processors
 

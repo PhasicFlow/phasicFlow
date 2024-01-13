@@ -21,13 +21,15 @@ Licence:
 #ifndef __demComponent_hpp__ 
 #define __demComponent_hpp__
 
-#include "systemControl.hpp"
-#include "Time.hpp"
-
+#include "types.hpp"
+#include "typeInfo.hpp"
+#include "Timers.hpp"
 
 namespace pFlow
 {
 
+class systemControl;
+class Time;
 /**
  * A base class for every main component of DEM system.
  * 
@@ -96,19 +98,11 @@ public:
 		}
 
 		/// Time step of integration
-		inline
-		real dt()const
-		{
-			return time_.dt();
-		}
-
+		real dt()const;
+		
 		/// Current simulation time 
-		inline
-		real currentTime()const
-		{
-			return time_.currentTime();
-		}
-
+		real currentTime()const;
+		
 		inline
 		const auto& time()const
 		{

@@ -47,11 +47,6 @@ public:
 
 	using execution_space 	= typename pointsType::execution_space;
 
-	using pFlagTypeDevice 	= pointFlag<execution_space>;
-
-	using pFlagTypeHost 	= pointFlag<DefaultHostExecutionSpace>;
-
-
 protected:
 
 	//// - data members
@@ -120,11 +115,19 @@ public:
 		FUNCTION_H
         realx3Field_D& pointPosition();
 
-		/*INLINE_FUNCTION_H
-		auto pointPositionHostAll()
-		{
-			return pointPosition_.hostVectorAll();
-		}*/
+        INLINE_FUNCTION_H
+        auto pointPositionHost()const
+        {
+            return pointPosition_.hostVector();
+        }
+
+        INLINE_FUNCTION_H
+        auto pointPositionDevice()const
+        {
+            return pointPosition_.deviceVector();
+        }
+
+		hostViewType1D<realx3> activePointsHost()const;
 
 		// - size of data structure
 		INLINE_FUNCTION_H
@@ -216,12 +219,12 @@ public:
 		
 		/// Read 
 		FUNCTION_H
-		bool read(iIstream& is, IOPattern::IOType iotype);
+		bool read(iIstream& is, const IOPattern& iop);
 		
 
 		/// Write 
 		FUNCTION_H
-		bool write(iOstream& os, IOPattern::IOType iotype)const;	
+		bool write(iOstream& os, const IOPattern& iop)const;	
 
 };
 
