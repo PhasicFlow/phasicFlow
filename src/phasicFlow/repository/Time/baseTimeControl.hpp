@@ -17,52 +17,36 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __baseTimeControl_hpp__
+#define __baseTimeControl_hpp__
 
-#include "simulationDomain.hpp"
-#include "pFlowProcessors.hpp"
-#include "systemControl.hpp"
-#include "vocabs.hpp"
+#include "dictionary.hpp"
+#include "ranges.hpp"
 
-pFlow::simulationDomain::simulationDomain(systemControl& control)
-:
-	fileDictionary
-	(
-		objectFile
-		(
-			domainFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		&control.settings()
-	),
-    globalBox_(subDict("globalBox"))
+
+namespace pFlow
 {
-    
+
+class baseTimeControl
+{
+private:
+   
+    bool 	isTimeStep_;
+
+	int32StridedRagne iRange_;
+
+	realStridedRange  rRange_;
+	
+
+public:
+
+	baseTimeControl(const dictionary& dict, const word& intervalPrefix = "");
+
+
+	bool timeEvent(uint32 iter, real t, real dt)const;
+
+};
+
 }
 
-pFlow::uniquePtr<pFlow::simulationDomain> 
-    pFlow::simulationDomain::create(systemControl& control)
-{
-	word sType = angleBracketsNames(
-        "simulationDomain", 
-        pFlowProcessors().localRunTypeName());
-
-
-	if( systemControlvCtorSelector_.search(sType) )
-	{
-		return systemControlvCtorSelector_[sType] (control);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< sType << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			systemControlvCtorSelector_
-		);
-		fatalExit;
-	}
-    return nullptr;
-}
+#endif

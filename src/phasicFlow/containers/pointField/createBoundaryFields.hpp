@@ -18,51 +18,19 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "simulationDomain.hpp"
-#include "pFlowProcessors.hpp"
-#include "systemControl.hpp"
-#include "vocabs.hpp"
+#ifndef __createBoundaryFields_hpp__
+#define __createBoundaryFields_hpp__
 
-pFlow::simulationDomain::simulationDomain(systemControl& control)
-:
-	fileDictionary
-	(
-		objectFile
-		(
-			domainFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		&control.settings()
-	),
-    globalBox_(subDict("globalBox"))
-{
+#include "boundaryField.hpp"
+#include "exitBoundaryField.hpp"
+
+#define createBaseBoundary(VectorFieldType, DataType, MemorySpaceType)          \
+    template class pFlow::boundaryField<VectorFieldType, DataType, MemorySpaceType>;
     
-}
 
-pFlow::uniquePtr<pFlow::simulationDomain> 
-    pFlow::simulationDomain::create(systemControl& control)
-{
-	word sType = angleBracketsNames(
-        "simulationDomain", 
-        pFlowProcessors().localRunTypeName());
+#define createBoundary(VectorFieldType, DataType, MemorySpaceType, BoundaryType)    \
+    template class pFlow::BoundaryType##BoundaryField<VectorFieldType, DataType, MemorySpaceType>;
 
 
-	if( systemControlvCtorSelector_.search(sType) )
-	{
-		return systemControlvCtorSelector_[sType] (control);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< sType << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			systemControlvCtorSelector_
-		);
-		fatalExit;
-	}
-    return nullptr;
-}
+#endif //__createBoundaryFields_hpp__
+    

@@ -101,14 +101,6 @@ protected:
 		static constexpr
 		bool isDeviceAccessible_ = isDeviceAccessible<execution_space>();
 
-
-		/// Name of the memory space
-	  	constexpr static inline 
-	  	const char* memoerySpaceName()
-	  	{
-	  		return memory_space::name();
-	  	}
-
 	  	/// Evaluate capacity based on the input size 
 		static INLINE_FUNCTION_H uint32 evalCapacity(uint32 n)
 		{
@@ -136,7 +128,7 @@ protected:
 public:
 
 	/// Type info
-	TypeInfoTemplateNV2("VectorSingle", T, memoerySpaceName());
+	TypeInfoTemplateNV111("VectorSingle", T, memoerySpaceName());
 
 	//// - Constructors
 
@@ -416,6 +408,12 @@ public:
 			return writeSpan(os, sp, iop);
 
 		}
+	/// Name of the memory space
+	constexpr static inline 
+	const char* memoerySpaceName()
+	{
+		return memory_space::name();
+	}
 
 }; // class VectorSingle
 

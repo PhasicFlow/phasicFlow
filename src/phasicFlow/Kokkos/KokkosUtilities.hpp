@@ -180,6 +180,35 @@ iOstream& operator <<(iOstream& os, const Pair<T1,T2>& p)
 
 template<typename T, typename... properties>
 INLINE_FUNCTION_H
+span<T> makeSpan(ViewType1D<T, properties...> & v)
+{
+	return span<T>(v.data(), v.size());
+}
+
+template<typename T, typename... properties>
+INLINE_FUNCTION_H
+span<T> makeSpan(ViewType1D<T, properties...> & v, uint32 size)
+{
+	return span<T>(v.data(), size);
+}
+
+template<typename T, typename... properties>
+INLINE_FUNCTION_H
+span<T> makeSpan(const ViewType1D<T, properties...> & v)
+{
+	return span<T>(const_cast<T*>(v.data()), v.size());
+}
+
+template<typename T, typename... properties>
+INLINE_FUNCTION_H
+span<T> makeSpan(const ViewType1D<T, properties...> & v, uint32 size)
+{
+	return span<T>(const_cast<T*>(v.data()), size);
+}
+
+
+template<typename T, typename... properties>
+INLINE_FUNCTION_H
 iOstream& operator <<(iOstream& os, const ViewType1D<T, properties...> & v)
 {
 	

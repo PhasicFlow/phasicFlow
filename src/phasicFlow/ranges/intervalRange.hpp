@@ -43,7 +43,7 @@ protected:
 	static inline const T minVal = largestNegative<T>();
 public:
 
-	TypeInfoTemplateNV("intervalRange",T);
+	TypeInfoTemplateNV11("intervalRange",T);
 
 	intervalRange(T begin, T end)
 	:

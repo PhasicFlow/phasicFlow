@@ -62,8 +62,6 @@ protected:
 	/// caseSetup folder repository
 	uniquePtr<repository>       caseSetup_;
 
-    uniquePtr<fileDictionary>   domainDict_ = nullptr;
-
 	/// extra libs to be loaded
 	dynamicLinkLibs 	        libs_;
 	
@@ -81,7 +79,7 @@ protected:
 
 	Timer 			writeToFileTimer_;
 
-    bool readDomainDict();
+    //bool readDomainDict();
 
 	static word getRunName( const fileSystem& path);
 	
@@ -159,7 +157,7 @@ public:
 		return settingsDict_();
 	}
 
-	fileDictionary& domainDict();
+	//fileDictionary& domainDict();
 	
 
 	virtual word runName() const
@@ -172,10 +170,10 @@ public:
 		return settingsDict_().getVal<realx3>("g");
 	}
 
-	inline box domain()
+	/*inline box domain()
 	{
 		return box(domainDict().subDict("globalBox"));
-	}
+	}*/
 
 	bool operator ++(int);
 

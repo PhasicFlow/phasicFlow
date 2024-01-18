@@ -34,9 +34,10 @@ class boundaryFieldList
 {
 public:
 
-    using boundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
+    using BoundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
 
-    using FieldType = typename boundaryFieldType::FieldType;
+    using InternalFieldType = typename BoundaryFieldType::InternalFieldType;
+    
 
 protected:
 
@@ -44,9 +45,9 @@ protected:
 
 public:
 
-    boundaryFieldList(const boundaryList& boundaries, FieldType& internal)
+    boundaryFieldList(const boundaryList& boundaries, InternalFieldType& internal)
     :
-        ListPtr<boundaryFieldType>(boundaries.size()),
+        ListPtr<BoundaryFieldType>(boundaries.size()),
         boundaries_(boundaries)
     {
         for(auto i=0; i<boundaries.size(); i++)
@@ -54,16 +55,10 @@ public:
             this->set
             (
                 i, 
-                makeUnique<boundaryFieldType>
-                (
-                    boundaries_[i], 
-                    internal
-                )
+                BoundaryFieldType::create(boundaries_[i], internal)
             );
         }
     }
-
-
 
 };
 

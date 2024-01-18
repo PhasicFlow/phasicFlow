@@ -24,13 +24,14 @@ Licence:
 
 #include "boundaryBase.hpp"
 #include "ListPtr.hpp"
+#include "baseTimeControl.hpp"
 
-#include "streams.hpp"
 
 namespace pFlow
 {
 
 class simulationDomain;
+class internalPoints;
 
 class boundaryList
 :
@@ -44,9 +45,15 @@ protected:
 		
         const simulationDomain& simDomain_;
 
+		baseTimeControl 		timeControl_;
+
         bool                    listSet_ = false;
 
-    
+		bool resetLists();
+
+		/// @brief update neighbor list of boundaries regardless
+		/// of the time intervals 
+		bool updateLists();
 
 public:
 	
@@ -55,26 +62,30 @@ public:
 	
 
 	//// - Constructors
-
 	boundaryList(
 		const simulationDomain& simD, 
 		internalPoints& internal);
 
-	//~boundaryList() = default;
 
-  ~boundaryList() = default;
+  	~boundaryList() = default;
 
-  bool updateLists();
+	/// @brief update neighbor list of boundaries based on 
+	/// the time intervals
+	bool updateLists(uint32 iter, real t, real dt);
 
-  auto& boundary(size_t i)
-  {
-    return ListPtr<boundaryBase>::operator[](i);
-  }
+	
 
-  const auto& boundary(size_t i)const
-  {
-    return ListPtr<boundaryBase>::operator[](i);
-  }
+	bool setLists();
+
+	auto& boundary(size_t i)
+	{
+		return ListPtr<boundaryBase>::operator[](i);
+	}
+
+	const auto& boundary(size_t i)const
+	{
+	return ListPtr<boundaryBase>::operator[](i);
+	}
 };
 
 } // pFlow

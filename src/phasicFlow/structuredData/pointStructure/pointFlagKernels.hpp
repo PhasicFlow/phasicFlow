@@ -20,9 +20,78 @@ Licence:
 #ifndef __pointFlagKernels_hpp__
 #define __pointFlagKernels_hpp__
 
-
-
 template<typename ExecutionSpace>
+pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markOutOfBoxDelete
+(
+	const box& validBox,
+	ViewType1D<realx3, memory_space> points
+)
+{
+	using rpScanFlag = Kokkos::RangePolicy<execution_space,  
+			Kokkos::IndexType<uint32>>;
+
+	uint32 numDeleted = 0;
+	
+	uint32 start = activeRange().start();
+	uint32 end   = activeRange().end();
+
+	uint32 minRange = end;
+	uint32 maxRange = start;
+
+	if(start<end)
+	{
+		Kokkos::parallel_reduce(
+			"pointFlagKernels::markOutOfBox",
+			rpScanFlag(start, end),
+			CLASS_LAMBDA_HD(
+				uint32 i, 
+				uint32& minUpdate, 
+				uint32& maxUpdate, 
+				uint32& delToUpdate)
+			{
+				if(isActive(i))
+				{
+					if(validBox.isInside(points[i]))
+					{
+						
+						minUpdate = min(minUpdate,i);
+						maxUpdate = max(maxUpdate,i);
+					}
+					else
+					{
+						flags_[i] = DELETED;
+						delToUpdate++;
+					}
+
+				}
+				
+			},
+			Kokkos::Min<uint32>(minRange), 
+			Kokkos::Max<uint32>(maxRange),
+			numDeleted);	
+	}
+	
+	if(numDeleted >= numActive_)
+	{
+		minRange = 0;
+		maxRange = 0;
+		numDeleted == numActive_;
+	}
+	else
+	{
+		// add one to maxRange to make it half-open
+		maxRange ++;
+	}
+
+	activeRange_ = {minRange, maxRange};
+	numActive_ 	= numActive_ - numDeleted;
+	isAllActive_ = 
+		(activeRange_.numElements() == numActive_)&& numActive_>0;
+	
+	return numDeleted;
+}
+
+/*template<typename ExecutionSpace>
 pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::scanPointFlag()
 {
 		
@@ -77,7 +146,7 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::scanPointFlag()
 	isAllActive_ = activeRange_.numElements() == numActive_;
 
 	return numActive;
-}
+}*/
 
 
 template<typename ExecutionSpace>
@@ -102,7 +171,7 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions
 	uint32 minRange = end;
 	uint32 maxRange = start;
 
-	uint32 numMarked = 0;
+	uint32 numMarkedDelete = 0;
 	uint32 nLeft = 0, nRight = 0;
 	uint32 nBottom = 0, nTop = 0;
 	uint32 nRear = 0, nFront = 0;
@@ -181,7 +250,7 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions
 			},
 			Kokkos::Min<uint32>(minRange), 
 			Kokkos::Max<uint32>(maxRange),
-			numMarked,
+			numMarkedDelete,
 			nLeft,
 			nRight,
 			nBottom,
@@ -192,10 +261,11 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions
 	}
 	
 	// means either range was empty or all points have been deleted.
-	if(minRange<start || maxRange>end)
+	if(numMarkedDelete>= numActive_)
 	{
 		minRange = 0;
 		maxRange = 0;
+		numMarkedDelete =  numActive_;
 	}
 	else
 	{
@@ -203,8 +273,8 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions
 	}
 
 	activeRange_ = {minRange, maxRange};
-	isAllActive_ = isAllActive_ && numMarked == 0; 
-	numActive_ 	-= numMarked;
+	numActive_ 	-= numMarkedDelete;
+	isAllActive_ = (activeRange_.numElements() == numActive_)&& numActive_>0;
 
 	nLeft_ 	= nLeft;
 	nRight_	= nRight;
@@ -213,7 +283,7 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions
 	nRear_	= nRear;
 	nFront_ = nFront;
 
-	return numMarked;
+	return numMarkedDelete;
 }
 
 template<typename ExecutionSpace>
@@ -235,7 +305,7 @@ void pFlow::pointFlag<ExecutionSpace>::fillNeighborsLists
 
 	ViewType1D<uint32, memory_space> nElems("nElems",6);
 
-	fill(nElems, 0, 6, 0);
+	fill(nElems, 0, 6, static_cast<uint32>(0));
 
 	if(start<end)
 	{

@@ -22,7 +22,7 @@ Licence:
 #include "Timers.hpp"
 #include "streams.hpp"
 
-pFlow::Timer::Timer(const word name, Timers* parrent)
+pFlow::Timer::Timer(const word& name, Timers* parrent)
 :
 	name_(name),
 	parrent_(parrent)

@@ -134,7 +134,7 @@ public:
 		virtual
 		bool beforeTimeLoop()
 		{
-			notImplementedFunction;
+			notImplementedFunction
 			return false;
 		}
 
@@ -155,7 +155,7 @@ public:
 		virtual
 		bool afterTimeLoop()
 		{
-			notImplementedFunction;
+			notImplementedFunction
 			return false;
 		}
 

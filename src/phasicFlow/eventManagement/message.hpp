@@ -45,7 +45,9 @@ public:
 
 protected:
 
-	std::bitset<16> events_{0x0000};
+	static constexpr size_t numberOfEvents_ = 8;
+
+	std::bitset<numberOfEvents_> events_{0x0000};
 	
 
 public:
@@ -59,7 +61,7 @@ public:
 
 	message(size_t i )
 	{
-		if(i<16)
+		if(i<numberOfEvents_)
 		{
 			events_.set(i);
 		}
@@ -118,7 +120,12 @@ public:
 	{
 		return remove(evnt);
 	}
-
+	
+	static
+	auto constexpr numEvents()
+	{
+		return numberOfEvents_;
+	}
 	static 
 	message Default()
 	{

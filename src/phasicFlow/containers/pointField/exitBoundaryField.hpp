@@ -17,65 +17,65 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __subscriber_hpp__
-#define __subscriber_hpp__
+#ifndef __exitBoundaryField_hpp__
+#define __exitBoundaryField_hpp__
 
-
-
-#include <array>
-
-#include "List.hpp"
-#include "message.hpp"
+#include "boundaryField.hpp"
 
 namespace pFlow
 {
 
-class observer;
-class anyList;
-
-class subscriber
+template< template<class, class> class VectorField, class T, class MemorySpace = void>
+class exitBoundaryField
+:
+    public boundaryField<VectorField, T, MemorySpace> 
 {
-protected:
+public:
+	
+    using ExitBoundaryFieldType = exitBoundaryField<VectorField, T, MemorySpace>;
 
-	// - list of subsribed objectd that recieve updage messages 
-	mutable std::array<List<observer*>,message::numEvents()> observerList_;
+	using BoundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
 
-	word subName_;
+	using InternalFieldType = typename BoundaryFieldType::InternalFieldType;
+
+	using memory_space 		= typename BoundaryFieldType::memory_space;
+
+	using execution_space 	= typename BoundaryFieldType::execution_space;
+
+   
 
 public:
 
-	subscriber(const word& name)
-	:
-		subName_(name)
-	{}
+	TypeInfo("boundaryField<exit>");
 
-	subscriber(const subscriber&) = delete;
-
-	subscriber(subscriber&&) = default;
-
-	subscriber& operator = (const subscriber&) = delete;
-
-	subscriber& operator = (subscriber&&) = default;
-
-	virtual ~subscriber();
-
-	virtual bool subscribe(message msg, observer* obsevr)const;
-
-	virtual bool unsubscribe(observer* obsevr)const;
-
-	//bool notify(const eventMessage& msg);
-
-	//bool notify(const eventMessage& msg, const List<eventObserver*>& exclutionList );
-
-
+	exitBoundaryField(
+		const boundaryBase& boundary, 
+		InternalFieldType& internal);
 	
-	bool notify(const message msg, const anyList& varList);
 	
+
+	add_vCtor
+	(
+		BoundaryFieldType,
+		ExitBoundaryFieldType,
+		boundaryBase
+	);
+
+
+	bool hearChanges
+	(
+		const message& msg, 
+    	const anyList& varList
+	) override
+    {
+		notImplementedFunction;
+		return false;
+	}
 
 };
 
-} // pFlow
+}
 
+#include "exitBoundaryField.cpp"
 
-
-#endif // __eventSubscriber_hpp__
+#endif

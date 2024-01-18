@@ -18,51 +18,12 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "simulationDomain.hpp"
-#include "pFlowProcessors.hpp"
-#include "systemControl.hpp"
-#include "vocabs.hpp"
-
-pFlow::simulationDomain::simulationDomain(systemControl& control)
+template<template<class, class> class VectorField, class T, class MemorySpace>
+    pFlow::exitBoundaryField<VectorField, T, MemorySpace>::exitBoundaryField
+(
+	const boundaryBase& boundary, 
+	InternalFieldType& internal
+)
 :
-	fileDictionary
-	(
-		objectFile
-		(
-			domainFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		&control.settings()
-	),
-    globalBox_(subDict("globalBox"))
-{
-    
-}
-
-pFlow::uniquePtr<pFlow::simulationDomain> 
-    pFlow::simulationDomain::create(systemControl& control)
-{
-	word sType = angleBracketsNames(
-        "simulationDomain", 
-        pFlowProcessors().localRunTypeName());
-
-
-	if( systemControlvCtorSelector_.search(sType) )
-	{
-		return systemControlvCtorSelector_[sType] (control);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< sType << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			systemControlvCtorSelector_
-		);
-		fatalExit;
-	}
-    return nullptr;
-}
+    BoundaryFieldType(boundary, internal)
+{}

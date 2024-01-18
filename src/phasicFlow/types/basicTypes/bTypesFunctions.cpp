@@ -44,7 +44,14 @@ pFlow::int32 pFlow::countChar( const char* s, const char c)
 pFlow::word pFlow::toUpper(const word & inStr)
 {
     word oStr(inStr);
-    transform(inStr.begin(), inStr.end(), oStr.begin(), ::toupper);
+    std::transform(inStr.begin(), inStr.end(), oStr.begin(), ::toupper);
+    return oStr;
+}
+
+pFlow::word pFlow::firstCapital(const word& inStr)
+{
+    word oStr(inStr);
+    oStr[0] = std::toupper(oStr[0]);
     return oStr;
 }
 

@@ -25,7 +25,7 @@ Licence:
 #include "systemControl.hpp"
 #include "vocabs.hpp"
 
-bool pFlow::systemControl::readDomainDict()
+/*bool pFlow::systemControl::readDomainDict()
 {
     if(!domainDict_)
     {
@@ -42,7 +42,7 @@ bool pFlow::systemControl::readDomainDict()
         );
     }
     return true;
-}
+}*/
 
 pFlow::word pFlow::systemControl::getRunName
 (
@@ -176,7 +176,7 @@ pFlow::systemControl::systemControl
 	),
 	writeToFileTimer_("Write to file", &timers_)	
 {
-    readDomainDict();
+    //readDomainDict();
 }
 
 pFlow::systemControl::systemControl(
@@ -250,13 +250,13 @@ pFlow::systemControl::systemControl(
 	),
 	writeToFileTimer_("Write to file", &timers_)	
 {
-    readDomainDict();
+    //readDomainDict();
 }
 
-pFlow::fileDictionary& pFlow::systemControl::domainDict()
+/*pFlow::fileDictionary& pFlow::systemControl::domainDict()
 {
     return domainDict_();
-}
+}*/
 
 bool pFlow::systemControl::operator ++(int)
 {

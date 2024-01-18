@@ -21,8 +21,8 @@ Licence:
 template<template<class, class> class VectorField, class T, class MemorySpace>
 pFlow::boundaryField<VectorField, T, MemorySpace>::boundaryField
 (
-	const boundaryBase& boundary,
-	FieldType &internal
+	const boundaryBase& boundary, 
+	InternalFieldType& internal
 )
 :
 	observer(),
@@ -30,3 +30,33 @@ pFlow::boundaryField<VectorField, T, MemorySpace>::boundaryField
 	internal_(internal)
 {}
 
+
+template<template<class, class> class VectorField, class T, class MemorySpace>
+pFlow::uniquePtr<pFlow::boundaryField<VectorField, T, MemorySpace>>
+	pFlow::boundaryField<VectorField, T, MemorySpace>::create
+(
+	const boundaryBase& boundary, 
+	InternalFieldType& internal
+)
+{
+
+	word bType = angleBracketsNames("boundaryField", boundary.type());
+
+	if(boundaryBasevCtorSelector_.search(bType))
+	{
+		return boundaryBasevCtorSelector_[bType](boundary, internal);
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< bType << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			boundaryBasevCtorSelector_
+		);
+		fatalExit;
+
+	}
+	return nullptr;
+}

@@ -19,21 +19,78 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "boundaryList.hpp"
+#include "internalPoints.hpp"
 #include "simulationDomain.hpp"
 
-pFlow::boundaryList::boundaryList
-(
-	const simulationDomain& simD,
-	internalPoints& internal
-)
-:
-    ListPtr<boundaryBase>(simD.sizeOfBoundaries()),
-	simDomain_(simD),
-	internal_(internal)
-{}
+bool pFlow::boundaryList::resetLists()
+{
+	clear();
+	listSet_ = false;
+    return true;
+}
 
 bool pFlow::boundaryList::updateLists()
 {
+    
+	std::array<real,6> dist;
+	dist[0] = boundary(0).neighborLength();
+	dist[1] = boundary(1).neighborLength();
+	dist[2] = boundary(2).neighborLength();
+	dist[3] = boundary(3).neighborLength();
+	dist[4] = boundary(4).neighborLength();
+	dist[5] = boundary(5).neighborLength();
+
+	
+	internal_.updateFlag(
+			simDomain_.thisDomain(),
+			dist);
+	const auto& maskD = internal_.activePointsMaskDevice();
+	boundary(0).setSize( maskD.leftSize() );
+	boundary(1).setSize( maskD.rightSize() );
+	boundary(2).setSize( maskD.bottomSize() );
+	boundary(3).setSize( maskD.topSize() );
+	boundary(4).setSize( maskD.rearSize() );
+	boundary(5).setSize( maskD.frontSize() );
+
+	internal_.fillNeighborsLists(
+		boundary(0).indexList().deviceVectorAll(),
+		boundary(1).indexList().deviceVectorAll(),
+		boundary(2).indexList().deviceVectorAll(),
+		boundary(3).indexList().deviceVectorAll(),
+		boundary(4).indexList().deviceVectorAll(),
+		boundary(5).indexList().deviceVectorAll());
+
+	return true;	
+}
+
+pFlow::boundaryList::boundaryList
+(
+    const simulationDomain &simD,
+    internalPoints &internal
+)
+: 
+	ListPtr<boundaryBase>(simD.sizeOfBoundaries()),
+	internal_(internal),
+	simDomain_(simD),
+	timeControl_
+	(
+		simDomain_.subDict("boundaries"), 
+		"update"
+	)
+{}
+
+bool pFlow::boundaryList::updateLists(uint32 iter, real t, real dt)
+{
+	if( timeControl_.timeEvent(iter, t, dt))
+	{
+		return updateLists();
+	}
+	return true;
+}
+
+bool pFlow::boundaryList::setLists()
+{
+	if(listSet_)return true;
 
 	for(auto i=0; i<simDomain_.sizeOfBoundaries();i++)
 	{
@@ -49,5 +106,6 @@ bool pFlow::boundaryList::updateLists()
 		);
 	}
 	listSet_ = true;
+
 	return true;
 }

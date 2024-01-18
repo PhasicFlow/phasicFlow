@@ -135,6 +135,43 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
+	auto leftSize()const
+	{
+		return nLeft_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto rightSize()const
+	{
+		return nRight_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto bottomSize()const
+	{
+		return nBottom_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto topSize()const
+	{
+		return nTop_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto rearSize()const
+	{
+		return nRear_;
+	}
+
+	INLINE_FUNCTION_HD
+	auto frontSize()const
+	{
+		return nFront_;
+	}
+
+
+	INLINE_FUNCTION_HD
 	bool operator()(uint32 i)
 	{
 		return isActive(i);
@@ -213,9 +250,28 @@ public:
 			isAllActive_);
 	}
 
-	
-	uint32 scanPointFlag();
+	/// @brief Loop over the active points and mark those out of the box
+	/// and return number of deleted points 
+	/// @param validBox the box whose inside is valid 
+	/// @param points list of all points 
+	/// @return number of deleted points 
+	uint32 markOutOfBoxDelete(
+		const box& validBox,
+		ViewType1D<realx3, memory_space> points);
 
+	
+	/// @brief mark points based on their position in the domain.
+	/// This should be the first method to be called when updating
+	/// boundaries (step 1 of 2).
+	/// @param dm the domain for which particles are tested 
+	/// @param points list of points 
+	/// @param leftLength neighbor length of the left face 
+	/// @param rightLength neighbor length of the right face 
+	/// @param bottomLength neighbor length of the bottom face 
+	/// @param topLength neighbor length of the top face 
+	/// @param rearLength neighbor length of the rear face 
+	/// @param frontLength neighbor length of the front face 
+	/// @return number of deleted points 
 	uint32 markPointRegions(
 		domain 								dm,
 		ViewType1D<realx3, memory_space> 	points,
@@ -226,6 +282,16 @@ public:
 		real rearLength,
 		real frontLength);
 
+	
+	/// @brief fill the lists for boundary faces. Lists keep the index 
+	/// of particles in the neighborhood of the faces. This mehtod is 
+	/// called after markPointRegions (step 2 of 2).
+	/// @param leftList neighbor list of the left face 
+	/// @param rightList neighbor list of the right face 
+	/// @param bottomList neighbor list of the bottom face 
+	/// @param topList neighbor list of the top face 
+	/// @param rearList neighbor list of the rear face 
+	/// @param frontList neighbor list of the front face 
 	void fillNeighborsLists(
 		ViewType1D<uint32, memory_space> leftList,
 		ViewType1D<uint32, memory_space> rightList,

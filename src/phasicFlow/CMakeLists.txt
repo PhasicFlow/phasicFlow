@@ -52,6 +52,7 @@ repository/IOobject/IOPattern.cpp
 repository/repository/repository.cpp
 repository/Time/Time.cpp
 repository/Time/timeControl.cpp
+repository/Time/baseTimeControl.cpp
 repository/systemControl/systemControl.cpp
 repository/systemControl/dynamicLinkLibs.cpp
 

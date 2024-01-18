@@ -20,9 +20,17 @@ Licence:
 
 
 #include "pointFields.hpp"
+#include "createBoundaryFields.hpp"
 
 
 template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8>; 
+createBaseBoundary(pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace);
+createBoundary(pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace, exit);
+
+template class pFlow::pointField<pFlow::VectorSingle, pFlow::real>; 
+createBaseBoundary(pFlow::VectorSingle, pFlow::real, pFlow::HostSpace);
+createBoundary(pFlow::VectorSingle, pFlow::real, pFlow::HostSpace, exit);
+
 
 /*template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>; 
 

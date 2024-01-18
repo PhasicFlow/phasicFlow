@@ -18,38 +18,46 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __pointField_hpp__
-#define __pointField_hpp__
-
+#ifndef __internalField_hpp__
+#define __internalField_hpp__
 
 #include "pointStructure.hpp"
-#include "internalField.hpp"
-#include "boundaryFieldList.hpp"
+#include "Field.hpp"
+#include "observer.hpp"
+
 
 namespace pFlow
 {
 
 template<template<class, class> class VectorField, class T, class MemorySpace=void>
-class pointField
+class internalField
 :
-	public IOobject,
-	public internalField<VectorField, T, MemorySpace>
+	public observer,
+	public Field<VectorField, T, MemorySpace>
 {
 public:
 	
-	using PointFieldType 	= pointField<VectorField, T, MemorySpace>;
-
-	using InternalFieldType = internalField<VectorField, T, MemorySpace>;
-
-	using FieldType 		= typename InternalFieldType::FieldType;
+	using pointFieldType 	= pointField<VectorField, T, MemorySpace>;
+	
+	using FieldType         = Field<VectorField, T, MemorySpace>;
 
     using boundaryFieldListType = boundaryFieldList<VectorField, T, MemorySpace>;
+  	
+  	using VectorType  		= typename FieldType::VectorType;
 
-	using VectorType  		= typename InternalFieldType::VectorType;
+	using iterator        	= typename FieldType::iterator;
 
-	using memory_space 		= typename InternalFieldType::memory_space;
+  	using const_iterator   	= typename FieldType::const_iterator;
 
-	using execution_space 	= typename InternalFieldType::execution_space;
+	using reference       	= typename FieldType::reference;
+  	
+  	using const_reference  	= typename FieldType::const_reference;
+
+	using value_type       	= typename FieldType::value_type;
+  	
+  	using pointer         	= typename FieldType::pointer;
+  	
+  	using const_pointer    	= typename FieldType::const_pointer;
 
 protected:
 
@@ -66,10 +74,9 @@ protected:
 
 
 public:
-	
-	
+ 
 	// - type info
-	TypeInfoTemplate111("pointField", T, VectorType::memoerySpaceName());
+	TypeInfoTemplateNV2("pointField", T, VectorType::memoerySpaceName());
 
 	
 	//// - Constructors
@@ -143,24 +150,24 @@ public:
 
 		// - update the field if any changes occure in pStruct 
 		//   for now it checks for deleted points
-		bool update(const eventMessage& msg);*/
+		bool update(const eventMessage& msg);
 
 
 	//// -  IO operations
-		bool readPointField(iIstream& is, const IOPattern& iop);
+		bool readPointField(iIstream& is);
 
-		bool writePointField(iOstream& os, const IOPattern& iop)const;
+		bool writePointField(iOstream& os)const;
 
 
-		bool read(iIstream& is, const IOPattern& iop)override
+		bool read(iIstream& is)
 		{
-			return readPointField(is, iop);
+			return readPointField(is);
 		}
 
-		bool write(iOstream& os, const IOPattern& iop)const override
+		bool write(iOstream& os)const
 		{
-			return writePointField(os, iop);
-		}
+			return writePointField(os);
+		}*/
 };
 
 /*template<template<class, class> class VectorField, class T, class MemorySpace>

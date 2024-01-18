@@ -22,7 +22,7 @@ Licence:
 
 #include "observer.hpp"
 #include "boundaryBase.hpp"
-#include "Field.hpp"
+#include "internalField.hpp"
 
 namespace pFlow
 {
@@ -33,19 +33,51 @@ class boundaryField
     public observer 
 {
 public:
-	using FieldType = Field<VectorField, T, MemorySpace>;
+	
+	using BoundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
+
+	using InternalFieldType = internalField<VectorField, T, MemorySpace>;
+
+	using memory_space 		= typename InternalFieldType::memory_space;
+
+	using execution_space 	= typename InternalFieldType::execution_space;
+
 protected:
 
     const boundaryBase&     boundary_;
 
     /// @brief a ref to the internal field 
-    FieldType& internal_;
+    InternalFieldType& 			internal_;
 
 public:
 
-   boundaryField(const boundaryBase& boundary, FieldType& internal);
+	TypeInfo("boundaryField<none>");
 
-	bool update
+	boundaryField(
+		const boundaryBase& boundary, 
+		InternalFieldType& internal);
+	
+	create_vCtor
+	(
+		boundaryField,
+		boundaryBase,
+		(
+			const boundaryBase& boundary, 
+			InternalFieldType& internal
+		),
+		(boundary, internal)
+	);
+
+
+	add_vCtor
+	(
+		BoundaryFieldType,
+		BoundaryFieldType,
+		boundaryBase
+	);
+
+
+	bool hearChanges
 	(
 		const message& msg, 
     	const anyList& varList
@@ -54,6 +86,21 @@ public:
 		notImplementedFunction;
 		return false;
 	}
+
+	auto size()const
+	{
+		return boundary_.size();
+	}
+
+	auto capacity()const
+	{
+		return boundary_.capacity();
+	}
+
+	static
+	uniquePtr<boundaryField> create(
+		const boundaryBase& boundary, 
+		InternalFieldType& internal);
 
 };
 

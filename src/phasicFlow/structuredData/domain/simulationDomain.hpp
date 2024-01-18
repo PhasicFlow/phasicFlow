@@ -23,6 +23,7 @@ Licence:
 #include <array>
 
 #include "domain.hpp"
+#include "fileDictionary.hpp"
 #include "span.hpp"
 #include "streams.hpp"
 #include "virtualConstructor.hpp"
@@ -31,9 +32,12 @@ Licence:
 namespace pFlow
 {
 
+class systemControl;
 //class pFlagTypeHost;
 
 class simulationDomain
+:
+	public fileDictionary
 {
 private:
 
@@ -43,19 +47,19 @@ static
 inline const std::array<word,6>  boundaryNames_ = 
 {
 	"left", "right", 
-	"top", "bottom",
+	"bottom", "top",
 	"rear", "front"
 };
 
 protected:	
+
+	//fileDictionary 	globalDomainDict_ ;
 
 	/// @brief acutal limits of the simulation domain
 	box 			globalBox_;
 
 	/// @brief the actual limits of this processor domain 
 	domain 			thisDomain_;
-
-	dictionary 		globalDomainDict_ ;
 
 	bool 			boundariesSet_ = false;
 	
@@ -69,7 +73,7 @@ public:
 	TypeInfo("simulationDomain");
 
 	/// Constrcut from components 
-	simulationDomain(const dictionary& dict);
+	simulationDomain(systemControl& control);
 	
 	/// Destructor 
 	virtual 
@@ -79,9 +83,9 @@ public:
 	create_vCtor
 	(
 		simulationDomain,
-		dictionary,
-		(const dictionary& dict),
-		(dict)	
+		systemControl,
+		(systemControl& control),
+		(control)	
 	);
 
 	virtual 
@@ -97,33 +101,33 @@ public:
 	bool initialTransferBlockData(
 		span<char> src, 
 		span<char> dst,
-		size_t sizeOfElement) = 0;
+		size_t sizeOfElement) const = 0;
     
     virtual 
     bool initialTransferBlockData(
         span<realx3> src,
-        span<realx3> dst) = 0;
+        span<realx3> dst) const = 0;
     
     virtual
     bool initialTransferBlockData(
         span<real> src,
-        span<real> dst) = 0;
+        span<real> dst) const = 0;
 
     virtual
     bool initialTransferBlockData(
         span<uint32> src,
-        span<uint32> dst) = 0;
+        span<uint32> dst) const = 0;
     
     virtual 
     bool initialTransferBlockData(
         span<int32> src,
-        span<int32> dst) = 0;
+        span<int32> dst) const = 0;
     
     
-    /*template<typename T>
+    template<typename T>
     bool initialTransferBlockData(
         span<T> src,
-        span<T> dst )
+        span<T> dst )const
     {
         size_t el=sizeof(T);
         return initialTransferBlockData
@@ -132,7 +136,7 @@ public:
             charSpan(dst), 
             el
         );
-    }*/  
+    } 
 
 
 
@@ -148,6 +152,18 @@ public:
 
 	virtual 
 	bool requiresDataTransfer() const = 0;
+
+	inline 
+	const auto& thisDomain()const
+	{
+		return thisDomain_;
+	}
+
+	inline 
+	const auto& globalBoundaryDict()const
+	{
+		return static_cast<const fileDictionary&>(*this);
+	}
 
 	inline
 	const dictionary& boundaryDict(uint32 i)const
@@ -174,7 +190,7 @@ public:
 	}
 	
 	static
-	uniquePtr<simulationDomain> create(const dictionary& dict);
+	uniquePtr<simulationDomain> create(systemControl& control);
 
 }; // simulationDomain
 

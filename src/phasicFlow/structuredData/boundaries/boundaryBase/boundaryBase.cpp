@@ -60,8 +60,18 @@ pFlow::boundaryBase::boundaryBase
 
 }
 
-typename pFlow::boundaryBase::pointFieldAccessType 
-    pFlow::boundaryBase::thisPoints()
+void pFlow::boundaryBase::setSize(uint32 newSize)
+{
+	indexList_.resize(newSize);
+
+	if( indexList_.capacity() <= newSize+1 )
+	{
+		indexList_.reserve(newSize+1);
+	}
+}	
+
+typename pFlow::boundaryBase::pointFieldAccessType
+pFlow::boundaryBase::thisPoints()
 {
     
     return pointFieldAccessType

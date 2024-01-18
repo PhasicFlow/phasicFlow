@@ -60,7 +60,7 @@ public:
 	using valueType 	= typename hashmapType::value_type;
 
 	
-	TypeInfoTemplateNV("hashMap", Key);
+	TypeInfoTemplateNV11("hashMap", Key);
 
 	//// - Constructors
 

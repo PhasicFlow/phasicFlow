@@ -116,6 +116,11 @@ public:
             return boundaries_[i];
         }
 
+		const auto& simDomain()const
+		{
+			return simulationDomain_();
+		}
+
 	// - IO methods 
 
 		/// @brief read the point structure from the input stream.

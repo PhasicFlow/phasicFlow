@@ -46,7 +46,7 @@ public Kokkos::pair<T,T>
 {
 	using Pair = Kokkos::pair<T,T>;
 
-	TypeInfoTemplateNV("Range", T)
+	TypeInfoTemplateNV11("Range", T)
 
 	//// - Constructors
 

@@ -46,10 +46,6 @@ public:
     using pointFieldAccessType = 
         scatterFieldAccess<realx3,DefaultExecutionSpace>;
 
-	enum DIRECTION: int8
-	{
-		
-	};
 
 protected:
 
@@ -110,6 +106,37 @@ public:
 		(dict, bplane, internal)
 	);
 
+	inline 
+	auto neighborLength()const
+	{
+		return neighborLength_;
+	}
+
+
+	const word& type()const
+	{
+		return type_;
+	}
+
+	const word& name()const
+	{
+		return name_;
+	}
+
+	auto size()const
+	{
+		return indexList_.size();
+	}
+
+	auto capacity()const
+	{
+		return indexList_.capacity();
+	}
+
+	/// @brief set the size of indexList 
+	/// Always make sure that size+1 <= capacity
+	void setSize(uint32 newSize);
+
 	virtual 
     bool beforeIteratoin(uint32 iterNum, real t) = 0 ;
 
@@ -118,6 +145,12 @@ public:
 
 	virtual 
     bool afterIteration(uint32 iterNum, real t) = 0;
+
+	
+	const auto& indexList()const
+	{
+		return indexList_;
+	}
 
     pointFieldAccessType thisPoints();
 

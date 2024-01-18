@@ -60,9 +60,9 @@ bool pFlow::pointStructure::setupPointStructure(const realx3Vector &points)
         return false;
     }
 
-    boundaries_.updateLists();
+    boundaries_.setLists();
 
-    return false;
+    return true;
 }
 
 
@@ -98,7 +98,7 @@ pFlow::pointStructure::pointStructure
   	internalPoints(),
 	simulationDomain_
 	(
-		simulationDomain::create(control.domainDict())
+		simulationDomain::create(control)
 	),
 	boundaries_
 	(
@@ -106,13 +106,13 @@ pFlow::pointStructure::pointStructure
 		*this
 	)
 {
-    REPORT(0)<< "Reading point structure from file"<<
-    IOobject::localPath()<<END_REPORT;
+    REPORT(0)<< "Reading point structure from "<<
+    IOobject::path()<<END_REPORT;
 
     if( !IOobject::read() )
     {
         fatalErrorInFunction<<
-        "Error in reading from file "<<IOobject::localPath()<<endl;
+        "Error in reading from file "<<IOobject::path()<<endl;
     }
 }
 
@@ -137,7 +137,7 @@ pFlow::pointStructure::pointStructure(
   	internalPoints(),
 	simulationDomain_
 	(
-		simulationDomain::create(control.domainDict())
+		simulationDomain::create(control)
 	),
 	boundaries_
 	(

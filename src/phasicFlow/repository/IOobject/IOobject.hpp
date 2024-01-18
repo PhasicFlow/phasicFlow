@@ -78,6 +78,11 @@ public:
             return owner_;
         }
 
+        repository* owner()
+        {
+            return owner_;
+        }
+
         repository* releaseOwner(bool fromOwner = false);
 
 	//// - IO operations 

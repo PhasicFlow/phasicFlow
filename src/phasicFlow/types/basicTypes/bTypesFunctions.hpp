@@ -62,6 +62,8 @@ int32 countChar(const char* s, const char c);
 /// convert a word to all caps
 word toUpper(const word & inStr);
 
+word firstCapital(const word& inStr);
+
 /// Check if str equals "Yes", "Y", "True", "Ok", "ON", or "T"
 bool isYes(const word & str);
 

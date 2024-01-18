@@ -81,7 +81,7 @@ protected:
 public:
 
 	// - Type info
-	TypeInfoTemplateNV("List", T);
+	TypeInfoTemplateNV11("List", T);
 
 	//// - Constructors
 

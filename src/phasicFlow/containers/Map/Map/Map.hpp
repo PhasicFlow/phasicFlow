@@ -60,7 +60,7 @@ public:
 	using valueType 	= typename mapType::value_type;
 
 	// - type info 
-	TypeInfoTemplateNV("Map", Key);
+	TypeInfoTemplateNV11("Map", Key);
 
 	//// - Constructors
 

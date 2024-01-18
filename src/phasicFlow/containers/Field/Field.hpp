@@ -74,7 +74,7 @@ protected:
 public:
 
 	/// type info
-	TypeInfoTemplateNV2("Field", T, VectorType::memoerySpaceName());
+	TypeInfoTemplateNV111("Field", T, VectorType::memoerySpaceName());
 
 	//// - Constructors
 
@@ -178,9 +178,14 @@ public:
 	//// - Methods
 
 		/// return field key
-		const word& fieldKey()const
+		word fieldKey()const
 		{
 			return fieldKey_;
+		}
+
+		word name()const
+		{
+			return VectorType::name();
 		}
 	
 	//// - IO operations 
@@ -196,28 +201,7 @@ public:
 		bool read(iIstream& is, const IOPattern& iop);
 		
 
-		bool write(iOstream& os, const IOPattern& iop )const;
-
-		template<typename HostMask>
-		bool write(
-			iOstream& os, 
-			const IOPattern& iop, 
-			const HostMask& mask)const
-		{
-			
-			os.writeWordKeyword(fieldKey_)<<endl;
-
-			if(!os.check(FUNCTION_NAME))return false;
-
-			if(!VectorType::write(os, iop)) return false;
-
-			os.endEntry();
-			if(!os.check(FUNCTION_NAME))return false;
-
-			return true;
-		}
-		
-			
+		bool write(iOstream& os, const IOPattern& iop )const;			
 
 };
 

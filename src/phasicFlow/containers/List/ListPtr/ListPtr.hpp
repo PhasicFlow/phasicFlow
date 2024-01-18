@@ -77,7 +77,7 @@ protected:
 public:
 
 	// - Type info
-	TypeInfoTemplateNV("ListPtr", T);
+	TypeInfoTemplateNV11("ListPtr", T);
 	
 	//// - Contructors 
 

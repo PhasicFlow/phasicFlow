@@ -6,10 +6,10 @@
 
 bool pFlow::regularSimulationDomain::createBoundaryDicts()
 {
-    auto& boundaries = globalDomainDict_.subDict("boundaries");
+    auto& boundaries = this->subDict("boundaries");
     
-    globalDomainDict_.addDict("regularSimulationDomainBoundaries", boundaries);
-    auto& rbBoundaries = globalDomainDict_.subDict("regularSimulationDomainBoundaries");
+    this->addDict("regularSimulationDomainBoundaries", boundaries);
+    auto& rbBoundaries = this->subDict("regularSimulationDomainBoundaries");
     
 	real neighborLength = boundaries.getVal<real>("neighborLength");
 
@@ -52,10 +52,10 @@ bool pFlow::regularSimulationDomain::setThisDomain()
 
 pFlow::regularSimulationDomain::regularSimulationDomain
 (
-    const dictionary &dict
+    systemControl& control
 )
 :
-    simulationDomain(dict)
+    simulationDomain(control)
 {}
 
 bool pFlow::regularSimulationDomain::initialUpdateDomains(span<realx3> pointPos)
@@ -93,7 +93,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 	span<char> src, 
 	span<char> dst,
 	size_t sizeOfElement
-)
+) const
 {
 	size_t requiredSize = sizeOfElement*initialNumberInThis();
 	if(dst.size() < requiredSize)
@@ -122,7 +122,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 (
     span<realx3> src, 
     span<realx3> dst
-)
+) const
 {
     return initialTransferBlockData(
         charSpan(src), 
@@ -134,7 +134,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 (
     span<real> src, 
     span<real> dst
-)
+) const
 {
     return initialTransferBlockData(
         charSpan(src), 
@@ -146,7 +146,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 (
     span<uint32> src, 
     span<uint32> dst
-)
+) const
 {
     return initialTransferBlockData(
         charSpan(src), 
@@ -158,7 +158,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 (
     span<int32> src, 
     span<int32> dst
-)
+) const
 {
     return initialTransferBlockData(
         charSpan(src), 
@@ -168,7 +168,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 
 const pFlow::dictionary &pFlow::regularSimulationDomain::thisBoundaryDict() const
 {
-    return globalDomainDict_.subDict("regularSimulationDomainBoundaries");
+    return this->subDict("regularSimulationDomainBoundaries");
 }
 
 bool pFlow::regularSimulationDomain::requiresDataTransfer()const

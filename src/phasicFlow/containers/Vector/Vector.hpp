@@ -87,16 +87,13 @@ protected:
 
 	static constexpr bool  isHostAccessible_ = true;
 
-	constexpr static inline const char* memoerySpaceName()
-  	{
-  		return "std";
-  	}
+	
   	
 
 public:
 
 	// - Type info
-	TypeInfoTemplateNV2("Vector", T, memoerySpaceName());
+	TypeInfoTemplateNV111("Vector", T, memoerySpaceName());
 
 	//// - Constructors
 
@@ -372,6 +369,10 @@ public:
 		return writeVector(os, iop);
 	}
 
+	constexpr static inline const char* memoerySpaceName()
+  	{
+  		return "std";
+  	}
 };
 
 

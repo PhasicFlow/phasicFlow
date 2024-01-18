@@ -55,7 +55,7 @@ protected:
 
 public:
     
-    TypeInfoTemplateNV("span", T);
+    TypeInfoTemplateNV11("span", T);
 
     /// Constructor
     INLINE_FUNCTION_HD
@@ -226,7 +226,6 @@ span<const char> charSpan(span<const T> s)
         reinterpret_cast<const char*>(s.data()),
         s.size()*el);
 }
-
 
 
 

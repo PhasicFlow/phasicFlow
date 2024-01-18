@@ -31,6 +31,8 @@ Licence:
 namespace pFlow
 {
 
+class domain;
+
 class internalPoints
 :
 	public subscriber
@@ -97,16 +99,16 @@ public:
 		internalPoints& operator=(internalPoints&&) = default;
 
 		/// Destructor 
-		virtual ~internalPoints() = default;
+		~internalPoints()override = default;
 
 
 	//// - Methods
 		FUNCTION_H
-		const pFlagTypeDevice& activePointsMaskD()const;
+		const pFlagTypeDevice& activePointsMaskDevice()const;
 
 
 		FUNCTION_H
-		const pFlagTypeHost& activePointsMaskH()const;
+		const pFlagTypeHost& activePointsMaskHost()const;
 
 		// - Const access pointPosition
 		FUNCTION_H
@@ -133,7 +135,7 @@ public:
 		INLINE_FUNCTION_H
 		uint32 size()const
 		{
-			return pointPosition_.size();
+			return pFlagsD_.activeRange_.end();
 		}
 		
 		// - maximum capacity of data structure 
@@ -165,55 +167,21 @@ public:
 
 		
 		FUNCTION_H
-		void updateFlag(
+		uint32 updateFlag(
 			const domain& dm, 
 			const std::array<real,6>& dist);
-
-		/*FUNCTION_H
-		size_t markDeleteOutOfBox(const box& domain);*/
-
 		
-		///////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		// - const access to points to be newly inserted
-		/*FUNCTION_H 
-		auto insertedPointIndex()const
-		{
-			return tobeInsertedIndex_;
-		}
-
-		FUNCTION_H 
-		auto insertedPointIndexH()const
-		{
-			return tobeInsertedIndex_.hostView();
-		}
-
-		FUNCTION_H 
-		auto insertedPointIndexD()const
-		{
-			return tobeInsertedIndex_.deviceView();
-		}
-
-
 		FUNCTION_H
-		auto mortonSortedIndex()const
-		{
-			return mortonSortedIndex_;
-		}
+		void fillNeighborsLists(
+			ViewType1D<uint32, memory_space> leftList,
+			ViewType1D<uint32, memory_space> rightList,
+			ViewType1D<uint32, memory_space> bottomList,
+			ViewType1D<uint32, memory_space> topList,
+			ViewType1D<uint32, memory_space> rearList,
+			ViewType1D<uint32, memory_space> frontList);
+		
 
-
-		// - update data structure by inserting/setting new points 
-		//   Notifies all the fields in the registered list of data structure
-		//   and exclude the fields that re in the exclusionList
-		//   retrun nullptr if it fails 
-		/*FUNCTION_H
-		virtual uniquePtr<int32IndexContainer> insertPoints(
-			const realx3Vector& pos,
-			const setFieldList& setField,
-			repository& owner,
-			const List<eventObserver*>& exclusionList={nullptr}
-		);*/
-
+		
 	
 	//// - IO operations 
 		
@@ -241,8 +209,6 @@ iOstream& operator<<(iOstream& os, const internalPoints& ip)
 }
 
 } // pFlow
-
-
 
 
 #endif //__internalPoints_hpp__
@@ -332,3 +298,49 @@ iOstream& operator<<(iOstream& os, const internalPoints& ip)
 			return allActive_;
 		}
 	};*/
+
+
+	/*FUNCTION_H`
+		size_t markDeleteOutOfBox(const box& domain);*/
+
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		// - const access to points to be newly inserted
+		/*FUNCTION_H 
+		auto insertedPointIndex()const
+		{
+			return tobeInsertedIndex_;
+		}
+
+		FUNCTION_H 
+		auto insertedPointIndexH()const
+		{
+			return tobeInsertedIndex_.hostView();
+		}
+
+		FUNCTION_H 
+		auto insertedPointIndexD()const
+		{
+			return tobeInsertedIndex_.deviceView();
+		}
+
+
+		FUNCTION_H
+		auto mortonSortedIndex()const
+		{
+			return mortonSortedIndex_;
+		}
+
+
+		// - update data structure by inserting/setting new points 
+		//   Notifies all the fields in the registered list of data structure
+		//   and exclude the fields that re in the exclusionList
+		//   retrun nullptr if it fails 
+		/*FUNCTION_H
+		virtual uniquePtr<int32IndexContainer> insertPoints(
+			const realx3Vector& pos,
+			const setFieldList& setField,
+			repository& owner,
+			const List<eventObserver*>& exclusionList={nullptr}
+		);*/

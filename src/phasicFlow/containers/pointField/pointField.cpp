@@ -21,34 +21,30 @@ Licence:
 template<template<class, class> class VectorField, class T, class MemorySpace>
 pFlow::pointField<VectorField, T, MemorySpace>::pointField
 (
-    const pointStructure& pStruct, 
-    const T& defVal, 
-    message msg
+    const objectFile& objf, 
+	pointStructure& pStruct, 
+	const T& defVal
 )
 :
+	IOobject
+	(
+		objf,
+		pStruct.ioPattern(),
+		pStruct.owner()
+	),
+	InternalFieldType
+	(
+		objf.name(),
+		pStruct
+	),
 	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
-{}
-
-/*template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField
-(
-	iIstream& is
-)
 {
 	
-	return FieldType::readField(is, pStruct_.size(), false);
 }
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::writePointField
-(
-	iOstream& os
-)const
-{
-	return FieldType::write(os);
-}
+/*
 
 
 
@@ -144,3 +140,58 @@ bool pFlow::pointField<VectorField, T, MemorySpace>::update(const eventMessage& 
 	return true;
 }*/
 
+
+template<template<class, class> class VectorField, class T, class MemorySpace>
+bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField
+(
+	iIstream& is,
+	const IOPattern& iop
+)
+{
+	Field<Vector, T , vecAllocator<T>> 
+        fRead("file_read"+InternalFieldType::name(), InternalFieldType::fieldKey());   
+
+	if( !fRead.read(is, iop))
+	{
+		fatalErrorInFunction<<
+		"Error in reading pointPosition from stream "<< is.name()<<endl;
+		return false;
+	}
+
+	auto thisN = pStruct_.simDomain().initialNumberInThis();
+
+	Field<Vector, T , vecAllocator<T>> internal
+    (
+        "internalField"+InternalFieldType::name(), 
+        InternalFieldType::fieldKey(), 
+        thisN, 
+        thisN, 
+        RESERVE()
+    );
+
+	auto pSpan  = fRead.getSpan(); 
+    auto iSpan  = internal.getSpan();
+    
+    if(!pStruct_.simDomain().initialTransferBlockData(pSpan, iSpan))
+    {
+        fatalErrorInFunction<<
+        "Error in transfering the block data for field "<<
+		InternalFieldType::name()<<endl;
+        return false;
+    }
+
+	this->field_.assign(internal);
+
+	return true;
+}
+
+template<template<class, class> class VectorField, class T, class MemorySpace>
+bool pFlow::pointField<VectorField, T, MemorySpace>::writePointField
+(
+	iOstream& os,
+	const IOPattern& iop
+)const
+{
+	notImplementedFunction;
+	return false;
+}

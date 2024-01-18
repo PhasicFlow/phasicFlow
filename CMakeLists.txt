@@ -60,12 +60,11 @@ if(pFlow_Build_MPI)
 	find_package(MPI REQUIRED)
 endif()
 
-
 include(cmake/makeLibraryGlobals.cmake)
 include(cmake/makeExecutableGlobals.cmake)
 
 configure_file(phasicFlowConfig.H.in phasicFlowConfig.H)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #add a global include directory 
 include_directories(src/setHelpers src/demComponent "${PROJECT_BINARY_DIR}")
 

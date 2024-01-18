@@ -54,7 +54,7 @@ Licence:
 	word typeName() const {return TYPENAME();} 
 
 
-#define TypeInfoTemplate(tName, Type)										\
+#define TypeInfoTemplate11(tName, Type)										\
 	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
@@ -66,7 +66,7 @@ Licence:
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
-#define TypeInfoTemplate2(tName, Type1, Type2)								\
+#define TypeInfoTemplate12(tName, Type1, Type2)								\
 	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
@@ -78,7 +78,7 @@ Licence:
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
-#define TypeInfoTemplate3(tName, Type1, Type2, Type3)						\
+#define TypeInfoTemplate13(tName, Type1, Type2, Type3)						\
 	inline static word TYPENAME()											\
 	{ 																		\
 		return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+","+Type3::TYPENAME()+">";\
@@ -86,7 +86,7 @@ Licence:
 	virtual word typeName() const { return TYPENAME();}
 
 // this is the non-virtual version
-#define TypeInfoTemplateNV(tName, Type)										\
+#define TypeInfoTemplateNV11(tName, Type)										\
 	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
@@ -99,7 +99,7 @@ Licence:
 	inline word typeName() const { return TYPENAME();}
 
 
-#define TypeInfoTemplateNV2(tName, Type, tName2)							\
+#define TypeInfoTemplateNV111(tName, Type, tName2)							\
 	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
@@ -110,6 +110,20 @@ Licence:
 	return "noTYPE"; 														\
 	}																		\
 	inline word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate111(tName, Type, tName2)							\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
+		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
+	else																	\
+		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
+	return "noTYPE"; 														\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+
 
 
 

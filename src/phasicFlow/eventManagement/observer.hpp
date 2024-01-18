@@ -66,8 +66,13 @@ public:
 		subscriber_ = nullptr;
 	}
 
+	static
+	constexpr auto numEvents()
+	{
+		return message::numEvents();
+	} 
 
-	virtual bool update(const message& msg, const anyList& varList)=0;
+	virtual bool hearChanges(const message& msg, const anyList& varList)=0;
 };
 
 } // pFlow

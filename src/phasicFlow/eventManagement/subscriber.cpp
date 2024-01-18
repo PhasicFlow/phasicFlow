@@ -45,12 +45,6 @@ bool pFlow::subscriber::subscribe
 	observer* 	obsevr
 )const
 {
-	if( msg.size()>16 )
-	{
-		fatalErrorInFunction<<
-		"message size is greater than 16!"<<endl;
-		return false;
-	}
 	// do not subscribe nullptr 
 	if(!obsevr)return false;
 
@@ -92,20 +86,14 @@ bool pFlow::subscriber::notify
 	const anyList& varList
 )
 {
-	if( msg.size()>16 )
-	{
-		fatalErrorInFunction<<
-		"message size is greater than 16!"<<endl;
-		return false;
-	}
-
+	
 	for(size_t i=0; i<msg.size(); i++)
 	{
 		if(msg.equivalentTo(i))
 		{
 			for( auto obsvr: observerList_[i] )
 			{
-				obsvr->update(message(i), varList);
+				obsvr->hearChanges(message(i), varList);
 			}
 		}
 	}

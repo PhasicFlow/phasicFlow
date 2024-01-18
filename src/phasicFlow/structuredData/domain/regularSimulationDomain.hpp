@@ -23,7 +23,7 @@ public:
 
 	TypeInfo("simulationDomain<regular>");
 
-	regularSimulationDomain(const dictionary& dict);
+	regularSimulationDomain(systemControl& control);
 
 	virtual
 	~regularSimulationDomain()=default;
@@ -32,7 +32,7 @@ public:
 	(
 		simulationDomain,
 		regularSimulationDomain,
-		dictionary
+		systemControl
 	);
 
     bool initialUpdateDomains(span<realx3> pointPos) override;
@@ -50,7 +50,7 @@ public:
 	bool initialTransferBlockData(
 		span<char> src, 
 		span<char> dst,
-		size_t sizeOfElement) override;
+		size_t sizeOfElement) const override;
 
 
     /// @brief 
@@ -59,19 +59,19 @@ public:
     /// @return 
     bool initialTransferBlockData(
         span<realx3> src,
-        span<realx3> dst) override;
+        span<realx3> dst) const override;
 
     bool initialTransferBlockData(
         span<real> src,
-        span<real> dst) override;
+        span<real> dst) const override;
 
     bool initialTransferBlockData(
         span<uint32> src,
-        span<uint32> dst) override;
+        span<uint32> dst) const override;
 
     bool initialTransferBlockData(
         span<int32> src,
-        span<int32> dst) override;
+        span<int32> dst) const override;
     
 	
 	const dictionary& thisBoundaryDict()const override;
