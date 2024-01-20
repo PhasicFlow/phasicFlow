@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::boundaryField<VectorField, T, MemorySpace>::boundaryField
+template<class T, class MemorySpace>
+pFlow::boundaryField<T, MemorySpace>::boundaryField
 (
 	const boundaryBase& boundary, 
 	InternalFieldType& internal
@@ -31,9 +31,9 @@ pFlow::boundaryField<VectorField, T, MemorySpace>::boundaryField
 {}
 
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::uniquePtr<pFlow::boundaryField<VectorField, T, MemorySpace>>
-	pFlow::boundaryField<VectorField, T, MemorySpace>::create
+template<class T, class MemorySpace>
+pFlow::uniquePtr<pFlow::boundaryField<T, MemorySpace>>
+	pFlow::boundaryField<T, MemorySpace>::create
 (
 	const boundaryBase& boundary, 
 	InternalFieldType& internal

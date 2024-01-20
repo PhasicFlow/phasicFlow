@@ -38,7 +38,7 @@ containers/Vector/Vectors.cpp
 containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
-#containers/pointField/pointFields.cpp
+containers/pointField/pointFields.cpp
 
 #setFieldList/setFieldList.cpp
 #setFieldList/setFieldEntry.cpp
@@ -112,6 +112,7 @@ if(pFlow_Build_MPI)
     MPIParallelization/procCommunication.cpp
     MPIParallelization/boundaryProcessor.cpp
     MPIParallelization/scatteredMasterDistributeChar.cpp
+	MPIParallelization/processorBoundaryFields.cpp
 	)
 	
 	list(APPEND link_libs MPI::MPI_CXX ${ZOLTAN_LIBRARY} -lm )

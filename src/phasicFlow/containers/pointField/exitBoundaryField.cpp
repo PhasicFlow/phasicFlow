@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-    pFlow::exitBoundaryField<VectorField, T, MemorySpace>::exitBoundaryField
+template<class T, class MemorySpace>
+    pFlow::exitBoundaryField<T, MemorySpace>::exitBoundaryField
 (
 	const boundaryBase& boundary, 
 	InternalFieldType& internal

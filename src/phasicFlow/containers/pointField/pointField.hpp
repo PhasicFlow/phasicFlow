@@ -26,24 +26,25 @@ Licence:
 #include "internalField.hpp"
 #include "boundaryFieldList.hpp"
 
+
 namespace pFlow
 {
 
-template<template<class, class> class VectorField, class T, class MemorySpace=void>
+template<class T, class MemorySpace=void>
 class pointField
 :
 	public IOobject,
-	public internalField<VectorField, T, MemorySpace>
+	public internalField<T, MemorySpace>
 {
 public:
 	
-	using PointFieldType 	= pointField<VectorField, T, MemorySpace>;
+	using PointFieldType 	= pointField<T, MemorySpace>;
 
-	using InternalFieldType = internalField<VectorField, T, MemorySpace>;
+	using InternalFieldType = internalField<T, MemorySpace>;
+
+	using boundaryFieldListType = boundaryFieldList<T, MemorySpace>;
 
 	using FieldType 		= typename InternalFieldType::FieldType;
-
-    using boundaryFieldListType = boundaryFieldList<VectorField, T, MemorySpace>;
 
 	using VectorType  		= typename InternalFieldType::VectorType;
 
@@ -187,8 +188,8 @@ iIstream& operator >> (iIstream & is, pointField<VectorField, T, MemorySpace> & 
 	return is;
 }*/
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-iOstream& operator << (iOstream& os, const pointField<VectorField, T, MemorySpace>& pF )
+template<class T, class MemorySpace>
+iOstream& operator << (iOstream& os, const pointField<T, MemorySpace>& pF )
 {
 	if(! pF.write(os, IOPattern::AllProcessorsDifferent) )
 	{

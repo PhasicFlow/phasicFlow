@@ -27,14 +27,14 @@ Licence:
 namespace pFlow
 {
 
-template< template<class, class> class VectorField, class T, class MemorySpace = void >
+template< class T, class MemorySpace = void >
 class boundaryFieldList
 :
-    ListPtr<boundaryField<VectorField, T, MemorySpace>>
+    public ListPtr< boundaryField<T, MemorySpace> >
 {
 public:
 
-    using BoundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
+    using BoundaryFieldType = boundaryField<T, MemorySpace>;
 
     using InternalFieldType = typename BoundaryFieldType::InternalFieldType;
     

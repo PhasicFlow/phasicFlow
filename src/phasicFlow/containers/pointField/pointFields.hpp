@@ -30,19 +30,19 @@ namespace pFlow
 {
 
 template<typename T>
-  using pointField_H = pointField<VectorSingle, T, HostSpace>;
+  using pointField_H = pointField<T, HostSpace>;
 
 template<typename T>
-  using pointField_D = pointField<VectorSingle, T>;
+  using pointField_D = pointField<T>;
 
 
-using int8PointField_D 		= pointField<VectorSingle, int8>;
+using int8PointField_D 		= pointField<int8>;
 
-using int8PointField_H 		= pointField<VectorSingle, int8, HostSpace>;
+using int8PointField_H 		= pointField<int8, HostSpace>;
 
-using realPointField_D 		= pointField<VectorSingle, real>;
+using realPointField_D 		= pointField<real>;
 
-using realPointField_H 		= pointField<VectorSingle, real, HostSpace>;
+using realPointField_H 		= pointField<real, HostSpace>;
 
 //using int32PointField_D 	= pointField<VectorSingle, int32>;
 

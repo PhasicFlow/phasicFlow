@@ -23,22 +23,22 @@ Licence:
 #include "createBoundaryFields.hpp"
 
 
-template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>; 
-createBaseBoundary(pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace);
-createBoundary(pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace, exit);
+template class pFlow::pointField<pFlow::int8, pFlow::HostSpace>; 
+createBaseBoundary(pFlow::int8, pFlow::HostSpace);
+createBoundary(pFlow::int8, pFlow::HostSpace, exit);
 
-template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8>; 
-createBaseBoundary(pFlow::VectorSingle, pFlow::int8, void);
-createBoundary(pFlow::VectorSingle, pFlow::int8, void, exit);
+template class pFlow::pointField<pFlow::int8>; 
+createBaseBoundary(pFlow::int8, void);
+createBoundary(pFlow::int8, void, exit);
 
-template class pFlow::pointField<pFlow::VectorSingle, pFlow::real, pFlow::HostSpace>; 
-createBaseBoundary(pFlow::VectorSingle, pFlow::real, pFlow::HostSpace);
-createBoundary(pFlow::VectorSingle, pFlow::real, pFlow::HostSpace, exit);
+template class pFlow::pointField<pFlow::real, pFlow::HostSpace>; 
+createBaseBoundary(pFlow::real, pFlow::HostSpace);
+createBoundary(pFlow::real, pFlow::HostSpace, exit);
 
 
-template class pFlow::pointField<pFlow::VectorSingle, pFlow::real>; 
-createBaseBoundary(pFlow::VectorSingle, pFlow::real, void);
-createBoundary(pFlow::VectorSingle, pFlow::real, void, exit);
+template class pFlow::pointField<pFlow::real>; 
+createBaseBoundary(pFlow::real, void);
+createBoundary(pFlow::real, void, exit);
 
 
 /*template class pFlow::pointField<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>; 

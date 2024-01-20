@@ -1,3 +1,4 @@
+#include "pointField.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -18,8 +19,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>::pointField
+template<class T, class MemorySpace>
+pFlow::pointField<T, MemorySpace>::pointField
 (
     const objectFile& objf, 
 	pointStructure& pStruct, 
@@ -44,8 +45,8 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
 	
 }
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>::pointField
+template<class T, class MemorySpace>
+pFlow::pointField<T, MemorySpace>::pointField
 (
 	const objectFile &objf, 
 	pointStructure &pStruct, 
@@ -81,8 +82,8 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
 
 
 
- template<template<class, class> class VectorField, class T, class MemorySpace>
- pFlow::pointField<VectorField, T, MemorySpace>::pointField
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField
  (
      const pointStructure& pStruct,
      const T& defVal,
@@ -98,8 +99,8 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
      this->fill(defVal);
  }
 
- template<template<class, class> class VectorField, class T, class MemorySpace>
- pFlow::pointField<VectorField, T, MemorySpace>::pointField
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField
  (
      const pointStructure& pStruct,
      const T& val,
@@ -115,8 +116,8 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
      this->fill(val);
  }
 
- template<template<class, class> class VectorField, class T, class MemorySpace>
- pFlow::pointField<VectorField, T, MemorySpace>::pointField
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField
  (
      const pointField& src,
      bool subscribe
@@ -128,15 +129,15 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
      defaultValue_(src.defaultValue_)
  {}
 
- template<template<class, class> class VectorField, class T, class MemorySpace>
- pFlow::pointField<VectorField, T, MemorySpace>::pointField(const pointField& src)
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField(const pointField& src)
  :
-     pointField<VectorField, T, MemorySpace>(src, src.subscribed())
+     pointField<T, MemorySpace>(src, src.subscribed())
  {}
 
 
- template<template<class, class> class VectorField, class T, class MemorySpace>
- pFlow::pointField<VectorField, T, MemorySpace>& pFlow::pointField<VectorField, T, MemorySpace>::operator =
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>& pFlow::pointField<T, MemorySpace>::operator =
  (
      const pointField& rhs
  )
@@ -148,8 +149,8 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
  }
 
 
- template<template<class, class> class VectorField, class T, class MemorySpace>
- bool pFlow::pointField<VectorField, T, MemorySpace>::update(const eventMessage& msg)
+ template<class T, class MemorySpace>
+ bool pFlow::pointField<T, MemorySpace>::update(const eventMessage& msg)
  {
 
      if( msg.isDeleted() )
@@ -173,14 +174,19 @@ pFlow::pointField<VectorField, T, MemorySpace>::pointField
      return true;
  }*/
 
-template <template <class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField(
+template <class T, class MemorySpace>
+bool pFlow::pointField<T, MemorySpace>::readPointField
+(
     iIstream &is,
-    const IOPattern &iop)
+    const IOPattern &iop
+)
 {
-	Field<Vector, T , vecAllocator<T>> 
-        fRead("file_read"+InternalFieldType::name(), InternalFieldType::fieldKey());   
-
+	typename InternalFieldType::FieldTypeHost fRead
+    (
+        InternalFieldType::name(),
+        InternalFieldType::fieldKey()
+    );
+    
 	if( !fRead.read(is, iop))
 	{
 		fatalErrorInFunction<<
@@ -190,10 +196,10 @@ bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField(
 
 	auto thisN = pStruct_.simDomain().initialNumberInThis();
 
-	Field<Vector, T , vecAllocator<T>> internal
+	typename InternalFieldType::FieldTypeHost internal
     (
-        "internalField"+InternalFieldType::name(), 
-        InternalFieldType::fieldKey(), 
+        InternalFieldType::name(),
+        InternalFieldType::fieldKey(),
         thisN, 
         thisN, 
         RESERVE()
@@ -215,35 +221,12 @@ bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField(
 	return true;
 }
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::writePointField
+template<class T, class MemorySpace>
+bool pFlow::pointField<T, MemorySpace>::writePointField
 (
 	iOstream& os,
 	const IOPattern& iop
 )const
 {
-	
-    hostViewType1D<T> valuesH;
-
-    if(this->isAllActive())
-    {
-        valuesH = this->fieldHost();
-    }
-    else
-    {
-        valuesH = this->activeValuesHost();
-    }
-
-    auto data = span<T>(valuesH.data(), valuesH.size());
-    
-    if( !writeSpan(os, data, iop) )
-    {
-        fatalErrorInFunction<<
-        "Error in writing pointStructure in stream "<<
-        os.name()<<endl;
-        return false;
-    }
-
-    return true;
-	
+    return InternalFieldType::write(os, iop);
 }

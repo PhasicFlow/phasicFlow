@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::internalField<VectorField, T, MemorySpace>::internalField
+template<class T, class MemorySpace>
+pFlow::internalField<T, MemorySpace>::internalField
 (
 	const word& name, 
 	const internalPoints& internal
@@ -41,8 +41,8 @@ pFlow::internalField<VectorField, T, MemorySpace>::internalField
 	internalPoints_(internal)
 {}
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::internalField<VectorField, T, MemorySpace>::internalField
+template<class T, class MemorySpace>
+pFlow::internalField<T, MemorySpace>::internalField
 (
 	const word &name, 
 	const internalPoints &internal, 
@@ -68,14 +68,22 @@ pFlow::internalField<VectorField, T, MemorySpace>::internalField
 } 
 
 
-template <template <class, class> class VectorField, class T, class MemorySpace>
-pFlow::hostViewType1D<T>
-pFlow::internalField<VectorField, T, MemorySpace>::activeValuesHost() const
+template <class T, class MemorySpace>
+typename pFlow::internalField<T, MemorySpace>::FieldTypeHost 
+	pFlow::internalField<T, MemorySpace>::activeValuesHost() const
 {
 	auto maskH = internalPoints_.activePointsMaskHost();
     auto fieldH = field_.hostVector();
 
-	hostViewType1D<T> aField("Active field", maskH.numActive());
+	FieldTypeHost aField
+	(
+		field_.name(), 
+		field_.fieldKey(),
+		maskH.numActive(),
+		maskH.numActive(),
+		RESERVE()
+	);
+
     auto aRange = maskH.activeRange();
 
 	uint32 n = 0;
@@ -87,12 +95,11 @@ pFlow::internalField<VectorField, T, MemorySpace>::activeValuesHost() const
             n++;
         }
     }
-
     return aField;
 }
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::internalField<VectorField, T, MemorySpace>::write
+template<class T, class MemorySpace>
+bool pFlow::internalField<T, MemorySpace>::write
 (
 	iOstream& os, 
 	const IOPattern& iop
@@ -104,9 +111,7 @@ bool pFlow::internalField<VectorField, T, MemorySpace>::write
 	}
 	else
 	{
-		auto aValues = activeValuesHost();
-		auto spanValues = makeSpan(aValues);
-		return writeSpan(os, spanValues, iop);
+		auto aField = activeValuesHost();
+		return aField.write(os, iop);
 	}
 }
-

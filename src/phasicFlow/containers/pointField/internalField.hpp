@@ -23,20 +23,25 @@ Licence:
 #include "internalPoints.hpp"
 #include "Field.hpp"
 #include "observer.hpp"
+#include "dataIO.hpp"
 
 
 namespace pFlow
 {
 
-template<template<class, class> class VectorField, class T, class MemorySpace=void>
+template<class T, class MemorySpace=void>
 class internalField
 :
     public observer
 {
 
 public:
+	
+	using InternalFieldType = internalField<T, MemorySpace>;
 
-	using FieldType         = Field<VectorField, T, MemorySpace>;
+	using FieldType         = Field<T, MemorySpace>;
+
+	using FieldTypeHost 	= Field<T, HostSpace>;
   	
 	using VectorType  		= typename FieldType::VectorType;
 
@@ -81,7 +86,7 @@ public:
 		return field_.hostVector();
 	}
 
-	hostViewType1D<T> activeValuesHost()const;
+	FieldTypeHost activeValuesHost()const;
 
 	inline
 	auto size()const
@@ -131,12 +136,12 @@ public:
 
 };
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
+template<class T, class MemorySpace>
 inline
 iOstream& operator<<
 (
 	iOstream& os, 
-	const internalField<VectorField, T, MemorySpace>& ifeild
+	const internalField<T,  MemorySpace>& ifeild
 )
 {
 	if( !ifeild.write(os, IOPattern::AllProcessorsDifferent) )

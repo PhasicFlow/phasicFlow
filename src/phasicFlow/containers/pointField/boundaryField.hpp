@@ -27,16 +27,16 @@ Licence:
 namespace pFlow
 {
 
-template< template<class, class> class VectorField, class T, class MemorySpace = void>
+template< class T, class MemorySpace = void>
 class boundaryField
 :
     public observer 
 {
 public:
 	
-	using BoundaryFieldType = boundaryField<VectorField, T, MemorySpace>;
+	using BoundaryFieldType = boundaryField<T, MemorySpace>;
 
-	using InternalFieldType = internalField<VectorField, T, MemorySpace>;
+	using InternalFieldType = internalField<T, MemorySpace>;
 
 	using memory_space 		= typename InternalFieldType::memory_space;
 

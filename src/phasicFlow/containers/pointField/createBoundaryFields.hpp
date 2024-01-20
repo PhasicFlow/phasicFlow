@@ -24,12 +24,12 @@ Licence:
 #include "boundaryField.hpp"
 #include "exitBoundaryField.hpp"
 
-#define createBaseBoundary(VectorFieldType, DataType, MemorySpaceType)          \
-    template class pFlow::boundaryField<VectorFieldType, DataType, MemorySpaceType>;
+#define createBaseBoundary(DataType, MemorySpaceType)          \
+    template class pFlow::boundaryField<DataType, MemorySpaceType>;
     
 
-#define createBoundary(VectorFieldType, DataType, MemorySpaceType, BoundaryType)    \
-    template class pFlow::BoundaryType##BoundaryField<VectorFieldType, DataType, MemorySpaceType>;
+#define createBoundary(DataType, MemorySpaceType, BoundaryType)    \
+    template class pFlow::BoundaryType##BoundaryField<DataType, MemorySpaceType>;
 
 
 #endif //__createBoundaryFields_hpp__
