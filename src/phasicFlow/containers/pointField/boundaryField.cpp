@@ -50,7 +50,8 @@ pFlow::uniquePtr<pFlow::boundaryField<T, MemorySpace>>
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< bType << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< bType << "for type "<< 
+			Yellow_Text(getTypeName<T>())	<< " dose not exist.\n"
 			<<"Avaiable ones are: \n\n"
 			,
 			boundaryBasevCtorSelector_
