@@ -44,6 +44,96 @@ Licence:
 };
 
 
+namespace pFlow
+{
+	//
+	template<typename T>
+	struct checkStatic
+	{
+		has_static_member(TYPENAME);	
+		
+		static constexpr
+		bool hasMember()
+		{
+			return has_static_member_TYPENAME<T,word(void)>::value;
+		}
+	};
+
+	template <typename T>
+	inline word basicTypeName()
+	{
+		int status;
+		auto& ti = typeid(T);
+		char* realname = abi::__cxa_demangle(ti.name(), 0, 0, &status);
+	  	word name(realname);
+	  	free(realname);
+	  	return name;
+	}
+
+	template<>
+	inline word basicTypeName<word>(){ return "word"; }
+
+	template<>
+	inline word basicTypeName<int64>(){ return "int64"; }
+
+	template<>
+	inline word basicTypeName<int32>(){ return "int32"; }
+
+		template<>
+	inline word basicTypeName<int8>(){ return "int8"; }
+
+	template<>
+	inline word basicTypeName<uint64>(){ return "uint64"; }
+
+	template<>
+	inline word basicTypeName<uint32>(){ return "uint32"; }
+
+	template<>
+	inline word basicTypeName<uint8>(){ return "uint8"; }
+
+	template<>
+	inline word basicTypeName<real>(){ return "real"; }
+
+	
+	template<typename T>
+	word constexpr getTypeName()
+	{
+		
+		if constexpr ( checkStatic<T>::hasMember() )
+		{
+			return T::TYPENAME();
+		}else
+		{
+			return basicTypeName<T>();
+		}
+	}
+	template<typename T>
+	word constexpr getTypeName(const T&)
+	{
+		if constexpr ( checkStatic<T>::hasMember() )
+		{
+			return T::TYPENAME();
+		}else
+		{
+			return basicTypeName<T>();
+		}
+	}
+
+	// compare the overriden typeName of object with concrete TYPENAME 
+	// of Type1
+	template <typename Type1, typename Type2>
+	bool checkType(Type2* object)
+	{
+		return getTypeName<Type1>() == object->typeName();
+	}
+
+	template <typename Type1, typename Type2>
+	bool checkType(Type2& object)
+	{
+		return getTypeName<Type1>() == object.typeName();
+	}
+}
+
 
 #define TypeInfo(tName)  \
 	inline static word TYPENAME() {return tName; } \
@@ -55,6 +145,52 @@ Licence:
 
 
 #define TypeInfoTemplate11(tName, Type)										\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type1>()+">";					\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate12(tName, Type1, Type2)								\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type1>()+","+getTypeName<Type2>()+">";}	\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate13(tName, Type1, Type2, Type3)						\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type1>()+","+getTypeName<Type2>()+","+getTypeName<Type3>()+">";\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+// this is the non-virtual version
+#define TypeInfoTemplateNV11(tName, Type)									\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+">"; 					\
+	}																		\
+	inline word typeName() const { return TYPENAME();}
+
+
+#define TypeInfoTemplateNV111(tName, Type, tName2)							\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+","+word(tName2)+">";	\
+	}																		\
+	inline word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate111(tName, Type, tName2)							\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+","+word(tName2)+">"; 	\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+
+/*#define TypeInfoTemplate11(tName, Type)										\
 	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
@@ -121,7 +257,7 @@ Licence:
 		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
 	return "noTYPE"; 														\
 	}																		\
-	virtual word typeName() const { return TYPENAME();}
+	virtual word typeName() const { return TYPENAME();}*/
 
 
 
@@ -131,55 +267,7 @@ Licence:
 namespace pFlow
 {
 
-	template <typename T>
-	inline word basicTypeName()
-	{
-		int status;
-		auto& ti = typeid(T);
-		char* realname = abi::__cxa_demangle(ti.name(), 0, 0, &status);
-	  	word name(realname);
-	  	free(realname);
-	  	return name;
-	}
-
-	template<>
-	inline word basicTypeName<word>(){ return "word"; }
-
-	template<>
-	inline word basicTypeName<int64>(){ return "int64"; }
-
-	template<>
-	inline word basicTypeName<int32>(){ return "int32"; }
-
-		template<>
-	inline word basicTypeName<int8>(){ return "int8"; }
-
-	template<>
-	inline word basicTypeName<uint64>(){ return "uint64"; }
-
-	template<>
-	inline word basicTypeName<uint32>(){ return "uint32"; }
-
-	template<>
-	inline word basicTypeName<uint8>(){ return "uint8"; }
-
-	template<>
-	inline word basicTypeName<real>(){ return "real"; }
-
-		
-	// compare the overriden typeName of object with concrete TYPENAME 
-	// of Type1
-	template <typename Type1, typename Type2>
-	bool checkType(Type2* object)
-	{
-		return word(Type1::TYPENAME()) == object->typeName();
-	}
-
-	template <typename Type1, typename Type2>
-	bool checkType(Type2& object)
-	{
-		return word(Type1::TYPENAME()) == object.typeName();
-	}
+	
 
 
 
