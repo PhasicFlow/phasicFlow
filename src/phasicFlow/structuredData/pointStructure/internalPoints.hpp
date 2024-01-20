@@ -26,7 +26,6 @@ Licence:
 #include "pointFlag.hpp"
 
 
-//#include "indexContainer.hpp"
 
 namespace pFlow
 {
@@ -41,20 +40,22 @@ public:
 	
 	inline static const uint32 initialCapacity_ = 10000;
 
-	using pointsType 		= realx3Field_D;
+	using PointsType 		= realx3Field_D;
 
-	using device_type 		= typename pointsType::device_type;
+	using PointsTypeHost 	= typename PointsType::FieldTypeHost;
 
-	using memory_space 		= typename pointsType::memory_space;
+	using device_type 		= typename PointsType::device_type;
 
-	using execution_space 	= typename pointsType::execution_space;
+	using memory_space 		= typename PointsType::memory_space;
+
+	using execution_space 	= typename PointsType::execution_space;
 
 protected:
 
 	//// - data members
 
 		/// Position of points on device
-		realx3Field_D 				pointPosition_;
+		PointsType 					pointPosition_;
 
 		/// flag of points on device
 		mutable pFlagTypeDevice 	pFlagsD_;
@@ -112,10 +113,10 @@ public:
 
 		// - Const access pointPosition
 		FUNCTION_H
-		const realx3Field_D& pointPosition()const;
+		const PointsType& pointPosition()const;
 		
 		FUNCTION_H
-        realx3Field_D& pointPosition();
+        PointsType& pointPosition();
 
         INLINE_FUNCTION_H
         auto pointPositionHost()const
@@ -129,7 +130,7 @@ public:
             return pointPosition_.deviceVector();
         }
 
-		hostViewType1D<realx3> activePointsHost()const;
+		PointsTypeHost activePointsHost()const;
 
 		// - size of data structure
 		INLINE_FUNCTION_H
@@ -187,6 +188,15 @@ public:
 		
 		/// Read 
 		FUNCTION_H
+		bool read(iIstream& is);
+		
+
+		/// Write 
+		FUNCTION_H
+		bool write(iOstream& os)const;
+
+		/// Read 
+		FUNCTION_H
 		bool read(iIstream& is, const IOPattern& iop);
 		
 
@@ -199,7 +209,7 @@ public:
 inline
 iOstream& operator<<(iOstream& os, const internalPoints& ip)
 {
-	if( !ip.write(os, IOPattern::AllProcessorsDifferent) )
+	if( !ip.write(os) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber());
 		fatalExit;

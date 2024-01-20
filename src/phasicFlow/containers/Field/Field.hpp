@@ -21,11 +21,9 @@ Licence:
 #ifndef __Field_hpp__
 #define __Field_hpp__
 
-//#include "VectorSingle.hpp"
-//#include "vocabs.hpp"
-
 
 #include "types.hpp"
+#include "VectorSingle.hpp"
 #include "Vector.hpp"
 #include "streams.hpp"
 
@@ -33,43 +31,43 @@ namespace pFlow
 {
 
 
-
-template<template<class, class> class VectorField, class T, class PropType=void>
+template<class T, class MemorySpace = void>
 class Field
 :
-	public VectorField<T, PropType>
+	public VectorSingle<T, MemorySpace>
 {
 public:
-	
 
-	using VectorType  		= VectorField<T,PropType>;
+	using VectorType  		= VectorSingle<T,MemorySpace>;
 
-	using FieldType         = Field<VectorField, T, PropType>;
+	using FieldType         = Field<T, MemorySpace>;
 
-	using iterator        = typename VectorType::iterator;
+	using FieldTypeHost 	= Field<T, HostSpace>;
 
-	using const_iterator   = typename VectorType::const_iterator;
+	using memory_space 		= typename VectorType::memory_space;
 
-	using reference       = typename VectorType::reference;
+	using execution_space 	= typename VectorType::execution_space;
+
+	using iterator        	= typename VectorType::iterator;
+
+	using const_iterator   	= typename VectorType::const_iterator;
+
+	using reference       	= typename VectorType::reference;
   	
-	using const_reference  = typename VectorType::const_reference;
+	using const_reference  	= typename VectorType::const_reference;
 
-	using value_type       = typename VectorType::value_type;
+	using value_type       	= typename VectorType::value_type;
   	
-	using pointer         = typename VectorType::pointer;
+	using pointer         	= typename VectorType::pointer;
   	
-	using const_pointer    = typename VectorType::const_pointer;
+	using const_pointer    	= typename VectorType::const_pointer;
   	
 
-protected:
+private:
 	
 	static const inline word FKey = "value";
 
 	const word fieldKey_ = FKey;
-
-	/*bool readUniform( iIstream& is, size_t len, bool readLength = true);
-
-	bool readNonUniform( iIstream& is, size_t len);*/
 
 public:
 
@@ -91,7 +89,6 @@ public:
 			VectorType(name),
 			fieldKey_(fieldKey)
 		{}
-
 		
 		/// Construct a field with name and fieldKey and specified len
 		Field(const word& name, const word& fieldKey, size_t len)
@@ -189,15 +186,12 @@ public:
 		}
 	
 	//// - IO operations 
-		/*bool readField(iIstream& is, const size_t len, bool resume, bool readLength = true);
 		
+		bool read(iIstream& is);
 		
-		bool readField(iIstream& is, bool resume );
+		bool write(iOstream& os)const;			
 
-		
-		bool writeField(iOstream& os)const;*/
 
-		
 		bool read(iIstream& is, const IOPattern& iop);
 		
 
@@ -206,8 +200,8 @@ public:
 };
 
 
-template<template<class, class> class VectorField, class T, class PropType>
-inline iIstream& operator >> (iIstream & is, Field<VectorField, T, PropType> & ifld )
+template<class T, class MemorySpace>
+inline iIstream& operator >> (iIstream & is, Field<T, MemorySpace> & ifld )
 {
 	if( !ifld.read(is, IOPattern::MasterProcessorOnly) )
 	{
@@ -217,8 +211,8 @@ inline iIstream& operator >> (iIstream & is, Field<VectorField, T, PropType> & i
 	return is;
 }
 
-template<template<class, class> class VectorField, class T, class PropType>
-inline iOstream& operator << (iOstream& os, const Field<VectorField, T, PropType>& ofld )
+template<typename T, typename MemorySpace>
+inline iOstream& operator << (iOstream& os, const Field<T, MemorySpace>& ofld )
 {
 	
 	if( !ofld.write(os, IOPattern::AllProcessorsDifferent) )

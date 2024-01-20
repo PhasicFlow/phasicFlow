@@ -286,7 +286,7 @@ bool pFlow::repository::write
 			REPORT(1)<< "Writing to " << obj.second->path()<<END_REPORT;
 		}
 		
-		if(!obj.second->write())
+		if(!obj.second->writeObject())
 		{
 			return false;
 		}

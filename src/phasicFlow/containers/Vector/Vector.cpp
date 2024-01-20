@@ -19,7 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-template<typename T, typename Allocator>
+/*template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::readVector
 (
 	iIstream& is,
@@ -38,7 +38,7 @@ bool pFlow::Vector<T, Allocator>::writeVector
 ) const
 {
 	return writeStdVector(os, vectorField(), iop);	
-}
+}*/
 
 /*template<typename T, typename Allocator>
 bool pFlow::Vector<T, Allocator>::deleteElement_sorted

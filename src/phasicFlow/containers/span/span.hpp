@@ -155,51 +155,16 @@ public:
     	return data_[i];
     }
 
-    /// Write in ASCII format, can be sued for all variable types
-    INLINE_FUNCTION_H
-    bool writeASCII(iOstream& os) const
-    {
-        os<< size()<<endl;
-        os << token::BEGIN_LIST;
-        if(size()>0)
-        {
-            for(uint32 i=0; i<size()-1; i++)
-            {
-                os << data_[i]<<token::NL;
-            }
-            os << data_[size()-1] << token::END_LIST;
-        }
-        else
-        {
-            os<< token::END_LIST;
-        }
-        
-        os.check(FUNCTION_NAME);
-        return true;
-    }
-
-
 };
 
-
-template<typename T>
-inline 
-iOstream& operator<<(iOstream& os, const span<T>& s)
-{
-
-    s.writeASCII(os);
-
-    return os;
-}
-
-template<typename T, template<class> class Container>
-span<T> makeSpan(Container<T>& container)
+template<typename T, typename... properties, template<class, class...> class Container>
+size_t makeSpan(Container<T, properties...>& container)
 {
     return span<T>(container.data(), container.size());
 }
 
-template<typename T, template<class> class Container>
-span<T> makeSpan(const Container<T>& container)
+template<typename T, typename... properties, template<class, class...> class Container>
+size_t makeSpan(const Container<T, properties...>& container)
 {
     return span<T>(
         const_cast<T*>(container.data()), 
@@ -226,6 +191,23 @@ span<const char> charSpan(span<const T> s)
         reinterpret_cast<const char*>(s.data()),
         s.size()*el);
 }
+
+template<typename T, template<class> class Container>
+span<T> makeSpan(Container<T>& container)
+{
+    return span<T>(container.data(), container.size());
+}
+
+template<typename T, template<class> class Container>
+span<T> makeSpan(const Container<T>& container)
+{
+    return span<T>(
+        const_cast<T*>(container.data()), 
+        container.size());
+}
+
+
+
 
 
 

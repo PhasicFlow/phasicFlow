@@ -50,11 +50,25 @@ protected:
 
     const internalPoints&   internalPoints_;
 
+	static inline
+	const message defaultMessage_ = 
+	(
+		message::CAP_CHANGED+
+		message::ITEM_INSERT+
+		message::ITEM_REARRANGE+
+		message::ITEM_DELETE
+	);
+
 public:
 
 	internalField(
 		const word& name, 
 		const internalPoints& internal);
+	
+	internalField(
+		const word& name, 
+		const internalPoints& internal,
+		const T& val);
 	
 
 	auto fieldDevice()const
@@ -105,28 +119,34 @@ public:
 		return internalPoints_.isAllActive();
 	}
 
+	bool hearChanges(const message& msg, const anyList& varList) override
+	{
+		notImplementedFunction;
+		return false;
+	}
+
 	//// - IO
 
 	bool write(iOstream& os, const IOPattern& iop)const;
 
 };
 
-/*template<template<class, class> class VectorField, class T, class MemorySpace>
+template<template<class, class> class VectorField, class T, class MemorySpace>
 inline
 iOstream& operator<<
 (
 	iOstream& os, 
-	const internalField<VectorField, T, MemorySpace>& if
+	const internalField<VectorField, T, MemorySpace>& ifeild
 )
 {
-	if( !if.write(os, IOPattern::AllProcessorsDifferent) )
+	if( !ifeild.write(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber());
 		fatalExit;
 	}
 
 	return os;
-}*/
+}
 
 } // pFlow
 

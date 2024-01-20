@@ -48,12 +48,20 @@ public:
 template<typename T>
 using vecAllocator = std::allocator<T>;
 
+template<typename T>
+inline
+bool writeSpan(
+    iOstream& os, 
+    span<T> sp)
+{
+	return writeDataAsciiBinary(os, sp);
+}
 
 template<typename T>
 inline
 bool writeSpan(
     iOstream& os, 
-    const span<T>& sp, 
+    span<T> sp, 
     const IOPattern& iop)
 {
    
@@ -77,12 +85,35 @@ template<typename T, typename Allocator>
 bool writeStdVector
 (
 	iOstream& os, 
+	const std::vector<T,Allocator>& vec
+)
+{
+	auto sp = makeSpan(vec);
+	return writeSpan(os, sp);
+}
+
+template<typename T, typename Allocator>
+bool writeStdVector
+(
+	iOstream& os, 
 	const std::vector<T,Allocator>& vec,
 	const IOPattern& iop 
 )
 {
 	auto sp = makeSpan(vec);
 	return writeSpan(os, sp, iop);
+}
+
+template<typename T, typename Allocator>
+bool readStdVector
+(
+	iIstream& is, 
+	std::vector<T,Allocator>& vec
+)
+{
+	
+	return readDataAsciiBinary(is, vec);
+	
 }
 
 template<typename T, typename Allocator>
@@ -113,7 +144,7 @@ bool readStdVector
 template<typename T, typename Allocator>
 iOstream& operator<<( iOstream& os, const std::vector<T,Allocator>& vec)
 {
-	if(!writeStdVector(os, vec, IOPattern::AllProcessorsDifferent))
+	if(!writeStdVector(os, vec))
 	{
 		fatalErrorInFunction;
 		fatalExit;
@@ -125,7 +156,7 @@ iOstream& operator<<( iOstream& os, const std::vector<T,Allocator>& vec)
 template<typename T, typename Allocator>
 iIstream& operator>>(iIstream& is, std::vector<T,Allocator>& vec)
 {
-	if( !readStdVector(is,vec, IOPattern::MasterProcessorOnly))
+	if( !readStdVector(is,vec))
 	{
 		fatalErrorInFunction;
 		fatalExit;

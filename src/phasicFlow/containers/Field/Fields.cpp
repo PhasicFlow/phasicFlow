@@ -21,61 +21,17 @@ Licence:
 #include "Fields.hpp"
 
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int8>;
+template class pFlow::Field<pFlow::int8>;
 
-/*template class pFlow::Field<pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace>;
+template class pFlow::Field<pFlow::uint8>;
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int16>;
+template class pFlow::Field<pFlow::int32>;
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int16, pFlow::HostSpace>;
+template class pFlow::Field<pFlow::uint32>;
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int32>;
+template class pFlow::Field<pFlow::real>;
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int32, pFlow::HostSpace>;
+template class pFlow::Field<pFlow::realx3>;
 
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int64>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::int64, pFlow::HostSpace>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::uint32>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::uint32, pFlow::HostSpace>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::label>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::label, pFlow::HostSpace>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::real>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::real, pFlow::HostSpace>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::realx3>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::realx3, pFlow::HostSpace>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::realx3x3>;
-
-template class pFlow::Field<pFlow::VectorSingle, pFlow::realx3x3, pFlow::HostSpace>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::int8>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::int16>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::int32>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::int64>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::uint32>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::label>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::real>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::realx3>;
-
-template class pFlow::Field<pFlow::VectorDual, pFlow::realx3x3>;
-
-
-template class pFlow::Field<pFlow::Vector, pFlow::word, pFlow::vecAllocator<pFlow::word>>;*/
 
 

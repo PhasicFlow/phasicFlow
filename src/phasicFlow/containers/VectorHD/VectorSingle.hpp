@@ -24,12 +24,11 @@ Licence:
 
 #include "globalSettings.hpp"
 #include "phasicFlowKokkos.hpp"
-#include "types.hpp"
+#include "stdVectorHelper.hpp"
 #include "error.hpp"
 #include "indexContainer.hpp"
 #include "streams.hpp"
-#include "span.hpp"
-#include "dataIO.hpp"
+
 
 
 #ifndef __RESERVE__
@@ -52,6 +51,8 @@ public:
 	//- typedefs for accessing data
 
 		using VectorType		= VectorSingle<T, MemorySpace>;
+
+		using VectorTypeHost 	= VectorSingle<T, HostSpace>; 		
 
 		using iterator        = T*;
 
@@ -77,7 +78,7 @@ public:
 
 		using execution_space 	= typename viewType::execution_space;
 
-protected:
+private:
 	
 	// - Data members
 
@@ -136,7 +137,7 @@ public:
 		VectorSingle();
 		
 		/// Empty vector with a name (capacity = 2) 
-		VectorSingle(const word& name);
+		explicit VectorSingle(const word& name);
 		
 		/// Vector with name and size n
 		VectorSingle(const word& name, uint32 n);
@@ -271,6 +272,12 @@ public:
 		/// The capacity of *this becomes the capacity of src.
 		INLINE_FUNCTION_H 
 		void assign(const std::vector<T>& src);
+
+		/// Assign source vector from host side.
+		/// The size of *this becomes the size of src. 
+		/// The capacity of *this becomes the capacity of src.
+		INLINE_FUNCTION_H
+		void assign(const VectorTypeHost& src);
 		
 		INLINE_FUNCTION_H
 		auto getSpan();
@@ -291,7 +298,7 @@ public:
 		///  resize if necessary and works on host accessible vector.
 		template<bool Enable = true>
 		INLINE_FUNCTION_H
-		typename std::enable_if<isHostAccessible_ && Enable, void>::type
+		typename std::enable_if_t<isHostAccessible_ && Enable, void>
 		push_back(const T& val)
 		{
 			auto n = changeSize(size_+1);
@@ -360,7 +367,19 @@ public:
 
 	//// - IO operations
 
-		/// Read vector from stream (ASCII)
+		/// Read vector from stream
+		FUNCTION_H
+		bool read(iIstream& is)
+		{
+			std::vector<T> vecFromFile;
+			if(! readStdVector(is, vecFromFile)) return false;
+
+			this->assign(vecFromFile);
+
+			return true;
+		}
+
+		/// Read vector from stream
 		FUNCTION_H
 		bool read(iIstream& is, const IOPattern& iop)
 		{
@@ -380,6 +399,16 @@ public:
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
 			
 			return writeSpan(os, sp, iop);
+			
+		}
+
+		FUNCTION_H
+		bool write(iOstream& os)const
+		{
+			auto hVec = hostVector();
+			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
+			
+			return writeSpan(os, sp);
 			
 		}
 
@@ -408,19 +437,21 @@ public:
 			return writeSpan(os, sp, iop);
 
 		}
-	/// Name of the memory space
-	constexpr static inline 
-	const char* memoerySpaceName()
-	{
-		return memory_space::name();
-	}
+
+
+		/// Name of the memory space
+		static  
+		constexpr const char* memoerySpaceName()
+		{
+			return memory_space::name();
+		}
 
 }; // class VectorSingle
 
 template<typename T, typename MemorySpace>
 inline iIstream& operator >> (iIstream & is, VectorSingle<T, MemorySpace> & ivec )
 {
-	if( !ivec.read(is, IOPattern::MasterProcessorOnly ) )
+	if( !ivec.read(is) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;
@@ -432,7 +463,7 @@ template<typename T, typename MemorySpace>
 inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& ovec )
 {
 	
-	if( !ovec.write(os, IOPattern::AllProcessorsDifferent) )
+	if( !ovec.write(os) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber());
 		fatalExit;

@@ -88,16 +88,16 @@ public:
 	//// - IO operations 
 
 		// - read from file 
-		bool read(bool rdHdr = true);
+		bool readObject(bool rdHdr = true);
 
 		// - write to file 
-		bool write() const;
+		bool writeObject() const;
 
 		// - read from istream 
-		bool read(iIstream& is, bool rdHdr = true);
+		bool readObject(iIstream& is, bool rdHdr = true);
 
 		// - write to istream 
-		bool write(iOstream& os) const;
+		bool writeObject(iOstream& os) const;
 
         virtual 
         bool write(iOstream& is, const IOPattern& iop)const = 0;

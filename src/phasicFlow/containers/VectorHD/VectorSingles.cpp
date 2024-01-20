@@ -18,38 +18,21 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __createDataIO_hpp__
-#define __createDataIO_hpp__
+#include "VectorSingles.hpp" 
 
-#include "uniquePtr.hpp"
-#include "dataIO.hpp"
-#include "dataIORegular.hpp"
-#include "dataIOMPI.hpp"
 
-namespace pFlow
-{
+template class Kokkos::View<pFlow::uint8*>;
+template class pFlow::VectorSingle<pFlow::uint8>;
 
-template<typename T>
-uniquePtr<dataIO<T>> createDataIO(
-    const word& runType, const IOPattern& iop)
-{
-    if(runType == "regular")
-    {
-        return makeUnique<dataIORegular<T>>(iop);
-    }
-    else if(runType == "MPI")
-    {
-        return makeUnique<dataIOMPI<T>>(iop);
-    }
-    else
-    {
-        fatalErrorInFunction<< "not dataIO pattern is specified for this "<<
-        runType<<endl;
-        fatalExit;
-    }
-    return nullptr;
-}
+template class Kokkos::View<pFlow::int32*>;
+template class pFlow::VectorSingle<pFlow::int32>;
 
-}
+template class Kokkos::View<pFlow::uint32*>;
+template class pFlow::VectorSingle<pFlow::uint32>;
 
-#endif
+template class Kokkos::View<pFlow::real*>;
+template class pFlow::VectorSingle<pFlow::real>;
+
+template class Kokkos::View<pFlow::realx3*>;
+template class pFlow::VectorSingle<pFlow::realx3>;
+

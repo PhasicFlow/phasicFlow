@@ -18,6 +18,116 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+template<class T, class MemorySpace>
+bool pFlow::Field<T, MemorySpace>::read
+(
+	iIstream& is
+)
+{
+	
+	bool tokenFound = true;
+	
+    tokenFound = is.findToken(fieldKey_);
+
+	if( !tokenFound )
+	{
+		ioErrorInFile( is.name(), is.lineNumber() ) <<
+		" error in searching for filedkey " << fieldKey_<<endl;
+		return false;
+	}
+	
+	if( !VectorType::read(is) )
+	{
+		ioErrorInFile(is.name(), is.lineNumber())<<
+		"error in reading field data from field "<< this->name()<<endl;
+		return false;
+	}
+    
+	is.readEndStatement("Field::read");
+
+	return true;
+}
+
+
+template<class T, class MemorySpace>
+bool pFlow::Field<T, MemorySpace>::read
+(
+	iIstream& is,
+	const IOPattern& iop
+)
+{
+	
+	bool tokenFound = true;
+	
+    if(iop.thisProcReadData())
+        tokenFound = is.findToken(fieldKey_);
+
+	if( !tokenFound )
+	{
+		ioErrorInFile( is.name(), is.lineNumber() ) <<
+		" error in searching for filedkey " << fieldKey_<<endl;
+		return false;
+	}
+	
+	if( !VectorType::read(is, iop) )
+	{
+		ioErrorInFile(is.name(), is.lineNumber())<<
+		"error in reading field data from field "<< this->name()<<endl;
+		return false;
+	}
+    if(iop.thisProcReadData())
+	    is.readEndStatement("Field::read");
+
+	return true;
+}
+
+template<class T, class MemorySpace>
+bool pFlow::Field<T, MemorySpace>::write
+(
+	iOstream& os
+)const
+{
+
+	os.writeWordKeyword(fieldKey_)<<endl;
+
+	if(!os.check(FUNCTION_NAME))return false;
+
+	if(!VectorType::write(os)) return false;
+
+	os.endEntry();
+	if(!os.check(FUNCTION_NAME))return false;
+
+	return true;
+}
+
+
+
+template<class T, class MemorySpace>
+bool pFlow::Field<T, MemorySpace>::write
+(
+	iOstream& os, 
+	const IOPattern& iop
+)const
+{
+
+	if(iop.thisProcWriteData())
+		os.writeWordKeyword(fieldKey_)<<endl;
+
+	if(!os.check(FUNCTION_NAME))return false;
+
+	if(!VectorType::write(os, iop)) return false;
+
+	if(iop.thisProcWriteData())
+		os.endEntry();
+
+	if(!os.check(FUNCTION_NAME))return false;
+
+	return true;
+}
+
+
+
+
 /*template<template<class, class> class VectorField, class T, class PropType>
 bool pFlow::Field<VectorField, T, PropType>::readUniform
 ( 
@@ -179,55 +289,3 @@ bool pFlow::Field<VectorField, T, PropType>::writeField(iOstream& os)const
 
 	return true;
 }*/
-
-
-template<template<class, class> class VectorField, class T, class PropType>
-bool pFlow::Field<VectorField, T, PropType>::read
-(
-	iIstream& is,
-	const IOPattern& iop
-)
-{
-	
-	bool tokenFound = true;
-	
-    if(iop.thisProcReadData())
-        tokenFound = is.findToken(fieldKey_);
-
-	if( !tokenFound )
-	{
-		ioErrorInFile( is.name(), is.lineNumber() ) <<
-		" error in searching for filedkey " << fieldKey_<<endl;
-		return false;
-	}
-	
-	if( !VectorType::read(is, iop) )
-	{
-		ioErrorInFile(is.name(), is.lineNumber())<<
-		"error in reading field data from field "<< this->name()<<endl;
-	}
-    if(iop.thisProcReadData())
-	    is.readEndStatement("Field::read");
-
-
-	return true;
-}
-
-template<template<class, class> class VectorField, class T, class PropType>
-bool pFlow::Field<VectorField, T, PropType>::write(
-	iOstream& os, 
-	const IOPattern& iop)const
-{
-
-	os.writeWordKeyword(fieldKey_)<<endl;
-
-	if(!os.check(FUNCTION_NAME))return false;
-
-	if(!VectorType::write(os, iop)) return false;
-
-	os.endEntry();
-	if(!os.check(FUNCTION_NAME))return false;
-
-	return true;
-}
-

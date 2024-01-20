@@ -35,15 +35,16 @@ template<typename T>
 template<typename T>
   using pointField_D = pointField<VectorSingle, T>;
 
-/*template<typename T>
-  using pointField_HD = pointField<VectorDual, T>;*/
-
 
 using int8PointField_D 		= pointField<VectorSingle, int8>;
 
 using int8PointField_H 		= pointField<VectorSingle, int8, HostSpace>;
 
-using int32PointField_D 	= pointField<VectorSingle, int32>;
+using realPointField_D 		= pointField<VectorSingle, real>;
+
+using realPointField_H 		= pointField<VectorSingle, real, HostSpace>;
+
+//using int32PointField_D 	= pointField<VectorSingle, int32>;
 
 /*using int32PointField_H 	= pointField<VectorSingle, int32, HostSpace>;
 

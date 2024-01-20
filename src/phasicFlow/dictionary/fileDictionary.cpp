@@ -20,7 +20,7 @@ pFlow::fileDictionary::fileDictionary
     )
 {
     dictionary::name_ = IOobject::path().wordPath();
-    if(!IOobject::read())
+    if(!IOobject::readObject())
     {
         fatalErrorInFunction<<
         "Error in reading from dictionary "<< globalName()<<endl;

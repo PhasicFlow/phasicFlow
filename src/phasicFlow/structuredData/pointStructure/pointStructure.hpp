@@ -39,17 +39,30 @@ class pointStructure
     public demComponent,
 	public internalPoints
 {
-protected:
+public:
+	
+	using PointsType 		= typename internalPoints::PointsType;
+
+	using PointsTypeHost 	= typename PointsType::FieldTypeHost;
+
+	using device_type 		= typename PointsType::device_type;
+
+	using memory_space 		= typename PointsType::memory_space;
+
+	using execution_space 	= typename PointsType::execution_space;
+
+private:
 
 	//// - data members 
 	uniquePtr<simulationDomain> simulationDomain_ = nullptr;
 
 	boundaryList 				boundaries_;
     
+	bool setupPointStructure(const realx3Vector& points);
 
-    bool setupPointStructure(const realx3Vector& points);
+    bool setupPointStructure(const PointsTypeHost& points);
 
-    bool initializePoints(const realx3Vector& points);
+    bool initializePoints(const PointsTypeHost& points);
 
 public:
 
@@ -80,7 +93,7 @@ public:
 		pointStructure& operator=(pointStructure&&) = delete;
 
 		// - destructor 
-		virtual ~pointStructure() = default;
+		~pointStructure() override = default;
 
 	// - Iteration methods
 
@@ -133,12 +146,6 @@ public:
 		/// Write 
 		bool write(iOstream& os, const IOPattern& iop)const override;
         
-		
-		
-		
-		
-
-
 
 };
 

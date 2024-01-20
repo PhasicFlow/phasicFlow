@@ -1,132 +1,127 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
 
 template<typename T>
-bool pFlow::dataIO<T>::writeData(iOstream& os, span<T> data)
+bool pFlow::writeDataAsciiBinary(iOstream& os, span<T> data)
 {
-	/// first gather data from all processors (if any)
-	if(!gatherData( data ) )
+
+	if( os.isBinary() )
 	{
-		fatalErrorInFunction<<
-		"Error in gathering data for out stream "<< os.name()<<endl;
-		return false;
-	}
+		// first write the number of data
+		uint64 numData = data.size();
+		os<< numData << endl;
 
-	if( ioPattern_.thisProcWriteData())
-	{
-		if( os.isBinary() )
+		// write the bindary data
+		auto chBuffer = charSpan(data);
+
+		if(!os.write(chBuffer.data(), chBuffer.size()))
 		{
-			// first write the number of data
-			uint64 numData = bufferSpan_.size();
-			os<< numData << endl;
-
-            // write the bindary data
-            auto chBuffer = charSpan(bufferSpan_);
-
-			if(!os.write(chBuffer.data(), chBuffer.size()))
-			{
-				fatalErrorInFunction<<
-		    	"error in writing binary data to "<<os.name()<<endl;
-		    	return false;
-			}
-
-		}
-		else
-		{
-		    if( !bufferSpan_.writeASCII(os) )
-		    {
-		    	fatalErrorInFunction<<
-		    	"error in writing ASCII data to "<<os.name()<<endl;
-		    	return false;
-		    }
+			fatalErrorInFunction<<
+			"error in writing binary data to "<<os.name()<<endl;
+			return false;
 		}
 
-		return os.check(FUNCTION_NAME);
 	}
 	else
 	{
-		return true;
+		if( !writeDataASCII(os, data) )
+		{
+			fatalErrorInFunction<<
+			"error in writing ASCII data to "<<os.name()<<endl;
+			return false;
+		}
 	}
+
+	return os.check(FUNCTION_NAME);
+	
 }
 
-template<>
-inline
-bool pFlow::dataIO<pFlow::word>::writeData(iOstream& os, span<word> data)
+template<typename T>
+bool pFlow::writeDataASCII(iOstream& os, span<T> data)
 {
-    notImplementedFunction;
-    fatalExit;
-    /// first gather data from all processors (if any)
-	if(!gatherData( data ) )
+	os<< data.size()<<endl;
+	os << token::BEGIN_LIST;
+	if(data.size()>0)
 	{
-		fatalErrorInFunction<<
-		"Error in gathering data for out stream "<< os.name()<<endl;
-		return false;
+		for(uint32 i=0; i<data.size()-1; i++)
+		{
+			os << data[i]<<token::NL;
+		}
+		os << data[data.size()-1] << token::END_LIST;
 	}
-
-	if( !bufferSpan_.writeASCII(os) )
-    {
-    	fatalErrorInFunction<<
-    	"error in writing ASCII data to "<<os.name()<<endl;
-    	return false;
-    }
-
+	else
+	{
+		os<< token::END_LIST;
+	}
+	
+	os.check(FUNCTION_NAME);
 	return true;
 }
 
-
 template<typename T>
-bool pFlow::dataIO<T>::readData
+bool pFlow::readDataAsciiBinary
 (
 	iIstream& is, 
 	std::vector<T>& data
 )
 {
-	data.clear();
-	if(ioPattern_.thisProcReadData())
+	
+	if(is.isBinary())
 	{
-		if(is.isBinary())
+		data.clear();
+		// read length of data 			
+		token firstToken(is);
+		
+		size_t len = 0;
+		if( firstToken.isInt64())
 		{
-            
-			// read length of data 			
-			token firstToken(is);
-			
-			size_t len = 0;
-			if( firstToken.isInt64())
-			{
-				len = firstToken.int64Token();
-				data.resize(len);	
-			}
-			else
-			{
-				fatalErrorInFunction<<
-				"expected length of vector in the stream "<<is.name()<<
-				"but found this "<< firstToken<<endl;
-				return false;
-			}
-
-			is.read(reinterpret_cast<char*>(data.data()), len*sizeof(T));	
-			
-			return is.check(FUNCTION_NAME);
+			len = firstToken.int64Token();
+			data.resize(len);	
 		}
 		else
 		{
-			
-			return readAscii(is, data);
+			fatalErrorInFunction<<
+			"expected length of vector in the stream "<<is.name()<<
+			"but found this "<< firstToken<<endl;
+			return false;
 		}
+
+		is.read(reinterpret_cast<char*>(data.data()), len*sizeof(T));	
+		
+		return is.check(FUNCTION_NAME);
 	}
 	else
 	{
-		return true;
+		
+		return readDataAscii(is, data);
 	}
+	
 }
 
 template<typename T>
-bool pFlow::dataIO<T>::readAscii
+bool pFlow::readDataAscii
 (
 	iIstream& is,
 	std::vector<T>& vec
 )
 {
-
-	if( !ioPattern_.thisProcReadData() ) return true;
 	
 	is.fatalCheck(FUNCTION_NAME);
 
@@ -188,3 +183,61 @@ bool pFlow::dataIO<T>::readAscii
 
 	return true;
 }
+
+
+template<typename T>
+bool pFlow::dataIO<T>::writeData(iOstream& os, span<T> data)
+{
+	/// first gather data from all processors (if any)
+	if(!gatherData( data ) )
+	{
+		fatalErrorInFunction<<
+		"Error in gathering data for out stream "<< os.name()<<endl;
+		return false;
+	}
+
+	if( ioPattern_.thisProcWriteData())
+	{
+		return writeDataAsciiBinary(os, data);
+	}
+	else
+	{
+		return true;
+	}
+}
+
+template<>
+inline
+bool pFlow::dataIO<pFlow::word>::writeData(iOstream& os, span<word> data)
+{
+    notImplementedFunction;
+    fatalExit;
+    /// first gather data from all processors (if any)
+	if(!gatherData( data ) )
+	{
+		fatalErrorInFunction<<
+		"Error in gathering data for out stream "<< os.name()<<endl;
+		return false;
+	}
+	
+	return false;
+}
+
+template<typename T>
+bool pFlow::dataIO<T>::readData
+(
+	iIstream& is, 
+	std::vector<T>& data
+)
+{
+	data.clear();
+	if(ioPattern_.thisProcReadData())
+	{
+		return readDataAsciiBinary(is, data);
+	}
+	else
+	{
+		return true;
+	}
+}
+

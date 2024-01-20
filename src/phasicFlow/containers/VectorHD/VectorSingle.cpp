@@ -403,6 +403,23 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
 {
     assign(src, src.capacity());
 }
+template<typename T, typename MemorySpace>
+INLINE_FUNCTION_H 
+void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
+{
+	uint32 srcSize = src.size();
+	uint32 srcCap = src.capacity();
+
+    if(srcCap != capacity())
+    {
+        reallocateCapacitySize(srcCap, srcSize);
+    }
+    else
+    {
+        setSize(srcSize);
+    }
+	copy(deviceVector(), src.hostVector());
+}
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H

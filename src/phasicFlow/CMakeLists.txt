@@ -35,9 +35,10 @@ dictionary/entry/dataEntry.cpp
 dictionary/twoPartEntry/twoPartEntry.cpp
 
 containers/Vector/Vectors.cpp
+containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
-containers/pointField/pointFields.cpp
+#containers/pointField/pointFields.cpp
 
 #setFieldList/setFieldList.cpp
 #setFieldList/setFieldEntry.cpp

@@ -71,13 +71,7 @@ public:
 
 	TypeInfo("boundaryBase");
 
-	/*boundaryBase(
-		const plane& 		bplane,
-		uint32 				mirrorProc, 
-		const word& 		name,
-		const word& 		type,
-		internalPoints& 	internal);*/
-
+	
 	boundaryBase(
 		const dictionary& 	dict,
 		const plane& 		bplane,

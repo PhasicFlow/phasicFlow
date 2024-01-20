@@ -33,7 +33,7 @@ namespace pFlow
 {
 
 class systemControl;
-//class pFlagTypeHost;
+
 
 class simulationDomain
 :

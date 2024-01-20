@@ -79,6 +79,17 @@ public:
 			const objectFile& objf, 
             pointStructure& pStruct, 
             const T& defVal);
+		
+		pointField(
+			const objectFile& objf,
+			pointStructure& pStruct,
+			const T& defVal,
+			const T& val);
+		
+		const auto& internal()const
+		{
+			return static_cast<const InternalFieldType&>(*this);
+		}
 
 		// - construct from iIOEntity, pointStructure and a value
 		/*pointField( const pointStructure& pStruct, const T& val, const T& defVal, bool subscribe = true);
@@ -174,12 +185,12 @@ iIstream& operator >> (iIstream & is, pointField<VectorField, T, MemorySpace> & 
 	}
 
 	return is;
-}
+}*/
 
 template<template<class, class> class VectorField, class T, class MemorySpace>
 iOstream& operator << (iOstream& os, const pointField<VectorField, T, MemorySpace>& pF )
 {
-	if(! pF.write(os) )
+	if(! pF.write(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile( os.name(), os.lineNumber() )<<
 		"error in writing pointField into file. \n";
@@ -187,7 +198,7 @@ iOstream& operator << (iOstream& os, const pointField<VectorField, T, MemorySpac
 	}
 
 	return os;
-}*/
+}
 
 }
 

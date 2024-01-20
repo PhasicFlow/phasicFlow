@@ -28,7 +28,7 @@ pFlow::internalField<VectorField, T, MemorySpace>::internalField
     observer
     (
 		&internal, 
-		message::CAP_CHANGED+message::ITEM_INSERT+message::ITEM_REARRANGE+message::ITEM_DELETE
+		defaultMessage_
     ),
 	field_
 	(
@@ -41,10 +41,36 @@ pFlow::internalField<VectorField, T, MemorySpace>::internalField
 	internalPoints_(internal)
 {}
 
-
 template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::hostViewType1D<T> 
-	pFlow::internalField<VectorField, T, MemorySpace>::activeValuesHost()const
+pFlow::internalField<VectorField, T, MemorySpace>::internalField
+(
+	const word &name, 
+	const internalPoints &internal, 
+	const T &val
+)
+:
+	observer
+    (
+		&internal, 
+		defaultMessage_
+    ),
+	field_
+	(
+		name,
+		"ineternalField",
+		internal.capacity(),
+		internal.size(),
+		RESERVE()
+	),
+	internalPoints_(internal)
+{
+	field_.fill(val);
+} 
+
+
+template <template <class, class> class VectorField, class T, class MemorySpace>
+pFlow::hostViewType1D<T>
+pFlow::internalField<VectorField, T, MemorySpace>::activeValuesHost() const
 {
 	auto maskH = internalPoints_.activePointsMaskHost();
     auto fieldH = field_.hostVector();

@@ -46,8 +46,20 @@ pFlow::internalPoints::internalPoints
 )
 :
 	subscriber("internalPoints"),
-	pointPosition_("internalPoints", "internalPoints", posVec.capacity(), 0, RESERVE()),
-	pFlagsD_(posVec.capacity(), 0, posVec.size())
+	pointPosition_
+	(
+		"internalPoints", 
+		"internalPoints", 
+		posVec.capacity(), 
+		0, 
+		RESERVE()
+	),
+	pFlagsD_
+	(
+		static_cast<uint32>(posVec.capacity()), 
+		static_cast<uint32>(0),
+		static_cast<uint32>(posVec.size())
+	)
 {
 
 	pointPosition_.assign(posVec);
@@ -70,19 +82,34 @@ const pFlow::pFlagTypeHost&
 }
 
 FUNCTION_H
-const pFlow::realx3Field_D& 
+const typename pFlow::internalPoints::PointsType& 
     pFlow::internalPoints::pointPosition()const
 {
     return pointPosition_;
 }
 
-pFlow::hostViewType1D<pFlow::realx3> 
+FUNCTION_H
+typename pFlow::internalPoints::PointsType&
+	pFlow::internalPoints::pointPosition()
+{
+    return pointPosition_;
+}
+
+typename pFlow::internalPoints::PointsTypeHost
     pFlow::internalPoints::activePointsHost() const
 {
     auto maskH = activePointsMaskHost();
     auto pointsH = pointPositionHost();
 
-    hostViewType1D<realx3> aPoints("Active pointst", maskH.numActive());
+	PointsTypeHost aPoints
+	(
+		pointPosition_.name(),
+		pointPosition_.fieldKey(),
+		maskH.numActive(), 
+		maskH.numActive(),
+		RESERVE()
+	);
+
     auto aRange = maskH.activeRange();
     uint32 n = 0;
     for(auto i=aRange.start(); i<aRange.end(); i++)
@@ -97,11 +124,7 @@ pFlow::hostViewType1D<pFlow::realx3>
     return aPoints;
 }
 
-FUNCTION_H
-pFlow::realx3Field_D &pFlow::internalPoints::pointPosition()
-{
-    return pointPosition_;
-}
+
 
 FUNCTION_H
 pFlow::uint32 pFlow::internalPoints::updateFlag
@@ -149,12 +172,55 @@ void pFlow::internalPoints::fillNeighborsLists
 FUNCTION_H
 bool pFlow::internalPoints::read
 (
+	iIstream& is
+)
+{
+	
+	PointsTypeHost fRead(pointPosition_.name(), pointPosition_.fieldKey());
+
+	if( !fRead.read(is))
+	{
+		fatalErrorInFunction<<
+		"Error in reading pointPosition from stream "<< is.name()<<endl;
+		return false;
+	}
+
+	pointPosition_.assign(fRead);
+
+	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
+	pFlagSync_ = false;
+	syncPFlag();
+
+	return true;
+}
+
+
+FUNCTION_H
+bool pFlow::internalPoints::write
+(
+	iOstream& os
+)const
+{
+	if( pFlagsD_.isAllActive())
+	{
+		return pointPosition_.write(os);
+	}
+	else
+	{
+		auto aPoints = this->activePointsHost();
+		return aPoints.write(os);
+	}
+}
+
+FUNCTION_H
+bool pFlow::internalPoints::read
+(
 	iIstream& is, 
 	const IOPattern& iop
 )
 {
 	
-	Field<Vector, realx3 , vecAllocator<realx3>> fRead("internalPoints", "internalPoints");
+	PointsTypeHost fRead(pointPosition_.name(), pointPosition_.fieldKey());
 
 	if( !fRead.read(is, iop))
 	{
@@ -163,10 +229,7 @@ bool pFlow::internalPoints::read
 		return false;
 	}
 
-	/// here there should be some mechanism for field distribution between procesors
-	
-
-	pointPosition_.assign(fRead.vectorField());
+	pointPosition_.assign(fRead);
 
 	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
 	pFlagSync_ = false;
@@ -190,9 +253,8 @@ bool pFlow::internalPoints::write
 	}
 	else
 	{
-		auto aPoints = this->activePointsHost();
-		auto spanPoints = makeSpan(aPoints); //span<realx3>(aPoints.data(), aPoints.size());
-		return writeSpan(os, spanPoints, iop);
+		auto aPoints = activePointsHost();
+		return aPoints.write(os,iop);
 	}
 }
 

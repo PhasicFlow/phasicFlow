@@ -20,22 +20,4 @@ Licence:
 
 #include "Vectors.hpp"
 
-// instantiation just for numeral types 
-
-/*template class pFlow::Vector<pFlow::int8>;
-
-template class pFlow::Vector<pFlow::int32>;
-
-template class pFlow::Vector<pFlow::uint32>;
-
-template class pFlow::Vector<pFlow::real>;
-
-template class pFlow::Vector<pFlow::realx3>;
-
-template class pFlow::Vector<pFlow::realx3x3>;*/
-
-
-
- 
-
 

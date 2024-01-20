@@ -23,8 +23,20 @@ Licence:
 #include "systemControl.hpp"
 #include "vocabs.hpp"
 
+bool pFlow::pointStructure::setupPointStructure(const realx3Vector& points)
+{
+    PointsTypeHost hPoints
+    (
+        pointPosition_.name(), 
+        pointPosition_.fieldKey()
+    );
 
-bool pFlow::pointStructure::setupPointStructure(const realx3Vector &points)
+    hPoints.assign(points);
+    
+    return setupPointStructure(hPoints);
+}
+
+bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
 {
     if(!simulationDomain_->initialUpdateDomains(points.getSpan()))
     {
@@ -35,19 +47,19 @@ bool pFlow::pointStructure::setupPointStructure(const realx3Vector &points)
     
     uint32 thisN = simulationDomain_->initialNumberInThis();
 
-    Field<Vector, realx3 , vecAllocator<realx3>> internal
+    PointsTypeHost internal
     (
-        "internalPoints", 
-        "internalPoints", 
+        pointPosition_.name(), 
+        pointPosition_.fieldKey(), 
         thisN, 
         thisN, 
         RESERVE()
     );
     
-    auto pSpan  = makeSpan(points); 
-    auto iSpan  = internal.getSpan();
+    auto pSpan  = points.getSpan();
     
-    if(!simulationDomain_->initialTransferBlockData(pSpan, iSpan))
+    if(auto iSpan  = internal.getSpan(); 
+        !simulationDomain_->initialTransferBlockData(pSpan, iSpan))
     {
         fatalErrorInFunction<<
         "Error in transfering the block data "<<endl;
@@ -66,9 +78,9 @@ bool pFlow::pointStructure::setupPointStructure(const realx3Vector &points)
 }
 
 
-bool pFlow::pointStructure::initializePoints(const realx3Vector &points)
+bool pFlow::pointStructure::initializePoints(const PointsTypeHost &points)
 {
-    pointPosition_.assign(points.vectorField());
+    pointPosition_.assign(points);
 
     pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
     pFlagSync_ = false;
@@ -109,7 +121,7 @@ pFlow::pointStructure::pointStructure
     REPORT(0)<< "Reading point structure from "<<
     IOobject::path()<<END_REPORT;
 
-    if( !IOobject::read() )
+    if( !IOobject::readObject() )
     {
         fatalErrorInFunction<<
         "Error in reading from file "<<IOobject::path()<<endl;
@@ -173,8 +185,11 @@ bool pFlow::pointStructure::read(
     const IOPattern& iop)
 {
     
-    Field<Vector, realx3 , vecAllocator<realx3>> 
-        fRead("file_internalPoints", "internalPoints");   
+    PointsTypeHost fRead
+    (
+        this->pointPosition_.name(),
+        this->pointPosition_.fieldKey()
+    );
 
 	if( !fRead.read(is, iop))
 	{
@@ -192,27 +207,5 @@ bool pFlow::pointStructure::write
     const IOPattern& iop
 )const
 {
-    
-    hostViewType1D<realx3> pointsH;
-
-    if(isAllActive())
-    {
-        pointsH = pointPositionHost();
-    }
-    else
-    {
-        pointsH = activePointsHost();
-    }
-
-    auto data = span<realx3>(pointsH.data(), pointsH.size());
-    
-    if( !writeSpan(os, data, iop) )
-    {
-        fatalErrorInFunction<<
-        "Error in writing pointStructure in stream "<<
-        os.name()<<endl;
-        return false;
-    }
-
-    return true;
+    return internalPoints::write(os, iop);
 }

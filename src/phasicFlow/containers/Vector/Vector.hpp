@@ -59,27 +59,27 @@ class Vector
 {
 public:
 	
-	typedef Vector<T, Allocator>					VectorType;
+	using VectorType 		= Vector<T, Allocator>;
 
-	typedef typename std::vector<T, Allocator>		vectorType;
+	using vectorType 		= typename std::vector<T, Allocator>;
 
-	typedef typename vectorType::iterator 			iterator;
+	using iterator 			= typename vectorType::iterator;
 	
-	typedef typename vectorType::const_iterator 	const_iterator;
+	using const_iterator 	= typename vectorType::const_iterator;
 	
-	typedef typename vectorType::reference 			reference;
+	using reference 		= typename vectorType::reference;
 	
-	typedef typename vectorType::const_reference 	const_reference;
+	using const_reference 	= typename vectorType::const_reference;
 	
-	typedef  T 										value_type; 		
+	using value_type 		= T; 		
 
-	typedef  T* 									pointer;
+	using pointer 			= T *;
 
-	typedef const T*  								const_pointer;
+	using const_pointer 	= const T *;
 
-	typedef typename std::initializer_list<T> 		init_list;
+	using init_list 		= typename std::initializer_list<T>;
 
-protected:
+private:
 
 	// - name of the vector  
 	word name_;
@@ -105,21 +105,24 @@ public:
 
 
 		/// Empty Vector with a name 
-		inline Vector(const word& name)
+		inline 
+		explicit Vector(const word& name)
 		:
 			name_(name)
 		{}
 
 		
 		/// Vector with specified length and name
-		inline Vector(const word& name, size_t len)
+		inline 
+		Vector(const word& name, size_t len)
 		:
 			vectorType(len),
 			name_(name)
 		{}
 
 		/// Vector with name, length and value
-		inline Vector(const word& name, size_t len, const T& val)
+		inline 
+		Vector(const word& name, size_t len, const T& val)
 		:
 			Vector(name, len)
 		{
@@ -136,7 +139,8 @@ public:
 
 
 		/// Vector from name and initializer list 
-		inline Vector(const word& name, const init_list &l)
+		inline 
+		Vector(const word& name, const init_list &l)
 		:
 			vectorType(l),
 			name_(name)
@@ -162,7 +166,7 @@ public:
 		inline Vector(const VectorType& src) = default;
 
 		/// Copy from src with a new name 
-		inline Vector(const word name, const Vector<T>& src):
+		inline Vector(const word& name, const Vector<T>& src):
 			vectorType(src),
 			name_(name)
 		{}
@@ -178,10 +182,10 @@ public:
 		}
 
 		/// Move construct 
-		inline Vector( VectorType && mv) = default;
+		Vector( VectorType && mv) noexcept= default;
 	
 		/// Move assignment 
-		inline VectorType& operator=( VectorType && mv) = default;
+		VectorType& operator=( VectorType && mv)noexcept = default;
 	
 		/// Scalar assignment 
 		inline void operator=(const T& val)
@@ -190,10 +194,8 @@ public:
 		}
 
 		/// Destructor 
-		inline ~Vector()
-		{
-			vectorType::clear();
-		}
+		~Vector() = default;
+		
 
 		/// Clone as a uniquePtr
 		inline uniquePtr<VectorType> clone() const
@@ -204,7 +206,8 @@ public:
 		/// Clone as a pointer 
 		inline VectorType* clonePtr()const
 		{
-			return new VectorType(*this);
+			uniquePtr<VectorType> Ptr = makeUnique<VectorType>(*this);
+			return Ptr.release();
 		}
 
 	
@@ -283,6 +286,99 @@ public:
 			vectorType::reserve(cap);
 		}
 
+		// - fill the whole content of vector, [begin, end), with val 
+		void fill( const T& val);
+
+		inline
+		auto getSpan()
+		{
+			return span<T>(this->data(), this->size());
+		}
+		
+		inline 
+		auto getSpan()const
+		{
+			return span<T>(const_cast<T*>(this->data()), this->size());
+		}
+
+		static constexpr bool isHostAccessible()
+		{
+			return isHostAccessible_;
+		}
+
+	void operator +=( const T& val);
+	void operator -=( const T& val);
+	void operator *=( const T& val);
+	void operator /=( const T& val);
+
+	void operator +=( const VectorType& v );
+	void operator -=( const VectorType& v );
+	void operator /=( const VectorType& v );
+	void operator *=( const VectorType& v );
+
+	VectorType operator -()const;
+
+	bool read(iIstream& is)
+	{
+		return readStdVector(is, vectorField());
+	}
+	bool write(iOstream& os)
+	{
+		return writeStdVector(os, vectorField());
+	}
+
+	bool read(iIstream& is, const IOPattern& iop)
+	{
+		return readStdVector(is, vectorField(), iop);
+	}
+
+	bool write(iOstream& os, const IOPattern& iop)const
+	{
+		return writeStdVector(os, vectorField(), iop);
+	}
+
+	static
+	constexpr const char* memoerySpaceName()
+  	{
+  		return "std";
+  	}
+};
+
+
+template<typename T, typename Allocator>
+inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
+{
+	if( !ivec.read(is) )
+	{
+		ioErrorInFile (is.name(), is.lineNumber());
+		fatalExit;
+	}
+	return is;
+}
+
+template<typename T, typename Allocator> 
+inline iOstream& operator << (iOstream& os, const Vector<T, Allocator>& ovec )
+{	
+	if( !ovec.write(os) )
+	{
+		ioErrorInFile(os.name(), os.lineNumber());
+		fatalExit;
+	}
+	return os; 
+}
+
+
+} // pFlow
+
+
+#include "VectorI.hpp"
+#include "Vector.cpp"
+#include "VectorMath.hpp"
+#include "VectorAlgorithm.hpp"
+
+#endif
+
+
 
 	/*// - delete elemens of vector based on sorted indices 
 	//   return false if out of range
@@ -318,93 +414,3 @@ public:
 	// - set or insert a new element into the vecor 
 	//   return false if it fails 
 	inline bool insertSetElement(int32 idx, const T& val);*/
-
-	// - fill the whole content of vector, [begin, end), with val 
-	inline void fill( const T& val);
-
-	inline
-	auto getSpan()
-	{
-		return span<T>(this->data(), this->size());
-	}
-	
-	inline 
-	auto getSpan()const
-	{
-		return span<T>(const_cast<T*>(this->data()), this->size());
-	}
-
-	static constexpr bool isHostAccessible()
-	{
-		return isHostAccessible_;
-	}
-
-	
-
-	inline void operator +=( const T& val);
-	inline void operator -=( const T& val);
-	inline void operator *=( const T& val);
-	inline void operator /=( const T& val);
-
-	inline void operator +=( const VectorType& v );
-	inline void operator -=( const VectorType& v );
-	inline void operator /=( const VectorType& v );
-	inline void operator *=( const VectorType& v );
-
-	inline VectorType operator -()const;
-
-	/// Read vector (assume ASCII in input)
-	bool readVector(iIstream& is, const IOPattern& iop);
-
-	/// write vector 
-	bool writeVector(iOstream& os, const IOPattern& iop) const;
-
-	bool read(iIstream& is, const IOPattern& iop)
-	{
-		return readVector(is, iop);
-	}
-
-	bool write(iOstream& os, const IOPattern& iop)const
-	{
-		return writeVector(os, iop);
-	}
-
-	constexpr static inline const char* memoerySpaceName()
-  	{
-  		return "std";
-  	}
-};
-
-
-template<typename T, typename Allocator>
-inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
-{
-	if( !ivec.readVector(is, IOPattern::MasterProcessorOnly) )
-	{
-		ioErrorInFile (is.name(), is.lineNumber());
-		fatalExit;
-	}
-	return is;
-}
-
-template<typename T, typename Allocator> 
-inline iOstream& operator << (iOstream& os, const Vector<T, Allocator>& ovec )
-{	
-	if( !ovec.writeVector(os, IOPattern::AllProcessorsDifferent) )
-	{
-		ioErrorInFile(os.name(), os.lineNumber());
-		fatalExit;
-	}
-	return os; 
-}
-
-
-} // pFlow
-
-
-#include "VectorI.hpp"
-#include "Vector.cpp"
-#include "VectorMath.hpp"
-#include "VectorAlgorithm.hpp"
-
-#endif

@@ -62,7 +62,7 @@ pFlow::repository* pFlow::IOobject::releaseOwner
     return old;
 }
 
-bool pFlow::IOobject::read(bool rdHdr)
+bool pFlow::IOobject::readObject(bool rdHdr)
 {
     
 	if( implyRead() )
@@ -85,7 +85,7 @@ bool pFlow::IOobject::read(bool rdHdr)
         {
             if( auto ptrIS = inStream(); ptrIS )
             {
-                if(!read(ptrIS(), rdHdr))return false;              
+                if(!readObject(ptrIS(), rdHdr))return false;              
             }
             else
             {
@@ -101,7 +101,7 @@ bool pFlow::IOobject::read(bool rdHdr)
 }
 
 
-bool pFlow::IOobject::write() const
+bool pFlow::IOobject::writeObject() const
 {
 	if(implyWrite())
 	{
@@ -109,7 +109,7 @@ bool pFlow::IOobject::write() const
         {
             if(auto ptrOS = outStream(); ptrOS )
             {
-                return write(ptrOS());
+                return writeObject(ptrOS());
             }
             else
             {
@@ -124,7 +124,7 @@ bool pFlow::IOobject::write() const
 }
 
 
-bool pFlow::IOobject::read(iIstream& is, bool rdHdr)
+bool pFlow::IOobject::readObject(iIstream& is, bool rdHdr)
 {
 	if(rdHdr && ioPattern().thisCallRead() )
 	{
@@ -143,7 +143,7 @@ bool pFlow::IOobject::read(iIstream& is, bool rdHdr)
 }
 
 
-bool pFlow::IOobject::write(iOstream& os) const
+bool pFlow::IOobject::writeObject(iOstream& os) const
 {
 	if(this->writeHeader() && ioPattern().thisProcWriteHeader())
 		writeHeader(os, typeName());

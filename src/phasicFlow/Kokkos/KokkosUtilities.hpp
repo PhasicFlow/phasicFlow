@@ -26,6 +26,7 @@ Licence:
 #include "pFlowMacros.hpp"
 #include "types.hpp"
 #include "span.hpp"
+#include "dataIO.hpp"
 #include "iOstream.hpp"
 
 namespace pFlow
