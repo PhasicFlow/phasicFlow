@@ -70,10 +70,13 @@ public:
     /// @param pointPos 
     /// @return 
     bool initialUpdateDomains(span<realx3> pointPos)override;
+    
 
     /// @brief 
     /// @return 
     uint32 initialNumberInThis()const override;
+
+    bool initialThisDomainActive()const override;
 
     bool initialTransferBlockData(
 		span<char> src, 

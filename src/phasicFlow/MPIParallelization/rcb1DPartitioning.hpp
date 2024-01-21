@@ -60,9 +60,8 @@ public:
 		const dictionary& dict, 
 		const box& globalBox);
 	
-	
-	virtual 
-	~rcb1DPartitioning()=default;
+
+	~rcb1DPartitioning() override=default;
 
     span<int32> exportList(int procNo)const override
     {

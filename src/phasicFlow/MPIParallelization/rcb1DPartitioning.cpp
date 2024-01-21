@@ -97,6 +97,12 @@ bool pFlow::rcb1DPartitioning::partition(pointCollection &points)
 
   	localBox_ = globalBox_;
 
+    if(equal(x0, x1))
+    {
+        x0 = x0 - 0.00001;
+        x1 = x1 + 0.00001;
+    }
+
     switch (direction_)
     {
     case Direction::X :

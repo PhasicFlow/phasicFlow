@@ -60,16 +60,26 @@ bool pFlow::MPISimulationDomain::createBoundaryDicts()
 			"in dictionary "<< boundaries.globalName()<<endl;
 			return false;
 		}
-
-		if( neighbors[i] == -1 )
+        if( initialThisDomainActive() )
         {
-            bDict.add("mirrorProcessorNo", processors::globalRank());
+            if( neighbors[i] == -1 )
+            {
+                bDict.add("mirrorProcessorNo", processors::globalRank());
+            }
+            else
+            {
+                bDict.add("mirrorProcessorNo", neighbors[i]);
+                bDict.addOrReplace("type", "processor");
+            }
+            warningInFunction<<"replace the method initialThisDomainActive()"<<endl;
         }
         else
         {
-            bDict.add("mirrorProcessorNo", neighbors[i]);
-            bDict.addOrReplace("type", "processor");
+            bDict.add("mirrorProcessorNo", processors::globalRank());
+            bDict.addOrReplace("type", "none");
+            warningInFunction<<"None: replace the method initialThisDomainActive()"<<endl;
         }
+		
 	}
 
     return true;
@@ -229,7 +239,12 @@ pFlow::uint32 pFlow::MPISimulationDomain::initialNumberInThis() const
 {
     uint32 numImport = domainPartition_->numberImportThisProc();
     uint32 numExport = domainPartition_->numberExportThisProc();
-    return initialNumPoints_+ numImport - numExport;;
+    return max(initialNumPoints_+ numImport - numExport, 0u);
+}
+
+bool pFlow::MPISimulationDomain::initialThisDomainActive() const
+{
+    return initialNumberInThis()>0;
 }
 
 bool pFlow::MPISimulationDomain::initialTransferBlockData
