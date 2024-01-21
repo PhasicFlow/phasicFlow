@@ -45,16 +45,16 @@ public:
 	};
 
 
-protected:
+private:
 
 	/// Name of the entity
 	word 	name_;
 
 	/// Read flag
-	readFlag  rFlag_ = READ_NEVER;
+	readFlag  rFlag_ = readFlag::READ_NEVER;
 
 	/// Write flag
-	writeFlag wFlag_ = WRITE_NEVER;
+	writeFlag wFlag_ = writeFlag::WRITE_NEVER;
 
 	/// Local path of entity
 	fileSystem localPath_ = "";
@@ -70,7 +70,7 @@ public:
 
 	
 	// constructors
-	objectFile
+	explicit objectFile
 	(
 		const word& name
 	);
@@ -80,8 +80,8 @@ public:
 	(
 		const word& name,
 		const fileSystem& 	localPath,
-		const readFlag&   	rf = READ_NEVER,
-		const writeFlag&  	wf = WRITE_NEVER,
+		const readFlag&   	rf = readFlag::READ_NEVER,
+		const writeFlag&  	wf = writeFlag::WRITE_NEVER,
 		bool  rwHeader = true
 	);
 
@@ -122,31 +122,31 @@ public:
 	inline
 	bool isReadAlways()const
 	{
-		return rFlag_ == READ_ALWAYS;
+		return rFlag_ == readFlag::READ_ALWAYS;
 	}
 
 	inline
 	bool isReadNever()const
 	{
-		return rFlag_ == READ_NEVER;
+		return rFlag_ == readFlag::READ_NEVER;
 	}
 
 	inline
 	bool isReadIfPresent()const
 	{
-		return rFlag_ == READ_IF_PRESENT;
+		return rFlag_ == readFlag::READ_IF_PRESENT;
 	}
 
 	inline
 	bool isWriteAlways()const
 	{
-		return wFlag_ == WRITE_ALWAYS;
+		return wFlag_ == writeFlag::WRITE_ALWAYS;
 	}
 
 	inline
 	bool isWriteNever()const
 	{
-		return wFlag_ == WRITE_NEVER;
+		return wFlag_ == writeFlag::WRITE_NEVER;
 	}
 
 	inline 

@@ -55,12 +55,6 @@ pFlow::Time::Time
 		geometryRepository_,
 		geometryFolder__,
 		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
 	)
 {
 	
@@ -90,12 +84,6 @@ pFlow::Time::Time(
 		geometryRepository_,
 		geometryFolder__,
 		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
 	)
 {
 	if(!readDictionary(setiingsDict))
@@ -107,6 +95,11 @@ pFlow::Time::Time(
 pFlow::fileSystem pFlow::Time::localPath()const
 {
     return fileSystem(timeName());
+}
+
+pFlow::fileSystem pFlow::Time::integrationFolder() const
+{
+	return integrationFolder__;
 }
 
 bool pFlow::Time::write

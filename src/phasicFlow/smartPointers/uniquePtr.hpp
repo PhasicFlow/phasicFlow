@@ -18,7 +18,6 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __uniquePtr_hpp__
 #define __uniquePtr_hpp__
 
@@ -47,7 +46,7 @@ class uniquePtr
 {
 public:
 
-	typedef std::unique_ptr<T,Deleter>  uniquePtrType;
+	using uniquePtrType = std::unique_ptr<T, Deleter>;
 
 	// using base constructors 
 	using uniquePtrType::unique_ptr;

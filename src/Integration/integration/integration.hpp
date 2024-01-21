@@ -23,13 +23,15 @@ Licence:
 
 
 #include "virtualConstructor.hpp"
-#include "Vectors.hpp"
-#include "pointStructure.hpp"
-#include "repository.hpp"
+#include "pointFields.hpp"
 
 
 namespace pFlow
 {
+
+// - Forward
+class repository;
+class pointStructure;
 
 /**
  * Base class for integrating the first order ODE (IVP) 
@@ -48,18 +50,18 @@ namespace pFlow
  */
 class integration
 {
-protected:
+private:
 
 	// - Protected data members 
 
 		/// The owner repository that all fields are storred in
 		repository& owner_;
 
-		/// The base name for integration 
-		const word baseName_;
-
 		/// A reference to pointStructure
 		const pointStructure& pStruct_;
+
+		/// The base name for integration 
+		const word baseName_;
 
 public:
 
@@ -72,9 +74,9 @@ public:
 		/// Construct from components
 		integration(
 			const word& baseName,
-			repository& owner,
-			const pointStructure& pStruct,
-			const word& method);
+			pointStructure& pStruct,
+			const word& method,
+			const realx3Field_D& initialValField);
 
 		/// Copy constructor 
 		integration(const integration&) = default;
@@ -88,22 +90,22 @@ public:
 		/// Move assignment
 		integration& operator = (integration&&) = default;
 
-		/// Polymorphic copy/cloning
-		virtual 
-		uniquePtr<integration> clone()const=0;
-
 		/// Destructor 
 		virtual ~integration()=default;
 
 		/// Add a virtual constructor 
-		create_vCtor(
+		create_vCtor
+		(
 			integration,
 			word,
-			(const word& baseName,
-			repository& owner,
-			const pointStructure& pStruct,
-			const word& method),
-			(baseName, owner, pStruct, method) );
+			(
+				const word& baseName,
+				pointStructure& pStruct,
+				const word& method,
+				const realx3Field_D& initialValField
+			),
+			(baseName, pStruct, method, initialValField)
+		);
 
 
 	// - Methods
@@ -129,13 +131,17 @@ public:
 			return owner_;
 		}
 
+		/// return integration method 
+		virtual 
+		word method()const = 0 ;
+
 		/// Prediction step in integration
 		virtual 
-		bool predict(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
+		bool predict(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
 
 		/// Correction/main integration step
 		virtual 
-		bool correct(real dt, realx3Vector_D& y, realx3Vector_D& dy) = 0;
+		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
 
 		/// Set the initial values for new indices 
 		virtual 
@@ -152,9 +158,9 @@ public:
 	static
 		uniquePtr<integration> create(
 			const word& baseName,
-			repository& owner,
-			const pointStructure& pStruct,
-			const word& method);
+			pointStructure& pStruct,
+			const word& method,
+			const realx3Field_D& initialValField);
 
 }; // integration
 

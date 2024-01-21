@@ -83,6 +83,12 @@ public:
 		
 		pointField(
 			const objectFile& objf,
+			repository* owner,
+			pointStructure& pStruct,
+			const T& defVal);
+		
+		pointField(
+			const objectFile& objf,
 			pointStructure& pStruct,
 			const T& defVal,
 			const T& val);

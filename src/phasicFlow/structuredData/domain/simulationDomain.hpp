@@ -97,6 +97,9 @@ public:
     virtual
     uint32 initialNumberInThis()const = 0;
 
+	virtual 
+	bool initialThisDomainActive()const = 0;
+
     virtual 
 	bool initialTransferBlockData(
 		span<char> src, 

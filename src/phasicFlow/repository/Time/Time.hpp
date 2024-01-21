@@ -28,7 +28,7 @@ Licence:
 
 #include "timeControl.hpp"
 #include "repository.hpp"
-
+#include "fileSystem.hpp"
 
 
 namespace pFlow
@@ -48,10 +48,6 @@ protected:
 
 	// - geometry folder/repository 
 	repository 		geometry_;
-
-	// - integration folder/repository 
-	repository 		integration_;
-
 
 	bool readDictionary(const dictionary& dict);
 
@@ -84,15 +80,7 @@ public:
 			return geometry_;
 		}
 
-		const repository& integration()const
-		{
-			return integration_;
-		}
-
-		repository& integration()
-		{
-			return integration_;
-		}
+		fileSystem integrationFolder()const;
 		
 		/// Write to the file with binary format?
 		bool outFileBinary()const override

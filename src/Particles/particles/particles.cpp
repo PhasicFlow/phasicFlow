@@ -24,135 +24,107 @@ Licence:
 
 pFlow::particles::particles
 (
-	systemControl& control,
-	const word& integrationMethod
+	systemControl& control
 )
 :
-	demParticles(control),
-	time_(control.time()),
-	integrationMethod_(integrationMethod),
-	/*dynPointStruct_(
-		time_.emplaceObject<dynamicPointStructure>(
-			objectFile(
-				pointStructureFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS			
-				),
-			control.time(),
-			integrationMethod
-			)
-		),*/
-	dynPointStruct_(
-		control.time(),
-		integrationMethod),
-	shapeName_(
-		control.time().emplaceObject<wordPointField>(
-			objectFile(
-				"shapeName",
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS,
-				false
-				),
-			pStruct(),
-			word("NO_NAME_SHAPE")
-			)
+	observer(),
+	demComponent("particles", control),
+	dynPointStruct_(control),
+	id_
+	(	
+		objectFile
+		(
+			"id",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
 		),
-	id_(
-		control.time().emplaceObject<int32PointField_HD>(
-			objectFile(
-				"id",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			static_cast<int32>(-1)
-			)
+		dynPointStruct_,
+		static_cast<uint32>(-1)
+	),
+	propertyId_
+	(
+		objectFile
+		(
+			"propertyId",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER
 		),
-	propertyId_(
-		control.time().emplaceObject<int8PointField_D>(
-			objectFile(
-				"propertyId",
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_NEVER
-				),
-			pStruct(),
-			static_cast<int8>(0)
-			)
+		dynPointStruct_,
+		static_cast<int8>(0)
+	),
+	diameter_
+	(
+		objectFile
+		(
+			"diameter",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_ALWAYS
 		),
-	diameter_(
-		control.time().emplaceObject<realPointField_D>(
-			objectFile(
-				"diameter",
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			static_cast<real>(0.00000000001)
-			)
+		dynPointStruct_,
+		0.00000000001
+	),
+	mass_
+	(
+		objectFile
+		(
+			"mass",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_ALWAYS
 		),
-	mass_(
-		control.time().emplaceObject<realPointField_D>(
-			objectFile(
-				"mass",
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			static_cast<real>(0.0000000001)
-			)
+		dynPointStruct_,
+		0.0000000001
+	),
+	accelertion_
+	(
+		objectFile
+		(
+			"accelertion",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
+			),
+		dynPointStruct_,
+		zero3
+	),
+	contactForce_
+	(
+		objectFile
+		(
+			"contactForce",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
 		),
-	accelertion_(
-		control.time().emplaceObject<realx3PointField_D>(
-			objectFile(
-				"accelertion",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
+		dynPointStruct_,
+		zero3
+	),
+	contactTorque_
+	(
+	
+		objectFile
+		(
+			"contactTorque",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
 		),
-	contactForce_(
-		control.time().emplaceObject<realx3PointField_D>(
-			objectFile(
-				"contactForce",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		),
-	contactTorque_(
-		control.time().emplaceObject<realx3PointField_D>(
-			objectFile(
-				"contactTorque",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		),
-	idHandler_(id_)
+		dynPointStruct_,
+		zero3
+	)
 {
 	
-	this->subscribe(pStruct());
+	WARNING<<"Subscribe particles"<<END_WARNING;
+	//this->subscribe(pStruct());
 
 }
 
 bool pFlow::particles::beforeIteration() 
 {
-	auto domain = this->control().domain();
+	/*auto domain = this->control().domain();
 
 	auto numMarked = dynPointStruct_.markDeleteOutOfBox(domain);
 	
@@ -174,12 +146,12 @@ bool pFlow::particles::beforeIteration()
 	}
 
 	this->zeroForce();
-	this->zeroTorque();
+	this->zeroTorque();*/
 
 	return true;
 }
 
-pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
+/*pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
 pFlow::particles::getFieldObjectList()const
 {
 	auto objListPtr = makeUnique<pFlow::List<pFlow::eventObserver*>>();
@@ -199,4 +171,4 @@ pFlow::particles::getFieldObjectList()const
 		static_cast<eventObserver*>(&shapeName_) );
 	
 	return objListPtr;
-}
+}*/

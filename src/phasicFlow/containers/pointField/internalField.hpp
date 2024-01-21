@@ -86,6 +86,21 @@ public:
 		return field_.hostVector();
 	}
 
+	const FieldType& field()const
+	{
+		return field_;
+	}
+
+	const pFlagTypeDevice& activePointsMaskDevice()const
+	{
+		return internalPoints_.activePointsMaskDevice();
+	}
+	
+	const pFlagTypeHost& activePointsMaskHost()const
+	{
+		return internalPoints_.activePointsMaskHost();
+	}
+
 	FieldTypeHost activeValuesHost()const;
 
 	inline

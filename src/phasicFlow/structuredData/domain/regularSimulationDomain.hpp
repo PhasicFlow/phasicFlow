@@ -39,6 +39,11 @@ public:
 
     uint32 initialNumberInThis()const override;
 
+	bool initialThisDomainActive()const override
+	{
+		return true;
+	}
+
 	/*bool updateDomains(
 		span<realx3> pointPos,
         pFlagTypeHost flags) override;*/

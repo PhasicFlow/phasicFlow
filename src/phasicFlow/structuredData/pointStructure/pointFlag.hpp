@@ -172,7 +172,7 @@ public:
 
 
 	INLINE_FUNCTION_HD
-	bool operator()(uint32 i)
+	bool operator()(uint32 i)const
 	{
 		return isActive(i);
 	}

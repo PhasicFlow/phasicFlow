@@ -10,7 +10,7 @@ pFlow::fileDictionary::fileDictionary
     IOobject
     (
         of, 
-        IOPattern::IOPattern::AllProcessorsSimilar, 
+        IOPattern::AllProcessorsSimilar, 
         owner
     ),
     dictionary

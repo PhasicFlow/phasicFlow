@@ -72,21 +72,10 @@ int main( int argc, char* argv[] )
 // this should be palced in each main 
 #include "initialize_Control.hpp"
 
-	auto objCPDict = IOobject::make<fileDictionary>
-	(
-		objectFile
-		(
-			"particlesDict",
-			Control.settings().path(),
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_ALWAYS
-		),
-		"particlesDict"
-	);
+	fileDictionary cpDict("particlesDict", Control.settings().path());
+	
 
-	auto& cpDict = objCPDict().getObject<fileDictionary>();
-
-	pointStructure* pStructPtr = nullptr;
+	uniquePtr<pointStructure> pStructPtr = nullptr;
 
 
 	if(!setOnly)
@@ -100,24 +89,11 @@ int main( int argc, char* argv[] )
 
 		auto finalPos = pointPosition().getFinalPosition();
 
-		
-		auto& pStruct = Control.time().emplaceObject<pointStructure>
-		(
-			objectFile
-			(
-				pointStructureFile__,
-				Control.time().path(),
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS			
-			),
-			Control,
-            finalPos
-		);
+		pStructPtr = makeUnique<pointStructure>(Control, finalPos);
 
-		pStructPtr = &pStruct;
 
-		REPORT(1)<< "Created pStruct with "<< pStruct.size() << " points and capacity "<<
-		pStruct.capacity()<<" . . ."<< END_REPORT;
+		REPORT(1)<< "Created pStruct with "<< pStructPtr().size() << " points and capacity "<<
+		pStructPtr().capacity()<<" . . ."<< END_REPORT;
 
 		//REPORT(1)<< "Writing pStruct to " << Control.time().path()+ pointStructureFile__<< END_REPORT<<endl<<endl;
         
@@ -130,20 +106,8 @@ int main( int argc, char* argv[] )
 	}
     else
 	{
-
-		auto& pStruct = Control.time().emplaceObject<pointStructure>
-		(
-			objectFile
-			(
-				pointStructureFile__,
-				Control.time().path(),
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS			
-			),
-            Control
-		);
-
-		pStructPtr = &pStruct;
+		// read the content of pStruct from 0/pStructure
+		pStructPtr = makeUnique<pointStructure>(Control);
 
 	}
 

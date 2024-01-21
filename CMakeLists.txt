@@ -73,7 +73,7 @@ add_subdirectory(src)
 
 #add_subdirectory(solvers)
 
-#add_subdirectory(utilities)
+add_subdirectory(utilities)
 
 #add_subdirectory(DEMSystems)
 add_subdirectory(testIO)

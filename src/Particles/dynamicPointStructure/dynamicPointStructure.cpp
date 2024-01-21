@@ -19,57 +19,40 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "dynamicPointStructure.hpp"
-
+#include "systemControl.hpp"
 
 pFlow::dynamicPointStructure::dynamicPointStructure
 (
-	Time& time,
-	const word& integrationMethod
+	systemControl& control
 )
 :
-	time_(time),
-	integrationMethod_(integrationMethod),
-	pStruct_(
-		time_.emplaceObject<pointStructure>(
-			objectFile(
-				pointStructureFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS			
-				)
-			)
-		),
-	velocity_(
-		time_.emplaceObject<realx3PointField_D>(
-			objectFile(
-				"velocity",
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		)
-
+	pointStructure(control),
+	velocity_
+	(
+		objectFile(
+			"velocity",
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
+			),
+		*this,
+		zero3
+	),
+	integrationMethod_
+	(
+		control.settingsDict().getVal<word>("integrationMethod")
+	)
 {
-
-	this->subscribe(pStruct());
-
 	REPORT(1)<< "Creating integration method "<<
-		greenText(integrationMethod_)<<" for dynamicPointStructure."<<endREPORT;
+		Green_Text(integrationMethod_)<<" for dynamicPointStructure."<<END_REPORT;
 
-	integrationPos_ = integration::create(
+	integrationPos_ = integration::create
+	(
 		"pStructPosition",
-		time_.integration(),
-		pStruct(),
-		integrationMethod_);
-	
-	integrationVel_ = integration::create(
-		"pStructVelocity",
-		time_.integration(),
-		pStruct(),
-		integrationMethod_);
+		*this,
+		integrationMethod_,
+		pointPosition()
+	);
 
 	if( !integrationPos_ )
 	{
@@ -77,6 +60,14 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		"  error in creating integration object for dynamicPointStructure (position). \n";
 		fatalExit;
 	}
+	
+	integrationVel_ = integration::create
+	(
+		"pStructVelocity",
+		*this,
+		integrationMethod_,
+		velocity_.field()
+	);
 
 	if( !integrationVel_ )
 	{
@@ -85,8 +76,10 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		fatalExit;
 	}
 
+
+	WARNING << "Initialization of integrationPos_ and integrationVel_ should be doen!"<<END_WARNING;
 	
-	if(!integrationPos_->needSetInitialVals()) return;
+	/*if(!integrationPos_->needSetInitialVals()) return;
 
 	
 		
@@ -107,14 +100,13 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		vel.push_back( hVel[index(i)]);
 	}
 
-	//output<< "pos "<< pos<<endl;
-	//output<< "vel "<< vel<<endl;
 
 	REPORT(2)<< "Initializing the required vectors for position integratoin "<<endREPORT;
 	integrationPos_->setInitialVals(indexHD, pos);
 
 	REPORT(2)<< "Initializing the required vectors for velocity integratoin\n "<<endREPORT;
-	integrationVel_->setInitialVals(indexHD, vel);
+	integrationVel_->setInitialVals(indexHD, vel);*/
+
 }
 
 bool pFlow::dynamicPointStructure::predict
@@ -123,10 +115,10 @@ bool pFlow::dynamicPointStructure::predict
 	realx3PointField_D& acceleration
 )
 {
-	auto& pos = pStruct().pointPosition();
+	//auto& pos = pStruct().pointPosition();
 
-	if(!integrationPos_().predict(dt, pos.VectorField(), velocity_.VectorField() ))return false;
-	if(!integrationVel_().predict(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
+	//if(!integrationPos_().predict(dt, pos.VectorField(), velocity_.VectorField() ))return false;
+	//if(!integrationVel_().predict(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
 
 	return true;
 }
@@ -137,11 +129,11 @@ bool pFlow::dynamicPointStructure::correct
 	realx3PointField_D& acceleration
 )
 {
-	auto& pos = pStruct().pointPosition();
+	//auto& pos = pStruct().pointPosition();
 	
-	if(!integrationPos_().correct(dt, pos.VectorField(), velocity_.VectorField() ))return false;
+	//if(!integrationPos_().correct(dt, pos.VectorField(), velocity_.VectorField() ))return false;
 	
-	if(!integrationVel_().correct(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
+	//if(!integrationVel_().correct(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
 
 	return true;	
 }
@@ -178,7 +170,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::dynamicPointStructure::inser
 }*/
 
 
-bool pFlow::dynamicPointStructure::update(
+/*bool pFlow::dynamicPointStructure::update(
 	const eventMessage& msg) 
 {
 	if( msg.isInsert())
@@ -215,4 +207,4 @@ bool pFlow::dynamicPointStructure::update(
 	}
 
 	return true;
-}
+}*/

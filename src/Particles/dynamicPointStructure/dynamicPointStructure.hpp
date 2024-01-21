@@ -30,97 +30,64 @@ Licence:
 namespace pFlow
 {
 
+class systemControl;
+
 class dynamicPointStructure
 :
-	//public pointStructure
-public eventObserver
+	public pointStructure
 {
-protected:
+private:
 
-	Time& time_;
+	realx3PointField_D  	velocity_;
 
-	word 			integrationMethod_;
+	uniquePtr<integration>  integrationPos_ = nullptr;
 
-	pointStructure& 	pStruct_;
+	uniquePtr<integration>  integrationVel_ = nullptr;
 
-	realx3PointField_D&  	velocity_;
-
-	uniquePtr<integration>  integrationPos_;
-
-	uniquePtr<integration>  integrationVel_;
+	/// @brief integration method for velocity and position
+	word 					integrationMethod_;
 
 public:
 
 	TypeInfo("dynamicPointStructure");
 
-	dynamicPointStructure(Time& time, const word& integrationMethod);
+	dynamicPointStructure(systemControl& control);
 
-	dynamicPointStructure(const dynamicPointStructure& ps) = default;
-
+	dynamicPointStructure(const dynamicPointStructure& ps) = delete;
 		
-		// - no move construct 
+	// - no move construct 
 	dynamicPointStructure(dynamicPointStructure&&) = delete;
 
-	// - copy assignment 
-	//
-	//   should be changed, may causs undefined behavior 
-	//////////////////////////////////////////////////////////////
-	dynamicPointStructure& operator=(const dynamicPointStructure&) = default;
+	/// 
+	dynamicPointStructure& operator=(const dynamicPointStructure&) = delete;
 
 	// - no move assignment 
 	dynamicPointStructure& operator=(dynamicPointStructure&&) = delete;
 
 	// - destructor 
-	virtual ~dynamicPointStructure() = default;
+	~dynamicPointStructure() override = default;
 
 
-	inline pointStructure& pStruct() 
-	{
-		return pStruct_;
-	}
-
-	inline const pointStructure& pStruct() const
-	{
-		return pStruct_;
-	}
-
-	inline const realx3PointField_D& velocity()const
+	inline 
+	const realx3PointField_D& velocity()const
 	{
 		return velocity_;
 	}
 
-	inline auto velocityHostAll()
+	inline 
+	realx3PointField_D& velocity()
+	{
+		return velocity_;
+	}
+
+	/*inline auto velocityHostAll()
 	{
 		return velocity_.hostVectorAll();
-	}
-
-	inline auto pointPositionHostAll()
-	{
-		return pStruct_.pointPositionHostAll();
-	}
-
-	auto markDeleteOutOfBox(const box& domain)
-	{
-		return pStruct_.markDeleteOutOfBox(domain);
-	}
+	}*/
 
 	bool predict(real dt, realx3PointField_D& acceleration);
 
 	bool correct(real dt, realx3PointField_D& acceleration);
-
-
-	// - update data structure by inserting/setting new points 
-	//   Notifies all the fields in the registered list of data structure
-	//   and exclude the fields that re in the exclusionList
-	//   retrun nullptr if it fails 
-	/*FUNCTION_H
-	virtual uniquePtr<int32IndexContainer> insertPoints(
-		const realx3Vector& pos,
-		const List<eventObserver*>& exclusionList={nullptr}
-	)override;*/
-
-	bool update(const eventMessage& msg) override;
-	
 
 };
 

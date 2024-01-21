@@ -18,47 +18,41 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "integration.hpp"
-#include "pointStructure.hpp"
-#include "repository.hpp"
+#include "boundaryNone.hpp"
 
-pFlow::integration::integration
+pFlow::boundaryNone::boundaryNone
 (
-	const word& baseName,
-	pointStructure& pStruct,
-	const word&,
-	const realx3Field_D&
+	const dictionary& dict,
+	const plane&      bplane,
+	internalPoints&   internal
 )
 :
-	owner_(*pStruct.owner()),
-	pStruct_(pStruct),
-	baseName_(baseName)	
+	boundaryBase(dict, bplane, internal)
 {}
 
-
-pFlow::uniquePtr<pFlow::integration> 
-	pFlow::integration::create
+bool pFlow::boundaryNone::beforeIteratoin
 (
-		const word& baseName,
-		pointStructure& pStruct,
-		const word& method,
-		const realx3Field_D& initialValField
+	uint32 iterNum, 
+	real t
 )
 {
-	if( wordvCtorSelector_.search(method) )
-	{
-		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< method << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			wordvCtorSelector_
-		);
-		fatalExit;
-	}
-	return nullptr;
+	return true;
+}
+
+bool pFlow::boundaryNone::iterate
+(
+	uint32 iterNum, 
+	real t
+)
+{
+	return true;
+}
+
+bool pFlow::boundaryNone::afterIteration
+(
+	uint32 iterNum, 
+	real t
+)
+{
+	return true;
 }

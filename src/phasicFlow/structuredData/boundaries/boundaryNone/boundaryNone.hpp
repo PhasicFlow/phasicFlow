@@ -18,47 +18,47 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "integration.hpp"
-#include "pointStructure.hpp"
-#include "repository.hpp"
-
-pFlow::integration::integration
-(
-	const word& baseName,
-	pointStructure& pStruct,
-	const word&,
-	const realx3Field_D&
-)
-:
-	owner_(*pStruct.owner()),
-	pStruct_(pStruct),
-	baseName_(baseName)	
-{}
+#ifndef __boundaryNone_hpp__
+#define __boundaryNone_hpp__
 
 
-pFlow::uniquePtr<pFlow::integration> 
-	pFlow::integration::create
-(
-		const word& baseName,
-		pointStructure& pStruct,
-		const word& method,
-		const realx3Field_D& initialValField
-)
+#include "boundaryBase.hpp"
+
+namespace pFlow
 {
-	if( wordvCtorSelector_.search(method) )
-	{
-		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField);
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< method << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			wordvCtorSelector_
-		);
-		fatalExit;
-	}
-	return nullptr;
+
+class boundaryNone
+:
+ 	public boundaryBase
+{
+
+public:
+
+	TypeInfo("boundary<none>");
+
+	boundaryNone(
+		const dictionary& 	dict,
+		const plane&    	bplane,
+		internalPoints& 	internal);
+
+	~boundaryNone() override= default;
+	
+	add_vCtor
+	(
+		boundaryBase,
+		boundaryNone,
+		dictionary
+	);
+
+	bool beforeIteratoin(uint32 iterNum, real t) override;
+
+	bool iterate(uint32 iterNum, real t) override;
+
+	bool afterIteration(uint32 iterNum, real t) override;
+
+
+};
+
 }
+
+#endif

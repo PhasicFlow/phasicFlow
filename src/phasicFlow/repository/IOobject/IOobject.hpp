@@ -36,7 +36,7 @@ class IOobject
 :
 	public	IOfileHeader
 {
-protected:
+private:
 
     IOPattern       ioPattern_;
 
@@ -57,7 +57,7 @@ public:
             const IOPattern&    iop, 
             repository*   owner);
         
-        ~IOobject();
+        ~IOobject() override;
 
 		// - copy construct 
 		IOobject(const IOobject& src)=delete;	

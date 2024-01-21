@@ -322,7 +322,7 @@ public:
 	{
 		return readStdVector(is, vectorField());
 	}
-	bool write(iOstream& os)
+	bool write(iOstream& os)const
 	{
 		return writeStdVector(os, vectorField());
 	}

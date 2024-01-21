@@ -38,7 +38,6 @@ bin/**
 lib/**
 test*/**
 **/**notnow
-**/MPIParallel*/**
 doc/code-documentation/
 doc/DTAGS
 # all possible time folders

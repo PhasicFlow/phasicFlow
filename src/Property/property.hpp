@@ -22,7 +22,7 @@ Licence:
 
 #include "Vectors.hpp"
 #include "hashMap.hpp"
-#include "fileSystem.hpp"
+#include "fileDictionary.hpp"
 #include "iFstream.hpp"
 
 namespace pFlow
@@ -38,13 +38,12 @@ class dictionary;
  * used in the simulation: for walls and particles.  
  */
 class property
+:
+	public fileDictionary
 {
-protected:
+private:
 
 	// - protected data members
-
-		/// pointer to the dictionary, if it is constructed from a file/dictionary
-		uniquePtr<dictionary> dict_ = nullptr;
 
 		/// list of name of materials
 		wordVector 		materials_;
@@ -62,10 +61,10 @@ protected:
 	// - protected member functions
 
 		/// read from dict
-		bool readDictionary(const dictionary& dict);
+		bool readDictionary();
 
 		/// write to dict
-		bool writeDictionary(dictionary& dict)const;
+		bool writeDictionary();
 
 		/// creates a mapp
 		bool makeNameIndex();
@@ -73,22 +72,19 @@ protected:
 public:
 
 	/// Type info
-	TypeInfoNV("property");
+	TypeInfo("property");
 
-	
 	// - Constructors 
 
-		/// Emptry constructor, used for reading from a file 
-		property(){}
-
-		/// Constructe from materials and densities 
-		property(const wordVector& materials, const realVector& densities);
-
-		/// Construct from file
-		property(const fileSystem& file);	
-
-		/// Construct from dictionary dict
-		property(const dictionary& dict);
+		explicit 
+		property(
+			const word& fileName, 
+			repository* owner=nullptr);
+		
+		property(const word& name, 
+				const wordVector& materials,
+				const realVector& densities,
+				repository* owner=nullptr);
 
 		/// Default copy
 		property(const property& ) = default;
@@ -103,16 +99,10 @@ public:
 		property& operator= (property&&) = default;
 
 		/// Default destructor 
-		~property() = default;
+		~property() override = default;
 
 	
 	// - Methods 
-
-		/// Return dictionary
-		inline const auto& dict()const
-		{
-			return dict_();
-		}
 
 		/// Return number of materials 
 		inline auto numMaterials()const
@@ -190,20 +180,6 @@ public:
 			}	
 		}
 		
-	//// - IO operatoins
-
-		/// Read from dictionary 
-		bool read(const dictionary& dict)
-		{
-			return readDictionary(dict);
-		}
-
-		/// Write to dictionary 
-		bool write(dictionary& dict)const
-		{
-			return writeDictionary(dict);
-		}
-
 };
 
 }

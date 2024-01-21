@@ -36,7 +36,7 @@ pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 	if(osPtr && owner())
 	{
 	 	auto outPrecision = owner()->outFilePrecision();
-	 	osPtr->precision(outPrecision);
+	 	osPtr->precision(static_cast<int>(outPrecision));
 	}
 
 	return osPtr;
@@ -62,7 +62,7 @@ pFlow::fileSystem pFlow::IOfileHeader::path() const
 	{
 		f = localPath();
 	}
-	f += name_;
+	f += name();
 	return f;
 }
 
@@ -146,11 +146,8 @@ bool pFlow::IOfileHeader::writeHeader
 ) const
 {
 
-	if(!forceWrite)
-	{
-		if(!writeHeader()) return true;
-	} 
-
+	if(!forceWrite && !writeHeader()) return true;
+	
 	writeBanner(os);
 
 	os.writeWordEntry("objectType", typeName );

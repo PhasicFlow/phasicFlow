@@ -58,7 +58,7 @@ public:
 									// standard input and output streams 
 	};
 
-protected:
+private:
 
 	IOType 		    ioType_;
 
@@ -72,11 +72,15 @@ protected:
 
 public:
 
-	IOPattern( IOType iotype);
+	IOPattern( IOPattern::IOType iotype);
 	
 	IOPattern(const IOPattern&)=default;
 
+	IOPattern(IOPattern&&) = default;
+
 	IOPattern& operator=(const IOPattern&)=default;
+
+	IOPattern& operator=(IOPattern&&)=default;
 
 	~IOPattern() = default;
 
@@ -122,6 +126,13 @@ public:
         if(isMasterProcessorOnly() && !isMaster())return false;
         return true;
     }
+
+	inline 
+	bool thisCallWrite()const
+	{
+		if(isMasterProcessorOnly()&& !isMaster())return false;
+		return true;
+	}
 
 	inline
 	bool thisProcReadData()const

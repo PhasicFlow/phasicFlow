@@ -19,6 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "positionParticles.hpp"
+#include "vocabs.hpp"
 #include "box.hpp"
 #include "cylinder.hpp"
 #include "sphere.hpp"
@@ -101,7 +102,18 @@ pFlow::positionParticles::positionParticles
 	}
 	else
 	{
-		region_ = makeUnique<region<box>>( control.domainDict().subDict("globalBox"));
+		fileDictionary domainDict
+		(
+			objectFile
+			{
+				domainFile__,
+				"",
+				objectFile::READ_ALWAYS,
+				objectFile::WRITE_NEVER
+			},
+			&control.settings()
+		);
+		region_ = makeUnique<region<box>>( domainDict.subDict("globalBox"));
 	}
 	
 }

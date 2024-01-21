@@ -41,9 +41,32 @@ pFlow::pointField<T, MemorySpace>::pointField
 	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
-{
-	
-}
+{}
+
+template<class T, class MemorySpace>
+pFlow::pointField<T, MemorySpace>::pointField
+(
+    const objectFile& objf,
+    repository* owner,
+    pointStructure& pStruct,
+    const T& defVal
+)
+:
+	IOobject
+	(
+		objf,
+		pStruct.ioPattern(),
+		owner
+	),
+	InternalFieldType
+	(
+		objf.name(),
+		pStruct
+	),
+	boundaryFieldList_(pStruct.boundaries(), *this),
+	pStruct_(pStruct),
+	defaultValue_(defVal)
+{}
 
 template<class T, class MemorySpace>
 pFlow::pointField<T, MemorySpace>::pointField
