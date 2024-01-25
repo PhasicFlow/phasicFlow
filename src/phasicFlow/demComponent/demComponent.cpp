@@ -24,10 +24,10 @@ Licence:
 
 pFlow::demComponent::demComponent(const word& name, systemControl& control)
 :
-	componentName_(name),
 	control_(control),
 	time_(control.time()),
-	timers_(name, &control.timers())
+	timers_(name, &control.timers()),
+  componentName_(name)
 {}
 
 pFlow::real pFlow::demComponent::dt()const
@@ -37,5 +37,10 @@ pFlow::real pFlow::demComponent::dt()const
 
 pFlow::real pFlow::demComponent::currentTime()const
 {
-    return time_.currentTime();
+   return time_.currentTime();
+}
+
+pFlow::uint32 pFlow::demComponent::currentIter() const
+{
+  return time_.currentIter();
 }

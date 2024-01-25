@@ -39,12 +39,12 @@ protected:
 	const subscriber* 	subscriber_ = nullptr;
 	
 	/// list of events in the message 
-	const message 		message_;
+	message 			message_;
 
 
 public:
 
-	observer();
+	observer(message msg);
 
 	observer(
 		const subscriber* subscrbr, 
@@ -53,11 +53,19 @@ public:
 	virtual 
 	~observer();
 
+	void subscribe(
+		const subscriber* subscrbr, 
+		message msg);
+
 	inline 
 	bool subscribed()const 
 	{
 		return subscriber_!=nullptr;
 	}
+
+	void addToSubscriber(
+		const subscriber* subscrbr, 
+		message msg);
 
 	bool addToSubscriber(const subscriber& subscriber);
 	
@@ -72,7 +80,12 @@ public:
 		return message::numEvents();
 	} 
 
-	virtual bool hearChanges(const message& msg, const anyList& varList)=0;
+	virtual bool hearChanges(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+		const anyList& varList)=0;
 };
 
 } // pFlow

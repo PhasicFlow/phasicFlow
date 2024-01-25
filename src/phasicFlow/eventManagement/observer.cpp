@@ -21,8 +21,9 @@ Licence:
 #include "observer.hpp"
 #include "subscriber.hpp" 
 
-pFlow::observer::observer():
-	subscriber_(nullptr)
+pFlow::observer::observer(message msg):
+	subscriber_(nullptr),
+	message_(msg)
 {}
 
 pFlow::observer::observer
@@ -30,30 +31,47 @@ pFlow::observer::observer
 	const subscriber* subscrbr,
 	message msg
 )
-:
-	subscriber_(subscrbr),
-	message_(msg)
+{
+	addToSubscriber(subscrbr, msg);
+}
+
+pFlow::observer::~observer()
 {
 	if(subscriber_)
+		subscriber_->unsubscribe(this);
+	invalidateSubscriber();
+}
+
+void pFlow::observer::addToSubscriber
+(
+	const subscriber* subscrbr, 
+	message msg
+)
+{
+	if(subscriber_)
+		subscriber_->unsubscribe(this);
+	invalidateSubscriber();
+
+	subscriber_ = subscrbr;
+	message_ = msg;
+
+	if(subscriber_)
 	{
-		if(!subscriber_->subscribe(msg, this))
+		if(!subscriber_->subscribe(message_, this))
 		{
 			fatalErrorInFunction<<
 			"error in subscribing an observer"<<endl;
 			fatalExit;
 		}
-	}
-}
-
-pFlow::observer::~observer()
-{
-	if( subscriber_)
-		subscriber_->unsubscribe(this);
-	invalidateSubscriber();
+	}	
 }
 
 bool pFlow::observer::addToSubscriber(const subscriber& subscrbr)
 {
+	if(subscriber_)
+		subscriber_->unsubscribe(this);
+	invalidateSubscriber();
+
 	subscriber_ = &subscrbr;
 	return subscriber_->subscribe(message_, this);
 }

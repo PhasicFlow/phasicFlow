@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __uniformRandomInt32_hpp__
-#define __uniformRandomInt32_hpp__
+#ifndef __uniformRandomUint32_hpp__
+#define __uniformRandomUint32_hpp__
 
 #include <random>
 
@@ -29,35 +29,35 @@ Licence:
 namespace pFlow
 {
 
-class uniformRandomInt32
+class uniformRandomUint32
 {
 protected:
 
  	std::mt19937_64 engineGen_;
 
- 	std::uniform_int_distribution<int32> distrbution_;
+ 	std::uniform_int_distribution<uint32> distrbution_;
 
 public:
 
 	// type info
 	TypeInfoNV("uniform");
 
-	explicit uniformRandomInt32(int32 min, int32 max)
+	explicit uniformRandomUint32(uint32 min, uint32 max)
 	:
 		engineGen_(std::random_device()()),
 		distrbution_(min, max)
 	{}
 
-	~uniformRandomInt32()= default;
+	~uniformRandomUint32()= default;
 
-	inline real  randomNumber() 
+	inline uint32  randomNumber() 
 	{
 		return  distrbution_(engineGen_);
 	}
 	
-	inline int32x3 randomNumber3()
+	inline triple<uint32> randomNumber3()
 	{
-		return int32x3
+		return triple<uint32>
 		(
 			randomNumber(),
 			randomNumber(),
@@ -65,9 +65,9 @@ public:
 		);
 	}	
 
-	inline realx3 operator()()
+	inline triple<uint32> operator()()
 	{
-		return randomNumber();
+		return randomNumber3();
 	}
 
 	

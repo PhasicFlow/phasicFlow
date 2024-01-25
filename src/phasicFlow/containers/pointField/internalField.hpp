@@ -139,7 +139,26 @@ public:
 		return internalPoints_.isAllActive();
 	}
 
-	bool hearChanges(const message& msg, const anyList& varList) override
+	inline 
+	void fillInternal(const T& val)
+	{
+		field_.fillField(activeRange(), val);
+	}
+
+	inline 
+	bool insertSetElement(uint32IndexContainer indices, const T& val)
+	{
+		return field_.insertSetElement(indices, val);
+	}
+
+	bool hearChanges
+	(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+		const anyList& varList
+	) override
 	{
 		notImplementedFunction;
 		return false;
@@ -171,5 +190,6 @@ iOstream& operator<<
 } // pFlow
 
 #include "internalField.cpp"
+#include "internalFieldAlgorithms.hpp"
 
 #endif // __internalField_hpp__

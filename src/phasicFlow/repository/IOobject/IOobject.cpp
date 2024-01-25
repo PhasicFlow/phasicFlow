@@ -62,6 +62,21 @@ pFlow::repository* pFlow::IOobject::releaseOwner
     return old;
 }
 
+bool pFlow::IOobject::isIncluded(const word& objName)const 
+{
+    if(owner_)
+        return owner_->isIncluded(objName);
+    return false;
+}
+
+
+bool pFlow::IOobject::isExcluded(const word& objName)const 
+{
+    if(owner_)
+        return owner_->isExcluded(objName);
+    return false;
+}
+
 bool pFlow::IOobject::readObject(bool rdHdr)
 {
     if(!implyRead())return true;

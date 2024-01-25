@@ -81,6 +81,18 @@ public:
     {
         return nullptr;
     }
+
+	virtual
+	bool isIncluded(const word& objName)const
+	{
+		return false;
+	}
+
+	virtual
+	bool isExcluded(const word& objName)const
+	{
+		return false;
+	}
 	
 	// - path to file name 
 	fileSystem path() const;

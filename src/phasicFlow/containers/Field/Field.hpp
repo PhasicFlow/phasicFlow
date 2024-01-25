@@ -158,20 +158,6 @@ public:
 		/// Move assignment 
 		FieldType& operator = (FieldType&&) = default;
 
-		/// clone as a uniquePtr
-		INLINE_FUNCTION_H
-		uniquePtr<FieldType> clone() const
-		{
-			return makeUnique<FieldType>(*this);
-		}
-
-		/// clone as a raw pointer 
-		INLINE_FUNCTION_H
-		FieldType* clonePtr()const
-		{
-			return new FieldType(*this);
-		}
-
 	//// - Methods
 
 		/// return field key
@@ -184,7 +170,13 @@ public:
 		{
 			return VectorType::name();
 		}
-	
+
+
+		void fillField(rangeU32 span, const T& val)
+		{
+			this->fill(span, val);
+		}
+		
 	//// - IO operations 
 		
 		bool read(iIstream& is);

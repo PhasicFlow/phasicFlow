@@ -63,6 +63,9 @@ public:
 
 	bool hearChanges
 	(
+		real t,
+		real dt,
+		uint32 iter,
 		const message& msg, 
     	const anyList& varList
 	) override

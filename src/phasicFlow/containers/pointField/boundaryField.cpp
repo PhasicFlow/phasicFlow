@@ -25,7 +25,7 @@ pFlow::boundaryField<T, MemorySpace>::boundaryField
 	InternalFieldType& internal
 )
 :
-	observer(),
+	observer(&boundary, defaultMessage_),
 	boundary_(boundary),
 	internal_(internal)
 {}

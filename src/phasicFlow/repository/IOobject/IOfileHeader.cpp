@@ -116,6 +116,8 @@ bool pFlow::IOfileHeader::implyRead() const
 
 bool pFlow::IOfileHeader::implyWrite() const
 {
+	if( isExcluded( name() ) ) return false;
+	if( isIncluded( name() ) ) return true;
 	return isWriteAlways();
 }
 

@@ -21,31 +21,31 @@ Licence:
 
 #include "selectRandom.hpp"
 #include "dictionary.hpp"
-#include "uniformRandomInt32.hpp"
+#include "uniformRandomUint32.hpp"
 #include "Set.hpp"
 
 
 bool pFlow::selectRandom::selectAllPointsInRange()
 {
 	// to reduct allocations
-	int32 maxNum = number_+1;
+	uint32 maxNum = number_+1;
 	
 	selectedPoints_.reserve	(maxNum);
 
 	selectedPoints_.clear();
 	
-	uniformRandomInt32 intRand (begin_, end_);
+	uniformRandomUint32 intRand (begin_, end_);
 
 
-	int32 n = 0;
-	int32 iter = 0;
+	uint32 n = 0;
+	uint32 iter = 0;
 	bool finished = false;
 
-	Set<int32> selctedIndices;
+	Set<uint32> selctedIndices;
 
 	while( iter < number_*100)
 	{
-		int32 newInd = intRand.randomNumber();
+		uint32 newInd = intRand.randomNumber();
 
 		if( auto [it, inserted] = selctedIndices.insert(newInd); inserted )
 		{
@@ -91,7 +91,7 @@ pFlow::selectRandom::selectRandom
 	),
 	begin_
 	(
-		dict.subDict("selectRandomInfo").getVal<int32>("begin")
+		dict.subDict("selectRandomInfo").getVal<uint32>("begin")
 	),
 	end_
 	(
@@ -102,9 +102,9 @@ pFlow::selectRandom::selectRandom
 		dict.subDict("selectRandomInfo").getValOrSet("number", 1)
 	)
 {
-	begin_ 	= max(begin_,1);
-	end_ 	= min(end_, static_cast<int32>(pStruct.size()));
-	number_ = max(number_,0);
+	begin_ 	= max(begin_,1u);
+	end_ 	= min(end_, static_cast<uint32>(pStruct.size()));
+	number_ = max(number_,0u);
 	if(end_-begin_ < number_)
 	{
 

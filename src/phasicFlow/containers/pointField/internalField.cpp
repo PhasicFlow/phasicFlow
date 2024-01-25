@@ -64,7 +64,7 @@ pFlow::internalField<T, MemorySpace>::internalField
 	),
 	internalPoints_(internal)
 {
-	field_.fill(val);
+	fillInternal(val);
 } 
 
 

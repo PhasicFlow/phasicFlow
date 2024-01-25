@@ -49,13 +49,10 @@ using uint32PointField_D 		= pointField_D<uint32>;
 using uint32PointField_H 		= pointField_H<uint32>;
 
 using int64PointField_D 		= pointField_D<int64>;
-using int63PointField_H 		= pointField_H<int64>;
+using int64PointField_H 		= pointField_H<int64>;
 
 using uint64PointField_D 		= pointField_D<uint64>;
 using uint64PointField_H 		= pointField_H<uint64>;
-
-using int32PointField_D 		= pointField_D<int32>;
-using int32PointField_H 		= pointField_H<int32>;
 
 using realPointField_D 		= pointField_D<real>;
 using realPointField_H 		= pointField_H<real>;
@@ -66,9 +63,7 @@ using realx3PointField_H 		= pointField_H<realx3>;
 using realx4PointField_D 		= pointField_D<realx4>;
 using realx4PointField_H 		= pointField_H<realx4>;
 
-
-
-
+using wordPointField_H      = pointField_H<word>;
 
 }
 

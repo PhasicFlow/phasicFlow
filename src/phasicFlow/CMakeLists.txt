@@ -56,15 +56,11 @@ containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
 containers/pointField/pointFields.cpp
 
-#setFieldList/setFieldList.cpp
-#setFieldList/setFieldEntry.cpp
+setFieldList/setFieldList.cpp
+setFieldList/setFieldEntry.cpp
 
 Timer/Timer.cpp
 Timer/Timers.cpp
-
-
-
-
 
 
 
@@ -81,6 +77,10 @@ structuredData/boundaries/boundaryBase/boundaryBase.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
 structuredData/boundaries/boundaryNone/boundaryNone.cpp
 structuredData/pointStructure/boundaryList.cpp
+structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
+structuredData/pointStructure/selectors/selectBox/selectBox.cpp
+structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
+structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
 
 commandLine/commandLine.cpp
 

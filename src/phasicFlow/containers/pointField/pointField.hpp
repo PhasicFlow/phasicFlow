@@ -93,76 +93,25 @@ public:
 			const T& defVal,
 			const T& val);
 		
+		
+
+	//// - Methods
+	
 		const auto& internal()const
 		{
 			return static_cast<const InternalFieldType&>(*this);
 		}
-
-		// - construct from iIOEntity, pointStructure and a value
-		/*pointField( const pointStructure& pStruct, const T& val, const T& defVal, bool subscribe = true);
-
-		// - construct from another pointField
-		//   subscribe to events if true
-		pointField( const pointField& src, bool subscribe);
-
-
-		// - copy construct 
-		pointField(const pointField& src);
-
-		// - no move construct
-		pointField(pointField&& src) = delete;
-
-
-		// assignment, only assign the VectorField and preserve other parts of this 
-		pointField& operator = (const pointField& rhs);
-
-		// no move assignment 
-		pointField& operator = (pointField&&) = delete;		
-
-
-		inline uniquePtr<pointFieldType> clone() const
-		{
-			return makeUnique<pointFieldType>(*this);
-		}
-
-		inline pointFieldType* clonePtr()const
-		{
-			return new pointFieldType(*this);
-		}
-
-	//// - Methods
 
 		// - reference to pointStructure
 		inline const pointStructure& pStruct()const {
 			return pStruct_;
 		}
 
-		// if all points are active 
-		INLINE_FUNCTION_H
-		bool allActive()const {	
-			return pStruct_.allActive();
-		}
-		
-
-		INLINE_FUNCTION_H
-		bool isActive(label i)const {
-			return pStruct_.isActive(i);
-		}
-
-		const auto& pointFlag()const
+		void fill(const T& val)
 		{
-			return pStruct_.pointFlag();
+			InternalFieldType::fillInternal(val);
+			boundaryFieldList_.fill(val);
 		}
-
-		range activeRange()const
-		{
-			return pStruct_.activeRange();
-		}
-
-		// - update the field if any changes occure in pStruct 
-		//   for now it checks for deleted points
-		bool update(const eventMessage& msg);*/
-
 
 	//// -  IO operations
 		bool readPointField(iIstream& is, const IOPattern& iop);

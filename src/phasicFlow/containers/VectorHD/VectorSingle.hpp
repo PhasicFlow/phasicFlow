@@ -256,6 +256,9 @@ public:
 		/// Fill the range [0,size) with val
 		INLINE_FUNCTION_H 
 		void fill(const T& val);
+
+		INLINE_FUNCTION_H
+		void fill(rangeU32 r,  const T& val);
 		
 		/// Change size of the vector and assign val to vector and 
 		INLINE_FUNCTION_H
@@ -291,6 +294,11 @@ public:
 		INLINE_FUNCTION_H
 		bool insertSetElement(uint32IndexContainer indices, const std::vector<T>& vals);
 		
+		INLINE_FUNCTION_H
+		bool insertSetElement(
+			uint32IndexContainer indices, 
+			const ViewType1D<T, memory_space> vals);
+
 		INLINE_FUNCTION_H
 		bool reorderItems(uint32IndexContainer indices);
 

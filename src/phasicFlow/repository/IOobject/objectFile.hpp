@@ -97,12 +97,14 @@ public:
 
 	virtual ~objectFile()=default;
 
-	virtual word name() const
+	virtual 
+	const word& name() const
 	{
 		return name_;
 	}
 
-	virtual fileSystem localPath()const
+	virtual 
+	const fileSystem& localPath()const
 	{
 		return localPath_;
 	}

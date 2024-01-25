@@ -24,25 +24,32 @@ Licence:
 #include "error.hpp"
 #include "systemControl.hpp"
 #include "vocabs.hpp"
+#include "Lists.hpp"
 
-/*bool pFlow::systemControl::readDomainDict()
+bool pFlow::systemControl::readIncludeExclue
+(
+	const dictionary& dict
+)
 {
-    if(!domainDict_)
-    {
-        domainDict_ = makeUnique<fileDictionary>
-        (
-            objectFile
-            (
-                domainFile__,
-                "",
-                objectFile::READ_ALWAYS,
-                objectFile::WRITE_NEVER
-            ),
-            &settings()
-        );
-    }
-    return true;
-}*/
+	if(dict.containsDataEntry("includeObjects"))
+	{
+		wordList incld = dict.getVal<wordList>("includeObjects");
+		for(auto& nm:incld)
+		{
+			includeList_.insert(nm);
+		}
+	}
+
+	if(dict.containsDataEntry("excludeObjects"))
+	{
+		wordList excld = dict.getVal<wordList>("excludeObjects");
+		for(auto& nm:excld)
+		{
+			excludeList_.insert(nm);
+		}
+	}
+	return true;
+}
 
 pFlow::word pFlow::systemControl::getRunName
 (
@@ -176,7 +183,7 @@ pFlow::systemControl::systemControl
 	),
 	writeToFileTimer_("Write to file", &timers_)	
 {
-    //readDomainDict();
+    readIncludeExclue(settingsDict_());
 }
 
 pFlow::systemControl::systemControl(
@@ -250,13 +257,9 @@ pFlow::systemControl::systemControl(
 	),
 	writeToFileTimer_("Write to file", &timers_)	
 {
-    //readDomainDict();
+    readIncludeExclue(settingsDict_());
 }
 
-/*pFlow::fileDictionary& pFlow::systemControl::domainDict()
-{
-    return domainDict_();
-}*/
 
 bool pFlow::systemControl::operator ++(int)
 {

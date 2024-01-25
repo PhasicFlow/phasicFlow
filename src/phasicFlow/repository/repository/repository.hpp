@@ -114,6 +114,23 @@ public:
 		bool removeFromRepository(IOobject* io);
 
         repository* releaseOwner(bool fromOwner = false);
+
+		virtual
+		bool isIncluded(const word& objName)const
+        {
+            if(owner_)
+                return owner_->isIncluded(objName);
+            return false;
+        }
+
+        virtual
+        bool isExcluded(const word& objName)const 
+        {
+            if(owner_)
+                return owner_->isExcluded(objName);
+            return false;
+        }
+
 	//// - lookups and queries
 	
 		// - check if name of object exists

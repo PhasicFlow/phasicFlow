@@ -69,7 +69,12 @@ public:
 
 
 	
-	bool notify(const message msg, const anyList& varList);
+	bool notify(
+		real t,
+		real dt,
+		uint32 iter,
+		const message msg, 
+		const anyList& varList);
 	
 
 };

@@ -49,6 +49,15 @@ protected:
     /// @brief a ref to the internal field 
     InternalFieldType& 			internal_;
 
+	static inline
+	const message defaultMessage_ = 
+	(
+		message::CAP_CHANGED+
+		message::SIZE_CHANGED+
+		message::ITEM_INSERT+
+		message::ITEM_DELETE
+	);
+
 public:
 
 	TypeInfo("boundaryField<none>");
@@ -79,6 +88,9 @@ public:
 
 	bool hearChanges
 	(
+		real t,
+		real dt,
+		uint32 iter,
 		const message& msg, 
     	const anyList& varList
 	) override
@@ -95,6 +107,12 @@ public:
 	auto capacity()const
 	{
 		return boundary_.capacity();
+	}
+
+	virtual
+	void fill(const T& val)
+	{
+		return ;
 	}
 
 	static

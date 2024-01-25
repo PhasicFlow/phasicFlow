@@ -82,6 +82,9 @@ bool pFlow::subscriber::unsubscribe
 
 bool pFlow::subscriber::notify
 (
+	real t,
+	real dt,
+	uint32 iter,
 	const message msg, 
 	const anyList& varList
 )
@@ -93,7 +96,14 @@ bool pFlow::subscriber::notify
 		{
 			for( auto obsvr: observerList_[i] )
 			{
-				obsvr->hearChanges(message(i), varList);
+				obsvr->hearChanges
+				(
+					t,
+					dt,
+					iter,
+					message(i),
+					varList
+				);
 			}
 		}
 	}

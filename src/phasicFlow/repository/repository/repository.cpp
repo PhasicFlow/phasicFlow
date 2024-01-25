@@ -283,7 +283,8 @@ bool pFlow::repository::write
 	{
 		if(verbose)
 		{
-			REPORT(1)<< "Writing to " << obj.second->path()<<END_REPORT;
+			if(obj.second->implyWrite())
+				REPORT(1)<< "Writing to " << obj.second->path()<<END_REPORT;
 		}
 		
 		if(!obj.second->writeObject())

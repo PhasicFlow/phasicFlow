@@ -352,6 +352,17 @@ void pFlow::VectorSingle<T,MemorySpace>::fill(const T& val)
 }
 
 template<typename T, typename MemorySpace>
+INLINE_FUNCTION_H 
+void pFlow::VectorSingle<T,MemorySpace>::fill
+(
+    rangeU32 r, 
+    const T& val
+)
+{
+    pFlow::fill(view_, r, val);
+}
+
+template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H
 void pFlow::VectorSingle<T,MemorySpace>::assign
 (
@@ -494,7 +505,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 )
 {
 
-	if(indices.size() == 0)return true;
+	if(indices.empty())return true;
 	if(indices.size() != vals.size())return false;
 
 	auto maxInd = indices.max(); 
@@ -518,9 +529,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 		Kokkos::parallel_for(
 			"VectorSingle::insertSetElement",
 			policy(0,indices.size()), LAMBDA_HD(int32 i){	
-				dVec(ind(i))= dVals(i);}
-			);
-
+				dVec(ind(i))= dVals(i);});
 		Kokkos::fence();
 
 	}
@@ -532,9 +541,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 		Kokkos::parallel_for(
 			"VectorSingle::insertSetElement",
 			policy(0,indices.size()), LAMBDA_HD(int32 i){	
-				dVec(ind(i))= hVals(i);}
-			);
-
+				dVec(ind(i))= hVals(i);});
 		Kokkos::fence();
 
 	}
@@ -542,6 +549,57 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 	return true;
 }
 
+template<typename T, typename MemorySpace>
+INLINE_FUNCTION_H
+bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
+(
+	uint32IndexContainer indices, 
+	const ViewType1D<T, memory_space> vals
+)
+{
+    if(indices.empty())return true;
+	if(indices.size() != vals.size())return false;
+
+	auto maxInd = indices.max(); 
+	
+	if(this->empty() || maxInd > size()-1 )
+	{
+		resize(maxInd+1);
+	} 
+
+    using policy = Kokkos::RangePolicy<
+                    execution_space,
+                    Kokkos::IndexType<uint32>>;
+
+	if constexpr( isDeviceAccessible_ )
+	{
+		auto dVec = view_;
+        auto dVals = vals;
+		auto ind = indices.deviceView();
+
+		Kokkos::parallel_for(
+			"VectorSingle::insertSetElement",
+			policy(0,indices.size()), LAMBDA_HD(int32 i){	
+				dVec(ind(i))= dVals(i);});
+		Kokkos::fence();
+
+	}
+	else
+	{
+		auto dVec = view_;
+        auto hVals = vals;
+		auto ind = indices.hostView();
+
+		Kokkos::parallel_for(
+			"VectorSingle::insertSetElement",
+			policy(0,indices.size()), LAMBDA_HD(int32 i){	
+				dVec(ind(i))= hVals(i);});
+		Kokkos::fence();
+
+	}
+		
+	return true;
+}
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H

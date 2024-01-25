@@ -85,6 +85,12 @@ public:
 
         repository* releaseOwner(bool fromOwner = false);
 
+        
+        bool isIncluded(const word& objName)const override;
+        
+        bool isExcluded(const word& objName)const override;
+        
+
 	//// - IO operations 
 
 		// - read from file 

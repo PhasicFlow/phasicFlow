@@ -210,8 +210,14 @@ template<>
 inline
 bool pFlow::dataIO<pFlow::word>::writeData(iOstream& os, span<word> data)
 {
-    notImplementedFunction;
-    fatalExit;
+    
+	if( ioPattern_.isParallel()	)
+	{
+		notImplementedFunction<<
+		"data transfer for type word is not supported in parallel mode!"<<endl;
+		fatalExit;
+	}
+
     /// first gather data from all processors (if any)
 	if(!gatherData( data ) )
 	{
@@ -220,7 +226,14 @@ bool pFlow::dataIO<pFlow::word>::writeData(iOstream& os, span<word> data)
 		return false;
 	}
 	
-	return false;
+	if( ioPattern_.thisProcWriteData())
+	{
+		return writeDataASCII(os, data);
+	}
+	else
+	{
+		return true;
+	}
 }
 
 template<typename T>

@@ -60,6 +60,14 @@ public:
         }
     }
 
+    void fill(const T& val)
+    {
+        for(auto& bf: *this)
+        {
+            bf->fill(val);
+        }
+    }
+
 };
 
 }

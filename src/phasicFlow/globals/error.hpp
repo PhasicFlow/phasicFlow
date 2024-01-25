@@ -62,7 +62,7 @@ pFlow::iOstream& reportAndExit(int errorCode = EXIT_FAILURE);
     notImplementedErrorMessage ((functionName), __FILE__, __LINE__ )
 
 /// Report that a function is yet not implemented. 
-#define notImplementedFunction Not_Implemented(FUNCTION_NAME);
+#define notImplementedFunction Not_Implemented(FUNCTION_NAME)
 
 /// Report an error in file operation with supplied fileName and lineNumber. 
 #define ioErrorInFile( fileName, lineNumber) \

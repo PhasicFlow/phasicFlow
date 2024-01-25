@@ -37,16 +37,16 @@ class selectRange
 {
 protected:
 	
-	int32Vector selectedPoints_;
+	uint32Vector selectedPoints_;
 
 	// begin index
-	int32 	begin_;
+	uint32 	begin_;
 
 	// end index
-	int32 	end_;
+	uint32 	end_;
 
 	// stride
-	int32 	stride_;
+	uint32 	stride_;
 
 	void selectAllPointsInRange();
 	
@@ -69,12 +69,12 @@ public:
 
 	//// - Methods
 
-		virtual const int32Vector& selectedPoinsts()const override
+		virtual const uint32Vector& selectedPoinsts()const override
 		{
 			return selectedPoints_;
 		}
 
-		virtual int32Vector& selectedPoinsts() override
+		virtual uint32Vector& selectedPoinsts() override
 		{
 			return selectedPoints_;
 		}

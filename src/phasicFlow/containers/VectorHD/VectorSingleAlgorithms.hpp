@@ -21,8 +21,6 @@ Licence:
 #define __VectorSingleMath_hpp__
 
 
-
-
 namespace pFlow
 {
 
@@ -50,8 +48,6 @@ INLINE_FUNCTION_H T max( const VectorSingle<T, MemorySpace>& vec)
 		0, vec.size()
 		);		
 }
-
-
 
 }
 
