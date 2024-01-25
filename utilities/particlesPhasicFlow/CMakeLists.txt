@@ -8,6 +8,6 @@ empty/empty.cpp
 )
 #set(link_lib phasicFlow Kokkos::kokkos Interaction Utilities)
 
-set(link_lib phasicFlow Kokkos::kokkos Utilities)
+set(link_lib phasicFlow Kokkos::kokkos Particles Utilities)
 
 pFlow_make_executable_install(particlesPhasicFlow source_files link_lib)
