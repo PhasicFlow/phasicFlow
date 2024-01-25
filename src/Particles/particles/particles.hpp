@@ -24,6 +24,7 @@ Licence:
 
 #include "dynamicPointStructure.hpp"
 #include "demComponent.hpp"
+#include "shape.hpp"
 
 namespace pFlow
 {
@@ -39,43 +40,51 @@ private:
 	/// dynamic point structure for particles center mass
 	dynamicPointStructure 	dynPointStruct_;
 
-	// - name of shapes - this is managed by particles 
-	//wordPointField&  		shapeName_;
+	/// id of particles on host
+	uint32PointField_D		id_;
 
-	// id of particles on host
-	int32PointField_D		id_;
+	/// property id on device
+	uint8PointField_D 		propertyId_;
 
-	// property id on device
-	int8PointField_D 		propertyId_;
+	/// property id on device
+	uint32PointField_D 		shapeIndex_;
 
-	// diameter / boundig sphere size of particles on device
+	/// diameter / boundig sphere size of particles on device
 	realPointField_D		diameter_;
 
-	// mass of particles field 
+	/// mass of particles field 
 	realPointField_D 		mass_;
 
-	// - acceleration on device
-	realx3PointField_D 	accelertion_;
+	/// acceleration on device
+	realx3PointField_D 		accelertion_;
 
 	/// contact force field
 	realx3PointField_D     contactForce_;
 
 	/// contact torque field
-	realx3PointField_D     contactTorque_;	
+	realx3PointField_D     contactTorque_;
 
+	static inline
+	const message defaultMessage_ = 
+	(
+		message::CAP_CHANGED+
+		message::SIZE_CHANGED+
+		message::ITEM_INSERT+
+		message::ITEM_DELETE
+	);
 	
+	bool initMassDiameter()const;
 	
 	void zeroForce()
 	{
-		WARNING<<"fill contactTorque"<<END_WARNING;
-		//contactForce_.fill(zero3);
+		contactForce_.fill(zero3);
 	}
 
 	void zeroTorque()
 	{
-		WARNING<<"fill contactTorque"<<END_WARNING;
-		//contactTorque_.fill(zero3);
+		contactTorque_.fill(zero3);
 	}
+
 protected:
 
 	inline auto& dynPointStruct()
@@ -92,6 +101,12 @@ protected:
 	auto& velocity()
 	{
 		return dynPointStruct_.velocity();
+	}
+
+	inline 
+	auto& shapeIndex()
+	{
+		return shapeIndex_;
 	}
 
 public:
@@ -208,15 +223,11 @@ public:
 		return propertyId_;
 	}
 
-	/*inline const auto& shapeName()const{
-		return shapeName_;
-	}*/
-
-	/*inline auto& shapName(){
-		return shapeName_;
-	}*/
-
 	bool beforeIteration() override;
+
+	bool iterate()override;
+
+	bool afterIteration() override;
 
 	/*virtual
 	bool insertParticles
@@ -234,14 +245,17 @@ public:
 	virtual
 	const realx3PointField_D& rAcceleration() const = 0;
 
-	/*virtual
-	const realVector_D& boundingSphere()const = 0;*/
+	virtual
+	const realPointField_D& boundingSphere()const = 0;
 
 	virtual 
 	word shapeTypeName()const = 0;
 
 	virtual
-	void boundingSphereMinMax(real & minDiam, real& maxDiam)const = 0;
+	const shape& getShapes()const = 0;
+
+	virtual
+	void boundingSphereMinMax(real & minDiam, real& maxDiam)const;
 
 	
 

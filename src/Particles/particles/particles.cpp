@@ -21,17 +21,71 @@ Licence:
 
 #include "particles.hpp"
 
+bool pFlow::particles::initMassDiameter()const 
+{
+
+	auto [minIndex, maxIndex] = minMax(shapeIndex_.internal());
+
+	const auto& shp = getShapes();
+
+	if( !shp.indexValid(maxIndex) )
+	{
+		fatalErrorInFunction<< 
+		"the maximum value of shape index is "<< maxIndex << 
+		" which is not valid."<<endl;
+		return false;
+	}
+
+	realVector_D d("diameter", shp.boundingDiameter());
+	realVector_D mass("mass",shp.mass());
+	uint8Vector_D propId("propId", shp.shapePropertyIds());
+
+	
+	auto aPointsMask = dynPointStruct_.activePointsMaskDevice();
+	auto aRange = aPointsMask.activeRange();
+
+	using exeSpace = typename realPointField_D::execution_space;
+	using policy = Kokkos::RangePolicy<
+			exeSpace,
+			Kokkos::IndexType<uint32>>;
+
+	auto field_diameter = diameter_.fieldDevice();
+	auto field_mass = mass_.fieldDevice();
+	auto field_propId = propertyId_.fieldDevice();
+	auto field_shapeIndex = shapeIndex_.fieldDevice();
+
+	auto d_d = d.deviceVector();
+	auto d_mass = mass.deviceVector();
+	auto d_propId = propId.deviceVector();
+
+	Kokkos::parallel_for(
+		"particles::initMassDiameter",
+		policy(aRange.start(), aRange.end()),
+		LAMBDA_HD(uint32 i)
+		{
+			if(aPointsMask(i))
+			{
+				uint32 index = field_shapeIndex[i];
+				field_diameter[i] = d_d[index];
+				field_mass[i] = d_mass[index];
+				field_propId[i] = d_propId[index];
+			}
+		});
+	Kokkos::fence();
+
+    return true;
+}
 
 pFlow::particles::particles
 (
-	systemControl& control
+    systemControl &control
 )
-:
-	observer(),
+: 
+	observer(defaultMessage_),
 	demComponent("particles", control),
 	dynPointStruct_(control),
 	id_
-	(	
+	(
 		objectFile
 		(
 			"id",
@@ -48,127 +102,108 @@ pFlow::particles::particles
 		(
 			"propertyId",
 			"",
-			objectFile::READ_NEVER,
+			objectFile::READ_ALWAYS,
 			objectFile::WRITE_NEVER
 		),
 		dynPointStruct_,
 		static_cast<int8>(0)
 	),
-	diameter_
+	shapeIndex_
 	(
 		objectFile
 		(
+			"shapeIndex",
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
+		),
+		dynPointStruct_,
+		0
+	),
+	diameter_
+	(
+		objectFile(
 			"diameter",
 			"",
 			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
-		),
+			objectFile::WRITE_NEVER),
 		dynPointStruct_,
 		0.00000000001
 	),
 	mass_
 	(
-		objectFile
-		(
+		objectFile(
 			"mass",
 			"",
 			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
-		),
+			objectFile::WRITE_NEVER),
 		dynPointStruct_,
 		0.0000000001
 	),
 	accelertion_
 	(
-		objectFile
-		(
+		objectFile(
 			"accelertion",
 			"",
 			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_ALWAYS
-			),
+			objectFile::WRITE_ALWAYS),
 		dynPointStruct_,
 		zero3
 	),
-	contactForce_
-	(
-		objectFile
-		(
+	contactForce_(
+		objectFile(
 			"contactForce",
 			"",
 			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_ALWAYS
-		),
+			objectFile::WRITE_ALWAYS),
 		dynPointStruct_,
-		zero3
-	),
-	contactTorque_
-	(
-	
-		objectFile
-		(
+		zero3),
+	contactTorque_(
+		objectFile(
 			"contactTorque",
 			"",
 			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_ALWAYS
-		),
+			objectFile::WRITE_ALWAYS),
 		dynPointStruct_,
-		zero3
-	)
+		zero3)
 {
 	
-	WARNING<<"Subscribe particles"<<END_WARNING;
-	//this->subscribe(pStruct());
+	this->addToSubscriber(dynPointStruct_);
+
+	if(!initMassDiameter())
+	{
+		fatalExit;
+	}
 
 }
 
 bool pFlow::particles::beforeIteration() 
 {
-	/*auto domain = this->control().domain();
-
-	auto numMarked = dynPointStruct_.markDeleteOutOfBox(domain);
 	
-	if(time_.sortTime())
-	{
-		real min_dx, max_dx;
-		boundingSphereMinMax(min_dx, max_dx);
-		Timer t;
-		t.start();
-		REPORT(0)<<"Performing morton sorting on particles ...."<<endREPORT;
-		if(!pStruct().mortonSortPoints(domain, max_dx))
-		{
-			fatalErrorInFunction<<"Morton sorting was not successful"<<endl;
-			return false;
-		}
-		t.end();
-		REPORT(1)<<"Active range is "<< pStruct().activeRange()<<endREPORT;
-		REPORT(1)<<"It took "<< yellowText(t.totalTime())<<" seconds."<<endREPORT;
-	}
-
-	this->zeroForce();
-	this->zeroTorque();*/
+	dynPointStruct_.beforeIteration();
+	zeroForce();
+	zeroTorque();
 
 	return true;
 }
 
-/*pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
-pFlow::particles::getFieldObjectList()const
+bool pFlow::particles::iterate()
 {
-	auto objListPtr = makeUnique<pFlow::List<pFlow::eventObserver*>>();
-	objListPtr().push_back(
-		static_cast<eventObserver*>(&id_) );
-		
-	objListPtr().push_back(
-		static_cast<eventObserver*>(&propertyId_) );
+	return dynPointStruct_.iterate();
+}
 
-	objListPtr().push_back(
-		static_cast<eventObserver*>(&diameter_) );
+bool pFlow::particles::afterIteration() 
+{
+	return dynPointStruct_.afterIteration();
+}
 
-	objListPtr().push_back(
-		static_cast<eventObserver*>(&mass_) );
-	
-	objListPtr().push_back(
-		static_cast<eventObserver*>(&shapeName_) );
-	
-	return objListPtr;
-}*/
+void pFlow::particles::boundingSphereMinMax
+(
+	real &minDiam, 
+	real &maxDiam
+) const
+{
+	auto& shp = getShapes();
+	minDiam = shp.minBoundingSphere();
+	maxDiam = shp.maxBoundingSphere();
+}
