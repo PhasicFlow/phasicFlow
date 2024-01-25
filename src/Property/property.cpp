@@ -82,7 +82,7 @@ bool pFlow::property::makeNameIndex()
 
 pFlow::property::property
 (
-	const word& name, 
+	const word& fileName, 
 	const wordVector& materials,
 	const realVector& densities,
 	repository* owner
@@ -92,7 +92,7 @@ pFlow::property::property
 	(
 		objectFile
 		(
-			name,
+			fileName,
 			"",
 			objectFile::READ_NEVER,
 			objectFile::WRITE_NEVER

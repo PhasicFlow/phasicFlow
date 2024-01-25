@@ -81,7 +81,7 @@ public:
 			const word& fileName, 
 			repository* owner=nullptr);
 		
-		property(const word& name, 
+		property(const word& fileName, 
 				const wordVector& materials,
 				const realVector& densities,
 				repository* owner=nullptr);
