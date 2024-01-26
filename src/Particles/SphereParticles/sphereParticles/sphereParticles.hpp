@@ -51,6 +51,15 @@ private:
 		/// reference to shapes 
 	ShapeType 			spheres_;
 
+	/// property id on device
+	uint32PointField_D 		propertyId_;
+
+	/// diameter / boundig sphere size of particles on device
+	realPointField_D		diameter_;
+
+	/// mass of particles field 
+	realPointField_D 		mass_;
+
 	/// pointField of inertial of particles 
 	realPointField_D     	I_;
 
@@ -150,6 +159,24 @@ public:
 		notImplementedFunction;
 		return false;
 	}
+
+	
+	const uint32PointField_D& propertyId()const override
+	{
+		return propertyId_;
+	}
+	
+	
+	const realPointField_D& diameter()const override
+	{
+		return diameter_;
+	}
+
+
+	const realPointField_D& mass()const override
+	{
+		return mass_;
+	}
 	
 	/// before iteration step 
 	bool beforeIteration() override;
@@ -178,6 +205,9 @@ public:
 	word shapeTypeName()const override;
 	
 	const shape& getShapes()const override;
+
+	
+	void boundingSphereMinMax(real & minDiam, real& maxDiam)const override;
 	
 }; //sphereParticles
 

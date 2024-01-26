@@ -40,7 +40,7 @@ bool pFlow::baseShapeNames::createHashNames()
 }
 
 
-bool pFlow::baseShapeNames::readFromDictionary()
+bool pFlow::baseShapeNames::readFromDictionary1()
 {
 	
 	shapeNames_ = getVal<wordVector>("names");
@@ -69,17 +69,20 @@ pFlow::baseShapeNames::baseShapeNames
     )
 {
 	
-	if( !readFromDictionary() )
+	if( !readFromDictionary1() )
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 
 	if( !createHashNames())
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 
 }
+
 
 bool pFlow::baseShapeNames::writeToDict(dictionary &dict)const
 {

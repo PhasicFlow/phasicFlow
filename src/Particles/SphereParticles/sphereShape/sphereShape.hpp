@@ -26,8 +26,6 @@ Licence:
 namespace pFlow
 {
 
-
-
 class sphereShape
 :
 	public shape
@@ -37,7 +35,7 @@ private:
 	// - diameter of spheres
 	realVector 			diameters_;
 	
-	bool readDictionary();
+	bool readFromDictionary3();
 
 protected:
 

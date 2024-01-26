@@ -7,6 +7,7 @@ particles/particles.cpp
 #particles/particleIdHandler.cpp
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
+SphereParticles/sphereParticles/sphereParticlesKernels.cpp
 #Insertion/shapeMixture/shapeMixture.cpp
 #Insertion/insertion/insertion.cpp
 #Insertion/Insertion/Insertions.cpp

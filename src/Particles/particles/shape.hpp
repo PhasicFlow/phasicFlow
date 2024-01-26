@@ -37,7 +37,7 @@ private:
   	const property& 	property_; 
 
 	/// list of property ids of shapes (index)
-	uint8Vector			shapePropertyIds_;
+	uint32Vector			shapePropertyIds_;
 
 	/// list of material names 
 	wordVector 			materialNames_;
@@ -45,7 +45,7 @@ private:
 	
 	bool findPropertyIds();
 
-	bool readFromDictionary();	
+	bool readFromDictionary2();	
 
 protected:
 
@@ -96,7 +96,7 @@ public:
 	}
 
 	inline
-    bool propIdValid(int8 propId)const
+    bool propIdValid(uint32 propId)const
 	{
 		return static_cast<uint32>(propId) < property_.numMaterials();
 	}

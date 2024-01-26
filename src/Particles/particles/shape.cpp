@@ -7,24 +7,23 @@ bool pFlow::shape::findPropertyIds()
 
 	ForAll( i, materialNames_)
 	{	
-		
 		if(uint32 propId; property_.nameToIndex(materialNames_[i], propId) )
 		{
-			shapePropertyIds_[i] = static_cast<uint8>(propId);
+			shapePropertyIds_[i] = propId;
 		}
 		else
 		{
 			fatalErrorInFunction<<"Material name "<< materialNames_[i]<< 
-			"is not valid in dictionary "<<globalName()<<endl;
+			" is not valid in dictionary "<<globalName()<<endl;
 			return false;
 		}
 	}
-    return false;
+    return true;
 }
 
-bool pFlow::shape::readFromDictionary()
+bool pFlow::shape::readFromDictionary2()
 {
-	
+
 	materialNames_ = getVal<wordVector>("materials");
 
 	if(materialNames_.size() != numShapes() )
@@ -49,13 +48,15 @@ pFlow::shape::shape
     property_(prop)
 {
 	
-	if( !readFromDictionary() )
+	if( !readFromDictionary2() )
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 
 	if(!findPropertyIds())
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 

@@ -15,19 +15,17 @@ Licence:
   phasicFlow is distributed to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
 
-#ifndef __sphereParticlesKernels_hpp__
-#define __sphereParticlesKernels_hpp__
+#include "sphereParticlesKernels.hpp"
 
-#include "types.hpp"
-#include "pointFlag.hpp"
+using policy = Kokkos::RangePolicy<
+			pFlow::DefaultExecutionSpace,
+			Kokkos::Schedule<Kokkos::Static>,
+			Kokkos::IndexType<pFlow::uint32>>;
 
-namespace pFlow::sphereParticlesKernels
-{
-
-void addMassDiamInertiaProp(
+void pFlow::sphereParticlesKernels::addMassDiamInertiaProp
+(
     deviceViewType1D<uint32>    shapeIndex,
     deviceViewType1D<real>  	mass,
 	deviceViewType1D<real>  	diameter,
@@ -38,9 +36,29 @@ void addMassDiamInertiaProp(
 	deviceViewType1D<real>  	src_diameter,
 	deviceViewType1D<real>  	src_I,
     deviceViewType1D<uint32>  	src_propertyId
-);
+)
+{
+    auto aRange = incld.activeRange();
 
-void acceleration( 
+    Kokkos::parallel_for(
+		"particles::initInertia",
+		policy(aRange.start(), aRange.end()),
+		LAMBDA_HD(uint32 i)
+		{
+			if(incld(i))
+			{
+				uint32 index = shapeIndex[i];
+				I[i] = src_I[index];
+				diameter[i] = src_diameter[index];
+				mass[i] = src_mass[index];
+				propertyId[i] = src_propertyId[index];
+			}
+		});
+
+}
+
+void pFlow::sphereParticlesKernels::acceleration
+( 
 	realx3		g,
 	deviceViewType1D<real>  	mass,
 	deviceViewType1D<realx3>  	force,
@@ -49,9 +67,34 @@ void acceleration(
 	pFlagTypeDevice 		    incld,
 	deviceViewType1D<realx3> 	lAcc,
 	deviceViewType1D<realx3> 	rAcc
-);
+)
+{
 
+	auto activeRange = incld.activeRange();
+	if(incld.isAllActive())
+	{
+		Kokkos::parallel_for(
+		"pFlow::sphereParticlesKernels::acceleration",
+		policy(activeRange.start(), activeRange.end()),
+		LAMBDA_HD(uint32 i){
+				lAcc[i] = force[i]/mass[i] + g;
+				rAcc[i] = torque[i]/I[i];
+		});
+	}
+	else
+	{
+		Kokkos::parallel_for(
+		"pFlow::sphereParticlesKernels::acceleration",
+		policy(activeRange.start(), activeRange.end()),
+		LAMBDA_HD(uint32 i){
+			if(incld(i))
+			{
+				lAcc[i] = force[i]/mass[i] + g;
+				rAcc[i] = torque[i]/I[i];
+			}
+		});
 
+	}
+	
+	Kokkos::fence();
 }
-
-#endif 

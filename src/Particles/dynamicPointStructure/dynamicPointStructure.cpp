@@ -76,37 +76,6 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		fatalExit;
 	}
 
-
-	WARNING << "Initialization of integrationPos_ and integrationVel_ should be doen!"<<END_WARNING;
-	
-	/*if(!integrationPos_->needSetInitialVals()) return;
-
-	
-		
-	auto [minInd, maxInd] = pStruct().activeRange();
-	int32IndexContainer indexHD(minInd, maxInd);
-	
-	auto n = indexHD.size();
-	auto index = indexHD.indicesHost();
-
-	realx3Vector pos(n,RESERVE());
-	realx3Vector vel(n,RESERVE());
-	const auto hVel = velocity().hostVector();
-	const auto hPos = pStruct().pointPosition().hostVector();
-
-	for(auto i=0; i<n; i++)
-	{
-		pos.push_back( hPos[index(i)]);
-		vel.push_back( hVel[index(i)]);
-	}
-
-
-	REPORT(2)<< "Initializing the required vectors for position integratoin "<<endREPORT;
-	integrationPos_->setInitialVals(indexHD, pos);
-
-	REPORT(2)<< "Initializing the required vectors for velocity integratoin\n "<<endREPORT;
-	integrationVel_->setInitialVals(indexHD, vel);*/
-
 }
 
 bool pFlow::dynamicPointStructure::predict

@@ -43,17 +43,8 @@ private:
 	/// id of particles on host
 	uint32PointField_D		id_;
 
-	/// property id on device
-	uint8PointField_D 		propertyId_;
-
-	/// property id on device
+	
 	uint32PointField_D 		shapeIndex_;
-
-	/// diameter / boundig sphere size of particles on device
-	realPointField_D		diameter_;
-
-	/// mass of particles field 
-	realPointField_D 		mass_;
 
 	/// acceleration on device
 	realx3PointField_D 		accelertion_;
@@ -73,8 +64,7 @@ private:
 		message::ITEM_DELETE
 	);
 	
-	bool initMassDiameter()const;
-	
+
 	void zeroForce()
 	{
 		contactForce_.fill(zero3);
@@ -153,29 +143,6 @@ public:
 	}
 
 	inline 
-	const auto& diameter()const
-	{
-		return diameter_;
-	}
-
-	inline 
-	auto& diameter()
-	{
-		return diameter_;
-	}
-
-	inline 
-	const auto& mass()const
-	{
-		return mass_;
-	}
-
-	inline auto& mass()	
-	{
-		return mass_;
-	}
-
-	inline 
 	const auto& accelertion()const
 	{
 		return accelertion_;
@@ -211,18 +178,6 @@ public:
 		return contactTorque_;
 	}
 
-	inline 
-	const auto& propertyId()const
-	{
-		return propertyId_;
-	}
-
-	inline 
-	auto& propertyId()
-	{
-		return propertyId_;
-	}
-
 	bool beforeIteration() override;
 
 	bool iterate()override;
@@ -237,7 +192,14 @@ public:
 	 	const setFieldList& setField
 	 ) = 0;*/
 
+	virtual 
+	const uint32PointField_D& propertyId()const = 0;
 	
+	virtual
+	const realPointField_D& diameter()const = 0;
+
+	virtual 
+	const realPointField_D& mass()const = 0;		
 
 	virtual
 	realx3PointField_D& rAcceleration() = 0;
@@ -255,7 +217,7 @@ public:
 	const shape& getShapes()const = 0;
 
 	virtual
-	void boundingSphereMinMax(real & minDiam, real& maxDiam)const;
+	void boundingSphereMinMax(real & minDiam, real& maxDiam)const = 0;
 
 	
 

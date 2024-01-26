@@ -21,9 +21,10 @@ Licence:
 #include "sphereParticles.hpp"
 #include "systemControl.hpp"
 #include "vocabs.hpp"
-//#include "setFieldList.hpp"
-//#include "sphereParticlesKernels.hpp"
+#include "sphereParticlesKernels.hpp"
 
+
+//#include "setFieldList.hpp"
 /*pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
 pFlow::sphereParticles::getFieldObjectList()const
 {
@@ -205,16 +206,36 @@ bool pFlow::sphereParticles::initInertia()
 			exeSpace,
 			Kokkos::IndexType<uint32>>;
 	
-	auto aPointsMask = dynPointStruct().activePointsMaskDevice();
-	auto aRange = aPointsMask.activeRange();
+	auto [minIndex, maxIndex] = minMax(shapeIndex().internal());		
 
-	auto field_I = I_.fieldDevice();
-	auto field_shapeIndex = shapeIndex().fieldDevice();
+	if( !spheres_.indexValid(maxIndex) )
+	{
+		fatalErrorInFunction<< 
+		"the maximum value of shapeIndex is "<< maxIndex << 
+		" which is not valid."<<endl;
+		return false;
+	}
+
+	auto aPointsMask 	= dynPointStruct().activePointsMaskDevice();
+	auto aRange 		= aPointsMask.activeRange();
 	
-	const auto& shp = getShapes();
-	realVector_D I ("I", shp.Inertia());
-	auto d_I = I.deviceVector();
-	
+	auto field_shapeIndex 	= shapeIndex().fieldDevice();
+	auto field_diameter 	= diameter_.fieldDevice();
+	auto field_mass 		= mass_.fieldDevice();
+	auto field_propId 		= propertyId_.fieldDevice();
+	auto field_I 			= I_.fieldDevice();
+
+	// get info from spheres shape 
+	realVector_D d("diameter", spheres_.boundingDiameter());
+	realVector_D mass("mass",spheres_.mass());
+	uint32Vector_D propId("propId", spheres_.shapePropertyIds());
+	realVector_D  I("I", spheres_.Inertia());
+
+	auto d_d 		= d.deviceVector();
+	auto d_mass 	= mass.deviceVector();
+	auto d_propId 	= propId.deviceVector();
+	auto d_I 		= I.deviceVector();
+		
 	Kokkos::parallel_for(
 		"particles::initInertia",
 		policy(aRange.start(), aRange.end()),
@@ -224,9 +245,13 @@ bool pFlow::sphereParticles::initInertia()
 			{
 				uint32 index = field_shapeIndex[i];
 				field_I[i] = d_I[index];
+				field_diameter[i] = d_d[index];
+				field_mass[i] = d_mass[index];
+				field_propId[i] = d_propId[index];
 			}
 		});
 	Kokkos::fence();
+	
 	return true;
 }
 
@@ -242,6 +267,38 @@ pFlow::sphereParticles::sphereParticles(
 		shapeFile__,
 		&control.caseSetup(),
 		prop
+	),
+	propertyId_
+	(
+		objectFile
+		(
+			"propertyId",
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_NEVER
+		),
+		dynPointStruct(),
+		0u
+	),
+	diameter_
+	(
+		objectFile(
+			"diameter",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER),
+		dynPointStruct(),
+		0.00000000001
+	),
+	mass_
+	(
+		objectFile(
+			"mass",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER),
+		dynPointStruct(),
+		0.0000000001
 	),
 	I_
 	(
@@ -285,7 +342,7 @@ pFlow::sphereParticles::sphereParticles(
 	intCorrectTimer_(
 		"Integration-correct", &this->timers() )
 {
-
+	
 	auto intMethod = control.settingsDict().getVal<word>("integrationMethod");
 	REPORT(1)<<"Creating integration method "<<Green_Text(intMethod)
 		  << " for rotational velocity."<<END_REPORT;
@@ -306,31 +363,10 @@ pFlow::sphereParticles::sphereParticles(
 	}
 
 	WARNING<<"setFields for rVelIntegration_"<<END_WARNING;
-	/*if(rVelIntegration_->needSetInitialVals())
-	{
-		
-		auto [minInd, maxInd] = pStruct().activeRange();
-		int32IndexContainer indexHD(minInd, maxInd);
-	
-		auto n = indexHD.size();
-		auto index = indexHD.indicesHost();
-
-		realx3Vector rvel(n,RESERVE());
-		const auto hrVel = rVelocity_.hostVector();
-
-		for(auto i=0; i<n; i++)
-		{
-			rvel.push_back( hrVel[index(i)]);
-		}
-		
-		REPORT(2)<< "Initializing the required vectors for rotational velocity integratoin\n "<<endREPORT;
-		rVelIntegration_->setInitialVals(indexHD, rvel);
-
-	}*/
-
 	
 	if(!initInertia())
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 	
@@ -437,18 +473,16 @@ bool pFlow::sphereParticles::iterate()
 
 	particles::iterate();
 	accelerationTimer_.start();
-	WARNING<<"pFlow::sphereParticlesKernels::acceleration"<<END_WARNING;
-	//INFO<<"before accelerationTimer_ "<<endINFO;
-		/*pFlow::sphereParticlesKernels::acceleration(
+		pFlow::sphereParticlesKernels::acceleration(
 			control().g(),
-			mass().deviceVectorAll(),
-			contactForce().deviceVectorAll(),
-			I().deviceVectorAll(),
-			contactTorque().deviceVectorAll(),
-			pStruct().activePointsMaskD(),
-			accelertion().deviceVectorAll(),
-			rAcceleration().deviceVectorAll()
-			);*/
+			mass().fieldDevice(),
+			contactForce().fieldDevice(),
+			I().fieldDevice(),
+			contactTorque().fieldDevice(),
+			dynPointStruct().activePointsMaskDevice(),
+			accelertion().fieldDevice(),
+			rAcceleration().fieldDevice()
+			);
 	accelerationTimer_.end();
 	
 	intCorrectTimer_.start();
@@ -484,4 +518,14 @@ pFlow::word pFlow::sphereParticles::shapeTypeName()const
 const pFlow::shape &pFlow::sphereParticles::getShapes() const
 {
     return spheres_;
+}
+
+void pFlow::sphereParticles::boundingSphereMinMax
+(
+	real & minDiam, 
+	real& maxDiam
+)const
+{
+	minDiam = spheres_.minBoundingSphere();
+	maxDiam = spheres_.maxBoundingSphere();
 }

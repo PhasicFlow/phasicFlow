@@ -21,60 +21,6 @@ Licence:
 
 #include "particles.hpp"
 
-bool pFlow::particles::initMassDiameter()const 
-{
-
-	auto [minIndex, maxIndex] = minMax(shapeIndex_.internal());
-
-	const auto& shp = getShapes();
-
-	if( !shp.indexValid(maxIndex) )
-	{
-		fatalErrorInFunction<< 
-		"the maximum value of shape index is "<< maxIndex << 
-		" which is not valid."<<endl;
-		return false;
-	}
-
-	realVector_D d("diameter", shp.boundingDiameter());
-	realVector_D mass("mass",shp.mass());
-	uint8Vector_D propId("propId", shp.shapePropertyIds());
-
-	
-	auto aPointsMask = dynPointStruct_.activePointsMaskDevice();
-	auto aRange = aPointsMask.activeRange();
-
-	using exeSpace = typename realPointField_D::execution_space;
-	using policy = Kokkos::RangePolicy<
-			exeSpace,
-			Kokkos::IndexType<uint32>>;
-
-	auto field_diameter = diameter_.fieldDevice();
-	auto field_mass = mass_.fieldDevice();
-	auto field_propId = propertyId_.fieldDevice();
-	auto field_shapeIndex = shapeIndex_.fieldDevice();
-
-	auto d_d = d.deviceVector();
-	auto d_mass = mass.deviceVector();
-	auto d_propId = propId.deviceVector();
-
-	Kokkos::parallel_for(
-		"particles::initMassDiameter",
-		policy(aRange.start(), aRange.end()),
-		LAMBDA_HD(uint32 i)
-		{
-			if(aPointsMask(i))
-			{
-				uint32 index = field_shapeIndex[i];
-				field_diameter[i] = d_d[index];
-				field_mass[i] = d_mass[index];
-				field_propId[i] = d_propId[index];
-			}
-		});
-	Kokkos::fence();
-
-    return true;
-}
 
 pFlow::particles::particles
 (
@@ -96,18 +42,6 @@ pFlow::particles::particles
 		dynPointStruct_,
 		static_cast<uint32>(-1)
 	),
-	propertyId_
-	(
-		objectFile
-		(
-			"propertyId",
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		dynPointStruct_,
-		static_cast<int8>(0)
-	),
 	shapeIndex_
 	(
 		objectFile
@@ -119,26 +53,6 @@ pFlow::particles::particles
 		),
 		dynPointStruct_,
 		0
-	),
-	diameter_
-	(
-		objectFile(
-			"diameter",
-			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_NEVER),
-		dynPointStruct_,
-		0.00000000001
-	),
-	mass_
-	(
-		objectFile(
-			"mass",
-			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_NEVER),
-		dynPointStruct_,
-		0.0000000001
 	),
 	accelertion_
 	(
@@ -167,14 +81,7 @@ pFlow::particles::particles
 		dynPointStruct_,
 		zero3)
 {
-	
 	this->addToSubscriber(dynPointStruct_);
-
-	if(!initMassDiameter())
-	{
-		fatalExit;
-	}
-
 }
 
 bool pFlow::particles::beforeIteration() 

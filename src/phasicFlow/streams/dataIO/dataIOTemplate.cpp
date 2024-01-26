@@ -130,12 +130,15 @@ bool pFlow::readDataAscii
 	token firstToken(is);
 
 	size_t len = 0;
+	bool lenFound = false;
 	if( firstToken.isInt64())
 	{
 		len = firstToken.int64Token();
+		lenFound = true;
 		vec.reserve(len);
 		firstToken  = token(is);
 	}
+	
 
 	T val{};
 	if( firstToken.isPunctuation() ) // start of vector 
@@ -164,6 +167,7 @@ bool pFlow::readDataAscii
 			
 			is >> lastToken;
 			is.fatalCheck(FUNCTION_NAME);
+
 		}
 
 	} else
@@ -174,7 +178,7 @@ bool pFlow::readDataAscii
 		return false;
 	}
 	
-	if(len>0&& len != vec.size())
+	if(lenFound && len>0 && len != vec.size())
 	{
 		warningInFunction<<"vector length specified "<< len << 
 		" is different from number of elements "<< vec.size()<<endl;

@@ -46,7 +46,7 @@ private:
 	
 	bool createHashNames();
 
-	bool readFromDictionary();	
+	bool readFromDictionary1();	
 
 protected:
 

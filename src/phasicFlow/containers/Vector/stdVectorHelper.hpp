@@ -111,7 +111,7 @@ bool readStdVector
 	std::vector<T,Allocator>& vec
 )
 {
-	
+
 	return readDataAsciiBinary(is, vec);
 	
 }

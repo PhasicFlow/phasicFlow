@@ -21,9 +21,9 @@ Licence:
 #include "sphereShape.hpp"
 
 
-bool pFlow::sphereShape::readDictionary()
+bool pFlow::sphereShape::readFromDictionary3()
 {
-	
+
 	diameters_ = getVal<realVector>("diameters");
 
 	if(diameters_.size() != numShapes() )
@@ -61,6 +61,11 @@ pFlow::sphereShape::sphereShape
 	shape(fileName, owner, prop)
 {
 
+	if(!readFromDictionary3())
+	{
+		fatalExit;
+		fatalErrorInFunction;
+	}
 }
 
 pFlow::real pFlow::sphereShape::maxBoundingSphere() const
