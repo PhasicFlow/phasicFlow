@@ -25,7 +25,8 @@ Licence:
 pFlow::baseTimeControl::baseTimeControl
 (
     const dictionary &dict,
-    const word& intervalPrefix
+    const word& intervalPrefix,
+	real defStartTime
 )
 {
 	auto tControl = dict.getVal<word>("timeControl");
@@ -47,7 +48,7 @@ pFlow::baseTimeControl::baseTimeControl
 
 	if(isTimeStep_)
 	{
-		auto startTime = (dict.getValOrSet<real>("startTime", 0.0));
+		auto startTime = (dict.getValOrSet<real>("startTime", defStartTime));
     	auto endTime = (dict.getValOrSet<real>("endTime", largeValue));
 		auto interval = dict.getVal<real>(intervalWord);
 		rRange_ = realStridedRange(startTime, endTime, interval);
@@ -55,7 +56,7 @@ pFlow::baseTimeControl::baseTimeControl
 	}
 	else
 	{
-		auto startTime = (dict.getValOrSet<int32>("startTime", 0.0));
+		auto startTime = (dict.getValOrSet<int32>("startTime", 0));
     	auto endTime = (dict.getValOrSet<int32>("endTime", largestPosInt32));
 		auto interval = dict.getVal<int32>(intervalWord);
 		iRange_ = int32StridedRagne(startTime, endTime, interval);

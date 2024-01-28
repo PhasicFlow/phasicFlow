@@ -25,7 +25,7 @@ Licence:
 #include "subscriber.hpp"
 #include "VectorSingles.hpp"
 #include "plane.hpp"
-#include "scatterFieldAccess.hpp"
+#include "scatteredFieldAccess.hpp"
 
 #include "streams.hpp"
 
@@ -44,12 +44,14 @@ class boundaryBase
 public:
 
     using pointFieldAccessType = 
-        scatterFieldAccess<realx3,DefaultExecutionSpace>;
+        deviceScatteredFieldAccess<realx3>;
 
-
-protected:
+private:
 
 	const plane& 	boundaryPlane_;
+
+	/// list of particles indices on device 
+	uint32Vector_D 	indexList_;
 
 	/// The length defined for creating neighbor list 
 	real  			neighborLength_;	
@@ -57,15 +59,11 @@ protected:
 	/// a reference to 
 	internalPoints& internal_;
 
-	/// list of particles indices on device 
-	uint32Vector_D 	indexList_;
-
 	uint32 			mirrorProcessoNo_;
 
 	word 		name_;
 
 	word 		type_;
-
 
 public:
 
@@ -85,7 +83,7 @@ public:
 
 	boundaryBase& operator=(boundaryBase&&) = default;
 
-	virtual ~boundaryBase() = default;
+	~boundaryBase() override = default;
 	
 
 	create_vCtor
@@ -117,9 +115,19 @@ public:
 		return name_;
 	}
 
+	bool empty()const
+	{
+		return indexList_.size()==0;
+	}
+
 	auto size()const
 	{
 		return indexList_.size();
+	}
+
+	const plane& boundaryPlane()const
+	{
+		return boundaryPlane_;
 	}
 
 	auto capacity()const
@@ -127,12 +135,22 @@ public:
 		return indexList_.capacity();
 	}
 
+	const internalPoints& internal()const
+	{
+		return internal_;
+	}
+
+	internalPoints& internal()
+	{
+		return internal_;
+	}
+
 	/// @brief set the size of indexList 
 	/// Always make sure that size+1 <= capacity
 	void setSize(uint32 newSize);
 
 	virtual 
-    bool beforeIteratoin(uint32 iterNum, real t) = 0 ;
+    bool beforeIteration(uint32 iterNum, real t, real dt) = 0 ;
 
 	virtual 
     bool iterate(uint32 iterNum, real t) = 0;
@@ -142,6 +160,11 @@ public:
 
 	
 	const auto& indexList()const
+	{
+		return indexList_;
+	}
+
+	auto& indexList()
 	{
 		return indexList_;
 	}

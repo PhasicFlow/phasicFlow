@@ -1,4 +1,3 @@
-#include "pointField.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -41,7 +40,25 @@ pFlow::pointField<T, MemorySpace>::pointField
 	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
-{}
+{
+    
+    if(IOobject::implyRead())
+    {
+        REPORT(1)<< "Reading field "<< Green_Text(IOobject::name())<<
+        " from "<<IOobject::path()<<END_REPORT;
+    }
+    else
+    {
+        REPORT(1)<< "Creating field "<< Green_Text(IOobject::name())<<END_REPORT;
+    }
+    if( !IOobject::readObject() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
+    }    
+
+}
 
 template<class T, class MemorySpace>
 pFlow::pointField<T, MemorySpace>::pointField
@@ -66,7 +83,23 @@ pFlow::pointField<T, MemorySpace>::pointField
 	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
-{}
+{
+    if(IOobject::implyRead())
+    {
+        REPORT(1)<< "Reading field "<< Green_Text(IOobject::name())<<
+        " from "<<IOobject::path()<<END_REPORT;
+    }
+    else
+    {
+        REPORT(1)<< "Creating field "<< Green_Text(IOobject::name())<<END_REPORT;
+    }
+    if( !IOobject::readObject() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
+    }
+}
 
 template<class T, class MemorySpace>
 pFlow::pointField<T, MemorySpace>::pointField
@@ -98,7 +131,9 @@ pFlow::pointField<T, MemorySpace>::pointField
 	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
-{}
+{
+
+}
 
 
  /*

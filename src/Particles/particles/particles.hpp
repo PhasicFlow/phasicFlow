@@ -87,11 +87,11 @@ protected:
 		return dynPointStruct_.pointPosition();	
 	}
 
-	inline 
+	/*inline 
 	auto& velocity()
 	{
 		return dynPointStruct_.velocity();
-	}
+	}*/
 
 	inline 
 	auto& shapeIndex()

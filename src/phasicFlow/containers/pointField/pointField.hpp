@@ -52,7 +52,7 @@ public:
 
 	using execution_space 	= typename InternalFieldType::execution_space;
 
-protected:
+private:
 
     //// - data members 
 

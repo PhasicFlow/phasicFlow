@@ -50,9 +50,9 @@ pFlow::boundaryBase::boundaryBase
 :
 	subscriber(dict.name()),
 	boundaryPlane_(bplane),
+	indexList_(groupNames(dict.name(),"indexList")),
 	neighborLength_(dict.getVal<real>("neighborLength")),
 	internal_(internal),
-	indexList_(groupNames(dict.name(),"indexList")),
 	mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
 	name_(dict.name()),
 	type_(dict.getVal<word>("type"))

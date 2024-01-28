@@ -124,7 +124,21 @@ typename pFlow::internalPoints::PointsTypeHost
     return aPoints;
 }
 
-
+bool pFlow::internalPoints::deletePoints
+(
+	scatteredFieldAccess<uint32, memory_space> delPoints
+)
+{
+	if(!pFlagsD_.deletePoints(delPoints))
+	{
+		fatalErrorInFunction<<
+		"Error in deleting points from internal points"<<endl;
+		return false;
+	}
+	WARNING<<"Notify the observersin in internalPoints"<<END_WARNING;
+	pFlagSync_ = false;
+    return true;
+}
 
 FUNCTION_H
 pFlow::uint32 pFlow::internalPoints::updateFlag
@@ -133,6 +147,7 @@ pFlow::uint32 pFlow::internalPoints::updateFlag
 	const std::array<real,6>& dist
 )
 {
+	pFlagSync_ = false;
 	return pFlagsD_.markPointRegions
 	(
 		dm,
@@ -143,9 +158,7 @@ pFlow::uint32 pFlow::internalPoints::updateFlag
 		dist[3],
 		dist[4],
 		dist[5]
-	);
-
-	pFlagSync_ = false;
+	);	
 }
 
 void pFlow::internalPoints::fillNeighborsLists
@@ -166,7 +179,6 @@ void pFlow::internalPoints::fillNeighborsLists
 		rearList,
 		frontList);
 		
-	pFlagSync_ = false;
 }
 
 FUNCTION_H

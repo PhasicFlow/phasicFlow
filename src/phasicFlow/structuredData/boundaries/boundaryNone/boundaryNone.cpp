@@ -30,10 +30,11 @@ pFlow::boundaryNone::boundaryNone
 	boundaryBase(dict, bplane, internal)
 {}
 
-bool pFlow::boundaryNone::beforeIteratoin
+bool pFlow::boundaryNone::beforeIteration
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;

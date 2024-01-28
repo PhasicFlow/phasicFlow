@@ -274,7 +274,7 @@ pFlow::sphereParticles::sphereParticles(
 		(
 			"propertyId",
 			"",
-			objectFile::READ_ALWAYS,
+			objectFile::READ_NEVER,
 			objectFile::WRITE_NEVER
 		),
 		dynPointStruct(),

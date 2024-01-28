@@ -50,6 +50,23 @@ using vecAllocator = std::allocator<T>;
 
 template<typename T>
 inline
+span<T> makeSpan(std::vector<T>& container)
+{
+    return span<T>(container.data(), container.size());
+}
+
+template<typename T>
+inline
+span<T> makeSpan(const std::vector<T>& container)
+{
+    return span<T>(
+		const_cast<T*>(container.data()), 
+		container.size());
+}
+
+
+template<typename T>
+inline
 bool writeSpan(
     iOstream& os, 
     span<T> sp)

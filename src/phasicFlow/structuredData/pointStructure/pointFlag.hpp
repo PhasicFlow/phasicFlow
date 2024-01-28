@@ -23,6 +23,7 @@ Licence:
 
 #include "phasicFlowKokkos.hpp"
 #include "domain.hpp"
+#include "scatteredFieldAccess.hpp"
 
 namespace pFlow
 {
@@ -259,6 +260,9 @@ public:
 		const box& validBox,
 		ViewType1D<realx3, memory_space> points);
 
+	
+	bool deletePoints(
+		scatteredFieldAccess<uint32, memory_space> points);
 	
 	/// @brief mark points based on their position in the domain.
 	/// This should be the first method to be called when updating

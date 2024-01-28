@@ -76,7 +76,7 @@ structuredData/pointStructure/pointStructure.cpp
 structuredData/boundaries/boundaryBase/boundaryBase.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
 structuredData/boundaries/boundaryNone/boundaryNone.cpp
-structuredData/pointStructure/boundaryList.cpp
+structuredData/boundaries/boundaryList.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 

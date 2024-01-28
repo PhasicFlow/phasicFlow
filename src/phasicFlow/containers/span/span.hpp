@@ -157,7 +157,7 @@ public:
 
 };
 
-template<typename T, typename... properties, template<class, class...> class Container>
+/*template<typename T, typename... properties, template<class, class...> class Container>
 size_t makeSpan(Container<T, properties...>& container)
 {
     return span<T>(container.data(), container.size());
@@ -169,7 +169,7 @@ size_t makeSpan(const Container<T, properties...>& container)
     return span<T>(
         const_cast<T*>(container.data()), 
         container.size());
-}
+}*/
 
 
 template<typename T>
@@ -192,7 +192,7 @@ span<const char> charSpan(span<const T> s)
         s.size()*el);
 }
 
-template<typename T, template<class> class Container>
+/*template<typename T, template<class> class Container>
 span<T> makeSpan(Container<T>& container)
 {
     return span<T>(container.data(), container.size());
@@ -204,7 +204,7 @@ span<T> makeSpan(const Container<T>& container)
     return span<T>(
         const_cast<T*>(container.data()), 
         container.size());
-}
+}*/
 
 
 

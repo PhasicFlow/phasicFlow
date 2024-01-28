@@ -114,17 +114,17 @@ pFlow::pointStructure::pointStructure
 	),
 	boundaries_
 	(
-		simulationDomain_(),
-		*this
+        *this
 	)
 {
-    REPORT(0)<< "Reading point structure from "<<
-    IOobject::path()<<END_REPORT;
+    REPORT(0)<< "Reading "<< Green_Text("point structure")<<
+    " from "<<IOobject::path()<<END_REPORT;
 
     if( !IOobject::readObject() )
     {
         fatalErrorInFunction<<
         "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
     }
 }
 
@@ -153,7 +153,6 @@ pFlow::pointStructure::pointStructure(
 	),
 	boundaries_
 	(
-		simulationDomain_(),
 		*this
 	)
 {

@@ -166,6 +166,11 @@ public:
 			return pFlagsD_.activeRange();
 		}
 
+		///@brief delete points at indices given in delPoints.
+		/// The default is that delPoints contains sorted indices 
+		FUNCTION_H
+		bool deletePoints(
+			scatteredFieldAccess<uint32, memory_space> delPoints);
 		
 		FUNCTION_H
 		uint32 updateFlag(

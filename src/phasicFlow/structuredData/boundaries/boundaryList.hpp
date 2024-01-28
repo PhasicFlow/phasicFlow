@@ -30,8 +30,7 @@ Licence:
 namespace pFlow
 {
 
-class simulationDomain;
-class internalPoints;
+class pointStructure;
 
 class boundaryList
 :
@@ -41,13 +40,11 @@ class boundaryList
 protected:
 
 	//// - data members
-        internalPoints& 		internal_;
-		
-        const simulationDomain& simDomain_;
+		pointStructure& 		pStruct_;
 
 		baseTimeControl 		timeControl_;
 
-        bool                    listSet_ = false;
+		bool                    listSet_ = false;
 
 		bool resetLists();
 
@@ -62,9 +59,7 @@ public:
 	
 
 	//// - Constructors
-	boundaryList(
-		const simulationDomain& simD, 
-		internalPoints& internal);
+	boundaryList(pointStructure& pStruct);
 
 
   	~boundaryList() = default;
@@ -72,8 +67,6 @@ public:
 	/// @brief update neighbor list of boundaries based on 
 	/// the time intervals
 	bool updateLists(uint32 iter, real t, real dt);
-
-	
 
 	bool setLists();
 
@@ -84,8 +77,20 @@ public:
 
 	const auto& boundary(size_t i)const
 	{
-	return ListPtr<boundaryBase>::operator[](i);
+		return ListPtr<boundaryBase>::operator[](i);
 	}
+
+	const baseTimeControl& timeControl()const
+	{
+		return timeControl_;
+	}
+
+	bool beforeIteration(uint32 iter, real t, real dt);
+
+	bool iterate(uint32 iter, real t, real dt);
+
+	bool afterIteration(uint32 iter, real t, real dt);
+	
 };
 
 } // pFlow

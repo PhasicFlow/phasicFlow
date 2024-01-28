@@ -1,6 +1,6 @@
 
-#ifndef __scatterFieldAccess_hpp__
-#define __scatterFieldAccess_hpp__
+#ifndef __scatteredFieldAccess_hpp__
+#define __scatteredFieldAccess_hpp__
 
 
 #include "phasicFlowKokkos.hpp"
@@ -9,8 +9,8 @@ namespace pFlow
 {
 
 
-template<typename T, typename MemorySpace>
-class scatterFieldAccess
+template<typename T, typename MemorySpace=void>
+class scatteredFieldAccess
 {
 public:
 	
@@ -22,7 +22,7 @@ public:
 
     using execution_space 	= typename viewType::execution_space;
 
-protected:
+private:
 
 	uint32 								size_ = 0;
 
@@ -32,12 +32,12 @@ protected:
 
 public:
 
-    scatterFieldAccess():
+    scatteredFieldAccess():
         indices_(),
         fieldVals_()    
     {}
 
-	scatterFieldAccess(
+	scatteredFieldAccess(
 		uint32 	sz,
 		ViewType1D<uint32, memory_space> ind,
 		ViewType1D<T, memory_space> fVals)
@@ -47,15 +47,15 @@ public:
 		fieldVals_(fVals)
 	{}
 
-	scatterFieldAccess(const scatterFieldAccess&) = default;
+	scatteredFieldAccess(const scatteredFieldAccess&) = default;
 
-	scatterFieldAccess(scatterFieldAccess&&) = default;
+	scatteredFieldAccess(scatteredFieldAccess&&) = default;
 
-	scatterFieldAccess& operator=(const scatterFieldAccess&) = default;
+	scatteredFieldAccess& operator=(const scatteredFieldAccess&) = default;
 
-	scatterFieldAccess& operator=(scatterFieldAccess&&) = default;
+	scatteredFieldAccess& operator=(scatteredFieldAccess&&) = default;
 
-	~scatterFieldAccess() = default;
+	~scatteredFieldAccess() = default;
 
 	// - Methods
 
@@ -95,10 +95,35 @@ public:
 		return size_ == 0;
 	}
 
+	T getFirstCopy()const
+	{
+		T val;
+		uint32 n = indices_(0);
+		getNth(val, fieldVals_, n);
+		return val;
+	}
+
+	T getLastCopy()const 
+	{
+		T val;
+		if(empty())return val;
+		uint32 n = indices_(size()-1);
+		getNth(val, fieldVals_, n);
+		return val;
+	}
+
 };
 
-}
+template<typename T>
+	using deviceScatteredFieldAccess = 
+		scatteredFieldAccess<T, typename DefaultExecutionSpace::memory_space>;
+
+template<typename T>
+	using hostScatteredFieldAccess = 
+		scatteredFieldAccess<T,HostSpace>;
+
+} // pFlow
 
 
-#endif //__scatterFieldAccess_hpp__
+#endif //__scatteredFieldAccess_hpp__
 

@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "boundaryList.hpp"
-#include "internalPoints.hpp"
-#include "simulationDomain.hpp"
+#include "pointStructure.hpp"
+
 
 bool pFlow::boundaryList::resetLists()
 {
@@ -41,10 +41,10 @@ bool pFlow::boundaryList::updateLists()
 	dist[5] = boundary(5).neighborLength();
 
 	
-	internal_.updateFlag(
-			simDomain_.thisDomain(),
+	pStruct_.updateFlag(
+			pStruct_.simDomain().thisDomain(),
 			dist);
-	const auto& maskD = internal_.activePointsMaskDevice();
+	const auto& maskD = pStruct_.activePointsMaskDevice();
 	boundary(0).setSize( maskD.leftSize() );
 	boundary(1).setSize( maskD.rightSize() );
 	boundary(2).setSize( maskD.bottomSize() );
@@ -52,7 +52,7 @@ bool pFlow::boundaryList::updateLists()
 	boundary(4).setSize( maskD.rearSize() );
 	boundary(5).setSize( maskD.frontSize() );
 
-	internal_.fillNeighborsLists(
+	pStruct_.fillNeighborsLists(
 		boundary(0).indexList().deviceVectorAll(),
 		boundary(1).indexList().deviceVectorAll(),
 		boundary(2).indexList().deviceVectorAll(),
@@ -65,17 +65,16 @@ bool pFlow::boundaryList::updateLists()
 
 pFlow::boundaryList::boundaryList
 (
-    const simulationDomain &simD,
-    internalPoints &internal
+    pointStructure& pStruct
 )
 : 
-	ListPtr<boundaryBase>(simD.sizeOfBoundaries()),
-	internal_(internal),
-	simDomain_(simD),
+	ListPtr<boundaryBase>(pStruct.simDomain().sizeOfBoundaries()),
+	pStruct_(pStruct),
 	timeControl_
 	(
-		simDomain_.subDict("boundaries"), 
-		"update"
+		pStruct.simDomain().subDict("boundaries"), 
+		"update",
+		pStruct.currentTime()
 	)
 {}
 
@@ -92,20 +91,71 @@ bool pFlow::boundaryList::setLists()
 {
 	if(listSet_)return true;
 
-	for(auto i=0; i<simDomain_.sizeOfBoundaries();i++)
+	for(auto i=0; i<pStruct_.simDomain().sizeOfBoundaries();i++)
 	{
 		this->set
 		(
 			i,
 			boundaryBase::create
 			(
-				simDomain_.boundaryDict(i),
-				simDomain_.boundaryPlane(i),
-				internal_
+				pStruct_.simDomain().boundaryDict(i),
+				pStruct_.simDomain().boundaryPlane(i),
+				pStruct_
 			)
 		);
 	}
 	listSet_ = true;
 
 	return true;
+}
+
+bool pFlow::boundaryList::beforeIteration
+(
+	uint32 iter, 
+	real t, 
+	real dt
+)
+{
+	// it is time to update lists 
+	if(timeControl_.timeEvent(iter, t, dt))
+	{
+		if(!updateLists())
+		{
+			fatalErrorInFunction;
+			return false;
+		}
+
+		WARNING<<"Maybe notification about the update list "<<END_WARNING;
+	}
+
+	for(auto& bdry:*this)
+	{
+		if( !bdry->beforeIteration(iter, t, dt))
+		{
+			fatalErrorInFunction<<
+			"Error in beforeIteration in boundary "<<bdry->name()<<endl;
+			return false;
+		}
+	}
+    return true;
+}
+
+bool pFlow::boundaryList::iterate
+(
+	uint32 iter, 
+	real t, 
+	real dt
+)
+{
+    return true;
+}
+
+bool pFlow::boundaryList::afterIteration
+(
+	uint32 iter, 
+	real t, 
+	real dt
+)
+{
+    return true;
 }

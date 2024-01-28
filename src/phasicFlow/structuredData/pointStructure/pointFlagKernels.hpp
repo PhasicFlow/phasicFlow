@@ -148,6 +148,55 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::scanPointFlag()
 	return numActive;
 }*/
 
+template<typename ExecutionSpace>
+bool pFlow::pointFlag<ExecutionSpace>::deletePoints
+(
+	scatteredFieldAccess<uint32, memory_space>  points
+)
+{
+	if(points.empty())return true;
+	
+	uint32 minIndex = points.getFirstCopy();
+	uint32 maxIndex = points.getLastCopy();
+	
+	if(maxIndex<minIndex) return false;
+	if(maxIndex>activeRange_.end())return false;
+	if(minIndex<activeRange_.start())return false;
+
+	using policy = Kokkos::RangePolicy<
+		execution_space,  
+		Kokkos::IndexType<uint32>>;
+
+	uint32 numDeleted = 0;
+	Kokkos::parallel_reduce
+	(
+		"pointFlagKernels::deletePoints",
+		policy(0u, points.size()),
+		CLASS_LAMBDA_HD(uint32 i, uint32& valDelUpdate)
+		{
+			uint32 n = points(i);
+			if(isActive(n))
+			{
+				valDelUpdate++;
+				flags_[n] = Flag::DELETED;
+			}
+		},
+		numDeleted
+	);	
+
+	if(numDeleted >= numActive_)
+	{
+		activeRange_ = {0, 0};
+		numDeleted == numActive_;
+	}
+		
+	numActive_ 	= numActive_ - numDeleted;
+	isAllActive_ = 
+		(activeRange_.numElements() == numActive_)&& numActive_>0;
+	
+	return true;
+}
+
 
 template<typename ExecutionSpace>
 pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions

@@ -241,19 +241,19 @@ void copy(
 }
 
 template <
-	typename dType,
-	typename sType,
+	typename Type,
 	typename... sProperties>
 INLINE_FUNCTION_H
 void getNth(
-	dType& dst,
-	const ViewType1D<sType, sProperties...>& src,
+	Type& dst,
+	const ViewType1D<Type, sProperties...>& src,
 	const uint32 n
 	)
 {
-	range32 span(n,n+1);
-	auto subV = Kokkos::subview(src, span);
-	hostViewType1D<dType> dstView("getNth",1);
+		
+	auto subV = Kokkos::subview(src, Kokkos::make_pair(n,n+1));
+	hostViewType1D<Type> dstView("getNth",1);
+	//hostViewTypeScalar
 	Kokkos::deep_copy(dstView,subV);
 	dst = *dstView.data();
 }
@@ -425,13 +425,12 @@ int32 binarySearch(
 template<
 	typename Type,
 	typename... properties,
-	typename dType,
 	typename... dProperties>
 void exclusiveScan(
 	const ViewType1D<Type, properties...>& view,
 	uint32 start,
 	uint32 end,
-	ViewType1D<dType, dProperties...>& dView,
+	ViewType1D<Type, dProperties...>& dView,
 	uint32 dStart )
 {
 
@@ -439,7 +438,7 @@ void exclusiveScan(
 	(
 		areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
-			typename ViewType1D<dType, dProperties...>::memory_space>(),
+			typename ViewType1D<Type, dProperties...>::memory_space>(),
 		"In exclusiveScan, view and dView should have the same space"
 
 	);
@@ -448,7 +447,7 @@ void exclusiveScan(
 	
 	uint32 numElems = end-start;
 	
-	pFlow::algorithms::KOKKOS::exclusiveScan<Type,dType,ExecutionSpace>(
+	pFlow::algorithms::KOKKOS::exclusiveScan<Type,ExecutionSpace>(
 		view.data()+start,
 		dView.data()+dStart,
 		numElems);
@@ -458,13 +457,12 @@ void exclusiveScan(
 template<
 	typename Type,
 	typename... properties,
-	typename dType,
 	typename... dProperties>
 void inclusiveScan(
 	const ViewType1D<Type, properties...>& view,
 	uint32 start,
 	uint32 end,
-	ViewType1D<dType, dProperties...>& dView,
+	ViewType1D<Type, dProperties...>& dView,
 	uint32 dStart)
 {
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
@@ -473,14 +471,14 @@ void inclusiveScan(
 	(
 		areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
-			typename ViewType1D<dType, dProperties...>::memory_space>(),
+			typename ViewType1D<Type, dProperties...>::memory_space>(),
 		"In exclusiveScan, view and dView should have the same space"
 	);
 
 
 	uint32 numElems = end-start;
 
-	pFlow::algorithms::KOKKOS::inclusiveScan<Type,dType,ExecutionSpace>(
+	pFlow::algorithms::KOKKOS::inclusiveScan<Type,ExecutionSpace>(
 		view.data()+start,
 		dView.data()+dStart,
 		numElems);
