@@ -139,9 +139,15 @@ public:
 		virtual 
 		bool predict(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
 
+		virtual 
+		bool predict(real dt, realx3Field_D& y, realx3PointField_D& dy) = 0;
+
 		/// Correction/main integration step
 		virtual 
 		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
+
+		virtual 
+		bool correct(real dt, realx3Field_D& y, realx3PointField_D& dy) = 0;
 
 		/// Set the initial values for new indices 
 		virtual 

@@ -178,10 +178,7 @@ public:
 		INLINE_FUNCTION_H 
 		uniquePtr<VectorSingle> clone() const;
 
-		/// Clone as a pointer (perform deep copy)
-		INLINE_FUNCTION_H
-		VectorSingle* clonePtr()const;
-	
+			
 	//// - Methods
 
 		/// Return *this
@@ -192,22 +189,22 @@ public:
 		INLINE_FUNCTION_H
 		const VectorType& VectorField()const;
 
-		/// Device vector range [0,capcity)
+		/// Device view range [0,capcity)
 		INLINE_FUNCTION_H 
-		auto deviceVectorAll() const;
+		auto deviceViewAll() const;
 
-		///  Device vector range [0, size)
+		///  Device view range [0, size)
 		INLINE_FUNCTION_H 
-		auto deviceVector()const;
+		auto deviceView()const;
 
-		/// Return a vector accessible on Host in range [0,capacity)
+		/// Return a view accessible on Host in range [0,capacity)
 		INLINE_FUNCTION_H 
-		auto hostVectorAll()const;
+		auto hostViewAll()const;
 		
 
-		/// Return a vector accessible on Host in range [0,size)
+		/// Return a view accessible on Host in range [0,size)
 		INLINE_FUNCTION_H 
-		auto hostVector()const;
+		auto hostView()const;
 
 		/// Name of the vector 
 		INLINE_FUNCTION_H 
@@ -403,7 +400,7 @@ public:
 		FUNCTION_H
 		bool write(iOstream& os, const IOPattern& iop)const
 		{
-			auto hVec = hostVector();
+			auto hVec = hostView();
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
 			
 			return writeSpan(os, sp, iop);
@@ -413,7 +410,7 @@ public:
 		FUNCTION_H
 		bool write(iOstream& os)const
 		{
-			auto hVec = hostVector();
+			auto hVec = hostView();
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
 			
 			return writeSpan(os, sp);
@@ -424,7 +421,7 @@ public:
 		FUNCTION_H
 		bool write(iOstream& os, const IOPattern& iop, const HostMask& mask)const
 		{
-			auto hVec = hostVector();
+			auto hVec = hostView();
 			
 			auto numActive = mask.numActive();
 			std::vector<T> finalField;
@@ -518,5 +515,5 @@ inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& 
 		INLINE_FUNCTION_H
 		bool append(const VectorSingle& Vec)
 		{
-			return append(Vec.deviceVector(), Vec.size());
+			return append(Vec.deviceView(), Vec.size());
 		}*/

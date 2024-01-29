@@ -80,10 +80,14 @@ public:
 		return velocity_;
 	}
 
-	/*inline auto velocityHostAll()
-	{
-		return velocity_.hostVectorAll();
-	}*/
+	/// In the time loop before iterate
+	//bool beforeIteration() override;
+
+	/// @brief This is called in time loop. Perform the main calculations 
+	/// when the component should evolve along time.
+	//bool iterate() override;
+
+		
 
 	bool predict(real dt, realx3PointField_D& acceleration);
 

@@ -151,7 +151,8 @@ public:
 	virtual realx3Vector getFinalPosition();
 
 	static
-	uniquePtr<positionParticles> create(systemControl& control, const dictionary & dict);
+	uniquePtr<positionParticles> 
+		create(systemControl& control, const dictionary & dict);
 	
 };	
 

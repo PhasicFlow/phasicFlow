@@ -28,14 +28,14 @@ template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
 size_t count(const VectorSingle<T,MemorySpace>& vec, const T& val)
 {
-	return count( vec.deviceVectorAll(), 0, vec.size(), val);
+	return count( vec.deviceViewAll(), 0, vec.size(), val);
 }
 
 template<class T, class MemorySpace>
 INLINE_FUNCTION_H T min( const VectorSingle<T,MemorySpace>& vec) 
 {
 	return min(
-		vec.deviceVectorAll(),
+		vec.deviceViewAll(),
 		0, vec.size()
 		);	
 }
@@ -44,7 +44,7 @@ template<class T, class MemorySpace>
 INLINE_FUNCTION_H T max( const VectorSingle<T, MemorySpace>& vec) 
 {
 	return min(
-		vec.deviceVectorAll(),
+		vec.deviceViewAll(),
 		0, vec.size()
 		);		
 }

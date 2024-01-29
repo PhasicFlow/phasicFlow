@@ -20,6 +20,8 @@ Licence:
 #ifndef __pointFlagKernels_hpp__
 #define __pointFlagKernels_hpp__
 
+#include "streams.hpp"
+
 template<typename ExecutionSpace>
 pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markOutOfBoxDelete
 (
@@ -353,9 +355,9 @@ void pFlow::pointFlag<ExecutionSpace>::fillNeighborsLists
 	uint32 end   = activeRange().end();
 
 	ViewType1D<uint32, memory_space> nElems("nElems",6);
-
+	
 	fill(nElems, 0, 6, static_cast<uint32>(0));
-
+		
 	if(start<end)
 	{
 		Kokkos::parallel_for(
@@ -363,16 +365,15 @@ void pFlow::pointFlag<ExecutionSpace>::fillNeighborsLists
 			rpMark(start,end),
 			CLASS_LAMBDA_HD(uint32 i){
 
-				uint32 flg = flags_(i);
-
+				uint8 flg = flags_(i);
 				if(this->isBoundary(flg))
 				{
 					if(this->isLeft(flg)) leftList[Kokkos::atomic_fetch_add(&nElems[0],1)] = i;
-					if(this->isRight(flg)) rightList[Kokkos::atomic_fetch_add(&nElems[1],1)] = i;
-					if(this->isBottom(flg)) bottomList[Kokkos::atomic_fetch_add(&nElems[2],1)] = i;
-					if(this->isTop(flg)) topList[Kokkos::atomic_fetch_add(&nElems[3],1)] = i;
-					if(this->isRear(flg)) rearList[Kokkos::atomic_fetch_add(&nElems[4],1)] = i;
-					if(this->isFront(flg)) frontList[Kokkos::atomic_fetch_add(&nElems[5],1)] = i;
+					if(this->isRight(flg))rightList[Kokkos::atomic_fetch_add(&nElems[1],1)] = i;
+					if(this->isBottom(flg))bottomList[Kokkos::atomic_fetch_add(&nElems[2],1)] = i;
+					if(this->isTop(flg))topList[Kokkos::atomic_fetch_add(&nElems[3],1)] = i;
+					if(this->isRear(flg))rearList[Kokkos::atomic_fetch_add(&nElems[4],1)] = i;
+					if(this->isFront(flg))frontList[Kokkos::atomic_fetch_add(&nElems[5],1)] = i;
 				}
 			});
 		Kokkos::fence();	

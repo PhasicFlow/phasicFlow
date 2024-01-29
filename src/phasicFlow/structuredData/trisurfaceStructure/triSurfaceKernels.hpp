@@ -32,9 +32,9 @@ INLINE_FUNCTION_H
 bool calculateArea(const realx3Field_D& points, const int32x3Field_D& vertices, realField_D& area)
 {
 	auto numTri = vertices.size();
-	auto areaD = area.deviceVectorAll();
-	auto pointsD = points.deviceVectorAll();
-	auto verticesD = vertices.deviceVectorAll();
+	auto areaD = area.deviceViewAll();
+	auto pointsD = points.deviceViewAll();
+	auto verticesD = vertices.deviceViewAll();
 
 	Kokkos::parallel_for(
 		"pFlow::triSurfaceKernels::calculateArea",

@@ -33,14 +33,14 @@ class pointFlag
 {
 	enum Flag: uint8
 	{
-		DELETED 	= 1, 	//10000000
-		INTERNAL 	= 2,	//00000001
-		LEFT 		= 4,	//00000010
-		RIGHT 		= 8,    //00000100
-		BOTTOM 		= 16,	//00001000
-		TOP 		= 32,	//00010000
-		REAR 		= 64, 	//00100000
-		FRONT 		= 128	//01000000
+		DELETED 	= 1, 	//00000001
+		INTERNAL 	= 2,	//00000010
+		LEFT 		= 4,	//00000100
+		RIGHT 		= 8,    //00001000
+		BOTTOM 		= 16,	//00010000
+		TOP 		= 32,	//00100000
+		REAR 		= 64, 	//01000000
+		FRONT 		= 128	//10000000
 	};
 
 	using execution_space 	= ExecutionSpace;
@@ -184,12 +184,7 @@ public:
 		return flags_[i] > DELETED;
 	}
 
-	INLINE_FUNCTION_HD
-	bool isBoundary(uint32 i)const
-	{
-		return flags_[i] > INTERNAL;
-	}
-
+	
 	INLINE_FUNCTION_HD
 	bool isBoundary(uint8 flg)const
 	{
@@ -200,38 +195,38 @@ public:
 	INLINE_FUNCTION_HD
 	bool isLeft(uint8 flg)const
 	{
-		return (flg&LEFT) == LEFT;
+		return flg&LEFT;
 	}
 
 	INLINE_FUNCTION_HD
 	bool isRight(uint8 flg)const
 	{
-		return (flg&&RIGHT) == RIGHT;
+		return flg&RIGHT;
 	}
 
 
 	INLINE_FUNCTION_HD
 	bool isBottom(uint8 flg)const
 	{
-		return (flg&&BOTTOM) == BOTTOM;
+		return flg&BOTTOM;
 	}
 
 	INLINE_FUNCTION_HD
 	bool isTop(uint8 flg)const
 	{
-		return (flg&&TOP) == TOP;
+		return flg&TOP;
 	}
 
 	INLINE_FUNCTION_HD
 	bool isRear(uint8 flg)const
 	{
-		return (flg&&REAR) == REAR;
+		return flg&REAR;
 	}
 
 	INLINE_FUNCTION_HD
 	bool isFront(uint8 flg)const
 	{
-		return (flg&&FRONT) == FRONT;
+		return flg&FRONT;
 	}
 
 	template<typename ExeSpace>

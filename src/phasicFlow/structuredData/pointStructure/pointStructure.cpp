@@ -166,6 +166,12 @@ pFlow::pointStructure::pointStructure(
 
 bool pFlow::pointStructure::beforeIteration()
 {
+    if( !boundaries_.beforeIteration(currentIter(), currentTime(), dt()) )
+    {
+        fatalErrorInFunction<<
+        "Unable to perform beforeIteration for boundaries"<<endl;
+        return false;
+    }
     return true;
 }
 
@@ -206,5 +212,6 @@ bool pFlow::pointStructure::write
     const IOPattern& iop
 )const
 {
+    output<<"bool pFlow::pointStructure::write bool pFlow::pointStructure::write bool pFlow::pointStructure::write"<<endl;
     return internalPoints::write(os, iop);
 }

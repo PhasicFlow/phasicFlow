@@ -21,7 +21,6 @@ Licence:
 #include "baseTimeControl.hpp"
 
 
-
 pFlow::baseTimeControl::baseTimeControl
 (
     const dictionary &dict,
@@ -46,7 +45,7 @@ pFlow::baseTimeControl::baseTimeControl
 
 	word intervalWord = intervalPrefix.size()==0? word("interval"): intervalPrefix+"Interval";
 
-	if(isTimeStep_)
+	if(!isTimeStep_)
 	{
 		auto startTime = (dict.getValOrSet<real>("startTime", defStartTime));
     	auto endTime = (dict.getValOrSet<real>("endTime", largeValue));
@@ -72,7 +71,7 @@ bool pFlow::baseTimeControl::timeEvent(uint32 iter, real t, real dt) const
 	}
 	else
 	{
-		return rRange_.isMember(t, 0.51*dt);
+		return rRange_.isMember(t, 0.55*dt);
 	}
     return false;
 }

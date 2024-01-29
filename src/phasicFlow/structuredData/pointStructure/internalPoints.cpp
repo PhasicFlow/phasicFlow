@@ -135,8 +135,9 @@ bool pFlow::internalPoints::deletePoints
 		"Error in deleting points from internal points"<<endl;
 		return false;
 	}
-	WARNING<<"Notify the observersin in internalPoints"<<END_WARNING;
 	pFlagSync_ = false;
+	WARNING<<"Notify the observersin in internalPoints"<<END_WARNING;
+
     return true;
 }
 
@@ -151,7 +152,7 @@ pFlow::uint32 pFlow::internalPoints::updateFlag
 	return pFlagsD_.markPointRegions
 	(
 		dm,
-		pointPosition_.deviceVectorAll(),
+		pointPosition_.deviceViewAll(),
 		dist[0],
 		dist[1],
 		dist[2],
@@ -213,15 +214,8 @@ bool pFlow::internalPoints::write
 	iOstream& os
 )const
 {
-	if( pFlagsD_.isAllActive())
-	{
-		return pointPosition_.write(os);
-	}
-	else
-	{
-		auto aPoints = this->activePointsHost();
-		return aPoints.write(os);
-	}
+	auto aPoints = this->activePointsHost();
+	return aPoints.write(os);
 }
 
 FUNCTION_H
@@ -259,15 +253,8 @@ bool pFlow::internalPoints::write
 	const IOPattern& iop
 )const
 {
-	if( pFlagsD_.isAllActive())
-	{
-		return pointPosition_.write(os, iop);
-	}
-	else
-	{
-		auto aPoints = activePointsHost();
-		return aPoints.write(os,iop);
-	}
+	auto aPoints = activePointsHost();
+	return aPoints.write(os,iop);	
 }
 
 
@@ -288,7 +275,7 @@ bool pFlow::internalPoints::evaluateinternalPoints()
 		0,
 		numPoints_,
 		static_cast<int8>(internalPoints::ACTIVE),
-		pointFlag_.deviceVectorAll(),
+		pointFlag_.deviceViewAll(),
 		minActive,
 		maxActive
 		);

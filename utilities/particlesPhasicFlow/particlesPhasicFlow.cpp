@@ -174,8 +174,8 @@ int main( int argc, char* argv[] )
 
 	REPORT(0)<< "Converting shapeName field to shapeIndex field"<<END_REPORT;
 
-	auto shapeName_D = shapeName.fieldDevice();
-	auto shapeIndex_D = shapeIndex.fieldDevice();
+	auto shapeName_D = shapeName.deviceView();
+	auto shapeIndex_D = shapeIndex.deviceView();
 	
 	REPORT(1)<<"List of shape names in "<<shapes.globalName()<<
 	" is: "<<Green_Text(shapes.shapeNameList())<<END_REPORT;

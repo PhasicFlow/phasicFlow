@@ -53,12 +53,12 @@ bool pFlow::boundaryList::updateLists()
 	boundary(5).setSize( maskD.frontSize() );
 
 	pStruct_.fillNeighborsLists(
-		boundary(0).indexList().deviceVectorAll(),
-		boundary(1).indexList().deviceVectorAll(),
-		boundary(2).indexList().deviceVectorAll(),
-		boundary(3).indexList().deviceVectorAll(),
-		boundary(4).indexList().deviceVectorAll(),
-		boundary(5).indexList().deviceVectorAll());
+		boundary(0).indexList().deviceViewAll(),
+		boundary(1).indexList().deviceViewAll(),
+		boundary(2).indexList().deviceViewAll(),
+		boundary(3).indexList().deviceViewAll(),
+		boundary(4).indexList().deviceViewAll(),
+		boundary(5).indexList().deviceViewAll());
 
 	return true;	
 }
@@ -124,8 +124,6 @@ bool pFlow::boundaryList::beforeIteration
 			fatalErrorInFunction;
 			return false;
 		}
-
-		WARNING<<"Maybe notification about the update list "<<END_WARNING;
 	}
 
 	for(auto& bdry:*this)

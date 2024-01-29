@@ -174,7 +174,7 @@ void pFlow::timeControl::checkForOutputToFile()
 bool pFlow::timeControl::timersReportTime()const
 {
 	if(currentIter_<=1)return false;
-	return timersReportInterval_.isMember(currentTime_, dt_);
+	return timersReportInterval_.isMember(currentTime_, 0.55*dt_);
 }
 
 bool pFlow::timeControl::sortTime()const

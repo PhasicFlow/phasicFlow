@@ -75,18 +75,26 @@ public:
 		const internalPoints& internal,
 		const T& val);
 	
-
-	auto fieldDevice()const
+	inline
+	auto deviceView()const
 	{
-		return field_.deviceVector();
+		return field_.deviceView();
 	}
 
-	auto fieldHost()const
+	inline
+	auto hostView()const
 	{
-		return field_.hostVector();
+		return field_.hostView();
 	}
 
+	inline
 	const FieldType& field()const
+	{
+		return field_;
+	}
+
+	inline
+	FieldType& field()
 	{
 		return field_;
 	}

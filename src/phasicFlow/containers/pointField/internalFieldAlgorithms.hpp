@@ -39,7 +39,7 @@ T min(const internalField<T,MemorySpace>& iField)
         // this is a device view 
         auto maskD = iField.activePointsMaskDevice();
         auto aRange = maskD.activeRange();
-        auto filed = iField.field().deviceVectorAll();
+        auto filed = iField.field().deviceViewAll();
 
         T minElement;
         
@@ -59,7 +59,7 @@ T min(const internalField<T,MemorySpace>& iField)
         // this is a host view 
         auto maskH = iField.activePointsMaskHost();
         auto aRange = maskH.activeRange();
-        auto filed = iField.field().deviceVectorAll();
+        auto filed = iField.field().deviceViewAll();
         T minElement;
         Kokkos::parallel_reduce(
             "min(internalField)",
@@ -90,7 +90,7 @@ T max(const internalField<T,MemorySpace>& iField)
         // this is a device view 
         auto maskD = iField.activePointsMaskDevice();
         auto aRange = maskD.activeRange();
-        auto filed = iField.field().deviceVectorAll();
+        auto filed = iField.field().deviceViewAll();
 
         T maxElement;
         
@@ -110,7 +110,7 @@ T max(const internalField<T,MemorySpace>& iField)
         // this is a host view 
         auto maskH = iField.activePointsMaskHost();
         auto aRange = maskH.activeRange();
-        auto filed = iField.field().deviceVectorAll();
+        auto filed = iField.field().deviceViewAll();
 
         T maxElement;
         
@@ -143,7 +143,7 @@ Pair<T,T> minMax(const internalField<T,MemorySpace>& iField)
         // this is a device view 
         auto maskD = iField.activePointsMaskDevice();
         auto aRange = maskD.activeRange();
-        auto filed = iField.field().deviceVectorAll();
+        auto filed = iField.field().deviceViewAll();
 
         T minElement;
         T maxElement;
@@ -170,7 +170,7 @@ Pair<T,T> minMax(const internalField<T,MemorySpace>& iField)
         // this is a host view 
         auto maskH = iField.activePointsMaskHost();
         auto aRange = maskH.activeRange();
-        auto filed = iField.field().deviceVectorAll();
+        auto filed = iField.field().deviceViewAll();
 
         T minElement;
         T maxElement;

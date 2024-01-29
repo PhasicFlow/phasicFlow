@@ -35,20 +35,20 @@ using rpIntegration = Kokkos::RangePolicy<
 
 bool intAllActive(
 	real dt, 
-	realx3PointField_D& y, 
+	realx3Field_D& y, 
 	realx3PointField_D& dy,
 	realx3PointField_D& dy1)
 {
 
-	auto d_dy = dy.fieldDevice();
-	auto d_y  = y.fieldDevice();
-	auto d_dy1= dy1.fieldDevice();
+	auto d_dy = dy.deviceView();
+	auto d_y  = y.deviceView();
+	auto d_dy1= dy1.deviceView();
 	auto activeRng = dy1.activeRange();
 
 	Kokkos::parallel_for(
 		"AdamsBashforth2::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
-		LAMBDA_HD(int32 i){
+		LAMBDA_HD(uint32 i){
 			d_y[i] +=  dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
 			d_dy1[i] = d_dy[i];
 		});
@@ -60,22 +60,22 @@ bool intAllActive(
 bool intScattered
 (
 	real dt, 
-	realx3PointField_D& y,
+	realx3Field_D& y,
 	realx3PointField_D& dy,
 	realx3PointField_D& dy1
 )
 {
 
-	auto d_dy 		= dy.fieldDevice();
-	auto d_y  		= y.fieldDevice();
-	auto d_dy1		= dy1.fieldDevice();
+	auto d_dy 		= dy.deviceView();
+	auto d_y  		= y.deviceView();
+	auto d_dy1		= dy1.deviceView();
 	auto activeRng 	= dy1.activeRange();
 	const auto& activeP = dy1.activePointsMaskDevice();
 
 	Kokkos::parallel_for(
 		"AdamsBashforth2::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
-		LAMBDA_HD(int32 i){
+		LAMBDA_HD(uint32 i){
 			if( activeP(i))
 			{
 				d_y[i] +=  dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
@@ -122,8 +122,17 @@ bool pFlow::AdamsBashforth2::predict
 	realx3PointField_D& UNUSED(dy)
 )
 {
-
 	return true;
+}
+
+bool pFlow::AdamsBashforth2::predict
+(
+	real dt, 
+	realx3Field_D &y, 
+	realx3PointField_D &dy
+)
+{
+    return true;
 }
 
 bool pFlow::AdamsBashforth2::correct
@@ -132,6 +141,11 @@ bool pFlow::AdamsBashforth2::correct
 	realx3PointField_D& y,
 	realx3PointField_D& dy
 )
+{
+	return correct(dt, y.field(), dy);
+}
+
+bool pFlow::AdamsBashforth2::correct(real dt, realx3Field_D &y, realx3PointField_D &dy)
 {
 	auto& dy1l = dy1();
 
@@ -143,8 +157,7 @@ bool pFlow::AdamsBashforth2::correct
 	{
 		return intScattered(dt, y, dy, dy1l);
 	}
-
-	return true;
+    return false;
 }
 
 bool pFlow::AdamsBashforth2::setInitialVals(

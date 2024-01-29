@@ -182,7 +182,7 @@ pFlow::VectorSingle<T,MemorySpace>::VectorSingle
 :
     VectorSingle(name, src.capacity(), src.size(), RESERVE())
 {
-    copy(deviceVector(), src.deviceVector());	
+    copy(deviceView(), src.deviceView());	
 }
 
 template<typename T, typename MemorySpace>
@@ -213,13 +213,6 @@ pFlow::uniquePtr<pFlow::VectorSingle<T,MemorySpace>>
     return makeUnique<VectorSingle>( this->name(), *this);
 }
 
-template<typename T, typename MemorySpace>
-INLINE_FUNCTION_H
-pFlow::VectorSingle<T,MemorySpace>*
-    pFlow::VectorSingle<T,MemorySpace>::clonePtr()const   
-{
-    return new VectorSingle(this->name(), *this);
-}
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H
@@ -239,21 +232,23 @@ pFlow::VectorSingle<T,MemorySpace>::VectorField()const
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
-auto pFlow::VectorSingle<T,MemorySpace>::deviceVectorAll() const
+auto pFlow::VectorSingle<T,MemorySpace>::deviceViewAll() const
 {
     return view_;
 }
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
-auto pFlow::VectorSingle<T,MemorySpace>::deviceVector()const
+auto pFlow::VectorSingle<T,MemorySpace>::deviceView()const
 {
-    return Kokkos::subview(view_, Kokkos::make_pair(0,int(size_)));
+    return Kokkos::subview(
+        view_, 
+        Kokkos::make_pair(0u,static_cast<uint32>(size_)));
 }
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
-auto pFlow::VectorSingle<T,MemorySpace>::hostVectorAll()const
+auto pFlow::VectorSingle<T,MemorySpace>::hostViewAll()const
 {
     auto hView = Kokkos::create_mirror_view(view_);
     copy(hView, view_);
@@ -262,10 +257,10 @@ auto pFlow::VectorSingle<T,MemorySpace>::hostVectorAll()const
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
-auto pFlow::VectorSingle<T,MemorySpace>::hostVector()const
+auto pFlow::VectorSingle<T,MemorySpace>::hostView()const
 {
-    auto hView = Kokkos::create_mirror_view(deviceVector());
-    copy(hView, deviceVector());
+    auto hView = Kokkos::create_mirror_view(deviceView());
+    copy(hView, deviceView());
     return hView;
 }
 
@@ -402,7 +397,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     
     // - unmanaged view in the host
     hostViewType1D<const T> temp(src.data(), srcSize );
-    copy(deviceVector(), temp);
+    copy(deviceView(), temp);
 }
 
 template<typename T, typename MemorySpace>
@@ -429,7 +424,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
     {
         setSize(srcSize);
     }
-	copy(deviceVector(), src.hostVector());
+	copy(deviceView(), src.hostView());
 }
 
 template<typename T, typename MemorySpace>
@@ -528,7 +523,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 
 		Kokkos::parallel_for(
 			"VectorSingle::insertSetElement",
-			policy(0,indices.size()), LAMBDA_HD(int32 i){	
+			policy(0,indices.size()), LAMBDA_HD(uint32 i){	
 				dVec(ind(i))= dVals(i);});
 		Kokkos::fence();
 
@@ -540,7 +535,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 
 		Kokkos::parallel_for(
 			"VectorSingle::insertSetElement",
-			policy(0,indices.size()), LAMBDA_HD(int32 i){	
+			policy(0,indices.size()), LAMBDA_HD(uint32 i){	
 				dVec(ind(i))= hVals(i);});
 		Kokkos::fence();
 
@@ -579,7 +574,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 
 		Kokkos::parallel_for(
 			"VectorSingle::insertSetElement",
-			policy(0,indices.size()), LAMBDA_HD(int32 i){	
+			policy(0,indices.size()), LAMBDA_HD(uint32 i){	
 				dVec(ind(i))= dVals(i);});
 		Kokkos::fence();
 
@@ -592,7 +587,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 
 		Kokkos::parallel_for(
 			"VectorSingle::insertSetElement",
-			policy(0,indices.size()), LAMBDA_HD(int32 i){	
+			policy(0,indices.size()), LAMBDA_HD(uint32 i){	
 				dVec(ind(i))= hVals(i);});
 		Kokkos::fence();
 
@@ -665,7 +660,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::reorderItems(uint32IndexContainer indic
 		Kokkos::fence();
 	}
 
-	copy(deviceVector(), sortedView);
+	copy(deviceView(), sortedView);
 	
 	return true;
 }

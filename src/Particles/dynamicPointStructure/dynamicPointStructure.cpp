@@ -78,16 +78,28 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 
 }
 
-bool pFlow::dynamicPointStructure::predict
-(
-	real dt,
-	realx3PointField_D& acceleration
-)
+/*bool pFlow::dynamicPointStructure::beforeIteration()
 {
-	//auto& pos = pStruct().pointPosition();
+	pointStructure::beforeIteration();
+	auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
+    return predict(dt(), acc);
+}*/
 
-	//if(!integrationPos_().predict(dt, pos.VectorField(), velocity_.VectorField() ))return false;
-	//if(!integrationVel_().predict(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
+/*bool pFlow::dynamicPointStructure::iterate()
+{
+	pointStructure::iterate();
+	auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
+    return correct(dt(), acc);
+    
+}*/
+
+bool pFlow::dynamicPointStructure::predict(
+    real dt,
+    realx3PointField_D &acceleration)
+{
+	
+	if(!integrationPos_().predict(dt, pointPosition(), velocity_ ))return false;
+	if(!integrationVel_().predict(dt, velocity_, acceleration))return false;
 
 	return true;
 }
@@ -100,9 +112,9 @@ bool pFlow::dynamicPointStructure::correct
 {
 	//auto& pos = pStruct().pointPosition();
 	
-	//if(!integrationPos_().correct(dt, pos.VectorField(), velocity_.VectorField() ))return false;
+	if(!integrationPos_().correct(dt, pointPosition(), velocity_) )return false;
 	
-	//if(!integrationVel_().correct(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
+	if(!integrationVel_().correct(dt, velocity_, acceleration))return false;
 
 	return true;	
 }
@@ -121,7 +133,7 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::dynamicPointStructure::inser
 
 	if(!integrationPos_().needSetInitialVals()) return newIndicesPtr;
 
-	auto hVel = velocity_.hostVector();
+	auto hVel = velocity_.hostView();
 	auto n = newIndicesPtr().size();
 	auto index = newIndicesPtr().indicesHost();
 
@@ -158,8 +170,8 @@ pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::dynamicPointStructure::inser
 
 		realx3Vector pos(n,RESERVE());
 		realx3Vector vel(n,RESERVE());
-		const auto hVel = velocity().hostVector();
-		const auto hPos = pStruct().pointPosition().hostVector();
+		const auto hVel = velocity().hostView();
+		const auto hPos = pStruct().pointPosition().hostView();
 
 		for(auto i=0; i<n; i++)
 		{

@@ -41,33 +41,39 @@ Licence:
 	
 }*/
 
-pFlow::boundaryBase::boundaryBase
+void pFlow::boundaryBase::setNewIndices
 (
-	const dictionary& 	dict,
-	const plane& 		bplane,
-	internalPoints& 	internal
+	deviceViewType1D<uint32> newIndices
 )
-:
-	subscriber(dict.name()),
-	boundaryPlane_(bplane),
-	indexList_(groupNames(dict.name(),"indexList")),
-	neighborLength_(dict.getVal<real>("neighborLength")),
-	internal_(internal),
-	mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
-	name_(dict.name()),
-	type_(dict.getVal<word>("type"))
 {
+	auto newSize = newIndices.size();
+	setSize(static_cast<uint32>(newSize));
+	copy(indexList_.deviceView(), newIndices);
+}
 
+pFlow::boundaryBase::boundaryBase(
+    const dictionary &dict,
+    const plane &bplane,
+    internalPoints &internal)
+    : subscriber(dict.name()),
+      boundaryPlane_(bplane),
+      indexList_(groupNames(dict.name(), "indexList")),
+      neighborLength_(dict.getVal<real>("neighborLength")),
+      internal_(internal),
+      mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
+      name_(dict.name()),
+      type_(dict.getVal<word>("type"))
+{
 }
 
 void pFlow::boundaryBase::setSize(uint32 newSize)
 {
 	indexList_.resize(newSize);
-
-	if( indexList_.capacity() <= newSize+1 )
+	/*if( indexList_.capacity() <= newSize+1 )
 	{
 		indexList_.reserve(newSize+1);
-	}
+	}*/
+	//INFORMATION<<"new size of boundary "<< name_<<" "<< indexList_.size()<<END_INFO;
 }	
 
 typename pFlow::boundaryBase::pointFieldAccessType
@@ -77,8 +83,8 @@ pFlow::boundaryBase::thisPoints()
     return pointFieldAccessType
     (
         indexList_.size(),
-        indexList_.deviceVectorAll(),
-        internal_.pointPosition().deviceVectorAll()
+        indexList_.deviceViewAll(),
+        internal_.pointPosition().deviceViewAll()
     );
    
 }

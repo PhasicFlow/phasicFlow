@@ -69,8 +69,8 @@ bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
 	SearchType search(
 					box(minP, maxP),
 					diameter_,
-					positionHD.deviceVectorAll(),
-					diameter.deviceVectorAll());
+					positionHD.deviceViewAll(),
+					diameter.deviceViewAll());
 
 	ContainerType pairs(3*startNum);
 		
@@ -250,7 +250,7 @@ pFlow::int32 pFlow::findCollisions(
 {
 	auto allPairs = pairs.getPairs();
 	auto num = pairs.capacity();
-	auto dFlags = flags.deviceVector();
+	auto dFlags = flags.deviceView();
 	
 
 	int32 numCollisions = 0;

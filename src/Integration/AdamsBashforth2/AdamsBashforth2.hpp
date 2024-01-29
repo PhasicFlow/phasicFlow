@@ -81,11 +81,22 @@ public:
 			real UNUSED(dt), 
 			realx3PointField_D& UNUSED(y), 
 			realx3PointField_D& UNUSED(dy)) final;
+		
+		bool predict(
+			real dt, 
+			realx3Field_D& y, 
+			realx3PointField_D& dy) final;
 
 		bool correct(
 			real dt, 
 			realx3PointField_D& y, 
 			realx3PointField_D& dy) final;
+
+		bool correct(
+			real dt, 
+			realx3Field_D& y, 
+			realx3PointField_D& dy);
+		
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,

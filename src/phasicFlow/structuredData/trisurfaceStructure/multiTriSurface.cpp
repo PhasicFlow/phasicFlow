@@ -115,11 +115,11 @@ bool pFlow::multiTriSurface::addTriSurface
 	vertices_.resize(vNewSize);
 	area_.resize(vNewSize);
 	
-	auto verVec = vertices_.deviceVectorAll();
-	auto areaVec = area_.deviceVectorAll();
+	auto verVec = vertices_.deviceViewAll();
+	auto areaVec = area_.deviceViewAll();
 
-	auto newVerVec = newVertices.deviceVectorAll();
-	auto newArea = newAreas.deviceVectorAll();
+	auto newVerVec = newVertices.deviceViewAll();
+	auto newArea = newAreas.deviceViewAll();
 
 	auto maxIdx = maxIndex();
 

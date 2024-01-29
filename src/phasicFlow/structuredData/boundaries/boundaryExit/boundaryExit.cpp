@@ -65,6 +65,7 @@ bool pFlow::boundaryExit::beforeIteration
 	auto points = thisPoints();
 	uint32 numDeleted = 0;
 	auto p = boundaryPlane().infPlane();
+	
 
 	Kokkos::parallel_reduce
 	(
@@ -84,6 +85,7 @@ bool pFlow::boundaryExit::beforeIteration
 		}, 
 		numDeleted
 	);
+	
 	
 	// no point is deleted
 	if(numDeleted == 0 )
@@ -111,7 +113,7 @@ bool pFlow::boundaryExit::beforeIteration
 	deviceScatteredFieldAccess<uint32> deleteIndices(
 			numDeleted, 
 			deleteList,
-			indexList().deviceVectorAll());
+			indexList().deviceViewAll());
 	
 	// tell internal to remove these points from its list 
 	if(!internal().deletePoints(deleteIndices))
@@ -124,13 +126,13 @@ bool pFlow::boundaryExit::beforeIteration
 	// delete these indices from your list 
 	if(numDeleted == s )
 	{
-		indexList().resize(0u);
+		setSize(0u);
 	}
 	else
 	{
-		uint newSize = s-numDeleted;
+		uint32 newSize = s-numDeleted;
 		deviceViewType1D<uint32> newIndices("newIndices", newSize);
-		auto oldIndices = indexList().deviceVectorAll();
+		auto oldIndices = indexList().deviceViewAll();
 
 		Kokkos::parallel_for(
 			"fillIndices",
@@ -144,13 +146,10 @@ bool pFlow::boundaryExit::beforeIteration
 			}
 		);
 		Kokkos::fence();
-		copy(oldIndices, newIndices);
-		indexList().resize(newSize);
+		setNewIndices(newIndices);
 	}
 
-	// notify your observers 
-
-	WARNING<<"notify observers in boundary exit "<<END_WARNING;
+	//TODO: notify observers about changes 
 	
 	return true;
 }

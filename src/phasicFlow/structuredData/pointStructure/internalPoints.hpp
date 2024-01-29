@@ -121,13 +121,13 @@ public:
         INLINE_FUNCTION_H
         auto pointPositionHost()const
         {
-            return pointPosition_.hostVector();
+            return pointPosition_.hostView();
         }
 
         INLINE_FUNCTION_H
         auto pointPositionDevice()const
         {
-            return pointPosition_.deviceVector();
+            return pointPosition_.deviceView();
         }
 
 		PointsTypeHost activePointsHost()const;

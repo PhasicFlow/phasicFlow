@@ -73,7 +73,7 @@ typename pFlow::internalField<T, MemorySpace>::FieldTypeHost
 	pFlow::internalField<T, MemorySpace>::activeValuesHost() const
 {
 	auto maskH = internalPoints_.activePointsMaskHost();
-    auto fieldH = field_.hostVector();
+    auto fieldH = field_.hostView();
 
 	FieldTypeHost aField
 	(
@@ -105,13 +105,6 @@ bool pFlow::internalField<T, MemorySpace>::write
 	const IOPattern& iop
 )const
 {
-	if( internalPoints_.isAllActive() )
-	{
-		return field_.write(os, iop);
-	}
-	else
-	{
-		auto aField = activeValuesHost();
-		return aField.write(os, iop);
-	}
+	auto aField = activeValuesHost();
+	return aField.write(os, iop);
 }

@@ -175,9 +175,9 @@ public:
 		{
 			return triangleAccessor(
 				numPoints(),
-				points_.deviceVectorAll(),
+				points_.deviceViewAll(),
 				numTriangles(),
-				vertices_.deviceVectorAll()
+				vertices_.deviceViewAll()
 				);
 		}
 
@@ -203,12 +203,12 @@ public:
 
 		const realx3* pointsData_D()const
 		{
-			return points_.deviceVectorAll().data();
+			return points_.deviceViewAll().data();
 		}
 
 		realx3* pointsData_D()
 		{
-			return points_.deviceVectorAll().data();
+			return points_.deviceViewAll().data();
 		}
 
 		const int32x3Vector_D& vertices() const
@@ -223,12 +223,12 @@ public:
 
 		int32x3* verticesData_D()
 		{
-			return vertices_.deviceVectorAll().data();
+			return vertices_.deviceViewAll().data();
 		}
 
 		const int32x3* verticesData_D()const
 		{
-			return vertices_.deviceVectorAll().data();
+			return vertices_.deviceViewAll().data();
 		}
 
 		void clear()

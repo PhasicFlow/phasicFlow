@@ -65,6 +65,10 @@ private:
 
 	word 		type_;
 
+protected:
+
+	void setNewIndices(deviceViewType1D<uint32> newIndices);
+
 public:
 
 	TypeInfo("boundaryBase");
@@ -164,10 +168,10 @@ public:
 		return indexList_;
 	}
 
-	auto& indexList()
+	/*auto& indexList()
 	{
 		return indexList_;
-	}
+	}*/
 
     pointFieldAccessType thisPoints();
 

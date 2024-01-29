@@ -85,7 +85,7 @@ pFlow::int32 pFlow::triSurface::calcMaxIndex()const
 
 	if(vertices_.size()>0)
 	{
-		auto verDeviceVec = vertices_.deviceVectorAll();
+		auto verDeviceVec = vertices_.deviceViewAll();
 		
 		Kokkos::parallel_reduce(
 			"triSurface::calcMaxIndex",

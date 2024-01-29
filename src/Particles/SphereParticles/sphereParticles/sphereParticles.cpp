@@ -219,11 +219,11 @@ bool pFlow::sphereParticles::initInertia()
 	auto aPointsMask 	= dynPointStruct().activePointsMaskDevice();
 	auto aRange 		= aPointsMask.activeRange();
 	
-	auto field_shapeIndex 	= shapeIndex().fieldDevice();
-	auto field_diameter 	= diameter_.fieldDevice();
-	auto field_mass 		= mass_.fieldDevice();
-	auto field_propId 		= propertyId_.fieldDevice();
-	auto field_I 			= I_.fieldDevice();
+	auto field_shapeIndex 	= shapeIndex().deviceView();
+	auto field_diameter 	= diameter_.deviceView();
+	auto field_mass 		= mass_.deviceView();
+	auto field_propId 		= propertyId_.deviceView();
+	auto field_I 			= I_.deviceView();
 
 	// get info from spheres shape 
 	realVector_D d("diameter", spheres_.boundingDiameter());
@@ -231,10 +231,10 @@ bool pFlow::sphereParticles::initInertia()
 	uint32Vector_D propId("propId", spheres_.shapePropertyIds());
 	realVector_D  I("I", spheres_.Inertia());
 
-	auto d_d 		= d.deviceVector();
-	auto d_mass 	= mass.deviceVector();
-	auto d_propId 	= propId.deviceVector();
-	auto d_I 		= I.deviceVector();
+	auto d_d 		= d.deviceView();
+	auto d_mass 	= mass.deviceView();
+	auto d_propId 	= propId.deviceView();
+	auto d_I 		= I.deviceView();
 		
 	Kokkos::parallel_for(
 		"particles::initInertia",
@@ -385,7 +385,7 @@ pFlow::sphereParticles::sphereParticles(
 		auto index = indexHD.indicesHost();
 
 		realx3Vector rvel(n,RESERVE());
-		const auto hrVel = rVelocity_.hostVector();
+		const auto hrVel = rVelocity_.hostView();
 
 		for(auto i=0; i<n; i++)
 		{
@@ -464,7 +464,7 @@ bool pFlow::sphereParticles::beforeIteration()
 		rVelIntegration_().predict(dt(),rVelocity_, rAcceleration_);
 	intPredictTimer_.end();
 	
-	WARNING<<"pFlow::sphereParticles::beforeIteration()"<<END_WARNING;
+	//WARNING<<"pFlow::sphereParticles::beforeIteration()"<<END_WARNING;
 	return true;
 }
 
@@ -475,13 +475,13 @@ bool pFlow::sphereParticles::iterate()
 	accelerationTimer_.start();
 		pFlow::sphereParticlesKernels::acceleration(
 			control().g(),
-			mass().fieldDevice(),
-			contactForce().fieldDevice(),
-			I().fieldDevice(),
-			contactTorque().fieldDevice(),
+			mass().deviceView(),
+			contactForce().deviceView(),
+			I().deviceView(),
+			contactTorque().deviceView(),
 			dynPointStruct().activePointsMaskDevice(),
-			accelertion().fieldDevice(),
-			rAcceleration().fieldDevice()
+			accelertion().deviceView(),
+			rAcceleration().deviceView()
 			);
 	accelerationTimer_.end();
 	
