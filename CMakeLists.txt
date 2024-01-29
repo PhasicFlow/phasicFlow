@@ -71,7 +71,7 @@ include_directories(src/setHelpers src/demComponent "${PROJECT_BINARY_DIR}")
 
 add_subdirectory(src)
 
-#add_subdirectory(solvers)
+add_subdirectory(solvers)
 
 add_subdirectory(utilities)
 
