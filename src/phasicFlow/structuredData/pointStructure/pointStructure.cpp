@@ -212,6 +212,5 @@ bool pFlow::pointStructure::write
     const IOPattern& iop
 )const
 {
-    output<<"bool pFlow::pointStructure::write bool pFlow::pointStructure::write bool pFlow::pointStructure::write"<<endl;
     return internalPoints::write(os, iop);
 }
