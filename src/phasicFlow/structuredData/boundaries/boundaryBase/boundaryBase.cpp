@@ -22,6 +22,8 @@ Licence:
 #include "dictionary.hpp"
 #include "internalPoints.hpp"
 
+#include "boundaryBaseKernels.hpp"
+
 /*pFlow::boundaryBase::boundaryBase
 (
 	const plane& 		bplane,
@@ -48,21 +50,142 @@ void pFlow::boundaryBase::setNewIndices
 {
 	auto newSize = newIndices.size();
 	setSize(static_cast<uint32>(newSize));
-	copy(indexList_.deviceView(), newIndices);
+	if(newSize>0u)
+	{
+		copy(indexList_.deviceView(), newIndices);
+	}
 }
 
-pFlow::boundaryBase::boundaryBase(
+void pFlow::boundaryBase::appendNewIndices
+(
+	deviceViewType1D<uint32> newIndices
+)
+{
+	auto s = static_cast<uint32>(newIndices.size());
+	if(s == 0) return;
+
+	uint32 oldS = size();
+	uint32 newSize = oldS + s; 
+
+	setSize(newSize);
+	auto appendView = Kokkos::subview(
+		indexList_.deviceViewAll(),
+		Kokkos::make_pair<uint32>(oldS, newSize));
+	copy(appendView, newIndices);
+	
+	// TODO: notify observers about this change 
+
+	// the index list should be sorted  
+	//sort(indexList_.deviceViewAll(), 0, newSize);
+}
+
+
+
+bool pFlow::boundaryBase::removeIndices
+(
+	uint32 numRemove,
+	deviceViewType1D<uint32> removeMask
+)
+{
+    if(removeMask.size() != size()+1 )
+	{
+		fatalErrorInFunction<<"size mismatch"<<endl;
+		return false;
+	}
+
+	deviceViewType1D<uint32> removeIndices("removeIndices", 1);
+	deviceViewType1D<uint32> keepIndices("keepIndices",1);
+
+	pFlow::boundaryBaseKernels::createRemoveKeepIndices
+	(
+		indexList_.deviceView(),
+		numRemove,
+		removeMask,
+		removeIndices,
+		keepIndices
+	);
+	
+	if(!internal_.deletePoints(removeIndices))
+	{
+		fatalErrorInFunction<<
+		"error in deleting points from boundary "<< name()<<endl;
+		return false;
+	}
+
+	setNewIndices(keepIndices);
+
+	//TODO: notify observers about changes 
+
+	return false;
+}
+
+bool pFlow::boundaryBase::transferPoints
+(
+	uint32 numTransfer, 
+	deviceViewType1D<uint32> transferMask, 
+	uint32 transferBoundaryIndex, 
+	realx3 transferVector
+)
+{
+	if(transferMask.size() != size()+1 )
+	{
+		fatalErrorInFunction<<"size mismatch"<<endl;
+		return false;
+	}
+
+	deviceViewType1D<uint32> transferIndices("transferIndices",1);
+	deviceViewType1D<uint32> keepIndices("keepIndices",1);
+
+	pFlow::boundaryBaseKernels::createRemoveKeepIndices
+	(
+		indexList_.deviceView(),
+		numTransfer,
+		transferMask,
+		transferIndices,
+		keepIndices
+	);
+
+	// third, remove the indices from this list 
+	setNewIndices(keepIndices);
+
+	// first, change the flags in the internalPoints
+	if( !internal_.changePointsFlag(
+		transferIndices, 
+		transferBoundaryIndex) ) 
+	{
+		return false;
+	}
+
+	// second, change the position of points 
+	if(!internal_.changePointsPoisition(
+		transferIndices,
+		transferVector))
+	{
+		return false;
+	}
+
+	// fourth, add the indices to the mirror boundary 
+	internal_.boundary(transferBoundaryIndex).
+		appendNewIndices(transferIndices);
+	
+    return true;
+}
+
+pFlow::boundaryBase::boundaryBase
+(
     const dictionary &dict,
     const plane &bplane,
-    internalPoints &internal)
-    : subscriber(dict.name()),
-      boundaryPlane_(bplane),
-      indexList_(groupNames(dict.name(), "indexList")),
-      neighborLength_(dict.getVal<real>("neighborLength")),
-      internal_(internal),
-      mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
-      name_(dict.name()),
-      type_(dict.getVal<word>("type"))
+    internalPoints &internal
+)
+: 
+	subscriber(dict.name()),
+	boundaryPlane_(bplane),
+	indexList_(groupNames(dict.name(), "indexList")),
+	neighborLength_(dict.getVal<real>("neighborLength")),
+	internal_(internal),
+	mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
+	name_(dict.name()),
+	type_(dict.getVal<word>("type"))
 {
 }
 

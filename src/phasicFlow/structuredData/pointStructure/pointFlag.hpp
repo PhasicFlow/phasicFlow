@@ -51,6 +51,10 @@ class pointFlag
 
 	using device_type 		= typename viewType::device_type;
 
+	using rPolicy = Kokkos::RangePolicy<
+		execution_space,  
+		Kokkos::IndexType<uint32>>;
+
 protected:
 	
 	viewType 	flags_;
@@ -75,7 +79,34 @@ protected:
 
 	//- Protected methods 
 
-	
+	uint8 getBoundaryFlag(uint32 index)const
+	{
+		uint8 flg;
+		switch (index){
+			case 0u:
+				flg = Flag::LEFT;
+				break;
+			case 1u:
+				flg = Flag::RIGHT;
+				break;
+			case 2u:
+				flg = Flag::BOTTOM;
+				break;
+			case 3u:
+				flg = Flag::TOP;
+				break;
+			case 4u:
+				flg = Flag::REAR;
+				break;
+			case 5u:
+				flg = Flag::FRONT;
+				break;
+			default:
+				flg=0;
+		}
+
+		return flg;
+	}
 
 public:
 
@@ -255,9 +286,15 @@ public:
 		const box& validBox,
 		ViewType1D<realx3, memory_space> points);
 
-	
 	bool deletePoints(
 		scatteredFieldAccess<uint32, memory_space> points);
+
+	bool deletePoints(
+		ViewType1D<uint32, memory_space> points);
+	
+	bool changeFlags(
+		ViewType1D<uint32, memory_space> changePoints, 
+		uint32 boundaryIndex);
 	
 	/// @brief mark points based on their position in the domain.
 	/// This should be the first method to be called when updating

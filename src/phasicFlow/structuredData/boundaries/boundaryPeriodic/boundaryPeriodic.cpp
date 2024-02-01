@@ -18,32 +18,43 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "boundaryExit.hpp"
+#include "boundaryPeriodic.hpp"
 #include "internalPoints.hpp"
 #include "dictionary.hpp"
 
 
-pFlow::boundaryExit::boundaryExit
+pFlow::boundaryPeriodic::boundaryPeriodic
 (
 	const dictionary& dict,
 	const plane&      bplane,
 	internalPoints&   internal
 )
 :
-	boundaryBase(dict, bplane, internal)
+	boundaryBase(dict, bplane, internal),
+	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
 {
-	exitMarginLength_ = max( 
-		dict.getValOrSet("exitMarginLength",0.0), 0.0);
-	checkForExitInterval_ = max(
-		dict.getValOrSet("checkForExitInterval", 1), 1);
+	extendedPlane_ = boundaryBase::boundaryPlane().parallelPlane(-boundaryBase::neighborLength());
 }
 
-bool pFlow::boundaryExit::beforeIteration
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+pFlow::real pFlow::boundaryPeriodic::neighborLength() const
+{
+    return 2.0*boundaryBase::neighborLength();
+}
+
+pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
+{
+    return -neighborLength()*boundaryBase::boundaryPlane().normal();
+}
+
+const pFlow::plane &pFlow::boundaryPeriodic::boundaryPlane() const
+{
+    return extendedPlane_;
+}
+
+bool pFlow::boundaryPeriodic::beforeIteration(
+    uint32 iterNum,
+    real t,
+    real dt)
 {
 	// nothing have to be done
 	if(empty())
@@ -52,39 +63,50 @@ bool pFlow::boundaryExit::beforeIteration
 	}
 
 	uint32 s = size();
-	deviceViewType1D<uint32> deleteFlags("deleteFlags",s+1); 
-	fill(deleteFlags, 0, s+1, 0u);
-
+	deviceViewType1D<uint32> transferFlags("transferFlags",s+1); 
+	fill(transferFlags, 0, s+1, 0u);
+	
 	auto points = thisPoints();
 	auto p = boundaryPlane().infPlane();
-
-	uint32 numDeleted = 0;	
+	uint32 numTransfered = 0;
 
 	Kokkos::parallel_reduce
 	(
-		"boundaryExit::beforeIteration",
-		deviceRPolicyStatic(0,s),
-		LAMBDA_HD(uint32 i, uint32& delToUpdate)
+		"boundaryPeriodic::beforeIteration",
+		deviceRPolicyStatic(0u,s),
+		LAMBDA_HD(uint32 i, uint32& trnasToUpdate)
 		{
 			if(p.pointInNegativeSide(points(i)))
 			{
-				deleteFlags(i)=1;
-				delToUpdate++;
+				transferFlags(i)=1;
+				trnasToUpdate++;
 			}
 		}, 
-		numDeleted
+		numTransfered
 	);
-		
-	// no point is deleted
-	if(numDeleted == 0 )
+	
+	// no point to be transfered 
+	if(numTransfered == 0 )
 	{
 		return true;
 	}
+	
+	// to obtain the transfer vector 
+	const auto& thisP = boundaryPlane();
+	const auto& mirrorP = internal().boundary(mirrorBoundaryIndex_).boundaryPlane();
+	realx3 transferVec = thisP.normal()*(thisP.d() + mirrorP.d());
 
-	return this->removeIndices(numDeleted, deleteFlags);
+	return transferPoints
+	(
+		numTransfered,
+		transferFlags, 
+		mirrorBoundaryIndex_, 
+		transferVec
+	);
+
 }
 
-bool pFlow::boundaryExit::iterate
+bool pFlow::boundaryPeriodic::iterate
 (
 	uint32 iterNum, 
 	real t
@@ -93,7 +115,7 @@ bool pFlow::boundaryExit::iterate
 	return true;
 }
 
-bool pFlow::boundaryExit::afterIteration
+bool pFlow::boundaryPeriodic::afterIteration
 (
 	uint32 iterNum, 
 	real t

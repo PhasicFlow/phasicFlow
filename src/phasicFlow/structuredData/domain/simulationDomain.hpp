@@ -162,6 +162,11 @@ public:
 		return thisDomain_;
 	}
 
+	
+	domain extendThisDomain(
+		const realx3& lowerPointExtension, 
+		const realx3& upperPointExtension)const;
+
 	inline 
 	const auto& globalBoundaryDict()const
 	{

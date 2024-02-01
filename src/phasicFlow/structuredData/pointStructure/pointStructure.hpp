@@ -119,12 +119,23 @@ public:
             return boundaries_;
         }
 
-        auto& boundary(size_t i )
+		
+		Time& time() override
+		{
+			return demComponent::time();
+		}
+
+		const Time& time() const override
+		{
+			return demComponent::time();
+		}
+
+        boundaryBase& boundary(size_t i ) override
         {
             return boundaries_[i];
         }
 
-        auto& boundary(size_t i)const
+        const boundaryBase& boundary(size_t i)const override
         {
             return boundaries_[i];
         }
@@ -134,6 +145,7 @@ public:
 			return simulationDomain_();
 		}
 
+		
 	// - IO methods 
 
 		/// @brief read the point structure from the input stream.

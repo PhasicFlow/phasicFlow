@@ -69,6 +69,19 @@ protected:
 
 	void setNewIndices(deviceViewType1D<uint32> newIndices);
 
+	void appendNewIndices(deviceViewType1D<uint32> newIndices);
+	
+	bool removeIndices(
+		uint32 numRemove, 
+		deviceViewType1D<uint32> removeMask);
+	
+	bool transferPoints(
+		uint32 numTransfer, 
+		deviceViewType1D<uint32> transferMask,
+		uint32 transferBoundaryIndex,
+		realx3 transferVector);
+	
+	
 public:
 
 	TypeInfo("boundaryBase");
@@ -102,12 +115,17 @@ public:
 		(dict, bplane, internal)
 	);
 
-	inline 
-	auto neighborLength()const
+	virtual 
+	real neighborLength()const
 	{
 		return neighborLength_;
 	}
 
+	virtual 
+	realx3 boundaryExtensionLength()const
+	{
+		return {0,0,0};
+	}
 
 	const word& type()const
 	{
@@ -129,6 +147,7 @@ public:
 		return indexList_.size();
 	}
 
+	virtual 
 	const plane& boundaryPlane()const
 	{
 		return boundaryPlane_;
@@ -167,11 +186,6 @@ public:
 	{
 		return indexList_;
 	}
-
-	/*auto& indexList()
-	{
-		return indexList_;
-	}*/
 
     pointFieldAccessType thisPoints();
 

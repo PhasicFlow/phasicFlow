@@ -41,8 +41,19 @@ pFlow::simulationDomain::simulationDomain(systemControl& control)
     
 }
 
-pFlow::uniquePtr<pFlow::simulationDomain> 
-    pFlow::simulationDomain::create(systemControl& control)
+pFlow::domain pFlow::simulationDomain::extendThisDomain
+(
+	const realx3 &lowerPointExtension, 
+	const realx3 &upperPointExtension
+) const
+{
+    realx3 minP = thisDomain().domainBox().minPoint() + lowerPointExtension;
+	realx3 maxP = thisDomain().domainBox().maxPoint() + upperPointExtension;
+	return domain({minP, maxP});
+}
+
+pFlow::uniquePtr<pFlow::simulationDomain>
+pFlow::simulationDomain::create(systemControl &control)
 {
 	word sType = angleBracketsNames(
         "simulationDomain", 

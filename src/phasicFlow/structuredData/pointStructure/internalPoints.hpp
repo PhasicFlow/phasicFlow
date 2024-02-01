@@ -31,6 +31,8 @@ namespace pFlow
 {
 
 class domain;
+class boundaryBase;
+class Time; 
 
 class internalPoints
 :
@@ -69,6 +71,19 @@ protected:
 	//// - protected members
 
 		void syncPFlag()const;
+
+		friend boundaryBase;
+		
+
+		bool deletePoints(deviceViewType1D<uint32> delPoints);
+
+		bool changePointsFlag(
+			deviceViewType1D<uint32> changePoints, 
+			uint32 boundaryIndex);
+
+		bool changePointsPoisition(
+			deviceViewType1D<uint32> changePoints,
+			realx3 transferVector);
 
 public:
 
@@ -165,6 +180,18 @@ public:
 		{
 			return pFlagsD_.activeRange();
 		}
+		
+		virtual 
+		Time& time() = 0;
+
+		virtual
+		const Time& time() const = 0;
+
+		virtual 
+		boundaryBase& boundary(size_t boundaryIndex ) = 0;
+
+		virtual 
+		const boundaryBase& boundary(size_t boundaryIndex ) const = 0;
 
 		///@brief delete points at indices given in delPoints.
 		/// The default is that delPoints contains sorted indices 

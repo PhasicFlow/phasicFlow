@@ -21,69 +21,73 @@ Licence:
 
 #include "pointFields.hpp"
 #include "createBoundaryFields.hpp"
+#include "periodicBoundaryField.hpp"
 
+#define createAllBoundary(DataType, MemorySpaceType)          \
+    template class pFlow::exitBoundaryField<DataType, MemorySpaceType>; \
+    template class pFlow::periodicBoundaryField<DataType, MemorySpaceType>;
 
 template class pFlow::pointField<pFlow::int8, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::int8, pFlow::HostSpace);
-createBoundary(pFlow::int8, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::int8, pFlow::HostSpace);
 
 template class pFlow::pointField<pFlow::int8>; 
 createBaseBoundary(pFlow::int8, void);
-createBoundary(pFlow::int8, void, exit);
+createAllBoundary(pFlow::int8, void);
 
 
 template class pFlow::pointField<pFlow::uint8, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::uint8, pFlow::HostSpace);
-createBoundary(pFlow::uint8, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::uint8, pFlow::HostSpace);
 
 template class pFlow::pointField<pFlow::uint8>; 
 createBaseBoundary(pFlow::uint8, void);
-createBoundary(pFlow::uint8, void, exit);
+createAllBoundary(pFlow::uint8, void);
 
 template class pFlow::pointField<pFlow::int32, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::int32, pFlow::HostSpace);
-createBoundary(pFlow::int32, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::int32, pFlow::HostSpace);
 
 template class pFlow::pointField<pFlow::int32>; 
 createBaseBoundary(pFlow::int32, void);
-createBoundary(pFlow::int32, void, exit);
+createAllBoundary(pFlow::int32, void);
 
 template class pFlow::pointField<pFlow::uint32, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::uint32, pFlow::HostSpace);
-createBoundary(pFlow::uint32, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::uint32, pFlow::HostSpace);
 
 template class pFlow::pointField<pFlow::uint32>; 
 createBaseBoundary(pFlow::uint32, void);
-createBoundary(pFlow::uint32, void, exit);
+createAllBoundary(pFlow::uint32, void);
 
 template class pFlow::pointField<pFlow::real, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::real, pFlow::HostSpace);
-createBoundary(pFlow::real, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::real, pFlow::HostSpace);
 
 
 template class pFlow::pointField<pFlow::real>; 
 createBaseBoundary(pFlow::real, void);
-createBoundary(pFlow::real, void, exit);
+createAllBoundary(pFlow::real, void);
 
 template class pFlow::pointField<pFlow::realx3, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::realx3, pFlow::HostSpace);
-createBoundary(pFlow::realx3, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::realx3, pFlow::HostSpace);
 
 
 template class pFlow::pointField<pFlow::realx3>; 
 createBaseBoundary(pFlow::realx3, void);
-createBoundary(pFlow::realx3, void, exit);
+createAllBoundary(pFlow::realx3, void);
 
 
 template class pFlow::pointField<pFlow::realx4, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::realx4, pFlow::HostSpace);
-createBoundary(pFlow::realx4, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::realx4, pFlow::HostSpace);
 
 
 template class pFlow::pointField<pFlow::realx4>; 
 createBaseBoundary(pFlow::realx4, void);
-createBoundary(pFlow::realx4, void, exit);
+createAllBoundary(pFlow::realx4, void);
 
 template class pFlow::pointField<pFlow::word, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::word, pFlow::HostSpace);
-createBoundary(pFlow::word, pFlow::HostSpace, exit);
+createAllBoundary(pFlow::word, pFlow::HostSpace);

@@ -232,7 +232,14 @@ pFlow::VectorSingle<T,MemorySpace>::VectorField()const
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
-auto pFlow::VectorSingle<T,MemorySpace>::deviceViewAll() const
+const auto& pFlow::VectorSingle<T,MemorySpace>::deviceViewAll() const
+{
+    return view_;
+}
+
+template<typename T, typename MemorySpace>
+INLINE_FUNCTION_H 
+auto& pFlow::VectorSingle<T,MemorySpace>::deviceViewAll()
 {
     return view_;
 }

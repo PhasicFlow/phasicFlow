@@ -158,12 +158,59 @@ bool pFlow::pointFlag<ExecutionSpace>::deletePoints
 {
 	if(points.empty())return true;
 	
-	uint32 minIndex = points.getFirstCopy();
-	uint32 maxIndex = points.getLastCopy();
+	//uint32 minIndex = points.getFirstCopy();
+	//uint32 maxIndex = points.getLastCopy();
 	
-	if(maxIndex<minIndex) return false;
-	if(maxIndex>activeRange_.end())return false;
-	if(minIndex<activeRange_.start())return false;
+	//if(maxIndex<minIndex) return false;
+	//if(maxIndex>activeRange_.end())return false;
+	//if(minIndex<activeRange_.start())return false;
+
+	using policy = Kokkos::RangePolicy<
+		execution_space,  
+		Kokkos::IndexType<uint32>>;
+
+	uint32 numDeleted = 0;
+	Kokkos::parallel_reduce
+	(
+		"pointFlagKernels::deletePoints",
+		policy(0u, points.size()),
+		CLASS_LAMBDA_HD(uint32 i, uint32& valDelUpdate)
+		{
+			uint32 n = points(i);
+			if(isActive(n))
+			{
+				valDelUpdate++;
+				flags_[n] = Flag::DELETED;
+			}
+		},
+		numDeleted
+	);	
+
+	if(numDeleted >= numActive_)
+	{
+		activeRange_ = {0, 0};
+		numDeleted == numActive_;
+	}
+		
+	numActive_ 	= numActive_ - numDeleted;
+	isAllActive_ = 
+		(activeRange_.numElements() == numActive_)&& numActive_>0;
+	
+	return true;
+}
+template<typename ExecutionSpace>
+bool pFlow::pointFlag<ExecutionSpace>::deletePoints
+(
+	ViewType1D<uint32, memory_space> points
+)
+{
+
+	uint32 s = points.size();
+	if(s==0u)return true;
+	
+	//if(maxIndex<minIndex) return false;
+	//if(maxIndex>activeRange_.end())return false;
+	//if(minIndex<activeRange_.start())return false;
 
 	using policy = Kokkos::RangePolicy<
 		execution_space,  
@@ -199,6 +246,27 @@ bool pFlow::pointFlag<ExecutionSpace>::deletePoints
 	return true;
 }
 
+
+template<typename ExecutionSpace>
+bool pFlow::pointFlag<ExecutionSpace>::changeFlags
+(
+	ViewType1D<uint32, memory_space> changePoints, 
+	uint32 boundaryIndex
+)
+{
+	auto flg = getBoundaryFlag(boundaryIndex);
+	Kokkos::parallel_for
+	(
+		"pointFlag::changeFlags",
+		rPolicy(0, changePoints.size()),
+		LAMBDA_HD(uint32 i)
+		{
+			flags_[changePoints(i)] = flg;
+		}
+	);
+	Kokkos::fence();
+	return true;
+}
 
 template<typename ExecutionSpace>
 pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markPointRegions

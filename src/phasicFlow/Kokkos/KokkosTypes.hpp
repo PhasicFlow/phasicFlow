@@ -39,13 +39,6 @@ Licence:
 namespace pFlow
 {
 
-///********DEP
-class DeviceSide{};
-class HostSide{};
-
-template<typename side>
-struct selectSide{};
-/*********///
 
 /// Host memory space 
 using HostSpace 	= Kokkos::HostSpace;
@@ -69,6 +62,20 @@ using DefaultHostExecutionSpace 	= Kokkos::DefaultHostExecutionSpace;
 /// Default execution space, it can be device exe. space, if a device space is 
 /// activated. 
 using DefaultExecutionSpace 		= Kokkos::DefaultExecutionSpace;
+
+
+using deviceRPolicyStatic = 
+	Kokkos::RangePolicy<
+			Kokkos::DefaultExecutionSpace,
+			Kokkos::Schedule<Kokkos::Static>,
+			Kokkos::IndexType<pFlow::uint32> >;
+
+
+using hostRPolicyStatic = 
+	Kokkos::RangePolicy<
+			Kokkos::DefaultExecutionSpace,
+			Kokkos::Schedule<Kokkos::Static>,
+			Kokkos::IndexType<pFlow::uint32> >;
 
 
 /// Pair of two variables

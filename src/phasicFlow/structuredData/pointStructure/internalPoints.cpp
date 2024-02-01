@@ -22,6 +22,7 @@ Licence:
 #include "internalPoints.hpp"
 #include "domain.hpp"
 #include "Vectors.hpp"
+#include "internalPointsKernels.hpp"
 
 void pFlow::internalPoints::syncPFlag()const
 {
@@ -30,6 +31,54 @@ void pFlow::internalPoints::syncPFlag()const
 		pFlagsH_ = pFlagsD_.clone<DefaultHostExecutionSpace>();
 		pFlagSync_ = true;
 	}
+}
+
+bool pFlow::internalPoints::deletePoints(deviceViewType1D<uint32> delPoints)
+{
+    if(!pFlagsD_.deletePoints(delPoints))
+	{
+		fatalErrorInFunction<<
+		"Error in deleting points from internal points"<<endl;
+		return false;
+	}
+	pFlagSync_ = false;
+	WARNING<<"Notify the observersin in internalPoints"<<END_WARNING;
+	return true;
+}
+
+bool pFlow::internalPoints::changePointsFlag
+(
+	deviceViewType1D<uint32> changePoints, 
+	uint32 boundaryIndex
+)
+{
+	if(boundaryIndex>5)
+	{
+		fatalErrorInFunction<<
+		"Invalid boundary index "<< boundaryIndex<<endl;
+		return false;
+	}
+	
+	pFlagsD_.changeFlags(changePoints, boundaryIndex);
+    pFlagSync_ = false;
+	WARNING<<"NOTIFY About transfering the data "<<END_WARNING;
+	return true;
+}
+
+bool pFlow::internalPoints::changePointsPoisition
+(
+	deviceViewType1D<uint32> changePoints, 
+	realx3 transferVector
+)
+{
+	pFlow::internalPointsKernels::changePosition
+	(
+		pointPosition_.deviceViewAll(),
+		changePoints,
+		transferVector
+	);
+	WARNING<<"Notify about the change in the position of points"<<END_WARNING;
+    return true;
 }
 
 pFlow::internalPoints::internalPoints()

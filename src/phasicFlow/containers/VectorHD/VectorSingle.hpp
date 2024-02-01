@@ -191,7 +191,11 @@ public:
 
 		/// Device view range [0,capcity)
 		INLINE_FUNCTION_H 
-		auto deviceViewAll() const;
+		auto& deviceViewAll();
+
+		/// Device view range [0,capcity)
+		INLINE_FUNCTION_H 
+		const auto& deviceViewAll() const;
 
 		///  Device view range [0, size)
 		INLINE_FUNCTION_H 

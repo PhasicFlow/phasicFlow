@@ -71,11 +71,14 @@ structuredData/plane/plane.cpp
 structuredData/domain/domain.cpp
 structuredData/domain/simulationDomain.cpp
 structuredData/domain/regularSimulationDomain.cpp
+structuredData/pointStructure/internalPointsKernels.cpp
 structuredData/pointStructure/internalPoints.cpp
 structuredData/pointStructure/pointStructure.cpp
 structuredData/boundaries/boundaryBase/boundaryBase.cpp
+structuredData/boundaries/boundaryBase/boundaryBaseKernels.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
 structuredData/boundaries/boundaryNone/boundaryNone.cpp
+structuredData/boundaries/boundaryPeriodic/boundaryPeriodic.cpp
 structuredData/boundaries/boundaryList.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp

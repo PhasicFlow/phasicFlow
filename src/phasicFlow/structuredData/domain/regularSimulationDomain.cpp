@@ -8,8 +8,8 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
 {
     auto& boundaries = this->subDict("boundaries");
     
-    this->addDict("regularSimulationDomainBoundaries", boundaries);
-    auto& rbBoundaries = this->subDict("regularSimulationDomainBoundaries");
+    this->addDict("regularBoundaries", boundaries);
+    auto& rbBoundaries = this->subDict("regularBoundaries");
     
 	real neighborLength = boundaries.getVal<real>("neighborLength");
 
@@ -37,7 +37,25 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
 			" in dictionary "<< boundaries.globalName()<<endl;
 			return false;
 		}
+		auto bType = bDict.getVal<word>("type");
+		uint32 mirrorIndex = 0;
+		if(bType == "periodic")
+		{
+			if(bName == bundaryName(0)) mirrorIndex = 1;
+			if(bName == bundaryName(1)) mirrorIndex = 0;
+			if(bName == bundaryName(2)) mirrorIndex = 3;
+			if(bName == bundaryName(3)) mirrorIndex = 2;
+			if(bName == bundaryName(4)) mirrorIndex = 5;
+			if(bName == bundaryName(5)) mirrorIndex = 4;
 
+			if(! bDict.addOrReplace("mirrorBoundaryIndex", mirrorIndex))
+			{
+				fatalErrorInFunction<<
+				"canno add entry mirroBoundaryIndex to dictionary "<<
+				bDict.globalName()<<endl;
+				return false;
+			}
+		}
 	}
     
     
@@ -168,7 +186,7 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
 
 const pFlow::dictionary &pFlow::regularSimulationDomain::thisBoundaryDict() const
 {
-    return this->subDict("regularSimulationDomainBoundaries");
+    return this->subDict("regularBoundaries");
 }
 
 bool pFlow::regularSimulationDomain::requiresDataTransfer()const

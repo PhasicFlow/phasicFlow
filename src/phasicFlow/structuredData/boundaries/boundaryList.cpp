@@ -40,9 +40,19 @@ bool pFlow::boundaryList::updateLists()
 	dist[4] = boundary(4).neighborLength();
 	dist[5] = boundary(5).neighborLength();
 
+	realx3 lowerExt = 
+		boundary(0).boundaryExtensionLength() + 
+		boundary(2).boundaryExtensionLength() + 
+		boundary(4).boundaryExtensionLength();
 	
+	realx3 upperExt = 
+		boundary(1).boundaryExtensionLength()+
+		boundary(3).boundaryExtensionLength()+
+		boundary(5).boundaryExtensionLength();
+
+	auto extDomain = pStruct_.simDomain().extendThisDomain(lowerExt, upperExt);
 	pStruct_.updateFlag(
-			pStruct_.simDomain().thisDomain(),
+			extDomain,
 			dist);
 	const auto& maskD = pStruct_.activePointsMaskDevice();
 	boundary(0).setSize( maskD.leftSize() );
