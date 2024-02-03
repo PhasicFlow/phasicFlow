@@ -18,54 +18,45 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
-#ifndef __bitTransfer_hpp__
-#define __bitTransfer_hpp__
-
+#ifndef __triangleFunctions_hpp__
+#define __triangleFunctions_hpp__
 
 #include "types.hpp"
-#include "Vectors.hpp"
 
-namespace pFlow
+namespace pFlow::triangle
 {
 
-// a simple functor that transfers 3 integers into a long variable and 
-// transfer the long to 3 integers
-
-class bitTransfer
+INLINE_FUNCTION_HD
+real surface( const realx3& p1, const realx3& p2, const realx3& p3)
 {
-protected:
+	realx3 V1 = p2 - p1;
+	realx3 V2 = p3 - p1;
+	return abs((cross(V1,V2)).length()/2.0);	
+}
 
-	static const int numBits_ = 21;
-	static const int numBits2_ = 2 * numBits_;
-	static const unsigned long mask1_ = 0x000000000001FFFFF;
-	static const unsigned long mask2_ = 0x0000003FFFFE00000;
-	static const unsigned long mask3_ = 0x07FFFFC0000000000;
+INLINE_FUNCTION_HD
+realx3 normal(const realx3& p1, const realx3& p2, const realx3& p3)
+{
+	auto n = cross(p2-p1, p3-p1);
+	if( equal(n.length(), 0.0) )
+    	return zero3;
+	else
+		return normalize(n);
+}
 
-public:
-
-	bitTransfer(){}
-
-	inline unsigned long operator()(const unit3& int3 )
-	{
-		return 
-			static_cast<long>(int3.x()) |
-			static_cast<long>(int3.y()) << numBits_ |
-			static_cast<long>(int3.z()) << numBits2_;
-	}
-
-	inline unit3 operator() (const unsigned long& ul )
-	{
-		return unit3
-			(
-				 ul & mask1_,
-				(ul & mask2_)>> numBits_,
-				(ul & mask3_)>> numBits2_
-			);
-	}
-};
-
+INLINE_FUNCTION_HD
+bool valid
+(
+	const realx3& p1, 
+	const realx3& p2, 
+	const realx3& p3
+)
+{
+  	return !equal(cross(p2-p1, p3-p1).length(), 0.0);
 }
 
 
-#endif
+
+}
+
+#endif 

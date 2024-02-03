@@ -3,11 +3,11 @@ set(SourceFiles
 readFromTimeFolder.cpp
 readControlDict.cpp
 #vtkFile/vtkFile.cpp
-#geometryPhasicFlow/Wall/Wall.cpp 
-#geometryPhasicFlow/planeWall/planeWall.cpp 
+geometryPhasicFlow/Wall/Wall.cpp 
+geometryPhasicFlow/planeWall/planeWall.cpp 
 #geometryPhasicFlow/stlWall/stlWall.cpp
-#geometryPhasicFlow/cylinderWall/cylinderWall.cpp
-#geometryPhasicFlow/cuboidWall/cuboidWall.cpp
+geometryPhasicFlow/cylinderWall/cylinderWall.cpp
+geometryPhasicFlow/cuboidWall/cuboidWall.cpp
 )
 
 #set(link_libs Kokkos::kokkos phasicFlow Particles Geometry)

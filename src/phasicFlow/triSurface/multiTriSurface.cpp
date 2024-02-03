@@ -21,7 +21,7 @@ Licence:
 
 #include "multiTriSurface.hpp"
 
-void pFlow::multiTriSurface::calculateVars()
+/*void pFlow::multiTriSurface::calculateVars()
 {
 	numSurfaces_ = surfaceNames_.size();
 
@@ -80,9 +80,9 @@ void pFlow::multiTriSurface::calculateVars()
 	verticesStartPos_.syncViews();
 	
 
-}
+}*/
 
-pFlow::multiTriSurface::multiTriSurface()
+/*pFlow::multiTriSurface::multiTriSurface()
 :
 	triSurface(),
 	lastPointIndex_("lastPointIndex", "lastPointIndex"),
@@ -90,9 +90,9 @@ pFlow::multiTriSurface::multiTriSurface()
 	surfaceNames_("surfaceNames", "surfaceNames")
 {
 	calculateVars();
-}
+}*/
 
-bool pFlow::multiTriSurface::addTriSurface
+/*bool pFlow::multiTriSurface::addTriSurface
 (
 	const word& name,
 	const triSurface& tSurf
@@ -152,17 +152,63 @@ bool pFlow::multiTriSurface::addTriSurface
 
 	return true;
 
+}*/
+
+pFlow::multiTriSurface::multiTriSurface
+(
+	const objectFile &obj, 
+	repository *owner
+)
+:
+	triSurface(obj, owner)
+{
+	if( !IOobject::readObject() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
+    }
 }
 
-bool pFlow::multiTriSurface::addTriSurface
+bool pFlow::multiTriSurface::appendTriSurface
 (
-	const word& name,
-	const realx3x3Vector& vertices
+	const word &name, 
+	const realx3x3Vector &triangles
 )
 {
-	triSurface newSurf(vertices);
+	uint32 start = size();
+	uint32 pointStart = numPoints();
 
-	return addTriSurface(name, newSurf);
+	if(!triSurface::appendTriSurface(triangles))
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+	uint32 end = size();
+	uint32 pointEnd = numPoints();
+	subSurfaces_.emplace_back(name, start, end, pointStart, pointEnd);
+
+    return true;
+}
+
+bool pFlow::multiTriSurface::read(iIstream &is, const IOPattern &iop)
+{
+    return false;
+}
+
+bool pFlow::multiTriSurface::write
+(
+    iOstream &os,
+    const IOPattern &iop
+) const
+{	
+	if( iop.thisProcWriteData() )
+	{
+		os.writeWordEntry("subSurfaces", subSurfaces_);
+		if(!os.check(FUNCTION_NAME))return false;
+	}
+	
+	return triSurface::write(os,iop);
 }
 
 /*pFlow::real3*
@@ -206,36 +252,3 @@ const pFlow::real3*
 	if(i>=numSurfaces())return points_.data()+numPoints();
 	return points_.data()+lastPointIndex_[i]+1;
 }*/
-
-bool pFlow::multiTriSurface::readMultiTriSurface
-(
-	iIstream& is
-)
-{
-	if( !readTriSurface(is) )return false;
-
-	// from current position
-	if(!lastPointIndex_.read(is, true)) return false;
-
-	if(!lastVertexIndex_.read(is, true) ) return false;
-
-	if( !surfaceNames_.read(is, true)) return false;
-
-	calculateVars();
-
-	return true;
-}
-
-bool pFlow::multiTriSurface::writeMultiTriSurface
-(
-	iOstream& os
-)const
-{
-	if(!writeTriSurface(os)) return false;
-
-	os << lastPointIndex_;
-	os << lastVertexIndex_;
-	os << surfaceNames_;
-
-	return os.check(FUNCTION_NAME);
-}

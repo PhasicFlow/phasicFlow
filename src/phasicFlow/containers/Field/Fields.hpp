@@ -54,6 +54,10 @@ using uint64Field_D 		= Field<uint64>;
 
 using uint64Field_H 		= Field<uint64, HostSpace> ;
 
+using uint32x3Field_D   = Field<uint32x3>;
+
+using uint32x3Field_H   = Field<uint32x3, HostSpace>;
+
 using realField_D 		= Field<real>;
 
 using realField_H 		= Field<real, HostSpace> ;

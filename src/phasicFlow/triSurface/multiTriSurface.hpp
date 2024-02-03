@@ -24,7 +24,8 @@ Licence:
 
 
 #include "triSurface.hpp"
-#include "VectorDuals.hpp"
+#include "subSurface.hpp"
+
 
 namespace pFlow
 {
@@ -34,70 +35,64 @@ class multiTriSurface
 :
 	public triSurface
 {
-protected:
+private:
+
+	subSurfaceList subSurfaces_;
 
 	// - the index of last point of each triSurface 
-	int32Field_HD 	lastPointIndex_;
+	
 
-	// - the index of the last vertex of each triSurface 
-	int32Field_HD   lastVertexIndex_;
+	
 
-	// - name of each surface 
-	wordField 		surfaceNames_;
+	
 
-	int32Field_HD 	surfaceNumPoints_;
-
-	int32Vector_HD  pointsStartPos_;
-
-	int32Field_HD   surfaceNumVertices_;
-
-	int32Vector_HD  verticesStartPos_;
-
-	int32 			numSurfaces_ = 0;
-
-	void        calculateVars();
+	//void        calculateVars();
 
 public:
 
 	// - type info
-	TypeInfoNV("multiTriSurface");
+	TypeInfo("multiTriSurface");
 
 	//// - Constructors
 
 		// - emtpy
-		multiTriSurface();
+		multiTriSurface(const objectFile& obj, repository* owner);
 
-		multiTriSurface(const multiTriSurface&) = default;
+		/*multiTriSurface(const multiTriSurface&) = default;
 
 		multiTriSurface& operator = (const multiTriSurface&) = default;
 
 		multiTriSurface(multiTriSurface&&) = delete;
 
-		multiTriSurface& operator = (multiTriSurface&&) = delete;		
+		multiTriSurface& operator = (multiTriSurface&&) = delete;	*/	
 
-		~multiTriSurface() = default;
+		~multiTriSurface() override = default;
 
 	//// - Methods
 
-		bool addTriSurface(const word& name, const triSurface& tSurf);
+		//bool addTriSurface(const word& name, const triSurface& tSurf);
 
-		bool addTriSurface(const word& name, const realx3x3Vector& vertices);
+		bool appendTriSurface(const word& name, const realx3x3Vector& vertices);
 
-		int32 numSurfaces()const
+		uint32 numSurfaces()const
 		{
-			return numSurfaces_;
+			return subSurfaces_.size();
 		}
 
-		void clear()
+		const subSurfaceList& subSurfaces()const
+		{
+			return subSurfaces_;
+		}
+		/*void clear()
 		{
 			triSurface::clear();
 
 			lastPointIndex_.clear();
 			surfaceNames_.clear();
-		}
+		}*/
 
 		
-		const auto& pointsStartPos()const
+		/*const auto& pointsStartPos()const
 		{
 			return pointsStartPos_;
 		}
@@ -135,27 +130,21 @@ public:
 		word surfaceName(int32 i)const
 		{
 			return surfaceNames_[i];
-		}
+		}*/
 
 	//// - IO operations
 
-		bool readMultiTriSurface(iIstream& is);
+		
 
-		bool writeMultiTriSurface(iOstream& os)const;
+		bool read(iIstream& is, const IOPattern& iop)override;
 
-		bool read(iIstream& is)
-		{
-			return readMultiTriSurface(is);
-		}
 
-		bool write(iOstream& os)const
-		{
-			return writeMultiTriSurface(os);
-		}
+		bool write(iOstream& os, const IOPattern& iop)const override;
+		
 
 };
 
-inline iIstream& operator >> (iIstream & is, multiTriSurface & tri )
+/*inline iIstream& operator >> (iIstream & is, multiTriSurface & tri )
 {
 	if(!tri.readMultiTriSurface(is))
 	{
@@ -164,11 +153,11 @@ inline iIstream& operator >> (iIstream & is, multiTriSurface & tri )
 	 	fatalExit;
 	}
 	return is;
-}
+}*/
 
 inline iOstream& operator << (iOstream& os, const multiTriSurface& tri)
 {
-	if( !tri.writeMultiTriSurface(os) )
+	if( !tri.write(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber())<<
 	 	"  error in writing multiTriSurface to file.\n";

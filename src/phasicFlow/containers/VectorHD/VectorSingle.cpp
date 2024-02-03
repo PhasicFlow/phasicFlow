@@ -1,3 +1,4 @@
+#include "VectorSingle.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -434,9 +435,29 @@ void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
 	copy(deviceView(), src.hostView());
 }
 
-template<typename T, typename MemorySpace>
-INLINE_FUNCTION_H
-auto pFlow::VectorSingle<T,MemorySpace>::getSpan()
+template <typename T, typename MemorySpace>
+void pFlow::VectorSingle<T, MemorySpace>::append
+(
+    const std::vector<T> &appVec
+)
+{
+    if(appVec.empty())return;
+
+    auto srcSize = appVec.size();
+    uint32 oldSize = size();
+    uint32 newSize = srcSize + oldSize;
+    
+    changeSize(newSize);
+    
+    hostViewType1D<const T> temp(appVec.data(), srcSize );
+    auto dest = Kokkos::subview(view_, Kokkos::make_pair<uint32>(oldSize,newSize));
+
+    copy(dest, temp);
+
+}
+
+template <typename T, typename MemorySpace>
+INLINE_FUNCTION_H auto pFlow::VectorSingle<T, MemorySpace>::getSpan()
 {
     return span<T>(view_.data(), size());
 }

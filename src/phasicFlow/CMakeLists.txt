@@ -63,7 +63,7 @@ Timer/Timer.cpp
 Timer/Timers.cpp
 
 
-
+structuredData/zAxis/zAxis.cpp
 structuredData/box/box.cpp
 structuredData/line/line.cpp
 structuredData/infinitePlane/infinitePlane.cpp
@@ -84,6 +84,11 @@ structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
 structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
+
+triSurface/subSurface.cpp
+triSurface/triSurface.cpp
+triSurface/multiTriSurface.cpp
+
 
 commandLine/commandLine.cpp
 

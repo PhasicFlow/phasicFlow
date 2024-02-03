@@ -146,7 +146,23 @@ struct triple
 		/// access component
 		INLINE_FUNCTION_HD const T & z()const { return z_; }
 
-        INLINE_FUNCTION_HD const T& comp(uint32 i) const {return *(this+i);}
+        /// access component
+		INLINE_FUNCTION_HD T & comp1(){ return x_; }
+
+		/// access component
+		INLINE_FUNCTION_HD const T & comp1()const { return x_; }
+		
+		/// access component
+		INLINE_FUNCTION_HD T & comp2(){ return y_; }
+		
+		/// access component
+		INLINE_FUNCTION_HD const T & comp2()const { return y_; }
+
+		/// access component
+		INLINE_FUNCTION_HD T & comp3(){ return z_; }
+		
+		/// access component
+		INLINE_FUNCTION_HD const T & comp3()const { return z_; }
 
 	//// methods
 

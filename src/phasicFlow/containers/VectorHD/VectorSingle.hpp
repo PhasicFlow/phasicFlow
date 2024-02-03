@@ -282,6 +282,9 @@ public:
 		/// The capacity of *this becomes the capacity of src.
 		INLINE_FUNCTION_H
 		void assign(const VectorTypeHost& src);
+
+		INLINE_FUNCTION_H
+		void append(const std::vector<T>& appVec);
 		
 		INLINE_FUNCTION_H
 		auto getSpan();
@@ -493,7 +496,8 @@ inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& 
 #endif //__VectorSingle_hpp__
 
 
-/*INLINE_FUNCTION_H
+/*
+INLINE_FUNCTION_H
 		bool append(const deviceViewType1D<T>& dVec, size_t numElems)
 		{
 
