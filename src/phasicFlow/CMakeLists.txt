@@ -55,6 +55,7 @@ containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
 containers/List/anyList/anyList.cpp
 containers/pointField/pointFields.cpp
+containers/triSurfaceField/triSurfaceFields.cpp
 
 setFieldList/setFieldList.cpp
 setFieldList/setFieldEntry.cpp

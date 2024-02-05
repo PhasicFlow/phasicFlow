@@ -106,6 +106,14 @@ public:
 			fieldKey_(fieldKey)
 		{}
 
+		Field(const word& name, const word& fieldKey, size_t capacity, size_t len, const T& val)
+		:
+			VectorType(name, len, len, RESERVE()),
+			fieldKey_(fieldKey)
+		{
+			VectorType::fill(val);
+		}
+
 		/// Construct a field with name, fieldKey, capacity and len
 		Field(const word& name, const word& fieldKey, size_t capacity, size_t len, RESERVE)
 		:

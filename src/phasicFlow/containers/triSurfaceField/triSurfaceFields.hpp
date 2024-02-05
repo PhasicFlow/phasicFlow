@@ -21,15 +21,15 @@ Licence:
 #ifndef __triSurfaceFields_hpp__ 
 #define __triSurfaceFields_hpp__
 
-#include "VectorSingle.hpp"
-#include "VectorDual.hpp"
-#include "triSurfaceField.hpp"
 #include "types.hpp"
+#include "VectorSingle.hpp"
+#include "triSurfaceField.hpp"
+
 
 namespace pFlow
 {
 
-using realTriSurfaceField_D 	= triSurfaceField<VectorSingle, real> ;
+/*using realTriSurfaceField_D 	= triSurfaceField<VectorSingle, real> ;
 
 using realTriSurfaceField_H 	= triSurfaceField<VectorSingle, real, HostSpace> ;
 
@@ -52,7 +52,7 @@ using int8TriSurfaceField_H 	= triSurfaceField<VectorSingle, int8, HostSpace> ;
 using int8TriSurfaceField_HD 	= triSurfaceField<VectorDual, int8> ;
 
 using int8TriSurfaceField 		= triSurfaceField<Vector, int8, vecAllocator<real>> ;
-
+*/
 
 }
 
