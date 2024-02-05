@@ -22,20 +22,16 @@ Licence:
 #define __vibratingMotion_hpp__
 
 
-#include "types.hpp"
-#include "typeInfo.hpp"
-#include "VectorDual.hpp"
-#include "Vectors.hpp"
-#include "List.hpp"
+#include "MotionModel.hpp"
 #include "vibrating.hpp"
+#include "fileDictionary.hpp"
+
 
 
 
 namespace pFlow
 {
 
-// forward
-class dictionary;
 
 /**
  * Vibrating motion model for walls
@@ -66,194 +62,39 @@ vibratingMotionInfo
  *
  */
 class vibratingMotion
+:
+    public fileDictionary,
+    public MotionModel<vibratingMotion, vibrating>
 {
-public:
-	
-	/** Motion model class to be passed to computational units/kernels for
-	 *  transfing points and returning velocities at various positions
-	 */
-	class Model
-	{
-	protected:
-		
-		deviceViewType1D<vibrating> 	components_;
-		int32 							numComponents_=0;
-
-	public:
-
-		INLINE_FUNCTION_HD
-		Model(deviceViewType1D<vibrating> comps, int32 numComps):
-			components_(comps),
-			numComponents_(numComps)
-		{}
-
-		INLINE_FUNCTION_HD
-		Model(const Model&) = default;
-		
-		
-		INLINE_FUNCTION_HD
-		Model& operator=(const Model&) = default;
-
-
-		INLINE_FUNCTION_HD
-		realx3 pointVelocity(int32 n, const realx3& p)const
-		{
-			return components_[n].linTangentialVelocityPoint(p);
-		}
-
-		INLINE_FUNCTION_HD
-		realx3 operator()(int32 n, const realx3& p)const
-		{
-			return pointVelocity(n,p);
-		}
-
-		INLINE_FUNCTION_HD
-		realx3 transferPoint(int32 n, const realx3 p, real dt)const
-		{
-			return components_[n].transferPoint(p, dt);	
-		}
-
-		INLINE_FUNCTION_HD int32 numComponents()const
-		{
-			return numComponents_;
-		}
-	};
 
 protected:
 
-	using axisVector_HD = VectorDual<vibrating>;
-
-	/// Vibrating motion components 
-	axisVector_HD 	components_;
-	
-	/// Names of components
-	wordList  		componentName_;
-
-	/// Number of components
-	label  			numComponents_= 0;
-
-	/// Read from a dictionary
-	bool readDictionary(const dictionary& dict);
-
-	/// Write to a dictionary 
-	bool writeDictionary(dictionary& dict)const;
+	bool impl_isMoving()const
+	{
+		return true;
+	}
 
 public:
 	
 	/// Type info
-	TypeInfoNV("vibratingMotion");
-
-	/// Empty
-	FUNCTION_H
-	vibratingMotion();
-
-	/// Construct with dictionary 
-	FUNCTION_H
-	vibratingMotion(const dictionary& dict);
-
-	/// Copy constructor 
-	FUNCTION_H
-	vibratingMotion(const vibratingMotion&) = default;
-
-	/// No move 
-	vibratingMotion(vibratingMotion&&) = delete;
-
-	/// Copy assignment 
-	FUNCTION_H
-	vibratingMotion& operator=(const vibratingMotion&) = default;
-
-	/// No Move assignment 
-	vibratingMotion& operator=(vibratingMotion&&) = delete;
+	TypeInfo("vibratingMotion");
+	
+	vibratingMotion(const objectFile& objf, repository* owner);
 
 	/// Destructor 
-	FUNCTION_H
-	~vibratingMotion() = default;
+	~vibratingMotion()override = default;
 
-	/// Return motion model at time t 
-	Model getModel(real t)
-	{
-		for(int32  i= 0; i<numComponents_; i++ )
-		{
-			components_[i].setTime(t);
-		}
-		components_.modifyOnHost();
-		components_.syncViews();
+    
+	bool write(iOstream& os, const IOPattern& iop)const override;
 
-		return Model(components_.deviceVectorAll(), numComponents_);
-	}
-
-	/// Name to component index 
-	INLINE_FUNCTION_H
-	int32 nameToIndex(const word& name)const
-	{
-		if( auto i = componentName_.findi(name); i == -1)
-		{
-			fatalErrorInFunction<<
-			"component name " << name << " does not exist. \n";
-			fatalExit;
-			return i;
-		}
-		else
-		{
-			return i;
-		}
-		
-	}
-
-	/// Index to name 
-	INLINE_FUNCTION_H
-	word indexToName(label i)const
-	{
-		if(i < numComponents_ )
-			return componentName_[i];
-		else
-		{
-			fatalErrorInFunction<<
-			"out of range access to the list of axes " << i <<endl<<
-			" size of components_ is "<<numComponents_<<endl;
-			fatalExit;
-			return "";
-		}
-	}
-
-	/// velocity at point p according to motion component n	
-	INLINE_FUNCTION_H
-	realx3 pointVelocity(label n, const realx3& p)const 
-	{
-		return components_.hostVectorAll()[n].linTangentialVelocityPoint(p);
-	}
-
-	/// Transfer point p for dt seconds based on motion component n 
-	INLINE_FUNCTION_H
-	realx3 transferPoint(label n, const realx3 p, real dt)const
-	{
-		return components_.hostVectorAll()[n].transferPoint(p, dt);
-	}
-
-	/// Is moving 
-	INLINE_FUNCTION_HD
-	bool isMoving()const
-	{
-		return true;
-	}
-
-	/// Move ponits at time t for dt seconds 
-	INLINE_FUNCTION_H
-	bool move(real t, real dt)
-	{
-		return true;
-	}
-
-	/// Read from input stream is 
-	FUNCTION_H
-	bool read(iIstream& is);
-
-	/// Write to output stream os
-	FUNCTION_H
-	bool write(iOstream& os)const;
+	static
+    auto noneComponent()
+    {
+      return vibrating();
+    }
 
 };
 
 } // pFlow
 
-#endif //__rotatingAxisMotion_hpp__
+#endif //__vibratingMotion_hpp__

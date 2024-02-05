@@ -1,13 +1,16 @@
 
 list(APPEND SourceFiles 
-entities/rotatingAxis/rotatingAxis.cpp
-entities/multiRotatingAxis/multiRotatingAxis.cpp
 entities/timeInterval/timeInterval.cpp
-entities/vibrating/vibrating.cpp
-fixedWall/fixedWall.cpp
+entities/rotatingAxis/rotatingAxis.cpp
 rotatingAxisMotion/rotatingAxisMotion.cpp
-multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
+
+
+entities/vibrating/vibrating.cpp
 vibratingMotion/vibratingMotion.cpp
+#fixedWall/fixedWall.cpp
+#entities/multiRotatingAxis/multiRotatingAxis.cpp
+#multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
+
 )
 
 set(link_libs Kokkos::kokkos phasicFlow)

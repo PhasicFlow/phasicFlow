@@ -24,6 +24,48 @@ Licence:
 #include "observer.hpp"
 #include "message.hpp"
 
+pFlow::subscriber::subscriber(const subscriber & src)
+:
+	subName_(src.subName_)
+{
+}
+
+pFlow::subscriber::subscriber(subscriber && src)
+:
+	observerList_(std::move(src.observerList_)),
+	subName_(std::move(src.subName_))
+{
+	
+	for(size_t i=0; i<observerList_.size(); i++)
+	{
+		for( auto obsvr: observerList_[i] )
+		{
+			if(obsvr) obsvr->changeSubscriber(this);
+		}
+	}
+}
+
+pFlow::subscriber &pFlow::subscriber::operator=(const subscriber & rhs)
+{
+    this->subName_ = rhs.subName_;
+	return *this;
+}
+
+pFlow::subscriber &pFlow::subscriber::operator=(subscriber && rhs)
+{
+    this->subName_ = std::move(rhs.subName_);
+	this->observerList_ = std::move(rhs.observerList_);
+
+	for(size_t i=0; i<observerList_.size(); i++)
+	{
+		for( auto obsvr: observerList_[i] )
+		{
+			if(obsvr) obsvr->changeSubscriber(this);
+		}
+	}
+
+	return *this;
+}	
 
 pFlow::subscriber::~subscriber()
 {
@@ -82,9 +124,9 @@ bool pFlow::subscriber::unsubscribe
 
 bool pFlow::subscriber::notify
 (
+	uint32 iter,
 	real t,
 	real dt,
-	uint32 iter,
 	const message msg, 
 	const anyList& varList
 )

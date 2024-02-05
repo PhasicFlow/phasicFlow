@@ -28,8 +28,6 @@ Licence:
 namespace pFlow
 {
 
-// forward 
-class dictionary;
 
 /** 
  * property holds the pure properties of materials.

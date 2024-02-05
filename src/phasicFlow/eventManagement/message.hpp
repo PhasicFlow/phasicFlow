@@ -40,12 +40,14 @@ public:
 		ITEM_DELETE	 	= 3,
 		ITEM_INSERT  	= 4,
 		RANGE_CHANGED   = 5,
-		ITEM_REARRANGE 	= 6	
+		ITEM_REARRANGE 	= 6,
+		ITEM_TRANSFER   = 7,
+		RESET_COUNTERS  = 8	
 	};
 
 protected:
 
-	static constexpr size_t numberOfEvents_ = 8;
+	static constexpr size_t numberOfEvents_ = 9;
 
 	std::bitset<numberOfEvents_> events_{0x0000};
 	

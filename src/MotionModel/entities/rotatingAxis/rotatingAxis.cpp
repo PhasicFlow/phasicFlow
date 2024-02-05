@@ -28,7 +28,6 @@ pFlow::rotatingAxis::rotatingAxis
 	const dictionary& dict
 )
 {
-
 	if(!read(dict))
 	{
 		fatalErrorInFunction<<
@@ -73,7 +72,7 @@ bool pFlow::rotatingAxis::read
 	if(!timeInterval::read(dict))return false;
 	if(!line::read(dict)) return false;
 		
-	real omega = dict.getValOrSet("omega", static_cast<real>(0.0));
+	real omega = dict.getValOrSet("omega", 0.0);
 	
 	setOmega(omega);
 	return true;

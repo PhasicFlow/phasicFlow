@@ -19,11 +19,17 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "observer.hpp"
-#include "subscriber.hpp" 
+#include "subscriber.hpp"
 
-pFlow::observer::observer(message msg):
-	subscriber_(nullptr),
-	message_(msg)
+const pFlow::subscriber *pFlow::observer::changeSubscriber(const subscriber *newSub)
+{
+	const subscriber* old = subscriber_;
+	subscriber_ = newSub;
+    return old;
+}
+
+pFlow::observer::observer(message msg) : subscriber_(nullptr),
+                                         message_(msg)
 {}
 
 pFlow::observer::observer

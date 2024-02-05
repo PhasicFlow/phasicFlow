@@ -24,13 +24,12 @@ Licence:
 #include "timeInterval.hpp"
 #include "line.hpp"
 
+#include "rotatingAxisFwd.hpp"
+
 namespace pFlow
 {
 
 class dictionary;
-class rotatingAxis;
-
-#include "rotatingAxisFwd.hpp"
 
 /**
  * An axis which rotates around itself at specified speed
@@ -64,7 +63,7 @@ class rotatingAxis
 	public timeInterval,
 	public line
 {
-protected:
+private:
 	
 	/// rotation speed 
 	real 	omega_ = 0;
@@ -78,11 +77,11 @@ public:
 
 	/// Empty constructor
 	FUNCTION_HD
-	rotatingAxis(){}
+	rotatingAxis()=default;
 
 	/// Construct from dictionary
 	FUNCTION_H
-	rotatingAxis(const dictionary& dict);
+	explicit rotatingAxis(const dictionary& dict);
 	
 	/// Construct from components
 	FUNCTION_HD
@@ -92,8 +91,18 @@ public:
 	FUNCTION_HD
 	rotatingAxis(const rotatingAxis&) = default;
 
+	FUNCTION_HD
+	rotatingAxis(rotatingAxis&&) = default;
+
 	/// Copy asssignment
 	rotatingAxis& operator=(const rotatingAxis&) = default;
+
+	/// Copy asssignment
+	rotatingAxis& operator=(rotatingAxis&&) = default;
+
+	/// destructor 
+	~rotatingAxis()=default;
+
 
 	/// Set omega
 	FUNCTION_HD
@@ -115,7 +124,10 @@ public:
 
 	/// Linear tangential velocity at point p
 	INLINE_FUNCTION_HD
-	realx3 linTangentialVelocityPoint(const realx3 &p)const;
+	realx3 linVelocityPoint(const realx3 &p)const;
+
+	INLINE_FUNCTION_HD
+	realx3 transferPoint(const realx3 p, real dt);
 
 	// - IO operation
 

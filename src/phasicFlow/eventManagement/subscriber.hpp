@@ -35,7 +35,7 @@ class anyList;
 
 class subscriber
 {
-protected:
+private:
 
 	// - list of subsribed objectd that recieve updage messages 
 	mutable std::array<List<observer*>,message::numEvents()> observerList_;
@@ -49,13 +49,19 @@ public:
 		subName_(name)
 	{}
 
-	subscriber(const subscriber&) = delete;
+	/// Copy constructor, only copies the name, not the list 
+	subscriber(const subscriber&);
 
-	subscriber(subscriber&&) = default;
+	/// @brief Move constructor, moves the name and the list,
+	/// also change the subriber of the object in the list 
+	subscriber(subscriber&&);
 
-	subscriber& operator = (const subscriber&) = delete;
+	/// Copy assignemnt, only assign the name, do not assign the list 
+	subscriber& operator = (const subscriber&);
 
-	subscriber& operator = (subscriber&&) = default;
+	/// @brief Move assignment, move assign name and list,
+	/// also change the subcriber of the object in the list 
+	subscriber& operator = (subscriber&&);
 
 	virtual ~subscriber();
 
@@ -63,16 +69,10 @@ public:
 
 	virtual bool unsubscribe(observer* obsevr)const;
 
-	//bool notify(const eventMessage& msg);
-
-	//bool notify(const eventMessage& msg, const List<eventObserver*>& exclutionList );
-
-
-	
 	bool notify(
+		uint32 iter,
 		real t,
 		real dt,
-		uint32 iter,
 		const message msg, 
 		const anyList& varList);
 	

@@ -32,7 +32,7 @@ class anyList;
 
 class observer
 {
-protected:
+private:
 	
 
 	/// pointer to subscriber 
@@ -41,6 +41,14 @@ protected:
 	/// list of events in the message 
 	message 			message_;
 
+	friend subscriber;
+	
+	const subscriber* changeSubscriber(const subscriber* newSub);
+
+	inline void invalidateSubscriber()
+	{
+		subscriber_ = nullptr;
+	}
 
 public:
 
@@ -69,10 +77,7 @@ public:
 
 	bool addToSubscriber(const subscriber& subscriber);
 	
-	inline void invalidateSubscriber()
-	{
-		subscriber_ = nullptr;
-	}
+	
 
 	static
 	constexpr auto numEvents()

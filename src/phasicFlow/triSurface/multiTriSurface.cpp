@@ -160,7 +160,8 @@ pFlow::multiTriSurface::multiTriSurface
 	repository *owner
 )
 :
-	triSurface(obj, owner)
+	triSurface(obj, owner),
+	subscriber("multiTriSurface")
 {
 	if( !IOobject::readObject() )
     {

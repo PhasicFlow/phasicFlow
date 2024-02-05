@@ -22,10 +22,9 @@ Licence:
 #ifndef __multiTriSurface_hpp__
 #define __multiTriSurface_hpp__
 
-
+#include "subscriber.hpp"
 #include "triSurface.hpp"
 #include "subSurface.hpp"
-
 
 namespace pFlow
 {
@@ -33,7 +32,8 @@ namespace pFlow
 
 class multiTriSurface
 :
-	public triSurface
+	public triSurface,
+	public subscriber
 {
 private:
 
@@ -41,11 +41,6 @@ private:
 
 	// - the index of last point of each triSurface 
 	
-
-	
-
-	
-
 	//void        calculateVars();
 
 public:
@@ -55,16 +50,16 @@ public:
 
 	//// - Constructors
 
-		// - emtpy
+		//
 		multiTriSurface(const objectFile& obj, repository* owner);
 
-		/*multiTriSurface(const multiTriSurface&) = default;
+		multiTriSurface(const multiTriSurface&) = default;
 
 		multiTriSurface& operator = (const multiTriSurface&) = default;
 
 		multiTriSurface(multiTriSurface&&) = delete;
 
-		multiTriSurface& operator = (multiTriSurface&&) = delete;	*/	
+		multiTriSurface& operator = (multiTriSurface&&) = delete;
 
 		~multiTriSurface() override = default;
 

@@ -18,6 +18,11 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+namespace pFlow
+{
+
+class rotatingAxis;
+
 INLINE_FUNCTION_HD
 realx3 rotate(const realx3 &p, const line& ln, real theta);
 
@@ -25,10 +30,10 @@ INLINE_FUNCTION_HD
 realx3 rotate(const realx3& p, const rotatingAxis& ax, real dt);
 
 INLINE_FUNCTION_HD
-void rotate(realx3* p, size_t n, const line& ln, real theta);
+void rotate(realx3* p, uint32 n, const line& ln, real theta);
 
 INLINE_FUNCTION_HD
-void rotate(realx3* p, size_t n, const rotatingAxis& ax, real dt);
+void rotate(realx3* p, uint32 n, const rotatingAxis& ax, real dt);
 
-
+}
 
