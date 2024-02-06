@@ -53,6 +53,11 @@ public:
 		//
 		multiTriSurface(const objectFile& obj, repository* owner);
 
+		multiTriSurface(
+			const objectFile& objf, 
+			repository* owner, 
+			const multiTriSurface& surf);
+
 		multiTriSurface(const multiTriSurface&) = default;
 
 		multiTriSurface& operator = (const multiTriSurface&) = default;
@@ -78,6 +83,29 @@ public:
 		{
 			return subSurfaces_;
 		}
+		
+		rangeU32 subSurfaceRange(uint32 nSub)
+		{
+			if( !(nSub < numSurfaces() ) )
+			{
+				fatalErrorInFunction;
+				fatalExit;
+			}
+			return {subSurfaces_[nSub].start(),subSurfaces_[nSub].end()};
+		}
+
+		rangeU32 subSurfacePointRange(uint32 nSub)const
+		{
+			if( !(nSub < numSurfaces() ) )
+			{
+				fatalErrorInFunction;
+				fatalExit;
+			}
+			return {
+				subSurfaces_[nSub].pointStart(),
+				subSurfaces_[nSub].pointEnd()};
+		}
+
 		/*void clear()
 		{
 			triSurface::clear();

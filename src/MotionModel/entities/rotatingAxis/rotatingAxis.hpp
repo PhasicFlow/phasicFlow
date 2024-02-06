@@ -75,6 +75,8 @@ public:
 
 	// - Constructor
 
+	TypeInfoNV("rotatingAxis");
+
 	/// Empty constructor
 	FUNCTION_HD
 	rotatingAxis()=default;

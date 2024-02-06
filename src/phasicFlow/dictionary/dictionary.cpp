@@ -299,6 +299,13 @@ pFlow::dictionary::dictionary
 
 }
 
+pFlow::dictionary::dictionary(const dictionary &src, bool global)
+:
+	dictionary(src)
+{
+	isGlobal_ = global;
+}
+
 pFlow::dictionary& pFlow::dictionary::operator=
 (
 	const dictionary& rhs

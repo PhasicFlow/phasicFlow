@@ -171,6 +171,20 @@ pFlow::multiTriSurface::multiTriSurface
     }
 }
 
+pFlow::multiTriSurface::multiTriSurface
+(
+	const objectFile &objf, 
+	repository *owner, 
+	const multiTriSurface &surf
+)
+:
+	triSurface(objf, owner, surf),
+	subscriber("multiTriSurface"),
+	subSurfaces_(surf.subSurfaces_)
+{
+	
+}
+
 bool pFlow::multiTriSurface::appendTriSurface
 (
 	const word &name, 
@@ -193,8 +207,17 @@ bool pFlow::multiTriSurface::appendTriSurface
 }
 
 bool pFlow::multiTriSurface::read(iIstream &is, const IOPattern &iop)
-{
-    return false;
+{	
+	subSurfaces_.clear();
+
+	if( !is.findKeywordAndVal("subSurfaces", subSurfaces_ ) )
+	{
+		fatalErrorInFunction<<
+		"Error in reading subSurfaces from stream "<< is.name()<<endl;
+		return false;
+	}
+
+    return triSurface::read(is, iop);
 }
 
 bool pFlow::multiTriSurface::write
@@ -203,6 +226,8 @@ bool pFlow::multiTriSurface::write
     const IOPattern &iop
 ) const
 {	
+
+	
 	if( iop.thisProcWriteData() )
 	{
 		os.writeWordEntry("subSurfaces", subSurfaces_);

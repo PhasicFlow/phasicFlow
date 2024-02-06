@@ -62,6 +62,11 @@ public:
 	// - type info
 	TypeInfo("triSurface");
 
+	triSurface(
+		const objectFile& objf, 
+		repository* owner, 
+		const triSurface& surf);
+
 	//// - Constructors
 		
 		// - construct from vertices of triangles 

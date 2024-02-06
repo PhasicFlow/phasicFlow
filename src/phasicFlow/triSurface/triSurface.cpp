@@ -126,26 +126,44 @@ pFlow::triSurface::triSurface
 
 pFlow::triSurface::triSurface
 (
-	const realx3x3Field_H &triangles,
-	repository* owner
+	const objectFile &objf,
+	repository* owner, 
+	const triSurface &surf
 )
 :
 	IOobject
 	(
 		objectFile
 		(
-			triangles.name(),
-			"",
-			IOobject::READ_NEVER,
-			IOobject::WRITE_ALWAYS
+			objf.name(),
+			objf.localPath(),
+			objectFile::READ_NEVER,
+			objf.wFlag()
 		),
 		IOPattern::AllProcessorsSimilar,
 		owner
 	),
-	points_("points", "points"),
-	vertices_("vertices", "vertices"),
-	area_("area", "area"),
-	normals_("normals","normals")
+	points_(surf.points_),
+	vertices_(surf.vertices_),
+	area_(surf.area_),
+	normals_(surf.normals_)
+{}
+
+pFlow::triSurface::triSurface(
+    const realx3x3Field_H &triangles,
+    repository *owner)
+    : IOobject(
+          objectFile(
+              triangles.name(),
+              "",
+              IOobject::READ_NEVER,
+              IOobject::WRITE_ALWAYS),
+          IOPattern::AllProcessorsSimilar,
+          owner),
+      points_("points", "points"),
+      vertices_("vertices", "vertices"),
+      area_("area", "area"),
+      normals_("normals", "normals")
 {
 	if( !appendTriSurface(triangles) )
 	{
@@ -238,6 +256,8 @@ bool pFlow::triSurface::read(iIstream &is, const IOPattern &iop)
 		" when reading field "<< vertices_.name()<<endl;
 		return false;
 	}
+	
+	WARNING<<"You should calculate area and normal after reading "<<END_WARNING;
 
     return true;
 }

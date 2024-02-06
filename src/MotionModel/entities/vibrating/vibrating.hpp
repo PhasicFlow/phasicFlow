@@ -94,6 +94,8 @@ private:
 
 public:
 
+	TypeInfoNV("vibrating");
+
 	FUNCTION_HD
 	vibrating()=default;
 

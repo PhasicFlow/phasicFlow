@@ -70,12 +70,17 @@ protected:
 	
 public:
 
-    TypeInfo("rotatingAxisMotion");
+	TypeInfo("rotatingAxisMotion");
 
-    rotatingAxisMotion(const objectFile& objf, repository* owner);
+	rotatingAxisMotion(const objectFile& objf, repository* owner);
+
+	rotatingAxisMotion(
+		const objectFile& objf, 
+		const dictionary& dict, 
+		repository* owner);
 
 
-    bool write(iOstream& os, const IOPattern& iop)const override;
+	bool write(iOstream& os, const IOPattern& iop)const override;
 
 	static
     auto noneComponent()

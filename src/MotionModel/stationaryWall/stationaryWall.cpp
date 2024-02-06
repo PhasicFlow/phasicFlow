@@ -18,31 +18,58 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __triSurfaceFields_hpp__ 
-#define __triSurfaceFields_hpp__
-
-#include "types.hpp"
-#include "VectorSingle.hpp"
-#include "triSurfaceField.hpp"
+#include "stationaryWall.hpp"
 
 
-namespace pFlow
+pFlow::stationaryWall::stationaryWall
+(
+	const objectFile &objf, 
+	repository *owner
+)
+:
+	fileDictionary(objf, owner)
 {
 
-using uint32TriSurfaceField_D 	= triSurfaceField<uint32> ;
-
-using uint32TriSurfaceField_H 	= triSurfaceField<uint32, HostSpace> ;
-
-using realTriSurfaceField_D 	= triSurfaceField<real> ;
-
-using realTriSurfaceField_H 	= triSurfaceField<real, HostSpace> ;
-
-using realx3TriSurfaceField_D 	= triSurfaceField<realx3> ;
-
-using realx3TriSurfaceField_H 	= triSurfaceField<realx3, HostSpace> ;
-
-
-
+	if(! getModel().impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
 }
 
-#endif //__trieSurfaceField_hpp__
+pFlow::stationaryWall::stationaryWall
+(
+	const objectFile &objf, 
+	const dictionary &dict, 
+	repository *owner
+)
+:
+	fileDictionary(objf, dict, owner)
+{
+	if(! getModel().impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
+}
+
+bool pFlow::stationaryWall::write
+(
+	iOstream &os, 
+	const IOPattern &iop
+) const
+{
+	// a global dictionary
+	dictionary newDict(fileDictionary::dictionary::name(), true);
+	if( iop.thisProcWriteData() )
+	{
+		if( !this->impl_writeDictionary(newDict) || 
+			!newDict.write(os))
+		{
+			fatalErrorInFunction<<
+			" error in writing to dictionary "<< newDict.globalName()<<endl;
+			return false;
+		}
+	}
+    return true;
+}

@@ -1,13 +1,16 @@
 
 list(APPEND SourceFiles 
 entities/timeInterval/timeInterval.cpp
+
 entities/rotatingAxis/rotatingAxis.cpp
 rotatingAxisMotion/rotatingAxisMotion.cpp
 
-
 entities/vibrating/vibrating.cpp
 vibratingMotion/vibratingMotion.cpp
-#fixedWall/fixedWall.cpp
+
+stationaryWall/stationaryWall.cpp
+entities/stationary/stationary.cpp
+
 #entities/multiRotatingAxis/multiRotatingAxis.cpp
 #multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
 

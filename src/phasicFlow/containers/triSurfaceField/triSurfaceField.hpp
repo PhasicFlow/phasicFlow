@@ -107,7 +107,39 @@ public:
 			return surface_;
 		}
 
+		inline 
+		auto size()const
+		{
+			return field_.size();
+		}
+
+		inline
+		auto capacity()const
+		{
+			return field_.capacity();
+		}
+
+		inline 
+		void assign(const std::vector<T>& vals)
+		{
+			if(vals.size() != surface_.size())
+			{
+				fatalErrorInFunction;
+				fatalExit;	
+			}
+			field_.assign(vals, surface_.capacity());
+		}
 		
+		bool hearChanges(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+		const anyList& varList) override
+		{
+			notImplementedFunction;
+			return false;
+		}
 
 	//// -  IO operations
 		bool write(iOstream& is, const IOPattern& iop)const override;

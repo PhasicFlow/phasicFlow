@@ -14,6 +14,22 @@ pFlow::vibratingMotion::vibratingMotion
 	}
 }
 
+pFlow::vibratingMotion::vibratingMotion
+(
+	const objectFile &objf, 
+	const dictionary &dict, 
+	repository *owner
+)
+:
+	fileDictionary(objf,dict,owner)
+{
+	if(! getModel().impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
+}
+
 bool pFlow::vibratingMotion::write(iOstream &os, const IOPattern &iop) const
 {
     // a global dictionary

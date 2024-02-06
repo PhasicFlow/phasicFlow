@@ -81,6 +81,11 @@ public:
 	
 	vibratingMotion(const objectFile& objf, repository* owner);
 
+	vibratingMotion(
+		const objectFile& objf, 
+		const dictionary& dict, 
+		repository* owner);
+
 	/// Destructor 
 	~vibratingMotion()override = default;
 

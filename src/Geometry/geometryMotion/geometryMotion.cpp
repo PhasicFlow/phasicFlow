@@ -1,3 +1,4 @@
+#include "geometryMotion.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -21,37 +22,49 @@ Licence:
 template<typename MotionModel>
 bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 {
-	motionIndex_.clear();
-	triMotionIndex_.reserve( this->surface().capacity() );
-	triMotionIndex_.clear();
-
-	ForAll( surfI, motionComponentName_)
+	
+	if(motionComponentName().size() != numSurfaces() )
 	{
-		auto mName = motionComponentName_[surfI];
-		auto mInd = motionModel_.nameToIndex(mName);
-		motionIndex_.push_back(mInd);
-		// fill motionIndex for triangles of the surface
-		int32 surfSize = this->surface().surfNumTriangles(surfI);
-		for(int32 i=0; i<surfSize; i++)
+		fatalErrorInFunction<<
+		"size of motion component names in the triSurface is not"<<
+		" equal to size of number of sub-surfaces"<<endl;
+		 return false;
+	}
+
+	uint32Vector surfMotionIndex("surfMotionIndex");
+	uint32Vector triMotionIndex("triMotionIndex");
+	uint32Vector pointMotionIndex("pointMotionIndex");
+
+	ForAll( surfI, motionComponentName())
+	{
+		auto mName = motionComponentName()[surfI];
+		uint32 mInd=0;
+		
+		if( !motionModel_.nameToIndex(mName, mInd) )
 		{
-			triMotionIndex_.push_back(mInd);
+			fatalErrorInFunction<<
+			mName<< " does not exist in the list of motion names -> "<<
+			motionModel_.componentNames();
+		}
+		surfMotionIndex.push_back(mInd);
+		
+		auto surfRange = this->surface().subSurfaceRange(surfI);
+		
+		for(uint32 i=0; i<surfRange.numElements(); i++)
+		{
+			triMotionIndex.push_back(mInd);
+		}
+
+		auto pointRange = this->surface().subSurfacePointRange(surfI);
+		for(uint32 n=0; n<pointRange.numElements(); n++)
+		{
+			pointMotionIndex.push_back(mInd);
 		}
 	}
-	motionIndex_.syncViews();
-	triMotionIndex_.syncViews();
-
-	pointMotionIndex_.reserve(triSurface_.numPoints());
-	pointMotionIndex_.clear();
-
-	ForAll(surfI, motionIndex_)
-	{
-		auto nP = triSurface_.surfNumPoints(surfI);
-		for(int32 i=0; i<nP; i++)
-		{
-			pointMotionIndex_.push_back(motionIndex_[surfI]);
-		}
-	}
-	pointMotionIndex_.syncViews();
+	
+	surfMotionIndex_.assign(surfMotionIndex);
+	triMotionIndex_.assign(triMotionIndex);
+	pointMotionIndex_.assign(pointMotionIndex);
 
 	return true;
 }
@@ -65,144 +78,188 @@ pFlow::geometryMotion<MotionModel>::geometryMotion
 )
 :
 	geometry(control, prop),
-	motionModel_(
-		this->owner().template emplaceObject<MotionModel>(
-			objectFile(
-				motionModelFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS
-				)
-			)
+	motionModel_
+	(
+		objectFile
+		(
+			motionModelFile__,
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
 		),
+		owner()
+	),
 	moveGeomTimer_("move geometry", &this->timers())
 {
-	findMotionIndex();
-}
-
-template<typename MotionModel>
-pFlow::geometryMotion<MotionModel>::geometryMotion
-(
-	systemControl& control,
-	const property& prop,
-	const multiTriSurface& triSurface,
-	const wordVector& motionCompName,
-	const wordVector& propName,
-	const MotionModel& motionModel
-)
-:
-	geometry(
-		control,
-		prop,
-		triSurface,
-		motionCompName,
-		propName
-		),
-	motionModel_(
-		this->owner().template emplaceObject<MotionModel>(
-			objectFile(
-				motionModelFile__,
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS
-				),
-			motionModel
-			)
-		),
-	moveGeomTimer_("move geometry", &this->timers())
-{
-	findMotionIndex();
-}
-
-template<typename MotionModel>
-pFlow::geometryMotion<MotionModel>::geometryMotion
-(
-	systemControl& control,
-	const property& prop,
-	const dictionary& dict,
-	const multiTriSurface& triSurface,
-	const wordVector& motionCompName,
-	const wordVector& propName
-)
-:
-	geometry(
-		control,
-		prop,
-		dict,
-		triSurface,
-		motionCompName,
-		propName
-		),
-	motionModel_(
-		this->owner().template emplaceObject<MotionModel>(
-			objectFile(
-				motionModelFile__,
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS
-				),
-			dict
-			)
-		),
-	moveGeomTimer_("move geometry", &this->timers())
-{
-	findMotionIndex();
-}
-
-template<typename MotionModel>
-bool pFlow::geometryMotion<MotionModel>::beforeIteration() 
-{ 
-	geometry::beforeIteration();
-	return true;
-}
-
-template<typename MotionModel>
-bool pFlow::geometryMotion<MotionModel>::iterate()
-{
-	if( motionModel_.isMoving() )
+	if(!findMotionIndex())
 	{
-		moveGeomTimer_.start();
-		moveGeometry();
-		moveGeomTimer_.end();
+		fatalExit;
 	}
-	return true;
 }
 
-template<typename MotionModel>
-bool pFlow::geometryMotion<MotionModel>::afterIteration() 
+template <typename MotionModelType>
+pFlow::geometryMotion<MotionModelType>::geometryMotion
+(
+	systemControl &control, 
+	const property &prop, 
+	multiTriSurface &surf, 
+	const wordVector &motionCompName, 
+	const wordVector &materialName, 
+	const dictionary &motionDict
+)
+:
+	geometry
+	(
+		control, 
+		prop, 
+		surf, 
+		motionCompName, 
+		materialName,
+        motionDict
+	),
+	motionModel_
+	(
+		objectFile
+		(
+			motionModelFile__,
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_ALWAYS
+		),
+		motionDict,
+		owner()
+	),
+	moveGeomTimer_("move geometry", &this->timers())
 {
-	geometry::afterIteration();
-	return true;
-}
+	if(!findMotionIndex())
+	{
+		fatalExit;
+	}
+} 
 
-template<typename MotionModel>
-bool pFlow::geometryMotion<MotionModel>::moveGeometry()
-{
+/*template<typename MotionModel>
+ pFlow::geometryMotion<MotionModel>::geometryMotion
+ (
+     systemControl& control,
+     const property& prop,
+     const multiTriSurface& triSurface,
+     const wordVector& motionCompName,
+     const wordVector& propName,
+     const MotionModel& motionModel
+ )
+ :
+     geometry(
+         control,
+         prop,
+         triSurface,
+         motionCompName,
+         propName
+         ),
+     motionModel_(
+         this->owner().template emplaceObject<MotionModel>(
+             objectFile(
+                 motionModelFile__,
+                 "",
+                 objectFile::READ_NEVER,
+                 objectFile::WRITE_ALWAYS
+                 ),
+             motionModel
+             )
+         ),
+     moveGeomTimer_("move geometry", &this->timers())
+ {
+     findMotionIndex();
+ }
 
-	real dt = this->dt();
-	real t = this->currentTime();
+ template<typename MotionModel>
+ pFlow::geometryMotion<MotionModel>::geometryMotion
+ (
+     systemControl& control,
+     const property& prop,
+     const dictionary& dict,
+     const multiTriSurface& triSurface,
+     const wordVector& motionCompName,
+     const wordVector& propName
+ )
+ :
+     geometry(
+         control,
+         prop,
+         dict,
+         triSurface,
+         motionCompName,
+         propName
+         ),
+     motionModel_(
+         this->owner().template emplaceObject<MotionModel>(
+             objectFile(
+                 motionModelFile__,
+                 "",
+                 objectFile::READ_NEVER,
+                 objectFile::WRITE_ALWAYS
+                 ),
+             dict
+             )
+         ),
+     moveGeomTimer_("move geometry", &this->timers())
+ {
+     findMotionIndex();
+ }
 
-	auto pointMIndex= pointMotionIndex_.deviceVector();
-	auto mModel = motionModel_.getModel(t);
-	realx3* points = triSurface_.pointsData_D();
-	auto numPoints = triSurface_.numPoints();
+ template<typename MotionModel>
+ bool pFlow::geometryMotion<MotionModel>::beforeIteration()
+ {
+     geometry::beforeIteration();
+     return true;
+ }
+
+ template<typename MotionModel>
+ bool pFlow::geometryMotion<MotionModel>::iterate()
+ {
+     if( motionModel_.isMoving() )
+     {
+         moveGeomTimer_.start();
+         moveGeometry();
+         moveGeomTimer_.end();
+     }
+     return true;
+ }
+
+ template<typename MotionModel>
+ bool pFlow::geometryMotion<MotionModel>::afterIteration()
+ {
+     geometry::afterIteration();
+     return true;
+ }
+
+ template<typename MotionModel>
+ bool pFlow::geometryMotion<MotionModel>::moveGeometry()
+ {
+
+     real dt = this->dt();
+     real t = this->currentTime();
+
+     auto pointMIndex= pointMotionIndex_.deviceVector();
+     auto mModel = motionModel_.getModel(t);
+     realx3* points = triSurface_.pointsData_D();
+     auto numPoints = triSurface_.numPoints();
 
 
-	Kokkos::parallel_for(
-		"geometryMotion<MotionModel>::movePoints",
-		numPoints,
-		LAMBDA_HD(int32 i){
-			auto newPos = mModel.transferPoint(pointMIndex[i], points[i], dt);
-			points[i] = newPos;
-		});
+     Kokkos::parallel_for(
+         "geometryMotion<MotionModel>::movePoints",
+         numPoints,
+         LAMBDA_HD(int32 i){
+             auto newPos = mModel.transferPoint(pointMIndex[i], points[i], dt);
+             points[i] = newPos;
+         });
 
-	Kokkos::fence();
+     Kokkos::fence();
 
-	// move the motion components 
-	motionModel_.move(t,dt);
+     // move the motion components
+     motionModel_.move(t,dt);
 
-	// end of calculations 
-	moveGeomTimer_.end();
+     // end of calculations
+     moveGeomTimer_.end();
 
-	return true;
-}
+     return true;
+ }*/

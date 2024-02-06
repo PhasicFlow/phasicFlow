@@ -37,6 +37,22 @@ pFlow::rotatingAxisMotion::rotatingAxisMotion
 	}
 }
 
+pFlow::rotatingAxisMotion::rotatingAxisMotion
+(
+	const objectFile &objf, 
+	const dictionary &dict, 
+	repository *owner
+)
+:
+	fileDictionary(objf, dict, owner)
+{
+	if(! getModel().impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
+}
+
 bool pFlow::rotatingAxisMotion::write
 (
 	iOstream &os, 

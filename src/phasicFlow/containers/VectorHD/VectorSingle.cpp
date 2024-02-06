@@ -362,6 +362,7 @@ void pFlow::VectorSingle<T,MemorySpace>::fill
     const T& val
 )
 {
+    changeSize(r.end());
     pFlow::fill(view_, r, val);
 }
 
@@ -373,6 +374,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     const T& val
 )
 {
+    
     if( n > capacity() )
     {
         reallocateCapacitySize(evalCapacity(n), n);
@@ -392,11 +394,13 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     uint32 cap
 ) 
 {
+    // make sure that vector has enough capacity
+    uint32 newCap = max(static_cast<uint32>(src.size()), cap);
     uint32 srcSize = src.size();
     
-    if(cap != capacity())
+    if(newCap != capacity())
     {
-        reallocateCapacitySize(cap, srcSize);
+        reallocateCapacitySize(newCap, srcSize);
     }
     else
     {
@@ -415,7 +419,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     const std::vector<T>& src
 ) 
 {
-    assign(src, src.capacity());
+    assign(src, this->capacity());
 }
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 

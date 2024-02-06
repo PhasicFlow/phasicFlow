@@ -1,3 +1,4 @@
+#include "Vector.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -24,9 +25,17 @@ inline void pFlow::Vector<T, Allocator>::fill( const T& val)
 	std::fill(this->begin(), this->end(), val);
 }
 
+template <typename T, typename Allocator>
+inline void pFlow::Vector<T, Allocator>::fill(uint32 start, uint32 end, const T &val)
+{
+	
+	for(uint32 i=start; i<end; i++)
+	{
+		this->at(i) = val;
+	}
+}
 #pragma hd_warning_disable 
-template<typename T, typename Allocator>
-inline void pFlow::Vector<T, Allocator>::operator +=( const T& val)
+template < typename T, typename Allocator> inline void pFlow::Vector < T, Allocator> ::operator+= (const T &val)
 {
 	for( auto& v:(*this) )
 	{

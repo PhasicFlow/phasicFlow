@@ -82,7 +82,11 @@ public:
 			VectorType()
 		{}
 
-		
+		Field(const word& name)
+		:
+			VectorType(name)
+		{}
+
 		/// Construct an empty field with name and fieldKey 
 		Field(const word& name, const word& fieldKey)
 		:

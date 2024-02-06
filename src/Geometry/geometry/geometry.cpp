@@ -19,33 +19,41 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "geometry.hpp"
+#include "systemControl.hpp"
 #include "vocabs.hpp"
 
 
-bool pFlow::geometry::findPropertyId()
+bool pFlow::geometry::createPropertyId()
 {
-
-	int8Vector propId(0, surface().capacity(),RESERVE());
-	propId.clear();
-
-	uint32 pId;
-	ForAll(matI, materialName_)
+	if(materialName_.size() != numSurfaces() )
 	{
+		fatalErrorInFunction<<
+		"number of subSurface and material names do not match"<<endl;
+		return false;
+	}
+
+	uint32Vector propId(
+		"propId", 
+		surface().capacity(), 
+		surface().size(),
+		RESERVE());
+
+	ForAll(i, materialName_)
+	{
+		uint32 pIdx =0;
 		
-		if( !wallProperty_.nameToIndex( materialName_[matI], pId ) )
+		if( !wallProperty_.nameToIndex(materialName_[i], pIdx) )
 		{
-		 	fatalErrorInFunction<<
-		 	"material name for the geometry is invalid: "<< materialName_[matI]<<endl;
-		 	return false;
+			fatalErrorInFunction<<
+			"Property/material name is invalid "<<materialName_[i]<<
+			". A list of valid names are \n"<< wallProperty_.materials()<<endl;
+			return false;
 		}
-
-		int32 surfSize = surface().surfNumTriangles(matI);
-
-		for(int32 i=0; i<surfSize; i++)
-		{
-			propId.push_back(pId);
-		}
-	}	
+		
+		auto triRange = subSurfaceRange(i);
+		propId.fill(triRange.start(), triRange.end(), pIdx);
+		
+	}
 
 	propertyId_.assign(propId);
 
@@ -59,77 +67,245 @@ pFlow::geometry::geometry
 	const property& prop
 )
 :
-	demGeometry(control),
+	multiTriSurface
+	(
+		objectFile
+		(
+			triSurfaceFile__,
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
+		),
+		&control.geometry()
+	),
+	demComponent
+	(
+		"geometry",
+		control
+	),
 	wallProperty_(prop),
-	geometryRepository_(control.geometry()),
-	triSurface_(
-		control.geometry().emplaceObject<multiTriSurface>(
-			objectFile(
-				"triSurface",
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS
-				)
-			)
+	motionComponentName_
+	(
+		"motionComponentName",
+		"motionComponentName"
+	),
+	materialName_
+	(
+		"materialName",
+		"materialName"
+	),
+	propertyId_
+	(
+		objectFile
+		(
+			"propertyId",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER
 		),
-	motionComponentName_(
-		control.geometry().emplaceObject<wordField>(
-			objectFile(
-				"motionComponentName",
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS	
-				),
-			"motionNamesList"
-			)
+		*this,
+		0u
+	),
+	contactForceWall_
+	(
+		objectFile
+		(
+			"contactForcWall",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_NEVER
 		),
-	materialName_(
-		control.geometry().emplaceObject<wordField>(
-			objectFile(
-				"materialName",
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS
-				),
-			"materialNamesList"
-			)
+		*this,
+		zero3
+	),
+	normalStressWall_
+	(
+		objectFile
+		(
+			"normalStressWall",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_NEVER
 		),
-	propertyId_(
-		control.geometry().emplaceObject<int8TriSurfaceField_D>(
-			objectFile(
-				"propertyId",
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_NEVER),
-			surface(),
-			0 ) ),
-	contactForceWall_(
-		control.geometry().emplaceObject<realx3TriSurfaceField_D>(
-			objectFile(
-				"contactForceWall",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS),
-			surface(),
-			zero3) ),
-	stressWall_(
-		control.geometry().emplaceObject<realx3TriSurfaceField_D>(
-			objectFile(
-				"stressWall",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS),
-			surface(),
-			zero3) )
+		*this,
+		zero3
+	),
+	shearStressWall_
+	(
+		objectFile
+		(
+			"shearStressWall",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_NEVER
+		),
+		*this,
+		zero3
+	)
 {
 
-	if(!findPropertyId())
+	readWholeObject_ = false;
+	if( !IOobject::readObject() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
+    }
+	readWholeObject_ = true;
+
+	if( this->numSurfaces() != motionComponentName_.size() )
+	{
+		fatalErrorInFunction<<
+		"Number of surfaces is not equal to number of motion component names"<<endl;
+		fatalExit;
+	}
+	
+	if(!createPropertyId())
 	{
 		fatalExit;
 	}
 }
 
 pFlow::geometry::geometry
+(
+	systemControl &control, 
+	const property &prop, 
+	multiTriSurface &surf, 
+	const wordVector &motionCompName, 
+	const wordVector &materialName,
+	const dictionary& motionDict
+)
+:
+	multiTriSurface
+	(
+		objectFile
+		(
+			triSurfaceFile__,
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_ALWAYS
+		),
+		&control.geometry(),
+		surf
+	),
+	demComponent
+	(
+		"geometry",
+		control
+	),
+	wallProperty_
+	(
+		prop
+	),
+	motionComponentName_
+	(
+		"motionComponentName",
+		"motionComponentName"
+	),
+	materialName_
+	(
+		"materialName",
+		"materialName"
+	),
+	propertyId_
+	(
+		objectFile
+		(
+			"propertyId",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER
+		),
+		*this,
+		0u
+	),
+	contactForceWall_
+	(
+		objectFile
+		(
+			"contactForcWall",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_NEVER
+		),
+		*this,
+		zero3
+	),
+	normalStressWall_
+	(
+		objectFile
+		(
+			"normalStressWall",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_NEVER
+		),
+		*this,
+		zero3
+	),
+	shearStressWall_
+	(
+		objectFile
+		(
+			"shearStressWall",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_NEVER
+		),
+		*this,
+		zero3
+	)
+	
+{
+	motionComponentName_.assign(motionCompName);
+	materialName_.assign(materialName);
+
+
+	if( this->numSurfaces() != motionComponentName_.size() )
+	{
+		fatalErrorInFunction<<
+		"Number of surfaces is not equal to number of motion component names"<<endl;
+		fatalExit;
+	}
+
+	if(!createPropertyId())
+	{
+		fatalExit;
+	}
+}
+
+bool pFlow::geometry::read(iIstream &is, const IOPattern &iop)
+{
+	motionComponentName_.read(is, iop);
+	materialName_.read(is, iop);
+	
+	if( readWholeObject_ )
+	{
+		return multiTriSurface::read(is, iop);
+	}
+
+    return true;
+}
+
+bool pFlow::geometry::write(iOstream &os, const IOPattern &iop) const
+{
+    
+	if( !motionComponentName_.write(os, iop) )
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+	if( !materialName_.write(os,iop))
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+	
+	return multiTriSurface::write(os,iop);
+}
+
+/*pFlow::geometry::geometry
 (
 	systemControl& control,
 	const property& prop,
@@ -296,23 +472,25 @@ bool pFlow::geometry::afterIteration()
 	Kokkos::fence();
 	return true;
 	
-}
+}*/
 
 pFlow::uniquePtr<pFlow::geometry> 
-	pFlow::geometry::create(
-			systemControl& control,
-			const property& prop,
-			const dictionary& dict,
-			const multiTriSurface& triSurface,
-			const wordVector& motionCompName,
-			const wordVector& propName)
+	pFlow::geometry::create
+	(
+		systemControl& control, 
+		const property& prop,
+		multiTriSurface& surf,
+		const wordVector& motionCompName,
+		const wordVector& materialName,
+		const dictionary& motionDic
+	)
 {
 
-	word model = dict.getVal<word>("motionModel");
+	word model = motionDic.getVal<word>("motionModel");
 
 	auto geomModel = angleBracketsNames("geometry", model);
 
-	REPORT(1)<< "Selecting geometry model . . ."<<endREPORT;
+	REPORT(1)<< "Selecting geometry model . . ."<<END_REPORT;
 
 	if( dictionaryvCtorSelector_.search(geomModel) )
 	{
@@ -320,19 +498,19 @@ pFlow::uniquePtr<pFlow::geometry>
 			(
 				control,
 				prop, 
-				dict,
-				triSurface,
+				surf,
 				motionCompName,
-				propName
+				materialName,
+				motionDic
 			);
-		REPORT(2)<<"Model "<< greenText(geomModel)<<" is created.\n"<<endREPORT;
+		REPORT(2)<<"Model "<< Green_Text(geomModel)<<" is created.\n"<<END_REPORT;
 		return objPtr;
 	}
 	else
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< yellowText(geomModel) << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< Yellow_Text(geomModel) << " dose not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_

@@ -36,6 +36,9 @@ pFlow::IOobject::IOobject
     
     if(owner_&& !owner->addToRepository(this))
     {
+        fatalErrorInFunction<<
+        "failed to add object "<< objf.name()<< 
+        " to repository "<< owner->name()<<endl;
         fatalExit;
     }
 }

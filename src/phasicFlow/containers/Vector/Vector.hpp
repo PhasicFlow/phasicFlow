@@ -289,6 +289,9 @@ public:
 		// - fill the whole content of vector, [begin, end), with val 
 		void fill( const T& val);
 
+		/// fill the content in range [start, end)
+		void fill( uint32 start, uint32 end, const T& val);
+
 		inline
 		auto getSpan()
 		{

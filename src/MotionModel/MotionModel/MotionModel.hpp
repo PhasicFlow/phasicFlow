@@ -149,7 +149,11 @@ protected:
 	 
 	bool impl_indexToName(uint32 i, word& name)const;
 
-	
+	const wordList& impl_componentNames()const
+	{
+		return componentNames_;
+	}
+
 	bool impl_isMoving()const
 	{
 		return false;
@@ -220,6 +224,11 @@ public:
 		bool indexToName(uint32 idx, word& name)const
 		{
 			return getModel().impl_indexToName(idx, name);
+		}
+
+		const wordList& componentNames()const
+		{
+			return getModel().impl_componentNames();
 		}
 		
 		/// Are walls moving 

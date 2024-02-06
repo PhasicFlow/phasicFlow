@@ -118,7 +118,10 @@ bool pFlow::Field<T, MemorySpace>::write
 	if(!VectorType::write(os, iop)) return false;
 
 	if(iop.thisProcWriteData())
+	{
 		os.endEntry();
+		os.newLine();
+	}	
 
 	if(!os.check(FUNCTION_NAME))return false;
 

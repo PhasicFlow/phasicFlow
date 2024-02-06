@@ -145,10 +145,9 @@ namespace pFlow
 
 
 #define TypeInfoTemplate11(tName, Type)										\
-	has_static_member(TYPENAME);											\
 	inline static word TYPENAME()											\
 	{ 																		\
-		return word(tName)+"<"+getTypeName<Type1>()+">";					\
+		return word(tName)+"<"+getTypeName<Type>()+">";						\
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 

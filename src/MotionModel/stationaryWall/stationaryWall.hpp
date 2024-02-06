@@ -18,31 +18,52 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __triSurfaceFields_hpp__ 
-#define __triSurfaceFields_hpp__
+#ifndef __stationaryWall_hpp__
+#define __stationaryWall_hpp__
 
-#include "types.hpp"
-#include "VectorSingle.hpp"
-#include "triSurfaceField.hpp"
 
+#include "MotionModel.hpp"
+#include "stationary.hpp"
+#include "fileDictionary.hpp"
 
 namespace pFlow
 {
 
-using uint32TriSurfaceField_D 	= triSurfaceField<uint32> ;
 
-using uint32TriSurfaceField_H 	= triSurfaceField<uint32, HostSpace> ;
+class stationaryWall
+:
+    public fileDictionary,
+    public MotionModel<stationaryWall, stationary>
+{
+protected:
 
-using realTriSurfaceField_D 	= triSurfaceField<real> ;
+	bool impl_isMoving()const
+	{
+		return false;
+	}
+	
+public:
 
-using realTriSurfaceField_H 	= triSurfaceField<real, HostSpace> ;
+	TypeInfo("stationaryWall");
 
-using realx3TriSurfaceField_D 	= triSurfaceField<realx3> ;
+	stationaryWall(const objectFile& objf, repository* owner);
 
-using realx3TriSurfaceField_H 	= triSurfaceField<realx3, HostSpace> ;
+	stationaryWall(
+		const objectFile& objf, 
+		const dictionary& dict, 
+		repository* owner);
 
 
+	bool write(iOstream& os, const IOPattern& iop)const override;
 
-}
+	static
+    auto noneComponent()
+    {
+      return stationary();
+    }
+};
 
-#endif //__trieSurfaceField_hpp__
+} // pFlow
+
+
+#endif // __stationaryWall_hpp__

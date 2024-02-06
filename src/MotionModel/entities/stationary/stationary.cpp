@@ -18,31 +18,40 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __triSurfaceFields_hpp__ 
-#define __triSurfaceFields_hpp__
-
-#include "types.hpp"
-#include "VectorSingle.hpp"
-#include "triSurfaceField.hpp"
+#include "stationary.hpp"
 
 
-namespace pFlow
+
+FUNCTION_H
+pFlow::stationary::stationary(const dictionary& dict)
 {
-
-using uint32TriSurfaceField_D 	= triSurfaceField<uint32> ;
-
-using uint32TriSurfaceField_H 	= triSurfaceField<uint32, HostSpace> ;
-
-using realTriSurfaceField_D 	= triSurfaceField<real> ;
-
-using realTriSurfaceField_H 	= triSurfaceField<real, HostSpace> ;
-
-using realx3TriSurfaceField_D 	= triSurfaceField<realx3> ;
-
-using realx3TriSurfaceField_H 	= triSurfaceField<realx3, HostSpace> ;
-
-
-
 }
 
-#endif //__trieSurfaceField_hpp__
+
+
+FUNCTION_H
+bool pFlow::stationary::read(const dictionary& dict)
+{	
+	return true;
+}
+
+FUNCTION_H
+bool pFlow::stationary::write(dictionary& dict) const
+{
+	
+	return true;
+}
+
+FUNCTION_H
+bool pFlow::stationary::read(iIstream& is)
+{
+	
+	notImplementedFunction;
+	return true;
+}
+
+FUNCTION_H
+bool pFlow::stationary::write(iOstream& os)const
+{
+  return true;
+}

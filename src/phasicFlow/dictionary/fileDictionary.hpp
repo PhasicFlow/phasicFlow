@@ -41,7 +41,10 @@ public:
 	/// construct a dictionary with name and read it from file 
 	fileDictionary(const word& keyword, const fileSystem& file);
 
-
+  fileDictionary(
+    const objectFile& objf, 
+    const dictionary& dict, 
+    repository* owner=nullptr);
 
     /// read from stream 
     bool read(iIstream& is, const IOPattern& iop) override;

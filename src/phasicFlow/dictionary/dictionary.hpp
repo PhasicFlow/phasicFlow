@@ -144,6 +144,8 @@ public:
 		/// entries_ are copied smoothly. set parrent dict to nullDict
 		dictionary(const dictionary& );
 
+		dictionary(const dictionary& src, bool global);
+
 
 		/// assignment preserve name of this dictionary 
 		/// only entries are transfered with ownership
