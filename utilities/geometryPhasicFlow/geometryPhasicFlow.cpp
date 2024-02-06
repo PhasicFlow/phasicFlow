@@ -20,12 +20,10 @@ Licence:
 
 #include "vocabs.hpp"
 #include "systemControl.hpp"
-#include "fileDictionary.hpp"
 #include "Wall.hpp"
+#include "Lists.hpp"
 #include "Vectors.hpp"
-#include "VectorSingles.hpp"
-#include "multiTriSurface.hpp"
-//#include "geometryMotion.hpp"
+#include "geometry.hpp"
 #include "commandLine.hpp"
 //#include "readControlDict.hpp"
 
@@ -52,7 +50,7 @@ int main( int argc, char* argv[] )
 // this should be palced in each main 
 #include "initialize_Control.hpp"
 
-	//#include "setProperty.hpp"
+	#include "setProperty.hpp"
 
 	REPORT(0)<<"\nReading "<<"geometryDict"<<" . . ."<<END_REPORT;
 	auto geometryDict = fileDictionary(
@@ -71,22 +69,25 @@ int main( int argc, char* argv[] )
 	auto wallsDictName = surfacesDict.dictionaryKeywords();
 
 	
-
+	word mSurfaceName = word("geometryPhasicFlow_")+word(triSurfaceFile__);
 	multiTriSurface surface
 	(
 		objectFile
 		(
-			triSurfaceFile__,
+			mSurfaceName,
 			"",
 			objectFile::READ_NEVER,
 			objectFile::WRITE_ALWAYS
 		),
-		&Control.geometry()
+		nullptr
 	);
 	
-	//wordVector materials;
-	//wordVector motion;
-	
+	wordVector materials;
+	wordList materialsList;
+
+	wordVector motion;
+	wordList motionList;
+
 	for(auto& name:wallsDictName)
 	{
 		REPORT(1)<<"Creating wall "<<Green_Text(name)<<" from dictionary "<<surfacesDict.globalName() <<END_REPORT;
@@ -97,19 +98,29 @@ int main( int argc, char* argv[] )
 		realx3x3Vector trinalges(wall.name(), wall.triangles());
 		
 		surface.appendTriSurface(wall.name(), trinalges);
-		/*materials.push_back(wall.materialName());
-		motion.push_back(wall.motionName());*/
+		materials.push_back(wall.materialName());
+		materialsList.push_back(wall.materialName());
+
+		motion.push_back(wall.motionName());
+		motionList.push_back(wall.motionName());
 	}
 
-	output<<surface<<endl;
-	//REPORT(1)<<"Selected wall materials are "<<cyanText(materials)<<'\n'<<endREPORT;
-		
-	/*REPORT(0)<< "\nCreating geometry . . ."<<endREPORT;
-	auto geomPtr = geometry::create(Control, proprties, geometryDict, surface, motion, materials);
-	REPORT(1)<< "geometry type is "<< greenText(geomPtr().typeName())<<endREPORT;
 	
-	REPORT(1)<< "Writing geometry to folder "<< geomPtr().path()<<endREPORT;
-	geomPtr().write();*/
+	REPORT(1)<<"Selected wall materials are "<<Cyan_Text(materialsList)<<'\n'<<END_REPORT;
+	REPORT(1)<<"Selected wall motion components are "<<Cyan_Text(motionList)<<'\n'<<END_REPORT;
+		
+	REPORT(0)<< "\nCreating geometry . . ."<<END_REPORT;
+	auto geomPtr = geometry::create(
+		Control, 
+		proprties, 
+		surface, 
+		motion, 
+		materials, 
+		geometryDict);
+	
+	REPORT(1)<< "geometry type is "<< Green_Text(geomPtr().typeName())<<END_REPORT;
+
+	Control.time().write(true);
 
 	REPORT(0)<< Green_Text("\nFinished successfully.\n")<<END_REPORT;
 

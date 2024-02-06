@@ -28,13 +28,15 @@ Licence:
  * (https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/iterateGeometry)
  * folder.
  */
- 
-#include "systemControl.hpp"
-#include "geometryMotion.hpp"
-#include "commandLine.hpp"
-#include "readControlDict.hpp"
 
-using pFlow::commandLine;
+#include "vocabs.hpp"
+#include "systemControl.hpp"
+#include "geometry.hpp"
+//#include "geometryMotion.hpp"
+#include "commandLine.hpp"
+//#include "readControlDict.hpp"
+
+using namespace pFlow;
 
 int main( int argc, char* argv[] )
 {
@@ -57,14 +59,15 @@ commandLine cmds(
 #include "initialize_Control.hpp"
 	
 	#include "setProperty.hpp"
-	#include "setSurfaceGeometry.hpp"
+	//#include "setSurfaceGeometry.hpp"
 
-	
-	do
+	WARNING<<"Code should be changed "<<END_WARNING;
+  auto geom = geometry(Control, proprties);
+	/*do
 	{
 		surfGeometry.iterate();
 
-	}while( Control++);
+	}while( Control++);*/
 
 // this should be palced in each main 
 #include "finalize.hpp"
