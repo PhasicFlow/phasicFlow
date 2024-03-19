@@ -102,6 +102,9 @@ private:
 		static constexpr
 		bool isDeviceAccessible_ = isDeviceAccessible<execution_space>();
 
+		static constexpr
+		bool isTriviallyCopyable_ = std::is_trivially_copyable_v<T>;
+
 	  	/// Evaluate capacity based on the input size 
 		static INLINE_FUNCTION_H uint32 evalCapacity(uint32 n)
 		{
@@ -397,7 +400,6 @@ public:
 		{
 			std::vector<T> vecFromFile;
 			if(! readStdVector(is, vecFromFile, iop)) return false;
-
 			this->assign(vecFromFile);
 
 			return true;

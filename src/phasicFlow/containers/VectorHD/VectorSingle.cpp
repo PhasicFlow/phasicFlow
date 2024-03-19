@@ -56,14 +56,34 @@ void pFlow::VectorSingle<T,MemorySpace>::changeCapacity
     bool withInit
 )
 {
-    if(withInit)
+    if constexpr( isTriviallyCopyable_ )
     {
-        resizeInit(view_, actualCap);
+        if(withInit)
+        {
+            resizeInit(view_, actualCap);
+        }
+        else
+        {
+            resizeNoInit(view_, actualCap);
+        }
+    }
+    else if constexpr( isHostAccessible_ )
+    {
+        viewType newView(view_.label(), actualCap);
+
+        for(auto i=0u; i<min(size_,actualCap); i++)
+        {
+            newView(i) = view_(i);
+        }
+
+        view_ = newView;
+
     }
     else
     {
-        resizeNoInit(view_, actualCap);
+        static_assert("changeCapacity is not a valid operation for non-trivially-copyable data type on device memory");
     }
+    
 }
 
 template<typename T, typename MemorySpace>
@@ -74,7 +94,16 @@ pFlow::uint32 pFlow::VectorSingle<T,MemorySpace>::reallocateCapacitySize
     uint32 s
 )
 {
-    reallocNoInit(view_, cap);
+    if constexpr (isTriviallyCopyable_)
+    {
+        reallocNoInit(view_, cap);
+    }
+    else
+    {
+        viewType newView(view_.label(), cap);
+        view_ = newView;
+    }
+    
     return setSize(s);
 }
 
@@ -183,7 +212,21 @@ pFlow::VectorSingle<T,MemorySpace>::VectorSingle
 :
     VectorSingle(name, src.capacity(), src.size(), RESERVE())
 {
-    copy(deviceView(), src.deviceView());	
+    if constexpr(isTriviallyCopyable_)
+    {
+        copy(deviceView(), src.deviceView());
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<src.size(); i++)
+        {
+            view_[i] = src.view_[i];
+        }
+    }
+    else
+    {
+        static_assert("This constructor is not valid for non-trivially copyable data type on device memory");
+    }
 }
 
 template<typename T, typename MemorySpace>
@@ -259,7 +302,18 @@ INLINE_FUNCTION_H
 auto pFlow::VectorSingle<T,MemorySpace>::hostViewAll()const
 {
     auto hView = Kokkos::create_mirror_view(view_);
-    copy(hView, view_);
+    if constexpr(isTriviallyCopyable_)
+    {
+        copy(hView, view_);
+    }
+    else if constexpr( isHostAccessible_ )
+    {
+        // nothing to be done, since it is already a host memory
+    }
+    else
+    {
+        static_assert("hostViewAll is not valid for non-trivially copyable data type on device memory");
+    }
     return hView;
 }
 
@@ -268,7 +322,19 @@ INLINE_FUNCTION_H
 auto pFlow::VectorSingle<T,MemorySpace>::hostView()const
 {
     auto hView = Kokkos::create_mirror_view(deviceView());
-    copy(hView, deviceView());
+    if constexpr(isTriviallyCopyable_)
+    {
+        copy(hView, deviceView());
+    }
+    else if constexpr( isHostAccessible_ )
+    {
+        // nothing to be done, since it is already a host memory
+    }
+    else
+    {
+        static_assert("hostView is not valid for non-trivially copyable data type on device memory");
+    }
+    
     return hView;
 }
 
@@ -351,7 +417,7 @@ INLINE_FUNCTION_H
 void pFlow::VectorSingle<T,MemorySpace>::fill(const T& val)
 {
     if(empty())return;
-    pFlow::fill(view_, rangeU32(0 ,size_) ,val);
+    pFlow::fill(view_, rangeU32(0 ,size_) ,val);    
 }
 
 template<typename T, typename MemorySpace>
@@ -407,9 +473,28 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
         setSize(srcSize);
     }
     
-    // - unmanaged view in the host
-    hostViewType1D<const T> temp(src.data(), srcSize );
-    copy(deviceView(), temp);
+    
+    
+    if constexpr( isTriviallyCopyable_ )
+    {
+        // - unmanaged view in the host
+        hostViewType1D<const T> temp(src.data(), srcSize );
+        copy(deviceView(), temp);
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        
+        for(auto i=0u; i<srcSize; i++)
+        {
+            view_[i] = src[i];
+        }
+        
+    }
+    else
+    {
+        static_assert("Not a valid operation for this data type on memory device");
+    }
+    
 }
 
 template<typename T, typename MemorySpace>
@@ -421,6 +506,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
 {
     assign(src, this->capacity());
 }
+
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
 void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
@@ -436,7 +522,22 @@ void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
     {
         setSize(srcSize);
     }
-	copy(deviceView(), src.hostView());
+	
+    if constexpr(isTriviallyCopyable_)
+    {
+        copy(deviceView(), src.hostView());
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<src.size(); i++)
+        {
+            view_[i] = src.view_[i];
+        }
+    }
+    else
+    {
+        static_assert("Not a valid operation for this data type on device memory");
+    }
 }
 
 template <typename T, typename MemorySpace>
@@ -456,8 +557,22 @@ void pFlow::VectorSingle<T, MemorySpace>::append
     hostViewType1D<const T> temp(appVec.data(), srcSize );
     auto dest = Kokkos::subview(view_, Kokkos::make_pair<uint32>(oldSize,newSize));
 
-    copy(dest, temp);
-
+    if constexpr( isTriviallyCopyable_)
+    {
+        copy(dest, temp);
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<appVec.size(); i++)
+        {
+            dest[i] = appVec[i];
+        }
+    }
+    else
+    {
+        static_assert("not a valid operation for this data type on device memory");
+    }
+    
 }
 
 template <typename T, typename MemorySpace>
