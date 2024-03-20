@@ -35,6 +35,71 @@ class iIstream;
 class iOstream;
 class repository;
 
+
+class triangleAccessor
+{
+private:
+	uint32 		numPoints_;
+	
+	uint32 		numTriangles_;
+
+	deviceViewType1D<realx3> dPoints_;
+	
+	deviceViewType1D<uint32x3>  dVectices_;
+public:
+
+	INLINE_FUNCTION_H
+	triangleAccessor(
+		uint32 	numPoints,
+		deviceViewType1D<realx3> points,
+		uint32 	numTrianlges,
+		deviceViewType1D<uint32x3> vertices )
+	:
+		numPoints_(numPoints),
+		numTriangles_(numTrianlges),
+		dPoints_(points),
+		dVectices_(vertices)
+	{}
+
+	INLINE_FUNCTION_HD
+	triangleAccessor(const triangleAccessor&)= default;
+
+	INLINE_FUNCTION_HD
+	triangleAccessor& operator=(const triangleAccessor&)= default;
+
+	INLINE_FUNCTION_HD
+	triangleAccessor(triangleAccessor&&)= default;
+
+	INLINE_FUNCTION_HD
+	triangleAccessor& operator=(triangleAccessor&&)= default;
+
+	INLINE_FUNCTION_HD
+	~triangleAccessor()=default;
+
+	INLINE_FUNCTION_HD
+	realx3x3 triangle(uint32 i)const	{
+		auto v = dVectices_[i];
+		return realx3x3(
+				dPoints_[v.x_],
+				dPoints_[v.y_],
+				dPoints_[v.z_]);
+	}
+
+	INLINE_FUNCTION_HD
+	realx3x3 operator()(uint32 i)const { return triangle(i);	}
+
+	INLINE_FUNCTION_HD
+	realx3x3 operator[](uint32 i)const { return triangle(i);	}
+
+	INLINE_FUNCTION_HD
+	uint32 numPoints()const { return numPoints_; }
+
+	INLINE_FUNCTION_HD
+	uint32 numTrianlges()const { return numTriangles_;}
+};
+
+
+
 class triSurface
 :
 	public IOobject
@@ -42,19 +107,29 @@ class triSurface
 private:
 
 	/// points of triangles
-	realx3Field_D 		points_;
+	realx3Field_D 		points_{"points", "points"};
 
 	/// vectices indices of triangles 
-	uint32x3Field_D 	vertices_;
+	uint32x3Field_D 	vertices_{"vertices", "vertices"};
 
 	/// area of each triangle 
-	realField_D  		area_;
+	realField_D  		area_{"area", "area"};
 
 	/// normal vector of triangles 
-	realx3Field_D 		normals_;
+	realx3Field_D 		normals_{"normals", "normals"};
 
 protected:
+	
+	bool calculateNormals();
 
+	bool calculateArea();
+
+	bool append(const realx3x3Field_H& triangles);
+
+	bool append(const realx3x3Vector& triangles);
+
+
+	// to be used by multiTriSurface
 	triSurface(const objectFile& obj, repository* owner);
 
 public:
@@ -77,9 +152,6 @@ public:
 
 		~triSurface() override = default;
 
-		bool appendTriSurface(const realx3x3Field_H& triangles);
-
-		bool appendTriSurface(const realx3x3Vector& triangles);
 
 	//// - Methods
 		uint32 numPoints() const
@@ -143,6 +215,16 @@ public:
 			vertices_.clear();
 			area_.clear();
 			normals_.clear();
+		}
+
+		/// Obtain an object for accessing triangles 
+		auto getTriangleAccessor()const
+		{
+			return triangleAccessor( 
+				points_.size(),
+				points_.deviceViewAll(),
+				vertices_.size(),
+				vertices_.deviceViewAll());
 		}
 		
 	//// - IO operations 

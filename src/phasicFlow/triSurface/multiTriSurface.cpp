@@ -21,139 +21,6 @@ Licence:
 
 #include "multiTriSurface.hpp"
 
-/*void pFlow::multiTriSurface::calculateVars()
-{
-	numSurfaces_ = surfaceNames_.size();
-
-	// make sure the host and device are sync
-	lastPointIndex_.syncViews();
-
-	surfaceNumPoints_.clear();
-	
-	int32 last = 0;
-	for(auto& pi:lastPointIndex_) 
-	{
-		surfaceNumPoints_.push_back(pi+1-last);
-		last = pi+1;
-	}
-	
-	// update views
-	surfaceNumPoints_.syncViews();
-
-	surfaceNumVertices_.clear();
-	last = 0;
-
-	lastVertexIndex_.syncViews();
-	
-
-	for(auto& vi:lastVertexIndex_)
-	{
-		surfaceNumVertices_.push_back(vi+1-last);
-		last = vi+1;
-	}
-	surfaceNumVertices_.syncViews();
-	
-	pointsStartPos_.reallocate(surfaceNumPoints_.capacity());
-	pointsStartPos_.clear();
-	
-	pointsStartPos_.push_back(0);
-
-	ForAll( i, surfaceNumPoints_)
-	{
-		if(i==0)continue;
-
-		pointsStartPos_.push_back( pointsStartPos_[i-1] + surfaceNumPoints_[i-1] );
-	}
-
-	pointsStartPos_.syncViews();
-	
-
-	verticesStartPos_.reallocate(surfaceNumVertices_.capacity());
-	verticesStartPos_.clear();
-
-	verticesStartPos_.push_back(0);
-	ForAll(i, surfaceNumVertices_)
-	{
-		if(i==0)continue;
-		verticesStartPos_.push_back(verticesStartPos_[i-1] + surfaceNumVertices_[i-1]);
-	}
-	verticesStartPos_.syncViews();
-	
-
-}*/
-
-/*pFlow::multiTriSurface::multiTriSurface()
-:
-	triSurface(),
-	lastPointIndex_("lastPointIndex", "lastPointIndex"),
-	lastVertexIndex_("lastVertexIndex", "lastVertexIndex"),
-	surfaceNames_("surfaceNames", "surfaceNames")
-{
-	calculateVars();
-}*/
-
-/*bool pFlow::multiTriSurface::addTriSurface
-(
-	const word& name,
-	const triSurface& tSurf
-)
-{
-
-	const auto& newPoints = tSurf.points();
-	const auto& newVertices = tSurf.vertices();
-	const auto& newAreas = tSurf.area();
-	
-	// 
-	
-	
-	points_.append(newPoints);
-	
-	
-	// add new vertices to the existing one
-	auto vOldSize = vertices_.size();
-	auto vNewSize =  vOldSize + newVertices.size();
-	vertices_.resize(vNewSize);
-	area_.resize(vNewSize);
-	
-	auto verVec = vertices_.deviceViewAll();
-	auto areaVec = area_.deviceViewAll();
-
-	auto newVerVec = newVertices.deviceViewAll();
-	auto newArea = newAreas.deviceViewAll();
-
-	auto maxIdx = maxIndex();
-
-	Kokkos::parallel_for(
-		"multiTriSurface::addTriSurface",
-		newVertices.size(),
-		LAMBDA_HD(int32 i){
-			verVec[vOldSize+i] = newVerVec[i]+(maxIdx+1);
-			areaVec[vOldSize+i] = newArea[i];
-		}
-		);
-	Kokkos::fence();
-
-	if( !check() )
-	{
-		fatalErrorInFunction<<
-		"the indices and number of points do not match. \n";
-		return false;
-	}
-
-	lastPointIndex_.push_back(points_.size()-1);
-	lastPointIndex_.syncViews();
-	
-	lastVertexIndex_.push_back(vertices_.size()-1);
-	lastVertexIndex_.syncViews();
-
-	surfaceNames_.push_back(name);
-
-	calculateVars();
-
-	return true;
-
-}*/
-
 pFlow::multiTriSurface::multiTriSurface
 (
 	const objectFile &obj, 
@@ -185,7 +52,7 @@ pFlow::multiTriSurface::multiTriSurface
 	
 }
 
-bool pFlow::multiTriSurface::appendTriSurface
+bool pFlow::multiTriSurface::appendSurface
 (
 	const word &name, 
 	const realx3x3Vector &triangles
@@ -194,7 +61,7 @@ bool pFlow::multiTriSurface::appendTriSurface
 	uint32 start = size();
 	uint32 pointStart = numPoints();
 
-	if(!triSurface::appendTriSurface(triangles))
+	if(!triSurface::append(triangles))
 	{
 		fatalErrorInFunction;
 		return false;
@@ -236,45 +103,3 @@ bool pFlow::multiTriSurface::write
 	
 	return triSurface::write(os,iop);
 }
-
-/*pFlow::real3*
-	pFlow::multiTriSurface::beginSurfacePoint
-(
-	unit i
-)
-{
-	if(i== 0) return points_.data();
-	if(i>=numSurfaces())return points_.data()+numPoints();
-	return points_.data()+lastPointIndex_[i-1]+1;
-}
-
-const pFlow::real3*
-	pFlow::multiTriSurface::beginSurfacePoint
-(
-	unit i
-)const
-{
-	if(i== 0) return points_.data();
-	if(i>=numSurfaces())return points_.data()+numPoints();
-	return points_.data()+lastPointIndex_[i-1]+1;
-}
-
-pFlow::real3* 
-	pFlow::multiTriSurface::endSurfacePoint
-(
-	unit i
-)
-{
-	if(i>=numSurfaces())return points_.data()+numPoints();
-	return points_.data()+lastPointIndex_[i]+1;
-}
-
-const pFlow::real3*
-	pFlow::multiTriSurface::endSurfacePoint
-(
-	unit i
-)const
-{
-	if(i>=numSurfaces())return points_.data()+numPoints();
-	return points_.data()+lastPointIndex_[i]+1;
-}*/

@@ -20,12 +20,12 @@ Licence:
 
 
 #include "triSurface.hpp"
-#include "Vectors.hpp"
-#include "triangleFunctions.hpp"
 #include "error.hpp"
 #include "iOstream.hpp"
+#include "Vectors.hpp"
+#include "triSurfaceKernels.hpp"
 
-//#include "triSurfaceKernels.hpp"
+
 
 namespace pFlow
 {
@@ -104,75 +104,23 @@ bool convertToTriSurfaceComponents
 
 }
 
-
-pFlow::triSurface::triSurface
-(
-	const objectFile &obj, 
-	repository *owner
-)
-:
-	IOobject
-	(
-		obj,
-		IOPattern::AllProcessorsSimilar,
-		owner
-	),
-	points_("points", "points"),
-	vertices_("vertices", "vertices"),
-	area_("area", "area"),
-	normals_("normals","normals")
+bool pFlow::triSurface::calculateNormals()
 {
+    return pFlow::triSurfaceKernels::calculateNormals(
+		points_, 
+		vertices_, 
+		normals_);
 }
 
-pFlow::triSurface::triSurface
-(
-	const objectFile &objf,
-	repository* owner, 
-	const triSurface &surf
-)
-:
-	IOobject
-	(
-		objectFile
-		(
-			objf.name(),
-			objf.localPath(),
-			objectFile::READ_NEVER,
-			objf.wFlag()
-		),
-		IOPattern::AllProcessorsSimilar,
-		owner
-	),
-	points_(surf.points_),
-	vertices_(surf.vertices_),
-	area_(surf.area_),
-	normals_(surf.normals_)
-{}
-
-pFlow::triSurface::triSurface(
-    const realx3x3Field_H &triangles,
-    repository *owner)
-    : IOobject(
-          objectFile(
-              triangles.name(),
-              "",
-              IOobject::READ_NEVER,
-              IOobject::WRITE_ALWAYS),
-          IOPattern::AllProcessorsSimilar,
-          owner),
-      points_("points", "points"),
-      vertices_("vertices", "vertices"),
-      area_("area", "area"),
-      normals_("normals", "normals")
+bool pFlow::triSurface::calculateArea()
 {
-	if( !appendTriSurface(triangles) )
-	{
-		fatalExit;
-	}
-
+    return pFlow::triSurfaceKernels::calculateArea(
+		points_,
+		vertices_,
+		area_);
 }
 
-bool pFlow::triSurface::appendTriSurface
+bool pFlow::triSurface::append
 (
 	const realx3x3Field_H &triangles
 )
@@ -207,7 +155,7 @@ bool pFlow::triSurface::appendTriSurface
     return true;
 }
 
-bool pFlow::triSurface::appendTriSurface(const realx3x3Vector &triangles)
+bool pFlow::triSurface::append(const realx3x3Vector &triangles)
 {
     uint32 basePointIndex = numPoints();
 
@@ -239,6 +187,73 @@ bool pFlow::triSurface::appendTriSurface(const realx3x3Vector &triangles)
     return true;
 }
 
+pFlow::triSurface::triSurface
+(
+    const objectFile &obj,
+    repository *owner
+)
+: 
+	IOobject
+	(
+        obj,
+        IOPattern::AllProcessorsSimilar,
+        owner
+	) 
+{
+	// this constructor is used by multiTrisurface and read operation is 
+	// done in that class 
+}
+
+pFlow::triSurface::triSurface
+(
+	const objectFile &objf,
+	repository* owner, 
+	const triSurface &surf
+)
+:
+	IOobject
+	(
+		objectFile
+		(
+			objf.name(),
+			objf.localPath(),
+			objectFile::READ_NEVER,
+			objf.wFlag()
+		),
+		IOPattern::AllProcessorsSimilar,
+		owner
+	),
+	points_(surf.points_),
+	vertices_(surf.vertices_),
+	area_(surf.area_),
+	normals_(surf.normals_)
+{}
+
+pFlow::triSurface::triSurface
+(
+    const realx3x3Field_H &triangles,
+    repository *owner
+)
+: 
+	IOobject
+	(
+        objectFile(
+            triangles.name(),
+            "",
+            IOobject::READ_NEVER,
+            IOobject::WRITE_ALWAYS),
+        IOPattern::AllProcessorsSimilar,
+        owner
+	)
+{
+	if( !append(triangles) )
+	{
+		fatalExit;
+	}
+}
+
+
+
 bool pFlow::triSurface::read(iIstream &is, const IOPattern &iop)
 {
 	points_.clear();
@@ -257,8 +272,10 @@ bool pFlow::triSurface::read(iIstream &is, const IOPattern &iop)
 		return false;
 	}
 	
-	WARNING<<"You should calculate area and normal after reading "<<END_WARNING;
-
+	normals_.reallocate(vertices_.capacity(), vertices_.size());
+	area_.reallocate(vertices_.capacity(), vertices_.size());
+	calculateArea();
+	calculateNormals();
     return true;
 }
 

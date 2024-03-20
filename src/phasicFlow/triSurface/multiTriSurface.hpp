@@ -29,7 +29,6 @@ Licence:
 namespace pFlow
 {
 
-
 class multiTriSurface
 :
 	public triSurface,
@@ -39,10 +38,6 @@ private:
 
 	subSurfaceList subSurfaces_;
 
-	// - the index of last point of each triSurface 
-	
-	//void        calculateVars();
-
 public:
 
 	// - type info
@@ -50,33 +45,42 @@ public:
 
 	//// - Constructors
 
-		//
+		/// @brief  Construct from objectFile and owner repository.
+		/// This is mainly used for reading from file.
+		/// @param obj object file 
+		/// @param owner owner repository 
 		multiTriSurface(const objectFile& obj, repository* owner);
 
+		/// @brief Construct from another multiTriSurface 
 		multiTriSurface(
 			const objectFile& objf, 
 			repository* owner, 
 			const multiTriSurface& surf);
 
+		/// @brief Copy construct (default)
 		multiTriSurface(const multiTriSurface&) = default;
 
+		/// @brief Copy assignment (default)
 		multiTriSurface& operator = (const multiTriSurface&) = default;
 
+		/// @brief  No move construct
 		multiTriSurface(multiTriSurface&&) = delete;
 
+		/// @brief No move assignment 
 		multiTriSurface& operator = (multiTriSurface&&) = delete;
 
+		/// @brief  default destructor 
 		~multiTriSurface() override = default;
 
 	//// - Methods
 
-		//bool addTriSurface(const word& name, const triSurface& tSurf);
-
-		bool appendTriSurface(const word& name, const realx3x3Vector& vertices);
+		bool appendSurface(
+			const word& name, 
+			const realx3x3Vector& vertices);
 
 		uint32 numSurfaces()const
 		{
-			return subSurfaces_.size();
+			return static_cast<uint32>(subSurfaces_.size());
 		}
 
 		const subSurfaceList& subSurfaces()const
@@ -84,7 +88,7 @@ public:
 			return subSurfaces_;
 		}
 		
-		rangeU32 subSurfaceRange(uint32 nSub)
+		rangeU32 subSurfaceRange(uint32 nSub)const
 		{
 			if( !(nSub < numSurfaces() ) )
 			{
@@ -106,54 +110,49 @@ public:
 				subSurfaces_[nSub].pointEnd()};
 		}
 
-		/*void clear()
+		/// @brief Clear the content of object
+		void clear()
 		{
 			triSurface::clear();
-
-			lastPointIndex_.clear();
-			surfaceNames_.clear();
-		}*/
+			subSurfaces_.clear();
+		}
 
 		
-		/*const auto& pointsStartPos()const
+		uint32 subSurfaceSize(uint32 nSub)const
 		{
-			return pointsStartPos_;
+			if(nSub<numSurfaces())
+			{
+				return subSurfaceRange(nSub).numElements();
+			}
+			else
+			{
+				return 0;
+			}
 		}
 
-		const auto& verticesStartPos()const
+		uint32 subSurfaceNumPoints(uint32 nSub)const
 		{
-			return verticesStartPos_;
+			if(nSub<numSurfaces())
+			{
+				return subSurfacePointRange(nSub).numElements();
+			}
+			else
+			{
+				return 0;
+			}
 		}
-
-		const auto& surfaceNumPoints()const
+		
+		word subSurfaceName(uint32 nSub)const
 		{
-			return surfaceNumPoints_;
+			if(nSub<numSurfaces())
+			{
+				return subSurfaces_[nSub].name();
+			}
+			else
+			{
+				return "";
+			}
 		}
-
-		auto& surfaceNumPoints()
-		{
-			return surfaceNumPoints_;
-		}
-
-		int32 surfNumPoints(int32 i)const
-		{
-			return surfaceNumPoints_[i];
-		}
-
-		int32 surfNumTriangles(int32 i)const
-		{
-			return surfaceNumVertices_[i];
-		}
-
-		int32 surfSize(int32 i)const
-		{
-			return surfNumTriangles(i);
-		}
-
-		word surfaceName(int32 i)const
-		{
-			return surfaceNames_[i];
-		}*/
 
 	//// - IO operations
 
@@ -167,16 +166,6 @@ public:
 
 };
 
-/*inline iIstream& operator >> (iIstream & is, multiTriSurface & tri )
-{
-	if(!tri.readMultiTriSurface(is))
-	{
-	 	ioErrorInFile(is.name(), is.lineNumber())<<
-	 	"  error in reading multiTriSurface from file.\n";
-	 	fatalExit;
-	}
-	return is;
-}*/
 
 inline iOstream& operator << (iOstream& os, const multiTriSurface& tri)
 {
@@ -189,7 +178,7 @@ inline iOstream& operator << (iOstream& os, const multiTriSurface& tri)
 	return os;
 }
 
-}
+} // pFlow
 
 
 #endif
