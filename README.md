@@ -14,7 +14,7 @@ In summary PhasicFlow can have 6 execution modes:
 5. Parallel on distributed memory workstations with multi-core nodes (using MPI+OpenMP)
 6. Parallel on workstations with multiple GPUs (using MPI+Cuda).
 ## How to build?
-You can build PhasicFlow for CPU and GPU executions. [Here is a complete step-by-step procedure](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
+You can build PhasicFlow for CPU and GPU executions. The latest release of PhasicFlow is v-0.1. [Here is a complete step-by-step procedure for building phasicFlow-v-0.1.](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
 
 ## Online code documentation
 You can find a full documentation of the code, its features, and other related materials on [online documentation of the code](https://phasicflow.github.io/phasicFlow/)
