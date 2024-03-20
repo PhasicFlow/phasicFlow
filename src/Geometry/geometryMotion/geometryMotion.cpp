@@ -45,17 +45,18 @@ bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 			fatalErrorInFunction<<
 			mName<< " does not exist in the list of motion names -> "<<
 			motionModel_.componentNames();
+            return false;
 		}
 		surfMotionIndex.push_back(mInd);
 		
-		auto surfRange = this->surface().subSurfaceRange(surfI);
+		auto surfRange = subSurfaceRange(surfI);
 		
 		for(uint32 i=0; i<surfRange.numElements(); i++)
 		{
 			triMotionIndex.push_back(mInd);
 		}
 
-		auto pointRange = this->surface().subSurfacePointRange(surfI);
+		auto pointRange = subSurfacePointRange(surfI);
 		for(uint32 n=0; n<pointRange.numElements(); n++)
 		{
 			pointMotionIndex.push_back(mInd);
@@ -69,6 +70,39 @@ bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 	return true;
 }
 
+
+template<typename MotionModel>
+ bool pFlow::geometryMotion<MotionModel>::moveGeometry()
+ {
+
+    uint32 iter = this->currentIter();
+    real t = this->currentTime();
+    real dt = this->dt();
+        
+    auto mModel = motionModel_.getModelInterface(iter, t, dt);
+    
+    auto& pointMIndexD= pointMotionIndex_.deviceViewAll();
+    auto& pointsD = points().deviceViewAll();
+    
+
+    Kokkos::parallel_for(
+         "geometryMotion<MotionModel>::movePoints",
+         deviceRPolicyStatic(0, numPoints()),
+         LAMBDA_HD(uint32 i){
+             auto newPos = mModel.transferPoint(pointMIndexD[i], pointsD[i], dt);
+             pointsD[i] = newPos;
+         });
+
+    Kokkos::fence();
+
+    // move the motion components
+    motionModel_.move(iter, t,dt);
+
+    // end of calculations
+     
+
+     return true;
+ }
 
 template<typename MotionModel>
 pFlow::geometryMotion<MotionModel>::geometryMotion
@@ -137,129 +171,16 @@ pFlow::geometryMotion<MotionModelType>::geometryMotion
 	}
 } 
 
-/*template<typename MotionModel>
- pFlow::geometryMotion<MotionModel>::geometryMotion
- (
-     systemControl& control,
-     const property& prop,
-     const multiTriSurface& triSurface,
-     const wordVector& motionCompName,
-     const wordVector& propName,
-     const MotionModel& motionModel
- )
- :
-     geometry(
-         control,
-         prop,
-         triSurface,
-         motionCompName,
-         propName
-         ),
-     motionModel_(
-         this->owner().template emplaceObject<MotionModel>(
-             objectFile(
-                 motionModelFile__,
-                 "",
-                 objectFile::READ_NEVER,
-                 objectFile::WRITE_ALWAYS
-                 ),
-             motionModel
-             )
-         ),
-     moveGeomTimer_("move geometry", &this->timers())
- {
-     findMotionIndex();
- }
-
- template<typename MotionModel>
- pFlow::geometryMotion<MotionModel>::geometryMotion
- (
-     systemControl& control,
-     const property& prop,
-     const dictionary& dict,
-     const multiTriSurface& triSurface,
-     const wordVector& motionCompName,
-     const wordVector& propName
- )
- :
-     geometry(
-         control,
-         prop,
-         dict,
-         triSurface,
-         motionCompName,
-         propName
-         ),
-     motionModel_(
-         this->owner().template emplaceObject<MotionModel>(
-             objectFile(
-                 motionModelFile__,
-                 "",
-                 objectFile::READ_NEVER,
-                 objectFile::WRITE_ALWAYS
-                 ),
-             dict
-             )
-         ),
-     moveGeomTimer_("move geometry", &this->timers())
- {
-     findMotionIndex();
- }
-
- template<typename MotionModel>
- bool pFlow::geometryMotion<MotionModel>::beforeIteration()
- {
-     geometry::beforeIteration();
-     return true;
- }
 
  template<typename MotionModel>
  bool pFlow::geometryMotion<MotionModel>::iterate()
  {
      if( motionModel_.isMoving() )
      {
-         moveGeomTimer_.start();
-         moveGeometry();
-         moveGeomTimer_.end();
+        moveGeomTimer_.start();
+          moveGeometry();
+          this->calculateNormals();
+        moveGeomTimer_.end();
      }
      return true;
  }
-
- template<typename MotionModel>
- bool pFlow::geometryMotion<MotionModel>::afterIteration()
- {
-     geometry::afterIteration();
-     return true;
- }
-
- template<typename MotionModel>
- bool pFlow::geometryMotion<MotionModel>::moveGeometry()
- {
-
-     real dt = this->dt();
-     real t = this->currentTime();
-
-     auto pointMIndex= pointMotionIndex_.deviceVector();
-     auto mModel = motionModel_.getModel(t);
-     realx3* points = triSurface_.pointsData_D();
-     auto numPoints = triSurface_.numPoints();
-
-
-     Kokkos::parallel_for(
-         "geometryMotion<MotionModel>::movePoints",
-         numPoints,
-         LAMBDA_HD(int32 i){
-             auto newPos = mModel.transferPoint(pointMIndex[i], points[i], dt);
-             points[i] = newPos;
-         });
-
-     Kokkos::fence();
-
-     // move the motion components
-     motionModel_.move(t,dt);
-
-     // end of calculations
-     moveGeomTimer_.end();
-
-     return true;
- }*/

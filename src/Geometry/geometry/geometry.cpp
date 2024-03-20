@@ -34,8 +34,8 @@ bool pFlow::geometry::createPropertyId()
 
 	uint32Vector propId(
 		"propId", 
-		surface().capacity(), 
-		surface().size(),
+		capacity(), 
+		size(),
 		RESERVE());
 
 	ForAll(i, materialName_)
@@ -61,6 +61,11 @@ bool pFlow::geometry::createPropertyId()
 
 }
 
+void pFlow::geometry::zeroForce()
+{
+	contactForceWall_.fill(zero3);
+}
+
 pFlow::geometry::geometry
 (
 	systemControl& control,
@@ -84,16 +89,6 @@ pFlow::geometry::geometry
 		control
 	),
 	wallProperty_(prop),
-	motionComponentName_
-	(
-		"motionComponentName",
-		"motionComponentName"
-	),
-	materialName_
-	(
-		"materialName",
-		"materialName"
-	),
 	propertyId_
 	(
 		objectFile
@@ -197,16 +192,6 @@ pFlow::geometry::geometry
 	(
 		prop
 	),
-	motionComponentName_
-	(
-		"motionComponentName",
-		"motionComponentName"
-	),
-	materialName_
-	(
-		"materialName",
-		"materialName"
-	),
 	propertyId_
 	(
 		objectFile
@@ -274,9 +259,47 @@ pFlow::geometry::geometry
 	}
 }
 
+bool pFlow::geometry::beforeIteration()
+{
+	zeroForce();
+    return true;
+}
+
+bool pFlow::geometry::iterate()
+{
+    return true;
+}
+
+bool pFlow::geometry::afterIteration()
+{
+	auto numTris = size();
+	auto& normalsD = normals().deviceViewAll();
+	auto& areaD = area().deviceViewAll();
+	auto& cForceD = contactForceWall_.deviceViewAll();
+	auto& sStressD = shearStressWall_.deviceViewAll();
+	auto& nStressD = normalStressWall_.deviceViewAll();
+
+	Kokkos::parallel_for(
+		"pFlow::geometry::afterIteration",
+		deviceRPolicyStatic(0, numTris),
+		LAMBDA_HD(uint32 i)
+		{	
+			realx3 n = normalsD[i];
+			real A = max(areaD[i],smallValue);
+			realx3 nF = dot(cForceD[i],n)*n;
+			realx3 sF = cForceD[i] - nF;
+			nStressD[i] = nF/A;
+			sStressD[i] = sF/A;
+		});
+	Kokkos::fence();
+    
+	return true;
+}
+
 bool pFlow::geometry::read(iIstream &is, const IOPattern &iop)
 {
 	motionComponentName_.read(is, iop);
+	
 	materialName_.read(is, iop);
 	
 	if( readWholeObject_ )
@@ -304,6 +327,93 @@ bool pFlow::geometry::write(iOstream &os, const IOPattern &iop) const
 	
 	return multiTriSurface::write(os,iop);
 }
+
+
+pFlow::uniquePtr<pFlow::geometry> 
+	pFlow::geometry::create
+(
+	systemControl& control,
+	const property& prop
+)
+{
+	
+	//
+	fileDictionary dict( motionModelFile__, control.time().geometry().path());
+
+	word model = dict.getVal<word>("motionModel");
+	
+	auto geomModel = angleBracketsNames("geometry", model);
+
+	REPORT(1)<< "Selecting geometry model . . ."<<END_REPORT;
+	if( systemControlvCtorSelector_.search(geomModel) )
+	{
+		auto objPtr = systemControlvCtorSelector_[geomModel] (control, prop);
+		REPORT(2)<<"Model "<< Green_Text(geomModel)<<" is created.\n"<<END_REPORT;
+		return objPtr;
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< Yellow_Text(geomModel) << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			systemControlvCtorSelector_
+		);
+		fatalExit;
+	}
+
+	return nullptr;
+}
+
+pFlow::uniquePtr<pFlow::geometry> 
+	pFlow::geometry::create
+	(
+		systemControl& control, 
+		const property& prop,
+		multiTriSurface& surf,
+		const wordVector& motionCompName,
+		const wordVector& materialName,
+		const dictionary& motionDic
+	)
+{
+
+	word model = motionDic.getVal<word>("motionModel");
+
+	auto geomModel = angleBracketsNames("geometry", model);
+
+	REPORT(1)<< "Selecting geometry model . . ."<<END_REPORT;
+
+	if( dictionaryvCtorSelector_.search(geomModel) )
+	{
+		auto objPtr = dictionaryvCtorSelector_[geomModel] 
+			(
+				control,
+				prop, 
+				surf,
+				motionCompName,
+				materialName,
+				motionDic
+			);
+		REPORT(2)<<"Model "<< Green_Text(geomModel)<<" is created.\n"<<END_REPORT;
+		return objPtr;
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< Yellow_Text(geomModel) << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			dictionaryvCtorSelector_
+		);
+		fatalExit;
+	}
+	return nullptr;
+}
+
+
+
 
 /*pFlow::geometry::geometry
 (
@@ -400,52 +510,7 @@ pFlow::geometry::geometry
 {}
 
 
-pFlow::uniquePtr<pFlow::geometry> 
-	pFlow::geometry::create
-(
-	systemControl& control,
-	const property& prop
-)
-{
-	//motionModelFile__
-	auto motionDictPtr = IOobject::make<dictionary>
-	(
-		objectFile
-		(
-			motionModelFile__,
-			control.geometry().path(),
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		motionModelFile__,
-		true
-	);
 
-	word model = motionDictPtr().getObject<dictionary>().getVal<word>("motionModel");
-	
-	auto geomModel = angleBracketsNames("geometry", model);
-
-	REPORT(1)<< "Selecting geometry model . . ."<<endREPORT;
-	if( systemControlvCtorSelector_.search(geomModel) )
-	{
-		auto objPtr = systemControlvCtorSelector_[geomModel] (control, prop);
-		REPORT(2)<<"Model "<< greenText(geomModel)<<" is created.\n"<<endREPORT;
-		return objPtr;
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< yellowText(geomModel) << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			systemControlvCtorSelector_
-		);
-		fatalExit;
-	}
-
-	return nullptr;
-}
 
 bool pFlow::geometry::beforeIteration()
 { 
@@ -473,49 +538,3 @@ bool pFlow::geometry::afterIteration()
 	return true;
 	
 }*/
-
-pFlow::uniquePtr<pFlow::geometry> 
-	pFlow::geometry::create
-	(
-		systemControl& control, 
-		const property& prop,
-		multiTriSurface& surf,
-		const wordVector& motionCompName,
-		const wordVector& materialName,
-		const dictionary& motionDic
-	)
-{
-
-	word model = motionDic.getVal<word>("motionModel");
-
-	auto geomModel = angleBracketsNames("geometry", model);
-
-	REPORT(1)<< "Selecting geometry model . . ."<<END_REPORT;
-
-	if( dictionaryvCtorSelector_.search(geomModel) )
-	{
-		auto objPtr = dictionaryvCtorSelector_[geomModel] 
-			(
-				control,
-				prop, 
-				surf,
-				motionCompName,
-				materialName,
-				motionDic
-			);
-		REPORT(2)<<"Model "<< Green_Text(geomModel)<<" is created.\n"<<END_REPORT;
-		return objPtr;
-	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< Yellow_Text(geomModel) << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			dictionaryvCtorSelector_
-		);
-		fatalExit;
-	}
-	return nullptr;
-}

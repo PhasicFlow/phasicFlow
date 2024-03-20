@@ -35,9 +35,10 @@ using vibratingMotionGeometry = geometryMotion<vibratingMotion>;
 
 using rotationAxisMotionGeometry = geometryMotion<rotatingAxisMotion>;
 
+using stationaryGeometry = geometryMotion<stationaryWall>;
+
 //typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
 
-typedef geometryMotion<stationaryWall> stationaryGeometry;
 
 
 
