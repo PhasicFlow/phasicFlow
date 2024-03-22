@@ -21,6 +21,7 @@ Licence:
 #define __message_hpp__
 
 #include <bitset>
+#include <array>
 
 #include "types.hpp"
 #include "iOstream.hpp"
@@ -35,22 +36,40 @@ public:
 	enum EVENT : size_t
 	{
 		DEFAULT 		= 0,
-		CAP_CHANGED 	= 1,
-		SIZE_CHANGED 	= 2,
-		ITEM_DELETE	 	= 3,
-		ITEM_INSERT  	= 4,
-		RANGE_CHANGED   = 5,
-		ITEM_REARRANGE 	= 6,
-		ITEM_TRANSFER   = 7,
-		RESET_COUNTERS  = 8	
+		CAP_CHANGED 	= 1,  // internal points capacity changed 
+		SIZE_CHANGED 	= 2,  // internal points size changed
+		ITEM_DELETE	 	= 3,  // internal points item deleted 
+		ITEM_INSERT  	= 4,  // internal points item inserted 
+		RANGE_CHANGED   = 5,  // internal points range changed 
+		ITEM_REARRANGE  = 6,  // internal points item rearrange
+		BNDR_REARRANGE 	= 7,  // boundary indices rearrange 
+		BNDR_TRANSFER   = 8,  // boundary indices transfered
+		BNDR_RESET		= 9,  // boundary indices reset entirely  
+		BNDR_DELETE 	= 10  // boundary indices deleted 
 	};
 
-protected:
+	
+private:
 
-	static constexpr size_t numberOfEvents_ = 9;
+	static constexpr size_t numberOfEvents_ = 11;
 
 	std::bitset<numberOfEvents_> events_{0x0000};
 	
+	static
+	inline const std::array<word,numberOfEvents_> eventNames_
+	{
+		"",
+		"capacity",
+		"size",
+		"deletedIndices",
+		"insertedIndices",
+		"range",
+		"rearrangedIndices",
+		"rearrangedIndices",
+		"transferredIndices",
+		"",
+		"deletedIndices"
+	};
 
 public:
 
@@ -140,6 +159,12 @@ public:
 	{
 		message msg;
 		return msg;
+	}
+
+	static
+	const word& eventName(size_t event)
+	{
+		return eventNames_[event];
 	}
 	
 };

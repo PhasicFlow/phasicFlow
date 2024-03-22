@@ -64,6 +64,8 @@ public:
 	void subscribe(
 		const subscriber* subscrbr, 
 		message msg);
+	
+	observer& addEvent(message::EVENT event);
 
 	inline 
 	bool subscribed()const 

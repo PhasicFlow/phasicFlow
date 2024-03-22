@@ -48,6 +48,21 @@ pFlow::observer::~observer()
 	invalidateSubscriber();
 }
 
+pFlow::observer &pFlow::observer::addEvent(message::EVENT event)
+{
+    if( !message_.equivalentTo(event) )
+	{
+		message_.add(event);
+		if(!subscriber_->subscribe(message(event),this))
+		{
+			fatalErrorInFunction<<
+			"error when subcribing event from observer "<<endl;
+			fatalExit;
+		}
+	}
+	return *this;
+}
+
 void pFlow::observer::addToSubscriber
 (
 	const subscriber* subscrbr, 
