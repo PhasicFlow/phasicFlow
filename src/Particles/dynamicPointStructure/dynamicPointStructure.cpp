@@ -93,6 +93,25 @@ pFlow::dynamicPointStructure::dynamicPointStructure
     
 }*/
 
+bool pFlow::dynamicPointStructure::beforeIteration()
+{
+	return pointStructure::beforeIteration();
+	/*real dt = this->dt();
+
+    auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
+	return predict(dt, acc);*/
+}
+
+bool pFlow::dynamicPointStructure::iterate()
+{
+	return pointStructure::iterate();
+	
+	/*real dt = this->dt();
+
+    auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
+    return correct(dt, acc);*/
+}
+
 bool pFlow::dynamicPointStructure::predict(
     real dt,
     realx3PointField_D &acceleration)

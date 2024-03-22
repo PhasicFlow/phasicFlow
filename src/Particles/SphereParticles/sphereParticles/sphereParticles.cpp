@@ -460,11 +460,11 @@ bool pFlow::sphereParticles::beforeIteration()
 {
 	particles::beforeIteration();
 	intPredictTimer_.start();
-		dynPointStruct().predict(dt(), accelertion());
-		rVelIntegration_().predict(dt(),rVelocity_, rAcceleration_);
+		auto dt = this->dt();
+		dynPointStruct().predict(dt, accelertion());
+		rVelIntegration_().predict(dt,rVelocity_, rAcceleration_);
 	intPredictTimer_.end();
 	
-	//WARNING<<"pFlow::sphereParticles::beforeIteration()"<<END_WARNING;
 	return true;
 }
 
@@ -475,13 +475,13 @@ bool pFlow::sphereParticles::iterate()
 	accelerationTimer_.start();
 		pFlow::sphereParticlesKernels::acceleration(
 			control().g(),
-			mass().deviceView(),
-			contactForce().deviceView(),
-			I().deviceView(),
-			contactTorque().deviceView(),
+			mass().deviceViewAll(),
+			contactForce().deviceViewAll(),
+			I().deviceViewAll(),
+			contactTorque().deviceViewAll(),
 			dynPointStruct().activePointsMaskDevice(),
-			accelertion().deviceView(),
-			rAcceleration().deviceView()
+			accelertion().deviceViewAll(),
+			rAcceleration().deviceViewAll()
 			);
 	accelerationTimer_.end();
 	
@@ -504,11 +504,6 @@ bool pFlow::sphereParticles::iterate()
 	return true;
 }
 
-bool pFlow::sphereParticles::afterIteration()
-{
-	particles::afterIteration();
-	return true;
-}
 
 pFlow::word pFlow::sphereParticles::shapeTypeName()const
 {

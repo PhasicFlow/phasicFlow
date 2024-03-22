@@ -4,7 +4,8 @@ dynamicPointStructure/dynamicPointStructure.cpp
 particles/baseShapeNames.cpp
 particles/shape.cpp
 particles/particles.cpp
-#particles/particleIdHandler.cpp
+particles/particleIdHandler.cpp
+particles/regularParticleHandler.cpp
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 SphereParticles/sphereParticles/sphereParticlesKernels.cpp

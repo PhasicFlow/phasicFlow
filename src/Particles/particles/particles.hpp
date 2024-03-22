@@ -25,10 +25,10 @@ Licence:
 #include "dynamicPointStructure.hpp"
 #include "demComponent.hpp"
 #include "shape.hpp"
+#include "particleIdHandler.hpp"
 
 namespace pFlow
 {
-
 
 class particles
 :
@@ -55,14 +55,11 @@ private:
 	/// contact torque field
 	realx3PointField_D     contactTorque_;
 
+	uniquePtr<particleIdHandler> idHandler_ = nullptr;
+
 	static inline
-	const message defaultMessage_ = 
-	(
-		message::CAP_CHANGED+
-		message::SIZE_CHANGED+
-		message::ITEM_INSERT+
-		message::ITEM_DELETE
-	);
+	const message defaultMessage_{message::DEFAULT}; 
+	
 	
 
 	void zeroForce()
@@ -107,10 +104,29 @@ public:
 	explicit particles(systemControl& control);
 
 
-	inline const auto& dynPointStruct()const 
+	inline 
+	const auto& dynPointStruct()const 
 	{
 		return dynPointStruct_;
-	}	
+	}
+
+	inline
+	const pointStructure& pStruct()const
+	{
+		return dynPointStruct_;
+	}
+
+	inline
+	const auto& simDomain()const
+	{
+		return dynPointStruct_.simDomain();
+	}
+
+	inline 
+	const auto& thisDomain()const
+	{
+		return dynPointStruct_.thisDomain();
+	}
 
 	inline auto size()const{
 		return dynPointStruct_.size();

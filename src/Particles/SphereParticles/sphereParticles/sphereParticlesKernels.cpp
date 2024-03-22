@@ -59,14 +59,14 @@ void pFlow::sphereParticlesKernels::addMassDiamInertiaProp
 
 void pFlow::sphereParticlesKernels::acceleration
 ( 
-	realx3		g,
-	deviceViewType1D<real>  	mass,
-	deviceViewType1D<realx3>  	force,
-	deviceViewType1D<real>  	I,
-	deviceViewType1D<realx3>  	torque,
-	pFlagTypeDevice 		    incld,
-	deviceViewType1D<realx3> 	lAcc,
-	deviceViewType1D<realx3> 	rAcc
+	const realx3&					g,
+	const deviceViewType1D<real>&  	mass,
+	const deviceViewType1D<realx3>& force,
+	const deviceViewType1D<real>&  	I,
+	const deviceViewType1D<realx3>& torque,
+	const pFlagTypeDevice& 		    incld,
+	deviceViewType1D<realx3>  		lAcc,
+	deviceViewType1D<realx3>  		rAcc
 )
 {
 

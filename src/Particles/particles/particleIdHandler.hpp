@@ -29,20 +29,44 @@ namespace pFlow
 
 class particleIdHandler
 {
-protected:
-	int32 nextId_=0;
-public:
-	particleIdHandler(int32PointField_HD & id);
+private:
 	
-	int32 getNextId()
+  uint32PointField_D&    id_;
+
+protected:
+
+	auto& id()
 	{
-		return nextId_++;
+		return id_;
 	}
 
-	int32 nextId() const
-	{
-		return nextId_;
-	}
+public:
+	
+	TypeInfo("particleIdHandler");
+
+	explicit particleIdHandler(uint32PointField_D & id);
+
+	create_vCtor
+	(
+		particleIdHandler,
+		pointField,
+		(uint32PointField_D & id),
+		(id)
+	);
+
+	virtual 
+	~particleIdHandler()=default;
+
+	virtual
+	Pair<uint32, uint32> getIdRange(uint32 nNewParticles)=0;
+
+	virtual 
+	bool initialIdCheck()=0;
+
+	static
+	uniquePtr<particleIdHandler> create(
+		uint32PointField_D & id);
+	
 };
 
 }

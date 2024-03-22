@@ -23,6 +23,10 @@ Licence:
 bool pFlow::baseShapeNames::createHashNames()
 {
 	hashNames_.clear();
+	hashes_.clear();
+
+	std::hash<word> hasher;
+
 	uint32 i=0;
 	for(const auto& nm:shapeNames_)
 	{
@@ -32,6 +36,7 @@ bool pFlow::baseShapeNames::createHashNames()
 			"  repeated name in the list of shape names: " << shapeNames_;
 			return false;
 		}
+		hashes_.push_back(hasher(nm));
 		i++;
 	}
 	hashNames_.rehash(0);

@@ -20,39 +20,36 @@ Licence:
 
 #include "particleIdHandler.hpp"
 
-
-
-pFlow::particleIdHandler::particleIdHandler(int32PointField_HD & id)
+pFlow::particleIdHandler::particleIdHandler(uint32PointField_D &id)
+:
+	id_(id)
 {
-	int32 maxID = maxActive<DeviceSide>(id);
+}
 
-	if( maxID != -1 	 && id.size() == 0 )
+pFlow::uniquePtr<pFlow::particleIdHandler> 
+	pFlow::particleIdHandler::create(uint32PointField_D &id)
+{
+    word idHType = angleBracketsNames(
+        "particleIdHandler", 
+        pFlowProcessors().localRunTypeName());
+
+
+	if( pointFieldvCtorSelector_.search(idHType) )
 	{
-		nextId_ = 0;
-	}
-	else if( maxID == -1 && id.size()>0 )
-	{
-
-		nextId_ = 0; 
-		id.modifyOnHost();
-
-		ForAll(i,id)
-		{
-			if(id.isActive(i))
-			{
-				id[i] = getNextId();	
-			}
-		}
-
-		id.syncViews();
-	}
-	else if( maxID >= static_cast<int32>(id.size()) )
-	{
-		nextId_ = maxID + 1;
+		REPORT(1)<<"Creating particle id handler "<< 
+			Green_Text(idHType)<<END_REPORT;
+		return pointFieldvCtorSelector_[idHType] (id);
 	}
 	else
 	{
-		nextId_ = id.size();
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< idHType << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			pointFieldvCtorSelector_
+		);
+		fatalExit;
 	}
+	return nullptr;
 }
-

@@ -51,7 +51,7 @@ public:
 
 	TypeInfo("dynamicPointStructure");
 
-	dynamicPointStructure(systemControl& control);
+	explicit dynamicPointStructure(systemControl& control);
 
 	dynamicPointStructure(const dynamicPointStructure& ps) = delete;
 		
@@ -81,13 +81,14 @@ public:
 	}
 
 	/// In the time loop before iterate
-	//bool beforeIteration() override;
+	bool beforeIteration() override;
 
 	/// @brief This is called in time loop. Perform the main calculations 
 	/// when the component should evolve along time.
-	//bool iterate() override;
-
+	bool iterate() override;
+	
 		
+
 
 	bool predict(real dt, realx3PointField_D& acceleration);
 

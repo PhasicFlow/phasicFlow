@@ -184,9 +184,7 @@ public:
 	/// iterate particles 
 	bool iterate() override;	
 
-	/// after iteration step
-	bool afterIteration() override;
-
+	
 	realx3PointField_D& rAcceleration() override
 	{
 		return rAcceleration_;

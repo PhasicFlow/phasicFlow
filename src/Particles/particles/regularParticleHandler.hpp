@@ -17,41 +17,44 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __regularParticleHandler_hpp__
+#define __regularParticleHandler_hpp__
 
-#ifndef __sphereParticlesKernels_hpp__
-#define __sphereParticlesKernels_hpp__
+#include "particleIdHandler.hpp"
 
-#include "types.hpp"
-#include "pointFlag.hpp"
-
-namespace pFlow::sphereParticlesKernels
+namespace pFlow
 {
 
-void addMassDiamInertiaProp(
-    deviceViewType1D<uint32>    shapeIndex,
-    deviceViewType1D<real>  	mass,
-    deviceViewType1D<real>  	diameter,
-	deviceViewType1D<real>  	I,
-    deviceViewType1D<uint32>  	propertyId,
-    pFlagTypeDevice 		    incld,
-    deviceViewType1D<real>  	src_mass,
-	deviceViewType1D<real>  	src_diameter,
-	deviceViewType1D<real>  	src_I,
-    deviceViewType1D<uint32>  	src_propertyId
-);
+class regularParticleHandler
+:
+    public particleIdHandler
+{
+private:
+    
+    uint32 maxId_ = -1;
 
-void acceleration( 
-	const realx3&					g,
-	const deviceViewType1D<real>&  	mass,
-	const deviceViewType1D<realx3>& force,
-	const deviceViewType1D<real>&  	I,
-	const deviceViewType1D<realx3>& torque,
-	const pFlagTypeDevice& 		    incld,
-	deviceViewType1D<realx3>  		lAcc,
-	deviceViewType1D<realx3>  		rAcc
-);
+public:
 
+    TypeInfo("particleIdHandler<regular>");
+
+    explicit regularParticleHandler(uint32PointField_D & id);
+
+    ~regularParticleHandler()override = default;
+
+	add_vCtor
+	(
+		particleIdHandler,
+		regularParticleHandler,
+		pointField
+	);
+
+    Pair<uint32, uint32> getIdRange(uint32 nNewParticles)override;
+
+	bool initialIdCheck()override;
+
+};
 
 }
 
-#endif 
+
+#endif //__regularParticleHandler_hpp__

@@ -40,6 +40,7 @@ pFlow::particles::particles
 			objectFile::WRITE_ALWAYS
 		),
 		dynPointStruct_,
+		static_cast<uint32>(-1),
 		static_cast<uint32>(-1)
 	),
 	shapeIndex_
@@ -79,19 +80,22 @@ pFlow::particles::particles
 			objectFile::READ_IF_PRESENT,
 			objectFile::WRITE_ALWAYS),
 		dynPointStruct_,
-		zero3)
+		zero3),
+	idHandler_(particleIdHandler::create(id_))
 {
 	this->addToSubscriber(dynPointStruct_);
+
+	idHandler_().initialIdCheck();
+
 }
 
 bool pFlow::particles::beforeIteration() 
 {
 	
-	dynPointStruct_.beforeIteration();
 	zeroForce();
 	zeroTorque();
 
-	return true;
+	return dynPointStruct_.beforeIteration();
 }
 
 bool pFlow::particles::iterate()

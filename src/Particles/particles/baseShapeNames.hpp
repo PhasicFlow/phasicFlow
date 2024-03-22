@@ -36,17 +36,22 @@ class baseShapeNames
 {
 private:
 
-	size_t 				numShapes_;
+	size_t 				numShapes_ = 0;
 
 	// - hashed list of spheres names
 	wordHashMap<uint32> hashNames_;
 
 	/// list of shape names 
-	wordVector 			shapeNames_;
+	wordVector 			shapeNames_{"shapeNames"};
+
+	/// hash for names 
+	Vector<size_t> 		hashes_{"hashes"};
 	
 	bool createHashNames();
 
 	bool readFromDictionary1();	
+
+	using hasher 	= typename wordHashMap<uint32>::hasher;
 
 protected:
 
@@ -76,6 +81,12 @@ public:
 		wordList wl;
 		wl.insert(wl.begin(), shapeNames_.begin(), shapeNames_.end());
 		return wl;
+	}
+
+	inline
+	const auto& hashes()const
+	{
+		return hashes_;
 	}
 
     inline
@@ -108,6 +119,20 @@ public:
 			name = shapeNames_[i];
 			return true;
 		}
+		return false;
+	}
+
+	inline bool hashToIndex(const size_t& hs, uint32& idx)
+	{
+		for(auto i=0; i<hashes_.size(); i++)
+		{
+			if(hashes_[i]==hs)
+			{
+				idx = i;
+				return true;
+			}
+		}
+		idx = -1;
 		return false;
 	}
 
