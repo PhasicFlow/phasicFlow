@@ -50,11 +50,11 @@ namespace pFlow
  */
 class processors
 {
-protected:
+private:
 
 	/// Is the static member initProcessors is called
 	static inline 
-	bool isSelfInitialized_ = false;
+	bool initProcessorsCelled_ = false;
 
 	/// Global rank of the current processor
 	static inline
