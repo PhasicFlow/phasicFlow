@@ -34,7 +34,7 @@ namespace pFlow
  * 
  * This class is used for simulaiton that at least one wall components 
  * is moving according to rotatingAxis motion mode. One or more than one
- * motion components can be defined in rotatingAxisMotionInfo dictionary
+ * motion components can be defined in rotatingAxisInfo dictionary
  * 
 \verbatim
 // In geometryDict file, this will defines rotating walls during simulation
@@ -63,10 +63,21 @@ class rotatingAxisMotion
 {
 protected:
 
+	friend MotionModel<rotatingAxisMotion, rotatingAxis>;
+
+	/// is the geometry attached to this component moving
 	bool impl_isMoving()const
 	{
 		return true;
 	}
+
+	/// move the component itself
+	bool impl_move(uint32, real, real)const
+	{
+		return true;
+	}
+
+	void impl_setTime(uint32 iter, real t, real dt)const;
 	
 public:
 

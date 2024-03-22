@@ -32,7 +32,9 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * @brief Motion model abstract class (CRTP) for all the motion models 
+*/
 template<typename Model, typename Component>
 class MotionModel
 {
@@ -123,49 +125,45 @@ private:
 
 protected:
 	
+	/// @brief  obtain a reference to the actual motion model
 	inline
 	auto& getModel()
 	{
 		return static_cast<ModelType&>(*this);
 	}
 
+	/// @brief  Obtain a const reference to the actual motion model 
 	inline
 	const auto& getModel()const
 	{
 		return static_cast<const ModelType&>(*this);
 	}
 
-	// implementation details goes here
+	/// Return a none object for the motion model 
 	inline
 	auto impl_noneComponent()const
 	{
 		return ModelType::noneComponent();
 	}
 	
-	/// name of the compoenent to index of the component 
+	/// Name of the compoenent to index of the component 
 	bool impl_nameToIndex(const word& name, uint32& idx)const;
 	
 	/// Component index to motion component name
-	 
 	bool impl_indexToName(uint32 i, word& name)const;
 
+	/// const reference to the list of component names 
+	inline 
 	const wordList& impl_componentNames()const
 	{
 		return componentNames_;
 	}
 
-	bool impl_isMoving()const
-	{
-		return false;
-	}
-
-	bool impl_move(uint32, real, real)const
-	{
-		return true;
-	}
-
+	/// Return model interface 
 	auto impl_getModelInterface(uint32 iter, real t, real dt)const
 	{
+		getModel().impl_setTime(iter, t, dt);
+
 		return ModelInterface(
 			motionComponents_.deviceViewAll(), 
 			numComponents_);
@@ -174,6 +172,7 @@ protected:
 	/// Read from dictionary 
 	bool impl_readDictionary(const dictionary& dict);
 
+	/// Write to dictionary 
 	bool impl_writeDictionary(dictionary& dict)const;
 
 public:
@@ -199,21 +198,7 @@ public:
 		~MotionModel() = default;
 
 	// - Methods
-		/// Return the motion model at time t 
-		/*Model getModel(real t)
-		{
-			for(int32 i= 0; i<numAxis_; i++ )
-			{
-				axis_[i].setTime(t);
-			}
-			axis_.modifyOnHost();
-			axis_.syncViews();
-
-			return Model(axis_.deviceVector(), numAxis_);
-		}*/
-
-		/// Motion component name to index
-	
+		
 		/// name of the compoenent to index of the component 
 		bool nameToIndex(const word& name, uint32& idx)const
 		{
@@ -226,23 +211,26 @@ public:
 			return getModel().impl_indexToName(idx, name);
 		}
 
+		/// @brief  Return a const reference to the list of compoenent names 
+		/// @return 
 		const wordList& componentNames()const
 		{
 			return getModel().impl_componentNames();
 		}
 		
-		/// Are walls moving 
+		/// Is the wall assocciated to this motion component moving?
 		bool isMoving()const
 		{
 			return getModel().impl_isMoving();
 		}
 
-		/// Move 
+		/// Move the component itself
 		bool move(uint32 iter, real t, real dt)
 		{
 			return getModel().impl_move(iter, t, dt);
 		}
 
+		/// Obtain an object to model interface 
 		auto getModelInterface(uint32 iter, real t, real dt)const
 		{
 			return getModel().impl_getModelInterface(iter, t, dt);

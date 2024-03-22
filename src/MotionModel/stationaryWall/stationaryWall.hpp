@@ -30,6 +30,26 @@ namespace pFlow
 {
 
 
+/**
+ * stationary model for walls
+ * 
+ * This class is used for simulaiton that all wall components 
+ * are fixed.
+ * 
+\verbatim
+// In geometryDict file, this will defines stationary walls
+...
+motionModel stationary;
+
+// this dictionary is optional
+stationaryInfo
+{
+	
+}
+...
+\endverbatim
+ *
+ */
 class stationaryWall
 :
     public fileDictionary,
@@ -37,11 +57,21 @@ class stationaryWall
 {
 protected:
 
+	friend MotionModel<stationaryWall, stationary>;
+  
 	bool impl_isMoving()const
 	{
 		return false;
 	}
+
+	bool impl_move(uint32, real, real)const
+	{
+		return true;
+	}
 	
+	void impl_setTime(uint32 ,real ,real )const
+	{}
+
 public:
 
 	TypeInfo("stationaryWall");

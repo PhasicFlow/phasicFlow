@@ -39,14 +39,14 @@ namespace pFlow
  * This class is used for simulaiton that at least one wall components 
  * are moving according to a sinoidal viration defined in class vibrating.
  * One or more than one motion components can be defined in 
- * vibratingMotionInfo dictionary
+ * vibratingInfo dictionary
  * 
 \verbatim
 // In geometryDict file, this will defines vibrating walls during simulation
 ...
-motionModel vibratingMotion;
+motionModel vibrating;
 
-vibratingMotionInfo
+vibratingInfo
 {
 	vibComponent1
 	{
@@ -68,11 +68,21 @@ class vibratingMotion
 {
 
 protected:
+	
+	friend MotionModel<vibratingMotion, vibrating>;
 
 	bool impl_isMoving()const
 	{
 		return true;
 	}
+
+	/// move the component itself
+	bool impl_move(uint32, real, real)const
+	{
+		return true;
+	}
+
+	void impl_setTime(uint32 iter, real t, real dt)const;
 
 public:
 	

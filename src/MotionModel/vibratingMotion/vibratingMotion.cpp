@@ -1,11 +1,29 @@
 #include "vibratingMotion.hpp"
 
+void pFlow::vibratingMotion::impl_setTime
+(
+	uint32 iter, 
+	real t, 
+	real dt
+)const
+{
+	auto motion = motionComponents_.deviceViewAll();
+	Kokkos::parallel_for(
+		"vibratingMotion::impl_setTime",
+		deviceRPolicyStatic(0, numComponents_),
+		LAMBDA_HD(uint32 i){
+			motion[i].setTime(t);
+		});
+	Kokkos::fence();
+}
+
 pFlow::vibratingMotion::vibratingMotion
 (
-    const objectFile &objf, 
+    const objectFile &objf,
     repository *owner
-):
-    fileDictionary(objf, owner)
+) 
+: 
+	fileDictionary(objf, owner)
 {
     if(! getModel().impl_readDictionary(*this) )
 	{

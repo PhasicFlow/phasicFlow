@@ -30,7 +30,7 @@ pFlow::stationaryWall::stationaryWall
 	fileDictionary(objf, owner)
 {
 
-	if(! getModel().impl_readDictionary(*this) )
+	if(!impl_readDictionary(*this) )
 	{
 		fatalErrorInFunction;
 		fatalExit;
@@ -46,7 +46,7 @@ pFlow::stationaryWall::stationaryWall
 :
 	fileDictionary(objf, dict, owner)
 {
-	if(! getModel().impl_readDictionary(*this) )
+	if(!impl_readDictionary(*this) )
 	{
 		fatalErrorInFunction;
 		fatalExit;

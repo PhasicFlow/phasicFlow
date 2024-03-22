@@ -117,13 +117,13 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	realx3 linTangentialVelocityPoint(const realx3 &)const
+	realx3 linVelocityPoint(const realx3 &)const
 	{
 		return velocity_;
 	}
 
 	INLINE_FUNCTION_HD
-	realx3 transferPoint(const realx3& p, real dt)
+	realx3 transferPoint(const realx3& p, real dt)const
 	{
 		if(!inTimeRange()) return p;
 		return p + 0.5*dt*(velocity0_+velocity_);

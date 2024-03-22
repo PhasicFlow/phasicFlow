@@ -20,17 +20,30 @@ Licence:
 
 #include "rotatingAxisMotion.hpp"
 
-
-pFlow::rotatingAxisMotion::rotatingAxisMotion
+void pFlow::rotatingAxisMotion::impl_setTime
 (
-	const objectFile &objf, 
-	repository *owner
-)
-:
-	fileDictionary(objf, owner)
+	uint32 iter, 
+	real t, 
+	real dt
+)const
+{
+	auto motion = motionComponents_.deviceViewAll();
+	Kokkos::parallel_for(
+		"rotatingAxisMotion::impl_setTime",
+		deviceRPolicyStatic(0, numComponents_),
+		LAMBDA_HD(uint32 i){
+			motion[i].setTime(t);
+		});
+	Kokkos::fence();
+}
+
+pFlow::rotatingAxisMotion::rotatingAxisMotion(
+    const objectFile &objf,
+    repository *owner)
+    : fileDictionary(objf, owner)
 {
 
-	if(! getModel().impl_readDictionary(*this) )
+	if(! impl_readDictionary(*this) )
 	{
 		fatalErrorInFunction;
 		fatalExit;
@@ -46,7 +59,7 @@ pFlow::rotatingAxisMotion::rotatingAxisMotion
 :
 	fileDictionary(objf, dict, owner)
 {
-	if(! getModel().impl_readDictionary(*this) )
+	if(!impl_readDictionary(*this) )
 	{
 		fatalErrorInFunction;
 		fatalExit;

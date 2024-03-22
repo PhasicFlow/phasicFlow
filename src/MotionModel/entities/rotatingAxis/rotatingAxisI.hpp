@@ -30,7 +30,7 @@ pFlow::realx3 pFlow::rotatingAxis::linVelocityPoint(const realx3 &p)const
 }
 
 INLINE_FUNCTION_HD 
-pFlow::realx3 pFlow::rotatingAxis::transferPoint(const realx3 p, real dt)
+pFlow::realx3 pFlow::rotatingAxis::transferPoint(const realx3 p, real dt)const
 {
     return  rotate(p, *this, dt);
 }
