@@ -279,8 +279,8 @@ bool pFlow::repository::write
 ) const
 {
 	
-	for(auto& obj:objects_)
-	{
+	for(const auto& obj:objects_)
+	{		
 		if(verbose)
 		{
 			if(obj.second->implyWrite())
