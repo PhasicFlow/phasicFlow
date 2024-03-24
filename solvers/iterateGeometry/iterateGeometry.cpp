@@ -32,7 +32,6 @@ Licence:
 #include "vocabs.hpp"
 #include "systemControl.hpp"
 #include "geometry.hpp"
-//#include "geometryMotion.hpp"
 #include "commandLine.hpp"
 //#include "readControlDict.hpp"
 
@@ -56,21 +55,23 @@ commandLine cmds(
    
 
 // this should be palced in each main 
+processors::initProcessors(argc, argv);
+initialize_pFlowProcessors();
 #include "initialize_Control.hpp"
 	
 	#include "setProperty.hpp"
-	//#include "setSurfaceGeometry.hpp"
+	#include "setSurfaceGeometry.hpp"
 
-	WARNING<<"Code should be changed "<<END_WARNING;
-  auto geom = geometry(Control, proprties);
-	/*do
+	
+	do
 	{
 		surfGeometry.iterate();
 
-	}while( Control++);*/
+	}while( Control++);
 
 // this should be palced in each main 
 #include "finalize.hpp"
+processors::finalizeProcessors();
 
 }
 
