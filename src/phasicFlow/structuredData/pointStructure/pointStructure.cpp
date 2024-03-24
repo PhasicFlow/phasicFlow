@@ -27,8 +27,8 @@ bool pFlow::pointStructure::setupPointStructure(const realx3Vector& points)
 {
     PointsTypeHost hPoints
     (
-        pointPosition_.name(), 
-        pointPosition_.fieldKey()
+        pointPosition().name(), 
+        pointPosition().fieldKey()
     );
 
     hPoints.assign(points);
@@ -49,8 +49,8 @@ bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
 
     PointsTypeHost internal
     (
-        pointPosition_.name(), 
-        pointPosition_.fieldKey(), 
+        pointPosition().name(), 
+        pointPosition().fieldKey(), 
         thisN, 
         thisN, 
         RESERVE()
@@ -80,10 +80,9 @@ bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
 
 bool pFlow::pointStructure::initializePoints(const PointsTypeHost &points)
 {
-    pointPosition_.assignFromHost(points);
+    pointPosition().assignFromHost(points);
 
-    pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
-    pFlagSync_ = false;
+    createDeviceFlag(pointPosition().capacity(), 0, pointPosition().size());
     syncPFlag();
 
     return true;
@@ -205,8 +204,8 @@ bool pFlow::pointStructure::read(
     
     PointsTypeHost fRead
     (
-        this->pointPosition_.name(),
-        this->pointPosition_.fieldKey()
+        this->pointPosition().name(),
+        this->pointPosition().fieldKey()
     );
 
 	if( !fRead.read(is, iop))

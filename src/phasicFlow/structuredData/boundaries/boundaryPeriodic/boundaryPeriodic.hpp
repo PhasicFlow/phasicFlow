@@ -42,9 +42,11 @@ public:
 	TypeInfo("boundary<periodic>");
 
 	boundaryPeriodic(
-		const dictionary& 	dict,
-		const plane&    	bplane,
-		internalPoints& 	internal);
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
 
 	 
 	~boundaryPeriodic() override= default;

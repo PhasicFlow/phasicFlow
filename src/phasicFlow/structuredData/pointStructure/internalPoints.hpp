@@ -53,7 +53,11 @@ public:
 
 	using execution_space 	= typename PointsType::execution_space;
 
-protected:
+private:
+
+	//// - friend et al.
+	
+		friend boundaryBase;
 
 	//// - data members
 
@@ -69,22 +73,32 @@ protected:
 		/// if both host and device flags sync
 		mutable bool 				pFlagSync_ = false;
 	
-	//// - protected members
-
-		void syncPFlag()const;
-
-		friend boundaryBase;
-		
+	//// - protected members		
 
 		bool deletePoints(const uint32Vector_D& delPoints);
 
-		bool changePointsFlag(
-			deviceViewType1D<uint32> changePoints, 
-			uint32 boundaryIndex);
+		bool changePointsFlagPosition(
+			const uint32Vector_D& changePoints,
+			realx3 transferVector, 
+			uint32 fromBoundaryIndex,
+			uint32 toBoundaryIndex);
 
-		bool changePointsPoisition(
-			deviceViewType1D<uint32> changePoints,
-			realx3 transferVector);
+protected:
+	
+	void syncPFlag()const;
+
+	inline
+	void unSyncFlag()
+	{
+		pFlagSync_ = false;
+	}
+
+	inline 
+	void createDeviceFlag(uint32 cap, uint32 start, uint32 end)
+	{
+		unSyncFlag();
+		pFlagsD_ = pFlagTypeDevice(cap, start, end);
+	}
 
 public:
 
@@ -101,7 +115,7 @@ public:
 
 		
 		/// Construct from point positions, assume all points are active
-		internalPoints(const realx3Vector& posVec);
+		explicit internalPoints(const realx3Vector& posVec);
 
 		/// No Copy construct
 		internalPoints(const internalPoints&) = delete;
@@ -262,134 +276,3 @@ iOstream& operator<<(iOstream& os, const internalPoints& ip)
 
 #endif //__internalPoints_hpp__
 
-
-/*class activePointsDevice
-	{
-	protected:
-		ViewType1D<int8> 	flag_;
-
-		bool allActive_;
-
-		range activeRange_;
-
-	public:
-
-		INLINE_FUNCTION_H
-		activePointsDevice(bool allActive, range active, const ViewType1D<int8>& flag)
-		:
-			flag_(flag),
-			allActive_(allActive),
-			activeRange_(active)
-		{}
-
-		INLINE_FUNCTION_HD
-		activePointsDevice(const activePointsDevice&) = default;
-
-		INLINE_FUNCTION_HD
-		activePointsDevice& operator=(const activePointsDevice&) = default;
-
-		INLINE_FUNCTION_HD
-		bool operator()(int32 i)const {
-			if(i<activeRange_.second && flag_[i] == 1)return true;
-			return false;
-		}
-
-		INLINE_FUNCTION_HD
-		auto activeRange()const {
-			return activeRange_; 
-		}
-
-		INLINE_FUNCTION_HD
-		auto allActive()const {
-			return allActive_;
-		}
-
-	};
-
-	class activePointsHost
-	{
-	protected:
-		
-		ViewType1D<int8, HostSpace> 	flag_;
-
-		bool allActive_;
-
-		range activeRange_;
-
-	public:
-
-		INLINE_FUNCTION_H
-		activePointsHost(bool allActive, range active, const ViewType1D<int8, HostSpace>& flag)
-		:
-			flag_(flag),
-			allActive_(allActive),
-			activeRange_(active){}
-
-		INLINE_FUNCTION_H
-		activePointsHost(const activePointsHost&) = default;
-
-		INLINE_FUNCTION_H
-		activePointsHost& operator=(const activePointsHost&) = default;
-
-		INLINE_FUNCTION_H
-		bool operator()(int32 i)const {
-			if(i <activeRange_.second && flag_[i] == PointFlag::ACTIVE)return true;
-			return false;
-		}
-
-		INLINE_FUNCTION_H
-		auto activeRange()const{
-			return activeRange_;
-		}
-
-		INLINE_FUNCTION_H
-		bool allActive()const {
-			return allActive_;
-		}
-	};*/
-
-
-	/*FUNCTION_H`
-		size_t markDeleteOutOfBox(const box& domain);*/
-
-		
-		///////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		// - const access to points to be newly inserted
-		/*FUNCTION_H 
-		auto insertedPointIndex()const
-		{
-			return tobeInsertedIndex_;
-		}
-
-		FUNCTION_H 
-		auto insertedPointIndexH()const
-		{
-			return tobeInsertedIndex_.hostView();
-		}
-
-		FUNCTION_H 
-		auto insertedPointIndexD()const
-		{
-			return tobeInsertedIndex_.deviceView();
-		}
-
-
-		FUNCTION_H
-		auto mortonSortedIndex()const
-		{
-			return mortonSortedIndex_;
-		}
-
-
-		// - update data structure by inserting/setting new points 
-		//   Notifies all the fields in the registered list of data structure
-		//   and exclude the fields that re in the exclusionList
-		//   retrun nullptr if it fails 
-		/*FUNCTION_H
-		virtual uniquePtr<int32IndexContainer> insertPoints(
-			const realx3Vector& pos,
-			const setFieldList& setField,
-			repository& owner,
-			const List<eventObserver*>& exclusionList={nullptr}
-		);*/

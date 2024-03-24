@@ -37,9 +37,11 @@ public:
 	TypeInfo("boundary<none>");
 
 	boundaryNone(
-		const dictionary& 	dict,
-		const plane&    	bplane,
-		internalPoints& 	internal);
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
 
 	~boundaryNone() override= default;
 	

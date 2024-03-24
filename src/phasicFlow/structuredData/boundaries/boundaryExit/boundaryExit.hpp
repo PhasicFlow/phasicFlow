@@ -47,9 +47,11 @@ public:
 	TypeInfo("boundary<exit>");
 
 	boundaryExit(
-		const dictionary& 	dict,
-		const plane&    	bplane,
-		internalPoints& 	internal);
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
 
 	virtual 
 	~boundaryExit() = default;

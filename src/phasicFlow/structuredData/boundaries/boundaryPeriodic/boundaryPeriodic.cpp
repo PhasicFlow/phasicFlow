@@ -25,12 +25,14 @@ Licence:
 
 pFlow::boundaryPeriodic::boundaryPeriodic
 (
-	const dictionary& dict,
-	const plane&      bplane,
-	internalPoints&   internal
+	const dictionary &dict,
+    const plane 	&bplane,
+    internalPoints 	&internal,
+	boundaryList	&bndrs,
+	uint32 			thisIndex
 )
 :
-	boundaryBase(dict, bplane, internal),
+	boundaryBase(dict, bplane, internal, bndrs, thisIndex),
 	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
 {
 	extendedPlane_ = boundaryBase::boundaryPlane().parallelPlane(-boundaryBase::neighborLength());
@@ -94,17 +96,16 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	
 	// to obtain the transfer vector 
 	const auto& thisP = boundaryPlane();
-	const auto& mirrorP = internal().boundary(mirrorBoundaryIndex_).boundaryPlane();
+	const auto& mirrorP = mirrorBoundary().boundaryPlane();
 	realx3 transferVec = thisP.normal()*(thisP.d() + mirrorP.d());
 
 	return transferPoints
 	(
 		numTransfered,
 		transferFlags, 
-		mirrorBoundaryIndex_, 
+		mirrorBoundaryIndex(), 
 		transferVec
 	);
-
 }
 
 bool pFlow::boundaryPeriodic::iterate

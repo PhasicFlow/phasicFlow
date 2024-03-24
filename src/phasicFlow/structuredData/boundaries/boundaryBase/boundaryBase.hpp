@@ -36,6 +36,7 @@ namespace pFlow
 
 class internalPoints;
 class dictionary;
+class boundaryList;
 
 class boundaryBase
 :
@@ -53,15 +54,17 @@ private:
 	/// list of particles indices on device 
 	uint32Vector_D 	indexList_;
 
-	uint32Vector_H 	indexListH_;
-
-	bool 			indexSync_ = false; 
-
 	/// The length defined for creating neighbor list 
 	real  			neighborLength_;	
 
 	/// a reference to 
 	internalPoints& internal_;
+
+	/// a reference to the list of boundaries 
+	/// (never use this in the constructor).
+	boundaryList& 	boundaries_;
+
+	uint32 			thisBoundaryIndex_;
 
 	uint32 			mirrorProcessoNo_;
 
@@ -73,7 +76,7 @@ protected:
 
 	void setNewIndices(const uint32Vector_D& newIndices);
 
-	void appendNewIndices(const uint32Vector_D& newIndices);
+	bool appendNewIndices(const uint32Vector_D& newIndices);
 	
 	bool removeIndices(
 		uint32 numRemove, 
@@ -85,16 +88,17 @@ protected:
 		uint32 transferBoundaryIndex,
 		realx3 transferVector);
 	
-	
 public:
 
 	TypeInfo("boundaryBase");
 
 	
 	boundaryBase(
-		const dictionary& 	dict,
-		const plane& 		bplane,
-		internalPoints& 	internal);
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
 
 	boundaryBase(const boundaryBase&) = delete;
 
@@ -112,11 +116,13 @@ public:
 		boundaryBase,
 		dictionary,
 		(
-			const dictionary& 	dict,
-			const plane& 		bplane,
-			internalPoints& 	internal
+			const dictionary &dict,
+    		const plane 	&bplane,
+    		internalPoints 	&internal,
+			boundaryList	&bndrs,
+			uint32 			thisIndex
 		),
-		(dict, bplane, internal)
+		(dict, bplane, internal, bndrs, thisIndex)
 	);
 
 	virtual 
@@ -172,6 +178,20 @@ public:
 		return internal_;
 	}
 
+	boundaryBase& mirrorBoundary();
+	
+	inline
+	uint32 thisBoundaryIndex()const
+	{
+		return thisBoundaryIndex_;
+	}
+
+	inline
+	uint32 mirrorBoundaryIndex()const
+	{
+		return thisBoundaryIndex_%2==0? thisBoundaryIndex_+1:thisBoundaryIndex_-1;
+	}
+
 	/// @brief set the size of indexList 
 	/// Always make sure that size+1 <= capacity
 	void setSize(uint32 newSize);
@@ -200,9 +220,11 @@ public:
 	static
 	uniquePtr<boundaryBase> create
 	(
-		const dictionary& 	dict,
-		const plane& 		bplane,
-		internalPoints& 	internal
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex
 	);
 
 	

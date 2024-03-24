@@ -25,5 +25,8 @@ template<class T, class MemorySpace>
 	InternalFieldType& internal
 )
 :
-    BoundaryFieldType(boundary, internal)
-{}
+	BoundaryFieldType(boundary, internal)
+{
+	this->addEvent(message::BNDR_APPEND)
+		 .addEvent(message::BNDR_TRANSFER);
+}

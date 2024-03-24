@@ -19,6 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "boundaryBase.hpp"
+#include "boundaryList.hpp"
 #include "dictionary.hpp"
 #include "internalPoints.hpp"
 #include "anyList.hpp"
@@ -34,17 +35,35 @@ void pFlow::boundaryBase::setNewIndices
 	indexList_.assign(newIndices, false);
 }
 
-void pFlow::boundaryBase::appendNewIndices
+bool pFlow::boundaryBase::appendNewIndices
 (
 	const uint32Vector_D& newIndices
 )
 {
+	
 	indexList_.append(newIndices);
 	
-	// TODO: notify observers about this change 
+	message msg;
 
-	// the index list should be sorted  
-	//sort(indexList_.deviceViewAll(), 0, newSize);
+	msg.add(message::BNDR_APPEND);
+	anyList varList;
+	varList.emplaceBack( 
+		message::eventName(message::BNDR_APPEND),
+		newIndices);
+
+	if(!notify(
+		internal_.time().currentIter(),
+		internal_.time().currentTime(),
+		internal_.time().dt(),
+		msg,
+		varList))
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+	return true;
+	
 }
 
 bool pFlow::boundaryBase::removeIndices
@@ -128,37 +147,32 @@ bool pFlow::boundaryBase::transferPoints
 		keepIndices
 	);
 
-	// third, remove the indices from this list 
-	setNewIndices(keepIndices);
-
 	// first, change the flags in the internalPoints
-	if( !internal_.changePointsFlag(
-		transferIndices.deviceView(), 
+	if( !internal_.changePointsFlagPosition(
+		transferIndices,
+		transferVector, 
+		thisBoundaryIndex(),
 		transferBoundaryIndex) ) 
 	{
+		fatalErrorInFunction;
 		return false;
 	}
 
-	// second, change the position of points 
-	if(!internal_.changePointsPoisition(
-		transferIndices.deviceView(),
-		transferVector))
-	{
-		return false;
-	}
+	// second, remove the indices from this list 
+	setNewIndices(keepIndices);
 
-	// fourth, add the indices to the mirror boundary 
-	internal_.boundary(transferBoundaryIndex).
-		appendNewIndices(transferIndices);
+	// third, add the indices to the mirror boundary 
+	return mirrorBoundary().appendNewIndices(transferIndices);
 	
-    return true;
 }
 
 pFlow::boundaryBase::boundaryBase
 (
     const dictionary &dict,
-    const plane &bplane,
-    internalPoints &internal
+    const plane 	&bplane,
+    internalPoints 	&internal,
+	boundaryList	&bndrs,
+	uint32 			thisIndex
 )
 : 
 	subscriber(dict.name()),
@@ -166,20 +180,23 @@ pFlow::boundaryBase::boundaryBase
 	indexList_(groupNames(dict.name(), "indexList")),
 	neighborLength_(dict.getVal<real>("neighborLength")),
 	internal_(internal),
+	boundaries_(bndrs),
+	thisBoundaryIndex_(thisIndex),
 	mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
 	name_(dict.name()),
 	type_(dict.getVal<word>("type"))
 {
 }
 
+pFlow::boundaryBase &pFlow::boundaryBase::mirrorBoundary()
+{
+    return boundaries_[mirrorBoundaryIndex()];
+}
+
 void pFlow::boundaryBase::setSize(uint32 newSize)
 {
 	indexList_.resize(newSize);
-	/*if( indexList_.capacity() <= newSize+1 )
-	{
-		indexList_.reserve(newSize+1);
-	}*/
-	//INFORMATION<<"new size of boundary "<< name_<<" "<< indexList_.size()<<END_INFO;
+	
 }	
 
 typename pFlow::boundaryBase::pointFieldAccessType
@@ -202,17 +219,21 @@ typename pFlow::boundaryBase::pointFieldAccessType
     return pointFieldAccessType();
 }
 
-pFlow::uniquePtr<pFlow::boundaryBase> pFlow::boundaryBase::create(
+pFlow::uniquePtr<pFlow::boundaryBase> pFlow::boundaryBase::create
+(
     const dictionary &dict,
-    const plane &bplane,
-    internalPoints &internal)
+    const plane 	&bplane,
+    internalPoints 	&internal,
+	boundaryList	&bndrs,
+	uint32 			thisIndex
+)
 {
 	word type = dict.getVal<word>("type");
 	word bType = angleBracketsNames("boundary", type);
 
 	if( dictionaryvCtorSelector_.search(bType) )
 	{
-		return dictionaryvCtorSelector_[bType] (dict, bplane, internal);
+		return dictionaryvCtorSelector_[bType] (dict, bplane, internal, bndrs, thisIndex);
 	}
 	else
 	{

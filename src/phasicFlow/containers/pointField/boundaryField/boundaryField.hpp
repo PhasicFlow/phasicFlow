@@ -52,8 +52,7 @@ protected:
 	static inline
 	const message defaultMessage_ = 
 	(
-		message::BNDR_RESET+
-		message::BNDR_REARRANGE		
+		message::BNDR_RESET		
 	);
 
 public:

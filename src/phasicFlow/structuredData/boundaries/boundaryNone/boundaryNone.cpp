@@ -22,12 +22,14 @@ Licence:
 
 pFlow::boundaryNone::boundaryNone
 (
-	const dictionary& dict,
-	const plane&      bplane,
-	internalPoints&   internal
+	const dictionary &dict,
+    const plane 	&bplane,
+    internalPoints 	&internal,
+	boundaryList	&bndrs,
+	uint32 			thisIndex
 )
 :
-	boundaryBase(dict, bplane, internal)
+	boundaryBase(dict, bplane, internal, bndrs, thisIndex)
 {}
 
 bool pFlow::boundaryNone::beforeIteration

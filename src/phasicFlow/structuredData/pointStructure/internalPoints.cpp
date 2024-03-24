@@ -48,7 +48,7 @@ bool pFlow::internalPoints::deletePoints(const uint32Vector_D& delPoints)
 		"Error in deleting points from internal points"<<endl;
 		return false;
 	}
-	pFlagSync_ = false;
+	unSyncFlag();
 	
 	auto newRange = pFlagsD_.activeRange();
 	auto newSize  = size();
@@ -88,40 +88,61 @@ bool pFlow::internalPoints::deletePoints(const uint32Vector_D& delPoints)
 	return true;
 }
 
-bool pFlow::internalPoints::changePointsFlag
+bool pFlow::internalPoints::changePointsFlagPosition
 (
-	deviceViewType1D<uint32> changePoints, 
-	uint32 boundaryIndex
+	const uint32Vector_D& changePoints,
+	realx3 transferVector, 
+	uint32 fromBoundaryIndex,
+	uint32 toBoundaryIndex
 )
 {
-	if(boundaryIndex>5)
+	if(toBoundaryIndex>5)
 	{
 		fatalErrorInFunction<<
-		"Invalid boundary index "<< boundaryIndex<<endl;
+		"Invalid boundary index "<< toBoundaryIndex<<endl;
 		return false;
 	}
-	
-	pFlagsD_.changeFlags(changePoints, boundaryIndex);
-    pFlagSync_ = false;
-	WARNING<<"NOTIFY About transfering the data "<<END_WARNING;
-	return true;
-}
 
-bool pFlow::internalPoints::changePointsPoisition
-(
-	deviceViewType1D<uint32> changePoints, 
-	realx3 transferVector
-)
-{
+	// change the flag 
+	pFlagsD_.changeFlags(changePoints.deviceView(), toBoundaryIndex);
+	unSyncFlag();
+
+	// change the position 
 	pFlow::internalPointsKernels::changePosition
 	(
 		pointPosition_.deviceViewAll(),
-		changePoints,
+		changePoints.deviceView(),
 		transferVector
 	);
-	WARNING<<"Notify about the change in the position of points"<<END_WARNING;
-    return true;
+
+	anyList varList;
+	message msg;
+	
+	varList.emplaceBack(
+		message::eventName(message::ITEM_FLAGCHANGED),
+		changePoints);
+	varList.emplaceBack("fromBoundaryIndex", fromBoundaryIndex);
+	varList.emplaceBack("toBoundaryIndex", toBoundaryIndex);
+
+	msg.add(message::ITEM_FLAGCHANGED);
+
+	if( !notify(
+		time().currentIter(), 
+		time().currentTime(), 
+		time().dt(),
+		msg,
+		varList))
+	{
+		fatalErrorInFunction<<
+		"Error in notify for item transfer from "<< fromBoundaryIndex<<
+		" to "<<toBoundaryIndex<< " boundary"<<endl;
+		return false;
+	}
+
+	return true;
 }
+
+
 
 pFlow::internalPoints::internalPoints()
 :
@@ -203,8 +224,10 @@ typename pFlow::internalPoints::PointsTypeHost
 
     auto aRange = maskH.activeRange();
     uint32 n = 0;
+	
     for(auto i=aRange.start(); i<aRange.end(); i++)
     {
+
         if( maskH.isActive(i) )
         {
             aPoints[n] = pointsH[i];
@@ -226,7 +249,7 @@ bool pFlow::internalPoints::deletePoints
 		"Error in deleting points from internal points"<<endl;
 		return false;
 	}
-	pFlagSync_ = false;
+	unSyncFlag();
 	WARNING<<"Notify the observersin in internalPoints"<<END_WARNING;
 
     return true;
@@ -239,7 +262,7 @@ pFlow::uint32 pFlow::internalPoints::updateFlag
 	const std::array<real,6>& dist
 )
 {
-	pFlagSync_ = false;
+	unSyncFlag();
 	return pFlagsD_.markPointRegions
 	(
 		dm,
@@ -292,7 +315,7 @@ bool pFlow::internalPoints::read
 	pointPosition_.assignFromHost(fRead);
 
 	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
-	pFlagSync_ = false;
+	unSyncFlag();
 	syncPFlag();
 
 	return true;
@@ -328,8 +351,7 @@ bool pFlow::internalPoints::read
 
 	pointPosition_.assignFromHost(fRead);
 
-	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
-	pFlagSync_ = false;
+	createDeviceFlag(pointPosition_.capacity(), 0, pointPosition_.size());
 	syncPFlag();
 
 	return true;
@@ -347,118 +369,3 @@ bool pFlow::internalPoints::write
 	auto aPoints = activePointsHost();
 	return aPoints.write(os,iop);	
 }
-
-
-/*FUNCTION_H
-bool pFlow::internalPoints::evaluateinternalPoints()
-{
-	if(pointFlag_.size() != pointPosition_.size())
-	{
-		fatalErrorInFunction<<
-		"number of elements in pointFlag and pointPosition is not equal \n";
-		return false;
-	}
-
-	setNumMaxPoints();
-
-	int32 minActive, maxActive;
-	numActivePoints_ = pFlow::internalPointsKernels::scanPointFlag(
-		0,
-		numPoints_,
-		static_cast<int8>(internalPoints::ACTIVE),
-		pointFlag_.deviceViewAll(),
-		minActive,
-		maxActive
-		);
-	
-	activeRange_ = {minActive, maxActive};	
-	
-	return true;
-}
-
-FUNCTION_H
-void pFlow::internalPoints::setNumMaxPoints()
-{
-	maxPoints_ = pointFlag_.capacity();
-	numPoints_ = pointFlag_.size();
-}
-
-FUNCTION_H
-pFlow::realx3Field_D& pFlow::internalPoints::pointPosition()
-{
-	return pointPosition_;
-}
-
-FUNCTION_H
-pFlow::int8Field_HD& pFlow::internalPoints::pointFlag()
-{
-	return pointFlag_;
-}
-		
-pFlow::uniquePtr<pFlow::int32IndexContainer> 
-	pFlow::internalPoints::getNewPointsIndices(int32 numNewPoints)const
-{
-
-
-	if( capacity() - activeRange_.second >=  numNewPoints )
-	{
-		// fill the sequence starting from activeRange_.second-1
-		return makeUnique<int32IndexContainer>(
-			activeRange_.second,
-			activeRange_.second+numNewPoints);
-
-	}
-
-	// second, check if there is space at the beginning
-	if( activeRange_.first >= numNewPoints)
-	{
-		return makeUnique<int32IndexContainer>(
-			0,
-			numNewPoints);	
-	}
-
-	// otherwise scan the points from first to the end to find empty spaces 
-	int32Vector newPoints(
-		numNewPoints,
-		RESERVE());
-
-	newPoints.clear();
-	int32 numAdded = 0;
-	ForAll(i, pointFlag_)
-	{
-		if(!isActive(i))
-		{
-			newPoints.push_back(static_cast<int32>(i));
-			numAdded++;
-		}
-
-		if(numAdded == numNewPoints)
-		{
-			return makeUnique<int32IndexContainer>(
-				newPoints.data(),
-				numNewPoints);
-		}
-	}
-
-	// check if there is space at the end for the remaining of points
-	if( numAdded <numNewPoints && capacity() - size() >= numNewPoints - numAdded )
-	{
-		int32 ind = size();
-		for(int32 i=numAdded; i<numNewPoints; i++)
-		{
-			newPoints.push_back(ind);
-			ind++;
-		}
-		
-		return makeUnique<int32IndexContainer>(
-			newPoints.data(),
-			numNewPoints);
-	}
-	else
-	{
-		fatalErrorInFunction<<"not enough capacity for inserting particles into the point structure\n";
-		return nullptr;
-	}
-
-	return nullptr;
-}*/

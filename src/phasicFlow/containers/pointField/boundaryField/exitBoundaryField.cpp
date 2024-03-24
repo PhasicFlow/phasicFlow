@@ -26,4 +26,6 @@ template<class T, class MemorySpace>
 )
 :
     BoundaryFieldType(boundary, internal)
-{}
+{
+	this->addEvent(message::BNDR_DELETE);
+}

@@ -25,12 +25,14 @@ Licence:
 
 pFlow::boundaryExit::boundaryExit
 (
-	const dictionary& dict,
-	const plane&      bplane,
-	internalPoints&   internal
+	const dictionary &dict,
+    const plane 	&bplane,
+    internalPoints 	&internal,
+	boundaryList	&bndrs,
+	uint32 			thisIndex
 )
 :
-	boundaryBase(dict, bplane, internal)
+	boundaryBase(dict, bplane, internal, bndrs, thisIndex)
 {
 	exitMarginLength_ = max( 
 		dict.getValOrSet("exitMarginLength",(real)0.0), (real)0.0);

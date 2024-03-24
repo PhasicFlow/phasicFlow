@@ -70,8 +70,17 @@ public:
     	const anyList& varList
 	) override
     {
-		notImplementedFunction;
-		return false;
+		BoundaryFieldType::hearChanges(t,dt,iter, msg,varList);
+		
+		if(msg.equivalentTo(message::BNDR_APPEND))
+		{
+			// do nothing;
+		}
+		if(msg.equivalentTo(message::BNDR_TRANSFER))
+		{
+			//do nothing 
+		}
+		return true;
 	}
 
 };

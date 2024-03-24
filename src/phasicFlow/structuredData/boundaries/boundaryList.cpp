@@ -110,7 +110,9 @@ bool pFlow::boundaryList::setLists()
 			(
 				pStruct_.simDomain().boundaryDict(i),
 				pStruct_.simDomain().boundaryPlane(i),
-				pStruct_
+				pStruct_,
+				*this,
+				i
 			)
 		);
 	}
@@ -144,7 +146,9 @@ bool pFlow::boundaryList::beforeIteration
 			"Error in beforeIteration in boundary "<<bdry->name()<<endl;
 			return false;
 		}
+		
 	}
+
     return true;
 }
 
