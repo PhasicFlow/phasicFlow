@@ -23,7 +23,7 @@ Licence:
 #include "streams.hpp"
 
 pFlow::uint32 pFlow::mapperNBS::checkInterval_ = 1000;
-pFlow::real pFlow::mapperNBS::enlargementFactor_ = 1;
+pFlow::real pFlow::mapperNBS::enlargementFactor_ = 1.1;
 
 bool pFlow::mapperNBS::setSearchBox
 (
