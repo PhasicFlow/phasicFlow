@@ -19,12 +19,12 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
+#include "vocabs.hpp"
+#include "commandLine.hpp"
 #include "positionParticles.hpp"
 #include "pointStructure.hpp"
 #include "setFields.hpp"
 #include "systemControl.hpp"
-#include "commandLine.hpp"
-#include "vocabs.hpp"
 #include "baseShapeNames.hpp"
 
 //#include "readControlDict.hpp"
@@ -152,6 +152,19 @@ int main( int argc, char* argv[] )
 	Control.clearIncludeExclude();
 	Control.addExclude("shapeName");
 
+	uint64PointField_H shapeHash
+	(
+		objectFile
+		(
+			"shapeHash",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_ALWAYS
+		),
+		pStructPtr(),
+		0u
+	);
+
 	uint32PointField_H shapeIndex
 	(
 		objectFile
@@ -175,15 +188,17 @@ int main( int argc, char* argv[] )
 	REPORT(0)<< "Converting shapeName field to shapeIndex field"<<END_REPORT;
 
 	auto shapeName_D = shapeName.deviceView();
+	auto shapeHash_D = shapeHash.deviceView();
 	auto shapeIndex_D = shapeIndex.deviceView();
 	
 	REPORT(1)<<"List of shape names in "<<shapes.globalName()<<
 	" is: "<<Green_Text(shapes.shapeNameList())<<END_REPORT;
 
-	ForAll(i, shapeIndex)
+	ForAll(i, shapeHash)
 	{
 		if(uint32 index; shapes.shapeNameToIndex(shapeName_D[i], index))
 		{
+			shapeHash_D[i] = shapes.hashes()[index];
 			shapeIndex_D[i] = index;
 		}
 		else
