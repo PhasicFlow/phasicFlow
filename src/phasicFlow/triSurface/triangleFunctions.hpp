@@ -31,7 +31,7 @@ real surface( const realx3& p1, const realx3& p2, const realx3& p3)
 {
 	realx3 V1 = p2 - p1;
 	realx3 V2 = p3 - p1;
-	return abs((cross(V1,V2)).length()/2.0);	
+	return abs((cross(V1,V2)).length()/(real)2.0);	
 }
 
 INLINE_FUNCTION_HD
