@@ -45,25 +45,25 @@ repository/Time/baseTimeControl.cpp
 repository/systemControl/systemControl.cpp
 repository/systemControl/dynamicLinkLibs.cpp
 
+commandLine/commandLine.cpp
+
 eventManagement/subscriber.cpp
 eventManagement/observer.cpp
 
 demComponent/demComponent.cpp
+
+Timer/Timer.cpp
+Timer/Timers.cpp
+
 
 containers/Vector/Vectors.cpp
 containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
 containers/symArrayHD/symArrays.cpp
 containers/List/anyList/anyList.cpp
-containers/pointField/pointFields.cpp
-containers/triSurfaceField/triSurfaceFields.cpp
 
-setFieldList/setFieldList.cpp
-setFieldList/setFieldEntry.cpp
-
-Timer/Timer.cpp
-Timer/Timers.cpp
-
+structuredData/pointStructure/internalPointsKernels.cpp
+structuredData/pointStructure/internalPoints.cpp
 
 structuredData/zAxis/zAxis.cpp
 structuredData/box/box.cpp
@@ -73,15 +73,13 @@ structuredData/plane/plane.cpp
 structuredData/domain/domain.cpp
 structuredData/domain/simulationDomain.cpp
 structuredData/domain/regularSimulationDomain.cpp
-structuredData/pointStructure/internalPointsKernels.cpp
-structuredData/pointStructure/internalPoints.cpp
-structuredData/pointStructure/pointStructure.cpp
 structuredData/boundaries/boundaryBase/boundaryBase.cpp
 structuredData/boundaries/boundaryBase/boundaryBaseKernels.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
 structuredData/boundaries/boundaryNone/boundaryNone.cpp
 structuredData/boundaries/boundaryPeriodic/boundaryPeriodic.cpp
 structuredData/boundaries/boundaryList.cpp
+structuredData/pointStructure/pointStructure.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
@@ -91,8 +89,13 @@ triSurface/subSurface.cpp
 triSurface/triSurface.cpp
 triSurface/multiTriSurface.cpp
 
+containers/pointField/pointFields.cpp
+containers/triSurfaceField/triSurfaceFields.cpp
 
-commandLine/commandLine.cpp
+setFieldList/setFieldList.cpp
+setFieldList/setFieldEntry.cpp
+
+
 
 
 )
