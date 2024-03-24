@@ -17,71 +17,46 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __boundaryField_hpp__
-#define __boundaryField_hpp__
+#ifndef __exitBoundaryField_hpp__
+#define __exitBoundaryField_hpp__
 
-#include "observer.hpp"
-#include "boundaryBase.hpp"
-#include "internalField.hpp"
+#include "boundaryField.hpp"
 
 namespace pFlow
 {
 
 template< class T, class MemorySpace = void>
-class boundaryField
+class exitBoundaryField
 :
-    public observer 
+    public boundaryField<T, MemorySpace> 
 {
 public:
 	
+    using ExitBoundaryFieldType = exitBoundaryField<T, MemorySpace>;
+
 	using BoundaryFieldType = boundaryField<T, MemorySpace>;
 
-	using InternalFieldType = internalField<T, MemorySpace>;
+	using InternalFieldType = typename BoundaryFieldType::InternalFieldType;
 
-	using memory_space 		= typename InternalFieldType::memory_space;
+	using memory_space 		= typename BoundaryFieldType::memory_space;
 
-	using execution_space 	= typename InternalFieldType::execution_space;
+	using execution_space 	= typename BoundaryFieldType::execution_space;
 
-protected:
-
-    const boundaryBase&     boundary_;
-
-    /// @brief a ref to the internal field 
-    InternalFieldType& 			internal_;
-
-	static inline
-	const message defaultMessage_ = 
-	(
-		message::CAP_CHANGED+
-		message::SIZE_CHANGED+
-		message::ITEM_INSERT+
-		message::ITEM_DELETE
-	);
+   
 
 public:
 
-	TypeInfo("boundaryField<none>");
+	TypeInfo("boundaryField<exit>");
 
-	boundaryField(
+	exitBoundaryField(
 		const boundaryBase& boundary, 
 		InternalFieldType& internal);
-	
-	create_vCtor
-	(
-		boundaryField,
-		boundaryBase,
-		(
-			const boundaryBase& boundary, 
-			InternalFieldType& internal
-		),
-		(boundary, internal)
-	);
-
+		
 
 	add_vCtor
 	(
 		BoundaryFieldType,
-		BoundaryFieldType,
+		ExitBoundaryFieldType,
 		boundaryBase
 	);
 
@@ -95,36 +70,20 @@ public:
     	const anyList& varList
 	) override
     {
-		notImplementedFunction;
-		return false;
+		BoundaryFieldType::hearChanges(t,dt,iter, msg,varList);
+		
+		if(msg.equivalentTo(message::BNDR_DELETE))
+		{
+			// do nothing;
+		}
+		
+		return true;
 	}
-
-	auto size()const
-	{
-		return boundary_.size();
-	}
-
-	auto capacity()const
-	{
-		return boundary_.capacity();
-	}
-
-	virtual
-	void fill(const T& val)
-	{
-		return ;
-	}
-
-	static
-	uniquePtr<boundaryField> create(
-		const boundaryBase& boundary, 
-		InternalFieldType& internal);
 
 };
 
 }
 
-#include "boundaryField.cpp"
+#include "exitBoundaryField.cpp"
 
 #endif
-

@@ -194,7 +194,58 @@ Pair<T,T> minMax(const internalField<T,MemorySpace>& iField)
     }
 }
 
+template<class T, class MemorySpace>
+inline 
+void fillSequence(internalField<T,MemorySpace>& iField, const T& startVal)
+{
+    using exeSpace = typename internalField<T,MemorySpace>::execution_space;
 
+    using policy = Kokkos::RangePolicy<
+			exeSpace,
+			Kokkos::IndexType<uint32> >;
+
+    if constexpr(isDeviceAccessible<exeSpace>())
+    {               
+        auto maskD = iField.activePointsMaskDevice();
+        auto aRange = maskD.activeRange();
+        auto field = iField.field().deviceViewAll();
+        auto aPoints = maskD.getActivePoints();
+        exclusiveScan(aPoints,0, aRange.end(), aPoints,0);
+        
+        Kokkos::parallel_for(
+            "internalField::fillSequence",
+            policy(aRange.start(), aRange.end() ),
+            LAMBDA_HD(uint32 i)
+            {
+                if(maskD(i))
+                {
+                    field[i] = aPoints[i]+startVal;
+                }
+            });
+        Kokkos::fence();
+    }
+    else
+    {
+        // this is a host view 
+        auto maskH = iField.activePointsMaskHost();
+        auto aRange = maskH.activeRange();
+        auto field = iField.field().deviceViewAll();
+        auto aPoints = maskH.getActivePoints();
+        exclusiveScan(aPoints,0, aRange.end(), aPoints,0);
+        
+        Kokkos::parallel_for(
+            "internalField::fillSequence",
+            policy(aRange.start(), aRange.end() ),
+            LAMBDA_HD(uint32 i)
+            {
+                if(maskH(i))
+                {
+                    field[i] = aPoints[i]+startVal;
+                }
+            });
+        Kokkos::fence();
+    }
+}
 
 }
 

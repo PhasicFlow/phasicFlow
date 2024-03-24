@@ -60,6 +60,14 @@ template class pFlow::pointField<pFlow::uint32>;
 createBaseBoundary(pFlow::uint32, void);
 createAllBoundary(pFlow::uint32, void);
 
+template class pFlow::pointField<pFlow::uint64, pFlow::HostSpace>; 
+createBaseBoundary(pFlow::uint64, pFlow::HostSpace);
+createAllBoundary(pFlow::uint64, pFlow::HostSpace);
+
+template class pFlow::pointField<pFlow::uint64>; 
+createBaseBoundary(pFlow::uint64, void);
+createAllBoundary(pFlow::uint64, void);
+
 template class pFlow::pointField<pFlow::real, pFlow::HostSpace>; 
 createBaseBoundary(pFlow::real, pFlow::HostSpace);
 createAllBoundary(pFlow::real, pFlow::HostSpace);

@@ -284,10 +284,16 @@ public:
 		/// The size of *this becomes the size of src. 
 		/// The capacity of *this becomes the capacity of src.
 		INLINE_FUNCTION_H
-		void assign(const VectorTypeHost& src);
+		void assignFromHost(const VectorTypeHost& src);
+
+		INLINE_FUNCTION_H
+		void assign(const VectorType& src, bool srcCapacity = true);
 
 		INLINE_FUNCTION_H
 		void append(const std::vector<T>& appVec);
+
+		INLINE_FUNCTION_H
+		void append(const VectorType& appVec);
 		
 		INLINE_FUNCTION_H
 		auto getSpan();

@@ -98,6 +98,46 @@ typename pFlow::internalField<T, MemorySpace>::FieldTypeHost
     return aField;
 }
 
+template <class T, class MemorySpace>
+bool pFlow::internalField<T, MemorySpace>:: hearChanges
+(
+	real t,
+	real dt,
+	uint32 iter,
+	const message& msg, 
+	const anyList& varList
+)
+{
+	if(msg.equivalentTo(message::CAP_CHANGED))
+	{
+		auto newCap = varList.getObject<uint32>(
+			message::eventName(message::CAP_CHANGED));
+
+		field_.reserve(newCap);
+	}
+	if(msg.equivalentTo(message::SIZE_CHANGED))
+	{
+		auto newSize = varList.getObject<uint32>(
+			message::eventName(message::SIZE_CHANGED));
+		field_.resize(newSize);
+	}
+	if(msg.equivalentTo(message::ITEM_DELETE))
+	{
+		// do nothing
+	}
+	if(msg.equivalentTo(message::ITEM_REARRANGE))
+	{
+		notImplementedFunction;
+		return false;
+	}
+	if(msg.equivalentTo(message::ITEM_INSERT))
+	{
+		notImplementedFunction;
+		return false;
+	}
+	return true;
+}
+
 template<class T, class MemorySpace>
 bool pFlow::internalField<T, MemorySpace>::write
 (

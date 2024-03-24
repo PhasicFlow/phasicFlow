@@ -188,6 +188,11 @@ public:
 		{
 			this->fill(span, val);
 		}
+
+		void fillField(const T& val)
+		{
+			this->fill(val);
+		}
 		
 	//// - IO operations 
 		

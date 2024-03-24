@@ -130,6 +130,41 @@ public:
 			field_.assign(vals, surface_.capacity());
 		}
 		
+		inline 
+		const auto& deviceViewAll()const
+		{
+			return field_.deviceViewAll();
+		}
+		inline
+		auto deviceView()const
+		{
+			return field_.deviceView();
+		}
+
+		inline
+		auto hostView()const
+		{
+			return field_.hostView();
+		}
+
+		inline
+		const FieldType& field()const
+		{
+			return field_;
+		}
+
+		inline
+		FieldType& field()
+		{
+			return field_;
+		}
+
+		inline 
+		void fill(const T& val)
+		{
+			field_.fillField(val);
+		}
+
 		bool hearChanges(
 		real t,
 		real dt,

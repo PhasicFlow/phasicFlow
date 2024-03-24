@@ -274,7 +274,7 @@ bool pFlow::pointField<T, MemorySpace>::readPointField
         return false;
     }
 
-	this->field_.assign(internal);
+	this->field_.assignFromHost(internal);
 
 	return true;
 }

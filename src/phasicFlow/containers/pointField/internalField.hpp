@@ -24,6 +24,7 @@ Licence:
 #include "Field.hpp"
 #include "observer.hpp"
 #include "dataIO.hpp"
+#include "anyList.hpp"
 
 
 namespace pFlow
@@ -59,6 +60,7 @@ protected:
 	const message defaultMessage_ = 
 	(
 		message::CAP_CHANGED+
+		message::SIZE_CHANGED+
 		message::ITEM_INSERT+
 		message::ITEM_REARRANGE+
 		message::ITEM_DELETE
@@ -75,6 +77,11 @@ public:
 		const internalPoints& internal,
 		const T& val);
 	
+	inline 
+	const auto& deviceViewAll()const
+	{
+		return field_.deviceViewAll();
+	}
 	inline
 	auto deviceView()const
 	{
@@ -166,11 +173,8 @@ public:
 		uint32 iter,
 		const message& msg, 
 		const anyList& varList
-	) override
-	{
-		notImplementedFunction;
-		return false;
-	}
+	) override;
+	
 
 	//// - IO
 

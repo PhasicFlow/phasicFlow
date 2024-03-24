@@ -509,7 +509,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
-void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
+void pFlow::VectorSingle<T,MemorySpace>::assignFromHost(const VectorTypeHost& src)
 {
 	uint32 srcSize = src.size();
 	uint32 srcCap = src.capacity();
@@ -540,7 +540,45 @@ void pFlow::VectorSingle<T,MemorySpace>::assign(const VectorTypeHost& src)
     }
 }
 
+template<typename T, typename MemorySpace>
+INLINE_FUNCTION_H
+void pFlow::VectorSingle<T,MemorySpace>::assign
+(
+    const VectorType& src, 
+    bool srcCapacity
+)
+{
+    uint32 srcSize = src.size();
+	uint32 srcCap = src.capacity();
+
+    if(srcCapacity && srcCap != capacity())
+    {
+        reallocateCapacitySize(srcCap, srcSize);
+    }
+    else
+    {
+        setSize(srcSize);
+    }
+
+    if constexpr(isTriviallyCopyable_)
+    {
+        copy(deviceView(), src.deviceView());
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<src.size(); i++)
+        {
+            view_[i] = src.view_[i];
+        }
+    }
+    else
+    {
+        static_assert("Not a valid operation for this data type on device memory");
+    }
+}
+
 template <typename T, typename MemorySpace>
+INLINE_FUNCTION_H
 void pFlow::VectorSingle<T, MemorySpace>::append
 (
     const std::vector<T> &appVec
@@ -573,6 +611,41 @@ void pFlow::VectorSingle<T, MemorySpace>::append
         static_assert("not a valid operation for this data type on device memory");
     }
     
+}
+
+template <typename T, typename MemorySpace>
+INLINE_FUNCTION_H
+void pFlow::VectorSingle<T, MemorySpace>::append
+(
+    const VectorType& appVec
+)
+{
+    uint32 appSize  = appVec.size();
+	if(appSize == 0) return;
+
+	uint32 oldS = size();
+	uint32 newSize = oldS + appSize; 
+
+	setSize(newSize);
+	auto appendView = Kokkos::subview(
+		view_,
+		Kokkos::make_pair<uint32>(oldS, newSize));
+	
+    if constexpr( isTriviallyCopyable_)
+    {
+        copy(appendView, appVec.deviceView());
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<appVec.size(); i++)
+        {
+            appendView[i] = appVec.view_[i];
+        }
+    }
+    else
+    {
+        static_assert("not a valid operation for this data type on device memory");
+    }
 }
 
 template <typename T, typename MemorySpace>

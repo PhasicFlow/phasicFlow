@@ -51,7 +51,9 @@ protected:
 	anyListType 	anyList_;
 
 	/// List of variable names in anyList_ 
-	wordList 		names_;	
+	wordList 		names_;
+
+	wordList 		types_;	
 
 public:
 
@@ -89,6 +91,7 @@ public:
 				fatalExit;
 			}
 			names_.push_back(name);
+			types_.push_back(getTypeName<T>());
 			return anyList_.emplace_back( 
 				std::in_place_type<T>, 
 				std::forward<Args>(args)...);
@@ -106,6 +109,7 @@ public:
 				fatalExit;
 			}
 			names_.push_back(name);
+			types_.push_back(getTypeName<T>());
 			return anyList_.emplace_back(std::in_place_type<T>, other);
 		}
 
@@ -121,6 +125,7 @@ public:
 				fatalExit;
 			}
 			names_.push_back(name);
+			types_.push_back(getTypeName<T>());
 			return anyList_.emplace_back(std::in_place_type<T>, std::move(other));
 		}
 

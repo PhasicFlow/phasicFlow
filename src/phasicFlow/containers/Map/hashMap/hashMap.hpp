@@ -43,6 +43,8 @@ public:
 	
 	using hashmapType 	= std::unordered_map<Key, T, Hash>;
 
+	using hasher 		= typename hashmapType::hasher;
+
 	using iterator 		= typename hashmapType::iterator;
 	
 	using constIterator = typename hashmapType::const_iterator;
@@ -75,46 +77,24 @@ public:
 		{}
 
 		// - Copy construct
-		hashMap(const hashMapType & src)
-		:
-			hashmapType(src)
-		{}
+		hashMap(const hashMapType & src) = default;
 
 		// - Move construct 
-		hashMap( hashMapType&& src)
-		:
-			hashmapType(std::move(src))
-		{}
+		hashMap( hashMapType&& src) = default;
 
 		// - Copy assignment
-		hashMapType& operator=(const hashMapType& rhs)
-		{
-			hashmapType::operator=(rhs);
-			return *this;
-		}
-
+		hashMapType& operator=(const hashMapType& rhs) = default;
+		
 		// - Move assignment
-		hashMapType& operator=(hashMapType&& rhs)
-		{
-			hashmapType::operator=( std::move(rhs));
-			return *this;
-		}
-
+		hashMapType& operator=(hashMapType&& rhs) = default;
+		
 		uniquePtr<hashMapType> clone()const
 		{
 			return makeUnique<hashMapType>(*this);
 		}
 
-		hashMapType* clonePtr()const
-		{
-			return new hashMapType(*this);
-		}	
-
-		~hashMap()
-		{
-			this->clear();
-		}
-
+		~hashMap() = default;
+	
 
 	//// - Methods	
 
