@@ -62,18 +62,19 @@ public:
 		FUNCTION_H
 		box(iIstream& is);
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		box(const box&) = default;
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		box(box&&) = default;
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		box& operator=(const box&) = default;
 
-		FUNCTION_HD
+		INLINE_FUNCTION_HD
 		box& operator=(box&&) = default;
 
+		INLINE_FUNCTION_HD
 		~box()=default;
 
 	//// - Methods 
@@ -85,16 +86,28 @@ public:
 		}
 
 		INLINE_FUNCTION_HD
-		realx3 minPoint()const
+		const realx3& minPoint()const
 		{
 			return min_;
 		}
 
 		INLINE_FUNCTION_HD
-		realx3 maxPoint()const
+		const realx3& maxPoint()const
 		{
 			return max_;
 		}
+
+        INLINE_FUNCTION_HD
+        realx3& minPoint()
+        {
+            return min_;
+        }
+
+        INLINE_FUNCTION_HD
+        realx3& maxPoint()
+        {
+            return max_;
+        }
 
 	//// - IO operation 
 		FUNCTION_H

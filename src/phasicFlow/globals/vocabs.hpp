@@ -37,8 +37,9 @@ const inline char* integrationFolder__  	= "integration";
 
 // file names
 const inline char* settingsFile__			= "settingsDict";
+const inline char* domainFile__     		= "domainDict";
 const inline char* insertionFile__ 			= "particleInsertion";
-const inline char* sphereShapeFile__  		= "sphereShape";
+const inline char* shapeFile__          	= "shapes";
 const inline char* pointStructureFile__ 	= "pStructure";
 const inline char* triSurfaceFile__ 		= "triSurface";
 const inline char* createParticles__		= "createParticles";

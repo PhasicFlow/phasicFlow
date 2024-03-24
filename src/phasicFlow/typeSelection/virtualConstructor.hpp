@@ -75,7 +75,7 @@ public: 																				\
 
 #define add_vCtor(baseClass, derivedClass, selectorName) 	\
 															\
-inline static baseClass::create##selectorName##Callback<derivedClass> baseClass##derivedClass##selectorName##_;
+inline static typename baseClass::template create##selectorName##Callback<derivedClass> baseClass##derivedClass##selectorName##_;
 
 
 

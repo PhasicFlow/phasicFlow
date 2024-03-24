@@ -43,6 +43,8 @@ public:
 	
 	using hashmapType 	= std::unordered_map<Key, T, Hash>;
 
+	using hasher 		= typename hashmapType::hasher;
+
 	using iterator 		= typename hashmapType::iterator;
 	
 	using constIterator = typename hashmapType::const_iterator;
@@ -60,7 +62,7 @@ public:
 	using valueType 	= typename hashmapType::value_type;
 
 	
-	TypeInfoTemplateNV("hashMap", Key);
+	TypeInfoTemplateNV11("hashMap", Key);
 
 	//// - Constructors
 
@@ -75,46 +77,24 @@ public:
 		{}
 
 		// - Copy construct
-		hashMap(const hashMapType & src)
-		:
-			hashmapType(src)
-		{}
+		hashMap(const hashMapType & src) = default;
 
 		// - Move construct 
-		hashMap( hashMapType&& src)
-		:
-			hashmapType(std::move(src))
-		{}
+		hashMap( hashMapType&& src) = default;
 
 		// - Copy assignment
-		hashMapType& operator=(const hashMapType& rhs)
-		{
-			hashmapType::operator=(rhs);
-			return *this;
-		}
-
+		hashMapType& operator=(const hashMapType& rhs) = default;
+		
 		// - Move assignment
-		hashMapType& operator=(hashMapType&& rhs)
-		{
-			hashmapType::operator=( std::move(rhs));
-			return *this;
-		}
-
+		hashMapType& operator=(hashMapType&& rhs) = default;
+		
 		uniquePtr<hashMapType> clone()const
 		{
 			return makeUnique<hashMapType>(*this);
 		}
 
-		hashMapType* clonePtr()const
-		{
-			return new hashMapType(*this);
-		}	
-
-		~hashMap()
-		{
-			this->clear();
-		}
-
+		~hashMap() = default;
+	
 
 	//// - Methods	
 
@@ -140,7 +120,7 @@ template<typename T>
 using wordHashMap = hashMap<word,T>;
 
 template<typename T>
-using labelHashMap = hashMap<label,T>;
+using uint64HashMap = hashMap<uint64,T>;
 
 template<typename T>
 using uint32HashMap = hashMap<uint32,T>;
@@ -155,7 +135,7 @@ template<typename T>
 inline iOstream& printKeys(iOstream& os, const wordHashMap<T> & m);
 
 template<typename T>
-inline iOstream& printKeys(iOstream& os, const labelHashMap<T> & m);
+inline iOstream& printKeys(iOstream& os, const uint64HashMap<T> & m);
 
 template<typename T>
 inline iOstream& printKeys(iOstream& os, const uint32HashMap<T> & m);

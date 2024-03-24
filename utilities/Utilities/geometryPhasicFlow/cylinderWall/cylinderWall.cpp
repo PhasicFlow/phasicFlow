@@ -49,7 +49,7 @@ bool pFlow::cylinderWall::createCylinder(
 	real L = zAx.length();
 
 	
-	realx3Vector r1P(numDiv + 1), r2P(numDiv + 1);
+	realx3Vector r1P("r1P",numDiv + 1), r2P("r1P",numDiv + 1);
 	real dTheta = 2 * Pi / numDiv;
 	real theta = 0;
 

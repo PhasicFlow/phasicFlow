@@ -25,6 +25,7 @@ Licence:
 #include "typeInfo.hpp"
 #include "dictionary.hpp"
 
+#include "streams.hpp"
 
 namespace pFlow
 {
@@ -35,18 +36,20 @@ stridedRange
 {
 protected:
 
-	T 		begin_;
+	T 		begin_ = 0;
 
-	T 		end_;
+	T 		end_ = 1;
 
-	T 		stride_;
+	T 		stride_ = 1;
 
 	static inline const T maxVal = largestPositive<T>();
 	static inline const T minVal = largestNegative<T>();
 
 public:
 
-	TypeInfoTemplateNV("stridedRange",T);
+	TypeInfoTemplateNV11("stridedRange",T);
+
+	stridedRange()=default;
 
 	stridedRange(T begin, T end, T stride)
 	:
@@ -76,9 +79,9 @@ public:
 
 	stridedRange(const dictionary& dict)
 	:
-		begin_(dict.getVal<label>("begin")),
-		end_(dict.getVal<label>("end")),
-		stride_(dict.getVal<label>("stride"))
+		begin_(dict.getVal<T>("begin")),
+		end_(dict.getVal<T>("end")),
+		stride_(dict.getVal<T>("stride"))
 	{}
 		
 	inline 
@@ -96,12 +99,21 @@ public:
 	{
 		return stride_;
 	}
+	
+	inline
+	bool isInRange(T val)const
+	{
+		return val>= begin_ && val<= end_;
+	}
+
 	inline
 	bool isMember(T val, T epsilon = 0)const
 	{
+		
+		if(!isInRange(val)) return false;
+		if(T dist = val-begin_; abs(dist%stride_)<= epsilon) return true;
 		if(equal(val,begin_))return true;
 		if(equal(val,end_))return true;
-		if(abs(mod(val-begin_,stride_))<= epsilon) return true;
 		return false;
 	}
 
@@ -136,6 +148,22 @@ public:
 
 	}
 };
+
+template<>
+inline
+bool stridedRange<real>::isMember(real val, real epsilon)const
+	{
+
+	if(!isInRange(val)) return false;
+	real dist = val-begin_;
+	if(abs(
+		(dist-(static_cast<uint64>((dist+0.01*epsilon)/stride_)*stride_))
+		)<= epsilon) return true;
+	if(equal(val,begin_))return true;
+	if(equal(val,end_))return true;
+	return false;
+}
+
 
 }
 

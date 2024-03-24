@@ -51,11 +51,11 @@ protected:
 
     T* data_ 		= nullptr;
 
-    label 	size_ 	= 0;
+    uint32 	size_ 	= 0;
 
 public:
     
-    TypeInfoTemplateNV("span", T);
+    TypeInfoTemplateNV11("span", T);
 
     /// Constructor
     INLINE_FUNCTION_HD
@@ -63,7 +63,7 @@ public:
 
 
     INLINE_FUNCTION_HD
-    span(T* data, label size)
+    span(T* data, uint32 size)
         : data_(data), size_(size)
     {}
 
@@ -77,11 +77,11 @@ public:
 
     /// move
     INLINE_FUNCTION_HD
-    span(span&&) = delete;
+    span(span&&) = default;
 
     /// assignment
     INLINE_FUNCTION_HD
-    span& operator=(span&) = delete;
+    span& operator=(span&) = default;
 
     
     INLINE_FUNCTION_HD
@@ -98,7 +98,7 @@ public:
 
     /// Returns the number of elements in the span
     INLINE_FUNCTION_HD
-    label size() const
+    uint32 size() const
     {
         return size_;
     }
@@ -132,6 +132,18 @@ public:
     }
 
     INLINE_FUNCTION_HD
+    T& operator[](uint32 i)
+    {
+    	return data_[i];
+    }
+
+    INLINE_FUNCTION_HD
+    const T& operator[](uint32 i)const
+    {
+    	return data_[i];
+    }
+
+    INLINE_FUNCTION_HD
     T& operator[](int32 i)
     {
     	return data_[i];
@@ -143,36 +155,61 @@ public:
     	return data_[i];
     }
 
-    INLINE_FUNCTION_HD
-    T& operator[](label i)
-    {
-    	return data_[i];
-    }
-
-    INLINE_FUNCTION_HD
-    const T& operator[](label i)const
-    {
-    	return data_[i];
-    }
-
 };
 
-template<typename T>
-inline 
-iOstream& operator<<(iOstream& os, const span<T>& s)
+/*template<typename T, typename... properties, template<class, class...> class Container>
+size_t makeSpan(Container<T, properties...>& container)
 {
-    os << token::BEGIN_LIST;
-    for(size_t i=0; i<s.size(); i++)
-    {
-        os << s[i]<<token::NL;
-    }
-    
-    os << token::END_LIST;
-
-    os.check(FUNCTION_NAME);
-
-    return os;
+    return span<T>(container.data(), container.size());
 }
+
+template<typename T, typename... properties, template<class, class...> class Container>
+size_t makeSpan(const Container<T, properties...>& container)
+{
+    return span<T>(
+        const_cast<T*>(container.data()), 
+        container.size());
+}*/
+
+
+template<typename T>
+inline
+span<char> charSpan(span<T> s)
+{
+    auto el = sizeof(T);
+    return span<char>(
+        reinterpret_cast<char*>(s.data()),
+        s.size()*el);
+}
+
+template<typename T>
+inline
+span<const char> charSpan(span<const T> s)
+{
+    auto el = sizeof(T);
+    return span<const char>(
+        reinterpret_cast<const char*>(s.data()),
+        s.size()*el);
+}
+
+/*template<typename T, template<class> class Container>
+span<T> makeSpan(Container<T>& container)
+{
+    return span<T>(container.data(), container.size());
+}
+
+template<typename T, template<class> class Container>
+span<T> makeSpan(const Container<T>& container)
+{
+    return span<T>(
+        const_cast<T*>(container.data()), 
+        container.size());
+}*/
+
+
+
+
+
 
 } // pFlow
 

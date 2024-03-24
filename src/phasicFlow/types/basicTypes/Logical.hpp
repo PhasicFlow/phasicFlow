@@ -17,7 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __Logical_hpp__
 #define __Logical_hpp__
 
@@ -25,22 +24,32 @@ Licence:
 #include "bTypesFunctions.hpp"
 #include "typeInfo.hpp"
 
+
 namespace pFlow
 {
 
+//- Forward 
 class iIstream;
 class iOstream;
 
-// allias for bool
+/**
+ *  Holds a bool value and converts strings to bool 
+ * 
+ */
 class Logical
 {
 protected:
+
+	/// bool value 
 	bool s_ = false;
 
+	/// Set numbe of of Yes or No
 	int  yesNoSet_ = 0;
 
+	/// Set of Yes or Nos
 	inline static const word YesNo__[4][2] = {{"Yes", "No"},{"on","off"},{"true","false"}, {"Ok","No"}};
 
+	/// Construct from bool and set number 
 	inline explicit Logical(bool s, int yns)
 	:	
 		s_(s),
@@ -49,58 +58,75 @@ protected:
 
 public:
 
+	/// Type info
 	TypeInfoNV("Logical");
 	
+	//// Constructors 
 
-	inline Logical(){}
+		/// Default constructor 
+		inline Logical(){}
+			
+		/// Construct from bool 
+		inline explicit Logical(bool s)
+		:
+		 	s_(s)
+		{}
+
+		/// Construct from word 
+		Logical(const word& l);
 		
+		/// Construct from char string 
+		Logical(const char* ch);
 
-	inline explicit Logical(bool s)
-	:
-	 	s_(s),
-	 	yesNoSet_(0)
-	{}
+		/// Copy 
+		Logical(const Logical&) = default;
 
-	Logical(const word& l);
+		/// Move 
+		Logical(Logical&&) = default;
+
+		/// Copy assignment 
+		Logical& operator=(const Logical&) = default;
+
+		/// Move assignment 
+		Logical& operator=(Logical&&) = default;
+
+		/// Assignment with bool
+		inline Logical& operator=(const bool& b)
+		{ 
+			s_ = b;
+			yesNoSet_ = 0;
+			return *this;
+		}
 	
-	Logical(const char* ch);
-
-	Logical(const Logical&) = default;
-
-	Logical(Logical&&) = default;
-
-	Logical& operator=(const Logical&) = default;
-
-	Logical& operator=(Logical&&) = default;
-
-	inline Logical& operator=(const bool& b)
-	{ 
-		s_ = b;
-		yesNoSet_ = 0;
-		return *this;
-	}
+	//// Methods 
 	
-	inline bool operator()() const
-	{
-		return s_;
-	}
-	
-	inline explicit operator bool() const
-	{
-		return s_;
-	}
+		/// () operator, return bool value 
+		inline bool operator()() const
+		{
+			return s_;
+		}
+		
+		/// Return bool value 
+		inline explicit operator bool() const
+		{
+			return s_;
+		}
 
-	inline Logical operator!()const
-	{
-		return Logical(!s_, yesNoSet_);
-	}
+		/// Not operator 
+		inline Logical operator!()const
+		{
+			return Logical(!s_, yesNoSet_);
+		}
 
 	//// IO operations
-	bool read(iIstream& is);
+	
+		bool read(iIstream& is);
 
-	bool write(iOstream& os)const; 
+		bool write(iOstream& os)const; 
 
-	bool static evaluteWord(const word& l, bool& b, int& yesNoSet );
+	//// Static members 
+
+		bool static evaluteWord(const word& l, bool& b, int& yesNoSet );
 	
 
 };

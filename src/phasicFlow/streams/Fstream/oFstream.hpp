@@ -17,10 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
-
-
 #ifndef __oFstream_hpp__
 #define __oFstream_hpp__
 
@@ -32,7 +28,13 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * Output file stream to send binary or ascii data to a file.  
+ * 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs
+ *
+ */
 class oFstream
 :
 	public fileStream,
@@ -40,16 +42,18 @@ class oFstream
 {
 public:
 
-	// Constructor
+	//// - Constructors
+	
+	/// From file path and format 
 	oFstream (const fileSystem& path, bool binary = false);
 
-	// no copy constructor
+	/// No copy constructor
 	oFstream( const oFstream& src) = delete;
 
-	// no assignment
+	/// No assignment
 	oFstream& operator = (const oFstream& rhs) = delete;
 
-	// Destructor
+	/// Destructor
 	virtual ~oFstream() = default;
 
 };

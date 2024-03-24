@@ -89,9 +89,9 @@ bool pFlow::AdamsBashforth5::intAll(
 	realx3Vector_D& dy, 
 	range activeRng)
 {
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
-	auto d_history = history_.deviceVectorAll();
+	auto d_dy = dy.deviceViewAll();
+	auto d_y  = y.deviceViewAll();
+	auto d_history = history_.deviceViewAll();
 
 	Kokkos::parallel_for(
 		"AdamsBashforth5::correct",

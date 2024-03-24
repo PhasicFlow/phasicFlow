@@ -31,7 +31,7 @@ void pFlow::selectBox::selectAllPointsInBox()
 	);
 
 	selectedPoints_.clear();
-	auto pPos = pStruct().pointPosition().hostVector();
+	auto pPos = pStruct().pointPosition().hostView();
 	
 	ForAll(i , pPos)
 	{

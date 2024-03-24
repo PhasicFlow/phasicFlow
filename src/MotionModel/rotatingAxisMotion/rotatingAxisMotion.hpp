@@ -22,32 +22,26 @@ Licence:
 #define __rotatingAxisMotion_hpp__
 
 
-#include "types.hpp"
-#include "typeInfo.hpp"
-#include "VectorDual.hpp"
-#include "Vectors.hpp"
-#include "List.hpp"
+#include "MotionModel.hpp"
 #include "rotatingAxis.hpp"
-
+#include "fileDictionary.hpp"
 
 namespace pFlow
 {
-
-class dictionary;
 
 /**
  * Rotating axis motion model for walls
  * 
  * This class is used for simulaiton that at least one wall components 
  * is moving according to rotatingAxis motion mode. One or more than one
- * motion components can be defined in rotatingAxisMotionInfo dictionary
+ * motion components can be defined in rotatingAxisInfo dictionary
  * 
 \verbatim
 // In geometryDict file, this will defines rotating walls during simulation
 ...
-motionModel rotatingAxisMotion;
+motionModel rotatingAxis;
 
-rotatingAxisMotionInfo
+rotatingAxisInfo
 {
 	rotationAxis1
 	{
@@ -63,185 +57,50 @@ rotatingAxisMotionInfo
  *
  */
 class rotatingAxisMotion
+:
+    public fileDictionary,
+    public MotionModel<rotatingAxisMotion, rotatingAxis>
 {
-public:
-	
-	/** Motion model class to be passed to computational units/kernels for
-	 *  transfing points and returning velocities at various positions
-	 */
-	class Model
-	{
-	protected:
-		
-		deviceViewType1D<rotatingAxis> 	axis_;
-		int32 							numAxis_=0;
-
-	public:
-
-		INLINE_FUNCTION_HD
-		Model(deviceViewType1D<rotatingAxis> axis, int32 numAxis):
-			axis_(axis),
-			numAxis_(numAxis)
-		{}
-
-		INLINE_FUNCTION_HD
-		Model(const Model&) = default;
-		
-		
-		INLINE_FUNCTION_HD
-		Model& operator=(const Model&) = default;
-
-
-		INLINE_FUNCTION_HD
-		realx3 pointVelocity(int32 n, const realx3& p)const
-		{
-			return axis_[n].linTangentialVelocityPoint(p);
-		}
-
-		INLINE_FUNCTION_HD
-		realx3 operator()(int32 n, const realx3& p)const
-		{
-			return pointVelocity(n,p);
-		}
-
-		INLINE_FUNCTION_HD
-		realx3 transferPoint(int32 n, const realx3 p, real dt)const
-		{
-			return rotate(p, axis_[n], dt);	
-		}
-
-		INLINE_FUNCTION_HD int32 numComponents()const
-		{
-			return numAxis_;
-		}
-	};
-
 protected:
 
-	using axisVector_HD = VectorDual<rotatingAxis>;
+	friend MotionModel<rotatingAxisMotion, rotatingAxis>;
 
-	/// Vector to store axes 
-	axisVector_HD 	axis_;
+	/// is the geometry attached to this component moving
+	bool impl_isMoving()const
+	{
+		return true;
+	}
+
+	/// move the component itself
+	bool impl_move(uint32, real, real)const
+	{
+		return true;
+	}
+
+	void impl_setTime(uint32 iter, real t, real dt)const;
 	
-	/// Names of axes
-	wordList  		axisName_;
-
-	/// Number of axes components
-	label  			numAxis_= 0;
-
-	/// Read from dictionary 
-	bool readDictionary(const dictionary& dict);
-
-	/// Write to dictionary
-	bool writeDictionary(dictionary& dict)const;
-
 public:
-	
-	/// Type info
-	TypeInfoNV("rotatingAxisMotion");
 
-	// - Constructors 
-	
-		/// Empty
-		FUNCTION_H
-		rotatingAxisMotion();
+	TypeInfo("rotatingAxisMotion");
 
-		/// Construct with dictionary 
-		FUNCTION_H
-		rotatingAxisMotion(const dictionary& dict);
+	rotatingAxisMotion(const objectFile& objf, repository* owner);
 
-		/// Copy constructor 
-		FUNCTION_H
-		rotatingAxisMotion(const rotatingAxisMotion&) = default;
+	rotatingAxisMotion(
+		const objectFile& objf, 
+		const dictionary& dict, 
+		repository* owner);
 
-		/// No move constructor 
-		rotatingAxisMotion(rotatingAxisMotion&&) = delete;
 
-		/// Copy assignment
-		FUNCTION_H
-		rotatingAxisMotion& operator=(const rotatingAxisMotion&) = default;
+	bool write(iOstream& os, const IOPattern& iop)const override;
 
-		/// No move assignment
-		rotatingAxisMotion& operator=(rotatingAxisMotion&&) = delete;
-
-		/// Destructor 
-		FUNCTION_H
-		~rotatingAxisMotion() = default;
-
-	// - Methods
-		/// Return the motion model at time t 
-		Model getModel(real t)
-		{
-			for(int32 i= 0; i<numAxis_; i++ )
-			{
-				axis_[i].setTime(t);
-			}
-			axis_.modifyOnHost();
-			axis_.syncViews();
-
-			return Model(axis_.deviceVector(), numAxis_);
-		}
-
-		/// Motion component name to index
-		INLINE_FUNCTION_H
-		int32 nameToIndex(const word& name)const
-		{
-			if( auto i = axisName_.findi(name); i == -1)
-			{
-				fatalErrorInFunction<<
-				"axis name " << name << " does not exist. \n";
-				fatalExit;
-				return i;
-			}
-			else
-			{
-				return i;
-			}
-			
-		}
-
-		/// Motion index to motion component name 
-		INLINE_FUNCTION_H
-		word indexToName(label i)const
-		{
-			if(i < numAxis_ )
-				return axisName_[i];
-			else
-			{
-				fatalErrorInFunction<<
-				"out of range access to the list of axes " << i <<endl<<
-				" size of axes_ is "<<numAxis_<<endl;
-				fatalExit;
-				return "";
-			}
-		}
-
-		
-		/// Are walls moving 
-		INLINE_FUNCTION_HD
-		bool isMoving()const
-		{
-			return true;
-		}
-
-		/// Move 
-		INLINE_FUNCTION_H
-		bool move(real t, real dt)
-		{
-			return true;
-		}
-
-	// - IO operation 
-		/// Read from input stream is 
-		FUNCTION_H
-		bool read(iIstream& is);
-
-		/// Write to output stream os
-		FUNCTION_H
-		bool write(iOstream& os)const;
-
+	static
+    auto noneComponent()
+    {
+      return rotatingAxis({0,0,0}, {1,0,0}, 0.0);
+    }
 };
 
 } // pFlow
 
-#endif //__rotatingAxisMotion_hpp__
+
+#endif // __rotatingAxisMotion_hpp__

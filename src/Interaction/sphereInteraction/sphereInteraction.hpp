@@ -23,7 +23,6 @@ Licence:
 
 #include "interaction.hpp"
 #include "sphereParticles.hpp"
-
 #include "sphereInteractionKernels.hpp"
 
 namespace pFlow
@@ -43,22 +42,19 @@ public:
 	
 	using ContactForceModel 	= contactForceModel;
 
-	using MotionModel 		= typename geometryMotionModel::MotionModel;
+	using MotionModel 			= typename geometryMotionModel::MotionModel;
 
-	using ModelStorage 		= typename ContactForceModel::contactForceStorage;
+	using ModelStorage 			= typename ContactForceModel::contactForceStorage;
 	
-	using IdType 			= typename interaction::IdType;
+	using IdType 			= uint32;
 
-	using IndexType    		= typename interaction::IndexType;
-
-	using ExecutionSpace 	= typename interaction::ExecutionSpace;
+	using IndexType    		= uint32;
 
 	using ContactListType 	= 
-			contactListType<ModelStorage, ExecutionSpace, IdType>;
+			contactListType<ModelStorage, DefaultExecutionSpace, IdType>;
 
-	using PairsContainerType= typename contactSearch::PairContainerType;
 
-protected:
+private:
 	
 	/// const reference to geometry
 	const GeometryMotionModel& 			geometryMotion_;
@@ -66,15 +62,17 @@ protected:
 	/// const reference to particles 
 	const sphereParticles& 				sphParticles_;
 
+	/// contact search object for pp and pw interactions 
+	uniquePtr<contactSearch> 			contactSearch_ = nullptr;
 
 	/// contact force model 
-	uniquePtr<ContactForceModel>  	forceModel_ 	= nullptr;
+	uniquePtr<ContactForceModel>  		forceModel_ 	= nullptr;
 
 	/// contact list for particle-particle interactoins (keeps the history)
-	uniquePtr<ContactListType> 		ppContactList_ = nullptr;
+	uniquePtr<ContactListType> 			ppContactList_ = nullptr;
 
 	/// contact list for particle-wall interactions (keeps the history)
-	uniquePtr<ContactListType> 		pwContactList_ = nullptr;	
+	uniquePtr<ContactListType> 			pwContactList_ = nullptr;	
 
 	/// timer for particle-particle interaction computations
 	Timer 		ppInteractionTimer_;
@@ -82,42 +80,39 @@ protected:
 	/// timer for particle-wall interaction computations
 	Timer       pwInteractionTimer_;
 
+	Timer 		contactListTimer_;
+
+	Timer 		contactListTimer0_;
+
 	bool createSphereInteraction();
 
-	bool managePPContactLists();
+	bool sphereSphereInteraction();
 
-	bool managePWContactLists();
+	bool sphereWallInteraction();
+
+	//bool managePPContactLists();
+
+	//bool managePWContactLists();
 
 	/// range policy for p-p interaction execution 
 	using rpPPInteraction = 
-		Kokkos::RangePolicy<Kokkos::IndexType<int32>, Kokkos::Schedule<Kokkos::Dynamic>>;
+		Kokkos::RangePolicy<Kokkos::IndexType<uint32>, Kokkos::Schedule<Kokkos::Dynamic>>;
 
 	/// range policy for p-w interaction execution 
 	using rpPWInteraction = rpPPInteraction;
 
 public:
 
-	TypeInfoTemplate3("sphereInteraction", ContactForceModel, MotionModel, ContactListType);
+	TypeInfoTemplate13("sphereInteraction", ContactForceModel, MotionModel, ContactListType);
 
-	// constructor
-
+	/// Constructor from components
 	sphereInteraction(
 		systemControl& control,
 		const particles& prtcl,
-		const geometry& geom)
-	:
-		interaction(control, prtcl, geom),
-		geometryMotion_(dynamic_cast<const GeometryMotionModel&>(geom)),
-		sphParticles_(dynamic_cast<const sphereParticles&>(prtcl)),
-		ppInteractionTimer_("sphere-sphere interaction", &this->timers()),
-		pwInteractionTimer_("sphere-wall interaction", &this->timers())
-	{
-		if(!createSphereInteraction())
-		{
-			fatalExit;
-		}
-	}
+		const geometry& geom);
+	
 
+	/// Add virtual constructor 
 	add_vCtor
 	(
 		interaction,
@@ -125,97 +120,25 @@ public:
 		systemControl
 	);
 
+	/// This is called in time loop, before iterate. (overriden from demComponent)
+	bool beforeIteration() override;
+	
+	/// This is called in time loop. Perform the main calculations 
+	/// when the component should evolve along time. (overriden from demComponent)
+	bool iterate() override; 
+	
+	/// This is called in time loop, after iterate. (overriden from demComponent)
+	bool afterIteration() override;
 
-	bool beforeIteration() override
-	{
-		return true;
-	}
-
-
-	bool iterate() override
-	{
-
-//Info<<"before contact search"<<endInfo;
-		////Info<<"interaction iterrate start"<<endInfo;
-		if(this->contactSearch_)
-		{
-
-			if( this->contactSearch_().ppEnterBroadSearch())
-			{
-				//Info<<" before ppEnterBroadSearch"<<endInfo;
-				ppContactList_().beforeBroadSearch();
-				//Info<<" after ppEnterBroadSearch"<<endInfo;
-			}
-
-			if(this->contactSearch_().pwEnterBroadSearch())
-			{
-				//Info<<" before pwEnterBroadSearch"<<endInfo;
-				pwContactList_().beforeBroadSearch();
-				//Info<<" after pwEnterBroadSearch"<<endInfo;
-			}
-
-			//Info<<" before broadSearch"<<endInfo;
-			if( !contactSearch_().broadSearch(
-					ppContactList_(),
-					pwContactList_()) )
-			{
-				fatalErrorInFunction<<
-				"unable to perform broadSearch.\n";
-				fatalExit;
-			}
-
-			//Info<<" before broadSearch"<<endInfo;
-
-
-			if(this->contactSearch_().ppPerformedBroadSearch())
-			{
-				//Info<<" before afterBroadSearch"<<endInfo;
-				ppContactList_().afterBroadSearch();
-				//Info<<" after afterBroadSearch"<<endInfo;
-			}
-
-			if(this->contactSearch_().pwPerformedBroadSearch())
-			{
-				//Info<<" before pwContactList_().afterBroadSearch()"<<endInfo;
-				pwContactList_().afterBroadSearch();
-				//Info<<" after pwContactList_().afterBroadSearch()"<<endInfo;
-			}
-		}
-//Info<<"after contact search"<<endInfo;
-
-		if( sphParticles_.numActive()<=0)return true;
-//Info<<"before sphereSphereInteraction "<<endInfo;
-		ppInteractionTimer_.start();
-			sphereSphereInteraction();
-		ppInteractionTimer_.end();
-//Info<<"after sphereSphereInteraction "<<endInfo;
-
-//Info<<"before sphereWallInteraction "<<endInfo;
-		pwInteractionTimer_.start();
-			sphereWallInteraction();
-		pwInteractionTimer_.end();
-//Info<<"after sphereWallInteraction "<<endInfo;
-		
-		return true;
-	}
-
-
-	bool afterIteration() override
-	{
-		return true;
-	}
-
-
-	bool update(const eventMessage& msg)override
-	{
-		// it requires not action regarding any changes in the 
-		// point structure 
-		return true;
-	}
-
-	bool sphereSphereInteraction();
-
-	bool sphereWallInteraction();
+	/// Check for changes in the point structures. (overriden from observer)
+	bool hearChanges(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+		const anyList& varList)override;
+	
+	
 };
 
 

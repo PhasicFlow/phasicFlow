@@ -19,7 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "contactSearch.hpp"
-
+#include "streams.hpp"
 
 
 pFlow::contactSearch::contactSearch(
@@ -29,11 +29,12 @@ pFlow::contactSearch::contactSearch(
  	const geometry& geom,
  	Timers& timers)
 :
-	interactionBase(prtcl, geom),
-	domain_(domain),
-	dict_(dict),
-	sphereSphereTimer_("particle-particle contact search", &timers),
-	sphereWallTimer_("particle-wall contact search", &timers)
+	domainBox_(domain),
+	particles_(prtcl),
+	geometry_(geom),
+	ppTimer_("particle-particle contact search", &timers),
+	pwTimer_("particle-wall contact search", &timers),
+	dict_(dict)
 {
 
 }
@@ -46,20 +47,16 @@ pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
  	const geometry& geom,
  	Timers& timers)
 {
+	word baseMethName	= dict.getVal<word>("method");	
 
-	word baseMethName	= dict.getVal<word>("method");
-	word wallMethod 	= dict.getVal<word>("wallMapping");
+	auto model = angleBracketsNames("ContactSearch", baseMethName);
 
-	auto model = angleBracketsNames2("ContactSearch", baseMethName, wallMethod);
-
-
-	REPORT(1)<<"Selecting contact search model . . ."<<endREPORT;
+	REPORT(1)<<"Selecting contact search model . . ."<<END_REPORT;
 	
-
 	if( dictionaryvCtorSelector_.search(model))
 	{
 		auto objPtr = dictionaryvCtorSelector_[model] (dict, domain, prtcl, geom, timers);
-		REPORT(2)<<"Model "<< greenText(model)<<" is created."<<endREPORT;
+		REPORT(2)<<"Model "<< Green_Text(model)<<" is created."<< END_REPORT;
 		return objPtr;
 	}
 	else

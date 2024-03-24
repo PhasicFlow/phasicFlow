@@ -18,119 +18,273 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
-template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::readPointField
+template<class T, class MemorySpace>
+pFlow::pointField<T, MemorySpace>::pointField
 (
-	iIstream& is
-)
-{
-	
-	return FieldType::readField(is, pStruct_.size(), false);
-}
-
-template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::writePointField
-(
-	iOstream& os
-)const
-{
-	return FieldType::write(os);
-}
-
-
-
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>::pointField
-(
-	const pointStructure& pStruct,
-	const T& defVal,
-	bool subscribe
+    const objectFile& objf, 
+	pointStructure& pStruct, 
+	const T& defVal
 )
 :
-	eventObserver(pStruct, subscribe),
-	FieldType(pStruct.capacity(), pStruct.size(), RESERVE()),
+	IOobject
+	(
+		objf,
+		pStruct.ioPattern(),
+		pStruct.owner()
+	),
+	InternalFieldType
+	(
+		objf.name(),
+		pStruct
+	),
+	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
 {
-	// set value 
-	this->fill(defVal);
+    
+    if(IOobject::implyRead())
+    {
+        REPORT(1)<< "Reading field "<< Green_Text(IOobject::name())<<
+        " from "<<IOobject::path()<<END_REPORT;
+    }
+    else
+    {
+        REPORT(1)<< "Creating field "<< Green_Text(IOobject::name())<<END_REPORT;
+    }
+    if( !IOobject::readObject() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
+    }    
+
 }
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>::pointField
+template<class T, class MemorySpace>
+pFlow::pointField<T, MemorySpace>::pointField
 (
-	const pointStructure& pStruct,
-	const T& val,
-	const T& defVal,
-	bool subscribe
+    const objectFile& objf,
+    repository* owner,
+    pointStructure& pStruct,
+    const T& defVal
 )
 :
-	eventObserver(pStruct, subscribe),
-	FieldType(pStruct.capacity(), pStruct.size(), RESERVE()),
+	IOobject
+	(
+		objf,
+		pStruct.ioPattern(),
+		owner
+	),
+	InternalFieldType
+	(
+		objf.name(),
+		pStruct
+	),
+	boundaryFieldList_(pStruct.boundaries(), *this),
 	pStruct_(pStruct),
 	defaultValue_(defVal)
 {
-	this->fill(val);
+    if(IOobject::implyRead())
+    {
+        REPORT(1)<< "Reading field "<< Green_Text(IOobject::name())<<
+        " from "<<IOobject::path()<<END_REPORT;
+    }
+    else
+    {
+        REPORT(1)<< "Creating field "<< Green_Text(IOobject::name())<<END_REPORT;
+    }
+    if( !IOobject::readObject() )
+    {
+        fatalErrorInFunction<<
+        "Error in reading from file "<<IOobject::path()<<endl;
+        fatalExit;
+    }
 }
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>::pointField
+template<class T, class MemorySpace>
+pFlow::pointField<T, MemorySpace>::pointField
 (
-	const pointField& src,
-	bool subscribe
+	const objectFile &objf, 
+	pointStructure &pStruct, 
+	const T& defVal,
+	const T& val
 )
 :
-	eventObserver(src.pStruct(), subscribe),
-	FieldType(src),
-	pStruct_(src.pStruct()),
-	defaultValue_(src.defaultValue_)
-{}
-
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>::pointField(const pointField& src)
-:
-	pointField<VectorField, T, MemorySpace>(src, src.subscribed())
-{}
-
-
-template<template<class, class> class VectorField, class T, class MemorySpace>
-pFlow::pointField<VectorField, T, MemorySpace>& pFlow::pointField<VectorField, T, MemorySpace>::operator = 
-(
-	const pointField& rhs
-)
+	IOobject
+	(
+		objectFile
+		(
+			objf.name(),
+			objf.localPath(),
+			objectFile::READ_NEVER,
+			objf.wFlag()
+		),
+		pStruct.ioPattern(),
+		pStruct.owner()
+	),
+	InternalFieldType
+	(
+		objf.name(),
+		pStruct,
+		val
+	),
+	boundaryFieldList_(pStruct.boundaries(), *this),
+	pStruct_(pStruct),
+	defaultValue_(defVal)
 {
-	if(this == &rhs) return *this;
-	
-	this->VectorField() = rhs.VectorField();
-	return *this;
+
 }
 
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-bool pFlow::pointField<VectorField, T, MemorySpace>::update(const eventMessage& msg)
+ /*
+
+
+
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField
+ (
+     const pointStructure& pStruct,
+     const T& defVal,
+     bool subscribe
+ )
+ :
+     eventObserver(pStruct, subscribe),
+     FieldType(pStruct.capacity(), pStruct.size(), RESERVE()),
+     pStruct_(pStruct),
+     defaultValue_(defVal)
+ {
+     // set value
+     this->fill(defVal);
+ }
+
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField
+ (
+     const pointStructure& pStruct,
+     const T& val,
+     const T& defVal,
+     bool subscribe
+ )
+ :
+     eventObserver(pStruct, subscribe),
+     FieldType(pStruct.capacity(), pStruct.size(), RESERVE()),
+     pStruct_(pStruct),
+     defaultValue_(defVal)
+ {
+     this->fill(val);
+ }
+
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField
+ (
+     const pointField& src,
+     bool subscribe
+ )
+ :
+     eventObserver(src.pStruct(), subscribe),
+     FieldType(src),
+     pStruct_(src.pStruct()),
+     defaultValue_(src.defaultValue_)
+ {}
+
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>::pointField(const pointField& src)
+ :
+     pointField<T, MemorySpace>(src, src.subscribed())
+ {}
+
+
+ template<class T, class MemorySpace>
+ pFlow::pointField<T, MemorySpace>& pFlow::pointField<T, MemorySpace>::operator =
+ (
+     const pointField& rhs
+ )
+ {
+     if(this == &rhs) return *this;
+
+     this->VectorField() = rhs.VectorField();
+     return *this;
+ }
+
+
+ template<class T, class MemorySpace>
+ bool pFlow::pointField<T, MemorySpace>::update(const eventMessage& msg)
+ {
+
+     if( msg.isDeleted() )
+     {
+
+     }
+     else if( msg.isInsert())
+     {
+         const auto newElems = pStruct().insertedPointIndex();
+         //Vector<T> vals( newElems.size(), defaultValue_);
+         return this->insertSetElement(newElems, defaultValue_);
+     }
+
+     if(msg.isRearranged())
+     {
+         auto sortedIndex = pStruct().mortonSortedIndex();
+         this->sortItems(sortedIndex);
+         return true;
+     }
+
+     return true;
+ }*/
+
+template <class T, class MemorySpace>
+bool pFlow::pointField<T, MemorySpace>::readPointField
+(
+    iIstream &is,
+    const IOPattern &iop
+)
 {
- 
-	if( msg.isDeleted() )
+	typename InternalFieldType::FieldTypeHost fRead
+    (
+        InternalFieldType::name(),
+        InternalFieldType::fieldKey()
+    );
+    
+	if( !fRead.read(is, iop))
 	{
-		/*const auto& dp = pStruct_.markedDeletePoints();
-		return this->deleteElement(dp);
-		notImplementedFunction;*/
-	}
-	else if( msg.isInsert())
-	{
-		const auto newElems = pStruct().insertedPointIndex();
-		//Vector<T> vals( newElems.size(), defaultValue_);
-		return this->insertSetElement(newElems, defaultValue_);
+		fatalErrorInFunction<<
+		"Error in reading pointPosition from stream "<< is.name()<<endl;
+		return false;
 	}
 
-	if(msg.isRearranged())
-	{
-		auto sortedIndex = pStruct().mortonSortedIndex();
-		this->sortItems(sortedIndex);
-		return true;
-	}
-	
+	auto thisN = pStruct_.simDomain().initialNumberInThis();
+
+	typename InternalFieldType::FieldTypeHost internal
+    (
+        InternalFieldType::name(),
+        InternalFieldType::fieldKey(),
+        thisN, 
+        thisN, 
+        RESERVE()
+    );
+
+	auto pSpan  = fRead.getSpan(); 
+    auto iSpan  = internal.getSpan();
+    
+    if(!pStruct_.simDomain().initialTransferBlockData(pSpan, iSpan))
+    {
+        fatalErrorInFunction<<
+        "Error in transfering the block data for field "<<
+		InternalFieldType::name()<<endl;
+        return false;
+    }
+
+	this->field_.assignFromHost(internal);
+
 	return true;
 }
 
+template<class T, class MemorySpace>
+bool pFlow::pointField<T, MemorySpace>::writePointField
+(
+	iOstream& os,
+	const IOPattern& iop
+)const
+{
+    return InternalFieldType::write(os, iop);
+}

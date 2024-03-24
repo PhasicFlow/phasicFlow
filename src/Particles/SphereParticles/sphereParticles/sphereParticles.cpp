@@ -19,10 +19,13 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "sphereParticles.hpp"
-#include "setFieldList.hpp"
+#include "systemControl.hpp"
+#include "vocabs.hpp"
 #include "sphereParticlesKernels.hpp"
 
-pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
+
+//#include "setFieldList.hpp"
+/*pFlow::uniquePtr<pFlow::List<pFlow::eventObserver*>> 
 pFlow::sphereParticles::getFieldObjectList()const
 {
 	auto objListPtr = particles::getFieldObjectList();
@@ -78,10 +81,10 @@ bool pFlow::sphereParticles::initializeParticles()
 		static_cast<int32>(shapeName_.size()));
 	
 	return insertSphereParticles(shapeName_, indices, false);
-}
+}*/
 
 
-bool pFlow::sphereParticles::beforeIteration() 
+/*bool pFlow::sphereParticles::beforeIteration() 
 {
 	particles::beforeIteration();
 	
@@ -98,45 +101,19 @@ bool pFlow::sphereParticles::beforeIteration()
 	intPredictTimer_.end();
 
 	return true;
-}
+}*/
 
 
-bool pFlow::sphereParticles::iterate() 
-{
-
-	accelerationTimer_.start();
-	//INFO<<"before accelerationTimer_ "<<endINFO;
-		pFlow::sphereParticlesKernels::acceleration(
-			control().g(),
-			mass().deviceVectorAll(),
-			contactForce().deviceVectorAll(),
-			I().deviceVectorAll(),
-			contactTorque().deviceVectorAll(),
-			pStruct().activePointsMaskD(),
-			accelertion().deviceVectorAll(),
-			rAcceleration().deviceVectorAll()
-			);
-	accelerationTimer_.end();
-	
-	intCorrectTimer_.start();
-	
-		dynPointStruct_.correct(this->dt(), accelertion_);
-	
-		rVelIntegration_().correct(this->dt(), rVelocity_, rAcceleration_);
-	
-	intCorrectTimer_.end();
-	
-	return true;
-}
 
 
-bool pFlow::sphereParticles::afterIteration() 
+
+/*bool pFlow::sphereParticles::afterIteration() 
 {
 	return true;
-}
+}*/
 
 
-bool pFlow::sphereParticles::insertSphereParticles(
+/*bool pFlow::sphereParticles::insertSphereParticles(
 	const wordVector& names,
 	const int32IndexContainer& indices,
 	bool setId
@@ -219,6 +196,63 @@ bool pFlow::sphereParticles::insertSphereParticles(
 
 	return true;
 
+}*/
+
+bool pFlow::sphereParticles::initInertia()
+{
+	
+	using exeSpace = typename realPointField_D::execution_space;
+	using policy = Kokkos::RangePolicy<
+			exeSpace,
+			Kokkos::IndexType<uint32>>;
+	
+	auto [minIndex, maxIndex] = minMax(shapeIndex().internal());		
+
+	if( !spheres_.indexValid(maxIndex) )
+	{
+		fatalErrorInFunction<< 
+		"the maximum value of shapeIndex is "<< maxIndex << 
+		" which is not valid."<<endl;
+		return false;
+	}
+
+	auto aPointsMask 	= dynPointStruct().activePointsMaskDevice();
+	auto aRange 		= aPointsMask.activeRange();
+	
+	auto field_shapeIndex 	= shapeIndex().deviceView();
+	auto field_diameter 	= diameter_.deviceView();
+	auto field_mass 		= mass_.deviceView();
+	auto field_propId 		= propertyId_.deviceView();
+	auto field_I 			= I_.deviceView();
+
+	// get info from spheres shape 
+	realVector_D d("diameter", spheres_.boundingDiameter());
+	realVector_D mass("mass",spheres_.mass());
+	uint32Vector_D propId("propId", spheres_.shapePropertyIds());
+	realVector_D  I("I", spheres_.Inertia());
+
+	auto d_d 		= d.deviceView();
+	auto d_mass 	= mass.deviceView();
+	auto d_propId 	= propId.deviceView();
+	auto d_I 		= I.deviceView();
+		
+	Kokkos::parallel_for(
+		"particles::initInertia",
+		policy(aRange.start(), aRange.end()),
+		LAMBDA_HD(uint32 i)
+		{
+			if(aPointsMask(i))
+			{
+				uint32 index = field_shapeIndex[i];
+				field_I[i] = d_I[index];
+				field_diameter[i] = d_d[index];
+				field_mass[i] = d_mass[index];
+				field_propId[i] = d_propId[index];
+			}
+		});
+	Kokkos::fence();
+	
+	return true;
 }
 
 
@@ -227,78 +261,99 @@ pFlow::sphereParticles::sphereParticles(
 	const property& prop
 )
 :
-	particles(
-		control,
-		control.settingsDict().getValOrSet(
-			"integrationMethod",
-			word("AdamsBashforth3")
-			)
+	particles(control),
+	spheres_
+	(
+		shapeFile__,
+		&control.caseSetup(),
+		prop
+	),
+	propertyId_
+	(
+		objectFile
+		(
+			"propertyId",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER
 		),
-	property_(prop),
-	shapes_(
-		control.caseSetup().emplaceObjectOrGet<sphereShape>(
-			objectFile(
-				sphereShapeFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_NEVER
-				)
-			)
+		dynPointStruct(),
+		0u
+	),
+	diameter_
+	(
+		objectFile(
+			"diameter",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER),
+		dynPointStruct(),
+		0.00000000001
+	),
+	mass_
+	(
+		objectFile(
+			"mass",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER),
+		dynPointStruct(),
+		0.0000000001
+	),
+	I_
+	(
+		objectFile
+		(
+			"I",
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER
 		),
-	I_(
-		this->time().emplaceObject<realPointField_D>(
-			objectFile(
-				"I",
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			static_cast<real>(0.0000000001)
-			)
+		dynPointStruct(),
+		static_cast<real>(0.0000000001)
+	),
+	rVelocity_
+	(
+		objectFile
+		(
+			"rVelocity",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
 		),
-	rVelocity_(
-		this->time().emplaceObject<realx3PointField_D>(
-			objectFile(
-				"rVelocity",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		),
-	rAcceleration_(
-		this->time().emplaceObject<realx3PointField_D>(
-			objectFile(
-				"rAcceleration",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		),
+		dynPointStruct(),
+		zero3
+	),
+	rAcceleration_
+	(
+		objectFile(
+			"rAcceleration",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
+			),
+		dynPointStruct(),
+		zero3
+	),
 	accelerationTimer_(
 		"Acceleration", &this->timers() ),
 	intPredictTimer_(
 		"Integration-predict", &this->timers() ),
 	intCorrectTimer_(
 		"Integration-correct", &this->timers() )
-
 {
-
-	REPORT(1)<<"Creating integration method "<<greenText(this->integrationMethod())
-		  << " for rotational velocity."<<endREPORT;
+	
+	auto intMethod = control.settingsDict().getVal<word>("integrationMethod");
+	REPORT(1)<<"Creating integration method "<<Green_Text(intMethod)
+		  << " for rotational velocity."<<END_REPORT;
 		  
-	rVelIntegration_ = 
-		integration::create(
+	rVelIntegration_ = integration::create
+		(
 			"rVelocity",
-			this->time().integration(),
-			this->pStruct(),
-			this->integrationMethod());
+			dynPointStruct(),
+			intMethod,
+			rVelocity_.field()
+		);
 
 	if( !rVelIntegration_ )
 	{
@@ -307,37 +362,17 @@ pFlow::sphereParticles::sphereParticles(
 		fatalExit;
 	}
 
-	if(rVelIntegration_->needSetInitialVals())
-	{
-		
-		auto [minInd, maxInd] = pStruct().activeRange();
-		int32IndexContainer indexHD(minInd, maxInd);
+	WARNING<<"setFields for rVelIntegration_"<<END_WARNING;
 	
-		auto n = indexHD.size();
-		auto index = indexHD.indicesHost();
-
-		realx3Vector rvel(n,RESERVE());
-		const auto hrVel = rVelocity_.hostVector();
-
-		for(auto i=0; i<n; i++)
-		{
-			rvel.push_back( hrVel[index(i)]);
-		}
-		
-		REPORT(2)<< "Initializing the required vectors for rotational velocity integratoin\n "<<endREPORT;
-		rVelIntegration_->setInitialVals(indexHD, rvel);
-
-	}
-
-	
-	if(!initializeParticles())
+	if(!initInertia())
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 	
 } 
 
-bool pFlow::sphereParticles::update(const eventMessage& msg) 
+/*bool pFlow::sphereParticles::update(const eventMessage& msg) 
 {
 	
 	if(rVelIntegration_->needSetInitialVals())
@@ -350,7 +385,7 @@ bool pFlow::sphereParticles::update(const eventMessage& msg)
 		auto index = indexHD.indicesHost();
 
 		realx3Vector rvel(n,RESERVE());
-		const auto hrVel = rVelocity_.hostVector();
+		const auto hrVel = rVelocity_.hostView();
 
 		for(auto i=0; i<n; i++)
 		{
@@ -362,9 +397,9 @@ bool pFlow::sphereParticles::update(const eventMessage& msg)
 	}	
 
 	return true;
-}
+}*/
 
-bool pFlow::sphereParticles::insertParticles
+/*bool pFlow::sphereParticles::insertParticles
 (
 	const realx3Vector& position,
  	const wordVector&  shapes,
@@ -419,4 +454,73 @@ bool pFlow::sphereParticles::insertParticles
 
 	return true;
 		
+}*/
+
+bool pFlow::sphereParticles::beforeIteration()
+{
+	particles::beforeIteration();
+	intPredictTimer_.start();
+		auto dt = this->dt();
+		dynPointStruct().predict(dt, accelertion());
+		rVelIntegration_().predict(dt,rVelocity_, rAcceleration_);
+	intPredictTimer_.end();
+	
+	return true;
+}
+
+bool pFlow::sphereParticles::iterate() 
+{
+
+	particles::iterate();
+	accelerationTimer_.start();
+		pFlow::sphereParticlesKernels::acceleration(
+			control().g(),
+			mass().deviceViewAll(),
+			contactForce().deviceViewAll(),
+			I().deviceViewAll(),
+			contactTorque().deviceViewAll(),
+			dynPointStruct().activePointsMaskDevice(),
+			accelertion().deviceViewAll(),
+			rAcceleration().deviceViewAll()
+			);
+	accelerationTimer_.end();
+	
+	intCorrectTimer_.start();
+	
+		if(!dynPointStruct().correct(dt(), accelertion()))
+		{
+			return false;
+		}
+		if(!rVelIntegration_().correct(
+			dt(), 
+			rVelocity_, 
+			rAcceleration_))
+		{
+			return false;
+		}
+	
+	intCorrectTimer_.end();
+	
+	return true;
+}
+
+
+pFlow::word pFlow::sphereParticles::shapeTypeName()const
+{
+	return "sphere";
+}
+
+const pFlow::shape &pFlow::sphereParticles::getShapes() const
+{
+    return spheres_;
+}
+
+void pFlow::sphereParticles::boundingSphereMinMax
+(
+	real & minDiam, 
+	real& maxDiam
+)const
+{
+	minDiam = spheres_.minBoundingSphere();
+	maxDiam = spheres_.maxBoundingSphere();
 }

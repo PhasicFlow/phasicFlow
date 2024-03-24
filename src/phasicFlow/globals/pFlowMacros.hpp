@@ -70,7 +70,7 @@ Licence:
 
 #define ForAll(i, container) for(auto i=0; i < container.size(); ++i)
 
-#ifdef USE_STD_PARALLEL_ALG
+#ifdef pFlow_STD_Parallel_Alg
 static inline const bool useStdParallel__ = true;
 #else
 static inline const bool useStdParallel__ = false;

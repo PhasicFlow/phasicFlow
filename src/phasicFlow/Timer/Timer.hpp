@@ -63,15 +63,15 @@ public:
 
 	TypeInfo("Timer");
 
-	Timer(){}
+	Timer() = default;
 
-	Timer(const word name)
+	explicit Timer(const word& name)
 	:
 		name_(name)
 	{}
 
 	
-	Timer(const word name, Timers* parrent);
+	Timer(const word& name, Timers* parrent);
 	
 
 	const word& name()const

@@ -23,21 +23,10 @@ Licence:
 
 #include "KokkosTypes.hpp"
 
-
 #include "types.hpp"
 #include "typeInfo.hpp"
 #include "Vector.hpp"
 
-
-/*
-stores the elemnt of a symetric array in the following order in a 1D vector
-
- 0  1  2  3
-    4  5  6
-       7  8  
-          9
-
-*/
 
 namespace pFlow
 {
@@ -52,6 +41,15 @@ void SWAP(Type &x, Type& y)
 	x = temp;
 }
 
+/*
+stores the elemnt of a symetric array in the following order in a 1D vector
+
+ 0  1  2  3
+    4  5  6
+       7  8  
+          9
+
+*/
 template<typename T, typename MemorySpace=void>
 class symArray
 {
@@ -82,14 +80,14 @@ class symArray
   	using execution_space 	= typename ViewType::execution_space;
 
   	
-protected:
+private:
 
-	uint32 			n_=0;
+	uint32 			n_= 0;
 
 	ViewType 		view_;
 
 
-	constexpr static inline const char* memoerySpaceName()
+	constexpr static const char* memoerySpaceName()
   	{
   		return memory_space::name();
   	}
@@ -97,14 +95,14 @@ protected:
 public:
 
 	// - type info
-	TypeInfoTemplateNV2("symArray", T, memoerySpaceName());
+	TypeInfoTemplateNV111("symArray", T, memoerySpaceName());
 
 	//// constructors 
 	INLINE_FUNCTION_H
 	symArray();
 
 	INLINE_FUNCTION_H
-	symArray(uint32 n)
+	explicit symArray(uint32 n)
 	:
 		symArray("symArray",n)
 	{}
@@ -125,7 +123,7 @@ public:
 	}
 
 	INLINE_FUNCTION_H
-	symArray(word name, Vector<T> src)
+	symArray(word name, const Vector<T>& src)
 	:
 		view_(name)
 	{
@@ -137,19 +135,19 @@ public:
 		}
 	}
 
-	INLINE_FUNCTION_H
+	INLINE_FUNCTION_HD
 	symArray(const symArray&) = default;
 
-	INLINE_FUNCTION_H
+	INLINE_FUNCTION_HD
 	symArray& operator=(const symArray&) = default;
 
-	INLINE_FUNCTION_H
-	symArray(symArray&&) = delete;
+	INLINE_FUNCTION_HD
+	symArray(symArray&&) = default;
 
-	INLINE_FUNCTION_H
-	symArray& operator=(symArray&&) = delete;
+	INLINE_FUNCTION_HD
+	symArray& operator=(symArray&&) = default;
 
-	INLINE_FUNCTION_H
+	INLINE_FUNCTION_HD
 	~symArray()=default;
 
 	
@@ -219,10 +217,10 @@ public:
 		bool write(iOstream& os)const
 		{
 			
-			int32 s = numElem(n_);
-			Vector<T, noConstructAllocator<T>> vecToFile(s);
+			uint32 s = numElem(n_);
+			Vector<T> vecToFile(view_.label(),s);
 			
-			const auto dVec = Kokkos::subview(view_, kPair<int32,int32>(0, s));
+			const auto dVec = Kokkos::subview(view_, Pair<uint32,uint32>(0, s));
 			hostViewType1D<T> mirror(vecToFile.data(), vecToFile.size());
 			Kokkos::deep_copy(mirror,dVec);
 

@@ -44,78 +44,20 @@ Licence:
 };
 
 
-
-#define TypeInfo(tName)  \
-	inline static word TYPENAME() {return tName; } \
-	virtual word typeName() const {return TYPENAME();} 
-
-#define TypeInfoNV(tName)  \
-	inline static word TYPENAME() {return tName; } \
-	word typeName() const {return TYPENAME();} 
-
-
-#define TypeInfoTemplate(tName, Type)										\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+">";} 						\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+">";						\
-	return "noTYPE"; 														\
-	}																		\
-	virtual word typeName() const { return TYPENAME();}
-
-#define TypeInfoTemplate2(tName, Type1, Type2)								\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type1,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+">";}	\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type1>()+","+Type2::TYPENAME()+">";\
-	return "noTYPE"; 														\
-	}																		\
-	virtual word typeName() const { return TYPENAME();}
-
-#define TypeInfoTemplate3(tName, Type1, Type2, Type3)						\
-	inline static word TYPENAME()											\
-	{ 																		\
-		return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+","+Type3::TYPENAME()+">";\
-	}																		\
-	virtual word typeName() const { return TYPENAME();}
-
-// this is the non-virtual version
-#define TypeInfoTemplateNV(tName, Type)										\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+">";} 					\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+">";					\
-	return "noTYPE"; 														\
-	}																		\
-	inline word typeName() const { return TYPENAME();}
-
-
-#define TypeInfoTemplateNV2(tName, Type, tName2)							\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
-	return "noTYPE"; 														\
-	}																		\
-	inline word typeName() const { return TYPENAME();}
-
-
-
-
 namespace pFlow
 {
+	//
+	template<typename T>
+	struct checkStatic
+	{
+		has_static_member(TYPENAME);	
+		
+		static constexpr
+		bool hasMember()
+		{
+			return has_static_member_TYPENAME<T,word(void)>::value;
+		}
+	};
 
 	template <typename T>
 	inline word basicTypeName()
@@ -137,35 +79,194 @@ namespace pFlow
 	template<>
 	inline word basicTypeName<int32>(){ return "int32"; }
 
-	template<>
-	inline word basicTypeName<int16>(){ return "int16"; }
-
-	template<>
+		template<>
 	inline word basicTypeName<int8>(){ return "int8"; }
 
 	template<>
-	inline word basicTypeName<label>(){ return "label"; }
+	inline word basicTypeName<uint64>(){ return "uint64"; }
 
 	template<>
 	inline word basicTypeName<uint32>(){ return "uint32"; }
 
 	template<>
+	inline word basicTypeName<uint8>(){ return "uint8"; }
+
+	template<>
 	inline word basicTypeName<real>(){ return "real"; }
 
+	
+	template<typename T>
+	word constexpr getTypeName()
+	{
 		
+		if constexpr ( checkStatic<T>::hasMember() )
+		{
+			return T::TYPENAME();
+		}else
+		{
+			return basicTypeName<T>();
+		}
+	}
+	template<typename T>
+	word constexpr getTypeName(const T&)
+	{
+		if constexpr ( checkStatic<T>::hasMember() )
+		{
+			return T::TYPENAME();
+		}else
+		{
+			return basicTypeName<T>();
+		}
+	}
+
 	// compare the overriden typeName of object with concrete TYPENAME 
 	// of Type1
 	template <typename Type1, typename Type2>
 	bool checkType(Type2* object)
 	{
-		return word(Type1::TYPENAME()) == object->typeName();
+		return getTypeName<Type1>() == object->typeName();
 	}
 
 	template <typename Type1, typename Type2>
 	bool checkType(Type2& object)
 	{
-		return word(Type1::TYPENAME()) == object.typeName();
+		return getTypeName<Type1>() == object.typeName();
 	}
+}
+
+
+#define TypeInfo(tName)  \
+	inline static word TYPENAME() {return tName; } \
+	virtual word typeName() const {return TYPENAME();} 
+
+#define TypeInfoNV(tName)  \
+	inline static word TYPENAME() {return tName; } \
+	word typeName() const {return TYPENAME();} 
+
+
+#define TypeInfoTemplate11(tName, Type)										\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+">";						\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate12(tName, Type1, Type2)								\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type1>()+","+getTypeName<Type2>()+">";	\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate13(tName, Type1, Type2, Type3)						\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type1>()+","+getTypeName<Type2>()+","+getTypeName<Type3>()+">";\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+// this is the non-virtual version
+#define TypeInfoTemplateNV11(tName, Type)									\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+">"; 					\
+	}																		\
+	inline word typeName() const { return TYPENAME();}
+
+
+#define TypeInfoTemplateNV111(tName, Type, tName2)							\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+","+word(tName2)+">";	\
+	}																		\
+	inline word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate111(tName, Type, tName2)							\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+getTypeName<Type>()+","+word(tName2)+">"; 	\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+
+/*#define TypeInfoTemplate11(tName, Type)										\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
+		{ return word(tName)+"<"+Type::TYPENAME()+">";} 						\
+	else																	\
+		return word(tName)+"<"+basicTypeName<Type>()+">";						\
+	return "noTYPE"; 														\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate12(tName, Type1, Type2)								\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+	if constexpr( has_static_member_TYPENAME<Type1,word(void)>::value) 		\
+		{ return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+">";}	\
+	else																	\
+		return word(tName)+"<"+basicTypeName<Type1>()+","+Type2::TYPENAME()+">";\
+	return "noTYPE"; 														\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate13(tName, Type1, Type2, Type3)						\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+","+Type3::TYPENAME()+">";\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
+// this is the non-virtual version
+#define TypeInfoTemplateNV11(tName, Type)										\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
+		{ return word(tName)+"<"+Type::TYPENAME()+">";} 					\
+	else																	\
+		return word(tName)+"<"+basicTypeName<Type>()+">";					\
+	return "noTYPE"; 														\
+	}																		\
+	inline word typeName() const { return TYPENAME();}
+
+
+#define TypeInfoTemplateNV111(tName, Type, tName2)							\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
+		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
+	else																	\
+		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
+	return "noTYPE"; 														\
+	}																		\
+	inline word typeName() const { return TYPENAME();}
+
+#define TypeInfoTemplate111(tName, Type, tName2)							\
+	has_static_member(TYPENAME);											\
+	inline static word TYPENAME()											\
+	{ 																		\
+	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
+		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
+	else																	\
+		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
+	return "noTYPE"; 														\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}*/
+
+
+
+
+
+
+namespace pFlow
+{
+
+	
 
 
 

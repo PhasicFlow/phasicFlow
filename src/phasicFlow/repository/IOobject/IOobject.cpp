@@ -24,113 +24,148 @@ Licence:
 
 pFlow::IOobject::IOobject
 (
-	const objectFile& objf,
-	const repository* owner,
-	uniquePtr<iObject>&& obj
+    const objectFile&   objf, 
+    const IOPattern&    iop, 
+    repository*   owner
 )
 :
-	IOfileHeader(objf, owner),
-	object_(obj.release())
+	IOfileHeader(objf),
+	ioPattern_(iop),
+    owner_(owner)
 {
-
-	if(!read(this->readWriteHeader()))
-	{
-		fatalErrorInFunction<<
-		"error in reading " << name() << " from path " << path()<<endl;
-		fatalExit;
-	}
+    
+    if(owner_&& !owner->addToRepository(this))
+    {
+        fatalErrorInFunction<<
+        "failed to add object "<< objf.name()<< 
+        " to repository "<< owner->name()<<endl;
+        fatalExit;
+    }
 }
 
+pFlow::IOobject::~IOobject()
+{
+    if(owner_)
+    {
+        owner_->removeFromRepository(this);
+    }
+}
 
-pFlow::IOobject::IOobject
+pFlow::repository* pFlow::IOobject::releaseOwner
 (
-	const objectFile& objf,
-	const repository* owner,
-	uniquePtr<IOobject>&& obj
+    bool fromOwner
 )
-:
-	IOfileHeader(objf, owner),
-	object_( obj->object_.release())
+{   
+    auto* old = owner_;
+    if(old && !fromOwner)
+    {
+        old->removeFromRepository(this);
+    }
+    owner_ = nullptr;
+    return old;
+}
+
+bool pFlow::IOobject::isIncluded(const word& objName)const 
 {
+    if(owner_)
+        return owner_->isIncluded(objName);
+    return false;
 }
 
 
-bool pFlow::IOobject::isObjectValid()const
+bool pFlow::IOobject::isExcluded(const word& objName)const 
 {
-	return object_.get() != nullptr;
+    if(owner_)
+        return owner_->isExcluded(objName);
+    return false;
 }
 
-bool pFlow::IOobject::read(bool rdHdr)
+bool pFlow::IOobject::readObject(bool rdHdr)
 {
-
-	if( implyRead() )
-	{
-		if( rdHdr )
-		{	
-			if( auto ptrIS = inStream(); ptrIS )
-			{
-				if(!readHeader(ptrIS()))return false;
-				ptrIS.reset(nullptr);
-			}
-			else
-			{
-				warningInFunction<<
-				"could not open file " << path() <<endl;
-				return false;
-			}
-		}
-
-		if( auto ptrIS = inStream(); ptrIS )
-		{
-			if(!read(ptrIS(), rdHdr))return false;
-			
-		}
-		else
-		{
-			warningInFunction<<
-			"could not open file " << path() <<endl;
-			return false;
-		}
-	}	
+    if(!implyRead())return true;
 	
+    if( rdHdr && ioPattern().thisCallRead())
+    {	
+        if( auto ptrIS = inStream(); ptrIS )
+        {
+            if(!readHeader(ptrIS()))return false;
+        }
+        else
+        {
+            warningInFunction<<
+            "could not open file " << path() <<endl;
+            return false;
+        }
+    }
+
+    if(ioPattern().thisCallRead())
+    {
+        if( auto ptrIS = inStream(); ptrIS )
+        {
+            if(!readObject(ptrIS(), rdHdr))return false;              
+        }
+        else
+        {
+            warningInFunction<<
+            "could not open file " << path() <<endl;
+            return false;
+        }    
+    }
+		
 	return true;
 }
 
 
-bool pFlow::IOobject::write() const
+bool pFlow::IOobject::writeObject() const
 {
-	if(implyWrite())
+    
+	if(implyWrite()&& ioPattern().thisCallWrite())
 	{
-		if(auto ptrOS = outStream(); ptrOS )
-		{
-			return write(ptrOS());
-		}
-		else
-		{
-			warningInFunction<< 
-			"error in opening file "<< path() <<endl;
-			return false;
-		}
+		
+        if(auto ptrOS = outStream(); ptrOS )
+        {
+            return writeObject(ptrOS());
+        }
+        else
+        {
+            warningInFunction<< 
+            "error in opening file "<< path() <<endl;
+            return false;
+        }
+        
 	}
 
 	return true;
 }
 
 
-bool pFlow::IOobject::read(iIstream& is, bool rdHdr)
+bool pFlow::IOobject::readObject(iIstream& is, bool rdHdr)
 {
-	if(rdHdr)
-	{
-		if(!readHeader(is))return false;
-	}
-	return object_->read_object_t(is);
+	if(rdHdr && 
+        ioPattern().thisCallRead() && 
+        !readHeader(is)) return false;
+	
+    if(ioPattern().thisCallRead())
+    {
+        return read(is, ioPattern());
+    }
+    else
+    {
+        return true;
+    }
+	
 }
 
 
-bool pFlow::IOobject::write(iOstream& os) const
+bool pFlow::IOobject::writeObject(iOstream& os) const
 {
-	if(this->readWriteHeader())
+	if(this->writeHeader() && ioPattern().thisProcWriteHeader())
 		writeHeader(os, typeName());
-	
-	return (object_->write_object_t(os) && writeSeparator(os));
+    
+    if(ioPattern().thisCallWrite())
+	 {   
+        return write(os, ioPattern() );
+     }
+    else
+        return true;
 }

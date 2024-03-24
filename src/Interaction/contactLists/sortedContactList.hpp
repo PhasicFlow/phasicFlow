@@ -53,7 +53,7 @@ protected:
 
 	ViewType1D<ValueType,ExecutionSpace> 	values_;
 
-	int32 									size0_ = 0;
+	uint32 									size0_ = 0;
 
 	ViewType1D<PairType,ExecutionSpace> 	sortedPairs0_;
 
@@ -73,7 +73,7 @@ protected:
 	using rpReFillPairs = Kokkos::RangePolicy<
 		ExecutionSpace,
 		Kokkos::Schedule<Kokkos::Static>,
-		Kokkos::IndexType<int32>,
+		Kokkos::IndexType<uint32>,
 		TagReFillPairs>;
 
 public:
@@ -81,7 +81,7 @@ public:
 	TypeInfoNV("sortedContactList");
 
 
-	sortedContactList(int32 initialSize =1)
+	explicit sortedContactList(uint32 initialSize =1)
 	:
 		SortedPairs(initialSize),
 		values_("values", SortedPairs::capacity()),
@@ -114,31 +114,31 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	ValueType getValue(int32 idx)const
+	ValueType getValue(uint32 idx)const
 	{
 		return values_[idx];
 	}
 
 	INLINE_FUNCTION_HD
-	void setValue(int32 idx, const ValueType& val)const
+	void setValue(uint32 idx, const ValueType& val)const
 	{
 		values_[idx] = val;
 	}
 
 	INLINE_FUNCTION_HD
-	void operator()(TagReFillPairs, int32 idx)const
+	void operator()(TagReFillPairs, uint32 idx)const
 	{
 
-		auto searchLen = max(size0_/1000,10);
-		auto start 	= max(0,idx-searchLen);
-		auto end 	= min(size0_,idx+searchLen);
+		uint32 searchLen = max(size0_/1000u,10u);
+		uint32 start 	= idx-min(searchLen,idx);
+		uint32 end 	= min(size0_,idx+searchLen);
 		auto newPair = this->sortedPairs_[idx];
 		if(	auto idx0 = binarySearch(
 				sortedPairs0_,
 				start,
 				end,
 				newPair);
-				idx0>=0)
+				idx0!=-1)
 		{
 			values_[idx] = values0_[idx0];
 		}
@@ -147,7 +147,7 @@ public:
 			start, 
 			end,
 			newPair);
-			idx0>=0)
+			idx0!=-1)
 		{
 			values_[idx] = values0_[idx0];
 			

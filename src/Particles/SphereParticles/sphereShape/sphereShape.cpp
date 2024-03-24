@@ -19,186 +19,182 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "sphereShape.hpp"
-#include "dictionary.hpp"
-#include "vocabs.hpp"
-#include "streams.hpp"
 
 
-bool pFlow::sphereShape::insertNames
-(
-	const wordVector& names
-)
+bool pFlow::sphereShape::readFromDictionary3()
 {
-	names_.clear();
-	uint32 i=0;
-	for(const auto& nm:names)
-	{
-		if(!names_.insertIf(nm, i))
-		{
-			fatalErrorInFunction<<
-			"  repeated name in the list of sphere names: " << names;
-			return false;
-		}
-		i++;
-	}
-	names_.rehash(0);
-	
-	numShapes_ = names_.size();
-	
-	return true;
-}
 
+	diameters_ = getVal<realVector>("diameters");
 
-bool pFlow::sphereShape::readDictionary
-(
-	const dictionary& dict
-)
-{
-	diameters_ = dict.getVal<realVector>("diameters");
-	materials_ = dict.getVal<wordVector>("materials");
-	auto names = dict.getVal<wordVector>("names");
-
-	if(diameters_.size() != materials_.size() )
+	if(diameters_.size() != numShapes() )
 	{
-		fatalErrorInFunction<<
-		"  number of elements in diameters and properties are not the same in "<< dict.globalName()<<endl;
-		return false;
-	}
-	else if(diameters_.size() != names.size() )
-	{
-		fatalErrorInFunction<<
-		"  number of elements in diameters and names are not the same in "<< dict.globalName()<<endl;
-		return false;
-	}
-
-	if( !insertNames(names) )
-	{
-		fatalErrorInFunction<<
-		"  error in reading dictionary "<< dict.globalName();
+		fatalErrorInFunction<< 
+		" number of elements in diameters in "<< globalName()<<" is not consistent"<<endl;
 		return false;
 	}
 
 	return true;
 }
 
-bool pFlow::sphereShape::writeDictionary
-(
-	dictionary& dict
-)const
+bool pFlow::sphereShape::writeToDict(dictionary& dict)const 
 {
+	
+	if(!shape::writeToDict(dict))return false;
 
-	if( !dict.add("diamters", diameters_) )
+	if( !dict.add("diameters", diameters_) )
 	{
-		fatalErrorInFunction<<  
+		fatalErrorInFunction<<
 		"  Error in writing diameters to dictionary "<< dict.globalName()<<endl;
 		return false;
 	}
 
-	if( !dict.add("properties", materials_) )
-	{
-		fatalErrorInFunction<<
-		"  Error in writing properties to dictionary "<< dict.globalName()<<endl;
-		return false;
-	}
-
-	size_t n = names_.size();
-	wordVector names(n);
-	names.clear();
-	word nm;
-	
-	for(label i=0; i<n; i++)
-	{
-		indexToName(i, nm);
-		names.push_back(nm);
-	}
-
-	if( !dict.add("names", names) )
-	{
-		fatalErrorInFunction<<
-		"  Error in writing names to dictionary "<< dict.globalName()<<endl;
-		return false;
-	}
-
 	return true;
 }
-
-
 
 pFlow::sphereShape::sphereShape
 (
-	const realVector& diameter,
-	const wordVector& property,
-	const wordVector& name
+	const word& fileName,
+	repository* owner,
+	const property& prop
 )
 :
-	diameters_(diameter),
-	materials_(property)
+	shape(fileName, owner, prop)
 {
-	if( !insertNames( name) )
+
+	if(!readFromDictionary3())
 	{
 		fatalExit;
+		fatalErrorInFunction;
 	}
 }
 
-bool pFlow::sphereShape::shapeToDiameter
-(
-	wordVector& names,
-	realVector& diams
-)const
+pFlow::real pFlow::sphereShape::maxBoundingSphere() const
 {
-	diams.clear();
-	uint32 idx;
-	for(const auto& nm:names)
-	{
-		if(!nameToIndex(nm, idx))
-		{
-			fatalErrorInFunction<<
-			"  invalid shape name requested "<< nm <<endl;
-			return false;
-		}
-		diams.push_back(diameters_[idx]);
-	}
-
-	return true;
+    return max(diameters_);
 }
 
-
-bool pFlow::sphereShape::read(iIstream& is)
+pFlow::real pFlow::sphereShape::minBoundingSphere() const
 {
-
-	dictionary sphereDict(sphereShapeFile__, true);
-
-	if( !sphereDict.read(is) )
-	{
-		ioErrorInFile(is.name(), is.lineNumber()) <<
-		"  error in reading dictionray " << sphereShapeFile__ <<" from file. \n";
-		return false;
-	}
-
-	if( !readDictionary(sphereDict) )
-	{
-		return false;
-	}
-
-	return true;
+    return min(diameters_);
 }
 
-bool pFlow::sphereShape::write(iOstream& os)const
+bool pFlow::sphereShape::boundingDiameter(uint32 index, real &bDiam) const
 {
-
-	dictionary sphereDict(sphereShapeFile__, true);
-
-	if( !writeDictionary(sphereDict))
+	if( indexValid(index))
 	{
-		return false;
+		bDiam = diameters_[index];
+		return true;
 	}
+    return false;
+}
 
-	if( !sphereDict.write(os) )
+pFlow::real pFlow::sphereShape::boundingDiameter(uint32 index) const
+{
+    if(indexValid(index))
 	{
-		ioErrorInFile( os.name(), os.lineNumber() )<<
-		"  error in writing dictionray to file. \n";
-		return false;
+		return diameters_[index];
 	}
+	fatalErrorInFunction<<"Invalid index for diameter "<<
+	index<<endl;
+	fatalExit;
+	return 0.0;
+}
 
-	return true;
+pFlow::realVector pFlow::sphereShape::boundingDiameter() const
+{
+    return diameters_;
+}
+
+bool pFlow::sphereShape::mass(uint32 index, real &m) const
+{
+    if( indexValid(index) )
+	{
+		real d = diameters_[index];
+		real rho = indexToDensity(index);
+		m = Pi/6.0*pow(d,3)*rho;
+		return true;
+	}
+	return false;
+}
+
+pFlow::real pFlow::sphereShape::mass(uint32 index) const
+{
+    if(real m; mass(index, m))
+	{
+		return m;
+	}
+	fatalErrorInFunction<<"bad index for mass "<< index<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::realVector pFlow::sphereShape::mass() const
+{
+    return realVector ("mass", Pi/6*pow(diameters_,(real)3.0)*density());
+}
+
+pFlow::realVector pFlow::sphereShape::density()const 
+{
+	auto pids = shapePropertyIds();
+	realVector rho("rho", numShapes());
+	ForAll(i, pids)
+	{
+		rho[i] = properties().density(pids[i]);
+	}
+	return rho;
+}
+
+bool pFlow::sphereShape::Inertia(uint32 index, real &I) const
+{
+	if( indexValid(index) )
+	{
+		I = 0.4 * mass(index) * pow(diameters_[index]/2.0,2.0);
+		return true;
+	}
+    return false;
+}
+
+pFlow::real pFlow::sphereShape::Inertia(uint32 index) const
+{
+	if(real I; Inertia(index, I))
+	{
+		return I;
+	}
+    fatalExit;
+	return 0;
+}
+
+pFlow::realVector pFlow::sphereShape::Inertia() const
+{
+    return realVector("I", (real)0.4*mass()*pow((real)0.5*diameters_,(real)2.0));
+}
+
+bool pFlow::sphereShape::Inertia_xx(uint32 index, real &Ixx) const
+{
+    return Inertia(index,Ixx);
+}
+
+pFlow::real pFlow::sphereShape::Inertial_xx(uint32 index) const
+{
+    return Inertia(index);
+}
+
+bool pFlow::sphereShape::Inertia_yy(uint32 index, real &Iyy) const
+{
+    return Inertia(index,Iyy);
+}
+
+pFlow::real pFlow::sphereShape::Inertial_yy(uint32 index) const
+{
+    return Inertia(index);
+}
+
+bool pFlow::sphereShape::Inertia_zz(uint32 index, real &Izz) const
+{
+    return Inertia(index,Izz);
+}
+
+pFlow::real pFlow::sphereShape::Inertial_zz(uint32 index) const
+{
+    return Inertia(index);
 }

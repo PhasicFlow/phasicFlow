@@ -109,15 +109,15 @@ T maxActive(const pointField<VectorSingle, T, MemorySpace>& pField)
 	{
 		if(len < sizeToSerial__ ) // serial execution instead of lunching parallel execution 
 			return maxActive_serial(
-				pField.deviceVectorAll(),
-				pField.pointFlag().hostVectorAll(),
+				pField.deviceViewAll(),
+				pField.pointFlag().hostViewAll(),
 				static_cast<size_t>(0),
 				len
 				);
 		else
 			return maxActiveH(
-				pField.deviceVectorAll(),
-				pField.pointFlag().hostVectorAll(),
+				pField.deviceViewAll(),
+				pField.pointFlag().hostViewAll(),
 				static_cast<size_t>(0),
 				len
 				);
@@ -125,8 +125,8 @@ T maxActive(const pointField<VectorSingle, T, MemorySpace>& pField)
 	else
 	{
 		return maxActiveD(
-			pField.deviceVectorAll(),
-			pField.pointFlag().deviceVectorAll(),
+			pField.deviceViewAll(),
+			pField.pointFlag().deviceViewAll(),
 			static_cast<size_t>(0),
 			len
 			);
@@ -148,23 +148,23 @@ T maxActive(const pointField<VectorDual, T, MemorySpace>& pField)
 	{
 		if( len < sizeToSerial__)
 			return maxActive_serial(
-				pField.hostVectorAll(),
-				pField.pointFlag().hostVectorAll(),
+				pField.hostViewAll(),
+				pField.pointFlag().hostViewAll(),
 				static_cast<size_t>(0),
 				len
 				);
 		else
 			return maxActiveH(
-				pField.hostVectorAll(),
-				pField.pointFlag().hostVectorAll(),
+				pField.hostViewAll(),
+				pField.pointFlag().hostViewAll(),
 				static_cast<size_t>(0),
 				len
 				);
 	}else
 	{
 		return maxActiveD(
-				pField.deviceVectorAll(),
-				pField.pointFlag().deviceVectorAll(),
+				pField.deviceViewAll(),
+				pField.pointFlag().deviceViewAll(),
 				static_cast<size_t>(0),
 				len
 				);

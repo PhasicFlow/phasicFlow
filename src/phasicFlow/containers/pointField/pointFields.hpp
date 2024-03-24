@@ -30,66 +30,40 @@ namespace pFlow
 {
 
 template<typename T>
-  using pointField_H = pointField<VectorSingle, T, HostSpace>;
+  using pointField_H = pointField<T, HostSpace>;
 
 template<typename T>
-  using pointField_D = pointField<VectorSingle, T>;
-
-template<typename T>
-  using pointField_HD = pointField<VectorDual, T>;
+  using pointField_D = pointField<T>;
 
 
-using int8PointField_D 		= pointField<VectorSingle, int8>;
+using int8PointField_D 		= pointField_D<int8>;
+using int8PointField_H 		= pointField_H<int8>;
 
-using int8PointField_H 		= pointField<VectorSingle, int8, HostSpace>;
+using uint8PointField_D 		= pointField_D<uint8>;
+using uint8PointField_H 		= pointField_H<uint8>;
 
-using int16PointField_D 	= pointField<VectorSingle, int16>;
+using int32PointField_D 		= pointField_D<int32>;
+using int32PointField_H 		= pointField_H<int32>;
 
-using int16PointField_H 	= pointField<VectorSingle, int16, HostSpace>;
+using uint32PointField_D 		= pointField_D<uint32>;
+using uint32PointField_H 		= pointField_H<uint32>;
 
-using int32PointField_D 	= pointField<VectorSingle, int32>;
+using int64PointField_D 		= pointField_D<int64>;
+using int64PointField_H 		= pointField_H<int64>;
 
-using int32PointField_H 	= pointField<VectorSingle, int32, HostSpace>;
+using uint64PointField_D 		= pointField_D<uint64>;
+using uint64PointField_H 		= pointField_H<uint64>;
 
-using int64PointField_D 	= pointField<VectorSingle, int64>;
+using realPointField_D 		= pointField_D<real>;
+using realPointField_H 		= pointField_H<real>;
 
-using int64PointField_H 	= pointField<VectorSingle, int64, HostSpace>;
+using realx3PointField_D 		= pointField_D<realx3>;
+using realx3PointField_H 		= pointField_H<realx3>;
 
-using uint32PointField_D 	= pointField<VectorSingle, uint32>;
+using realx4PointField_D 		= pointField_D<realx4>;
+using realx4PointField_H 		= pointField_H<realx4>;
 
-using uint32PointField_H 	= pointField<VectorSingle, uint32, HostSpace>;
-
-using labelPointField_D 	= pointField<VectorSingle, label>;
-
-using labelPointField_H  	= pointField<VectorSingle, label, HostSpace>;
-
-using realPointField_D 		= pointField<VectorSingle, real>;
-
-using realPointField_H 		= pointField<VectorSingle, real, HostSpace>;
-
-using realx3PointField_D 	= pointField<VectorSingle, realx3> ;
-
-using realx3PointField_H 	= pointField<VectorSingle, realx3, HostSpace>;
-
-using wordPointField_H 		= pointField<VectorSingle, word, HostSpace>;
-
-using int8PointField_HD 	= pointField<VectorDual, int8>;
-
-using int16PointField_HD 	= pointField<VectorDual, int16>;
-
-using int32PointField_HD 	= pointField<VectorDual, int32>;
-
-using int64PointField_HD 	= pointField<VectorDual, int64>;
-
-using uint32PointField_HD 	= pointField<VectorDual, uint32>;
-
-using labelPointField_HD 	= pointField<VectorDual, label>;
-
-using realPointField_HD 	= pointField<VectorDual, real>;
-
-using realx3PointField_HD 	= pointField<VectorDual, realx3>;
-
-using wordPointField 		= pointField<Vector, word, vecAllocator<word>>;
+using wordPointField_H      = pointField_H<word>;
 
 }
 

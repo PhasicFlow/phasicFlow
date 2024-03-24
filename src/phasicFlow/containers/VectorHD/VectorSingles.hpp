@@ -33,10 +33,6 @@ typedef VectorSingle<int8> 				int8Vector_D;
 
 typedef VectorSingle<int8, HostSpace> 	int8Vector_H;
 
-typedef VectorSingle<int16> 			int16Vector_D;
-
-typedef VectorSingle<int16, HostSpace> 	int16Vector_H;
-
 typedef VectorSingle<int32> 			int32Vector_D;
 
 typedef VectorSingle<int32, HostSpace> 	int32Vector_H;
@@ -45,13 +41,17 @@ typedef VectorSingle<int64> 			int64Vector_D;
 
 typedef VectorSingle<int64, HostSpace> 	int64Vector_H;
 
+typedef VectorSingle<uint8> 			uint8Vector_D;
+
+typedef VectorSingle<uint8, HostSpace> 	uint8Vector_H;
+
 typedef VectorSingle<uint32> 			uint32Vector_D;
 
 typedef VectorSingle<uint32, HostSpace> uint32Vector_H;
 
-typedef VectorSingle<label> 			labelVector_D;
+typedef VectorSingle<uint64> 			uint64Vector_D;
 
-typedef VectorSingle<label, HostSpace> 	labelVector_H;
+typedef VectorSingle<uint64, HostSpace> uint64Vector_H;
 
 typedef VectorSingle<real> 				realVector_D;
 
@@ -61,14 +61,6 @@ typedef VectorSingle<realx3> 				realx3Vector_D;
 
 typedef VectorSingle<realx3, HostSpace> 	realx3Vector_H;
 
-typedef VectorSingle<uint16x3> 				uint16x3Vector_D;
-
-typedef VectorSingle<uint16x3, HostSpace> 	uint16x3Vector_H;
-
-typedef VectorSingle<uint32x3> 				uint32x3Vector_D;
-
-typedef VectorSingle<uint32x3, HostSpace> 	uint32x3Vector_H;
-
 typedef VectorSingle<int32x3> 				int32x3Vector_D;
 
 typedef VectorSingle<int32x3, HostSpace> 	int32x3Vector_H;
@@ -76,6 +68,10 @@ typedef VectorSingle<int32x3, HostSpace> 	int32x3Vector_H;
 typedef VectorSingle<int64x3> 				int64x3Vector_D;
 
 typedef VectorSingle<int64x3, HostSpace> 	int64x3Vector_H;
+
+typedef VectorSingle<uint32x3> 				uint32x3Vector_D;
+
+typedef VectorSingle<uint32x3, HostSpace> 	uint32x3Vector_H;
 
 typedef VectorSingle<realx3x3> 				realx3x3Vector_D;
 

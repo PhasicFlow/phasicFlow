@@ -18,7 +18,6 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #include "repository.hpp"
 
 
@@ -33,7 +32,7 @@ pFlow::repository::repository
 	localPath_(localPath),
 	owner_(owner)
 {
-
+    
 	if(owner)
 	{
 		owner->addToRepository(this);
@@ -42,10 +41,20 @@ pFlow::repository::repository
 
 pFlow::repository::~repository()
 {
-	if(owner_)
+	for(auto& objcs: objects_)
+    {
+        objcs.second->releaseOwner(true);
+    }
+    for(auto& reps: repositories_)
+    {
+        reps.second->releaseOwner(true);
+    }
+
+    if(owner_)
 	{
-		owner_->removeRepository(this);
+		owner_->removeFromRepository(this);
 	}
+    
 }
 
 pFlow::word pFlow::repository::name()const
@@ -106,26 +115,57 @@ bool pFlow::repository::addToRepository(repository* rep)
 	return true;
 }	
 
-bool pFlow::repository::removeRepository(repository* rep)
+bool pFlow::repository::removeFromRepository(repository* rep)
 {
 	auto name = rep->name();
 	return repositories_.erase(name) == 1; 
 }
 
+bool pFlow::repository::removeFromRepository(IOobject *io)
+{
+    auto name = io->name();
+	return objects_.erase(name) == 1; 
+    
+}
 
+pFlow::repository *pFlow::repository::releaseOwner(bool fromOwner)
+{
+    auto* old = owner_;
+    if(old && !fromOwner)
+    {
+        old->removeFromRepository(this);
+    }
+    owner_ = nullptr;
+    return old;
+}
+
+bool pFlow::repository::addToRepository(IOobject* io)
+{
+    if( !objects_.insertIf(io->name(), io ) )
+	{
+		warningInFunction<<
+    	"Failed to add object " << io->name() <<
+    	" to repository " << this->name() << 
+    	". It is already in this repository. \n";
+    	return false;
+	}
+
+	return true;
+}
 
 bool pFlow::repository::lookupObjectName(const word& nm)const
 {
 	return objects_.search(nm);
 }
 
-pFlow::word pFlow::repository::lookupObjectTypeName(
+pFlow::word pFlow::repository::lookupObjectTypeName
+(
 	const word& nm
-	)const
+)const
 {
 	if(auto [iter, found] = objects_.findIf(nm); found)
 	{
-		return iter->second.typeName();
+		return iter->second->typeName();
 	}
 	else
 	{
@@ -143,13 +183,11 @@ bool pFlow::repository::globalLookupObjectName
 )const
 {	
 
-	
-	
 	if(!downward)
 	{	
 		// the object to start search and its owner 
-		auto object = this;
-		auto owner = object->owner();
+		auto* object = this;
+		auto* owner = object->owner();
 
 		// get to the top-most repository 
 		while(!owner)
@@ -241,14 +279,15 @@ bool pFlow::repository::write
 ) const
 {
 	
-	for(auto& obj:objects_)
-	{
+	for(const auto& obj:objects_)
+	{		
 		if(verbose)
 		{
-			REPORT(1)<< "Writing to " << obj.second.path()<<endREPORT;
+			if(obj.second->implyWrite())
+				REPORT(1)<< "Writing to " << obj.second->path()<<END_REPORT;
 		}
 		
-		if(!obj.second.write())
+		if(!obj.second->writeObject())
 		{
 			return false;
 		}

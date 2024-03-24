@@ -19,152 +19,70 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "rotatingAxisMotion.hpp"
-#include "dictionary.hpp"
-#include "vocabs.hpp"
 
-
-bool pFlow::rotatingAxisMotion::readDictionary
+void pFlow::rotatingAxisMotion::impl_setTime
 (
-	const dictionary& dict
-)
-{
-
-	auto motionModel = dict.getVal<word>("motionModel");
-
-	if(motionModel != "rotatingAxisMotion")
-	{
-		fatalErrorInFunction<<
-		"  motionModel should be rotatingAxisMotion, but found "
-		 << motionModel <<endl;
-		return false;
-	}
-
-	auto& motionInfo = dict.subDict("rotatingAxisMotionInfo");
-	auto axisNames = motionInfo.dictionaryKeywords();
-	
-	axis_.reserve(axisNames.size()+1);
-	
-	
-	axis_.clear();
-	axisName_.clear();
-
-		
-	for(auto& aName: axisNames)
-	{
-		auto& axDict = motionInfo.subDict(aName);
-		
-		if(auto axPtr = makeUnique<rotatingAxis>(axDict); axPtr)
-		{
-			axis_.push_back(axPtr());
-			axisName_.push_back(aName);
-		}
-		else
-		{
-			fatalErrorInFunction<<
-			"could not read rotating axis from "<< axDict.globalName()<<endl;
-			return false;
-		}
-	}
-
-
-
-	if( !axisName_.search("none") )
-	{
-		axis_.push_back
-		(
-			rotatingAxis(
-				realx3(0.0,0.0,0.0),
-				realx3(1.0,0.0,0.0),
-				0.0
-				)
-		);
-		axisName_.push_back("none");	
-	}
-
-	axis_.syncViews();
-	numAxis_ = axis_.size();
-
-	return true;
-}
-
-bool pFlow::rotatingAxisMotion::writeDictionary
-(
-	dictionary& dict
+	uint32 iter, 
+	real t, 
+	real dt
 )const
 {
-	dict.add("motionModel", "rotatingAxisMotion");
-
-	auto& motionInfo = dict.subDictOrCreate("rotatingAxisMotionInfo");
-	
-	ForAll(i, axis_)
-	{
-		
-		auto& axDict = motionInfo.subDictOrCreate(axisName_[i]);
-		if( !axis_.hostVectorAll()[i].write(axDict))
-		{
-			fatalErrorInFunction<<
-			"  error in writing axis "<< axisName_[i] << " to dicrionary "
-			<< motionInfo.globalName()<<endl;
-			return false;
-		}
-	}
-
-	return true;
+	auto motion = motionComponents_.deviceViewAll();
+	Kokkos::parallel_for(
+		"rotatingAxisMotion::impl_setTime",
+		deviceRPolicyStatic(0, numComponents_),
+		LAMBDA_HD(uint32 i){
+			motion[i].setTime(t);
+		});
+	Kokkos::fence();
 }
 
-pFlow::rotatingAxisMotion::rotatingAxisMotion()
-{}
-
-pFlow::rotatingAxisMotion::rotatingAxisMotion
-(
-	const dictionary& dict
-)
+pFlow::rotatingAxisMotion::rotatingAxisMotion(
+    const objectFile &objf,
+    repository *owner)
+    : fileDictionary(objf, owner)
 {
-	if(! readDictionary(dict) )
+
+	if(! impl_readDictionary(*this) )
 	{
+		fatalErrorInFunction;
 		fatalExit;
 	}
 }
 
-bool pFlow::rotatingAxisMotion::read
+pFlow::rotatingAxisMotion::rotatingAxisMotion
 (
-	iIstream& is
+	const objectFile &objf, 
+	const dictionary &dict, 
+	repository *owner
 )
+:
+	fileDictionary(objf, dict, owner)
 {
-	// create an empty file dictionary
-	dictionary motionInfo(motionModelFile__, true);
-
-	// read dictionary from stream
-	if( !motionInfo.read(is) )
+	if(!impl_readDictionary(*this) )
 	{
-		ioErrorInFile(is.name(), is.lineNumber()) <<
-		"  error in reading dictionray " << motionModelFile__ <<" from file. \n";
-		return false;
+		fatalErrorInFunction;
+		fatalExit;
 	}
-
-	if( !readDictionary(motionInfo) ) return false;
-	
-	return true;
 }
 
 bool pFlow::rotatingAxisMotion::write
 (
-	iOstream& os
-)const
+	iOstream &os, 
+	const IOPattern &iop
+) const
 {
-	// create an empty file dictionary
-	dictionary motionInfo(motionModelFile__, true);
-
-	if( !writeDictionary(motionInfo))
+	// a global dictionary
+	dictionary newDict(fileDictionary::dictionary::name(), true);
+	if( iop.thisProcWriteData() )
 	{
-		return false;
+		if( !this->impl_writeDictionary(newDict) || 
+			!newDict.write(os))
+		{
+			fatalErrorInFunction<<
+			" error in writing to dictionary "<< newDict.globalName()<<endl;
+			return false;
+		}
 	}
-
-	if( !motionInfo.write(os) )
-	{
-		ioErrorInFile( os.name(), os.lineNumber() )<<
-		"  error in writing dictionray to file. \n";
-		return false;
-	}
-	return true;
+    return true;
 }

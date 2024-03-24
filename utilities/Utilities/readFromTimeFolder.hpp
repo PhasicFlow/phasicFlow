@@ -20,7 +20,7 @@ Licence:
 #ifndef __readFromTimeFolder_hpp__
 #define __readFromTimeFolder_hpp__
 
-
+#include "vocabs.hpp"
 #include "repository.hpp"
 #include "pointFields.hpp"
 #include "utilityFunctions.hpp"
@@ -42,7 +42,7 @@ protected:
 public:
 
 
-	readFromTimeFolder(repository& rep);
+	explicit readFromTimeFolder(repository& rep);
 
 	auto path()const
 	{
@@ -65,9 +65,9 @@ public:
 	bool pointFieldGetType(word& typeName)const
 	{
 		word fieldTYPENAME = pointField_H<T>::TYPENAME();
-		word fldType{}, space{};
+		word fldType{};
 		
-		if( !pFlow::utilities::pointFieldGetType(
+		if(word space{};  !pFlow::utilities::pointFieldGetType(
 			fieldTYPENAME, fldType, space) )
 		{
 			fatalErrorInFunction<<
@@ -81,18 +81,19 @@ public:
 	}
 
 	template<typename T>
-	bool pointFieldGetCheckType(word fieldName, word& typeName) const
+	bool pointFieldGetCheckType(word const& fieldName, word& typeName) const
 	{
 		
 		word fieldTYPENAME = pointField_H<T>::TYPENAME();
-		word flType{},fldType{};
-
+		
+		word flType{};
 		if(!pointFieldFileGetType( fieldName, flType))
 		{
 			fatalExit;
 			return false;
 		}
-		
+
+		word fldType{};
 		if( !pointFieldGetType<T>(fldType) )
 		{
 			fatalExit;
@@ -112,7 +113,7 @@ public:
 	}
 
 	template<typename T>
-	pointField_H<T>&  createUniformPointField_H(word name, T value)
+	uniquePtr<pointField_H<T>>  createUniformPointField_H(word const& name, T value)
 	{
 		if( !checkForPointStructure() )
 		{
@@ -120,29 +121,28 @@ public:
 			"cannot find " << pointStructureFile__ << " in repository "<< repository_.name()<<endl;
 			fatalExit;
 		}
+
 		auto& pStruct = repository_.lookupObject<pointStructure>(pointStructureFile__);
 
-		word fType;
-		pointFieldGetType<T>(fType);
-		word newName = name + fType;
 
-		auto& field = repository_.emplaceReplaceObject<pointField_H<T>>(
-			objectFile(
+		auto Ptr = makeUnique<pointField_H<T>>
+		(
+			objectFile
+			(
 				name,
 				"",
 				objectFile::READ_NEVER,
 				objectFile::WRITE_NEVER
-				),
+			),
 			pStruct,
+			T{},
 			value
-			);
-
-		return field;
-
+		);
+		return Ptr;
 	}
 
 	template<typename T>
-	pointField_H<T>& readPointField_H(word name) 
+	uniquePtr<pointField_H<T>> readPointField_H(word const& name) 
 	{
 		if( !checkForPointStructure() )
 		{
@@ -152,23 +152,25 @@ public:
 		}
 		auto& pStruct = repository_.lookupObject<pointStructure>(pointStructureFile__);
 
-		auto& field = repository_.emplaceObjectOrGet<pointField_H<T>>(
-			objectFile(
+		auto Ptr = makeUnique<pointField_H<T>>
+		(
+			objectFile
+			(
 				name,
 				"",
 				objectFile::READ_IF_PRESENT,
 				objectFile::WRITE_ALWAYS
-				),
+			),
 			pStruct,
 			T{}
-			);
+		);
 
-		return field;
+		return Ptr;
 
 	}
 
 	template<typename T>
-	pointField_D<T>& readPointField_D(word name) 
+	uniquePtr<pointField_D<T>> readPointField_D(word const& name) 
 	{
 		if( !checkForPointStructure() )
 		{
@@ -178,18 +180,20 @@ public:
 		}
 		auto& pStruct = repository_.lookupObject<pointStructure>(pointStructureFile__);
 
-		auto& field = repository_.emplaceObjectOrGet<pointField_H<T>>(
-			objectFile(
+		auto Ptr = makeUnique<pointField_D<T>> 
+		(
+			objectFile
+			(
 				name,
 				"",
 				objectFile::READ_IF_PRESENT,
 				objectFile::WRITE_ALWAYS
-				),
+			),
 			pStruct,
 			T{}
-			);
+		);
 
-		return field;
+		return Ptr;
 	}
 
 };

@@ -1,3 +1,4 @@
+#include "rotatingAxis.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -19,13 +20,19 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 INLINE_FUNCTION_HD
-pFlow::realx3 pFlow::rotatingAxis::linTangentialVelocityPoint(const realx3 &p)const
+pFlow::realx3 pFlow::rotatingAxis::linVelocityPoint(const realx3 &p)const
 {
 	
 	if(!inTimeRange()) return {0,0,0};
 
 	realx3 L = p - projectPoint(p);
 	return cross(omega_*unitVector(),L);
+}
+
+INLINE_FUNCTION_HD 
+pFlow::realx3 pFlow::rotatingAxis::transferPoint(const realx3 p, real dt)const
+{
+    return  rotate(p, *this, dt);
 }
 
 INLINE_FUNCTION_HD
@@ -97,7 +104,7 @@ pFlow::realx3 pFlow::rotate(const realx3 &p, const line& ln, real theta)
 }
 
 INLINE_FUNCTION_HD
-void pFlow::rotate(realx3* p, size_t n, const line& ln, real theta)
+void pFlow::rotate(realx3* p, uint32 n, const line& ln, real theta)
 {
 	realx3 nv = ln.unitVector();
 	real cos_tet = cos(theta);
@@ -110,7 +117,7 @@ void pFlow::rotate(realx3* p, size_t n, const line& ln, real theta)
 	// (a(v2+w2) - u( bv + cw - ux - vy - wz)) (1-cos_tet) + x cos_tet + (- cv + bw - wy + vz) sin_tet 
 	realx3 res;
 
-	for(label i=0; i<n; i++ )
+	for(uint32 i=0; i<n; i++ )
 	{
 		res.x_ = (lp1.x_*(v2 + w2) - (nv.x_*(lp1.y_*nv.y_ + lp1.z_*nv.z_ - nv.x_*p[i].x_ - nv.y_*p[i].y_ - nv.z_*p[i].z_)))*(1 - cos_tet) +
 			p[i].x_ * cos_tet +
@@ -133,7 +140,7 @@ void pFlow::rotate(realx3* p, size_t n, const line& ln, real theta)
 }
 
 INLINE_FUNCTION_HD
-void pFlow::rotate(realx3* p, size_t n, const rotatingAxis& ax, real dt)
+void pFlow::rotate(realx3* p, uint32 n, const rotatingAxis& ax, real dt)
 {
 	if(!ax.inTimeRange()) return;
 	
@@ -148,7 +155,7 @@ void pFlow::rotate(realx3* p, size_t n, const rotatingAxis& ax, real dt)
 	// (a(v2+w2) - u( bv + cw - ux - vy - wz)) (1-cos_tet) + x cos_tet + (- cv + bw - wy + vz) sin_tet 
 	realx3 res;
 
-	for(label i=0; i<n; i++ )
+	for(uint32 i=0; i<n; i++ )
 	{
 		res.x_ = (lp1.x_*(v2 + w2) - (nv.x_*(lp1.y_*nv.y_ + lp1.z_*nv.z_ - nv.x_*p[i].x_ - nv.y_*p[i].y_ - nv.z_*p[i].z_)))*(1 - cos_tet) +
 			p[i].x_ * cos_tet +

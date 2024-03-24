@@ -44,22 +44,30 @@ class sphereParticles
 :
 	public particles 
 {
-protected:
+public:
+	using ShapeType = sphereShape;
+private:
 
-	/// reference to material properties
-	const property& 	property_;
+		/// reference to shapes 
+	ShapeType 			spheres_;
 
-	/// reference to shapes 
-	sphereShape& 		shapes_;
+	/// property id on device
+	uint32PointField_D 		propertyId_;
+
+	/// diameter / boundig sphere size of particles on device
+	realPointField_D		diameter_;
+
+	/// mass of particles field 
+	realPointField_D 		mass_;
 
 	/// pointField of inertial of particles 
-	realPointField_D&     	I_;
+	realPointField_D     	I_;
 
 	/// pointField of rotational Velocity of particles on device 
-	realx3PointField_D& 	rVelocity_;
+	realx3PointField_D 	rVelocity_;
 
 	/// pointField of rotational acceleration of particles on device  
-	realx3PointField_D& 	rAcceleration_;	
+	realx3PointField_D 	rAcceleration_;	
 
 	/// rotational velocity integrator 
 	uniquePtr<integration>  rVelIntegration_ = nullptr;
@@ -73,9 +81,9 @@ protected:
 	/// timer for integration computations (correction step)
 	Timer 					intCorrectTimer_;
 
-	bool diameterMassInertiaPropId(const word& shName, real& diam, real& mass, real& I, int8& propIdx);
+	bool initInertia();
 
-	bool initializeParticles();
+	/*bool initializeParticles();
 
 	bool insertSphereParticles(
 		const wordVector& names, 
@@ -83,25 +91,17 @@ protected:
 		bool setId = true);
 
 	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const override;
+	*/
 
 public:
 
 	/// construct from systemControl and property 
-	sphereParticles(systemControl &control, const property& prop);
+	sphereParticles(
+		systemControl &control, 
+		const property& prop);
 
-	/// no copy constructor 
-	sphereParticles(const sphereParticles&) = delete;
 
-	/// move constructor 
-	sphereParticles(sphereParticles&&) = default;
-
-	/// no copy-assignement
-	sphereParticles& operator=(const sphereParticles&) = delete;
-
-	/// move-assignement
-	sphereParticles& operator=(sphereParticles&&) = default;
-
-	virtual ~sphereParticles()=default;
+	~sphereParticles()override=default;
 
 	/**
 	 * Insert new particles in position with specified shapes
@@ -112,17 +112,17 @@ public:
 	 * \param shape shape of new particles
 	 * \param setField initial value of the selected fields for new particles
 	 */
-	bool insertParticles
+	/*bool insertParticles
 	(
 		const realx3Vector& position,
 	 	const wordVector&  shapes,
 	 	const setFieldList& setField
-	) override ;
+	) override ;*/
 
 	/// const reference to shapes object 
-	const auto& shapes()const
+	const auto& spheres()const
 	{
-		return shapes_;
+		return spheres_;
 	}
 
 	/// const reference to inertia pointField
@@ -137,51 +137,75 @@ public:
 		return I_;
 	}
 	
-	const realx3Vector_D rVelocity()const 
+	const auto& rVelocity()const 
 	{	
 		return rVelocity_;
 	}
 
-	const realVector_D& boundingSphere()const override
-	{
-		return this->diameter();
+	auto& rVelocity()
+	{	
+		return rVelocity_;
 	}
 
-	word shapeTypeName() const override
+	bool hearChanges
+	(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+    	const anyList& varList
+	) override
 	{
-		return "sphere";
+		notImplementedFunction;
+		return false;
 	}
 
-	void boundingSphereMinMax(
-		real& minDiam,
-		real& maxDiam )const override
+	
+	const uint32PointField_D& propertyId()const override
 	{
-		shapes_.diameterMinMax(minDiam, maxDiam);
+		return propertyId_;
 	}
-
-	bool update(const eventMessage& msg) override;
 	
 	
-	realx3PointField_D& rAcceleration() override
+	const realPointField_D& diameter()const override
 	{
-		return rAcceleration_;
-	}
-	
-	const realx3PointField_D& rAcceleration() const override
-	{
-		return rAcceleration_;
+		return diameter_;
 	}
 
+
+	const realPointField_D& mass()const override
+	{
+		return mass_;
+	}
+	
 	/// before iteration step 
 	bool beforeIteration() override;
 
 	/// iterate particles 
 	bool iterate() override;	
 
-	/// after iteration step
-	bool afterIteration() override;
 	
+	realx3PointField_D& rAcceleration() override
+	{
+		return rAcceleration_;
+	}
 
+	const realx3PointField_D& rAcceleration() const override
+	{
+		return rAcceleration_;
+	}
+	
+	const realPointField_D& boundingSphere()const override
+	{
+		return diameter();
+	}
+
+	word shapeTypeName()const override;
+	
+	const shape& getShapes()const override;
+
+	
+	void boundingSphereMinMax(real & minDiam, real& maxDiam)const override;
 	
 }; //sphereParticles
 

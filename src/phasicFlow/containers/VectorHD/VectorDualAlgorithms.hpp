@@ -39,11 +39,11 @@ int64 count(const VectorDual<T,MemorySpace>& vec, const T& val)
 {
 	if constexpr (std::is_same<side,HostSide>::value)
 	{
-		return count( vec.hostVectorAll(), static_cast<size_t>(0), vec.size(), val);
+		return count( vec.hostViewAll(), static_cast<size_t>(0), vec.size(), val);
 	}
 	else
 	{
-		return count( vec.deviceVectorAll(), static_cast<size_t>(0), vec.size(), val);
+		return count( vec.deviceViewAll(), static_cast<size_t>(0), vec.size(), val);
 	}
 
 	return -1;
@@ -63,11 +63,11 @@ int64 min(const VectorDual<T,MemorySpace>& vec)
 {
 	if constexpr (std::is_same<side,HostSide>::value)
 	{
-		return min( vec.hostVectorAll(), static_cast<size_t>(0), vec.size());
+		return min( vec.hostViewAll(), static_cast<size_t>(0), vec.size());
 	}
 	else
 	{
-		return min( vec.deviceVectorAll(), static_cast<size_t>(0), vec.size());
+		return min( vec.deviceViewAll(), static_cast<size_t>(0), vec.size());
 	}
 
 	return 0.0;
@@ -87,11 +87,11 @@ int64 max(const VectorDual<T,MemorySpace>& vec)
 {
 	if constexpr (std::is_same<side,HostSide>::value)
 	{
-		return max( vec.hostVectorAll(), static_cast<size_t>(0), vec.size());
+		return max( vec.hostViewAll(), static_cast<size_t>(0), vec.size());
 	}
 	else
 	{
-		return max( vec.deviceVectorAll(), static_cast<size_t>(0), vec.size());
+		return max( vec.deviceViewAll(), static_cast<size_t>(0), vec.size());
 	}
 
 	return 0.0;

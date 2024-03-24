@@ -39,7 +39,7 @@ inline bool pFlow::ListPtr<T>::copy(const ListPtrType& src)
 }
 
 template<typename T>
-T* pFlow::ListPtr<T>::ptr(label i) 
+T* pFlow::ListPtr<T>::ptr(size_t i) 
 {
 
 	if(i >= size() ) return nullptr;	
@@ -53,7 +53,7 @@ T* pFlow::ListPtr<T>::ptr(label i)
 template<typename T>
 const T* pFlow::ListPtr<T>::ptr
 (
-	label i
+	size_t i
 ) const
 {
 
@@ -68,7 +68,7 @@ const T* pFlow::ListPtr<T>::ptr
 template<typename T>
 auto pFlow::ListPtr<T>::pos
 (
-	label i
+	size_t i
 )
 {
 	if(i >= size() ) 
@@ -86,7 +86,7 @@ auto pFlow::ListPtr<T>::pos
 template<typename T>
 auto pFlow::ListPtr<T>::pos
 (
-	label i
+	size_t i
 )const 
 {
 	if(i >= size() ) 
@@ -144,9 +144,9 @@ pFlow::ListPtr<T>& pFlow::ListPtr<T>::operator=
 }
 
 template<typename T>
-T* pFlow::ListPtr<T>::set
+pFlow::uniquePtr<T> pFlow::ListPtr<T>::set
 (
-	label i, T* ptr
+	size_t i, T* ptr
 )
 {
 	uniquePtr<T> uptr(ptr);
@@ -157,8 +157,8 @@ T* pFlow::ListPtr<T>::set
 template<typename T>
 pFlow::uniquePtr<T> pFlow::ListPtr<T>::set
 (
-	label i,
-	uniquePtr<T>& ptr
+	size_t i,
+	uniquePtr<T>&& ptr
 )
 {
 	if( i > size() )
@@ -171,10 +171,9 @@ pFlow::uniquePtr<T> pFlow::ListPtr<T>::set
 
 	auto iter = list_.begin();
 	std::advance(iter, i);
-	auto oldIter = iter;
+	T* oldPtr = *iter;
 	*iter = ptr.release();
-	return *oldIter;
-
+	return uniquePtr<T>(oldPtr);
 }
 
 
@@ -182,7 +181,7 @@ template<typename T>
 template<typename... Args>
 pFlow::uniquePtr<T> pFlow::ListPtr<T>::setSafe
 (
-	label i,
+	size_t i,
 	Args&&... args
 )
 {
@@ -200,7 +199,7 @@ void pFlow::ListPtr<T>::push_back
 }
 
 template<typename T>
-void pFlow::ListPtr<T>::push_back(uniquePtr<T>& ptr)
+void pFlow::ListPtr<T>::push_back(uniquePtr<T>&& ptr)
 {
 	list_.push_back( ptr.release() );
 }
@@ -216,7 +215,7 @@ void pFlow::ListPtr<T>::push_backSafe(Args&&... args)
 template<typename T>
 T& pFlow::ListPtr<T>::operator[]
 (
-	label i
+	size_t i
 )
 {
 	T* p = ptr(i);
@@ -234,7 +233,7 @@ T& pFlow::ListPtr<T>::operator[]
 template<typename T>
 const T& pFlow::ListPtr<T>::operator[]
 (
-	label i
+	size_t i
 ) const
 {
 	const T* p = ptr(i);
@@ -263,7 +262,7 @@ auto pFlow::ListPtr<T>::empty() const
 template<typename T>
 pFlow::uniquePtr<T> pFlow::ListPtr<T>::release
 (
-	label i
+	size_t i
 )
 {
 	auto p = ptr(i);
@@ -271,24 +270,30 @@ pFlow::uniquePtr<T> pFlow::ListPtr<T>::release
 	return p;
 }
 
+
+
 template<typename T>
 void pFlow::ListPtr<T>::clear()
 {
+	
+	int i =0;
 	for( auto iter = list_.begin(); iter != list_.end(); ++iter )
 	{
 		if(*iter != nullptr)
 		{
+	
 			delete *iter;
 			*iter = nullptr;
-		}
+		}	
 	}
+
 	list_.clear();
 }
 
 template<typename T>
 void pFlow::ListPtr<T>::clear
 (
-	label i
+	size_t i
 )
 {
 	T* p = ptr(i);

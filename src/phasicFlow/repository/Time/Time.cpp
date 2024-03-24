@@ -55,12 +55,6 @@ pFlow::Time::Time
 		geometryRepository_,
 		geometryFolder__,
 		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
 	)
 {
 	
@@ -90,18 +84,22 @@ pFlow::Time::Time(
 		geometryRepository_,
 		geometryFolder__,
 		this
-	),
-	integration_
-	(
-		integrationRepository__,
-		integrationFolder__,
-		this
 	)
 {
 	if(!readDictionary(setiingsDict))
 	{
 		fatalExit;
 	}
+}
+
+pFlow::fileSystem pFlow::Time::localPath()const
+{
+    return fileSystem(timeName());
+}
+
+pFlow::fileSystem pFlow::Time::integrationFolder() const
+{
+	return integrationFolder__;
 }
 
 bool pFlow::Time::write
@@ -111,7 +109,7 @@ bool pFlow::Time::write
 {
 	if(outputToFile())
 	{
-		REPORT(0)<<"\nWriting to file at time: "<< cyanText(timeName())<<endREPORT;
+		REPORT(0)<<"\nWriting to file at time: "<< Cyan_Text(timeName())<<END_REPORT;
 		return repository::write(verbose);
 	}
 	return true;

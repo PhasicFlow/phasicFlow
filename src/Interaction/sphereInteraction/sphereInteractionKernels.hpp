@@ -42,7 +42,7 @@ struct ppInteractionFunctor
 	ContactListType   tobeFilled_;
 
 	deviceViewType1D<real>  		diam_;
-	deviceViewType1D<int8> 			propId_;
+	deviceViewType1D<uint32> 		propId_;
 	deviceViewType1D<realx3>  		pos_;
 	deviceViewType1D<realx3>  		lVel_;
 	deviceViewType1D<realx3>  		rVel_;
@@ -55,7 +55,7 @@ struct ppInteractionFunctor
 		ContactForceModel 		forceModel,
 		ContactListType 		tobeFilled,
 		deviceViewType1D<real>  		diam,
-		deviceViewType1D<int8> 			propId,
+		deviceViewType1D<uint32> 		propId,
 		deviceViewType1D<realx3>  		pos,
 		deviceViewType1D<realx3>  		lVel,
 		deviceViewType1D<realx3>  		rVel,
@@ -75,7 +75,7 @@ struct ppInteractionFunctor
 	{}
 
 	INLINE_FUNCTION_HD
-	void operator()(const int32 n)const
+	void operator()(const uint32 n)const
 	{
 		
 		if(!tobeFilled_.isValid(n))return;
@@ -181,14 +181,14 @@ struct pwInteractionFunctor
 	MotionModel  			motionModel_;
 
 	deviceViewType1D<real>  	diam_;
-	deviceViewType1D<int8> 		propId_;
+	deviceViewType1D<uint32>	propId_;
 	deviceViewType1D<realx3>  	pos_;
 	deviceViewType1D<realx3>  	lVel_;
 	deviceViewType1D<realx3>  	rVel_;
 	deviceViewType1D<realx3>	cForce_;
 	deviceViewType1D<realx3>	cTorque_;
-	deviceViewType1D<int8> 		wTriMotionIndex_;
-	deviceViewType1D<int8>      wPropId_;
+	deviceViewType1D<uint32> 	wTriMotionIndex_;
+	deviceViewType1D<uint32>    wPropId_;
 	deviceViewType1D<realx3>    wCForce_;
 	
 
@@ -199,14 +199,14 @@ struct pwInteractionFunctor
 		TraingleAccessor		triangles,
 		MotionModel 			motionModel ,
 		deviceViewType1D<real>  	diam ,
-		deviceViewType1D<int8>  	propId,
+		deviceViewType1D<uint32>  	propId,
 		deviceViewType1D<realx3>   	pos ,
 		deviceViewType1D<realx3>   	lVel,
 		deviceViewType1D<realx3>   	rVel,
 		deviceViewType1D<realx3> 	cForce,
 		deviceViewType1D<realx3> 	cTorque ,
-		deviceViewType1D<int8> 		wTriMotionIndex,
-		deviceViewType1D<int8>      wPropId,
+		deviceViewType1D<uint32> 	wTriMotionIndex,
+		deviceViewType1D<uint32>    wPropId,
 		deviceViewType1D<realx3>    wCForce)
 	:
 		dt_(dt),

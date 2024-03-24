@@ -62,9 +62,9 @@ public:
 		const pointStructure& pStruct()const;
 
 
-		virtual const int32Vector& selectedPoinsts()const = 0;
+		virtual const uint32Vector& selectedPoinsts()const = 0;
 
-		virtual int32Vector& selectedPoinsts() = 0;
+		virtual uint32Vector& selectedPoinsts() = 0;
 
 
 	static

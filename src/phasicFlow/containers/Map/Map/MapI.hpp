@@ -92,7 +92,7 @@ inline iOstream& printKeys(iOstream& os, const uint32Map<T> & m)
 }
 
 template<typename T>
-inline iOstream& printKeys(iOstream& os, const labelMap<T> & m)
+inline iOstream& printKeys(iOstream& os, const uint64Map<T> & m)
 {
 	if (m.empty())
 		return os<<"labelMap is empty"<<endl;

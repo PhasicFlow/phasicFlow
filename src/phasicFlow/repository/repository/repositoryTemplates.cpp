@@ -18,12 +18,14 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+
 template <typename Type1>
-pFlow::word pFlow::repository::reportTypeError (IOobject& object)
+pFlow::word pFlow::repository::reportTypeError(IOobject& object)
 {
 	word err;
-	err = "The requested object " + object.name() + " with type " + Type1::TYPENAME() + ", while the type " +
-	  	object.typeName() + "is found in repository " + this->name();
+	err = "Object " + object.name() + " with type " + Type1::TYPENAME() + 
+    "is requested, while the type " +
+	  	object.typeName() + "is found in repository " + this->name()+".";
 
 	return err;
 }
@@ -34,114 +36,6 @@ bool pFlow::repository::checkForObjectType(IOobject& object)
 	return Type::TYPENAME() == object.typeName();
 }
 
-template<typename T, typename... Args>
-T& pFlow::repository::emplaceObject(const objectFile& objf, Args&&... args)
-{
-	
-	if( auto [iter2, success2] = objects_.findIf(objf.name()); !success2 )
-	{
-		auto ptr = IOobject::make_object_t<T>(std::forward<Args>(args)...);
-		auto [iter, success] = objects_.emplace(std::piecewise_construct,
-					 std::forward_as_tuple(objf.name()),
-					 std::forward_as_tuple(objf, this, std::move(ptr) )
-					 );
-	
-		return iter->second.template getObject<T>();
-	}
-	else
-	{
-		fatalErrorInFunction<<
-		"IOobject " << objf.name() << " already exists in repository " << name() <<endl;
-		fatalExit;
-		return	iter2->second.template getObject<T>();
-		
-	}
-}
-
-template<typename T, typename... Args>
-T& pFlow::repository::emplaceObjectOrGet(const objectFile& objf, Args&&... args)
-{
-
-	if(auto [iter, success] = objects_.findIf(objf.name()); !success )
-	{
-		return emplaceObject<T>(objf, std::forward<Args>(args)... );
-	}
-	else
-	{
-		// type check 
-		if( checkForObjectType<T>( iter->second ) )
-		{
-			return iter->second.template getObject<T>();
-		}
-		else
-		{
-			fatalErrorInFunction<<
-			"  IOobject "<< objf.name() <<" already exist in the repository "<< name() <<
-			". Trying to return the existing object but there is a type mismatch. \n"<<
-			reportTypeError<T>( iter->second );
-			fatalExit;
-			return iter->second.template getObject<T>(); // this is never executed 
-		}
-	}
-}
-
-template<typename T, typename... Args>
-T& pFlow::repository::emplaceReplaceObject(const objectFile& objf, Args&&... args)
-{
-	
-	eraseObject(objf.name());
-
-	auto ptr = IOobject::make_object_t<T>(std::forward<Args>(args)...);
-	auto [iter, success] = objects_.emplace(std::piecewise_construct,
-					 std::forward_as_tuple(objf.name()),
-					 std::forward_as_tuple(objf, this, std::move(ptr) )
-					 );
-	
-	return iter->second.template getObject<T>();
-}
-
-template<typename T>
-T& pFlow::repository::insertReplaceObject(uniquePtr<IOobject>&& ptr )
-{
-	if( !ptr->owner() )
-	{
-		eraseObject(ptr->name());
-		objectFile objf( ptr() );
-		
-		auto [iter, success] = objects_.emplace
-					(
-						std::piecewise_construct,
-					 	std::forward_as_tuple(ptr->name()),
-					 	std::forward_as_tuple(objf, this, std::move(ptr))
-					 );
-		return iter->second.template getObject<T>();
-	}else
-	{
-		return ptr().getObject<T>();
-	}
-}
-
-template<typename T>
-T& pFlow::repository::insertReplaceObject(const objectFile& objf, uniquePtr<IOobject>&& ptr )
-{
-	if( !ptr->owner() )
-	{
-		eraseObject(objf.name());
-		
-		auto [iter, success] = objects_.emplace
-					(
-						std::piecewise_construct,
-					 	std::forward_as_tuple(objf.name()),
-					 	std::forward_as_tuple(objf, this, std::move(ptr))
-					 );
-		return iter->second.template getObject<T>();
-	}else
-	{
-		return ptr().getObject<T>();
-	}
-}
-
-
 template<typename T>
 T& pFlow::repository::lookupObject(const word& name)
 {
@@ -150,14 +44,15 @@ T& pFlow::repository::lookupObject(const word& name)
 
     	if( checkType<T>(iter->second) )
     	{
-    		return iter->second.template getObject<T>();
+    		return static_cast<T&>(*iter->second);
+            
 
     	}else
     	{
     		fatalErrorInFunction << 
-    		reportTypeError<T>(iter->second)<<endl;
+    		reportTypeError<T>(*iter->second)<<endl;
     		fatalExit;
-    		return iter->second.template getObject<T>();
+    		return static_cast<T&>(*iter->second);
     	}
         
     }
@@ -167,6 +62,6 @@ T& pFlow::repository::lookupObject(const word& name)
 		"Object with name " << name << " is not found in repository " << this->name()<<endl <<
 		"list of avaiable objest is \n" << objectNames();
         fatalExit;
-        return iter->second.template getObject<T>();
+        return static_cast<T&>(*iter->second);
     }
 }

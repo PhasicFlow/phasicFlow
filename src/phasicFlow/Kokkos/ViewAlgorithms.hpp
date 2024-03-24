@@ -23,7 +23,9 @@ Licence:
 
 
 #include "numericConstants.hpp"
+#include "Range.hpp"
 #include "KokkosUtilities.hpp"
+
 #include "kokkosAlgorithms.hpp"
 #include "stdAlgorithms.hpp"
 #include "cudaAlgorithms.hpp"
@@ -31,36 +33,25 @@ Licence:
 
 namespace pFlow
 { 	
-
-inline const size_t maxSizeToSerial__ = 64;
-
 template<typename T, typename... properties>
 INLINE_FUNCTION_H
-int32 count(
+uint32 count(
 	const ViewType1D<T, properties...>& view,
-	int32 start,
-	int32 end,
+	uint32 start,
+	uint32 end,
 	const T& val)
 {
+	
 	using ExecutionSpace = typename ViewType1D<T, properties...>::execution_space;
 	
-	int32 numElems = end-start;
+	uint32 numElems = end-start;
 
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			return pFlow::algorithms::STD::count<T,false>(
-				view.data()+start,
-				numElems,
-				val);
-		}
-	}
-
-	return  pFlow::algorithms::KOKKOS::count<T, ExecutionSpace>(
-			view.data()+start,
-			numElems,
-			val);
+	return  pFlow::algorithms::KOKKOS::count<T, ExecutionSpace>
+	(
+		view.data()+start,
+		numElems,
+		val
+	);
 }	
 
 template<typename T, typename... properties>
@@ -68,40 +59,66 @@ INLINE_FUNCTION_H
 void fill
 (
 	ViewType1D<T, properties...>& view,
-	range span,
+	rangeU32 span,
 	T val
 )
 {
-	using ExecutionSpace = typename ViewType1D<T, properties...>::execution_space;
-
-
-	if constexpr( isHostAccessible<ExecutionSpace>())
+	using exe_space = typename ViewType1D<T, properties...>::execution_space;
+	auto subV = Kokkos::subview(view, span.getPair() );
+	if constexpr ( std::is_trivially_copyable_v<T>)
 	{
-		int32 numElems = span.second-span.first;
-		if( numElems<maxSizeToSerial__)
+		Kokkos::deep_copy(subV, val);
+	}
+	else if constexpr( isHostAccessible<exe_space>())
+	{
+		for(auto i=span.start(); i<span.end(); i++ )
 		{
-			pFlow::algorithms::STD::fill<T,false>(
-				view.data()+span.first,
-				numElems,
-				val);
-			return;
+			view[i] = val;
 		}
 	}
-
-	auto subV = Kokkos::subview(view, span);
-	Kokkos::deep_copy(subV, val);
+	else
+	{
+		static_assert("fill is not valid for non-trivially-copyable data type");
+	}
+	
 }
 
 template<typename T, typename... properties>
 void fill
 (
 	ViewType1D<T, properties...>& view,
-	int32 start,
-	int32 end,
+	uint32 start,
+	uint32 end,
 	T val
 )
 {
-	fill(view, range(start,end),val);
+	fill(view, rangeU32(start, end),val);
+}
+
+template<typename T, typename... properties>
+void fill
+(
+	ViewType3D<T, properties...>& view,
+	rangeU32 range1,
+	rangeU32 range2,
+	rangeU32 range3,
+	const T& val
+)
+{
+	static_assert(std::is_trivially_copyable_v<T>, "Not valid type for fill");
+	auto subV = Kokkos::subview(view, range1, range2, range3);
+	Kokkos::deep_copy(subV, val);
+}
+
+template<typename T, typename... properties>
+void fill
+(
+	ViewType3D<T, properties...>& view,
+	const T& val
+)
+{
+	static_assert(std::is_trivially_copyable_v<T>, "Not valid type for fill");
+	Kokkos::deep_copy(view, val);
 }
 
 template<
@@ -109,26 +126,14 @@ template<
 	typename... properties>
 void fillSequence(
 	ViewType1D<Type, properties...>& view,
-	int32 start,
-	int32 end,
+	uint32 start,
+	uint32 end,
 	const Type startVal
 	)
 {
-
+	static_assert(std::is_trivially_copyable_v<Type>, "Not valid type for fill");
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
-	int32 numElems = end-start;
-
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{ 
-			pFlow::algorithms::STD::fillSequence<Type,false>(
-				view.data()+start,
-				numElems,
-				startVal);
-			return ;
-		}
-	}
+	uint32 numElems = end-start;
 
 	pFlow::algorithms::KOKKOS::fillSequence<Type, ExecutionSpace>(
 			view.data()+start,
@@ -144,38 +149,32 @@ template<
 	typename... properties,
 	typename indexType,
 	typename... indexProperties>
-bool fillSelected(
+bool fillSelected
+(
 	ViewType1D<Type, properties...> view,
-	const ViewType1D<indexType, indexProperties...> indices,
-	const int32 numElems,
-	const Type val,
-	typename std::enable_if_t<
-		areAccessible<
-			typename ViewType1D<Type, properties...>::execution_space,
-			typename ViewType1D<indexType, indexProperties...>::memory_space>(),
-		bool> = true )
+	ViewType1D<indexType, indexProperties...> indices,
+	uint32 numElems,
+	Type val
+)
 {
 
-	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
-	
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{ 
-			pFlow::algorithms::STD::fillSelected<Type,indexType,false>(
-				view.data(),
-				indices.data(),
-				numElems,
-				val);
-			return true;
-		}
-	}
+	static_assert(std::is_trivially_copyable_v<Type>, "Not valid type for fillSelected");
+	static_assert(
+      areAccessible<
+			typename ViewType1D<Type, properties...>::execution_space,
+			typename ViewType1D<indexType, indexProperties...>::memory_space>(),
+      "In fillSelected, arguments view and indices must have similar spaces");
 
-	pFlow::algorithms::KOKKOS::fillSelected<Type, indexType, ExecutionSpace>(
-			view.data(),
-			indices.data(),
-			numElems,
-			val);
+	using ExSpace = typename ViewType1D<Type, properties...>::execution_space;
+	using policy = Kokkos::RangePolicy<ExSpace,Kokkos::IndexType<uint32> >;
+
+	Kokkos::parallel_for(
+		"ViewAlgorithms::fillSelected",
+		policy(0,numElems),
+		LAMBDA_HD(uint32 i){
+			//view[indices[i]]= val;
+		});
+	Kokkos::fence();
 
 	return true;
 }
@@ -185,39 +184,21 @@ template<
 	typename... properties,
 	typename indexType,
 	typename... indexProperties>
-	//typename valType> //,
-	//typename... valProperties>
 bool fillSelected(
 	ViewType1D<Type, properties...> view,
 	const ViewType1D<indexType, indexProperties...> indices,
-	const ViewType1D<Type, indexProperties...> vals,
-	const int32 numElems ,
-	typename std::enable_if_t<
-		areAccessible<
+	const ViewType1D<Type, properties...> vals,
+	const uint32 numElems )
+{
+	static_assert(std::is_trivially_copyable_v<Type>, "Not valid type for fillSelected");
+	static_assert(
+      areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
 			typename ViewType1D<indexType, indexProperties...>::memory_space>(),
-		bool> = true )
-{
+      "In fillSelected arguments view and indices must have similar spaces");
 
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
 	
-
-
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{ 
-			pFlow::algorithms::STD::fillSelected<Type,indexType,false>(
-				view.data(),
-				indices.data(),
-				vals.data(),
-				numElems
-				);
-			return true;
-		}
-	}
-
-
 	pFlow::algorithms::KOKKOS::fillSelected<Type, indexType, ExecutionSpace>(
 			view.data(),
 			indices.data(),
@@ -233,26 +214,15 @@ template<typename T, typename... properties>
 INLINE_FUNCTION_H
 T min( 
 	const ViewType1D<T, properties...>& view,
-	int32 start,
-	int32 end)
+	uint32 start,
+	uint32 end)
 {
 
 	using ExecutionSpace = typename ViewType1D<T, properties...>::execution_space;
 	
-	int32 numElems = end-start;
-
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			return 
-			pFlow::algorithms::STD::min<T,false>(
-				view.data()+start,
-				numElems);
-		}
-	}
-
-	return  
+	uint32 numElems = end-start;
+ 	
+ 	return 
 	pFlow::algorithms::KOKKOS::min<T, ExecutionSpace>(
 		view.data()+start,
 		numElems);
@@ -262,24 +232,13 @@ template<typename T, typename... properties>
 INLINE_FUNCTION_H
 T max( 
 	const ViewType1D<T, properties...>& view,
-	int32 start,
-	int32 end)
+	uint32 start,
+	uint32 end)
 {
 
 	using ExecutionSpace = typename ViewType1D<T, properties...>::execution_space;
 	
-	int32 numElems = end-start;
-
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			return 
-			pFlow::algorithms::STD::max<T,false>(
-				view.data()+start,
-				numElems);
-		}
-	}
+	uint32 numElems = end-start;
 
 	return  
 	pFlow::algorithms::KOKKOS::max<T, ExecutionSpace>(
@@ -309,15 +268,15 @@ template <
 INLINE_FUNCTION_H
 void copy(
 	const ViewType1D<dType, dProperties...>& dst,
-	int32 dStart,
+	uint32 dStart,
 	const ViewType1D<sType, sProperties...>& src,
-	int32 sStart,
-	int32 sEnd
+	uint32 sStart,
+	uint32 sEnd
 	)
 {
 
-	range sSpan(sStart,sEnd);
-	range dSpan(dStart,dStart+(sEnd-sStart));
+	range32 sSpan(sStart,sEnd);
+	range32 dSpan(dStart,dStart+(sEnd-sStart));
 	
 	auto srcSub = Kokkos::subview(src, sSpan);
 	auto dstSub = Kokkos::subview(dst, dSpan);
@@ -326,19 +285,19 @@ void copy(
 }
 
 template <
-	typename dType,
-	typename sType,
+	typename Type,
 	typename... sProperties>
 INLINE_FUNCTION_H
 void getNth(
-	dType& dst,
-	const ViewType1D<sType, sProperties...>& src,
-	const int32 n
+	Type& dst,
+	const ViewType1D<Type, sProperties...>& src,
+	const uint32 n
 	)
 {
-	range span(n,n+1);
-	auto subV = Kokkos::subview(src, span);
-	hostViewType1D<dType> dstView("getNth",1);
+		
+	auto subV = Kokkos::subview(src, Kokkos::make_pair(n,n+1));
+	hostViewType1D<Type> dstView("getNth",1);
+	//hostViewTypeScalar
 	Kokkos::deep_copy(dstView,subV);
 	dst = *dstView.data();
 }
@@ -348,30 +307,19 @@ template<typename T, typename... properties>
 INLINE_FUNCTION_H
 void sort( 
 	ViewType1D<T, properties...>& view,
-	int32 start,
-	int32 end)
+	uint32 start,
+	uint32 end)
 {
-
 	using ExecutionSpace = typename ViewType1D<T, properties...>::execution_space;
 	
-	int32 numElems = end-start;
+	uint32 numElems = end-start;
 
 	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			pFlow::algorithms::STD::sort<T,false>(
-				view.data()+start,
-				numElems);
-			return;
-		}
-		else
-		{
-			pFlow::algorithms::STD::sort<T,true>(
-				view.data()+start,
-				numElems);
-			return;
-		}
+	{		
+		pFlow::algorithms::STD::sort<T,true>(
+			view.data()+start,
+			numElems);
+		return;
 	}
 
 #ifdef __CUDACC__
@@ -391,33 +339,22 @@ template<typename T, typename... properties, typename CompareFunc>
 INLINE_FUNCTION_H
 void sort( 
 	ViewType1D<T, properties...>& view,
-	int32 start,
-	int32 end,
+	uint32 start,
+	uint32 end,
 	CompareFunc compare)
 {
 
 	using ExecutionSpace = typename ViewType1D<T, properties...>::execution_space;
 	
-	int32 numElems = end-start;
+	uint32 numElems = end-start;
 
 	if constexpr( isHostAccessible<ExecutionSpace>())
 	{
-		if(numElems<maxSizeToSerial__)
-		{
-			pFlow::algorithms::STD::sort<T,CompareFunc,false>(
-				view.data()+start,
-				numElems,
-				compare);
-			return;
-		}
-		else
-		{
-			pFlow::algorithms::STD::sort<T,CompareFunc,true>(
-				view.data()+start,
-				numElems,
-				compare);
-			return;
-		}
+		pFlow::algorithms::STD::sort<T,CompareFunc,true>(
+			view.data()+start,
+			numElems,
+			compare);
+		return;	
 	}
 
 #ifdef __CUDACC__
@@ -441,40 +378,28 @@ template<
 	typename... permProperties>
 void permuteSort(
 	const ViewType1D<Type, properties...>& view,
-	int32 start,
-	int32 end,
+	uint32 start,
+	uint32 end,
 	ViewType1D<permType, permProperties...>& permuteView,
-	int32 permStart,
-	typename std::enable_if_t<
+	uint32 permStart )
+{
+	static_assert(
 		areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
 			typename ViewType1D<permType, permProperties...>::memory_space>(),
-		bool> = true )
-{
+		"In permuteSort, view and permuteView should have the same space");
+
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
 	
-	int32 numElems = end-start;
+	uint32 numElems = end-start;
+		
+	pFlow::algorithms::STD::permuteSort<Type,permType,true>(
+		view.data()+start,
+		permuteView.data()+permStart,
+		numElems);
+	return;
 
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			pFlow::algorithms::STD::permuteSort<Type,permType,false>(
-				view.data()+start,
-				permuteView.data()+permStart,
-				numElems	);
-			return;
-		}
-		else
-		{
-			pFlow::algorithms::STD::permuteSort<Type,permType,true>(
-				view.data()+start,
-				permuteView.data()+permStart,
-				numElems);
-			return;
-		}
-	}
-
+	
 #ifdef __CUDACC__
 	
 	pFlow::algorithms::CUDA::permuteSort(
@@ -488,21 +413,52 @@ void permuteSort(
 
 }
 
+template<typename T>
+INLINE_FUNCTION_HD
+int32 binarySearch_(const T* array, int32 length, const T& val)
+{
+    if(length <= 0) return -1;
+    
+    int low = 0;            
+    int high = length - 1;  
+
+    while (low <= high) 
+    {
+        int mid = low + (high - low)/2;
+        
+        if ( array[mid] > val)
+        { 
+            high = mid - 1;  
+        }
+        else if ( array[mid] < val)
+        { 
+            low = mid + 1;        
+        }
+        else 
+        {           
+            return mid; 
+        }
+    }
+
+    return -1; // val not found in array[0, length)
+}
+
+/// On DEVICE and HOST calls 
 template<
 	typename Type,
 	typename... properties>
 INLINE_FUNCTION_HD
-int32 binarySearch(
+uint32 binarySearch(
 	const ViewType1D<Type, properties...>& view,
-	int32 start,
-	int32 end,
+	uint32 start,
+	uint32 end,
 	const Type& val)
 {
 	
 	if(end<=start)return -1;
 
 	if(auto res = 
-		pFlow::algorithms::binarySearch(view.data()+start,end-start,val); res>=0) {
+		binarySearch_(view.data()+start,end-start,val); res!=-1) {
 		return res+start;
 	}
 	else{
@@ -513,36 +469,29 @@ int32 binarySearch(
 template<
 	typename Type,
 	typename... properties,
-	typename dType,
 	typename... dProperties>
 void exclusiveScan(
 	const ViewType1D<Type, properties...>& view,
-	int32 start,
-	int32 end,
-	ViewType1D<dType, dProperties...>& dView,
-	int32 dStart,
-	typename std::enable_if_t<
+	uint32 start,
+	uint32 end,
+	ViewType1D<Type, dProperties...>& dView,
+	uint32 dStart )
+{
+
+	static_assert
+	(
 		areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
-			typename ViewType1D<dType, dProperties...>::memory_space>(),
-		bool> = true )
-{
+			typename ViewType1D<Type, dProperties...>::memory_space>(),
+		"In exclusiveScan, view and dView should have the same space"
+
+	);
+
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
 	
-	int32 numElems = end-start;
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			pFlow::algorithms::STD::exclusiveScan<Type,dType,false>(
-				view.data()+start,
-				dView.data()+dStart,
-				numElems);
-			return;
-		}
-	}
-
-	pFlow::algorithms::KOKKOS::exclusiveScan<Type,dType,ExecutionSpace>(
+	uint32 numElems = end-start;
+	
+	pFlow::algorithms::KOKKOS::exclusiveScan<Type,ExecutionSpace>(
 		view.data()+start,
 		dView.data()+dStart,
 		numElems);
@@ -552,36 +501,28 @@ void exclusiveScan(
 template<
 	typename Type,
 	typename... properties,
-	typename dType,
 	typename... dProperties>
 void inclusiveScan(
 	const ViewType1D<Type, properties...>& view,
-	int32 start,
-	int32 end,
-	ViewType1D<dType, dProperties...>& dView,
-	int32 dStart,
-	typename std::enable_if_t<
-		areAccessible<
-			typename ViewType1D<Type, properties...>::execution_space,
-			typename ViewType1D<dType, dProperties...>::memory_space>(),
-		bool> = true )
+	uint32 start,
+	uint32 end,
+	ViewType1D<Type, dProperties...>& dView,
+	uint32 dStart)
 {
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
 	
-	int32 numElems = end-start;
-	if constexpr( isHostAccessible<ExecutionSpace>())
-	{
-		if(numElems<maxSizeToSerial__)
-		{
-			pFlow::algorithms::STD::inclusiveScan<Type,dType,false>(
-				view.data()+start,
-				dView.data()+dStart,
-				numElems);
-			return;
-		}
-	}
+	static_assert
+	(
+		areAccessible<
+			typename ViewType1D<Type, properties...>::execution_space,
+			typename ViewType1D<Type, dProperties...>::memory_space>(),
+		"In exclusiveScan, view and dView should have the same space"
+	);
 
-	pFlow::algorithms::KOKKOS::inclusiveScan<Type,dType,ExecutionSpace>(
+
+	uint32 numElems = end-start;
+
+	pFlow::algorithms::KOKKOS::inclusiveScan<Type,ExecutionSpace>(
 		view.data()+start,
 		dView.data()+dStart,
 		numElems);

@@ -21,8 +21,15 @@ Licence:
 
 #include "iOstream.hpp"
 #include "token.hpp"
+#include "error.hpp"
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+pFlow::iOstream& pFlow::iOstream::writeBinaryBlockFlag()
+{
+    notImplementedFunction;
+    return *this;
+}
 
 void pFlow::iOstream::decrIndent()
 {

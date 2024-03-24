@@ -21,37 +21,26 @@ Licence:
 #ifndef __triSurfaceFields_hpp__ 
 #define __triSurfaceFields_hpp__
 
-#include "VectorSingle.hpp"
-#include "VectorDual.hpp"
-#include "triSurfaceField.hpp"
 #include "types.hpp"
+#include "VectorSingle.hpp"
+#include "triSurfaceField.hpp"
+
 
 namespace pFlow
 {
 
-using realTriSurfaceField_D 	= triSurfaceField<VectorSingle, real> ;
+using uint32TriSurfaceField_D 	= triSurfaceField<uint32> ;
 
-using realTriSurfaceField_H 	= triSurfaceField<VectorSingle, real, HostSpace> ;
+using uint32TriSurfaceField_H 	= triSurfaceField<uint32, HostSpace> ;
 
-using realx3TriSurfaceField_D 	= triSurfaceField<VectorSingle, realx3> ;
+using realTriSurfaceField_D 	= triSurfaceField<real> ;
 
-using realx3TriSurfaceField_H 	= triSurfaceField<VectorSingle, realx3, HostSpace> ;
+using realTriSurfaceField_H 	= triSurfaceField<real, HostSpace> ;
 
-using realTriSurfaceField_HD 	= triSurfaceField<VectorDual, real> ;
+using realx3TriSurfaceField_D 	= triSurfaceField<realx3> ;
 
-using realx3TriSurfaceField_HD 	= triSurfaceField<VectorDual, realx3> ;
+using realx3TriSurfaceField_H 	= triSurfaceField<realx3, HostSpace> ;
 
-using realTriSurfaceField 		= triSurfaceField<Vector, real, vecAllocator<real>> ;
-
-using realx3TriSurfaceField 	= triSurfaceField<Vector, realx3, vecAllocator<realx3>> ;
-
-using int8TriSurfaceField_D 	= triSurfaceField<VectorSingle, int8> ;
-
-using int8TriSurfaceField_H 	= triSurfaceField<VectorSingle, int8, HostSpace> ;
-
-using int8TriSurfaceField_HD 	= triSurfaceField<VectorDual, int8> ;
-
-using int8TriSurfaceField 		= triSurfaceField<Vector, int8, vecAllocator<real>> ;
 
 
 }

@@ -24,11 +24,8 @@ Licence:
 #include "types.hpp"
 #include "fileSystem.hpp"
 
-
 namespace pFlow
 {
-
-
 
 class objectFile
 {
@@ -47,28 +44,33 @@ public:
 		WRITE_NEVER
 	};
 
-protected:
 
-	// name of the entity
+private:
+
+	/// Name of the entity
 	word 	name_;
 
-	// read flag
-	readFlag  rFlag_;
+	/// Read flag
+	readFlag  rFlag_ = readFlag::READ_NEVER;
 
-	// write flag
-	writeFlag wFlag_;
+	/// Write flag
+	writeFlag wFlag_ = writeFlag::WRITE_NEVER;
 
-	// local path of entity
-	fileSystem localPath_;
+	/// Local path of entity
+	fileSystem localPath_ = "";
 
-	bool readWriteHeader_ = true;
+	/// Number of bytes used for writing/reading real variable (used for binray)
+	int 		numBytesForReal_ = numBytesForReal__;
+	
+	/// Does the objectFile read & write the header?
+	bool        readWriteHeader_ = true;
 
 public:
 
 
 	
 	// constructors
-	objectFile
+	explicit objectFile
 	(
 		const word& name
 	);
@@ -77,9 +79,9 @@ public:
 	objectFile
 	(
 		const word& name,
-		const fileSystem& localPath,
-		const readFlag&   rf = READ_NEVER,
-		const writeFlag&  wf = WRITE_NEVER,
+		const fileSystem& 	localPath,
+		const readFlag&   	rf = readFlag::READ_NEVER,
+		const writeFlag&  	wf = writeFlag::WRITE_NEVER,
 		bool  rwHeader = true
 	);
 
@@ -92,53 +94,64 @@ public:
 
 	objectFile& operator = (objectFile && rhs) = default;
 
+
 	virtual ~objectFile()=default;
 
-	virtual word name() const
+	virtual 
+	const word& name() const
 	{
 		return name_;
 	}
 
-	virtual fileSystem localPath()const
+	virtual 
+	const fileSystem& localPath()const
 	{
 		return localPath_;
 	}
 
+	inline
 	readFlag rFlag()const
 	{
 		return rFlag_;
 	}
 
+	inline
 	writeFlag wFlag()const
 	{
 		return wFlag_;
 	}
 
+	inline
 	bool isReadAlways()const
 	{
-		return rFlag_ == READ_ALWAYS;
+		return rFlag_ == readFlag::READ_ALWAYS;
 	}
 
+	inline
 	bool isReadNever()const
 	{
-		return rFlag_ == READ_NEVER;
+		return rFlag_ == readFlag::READ_NEVER;
 	}
 
+	inline
 	bool isReadIfPresent()const
 	{
-		return rFlag_ == READ_IF_PRESENT;
+		return rFlag_ == readFlag::READ_IF_PRESENT;
 	}
 
+	inline
 	bool isWriteAlways()const
 	{
-		return wFlag_ == WRITE_ALWAYS;
+		return wFlag_ == writeFlag::WRITE_ALWAYS;
 	}
 
+	inline
 	bool isWriteNever()const
 	{
-		return wFlag_ == WRITE_NEVER;
+		return wFlag_ == writeFlag::WRITE_NEVER;
 	}
 
+	inline 
 	bool readWriteHeader()const
 	{
 		return readWriteHeader_;

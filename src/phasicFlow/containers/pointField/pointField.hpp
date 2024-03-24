@@ -22,147 +22,115 @@ Licence:
 #define __pointField_hpp__
 
 
-#include "Field.hpp"
 #include "pointStructure.hpp"
-#include "error.hpp"
+#include "internalField.hpp"
+#include "boundaryFieldList.hpp"
+
 
 namespace pFlow
 {
 
-
-
-template<template<class, class> class VectorField, class T, class MemorySpace=void>
+template<class T, class MemorySpace=void>
 class pointField
 :
-	public eventObserver,
-	public Field<VectorField, T, MemorySpace>
+	public IOobject,
+	public internalField<T, MemorySpace>
 {
 public:
 	
-	using pointFieldType 	= pointField<VectorField, T, MemorySpace>;
-	
-	using FieldType         = Field<VectorField, T, MemorySpace>;
-  	
-  	using VectorType  		= typename FieldType::VectorType;
+	using PointFieldType 	= pointField<T, MemorySpace>;
 
-	using iterator        	= typename FieldType::iterator;
+	using InternalFieldType = internalField<T, MemorySpace>;
 
-  	using constIterator   	= typename FieldType::constIterator;
+	using boundaryFieldListType = boundaryFieldList<T, MemorySpace>;
 
-	using reference       	= typename FieldType::reference;
-  	
-  	using constReference  	= typename FieldType::constReference;
+	using FieldType 		= typename InternalFieldType::FieldType;
 
-	using valueType       	= typename FieldType::valueType;
-  	
-  	using pointer         	= typename FieldType::pointer;
-  	
-  	using constPointer    	= typename FieldType::constPointer;
+	using VectorType  		= typename InternalFieldType::VectorType;
 
-protected:
+	using memory_space 		= typename InternalFieldType::memory_space;
 
-	////- data members
-		const pointStructure& pStruct_;
+	using execution_space 	= typename InternalFieldType::execution_space;
 
-		// - value when a new item is added to field
+private:
+
+    //// - data members 
+
+        /// @brief list of boundaries
+        boundaryFieldListType       boundaryFieldList_;
+        
+		/// @brief  refrence to point structure 
+		const pointStructure&       pStruct_;
+
+		/// @brief value when a new item is added to field
 		T 	defaultValue_;
 
 
 public:
- 
+	
+	
 	// - type info
-	TypeInfoTemplateNV2("pointField", T, VectorType::memoerySpaceName());
+	TypeInfoTemplate111("pointField", T, VectorType::memoerySpaceName());
 
 	
 	//// - Constructors
 
 		// - construct a field from pointStructure and set defaultValue_ and field value to defVal
-		pointField( const pointStructure& pStruct, const T& defVal, bool subscribe = true);
-
-		// - construct from iIOEntity, pointStructure and a value
-		pointField( const pointStructure& pStruct, const T& val, const T& defVal, bool subscribe = true);
-
-		// - construct from another pointField
-		//   subscribe to events if true
-		pointField( const pointField& src, bool subscribe);
-
-
-		// - copy construct 
-		pointField(const pointField& src);
-
-		// - no move construct
-		pointField(pointField&& src) = delete;
-
-
-		// assignment, only assign the VectorField and preserve other parts of this 
-		pointField& operator = (const pointField& rhs);
-
-		// no move assignment 
-		pointField& operator = (pointField&&) = delete;		
-
-
-		inline uniquePtr<pointFieldType> clone() const
-		{
-			return makeUnique<pointFieldType>(*this);
-		}
-
-		inline pointFieldType* clonePtr()const
-		{
-			return new pointFieldType(*this);
-		}
+		pointField(
+			const objectFile& objf, 
+            pointStructure& pStruct, 
+            const T& defVal);
+		
+		pointField(
+			const objectFile& objf,
+			repository* owner,
+			pointStructure& pStruct,
+			const T& defVal);
+		
+		pointField(
+			const objectFile& objf,
+			pointStructure& pStruct,
+			const T& defVal,
+			const T& val);
+		
+		
 
 	//// - Methods
+	
+		const auto& internal()const
+		{
+			return static_cast<const InternalFieldType&>(*this);
+		}
 
 		// - reference to pointStructure
 		inline const pointStructure& pStruct()const {
 			return pStruct_;
 		}
 
-		// if all points are active 
-		INLINE_FUNCTION_H
-		bool allActive()const {	
-			return pStruct_.allActive();
-		}
-		
-
-		INLINE_FUNCTION_H
-		bool isActive(label i)const {
-			return pStruct_.isActive(i);
-		}
-
-		const auto& pointFlag()const
+		void fill(const T& val)
 		{
-			return pStruct_.pointFlag();
+			InternalFieldType::fillInternal(val);
+			boundaryFieldList_.fill(val);
 		}
-
-		range activeRange()const
-		{
-			return pStruct_.activeRange();
-		}
-
-		// - update the field if any changes occure in pStruct 
-		//   for now it checks for deleted points
-		bool update(const eventMessage& msg);
-
 
 	//// -  IO operations
-		bool readPointField(iIstream& is);
+		bool readPointField(iIstream& is, const IOPattern& iop);
 
-		bool writePointField(iOstream& os)const;
+		bool writePointField(iOstream& os, const IOPattern& iop)const;
 
 
-		bool read(iIstream& is)
+		bool read(iIstream& is, const IOPattern& iop)override
 		{
-			return readPointField(is);
+			return readPointField(is, iop);
 		}
 
-		bool write(iOstream& os)const
+		bool write(iOstream& os, const IOPattern& iop)const override
 		{
-			return writePointField(os);
+			return writePointField(os, iop);
 		}
 };
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
+/*template<template<class, class> class VectorField, class T, class MemorySpace>
 iIstream& operator >> (iIstream & is, pointField<VectorField, T, MemorySpace> & pF )
 {
 	if( !pF.read(is))
@@ -173,12 +141,12 @@ iIstream& operator >> (iIstream & is, pointField<VectorField, T, MemorySpace> & 
 	}
 
 	return is;
-}
+}*/
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
-iOstream& operator << (iOstream& os, const pointField<VectorField, T, MemorySpace>& pF )
+template<class T, class MemorySpace>
+iOstream& operator << (iOstream& os, const pointField<T, MemorySpace>& pF )
 {
-	if(! pF.write(os) )
+	if(! pF.write(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile( os.name(), os.lineNumber() )<<
 		"error in writing pointField into file. \n";
@@ -191,6 +159,6 @@ iOstream& operator << (iOstream& os, const pointField<VectorField, T, MemorySpac
 }
 
 #include "pointField.cpp"
-#include "pointFieldAlgorithms.hpp"
+//#include "pointFieldAlgorithms.hpp"
 
 #endif //  __pointField_hpp__

@@ -35,6 +35,10 @@ namespace pFlow
 
 class dictionary;
 
+/**
+ *  Interface calss for data entry and dictionary  
+ * 
+ */
 class iEntry
 {
 
@@ -42,10 +46,10 @@ public:
 	
 	//// - public static methods
 
-		// - read a keyword from stream 
+		/// read a keyword from stream 
 		static bool readKeyword(iIstream &is, word& keyword, token& tok );
 
-		// - create an entry (dataEntry or dictionary) from stream 
+		/// create an entry (dataEntry or dictionary) from stream 
 		static bool createEntry(dictionary& parDict, iIstream& is, bool hasBlockToken = false);
 
 protected:
@@ -57,41 +61,42 @@ protected:
 
 public:
 	
-
+	/// Type info
 	TypeInfo("iEntry");
 
 	//// - Constructors
 
-		// - empty constructor
+		/// empty constructor
 		iEntry()
 		{}
 
-		// - construct with a keyword
+		/// construct with a keyword
 		iEntry(const word& key)
 		{
 			// this moved here due to a very strange core dumped error!
 			keyword_ = key;
 		}
 
-		// - destructor
+		/// destructor
 		virtual ~iEntry()
 		{}
 
 
 	//// - Methods
 
-		// - return keyword
+		/// return keyword
 		virtual const word& keyword() const
 		{
 			return keyword_;
 		}
 
-		// - return keyword
+		/// return keyword
 		virtual word& keyword()
 		{
 			return keyword_;
 		}
 
+		/// name/keyword of entry 
 		virtual word name()const
 		{
 			return keyword();
@@ -100,49 +105,50 @@ public:
 		// global name of entry, separated with dots
 		virtual word globalName()const = 0;
 
-		// - pointer to this dictionary
+		/// pointer to this dictionary
 		virtual dictionary* dictPtr()
 		{
 			return nullptr;
 		}
 
-		// - const pointer to this dictionary
+		/// const pointer to this dictionary
 		virtual const dictionary* dictPtr() const
 		{
 			return nullptr;
 		}
 
-		// - if this is a dictionary
+		/// if this is a dictionary
 		virtual bool isDictionary() const
 		{
 			return false;
 		}
 
-		// - const ref to parrent dictionary 
+		/// const ref to parrent dictionary 
 		virtual const dictionary& parrentDict() const = 0;
 		
-		// - ref to this dictionary, if it is a dictionary
+		/// ref to this dictionary, if it is a dictionary
 		virtual dictionary& dict() = 0;
 
-		// - const ref to this dictionary, if it is a dicrionary
+		/// const ref to this dictionary, if it is a dicrionary
 		virtual const dictionary& dict() const = 0;
 
-		// clone the object
+		/// clone the object
 		virtual iEntry* clonePtr() const = 0;
 
 		virtual uniquePtr<iEntry> clone() const = 0;
 
-		// clone the object and change its ownership to parDict 
+		/// clone the object and change its ownership to parDict 
 		virtual iEntry* clonePtr(const dictionary& parDict) const = 0;
 
+		/// clone the object and change its ownership to parDict 
 		virtual uniquePtr<iEntry> clone(const dictionary& parDict)const = 0;
 
 	//// - IO operatoins
 
-		// read from stream
+		/// read from stream
 		virtual bool read(iIstream& is) = 0;
 
-		// write to stream
+		/// write to stream
 		virtual bool write(iOstream& os) const =0;
 
 };
@@ -150,11 +156,10 @@ public:
 
 iOstream& operator << (iOstream& os, const iEntry& e);
 
-
 iIstream& operator >> (iIstream& is, iEntry& e);
 
 
-}
+} // pFlow
 
 
 #endif //__iEntry_hpp__

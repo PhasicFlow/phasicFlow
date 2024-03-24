@@ -39,13 +39,15 @@ bool pFlow::setFieldEntry::checkForTypeAndValueAll()const
 	if( 
 		!(
 			checkForTypeAndValue<int8>() ||
-			checkForTypeAndValue<int16>() ||
+			checkForTypeAndValue<uint8>() ||
 			checkForTypeAndValue<int32>() ||
 			checkForTypeAndValue<int64>() ||
 			checkForTypeAndValue<uint32>() ||
-			checkForTypeAndValue<label>() ||
+			checkForTypeAndValue<uint64>() ||
 			checkForTypeAndValue<real>()  ||
-			checkForTypeAndValue<realx3>()
+			checkForTypeAndValue<realx3>() ||
+			checkForTypeAndValue<realx4>() ||
+			checkForTypeAndValue<word>()
 		 )
 	   )
 	{
@@ -57,40 +59,58 @@ bool pFlow::setFieldEntry::checkForTypeAndValueAll()const
 	return true;
 }
 
-void* pFlow::setFieldEntry::setPointFieldDefaultValueNewAll
+pFlow::uniquePtr<pFlow::IOobject> 
+	pFlow::setFieldEntry::setPointFieldDefaultValueNewAll
 (
-	repository& owner,
 	pointStructure& pStruct,
 	bool verbose
 )
 {
-	if( void* res =  setPointFieldDefaultValueNew<int8> (owner, pStruct, verbose) ; res)
+	uniquePtr<IOobject> Ptr = nullptr;
+
+	if(  Ptr =  setPointFieldDefaultValueNew<int8>(pStruct, verbose) ; Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<int16>(owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<uint8>(pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<int32> (owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<int32> (pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<int64> (owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<int64> (pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<uint32> (owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<uint32> (pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<label>(owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<int64>(pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<real>(owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<uint64>(pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueNew<realx3>(owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<real>(pStruct, verbose); Ptr)
 	{
-		return res;
-	}else if(void* res = setPointFieldDefaultValueStdNew<word>(owner, pStruct, verbose); res)
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<realx3>(pStruct, verbose); Ptr)
 	{
-		return res;
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<realx4>(pStruct, verbose); Ptr)
+	{
+		return Ptr;
+	}
+	else if(Ptr = setPointFieldDefaultValueNew<word>(pStruct, verbose); Ptr)
+	{
+		return Ptr;
 	}else
 	{
 		fatalErrorInFunction<< 
@@ -100,46 +120,59 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueNewAll
 
 }
 
-void* pFlow::setFieldEntry::setPointFieldSelectedAll
+bool pFlow::setFieldEntry::setPointFieldSelectedAll
 (
 	repository& owner,
-	int32IndexContainer& selected,
+	uint32IndexContainer& selected,
 	bool verbose
 )
 {
 
-	if( void* res =  setPointFieldSelected<int8> (owner, selected, verbose) ; res)
+	if( setPointFieldSelected<int8> (owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<int16>(owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<uint8>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<int32> (owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<int32>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<int64> (owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<uint32>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<uint32> (owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<int64>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<label>(owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<uint64>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<real>(owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<real>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelected<realx3>(owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<realx3>(owner, selected, verbose))
 	{
-		return res;
-	}else if(void* res = setPointFieldSelectedStd<word>(owner, selected, verbose); res)
+		return true;
+	}
+	else if( setPointFieldSelected<realx4>(owner, selected, verbose))
 	{
-		return res;
-	}else
+		return true;
+	}
+	else if( setPointFieldSelected<word>(owner, selected, verbose))
+	{
+		return true;
+	}
+	else
 	{
 		fatalErrorInFunction<< 
 		"  un-supported data type "<<entry_.firstPart() << " in setField for field " << fieldName() <<endl;
-		return nullptr;
+		return false;
 	}
 
 }

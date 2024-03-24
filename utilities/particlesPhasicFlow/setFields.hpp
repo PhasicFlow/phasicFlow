@@ -39,7 +39,7 @@ bool applySelector(systemControl& control, const pointStructure& pStruct, const 
 
 	auto& selected = selector().selectedPoinsts();
 
-	int32IndexContainer selIndex(selected.data(), selected.size());
+	uint32IndexContainer selIndex(selected.data(), selected.size());
 
 	setFieldList sfList(selDict.subDict("fieldValue"));
 

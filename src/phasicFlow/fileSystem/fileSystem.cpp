@@ -21,7 +21,7 @@ Licence:
 
 #include "fileSystem.hpp"
 #include "error.hpp"
-#include "iOstream.hpp"
+#include "streams.hpp"
 
 
 bool pFlow::fileSystem::checkFileName(const word& name)
@@ -41,6 +41,17 @@ bool pFlow::fileSystem::checkFileName(const word& name)
 }
 
 
+/// From full path 
+pFlow::fileSystem::fileSystem(const word & wPath)
+:
+	path_(wPath),
+	isDir_(std::filesystem::is_directory(path_))
+{
+	if( !isDir_ && !checkFileName(fileName()))
+	{
+		fatalExit;
+	}
+}
 
 pFlow::fileSystem::fileSystem( const word& dir, const word& file)
 {
@@ -74,10 +85,9 @@ pFlow::fileSystem::fileSystem( const char* dir, const char* file)
 
 pFlow::fileSystem::fileSystem( const pathType& path )
 :
-	path_(path)
-{
-	isDir_ = isDirectory(*this);
-}
+	path_(path),
+	isDir_(std::filesystem::is_directory(path_))
+{}
 
 pFlow::fileSystem pFlow::fileSystem::dirPath() const
 {
@@ -175,9 +185,7 @@ bool pFlow::fileSystem::dirExist
 	
 }
 
-bool pFlow::fileSystem::exist
-(
-)const
+bool pFlow::fileSystem::exist()const
 {
 	try
 	{
@@ -267,7 +275,7 @@ pFlow::fileSystem pFlow::operator /
 	const fileSystem& fs2 
 )
 {
-	fileSystem::pathType cmbPath(fs1.dirPath().path_ / fs2.dirPath().path_);
+	fileSystem::pathType cmbPath(fs1.dirPath().path_ / fs2.path_);
 
 	return fileSystem( cmbPath.c_str() );
 
@@ -284,13 +292,13 @@ pFlow::fileSystem pFlow::operator +
 	return path;
 }
 
-pFlow::iOstream& pFlow::operator << (iOstream& os, fileSystem fs)
+pFlow::iOstream& pFlow::operator << (iOstream& os, const fileSystem& fs)
 {
 	os << fs.path_.c_str();
 	return os;
 }
 
-std::ostream& pFlow::operator << (std::ostream& os, fileSystem fs)
+std::ostream& pFlow::operator << (std::ostream& os, const fileSystem& fs)
 {
 	os << fs.path_.c_str();
 	return os;
@@ -321,7 +329,7 @@ pFlow::fileSystemList pFlow::subDirectories
 		auto dOps = std::filesystem::directory_options::skip_permission_denied;
 		for( auto& subPath: std::filesystem::directory_iterator(path.path(), dOps) )
 		{
-			if(isDirectory( subPath.path() ) )
+			if(isDirectory( fileSystem(subPath.path()) ) )
 			{
 				dirs.emplace_back(subPath.path());
 			}

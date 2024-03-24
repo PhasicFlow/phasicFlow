@@ -25,13 +25,13 @@ Licence:
 void pFlow::selectRange::selectAllPointsInRange()
 {
 	// to reduct allocations
-	int32 maxNum = (end_ - begin_)/stride_+2;
+	uint32 maxNum = (end_ - begin_)/stride_+2;
 	
 	selectedPoints_.reserve	(maxNum);
 
 	selectedPoints_.clear();
 		
-	for(int32 i = begin_; i<end_; i+= stride_)
+	for(uint32 i = begin_; i<end_; i+= stride_)
 	{
 		selectedPoints_.push_back(i);
 	}
@@ -49,20 +49,20 @@ pFlow::selectRange::selectRange
 	),
 	begin_
 	(
-		dict.subDict("selectRangeInfo").getVal<int32>("begin")
+		dict.subDict("selectRangeInfo").getVal<uint32>("begin")
 	),
 	end_
 	(
-		dict.subDict("selectRangeInfo").getValOrSet("end", pStruct.size())
+		dict.subDict("selectRangeInfo").getValOrSet<uint32>("end", pStruct.size())
 	),
 	stride_
 	(
-		dict.subDict("selectRangeInfo").getValOrSet("stride", 1)
+		dict.subDict("selectRangeInfo").getValOrSet<uint32>("stride", 1u)
 	)
 {
-	begin_ 	= max(begin_,1);
-	end_ 	= min(end_, static_cast<int32>(pStruct.size()));
-	stride_ = max(stride_,1);
+	begin_ 	= max(begin_,1u);
+	end_ 	= min(end_, static_cast<uint32>(pStruct.size()));
+	stride_ = max(stride_,1u);
 
 	selectAllPointsInRange();
 }

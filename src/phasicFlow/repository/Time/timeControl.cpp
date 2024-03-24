@@ -174,7 +174,7 @@ void pFlow::timeControl::checkForOutputToFile()
 bool pFlow::timeControl::timersReportTime()const
 {
 	if(currentIter_<=1)return false;
-	return timersReportInterval_.isMember(currentTime_, dt_);
+	return timersReportInterval_.isMember(currentTime_, 0.55*dt_);
 }
 
 bool pFlow::timeControl::sortTime()const
@@ -203,7 +203,7 @@ bool pFlow::timeControl::operator ++(int)
 	currentTime_ += dt_;
 	if(screenReport() && !managedExternaly_)
 	{
-		REPORT(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endREPORT;
+		REPORT(0)<<"Time (s): "<<Cyan_Text( currentTimeWord() )<<END_REPORT;
 	}
 	// switch outputToFile_ on/off
 	checkForOutputToFile();

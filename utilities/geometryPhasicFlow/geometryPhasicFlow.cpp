@@ -18,26 +18,15 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "vocabs.hpp"
 #include "systemControl.hpp"
 #include "Wall.hpp"
-#include "Vectors.hpp"
-#include "multiTriSurface.hpp"
-#include "geometryMotion.hpp"
+#include "geometry.hpp"
 #include "commandLine.hpp"
-#include "readControlDict.hpp"
+//#include "readControlDict.hpp"
 
-using pFlow::output;
-using pFlow::endl;
-using pFlow::IOobject;
-using pFlow::dictionary;
-using pFlow::objectFile;
-using pFlow::wordVector;
-using pFlow::Wall;
-using pFlow::geometry;
-using pFlow::realx3x3Vector;
-using pFlow::multiTriSurface;
-using pFlow::commandLine;
+
+using namespace pFlow;
 
 int main( int argc, char* argv[] )
 {
@@ -61,9 +50,8 @@ int main( int argc, char* argv[] )
 
 	#include "setProperty.hpp"
 
-	REPORT(0)<<"\nReading "<<"createGeometryDict"<<" . . ."<<endREPORT;
-	auto objDict = IOobject::make<dictionary>
-	(
+	REPORT(0)<<"\nReading "<<"geometryDict"<<" . . ."<<END_REPORT;
+	auto geometryDict = fileDictionary(
 		objectFile
 		(
 			"geometryDict",
@@ -71,46 +59,68 @@ int main( int argc, char* argv[] )
 			objectFile::READ_ALWAYS,
 			objectFile::WRITE_NEVER
 		),
-		"geometryDict",
-		true
+		nullptr
 	);
-
-	auto& geometryDict = objDict().getObject<dictionary>();
-
+	
 	auto& surfacesDict = geometryDict.subDict("surfaces");
 
 	auto wallsDictName = surfacesDict.dictionaryKeywords();
 
 	
-
-	multiTriSurface surface;
-	wordVector materials;
-	wordVector motion;
+	word mSurfaceName = word("geometryPhasicFlow_")+word(triSurfaceFile__);
+	multiTriSurface surface
+	(
+		objectFile
+		(
+			mSurfaceName,
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_ALWAYS
+		),
+		nullptr
+	);
 	
+	wordVector materials;
+	wordList materialsList;
+
+	wordVector motion;
+	wordList motionList;
+
 	for(auto& name:wallsDictName)
 	{
-		REPORT(1)<<"Creating wall "<<greenText(name)<<" from file dictionary . . . "<<endREPORT;
+		REPORT(1)<<"Creating wall "<<Green_Text(name)<<" from dictionary "<<surfacesDict.globalName() <<END_REPORT;
 		auto wallPtr = Wall::create( surfacesDict.subDict(name));
 		auto& wall = wallPtr();
-		REPORT(1)<<"wall type is "<<greenText(wall.typeName())<<'\n'<<endREPORT;		
+		REPORT(1)<<"wall type is "<<Green_Text(wall.typeName())<<'\n'<<END_REPORT;		
 
-		realx3x3Vector trinalges(wall.name());
-		trinalges = wall.triangles();
-		surface.addTriSurface(wall.name(), trinalges);
+		realx3x3Vector trinalges(wall.name(), wall.triangles());
+		
+		surface.appendSurface(wall.name(), trinalges);
 		materials.push_back(wall.materialName());
+		materialsList.push_back(wall.materialName());
+
 		motion.push_back(wall.motionName());
+		motionList.push_back(wall.motionName());
 	}
 
-	REPORT(1)<<"Selected wall materials are "<<cyanText(materials)<<'\n'<<endREPORT;
-		
-	REPORT(0)<< "\nCreating geometry . . ."<<endREPORT;
-	auto geomPtr = geometry::create(Control, proprties, geometryDict, surface, motion, materials);
-	REPORT(1)<< "geometry type is "<< greenText(geomPtr().typeName())<<endREPORT;
 	
-	REPORT(1)<< "Writing geometry to folder "<< geomPtr().path()<<endREPORT;
-	geomPtr().write();
+	REPORT(1)<<"Selected wall materials are "<<Cyan_Text(materialsList)<<'\n'<<END_REPORT;
+	REPORT(1)<<"Selected wall motion components are "<<Cyan_Text(motionList)<<'\n'<<END_REPORT;
+		
+	REPORT(0)<< "\nCreating geometry . . ."<<END_REPORT;
+	auto geomPtr = geometry::create(
+		Control, 
+		proprties, 
+		surface, 
+		motion, 
+		materials, 
+		geometryDict);
+	
+	REPORT(1)<< "geometry type is "<< Green_Text(geomPtr().typeName())<<END_REPORT;
 
-	REPORT(0)<< greenText("\nFinished successfully.\n");
+	Control.time().write(true);
+
+	REPORT(0)<< Green_Text("\nFinished successfully.\n")<<END_REPORT;
 
 // this should be palced in each main 
 #include "finalize.hpp"
