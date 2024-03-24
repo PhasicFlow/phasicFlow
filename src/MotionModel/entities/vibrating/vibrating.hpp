@@ -126,7 +126,7 @@ public:
 	realx3 transferPoint(const realx3& p, real dt)const
 	{
 		if(!inTimeRange()) return p;
-		return p + 0.5*dt*(velocity0_+velocity_);
+		return p + static_cast<real>(0.5*dt)*(velocity0_+velocity_);
 	}
 
 	// - IO operation

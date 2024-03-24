@@ -63,8 +63,24 @@ void fill
 	T val
 )
 {
+	using exe_space = typename ViewType1D<T, properties...>::execution_space;
 	auto subV = Kokkos::subview(view, span.getPair() );
-	Kokkos::deep_copy(subV, val);
+	if constexpr ( std::is_trivially_copyable_v<T>)
+	{
+		Kokkos::deep_copy(subV, val);
+	}
+	else if constexpr( isHostAccessible<exe_space>())
+	{
+		for(auto i=span.start(); i<span.end(); i++ )
+		{
+			view[i] = val;
+		}
+	}
+	else
+	{
+		static_assert("fill is not valid for non-trivially-copyable data type");
+	}
+	
 }
 
 template<typename T, typename... properties>
@@ -79,6 +95,32 @@ void fill
 	fill(view, rangeU32(start, end),val);
 }
 
+template<typename T, typename... properties>
+void fill
+(
+	ViewType3D<T, properties...>& view,
+	rangeU32 range1,
+	rangeU32 range2,
+	rangeU32 range3,
+	const T& val
+)
+{
+	static_assert(std::is_trivially_copyable_v<T>, "Not valid type for fill");
+	auto subV = Kokkos::subview(view, range1, range2, range3);
+	Kokkos::deep_copy(subV, val);
+}
+
+template<typename T, typename... properties>
+void fill
+(
+	ViewType3D<T, properties...>& view,
+	const T& val
+)
+{
+	static_assert(std::is_trivially_copyable_v<T>, "Not valid type for fill");
+	Kokkos::deep_copy(view, val);
+}
+
 template<
 	typename Type,
 	typename... properties>
@@ -89,7 +131,7 @@ void fillSequence(
 	const Type startVal
 	)
 {
-
+	static_assert(std::is_trivially_copyable_v<Type>, "Not valid type for fill");
 	using ExecutionSpace = typename ViewType1D<Type, properties...>::execution_space;
 	uint32 numElems = end-start;
 
@@ -115,6 +157,8 @@ bool fillSelected
 	Type val
 )
 {
+
+	static_assert(std::is_trivially_copyable_v<Type>, "Not valid type for fillSelected");
 	static_assert(
       areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
@@ -146,7 +190,7 @@ bool fillSelected(
 	const ViewType1D<Type, properties...> vals,
 	const uint32 numElems )
 {
-
+	static_assert(std::is_trivially_copyable_v<Type>, "Not valid type for fillSelected");
 	static_assert(
       areAccessible<
 			typename ViewType1D<Type, properties...>::execution_space,
@@ -404,7 +448,7 @@ template<
 	typename Type,
 	typename... properties>
 INLINE_FUNCTION_HD
-int32 binarySearch(
+uint32 binarySearch(
 	const ViewType1D<Type, properties...>& view,
 	uint32 start,
 	uint32 end,
@@ -414,7 +458,7 @@ int32 binarySearch(
 	if(end<=start)return -1;
 
 	if(auto res = 
-		binarySearch_(view.data()+start,end-start,val); res>=0) {
+		binarySearch_(view.data()+start,end-start,val); res!=-1) {
 		return res+start;
 	}
 	else{

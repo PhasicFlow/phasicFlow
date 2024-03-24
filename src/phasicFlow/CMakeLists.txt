@@ -53,6 +53,7 @@ demComponent/demComponent.cpp
 containers/Vector/Vectors.cpp
 containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
+containers/symArrayHD/symArrays.cpp
 containers/List/anyList/anyList.cpp
 containers/pointField/pointFields.cpp
 containers/triSurfaceField/triSurfaceFields.cpp

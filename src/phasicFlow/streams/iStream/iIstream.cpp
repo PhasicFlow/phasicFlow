@@ -102,10 +102,13 @@ bool pFlow::iIstream::findTokenResume(const word& w)
             " at line number "<< lineNumber()<<endl;
             return false;
         }
-
+        
         if( next.isWord() && isFirstToken)
         {   
-            if(next.wordToken() == w ) return true;   
+            if(next.wordToken() == w ) 
+            {
+                return true;   
+            }
         }
 
         if(next.isEndStatement()|| next.isEndBlock())

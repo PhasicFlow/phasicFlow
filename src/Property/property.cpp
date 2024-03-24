@@ -64,15 +64,17 @@ bool pFlow::property::makeNameIndex()
 {
 	nameIndex_.clear();
 
+
 	uint32 i=0;
 	for(auto const& nm:materials_)
 	{
-		if(!nameIndex_.insertIf(nm, i++))
+		if(!nameIndex_.insertIf(nm, i))
 		{
 			fatalErrorInFunction<<
 			"  repeated material name in the list of materials: " << materials_;
 			return false;
 		}
+		i++;
 	}
 	nameIndex_.rehash(0);
 	numMaterials_ = static_cast<uint32>(materials_.size());
@@ -149,3 +151,33 @@ pFlow::property::property
 
 }
 
+pFlow::property::property
+(
+	const word &fileName, 
+	const fileSystem &dir
+)
+:
+	fileDictionary
+	(
+		objectFile
+		(
+			fileName,
+			dir,
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_NEVER
+		),
+		nullptr
+	)
+{
+	if(!readDictionary())
+	{
+		fatalExit;
+	}
+
+	if(!makeNameIndex())
+	{
+		fatalErrorInFunction<<
+		"error in dictionary "<< globalName()<<endl;
+		fatalExit;
+	}
+}

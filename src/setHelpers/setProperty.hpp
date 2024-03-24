@@ -23,6 +23,6 @@ Licence:
 
 REPORT(0)<<"\nReading proprties . . . "<<END_REPORT;
 
-auto proprties = property(propertyFile__, &Control.caseSetup());
+auto proprties = property(propertyFile__, Control.caseSetup().path());
 
 #endif // __setProperty_hpp__

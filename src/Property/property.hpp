@@ -28,7 +28,6 @@ Licence:
 namespace pFlow
 {
 
-
 /** 
  * property holds the pure properties of materials.
  * 
@@ -51,6 +50,7 @@ private:
 
 		/// rapid mapping from name to index
 		wordHashMap<uint32>		nameIndex_;
+
 
 		/// number of materials
 		uint32 			numMaterials_ = 0;
@@ -78,6 +78,11 @@ public:
 		property(
 			const word& fileName, 
 			repository* owner=nullptr);
+
+		property(
+			const word& fileName,
+			const fileSystem& dir
+		);
 		
 		property(const word& fileName, 
 				const wordVector& materials,
@@ -177,6 +182,8 @@ public:
 				return false;
 			}	
 		}
+
+		
 		
 };
 

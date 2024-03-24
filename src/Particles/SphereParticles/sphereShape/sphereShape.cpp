@@ -166,7 +166,7 @@ pFlow::real pFlow::sphereShape::Inertia(uint32 index) const
 
 pFlow::realVector pFlow::sphereShape::Inertia() const
 {
-    return realVector("I", 0.4*mass()*pow(0.5*diameters_,(real)2.0));
+    return realVector("I", (real)0.4*mass()*pow((real)0.5*diameters_,(real)2.0));
 }
 
 bool pFlow::sphereShape::Inertia_xx(uint32 index, real &Ixx) const

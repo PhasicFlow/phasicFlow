@@ -154,7 +154,7 @@ namespace pFlow
 #define TypeInfoTemplate12(tName, Type1, Type2)								\
 	inline static word TYPENAME()											\
 	{ 																		\
-		return word(tName)+"<"+getTypeName<Type1>()+","+getTypeName<Type2>()+">";}	\
+		return word(tName)+"<"+getTypeName<Type1>()+","+getTypeName<Type2>()+">";	\
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
