@@ -21,8 +21,6 @@ Licence:
 #include "vocabs.hpp"
 #include "systemControl.hpp"
 #include "Wall.hpp"
-#include "Lists.hpp"
-#include "Vectors.hpp"
 #include "geometry.hpp"
 #include "commandLine.hpp"
 //#include "readControlDict.hpp"
@@ -97,7 +95,7 @@ int main( int argc, char* argv[] )
 
 		realx3x3Vector trinalges(wall.name(), wall.triangles());
 		
-		surface.appendTriSurface(wall.name(), trinalges);
+		surface.appendSurface(wall.name(), trinalges);
 		materials.push_back(wall.materialName());
 		materialsList.push_back(wall.materialName());
 
