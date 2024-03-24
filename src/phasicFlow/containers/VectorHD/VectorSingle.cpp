@@ -470,10 +470,8 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     }
     else
     {
-        setSize(srcSize);
+        changeSize(srcSize);
     }
-    
-    
     
     if constexpr( isTriviallyCopyable_ )
     {
@@ -555,10 +553,11 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     {
         reallocateCapacitySize(srcCap, srcSize);
     }
-    else
+    else 
     {
-        setSize(srcSize);
+        changeSize(srcSize);
     }
+    
 
     if constexpr(isTriviallyCopyable_)
     {
@@ -626,7 +625,8 @@ void pFlow::VectorSingle<T, MemorySpace>::append
 	uint32 oldS = size();
 	uint32 newSize = oldS + appSize; 
 
-	setSize(newSize);
+	changeSize(newSize);
+
 	auto appendView = Kokkos::subview(
 		view_,
 		Kokkos::make_pair<uint32>(oldS, newSize));
