@@ -133,8 +133,9 @@ protected:
 			return false;
 		}
 
-		realVector etha_n(nElem);
-		realVector etha_t(nElem);
+		realVector etha_n("etha_n", nElem);
+		realVector etha_t("etha_t", nElem);
+
 		ForAll(i , kn)
 		{
 			etha_n[i] = -2.0*log(en[i])*sqrt(kn[i])/
@@ -144,7 +145,7 @@ protected:
 					sqrt(pow(log(et[i]),2.0)+ pow(Pi,2.0));
 		}
 
-		Vector<linearProperties> prop(nElem);
+		Vector<linearProperties> prop("prop", nElem);
 		ForAll(i,kn)
 		{
 			prop[i] = {kn[i], kt[i], etha_n[i], etha_t[i], mu[i]};
@@ -219,10 +220,10 @@ public:
 	void contactForce
 	(
 		const real dt,
-		const int32 i,
-		const int32 j,
-		const int32 propId_i,
-		const int32 propId_j,
+		const uint32 i,
+		const uint32 j,
+		const uint32 propId_i,
+		const uint32 propId_j,
 		const real Ri,
 		const real Rj,
 		const real ovrlp_n,

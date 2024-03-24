@@ -18,42 +18,32 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __demInteraction_hpp__
-#define __demInteraction_hpp__
+#include "phasicFlowKokkos.hpp"
+#include "cells.hpp"
+#include "pointFlag.hpp"
 
-#include "property.hpp"
-#include "demComponent.hpp"
-#include "pointFields.hpp"
-#include "triSurfaceFields.hpp"
 
-namespace pFlow
+namespace pFlow::mapperNBSKernels
 {
 
-class demInteraction
-:
-	public property,
-	public demComponent
-{
-protected:
+void findPointExtends(
+    const deviceViewType1D<realx3>& points,
+    const pFlagTypeDevice& flags,
+    realx3& minPoint,
+    realx3& maxPoint);
 
-public:
-	demInteraction(systemControl& control)
-	:
-		property(),
-		demComponent("interaction", control)
-	{}
+bool buildListsReduce(
+    const cells& searchCell,
+    const deviceViewType3D<uint32>& head,
+    const deviceViewType1D<uint32>& next,
+    const deviceViewType1D<realx3>& points,
+    const pFlagTypeDevice& flags);
 
-	demInteraction(systemControl& control, const fileSystem& file)
-	:
-		property(file),
-		demComponent("interaction", control)
-	{}
-
-
-
-};
-
+bool buildLists(
+    const cells& searchCell,
+    const deviceViewType3D<uint32>& head,
+    const deviceViewType1D<uint32>& next,
+    const deviceViewType1D<realx3>& points,
+    const pFlagTypeDevice& flags);
 
 }
-
-#endif //__interaction_hpp__ 

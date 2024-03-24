@@ -20,11 +20,11 @@ Licence:
 
 #include "ContactSearch.hpp"
 
-#include "cellMapping.hpp"
+//#include "cellMapping.hpp"
 #include "NBS.hpp"
-#include "multiGridNBS.hpp"
-#include "multiGridMapping.hpp"
+//#include "multiGridNBS.hpp"
+//#include "multiGridMapping.hpp"
 
 
-template class pFlow::ContactSearch<pFlow::NBS, pFlow::cellMapping>;
-template class pFlow::ContactSearch<pFlow::multiGridNBS, pFlow::multiGridMapping>;
+template class pFlow::ContactSearch<pFlow::NBS>;
+//template class pFlow::ContactSearch<pFlow::multiGridNBS, pFlow::multiGridMapping>;

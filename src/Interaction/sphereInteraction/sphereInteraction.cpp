@@ -18,22 +18,18 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<
-	typename contactForceModel,
-	typename geometryMotionModel,
-	template <class, class, class> class contactListType >
-bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactListType>::
-	createSphereInteraction()
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::createSphereInteraction()
 {
 	
-	realVector_D rhoD(this->densities());
+	realVector_D rhoD("densities", this->densities());
 
-	auto modelDict = this->fileDict().subDict("model");
+	auto modelDict = this->subDict("model");
 
-	REPORT(1)<<"Createing contact force model . . ."<<endREPORT;
+	REPORT(1)<<"Createing contact force model . . ."<<END_REPORT;
 	forceModel_ = makeUnique<ContactForceModel>(
 		this->numMaterials(),
-		rhoD.deviceVector(),
+		rhoD.deviceView(),
 		modelDict );
 
 
@@ -47,17 +43,9 @@ bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactList
 }
 
 
-
-template<
-	typename contactForceModel,
-	typename geometryMotionModel,
-	template <class, class, class> class contactListType >
-bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactListType>::
-	sphereSphereInteraction()
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::sphereSphereInteraction()
 {
-	
-
-
 	auto lastItem = ppContactList_().loopCount();
 
 	// create the kernel functor 
@@ -66,17 +54,17 @@ bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactList
 			this->dt(),
 			this->forceModel_(),
 			ppContactList_(), // to be read
-			sphParticles_.diameter().deviceVectorAll(),
-			sphParticles_.propertyId().deviceVectorAll(),
-			sphParticles_.pointPosition().deviceVectorAll(),
-			sphParticles_.velocity().deviceVectorAll(),
-			sphParticles_.rVelocity().deviceVectorAll(),
-			sphParticles_.contactForce().deviceVectorAll(),
-			sphParticles_.contactTorque().deviceVectorAll()
+			sphParticles_.diameter().deviceViewAll(),
+			sphParticles_.propertyId().deviceViewAll(),
+			sphParticles_.pointPosition().deviceViewAll(),
+			sphParticles_.velocity().deviceViewAll(),
+			sphParticles_.rVelocity().deviceViewAll(),
+			sphParticles_.contactForce().deviceViewAll(),
+			sphParticles_.contactTorque().deviceViewAll()
 			);
 	
 	Kokkos::parallel_for(
-		"",
+		"ppInteraction",
 		rpPPInteraction(0,lastItem),
 		ppInteraction
 		);
@@ -87,34 +75,32 @@ bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactList
 }
 
 
-template<
-	typename contactForceModel,
-	typename geometryMotionModel,
-	template <class, class, class> class contactListType >
-bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactListType>::
-	sphereWallInteraction()
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::sphereWallInteraction()
 {
 	
-	int32 lastItem = pwContactList_().loopCount();
+	uint32 lastItem = pwContactList_().loopCount();
+	uint32 iter = this->currentIter();
 	real t = this->currentTime();
+	real dt = this->dt();
 
 	pFlow::sphereInteractionKernels::pwInteractionFunctor
 		pwInteraction(
-			this->dt(),
+			dt,
 			this->forceModel_(),
 			pwContactList_(),
 			geometryMotion_.getTriangleAccessor(), 
-			geometryMotion_.getModel(t) , 
-			sphParticles_.diameter().deviceVectorAll() ,
-			sphParticles_.propertyId().deviceVectorAll(),
-			sphParticles_.pointPosition().deviceVectorAll(),
-			sphParticles_.velocity().deviceVectorAll(),
-			sphParticles_.rVelocity().deviceVectorAll() ,
-			sphParticles_.contactForce().deviceVectorAll(),
-			sphParticles_.contactTorque().deviceVectorAll() ,
-			geometryMotion_.triMotionIndex().deviceVectorAll(),
-			geometryMotion_.propertyId().deviceVectorAll(),
-			geometryMotion_.contactForceWall().deviceVectorAll()
+			geometryMotion_.getModel(iter, t, dt) , 
+			sphParticles_.diameter().deviceViewAll() ,
+			sphParticles_.propertyId().deviceViewAll(),
+			sphParticles_.pointPosition().deviceViewAll(),
+			sphParticles_.velocity().deviceViewAll(),
+			sphParticles_.rVelocity().deviceViewAll() ,
+			sphParticles_.contactForce().deviceViewAll(),
+			sphParticles_.contactTorque().deviceViewAll() ,
+			geometryMotion_.triMotionIndex().deviceViewAll(),
+			geometryMotion_.propertyId().deviceViewAll(),
+			geometryMotion_.contactForceWall().deviceViewAll()
 		);
 
 	Kokkos::parallel_for(
@@ -128,3 +114,122 @@ bool pFlow::sphereInteraction<contactForceModel,geometryMotionModel, contactList
 
 	return true;
 }
+
+
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+pFlow::sphereInteraction<cFM,gMM, cLT>::sphereInteraction
+(
+	systemControl& control,
+	const particles& prtcl,
+	const geometry& geom
+)
+:
+	interaction(control, prtcl, geom),
+	geometryMotion_(dynamic_cast<const GeometryMotionModel&>(geom)),
+	sphParticles_(dynamic_cast<const sphereParticles&>(prtcl)),
+	ppInteractionTimer_("sphere-sphere interaction", &this->timers()),
+	pwInteractionTimer_("sphere-wall interaction", &this->timers()),
+	contactListTimer_("contact list management", &this->timers()),
+	contactListTimer0_("contact list clear", &this->timers())
+{
+	contactSearch_ = contactSearch::create(
+	subDict("contactSearch"),
+	prtcl.thisDomain().domainBox(),
+	prtcl,
+	geom,
+	timers());
+
+
+	if(!createSphereInteraction())
+	{
+		fatalExit;
+	}
+}
+
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::beforeIteration()
+{
+	return true;
+}
+
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
+{
+	
+	auto iter = this->currentIter();
+	auto t = this->currentTime();
+	auto dt = this->dt();
+
+	//output<<"iter, t, dt "<< iter<<" "<< t << " "<<dt<<endl;
+	bool broadSearch = contactSearch_().enterBroadSearch(iter, t, dt);
+
+
+	if(broadSearch)
+	{
+		contactListTimer0_.start();
+		ppContactList_().beforeBroadSearch();
+		pwContactList_().beforeBroadSearch();
+		contactListTimer0_.end();
+	} 
+	
+	if( sphParticles_.numActive()<=0)return true;
+	
+	
+	if( !contactSearch_().broadSearch(
+			iter,
+			t,
+			dt,		
+			ppContactList_(),
+			pwContactList_()) )
+	{
+		fatalErrorInFunction<<
+		"unable to perform broadSearch.\n";
+		fatalExit;
+	}
+	
+
+	
+	if(broadSearch && contactSearch_().performedBroadSearch())
+	{
+		contactListTimer_.start();
+		ppContactList_().afterBroadSearch();
+		pwContactList_().afterBroadSearch();
+		contactListTimer_.end();
+	}
+	
+	ppInteractionTimer_.start();
+		sphereSphereInteraction();
+	ppInteractionTimer_.end();
+
+	
+	pwInteractionTimer_.start();
+		sphereWallInteraction();
+	pwInteractionTimer_.end();
+
+	
+	return true;
+}
+
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::afterIteration()
+{
+	return true;
+}
+
+template<typename cFM,typename gMM,template <class, class, class> class cLT>
+bool pFlow::sphereInteraction<cFM,gMM, cLT>::hearChanges
+(
+	real t,
+	real dt,
+	uint32 iter,
+	const message& msg, 
+	const anyList& varList
+)
+{
+	if(msg.equivalentTo(message::ITEM_REARRANGE))
+	{
+		notImplementedFunction;
+	}
+	return true;
+}
+

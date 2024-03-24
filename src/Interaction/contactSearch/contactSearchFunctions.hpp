@@ -96,17 +96,6 @@ void indexToCell(const indexType idx, const iBox<cellIndexType>& box, triple<cel
 	cell+= box.minPoint();
 }
 
-
-
-
-
-
-INLINE_FUNCTION_HD
-bool sphereSphereCheck(const realx3& p1, const realx3 p2, real d1, real d2)
-{
-	return length(p2-p1) < 0.5*(d2+d1);
-}
-
 }
 
 #endif //__broadSearchFunctions_hpp__

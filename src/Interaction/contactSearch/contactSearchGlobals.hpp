@@ -18,28 +18,21 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __interactionTypes_hpp__
-#define __interactionTypes_hpp__
-
-
-
 #include "types.hpp"
+#include "unsortedPairs.hpp"
 
+#ifndef __contactSearchGlobals_hpp__
+#define __contactSearchGlobals_hpp__
 
 namespace pFlow
 {
 
+using csExecutionSpace = DefaultExecutionSpace;
 
-// always use signed types
-using CELL_INDEX_TYPE 	= int32;
+using csIdType = uint32;
 
-using ID_TYPE 			= int32;
-
-//constexpr int32 minCellIndex = largestNegative<CELL_INDEX_TYPE>();
-
-//constexpr int32 maxCellIndex = largestPositive<CELL_INDEX_TYPE>();
+using csPairContainerType   = unsortedPairs<DefaultExecutionSpace, uint32>;
 
 }
 
-
-#endif //__interactionTypes_hpp__
+#endif

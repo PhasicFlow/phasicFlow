@@ -18,67 +18,50 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __interactionBase_hpp__ 
-#define __interactionBase_hpp__
+#include "NBS.hpp"
 
-#include "interactionTypes.hpp"
-#include "particles.hpp"
-#include "geometry.hpp"
-
-namespace pFlow
+pFlow::NBS::NBS
+(
+    const dictionary& dict,
+	const box& domainBox,
+	real  	minBSSize,
+	real 	maxBSSize,
+	const deviceViewType1D<realx3> &position, 
+	const pFlagTypeDevice &flags, 
+	const deviceViewType1D<real> &diam, 
+	uint32 					nWallPoints,
+	uint32 					nWallElements,
+	const ViewType1D<realx3,memory_space>& 		wallPoints, 
+	const ViewType1D<uint32x3,memory_space>& 	wallVertices
+)
+: 
+    particleWallContactSearchs<NBS>(
+        dict,
+        domainBox,
+        minBSSize,
+        maxBSSize,
+        position,
+        flags,
+        diam),
+    sizeRatio_(max(dict.getVal<real>("sizeRatio"), 1.0)),
+    cellExtent_(max(dict.getVal<real>("cellExtent"), 0.5)),
+    adjustableBox_(dict.getVal<Logical>("adjustableBox")),
+    NBSLevel0_
+	(
+        this->domainBox_,
+        maxBSSize,
+        sizeRatio_,
+        position,
+        flags,
+        adjustableBox_()
+	),
+	cellsWallLevel0_
+	(
+		cellExtent_,
+		nWallPoints,
+		nWallElements,
+		wallPoints,
+		wallVertices
+	)
 {
-
-class interactionBase
-{
-public:
-
-	using IndexType    			= CELL_INDEX_TYPE;
-
-	using IdType  				= ID_TYPE;
-
-	using ExecutionSpace 	 	= DefaultExecutionSpace;
-
-protected:
-
-	const particles& 		particles_;
-
-	const geometry& 		geometry_;
-
-public:
-
-	interactionBase(
-		const particles& prtcl,
-		const geometry& geom)
-	:
-		particles_(prtcl),
-		geometry_(geom)
-	{}
-
-	inline
-	const auto& pStruct()const
-	{
-		return particles_.pStruct();
-	}
-
-	inline
-	const auto& surface()const
-	{
-		return geometry_.surface();
-	}
-
-	inline 
-	const auto& Particles()const
-	{
-		return particles_;
-	}
-
-	inline auto& Geometry()const
-	{
-		return geometry_;
-	}
-};
-
 }
-
-
-#endif //__interactionBase_hpp__
