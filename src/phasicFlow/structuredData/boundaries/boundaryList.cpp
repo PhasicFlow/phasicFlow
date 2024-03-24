@@ -155,6 +155,15 @@ bool pFlow::boundaryList::iterate
 	real dt
 )
 {
+	for(auto& bdry:*this)
+	{
+		if( !bdry->iterate(iter, t, dt))
+		{
+			fatalErrorInFunction<<
+			"Error in iterate in boundary "<<bdry->name()<<endl;
+			return false;
+		}
+	}
     return true;
 }
 
@@ -165,5 +174,14 @@ bool pFlow::boundaryList::afterIteration
 	real dt
 )
 {
-    return true;
+    for(auto& bdry:*this)
+	{
+		if( !bdry->afterIteration(iter, t, dt))
+		{
+			fatalErrorInFunction<<
+			"Error in afterIteration in boundary "<<bdry->name()<<endl;
+			return false;
+		}
+	}
+	return true;
 }

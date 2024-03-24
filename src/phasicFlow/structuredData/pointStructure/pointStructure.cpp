@@ -80,7 +80,7 @@ bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
 
 bool pFlow::pointStructure::initializePoints(const PointsTypeHost &points)
 {
-    pointPosition_.assign(points);
+    pointPosition_.assignFromHost(points);
 
     pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
     pFlagSync_ = false;
@@ -117,7 +117,7 @@ pFlow::pointStructure::pointStructure
         *this
 	)
 {
-    REPORT(0)<< "Reading "<< Green_Text("point structure")<<
+    REPORT(1)<< "Reading "<< Green_Text("pointStructure")<<
     " from "<<IOobject::path()<<END_REPORT;
 
     if( !IOobject::readObject() )
@@ -177,11 +177,24 @@ bool pFlow::pointStructure::beforeIteration()
 
 bool pFlow::pointStructure::iterate()
 {
+    if( !boundaries_.iterate(currentIter(), currentTime(), dt()) )
+    {
+        fatalErrorInFunction<<
+        "Unable to perform iterate for boundaries"<<endl;
+        return false;
+    }
+    
     return true;
 }
 
 bool pFlow::pointStructure::afterIteration()
 {
+    if( !boundaries_.afterIteration(currentIter(), currentTime(), dt()) )
+    {
+        fatalErrorInFunction<<
+        "Unable to perform afterIteration for boundaries"<<endl;
+        return false;
+    }
     return true;
 }
 

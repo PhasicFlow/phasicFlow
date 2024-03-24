@@ -43,7 +43,8 @@ bool pFlow::boundaryNone::beforeIteration
 bool pFlow::boundaryNone::iterate
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;
@@ -52,7 +53,8 @@ bool pFlow::boundaryNone::iterate
 bool pFlow::boundaryNone::afterIteration
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;

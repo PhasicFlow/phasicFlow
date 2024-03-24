@@ -63,9 +63,9 @@ public:
 
 	bool beforeIteration(uint32 iterNum, real t, real dt) override;
 
-	bool iterate(uint32 iterNum, real t) override;
+	bool iterate(uint32 iterNum, real t, real dt) override;
 
-	bool afterIteration(uint32 iterNum, real t) override;
+	bool afterIteration(uint32 iterNum, real t, real dt) override;
 
 
 };

@@ -18,10 +18,11 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "Time.hpp"
 #include "internalPoints.hpp"
 #include "domain.hpp"
 #include "Vectors.hpp"
+#include "anyList.hpp"
 #include "internalPointsKernels.hpp"
 
 void pFlow::internalPoints::syncPFlag()const
@@ -33,16 +34,57 @@ void pFlow::internalPoints::syncPFlag()const
 	}
 }
 
-bool pFlow::internalPoints::deletePoints(deviceViewType1D<uint32> delPoints)
+bool pFlow::internalPoints::deletePoints(const uint32Vector_D& delPoints)
 {
-    if(!pFlagsD_.deletePoints(delPoints))
+	
+	if(delPoints.empty())return true;
+
+	auto oldRange = pFlagsD_.activeRange();
+	auto oldSize  = size();
+
+    if(!pFlagsD_.deletePoints(delPoints.deviceView()))
 	{
 		fatalErrorInFunction<<
 		"Error in deleting points from internal points"<<endl;
 		return false;
 	}
 	pFlagSync_ = false;
-	WARNING<<"Notify the observersin in internalPoints"<<END_WARNING;
+	
+	auto newRange = pFlagsD_.activeRange();
+	auto newSize  = size();
+
+	anyList varList;
+
+	varList.emplaceBack(
+		message::eventName(message::ITEM_DELETE), 
+		delPoints);
+	message msg(message::ITEM_DELETE);
+
+	if(oldSize!= newSize)
+	{
+		msg.add(message::SIZE_CHANGED); 
+		varList.emplaceBack(
+			message::eventName(message::SIZE_CHANGED),
+			newSize);
+	}
+	
+	if(oldRange!=newRange)
+	{
+		msg.add(message::RANGE_CHANGED);
+		varList.emplaceBack(
+			message::eventName(message::RANGE_CHANGED),
+			newRange);
+	}
+	auto iter = time().currentIter();
+	auto t = time().currentTime();
+	auto dt = time().dt();
+
+	if( !notify(iter, t, dt, msg, varList) )
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
 	return true;
 }
 
@@ -247,7 +289,7 @@ bool pFlow::internalPoints::read
 		return false;
 	}
 
-	pointPosition_.assign(fRead);
+	pointPosition_.assignFromHost(fRead);
 
 	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
 	pFlagSync_ = false;
@@ -284,7 +326,7 @@ bool pFlow::internalPoints::read
 		return false;
 	}
 
-	pointPosition_.assign(fRead);
+	pointPosition_.assignFromHost(fRead);
 
 	pFlagsD_ = pFlagTypeDevice(pointPosition_.capacity(), 0, pointPosition_.size());
 	pFlagSync_ = false;

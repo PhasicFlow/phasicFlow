@@ -22,6 +22,7 @@ Licence:
 
 #include "subscriber.hpp"
 #include "Vectors.hpp"
+#include "VectorSingles.hpp"
 #include "Fields.hpp"
 #include "pointFlag.hpp"
 
@@ -75,7 +76,7 @@ protected:
 		friend boundaryBase;
 		
 
-		bool deletePoints(deviceViewType1D<uint32> delPoints);
+		bool deletePoints(const uint32Vector_D& delPoints);
 
 		bool changePointsFlag(
 			deviceViewType1D<uint32> changePoints, 
@@ -159,6 +160,12 @@ public:
 		uint32 capacity()const
 		{
 			return pointPosition_.capacity();
+		}
+
+		INLINE_FUNCTION_H
+		bool empty()const
+		{
+			return size()==0u;
 		}
 		
 		// - number of active points 

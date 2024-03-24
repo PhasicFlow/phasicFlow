@@ -33,7 +33,7 @@ pFlow::boundaryExit::boundaryExit
 	boundaryBase(dict, bplane, internal)
 {
 	exitMarginLength_ = max( 
-		dict.getValOrSet("exitMarginLength",0.0), 0.0);
+		dict.getValOrSet("exitMarginLength",(real)0.0), (real)0.0);
 	checkForExitInterval_ = max(
 		dict.getValOrSet("checkForExitInterval", 1), 1);
 }
@@ -52,9 +52,10 @@ bool pFlow::boundaryExit::beforeIteration
 	}
 
 	uint32 s = size();
-	deviceViewType1D<uint32> deleteFlags("deleteFlags",s+1); 
-	fill(deleteFlags, 0, s+1, 0u);
+	uint32Vector_D deleteFlags("deleteFlags",s+1, s+1, RESERVE());
+	deleteFlags.fill(0u);
 
+	const auto& deleteD = deleteFlags.deviceViewAll();
 	auto points = thisPoints();
 	auto p = boundaryPlane().infPlane();
 
@@ -68,7 +69,7 @@ bool pFlow::boundaryExit::beforeIteration
 		{
 			if(p.pointInNegativeSide(points(i)))
 			{
-				deleteFlags(i)=1;
+				deleteD(i)=1;
 				delToUpdate++;
 			}
 		}, 
@@ -87,7 +88,8 @@ bool pFlow::boundaryExit::beforeIteration
 bool pFlow::boundaryExit::iterate
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;
@@ -96,7 +98,8 @@ bool pFlow::boundaryExit::iterate
 bool pFlow::boundaryExit::afterIteration
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;

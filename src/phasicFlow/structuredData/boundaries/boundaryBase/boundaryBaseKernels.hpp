@@ -21,7 +21,7 @@ Licence:
 #ifndef __boundaryBaseKernels_hpp__
 #define __boundaryBaseKernels_hpp__
 
-#include "phasicFlowKokkos.hpp"
+#include "VectorSingles.hpp"
 
 namespace pFlow::boundaryBaseKernels
 {
@@ -29,16 +29,16 @@ namespace pFlow::boundaryBaseKernels
 void createRemoveKeepLists(
     uint32 numTotal, 
     uint32 numRemove, 
-    deviceViewType1D<uint32> removeMask, 
-    deviceViewType1D<uint32>& removeList, 
-    deviceViewType1D<uint32>& keepList);
+    const uint32Vector_D& removeMask, 
+    uint32Vector_D& removeList, 
+    uint32Vector_D& keepList);
 
 void createRemoveKeepIndices(
-    deviceViewType1D<uint32> indices,
+    const uint32Vector_D& indices,
     uint32 numRemove,
-    deviceViewType1D<uint32> removeMask, 
-    deviceViewType1D<uint32>& removeIndices, 
-    deviceViewType1D<uint32>& keepIndices);
+    const uint32Vector_D& removeMask, 
+    uint32Vector_D& removeIndices, 
+    uint32Vector_D& keepIndices);
 
 
 }

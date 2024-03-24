@@ -53,7 +53,7 @@ pFlow::domain pFlow::simulationDomain::extendThisDomain
 }
 
 pFlow::uniquePtr<pFlow::simulationDomain>
-pFlow::simulationDomain::create(systemControl &control)
+	pFlow::simulationDomain::create(systemControl &control)
 {
 	word sType = angleBracketsNames(
         "simulationDomain", 

@@ -20,7 +20,36 @@ Licence:
 #ifndef __pointFlagKernels_hpp__
 #define __pointFlagKernels_hpp__
 
-#include "streams.hpp"
+template<typename ExecutionSpace>
+pFlow::ViewType1D<pFlow::uint32, typename pFlow::pointFlag<ExecutionSpace>::memory_space>
+	pFlow::pointFlag<ExecutionSpace>::getActivePoints()
+{
+	using rpAPoints = Kokkos::RangePolicy<execution_space,  
+			Kokkos::IndexType<uint32>>;
+
+	ViewType1D<pFlow::uint32,memory_space> 
+		aPoints("activePoints", activeRange_.end()+1);
+	
+
+	Kokkos::parallel_for(
+		"pFlow::pointFlag<ExecutionSpace>::getActivePoints",
+		rpAPoints(0,activeRange_.end()),
+		CLASS_LAMBDA_HD(uint32 i)
+		{
+			if( isActive(i))
+			{
+				aPoints[i] = 1;
+			}
+			else
+			{
+				aPoints[i] = 0;
+			}
+		}
+	);
+	Kokkos::fence();
+	return aPoints;
+}
+
 
 template<typename ExecutionSpace>
 pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markOutOfBoxDelete

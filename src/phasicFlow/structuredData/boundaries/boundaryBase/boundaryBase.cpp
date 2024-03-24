@@ -21,57 +21,25 @@ Licence:
 #include "boundaryBase.hpp"
 #include "dictionary.hpp"
 #include "internalPoints.hpp"
-
+#include "anyList.hpp"
+#include "Time.hpp"
 #include "boundaryBaseKernels.hpp"
 
-/*pFlow::boundaryBase::boundaryBase
-(
-	const plane& 		bplane,
-	uint32 				mirrorProc, 
-	const word& 		name,
-	const word& 		type,
-	internalPoints& 	internal
-)
-:
-	subscriber(groupNames(name,type)),
-	boundaryPlane_(bplane),
-	name_(name),
-	type_(type),
-	mirrorProcessoNo_(mirrorProc),
-	internal_(internal)
-{
-	
-}*/
 
 void pFlow::boundaryBase::setNewIndices
 (
-	deviceViewType1D<uint32> newIndices
+	const uint32Vector_D& newIndices
 )
 {
-	auto newSize = newIndices.size();
-	setSize(static_cast<uint32>(newSize));
-	if(newSize>0u)
-	{
-		copy(indexList_.deviceView(), newIndices);
-	}
+	indexList_.assign(newIndices, false);
 }
 
 void pFlow::boundaryBase::appendNewIndices
 (
-	deviceViewType1D<uint32> newIndices
+	const uint32Vector_D& newIndices
 )
 {
-	auto s = static_cast<uint32>(newIndices.size());
-	if(s == 0) return;
-
-	uint32 oldS = size();
-	uint32 newSize = oldS + s; 
-
-	setSize(newSize);
-	auto appendView = Kokkos::subview(
-		indexList_.deviceViewAll(),
-		Kokkos::make_pair<uint32>(oldS, newSize));
-	copy(appendView, newIndices);
+	indexList_.append(newIndices);
 	
 	// TODO: notify observers about this change 
 
@@ -79,12 +47,10 @@ void pFlow::boundaryBase::appendNewIndices
 	//sort(indexList_.deviceViewAll(), 0, newSize);
 }
 
-
-
 bool pFlow::boundaryBase::removeIndices
 (
 	uint32 numRemove,
-	deviceViewType1D<uint32> removeMask
+	const uint32Vector_D& removeMask
 )
 {
     if(removeMask.size() != size()+1 )
@@ -93,12 +59,12 @@ bool pFlow::boundaryBase::removeIndices
 		return false;
 	}
 
-	deviceViewType1D<uint32> removeIndices("removeIndices", 1);
-	deviceViewType1D<uint32> keepIndices("keepIndices",1);
+	uint32Vector_D removeIndices("removeIndices");
+	uint32Vector_D keepIndices("keepIndices");
 
 	pFlow::boundaryBaseKernels::createRemoveKeepIndices
 	(
-		indexList_.deviceView(),
+		indexList_,
 		numRemove,
 		removeMask,
 		removeIndices,
@@ -114,15 +80,32 @@ bool pFlow::boundaryBase::removeIndices
 
 	setNewIndices(keepIndices);
 
-	//TODO: notify observers about changes 
+	anyList aList;
+	
+	aList.emplaceBack(
+		message::eventName(message::BNDR_RESET), 
+		std::move(keepIndices));
+	
+	message msgBndry 	= message::BNDR_RESET;
 
-	return false;
+	uint32 iter = internal_.time().currentIter();
+	real t = internal_.time().currentTime();
+	real dt = internal_.time().dt();
+
+	if( !this->notify(iter, t, dt, msgBndry, aList) )
+	{
+		fatalErrorInFunction<<"Error in notify operation in boundary "<< 
+		name_ <<endl;
+		return false;
+	}
+	
+	return true;
 }
 
 bool pFlow::boundaryBase::transferPoints
 (
 	uint32 numTransfer, 
-	deviceViewType1D<uint32> transferMask, 
+	const uint32Vector_D& transferMask, 
 	uint32 transferBoundaryIndex, 
 	realx3 transferVector
 )
@@ -133,12 +116,12 @@ bool pFlow::boundaryBase::transferPoints
 		return false;
 	}
 
-	deviceViewType1D<uint32> transferIndices("transferIndices",1);
-	deviceViewType1D<uint32> keepIndices("keepIndices",1);
+	uint32Vector_D transferIndices("transferIndices");
+	uint32Vector_D keepIndices("keepIndices");
 
 	pFlow::boundaryBaseKernels::createRemoveKeepIndices
 	(
-		indexList_.deviceView(),
+		indexList_,
 		numTransfer,
 		transferMask,
 		transferIndices,
@@ -150,7 +133,7 @@ bool pFlow::boundaryBase::transferPoints
 
 	// first, change the flags in the internalPoints
 	if( !internal_.changePointsFlag(
-		transferIndices, 
+		transferIndices.deviceView(), 
 		transferBoundaryIndex) ) 
 	{
 		return false;
@@ -158,7 +141,7 @@ bool pFlow::boundaryBase::transferPoints
 
 	// second, change the position of points 
 	if(!internal_.changePointsPoisition(
-		transferIndices,
+		transferIndices.deviceView(),
 		transferVector))
 	{
 		return false;

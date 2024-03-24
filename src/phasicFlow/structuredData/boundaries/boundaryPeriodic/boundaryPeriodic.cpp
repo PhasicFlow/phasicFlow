@@ -63,11 +63,12 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	}
 
 	uint32 s = size();
-	deviceViewType1D<uint32> transferFlags("transferFlags",s+1); 
-	fill(transferFlags, 0, s+1, 0u);
+	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
+	transferFlags.fill(0u);
 	
 	auto points = thisPoints();
 	auto p = boundaryPlane().infPlane();
+	const auto & transferD = transferFlags.deviceViewAll();
 	uint32 numTransfered = 0;
 
 	Kokkos::parallel_reduce
@@ -78,7 +79,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 		{
 			if(p.pointInNegativeSide(points(i)))
 			{
-				transferFlags(i)=1;
+				transferD(i)=1;
 				trnasToUpdate++;
 			}
 		}, 
@@ -109,7 +110,8 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 bool pFlow::boundaryPeriodic::iterate
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;
@@ -118,7 +120,8 @@ bool pFlow::boundaryPeriodic::iterate
 bool pFlow::boundaryPeriodic::afterIteration
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;

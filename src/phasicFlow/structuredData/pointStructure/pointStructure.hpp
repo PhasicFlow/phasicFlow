@@ -27,11 +27,8 @@ Licence:
 #include "boundaryList.hpp"
 #include "streams.hpp"
 
-
-
 namespace pFlow
 {
-
 
 class pointStructure
 :
@@ -74,7 +71,7 @@ public:
 	//// - Constructors 
 
 		/// an empty pointStructure, good for reading from file 
-		pointStructure(systemControl& control);
+		explicit pointStructure(systemControl& control);
 
 		/// construct from point positions, assume all points are active
 		pointStructure(
@@ -119,17 +116,16 @@ public:
             return boundaries_;
         }
 
-		
 		Time& time() override
 		{
 			return demComponent::time();
 		}
-
+		
 		const Time& time() const override
 		{
 			return demComponent::time();
 		}
-
+		
         boundaryBase& boundary(size_t i ) override
         {
             return boundaries_[i];
@@ -140,11 +136,17 @@ public:
             return boundaries_[i];
         }
 
+		inline
 		const auto& simDomain()const
 		{
 			return simulationDomain_();
 		}
 
+		inline 
+		const auto& thisDomain()const
+		{
+			return simulationDomain_().thisDomain();
+		}
 		
 	// - IO methods 
 

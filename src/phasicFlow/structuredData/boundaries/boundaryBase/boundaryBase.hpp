@@ -53,6 +53,10 @@ private:
 	/// list of particles indices on device 
 	uint32Vector_D 	indexList_;
 
+	uint32Vector_H 	indexListH_;
+
+	bool 			indexSync_ = false; 
+
 	/// The length defined for creating neighbor list 
 	real  			neighborLength_;	
 
@@ -67,17 +71,17 @@ private:
 
 protected:
 
-	void setNewIndices(deviceViewType1D<uint32> newIndices);
+	void setNewIndices(const uint32Vector_D& newIndices);
 
-	void appendNewIndices(deviceViewType1D<uint32> newIndices);
+	void appendNewIndices(const uint32Vector_D& newIndices);
 	
 	bool removeIndices(
 		uint32 numRemove, 
-		deviceViewType1D<uint32> removeMask);
+		const uint32Vector_D& removeMask);
 	
 	bool transferPoints(
 		uint32 numTransfer, 
-		deviceViewType1D<uint32> transferMask,
+		const uint32Vector_D& transferMask,
 		uint32 transferBoundaryIndex,
 		realx3 transferVector);
 	
@@ -176,10 +180,10 @@ public:
     bool beforeIteration(uint32 iterNum, real t, real dt) = 0 ;
 
 	virtual 
-    bool iterate(uint32 iterNum, real t) = 0;
+    bool iterate(uint32 iterNum, real t, real dt) = 0;
 
 	virtual 
-    bool afterIteration(uint32 iterNum, real t) = 0;
+    bool afterIteration(uint32 iterNum, real t, real dt) = 0;
 
 	
 	const auto& indexList()const

@@ -24,16 +24,25 @@ void pFlow::boundaryBaseKernels::createRemoveKeepLists
 (
     uint32 numTotal, 
     uint32 numRemove, 
-    deviceViewType1D<uint32> removeMask, 
-    deviceViewType1D<uint32>& removeList, 
-    deviceViewType1D<uint32>& keepList
+    const uint32Vector_D& removeMask, 
+    uint32Vector_D& removeList, 
+    uint32Vector_D& keepList
 )
 {
     uint32 numKeep = numTotal - numRemove;
-    deviceViewType1D<uint32> rList("rList",numRemove);
-    deviceViewType1D<uint32> kList("kList",numKeep);
-
-    exclusiveScan(removeMask, 0u, numTotal+1, removeMask, 0u);
+    removeList.reallocate(numRemove,numRemove);
+    keepList.reallocate(numKeep,numKeep);
+    
+    auto maskD = removeMask.deviceViewAll();
+    const auto& removeD = removeList.deviceViewAll();
+    const auto& keepD = keepList.deviceViewAll();
+    
+    exclusiveScan(
+        maskD, 
+        0u, 
+        numTotal+1, 
+        maskD, 
+        0u);
 
     Kokkos::parallel_for
     (
@@ -41,35 +50,38 @@ void pFlow::boundaryBaseKernels::createRemoveKeepLists
         deviceRPolicyStatic(0, numTotal),
         LAMBDA_HD(uint32 i)
 		{
-			if(removeMask(i)!= removeMask(i+1))
-				rList(removeMask(i)) = i;
+			if(maskD(i)!= maskD(i+1))
+				removeD(maskD(i)) = i;
             else
-                kList(i-removeMask(i)) = i;
+                keepD(i-maskD(i)) = i;
 		}
     );
     Kokkos::fence();
-
-    removeList = rList;
-    keepList = kList;
 
 }
 
 
 void pFlow::boundaryBaseKernels::createRemoveKeepIndices
 (
-    deviceViewType1D<uint32> indices,
+    const uint32Vector_D& indices,
     uint32 numRemove,
-    deviceViewType1D<uint32> removeMask, 
-    deviceViewType1D<uint32>& removeIndices, 
-    deviceViewType1D<uint32>& keepIndices
+    const uint32Vector_D& removeMask, 
+    uint32Vector_D& removeIndices, 
+    uint32Vector_D& keepIndices
 )
 {
     uint32 numTotal = indices.size();
     uint32 numKeep = numTotal - numRemove;
-    deviceViewType1D<uint32> rIndices("rIndices",numRemove);
-    deviceViewType1D<uint32> kIndices("kIndices",numKeep);
+    
+    removeIndices.reallocate(numRemove, numRemove);
+    keepIndices.reallocate(numKeep, numKeep);
 
-    exclusiveScan(removeMask, 0u, numTotal+1, removeMask, 0u);
+    auto maskD = removeMask.deviceViewAll();
+    const auto& removeD = removeIndices.deviceViewAll();
+    const auto& keepD = keepIndices.deviceViewAll();
+    const auto& indicesD = indices.deviceViewAll();
+
+    exclusiveScan(maskD, 0u, numTotal+1, maskD, 0u);
 
     Kokkos::parallel_for
     (
@@ -77,14 +89,11 @@ void pFlow::boundaryBaseKernels::createRemoveKeepIndices
         deviceRPolicyStatic(0, numTotal),
         LAMBDA_HD(uint32 i)
 		{
-			if(removeMask(i)!= removeMask(i+1))
-				rIndices(removeMask(i)) = indices(i);
+			if(maskD(i)!= maskD(i+1))
+				removeD(maskD(i)) = indicesD(i);
             else
-                kIndices(i-removeMask(i)) = indices(i);
+                keepD(i-maskD(i)) = indicesD(i);
 		}
     );
-    Kokkos::fence();
-
-    removeIndices = rIndices;
-    keepIndices = kIndices;
+    Kokkos::fence();   
 }

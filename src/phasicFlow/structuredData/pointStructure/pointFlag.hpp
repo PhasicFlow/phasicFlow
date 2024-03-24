@@ -277,6 +277,9 @@ public:
 			isAllActive_);
 	}
 
+	ViewType1D<uint32, memory_space> getActivePoints();
+	
+
 	/// @brief Loop over the active points and mark those out of the box
 	/// and return number of deleted points 
 	/// @param validBox the box whose inside is valid 
