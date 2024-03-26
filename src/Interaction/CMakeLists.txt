@@ -6,6 +6,7 @@ contactSearch/methods/cellBased/NBS/NBSLevel0.cpp
 contactSearch/methods/cellBased/NBS/NBS.cpp
 contactSearch/methods/cellBased/NBS/cellsWallLevel0.cpp
 contactSearch/contactSearch/contactSearch.cpp
+contactSearch/boundaries/searchBoundary.cpp
 contactSearch/ContactSearch/ContactSearchs.cpp
 interaction/interaction.cpp
 sphereInteraction/sphereInteractions.cpp

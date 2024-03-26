@@ -22,11 +22,17 @@ template<class T, class MemorySpace>
 pFlow::boundaryField<T, MemorySpace>::boundaryField
 (
 	const boundaryBase& boundary, 
+	const pointStructure& pStruct,
 	InternalFieldType& internal
 )
 :
-	observer(&boundary, defaultMessage_),
-	boundary_(boundary),
+	generalBoundary
+	(
+		boundary, 
+		pStruct,
+		getTypeName<T>(), 
+		memory_space::name()
+	),
 	internal_(internal)
 {}
 
@@ -36,15 +42,26 @@ pFlow::uniquePtr<pFlow::boundaryField<T, MemorySpace>>
 	pFlow::boundaryField<T, MemorySpace>::create
 (
 	const boundaryBase& boundary, 
+	const pointStructure& pStruct,
 	InternalFieldType& internal
 )
 {
 
-	word bType = angleBracketsNames("boundaryField", boundary.type());
+	word bType = angleBracketsNames3(
+		"boundaryField", 
+		boundary.type(),
+		getTypeName<T>(),
+		memory_space::name());
+
+	word bTypeAlter = angleBracketsNames3(
+		"boundaryField", 
+		"none",
+		getTypeName<T>(),
+		memory_space::name());
 
 	if(boundaryBasevCtorSelector_.search(bType))
 	{
-		return boundaryBasevCtorSelector_[bType](boundary, internal);
+		return boundaryBasevCtorSelector_[bType](boundary, pStruct, internal);
 	}
 	else
 	{

@@ -20,8 +20,7 @@ Licence:
 #ifndef __boundaryField_hpp__
 #define __boundaryField_hpp__
 
-#include "observer.hpp"
-#include "boundaryBase.hpp"
+#include "generalBoundary.hpp"
 #include "internalField.hpp"
 
 namespace pFlow
@@ -30,7 +29,7 @@ namespace pFlow
 template< class T, class MemorySpace = void>
 class boundaryField
 :
-    public observer 
+    public generalBoundary 
 {
 public:
 	
@@ -44,23 +43,17 @@ public:
 
 protected:
 
-    const boundaryBase&     boundary_;
-
     /// @brief a ref to the internal field 
     InternalFieldType& 			internal_;
 
-	static inline
-	const message defaultMessage_ = 
-	(
-		message::BNDR_RESET		
-	);
-
+	
 public:
 
-	TypeInfo("boundaryField<none>");
+	TypeInfoTemplate211("boundaryField","none" ,T, memory_space::name());
 
 	boundaryField(
 		const boundaryBase& boundary, 
+		const pointStructure& pStruct,
 		InternalFieldType& internal);
 	
 	create_vCtor
@@ -69,9 +62,10 @@ public:
 		boundaryBase,
 		(
 			const boundaryBase& boundary, 
+			const pointStructure& pStruct,
 			InternalFieldType& internal
 		),
-		(boundary, internal)
+		(boundary, pStruct, internal)
 	);
 
 
@@ -104,25 +98,21 @@ public:
 		return true;
 	}
 
-	auto size()const
+	void fill(const std::any& val)override
 	{
-		return boundary_.size();
-	}
-
-	auto capacity()const
-	{
-		return boundary_.capacity();
+		return;
 	}
 
 	virtual
 	void fill(const T& val)
 	{
-		return ;
+		return;
 	}
 
 	static
 	uniquePtr<boundaryField> create(
 		const boundaryBase& boundary, 
+		const pointStructure& pStruct,
 		InternalFieldType& internal);
 
 };

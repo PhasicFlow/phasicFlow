@@ -49,15 +49,24 @@ public:
 
 private:
 
+	// friend et al. 
+	friend boundaryList;
+
 	const plane& 	boundaryPlane_;
 
 	/// list of particles indices on device 
 	uint32Vector_D 	indexList_;
 
+	/// list of particles indieces on host
+	mutable uint32Vector_H 	indexListHost_;
+
+	/// device and host list are sync
+	mutable bool 			listsSync_ = false;
+
 	/// The length defined for creating neighbor list 
 	real  			neighborLength_;	
 
-	/// a reference to 
+	/// a reference to internal points 
 	internalPoints& internal_;
 
 	/// a reference to the list of boundaries 
@@ -73,6 +82,9 @@ private:
 	word 		type_;
 
 protected:
+	
+	/// @brief set the size of indexList 
+	void setSize(uint32 newSize);
 
 	void setNewIndices(const uint32Vector_D& newIndices);
 
@@ -88,10 +100,24 @@ protected:
 		uint32 transferBoundaryIndex,
 		realx3 transferVector);
 	
+	void unSyncLists()
+	{
+		listsSync_ = false;
+	}
+
+	void syncLists()const
+	{
+		if(!listsSync_)
+		{
+			indexListHost_.assignFromDevice(indexList_, true);
+			listsSync_ = true;
+		}
+	}
+
+	
 public:
 
 	TypeInfo("boundaryBase");
-
 	
 	boundaryBase(
 		const dictionary &dict,
@@ -137,49 +163,36 @@ public:
 		return {0,0,0};
 	}
 
+	inline
 	const word& type()const
 	{
 		return type_;
 	}
 
+	inline
 	const word& name()const
 	{
 		return name_;
 	}
 
+	inline
 	bool empty()const
 	{
 		return indexList_.size()==0;
 	}
 
+	inline
 	auto size()const
 	{
 		return indexList_.size();
 	}
 
-	virtual 
-	const plane& boundaryPlane()const
-	{
-		return boundaryPlane_;
-	}
-
+	inline
 	auto capacity()const
 	{
 		return indexList_.capacity();
 	}
 
-	const internalPoints& internal()const
-	{
-		return internal_;
-	}
-
-	internalPoints& internal()
-	{
-		return internal_;
-	}
-
-	boundaryBase& mirrorBoundary();
-	
 	inline
 	uint32 thisBoundaryIndex()const
 	{
@@ -192,9 +205,48 @@ public:
 		return thisBoundaryIndex_%2==0? thisBoundaryIndex_+1:thisBoundaryIndex_-1;
 	}
 
-	/// @brief set the size of indexList 
-	/// Always make sure that size+1 <= capacity
-	void setSize(uint32 newSize);
+	inline
+	const internalPoints& internal()const
+	{
+		return internal_;
+	}
+
+	inline
+	internalPoints& internal()
+	{
+		return internal_;
+	}
+
+	inline
+	const auto& indexList()const
+	{
+		return indexList_;
+	}
+
+	inline
+	const auto& indexListHost()const
+	{
+		syncLists();
+		return indexListHost_;
+	}
+
+	boundaryBase& mirrorBoundary();
+
+	const boundaryBase& mirrorBoundary()const;
+	
+	virtual 
+	const plane& boundaryPlane()const
+	{
+		return boundaryPlane_;
+	}
+
+	/// @brief displacement vector that transfers points from 
+	/// to a distance that is equal to the distance between 
+	/// this plane and the mirror plane, the vector points from 
+	/// this plane to mirror plane 
+	virtual
+	realx3 displacementVectroToMirror()const;
+	
 
 	virtual 
     bool beforeIteration(uint32 iterNum, real t, real dt) = 0 ;
@@ -204,19 +256,13 @@ public:
 
 	virtual 
     bool afterIteration(uint32 iterNum, real t, real dt) = 0;
-
 	
-	const auto& indexList()const
-	{
-		return indexList_;
-	}
-
     pointFieldAccessType thisPoints();
 
     virtual
     pointFieldAccessType neighborPoints();
     
-
+	/// - static create 
 	static
 	uniquePtr<boundaryBase> create
 	(

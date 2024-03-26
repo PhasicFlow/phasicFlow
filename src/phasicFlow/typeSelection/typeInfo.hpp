@@ -64,7 +64,7 @@ namespace pFlow
 	{
 		int status;
 		auto& ti = typeid(T);
-		char* realname = abi::__cxa_demangle(ti.name(), 0, 0, &status);
+		char* realname = abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status);
 	  	word name(realname);
 	  	free(realname);
 	  	return name;
@@ -79,7 +79,7 @@ namespace pFlow
 	template<>
 	inline word basicTypeName<int32>(){ return "int32"; }
 
-		template<>
+	template<>
 	inline word basicTypeName<int8>(){ return "int8"; }
 
 	template<>
@@ -107,6 +107,7 @@ namespace pFlow
 			return basicTypeName<T>();
 		}
 	}
+
 	template<typename T>
 	word constexpr getTypeName(const T&)
 	{
@@ -189,87 +190,12 @@ namespace pFlow
 	virtual word typeName() const { return TYPENAME();}
 
 
-/*#define TypeInfoTemplate11(tName, Type)										\
-	has_static_member(TYPENAME);											\
+#define TypeInfoTemplate211(tBase,tName1, Type, tName3)							\
 	inline static word TYPENAME()											\
 	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+">";} 						\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+">";						\
-	return "noTYPE"; 														\
+		return word(tBase)+"<"+word(tName1)+","+getTypeName<Type>()+","+word(tName3)+">"; 	\
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
-#define TypeInfoTemplate12(tName, Type1, Type2)								\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type1,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+">";}	\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type1>()+","+Type2::TYPENAME()+">";\
-	return "noTYPE"; 														\
-	}																		\
-	virtual word typeName() const { return TYPENAME();}
-
-#define TypeInfoTemplate13(tName, Type1, Type2, Type3)						\
-	inline static word TYPENAME()											\
-	{ 																		\
-		return word(tName)+"<"+Type1::TYPENAME()+","+Type2::TYPENAME()+","+Type3::TYPENAME()+">";\
-	}																		\
-	virtual word typeName() const { return TYPENAME();}
-
-// this is the non-virtual version
-#define TypeInfoTemplateNV11(tName, Type)										\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+">";} 					\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+">";					\
-	return "noTYPE"; 														\
-	}																		\
-	inline word typeName() const { return TYPENAME();}
-
-
-#define TypeInfoTemplateNV111(tName, Type, tName2)							\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
-	return "noTYPE"; 														\
-	}																		\
-	inline word typeName() const { return TYPENAME();}
-
-#define TypeInfoTemplate111(tName, Type, tName2)							\
-	has_static_member(TYPENAME);											\
-	inline static word TYPENAME()											\
-	{ 																		\
-	if constexpr ( has_static_member_TYPENAME<Type,word(void)>::value) 		\
-		{ return word(tName)+"<"+Type::TYPENAME()+","+word(tName2)+">";} 	\
-	else																	\
-		return word(tName)+"<"+basicTypeName<Type>()+","+word(tName2)+">";	\
-	return "noTYPE"; 														\
-	}																		\
-	virtual word typeName() const { return TYPENAME();}*/
-
-
-
-
-
-
-namespace pFlow
-{
-
-	
-
-
-
-} // pFlow
 
 #endif

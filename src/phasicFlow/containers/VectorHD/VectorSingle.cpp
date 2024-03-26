@@ -481,12 +481,10 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     }
     else if constexpr( isHostAccessible_)
     {
-        
         for(auto i=0u; i<srcSize; i++)
         {
             view_[i] = src[i];
-        }
-        
+        }   
     }
     else
     {
@@ -518,7 +516,7 @@ void pFlow::VectorSingle<T,MemorySpace>::assignFromHost(const VectorTypeHost& sr
     }
     else
     {
-        setSize(srcSize);
+        changeSize(srcSize);
     }
 	
     if constexpr(isTriviallyCopyable_)

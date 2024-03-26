@@ -46,10 +46,11 @@ public:
 
 public:
 
-	TypeInfo("boundaryField<exit>");
+	TypeInfoTemplate211("boundaryField","exit", T, memory_space::name());
 
 	exitBoundaryField(
 		const boundaryBase& boundary, 
+		const pointStructure& pStruct,
 		InternalFieldType& internal);
 		
 

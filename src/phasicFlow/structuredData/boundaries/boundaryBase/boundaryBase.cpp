@@ -26,6 +26,11 @@ Licence:
 #include "Time.hpp"
 #include "boundaryBaseKernels.hpp"
 
+void pFlow::boundaryBase::setSize(uint32 newSize)
+{
+	indexList_.resize(newSize);
+	unSyncLists();
+}
 
 void pFlow::boundaryBase::setNewIndices
 (
@@ -33,6 +38,7 @@ void pFlow::boundaryBase::setNewIndices
 )
 {
 	indexList_.assign(newIndices, false);
+	unSyncLists();
 }
 
 bool pFlow::boundaryBase::appendNewIndices
@@ -42,7 +48,8 @@ bool pFlow::boundaryBase::appendNewIndices
 {
 	
 	indexList_.append(newIndices);
-	
+	unSyncLists();
+
 	message msg;
 
 	msg.add(message::BNDR_APPEND);
@@ -177,7 +184,8 @@ pFlow::boundaryBase::boundaryBase
 : 
 	subscriber(dict.name()),
 	boundaryPlane_(bplane),
-	indexList_(groupNames(dict.name(), "indexList")),
+	indexList_(groupNames("indexList", dict.name())),
+	indexListHost_(groupNames("hostIndexList",dict.name())),
 	neighborLength_(dict.getVal<real>("neighborLength")),
 	internal_(internal),
 	boundaries_(bndrs),
@@ -186,6 +194,7 @@ pFlow::boundaryBase::boundaryBase
 	name_(dict.name()),
 	type_(dict.getVal<word>("type"))
 {
+	unSyncLists();
 }
 
 pFlow::boundaryBase &pFlow::boundaryBase::mirrorBoundary()
@@ -193,11 +202,10 @@ pFlow::boundaryBase &pFlow::boundaryBase::mirrorBoundary()
     return boundaries_[mirrorBoundaryIndex()];
 }
 
-void pFlow::boundaryBase::setSize(uint32 newSize)
+const pFlow::boundaryBase &pFlow::boundaryBase::mirrorBoundary() const
 {
-	indexList_.resize(newSize);
-	
-}	
+    return boundaries_[mirrorBoundaryIndex()];
+}
 
 typename pFlow::boundaryBase::pointFieldAccessType
 pFlow::boundaryBase::thisPoints()
@@ -218,6 +226,15 @@ typename pFlow::boundaryBase::pointFieldAccessType
     notImplementedFunction;
     return pointFieldAccessType();
 }
+
+
+pFlow::realx3 pFlow::boundaryBase::displacementVectroToMirror() const
+{
+	const plane& thisP = boundaryPlane();
+	const plane& mirrorP = mirrorBoundary().boundaryPlane();
+	return thisP.normal()*(thisP.d() + mirrorP.d());
+}
+
 
 pFlow::uniquePtr<pFlow::boundaryBase> pFlow::boundaryBase::create
 (

@@ -22,10 +22,11 @@ template<class T, class MemorySpace>
     pFlow::periodicBoundaryField<T, MemorySpace>::periodicBoundaryField
 (
 	const boundaryBase& boundary, 
+	const pointStructure& pStruct,
 	InternalFieldType& internal
 )
 :
-	BoundaryFieldType(boundary, internal)
+	BoundaryFieldType(boundary, pStruct, internal)
 {
 	this->addEvent(message::BNDR_APPEND)
 		 .addEvent(message::BNDR_TRANSFER);
