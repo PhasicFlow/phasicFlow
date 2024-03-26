@@ -35,6 +35,7 @@ namespace pFlow
 class box;
 class particles;
 class geometry;
+class pointStructure;
 
 
 class contactSearch
@@ -96,6 +97,8 @@ public:
 	{
 		return particles_;
 	}
+
+	const pointStructure& pStruct()const;
 
 	const auto& Geometry()const
 	{

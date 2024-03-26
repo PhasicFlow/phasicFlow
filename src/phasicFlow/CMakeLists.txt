@@ -85,10 +85,13 @@ structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
 structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
 
+
+
 triSurface/subSurface.cpp
 triSurface/triSurface.cpp
 triSurface/multiTriSurface.cpp
 
+containers/pointField/boundaryField/generalBoundary.cpp
 containers/pointField/pointFields.cpp
 containers/triSurfaceField/triSurfaceFields.cpp
 

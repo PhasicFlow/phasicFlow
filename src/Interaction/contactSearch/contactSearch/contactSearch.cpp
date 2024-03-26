@@ -20,6 +20,7 @@ Licence:
 
 #include "contactSearch.hpp"
 #include "streams.hpp"
+#include "particles.hpp"
 
 
 pFlow::contactSearch::contactSearch(
@@ -39,13 +40,17 @@ pFlow::contactSearch::contactSearch(
 
 }
 
+const pFlow::pointStructure &pFlow::contactSearch::pStruct() const
+{
+   return particles_.pStruct();
+}
 
 pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
-	const dictionary& dict,
-	const box& domain,
- 	const particles& prtcl,
- 	const geometry& geom,
- 	Timers& timers)
+    const dictionary &dict,
+    const box &domain,
+    const particles &prtcl,
+    const geometry &geom,
+    Timers &timers)
 {
 	word baseMethName	= dict.getVal<word>("method");	
 

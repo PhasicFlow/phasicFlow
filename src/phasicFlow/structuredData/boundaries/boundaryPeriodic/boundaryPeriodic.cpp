@@ -95,9 +95,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	}
 	
 	// to obtain the transfer vector 
-	const auto& thisP = boundaryPlane();
-	const auto& mirrorP = mirrorBoundary().boundaryPlane();
-	realx3 transferVec = thisP.normal()*(thisP.d() + mirrorP.d());
+	realx3 transferVec = displacementVectroToMirror();
 
 	return transferPoints
 	(

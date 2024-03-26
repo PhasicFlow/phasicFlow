@@ -289,6 +289,33 @@ public:
 		INLINE_FUNCTION_H
 		void assign(const VectorType& src, bool srcCapacity = true);
 
+		
+		/*template<typename MSpace, 
+				std::enable_if_t<
+					!std::is_same_v<typename VectorSingle<T, MSpace>::memory_space, memory_space>, 
+					bool> = true>*/
+		template<typename MSpace>
+		INLINE_FUNCTION_H
+		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true)
+		{
+			uint32 srcSize = src.size();
+			uint32 srcCap = src.capacity();
+
+			if(srcCapacity && srcCap != capacity()){
+				reallocateCapacitySize(srcCap, srcSize);
+			}
+			else {
+				changeSize(srcSize);
+			}
+
+			if constexpr(isTriviallyCopyable_){
+				copy(deviceView(), src.deviceView());
+			}
+			else{
+				static_assert("Not a valid operation for this data type ");
+			}
+		}
+
 		INLINE_FUNCTION_H
 		void append(const std::vector<T>& appVec);
 

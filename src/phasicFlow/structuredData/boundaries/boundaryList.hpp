@@ -70,6 +70,11 @@ public:
 
 	bool setLists();
 
+	const pointStructure& pStruct()const
+	{
+		return pStruct_;
+	}
+
 	auto& boundary(size_t i)
 	{
 		return ListPtr<boundaryBase>::operator[](i);

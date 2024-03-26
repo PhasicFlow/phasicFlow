@@ -55,7 +55,7 @@ public:
             this->set
             (
                 i, 
-                BoundaryFieldType::create(boundaries_[i], internal)
+                BoundaryFieldType::create(boundaries_[i], boundaries_.pStruct() ,internal)
             );
         }
     }

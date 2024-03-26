@@ -46,10 +46,11 @@ public:
 
 public:
 
-	TypeInfo("boundaryField<periodic>");
+	TypeInfoTemplate211("boundaryField","periodic", T, memory_space::name());
 
 	periodicBoundaryField(
 		const boundaryBase& boundary, 
+		const pointStructure& pStruct,
 		InternalFieldType& internal);
 		
 
