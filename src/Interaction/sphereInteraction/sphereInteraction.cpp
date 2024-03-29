@@ -134,7 +134,7 @@ pFlow::sphereInteraction<cFM,gMM, cLT>::sphereInteraction
 {
 	contactSearch_ = contactSearch::create(
 	subDict("contactSearch"),
-	prtcl.thisDomain().domainBox(),
+	prtcl.extendedDomain().domainBox(),
 	prtcl,
 	geom,
 	timers());

@@ -80,7 +80,10 @@ protected:
 		if(!cellsWallLevel0_.broadSearch(
 			pwPairs,
 			NBSLevel0_.getSearchCells(),
-			NBSLevel0_.getCellIterator()))
+			NBSLevel0_.getCellIterator(),
+			pointPos,
+			diameter,
+			sizeRatio_))
 		{
 			fatalErrorInFunction<<
 			"Error in broadSearch for NBS (particle-wall)"<<endl;
@@ -105,7 +108,8 @@ public:
 			uint32 					nWallPoints,
 			uint32 					nWallElements,
 			const ViewType1D<realx3,memory_space>& 		wallPoints, 
-			const ViewType1D<uint32x3,memory_space>& 	wallVertices);
+			const ViewType1D<uint32x3,memory_space>& 	wallVertices,
+			const ViewType1D<realx3,memory_space>& 		wallNormals );
 		
 			
 		INLINE_FUNCTION_HD

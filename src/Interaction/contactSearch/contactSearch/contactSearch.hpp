@@ -42,7 +42,7 @@ class contactSearch
 {
 private:
 
-	const box& 	domainBox_;
+	const box& 	extendedDomainBox_;
 
 	const particles& 		particles_;
 
@@ -60,7 +60,7 @@ public:
 
 	contactSearch(
 		const dictionary& dict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers);
@@ -88,9 +88,9 @@ public:
 		return dict_;
 	}
 
-	const auto& domainBox()const
+	const auto& extendedDomainBox()const
 	{
-		return domainBox_;
+		return extendedDomainBox_;
 	}
 
 	const auto& Particles()const
@@ -133,7 +133,7 @@ public:
 	static 
 	uniquePtr<contactSearch> create(
 		const dictionary& dict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers);
