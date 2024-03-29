@@ -1,7 +1,7 @@
 
 set(source_files 
 pFlowToVTK.cpp 
-geometric.cpp 
+#geometric.cpp 
 )
 set(link_lib phasicFlow Kokkos::kokkos Utilities)
 

@@ -50,7 +50,13 @@ fileSystem operator /
 (
 	const fileSystem& fs1,
     const fileSystem& fs2
- );
+);
+
+fileSystem operator /
+(
+	const fileSystem& fs1,
+    const word& dir2
+);
 
 fileSystem operator +
 (

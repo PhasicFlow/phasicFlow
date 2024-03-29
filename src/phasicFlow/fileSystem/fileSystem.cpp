@@ -281,6 +281,15 @@ pFlow::fileSystem pFlow::operator /
 
 }
 
+pFlow::fileSystem pFlow::operator /
+(
+	const fileSystem& fs1,
+	const word& dir2 
+)
+{
+	return fs1/fileSystem(dir2, "");
+}
+
 pFlow::fileSystem pFlow::operator +
 (
 	const fileSystem& fs1,

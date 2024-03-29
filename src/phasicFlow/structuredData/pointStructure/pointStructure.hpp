@@ -147,6 +147,12 @@ public:
 		{
 			return simulationDomain_().thisDomain();
 		}
+
+		inline 
+		const auto& extendedDomain()const
+		{
+			return boundaries_.extendedDomain();
+		}
 		
 	// - IO methods 
 

@@ -108,14 +108,8 @@ public:
 		return dt_;
 	}
 
-	real setTime(real t)
-	{
-		real tmp = currentTime_;
-		currentTime_ = t;
-		lastSaved_ = t;
-		checkForOutputToFile();
-		return tmp;
-	}
+	real setTime(real t);
+	
 
 	void setStopAt(real sT)
 	{

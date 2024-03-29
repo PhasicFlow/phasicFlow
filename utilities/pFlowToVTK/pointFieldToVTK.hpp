@@ -25,13 +25,15 @@ Licence:
 #include <regex>
 
 #include "vtkFile.hpp"
+#include "systemControl.hpp"
+#include "pointStructure.hpp"
 #include "pointFields.hpp"
-#include "IOobject.hpp"
+
 
 namespace pFlow::PFtoVTK
 {
 
-template<typename IntType, typename IncludeMaskType>
+/*template<typename IntType, typename IncludeMaskType>
 bool addIntPointField(
 	iOstream& 	os,
 	word 		fieldName,
@@ -53,7 +55,7 @@ bool addRealx3PointField(
 	word 		fieldName,
 	int32 		numActivePoints,
 	realx3* 	field,
-	IncludeMaskType includeMask );
+	IncludeMaskType includeMask );*/
 
 bool regexCheck(word TYPENAME, word fieldType)
 {
@@ -69,14 +71,10 @@ bool regexCheck(word TYPENAME, word fieldType)
 template<typename Type>
 bool checkFieldType(word objectType)
 {
-	//if( pointField<VectorSingle,Type>::TYPENAME() == objectType )return true;
-	//if( pointField<VectorSingle,Type, HostSpace>::TYPENAME() == objectType ) return true;
-	//if( pointField<VectorDual, Type>::TYPENAME() == objectType )return true;
-	return regexCheck(pointField<VectorSingle,Type>::TYPENAME(), objectType);
-	
+	return regexCheck(pointField<Type>::TYPENAME(), objectType);
 }
 
-template<typename T>
+/*template<typename T>
 bool convertIntPointField
 (
 	iOstream& os,
@@ -113,10 +111,10 @@ bool convertIntPointField
 		pStruct.numActive(),
 		data,
 		pStruct.activePointsMaskH() );
-}
+}*/
 
 
-bool convertRealTypePointField(
+/*bool convertRealTypePointField(
 	iOstream& os,
 	const IOfileHeader& header,
 	const pointStructure& pStruct)
@@ -144,9 +142,9 @@ bool convertRealTypePointField(
 		pStruct.numActive(),
 		data,
 		pStruct.activePointsMaskH() );
-}
+}*/
 
-bool convertRealx3TypePointField(
+/*bool convertRealx3TypePointField(
 	iOstream& os,
 	const IOfileHeader& header,
 	const pointStructure& pStruct)
@@ -174,50 +172,45 @@ bool convertRealx3TypePointField(
 		pStruct.numActive(),
 		data,
 		pStruct.activePointsMaskH() );
-}
+}*/
 
 
-template<typename IncludeMaskType>
 bool addUndstrcuturedGridField(
 	iOstream& 	os,
-	int32 		numActivePoints,
 	realx3* 	position,
-	IncludeMaskType includeMask)
+	uint32 		numPoints)
 {
 
-	auto [iFirst, iLast] = includeMask.activeRange();
-
 	os<< "DATASET UNSTRUCTURED_GRID\n";
-	os<< "POINTS "<< numActivePoints << " float\n"; 
+	os<< "POINTS "<< numPoints << " float\n"; 
 	
-	if(numActivePoints==0) return true;
+	if(numPoints==0) return true;
 	
-	for(int32 i=iFirst; i<iLast; ++i)
+	for(uint32 i=0; i<numPoints; i++)
 	{
-		if(includeMask(i))
-			os<< position[i].x()<<' '<< position[i].y()<<' '<<position[i].z()<<'\n';
+		os<< position[i].x()<<' '<< position[i].y()<<' '<<position[i].z()<<'\n';
 	}
 
-	os<<"CELLS "<< numActivePoints<<' '<< 2*numActivePoints<<'\n';
-	for(int32 i=0; i<numActivePoints; i++)
+	os<<"CELLS "<< numPoints<<' '<< 2*numPoints<<'\n';
+	for(uint32 i=0; i<numPoints; i++)
 	{
 		os<< 1 <<' '<< i<<'\n';
 	}
 
-	os<<"CELL_TYPES "<< numActivePoints<<'\n';
+	os<<"CELL_TYPES "<< numPoints<<'\n';
 
-	for(int32 i=0; i<numActivePoints; i++)
+	for(int32 i=0; i<numPoints; i++)
 	{
 		os<< 1 <<'\n';
 	}
 	
-	os << "POINT_DATA " << numActivePoints << endl;
+	os << "POINT_DATA " << numPoints << endl;
 
 	return true;
 }
 
 
-template<typename IntType, typename IncludeMaskType>
+/*template<typename IntType, typename IncludeMaskType>
 bool addIntPointField(
 	iOstream& 	os,
 	word 		fieldName,
@@ -238,9 +231,9 @@ bool addIntPointField(
 	}
 
 	return true;
-}
+}*/
 
-template<typename IncludeMaskType>
+/*template<typename IncludeMaskType>
 bool addRealPointField(
 	iOstream& 	os,
 	word 		fieldName,
@@ -260,9 +253,9 @@ bool addRealPointField(
 			os<< field[i] <<'\n';
 	}
 	return true;
-}
+}*/
 
-template<typename IncludeMaskType>
+/*template<typename IncludeMaskType>
 bool addRealx3PointField(
 	iOstream& 	os,
 	word 		fieldName,
@@ -283,16 +276,16 @@ bool addRealx3PointField(
 	}
 
 	return true;
-}
+}*/
 
 
 bool convertTimeFolderPointFields( 
-	fileSystem timeFolder,
-	real time,
+	systemControl& control,
 	fileSystem destPath,
 	word bName)
 {
 
+	fileSystem timeFolder = control.time().path();
 	// check if pointStructure exist in this folder 
 	IOfileHeader pStructHeader(
 		objectFile(
@@ -304,36 +297,35 @@ bool convertTimeFolderPointFields(
 
 	if( !pStructHeader.headerOk(true) )
 	{
-		output<<yellowColor<<"Time folder "<< timeFolder <<
+		output<<yellowColor<<"Time folder "<< control.time().path() <<
 		" does not contain any pStructure data file. Skipping this folder . . ."
 		<<defaultColor<<nl;
 		return true;
 	}
 
-	vtkFile vtk(destPath, bName, time);
+	vtkFile vtk(destPath, bName, control.time().currentTime());
 
 	if(!vtk) return false;
 
-	auto pStructObjPtr = IOobject::make<pointStructure>(pStructHeader);
-	auto& pStruct = pStructObjPtr().getObject<pointStructure>();
+	
+	auto pStruct = pointStructure(control);
 
 	// get a list of files in this timeFolder;
 
-	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
+	auto posVec = pStruct.pointPositionHost();
 	auto* pos = posVec.data();
 
-	REPORT(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
-					 <<" active particles"<<endREPORT;
+	REPORT(1)<<"Writing pointStructure to vtk file with "<< Yellow_Text(pStruct.numActive())
+					 <<" active particles"<<END_REPORT;
 	addUndstrcuturedGridField(
 		vtk(),
-		pStruct.numActive(),
 		pos,
-		pStruct.activePointsMaskH());
+		pStruct.numActive());
 
-	auto fileList = containingFiles(timeFolder);
+	//auto fileList = containingFiles(timeFolder);
 
 
-	for(auto& file:fileList)
+	/*for(auto& file:fileList)
 	{
 		IOfileHeader fieldHeader(
 			objectFile(
@@ -350,7 +342,7 @@ bool convertTimeFolderPointFields(
 			convertRealTypePointField(vtk(), fieldHeader, pStruct);
 			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
 		}
-	}
+	}*/
 
 	return true;
 }
@@ -367,7 +359,7 @@ bool convertTimeFolderPointFieldsSelected(
 {
 
 	// check if pointStructure exist in this folder 
-	IOfileHeader pStructHeader(
+	/*IOfileHeader pStructHeader(
 		objectFile(
 			pointStructureFile__,
 			timeFolder,
@@ -438,7 +430,7 @@ bool convertTimeFolderPointFieldsSelected(
 				REPORT(1)<<"Could not find "<<yellowText(fieldAddress) <<" skipping . . ."<<endREPORT;
 			}
 		}
-	}
+	}*/
 
 	return true;
 }
