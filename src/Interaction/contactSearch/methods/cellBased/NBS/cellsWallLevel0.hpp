@@ -60,6 +60,9 @@ private:
 	// - ref to points in the trisurface (borrowed)
 	ViewType1D<realx3, memory_space> 	points_;
 
+	// - ref to normal vectors of triangles (borrowed)
+	ViewType1D<realx3, memory_space> 	normals_;
+
 	// cell range of element/triangle bounding box
 	ViewType1D<iBoxType, memory_space> 	elementBox_;
 	
@@ -88,7 +91,8 @@ public:
 		uint32 					numPoints,
 		uint32 					numElements,
 		const ViewType1D<realx3,memory_space>& 		points, 
-		const ViewType1D<uint32x3,memory_space>& 	vertices);
+		const ViewType1D<uint32x3,memory_space>& 	vertices,
+		const ViewType1D<realx3, memory_space>& normals);
 	
 
 	
@@ -97,8 +101,9 @@ public:
 	bool resetElements( 
 		uint32 		numElements,
 		uint32      numPoints,
-		ViewType1D<realx3, memory_space>& points, 
-		ViewType1D<uint32x3, memory_space>& vertices);
+		const ViewType1D<realx3, memory_space>& points, 
+		const ViewType1D<uint32x3, memory_space>& vertices,
+		const ViewType1D<realx3, memory_space>& normals);
 	
 
 	INLINE_FUNCTION_HD
@@ -116,18 +121,27 @@ public:
 	bool broadSearch(
 		csPairContainerType& pairs,
 		const cells& searchBox, 
-		const mapperNBS::CellIterator& particleMap);
+		const mapperNBS::CellIterator& particleMap,
+		const deviceViewType1D<realx3>& pPoints,
+		const deviceViewType1D<real>&  pDiams,
+		real sizeRatio);
 	
 
 	bool build(const cells& searchBox);
 	
 	bool particleWallFindPairs(
 		csPairContainerType& pairs, 
-		const mapperNBS::CellIterator& particleMap);
+		const mapperNBS::CellIterator& particleMap,
+		const deviceViewType1D<realx3>& pPoints,
+		const deviceViewType1D<real>&  pDiams,
+		real sizeRatio);
 
 	int32 findPairsElementRangeCount(
 		csPairContainerType& pairs, 
-		const mapperNBS::CellIterator& particleMap); 
+		const mapperNBS::CellIterator& particleMap,
+		const deviceViewType1D<realx3>& pPoints,
+		const deviceViewType1D<real>&  pDiams,
+		real sizeRatio); 
 	
 
 

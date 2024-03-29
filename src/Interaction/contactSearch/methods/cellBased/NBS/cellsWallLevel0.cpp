@@ -26,18 +26,18 @@ pFlow::cellsWallLevel0::cellsWallLevel0
     real cellExtent, 
     uint32 numPoints, 
     uint32 numElements, 
-    const ViewType1D<realx3, 
-    memory_space> &points,
-    const ViewType1D<uint32x3, memory_space> &vertices
+    const ViewType1D<realx3, memory_space> &points,
+    const ViewType1D<uint32x3, memory_space> &vertices,
+	const ViewType1D<realx3, memory_space>& normals
 )
 :
     cellExtent_( max(cellExtent, 0.5 ) ),
     numElements_(numElements),
     numPoints_(numPoints),
     vertices_(vertices),
-    points_(points)
+    points_(points),
+	normals_(normals)
 {
-
     allocateArrays();
 }
 
@@ -45,8 +45,9 @@ bool pFlow::cellsWallLevel0::resetElements
 (
 	uint32 numElements, 
 	uint32 numPoints, 
-	ViewType1D<realx3, memory_space> &points, 
-	ViewType1D<uint32x3, memory_space> &vertices
+	const ViewType1D<realx3, memory_space>& points, 
+	const ViewType1D<uint32x3, memory_space>& vertices,
+	const ViewType1D<realx3, memory_space>& normals
 )
 {
 
@@ -54,6 +55,7 @@ bool pFlow::cellsWallLevel0::resetElements
 	numPoints_ = numPoints;
 	points_ 	= points;
 	vertices_ 	= vertices;
+	normals_ 	= normals;
 
 	allocateArrays();
 
@@ -64,7 +66,10 @@ bool pFlow::cellsWallLevel0::broadSearch
 (
 	csPairContainerType &pairs,
 	const cells& searchBox,  
-	const mapperNBS::CellIterator &particleMap
+	const mapperNBS::CellIterator &particleMap,
+	const deviceViewType1D<realx3>& pPoints,
+	const deviceViewType1D<real>&  pDiams,
+	real sizeRatio
 )
 {
 	
@@ -72,7 +77,7 @@ bool pFlow::cellsWallLevel0::broadSearch
 	
 	this->build(searchBox);
 	
-	this->particleWallFindPairs(pairs, particleMap);
+	this->particleWallFindPairs(pairs, particleMap, pPoints, pDiams, sizeRatio);
 	
 	return true;
 }
@@ -104,7 +109,10 @@ bool pFlow::cellsWallLevel0::build(const cells & searchBox)
 bool pFlow::cellsWallLevel0::particleWallFindPairs
 (
 	csPairContainerType &pairs, 
-	const mapperNBS::CellIterator &particleMap
+	const mapperNBS::CellIterator &particleMap,
+	const deviceViewType1D<realx3>& pPoints,
+	const deviceViewType1D<real>&  pDiams,
+	real sizeRatio
 )
 {
 
@@ -113,7 +121,7 @@ bool pFlow::cellsWallLevel0::particleWallFindPairs
 	while (getFull)
 	{
 		
-		getFull = findPairsElementRangeCount(pairs, particleMap);
+		getFull = findPairsElementRangeCount(pairs, particleMap, pPoints, pDiams, sizeRatio);
 		
 		if(getFull)
 		{
@@ -137,14 +145,14 @@ bool pFlow::cellsWallLevel0::particleWallFindPairs
 pFlow::int32 pFlow::cellsWallLevel0::findPairsElementRangeCount
 (
 	csPairContainerType &pairs, 
-	const mapperNBS::CellIterator &particleMap
+	const mapperNBS::CellIterator &particleMap,
+	const deviceViewType1D<realx3>& pPoints,
+	const deviceViewType1D<real>&  pDiams,
+	real sizeRatio
 )
 {
 	uint32 getFull =0;
-	
-	//const auto pwPairs = pairs;
-	const auto elementBox = elementBox_;
-	
+			
 	
 	Kokkos::parallel_reduce(
 		"pFlow::cellsWallLevel0::findPairsElementRangeCount",
@@ -155,13 +163,16 @@ pFlow::int32 pFlow::cellsWallLevel0::findPairsElementRangeCount
 			
 			const uint32 iTri = teamMember.league_rank();
 
-			const auto triBox = elementBox[iTri];
-			
+			const auto triBox = elementBox_[iTri];
+			const auto triPlane = infinitePlane(
+				normals_[iTri], 
+				points_[vertices_[iTri].x()]);
+
 			uint32 getFull2 = 0;
 
 			auto bExtent = boxExtent(triBox);
 			uint32 numCellBox = bExtent.x()*bExtent.y()*bExtent.z();
-
+			
 			Kokkos::parallel_reduce( 
 				Kokkos::TeamThreadRange( teamMember, numCellBox ),
 				[&] ( const uint32 linIndex, uint32 &innerUpdate )
@@ -175,10 +186,13 @@ pFlow::int32 pFlow::cellsWallLevel0::findPairsElementRangeCount
 						while( n != particleMap.NoPos)
 						{
 							// id is wall id the pair is (particle id, wall id)
-							if( pairs.insert(
-								static_cast<csIdType>(n),
-								static_cast<csIdType>(iTri) ) == -1 )
-								innerUpdate++;
+							if( abs(triPlane.pointFromPlane(pPoints[n]))< pDiams[n]*sizeRatio*cellExtent_)
+							{
+								if( pairs.insert(
+									static_cast<csIdType>(n),
+									static_cast<csIdType>(iTri) ) == -1 )
+									innerUpdate++;
+							}
 							n = particleMap.next(n);
 						
 						}

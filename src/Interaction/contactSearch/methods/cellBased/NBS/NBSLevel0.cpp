@@ -60,7 +60,6 @@ bool pFlow::NBSLevel0::findPairs
 			
 		}
 
-		Kokkos::fence();
 	}
 	
 	return true;

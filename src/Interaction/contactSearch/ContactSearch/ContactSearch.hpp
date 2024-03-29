@@ -56,12 +56,12 @@ public:
 
 	ContactSearch(
 		const dictionary& csDict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers)
 	:
-		contactSearch(csDict, domain, prtcl, geom, timers)
+		contactSearch(csDict, extDomain, prtcl, geom, timers)
 	{
 
 		auto method = dict().getVal<word>("method");
@@ -79,12 +79,13 @@ public:
 		uint32 wnTri    = this->Geometry().size();
 		const auto& wPoints = this->Geometry().points().deviceViewAll();
 		const auto& wVertices = this->Geometry().vertices().deviceViewAll();
+		const auto& wNormals = this->Geometry().normals().deviceViewAll();
 
 		ppwContactSearch_ = 
 			makeUnique<SearchMethodType>
 			(
 				nbDict,
-				this->domainBox(),
+				this->extendedDomainBox(),
 				minD,
 				maxD,
 				position,
@@ -93,7 +94,8 @@ public:
 				wnPoints,
 				wnTri,
 				wPoints,
-				wVertices
+				wVertices,
+				wNormals
 			);
 		REPORT(2)<<"Contact search algorithm for particle-particle is "<<
 				 Green_Text(ppwContactSearch_().typeName())<<END_REPORT;

@@ -25,12 +25,12 @@ Licence:
 
 pFlow::contactSearch::contactSearch(
 	const dictionary& dict,
-	const box& domain,
+	const box& extDomain,
  	const particles& prtcl,
  	const geometry& geom,
  	Timers& timers)
 :
-	domainBox_(domain),
+	extendedDomainBox_(extDomain),
 	particles_(prtcl),
 	geometry_(geom),
 	ppTimer_("particle-particle contact search", &timers),
@@ -47,7 +47,7 @@ const pFlow::pointStructure &pFlow::contactSearch::pStruct() const
 
 pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
     const dictionary &dict,
-    const box &domain,
+    const box &extDomain,
     const particles &prtcl,
     const geometry &geom,
     Timers &timers)
@@ -60,7 +60,7 @@ pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
 	
 	if( dictionaryvCtorSelector_.search(model))
 	{
-		auto objPtr = dictionaryvCtorSelector_[model] (dict, domain, prtcl, geom, timers);
+		auto objPtr = dictionaryvCtorSelector_[model] (dict, extDomain, prtcl, geom, timers);
 		REPORT(2)<<"Model "<< Green_Text(model)<<" is created."<< END_REPORT;
 		return objPtr;
 	}

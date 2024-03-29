@@ -32,7 +32,8 @@ pFlow::NBS::NBS
 	uint32 					nWallPoints,
 	uint32 					nWallElements,
 	const ViewType1D<realx3,memory_space>& 		wallPoints, 
-	const ViewType1D<uint32x3,memory_space>& 	wallVertices
+	const ViewType1D<uint32x3,memory_space>& 	wallVertices,
+  const ViewType1D<realx3,memory_space>& 		wallNormals 
 )
 : 
     particleWallContactSearchs<NBS>(
@@ -61,7 +62,8 @@ pFlow::NBS::NBS
 		nWallPoints,
 		nWallElements,
 		wallPoints,
-		wallVertices
+		wallVertices,
+    wallNormals
 	)
 {
 }

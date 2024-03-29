@@ -31,7 +31,6 @@ Licence:
 #include "types.hpp"
 #include "Time.hpp"
 #include "fileDictionary.hpp"
-#include "box.hpp"
 #include "Timers.hpp"
 #include "dynamicLinkLibs.hpp"
 #include "Set.hpp"
@@ -175,11 +174,6 @@ public:
 	{
 		return settingsDict_().getVal<realx3>("g");
 	}
-
-	/*inline box domain()
-	{
-		return box(domainDict().subDict("globalBox"));
-	}*/
 
 	bool operator ++(int);
 

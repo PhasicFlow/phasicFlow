@@ -18,29 +18,19 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "vocabs.hpp"
 #include "systemControl.hpp"
-#include "pointFieldToVTK.hpp"
-#include "triSurfaceFieldToVTK.hpp"
 #include "timeFolder.hpp"
 #include "commandLine.hpp"
 #include "ranges.hpp"
-#include "readControlDict.hpp"
+#include "Vectors.hpp"
+#include "phasicFlowKokkos.hpp"
+#include "pointFieldToVTK.hpp"
+//#include "triSurfaceFieldToVTK.hpp"
+//#include "readControlDict.hpp"
 
 
-using pFlow::word;
-using pFlow::wordVector;
-using pFlow::geometryFolder__;
-using pFlow::timeFolder;
-using pFlow::fileSystem;
-using pFlow::wordList;
-using pFlow::IOfileHeader;
-using pFlow::objectFile;
-using pFlow::output;
-using pFlow::endl;
-using pFlow::multiTriSurface;
-using pFlow::commandLine;
-using pFlow::realCombinedRange;
+using namespace pFlow;
 
 int main(int argc, char** argv )
 {
@@ -68,6 +58,12 @@ int main(int argc, char** argv )
 		outFolder,
 		"path to output folder of VTK",
 		"path");
+	
+	bool separateSurfaces = false;
+	cmds.addOption(
+		"-s,--separate-surfaces",
+		separateSurfaces,
+		"surfaces in the geometry are converted separatedly");
 
 	wordVector fields;
 	bool 			 allFields = true;
@@ -92,7 +88,7 @@ int main(int argc, char** argv )
 
 
 	timeFolder folders(Control);
-	fileSystem destFolder = fileSystem(outFolder)/geometryFolder__;
+	fileSystem destFolder = fileSystem(outFolder)/word(geometryFolder__);
 	fileSystem destFolderField = fileSystem(outFolder);
 	wordList geomfiles{"triSurface"};
 
@@ -117,11 +113,11 @@ int main(int argc, char** argv )
 
 	do
 	{
-
+		Control.time().setTime(folders.time());
 		if( !validRange.isMember( folders.time() ) )continue;
 		
-		output<< "time: " << cyanText( folders.time() )<<" s" <<endl;
-		if(!noGoem)
+		output<< "time: " << Cyan_Text( folders.time() )<<" s" <<endl;
+		/*if(!noGoem)
 		{	
 			fileSystem geomFolder = folders.folder()/geometryFolder__;
 			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(geomFolder, folders.time(), destFolder, "surface"))
@@ -129,7 +125,7 @@ int main(int argc, char** argv )
 				fatalExit;
 				return 1;
 			}	
-		}
+		}*/
 
 		if(!noParticle)
 		{
@@ -137,17 +133,15 @@ int main(int argc, char** argv )
 			if(allFields)
 			{
 				if( !pFlow::PFtoVTK::convertTimeFolderPointFields(
-					folders.folder(),
-					folders.time(),
+					Control,
 					destFolderField,
-					"sphereFields" )
-				)
+					"sphereFields" ))
 				{
 					fatalExit;
 				}
 			}else
 			{
-				if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
+				/*if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
 					folders.folder(),
 					folders.time(),
 					destFolderField,
@@ -157,7 +151,7 @@ int main(int argc, char** argv )
 				)
 				{
 					fatalExit;
-				}
+				}*/
 			}	
 		}
 		
