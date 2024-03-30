@@ -22,9 +22,9 @@ Licence:
 #include "oFstream.hpp"
 
 
-pFlow::oFstream::oFstream (const fileSystem& path, bool binary)
+pFlow::oFstream::oFstream (const fileSystem& path, bool binary, bool append)
 :
-	fileStream(path, true, binary),
+	fileStream(path, true, binary, append),
 	Ostream
   ( 
     fileStream::outStream(), 

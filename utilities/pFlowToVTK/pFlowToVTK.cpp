@@ -26,7 +26,7 @@ Licence:
 #include "Vectors.hpp"
 #include "phasicFlowKokkos.hpp"
 #include "pointFieldToVTK.hpp"
-//#include "triSurfaceFieldToVTK.hpp"
+#include "triSurfaceFieldToVTK.hpp"
 //#include "readControlDict.hpp"
 
 
@@ -60,10 +60,10 @@ int main(int argc, char** argv )
 		"path");
 	
 	bool separateSurfaces = false;
-	cmds.addOption(
+	cmds.add_flag(
 		"-s,--separate-surfaces",
 		separateSurfaces,
-		"surfaces in the geometry are converted separatedly");
+		"use this when you want to have sub-surfaces in separate files");
 
 	wordVector fields;
 	bool 			 allFields = true;
@@ -78,7 +78,7 @@ int main(int argc, char** argv )
 		"a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end",
 		" ");
 
-	bool isCoupling = false;
+	//bool isCoupling = false;
 
 	if(!cmds.parse(argc, argv)) return 0;
 	
@@ -88,8 +88,8 @@ int main(int argc, char** argv )
 
 
 	timeFolder folders(Control);
-	fileSystem destFolder = fileSystem(outFolder)/word(geometryFolder__);
-	fileSystem destFolderField = fileSystem(outFolder);
+	auto destFolder = fileSystem(outFolder)/word(geometryFolder__);
+	auto destFolderField = fileSystem(outFolder);
 	wordList geomfiles{"triSurface"};
 
 
@@ -117,15 +117,16 @@ int main(int argc, char** argv )
 		if( !validRange.isMember( folders.time() ) )continue;
 		
 		output<< "time: " << Cyan_Text( folders.time() )<<" s" <<endl;
-		/*if(!noGoem)
+		if(!noGoem)
 		{	
-			fileSystem geomFolder = folders.folder()/geometryFolder__;
-			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(geomFolder, folders.time(), destFolder, "surface"))
+			
+			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
+				Control, destFolder, "surface", separateSurfaces))
 			{
 				fatalExit;
 				return 1;
 			}	
-		}*/
+		}
 
 		if(!noParticle)
 		{
@@ -141,9 +142,8 @@ int main(int argc, char** argv )
 				}
 			}else
 			{
-				/*if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
-					folders.folder(),
-					folders.time(),
+				if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
+					Control,
 					destFolderField,
 					"sphereFields",
 					fields,
@@ -151,7 +151,7 @@ int main(int argc, char** argv )
 				)
 				{
 					fatalExit;
-				}*/
+				}
 			}	
 		}
 		

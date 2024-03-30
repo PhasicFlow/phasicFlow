@@ -40,15 +40,21 @@ protected:
 
 	real  	   time_ = 0.0;
 
+	bool		append_=false;
+
 	uniquePtr<oFstream>  oStream_= nullptr;
 
-	bool openStream();
+	bool openStream(bool wHeader);
 
 	virtual bool writeHeader();
 
 public:
 
-	vtkFile(const fileSystem dir, const word& bName, real time);
+	vtkFile(
+		const fileSystem dir, 
+		const word& bName, 
+		real time,
+		bool append = false);
 
 	virtual ~vtkFile() = default;
 
@@ -56,7 +62,7 @@ public:
 	{
 		if(!oStream_)
 		{
-			if(!openStream())
+			if(!openStream(!append_))
 			{
 				fatalErrorInFunction<<
 				"  error in opening vtkFile "<< fileName() <<endl;
