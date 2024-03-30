@@ -33,7 +33,6 @@ bool pFlow::fileSystem::checkFileName(const word& name)
 		"Invalid file name supplied " << name <<
 		"the following characters are not allowd: " <<
 		notPermittedCharsFile << endl;
-		fatalExit;
 		return false;
 	}
 
@@ -57,9 +56,9 @@ pFlow::fileSystem::fileSystem( const word& dir, const word& file)
 {
 	isDir_ = file.empty();
 
-	if( !isDir_) 
+	if( !isDir_ && !checkFileName(file)) 
 	{
-		checkFileName(file);
+		fatalExit;
 	}
 
 	try
@@ -240,7 +239,10 @@ pFlow::fileSystem pFlow::fileSystem::operator()
 
 void pFlow::fileSystem::operator += (const word& fileName)
 {
-	checkFileName(fileName);
+	if(!checkFileName(fileName))
+	{
+		fatalExit;
+	}
 
 	if( isDir())
 	{

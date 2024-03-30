@@ -26,7 +26,7 @@ Licence:
 #include "Vectors.hpp"
 #include "phasicFlowKokkos.hpp"
 #include "pointFieldToVTK.hpp"
-//#include "triSurfaceFieldToVTK.hpp"
+#include "triSurfaceFieldToVTK.hpp"
 //#include "readControlDict.hpp"
 
 
@@ -60,10 +60,10 @@ int main(int argc, char** argv )
 		"path");
 	
 	bool separateSurfaces = false;
-	cmds.addOption(
+	cmds.add_flag(
 		"-s,--separate-surfaces",
 		separateSurfaces,
-		"surfaces in the geometry are converted separatedly");
+		"use this when you want to have sub-surfaces in separate files");
 
 	wordVector fields;
 	bool 			 allFields = true;
@@ -117,15 +117,16 @@ int main(int argc, char** argv )
 		if( !validRange.isMember( folders.time() ) )continue;
 		
 		output<< "time: " << Cyan_Text( folders.time() )<<" s" <<endl;
-		/*if(!noGoem)
+		if(!noGoem)
 		{	
-			fileSystem geomFolder = folders.folder()/geometryFolder__;
-			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(geomFolder, folders.time(), destFolder, "surface"))
+			
+			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
+				Control, destFolder, "surface", separateSurfaces))
 			{
 				fatalExit;
 				return 1;
 			}	
-		}*/
+		}
 
 		if(!noParticle)
 		{

@@ -21,11 +21,14 @@ Licence:
 
 #include "vtkFile.hpp"
 
-bool pFlow::vtkFile::openStream()
+bool pFlow::vtkFile::openStream(bool wHeader)
 {
-	oStream_ = makeUnique<oFstream>( fileName() );
+	oStream_ = makeUnique<oFstream>( fileName(), false, append_ );
 	if( !oStream_ )return false;
-	return writeHeader();
+	if(wHeader)
+		return writeHeader();
+	else
+		return true;
 }
 
 bool pFlow::vtkFile::vtkFile::writeHeader()
@@ -49,15 +52,17 @@ pFlow::vtkFile::vtkFile
 (
 	const fileSystem dir,
 	const word& bName,
-	real time
+	real time,
+	bool append
 )
 :
 	dirPath_(dir),
 	baseName_(bName),
-	time_(time)
+	time_(time),
+	append_(append)
 {
 
-	if(!openStream())
+	if(!openStream(!append))
 	{
 		fatalErrorInFunction <<
 		"  error in creating vtkFile "<<fileName()<<endl;

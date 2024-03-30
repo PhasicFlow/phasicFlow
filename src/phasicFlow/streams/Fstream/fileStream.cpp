@@ -70,13 +70,30 @@ void pFlow::fileStream::openOutFile
 	
 	if(binary_)
 	{
-		outStream_ = makeUnique< std::ofstream>(
+		if(append_)
+		{
+			outStream_ = makeUnique< std::ofstream>(
+			path.wordPath(), std::ios_base::out| std::ios::binary|std::ios::app);
+		}
+		else
+		{
+			outStream_ = makeUnique< std::ofstream>(
 			path.wordPath(), std::ios_base::out| std::ios::binary);
+		}
 	}
 	else
-		outStream_ = makeUnique< std::ofstream>(
+	{
+		if(append_)
+		{
+			outStream_ = makeUnique< std::ofstream>(
+			path.wordPath(), std::ios_base::out|std::ios::app);
+		}
+		else
+		{
+			outStream_ = makeUnique< std::ofstream>(
 			path.wordPath(), std::ios_base::out);
-
+		}
+	}
 
 	if(!outStream_->is_open())
 	{
@@ -103,12 +120,14 @@ pFlow::fileStream::fileStream
 (
 	const fileSystem& path,
 	bool outStream,
-	bool binary
+	bool binary,
+	bool append
 )
 :
 	inStream_(nullptr),
 	outStream_(nullptr),
-	binary_(binary)
+	binary_(binary),
+	append_(append)
 {
 
 	if(outStream)
