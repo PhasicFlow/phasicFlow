@@ -78,7 +78,7 @@ int main(int argc, char** argv )
 		"a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end",
 		" ");
 
-	bool isCoupling = false;
+	//bool isCoupling = false;
 
 	if(!cmds.parse(argc, argv)) return 0;
 	
@@ -88,8 +88,8 @@ int main(int argc, char** argv )
 
 
 	timeFolder folders(Control);
-	fileSystem destFolder = fileSystem(outFolder)/word(geometryFolder__);
-	fileSystem destFolderField = fileSystem(outFolder);
+	auto destFolder = fileSystem(outFolder)/word(geometryFolder__);
+	auto destFolderField = fileSystem(outFolder);
 	wordList geomfiles{"triSurface"};
 
 
@@ -141,9 +141,8 @@ int main(int argc, char** argv )
 				}
 			}else
 			{
-				/*if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
-					folders.folder(),
-					folders.time(),
+				if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
+					Control,
 					destFolderField,
 					"sphereFields",
 					fields,
@@ -151,7 +150,7 @@ int main(int argc, char** argv )
 				)
 				{
 					fatalExit;
-				}*/
+				}
 			}	
 		}
 		

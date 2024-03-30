@@ -1,5 +1,6 @@
 
 set(source_files 
+pointFieldToVTK.cpp
 pFlowToVTK.cpp 
 #geometric.cpp 
 )
