@@ -23,7 +23,11 @@ Licence:
 
 #include "interaction.hpp"
 #include "sphereParticles.hpp"
+#include "boundarySphereInteractionList.hpp"
 #include "sphereInteractionKernels.hpp"
+//#include "unsortedContactList.hpp"
+
+
 
 namespace pFlow
 {
@@ -45,6 +49,8 @@ public:
 	using MotionModel 			= typename geometryMotionModel::MotionModel;
 
 	using ModelStorage 			= typename ContactForceModel::contactForceStorage;
+
+	using BoundaryListType 		= boundarySphereInteractionList<ContactForceModel,GeometryMotionModel>;
 	
 	using IdType 			= uint32;
 
@@ -52,6 +58,9 @@ public:
 
 	using ContactListType 	= 
 			contactListType<ModelStorage, DefaultExecutionSpace, IdType>;
+
+	//using BoundaryContactListType = unsortedContactList<ModelStorage, DefaultExecutionSpace, IdType>;
+	
 
 
 private:
@@ -61,6 +70,9 @@ private:
 
 	/// const reference to particles 
 	const sphereParticles& 				sphParticles_;
+
+	/// particle-particle and particle-wall interactions at boundaries 
+	BoundaryListType 					boundaryInteraction_;	
 
 	/// contact search object for pp and pw interactions 
 	uniquePtr<contactSearch> 			contactSearch_ = nullptr;
@@ -72,7 +84,8 @@ private:
 	uniquePtr<ContactListType> 			ppContactList_ = nullptr;
 
 	/// contact list for particle-wall interactions (keeps the history)
-	uniquePtr<ContactListType> 			pwContactList_ = nullptr;	
+	uniquePtr<ContactListType> 			pwContactList_ = nullptr;
+
 
 	/// timer for particle-particle interaction computations
 	Timer 		ppInteractionTimer_;
@@ -80,9 +93,13 @@ private:
 	/// timer for particle-wall interaction computations
 	Timer       pwInteractionTimer_;
 
-	Timer 		contactListTimer_;
+	/// timer for managing contact lists (only inernal points)
+	Timer 		contactListMangementTimer_;
 
-	Timer 		contactListTimer0_;
+	/// timer for boundary interaction time 
+	Timer 		boundaryInteractionTimer_;
+
+	
 
 	bool createSphereInteraction();
 

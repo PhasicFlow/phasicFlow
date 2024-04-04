@@ -68,7 +68,7 @@ pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< model << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< model << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_

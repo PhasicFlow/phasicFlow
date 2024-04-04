@@ -35,9 +35,18 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::createSphereInteraction()
 
 	uint32 nPrtcl = sphParticles_.size();
 
+	contactSearch_ = contactSearch::create(
+	subDict("contactSearch"),
+	sphParticles_.extendedDomain().domainBox(),
+	sphParticles_,
+	geometryMotion_,
+	timers());
+
 	ppContactList_ = makeUnique<ContactListType>(nPrtcl+1);
 	
-	pwContactList_ = makeUnique<ContactListType>(nPrtcl/4+1);
+	pwContactList_ = makeUnique<ContactListType>(nPrtcl/5+1);
+
+	
 
 	return true;
 }
@@ -127,19 +136,13 @@ pFlow::sphereInteraction<cFM,gMM, cLT>::sphereInteraction
 	interaction(control, prtcl, geom),
 	geometryMotion_(dynamic_cast<const GeometryMotionModel&>(geom)),
 	sphParticles_(dynamic_cast<const sphereParticles&>(prtcl)),
+	boundaryInteraction_(sphParticles_,geometryMotion_),
 	ppInteractionTimer_("sphere-sphere interaction", &this->timers()),
 	pwInteractionTimer_("sphere-wall interaction", &this->timers()),
-	contactListTimer_("contact list management", &this->timers()),
-	contactListTimer0_("contact list clear", &this->timers())
+	contactListMangementTimer_("contact-list management", &this->timers()),
+	boundaryInteractionTimer_("interaction for boundary", &this->timers())
 {
-	contactSearch_ = contactSearch::create(
-	subDict("contactSearch"),
-	prtcl.extendedDomain().domainBox(),
-	prtcl,
-	geom,
-	timers());
-
-
+	
 	if(!createSphereInteraction())
 	{
 		fatalExit;
@@ -163,14 +166,20 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 	//output<<"iter, t, dt "<< iter<<" "<< t << " "<<dt<<endl;
 	bool broadSearch = contactSearch_().enterBroadSearch(iter, t, dt);
 
-
+	
 	if(broadSearch)
 	{
-		contactListTimer0_.start();
+		contactListMangementTimer_.start();
 		ppContactList_().beforeBroadSearch();
 		pwContactList_().beforeBroadSearch();
-		contactListTimer0_.end();
+		contactListMangementTimer_.pause();
 	} 
+
+	for(uint32 i=0; i<6u; i++)
+	{
+		boundaryInteraction_[i].ppPairs().beforeBroadSearch();
+		boundaryInteraction_[i].pwPairs().beforeBroadSearch();
+	}
 	
 	if( sphParticles_.numActive()<=0)return true;
 	
@@ -187,14 +196,34 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 		fatalExit;
 	}
 	
-
+	for(uint32 i=0; i<6u; i++)
+	{
+		if( !contactSearch_().boundaryBroadSearch(
+			i,
+			iter,
+			t,
+			dt,
+			boundaryInteraction_[i].ppPairs(),
+			boundaryInteraction_[i].pwPairs()))
+		{
+			fatalErrorInFunction<<
+			"failed to perform broadSearch for boundary index "<<i<<endl;
+			return false;
+		}
+	}
 	
 	if(broadSearch && contactSearch_().performedBroadSearch())
 	{
-		contactListTimer_.start();
+		contactListMangementTimer_.resume();
 		ppContactList_().afterBroadSearch();
 		pwContactList_().afterBroadSearch();
-		contactListTimer_.end();
+		contactListMangementTimer_.end();
+	}
+
+	for(uint32 i=0; i<6u; i++)
+	{
+		boundaryInteraction_[i].ppPairs().afterBroadSearch();
+		boundaryInteraction_[i].pwPairs().afterBroadSearch();
 	}
 	
 	ppInteractionTimer_.start();
@@ -206,7 +235,14 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 		sphereWallInteraction();
 	pwInteractionTimer_.end();
 
-	
+	boundaryInteractionTimer_.start();
+	for(uint32 i=0; i<6u; i++)
+	{
+		boundaryInteraction_[i].sphereSphereInteraction(
+			dt, 
+			this->forceModel_());
+	}
+	boundaryInteractionTimer_.end();
 	return true;
 }
 

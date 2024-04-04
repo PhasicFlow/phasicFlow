@@ -27,6 +27,7 @@ Licence:
 #include "box.hpp"
 #include "particles.hpp"
 #include "geometry.hpp"
+#include "boundaryContactSearchList.hpp"
 
 namespace pFlow
 {
@@ -50,6 +51,8 @@ private:
 	
 	uniquePtr<SearchMethodType> 	ppwContactSearch_ = nullptr;
 
+	boundaryContactSearchList 		csBoundaries_;
+
 public:
 
 	TypeInfoTemplate11("ContactSearch", SearchMethodType);
@@ -61,14 +64,24 @@ public:
 	 	const geometry& geom,
 	 	Timers& timers)
 	:
-		contactSearch(csDict, extDomain, prtcl, geom, timers)
+		contactSearch(
+			csDict, 
+			extDomain, 
+			prtcl, 
+			geom, 
+			timers),
+		csBoundaries_(
+			csDict, 
+			Particles().pStruct().boundaries(),
+			*this)
 	{
 
-		auto method = dict().getVal<word>("method");
+		/*auto method = dict().getVal<word>("method");
 				
-		auto nbDict = dict().subDict(method+"Info");
+		auto nbDict = dict().subDict(method+"Info");*/
 
-		real minD, maxD;
+		real minD;
+		real maxD;
 		this->Particles().boundingSphereMinMax(minD, maxD);
 		
 		const auto& position = this->Particles().pointPosition().deviceViewAll();
@@ -84,7 +97,7 @@ public:
 		ppwContactSearch_ = 
 			makeUnique<SearchMethodType>
 			(
-				nbDict,
+				dict(),
 				this->extendedDomainBox(),
 				minD,
 				maxD,
@@ -141,9 +154,25 @@ public:
 		}
 		ppTimer().end();
 
-				
-	
 		return true;
+	}
+
+	bool boundaryBroadSearch(
+		uint32 i,
+		uint32 iter,
+		real t,
+		real dt,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false)override
+	{
+		return csBoundaries_[i].broadSearch(
+			iter, 
+			t, 
+			dt, 
+			ppPairs, 
+			pwPairs, 
+			force);
 	}
 
 
