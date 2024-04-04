@@ -128,6 +128,12 @@ public:
 		return dynPointStruct_.thisDomain();
 	}
 
+	inline
+	const auto& extendedDomain()const
+	{
+		return dynPointStruct_.extendedDomain();
+	}
+
 	inline auto size()const{
 		return dynPointStruct_.size();
 	}

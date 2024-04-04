@@ -42,7 +42,7 @@ int main(int argc, char** argv )
 		" date in time folders into vtk file format.");
 
 	wordVector times;
-		
+		 
 	bool noGoem = false;
 	cmds.add_flag(
 		"--no-geometry",
@@ -57,7 +57,7 @@ int main(int argc, char** argv )
 	cmds.addOption("-o,--out-folder",
 		outFolder,
 		"path to output folder of VTK",
-		"path");
+		"path"); 
 	
 	bool separateSurfaces = false;
 	cmds.add_flag(
