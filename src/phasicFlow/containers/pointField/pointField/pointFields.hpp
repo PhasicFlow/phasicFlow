@@ -36,20 +36,12 @@ template<typename T>
   using pointField_D = pointField<T>;
 
 
-using int8PointField_D 		= pointField_D<int8>;
-using int8PointField_H 		= pointField_H<int8>;
 
 using uint8PointField_D 		= pointField_D<uint8>;
 using uint8PointField_H 		= pointField_H<uint8>;
 
-using int32PointField_D 		= pointField_D<int32>;
-using int32PointField_H 		= pointField_H<int32>;
-
 using uint32PointField_D 		= pointField_D<uint32>;
 using uint32PointField_H 		= pointField_H<uint32>;
-
-using int64PointField_D 		= pointField_D<int64>;
-using int64PointField_H 		= pointField_H<int64>;
 
 using uint64PointField_D 		= pointField_D<uint64>;
 using uint64PointField_H 		= pointField_H<uint64>;

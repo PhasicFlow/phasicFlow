@@ -169,12 +169,12 @@ public:
 			return vertices_.capacity();
 		}
 
-		const auto& points() const
+		const realx3Field_D& points() const
 		{
 			return points_;
 		}
 
-		auto& points()
+		realx3Field_D& points()
 		{
 			return points_;
 		}
@@ -189,12 +189,12 @@ public:
 			return area_;
 		}		
 
-		const auto& vertices() const
+		const uint32x3Field_D& vertices() const
 		{
 			return vertices_;
 		}
 
-		auto& vertices()
+		uint32x3Field_D& vertices()
 		{
 			return vertices_;
 		}

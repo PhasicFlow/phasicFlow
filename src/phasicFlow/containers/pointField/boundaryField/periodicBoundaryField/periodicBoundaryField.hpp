@@ -15,64 +15,49 @@ Licence:
   phasicFlow is distributed to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
-#ifndef __boundaryField_hpp__
-#define __boundaryField_hpp__
 
-#include "generalBoundary.hpp"
-#include "internalField.hpp"
+#ifndef __periodicBoundaryField_hpp__
+#define __periodicBoundaryField_hpp__
+
+#include "boundaryField.hpp"
 
 namespace pFlow
 {
 
 template< class T, class MemorySpace = void>
-class boundaryField
+class periodicBoundaryField
 :
-    public generalBoundary 
+    public boundaryField<T, MemorySpace> 
 {
 public:
 	
+    using periodicBoundaryFieldType = periodicBoundaryField<T, MemorySpace>;
+
 	using BoundaryFieldType = boundaryField<T, MemorySpace>;
 
-	using InternalFieldType = internalField<T, MemorySpace>;
+	using InternalFieldType = typename BoundaryFieldType::InternalFieldType;
 
-	using memory_space 		= typename InternalFieldType::memory_space;
+	using memory_space 		= typename BoundaryFieldType::memory_space;
 
-	using execution_space 	= typename InternalFieldType::execution_space;
+	using execution_space 	= typename BoundaryFieldType::execution_space;
 
-protected:
+   
 
-    /// @brief a ref to the internal field 
-    InternalFieldType& 			internal_;
-
-	
 public:
 
-	TypeInfoTemplate211("boundaryField","none" ,T, memory_space::name());
+	TypeInfoTemplate211("boundaryField","periodic", T, memory_space::name());
 
-	boundaryField(
+	periodicBoundaryField(
 		const boundaryBase& boundary, 
 		const pointStructure& pStruct,
 		InternalFieldType& internal);
-	
-	create_vCtor
-	(
-		boundaryField,
-		boundaryBase,
-		(
-			const boundaryBase& boundary, 
-			const pointStructure& pStruct,
-			InternalFieldType& internal
-		),
-		(boundary, pStruct, internal)
-	);
-
+		
 
 	add_vCtor
 	(
 		BoundaryFieldType,
-		BoundaryFieldType,
+		periodicBoundaryFieldType,
 		boundaryBase
 	);
 
@@ -86,40 +71,23 @@ public:
     	const anyList& varList
 	) override
     {
+		BoundaryFieldType::hearChanges(t,dt,iter, msg,varList);
 		
-		if(msg.equivalentTo(message::BNDR_REARRANGE))
+		if(msg.equivalentTo(message::BNDR_APPEND))
 		{
-			// do nothing
+			// do nothing;
 		}
-		if(msg.equivalentTo(message::BNDR_RESET))
+		if(msg.equivalentTo(message::BNDR_TRANSFER))
 		{
-			//do nothing
+			//do nothing 
 		}
 		return true;
 	}
-
-	void fill(const std::any& val)override
-	{
-		return;
-	}
-
-	virtual
-	void fill(const T& val)
-	{
-		return;
-	}
-
-	static
-	uniquePtr<boundaryField> create(
-		const boundaryBase& boundary, 
-		const pointStructure& pStruct,
-		InternalFieldType& internal);
 
 };
 
 }
 
-#include "boundaryField.cpp"
+#include "periodicBoundaryField.cpp"
 
 #endif
-

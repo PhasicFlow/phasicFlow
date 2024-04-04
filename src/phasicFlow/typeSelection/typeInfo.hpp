@@ -197,5 +197,12 @@ namespace pFlow
 	}																		\
 	virtual word typeName() const { return TYPENAME();}
 
+#define TypeInfoTemplate22(tBase,tName1, Type1, Type2)							\
+	inline static word TYPENAME()											\
+	{ 																		\
+		return word(tBase)+"<"+word(tName1)+","+getTypeName<Type1>()+","+getTypeName<Type2>()+">"; 	\
+	}																		\
+	virtual word typeName() const { return TYPENAME();}
+
 
 #endif

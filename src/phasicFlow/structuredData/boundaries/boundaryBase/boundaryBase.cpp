@@ -208,7 +208,7 @@ const pFlow::boundaryBase &pFlow::boundaryBase::mirrorBoundary() const
 }
 
 typename pFlow::boundaryBase::pointFieldAccessType
-pFlow::boundaryBase::thisPoints()
+pFlow::boundaryBase::thisPoints()const
 {
     
     return pointFieldAccessType
@@ -221,7 +221,7 @@ pFlow::boundaryBase::thisPoints()
 }
 
 typename pFlow::boundaryBase::pointFieldAccessType
-    pFlow::boundaryBase::neighborPoints()
+    pFlow::boundaryBase::neighborPoints()const
 {
     notImplementedFunction;
     return pointFieldAccessType();

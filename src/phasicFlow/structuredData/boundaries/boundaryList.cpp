@@ -21,6 +21,33 @@ Licence:
 #include "boundaryList.hpp"
 #include "pointStructure.hpp"
 
+void pFlow::boundaryList::setExtendedDomain()
+{
+	if(!listSet_)
+	{
+		fatalErrorInFunction<<
+		"boundary list is not set yet and you used the objects."<<endl;
+		fatalExit;
+	}
+	
+	realx3 lowerExt = 
+		boundary(0).boundaryExtensionLength() + 
+		boundary(2).boundaryExtensionLength() + 
+		boundary(4).boundaryExtensionLength();
+	
+	realx3 upperExt = 
+		boundary(1).boundaryExtensionLength()+
+		boundary(3).boundaryExtensionLength()+
+		boundary(5).boundaryExtensionLength();
+	
+	extendedDomain_ = pStruct_.simDomain().extendThisDomain
+	(
+		lowerExt,
+		upperExt
+	);
+	
+	
+}
 
 bool pFlow::boundaryList::resetLists()
 {
@@ -31,7 +58,11 @@ bool pFlow::boundaryList::resetLists()
 
 bool pFlow::boundaryList::updateLists()
 {
-    
+    if(!listSet_)
+	{
+		setLists();
+	}
+
 	std::array<real,6> dist;
 	dist[0] = boundary(0).neighborLength();
 	dist[1] = boundary(1).neighborLength();
@@ -40,20 +71,10 @@ bool pFlow::boundaryList::updateLists()
 	dist[4] = boundary(4).neighborLength();
 	dist[5] = boundary(5).neighborLength();
 
-	realx3 lowerExt = 
-		boundary(0).boundaryExtensionLength() + 
-		boundary(2).boundaryExtensionLength() + 
-		boundary(4).boundaryExtensionLength();
-	
-	realx3 upperExt = 
-		boundary(1).boundaryExtensionLength()+
-		boundary(3).boundaryExtensionLength()+
-		boundary(5).boundaryExtensionLength();
-
-	auto extDomain = pStruct_.simDomain().extendThisDomain(lowerExt, upperExt);
 	pStruct_.updateFlag(
-			extDomain,
+			extendedDomain_,
 			dist);
+
 	const auto& maskD = pStruct_.activePointsMaskDevice();
 	boundary(0).setSize( maskD.leftSize() );
 	boundary(1).setSize( maskD.rightSize() );
@@ -69,7 +90,8 @@ bool pFlow::boundaryList::updateLists()
 		boundary(3).indexList().deviceViewAll(),
 		boundary(4).indexList().deviceViewAll(),
 		boundary(5).indexList().deviceViewAll());
-
+	
+	
 	return true;	
 }
 
@@ -117,7 +139,7 @@ bool pFlow::boundaryList::setLists()
 		);
 	}
 	listSet_ = true;
-
+	setExtendedDomain();
 	return true;
 }
 

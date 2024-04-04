@@ -100,6 +100,18 @@ public:
     }
 
     inline
+    const auto& indexList()const
+	{
+		return boundary_.indexList();
+	}
+
+    inline
+    const auto& mirrorBoundary()const
+    {
+        return boundary_.mirrorBoundary();
+    }
+
+    inline
     const word& name()const
     {
         return boundary_.name();
@@ -122,7 +134,7 @@ public:
 	virtual
 	void fill(const std::any& val)=0;
 
-    template<typename BoundaryFieldType>
+    /*template<typename BoundaryFieldType>
     BoundaryFieldType& thisField()
     {
         return static_cast<BoundaryFieldType&>(*this);
@@ -132,7 +144,7 @@ public:
     const BoundaryFieldType& thisField()const
     {
         return static_cast<const BoundaryFieldType&>(*this);
-    }
+    }*/
 	
 };
 

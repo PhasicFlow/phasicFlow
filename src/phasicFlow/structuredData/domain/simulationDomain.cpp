@@ -47,8 +47,8 @@ pFlow::domain pFlow::simulationDomain::extendThisDomain
 	const realx3 &upperPointExtension
 ) const
 {
-    realx3 minP = thisDomain().domainBox().minPoint() + lowerPointExtension;
-	realx3 maxP = thisDomain().domainBox().maxPoint() + upperPointExtension;
+    realx3 minP = thisDomain().minPoint() + lowerPointExtension;
+	realx3 maxP = thisDomain().maxPoint() + upperPointExtension;
 	return domain({minP, maxP});
 }
 

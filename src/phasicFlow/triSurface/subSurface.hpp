@@ -89,6 +89,11 @@ public:
         return end_-start_;
     }
 
+    uint32 numPoints()const
+    {
+        return pointEnd_ - pointStart_;
+    }
+
     friend iOstream& operator<< (iOstream& str, const subSurface & sub);
 		
 		/// >> operator 

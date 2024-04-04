@@ -234,13 +234,12 @@ public:
 
 	const boundaryBase& mirrorBoundary()const;
 	
-	virtual 
 	const plane& boundaryPlane()const
 	{
 		return boundaryPlane_;
 	}
 
-	/// @brief displacement vector that transfers points from 
+	/// @brief displacement vector that transfers points  
 	/// to a distance that is equal to the distance between 
 	/// this plane and the mirror plane, the vector points from 
 	/// this plane to mirror plane 
@@ -257,10 +256,10 @@ public:
 	virtual 
     bool afterIteration(uint32 iterNum, real t, real dt) = 0;
 	
-    pointFieldAccessType thisPoints();
+    pointFieldAccessType thisPoints()const;
 
     virtual
-    pointFieldAccessType neighborPoints();
+    pointFieldAccessType neighborPoints()const;
     
 	/// - static create 
 	static

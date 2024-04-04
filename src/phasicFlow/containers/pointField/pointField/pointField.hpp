@@ -15,7 +15,6 @@ Licence:
   phasicFlow is distributed to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
 
 #ifndef __pointField_hpp__
@@ -100,6 +99,16 @@ public:
 		const auto& internal()const
 		{
 			return static_cast<const InternalFieldType&>(*this);
+		}
+
+		const auto& boundaryFields()const
+		{
+			return boundaryFieldList_;
+		}
+
+		const auto& BoundaryField(uint32 i)const
+		{
+			return boundaryFieldList_[i];
 		}
 
 		// - reference to pointStructure

@@ -21,13 +21,11 @@ Licence:
 #include "Fields.hpp"
 
 
-template class pFlow::Field<pFlow::int8>;
-
 template class pFlow::Field<pFlow::uint8>;
 
-template class pFlow::Field<pFlow::int32>;
-
 template class pFlow::Field<pFlow::uint32>;
+
+template class pFlow::Field<pFlow::uint64>;
 
 template class pFlow::Field<pFlow::real>;
 

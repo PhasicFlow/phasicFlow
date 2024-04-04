@@ -62,8 +62,8 @@ containers/Field/Fields.cpp
 containers/symArrayHD/symArrays.cpp
 containers/List/anyList/anyList.cpp
 
-structuredData/pointStructure/internalPointsKernels.cpp
-structuredData/pointStructure/internalPoints.cpp
+structuredData/pointStructure/internalPoints/internalPointsKernels.cpp
+structuredData/pointStructure/internalPoints/internalPoints.cpp
 
 structuredData/zAxis/zAxis.cpp
 structuredData/box/box.cpp
@@ -79,27 +79,23 @@ structuredData/boundaries/boundaryExit/boundaryExit.cpp
 structuredData/boundaries/boundaryNone/boundaryNone.cpp
 structuredData/boundaries/boundaryPeriodic/boundaryPeriodic.cpp
 structuredData/boundaries/boundaryList.cpp
-structuredData/pointStructure/pointStructure.cpp
+structuredData/pointStructure/pointStructure/pointStructure.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
 structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
 
 
-
 triSurface/subSurface.cpp
 triSurface/triSurface.cpp
 triSurface/multiTriSurface.cpp
 
-containers/pointField/boundaryField/generalBoundary.cpp
-containers/pointField/pointFields.cpp
+containers/pointField/boundaryField/generalBoundary/generalBoundary.cpp
+containers/pointField/pointField/pointFields.cpp
 containers/triSurfaceField/triSurfaceFields.cpp
 
 setFieldList/setFieldList.cpp
 setFieldList/setFieldEntry.cpp
-
-
-
 
 )
 

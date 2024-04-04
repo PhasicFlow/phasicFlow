@@ -18,18 +18,24 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "VectorSingles.hpp" 
+#include "generalBoundary.hpp"
+#include "pointStructure.hpp"
+
+pFlow::generalBoundary::generalBoundary
+(
+	const boundaryBase& boundary,
+	const pointStructure& pStruct,
+	const word&  dataType,
+	const word&  option
+)
+:
+	observer(&boundary, defaultMessage_),
+	boundary_(boundary),
+	pStruct_(pStruct)
+{}
 
 
-template class Kokkos::View<pFlow::uint8*>;
-template class pFlow::VectorSingle<pFlow::uint8>;
-
-template class Kokkos::View<pFlow::uint32*>;
-template class pFlow::VectorSingle<pFlow::uint32>;
-
-template class Kokkos::View<pFlow::real*>;
-template class pFlow::VectorSingle<pFlow::real>;
-
-template class Kokkos::View<pFlow::realx3*>;
-template class pFlow::VectorSingle<pFlow::realx3>;
-
+pFlow::Time const& pFlow::generalBoundary::time() const
+{
+    return pStruct_.time();
+}

@@ -30,7 +30,7 @@ namespace pFlow
 
 class domain
 {
-protected:
+private:
 	
 	box 		domainBox_;
 
@@ -60,10 +60,10 @@ public:
 
 	//// - Constructors 
 		INLINE_FUNCTION_HD 
-		domain(){}
+		domain() = default;
 
 		FUNCTION_H 
-		domain(const box& db);
+		explicit domain(const box& db);
 		
 		INLINE_FUNCTION_HD
 		domain(const domain&) = default;
@@ -127,25 +127,43 @@ public:
 		INLINE_FUNCTION_H
 		const auto& boundaryPlane(uint32 i)const 
 		{
-			if(i==0) return left_;
-			if(i==1) return right_;
-			if(i==2) return bottom_;
-			if(i==3) return top_;
-			if(i==4) return rear_;
-			return front_;
+			switch (i)
+			{
+				case 0:
+					return left_;
+				case 1:
+					return right_;
+				case 2:
+					return bottom_;
+				case 3:
+					return top_;
+				case 4:
+					return rear_;
+				case 5:
+					return front_;
+				default:
+					fatalErrorInFunction;
+					return front_;
+			}
 		}
 
-	
+		INLINE_FUNCTION_HD
+		const auto& minPoint()const
+		{
+			return domainBox_.minPoint();
+		}
+
+		INLINE_FUNCTION_HD
+		const auto& maxPoint()const
+		{
+			return domainBox_.maxPoint();
+		}
+		
 }; // domain
 
-INLINE_FUNCTION_HD
-bool equal(const domain& d1, const domain& d2)
-{
-	return equal(d1.domainBox(), d2.domainBox());
-}
 
 INLINE_FUNCTION_HD
-bool equal(const domain& d1, const domain& d2, real tol)
+bool equal(const domain& d1, const domain& d2, real tol=smallValue)
 {
 	return equal(d1.domainBox(), d2.domainBox(), tol);
 }

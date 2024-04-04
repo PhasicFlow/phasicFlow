@@ -77,6 +77,19 @@ using hostRPolicyStatic =
 			Kokkos::Schedule<Kokkos::Static>,
 			Kokkos::IndexType<pFlow::uint32> >;
 
+using deviceRPolicyDynamic = 
+	Kokkos::RangePolicy<
+			Kokkos::DefaultExecutionSpace,
+			Kokkos::Schedule<Kokkos::Dynamic>,
+			Kokkos::IndexType<pFlow::uint32> >;
+
+
+using hostRPolicyDynamic = 
+	Kokkos::RangePolicy<
+			Kokkos::DefaultExecutionSpace,
+			Kokkos::Schedule<Kokkos::Dynamic>,
+			Kokkos::IndexType<pFlow::uint32> >;
+
 
 /// Pair of two variables
 template<typename T1, typename T2>

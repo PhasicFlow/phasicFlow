@@ -42,21 +42,25 @@ protected:
 
 	using timer = std::chrono::high_resolution_clock;
 
-	// - name for the timer 
-	word name_ = "noNameTimer";
-
-	// start time
+	/// start time
 	timer::time_point   start_;
 
-	// number of times start() and end() are called 
+	/// number of times start() and end() are called 
 	int32 				numIteration_ = 0;
 
-	// sum of time duratios (in seconds) between all start() and end() calls 
+	/// sum of time duratios (in seconds) between all start() and end() calls 
 	real 				accTime_  = 0.0;
 
-	// 
+	/// last time duration 
 	real 				lastTime_ = 0.0;
 
+	/// @brief  Accumulative duration for multiple steps between start() and end()
+	real 				stepAccTime_ = 0.0;
+
+	/// name for the timer 
+	word 				name_ = "noNameTimer";
+
+	/// @brief  parrent of timer 
 	Timers* 			parrent_ = nullptr;
 
 public:
@@ -97,14 +101,26 @@ public:
 	void start()
 	{
 		start_ = timer::now();
+		stepAccTime_ = 0;
+	}
+
+	void pause()
+	{
+		auto end = timer::now();
+		stepAccTime_ += std::chrono::duration_cast
+			< std::chrono::duration<real> >(end - start_).count();
+	}
+
+	void resume()
+	{
+		start_ = timer::now();
 	}
 
 	void end()
 	{
-		auto end = timer::now();
-		lastTime_ =  std::chrono::duration_cast
-			< std::chrono::duration<real> >(end - start_).count();
-		
+		pause();
+		lastTime_ =  stepAccTime_;
+
 		numIteration_++;
 		accTime_ += lastTime_;
 	}
