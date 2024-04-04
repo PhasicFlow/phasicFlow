@@ -17,9 +17,10 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __unsortedContactList_hpp__
 #define __unsortedContactList_hpp__ 
+
+#include "unsortedPairs.hpp"
 
 namespace pFlow
 {

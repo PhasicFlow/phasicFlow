@@ -1,3 +1,22 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
 
 #ifndef __scatteredFieldAccess_hpp__
 #define __scatteredFieldAccess_hpp__
@@ -39,8 +58,8 @@ public:
 
 	scatteredFieldAccess(
 		uint32 	sz,
-		ViewType1D<uint32, memory_space> ind,
-		ViewType1D<T, memory_space> fVals)
+		const ViewType1D<uint32, memory_space>& ind,
+		const ViewType1D<T, memory_space>& fVals)
 	:
 		size_(sz),
 		indices_(ind),
@@ -74,13 +93,30 @@ public:
     INLINE_FUNCTION_HD
 	T& operator[](uint32 i)
 	{
-		return fieldVals_(indices_(i));
+		return fieldVals_[indices_[i]];
 	}
 
     INLINE_FUNCTION_HD
 	const T& operator[](uint32 i)const
 	{
-		return fieldVals_(indices_(i));
+		return fieldVals_[indices_[i]];
+	}
+
+	INLINE_FUNCTION_HD
+	const viewType& field()const
+	{
+		return fieldVals_;
+	}
+
+	INLINE_FUNCTION_HD
+	viewType& field()
+	{
+		return fieldVals_;
+	}
+
+	uint32 index(uint32 i)const
+	{
+		return indices_[i];
 	}
 
     INLINE_FUNCTION_HD

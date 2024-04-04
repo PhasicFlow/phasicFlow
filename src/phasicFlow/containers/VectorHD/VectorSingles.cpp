@@ -24,9 +24,6 @@ Licence:
 template class Kokkos::View<pFlow::uint8*>;
 template class pFlow::VectorSingle<pFlow::uint8>;
 
-template class Kokkos::View<pFlow::int32*>;
-template class pFlow::VectorSingle<pFlow::int32>;
-
 template class Kokkos::View<pFlow::uint32*>;
 template class pFlow::VectorSingle<pFlow::uint32>;
 

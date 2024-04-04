@@ -22,6 +22,7 @@ Licence:
 #ifndef __boundaryList_hpp__
 #define __boundaryList_hpp__
 
+#include "domain.hpp"
 #include "boundaryBase.hpp"
 #include "ListPtr.hpp"
 #include "baseTimeControl.hpp"
@@ -36,21 +37,25 @@ class boundaryList
 :
     public ListPtr<boundaryBase>
 {
-
-protected:
+private:
 
 	//// - data members
 		pointStructure& 		pStruct_;
 
 		baseTimeControl 		timeControl_;
 
+		domain 					extendedDomain_;
+
 		bool                    listSet_ = false;
+
+		void setExtendedDomain();		
 
 		bool resetLists();
 
 		/// @brief update neighbor list of boundaries regardless
 		/// of the time intervals 
 		bool updateLists();
+
 
 public:
 	
@@ -70,24 +75,34 @@ public:
 
 	bool setLists();
 
+	inline
 	const pointStructure& pStruct()const
 	{
 		return pStruct_;
 	}
 
+	inline
 	auto& boundary(size_t i)
 	{
 		return ListPtr<boundaryBase>::operator[](i);
 	}
 
+	inline
 	const auto& boundary(size_t i)const
 	{
 		return ListPtr<boundaryBase>::operator[](i);
 	}
 
+	inline
 	const baseTimeControl& timeControl()const
 	{
 		return timeControl_;
+	}
+
+	inline
+	const auto& extendedDomain()const
+	{
+		return extendedDomain_;
 	}
 
 	bool beforeIteration(uint32 iter, real t, real dt);

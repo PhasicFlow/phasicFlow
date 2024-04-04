@@ -123,6 +123,16 @@ public:
 		csPairContainerType& ppPairs,
 		csPairContainerType& pwPairs,
 		bool force = false) = 0;
+	
+	virtual 
+	bool boundaryBroadSearch(
+		uint32 i,
+		uint32 iter,
+		real t,
+		real dt,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false)=0;
 
 	virtual 
 	bool enterBroadSearch(uint32 iter, real t, real dt)const = 0;

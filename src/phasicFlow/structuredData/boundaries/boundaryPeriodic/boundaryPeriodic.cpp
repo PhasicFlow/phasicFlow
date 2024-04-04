@@ -34,24 +34,18 @@ pFlow::boundaryPeriodic::boundaryPeriodic
 :
 	boundaryBase(dict, bplane, internal, bndrs, thisIndex),
 	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
-{
-	extendedPlane_ = boundaryBase::boundaryPlane().parallelPlane(-boundaryBase::neighborLength());
-}
+{}
 
 pFlow::real pFlow::boundaryPeriodic::neighborLength() const
 {
-    return 2.0*boundaryBase::neighborLength();
+    return (1+extensionLength_)*boundaryBase::neighborLength();
 }
 
 pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
 {
-    return -neighborLength()*boundaryBase::boundaryPlane().normal();
+    return -extensionLength_*neighborLength()*boundaryBase::boundaryPlane().normal();
 }
 
-const pFlow::plane &pFlow::boundaryPeriodic::boundaryPlane() const
-{
-    return extendedPlane_;
-}
 
 bool pFlow::boundaryPeriodic::beforeIteration(
     uint32 iterNum,
@@ -63,7 +57,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	{
 		return true;
 	}
-
+	
 	uint32 s = size();
 	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
 	transferFlags.fill(0u);
@@ -71,6 +65,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	auto points = thisPoints();
 	auto p = boundaryPlane().infPlane();
 	const auto & transferD = transferFlags.deviceViewAll();
+	
 	uint32 numTransfered = 0;
 
 	Kokkos::parallel_reduce
@@ -96,7 +91,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	
 	// to obtain the transfer vector 
 	realx3 transferVec = displacementVectroToMirror();
-
+	
 	return transferPoints
 	(
 		numTransfered,

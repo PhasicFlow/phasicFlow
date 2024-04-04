@@ -35,7 +35,8 @@ private:
 
 	uint32 mirrorBoundaryIndex_;
 
-	plane extendedPlane_;
+	static
+	inline const real extensionLength_ = 0.1;
 
 public:
 
@@ -62,7 +63,7 @@ public:
 
 	realx3 boundaryExtensionLength()const override;
 
-	const plane& boundaryPlane()const override;
+	//const plane& boundaryPlane()const override;*/
 
 	bool beforeIteration(uint32 iterNum, real t, real dt) override;
 

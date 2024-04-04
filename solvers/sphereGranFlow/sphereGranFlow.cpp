@@ -88,7 +88,7 @@ initialize_pFlowProcessors();
 			"particle insertion failed in sphereDFlow solver.\n";
 			return 1;
 		}*/
-		
+		 
 		// set force to zero
 		surfGeometry.beforeIteration();
 

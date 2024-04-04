@@ -79,6 +79,17 @@ public:
 			(control, prtcl, geom)
 		);
 	
+	inline
+	const auto& Particles()const
+	{
+		return particles_;
+	}
+
+	inline
+	const auto& Geometry()const
+	{
+		return geometry_;
+	}
 
 	static 
 	uniquePtr<interaction> create(

@@ -33,6 +33,9 @@ using csIdType = uint32;
 
 using csPairContainerType   = unsortedPairs<DefaultExecutionSpace, uint32>;
 
+inline 
+const uint32 BASE_MIRROR_WALL_INDEX = 1000000;
+
 }
 
 #endif

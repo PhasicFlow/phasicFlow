@@ -31,7 +31,7 @@ class plane
 :
 	public infinitePlane
 {
-protected:
+private:
 	
 	/// First point 
 	realx3 p1_;
