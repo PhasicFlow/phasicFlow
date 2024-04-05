@@ -78,6 +78,7 @@ structuredData/boundaries/boundaryBase/boundaryBaseKernels.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
 structuredData/boundaries/boundaryNone/boundaryNone.cpp
 structuredData/boundaries/boundaryPeriodic/boundaryPeriodic.cpp
+structuredData/boundaries/boundaryReflective/boundaryReflective.cpp
 structuredData/boundaries/boundaryList.cpp
 structuredData/pointStructure/pointStructure/pointStructure.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp

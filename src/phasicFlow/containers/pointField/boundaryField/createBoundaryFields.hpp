@@ -21,15 +21,23 @@ Licence:
 #ifndef __createBoundaryFields_hpp__
 #define __createBoundaryFields_hpp__
 
-#include "boundaryField.hpp"
-#include "exitBoundaryField.hpp"
+#include "boundaryField/boundaryField.hpp"
+#include "exitBoundaryField/exitBoundaryField.hpp"
+#include "periodicBoundaryField/periodicBoundaryField.hpp"
+#include "reflectiveBoundaryField/reflectiveBoundaryField.hpp"
+
+#define createDerivedBoundary(DataType, MemorySpaceType)          \
+	template class pFlow::exitBoundaryField<DataType, MemorySpaceType>; \
+	template class pFlow::periodicBoundaryField<DataType, MemorySpaceType>; \
+	template class pFlow::reflectiveBoundaryField<DataType, MemorySpaceType>;
 
 #define createBaseBoundary(DataType, MemorySpaceType)          \
-    template class pFlow::boundaryField<DataType, MemorySpaceType>;
+	template class pFlow::boundaryField<DataType, MemorySpaceType>;
     
 
-#define createBoundary(DataType, MemorySpaceType, BoundaryType)    \
-    template class pFlow::BoundaryType##BoundaryField<DataType, MemorySpaceType>;
+#define createBoundaryFields(DataType, MemorySpaceType)    \
+    createBaseBoundary(DataType, MemorySpaceType); \
+	createDerivedBoundary(DataType, MemorySpaceType);
 
 
 #endif //__createBoundaryFields_hpp__

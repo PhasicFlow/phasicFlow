@@ -15,40 +15,17 @@ Licence:
   phasicFlow is distributed to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
 
-#include "pointFields.hpp"
-#include "createBoundaryFields.hpp"
-
-
-#define createPointFields(DataType) 							\
-  template class pFlow::pointField<DataType, pFlow::HostSpace>; \
-  createBoundaryFields(DataType, pFlow::HostSpace); 			\
-              													\
-  template class pFlow::pointField<DataType>;   				\
-  createBoundaryFields(DataType, void);
-
-// uint8
-createPointFields(pFlow::uint8);
-
-/// uint32
-createPointFields(pFlow::uint32);
-
-/// uint64
-createPointFields(pFlow::uint64);
-
-/// real 
-createPointFields(pFlow::real);
-
-/// realx3
-createPointFields(pFlow::realx3);
-
-
-/// realx4
-createPointFields(pFlow::realx4);
-
-
-/// word, only on host
-template class pFlow::pointField<pFlow::word, pFlow::HostSpace>; 
-createBoundaryFields(pFlow::word, pFlow::HostSpace);
+template<class T, class MemorySpace>
+    pFlow::reflectiveBoundaryField<T, MemorySpace>::reflectiveBoundaryField
+(
+	const boundaryBase& boundary, 
+	const pointStructure& pStruct,
+	InternalFieldType& internal
+)
+:
+	BoundaryFieldType(boundary, pStruct, internal)
+{
+	//this->addEvent(message::BNDR_DELETE);
+}

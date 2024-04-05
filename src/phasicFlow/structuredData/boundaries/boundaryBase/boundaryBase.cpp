@@ -24,6 +24,7 @@ Licence:
 #include "internalPoints.hpp"
 #include "anyList.hpp"
 #include "Time.hpp"
+#include "pointStructure.hpp"
 #include "boundaryBaseKernels.hpp"
 
 void pFlow::boundaryBase::setSize(uint32 newSize)
@@ -114,9 +115,9 @@ bool pFlow::boundaryBase::removeIndices
 	
 	message msgBndry 	= message::BNDR_RESET;
 
-	uint32 iter = internal_.time().currentIter();
-	real t = internal_.time().currentTime();
-	real dt = internal_.time().dt();
+	uint32 iter = time().currentIter();
+	real t = time().currentTime();
+	real dt = time().dt();
 
 	if( !this->notify(iter, t, dt, msgBndry, aList) )
 	{
@@ -197,6 +198,16 @@ pFlow::boundaryBase::boundaryBase
 	unSyncLists();
 }
 
+const pFlow::pointStructure &pFlow::boundaryBase::pStruct() const
+{
+    return boundaries_.pStruct();
+}
+
+const pFlow::Time &pFlow::boundaryBase::time() const
+{
+    return boundaries_.pStruct().time();
+}
+
 pFlow::boundaryBase &pFlow::boundaryBase::mirrorBoundary()
 {
     return boundaries_[mirrorBoundaryIndex()];
@@ -256,7 +267,7 @@ pFlow::uniquePtr<pFlow::boundaryBase> pFlow::boundaryBase::create
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< bType << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< bType << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_

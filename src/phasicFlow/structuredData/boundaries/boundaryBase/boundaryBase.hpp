@@ -37,6 +37,8 @@ namespace pFlow
 class internalPoints;
 class dictionary;
 class boundaryList;
+class pointStructure;
+class Time;
 
 class boundaryBase
 :
@@ -216,6 +218,10 @@ public:
 	{
 		return internal_;
 	}
+
+	const pointStructure& pStruct()const;
+
+	const Time& time()const;
 
 	inline
 	const auto& indexList()const
