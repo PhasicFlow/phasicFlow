@@ -44,9 +44,28 @@ public:
 		const dictionary& dict, 
 		const word& intervalPrefix = "",
 		real defStartTime = 0.0);
-
+	
+	inline
+	bool isTimeStep()const
+	{
+		return isTimeStep_;
+	}
 
 	bool timeEvent(uint32 iter, real t, real dt)const;
+
+	bool isInRange(uint32 iter, real t, real dt)const;
+
+	real startTime()const;
+
+	real endTime()const;
+
+	real rInterval()const;
+
+	int32 startIter()const;
+
+	int32 endIter()const;
+
+	int32 iInterval()const;
 
 };
 

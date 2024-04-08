@@ -75,3 +75,90 @@ bool pFlow::baseTimeControl::timeEvent(uint32 iter, real t, real dt) const
 	}
     return false;
 }
+
+bool
+pFlow::baseTimeControl::isInRange(uint32 iter, real t, real dt) const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.isInRange(iter);
+	}
+	else
+	{
+		return rRange_.isInRange(t);
+	}
+}
+
+pFlow::real
+pFlow::baseTimeControl::startTime() const
+{
+	if(!isTimeStep_)
+	{
+		return rRange_.begin();
+	}
+
+	fatalErrorInFunction<<"timeControl is not simulationTime or runTime"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::real
+pFlow::baseTimeControl::endTime() const
+{
+	if(!isTimeStep_)
+	{
+		return rRange_.end();
+	}
+
+	fatalErrorInFunction<<"timeControl is not simulationTime or runTime"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::real
+pFlow::baseTimeControl::rInterval() const
+{
+	if(!isTimeStep_)
+	{
+		return rRange_.stride();
+	}
+	fatalErrorInFunction<<"timeControl is not simulationTime or runTime"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::int32
+pFlow::baseTimeControl::startIter() const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.begin();
+	}
+	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::int32
+pFlow::baseTimeControl::endIter() const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.end();
+	}
+	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::int32
+pFlow::baseTimeControl::iInterval() const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.stride();
+	}
+	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
+	fatalExit;
+	return 0;
+}
