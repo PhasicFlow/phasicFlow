@@ -58,7 +58,8 @@ struct checkStatic
 };
 
 template <typename T>
-inline word basicTypeName()
+inline
+word basicTypeName()
 {
 	int   status;
 	auto &ti       = typeid(T);
@@ -117,7 +118,8 @@ inline word basicTypeName<real>()
 }
 
 template <typename T>
-word constexpr getTypeName()
+inline
+word getTypeName()
 {
 	if constexpr (checkStatic<T>::hasMember())
 	{
@@ -130,7 +132,8 @@ word constexpr getTypeName()
 }
 
 template <typename T>
-word constexpr getTypeName(const T &)
+inline
+word getTypeName(const T &)
 {
 	if constexpr (checkStatic<T>::hasMember())
 	{
@@ -156,6 +159,32 @@ bool checkType(Type2 &object)
 	return getTypeName<Type1>() == object.typeName();
 }
 } // namespace pFlow
+
+#define QuadrupleTypeInfoNV(T)			\
+	inline static word TYPENAME()		\
+	{									\
+		return getTypeName<T>()+"x4"; 	\
+	}									\
+	word typeName() const 		  		\
+	{                             		\
+		return TYPENAME();        		\
+	}
+
+#define TripleTypeInfoNV(T)				\
+	inline static word TYPENAME()		\
+	{									\
+		return getTypeName<T>()+"x3"; 	\
+	}									\
+	word typeName() const 		  		\
+	{                             		\
+		return TYPENAME();        		\
+	}
+
+#define ClassInfo(tName)           \
+	inline static word TYPENAME() \
+	{                             \
+		return tName;             \
+	}
 
 #define TypeInfo(tName)           \
 	inline static word TYPENAME() \
