@@ -50,16 +50,16 @@ using realx4 = quadruple<real>;
 
 using realx4x3 = quadruple<realx3>;
 
-template<>
+/*template<>
 inline word
-basicTypeName<int8x3>()
+triple<int8>::TYPENAME()
 {
 	return "int8x3";
 }
 
 template<>
 inline word
-basicTypeName<int32x3>()
+triple<int32>::TYPENAME()
 {
 	return "int32x3";
 }
@@ -132,7 +132,7 @@ inline word
 basicTypeName<realx4x3>()
 {
 	return "realx4x3";
-}
+}*/
 
 extern const realx3   zero3;
 extern const realx3   one3;

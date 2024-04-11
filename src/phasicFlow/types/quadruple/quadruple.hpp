@@ -22,6 +22,7 @@ Licence:
 #define __quadruple_hpp__
 
 #include "error.hpp"
+#include "typeInfo.hpp"
 #include "iIstream.hpp"
 #include "iOstream.hpp"
 #include "token.hpp"
@@ -40,14 +41,13 @@ class iIstream;
 // you can see it as a sequence of four elements (w,x,y,z) or an (scalar and
 // vector)
 template<typename T>
-class quadruple
+struct quadruple
 {
-public:
-
 	T         s_;
 	triple<T> v_;
 
-public:
+
+	QuadrupleTypeInfoNV(T);
 
 	//// constructors
 	INLINE_FUNCTION_HD

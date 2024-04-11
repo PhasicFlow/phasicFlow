@@ -22,7 +22,7 @@ Licence:
 
 #include "builtinTypes.hpp"
 #include "bTypesFunctions.hpp"
-#include "typeInfo.hpp"
+
 
 
 namespace pFlow
@@ -62,7 +62,15 @@ private:
 public:
 
 	/// Type info
-	TypeInfoNV("Logical");
+	inline static word TYPENAME()
+	{
+		return "Logical";
+	}
+
+	inline word typeName()const
+	{
+		return TYPENAME();
+	}
 
 	//// Constructors
 

@@ -22,6 +22,7 @@ Licence:
 
 #include "pFlowMacros.hpp"
 #include "numericConstants.hpp"
+#include "typeInfo.hpp"
 #include "uniquePtr.hpp"
 #include "iOstream.hpp"
 #include "iIstream.hpp"
@@ -49,6 +50,7 @@ struct triple
 	T y_;
 	T z_;
 
+	TripleTypeInfoNV(T);
 	//// Constructors
 
 	/// Initilize to zero
