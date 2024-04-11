@@ -41,11 +41,11 @@ class AdamsBashforth2
 {
 private:
 
-
 	auto& dy1()
 	{
 		return static_cast<realx3PointField_D&>(*this);
 	}
+	
 public:
 
 	/// Type info

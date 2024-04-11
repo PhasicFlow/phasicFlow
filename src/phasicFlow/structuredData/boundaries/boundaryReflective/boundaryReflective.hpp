@@ -15,40 +15,59 @@ Licence:
   phasicFlow is distributed to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
 
-#include "pointFields.hpp"
-#include "createBoundaryFields.hpp"
+#ifndef __boundaryReflective_hpp__
+#define __boundaryReflective_hpp__
 
 
-#define createPointFields(DataType) 							\
-  template class pFlow::pointField<DataType, pFlow::HostSpace>; \
-  createBoundaryFields(DataType, pFlow::HostSpace); 			\
-              													\
-  template class pFlow::pointField<DataType>;   				\
-  createBoundaryFields(DataType, void);
+#include "boundaryBase.hpp"
 
-// uint8
-createPointFields(pFlow::uint8);
+namespace pFlow
+{
 
-/// uint32
-createPointFields(pFlow::uint32);
+class boundaryReflective
+:
+ 	public boundaryBase
+{
+private:
 
-/// uint64
-createPointFields(pFlow::uint64);
+	real        restitution_ = 0.95;
 
-/// real 
-createPointFields(pFlow::real);
+    word        velocityName_{"velocity"};
+	
+    word        diameterName_{"diameter"};
 
-/// realx3
-createPointFields(pFlow::realx3);
+public:
+
+	TypeInfo("boundary<reflective>");
+
+	boundaryReflective(
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
+
+	 
+	~boundaryReflective()override = default;
+	
+	add_vCtor
+	(
+		boundaryBase,
+		boundaryReflective,
+		dictionary
+	);
+
+	bool beforeIteration(uint32 iterNum, real t, real dt) override;
+
+	bool iterate(uint32 iterNum, real t, real dt) override;
+
+	bool afterIteration(uint32 iterNum, real t, real dt) override;
 
 
-/// realx4
-createPointFields(pFlow::realx4);
+};
 
+}
 
-/// word, only on host
-template class pFlow::pointField<pFlow::word, pFlow::HostSpace>; 
-createBoundaryFields(pFlow::word, pFlow::HostSpace);
+#endif

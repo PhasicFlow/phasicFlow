@@ -20,7 +20,7 @@ Licence:
 
 
 template <typename Type1>
-pFlow::word pFlow::repository::reportTypeError(IOobject& object)
+pFlow::word pFlow::repository::reportTypeError(IOobject& object)const
 {
 	word err;
 	err = "Object " + object.name() + " with type " + Type1::TYPENAME() + 
@@ -40,28 +40,57 @@ template<typename T>
 T& pFlow::repository::lookupObject(const word& name)
 {
 	if( auto [iter, success] = objects_.findIf(name); success )
-    {
+	{
 
-    	if( checkType<T>(iter->second) )
-    	{
-    		return static_cast<T&>(*iter->second);
-            
+		if( checkType<T>(iter->second) )
+		{
+			return static_cast<T&>(*iter->second);
+			
 
-    	}else
-    	{
-    		fatalErrorInFunction << 
-    		reportTypeError<T>(*iter->second)<<endl;
-    		fatalExit;
-    		return static_cast<T&>(*iter->second);
-    	}
-        
-    }
-    else
-    {
-    	fatalErrorInFunction << 
+		}else
+		{
+			fatalErrorInFunction << 
+			reportTypeError<T>(*iter->second)<<endl;
+			fatalExit;
+			return static_cast<T&>(*iter->second);
+		}
+		
+	}
+	else
+	{
+		fatalErrorInFunction << 
 		"Object with name " << name << " is not found in repository " << this->name()<<endl <<
 		"list of avaiable objest is \n" << objectNames();
-        fatalExit;
-        return static_cast<T&>(*iter->second);
-    }
+		fatalExit;
+		return static_cast<T&>(*iter->second);
+	}
+}
+
+template<typename T>
+const T& pFlow::repository::lookupObject(const word& name)const
+{
+	if( auto [iter, success] = objects_.findIf(name); success )
+	{
+
+		if( checkType<T>(iter->second) )
+		{
+			return static_cast<const T&>(*iter->second);
+		}
+		else
+		{
+			fatalErrorInFunction << 
+			reportTypeError<T>(*iter->second)<<endl;
+			fatalExit;
+			return static_cast<T&>(*iter->second);
+		}
+		
+	}
+	else
+	{
+		fatalErrorInFunction << 
+		"Object with name " << name << " is not found in repository " << this->name()<<endl <<
+		"list of avaiable objest is \n" << objectNames();
+		fatalExit;
+		return static_cast<T&>(*iter->second);
+	}
 }
