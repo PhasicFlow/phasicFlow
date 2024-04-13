@@ -79,10 +79,12 @@ public:
 
 	//// - Methods 
 
+		
 		INLINE_FUNCTION_HD
 		bool isInside(const realx3& point)const
 		{
-			return point > min_ && point <max_;
+			// box planes are also included as the inside of the box 
+			return point >= min_ && point <=max_;
 		}
 
 		INLINE_FUNCTION_HD

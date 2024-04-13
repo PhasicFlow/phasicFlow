@@ -18,13 +18,13 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #include "peakableRegion.hpp"
 #include "dictionary.hpp"
 
 pFlow::peakableRegion::peakableRegion
 (
-	const word& type, const dictionary& dict
+	const word& type, 
+	const dictionary& dict
 )
 {
 	CONSUME_PARAM(type);
@@ -37,8 +37,8 @@ pFlow::uniquePtr<pFlow::peakableRegion> pFlow::peakableRegion::create
 	const word& type,
 	const dictionary& dict
 )
-{
-	word regionType = angleBracketsNames("peakableRegion", type);
+{ 
+	word regionType = angleBracketsNames("peakable", type);
 
 	if( wordvCtorSelector_.search(regionType) )
 	{
@@ -48,7 +48,7 @@ pFlow::uniquePtr<pFlow::peakableRegion> pFlow::peakableRegion::create
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< regionType << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< regionType << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			wordvCtorSelector_

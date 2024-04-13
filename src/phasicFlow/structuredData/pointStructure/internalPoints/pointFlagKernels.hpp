@@ -122,62 +122,52 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markOutOfBoxDelete
 	return numDeleted;
 }
 
-/*template<typename ExecutionSpace>
-pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::scanPointFlag()
+template<typename ExecutionSpace>
+pFlow::uint32 
+pFlow::pointFlag<ExecutionSpace>::addInternalPoints
+(
+	const ViewType1D<uint32, memory_space>& points
+)
 {
-		
-	using rpScanFlag = Kokkos::RangePolicy<execution_space,  
-			Kokkos::IndexType<uint32>>;
+	if(points.extent(0)==0u)return 0;
 
-	uint32 numActive = 0;
+	uint32 minRange;
+	uint32 maxRange;
+	uint32 numAdded = 0;
 	
 	
-	uint32 start = activeRange().start();
-	uint32 end   = activeRange().end();
+	Kokkos::parallel_reduce(
+		"pointFlagKernels::addInternalPoints",
+		deviceRPolicyStatic(0, points.extent(0)),
+		LAMBDA_HD(
+			uint32 i, 
+			uint32& minUpdate, 
+			uint32& maxUpdate, 
+			uint32& addToUpdate)
+		{
+			uint32 idx = points(i);
+			if( flags_[idx] <= DELETED) addToUpdate ++;
+			minUpdate = min(minUpdate,idx);
+			maxUpdate = max(maxUpdate,idx);
+			flags_[idx] = INTERNAL;	
+		},
+		Kokkos::Min<uint32>(minRange), 
+		Kokkos::Max<uint32>(maxRange),
+		numAdded);	
 
-	uint32 minRange = end;
-	uint32 maxRange = start;
-
-	if(start<end)
-	{
-		Kokkos::parallel_reduce(
-			"pointFlagKernels::scanPointFlag",
-			rpScanFlag(start, end),
-			CLASS_LAMBDA_HD(
-				uint32 i, 
-				uint32& minUpdate, 
-				uint32& maxUpdate, 
-				uint32& sumToUpdate)
-			{
-				if(this->isActive(i))
-				{
-					sumToUpdate++;
-					minUpdate = min(minUpdate,i);
-					maxUpdate = max(maxUpdate,i);
-				}
-			},
-			Kokkos::Min<uint32>(minRange), 
-			Kokkos::Max<uint32>(maxRange),
-			numActive);	
-	}
+	// add one to max range to make range it half open 
+	maxRange++;
 	
-	if(numActive==0)
-	{
-		minRange = 0;
-		maxRange = 0;
-	}
-	else
-	{
-		// add one to maxRange to make it half-open
-		maxRange ++;
-	}
+	minRange = min(activeRange_.start(), minRange);
+	maxRange = max(activeRange_.end(), maxRange);
 
 	activeRange_ = {minRange, maxRange};
-	numActive_ 	= numActive;
+	numActive_ 	= numActive_ + numAdded;
+	
 	isAllActive_ = activeRange_.numElements() == numActive_;
-
-	return numActive;
-}*/
+	
+	return numAdded;
+}
 
 template<typename ExecutionSpace>
 bool pFlow::pointFlag<ExecutionSpace>::deletePoints
@@ -187,13 +177,7 @@ bool pFlow::pointFlag<ExecutionSpace>::deletePoints
 {
 	if(points.empty())return true;
 	
-	//uint32 minIndex = points.getFirstCopy();
-	//uint32 maxIndex = points.getLastCopy();
 	
-	//if(maxIndex<minIndex) return false;
-	//if(maxIndex>activeRange_.end())return false;
-	//if(minIndex<activeRange_.start())return false;
-
 	using policy = Kokkos::RangePolicy<
 		execution_space,  
 		Kokkos::IndexType<uint32>>;
@@ -237,10 +221,6 @@ bool pFlow::pointFlag<ExecutionSpace>::deletePoints
 	uint32 s = points.size();
 	if(s==0u)return true;
 	
-	//if(maxIndex<minIndex) return false;
-	//if(maxIndex>activeRange_.end())return false;
-	//if(minIndex<activeRange_.start())return false;
-
 	using policy = Kokkos::RangePolicy<
 		execution_space,  
 		Kokkos::IndexType<uint32>>;
@@ -549,4 +529,92 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markDelete
 	return numMarked;
 }
 
+template<typename ExecutionSpace>
+pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::changeCapacity
+(
+	uint32 reqEmptySpots
+)
+{
+	
+	uint32 oldCap = capacity();
+	uint32 newCap = oldCap* pFlow::gSettings::vectorGrowthFactor__+1;
+	uint32 emptySpots = newCap - numActive_;
+
+	while( emptySpots < reqEmptySpots )
+	{
+		newCap = newCap*pFlow::gSettings::vectorGrowthFactor__+1;
+		emptySpots = newCap - numActive_;
+	}
+	
+	viewType newFlags(flags_.label(), newCap);
+	// copy contnent 
+	copy(newFlags, 0u, flags_, 0u, oldCap);
+	fill(newFlags, oldCap, newCap, static_cast<uint8>(DELETED));
+
+	// reference replacement 
+	flags_ = newFlags;
+
+	return newCap;
+}
+
 #endif // __pointFlagKernels_hpp__
+
+
+
+
+/*template<typename ExecutionSpace>
+pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::scanPointFlag()
+{
+		
+	using rpScanFlag = Kokkos::RangePolicy<execution_space,  
+			Kokkos::IndexType<uint32>>;
+
+	uint32 numActive = 0;
+	
+	
+	uint32 start = activeRange().start();
+	uint32 end   = activeRange().end();
+
+	uint32 minRange = end;
+	uint32 maxRange = start;
+
+	if(start<end)
+	{
+		Kokkos::parallel_reduce(
+			"pointFlagKernels::scanPointFlag",
+			rpScanFlag(start, end),
+			CLASS_LAMBDA_HD(
+				uint32 i, 
+				uint32& minUpdate, 
+				uint32& maxUpdate, 
+				uint32& sumToUpdate)
+			{
+				if(this->isActive(i))
+				{
+					sumToUpdate++;
+					minUpdate = min(minUpdate,i);
+					maxUpdate = max(maxUpdate,i);
+				}
+			},
+			Kokkos::Min<uint32>(minRange), 
+			Kokkos::Max<uint32>(maxRange),
+			numActive);	
+	}
+	
+	if(numActive==0)
+	{
+		minRange = 0;
+		maxRange = 0;
+	}
+	else
+	{
+		// add one to maxRange to make it half-open
+		maxRange ++;
+	}
+
+	activeRange_ = {minRange, maxRange};
+	numActive_ 	= numActive;
+	isAllActive_ = activeRange_.numElements() == numActive_;
+
+	return numActive;
+}*/

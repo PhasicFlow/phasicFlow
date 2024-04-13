@@ -193,14 +193,14 @@ const pFlow::pFlagTypeHost&
 	return pFlagsH_;
 }
 
-FUNCTION_H
+
 const typename pFlow::internalPoints::PointsType& 
     pFlow::internalPoints::pointPosition()const
 {
     return pointPosition_;
 }
 
-FUNCTION_H
+
 typename pFlow::internalPoints::PointsType&
 	pFlow::internalPoints::pointPosition()
 {
@@ -255,7 +255,7 @@ bool pFlow::internalPoints::deletePoints
     return true;
 }
 
-FUNCTION_H
+
 pFlow::uint32 pFlow::internalPoints::updateFlag
 (
 	const domain& dm, 
@@ -296,7 +296,108 @@ void pFlow::internalPoints::fillNeighborsLists
 		
 }
 
-FUNCTION_H
+bool
+pFlow::internalPoints::insertPoints(
+  const realx3Vector& points,
+  anyList&            varList
+)
+{
+	uint32 numNew = static_cast<uint32>(points.size());
+
+	auto aRange = pFlagsD_.activeRange();
+	uint32 emptySpots = pFlagsD_.capacity() - pFlagsD_.numActive();
+	message msg;
+
+	if( numNew > emptySpots )
+	{
+		// increase the capacity to hold new points 
+		aRange = pFlagsD_.activeRange();
+		uint32 newCap = pFlagsD_.changeCapacity(numNew);
+		unSyncFlag();
+		varList.emplaceBack(
+			msg.addAndName(message::CAP_CHANGED),
+			newCap);
+	}
+	
+	
+	// first check if it is possible to add to the beggining of list
+	if(numNew <= aRange.start())
+	{
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			0u, numNew);
+	}
+	// check if it is possible to add to the end of the list  
+	else if( numNew <= pFlagsD_.capacity() - aRange.end() )
+	{	 	
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			aRange.end(), aRange.end()+numNew);
+	}
+	// we should fill the scattered empty spots
+	else
+	{
+		notImplementedFunction;
+		return false;
+	}
+
+	const auto& indices = varList.getObject<uint32IndexContainer>(
+		message::eventName(message::ITEM_INSERT)
+	);
+
+	auto nAdded = pFlagsD_.addInternalPoints(indices.deviceView());
+	unSyncFlag();
+
+	if(nAdded != numNew )
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+	pointPosition_.reserve( pFlagsD_.capacity() );
+	if(!pointPosition_.insertSetElement(indices, points))
+	{
+		fatalErrorInFunction<<
+		"Error in inserting new positions into pointPosition"<<
+		" internalPoints field"<<endl;
+		return false;
+	}
+
+	auto newARange = pFlagsD_.activeRange();
+
+	if( aRange.end() != newARange.end() )
+	{
+		varList.emplaceBack(
+			msg.addAndName(message::RANGE_CHANGED),
+			newARange);
+		varList.emplaceBack(
+			msg.addAndName(message::SIZE_CHANGED),
+			newARange.end());
+	}
+	else if(aRange.start() != newARange.start())
+	{
+		varList.emplaceBack(
+			msg.addAndName(message::RANGE_CHANGED),
+			newARange);
+	}
+	
+	auto tInfo = time().TimeInfo();
+
+	if(!notify(
+		tInfo.iter(),
+		tInfo.t(),
+		tInfo.dt(),
+		msg, 
+		varList))
+	{
+		fatalErrorInFunction<<
+		"Error in notifying observers of "<< subscriberName()<<endl;
+		return false;
+	}
+
+	return true;
+}
+
 bool pFlow::internalPoints::read
 (
 	iIstream& is
@@ -322,7 +423,7 @@ bool pFlow::internalPoints::read
 }
 
 
-FUNCTION_H
+
 bool pFlow::internalPoints::write
 (
 	iOstream& os
@@ -332,7 +433,7 @@ bool pFlow::internalPoints::write
 	return aPoints.write(os);
 }
 
-FUNCTION_H
+
 bool pFlow::internalPoints::read
 (
 	iIstream& is, 
@@ -359,7 +460,7 @@ bool pFlow::internalPoints::read
 		
 
 
-FUNCTION_H
+
 bool pFlow::internalPoints::write
 (
 	iOstream& os, 

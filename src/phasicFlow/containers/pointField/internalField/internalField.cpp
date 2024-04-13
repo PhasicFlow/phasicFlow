@@ -17,11 +17,51 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 -----------------------------------------------------------------------------*/
 
+
+template<class T, class MemorySpace>
+bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
+{
+	const word eventName = message::eventName(message::ITEM_INSERT);
+
+	const auto& indices = varList.getObject<uint32IndexContainer>(
+		eventName);
+	bool success = false;
+	output<<"insert for field "<< name()<<endl;
+
+	if(varList.contains(name()))
+	{
+		// a single value is assigned
+		T val = varList.getObject<T>(name());
+		success = field_.insertSetElement(indices, val);
+		
+	}
+	else if(varList.contains(name()+"Vector"))
+	{
+		// a vector of values is going to be assigned
+		const auto& valVec = varList.getObject<Vector<T>>(name()+"Vector");
+		success = field_.insertSetElement(indices,valVec);
+	}
+	else
+	{
+		success = field_.insertSetElement(indices, defaultValue_);
+	}
+
+	if(!success)
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+	return true;
+
+}
+
 template<class T, class MemorySpace>
 pFlow::internalField<T, MemorySpace>::internalField
 (
 	const word& name, 
-	const internalPoints& internal
+	const internalPoints& internal,
+	const T& defVal
 )
 :
     observer
@@ -37,6 +77,7 @@ pFlow::internalField<T, MemorySpace>::internalField
 		internal.size(),
 		RESERVE()
 	),
+	defaultValue_(defVal),
 	internalPoints_(internal)
 {}
 
@@ -45,6 +86,7 @@ pFlow::internalField<T, MemorySpace>::internalField
 (
 	const word &name, 
 	const internalPoints &internal, 
+	const T& defVal,
 	const T &val
 )
 :
@@ -61,6 +103,7 @@ pFlow::internalField<T, MemorySpace>::internalField
 		internal.size(),
 		RESERVE()
 	),
+	defaultValue_(defVal),
 	internalPoints_(internal)
 {
 	fillInternal(val);
@@ -131,8 +174,7 @@ bool pFlow::internalField<T, MemorySpace>:: hearChanges
 	}
 	if(msg.equivalentTo(message::ITEM_INSERT))
 	{
-		notImplementedFunction;
-		return false;
+		return insert(varList);
 	}
 	return true;
 }

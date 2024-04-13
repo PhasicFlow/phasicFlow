@@ -38,7 +38,7 @@ Licence:
 #include "geometry.hpp"
 #include "sphereParticles.hpp"
 #include "interaction.hpp"
-//#include "Insertions.hpp"
+#include "Insertions.hpp"
 
 
 
@@ -80,14 +80,15 @@ initialize_pFlowProcessors();
 	do 
 	{
 		
-		/*if(! sphInsertion.insertParticles( 
+		if(! sphInsertion.insertParticles( 
+			Control.time().currentIter(),
 			Control.time().currentTime(),
 			Control.time().dt()	) )
 		{
 			fatalError<<
 			"particle insertion failed in sphereDFlow solver.\n";
 			return 1;
-		}*/
+		}
 		 
 		// set force to zero
 		surfGeometry.beforeIteration();

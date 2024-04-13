@@ -87,11 +87,10 @@ public:
 	/// when the component should evolve along time.
 	bool iterate() override;
 	
-		
-
-
+	/// prediction step (if any), is called in beforeIteration	
 	bool predict(real dt, realx3PointField_D& acceleration);
 
+	/// correction step, is called in iterate 
 	bool correct(real dt, realx3PointField_D& acceleration);
 
 };

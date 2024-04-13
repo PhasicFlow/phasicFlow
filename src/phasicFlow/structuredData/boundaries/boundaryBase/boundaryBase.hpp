@@ -153,12 +153,30 @@ public:
 		(dict, bplane, internal, bndrs, thisIndex)
 	);
 
+	/// The length from boundary plane into the domain 
+	/// where beyond that distance internal points exist.
+	/// By conventions is it always equal to neighborLength_  
+	real neighborLengthIntoInternal()const
+	{
+		return neighborLength_;
+	}
+
+	/// The distance length from boundary plane 
+	/// where neighbor particles exist in that distance. 
+	/// This length may be modified in each boundary type 
+	/// as required. In this case the boundaryExtensionLength
+	/// method should also be modified accordingly. 
 	virtual 
 	real neighborLength()const
 	{
 		return neighborLength_;
 	}
 
+	/// The extention length (in vector form) for the boundary
+	/// as required by  each boundary type. It is allowed for 
+	/// each boundary type to be extended outward to allow 
+	/// particles to stay more in its list before being removed 
+	/// from its list. 
 	virtual 
 	realx3 boundaryExtensionLength()const
 	{
@@ -240,6 +258,7 @@ public:
 
 	const boundaryBase& mirrorBoundary()const;
 	
+	/// the actual boundary plane of this boundary 
 	const plane& boundaryPlane()const
 	{
 		return boundaryPlane_;

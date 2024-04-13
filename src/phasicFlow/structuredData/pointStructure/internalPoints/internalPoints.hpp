@@ -83,6 +83,7 @@ private:
 			uint32 fromBoundaryIndex,
 			uint32 toBoundaryIndex);
 
+
 protected:
 	
 	void syncPFlag()const;
@@ -134,27 +135,25 @@ public:
 
 
 	//// - Methods
-		FUNCTION_H
+		
 		const pFlagTypeDevice& activePointsMaskDevice()const;
 
-
-		FUNCTION_H
+		
 		const pFlagTypeHost& activePointsMaskHost()const;
 
 		// - Const access pointPosition
-		FUNCTION_H
 		const PointsType& pointPosition()const;
 		
-		FUNCTION_H
+		
         PointsType& pointPosition();
 
-        INLINE_FUNCTION_H
+        inline
         auto pointPositionHost()const
         {
             return pointPosition_.hostView();
         }
 
-        INLINE_FUNCTION_H
+        inline
         auto pointPositionDevice()const
         {
             return pointPosition_.deviceView();
@@ -163,40 +162,40 @@ public:
 		PointsTypeHost activePointsHost()const;
 
 		// - size of data structure
-		INLINE_FUNCTION_H
+		inline
 		uint32 size()const
 		{
 			return pFlagsD_.activeRange_.end();
 		}
 		
 		// - maximum capacity of data structure 
-		INLINE_FUNCTION_H
+		inline
 		uint32 capacity()const
 		{
-			return pointPosition_.capacity();
+			return pFlagsD_.capacity();
 		}
 
-		INLINE_FUNCTION_H
+		inline
 		bool empty()const
 		{
 			return size()==0u;
 		}
 		
 		// - number of active points 
-		INLINE_FUNCTION_H
+		inline
 		uint32 numActive() const
 		{
 			return pFlagsD_.numActive();
 		}
 				
 		// - if all points are active 
-		INLINE_FUNCTION_H
+		inline
 		bool isAllActive()const
 		{
 			return pFlagsD_.isAllActive();
 		}
 
-		INLINE_FUNCTION_H
+		inline
 		auto activeRange()const
 		{
 			return pFlagsD_.activeRange();
@@ -216,16 +215,16 @@ public:
 
 		///@brief delete points at indices given in delPoints.
 		/// The default is that delPoints contains sorted indices 
-		FUNCTION_H
+		
 		bool deletePoints(
 			scatteredFieldAccess<uint32, memory_space> delPoints);
 		
-		FUNCTION_H
+		
 		uint32 updateFlag(
 			const domain& dm, 
 			const std::array<real,6>& dist);
 		
-		FUNCTION_H
+		
 		void fillNeighborsLists(
 			ViewType1D<uint32, memory_space> leftList,
 			ViewType1D<uint32, memory_space> rightList,
@@ -234,27 +233,24 @@ public:
 			ViewType1D<uint32, memory_space> rearList,
 			ViewType1D<uint32, memory_space> frontList);
 		
-
+		
+		bool insertPoints(const realx3Vector& points, anyList& varList);
 		
 	
 	//// - IO operations 
 		
 		/// Read 
-		FUNCTION_H
 		bool read(iIstream& is);
 		
 
 		/// Write 
-		FUNCTION_H
 		bool write(iOstream& os)const;
 
 		/// Read 
-		FUNCTION_H
 		bool read(iIstream& is, const IOPattern& iop);
 		
 
 		/// Write 
-		FUNCTION_H
 		bool write(iOstream& os, const IOPattern& iop)const;	
 
 };

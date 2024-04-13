@@ -88,11 +88,7 @@ private:
 		/// view of the vector 
 		viewType   		view_;
 
-	// - protected members and methods 
-
-		/// growth factor for vector 
-		static const inline 
-		real 	growthFactor_ = vectorGrowthFactor__;
+	// - protected members and methods 		
 
 		/// Is the memory of this vector accessible from Host
 		static constexpr 
@@ -108,7 +104,7 @@ private:
 	  	/// Evaluate capacity based on the input size 
 		static INLINE_FUNCTION_H uint32 evalCapacity(uint32 n)
 		{
-			return static_cast<uint32>(n*growthFactor_+1);
+			return static_cast<uint32>(n*pFlow::gSettings::vectorGrowthFactor__+1);
 		}
 
 	/// @brief Change size to n and preserve the conetent if realloc 
@@ -289,11 +285,6 @@ public:
 		INLINE_FUNCTION_H
 		void assign(const VectorType& src, bool srcCapacity = true);
 
-		
-		/*template<typename MSpace, 
-				std::enable_if_t<
-					!std::is_same_v<typename VectorSingle<T, MSpace>::memory_space, memory_space>, 
-					bool> = true>*/
 		template<typename MSpace>
 		INLINE_FUNCTION_H
 		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true)
@@ -329,14 +320,14 @@ public:
 		auto getSpan()const;
 		
 		INLINE_FUNCTION_H
-		bool insertSetElement(uint32IndexContainer indices, const T& val);
+		bool insertSetElement(const uint32IndexContainer& indices, const T& val);
 		
 		INLINE_FUNCTION_H
-		bool insertSetElement(uint32IndexContainer indices, const std::vector<T>& vals);
+		bool insertSetElement(const uint32IndexContainer& indices, const std::vector<T>& vals);
 		
 		INLINE_FUNCTION_H
 		bool insertSetElement(
-			uint32IndexContainer indices, 
+			const uint32IndexContainer& indices, 
 			const ViewType1D<T, memory_space> vals);
 
 		INLINE_FUNCTION_H

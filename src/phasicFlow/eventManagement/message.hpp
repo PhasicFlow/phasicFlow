@@ -108,6 +108,12 @@ public:
 		return *this;
 	}
 
+	inline const word& addAndName(EVENT evnt)
+	{
+		add(evnt);
+		return eventName(static_cast<size_t>(evnt));
+	}
+
 	inline message& remove(EVENT evnt)
 	{
 		events_.set(static_cast<size_t>(evnt), false);

@@ -57,7 +57,7 @@ bool isCoupling = false;
 if(!cmds.parse(argc, argv)) return 0;
 
 // this should be palced in each main 
-processors::initProcessors(argc, argv);
+processors::initProcessors(argc, argv); 
 initialize_pFlowProcessors();
 #include "initialize_Control.hpp"
 	

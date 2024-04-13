@@ -253,11 +253,14 @@ copy(
   uint32                                   sEnd
 )
 {
-	range32 sSpan(sStart, sEnd);
-	range32 dSpan(dStart, dStart + (sEnd - sStart));
+	
+	auto srcSub = Kokkos::subview(
+		src, 
+		Kokkos::make_pair(sStart, sEnd));
 
-	auto    srcSub = Kokkos::subview(src, sSpan);
-	auto    dstSub = Kokkos::subview(dst, dSpan);
+	auto dstSub = Kokkos::subview(
+		dst, 
+		Kokkos::make_pair(dStart, dStart + (sEnd - sStart)));
 
 	Kokkos::deep_copy(dstSub, srcSub);
 }

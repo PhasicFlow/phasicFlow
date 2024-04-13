@@ -1,18 +1,18 @@
-#include "regularParticleHandler.hpp"
+#include "regularParticleIdHandler.hpp"
 
 
 
-pFlow::regularParticleHandler::regularParticleHandler
+pFlow::regularParticleIdHandler::regularParticleIdHandler
 (
-    uint32PointField_D & id
+    pointStructure& pStruct
 )
 :
-    particleIdHandler(id)
+    particleIdHandler(pStruct)
 {
 }
 
 pFlow::Pair<pFlow::uint32, pFlow::uint32> 
-    pFlow::regularParticleHandler::getIdRange(uint32 nNewParticles)
+    pFlow::regularParticleIdHandler::getIdRange(uint32 nNewParticles)
 {
     uint32 startId;
     if(maxId_==-1)
@@ -28,18 +28,18 @@ pFlow::Pair<pFlow::uint32, pFlow::uint32>
     return {startId, endId};
 }
 
-bool pFlow::regularParticleHandler::initialIdCheck()
+bool pFlow::regularParticleIdHandler::initialIdCheck()
 {
     /// empty point structure / no particles in simulation
-    if( id().pStruct().empty() ) return true;
+    if( pStruct().empty() ) return true;
 
-    uint32 maxId = max(id());
+    uint32 maxId = max( *this );
     
     /// particles should get ids from 0 to size-1
     if(maxId == -1)
     {
-        fillSequence(id(),0u);
-        maxId_ = id().size()-1;
+        fillSequence(*this,0u);
+        maxId_ = size()-1;
     }
     else
     {

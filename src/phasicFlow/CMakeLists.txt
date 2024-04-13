@@ -5,6 +5,7 @@ types/basicTypes/Logical.cpp
 types/types.cpp
 
 globals/error.cpp
+globals/globalSettings.cpp
 
 processors/processors.cpp
 processors/localProcessors.cpp
@@ -62,11 +63,18 @@ containers/Field/Fields.cpp
 containers/symArrayHD/symArrays.cpp
 containers/List/anyList/anyList.cpp
 
+structuredData/box/box.cpp
+structuredData/sphere/sphere.cpp
+structuredData/cylinder/cylinder.cpp
+structuredData/peakableRegion/geometricRegion/geometricRegions.cpp
+structuredData/peakableRegion/PeakableRegion/PeakableRegions.cpp
+structuredData/peakableRegion/peakableRegion/peakableRegion.cpp
+
 structuredData/pointStructure/internalPoints/internalPointsKernels.cpp
 structuredData/pointStructure/internalPoints/internalPoints.cpp
 
 structuredData/zAxis/zAxis.cpp
-structuredData/box/box.cpp
+
 structuredData/line/line.cpp
 structuredData/infinitePlane/infinitePlane.cpp
 structuredData/plane/plane.cpp
@@ -82,10 +90,9 @@ structuredData/boundaries/boundaryReflective/boundaryReflective.cpp
 structuredData/boundaries/boundaryList.cpp
 structuredData/pointStructure/pointStructure/pointStructure.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
-structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
 structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
-
+structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 
 triSurface/subSurface.cpp
 triSurface/triSurface.cpp

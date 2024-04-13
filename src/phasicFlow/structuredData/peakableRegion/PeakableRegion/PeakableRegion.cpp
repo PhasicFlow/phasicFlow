@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-template<typename RegionType>
-pFlow::PeakableRegion<RegionType>::PeakableRegion
+template<typename GeomType>
+pFlow::PeakableRegion<GeomType>::PeakableRegion
 (
 	const word& type, 
 	const dictionary& dict
@@ -32,8 +32,8 @@ pFlow::PeakableRegion<RegionType>::PeakableRegion
 	
 }
 
-template<typename RegionType>
-bool  pFlow::PeakableRegion<RegionType>::isInside
+template<typename GeomType>
+bool  pFlow::PeakableRegion<GeomType>::isInside
 (
 	const realx3& point
 )const
@@ -42,20 +42,20 @@ bool  pFlow::PeakableRegion<RegionType>::isInside
 }
 
 
-template<typename RegionType>
-pFlow::realx3 pFlow::PeakableRegion<RegionType>::peek()const
+template<typename GeomType>
+pFlow::realx3 pFlow::PeakableRegion<GeomType>::peek()const
 {
 	return region_.peek();
 }
 	
-template<typename RegionType>
-bool pFlow::PeakableRegion<RegionType>::read(const dictionary& dict)
+template<typename GeomType>
+bool pFlow::PeakableRegion<GeomType>::read(const dictionary& dict)
 {
 	return region_.read(dict);
 }
 
-template<typename RegionType>
-bool pFlow::PeakableRegion<RegionType>::write(dictionary& dict)const
+template<typename GeomType>
+bool pFlow::PeakableRegion<GeomType>::write(dictionary& dict)const
 {
 	return region_.write(dict);
 }

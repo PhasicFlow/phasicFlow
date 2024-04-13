@@ -122,6 +122,17 @@ public:
 		return 0.0;
 	}
 
+	inline 
+	uint32 propertyId(uint32 index)const
+	{
+		if(indexValid(index))
+		{
+			return shapePropertyIds_[index];
+		}
+		fatalExit;
+		return 0.0;
+	}
+
 	virtual 
     real maxBoundingSphere()const = 0;
 

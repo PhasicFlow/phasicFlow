@@ -1,4 +1,3 @@
-#include "VectorSingle.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -75,9 +74,7 @@ void pFlow::VectorSingle<T,MemorySpace>::changeCapacity
         {
             newView(i) = view_(i);
         }
-
         view_ = newView;
-
     }
     else
     {
@@ -661,7 +658,7 @@ auto pFlow::VectorSingle<T,MemorySpace>::getSpan()const
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H
-bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement(uint32IndexContainer indices, const T& val)
+bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement(const uint32IndexContainer& indices, const T& val)
 {
 	if(indices.empty()) return true;
 	
@@ -713,7 +710,7 @@ template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H
 bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 (
-	const uint32IndexContainer indices, 
+	const uint32IndexContainer& indices, 
 	const std::vector<T>& vals
 )
 {
@@ -766,7 +763,7 @@ template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H
 bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 (
-	uint32IndexContainer indices, 
+	const uint32IndexContainer& indices, 
 	const ViewType1D<T, memory_space> vals
 )
 {

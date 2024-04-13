@@ -76,7 +76,7 @@ public:
 		{
 			auto cPoint = point-center_;
 			auto dist2 = dot(cPoint,cPoint);
-			return dist2 < radius2_;
+			return dist2 <= radius2_;
 
 		}
 

@@ -78,20 +78,6 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 
 }
 
-/*bool pFlow::dynamicPointStructure::beforeIteration()
-{
-	pointStructure::beforeIteration();
-	auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
-    return predict(dt(), acc);
-}*/
-
-/*bool pFlow::dynamicPointStructure::iterate()
-{
-	pointStructure::iterate();
-	auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
-    return correct(dt(), acc);
-    
-}*/
 
 bool pFlow::dynamicPointStructure::beforeIteration()
 {
@@ -137,74 +123,3 @@ bool pFlow::dynamicPointStructure::correct
 
 	return true;	
 }
-
-/*FUNCTION_H
-pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::dynamicPointStructure::insertPoints
-(
-	const realx3Vector& pos,
-	const List<eventObserver*>& exclusionList
-)
-{
-	auto newIndicesPtr = pointStructure::insertPoints(pos, exclusionList);
-
-	// no new point is inserted
-	if( !newIndicesPtr ) return newIndicesPtr;
-
-	if(!integrationPos_().needSetInitialVals()) return newIndicesPtr;
-
-	auto hVel = velocity_.hostView();
-	auto n = newIndicesPtr().size();
-	auto index = newIndicesPtr().indicesHost();
-
-	realx3Vector velVec(n, RESERVE());
-	for(auto i=0; i<n; i++)
-	{
-		velVec.push_back( hVel[ index(i) ]);
-	}
-
-	integrationPos_->setInitialVals(newIndicesPtr(), pos );
-	integrationVel_->setInitialVals(newIndicesPtr(), velVec );
-	
-	return newIndicesPtr;
-
-}*/
-
-
-/*bool pFlow::dynamicPointStructure::update(
-	const eventMessage& msg) 
-{
-	if( msg.isInsert())
-	{
-		
-		if(!integrationPos_->needSetInitialVals())return true;
-
-		const auto indexHD = pStruct().insertedPointIndex();
-
-	
-		auto n = indexHD.size();
-
-		if(n==0) return true;
-
-		auto index = indexHD.indicesHost();
-
-		realx3Vector pos(n,RESERVE());
-		realx3Vector vel(n,RESERVE());
-		const auto hVel = velocity().hostView();
-		const auto hPos = pStruct().pointPosition().hostView();
-
-		for(auto i=0; i<n; i++)
-		{
-			pos.push_back( hPos[index(i)]);
-			vel.push_back( hVel[index(i)]);
-		}
-
-
-		
-		integrationPos_->setInitialVals(indexHD, pos);
-
-		integrationVel_->setInitialVals(indexHD, vel);		
-
-	}
-
-	return true;
-}*/

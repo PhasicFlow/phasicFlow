@@ -153,6 +153,12 @@ public:
 		{
 			return boundaries_.extendedDomain();
 		}
+
+		inline 
+		auto internalDomainBox()const
+		{
+			return boundaries_.internalDomainBox();
+		}
 		
 	// - IO methods 
 

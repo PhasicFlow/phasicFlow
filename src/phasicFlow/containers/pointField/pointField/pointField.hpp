@@ -61,9 +61,6 @@ private:
 		/// @brief  refrence to point structure 
 		const pointStructure&       pStruct_;
 
-		/// @brief value when a new item is added to field
-		T 	defaultValue_;
-
 
 public:
 	
@@ -95,6 +92,11 @@ public:
 		
 
 	//// - Methods
+
+		const word& name() const final
+		{
+			return  IOobject::name();
+		}
 	
 		const auto& internal()const
 		{

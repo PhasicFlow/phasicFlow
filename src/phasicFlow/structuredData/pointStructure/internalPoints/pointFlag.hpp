@@ -20,10 +20,10 @@ Licence:
 #ifndef __pointFlag_hpp__
 #define __pointFlag_hpp__
 
-
 #include "phasicFlowKokkos.hpp"
 #include "domain.hpp"
 #include "scatteredFieldAccess.hpp"
+#include "globalSettings.hpp"
 
 namespace pFlow
 {
@@ -112,8 +112,7 @@ public:
 
 	friend class internalPoints;
 
-	pointFlag()
-	{}
+	pointFlag() = default;
 
 	pointFlag(uint32 capacity, uint32 start, uint32 end )
 	:
@@ -122,7 +121,7 @@ public:
 		activeRange_(start, end),
 		isAllActive_(true)
 	{
-		fill(flags_, 0, capacity, static_cast<uint8>(Flag::DELETED));
+		fill(flags_, end, capacity, static_cast<uint8>(Flag::DELETED));
 		fill(flags_, activeRange_, static_cast<uint8>(Flag::INTERNAL));
 	}
 
@@ -158,6 +157,12 @@ public:
 	const auto& activeRange()const
 	{
 		return activeRange_;
+	}
+
+	INLINE_FUNCTION_HD
+	uint32 capacity()const
+	{
+		return flags_.extent(0);
 	}
 
 	INLINE_FUNCTION_HD
@@ -289,6 +294,9 @@ public:
 		const box& validBox,
 		ViewType1D<realx3, memory_space> points);
 
+	uint32 addInternalPoints(
+		const ViewType1D<uint32, memory_space>& points);
+
 	bool deletePoints(
 		scatteredFieldAccess<uint32, memory_space> points);
 
@@ -344,6 +352,8 @@ public:
 		ViewType1D<realx3, memory_space> 	points,
 		ViewType1D<uint32, memory_space> 	indices,
 		ViewType1D<uint32, memory_space> 	onOff);
+
+	uint32 changeCapacity( uint32 reqEmptySpots );
 
 
 

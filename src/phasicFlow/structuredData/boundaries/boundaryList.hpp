@@ -46,6 +46,8 @@ private:
 
 		domain 					extendedDomain_;
 
+		box 					internalDomainBox_;
+
 		bool                    listSet_ = false;
 
 		void setExtendedDomain();		
@@ -104,6 +106,16 @@ public:
 	{
 		return extendedDomain_;
 	}
+
+	inline
+	const auto& extendedDomainBox()const
+	{
+		return extendedDomain_.domainBox();
+	}
+
+	box internalDomainBox()const;
+	
+	
 
 	bool beforeIteration(uint32 iter, real t, real dt);
 

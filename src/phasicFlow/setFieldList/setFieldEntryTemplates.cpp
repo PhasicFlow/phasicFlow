@@ -23,7 +23,7 @@ template <typename Type>
 bool pFlow::setFieldEntry::checkForType()const
 {
 	word typeName( entry_.firstPart() );
-	return basicTypeName<Type>() == typeName;
+	return getTypeName<Type>() == typeName;
 };
 
 template <typename Type>
@@ -69,40 +69,7 @@ pFlow::uniquePtr<pFlow::pointField_H<Type>>
 	return Ptr;
 }
 
-/*template <typename Type>
-void* pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
-(
-	repository& owner,
-	pointStructure& pStruct,
-	bool verbose
-)
-{
 
-	if( !checkForType<Type>() ) return nullptr;
-	
-	Type defValue = entry_.secondPartVal<Type>();
-	
-	if(verbose)
-		REPORT(2)<<"Creating pointField " << Green_Text(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<END_REPORT;
-
-	// by default we perform operations on host
-	auto& field = 
-	owner.emplaceObject<pointField<Vector,Type, vecAllocator<Type>>>
-	(
-		objectFile
-		(
-			fieldName(),
-			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
-		),
-		pStruct,
-		defValue
-	);
-
-	return &field;
-}*/
 
 template <typename Type>
 bool pFlow::setFieldEntry::setPointFieldSelected
@@ -148,45 +115,3 @@ bool pFlow::setFieldEntry::setPointFieldSelected
 	return false;
 }
 
-/*template <typename Type>
-void* pFlow::setFieldEntry::setPointFieldSelectedStd
-(
-	repository& owner,
-	int32IndexContainer& selected,
-	bool verbose
-)
-{
-	
-	if( !checkForType<Type>() ) return nullptr;
-
-	
-	auto fName = fieldName();
-
-	if( !owner.lookupObjectName(fName) )
-	{
-		fatalErrorInFunction<<
-		"  Cannot find "<< fName << " in repository " << owner.name() << ". \n";
-		return nullptr;
-	}
-
-	
-	Type value = entry_.secondPartVal<Type>();
-
-	if(verbose)
-		REPORT(2)<< "Setting selected points of " << Green_Text(fName)
-		 		 << " to value " << cyanText(value) <<END_REPORT;
-	
-	
-	auto fieldTypeName = owner.lookupObjectTypeName(fName);
-
-	if( pointField<Vector, Type, vecAllocator<Type>>::TYPENAME() == fieldTypeName )
-	{
-		auto& field = owner.lookupObject<pointField<Vector,Type, vecAllocator<Type>>>(fName);
-		if(field.insertSetElement(selected, value))
-			return &field;
-		else
-			return nullptr;
-	}
-
-	return nullptr;
-}*/
