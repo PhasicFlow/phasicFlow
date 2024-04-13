@@ -31,6 +31,7 @@ namespace pFlow
 
 class dictionary;
 class insertion;
+class pointStructure;
 
 /**
  * This class defines all the necessary enteties for defining an insertion
@@ -92,7 +93,7 @@ private:
 	/// insertion region dictionary
 	const dictionary&         dict_;
 
-	/// ref to pointStructure
+	/// ref to insertion
 	const insertion&          insertion_;
 
 	/// @brief time control for insertion events
@@ -162,6 +163,8 @@ public:
 	{
 		return insertion_;
 	}
+
+	const pointStructure& pStruct()const;
 
 	inline bool insertionTime(uint32 iter, real t, real dt) const
 	{

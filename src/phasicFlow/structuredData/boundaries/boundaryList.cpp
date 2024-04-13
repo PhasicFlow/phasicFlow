@@ -143,12 +143,27 @@ bool pFlow::boundaryList::setLists()
 	return true;
 }
 
-bool pFlow::boundaryList::beforeIteration
-(
-	uint32 iter, 
-	real t, 
-	real dt
-)
+pFlow::box
+pFlow::boundaryList::internalDomainBox() const
+{
+	const auto& thisBox = pStruct_.thisDomain().domainBox();
+	
+	const realx3 lowerPointDisplacement = {
+		boundary(0).neighborLengthIntoInternal(), 
+		boundary(2).neighborLengthIntoInternal(), 
+		boundary(4).neighborLengthIntoInternal()};
+
+	const realx3 upperPointDisplacement = {
+		boundary(1).neighborLengthIntoInternal(), 
+		boundary(3).neighborLengthIntoInternal(), 
+		boundary(5).neighborLengthIntoInternal()};
+	
+	return {thisBox.minPoint() + lowerPointDisplacement, 
+			thisBox.maxPoint() - upperPointDisplacement};
+}
+
+bool
+pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt)
 {
 	// it is time to update lists 
 	if(timeControl_.timeEvent(iter, t, dt))

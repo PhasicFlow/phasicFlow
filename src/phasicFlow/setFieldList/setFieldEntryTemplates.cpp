@@ -23,7 +23,7 @@ template <typename Type>
 bool pFlow::setFieldEntry::checkForType()const
 {
 	word typeName( entry_.firstPart() );
-	return basicTypeName<Type>() == typeName;
+	return getTypeName<Type>() == typeName;
 };
 
 template <typename Type>

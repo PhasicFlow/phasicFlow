@@ -27,6 +27,7 @@ namespace pFlow
 
 // forward
 class particles;
+class pointStructure;
 
 /**
  * Base class for particle insertion
@@ -87,6 +88,8 @@ public:
 	{
 		return particles_;
 	}
+
+	const pointStructure& pStruct()const;
 
 	inline bool readFromFile() const
 	{

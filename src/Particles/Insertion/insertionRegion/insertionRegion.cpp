@@ -158,6 +158,12 @@ pFlow::insertionRegion::insertionRegion(
 	}
 }
 
+const pFlow::pointStructure&
+pFlow::insertionRegion::pStruct() const
+{
+	return Insertion().pStruct();
+}
+
 pFlow::uint32
 pFlow::insertionRegion::numberToBeInserted(uint32 iter, real t, real dt)
 {

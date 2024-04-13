@@ -543,7 +543,7 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::changeCapacity
 	while( emptySpots < reqEmptySpots )
 	{
 		newCap = newCap*pFlow::gSettings::vectorGrowthFactor__+1;
-		uint32 emptySpots = newCap - numActive_;
+		emptySpots = newCap - numActive_;
 	}
 	
 	viewType newFlags(flags_.label(), newCap);

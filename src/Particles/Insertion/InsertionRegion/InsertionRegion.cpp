@@ -68,6 +68,16 @@ bool pFlow::InsertionRegion<ShapeType>::insertParticles
 	
 	if(newNum == 0) return true;
 
+	auto internalBox =  pStruct().internalDomainBox();
+
+	if( !(internalBox.minPoint() < internalBox.maxPoint()))
+	{
+		WARNING<<"Minimum point of internal point is not lower than "<<
+		"the maximum point \n"<<
+		"minimum point: "<< internalBox.minPoint()<<
+		"\nmaximum point:"<<internalBox.maxPoint()<<END_WARNING;
+	}
+
 	names.reserve(max(newNum,names.capacity()));
 	pos.reserve(max(newNum,pos.capacity()));
 	names.clear();
@@ -75,13 +85,7 @@ bool pFlow::InsertionRegion<ShapeType>::insertParticles
 
 	realVector diams("diams", newNum, 0, RESERVE());
 
-	for(uint32 i=0; i<newNum; i++)
-	{
-		uint32 idx;
-		shapes_.shapeNameToIndex(names[i], idx);
-		diams[i] = shapes_.boundingDiameter(idx);
-	}
-
+	
 	size_t n = 0;
 	uint32 idx;
 	auto& mix = mixture();
@@ -94,6 +98,10 @@ bool pFlow::InsertionRegion<ShapeType>::insertParticles
 	{
 		
 		realx3 p = pReg.peek();
+
+		// check if point is inside internal box 
+		if(!internalBox.isInside(p))continue;
+
 		if( !checkForContact(pos, diams, p, d) )
 		{
 			names.push_back(name);

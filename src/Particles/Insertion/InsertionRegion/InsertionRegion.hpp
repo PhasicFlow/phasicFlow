@@ -22,6 +22,7 @@ Licence:
 #define __InsertionRegion_hpp__
 
 #include "dictionary.hpp"
+#include "pointStructure.hpp"
 #include "insertionRegion.hpp"
 
 namespace pFlow

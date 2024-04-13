@@ -39,6 +39,12 @@ pFlow::insertion::insertion(particles& prtcl)
 	readInsertionDict(*this);
 }
 
+const pFlow::pointStructure&
+pFlow::insertion::pStruct() const
+{
+	return particles_.pStruct();
+}
+
 bool
 pFlow::insertion::read(iIstream& is, const IOPattern& iop)
 {
