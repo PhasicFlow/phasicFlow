@@ -2,90 +2,79 @@
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
-   OOOOOOO     F luid flow       
+   OOOOOOO     F luid flow
 ------------------------------------------------------------------------------
   Copyright (C): www.cemf.ir
   email: hamid.r.norouzi AT gmail.com
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 Licence:
-  This file is part of phasicFlow code. It is a free software for simulating 
+  This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
-  the terms of GNU General Public License v3 or any other later versions. 
- 
-  phasicFlow is distributed to help others in their research in the field of 
+  the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
-#ifndef __positionOrdered_hpp__
-#define __positionOrdered_hpp__
+#ifndef __positionRandom_hpp__
+#define __positionRandom_hpp__
 
 #include "positionParticles.hpp"
-#include "VectorSingles.hpp"
-#include "VectorDuals.hpp"
-
+#include "dictionary.hpp"
 
 namespace pFlow
 {
 
+class collisionCheck;
 
-
-class positionRandom
-:
-	public positionParticles
+class positionRandom : public positionParticles
 {
-protected:
+private:
 
-	dictionary 	prDict_;
+	dictionary   prDict_;
 
-	real 		diameter_;
+	real         diameter_;
 
-	size_t 		numPoints_;
+	uint32       numPoints_;
 
-	size_t 		maxIterations_;
-	
-	realx3Vector 	position_;
+	uint32       maxIterations_;
 
-	size_t 		reportInterval_;
+	realx3Vector position_;
 
-	bool positionOnePass(int32 pass, int32 startNum);
-	
-	bool positionPointsRandom();
+	realVector   diameters_;
 
-	bool inCollision(const realx3 &cntr, real diam);
+	uint32       reportInterval_;
 
-	void fillPoints(
-		uint numPoints,
-		realx3Vector_HD& points,
-		int32Vector_HD& flags );
+	bool         positionOnePass(collisionCheck& collCheck);
+
+	bool         positionPointsRandom();
 
 public:
 
 	// - type Info
-	TypeInfo("positionRandom");
+	TypeInfo("random");
 
-	positionRandom(
-		systemControl& control,
-		const dictionary& dict);
+	positionRandom(systemControl& control, const dictionary& dict);
 
-	// - add this class to vCtor selection table 
-	add_vCtor(
-		positionParticles,
-		positionRandom,
-		dictionary);
+	// - add this class to vCtor selection table
+	add_vCtor
+	(
+		positionParticles, 
+		positionRandom, 
+		dictionary
+	);
 
-	virtual ~positionRandom() = default;
+	~positionRandom() final = default;
 
-	//// - Methods 
+	//// - Methods
 
-	virtual uint64 numPoints()const
+	uint32 numPoints() const final
 	{
 		return position_.size();
 	}
 
-	virtual uint64 size()const
+	uint32 size() const final
 	{
 		return position_.size();
 	}
@@ -96,25 +85,18 @@ public:
 	}
 
 	// - const access to position
-	virtual const realx3Vector& position()const 
+	const realx3Vector& position() const final
 	{
 		return position_;
 	}
 
-	// - access to position 
-	virtual realx3Vector& position()
+	// - access to position
+	realx3Vector& position() final
 	{
 		return position_;
 	}
-
-
-
-	
-};	
-
+};
 
 }
-
-
 
 #endif // __positionOrdered_hpp__

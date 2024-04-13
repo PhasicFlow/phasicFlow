@@ -22,7 +22,6 @@ Licence:
 #define __empty_hpp__
 
 #include "positionParticles.hpp"
-#include "box.hpp"
 
 namespace pFlow
 {
@@ -32,10 +31,7 @@ class empty
 :
 	public positionParticles
 {
-protected:
-
-	dictionary 	emptyDict_;
-
+private:
 
 	realx3Vector 	position_;
 
@@ -54,33 +50,33 @@ public:
 		empty,
 		dictionary);
 
-	virtual ~empty() = default;
+	~empty() final = default;
 
 	//// - Methods 
 
-	virtual uint64 numPoints()const
+	uint32 numPoints()const final
 	{
 		return 0;
 	}
 
-	virtual uint64 size()const
+	uint32 size()const final
 	{
 		return 0;
 	}
 
-	real maxDiameter() const override
+	real maxDiameter() const final
 	{
 		return 1.0;
 	}
 
 	// - const access to position
-	virtual const realx3Vector& position()const 
+	const realx3Vector& position()const final 
 	{
 		return position_;
 	}
 
 	// - access to position 
-	virtual realx3Vector& position()
+	realx3Vector& position() final
 	{
 		return position_;
 	}
