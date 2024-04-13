@@ -52,8 +52,13 @@ public:
 
 protected:
 
+	/// Field
     FieldType           	field_;
 
+	/// @brief value when a new item is added to field
+	T 						defaultValue_;
+
+	/// const ref to internal points 
     const internalPoints&   internalPoints_;
 
 	static inline
@@ -66,15 +71,19 @@ protected:
 		message::ITEM_DELETE
 	);
 
+	bool insert(const anyList& varList);
+
 public:
 
 	internalField(
 		const word& name, 
-		const internalPoints& internal);
+		const internalPoints& internal,
+		const T& defVal);
 	
 	internalField(
 		const word& name, 
 		const internalPoints& internal,
+		const T& defVal,
 		const T& val);
 	
 	inline 
@@ -140,6 +149,12 @@ public:
 	word fieldKey()const
 	{
 		return field_.fieldKey();
+	}
+
+	inline
+	const T& defaultValue()const
+	{
+		return defaultValue_;
 	}
 
 	inline

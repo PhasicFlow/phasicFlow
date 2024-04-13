@@ -34,11 +34,11 @@ pFlow::pointField<T, MemorySpace>::pointField
 	InternalFieldType
 	(
 		objf.name(),
-		pStruct
+		pStruct,
+        defVal
 	),
 	boundaryFieldList_(pStruct.boundaries(), *this),
-	pStruct_(pStruct),
-	defaultValue_(defVal)
+	pStruct_(pStruct)
 {
     
     if(IOobject::implyRead())
@@ -77,11 +77,11 @@ pFlow::pointField<T, MemorySpace>::pointField
 	InternalFieldType
 	(
 		objf.name(),
-		pStruct
+		pStruct,
+        defVal
 	),
 	boundaryFieldList_(pStruct.boundaries(), *this),
-	pStruct_(pStruct),
-	defaultValue_(defVal)
+	pStruct_(pStruct)
 {
     if(IOobject::implyRead())
     {
@@ -125,11 +125,11 @@ pFlow::pointField<T, MemorySpace>::pointField
 	(
 		objf.name(),
 		pStruct,
+        defVal,
 		val
 	),
 	boundaryFieldList_(pStruct.boundaries(), *this),
-	pStruct_(pStruct),
-	defaultValue_(defVal)
+	pStruct_(pStruct)
 {
 
 }

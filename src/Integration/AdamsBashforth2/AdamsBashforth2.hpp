@@ -48,8 +48,8 @@ private:
 	
 public:
 
-	/// Type info
-	TypeInfo("AdamsBashforth2");
+	/// Class info
+	ClassInfo("AdamsBashforth2");
 
 	// - Constructors
 
@@ -95,8 +95,16 @@ public:
 		bool correct(
 			real dt, 
 			realx3Field_D& y, 
-			realx3PointField_D& dy);
+			realx3PointField_D& dy) final;
 		
+		/*bool hearChanges
+		(
+			real t,
+			real dt,
+			uint32 iter,
+			const message& msg, 
+			const anyList& varList
+		) override;*/
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,

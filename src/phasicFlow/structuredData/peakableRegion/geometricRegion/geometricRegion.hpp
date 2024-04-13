@@ -18,66 +18,58 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __PeakableRegion_hpp__
-#define __PeakableRegion_hpp__
+#ifndef __geometricRegion_hpp__
+#define __geometricRegion_hpp__
+
 
 #include "dictionary.hpp"
-#include "geometricRegion.hpp"
-#include "peakableRegion.hpp"
+#include "uniformRandomReal.hpp"
+#include "typeInfo.hpp"
 
 namespace pFlow
 {
 
 template<typename GeomType>
-class PeakableRegion : public peakableRegion
+class geometricRegion
 {
 public:
 
-	using RegionType = geometricRegion<GeomType>;
-
-	using GeometryType = typename RegionType::GeometryType;
+	using GeometryType = GeomType;
 
 private:
 
-	RegionType region_;
+	GeomType                  geom_;
+
+	realx3                    minPoint_;
+
+	realx3                    maxPoint_;
+
+	mutable uniformRandomReal random_;
+
+	static constexpr uint32   maxTries_ = 100;
 
 public:
 
-	// type info
-	TypeInfoTemplate11("peakable", GeometryType);
+	// - type info
+	TypeInfoTemplateNV11("geometricRegion", GeomType);
 
-	//// - Constructors
-	PeakableRegion(const word& type, const dictionary& dict);
+	explicit geometricRegion(const dictionary& dict);
 
-	add_vCtor(peakableRegion, PeakableRegion, word);
+	~geometricRegion() = default;
 
-	virtual uniquePtr<peakableRegion> clone() const override
-	{
-		return makeUnique<PeakableRegion<GeomType>>(*this);
-	}
+	//// - methods
+	bool   isInside(const realx3& p) const;
 
-	virtual peakableRegion* clonePtr() const override
-	{
-		return new PeakableRegion<GeomType>(*this);
-	}
+	realx3 peek() const;
 
-	virtual ~PeakableRegion() = default;
+	//// IO operation
+	bool   read(const dictionary& dict);
 
-	//// - Methods
-
-	virtual bool   isInside(const realx3& point) const override;
-
-	virtual realx3 peek() const override;
-
-	//// - IO operatoins
-
-	virtual bool   read(const dictionary& dict) override;
-
-	virtual bool   write(dictionary& dict) const override;
+	bool   write(dictionary& dict) const;
 };
 
-} // pFlow
+} // namespace pFlow
 
-#include "PeakableRegion.cpp"
+#include "geometricRegion.cpp"
 
 #endif

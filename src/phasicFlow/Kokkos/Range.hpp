@@ -44,13 +44,11 @@ struct Range : public Kokkos::pair<T, T>
 	  //// - Constructors
 
 	  /// Default
-	  INLINE_FUNCTION_HD Range()
-	{
-	}
+	  INLINE_FUNCTION_HD Range() = default;
 
 	/// From end, set start to 0
 	INLINE_FUNCTION_HD
-	Range(const T& e)
+	explicit Range(const T& e)
 	  : Range(0, e)
 	{
 	}

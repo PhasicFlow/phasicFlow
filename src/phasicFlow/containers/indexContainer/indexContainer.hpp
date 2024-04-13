@@ -24,7 +24,7 @@ Licence:
 #include <vector>
 
 #include "phasicFlowKokkos.hpp"
-
+#include "typeInfo.hpp"
 
 namespace pFlow
 {
@@ -93,6 +93,8 @@ protected:
 	DVType 			views_;
 
 public:
+
+	TypeInfoTemplateNV11("indexContainer", IndexType);
 
 	//// - Constructors 
 

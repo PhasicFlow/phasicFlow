@@ -25,31 +25,31 @@ namespace pFlow
 {
 
 // folders / repositories
-const inline char* settingsFolder__        = "settings";
-const inline char* settingsRepository__    = "settings";
-const inline char* caseSetupFolder__       = "caseSetup";
-const inline char* caseSetupRepository__   = "caseSetup";
-const inline char* geometryFolder__        = "geometry";
-const inline char* geometryRepository_     = "geometry";
-const inline char* integrationRepository__ = "integration";
-const inline char* integrationFolder__     = "integration";
+const inline char* const settingsFolder__        = "settings";
+const inline char* const settingsRepository__    = "settings";
+const inline char* const caseSetupFolder__       = "caseSetup";
+const inline char* const caseSetupRepository__   = "caseSetup";
+const inline char* const geometryFolder__        = "geometry";
+const inline char* const geometryRepository_     = "geometry";
+const inline char* const integrationRepository__ = "integration";
+const inline char* const integrationFolder__     = "integration";
 
 // file names
-const inline char* settingsFile__       = "settingsDict";
-const inline char* domainFile__         = "domainDict";
-const inline char* insertionFile__      = "particleInsertion";
-const inline char* shapeFile__          = "shapes";
-const inline char* pointStructureFile__ = "pStructure";
-const inline char* triSurfaceFile__     = "triSurface";
-const inline char* createParticles__    = "createParticles";
-const inline char* motionModelFile__    = "motionModel";
-const inline char* contactSearchFile__  = "contactSearch";
-const inline char* propertyFile__       = "interaction";
-const inline char* interactionFile__    = "interaction";
-const inline char* postprocessFile__    = "postprocessDict";
+const inline char* const settingsFile__       = "settingsDict";
+const inline char* const domainFile__         = "domainDict";
+const inline char* const insertionFile__      = "particleInsertion";
+const inline char* const shapeFile__          = "shapes";
+const inline char* const pointStructureFile__ = "pStructure";
+const inline char* const triSurfaceFile__     = "triSurface";
+const inline char* const createParticles__    = "createParticles";
+const inline char* const motionModelFile__    = "motionModel";
+const inline char* const contactSearchFile__  = "contactSearch";
+const inline char* const propertyFile__       = "interaction";
+const inline char* const interactionFile__    = "interaction";
+const inline char* const postprocessFile__    = "postprocessDict";
 
-const inline char* uniform__    = "uniform";
-const inline char* nonUniform__ = "nonUniform";
+const inline char* const uniform__    = "uniform";
+const inline char* const nonUniform__ = "nonUniform";
 
 }
 

@@ -18,56 +18,50 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __peakableRegion_hpp__
-#define __peakableRegion_hpp__
-
-#include "types.hpp"
-#include "virtualConstructor.hpp"
-
-namespace pFlow
+template<typename GeomType>
+pFlow::geometricRegion<GeomType>::geometricRegion(const dictionary& dict)
+  : geom_(dict)
+  , random_()
 {
+	minPoint_ = geom_.minPoint();
+	maxPoint_ = geom_.maxPoint();
+}
 
-class dictionary;
-
-class peakableRegion
+template<typename GeomType>
+inline bool
+pFlow::geometricRegion<GeomType>::isInside(const realx3& p) const
 {
-public:
+	return geom_.isInside(p);
+}
 
-	// type info
-	TypeInfo("peakableRegion");
+template<typename GeomType>
+inline pFlow::realx3
+pFlow::geometricRegion<GeomType>::peek() const
+{
+	for (uint32 i = 0u; i < maxTries_; i++)
+	{
+		realx3 p = random_.randomNumber(minPoint_, maxPoint_);
 
-	peakableRegion(const word& type, const dictionary& dict);
+		if (isInside(p))
+			return p;
+	}
 
-	create_vCtor(
-	    peakableRegion,
-	    word,
-	    (const word& type, const dictionary& dict),
-	    (type, dict)
-	);
+	fatalErrorInFunction << "cannot peek a random point from geometricRegion "
+	                    << typeName() << endl;
+	fatalExit;
+	return 0;
+}
 
-	virtual uniquePtr<peakableRegion> clone() const = 0;
+template<typename GeomType>
+bool
+pFlow::geometricRegion<GeomType>::read(const dictionary& dict)
+{
+	return geom_.read(dict);
+}
 
-	virtual peakableRegion*           clonePtr() const = 0;
-
-	virtual ~peakableRegion() = default;
-
-	//// - Methods
-
-	virtual bool   isInside(const realx3& point) const = 0;
-
-	virtual realx3 peek() const = 0;
-
-	//// - IO operatoins
-
-	virtual bool   read(const dictionary& dict) = 0;
-
-	virtual bool   write(dictionary& dict) const = 0;
-
-	// - static create
-	static uniquePtr<peakableRegion>
-	create(const word& type, const dictionary& dict);
-};
-
-} // namespace pFlow
-
-#endif
+template<typename GeomType>
+bool
+pFlow::geometricRegion<GeomType>::write(dictionary& dict) const
+{
+	return geom_.write(dict);
+}

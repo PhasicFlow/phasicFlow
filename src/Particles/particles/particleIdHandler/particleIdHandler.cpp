@@ -20,25 +20,69 @@ Licence:
 
 #include "particleIdHandler.hpp"
 
-pFlow::particleIdHandler::particleIdHandler(uint32PointField_D &id)
+pFlow::particleIdHandler::particleIdHandler(pointStructure& pStruct)
 :
-	id_(id)
+	uint32PointField_D
+	(
+		objectFile
+		(
+			"id",
+			"",
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
+		),
+		pStruct,
+		static_cast<uint32>(-1),
+		static_cast<uint32>(-1)
+	)
 {
+
 }
 
-pFlow::uniquePtr<pFlow::particleIdHandler> 
-	pFlow::particleIdHandler::create(uint32PointField_D &id)
+bool
+pFlow::particleIdHandler::hearChanges(
+  real           t,
+  real           dt,
+  uint32         iter,
+  const message& msg,
+  const anyList& varList
+)
+{
+	if(msg.equivalentTo(message::ITEM_INSERT))
+	{
+		const word eventName = message::eventName(message::ITEM_INSERT);
+
+		const auto& indices = varList.getObject<uint32IndexContainer>(
+			eventName);
+
+		uint32 numNew = indices.size();
+		if(numNew == 0u)return true;
+
+		auto idRange = getIdRange(numNew);
+		uint32Vector newId("newId",numNew,numNew,RESERVE());
+		fillSequence(newId, idRange.first);
+		output<< "id "<< idRange<<endl;
+		return this->field().insertSetElement(indices, newId);
+	}
+	else
+	{
+		return uint32PointField_D::hearChanges(t,dt,iter, msg,varList);
+	}
+}
+
+pFlow::uniquePtr<pFlow::particleIdHandler>
+pFlow::particleIdHandler::create(pointStructure& pStruct)
 {
     word idHType = angleBracketsNames(
         "particleIdHandler", 
         pFlowProcessors().localRunTypeName());
 
 
-	if( pointFieldvCtorSelector_.search(idHType) )
+	if( pointStructurevCtorSelector_.search(idHType) )
 	{
 		REPORT(1)<<"Creating particle id handler "<< 
 			Green_Text(idHType)<<END_REPORT;
-		return pointFieldvCtorSelector_[idHType] (id);
+		return pointStructurevCtorSelector_[idHType] (pStruct);
 	}
 	else
 	{
@@ -47,7 +91,7 @@ pFlow::uniquePtr<pFlow::particleIdHandler>
 			fatalError << "Ctor Selector "<< idHType << " dose not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
-			pointFieldvCtorSelector_
+			pointStructurevCtorSelector_
 		);
 		fatalExit;
 	}

@@ -1,19 +1,18 @@
 
 set(SourceFiles 
 dynamicPointStructure/dynamicPointStructure.cpp
-particles/baseShapeNames.cpp
-particles/shape.cpp
+particles/shape/baseShapeNames.cpp
+particles/shape/shape.cpp
 particles/particles.cpp
-particles/particleIdHandler.cpp
-particles/regularParticleHandler.cpp
+particles/particleIdHandler/particleIdHandler.cpp
+particles/regularParticleIdHandler/regularParticleIdHandler.cpp
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 SphereParticles/sphereParticles/sphereParticlesKernels.cpp
-#Insertion/shapeMixture/shapeMixture.cpp
-#Insertion/insertion/insertion.cpp
-#Insertion/Insertion/Insertions.cpp
-#Insertion/insertionRegion/insertionRegion.cpp
-#Insertion/insertionRegion/timeFlowControl.cpp
+Insertion/insertionRegion/insertionRegion.cpp
+Insertion/insertion/insertion.cpp
+Insertion/shapeMixture/shapeMixture.cpp
+Insertion/Insertion/Insertions.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow Integration Property)

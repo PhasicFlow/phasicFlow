@@ -23,9 +23,11 @@ Licence:
 
 
 
-namespace pFlow
+namespace pFlow::gSettings
 {
-const inline double vectorGrowthFactor__ = 1.2;
+
+extern const double vectorGrowthFactor__;
+
 }
 
 

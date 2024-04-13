@@ -18,10 +18,60 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __particleIdHandler_hpp__
+#define __particleIdHandler_hpp__
 
-#include "peakableRegions.hpp"
 
- 
-#ifdef BUILD_SHARED_LIBS
-	#include "peakableRegionInstantiate.cpp"
+#include "pointFields.hpp"
+
+namespace pFlow
+{
+
+class particleIdHandler
+:
+	public uint32PointField_D
+{
+  
+public:
+	
+	/// class info
+	ClassInfo("particleIdHandler");
+
+	explicit particleIdHandler(pointStructure& pStruct);
+
+	create_vCtor
+	(
+		particleIdHandler,
+		pointStructure,
+		(pointStructure& pStruct),
+		(pStruct)
+	);
+
+	~particleIdHandler()override=default;
+
+	virtual
+	Pair<uint32, uint32> getIdRange(uint32 nNewParticles)=0;
+
+	virtual 
+	bool initialIdCheck()=0;
+
+	// heat change for possible insertion of particles
+	// overrdie from internalField
+	bool hearChanges
+	(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+		const anyList& varList
+	) override;
+
+	static
+	uniquePtr<particleIdHandler> create(
+		pointStructure& pStruct);
+	
+};
+
+}
+
 #endif

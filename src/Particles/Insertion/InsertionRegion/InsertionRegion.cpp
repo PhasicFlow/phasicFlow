@@ -39,21 +39,21 @@ bool pFlow::InsertionRegion<ShapeType>::checkForContact
 template<typename ShapeType>
 pFlow::InsertionRegion<ShapeType>::InsertionRegion
 (
-	const dictionary& dict,
+	const word& name,
+	const insertion& instn, 
 	const ShapeType& shapes
 )
 :
-	insertionRegion(dict),
+	insertionRegion(name, instn),
 	shapes_(shapes)
-{
-
-}
+{}
 
 
 template<typename ShapeType>
 bool pFlow::InsertionRegion<ShapeType>::insertParticles
 (
-	real currentTime,
+	uint32 iter, 
+	real t,
 	real dt,
 	wordVector& names,
 	realx3Vector& pos,
@@ -62,9 +62,9 @@ bool pFlow::InsertionRegion<ShapeType>::insertParticles
 {
 	insertionOccured = false;
 
-	if(!insertionTime( currentTime, dt)) return true;
+	if(!insertionTime(iter, t, dt)) return true;
 
-	size_t newNum = numberToBeInserted(currentTime);
+	uint32 newNum = numberToBeInserted(iter, t, dt);
 	
 	if(newNum == 0) return true;
 
@@ -73,43 +73,49 @@ bool pFlow::InsertionRegion<ShapeType>::insertParticles
 	names.clear();
 	pos.clear();
 
-	realVector diams(newNum, RESERVE());
+	realVector diams("diams", newNum, 0, RESERVE());
 
-	mixture_->getNextShapeNameN(newNum, names);
-
-	if(!shapes_.shapeToDiameter(names,diams))
+	for(uint32 i=0; i<newNum; i++)
 	{
-		fatalErrorInFunction<<
-		"  error occured in insertion region "<< name() << 
-		" while converting shapes to diameter. \n";
-		return false;
+		uint32 idx;
+		shapes_.shapeNameToIndex(names[i], idx);
+		diams[i] = shapes_.boundingDiameter(idx);
 	}
 
 	size_t n = 0;
+	uint32 idx;
+	auto& mix = mixture();
+	auto& pReg = pRegion();
+	word name = mix.getNextShapeName();
+	shapes_.shapeNameToIndex(name, idx);
+	real d = shapes_.boundingDiameter(idx);
 
-	for(label iter=0; iter< 10*newNum ; ++iter)
+	for(uint32 i=0; i< 100*newNum ; ++i)
 	{
-		if( !(n < newNum) ) 
-		{
-			addToNumInserted(newNum);
-			insertionOccured = true;
-			return true;
-		}
-		realx3 p = pRegion_().peek();
-		real d = diams[pos.size()];
+		
+		realx3 p = pReg.peek();
 		if( !checkForContact(pos, diams, p, d) )
 		{
+			names.push_back(name);
 			pos.push_back(p);
+			diams.push_back(d);
 			n++;
+
+			if( n == newNum ) 
+			{
+				addToNumInserted(newNum);
+				insertionOccured = true;
+				return true;
+			}
+
+			name = mix.getNextShapeName();
+			shapes_.shapeNameToIndex(name, idx);
+			d = shapes_.boundingDiameter(idx);
 		}
 
 	}
 
-	fatalErrorInFunction<<
-	"  Cannot insert "<< newNum << " new particles from region "<< name()<<". \n"
-	"  pFlow could position only "<< n<< " particles in this region. \n";
 	addToNumInserted(n);
-	insertionOccured = false;
+	insertionOccured = true;
 	return false;
-
 }

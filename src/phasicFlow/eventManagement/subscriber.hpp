@@ -76,6 +76,10 @@ public:
 		const message msg, 
 		const anyList& varList);
 	
+	const word& subscriberName()const
+	{
+		return subName_;
+	}
 
 };
 

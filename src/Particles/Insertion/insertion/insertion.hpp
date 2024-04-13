@@ -2,56 +2,59 @@
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
-   OOOOOOO     F luid flow       
+   OOOOOOO     F luid flow
 ------------------------------------------------------------------------------
   Copyright (C): www.cemf.ir
   email: hamid.r.norouzi AT gmail.com
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 Licence:
-  This file is part of phasicFlow code. It is a free software for simulating 
+  This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
-  the terms of GNU General Public License v3 or any other later versions. 
- 
-  phasicFlow is distributed to help others in their research in the field of 
+  the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __insertion_hpp__
 #define __insertion_hpp__
 
-#include "types.hpp"
-#include "virtualConstructor.hpp"
+#include "fileDictionary.hpp"
 
 namespace pFlow
 {
 
 // forward
 class particles;
-class dictionary;
 
 /**
  * Base class for particle insertion
  */
-class insertion
+class insertion : public fileDictionary
 {
-protected:
-	
-	/// Is insertion active 
-	Logical 	active_ = "No";
+private:
+
+	/// Is insertion active
+	Logical    active_ = "No";
 
 	/// Check for collision? It is not active now
-	Logical  	checkForCollision_ = "No";
+	Logical    checkForCollision_ = "No";
 
-	/// Ref to particles 
-	particles& 				  particles_;
+	/// if increase velocity in case particles are failed
+	/// to be inserted due to collision
+	Logical    increaseVelocity_ = "No";
+
+	/// Ref to particles
+	particles& particles_;
+
+	bool       readFromFile_ = false;
 
 	/// Read from dictionary
-	bool readInsertionDict(const dictionary& dict);
+	bool       readInsertionDict(const dictionary& dict);
 
 	/// Write to dictionary
-	bool writeInsertionDict(dictionary& dict)const;
+	// bool writeInsertionDict(dictionary& dict)const;
 
 public:
 
@@ -59,24 +62,47 @@ public:
 	TypeInfo("insertion");
 
 	/// Construct from component
-	insertion(particles& prtcl);
+	explicit insertion(particles& prtcl);
 
-	/// Destructor 
-	virtual ~insertion() = default;
+	/// Destructor
+	~insertion() override = default;
 
-	/// is Insertion active 
-	bool isActive()const {
+	/// is Insertion active
+	inline bool isActive() const
+	{
 		return active_();
 	}
 
-	/// read from iIstream
+	inline bool checkForCollision() const
+	{
+		return checkForCollision_();
+	}
+
+	inline particles& Particles()
+	{
+		return particles_;
+	}
+
+	inline const particles& Particles() const
+	{
+		return particles_;
+	}
+
+	inline bool readFromFile() const
+	{
+		return readFromFile_;
+	}
+
+	/// read from stream
+	bool read(iIstream& is, const IOPattern& iop) override;
+
+	/*/// read from iIstream
 	virtual bool read(iIstream& is) = 0;
 
 	/// write to iOstream
-	virtual bool write(iOstream& os)const = 0;
-
-
+	virtual bool write(iOstream& os)const = 0;*/
 };
+
 }
 
 #endif

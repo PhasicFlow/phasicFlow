@@ -17,14 +17,44 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __regularParticleIdHandler_hpp__
+#define __regularParticleIdHandler_hpp__
 
-#include "boxRegion.hpp"
-#include "sphereRegion.hpp"
-#include "cylinderRegion.hpp"
+#include "particleIdHandler.hpp"
+
+namespace pFlow
+{
+
+class regularParticleIdHandler
+:
+    public particleIdHandler
+{
+private:
+    
+    uint32 maxId_ = -1;
+
+public:
+
+    ClassInfo("particleIdHandler<regular>");
+    
+    explicit regularParticleIdHandler(pointStructure& pStruct);
+
+    ~regularParticleIdHandler()override = default;
+
+	add_vCtor
+	(
+		particleIdHandler,
+		regularParticleIdHandler,
+		pointStructure
+	);
+
+    Pair<uint32, uint32> getIdRange(uint32 nNewParticles)override;
+
+	bool initialIdCheck()override;
+
+};
+
+}
 
 
-template class pFlow::PeakableRegion<pFlow::boxRegion>;
-
-template class pFlow::PeakableRegion<pFlow::sphereRegion>;
-
-template class pFlow::PeakableRegion<pFlow::cylinderRegion>;
+#endif //__regularParticleIdHandler_hpp__

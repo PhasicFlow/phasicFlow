@@ -198,7 +198,7 @@ bool pFlow::sphereParticles::initializeParticles()
 
 }*/
 
-bool pFlow::sphereParticles::initInertia()
+bool pFlow::sphereParticles::initializeParticles()
 {
 	
 	using exeSpace = typename realPointField_D::execution_space;
@@ -255,6 +255,55 @@ bool pFlow::sphereParticles::initInertia()
 	return true;
 }
 
+bool
+pFlow::sphereParticles::getParticlesInfoFromShape(
+  const wordVector& shapeNames,
+  uint32Vector&     propIds,
+  realVector&       diams,
+  realVector&       m,
+  realVector&       Is,
+  uint32Vector&     shIndex
+)
+{
+	auto numNew = static_cast<uint32>(shapeNames.size());
+
+	propIds.clear();
+	propIds.reserve(numNew);
+
+	diams.clear();
+	diams.reserve(numNew);
+
+	m.clear();
+	m.reserve(numNew);
+
+	Is.clear();
+	Is.reserve(numNew);
+
+	shIndex.clear();
+	shIndex.reserve(numNew);
+	
+
+	for(const auto& name:shapeNames)
+	{
+		uint32 indx;
+		if(spheres_.shapeNameToIndex(name,indx))
+		{
+			shIndex.push_back(indx);
+			Is.push_back( spheres_.Inertia(indx));
+			m.push_back(spheres_.mass(indx));
+			diams.push_back(spheres_.boundingDiameter(indx));
+			propIds.push_back( spheres_.propertyId(indx));
+		}
+		else
+		{	
+			fatalErrorInFunction<<"Shape name "<< name << 
+			"does not exist. The list is "<<spheres_.shapeNameList()<<endl;
+			return false;
+		}
+	}
+	
+	return true;
+}
 
 pFlow::sphereParticles::sphereParticles(
 	systemControl &control,
@@ -364,7 +413,7 @@ pFlow::sphereParticles::sphereParticles(
 
 	WARNING<<"setFields for rVelIntegration_"<<END_WARNING;
 	
-	if(!initInertia())
+	if(!initializeParticles())
 	{
 		fatalErrorInFunction;
 		fatalExit;
@@ -504,6 +553,59 @@ bool pFlow::sphereParticles::iterate()
 	return true;
 }
 
+bool pFlow::sphereParticles::insertParticles
+(
+	const realx3Vector &position, 
+	const wordVector &shapesNames, 
+	const anyList &setVarList
+)
+{
+	anyList newVarList(setVarList);
+
+	realVector mass("mass");
+	realVector I("I");
+	realVector diameter("diameter");
+	uint32Vector propId("propId");
+	uint32Vector shapeIdx("shapeIdx");
+
+	if(!getParticlesInfoFromShape(
+		shapesNames,
+		propId,
+		diameter,
+		mass,
+		I,
+		shapeIdx))
+	{
+		return false;
+	}
+
+	newVarList.emplaceBack(
+		mass_.name()+"Vector",
+		std::move(mass));
+
+	newVarList.emplaceBack(
+		I_.name()+"Vector",
+		std::move(I));
+	
+	newVarList.emplaceBack(
+		diameter_.name()+"Vector",
+		std::move(diameter));
+
+	newVarList.emplaceBack(
+		propertyId_.name()+"Vector",
+		std::move(propId));
+
+	newVarList.emplaceBack(
+		shapeIndex().name()+"Vector",
+		std::move(shapeIdx));
+	
+	if(!dynPointStruct().insertPoints(position, newVarList))
+	{
+		return false;
+	}
+
+    return true;
+}
 
 pFlow::word pFlow::sphereParticles::shapeTypeName()const
 {
