@@ -19,8 +19,8 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#ifndef __selectRange_hpp__
-#define __selectRange_hpp__
+#ifndef __selectRandom_hpp__
+#define __selectRandom_hpp__
 
 #include "pStructSelector.hpp"
 #include "pointStructure.hpp"
@@ -31,11 +31,11 @@ namespace pFlow
 
 class dictionary;
 
-class selectRange
+class selectorRandomPoints
 :
 	public pStructSelector
 {
-protected:
+private:
 	
 	uint32Vector selectedPoints_;
 
@@ -46,35 +46,35 @@ protected:
 	uint32 	end_;
 
 	// stride
-	uint32 	stride_;
+	uint32 	number_;
 
-	void selectAllPointsInRange();
+	bool selectAllPointsInRange();
 	
 public:
 
 	// - type info
-	TypeInfo("selectRange");
+	TypeInfo("selector<randomPoints>");
 
 
-		selectRange(const pointStructure& pStruct, const dictionary& dict);
+		selectorRandomPoints(const pointStructure& pStruct, const dictionary& dict);
 
 		add_vCtor
 		(
 			pStructSelector,
-			selectRange,
+			selectorRandomPoints,
 			dictionary
 		);
 
-		virtual ~selectRange() = default;
+		~selectorRandomPoints() final = default;
 
 	//// - Methods
 
-		virtual const uint32Vector& selectedPoinsts()const override
+		const uint32Vector& selectedPoints()const final
 		{
 			return selectedPoints_;
 		}
 
-		virtual uint32Vector& selectedPoinsts() override
+		uint32Vector& selectedPoints() final
 		{
 			return selectedPoints_;
 		}

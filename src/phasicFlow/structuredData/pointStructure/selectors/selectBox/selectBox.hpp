@@ -63,12 +63,12 @@ public:
 
 	//// - Methods
 
-		virtual const uint32Vector& selectedPoinsts()const override
+		const uint32Vector& selectedPoints()const override
 		{
 			return selectedPoints_;
 		}
 
-		virtual uint32Vector& selectedPoinsts() override
+		uint32Vector& selectedPoints() override
 		{
 			return selectedPoints_;
 		}

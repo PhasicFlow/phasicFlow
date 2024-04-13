@@ -18,13 +18,13 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __pStructSelector_hpp__
 #define __pStructSelector_hpp__
 
 
 #include "Vectors.hpp"
 #include "virtualConstructor.hpp"
+
 
 namespace pFlow
 {
@@ -62,15 +62,18 @@ public:
 		const pointStructure& pStruct()const;
 
 
-		virtual const uint32Vector& selectedPoinsts()const = 0;
+		virtual const uint32Vector& selectedPoints()const = 0;
 
-		virtual uint32Vector& selectedPoinsts() = 0;
+		virtual uint32Vector& selectedPoints() = 0;
 
+		realx3Vector selectedPointPositions()const;
 
 	static
 	uniquePtr<pStructSelector> create(const pointStructure& pStruct, const dictionary& dict);
 
 };
+
+
 
 } // pFlow
 

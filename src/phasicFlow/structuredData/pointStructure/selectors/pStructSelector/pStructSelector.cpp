@@ -37,11 +37,34 @@ const pFlow::pointStructure& pFlow::pStructSelector::pStruct()const
 	return pStruct_;
 }
 
+pFlow::realx3Vector
+pFlow::pStructSelector::selectedPointPositions() const
+{
+
+	const auto& slctd = selectedPoints();
+
+	if(slctd.empty()) return realx3Vector("selectedPointPositions");
+	
+	realx3Vector slctdPoints("selectedPointPositions", slctd.size());
+	
+	auto pPos = pStruct().pointPositionHost();
+
+	for(uint32 i=0; i<slctd.size(); i++)
+	{
+		slctdPoints[i] = pPos[slctd[i]];
+	}
+
+	return slctdPoints;
+}
 
 pFlow::uniquePtr<pFlow::pStructSelector>
-	pFlow::pStructSelector::create(const pointStructure& pStruct, const dictionary& dict)
+pFlow::pStructSelector::create(
+  const pointStructure& pStruct,
+  const dictionary&     dict
+)
 {
-	word selectorMethod = dict.getVal<word>("selector");
+
+	word selectorMethod = angleBracketsNames("selector", dict.getVal<word>("selector"));
 
 	if( dictionaryvCtorSelector_.search(selectorMethod) )
 	{

@@ -90,9 +90,10 @@ structuredData/boundaries/boundaryReflective/boundaryReflective.cpp
 structuredData/boundaries/boundaryList.cpp
 structuredData/pointStructure/pointStructure/pointStructure.cpp
 structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
-structuredData/pointStructure/selectors/selectRange/selectRange.cpp 
-structuredData/pointStructure/selectors/selectRandom/selectRandom.cpp
+structuredData/pointStructure/selectors/selectorStridedRange/selectorStridedRange.cpp 
+structuredData/pointStructure/selectors/selectorRandomPoints/selectorRandomPoints.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
+structuredData/pointStructure/selectors/selectorGeometric/selectorGeometrics.cpp
 
 triSurface/subSurface.cpp
 triSurface/triSurface.cpp
