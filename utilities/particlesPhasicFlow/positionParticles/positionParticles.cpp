@@ -20,16 +20,11 @@ Licence:
 
 #include "positionParticles.hpp"
 #include "vocabs.hpp"
-#include "box.hpp"
-#include "cylinder.hpp"
-#include "sphere.hpp"
-#include "cells.hpp"
-//#include "contactSearchFunctions.hpp"
+#include "dictionary.hpp"
+#include "systemControl.hpp"
 
-#include "streams.hpp"
-
-
-pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& position)const
+pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(
+	const realx3Vector& position)const
 {
 	struct indexMorton
 	{
@@ -81,25 +76,20 @@ pFlow::positionParticles::positionParticles
 	systemControl& control,
 	const dictionary& dict
 )
+:
+	regionType_(dict.getValOrSet<word>("regionType", "domain")),
+	maxNumberOfParticles_(dict.getValOrSet(
+		"maxNumberOfParticles", 
+		static_cast<uint32>(10000))),
+	mortonSorting_(dict.getValOrSet("mortonSorting", Logical("Yes")))
 {
-	maxNumberOfParticles_ = dict.getValOrSet("maxNumberOfParticles", static_cast<uint64>(10000));
-	
-	mortonSorting_ = dict.getValOrSet("mortonSorting", Logical("Yes"));
 
-	if( dict.containsDictionay("box") )	
+	if( regionType_ != "domain" )	
 	{
-		region_ = makeUnique<region<box>>(dict.subDict("box"));
-	}
-	else if(dict.containsDictionay("cylinder"))
-	{
-        WARNING<<"cylinder region is not set!"<<END_WARNING;
-		//region_ = makeUnique<region<cylinder>>(dict.subDict("cylinder"));
-	}
-	else if(dict.containsDictionay("sphere"))
-	{
-        WARNING<<"sphere region is not set!"<<END_WARNING;
-		//region_ = makeUnique<region<sphere>>(dict.subDict("sphere"));
-	}
+		pRegion_ = peakableRegion::create(
+			regionType_,
+			dict.subDict(regionType_+"Info"));
+	}	
 	else
 	{
 		fileDictionary domainDict
@@ -113,7 +103,7 @@ pFlow::positionParticles::positionParticles
 			},
 			&control.settings()
 		);
-		region_ = makeUnique<region<box>>( domainDict.subDict("globalBox"));
+		pRegion_ = peakableRegion::create(regionType_,domainDict.subDict("globalBox"));
 	}
 	
 }
@@ -128,9 +118,8 @@ pFlow::realx3Vector pFlow::positionParticles::getFinalPosition()
 	else
 	{
 		realx3Vector vec("final position",position().capacity(), 0 , RESERVE());
-		vec.assign( position().begin(), position().end());
-		
-		return std::move(vec);
+		vec.assign( position().begin(), position().end());	
+		return vec;
 	}
 }
 

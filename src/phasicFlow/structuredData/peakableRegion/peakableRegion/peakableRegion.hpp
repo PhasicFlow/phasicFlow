@@ -57,6 +57,10 @@ public:
 
 	virtual realx3 peek() const = 0;
 
+	virtual const realx3& minPoint()const = 0;
+
+	virtual const realx3& maxPoint()const = 0;
+
 	//// - IO operatoins
 
 	virtual bool   read(const dictionary& dict) = 0;

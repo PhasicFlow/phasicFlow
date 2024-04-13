@@ -62,6 +62,16 @@ public:
 
 	realx3 peek() const;
 
+	const auto& minPoint()const
+	{
+		return minPoint_;
+	}
+
+	const auto& maxPoint()const
+	{
+		return maxPoint_;
+	}
+
 	//// IO operation
 	bool   read(const dictionary& dict);
 

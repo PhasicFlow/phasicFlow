@@ -65,9 +65,19 @@ public:
 
 	//// - Methods
 
-	virtual bool   isInside(const realx3& point) const override;
+	bool   isInside(const realx3& point) const override;
 
-	virtual realx3 peek() const override;
+	realx3 peek() const override;
+
+	const realx3& minPoint()const override
+	{
+		return region_.minPoint();
+	}
+
+	const realx3& maxPoint()const override
+	{
+		return region_.maxPoint();
+	}
 
 	//// - IO operatoins
 

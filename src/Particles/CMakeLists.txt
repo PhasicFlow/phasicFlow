@@ -9,6 +9,7 @@ particles/regularParticleIdHandler/regularParticleIdHandler.cpp
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 SphereParticles/sphereParticles/sphereParticlesKernels.cpp
+Insertion/collisionCheck/collisionCheck.cpp
 Insertion/insertionRegion/insertionRegion.cpp
 Insertion/insertion/insertion.cpp
 Insertion/shapeMixture/shapeMixture.cpp
