@@ -18,31 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-/*template<typename ShapeType>
-bool pFlow::Insertion<ShapeType>::readInsertionDict
-(
-	const dictionary& dict
-)
-{
-	if(!insertion::readInsertionDict(dict)) return false;
-	
-	regions_.clear();
-	
-	if( !this->isActive() )
-	{
-		return true;
-	}
 
-	wordList regionDicNames = dict.dictionaryKeywords();
-
-	for(auto& name:regionDicNames)
-	{
-		REPORT(2)<<"reading insertion region "<< greenText(name)<<endREPORT;
-		regions_.push_backSafe(dict.subDict(name), shapes_);
-	}
-
-	return true;
-}
 
 template<typename ShapeType>
 bool pFlow::Insertion<ShapeType>::writeInsertionDict
@@ -50,7 +26,8 @@ bool pFlow::Insertion<ShapeType>::writeInsertionDict
 	dictionary& dict
 )const
 {
-	if( !insertion::writeInsertionDict(dict) ) return false;
+	
+	if(!insertion::writeInsertionDict(dict))return false;
 
 	if( !this->isActive() ) return true;
 
@@ -60,16 +37,18 @@ bool pFlow::Insertion<ShapeType>::writeInsertionDict
 
 		if( !regions_[i].write(rgnDict) )
 		{
+			fatalErrorInFunction<<
+			"Error in writing to dictionary "<<rgnDict.globalName()<<endl;
 			return false;
 		}
 	}
 
 	return true;
-}*/
+}
 
 template<typename ShapeType>
 bool
-pFlow::Insertion<ShapeType>::setInsertionRegions()
+pFlow::Insertion<ShapeType>::readInsertionDict()
 {
 	regions_.clear();
 	
@@ -102,7 +81,7 @@ pFlow::Insertion<ShapeType>::Insertion(
 	insertion(prtcl),
 	shapes_(shapes)
 {
-	if(!setInsertionRegions())
+	if(!readInsertionDict())
 	{
 		fatalErrorInFunction;
 		fatalExit;

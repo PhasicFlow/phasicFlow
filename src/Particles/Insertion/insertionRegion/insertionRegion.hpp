@@ -159,6 +159,11 @@ public:
 		return type_;
 	}
 
+	const auto& dict()const
+	{
+		return dict_;
+	}
+
 	const auto& Insertion() const
 	{
 		return insertion_;
@@ -206,16 +211,13 @@ public:
 	        return false;
 
 	    return readInsertionRegion(dict);
-	}
+	}*/
 
 	/// write to dictionary
 	bool write(dictionary& dict) const
 	{
-	    if (!timeFlowControl::write(dict))
-	        return false;
-
 	    return writeInsertionRegion(dict);
-	}*/
+	}
 };
 
 } // pFlow

@@ -49,16 +49,29 @@ pFlow::collisionCheck::checkPoint(const realx3& p, const real d) const
     if(!searchBox_.isInside(p)) return false;
 
     const auto ind = pointIndex(p);
-    
-    uint32 n = head_(ind.x(), ind.y(), ind.z());
-    while( n != -1)
+    const auto startInd = max(ind - 1 ,int32x3(0));
+    const auto endInd = min( ind+1 ,nCells_-1);
+
+    for(int32 i=startInd.x(); i<=endInd.x(); i++)
     {
-        if( (position_[n]-p).length() - 0.5*(diameters_[n]+d )<0.0 )
+        for(int32 j=startInd.y(); j<=endInd.y(); j++)
         {
-            return false;
+            for(int32 k=startInd.z(); k<=endInd.z(); k++)
+            {
+                uint32 n = head_(i, j, k);
+    
+                while( n != -1)
+                {
+                    if( ((position_[n]-p).length() - 0.5*(diameters_[n]+d )) <= 0.0 )
+                    {
+                        return false;
+                    }
+                    n = next_[n];
+                }
+            }
         }
-        n = next_[n];
     }
+    
 	return true;
 }
 

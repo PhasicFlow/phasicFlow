@@ -27,6 +27,8 @@ pFlow::baseTimeControl::baseTimeControl
     const word& intervalPrefix,
 	real defStartTime
 )
+:
+	intervalPrefix_(intervalPrefix)
 {
 	auto tControl = dict.getVal<word>("timeControl");
 	if(tControl == "timeStep")
@@ -161,4 +163,33 @@ pFlow::baseTimeControl::iInterval() const
 	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
 	fatalExit;
 	return 0;
+}
+
+bool
+pFlow::baseTimeControl::write(dictionary& dict) const
+{
+	if(isTimeStep_)
+	{
+		dict.add("timeControl", "timeStep");
+	}
+	else
+	{
+		dict.add("timeControl", "runTime");
+	}
+
+	word intervalWord = intervalPrefix_.size()==0? word("interval"): intervalPrefix_+"Interval";
+	
+	if(!isTimeStep_)
+	{
+		dict.add(intervalWord,rRange_.stride());
+		dict.add("startTime",rRange_.begin());
+		dict.add("endTime", rRange_.end());
+	}
+	else
+	{
+		dict.add(intervalWord,iRange_.stride());
+		dict.add("startTime",iRange_.begin());
+		dict.add("endTime", iRange_.end());
+	}
+	return true;
 }

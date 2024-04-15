@@ -58,7 +58,9 @@ private:
 	uint32Vector   	numberInserted_{"numberInserted"};
 
 	/// Current number of inserted
-	uint32Vector      current_{"currentInserted"};
+	uint32Vector    current_{"currentInserted"};
+
+	uint32 			lastPeaked_ = 0;
 
 public:
 

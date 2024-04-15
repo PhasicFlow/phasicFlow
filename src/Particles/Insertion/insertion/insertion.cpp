@@ -30,13 +30,42 @@ pFlow::insertion::insertion(particles& prtcl)
         insertionFile__,
         "",
         objectFile::READ_IF_PRESENT,
-        objectFile::WRITE_NEVER
+        objectFile::WRITE_ALWAYS
       ),
-      &prtcl.control().caseSetup()
+      &prtcl.time()
     ),
     particles_(prtcl)
 {
-	readInsertionDict(*this);
+	// this means that insertion file exist in time folder 
+	if( IOobject::implyRead() )
+	{
+		readFromFile_ = true;
+		
+	} // look inside the caseSetup folder if it exist
+	else
+	{
+		// read dictionary from caseSetup folder 
+		fileDictionary caseFile(
+			objectFile(
+				insertionFile__,
+				"",
+				objectFile::READ_IF_PRESENT,
+				objectFile::WRITE_NEVER),
+			&prtcl.control().caseSetup());
+		
+		// check if read happened
+		if(caseFile.implyRead())
+		{
+			readFromFile_ = true;
+			// assign it to this dictionary 
+			fileDictionary::dictionary::operator=(caseFile);
+		}
+	}
+
+	if( readFromFile_)
+	{
+		readInsertionDict();
+	}
 }
 
 const pFlow::pointStructure&
@@ -45,27 +74,18 @@ pFlow::insertion::pStruct() const
 	return particles_.pStruct();
 }
 
-bool
-pFlow::insertion::read(iIstream& is, const IOPattern& iop)
-{
-	if (fileDictionary::read(is, iop))
-	{
-		readFromFile_ = true;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
+
+
 
 bool
-pFlow::insertion::readInsertionDict(const dictionary& dict)
+pFlow::insertion::readInsertionDict()
 {
-	active_ = dict.getVal<Logical>("active");
+	active_ = getVal<Logical>("active");
 
 	if (active_)
 	{
+    	checkForCollision_ = getVal<Logical>("checkForCollision");
+
 		REPORT(1) << "Particle insertion mechanism is " << Yellow_Text("active")
 		          << " in the simulation." << END_REPORT;
 	}
@@ -78,26 +98,56 @@ pFlow::insertion::readInsertionDict(const dictionary& dict)
 	return true;
 }
 
-/*
-bool pFlow::insertion::writeInsertionDict
-(
-                dictionary& dict
-)const
+bool
+pFlow::insertion::writeInsertionDict(dictionary& dict) const
 {
-                if(!dict.add("active", active_) )
-                {
-                                fatalErrorInFunction<<
-                                "  error in writing active to dictionary
-"<<dict.globalName()<<endl; return false;
-                }
+	if (!dict.add("active", active_))
+	{
+		fatalErrorInFunction <<"Error in writing active to dictionary "
+		                        <<dict.globalName()<<endl; 
+		return false;
+	}
 
-                if(!dict.add("checkForCollision", checkForCollision_) )
-                {
-                                fatalErrorInFunction<<
-                                "  error in writing checkForCollision to
-dictionary
-"<<dict.globalName()<<endl; return false;
-                }
+	if (!dict.add("checkForCollision", checkForCollision_))
+	{
+		fatalErrorInFunction << 
+		"Error in writing checkForCollision to dictionary "<<
+		dict.globalName()<<endl; 
+		return false;
+	}
 
-                return true;
+	return true;
+}
+
+
+bool pFlow::insertion::write(iOstream & os, const IOPattern & iop) const
+{
+	dictionary newDict(fileDictionary::dictionary::name(), true);
+	if( iop.thisProcWriteData() )
+	{
+		if( !writeInsertionDict(newDict) || 
+			!newDict.write(os))
+		{
+			fatalErrorInFunction<<
+			" error in writing to dictionary "<< newDict.globalName()<<endl;
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+/*bool
+pFlow::insertion::read(iIstream& is, const IOPattern& iop)
+{
+	if (fileDictionary::read(is, iop))
+	{
+		readFromFile_ = true;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }*/

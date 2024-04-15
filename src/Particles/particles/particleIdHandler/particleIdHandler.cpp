@@ -61,7 +61,7 @@ pFlow::particleIdHandler::hearChanges(
 		auto idRange = getIdRange(numNew);
 		uint32Vector newId("newId",numNew,numNew,RESERVE());
 		fillSequence(newId, idRange.first);
-		output<< "id "<< idRange<<endl;
+		
 		return this->field().insertSetElement(indices, newId);
 	}
 	else

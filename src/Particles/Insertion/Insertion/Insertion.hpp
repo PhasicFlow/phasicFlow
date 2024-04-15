@@ -62,12 +62,11 @@ private:
 	// - insertion regions
 	ListPtr<InsertionRegion<ShapeType>> regions_;
 
+  bool readInsertionDict();
 
-	bool setInsertionRegions();
+protected:
 
-	// bool readInsertionDict(const dictionary& dict);
-
-	// bool writeInsertionDict(dictionary& dict)const;
+	bool writeInsertionDict(dictionary& dict)const override;
 
 public:
 

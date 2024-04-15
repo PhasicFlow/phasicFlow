@@ -50,17 +50,17 @@ struct triple
 	T y_;
 	T z_;
 
+	/// Type info for triple
 	TripleTypeInfoNV(T);
+	
 	//// Constructors
 
 	/// Initilize to zero
 	INLINE_FUNCTION_HD
-	triple()
-	  : x_(),
-	    y_(),
-	    z_()
-	{
-	}
+	triple() = default;
+	
+	INLINE_FUNCTION_HD
+	~triple() = default;
 
 	/// Construct from x, y, z
 	INLINE_FUNCTION_HD

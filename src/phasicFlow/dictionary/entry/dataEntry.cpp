@@ -121,6 +121,9 @@ bool pFlow::dataEntry::writeDataEntry
 			}
 			else
 			{
+				
+				if(tok != tokens.cbegin())os<<spaceToken();
+
 				os << *tok;	
 			}
 			lastPuncBegin = true;
@@ -141,6 +144,7 @@ bool pFlow::dataEntry::writeDataEntry
 		}
 		else
 		{
+			
 			if(!lastPuncBegin&&applySpace) os<<spaceToken();
 			os << *tok;
 			lastPuncEnd = false;
