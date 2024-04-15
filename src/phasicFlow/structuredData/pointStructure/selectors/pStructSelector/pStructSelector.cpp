@@ -32,6 +32,16 @@ pFlow::pStructSelector::pStructSelector
 	pStruct_(pStruct)
 {}
 
+pFlow::pStructSelector::pStructSelector(
+  const word&           ,
+  const pointStructure& pStruct,
+  const dictionary&     
+)
+:
+	pStruct_(pStruct)
+{
+}
+
 const pFlow::pointStructure& pFlow::pStructSelector::pStruct()const
 {
 	return pStruct_;
@@ -63,7 +73,6 @@ pFlow::pStructSelector::create(
   const dictionary&     dict
 )
 {
-
 	word selectorMethod = angleBracketsNames("selector", dict.getVal<word>("selector"));
 
 	if( dictionaryvCtorSelector_.search(selectorMethod) )
@@ -74,7 +83,7 @@ pFlow::pStructSelector::create(
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< selectorMethod << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< selectorMethod << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_
@@ -82,4 +91,32 @@ pFlow::pStructSelector::create(
 		fatalExit;
 	}
 	return nullptr;
+}
+
+pFlow::uniquePtr<pFlow::pStructSelector>
+pFlow::pStructSelector::create(
+  const word&           type,
+  const pointStructure& pStruct,
+  const dictionary&     dict
+)
+{
+	word selectorMethod = angleBracketsNames("selector", type);
+
+	if( wordvCtorSelector_.search(selectorMethod) )
+	{
+		return wordvCtorSelector_[selectorMethod] (type, pStruct, dict);
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< selectorMethod << " does not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			wordvCtorSelector_
+		);
+		fatalExit;
+	}
+	return nullptr;
+
 }

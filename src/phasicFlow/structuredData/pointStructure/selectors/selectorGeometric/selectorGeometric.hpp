@@ -50,11 +50,23 @@ public:
 
 	selectorGeometric(const pointStructure& pStruct, const dictionary& dict);
 
+	selectorGeometric(
+		const word& type, 
+		const pointStructure& pStruct, 
+		const dictionary& dict);
+		
 	add_vCtor
     (
         pStructSelector, 
         selectorGeometric, 
         dictionary
+    );
+
+	add_vCtor
+    (
+        pStructSelector, 
+        selectorGeometric, 
+        word
     );
 
 	~selectorGeometric() override = default;

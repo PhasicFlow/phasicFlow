@@ -44,8 +44,15 @@ public:
 	// - type info
 	TypeInfo("pStructSelector");
 
-
+		/// the dictionary contains the selector keyword and another dictionary which is 
+		/// used for creating selector 
 		pStructSelector(const pointStructure& pStruct, const dictionary& UNUSED(dict));
+
+		/// construct using selector type and a dictionary that contains info of selector 
+		pStructSelector(
+			const word& type, 
+			const pointStructure& pStruct, 
+			const dictionary& UNUSED(dict));
 
 		create_vCtor
 		(
@@ -53,6 +60,18 @@ public:
 			dictionary,
 			(const pointStructure& pStruct, const dictionary& dict),
 			(pStruct, dict)
+		);
+
+		create_vCtor
+		(
+			pStructSelector,
+			word,
+			(
+				const word& type, 
+				const pointStructure& pStruct, 
+				const dictionary& dict
+			),
+			(type, pStruct, dict)
 		);
 
 		virtual ~pStructSelector() = default;
@@ -71,6 +90,11 @@ public:
 	static
 	uniquePtr<pStructSelector> create(const pointStructure& pStruct, const dictionary& dict);
 
+	static
+	uniquePtr<pStructSelector> create(
+		const word& type, 
+		const pointStructure& pStruct, 
+		const dictionary& dict);
 };
 
 
