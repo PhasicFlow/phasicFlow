@@ -19,50 +19,69 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#include "selectRange.hpp"
-#include "dictionary.hpp"
+#ifndef __selectRange_hpp__
+#define __selectRange_hpp__
 
-void pFlow::selectRange::selectAllPointsInRange()
+#include "pStructSelector.hpp"
+#include "pointStructure.hpp"
+
+
+namespace pFlow
 {
-	// to reduct allocations
-	uint32 maxNum = (end_ - begin_)/stride_+2;
-	
-	selectedPoints_.reserve	(maxNum);
 
-	selectedPoints_.clear();
-		
-	for(uint32 i = begin_; i<end_; i+= stride_)
-	{
-		selectedPoints_.push_back(i);
-	}
-}
+class dictionary;
 
-pFlow::selectRange::selectRange
-(
-	const pointStructure& pStruct,
-	const dictionary& dict
-)
+class selectorStridedRange
 :
-	pStructSelector
-	(
-		pStruct, dict
-	),
-	begin_
-	(
-		dict.subDict("selectRangeInfo").getVal<uint32>("begin")
-	),
-	end_
-	(
-		dict.subDict("selectRangeInfo").getValOrSet<uint32>("end", pStruct.size())
-	),
-	stride_
-	(
-		dict.subDict("selectRangeInfo").getValOrSet<uint32>("stride", 1u)
-	)
+	public pStructSelector
 {
-	begin_ 	= max(begin_,1u);
-	end_ 	= min(end_, static_cast<uint32>(pStruct.size()));
-	stride_ = max(stride_,1u);
+private:
+	
+	uint32Vector selectedPoints_;
 
-	selectAllPointsInRange();
-}
+	// begin index
+	uint32 	begin_;
+
+	// end index
+	uint32 	end_;
+
+	// stride
+	uint32 	stride_;
+
+	void selectAllPointsInRange();
+	
+public:
+
+	// - type info
+	TypeInfo("selector<stridedRange>");
+
+
+		selectorStridedRange(const pointStructure& pStruct, const dictionary& dict);
+
+		add_vCtor
+		(
+			pStructSelector,
+			selectorStridedRange,
+			dictionary
+		);
+
+		~selectorStridedRange() final = default;
+
+	//// - Methods
+
+		const uint32Vector& selectedPoints()const final
+		{
+			return selectedPoints_;
+		}
+
+		uint32Vector& selectedPoints() final
+		{
+			return selectedPoints_;
+		}
+
+};
+
+} // pFlow
+
+
+#endif //__pStructSelector_hpp__

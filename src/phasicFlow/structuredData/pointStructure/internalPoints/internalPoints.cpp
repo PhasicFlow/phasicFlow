@@ -457,9 +457,6 @@ bool pFlow::internalPoints::read
 
 	return true;
 }
-		
-
-
 
 bool pFlow::internalPoints::write
 (

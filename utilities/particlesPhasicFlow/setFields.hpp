@@ -37,7 +37,7 @@ bool applySelector(systemControl& control, const pointStructure& pStruct, const 
 	
 	auto selector = pStructSelector::create(pStruct, selDict);
 
-	auto& selected = selector().selectedPoinsts();
+	auto& selected = selector().selectedPoints();
 
 	uint32IndexContainer selIndex(selected.data(), selected.size());
 

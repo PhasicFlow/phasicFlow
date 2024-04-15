@@ -19,67 +19,25 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 
-#include "selectRandom.hpp"
+#include "selectorStridedRange.hpp"
 #include "dictionary.hpp"
-#include "uniformRandomUint32.hpp"
-#include "Set.hpp"
 
-
-bool pFlow::selectRandom::selectAllPointsInRange()
+void pFlow::selectorStridedRange::selectAllPointsInRange()
 {
 	// to reduct allocations
-	uint32 maxNum = number_+1;
+	uint32 maxNum = (end_ - begin_)/stride_+2;
 	
 	selectedPoints_.reserve	(maxNum);
 
 	selectedPoints_.clear();
-	
-	uniformRandomUint32 intRand (begin_, end_);
-
-
-	uint32 n = 0;
-	uint32 iter = 0;
-	bool finished = false;
-
-	Set<uint32> selctedIndices;
-
-	while( iter < number_*100)
+		
+	for(uint32 i = begin_; i<end_; i+= stride_)
 	{
-		uint32 newInd = intRand.randomNumber();
-
-		if( auto [it, inserted] = selctedIndices.insert(newInd); inserted )
-		{
-			n++;
-
-			if(n == number_)
-			{
-				finished = true;
-				break;
-			}
-		}
-		iter++;
+		selectedPoints_.push_back(i);
 	}
-
-	
-	if(finished)
-	{
-		for(auto& ind:selctedIndices)
-		{
-			selectedPoints_.push_back(ind);
-		}
-
-		return true;
-
-	}else
-	{
-		fatalErrorInFunction<< "Could not find random indices in the range."<<endl;
-		return false;	
-	}
-
-	
 }
-	
-pFlow::selectRandom::selectRandom
+
+pFlow::selectorStridedRange::selectorStridedRange
 (
 	const pointStructure& pStruct,
 	const dictionary& dict
@@ -91,32 +49,20 @@ pFlow::selectRandom::selectRandom
 	),
 	begin_
 	(
-		dict.subDict("selectRandomInfo").getVal<uint32>("begin")
+		dict.subDict("stridedRangeInfo").getVal<uint32>("begin")
 	),
 	end_
 	(
-		dict.subDict("selectRandomInfo").getValOrSet("end", pStruct.size())
+		dict.subDict("stridedRangeInfo").getValOrSet<uint32>("end", pStruct.size())
 	),
-	number_
+	stride_
 	(
-		dict.subDict("selectRandomInfo").getValOrSet("number", 1)
+		dict.subDict("stridedRangeInfo").getValOrSet<uint32>("stride", 1u)
 	)
 {
 	begin_ 	= max(begin_,1u);
 	end_ 	= min(end_, static_cast<uint32>(pStruct.size()));
-	number_ = max(number_,0u);
-	if(end_-begin_ < number_)
-	{
+	stride_ = max(stride_,1u);
 
-		warningInFunction<< "In dictionary " << dict.globalName()<<
-		" number is greater than the interval defined by begine and end ["<<
-		begin_<<" "<<end_<<"), resetting it to "<<end_-begin_<<endl;
-
-		number_ = end_-begin_;
-	}
-
-	if(!selectAllPointsInRange())
-	{
-		fatalExit;
-	}
+	selectAllPointsInRange();
 }
