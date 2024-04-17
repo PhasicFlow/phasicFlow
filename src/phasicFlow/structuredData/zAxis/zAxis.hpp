@@ -29,76 +29,51 @@ p1 and p2
 #define __zAxis_hpp__
 
 #include "types.hpp"
+#include "array2D.hpp"
 
 namespace pFlow
 {
 
-template <typename T, int32 nRow, int32 nInner, int32 nCol >
-void MatMul(T(&A)[nRow][nInner], T(&B)[nInner][nCol], T(&C)[nRow][nCol]);
-
-template <typename T, int32 nRow, int32 nCol >
-void assignMat(T(&A)[nRow][nCol], T(&B)[nRow][nCol]);
 
 class zAxis
 {
+
+private:
+	
+	using ArrayType = array2D<real,3uL,3uL>;
+
+	/// the origin of the transformed coord
+	realx3 			p1_;
+
+	/// the direction vector of rotated coordinates 
+	realx3 			p2_;
+
+	/// transformation matrix to rotate original coordinates
+	/// to rotated coordinates 
+	ArrayType 		rotMat_;
+
+	/// rotation matrix to rotate back from rotated coordinates
+	/// to the original axis
+	ArrayType 		invRotMat_;
+
+	void makeTransMatrix(const realx3& v);
+
 public:
 	// constructors 
 	zAxis(const realx3 &lp1, const realx3 &lp2);
 	
+	inline
 	real length()const
 	{
 		return pFlow::length(p2_-p1_);
 	}
 
-	realx3 transferToZ(const realx3 & p);
+	realx3 transferToZ(const realx3 & p)const;
 
-	realx3 transferBackZ(const realx3 & p);
+	realx3 transferBackZ(const realx3 & p)const;
 
-private:
-	void makeTransMatrix();
-protected:
 
-	realx3 p1_;
-	realx3 p2_;
-	realx3 n_;
-
-	real Trans_z_xz_P1_[4][4];
-
-	real ITrans_P1_xz_z_[4][4];
 };
-
-
-
-template <typename T, int32 nRow, int32 nInner, int32 nCol >
-void MatMul(T(&A)[nRow][nInner], T(&B)[nInner][nCol], T(&C)[nRow][nCol])
-{
-
-	for (int32 row = 0; row < nRow; row++)
-	{
-		for (int32 col = 0; col < nCol; col++)
-		{
-			T sum = 0;
-			for (int inner = 0; inner < nInner; inner++)
-			{
-				sum += A[row][inner] * B[inner][col];
-			}
-			C[row][col] = sum;
-		}
-	}
-}
-
-template <typename T, int32 nRow, int32 nCol >
-void assignMat(T(&A)[nRow][nCol], T(&B)[nRow][nCol])
-{
-
-	for (int32 row = 0; row < nRow; row++)
-	{
-		for (int32 col = 0; col < nCol; col++)
-		{
-			B[row][col] = A[row][col];
-		}
-	}
-}
 
 
 }

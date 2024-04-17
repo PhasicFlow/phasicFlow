@@ -63,6 +63,7 @@ containers/Field/Fields.cpp
 containers/symArrayHD/symArrays.cpp
 containers/List/anyList/anyList.cpp
 
+structuredData/zAxis/zAxis.cpp
 structuredData/box/box.cpp
 structuredData/sphere/sphere.cpp
 structuredData/cylinder/cylinder.cpp
@@ -72,8 +73,6 @@ structuredData/peakableRegion/peakableRegion/peakableRegion.cpp
 
 structuredData/pointStructure/internalPoints/internalPointsKernels.cpp
 structuredData/pointStructure/internalPoints/internalPoints.cpp
-
-structuredData/zAxis/zAxis.cpp
 
 structuredData/line/line.cpp
 structuredData/infinitePlane/infinitePlane.cpp
