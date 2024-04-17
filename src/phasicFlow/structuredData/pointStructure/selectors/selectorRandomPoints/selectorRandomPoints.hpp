@@ -58,6 +58,11 @@ public:
 
 		selectorRandomPoints(const pointStructure& pStruct, const dictionary& dict);
 
+		selectorRandomPoints(
+			const word& type, 
+			const pointStructure& pStruct, 
+			const dictionary& UNUSED(dict));
+
 		add_vCtor
 		(
 			pStructSelector,
@@ -65,6 +70,12 @@ public:
 			dictionary
 		);
 
+		add_vCtor
+		(
+			pStructSelector,
+			selectorRandomPoints,
+			word
+		);
 		~selectorRandomPoints() final = default;
 
 	//// - Methods

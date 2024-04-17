@@ -26,8 +26,7 @@ bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
 	const auto& indices = varList.getObject<uint32IndexContainer>(
 		eventName);
 	bool success = false;
-	output<<"insert for field "<< name()<<endl;
-
+	
 	if(varList.contains(name()))
 	{
 		// a single value is assigned

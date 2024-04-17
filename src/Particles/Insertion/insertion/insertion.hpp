@@ -46,16 +46,22 @@ private:
 	/// to be inserted due to collision
 	Logical    increaseVelocity_ = "No";
 
+	word 		diameterName_ = "diameter";
+
+	word 		velocityName_ = "velocity";
+
 	/// Ref to particles
 	particles& particles_;
 
 	bool       readFromFile_ = false;
 
 	/// Read from dictionary
-	bool       readInsertionDict(const dictionary& dict);
+	bool readInsertionDict();
+
+protected:
 
 	/// Write to dictionary
-	// bool writeInsertionDict(dictionary& dict)const;
+	virtual bool writeInsertionDict(dictionary& dict)const;
 
 public:
 
@@ -71,7 +77,7 @@ public:
 	/// is Insertion active
 	inline bool isActive() const
 	{
-		return active_();
+		return readFromFile_ && active_();
 	}
 
 	inline bool checkForCollision() const
@@ -96,14 +102,24 @@ public:
 		return readFromFile_;
 	}
 
+	const word& diameterName()const
+	{
+		return diameterName_;
+	}
+
+	const word& velocityName()const
+	{
+		return velocityName_;
+	}
+
 	/// read from stream
-	bool read(iIstream& is, const IOPattern& iop) override;
+	//bool read(iIstream& is, const IOPattern& iop) override;
 
 	/*/// read from iIstream
-	virtual bool read(iIstream& is) = 0;
+	virtual bool read(iIstream& is) = 0;*/
 
 	/// write to iOstream
-	virtual bool write(iOstream& os)const = 0;*/
+	bool write(iOstream& os, const IOPattern& iop)const override ;
 };
 
 }

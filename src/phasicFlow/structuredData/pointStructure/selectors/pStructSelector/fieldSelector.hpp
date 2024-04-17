@@ -33,7 +33,7 @@ Vector<T> selectedFieldVals(const pStructSelector& selector, const word& name)
     {
         fatalErrorInFunction<<
 		"Type of field "<< name << " in time repository does not match with"<<
-        FieldType::TYEPANME()<<endl;
+        FieldType::TYPENAME()<<endl;
 		fatalExit;
     }
 

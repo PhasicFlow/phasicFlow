@@ -34,7 +34,7 @@ pFlow::particleWallContactSearchs<method>::particleWallContactSearchs
     domainBox_(domain),
     updateInterval_
     (
-        dict.getValOrSet<uint32>("updateInterval", 1)
+        max(dict.getValOrSet<uint32>("updateInterval", 1),1u)
     )
 {
     

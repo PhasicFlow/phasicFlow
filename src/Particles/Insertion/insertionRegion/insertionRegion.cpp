@@ -101,9 +101,15 @@ pFlow::insertionRegion::readInsertionRegion(const dictionary& dict)
 bool
 pFlow::insertionRegion::writeInsertionRegion(dictionary& dict) const
 {
-	if (!dict.add("type", type_))
+	
+	if(!dict.add("rate", rate_))
 		return false;
 
+	if(!tControl_.write(dict))
+		return false;
+
+	if (!dict.add("regionType", type_))
+		return false;
 	if (pRegion_)
 	{
 		auto& prDict = dict.subDictOrCreate(type_ + "Info");
@@ -118,11 +124,11 @@ pFlow::insertionRegion::writeInsertionRegion(dictionary& dict) const
 			return false;
 	}
 
-	/*if(setFields_)
+	if(setFieldDict_)
 	{
-	    auto& sfDict = dict.subDictOrCreate("setFields");
-	    setFields_().write(sfDict);
-	}*/
+	    if(!dict.addDict("setFields", setFieldDict_()))
+			return false;	    
+	}
 
 	return true;
 }

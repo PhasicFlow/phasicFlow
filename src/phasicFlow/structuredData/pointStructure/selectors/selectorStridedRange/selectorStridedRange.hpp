@@ -58,11 +58,23 @@ public:
 
 		selectorStridedRange(const pointStructure& pStruct, const dictionary& dict);
 
+		selectorStridedRange(
+			const word& type, 
+			const pointStructure& pStruct, 
+			const dictionary& dict);
+		
 		add_vCtor
 		(
 			pStructSelector,
 			selectorStridedRange,
 			dictionary
+		);
+
+		add_vCtor
+		(
+			pStructSelector,
+			selectorStridedRange,
+			word
 		);
 
 		~selectorStridedRange() final = default;

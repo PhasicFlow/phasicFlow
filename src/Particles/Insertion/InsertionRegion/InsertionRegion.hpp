@@ -21,9 +21,15 @@ Licence:
 #ifndef __InsertionRegion_hpp__
 #define __InsertionRegion_hpp__
 
+#include "insertionRegion.hpp"
 #include "dictionary.hpp"
 #include "pointStructure.hpp"
-#include "insertionRegion.hpp"
+#include "insertion.hpp"
+#include "collisionCheck.hpp"
+#include "pStructSelector.hpp"
+#include "fieldSelector.hpp"
+
+
 
 namespace pFlow
 {

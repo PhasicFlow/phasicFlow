@@ -21,11 +21,13 @@ Licence:
 
 #include "cylinder.hpp"
 #include "zAxis.hpp"
+#include "streams.hpp"
 
 FUNCTION_H
 bool pFlow::cylinder::calculateParams()
 {
 
+	WARNING<<"Use of cylinder requires modifications to zAxis"<<END_WARNING;
 	auto p1p2 = p2_ - p1_;
 
 	if( p1p2.length() > smallValue )
