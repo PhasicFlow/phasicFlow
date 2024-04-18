@@ -6,7 +6,7 @@ project(phasicFlow VERSION 1.0 )
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "" FORCE)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_INSTALL_PREFIX ${phasicFlow_SOURCE_DIR} CACHE PATH "Install path of phasicFlow" FORCE)
-set(CMAKE_BUILD_TYPE Relase CACHE STRING "build type" FORCE)
+set(CMAKE_BUILD_TYPE Debug CACHE STRING "build type" FORCE)
 set(BUILD_SHARED_LIBS ON CACHE BOOL "Build using shared libraries" FORCE)
 mark_as_advanced(FORCE var BUILD_SHARED_LIBS)
 

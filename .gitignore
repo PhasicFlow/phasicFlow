@@ -1,5 +1,11 @@
+# files 
+.clang-format
+.vscode
+.dependencygraph
+
 # Prerequisites
 *.d
+
 
 # Compiled Object files
 *.slo
