@@ -31,7 +31,7 @@ class plane
 :
 	public infinitePlane
 {
-protected:
+private:
 	
 	/// First point 
 	realx3 p1_;
@@ -121,6 +121,11 @@ public:
 
 	// return the parallel plane to this plane 
 	plane parallelPlane(real distance)const;
+
+	infinitePlane infPlane()const
+	{
+		return infinitePlane(normal(), d());
+	}
 
 
 	static 

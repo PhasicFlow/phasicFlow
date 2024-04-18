@@ -19,7 +19,9 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "interaction.hpp"
-
+#include "particles.hpp"
+#include "vocabs.hpp"
+#include "geometry.hpp"
 
 pFlow::interaction::interaction
 (
@@ -28,26 +30,16 @@ pFlow::interaction::interaction
 	const geometry& geom
 )
 :
-	demInteraction(control, control.caseSetup().path()+interactionFile__),
-	interactionBase(prtcl, geom),
-	fileDict_(control.caseSetup().emplaceObject<dictionary>(
-		objectFile(
-			interactionFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER),
-		interactionFile__,
-		true ))
+	property(interactionFile__, &control.caseSetup()),
+	observer
+	(
+		&prtcl.dynPointStruct(),
+		msg_
+	),
+	demComponent("interaction", control),
+	particles_(prtcl),
+	geometry_(geom)
 {
-	this->subscribe(prtcl.pStruct());
-
-	contactSearch_ = contactSearch::create(
-		fileDict_.subDict("contactSearch"),
-		this->control().domain(),
-		prtcl,
-		geom,
-		timers()
-		 );
 
 }
 
@@ -79,14 +71,15 @@ pFlow::uniquePtr<pFlow::interaction> pFlow::interaction::create
 			clType);
 
 
-	REPORT(1)<< "Selecting interaction model..."<<endREPORT;
+	
+	REPORT(1)<<"Creating interaction "<<Green_Text(interactionModel)<<" . . ."<<END_REPORT;
 	if( systemControlvCtorSelector_.search(interactionModel) )
 	{
 		auto objPtr = 
 			systemControlvCtorSelector_[interactionModel]
 			(control, prtcl, geom);
 
-		REPORT(2)<<"Model "<<greenText(interactionModel)<<" is created."<<endREPORT;
+		
 		return objPtr;
 	}
 	else

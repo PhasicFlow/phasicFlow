@@ -41,6 +41,8 @@ using uint32Vector   = Vector<uint32>;
 
 using uint64Vector   = Vector<uint64>;
 
+using uint32x3Vector = Vector<uint32x3>;
+
 using realVector 	= Vector<real> 	;
 
 using realx3Vector 	= Vector<realx3>;

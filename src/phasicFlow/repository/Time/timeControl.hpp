@@ -25,7 +25,7 @@ Licence:
 #include "types.hpp"
 #include "ranges.hpp"
 #include "streams.hpp"
-
+#include "timeInfo.hpp"
 
 namespace pFlow
 {
@@ -36,7 +36,7 @@ class dictionary;
 
 class timeControl
 {
-protected:
+private:
 
 
 	//// - Data members
@@ -90,7 +90,7 @@ protected:
 	
 public:
 
-	timeControl(const dictionary& dict);
+	explicit timeControl(const dictionary& dict);
 
 	timeControl(
 		dictionary& dict,
@@ -99,23 +99,15 @@ public:
 		real saveInterval,
 		word startTimeName);
 	
-	virtual ~timeControl()
-	{}
-
-
+	virtual ~timeControl() = default;
+	
 	real dt()const
 	{
 		return dt_;
 	}
 
-	real setTime(real t)
-	{
-		real tmp = currentTime_;
-		currentTime_ = t;
-		lastSaved_ = t;
-		checkForOutputToFile();
-		return tmp;
-	}
+	real setTime(real t);
+	
 
 	void setStopAt(real sT)
 	{
@@ -192,7 +184,11 @@ public:
 		return timePrecision_;
 	}
 
-
+	inline
+	timeInfo TimeInfo()const
+	{
+		return {static_cast<uint32>(currentIter_), currentTime_, dt_};
+	}
 
 
 };

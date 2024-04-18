@@ -25,7 +25,7 @@ Licence:
 #include "subscriber.hpp"
 #include "VectorSingles.hpp"
 #include "plane.hpp"
-#include "scatterFieldAccess.hpp"
+#include "scatteredFieldAccess.hpp"
 
 #include "streams.hpp"
 
@@ -36,6 +36,9 @@ namespace pFlow
 
 class internalPoints;
 class dictionary;
+class boundaryList;
+class pointStructure;
+class Time;
 
 class boundaryBase
 :
@@ -44,21 +47,35 @@ class boundaryBase
 public:
 
     using pointFieldAccessType = 
-        scatterFieldAccess<realx3,DefaultExecutionSpace>;
+        deviceScatteredFieldAccess<realx3>;
 
+private:
 
-protected:
+	// friend et al. 
+	friend boundaryList;
 
 	const plane& 	boundaryPlane_;
+
+	/// list of particles indices on device 
+	uint32Vector_D 	indexList_;
+
+	/// list of particles indieces on host
+	mutable uint32Vector_H 	indexListHost_;
+
+	/// device and host list are sync
+	mutable bool 			listsSync_ = false;
 
 	/// The length defined for creating neighbor list 
 	real  			neighborLength_;	
 
-	/// a reference to 
+	/// a reference to internal points 
 	internalPoints& internal_;
 
-	/// list of particles indices on device 
-	uint32Vector_D 	indexList_;
+	/// a reference to the list of boundaries 
+	/// (never use this in the constructor).
+	boundaryList& 	boundaries_;
+
+	uint32 			thisBoundaryIndex_;
 
 	uint32 			mirrorProcessoNo_;
 
@@ -66,16 +83,50 @@ protected:
 
 	word 		type_;
 
+protected:
+	
+	/// @brief set the size of indexList 
+	void setSize(uint32 newSize);
 
+	void setNewIndices(const uint32Vector_D& newIndices);
+
+	bool appendNewIndices(const uint32Vector_D& newIndices);
+	
+	bool removeIndices(
+		uint32 numRemove, 
+		const uint32Vector_D& removeMask);
+	
+	bool transferPoints(
+		uint32 numTransfer, 
+		const uint32Vector_D& transferMask,
+		uint32 transferBoundaryIndex,
+		realx3 transferVector);
+	
+	void unSyncLists()
+	{
+		listsSync_ = false;
+	}
+
+	void syncLists()const
+	{
+		if(!listsSync_)
+		{
+			indexListHost_.assignFromDevice(indexList_, true);
+			listsSync_ = true;
+		}
+	}
+
+	
 public:
 
 	TypeInfo("boundaryBase");
-
 	
 	boundaryBase(
-		const dictionary& 	dict,
-		const plane& 		bplane,
-		internalPoints& 	internal);
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
 
 	boundaryBase(const boundaryBase&) = delete;
 
@@ -85,7 +136,7 @@ public:
 
 	boundaryBase& operator=(boundaryBase&&) = default;
 
-	virtual ~boundaryBase() = default;
+	~boundaryBase() override = default;
 	
 
 	create_vCtor
@@ -93,71 +144,157 @@ public:
 		boundaryBase,
 		dictionary,
 		(
-			const dictionary& 	dict,
-			const plane& 		bplane,
-			internalPoints& 	internal
+			const dictionary &dict,
+    		const plane 	&bplane,
+    		internalPoints 	&internal,
+			boundaryList	&bndrs,
+			uint32 			thisIndex
 		),
-		(dict, bplane, internal)
+		(dict, bplane, internal, bndrs, thisIndex)
 	);
 
-	inline 
-	auto neighborLength()const
+	/// The length from boundary plane into the domain 
+	/// where beyond that distance internal points exist.
+	/// By conventions is it always equal to neighborLength_  
+	real neighborLengthIntoInternal()const
 	{
 		return neighborLength_;
 	}
 
+	/// The distance length from boundary plane 
+	/// where neighbor particles exist in that distance. 
+	/// This length may be modified in each boundary type 
+	/// as required. In this case the boundaryExtensionLength
+	/// method should also be modified accordingly. 
+	virtual 
+	real neighborLength()const
+	{
+		return neighborLength_;
+	}
 
+	/// The extention length (in vector form) for the boundary
+	/// as required by  each boundary type. It is allowed for 
+	/// each boundary type to be extended outward to allow 
+	/// particles to stay more in its list before being removed 
+	/// from its list. 
+	virtual 
+	realx3 boundaryExtensionLength()const
+	{
+		return {0,0,0};
+	}
+
+	inline
 	const word& type()const
 	{
 		return type_;
 	}
 
+	inline
 	const word& name()const
 	{
 		return name_;
 	}
 
+	inline
+	bool empty()const
+	{
+		return indexList_.size()==0;
+	}
+
+	inline
 	auto size()const
 	{
 		return indexList_.size();
 	}
 
+	inline
 	auto capacity()const
 	{
 		return indexList_.capacity();
 	}
 
-	/// @brief set the size of indexList 
-	/// Always make sure that size+1 <= capacity
-	void setSize(uint32 newSize);
+	inline
+	uint32 thisBoundaryIndex()const
+	{
+		return thisBoundaryIndex_;
+	}
 
-	virtual 
-    bool beforeIteratoin(uint32 iterNum, real t) = 0 ;
+	inline
+	uint32 mirrorBoundaryIndex()const
+	{
+		return thisBoundaryIndex_%2==0? thisBoundaryIndex_+1:thisBoundaryIndex_-1;
+	}
 
-	virtual 
-    bool iterate(uint32 iterNum, real t) = 0;
+	inline
+	const internalPoints& internal()const
+	{
+		return internal_;
+	}
 
-	virtual 
-    bool afterIteration(uint32 iterNum, real t) = 0;
+	inline
+	internalPoints& internal()
+	{
+		return internal_;
+	}
 
-	
+	const pointStructure& pStruct()const;
+
+	const Time& time()const;
+
+	inline
 	const auto& indexList()const
 	{
 		return indexList_;
 	}
 
-    pointFieldAccessType thisPoints();
+	inline
+	const auto& indexListHost()const
+	{
+		syncLists();
+		return indexListHost_;
+	}
+
+	boundaryBase& mirrorBoundary();
+
+	const boundaryBase& mirrorBoundary()const;
+	
+	/// the actual boundary plane of this boundary 
+	const plane& boundaryPlane()const
+	{
+		return boundaryPlane_;
+	}
+
+	/// @brief displacement vector that transfers points  
+	/// to a distance that is equal to the distance between 
+	/// this plane and the mirror plane, the vector points from 
+	/// this plane to mirror plane 
+	virtual
+	realx3 displacementVectroToMirror()const;
+	
+
+	virtual 
+    bool beforeIteration(uint32 iterNum, real t, real dt) = 0 ;
+
+	virtual 
+    bool iterate(uint32 iterNum, real t, real dt) = 0;
+
+	virtual 
+    bool afterIteration(uint32 iterNum, real t, real dt) = 0;
+	
+    pointFieldAccessType thisPoints()const;
 
     virtual
-    pointFieldAccessType neighborPoints();
+    pointFieldAccessType neighborPoints()const;
     
-
+	/// - static create 
 	static
 	uniquePtr<boundaryBase> create
 	(
-		const dictionary& 	dict,
-		const plane& 		bplane,
-		internalPoints& 	internal
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex
 	);
 
 	

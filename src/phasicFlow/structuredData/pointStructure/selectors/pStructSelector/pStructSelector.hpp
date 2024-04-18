@@ -18,13 +18,13 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __pStructSelector_hpp__
 #define __pStructSelector_hpp__
 
 
 #include "Vectors.hpp"
 #include "virtualConstructor.hpp"
+
 
 namespace pFlow
 {
@@ -44,8 +44,15 @@ public:
 	// - type info
 	TypeInfo("pStructSelector");
 
-
+		/// the dictionary contains the selector keyword and another dictionary which is 
+		/// used for creating selector 
 		pStructSelector(const pointStructure& pStruct, const dictionary& UNUSED(dict));
+
+		/// construct using selector type and a dictionary that contains info of selector 
+		pStructSelector(
+			const word& type, 
+			const pointStructure& pStruct, 
+			const dictionary& UNUSED(dict));
 
 		create_vCtor
 		(
@@ -55,6 +62,18 @@ public:
 			(pStruct, dict)
 		);
 
+		create_vCtor
+		(
+			pStructSelector,
+			word,
+			(
+				const word& type, 
+				const pointStructure& pStruct, 
+				const dictionary& dict
+			),
+			(type, pStruct, dict)
+		);
+
 		virtual ~pStructSelector() = default;
 
 	//// - Methods
@@ -62,15 +81,23 @@ public:
 		const pointStructure& pStruct()const;
 
 
-		virtual const int32Vector& selectedPoinsts()const = 0;
+		virtual const uint32Vector& selectedPoints()const = 0;
 
-		virtual int32Vector& selectedPoinsts() = 0;
+		virtual uint32Vector& selectedPoints() = 0;
 
+		realx3Vector selectedPointPositions()const;
 
 	static
 	uniquePtr<pStructSelector> create(const pointStructure& pStruct, const dictionary& dict);
 
+	static
+	uniquePtr<pStructSelector> create(
+		const word& type, 
+		const pointStructure& pStruct, 
+		const dictionary& dict);
 };
+
+
 
 } // pFlow
 

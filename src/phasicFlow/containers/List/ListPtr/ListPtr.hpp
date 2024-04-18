@@ -39,8 +39,12 @@ class ListPtr
 public:
 
 	using ListPtrType 		= ListPtr<T> ; 
+	
 	using listType 			= std::list<T*>;
 
+	using iterator 			= typename listType::iterator;
+
+	using const_iterator 	= typename listType::const_iterator;
 
 	template<typename... Args>
     inline static uniquePtr<T> makeSafe(Args&&... args)
@@ -183,7 +187,25 @@ public:
 		// - clear the ith element
 		void clear(size_t i);	
 		
-		// - clone the object 
+		iterator begin()		
+		{
+			return list_.begin();
+		}
+		
+		const_iterator begin()const
+		{
+			return list_.begin();
+		}
+
+		iterator end()
+		{
+			return list_.end();
+		}
+
+		const_iterator end()const
+		{
+			return list_.end();
+		}
 		
 };
 

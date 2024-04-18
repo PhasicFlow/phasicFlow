@@ -107,11 +107,7 @@ protected:
 		/// write dictionary to stream - with keyword
 		bool writeDictionary(iOstream& os, bool withBlock = true)const;
 
-        /// construct an empty dictionary with keyword and make it global/fileDictionary (if true)
-		dictionary(const word& keyword, bool global);
-
-		/// construct a dictionary with name and read it from file 
-		dictionary(const word& keyword, const fileSystem& file);
+        
 	
 
 public:
@@ -122,7 +118,12 @@ public:
 	TypeInfo("dictionary");
 
 	//// - Constructors
+		/// construct an empty dictionary with keyword and make it global/fileDictionary (if true)
+		dictionary(const word& keyword, bool global);
 
+		/// construct a dictionary with name and read it from file 
+		dictionary(const word& keyword, const fileSystem& file);
+		
 		/// cunstructs a null dictionary
 		dictionary();
 
@@ -142,6 +143,8 @@ public:
 		/// copy construct as default behavior
 		/// entries_ are copied smoothly. set parrent dict to nullDict
 		dictionary(const dictionary& );
+
+		dictionary(const dictionary& src, bool global);
 
 
 		/// assignment preserve name of this dictionary 

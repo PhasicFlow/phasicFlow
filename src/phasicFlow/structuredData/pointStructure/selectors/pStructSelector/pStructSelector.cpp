@@ -32,16 +32,48 @@ pFlow::pStructSelector::pStructSelector
 	pStruct_(pStruct)
 {}
 
+pFlow::pStructSelector::pStructSelector(
+  const word&           ,
+  const pointStructure& pStruct,
+  const dictionary&     
+)
+:
+	pStruct_(pStruct)
+{
+}
+
 const pFlow::pointStructure& pFlow::pStructSelector::pStruct()const
 {
 	return pStruct_;
 }
 
+pFlow::realx3Vector
+pFlow::pStructSelector::selectedPointPositions() const
+{
+
+	const auto& slctd = selectedPoints();
+
+	if(slctd.empty()) return realx3Vector("selectedPointPositions");
+	
+	realx3Vector slctdPoints("selectedPointPositions", slctd.size());
+	
+	auto pPos = pStruct().pointPositionHost();
+
+	for(uint32 i=0; i<slctd.size(); i++)
+	{
+		slctdPoints[i] = pPos[slctd[i]];
+	}
+
+	return slctdPoints;
+}
 
 pFlow::uniquePtr<pFlow::pStructSelector>
-	pFlow::pStructSelector::create(const pointStructure& pStruct, const dictionary& dict)
+pFlow::pStructSelector::create(
+  const pointStructure& pStruct,
+  const dictionary&     dict
+)
 {
-	word selectorMethod = dict.getVal<word>("selector");
+	word selectorMethod = angleBracketsNames("selector", dict.getVal<word>("selector"));
 
 	if( dictionaryvCtorSelector_.search(selectorMethod) )
 	{
@@ -51,7 +83,7 @@ pFlow::uniquePtr<pFlow::pStructSelector>
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< selectorMethod << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< selectorMethod << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_
@@ -59,4 +91,32 @@ pFlow::uniquePtr<pFlow::pStructSelector>
 		fatalExit;
 	}
 	return nullptr;
+}
+
+pFlow::uniquePtr<pFlow::pStructSelector>
+pFlow::pStructSelector::create(
+  const word&           type,
+  const pointStructure& pStruct,
+  const dictionary&     dict
+)
+{
+	word selectorMethod = angleBracketsNames("selector", type);
+
+	if( wordvCtorSelector_.search(selectorMethod) )
+	{
+		return wordvCtorSelector_[selectorMethod] (type, pStruct, dict);
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< selectorMethod << " does not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			wordvCtorSelector_
+		);
+		fatalExit;
+	}
+	return nullptr;
+
 }

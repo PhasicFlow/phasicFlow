@@ -67,7 +67,7 @@ class vibrating
 	public timeInterval
 {
 
-protected:
+private:
 	
 	// rotation speed 
 	realx3	angularFreq_{0,0,0};
@@ -94,11 +94,13 @@ protected:
 
 public:
 
+	TypeInfoNV("vibrating");
+
 	FUNCTION_HD
-	vibrating(){}
+	vibrating()=default;
 
 	FUNCTION_H
-	vibrating(const dictionary& dict);
+	explicit vibrating(const dictionary& dict);
 	
 
 	FUNCTION_HD
@@ -115,16 +117,16 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	realx3 linTangentialVelocityPoint(const realx3 &p)const
+	realx3 linVelocityPoint(const realx3 &)const
 	{
 		return velocity_;
 	}
 
 	INLINE_FUNCTION_HD
-	realx3 transferPoint(const realx3& p, real dt)
+	realx3 transferPoint(const realx3& p, real dt)const
 	{
 		if(!inTimeRange()) return p;
-		return p + static_cast<real>(0.5)*dt*(velocity0_+velocity_);
+		return p + static_cast<real>(0.5*dt)*(velocity0_+velocity_);
 	}
 
 	// - IO operation

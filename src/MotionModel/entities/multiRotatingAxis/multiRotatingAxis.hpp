@@ -78,7 +78,7 @@ class multiRotatingAxis
 {
 protected:
 
-	/// This is either host/device pointer to all axes
+	/// This is device pointer to all axes
 	multiRotatingAxis*		axisList_;
 
 	/// Index of parent axis
@@ -170,7 +170,7 @@ public:
 		/// Set the pointer to the list of all axes.
 		/// This pointer is device pointer 
 		INLINE_FUNCTION_H
-		void setAxisList(multiRotatingAxis* axisList)
+		void setAxisListPtr(multiRotatingAxis* axisList)
 		{
 			axisList_ = axisList;
 		}

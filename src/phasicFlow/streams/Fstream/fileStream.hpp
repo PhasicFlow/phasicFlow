@@ -52,6 +52,8 @@ protected:
 
 	bool binary_ = false;
 	
+	bool append_ = false;
+
 	/// open input file
 	void openInFile(const fileSystem& path);
 	
@@ -66,7 +68,7 @@ public:
 	//// - Constructors
 
 		/// From file path and input type and format. 
-		fileStream( const fileSystem& path, bool outStream = false, bool binary = false);
+		fileStream( const fileSystem& path, bool outStream = false, bool binary = false, bool append = false);
 		
 		/// No copy
 		fileStream(const fileStream&)= delete;

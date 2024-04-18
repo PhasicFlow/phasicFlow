@@ -90,7 +90,9 @@ public:
 			auto p1Point = point-p1_;
 			auto H = cross(p1Point , axisVector_);
 			auto H2 = dot(H,H);
-			if( H2 < radius2_*axisVector2_)
+
+			// the shell itslef is considered as inside point 
+			if( H2 <= radius2_*axisVector2_)
 			{
 				real t = dot(p1Point, axisVector_)/axisVector2_;
 				if(t >= 0.0 && t <= 1.0)

@@ -36,7 +36,7 @@ class IOobject
 :
 	public	IOfileHeader
 {
-protected:
+private:
 
     IOPattern       ioPattern_;
 
@@ -57,7 +57,7 @@ public:
             const IOPattern&    iop, 
             repository*   owner);
         
-        ~IOobject();
+        ~IOobject() override;
 
 		// - copy construct 
 		IOobject(const IOobject& src)=delete;	
@@ -84,6 +84,12 @@ public:
         }
 
         repository* releaseOwner(bool fromOwner = false);
+
+        
+        bool isIncluded(const word& objName)const override;
+        
+        bool isExcluded(const word& objName)const override;
+        
 
 	//// - IO operations 
 

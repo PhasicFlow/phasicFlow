@@ -19,54 +19,56 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "contactSearch.hpp"
-
+#include "streams.hpp"
+#include "particles.hpp"
 
 
 pFlow::contactSearch::contactSearch(
 	const dictionary& dict,
-	const box& domain,
+	const box& extDomain,
  	const particles& prtcl,
  	const geometry& geom,
  	Timers& timers)
 :
-	interactionBase(prtcl, geom),
-	domain_(domain),
-	dict_(dict),
-	sphereSphereTimer_("particle-particle contact search", &timers),
-	sphereWallTimer_("particle-wall contact search", &timers)
+	extendedDomainBox_(extDomain),
+	particles_(prtcl),
+	geometry_(geom),
+	ppTimer_("particle-particle contact search", &timers),
+	pwTimer_("particle-wall contact search", &timers),
+	dict_(dict)
 {
 
 }
 
+const pFlow::pointStructure &pFlow::contactSearch::pStruct() const
+{
+   return particles_.pStruct();
+}
 
 pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
-	const dictionary& dict,
-	const box& domain,
- 	const particles& prtcl,
- 	const geometry& geom,
- 	Timers& timers)
+    const dictionary &dict,
+    const box &extDomain,
+    const particles &prtcl,
+    const geometry &geom,
+    Timers &timers)
 {
+	word baseMethName	= dict.getVal<word>("method");	
 
-	word baseMethName	= dict.getVal<word>("method");
-	word wallMethod 	= dict.getVal<word>("wallMapping");
+	auto model = angleBracketsNames("ContactSearch", baseMethName);
 
-	auto model = angleBracketsNames2("ContactSearch", baseMethName, wallMethod);
-
-
-	REPORT(1)<<"Selecting contact search model . . ."<<endREPORT;
+	REPORT(1)<<"Selecting contact search model . . ."<<END_REPORT;
 	
-
 	if( dictionaryvCtorSelector_.search(model))
 	{
-		auto objPtr = dictionaryvCtorSelector_[model] (dict, domain, prtcl, geom, timers);
-		REPORT(2)<<"Model "<< greenText(model)<<" is created."<<endREPORT;
+		auto objPtr = dictionaryvCtorSelector_[model] (dict, extDomain, prtcl, geom, timers);
+		REPORT(2)<<"Model "<< Green_Text(model)<<" is created."<< END_REPORT;
 		return objPtr;
 	}
 	else
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< model << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< model << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_

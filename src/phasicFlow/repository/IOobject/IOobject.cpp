@@ -36,6 +36,9 @@ pFlow::IOobject::IOobject
     
     if(owner_&& !owner->addToRepository(this))
     {
+        fatalErrorInFunction<<
+        "failed to add object "<< objf.name()<< 
+        " to repository "<< owner->name()<<endl;
         fatalExit;
     }
 }
@@ -62,62 +65,74 @@ pFlow::repository* pFlow::IOobject::releaseOwner
     return old;
 }
 
+bool pFlow::IOobject::isIncluded(const word& objName)const 
+{
+    if(owner_)
+        return owner_->isIncluded(objName);
+    return false;
+}
+
+
+bool pFlow::IOobject::isExcluded(const word& objName)const 
+{
+    if(owner_)
+        return owner_->isExcluded(objName);
+    return false;
+}
+
 bool pFlow::IOobject::readObject(bool rdHdr)
 {
-    
-	if( implyRead() )
-	{
-		if( rdHdr & ioPattern().thisCallRead())
-		{	
-			if( auto ptrIS = inStream(); ptrIS )
-			{
-				if(!readHeader(ptrIS()))return false;
-			}
-			else
-			{
-				warningInFunction<<
-				"could not open file " << path() <<endl;
-				return false;
-			}
-		}
-
-        if(ioPattern().thisCallRead())
-        {
-            if( auto ptrIS = inStream(); ptrIS )
-            {
-                if(!readObject(ptrIS(), rdHdr))return false;              
-            }
-            else
-            {
-                warningInFunction<<
-                "could not open file " << path() <<endl;
-                return false;
-            }    
-        }
-		
-	}	
+    if(!implyRead())return true;
 	
+    if( rdHdr && ioPattern().thisCallRead())
+    {	
+        if( auto ptrIS = inStream(); ptrIS )
+        {
+            if(!readHeader(ptrIS()))return false;
+        }
+        else
+        {
+            warningInFunction<<
+            "could not open file " << path() <<endl;
+            return false;
+        }
+    }
+
+    if(ioPattern().thisCallRead())
+    {
+        if( auto ptrIS = inStream(); ptrIS )
+        {
+            if(!readObject(ptrIS(), rdHdr))return false;              
+        }
+        else
+        {
+            warningInFunction<<
+            "could not open file " << path() <<endl;
+            return false;
+        }    
+    }
+		
 	return true;
 }
 
 
 bool pFlow::IOobject::writeObject() const
 {
-	if(implyWrite())
+    
+	if(implyWrite()&& ioPattern().thisCallWrite())
 	{
-		if(ioPattern().thisProcWriteData())
+		
+        if(auto ptrOS = outStream(); ptrOS )
         {
-            if(auto ptrOS = outStream(); ptrOS )
-            {
-                return writeObject(ptrOS());
-            }
-            else
-            {
-                warningInFunction<< 
-                "error in opening file "<< path() <<endl;
-                return false;
-            }
+            return writeObject(ptrOS());
         }
+        else
+        {
+            warningInFunction<< 
+            "error in opening file "<< path() <<endl;
+            return false;
+        }
+        
 	}
 
 	return true;
@@ -126,11 +141,10 @@ bool pFlow::IOobject::writeObject() const
 
 bool pFlow::IOobject::readObject(iIstream& is, bool rdHdr)
 {
-	if(rdHdr && ioPattern().thisCallRead() )
-	{
-		if(!readHeader(is))return false;
-	}
-
+	if(rdHdr && 
+        ioPattern().thisCallRead() && 
+        !readHeader(is)) return false;
+	
     if(ioPattern().thisCallRead())
     {
         return read(is, ioPattern());
@@ -148,11 +162,9 @@ bool pFlow::IOobject::writeObject(iOstream& os) const
 	if(this->writeHeader() && ioPattern().thisProcWriteHeader())
 		writeHeader(os, typeName());
     
-    if(ioPattern().thisProcWriteData())
-	 {   //return (object_->write_object_t(os, ioPattern_) && writeSeparator(os));
-        notImplementedFunction;
-        //return object_->read_object_t(is, ioPattern_);
-        return false;
+    if(ioPattern().thisCallWrite())
+	 {   
+        return write(os, ioPattern() );
      }
     else
         return true;

@@ -88,11 +88,7 @@ private:
 		/// view of the vector 
 		viewType   		view_;
 
-	// - protected members and methods 
-
-		/// growth factor for vector 
-		static const inline 
-		real 	growthFactor_ = vectorGrowthFactor__;
+	// - protected members and methods 		
 
 		/// Is the memory of this vector accessible from Host
 		static constexpr 
@@ -102,10 +98,13 @@ private:
 		static constexpr
 		bool isDeviceAccessible_ = isDeviceAccessible<execution_space>();
 
+		static constexpr
+		bool isTriviallyCopyable_ = std::is_trivially_copyable_v<T>;
+
 	  	/// Evaluate capacity based on the input size 
 		static INLINE_FUNCTION_H uint32 evalCapacity(uint32 n)
 		{
-			return static_cast<uint32>(n*growthFactor_+1);
+			return static_cast<uint32>(n*pFlow::gSettings::vectorGrowthFactor__+1);
 		}
 
 	/// @brief Change size to n and preserve the conetent if realloc 
@@ -178,10 +177,7 @@ public:
 		INLINE_FUNCTION_H 
 		uniquePtr<VectorSingle> clone() const;
 
-		/// Clone as a pointer (perform deep copy)
-		INLINE_FUNCTION_H
-		VectorSingle* clonePtr()const;
-	
+			
 	//// - Methods
 
 		/// Return *this
@@ -192,22 +188,26 @@ public:
 		INLINE_FUNCTION_H
 		const VectorType& VectorField()const;
 
-		/// Device vector range [0,capcity)
+		/// Device view range [0,capcity)
 		INLINE_FUNCTION_H 
-		auto deviceVectorAll() const;
+		auto& deviceViewAll();
 
-		///  Device vector range [0, size)
+		/// Device view range [0,capcity)
 		INLINE_FUNCTION_H 
-		auto deviceVector()const;
+		const auto& deviceViewAll() const;
 
-		/// Return a vector accessible on Host in range [0,capacity)
+		///  Device view range [0, size)
 		INLINE_FUNCTION_H 
-		auto hostVectorAll()const;
+		auto deviceView()const;
+
+		/// Return a view accessible on Host in range [0,capacity)
+		INLINE_FUNCTION_H 
+		auto hostViewAll()const;
 		
 
-		/// Return a vector accessible on Host in range [0,size)
+		/// Return a view accessible on Host in range [0,size)
 		INLINE_FUNCTION_H 
-		auto hostVector()const;
+		auto hostView()const;
 
 		/// Name of the vector 
 		INLINE_FUNCTION_H 
@@ -256,6 +256,9 @@ public:
 		/// Fill the range [0,size) with val
 		INLINE_FUNCTION_H 
 		void fill(const T& val);
+
+		INLINE_FUNCTION_H
+		void fill(rangeU32 r,  const T& val);
 		
 		/// Change size of the vector and assign val to vector and 
 		INLINE_FUNCTION_H
@@ -277,7 +280,38 @@ public:
 		/// The size of *this becomes the size of src. 
 		/// The capacity of *this becomes the capacity of src.
 		INLINE_FUNCTION_H
-		void assign(const VectorTypeHost& src);
+		void assignFromHost(const VectorTypeHost& src);
+
+		INLINE_FUNCTION_H
+		void assign(const VectorType& src, bool srcCapacity = true);
+
+		template<typename MSpace>
+		INLINE_FUNCTION_H
+		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true)
+		{
+			uint32 srcSize = src.size();
+			uint32 srcCap = src.capacity();
+
+			if(srcCapacity && srcCap != capacity()){
+				reallocateCapacitySize(srcCap, srcSize);
+			}
+			else {
+				changeSize(srcSize);
+			}
+
+			if constexpr(isTriviallyCopyable_){
+				copy(deviceView(), src.deviceView());
+			}
+			else{
+				static_assert("Not a valid operation for this data type ");
+			}
+		}
+
+		INLINE_FUNCTION_H
+		void append(const std::vector<T>& appVec);
+
+		INLINE_FUNCTION_H
+		void append(const VectorType& appVec);
 		
 		INLINE_FUNCTION_H
 		auto getSpan();
@@ -286,11 +320,16 @@ public:
 		auto getSpan()const;
 		
 		INLINE_FUNCTION_H
-		bool insertSetElement(uint32IndexContainer indices, const T& val);
+		bool insertSetElement(const uint32IndexContainer& indices, const T& val);
 		
 		INLINE_FUNCTION_H
-		bool insertSetElement(uint32IndexContainer indices, const std::vector<T>& vals);
+		bool insertSetElement(const uint32IndexContainer& indices, const std::vector<T>& vals);
 		
+		INLINE_FUNCTION_H
+		bool insertSetElement(
+			const uint32IndexContainer& indices, 
+			const ViewType1D<T, memory_space> vals);
+
 		INLINE_FUNCTION_H
 		bool reorderItems(uint32IndexContainer indices);
 
@@ -385,7 +424,6 @@ public:
 		{
 			std::vector<T> vecFromFile;
 			if(! readStdVector(is, vecFromFile, iop)) return false;
-
 			this->assign(vecFromFile);
 
 			return true;
@@ -395,7 +433,7 @@ public:
 		FUNCTION_H
 		bool write(iOstream& os, const IOPattern& iop)const
 		{
-			auto hVec = hostVector();
+			auto hVec = hostView();
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
 			
 			return writeSpan(os, sp, iop);
@@ -405,7 +443,7 @@ public:
 		FUNCTION_H
 		bool write(iOstream& os)const
 		{
-			auto hVec = hostVector();
+			auto hVec = hostView();
 			auto sp = span<T>( const_cast<T*>(hVec.data()), hVec.size());
 			
 			return writeSpan(os, sp);
@@ -416,7 +454,7 @@ public:
 		FUNCTION_H
 		bool write(iOstream& os, const IOPattern& iop, const HostMask& mask)const
 		{
-			auto hVec = hostVector();
+			auto hVec = hostView();
 			
 			auto numActive = mask.numActive();
 			std::vector<T> finalField;
@@ -484,7 +522,8 @@ inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& 
 #endif //__VectorSingle_hpp__
 
 
-/*INLINE_FUNCTION_H
+/*
+INLINE_FUNCTION_H
 		bool append(const deviceViewType1D<T>& dVec, size_t numElems)
 		{
 
@@ -510,5 +549,5 @@ inline iOstream& operator << (iOstream& os, const VectorSingle<T, MemorySpace>& 
 		INLINE_FUNCTION_H
 		bool append(const VectorSingle& Vec)
 		{
-			return append(Vec.deviceVector(), Vec.size());
+			return append(Vec.deviceView(), Vec.size());
 		}*/

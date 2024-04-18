@@ -45,7 +45,7 @@ public:
 	//// - Constructors
 	
 	/// From file path and format 
-	oFstream (const fileSystem& path, bool binary = false);
+	oFstream (const fileSystem& path, bool binary = false, bool append = false);
 
 	/// No copy constructor
 	oFstream( const oFstream& src) = delete;

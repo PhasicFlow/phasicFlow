@@ -18,55 +18,42 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #include "property.hpp"
 #include "dictionary.hpp"
 
-bool pFlow::property::readDictionary
-(
-	const dictionary& dict
-)
+bool pFlow::property::readDictionary()
 {
 	
-	materials_ = dict.getVal<wordVector>("materials");
+	materials_ = getVal<wordVector>("materials");
 	
-	densities_ = dict.getVal<realVector>("densities");
+	densities_ = getVal<realVector>("densities");
 
 	if(materials_.size() != densities_.size() )
 	{
 		fatalErrorInFunction<<
 		"  number of elements in material ("<<materials_.size()<<
 		") is not equal to number of elements in densities ("<<densities_.size()<<
-		") in dictionary "<< dict.globalName()<<endl;
+		") in dictionary "<< globalName()<<endl;
 		return false;
 	}
 
-	if(!makeNameIndex())
-	{
-		fatalErrorInFunction<<
-		"  error in dictionary "<< dict.globalName()<<endl;
-		return false;
-	}
 	return true;
 }
 
-bool pFlow::property::writeDictionary
-(
-	dictionary& dict
-)const
+bool pFlow::property::writeDictionary()
 {
 
-	if(!dict.add("materials", materials_))
+	if(!add("materials", materials_))
 	{
 		fatalErrorInFunction<<
-		"  error in writing materials to dictionary "<< dict.globalName()<<endl;
+		"  error in writing materials to dictionary "<< globalName()<<endl;
 		return false;
 	}
 
-	if(!dict.add("densities", densities_))
+	if(!add("densities", densities_))
 	{
 		fatalErrorInFunction<<
-		"  error in writing densities to dictionary "<< dict.globalName()<<endl;
+		"  error in writing densities to dictionary "<< globalName()<<endl;
 		return false;
 	}
 
@@ -77,79 +64,120 @@ bool pFlow::property::makeNameIndex()
 {
 	nameIndex_.clear();
 
+
 	uint32 i=0;
-	for(auto& nm:materials_)
+	for(auto const& nm:materials_)
 	{
-		if(!nameIndex_.insertIf(nm, i++))
+		if(!nameIndex_.insertIf(nm, i))
 		{
 			fatalErrorInFunction<<
 			"  repeated material name in the list of materials: " << materials_;
 			return false;
 		}
+		i++;
 	}
 	nameIndex_.rehash(0);
-	numMaterials_ = materials_.size();
+	numMaterials_ = static_cast<uint32>(materials_.size());
 	return true;
 }
 
 
 pFlow::property::property
 (
+	const word& fileName, 
 	const wordVector& materials,
-	const realVector& densities
+	const realVector& densities,
+	repository* owner
 )
 :
+	fileDictionary
+	(
+		objectFile
+		(
+			fileName,
+			"",
+			objectFile::READ_NEVER,
+			objectFile::WRITE_NEVER
+		),
+		owner
+	),
 	materials_(materials),
 	densities_(densities)
 {
+	
+	if(!writeDictionary())
+	{
+		fatalExit;
+	}
+
 	if(!makeNameIndex())
 	{
 		fatalErrorInFunction<<
-		"  error in the input parameters of constructor. \n";
+		"error in the input parameters of constructor. \n";
 		fatalExit;
 	}
 }
 
 pFlow::property::property
 (
-const fileSystem& file
+	const word& fileName,
+	repository* owner
 )
 :
-	dict_
+	fileDictionary
 	(
-		makeUnique<dictionary>
-		("property", true)
-	)
-{
-	iFstream dictStream(file);
-
-	if(!dict_().read(dictStream))
-	{
-		ioErrorInFile(dictStream.name(), dictStream.lineNumber());
-		fatalExit;
-	}
-
-	if(!readDictionary(dict_()))
-	{
-		fatalExit;
-	}
-
-}
-
-pFlow::property::property
-(
-	const dictionary& dict
-)
-:
-	dict_
-	(
-		makeUnique<dictionary>(dict)
+		objectFile
+		(
+			fileName,
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_NEVER
+		),
+		owner
 	)
 {
 	
-	if(!readDictionary(dict_()))
+	if(!readDictionary())
 	{
 		fatalExit;
 	}
+
+	if(!makeNameIndex())
+	{
+		fatalErrorInFunction<<
+		"error in dictionary "<< globalName()<<endl;
+		fatalExit;
+	}
+
 }
 
+pFlow::property::property
+(
+	const word &fileName, 
+	const fileSystem &dir
+)
+:
+	fileDictionary
+	(
+		objectFile
+		(
+			fileName,
+			dir,
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_NEVER
+		),
+		nullptr
+	)
+{
+	if(!readDictionary())
+	{
+		fatalExit;
+	}
+
+	if(!makeNameIndex())
+	{
+		fatalErrorInFunction<<
+		"error in dictionary "<< globalName()<<endl;
+		fatalExit;
+	}
+}

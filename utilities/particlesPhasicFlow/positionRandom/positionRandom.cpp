@@ -20,141 +20,81 @@ Licence:
 
 
 #include "positionRandom.hpp"
-#include "uniformRandomReal.hpp"
-#include "NBSLevel0.hpp"
-#include "unsortedPairs.hpp"
-#include "box.hpp"
+#include "collisionCheck.hpp"
 
 
 
-namespace pFlow
+bool pFlow::positionRandom::positionOnePass(collisionCheck& collCheck)
 {
 
-using SearchType = NBSLevel0<DefaultExecutionSpace> ;
-using ContainerType = unsortedPairs<DefaultExecutionSpace, int32>;
+	auto const& region = pRegion();
+	
+	auto n = static_cast<uint32>(position_.size());
 
-
-
-int32 findCollisions(
-		ContainerType& pairs,
-		int32Vector_HD& flags);
-
-int32 findCollisions(int32 num, realx3Vector_HD& points, real diam)
-{
-	int32 res =0;
-	for(auto i=0; i<num;i++)
+	for(uint32 iter = 0; iter<numPoints_; iter++)
 	{
-		for(auto j=i+1; j<num; j++)
+		realx3 p = region.peek();
+
+		if( collCheck.checkPoint(p, diameter_) )
 		{
-			if(sphereSphereCheck(points[i],points[j],diam,diam))res++;
-		}
-	}
-
-	return res;
-}
-
-}
-
-
-bool pFlow::positionRandom::positionOnePass(int32 pass, int32 startNum)
-{
-
-	realVector_D diameter(startNum , diameter_);
-	int32Vector_HD  flagHD(startNum, 0);
-	realx3Vector_HD positionHD(startNum);
-	
-	auto minP = region_->minPoint();
-	auto maxP = region_->maxPoint();
-
-	SearchType search(
-					box(minP, maxP),
-					diameter_,
-					positionHD.deviceVectorAll(),
-					diameter.deviceVectorAll());
-
-	ContainerType pairs(3*startNum);
-		
-	REPORT(1)<< "Positioning "<<
-		greenText("(Pass #"<< pass+1<<")")<< 
-		": started with "<< startNum <<" points."<<endREPORT;
-	
-	fillPoints(startNum, positionHD, flagHD);
-		
-	search.broadSearch(pairs, range(0, startNum));
-
-	
-	int32 numCollisions = findCollisions(pairs, flagHD);
-	
-	
-	REPORT(2)<< "Positioned " << cyanText(startNum - numCollisions) <<
-	" without collision \n"<<endREPORT; 
-
-	if(startNum-numCollisions >= numPoints_ )
-	{
-		
-		REPORT(1)<<"Selected "<< cyanText(numPoints_)<< " for the final field.\n"<<endREPORT;
-
-		positionHD.syncViews();
-		position_.clear();
-		int32 n=0;
-		for(int32 i=0; i<startNum; i++)
-		{
-			if(flagHD[i] == 0 )
-			{
-				position_.push_back( positionHD[i]);
-				n++;
-				if(n==numPoints_)break;	
-			}
+			position_.push_back(p);
+			diameters_.push_back(diameter_);
 			
+			if(!collCheck.mapLastAddedParticle())
+			{
+				fatalErrorInFunction;
+				return false;
+			}
+			n++;
+
+			if(n == numPoints_) break;
 		}
-		
-		return true;
 	}
 	
-	
-	return false;
-	
-	
+	return true;	
 }
 
 bool pFlow::positionRandom::positionPointsRandom()
 {
 	
 	position_.clear();
-
+	diameters_.clear();
 	if(numPoints_ == 0)return true;
 	
-	size_t pass = 0;
-	int32 startNum = numPoints_;
+	uint32 pass = 0;
+	collisionCheck collCheck(
+		box(pRegion().minPoint(), pRegion().maxPoint()),
+		diameter_,
+		position_,
+		diameters_);
+	
 
 	while ( pass <maxIterations_)
 	{
-		if( positionOnePass(pass, startNum) )return true;
-		startNum = 1.1*startNum+1;
+		if( !positionOnePass(collCheck) )
+		{
+			return false;
+		}
 		pass++;
+		REPORT(1)<<"Positioning "<< Green_Text("(Pass #"<< pass<<")")<<
+		": number of non-colliding spheres is "<<
+		Yellow_Text(position_.size())<<END_REPORT;
+
+		if( position_.size() == numPoints_ ) 
+		{
+			REPORT(0)<<END_REPORT;
+			return true;
+		}
 	}	
 	
-	
 	fatalErrorInFunction<< 
-	"  cannot position "<< numPoints_ << " in the domain in " << maxIterations_ << " iterations.\n" <<
+	"  Cannot position "<< numPoints_ << " in the domain in " <<
+	maxIterations_ << " iterations.\n" <<
 	"  you may increase maxIterations for positioning points.\n";
 
 	return false;
 }
 
-bool pFlow::positionRandom::inCollision
-(
-	const realx3 &cntr,
-	real diam
-)
-{
-	for(const auto& cp: position_)
-	{
-		if( length(cp-cntr) <= diam ) return true;
-	}
-
-	return false;
-}
 
 pFlow::positionRandom::positionRandom
 (
@@ -165,7 +105,7 @@ pFlow::positionRandom::positionRandom
 	positionParticles(control, dict),
 	prDict_
 	(  
-		dict.subDict("positionRandomInfo")
+		dict.subDict("randomInfo")
 	),
 	diameter_
 	(
@@ -173,107 +113,35 @@ pFlow::positionRandom::positionRandom
 	),
 	numPoints_
 	(
-		prDict_.getVal<size_t>("numPoints")
+		prDict_.getVal<uint32>("numPoints")
 	),
 	maxIterations_
 	(
-		prDict_.getValOrSet("maxIterations", 10)
+		prDict_.getValOrSet("maxIterations", 10u)
 	),
 	position_
 	(
-		maxNumberOfParticles_, RESERVE()
+		"position",
+		maxNumberOfParticles(),
+		0,
+		RESERVE()
+	),
+	diameters_
+	(
+		"diameters",
+		maxNumberOfParticles(),
+		0,
+		RESERVE()
 	)
 {
 
-	reportInterval_ = max(numPoints_/numReports_, static_cast<size_t>(2));
+	reportInterval_ = max(numPoints_/numReports_, static_cast<uint32>(2));
 
 	if( !positionPointsRandom() )
 	{
 		fatalExit;
 	}
 
-	if(!region_)
-	{
-		fatalErrorInFunction<<"You must provided a region (box, cylinder, ...) for positioning particles in dictionary "<<
-		dict.globalName()<<endl;
-		fatalExit;
-	}
-
-}
-
-void pFlow::positionRandom::fillPoints(
-	uint numPoints,
-	realx3Vector_HD& points,
-	int32Vector_HD& flags )
-{
-
-	uniformRandomReal rand;
-	
-	auto minP = region_().minPoint();
-	auto maxP = region_().maxPoint();
-
-	for(size_t i=0; i<numPoints; i++)
-	{
-		if(flags[i] == 0)
-		{
-			bool loop=true;
-			size_t n=0;
-			while (loop)
-			{
-
-				auto pos = rand(minP, maxP);
-				if( region_().isInside(pos))
-				{
-					points[i] =pos;
-					loop = false;		
-				}
-				n++;
-
-				if(n>100)
-				{
-					fatalErrorInFunction<< 
-					"could not find a point inside region"<<region_->name()<<endl;
-					fatalExit;
-				}
-				
-			}
-			
-		}
-	}
-	points.modifyOnHost();
-	points.syncViews();
-}
-
-pFlow::int32 pFlow::findCollisions(
-		ContainerType& pairs,
-		int32Vector_HD& flags)
-{
-	auto allPairs = pairs.getPairs();
-	auto num = pairs.capacity();
-	auto dFlags = flags.deviceVector();
-	
-
-	int32 numCollisions = 0;
-
-	Kokkos::parallel_reduce(
-		"positionRandom::findCollisions",
-		num,
-		LAMBDA_HD(int32 i, int32& valueToUpdate){
-			if(allPairs.isValid(i))
-			{
-				auto pair = allPairs.getPair(i);
-				if( dFlags[pair.first] ==0 )
-				{
-					dFlags[pair.first] = 1;
-					valueToUpdate++;	
-				}
-			}
-		}, numCollisions);
-
-	flags.modifyOnDevice();
-	flags.syncViews();	
-
-	return numCollisions;
 }
 
 

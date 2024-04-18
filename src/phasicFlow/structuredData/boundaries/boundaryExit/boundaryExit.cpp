@@ -19,36 +19,79 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "boundaryExit.hpp"
+#include "internalPoints.hpp"
 #include "dictionary.hpp"
+
 
 pFlow::boundaryExit::boundaryExit
 (
-	const dictionary& dict,
-	const plane&      bplane,
-	internalPoints&   internal
+	const dictionary &dict,
+    const plane 	&bplane,
+    internalPoints 	&internal,
+	boundaryList	&bndrs,
+	uint32 			thisIndex
 )
 :
-	boundaryBase(dict, bplane, internal)
+	boundaryBase(dict, bplane, internal, bndrs, thisIndex)
 {
 	exitMarginLength_ = max( 
-		dict.getValOrSet("exitMarginLength",0.0), 0.0);
+		dict.getValOrSet("exitMarginLength",(real)0.0), (real)0.0);
 	checkForExitInterval_ = max(
 		dict.getValOrSet("checkForExitInterval", 1), 1);
 }
 
-bool pFlow::boundaryExit::beforeIteratoin
+bool pFlow::boundaryExit::beforeIteration
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
-	return true;
+	// nothing have to be done
+	if(empty())
+	{
+		return true;
+	}
+
+	uint32 s = size();
+	uint32Vector_D deleteFlags("deleteFlags",s+1, s+1, RESERVE());
+	deleteFlags.fill(0u);
+
+	const auto& deleteD = deleteFlags.deviceViewAll();
+	auto points = thisPoints();
+	auto p = boundaryPlane().infPlane();
+
+	uint32 numDeleted = 0;	
+
+	Kokkos::parallel_reduce
+	(
+		"boundaryExit::beforeIteration",
+		deviceRPolicyStatic(0,s),
+		LAMBDA_HD(uint32 i, uint32& delToUpdate)
+		{
+			if(p.pointInNegativeSide(points(i)))
+			{
+				deleteD(i)=1;
+				delToUpdate++;
+			}
+		}, 
+		numDeleted
+	);
+		
+	// no point is deleted
+	if(numDeleted == 0 )
+	{
+		return true;
+	}
+
+	return this->removeIndices(numDeleted, deleteFlags);
 }
 
 bool pFlow::boundaryExit::iterate
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;
@@ -57,7 +100,8 @@ bool pFlow::boundaryExit::iterate
 bool pFlow::boundaryExit::afterIteration
 (
 	uint32 iterNum, 
-	real t
+	real t,
+	real dt
 )
 {
 	return true;

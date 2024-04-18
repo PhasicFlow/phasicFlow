@@ -19,11 +19,11 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 //
-REPORT(0)<<"\nReading sphere particles . . ."<<endREPORT;
+REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
 sphereParticles sphParticles(Control, proprties);
 
 //
-REPORT(0)<<"\nCreating particle insertion object . . ."<<endREPORT;
+REPORT(0)<<"\nCreating particle insertion object . . ."<<END_REPORT;
 /*auto& sphInsertion = 
 	Control.caseSetup().emplaceObject<sphereInsertion>(
 		objectFile(
@@ -37,11 +37,10 @@ REPORT(0)<<"\nCreating particle insertion object . . ."<<endREPORT;
 	);*/
 
 auto sphInsertion =  sphereInsertion(
-	Control.caseSetup().path()+insertionFile__, 
 	sphParticles, 
-	sphParticles.shapes());
+	sphParticles.spheres());
 
-REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
+REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<END_REPORT;
 auto interactionPtr = interaction::create(
 	Control,
 	sphParticles,

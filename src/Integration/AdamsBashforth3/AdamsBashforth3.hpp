@@ -160,9 +160,9 @@ bool pFlow::AdamsBashforth3::intRange(
 	realx3Vector_D& dy,
 	activeFunctor activeP )
 {
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
-	auto d_history = history_.deviceVectorAll();
+	auto d_dy = dy.deviceViewAll();
+	auto d_y  = y.deviceViewAll();
+	auto d_history = history_.deviceViewAll();
 	auto activeRng = activeP.activeRange();
 
 	Kokkos::parallel_for(

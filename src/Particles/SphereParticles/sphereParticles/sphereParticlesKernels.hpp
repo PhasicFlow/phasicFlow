@@ -21,56 +21,36 @@ Licence:
 #ifndef __sphereParticlesKernels_hpp__
 #define __sphereParticlesKernels_hpp__
 
+#include "types.hpp"
+#include "pointFlag.hpp"
+
 namespace pFlow::sphereParticlesKernels
 {
 
-using rpAcceleration = Kokkos::RangePolicy<
-			DefaultExecutionSpace,
-			Kokkos::Schedule<Kokkos::Static>,
-			Kokkos::IndexType<int32>
-			>;
-
-template<typename IncludeFunctionType>
-void acceleration( 
-	realx3		g,
-	deviceViewType1D<real>  	mass,
-	deviceViewType1D<realx3>  	force,
+void addMassDiamInertiaProp(
+    deviceViewType1D<uint32>    shapeIndex,
+    deviceViewType1D<real>  	mass,
+    deviceViewType1D<real>  	diameter,
 	deviceViewType1D<real>  	I,
-	deviceViewType1D<realx3>  	torque,
-	IncludeFunctionType 		incld,
-	deviceViewType1D<realx3> 	lAcc,
-	deviceViewType1D<realx3> 	rAcc
-	)
-{
+    deviceViewType1D<uint32>  	propertyId,
+    pFlagTypeDevice 		    incld,
+    deviceViewType1D<real>  	src_mass,
+	deviceViewType1D<real>  	src_diameter,
+	deviceViewType1D<real>  	src_I,
+    deviceViewType1D<uint32>  	src_propertyId
+);
 
-	auto activeRange = incld.activeRange();
-	if(incld.allActive())
-	{
-		Kokkos::parallel_for(
-		"pFlow::sphereParticlesKernels::acceleration",
-		rpAcceleration(activeRange.first, activeRange.second),
-		LAMBDA_HD(int32 i){
-				lAcc[i] = force[i]/mass[i] + g;
-				rAcc[i] = torque[i]/I[i];
-		});
-	}
-	else
-	{
-		Kokkos::parallel_for(
-		"pFlow::sphereParticlesKernels::acceleration",
-		rpAcceleration(activeRange.first, activeRange.second),
-		LAMBDA_HD(int32 i){
-			if(incld(i))
-			{
-				lAcc[i] = force[i]/mass[i] + g;
-				rAcc[i] = torque[i]/I[i];
-			}
-		});
+void acceleration( 
+	const realx3&					g,
+	const deviceViewType1D<real>&  	mass,
+	const deviceViewType1D<realx3>& force,
+	const deviceViewType1D<real>&  	I,
+	const deviceViewType1D<realx3>& torque,
+	const pFlagTypeDevice& 		    incld,
+	deviceViewType1D<realx3>  		lAcc,
+	deviceViewType1D<realx3>  		rAcc
+);
 
-	}
-	
-	Kokkos::fence();
-}
 
 }
 

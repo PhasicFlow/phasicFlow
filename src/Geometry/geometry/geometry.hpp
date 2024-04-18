@@ -23,13 +23,14 @@ Licence:
 
 
 #include "virtualConstructor.hpp"
-#include "demGeometry.hpp"
+#include "demComponent.hpp"
 #include "property.hpp"
-#include "Fields.hpp"
-#include "Vectors.hpp"
 #include "multiTriSurface.hpp"
 #include "triSurfaceFields.hpp"
-#include "dictionary.hpp"
+//#include "Fields.hpp"
+//#include "Vectors.hpp"
+
+
 
 namespace pFlow
 {
@@ -42,49 +43,50 @@ namespace pFlow
  */
 class geometry
 :
-	public demGeometry
+	public multiTriSurface,
+	public demComponent
 {
-protected:
+private:
 
 	// - Protected members 
 
 		/// Const reference to physical property of materials 
 		const property& 	wallProperty_;
 
-		/// Repository to store geometry data at each simulation moment
-		repository&  		geometryRepository_;
-
-		/// All triangles in the set of wall surfaces 
-		multiTriSurface&  	triSurface_;
-
 		/// The name of motion component of each wall surface 
-		wordField& 			motionComponentName_;
+		wordField_H 		motionComponentName_{
+								"motionComponentName",	
+								"motionComponentName"};
 
 		/// Material name of each wall surface  
-		wordField&   		materialName_;
+		wordField_H   		materialName_{
+								"materialName",
+								"materialName"};
 		
 		/// Property id of each triangle in the set of wall surfaces
-		int8TriSurfaceField_D& 		propertyId_;
+		uint32TriSurfaceField_D 		propertyId_;
 
 		/// Contact force on each triangle in the set of wall surfaces
-		realx3TriSurfaceField_D& 	contactForceWall_;
+		realx3TriSurfaceField_D 		contactForceWall_;
 
-		/// Stress on ech triangle in the set of wall surfaces 
-		realx3TriSurfaceField_D&    stressWall_;
+		/// Stress on each triangle in the set of wall surfaces 
+		realx3TriSurfaceField_D 		normalStressWall_;
+
+		/// Stress on each triangle in the set of wall surfaces 
+		realx3TriSurfaceField_D 		shearStressWall_;
+
+
+		bool readWholeObject_ = true; 			
 
 	// - Protected member functions
 	
 		/// Find property id of each triangle based on the supplied material name
 		/// and the surface wall that the triangle belongs to. 
-		bool findPropertyId();
+		bool createPropertyId();
 
 		/// Initialize contact force to zero 
-		void zeroForce()
-		{
-			contactForceWall_.fill(zero3);
-		}
-
-
+		void zeroForce();
+		
 public:
 
 	/// Type info
@@ -95,8 +97,15 @@ public:
 		/// Construct from controlSystem and property, for reading from file
 		geometry(systemControl& control, const property& prop);
 
+		geometry(systemControl& control, 
+			const property& prop,
+			multiTriSurface& surf,
+			const wordVector& motionCompName,
+			const wordVector& materialName,
+			const dictionary& motionDict);
+
 		/// Construct from components
-		geometry(systemControl& control,
+		/*geometry(systemControl& control,
 				 const property& prop,
 				 const multiTriSurface& triSurface,
 				 const wordVector& motionCompName,
@@ -110,10 +119,10 @@ public:
 				 const dictionary& dict,
 				 const multiTriSurface& triSurface,
 				 const wordVector& motionCompName,
-				 const wordVector& propName);
+				 const wordVector& propName);*/
 
 		/// Destructor
-		virtual ~geometry() = default;
+		~geometry()override = default;
 
 		/// Virtual constructor 
 		create_vCtor
@@ -132,82 +141,42 @@ public:
 		(
 			geometry,
 			dictionary,
-			(systemControl& control,
-			 const property& prop,
-			 const dictionary& dict,
-			 const multiTriSurface& triSurface,
-			 const wordVector& motionCompName,
-			 const wordVector& propName),
-			(control, prop, dict, triSurface, motionCompName, propName)
+			(
+				systemControl& control, 
+				const property& prop,
+				multiTriSurface& surf,
+				const wordVector& motionCompName,
+				const wordVector& materialName,
+				const dictionary& motionDic),
+			(control, prop, surf, motionCompName, materialName, motionDic)
 		);
 
-	//- Methods 
-
-		/// Size of tri-surface 
-		inline
-		auto size()const
+	//- Methods 	
+		inline 
+		const auto& motionComponentName()const
 		{
-			return triSurface_.size();
+			return motionComponentName_;
 		}
-
-		/// Number of points in the set of surface walls 
-		inline
-		auto numPoints()const
-		{
-			return triSurface_.numPoints();
-		}
-
-		/// Number of triangles in the set of surface walls 
-		inline
-		auto numTriangles()const
-		{
-			return size();
-		}
-
-		/// Access to the points
-		inline
-		const auto& points()const
-		{
-			return triSurface_.points();
-		}
-
-		/// Access to the vertices 
-		inline
-		const auto& vertices()const
-		{
-			return triSurface_.vertices();
-		}
-
-		/// Obtain an object for accessing triangles 
-		inline auto getTriangleAccessor()const
-		{
-			return triSurface_.getTriangleAccessor();
-		}
-
-		/// Surface 
-		inline auto& surface()
-		{
-			return triSurface_;
-		}
-
-		/// Surface 
-		inline const auto& surface()const
-		{
-			return triSurface_;
-		}
-
+		
 		/// Access to contact force
 		inline
-		realx3TriSurfaceField_D& contactForceWall()
+		auto& contactForceWall()
 		{
 			return contactForceWall_;
 		}
 
 		/// Access to contact force
 		inline
-		const realx3TriSurfaceField_D& contactForceWall() const
+		const auto& contactForceWall() const
 		{
 			return contactForceWall_;
+		}
+
+		/// Property ide of triangles 
+		inline
+		const auto& propertyId()const
+		{
+			return propertyId_;
 		}
 
 		/// Access to property 
@@ -216,72 +185,52 @@ public:
 			return wallProperty_;
 		}
 
-		/// Owner repository
-		inline
-		const repository& owner()const
-		{
-			return geometryRepository_;
-		}
-
-		/// Owner repository
-		inline
-		repository& owner()
-		{
-			return geometryRepository_;
-		}
-
-		/// Path to the repository folder 
-		inline auto path()
-		{
-			return owner().path();
-		}
-
 		/// The name of motion model 
 		virtual 
 		word motionModelTypeName()const = 0;
 
 		/// Motion model index of triangles 
 		virtual
-		const int8Vector_HD& 			triMotionIndex() const =0;
+		const uint32Field_D& triMotionIndex() const =0;
 
 		/// Motion model index of points 
 		virtual 
-		const int8Vector_HD& 			pointMotionIndex()const = 0;
+		const uint32Field_D& pointMotionIndex()const = 0;
 
-		/// Property ide of triangles 
-		const int8TriSurfaceField_D& 	propertyId() const
-		{
-			return propertyId_;
-		}
-
-		/// Operations before each iteration 
+		
 		bool beforeIteration() override;
-
-		/// Operations after each iteration
+		
+		/// This is called in time loop. Perform the main calculations 
+		/// when the component should evolve along time.
+		bool iterate() override;
+		
+		/// This is called in time loop, after iterate.
 		bool afterIteration() override;
-
+		
 	//- IO
 
+		bool read(iIstream& is, const IOPattern& iop) override;
+
 		/// write 
-		bool write()const
-		{
-			return owner().write();
-		}
+		bool write( iOstream& os, const IOPattern& iop )const override;
+		
 
 
 	//- Static members 
 
 		static
-		uniquePtr<geometry> create(systemControl& control, const property& prop);
+		uniquePtr<geometry> create(
+			systemControl& control, 
+			const property& prop);
 
 		static
 		uniquePtr<geometry> create(
-				systemControl& control,
-				const property& prop,
-				const dictionary& dict,
-				const multiTriSurface& triSurface,
-				const wordVector& motionCompName,
-				const wordVector& propName);
+			systemControl& control, 
+			const property& prop,
+			multiTriSurface& surf,
+			const wordVector& motionCompName,
+			const wordVector& materialName,
+			const dictionary& motionDic);
 
 };
 

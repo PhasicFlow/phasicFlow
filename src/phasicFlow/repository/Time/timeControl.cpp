@@ -117,6 +117,15 @@ pFlow::timeControl::timeControl(
 	checkForOutputToFile();
 }
 
+pFlow::real pFlow::timeControl::setTime(real t)
+{
+	real tmp = currentTime_;
+	currentTime_ = t;
+	lastSaved_ = t;
+	checkForOutputToFile();
+	return tmp;
+}
+
 pFlow::word pFlow::timeControl::timeName()const
 {
 	if(managedExternaly_)
@@ -167,14 +176,12 @@ void pFlow::timeControl::checkForOutputToFile()
 	}
 
 	outputToFile_ = save;
-
-
 }
 
 bool pFlow::timeControl::timersReportTime()const
 {
 	if(currentIter_<=1)return false;
-	return timersReportInterval_.isMember(currentTime_, dt_);
+	return timersReportInterval_.isMember(currentTime_, 0.55*dt_);
 }
 
 bool pFlow::timeControl::sortTime()const

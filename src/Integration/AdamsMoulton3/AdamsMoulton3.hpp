@@ -144,11 +144,11 @@ bool AdamsMoulton3::predictRange(
 	realx3Vector_D& dy,
 	activeFunctor activeP)
 {
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
-	auto d_y0 = y0_.deviceVectorAll();
-	auto d_dy0 = dy0_.deviceVectorAll();
-	auto d_dy1= dy1_.deviceVectorAll();
+	auto d_dy = dy.deviceViewAll();
+	auto d_y  = y.deviceViewAll();
+	auto d_y0 = y0_.deviceViewAll();
+	auto d_dy0 = dy0_.deviceViewAll();
+	auto d_dy1= dy1_.deviceViewAll();
 	
 	auto activeRng = activeP.activeRange();
 
@@ -182,12 +182,12 @@ bool pFlow::AdamsMoulton3::intRange(
 	activeFunctor activeP)
 {
 
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
+	auto d_dy = dy.deviceViewAll();
+	auto d_y  = y.deviceViewAll();
 
-	auto d_dy0 = dy0_.deviceVectorAll();
-	auto d_y0  = y0_.deviceVectorAll();
-	auto d_dy1 = dy1_.deviceVectorAll();
+	auto d_dy0 = dy0_.deviceViewAll();
+	auto d_y0  = y0_.deviceViewAll();
+	auto d_dy1 = dy1_.deviceViewAll();
 
 	auto activeRng = activeP.activeRange();
 

@@ -31,9 +31,9 @@ Licence:
 #include "types.hpp"
 #include "Time.hpp"
 #include "fileDictionary.hpp"
-#include "box.hpp"
 #include "Timers.hpp"
 #include "dynamicLinkLibs.hpp"
+#include "Set.hpp"
 
 namespace pFlow
 {
@@ -79,7 +79,12 @@ protected:
 
 	Timer 			writeToFileTimer_;
 
-    //bool readDomainDict();
+	wordSet 		includeList_;
+
+	wordSet 		excludeList_;
+    
+	
+	bool readIncludeExclue(const dictionary& dict);
 
 	static word getRunName( const fileSystem& path);
 	
@@ -170,11 +175,6 @@ public:
 		return settingsDict_().getVal<realx3>("g");
 	}
 
-	/*inline box domain()
-	{
-		return box(domainDict().subDict("globalBox"));
-	}*/
-
 	bool operator ++(int);
 
 	void setSaveTimeFolder(
@@ -187,6 +187,36 @@ public:
 	size_t outFilePrecision() const override
 	{
 		return outFilePrecision_;
+	}
+
+	
+	bool isIncluded(const word& objName)const final
+	{
+		return includeList_.count(objName) == static_cast<size_t>(1);
+	}
+
+	
+	bool isExcluded(const word& objName)const final
+	{
+		return excludeList_.count(objName) == static_cast<size_t>(1);
+	}
+
+	void clearIncludeExclude()
+	{
+		includeList_.clear();
+		excludeList_.clear();
+	}
+
+	bool addInclude(const word& objName)
+	{
+		auto [iter, success] = includeList_.insert(objName);
+		return success;
+	}
+
+	bool addExclude(const word& objName)
+	{
+		auto [ite, success] = excludeList_.insert(objName);
+		return success;
 	}
 
 };

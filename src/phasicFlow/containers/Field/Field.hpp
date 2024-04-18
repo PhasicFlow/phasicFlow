@@ -82,7 +82,11 @@ public:
 			VectorType()
 		{}
 
-		
+		Field(const word& name)
+		:
+			VectorType(name)
+		{}
+
 		/// Construct an empty field with name and fieldKey 
 		Field(const word& name, const word& fieldKey)
 		:
@@ -105,6 +109,14 @@ public:
 			VectorType(name, len, val),
 			fieldKey_(fieldKey)
 		{}
+
+		Field(const word& name, const word& fieldKey, size_t capacity, size_t len, const T& val)
+		:
+			VectorType(name, len, len, RESERVE()),
+			fieldKey_(fieldKey)
+		{
+			VectorType::fill(val);
+		}
 
 		/// Construct a field with name, fieldKey, capacity and len
 		Field(const word& name, const word& fieldKey, size_t capacity, size_t len, RESERVE)
@@ -158,20 +170,6 @@ public:
 		/// Move assignment 
 		FieldType& operator = (FieldType&&) = default;
 
-		/// clone as a uniquePtr
-		INLINE_FUNCTION_H
-		uniquePtr<FieldType> clone() const
-		{
-			return makeUnique<FieldType>(*this);
-		}
-
-		/// clone as a raw pointer 
-		INLINE_FUNCTION_H
-		FieldType* clonePtr()const
-		{
-			return new FieldType(*this);
-		}
-
 	//// - Methods
 
 		/// return field key
@@ -184,7 +182,18 @@ public:
 		{
 			return VectorType::name();
 		}
-	
+
+
+		void fillField(rangeU32 span, const T& val)
+		{
+			this->fill(span, val);
+		}
+
+		void fillField(const T& val)
+		{
+			this->fill(val);
+		}
+		
 	//// - IO operations 
 		
 		bool read(iIstream& is);

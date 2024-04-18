@@ -30,15 +30,15 @@ namespace pFlow::algorithms::KOKKOS
 
 template<typename Type, typename ExecutionSpace>
 INLINE_FUNCTION_H
-int32 count(const Type* first, int32 numElems, const Type& val)
+uint32 count(const Type* first, uint32 numElems, const Type& val)
 {
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
-	int32 num = 0;
+			Kokkos::IndexType<uint32> >;
+	uint32 num = 0;
 	Kokkos::parallel_reduce("count",
 							policy(0, numElems),
-							LAMBDA_HD(int32 i, int32& updateVal){
+							LAMBDA_HD(uint32 i, uint32& updateVal){
 								if(equal(first[i],val)) updateVal++;
 							},
 							num);
@@ -50,17 +50,17 @@ int32 count(const Type* first, int32 numElems, const Type& val)
 
 template<typename Type, typename ExecutionSpace>
 INLINE_FUNCTION_H
-void fillSequence(Type* first, int32 numElems, const Type& firstVal)
+void fillSequence(Type* first, uint32 numElems, const Type& firstVal)
 {
 	
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
+			Kokkos::IndexType<uint32> >;
 
 	Kokkos::parallel_for(
 		"fillSequence",
 		policy(0, numElems),
-		LAMBDA_HD(int32 i){ 
+		LAMBDA_HD(uint32 i){ 
 			first[i] = firstVal+i;
 		});
 	Kokkos::fence();
@@ -68,15 +68,15 @@ void fillSequence(Type* first, int32 numElems, const Type& firstVal)
 
 template<typename Type, typename indexType, typename ExecutionSpace>
 INLINE_FUNCTION_H
-void fillSelected(Type* first, const indexType* indices, const int32 numElems, const Type val)
+void fillSelected(Type* first, const indexType* indices, const uint32 numElems, const Type val)
 {
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
+			Kokkos::IndexType<uint32> >;
 	Kokkos::parallel_for(
 		"fillSelected",
 		policy(0,numElems),
-		LAMBDA_HD(int32 i){
+		LAMBDA_HD(uint32 i){
 			first[indices[i]]= val;
 		});
 	Kokkos::fence();
@@ -84,16 +84,16 @@ void fillSelected(Type* first, const indexType* indices, const int32 numElems, c
 
 template<typename Type, typename indexType, typename ExecutionSpace>
 INLINE_FUNCTION_H
-void fillSelected(Type* first, const indexType* indices, const Type* vals, const int32 numElems)
+void fillSelected(Type* first, const indexType* indices, const Type* vals, const uint32 numElems)
 {
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
+			Kokkos::IndexType<uint32> >;
 
 	Kokkos::parallel_for(
 		"fillSelected",
 		policy(0,numElems),
-		LAMBDA_HD(int32 i){
+		LAMBDA_HD(uint32 i){
 			first[indices[i]]= vals[i];
 		});
 	Kokkos::fence();
@@ -101,17 +101,17 @@ void fillSelected(Type* first, const indexType* indices, const Type* vals, const
 
 template<typename Type, typename ExecutionSpace>
 INLINE_FUNCTION_H
-Type max(const Type* first, int32 numElems)
+Type max(const Type* first, uint32 numElems)
 {
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
+			Kokkos::IndexType<uint32> >;
 	Type maxElement=0;
 
 	Kokkos::parallel_reduce(
 		"max",
 		policy(0, numElems),
-		LAMBDA_HD(int32 i, Type& maxUpdate){
+		LAMBDA_HD(uint32 i, Type& maxUpdate){
 			if(maxUpdate<first[i]) maxUpdate = first[i];
 		},
 		Kokkos::Max<Type>(maxElement));
@@ -144,38 +144,38 @@ Type min(const Type* first, int32 numElems)
 //void sort(Type* first, int32 numElems, CompareFunc compare);
 //void permuteSort(const Type* first, PermuteType* pFirst, int32 numElems);
 
-template<typename Type, typename DestType, typename ExecutionSpace>
-void exclusiveScan(Type* first, DestType* dFirst, int32 numElems)
+template<typename Type, typename ExecutionSpace>
+void exclusiveScan(Type* first, Type* dFirst, uint32 numElems)
 {	
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
+			Kokkos::IndexType<uint32> >;
 
 	Kokkos::parallel_scan(
 		"exclusiveScan",
 		policy(0, numElems),
-		LAMBDA_HD(const int32 i, DestType& valToUpdate, const bool final)
+		LAMBDA_HD(const uint32 i, Type& valToUpdate, const bool final)
 		{
-			const int32 val = first[i];
+			const Type val = first[i];
 			if(final)
 				dFirst[i] = valToUpdate;
 			valToUpdate += val;
 		});
 }
 
-template<typename Type, typename DestType, typename ExecutionSpace>
-void inclusiveScan(Type* first, DestType* dFirst, int32 numElems)
+template<typename Type, typename ExecutionSpace>
+void inclusiveScan(Type* first, Type* dFirst, uint32 numElems)
 {
 	using policy = Kokkos::RangePolicy<
 			ExecutionSpace,
-			Kokkos::IndexType<int32> >;
+			Kokkos::IndexType<uint32> >;
 
 	Kokkos::parallel_scan(
 		"inclusiveScan",
 		policy(0, numElems),
-		LAMBDA_HD(const int32 i, int32& valToUpdate, const bool final)
+		LAMBDA_HD(const uint32 i, Type& valToUpdate, const bool final)
 		{
-			const int32 val = first[i];
+			const Type val = first[i];
 			valToUpdate += val;
 			if(final)
 				dFirst[i] = valToUpdate;

@@ -21,8 +21,8 @@ Licence:
 #ifndef __shapeMixture_hpp__
 #define __shapeMixture_hpp__
 
-
 #include "Vectors.hpp"
+#include "Lists.hpp"
 
 namespace pFlow
 {
@@ -46,19 +46,21 @@ class dictionary;
  */
 class shapeMixture
 {
-protected:
+private:
 
 	/// List of shape names 
-	wordVector 		names_;
+	wordVector 		names_{"shapeNames"};
 
 	/// Number composition 
-	uint32Vector   	number_;
+	uint32Vector   	number_{"number"};
 
 	/// Number of inserted particles of each shape 
-	uint32Vector   	numberInserted_;
+	uint32Vector   	numberInserted_{"numberInserted"};
 
 	/// Current number of inserted
-	uint32Vector      current_;
+	uint32Vector    current_{"currentInserted"};
+
+	uint32 			lastPeaked_ = 0;
 
 public:
 
@@ -68,7 +70,7 @@ public:
 	// - Constrcutors 
 		
 		/// Construct from dictionary
-		shapeMixture(const dictionary & dict);
+		shapeMixture(const dictionary & dict, const wordList& validNames);
 
 		/// Copy
 		shapeMixture(const shapeMixture&) = default;
@@ -87,13 +89,6 @@ public:
 		{
 			return makeUnique<shapeMixture>(*this);
 		}
-
-		/// Polymorphic copy
-		shapeMixture* clonePtr()const
-		{
-			return new shapeMixture(*this);
-		}
-
 
 		/// Destructor 
 		~shapeMixture() = default;

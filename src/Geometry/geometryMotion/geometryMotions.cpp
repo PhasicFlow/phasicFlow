@@ -17,9 +17,13 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #include "geometryMotions.hpp"
 
-#ifdef BUILD_SHARED_LIBS
-#include "geometryMotionsInstantiate.cpp"
-#endif
+
+template class pFlow::geometryMotion<pFlow::vibratingMotion>;
+
+template class pFlow::geometryMotion<pFlow::rotatingAxisMotion>;
+
+template class pFlow::geometryMotion<pFlow::stationaryWall>;
+
+//template class pFlow::geometryMotion<pFlow::multiRotatingAxisMotion>;

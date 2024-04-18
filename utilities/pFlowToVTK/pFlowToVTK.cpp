@@ -18,29 +18,19 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "vocabs.hpp"
 #include "systemControl.hpp"
-#include "pointFieldToVTK.hpp"
-#include "triSurfaceFieldToVTK.hpp"
 #include "timeFolder.hpp"
 #include "commandLine.hpp"
 #include "ranges.hpp"
-#include "readControlDict.hpp"
+#include "Vectors.hpp"
+#include "phasicFlowKokkos.hpp"
+#include "pointFieldToVTK.hpp"
+#include "triSurfaceFieldToVTK.hpp"
+//#include "readControlDict.hpp"
 
 
-using pFlow::word;
-using pFlow::wordVector;
-using pFlow::geometryFolder__;
-using pFlow::timeFolder;
-using pFlow::fileSystem;
-using pFlow::wordList;
-using pFlow::IOfileHeader;
-using pFlow::objectFile;
-using pFlow::output;
-using pFlow::endl;
-using pFlow::multiTriSurface;
-using pFlow::commandLine;
-using pFlow::realCombinedRange;
+using namespace pFlow;
 
 int main(int argc, char** argv )
 {
@@ -52,7 +42,7 @@ int main(int argc, char** argv )
 		" date in time folders into vtk file format.");
 
 	wordVector times;
-		
+		 
 	bool noGoem = false;
 	cmds.add_flag(
 		"--no-geometry",
@@ -67,7 +57,13 @@ int main(int argc, char** argv )
 	cmds.addOption("-o,--out-folder",
 		outFolder,
 		"path to output folder of VTK",
-		"path");
+		"path"); 
+	
+	bool separateSurfaces = false;
+	cmds.add_flag(
+		"-s,--separate-surfaces",
+		separateSurfaces,
+		"use this when you want to have sub-surfaces in separate files");
 
 	wordVector fields;
 	bool 			 allFields = true;
@@ -82,7 +78,7 @@ int main(int argc, char** argv )
 		"a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end",
 		" ");
 
-	bool isCoupling = false;
+	//bool isCoupling = false;
 
 	if(!cmds.parse(argc, argv)) return 0;
 	
@@ -92,8 +88,8 @@ int main(int argc, char** argv )
 
 
 	timeFolder folders(Control);
-	fileSystem destFolder = fileSystem(outFolder)/geometryFolder__;
-	fileSystem destFolderField = fileSystem(outFolder);
+	auto destFolder = fileSystem(outFolder)/word(geometryFolder__);
+	auto destFolderField = fileSystem(outFolder);
 	wordList geomfiles{"triSurface"};
 
 
@@ -117,14 +113,15 @@ int main(int argc, char** argv )
 
 	do
 	{
-
+		Control.time().setTime(folders.time());
 		if( !validRange.isMember( folders.time() ) )continue;
 		
-		output<< "time: " << cyanText( folders.time() )<<" s" <<endl;
+		output<< "time: " << Cyan_Text( folders.time() )<<" s" <<endl;
 		if(!noGoem)
 		{	
-			fileSystem geomFolder = folders.folder()/geometryFolder__;
-			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(geomFolder, folders.time(), destFolder, "surface"))
+			
+			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
+				Control, destFolder, "surface", separateSurfaces))
 			{
 				fatalExit;
 				return 1;
@@ -137,19 +134,16 @@ int main(int argc, char** argv )
 			if(allFields)
 			{
 				if( !pFlow::PFtoVTK::convertTimeFolderPointFields(
-					folders.folder(),
-					folders.time(),
+					Control,
 					destFolderField,
-					"sphereFields" )
-				)
+					"sphereFields" ))
 				{
 					fatalExit;
 				}
 			}else
 			{
 				if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
-					folders.folder(),
-					folders.time(),
+					Control,
 					destFolderField,
 					"sphereFields",
 					fields,

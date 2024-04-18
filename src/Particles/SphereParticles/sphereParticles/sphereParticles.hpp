@@ -2,188 +2,217 @@
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
-   OOOOOOO     F luid flow       
+   OOOOOOO     F luid flow
 ------------------------------------------------------------------------------
   Copyright (C): www.cemf.ir
   email: hamid.r.norouzi AT gmail.com
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 Licence:
-  This file is part of phasicFlow code. It is a free software for simulating 
+  This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
-  the terms of GNU General Public License v3 or any other later versions. 
- 
-  phasicFlow is distributed to help others in their research in the field of 
+  the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-/** 
+/**
  * @class pFlow::sphereParticles
- *   
- * @brief Class for managing spherical particles 
- *  
+ *
+ * @brief Class for managing spherical particles
+ *
  * This is a top-level class that contains the essential components for
  * defining spherical prticles in a DEM simulation.
  */
 
 #ifndef __sphereParticles_hpp__
-#define __sphereParticles_hpp__ 
+#define __sphereParticles_hpp__
 
-#include "systemControl.hpp"
-#include "particles.hpp"
-#include "sphereShape.hpp"
-#include "property.hpp"
 #include "indexContainer.hpp"
-
-
+#include "particles.hpp"
+#include "property.hpp"
+#include "sphereShape.hpp"
+#include "systemControl.hpp"
 
 namespace pFlow
 {
 
-class sphereParticles
-:
-	public particles 
+class sphereParticles : public particles
 {
-protected:
+public:
 
-	/// reference to material properties
-	const property& 	property_;
+	using ShapeType = sphereShape;
 
-	/// reference to shapes 
-	sphereShape& 		shapes_;
+private:
 
-	/// pointField of inertial of particles 
-	realPointField_D&     	I_;
+	/// reference to shapes
+	ShapeType              spheres_;
 
-	/// pointField of rotational Velocity of particles on device 
-	realx3PointField_D& 	rVelocity_;
+	/// property id on device
+	uint32PointField_D     propertyId_;
 
-	/// pointField of rotational acceleration of particles on device  
-	realx3PointField_D& 	rAcceleration_;	
+	/// diameter / boundig sphere size of particles on device
+	realPointField_D       diameter_;
 
-	/// rotational velocity integrator 
-	uniquePtr<integration>  rVelIntegration_ = nullptr;
+	/// mass of particles field
+	realPointField_D       mass_;
 
-	/// timer for acceleration computations 
-	Timer 					accelerationTimer_;
+	/// pointField of inertial of particles
+	realPointField_D       I_;
+
+	/// pointField of rotational Velocity of particles on device
+	realx3PointField_D     rVelocity_;
+
+	/// pointField of rotational acceleration of particles on device
+	realx3PointField_D     rAcceleration_;
+
+	/// rotational velocity integrator
+	uniquePtr<integration> rVelIntegration_ = nullptr;
+
+	/// timer for acceleration computations
+	Timer                  accelerationTimer_;
 
 	/// timer for integration computations (prediction step)
-	Timer 					intPredictTimer_;
+	Timer                  intPredictTimer_;
 
 	/// timer for integration computations (correction step)
-	Timer 					intCorrectTimer_;
+	Timer                  intCorrectTimer_;
 
-	bool diameterMassInertiaPropId(const word& shName, real& diam, real& mass, real& I, int8& propIdx);
+	
 
+private:
 	bool initializeParticles();
 
+	bool getParticlesInfoFromShape(
+	  const wordVector& shapeNames,
+	  uint32Vector&     propIds,
+	  realVector&       diams,
+	  realVector&       m,
+	  realVector&       Is,
+	  uint32Vector&     shIndex
+	);
+	/*bool initializeParticles();
+
 	bool insertSphereParticles(
-		const wordVector& names, 
-		const int32IndexContainer& indices,
-		bool setId = true);
+	    const wordVector& names,
+	    const int32IndexContainer& indices,
+	    bool setId = true);
 
 	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const override;
+	*/
 
 public:
 
-	/// construct from systemControl and property 
-	sphereParticles(systemControl &control, const property& prop);
+	/// construct from systemControl and property
+	sphereParticles(systemControl& control, const property& prop);
 
-	/// no copy constructor 
-	sphereParticles(const sphereParticles&) = delete;
-
-	/// move constructor 
-	sphereParticles(sphereParticles&&) = default;
-
-	/// no copy-assignement
-	sphereParticles& operator=(const sphereParticles&) = delete;
-
-	/// move-assignement
-	sphereParticles& operator=(sphereParticles&&) = default;
-
-	virtual ~sphereParticles()=default;
+	~sphereParticles() override = default;
 
 	/**
 	 * Insert new particles in position with specified shapes
-	 * 
-	 * This function is involked by inserted object to insert new set of particles
-	 * into the simulation. 
-	 * \param position position of new particles
+	 *
+	 * This function is involked by inserted object to insert new set of
+	 * particles into the simulation. \param position position of new particles
 	 * \param shape shape of new particles
 	 * \param setField initial value of the selected fields for new particles
 	 */
-	bool insertParticles
+	/*bool insertParticles
 	(
-		const realx3Vector& position,
-	 	const wordVector&  shapes,
-	 	const setFieldList& setField
-	) override ;
+	    const realx3Vector& position,
+	    const wordVector&  shapes,
+	    const setFieldList& setField
+	) override ;*/
 
-	/// const reference to shapes object 
-	const auto& shapes()const
+	/// const reference to shapes object
+	const auto& spheres() const
 	{
-		return shapes_;
+		return spheres_;
 	}
 
 	/// const reference to inertia pointField
-	const auto& I()const
+	const auto& I() const
 	{
 		return I_;
 	}
 
-	/// reference to inertia pointField 
+	/// reference to inertia pointField
 	auto& I()
 	{
 		return I_;
 	}
-	
-	const realx3Vector_D rVelocity()const 
-	{	
+
+	const auto& rVelocity() const
+	{
 		return rVelocity_;
 	}
 
-	const realVector_D& boundingSphere()const override
+	auto& rVelocity()
 	{
-		return this->diameter();
+		return rVelocity_;
 	}
 
-	word shapeTypeName() const override
+	bool hearChanges(
+	  real           t,
+	  real           dt,
+	  uint32         iter,
+	  const message& msg,
+	  const anyList& varList
+	) override
 	{
-		return "sphere";
+		notImplementedFunction;
+		return false;
 	}
 
-	void boundingSphereMinMax(
-		real& minDiam,
-		real& maxDiam )const override
+	const uint32PointField_D& propertyId() const override
 	{
-		shapes_.diameterMinMax(minDiam, maxDiam);
+		return propertyId_;
 	}
 
-	bool update(const eventMessage& msg) override;
-	
-	
+	const realPointField_D& diameter() const override
+	{
+		return diameter_;
+	}
+
+	const realPointField_D& mass() const override
+	{
+		return mass_;
+	}
+
+	/// before iteration step
+	bool beforeIteration() override;
+
+	/// iterate particles
+	bool iterate() override;
+
+	bool insertParticles(
+	  const realx3Vector& position,
+	  const wordVector&   shapesNames,
+	  const anyList&      setVarList
+	) override;
+
 	realx3PointField_D& rAcceleration() override
 	{
 		return rAcceleration_;
 	}
-	
+
 	const realx3PointField_D& rAcceleration() const override
 	{
 		return rAcceleration_;
 	}
 
-	/// before iteration step 
-	bool beforeIteration() override;
+	const realPointField_D& boundingSphere() const override
+	{
+		return diameter();
+	}
 
-	/// iterate particles 
-	bool iterate() override;	
+	word         shapeTypeName() const override;
 
-	/// after iteration step
-	bool afterIteration() override;
-	
+	const shape& getShapes() const override;
 
-	
-}; //sphereParticles
+	void boundingSphereMinMax(real& minDiam, real& maxDiam) const override;
+
+}; // sphereParticles
 
 } // pFlow
 

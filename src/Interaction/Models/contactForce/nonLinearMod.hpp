@@ -121,7 +121,7 @@ protected:
 		}
 
 
-		Vector<nonLinearProperties> prop(nElem);
+		Vector<nonLinearProperties> prop("prop",nElem);
 		ForAll(i,Yeff)
 		{
 			prop[i] = {Yeff[i], Geff[i], etha_n[i], mu[i]};
@@ -198,10 +198,10 @@ public:
 	void contactForce
 	(
 		const real dt,
-		const int32 i,
-		const int32 j,
-		const int32 propId_i,
-		const int32 propId_j,
+		const uint32 i,
+		const uint32 j,
+		const uint32 propId_i,
+		const uint32 propId_j,
 		const real Ri,
 		const real Rj,
 		const real ovrlp_n,

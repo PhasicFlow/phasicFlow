@@ -21,6 +21,7 @@ Licence:
 #define __message_hpp__
 
 #include <bitset>
+#include <array>
 
 #include "types.hpp"
 #include "iOstream.hpp"
@@ -35,20 +36,44 @@ public:
 	enum EVENT : size_t
 	{
 		DEFAULT 		= 0,
-		CAP_CHANGED 	= 1,
-		SIZE_CHANGED 	= 2,
-		ITEM_DELETE	 	= 3,
-		ITEM_INSERT  	= 4,
-		RANGE_CHANGED   = 5,
-		ITEM_REARRANGE 	= 6	
+		CAP_CHANGED 	= 1,  // internal points capacity changed 
+		SIZE_CHANGED 	= 2,  // internal points size changed
+		ITEM_DELETE	 	= 3,  // internal points item deleted 
+		ITEM_INSERT  	= 4,  // internal points item inserted 
+		RANGE_CHANGED   = 5,  // internal points range changed 
+		ITEM_REARRANGE  = 6,  // internal points item rearrange
+		ITEM_FLAGCHANGED= 7,  // internal points item flag changed, this occurs when transfer occurs
+		BNDR_REARRANGE 	= 8,  // boundary indices rearrange 
+		BNDR_TRANSFER   = 9,  // boundary indices transfered
+		BNDR_RESET		= 10,  // boundary indices reset entirely  
+		BNDR_DELETE 	= 11,  // boundary indices deleted
+		BNDR_APPEND		= 12
 	};
 
-protected:
+	
+private:
 
-	static constexpr size_t numberOfEvents_ = 8;
+	static constexpr size_t numberOfEvents_ = 13;
 
 	std::bitset<numberOfEvents_> events_{0x0000};
 	
+	static
+	inline const std::array<word,numberOfEvents_> eventNames_
+	{
+		"",
+		"capacity",
+		"size",
+		"deletedIndices",
+		"insertedIndices",
+		"range",
+		"rearrangedIndices",
+		"transferredIndices",
+		"rearrangedIndices",
+		"transferredIndices",
+		"",
+		"deletedIndices",
+		"appendedIndices"
+	};
 
 public:
 
@@ -81,6 +106,12 @@ public:
 	{
 		events_.set(static_cast<size_t>(evnt));
 		return *this;
+	}
+
+	inline const word& addAndName(EVENT evnt)
+	{
+		add(evnt);
+		return eventName(static_cast<size_t>(evnt));
 	}
 
 	inline message& remove(EVENT evnt)
@@ -120,6 +151,19 @@ public:
 	{
 		return remove(evnt);
 	}
+
+	inline 
+	message& operator+(const message& msg)
+	{
+		for(size_t i=0uL; i< events_.size(); i++)
+		{
+			if(msg.equivalentTo(i))
+			{
+				events_.set(i);
+			}
+		}
+		return *this;
+	}
 	
 	static
 	auto constexpr numEvents()
@@ -138,6 +182,12 @@ public:
 	{
 		message msg;
 		return msg;
+	}
+
+	static
+	const word& eventName(size_t event)
+	{
+		return eventNames_[event];
 	}
 	
 };

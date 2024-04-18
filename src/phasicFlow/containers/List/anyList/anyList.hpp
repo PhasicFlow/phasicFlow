@@ -23,6 +23,7 @@ Licence:
 
 #include <any>
 
+#include "typeInfo.hpp"
 #include "types.hpp"
 #include "List.hpp"
 
@@ -44,14 +45,15 @@ public:
 
 	using const_iterator= typename anyListType::const_iterator;
 
-
-protected:
+private:
 
 	/// Contains a list of variables with any type 
 	anyListType 	anyList_;
 
 	/// List of variable names in anyList_ 
-	wordList 		names_;	
+	wordList 		names_;
+
+	wordList 		types_;	
 
 public:
 
@@ -89,6 +91,7 @@ public:
 				fatalExit;
 			}
 			names_.push_back(name);
+			types_.push_back(getTypeName<T>());
 			return anyList_.emplace_back( 
 				std::in_place_type<T>, 
 				std::forward<Args>(args)...);
@@ -106,6 +109,7 @@ public:
 				fatalExit;
 			}
 			names_.push_back(name);
+			types_.push_back(getTypeName(other));
 			return anyList_.emplace_back(std::in_place_type<T>, other);
 		}
 
@@ -121,13 +125,23 @@ public:
 				fatalExit;
 			}
 			names_.push_back(name);
-			return anyList_.emplace_back(std::in_place_type<T>, std::move(other));
+			types_.push_back(getTypeName(other));
+			return anyList_.emplace_back(std::in_place_type<T>, std::forward<T>(other));
 		}
 
 		/// Get the reference to variable by index
 		template<typename T>
 		T& getObject(size_t i)
 		{
+			if(getTypeName<T>() != types_[i])
+			{
+				fatalErrorInFunction<<
+				"requested object type is "<<getTypeName<T>()<<
+				" while strored type is "<<types_[i]<<
+				" for object "<< names_[i]<<endl;
+				fatalExit;
+			}
+
 			std::any *a = &(*anyList_.pos(i));
 			if(!a->has_value())
 			{
@@ -151,15 +165,7 @@ public:
 				"list of variables is "<<names_<<endl;
 				fatalExit;
 			}
-			std::any *a = &(*anyList_.pos(i));
-			if(!a->has_value())
-			{
-				fatalErrorInFunction<<
-				"any does not have a value for dereferencing. "<<
-				"index in anyList is "<<i<<"."<<endl;
-				fatalExit;
-			}
-			return *std::any_cast<T>(a);
+			return getObject<T>(static_cast<size_t>(i));
 		}
 
 		/// Get the const reference to variable by name 
@@ -174,21 +180,22 @@ public:
 				"list of variables is "<<names_<<endl;
 				fatalExit;
 			}
-			const std::any *a = &(*anyList_.pos(i));
-			if(!a->has_value())
-			{
-				fatalErrorInFunction<<
-				"any does not have a value for dereferencing. "<<
-				"index in anyList is "<<i<<"."<<endl;
-				fatalExit;
-			}
-			return *std::any_cast<const T>(a);
+			return getObject<T>(static_cast<size_t>(i));
 		}
 
 		/// Get the const reference to object by index
 		template<typename T>
 		const T& getObject(size_t i)const
 		{
+			if(getTypeName<T>() != types_[i])
+			{
+				fatalErrorInFunction<<
+				"requested object type is "<<getTypeName<T>()<<
+				" while strored type is "<<types_[i]<<
+				" for object "<< names_[i]<<endl;
+				fatalExit;
+			}
+
 			const std::any *a = &(*anyList_.pos(i));
 			if(!a->has_value())
 			{
@@ -206,6 +213,15 @@ public:
 		{
 			if(i>= size())return nullptr;
 
+			if(getTypeName<T>() != types_[i])
+			{
+				warningInFunction<<
+				"requested object type is "<<getTypeName<T>()<<
+				" while strored type is "<<types_[i]<<
+				" for object "<< names_[i]<<endl;
+				return nullptr;
+			}
+
 			std::any *a = &(*anyList_.pos(i));
 			if( a->has_value())
 			{
@@ -222,6 +238,15 @@ public:
 		const T* getObjectPtr(size_t i)const
 		{
 			if(i>=size())return nullptr;
+			if(getTypeName<T>() != types_[i])
+			{
+				warningInFunction<<
+				"requested object type is "<<getTypeName<T>()<<
+				" while strored type is "<<types_[i]<<
+				" for object "<< names_[i]<<endl;
+				return nullptr;
+			}
+
 			const std::any *a = &(*anyList_.pos(i));
 			if( a->has_value())
 			{

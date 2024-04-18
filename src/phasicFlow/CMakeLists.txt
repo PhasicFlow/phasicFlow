@@ -5,6 +5,7 @@ types/basicTypes/Logical.cpp
 types/types.cpp
 
 globals/error.cpp
+globals/globalSettings.cpp
 
 processors/processors.cpp
 processors/localProcessors.cpp
@@ -34,18 +35,6 @@ dictionary/entry/iEntry.cpp
 dictionary/entry/dataEntry.cpp 
 dictionary/twoPartEntry/twoPartEntry.cpp
 
-containers/Vector/Vectors.cpp
-containers/VectorHD/VectorSingles.cpp
-containers/Field/Fields.cpp
-containers/List/anyList/anyList.cpp
-containers/pointField/pointFields.cpp
-
-#setFieldList/setFieldList.cpp
-#setFieldList/setFieldEntry.cpp
-
-Timer/Timer.cpp
-Timer/Timers.cpp
-
 repository/IOobject/objectFile.cpp
 repository/IOobject/IOfileHeader.cpp
 repository/IOobject/IOobject.cpp
@@ -57,26 +46,64 @@ repository/Time/baseTimeControl.cpp
 repository/systemControl/systemControl.cpp
 repository/systemControl/dynamicLinkLibs.cpp
 
+commandLine/commandLine.cpp
+
 eventManagement/subscriber.cpp
 eventManagement/observer.cpp
 
 demComponent/demComponent.cpp
 
+Timer/Timer.cpp
+Timer/Timers.cpp
+
+
+containers/Vector/Vectors.cpp
+containers/VectorHD/VectorSingles.cpp
+containers/Field/Fields.cpp
+containers/symArrayHD/symArrays.cpp
+containers/List/anyList/anyList.cpp
+
+structuredData/zAxis/zAxis.cpp
 structuredData/box/box.cpp
+structuredData/sphere/sphere.cpp
+structuredData/cylinder/cylinder.cpp
+structuredData/peakableRegion/geometricRegion/geometricRegions.cpp
+structuredData/peakableRegion/PeakableRegion/PeakableRegions.cpp
+structuredData/peakableRegion/peakableRegion/peakableRegion.cpp
+
+structuredData/pointStructure/internalPoints/internalPointsKernels.cpp
+structuredData/pointStructure/internalPoints/internalPoints.cpp
+
 structuredData/line/line.cpp
 structuredData/infinitePlane/infinitePlane.cpp
 structuredData/plane/plane.cpp
 structuredData/domain/domain.cpp
 structuredData/domain/simulationDomain.cpp
 structuredData/domain/regularSimulationDomain.cpp
-structuredData/pointStructure/internalPoints.cpp
-structuredData/pointStructure/pointStructure.cpp
 structuredData/boundaries/boundaryBase/boundaryBase.cpp
+structuredData/boundaries/boundaryBase/boundaryBaseKernels.cpp
 structuredData/boundaries/boundaryExit/boundaryExit.cpp
-structuredData/pointStructure/boundaryList.cpp
+structuredData/boundaries/boundaryNone/boundaryNone.cpp
+structuredData/boundaries/boundaryPeriodic/boundaryPeriodic.cpp
+structuredData/boundaries/boundaryReflective/boundaryReflective.cpp
+structuredData/boundaries/boundaryList.cpp
+structuredData/pointStructure/pointStructure/pointStructure.cpp
+structuredData/pointStructure/selectors/pStructSelector/pStructSelector.cpp
+structuredData/pointStructure/selectors/selectorStridedRange/selectorStridedRange.cpp 
+structuredData/pointStructure/selectors/selectorRandomPoints/selectorRandomPoints.cpp
+structuredData/pointStructure/selectors/selectBox/selectBox.cpp
+structuredData/pointStructure/selectors/selectorGeometric/selectorGeometrics.cpp
 
-commandLine/commandLine.cpp
+triSurface/subSurface.cpp
+triSurface/triSurface.cpp
+triSurface/multiTriSurface.cpp
 
+containers/pointField/boundaryField/generalBoundary/generalBoundary.cpp
+containers/pointField/pointField/pointFields.cpp
+containers/triSurfaceField/triSurfaceFields.cpp
+
+setFieldList/setFieldList.cpp
+setFieldList/setFieldEntry.cpp
 
 )
 

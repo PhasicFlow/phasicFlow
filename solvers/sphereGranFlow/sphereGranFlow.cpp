@@ -30,29 +30,21 @@ Licence:
  * (https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow) folder.
  */
 
+#include "vocabs.hpp"
+#include "phasicFlowKokkos.hpp"
+#include "systemControl.hpp"
+#include "commandLine.hpp"
 #include "property.hpp"
 #include "geometry.hpp"
 #include "sphereParticles.hpp"
+#include "interaction.hpp"
 #include "Insertions.hpp"
-#include "systemControl.hpp"
-#include "contactSearch.hpp"
-#include "sphereInteraction.hpp"
-#include "commandLine.hpp"
-#include "readControlDict.hpp"
-
-using pFlow::output;
-using pFlow::endl;
-using pFlow::property;
-using pFlow::sphereParticles;
-using pFlow::objectFile;
-using pFlow::sphereInsertion;
-using pFlow::insertionFile__;
-using pFlow::interactionFile__;
-using pFlow::contactSearch;
-using pFlow::interaction;
-using pFlow::commandLine;
 
 
+
+//#include "readControlDict.hpp"
+
+using namespace pFlow;
 
 /**
  * DEM solver for simulating granular flow of cohesion-less particles.
@@ -73,20 +65,23 @@ bool isCoupling = false;
 if(!cmds.parse(argc, argv)) return 0;
 
 // this should be palced in each main 
+processors::initProcessors(argc, argv);
+initialize_pFlowProcessors();
 #include "initialize_Control.hpp"
-	
+	 
 	#include "setProperty.hpp"
 	#include "setSurfaceGeometry.hpp"
 	
 
 	#include "createDEMComponents.hpp"
 	
-	REPORT(0)<<"\nStart of time loop . . .\n"<<endREPORT;
+	REPORT(0)<<"\nStart of time loop . . .\n"<<END_REPORT;
 
 	do 
 	{
 		
 		if(! sphInsertion.insertParticles( 
+			Control.time().currentIter(),
 			Control.time().currentTime(),
 			Control.time().dt()	) )
 		{
@@ -94,31 +89,35 @@ if(!cmds.parse(argc, argv)) return 0;
 			"particle insertion failed in sphereDFlow solver.\n";
 			return 1;
 		}
-
+		 
+		// set force to zero
 		surfGeometry.beforeIteration();
-		
-		sphInteraction.beforeIteration();
 
+		// set force to zero, predict, particle deletion and etc. 
 		sphParticles.beforeIteration();
+
+		sphInteraction.beforeIteration();
 		
+		sphInteraction.iterate();	
 		
-		sphInteraction.iterate();
+		surfGeometry.iterate();
 
 		sphParticles.iterate();
 
-		surfGeometry.iterate();
+		sphInteraction.afterIteration();
+
+		surfGeometry.afterIteration();
 
 		sphParticles.afterIteration();
-		
-		surfGeometry.afterIteration();
-		
+				
 
 	}while(Control++);
 
-	REPORT(0)<<"\nEnd of time loop.\n"<<endREPORT;
+	REPORT(0)<<"\nEnd of time loop.\n"<<END_REPORT;
 
 // this should be palced in each main 
 #include "finalize.hpp"
+processors::finalizeProcessors();
 
 
 }	

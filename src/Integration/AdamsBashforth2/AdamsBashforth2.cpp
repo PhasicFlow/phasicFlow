@@ -19,59 +19,146 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "AdamsBashforth2.hpp"
+#include "pointStructure.hpp"
+#include "Time.hpp"
+#include "vocabs.hpp"
 
-//const real AB2_coef[] = { 3.0 / 2.0, 1.0 / 2.0};
+namespace pFlow
+{
+
+/// Range policy for integration kernel (alias)
+using rpIntegration = Kokkos::RangePolicy<
+		DefaultExecutionSpace,
+		Kokkos::Schedule<Kokkos::Static>,
+		Kokkos::IndexType<uint32>
+		>;
+
+bool intAllActive(
+	real dt, 
+	realx3Field_D& y, 
+	realx3PointField_D& dy,
+	realx3PointField_D& dy1)
+{
+
+	auto d_dy = dy.deviceView();
+	auto d_y  = y.deviceView();
+	auto d_dy1= dy1.deviceView();
+	auto activeRng = dy1.activeRange();
+
+	Kokkos::parallel_for(
+		"AdamsBashforth2::correct",
+		rpIntegration (activeRng.start(), activeRng.end()),
+		LAMBDA_HD(uint32 i){
+			d_y[i] +=  dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
+			d_dy1[i] = d_dy[i];
+		});
+	Kokkos::fence();
+
+	return true;	
+}
+
+bool intScattered
+(
+	real dt, 
+	realx3Field_D& y,
+	realx3PointField_D& dy,
+	realx3PointField_D& dy1
+)
+{
+
+	auto d_dy 		= dy.deviceView();
+	auto d_y  		= y.deviceView();
+	auto d_dy1		= dy1.deviceView();
+	auto activeRng 	= dy1.activeRange();
+	const auto& activeP = dy1.activePointsMaskDevice();
+
+	Kokkos::parallel_for(
+		"AdamsBashforth2::correct",
+		rpIntegration (activeRng.start(), activeRng.end()),
+		LAMBDA_HD(uint32 i){
+			if( activeP(i))
+			{
+				d_y[i] +=  dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
+				d_dy1[i] = d_dy[i];
+			}
+		});
+	Kokkos::fence();
+
+
+	return true;
+}
+
+}
+
+
 
 pFlow::AdamsBashforth2::AdamsBashforth2
 (
 	const word& baseName,
-	repository& owner,
-	const pointStructure& pStruct,
-	const word& method
+	pointStructure& pStruct,
+	const word& method,
+	const realx3Field_D& initialValField
 )
 :
-	integration(baseName, owner, pStruct, method),
-	dy1_(
-		owner.emplaceObject<realx3PointField_D>(
-			objectFile(
-				groupNames(baseName,"dy1"),
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS),
-			pStruct,
-			zero3))
-{
-
-}
+	integration(baseName, pStruct, method, initialValField),
+	realx3PointField_D
+	(
+		objectFile
+		(
+			groupNames(baseName,"dy1"),
+			pStruct.time().integrationFolder(),
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
+		),
+		pStruct,
+		zero3,
+		zero3
+	)
+{}
 
 bool pFlow::AdamsBashforth2::predict
 (
 	real UNUSED(dt),
-	realx3Vector_D& UNUSED(y),
-	realx3Vector_D& UNUSED(dy)
+	realx3PointField_D& UNUSED(y),
+	realx3PointField_D& UNUSED(dy)
 )
 {
-
 	return true;
+}
+
+bool pFlow::AdamsBashforth2::predict
+(
+	real dt, 
+	realx3Field_D &y, 
+	realx3PointField_D &dy
+)
+{
+    return true;
 }
 
 bool pFlow::AdamsBashforth2::correct
 (
 	real dt,
-	realx3Vector_D& y,
-	realx3Vector_D& dy
+	realx3PointField_D& y,
+	realx3PointField_D& dy
 )
 {
-	if(this->pStruct().allActive())
+	return correct(dt, y.field(), dy);
+}
+
+bool pFlow::AdamsBashforth2::correct(real dt, realx3Field_D &y, realx3PointField_D &dy)
+{
+	auto& dy1l = dy1();
+
+	if(dy1l.isAllActive())
 	{
-		return intAll(dt, y, dy, this->pStruct().activeRange());
+		return intAllActive(dt, y, dy, dy1l);
 	}
 	else
 	{
-		return intRange(dt, y, dy, this->pStruct().activePointsMaskD());
+		return intScattered(dt, y, dy, dy1l);
 	}
-
-	return true;
+    return false;
 }
 
 bool pFlow::AdamsBashforth2::setInitialVals(
@@ -81,25 +168,3 @@ bool pFlow::AdamsBashforth2::setInitialVals(
 	return true;
 }
 
-bool pFlow::AdamsBashforth2::intAll(
-	real dt, 
-	realx3Vector_D& y, 
-	realx3Vector_D& dy, 
-	range activeRng)
-{
-
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
-	auto d_dy1= dy1_.deviceVectorAll();
-
-	Kokkos::parallel_for(
-		"AdamsBashforth2::correct",
-		rpIntegration (activeRng.first, activeRng.second),
-		LAMBDA_HD(int32 i){
-			d_y[i] +=  dt*(static_cast<real>(3.0 / 2.0) * d_dy[i] - static_cast<real>(1.0 / 2.0) * d_dy1[i]);
-			d_dy1[i] = d_dy[i];
-		});
-	Kokkos::fence();
-
-	return true;	
-}

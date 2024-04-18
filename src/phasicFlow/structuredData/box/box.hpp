@@ -46,7 +46,7 @@ public:
 
 	//// - Constructors 
 		INLINE_FUNCTION_HD 
-		box(){}
+		box() = default;
 
 		INLINE_FUNCTION_HD 
 		box(const realx3& minP, const realx3& maxP)
@@ -57,10 +57,10 @@ public:
 		
 
 		FUNCTION_H
-		box(const dictionary& dict);
+		explicit box(const dictionary& dict);
 
 		FUNCTION_H
-		box(iIstream& is);
+		explicit box(iIstream& is);
 
 		INLINE_FUNCTION_HD
 		box(const box&) = default;
@@ -79,10 +79,12 @@ public:
 
 	//// - Methods 
 
+		
 		INLINE_FUNCTION_HD
 		bool isInside(const realx3& point)const
 		{
-			return point > min_ && point <max_;
+			// box planes are also included as the inside of the box 
+			return point >= min_ && point <=max_;
 		}
 
 		INLINE_FUNCTION_HD
@@ -128,6 +130,19 @@ iIstream& operator >>(iIstream& is, box& b);
 
 FUNCTION_H
 iOstream& operator << (iOstream& os, const box& b);
+
+INLINE_FUNCTION_HD
+bool equal(const box& b1, const box& b2, real tol = smallValue)
+{
+	return  equal(b1.minPoint(), b2.minPoint(), tol) && 
+			equal(b1.maxPoint(), b2.maxPoint(), tol);
+}
+
+INLINE_FUNCTION_HD
+bool operator ==(const box& b1, const box& b2)
+{
+	return equal(b1, b2);
+}
 
 INLINE_FUNCTION_HD
 box extendBox(const box& b, const realx3& dl)

@@ -144,7 +144,7 @@ bool pFlow::repository::addToRepository(IOobject* io)
     if( !objects_.insertIf(io->name(), io ) )
 	{
 		warningInFunction<<
-    	"Failed to add repository " << io->name() <<
+    	"Failed to add object " << io->name() <<
     	" to repository " << this->name() << 
     	". It is already in this repository. \n";
     	return false;
@@ -279,11 +279,12 @@ bool pFlow::repository::write
 ) const
 {
 	
-	for(auto& obj:objects_)
-	{
+	for(const auto& obj:objects_)
+	{		
 		if(verbose)
 		{
-			REPORT(1)<< "Writing to " << obj.second->path()<<END_REPORT;
+			if(obj.second->implyWrite())
+				REPORT(1)<< "Writing to " << obj.second->path()<<END_REPORT;
 		}
 		
 		if(!obj.second->writeObject())

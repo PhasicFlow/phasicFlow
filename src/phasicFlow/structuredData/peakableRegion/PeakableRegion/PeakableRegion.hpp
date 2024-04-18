@@ -2,85 +2,88 @@
       O        C enter of
      O O       E ngineering and
     O   O      M ultiscale modeling of
-   OOOOOOO     F luid flow       
+   OOOOOOO     F luid flow
 ------------------------------------------------------------------------------
   Copyright (C): www.cemf.ir
   email: hamid.r.norouzi AT gmail.com
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 Licence:
-  This file is part of phasicFlow code. It is a free software for simulating 
+  This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
-  the terms of GNU General Public License v3 or any other later versions. 
- 
-  phasicFlow is distributed to help others in their research in the field of 
+  the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __PeakableRegion_hpp__
 #define __PeakableRegion_hpp__
 
-
-#include "peakableRegion.hpp"
 #include "dictionary.hpp"
+#include "geometricRegion.hpp"
+#include "peakableRegion.hpp"
 
 namespace pFlow
 {
 
-
-
-
-template<typename RegionType>
-class PeakableRegion
-:
-	public peakableRegion
+template<typename GeomType>
+class PeakableRegion : public peakableRegion
 {
-protected:
+public:
 
-	RegionType 		region_;
+	using RegionType = geometricRegion<GeomType>;
+
+	using GeometryType = typename RegionType::GeometryType;
+
+private:
+
+	RegionType region_;
 
 public:
 
 	// type info
-	TypeInfoTemplate("peakableRegion", RegionType);
+	TypeInfoTemplate11("peakable", GeometryType);
 
-	//// - Constructors 
-		PeakableRegion(const word& type, const dictionary& dict);
+	//// - Constructors
+	PeakableRegion(const word& type, const dictionary& dict);
 
-		add_vCtor(
-			peakableRegion,
-			PeakableRegion,
-			word
-			);
+	add_vCtor(peakableRegion, PeakableRegion, word);
 
-		virtual uniquePtr<peakableRegion> clone()const override
-		{
-			return makeUnique<PeakableRegion<RegionType>>(*this);
-		}
-		
-		virtual peakableRegion* clonePtr()const override
-		{
-			return new PeakableRegion<RegionType>(*this);
-		}
+	virtual uniquePtr<peakableRegion> clone() const override
+	{
+		return makeUnique<PeakableRegion<GeomType>>(*this);
+	}
 
+	virtual peakableRegion* clonePtr() const override
+	{
+		return new PeakableRegion<GeomType>(*this);
+	}
 
-		virtual ~PeakableRegion() = default;
+	virtual ~PeakableRegion() = default;
 
 	//// - Methods
 
-		virtual bool  isInside(const realx3& point)const override;
+	bool   isInside(const realx3& point) const override;
 
-		virtual realx3 peek()const override;
+	realx3 peek() const override;
 
+	const realx3& minPoint()const override
+	{
+		return region_.minPoint();
+	}
 
-	//// - IO operatoins 
+	const realx3& maxPoint()const override
+	{
+		return region_.maxPoint();
+	}
 
-		virtual bool read(const dictionary& dict) override;
+	//// - IO operatoins
 
-		virtual bool write(dictionary& dict)const override;
+	virtual bool   read(const dictionary& dict) override;
 
+	virtual bool   write(dictionary& dict) const override;
 };
 
 } // pFlow

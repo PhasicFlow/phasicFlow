@@ -33,7 +33,7 @@ namespace pFlow
 
 class repository
 {
-protected:
+private:
 	
 	// - repository name
 	word 		name_;
@@ -53,10 +53,11 @@ protected:
 
 
 	template <typename Type1>
-		word reportTypeError (IOobject& object);
+	word reportTypeError (IOobject& object)const;
 
 	template <typename Type>
-		bool checkForObjectType(IOobject& object);
+	static
+	bool checkForObjectType(IOobject& object);
 
 public:
 
@@ -114,6 +115,23 @@ public:
 		bool removeFromRepository(IOobject* io);
 
         repository* releaseOwner(bool fromOwner = false);
+
+		virtual
+		bool isIncluded(const word& objName)const
+        {
+            if(owner_)
+                return owner_->isIncluded(objName);
+            return false;
+        }
+
+        virtual
+        bool isExcluded(const word& objName)const 
+        {
+            if(owner_)
+                return owner_->isExcluded(objName);
+            return false;
+        }
+
 	//// - lookups and queries
 	
 		// - check if name of object exists
@@ -150,9 +168,13 @@ public:
 			}
 		}
 		
-		// - return a ref to the underlaying data in the object 
+		/// return a ref to the underlaying data in the object 
 		template<typename T>
 		T& lookupObject(const word& name);
+
+		/// return a const ref to the underlaying data in the object 
+		template<typename T>
+		const T& lookupObject(const word& name)const;
 		
 		// - search the name and return a ref to repository
 		repository& lookupRepository(const word& name);

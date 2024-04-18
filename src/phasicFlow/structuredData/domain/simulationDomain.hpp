@@ -97,6 +97,9 @@ public:
     virtual
     uint32 initialNumberInThis()const = 0;
 
+	virtual 
+	bool initialThisDomainActive()const = 0;
+
     virtual 
 	bool initialTransferBlockData(
 		span<char> src, 
@@ -158,6 +161,11 @@ public:
 	{
 		return thisDomain_;
 	}
+
+	
+	domain extendThisDomain(
+		const realx3& lowerPointExtension, 
+		const realx3& upperPointExtension)const;
 
 	inline 
 	const auto& globalBoundaryDict()const

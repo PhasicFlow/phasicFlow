@@ -40,13 +40,9 @@ class Time;
  */
 class demComponent
 {
-protected:
-
-	// - Protected data members 
-
-		/// Name of the DEM component 
-		word 	componentName_;
-
+private:
+	// - Protected data members 		
+		
 		/// Reference to systemControl 
 		systemControl& 	control_;
 
@@ -54,6 +50,9 @@ protected:
 
 		/// All timers (if any) of this component
 		Timers 	timers_;
+
+		/// Name of the DEM component 
+		word 	componentName_;
 
 public:
 
@@ -102,6 +101,8 @@ public:
 		
 		/// Current simulation time 
 		real currentTime()const;
+
+		uint32 currentIter()const;
 		
 		inline
 		const auto& time()const
@@ -134,7 +135,7 @@ public:
 		virtual
 		bool beforeTimeLoop()
 		{
-			notImplementedFunction
+			notImplementedFunction;
 			return false;
 		}
 
@@ -155,7 +156,7 @@ public:
 		virtual
 		bool afterTimeLoop()
 		{
-			notImplementedFunction
+			notImplementedFunction;
 			return false;
 		}
 

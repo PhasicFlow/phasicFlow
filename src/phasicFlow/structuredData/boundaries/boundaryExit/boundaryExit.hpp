@@ -47,9 +47,11 @@ public:
 	TypeInfo("boundary<exit>");
 
 	boundaryExit(
-		const dictionary& 	dict,
-		const plane&    	bplane,
-		internalPoints& 	internal);
+		const dictionary &dict,
+		const plane 	&bplane,
+		internalPoints 	&internal,
+		boundaryList	&bndrs,
+		uint32 			thisIndex);
 
 	virtual 
 	~boundaryExit() = default;
@@ -61,11 +63,11 @@ public:
 		dictionary
 	);
 
-	bool beforeIteratoin(uint32 iterNum, real t) override;
+	bool beforeIteration(uint32 iterNum, real t, real dt) override;
 
-	bool iterate(uint32 iterNum, real t) override;
+	bool iterate(uint32 iterNum, real t, real dt) override;
 
-	bool afterIteration(uint32 iterNum, real t) override;
+	bool afterIteration(uint32 iterNum, real t, real dt) override;
 
 
 };

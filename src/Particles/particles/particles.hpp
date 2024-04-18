@@ -1,79 +1,63 @@
-/*------------------------------- phasicFlow ---------------------------------
-      O        C enter of
-     O O       E ngineering and
-    O   O      M ultiscale modeling of
-   OOOOOOO     F luid flow       
+/*------------------------------- phasicFlow
+--------------------------------- O        C enter of O O       E
+ngineering and O   O      M ultiscale modeling of OOOOOOO     F luid
+flow
 ------------------------------------------------------------------------------
   Copyright (C): www.cemf.ir
   email: hamid.r.norouzi AT gmail.com
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 Licence:
-  This file is part of phasicFlow code. It is a free software for simulating 
-  granular and multiphase flows. You can redistribute it and/or modify it under
-  the terms of GNU General Public License v3 or any other later versions. 
- 
-  phasicFlow is distributed to help others in their research in the field of 
-  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
-  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  This file is part of phasicFlow code. It is a free software for
+simulating granular and multiphase flows. You can redistribute it
+and/or modify it under the terms of GNU General Public License v3 or
+any other later versions.
+
+  phasicFlow is distributed to help others in their research in the
+field of granular and multiphase flows, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 
 #ifndef __particles_hpp__
 #define __particles_hpp__
 
+#include "demComponent.hpp"
 #include "dynamicPointStructure.hpp"
 #include "particleIdHandler.hpp"
-#include "demParticles.hpp"
+#include "shape.hpp"
+
 namespace pFlow
 {
 
-class setFieldList;
-
 class particles
-:
-	public eventObserver,
-	public demParticles
+  : public observer
+  , public demComponent
 {
+private:
+
+	/// dynamic point structure for particles center mass
+	dynamicPointStructure        dynPointStruct_;
+
+	/// shape index of each particle 
+	uint32PointField_D           shapeIndex_;
+
+	/// acceleration on device
+	realx3PointField_D           accelertion_;
+
+	/// contact force field
+	realx3PointField_D           contactForce_;
+
+	/// contact torque field
+	realx3PointField_D           contactTorque_;
+
+	/// handling new ids for new particles 
+	uniquePtr<particleIdHandler> idHandler_ = nullptr;
+
+	/// messages for this objects
+	static inline const message  defaultMessage_{ message::DEFAULT };
+
 protected:
-	
-	// owner repository 
-	Time& time_;
-
-	const word integrationMethod_;
-
-	// dynamic point structure for particles 
-	dynamicPointStructure 	dynPointStruct_;
-
-	// - name of shapes - this is managed by particles 
-	wordPointField&  		shapeName_;
-
-	// id of particles on host
-	int32PointField_HD&		id_;
-
-	// property id on device
-	int8PointField_D& 		propertyId_;
-
-	// diameter / boundig sphere size of particles on device
-	realPointField_D&		diameter_;
-
-	// mass on device
-	realPointField_D& 		mass_;
-
-	// - acceleration on device
-	realx3PointField_D& 	accelertion_;
-
-
-	realx3PointField_D&     contactForce_;
-
-
-	realx3PointField_D&     contactTorque_;	
-
-	
-	// - object handling particle id
-	particleIdHandler		idHandler_;
-
-	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const;
 
 	void zeroForce()
 	{
@@ -85,193 +69,150 @@ protected:
 		contactTorque_.fill(zero3);
 	}
 
-public:
-
-	// type info
-	TypeInfo("particles");
-
-	particles(systemControl& control, const word& integrationMethod);
-
-	inline const auto& time()const {
-		return time_;
-	}
-
-	inline auto& time() {
-		return time_;
-	}
-	
-	inline auto integrationMethod()const
-	{
-		return integrationMethod_;
-	}
-
-	inline const auto& dynPointStruct()const 
-	{
-		return dynPointStruct_;
-	}
-
 	inline auto& dynPointStruct()
 	{
 		return dynPointStruct_;
 	}
 
-	inline const auto& pStruct()const{
-		return dynPointStruct_.pStruct();
-	}
-
-	inline auto& pStruct(){
-		return dynPointStruct_.pStruct();
-	}
-
-	inline auto size()const{
-		return pStruct().size();
-	}
-
-	inline auto capacity() const{
-		return pStruct().capacity();
-	}
-
-	inline auto activePointsMaskD()const{
-		return pStruct().activePointsMaskD();
-	}
-
-	inline auto numActive()const
+	inline auto& pointPosition()
 	{
-		return pStruct().numActive();
+		return dynPointStruct_.pointPosition();
+	}
+
+	inline auto& idHandler()
+	{
+		return idHandler_();
 	}
 	
-	inline bool allActive()const{
-		return pStruct().allActive();
-	}
-
-	inline auto activeRange()const{
-		return pStruct().activeRange();
-	}
-
-	inline auto activePointsMaskH()const{
-		return pStruct().activePointsMaskH();
-	}
-
-	inline const auto& pointPosition()const{
-		return pStruct().pointPosition();
-	}
-
-	inline const auto& position()const
+	inline auto& shapeIndex()
 	{
-		return pStruct().pointPosition();	
+		return shapeIndex_;
 	}
 
-	inline const auto& pointVelocity()const{
-		return dynPointStruct().velocity();
+public:
+
+	// type info
+	TypeInfo("particles");
+
+	explicit particles(systemControl& control);
+
+	inline const auto& dynPointStruct() const
+	{
+		return dynPointStruct_;
 	}
 
-	inline const auto& velocity()const{
-		return dynPointStruct().velocity();
+	inline const pointStructure& pStruct() const
+	{
+		return dynPointStruct_;
 	}
 
-	inline const auto& id()const{
-		return id_;
+	inline const auto& simDomain() const
+	{
+		return dynPointStruct_.simDomain();
 	}
 
-	inline auto& id(){
-		return id_;
+	inline const auto& thisDomain() const
+	{
+		return dynPointStruct_.thisDomain();
 	}
 
-	inline const auto& diameter()const{
-		return diameter_;
+	inline const auto& extendedDomain() const
+	{
+		return dynPointStruct_.extendedDomain();
 	}
 
-	inline auto& diameter(){
-		return diameter_;
+	inline auto size() const
+	{
+		return dynPointStruct_.size();
 	}
 
-	inline const auto& mass()const{
-		return mass_;
+	inline auto capacity() const
+	{
+		return dynPointStruct_.capacity();
 	}
 
-	inline auto& mass()	{
-		return mass_;
+	inline auto numActive() const
+	{
+		return dynPointStruct_.numActive();
 	}
 
-	inline const auto& accelertion()const{
+	inline bool isAllActive() const
+	{
+		return dynPointStruct_.isAllActive();
+	}
+
+	inline const auto& pointPosition() const
+	{
+		return dynPointStruct_.pointPosition();
+	}
+
+	inline const auto& velocity() const
+	{
+		return dynPointStruct_.velocity();
+	}
+
+	inline const auto& accelertion() const
+	{
 		return accelertion_;
 	}
 
-	inline auto& accelertion(){
+	inline auto& accelertion()
+	{
 		return accelertion_;
 	}
 
-	inline 
-	realx3PointField_D& contactForce() 
+	inline auto& contactForce()
 	{
 		return contactForce_;
 	}
 
-	inline
-	const realx3PointField_D& contactForce() const
+	inline const auto& contactForce() const
 	{
 		return contactForce_;
 	}
 
-	inline
-	realx3PointField_D& contactTorque()
+	inline auto& contactTorque()
 	{
 		return contactTorque_;
 	}
 
-	inline
-	const realx3PointField_D& contactTorque() const 
+	inline const auto& contactTorque() const
 	{
 		return contactTorque_;
 	}
 
-	inline const auto& propertyId()const{
-		return propertyId_;
-	}
+	bool         beforeIteration() override;
 
-	inline auto& propertyId(){
-		return propertyId_;
-	}
+	bool         iterate() override;
 
-	inline const auto& shapeName()const{
-		return shapeName_;
-	}
+	bool         afterIteration() override;
 
-	inline auto& shapName(){
-		return shapeName_;
-	}
+	virtual bool insertParticles(
+	  const realx3Vector& position,
+	  const wordVector&   shapesNames,
+	  const anyList&      setVarList
+	) = 0;
 
-	bool beforeIteration() override;
+	virtual const uint32PointField_D& propertyId() const = 0;
 
-	virtual
-	bool insertParticles
-	(
-		const realx3Vector& position,
-	 	const wordVector&  shapes,
-	 	const setFieldList& setField
-	 ) = 0;
+	virtual const realPointField_D&   diameter() const = 0;
 
-	
+	virtual const realPointField_D&   mass() const = 0;
 
-	virtual
-	realx3PointField_D& rAcceleration() = 0;
+	virtual realx3PointField_D&       rAcceleration() = 0;
 
-	virtual
-	const realx3PointField_D& rAcceleration() const = 0;
+	virtual const realx3PointField_D& rAcceleration() const = 0;
 
-	virtual
-	const realVector_D& boundingSphere()const = 0;
+	virtual const realPointField_D&   boundingSphere() const = 0;
 
-	virtual 
-	word shapeTypeName()const = 0;
+	virtual word                      shapeTypeName() const = 0;
 
-	virtual
-	void boundingSphereMinMax(real & minDiam, real& maxDiam)const = 0;
+	virtual const shape&              getShapes() const = 0;
 
-	
+	virtual void boundingSphereMinMax(real& minDiam, real& maxDiam) const = 0;
 
 }; // particles
 
-} // pFlow
+} // namespace pFlow
 
 #endif //__particles_hpp__

@@ -36,41 +36,32 @@ namespace pFlow
  */
 class AdamsBashforth2
 :
-	public integration
+	public integration,
+	public realx3PointField_D
 {
-protected:
+private:
 
-	/// dy at t-dt
-	realx3PointField_D& dy1_;
-
-	/// Range policy for integration kernel (alias)
-	using rpIntegration = Kokkos::RangePolicy<
-			DefaultExecutionSpace,
-			Kokkos::Schedule<Kokkos::Static>,
-			Kokkos::IndexType<int32>
-			>;
-
+	auto& dy1()
+	{
+		return static_cast<realx3PointField_D&>(*this);
+	}
+	
 public:
 
-	/// Type info
-	TypeInfo("AdamsBashforth2");
+	/// Class info
+	ClassInfo("AdamsBashforth2");
 
 	// - Constructors
 
 		/// Construct from components
 		AdamsBashforth2(
 			const word& baseName,
-			repository& owner,
-			const pointStructure& pStruct,
-			const word& method);
-
-		uniquePtr<integration> clone()const override
-		{
-			return makeUnique<AdamsBashforth2>(*this);
-		}
+			pointStructure& pStruct,
+			const word& method,
+			const realx3Field_D& initialValField);
 
 		/// Destructor 
-		virtual ~AdamsBashforth2()=default;
+		~AdamsBashforth2()final = default;
 
 		/// Add this to the virtual constructor table 
 		add_vCtor(
@@ -80,71 +71,52 @@ public:
 
 
 	// - Methods
+		/// return integration method 
+		word method()const override
+		{
+			return "AdamsBashforth2";
+		}
 
 		bool predict(
 			real UNUSED(dt), 
-			realx3Vector_D& UNUSED(y), 
-			realx3Vector_D& UNUSED(dy)) override;
+			realx3PointField_D& UNUSED(y), 
+			realx3PointField_D& UNUSED(dy)) final;
+		
+		bool predict(
+			real dt, 
+			realx3Field_D& y, 
+			realx3PointField_D& dy) final;
 
 		bool correct(
 			real dt, 
-			realx3Vector_D& y, 
-			realx3Vector_D& dy) override;
+			realx3PointField_D& y, 
+			realx3PointField_D& dy) final;
+
+		bool correct(
+			real dt, 
+			realx3Field_D& y, 
+			realx3PointField_D& dy) final;
+		
+		/*bool hearChanges
+		(
+			real t,
+			real dt,
+			uint32 iter,
+			const message& msg, 
+			const anyList& varList
+		) override;*/
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,
-			const realx3Vector& y) override;
+			const realx3Vector& y) final;
 
-		bool needSetInitialVals()const override
+		bool needSetInitialVals()const final
 		{
 			return false;
 		}
-		
-		/// Integrate on all points in the active range 
-		bool intAll(
-			real dt, 
-			realx3Vector_D& y, 
-			realx3Vector_D& dy, 
-			range activeRng);
-
-		/// Integrate on active points in the active range 
-		template<typename activeFunctor>
-		bool intRange(
-			real dt, 
-			realx3Vector_D& y, 
-			realx3Vector_D& dy, 
-			activeFunctor activeP );
 
 };
 
-template<typename activeFunctor>
-bool pFlow::AdamsBashforth2::intRange(
-	real dt, 
-	realx3Vector_D& y,
-	realx3Vector_D& dy,
-	activeFunctor activeP )
-{
-
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
-	auto d_dy1= dy1_.deviceVectorAll();
-	auto activeRng = activeP.activeRange();
-
-	Kokkos::parallel_for(
-		"AdamsBashforth2::correct",
-		rpIntegration (activeRng.first, activeRng.second),
-		LAMBDA_HD(int32 i){
-			if( activeP(i))
-			{
-				d_y[i] +=  dt*(static_cast<real>(3.0 / 2.0) * d_dy[i] - static_cast<real>(1.0 / 2.0) * d_dy1[i]);
-				d_dy1[i] = d_dy[i];
-			}
-		});
-	Kokkos::fence();
-
-
-	return true;
-}
 
 } // pFlow
 

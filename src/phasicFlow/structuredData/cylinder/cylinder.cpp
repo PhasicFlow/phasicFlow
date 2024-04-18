@@ -21,6 +21,7 @@ Licence:
 
 #include "cylinder.hpp"
 #include "zAxis.hpp"
+#include "streams.hpp"
 
 FUNCTION_H
 bool pFlow::cylinder::calculateParams()
@@ -43,9 +44,12 @@ bool pFlow::cylinder::calculateParams()
 	realx3 minPinZ(-sqrt(radius2_), -sqrt(radius2_), 0.0);
 	realx3 maxPinZ( sqrt(radius2_),  sqrt(radius2_), sqrt(axisVector2_));
 
-	minPoint_ = zA.transferBackZ(minPinZ);
-	maxPoint_ = zA.transferBackZ(maxPinZ);
+	auto minp = zA.transferBackZ(minPinZ);
+	auto maxp = zA.transferBackZ(maxPinZ);
 
+	minPoint_ = min(minp, maxp);
+	maxPoint_ = max(minp, maxp);
+	
 	return true;
 }
 

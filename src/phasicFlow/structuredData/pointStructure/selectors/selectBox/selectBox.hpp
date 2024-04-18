@@ -38,7 +38,7 @@ class selectBox
 {
 protected:
 	
-	int32Vector selectedPoints_;
+	uint32Vector selectedPoints_;
 
 	box 		box_;
 
@@ -63,12 +63,12 @@ public:
 
 	//// - Methods
 
-		virtual const int32Vector& selectedPoinsts()const override
+		const uint32Vector& selectedPoints()const override
 		{
 			return selectedPoints_;
 		}
 
-		virtual int32Vector& selectedPoinsts() override
+		uint32Vector& selectedPoints() override
 		{
 			return selectedPoints_;
 		}

@@ -36,7 +36,7 @@ class localProcessors
 :
     public processors
 {
-protected:
+private:
 
 #ifdef pFlow_Build_MPI
     pFlow::MPI::Comm    parrentCommunicator_;
@@ -44,9 +44,9 @@ protected:
     pFlow::MPI::Comm    localCommunicator_;
 #endif
 
-    int localSize_ = 0 ;
+    int localSize_ = 1 ;
 
-    int localRank_ = -1;
+    int localRank_ = 0;
 
     bool isPartOfLocal_ = true;
 

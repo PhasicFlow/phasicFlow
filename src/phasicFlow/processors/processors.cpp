@@ -46,7 +46,7 @@ void pFlow::processors::initProcessors(int argc, char *argv[])
 	if(!processors::isInitialized())
 	{
 		CheckMPI(MPI_Init(&argc, &argv), true);
-		isSelfInitialized_ = true;
+		initProcessorsCelled_ = true;
 
         argc_ = argc;
         argv_ = argv;
@@ -84,7 +84,7 @@ void pFlow::processors::finalizeProcessors()
 {
 
 #ifdef pFlow_Build_MPI
-	if(isSelfInitialized_ && !isFinalized())
+	if(initProcessorsCelled_ && !isFinalized())
 	{
         MPI::TypeFree(&pFlow::MPI::realx3Type__);
         MPI::TypeFree(&pFlow::MPI::realx4Type__);

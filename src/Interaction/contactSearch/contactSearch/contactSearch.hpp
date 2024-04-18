@@ -23,50 +23,44 @@ Licence:
 #define __contactSearch_hpp__
 
 
-#include "interactionBase.hpp"
-#include "unsortedPairs.hpp"
-#include "box.hpp"
+#include "contactSearchGlobals.hpp"
 #include "dictionary.hpp"
+#include "virtualConstructor.hpp"
+#include "Timer.hpp"
 
 namespace pFlow
 {
 
+// - forward 
+class box;
+class particles;
+class geometry;
+class pointStructure;
+
 
 class contactSearch
-:
-	public interactionBase
 {
-public:
-	using IdType 			= typename interactionBase::IdType;
+private:
 
-	using IndexType 		= typename interactionBase::IndexType;
+	const box& 	extendedDomainBox_;
 
-	using ExecutionSpace 	= typename interactionBase::ExecutionSpace;
+	const particles& 		particles_;
 
-	using PairContainerType   = unsortedPairs<ExecutionSpace, IdType>;
+	const geometry&			geometry_;
 
-protected:
+	Timer 		ppTimer_;
 
-	const box& 			domain_;
+	Timer 		pwTimer_;
 
 	dictionary 	dict_;
 
-	Timer 		sphereSphereTimer_;
-
-	Timer 		sphereWallTimer_;
-
-	auto& dict()
-	{
-		return dict_;
-	}
-	
 public:
 
 	TypeInfo("contactSearch");
 
 	contactSearch(
 		const dictionary& dict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers);
@@ -88,40 +82,68 @@ public:
 	 	(dict, domain, prtcl, geom, timers)
 	);
 
-	const auto& domain()const
-	{
-		return domain_;
-	}
-
+	
 	const auto& dict()const
 	{
 		return dict_;
 	}
 
+	const auto& extendedDomainBox()const
+	{
+		return extendedDomainBox_;
+	}
+
+	const auto& Particles()const
+	{
+		return particles_;
+	}
+
+	const pointStructure& pStruct()const;
+
+	const auto& Geometry()const
+	{
+		return geometry_;
+	}
+
+	auto& ppTimer()
+	{
+		return ppTimer_;
+	}
+
+	auto& pwTimer()
+	{
+		return pwTimer_;
+	}
 
 	virtual 
 	bool broadSearch(
-		PairContainerType& ppPairs,
-		PairContainerType& pwPairs,
+		uint32 iter,
+		real t,
+		real dt,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
 		bool force = false) = 0;
-
-	virtual 
-	bool ppEnterBroadSearch()const = 0;
-
-	virtual 
-	bool pwEnterBroadSearch()const = 0;
-
-	virtual 
-	bool ppPerformedBroadSearch()const = 0;
-
-	virtual 
-	bool pwPerformedBroadSearch()const = 0;
 	
+	virtual 
+	bool boundaryBroadSearch(
+		uint32 i,
+		uint32 iter,
+		real t,
+		real dt,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false)=0;
+
+	virtual 
+	bool enterBroadSearch(uint32 iter, real t, real dt)const = 0;
+
+	virtual 
+	bool performedBroadSearch()const = 0;
 
 	static 
 	uniquePtr<contactSearch> create(
 		const dictionary& dict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers);

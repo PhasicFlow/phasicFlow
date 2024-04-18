@@ -21,12 +21,14 @@ Licence:
 #include "baseTimeControl.hpp"
 
 
-
 pFlow::baseTimeControl::baseTimeControl
 (
     const dictionary &dict,
-    const word& intervalPrefix
+    const word& intervalPrefix,
+	real defStartTime
 )
+:
+	intervalPrefix_(intervalPrefix)
 {
 	auto tControl = dict.getVal<word>("timeControl");
 	if(tControl == "timeStep")
@@ -45,9 +47,9 @@ pFlow::baseTimeControl::baseTimeControl
 
 	word intervalWord = intervalPrefix.size()==0? word("interval"): intervalPrefix+"Interval";
 
-	if(isTimeStep_)
+	if(!isTimeStep_)
 	{
-		auto startTime = (dict.getValOrSet<real>("startTime", 0.0));
+		auto startTime = (dict.getValOrSet<real>("startTime", defStartTime));
     	auto endTime = (dict.getValOrSet<real>("endTime", largeValue));
 		auto interval = dict.getVal<real>(intervalWord);
 		rRange_ = realStridedRange(startTime, endTime, interval);
@@ -55,7 +57,7 @@ pFlow::baseTimeControl::baseTimeControl
 	}
 	else
 	{
-		auto startTime = (dict.getValOrSet<int32>("startTime", 0.0));
+		auto startTime = (dict.getValOrSet<int32>("startTime", 0));
     	auto endTime = (dict.getValOrSet<int32>("endTime", largestPosInt32));
 		auto interval = dict.getVal<int32>(intervalWord);
 		iRange_ = int32StridedRagne(startTime, endTime, interval);
@@ -71,7 +73,123 @@ bool pFlow::baseTimeControl::timeEvent(uint32 iter, real t, real dt) const
 	}
 	else
 	{
-		return rRange_.isMember(t, 0.51*dt);
+		return rRange_.isMember(t, 0.55*dt);
 	}
     return false;
+}
+
+bool
+pFlow::baseTimeControl::isInRange(uint32 iter, real t, real dt) const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.isInRange(iter);
+	}
+	else
+	{
+		return rRange_.isInRange(t);
+	}
+}
+
+pFlow::real
+pFlow::baseTimeControl::startTime() const
+{
+	if(!isTimeStep_)
+	{
+		return rRange_.begin();
+	}
+
+	fatalErrorInFunction<<"timeControl is not simulationTime or runTime"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::real
+pFlow::baseTimeControl::endTime() const
+{
+	if(!isTimeStep_)
+	{
+		return rRange_.end();
+	}
+
+	fatalErrorInFunction<<"timeControl is not simulationTime or runTime"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::real
+pFlow::baseTimeControl::rInterval() const
+{
+	if(!isTimeStep_)
+	{
+		return rRange_.stride();
+	}
+	fatalErrorInFunction<<"timeControl is not simulationTime or runTime"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::int32
+pFlow::baseTimeControl::startIter() const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.begin();
+	}
+	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::int32
+pFlow::baseTimeControl::endIter() const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.end();
+	}
+	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
+	fatalExit;
+	return 0;
+}
+
+pFlow::int32
+pFlow::baseTimeControl::iInterval() const
+{
+	if(isTimeStep_)
+	{
+		return iRange_.stride();
+	}
+	fatalErrorInFunction<<"timeControl is not timeStep"<<endl;
+	fatalExit;
+	return 0;
+}
+
+bool
+pFlow::baseTimeControl::write(dictionary& dict) const
+{
+	if(isTimeStep_)
+	{
+		dict.add("timeControl", "timeStep");
+	}
+	else
+	{
+		dict.add("timeControl", "runTime");
+	}
+
+	word intervalWord = intervalPrefix_.size()==0? word("interval"): intervalPrefix_+"Interval";
+	
+	if(!isTimeStep_)
+	{
+		dict.add(intervalWord,rRange_.stride());
+		dict.add("startTime",rRange_.begin());
+		dict.add("endTime", rRange_.end());
+	}
+	else
+	{
+		dict.add(intervalWord,iRange_.stride());
+		dict.add("startTime",iRange_.begin());
+		dict.add("endTime", iRange_.end());
+	}
+	return true;
 }
