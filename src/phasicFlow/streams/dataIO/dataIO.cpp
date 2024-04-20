@@ -258,3 +258,32 @@ bool pFlow::dataIO<T>::readData
 	}
 }
 
+template<typename T>
+pFlow::uniquePtr<pFlow::dataIO<T>> 
+	pFlow::dataIO<T>::create(const IOPattern& iop)
+{
+
+	word dataIOType = angleBracketsNames2(
+		"dataIO", 
+		getTypeName<T>(), 
+		pFlowProcessors().localRunTypeName());
+	
+	if(IOPatternvCtorSelector_.search(dataIOType))
+	{
+		return IOPatternvCtorSelector_[dataIOType](iop);
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< dataIOType << " does not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			IOPatternvCtorSelector_
+		);
+		fatalExit;
+	}
+
+	return nullptr;
+}
+
