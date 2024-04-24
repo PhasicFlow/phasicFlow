@@ -30,6 +30,12 @@ class dataIORegular
 :
 	public dataIO<T>
 {
+public:
+  
+  using DataIORegularType = dataIORegular<T>;
+
+  using DataIOType = dataIO<T>;
+
 protected:
 
     bool gatherData(span<T> data ) override
@@ -41,7 +47,7 @@ protected:
 
 public:
 
-	TypeInfo("dataIO<regular>");
+	TypeInfoTemplate111("dataIO",T,"regular");
 
 	dataIORegular(const IOPattern& iop)
     :
@@ -57,6 +63,13 @@ public:
 	dataIORegular& operator=(dataIORegular&&) = default;
 
 	~dataIORegular() = default;
+
+	add_vCtor
+	(
+		DataIOType,
+		DataIORegularType,
+		IOPattern
+	);
 	
 };
 

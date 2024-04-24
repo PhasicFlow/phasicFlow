@@ -28,7 +28,7 @@ Licence:
 #include "span.hpp"
 #include "iOstream.hpp"
 #include "iIstream.hpp"
-#include "createDataIO.hpp"
+#include "dataIO.hpp"
 #include "pFlowProcessors.hpp"
 
 namespace pFlow
@@ -82,8 +82,8 @@ bool writeSpan(
     const IOPattern& iop)
 {
    
-   auto ioPtr = createDataIO<T>(pFlowProcessors().localRunTypeName(), iop);
-    
+   auto ioPtr = dataIO<T>::create(iop);
+       
    if(!ioPtr)
 	{
 		fatalErrorInFunction;
@@ -141,8 +141,8 @@ bool readStdVector
 	const IOPattern& iop 
 )
 {
-	auto ioPtr = createDataIO<T>(pFlowProcessors().localRunTypeName(), iop);
-
+	auto ioPtr = dataIO<T>::create(iop);
+	
 	if(!ioPtr)
 	{
 		fatalErrorInFunction;

@@ -28,6 +28,8 @@ Licence:
 #include "IOPattern.hpp"
 #include "iOstream.hpp"
 #include "iIstream.hpp"
+#include "virtualConstructor.hpp"
+#include "pFlowProcessors.hpp"
 
 
 
@@ -98,6 +100,14 @@ public:
 
 	virtual ~dataIO() = default;
 
+	create_vCtor
+	(
+		dataIO,
+		IOPattern,
+		(const IOPattern& iop),
+		(iop)
+	);
+
 	/// Write data to the end of file from all processors.
 	/// This method should be called from all processors. 
 	bool writeData(iOstream& os, span<T> data);
@@ -105,6 +115,9 @@ public:
 	bool readData(
         iIstream& is, 
         std::vector<T>& data);
+
+	static
+	uniquePtr<dataIO> create(const IOPattern& iop);
 
 };
 
@@ -123,6 +136,6 @@ iOstream& operator<<(iOstream& os, const span<T>& s)
 
 }
 
-#include "dataIOTemplate.cpp"
+#include "dataIO.cpp"
 
 #endif
