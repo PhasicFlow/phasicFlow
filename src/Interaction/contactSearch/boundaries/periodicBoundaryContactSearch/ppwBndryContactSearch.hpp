@@ -36,15 +36,16 @@ public:
 	using NextType = deviceViewType1D<uint32>;
 
 private:
-	cells searchCells_;
 
-	HeadType head_{"periodic::head", 1, 1, 1};
+	cells    searchCells_;
 
-	NextType next_{"periodic::next", 1};
+	HeadType head_{ "periodic::head", 1, 1, 1 };
 
-	real sizeRatio_ = 1.0;
+	NextType next_{ "periodic::next", 1 };
 
-	uint32 nextCapacity_ = 0;
+	real     sizeRatio_ = 1.0;
+
+	uint32   nextCapacity_ = 0;
 
 	void checkAllocateNext(uint32 n);
 

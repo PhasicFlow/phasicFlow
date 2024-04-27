@@ -26,6 +26,18 @@ Licence:
 namespace pFlow
 {
 
+
+// forward 
+template< class T, class MemorySpace>
+	class boundaryFieldList;
+
+enum class DataDirection
+{
+	MasterToSlave,
+	SlaveToMaster,
+	TwoWay
+};
+
 template< class T, class MemorySpace = void>
 class boundaryField
 :
@@ -43,12 +55,22 @@ public:
 
 	using FieldAccessType 	= scatteredFieldAccess<T, memory_space>;
 
-protected:
+	using ProcVectorType 	= VectorSingle<T,MemorySpace>;
 
+private:
+
+	/// friend et al. 
+	friend class boundaryFieldList<T,MemorySpace>;
+	
     /// @brief a ref to the internal field 
     InternalFieldType& 			internal_;
 
-	
+	virtual 
+	bool updateBoundary(int step, DataDirection direction)
+	{
+		return true;
+	}
+
 public:
 
 	TypeInfoTemplate211("boundaryField","none" ,T, memory_space::name());
@@ -77,7 +99,6 @@ public:
 		BoundaryFieldType,
 		boundaryBase
 	);
-
 
 	bool hearChanges
 	(
@@ -116,6 +137,12 @@ public:
 			this->mirrorBoundary().indexList().deviceViewAll(),
 			internal_.deviceViewAll());
 	}
+	
+	virtual 
+	ProcVectorType& neighborProcField();
+
+	virtual
+	const ProcVectorType& neighborProcField()const;
 
 	void fill(const std::any& val)override
 	{

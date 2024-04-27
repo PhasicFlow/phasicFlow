@@ -39,33 +39,27 @@ class simulationDomain
 :
 	public fileDictionary
 {
-private:
+private:	
 
-static inline constexpr uint32 sizeOfBoundaries_ = 6;
-
-static 
-inline const std::array<word,6>  boundaryNames_ = 
-{
-	"left", "right", 
-	"bottom", "top",
-	"rear", "front"
-};
-
-protected:	
-
-	//fileDictionary 	globalDomainDict_ ;
-
-	/// @brief acutal limits of the simulation domain
+	/// @brief acutal limits of the global box of  simulation
 	box 			globalBox_;
 
-	/// @brief the actual limits of this processor domain 
-	domain 			thisDomain_;
 
-	bool 			boundariesSet_ = false;
+	static constexpr uint32 sizeOfBoundaries_ = 6;
+
+	static 
+	inline const std::array<word,6>  boundaryNames_ = 
+	{
+		"left", "right", 
+		"bottom", "top",
+		"rear", "front"
+	};
 	
-	virtual bool    createBoundaryDicts() = 0;
+	virtual 
+	bool createBoundaryDicts() = 0;
 
-	virtual bool    setThisDomain() = 0;
+	virtual 
+	bool setThisDomain() = 0;
 
 public:
 
@@ -73,11 +67,10 @@ public:
 	TypeInfo("simulationDomain");
 
 	/// Constrcut from components 
-	simulationDomain(systemControl& control);
+	explicit simulationDomain(systemControl& control);
 	
 	/// Destructor 
-	virtual 
-	~simulationDomain() = default;
+	~simulationDomain() override = default;
 	
 
 	create_vCtor
@@ -88,6 +81,11 @@ public:
 		(control)	
 	);
 
+	const auto& globalBox()const
+	{
+		return globalBox_;
+	}
+
 	virtual 
 	const dictionary& thisBoundaryDict()const = 0;
 	
@@ -96,9 +94,6 @@ public:
 
     virtual
     uint32 initialNumberInThis()const = 0;
-
-	virtual 
-	bool initialThisDomainActive()const = 0;
 
     virtual 
 	bool initialTransferBlockData(
@@ -139,9 +134,7 @@ public:
             charSpan(dst), 
             el
         );
-    } 
-
-
+    }
 
     /// @brief Number of points to be imported after updating domains 
 	/// @return number of points
@@ -151,40 +144,46 @@ public:
     virtual 
     uint32 numberToBeExported()const = 0;
 
-	
-
+	/// @brief Is this domain active?
+	/// Active mean, there is particle in it and 
+	/// boundaries and other entities of simulation domains are valid  
 	virtual 
-	bool requiresDataTransfer() const = 0;
+	bool domainActive()const = 0;
 
-	inline 
-	const auto& thisDomain()const
-	{
-		return thisDomain_;
-	}
-
+	
+	/// @brief return the simulation domain of this processor 
+	virtual 
+	const domain& thisDomain()const = 0;
+	
 	
 	domain extendThisDomain(
 		const realx3& lowerPointExtension, 
 		const realx3& upperPointExtension)const;
 
+	/// @brief The original dictionary supplied by the user as input 
 	inline 
 	const auto& globalBoundaryDict()const
 	{
 		return static_cast<const fileDictionary&>(*this);
 	}
 
+	/// @brief return a const ref to dicrionary of boundary i of this processor 
 	inline
 	const dictionary& boundaryDict(uint32 i)const
 	{
 		return thisBoundaryDict().subDict(bundaryName(i));
 	}
 	
-	inline
-	const auto& boundaryPlane(uint32 i)const
-	{
-		return thisDomain_.boundaryPlane(i);
-	}
+	/// @brief return a const ref to the plane of boundary i of this processor 
+	const plane& boundaryPlane(uint32 i)const;
+	
 
+	static
+	uniquePtr<simulationDomain> create(systemControl& control);
+
+	/// @brief  Boundary name based on boundary index 
+	/// @param i boundary index (range from 0 to 5) 
+	/// @return const reference to name of the boundary 
 	static inline
 	const word& bundaryName(uint32 i)
 	{
@@ -197,9 +196,6 @@ public:
 		return boundaryNames_.size();
 	}
 	
-	static
-	uniquePtr<simulationDomain> create(systemControl& control);
-
 }; // simulationDomain
 
 

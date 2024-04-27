@@ -28,12 +28,12 @@ namespace pFlow
 
 	extern Istream input; 
 
-	extern masterOstream errReport;
+	extern processorOstream errReport;
 
 }
 
 
-#define INFORMATION pFlow::mOutput<<boldChar<<magentaColor<<"> INFO: "<<defaultColor<<magentaColor
+#define INFORMATION pFlow::pOutput<<boldChar<<magentaColor<<"> INFO: "<<defaultColor<<magentaColor
 #define END_INFO defaultColor<<pFlow::endl
 
 #define REPORT(n) pFlow::mOutput.space(2*n)

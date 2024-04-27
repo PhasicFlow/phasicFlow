@@ -19,8 +19,14 @@ template class pFlow::dataIORegular<pFlow::int64>;
 template class pFlow::dataIO<pFlow::uint32>;
 template class pFlow::dataIORegular<pFlow::uint32>;
 
+template class pFlow::dataIO<pFlow::uint32x3>;
+template class pFlow::dataIORegular<pFlow::uint32x3>;
+
 template class pFlow::dataIO<pFlow::uint64>;
 template class pFlow::dataIORegular<pFlow::uint64>;
+
+template class pFlow::dataIO<size_t>;
+template class pFlow::dataIORegular<size_t>;
 
 template class pFlow::dataIO<pFlow::real>;
 template class pFlow::dataIORegular<pFlow::real>;

@@ -31,7 +31,12 @@ class particleIdHandler
 :
 	public uint32PointField_D
 {
-  
+
+private:
+
+	virtual 
+	bool initialIdCheck()=0;
+
 public:
 	
 	/// class info
@@ -53,7 +58,9 @@ public:
 	Pair<uint32, uint32> getIdRange(uint32 nNewParticles)=0;
 
 	virtual 
-	bool initialIdCheck()=0;
+	uint32 maxId()const = 0;
+
+	
 
 	// heat change for possible insertion of particles
 	// overrdie from internalField

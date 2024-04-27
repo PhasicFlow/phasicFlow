@@ -43,6 +43,8 @@ protected:
 
     const boundaryList&         boundaries_;
 
+    uint32                      slaveToMasterUpdateIter_ = -1;
+
 public:
 
     boundaryFieldList(const boundaryList& boundaries, InternalFieldType& internal)
@@ -60,6 +62,29 @@ public:
         }
     }
 
+    void updateBoundaries(uint32 iter, DataDirection direction)
+    {
+        if( direction == DataDirection::SlaveToMaster 
+            && slaveToMasterUpdateIter_ == iter) return;
+        
+        // first step
+        for(auto b:*this)
+        {
+            b->updateBoundary(1, direction);
+        }
+
+        // second step
+        for(auto b:*this)
+        {
+            b->updateBoundary(2, direction);
+        }
+
+        if(direction == DataDirection::SlaveToMaster)
+        {
+            slaveToMasterUpdateIter_ = iter;
+        }
+    }
+
     void fill(const T& val)
     {
         for(auto& bf: *this)
@@ -68,6 +93,12 @@ public:
         }
     }
 
+    bool slaveToMasterUpdateRequested()const
+    {
+        return slaveToMasterUpdateIter_ != -1;
+    }
+
+    
 };
 
 }

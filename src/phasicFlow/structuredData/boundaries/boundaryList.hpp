@@ -40,24 +40,23 @@ class boundaryList
 private:
 
 	//// - data members
-		pointStructure& 		pStruct_;
+	pointStructure& pStruct_;
 
-		baseTimeControl 		timeControl_;
+	baseTimeControl timeControl_;
 
-		domain 					extendedDomain_;
+	domain          extendedDomain_;
 
-		box 					internalDomainBox_;
+	box             internalDomainBox_;
 
-		bool                    listSet_ = false;
+	bool            listSet_ = false;
 
-		void setExtendedDomain();		
+	void setExtendedDomain();
 
-		bool resetLists();
+	bool resetLists();
 
-		/// @brief update neighbor list of boundaries regardless
-		/// of the time intervals 
-		bool updateLists();
-
+	/// @brief update neighbor list of boundaries regardless
+	/// of the time intervals
+	bool updateNeighborLists();
 
 public:
 	
@@ -66,16 +65,16 @@ public:
 	
 
 	//// - Constructors
-	boundaryList(pointStructure& pStruct);
+	explicit boundaryList(pointStructure& pStruct);
 
 
-  	~boundaryList() = default;
+  	virtual ~boundaryList() = default;
 
 	/// @brief update neighbor list of boundaries based on 
 	/// the time intervals
-	bool updateLists(uint32 iter, real t, real dt);
+	bool updateNeighborLists(uint32 iter, real t, real dt);
 
-	bool setLists();
+	bool createBoundaries();
 
 	inline
 	const pointStructure& pStruct()const
@@ -115,8 +114,6 @@ public:
 
 	box internalDomainBox()const;
 	
-	
-
 	bool beforeIteration(uint32 iter, real t, real dt);
 
 	bool iterate(uint32 iter, real t, real dt);

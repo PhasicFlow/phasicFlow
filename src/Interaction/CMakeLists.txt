@@ -7,6 +7,8 @@ contactSearch/methods/cellBased/NBS/NBS.cpp
 contactSearch/methods/cellBased/NBS/cellsWallLevel0.cpp
 
 contactSearch/boundaries/boundaryContactSearch/boundaryContactSearch.cpp
+contactSearch/boundaries/twoPartContactSearch/twoPartContactSearchKernels.cpp
+contactSearch/boundaries/twoPartContactSearch/twoPartContactSearch.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/ppwBndryContactSearchKernels.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/ppwBndryContactSearch.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/wallBoundaryContactSearch.cpp
@@ -21,6 +23,13 @@ sphereInteraction/sphereInteractionsLinearModels.cpp
 sphereInteraction/sphereInteractionsNonLinearModels.cpp
 sphereInteraction/sphereInteractionsNonLinearModModels.cpp
 )
+
+if(pFlow_Build_MPI)
+    list(APPEND SourceFiles 
+    contactSearch/boundaries/processorBoundaryContactSearch/processorBoundaryContactSearch.cpp
+    sphereInteraction/boundaries/processorBoundarySphereInteraction/processorBoundarySphereInteractions.cpp
+    )
+endif()
 
 set(link_libs Kokkos::kokkos phasicFlow Property Particles Geometry)
 

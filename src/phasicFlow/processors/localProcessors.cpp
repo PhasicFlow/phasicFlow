@@ -1,3 +1,22 @@
+/*------------------------------- phasicFlow ---------------------------------
+    O        C enter of
+   O O       E ngineering and
+  O   O      M ultiscale modeling of
+ OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
 #include "localProcessors.hpp"
 
 pFlow::localProcessors::localProcessors(const word &name)
@@ -8,8 +27,8 @@ pFlow::localProcessors::localProcessors(const word &name)
     name_(name)
 {
 #ifdef pFlow_Build_MPI
-    parrentCommunicator_ = pFlow::MPI::CommWorld;
-    localCommunicator_ = pFlow::MPI::CommWorld;
+    parrentCommunicator_ = MPI_COMM_WORLD;
+    localCommunicator_ = MPI_COMM_WORLD;
 #endif
 
 }
@@ -24,7 +43,7 @@ pFlow::localProcessors::localProcessors
     name_(name)
 {
 #ifdef pFlow_Build_MPI
-    parrentCommunicator_ = pFlow::MPI::CommWorld;
+    parrentCommunicator_ = MPI_COMM_WORLD;
     
     if(ranks.size()> this->globalSize() )
     {
@@ -33,17 +52,17 @@ pFlow::localProcessors::localProcessors
         fatalExit;
     }
 
-    pFlow::MPI::Group globalGroup;
+    MPI_Group globalGroup;
     MPI_Comm_group(parrentCommunicator_, &globalGroup);
 
-    pFlow::MPI::Group localGroup;
+    MPI_Group localGroup;
     MPI_Group_incl(globalGroup, ranks.size(), ranks.data(), &localGroup);
  
     // Create the new communicator from that group of processes.
     
     CheckMPI( MPI_Comm_create(parrentCommunicator_, localGroup, &localCommunicator_), true);
     
-    isPartOfLocal_ = localCommunicator_ != MPI::CommNull;
+    isPartOfLocal_ = localCommunicator_ != MPI_COMM_NULL;
     
     if(isPartOfLocal_)
     {
@@ -71,7 +90,7 @@ pFlow::localProcessors::localProcessors
 
 pFlow::localProcessors::localProcessors
 (
-    pFlow::MPI::Comm parrentComm, 
+    MPI_Comm parrentComm, 
     const word &name, 
     const std::vector<int> &ranks
 )
@@ -92,17 +111,17 @@ pFlow::localProcessors::localProcessors
         fatalExit;
     }
 
-    pFlow::MPI::Group parGroup;
+    MPI_Group parGroup;
     MPI_Comm_group(parrentCommunicator_, &parGroup);
 
-    pFlow::MPI::Group localGroup;
+    MPI_Group localGroup;
     MPI_Group_incl(parGroup, ranks.size(), ranks.data(), &localGroup);
  
     // Create the new communicator from that group of processes.
     
     CheckMPI( MPI_Comm_create(parrentCommunicator_, localGroup, &localCommunicator_), true);
     
-    isPartOfLocal_ = localCommunicator_ != MPI::CommNull;
+    isPartOfLocal_ = localCommunicator_ != MPI_COMM_NULL;
     
     if(isPartOfLocal_)
     {

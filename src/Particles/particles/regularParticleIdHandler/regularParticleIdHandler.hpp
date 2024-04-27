@@ -33,6 +33,7 @@ private:
     
     uint32 maxId_ = -1;
 
+  bool initialIdCheck()override; 
 public:
 
     ClassInfo("particleIdHandler<regular>");
@@ -50,7 +51,10 @@ public:
 
     Pair<uint32, uint32> getIdRange(uint32 nNewParticles)override;
 
-	bool initialIdCheck()override;
+	uint32 maxId()const override
+	{
+		return maxId_;
+	}
 
 };
 

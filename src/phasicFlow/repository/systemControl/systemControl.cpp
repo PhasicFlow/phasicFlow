@@ -199,7 +199,7 @@ bool pFlow::systemControl::operator++(int)
 
 		if (time().timersReportTime() && timersReport())
 		{
-			timers_.write(output, true);
+			timers_.write(mOutput, true);
 		}
 	}
 	else if (time().finalTime())
@@ -212,7 +212,7 @@ bool pFlow::systemControl::operator++(int)
 		}
 		writeToFileTimer_.end();
 
-		timers_.write(output, true);
+		timers_.write(mOutput, true);
 	}
 
 	return toContinue;

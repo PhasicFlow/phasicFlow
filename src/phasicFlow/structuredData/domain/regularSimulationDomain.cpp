@@ -51,9 +51,9 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
 			return false;
 		}
 
-		if(!bDict.add("mirrorProcessorNo",(uint32) processors::globalRank()))
+		if(!bDict.add("neighborProcessorNo",(uint32) processors::globalRank()))
 		{
-			fatalErrorInFunction<<"error in adding mirrorProcessorNo to "<< bName <<
+			fatalErrorInFunction<<"error in adding neighborProcessorNo to "<< bName <<
 			" in dictionary "<< boundaries.globalName()<<endl;
 			return false;
 		}
@@ -84,7 +84,7 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
 
 bool pFlow::regularSimulationDomain::setThisDomain()
 {
-	thisDomain_ = domain(globalBox_);
+	thisDomain_ = domain(globalBox());
     return true;
 }
 
@@ -126,11 +126,23 @@ pFlow::uint32 pFlow::regularSimulationDomain::numberToBeExported() const
     return 0;
 }
 
-bool pFlow::regularSimulationDomain::initialTransferBlockData
-(
-	span<char> src, 
-	span<char> dst,
-	size_t sizeOfElement
+bool
+pFlow::regularSimulationDomain::domainActive() const
+{
+	return true;
+}
+
+const pFlow::domain&
+pFlow::regularSimulationDomain::thisDomain() const
+{
+	return thisDomain_;
+}
+
+bool
+pFlow::regularSimulationDomain::initialTransferBlockData(
+  span<char> src,
+  span<char> dst,
+  size_t     sizeOfElement
 ) const
 {
 	size_t requiredSize = sizeOfElement*initialNumberInThis();
@@ -209,7 +221,3 @@ const pFlow::dictionary &pFlow::regularSimulationDomain::thisBoundaryDict() cons
     return this->subDict("regularBoundaries");
 }
 
-bool pFlow::regularSimulationDomain::requiresDataTransfer()const
-{
-    return false;
-}
