@@ -24,7 +24,7 @@ Licence:
 #include "pointStructure.hpp"
 #include "internalField.hpp"
 #include "boundaryFieldList.hpp"
-
+#include "Time.hpp"
 
 namespace pFlow
 {
@@ -101,6 +101,23 @@ public:
 		const auto& internal()const
 		{
 			return static_cast<const InternalFieldType&>(*this);
+		}
+
+		void updateBoundaries(DataDirection direction)const
+		{
+			uint32 iter =  this->time().currentIter();
+			auto& bList = const_cast<boundaryFieldListType&>(boundaryFieldList_);
+			bList.updateBoundaries(iter, direction);
+		}
+
+		/// @brief update boundaries if it is requested previousely (slave to master). 
+		/// It only checks for SlaveToMaster direction.
+		void updateBoundariesSlaveToMasterIfRequested()
+		{
+			if(boundaryFieldList_.slaveToMasterUpdateRequested())
+			{
+				updateBoundaries(DataDirection::SlaveToMaster);
+			}
 		}
 
 		const auto& boundaryFields()const

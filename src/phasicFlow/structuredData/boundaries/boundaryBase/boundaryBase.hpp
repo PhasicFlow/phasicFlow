@@ -51,42 +51,48 @@ public:
 
 private:
 
-	// friend et al. 
+	// friend et al.
 	friend boundaryList;
 
-	const plane& 	boundaryPlane_;
+	const plane&           boundaryPlane_;
 
-	/// list of particles indices on device 
-	uint32Vector_D 	indexList_;
+	/// list of particles indices on device
+	uint32Vector_D         indexList_;
 
 	/// list of particles indieces on host
-	mutable uint32Vector_H 	indexListHost_;
+	mutable uint32Vector_H indexListHost_;
 
 	/// device and host list are sync
-	mutable bool 			listsSync_ = false;
+	mutable bool           listsSync_ = false;
 
-	/// The length defined for creating neighbor list 
-	real  			neighborLength_;	
+	/// The length defined for creating neighbor list
+	real                   neighborLength_;
 
-	/// a reference to internal points 
-	internalPoints& internal_;
+	/// a reference to internal points
+	internalPoints&        internal_;
 
-	/// a reference to the list of boundaries 
+	/// a reference to the list of boundaries
 	/// (never use this in the constructor).
-	boundaryList& 	boundaries_;
+	boundaryList&          boundaries_;
 
-	uint32 			thisBoundaryIndex_;
+	uint32                 thisBoundaryIndex_;
 
-	uint32 			mirrorProcessoNo_;
+	int                    neighborProcessorNo_;
 
-	word 		name_;
+	bool                   isBoundaryMaster_;
 
-	word 		type_;
+	word                   name_;
+
+	word                   type_;
 
 protected:
 	
-	/// @brief set the size of indexList 
-	void setSize(uint32 newSize);
+	/// @brief Set the size of indexList. 
+	/// It is virtual to let derived classed to be aware of 
+	/// the fact that the size of boundary points has been changed.
+	/// So, any drived class that override this method should call 
+	/// boundaryBase::setSize(newSize) too. 
+	virtual void setSize(uint32 newSize);
 
 	void setNewIndices(const uint32Vector_D& newIndices);
 
@@ -116,6 +122,17 @@ protected:
 		}
 	}
 
+	/// Update this boundary data in two steps (1 and 2).
+	/// This is called after calling beforeIteration for 
+	/// all boundaries, so any particle addition, deletion,
+	/// and transfer has been finished up to this point.
+	/// This two-step update help to have a flexible mechanism
+	/// for data transfer, mostly for MPI related jobs. 
+	virtual 
+	bool updataBoundary(int step)
+	{
+		return true;
+	}
 	
 public:
 
@@ -213,6 +230,24 @@ public:
 		return indexList_.capacity();
 	}
 
+	inline 
+	int neighborProcessorNo()const
+	{
+		return neighborProcessorNo_;
+	}
+
+	inline 
+	int thisProcessorNo()const
+	{
+		return pFlowProcessors().localRank();
+	}
+
+	inline
+    bool isBoundaryMaster()const
+    {
+        return isBoundaryMaster_;
+    }
+
 	inline
 	uint32 thisBoundaryIndex()const
 	{
@@ -283,8 +318,22 @@ public:
 	
     pointFieldAccessType thisPoints()const;
 
+	/// @brief Return number of points in the neighbor processor boundary
+	virtual 
+	uint32 neighborProcSize()const
+	{
+		return 0;
+	}
+
+	/// @brief Return a reference to point positions in the neighbor
+	/// processor boundary.
     virtual
-    pointFieldAccessType neighborPoints()const;
+    realx3Vector_D& neighborProcPoints();
+
+	/// @brief Return a const reference to point positions in the 
+	/// neighbor processor boundary.
+	virtual
+	const realx3Vector_D& neighborProcPoints()const;
     
 	/// - static create 
 	static

@@ -3,6 +3,7 @@ namespace pFlow::periodicBoundarySIKernels
 {
 
 template<typename ContactListType, typename ContactForceModel>
+inline
 void sphereSphereInteraction
 (
     real dt,
@@ -46,14 +47,6 @@ void sphereSphereInteraction
             
             if( ovrlp >0.0 )
             {
-                
-                /*auto Vi = thisVel[i];
-                auto Vj = mirrorVel[j];
-                auto wi = thisRVel[i];
-                auto wj = mirrorRVel[j];
-                auto Nij = (xj-xi)/dist;
-                auto Vr = Vi - Vj + cross((Ri*wi+Rj*wj), Nij);*/
-
                 auto Nij = (xj-xi)/dist;
                 auto wi = rVel[ind_i];
                 auto wj = rVel[ind_j];

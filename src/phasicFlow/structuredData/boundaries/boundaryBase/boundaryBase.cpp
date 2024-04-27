@@ -191,7 +191,8 @@ pFlow::boundaryBase::boundaryBase
 	internal_(internal),
 	boundaries_(bndrs),
 	thisBoundaryIndex_(thisIndex),
-	mirrorProcessoNo_(dict.getVal<uint32>("mirrorProcessorNo")),
+	neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo")),
+	isBoundaryMaster_(thisProcessorNo()>=neighborProcessorNo()),
 	name_(dict.name()),
 	type_(dict.getVal<word>("type"))
 {
@@ -231,13 +232,22 @@ pFlow::boundaryBase::thisPoints()const
    
 }
 
-typename pFlow::boundaryBase::pointFieldAccessType
-    pFlow::boundaryBase::neighborPoints()const
+pFlow::realx3Vector_D& pFlow::boundaryBase::neighborProcPoints()
 {
-    notImplementedFunction;
-    return pointFieldAccessType();
+	static realx3Vector_D dummyVector{"dummyVector"};
+	notImplementedFunction;
+	fatalExit;
+	return dummyVector;
 }
 
+const pFlow::realx3Vector_D& 
+pFlow::boundaryBase::neighborProcPoints()const
+{
+	static realx3Vector_D dummyVector{"dummyVector"};
+	notImplementedFunction;
+	fatalExit;
+	return dummyVector;
+}
 
 pFlow::realx3 pFlow::boundaryBase::displacementVectroToMirror() const
 {

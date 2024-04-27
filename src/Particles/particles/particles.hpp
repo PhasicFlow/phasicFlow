@@ -181,6 +181,12 @@ public:
 		return contactTorque_;
 	}
 
+	inline 
+	uint maxId()const
+	{
+		return idHandler_().maxId();
+	}
+
 	bool         beforeIteration() override;
 
 	bool         iterate() override;

@@ -55,7 +55,7 @@ bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
         thisN, 
         RESERVE()
     );
-    
+
     auto pSpan  = points.getSpan();
     
     if(auto iSpan  = internal.getSpan(); 
@@ -72,7 +72,7 @@ bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
         return false;
     }
 
-    boundaries_.setLists();
+    boundaries_.createBoundaries();
 
     return true;
 }

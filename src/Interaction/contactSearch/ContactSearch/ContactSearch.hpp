@@ -130,9 +130,10 @@ public:
 		csPairContainerType& pwPairs,
 		bool force = false) override
 	{
-
 		ppTimer().start();
 
+		Particles().boundingSphere().updateBoundaries(DataDirection::SlaveToMaster);
+		
 		const auto& position = Particles().pointPosition().deviceViewAll();
 		const auto& flags = Particles().dynPointStruct().activePointsMaskDevice();
 		const auto& diam = Particles().boundingSphere().deviceViewAll();

@@ -25,7 +25,7 @@ Licence:
 #include "types.hpp"
 
 #ifdef pFlow_Build_MPI
-    #include "mpiTypes.hpp"
+    #include "mpi.h"
 #endif
 
 
@@ -39,9 +39,9 @@ class localProcessors
 private:
 
 #ifdef pFlow_Build_MPI
-    pFlow::MPI::Comm    parrentCommunicator_;
+    MPI_Comm    parrentCommunicator_;
 
-    pFlow::MPI::Comm    localCommunicator_;
+    MPI_Comm    localCommunicator_;
 #endif
 
     int localSize_ = 1 ;
@@ -70,7 +70,7 @@ public:
 
     #ifdef pFlow_Build_MPI
         localProcessors(
-            pFlow::MPI::Comm parrentComm, 
+            MPI_Comm parrentComm, 
             const word& name, 
             const std::vector<int>& ranks);
     #endif

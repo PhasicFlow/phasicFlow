@@ -31,8 +31,6 @@ Licence:
 #include "virtualConstructor.hpp"
 #include "pFlowProcessors.hpp"
 
-
-
 namespace pFlow
 {
 

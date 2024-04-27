@@ -78,7 +78,7 @@ pFlow::particles::particles(systemControl& control)
 {
 	this->addToSubscriber(dynPointStruct_);
 
-	idHandler_().initialIdCheck();
+	//idHandler_().initialIdCheck();
 }
 
 bool
@@ -87,7 +87,16 @@ pFlow::particles::beforeIteration()
 	zeroForce();
 	zeroTorque();
 
-	return dynPointStruct_.beforeIteration();
+	if( !dynPointStruct_.beforeIteration())
+  {
+    return false;
+  }
+
+  shapeIndex_.updateBoundariesSlaveToMasterIfRequested();
+  accelertion_.updateBoundariesSlaveToMasterIfRequested();
+  idHandler_().updateBoundariesSlaveToMasterIfRequested();
+
+  return true;
 }
 
 bool

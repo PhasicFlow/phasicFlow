@@ -36,6 +36,25 @@ pFlow::boundaryField<T, MemorySpace>::boundaryField
 	internal_(internal)
 {}
 
+template<class T, class MemorySpace>
+typename pFlow::boundaryField<T, MemorySpace>::ProcVectorType& 
+pFlow::boundaryField<T, MemorySpace>::neighborProcField()
+{
+	static ProcVectorType dummyVector{"dummyVector"};
+	notImplementedFunction;
+	fatalExit;
+	return dummyVector;
+}
+
+template<class T, class MemorySpace>
+const typename pFlow::boundaryField<T, MemorySpace>::ProcVectorType& 
+pFlow::boundaryField<T, MemorySpace>::neighborProcField() const
+{
+	static ProcVectorType dummyVector{"dummyVector"};
+	notImplementedFunction;
+	fatalExit;
+	return dummyVector;
+}
 
 template<class T, class MemorySpace>
 pFlow::uniquePtr<pFlow::boundaryField<T, MemorySpace>>

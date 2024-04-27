@@ -16,6 +16,11 @@ Insertion/shapeMixture/shapeMixture.cpp
 Insertion/Insertion/Insertions.cpp
 )
 
+if(pFlow_Build_MPI)
+    list(APPEND SourceFiles 
+    particles/MPIParticleIdHandler/MPIParticleIdHandler.cpp)
+endif()
+
 set(link_libs Kokkos::kokkos phasicFlow Integration Property)
 
 pFlow_add_library_install(Particles SourceFiles link_libs)
