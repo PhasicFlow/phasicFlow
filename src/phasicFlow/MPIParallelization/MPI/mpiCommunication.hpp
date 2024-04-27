@@ -27,6 +27,7 @@ Licence:
 #include "span.hpp"
 
 
+
 namespace pFlow::MPI
 {
 
@@ -237,7 +238,31 @@ inline auto send(span<T> data, int dest, int tag, Comm comm)
         comm);
 }
 
+template<typename T>
+inline auto Isend(span<T> data, int dest, int tag, Comm comm, Request* req)
+{
+	return MPI_Isend(
+		data.data(), 
+		sFactor<T>()*data.size(), 
+		Type<T>(), 
+		dest, 
+		tag, 
+		comm, 
+		req);
+}
 
+template<typename T>
+inline auto Isend(const T& data, int dest, int tag, Comm comm, Request* req)
+{
+	return MPI_Isend(
+		&data, 
+		sFactor<T>(), 
+		Type<T>(), 
+		dest, 
+		tag, 
+		comm, 
+		req);
+}
 
 template<typename T>
 inline auto recv(span<T> data, int source, int tag, Comm comm, Status *status)
@@ -252,6 +277,31 @@ inline auto recv(span<T> data, int source, int tag, Comm comm, Status *status)
         status);
 }
 
+template<typename T>
+inline auto Irecv(T& data, int source, int tag, Comm comm, Request* req)
+{
+	return MPI_Irecv(
+		&data,
+		sFactor<T>(),
+		Type<T>(),
+		source,
+		tag, 
+		comm,
+		req);
+}
+
+template<typename T>
+inline auto Irecv(span<T> data, int source, int tag, Comm comm, Request* req)
+{
+	return MPI_Irecv(
+		data.data(),
+		sFactor<T>()*data.size(),
+		Type<T>(),
+		source,
+		tag, 
+		comm,
+		req);
+}
 
 template<typename T>
 inline auto scan(T sData, T& rData, Comm comm, Operation op = SumOp)
@@ -308,6 +358,7 @@ inline auto Bcast(T& sendData, int root, Comm comm)
 		&sendData, sFactor<T>()*1, Type<T>(), root, comm);
 
 }
+
 
 template<typename T> 
 bool typeCreateIndexedBlock(
@@ -371,7 +422,6 @@ inline auto typeFree(DataType& type)
 
 
 }
-
 
 
 #endif  //__mpiCommunication_H__

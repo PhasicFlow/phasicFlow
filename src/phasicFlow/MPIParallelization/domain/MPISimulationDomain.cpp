@@ -24,15 +24,16 @@ Licence:
 #include "scatteredMasterDistribute.hpp"
 #include "scatteredMasterDistributeChar.hpp"
 
-pFlow::MPISimulationDomain::MPISimulationDomain(systemControl& control)
+pFlow::MPI::MPISimulationDomain::MPISimulationDomain(systemControl& control)
 :
     simulationDomain(control),
     communication_(pFlowProcessors()),
-    subDomains_(pFlowProcessors()),
-    domainPartition_( makeUnique<rcb1DPartitioning>(subDict("decomposition"), globalBox_))
+    subDomainsAll_(pFlowProcessors()),
+    numPointsAll_(pFlowProcessors()),
+    domainPartitioning_( makeUnique<rcb1DPartitioning>(subDict("decomposition"), globalBox()))
 {}
 
-bool pFlow::MPISimulationDomain::createBoundaryDicts()
+bool pFlow::MPI::MPISimulationDomain::createBoundaryDicts()
 {
     auto& boundaries = this->subDict("boundaries");
     
@@ -60,48 +61,94 @@ bool pFlow::MPISimulationDomain::createBoundaryDicts()
 			"in dictionary "<< boundaries.globalName()<<endl;
 			return false;
 		}
-        if( initialThisDomainActive() )
+        if( thisDomainActive_ )
         {
             if( neighbors[i] == -1 )
             {
-                bDict.add("mirrorProcessorNo", processors::globalRank());
+                bDict.add("neighborProcessorNo", processors::globalRank());
             }
             else
             {
-                bDict.add("mirrorProcessorNo", neighbors[i]);
+                bDict.add("neighborProcessorNo", neighbors[i]);
                 bDict.addOrReplace("type", "processor");
             }
-            warningInFunction<<"replace the method initialThisDomainActive()"<<endl;
         }
         else
         {
-            bDict.add("mirrorProcessorNo", processors::globalRank());
+            bDict.add("neighborProcessorNo", processors::globalRank());
             bDict.addOrReplace("type", "none");
-            warningInFunction<<"None: replace the method initialThisDomainActive()"<<endl;
         }
 		
+        if( bDict.getVal<word>("type") == "periodic")
+        {
+            fatalErrorInFunction<<
+            "periodic is not implemented "<<endl;
+            fatalExit;
+        }
 	}
 
     return true;
 }
 
-bool pFlow::MPISimulationDomain::setThisDomain()
+bool pFlow::MPI::MPISimulationDomain::setThisDomain()
 {
-    thisDomain_ = domain(domainPartition_->localBox());
-    if(!communication_.collectAllToAll(thisDomain_, subDomains_))
+    thisDomain_ = domain(domainPartitioning_->localBox());
+    uint32 thisNumPoints = initialNumberInThis();
+
+    if(!communication_.collectAllToAll(thisNumPoints, numPointsAll_))
+    {
+        fatalErrorInFunction<<
+        "Failed to distribute number of points."<<endl;
+        return false;
+    }
+    uint32 allNumPoints = std::accumulate(numPointsAll_.begin(), numPointsAll_.end(), 0u);
+
+    if( thisNumPoints != 0u )
+    {
+        thisDomainActive_ = true;
+    }
+    else 
+    {
+        if(communication_.localMaster()&& allNumPoints == 0u)
+            thisDomainActive_ = true;
+        else
+            thisDomainActive_ = false;
+    }
+
+    if( thisDomainActive_ )
+    {
+        bool allInactive = true;
+        for(int32 i=0; i<communication_.localSize(); i++ )
+        {
+            if(i == communication_.localRank() )continue;
+            if(numPointsAll_[i]!=0)
+            {
+                allInactive = false;
+                break;
+            }
+        }
+
+        if(allInactive)
+        {
+            thisDomain_ = domain(globalBox());
+        }
+    }
+    
+    if(!communication_.collectAllToAll(thisDomain_, subDomainsAll_))
     {
         fatalErrorInFunction<< "Failed to distributed domains"<<endl;
         return false;
     }
 
+
     return true;
 }
 
-std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
+std::vector<int> pFlow::MPI::MPISimulationDomain::findPlaneNeighbors() const
 {
 
     std::vector<int> neighbors(sizeOfBoundaries(),  -2);
-    domain gDomain(globalBox_);
+    domain gDomain(globalBox());
 
     // left 
     if( thisDomain_.left().parallelTouch( gDomain.left() ) )
@@ -109,12 +156,12 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
         neighbors[0] = -1;
     }
     
-    for(int i=0; i<sizeOfBoundaries(); i++)
+    for(int i=0; i<subDomainsAll_.size(); i++)
     {   
-        if(i == subDomains_.rank())continue;
+        if(i == subDomainsAll_.rank())continue;
 
         if( thisDomain_.left().parallelTouch(
-            subDomains_[i].right()) )
+            subDomainsAll_[i].right()) )
         {
             neighbors[0] = i;
             break;
@@ -127,13 +174,13 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
         neighbors[1] = -1;
     }
 
-    for(int i=0; i<sizeOfBoundaries(); i++)
+    for(int i=0; i<subDomainsAll_.size(); i++)
     {
         
-        if(i == subDomains_.rank())continue;
+        if(i == subDomainsAll_.rank())continue;
 
         if( thisDomain_.right().parallelTouch(
-            subDomains_[i].left()) )
+            subDomainsAll_[i].left()) )
         {
             neighbors[1] = i;
             break;
@@ -146,12 +193,12 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
         neighbors[2] = -1;
     }
     
-    for(int i=0; i<sizeOfBoundaries(); i++)
+    for(int i=0; i<subDomainsAll_.size(); i++)
     {   
-        if(i == subDomains_.rank())continue;
+        if(i == subDomainsAll_.rank())continue;
 
         if( thisDomain_.bottom().parallelTouch(
-            subDomains_[i].top()) )
+            subDomainsAll_[i].top()) )
         {
             neighbors[2] = i;
             break;
@@ -164,12 +211,12 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
         neighbors[3] = -1;
     }
     
-    for(int i=0; i<sizeOfBoundaries(); i++)
+    for(int i=0; i<subDomainsAll_.size(); i++)
     {   
-        if(i == subDomains_.rank())continue;
+        if(i == subDomainsAll_.rank())continue;
 
         if( thisDomain_.top().parallelTouch(
-            subDomains_[i].bottom()) )
+            subDomainsAll_[i].bottom()) )
         {
             neighbors[3] = i;
             break;
@@ -182,12 +229,12 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
         neighbors[4] = -1;
     }
     
-    for(int i=0; i<sizeOfBoundaries(); i++)
+    for(int i=0; i<subDomainsAll_.size(); i++)
     {   
-        if(i == subDomains_.rank())continue;
+        if(i == subDomainsAll_.rank())continue;
 
         if( thisDomain_.rear().parallelTouch(
-            subDomains_[i].front()) )
+            subDomainsAll_[i].front()) )
         {
             neighbors[4] = i;
             break;
@@ -200,12 +247,12 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
         neighbors[5] = -1;
     }
     
-    for(int i=0; i<sizeOfBoundaries(); i++)
+    for(int i=0; i<subDomainsAll_.size(); i++)
     {   
-        if(i == subDomains_.rank())continue;
+        if(i == subDomainsAll_.rank())continue;
 
         if( thisDomain_.front().parallelTouch(
-            subDomains_[i].rear()) )
+            subDomainsAll_[i].rear()) )
         {
             neighbors[5] = i;
             break;
@@ -215,39 +262,37 @@ std::vector<int> pFlow::MPISimulationDomain::findPlaneNeighbors() const
 }
 
 const pFlow::dictionary &
-pFlow::MPISimulationDomain::thisBoundaryDict() const
+pFlow::MPI::MPISimulationDomain::thisBoundaryDict() const
 {
     return this->subDict("MPIBoundaries");
 }
 
-bool pFlow::MPISimulationDomain::initialUpdateDomains(span<realx3> pointPos)
+bool pFlow::MPI::MPISimulationDomain::initialUpdateDomains(span<realx3> pointPos)
 {
     pFlagTypeHost flags(pointPos.size(), 0 , pointPos.size());
     initialNumPoints_ = pointPos.size();
-    if( !domainPartition_->partition(pointPos, flags) )
+    if( !domainPartitioning_->partition(pointPos, flags) )
     {
+        fatalErrorInFunction<<
+        "Point partitioning failed."<<endl;
         return false;
     }
     
     if(!setThisDomain()) return false;
+
     if(!createBoundaryDicts()) return false;
 
     return true;
 }
 
-pFlow::uint32 pFlow::MPISimulationDomain::initialNumberInThis() const
+pFlow::uint32 pFlow::MPI::MPISimulationDomain::initialNumberInThis() const
 {
-    uint32 numImport = domainPartition_->numberImportThisProc();
-    uint32 numExport = domainPartition_->numberExportThisProc();
+    uint32 numImport = domainPartitioning_->numberImportThisProc();
+    uint32 numExport = domainPartitioning_->numberExportThisProc();
     return max(initialNumPoints_+ numImport - numExport, 0u);
 }
 
-bool pFlow::MPISimulationDomain::initialThisDomainActive() const
-{
-    return initialNumberInThis()>0;
-}
-
-bool pFlow::MPISimulationDomain::initialTransferBlockData
+bool pFlow::MPI::MPISimulationDomain::initialTransferBlockData
 (  
     span<char> src, 
     span<char> dst, 
@@ -256,7 +301,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
 {
     MPI::scatteredMasterDistribute<char> dataDist(sizeOfElement, pFlowProcessors());
     
-    auto lists = domainPartition_->allExportLists();
+    auto lists = domainPartitioning_->allExportLists();
     
     if(!dataDist.setDataMaps( lists ))
     {
@@ -273,7 +318,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     return true;
 }
 
-bool pFlow::MPISimulationDomain::initialTransferBlockData
+bool pFlow::MPI::MPISimulationDomain::initialTransferBlockData
 (
     span<realx3> src, 
     span<realx3> dst
@@ -282,8 +327,8 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     
     MPI::scatteredMasterDistribute<realx3> 
         dataDist(pFlowProcessors());
-    auto lists = domainPartition_->allExportLists();
-
+    auto lists = domainPartitioning_->allExportLists();
+    
     if(!dataDist.setDataMaps( lists ))
     {
         fatalErrorInFunction;
@@ -300,7 +345,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     return true;
 }
 
-bool pFlow::MPISimulationDomain::initialTransferBlockData
+bool pFlow::MPI::MPISimulationDomain::initialTransferBlockData
 (
     span<real> src, 
     span<real> dst
@@ -309,7 +354,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     MPI::scatteredMasterDistribute<real> 
         dataDist(pFlowProcessors());
 
-    auto lists = domainPartition_->allExportLists();
+    auto lists = domainPartitioning_->allExportLists();
 
     if(!dataDist.setDataMaps( lists ))
     {
@@ -327,7 +372,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     return true;
 }
 
-bool pFlow::MPISimulationDomain::initialTransferBlockData
+bool pFlow::MPI::MPISimulationDomain::initialTransferBlockData
 (
     span<uint32> src, 
     span<uint32> dst
@@ -336,7 +381,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     MPI::scatteredMasterDistribute<uint32> 
         dataDist(pFlowProcessors());
 
-    auto lists = domainPartition_->allExportLists();
+    auto lists = domainPartitioning_->allExportLists();
 
     if(!dataDist.setDataMaps( lists ))
     {
@@ -354,7 +399,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     return true;
 }
 
-bool pFlow::MPISimulationDomain::initialTransferBlockData
+bool pFlow::MPI::MPISimulationDomain::initialTransferBlockData
 (
     span<int32> src, 
     span<int32> dst
@@ -363,7 +408,7 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     MPI::scatteredMasterDistribute<int32> 
         dataDist(pFlowProcessors());
 
-    auto lists = domainPartition_->allExportLists();
+    auto lists = domainPartitioning_->allExportLists();
 
     if(!dataDist.setDataMaps( lists ))
     {
@@ -381,35 +426,25 @@ bool pFlow::MPISimulationDomain::initialTransferBlockData
     return true;
 }
 
-/*bool pFlow::MPISimulationDomain::updateDomains(
-    span<realx3> pointPos,
-    pFlagTypeHost flags)
-{
-    if( !domainPartition_->partition(pointPos, flags) )
-    {
-        return false;
-    }
-        
-    if(!setThisDomain()) return false;
-    if(!createBoundaryDicts()) return false;
-	
-    return true;
-}*/
 
-pFlow::uint32 pFlow::MPISimulationDomain::numberToBeImported() const
+pFlow::uint32 pFlow::MPI::MPISimulationDomain::numberToBeImported() const
 {
-    return domainPartition_->numberImportThisProc();
+    return domainPartitioning_->numberImportThisProc();
 }
 
-pFlow::uint32 pFlow::MPISimulationDomain::numberToBeExported() const
+pFlow::uint32 pFlow::MPI::MPISimulationDomain::numberToBeExported() const
 {
-    return domainPartition_->numberExportThisProc();
+    return domainPartitioning_->numberExportThisProc();
 }
 
-
-
-bool pFlow::MPISimulationDomain::requiresDataTransfer() const
+bool
+pFlow::MPI::MPISimulationDomain::domainActive() const
 {
-    notImplementedFunction;
-    return false;
+	return thisDomainActive_;
+}
+
+const pFlow::domain&
+pFlow::MPI::MPISimulationDomain::thisDomain() const
+{
+	return thisDomain_;
 }
