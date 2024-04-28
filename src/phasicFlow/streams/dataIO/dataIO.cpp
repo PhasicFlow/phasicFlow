@@ -202,7 +202,7 @@ bool pFlow::dataIO<T>::writeData(iOstream& os, span<T> data)
 
 	if( ioPattern_.thisProcWriteData())
 	{
-		return writeDataAsciiBinary(os, data);
+		return writeDataAsciiBinary(os, bufferSpan_);
 	}
 	else
 	{
@@ -215,7 +215,7 @@ inline
 bool pFlow::dataIO<pFlow::word>::writeData(iOstream& os, span<word> data)
 {
     
-	if( ioPattern_.isParallel()	)
+	if( ioPattern_.isParallel()	&& ioPattern_.isMasterProcessorDistribute())
 	{
 		notImplementedFunction<<
 		"data transfer for type word is not supported in parallel mode!"<<endl;
@@ -232,7 +232,7 @@ bool pFlow::dataIO<pFlow::word>::writeData(iOstream& os, span<word> data)
 	
 	if( ioPattern_.thisProcWriteData())
 	{
-		return writeDataASCII(os, data);
+		return writeDataASCII(os, bufferSpan_);
 	}
 	else
 	{

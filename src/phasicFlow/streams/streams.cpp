@@ -9,5 +9,5 @@ pFlow::processorOstream pFlow::pOutput(cout, "pFlow processorOstream");
 
 pFlow::Istream pFlow::input( std::cin, "sFlow Istream"); 
 
-pFlow::masterOstream pFlow::errReport( std::cerr, "pFlow error report stream");
+pFlow::processorOstream pFlow::errReport( std::cerr, "pFlow error report stream");
 

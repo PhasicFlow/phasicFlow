@@ -118,8 +118,9 @@ bool pFlow::IOobject::readObject(bool rdHdr)
 
 bool pFlow::IOobject::writeObject() const
 {
-    
-	if(implyWrite()&& ioPattern().thisCallWrite())
+    if(!implyWrite()) return true;
+
+	if(ioPattern().thisCallWrite())
 	{
 		
         if(auto ptrOS = outStream(); ptrOS )
@@ -160,7 +161,9 @@ bool pFlow::IOobject::readObject(iIstream& is, bool rdHdr)
 bool pFlow::IOobject::writeObject(iOstream& os) const
 {
 	if(this->writeHeader() && ioPattern().thisProcWriteHeader())
-		writeHeader(os, typeName());
+	{
+        writeHeader(os, typeName());
+    }
     
     if(ioPattern().thisCallWrite())
 	 {   

@@ -295,3 +295,35 @@ inline pFlow::iIstream& pFlow::operator>>( iIstream& is, double& val)
     return is;
 }
 
+inline pFlow::iIstream& pFlow::operator>>( iIstream& is, size_t& val)
+{
+    token t(is);
+    if (!t.good())
+    {
+        ioErrorInFile(is.name(), is.lineNumber())
+            << "Bad token - could not get double value";
+            fatalExit;
+        is.setBad();
+        return is;
+    }
+
+    if (t.isNumber())
+    {
+        val = static_cast<size_t>(t.number());
+    }
+    else
+    {
+        ioErrorInFile(is.name(), is.lineNumber())
+            << "Wrong token type - expected double value, found "
+            << t;
+            fatalExit;
+        is.setBad();
+        return is;
+    }
+
+    is.check(FUNCTION_NAME);
+    return is;
+}
+
+
+

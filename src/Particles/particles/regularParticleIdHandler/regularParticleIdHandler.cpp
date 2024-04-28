@@ -9,6 +9,7 @@ pFlow::regularParticleIdHandler::regularParticleIdHandler
 :
     particleIdHandler(pStruct)
 {
+    initialIdCheck();
 }
 
 pFlow::Pair<pFlow::uint32, pFlow::uint32> 

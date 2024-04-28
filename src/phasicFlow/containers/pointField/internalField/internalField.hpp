@@ -181,6 +181,11 @@ public:
 		return field_.insertSetElement(indices, val);
 	}
 
+	inline const Time& time()const
+	{
+		return internalPoints_.time();
+	}
+
 	bool hearChanges
 	(
 		real t,

@@ -260,6 +260,8 @@ inline iIstream& operator>>( iIstream& is, float& val);
 
 inline iIstream& operator>>( iIstream& is, double& val);
 
+inline iIstream& operator>>( iIstream& is, size_t& val);
+
 
 
 } // pFlow

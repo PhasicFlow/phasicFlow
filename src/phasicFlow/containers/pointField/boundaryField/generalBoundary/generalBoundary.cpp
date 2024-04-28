@@ -31,7 +31,8 @@ pFlow::generalBoundary::generalBoundary
 :
 	observer(&boundary, defaultMessage_),
 	boundary_(boundary),
-	pStruct_(pStruct)
+	pStruct_(pStruct),
+  isBoundaryMaster_(boundary.isBoundaryMaster())
 {}
 
 

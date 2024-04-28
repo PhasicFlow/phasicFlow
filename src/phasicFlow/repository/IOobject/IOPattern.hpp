@@ -41,7 +41,7 @@ public:
 	 * 
 	 * MasterProcessorDistribute: Read is done on master processor, but 
 	 * the data should be distributed between processors based on an externally 
-	 * specified pattern. Write is done on master processors and the data is 
+	 * specified pattern. Write is done on master processor and the data is 
 	 * collected from all processors (collection is done based on the externally 
 	 * specified pattern). 
 	 * 
@@ -146,7 +146,6 @@ public:
 	bool thisProcWriteData()const
 	{
 		if(isAllProcessorsDifferent()) return true;
-        if(isMasterProcessorDistribute())return true;
 		return isMaster();
 	}
 
