@@ -143,7 +143,9 @@ public:
 	) override
     {
 		
-		notImplementedFunction;
+		pOutput<<"Function (hearChanges in boundarySphereInteractions)is not implmented Message "<<
+		 msg <<endl<<" name "<< this->name() <<" type "<< this->type()<<endl;;
+		//notImplementedFunction;
 		return true;
 	}
 

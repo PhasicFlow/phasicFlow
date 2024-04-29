@@ -52,8 +52,14 @@ pFlow::domain pFlow::simulationDomain::extendThisDomain
 	return domain({minP, maxP});
 }
 
+const pFlow::plane&
+pFlow::simulationDomain::boundaryPlane(uint32 i) const
+{
+	return thisDomain().boundaryPlane(i);
+}
+
 pFlow::uniquePtr<pFlow::simulationDomain>
-	pFlow::simulationDomain::create(systemControl &control)
+pFlow::simulationDomain::create(systemControl& control)
 {
 	word sType = angleBracketsNames(
         "simulationDomain", 

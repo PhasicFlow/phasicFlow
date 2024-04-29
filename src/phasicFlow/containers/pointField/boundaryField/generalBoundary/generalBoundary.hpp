@@ -45,16 +45,10 @@ private:
 
     const pointStructure&   pStruct_;
 
+    const bool              isBoundaryMaster_;
 
 	static inline
 	const message defaultMessage_{message::BNDR_RESET};
-				
-    template<typename BoundaryFieldType>
-    inline
-    bool checkForType()const
-    {
-        return typeName() == BoundaryFieldType::TYPENAME();
-    }
 
 public:
 
@@ -67,7 +61,6 @@ public:
         const word&  option);
     
     ~generalBoundary()override = default;
-	
 	
     inline
     uint32 thisBoundaryIndex()const
@@ -92,6 +85,24 @@ public:
 	{
 		return boundary_.capacity();
 	}
+
+    inline 
+    auto neighborProcSize()const
+    {
+        return boundary_.neighborProcSize();
+    }
+
+    inline 
+    int neighborProcessorNo()const
+    {
+        return boundary_.neighborProcessorNo();
+    }
+
+    inline
+    int thisProcessorNo()const
+    {
+        return boundary_.thisProcessorNo();
+    }
 
     inline 
     const auto& boundary()const
@@ -129,22 +140,17 @@ public:
         return pStruct_;
     }
 
+    inline
+    bool isBoundaryMaster()const
+    {
+        return isBoundaryMaster_;
+    }
+
     const Time& time()const;
 
 	virtual
 	void fill(const std::any& val)=0;
 
-    /*template<typename BoundaryFieldType>
-    BoundaryFieldType& thisField()
-    {
-        return static_cast<BoundaryFieldType&>(*this);
-    }
-
-    template<typename BoundaryFieldType>
-    const BoundaryFieldType& thisField()const
-    {
-        return static_cast<const BoundaryFieldType&>(*this);
-    }*/
 	
 };
 

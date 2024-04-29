@@ -58,11 +58,13 @@ void pFlow::processors::initProcessors(int argc, char *argv[])
 		if(processors::globalParallel())
 		{
 			pFlow::pOutput.activatePrefix();
-			pFlow::pOutput.setPrefixNum(processors::globalRank_);	
+			pFlow::pOutput.setPrefixNum(processors::globalRank_);
+			pFlow::errReport.activatePrefix();
+			pFlow::errReport.setPrefixNum(processors::globalRank_);
 		}
 		
 		pFlow::mOutput.setMasterSlave(processors::globalMaster());
-		pFlow::errReport.setMasterSlave(processors::globalMaster());
+		
 
         MPI_Type_contiguous(3, pFlow::MPI::Type<real>(), &pFlow::MPI::realx3Type__);
 		MPI_Type_commit(&pFlow::MPI::realx3Type__);

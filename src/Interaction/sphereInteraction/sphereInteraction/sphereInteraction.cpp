@@ -163,9 +163,16 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 	auto t = this->currentTime();
 	auto dt = this->dt();
 
-	//output<<"iter, t, dt "<< iter<<" "<< t << " "<<dt<<endl;
+	
 	bool broadSearch = contactSearch_().enterBroadSearch(iter, t, dt);
 
+	/*sphParticles_.diameter().updateBoundaries(DataDirection::SlaveToMaster);
+	sphParticles_.velocity().updateBoundaries(DataDirection::SlaveToMaster);
+	sphParticles_.rVelocity().updateBoundaries(DataDirection::SlaveToMaster);
+	sphParticles_.mass().updateBoundaries(DataDirection::SlaveToMaster);
+	sphParticles_.I().updateBoundaries(DataDirection::SlaveToMaster);
+	sphParticles_.propertyId().updateBoundaries(DataDirection::SlaveToMaster);*/
+	
 	
 	if(broadSearch)
 	{

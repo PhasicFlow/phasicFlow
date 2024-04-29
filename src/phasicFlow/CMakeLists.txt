@@ -25,6 +25,7 @@ streams/TStream/oTstream.cpp
 streams/Fstream/iFstream.cpp
 streams/Fstream/oFstream.cpp
 streams/Fstream/fileStream.cpp
+streams/dataIO/dataIORegulars.cpp
 streams/streams.cpp 
 
 fileSystem/fileSystem.cpp
@@ -132,14 +133,14 @@ if(pFlow_Build_MPI)
 	message(STATUS "Zoltan lib path: ${ZOLTAN_LIBRARY}")
 	
 	list(APPEND SourceFiles
-	MPIParallelization/partitioning.cpp 
-	MPIParallelization/rcb1DPartitioning.cpp
+	MPIParallelization/domain/partitioning/partitioning.cpp 
+	MPIParallelization/domain/partitioning/rcb1DPartitioning.cpp
 	MPIParallelization/domain/MPISimulationDomain.cpp
-    #MPIParallelization/dataIOMPI.cpp
-    MPIParallelization/procCommunication.cpp
-    MPIParallelization/boundaryProcessor.cpp
-    MPIParallelization/scatteredMasterDistributeChar.cpp
-	MPIParallelization/processorBoundaryFields.cpp
+    MPIParallelization/dataIOMPI/dataIOMPIs.cpp
+    MPIParallelization/MPI/procCommunication.cpp
+    MPIParallelization/MPI/scatteredMasterDistributeChar.cpp
+	MPIParallelization/pointStructure/boundaries/boundaryProcessor.cpp
+	MPIParallelization/pointField/processorBoundaryFields.cpp
 	)
 	
 	list(APPEND link_libs MPI::MPI_CXX ${ZOLTAN_LIBRARY} -lm )

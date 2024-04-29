@@ -513,6 +513,14 @@ bool pFlow::sphereParticles::beforeIteration()
 		dynPointStruct().predict(dt, accelertion());
 		rVelIntegration_().predict(dt,rVelocity_, rAcceleration_);
 	intPredictTimer_.end();
+
+	propertyId_.updateBoundariesSlaveToMasterIfRequested();
+	diameter_.updateBoundariesSlaveToMasterIfRequested();
+	mass_.updateBoundariesSlaveToMasterIfRequested();
+	I_.updateBoundariesSlaveToMasterIfRequested();
+	rVelocity_.updateBoundariesSlaveToMasterIfRequested();
+	rAcceleration_.updateBoundariesSlaveToMasterIfRequested();
+	
 	
 	return true;
 }
