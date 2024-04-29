@@ -99,7 +99,7 @@ bool pFlow::twoPartContactSearch::broadSearchPP
 			ppPairs.increaseCapacityBy(len);
 
 			INFORMATION<< "Particle-particle contact pair container capacity increased from "<<
-			oldCap << " to "<<ppPairs.capacity()<<" in peiodicBoundaryContactSearch."<<END_INFO;
+			oldCap << " to "<<ppPairs.capacity()<<" in contact search in boundary region."<<END_INFO;
 			
 		}
 

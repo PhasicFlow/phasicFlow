@@ -25,11 +25,7 @@ Licence:
 void
 pFlow::MPI::boundaryProcessor::checkSize() const
 {
-	if (!sizeObtained_)
-	{
-		//MPI_Wait(&sizeRequest_, StatusIgnore);
-		sizeObtained_ = true;
-	}
+	
 }
 
 void
@@ -37,13 +33,13 @@ pFlow::MPI::boundaryProcessor::checkDataRecieved() const
 {
 	if (!dataRecieved_)
 	{
-		//uint32 nRecv  = reciever_.waitComplete();
+		uint32 nRecv = reciever_.waitBufferForUse();
 		dataRecieved_ = true;
-		/*if (nRecv != neighborProcSize())
+		if (nRecv != neighborProcSize())
 		{
 			fatalErrorInFunction;
 			fatalExit;
-		}*/
+		}
 	}
 }
 
@@ -92,8 +88,7 @@ pFlow::MPI::boundaryProcessor::beforeIteration(uint32 iterNum, real t, real dt)
 		pFlowProcessors().localCommunicator(),
 		MPI_STATUS_IGNORE
 	);
-
-	sizeObtained_ = false;
+	MPI_Request_free(&req);
 
 	return true;
 }

@@ -47,9 +47,8 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 	
 	const auto & sphPar = this->sphParticles();
 	uint32 thisIndex = this->boundary().thisBoundaryIndex();
-	const auto& a = sphPar.diameter().BoundaryField(thisIndex).neighborProcField().deviceViewAll();
-
-	/*pFlow::MPI::processorBoundarySIKernels::sphereSphereInteraction(
+	pOutput<<"beofre sphereSphereInteraction"<<endl;
+	pFlow::MPI::processorBoundarySIKernels::sphereSphereInteraction(
 		dt,
 		this->ppPairs(),
 		cfModel,
@@ -67,7 +66,9 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 		sphPar.rVelocity().BoundaryField(thisIndex).neighborProcField().deviceViewAll(),
 		sphPar.contactForce().BoundaryField(thisIndex).neighborProcField().deviceViewAll(),
 		sphPar.contactTorque().BoundaryField(thisIndex).neighborProcField().deviceViewAll()
-	);*/
+	);
+
+	pOutput<<"after sphereSphereInteraction"<<endl;
 
 	return true;
 }

@@ -38,21 +38,13 @@ private:
 
 	uint32                       neighborProcNumPoints_ = 0;
 
-	uint32                       thisNumPoints_;
+	uint32                       thisNumPoints_ = 0;
 
 	realx3Vector_D               neighborProcPoints_;
 
-	mutable Request              sizeRequest_;
+	dataSender<realx3>   sender_;
 
-	mutable Request 			sSizeRequest_;
-
-	int req_=0;
-
-	mutable bool                 sizeObtained_ = true;
-
-	mutable dataSender<realx3>   sender_;
-
-	mutable dataReciever<realx3> reciever_;
+	dataReciever<realx3> reciever_;
 
 	mutable bool                 dataRecieved_ = true;
 

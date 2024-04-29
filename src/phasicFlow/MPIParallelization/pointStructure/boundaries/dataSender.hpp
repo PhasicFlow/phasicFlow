@@ -26,15 +26,13 @@ public:
 
 private:
 
-	//BufferVectorType buffer_;
-
-    std::vector<T> buffer_;
+	BufferVectorType buffer_;
 
 	int              toProc_;
 
 	int              tag_;
 
-	Request          sendRequest_ = RequestNull;
+	mutable Request  sendRequest_ = RequestNull;
 
 public:
 
@@ -44,7 +42,22 @@ public:
         tag_(tag)
     {}
 
-    ~dataSender()=default;
+    ~dataSender()
+    {
+        if(sendRequest_ != RequestNull)
+        {
+            MPI_Request_free(&sendRequest_);
+        }
+    }
+
+    bool waitBufferForUse()const
+    {
+        if(sendRequest_ != RequestNull)
+        {
+            MPI_Wait(&sendRequest_, StatusesIgnore);
+        }
+        return true;
+    }
 
     void sendData(
         const localProcessors&      processors,
@@ -52,17 +65,21 @@ public:
     )
     {
         using RPolicy = Kokkos::RangePolicy<
-                DefaultExecutionSpace,
+                execution_space,
                 Kokkos::Schedule<Kokkos::Static>,
                 Kokkos::IndexType<pFlow::uint32>>;
 
         uint32 n = scatterField.size();
+        
+        // make sure the buffer is ready to be used and free 
+        // the previous request (if any).
+        waitBufferForUse();
 
         // clear the buffer to prevent data copy if capacity increases 
         buffer_.clear();
         buffer_.resize(n);
         
-        auto* buffView = buffer_.data();
+        const auto& buffView = buffer_.deviceViewAll();
 
         Kokkos::parallel_for(
             "dataSender::sendData",
@@ -73,26 +90,20 @@ public:
             }
         );
         Kokkos::fence();
-        auto req = MPI_REQUEST_NULL;
-
-        MPI_Isend(
-            buffer_.data(),
-            buffer_.size(),
-            realx3Type__,
-            toProc_,
-            tag_,
-            processors.localCommunicator(),
-            &req);
         
-        /*CheckMPI(send(
-            buffer_.getSpan(), 
-            toProc_, 
-            tag_, 
-            processors.localCommunicator(), 
-            MPI_STATUS_IGNORE), true);*/
+        CheckMPI(
+            Isend(buffer_.getSpan(),
+                toProc_,
+                tag_,
+                processors.localCommunicator(),
+                &sendRequest_
+            ), 
+            true
+        );
+                
     }
 
-    /*auto& buffer()
+    auto& buffer()
     {
         return buffer_;
     }
@@ -100,17 +111,20 @@ public:
     const auto& buffer()const
     {
         return buffer_;
-    }*/
+    }
 
     bool sendComplete()
     {
-        return true;
-        /*int test;   
-        MPI_Test(&sendRequest_, &test, StatusIgnore);
-        if(test) 
-            return true;
+        int test;
+        if(sendRequest_ != RequestNull)   
+        {
+            MPI_Test(&sendRequest_, &test, StatusIgnore);
+            return test;
+        }
         else
-            return false;*/
+        {
+            return true;
+        }
     }
 
 };
