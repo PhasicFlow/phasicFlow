@@ -156,3 +156,9 @@ void pFlow::processorOstream::indent()
     checkForPrefix();
     Ostream::indent();
 }
+
+pFlow::processorOstream &pFlow::processorOstream::setColor(const char *colorCode)
+{
+    Ostream::write(colorCode);
+    return *this;
+}
