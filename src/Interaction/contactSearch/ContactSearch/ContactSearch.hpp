@@ -130,10 +130,10 @@ public:
 		csPairContainerType& pwPairs,
 		bool force = false) override
 	{
-		ppTimer().start();
-
-		Particles().boundingSphere().updateBoundaries(DataDirection::SlaveToMaster);
 		
+
+		ppTimer().start();
+	
 		const auto& position = Particles().pointPosition().deviceViewAll();
 		const auto& flags = Particles().dynPointStruct().activePointsMaskDevice();
 		const auto& diam = Particles().boundingSphere().deviceViewAll();
@@ -167,6 +167,7 @@ public:
 		csPairContainerType& pwPairs,
 		bool force = false)override
 	{
+		Particles().boundingSphere().updateBoundaries(DataDirection::SlaveToMaster);
 		return csBoundaries_[i].broadSearch(
 			iter, 
 			t, 
@@ -175,7 +176,6 @@ public:
 			pwPairs, 
 			force);
 	}
-
 
 	bool enterBroadSearch(uint32 iter, real t, real dt)const override
 	{
