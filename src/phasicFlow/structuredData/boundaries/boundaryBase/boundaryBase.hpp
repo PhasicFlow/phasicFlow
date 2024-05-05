@@ -102,6 +102,10 @@ protected:
 		uint32 numRemove, 
 		const uint32Vector_D& removeMask);
 	
+	bool setRemoveKeepIndices(
+		const uint32Vector_D& removeIndices,
+		const uint32Vector_D& keepIndices);
+	
 	bool transferPoints(
 		uint32 numTransfer, 
 		const uint32Vector_D& transferMask,
@@ -132,6 +136,18 @@ protected:
 	bool updataBoundary(int step)
 	{
 		return true;
+	}
+
+	/// @brief This method is called when a transfer of data 
+	/// is to be performed between processors (in afterIteration).
+	/// @param step is the step in the transfer of data. 
+	/// @return true: if operation requires at least one additional step 
+	/// to complete. false: if the operation is complete and no need for
+	/// additional step in operation. 
+	virtual 
+	bool transferData(int step)
+	{
+		return false;
 	}
 	
 public:

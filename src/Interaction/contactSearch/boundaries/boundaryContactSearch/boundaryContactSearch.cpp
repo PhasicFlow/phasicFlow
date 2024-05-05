@@ -50,13 +50,13 @@ pFlow::boundaryContactSearch::create(
 
 	if( boundaryBasevCtorSelector_.search(bType) )
 	{
-		REPORT(2)<<"Creating contact search boundary "<< Green_Text(bType)<<
+		pOutput.space(4)<<"Creating contact search boundary "<< Green_Text(bType)<<
 		" for "<<boundary.name()<<endl;
 		return boundaryBasevCtorSelector_[bType](dict, boundary, cSearch);
 	}
 	else if(boundaryBasevCtorSelector_.search(altBType))
 	{
-		REPORT(2)<<"Creating contact search boundary "<< Green_Text(altBType)<<
+		pOutput.space(4)<<"Creating contact search boundary "<< Green_Text(altBType)<<
 		" for "<<boundary.name()<<endl;
 		return boundaryBasevCtorSelector_[altBType](dict, boundary, cSearch);
 	}

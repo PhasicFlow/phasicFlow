@@ -205,7 +205,23 @@ pFlow::boundaryList::iterate(uint32 iter, real t, real dt)
 bool
 pFlow::boundaryList::afterIteration(uint32 iter, real t, real dt)
 {
-	for (auto& bdry : *this)
+	
+	std::array<bool,6> requireStep{true, true, true, true, true, true};
+
+	int step = 1;
+	while(std::any_of(requireStep.begin(), requireStep.end(), [](bool v) { return v==true; }))
+	{
+		for(auto i=0uL; i<6; i++)
+		{
+			if(requireStep[i])
+			{
+				requireStep[i] = this->operator[](i).transferData(step);
+			}
+		}
+		step++;
+	}
+
+	/*for (auto& bdry : *this)
 	{
 		if (!bdry->afterIteration(iter, t, dt))
 		{
@@ -213,6 +229,6 @@ pFlow::boundaryList::afterIteration(uint32 iter, real t, real dt)
 			                     << bdry->name() << endl;
 			return false;
 		}
-	}
+	}*/
 	return true;
 }
