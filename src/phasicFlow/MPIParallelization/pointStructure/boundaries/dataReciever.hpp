@@ -27,13 +27,11 @@ private:
     
     BufferVectorType buffer_;
 
-    std::vector<T>  buffer0_;
-
 	int              fromProc_;
 
 	int              tag_;
 
-	Request          recvRequest_;
+	mutable Request  recvRequest_ = RequestNull;
 
 public:
 
@@ -46,34 +44,40 @@ public:
 
     ~dataReciever()=default;
 
+    uint32 waitBufferForUse()const
+    {
+        if(recvRequest_ != RequestNull)
+        {
+            Status status;
+            MPI_Wait(&recvRequest_, &status);
+            int count;
+            CheckMPI(getCount<T>(&status, count), true);
+
+            return static_cast<uint32>(count);
+        }
+        else
+            return buffer_.size();
+    }
+
     void recieveData(
         const localProcessors&      processors,
         uint32 numToRecv
     )
     {   
-        
-        buffer0_.clear();
-		buffer0_.resize(numToRecv);
-        MPI_Status status;
+        waitBufferForUse();
+        buffer_.clear();
+        buffer_.resize(numToRecv);
 
-        /*CheckMPI(recv(
-            buffer_.getSpan(), 
-            fromProc_, 
-            tag_, 
-            processors.localCommunicator(), 
-            &status), true);*/
-        MPI_Recv(
-            buffer0_.data(),
-            buffer0_.size(),
-            realx3Type__,
-            fromProc_,
-            tag_,
-            processors.localCommunicator(),
-            &status
+        CheckMPI(
+            Irecv(
+                buffer_.getSpan(), 
+                fromProc_, 
+                tag_, 
+                processors.localCommunicator(), 
+                &recvRequest_
+            ),
+            true
         );
-        int c;
-        getCount<realx3>(&status, c);
-        pOutput<<"Number of data recieved "<<c<<endl;
     }
 
     auto& buffer()
@@ -84,20 +88,6 @@ public:
     const auto& buffer()const
     {
         return buffer_;
-    }
-
-    uint32 waitComplete()
-    {
-        
-        /*Status status;   
-        
-        CheckMPI(MPI_Wait(&recvRequest_, &status), true);
-
-        int count;
-        CheckMPI(getCount<T>(&status, count), true);
-
-        return static_cast<uint32>(count);*/
-        return buffer_.size();
     }
 
 };

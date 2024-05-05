@@ -3,10 +3,18 @@
 </div>
 
 
-**PhasicFlow** is a parallel C++ code for performing DEM simulations. It can run on shared-memory multi-core computational units such as multi-core CPUs or GPUs (for now it works on CUDA-enabled GPUs). The parallelization method mainly relies on loop-level parallelization on a shared-memory computational unit. You can build and run PhasicFlow in serial mode on regular PCs, in parallel mode for multi-core CPUs, or build it for a GPU device to off-load computations to a GPU. In its current statues you can simulate millions of particles (up to 80M particles tested) on a single desktop computer. You can see the [performance tests of PhasicFlow](https://github.com/PhasicFlow/phasicFlow/wiki/Performance-of-phasicFlow) in the wiki page. 
+**PhasicFlow** is a parallel C++ code for performing DEM simulations. It can run on shared-memory multi-core computational units such as multi-core CPUs or GPUs (for now it works on CUDA-enabled GPUs). The parallelization method mainly relies on loop-level parallelization on a shared-memory computational unit. You can build and run PhasicFlow in serial mode on regular PCs, in parallel mode for multi-core CPUs, or build it for a GPU device to off-load computations to a GPU. In its current statues you can simulate millions of particles (up to 80M particles tested) on a single desktop computer. You can see the [performance tests of PhasicFlow](https://github.com/PhasicFlow/phasicFlow/wiki/Performance-of-phasicFlow) in the wiki page.
 
+**MPI** parallelization with dynamic load balancing is under development. With this level of parallelization, PhasicFlow can leverage the computational power of **multi-gpu** workstations or clusters with distributed memory CPUs. 
+In summary PhasicFlow can have 6 execution modes:
+1. Serial on a single CPU core,
+2. Parallel on a multi-core computer/node (using OpenMP),
+3. Parallel on an nvidia-GPU (using Cuda),
+4. Parallel on distributed memory workstation (Using MPI)
+5. Parallel on distributed memory workstations with multi-core nodes (using MPI+OpenMP)
+6. Parallel on workstations with multiple GPUs (using MPI+Cuda).
 ## How to build?
-You can build PhasicFlow for CPU and GPU executions. [Here is a complete step-by-step procedure](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
+You can build PhasicFlow for CPU and GPU executions. The latest release of PhasicFlow is v-0.1. [Here is a complete step-by-step procedure for building phasicFlow-v-0.1.](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
 
 ## Online code documentation
 You can find a full documentation of the code, its features, and other related materials on [online documentation of the code](https://phasicflow.github.io/phasicFlow/)

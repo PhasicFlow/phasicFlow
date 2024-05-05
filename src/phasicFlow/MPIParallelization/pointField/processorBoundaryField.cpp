@@ -24,13 +24,13 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::checkDataRecieved() const
 {
 	if (!dataRecieved_)
 	{
-		//uint32 nRecv  = reciever_.waitComplete();
+		uint32 nRecv = reciever_.waitBufferForUse();
 		dataRecieved_ = true;
-		/*if (nRecv != this->neighborProcSize())
+		if (nRecv != this->neighborProcSize())
 		{
 			fatalErrorInFunction;
 			fatalExit;
-		}*/
+		}
 	}
 }
 
@@ -41,7 +41,7 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundary(
   DataDirection direction
 )
 {
-	/*if (step == 1)
+	if (step == 1)
 	{
 		// Isend
 		if (direction == DataDirection::TwoWay || 
@@ -67,7 +67,7 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundary(
 	{
 		fatalErrorInFunction << "Invalid step number " << step << endl;
 		return false;
-	}*/
+	}
 
 	return true;
 }
@@ -90,6 +90,8 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::processorBoundaryField(
       boundary.mirrorBoundaryIndex()
     )
 {
+	this->addEvent(message::BNDR_PROCTRANS1).
+	addEvent(message::BNDR_PROCTRANS2);
 }
 
 template<class T, class MemorySpace>

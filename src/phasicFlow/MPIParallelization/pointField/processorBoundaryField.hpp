@@ -50,11 +50,11 @@ public:
 
 private:
 
-	dataSender<T, MemorySpace>           sender_;
+	dataSender<T, MemorySpace>   sender_;
 
-	mutable dataReciever<T, MemorySpace> reciever_;
+	dataReciever<T, MemorySpace> reciever_;
 
-	mutable bool                          dataRecieved_ = true;
+	mutable bool                 dataRecieved_ = true;
 
 	void checkDataRecieved()const;
 
@@ -82,7 +82,6 @@ public:
 	
 	ProcVectorType& neighborProcField() override;
 
-	
 	const ProcVectorType& neighborProcField()const override;
 
 	bool hearChanges

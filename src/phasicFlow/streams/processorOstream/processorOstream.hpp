@@ -139,6 +139,8 @@ public:
         /// Add indentation characters
         void indent() override;
 
+        processorOstream& setColor(const char* colorCode);
+
 
 }; // processorOstream
 

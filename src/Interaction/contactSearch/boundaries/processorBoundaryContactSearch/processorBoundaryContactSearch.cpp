@@ -85,7 +85,7 @@ bool pFlow::processorBoundaryContactSearch::broadSearch
 {
     if(masterSearch_)
     {
-        /*const auto thisPoints = boundary().thisPoints();
+        const auto thisPoints = boundary().thisPoints();
         const auto& neighborProcPoints = boundary().neighborProcPoints();
         const auto& bDiams = diameter_.BoundaryField(thisBoundaryIndex());
         const auto thisDiams = bDiams.thisField();
@@ -96,9 +96,9 @@ bool pFlow::processorBoundaryContactSearch::broadSearch
             thisPoints, 
             thisDiams,
             neighborProcPoints,
-            neighborProcDiams);
-
-        pOutput<<"ppPairs size in boundary"<< ppPairs.size()<<endl;      */
+            neighborProcDiams
+        );
+        //pOutput<<"ppSize "<< ppPairs.size()<<endl;
         return true;
 
     }else
