@@ -33,7 +33,7 @@ namespace pFlow
 }
 
 
-#define INFORMATION pFlow::pOutput<<boldChar<<magentaColor<<"> INFO: "<<defaultColor<<magentaColor
+#define INFORMATION pFlow::pOutput.setColor(boldChar).setColor(magentaColor)<<"> INFO: "<<defaultColor<<magentaColor
 #define END_INFO defaultColor<<pFlow::endl
 
 #define REPORT(n) pFlow::mOutput.space(2*n)
