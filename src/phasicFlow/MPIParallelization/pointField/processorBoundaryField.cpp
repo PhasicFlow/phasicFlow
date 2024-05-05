@@ -90,6 +90,8 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::processorBoundaryField(
       boundary.mirrorBoundaryIndex()
     )
 {
+	this->addEvent(message::BNDR_PROCTRANS1).
+	addEvent(message::BNDR_PROCTRANS2);
 }
 
 template<class T, class MemorySpace>

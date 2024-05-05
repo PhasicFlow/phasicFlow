@@ -32,9 +32,7 @@ pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::processorBoundarySpher
 		geomMotion
 	),
 	masterInteraction_(boundary.isBoundaryMaster())
-{
-	pOutput<<"Processor boundayrCondition for "<< boundary.name()<<endl;
-}
+{}
 
 template <typename cFM, typename gMM>
 bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInteraction
@@ -43,6 +41,7 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 	const ContactForceModel &cfModel
 )
 {
+	return true;
 	if(!masterInteraction_) return true;
 	
 	const auto & sphPar = this->sphParticles();

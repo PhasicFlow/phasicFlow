@@ -21,6 +21,8 @@ Licence:
 #include "boundaryProcessor.hpp"
 #include "dictionary.hpp"
 #include "mpiCommunication.hpp"
+#include "boundaryBaseKernels.hpp"
+#include "internalPoints.hpp"
 
 void
 pFlow::MPI::boundaryProcessor::checkSize() const
@@ -130,6 +132,105 @@ pFlow::MPI::boundaryProcessor::updataBoundary(int step)
 	return true;
 }
 
+bool pFlow::MPI::boundaryProcessor::transferData(int step)
+{
+    if(step==1)
+	{
+		uint32 s = size();
+		uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE());
+		transferFlags.fill(0u);
+
+		const auto& transferD = transferFlags.deviceViewAll();
+		auto points = thisPoints();
+		auto p = boundaryPlane().infPlane();
+
+		numToTransfer_ = 0;	
+
+		Kokkos::parallel_reduce
+		(
+			"boundaryProcessor::afterIteration",
+			deviceRPolicyStatic(0,s),
+			LAMBDA_HD(uint32 i, uint32& transferToUpdate)
+			{
+				if(p.pointInNegativeSide(points(i)))
+				{
+					transferD(i)=1;
+					transferToUpdate++;
+				}
+			}, 
+			numToTransfer_
+		);
+			
+		uint32Vector_D keepIndices("keepIndices");
+		if(numToTransfer_ != 0u)
+		{
+			pFlow::boundaryBaseKernels::createRemoveKeepIndices
+			(
+				indexList(),
+				numToTransfer_,
+				transferFlags,
+				transferIndices_,
+				keepIndices,
+				false
+			);
+			// delete transfer point from this processor 
+			if( !setRemoveKeepIndices(transferIndices_, keepIndices))
+			{
+				fatalErrorInFunction<<
+				"error in setting transfer and keep points in boundary "<< name()<<endl;
+				return false;
+			}
+		}
+		else
+		{
+			transferIndices_.clear();
+		}
+
+		auto req = RequestNull;
+		CheckMPI( Isend(
+			numToTransfer_, 
+			neighborProcessorNo(), 
+			thisBoundaryIndex(),
+			pFlowProcessors().localCommunicator(),
+			&req), true );
+
+		CheckMPI(recv(
+			numToRecieve_,
+			neighborProcessorNo(),
+			mirrorBoundaryIndex(),
+			pFlowProcessors().localCommunicator(),
+			StatusesIgnore), true);
+
+		MPI_Request_free(&req);
+		return true;
+	}
+	else if(step ==2 )
+	{
+		pointFieldAccessType transferPoints(
+			transferIndices_.size(), 
+			transferIndices_.deviceViewAll(),
+			internal().pointPositionDevice());
+
+		sender_.sendData(pFlowProcessors(), transferPoints);
+		return true;
+	}
+	else if(step == 3)
+	{
+		
+		reciever_.recieveData(pFlowProcessors(), numToRecieve_);
+		return true;
+	}
+	else if(step == 4)
+	{
+		reciever_.waitBufferForUse();
+		// 		
+		return false;
+	}
+
+	return false;
+	
+}
+
 bool
 pFlow::MPI::boundaryProcessor::iterate(uint32 iterNum, real t, real dt)
 {
@@ -139,5 +240,54 @@ pFlow::MPI::boundaryProcessor::iterate(uint32 iterNum, real t, real dt)
 bool
 pFlow::MPI::boundaryProcessor::afterIteration(uint32 iterNum, real t, real dt)
 {
+	
+	uint32 s = size();
+	pOutput<<"size of boundary is "<< s <<endl;
+	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE());
+	transferFlags.fill(0u);
+
+	const auto& transferD = transferFlags.deviceViewAll();
+	auto points = thisPoints();
+	auto p = boundaryPlane().infPlane();
+
+	uint32 numTransfer = 0;	
+
+	Kokkos::parallel_reduce
+	(
+		"boundaryProcessor::afterIteration",
+		deviceRPolicyStatic(0,s),
+		LAMBDA_HD(uint32 i, uint32& transferToUpdate)
+		{
+			if(p.pointInNegativeSide(points(i)))
+			{
+				transferD(i)=1;
+				transferToUpdate++;
+			}
+		}, 
+		numTransfer
+	);
+		
+	pOutput<<"Numebr to be transfered "<< numTransfer<<endl;
+		
+	uint32Vector_D transferIndices("transferIndices");
+	uint32Vector_D keepIndices("keepIndices");
+
+	pFlow::boundaryBaseKernels::createRemoveKeepIndices
+	(
+		indexList(),
+		numTransfer,
+		transferFlags,
+		transferIndices,
+		keepIndices
+	);
+	
+	// delete transfer point from this processor 
+	if( !setRemoveKeepIndices(transferIndices, keepIndices))
+	{
+		fatalErrorInFunction<<
+		"error in setting transfer and keep points in boundary "<< name()<<endl;
+		return false;
+	}
+	
 	return true;
 }

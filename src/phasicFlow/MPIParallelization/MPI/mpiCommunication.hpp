@@ -238,6 +238,18 @@ inline auto send(span<T> data, int dest, int tag, Comm comm)
         comm);
 }
 
+template<typename T> 
+inline auto send(const T& data, int dest, int tag, Comm comm)
+{
+	return MPI_Send(
+        &data, 
+        sFactor<T>(), 
+        Type<T>(), 
+        dest, 
+        tag, 
+        comm);
+}
+
 template<typename T>
 inline auto Isend(span<T> data, int dest, int tag, Comm comm, Request* req)
 {
@@ -270,6 +282,19 @@ inline auto recv(span<T> data, int source, int tag, Comm comm, Status *status)
 	return MPI_Recv(
         data.data(), 
         sFactor<T>()*data.size(), 
+        Type<T>(), 
+        source, 
+        tag, 
+        comm, 
+        status);
+}
+
+template<typename T>
+inline auto recv(T& data, int source, int tag, Comm comm, Status *status)
+{
+	return MPI_Recv(
+        &data, 
+        sFactor<T>(), 
         Type<T>(), 
         source, 
         tag, 
