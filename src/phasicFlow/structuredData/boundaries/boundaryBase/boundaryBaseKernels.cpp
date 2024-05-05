@@ -67,14 +67,26 @@ void pFlow::boundaryBaseKernels::createRemoveKeepIndices
     uint32 numRemove,
     const uint32Vector_D& removeMask, 
     uint32Vector_D& removeIndices, 
-    uint32Vector_D& keepIndices
+    uint32Vector_D& keepIndices,
+    bool exactCap
 )
 {
     uint32 numTotal = indices.size();
     uint32 numKeep = numTotal - numRemove;
+    if(exactCap)
+    {
+        removeIndices.reallocate(numRemove, numRemove);
+        keepIndices.reallocate(numKeep, numKeep);
+    }
+    else
+    {
+        removeIndices.clear();
+        removeIndices.resize(numRemove);
+        
+        keepIndices.clear();
+        keepIndices.resize(numKeep);
+    }
     
-    removeIndices.reallocate(numRemove, numRemove);
-    keepIndices.reallocate(numKeep, numKeep);
 
     auto maskD = removeMask.deviceViewAll();
     const auto& removeD = removeIndices.deviceViewAll();

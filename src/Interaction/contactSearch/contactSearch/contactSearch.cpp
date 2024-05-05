@@ -55,13 +55,11 @@ pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
 	word baseMethName	= dict.getVal<word>("method");	
 
 	auto model = angleBracketsNames("ContactSearch", baseMethName);
-
-	REPORT(1)<<"Selecting contact search model . . ."<<END_REPORT;
 	
+	pOutput.space(2)<<"Selecting contact search model "<<Green_Text(model)<<endl;	
 	if( dictionaryvCtorSelector_.search(model))
 	{
 		auto objPtr = dictionaryvCtorSelector_[model] (dict, extDomain, prtcl, geom, timers);
-		REPORT(2)<<"Model "<< Green_Text(model)<<" is created."<< END_REPORT;
 		return objPtr;
 	}
 	else
