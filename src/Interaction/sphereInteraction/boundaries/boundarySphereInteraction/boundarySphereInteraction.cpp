@@ -56,7 +56,7 @@ pFlow::boundarySphereInteraction<cFM, gMM>::create(
 
 	if (boundaryBasevCtorSelector_.search(boundaryTypeName))
 	{
-		REPORT(2) << "Creating boundry type " << Green_Text(boundaryTypeName) << 
+		pOutput.space(4) << "Creating boundry type " << Green_Text(boundaryTypeName) << 
 		" for boundary " << boundary.name() << " . . ." << END_REPORT;
 		return boundaryBasevCtorSelector_[boundaryTypeName](
 			boundary,
@@ -67,7 +67,7 @@ pFlow::boundarySphereInteraction<cFM, gMM>::create(
 	{
 		// if boundary condition is not implemented, the default is used
 		
-		REPORT(2) << "Creating boundry type " << Green_Text(altBTypeName) << 
+		pOutput.space(4) << "Creating boundry type " << Green_Text(altBTypeName) << 
 		" for boundary " << boundary.name() << " . . ." << END_REPORT;
 		return boundaryBasevCtorSelector_[altBTypeName](
 			boundary,

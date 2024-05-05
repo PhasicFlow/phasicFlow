@@ -76,10 +76,6 @@ public:
 			*this)
 	{
 
-		/*auto method = dict().getVal<word>("method");
-				
-		auto nbDict = dict().subDict(method+"Info");*/
-
 		real minD;
 		real maxD;
 		this->Particles().boundingSphereMinMax(minD, maxD);
@@ -110,9 +106,6 @@ public:
 				wVertices,
 				wNormals
 			);
-		REPORT(2)<<"Contact search algorithm for particle-particle is "<<
-				 Green_Text(ppwContactSearch_().typeName())<<END_REPORT;
-
 	}
 
 

@@ -26,7 +26,6 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::createSphereInteraction()
 
 	auto modelDict = this->subDict("model");
 
-	REPORT(1)<<"Createing contact force model . . ."<<END_REPORT;
 	forceModel_ = makeUnique<ContactForceModel>(
 		this->numMaterials(),
 		rhoD.deviceView(),
@@ -45,8 +44,6 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::createSphereInteraction()
 	ppContactList_ = makeUnique<ContactListType>(nPrtcl+1);
 	
 	pwContactList_ = makeUnique<ContactListType>(nPrtcl/5+1);
-
-	
 
 	return true;
 }

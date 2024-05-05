@@ -28,6 +28,8 @@ namespace pFlow::gSettings
 
 extern const double vectorGrowthFactor__;
 
+void sleepMiliSeconds(int miliSeconds);
+
 }
 
 
