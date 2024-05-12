@@ -79,7 +79,7 @@ private:
 	/// timer for integration computations (correction step)
 	Timer                  intCorrectTimer_;
 
-	
+	Timer  				   fieldUpdateTimer_;
 
 private:
 	bool initializeParticles();

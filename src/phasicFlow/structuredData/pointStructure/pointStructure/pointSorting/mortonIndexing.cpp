@@ -17,66 +17,60 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #include "mortonIndexing.hpp"
 #include "cells.hpp"
 
-#include "streams.hpp"
 
-bool pFlow::getSortedIndex(
+pFlow::uint32IndexContainer pFlow::getSortedIndices(
 	box boundingBox,
-	real dx,
-	range activeRange, 
-	ViewType1D<realx3> pos, 
-	ViewType1D<int8> flag,
-	int32IndexContainer& sortedIndex)
+	real dx,  
+	const ViewType1D<realx3>& pos, 
+	const pFlagTypeDevice& flag
+)
 {
+	if(flag.numActive() == 0u)return uint32IndexContainer();
 
 	// obtain the morton code of the particles
-	cells<size_t> allCells( boundingBox, dx);
-	int32IndexContainer index(activeRange.first, activeRange.second);
+	cells allCells( boundingBox, dx);
+	auto aRange = flag.activeRange();
 
-	ViewType1D<uint64_t> mortonCode("mortonCode", activeRange.second);
+	uint32IndexContainer sortedIndex(aRange.start(), aRange.end());
 
-	output<<"before first kernel"<<endl;;
+	ViewType1D<uint64_t> mortonCode("mortonCode", aRange.end());
 
-	using rpMorton = 
-		Kokkos::RangePolicy<Kokkos::IndexType<int32>>;
-	int32 numActive = 0;
-	Kokkos::parallel_reduce
+
+	Kokkos::parallel_for
 	(
 		"mortonIndexing::getIndex::morton",
-		rpMorton(activeRange.first, activeRange.second),
-		LAMBDA_HD(int32 i, int32& sumToUpdate){
-			if( flag[i] == 1 ) // active point 
+		deviceRPolicyStatic(aRange.start(), aRange.end()),
+		LAMBDA_HD(uint32 i){
+			if( flag.isActive(i)) // active point 
 			{
 				auto cellInd = allCells.pointIndex(pos[i]);
 				mortonCode[i] = xyzToMortonCode64(cellInd.x(), cellInd.y(), cellInd.z());
-				sumToUpdate++;
 			}else
 			{
 				mortonCode[i] = xyzToMortonCode64
 				(
-					static_cast<uint64_t>(-1),
-					static_cast<uint64_t>(-1),
-					static_cast<uint64_t>(-1)
+					largestPosInt32,
+					largestPosInt32,
+					largestPosInt32
 				);
 			}
-		},
-		numActive
+		}
 	);
 	
+	Kokkos::fence();
+
 	permuteSort(
 		mortonCode, 
-		activeRange.first, 
-		activeRange.second,
-		index.deviceView(),
+		aRange.start(), 
+		aRange.end(),
+		sortedIndex.deviceView(),
 		0 );
-	index.modifyOnDevice();
-	index.setSize(numActive);
-	index.syncViews();
 
-	sortedIndex = index;
+	sortedIndex.modifyOnDevice();
+	sortedIndex.syncViews(flag.numActive());
 
-	return true;
+	return sortedIndex;
 }

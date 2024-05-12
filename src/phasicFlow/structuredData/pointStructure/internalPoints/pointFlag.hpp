@@ -57,6 +57,8 @@ class pointFlag
 
 protected:
 	
+	friend class internalPoints;
+
 	viewType 	flags_;
 
 	uint32 		numActive_ 		= 0;
@@ -108,9 +110,29 @@ protected:
 		return flg;
 	}
 
+	void resetFlags(uint32 cap, uint32 start, uint32 end)
+	{
+		if(cap != capacity() )
+		{
+			reallocFill(flags_, cap, static_cast<uint8>(Flag::DELETED));
+		}
+		else
+		{
+			fill(flags_, end, cap, static_cast<uint8>(Flag::DELETED));
+		}
+
+		activeRange_ = {start, end};
+		numActive_ = activeRange_.numElements();
+		isAllActive_ = true;
+		fill(flags_, activeRange_, static_cast<uint8>(Flag::INTERNAL));
+
+		nLeft_ = nRight_ = 0;
+		nBottom_ = nTop_ = 0;
+		nRear_ = nFront_ = 0;
+	}
+
 public:
 
-	friend class internalPoints;
 
 	pointFlag() = default;
 
@@ -283,6 +305,9 @@ public:
 	}
 
 	ViewType1D<uint32, memory_space> getActivePoints();
+
+
+	ViewType1D<uint32, memory_space> getEmptyPoints(uint32 numToGet)const;
 	
 
 	/// @brief Loop over the active points and mark those out of the box

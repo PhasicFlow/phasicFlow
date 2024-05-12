@@ -48,14 +48,16 @@ public:
 		BNDR_RESET		= 10,  // boundary indices reset entirely  
 		BNDR_DELETE 	= 11,  // boundary indices deleted
 		BNDR_APPEND		= 12,  // 
-		BNDR_PROCTRANS1 = 13,  // transfer of data between processors step 1 
-		BNDR_PROCTRANS2 = 14   // transfer of data between processors step 2
+		BNDR_PROCTRANSFER_SEND = 13,    // transfer of data between processors step 1 
+		BNDR_PROCTRANSFER_RECIEVE = 14,  // transfer of data between processors step 2
+		BNDR_PROCTRANSFER_WAITFILL = 15,  // wait for data and fill the field 
+		BNDR_PROC_SIZE_CHANGED = 16
 	};
 
 	
 private:
 
-	static constexpr size_t numberOfEvents_ = 15;
+	static constexpr size_t numberOfEvents_ = 17;
 
 	std::bitset<numberOfEvents_> events_{0x0000};
 	
@@ -76,7 +78,9 @@ private:
 		"deletedIndices",
 		"appendedIndices",
 		"transferredIndices",
-		"numberRecieved"
+		"numToRecieve",
+		"insertedIndices",
+		"size"
 	};
 
 public:

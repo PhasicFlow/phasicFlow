@@ -47,6 +47,9 @@ bool pFlow::boundaryExit::beforeIteration
 	real dt
 )
 {
+
+	if( !boundaryListUpdate(iterNum))return true;
+
 	// nothing have to be done
 	if(empty())
 	{

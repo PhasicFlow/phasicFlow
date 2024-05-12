@@ -147,10 +147,6 @@ public:
     }
 
     const Time& time()const;
-
-	virtual
-	void fill(const std::any& val)=0;
-
 	
 };
 

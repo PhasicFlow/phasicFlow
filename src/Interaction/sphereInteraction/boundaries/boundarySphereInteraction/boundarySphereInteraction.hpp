@@ -22,7 +22,7 @@ Licence:
 
 #include "virtualConstructor.hpp"
 #include "generalBoundary.hpp"
-#include "unsortedContactList.hpp"
+#include "sortedContactList.hpp"
 #include "sphereParticles.hpp"
 
 namespace pFlow
@@ -51,7 +51,7 @@ public:
 	using IndexType    		    = uint32;
     
     using ContactListType = 
-        unsortedContactList<ModelStorage, DefaultExecutionSpace, IdType>;
+        sortedContactList<ModelStorage, DefaultExecutionSpace, IdType>;
 
 private:
 
@@ -60,9 +60,15 @@ private:
 	/// const reference to sphere particles 
 	const sphereParticles& 				sphParticles_;
     
-	uniquePtr<ContactListType> 			ppPairs_;
+	uniquePtr<ContactListType> 			ppPairs_ = nullptr;
 
-	uniquePtr<ContactListType>			pwPairs_;
+	uniquePtr<ContactListType>			pwPairs_ = nullptr;
+
+protected:
+
+	void allocatePPPairs();
+
+	void allocatePWPairs();
 
 public:
 
@@ -124,14 +130,29 @@ public:
 		return pwPairs_();
 	}
 
+	bool ppPairsAllocated()const
+	{
+		if( ppPairs_)return true;
+		return false;
+	}
+
+	bool pwPairsAllocated()const
+	{
+		if( pwPairs_)return true;
+		return false;
+	}
+
 	virtual
 	bool sphereSphereInteraction(
 		real dt,
-		const ContactForceModel& cfModel)
+		const ContactForceModel& cfModel,
+		uint32 step)
 	{
 		// for default boundary, no thing to be done 
-		return true;
+		return false;
 	}
+
+
 
 	bool hearChanges
 	(
@@ -147,11 +168,6 @@ public:
 		 msg <<endl<<" name "<< this->name() <<" type "<< this->type()<<endl;;
 		//notImplementedFunction;
 		return true;
-	}
-
-	void fill(const std::any& val)override
-	{
-		notImplementedFunction;
 	}
 
 	static

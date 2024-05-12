@@ -158,6 +158,9 @@ public:
 		
     	/// Copy construct with a new name (perform deep copy)
 		VectorSingle(const word& name, const VectorSingle& src);
+
+		/// Copy construct with a new name (perform deep copy)
+		VectorSingle(const word& name, const ViewType1D<T, MemorySpace>& src);
 		
 		/// Copy assignment (perform deep copy from rhs to *this)
 		VectorSingle& operator = (const VectorSingle& rhs) ;
@@ -308,6 +311,9 @@ public:
 		}
 
 		INLINE_FUNCTION_H
+		void append(const ViewType1D<T,MemorySpace>& appVec);
+
+		INLINE_FUNCTION_H
 		void append(const std::vector<T>& appVec);
 
 		INLINE_FUNCTION_H
@@ -331,7 +337,7 @@ public:
 			const ViewType1D<T, memory_space> vals);
 
 		INLINE_FUNCTION_H
-		bool reorderItems(uint32IndexContainer indices);
+		bool reorderItems(const uint32IndexContainer& indices);
 
 		/// @brief push a new element at the end (host call only)
 		///  resize if necessary and works on host accessible vector.

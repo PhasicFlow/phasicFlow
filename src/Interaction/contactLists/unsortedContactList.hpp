@@ -95,7 +95,8 @@ public:
 		// swap conainer and values 
 		swapViews(values0_, values_);
 		swapViews(container0_, this->container_);
-		return UnsortedPairs::beforeBroadSearch();
+		UnsortedPairs::beforeBroadSearch();
+		return true;
 	}
 
 	bool afterBroadSearch()
@@ -110,7 +111,7 @@ public:
 			rpFillPairs(0,this->capacity()),
 			*this);
 		Kokkos::fence();
-
+		
 		return true; 
 	}
 

@@ -143,6 +143,16 @@ public:
 			indexContainer(ind.data(), ind.size())
 		{}
 
+		indexContainer(const DeviceViewType& ind):
+			size_(ind.size()),
+			views_("indexContainer", size_)
+		{
+			copy(views_.h_view, ind);
+			copy(views_.d_view, ind);
+			min_ = pFlow::min(views_.d_view, 0, size_);
+			max_ = pFlow::max(views_.d_view, 0, size_);
+		}
+
 		/// Copy
 		indexContainer(const indexContainer&) = default;
 
@@ -240,13 +250,13 @@ public:
 		void syncViews()
 		{
 			bool findMinMax = false;
-			if(views_.template need_sync<HostType>())
+			if(views_.template need_sync<DeviceType>())
 			{
 				Kokkos::deep_copy(views_.d_view, views_.h_view);
 				views_.clear_sync_state();
 				findMinMax = true;
 			}
-			else if(views_.template need_sync<DeviceType>())
+			else if(views_.template need_sync<HostType>())
 			{
 				Kokkos::deep_copy(views_.h_view, views_.d_view);
 				views_.clear_sync_state();
@@ -258,6 +268,12 @@ public:
 				min_ 	= pFlow::min(views_.d_view, 0, size_);
 				max_ 	= pFlow::max(views_.d_view, 0, size_);
 			}
+		}
+
+		void syncViews(uint32 newSize)
+		{
+			size_ = newSize;
+			syncViews();
 		}
 
 };
