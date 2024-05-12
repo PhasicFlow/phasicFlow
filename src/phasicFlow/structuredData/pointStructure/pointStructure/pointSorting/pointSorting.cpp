@@ -18,61 +18,35 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __boundaryPeriodic_hpp__
-#define __boundaryPeriodic_hpp__
+#include "pointSorting.hpp"
+#include "mortonIndexing.hpp"
 
-
-#include "boundaryBase.hpp"
-
-namespace pFlow
-{
-
-class boundaryPeriodic
+pFlow::pointSorting::pointSorting(const dictionary & dict)
 :
- 	public boundaryBase
+    performSorting_(dict.getValOrSet("active", Logical(false))),
+    timeControl_(
+        performSorting_()? 
+            baseTimeControl(dict, "sorting"): 
+            baseTimeControl(0,1,1, "sorting")
+    ),
+    dx_(
+        performSorting_()?
+            dict.getVal<real>("dx"):
+            1.0
+    )
 {
-private:
-
-	uint32 mirrorBoundaryIndex_;
-
-	real extensionLength_ = 0.1;
-
-public:
-
-	TypeInfo("boundary<periodic>");
-
-	boundaryPeriodic(
-		const dictionary &dict,
-		const plane 	&bplane,
-		internalPoints 	&internal,
-		boundaryList	&bndrs,
-		uint32 			thisIndex);
-
-	 
-	~boundaryPeriodic() override= default;
-	
-	add_vCtor
-	(
-		boundaryBase,
-		boundaryPeriodic,
-		dictionary
-	);
-
-	real neighborLength()const override;
-
-	realx3 boundaryExtensionLength()const override;
-
-	//const plane& boundaryPlane()const override;*/
-
-	bool beforeIteration(uint32 iterNum, real t, real dt) override;
-
-	bool iterate(uint32 iterNum, real t, real dt) override;
-
-	bool afterIteration(uint32 iterNum, real t, real dt) override;
-
-
-};
+    if( performSorting_() )
+        REPORT(1)<<"Point sorting is "<<Yellow_Text("active")<<" in simulation"<<END_REPORT;
+    else
+       REPORT(1)<<"Point sorting is "<<Yellow_Text("inactive")<<" in simulation"<<END_REPORT;
 
 }
-
-#endif
+pFlow::uint32IndexContainer 
+pFlow::pointSorting::getSortedIndices(
+    const box& boundingBox, 
+    const ViewType1D<realx3> &pos, 
+    const pFlagTypeDevice &flag
+) const
+{
+    return pFlow::getSortedIndices(boundingBox, dx_, pos, flag);
+}

@@ -68,6 +68,12 @@ private:
 	/// The length defined for creating neighbor list
 	real                   neighborLength_;
 
+	/// time steps between successive update of boundary lists  
+	uint32 				   updateInetrval_;
+
+	/// the extra boundary extension beyound actual limits of boundary 
+	real 				   boundaryExtntionLengthRatio_;
+
 	/// a reference to internal points
 	internalPoints&        internal_;
 
@@ -106,7 +112,7 @@ protected:
 		const uint32Vector_D& removeIndices,
 		const uint32Vector_D& keepIndices);
 	
-	bool transferPoints(
+	bool transferPointsToMirror(
 		uint32 numTransfer, 
 		const uint32Vector_D& transferMask,
 		uint32 transferBoundaryIndex,
@@ -126,6 +132,12 @@ protected:
 		}
 	}
 
+	/// Is this iter the right time for updating bounday list
+	bool boundaryListUpdate(uint32 iter)const
+	{
+		return iter%updateInetrval_ == 0u || iter == 0u;
+	}
+
 	/// Update this boundary data in two steps (1 and 2).
 	/// This is called after calling beforeIteration for 
 	/// all boundaries, so any particle addition, deletion,
@@ -133,7 +145,7 @@ protected:
 	/// This two-step update help to have a flexible mechanism
 	/// for data transfer, mostly for MPI related jobs. 
 	virtual 
-	bool updataBoundary(int step)
+	bool updataBoundaryData(int step)
 	{
 		return true;
 	}
@@ -145,11 +157,13 @@ protected:
 	/// to complete. false: if the operation is complete and no need for
 	/// additional step in operation. 
 	virtual 
-	bool transferData(int step)
+	bool transferData(uint32 iter, int step)
 	{
 		return false;
 	}
 	
+	 
+
 public:
 
 	TypeInfo("boundaryBase");
@@ -189,20 +203,21 @@ public:
 	/// The length from boundary plane into the domain 
 	/// where beyond that distance internal points exist.
 	/// By conventions is it always equal to neighborLength_  
+	inline
 	real neighborLengthIntoInternal()const
 	{
 		return neighborLength_;
 	}
 
 	/// The distance length from boundary plane 
-	/// where neighbor particles exist in that distance. 
+	/// where neighbor particles still exist in that distance. 
 	/// This length may be modified in each boundary type 
 	/// as required. In this case the boundaryExtensionLength
 	/// method should also be modified accordingly. 
 	virtual 
 	real neighborLength()const
 	{
-		return neighborLength_;
+		return (1+boundaryExtntionLengthRatio_)*neighborLength_;
 	}
 
 	/// The extention length (in vector form) for the boundary
@@ -213,7 +228,7 @@ public:
 	virtual 
 	realx3 boundaryExtensionLength()const
 	{
-		return {0,0,0};
+		return -boundaryExtntionLengthRatio_*neighborLength_ * boundaryPlane_.normal();
 	}
 
 	inline
@@ -351,6 +366,18 @@ public:
 	virtual
 	const realx3Vector_D& neighborProcPoints()const;
     
+	virtual 
+	uint32 numToTransfer()const
+	{
+		return 0u;
+	}
+
+	virtual 
+	uint32 numToRecieve()const
+	{
+		return 0u;
+	}
+
 	/// - static create 
 	static
 	uniquePtr<boundaryBase> create

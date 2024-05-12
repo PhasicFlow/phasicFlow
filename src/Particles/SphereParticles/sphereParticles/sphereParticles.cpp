@@ -389,7 +389,9 @@ pFlow::sphereParticles::sphereParticles(
 	intPredictTimer_(
 		"Integration-predict", &this->timers() ),
 	intCorrectTimer_(
-		"Integration-correct", &this->timers() )
+		"Integration-correct", &this->timers() ),
+	fieldUpdateTimer_(
+		"fieldUpdate", &this->timers() )
 {
 	
 	auto intMethod = control.settingsDict().getVal<word>("integrationMethod");
@@ -514,13 +516,14 @@ bool pFlow::sphereParticles::beforeIteration()
 		rVelIntegration_().predict(dt,rVelocity_, rAcceleration_);
 	intPredictTimer_.end();
 
+	fieldUpdateTimer_.start();
 	propertyId_.updateBoundariesSlaveToMasterIfRequested();
 	diameter_.updateBoundariesSlaveToMasterIfRequested();
 	mass_.updateBoundariesSlaveToMasterIfRequested();
 	I_.updateBoundariesSlaveToMasterIfRequested();
 	rVelocity_.updateBoundariesSlaveToMasterIfRequested();
 	rAcceleration_.updateBoundariesSlaveToMasterIfRequested();
-	
+	fieldUpdateTimer_.end();
 	
 	return true;
 }

@@ -17,60 +17,50 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __pointSorting_hpp__
+#define __pointSorting_hpp__
 
-#ifndef __boundaryPeriodic_hpp__
-#define __boundaryPeriodic_hpp__
+#include "baseTimeControl.hpp"
+#include "indexContainer.hpp"
+#include "pointFlag.hpp"
 
-
-#include "boundaryBase.hpp"
 
 namespace pFlow
 {
 
-class boundaryPeriodic
-:
- 	public boundaryBase
+class box;
+
+
+class pointSorting
 {
 private:
 
-	uint32 mirrorBoundaryIndex_;
+	Logical                 performSorting_;
 
-	real extensionLength_ = 0.1;
+	baseTimeControl         timeControl_;
+
+	real 					dx_;
 
 public:
 
-	TypeInfo("boundary<periodic>");
+	explicit pointSorting(const dictionary& dict);
 
-	boundaryPeriodic(
-		const dictionary &dict,
-		const plane 	&bplane,
-		internalPoints 	&internal,
-		boundaryList	&bndrs,
-		uint32 			thisIndex);
+	bool performSorting()const
+	{
+		return performSorting_();
+	}
 
-	 
-	~boundaryPeriodic() override= default;
+	bool sortTime(uint32 iter, real t, real dt)const
+	{
+		return performSorting_() && timeControl_.timeEvent(iter, t, dt);
+	}
+
+	uint32IndexContainer getSortedIndices(
+		const box& boundingBox, 
+		const ViewType1D<realx3>& pos,
+		const pFlagTypeDevice& flag
+	)const;
 	
-	add_vCtor
-	(
-		boundaryBase,
-		boundaryPeriodic,
-		dictionary
-	);
-
-	real neighborLength()const override;
-
-	realx3 boundaryExtensionLength()const override;
-
-	//const plane& boundaryPlane()const override;*/
-
-	bool beforeIteration(uint32 iterNum, real t, real dt) override;
-
-	bool iterate(uint32 iterNum, real t, real dt) override;
-
-	bool afterIteration(uint32 iterNum, real t, real dt) override;
-
-
 };
 
 }

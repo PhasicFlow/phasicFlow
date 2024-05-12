@@ -17,24 +17,22 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __mortonIndexing_hpp__
 #define __mortonIndexing_hpp__
 
 #include "types.hpp"
 #include "box.hpp"
 #include "indexContainer.hpp"
+#include "pointFlag.hpp"
 
 namespace pFlow
 {
 
-bool getSortedIndex(
+uint32IndexContainer getSortedIndices(
 	box boundingBox,
-	real dx, 
-	range activeRange, 
-	ViewType1D<realx3> pos, 
-	ViewType1D<int8> flag,
-	int32IndexContainer& sortedIndex);
+	real dx,  
+	const ViewType1D<realx3>& pos, 
+	const pFlagTypeDevice& flag);
 
 
 INLINE_FUNCTION_HD

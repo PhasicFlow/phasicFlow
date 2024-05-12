@@ -28,57 +28,39 @@ Licence:
 namespace pFlow
 {
 
-template<typename indexType>
 class cells
 {
-public:
-	
-	using CellType = triple<indexType>;
-
-protected:
+private:
 
 	// - domain 
-	box 		domain_{realx3(0.0), realx3(1.0)};
+	box 		domainBox_{realx3(0.0), realx3(1.0)};
 
 	// - cell size 
-	realx3 		cellSize_{1,1,1};
+	real 		celldx_{1};
 
-	CellType 	numCells_{1,1,1};
-
+	int32x3 	numCells_{1,1,1};
 	
 	// - protected methods
 	INLINE_FUNCTION_H
 	void calculate()
 	{
-		numCells_ = (domain_.maxPoint()-domain_.minPoint())/cellSize_ + realx3(1.0);
-		numCells_ = max( numCells_ , CellType(static_cast<indexType>(1)) );
+		numCells_ = (domainBox_.maxPoint()-domainBox_.minPoint())/celldx_ + realx3(1.0);
+		numCells_ = max( numCells_ , int32x3(1) );
 	}
 
 public:
 
 	INLINE_FUNCTION_HD
-	cells()
-	{}
+	cells() = default;
 
 	INLINE_FUNCTION_H
 	cells(const box& domain, real cellSize)
 	:
-		domain_(domain),
-		cellSize_(cellSize)
+		domainBox_(domain),
+		celldx_(cellSize)
 	{
 		calculate();
 	}
-
- 
-	INLINE_FUNCTION_H
-	cells(const box& domain, int32 nx, int32 ny, int32 nz)
-	:
-		domain_(domain),
-		cellSize_(
-			(domain_.maxPoint() - domain_.minPoint())/realx3(nx, ny,  nz)
-			),
-		numCells_(nx, ny, nz)
-	{}
 
 	INLINE_FUNCTION_HD
 	cells(const cells&) = default;
@@ -100,43 +82,36 @@ public:
 	INLINE_FUNCTION_H
 	void setCellSize(real cellSize)
 	{
-		cellSize_ = cellSize;
-		calculate();
-	}
-
-	INLINE_FUNCTION_H
-	void setCellSize(realx3 cellSize)
-	{
-		cellSize_ = cellSize;
+		celldx_ = cellSize;
 		calculate();
 	}
 
 	INLINE_FUNCTION_HD
-	realx3 cellSize()const
+	real cellSize()const
 	{
-		return cellSize_;
+		return celldx_;
 	}
 
 	INLINE_FUNCTION_HD
-	const CellType& numCells()const
+	const int32x3& numCells()const
 	{
 		return numCells_;
 	}
 
 	INLINE_FUNCTION_HD
-	indexType nx()const
+	int32 nx()const
 	{
 		return numCells_.x();
 	}
 
 	INLINE_FUNCTION_HD
-	indexType ny()const
+	int32 ny()const
 	{
 		return numCells_.y();
 	}
 
 	INLINE_FUNCTION_HD
-	indexType nz()const
+	int32 nz()const
 	{
 		return numCells_.z();
 	}
@@ -149,22 +124,21 @@ public:
 				static_cast<int64>(numCells_.z());
 	}
 
-	const auto& domain()const
+	const auto& domainBox()const
 	{
-		return domain_;
+		return domainBox_;
 	}
 	
 	INLINE_FUNCTION_HD
-	CellType pointIndex(const realx3& p)const
+	int32x3 pointIndex(const realx3& p)const
 	{
-		return CellType( (p - domain_.minPoint())/cellSize_ );
+		return int32x3( (p - domainBox_.minPoint())/celldx_ );
 	}
 
 	INLINE_FUNCTION_HD
-	bool pointIndexInDomain(const realx3 p, CellType& index)const
+	bool pointIndexInDomain(const realx3 p, int32x3& index)const
 	{
-		if( !domain_.isInside(p) ) return false;
-		
+		if(!inDomain(p))return false;
 		index = this->pointIndex(p);
 		return true;
 	}
@@ -172,11 +146,11 @@ public:
 	INLINE_FUNCTION_HD
 	bool inDomain(const realx3& p)const
 	{	
-		return domain_.isInside(p);
+		return domainBox_.isInside(p);
 	}
 
 	INLINE_FUNCTION_HD
-	bool isInRange(const CellType& cell)const
+	bool inCellRange(const int32x3& cell)const
 	{
 		if(cell.x()<0)return false;
 		if(cell.y()<0)return false;
@@ -188,7 +162,7 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	bool isInRange(indexType i, indexType j, indexType k)const
+	bool inCellRange(int32 i, int32 j, int32 k)const
 	{
 		if(i<0)return false;
 		if(j<0)return false;
@@ -199,22 +173,7 @@ public:
 		return true;
 	}
 
-	INLINE_FUNCTION_HD
-	void extendBox(
-		const CellType& p1,
-		const CellType& p2,
-		const CellType& p3,
-		indexType extent,
-		CellType& minP,
-		CellType& maxP)const
-	{
-		minP = min( min( p1, p2), p3)-extent;
-		maxP = max( max( p1, p2), p3)+extent;
-
-		minP = bound(minP);
-		maxP = bound(maxP);
-	}
-
+	
 	INLINE_FUNCTION_HD
 	void extendBox(
 		const realx3& p1,
@@ -224,17 +183,17 @@ public:
 		realx3& minP,
 		realx3& maxP)const
 	{
-		minP = min(min(p1,p2),p3) - extent*cellSize_ ;
-		maxP = max(max(p1,p2),p3) + extent*cellSize_ ;
+		minP = min(min(p1,p2),p3) - extent*celldx_ ;
+		maxP = max(max(p1,p2),p3) + extent*celldx_ ;
 
 		minP = bound(minP);
 		maxP = bound(maxP);
 	}
 
 	INLINE_FUNCTION_HD
-	CellType bound(CellType p)const
+	int32x3 bound(int32x3 p)const
 	{
-		return CellType(
+		return int32x3(
 			min( numCells_.x()-1, max(0,p.x())),
 			min( numCells_.y()-1, max(0,p.y())),
 			min( numCells_.z()-1, max(0,p.z()))
@@ -245,9 +204,9 @@ public:
 	realx3 bound(realx3 p)const
 	{
 		return realx3(
-			min( domain_.maxPoint().x(), max(domain_.minPoint().x(),p.x())),
-			min( domain_.maxPoint().y(), max(domain_.minPoint().y(),p.y())),
-			min( domain_.maxPoint().z(), max(domain_.minPoint().z(),p.z()))
+			min( domainBox_.maxPoint().x(), max(domainBox_.minPoint().x(),p.x())),
+			min( domainBox_.maxPoint().y(), max(domainBox_.minPoint().y(),p.y())),
+			min( domainBox_.maxPoint().z(), max(domainBox_.minPoint().z(),p.z()))
 			);
 	}
 };	

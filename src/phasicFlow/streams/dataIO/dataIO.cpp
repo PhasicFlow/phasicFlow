@@ -22,7 +22,7 @@ template<typename T>
 bool pFlow::writeDataAsciiBinary(iOstream& os, span<T> data)
 {
 
-	if( os.isBinary() )
+	if( std::is_trivially_copyable_v<T> && os.isBinary() )
 	{
 		// first write the number of data
 		uint64 numData = data.size();
@@ -83,7 +83,7 @@ bool pFlow::readDataAsciiBinary
 )
 {
 	
-	if(is.isBinary())
+	if(std::is_trivially_copyable_v<T> && is.isBinary())
 	{
 		data.clear();
 		// read length of data 			

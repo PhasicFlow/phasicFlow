@@ -72,7 +72,7 @@ pFlow::uniquePtr<pFlow::interaction> pFlow::interaction::create
 
 
 	gSettings::sleepMiliSeconds(
-			1000*(pFlowProcessors().localSize()-pFlowProcessors().localRank()-1));
+			100*(pFlowProcessors().localSize()-pFlowProcessors().localRank()-1));
 	pOutput.space(2)<<"Creating interaction "<<Green_Text(interactionModel)<<" . . ."<<END_REPORT;
 	if( systemControlvCtorSelector_.search(interactionModel) )
 	{

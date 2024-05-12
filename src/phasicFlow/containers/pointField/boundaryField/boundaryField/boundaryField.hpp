@@ -121,7 +121,18 @@ public:
 		return true;
 	}
 
-	
+	inline
+	InternalFieldType& internal()
+	{
+		return internal_;
+	}
+
+	inline
+	const InternalFieldType& internal()const
+	{
+		return internal_;
+	}
+
 	FieldAccessType thisField()const
 	{
 		return FieldAccessType(
@@ -143,11 +154,6 @@ public:
 
 	virtual
 	const ProcVectorType& neighborProcField()const;
-
-	void fill(const std::any& val)override
-	{
-		return;
-	}
 
 	virtual
 	void fill(const T& val)

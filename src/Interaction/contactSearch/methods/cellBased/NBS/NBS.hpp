@@ -134,6 +134,16 @@ public:
 		{
 			return 1;
 		}
+		
+		real sizeRatio()const
+		{
+			return sizeRatio_;
+		}
+
+		real cellExtent()const
+		{
+			return cellExtent_;
+		}
 
 		auto getCellIterator([[maybe_unused]] uint32 lvl)const
 		{

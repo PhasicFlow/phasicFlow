@@ -227,6 +227,32 @@ pFlow::VectorSingle<T,MemorySpace>::VectorSingle
 }
 
 template<typename T, typename MemorySpace>
+pFlow::VectorSingle<T,MemorySpace>::VectorSingle
+(
+    const word& name, 
+    const ViewType1D<T, MemorySpace>& src
+)
+:
+    VectorSingle(name, src.size(), src.size(), RESERVE())
+{
+    if constexpr(isTriviallyCopyable_)
+    {
+        copy(deviceView(), src);
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<size(); i++)
+        {
+            view_[i] = src[i];
+        }
+    }
+    else
+    {
+        static_assert("This constructor is not valid for non-trivially copyable data type on device memory");
+    }
+}
+
+template<typename T, typename MemorySpace>
 pFlow::VectorSingle<T,MemorySpace>& 
     pFlow::VectorSingle<T,MemorySpace>::operator = (const VectorSingle& rhs) 
 {
@@ -367,6 +393,7 @@ template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H 
 void pFlow::VectorSingle<T,MemorySpace>::reserve(uint32 cap) 
 {
+    if(cap == capacity() ) return;
     changeCapacity(cap);
 }
 
@@ -568,6 +595,40 @@ void pFlow::VectorSingle<T,MemorySpace>::assign
     else
     {
         static_assert("Not a valid operation for this data type on device memory");
+    }
+}
+
+
+template <typename T, typename MemorySpace>
+INLINE_FUNCTION_H
+void pFlow::VectorSingle<T, MemorySpace>::append(const ViewType1D<T,MemorySpace>& appVec)
+{
+    uint32 appSize  = appVec.size();
+	if(appSize == 0) return;
+
+	uint32 oldS = size();
+	uint32 newSize = oldS + appSize; 
+
+	changeSize(newSize);
+
+	auto appendView = Kokkos::subview(
+		view_,
+		Kokkos::make_pair<uint32>(oldS, newSize));
+	
+    if constexpr( isTriviallyCopyable_)
+    {
+        copy(appendView, appVec);
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<appVec.size(); i++)
+        {
+            appendView[i] = appVec[i];
+        }
+    }
+    else
+    {
+        static_assert("not a valid operation for this data type on device memory");
     }
 }
 
@@ -813,7 +874,7 @@ bool pFlow::VectorSingle<T,MemorySpace>::insertSetElement
 
 template<typename T, typename MemorySpace>
 INLINE_FUNCTION_H
-bool pFlow::VectorSingle<T,MemorySpace>::reorderItems(uint32IndexContainer indices)
+bool pFlow::VectorSingle<T,MemorySpace>::reorderItems(const uint32IndexContainer& indices)
 {
 	if(indices.size() == 0)
 	{
@@ -831,10 +892,8 @@ bool pFlow::VectorSingle<T,MemorySpace>::reorderItems(uint32IndexContainer indic
 		return false;
 	}
 
-	uint32 		newSize = indices.size();
+	uint32 	newSize = indices.size();
 	
-	setSize(newSize);
-
 	viewType 	sortedView(this->name(), newSize);
 
 	using policy = Kokkos::RangePolicy< execution_space,Kokkos::IndexType<uint32>>;
@@ -875,7 +934,24 @@ bool pFlow::VectorSingle<T,MemorySpace>::reorderItems(uint32IndexContainer indic
 		Kokkos::fence();
 	}
 
-	copy(deviceView(), sortedView);
-	
+    setSize(newSize);
+
+    
+    if constexpr( isTriviallyCopyable_ )
+    {
+        copy(deviceView(), sortedView);
+    }
+    else if constexpr( isHostAccessible_)
+    {
+        for(auto i=0u; i<newSize; i++)
+        {
+            view_[i] = sortedView[i];
+        }   
+    }
+    else
+    {
+        static_assert("Not a valid operation for this data type on memory device");
+    }
+    
 	return true;
 }

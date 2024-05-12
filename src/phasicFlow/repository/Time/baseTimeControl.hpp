@@ -46,6 +46,13 @@ public:
 	  real              defStartTime   = 0.0
 	);
 
+	baseTimeControl(
+		int32 start,
+		int32 end,
+		int32 stride,
+		const word& intervalPrefix = ""
+	);
+
 	inline bool isTimeStep() const
 	{
 		return isTimeStep_;
