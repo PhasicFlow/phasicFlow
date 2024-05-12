@@ -52,7 +52,8 @@ pFlow::processorBoundaryContactSearch::processorBoundaryContactSearch(
 : 
     boundaryContactSearch(dict, boundary, cSearch),
     diameter_(cSearch.Particles().boundingSphere()),
-    masterSearch_(this->isBoundaryMaster())
+    masterSearch_(this->isBoundaryMaster()),
+    sizeRatio_(dict.getVal<real>("sizeRatio"))
 {
     
     if(masterSearch_)
@@ -65,7 +66,8 @@ pFlow::processorBoundaryContactSearch::processorBoundaryContactSearch(
         
         ppContactSearch_ = makeUnique<twoPartContactSearch>(
             searchBox_,
-            maxD);
+            maxD,
+            sizeRatio_);
     }
     else
     {
@@ -96,7 +98,8 @@ bool pFlow::processorBoundaryContactSearch::broadSearch
             thisPoints, 
             thisDiams,
             neighborProcPoints,
-            neighborProcDiams
+            neighborProcDiams,
+            name()
         );
         //pOutput<<"ppSize "<< ppPairs.size()<<endl;
         return true;

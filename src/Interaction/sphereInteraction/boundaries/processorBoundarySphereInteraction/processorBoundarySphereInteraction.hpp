@@ -21,6 +21,7 @@ Licence:
 #define __processorBoundarySphereInteraction_hpp__
 
 #include "boundarySphereInteraction.hpp"
+#include "processorBoundaryField.hpp"
 
 namespace pFlow::MPI
 {
@@ -56,6 +57,12 @@ private:
     
     bool    masterInteraction_;
 
+    Timer   inter_;
+    Timer   send_;
+    Timer   recv_;
+    Timer   add_;
+    uint32  iter=0;
+
 public:
 
     TypeInfoTemplate22("boundarySphereInteraction", "processor",ContactForceModel, MotionModel);
@@ -78,7 +85,8 @@ public:
 
     bool sphereSphereInteraction(
         real dt,
-		const ContactForceModel& cfModel)override;
+		const ContactForceModel& cfModel,
+        uint32 step)override;
 	
 };
 

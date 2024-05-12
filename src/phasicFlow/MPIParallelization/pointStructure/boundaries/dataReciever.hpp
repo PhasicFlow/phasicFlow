@@ -59,15 +59,28 @@ public:
             return buffer_.size();
     }
 
+    void sendBackData(
+        const localProcessors& processors)const
+    {
+        CheckMPI(
+            Isend(
+                buffer_.getSpan(),
+                fromProc_,
+                tag_,
+                processors.localCommunicator(),
+                &recvRequest_
+            ),
+            true
+        );
+    }
+
     void recieveData(
         const localProcessors&      processors,
         uint32 numToRecv
     )
     {   
-        waitBufferForUse();
-        buffer_.clear();
-        buffer_.resize(numToRecv);
-
+        resize(numToRecv);
+        
         CheckMPI(
             Irecv(
                 buffer_.getSpan(), 
@@ -80,14 +93,37 @@ public:
         );
     }
 
+    inline
     auto& buffer()
     {
         return buffer_;
     }
 
+    inline
     const auto& buffer()const
     {
         return buffer_;
+    }
+
+    inline
+    void fill(const T& val)
+    {
+        waitBufferForUse();
+        buffer_.fill(val);
+    }
+
+    inline
+    uint32 size()const
+    {
+        return buffer_.size();
+    }
+
+    inline
+    void resize(uint32 newSize)
+    {
+        waitBufferForUse();
+        buffer_.clear();
+        buffer_.resize(newSize);
     }
 
 };

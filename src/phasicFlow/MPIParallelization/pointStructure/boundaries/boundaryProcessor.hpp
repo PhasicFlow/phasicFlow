@@ -33,9 +33,11 @@ namespace pFlow::MPI
 		: public boundaryBase
 	{
 	public:
+
 		using pointFieldAccessType = typename boundaryBase::pointFieldAccessType;
 
 	private:
+	
 		uint32               neighborProcNumPoints_ = 0;
 
 		uint32               thisNumPoints_ = 0;
@@ -54,8 +56,6 @@ namespace pFlow::MPI
 
 		uint32Vector_D       transferIndices_{"transferIndices"};
 
-		void checkSize() const;
-
 		void checkDataRecieved() const;
 
 		/// @brief  Update processor boundary data for this processor
@@ -66,9 +66,9 @@ namespace pFlow::MPI
 		/// allow processor boundaries to exchange data in two steps.
 		/// The first step is a buffered non-blocking send and the second
 		/// step is non-blocking recieve to get data.
-		bool updataBoundary(int step) override;
+		bool updataBoundaryData(int step) override;
 
-		bool transferData(int step) override;
+		bool transferData(uint32 iter, int step) override;
 
 	public:
 		TypeInfo("boundary<processor>");
@@ -104,6 +104,18 @@ namespace pFlow::MPI
 		/// @brief Return a const reference to point positions in the
 		/// neighbor processor boundary.
 		const realx3Vector_D &neighborProcPoints() const override;
+
+		 
+		uint32 numToTransfer()const override
+		{
+			return numToTransfer_;
+		}
+
+		 
+		uint32 numToRecieve()const override
+		{
+			return numToRecieve_;
+		}
 	};
 
 } // namespace pFlow::MPI

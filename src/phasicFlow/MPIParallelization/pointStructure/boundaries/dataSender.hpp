@@ -26,7 +26,7 @@ public:
 
 private:
 
-	BufferVectorType buffer_;
+	mutable BufferVectorType buffer_;
 
 	int              toProc_;
 
@@ -103,6 +103,34 @@ public:
                 
     }
 
+    bool recieveBackData(
+        const localProcessors&      processors,
+        uint32 numToRecieve
+    )const
+    {       
+        // make sure the buffer is ready to be used and free 
+        // the previous request (if any).
+        waitBufferForUse();
+
+        // clear the buffer to prevent data copy if capacity increases 
+        buffer_.clear();
+        buffer_.resize(numToRecieve);
+        
+        Status status;
+        CheckMPI(
+            Irecv(
+                buffer_.getSpan(),
+                toProc_,
+                tag_,
+                processors.localCommunicator(),
+                &sendRequest_
+            ),
+            true
+        );
+
+        return true;
+    }
+
     auto& buffer()
     {
         return buffer_;
@@ -111,6 +139,18 @@ public:
     const auto& buffer()const
     {
         return buffer_;
+    }
+
+    inline
+    void fill(const T& val)
+    {
+        waitBufferForUse();
+        buffer_.fill(val);
+    }
+
+    uint32 size()const
+    {
+        return buffer_.size();
     }
 
     bool sendComplete()
@@ -125,6 +165,14 @@ public:
         {
             return true;
         }
+    }
+
+    inline
+    void resize(uint32 newSize)
+    {
+        waitBufferForUse();
+        buffer_.clear();
+        buffer_.resize(newSize);
     }
 
 };

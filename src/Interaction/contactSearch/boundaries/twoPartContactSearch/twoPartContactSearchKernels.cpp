@@ -20,9 +20,7 @@ pFlow::twoPartContactSearchKernels::buildNextHead(
   deviceViewType1D<uint32>&                 next
 )
 {
-	if (points.empty())
-		return;
-
+	
 	uint32 n = points.size();
 
 	Kokkos::parallel_for(

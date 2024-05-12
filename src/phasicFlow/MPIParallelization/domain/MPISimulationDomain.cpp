@@ -41,6 +41,9 @@ bool pFlow::MPI::MPISimulationDomain::createBoundaryDicts()
     auto& mpiBoundaries = this->subDict("MPIBoundaries");
 
     real neighborLength = boundaries.getVal<real>("neighborLength");
+    auto boundaryExtntionLengthRatio = 
+		boundaries.getValOrSet<real>("boundaryExtntionLengthRatio", 0.1);
+	auto updateIntercal = boundaries.getValOrSet<uint32>("updateInterval", 1u);
 
     auto neighbors = findPlaneNeighbors();
 
@@ -61,6 +64,15 @@ bool pFlow::MPI::MPISimulationDomain::createBoundaryDicts()
 			"in dictionary "<< boundaries.globalName()<<endl;
 			return false;
 		}
+        
+        if(!bDict.addOrReplace("updateInterval", updateIntercal))
+		{
+			fatalErrorInFunction<<"error in adding updateIntercal to "<< bName <<
+			"in dictionary "<< boundaries.globalName()<<endl;
+		}
+
+		bDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+
         if( thisDomainActive_ )
         {
             if( neighbors[i] == -1 )

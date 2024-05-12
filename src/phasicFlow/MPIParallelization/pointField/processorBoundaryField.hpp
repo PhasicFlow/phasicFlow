@@ -83,25 +83,25 @@ public:
 	ProcVectorType& neighborProcField() override;
 
 	const ProcVectorType& neighborProcField()const override;
+	
+	void fill(const T& val)override
+	{
+		reciever_.fill(val);
+	}
 
-	bool hearChanges
-	(
+	bool hearChanges(
 		real t,
 		real dt,
 		uint32 iter,
 		const message& msg, 
     	const anyList& varList
-	) override
-    {
-		BoundaryFieldType::hearChanges(t,dt,iter, msg,varList);
-		
-		if(msg.equivalentTo(message::BNDR_DELETE))
-		{
-			// do nothing;
-		}
-		
-		return true;
-	}
+	) override;
+    
+	void sendBackData()const;
+
+	void recieveBackData()const;
+
+	void addBufferToInternalField()const;
 
 };
 

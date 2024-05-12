@@ -39,6 +39,8 @@ private:
 
 	bool                            masterSearch_;
 
+	real 							sizeRatio_;
+
 	void                            setSearchBox();
 
 public:
