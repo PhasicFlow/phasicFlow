@@ -135,18 +135,31 @@ public:
 
 	FieldAccessType thisField()const
 	{
-		return FieldAccessType(
-			this->size(),
-			this->indexList().deviceViewAll(),
-			internal_.deviceViewAll());
+        if constexpr(isDeviceAccessible<execution_space>())
+            return FieldAccessType(
+                this->size(),
+                this->indexList().deviceViewAll(),
+                internal_.deviceViewAll());
+        else
+            return FieldAccessType(
+                this->size(),
+                this->boundary().indexListHost().deviceViewAll(),
+                internal_.deviceViewAll());
 	}
 
 	FieldAccessType mirrorField()const
 	{
-		return FieldAccessType(
-			this->mirrorBoundary().size(),
-			this->mirrorBoundary().indexList().deviceViewAll(),
-			internal_.deviceViewAll());
+        if constexpr(isDeviceAccessible<execution_space>())
+            return FieldAccessType(
+                this->mirrorBoundary().size(),
+                this->mirrorBoundary().indexList().deviceViewAll(),
+                internal_.deviceViewAll());
+        else
+            return FieldAccessType(
+                this->mirrorBoundary().size(),
+                this->mirrorBoundary().indexListHost().deviceViewAll(),
+                internal_.deviceViewAll());
+
 	}
 	
 	virtual 

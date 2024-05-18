@@ -30,18 +30,16 @@ Licence:
 //#include "readControlDict.hpp"
 
 
-using namespace pFlow;
-
 int main(int argc, char** argv )
 {
-	word outFolder = (pFlow::CWD()/word("VTK")).wordPath();
+	pFlow::word outFolder = (pFlow::CWD()/pFlow::word("VTK")).wordPath();
 
-	commandLine cmds(
+	pFlow::commandLine cmds(
 		"pFlowToVTK",
 		"Convrtes the saved pointField and geometry"
 		" date in time folders into vtk file format.");
 
-	wordVector times;
+	pFlow::wordVector times;
 		 
 	bool noGoem = false;
 	cmds.add_flag(
@@ -65,7 +63,7 @@ int main(int argc, char** argv )
 		separateSurfaces,
 		"use this when you want to have sub-surfaces in separate files");
 
-	wordVector fields;
+	pFlow::wordVector fields;
 	bool 			 allFields = true;
 	cmds.addOption("-f,--fields",
 		fields.vectorField(),
@@ -87,10 +85,10 @@ int main(int argc, char** argv )
 #include "initialize_Control.hpp"
 
 
-	timeFolder folders(Control);
-	auto destFolder = fileSystem(outFolder)/word(geometryFolder__);
-	auto destFolderField = fileSystem(outFolder);
-	wordList geomfiles{"triSurface"};
+	pFlow::timeFolder folders(Control);
+	auto destFolder = pFlow::fileSystem(outFolder)/pFlow::word(pFlow::geometryFolder__);
+	auto destFolderField = pFlow::fileSystem(outFolder);
+	pFlow::wordList geomfiles{"triSurface"};
 
 
 	if(cmds.count("--fields"))
@@ -98,7 +96,7 @@ int main(int argc, char** argv )
 		allFields = false;
 	}
 
-	realCombinedRange validRange;
+	pFlow::realCombinedRange validRange;
 	if( cmds.count("--time") )
 	{
 		if(!validRange.addRanges(times))
@@ -116,7 +114,7 @@ int main(int argc, char** argv )
 		Control.time().setTime(folders.time());
 		if( !validRange.isMember( folders.time() ) )continue;
 		
-		output<< "time: " << Cyan_Text( folders.time() )<<" s" <<endl;
+		pFlow::output<< "time: " << Cyan_Text( folders.time() )<<" s" <<pFlow::endl;
 		if(!noGoem)
 		{	
 			
@@ -155,13 +153,13 @@ int main(int argc, char** argv )
 			}	
 		}
 		
-		output<<endl;
+		pFlow::output<<pFlow::endl;
 
 	}
 	while( folders++ );
 
 
-	output<< "\nFinished successfully.\n";
+	pFlow::output<< "\nFinished successfully.\n";
 
 	
 // this should be palced in each main 

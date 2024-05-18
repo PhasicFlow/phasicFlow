@@ -76,8 +76,6 @@ protected:
 	{
 		return true;
 	}
-
-	void impl_setTime(uint32 iter, real t, real dt)const;
 	
 public:
 
@@ -90,6 +88,7 @@ public:
 		const dictionary& dict, 
 		repository* owner);
 
+    using fileDictionary::write;
 
 	bool write(iOstream& os, const IOPattern& iop)const override;
 
@@ -98,6 +97,9 @@ public:
     {
       return rotatingAxis({0,0,0}, {1,0,0}, 0.0);
     }
+
+    // TODO: make this method protected
+    void impl_setTime(uint32 iter, real t, real dt)const;
 };
 
 } // pFlow

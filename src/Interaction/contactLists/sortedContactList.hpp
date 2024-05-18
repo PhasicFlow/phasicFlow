@@ -138,7 +138,7 @@ public:
 				start,
 				end,
 				newPair);
-				idx0!=-1)
+				idx0!=static_cast<uint32>(-1))
 		{
 			values_[idx] = values0_[idx0];
 		}
@@ -147,7 +147,7 @@ public:
 			start, 
 			end,
 			newPair);
-			idx0!=-1)
+			idx0!= static_cast<uint32>(-1) )
 		{
 			values_[idx] = values0_[idx0];
 			

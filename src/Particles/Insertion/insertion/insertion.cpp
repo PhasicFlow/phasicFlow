@@ -74,9 +74,6 @@ pFlow::insertion::pStruct() const
 	return particles_.pStruct();
 }
 
-
-
-
 bool
 pFlow::insertion::readInsertionDict()
 {

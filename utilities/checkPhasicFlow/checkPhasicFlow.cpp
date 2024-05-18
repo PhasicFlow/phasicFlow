@@ -20,6 +20,7 @@ Licence:
 
 #include "KokkosTypes.hpp"
 #include "systemControl.hpp"
+#include "localProcessors.hpp"
 #include "commandLine.hpp"
 
 
@@ -40,9 +41,11 @@ if(!cmds.parse(argc, argv)) return 0;
 #include "initialize.hpp"
 
 	output<<endl;
-	REPORT(1)<< "You are using "<<yellowText(cmds.productNameCopyright())<<endREPORT;
-  REPORT(1)<< yellowText(pFlow::floatingPointDescription())<<endREPORT;
-	
+	REPORT(1)<< "You are using "<<Yellow_Text(cmds.productNameCopyright())<<END_REPORT;
+	REPORT(1)<< Yellow_Text(pFlow::floatingPointDescription())<<END_REPORT;
+    REPORT(1)<< (pFlow::localProcessors::builtForMPI()?
+        "This is a built for MPI execution":
+        "This is not a build for MPI execution")<<END_REPORT;
 
 // this should be palced in each main 
 #include "finalize.hpp"

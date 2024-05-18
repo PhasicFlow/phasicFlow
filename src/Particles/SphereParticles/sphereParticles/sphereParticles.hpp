@@ -82,7 +82,7 @@ private:
 	Timer  				   fieldUpdateTimer_;
 
 private:
-	bool initializeParticles();
+	
 
 	bool getParticlesInfoFromShape(
 	  const wordVector& shapeNames,
@@ -119,10 +119,13 @@ public:
 	 */
 	/*bool insertParticles
 	(
-	    const realx3Vector& position,
+    const realx3Vector& position,
 	    const wordVector&  shapes,
 	    const setFieldList& setField
 	) override ;*/
+
+    // TODO: make this method private later 
+    bool initializeParticles();
 
 	/// const reference to shapes object
 	const auto& spheres() const

@@ -33,12 +33,12 @@ struct array2D
 
     constexpr size_t nCols()const noexcept
     {
-        return nCols;
+        return nCol;
     }
 
     constexpr size_t nRows()const noexcept
     {
-        return nRows;
+        return nRow;
     }
     
 };

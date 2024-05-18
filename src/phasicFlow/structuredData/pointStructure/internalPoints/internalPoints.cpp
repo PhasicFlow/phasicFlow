@@ -317,6 +317,9 @@ pFlow::internalPoints::insertPoints(
 
 	auto aRange = pFlagsD_.activeRange();
 	uint32 emptySpots = pFlagsD_.capacity() - pFlagsD_.numActive();
+
+    if(emptySpots!= 0) emptySpots--;
+
 	message msg;
 
 	if( numNew > emptySpots )
@@ -348,8 +351,20 @@ pFlow::internalPoints::insertPoints(
 	// we should fill the scattered empty spots
 	else
 	{
-		notImplementedFunction;
-		return false;
+		auto newIndices = pFlagsD_.getEmptyPoints(numNew);
+		if(numNew != newIndices.size())
+		{
+			fatalErrorInFunction<<"not enough empty points in pointFlag"<<
+			numNew<< " "<<newIndices.size() <<endl;
+			pOutput<< pFlagsD_.capacity()<<endl;
+			pOutput<< pFlagsD_.numActive()<<endl;
+			return false;
+		}
+		
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			newIndices
+		);
 	}
 
 	const auto& indices = varList.getObject<uint32IndexContainer>(
@@ -450,7 +465,7 @@ bool pFlow::internalPoints::insertPointsOnly(
 	}// we should fill the scattered empty spots
 	else
 	{
-		pOutput<<"numNew to be inserted "<< numNew <<endl;
+		
 		auto newIndices = pFlagsD_.getEmptyPoints(numNew);
 		if(numNew != newIndices.size())
 		{
@@ -460,7 +475,7 @@ bool pFlow::internalPoints::insertPointsOnly(
 			pOutput<< pFlagsD_.numActive()<<endl;
 			return false;
 		}
-		pOutput<<newIndices<<endl;
+		
 		varList.emplaceBack<uint32IndexContainer>(
 			msg.addAndName(message::ITEM_INSERT),
 			newIndices

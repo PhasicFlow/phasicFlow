@@ -40,11 +40,7 @@ Licence:
 #include "interaction.hpp"
 #include "Insertions.hpp"
 
-
-
 //#include "readControlDict.hpp"
-
-using namespace pFlow;
 
 /**
  * DEM solver for simulating granular flow of cohesion-less particles.
@@ -55,7 +51,7 @@ using namespace pFlow;
 int main( int argc, char* argv[])
 {
 
-commandLine cmds(
+pFlow::commandLine cmds(
 		"sphereGranFlow",
 		"DEM solver for non-cohesive spherical particles with particle insertion "
 		"mechanism and moving geometry");
@@ -65,13 +61,12 @@ bool isCoupling = false;
 if(!cmds.parse(argc, argv)) return 0;
 
 // this should be palced in each main 
-processors::initProcessors(argc, argv);
-initialize_pFlowProcessors();
+pFlow::processors::initProcessors(argc, argv);
+pFlow::initialize_pFlowProcessors();
 #include "initialize_Control.hpp"
 	 
 	#include "setProperty.hpp"
 	#include "setSurfaceGeometry.hpp"
-	
 
 	#include "createDEMComponents.hpp"
 	
@@ -117,7 +112,7 @@ initialize_pFlowProcessors();
 
 // this should be palced in each main 
 #include "finalize.hpp"
-processors::finalizeProcessors();
+pFlow::processors::finalizeProcessors();
 
 
 }	

@@ -43,7 +43,7 @@ while( m !=  mapperNBS::NoPos)
 			auto lm = m;
 
 			if(lm>ln) Swap(lm,ln);
-			if( pairs.insert(lm,ln) == -1)
+			if( pairs.insert(lm,ln) == static_cast<uint32>(-1))
 			{
 				getFullUpdate++;
 			}
@@ -86,7 +86,7 @@ while( m !=  mapperNBS::NoPos)
 					auto ln = n;
 					auto lm = m;
 					if(lm>ln) Swap(lm,ln);
-					if( pairs.insert(lm,ln) == -1)
+					if( pairs.insert(lm,ln) == static_cast<uint32>(-1))
 					{
 						getFullUpdate++;
 					}

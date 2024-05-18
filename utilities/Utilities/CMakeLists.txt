@@ -5,7 +5,8 @@ readFromTimeFolder.cpp
 vtkFile/vtkFile.cpp
 geometryPhasicFlow/Wall/Wall.cpp 
 geometryPhasicFlow/planeWall/planeWall.cpp 
-#geometryPhasicFlow/stlWall/stlWall.cpp
+geometryPhasicFlow/stlWall/stlFile.cpp
+geometryPhasicFlow/stlWall/stlWall.cpp
 geometryPhasicFlow/cylinderWall/cylinderWall.cpp
 geometryPhasicFlow/cuboidWall/cuboidWall.cpp
 )

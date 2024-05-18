@@ -42,12 +42,22 @@ pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 	return osPtr;
 }
 
-pFlow::IOfileHeader::IOfileHeader
-(
-	const objectFile& objf
-)
-:
-	objectFile(objf)
+pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::dummyOutStream() const
+{
+    auto osPtr = makeUnique<oFstream>( CWD()+word("dummyFile") , outFileBinary());
+    
+    if(osPtr && owner())
+	{
+	 	auto outPrecision = owner()->outFilePrecision();
+	 	osPtr->precision(static_cast<int>(outPrecision));
+	}
+
+	return osPtr;
+}
+
+pFlow::IOfileHeader::IOfileHeader(
+    const objectFile &objf)
+    : objectFile(objf)
 {}
 
 pFlow::fileSystem pFlow::IOfileHeader::path() const

@@ -125,6 +125,8 @@ bool pFlow::boundaryReflective::afterIteration
 
     const auto& velocity = time().lookupObject<realx3PointField_D>(velocityName_);
     const auto& velocityD = velocity.deviceViewAll();
+    
+    const auto restitution = restitution_;
 
     Kokkos::parallel_for(
         "pFlow::boundaryReflective::velocityChange",
@@ -137,7 +139,7 @@ bool pFlow::boundaryReflective::afterIteration
             if(vn < 0)
             {
                 realx3 vt = vel - vn*p.normal();
-                vel = restitution_*(vt - vn*p.normal());
+                vel = restitution*(vt - vn*p.normal());
             }
         }
     );
