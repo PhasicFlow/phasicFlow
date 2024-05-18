@@ -43,7 +43,7 @@ protected:
 
     const boundaryList&         boundaries_;
 
-    uint32                      slaveToMasterUpdateIter_ = -1;
+    uint32                      slaveToMasterUpdateIter_ = static_cast<uint32>(-1);
 
 public:
 
@@ -95,7 +95,7 @@ public:
 
     bool slaveToMasterUpdateRequested()const
     {
-        return slaveToMasterUpdateIter_ != -1;
+        return slaveToMasterUpdateIter_ != static_cast<uint32>(-1);
     }
 
     

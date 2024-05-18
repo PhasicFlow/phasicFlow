@@ -29,12 +29,10 @@ Licence:
 
 //#include "readControlDict.hpp"
 
-using namespace pFlow;
-
 int main( int argc, char* argv[] )
 {
 
-	commandLine cmds(
+	pFlow::commandLine cmds(
 		"createParticles",
 		"Read the dictionary createParticles and create particles"
 		" based on the two sub-dictionaries positionParticles and setFields.\n"
@@ -73,10 +71,10 @@ int main( int argc, char* argv[] )
 // this should be palced in each main 
 #include "initialize_Control.hpp"
 
-	fileDictionary cpDict("particlesDict", Control.settings().path());
+	pFlow::fileDictionary cpDict("particlesDict", Control.settings().path());
 	
 
-	uniquePtr<pointStructure> pStructPtr = nullptr;
+	pFlow::uniquePtr<pFlow::pointStructure> pStructPtr = nullptr;
 
 
 	if(!setOnly)
@@ -84,13 +82,13 @@ int main( int argc, char* argv[] )
 
 		// position particles based on the dict content 
 		REPORT(0)<< "Positioning points . . . \n"<<END_REPORT;
-		auto pointPosition = positionParticles::create(Control, cpDict.subDict("positionParticles"));
+		auto pointPosition = pFlow::positionParticles::create(Control, cpDict.subDict("positionParticles"));
 
-		fileSystem pStructPath = Control.time().path()+pointStructureFile__;
+		pFlow::fileSystem pStructPath = Control.time().path()+pFlow::pointStructureFile__;
 
 		auto finalPos = pointPosition().getFinalPosition();
 
-		pStructPtr = makeUnique<pointStructure>(Control, finalPos);
+		pStructPtr = pFlow::makeUnique<pFlow::pointStructure>(Control, finalPos);
 
 
 		REPORT(1)<< "Created pStruct with "<< pStructPtr().size() << " points and capacity "<<
@@ -100,11 +98,11 @@ int main( int argc, char* argv[] )
     else
 	{
 		// read the content of pStruct from 0/pStructure
-		pStructPtr = makeUnique<pointStructure>(Control);
+		pStructPtr = pFlow::makeUnique<pFlow::pointStructure>(Control);
 
 	}
 
-	List<uniquePtr<IOobject>> allObjects;
+	pFlow::List<pFlow::uniquePtr<pFlow::IOobject>> allObjects;
 
 	if(!positionOnly)
 	{
@@ -113,7 +111,7 @@ int main( int argc, char* argv[] )
 
 		auto& sfDict = cpDict.subDict("setFields");
 
-		setFieldList defValueList(sfDict.subDict("defaultValue"));
+		pFlow::setFieldList defValueList(sfDict.subDict("defaultValue"));
 
 		for(auto& sfEntry: defValueList)
 		{
@@ -128,7 +126,7 @@ int main( int argc, char* argv[] )
 			}
 		}
 		
-		output<<endl;
+		pFlow::output<<pFlow::endl;
 
 		auto& selectorsDict = sfDict.subDict("selectors");
 
@@ -145,45 +143,45 @@ int main( int argc, char* argv[] )
 				ERR<<"\n error occured in setting selector. \n"<<END_ERR;
 				return 1;
 			}
-			output<<endl;
+			pFlow::output<<pFlow::endl;
 		}
 	}
 
 	Control.clearIncludeExclude();
 	Control.addExclude("shapeName");
 
-	uint64PointField_H shapeHash
+	pFlow::uint64PointField_H shapeHash
 	(
-		objectFile
+		pFlow::objectFile
 		(
 			"shapeHash",
 			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
+			pFlow::objectFile::READ_NEVER,
+			pFlow::objectFile::WRITE_ALWAYS
 		),
 		pStructPtr(),
 		0u
 	);
 
-	uint32PointField_H shapeIndex
+	pFlow::uint32PointField_H shapeIndex
 	(
-		objectFile
+		pFlow::objectFile
 		(
 			"shapeIndex",
 			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
+			pFlow::objectFile::READ_NEVER,
+			pFlow::objectFile::WRITE_ALWAYS
 		),
 		pStructPtr(),
 		0u
 	);
 
-	baseShapeNames shapes(
-		shapeFile__,
+	pFlow::baseShapeNames shapes(
+		pFlow::shapeFile__,
 		&Control.caseSetup()
 	);
 	
-	auto& shapeName = Control.time().template lookupObject<wordPointField_H>("shapeName");
+	auto& shapeName = Control.time().template lookupObject<pFlow::wordPointField_H>("shapeName");
 
 	REPORT(0)<< "Converting shapeName field to shapeIndex field"<<END_REPORT;
 
@@ -196,7 +194,7 @@ int main( int argc, char* argv[] )
 
 	ForAll(i, shapeHash)
 	{
-		if(uint32 index; shapes.shapeNameToIndex(shapeName_D[i], index))
+		if(pFlow::uint32 index; shapes.shapeNameToIndex(shapeName_D[i], index))
 		{
 			shapeHash_D[i] = shapes.hashes()[index];
 			shapeIndex_D[i] = index;
@@ -206,7 +204,7 @@ int main( int argc, char* argv[] )
 			fatalErrorInFunction<<"Found shape name "<< Yellow_Text(shapeName_D[i])<<
 			"in shapeName field. But the list of shape names in file "<< 
 			shapes.globalName()<<" is : \n"<<
-			shapes.shapeNames()<<endl;
+			shapes.shapeNames()<<pFlow::endl;
 		}
 	}
 

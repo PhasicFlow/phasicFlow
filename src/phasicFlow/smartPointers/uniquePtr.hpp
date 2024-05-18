@@ -37,16 +37,15 @@ namespace pFlow
 
 
 template<
-	typename T, 
-	typename Deleter = std::default_delete<T>
+	typename T
 >
 class uniquePtr
 :
-	public std::unique_ptr<T, Deleter>
+	public std::unique_ptr<T>
 {
 public:
 
-	using uniquePtrType = std::unique_ptr<T, Deleter>;
+	using uniquePtrType = std::unique_ptr<T>;
 
 	// using base constructors 
 	using uniquePtrType::unique_ptr;

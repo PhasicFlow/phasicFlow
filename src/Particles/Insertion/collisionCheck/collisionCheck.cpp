@@ -60,7 +60,7 @@ pFlow::collisionCheck::checkPoint(const realx3& p, const real d) const
             {
                 uint32 n = head_(i, j, k);
     
-                while( n != -1)
+                while( n != static_cast<uint32>(-1))
                 {
                     if( ((position_[n]-p).length() - 0.5*(diameters_[n]+d )) <= 0.0 )
                     {
@@ -85,7 +85,7 @@ pFlow::collisionCheck::mapLastAddedParticle()
         "size mismatch of next and position"<<endl;
         return false;
     }
-    next_.push_back(-1);
+    next_.push_back(static_cast<uint32>(-1));
     const auto& p = position_[n];
 
     if(!searchBox_.isInside(p))

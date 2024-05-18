@@ -23,6 +23,6 @@ Licence:
 
 REPORT(0)<<"\nReading proprties . . . "<<END_REPORT;
 
-auto proprties = property(propertyFile__, Control.caseSetup().path());
+auto proprties = pFlow::property(pFlow::propertyFile__, Control.caseSetup().path());
 
 #endif // __setProperty_hpp__

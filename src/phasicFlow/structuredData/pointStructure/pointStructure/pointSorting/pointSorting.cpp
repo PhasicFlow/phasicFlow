@@ -17,48 +17,36 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __regularParticleIdHandler_hpp__
-#define __regularParticleIdHandler_hpp__
 
-#include "particleIdHandler.hpp"
+#include "pointSorting.hpp"
+#include "mortonIndexing.hpp"
 
-namespace pFlow
-{
-
-class regularParticleIdHandler
+pFlow::pointSorting::pointSorting(const dictionary & dict)
 :
-    public particleIdHandler
+    performSorting_(dict.getValOrSet("active", Logical(false))),
+    timeControl_(
+        performSorting_()? 
+            baseTimeControl(dict, "sorting"): 
+            baseTimeControl(0,1,1, "sorting")
+    ),
+    dx_(
+        performSorting_()?
+            dict.getVal<real>("dx"):
+            1.0
+    )
 {
-private:
-    
-    uint32 maxId_ = static_cast<uint32>(-1);
-
-  bool initialIdCheck()override; 
-public:
-
-    ClassInfo("particleIdHandler<regular>");
-    
-    explicit regularParticleIdHandler(pointStructure& pStruct);
-
-    ~regularParticleIdHandler()override = default;
-
-	add_vCtor
-	(
-		particleIdHandler,
-		regularParticleIdHandler,
-		pointStructure
-	);
-
-    Pair<uint32, uint32> getIdRange(uint32 nNewParticles)override;
-
-	uint32 maxId()const override
-	{
-		return maxId_;
-	}
-
-};
+    if( performSorting_() )
+        REPORT(1)<<"Point sorting is "<<Yellow_Text("active")<<" in simulation"<<END_REPORT;
+    else
+       REPORT(1)<<"Point sorting is "<<Yellow_Text("inactive")<<" in simulation"<<END_REPORT;
 
 }
-
-
-#endif //__regularParticleIdHandler_hpp__
+pFlow::uint32IndexContainer 
+pFlow::pointSorting::getSortedIndices(
+    const box& boundingBox, 
+    const ViewType1D<realx3> &pos, 
+    const pFlagTypeDevice &flag
+) const
+{
+    return pFlow::getSortedIndices(boundingBox, dx_, pos, flag);
+}

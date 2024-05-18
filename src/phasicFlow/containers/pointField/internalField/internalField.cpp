@@ -52,8 +52,28 @@ bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
 	}
 
 	return true;
-
 }
+
+template<class T, class MemorySpace>
+bool pFlow::internalField<T, MemorySpace>::rearrange(const anyList& varList)
+{
+	const word eventName = message::eventName(message::ITEM_REARRANGE);
+
+	const auto& indices = varList.getObject<uint32IndexContainer>(
+		eventName);
+	
+	field_.reserve( internalPoints_.capacity());
+	field_.resize(internalPoints_.size());
+	if(!field_.reorderItems(indices))
+	{
+		fatalErrorInFunction<<
+		"cannot reorder items in field "<< name()<<endl;
+		return false;
+	}
+
+	return true;
+}
+
 
 template<class T, class MemorySpace>
 pFlow::internalField<T, MemorySpace>::internalField
@@ -166,14 +186,14 @@ bool pFlow::internalField<T, MemorySpace>:: hearChanges
 	{
 		// do nothing
 	}
-	if(msg.equivalentTo(message::ITEM_REARRANGE))
-	{
-		notImplementedFunction;
-		return false;
-	}
 	if(msg.equivalentTo(message::ITEM_INSERT))
 	{
 		return insert(varList);
+	}
+	if(msg.equivalentTo(message::ITEM_REARRANGE))
+	{
+		return rearrange(varList);
+
 	}
 	return true;
 }

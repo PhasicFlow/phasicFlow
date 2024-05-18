@@ -84,6 +84,8 @@ public:
 		repository* owner);
 
 
+    using fileDictionary::write;
+
 	bool write(iOstream& os, const IOPattern& iop)const override;
 
 	static

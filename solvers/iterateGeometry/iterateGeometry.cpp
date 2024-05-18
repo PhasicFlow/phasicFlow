@@ -35,12 +35,10 @@ Licence:
 #include "commandLine.hpp"
 //#include "readControlDict.hpp"
 
-using namespace pFlow;
-
 int main( int argc, char* argv[] )
 {
 
-commandLine cmds(
+pFlow::commandLine cmds(
     "iterateGeometry",
     "Performs simulation without particles, only geometry is solved");
 
@@ -55,8 +53,8 @@ commandLine cmds(
    
 
 // this should be palced in each main 
-processors::initProcessors(argc, argv);
-initialize_pFlowProcessors();
+pFlow::processors::initProcessors(argc, argv);
+pFlow::initialize_pFlowProcessors();
 #include "initialize_Control.hpp"
 	
 	#include "setProperty.hpp"
@@ -71,7 +69,7 @@ initialize_pFlowProcessors();
 
 // this should be palced in each main 
 #include "finalize.hpp"
-processors::finalizeProcessors();
+pFlow::processors::finalizeProcessors();
 
 }
 

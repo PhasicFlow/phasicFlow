@@ -17,88 +17,52 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __pointSorting_hpp__
+#define __pointSorting_hpp__
 
-#ifndef __stationary_hpp__
-#define __stationary_hpp__
+#include "baseTimeControl.hpp"
+#include "indexContainer.hpp"
+#include "pointFlag.hpp"
 
-
-#include "types.hpp"
-#include "typeInfo.hpp"
-#include "streams.hpp"
 
 namespace pFlow
 {
 
-// forward
-class dictionary;
+class box;
 
 
-/**
- * stationary model for a wall
- * 
- */
-class stationary
+class pointSorting
 {
+private:
+
+	Logical                 performSorting_;
+
+	baseTimeControl         timeControl_;
+
+	real 					dx_;
+
 public:
 
-	TypeInfoNV("stationary");
+	explicit pointSorting(const dictionary& dict);
 
-	FUNCTION_HD
-	stationary()=default;
+	bool performSorting()const
+	{
+		return performSorting_();
+	}
 
-	FUNCTION_H
-	explicit stationary(const dictionary& dict);
+	bool sortTime(uint32 iter, real t, real dt)const
+	{
+		return performSorting_() && timeControl_.timeEvent(iter, t, dt);
+	}
+
+	uint32IndexContainer getSortedIndices(
+		const box& boundingBox, 
+		const ViewType1D<realx3>& pos,
+		const pFlagTypeDevice& flag
+	)const;
 	
-
-	FUNCTION_HD
-	stationary(const stationary&) = default;
-
-	stationary& operator=(const stationary&) = default;
-
-	INLINE_FUNCTION_HD
-	void setTime(real t)
-	{}
-
-	INLINE_FUNCTION_HD
-	realx3 linVelocityPoint(const realx3 &)const
-	{
-		return realx3(0);
-	}
-
-	INLINE_FUNCTION_HD
-	realx3 transferPoint(const realx3& p, real)const
-	{
-		return p;
-	}
-
-	// - IO operation
-	FUNCTION_H 
-	bool read(const dictionary& dict);
-
-	FUNCTION_H
-	bool write(dictionary& dict) const;
-
-	FUNCTION_H
-	bool read(iIstream& is);
-
-	FUNCTION_H
-	bool write(iOstream& os)const;
-
 };
 
-inline iOstream& operator <<(iOstream& os, const stationary& obj)
-{
-	
-	return os;
 }
-
-inline iIstream& operator >>(iIstream& is, stationary& obj)
-{
-	
-	return is;
-}
-
-}
-
 
 #endif

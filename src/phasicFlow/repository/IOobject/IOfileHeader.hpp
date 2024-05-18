@@ -58,6 +58,8 @@ protected:
 		// - ouput file stream
 		uniquePtr<oFstream> outStream()const;
 
+        uniquePtr<oFstream> dummyOutStream()const;
+
 public:
 
 	// with owner 

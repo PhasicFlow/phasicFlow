@@ -83,7 +83,8 @@ public:
 
     bool sphereSphereInteraction(
         real dt,
-		const ContactForceModel& cfModel)override;
+		const ContactForceModel& cfModel,
+        uint32 step)override;
 	
 };
 

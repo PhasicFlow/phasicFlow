@@ -25,6 +25,7 @@ Licence:
 
 #include "types.hpp"
 #include "VectorSingle.hpp"
+#include "wordVectorHost.hpp"
 
 namespace pFlow
 {
@@ -76,6 +77,8 @@ typedef VectorSingle<uint32x3, HostSpace> 	uint32x3Vector_H;
 typedef VectorSingle<realx3x3> 				realx3x3Vector_D;
 
 typedef VectorSingle<realx3x3, HostSpace> 	realx3x3Vector_H;
+
+typedef VectorSingle<word, HostSpace>        wordVector_H;
 
 }
 

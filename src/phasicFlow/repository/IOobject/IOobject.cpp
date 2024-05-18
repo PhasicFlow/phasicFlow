@@ -122,17 +122,34 @@ bool pFlow::IOobject::writeObject() const
 
 	if(ioPattern().thisCallWrite())
 	{
-		
-        if(auto ptrOS = outStream(); ptrOS )
+		if( ioPattern().thisProcWriteData())
         {
-            return writeObject(ptrOS());
+            if(auto ptrOS = outStream(); ptrOS )
+            {
+                return writeObject(ptrOS());
+            }
+            else
+            {
+                warningInFunction<< 
+                "error in opening file "<< path() <<endl;
+                return false;
+            }
         }
         else
         {
-            warningInFunction<< 
-            "error in opening file "<< path() <<endl;
-            return false;
+            
+            if(auto ptrOS = dummyOutStream(); ptrOS )
+            {
+                return writeObject(ptrOS());
+            }
+            else
+            {
+                warningInFunction<< 
+                "error in opening file "<< path() <<endl;
+                return false;
+            }
         }
+        
         
 	}
 

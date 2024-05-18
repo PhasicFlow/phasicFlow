@@ -95,7 +95,8 @@ public:
 		// swap conainer and values 
 		swapViews(values0_, values_);
 		swapViews(container0_, this->container_);
-		return UnsortedPairs::beforeBroadSearch();
+		UnsortedPairs::beforeBroadSearch();
+		return true;
 	}
 
 	bool afterBroadSearch()
@@ -110,7 +111,7 @@ public:
 			rpFillPairs(0,this->capacity()),
 			*this);
 		Kokkos::fence();
-
+		
 		return true; 
 	}
 
@@ -123,7 +124,7 @@ public:
 	INLINE_FUNCTION_HD
 	bool getValue(const PairType& p, ValueType& val)const
 	{
-		if(auto idx = this->find(p); idx!=-1)
+		if(auto idx = this->find(p); idx!=static_cast<uint32>(-1))
 		{
 			val = getValue(idx); 
 			return true;
@@ -140,7 +141,7 @@ public:
 	INLINE_FUNCTION_HD
 	bool setValue(const PairType& p, const ValueType& val)const
 	{
-		if(uint32 idx = this->find(p); idx!=-1)
+		if(uint32 idx = this->find(p); idx!=static_cast<uint32>(-1))
 		{
 			setValue(idx, val);
 			return true;;
@@ -155,7 +156,7 @@ public:
 		{
 			if( uint32 idx0 = 
 					container0_.find(this->getPair(idx));
-					idx0!=-1 )
+					idx0!= static_cast<uint32>(-1) )
 			{
 				values_[idx] = values0_[idx0];
 			}

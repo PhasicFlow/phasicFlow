@@ -145,6 +145,15 @@ public:
         }
     #endif
 
+    static
+    bool builtForMPI()
+    {
+        #ifdef pFlow_Build_MPI
+            return true;
+        #else
+            return false;
+        #endif
+    }
 };
 
 }

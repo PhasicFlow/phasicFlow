@@ -32,7 +32,9 @@ class pointStructure;
 /**
  * Base class for particle insertion
  */
-class insertion : public fileDictionary
+class insertion 
+: 
+    public fileDictionary
 {
 private:
 
@@ -117,6 +119,8 @@ public:
 
 	/*/// read from iIstream
 	virtual bool read(iIstream& is) = 0;*/
+
+    using fileDictionary::write;
 
 	/// write to iOstream
 	bool write(iOstream& os, const IOPattern& iop)const override ;

@@ -43,7 +43,7 @@ public:
 		boundaryList	&bndrs,
 		uint32 			thisIndex);
 
-	~boundaryNone() override= default;
+	~boundaryNone() final= default;
 	
 	add_vCtor
 	(
@@ -52,11 +52,11 @@ public:
 		dictionary
 	);
 
-	bool beforeIteration(uint32 iterNum, real t, real dt) override;
+	bool beforeIteration(uint32 iterNum, real t, real dt) final;
 
-	bool iterate(uint32 iterNum, real t, real dt) override;
+	bool iterate(uint32 iterNum, real t, real dt) final;
 
-	bool afterIteration(uint32 iterNum, real t, real dt) override;
+	bool afterIteration(uint32 iterNum, real t, real dt) final;
 
 
 };

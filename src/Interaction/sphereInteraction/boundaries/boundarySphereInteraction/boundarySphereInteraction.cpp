@@ -1,3 +1,4 @@
+#include "boundarySphereInteraction.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -18,6 +19,20 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+template <typename cFM, typename gMM>
+void pFlow::boundarySphereInteraction<cFM, gMM>::allocatePPPairs()
+{
+	ppPairs_.reset(nullptr);
+	ppPairs_ = makeUnique<ContactListType>(1);
+}
+
+template <typename cFM, typename gMM>
+void pFlow::boundarySphereInteraction<cFM, gMM>::allocatePWPairs()
+{
+	pwPairs_.reset(nullptr);
+	pwPairs_ = makeUnique<ContactListType>(1);
+}
+
 
 template <typename cFM, typename gMM>
 pFlow::boundarySphereInteraction<cFM, gMM>::boundarySphereInteraction(
@@ -28,8 +43,6 @@ pFlow::boundarySphereInteraction<cFM, gMM>::boundarySphereInteraction(
 	  geometryMotion_(geomMotion),
 	  sphParticles_(sphPrtcls)
 {
-	ppPairs_ = makeUnique<ContactListType>(1);
-	pwPairs_ = makeUnique<ContactListType>(1);
 }
 
 template <typename cFM, typename gMM>

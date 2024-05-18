@@ -302,10 +302,10 @@ public:
 	//// - IO operations 
 
 		/// read from stream
-		virtual bool read(iIstream& is);
+		bool read(iIstream& is) override;
 
 		/// write to stream
-		virtual bool write(iOstream& os) const;
+		bool write(iOstream& os) const override;
 
 };
 

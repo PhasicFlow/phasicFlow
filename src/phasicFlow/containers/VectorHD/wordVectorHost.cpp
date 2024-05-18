@@ -17,48 +17,7 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-#ifndef __regularParticleIdHandler_hpp__
-#define __regularParticleIdHandler_hpp__
-
-#include "particleIdHandler.hpp"
-
-namespace pFlow
-{
-
-class regularParticleIdHandler
-:
-    public particleIdHandler
-{
-private:
-    
-    uint32 maxId_ = static_cast<uint32>(-1);
-
-  bool initialIdCheck()override; 
-public:
-
-    ClassInfo("particleIdHandler<regular>");
-    
-    explicit regularParticleIdHandler(pointStructure& pStruct);
-
-    ~regularParticleIdHandler()override = default;
-
-	add_vCtor
-	(
-		particleIdHandler,
-		regularParticleIdHandler,
-		pointStructure
-	);
-
-    Pair<uint32, uint32> getIdRange(uint32 nNewParticles)override;
-
-	uint32 maxId()const override
-	{
-		return maxId_;
-	}
-
-};
-
-}
 
 
-#endif //__regularParticleIdHandler_hpp__
+#include "wordVectorHost.hpp"
+

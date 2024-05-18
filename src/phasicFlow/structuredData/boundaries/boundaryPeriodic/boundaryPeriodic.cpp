@@ -33,17 +33,20 @@ pFlow::boundaryPeriodic::boundaryPeriodic
 )
 :
 	boundaryBase(dict, bplane, internal, bndrs, thisIndex),
-	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
-{}
+	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex")),
+	extensionLength_(dict.getVal<real>("boundaryExtntionLengthRatio"))
+{
+	extensionLength_ = max(extensionLength_, static_cast<real>(0.1));
+}
 
 pFlow::real pFlow::boundaryPeriodic::neighborLength() const
 {
-    return (1+extensionLength_)*boundaryBase::neighborLength();
+    return (1+extensionLength_)*neighborLengthIntoInternal();
 }
 
 pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
 {
-    return -extensionLength_*neighborLength()*boundaryBase::boundaryPlane().normal();
+    return -extensionLength_*neighborLengthIntoInternal()*boundaryBase::boundaryPlane().normal();
 }
 
 
@@ -57,6 +60,8 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	{
 		return true;
 	}
+
+	if( !boundaryListUpdate(iterNum))return true;
 	
 	uint32 s = size();
 	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
@@ -92,7 +97,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 	// to obtain the transfer vector 
 	realx3 transferVec = displacementVectroToMirror();
 	
-	return transferPoints
+	return transferPointsToMirror
 	(
 		numTransfered,
 		transferFlags, 

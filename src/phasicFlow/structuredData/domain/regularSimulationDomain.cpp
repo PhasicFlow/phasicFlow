@@ -31,7 +31,10 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
     this->addDict("regularBoundaries", boundaries);
     auto& rbBoundaries = this->subDict("regularBoundaries");
     
-	real neighborLength = boundaries.getVal<real>("neighborLength");
+	auto neighborLength = boundaries.getVal<real>("neighborLength");
+	auto boundaryExtntionLengthRatio = 
+		boundaries.getValOrSet<real>("boundaryExtntionLengthRatio", 0.1);
+	auto updateIntercal = boundaries.getValOrSet<uint32>("updateInterval", 1u); 
 
 	for(uint32 i=0; i<sizeOfBoundaries(); i++)
 	{
@@ -50,6 +53,14 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
 			"in dictionary "<< boundaries.globalName()<<endl;
 			return false;
 		}
+
+		if(!bDict.addOrReplace("updateInterval", updateIntercal))
+		{
+			fatalErrorInFunction<<"error in adding updateIntercal to "<< bName <<
+			"in dictionary "<< boundaries.globalName()<<endl;
+		}
+
+		bDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
 
 		if(!bDict.add("neighborProcessorNo",(uint32) processors::globalRank()))
 		{

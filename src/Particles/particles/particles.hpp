@@ -54,6 +54,8 @@ private:
 	/// handling new ids for new particles 
 	uniquePtr<particleIdHandler> idHandler_ = nullptr;
 
+	Timer 						 baseFieldBoundaryUpdateTimer_;
+
 	/// messages for this objects
 	static inline const message  defaultMessage_{ message::DEFAULT };
 

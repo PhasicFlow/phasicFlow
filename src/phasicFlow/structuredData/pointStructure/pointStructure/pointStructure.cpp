@@ -22,6 +22,7 @@ Licence:
 #include "pointStructure.hpp"
 #include "systemControl.hpp"
 #include "vocabs.hpp"
+#include "anyList.hpp"
 
 bool pFlow::pointStructure::setupPointStructure(const realx3Vector& points)
 {
@@ -73,6 +74,7 @@ bool pFlow::pointStructure::setupPointStructure(const PointsTypeHost &points)
     }
 
     boundaries_.createBoundaries();
+    boundaries_.updateNeighborLists(0u, true);
 
     return true;
 }
@@ -111,10 +113,13 @@ pFlow::pointStructure::pointStructure
 	(
 		simulationDomain::create(control)
 	),
+    pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
 	(
         *this
-	)
+	),
+    boundaryUpdateTimer_("boundaryUpdate", &timers()),
+    boundaryDataTransferTimer_("boundaryDataTransferTimer", &timers())
 {
     REPORT(1)<< "Reading "<< Green_Text("pointStructure")<<
     " from "<<IOobject::path()<<END_REPORT;
@@ -150,6 +155,7 @@ pFlow::pointStructure::pointStructure(
 	(
 		simulationDomain::create(control)
 	),
+    pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
 	(
 		*this
@@ -165,12 +171,58 @@ pFlow::pointStructure::pointStructure(
 
 bool pFlow::pointStructure::beforeIteration()
 {
-    if( !boundaries_.beforeIteration(currentIter(), currentTime(), dt()) )
+    uint32 iter = currentIter();
+    real t = currentTime();
+    real deltat = dt();
+
+    if(pointSorting_.sortTime(iter, t, deltat))
     {
-        fatalErrorInFunction<<
-        "Unable to perform beforeIteration for boundaries"<<endl;
-        return false;
+        auto sortedIndices = pointSorting_.getSortedIndices(
+            simulationDomain_().globalBox(),
+            pointPositionDevice(),
+            activePointsMaskDevice()
+        );
+        
+        if( !sortPoints(sortedIndices) )
+        {
+            fatalErrorInFunction;
+            return false;
+        }
+        
+        boundaryUpdateTimer_.start();
+        boundaries_.beforeIteration(iter, t, deltat, true); 
+        boundaryUpdateTimer_.end();
+
+        INFORMATION<<"Reordering of particles has been done. New active range for particles is "<<
+        activeRange()<<END_INFO; 
+        message msg;
+        anyList varList;
+
+        varList.emplaceBack(
+            msg.addAndName(message::ITEM_REARRANGE),
+            sortedIndices);
+
+        if(!notify(iter, t, deltat, msg, varList))
+        {
+            fatalErrorInFunction<<
+            "cannot notify for reordering items."<<endl;
+            return false;
+        }
+        return true;
+        // notify others about this change 
     }
+    else
+    {
+        boundaryUpdateTimer_.start();
+        if( !boundaries_.beforeIteration(iter, t, deltat) )
+        {
+            fatalErrorInFunction<<
+            "Unable to perform beforeIteration for boundaries"<<endl;
+            return false;
+        }
+        boundaryUpdateTimer_.end();
+    }
+    
     return true;
 }
 
@@ -188,12 +240,14 @@ bool pFlow::pointStructure::iterate()
 
 bool pFlow::pointStructure::afterIteration()
 {
+    boundaryDataTransferTimer_.start();
     if( !boundaries_.afterIteration(currentIter(), currentTime(), dt()) )
     {
         fatalErrorInFunction<<
         "Unable to perform afterIteration for boundaries"<<endl;
         return false;
     }
+    boundaryDataTransferTimer_.end();
     return true;
 }
 

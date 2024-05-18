@@ -1,4 +1,3 @@
-#include "geometryMotion.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -70,6 +69,28 @@ bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 	return true;
 }
 
+namespace pFlow::GMotion
+{
+    template<typename ModelInterface>
+    void moveGeometry(
+        real dt,
+        uint32 nPoints,
+        const ModelInterface& mModel,
+        const deviceViewType1D<uint32>& pointMIndexD,
+        const deviceViewType1D<realx3>& pointsD
+    )
+    {
+        Kokkos::parallel_for(
+         "geometryMotion<MotionModel>::movePoints",
+         deviceRPolicyStatic(0, nPoints),
+         LAMBDA_HD(uint32 i){
+             auto newPos = mModel.transferPoint(pointMIndexD[i], pointsD[i], dt);
+             pointsD[i] = newPos;
+         });
+
+        Kokkos::fence();
+    }
+}
 
 template<typename MotionModel>
  bool pFlow::geometryMotion<MotionModel>::moveGeometry()
@@ -84,8 +105,15 @@ template<typename MotionModel>
     auto& pointMIndexD= pointMotionIndex_.deviceViewAll();
     auto& pointsD = points().deviceViewAll();
     
+    pFlow::GMotion::moveGeometry(
+        dt, 
+        numPoints(), 
+        motionModel_.getModelInterface(iter, t, dt),
+        pointMotionIndex_.deviceViewAll(),
+        points().deviceViewAll()
+    );
 
-    Kokkos::parallel_for(
+    /*Kokkos::parallel_for(
          "geometryMotion<MotionModel>::movePoints",
          deviceRPolicyStatic(0, numPoints()),
          LAMBDA_HD(uint32 i){
@@ -93,7 +121,7 @@ template<typename MotionModel>
              pointsD[i] = newPos;
          });
 
-    Kokkos::fence();
+    Kokkos::fence();*/
 
     // move the motion components
     motionModel_.move(iter, t,dt);
