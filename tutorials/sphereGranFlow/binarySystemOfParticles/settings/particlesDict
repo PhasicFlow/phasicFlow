@@ -6,63 +6,72 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-
-// positions particles 
-positionParticles
-{
-	method positionOrdered;     // ordered positioning
-
-	maxNumberOfParticles 30001; // maximum number of particles in the simulation
-	mortonSorting Yes;          // perform initial sorting based on morton code?   
-
-	cylinder  // cylinder region for positioning particles 
-	{
-		p1 (0.0 0.0 0.003); 	// begin point of cylinder axis
-		p2 (0.0 0.0 0.097);		// end point of cylinder axis
-		radius 		0.117;		// radius of cylinder 
-	}
-		
-	positionOrderedInfo
-	{		
-		diameter 0.005; 	// minimum space between centers of particles
-		numPoints 30000; 	// number of particles in the simulation 
-		axisOrder (z x y);  // axis order for filling the space with particles
-	}
-}
-
 setFields
 {
 	/*
-	    Default value for fields defined for particles
-	These fields should always be defined for simulations with 
-	spherical particles.*/
+	    	Default value for fields defined for particles
+		These fields should always be defined for simulations with 
+		spherical particles.
+	*/
 
 	defaultValue 
 	{
-		velocity 		realx3 	(0 0 0); // linear velocity (m/s)
-		acceleration 	realx3 	(0 0 0); // linear acceleration (m/s2)
-		rVelocity 		realx3 	(0 0 0); // rotational velocity (rad/s)
-		shapeName 		word	smallSphere; // name of the particle shape 
+		velocity 		realx3 	(0 0 0); 			       // linear velocity (m/s)
+
+		acceleration 	realx3 	(0 0 0); 			       // linear acceleration (m/s2)
+
+		rVelocity 		realx3 	(0 0 0); 			       // rotational velocity (rad/s)
+
+		shapeName 		word	smallSphere; 		       // name of the particle shape 
 	}
 
 	selectors
 	{
 		shapeAssigne
 		{
-			selector 	selectRange; // type of point selector
-			selectRangeInfo
+			selector 	stridedRange; 				       // type of point selector
+ 
+			stridedRangeInfo
 			{
-				begin 	0;			// begin index of points
-				end 	30000;		// end index of points 
-				stride  3;			// stride for selector 
+				begin 	0;			 				       // begin index of points
+
+				end 	30000;		 				       // end index of points 
+
+				stride  3;			 				       // stride for selector 
 			}
-			fieldValue  // fields that the selector is applied to 
+
+			fieldValue  							       // fields that the selector is applied to 
 			{
-				/*
-				sets shapeName of the selected points to largeSphere*/
-				shapeName 	word 	largeSphere;
+				shapeName 	word 	largeSphere;           // sets shapeName of the selected points to largeSphere
 			}
 		}
+	}
+}
+
+positionParticles 				                           // positions particles 
+{
+	method ordered;                                        // can be ordered or random or empty
+
+	orderedInfo
+	{		
+		diameter  0.005; 	                               // diameter of particles
+
+		numPoints 30000; 	                               // number of particles in the simulation
+
+		axisOrder (z x y);                                 // axis order for filling the space with particles
+	}
+
+	maxNumberOfParticles 30001;                            // maximum number of particles in the simulation
+	
+	regionType cylinder;                                   // can be box or cylinder or sphere  
+
+	cylinderInfo  				                           // cylinder region for positioning particles 
+	{
+		p1 (0.0 0.0 0.003); 	                           // begin point of cylinder axis
+
+		p2 (0.0 0.0 0.097);		                           // end point of cylinder axis
+
+		radius 		0.117;		                           // radius of cylinder 
 	}
 }
 
