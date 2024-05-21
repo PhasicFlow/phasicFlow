@@ -6,7 +6,7 @@ objectName  interaction;
 objectType  dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials      (prop1);                          // a list of materials names
+materials      (prop1);                          // properties of material
 
 densities      (1000.0);                         // density of materials [kg/m3]
 
@@ -15,7 +15,7 @@ contactListType   sortedContactList;
 contactSearch
 {
   
-   method         NBS;                           // method for broad search particle-particle
+   method         NBS;                           // method for broad search 
     
    updateInterval 10;
 

@@ -22,10 +22,6 @@ rotatingAxisInfo                       // information for rotatingAxis motion mo
 
 surfaces
 {
-	/*
-	    A cylinder with begin and end radii 0.12 m and axis points at (0 0 0) and (0 0 0.1)
-	*/
-
 	cylinder
 	{
 		type cylinderWall;             // type of the wall

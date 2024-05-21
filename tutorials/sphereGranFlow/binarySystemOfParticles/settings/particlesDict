@@ -29,7 +29,7 @@ setFields
 	{
 		shapeAssigne
 		{
-			selector 	stridedRange; 				       // type of point selector
+			selector 	stridedRange; 				       // other options: box, cylinder, sphere, randomPoints 
  
 			stridedRangeInfo
 			{
@@ -50,7 +50,7 @@ setFields
 
 positionParticles 				                           // positions particles 
 {
-	method ordered;                                        // can be ordered or random or empty
+	method ordered;                                        // other options: random and empty
 
 	orderedInfo
 	{		
@@ -60,12 +60,10 @@ positionParticles 				                           // positions particles
 
 		axisOrder (z x y);                                 // axis order for filling the space with particles
 	}
-
-	maxNumberOfParticles 30001;                            // maximum number of particles in the simulation
 	
-	regionType cylinder;                                   // can be box or cylinder or sphere  
+	regionType cylinder;                                   // other options: box and sphere  
 
-	cylinderInfo  				                           // cylinder region for positioning particles 
+	cylinderInfo  				                           // cylinder information for positioning particles 
 	{
 		p1 (0.0 0.0 0.003); 	                           // begin point of cylinder axis
 
