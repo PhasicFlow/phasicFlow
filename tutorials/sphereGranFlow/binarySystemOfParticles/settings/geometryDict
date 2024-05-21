@@ -8,7 +8,7 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 motionModel rotatingAxis;              // motion model can be rotatingAxis or stationary or vibrating
 
-rotatingAxisInfo                       // information for rotatingAxisMotion motion model 
+rotatingAxisInfo                       // information for rotatingAxis motion model 
 {
 	rotAxis 
 	{
