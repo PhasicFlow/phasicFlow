@@ -113,6 +113,21 @@ public:
 		return false;		
 	}
 
+	uint32 updateInterval()const
+	{
+		return updateInterval_;
+	}
+
+	real sizeRatio()const
+	{
+		return getMethod().sizeRatio();
+	}
+
+	real cellExtent()const
+	{
+		return getMethod().cellExtent();
+	}
+
 };
 
 

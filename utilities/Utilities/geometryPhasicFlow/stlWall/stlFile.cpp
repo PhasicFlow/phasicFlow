@@ -272,7 +272,7 @@ void pFlow::stlFile::addSolid
 	const realx3x3Vector& vertecies
 )
 {
-	solids_.push_backSafe(vertecies);
+	solids_.push_back(makeUnique<realx3x3Vector>(vertecies));
 	solidNames_.push_back(name);
 }
 
@@ -283,7 +283,7 @@ void pFlow::stlFile::addSolid
 	realx3x3Vector&& vertecies
 )
 {
-	solids_.push_backSafe(std::move(vertecies));
+	solids_.push_back(makeUnique<realx3x3Vector>(vertecies));
 	solidNames_.push_back(name);
 }
 
@@ -325,7 +325,7 @@ bool pFlow::stlFile::write()const
 {
 	oFstream os(file_);
 	os.precision(8);
-	for(label i=0; i<size(); i++)
+	for(size_t i=0; i<size(); i++)
 	{
 		writeSolid(os, solids_[i], solidNames_[i]);
 	}
@@ -353,7 +353,7 @@ size_t pFlow::stlFile::size()const
 
 const pFlow::realx3x3Vector& pFlow::stlFile::solid
 (
-	label i
+	size_t i
 )const
 {
 	if(i >= size() )
@@ -369,7 +369,7 @@ const pFlow::realx3x3Vector& pFlow::stlFile::solid
 
 const pFlow::word& pFlow::stlFile::name
 (
-	label i
+	size_t i
 )const
 {
 	if(i >= size() )

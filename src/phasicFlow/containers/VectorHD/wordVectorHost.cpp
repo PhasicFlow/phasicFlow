@@ -18,19 +18,6 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __globalSettings_hpp__
-#define __globalSettings_hpp__
 
+#include "wordVectorHost.hpp"
 
-
-namespace pFlow::gSettings
-{
-
-extern const double vectorGrowthFactor__;
-
-void sleepMiliSeconds(int miliSeconds);
-
-}
-
-
-#endif // __globalSettings_hpp__

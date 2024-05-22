@@ -113,7 +113,10 @@ pFlow::uint32 pFlow::wallBoundaryContactSearch::findPairsElementRangeCount
 
     uint32 nNotInserted = 0;
     uint32 nThis = pPoints.size();
-    
+    const auto& numElements = numElements_;
+    const auto& elementBox = elementBox_;
+    const auto& validBox = validBox_;
+
     Kokkos::parallel_reduce(
         "pFlow::wallBoundaryContactSearch::findPairsElementRangeCount",
         deviceRPolicyDynamic(0,nThis),
@@ -123,11 +126,11 @@ pFlow::uint32 pFlow::wallBoundaryContactSearch::findPairsElementRangeCount
             int32x3 ind;
             if( searchCells.pointIndexInDomain(p, ind) )
             {
-                for(uint32 nTri=0; nTri<numElements_; nTri++)
+                for(uint32 nTri=0; nTri<numElements; nTri++)
                 {
-                    if( validBox_[nTri]== 0)continue;
-                    if( elementBox_[nTri].isInside(ind)&& 
-                        pairs.insert(i,nTri+baseTriIndex) == -1)
+                    if( validBox[nTri]== 0)continue;
+                    if( elementBox[nTri].isInside(ind)&& 
+                        pairs.insert(i,nTri+baseTriIndex) == static_cast<uint32>(-1))
                     {
                         notInsertedUpdate++;    
                     }

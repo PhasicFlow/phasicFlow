@@ -72,11 +72,6 @@ public:
         return contactSearch_;
     }
 
-    void fill(const std::any &val) override
-    {
-        return;
-    }
-
     bool hearChanges(
         real t,
         real dt,

@@ -39,9 +39,6 @@ Licence:
 namespace pFlow
 {
 
-//- Forward 
-template<typename T, typename MemorySpace>
-class VectorSingle;
 
 template<typename T, typename MemorySpace=void>
 class VectorSingle
@@ -101,6 +98,8 @@ private:
 		static constexpr
 		bool isTriviallyCopyable_ = std::is_trivially_copyable_v<T>;
 
+        static_assert(isTriviallyCopyable_, "This type is not trivially copyable");
+
 	  	/// Evaluate capacity based on the input size 
 		static INLINE_FUNCTION_H uint32 evalCapacity(uint32 n)
 		{
@@ -158,6 +157,9 @@ public:
 		
     	/// Copy construct with a new name (perform deep copy)
 		VectorSingle(const word& name, const VectorSingle& src);
+
+		/// Copy construct with a new name (perform deep copy)
+		VectorSingle(const word& name, const ViewType1D<T, MemorySpace>& src);
 		
 		/// Copy assignment (perform deep copy from rhs to *this)
 		VectorSingle& operator = (const VectorSingle& rhs) ;
@@ -287,25 +289,10 @@ public:
 
 		template<typename MSpace>
 		INLINE_FUNCTION_H
-		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true)
-		{
-			uint32 srcSize = src.size();
-			uint32 srcCap = src.capacity();
+		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true);
 
-			if(srcCapacity && srcCap != capacity()){
-				reallocateCapacitySize(srcCap, srcSize);
-			}
-			else {
-				changeSize(srcSize);
-			}
-
-			if constexpr(isTriviallyCopyable_){
-				copy(deviceView(), src.deviceView());
-			}
-			else{
-				static_assert("Not a valid operation for this data type ");
-			}
-		}
+		INLINE_FUNCTION_H
+		void append(const ViewType1D<T,MemorySpace>& appVec);
 
 		INLINE_FUNCTION_H
 		void append(const std::vector<T>& appVec);
@@ -331,7 +318,7 @@ public:
 			const ViewType1D<T, memory_space> vals);
 
 		INLINE_FUNCTION_H
-		bool reorderItems(uint32IndexContainer indices);
+		bool reorderItems(const uint32IndexContainer& indices);
 
 		/// @brief push a new element at the end (host call only)
 		///  resize if necessary and works on host accessible vector.

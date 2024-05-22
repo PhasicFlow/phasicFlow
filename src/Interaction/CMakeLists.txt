@@ -7,8 +7,8 @@ contactSearch/methods/cellBased/NBS/NBS.cpp
 contactSearch/methods/cellBased/NBS/cellsWallLevel0.cpp
 
 contactSearch/boundaries/boundaryContactSearch/boundaryContactSearch.cpp
-contactSearch/boundaries/twoPartContactSearch/twoPartContactSearchKernels.cpp
-contactSearch/boundaries/twoPartContactSearch/twoPartContactSearch.cpp
+#contactSearch/boundaries/twoPartContactSearch/twoPartContactSearchKernels.cpp
+#contactSearch/boundaries/twoPartContactSearch/twoPartContactSearch.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/ppwBndryContactSearchKernels.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/ppwBndryContactSearch.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/wallBoundaryContactSearch.cpp

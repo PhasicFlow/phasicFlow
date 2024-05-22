@@ -29,7 +29,6 @@ Licence:
 #include "processors.hpp"
 #include "streams.hpp"
 
-static int numVarsInitialized__ = 0;
 
 #ifdef pFlow_Build_MPI
 

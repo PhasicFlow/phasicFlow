@@ -38,7 +38,8 @@ void createRemoveKeepIndices(
     uint32 numRemove,
     const uint32Vector_D& removeMask, 
     uint32Vector_D& removeIndices, 
-    uint32Vector_D& keepIndices);
+    uint32Vector_D& keepIndices,
+    bool exactCap = true);
 
 
 }

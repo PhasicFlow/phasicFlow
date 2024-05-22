@@ -44,6 +44,8 @@ private:
 
 	uniquePtr<integration>  integrationVel_ = nullptr;
 
+	Timer 					velocityUpdateTimer_;
+
 	/// @brief integration method for velocity and position
 	word 					integrationMethod_;
 

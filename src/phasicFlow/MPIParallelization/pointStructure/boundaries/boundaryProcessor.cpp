@@ -19,16 +19,14 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "boundaryProcessor.hpp"
+#include "boundaryProcessorKernels.hpp"
 #include "dictionary.hpp"
 #include "mpiCommunication.hpp"
 #include "boundaryBaseKernels.hpp"
 #include "internalPoints.hpp"
+#include "Time.hpp"
+#include "anyList.hpp"
 
-void
-pFlow::MPI::boundaryProcessor::checkSize() const
-{
-	
-}
 
 void
 pFlow::MPI::boundaryProcessor::checkDataRecieved() const
@@ -69,6 +67,7 @@ pFlow::MPI::boundaryProcessor::boundaryProcessor(
 bool
 pFlow::MPI::boundaryProcessor::beforeIteration(uint32 iterNum, real t, real dt)
 {
+
 	thisNumPoints_ = size();
 
 	auto req = MPI_REQUEST_NULL;
@@ -92,13 +91,23 @@ pFlow::MPI::boundaryProcessor::beforeIteration(uint32 iterNum, real t, real dt)
 	);
 	MPI_Request_free(&req);
 
+	anyList varList;
+	message msg;
+
+	varList.emplaceBack(msg.addAndName(message::BNDR_PROC_SIZE_CHANGED), neighborProcNumPoints_);
+
+	if( !notify(iterNum, t, dt, msg, varList) )
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+	
 	return true;
 }
 
 pFlow::uint32
 pFlow::MPI::boundaryProcessor::neighborProcSize() const
 {
-	checkSize();
 	return neighborProcNumPoints_;
 }
 
@@ -117,7 +126,7 @@ pFlow::MPI::boundaryProcessor::neighborProcPoints() const
 }
 
 bool
-pFlow::MPI::boundaryProcessor::updataBoundary(int step)
+pFlow::MPI::boundaryProcessor::updataBoundaryData(int step)
 {
 	if (step == 1)
 	{
@@ -132,8 +141,10 @@ pFlow::MPI::boundaryProcessor::updataBoundary(int step)
 	return true;
 }
 
-bool pFlow::MPI::boundaryProcessor::transferData(int step)
+bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
 {
+	if(!boundaryListUpdate(iter))return false;
+	
     if(step==1)
 	{
 		uint32 s = size();
@@ -141,23 +152,21 @@ bool pFlow::MPI::boundaryProcessor::transferData(int step)
 		transferFlags.fill(0u);
 
 		const auto& transferD = transferFlags.deviceViewAll();
-		auto points = thisPoints();
+		deviceScatteredFieldAccess<realx3> points = thisPoints();
 		auto p = boundaryPlane().infPlane();
 
 		numToTransfer_ = 0;	
 
-		Kokkos::parallel_reduce
+		
+        Kokkos::parallel_reduce
 		(
 			"boundaryProcessor::afterIteration",
 			deviceRPolicyStatic(0,s),
-			LAMBDA_HD(uint32 i, uint32& transferToUpdate)
-			{
-				if(p.pointInNegativeSide(points(i)))
-				{
-					transferD(i)=1;
-					transferToUpdate++;
-				}
-			}, 
+			boundaryProcessorKernels::markNegative(
+                boundaryPlane().infPlane(),
+                transferFlags.deviceViewAll(),
+                thisPoints()
+            ),
 			numToTransfer_
 		);
 			
@@ -193,37 +202,103 @@ bool pFlow::MPI::boundaryProcessor::transferData(int step)
 			thisBoundaryIndex(),
 			pFlowProcessors().localCommunicator(),
 			&req), true );
-
+        //pOutput<<"sent "<< numToTransfer_<<endl;
 		CheckMPI(recv(
 			numToRecieve_,
 			neighborProcessorNo(),
 			mirrorBoundaryIndex(),
 			pFlowProcessors().localCommunicator(),
 			StatusesIgnore), true);
+        
+        //pOutput<<"recieved "<<numToRecieve_<<endl;
 
 		MPI_Request_free(&req);
 		return true;
 	}
 	else if(step ==2 )
 	{
+		if( transferIndices_.empty() )return true; 
+
 		pointFieldAccessType transferPoints(
-			transferIndices_.size(), 
-			transferIndices_.deviceViewAll(),
-			internal().pointPositionDevice());
+		transferIndices_.size(), 
+		transferIndices_.deviceViewAll(),
+		internal().pointPositionDevice());
 
 		sender_.sendData(pFlowProcessors(), transferPoints);
+		message msg;
+		anyList varList;
+		varList.emplaceBack( 
+		msg.addAndName(message::BNDR_PROCTRANSFER_SEND),
+		transferIndices_);
+
+		if(!notify(
+		internal().time().currentIter(),
+		internal().time().currentTime(),
+		internal().time().dt(),
+		msg,
+		varList))
+		{
+			fatalErrorInFunction;
+			return false;
+		} 
+
 		return true;
 	}
 	else if(step == 3)
 	{
-		
+		if(numToRecieve_ == 0u) return false;
 		reciever_.recieveData(pFlowProcessors(), numToRecieve_);
+		
+		message msg;
+		anyList varList;
+		varList.emplaceBack( 
+		msg.addAndName(message::BNDR_PROCTRANSFER_RECIEVE),
+		numToRecieve_);
+
+		if(!notify(
+		internal().time().currentIter(),
+		internal().time().currentTime(),
+		internal().time().dt(),
+		msg,
+		varList))
+		{
+			fatalErrorInFunction;
+			return false;
+		}
+
 		return true;
 	}
 	else if(step == 4)
 	{
+		if(numToRecieve_ == 0u) return false;
 		reciever_.waitBufferForUse();
-		// 		
+		
+		// points should be inserted first 
+		message msg(message::BNDR_PROCTRANSFER_WAITFILL);
+		anyList varList;
+
+		internal().insertPointsOnly(reciever_.buffer(), msg, varList);
+		const auto& indices = varList.getObject<uint32IndexContainer>(message::eventName(message::ITEM_INSERT));
+		auto indView = deviceViewType1D<uint32>(indices.deviceView().data(), indices.deviceView().size());
+		uint32Vector_D newIndices("newIndices", indView);
+
+		if(! appendNewIndices(newIndices))
+		{
+			fatalErrorInFunction;
+			return false;
+		}
+
+		if(!notify(
+			internal().time().currentIter(),
+			internal().time().currentTime(),
+			internal().time().dt(),
+			msg,
+			varList))
+		{
+			fatalErrorInFunction;
+			return false;
+		}
+
 		return false;
 	}
 

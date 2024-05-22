@@ -105,7 +105,7 @@ public:
 	uint32 insert(idType i, idType j)const
 	{
 		if(auto insertResult = container_.insert(PairType(i,j)); insertResult.failed())
-			return -1;
+			return static_cast<uint32>(-1);
 		else
 			return insertResult.index();
 			
@@ -115,7 +115,7 @@ public:
 	uint32 insert(const PairType& p)const
 	{
 		if(auto insertResult = container_.insert(p); insertResult.failed())
-			return -1;
+			return static_cast<uint32>(-1);
 		else
 			return insertResult.index();
 
@@ -154,7 +154,7 @@ public:
 			idx != Kokkos::UnorderedMapInvalidIndex )
 			return idx;
 		else
-			return -1;
+			return static_cast<uint32>(-1);
 	}
 
 	INLINE_FUNCTION_HD

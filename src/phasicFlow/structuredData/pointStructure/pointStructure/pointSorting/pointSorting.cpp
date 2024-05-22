@@ -18,19 +18,35 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __globalSettings_hpp__
-#define __globalSettings_hpp__
+#include "pointSorting.hpp"
+#include "mortonIndexing.hpp"
 
-
-
-namespace pFlow::gSettings
+pFlow::pointSorting::pointSorting(const dictionary & dict)
+:
+    performSorting_(dict.getValOrSet("active", Logical(false))),
+    timeControl_(
+        performSorting_()? 
+            baseTimeControl(dict, "sorting"): 
+            baseTimeControl(0,1,1, "sorting")
+    ),
+    dx_(
+        performSorting_()?
+            dict.getVal<real>("dx"):
+            1.0
+    )
 {
-
-extern const double vectorGrowthFactor__;
-
-void sleepMiliSeconds(int miliSeconds);
+    if( performSorting_() )
+        REPORT(1)<<"Point sorting is "<<Yellow_Text("active")<<" in simulation"<<END_REPORT;
+    else
+       REPORT(1)<<"Point sorting is "<<Yellow_Text("inactive")<<" in simulation"<<END_REPORT;
 
 }
-
-
-#endif // __globalSettings_hpp__
+pFlow::uint32IndexContainer 
+pFlow::pointSorting::getSortedIndices(
+    const box& boundingBox, 
+    const ViewType1D<realx3> &pos, 
+    const pFlagTypeDevice &flag
+) const
+{
+    return pFlow::getSortedIndices(boundingBox, dx_, pos, flag);
+}

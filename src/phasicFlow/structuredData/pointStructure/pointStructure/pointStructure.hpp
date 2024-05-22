@@ -24,6 +24,7 @@ Licence:
 #include "demComponent.hpp"
 #include "internalPoints.hpp"
 #include "simulationDomain.hpp"
+#include "pointSorting.hpp"
 #include "boundaryList.hpp"
 #include "streams.hpp"
 
@@ -53,8 +54,16 @@ private:
 	//// - data members 
 	uniquePtr<simulationDomain> simulationDomain_ = nullptr;
 
+	pointSorting 				pointSorting_;
+
 	boundaryList 				boundaries_;
-    
+	
+	Timer 						boundaryUpdateTimer_;
+
+	Timer  						boundaryDataTransferTimer_;
+
+	
+
 	bool setupPointStructure(const realx3Vector& points);
 
     bool setupPointStructure(const PointsTypeHost& points);

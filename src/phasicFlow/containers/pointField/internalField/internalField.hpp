@@ -73,6 +73,8 @@ protected:
 
 	bool insert(const anyList& varList);
 
+	bool rearrange(const anyList& varList);
+
 public:
 
 	internalField(

@@ -249,7 +249,9 @@ pFlow::geometry::geometry
 	if( this->numSurfaces() != motionComponentName_.size() )
 	{
 		fatalErrorInFunction<<
-		"Number of surfaces is not equal to number of motion component names"<<endl;
+		"Number of surfaces ("<< this->numSurfaces() <<
+        ") is not equal to number of motion component names("<<
+        motionComponentName_.size()<<")"<<endl;
 		fatalExit;
 	}
 

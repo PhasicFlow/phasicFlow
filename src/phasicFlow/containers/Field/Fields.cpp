@@ -31,5 +31,4 @@ template class pFlow::Field<pFlow::real>;
 
 template class pFlow::Field<pFlow::realx3>;
 
-
-
+template class pFlow::Field<pFlow::word, pFlow::HostSpace>;

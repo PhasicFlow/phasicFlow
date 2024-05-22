@@ -96,8 +96,11 @@ private:
 	/// timer for managing contact lists (only inernal points)
 	Timer 		contactListMangementTimer_;
 
+	Timer 		boundaryContactSearchTimer_;
 	/// timer for boundary interaction time 
 	Timer 		boundaryInteractionTimer_;
+
+	Timer 		contactListBoundaryTimer_;
 
 	
 

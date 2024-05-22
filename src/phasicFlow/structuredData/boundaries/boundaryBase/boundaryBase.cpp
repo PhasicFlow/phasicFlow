@@ -42,6 +42,7 @@ void pFlow::boundaryBase::setNewIndices
 	unSyncLists();
 }
 
+
 bool pFlow::boundaryBase::appendNewIndices
 (
 	const uint32Vector_D& newIndices
@@ -98,14 +99,10 @@ bool pFlow::boundaryBase::removeIndices
 		keepIndices
 	);
 	
-	if(!internal_.deletePoints(removeIndices))
+	if(!setRemoveKeepIndices(removeIndices, keepIndices))
 	{
-		fatalErrorInFunction<<
-		"error in deleting points from boundary "<< name()<<endl;
 		return false;
 	}
-
-	setNewIndices(keepIndices);
 
 	anyList aList;
 	
@@ -129,7 +126,26 @@ bool pFlow::boundaryBase::removeIndices
 	return true;
 }
 
-bool pFlow::boundaryBase::transferPoints
+bool pFlow::boundaryBase::setRemoveKeepIndices
+(
+	const uint32Vector_D &removeIndices, 
+	const uint32Vector_D &keepIndices
+)
+{
+
+	if(!internal_.deletePoints(removeIndices))
+	{
+		fatalErrorInFunction<<
+		"error in deleting points from boundary "<< name()<<endl;
+		return false;
+	}
+
+	setNewIndices(keepIndices);
+
+    return true;
+}
+
+bool pFlow::boundaryBase::transferPointsToMirror
 (
 	uint32 numTransfer, 
 	const uint32Vector_D& transferMask, 
@@ -188,6 +204,8 @@ pFlow::boundaryBase::boundaryBase
 	indexList_(groupNames("indexList", dict.name())),
 	indexListHost_(groupNames("hostIndexList",dict.name())),
 	neighborLength_(dict.getVal<real>("neighborLength")),
+	updateInetrval_(dict.getVal<uint32>("updateInterval")),
+	boundaryExtntionLengthRatio_(dict.getVal<real>("boundaryExtntionLengthRatio")),
 	internal_(internal),
 	boundaries_(bndrs),
 	thisBoundaryIndex_(thisIndex),

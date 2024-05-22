@@ -1,3 +1,4 @@
+#include "boundarySphereInteraction.hpp"
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -18,6 +19,20 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+template <typename cFM, typename gMM>
+void pFlow::boundarySphereInteraction<cFM, gMM>::allocatePPPairs()
+{
+	ppPairs_.reset(nullptr);
+	ppPairs_ = makeUnique<ContactListType>(1);
+}
+
+template <typename cFM, typename gMM>
+void pFlow::boundarySphereInteraction<cFM, gMM>::allocatePWPairs()
+{
+	pwPairs_.reset(nullptr);
+	pwPairs_ = makeUnique<ContactListType>(1);
+}
+
 
 template <typename cFM, typename gMM>
 pFlow::boundarySphereInteraction<cFM, gMM>::boundarySphereInteraction(
@@ -28,8 +43,6 @@ pFlow::boundarySphereInteraction<cFM, gMM>::boundarySphereInteraction(
 	  geometryMotion_(geomMotion),
 	  sphParticles_(sphPrtcls)
 {
-	ppPairs_ = makeUnique<ContactListType>(1);
-	pwPairs_ = makeUnique<ContactListType>(1);
 }
 
 template <typename cFM, typename gMM>
@@ -56,7 +69,7 @@ pFlow::boundarySphereInteraction<cFM, gMM>::create(
 
 	if (boundaryBasevCtorSelector_.search(boundaryTypeName))
 	{
-		REPORT(2) << "Creating boundry type " << Green_Text(boundaryTypeName) << 
+		pOutput.space(4) << "Creating boundry type " << Green_Text(boundaryTypeName) << 
 		" for boundary " << boundary.name() << " . . ." << END_REPORT;
 		return boundaryBasevCtorSelector_[boundaryTypeName](
 			boundary,
@@ -67,7 +80,7 @@ pFlow::boundarySphereInteraction<cFM, gMM>::create(
 	{
 		// if boundary condition is not implemented, the default is used
 		
-		REPORT(2) << "Creating boundry type " << Green_Text(altBTypeName) << 
+		pOutput.space(4) << "Creating boundry type " << Green_Text(altBTypeName) << 
 		" for boundary " << boundary.name() << " . . ." << END_REPORT;
 		return boundaryBasevCtorSelector_[altBTypeName](
 			boundary,

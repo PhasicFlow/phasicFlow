@@ -20,7 +20,7 @@ Licence:
 
 //
 REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
-sphereParticles sphParticles(Control, proprties);
+pFlow::sphereParticles sphParticles(Control, proprties);
 
 //
 REPORT(0)<<"\nCreating particle insertion object . . ."<<END_REPORT;
@@ -36,12 +36,12 @@ REPORT(0)<<"\nCreating particle insertion object . . ."<<END_REPORT;
 		sphParticles.shapes()
 	);*/
 
-auto sphInsertion =  sphereInsertion(
+auto sphInsertion =  pFlow::sphereInsertion(
 	sphParticles, 
 	sphParticles.spheres());
 
 REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<END_REPORT;
-auto interactionPtr = interaction::create(
+auto interactionPtr = pFlow::interaction::create(
 	Control,
 	sphParticles,
 	surfGeometry

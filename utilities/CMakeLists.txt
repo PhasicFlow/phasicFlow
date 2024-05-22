@@ -1,5 +1,5 @@
 
-#add_subdirectory(checkPhasicFlow)
+add_subdirectory(checkPhasicFlow)
 
 add_subdirectory(particlesPhasicFlow)
 

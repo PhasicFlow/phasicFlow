@@ -20,6 +20,6 @@ Licence:
 
 //
 REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
-sphereParticles sphParticles(Control, proprties);
+pFlow::sphereParticles sphParticles(Control, proprties);
 
 WARNING<<"Particle insertion has not been set yet!"<<END_WARNING;

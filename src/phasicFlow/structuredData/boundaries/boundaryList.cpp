@@ -91,18 +91,18 @@ pFlow::boundaryList::updateNeighborLists()
 pFlow::boundaryList::boundaryList(pointStructure& pStruct)
   : ListPtr<boundaryBase>(pStruct.simDomain().sizeOfBoundaries()),
     pStruct_(pStruct),
-    timeControl_(
-      pStruct.simDomain().subDict("boundaries"),
-      "update",
-      pStruct.currentTime()
-    )
+    neighborListUpdateInterval_(
+		pStruct.simDomain().subDict("boundaries").getVal<uint32>(
+			"neighborListUpdateInterval"
+		)
+	)
 {
 }
 
 bool
-pFlow::boundaryList::updateNeighborLists(uint32 iter, real t, real dt)
+pFlow::boundaryList::updateNeighborLists(uint32 iter, bool force)
 {
-	if (timeControl_.timeEvent(iter, t, dt))
+	if(iter%neighborListUpdateInterval_==0u || iter == 0u || force)
 	{
 		return updateNeighborLists();
 	}
@@ -155,15 +155,18 @@ pFlow::boundaryList::internalDomainBox() const
 }
 
 bool
-pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt)
+pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt, bool force)
 {
 	// it is time to update lists
-	if (timeControl_.timeEvent(iter, t, dt) && !updateNeighborLists())
+	if(!updateNeighborLists(iter , force) )
 	{
 		fatalErrorInFunction;
 		return false;
 	}
 
+	// this forces performing updating the list on each boundary
+	if(force) iter = 0; 
+	
 	for (auto bdry : *this)
 	{
 		if (!bdry->beforeIteration(iter, t, dt))
@@ -176,12 +179,12 @@ pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt)
 
 	for (auto bdry : *this)
 	{
-		bdry->updataBoundary(1);
+		bdry->updataBoundaryData(1);
 	}
 
 	for (auto bdry : *this)
 	{
-		bdry->updataBoundary(2);
+		bdry->updataBoundaryData(2);
 	}
 
 	return true;
@@ -205,14 +208,21 @@ pFlow::boundaryList::iterate(uint32 iter, real t, real dt)
 bool
 pFlow::boundaryList::afterIteration(uint32 iter, real t, real dt)
 {
-	for (auto& bdry : *this)
+	
+	std::array<bool,6> requireStep{true, true, true, true, true, true};
+
+	int step = 1;
+	while(std::any_of(requireStep.begin(), requireStep.end(), [](bool v) { return v==true; }))
 	{
-		if (!bdry->afterIteration(iter, t, dt))
+		for(auto i=0uL; i<6; i++)
 		{
-			fatalErrorInFunction << "Error in afterIteration in boundary "
-			                     << bdry->name() << endl;
-			return false;
+			if(requireStep[i])
+			{
+				requireStep[i] = this->operator[](i).transferData(iter, step);
+			}
 		}
+		step++;
 	}
+
 	return true;
 }

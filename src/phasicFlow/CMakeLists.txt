@@ -59,6 +59,7 @@ Timer/Timers.cpp
 
 
 containers/Vector/Vectors.cpp
+containers/VectorHD/wordVectorHost.cpp
 containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
 containers/symArrayHD/symArrays.cpp
@@ -94,6 +95,8 @@ structuredData/pointStructure/selectors/selectorStridedRange/selectorStridedRang
 structuredData/pointStructure/selectors/selectorRandomPoints/selectorRandomPoints.cpp
 structuredData/pointStructure/selectors/selectBox/selectBox.cpp
 structuredData/pointStructure/selectors/selectorGeometric/selectorGeometrics.cpp
+structuredData/pointStructure/pointStructure/pointSorting/mortonIndexing.cpp
+structuredData/pointStructure/pointStructure/pointSorting/pointSorting.cpp
 
 triSurface/subSurface.cpp
 triSurface/triSurface.cpp

@@ -76,10 +76,6 @@ public:
 			*this)
 	{
 
-		/*auto method = dict().getVal<word>("method");
-				
-		auto nbDict = dict().subDict(method+"Info");*/
-
 		real minD;
 		real maxD;
 		this->Particles().boundingSphereMinMax(minD, maxD);
@@ -110,9 +106,6 @@ public:
 				wVertices,
 				wNormals
 			);
-		REPORT(2)<<"Contact search algorithm for particle-particle is "<<
-				 Green_Text(ppwContactSearch_().typeName())<<END_REPORT;
-
 	}
 
 
@@ -167,7 +160,8 @@ public:
 		csPairContainerType& pwPairs,
 		bool force = false)override
 	{
-		Particles().boundingSphere().updateBoundaries(DataDirection::SlaveToMaster);
+		if(i==0u)
+			Particles().boundingSphere().updateBoundaries(DataDirection::SlaveToMaster);
 		return csBoundaries_[i].broadSearch(
 			iter, 
 			t, 
@@ -189,6 +183,23 @@ public:
 	bool performedBroadSearch()const override
 	{
 		return ppwContactSearch_().performedSearch();
+	}
+
+	
+	uint32 updateInterval()const override
+	{
+		return ppwContactSearch_().updateInterval();
+	}
+
+	real sizeRatio()const override
+	{
+		return ppwContactSearch_().sizeRatio();
+	}
+
+	 
+	real cellExtent()const override
+	{
+		return ppwContactSearch_().cellExtent();
 	}
 	
 };

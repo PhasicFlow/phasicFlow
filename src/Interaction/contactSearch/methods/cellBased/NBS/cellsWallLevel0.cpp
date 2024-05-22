@@ -85,21 +85,26 @@ bool pFlow::cellsWallLevel0::broadSearch
 bool pFlow::cellsWallLevel0::build(const cells & searchBox)
 {
 	
+    const auto& points = points_;
+    const auto& vertices = vertices_;
+    const auto& elementBox = elementBox_;
+    const auto cellExtent = cellExtent_;
+
 	Kokkos::parallel_for(
 		"pFlow::cellsWallLevel0::build",
 		deviceRPolicyStatic(0,numElements_),
-		CLASS_LAMBDA_HD(uint32 i)
+		LAMBDA_HD(uint32 i)
 		{
-			auto v = vertices_[i];
-			auto p1 = points_[v.x()];
-			auto p2 = points_[v.y()];
-			auto p3 = points_[v.z()];
+			auto v = vertices[i];
+			auto p1 = points[v.x()];
+			auto p2 = points[v.y()];
+			auto p3 = points[v.z()];
 			
 			realx3 minP;
 			realx3 maxP;
 
-			searchBox.extendBox(p1, p2, p3, cellExtent_, minP, maxP);
-			elementBox_[i] = iBoxType(searchBox.pointIndex(minP), searchBox.pointIndex(maxP));
+			searchBox.extendBox(p1, p2, p3, cellExtent, minP, maxP);
+			elementBox[i] = iBoxType(searchBox.pointIndex(minP), searchBox.pointIndex(maxP));
 		});
 	Kokkos::fence();
 
@@ -153,7 +158,12 @@ pFlow::int32 pFlow::cellsWallLevel0::findPairsElementRangeCount
 {
 	uint32 getFull =0;
 			
-	
+	const auto& elementBox = elementBox_;
+    const auto& normals = normals_;
+    const auto& points = points_;
+    const auto& vertices = vertices_;
+    const auto cellExtent = cellExtent_;
+
 	Kokkos::parallel_reduce(
 		"pFlow::cellsWallLevel0::findPairsElementRangeCount",
 		tpPWContactSearch(numElements_, Kokkos::AUTO),
@@ -163,10 +173,10 @@ pFlow::int32 pFlow::cellsWallLevel0::findPairsElementRangeCount
 			
 			const uint32 iTri = teamMember.league_rank();
 
-			const auto triBox = elementBox_[iTri];
+			const auto triBox = elementBox[iTri];
 			const auto triPlane = infinitePlane(
-				normals_[iTri], 
-				points_[vertices_[iTri].x()]);
+				normals[iTri], 
+				points[vertices[iTri].x()]);
 
 			uint32 getFull2 = 0;
 
@@ -186,11 +196,12 @@ pFlow::int32 pFlow::cellsWallLevel0::findPairsElementRangeCount
 						while( n != particleMap.NoPos)
 						{
 							// id is wall id the pair is (particle id, wall id)
-							if( abs(triPlane.pointFromPlane(pPoints[n]))< pDiams[n]*sizeRatio*cellExtent_)
+							if( abs(triPlane.pointFromPlane(pPoints[n]))< pDiams[n]*sizeRatio*cellExtent)
 							{
 								if( pairs.insert(
 									static_cast<csIdType>(n),
-									static_cast<csIdType>(iTri) ) == -1 )
+									static_cast<csIdType>(iTri) ) == static_cast<csIdType>(-1) 
+                                )
 									innerUpdate++;
 							}
 							n = particleMap.next(n);

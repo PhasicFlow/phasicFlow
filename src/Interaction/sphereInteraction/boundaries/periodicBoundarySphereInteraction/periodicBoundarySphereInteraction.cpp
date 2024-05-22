@@ -30,7 +30,10 @@ pFlow::periodicBoundarySphereInteraction<cFM, gMM>::periodicBoundarySphereIntera
 {
 	if(boundary.thisBoundaryIndex()%2==1)
     {
-       masterInteraction_ = true;
+    	masterInteraction_ = true;
+		this->allocatePPPairs();
+		this->allocatePWPairs();
+	   
     }
     else
     {
@@ -42,10 +45,11 @@ template <typename cFM, typename gMM>
 bool pFlow::periodicBoundarySphereInteraction<cFM, gMM>::sphereSphereInteraction
 (
 	real dt,
-	const ContactForceModel &cfModel
+	const ContactForceModel &cfModel,
+	uint32 step
 )
 {
-	if(!masterInteraction_) return true;
+	if(!masterInteraction_) return false;
 	
 	pFlow::periodicBoundarySIKernels::sphereSphereInteraction(
 		dt,
@@ -61,5 +65,5 @@ bool pFlow::periodicBoundarySphereInteraction<cFM, gMM>::sphereSphereInteraction
 		this->sphParticles().contactForce().deviceViewAll(),
 		this->sphParticles().contactTorque().deviceViewAll());
 
-	return true;
+	return false;
 }

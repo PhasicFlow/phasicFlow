@@ -50,6 +50,52 @@ pFlow::ViewType1D<pFlow::uint32, typename pFlow::pointFlag<ExecutionSpace>::memo
 	return aPoints;
 }
 
+template<typename ExecutionSpace>
+pFlow::ViewType1D<pFlow::uint32, typename pFlow::pointFlag<ExecutionSpace>::memory_space>
+	pFlow::pointFlag<ExecutionSpace>::getEmptyPoints(uint32 numToGet)const
+{
+
+	uint32 cap = capacity();
+	using rpAPoints = Kokkos::RangePolicy<execution_space,  
+			Kokkos::IndexType<uint32>>;
+
+	ViewType1D<uint32,memory_space> indices("indices", cap+1);
+
+	ViewType1D<uint32,memory_space> emptyPoints("emptyPoints", numToGet);
+
+	auto flags = flags_;
+
+	Kokkos::parallel_for(
+		"getEmptyPoints",
+		rPolicy(0, cap),
+		LAMBDA_HD(uint32 i){
+			indices(i) = flags[i] == DELETED;
+	});
+	Kokkos::fence();
+
+	exclusiveScan(indices, 0u, cap, indices, 0u);
+	uint32 numFound = 0;
+	Kokkos::parallel_reduce(
+		"fillEmptyPoints",
+		rpAPoints(0, cap-1),
+		LAMBDA_HD(uint32 i, uint32& numFoundUpdate){
+			if(indices(i)!= indices(i+1) && indices(i)< numToGet)
+			{
+				emptyPoints(indices(i)) = i;
+				numFoundUpdate++;
+			}
+		},
+		numFound
+	);
+	
+	if(numFound < numToGet)
+	{
+		return Kokkos::subview(emptyPoints, Kokkos::make_pair(0u, numFound));
+	}
+	return emptyPoints;
+
+}
+
 
 template<typename ExecutionSpace>
 pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markOutOfBoxDelete
@@ -106,7 +152,7 @@ pFlow::uint32 pFlow::pointFlag<ExecutionSpace>::markOutOfBoxDelete
 	{
 		minRange = 0;
 		maxRange = 0;
-		numDeleted == numActive_;
+		numDeleted = numActive_;
 	}
 	else
 	{
@@ -135,7 +181,8 @@ pFlow::pointFlag<ExecutionSpace>::addInternalPoints
 	uint32 maxRange;
 	uint32 numAdded = 0;
 	
-	
+	const auto& flag = flags_;
+
 	Kokkos::parallel_reduce(
 		"pointFlagKernels::addInternalPoints",
 		deviceRPolicyStatic(0, points.extent(0)),
@@ -146,10 +193,10 @@ pFlow::pointFlag<ExecutionSpace>::addInternalPoints
 			uint32& addToUpdate)
 		{
 			uint32 idx = points(i);
-			if( flags_[idx] <= DELETED) addToUpdate ++;
+			if( flag[idx] <= DELETED) addToUpdate ++;
 			minUpdate = min(minUpdate,idx);
 			maxUpdate = max(maxUpdate,idx);
-			flags_[idx] = INTERNAL;	
+			flag[idx] = INTERNAL;	
 		},
 		Kokkos::Min<uint32>(minRange), 
 		Kokkos::Max<uint32>(maxRange),
@@ -202,7 +249,7 @@ bool pFlow::pointFlag<ExecutionSpace>::deletePoints
 	if(numDeleted >= numActive_)
 	{
 		activeRange_ = {0, 0};
-		numDeleted == numActive_;
+		numDeleted = numActive_;
 	}
 		
 	numActive_ 	= numActive_ - numDeleted;
@@ -245,7 +292,7 @@ bool pFlow::pointFlag<ExecutionSpace>::deletePoints
 	if(numDeleted >= numActive_)
 	{
 		activeRange_ = {0, 0};
-		numDeleted == numActive_;
+		numDeleted = numActive_;
 	}
 		
 	numActive_ 	= numActive_ - numDeleted;
@@ -264,13 +311,14 @@ bool pFlow::pointFlag<ExecutionSpace>::changeFlags
 )
 {
 	auto flg = getBoundaryFlag(boundaryIndex);
+    const auto& flags = flags_;
 	Kokkos::parallel_for
 	(
 		"pointFlag::changeFlags",
 		rPolicy(0, changePoints.size()),
 		LAMBDA_HD(uint32 i)
 		{
-			flags_[changePoints(i)] = flg;
+			flags[changePoints(i)] = flg;
 		}
 	);
 	Kokkos::fence();

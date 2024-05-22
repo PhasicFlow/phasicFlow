@@ -38,6 +38,7 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		*this,
 		zero3
 	),
+	velocityUpdateTimer_("velocity boundary update", &timers()),
 	integrationMethod_
 	(
 		control.settingsDict().getVal<word>("integrationMethod")
@@ -81,11 +82,11 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 
 bool pFlow::dynamicPointStructure::beforeIteration()
 {
-	return pointStructure::beforeIteration();
-	/*real dt = this->dt();
-
-    auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
-	return predict(dt, acc);*/
+	if(!pointStructure::beforeIteration())return false;
+	velocityUpdateTimer_.start();
+	velocity_.updateBoundariesSlaveToMasterIfRequested();
+	velocityUpdateTimer_.end();
+	return true;
 }
 
 bool pFlow::dynamicPointStructure::iterate()

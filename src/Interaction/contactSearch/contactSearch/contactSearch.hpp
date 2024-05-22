@@ -140,6 +140,15 @@ public:
 	virtual 
 	bool performedBroadSearch()const = 0;
 
+	virtual
+	uint32 updateInterval()const = 0;
+
+	virtual 
+	real sizeRatio()const = 0;
+
+	virtual 
+	real cellExtent()const = 0;
+	
 	static 
 	uniquePtr<contactSearch> create(
 		const dictionary& dict,

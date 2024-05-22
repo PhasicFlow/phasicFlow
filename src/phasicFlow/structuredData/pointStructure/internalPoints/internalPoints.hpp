@@ -101,6 +101,8 @@ protected:
 		pFlagsD_ = pFlagTypeDevice(cap, start, end);
 	}
 
+	bool sortPoints(const uint32IndexContainer& sortedIndices);
+
 public:
 
 	//friend class dynamicinternalPoints;
@@ -235,6 +237,8 @@ public:
 		
 		
 		bool insertPoints(const realx3Vector& points, anyList& varList);
+
+		bool insertPointsOnly(const realx3Vector_D& points, message& msg, anyList& varList);
 		
 	
 	//// - IO operations 

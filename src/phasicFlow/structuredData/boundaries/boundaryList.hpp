@@ -17,15 +17,12 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __boundaryList_hpp__
 #define __boundaryList_hpp__
 
 #include "domain.hpp"
 #include "boundaryBase.hpp"
 #include "ListPtr.hpp"
-#include "baseTimeControl.hpp"
 
 
 namespace pFlow
@@ -42,7 +39,7 @@ private:
 	//// - data members
 	pointStructure& pStruct_;
 
-	baseTimeControl timeControl_;
+	uint32 			neighborListUpdateInterval_;
 
 	domain          extendedDomain_;
 
@@ -72,7 +69,7 @@ public:
 
 	/// @brief update neighbor list of boundaries based on 
 	/// the time intervals
-	bool updateNeighborLists(uint32 iter, real t, real dt);
+	bool updateNeighborLists(uint32 iter, bool force = false);
 
 	bool createBoundaries();
 
@@ -94,11 +91,6 @@ public:
 		return ListPtr<boundaryBase>::operator[](i);
 	}
 
-	inline
-	const baseTimeControl& timeControl()const
-	{
-		return timeControl_;
-	}
 
 	inline
 	const auto& extendedDomain()const
@@ -114,7 +106,7 @@ public:
 
 	box internalDomainBox()const;
 	
-	bool beforeIteration(uint32 iter, real t, real dt);
+	bool beforeIteration(uint32 iter, real t, real dt, bool force = false);
 
 	bool iterate(uint32 iter, real t, real dt);
 

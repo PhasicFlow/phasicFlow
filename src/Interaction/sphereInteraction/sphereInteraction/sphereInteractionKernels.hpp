@@ -261,7 +261,7 @@ struct pwInteractionFunctor
 			int32 propId_i = propId_[i];
 			int32 wPropId_j = wPropId_[tj];
 
-			realx3 FCn, FCt, Mri, Mrj, Mij, Mji;
+			realx3 FCn, FCt, Mri, Mrj, Mij;
 			//output<< "before "<<history.overlap_t_<<endl;
 			// calculates contact force 
 			forceModel_.contactForce(

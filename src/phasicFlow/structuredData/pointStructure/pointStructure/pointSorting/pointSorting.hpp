@@ -17,20 +17,52 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __pointSorting_hpp__
+#define __pointSorting_hpp__
 
-#ifndef __globalSettings_hpp__
-#define __globalSettings_hpp__
+#include "baseTimeControl.hpp"
+#include "indexContainer.hpp"
+#include "pointFlag.hpp"
 
 
-
-namespace pFlow::gSettings
+namespace pFlow
 {
 
-extern const double vectorGrowthFactor__;
+class box;
 
-void sleepMiliSeconds(int miliSeconds);
+
+class pointSorting
+{
+private:
+
+	Logical                 performSorting_;
+
+	baseTimeControl         timeControl_;
+
+	real 					dx_;
+
+public:
+
+	explicit pointSorting(const dictionary& dict);
+
+	bool performSorting()const
+	{
+		return performSorting_();
+	}
+
+	bool sortTime(uint32 iter, real t, real dt)const
+	{
+		return performSorting_() && timeControl_.timeEvent(iter, t, dt);
+	}
+
+	uint32IndexContainer getSortedIndices(
+		const box& boundingBox, 
+		const ViewType1D<realx3>& pos,
+		const pFlagTypeDevice& flag
+	)const;
+	
+};
 
 }
 
-
-#endif // __globalSettings_hpp__
+#endif

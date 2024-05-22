@@ -121,21 +121,45 @@ public:
 		return true;
 	}
 
-	
+	inline
+	InternalFieldType& internal()
+	{
+		return internal_;
+	}
+
+	inline
+	const InternalFieldType& internal()const
+	{
+		return internal_;
+	}
+
 	FieldAccessType thisField()const
 	{
-		return FieldAccessType(
-			this->size(),
-			this->indexList().deviceViewAll(),
-			internal_.deviceViewAll());
+        if constexpr(isDeviceAccessible<execution_space>())
+            return FieldAccessType(
+                this->size(),
+                this->indexList().deviceViewAll(),
+                internal_.deviceViewAll());
+        else
+            return FieldAccessType(
+                this->size(),
+                this->boundary().indexListHost().deviceViewAll(),
+                internal_.deviceViewAll());
 	}
 
 	FieldAccessType mirrorField()const
 	{
-		return FieldAccessType(
-			this->mirrorBoundary().size(),
-			this->mirrorBoundary().indexList().deviceViewAll(),
-			internal_.deviceViewAll());
+        if constexpr(isDeviceAccessible<execution_space>())
+            return FieldAccessType(
+                this->mirrorBoundary().size(),
+                this->mirrorBoundary().indexList().deviceViewAll(),
+                internal_.deviceViewAll());
+        else
+            return FieldAccessType(
+                this->mirrorBoundary().size(),
+                this->mirrorBoundary().indexListHost().deviceViewAll(),
+                internal_.deviceViewAll());
+
 	}
 	
 	virtual 
@@ -143,11 +167,6 @@ public:
 
 	virtual
 	const ProcVectorType& neighborProcField()const;
-
-	void fill(const std::any& val)override
-	{
-		return;
-	}
 
 	virtual
 	void fill(const T& val)

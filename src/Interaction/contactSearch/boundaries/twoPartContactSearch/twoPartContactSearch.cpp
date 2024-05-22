@@ -64,7 +64,9 @@ bool pFlow::twoPartContactSearch::broadSearchPP
 	const realx3& transferVec
 )
 {
-	
+	if(points1.empty())return true;
+	if(points2.empty()) return true;
+
 	buildList(points1);
 
 	uint32 nNotInserted = 1;
@@ -114,7 +116,8 @@ bool pFlow::twoPartContactSearch::broadSearchPP
 	const deviceScatteredFieldAccess<realx3> &points1,
 	const deviceScatteredFieldAccess<real> &diams1,
 	const realx3Vector_D& points2,
-	const realVector_D& diams2
+	const realVector_D& diams2,
+	const word& name
 )
 {
 	buildList(points1);
@@ -148,9 +151,9 @@ bool pFlow::twoPartContactSearch::broadSearchPP
 			auto oldCap = ppPairs.capacity();
 			
 			ppPairs.increaseCapacityBy(len);
-
+			
 			INFORMATION<< "Particle-particle contact pair container capacity increased from "<<
-			oldCap << " to "<<ppPairs.capacity()<<" in peiodicBoundaryContactSearch."<<END_INFO;
+			oldCap << " to "<<ppPairs.capacity()<<" in boundary contact search in "<< name <<END_INFO;
 			
 		}
 

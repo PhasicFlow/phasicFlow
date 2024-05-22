@@ -142,13 +142,24 @@ bool pFlow::internalPoints::changePointsFlagPosition
 	return true;
 }
 
+bool pFlow::internalPoints::sortPoints(const uint32IndexContainer &sortedIndices)
+{
+	if(!pointPosition_.reorderItems(sortedIndices))
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+    
+	pFlagsD_.resetFlags(pFlagsD_.capacity(), 0u, sortedIndices.size());
+	unSyncFlag();
 
+	return true;
+}
 
 pFlow::internalPoints::internalPoints()
-:
-	subscriber("internalPoints"),
-	pointPosition_("internalPoints", "internalPoints", initialCapacity_, 0, RESERVE()),
-	pFlagsD_(initialCapacity_, 0 , 0)
+    : subscriber("internalPoints"),
+      pointPosition_("internalPoints", "internalPoints", initialCapacity_, 0, RESERVE()),
+      pFlagsD_(initialCapacity_, 0, 0)
 {}
 
 
@@ -306,6 +317,9 @@ pFlow::internalPoints::insertPoints(
 
 	auto aRange = pFlagsD_.activeRange();
 	uint32 emptySpots = pFlagsD_.capacity() - pFlagsD_.numActive();
+
+    if(emptySpots!= 0) emptySpots--;
+
 	message msg;
 
 	if( numNew > emptySpots )
@@ -337,8 +351,20 @@ pFlow::internalPoints::insertPoints(
 	// we should fill the scattered empty spots
 	else
 	{
-		notImplementedFunction;
-		return false;
+		auto newIndices = pFlagsD_.getEmptyPoints(numNew);
+		if(numNew != newIndices.size())
+		{
+			fatalErrorInFunction<<"not enough empty points in pointFlag"<<
+			numNew<< " "<<newIndices.size() <<endl;
+			pOutput<< pFlagsD_.capacity()<<endl;
+			pOutput<< pFlagsD_.numActive()<<endl;
+			return false;
+		}
+		
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			newIndices
+		);
 	}
 
 	const auto& indices = varList.getObject<uint32IndexContainer>(
@@ -396,6 +422,108 @@ pFlow::internalPoints::insertPoints(
 	}
 
 	return true;
+}
+
+bool pFlow::internalPoints::insertPointsOnly(
+	const realx3Vector_D &points,
+	message& msg, 
+	anyList &varList
+)
+{
+
+	uint32 numNew = static_cast<uint32>(points.size());
+
+	auto aRange = pFlagsD_.activeRange();
+	uint32 emptySpots = pFlagsD_.capacity() - pFlagsD_.numActive();
+
+	if(emptySpots!= 0) emptySpots--;
+	
+	if( numNew > emptySpots )
+	{
+		// increase the capacity to hold new points 
+		aRange = pFlagsD_.activeRange();
+		uint32 newCap = pFlagsD_.changeCapacity(numNew);
+		unSyncFlag();
+		varList.emplaceBack(
+			msg.addAndName(message::CAP_CHANGED),
+			newCap);
+	}
+	
+	
+	// first check if it is possible to add to the beggining of list
+	if(numNew <= aRange.start())
+	{
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			0u, numNew);
+	}// check if it is possible to add to the end of the list  
+	else if( numNew <= pFlagsD_.capacity() - aRange.end() )
+	{	 	
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			aRange.end(), aRange.end()+numNew);
+	}// we should fill the scattered empty spots
+	else
+	{
+		
+		auto newIndices = pFlagsD_.getEmptyPoints(numNew);
+		if(numNew != newIndices.size())
+		{
+			fatalErrorInFunction<<"not enough empty points in pointFlag"<<
+			numNew<< " "<<newIndices.size() <<endl;
+			pOutput<< pFlagsD_.capacity()<<endl;
+			pOutput<< pFlagsD_.numActive()<<endl;
+			return false;
+		}
+		
+		varList.emplaceBack<uint32IndexContainer>(
+			msg.addAndName(message::ITEM_INSERT),
+			newIndices
+		);
+	}
+
+	const auto& indices = varList.getObject<uint32IndexContainer>(
+		message::eventName(message::ITEM_INSERT)
+	);
+
+	auto nAdded = pFlagsD_.addInternalPoints(indices.deviceView());
+	unSyncFlag();
+
+	if(nAdded != numNew )
+	{
+		fatalErrorInFunction;
+		return false;
+	}
+
+	pointPosition_.reserve( pFlagsD_.capacity() );
+
+	if(!pointPosition_.insertSetElement(indices, points.deviceView()))
+	{
+		fatalErrorInFunction<<
+		"Error in inserting new positions into pointPosition"<<
+		" internalPoints field"<<endl;
+		return false;
+	}
+
+	auto newARange = pFlagsD_.activeRange();
+
+	if( aRange.end() != newARange.end() )
+	{
+		varList.emplaceBack(
+			msg.addAndName(message::RANGE_CHANGED),
+			newARange);
+		varList.emplaceBack(
+			msg.addAndName(message::SIZE_CHANGED),
+			newARange.end());
+	}
+	else if(aRange.start() != newARange.start())
+	{
+		varList.emplaceBack(
+			msg.addAndName(message::RANGE_CHANGED),
+			newARange);
+	}
+	
+    return true;
 }
 
 bool pFlow::internalPoints::read

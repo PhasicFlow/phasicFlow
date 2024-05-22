@@ -35,8 +35,7 @@ private:
 
 	uint32 mirrorBoundaryIndex_;
 
-	static
-	inline const real extensionLength_ = 0.1;
+	real extensionLength_ = 0.1;
 
 public:
 

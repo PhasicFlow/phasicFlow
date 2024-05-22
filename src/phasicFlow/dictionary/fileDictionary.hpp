@@ -46,6 +46,9 @@ public:
     const dictionary& dict, 
     repository* owner=nullptr);
 
+    using dictionary::read;
+    using dictionary::write;
+
     /// read from stream 
     bool read(iIstream& is, const IOPattern& iop) override;
 

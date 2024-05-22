@@ -114,6 +114,17 @@ public:
 		return fieldVals_;
 	}
 
+	auto& indices()
+	{
+		return indices_;
+	}
+
+	const auto& indices()const
+	{
+		return indices_;
+	}
+
+    INLINE_FUNCTION_HD
 	uint32 index(uint32 i)const
 	{
 		return indices_[i];

@@ -85,7 +85,8 @@ public:
 		const deviceScatteredFieldAccess<realx3> &points1,
 		const deviceScatteredFieldAccess<real> &diams1,
 		const realx3Vector_D& points2,
-		const realVector_D& diams2);
+		const realVector_D& diams2,
+		const word& name);
 
 	const auto& searchCells()const
 	{

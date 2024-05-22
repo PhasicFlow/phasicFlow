@@ -74,7 +74,8 @@ pFlow::particles::particles(systemControl& control)
       dynPointStruct_,
       zero3
     ),
-    idHandler_(particleIdHandler::create(dynPointStruct_))
+    idHandler_(particleIdHandler::create(dynPointStruct_)),
+    baseFieldBoundaryUpdateTimer_("baseFieldBoundaryUpdate",&timers())
 {
 	this->addToSubscriber(dynPointStruct_);
 
@@ -84,18 +85,18 @@ pFlow::particles::particles(systemControl& control)
 bool
 pFlow::particles::beforeIteration()
 {
-	zeroForce();
-	zeroTorque();
-
 	if( !dynPointStruct_.beforeIteration())
   {
     return false;
   }
 
+  zeroForce();
+	zeroTorque();
+  baseFieldBoundaryUpdateTimer_.start();
   shapeIndex_.updateBoundariesSlaveToMasterIfRequested();
   accelertion_.updateBoundariesSlaveToMasterIfRequested();
   idHandler_().updateBoundariesSlaveToMasterIfRequested();
-
+  baseFieldBoundaryUpdateTimer_.end();
   return true;
 }
 
