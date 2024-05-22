@@ -87,14 +87,14 @@ pFlow::twoPartContactSearchKernels::broadSearchPP(
 						  continue;
 
 					  uint32 thisI = head(ind.x(), ind.y(), ind.z());
-					  while (thisI != -1)
+					  while (thisI !=  static_cast<uint32>(-1))
 					  {
 						  auto d_n = sizeRatio * diams[thisI];
 
 						  // first item is for this boundary and second itme,
 						  // for mirror
 						  if(sphereSphereCheckB(p_m, points[thisI], d_m, d_n)&&
-                       ppPairs.insert(thisI,mrrI) == -1)
+                       ppPairs.insert(thisI,mrrI) == static_cast<uint32>(-1))
 						  {
 							  getFullUpdate++;
 						  }
@@ -161,14 +161,14 @@ pFlow::twoPartContactSearchKernels::broadSearchPP(
 					  }
 
 					  uint32 i1 = head(ind.x(), ind.y(), ind.z());
-					  while (i1 != -1)
+					  while (i1 != static_cast<uint32>(-1))
 					  {
 						  auto d_n = sizeRatio * diams1[i1];
 
 						  // first item is for this boundary and second itme,
 						  // for mirror
 						  if(sphereSphereCheckB(p_m, points1[i1], d_m, d_n)&&
-                       ppPairs.insert(i1,i2) == -1)
+                       ppPairs.insert(i1,i2) == static_cast<uint32>(-1))
 						  {
 							  getFullUpdate++;
 						  }

@@ -136,12 +136,28 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 			message::eventName(message::BNDR_PROCTRANSFER_SEND)
 		);
 
-		FieldAccessType transferData(
-			indices.size(), 
-			indices.deviceViewAll(),
-			this->internal().deviceViewAll()
-		);
-		sender_.sendData(pFlowProcessors(),transferData);
+        if constexpr( isDeviceAccessible<execution_space>())
+        {
+            FieldAccessType transferData(
+			    indices.size(), 
+			    indices.deviceViewAll(),
+			    this->internal().deviceViewAll()
+		    );
+
+		    sender_.sendData(pFlowProcessors(),transferData);
+        }
+        else
+        {
+            FieldAccessType transferData(
+			    indices.size(), 
+			    indices.hostViewAll(),
+			    this->internal().deviceViewAll()
+		    );
+            
+		    sender_.sendData(pFlowProcessors(),transferData);
+        }
+
+		
 	}
 	else if(msg.equivalentTo(message::BNDR_PROCTRANSFER_RECIEVE))
 	{

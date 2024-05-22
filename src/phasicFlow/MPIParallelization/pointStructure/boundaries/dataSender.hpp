@@ -116,7 +116,6 @@ public:
         buffer_.clear();
         buffer_.resize(numToRecieve);
         
-        Status status;
         CheckMPI(
             Irecv(
                 buffer_.getSpan(),

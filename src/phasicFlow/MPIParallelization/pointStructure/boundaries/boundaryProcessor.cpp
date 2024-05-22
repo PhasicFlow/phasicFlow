@@ -19,6 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "boundaryProcessor.hpp"
+#include "boundaryProcessorKernels.hpp"
 #include "dictionary.hpp"
 #include "mpiCommunication.hpp"
 #include "boundaryBaseKernels.hpp"
@@ -69,8 +70,6 @@ pFlow::MPI::boundaryProcessor::beforeIteration(uint32 iterNum, real t, real dt)
 
 	thisNumPoints_ = size();
 
-	uint32 oldNeighborProcNumPoints = neighborProcNumPoints_;
-
 	auto req = MPI_REQUEST_NULL;
 	MPI_Isend(
 		&thisNumPoints_,
@@ -103,7 +102,6 @@ pFlow::MPI::boundaryProcessor::beforeIteration(uint32 iterNum, real t, real dt)
 		return false;
 	}
 	
-
 	return true;
 }
 
@@ -154,23 +152,21 @@ bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
 		transferFlags.fill(0u);
 
 		const auto& transferD = transferFlags.deviceViewAll();
-		auto points = thisPoints();
+		deviceScatteredFieldAccess<realx3> points = thisPoints();
 		auto p = boundaryPlane().infPlane();
 
 		numToTransfer_ = 0;	
 
-		Kokkos::parallel_reduce
+		
+        Kokkos::parallel_reduce
 		(
 			"boundaryProcessor::afterIteration",
 			deviceRPolicyStatic(0,s),
-			LAMBDA_HD(uint32 i, uint32& transferToUpdate)
-			{
-				if(p.pointInNegativeSide(points(i)))
-				{
-					transferD(i)=1;
-					transferToUpdate++;
-				}
-			}, 
+			boundaryProcessorKernels::markNegative(
+                boundaryPlane().infPlane(),
+                transferFlags.deviceViewAll(),
+                thisPoints()
+            ),
 			numToTransfer_
 		);
 			
@@ -206,13 +202,15 @@ bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
 			thisBoundaryIndex(),
 			pFlowProcessors().localCommunicator(),
 			&req), true );
-
+        //pOutput<<"sent "<< numToTransfer_<<endl;
 		CheckMPI(recv(
 			numToRecieve_,
 			neighborProcessorNo(),
 			mirrorBoundaryIndex(),
 			pFlowProcessors().localCommunicator(),
 			StatusesIgnore), true);
+        
+        //pOutput<<"recieved "<<numToRecieve_<<endl;
 
 		MPI_Request_free(&req);
 		return true;
