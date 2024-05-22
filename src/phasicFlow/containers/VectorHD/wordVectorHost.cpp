@@ -21,3 +21,80 @@ Licence:
 
 #include "wordVectorHost.hpp"
 
+bool pFlow::VectorSingle<pFlow::word,pFlow::HostSpace>::insertSetElement(
+    const uint32IndexContainer& indices, 
+    const word& val
+)
+{
+    if(indices.empty()) return true;
+	
+	auto maxInd = indices.max();
+
+	if(this->empty() || maxInd > size()-1 )
+	{
+		resize(maxInd+1);
+	}
+
+    auto ind = indices.hostView();
+    auto s = indices.size();
+
+    for(uint32 i=0; i< s; i++)
+    {
+        container_[ind[i]] = val;    
+    }
+
+    return true;
+}
+
+bool pFlow::VectorSingle<pFlow::word,pFlow::HostSpace>::insertSetElement(
+    const uint32IndexContainer& indices, 
+    const std::vector<word>& vals
+)
+{
+    if(indices.empty())return true;
+	if(indices.size() != vals.size())return false;
+
+	auto maxInd = indices.max(); 
+	
+	if(this->empty() || maxInd > size()-1 )
+	{
+		resize(maxInd+1);
+	} 
+
+	auto ind = indices.hostView();
+	auto s = indices.size();
+
+	for(uint32 i=0; i< s; i++)
+	{
+		container_[ind[i]] = vals[i];    
+	}
+
+	return true;
+}
+
+bool pFlow::VectorSingle<pFlow::word,pFlow::HostSpace>::insertSetElement(
+	const uint32IndexContainer& indices, 
+	const ViewType1D<word, memory_space> vals
+)
+{
+	if(indices.empty())return true;
+	if(indices.size() != vals.size())return false;
+
+	auto maxInd = indices.max(); 
+	
+	if(this->empty() || maxInd > size()-1 )
+	{
+		resize(maxInd+1);
+	} 
+
+	auto ind = indices.hostView();
+	auto s = indices.size();
+
+	for(uint32 i=0; i< s; i++)
+	{
+		container_[ind[i]] = vals[i];    
+	}
+
+	return true;
+}
+

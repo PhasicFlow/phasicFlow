@@ -32,9 +32,12 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
     auto& rbBoundaries = this->subDict("regularBoundaries");
     
 	auto neighborLength = boundaries.getVal<real>("neighborLength");
-	auto boundaryExtntionLengthRatio = 
-		boundaries.getValOrSet<real>("boundaryExtntionLengthRatio", 0.1);
-	auto updateIntercal = boundaries.getValOrSet<uint32>("updateInterval", 1u); 
+	auto boundaryExtntionLengthRatio = max(
+		boundaries.getValOrSet<real>("boundaryExtntionLengthRatio", 0.1),
+        0.0);
+	auto updateIntercal = max( 
+        boundaries.getValOrSet<uint32>("updateInterval", 1u),
+        1u); 
 
 	for(uint32 i=0; i<sizeOfBoundaries(); i++)
 	{

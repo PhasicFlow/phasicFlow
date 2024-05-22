@@ -92,9 +92,12 @@ pFlow::boundaryList::boundaryList(pointStructure& pStruct)
   : ListPtr<boundaryBase>(pStruct.simDomain().sizeOfBoundaries()),
     pStruct_(pStruct),
     neighborListUpdateInterval_(
-		pStruct.simDomain().subDict("boundaries").getVal<uint32>(
-			"neighborListUpdateInterval"
-		)
+        max(
+            pStruct.simDomain().subDict("boundaries").getVal<uint32>(
+                "neighborListUpdateInterval"
+            ),
+            1u
+        )
 	)
 {
 }
