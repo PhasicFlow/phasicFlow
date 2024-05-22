@@ -6,147 +6,47 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+active  yes;                                     // is insertion active -> yes or no
 
-active  yes;          // is insertion active?
-
-collisionCheck No;   // not implemented for yes
+checkForCollision No;                            // is checked          -> yes or no
 
 /*
-five layers of particles are packed one-by-one using 5 insertion steps. 
+   one layers of particles are packed 
 */
 
 layer0
-{
-   type		      cylinderRegion; // type of insertion region
-   rate 	      15000;  // insertion rate (particles/s)
-   startTime 	  0;      // (s)
-   endTime   	  0.5;    // (s)
-   interval       0.025;  //s  
+{  
+   timeControl          simulationTime;
 
-   cylinderRegionInfo 
+   regionType                 cylinder;          // type of insertion region
+
+   rate                          15000;          // insertion rate (particles/s)
+
+   startTime                         0;          // (s)
+
+   endTime                         0.5;          // (s)
+
+   insertionInterval             0.025;          // s 
+
+   cylinderInfo 
    {
-   	radius 	0.09;       // radius of cylinder (m)
-   	p1 ( 0.0  0.0 0.1 ); // (m,m,m)
-   	p2 ( 0.0  0.0 0.11); // (m,m,m)
+   	radius 	                   0.09;          // radius of cylinder (m)
+
+   	p1              ( 0.0  0.0 0.1 );          // (m,m,m)
+
+   	p2              ( 0.0  0.0 0.11);          // (m,m,m)
    }
    
    setFields
    {
-     velocity    realx3 (0.0 0.0 -0.6); // initial velocity of inserted particles 
+     velocity     realx3 (0.0 0.0 -0.6);         // initial velocity of inserted particles 
    }
    
    mixture
    {
-      lightSphere 1; // mixture composition of inserted particles 
-      
+      lightSphere                    1;          // mixture composition of inserted particles 
    }
 }
 
-layer1
-{
-   type         cylinderRegion;
-   rate         15000; // (particles/s)
-   startTime    0.7; // (s)
-   endTime      1.2; // (s)
-   interval     0.025; //s  
 
-   cylinderRegionInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.16 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.17); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      heavySphere 1; // only heavySphere
-      
-   }
-}
-
-layer2
-{
-   type         cylinderRegion;
-   rate         15000; // (particles/s)
-   startTime    1.4; // (s)
-   endTime      1.9; // (s)
-   interval     0.025; //s  
-
-   cylinderRegionInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.2 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.21); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      lightSphere 1; // only lightSphere
-      
-   }
-}
-
-layer3
-{
-   type         cylinderRegion;
-   rate         15000; // (particles/s)
-   startTime    2.1; // (s)
-   endTime      2.6; // (s)
-   interval     0.025; //s  
-
-   cylinderRegionInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.28 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.29); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity   realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      heavySphere 1;
-      
-   }
-}
-
-layer4
-{
-   type         cylinderRegion;
-   rate         15000; // (particles/s)
-   startTime    2.8; // (s)
-   endTime      3.3; // (s)
-   interval     0.025; //s  
-
-   cylinderRegionInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.37 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.38); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      lightSphere 1;
-      
-   }
-}
 

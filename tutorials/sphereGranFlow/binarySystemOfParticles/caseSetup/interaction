@@ -6,49 +6,47 @@ objectName  interaction;
 objectType  dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+materials      (prop1);                          // properties of material
 
+densities      (1000.0);                         // density of materials [kg/m3]
 
-materials      (prop1);    // a list of materials names
-densities      (1000.0);   // density of materials [kg/m3]
+contactListType   sortedContactList;
 
-contactListType   sortedContactList; 
+contactSearch
+{
+  
+   method         NBS;                           // method for broad search 
+    
+   updateInterval 10;
+
+   sizeRatio      1.1;
+
+   cellExtent     0.55;
+
+   adjustableBox  Yes;
+} 
 
 model
 {
    contactForceModel nonLinearNonLimited;
+
    rollingFrictionModel normal;
 
-   Yeff  (1.0e6);       // Young modulus [Pa]
+   // Property (solid-solid Properties)
 
-   Geff  (0.8e6);       // Shear modulus [Pa]
+   Yeff  (1.0e6);                                // Young modulus [Pa]
 
-   nu    (0.25);        // Poisson's ratio [-]
+   Geff  (0.8e6);                                // Shear modulus [Pa]
 
-   en    (0.7);         // coefficient of normal restitution
+   nu    (0.25);                                 // Poisson's ratio [-]
 
-   et    (1.0);         // coefficient of tangential restitution 
+   en    (0.7);                                  // coefficient of normal restitution
 
-   mu    (0.3);         // dynamic friction 
+   et    (1.0);                                  // coefficient of tangential restitution 
 
-   mur   (0.1);         // rolling friction 
-        
+   mu    (0.3);                                  // dynamic friction 
+
+   mur   (0.1);                                  // rolling friction     
 }
 
-contactSearch
-{
-   method         multiGridNBS;       // method for broad search particle-particle
-   wallMapping    multiGridMapping;   // method for broad search particle-wall 
 
-   multiGridNBSInfo
-   {
-      updateFrequency 10;        // each 10 timesteps, update neighbor list 
-      sizeRatio      1.1;        // bounding box size to particle diameter (max)
-   }
-
-   multiGridMappingInfo
-   {
-      updateFrequency 10;        // each 10 timesteps, update neighbor list  
-      cellExtent     0.6;        // bounding box for particle-wall search (> 0.5)
-   }
-
-}
