@@ -421,10 +421,10 @@ binarySearch(
 )
 {
 	if (end <= start)
-		return -1;
+		return static_cast<uint32>(-1);
 
 	if (auto res = binarySearch_(view.data() + start, end - start, val);
-	    res != -1)
+	    res != static_cast<uint32>(-1))
 	{
 		return res + start;
 	}

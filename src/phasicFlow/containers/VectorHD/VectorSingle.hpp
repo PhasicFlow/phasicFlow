@@ -39,9 +39,6 @@ Licence:
 namespace pFlow
 {
 
-//- Forward 
-template<typename T, typename MemorySpace>
-class VectorSingle;
 
 template<typename T, typename MemorySpace=void>
 class VectorSingle
@@ -100,6 +97,8 @@ private:
 
 		static constexpr
 		bool isTriviallyCopyable_ = std::is_trivially_copyable_v<T>;
+
+        static_assert(isTriviallyCopyable_, "This type is not trivially copyable");
 
 	  	/// Evaluate capacity based on the input size 
 		static INLINE_FUNCTION_H uint32 evalCapacity(uint32 n)
@@ -290,25 +289,7 @@ public:
 
 		template<typename MSpace>
 		INLINE_FUNCTION_H
-		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true)
-		{
-			uint32 srcSize = src.size();
-			uint32 srcCap = src.capacity();
-
-			if(srcCapacity && srcCap != capacity()){
-				reallocateCapacitySize(srcCap, srcSize);
-			}
-			else {
-				changeSize(srcSize);
-			}
-
-			if constexpr(isTriviallyCopyable_){
-				copy(deviceView(), src.deviceView());
-			}
-			else{
-				static_assert("Not a valid operation for this data type ");
-			}
-		}
+		void assignFromDevice(const VectorSingle<T, MSpace>& src, bool srcCapacity = true);
 
 		INLINE_FUNCTION_H
 		void append(const ViewType1D<T,MemorySpace>& appVec);

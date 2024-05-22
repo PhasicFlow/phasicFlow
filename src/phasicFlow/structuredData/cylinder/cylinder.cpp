@@ -18,7 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "math.hpp"
 #include "cylinder.hpp"
 #include "zAxis.hpp"
 #include "streams.hpp"

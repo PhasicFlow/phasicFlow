@@ -24,6 +24,7 @@ Licence:
 
 #include "types.hpp"
 #include "VectorSingle.hpp"
+#include "wordVectorHost.hpp"
 #include "Vector.hpp"
 #include "streams.hpp"
 

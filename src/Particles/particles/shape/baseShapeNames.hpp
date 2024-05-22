@@ -132,7 +132,7 @@ public:
 				return true;
 			}
 		}
-		idx = -1;
+		idx = static_cast<uint32>(-1);
 		return false;
 	}
 
@@ -143,6 +143,8 @@ public:
 	}
 
 	// - IO
+
+    using fileDictionary::write;
 
 	bool write(iOstream& os)const override;
 

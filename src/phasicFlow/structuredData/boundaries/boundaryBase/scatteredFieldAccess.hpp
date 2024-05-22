@@ -124,6 +124,7 @@ public:
 		return indices_;
 	}
 
+    INLINE_FUNCTION_HD
 	uint32 index(uint32 i)const
 	{
 		return indices_[i];

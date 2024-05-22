@@ -68,7 +68,7 @@ pFlow::baseTimeControl::baseTimeControl
 pFlow::baseTimeControl::baseTimeControl(int32 start, int32 end, int32 stride, const word &intervalPrefix)
 :
 	isTimeStep_(true),
-	iRange_(start, end, max(stride,1)),
+	iRange_(start, end, std::max(stride,1)),
 	intervalPrefix_(
 		intervalPrefix.size()==0uL? word("interval"): intervalPrefix+"Interval"
 	)

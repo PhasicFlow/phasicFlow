@@ -59,6 +59,7 @@ Timer/Timers.cpp
 
 
 containers/Vector/Vectors.cpp
+containers/VectorHD/wordVectorHost.cpp
 containers/VectorHD/VectorSingles.cpp
 containers/Field/Fields.cpp
 containers/symArrayHD/symArrays.cpp

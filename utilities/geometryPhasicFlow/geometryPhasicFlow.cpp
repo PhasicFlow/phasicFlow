@@ -26,12 +26,10 @@ Licence:
 //#include "readControlDict.hpp"
 
 
-using namespace pFlow;
-
 int main( int argc, char* argv[] )
 {
 
-	commandLine cmds(
+	pFlow::commandLine cmds(
     	"geometryPhasicFlow",
     	"Converts the supplied informaiton for sufraces in"
     	" geometryDict into PhasicFlow geometry data structure");
@@ -51,13 +49,13 @@ int main( int argc, char* argv[] )
 	#include "setProperty.hpp"
 
 	REPORT(0)<<"\nReading "<<"geometryDict"<<" . . ."<<END_REPORT;
-	auto geometryDict = fileDictionary(
-		objectFile
+	auto geometryDict = pFlow::fileDictionary(
+		pFlow::objectFile
 		(
 			"geometryDict",
 			Control.settings().path(),
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
+			pFlow::objectFile::READ_ALWAYS,
+			pFlow::objectFile::WRITE_NEVER
 		),
 		nullptr
 	);
@@ -67,33 +65,33 @@ int main( int argc, char* argv[] )
 	auto wallsDictName = surfacesDict.dictionaryKeywords();
 
 	
-	word mSurfaceName = word("geometryPhasicFlow_")+word(triSurfaceFile__);
-	multiTriSurface surface
+    auto mSurfaceName = pFlow::word("geometryPhasicFlow_")+pFlow::word(pFlow::triSurfaceFile__);
+	pFlow::multiTriSurface surface
 	(
-		objectFile
+		pFlow::objectFile
 		(
 			mSurfaceName,
 			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
+			pFlow::objectFile::READ_NEVER,
+			pFlow::objectFile::WRITE_ALWAYS
 		),
 		nullptr
 	);
 	
-	wordVector materials;
-	wordList materialsList;
+	pFlow::wordVector materials;
+	pFlow::wordList materialsList;
 
-	wordVector motion;
-	wordList motionList;
+	pFlow::wordVector motion;
+	pFlow::wordList motionList;
 
 	for(auto& name:wallsDictName)
 	{
 		REPORT(1)<<"Creating wall "<<Green_Text(name)<<" from dictionary "<<surfacesDict.globalName() <<END_REPORT;
-		auto wallPtr = Wall::create( surfacesDict.subDict(name));
+		auto wallPtr = pFlow::Wall::create( surfacesDict.subDict(name));
 		auto& wall = wallPtr();
 		REPORT(1)<<"wall type is "<<Green_Text(wall.typeName())<<'\n'<<END_REPORT;		
 
-		realx3x3Vector trinalges(wall.name(), wall.triangles());
+		pFlow::realx3x3Vector trinalges(wall.name(), wall.triangles());
 		
 		surface.appendSurface(wall.name(), trinalges);
 		materials.push_back(wall.materialName());
@@ -108,7 +106,7 @@ int main( int argc, char* argv[] )
 	REPORT(1)<<"Selected wall motion components are "<<Cyan_Text(motionList)<<'\n'<<END_REPORT;
 		
 	REPORT(0)<< "\nCreating geometry . . ."<<END_REPORT;
-	auto geomPtr = geometry::create(
+	auto geomPtr = pFlow::geometry::create(
 		Control, 
 		proprties, 
 		surface, 

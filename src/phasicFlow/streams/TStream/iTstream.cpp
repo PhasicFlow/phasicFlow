@@ -325,7 +325,7 @@ void pFlow::iTstream::reset()
 size_t pFlow::iTstream::tell() 
 {
     notImplementedFunction;
-    return -1;
+    return static_cast<size_t>(-1);
 }
 
 const pFlow::tokenList& pFlow::iTstream::tokens()const

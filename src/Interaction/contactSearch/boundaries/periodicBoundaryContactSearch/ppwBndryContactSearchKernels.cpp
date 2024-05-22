@@ -80,14 +80,14 @@ pFlow::uint32 pFlow::pweBndryContactSearchKernels::broadSearchPP
 				if(!searchCells.inCellRange(ind))continue;
 
 				uint32 thisI = head(ind.x(),ind.y(),ind.z());
-				while (thisI!=-1)
+				while (thisI!=static_cast<uint32>(-1))
 				{				
 					
 					auto d_n = sizeRatio*diams[thisI];
 					
                     // first item is for this boundary and second itme, for mirror 
 					if(sphereSphereCheckB(p_m, points[thisI], d_m, d_n)&&
-                       ppPairs.insert(thisI,mrrI) == -1)
+                       ppPairs.insert(thisI,mrrI) == static_cast<uint32>(-1))
 					{
 						getFullUpdate++;	
 					}

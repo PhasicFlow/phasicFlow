@@ -82,7 +82,6 @@ protected:
 		return true;
 	}
 
-	void impl_setTime(uint32 iter, real t, real dt)const;
 
 public:
 	
@@ -99,8 +98,11 @@ public:
 	/// Destructor 
 	~vibratingMotion()override = default;
 
+    using fileDictionary::write;
     
 	bool write(iOstream& os, const IOPattern& iop)const override;
+
+    
 
 	static
     auto noneComponent()
@@ -108,6 +110,8 @@ public:
       return vibrating();
     }
 
+    // TODO: make this protected
+    void impl_setTime(uint32 iter, real t, real dt)const;
 };
 
 } // pFlow

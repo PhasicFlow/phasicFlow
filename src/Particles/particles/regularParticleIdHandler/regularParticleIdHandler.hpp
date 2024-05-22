@@ -31,7 +31,7 @@ class regularParticleIdHandler
 {
 private:
     
-    uint32 maxId_ = -1;
+    uint32 maxId_ = static_cast<uint32>(-1);
 
   bool initialIdCheck()override; 
 public:
