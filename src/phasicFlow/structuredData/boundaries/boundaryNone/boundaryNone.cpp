@@ -34,6 +34,7 @@ pFlow::boundaryNone::boundaryNone
 
 bool pFlow::boundaryNone::beforeIteration
 (
+	uint32 step,
 	uint32 iterNum, 
 	real t,
 	real dt
