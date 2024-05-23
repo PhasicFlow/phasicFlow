@@ -372,28 +372,20 @@ public:
             return span<word>(const_cast<word*>(container_.data()), container_.size());
         }
 		
-		INLINE_FUNCTION_H
-		bool insertSetElement(const uint32IndexContainer& indices, const word& val)
-        {
-            notImplementedFunction;
-            return false;
-        }
 		
-		INLINE_FUNCTION_H
-		bool insertSetElement(const uint32IndexContainer& indices, const std::vector<word>& vals)
-        {
-            notImplementedFunction;
-            return false;
-        }
+		bool insertSetElement(const uint32IndexContainer& indices, const word& val);
+        
 		
-		INLINE_FUNCTION_H
+		
+		bool insertSetElement(const uint32IndexContainer& indices, const std::vector<word>& vals);
+        
+		
+		
 		bool insertSetElement(
 			const uint32IndexContainer& indices, 
-			const ViewType1D<word, memory_space> vals)
-        {
-            notImplementedFunction;
-            return false;
-        }
+			const ViewType1D<word, memory_space> vals
+        );
+        
 
 		INLINE_FUNCTION_H
 		bool reorderItems(const uint32IndexContainer& indices)
