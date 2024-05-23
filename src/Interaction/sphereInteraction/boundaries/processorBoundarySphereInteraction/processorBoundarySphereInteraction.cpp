@@ -106,7 +106,7 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 			return true;
 		}
 		
-		if(iter % 1000 == 0u)
+		if(iter % 100 == 0u)
 		{
 			pOutput<<"inter "<< inter_.totalTime()<<endl;
 			pOutput<<"send "<< send_.totalTime()<<endl<<endl;;
@@ -144,7 +144,7 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 			return true;
 		}
 		
-		if(iter % 1000 == 0u)
+		if(iter % 100 == 0u)
 		{
 			pOutput<<"recive "<< recv_.totalTime()<<endl;
 			pOutput<<"add "<< add_.totalTime()<<endl<<endl;

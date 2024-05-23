@@ -42,6 +42,10 @@ namespace pFlow::MPI
 
 		uint32               thisNumPoints_ = 0;
 
+		Request 			 numPointsRequest_ = RequestNull;
+
+		Request 			 numPointsRequest0_ = RequestNull;
+
 		realx3Vector_D       neighborProcPoints_;
 
 		dataSender<realx3>   sender_;
@@ -87,7 +91,7 @@ namespace pFlow::MPI
 			boundaryProcessor,
 			dictionary);
 
-		bool beforeIteration(uint32 iterNum, real t, real dt) override;
+		bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) override;
 
 		bool iterate(uint32 iterNum, real t, real dt) override;
 

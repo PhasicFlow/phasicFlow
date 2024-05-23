@@ -65,43 +65,61 @@ pFlow::MPI::boundaryProcessor::boundaryProcessor(
 }
 
 bool
-pFlow::MPI::boundaryProcessor::beforeIteration(uint32 iterNum, real t, real dt)
+pFlow::MPI::boundaryProcessor::beforeIteration(
+	uint32 step, 
+	uint32 iterNum, 
+	real t, 
+	real dt)
 {
-
-	thisNumPoints_ = size();
-
-	auto req = MPI_REQUEST_NULL;
-	MPI_Isend(
-		&thisNumPoints_,
-		1,
-		MPI_UNSIGNED,
-		neighborProcessorNo(),
-		thisBoundaryIndex(),
-		pFlowProcessors().localCommunicator(),
-		&req);
-
-	MPI_Recv(
-		&neighborProcNumPoints_,
-		1,
-		MPI_UNSIGNED,
-		neighborProcessorNo(),
-		mirrorBoundaryIndex(),
-		pFlowProcessors().localCommunicator(),
-		MPI_STATUS_IGNORE
-	);
-	MPI_Request_free(&req);
-
-	anyList varList;
-	message msg;
-
-	varList.emplaceBack(msg.addAndName(message::BNDR_PROC_SIZE_CHANGED), neighborProcNumPoints_);
-
-	if( !notify(iterNum, t, dt, msg, varList) )
+		if(step == 1 )
 	{
-		fatalErrorInFunction;
-		return false;
+		thisNumPoints_ = size();
+
+		uint32 oldNeighborProcNumPoints = neighborProcNumPoints_;
+
+		MPI_Isend(
+			&thisNumPoints_,
+			1,
+			MPI_UNSIGNED,
+			neighborProcessorNo(),
+			thisBoundaryIndex(),
+			pFlowProcessors().localCommunicator(),
+			&numPointsRequest0_);
+
+		MPI_Irecv(
+			&neighborProcNumPoints_,
+			1,
+			MPI_UNSIGNED,
+			neighborProcessorNo(),
+			mirrorBoundaryIndex(),
+			pFlowProcessors().localCommunicator(),
+			&numPointsRequest_
+		);
+
 	}
-	
+	else if(step == 2 )
+	{
+		if(numPointsRequest_ != RequestNull)
+		{
+			MPI_Wait(&numPointsRequest_, MPI_STATUS_IGNORE);
+			if(numPointsRequest0_!= RequestNull)
+			{
+				MPI_Request_free(&numPointsRequest0_);
+			}
+		}
+
+		anyList varList;
+		message msg;
+
+		varList.emplaceBack(msg.addAndName(message::BNDR_PROC_SIZE_CHANGED), neighborProcNumPoints_);
+
+		if( !notify(iterNum, t, dt, msg, varList) )
+		{
+			fatalErrorInFunction;
+			return false;
+		}
+	}
+
 	return true;
 }
 
