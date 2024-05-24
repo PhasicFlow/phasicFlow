@@ -51,10 +51,12 @@ pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
 
 
 bool pFlow::boundaryPeriodic::beforeIteration(
+	uint32 step,
     uint32 iterNum,
     real t,
     real dt)
 {
+	if(step!=2)return true;
 	// nothing have to be done
 	if(empty())
 	{

@@ -172,7 +172,17 @@ pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt, bool force)
 	
 	for (auto bdry : *this)
 	{
-		if (!bdry->beforeIteration(iter, t, dt))
+		if (!bdry->beforeIteration(1, iter, t, dt))
+		{
+			fatalErrorInFunction << "Error in beforeIteration in boundary "
+			                     << bdry->name() << endl;
+			return false;
+		}
+	}
+
+	for (auto bdry : *this)
+	{
+		if (!bdry->beforeIteration(2, iter, t, dt))
 		{
 			fatalErrorInFunction << "Error in beforeIteration in boundary "
 			                     << bdry->name() << endl;
