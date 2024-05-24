@@ -197,12 +197,12 @@ public:
 		
 	//// - IO operations 
 		
-		bool read(iIstream& is);
+		bool read(iIstream& is, bool resume = false);
 		
 		bool write(iOstream& os)const;			
 
 
-		bool read(iIstream& is, const IOPattern& iop);
+		bool read(iIstream& is, const IOPattern& iop, bool resume = false);
 		
 
 		bool write(iOstream& os, const IOPattern& iop )const;			
