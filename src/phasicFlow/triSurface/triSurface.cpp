@@ -257,7 +257,7 @@ pFlow::triSurface::triSurface
 bool pFlow::triSurface::read(iIstream &is, const IOPattern &iop)
 {
 	points_.clear();
-	if(!points_.read(is, iop))
+	if(!points_.read(is, iop, true))
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
 		" when reading field "<< points_.name()<<endl;
@@ -265,7 +265,7 @@ bool pFlow::triSurface::read(iIstream &is, const IOPattern &iop)
 	}
 
 	vertices_.clear();
-	if(!vertices_.read(is, iop))
+	if(!vertices_.read(is, iop, true))
 	{
 		ioErrorInFile(is.name(), is.lineNumber())<<
 		" when reading field "<< vertices_.name()<<endl;

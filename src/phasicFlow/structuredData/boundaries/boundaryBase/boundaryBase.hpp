@@ -339,7 +339,7 @@ public:
 	
 
 	virtual 
-    bool beforeIteration(uint32 iterNum, real t, real dt) = 0 ;
+    bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) = 0 ;
 
 	virtual 
     bool iterate(uint32 iterNum, real t, real dt) = 0;
