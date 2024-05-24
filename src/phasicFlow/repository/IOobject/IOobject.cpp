@@ -126,6 +126,7 @@ bool pFlow::IOobject::writeObject() const
         {
             if(auto ptrOS = outStream(); ptrOS )
             {
+                pOutput<<"Should write field "<<name() <<" file "<<ptrOS->name()<<endl;
                 return writeObject(ptrOS());
             }
             else
@@ -140,6 +141,7 @@ bool pFlow::IOobject::writeObject() const
             
             if(auto ptrOS = dummyOutStream(); ptrOS )
             {
+                pOutput<<"Should write field "<< name()<< " file " <<ptrOS->name()<<endl;
                 return writeObject(ptrOS());
             }
             else

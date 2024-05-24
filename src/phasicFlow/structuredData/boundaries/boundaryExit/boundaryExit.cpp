@@ -49,6 +49,7 @@ bool pFlow::boundaryExit::beforeIteration
 )
 {
 	if(step!= 2 )return true;
+	
 	if( !boundaryListUpdate(iterNum))return true;
 
 	// nothing have to be done
