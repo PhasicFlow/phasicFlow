@@ -9,9 +9,8 @@ fileFormat  ASCII;
 setFields
 {
 	/*
-	    	Default value for fields defined for particles
-		These fields should always be defined for simulations with 
-		spherical particles.
+	    	Default value for fields defined for particles:
+		These fields should always be defined for simulations with spherical particles
 	*/
 
 	defaultValue 
