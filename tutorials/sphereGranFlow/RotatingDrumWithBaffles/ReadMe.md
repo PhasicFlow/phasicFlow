@@ -1,5 +1,6 @@
 # Problem Definition 
-The problem is to simulate a rotating drum with the diameter **0.24 m**, the length **0.1 m** and **6** Baffles, rotating at **15 rpm**. This drum is filled with **20000** Particles.The timestep for integration is **0.00001 s**. There are 2 types of Particles in this drum each are being inserted during simulation to fill the drum.
+
+The problem is to simulate a rotating drum with the diameter **0.24 m**, the length **0.1 m** and **6** Baffles, rotating at **15 rpm**. This drum is filled with **20000** Particles.The timestep for integration is **0.00001 s**. There are 2 types of Particles in this drum each are being inserted during simulation to fill the drum..
 * **12500** Particles with **4 mm** diameter, at the rate of 12500 particles/s for 1 sec. 
 * **7500** Particles with **5mm** diameter, at the rate of 7500 particles/s for 1 sec.   
 
@@ -20,18 +21,20 @@ As it has been explained in the previous cases, the simulation case setup is bas
 ## Defining small and large particles 
 Then in the `caseSetup/sphereShape` the diameter and the material name of the particles are defined.  Two sizes are defined: 4 and 5 mm. 
 ```C++
-// names of shapes 
-names 		(smallSphere largeSphere);
-// diameter of shapes (m) 	
-diameters 	(0.004 0.005);
-// material names for shapes 			
-materials	(lightMat heavyMat);
+
+names 		(smallSphere largeSphere);         // names of shapes 
+
+diameters 	(0.004 0.005);                     // diameter of shapes (m) 	
+	
+materials	(lightMat heavyMat);               // material names for shapes 		
 ```
 
 
 ## Particle Insertion
-In this case we have two region for inserting our particles. In the both region we define rate of insertion, start and end time of insertion, information for the volume of the space throught which particles are being inserted. The insertion phase in the simulation is performed between times 0 and 1 seconds.   
-For example, for the insertion region for inserting light particles is shown below.
+
+In this case we have two regions for inserting our particles. In both regions we define the insertion rate, the start and end time of the insertion, information about the volume of space through which the particles are inserted. The insertion phase in the simulation is performed between times 0 and 1 second.   
+
+For example, the insertion region for inserting light particles is shown below.
 
 <div align="center"> 
 in <b>caseSetup/particleInsertion</b> file
@@ -42,29 +45,47 @@ in <b>caseSetup/particleInsertion</b> file
 // Right Layer Region
 layerrightregion 
 {
-// type of insertion region
-   type	          cylinderRegion;
-// insertion rate (particles/s)    
-   rate 	  12500;
-// Start time of LightParticles insertion (s)
-   startTime 	  0; 
-// End time of LightParticles insertion (s)      
-   endTime   	  1;
-// Time Interval of LightParticles insertion (s)
-   interval       0.025; 
+   regionType	          cylinder;          // type of insertion region
 
-   cylinderRegionInfo 
+   cylinderInfo 
    {
-// Coordinates of cylinderRegion (m,m,m)
-   	p2 (-0.15 0.25 0.05);
-   	p1 (-0.15 0.24	0.05);
-// radius of cylinder (m)
-   	radius 0.035;
+      /*    coordinates of center of both ends of the insertion cylinder on 
+         the right side of the RotatingDrumWithBaffles(m,m,m)
+      */
+
+      p2 (-0.15 0.25 0.05);          // (m,m,m)
+
+      p1 (-0.15 0.24 0.05);          // (m,m,m)
+
+      radius         0.035;          // radius of cylinder (m)
+   }
+
+   timeControl           simulationTime;
+
+   insertionInterval               0.03;          // seconds 
+  
+   rate 	                         12500;          // insertion rate (particles/s)  
+
+   startTime 	                       0;          // Start time of LightParticles insertion (s)
+   
+   endTime   	                       1;          // End time of LightParticles insertion (s)   
+
+   interval                       0.025;          // Time Interval of LightParticles insertion (s)
+
+   setFields
+   {
+      velocity    realx3 (0.0 -0.6 0.0);          // initial velocity of inserted particles
+   }
+   
+   mixture
+   {
+      smallSphere                     1;          // mixture composition of inserted particles 
    }
 }
 ```
 ## Interaction between particles and walls
-In `caseSetup/interaction` file, material names and properties and interaction parameters are defined: interaction between the particles and the shell of rotating drum. Since we are defining 3 materials for simulation, the interaction matrix is 3x3, while we are only required to enter upper-triangle elements (interactions are symetric). 
+
+The `caseSetup/interaction` file defines the material names and properties as well as the interaction parameters: the interaction between the particles and the shell of the rotating drum. Since we define 3 materials for simulation, the interaction matrix is 3x3, while we only need to enter upper triangle elements (interactions are symmetric). 
 
 ```C++
 // a list of materials names
@@ -163,6 +184,7 @@ surfaces
 }
 ```
 ### Rotating Axis Info
+
 In this part of `geometryDict` the information of rotating axis and speed of rotation are defined. The start of rotation is at 2 s. The first 2 seconds of simulation is for allowing particles to settle donw in the drum. 
 
 ```C++
@@ -184,6 +206,7 @@ rotatingAxisMotionInfo
 }
 ```
 ## Performing Simulation
+
 To perform simulations, enter the following commands one after another in the terminal. 
 
 Enter `$ particlesPhasicFlow` command to create the initial fields for particles.  
