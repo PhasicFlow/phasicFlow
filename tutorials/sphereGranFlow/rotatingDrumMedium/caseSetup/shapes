@@ -2,13 +2,13 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-objectName particleInsertion;
-objectType dicrionary;
+objectName 	sphereDict;
+objectType 	sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+names 		(glassBead); 	      // names of shapes 
 
-active  no;          // is insertion active?
+diameters 	    (0.004);		  // diameter of shapes 
 
-collisionCheck No;   // not implemented for yes
-
+materials	 (glassMat);		  // material names for shapes 
 

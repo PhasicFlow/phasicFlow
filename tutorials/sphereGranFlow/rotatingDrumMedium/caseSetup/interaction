@@ -6,60 +6,49 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+materials (glassMat wallMat);          // a list of materials names
 
-materials   (glassMat wallMat); // a list of materials names
-densities   (2500.0 2500);      // density of materials [kg/m3]
+densities    (2500.0 2500.0);          // density of materials [kg/m3]
 
 contactListType   sortedContactList;
+
+contactSearch
+{
+   
+   method                NBS;          // method for broad search particle-particle
+   
+   updateInterval         10;
+
+   sizeRatio             1.1;
+
+   cellExtent           0.55;
+
+   adjustableBox         Yes;
+}
 
 model
 {
    contactForceModel nonLinearLimited;
-   rollingFrictionModel normal;
+
+   rollingFrictionModel        normal;
 
    /*
-   Property (glassMat-glassMat      glassMat-wallMat
-                                    wallMat-wallMat);
+      glass-glass Properties     glass-wall Properties     wall-wall Properties
    */
 
-   Yeff (1.0e6 1.0e6  // Young modulus [Pa]
-               1.0e6);
+   Yeff (1.0e6 1.0e6 1.0e6);                     // Young modulus [Pa]
+
+   Geff (0.8e6 0.8e6 0.8e6);                     // Shear modulus [Pa]
+
+   nu      (0.25 0.25 0.25);                     // Poisson's ratio [-]
+
+   en      (0.97 0.85 1.00);                     // coefficient of normal restitution
+
+   et         (1.0 1.0 1.0);                     // coefficient of tangential restitution 
+
+   mu      (0.65 0.65 0.65);                     // dynamic friction 
    
-   Geff (0.8e6 0.8e6  // Shear modulus [Pa]
-               0.8e6);
-
-   nu    (0.25 0.25  // Poisson's ratio [-]
-               0.25);
-
-   en (0.97  0.85   // coefficient of normal restitution
-             1.00);
-
-   et (1.0   1.0    // coefficient of tangential restitution 
-             1.0);
-
-   mu (0.65  0.65   // dynamic friction 
-             0.65);
-
-   mur (0.1  0.1    // rolling friction 
-             0.1);
-        
+   mur        (0.1 0.1 0.1);                     // rolling friction     
 }
 
-contactSearch
-{
-   method         NBS;           // method for broad search particle-particle
-   wallMapping    cellMapping;   // method for broad search particle-wall 
 
-   NBSInfo
-   {
-      updateFrequency 20;        // each 20 timesteps, update neighbor list 
-      sizeRatio      1.1;        // bounding box size to particle diameter (max)
-   }
-
-   cellMappingInfo
-   {
-      updateFrequency 20;        // each 20 timesteps, update neighbor list  
-      cellExtent     0.6;        // bounding box for particle-wall search (> 0.5)
-   }
-
-}
