@@ -42,3 +42,4 @@ positionParticles                                          // positions particle
 		max ( 0.08  0.08 0.098);	      // upper corner point of the box 
 	} 
 }
+
