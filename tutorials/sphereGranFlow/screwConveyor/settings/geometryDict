@@ -6,40 +6,50 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat 	ASCII;
 /*---------------------------------------------------------------------------*/
+motionModel rotatingAxis;          // motion model can be rotatingAxis or stationary or vibrating
 
-// motion model: rotating object around an axis
-motionModel rotatingAxisMotion; 
+rotatingAxisInfo                   // information for rotatingAxisMotion motion model 
+{
+	rotAxis 
+	{
+		p1  (1.09635 0.2010556 0.22313511);	         // first point for the axis of rotation 
+		
+		p2 (0.0957492 0.201556 0.22313511);	         // second point for the axis of rotation
+
+		omega     3; 		                         // rotation speed (rad/s)
+
+		startTime 5;                                 // start time of rotation
+
+		endTime  30;                                 // end time of rotation
+	}
+} 
 
 surfaces
 {
 	helix
 	{
-		type 	 stlWall;  	// type of the wall
-		file 	 helix.stl;	// file name in stl folder		
-		material prop1;   // material name of this wall
-		motion 	 rotAxis;	// motion component name 
+		type 	   stlWall;  	     // type of the wall
+
+		file 	 helix.stl;	         // file name in stl folder	
+
+		material     prop1;          // material name of this wall
+
+		motion 	   rotAxis;	         // motion component name 
 	}
 
 	shell
 	{
-		type 	 stlWall;  	// type of the wall
-		file 	 shell.stl;	// file name in stl folder		
-		material prop1;   // material name of this wall
-		motion 	 none;		// motion component name 
-	}
+		type 	   stlWall;  	     // type of the wall
 
-}
+		file 	 shell.stl;	         // file name in stl folder	
 
+		material     prop1;          // material name of this wall
 
-rotatingAxisMotionInfo
-{
-	rotAxis 
-	{
-		p1 (1.09635 0.2010556 0.22313511);	// first point for the axis of rotation 
-		p2 (0.0957492 0.201556 0.22313511);	// second point for the axis of rotation
-		omega 3; 		// rotation speed (rad/s)
-		startTime 5;
-		endTime 30;
+		motion 	      none;		     // motion component name 
 	}
 }
+
+
+
+
 

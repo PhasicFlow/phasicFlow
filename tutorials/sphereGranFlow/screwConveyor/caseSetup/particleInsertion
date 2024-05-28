@@ -6,11 +6,9 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat 	ASCII;
 /*---------------------------------------------------------------------------*/
+active           yes;          // is insertion active -> yes or no
 
-
-active  yes;          // is insertion active?
-
-collisionCheck No;   // not implemented for yes
+checkForCollision No;          // is checked          -> yes or no
 
 /*
 five layers of particles are packed one-by-one using 5 insertion steps. 
@@ -18,29 +16,42 @@ five layers of particles are packed one-by-one using 5 insertion steps.
 
 layer0
 {
-   type		      cylinderRegion; // type of insertion region
-   rate 	      5000;  // insertion rate (particles/s)
-   startTime 	  0;      // (s)
-   endTime   	  100;    // (s)
-   interval       0.03;  //s  
+   regionType		      cylinder;            // type of insertion region
 
-   cylinderRegionInfo 
+   cylinderInfo 
    {
-   	radius 	0.09;       // radius of cylinder (m)
-   	p1 (0.22 0.73 0.25); // (m,m,m)
-   	p2 (0.22 0.742 0.25); // (m,m,m)
+      // coordinates of center of both ends of the insertion cylinder on 
+      // the right side of the screwConveyor(m,m,m)
+
+      p1  (0.22 0.73 0.25);          // (m,m,m)
+
+      p2 (0.22 0.742 0.25);          // (m,m,m)
+
+      radius          0.09;          // radius of cylinder (m)
    }
+
+   timeControl      simulationTime;
+
+   insertionInterval       0.03;          // seconds  
+
+   rate 	                  5000;          // insertion rate (particles/s)
+
+   startTime 	             0.0;          // seconds
+
+   endTime   	           100.0;          // seconds
    
    setFields
    {
-     velocity    realx3 (0.0 -0.6 -0); // initial velocity of inserted particles 
+      velocity    realx3 (0.0 -0.6 -0);          // initial velocity of inserted particles 
    }
    
    mixture
    {
-      sphere1 1; // mixture composition of inserted particles 
-      
+      sphere1 1;          // mixture composition of inserted particles   
    }
 }
+
+
+
 
 
