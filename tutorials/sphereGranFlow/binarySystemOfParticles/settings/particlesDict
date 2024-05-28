@@ -71,5 +71,3 @@ positionParticles 				                           // positions particles
 		radius 		0.117;		                           // radius of cylinder 
 	}
 }
-
-

@@ -83,5 +83,3 @@ surfaces
 		motion       rotAxis;          // motion component name 
 	}
 }
-
-

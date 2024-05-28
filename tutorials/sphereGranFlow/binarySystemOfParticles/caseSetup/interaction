@@ -49,4 +49,3 @@ model
    mur      (0.1);            // rolling friction     
 }
 
-
