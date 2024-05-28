@@ -6,7 +6,6 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  	ASCII;
 /*---------------------------------------------------------------------------*/
-
 setFields
 {
 	/*
@@ -17,32 +16,36 @@ setFields
 
 	defaultValue 
 	{
-		// linear velocity (m/s)
-		velocity 	realx3 	(0 0 0);
 		
-		// linear acceleration (m/s2)
-		acceleration 	realx3 	(0 0 0);
+		velocity 	    realx3 	(0 0 0);          // linear velocity (m/s)
+
+		acceleration 	realx3 	(0 0 0);          // linear acceleration (m/s2)
+
+		rVelocity	 	realx3 	(0 0 0);          // rotational velocity (rad/s)
 		
-		// rotational velocity (rad/s)
-		rVelocity	 	realx3 	(0 0 0);
-		
-		// name of the particle shape
-		shapeName 	word	smallSphere;
+		shapeName 	word	smallSphere;          // name of the particle shape
 	}
 
 	selectors
 	{}
 }
 
-// positions particles 
-positionParticles
+positionParticles                        // positions particles 
 {
-        // no particle is initially in the simulation
-	method empty;
+	method               empty;          // other options: ordered and random 
 
-        // maximum number of particles in the simulation
-	maxNumberOfParticles 25000;
+    maxNumberOfParticles 25000;          // maximum number of particles in the simulation
 	
-	// perform initial sorting based on morton code?
-	mortonSorting Yes;
+	regionType             box;          // other options: cylinder and sphere
+
+	boxInfo                              // box for positioning particles 
+	{
+		min (-0.08 -0.08 0.015);         // lower corner point of the box 
+
+		max ( 0.08  0.08 0.098);         // upper corner point of the box 
+	}
 }
+
+
+
+

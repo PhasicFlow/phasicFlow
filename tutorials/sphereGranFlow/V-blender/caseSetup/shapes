@@ -6,12 +6,11 @@ objectName 	sphereDict;
 objectType 	sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+names 		(smallSphere largeSphere);          // names of particles
 
-// names of particles
-names 		(smallSphere largeSphere);
+diameters 	            (0.01 0.0101);          // diameter of particles
 
-// diameter of particles
-diameters 	(0.01 0.0101);
+materials	      (lightMat lightMat);          // material of the particles
 
-// material names for particles
-materials	(lightMat lightMat); 
+
+
