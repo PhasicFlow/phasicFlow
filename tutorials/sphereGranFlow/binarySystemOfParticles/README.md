@@ -1,6 +1,6 @@
 # Problem definition
-A rotating drum with two particle sizes is randomly filled and let it rotate to see the segregation of particles.
-The focus of this tutorial is to show how to use the pre-processing tool, `particlesPhasicFlow`, to create the initial mixture of small and large particles. 
+
+A rotating drum is randomly filled with two particle sizes and rotated to observe particle segregation. The focus of this tutorial is to show how to use the preprocessing tool `particlesPhasicFlow` to create the initial mixture of small and large particles. 
 
 **Note:** It is supposed that you have reviewed [simulating a rotating drum](https://github.com/PhasicFlow/phasicFlow/wiki/Simulating-a-rotating-drum) tutorial before starting this tutorial.
 
@@ -14,11 +14,13 @@ a view of the rotating drum with small and large particles after 7 seconds of ro
 ***
 
 # Case setup
-PhasicFlow simulation case setup is based on the text-based files that we provide in two folders located in the simulation case folder: `settings` and `caseSetup`. Here we will have a look at some important files and the rest can be found in the tutorial folder of this case setup. 
+
+In the file `caseSetup/sphereShape` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
 
 [Simulation case setup files can be found in tutorials/sphereGranFlow folder.](https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/binarySystemOfParticles)
 ### Shape definition 
-In file `caseSetup/sphereShape`, two particle types with names `smallSphere` and `largeSphere` and diameters 3 and 5 mm are defined. 
+
+In the file `caseSetup/sphereShape` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
 
 <div align="center"> 
 in <b>caseSetup/sphereShape</b> file
@@ -31,7 +33,7 @@ materials    (prop1  prop1);       // material names for shapes
 ```
 ### Positioning and initial mixture 
 
-In dictionary `positionParticles` located in file `settings/particlesDict`, 30000 particles are located in a cylindrical region. These particles are positioned in order along `z`, `x` and then `y` axis with 0.005 m distance between their centers. 
+In the dictionary `positionParticles` located in file `settings/particlesDict`, 30000 particles are located in a cylindrical region. These particles are positioned in order along `z`, `x` and then `y` axis with 0.005 m distance between their centers. 
 
 <div align="center"> 
 in <b>settings/particlesDict</b> file
@@ -42,10 +44,16 @@ in <b>settings/particlesDict</b> file
 // positions particles 
 positionParticles
 {
-    method positionOrdered;     // ordered positioning
+    method ordered;     // other options: random or empty
 
-    maxNumberOfParticles 30001; // maximum number of particles in the simulation
-    mortonSorting Yes;          // perform initial sorting based on morton code?   
+    orderedInfo
+    {        
+        diameter 0.005;     // minimum space between centers of particles
+        numPoints 30000;    // number of particles in the simulation 
+        axisOrder (z x y);  // axis order for filling the space with particles
+    }
+
+    regionType cylinder;                                   // other options: box and sphere 
 
     cylinder  // cylinder region for positioning particles 
     {
@@ -53,17 +61,9 @@ positionParticles
         p2 (0.0 0.0 0.097);     // end point of cylinder axis (m m m)
         radius       0.117;     // radius of cylinder (m)
     }
-        
-    positionOrderedInfo
-    {        
-        diameter 0.005;     // minimum space between centers of particles
-        numPoints 30000;    // number of particles in the simulation 
-        axisOrder (z x y);  // axis order for filling the space with particles
-    }
 }
 ```
-
-In dictionary `setFields` located in file `settings/particlesDict`, you define the initial `velocity`, `acceleration`, `rotVelocity`, and  `shapeName` fields for all 30000 particles in the simulation. In `selectors` dictionary, you can select  subsets of particles and set the field value for these subsets. In `shapeAssigne` sub-dictionary, the `selectRange` selector is defined. It defines a range with `begin` (begin index), `end` (end index) and `stride` to select particles. And in `fieldValue` sub-dictionary, the fields values for selected particles are set (any number of field values can be set here).
+In the `setFields` dictionary, located in the `settings/particlesDict` file, you define the initial `velocity`, `acceleration`, `rotVelocity` and `shapeName` fields for all 30000 particles in the simulation. In the `selectors' dictionary, you can select subsets of particles and set the field value for those subsets. The `selectRange` selector is defined in the `shapeAssigne` subdictionary. It defines a range with `begin`, `end` and `stride` to select particles. And in the `fieldValue` subdictionary the field values for selected particles are set (any number of field values can be set here).
 
 **Note:** Other selectors are: `selectBox` that selects particles inside a box and `randomSelect` that selects particles randomly from a given index range. 
 
@@ -77,7 +77,8 @@ setFields
     /*
         Default value for fields defined for particles
     These fields should always be defined for simulations with 
-    spherical particles.*/
+    spherical particles.
+*/
 
     defaultValue 
     {
@@ -91,8 +92,9 @@ setFields
     {
         shapeAssigne
         {
-            selector     selectRange; // type of point selector
-            selectRangeInfo
+            selector     stridedRange; 				       // other options: box, cylinder, sphere, randomPoints
+
+            stridedRangeInfo
             {
                 begin   0;            // begin index of points
                 end     30000;        // end index of points 
@@ -101,10 +103,10 @@ setFields
             fieldValue  // fields that the selector is applied to 
             {
                 /*
-                sets shapeName of the selected points to largeSphere*/
+                    sets shapeName of the selected points to largeSphere
+                */
                 shapeName     word     largeSphere;
             }
-        
     }
 }
 

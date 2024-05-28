@@ -21,10 +21,10 @@ boundaries
 	neighborListUpdateInterval 30;
 	
 	// Determines how often do you want to update the new changes in the boundary
-	updateInterval 10;
+	updateInterval             10;
 
 	// The distance from the boundary plane within which particles are marked to be in the boundary list 
-	neighborLength 0.004;
+	neighborLength          0.004;
 
 	left
 	{
@@ -55,4 +55,6 @@ boundaries
 	{
 		type exit;           // other options: periodict, reflective 
 	}
-}
+}    
+
+
