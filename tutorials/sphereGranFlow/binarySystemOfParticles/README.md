@@ -28,8 +28,8 @@ in <b>caseSetup/sphereShape</b> file
 
 ```C++
 names        (smallSphere largeSphere); // names of shapes 
-diameters    (0.003     0.005);    // diameter of shapes (m)
-materials    (prop1  prop1);       // material names for shapes 
+diameters    (0.003     0.005);         // diameter of shapes (m)
+materials    (prop1  prop1);            // material names for shapes 
 ```
 ### Positioning and initial mixture 
 

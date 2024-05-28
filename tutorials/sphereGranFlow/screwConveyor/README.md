@@ -1,6 +1,8 @@
 # Simulating a screw conveyor {#screwConveyor}
 ## Problem definition
-The problem is to simulate a screw conveyorwith the diameter 0.2 m and the length 1 m and 20 cm pitch. It is filled with 30,000 4-mm spherical particles. The timestep for integration is 0.00001 s.
+
+The problem is to simulate a screw conveyor with a diameter of 0.2 m, a length of 1 m and a pitch of 20 cm. It is filled with 30,000 4 mm spherical particles. The integration time step is 0.00001 s.
+
 <div align="center"><b>
 a view of rotating drum
 
@@ -10,14 +12,14 @@ a view of rotating drum
 ***
 
 ## Setting up the case 
-PhasicFlow simulation case setup is based on the text-based scripts that we provide in two folders located in the simulation case folder: `settings` and `caseSetup` (You can find the case setup files in the above folders.
-All the commands should be entered in the terminal while the current working directory is the simulation case folder (at the top of the `caseSetup` and `settings`).
- 
 
+The PhasicFlow simulation case setup is based on the text-based scripts that we provide in two folders located in the simulation case folder: `settings` and `caseSetup` (You can find the case setup files in the above folders.
+All commands should be entered in the terminal with the current working directory being the simulation case folder (at the top of the `caseSetup` and `settings` folders).
+ 
 ### Creating particles
 
-Open the file  `settings/particlesDict`. Two dictionaries, `positionParticles` and `setFields` position particles and set the field values for the particles. 
-In dictionary `positionParticles`, the positioning `method` is `positionOrdered`, which position particles in order in the space defined by `box`. `box` space is defined by two corner points `min` and `max`. In dictionary `positionOrderedInfo`, `numPoints` defines number of particles; `diameter`, the distance between two adjacent particles, and `axisOrder` defines the axis order for filling the space by particles. 
+Open the file `settings/particlesDict`. Two dictionaries, `positionParticles` and `setFields`, position particles and set field values for the particles. 
+In the dictionary `positionParticles`, the positioning method is `positionOrdered`, which positions particles in order in the space defined by `box`. The `box` space is defined by two corner points `min` and `max`. In the dictionary `positionOrderedInfo`, `numPoints` defines the number of particles, `diameter` the distance between two adjacent particles, and `axisOrder` the axis order for filling the space with particles. 
 
 <div align="center"> 
 in <b>settings/particlesDict</b> file
@@ -26,11 +28,18 @@ in <b>settings/particlesDict</b> file
 ```C++
 positionParticles
 {
-	method empty;     		// creates the required fields with zero particles (empty). 
+	method empty;     		        // other options: ordered and random 
 
-	maxNumberOfParticles 	50000; // maximum number of particles in the simulation
-	mortonSorting 			Yes;    // perform initial sorting based on morton code?   
+        maxNumberOfParticles 	50000;          // maximum number of particles in the simulation
 
+	regionType                box;          // other options: cylinder and sphere
+
+	boxInfo                                 // box for positioning particles 
+	{
+		min    (-0.1 -0.08 0.015);          // lower corner point of the box 
+
+		max       (0.1 0.0 0.098);          // upper corner point of the box 
+	} 
 }
 ```
 
@@ -39,31 +48,36 @@ Enter the following command in the terminal to create the particles and store th
 `> particlesPhasicFlow`
  
 ### Creating geometry
-In file `settings/geometryDict` , you can provide information for creating geometry. Each simulation should have a `motionModel` that defines a model for moving the surfaces in the simulation. `rotatingAxisMotion` model defines a fixed axis which rotates around itself. The dictionary `rotAxis` defines an motion component with `p1` and `p2` as the end points of the axis and `omega` as the rotation speed in rad/s. You can define more than one motion component in a simulation. 
+
+In the `settings/geometryDict` file you can provide information for creating geometry. Each simulation should have a `motionModel` which defines a model for moving the surfaces in the simulation. The `rotatingAxisMotion' model defines a fixed axis that rotates around itself. The dictionary `rotAxis` defines a motion component with `p1` and `p2` as the end points of the axis and `omega` as the speed of rotation in rad/s. You can define more than one motion component in a simulation. 
 
 <div align="center"> 
 in <b>settings/geometryDict</b> file
 </div>
 
 ```C++
-motionModel rotatingAxisMotion; 
+motionModel rotatingAxis; 
 .
 .
 .
-rotatingAxisMotionInfo
+rotatingAxisInfo
 {
 	rotAxis 
 	{
-		p1 (1.09635 0.2010556 0.22313511);	// first point for the axis of rotation 
+		p1 (1.09635 0.2010556 0.22313511);	// first point for the axis of rotation
+
 		p2 (0.0957492 0.201556 0.22313511);	// second point for the axis of rotation
+
 		omega 3; 		// rotation speed (rad/s)
+
 		startTime 5;
+
 		endTime 30;
 	}
 }
 
 ```
-In the dictionary `surfaces` you can define all the surfaces (shell) in the simulation. Two main options are available: built-in geometries in PhasicFlow, and providing surfaces with stl file. Here we use built-in geometries. In `cylinder` dictionary, a cylindrical shell with end helix, `material` name `prop1`, `motion` component `none` is defined. `helix` define  plane helix at center of  cylindrical shell, `material` name `prop1` and `motion` component `rotAxis`.'rotAxis' is use for helix because it is rotating and 'none' is use for shell because It is motionless.
+In the dictionary `surfaces` you can define all surfaces (shell) in the simulation. There are two main options: built-in geometries in PhasicFlow and providing surfaces with stl file. Here we will use built-in geometries. In the `cylinder` dictionary a cylindrical shell with end helix, `material` name `prop1`, `motion` component `none` is defined. In `helix` we define a plane helix at the center of the cylindrical shell, `material` name `prop1` and `motion` component `rotAxis`. `rotAxis` is used for the helix because it is rotating and `none` is used for the shell because it is not moving.
 
 <div align="center"> 
 in <b>settings/geometryDict</b> file
@@ -76,7 +90,7 @@ surfaces
 	{
 		type 	 stlWall;  	// type of the wall
 		file 	 helix.stl;	// file name in stl folder		
-		material prop1;   // material name of this wall
+		material prop1;         // material name of this wall
 		motion 	 rotAxis;	// motion component name 
 	}
 
@@ -87,7 +101,6 @@ surfaces
 		material prop1;   // material name of this wall
 		motion 	 none;		// motion component name 
 	}
-
 }
 
 ```
@@ -97,7 +110,8 @@ Enter the following command in the terminal to create the geometry and store it 
 `> geometryPhasicFlow`
 
 ### Defining properties and interactions 
-In the file `caseSetup/interaction` , you find properties of materials. `materials` defines a list of material names in the simulation and `densities` sets the corresponding density of each material name. model dictionary defines the interaction model for particle-particle and particle-wall interactions. `contactForceModel` selects the model for mechanical contacts (here nonlinear model with limited tangential displacement) and `rollingFrictionModel` selects the model for calculating rolling friction. Other required prosperities should be defined in this dictionary. 
+
+The `caseSetup/interaction' file contains material properties. `materials` defines a list of material names in the simulation and `densities` sets the corresponding density of each material name. model dictionary defines the interaction model for particle-particle and particle-wall interactions. ContactForceModel selects the model for mechanical contacts (here nonlinear model with limited tangential displacement) and `rollingFrictionModel` selects the model for the calculation of rolling friction. Other required properties should be defined in this dictionary. 
 
 <div align="center"> 
 in <b>caseSetup/interaction</b> file
@@ -131,7 +145,7 @@ model
 }
 ```
 
-Dictionary `contactSearch` sets the methods for particle-particle and particle-wall contact search. `method` specifies the algorithm for finding neighbor list for particle-particle contacts and `wallMapping` shows how particles are mapped onto walls for finding neighbor list for particle-wall contacts. `updateFrequency` sets the frequency for updating neighbor list and `sizeRatio` sets the size of enlarged cells (with respect to particle diameter) for finding neighbor list. Larger `sizeRatio` include more particles in the neighbor list and you require to update it less frequent. 
+Dictionary `contactSearch` sets the methods for particle-particle and particle-wall contact search. method' specifies the algorithm for finding the neighbor list for particle-particle contacts and `wallMapping' specifies how particles are mapped to walls for finding the neighbor list for particle-wall contacts. `updateFrequency` specifies the frequency for updating the neighbor list and `sizeRatio` specifies the size of enlarged cells (with respect to particle diameter) for neighbor list search. Larger `sizeRatio` includes more particles in the neighbor list and you need to update it less frequently. 
 
 <div align="center"> 
 in <b>caseSetup/interaction</b> file
@@ -140,24 +154,17 @@ in <b>caseSetup/interaction</b> file
 ```C++
 contactSearch
 {
-   method         NBS;           // method for broad search particle-particle
-   wallMapping    cellMapping;   // method for broad search particle-wall 
+   method         NBS;          // method for broad search particle-particle
+   
+   updateInterval  10;
 
-   NBSInfo
-   {
-      updateFrequency 10;        // each 20 timesteps, update neighbor list 
-      sizeRatio      1.1;        // bounding box size to particle diameter (max)
-   }
+   sizeRatio      1.1;
 
-   cellMappingInfo
-   {
-      updateFrequency 10;        // each 20 timesteps, update neighbor list  
-      cellExtent     0.6;        // bounding box for particle-wall search (> 0.5)
-   }
+   cellExtent    0.55;
 
+   adjustableBox   No;
 }
 ```
-
 In the file `caseSetup/sphereShape`, you can define a list of `names` for shapes (`shapeName` in particle field), a list of diameters for shapes and their `properties` names. 
 
 <div align="center"> 
@@ -170,7 +177,7 @@ diameters 	(0.01);	        // diameter of shapes
 materials	(prop1);	// material names for shapes 
 ```
 
-Other settings for the simulation can be set in file `settings/settingsDict`. The dictionary `domain` defines the a rectangular bounding box with two corner points for the simulation. Each particle that gets out of this box, will be deleted automatically. 
+Other settings for the simulation can be set in the `settings/settingsDict` file. The `domain' dictionary defines a rectangular bounding box with two corner points for the simulation. Any particle that leaves this box will be automatically deleted. 
 
 <div align="center"> 
 in <b>settings/settingsDict</b> file
@@ -190,7 +197,7 @@ domain
 	max (1.2 1 0.5);
 }
 
-integrationMethod 		AdamsBashforth3; 	// integration method 
+integrationMethod 		AdamsBashforth2; 	// integration method 
 
 timersReport 			Yes;  	                // report timers?
 
@@ -198,6 +205,7 @@ timersReportInterval    	0.01;	                // time interval for reporting ti
 ```
 
 ## Running the case 
+
 The solver for this simulation is `sphereGranFlow`. Enter the following command in the terminal. Depending on the computational power, it may take a few minutes to a few hours to complete. 
 
 `> sphereGranFlow`
