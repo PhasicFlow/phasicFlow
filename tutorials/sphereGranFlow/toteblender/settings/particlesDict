@@ -6,7 +6,6 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-
 setFields
 {
 	/*
@@ -14,58 +13,51 @@ setFields
 	These fields should always be defined for simulations with 
 	spherical particles.
 	*/
+
 	defaultValue 
-	{
-		// linear velocity (m/s)	
-		velocity 		realx3 	(0 0 0); 
-		
-		// linear acceleration (m/s2)		
-		acceleration 	realx3 	(0 0 0);
-		
-		// rotational velocity (rad/s)		 
-		rVelocity 		realx3 	(0 0 0);
-		
-		// name of the particle shape 		 
-		shapeName 		word	sphere1; 
+	{	
+		velocity 		realx3 	(0 0 0);          // linear velocity (m/s)	
+
+		acceleration 	realx3 	(0 0 0);          // linear acceleration (m/s2)
+
+		rVelocity 		realx3 	(0 0 0);          // rotational velocity (rad/s)
+
+		shapeName       word	sphere1;          // name of the particle shape
 	}
 
 	selectors
 	{}
 }
-
-// positions particles 
-positionParticles
+ 
+positionParticles                                 // positions particles
 {
-	// ordered positioning
-	method 	positionOrdered;     
+	method 	ordered;     	  // other options: random and empty
 
-	// maximum number of particles in the simulation
-	maxNumberOfParticles 25001;
-	
-	// perform initial sorting based on morton code? 
-	mortonSorting 	Yes;             
-	
-	// cylinder for positioning particles 
-	cylinder
+	orderedInfo
 	{
-		// Coordinates of top cylinderRegion (m,m,m)	
-		p1 (0.0 0.0 0.09);
 		
-		p2 (0.0 0.0 0.21);
-		
-		// radius of cylinder
-		radius 0.09;
+		diameter    0.005;		    // diameter of particles	
+
+		numPoints   24000;			// number of particles in the simulation
+
+		axisOrder (x y z);          // axis order for filling the space with particles
 	}
 
-	positionOrderedInfo
-	{
-		// minimum space between centers of particles
-		diameter 0.005;
-		
-		// number of particles in the simulation 	 	
-		numPoints 24000;
+	maxNumberOfParticles 25001;          // maximum number of particles in the simulation
+
+	regionType        cylinder;          // other options: box and sphere            
 	
-		// axis order for filling the space with particles		 	
-		axisOrder (x y z);  
-	}
+	cylinderInfo                         // cylinder for positioning particles 
+	{
+		p1 (0.0 0.0 0.09);			// Coordinates of top cylinderRegion (m,m,m)
+
+		p2 (0.0 0.0 0.21);          // Coordinates of bottom cylinderRegion (m,m,m)
+		
+		radius       0.09;		    // radius of cylinder
+	}	
 }
+
+
+
+
+

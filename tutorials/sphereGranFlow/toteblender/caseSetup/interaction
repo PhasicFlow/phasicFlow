@@ -6,72 +6,48 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+materials      (solidProperty);          // a list of materials names
 
-// a list of materials names
-materials      (solidProperty);
-
-// density of materials [kg/m3]
-densities      (1000.0);   
+densities             (1000.0);          // density of materials [kg/m3]
 
 contactListType   sortedContactList; 
+
+contactSearch
+{
+   method         NBS;          // method for broad search particle-particle
+   
+   updateInterval  10;
+
+   sizeRatio      1.1;
+
+   cellExtent    0.55;
+
+   adjustableBox  Yes;
+}
 
 model
 {
    contactForceModel       nonLinearNonLimited;
-    
-   rollingFrictionModel    normal;
+
+   rollingFrictionModel                 normal;
    
-   /*
-   Property (solidProperty-solidProperty);
-   */
+   // Property (solidProperty-solidProperty)
     
-   // Young modulus [Pa]
-   Yeff  (1.0e6);       
+   Yeff  (1.0e6);          // Young modulus [Pa]
 
-   // Shear modulus [Pa]
-   Geff  (0.8e6);       
-    
-   // Poisson's ratio [-]
-   nu    (0.25);        
-    
-   // coefficient of normal restitution
-   en    (0.7);         
+   Geff  (0.8e6);          // Shear modulus [Pa] 
 
-   // coefficient of tangential restitution
-   et    (1.0);          
+   nu     (0.25);          // Poisson's ratio [-]  
 
-   // dynamic friction
-   mu    (0.3);          
+   en      (0.7);          // coefficient of normal restitution  
 
-   // rolling friction
-   mur   (0.1);                  
+   et      (1.0);          // coefficient of tangential restitution  
+
+   mu      (0.3);          // dynamic friction  
+     
+   mur     (0.1);          // rolling friction             
 }
 
-contactSearch
-{
 
-   // method for broad search particle-particle
-   method         NBS;
 
-   // method for broad search particle-wall           
-   wallMapping    cellMapping;   
 
-   NBSInfo
-   {
-      // each 20 timesteps, update neighbor list 
-      updateFrequency 20; 
-   
-      // bounding box size to particle diameter (max)       
-      sizeRatio      1.1;        
-   }
-
-   cellMappingInfo
-   {
-      // each 20 timesteps, update neighbor list
-      updateFrequency 20;
-      
-      // bounding box for particle-wall search (> 0.5)          
-      cellExtent     0.7;        
-   }
-
-}

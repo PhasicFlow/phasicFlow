@@ -6,12 +6,15 @@ objectName 	sphereDict;
 objectType 	sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+names 		      (sphere1); 	      // name of shapes 
 
-// name of shapes 
-names 		(sphere1); 	
+diameters 	        (0.005);		  // diameter of shapes (m)
 
-// diameter of shapes (m)
-diameters 	(0.005);
+materials	(solidProperty); 		  // material name for shapes 	
 
-// material name for shapes 	
-materials	(solidProperty);	
+
+
+
+
+
+
