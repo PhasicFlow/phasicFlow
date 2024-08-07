@@ -25,13 +25,17 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::checkDataRecieved() const
 {
 	if (!dataRecieved_)
 	{
-		uint32 nRecv = reciever_.waitBufferForUse();
+		uint32 nRecv = neighborProcField_.waitBufferForUse();
 		dataRecieved_ = true;
 		if (nRecv != this->neighborProcSize())
 		{
-			fatalErrorInFunction;
+			fatalErrorInFunction<<
+			"number of recived data is "<< nRecv <<" and expected number is "<<
+			this->neighborProcSize()<< " in "<<this->name() <<endl;
 			fatalExit;
 		}
+
+		//pOutput<<"field data "<< this->name()<<" has recieved with size "<< nRecv<<endl;
 	}
 }
 
@@ -42,6 +46,11 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundary(
   DataDirection direction
 )
 {
+#ifndef BoundaryModel1
+	if(!this->boundary().performBoundarytUpdate())
+		return true;
+#endif
+
 	if (step == 1)
 	{
 		// Isend
@@ -49,9 +58,11 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundary(
 		( this->isBoundaryMaster() && direction == DataDirection::MasterToSlave) || 
 		(!this->isBoundaryMaster() && direction == DataDirection::SlaveToMaster))
 		{
-			sender_.sendData(pFlowProcessors(), this->thisField());
+			thisFieldInNeighbor_.sendData(pFlowProcessors(), this->thisField(), this->name());
 			dataRecieved_ = false;
+			//pOutput<<"request for boundary update "<< this->name()<<" direction "<< (int)direction<<endl; 
 		}
+		
 	}
 	else if (step == 2)
 	{
@@ -60,8 +71,9 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundary(
 		(!this->isBoundaryMaster() && direction == DataDirection::MasterToSlave) || 
 		( this->isBoundaryMaster() && direction == DataDirection::SlaveToMaster))
 		{
-			reciever_.recieveData(pFlowProcessors(), this->neighborProcSize());
+			neighborProcField_.recieveData(pFlowProcessors(), this->neighborProcSize(), this->name());
 			dataRecieved_ = false;
+			//pOutput<<"request for boundary update "<< this->name()<<" direction "<< (int)direction<<endl;
 		}
 	}
 	else
@@ -80,13 +92,13 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::processorBoundaryField(
   InternalFieldType&    internal
 )
   : BoundaryFieldType(boundary, pStruct, internal),
-    sender_(
-      groupNames("sendBufferField", boundary.name()),
+    thisFieldInNeighbor_(
+      groupNames("sendBuffer", this->name()),
       boundary.neighborProcessorNo(),
       boundary.thisBoundaryIndex()
     ),
-    reciever_(
-      groupNames("neighborProcField", boundary.name()),
+    neighborProcField_(
+      groupNames("recieveBuffer", boundary.name()),
       boundary.neighborProcessorNo(),
       boundary.mirrorBoundaryIndex()
     )
@@ -102,7 +114,7 @@ typename pFlow::MPI::processorBoundaryField<T, MemorySpace>::ProcVectorType&
 pFlow::MPI::processorBoundaryField<T, MemorySpace>::neighborProcField()
 {
 	checkDataRecieved();
-	return reciever_.buffer();
+	return neighborProcField_.buffer();
 }
 
 template<class T, class MemorySpace>
@@ -111,7 +123,7 @@ const typename pFlow::MPI::processorBoundaryField<T, MemorySpace>::
   pFlow::MPI::processorBoundaryField<T, MemorySpace>::neighborProcField() const
 {
 	checkDataRecieved();
-	return reciever_.buffer();
+	return neighborProcField_.buffer();
 }
 
 template<class T, class MemorySpace>
@@ -127,7 +139,7 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 	if(msg.equivalentTo(message::BNDR_PROC_SIZE_CHANGED))
 	{
 		auto newProcSize = varList.getObject<uint32>("size");
-		reciever_.resize(newProcSize);
+		neighborProcField_.resize(newProcSize);
 	}
 
 	if(msg.equivalentTo(message::BNDR_PROCTRANSFER_SEND))
@@ -144,7 +156,7 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 			    this->internal().deviceViewAll()
 		    );
 
-		    sender_.sendData(pFlowProcessors(),transferData);
+		    thisFieldInNeighbor_.sendData(pFlowProcessors(),transferData);
         }
         else
         {
@@ -154,7 +166,7 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 			    this->internal().deviceViewAll()
 		    );
             
-		    sender_.sendData(pFlowProcessors(),transferData);
+		    thisFieldInNeighbor_.sendData(pFlowProcessors(),transferData);
         }
 
 		
@@ -164,12 +176,12 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 		uint32 numRecieved = varList.getObject<uint32>(
 			message::eventName(message::BNDR_PROCTRANSFER_RECIEVE)
 		);
-		reciever_.recieveData(pFlowProcessors(), numRecieved);
+		neighborProcField_.recieveData(pFlowProcessors(), numRecieved);
 	}
 	else if(msg.equivalentTo(message::BNDR_PROCTRANSFER_WAITFILL))
 	{
 		
-		uint32 numRecieved = reciever_.waitBufferForUse();
+		uint32 numRecieved = neighborProcField_.waitBufferForUse();
 
 		if(msg.equivalentTo(message::CAP_CHANGED))
 		{
@@ -188,7 +200,7 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 		const auto& indices = varList.getObject<uint32IndexContainer>(
 			message::eventName(message::ITEM_INSERT));
 		
-		this->internal().field().insertSetElement(indices, reciever_.buffer().deviceView());
+		this->internal().field().insertSetElement(indices, neighborProcField_.buffer().deviceView());
 
 		return true;
 	}
@@ -198,14 +210,14 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 template <class T, class MemorySpace>
 void pFlow::MPI::processorBoundaryField<T, MemorySpace>::sendBackData() const
 {
-	reciever_.sendBackData(pFlowProcessors());
+	neighborProcField_.sendBackData(pFlowProcessors());
 	dataRecieved_ = false;
 }
 
 template <class T, class MemorySpace>
 void pFlow::MPI::processorBoundaryField<T, MemorySpace>::recieveBackData() const
 {
-	sender_.recieveBackData(pFlowProcessors(), this->size());
+	thisFieldInNeighbor_.recieveBackData(pFlowProcessors(), this->size());
 }
 
 template <class T, class MemorySpace>
@@ -216,16 +228,17 @@ void pFlow::MPI::processorBoundaryField<T, MemorySpace>::addBufferToInternalFiel
 		Kokkos::Schedule<Kokkos::Static>,
 		Kokkos::IndexType<pFlow::uint32>>;
 
-	sender_.waitBufferForUse();
+	//pOutput<<"waiting for buffer to be recived in addBufferToInternalField "<<this->name()<<endl;
+	thisFieldInNeighbor_.waitBufferForUse();
 
-	const auto& buffView = sender_.buffer().deviceViewAll();
+	const auto& buffView = thisFieldInNeighbor_.buffer().deviceViewAll();
 	const auto& field = this->internal().deviceViewAll();
 
 	if constexpr( isDeviceAccessible<execution_space> )
 	{
 		const auto& indices = this->indexList().deviceViewAll();
 		Kokkos::parallel_for(
-			"dataSender::recieveBackData",
+			"recieveBackData::"+this->name(),
 			RPolicy(0,this->size()),
 			LAMBDA_HD(uint32 i)
 			{
@@ -238,7 +251,7 @@ void pFlow::MPI::processorBoundaryField<T, MemorySpace>::addBufferToInternalFiel
 	{
 		const auto& indices = this->boundary().indexListHost().deviceViewAll();
 		Kokkos::parallel_for(
-			"dataSender::recieveBackData",
+			"recieveBackData::"+this->name(),
 			RPolicy(0,this->size()),
 			LAMBDA_HD(uint32 i)
 			{
@@ -246,5 +259,26 @@ void pFlow::MPI::processorBoundaryField<T, MemorySpace>::addBufferToInternalFiel
 			}
 		);
 		Kokkos::fence();
+	}
+}
+
+
+template <class T, class MemorySpace>
+void pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundaryToMaster()const
+{
+	if (!this->isBoundaryMaster() )
+	{
+		thisFieldInNeighbor_.sendData(pFlowProcessors(), this->thisField(), this->name());
+		dataRecieved_ = false;
+	}
+}
+
+template <class T, class MemorySpace>
+void pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundaryFromSlave()const
+{
+	if( this->isBoundaryMaster() )
+	{
+		neighborProcField_.recieveData(pFlowProcessors(), this->neighborProcSize(), this->name());
+		dataRecieved_ = false;
 	}
 }

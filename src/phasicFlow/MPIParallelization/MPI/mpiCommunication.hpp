@@ -17,7 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __mpiCommunication_H__
 #define __mpiCommunication_H__
 
@@ -36,6 +35,8 @@ extern DataType realx3Type__;
 extern DataType realx4Type__;
 
 extern DataType int32x3Type__;
+
+extern DataType uint32x3Type__;
 
 template<typename T> 
 auto constexpr Type()
@@ -190,6 +191,20 @@ auto constexpr sFactor<int32x3>()
 	return 1;
 }
 
+template<>
+inline
+auto Type<uint32x3>()
+{
+	return uint32x3Type__;
+}
+
+
+template<>
+auto constexpr sFactor<uint32x3>()
+{
+	return 1;
+}
+
 /*inline 
 auto createByteSequence(int sizeOfElement)
 {
@@ -211,6 +226,7 @@ auto TypeFree(DataType* type)
     return MPI_Type_free(type);
 
 }
+
 template<typename T>
 inline auto getCount(Status* status, int& count)
 {
@@ -438,11 +454,6 @@ inline auto Gatherv
 inline auto Wait(Request* request, Status* status)
 {
 	return MPI_Wait(request, status);
-}
-
-inline auto typeFree(DataType& type)
-{
-	return MPI_Type_free(&type);
 }
 
 

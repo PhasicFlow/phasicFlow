@@ -33,11 +33,13 @@ pFlow::MPI::boundaryProcessor::checkDataRecieved() const
 {
 	if (!dataRecieved_)
 	{
-		uint32 nRecv = reciever_.waitBufferForUse();
+		uint32 nRecv = neighborProcPoints_.waitBufferForUse();
 		dataRecieved_ = true;
 		if (nRecv != neighborProcSize())
 		{
-			fatalErrorInFunction;
+			fatalErrorInFunction<<"In boundary "<<this->name()<<
+			" ,number of recieved data is "<< nRecv<<
+			" and neighborProcSize is "<<neighborProcSize()<<endl;
 			fatalExit;
 		}
 	}
@@ -51,12 +53,12 @@ pFlow::MPI::boundaryProcessor::boundaryProcessor(
   uint32            thisIndex
 )
   : boundaryBase(dict, bplane, internal, bndrs, thisIndex),
-    sender_(
+    thisPointsInNeighbor_(
       groupNames("sendBuffer", name()),
       neighborProcessorNo(),
       thisBoundaryIndex()
     ),
-    reciever_(
+    neighborProcPoints_(
       groupNames("neighborProcPoints", name()),
       neighborProcessorNo(),
       mirrorBoundaryIndex()
@@ -67,57 +69,94 @@ pFlow::MPI::boundaryProcessor::boundaryProcessor(
 bool
 pFlow::MPI::boundaryProcessor::beforeIteration(
 	uint32 step, 
-	uint32 iterNum, 
-	real t, 
-	real dt)
+	const timeInfo& ti, 
+	bool updateIter, 
+	bool iterBeforeUpdate , 
+	bool& callAgain
+)
 {
-		if(step == 1 )
+	if(step == 1)
 	{
-		thisNumPoints_ = size();
-
-		uint32 oldNeighborProcNumPoints = neighborProcNumPoints_;
-
-		MPI_Isend(
-			&thisNumPoints_,
-			1,
-			MPI_UNSIGNED,
-			neighborProcessorNo(),
-			thisBoundaryIndex(),
-			pFlowProcessors().localCommunicator(),
-			&numPointsRequest0_);
-
-		MPI_Irecv(
-			&neighborProcNumPoints_,
-			1,
-			MPI_UNSIGNED,
-			neighborProcessorNo(),
-			mirrorBoundaryIndex(),
-			pFlowProcessors().localCommunicator(),
-			&numPointsRequest_
-		);
-
+		boundaryBase::beforeIteration(step, ti, updateIter, iterBeforeUpdate, callAgain);
+		callAgain = true;
 	}
 	else if(step == 2 )
 	{
+
+#ifdef BoundaryModel1
+	callAgain = true;
+#else
+	if(!performBoundarytUpdate())
+	{
+		callAgain = false;
+		return true;
+	}
+#endif
+
+	thisNumPoints_ = size();
+
+	MPI_Isend(
+		&thisNumPoints_,
+		1,
+		MPI_UNSIGNED,
+		neighborProcessorNo(),
+		thisBoundaryIndex(),
+		pFlowProcessors().localCommunicator(),
+		&numPointsRequest0_);
+
+	MPI_Irecv(
+		&neighborProcNumPoints_,
+		1,
+		MPI_UNSIGNED,
+		neighborProcessorNo(),
+		mirrorBoundaryIndex(),
+		pFlowProcessors().localCommunicator(),
+		&numPointsRequest_
+	);
+
+	}
+	else if(step == 3 )
+	{
+		callAgain = true;
+
 		if(numPointsRequest_ != RequestNull)
 		{
 			MPI_Wait(&numPointsRequest_, MPI_STATUS_IGNORE);
 			if(numPointsRequest0_!= RequestNull)
 			{
-				MPI_Request_free(&numPointsRequest0_);
+				MPI_Wait(&numPointsRequest0_, MPI_STATUS_IGNORE);
 			}
 		}
+		
+		// Size has not been changed. Notification is not required. 
+		if(neighborProcNumPoints_ == neighborProcPoints_.size()) return true;
 
 		anyList varList;
 		message msg;
 
 		varList.emplaceBack(msg.addAndName(message::BNDR_PROC_SIZE_CHANGED), neighborProcNumPoints_);
 
-		if( !notify(iterNum, t, dt, msg, varList) )
+		if( !notify(ti.iter(), ti.t(), ti.dt(), msg, varList) )
 		{
 			fatalErrorInFunction;
+			callAgain = false;
 			return false;
 		}
+		
+	}
+	else if(step == 4)
+	{
+		dataRecieved_ = false;
+		if ( !isBoundaryMaster())
+		{
+			thisPointsInNeighbor_.sendData(pFlowProcessors(), thisPoints(),"positions");
+		}
+		else if (isBoundaryMaster())
+		{
+			neighborProcPoints_.recieveData(pFlowProcessors(), neighborProcSize(), "positions");
+		}
+
+		callAgain = false;
 	}
 
 	return true;
@@ -133,62 +172,46 @@ pFlow::realx3Vector_D&
 pFlow::MPI::boundaryProcessor::neighborProcPoints()
 {
 	checkDataRecieved();
-	return reciever_.buffer();
+	return neighborProcPoints_.buffer();
 }
 
 const pFlow::realx3Vector_D&
 pFlow::MPI::boundaryProcessor::neighborProcPoints() const
 {
 	checkDataRecieved();
-	return reciever_.buffer();
+	return neighborProcPoints_.buffer();
 }
 
 bool
 pFlow::MPI::boundaryProcessor::updataBoundaryData(int step)
 {
-	if (step == 1)
-	{
-		sender_.sendData(pFlowProcessors(), thisPoints());
-		dataRecieved_ = false;
-	}
-	else if (step == 2)
-	{
-		reciever_.recieveData(pFlowProcessors(), neighborProcSize());
-		dataRecieved_ = false;
-	}
 	return true;
 }
 
-bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
+bool pFlow::MPI::boundaryProcessor::transferData(
+	uint32 iter, 
+	int step,
+	bool& callAgain
+)
 {
-	if(!boundaryListUpdate(iter))return false;
 	
-    if(step==1)
+	if( !iterBeforeBoundaryUpdate() )
 	{
-		uint32 s = size();
-		uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE());
-		transferFlags.fill(0u);
+		callAgain = false;
+		return true;
+	}
 
-		const auto& transferD = transferFlags.deviceViewAll();
-		deviceScatteredFieldAccess<realx3> points = thisPoints();
-		auto p = boundaryPlane().infPlane();
-
-		numToTransfer_ = 0;	
-
+    if(step == 1)
+	{
 		
-        Kokkos::parallel_reduce
-		(
-			"boundaryProcessor::afterIteration",
-			deviceRPolicyStatic(0,s),
-			boundaryProcessorKernels::markNegative(
-                boundaryPlane().infPlane(),
-                transferFlags.deviceViewAll(),
-                thisPoints()
-            ),
-			numToTransfer_
-		);
+		uint32Vector_D transferFlags("transferFlags"+this->name());
+		
+		numToTransfer_ = markInNegativeSide(
+			"transferData::markToTransfer"+this->name(),
+			transferFlags);
 			
 		uint32Vector_D keepIndices("keepIndices");
+		
 		if(numToTransfer_ != 0u)
 		{
 			pFlow::boundaryBaseKernels::createRemoveKeepIndices
@@ -200,6 +223,7 @@ bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
 				keepIndices,
 				false
 			);
+			
 			// delete transfer point from this processor 
 			if( !setRemoveKeepIndices(transferIndices_, keepIndices))
 			{
@@ -212,60 +236,80 @@ bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
 		{
 			transferIndices_.clear();
 		}
-
-		auto req = RequestNull;
+		
 		CheckMPI( Isend(
 			numToTransfer_, 
 			neighborProcessorNo(), 
 			thisBoundaryIndex(),
 			pFlowProcessors().localCommunicator(),
-			&req), true );
-        //pOutput<<"sent "<< numToTransfer_<<endl;
-		CheckMPI(recv(
+			&numTransferRequest_), true );
+        
+		CheckMPI(Irecv(
 			numToRecieve_,
 			neighborProcessorNo(),
 			mirrorBoundaryIndex(),
 			pFlowProcessors().localCommunicator(),
-			StatusesIgnore), true);
+			&numRecieveRequest_), true);
         
-        //pOutput<<"recieved "<<numToRecieve_<<endl;
-
-		MPI_Request_free(&req);
+		callAgain = true;
 		return true;
 	}
-	else if(step ==2 )
+	else if(step ==2) // to transferData to neighbor 
 	{
-		if( transferIndices_.empty() )return true; 
+		if(numTransferRequest_!= RequestNull)
+		{
+			Wait(&numTransferRequest_, StatusIgnore);
+		}
+		
+		if( numToTransfer_ == 0u)
+		{
+			callAgain = true;
+			return true;
+		} 
 
 		pointFieldAccessType transferPoints(
-		transferIndices_.size(), 
-		transferIndices_.deviceViewAll(),
-		internal().pointPositionDevice());
+			transferIndices_.size(), 
+			transferIndices_.deviceViewAll(),
+			internal().pointPositionDevice()
+		);
 
-		sender_.sendData(pFlowProcessors(), transferPoints);
+		// this buffer is used temporarily 
+		thisPointsInNeighbor_.sendData(pFlowProcessors(), transferPoints);
+		
 		message msg;
 		anyList varList;
 		varList.emplaceBack( 
 		msg.addAndName(message::BNDR_PROCTRANSFER_SEND),
 		transferIndices_);
 
-		if(!notify(
-		internal().time().currentIter(),
-		internal().time().currentTime(),
-		internal().time().dt(),
-		msg,
-		varList))
+		const auto ti = internal().time().TimeInfo();
+		
+		if(!notify(ti, msg,	varList)
+		)
 		{
 			fatalErrorInFunction;
+			callAgain = false;
 			return false;
 		} 
 
 		return true;
 	}
-	else if(step == 3)
+	else if(step == 3) // to recieve data 
 	{
-		if(numToRecieve_ == 0u) return false;
-		reciever_.recieveData(pFlowProcessors(), numToRecieve_);
+
+		if(numRecieveRequest_ != RequestNull)
+		{
+			Wait(&numRecieveRequest_, StatusIgnore);
+		}
+		
+		if(numToRecieve_ == 0u)
+		{
+			callAgain = false;
+			return true;
+		} 
+		
+		// this buffer is being used temporarily 
+		neighborProcPoints_.recieveData(pFlowProcessors(), numToRecieve_);
 		
 		message msg;
 		anyList varList;
@@ -273,65 +317,70 @@ bool pFlow::MPI::boundaryProcessor::transferData(uint32 iter, int step)
 		msg.addAndName(message::BNDR_PROCTRANSFER_RECIEVE),
 		numToRecieve_);
 
-		if(!notify(
-		internal().time().currentIter(),
-		internal().time().currentTime(),
-		internal().time().dt(),
-		msg,
-		varList))
+		const auto ti = internal().time().TimeInfo();
+		if(!notify( ti,	msg, varList))
 		{
 			fatalErrorInFunction;
+			callAgain = false;
 			return false;
 		}
 
+		callAgain = true;
 		return true;
 	}
-	else if(step == 4)
+	else if(step == 4) // to insert data 
 	{
-		if(numToRecieve_ == 0u) return false;
-		reciever_.waitBufferForUse();
+		if(numToRecieve_ == 0u)
+		{
+			callAgain = false;
+			return true;
+		}
 		
 		// points should be inserted first 
 		message msg(message::BNDR_PROCTRANSFER_WAITFILL);
 		anyList varList;
 
-		internal().insertPointsOnly(reciever_.buffer(), msg, varList);
+		neighborProcPoints_.waitBufferForUse();
+		internal().insertPointsOnly(neighborProcPoints_.buffer(), msg, varList);
+		
 		const auto& indices = varList.getObject<uint32IndexContainer>(message::eventName(message::ITEM_INSERT));
+		
 		auto indView = deviceViewType1D<uint32>(indices.deviceView().data(), indices.deviceView().size());
+		
 		uint32Vector_D newIndices("newIndices", indView);
 
 		if(! appendNewIndices(newIndices))
 		{
 			fatalErrorInFunction;
+			callAgain = false;
 			return false;
 		}
 
-		if(!notify(
-			internal().time().currentIter(),
-			internal().time().currentTime(),
-			internal().time().dt(),
-			msg,
-			varList))
+		const auto ti = internal().time().TimeInfo();
+		if(!notify(ti, msg, varList))
 		{
 			fatalErrorInFunction;
+			callAgain = false;
 			return false;
 		}
 
-		return false;
+		callAgain = false;
+		return true;
 	}
 
-	return false;
+	callAgain = false;
+	return true;
 	
 }
 
 bool
-pFlow::MPI::boundaryProcessor::iterate(uint32 iterNum, real t, real dt)
+pFlow::MPI::boundaryProcessor::iterate(const timeInfo& ti)
 {
 	return true;
 }
 
 bool
-pFlow::MPI::boundaryProcessor::afterIteration(uint32 iterNum, real t, real dt)
+pFlow::MPI::boundaryProcessor::afterIteration(const timeInfo& ti)
 {
 	
 	uint32 s = size();

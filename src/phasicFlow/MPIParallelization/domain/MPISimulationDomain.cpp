@@ -35,46 +35,25 @@ pFlow::MPI::MPISimulationDomain::MPISimulationDomain(systemControl& control)
 
 bool pFlow::MPI::MPISimulationDomain::createBoundaryDicts()
 {
+
+    if(!prepareBoundaryDicts())
+	{
+		return false;
+	}
+
     auto& boundaries = this->subDict("boundaries");
     
-    this->addDict("MPIBoundaries", boundaries);
-    auto& mpiBoundaries = this->subDict("MPIBoundaries");
+    
+    auto& thisBoundaries = this->subDict(thisBoundariesDictName());
 
-    real neighborLength = boundaries.getVal<real>("neighborLength");
-    auto boundaryExtntionLengthRatio = max(
-		boundaries.getValOrSet<real>("boundaryExtntionLengthRatio", 0.1),
-        0.0);
-	auto updateIntercal = max(
-        boundaries.getValOrSet<uint32>("updateInterval", 1u),
-        1u);
-
+    
     auto neighbors = findPlaneNeighbors();
 
     for(uint32 i=0; i<sizeOfBoundaries(); i++)
 	{
-		word bName = bundaryName(i);
-		if( !boundaries.containsDictionay(bName) )
-		{
-			fatalErrorInFunction<<"dictionary "<< bName<<
-			"does not exist in "<< boundaries.globalName()<<endl;
-			return false;
-		}
-		auto& bDict = mpiBoundaries.subDict(bName);
-
-		if(!bDict.addOrKeep("neighborLength", neighborLength))
-		{
-			fatalErrorInFunction<<"error in adding neighborLength to "<< bName <<
-			"in dictionary "<< boundaries.globalName()<<endl;
-			return false;
-		}
-        
-        if(!bDict.addOrReplace("updateInterval", updateIntercal))
-		{
-			fatalErrorInFunction<<"error in adding updateIntercal to "<< bName <<
-			"in dictionary "<< boundaries.globalName()<<endl;
-		}
-
-		bDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+		
+        word bName = bundaryName(i);
+		auto& bDict = thisBoundaries.subDict(bName);
 
         if( thisDomainActive_ )
         {
@@ -276,11 +255,6 @@ std::vector<int> pFlow::MPI::MPISimulationDomain::findPlaneNeighbors() const
     return neighbors;
 }
 
-const pFlow::dictionary &
-pFlow::MPI::MPISimulationDomain::thisBoundaryDict() const
-{
-    return this->subDict("MPIBoundaries");
-}
 
 bool pFlow::MPI::MPISimulationDomain::initialUpdateDomains(span<realx3> pointPos)
 {

@@ -9,6 +9,7 @@ template<typename ContactListType, typename ContactForceModel>
 inline
 void sphereSphereInteraction
 (
+    const word& kernalName,
     real dt,
     const ContactListType&              cntctList,
     const ContactForceModel&            forceModel,
@@ -36,7 +37,7 @@ void sphereSphereInteraction
     uint32 lastItem = cntctList.loopCount();
 
     Kokkos::parallel_for(
-        "pFlow::MPI::processorBoundarySIKernels::sphereSphereInteraction",
+        kernalName,
         deviceRPolicyDynamic(0,lastItem),
         LAMBDA_HD(uint32 n)
         {

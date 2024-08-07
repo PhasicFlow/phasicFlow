@@ -76,7 +76,8 @@ public:
 
     void recieveData(
         const localProcessors&      processors,
-        uint32 numToRecv
+        uint32 numToRecv,
+        const word& name = "dataReciver"
     )
     {   
         resize(numToRecv);

@@ -23,6 +23,7 @@ Licence:
 #include "boundaryField.hpp"
 #include "dataSender.hpp"
 #include "dataReciever.hpp"
+#include "boundaryProcessor.hpp"
 
 namespace pFlow::MPI
 {
@@ -50,9 +51,9 @@ public:
 
 private:
 
-	dataSender<T, MemorySpace>   sender_;
+	mutable dataSender<T, MemorySpace>   thisFieldInNeighbor_;
 
-	dataReciever<T, MemorySpace> reciever_;
+	mutable dataReciever<T, MemorySpace> neighborProcField_;
 
 	mutable bool                 dataRecieved_ = true;
 
@@ -86,7 +87,7 @@ public:
 	
 	void fill(const T& val)override
 	{
-		reciever_.fill(val);
+		neighborProcField_.fill(val);
 	}
 
 	bool hearChanges(
@@ -102,6 +103,10 @@ public:
 	void recieveBackData()const;
 
 	void addBufferToInternalField()const;
+
+	void updateBoundaryToMaster()const;
+
+	void updateBoundaryFromSlave()const;
 
 };
 

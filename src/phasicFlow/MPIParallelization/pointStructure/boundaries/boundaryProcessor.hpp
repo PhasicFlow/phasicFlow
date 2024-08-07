@@ -25,6 +25,7 @@ Licence:
 #include "mpiTypes.hpp"
 #include "dataSender.hpp"
 #include "dataReciever.hpp"
+#include "boundaryConfigs.hpp"
 
 namespace pFlow::MPI
 {
@@ -46,11 +47,9 @@ namespace pFlow::MPI
 
 		Request 			 numPointsRequest0_ = RequestNull;
 
-		realx3Vector_D       neighborProcPoints_;
+		dataSender<realx3>   thisPointsInNeighbor_;
 
-		dataSender<realx3>   sender_;
-
-		dataReciever<realx3> reciever_;
+		dataReciever<realx3> neighborProcPoints_;
 
 		mutable bool         dataRecieved_ = true;
 
@@ -59,6 +58,10 @@ namespace pFlow::MPI
 		uint32               numToRecieve_ = 0;
 
 		uint32Vector_D       transferIndices_{"transferIndices"};
+
+		Request 			 numTransferRequest_ = RequestNull;
+
+		Request 			 numRecieveRequest_ = RequestNull;
 
 		void checkDataRecieved() const;
 
@@ -72,7 +75,7 @@ namespace pFlow::MPI
 		/// step is non-blocking recieve to get data.
 		bool updataBoundaryData(int step) override;
 
-		bool transferData(uint32 iter, int step) override;
+		bool transferData(uint32 iter, int step, bool& callAgain) override;
 
 	public:
 		TypeInfo("boundary<processor>");
@@ -91,11 +94,17 @@ namespace pFlow::MPI
 			boundaryProcessor,
 			dictionary);
 
-		bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) override;
+		bool beforeIteration(
+			uint32 step, 
+			const timeInfo& ti, 
+			bool updateIter, 
+			bool iterBeforeUpdate , 
+			bool& callAgain
+		) override;
 
-		bool iterate(uint32 iterNum, real t, real dt) override;
+		bool iterate(const timeInfo& ti) override;
 
-		bool afterIteration(uint32 iterNum, real t, real dt) override;
+		bool afterIteration(const timeInfo& ti) override;
 
 		/// @brief Return number of points in the neighbor processor boundary.
 		/// This is overriden from boundaryBase.
