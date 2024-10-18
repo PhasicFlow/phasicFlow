@@ -291,7 +291,7 @@ bool pFlow::MPI::boundaryProcessor::transferData(
 			callAgain = false;
 			return false;
 		} 
-
+		callAgain = true;
 		return true;
 	}
 	else if(step == 3) // to recieve data 
@@ -367,10 +367,7 @@ bool pFlow::MPI::boundaryProcessor::transferData(
 		callAgain = false;
 		return true;
 	}
-
-	callAgain = false;
 	return true;
-	
 }
 
 bool

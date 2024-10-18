@@ -22,6 +22,7 @@ Licence:
 #define __boundaryProcessor_hpp__
 
 #include "boundaryBase.hpp"
+#include "timeInfo.hpp"
 #include "mpiTypes.hpp"
 #include "dataSender.hpp"
 #include "dataReciever.hpp"

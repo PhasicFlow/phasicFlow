@@ -36,16 +36,9 @@ pFlow::MPI::MPISimulationDomain::MPISimulationDomain(systemControl& control)
 bool pFlow::MPI::MPISimulationDomain::createBoundaryDicts()
 {
 
-    if(!prepareBoundaryDicts())
-	{
-		return false;
-	}
-
-    auto& boundaries = this->subDict("boundaries");
+    dictionary& boundaries = this->subDict("boundaries");
     
-    
-    auto& thisBoundaries = this->subDict(thisBoundariesDictName());
-
+    dictionary& thisBoundaries = this->subDict(thisBoundariesDictName());
     
     auto neighbors = findPlaneNeighbors();
 
@@ -133,8 +126,7 @@ bool pFlow::MPI::MPISimulationDomain::setThisDomain()
         fatalErrorInFunction<< "Failed to distributed domains"<<endl;
         return false;
     }
-
-
+    
     return true;
 }
 

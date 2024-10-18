@@ -50,16 +50,16 @@ bool pFlow::processorAB2BoundaryIntegration::correctPStruct(real dt, const realx
 	#ifndef BoundaryModel1
     if(this->isBoundaryMaster())
     {
-        const uint32 thisIndex = thisBoundaryIndex();
+		const uint32 thisIndex = thisBoundaryIndex();
 		const auto&  AB2 =  static_cast<const AdamsBashforth2&>(Integration());
-        const auto& dy1View = AB2.BoundaryField(thisIndex).neighborProcField().deviceView();
+		const auto& dy1View = AB2.BoundaryField(thisIndex).neighborProcField().deviceView();
 		const auto& velView = vel.BoundaryField(thisIndex).neighborProcField().deviceView();
 		const auto& xposView = boundary().neighborProcPoints().deviceView();        
-        const rangeU32 aRange(0u, dy1View.size());
-        return  AB2Kernels::intAllActive(
+		const rangeU32 aRange(0u, dy1View.size());
+		return  AB2Kernels::intAllActive(
 			"AB2Integration::correctPStruct."+this->boundaryName(), 
 			dt,
-            aRange, 
+			aRange, 
 			xposView, 
 			velView, 
 			dy1View
