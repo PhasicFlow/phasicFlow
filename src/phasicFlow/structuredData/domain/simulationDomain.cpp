@@ -23,22 +23,81 @@ Licence:
 #include "systemControl.hpp"
 #include "vocabs.hpp"
 
-pFlow::simulationDomain::simulationDomain(systemControl& control)
-:
-	fileDictionary
-	(
-		objectFile
-		(
-			domainFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		&control.settings()
-	),
-    globalBox_(subDict("globalBox"))
+bool pFlow::simulationDomain::prepareBoundaryDicts()
 {
-    
+	
+    dictionary& boundaries = this->subDict("boundaries");
+
+    real neighborLength = boundaries.getVal<real>("neighborLength");
+
+	real boundaryExtntionLengthRatio = 
+        boundaries.getValOrSetMax("boundaryExtntionLengthRatio", 0.1);
+	
+    uint32 updateInterval = 
+        boundaries.getValOrSetMax<uint32>("updateInterval", 1u);
+
+    uint32 neighborListUpdateInterval = 
+        boundaries.getValMax("neighborListUpdateInterval", updateInterval);
+
+    boundaries.addOrReplace("neighborListUpdateInterval", neighborListUpdateInterval);
+
+	// create this boundaries dictionary 
+	this->addDict(thisBoundariesDictName(), boundaries);
+    dictionary& thisBDict = this->subDict(thisBoundariesDictName());
+	thisBDict.addOrReplace("neighborLength", neighborLength);
+	thisBDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+	thisBDict.addOrReplace("updateInterval", updateInterval);
+	thisBDict.addOrReplace("neighborListUpdateInterval", neighborListUpdateInterval);
+
+
+    for(uint32 i=0; i<sizeOfBoundaries(); i++)
+	{
+		word bName = bundaryName(i);
+		if( !boundaries.containsDictionay(bName) )
+		{
+			fatalErrorInFunction<<"dictionary "<< bName<<
+			"does not exist in "<< boundaries.globalName()<<endl;
+			return false;
+		}
+		auto& bDict = thisBDict.subDict(bName);
+
+		if(!bDict.addOrKeep("neighborLength", neighborLength))
+		{
+			fatalErrorInFunction<<"error in adding neighborLength to "<< bName <<
+			"in dictionary "<< boundaries.globalName()<<endl;
+			return false;
+		}
+
+		if(!bDict.addOrReplace("updateInterval", updateInterval))
+		{
+			fatalErrorInFunction<<"error in adding updateInterval to "<< bName <<
+			"in dictionary "<< boundaries.globalName()<<endl;
+            return false;
+		}
+
+		bDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+
+	}
+
+    return true;
+}
+
+pFlow::simulationDomain::simulationDomain(systemControl &control)
+    : fileDictionary(
+          objectFile(
+              domainFile__,
+              "",
+              objectFile::READ_ALWAYS,
+              objectFile::WRITE_NEVER),
+          &control.settings()),
+      globalBox_(subDict("globalBox"))
+{
+    if( !prepareBoundaryDicts() )
+    {
+        fatalErrorInFunction<<
+            "Error in preparing dictionaries for boundaries"<<endl;
+        fatalExit;
+    }
 }
 
 pFlow::domain pFlow::simulationDomain::extendThisDomain

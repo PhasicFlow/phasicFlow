@@ -63,11 +63,17 @@ public:
 		dictionary
 	);
 
-	bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) override;
+	bool beforeIteration(
+		uint32 step, 
+		const timeInfo& ti, 
+		bool updateIter, 
+		bool iterBeforeUpdate , 
+		bool& callAgain
+	) final;
 
-	bool iterate(uint32 iterNum, real t, real dt) override;
-
-	bool afterIteration(uint32 iterNum, real t, real dt) override;
+	bool iterate(const timeInfo& ti) final;
+	 
+	bool afterIteration(const timeInfo& ti)final;
 
 
 };

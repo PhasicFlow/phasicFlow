@@ -17,7 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __boundaryBase_hpp__
 #define __boundaryBase_hpp__
 
@@ -26,8 +25,8 @@ Licence:
 #include "VectorSingles.hpp"
 #include "plane.hpp"
 #include "scatteredFieldAccess.hpp"
+#include "timeInfo.hpp"
 
-#include "streams.hpp"
 
 namespace pFlow
 {
@@ -68,8 +67,9 @@ private:
 	/// The length defined for creating neighbor list
 	real                   neighborLength_;
 
-	/// time steps between successive update of boundary lists  
-	uint32 				   updateInetrval_;
+	bool 				   updateTime_ = false;
+
+	bool 				   iterBeforeUpdate_ = false;
 
 	/// the extra boundary extension beyound actual limits of boundary 
 	real 				   boundaryExtntionLengthRatio_;
@@ -99,6 +99,12 @@ protected:
 	/// So, any drived class that override this method should call 
 	/// boundaryBase::setSize(newSize) too. 
 	virtual void setSize(uint32 newSize);
+
+
+	void setUpdateTime(bool val)
+	{
+		updateTime_ = val;
+	}
 
 	void setNewIndices(const uint32Vector_D& newIndices);
 
@@ -132,12 +138,6 @@ protected:
 		}
 	}
 
-	/// Is this iter the right time for updating bounday list
-	bool boundaryListUpdate(uint32 iter)const
-	{
-		return iter%updateInetrval_ == 0u || iter == 0u;
-	}
-
 	/// Update this boundary data in two steps (1 and 2).
 	/// This is called after calling beforeIteration for 
 	/// all boundaries, so any particle addition, deletion,
@@ -152,17 +152,19 @@ protected:
 
 	/// @brief This method is called when a transfer of data 
 	/// is to be performed between processors (in afterIteration).
-	/// @param step is the step in the transfer of data. 
-	/// @return true: if operation requires at least one additional step 
-	/// to complete. false: if the operation is complete and no need for
-	/// additional step in operation. 
+	/// @param step is the step in the transfer of data.
+	/// @param callAgain if operation requires at least one additional step 
+	/// to complete it should be set to true and if the operation is complete and no need for
+	/// additional step, it should be set to false;  
+	/// @return true: succesful, false: fail
 	virtual 
-	bool transferData(uint32 iter, int step)
+	bool transferData(uint32 iter, int step, bool& callAgain)
 	{
-		return false;
+		callAgain = false;
+		return true;
 	}
 	
-	 
+	uint32 markInNegativeSide(const word& name, uint32Vector_D& markedIndices )const;
 
 public:
 
@@ -229,6 +231,19 @@ public:
 	realx3 boundaryExtensionLength()const
 	{
 		return -boundaryExtntionLengthRatio_*neighborLength_ * boundaryPlane_.normal();
+	}
+
+	/// Is this iter the right time for updating bounday list
+	inline
+	bool performBoundarytUpdate()const
+	{
+		return updateTime_;
+	}
+
+	inline
+	bool iterBeforeBoundaryUpdate()const
+	{
+		return iterBeforeUpdate_;
 	}
 
 	inline
@@ -339,13 +354,24 @@ public:
 	
 
 	virtual 
-    bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) = 0 ;
+	bool beforeIteration(
+		uint32 step, 
+		const timeInfo& ti, 
+		bool updateIter, 
+		bool iterBeforeUpdate , 
+		bool& callAgain
+	)
+	{
+		updateTime_ = updateIter;
+		iterBeforeUpdate_ = iterBeforeUpdate;
+		return true;
+	}
 
 	virtual 
-    bool iterate(uint32 iterNum, real t, real dt) = 0;
+	bool iterate(const timeInfo& ti) = 0;
 
 	virtual 
-    bool afterIteration(uint32 iterNum, real t, real dt) = 0;
+	bool afterIteration(const timeInfo& ti) = 0;
 	
     pointFieldAccessType thisPoints()const;
 

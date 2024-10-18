@@ -153,35 +153,7 @@ bool pFlow::subscriber::notify
 	return true;
 }
 
-/*bool pFlow::subscriber::notify
-(
-	const eventMessage &msg
-)
+bool pFlow::subscriber::notify(const timeInfo &ti, const message msg, const anyList &varList)
 {
-	for ( auto& observer:observerList_ )
-	{
-		if(observer)
-			if( !observer->update(msg) ) return false;
-	}
-
-	return true;
+    return notify(ti.iter(), ti.t(), ti.dt(), msg, varList);
 }
-
-bool pFlow::eventSubscriber::notify
-(
-	const eventMessage& msg,
-	const List<eventObserver*>& exclutionList
-)
-{
-	Set<eventObserver*> sortedExcList(exclutionList.begin(),exclutionList.end());
-
-	for(auto& observer:observerList_)
-	{
-		if( observer && sortedExcList.count(observer) == 0 )
-		{
-			if(!observer->update(msg)) return false;
-		}
-	}
-
-	return true;
-}*/

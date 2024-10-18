@@ -165,7 +165,7 @@ public:
     {
 		
 		pOutput<<"Function (hearChanges in boundarySphereInteractions)is not implmented Message "<<
-		 msg <<endl<<" name "<< this->name() <<" type "<< this->type()<<endl;;
+		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;;
 		//notImplementedFunction;
 		return true;
 	}

@@ -22,7 +22,6 @@ Licence:
 #define __Timerr_hpp__
 
 #include <chrono>
-
 #include "types.hpp"
 
 namespace pFlow
@@ -33,7 +32,7 @@ class Timers;
 
 class Timer
 {
-protected:
+private:
 
 	using timer = std::chrono::high_resolution_clock;
 
@@ -58,6 +57,12 @@ protected:
 
 	/// @brief  parrent of timer
 	Timers*           parrent_ = nullptr;
+
+protected:
+
+	real averageTimeMax()const;
+
+	real accTimersTotalMax()const;
 
 public:
 
@@ -91,12 +96,19 @@ public:
 		return false;
 	}
 
+	Timers* parrent()const
+	{
+		return parrent_;
+	} 
+
+	inline
 	void start()
 	{
 		start_       = timer::now();
 		stepAccTime_ = 0;
 	}
 
+	inline
 	void pause()
 	{
 		auto end = timer::now();
@@ -107,11 +119,13 @@ public:
 		        .count();
 	}
 
+	inline
 	void resume()
 	{
 		start_ = timer::now();
 	}
 
+	inline
 	void end()
 	{
 		pause();
@@ -121,27 +135,32 @@ public:
 		accTime_ += lastTime_;
 	}
 
-	inline bool timerActive() const
+	inline 
+	bool timerActive() const
 	{
 		return numIteration_ != 0;
 	}
 
-	inline real lastTime() const
+	inline 
+	real lastTime() const
 	{
 		return lastTime_;
 	}
 
-	inline real totalTime() const
+	inline 
+	real totalTime() const
 	{
 		return accTime_;
 	}
 
-	inline real averageTime() const
+	inline 
+	real averageTime() const
 	{
 		return accTime_ / max(numIteration_, 1);
 	}
 
-	virtual real accTimersTotal() const
+	virtual 
+	real accTimersTotal() const
 	{
 		return totalTime();
 	}

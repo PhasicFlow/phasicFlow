@@ -134,17 +134,21 @@ pFlow::sphereInteraction<cFM,gMM, cLT>::sphereInteraction
 	geometryMotion_(dynamic_cast<const GeometryMotionModel&>(geom)),
 	sphParticles_(dynamic_cast<const sphereParticles&>(prtcl)),
 	boundaryInteraction_(sphParticles_,geometryMotion_),
-	ppInteractionTimer_("sphere-sphere interaction", &this->timers()),
-	pwInteractionTimer_("sphere-wall interaction", &this->timers()),
-	contactListMangementTimer_("contact-list management", &this->timers()),
-	boundaryContactSearchTimer_("contact search for boundary", &this->timers()),
-	boundaryInteractionTimer_("interaction for boundary", &this->timers()),
-	contactListBoundaryTimer_("contact-list management for boundary", &this->timers())
+	ppInteractionTimer_("sphere-sphere interaction (internal)", &this->timers()),
+	pwInteractionTimer_("sphere-wall interaction (internal)", &this->timers()),
+	boundaryInteractionTimer_("sphere-sphere interaction (boundary)",&this->timers()),
+	contactListMangementTimer_("list management (interal)", &this->timers()),
+	contactListMangementBoundaryTimer_("list management (boundary)", &this->timers())
 {
 	
 	if(!createSphereInteraction())
 	{
 		fatalExit;
+	}
+
+	for(uint32 i=0; i<6; i++)
+	{
+		activeBoundaries_[i] = boundaryInteraction_[i].ppPairsAllocated();
 	}
 }
 
@@ -158,45 +162,55 @@ template<typename cFM,typename gMM,template <class, class, class> class cLT>
 bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 {
 	
-	auto iter = this->currentIter();
-	auto t = this->currentTime();
-	auto dt = this->dt();
+	timeInfo ti = this->TimeInfo();
+	auto iter = ti.iter();
+	auto t = ti.t();
+	auto dt = ti.dt();
 
-	
-	bool broadSearch = contactSearch_().enterBroadSearch(iter, t, dt);
+	auto& contactSearchRef = contactSearch_();
 
+	bool broadSearch = contactSearchRef.enterBroadSearch(ti);
+	bool broadSearchBoundary = contactSearchRef.enterBroadSearchBoundary(ti);
+
+	/// update boundaries of the fields that are being used by inreaction 
 	sphParticles_.diameter().updateBoundaries(DataDirection::SlaveToMaster);
 	sphParticles_.velocity().updateBoundaries(DataDirection::SlaveToMaster);
 	sphParticles_.rVelocity().updateBoundaries(DataDirection::SlaveToMaster);
-	sphParticles_.mass().updateBoundaries(DataDirection::SlaveToMaster);
-	sphParticles_.I().updateBoundaries(DataDirection::SlaveToMaster);
 	sphParticles_.propertyId().updateBoundaries(DataDirection::SlaveToMaster);
 	
-	
+	/// lists 
 	if(broadSearch)
 	{
 		contactListMangementTimer_.start();
-		ppContactList_().beforeBroadSearch();
-		pwContactList_().beforeBroadSearch();
+		ComputationTimer().start();
+			ppContactList_().beforeBroadSearch();
+			pwContactList_().beforeBroadSearch();
+		ComputationTimer().end();
 		contactListMangementTimer_.pause();
 	} 
 
-	contactListBoundaryTimer_.start();
-	for(uint32 i=0; i<6u; i++)
+	if(broadSearchBoundary)
 	{
-		auto& BI = boundaryInteraction_[i];
-		if(BI.ppPairsAllocated()) BI.ppPairs().beforeBroadSearch();
-		if(BI.pwPairsAllocated()) BI.pwPairs().beforeBroadSearch();
+		contactListMangementBoundaryTimer_.start();
+		ComputationTimer().start();
+		for(uint32 i=0; i<6u; i++)
+		{
+			if(activeBoundaries_[i])
+			{
+				auto& BI = boundaryInteraction_[i];
+				BI.ppPairs().beforeBroadSearch();
+				BI.pwPairs().beforeBroadSearch();
+			} 
+		}
+		ComputationTimer().end();
+		contactListMangementBoundaryTimer_.pause();	
 	}
-	contactListBoundaryTimer_.pause();
 	
 	if( sphParticles_.numActive()<=0)return true;
 	
-	
-	if( !contactSearch_().broadSearch(
-			iter,
-			t,
-			dt,		
+	ComputationTimer().start();
+	if( !contactSearchRef.broadSearch(
+			ti,		
 			ppContactList_(),
 			pwContactList_()) )
 	{
@@ -205,62 +219,64 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 		fatalExit;
 	}
 	
-	boundaryContactSearchTimer_.start();
 	for(uint32 i=0; i<6u; i++)
 	{
-		auto& BI =boundaryInteraction_[i];
-		if(BI.ppPairsAllocated())
+		if(activeBoundaries_[i])
 		{
-			if( !contactSearch_().boundaryBroadSearch(
+			auto& BI = boundaryInteraction_[i];
+			if(!contactSearchRef.boundaryBroadSearch(
 				i,
-				iter,
-				t,
-				dt,
+				ti,
 				BI.ppPairs(),
-				BI.pwPairs()))
+				BI.pwPairs())
+			)
 			{
 				fatalErrorInFunction<<
 				"failed to perform broadSearch for boundary index "<<i<<endl;
 				return false;
 			}
-		} 
+		}
 	}
-	boundaryContactSearchTimer_.end();
+	ComputationTimer().end();
 	
-	if(broadSearch && contactSearch_().performedBroadSearch())
+	if(broadSearch && contactSearchRef.performedSearch())
 	{
 		contactListMangementTimer_.resume();
-		ppContactList_().afterBroadSearch();
-		pwContactList_().afterBroadSearch();
+		ComputationTimer().start();
+			ppContactList_().afterBroadSearch();
+			pwContactList_().afterBroadSearch();
+		ComputationTimer().end();
 		contactListMangementTimer_.end();
 	}
 
-	contactListBoundaryTimer_.resume();
-	for(uint32 i=0; i<6u; i++)
+	if(broadSearchBoundary && contactSearchRef.performedSearchBoundary())
 	{
-		auto& BI = boundaryInteraction_[i];
-		if(BI.ppPairsAllocated()) BI.ppPairs().afterBroadSearch();
-		if(BI.pwPairsAllocated()) BI.pwPairs().afterBroadSearch();
+		contactListMangementBoundaryTimer_.resume();
+		ComputationTimer().start();
+		for(uint32 i=0; i<6u; i++)
+		{
+			if(activeBoundaries_[i])
+			{
+				auto& BI = boundaryInteraction_[i];
+				BI.ppPairs().afterBroadSearch();
+				BI.pwPairs().afterBroadSearch();
+			}
+		}
+		ComputationTimer().end();
+		contactListMangementBoundaryTimer_.end();
 	}
-	contactListBoundaryTimer_.end();
 	
-	
-	{
-	boundaryInteractionTimer_.start();
-	std::array<bool,6> requireStep{
-		boundaryInteraction_[0].isBoundaryMaster(),
-		boundaryInteraction_[1].isBoundaryMaster(),
-		boundaryInteraction_[2].isBoundaryMaster(),
-		boundaryInteraction_[3].isBoundaryMaster(),
-		boundaryInteraction_[4].isBoundaryMaster(),
-		boundaryInteraction_[5].isBoundaryMaster()};
-	int step = 1;
+	/// peform contact search on boundareis with active contact search (master boundaries)
+	auto requireStep = boundariesMask<6>(true);
 	const auto& cfModel = this->forceModel_();
-	while( std::any_of(requireStep.begin(), requireStep.end(), [](bool v) { return v==true; }))
+	uint32 step=1;
+	boundaryInteractionTimer_.start();
+	ComputationTimer().start();
+	while(requireStep.anyElement(true) && step <= 10)
 	{
 		for(uint32 i=0; i<6u; i++)
 		{
-			if(step==1u || requireStep[i] )
+			if(requireStep[i] )
 			{
 				requireStep[i] = boundaryInteraction_[i].sphereSphereInteraction(
 					dt, 
@@ -271,30 +287,31 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 		}
 		step++;
 	}
+	ComputationTimer().end();
 	boundaryInteractionTimer_.pause();
-	}
+	
+
 	ppInteractionTimer_.start();
+	ComputationTimer().start();
 		sphereSphereInteraction();
+	ComputationTimer().end();
 	ppInteractionTimer_.end();
 
 	
 	pwInteractionTimer_.start();
+	ComputationTimer().start();
 		sphereWallInteraction();
+	ComputationTimer().start();
 	pwInteractionTimer_.end();
 
 	{
 	boundaryInteractionTimer_.resume();
-	std::array<bool,6> requireStep{
-		!boundaryInteraction_[0].isBoundaryMaster(),
-		!boundaryInteraction_[1].isBoundaryMaster(),
-		!boundaryInteraction_[2].isBoundaryMaster(),
-		!boundaryInteraction_[3].isBoundaryMaster(),
-		!boundaryInteraction_[4].isBoundaryMaster(),
-		!boundaryInteraction_[5].isBoundaryMaster()};
+	ComputationTimer().start();
+	auto requireStep = boundariesMask<6>(true);
 
-	int step = 2;
+	uint32 step = 11;
 	const auto& cfModel = this->forceModel_();
-	while(std::any_of(requireStep.begin(), requireStep.end(), [](bool v) { return v==true; }))
+	while( requireStep.anyElement(true) && step < 20 )
 	{
 		for(uint32 i=0; i<6u; i++)
 		{
@@ -302,13 +319,14 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 			{
 				requireStep[i] = boundaryInteraction_[i].sphereSphereInteraction(
 					dt, 
-					this->forceModel_(),
+					cfModel,
 					step
 				);
 			}		
 		}
 		step++;
 	}
+	ComputationTimer().end();
 	boundaryInteractionTimer_.end();
 	}
 	
@@ -337,4 +355,3 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::hearChanges
 	}
 	return true;
 }
-

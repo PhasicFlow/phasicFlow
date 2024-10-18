@@ -85,6 +85,8 @@ bool pFlow::dynamicPointStructure::beforeIteration()
 	if(!pointStructure::beforeIteration())return false;
 	velocityUpdateTimer_.start();
 	velocity_.updateBoundariesSlaveToMasterIfRequested();
+	integrationPos_->updateBoundariesSlaveToMasterIfRequested();
+	integrationVel_->updateBoundariesSlaveToMasterIfRequested();
 	velocityUpdateTimer_.end();
 	return true;
 }
@@ -118,7 +120,7 @@ bool pFlow::dynamicPointStructure::correct
 {
 	//auto& pos = pStruct().pointPosition();
 	
-	if(!integrationPos_().correct(dt, pointPosition(), velocity_) )return false;
+	if(!integrationPos_().correctPStruct(dt, *this, velocity_) )return false;
 	
 	if(!integrationVel_().correct(dt, velocity_, acceleration))return false;
 

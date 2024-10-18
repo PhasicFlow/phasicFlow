@@ -24,6 +24,7 @@ Licence:
 #include "boundaryList.hpp"
 #include "ListPtr.hpp"
 
+
 namespace pFlow
 {
 
@@ -67,9 +68,17 @@ public:
         if( direction == DataDirection::SlaveToMaster 
             && slaveToMasterUpdateIter_ == iter) return;
         
+        
+        
         // first step
+        uint32 i=0;
         for(auto b:*this)
         {
+            if(i==0 ) 
+            {
+                //pOutput<<"request for update boundaries for field "<< b->name()<<endl;
+                i++;
+            }
             b->updateBoundary(1, direction);
         }
 

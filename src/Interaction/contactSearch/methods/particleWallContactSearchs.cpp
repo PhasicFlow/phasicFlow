@@ -31,48 +31,36 @@ pFlow::particleWallContactSearchs<method>::particleWallContactSearchs
     const ViewType1D<real, memory_space> &diam
 )
 :
-    domainBox_(domain),
-    updateInterval_
-    (
-        max(dict.getValOrSet<uint32>("updateInterval", 1),1u)
-    )
-{
-    
-}
+    domainBox_(domain)
+{}
 
 template <typename method>
 bool pFlow::particleWallContactSearchs<method>::broadSearch
-	(
-		uint32 iter,
-		real t,
-		real dt,
-		csPairContainerType& ppPairs,
-		csPairContainerType& pwPairs,
-		const deviceViewType1D<realx3>& pointPos,
-		const pFlagTypeDevice& flags,
-		const deviceViewType1D<real>& diameter,
-		bool  force
-	)
+(
+	uint32 iter,
+	real t,
+	real dt,
+	csPairContainerType& ppPairs,
+	csPairContainerType& pwPairs,
+	const deviceViewType1D<realx3>& pointPos,
+	const pFlagTypeDevice& flags,
+	const deviceViewType1D<real>& diameter,
+	bool  force
+)
+{
+	
+	if(!getMethod().impl_broadSearch(
+		ppPairs,
+		pwPairs,
+		pointPos,
+		flags,
+		diameter))
 	{
-		
-		performedSearch_ = false;
-		if( !performSearch(iter, force) ) return true;
-
-		if(!getMethod().impl_broadSearch(
-			ppPairs,
-			pwPairs,
-			pointPos,
-			flags,
-			diameter))
-		{
-			fatalErrorInFunction<<
-			"Error in performing particle-particle broadSearch in method"<<
-			getMethod().typeName()<<endl;
-			return false;
-		}
-
-		lastUpdated_ = iter;
-		
-		performedSearch_ = true;		
-		return true;
+		fatalErrorInFunction<<
+		"Error in performing particle-particle broadSearch in method"<<
+		getMethod().typeName()<<endl;
+		return false;
 	}
+	
+	return true;
+}

@@ -35,6 +35,12 @@ public:
 		real dt, 
 		realx3PointField_D& y, 
 		realx3PointField_D& dy);
+
+    bool correctPStruct(
+        real dt, 
+        pointStructure& pStruct, 
+        const realx3PointField_D& vel);
+
 };
 
 

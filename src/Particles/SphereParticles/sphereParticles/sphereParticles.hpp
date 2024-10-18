@@ -33,6 +33,7 @@ Licence:
 #include "particles.hpp"
 #include "property.hpp"
 #include "sphereShape.hpp"
+#include "boundarySphereParticlesList.hpp"
 #include "systemControl.hpp"
 
 namespace pFlow
@@ -66,6 +67,9 @@ private:
 
 	/// pointField of rotational acceleration of particles on device
 	realx3PointField_D     rAcceleration_;
+
+	/// boundaries 
+	boundarySphereParticlesList boundarySphereParticles_;
 
 	/// rotational velocity integrator
 	uniquePtr<integration> rVelIntegration_ = nullptr;

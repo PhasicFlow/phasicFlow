@@ -32,10 +32,28 @@ bool pFlow::boundaryIntegrationList::correct(real dt, realx3PointField_D &y, rea
 	{
 		if(!bndry->correct(dt, y, dy))
 		{
-			fatalErrorInFunction;
+			fatalErrorInFunction<<"Error in correcting boundary "<<
+			bndry->boundaryName()<<endl;
 			return false;
 		}
 		
     }
+    return true;
+}
+
+bool pFlow::boundaryIntegrationList::correctPStruct(
+	real dt, 
+	pointStructure &pStruct, 
+	const realx3PointField_D &vel)
+{
+	for(auto& bndry:*this)
+	{
+		if(!bndry->correctPStruct(dt, vel))
+		{
+			fatalErrorInFunction<<"Error in correcting boundary "<<
+			bndry->boundaryName()<<" in pointStructure."<<endl;
+			return false;
+		}
+	}
     return true;
 }

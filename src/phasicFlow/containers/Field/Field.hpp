@@ -197,7 +197,7 @@ public:
 		
 	//// - IO operations 
 		
-		bool read(iIstream& is, bool resume = false);
+		bool read(iIstream& is);
 		
 		bool write(iOstream& os)const;			
 

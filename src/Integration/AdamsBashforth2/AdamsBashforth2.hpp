@@ -17,13 +17,13 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __AdamsBashforth2_hpp__
 #define __AdamsBashforth2_hpp__
 
 
 #include "integration.hpp"
 #include "pointFields.hpp"
+#include "boundaryIntegrationList.hpp"
 
 namespace pFlow
 {
@@ -40,6 +40,15 @@ class AdamsBashforth2
 	public realx3PointField_D
 {
 private:
+
+	boundaryIntegrationList boundaryList_;
+
+	friend class processorAB2BoundaryIntegration;
+
+	const auto& dy1()const
+	{
+		return static_cast<const realx3PointField_D&>(*this);
+	}
 
 	auto& dy1()
 	{
@@ -71,6 +80,9 @@ public:
 
 
 	// - Methods
+
+		void updateBoundariesSlaveToMasterIfRequested()override;
+
 		/// return integration method 
 		word method()const override
 		{
@@ -92,10 +104,11 @@ public:
 			realx3PointField_D& y, 
 			realx3PointField_D& dy) final;
 
-		bool correct(
+		bool correctPStruct(
 			real dt, 
-			realx3Field_D& y, 
-			realx3PointField_D& dy) final;
+			pointStructure& pStruct, 
+			realx3PointField_D& vel) final;
+			
 		
 		/*bool hearChanges
 		(

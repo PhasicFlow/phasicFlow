@@ -190,29 +190,58 @@ bool pFlow::boundaryBase::transferPointsToMirror
 	
 }
 
-pFlow::boundaryBase::boundaryBase
-(
+pFlow::uint32 pFlow::boundaryBase::markInNegativeSide(const word &name, uint32Vector_D &markedIndices) const
+{
+
+	uint32 s = size();
+
+	markedIndices.reallocate(s+1, s+1);
+	markedIndices.fill(0u);
+
+	const auto& markedIndicesD = markedIndices.deviceViewAll();
+	pointFieldAccessType points = thisPoints();
+	infinitePlane p = boundaryPlane().infPlane();
+
+	uint32 numMark = 0;	
+
+	Kokkos::parallel_reduce
+	(
+		"boundaryProcessor::afterIteration",
+		deviceRPolicyStatic(0,s),
+		LAMBDA_HD(uint32 i, uint32& markToUpdate)
+		{
+			if(p.pointInNegativeSide(points(i)))
+			{
+				markedIndicesD(i)=1;
+				markToUpdate++;
+			}
+		}, 
+		numMark
+	);
+
+    return numMark;
+}
+
+pFlow::boundaryBase::boundaryBase(
     const dictionary &dict,
-    const plane 	&bplane,
-    internalPoints 	&internal,
-	boundaryList	&bndrs,
-	uint32 			thisIndex
-)
-: 
-	subscriber(dict.name()),
-	boundaryPlane_(bplane),
-	indexList_(groupNames("indexList", dict.name())),
-	indexListHost_(groupNames("hostIndexList",dict.name())),
-	neighborLength_(dict.getVal<real>("neighborLength")),
-	updateInetrval_(dict.getVal<uint32>("updateInterval")),
-	boundaryExtntionLengthRatio_(dict.getVal<real>("boundaryExtntionLengthRatio")),
-	internal_(internal),
-	boundaries_(bndrs),
-	thisBoundaryIndex_(thisIndex),
-	neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo")),
-	isBoundaryMaster_(thisProcessorNo()>=neighborProcessorNo()),
-	name_(dict.name()),
-	type_(dict.getVal<word>("type"))
+    const plane &bplane,
+    internalPoints &internal,
+    boundaryList &bndrs,
+    uint32 thisIndex)
+    : subscriber(dict.name()),
+      boundaryPlane_(bplane),
+      indexList_(groupNames("indexList", dict.name())),
+      indexListHost_(groupNames("hostIndexList", dict.name())),
+      neighborLength_(dict.getVal<real>("neighborLength")),
+      // updateInetrval_(dict.getVal<uint32>("updateInterval")),
+      boundaryExtntionLengthRatio_(dict.getVal<real>("boundaryExtntionLengthRatio")),
+      internal_(internal),
+      boundaries_(bndrs),
+      thisBoundaryIndex_(thisIndex),
+      neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo")),
+      isBoundaryMaster_(thisProcessorNo() >= neighborProcessorNo()),
+      name_(dict.name()),
+      type_(dict.getVal<word>("type"))
 {
 	unSyncLists();
 }

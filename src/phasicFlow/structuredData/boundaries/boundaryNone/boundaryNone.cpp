@@ -32,33 +32,24 @@ pFlow::boundaryNone::boundaryNone
 	boundaryBase(dict, bplane, internal, bndrs, thisIndex)
 {}
 
-bool pFlow::boundaryNone::beforeIteration
-(
-	uint32 step,
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryNone::beforeIteration(
+	uint32 step, 
+	const timeInfo &ti, 
+	bool updateIter, 
+	bool iterBeforeUpdate, 
+	bool &callAgain)
+{
+	boundaryBase::beforeIteration(step, ti, updateIter, iterBeforeUpdate, callAgain);
+	callAgain = false;
+  return true;
+}
+
+bool pFlow::boundaryNone::iterate(const timeInfo &ti)
 {
 	return true;
 }
 
-bool pFlow::boundaryNone::iterate
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
-{
-	return true;
-}
-
-bool pFlow::boundaryNone::afterIteration
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryNone::afterIteration(const timeInfo& ti)
 {
 	return true;
 }

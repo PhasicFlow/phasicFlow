@@ -88,8 +88,6 @@ public:
 	bool initialTransferBlockData(span<int32> src, span<int32> dst)
 	  const final;
 
-	const dictionary& thisBoundaryDict() const final;
-
 };
 
 }

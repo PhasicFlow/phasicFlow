@@ -28,6 +28,14 @@ public:
         const contactSearch& cSearch);
     
     ~boundaryContactSearchList()=default;
+
+    inline
+    const boundaryList& boundaries()const
+    {
+        return boundaries_;
+    } 
+
+    bool boundariesUpdated()const;
     
 };
 
