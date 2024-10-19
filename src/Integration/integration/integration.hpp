@@ -131,6 +131,8 @@ public:
 			return owner_;
 		}
 
+		virtual 
+		void updateBoundariesSlaveToMasterIfRequested() = 0;
 		/// return integration method 
 		virtual 
 		word method()const = 0 ;
@@ -147,7 +149,7 @@ public:
 		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
 
 		virtual 
-		bool correct(real dt, realx3Field_D& y, realx3PointField_D& dy) = 0;
+		bool correctPStruct(real dt, pointStructure& pStruct, realx3PointField_D& vel) = 0;
 
 		/// Set the initial values for new indices 
 		virtual 

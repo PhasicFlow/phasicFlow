@@ -26,6 +26,7 @@ Licence:
 
 #include "List.hpp"
 #include "message.hpp"
+#include "timeInfo.hpp"
 
 namespace pFlow
 {
@@ -73,6 +74,11 @@ public:
 		uint32 iter,
 		real t,
 		real dt,
+		const message msg, 
+		const anyList& varList);
+	
+	bool notify(
+		const timeInfo& ti,
 		const message msg, 
 		const anyList& varList);
 	

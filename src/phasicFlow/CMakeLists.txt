@@ -10,6 +10,8 @@ globals/globalSettings.cpp
 processors/processors.cpp
 processors/localProcessors.cpp
 processors/pFlowProcessors.cpp
+processors/MPITimer.cpp
+
 
 streams/token/tokenIO.cpp
 streams/token/token.cpp

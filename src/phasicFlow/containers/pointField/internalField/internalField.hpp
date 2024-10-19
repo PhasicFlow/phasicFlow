@@ -160,7 +160,7 @@ public:
 	}
 
 	inline
-	auto activeRange()const
+	rangeU32 activeRange()const
 	{
 		return internalPoints_.activeRange();
 	}

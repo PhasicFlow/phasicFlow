@@ -26,6 +26,7 @@ Licence:
 #include "contactSearchGlobals.hpp"
 #include "dictionary.hpp"
 #include "virtualConstructor.hpp"
+#include "timeInfo.hpp"
 #include "Timer.hpp"
 
 namespace pFlow
@@ -44,15 +45,46 @@ private:
 
 	const box& 	extendedDomainBox_;
 
+	/// @brief update interval in terms of iteration numebr 
+	uint32 		updateInterval_= 1;
+
+	/// @brief  last iteration number which contact search has been performed
+	uint32 		lastUpdated_ 	= 0;
+
+	/// @brief performed search? 
+	bool 		performedSearch_ = false;
+
+	/// @brief performed search in boundaries
+	bool 		performedSearchBoundary_ = false;
+
+	/// const ref to particles
 	const particles& 		particles_;
 
+	/// const ref to geometry 
 	const geometry&			geometry_;
+
+	Timer 		bTimer_;
 
 	Timer 		ppTimer_;
 
-	Timer 		pwTimer_;
-
 	dictionary 	dict_;
+
+	virtual
+	bool BroadSearch(
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force
+	)=0;
+
+	virtual
+	bool  BoundaryBroadSearch(
+		uint32 bndryIndex,
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false
+	)=0;
 
 public:
 
@@ -82,66 +114,92 @@ public:
 	 	(dict, domain, prtcl, geom, timers)
 	);
 
-	
-	const auto& dict()const
+	inline
+	bool performedSearch()const
+	{
+		return performedSearch_;
+	}
+
+	inline 
+	bool performedSearchBoundary()const 
+	{
+		return performedSearchBoundary_;
+	}
+
+	inline
+	bool performSearch(uint32 iter, bool force = false)const
+	{
+		if((iter-lastUpdated_) % updateInterval_ == 0 || iter == 0 || force )
+		{
+			return true;
+		}
+		return false;		
+	}
+
+	bool enterBroadSearch(const timeInfo& ti, bool force = false)const
+	{
+		return performSearch(ti.iter(), force);
+	}
+
+	virtual 
+	bool enterBroadSearchBoundary(const timeInfo& ti, bool force=false)const = 0;
+
+	inline
+	uint32 updateInterval()const
+	{
+		return updateInterval_;
+	}
+
+	inline
+	const dictionary& dict()const
 	{
 		return dict_;
 	}
 
-	const auto& extendedDomainBox()const
+	inline
+	const box& extendedDomainBox()const
 	{
 		return extendedDomainBox_;
 	}
 
-	const auto& Particles()const
+	inline
+	const particles& Particles()const
 	{
 		return particles_;
 	}
 
 	const pointStructure& pStruct()const;
 
-	const auto& Geometry()const
+	inline
+	const geometry& Geometry()const
 	{
 		return geometry_;
 	}
 
-	auto& ppTimer()
+	inline
+	Timer& ppTimer()
 	{
 		return ppTimer_;
 	}
 
-	auto& pwTimer()
+	inline
+	Timer& bTimer()
 	{
-		return pwTimer_;
+		return bTimer_;
 	}
-
-	virtual 
+ 
 	bool broadSearch(
-		uint32 iter,
-		real t,
-		real dt,
+		const timeInfo& ti,
 		csPairContainerType& ppPairs,
 		csPairContainerType& pwPairs,
-		bool force = false) = 0;
+		bool force = false);
 	
-	virtual 
 	bool boundaryBroadSearch(
-		uint32 i,
-		uint32 iter,
-		real t,
-		real dt,
+		uint32 bndryIndex,
+		const timeInfo& ti,
 		csPairContainerType& ppPairs,
 		csPairContainerType& pwPairs,
-		bool force = false)=0;
-
-	virtual 
-	bool enterBroadSearch(uint32 iter, real t, real dt)const = 0;
-
-	virtual 
-	bool performedBroadSearch()const = 0;
-
-	virtual
-	uint32 updateInterval()const = 0;
+		bool force = false);
 
 	virtual 
 	real sizeRatio()const = 0;

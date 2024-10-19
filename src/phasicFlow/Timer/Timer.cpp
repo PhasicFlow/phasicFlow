@@ -22,9 +22,19 @@ Licence:
 #include "Timers.hpp"
 #include "streams.hpp"
 
-pFlow::Timer::Timer(const word& name, Timers* parrent)
-  : name_(name),
-    parrent_(parrent)
+pFlow::real pFlow::Timer::averageTimeMax() const
+{
+    return 0.0;
+}
+
+pFlow::real pFlow::Timer::accTimersTotalMax() const
+{
+    return 0.0;
+}
+
+pFlow::Timer::Timer(const word &name, Timers *parrent)
+    : name_(name),
+      parrent_(parrent)
 {
 	if (parrent_)
 		parrent_->addToList(this);

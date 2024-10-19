@@ -26,4 +26,7 @@ pFlow::boundaryContactSearchList::boundaryContactSearchList(
     setList(dict, cSearch);
 }
 
-
+bool pFlow::boundaryContactSearchList::boundariesUpdated() const
+{
+    return boundaries_.boundariesUpdated();
+}

@@ -133,6 +133,16 @@ public:
 		return internal_;
 	}
 
+	word fieldName()const
+	{
+		return internal_.name(); 
+	}
+
+	word name()const
+	{
+		return groupNames(fieldName(),boundaryName());
+	}
+
 	FieldAccessType thisField()const
 	{
         if constexpr(isDeviceAccessible<execution_space>())

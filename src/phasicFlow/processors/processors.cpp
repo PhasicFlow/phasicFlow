@@ -35,6 +35,7 @@ Licence:
     pFlow::MPI::DataType pFlow::MPI::realx3Type__;
     pFlow::MPI::DataType pFlow::MPI::realx4Type__;
     pFlow::MPI::DataType pFlow::MPI::int32x3Type__;
+	pFlow::MPI::DataType pFlow::MPI::uint32x3Type__;
     
 #endif
 
@@ -74,6 +75,9 @@ void pFlow::processors::initProcessors(int argc, char *argv[])
 		MPI_Type_contiguous(3, pFlow::MPI::Type<int32>(), &pFlow::MPI::int32x3Type__);
 		MPI_Type_commit(&pFlow::MPI::int32x3Type__);
 
+		MPI_Type_contiguous(3, pFlow::MPI::Type<uint32>(), &pFlow::MPI::uint32x3Type__);
+		MPI_Type_commit(&pFlow::MPI::uint32x3Type__);
+
 	}
 #else
 
@@ -90,6 +94,7 @@ void pFlow::processors::finalizeProcessors()
         MPI::TypeFree(&pFlow::MPI::realx3Type__);
         MPI::TypeFree(&pFlow::MPI::realx4Type__);
 		MPI::TypeFree(&pFlow::MPI::int32x3Type__);
+		MPI::TypeFree(&pFlow::MPI::uint32x3Type__);
 		CheckMPI(MPI_Finalize(), true);
 	}
 #else

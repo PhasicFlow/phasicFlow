@@ -90,25 +90,50 @@ pFlow::boundaryList::updateNeighborLists()
 
 pFlow::boundaryList::boundaryList(pointStructure& pStruct)
   : ListPtr<boundaryBase>(pStruct.simDomain().sizeOfBoundaries()),
-    pStruct_(pStruct),
-    neighborListUpdateInterval_(
-        max(
-            pStruct.simDomain().subDict("boundaries").getVal<uint32>(
-                "neighborListUpdateInterval"
-            ),
-            1u
-        )
-	)
+    pStruct_(pStruct)
 {
+	const dictionary& dict= pStruct_.simDomain().thisBoundariesDict();
+
+	neighborListUpdateInterval_ = dict.getValMax(
+			"neighborListUpdateInterval",
+			1u
+		);
+
+	updateInterval_ = dict.getVal<uint32>("updateInterval");
 }
 
 bool
 pFlow::boundaryList::updateNeighborLists(uint32 iter, bool force)
 {
+	neighborListUpdate_ = false;
+	boundaryUpdate_ = false;
+	iterBeforeBoundaryUpdate_ = false;
+
 	if(iter%neighborListUpdateInterval_==0u || iter == 0u || force)
 	{
-		return updateNeighborLists();
+		if(updateNeighborLists())
+		{
+			neighborListUpdate_ = true;
+			lastNeighborUpdated_ = iter;
+		}
+		else
+		{
+			fatalErrorInFunction<<"error in updating neighbor lists of boundaries"<<endl;
+			return false;
+		}
+		
 	}
+
+	if( iter%updateInterval_ == 0u || iter == 0u || force )
+	{
+		boundaryUpdate_ = true; 
+	}
+
+	if((iter+1)%updateInterval_ == 0u)
+	{
+		iterBeforeBoundaryUpdate_ = true;
+	}
+	
 	return true;
 }
 
@@ -158,37 +183,42 @@ pFlow::boundaryList::internalDomainBox() const
 }
 
 bool
-pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt, bool force)
+pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 {
 	// it is time to update lists
-	if(!updateNeighborLists(iter , force) )
+	if(!updateNeighborLists(ti.iter() , force) )
 	{
-		fatalErrorInFunction;
 		return false;
 	}
 
-	// this forces performing updating the list on each boundary
-	if(force) iter = 0; 
-	
-	for (auto bdry : *this)
-	{
-		if (!bdry->beforeIteration(1, iter, t, dt))
-		{
-			fatalErrorInFunction << "Error in beforeIteration in boundary "
-			                     << bdry->name() << endl;
-			return false;
-		}
-	}
+	auto callAgain = boundariesMask<6>(true);
 
-	for (auto bdry : *this)
+	uint32 step = 1;
+
+	while(callAgain.anyElement(true) && step <= 10u)
 	{
-		if (!bdry->beforeIteration(2, iter, t, dt))
+		for(size_t i=0; i<6ul; i++)
 		{
-			fatalErrorInFunction << "Error in beforeIteration in boundary "
-			                     << bdry->name() << endl;
-			return false;
+
+			if(callAgain[i])
+			{
+				if(! boundary(i).beforeIteration(
+					step, 
+					ti,
+					boundaryUpdate_,
+					iterBeforeBoundaryUpdate_,
+					callAgain[i]))
+				{
+					fatalErrorInFunction<<"error in performing beforeIteration for boundary"<<
+					boundary(i).name()<<" at step "<< step<<endl;
+					return false;
+				}
+			}			
 		}
+
+		step++;
 	}
+	
 
 	for (auto bdry : *this)
 	{
@@ -204,11 +234,11 @@ pFlow::boundaryList::beforeIteration(uint32 iter, real t, real dt, bool force)
 }
 
 bool
-pFlow::boundaryList::iterate(uint32 iter, real t, real dt)
+pFlow::boundaryList::iterate(const timeInfo& ti, bool force)
 {
 	for (auto& bdry : *this)
 	{
-		if (!bdry->iterate(iter, t, dt))
+		if (!bdry->iterate(ti))
 		{
 			fatalErrorInFunction << "Error in iterate in boundary "
 			                     << bdry->name() << endl;
@@ -219,19 +249,24 @@ pFlow::boundaryList::iterate(uint32 iter, real t, real dt)
 }
 
 bool
-pFlow::boundaryList::afterIteration(uint32 iter, real t, real dt)
+pFlow::boundaryList::afterIteration(const timeInfo& ti, bool force)
 {
 	
-	std::array<bool,6> requireStep{true, true, true, true, true, true};
+	auto callAgain = boundariesMask<6>(true);
 
 	int step = 1;
-	while(std::any_of(requireStep.begin(), requireStep.end(), [](bool v) { return v==true; }))
+	while(callAgain.anyElement(true)&& step <=10)
 	{
-		for(auto i=0uL; i<6; i++)
+		for(size_t i=0; i<6; i++)
 		{
-			if(requireStep[i])
+			if(callAgain[i])
 			{
-				requireStep[i] = this->operator[](i).transferData(iter, step);
+				if( !boundary(i).transferData(ti.iter(), step, callAgain[i]))
+				{
+					fatalErrorInFunction<<"Error in transfering data for boundary "<<
+					boundary(i).name()<<endl;
+					return false;
+				}
 			}
 		}
 		step++;

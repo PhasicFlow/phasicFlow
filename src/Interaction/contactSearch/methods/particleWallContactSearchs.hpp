@@ -48,18 +48,6 @@ private:
 	/// @brief  box enclosing the simulation domain (local to processor)
 	box 		domainBox_;
 
-	/*/// @brief box enclosing the area for contact search (region with points)
-	box 		searchBox_;*/
-
-	/// @brief update interval in terms of iteration numebr 
-	uint32 		updateInterval_= 1;
-
-	/// @brief  last iteration number which contact search has been performed
-	uint32 		lastUpdated_ 	= 0;
-
-	/// @brief performed search? 
-	bool 		performedSearch_ = false;
-
 protected:
 
 	inline
@@ -98,25 +86,6 @@ public:
     	const deviceViewType1D<real>& diameter,
 		bool  force = false
 	);
-		
-	bool performedSearch()const
-	{
-		return performedSearch_;
-	}
-
-	bool performSearch(uint32 iter, bool force = false)const
-	{
-		if((iter-lastUpdated_) % updateInterval_ == 0 || iter == 0 || force )
-		{
-			return true;
-		}
-		return false;		
-	}
-
-	uint32 updateInterval()const
-	{
-		return updateInterval_;
-	}
 
 	real sizeRatio()const
 	{

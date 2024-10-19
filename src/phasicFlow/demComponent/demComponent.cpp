@@ -44,3 +44,8 @@ pFlow::uint32 pFlow::demComponent::currentIter() const
 {
   return time_.currentIter();
 }
+
+pFlow::timeInfo pFlow::demComponent::TimeInfo() const
+{
+    return time_.TimeInfo();
+}

@@ -384,6 +384,11 @@ pFlow::sphereParticles::sphereParticles(
 		dynPointStruct(),
 		zero3
 	),
+	boundarySphereParticles_
+	(
+		dynPointStruct().boundaries(),
+		*this
+	),
 	accelerationTimer_(
 		"Acceleration", &this->timers() ),
 	intPredictTimer_(
@@ -523,6 +528,7 @@ bool pFlow::sphereParticles::beforeIteration()
 	I_.updateBoundariesSlaveToMasterIfRequested();
 	rVelocity_.updateBoundariesSlaveToMasterIfRequested();
 	rAcceleration_.updateBoundariesSlaveToMasterIfRequested();
+	rVelIntegration_().updateBoundariesSlaveToMasterIfRequested();
 	fieldUpdateTimer_.end();
 	
 	return true;
@@ -531,10 +537,13 @@ bool pFlow::sphereParticles::beforeIteration()
 bool pFlow::sphereParticles::iterate() 
 {
 
+	timeInfo ti = TimeInfo();
+	realx3 g = control().g();
+
 	particles::iterate();
 	accelerationTimer_.start();
 		pFlow::sphereParticlesKernels::acceleration(
-			control().g(),
+			g,
 			mass().deviceViewAll(),
 			contactForce().deviceViewAll(),
 			I().deviceViewAll(),
@@ -543,6 +552,10 @@ bool pFlow::sphereParticles::iterate()
 			accelertion().deviceViewAll(),
 			rAcceleration().deviceViewAll()
 			);
+		for(auto& bndry:boundarySphereParticles_)
+		{
+			bndry->acceleration(ti, g);
+		}
 	accelerationTimer_.end();
 	
 	intCorrectTimer_.start();

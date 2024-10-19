@@ -51,79 +51,83 @@ pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
 
 
 bool pFlow::boundaryPeriodic::beforeIteration(
-	uint32 step,
-    uint32 iterNum,
-    real t,
-    real dt)
+	uint32 step, 
+	const timeInfo& ti, 
+	bool updateIter, 
+	bool iterBeforeUpdate , 
+	bool& callAgain)
 {
-	if(step!=2)return true;
-	// nothing have to be done
-	if(empty())
+	if(step==1)
 	{
-		return true;
+		callAgain = true;
 	}
-
-	if( !boundaryListUpdate(iterNum))return true;
-	
-	uint32 s = size();
-	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
-	transferFlags.fill(0u);
-	
-	auto points = thisPoints();
-	auto p = boundaryPlane().infPlane();
-	const auto & transferD = transferFlags.deviceViewAll();
-	
-	uint32 numTransfered = 0;
-
-	Kokkos::parallel_reduce
-	(
-		"boundaryPeriodic::beforeIteration",
-		deviceRPolicyStatic(0u,s),
-		LAMBDA_HD(uint32 i, uint32& trnasToUpdate)
+	else
+	{
+		callAgain = false;
+		// nothing have to be done
+		if(empty())
 		{
-			if(p.pointInNegativeSide(points(i)))
+			return true;
+		}
+
+		if(!performBoundarytUpdate())
+		{
+			return true;
+		}
+
+		uint32 s = size();
+		uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
+		transferFlags.fill(0u);
+		
+		auto points = thisPoints();
+		auto p = boundaryPlane().infPlane();
+		const auto & transferD = transferFlags.deviceViewAll();
+		
+		uint32 numTransfered = 0;
+
+		Kokkos::parallel_reduce
+		(
+			"boundaryPeriodic::beforeIteration",
+			deviceRPolicyStatic(0u,s),
+			LAMBDA_HD(uint32 i, uint32& trnasToUpdate)
 			{
-				transferD(i)=1;
-				trnasToUpdate++;
-			}
-		}, 
-		numTransfered
-	);
-	
-	// no point to be transfered 
-	if(numTransfered == 0 )
-	{
-		return true;
+				if(p.pointInNegativeSide(points(i)))
+				{
+					transferD(i)=1;
+					trnasToUpdate++;
+				}
+			}, 
+			numTransfered
+		);
+
+		// no point to be transfered 
+		if(numTransfered == 0 )
+		{
+			return true;
+		}
+		
+		// to obtain the transfer vector 
+		realx3 transferVec = displacementVectroToMirror();
+		
+		return transferPointsToMirror
+		(
+			numTransfered,
+			transferFlags, 
+			mirrorBoundaryIndex(), 
+			transferVec
+		);
 	}
 	
-	// to obtain the transfer vector 
-	realx3 transferVec = displacementVectroToMirror();
+	return true;
 	
-	return transferPointsToMirror
-	(
-		numTransfered,
-		transferFlags, 
-		mirrorBoundaryIndex(), 
-		transferVec
-	);
 }
 
-bool pFlow::boundaryPeriodic::iterate
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryPeriodic::iterate(const timeInfo& ti)
 {
 	return true;
 }
 
-bool pFlow::boundaryPeriodic::afterIteration
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryPeriodic::afterIteration(const timeInfo& ti)
 {
 	return true;
 }

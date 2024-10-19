@@ -23,6 +23,8 @@ Licence:
 #include "domain.hpp"
 #include "boundaryBase.hpp"
 #include "ListPtr.hpp"
+#include "timeInfo.hpp"
+#include "boundariesMask.hpp"
 
 
 namespace pFlow
@@ -41,11 +43,21 @@ private:
 
 	uint32 			neighborListUpdateInterval_;
 
-	domain          extendedDomain_;
+	uint32 			updateInterval_;
 
-	box             internalDomainBox_;
+	uint32 			lastNeighborUpdated_ = 0;
 
-	bool            listSet_ = false;
+	bool 			neighborListUpdate_;
+
+	bool 			boundaryUpdate_;
+
+	bool 			iterBeforeBoundaryUpdate_;
+
+	domain 			extendedDomain_;
+
+	box				internalDomainBox_;
+
+	bool			listSet_ = false;
 
 	void setExtendedDomain();
 
@@ -91,6 +103,11 @@ public:
 		return ListPtr<boundaryBase>::operator[](i);
 	}
 
+	inline 
+	bool boundariesUpdated()const 
+	{
+		return boundaryUpdate_;
+	}
 
 	inline
 	const auto& extendedDomain()const
@@ -106,11 +123,11 @@ public:
 
 	box internalDomainBox()const;
 	
-	bool beforeIteration(uint32 iter, real t, real dt, bool force = false);
+	bool beforeIteration(const timeInfo& tf, bool force = false);
 
-	bool iterate(uint32 iter, real t, real dt);
+	bool iterate(const timeInfo& tf, bool force = false);
 
-	bool afterIteration(uint32 iter, real t, real dt);
+	bool afterIteration(const timeInfo& tf, bool force = false);
 	
 };
 

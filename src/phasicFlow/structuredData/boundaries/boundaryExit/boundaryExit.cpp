@@ -42,72 +42,80 @@ pFlow::boundaryExit::boundaryExit
 
 bool pFlow::boundaryExit::beforeIteration
 (
-	uint32 step,
-	uint32 iterNum, 
-	real t,
-	real dt
+	uint32 step, 
+	const timeInfo& ti, 
+	bool updateIter, 
+	bool iterBeforeUpdate , 
+	bool& callAgain
 )
 {
-	if(step!= 2 )return true;
 	
-	if( !boundaryListUpdate(iterNum))return true;
-
-	// nothing have to be done
-	if(empty())
+	if(step == 1)
 	{
+		boundaryBase::beforeIteration(step, ti, updateIter, iterBeforeUpdate, callAgain);
+		callAgain = true;
 		return true;
-	}
+	} 
+	else if(step == 2 )
+	{
+		callAgain = false;
 
-	uint32 s = size();
-	uint32Vector_D deleteFlags("deleteFlags",s+1, s+1, RESERVE());
-	deleteFlags.fill(0u);
-
-	const auto& deleteD = deleteFlags.deviceViewAll();
-	auto points = thisPoints();
-	auto p = boundaryPlane().infPlane();
-
-	uint32 numDeleted = 0;	
-
-	Kokkos::parallel_reduce
-	(
-		"boundaryExit::beforeIteration",
-		deviceRPolicyStatic(0,s),
-		LAMBDA_HD(uint32 i, uint32& delToUpdate)
+		if( !performBoundarytUpdate())
 		{
-			if(p.pointInNegativeSide(points(i)))
-			{
-				deleteD(i)=1;
-				delToUpdate++;
-			}
-		}, 
-		numDeleted
-	);
-		
-	// no point is deleted
-	if(numDeleted == 0 )
-	{
-		return true;
-	}
+			return true;
+		}
 
-	return this->removeIndices(numDeleted, deleteFlags);
+		// nothing have to be done
+		if(empty())
+		{
+			return true;
+		}
+
+		uint32 s = size();
+		uint32Vector_D deleteFlags("deleteFlags",s+1, s+1, RESERVE());
+		deleteFlags.fill(0u);
+
+		const auto& deleteD = deleteFlags.deviceViewAll();
+		auto points = thisPoints();
+		auto p = boundaryPlane().infPlane();
+
+		uint32 numDeleted = 0;	
+
+		Kokkos::parallel_reduce
+		(
+			"boundaryExit::beforeIteration",
+			deviceRPolicyStatic(0,s),
+			LAMBDA_HD(uint32 i, uint32& delToUpdate)
+			{
+				if(p.pointInNegativeSide(points(i)))
+				{
+					deleteD(i)=1;
+					delToUpdate++;
+				}
+			}, 
+			numDeleted
+		);
+			
+		// no point is deleted
+		if(numDeleted == 0 )
+		{
+			return true;
+		}
+
+		return this->removeIndices(numDeleted, deleteFlags);
+
+	}
+		
+	return true;
+	
 }
 
-bool pFlow::boundaryExit::iterate
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryExit::iterate(const timeInfo& ti)
 {
 	return true;
 }
 
-bool pFlow::boundaryExit::afterIteration
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryExit::afterIteration(const timeInfo& ti)
 {
 	return true;
 }

@@ -53,6 +53,47 @@ private:
 
 	boundaryContactSearchList 		csBoundaries_;
 
+	bool BroadSearch(
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false) override
+	{
+		
+		const auto& position = Particles().pointPosition().deviceViewAll();
+		const auto& flags = Particles().dynPointStruct().activePointsMaskDevice();
+		const auto& diam = Particles().boundingSphere().deviceViewAll();
+
+		return ppwContactSearch_().broadSearch(
+			ti.iter(),
+			ti.t(),
+			ti.dt(),
+			ppPairs, 
+			pwPairs,
+			position, 
+			flags, 
+			diam,
+			force
+		);
+	}
+
+	bool BoundaryBroadSearch(
+		uint32 bndryIndex,
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false)override
+	{		
+		return csBoundaries_[bndryIndex].broadSearch(
+			ti.iter(), 
+			ti.t(), 
+			ti.dt(), 
+			ppPairs, 
+			pwPairs, 
+			force
+		);
+	}
+
 public:
 
 	TypeInfoTemplate11("ContactSearch", SearchMethodType);
@@ -108,87 +149,14 @@ public:
 			);
 	}
 
-
 	add_vCtor(
 		contactSearch,
 		ContactSearch,
 		dictionary);
 
-	
-	bool broadSearch(
-		uint32 iter,
-		real t,
-		real dt,
-		csPairContainerType& ppPairs,
-		csPairContainerType& pwPairs,
-		bool force = false) override
+	bool enterBroadSearchBoundary(const timeInfo& ti, bool force=false)const override
 	{
-		
-
-		ppTimer().start();
-	
-		const auto& position = Particles().pointPosition().deviceViewAll();
-		const auto& flags = Particles().dynPointStruct().activePointsMaskDevice();
-		const auto& diam = Particles().boundingSphere().deviceViewAll();
-		
-		
-		if( !ppwContactSearch_().broadSearch(
-			iter,
-			t,
-			dt,
-			ppPairs, 
-			pwPairs,
-			position, 
-			flags, 
-			diam,
-			force) )
-		{
-			fatalErrorInFunction;
-			return false;
-		}
-		ppTimer().end();
-
-		return true;
-	}
-
-	bool boundaryBroadSearch(
-		uint32 i,
-		uint32 iter,
-		real t,
-		real dt,
-		csPairContainerType& ppPairs,
-		csPairContainerType& pwPairs,
-		bool force = false)override
-	{
-		if(i==0u)
-			Particles().boundingSphere().updateBoundaries(DataDirection::SlaveToMaster);
-		return csBoundaries_[i].broadSearch(
-			iter, 
-			t, 
-			dt, 
-			ppPairs, 
-			pwPairs, 
-			force);
-	}
-
-	bool enterBroadSearch(uint32 iter, real t, real dt)const override
-	{
-		if(ppwContactSearch_)
-		{
-			return ppwContactSearch_().performSearch(iter); 
-		}
-		return false;
-	}
-
-	bool performedBroadSearch()const override
-	{
-		return ppwContactSearch_().performedSearch();
-	}
-
-	
-	uint32 updateInterval()const override
-	{
-		return ppwContactSearch_().updateInterval();
+		return enterBroadSearch(ti, force) || csBoundaries_.boundariesUpdated();
 	}
 
 	real sizeRatio()const override
@@ -196,7 +164,6 @@ public:
 		return ppwContactSearch_().sizeRatio();
 	}
 
-	 
 	real cellExtent()const override
 	{
 		return ppwContactSearch_().cellExtent();

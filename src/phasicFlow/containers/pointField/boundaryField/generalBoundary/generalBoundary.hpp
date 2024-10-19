@@ -123,7 +123,7 @@ public:
     }
 
     inline
-    const word& name()const
+    const word& boundaryName()const
     {
         return boundary_.name();
     }

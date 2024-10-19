@@ -1,7 +1,10 @@
 
 list(APPEND SourceFiles 
-integration/integration.cpp 
+integration/integration.cpp
+boundaries/boundaryIntegration.cpp
+boundaries/boundaryIntegrationList.cpp 
 AdamsBashforth2/AdamsBashforth2.cpp
+AdamsBashforth2/processorAB2BoundaryIntegration.cpp
 #AdamsBashforth5/AdamsBashforth5.cpp
 #AdamsBashforth4/AdamsBashforth4.cpp
 #AdamsBashforth3/AdamsBashforth3.cpp

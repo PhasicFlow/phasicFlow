@@ -41,8 +41,8 @@ typename pFlow::boundaryField<T, MemorySpace>::ProcVectorType&
 pFlow::boundaryField<T, MemorySpace>::neighborProcField()
 {
 	static ProcVectorType dummyVector{"dummyVector"};
-	notImplementedFunction;
-	fatalExit;
+	//notImplementedFunction;
+	//fatalExit;
 	return dummyVector;
 }
 
@@ -51,8 +51,8 @@ const typename pFlow::boundaryField<T, MemorySpace>::ProcVectorType&
 pFlow::boundaryField<T, MemorySpace>::neighborProcField() const
 {
 	static ProcVectorType dummyVector{"dummyVector"};
-	notImplementedFunction;
-	fatalExit;
+	//notImplementedFunction;
+	//fatalExit;
 	return dummyVector;
 }
 
