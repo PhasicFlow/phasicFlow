@@ -1,0 +1,13 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName 	grainDict;
+objectType 	grainShape;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+names 		(sphere1); 	// names of shapes 
+grainDiameters	(0.0008);	// diameter of shapes 
+sphereDiameters	(0.0004);	// diameter of shapes 
+materials	(prop1);	// material names for shapes 

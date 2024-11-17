@@ -1,0 +1,71 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	geometryDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+// motion model: rotating object around an axis
+motionModel rotatingAxis; 
+
+surfaces
+{
+	/*
+	    A cylinder with begin and end radii 0.12 m and axis points at (0 0 0) 
+	and (0 0 0.1)
+	*/
+	cylinder
+	{
+		type cylinderWall;  // type of the wall
+		p1 (0.0 0.0 0.0);   // begin point of cylinder axis
+		p2 (0.0 0.0 0.025);   // end point of cylinder axis
+		radius1 0.036;		// radius at p1
+		radius2 0.036;		// radius at p2
+		resolution 24;      // number of divisions
+		material prop1;     // material name of this wall
+		motion rotAxis;		// motion component name 
+	}
+
+	/*
+	This is a plane wall at the rear end of cylinder
+	*/
+	wall1
+	{
+		type planeWall;			// type of the wall
+		p1 (-0.036 -0.036 0.0);	// first point of the wall
+		p2 ( 0.036 -0.036 0.0);   // second point
+		p3 ( 0.036  0.036 0.0);   // third point
+		p4 (-0.036  0.036 0.0);   // fourth point 
+		material prop1;         // material name of the wall  
+		motion rotAxis;			// motion component name 
+	}
+
+	/*
+	This is a plane wall at the front end of cylinder
+	*/
+	wall2
+	{
+		type planeWall;
+		p1 (-0.036 -0.036 0.025);	// first point of the wall
+		p2 ( 0.036 -0.036 0.025);   // second point
+		p3 ( 0.036  0.036 0.025);   // third point
+		p4 (-0.036  0.036 0.025); 
+		material prop1;
+		motion rotAxis;
+	}
+		
+	
+}
+
+// information for rotatingAxisMotion motion model 
+rotatingAxisInfo
+{
+	rotAxis 
+	{
+		p1 (0.0 0.0 0.0);	// first point for the axis of rotation 
+		p2 (0.0 0.0 1.0);	// second point for the axis of rotation
+		omega 0.8; 		// rotation speed (rad/s)
+	}
+}
