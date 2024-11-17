@@ -18,8 +18,28 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __grainContactForceModels_hpp__
+#define __grainContactForceModels_hpp__
 
-#include "Insertions.hpp"
+#include "cGAbsoluteLinearCF.hpp"
+#include "cGRelativeLinearCF.hpp"
 
-template class pFlow::Insertion<pFlow::sphereShape>;
-template class pFlow::Insertion<pFlow::grainShape>;
+#include "grainRolling.hpp"
+
+
+
+namespace pFlow::cfModels 
+{
+
+
+using limitedCGAbsoluteLinearGrainRolling 	= grainRolling<cGAbsoluteLinear<true>>;
+using nonLimitedCGAbsoluteLinearGrainRolling = grainRolling<cGAbsoluteLinear<false>>;
+
+using limitedCGRelativeLinearGrainRolling   = grainRolling<cGRelativeLinear<true>>;
+using nonLimitedCGRelativeLinearGrainRolling = grainRolling<cGRelativeLinear<false>>;
+
+}
+
+
+
+#endif //__grainContactForceModels_hpp__

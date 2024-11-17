@@ -9,8 +9,17 @@ particles/regularParticleIdHandler/regularParticleIdHandler.cpp
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 SphereParticles/sphereParticles/sphereParticlesKernels.cpp
+
+GrainParticles/grainShape/grainShape.cpp
+GrainParticles/grainParticles/grainParticles.cpp
+GrainParticles/grainParticles/grainParticlesKernels.cpp
+
 SphereParticles/boundarySphereParticles.cpp
 SphereParticles/boundarySphereParticlesList.cpp
+
+GrainParticles/boundaryGrainParticles.cpp
+GrainParticles/boundaryGrainParticlesList.cpp
+
 Insertion/collisionCheck/collisionCheck.cpp
 Insertion/insertionRegion/insertionRegion.cpp
 Insertion/insertion/insertion.cpp

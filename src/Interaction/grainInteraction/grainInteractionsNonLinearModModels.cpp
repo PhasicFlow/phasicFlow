@@ -18,8 +18,26 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#include "grainInteraction.hpp"
+#include "geometryMotions.hpp"
+#include "grainContactForceModels.hpp"
+#include "unsortedContactList.hpp"
+#include "sortedContactList.hpp"
+#include "createBoundaryGrainInteraction.hpp"
 
-#include "Insertions.hpp"
 
-template class pFlow::Insertion<pFlow::sphereShape>;
-template class pFlow::Insertion<pFlow::grainShape>;
+
+#define createInteraction(ForceModel,GeomModel) 	\
+													\
+	template class pFlow::grainInteraction< 		\
+		ForceModel,									\
+		GeomModel,									\
+		pFlow::unsortedContactList>;				\
+													\
+	template class pFlow::grainInteraction< 		\
+		ForceModel,									\
+		GeomModel,									\
+		pFlow::sortedContactList>;					\
+	createBoundaryGrainInteraction(ForceModel, GeomModel)
+
+

@@ -15,11 +15,17 @@ Licence:
   phasicFlow is distributed to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
 
+#include "boundaryGrainInteraction.hpp"
+#include "periodicBoundaryGrainInteraction.hpp"
 
-#include "Insertions.hpp"
+#define createBoundaryGrainInteraction(ForceModel,GeomModel) 	\
+	template class pFlow::boundaryGrainInteraction<			\
+	ForceModel,													\
+	GeomModel>;													\
+																\
+	template class pFlow::periodicBoundaryGrainInteraction<	\
+	ForceModel,													\
+	GeomModel>;
 
-template class pFlow::Insertion<pFlow::sphereShape>;
-template class pFlow::Insertion<pFlow::grainShape>;
