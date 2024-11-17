@@ -18,8 +18,42 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef __grainParticlesKernels_hpp__
+#define __grainParticlesKernels_hpp__
 
-#include "Insertions.hpp"
+#include "types.hpp"
+#include "pointFlag.hpp"
 
-template class pFlow::Insertion<pFlow::sphereShape>;
-template class pFlow::Insertion<pFlow::grainShape>;
+namespace pFlow::grainParticlesKernels
+{
+
+void addMassDiamInertiaProp(
+    deviceViewType1D<uint32>    shapeIndex,
+    deviceViewType1D<real>  	mass,
+    deviceViewType1D<real>  	diameter,
+        deviceViewType1D<real>    coarseGrainFactor,
+
+	deviceViewType1D<real>  	I,
+    deviceViewType1D<uint32>  	propertyId,
+    pFlagTypeDevice 		    incld,
+    deviceViewType1D<real>  	src_mass,
+	deviceViewType1D<real>  	src_grainDiameter,
+	deviceViewType1D<real>  	src_I,
+    deviceViewType1D<uint32>  	src_propertyId
+);
+
+void acceleration( 
+	const realx3&					g,
+	const deviceViewType1D<real>&  	mass,
+	const deviceViewType1D<realx3>& force,
+	const deviceViewType1D<real>&  	I,
+	const deviceViewType1D<realx3>& torque,
+	const pFlagTypeDevice& 		    incld,
+	deviceViewType1D<realx3>  		lAcc,
+	deviceViewType1D<realx3>  		rAcc
+);
+
+
+}
+
+#endif 

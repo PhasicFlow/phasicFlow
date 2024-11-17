@@ -18,8 +18,33 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+//
+REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
+pFlow::grainParticles grnParticles(Control, proprties);
 
-#include "Insertions.hpp"
+//
+REPORT(0)<<"\nCreating particle insertion object . . ."<<END_REPORT;
+/*auto& sphInsertion = 
+	Control.caseSetup().emplaceObject<sphereInsertion>(
+		objectFile(
+			insertionFile__,
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
+			),
+		sphParticles,
+		sphParticles.shapes()
+	);*/
 
-template class pFlow::Insertion<pFlow::sphereShape>;
-template class pFlow::Insertion<pFlow::grainShape>;
+auto grnInsertion =  pFlow::grainInsertion(
+	grnParticles, 
+	grnParticles.grains());
+
+REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<END_REPORT;
+auto interactionPtr = pFlow::interaction::create(
+	Control,
+	grnParticles,
+	surfGeometry
+	);
+
+auto& grnInteraction = interactionPtr();
