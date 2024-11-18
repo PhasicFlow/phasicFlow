@@ -1,0 +1,55 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	domainDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+
+globalBox 
+{
+	min (-0.037 -0.037 -0.001);
+	max (0.037   0.037 0.026);
+}
+
+boundaries
+{
+	timeControl runTime;
+	
+	neighborListUpdateInterval 0.0001;
+
+	neighborLength 0.004;
+
+
+	left
+	{
+		type exit;	
+	}
+
+	right
+	{
+		type exit;
+	}
+
+	bottom
+	{
+		type exit;
+	}
+
+	top
+	{
+		type exit;
+	}
+
+	rear
+	{
+		type exit;
+	}
+
+	front
+	{
+		type exit;
+	}
+}

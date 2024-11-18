@@ -1,0 +1,56 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName interaction;
+objectType dicrionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+materials      (prop1);    // a list of materials names
+densities      (2500.0);   // density of materials [kg/m3]
+
+contactListType   sortedContactList; 
+
+model
+{
+   contactForceModel cGRelativeLinearLimited; // cGAbsoluteLinearLimited   or   cGRelativeLinearLimited
+   
+   rollingFrictionModel normal;
+   
+   grainDissipationModel  none; // simplified or KTGF or none 
+
+   Yeff  (1.0e6);       // Young modulus [Pa]
+
+   Geff  (0.8e6);       // Shear modulus [Pa]
+
+   nu    (0.25);        // Poisson's ratio [-]
+
+   en    (0.8);         // coefficient of normal restitution
+
+   et    (1.0);         // coefficient of tangential restitution 
+
+   mu    (0.3);         // dynamic friction 
+
+   mur   (0.1);         // rolling friction 
+   
+   kn    (1050);
+   
+   kt    (800);
+   
+   additionalDissipationModel GB;
+   
+   
+}
+
+contactSearch
+{
+   method         NBS;           // method for broad search particle-particle
+   
+   
+   updateInterval 10;
+   sizeRatio      1.1;
+   cellExtent     0.55;
+   adjustableBox  Yes;
+
+}
