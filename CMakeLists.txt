@@ -76,7 +76,7 @@ add_subdirectory(solvers)
 add_subdirectory(utilities)
 
 #add_subdirectory(DEMSystems)
-add_subdirectory(testIO)
+#add_subdirectory(testIO)
 
 install(FILES "${PROJECT_BINARY_DIR}/phasicFlowConfig.H"
   DESTINATION include)

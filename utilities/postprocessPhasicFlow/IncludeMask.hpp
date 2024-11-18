@@ -186,11 +186,12 @@ protected:
 		
 	Operator 				operator_;
 	
-	pointField_H<T> 		field_;
+	uniquePtr<pointField_H<T>> 		fieldPtr_;
 
+	hostViewType1D<T> 			field_;
 public:
 
-	TypeInfoTemplate2("IncludeMask", T, Operator);
+	TypeInfoTemplate12("IncludeMask", T, Operator);
 
 	IncludeMask(
 		const dictionary& dict,
@@ -199,8 +200,10 @@ public:
 	:
 		includeMask(dict, opType, timeFolder),
 		operator_(dict),
-		field_(timeFolder.readPointField_H<T>(this->fieldName()))
-	{}
+		fieldPtr_(timeFolder.readPointField_H<T>(this->fieldName())),
+		field_(fieldPtr_().hostView())
+	{
+	}
 
 	add_vCtor(
 		includeMask,
@@ -212,6 +215,11 @@ public:
 		return operator_(field_[n]);
 	}
 
+	uint32 size()const override
+	{
+		return field_.size();
+	}
+
 };
 
 
@@ -221,7 +229,7 @@ class IncludeMask<T,allOp<T>>
 	public includeMask
 {
 public:
-	TypeInfoTemplate2("IncludeMask", T, allOp<int8>);
+	TypeInfoTemplate12("IncludeMask", T, allOp<int8>);
 
 	IncludeMask(
 		const dictionary& dict,
@@ -239,6 +247,11 @@ public:
 	bool isIncluded(int32 n)const override
 	{
 		return true;
+	}
+
+	uint32 size()const override
+	{
+		return 0;
 	}
 };
 

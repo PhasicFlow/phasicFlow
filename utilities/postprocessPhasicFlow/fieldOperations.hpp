@@ -31,14 +31,15 @@ namespace pFlow
 
 
 template<typename T>
-rectMeshField_H<T> sumOp( const pointField_H<T> field, const pointRectCell& pointToCell)
+uniquePtr<rectMeshField_H<T>> sumOp( pointField_H<T>& field, pointRectCell& pointToCell)
 {
 	// create field
-	const auto& mesh = pointToCell.mesh();
+	auto& mesh = pointToCell.mesh();
 	auto iterator = pointToCell.getCellIterator();
+	auto f = field.deviceView();
 
-	rectMeshField_H<T> results(mesh, T(0));
-
+	auto resultsPtr = makeUnique<rectMeshField_H<T>>(mesh, T(0));
+	auto& results = resultsPtr();
 	for(int32 i=0; i<mesh.nx(); i++)
 	{
 		for(int32 j=0; j<mesh.ny(); j++)
@@ -49,7 +50,7 @@ rectMeshField_H<T> sumOp( const pointField_H<T> field, const pointRectCell& poin
 				T res (0);
 				while(n>-1)
 				{
-					res += field[n];
+					res += f[n];
 					n = iterator.getNext(n);
 				}
 
@@ -58,17 +59,19 @@ rectMeshField_H<T> sumOp( const pointField_H<T> field, const pointRectCell& poin
 		}
 	}
 
-	return results;
+	return resultsPtr;
 }
 
 template<typename T, typename incMask>
-rectMeshField_H<T> sumMaksOp( const pointField_H<T> field, const pointRectCell& pointToCell, const incMask& mask)
+uniquePtr<rectMeshField_H<T>> sumMaksOp( pointField_H<T>& field, pointRectCell& pointToCell, const incMask& mask)
 {
 	// create field
-	const auto& mesh = pointToCell.mesh();
+	auto& mesh = pointToCell.mesh();
 	auto iterator = pointToCell.getCellIterator();
+	auto f = field.deviceView();
 
-	rectMeshField_H<T> results(mesh, T(0));
+	auto resultsPtr = makeUnique<rectMeshField_H<T>>(mesh, T(0));
+	auto& results = resultsPtr();
 
 	for(int32 i=0; i<mesh.nx(); i++)
 	{
@@ -85,7 +88,7 @@ rectMeshField_H<T> sumMaksOp( const pointField_H<T> field, const pointRectCell& 
 					
 					if(mask(n))
 					{
-						res += field[n];
+						res += f[n];
 					}
 
 					n = iterator.getNext(n);
@@ -96,7 +99,7 @@ rectMeshField_H<T> sumMaksOp( const pointField_H<T> field, const pointRectCell& 
 		}
 	}
 
-	return results;
+	return resultsPtr;
 }
 
 

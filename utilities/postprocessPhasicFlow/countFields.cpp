@@ -18,28 +18,36 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __rectMeshFields_hpp__
-#define __rectMeshFields_hpp__
+#include "countFields.hpp"
+#include "countField.hpp"
+#include "repository.hpp"
+#include "includeMask.hpp"
 
-#include "rectMeshField.hpp"
 
-namespace pFlow
+pFlow::countFields::countFields(const dictionary& dict)
+:
+	dict_(dict),
+	variableNames_(dict.dictionaryKeywords()),
+	countedValues_(variableNames_.size(), 0u)
 {
-
-template<typename T>
-using rectMeshField_H 		= rectMeshField<T>;
-
-using int8RectMeshField_H  = rectMeshField<int8>;
-
-using int32RectMeshField_H 	= rectMeshField<int32>;
-
-using int64RectMeshField_H  = rectMeshField<int64>;
-
-using realRectMeshField_H	= rectMeshField<real>;
-
-using realx3RectMeshField_H	= rectMeshField<realx3>;
 
 }
 
 
-#endif // __rectMeshFields_hpp__
+bool pFlow::countFields::process(repository& rep)
+{
+	uint32List counted;
+
+	for(const auto& name: variableNames_)
+	{
+		const dictionary& varDict = dict_.subDict(name);
+		uint32 count;
+		countField cField(varDict, rep);
+		cField.process(count);
+		counted.push_back(count);
+	}
+
+	countedValues_ = counted;
+
+	return true;
+}

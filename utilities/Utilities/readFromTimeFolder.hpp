@@ -113,7 +113,7 @@ public:
 	}
 
 	template<typename T>
-	uniquePtr<pointField_H<T>>  createUniformPointField_H(word const& name, T value)
+	uniquePtr<pointField_H<T>>  createUniformPointField_H(word const& name, T value, bool regRep = true)
 	{
 		if( !checkForPointStructure() )
 		{
@@ -124,21 +124,43 @@ public:
 
 		auto& pStruct = repository_.lookupObject<pointStructure>(pointStructureFile__);
 
-
-		auto Ptr = makeUnique<pointField_H<T>>
-		(
-			objectFile
+		if(regRep)
+		{
+			auto Ptr = makeUnique<pointField_H<T>>
 			(
-				name,
-				"",
-				objectFile::READ_NEVER,
-				objectFile::WRITE_NEVER
-			),
-			pStruct,
-			T{},
-			value
-		);
-		return Ptr;
+				objectFile
+				(
+					name,
+					"",
+					objectFile::READ_NEVER,
+					objectFile::WRITE_NEVER
+				),
+				pStruct,
+				T{},
+				value
+			);
+			return Ptr;
+		}
+		else
+		{
+			auto Ptr = makeUnique<pointField_H<T>>
+			(
+				objectFile
+				(
+					name,
+					"",
+					objectFile::READ_NEVER,
+					objectFile::WRITE_NEVER
+				),
+				nullptr,
+				pStruct,
+				value
+			);
+			Ptr().fill(value);
+			return Ptr;
+		}
+		
+		return nullptr;
 	}
 
 	template<typename T>

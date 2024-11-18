@@ -40,14 +40,14 @@ class ProcessField
 
 protected:
 
-	pointField_H<T>& 	field_;
+	uniquePtr<pointField_H<T>> 	field_;
 
 
-	rectMeshField_H<T>& 	processedField_;
+	rectMeshField_H<T> 	processedField_;
 
 public:
 
-	TypeInfoTemplate("ProcessField", T);
+	TypeInfoTemplate11("ProcessField", T);
 
 
 	ProcessField(
@@ -58,24 +58,14 @@ public:
 		processField(dict, pToCell, rep),
 		field_(
 			this->isUniform()?
-			timeFolder().createUniformPointField_H(this->fieldName(), getUniformValue() ):
+			timeFolder().createUniformPointField_H(this->fieldName(), getUniformValue(), false ):
 			timeFolder().readPointField_H<T>(this->fieldName()) 
 			),
 		processedField_
 		(
-			processedRepository().emplaceObject<rectMeshField_H<T>>
-			(
-				objectFile
-				(
-					processedFieldName(),
-					"",
-					objectFile::READ_NEVER,
-					objectFile::WRITE_ALWAYS
-				),
-				mesh(),
-				processedFieldName(),
-				T{}
-			)
+			mesh(),
+			processedFieldName(),
+			T{}
 		)
 	{
 		
@@ -99,33 +89,59 @@ public:
 		
 		const includeMask& incMask = includeMask_();
 		
-		auto numerator = sumMaksOp( field_ , this->pointToCell(), incMask);
+		auto numeratorPtr =  sumMaksOp( field_() , this->pointToCell(), incMask);
+		uniquePtr<rectMeshField_H<real>> denomeratorPtr;
 		
-		rectMeshField_H<real> denomerator( this->mesh(), real{} );
-
 		if(operation() == "sum")
 		{
-			denomerator = rectMeshField_H<real>(this->mesh(), static_cast<real>(1.0));
+			denomeratorPtr = makeUnique<rectMeshField_H<real>>(this->mesh(), static_cast<real>(1.0));
 
 		}else if(operation() == "average")
 		{
 
-			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
+			pointField_H<real> oneFld(
+				objectFile
+				(
+					"oneField",
+					"", 
+					objectFile::READ_NEVER, 
+					objectFile::WRITE_NEVER
+				),
+				const_cast<pointStructure&>(field_().pStruct()), 
+				static_cast<real>(1.0), 
+				static_cast<real>(1.0)
+			);
 
-			denomerator = sumOp(oneFld, this->pointToCell());
+			denomeratorPtr = sumOp(oneFld, this->pointToCell());
 
 		}else if(operation() == "averageMask")
 		{
-			pointField_H<real> oneFld(field_.pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
+			//pointField_H<real> oneFld(field_().pStruct(), static_cast<real>(1.0), static_cast<real>(1.0));
+			pointField_H<real> oneFld(
+				objectFile
+				(
+					"oneField",
+					"", 
+					objectFile::READ_NEVER, 
+					objectFile::WRITE_NEVER
+				),
+				const_cast<pointStructure&>(field_().pStruct()), 
+				static_cast<real>(1.0), 
+				static_cast<real>(1.0)
+			);
+			
+			denomeratorPtr = sumMaksOp(oneFld, this->pointToCell(), incMask);
 
-			denomerator = sumMaksOp(oneFld, this->pointToCell(), incMask);
-		}else
+		}
+		else
 		{
 			fatalErrorInFunction<<"operation is not known: "<< operation()<<endl;
 			fatalExit;
 		}
 
-		
+		auto& numerator = numeratorPtr();
+		auto& denomerator = denomeratorPtr();
+
 		for(int32 i=0; i<this->mesh().nx(); i++ )
 		{
 			for(int32 j=0; j<this->mesh().ny(); j++ )

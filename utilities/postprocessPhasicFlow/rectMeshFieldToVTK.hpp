@@ -26,7 +26,7 @@ namespace pFlow
 {
 
 template<typename T>
-bool convertRectMeshField(iOstream& os, rectMeshField_H<T>& field)
+bool convertRectMeshField(iOstream& os, const rectMeshField_H<T>& field)
 {
 	fatalErrorInFunction<< "this type is not supported "<<
 	field.typeName()<<endl;
@@ -36,7 +36,7 @@ bool convertRectMeshField(iOstream& os, rectMeshField_H<T>& field)
 
 
 template<>
-bool convertRectMeshField(iOstream& os, rectMeshField_H<real>& field)
+bool convertRectMeshField(iOstream& os, const rectMeshField_H<real>& field)
 {
 	
 	os<<"FIELD FieldData 1 " << field.name() << " 1 "<< field.size() << " float\n";
@@ -55,7 +55,7 @@ bool convertRectMeshField(iOstream& os, rectMeshField_H<real>& field)
 }
 
 template<>
-bool convertRectMeshField(iOstream& os, rectMeshField_H<realx3>& field)
+bool convertRectMeshField(iOstream& os, const rectMeshField_H<realx3>& field)
 {
 	
 	os<<"FIELD FieldData 1 " << field.name() << " 3 "<< field.size() << " float\n";
@@ -74,7 +74,7 @@ bool convertRectMeshField(iOstream& os, rectMeshField_H<realx3>& field)
 }
 
 template<>
-bool convertRectMeshField(iOstream& os, rectMeshField_H<int32>& field)
+bool convertRectMeshField(iOstream& os, const rectMeshField_H<int32>& field)
 {
 	
 	os<<"FIELD FieldData 1 " << field.name() << " 1 "<< field.size() << " int\n";

@@ -22,17 +22,19 @@ Licence:
 #define __rectMeshField_hpp__
 
 #include "rectangleMesh.hpp"
-#include "baseAlgorithms.hpp"
+#include "ViewAlgorithms.hpp"
 
 namespace pFlow
 {
 
-template<typename T, typename MemorySpace=void>
+template<typename T>
 class rectMeshField
+:
+	public IOobject
 {
 public:
 
-	using viewType = ViewType3D<T,MemorySpace>;
+	using viewType = ViewType3D<T,HostSpace>;
 
 	using memory_space = typename viewType::memory_space;
 
@@ -54,22 +56,49 @@ protected:
 public:
 
 
-	TypeInfoTemplateNV2("rectMeshField", T, memoerySpaceName());
+	TypeInfoTemplateNV111("rectMeshField", T, memoerySpaceName());
 	
-	rectMeshField(const rectangleMesh& mesh, const word& name ,const T& defVal)
+	rectMeshField(rectangleMesh& mesh, const word& name ,const T& defVal)
 	:
+		IOobject(
+			objectFile
+			(
+				name,
+				"",
+				objectFile::READ_NEVER,
+				objectFile::WRITE_NEVER
+			),
+			IOPattern::MasterProcessorOnly,
+			nullptr
+		),
 		mesh_(&mesh),
 		name_(name),
-		field_("pFlow::reactMeshField", mesh_->nx(), mesh_->ny(), mesh_->nz()),
+		field_("reactMeshField."+name, mesh_->nx(), mesh_->ny(), mesh_->nz()),
 		defaultValue_(defVal)
 	{
 		this->fill(defaultValue_);
 	}
 
-	rectMeshField(const rectangleMesh& mesh, const T& defVal)
+	rectMeshField(rectangleMesh& mesh, const T& defVal)
 	:
-		rectMeshField(mesh, "noName", defVal)
-	{}
+		IOobject(
+			objectFile
+			(
+				"noName",
+				"",
+				objectFile::READ_NEVER,
+				objectFile::WRITE_NEVER
+			),
+			IOPattern::MasterProcessorOnly,
+			nullptr
+		),
+		mesh_(&mesh),
+		name_("noName"),
+		field_("reactMeshField.noName", mesh_->nx(), mesh_->ny(), mesh_->nz()),
+		defaultValue_(defVal)
+	{
+		this->fill(defaultValue_);
+	}
 
 	rectMeshField(const rectMeshField&) = default;
 
@@ -144,11 +173,21 @@ public:
 	{
 		pFlow::fill(
 			field_,
-			range(0,mesh_->nx()),
-			range(0,mesh_->ny()),
-			range(0,mesh_->nz()),
 			val
 			);
+	}
+
+	 
+	bool write(iOstream& is, const IOPattern& iop)const override
+	{
+		notImplementedFunction;
+		return true;
+	}
+
+	bool read(iIstream& is, const IOPattern& iop) override
+	{
+		notImplementedFunction;
+		return true;
 	}
 
 	bool read(iIstream& is)

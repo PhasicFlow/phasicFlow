@@ -17,71 +17,86 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __countField_hpp__
+#define __countField_hpp__
 
-#ifndef __readControlDict_hpp__
-#define __readControlDict_hpp__
 
-#include "fileSystem.hpp"
+#include "virtualConstructor.hpp"
+#include "dictionary.hpp"
+#include "readFromTimeFolder.hpp"
+#include "includeMask.hpp"
 
 
 namespace pFlow
 {
 
-class
-readControlDict
+
+class repository;
+
+class countField
 {
 protected:
+
+	dictionary 	dict_;
 	
-	fileSystem rootPath_;
+	mutable readFromTimeFolder 	timeFolder_;
 
-	fileSystem cdPath_;
-
-	real startTime_;
+	uniquePtr<includeMask>  	includeMask_ = nullptr;
 	
-	real endTime_;
-	
-	real saveInterval_;
-
-	word formatType_;
-
-	int32 precision_;
-
-	inline static fileSystem defaultRootPath = pFlow::CWD();
-	inline static fileSystem defaultCDPath = pFlow::CWD()/word("system")+word("controlDict");
-	
-	word convertTimeToName(const real t, const int32 precision)const;
-
-	bool read();
+	bool static getFieldType(
+			const dictionary& dict,
+			readFromTimeFolder& timeFolder,
+			word& fieldName,
+			word& fieldType);
 
 public:
 
-	readControlDict(
-		const fileSystem& rootPath = defaultRootPath, 
-		const fileSystem& cdPath = defaultCDPath);
+	TypeInfo("countField");
 
-	auto startTime()const
+	countField(const dictionary& dict, repository& rep);
+
+	
+	auto& dict()
 	{
-		return startTime_;
+		return dict_;
 	}
 
-	auto endTime()const
+	const auto& dict()const
 	{
-		return endTime_;
+		return dict_;
 	}
 
-	auto saveInterval()const
+	auto& timeFolderRepository()
 	{
-		return saveInterval_;
+		return timeFolder_.db();
+	}
+	
+	
+	auto& timeFolder()
+	{
+		return timeFolder_;
 	}
 
-	auto startTimeName()const
+	word variableName()const
 	{
-		return convertTimeToName(startTime_, precision_);
+		return dict_.name();
 	}
 
+	// requires a class to read pointField from timefolder 
+	bool process(uint32& countedValue);
+
+
+
+	//virtual bool writeToFile(iOstream& is) const = 0;
+
+	/*static 
+	uniquePtr<countField> create(
+		const dictionary& dict,
+		repository& rep);*/
 };
+
 
 }
 
-#endif //__readControlDict_hpp__
 
+#endif //__countField_hpp__
