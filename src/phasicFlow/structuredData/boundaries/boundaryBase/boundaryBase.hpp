@@ -164,9 +164,11 @@ protected:
 		return true;
 	}
 	
-	uint32 markInNegativeSide(const word& name, uint32Vector_D& markedIndices )const;
 
 public:
+
+	uint32 markInNegativeSide(const word& name, uint32Vector_D& markedIndices )const;
+
 
 	TypeInfo("boundaryBase");
 	
