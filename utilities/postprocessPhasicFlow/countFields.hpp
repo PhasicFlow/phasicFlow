@@ -17,29 +17,61 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#ifndef __countFields_hpp__
+#define __countFields_hpp__
 
-#ifndef __rectMeshFields_hpp__
-#define __rectMeshFields_hpp__
 
-#include "rectMeshField.hpp"
+#include "dictionary.hpp"
+
 
 namespace pFlow
 {
 
-template<typename T>
-using rectMeshField_H 		= rectMeshField<T>;
 
-using int8RectMeshField_H  = rectMeshField<int8>;
+class repository;
 
-using int32RectMeshField_H 	= rectMeshField<int32>;
+class countFields
+{
+protected:
 
-using int64RectMeshField_H  = rectMeshField<int64>;
+	dictionary 	dict_;
+	
+	wordList 	variableNames_;
 
-using realRectMeshField_H	= rectMeshField<real>;
+	uint32List 	countedValues_;
 
-using realx3RectMeshField_H	= rectMeshField<realx3>;
+public:
+
+	TypeInfo("countFields");
+
+	countFields(const dictionary& dict);
+
+	auto& dict()
+	{
+		return dict_;
+	}
+
+	const auto& dict()const
+	{
+		return dict_;
+	}
+
+	const wordList& variableNames()const
+	{
+		return variableNames_;
+	}
+	const uint32List& countedValues()const
+	{
+		return countedValues_;
+	}
+	
+	// requires a class to read pointField from timefolder 
+	bool process(repository& rep);
+
+};
+
 
 }
 
 
-#endif // __rectMeshFields_hpp__
+#endif //__countFields_hpp__

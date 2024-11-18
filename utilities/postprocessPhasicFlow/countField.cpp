@@ -18,43 +18,11 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "processField.hpp"
-#include "pointRectCell.hpp"
+#include "countField.hpp"
 #include "repository.hpp"
 #include "twoPartEntry.hpp"
 
-
-pFlow::processField::processField(
-	const dictionary& dict,
-	pointRectCell& pToCell,
-	repository& rep)
-:
-	dict_(dict),
-	pointToCell_(pToCell),
-	timeFolder_(rep),
-	processedFieldName_(dict.name()),
-	operation_(dict.getVal<word>("operation")),
-	includeMaskType_(dict.getVal<word>("includeMask")),
-	threshold_(dict.getValOrSet<int32>("threshold", 1))
-{
-	
-	if(!processField::getFieldType(
-		dict_, 
-		timeFolder_,
-		fieldName_,
-		fieldType_) )
-	{
-		fatalExit;
-	}
-	
-	auto& incDict = dict_.subDictOrCreate(includeMaskType_+"Info");
-	
-	includeMask_ = includeMask::create(incDict, includeMaskType_, timeFolder_);
-	
-	
-}
-
-bool pFlow::processField::getFieldType(
+bool pFlow::countField::getFieldType(
 	const dictionary& dict,
 	readFromTimeFolder& timeFolder,
 	word& fieldName,
@@ -92,42 +60,35 @@ bool pFlow::processField::getFieldType(
 }
 
 
-pFlow::uniquePtr<pFlow::processField> 
-pFlow::processField::create(
-	const dictionary& dict,
-	pointRectCell& pToCell,
-	repository& rep)
+pFlow::countField::countField(const dictionary& dict, repository& rep)
+:
+	dict_(dict),
+	timeFolder_(rep)
 {
 
-	word  fName, fType;
-	readFromTimeFolder timeFolder(rep);
-	if(!getFieldType(dict, timeFolder, fName, fType))
-	{
-		fatalExit;
-		return nullptr;
-	}
-	
-	auto method = angleBracketsNames("ProcessField", fType);
+	word includeMaskType = dict_.getVal<word>("includeMask");
 
-	if( dictionaryvCtorSelector_.search(method) )
+	auto& incDict = dict_.subDictOrCreate(includeMaskType+"Info");
+	
+	includeMask_ = includeMask::create(incDict, includeMaskType, timeFolder_);
+
+}
+
+
+bool pFlow::countField::process(uint32& countedValue)
+{
+	auto& incMask = includeMask_();
+
+	countedValue = 0;
+	uint32 n = incMask.size();
+
+	for(uint32 i=0; i<n; i++)
 	{
-		auto objPtr = 
-			dictionaryvCtorSelector_[method]
-			(dict, pToCell, rep);
-		REPORT(2)<<"Processing/creating " << Yellow_Text(dict.name())<< " with model "<<Green_Text(method)<<"."<<END_REPORT;
-		return objPtr;
+		if( incMask(i) )
+		{
+			countedValue++;
+		}
 	}
-	else
-	{
-		printKeys
-		( 
-			fatalError << "Ctor Selector "<< 
-			method << " dose not exist. \n"
-			<<"Avaiable ones are: \n\n"
-			,
-			dictionaryvCtorSelector_
-		);
-		fatalExit;
-		return nullptr;
-	}
+
+	return true;
 }

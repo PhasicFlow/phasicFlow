@@ -144,7 +144,8 @@ bool pFlow::repository::addToRepository(IOobject* io)
     if( !objects_.insertIf(io->name(), io ) )
 	{
 		warningInFunction<<
-    	"Failed to add object " << io->name() <<
+    	"Failed to add object " << io->name() << 
+		" with type "<< lookupObjectTypeName(io->name())<<
     	" to repository " << this->name() << 
     	". It is already in this repository. \n";
     	return false;

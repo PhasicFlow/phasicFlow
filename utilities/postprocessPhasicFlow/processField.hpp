@@ -70,6 +70,7 @@ public:
 
 	processField(const dictionary& dict, pointRectCell& pToCell, repository& rep);
 
+	virtual ~processField() = default;
 
 	create_vCtor(
 			processField,
@@ -85,7 +86,17 @@ public:
 		return pointToCell_.mesh();
 	}
 
+	auto& mesh()
+	{
+		return pointToCell_.mesh();
+	}
+
 	const auto& pointToCell()const
+	{
+		return pointToCell_;
+	}
+
+	auto& pointToCell()
 	{
 		return pointToCell_;
 	}

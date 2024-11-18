@@ -74,7 +74,7 @@ int main(int argc, char** argv )
 	#include "initialize_Control.hpp"
 
 	
-	pFlow::postprocess post(Control);
+	
 		
 	// time folders in case 
 	timeFolder folders(Control);
@@ -93,12 +93,16 @@ int main(int argc, char** argv )
 
 	pFlow::fileSystem destFolder = pFlow::fileSystem(outFolder);
 
+	pFlow::postprocess post(Control);
+
 	do 
 	{
 
-
-		if( !validRange.isMember( folders.time() ) )continue;
-
+		if( !validRange.isMember( folders.time() ) )
+		{
+			continue;
+		}
+				
 		if( !withZeroFolder && pFlow::equal(folders.time() , 0.0))continue;
 
 		post.processTimeFolder(folders);
@@ -106,9 +110,10 @@ int main(int argc, char** argv )
 		if(!post.writeToVTK(destFolder, "processed"))
 		{
 			fatalExit;
-		}	
-		
+		}
 
+		
+			
 	}while (folders++);
 
 	#include "finalize.hpp"

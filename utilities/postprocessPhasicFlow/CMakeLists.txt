@@ -1,12 +1,15 @@
 
 set(source_files 
-postprocessPhasicFlow.cpp 
+cellMapper.cpp
+rectangleMesh.cpp
+countField.cpp
+countFields.cpp
 postprocess.cpp
 processField.cpp
 ProcessFields.cpp
 includeMask.cpp
 IncludeMasks.cpp
-
+postprocessPhasicFlow.cpp
 )
 set(link_lib phasicFlow Interaction Kokkos::kokkos Utilities)
 
