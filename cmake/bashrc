@@ -1,7 +1,7 @@
 
 export pFlow_PROJECT_VERSION=v-1.0
 
-export pFlow_PROJECT=phasicFlow
+export pFlow_PROJECT="phasicFlow-$pFlow_PROJECT_VERSION"
 
 
 projectDir="$HOME/PhasicFlow" 

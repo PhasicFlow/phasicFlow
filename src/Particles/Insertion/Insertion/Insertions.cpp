@@ -22,3 +22,4 @@ Licence:
 #include "Insertions.hpp"
 
 template class pFlow::Insertion<pFlow::sphereShape>;
+template class pFlow::Insertion<pFlow::grainShape>;

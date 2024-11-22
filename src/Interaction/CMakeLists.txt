@@ -21,6 +21,12 @@ interaction/interaction.cpp
 sphereInteraction/sphereInteractionsLinearModels.cpp
 sphereInteraction/sphereInteractionsNonLinearModels.cpp
 sphereInteraction/sphereInteractionsNonLinearModModels.cpp
+
+grainInteraction/grainInteractionsLinearModels.cpp
+grainInteraction/grainInteractionsNonLinearModels.cpp
+grainInteraction/grainInteractionsNonLinearModModels.cpp
+
+
 )
 
 if(pFlow_Build_MPI)
