@@ -46,9 +46,9 @@ uniquePtr<rectMeshField_H<T>> sumOp( pointField_H<T>& field, pointRectCell& poin
 		{
 			for(int32 k=0; k<mesh.nz(); k++)
 			{
-				auto n = iterator.start(i,j,k);	
+				uint32 n = iterator.start(i,j,k);	
 				T res (0);
-				while(n>-1)
+				while(n != cellMapper::NoPos)
 				{
 					res += f[n];
 					n = iterator.getNext(n);
@@ -80,10 +80,10 @@ uniquePtr<rectMeshField_H<T>> sumMaksOp( pointField_H<T>& field, pointRectCell& 
 			for(int32 k=0; k<mesh.nz(); k++)
 			{
 				//auto [loop, n] = pointToCell.startLoop(i,j,k);
-				auto n = iterator.start(i,j,k);	
+				uint32 n = iterator.start(i,j,k);	
 				T res (0);
 				
-				while(n>-1)
+				while(n!= cellMapper::NoPos)
 				{
 					
 					if(mask(n))
