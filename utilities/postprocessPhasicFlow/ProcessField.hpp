@@ -49,7 +49,6 @@ public:
 
 	TypeInfoTemplate11("ProcessField", T);
 
-
 	ProcessField(
 		const dictionary& dict,
 		pointRectCell& pToCell,

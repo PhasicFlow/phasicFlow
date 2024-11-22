@@ -101,7 +101,6 @@ public:
 		map_.build(points, activeMask);
 		
 		auto iterator = map_.getCellIterator();
-		
 	
 		for(int32 i=0; i<mesh_.nx(); i++)
 		{
@@ -111,8 +110,8 @@ public:
 				{
 
 					int32 res = 0;
-					int32 n = iterator.start(i,j,k);
-					while( n>-1)
+					uint32 n = iterator.start(i,j,k);
+					while( n!= cellMapper::NoPos)
 					{
 						res+=1;
 						n = iterator.getNext(n);

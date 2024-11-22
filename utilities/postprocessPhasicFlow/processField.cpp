@@ -35,7 +35,7 @@ pFlow::processField::processField(
 	processedFieldName_(dict.name()),
 	operation_(dict.getVal<word>("operation")),
 	includeMaskType_(dict.getVal<word>("includeMask")),
-	threshold_(dict.getValOrSet<int32>("threshold", 1))
+	threshold_(dict.getValOrSetMax<int32>("threshold", 1))
 {
 	
 	if(!processField::getFieldType(
@@ -50,8 +50,7 @@ pFlow::processField::processField(
 	auto& incDict = dict_.subDictOrCreate(includeMaskType_+"Info");
 	
 	includeMask_ = includeMask::create(incDict, includeMaskType_, timeFolder_);
-	
-	
+
 }
 
 bool pFlow::processField::getFieldType(
