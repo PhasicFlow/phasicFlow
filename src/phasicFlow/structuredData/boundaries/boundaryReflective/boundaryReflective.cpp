@@ -46,6 +46,7 @@ pFlow::boundaryReflective::boundaryReflective
 }
 
 bool pFlow::boundaryReflective::beforeIteration(
+    uint32 step,
     uint32 iterNum,
     real t,
     real dt)

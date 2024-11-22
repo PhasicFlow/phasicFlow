@@ -55,6 +55,8 @@ namespace pFlow::MPI
 	inline const auto ErrOp 	= MPI_ERR_OP;
 
 	inline const auto SumOp		= MPI_SUM;
+	inline const auto MaxOp 	= MPI_MAX;
+	inline const auto MinOp 	= MPI_MIN;
 
 	inline const size_t MaxNoProcessors = 2048;
 	

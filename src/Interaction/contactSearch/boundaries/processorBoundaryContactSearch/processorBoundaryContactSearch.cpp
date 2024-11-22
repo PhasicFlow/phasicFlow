@@ -99,7 +99,7 @@ bool pFlow::processorBoundaryContactSearch::broadSearch
             thisDiams,
             neighborProcPoints,
             neighborProcDiams,
-            name()
+            boundaryName()
         );
         //pOutput<<"ppSize "<< ppPairs.size()<<endl;
         return true;

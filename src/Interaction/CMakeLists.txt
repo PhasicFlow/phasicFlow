@@ -7,8 +7,7 @@ contactSearch/methods/cellBased/NBS/NBS.cpp
 contactSearch/methods/cellBased/NBS/cellsWallLevel0.cpp
 
 contactSearch/boundaries/boundaryContactSearch/boundaryContactSearch.cpp
-#contactSearch/boundaries/twoPartContactSearch/twoPartContactSearchKernels.cpp
-#contactSearch/boundaries/twoPartContactSearch/twoPartContactSearch.cpp
+
 contactSearch/boundaries/periodicBoundaryContactSearch/ppwBndryContactSearchKernels.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/ppwBndryContactSearch.cpp
 contactSearch/boundaries/periodicBoundaryContactSearch/wallBoundaryContactSearch.cpp
@@ -28,6 +27,8 @@ if(pFlow_Build_MPI)
     list(APPEND SourceFiles 
     contactSearch/boundaries/processorBoundaryContactSearch/processorBoundaryContactSearch.cpp
     sphereInteraction/boundaries/processorBoundarySphereInteraction/processorBoundarySphereInteractions.cpp
+    contactSearch/boundaries/twoPartContactSearch/twoPartContactSearchKernels.cpp
+    contactSearch/boundaries/twoPartContactSearch/twoPartContactSearch.cpp
     )
 endif()
 

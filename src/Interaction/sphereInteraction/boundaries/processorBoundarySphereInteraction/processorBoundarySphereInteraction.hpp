@@ -22,6 +22,7 @@ Licence:
 
 #include "boundarySphereInteraction.hpp"
 #include "processorBoundaryField.hpp"
+#include "boundaryProcessor.hpp"
 
 namespace pFlow::MPI
 {
@@ -56,12 +57,6 @@ public:
 private:
     
     bool    masterInteraction_;
-
-    Timer   inter_;
-    Timer   send_;
-    Timer   recv_;
-    Timer   add_;
-    uint32  iter=0;
 
 public:
 

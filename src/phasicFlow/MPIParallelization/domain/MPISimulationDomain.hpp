@@ -72,8 +72,6 @@ public:
         systemControl
     );
 
-	const dictionary& thisBoundaryDict() const final;
-
 	/// @brief
 	/// @param pointPos
 	/// @return

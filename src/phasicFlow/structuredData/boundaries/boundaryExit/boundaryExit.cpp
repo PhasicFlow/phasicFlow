@@ -42,12 +42,14 @@ pFlow::boundaryExit::boundaryExit
 
 bool pFlow::boundaryExit::beforeIteration
 (
+	uint32 step,
 	uint32 iterNum, 
 	real t,
 	real dt
 )
 {
-
+	if(step!= 2 )return true;
+	
 	if( !boundaryListUpdate(iterNum))return true;
 
 	// nothing have to be done

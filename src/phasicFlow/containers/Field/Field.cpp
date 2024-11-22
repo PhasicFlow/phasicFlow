@@ -21,13 +21,17 @@ Licence:
 template<class T, class MemorySpace>
 bool pFlow::Field<T, MemorySpace>::read
 (
-	iIstream& is
+	iIstream& is,
+	bool resume
 )
 {
 	
 	bool tokenFound = true;
 	
-    tokenFound = is.findToken(fieldKey_);
+	if(resume)
+		tokenFound = is.findTokenResume(fieldKey_);
+	else
+		tokenFound = is.findToken(fieldKey_);
 
 	if( !tokenFound )
 	{
@@ -53,14 +57,21 @@ template<class T, class MemorySpace>
 bool pFlow::Field<T, MemorySpace>::read
 (
 	iIstream& is,
-	const IOPattern& iop
+	const IOPattern& iop,
+	bool resume
 )
 {
 	
 	bool tokenFound = true;
 	
     if(iop.thisProcReadData())
-        tokenFound = is.findToken(fieldKey_);
+	{
+		if(resume)
+			tokenFound = is.findTokenResume(fieldKey_);
+		else
+			tokenFound = is.findToken(fieldKey_);
+	}
+	
 
 	if( !tokenFound )
 	{

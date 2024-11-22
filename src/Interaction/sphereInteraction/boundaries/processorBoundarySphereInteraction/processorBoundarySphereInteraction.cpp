@@ -32,11 +32,6 @@ pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::processorBoundarySpher
 		geomMotion
 	),
 	masterInteraction_(boundary.isBoundaryMaster())
-	,
-	inter_("inter"),
-	send_("send"),
-	recv_("recv"),
-	add_("add")
 {
 	if(masterInteraction_)
 	{
@@ -45,6 +40,9 @@ pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::processorBoundarySpher
 	}
 		
 }
+
+
+#ifdef BoundaryModel1
 
 template <typename cFM, typename gMM>
 bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInteraction
@@ -74,8 +72,8 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 		if(step == 2 )
 		{
 			iter++;
-			inter_.start();
 			pFlow::MPI::processorBoundarySIKernels::sphereSphereInteraction(
+				"ppBoundaryInteraction."+this->boundaryName(),
 				dt,
 				this->ppPairs(),
 				cfModel,
@@ -94,64 +92,165 @@ bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInter
 				cfBndry.neighborProcField().deviceViewAll(),
 				ctBndry.neighborProcField().deviceViewAll()
 			);
-			inter_.end();
+			
 			return true;
 		}		
 		else if(step == 3 )
 		{
-			send_.start();
 			cfBndry.sendBackData();
 			ctBndry.sendBackData();
-			send_.end();
+			
 			return true;
 		}
 		
-		if(iter % 1000 == 0u)
-		{
-			pOutput<<"inter "<< inter_.totalTime()<<endl;
-			pOutput<<"send "<< send_.totalTime()<<endl<<endl;;
-		}
+		
 		return false;	
 	}
 	else
 	{
 		
-		const auto & sphPar = this->sphParticles();
-		uint32 thisIndex = this->boundary().thisBoundaryIndex();
-		const auto& cfBndry = static_cast<const processorBoundaryField<realx3>&>(
-		sphPar.contactForce().BoundaryField(thisIndex));
-		const auto& ctBndry = static_cast<const processorBoundaryField<realx3>&> (
-		sphPar.contactTorque().BoundaryField(thisIndex));
-		if(step==1)
+		if(step == 1 )
 		{
-			recv_.start();
+			const auto & sphPar = this->sphParticles();
+			uint32 thisIndex = this->boundary().thisBoundaryIndex();
+			const auto& cfBndry = static_cast<const processorBoundaryField<realx3>&>(
+			sphPar.contactForce().BoundaryField(thisIndex));
+			const auto& ctBndry = static_cast<const processorBoundaryField<realx3>&> (
+			sphPar.contactTorque().BoundaryField(thisIndex));
+
 			cfBndry.recieveBackData();
 			ctBndry.recieveBackData();
-			recv_.end();
+			
 			return false;
 		}
-		else if(step == 2)
+		else if(step == 11)
 		{
-			iter++;
-			return true;
-		}
-		else if(step == 3)
-		{
-			add_.start();
+			const auto & sphPar = this->sphParticles();
+			uint32 thisIndex = this->boundary().thisBoundaryIndex();
+			const auto& cfBndry = static_cast<const processorBoundaryField<realx3>&>(
+			sphPar.contactForce().BoundaryField(thisIndex));
+			const auto& ctBndry = static_cast<const processorBoundaryField<realx3>&> (
+			sphPar.contactTorque().BoundaryField(thisIndex));
+
 			cfBndry.addBufferToInternalField();
 			ctBndry.addBufferToInternalField();
-			add_.end();
+	
 			return true;
 		}
 		
-		if(iter % 1000 == 0u)
-		{
-			pOutput<<"recive "<< recv_.totalTime()<<endl;
-			pOutput<<"add "<< add_.totalTime()<<endl<<endl;
-		}
-
+		
 		return false;
 	}
 
 	return false;
 }
+#else
+
+template <typename cFM, typename gMM>
+bool pFlow::MPI::processorBoundarySphereInteraction<cFM, gMM>::sphereSphereInteraction
+(
+	real dt,
+	const ContactForceModel &cfModel,
+	uint32 step
+)
+{
+	
+	// master processor calculates the contact force/torque and sends data back to the 
+	// neighbor processor (slave processor).
+	// slave processor recieves the data and adds the data to the internalField 
+	if(masterInteraction_) 
+	{
+		if(step==1)return true;
+
+		const auto & sphPar = this->sphParticles();
+		uint32 thisIndex = this->boundary().thisBoundaryIndex();
+		
+		const auto& cfBndry = static_cast<const processorBoundaryField<realx3>&> (
+		sphPar.contactForce().BoundaryField(thisIndex));
+
+		const auto& ctBndry = static_cast<const processorBoundaryField<realx3>&> (
+		sphPar.contactTorque().BoundaryField(thisIndex));
+
+		if(step == 2 )
+		{
+			
+			pFlow::MPI::processorBoundarySIKernels::sphereSphereInteraction(
+				"ppBoundaryInteraction."+this->boundaryName(),
+				dt,
+				this->ppPairs(),
+				cfModel,
+				this->boundary().thisPoints(),
+				sphPar.diameter().deviceViewAll(),
+				sphPar.propertyId().deviceViewAll(),
+				sphPar.velocity().deviceViewAll(),
+				sphPar.rVelocity().deviceViewAll(),
+				sphPar.contactForce().deviceViewAll(),
+				sphPar.contactTorque().deviceViewAll(),
+				this->boundary().neighborProcPoints().deviceViewAll(),
+				sphPar.diameter().BoundaryField(thisIndex).neighborProcField().deviceViewAll(),
+				sphPar.propertyId().BoundaryField(thisIndex).neighborProcField().deviceViewAll(),
+				sphPar.velocity().BoundaryField(thisIndex).neighborProcField().deviceViewAll(),
+				sphPar.rVelocity().BoundaryField(thisIndex).neighborProcField().deviceViewAll(),
+				cfBndry.neighborProcField().deviceViewAll(),
+				ctBndry.neighborProcField().deviceViewAll()
+			);
+		
+			return true;
+		}		
+		else if(step == 3 )
+		{
+			cfBndry.sendBackData();
+			ctBndry.sendBackData();
+			return true;
+		}
+		else if(step == 11 )
+		{
+			cfBndry.updateBoundaryFromSlave();
+			ctBndry.updateBoundaryFromSlave();
+			return true;
+		}
+
+		return false;	
+	}
+	else
+	{
+		
+		if(step == 1 )
+		{
+			const auto & sphPar = this->sphParticles();
+			uint32 thisIndex = this->boundary().thisBoundaryIndex();
+			const auto& cfBndry = static_cast<const processorBoundaryField<realx3>&>(
+			sphPar.contactForce().BoundaryField(thisIndex));
+			const auto& ctBndry = static_cast<const processorBoundaryField<realx3>&> (
+			sphPar.contactTorque().BoundaryField(thisIndex));
+
+			cfBndry.recieveBackData();
+			ctBndry.recieveBackData();
+			
+			return false;
+		}
+		else if(step == 11)
+		{
+			const auto & sphPar = this->sphParticles();
+			uint32 thisIndex = this->boundary().thisBoundaryIndex();
+			const auto& cfBndry = static_cast<const processorBoundaryField<realx3>&>(
+			sphPar.contactForce().BoundaryField(thisIndex));
+			const auto& ctBndry = static_cast<const processorBoundaryField<realx3>&> (
+			sphPar.contactTorque().BoundaryField(thisIndex));
+
+			cfBndry.addBufferToInternalField();
+			cfBndry.updateBoundaryToMaster();
+
+			ctBndry.addBufferToInternalField();
+			ctBndry.updateBoundaryToMaster();
+
+			return true;
+		}
+				
+		return false;
+	}
+
+	return false;
+}
+
+#endif

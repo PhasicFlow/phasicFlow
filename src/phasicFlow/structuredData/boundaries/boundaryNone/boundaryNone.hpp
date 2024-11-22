@@ -52,7 +52,7 @@ public:
 		dictionary
 	);
 
-	bool beforeIteration(uint32 iterNum, real t, real dt) final;
+	bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) final;
 
 	bool iterate(uint32 iterNum, real t, real dt) final;
 
