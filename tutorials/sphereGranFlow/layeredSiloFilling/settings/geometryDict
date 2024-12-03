@@ -6,7 +6,7 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-motionModel stationary;          // motion model can be rotatingAxis or stationary or vibrating
+motionModel            stationary;               // motion model can be rotatingAxis or stationary or vibrating
 
 stationaryInfo
 {
@@ -17,36 +17,36 @@ surfaces
 {
 	cylinderShell
 	{
-		type 		 cylinderWall;  	    // other options: cuboidWall and planeWall
+		type 		 cylinderWall;  	         // other options: cuboidWall and planeWall
 
-		p1 			(0.0 0.0 0.0);          // begin point of cylinder axis
+		p1 			(0.0 0.0 0.0);               // begin point of cylinder axis
 
-		p2 			(0.0 0.0 0.4);          // end point of cylinder axis
+		p2 			(0.0 0.0 0.4);               // end point of cylinder axis
 
-		radius1 	          0.1;		    // radius at p1
+		radius1 	          0.1;		         // radius at p1
  
-		radius2 	          0.1;		    // radius at p2
+		radius2 	          0.1;		         // radius at p2
 
-		resolution 	           36;      	// number of divisions
+		resolution 	           36;      	     // number of divisions
 
-		material 	      wallMat;   	    // material name of this wall
+		material 	      wallMat;   	         // material name of this wall
 	}
 
 	coneShell
 	{
-		type 		 cylinderWall;  	    // other options: cuboidWall and planeWall
+		type 		 cylinderWall;  	         // other options: cuboidWall and planeWall
 
-		p1 		   (0.0 0.0 -0.1);          // begin point of cylinder axis
+		p1 		   (0.0 0.0 -0.1);               // begin point of cylinder axis
 
-		p2 			(0.0 0.0 0.0);          // end point of cylinder axis
+		p2 			(0.0 0.0 0.0);               // end point of cylinder axis
 
-		radius1 	         0.02;		    // radius at p1
+		radius1 	         0.02;		         // radius at p1
 
-		radius2 	          0.1;		    // radius at p2
+		radius2 	          0.1;		         // radius at p2
+  
+		resolution 	           36;      	     // number of divisions
 
-		resolution 	           36;      	// number of divisions
-
-		material 	      wallMat;   	    // material name of this wall
+		material 	      wallMat;   	         // material name of this wall
 	}
 
 	/*
@@ -55,17 +55,17 @@ surfaces
 
 	exitGate
 	{
-		type planeWall;                     // other options: cuboidWall and cylinderWall
+		type        planeWall;                   // other options: cuboidWall and cylinderWall
 
-		p1 (-0.02 -0.02 -0.1);              // first point of the wall
+		p1 (-0.02 -0.02 -0.1);                   // first point of the wall
 
-		p2 ( 0.02 -0.02 -0.1);              // second point of the wall
+		p2 ( 0.02 -0.02 -0.1);                   // second point of the wall
 
-		p3 ( 0.02  0.02 -0.1);              // third point of the wall
+		p3 ( 0.02  0.02 -0.1);                   // third point of the wall
 
-		p4 (-0.02  0.02 -0.1);              // fourth point of the wall
+		p4 (-0.02  0.02 -0.1);                   // fourth point of the wall
 		 
-		material wallMat;                   // material name of the wall 
+		material      wallMat;                   // material name of the wall 
 	}
 }
 
