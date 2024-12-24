@@ -10,7 +10,7 @@ globalBox                                        // Simulation domain: every par
 {
 	min (-0.11 -0.11 -0.41);
 	
-	max ( 0.11  0.11  0.41);
+	max ( 0.33  0.11  0.41);
 }
 
 boundaries
