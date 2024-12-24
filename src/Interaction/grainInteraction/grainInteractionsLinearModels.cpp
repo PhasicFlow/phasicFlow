@@ -60,3 +60,9 @@ createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGRelativeLinea
 
 createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGAbsoluteLinear<false>>, pFlow::vibratingMotionGeometry);
 createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGRelativeLinear<false>>, pFlow::vibratingMotionGeometry);
+
+createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGAbsoluteLinear<true>>, pFlow::conveyorBeltMotionGeometry);
+createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGRelativeLinear<true>>, pFlow::conveyorBeltMotionGeometry);
+
+createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGAbsoluteLinear<false>>, pFlow::conveyorBeltMotionGeometry);
+createInteraction(pFlow::cfModels::grainRolling<pFlow::cfModels::cGRelativeLinear<false>>, pFlow::conveyorBeltMotionGeometry);

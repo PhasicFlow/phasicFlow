@@ -8,11 +8,11 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 motionModel            conveyorBelt;               // motion model can be rotatingAxis or stationary or vibrating
 
-conveyorBeltMotionInfo
+conveyorBeltInfo
 {
     conveyorBelt1
     {
-        velocity (1, 0, 0);
+        velocity (1 0 0);
     }
 }
 
