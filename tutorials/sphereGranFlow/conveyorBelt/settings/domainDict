@@ -1,0 +1,65 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	domainDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
+{
+	min (-0.11 -0.11 -0.41);
+	
+	max ( 0.11  0.11  0.41);
+}
+
+boundaries
+{
+	// Determines how often (how many iterations) do you want to 
+
+	// rebuild the list of particles in the neighbor list 
+
+	// of all boundaries in the simulation domain 
+
+	neighborListUpdateInterval 30;
+	
+	// Determines how often do you want to update the new changes in the boundary
+
+	updateInterval             10;
+
+	// The distance from the boundary plane within which particles are marked to be in the boundary list 
+
+	neighborLength          0.004;
+
+	left
+	{
+		type exit;	                             // other options: periodict, reflective 
+	}
+
+	right
+	{
+		type exit;                               // other options: periodict, reflective 
+	}
+
+	bottom
+	{
+		type exit;                               // other options: periodict, reflective 
+	}
+
+	top
+	{
+		type exit;                               // other options: periodict, reflective 
+	}
+
+	rear
+	{
+		type exit;                               // other options: periodict, reflective 
+	}
+
+	front
+	{
+		type exit;                               // other options: periodict, reflective 
+	}
+}    
+
+
