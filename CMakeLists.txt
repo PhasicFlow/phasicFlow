@@ -23,7 +23,7 @@ else()
   set(Kokkos_Source_DIR $ENV{HOME}/Kokkos/kokkos)
 endif()
 message(STATUS "Kokkos source directory is ${Kokkos_Source_DIR}")
-add_subdirectory(${Kokkos_Source_DIR} ${phasicFlow_BINARY_DIR}/kokkos)
+add_subdirectory(${Kokkos_Source_DIR} ./kokkos)
 Kokkos_cmake_settings()
 
 

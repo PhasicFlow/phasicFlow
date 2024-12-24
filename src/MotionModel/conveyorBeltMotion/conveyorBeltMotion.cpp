@@ -18,34 +18,58 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __geometryMotions_hpp__
-#define __geometryMotions_hpp__
-
-#include "geometryMotion.hpp"
-#include "stationaryWall.hpp"
-#include "rotatingAxisMotion.hpp"
 #include "conveyorBeltMotion.hpp"
-//#include "multiRotatingAxisMotion.hpp"
-#include "vibratingMotion.hpp"
 
 
-namespace pFlow
+pFlow::conveyorBeltMotion::conveyorBeltMotion
+(
+	const objectFile &objf, 
+	repository *owner
+)
+:
+	fileDictionary(objf, owner)
 {
 
-using vibratingMotionGeometry = geometryMotion<vibratingMotion>;
-
-using rotationAxisMotionGeometry = geometryMotion<rotatingAxisMotion>;
-
-using stationaryGeometry = geometryMotion<stationaryWall>;
-
-using conveyorBeltMotionGeometry = geometryMotion<conveyorBeltMotion>;
-
-//typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
-
-
-
-
+	if(!impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
 }
 
+pFlow::conveyorBeltMotion::conveyorBeltMotion
+(
+	const objectFile &objf, 
+	const dictionary &dict, 
+	repository *owner
+)
+:
+	fileDictionary(objf, dict, owner)
+{
+	if(!impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
+}
 
-#endif
+bool pFlow::conveyorBeltMotion::write
+(
+	iOstream &os, 
+	const IOPattern &iop
+) const
+{
+	// a global dictionary
+	dictionary newDict(fileDictionary::dictionary::name(), true);
+	if( iop.thisProcWriteData() )
+	{
+		if( !this->impl_writeDictionary(newDict) || 
+			!newDict.write(os))
+		{
+			fatalErrorInFunction<<
+			" error in writing to dictionary "<< newDict.globalName()<<endl;
+			return false;
+		}
+	}
+    return true;
+}
