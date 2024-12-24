@@ -6,53 +6,75 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-
 setFields
 {
 	/*
 	    Default value for fields defined for particles
-	These fields should always be defined for simulations with 
-	spherical particles.
+		These fields should always be defined for simulations with 
+		spherical particles
 	*/
 
 	defaultValue 
 	{
-		velocity 		realx3 	(0 0 0); // linear velocity (m/s)
-		acceleration 	realx3 	(0 0 0); // linear acceleration (m/s2)
-		rVelocity 		realx3 	(0 0 0); // rotational velocity (rad/s)
-		shapeName 		word	glassBead; // name of the particle shape 
+		velocity 		realx3 	  (0 0 0);       // linear velocity (m/s)
+
+		acceleration 	realx3 	  (0 0 0);       // linear acceleration (m/s2)
+
+		rVelocity 		realx3 	  (0 0 0);       // rotational velocity (rad/s)
+
+		shapeName 		word	glassBead;       // name of the particle shape 
 	}
 
 	selectors
-	{}
+	{
+		shapeAssigne
+		{
+			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
+ 
+			stridedRangeInfo
+			{
+				begin 	    0;			         // begin index of points
+
+				end 	250000;		 			 // end index of points 
+
+				stride      3;			 		 // stride for selector 
+			}
+
+			fieldValue  					     // fields that the selector is applied to 
+			{
+				shapeName 	word    glassBead; // sets shapeName of the selected points to largeSphere
+			}
+		}
+	}
 }
 
-// positions particles 
-positionParticles
+positionParticles                                // positions particles 
 {
-	method positionOrdered;     		// ordered positioning
+	method ordered;     		                 // other options: random and empty
 
-	maxNumberOfParticles 	250001; // maximum number of particles in the simulation
-	mortonSorting 			Yes;    // perform initial sorting based on morton code?   
+	//maxNumberOfParticles 	250001;              // maximum number of particles in the simulation
 
-	box  // box for positioning particles 
+	//mortonSorting 			   Yes;              // perform initial sorting based on morton code?   
+
+	orderedInfo
 	{
-		min (-0.08 -0.08 0.0);    // lower corner point of the box 
-		max ( 0.08  0.08 0.36);	// upper corner point of the box 
-	}
-	
-	positionOrderedInfo
-	{
-		diameter 0.003; 	// minimum space between centers of particles
-		numPoints 250000; 	// number of particles in the simulation 
-		axisOrder (z y x);  // axis order for filling the space with particles
+		diameter 0.003; 						 // minimum space between centers of particles
+
+		numPoints 250000; 	                     // number of particles in the simulation 
+
+		axisOrder (z y x);                       // axis order for filling the space with particles
 	}
 
-	positionRandomInfo
+	regionType cylinder;                         // other options: box and sphere  
+
+	cylinderInfo  				                 // cylinder information for positioning particles 
 	{
-		diameter 0.003; 	// minimum space between centers of particles
-		numPoints 250000; 	// number of particles in the simulation 
-		maxIterations 40;   // max number of contact search passes to position particles	
+		p1 (0.0 0.003 0.0); 	                 // begin point of cylinder axis
+
+		p2 (0.0 0.22 0.0);		                 // end point of cylinder axis
+
+		radius 		0.117;		                 // radius of cylinder 
 	}
+
 
 }

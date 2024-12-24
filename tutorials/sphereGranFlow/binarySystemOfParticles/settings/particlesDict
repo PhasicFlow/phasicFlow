@@ -11,7 +11,9 @@ setFields
 	/*
 	    Default value for fields defined for particles:
 
-		These fields should always be defined for simulations with spherical particles
+		These fields should always be defined for simulations with 
+
+		spherical particles
 	*/
 
 	defaultValue 

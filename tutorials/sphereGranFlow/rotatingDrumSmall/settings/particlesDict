@@ -6,45 +6,70 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-
 setFields
 {
 	/*
 	    Default value for fields defined for particles
-	These fields should always be defined for simulations with 
-	spherical particles.
+
+		These fields should always be defined for simulations with 
+
+		spherical particles.
 	*/
 
 	defaultValue 
 	{
-		velocity 		realx3 	(0 0 0); // linear velocity (m/s)
-		acceleration 	realx3 	(0 0 0); // linear acceleration (m/s2)
-		rVelocity 		realx3 	(0 0 0); // rotational velocity (rad/s)
-		shapeName 		word	sphere1; // name of the particle shape 
+		velocity 		realx3 	(0 0 0);         // linear velocity (m/s)
+
+		acceleration 	realx3 	(0 0 0);         // linear acceleration (m/s2)
+
+		rVelocity 		realx3 	(0 0 0);         // rotational velocity (rad/s)
+
+		shapeName 		word	sphere1;         // name of the particle shape 
 	}
 
 	selectors
-	{}
+	{
+		shapeAssigne
+		{
+			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
+ 
+			stridedRangeInfo
+			{
+				begin 	    0;			         // begin index of points
+
+				end 	30000;		 			 // end index of points 
+
+				stride      3;			 		 // stride for selector 
+			}
+
+			fieldValue  					     // fields that the selector is applied to 
+			{
+				shapeName 	word    sphere1;     // sets shapeName of the selected points to largeSphere
+			}
+		}
 }
 
-// positions particles 
-positionParticles
+positionParticles                                // positions particles 
 {
-	method positionOrdered;     // ordered positioning
+	method ordered;     		                 // other options: random and empty
 
-	maxNumberOfParticles 40000; // maximum number of particles in the simulation
-	mortonSorting Yes;          // perform initial sorting based on morton code?   
+	mortonSorting 			   Yes;              // perform initial sorting based on morton code?   
 
-	box  // box for positioning particles 
+	orderedInfo
 	{
-		min (-0.08 -0.08 0.015);    // lower corner point of the box 
-		max ( 0.08  0.08 0.098);	// upper corner point of the box 
+		diameter  0.004; 						 // minimum space between centers of particles
+
+		numPoints 30000; 	                     // number of particles in the simulation 
+
+		axisOrder (z y x);                       // axis order for filling the space with particles
 	}
 
-	positionOrderedInfo
+	regionType box;                              // other options: cylinder and sphere  
+
+	boxInfo  				                     // box information for positioning particles 
 	{
-		diameter 0.004; 	// minimum space between centers of particles
-		numPoints 30000; 	// number of particles in the simulation 
-		axisOrder (z y x);  // axis order for filling the space with particles
+		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
+
+		max ( 0.08  0.08 0.098);	             // upper corner point of the box 
 	}
 }

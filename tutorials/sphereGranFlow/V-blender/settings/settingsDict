@@ -6,26 +6,19 @@ objectName 	settingsDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-
 run 		rotatingVblender;
 
-// time step for integration (s)
-dt 			0.00001;
+dt 			         0.00001;                    // time step for integration (s)
 
-// start time for simulation
-startTime 		0;
+startTime 		           0;                    // start time for simulation
 
-// end time for simulation
-endTime 		10;
+endTime 		          10;                    // end time for simulation
 
-// time interval for saving the simulation
-saveInterval    	0.05;
+saveInterval    	    0.05;                    // time interval for saving the simulation
 
-// maximum number of digits for time folder
-timePrecision    	6; 
+timePrecision    	       6;                    // maximum number of digits for time folder
 
-// gravity vector (m/s2)
-g 			(0 0 -9.8);
+g 			      (0 0 -9.8);                    // gravity vector (m/s2)
 
 /*
 	Simulation domain 
