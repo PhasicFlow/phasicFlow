@@ -46,7 +46,7 @@ conveyorBeltInfo
 {
   conveyorBelt1
   {
-    // the definition based on class conveyorBelt1
+    // the definition based on class conveyorBelt
   }
 }
 ...

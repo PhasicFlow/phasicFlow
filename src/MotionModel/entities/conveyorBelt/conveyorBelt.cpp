@@ -33,8 +33,6 @@ pFlow::conveyorBelt::conveyorBelt(const dictionary& dict)
 	}
 }
 
-
-
 FUNCTION_H
 bool pFlow::conveyorBelt::read(const dictionary& dict)
 {	
