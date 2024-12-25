@@ -43,12 +43,9 @@ protected:
 	
 	int32Vector_H 							numParInDomain_;
 
-
 	real maxBoundingBoxSize_;
 
 	real domainExtension_ = 1.0;
-
-	using includeMask = typename pointStructure::activePointsHost;
 
 	void clcDomains(const std::vector<box>& domains);
 
@@ -78,7 +75,7 @@ public:
 	{
 		return
 		span<const int32>(
-			particlesInDomains_[di].hostVectorAll().data(),
+			particlesInDomains_[di].hostViewAll().data(),
 			numParInDomain_[di]
 			);
 	}
@@ -91,7 +88,7 @@ public:
 
 	//template<typename includeMask>
 	bool locateParticles(
-		ViewType1D<realx3,HostSpace> points, includeMask mask);
+		ViewType1D<realx3,HostSpace> points, const pFlagTypeHost& mask);
 	
 };
 

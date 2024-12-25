@@ -47,10 +47,10 @@ maxBoundingBoxSize_(maxBoundingBox)
 }
 
 bool pFlow::domainDistribute::locateParticles(
-		ViewType1D<realx3,HostSpace> points, includeMask mask)
+		ViewType1D<realx3,HostSpace> points, const pFlagTypeHost& mask)
 {
 	
-	range activeRange = mask.activeRange();
+	const rangeU32 activeRange = mask.activeRange();
 
 
 	for(int32 di=0; di<numDomains_; di++)
@@ -59,7 +59,7 @@ bool pFlow::domainDistribute::locateParticles(
 	}
 
 	
-	for(int32 i=activeRange.first; i<activeRange.second; i++)
+	for(int32 i=activeRange.start(); i<activeRange.end(); i++)
 	{
 		if(mask(i))
 		{
