@@ -18,34 +18,53 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __geometryMotions_hpp__
-#define __geometryMotions_hpp__
-
-#include "geometryMotion.hpp"
-#include "stationaryWall.hpp"
-#include "rotatingAxisMotion.hpp"
-#include "conveyorBeltMotion.hpp"
-//#include "multiRotatingAxisMotion.hpp"
-#include "vibratingMotion.hpp"
+#include "conveyorBelt.hpp"
+#include "dictionary.hpp"
 
 
-namespace pFlow
+FUNCTION_H
+pFlow::conveyorBelt::conveyorBelt(const dictionary& dict)
 {
-
-using vibratingMotionGeometry = geometryMotion<vibratingMotion>;
-
-using rotationAxisMotionGeometry = geometryMotion<rotatingAxisMotion>;
-
-using stationaryGeometry = geometryMotion<stationaryWall>;
-
-using conveyorBeltMotionGeometry = geometryMotion<conveyorBeltMotion>;
-
-//typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
-
-
-
-
+  if(!read(dict))
+	{
+		fatalErrorInFunction<<
+		"  error in reading conveyorBelt from dictionary "<< dict.globalName()<<endl;
+		fatalExit;
+	}
 }
 
+FUNCTION_H
+bool pFlow::conveyorBelt::read(const dictionary& dict)
+{	
 
-#endif
+	tangentVelocity_ 		= dict.getVal<realx3>("tangentVelocity");
+	
+	return true;
+}
+
+FUNCTION_H
+bool pFlow::conveyorBelt::write(dictionary& dict) const
+{
+	if( !dict.add("tangentVelocity", tangentVelocity_) )
+	{
+		fatalErrorInFunction<<
+		"  error in writing tangentVelocity to dictionary "<< dict.globalName()<<endl;
+		return false;
+	}
+	return true;
+}
+
+FUNCTION_H
+bool pFlow::conveyorBelt::read(iIstream& is)
+{
+	
+	notImplementedFunction;
+	return true;
+}
+
+FUNCTION_H
+bool pFlow::conveyorBelt::write(iOstream& os)const
+{
+  os.writeWordEntry("tangentVelocity", tangentVelocity_);
+  return true;
+}
