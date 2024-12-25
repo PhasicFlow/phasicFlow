@@ -12,7 +12,7 @@ conveyorBeltInfo
 {
     conveyorBelt1
     {
-        velocity (0.5 0 0);
+        tangentVelocity (0.5 0 0);
     }
 }
 

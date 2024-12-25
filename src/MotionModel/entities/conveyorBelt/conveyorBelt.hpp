@@ -41,7 +41,7 @@ class conveyorBelt
 {
 private:
 
-	realx3  velocity_{0, 0, 0};
+	realx3  tangentVelocity_{0, 0, 0};
 
 public:
 
@@ -66,7 +66,7 @@ public:
 	INLINE_FUNCTION_HD
 	realx3 linVelocityPoint(const realx3 &)const
 	{
-		return velocity_;
+		return tangentVelocity_;
 	}
 
 	INLINE_FUNCTION_HD

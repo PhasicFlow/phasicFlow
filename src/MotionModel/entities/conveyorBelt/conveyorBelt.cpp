@@ -37,7 +37,7 @@ FUNCTION_H
 bool pFlow::conveyorBelt::read(const dictionary& dict)
 {	
 
-	velocity_ 		= dict.getVal<realx3>("velocity");
+	tangentVelocity_ 		= dict.getVal<realx3>("tangentVelocity");
 	
 	return true;
 }
@@ -45,10 +45,10 @@ bool pFlow::conveyorBelt::read(const dictionary& dict)
 FUNCTION_H
 bool pFlow::conveyorBelt::write(dictionary& dict) const
 {
-	if( !dict.add("velocity", velocity_) )
+	if( !dict.add("tangentVelocity", tangentVelocity_) )
 	{
 		fatalErrorInFunction<<
-		"  error in writing velocity to dictionary "<< dict.globalName()<<endl;
+		"  error in writing tangentVelocity to dictionary "<< dict.globalName()<<endl;
 		return false;
 	}
 	return true;
@@ -65,6 +65,6 @@ bool pFlow::conveyorBelt::read(iIstream& is)
 FUNCTION_H
 bool pFlow::conveyorBelt::write(iOstream& os)const
 {
-  os.writeWordEntry("velocity", velocity_);
+  os.writeWordEntry("tangentVelocity", tangentVelocity_);
   return true;
 }
