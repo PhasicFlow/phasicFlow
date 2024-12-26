@@ -43,12 +43,15 @@ class sphereFluidParticles
 protected:
 	
 	/// pointField of rotational acceleration of particles on device  
-	realx3PointField_HD& 	fluidForce_;
+	realx3PointField_D 		fluidForce_;
 
-	realx3PointField_HD& 	fluidTorque_;
+	hostViewType1D<realx3> 	fluidForceHost_;
 
+	realx3PointField_D 		fluidTorque_;
 
-	void zeroFluidForce_H()
+	hostViewType1D<realx3>	fluidTorqueHost_;
+
+	/*void zeroFluidForce_H()
 	{
 		fluidForce_.fillHost(zero3);
 	}
@@ -56,7 +59,7 @@ protected:
 	void zeroFluidTorque_H()
 	{
 		fluidTorque_.fillHost(zero3);
-	}
+	}*/
 
 public:
 
@@ -81,16 +84,15 @@ public:
 	}
 
 
-	auto& fluidForceHostAll()
+	auto& fluidForceHost()
 	{
-		return fluidForce_.hostVectorAll();
+		return fluidForceHost_; 
 	}
 
-	auto& fluidTorqueHostAll()
+	auto& fluidTorqueHost()
 	{
-		return fluidTorque_.hostVectorAll();
+		return fluidTorqueHost_;
 	}
-
 
 	void fluidForceHostUpdatedSync();
 

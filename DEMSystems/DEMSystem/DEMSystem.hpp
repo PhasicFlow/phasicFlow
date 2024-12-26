@@ -61,6 +61,7 @@ public:
 
 	DEMSystem(const DEMSystem&)=delete;
 
+	/// @brief no assignment 
 	DEMSystem& operator = (const DEMSystem&)=delete;
 
 	create_vCtor(
@@ -118,7 +119,7 @@ public:
 	span<const int32> parIndexInDomain(int32 domIndx)const = 0;
 
 	virtual
-	span<real> parDiameter() = 0; 
+	span<real> diameter() = 0; 
 
 	virtual
 	span<realx3> acceleration()=0;
