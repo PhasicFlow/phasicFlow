@@ -52,7 +52,7 @@ protected:
 public:
 
 	domainDistribute(
-		const Vector<box>& domains,
+		const std::vector<box>& domains,
 		real maxBoundingBox);
 
 	~domainDistribute()=default;

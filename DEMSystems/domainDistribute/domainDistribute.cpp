@@ -33,7 +33,7 @@ void pFlow::domainDistribute::clcDomains(const std::vector<box>& domains)
 
 
 pFlow::domainDistribute::domainDistribute(
-	const Vector<box>& domains,
+	const std::vector<box>& domains,
 	real maxBoundingBox)
 :
 numDomains_(domains.size()),

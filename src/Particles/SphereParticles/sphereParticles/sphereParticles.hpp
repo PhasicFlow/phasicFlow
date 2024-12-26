@@ -105,7 +105,22 @@ private:
 
 	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const override;
 	*/
+protected:
+	Timer& accelerationTimer()
+	{
+		return accelerationTimer_;
+	}
 
+	Timer& intCorrectTimer()
+	{
+		return intCorrectTimer_;
+	}
+
+	integration& rVelIntegration()
+	{
+		return rVelIntegration_();
+	}
+	
 public:
 
 	/// construct from systemControl and property
