@@ -41,8 +41,8 @@ target_include_directories(${target_name}
 
 message(STATUS "\nCreating make file for library ${target_name}")
 message(STATUS "  ${target_name} link libraries are: ${${target_link_libs}}")
-message(STATUS "  ${target_name} source files are: ${source_files}")
-message(STATUS "  ${target_name} include dirs are: ${includeDirs}\n \n")
+#message(STATUS "  ${target_name} source files are: ${source_files}")
+#message(STATUS "  ${target_name} include dirs are: ${includeDirs}\n \n")
 
 install(TARGETS ${target_name} DESTINATION lib)
 install(FILES ${includeFiles}  DESTINATION include/${target_name})
