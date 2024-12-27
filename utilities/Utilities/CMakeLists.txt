@@ -1,7 +1,7 @@
 
 set(SourceFiles 
 readFromTimeFolder.cpp
-#readControlDict.cpp
+readControlDict.cpp
 vtkFile/vtkFile.cpp
 geometryPhasicFlow/Wall/Wall.cpp 
 geometryPhasicFlow/planeWall/planeWall.cpp 
