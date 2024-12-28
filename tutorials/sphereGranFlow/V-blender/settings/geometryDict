@@ -6,49 +6,37 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+motionModel rotatingAxis;                        // motion model: rotating object around an axis
 
-// motion model: rotating object around an axis
-motionModel rotatingAxisMotion; 
+rotatingAxisInfo                                 // information for rotatingAxis motion model 
+{
+	rotAxis 
+	{  
+		p1 (0.128228 0.116446 0.297901);         // first point for the axis of rotation
+
+		p2 (0.722596 0.116459 0.297901);	     // second point for the axis of rotation
+		
+		omega                      3.14;         // rotation speed (rad/s)
+		
+		startTime                     3;         // start time of rotation
+		
+		endTime                      10;         // end time of rotation
+	}
+}
 
 surfaces
 {
-	
 	body
-	{
-	        // type of the wall
-		type 	 stlWall;
+	{ 
+		type 	  stlWall;                       // type of the wall
 		
-		// file name in stl folder
-		file 	 body.stl;
+		file 	 body.stl;                       // file name in stl folder
 		
-		// material name of this wall
-		material wallMat;
+		material  wallMat;                       // material name of this wall
 		
-		// motion component name
-		motion 	 rotAxis;
-	}
-
-	
-}
-
-// information for rotatingAxisMotion motion model 
-rotatingAxisMotionInfo
-{
-	rotAxis 
-	{
-	        // first point for the axis of rotation
-		p1 (0.128228 0.116446 0.297901);
-		
-		// second point for the axis of rotation
-		p2 (0.722596 0.116459 0.297901);
-		
-		// rotation speed (rad/s)
-		omega 3.14;
-		
-		// start time of rotation
-		startTime 3;
-		
-		// end time of rotation
-		endTime 10;
+		motion 	   otAxis;                       // motion component name
 	}
 }
+
+                                     
+

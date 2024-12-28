@@ -6,45 +6,29 @@ objectName 	settingsDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-
 run 		rotatingVblender;
 
-// time step for integration (s)
-dt 			0.00001;
+dt 			         0.00001;                    // time step for integration (s)
 
-// start time for simulation
-startTime 		0;
+startTime 		           0;                    // start time for simulation
 
-// end time for simulation
-endTime 		10;
+endTime 		          10;                    // end time for simulation
 
-// time interval for saving the simulation
-saveInterval    	0.05;
+saveInterval    	    0.05;                    // time interval for saving the simulation
 
-// maximum number of digits for time folder
-timePrecision    	6; 
+timePrecision    	       6;                    // maximum number of digits for time folder
 
-// gravity vector (m/s2)
-g 			(0 0 -9.8);
+g 			      (0 0 -9.8);                    // gravity vector (m/s2)
 
-/*
-	Simulation domain 
-	every particles that goes outside this domain is deleted.
-*/
+includeObjects (diameter);                       // save necessary (i.e., required) data on disk
 
-domain 
-{
-	min (-0.1 -0.4 0);
-	max (0.86 0.6 0.6);
-}
+// exclude unnecessary data from saving on disk
+excludeObjects (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
 
-// integration method
-integrationMethod 	AdamsBashforth2;
+integrationMethod 	AdamsBashforth2;             // integration method
 
-writeFormat			ascii;
+writeFormat			          ascii;             // data writting format (ascii or binary)
 
-// report timers?
-timersReport 		Yes;
+timersReport 		            Yes;             // report timers (Yes or No)
 
-// time interval for reporting timers
-timersReportInterval   	0.01;
+timersReportInterval   	       0.01;             // time interval for reporting timers
