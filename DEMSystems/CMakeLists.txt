@@ -4,8 +4,8 @@ domainDistribute/domainDistribute.cpp
 DEMSystem/DEMSystem.cpp
 sphereDEMSystem/sphereFluidParticles.cpp
 sphereDEMSystem/sphereDEMSystem.cpp
-#
-
+grainDEMSystem/grainFluidParticles.cpp
+grainDEMSystem/grainDEMSystem.cpp
 )
 
 set(link_libs Kokkos::kokkos phasicFlow Particles Geometry Property Interaction Interaction Utilities)

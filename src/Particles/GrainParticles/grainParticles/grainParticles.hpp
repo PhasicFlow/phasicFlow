@@ -100,15 +100,23 @@ private:
 	  realVector&       Is,
 	  uint32Vector&     shIndex
 	);
-	/*bool initializeParticles();
+	
+protected:
 
-	bool insertSphereParticles(
-	    const wordVector& names,
-	    const int32IndexContainer& indices,
-	    bool setId = true);
+	Timer& accelerationTimer()
+	{
+		return accelerationTimer_;
+	}
 
-	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const override;
-	*/
+	Timer& intCorrectTimer()
+	{
+		return intCorrectTimer_;
+	}
+
+	integration& rVelIntegration()
+	{
+		return rVelIntegration_();
+	}
 
 public:
 
@@ -185,7 +193,12 @@ public:
 		return grainDiameter_;
 	}
 
-		const realPointField_D& coarseGrainFactor() const 
+	const realPointField_D& grainDiameter()const
+	{
+		return grainDiameter_;
+	}
+
+	const realPointField_D& coarseGrainFactor() const 
 	{
 		return coarseGrainFactor_;
 	}

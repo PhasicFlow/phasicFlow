@@ -18,10 +18,10 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "sphereDEMSystem.hpp"
+#include "grainDEMSystem.hpp"
 #include "vocabs.hpp"
 
-bool pFlow::sphereDEMSystem::loop()
+bool pFlow::grainDEMSystem::loop()
 {
 
 	do 
@@ -33,7 +33,7 @@ bool pFlow::sphereDEMSystem::loop()
 			Control().time().dt()	) )
 		{
 			fatalError<<
-			"particle insertion failed in sphereDEMSystem.\n";
+			"particle insertion failed in grainDEMSystem.\n";
 			return false;
 		}	
 
@@ -59,7 +59,7 @@ bool pFlow::sphereDEMSystem::loop()
 	return true;
 }
 
-pFlow::sphereDEMSystem::sphereDEMSystem(
+pFlow::grainDEMSystem::grainDEMSystem(
 		word  demSystemName,
 		const std::vector<box>& domains,
 		int argc, 
@@ -75,38 +75,37 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 		propertyFile__,
     	Control().caseSetup().path());
 
-	REPORT(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<END_REPORT;
+	REPORT(0)<< "\nCreating surface geometry for grainDEMSystem . . . "<<END_REPORT;
 	geometry_ = geometry::create(Control(), Property());
 
 
-	REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
-	particles_ = makeUnique<sphereFluidParticles>(Control(), Property());
+	REPORT(0)<<"\nReading grain particles . . ."<<END_REPORT;
+	particles_ = makeUnique<grainFluidParticles>(Control(), Property());
 
 
-	insertion_ = makeUnique<sphereInsertion>( 
+	insertion_ = makeUnique<grainInsertion>( 
 		particles_(), 
-		particles_().spheres());
+		particles_().grains());
 	
-	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<END_REPORT;
+	REPORT(0)<<"\nCreating interaction model for grain-grain contact and grain-wall contact . . ."<<END_REPORT;
 	interaction_ = interaction::create(
 		Control(),
 		Particles(),
 		Geometry());
 
-	real minD, maxD;
-	particles_->boundingSphereMinMax(minD, maxD);
+	auto maxD = maxBounndingSphereSize();
 
 	particleDistribution_ = makeUnique<domainDistribute>(domains, maxD);
 
 }
 
 
-pFlow::sphereDEMSystem::~sphereDEMSystem()
+pFlow::grainDEMSystem::~grainDEMSystem()
 {
 	
 }
 
-bool pFlow::sphereDEMSystem::updateParticleDistribution(
+bool pFlow::grainDEMSystem::updateParticleDistribution(
 	real extentFraction,
 	const std::vector<box> domains)
 {
@@ -134,13 +133,13 @@ bool pFlow::sphereDEMSystem::updateParticleDistribution(
 }
 
 pFlow::int32 
-	pFlow::sphereDEMSystem::numParInDomain(int32 di)const
+	pFlow::grainDEMSystem::numParInDomain(int32 di)const
 {
 	return particleDistribution_().numParInDomain(di);
 }
 
 std::vector<pFlow::int32> 
-	pFlow::sphereDEMSystem::numParInDomains()const
+	pFlow::grainDEMSystem::numParInDomains()const
 {
 	const auto& distribute = particleDistribution_();
 	int32 numDomains = distribute.numDomains();
@@ -154,77 +153,77 @@ std::vector<pFlow::int32>
 }
 
 pFlow::span<const pFlow::int32> 
-pFlow::sphereDEMSystem::parIndexInDomain(int32 di)const
+pFlow::grainDEMSystem::parIndexInDomain(int32 di)const
 {
 	return particleDistribution_->particlesInDomain(di);
 }
 
-pFlow::span<pFlow::real> pFlow::sphereDEMSystem::diameter() 
+pFlow::span<pFlow::real> pFlow::grainDEMSystem::diameter() 
 {	
 	return span<real>(diameterHost_.data(), diameterHost_.size());
 }
 
-pFlow::span<pFlow::real> pFlow::sphereDEMSystem::courseGrainFactor()
+pFlow::span<pFlow::real> pFlow::grainDEMSystem::courseGrainFactor()
 {
-    return span<real>(nullptr, 0);
+    return span<real>(particles_->courseGrainFactorHost().data(), particles_->courseGrainFactorHost().size());
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::acceleration()
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::acceleration()
 {
     return span<realx3>(nullptr, 0);
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::velocity()  
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::velocity()  
 {
 	return span<realx3>(velocityHost_.data(), velocityHost_.size());
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::position()  
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::position()  
 {
 	return span<realx3>(positionHost_.data(), positionHost_.size());
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::rAcceleration()
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::rAcceleration()
 {
     return span<realx3>(nullptr, 0);
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::rVelocity()
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::rVelocity()
 {
     return span<realx3>(rVelocityHost_.data(), rVelocityHost_.size());
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::rPosition()
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::rPosition()
 {
     return span<realx3>(nullptr, 0);
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidForce() 
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::parFluidForce() 
 {
 	auto& hVec =  particles_->fluidForceHost();
 	
 	return span<realx3>(hVec.data(), hVec.size());
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidTorque() 
+pFlow::span<pFlow::realx3> pFlow::grainDEMSystem::parFluidTorque() 
 {
 	auto& hVec =  particles_->fluidTorqueHost();
 	return span<realx3>(hVec.data(), hVec.size());
 }
 
-bool pFlow::sphereDEMSystem::sendFluidForceToDEM() 
+bool pFlow::grainDEMSystem::sendFluidForceToDEM() 
 {
 	particles_->fluidForceHostUpdatedSync();
 	return true;
 }
 
-bool pFlow::sphereDEMSystem::sendFluidTorqueToDEM()
+bool pFlow::grainDEMSystem::sendFluidTorqueToDEM()
 {
 	particles_->fluidTorqueHostUpdatedSync();
 	return true;
 }
 
-bool pFlow::sphereDEMSystem::beforeIteration()
+bool pFlow::grainDEMSystem::beforeIteration()
 {
 	velocityHost_ = std::as_const(particles_()).velocity().hostView();
 	positionHost_ = std::as_const(particles_()).pointPosition().hostView();
@@ -238,7 +237,7 @@ bool pFlow::sphereDEMSystem::beforeIteration()
 }
 
 
-bool pFlow::sphereDEMSystem::iterate(
+bool pFlow::grainDEMSystem::iterate(
 	real upToTime, 
 	real timeToWrite, 
 	word timeName) 
@@ -252,7 +251,7 @@ bool pFlow::sphereDEMSystem::iterate(
 	return true;
 }
 
-bool pFlow::sphereDEMSystem::iterate(real upToTime)
+bool pFlow::grainDEMSystem::iterate(real upToTime)
 {
 	Control().time().setStopAt(upToTime);
 	return loop();
@@ -260,7 +259,7 @@ bool pFlow::sphereDEMSystem::iterate(real upToTime)
 }
 
 pFlow::real 
-	pFlow::sphereDEMSystem::maxBounndingSphereSize()const
+	pFlow::grainDEMSystem::maxBounndingSphereSize()const
 {
 	real minD, maxD;
 	particles_->boundingSphereMinMax(minD, maxD);

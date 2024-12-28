@@ -18,14 +18,14 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __sphereDEMSystem_hpp__
-#define __sphereDEMSystem_hpp__
+#ifndef __grainDEMSystem_hpp__
+#define __grainDEMSystem_hpp__
 
 #include "DEMSystem.hpp"
 #include "property.hpp"
 #include "uniquePtr.hpp"
 #include "geometry.hpp"
-#include "sphereFluidParticles.hpp"
+#include "grainFluidParticles.hpp"
 #include "interaction.hpp"
 #include "Insertions.hpp"
 #include "domainDistribute.hpp"
@@ -34,7 +34,7 @@ Licence:
 namespace pFlow
 {
 
-class sphereDEMSystem
+class grainDEMSystem
 :
 	public DEMSystem
 {
@@ -46,9 +46,9 @@ protected:
 
 	uniquePtr<geometry> 			geometry_ = nullptr;
 
-	uniquePtr<sphereFluidParticles> particles_ = nullptr;
+	uniquePtr<grainFluidParticles>  particles_ = nullptr;
 
-	uniquePtr<sphereInsertion> 		insertion_ = nullptr;
+	uniquePtr<grainInsertion> 		insertion_ = nullptr;
 
 	uniquePtr<interaction> 			interaction_ = nullptr;
 
@@ -91,24 +91,24 @@ protected:
 
 public:
 
-	TypeInfo("sphereDEMSystem");
+	TypeInfo("grainDEMSystem");
 
-	sphereDEMSystem(
+	grainDEMSystem(
 		word  demSystemName,
 		const std::vector<box>& domains,
 		int argc, 
 		char* argv[],
 		bool requireRVel=false);
 
-	virtual ~sphereDEMSystem();
+	virtual ~grainDEMSystem();
 
-	sphereDEMSystem(const sphereDEMSystem&)=delete;
+	grainDEMSystem(const grainDEMSystem&)=delete;
 
-	sphereDEMSystem& operator = (const sphereDEMSystem&)=delete;
+	grainDEMSystem& operator = (const grainDEMSystem&)=delete;
 
 	add_vCtor(
 		DEMSystem,
-		sphereDEMSystem,
+		grainDEMSystem,
 		word);
 
 
