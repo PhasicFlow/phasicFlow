@@ -121,6 +121,9 @@ public:
 	virtual
 	span<real> diameter() = 0; 
 
+	virtual 
+	span<real> courseGrainFactor() = 0;
+
 	virtual
 	span<realx3> acceleration()=0;
 
