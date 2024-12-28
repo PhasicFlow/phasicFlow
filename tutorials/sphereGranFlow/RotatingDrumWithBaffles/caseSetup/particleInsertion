@@ -6,82 +6,81 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+active           Yes;                            // is insertion active -> Yes or No
 
-// is insertion active?
-active  yes;          
-// not implemented for yes
-collisionCheck No;
+checkForCollision No;                            // is checked          -> Yes or No
 
 /*
-Two layers of particles are packed one-by-one using 1 insertion steps. 
+      Two layers of particles are packed one-by-one using 1 insertion steps 
 */
 
-// Right Layer Region
-   layerrightregion 
-{
-// type of insertion region
-   type	          cylinderRegion;
-// insertion rate (particles/s)    
-   rate 	  12500;
-// Start time of LightParticles insertion (s)
-   startTime 	  0; 
-// End time of LightParticles insertion (s)      
-   endTime   	  1;
-// Time Interval of LightParticles insertion (s)
-   interval       0.025; 
 
-   cylinderRegionInfo 
+layerrightregion                                 // Right Layer Region
+{
+   timeControl     simulationTime;
+
+   regionType	    cylinder;               // type of insertion region
+ 
+   rate 	                   12500;               // Right Region Particles Insertion Rate (particles/s)
+
+   startTime 	                 0;               // Start time of LightParticles insertion (s)
+    
+   endTime   	                 1;               // End time of LightParticles insertion (s) 
+
+   insertionInterval        0.025;               // Time Interval of LightParticles insertion (s)
+
+   cylinderInfo 
    {
-// Coordinates of cylinderRegion (m,m,m)
-   	p2 (-0.15 0.25 0.05);
-   	p1 (-0.15 0.24	0.05);
-// radius of cylinder (m)
-   	radius 0.035;
+
+   	p2 (-0.15 0.25 0.05);                      // 
+
+   	p1 (-0.15 0.24	0.05);                      // Bottom of cylinderRegion (m,m,m)
+
+   	radius         0.035;                      // radius of cylinder (m)
    }
    
    setFields
    {
-// initial velocity of inserted particles
-     velocity    realx3 (0.0 -0.6 0.0);  
+      velocity   realx3 (0.0 -0.6 0.0);          // initial velocity of inserted particles
    }
    
    mixture
    {
-// mixture composition of inserted particles
-      smallSphere 1;    
+      smallSphere 1;                             // mixture composition of inserted particles
    }
 }
-// Left Layer Region
-   layerleftregion
-{
-   type         cylinderRegion;
-//Left Region Particles Insertion Rate (particles/s)
-   rate         7500;
-// Start time of LightParticles insertion (s)
-   startTime    0;
-// End time of LightParticles insertion (s)  
-   endTime      1;
-// Time Interval of LightParticles insertion (s)
-   interval     0.025;
 
-   cylinderRegionInfo 
+layerleftregion                                  // Left Layer Region
+{
+   timeControl     simulationTime;
+
+   regionType      cylinder;               // type of insertion region
+
+   rate                      7500;               // Left Region Particles Insertion Rate (particles/s)
+
+   startTime                    0;               // Start time of LightParticles insertion (s)
+  
+   endTime                      1;               // End time of LightParticles insertion (s)
+
+   insertionInterval        0.025;               // Time Interval of LightParticles insertion (s)
+
+   cylinderInfo 
    {
-// Coordinates of cylinderRegion (m,m,m)
-      p2 (-0.23	 0.25	0.05); 
-      p1 (-0.23	 0.24	0.05);
-// radius of cylinder (m)      
-      radius 0.035;
+      p2 (-0.23 0.25	0.05);                      // Top of cylinderRegion (m,m,m)
+
+      p1 (-0.23 0.24	0.05);                      // Bottom of cylinderRegion (m,m,m)
+   
+      radius         0.035;                      // radius of cylinder (m)   
    }
    
    setFields
    {
-     velocity    realx3 (0.0 -0.6 0.0);
+     velocity    realx3 (0.0 -0.6 0.0);          // initial velocity of inserted particles
    }
    
    mixture
    {
-      largeSphere 1; // only heavySphere
-      
+      largeSphere 1;                             // only heavySphere
    }
 }
 
