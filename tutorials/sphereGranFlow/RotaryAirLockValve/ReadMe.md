@@ -3,6 +3,7 @@ The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rot
 * **28000** particles with **5 mm** diameter are inserted into the valve with the rate of **4000 particles/s**. 
 * The rotor starts its ortation at t = 1.25 s at the rate of 2.1 rad/s. 
 
+
 <html>
 <body>
 <div align="center"><b>
