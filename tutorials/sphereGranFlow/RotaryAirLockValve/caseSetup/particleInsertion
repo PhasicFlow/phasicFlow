@@ -6,45 +6,38 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+active        yes;                                         // is insertion active -> yes or no
 
-// is insertion active?
-active  yes;
-
-// not implemented for yes
-collisionCheck No;
+checkForCollision No;                                      // is checked          -> yes or no
 
 /*
-one region is considered for inserting particles. 
+	one region is considered for inserting particles. 
 */
+
 topRegion
 {
+	regionType               box;                          // type of insertion region
 
-	// type of insertion region
-	type  boxRegion;
-
-	// insertion rate (particles/s)
-	rate 	  4000;
-
-	// Start time of Particles insertion (s)
-	startTime 	  0;
-
-	// End time of Particles insertion (s)	
-	endTime   	  7;
-
-	// Time Interval between each insertion (s)
-	interval       0.025;
-
-	// Coordinates of BoxRegion (m,m,m)
-	boxRegionInfo 
+	timeControl   simulationTime;
+	
+	rate 	                4000;                          // insertion rate (particles/s)
+	
+    startTime 	               0;                          // Start time of Particles insertion (s)
+	
+    endTime   	               7;                          // End time of Particles insertion (s)	
+	                                             
+    insertionInterval      0.025;                          // Time Interval between each insertion (s)
+	                                  
+	boxInfo                                                // Coordinates of BoxRegion (m,m,m)
 	{
-		min ( 0.48 0.58 0.01 ); // (m,m,m)
-		max ( 0.64 0.59 0.05 ); // (m,m,m)
+		min   ( 0.48 0.58 0.01 );                          // (m,m,m)
+
+		max   ( 0.64 0.59 0.05 );                          // (m,m,m)
 	}
 
 	setFields
 	{
-		// initial velocity of inserted particles
-		velocity    realx3 (0.0 -0.6 0.0);  
+		velocity    realx3 (0.0 -0.6 0.0);                 // initial velocity of inserted particles
 	}
 
 	mixture
