@@ -1,5 +1,5 @@
 # Problem Definition
-The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rotor is about 21 cm. There is one type of particle in this simulation. Particles are inserted into the inlet of the valve from t=**0** s.
+The problem is to simulate a RotaryAirLockValve. The external diameter of the rotor is about 21 cm. There is one type of particle in this simulation. Particles are inserted into the inlet of the valve from t=**0** s.
 * **28000** particles with **5 mm** diameter are inserted into the valve with the rate of **4000 particles/s**. 
 * The rotor starts its ortation at t = 1.25 s at the rate of 2.1 rad/s. 
 
@@ -19,7 +19,7 @@ The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rot
 </html>
 
 # Setting up the Case
-As it has been explained in the previous simulations, the simulation case setup is based on text-based scripts. Here, the simulation case setup files are stored into three folders: `caseSetup`, `setting`, and `stl`  (see the above folders). See next the section for more information on how we can setup the geometry and its rotation.
+As explained in the previous simulations, the simulation case setup is based on text-based scripts. Here, the simulation case setup files are stored in three folders: `caseSetup`, `setting`, and `stl` (see the folders above). See the next section for more information on how we can set up the geometry and its rotation.
   
 ## Geometry 
 
@@ -87,7 +87,7 @@ surfaces
 ```
 ## Defining particles 
 ### Diameter and material of spheres 
-In the `caseSetup/sphereShape` the diameter and the material name of the particles are defined.
+In the `caseSetup/shapes` the diameter and the material name of the particles are defined.
 
 <div align="center"> 
 in <b>caseSetup/sphereShape</b> file
@@ -104,10 +104,10 @@ diameters 	(0.005);
 materials	(sphereMat);
 ```
 ### Insertion of Particles 
-Insertion of particles starts from t = 0 s and ends at t = 7 s. A box is defined for the port from which particles are being inderted. The rate of insertion is 4000 particles per second. 
+Particle insertion starts at t = 0 s and ends at t = 7 s. A box is defined for the port from which particles are inserted. The insertion rate is 4000 particles per second. 
 
 <div align="center"> 
-in <b>settings/particleInsertion</b> file
+in <b>caseSetup/particleInsertion</b> file
 </div>
 
 ```C++
@@ -200,10 +200,10 @@ model
                 0.1);     
 }
 ```
-# Performing simulation and seeing the results 
+# Performing simulation and viewing simulation results
 To perform simulations, enter the following commands one after another in the terminal. 
 
-Enter `$ particlesPhasicFlow` command to create the initial fields for particles (here the simulaiton has no particle at the beginning).  
+Enter `$ particlesPhasicFlow` command to create the initial fields for particles (here the simulation has no particle at the beginning).  
 Enter `$ geometryPhasicFlow` command to create the geometry.  
-At last, enter `$ sphereGranFlow` command to start the simulation.  
-After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder.
+Finally, type `$ sphereGranFlow` command to start the simulation.  
+After the simulation is finished, you can type  `$ pFlowtoVTK` to convert the results to vtk format, which can be found in the ./VTK folder.
