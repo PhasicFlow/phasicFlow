@@ -53,6 +53,9 @@ protected:
 
 	hostViewType1D<real> 	courseGrainFactorHost_;
 
+
+	void checkHostMemory();
+
 public:
 
 	/// construct from systemControl and property 

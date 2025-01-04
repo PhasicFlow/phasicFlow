@@ -21,42 +21,46 @@ Licence:
 #include "grainFluidParticles.hpp"
 #include "grainFluidParticlesKernels.hpp"
 
+void pFlow::grainFluidParticles::checkHostMemory()
+{
+	if(fluidForce_.size()!=fluidForceHost_.size())
+	{
+		resizeNoInit(fluidForceHost_, fluidForce_.size());
+		resizeNoInit(fluidTorqueHost_, fluidTorque_.size());
+	}
+
+	// copy the data (if required) from device to host
+	courseGrainFactorHost_ = coarseGrainFactor().hostView();
+}
 
 pFlow::grainFluidParticles::grainFluidParticles(
-	systemControl &control,
-	const property& prop
-)
-:
-	grainParticles(control, prop),
-	fluidForce_(
-    	objectFile(
-        	"fluidForce",
-    		"",
-    		objectFile::READ_IF_PRESENT,
-        	objectFile::WRITE_ALWAYS
-      	),
-      dynPointStruct(),
-      zero3
-    ),
-	fluidTorque_(
-		objectFile(
-			"fluidTorque",
-			"",
-			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_NEVER
-      	),
-    	dynPointStruct(),
-    	zero3
-	)
-{} 
+    systemControl &control,
+    const property &prop)
+    : grainParticles(control, prop),
+      fluidForce_(
+          objectFile(
+              "fluidForce",
+              "",
+              objectFile::READ_IF_PRESENT,
+              objectFile::WRITE_ALWAYS),
+          dynPointStruct(),
+          zero3),
+      fluidTorque_(
+          objectFile(
+              "fluidTorque",
+              "",
+              objectFile::READ_IF_PRESENT,
+              objectFile::WRITE_NEVER),
+          dynPointStruct(),
+          zero3)
+{
+	checkHostMemory();
+} 
 
 bool pFlow::grainFluidParticles::beforeIteration()
 {
 	grainParticles::beforeIteration();
-	
-	// copy the data (if required) from device to host
-	courseGrainFactorHost_ = coarseGrainFactor().hostView();
-
+	checkHostMemory();
 	return true;
 }
 

@@ -51,6 +51,8 @@ protected:
 
 	hostViewType1D<realx3>	fluidTorqueHost_;
 
+	void checkHostMemory();
+
 	/*void zeroFluidForce_H()
 	{
 		fluidForce_.fillHost(zero3);
