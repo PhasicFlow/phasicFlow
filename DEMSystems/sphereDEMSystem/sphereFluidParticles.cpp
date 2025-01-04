@@ -21,38 +21,44 @@ Licence:
 #include "sphereFluidParticles.hpp"
 #include "sphereFluidParticlesKernels.hpp"
 
+void pFlow::sphereFluidParticles::checkHostMemory()
+{
+	if(fluidForce_.size()!=fluidForceHost_.size())
+	{
+		resizeNoInit(fluidForceHost_, fluidForce_.size());
+		resizeNoInit(fluidTorqueHost_, fluidTorque_.size());
+	}
+}
 
 pFlow::sphereFluidParticles::sphereFluidParticles(
-	systemControl &control,
-	const property& prop
-)
-:
-	sphereParticles(control, prop),
-	fluidForce_(
-    	objectFile(
-        	"fluidForce",
-    		"",
-    		objectFile::READ_IF_PRESENT,
-        	objectFile::WRITE_ALWAYS
-      	),
-      dynPointStruct(),
-      zero3
-    ),
-	fluidTorque_(
-		objectFile(
-			"fluidTorque",
-			"",
-			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_NEVER
-      	),
-    	dynPointStruct(),
-    	zero3
-	)
-{} 
+    systemControl &control,
+    const property &prop)
+    : sphereParticles(control, prop),
+      fluidForce_(
+          objectFile(
+              "fluidForce",
+              "",
+              objectFile::READ_IF_PRESENT,
+              objectFile::WRITE_ALWAYS),
+          dynPointStruct(),
+          zero3),
+      fluidTorque_(
+          objectFile(
+              "fluidTorque",
+              "",
+              objectFile::READ_IF_PRESENT,
+              objectFile::WRITE_NEVER),
+          dynPointStruct(),
+          zero3)
+{
+	checkHostMemory();
+} 
 
 bool pFlow::sphereFluidParticles::beforeIteration()
 {
 	sphereParticles::beforeIteration();
+	checkHostMemory();
+
 	return true;
 }
 
