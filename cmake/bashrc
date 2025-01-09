@@ -3,7 +3,6 @@ export pFlow_PROJECT_VERSION=v-1.0
 
 export pFlow_PROJECT="phasicFlow-$pFlow_PROJECT_VERSION"
 
-
 projectDir="$HOME/PhasicFlow" 
 kokkosDir="$HOME/Kokkos/kokkos"
 
@@ -31,5 +30,5 @@ export LD_LIBRARY_PATH="$pFlow_LIB_DIR:$LD_LIBRARY_PATH"
 
 export LD_LIBRARY_PATH="$Zoltan_DIR/lib:$LD_LIBRARY_PATH"
 
-
+source $pFlow_PROJECT_DIR/cmake/autoComplete 
 #------------------------------------------------------------------------------
