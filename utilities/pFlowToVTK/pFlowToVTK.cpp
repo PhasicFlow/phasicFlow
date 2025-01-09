@@ -27,8 +27,10 @@ Licence:
 #include "phasicFlowKokkos.hpp"
 #include "pointFieldToVTK.hpp"
 #include "triSurfaceFieldToVTK.hpp"
+#include "fileSeries.hpp"
 //#include "readControlDict.hpp"
 
+bool bindaryOutput__;
 
 int main(int argc, char** argv )
 {
@@ -51,6 +53,11 @@ int main(int argc, char** argv )
 	cmds.add_flag("--no-particles",
 		noParticle,
 		"Do not convert particle fields to VTK file");
+
+	bindaryOutput__ = false;
+	cmds.add_flag("-b, --binary",
+		bindaryOutput__,
+		"Wrtie vtk file (for particles only) in binary format. Default is ASCII");
 
 	cmds.addOption("-o,--out-folder",
 		outFolder,
@@ -85,9 +92,18 @@ int main(int argc, char** argv )
 #include "initialize_Control.hpp"
 
 
+	if(!bindaryOutput__)
+	{
+		INFORMATION<<"Writing vtk file in binray format will accelerate the conversion (5~10x)"<<
+		" and visualization in paraview."<<
+		" Consider addig flag -b or --binary in the command line."<<END_INFO;
+	}
+
+	pFlow::word formatName = bindaryOutput__?"binary":"ascii";
+
 	pFlow::timeFolder folders(Control);
-	auto destFolder = pFlow::fileSystem(outFolder)/pFlow::word(pFlow::geometryFolder__);
-	auto destFolderField = pFlow::fileSystem(outFolder);
+	auto destFolderGeometry = pFlow::fileSystem(outFolder)/pFlow::word(pFlow::geometryFolder__);
+	auto destFolderField = pFlow::fileSystem(outFolder)/pFlow::word("particles");
 	pFlow::wordList geomfiles{"triSurface"};
 
 
@@ -109,6 +125,12 @@ int main(int argc, char** argv )
 		validRange.addIntervalRange(folders.startTime(), folders.endTime());
 	}
 
+	{
+
+	pFlow::PFtoVTK::fileSeries timeSeries{pFlow::fileSystem(outFolder)};
+	pFlow::word fileName;
+	pFlow::wordList geomFileNames;
+	pFlow::wordList surfNames;
 	do
 	{
 		Control.time().setTime(folders.time());
@@ -119,22 +141,27 @@ int main(int argc, char** argv )
 		{	
 			
 			if(!pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
-				Control, destFolder, "surface", separateSurfaces))
+				Control, destFolderGeometry, "surface", separateSurfaces, surfNames, geomFileNames))
 			{
 				fatalExit;
 				return 1;
-			}	
+			}
+
+			timeSeries.addTimeFile(surfNames, folders.time(), geomFileNames);
 		}
 
 		if(!noParticle)
 		{
-			
+			REPORT(1)<< "Converting pointFields to vtk file in "<< formatName<< " format ..."<<END_REPORT;
 			if(allFields)
 			{
 				if( !pFlow::PFtoVTK::convertTimeFolderPointFields(
 					Control,
 					destFolderField,
-					"sphereFields" ))
+					"particles",
+					fileName 
+					)
+				)
 				{
 					fatalExit;
 				}
@@ -143,20 +170,27 @@ int main(int argc, char** argv )
 				if(!pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
 					Control,
 					destFolderField,
-					"sphereFields",
+					"particles",
 					fields,
-					!pFlow::equal(folders.time(),static_cast<pFlow::real>(0.0)) )
+					!pFlow::equal(folders.time(),static_cast<pFlow::real>(0.0)),
+					fileName 
+					)
 				)
 				{
 					fatalExit;
 				}
-			}	
+			}
+
+			timeSeries.addTimeFile("particles", folders.time(), fileName);
+				
 		}
 		
 		pFlow::output<<pFlow::endl;
 
 	}
 	while( folders++ );
+
+	}
 
 
 	pFlow::output<< "\nFinished successfully.\n";

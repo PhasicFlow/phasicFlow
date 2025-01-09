@@ -54,7 +54,7 @@ private:
 	//// - data members 
 	uniquePtr<simulationDomain> simulationDomain_ = nullptr;
 
-	pointSorting 				pointSorting_;
+	uniquePtr<pointSorting> 	pointSorting_ = nullptr;
 
 	boundaryList 				boundaries_;
 	

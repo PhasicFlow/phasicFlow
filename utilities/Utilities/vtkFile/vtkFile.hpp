@@ -34,15 +34,17 @@ class vtkFile
 {
 protected:
 
-	fileSystem dirPath_;
+	uniquePtr<oFstream>  oStream_= nullptr;
 
-	word       baseName_;
-
-	real  	   time_ = 0.0;
+	bool 		binary_ = false;
 
 	bool		append_=false;
 
-	uniquePtr<oFstream>  oStream_= nullptr;
+	real		time_ = 0.0;
+
+	fileSystem dirPath_;
+
+	word		baseName_;	
 
 	bool openStream(bool wHeader);
 
@@ -54,6 +56,7 @@ public:
 		const fileSystem dir, 
 		const word& bName, 
 		real time,
+		bool bnry,
 		bool append = false);
 
 	virtual ~vtkFile() = default;
@@ -85,6 +88,12 @@ public:
 		if( oStream_().fail() )return true;
 		
 		return false;
+	}
+
+	inline 
+	bool binary()const
+	{
+		return binary_;
 	}
 
 	virtual fileSystem fileName()const;	
