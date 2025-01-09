@@ -37,15 +37,17 @@ bool convertTimeFolderTriSurfaceFields(
 	systemControl& control,
 	const fileSystem& destPath,
 	const word& bName,
-	bool separate);
+	bool separate,
+	wordList& surfNames,
+	wordList& fileNames);
 
 
-bool triSurfaceToVTK(iOstream &os,
+bool triSurfaceToVTK(Ostream &os,
 					const realx3 *points,
 					const uint32x3 *vertices,
 					const subSurface &subSurf);
 
-bool triSurfaceToVTK(iOstream &os,
+bool triSurfaceToVTK(Ostream &os,
 					const realx3* points,
 					const uint32x3* vertices,
 					uint32 numPoints,
@@ -55,13 +57,17 @@ bool convertTimeFolderTriSurfaceFieldsSingle(
 	multiTriSurface& surface,
 	const fileSystem& destPath,
 	real  time,
-	const word& bName);
+	const word& bName,
+	wordList& surfNames,
+	wordList& fileNames);
 
 bool convertTimeFolderTriSurfaceFieldsSeparate( 
 	multiTriSurface& surface,
 	const fileSystem& destPath,
 	real  time,
-	const word& bName);
+	const word& bName,
+	wordList& surfNames,
+	wordList& fileNames);
 
 inline
 bool regexCheck(const word& TYPENAME, const word& fieldType)
@@ -84,7 +90,7 @@ bool checkTriFieldType(word objectType)
 }
 
 bool convertRealx3TypetriSurfaceField(
-	iOstream& os,
+	Ostream& os,
 	const IOfileHeader& header,
 	multiTriSurface& tSurface);
 

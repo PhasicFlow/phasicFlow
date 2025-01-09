@@ -132,7 +132,7 @@ bool pFlow::postprocess::processTimeFolder(const timeFolder& tFolder)
 
 bool pFlow::postprocess::writeToVTK(fileSystem destPath, word bName)const
 {
-	vtkFile vtk(destPath, bName, time_);
+	vtkFile vtk(destPath, bName, time_, false);
 
 	if(!vtk) return false;
 

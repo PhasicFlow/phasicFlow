@@ -175,6 +175,9 @@ public:
 		/// Canonical path of this (it should exist)
 		fileSystem canonical()const;
 
+		/// relative path of this this with respect to base
+		fileSystem relative(const fileSystem& base)const;
+
 		/// Only operate on dir path
 		/// Check if the dir path exists
 		bool dirExist()const;	

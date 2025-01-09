@@ -113,7 +113,7 @@ pFlow::pointStructure::pointStructure
 	(
 		simulationDomain::create(control)
 	),
-    pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
+    //pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
 	(
         *this
@@ -130,6 +130,8 @@ pFlow::pointStructure::pointStructure
         "Error in reading from file "<<IOobject::path()<<endl;
         fatalExit;
     }
+
+    pointSorting_ = makeUnique<pointSorting>(simulationDomain_->subDictOrCreate("pointSorting"));
 }
 
 
@@ -155,7 +157,7 @@ pFlow::pointStructure::pointStructure(
 	(
 		simulationDomain::create(control)
 	),
-    pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
+    //pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
 	(
 		*this
@@ -167,15 +169,16 @@ pFlow::pointStructure::pointStructure(
         "Error in seting up pointStructure"<<endl;
         fatalExit;
     }
+    pointSorting_ = makeUnique<pointSorting>(simulationDomain_->subDictOrCreate("pointSorting"));
 }
 
 bool pFlow::pointStructure::beforeIteration()
 {
     const timeInfo ti = TimeInfo();
 
-    if(pointSorting_.sortTime(ti.iter(), ti.t(), ti.dt()))
+    if(pointSorting_().sortTime(ti.iter(), ti.t(), ti.dt()))
     {
-        auto sortedIndices = pointSorting_.getSortedIndices(
+        auto sortedIndices = pointSorting_().getSortedIndices(
             simulationDomain_().globalBox(),
             pointPositionDevice(),
             activePointsMaskDevice()
