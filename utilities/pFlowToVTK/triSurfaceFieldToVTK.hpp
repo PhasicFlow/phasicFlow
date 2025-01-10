@@ -18,7 +18,6 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __triSurfaceFieldToVTK_hpp__
 #define __triSurfaceFieldToVTK_hpp__
 
