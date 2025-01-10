@@ -43,7 +43,7 @@ protected:
 public:
 
 	// - type info
-	TypeInfoTemplateNV("iBox", intType);
+	TypeInfoTemplateNV11("iBox", intType);
 
 	//// - Constructors 
 		INLINE_FUNCTION_HD 

@@ -42,24 +42,29 @@ protected:
 	
 	// protected members 
 
-	uniquePtr<property> 		property_ = nullptr;
+	uniquePtr<property> 			property_ = nullptr;
 
-	uniquePtr<geometry> 		geometry_ = nullptr;
+	uniquePtr<geometry> 			geometry_ = nullptr;
 
-	uniquePtr<sphereFluidParticles> 	particles_ = nullptr;
+	uniquePtr<sphereFluidParticles> particles_ = nullptr;
 
-	uniquePtr<sphereInsertion> 	insertion_ = nullptr;
+	uniquePtr<sphereInsertion> 		insertion_ = nullptr;
 
-	uniquePtr<interaction> 		interaction_ = nullptr;
+	uniquePtr<interaction> 			interaction_ = nullptr;
 
-	uniquePtr<domainDistribute> particleDistribution_=nullptr;
+	uniquePtr<domainDistribute> 	particleDistribution_=nullptr;
 
 	// to be used for CPU communications 
-	ViewType1D<realx3, HostSpace>  parVelocity_;
+	ViewType1D<realx3, HostSpace> 	velocityHost_;
 
-	ViewType1D<realx3, HostSpace>  parPosition_;
+	ViewType1D<realx3, HostSpace> 	positionHost_;
 
-	ViewType1D<real, HostSpace> parDiameter_;
+	ViewType1D<real, HostSpace> 	diameterHost_;
+
+	bool 							requireRVel_ = false;
+
+	ViewType1D<realx3, HostSpace> 	rVelocityHost_;
+
 
 //  protected member functions
 	auto& Property()
@@ -92,7 +97,8 @@ public:
 		word  demSystemName,
 		const std::vector<box>& domains,
 		int argc, 
-		char* argv[]);
+		char* argv[],
+		bool requireRVel=false);
 
 	virtual ~sphereDEMSystem();
 
@@ -110,15 +116,25 @@ public:
 	 
 	int32 numParInDomain(int32 di)const override;
 	
-	std::vector<int32> numParInDomain()const override;
+	std::vector<int32> numParInDomains()const override;
 
 	span<const int32> parIndexInDomain(int32 di)const override;
 
-	span<real> parDiameter() override;
+	span<real> diameter() override;
 
-	span<realx3> parVelocity() override;
+	span<real> courseGrainFactor() override;
 
-	span<realx3> parPosition() override;
+	span<realx3> acceleration() override;
+
+	span<realx3> velocity() override;
+
+	span<realx3> position() override;
+
+	span<realx3> rAcceleration() override;
+
+	span<realx3> rVelocity() override;
+
+	span<realx3> rPosition() override;
 
 	span<realx3> parFluidForce() override;
 

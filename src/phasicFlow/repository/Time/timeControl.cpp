@@ -18,7 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
+#include "math.hpp"
 #include "timeControl.hpp"
 #include "dictionary.hpp"
 
@@ -117,6 +117,15 @@ pFlow::timeControl::timeControl(
 	checkForOutputToFile();
 }
 
+pFlow::real pFlow::timeControl::setTime(real t)
+{
+	real tmp = currentTime_;
+	currentTime_ = t;
+	lastSaved_ = t;
+	checkForOutputToFile();
+	return tmp;
+}
+
 pFlow::word pFlow::timeControl::timeName()const
 {
 	if(managedExternaly_)
@@ -128,14 +137,14 @@ pFlow::word pFlow::timeControl::timeName()const
 bool pFlow::timeControl::finalTime()const
 {
 	if( currentTime_ >= endTime_ ) return true;
-	if( abs(currentTime_-endTime_) < 0.5*dt_ )return true;
+	if( std::abs(currentTime_-endTime_) < 0.5*dt_ )return true;
 	return false;	
 }
 
 bool pFlow::timeControl::reachedStopAt()const
 {
 	if( currentTime_ >= stopAt_ ) return true;
-	if( abs(currentTime_-stopAt_) < 0.5*dt_ )return true;
+	if( std::abs(currentTime_-stopAt_) < 0.5*dt_ )return true;
 	return false;
 }
 
@@ -145,7 +154,7 @@ void pFlow::timeControl::checkForOutputToFile()
 	bool save = false;
 	if(managedExternaly_)
 	{
-		if( abs(currentTime_-writeTime_) < 0.5*dt_)
+		if( std::abs(currentTime_-writeTime_) < 0.5*dt_)
 		{
 			save = true;
 			lastSaved_ = currentTime_;
@@ -153,12 +162,12 @@ void pFlow::timeControl::checkForOutputToFile()
 	}
 	else
 	{
-		if ( abs(currentTime_ - lastSaved_ - saveInterval_) < 0.5 * dt_ )
+		if ( std::abs(currentTime_ - lastSaved_ - saveInterval_) < 0.5 * dt_ )
 		{	
 			lastSaved_ = currentTime_;
 			save = true;
 		}
-		else if( abs(currentTime_ - lastSaved_) < min( pow(10.0,-1.0*timePrecision_), 0.5 *dt_) )
+		else if( std::abs(currentTime_ - lastSaved_) < std::min( pow(10.0,-1.0*timePrecision_), 0.5 *dt_) )
 		{
 			lastSaved_ = currentTime_;
 			save = true;
@@ -167,14 +176,12 @@ void pFlow::timeControl::checkForOutputToFile()
 	}
 
 	outputToFile_ = save;
-
-
 }
 
 bool pFlow::timeControl::timersReportTime()const
 {
 	if(currentIter_<=1)return false;
-	return timersReportInterval_.isMember(currentTime_, dt_);
+	return timersReportInterval_.isMember(currentTime_, 0.55*dt_);
 }
 
 bool pFlow::timeControl::sortTime()const
@@ -203,7 +210,7 @@ bool pFlow::timeControl::operator ++(int)
 	currentTime_ += dt_;
 	if(screenReport() && !managedExternaly_)
 	{
-		REPORT(0)<<"Time (s): "<<cyanText( currentTimeWord() )<<endREPORT;
+		REPORT(0)<<"Time (s): "<<Cyan_Text( currentTimeWord() )<<END_REPORT;
 	}
 	// switch outputToFile_ on/off
 	checkForOutputToFile();

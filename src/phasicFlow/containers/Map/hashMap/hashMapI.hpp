@@ -80,7 +80,7 @@ inline iOstream& printKeys(iOstream& os, const wordHashMap<T> & m)
 
 
 template<typename T>
-inline iOstream& printKeys(iOstream& os, const labelHashMap<T> & m)
+inline iOstream& printKeys(iOstream& os, const uint64HashMap<T> & m)
 {
 	if (m.empty())
 		return os<<"labelHashMap is empty"<<endl;

@@ -23,11 +23,12 @@ Licence:
 
 
 
-namespace pFlow
+namespace pFlow::gSettings
 {
 
-const inline double vectorGrowthFactor__ = 1.1;
+extern const double vectorGrowthFactor__;
 
+void sleepMiliSeconds(int miliSeconds);
 
 }
 

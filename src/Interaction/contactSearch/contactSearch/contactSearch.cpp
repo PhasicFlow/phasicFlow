@@ -19,54 +19,124 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "contactSearch.hpp"
-
+#include "streams.hpp"
+#include "particles.hpp"
 
 
 pFlow::contactSearch::contactSearch(
 	const dictionary& dict,
-	const box& domain,
+	const box& extDomain,
  	const particles& prtcl,
  	const geometry& geom,
  	Timers& timers)
 :
-	interactionBase(prtcl, geom),
-	domain_(domain),
-	dict_(dict),
-	sphereSphereTimer_("particle-particle contact search", &timers),
-	sphereWallTimer_("particle-wall contact search", &timers)
+	extendedDomainBox_(extDomain),
+	particles_(prtcl),
+	geometry_(geom),
+	bTimer_("Boundary particles contact search", &timers),
+	ppTimer_("Internal particles contact search", &timers),
+	dict_(dict)
 {
 
 }
 
+const pFlow::pointStructure &pFlow::contactSearch::pStruct() const
+{
+   return particles_.pStruct();
+}
 
-pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
-	const dictionary& dict,
-	const box& domain,
- 	const particles& prtcl,
- 	const geometry& geom,
- 	Timers& timers)
+bool pFlow::contactSearch::broadSearch
+(
+	const timeInfo &ti, 
+	csPairContainerType &ppPairs, 
+	csPairContainerType &pwPairs, 
+	bool force
+)
 {
 
-	word baseMethName	= dict.getVal<word>("method");
-	word wallMethod 	= dict.getVal<word>("wallMapping");
+	if(enterBroadSearch(ti, force))
+	{
+		ppTimer_.start();
+		if( !BroadSearch(
+			ti,
+			ppPairs,
+			pwPairs,
+			force ) )
+		{
+			fatalErrorInFunction;
+			performedSearch_ = false;
+			return false;
+		}
+		ppTimer_.end();
+		performedSearch_ = true;
+	}
+	else
+	{
+		performedSearch_ = false;
+	}
 
-	auto model = angleBracketsNames2("ContactSearch", baseMethName, wallMethod);
+	return true;
+}
 
+bool pFlow::contactSearch::boundaryBroadSearch
+(
+	uint32 bndryIndex, 
+	const timeInfo &ti, 
+	csPairContainerType &ppPairs, 
+	csPairContainerType &pwPairs, 
+	bool force
+)
+{
+	if(enterBroadSearchBoundary(ti, force))
+	{
+		bTimer_.start();
+		for(uint32 i=0u; i<6u; i++)
+		{
+			if(!BoundaryBroadSearch(
+				i,
+				ti,
+				ppPairs,
+				pwPairs,
+				force))
+			{
+				performedSearchBoundary_ = false;
+				return false;
+			}
+		}
+		bTimer_.end();
+		performedSearchBoundary_ = true;
+	}
+	else
+	{
 
-	REPORT(1)<<"Selecting contact search model . . ."<<endREPORT;
+		performedSearchBoundary_ = false;
+	}
+
+    return true;
+}
+
+pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(
+    const dictionary &dict,
+    const box &extDomain,
+    const particles &prtcl,
+    const geometry &geom,
+    Timers &timers)
+{
+	word baseMethName	= dict.getVal<word>("method");	
+
+	auto model = angleBracketsNames("ContactSearch", baseMethName);
 	
-
+	pOutput.space(2)<<"Selecting contact search model "<<Green_Text(model)<<endl;	
 	if( dictionaryvCtorSelector_.search(model))
 	{
-		auto objPtr = dictionaryvCtorSelector_[model] (dict, domain, prtcl, geom, timers);
-		REPORT(2)<<"Model "<< greenText(model)<<" is created."<<endREPORT;
+		auto objPtr = dictionaryvCtorSelector_[model] (dict, extDomain, prtcl, geom, timers);
 		return objPtr;
 	}
 	else
 	{
 		printKeys
 		( 
-			fatalError << "Ctor Selector "<< model << " dose not exist. \n"
+			fatalError << "Ctor Selector "<< model << " does not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
 			dictionaryvCtorSelector_

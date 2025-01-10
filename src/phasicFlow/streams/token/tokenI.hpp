@@ -144,7 +144,7 @@ inline pFlow::token::token(punctuationToken p, int32 lineNumber)
     data_.punctuationVal = p;
 }
 
-inline pFlow::token::token(const label val, int32 lineNumber)
+inline pFlow::token::token(const uint64 val, int32 lineNumber)
 :
     data_(),
     type_(tokenType::INT64),
@@ -154,6 +154,15 @@ inline pFlow::token::token(const label val, int32 lineNumber)
 }
 
 inline pFlow::token::token(const uint32 val, int32 lineNumber)
+:
+    data_(),
+    type_(tokenType::INT64),
+    lineNumber_(lineNumber)
+{
+    data_.int64Val = static_cast<int64>(val);
+}
+
+inline pFlow::token::token(const uint8 val, int32 lineNumber)
 :
     data_(),
     type_(tokenType::INT64),
@@ -172,6 +181,15 @@ inline pFlow::token::token(const int64 val, int32 lineNumber)
 }
 
 inline pFlow::token::token(const int32 val, int32 lineNumber)
+:
+    data_(),
+    type_(tokenType::INT64),
+    lineNumber_(lineNumber)
+{
+    data_.int64Val = static_cast<int64>(val);
+}
+
+inline pFlow::token::token(const int8 val, int32 lineNumber)
 :
     data_(),
     type_(tokenType::INT64),

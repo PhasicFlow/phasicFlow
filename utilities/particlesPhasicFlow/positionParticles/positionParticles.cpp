@@ -19,33 +19,29 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "positionParticles.hpp"
-#include "box.hpp"
-#include "cylinder.hpp"
-#include "sphere.hpp"
-#include "cells.hpp"
-#include "contactSearchFunctions.hpp"
+#include "vocabs.hpp"
+#include "dictionary.hpp"
+#include "systemControl.hpp"
 
-#include "streams.hpp"
-
-
-pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& position)const
+pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(
+	const realx3Vector& position)const
 {
 	struct indexMorton
 	{
-		size_t morton;
-		size_t index;
+		uint64 morton;
+		uint64 index;
 	};
 
-	realx3 minP = min(position);
+	/*realx3 minP = min(position);
 	realx3 maxP = max(position);
 	real cellsize = maxDiameter();
-	cells<size_t> allCells( box(minP, maxP), cellsize);
+	cells<uint64> allCells( box(minP, maxP), cellsize);
 
 	Vector<indexMorton> indMor(position.size(),RESERVE());
 
 	indMor.clear();
 
-	size_t ind=0;
+	uint64 ind=0;
 	for(const auto& p:position)
 	{
 		auto cellInd = allCells.pointIndex(p);
@@ -54,7 +50,7 @@ pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& pos
 			ind++});
 	}
 
-	INFORMATION<<"Performing morton sorting."<<endINFO;
+	INFORMATION<<"Performing morton sorting."<<END_INFO;
 	std::sort(
 		indMor.begin(),
 		indMor.end(),
@@ -68,33 +64,48 @@ pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(realx3Vector& pos
 	for(auto& ind:indMor)
 	{
 		sortedPos.push_back( position[ind.index] );
-	}
+	}*/
 
-	return sortedPos;
+    WARNING<<"Morton sorting is inactive!"<<END_WARNING;
+	return position;
 }
 
 
 pFlow::positionParticles::positionParticles
 (
+	systemControl& control,
 	const dictionary& dict
 )
+:
+	regionType_(dict.getValOrSet<word>("regionType", "domain")),
+	maxNumberOfParticles_(dict.getValOrSet(
+		"maxNumberOfParticles", 
+		static_cast<uint32>(10000))),
+	mortonSorting_(dict.getValOrSet("mortonSorting", Logical("Yes")))
 {
-	maxNumberOfParticles_ = dict.getValOrSet("maxNumberOfParticles", static_cast<size_t>(10000));
-	
-	mortonSorting_ = dict.getValOrSet("mortonSorting", Logical("Yes"));
 
-	if( dict.containsDictionay("box") )	
+	if( regionType_ != "domain" )	
 	{
-		region_ = makeUnique<region<box>>(dict.subDict("box"));
-	}
-	else if(dict.containsDictionay("cylinder"))
+		pRegion_ = peakableRegion::create(
+			regionType_,
+			dict.subDict(regionType_+"Info"));
+	}	
+	else
 	{
-		region_ = makeUnique<region<cylinder>>(dict.subDict("cylinder"));
+		fileDictionary domainDict
+		(
+			objectFile
+			{
+				domainFile__,
+				"",
+				objectFile::READ_ALWAYS,
+				objectFile::WRITE_NEVER
+			},
+			&control.settings()
+		);
+		pRegion_ = peakableRegion::create(regionType_,domainDict.subDict("globalBox"));
 	}
-	else if(dict.containsDictionay("sphere"))
-	{
-		region_ = makeUnique<region<sphere>>(dict.subDict("sphere"));
-	}
+	
 }
 
 
@@ -106,15 +117,18 @@ pFlow::realx3Vector pFlow::positionParticles::getFinalPosition()
 	}
 	else
 	{
-		realx3Vector vec(position().capacity(), RESERVE());
-		vec.assign( position().begin(), position().end());
-		
-		return std::move(vec);
+		realx3Vector vec("final position",position().capacity(), 0 , RESERVE());
+		vec.assign( position().begin(), position().end());	
+		return vec;
 	}
 }
 
 pFlow::uniquePtr<pFlow::positionParticles> 
-	pFlow::positionParticles::create(const dictionary & dict)
+	pFlow::positionParticles::create
+(
+    systemControl& control,
+    const dictionary & dict
+)
 {
 
 	word method = dict.getVal<word>("method");
@@ -122,7 +136,7 @@ pFlow::uniquePtr<pFlow::positionParticles>
 
 	if( dictionaryvCtorSelector_.search(method) )
 	{
-		return dictionaryvCtorSelector_[method] (dict);
+		return dictionaryvCtorSelector_[method] (control, dict);
 	}
 	else
 	{

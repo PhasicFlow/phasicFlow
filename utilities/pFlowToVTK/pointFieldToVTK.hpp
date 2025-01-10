@@ -1,451 +1,176 @@
 /*------------------------------- phasicFlow ---------------------------------
-      O        C enter of
-     O O       E ngineering and
-    O   O      M ultiscale modeling of
-   OOOOOOO     F luid flow       
+	  O        C enter of
+	 O O       E ngineering and
+	O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow
 ------------------------------------------------------------------------------
   Copyright (C): www.cemf.ir
   email: hamid.r.norouzi AT gmail.com
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 Licence:
-  This file is part of phasicFlow code. It is a free software for simulating 
+  This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
-  the terms of GNU General Public License v3 or any other later versions. 
- 
-  phasicFlow is distributed to help others in their research in the field of 
+  the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __pointFieldToVTK_hpp__
 #define __pointFieldToVTK_hpp__
 
-#include <regex>
-
-#include "vtkFile.hpp"
+#include "systemControl.hpp"
+#include "pointStructure.hpp"
 #include "pointFields.hpp"
-#include "IOobject.hpp"
+#include "vtkByteSwapper.hpp"
+
+extern bool bindaryOutput__;
 
 namespace pFlow::PFtoVTK
 {
 
-template<typename IntType, typename IncludeMaskType>
-bool addIntPointField(
-	iOstream& 	os,
-	word 		fieldName,
-	int32 		numActivePoints,
-	IntType* 		field,
-	IncludeMaskType includeMask );
+	bool convertTimeFolderPointFields(
+		systemControl &control,
+		const fileSystem &destPath,
+		const word &bName,
+		word& filename);
 
-template<typename IncludeMaskType>
-bool addRealPointField(
-	iOstream& 	os,
-	word 		fieldName,
-	int32 		numActivePoints,
-	real* 		field,
-	IncludeMaskType includeMask );
+	bool convertTimeFolderPointFieldsSelected(
+		systemControl &control,
+		const fileSystem &destPath,
+		const word &bName,
+		const wordVector &fieldsName,
+		bool mustExist,
+		word& filename);
 
-template<typename IncludeMaskType>
-bool addRealx3PointField(
-	iOstream& 	os,
-	word 		fieldName,
-	int32 		numActivePoints,
-	realx3* 	field,
-	IncludeMaskType includeMask );
+	bool addUndstrcuturedGridField(
+		Ostream &os,
+		realx3 *position,
+		uint32 numPoints);
 
-bool regexCheck(word TYPENAME, word fieldType)
-{
-	std::regex match("pointField\\<([A-Za-z1-9_]*)\\,([A-Za-z1-9_]*)\\>");
-	std::smatch search1, search2;
-	if(!std::regex_match(fieldType, search1, match))return false;
-	if(!std::regex_match(TYPENAME, search2, match))return false;
-	if(search1.size()!=3)return false;
-	if(search1.size()!=search2.size())return false;
-	return search1[1] == search2[1];
-}
+	bool convertRealTypePointField(
+		Ostream &os,
+		const IOfileHeader &header,
+		pointStructure &pStruct);
 
-template<typename Type>
-bool checkFieldType(word objectType)
-{
-	//if( pointField<VectorSingle,Type>::TYPENAME() == objectType )return true;
-	//if( pointField<VectorSingle,Type, HostSpace>::TYPENAME() == objectType ) return true;
-	//if( pointField<VectorDual, Type>::TYPENAME() == objectType )return true;
-	return regexCheck(pointField<VectorSingle,Type>::TYPENAME(), objectType);
-	
-}
+	bool convertRealx3TypePointField(
+		Ostream &os,
+		const IOfileHeader &header,
+		pointStructure &pStruct);
 
-template<typename T>
-bool convertIntPointField
-(
-	iOstream& os,
-	const IOfileHeader& header,
-	const pointStructure& pStruct
-)
-{
+	template <typename IntType>
+	bool addIntPointField(
+		Ostream &os,
+		const word &fieldName,
+		IntType *field,
+		uint32 numData);
 
-	using PointFieldType = pointField<VectorSingle, T, HostSpace>;
+	bool addRealPointField(
+		Ostream &os,
+		const word &fieldName,
+		const real *field,
+		uint32 numData);
 
-	word objectType = header.objectType();
+	bool addRealx3PointField(
+		Ostream &os,
+		const word &fieldName,
+		const realx3 *field,
+		uint32 numData);
 
-	if(!checkFieldType<T>(objectType))
+	template <typename Type>
+	bool checkFieldType(word objectType);
+
+	bool regexCheck(const word &TYPENAME, const word &fieldType);
+
+	template <typename Type>
+	inline bool checkFieldType(word objectType)
 	{
-		return false;
+		return regexCheck(pointField<Type>::TYPENAME(), objectType);
 	}
 
-	auto objField = IOobject::make<PointFieldType>
-	(
-		header,
-		pStruct,
-		static_cast<T>(0)
-	);
-
-	auto& Field = objField().template getObject<PointFieldType>();
-
-	T* data = Field.deviceVectorAll().data();
-	
-	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk.\n";
-
-	return addIntPointField(
-		os,
-		header.objectName(),
-		pStruct.numActive(),
-		data,
-		pStruct.activePointsMaskH() );
-}
-
-
-bool convertRealTypePointField(
-	iOstream& os,
-	const IOfileHeader& header,
-	const pointStructure& pStruct)
-{
-	word objectType = header.objectType();
-
-	if(!checkFieldType<real>(objectType))return false;
-
-	auto objField = IOobject::make<realPointField_H>
-	(
-		header,
-		pStruct,
-		static_cast<real>(0)
-	);
-
-	auto& Field = objField().getObject<realPointField_H>();
-
-	real* data = Field.hostVectorAll().data();
-	
-	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endREPORT;
-
-	return addRealPointField(
-		os,
-		header.objectName(),
-		pStruct.numActive(),
-		data,
-		pStruct.activePointsMaskH() );
-}
-
-bool convertRealx3TypePointField(
-	iOstream& os,
-	const IOfileHeader& header,
-	const pointStructure& pStruct)
-{
-	word objectType = header.objectType();
-
-	if(!checkFieldType<realx3>(objectType))return false;
-
-	auto objField = IOobject::make<realx3PointField_H>
-	(
-		header,
-		pStruct,
-		static_cast<real>(0)
-	);
-
-	auto& Field = objField().getObject<realx3PointField_H>();
-
-	realx3* data = Field.hostVectorAll().data();
-	
-	REPORT(2)<<"writing "<< greenColor <<header.objectName()<<defaultColor<<" field to vtk."<<endREPORT;
-
-	return addRealx3PointField(
-		os,
-		header.objectName(),
-		pStruct.numActive(),
-		data,
-		pStruct.activePointsMaskH() );
-}
-
-
-template<typename IncludeMaskType>
-bool addUndstrcuturedGridField(
-	iOstream& 	os,
-	int32 		numActivePoints,
-	realx3* 	position,
-	IncludeMaskType includeMask)
-{
-
-	auto [iFirst, iLast] = includeMask.activeRange();
-
-	os<< "DATASET UNSTRUCTURED_GRID\n";
-	os<< "POINTS "<< numActivePoints << " float\n"; 
-	
-	if(numActivePoints==0) return true;
-	
-	for(int32 i=iFirst; i<iLast; ++i)
+	template <typename IntType>
+	inline bool convertIntPointField(
+		Ostream &os,
+		const IOfileHeader &header,
+		pointStructure &pStruct)
 	{
-		if(includeMask(i))
-			os<< position[i].x()<<' '<< position[i].y()<<' '<<position[i].z()<<'\n';
-	}
 
-	os<<"CELLS "<< numActivePoints<<' '<< 2*numActivePoints<<'\n';
-	for(int32 i=0; i<numActivePoints; i++)
-	{
-		os<< 1 <<' '<< i<<'\n';
-	}
+		using PointFieldType = pointField<IntType, HostSpace>;
 
-	os<<"CELL_TYPES "<< numActivePoints<<'\n';
+		word objectType = header.objectType();
 
-	for(int32 i=0; i<numActivePoints; i++)
-	{
-		os<< 1 <<'\n';
-	}
-	
-	os << "POINT_DATA " << numActivePoints << endl;
-
-	return true;
-}
-
-
-template<typename IntType, typename IncludeMaskType>
-bool addIntPointField(
-	iOstream& 	os,
-	word 		fieldName,
-	int32 		numActivePoints,
-	IntType* 		field,
-	IncludeMaskType includeMask )
-{
-	if(numActivePoints==0) return true;
-
-	auto [iFirst, iLast] = includeMask.activeRange();
-
-	os << "FIELD FieldData 1\n"<<
-	fieldName << " 1 " << numActivePoints << " int\n";
-	for(int32 i=iFirst; i<iLast; ++i)
-	{
-		if(includeMask(i))
-			os<< field[i] <<'\n';
-	}
-
-	return true;
-}
-
-template<typename IncludeMaskType>
-bool addRealPointField(
-	iOstream& 	os,
-	word 		fieldName,
-	int32 		numActivePoints,
-	real* 		field,
-	IncludeMaskType includeMask )
-{
-	if(numActivePoints==0) return true;
-
-	auto [iFirst, iLast] = includeMask.activeRange();
-
-	os << "FIELD FieldData 1\n"<<
-	fieldName << " 1 " << numActivePoints << " float\n";
-	for(int32 i=iFirst; i<iLast; ++i)
-	{
-		if(includeMask(i))
-			os<< field[i] <<'\n';
-	}
-	return true;
-}
-
-template<typename IncludeMaskType>
-bool addRealx3PointField(
-	iOstream& 	os,
-	word 		fieldName,
-	int32 		numActivePoints,
-	realx3* 	field,
-	IncludeMaskType includeMask )
-{
-	if(numActivePoints==0) return true;
-
-	auto [iFirst, iLast] = includeMask.activeRange();
-
-	os << "FIELD FieldData 1\n"<<
-	fieldName << " 3 " << numActivePoints << " float\n";
-	for(int32 i=iFirst; i<iLast; ++i)
-	{
-		if(includeMask(i))
-			os<< field[i].x()<<' '<< field[i].y()<<' '<<field[i].z()<<'\n';
-	}
-
-	return true;
-}
-
-
-bool convertTimeFolderPointFields( 
-	fileSystem timeFolder,
-	real time,
-	fileSystem destPath,
-	word bName)
-{
-
-	// check if pointStructure exist in this folder 
-	IOfileHeader pStructHeader(
-		objectFile(
-			pointStructureFile__,
-			timeFolder,
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_ALWAYS)
-		);
-
-	if( !pStructHeader.headerOk(true) )
-	{
-		output<<yellowColor<<"Time folder "<< timeFolder <<
-		" does not contain any pStructure data file. Skipping this folder . . ."
-		<<defaultColor<<nl;
-		return true;
-	}
-
-	vtkFile vtk(destPath, bName, time);
-
-	if(!vtk) return false;
-
-	auto pStructObjPtr = IOobject::make<pointStructure>(pStructHeader);
-	auto& pStruct = pStructObjPtr().getObject<pointStructure>();
-
-	// get a list of files in this timeFolder;
-
-	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
-	auto* pos = posVec.data();
-
-	REPORT(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
-					 <<" active particles"<<endREPORT;
-	addUndstrcuturedGridField(
-		vtk(),
-		pStruct.numActive(),
-		pos,
-		pStruct.activePointsMaskH());
-
-	auto fileList = containingFiles(timeFolder);
-
-
-	for(auto& file:fileList)
-	{
-		IOfileHeader fieldHeader(
-			objectFile(
-			file.wordPath(),
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_ALWAYS) );
-
-		if( fieldHeader.headerOk(true) )
+		if (!checkFieldType<IntType>(objectType))
 		{
-			convertIntPointField<int32>(vtk(), fieldHeader, pStruct);
-			convertIntPointField<int64>(vtk(), fieldHeader, pStruct);
-			convertIntPointField<int8>(vtk(), fieldHeader, pStruct);
-			convertRealTypePointField(vtk(), fieldHeader, pStruct);
-			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
+			return false;
 		}
+
+		REPORT(1);
+		auto field = PointFieldType(
+			header,
+			pStruct,
+			static_cast<IntType>(0));
+
+		const IntType *data = field.deviceViewAll().data();
+
+		REPORT(2) << ">>> Writing " << Green_Text(header.objectName()) << " field to vtk.\n";
+
+		return addIntPointField(
+			os,
+			header.objectName(),
+			data,
+			pStruct.numActive());
 	}
 
-	return true;
-}
-
-
-
-bool convertTimeFolderPointFieldsSelected( 
-	fileSystem 			timeFolder,
-	real 				time,
-	fileSystem 			destPath,
-	word 				bName,
-	wordVector 			fieldsName,
-	bool 				mustExist)
-{
-
-	// check if pointStructure exist in this folder 
-	IOfileHeader pStructHeader(
-		objectFile(
-			pointStructureFile__,
-			timeFolder,
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_ALWAYS)
-		);
-
-	if( !pStructHeader.headerOk(true) )
+	template <typename IntType>
+	inline bool addIntPointField(
+		Ostream &os,
+		const word &fieldName,
+		IntType *field,
+		uint32 numData)
 	{
-		output<<yellowColor<<"Time folder "<< timeFolder <<
-		" does not contain any pStructure data file. Skipping this folder . . ."
-		<<defaultColor<<nl;
-		return true;
-	}
 
-	vtkFile vtk(destPath, bName, time);
+		if (numData == 0)
+			return true;
 
-	if(!vtk) return false;
-
-	auto pStructObjPtr = IOobject::make<pointStructure>(pStructHeader);
-	auto& pStruct = pStructObjPtr().getObject<pointStructure>();
-
-	// get a list of files in this timeFolder;
-
-	auto posVec = std::as_const(pStruct).pointPosition().hostVectorAll();
-	auto* pos = posVec.data();
-
-	REPORT(1)<<"Writing pointStructure to vtk file with "<< yellowText(pStruct.numActive())
-					 <<" active particles"<<endREPORT;
-	addUndstrcuturedGridField(
-		vtk(),
-		pStruct.numActive(),
-		pos,
-		pStruct.activePointsMaskH());
-
-	auto fileList = containingFiles(timeFolder);
-
-
-	for(auto& fname:fieldsName)
-	{
-		fileSystem fieldAddress = timeFolder+fname;
-		
-		IOfileHeader fieldHeader(
-			objectFile(
-			fieldAddress.wordPath(),
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_ALWAYS) );
-
-		if( fieldHeader.headerOk(true) )
+		if(std::is_same_v<IntType, int> || std::is_same_v<IntType, const int> )
 		{
-			convertIntPointField<int32>(vtk(), fieldHeader, pStruct);
-			convertIntPointField<int64>(vtk(), fieldHeader, pStruct);
-			convertIntPointField<int8>(vtk(), fieldHeader, pStruct);
-			convertRealTypePointField(vtk(), fieldHeader, pStruct);
-			convertRealx3TypePointField(vtk(), fieldHeader, pStruct);
+			os << "FIELD FieldData 1\n"
+		   		<< fieldName << " 1 " << numData << " int\n";
+		}
+		else if( std::is_same_v<IntType, unsigned int>|| std::is_same_v<IntType, const unsigned int>)
+		{
+			os << "FIELD FieldData 1\n"
+		   		<< fieldName << " 1 " << numData << " unsigned_int\n";
 		}
 		else
 		{
-			if(mustExist)
+			WARNING<<"Field "<< fieldName<< " has invalid data type for conversion. Type is "
+			<<getTypeName<IntType>()<<END_WARNING;
+			return false; 
+		}
+
+		if(bindaryOutput__)
+		{
+			for (uint32 i = 0; i < numData; ++i)
 			{
-				fatalErrorInFunction<<"Field " << fieldAddress << 
-				" does not exist."<<endl;
-				return false;
+				IntType val = byteSwaper(field[i]);
+				os.stdStream().write(reinterpret_cast<const char*>(&val), sizeof(IntType));
 			}
-			else
+			os<<'\n';
+		}
+		else
+		{
+			for (uint32 i = 0; i < numData; ++i)
 			{
-				REPORT(1)<<"Could not find "<<yellowText(fieldAddress) <<" skipping . . ."<<endREPORT;
+				os << field[i] << '\n';
 			}
 		}
+		
+		return true;
 	}
 
-	return true;
 }
 
- 
-}
-
-
-
-#endif 
+#endif

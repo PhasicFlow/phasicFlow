@@ -13,38 +13,37 @@
 
 #include "iTstream.hpp"
 
+#include "processorOstream.hpp"
+
+#include "masterOstream.hpp"
+
 namespace pFlow
 {
 
-
 	extern Ostream output;
+
+	extern masterOstream mOutput;
+
+	extern processorOstream pOutput;
 
 	extern Istream input; 
 
-	extern Ostream errReport;
-
+	extern processorOstream errReport;
 
 }
 
-#define redText(text)     	redColor<<text<<defaultColor
-#define yellowText(text)  	yellowColor<<text<<defaultColor
-#define blueText(text)    	blueColor<<text<<defaultColor
-#define greenText(text)   	greenColor<<text<<defaultColor
-#define magentaText(text) 	magentaColor<<text<<defaultColor
-#define cyanText(text) 		cyanColor<<text<<defaultColor
-#define boldText(text) 		boldChar<<text<<defaultColor
 
-#define INFORMATION pFlow::output<<boldChar<<magentaColor<<"> INFO: "<<defaultColor<<magentaColor
-#define endINFO defaultColor<<pFlow::nl
+#define INFORMATION pFlow::pOutput.setColor(boldChar).setColor(magentaColor)<<"> INFO: "<<defaultColor<<magentaColor
+#define END_INFO defaultColor<<pFlow::endl
 
-#define REPORT(n) pFlow::output.space(2*n)
-#define endREPORT pFlow::nl
+#define REPORT(n) pFlow::mOutput.space(2*n)
+#define END_REPORT pFlow::endl
 
 
-#define yWARNING pFlow::output<<boldChar<<yellowColor<<"> WARNING\n"<<defaultColor<<yellowColor<<"  " 
-#define endyWARNING defaultColor<<pFlow::nl
+#define WARNING pFlow::errReport<<boldChar<<yellowColor<<"> WARNING\n"<<defaultColor<<yellowColor<<"  " 
+#define END_WARNING defaultColor<<pFlow::endl
 
-#define ERR pFlow::output<<boldChar<<redColor<<"> ERROR\n"<<defaultColor<<redColor<<"  " 
-#define endERR defaultColor<<pFlow::nl
+#define ERR pFlow::errReport<<boldChar<<redColor<<"> ERROR\n"<<defaultColor<<redColor<<"  " 
+#define END_ERR defaultColor<<pFlow::endl
 
 #endif

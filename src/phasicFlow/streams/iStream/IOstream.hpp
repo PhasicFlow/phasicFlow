@@ -17,13 +17,9 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __IOstream_hpp__
 #define __IOstream_hpp__
 
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
 #include <iostream>
 
@@ -42,6 +38,12 @@ using std::cerr;
 namespace pFlow
 {
 
+/**
+ * A base calss for input/output streams
+ * 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs
+ */
 class IOstream
 {
 
@@ -115,7 +117,7 @@ protected:
 
 public:
 
-    //- Constructors
+    ////- Constructors
 
         /// Default
         explicit IOstream():
@@ -144,7 +146,7 @@ public:
         virtual ~IOstream() = default;
           
         
-    //- Member Functions
+    ////- Member Functions
 
         /// Return the name of the stream
         virtual const word& name() const;
@@ -178,7 +180,7 @@ public:
         bool isBinary()const
         {
             return writeFormat_ == BINARY;
-        }
+        }    
 
         /// Return true if next operation might succeed
         bool good() const
@@ -299,12 +301,12 @@ public:
             flags(flags() & ~f);
         }
 
-
 }; // end of IOstream
 
 
 /// An IOstream manipulator
 typedef IOstream& (*IOstreamManip)(IOstream&);
+
 
 inline IOstream& dec(IOstream& io)
 {
@@ -335,7 +337,6 @@ inline IOstream& scientific(IOstream& io)
     io.setf(ios_base::scientific, ios_base::floatfield);
     return io;
 }
-
 
 
 } // pFlow

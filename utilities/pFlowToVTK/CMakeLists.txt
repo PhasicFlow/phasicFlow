@@ -1,7 +1,11 @@
 
 set(source_files 
+fileSeries.cpp
+pointFieldToVTK.cpp
+triSurfaceFieldToVTK.cpp
 pFlowToVTK.cpp 
-geometric.cpp 
+
+#geometric.cpp 
 )
 set(link_lib phasicFlow Kokkos::kokkos Utilities)
 

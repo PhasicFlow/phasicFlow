@@ -1,0 +1,33 @@
+PF_cFlags="--description --help --version"
+
+_pFlowToVTK(){
+    if [ "$3" == "--time" ]; then
+      COMPREPLY=( $(ls) )
+    else
+      COMPREPLY=( $(compgen -W "$PF_cFlags --binary --no-geometry --no-particles --out-folder --time --separate-surfaces --fields" -- "$2") )
+    fi
+}
+complete -F _pFlowToVTK pFlowToVTK
+
+_postprocessPhasicFlow(){
+    if [ "$3" == "--time" ]; then
+      COMPREPLY=( $(ls) )
+    else
+      COMPREPLY=( $(compgen -W "$PF_cFlags --out-folder --time --zeroFolder" -- "$2") )
+    fi
+}
+complete -F _postprocessPhasicFlow postprocessPhasicFlow
+
+complete -W "$PF_cFlags --positionParticles-only --setFields-only --coupling" particlesPhasicFlow
+
+complete -W "$PF_cFlags --coupling" geometryPhasicFlow 
+
+complete -W "$PF_cFlags --coupling" iterateGeometry
+
+complete -W "$PF_cFlags" iterateSphereParticles
+
+complete -W "$PF_cFlags" sphereGranFlow
+
+complete -W "$PF_cFlags" grainGranFlow
+
+complete -W "$PF_cFlags" checkPhasicFlow

@@ -22,7 +22,8 @@ Licence:
 #define __trieSurfaceField_hpp__
 
 #include "Field.hpp"
-#include "triSurface.hpp"
+#include "multiTriSurface.hpp"
+#include "observer.hpp"
 #include "error.hpp"
 
 
@@ -30,119 +31,160 @@ namespace pFlow
 {
 
 
-template<template<class, class> class VectorField, class T, class MemorySpace=void>
+template<class T, class MemorySpace=void>
 class triSurfaceField
 :
-	public eventObserver,	
-	public Field<VectorField, T, MemorySpace>
+	public IOobject,
+	public observer
 {
 public:
 	
-	using triSurfaceFieldType 	= triSurfaceField<VectorField, T, MemorySpace>;
+	using triSurfaceFieldType 	= triSurfaceField<T, MemorySpace>;
 	
-	using FieldType         	= Field<VectorField, T, MemorySpace>;
+	using FieldType         	= Field<T, MemorySpace>;
   	
   	using VectorType  			= typename FieldType::VectorType;
 
-	using iterator        = typename FieldType::iterator;
+	using memory_space 			= typename FieldType::memory_space;
 
-  	using constIterator   = typename FieldType::constIterator;
+	using execution_space 		= typename FieldType::execution_space;
 
-	using reference       = typename FieldType::reference;
-  	
-  	using constReference  = typename FieldType::constReference;
-
-	using valueType       = typename FieldType::valueType;
-  	
-  	using pointer         = typename FieldType::pointer;
-  	
-  	using constPointer    = typename FieldType::constPointer;
-
-protected:
+private:
 
 	////- data members
-		const triSurface& surface_;
+
+		FieldType 				field_;
+
+		const multiTriSurface& 	surface_;
 
 		// - value when a new item is added to field
-		T 	defaultValue_;
+		T 						defaultValue_;
 
 
 public:
 	
 	// - type info
-	TypeInfoTemplateNV2("triSurfaceField", T, VectorType::memoerySpaceName());
+	TypeInfoTemplate111("triSurfaceField", T, VectorType::memoerySpaceName());
 
 	
 	//// CONSTRUCTORS
 
 		// - construct a field from tirSurface and set defaultValue_ and field value to defVal
-		triSurfaceField( const triSurface& surface, const T& defVal, bool subscribe = true);
+		triSurfaceField( 
+			const objectFile& objf,
+			multiTriSurface& surface, 
+			const T& defVal);
+
+		triSurfaceField( 
+			const objectFile& objf,
+			repository* owner,
+			multiTriSurface& surface, 
+			const T& defVal);
 
 		// - construct from iIOEntity, tirSurface and a value
-		triSurfaceField( const triSurface& surface, const T& val, const T& defVal, bool subscribe = true);
+		triSurfaceField( 
+			const objectFile& objf,
+			multiTriSurface& surface, 
+			const T& val, 
+			const T& defVal);
 
-		// - construct from another triSurfaceField
-		//   subscribe to events if true
-		triSurfaceField( const triSurfaceField& src, bool subscribe);
+		triSurfaceField( 
+			const objectFile& objf,
+			repository* owner,
+			multiTriSurface& surface, 
+			const T& val, 
+			const T& defVal);
 
+		~triSurfaceField()override = default;
 
-		// - copy construct 
-		triSurfaceField(const triSurfaceField& src);
-
-		// - no move construct
-		triSurfaceField(triSurfaceField&& src) = delete;
-
-
-		// assignment, only assign the VectorField and preserve other parts of this 
-		triSurfaceField& operator = (const triSurfaceField& rhs);
-
-		// no move assignment 
-		triSurfaceField& operator = (triSurfaceField&&) = delete;		
-
-
-		inline uniquePtr<triSurfaceFieldType> clone() const
-		{
-			return makeUnique<triSurfaceFieldType>(*this);
-		}
-
-		inline triSurfaceFieldType* clonePtr()const
-		{
-			return new triSurfaceFieldType(*this);
-		}
+			
 
 	//// - Methods
 
-		inline const triSurface& surface()const {
+		inline 
+		const auto& surface()const 
+		{
 			return surface_;
 		}
 
-		auto getTriangleAccessor()const
+		inline 
+		auto size()const
 		{
-			return surface_.getTriangleAccessor();
+			return field_.size();
 		}
 
-		bool update(const eventMessage& msg);
+		inline
+		auto capacity()const
+		{
+			return field_.capacity();
+		}
 
+		inline 
+		void assign(const std::vector<T>& vals)
+		{
+			if(vals.size() != surface_.size())
+			{
+				fatalErrorInFunction;
+				fatalExit;	
+			}
+			field_.assign(vals, surface_.capacity());
+		}
+		
+		inline 
+		const auto& deviceViewAll()const
+		{
+			return field_.deviceViewAll();
+		}
+		inline
+		auto deviceView()const
+		{
+			return field_.deviceView();
+		}
+
+		inline
+		auto hostView()const
+		{
+			return field_.hostView();
+		}
+
+		inline
+		const FieldType& field()const
+		{
+			return field_;
+		}
+
+		inline
+		FieldType& field()
+		{
+			return field_;
+		}
+
+		inline 
+		void fill(const T& val)
+		{
+			field_.fillField(val);
+		}
+
+		bool hearChanges(
+		real t,
+		real dt,
+		uint32 iter,
+		const message& msg, 
+		const anyList& varList) override
+		{
+			notImplementedFunction;
+			return false;
+		}
 
 	//// -  IO operations
-		bool readTriSurfacceField(iIstream& is);
+		bool write(iOstream& is, const IOPattern& iop)const override;
 
-		bool writeTriSurfaceField(iOstream& os)const;
-
-
-		bool read(iIstream& is)
-		{
-			return readTriSurfacceField(is);
-		}
-
-		bool write(iOstream& os)const
-		{
-			return writeTriSurfaceField(os);
-		}
+    
+        bool read(iIstream& is, const IOPattern& iop) override;
 
 };
 
-template<template<class, class> class VectorField, class T, class MemorySpace>
+/*template<template<class, class> class VectorField, class T, class MemorySpace>
 iIstream& operator >> (iIstream & is, triSurfaceField<VectorField, T, MemorySpace> & tsF )
 {
 	if( !tsF.read(is))
@@ -168,7 +210,7 @@ iOstream& operator << (iOstream& os, const triSurfaceField<VectorField, T, Memor
 	}
 
 	return os;
-}
+}*/
 
 }
 

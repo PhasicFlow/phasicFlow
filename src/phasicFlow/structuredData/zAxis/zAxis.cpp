@@ -22,129 +22,60 @@ Licence:
 #include "zAxis.hpp"
 
 
-pFlow::zAxis::zAxis(const realx3 &p1, const realx3 &p2) :
-p1_(p1),
-p2_(p2)
+pFlow::zAxis::zAxis(const realx3 &p1, const realx3 &p2) 
+:
+	p1_(p1),
+	p2_(p2)
 {
-	n_ = p2-p1;
-	auto len = pFlow::length(n_);
-
-	if(len < smallValue )
+	if( equal(p1,p2))
 	{
+		fatalErrorInFunction<<
+		"points are equal "<< p1 <<" "<<p2<<endl;
 		fatalExit;
 	}
-	n_ /= len;
-
-	makeTransMatrix();
+	makeTransMatrix(p2-p1);
 }
 
-pFlow::realx3 pFlow::zAxis::transferToZ(const realx3 & p)
+pFlow::realx3 pFlow::zAxis::transferToZ(const realx3 & p)const
 {
-	real pp[4][1] = {p.x(), p.y(), p.z(), 1.0};
-	real pn[4][1];
-
-	MatMul(Trans_z_xz_P1_, pp, pn);
+	const auto p0 = p1_-p;
+	array2D<real,3,1> po {p0.x(), p0.y(), p0.z()}; 
 	
-	return realx3(
-		pn[0][0],
-		pn[1][0],
-		pn[2][0]
-		);
+	auto tp = MatMul(rotMat_, po);
+	
+	return realx3(tp(0,0), tp(1,0), tp(2,0));
 
 }
 
-pFlow::realx3 pFlow::zAxis::transferBackZ(const realx3 & p)
+pFlow::realx3 pFlow::zAxis::transferBackZ(const realx3 & p)const
 {
-	real pp[4][1] = { p.x(), p.y(), p.z(), 1.0 };
-	real pn[4][1];
 
-	MatMul(ITrans_P1_xz_z_, pp, pn);
+	auto rp = MatMul(invRotMat_,array2D<real,3,1>{p.x(), p.y(), p.z()});
 
-	return realx3(
-		pn[0][0],
-		pn[1][0],
-		pn[2][0]
-		);
+	return realx3(rp(0,0)+p1_.x(),rp(1,0)+p1_.y(), rp(2,0)+p1_.z());
 }
 
 
-void pFlow::zAxis::makeTransMatrix()
+
+
+void pFlow::zAxis::makeTransMatrix(const realx3& vec)
 {
-	
-	// transfering point p1 to the origin
-	real TransP1[4][4] =
-	{
-		1.0, 0.0, 0.0, -p1_.x(),
-		0.0, 1.0, 0.0, -p1_.y(),
-		0.0, 0.0, 1.0, -p1_.z(),
-		0.0, 0.0, 0.0, 1.0
-	};
+	const realx3 Unit = {0,0,1};
+	const auto v_unit = normalize(vec);
+	auto uvw = cross(v_unit,Unit);
 
-	// for transformation back
-	real ITransP1[4][4] =
-	{
-		1.0, 0.0, 0.0, p1_.x(),
-		0.0, 1.0, 0.0, p1_.y(),
-		0.0, 0.0, 1.0, p1_.z(),
-		0.0, 0.0, 0.0, 1.0
-	};
+	const auto rcos = dot(v_unit, Unit);
+    const auto rsin = uvw.length();
 
-	
-	real u = n_.x();
-	real v = n_.y();
-	real w = n_.z();
-	real u2v2 = sqrt(u*u + v*v);
+	if (abs(rsin) > smallValue)
+        uvw /= rsin;
+	const auto& [u, v, w] = uvw;
 
-	//correcting the transformation matrix in the case of coincidence with z - axis
-	if ( equal(w,1.0) )
-	{
-		assignMat(TransP1 , Trans_z_xz_P1_);
-		assignMat(ITransP1, ITrans_P1_xz_z_);
-		return;
-	}
+	rotMat_ = 
+	ArrayType({rcos, 0, 0, 0, rcos, 0, 0, 0, rcos})+
+	ArrayType({0, -w, v, w, 0, -u, -v, u, 0})+
+	(1-rcos)*ArrayType({u*u, u*v, u*w, u*v, v*v, w*v, u*w, v*w, w*w});
 
-	u2v2 = max(smallValue, u2v2);
+	invRotMat_ = transpose(rotMat_);
 
-	real TransXZ[4][4] =
-	{
-		u / u2v2, v / u2v2, 0.0, 0.0,
-		-v / u2v2, u / u2v2, 0.0, 0.0,
-		0.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 0.0, 1.0
-	};
-
-	real TransZ[4][4] =
-	{
-		w, 0.0, -u2v2, 0.0,
-		0.0, 1.0, 0.0, 0.0,
-		u2v2, 0.0, w, 0.0,
-		0.0, 0.0, 0.0, 1.0
-	};
-
-	real temp[4][4];
-	// creat transformation matrix to transfer point from line axis to z-axis
-	MatMul(TransXZ, TransP1, temp);
-	MatMul(TransZ, temp, Trans_z_xz_P1_);
-
-
-	real ITransXZ[4][4] =
-	{
-		u / u2v2, -v / u2v2, 0.0, 0.0,
-		+v / u2v2, u / u2v2, 0.0, 0.0,
-		0.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 0.0, 1.0
-	};
-
-	real ITransZ[4][4] =
-	{
-		w, 0.0, +u2v2, 0.0,
-		0.0, 1.0, 0.0, 0.0,
-		-u2v2, 0.0, w, 0.0,
-		0.0, 0.0, 0.0, 1.0
-	};
-
-	// creat transformation matrix to transfer point to from z-axis to line axis
-	MatMul(ITransXZ, ITransZ, temp);
-	MatMul(ITransP1, temp, ITrans_P1_xz_z_);
-
-}
+}  

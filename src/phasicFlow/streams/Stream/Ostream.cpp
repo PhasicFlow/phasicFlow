@@ -17,8 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
 #include "error.hpp"
 #include "token.hpp"
@@ -181,21 +179,14 @@ pFlow::iOstream& pFlow::Ostream::write(const int32 val)
     return *this;
 }
 
-/*pFlow::iOstream& pFlow::Ostream::write(const int16 val)
+pFlow::iOstream& pFlow::Ostream::write(const int8 val)
 {
     os_ << val;
     setState(os_.rdstate());
     return *this;
 }
 
-pFlow::iOstream& pFlow::Ostream::write(const int8 val)
-{
-    os_ << val;
-    setState(os_.rdstate());
-    return *this;
-}*/
-
-pFlow::iOstream& pFlow::Ostream::write(const label val)
+pFlow::iOstream& pFlow::Ostream::write(const uint64 val)
 {
     os_ << val;
     setState(os_.rdstate());
@@ -209,7 +200,7 @@ pFlow::iOstream& pFlow::Ostream::write(const uint32 val)
     return *this;
 }
 
-pFlow::iOstream& pFlow::Ostream::write(const uint16 val)
+pFlow::iOstream& pFlow::Ostream::write(const uint8 val)
 {
     os_ << val;
     setState(os_.rdstate());
@@ -225,6 +216,13 @@ pFlow::iOstream& pFlow::Ostream::write(const float val)
 
 
 pFlow::iOstream& pFlow::Ostream::write(const double val)
+{
+    os_ << val;
+    setState(os_.rdstate());
+    return *this;
+}
+
+pFlow::iOstream& pFlow::Ostream::write(const size_t val)
 {
     os_ << val;
     setState(os_.rdstate());
@@ -248,13 +246,22 @@ pFlow::iOstream& pFlow::Ostream::write
     os_.write(binaryData, count);
     os_ << token::END_LIST;
 
-    setState(os_.rdstate());
-
     return *this;
 }
 
+pFlow::iOstream& pFlow::Ostream::writeBinaryBlockFlag()
+{
+    write( static_cast<char>(255));
+    write( static_cast<char>(255));
+    write( static_cast<char>(255));
+    write( static_cast<char>(0));
+    return *this;
+}
 
-
+void pFlow::Ostream::seek(size_t pos)
+{
+    os_.seekp(pos, std::ios_base::cur);
+}
 
 void pFlow::Ostream::indent()
 {
@@ -264,19 +271,29 @@ void pFlow::Ostream::indent()
     }
 }
 
+void pFlow::Ostream::startOfBinaryStreaming()
+{
+    this->endl();
+    this->flush();
+}
+
+void pFlow::Ostream::endOfBinaryStreaming()
+{
+    os_.seekp(0, std::ios_base::end);
+    this->endl();
+    this->flush();
+}
 
 void pFlow::Ostream::flush()
 {
     os_.flush();
 }
 
-
 void pFlow::Ostream::endl()
 {
     write('\n');
     os_.flush();
 }
-
 
 std::ios_base::fmtflags pFlow::Ostream::flags() const
 {

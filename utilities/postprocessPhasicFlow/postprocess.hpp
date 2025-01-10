@@ -46,6 +46,12 @@ protected:
 
 	wordList 				weightBasedDictNames_;
 
+	wordList 				countDictNames_;
+
+	List<wordList>  		countedVariableNamesList_;
+
+	List<uint32List> 		countedVairablesLists_;
+
 	uniquePtr<repository> 	timeFolderReposiory_ {nullptr};
 
 	uniquePtr<pointRectCell>	pointToCell_ {nullptr};

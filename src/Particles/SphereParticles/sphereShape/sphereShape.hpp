@@ -21,154 +21,76 @@ Licence:
 #ifndef __sphereShape_hpp__
 #define __sphereShape_hpp__
 
-#include "Vectors.hpp"
-#include "hashMap.hpp"
+#include "shape.hpp"
 
 namespace pFlow
 {
 
-class dictionary;
-
 class sphereShape
+:
+	public shape
 {
-protected:
+private:
 	
 	// - diameter of spheres
 	realVector 			diameters_;
 	
-	// - property name of spheres
-	wordVector 			materials_;
+	bool readFromDictionary3();
 
-	// - hashed list of spheres names
-	wordHashMap<uint32> names_;
+protected:
 
-	size_t 				numShapes_;
-
-
-	bool insertNames(const wordVector& names);
-
-	bool readDictionary(const dictionary& dict);
-
-	bool writeDictionary(dictionary& dict)const;
+	bool writeToDict(dictionary& dict)const override;
 
 public:
 
 	// - type info
-	TypeInfoNV("sphereShape");
+	TypeInfo("shape<sphere>");
 
+	sphereShape(
+		const word& fileName,
+		repository* owner,
+		const property& prop);
 
-		sphereShape(){}
-
-		sphereShape(
-			const realVector& diameter,
-			const wordVector& property,
-			const wordVector& name
-			);
-
-		sphereShape(const sphereShape&) = default;
-
-		sphereShape(sphereShape&&) = default;
-
-		sphereShape& operator=(const sphereShape&) = default;
-
-		sphereShape& operator=(sphereShape&&) = default;
-
-		auto clone()const
-		{
-			return makeUnique<sphereShape>(*this);
-		}
-
-		sphereShape* clonePtr()const
-		{
-			return new sphereShape(*this);
-		}
-
-		~sphereShape() = default;
+	
+	~sphereShape() override = default;
 
 	//// - Methods
-		const auto& names()const{
-			return names_;
-		}
 
-		const auto& diameters()const{
-			return diameters_;
-		}
+	real maxBoundingSphere()const override;
 
-		const auto& materials()const{
-			return materials_;
-		}
+    real minBoundingSphere()const override;
 
-		const auto diameter(label i)const{
-			return diameters_[i];
-		}
+	bool boundingDiameter(uint32 index, real& bDiam)const override;
 
-		const auto material(label i)const{
-			return materials_[i];
-		}
+	real boundingDiameter(uint32 index)const override;
 
+	realVector boundingDiameter()const override;
 
-		// name to index
-		bool nameToIndex(const word& name, uint32& index)const
-		{
-			if(auto[iter, found] = names_.findIf(name); found )
-			{
-				index = iter->second;
-				return true;
-			}
-			else
-			{
-				index = 0;
-				return false;
-			}
-		}
+	bool mass(uint32 index, real& m)const override;
 
-		uint32 nameToIndex(const word& name)const
-		{
-			return names_.at(name);
-		}
+	real mass(uint32 index) const override;
 
-		bool indexToName(uint32 i, word& name)const
-		{
-			for(auto& nm: names_)
-			{
-				if(nm.second == i)
-				{
-					name = nm.first;
-					return true;
-				}
-			}
-			name = "";
-			return false;
-		}
+	realVector mass()const override;
 
-		bool shapeToDiameter(wordVector& names, realVector& diams)const;
+    realVector density() const override;
 
-		void diameterMinMax(real& minD, real& maxD)const
-		{
-			minD = min(diameters_);
-			maxD = max(diameters_);
-		}
+	bool Inertia(uint32 index, real& I)const override;
 
-	//// - IO operatoin 
+	real Inertia(uint32 index)const override;
 
-		// - read from stream/file
-		bool read(iIstream& is);
+	realVector Inertia()const override;
+	 
+    bool Inertia_xx(uint32 index, real& Ixx)const override;
 
-		// - write to stream/file
-		bool write(iOstream& os)const;
+    real Inertial_xx(uint32 index)const override;
+	
+    bool Inertia_yy(uint32 index, real& Iyy)const override;
 
-		// - read from dictionary 
-		bool read(const dictionary& dict)
-		{
-			return readDictionary(dict);
-		}
+    real Inertial_yy(uint32 index)const override;
 
-		// - write to dictionary 
-		bool write(dictionary& dict)const
-		{
-			return writeDictionary(dict);
-		}
+    bool Inertia_zz(uint32 index, real& Izz)const override;
 
+    real Inertial_zz(uint32 index)const override;
 
 };
 

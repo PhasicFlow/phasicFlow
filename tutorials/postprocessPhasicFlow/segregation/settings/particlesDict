@@ -41,7 +41,7 @@ setFields
 	{
 		velocity 		realx3 	(0 0 0); // linear velocity (m/s)
 		acceleration 	realx3 	(0 0 0); // linear acceleration (m/s2)
-		rotVelocity 	realx3 	(0 0 0); // rotational velocity (rad/s)
+		r	Velocity 	realx3 	(0 0 0); // rotational velocity (rad/s)
 		shapeName 		word	smallSphere; // name of the particle shape 
 	}
 
@@ -53,8 +53,7 @@ setFields
 			selectRandomInfo
 			{
 				begin 	0;			// begin index of points
-				end 	30000;		// end index of points 
-				number  29999;			// stride for selector 
+				end 	29999;		// end index of points 
 			}
 			fieldValue  // fields that the selector is applied to 
 			{

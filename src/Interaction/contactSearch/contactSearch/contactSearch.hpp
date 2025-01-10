@@ -23,50 +23,76 @@ Licence:
 #define __contactSearch_hpp__
 
 
-#include "interactionBase.hpp"
-#include "unsortedPairs.hpp"
-#include "box.hpp"
+#include "contactSearchGlobals.hpp"
 #include "dictionary.hpp"
+#include "virtualConstructor.hpp"
+#include "timeInfo.hpp"
+#include "Timer.hpp"
 
 namespace pFlow
 {
 
+// - forward 
+class box;
+class particles;
+class geometry;
+class pointStructure;
+
 
 class contactSearch
-:
-	public interactionBase
 {
-public:
-	using IdType 			= typename interactionBase::IdType;
+private:
 
-	using IndexType 		= typename interactionBase::IndexType;
+	const box& 	extendedDomainBox_;
 
-	using ExecutionSpace 	= typename interactionBase::ExecutionSpace;
+	/// @brief update interval in terms of iteration numebr 
+	uint32 		updateInterval_= 1;
 
-	using PairContainerType   = unsortedPairs<ExecutionSpace, IdType>;
+	/// @brief  last iteration number which contact search has been performed
+	uint32 		lastUpdated_ 	= 0;
 
-protected:
+	/// @brief performed search? 
+	bool 		performedSearch_ = false;
 
-	const box& 			domain_;
+	/// @brief performed search in boundaries
+	bool 		performedSearchBoundary_ = false;
+
+	/// const ref to particles
+	const particles& 		particles_;
+
+	/// const ref to geometry 
+	const geometry&			geometry_;
+
+	Timer 		bTimer_;
+
+	Timer 		ppTimer_;
 
 	dictionary 	dict_;
 
-	Timer 		sphereSphereTimer_;
+	virtual
+	bool BroadSearch(
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force
+	)=0;
 
-	Timer 		sphereWallTimer_;
+	virtual
+	bool  BoundaryBroadSearch(
+		uint32 bndryIndex,
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false
+	)=0;
 
-	auto& dict()
-	{
-		return dict_;
-	}
-	
 public:
 
 	TypeInfo("contactSearch");
 
 	contactSearch(
 		const dictionary& dict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers);
@@ -88,40 +114,103 @@ public:
 	 	(dict, domain, prtcl, geom, timers)
 	);
 
-	const auto& domain()const
+	inline
+	bool performedSearch()const
 	{
-		return domain_;
+		return performedSearch_;
 	}
 
-	const auto& dict()const
+	inline 
+	bool performedSearchBoundary()const 
+	{
+		return performedSearchBoundary_;
+	}
+
+	inline
+	bool performSearch(uint32 iter, bool force = false)const
+	{
+		if((iter-lastUpdated_) % updateInterval_ == 0 || iter == 0 || force )
+		{
+			return true;
+		}
+		return false;		
+	}
+
+	bool enterBroadSearch(const timeInfo& ti, bool force = false)const
+	{
+		return performSearch(ti.iter(), force);
+	}
+
+	virtual 
+	bool enterBroadSearchBoundary(const timeInfo& ti, bool force=false)const = 0;
+
+	inline
+	uint32 updateInterval()const
+	{
+		return updateInterval_;
+	}
+
+	inline
+	const dictionary& dict()const
 	{
 		return dict_;
 	}
 
+	inline
+	const box& extendedDomainBox()const
+	{
+		return extendedDomainBox_;
+	}
 
-	virtual 
+	inline
+	const particles& Particles()const
+	{
+		return particles_;
+	}
+
+	const pointStructure& pStruct()const;
+
+	inline
+	const geometry& Geometry()const
+	{
+		return geometry_;
+	}
+
+	inline
+	Timer& ppTimer()
+	{
+		return ppTimer_;
+	}
+
+	inline
+	Timer& bTimer()
+	{
+		return bTimer_;
+	}
+ 
 	bool broadSearch(
-		PairContainerType& ppPairs,
-		PairContainerType& pwPairs,
-		bool force = false) = 0;
-
-	virtual 
-	bool ppEnterBroadSearch()const = 0;
-
-	virtual 
-	bool pwEnterBroadSearch()const = 0;
-
-	virtual 
-	bool ppPerformedBroadSearch()const = 0;
-
-	virtual 
-	bool pwPerformedBroadSearch()const = 0;
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false);
 	
+	bool boundaryBroadSearch(
+		uint32 bndryIndex,
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false);
 
+	virtual 
+	real sizeRatio()const = 0;
+
+	virtual 
+	real cellExtent()const = 0;
+	
 	static 
 	uniquePtr<contactSearch> create(
 		const dictionary& dict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers);

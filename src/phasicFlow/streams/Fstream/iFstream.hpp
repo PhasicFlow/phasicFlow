@@ -17,9 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
-
 #ifndef __iFstream_hpp__
 #define __iFstream_hpp__
 
@@ -31,7 +28,12 @@ Licence:
 namespace pFlow
 {
 
-
+/**
+ * Input file stream for reading binary or ascii data from a file. 
+ * 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs.
+ */
 class iFstream
 :
 	public fileStream,
@@ -39,17 +41,19 @@ class iFstream
 {
 public:
 
-	// - Constructor 
-	iFstream (const fileSystem& path, bool binary = false);
+	//// - Constructors
 
-	// no copy constructor
-	iFstream( const iFstream& src) = delete;
+		/// From file path and format 
+		iFstream (const fileSystem& path, bool binary = false);
 
-	// no assignment
-	iFstream& operator = (const iFstream& rhs) = delete;
+		/// No copy constructor
+		iFstream( const iFstream& src) = delete;
 
-	// - Destructor
-	virtual ~iFstream() = default;
+		/// No assignment
+		iFstream& operator = (const iFstream& rhs) = delete;
+
+		/// Destructor
+		virtual ~iFstream() = default;
 
 };
 

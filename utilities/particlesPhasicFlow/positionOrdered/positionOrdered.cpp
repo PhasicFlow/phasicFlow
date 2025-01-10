@@ -18,11 +18,9 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "positionOrdered.hpp"
 #include "error.hpp"
-
-
-#include "streams.hpp"
+#include "dictionary.hpp"
+#include "positionOrdered.hpp"
 
 
 bool pFlow::positionOrdered::findAxisIndex()
@@ -45,9 +43,9 @@ bool pFlow::positionOrdered::findAxisIndex()
 		return false;
 	}
 
-	realx3 uV[3];
+	std::array<realx3,3> uV;
 	size_t i=0;
-	for(auto& ca: axisOrder_)
+	for(const auto& ca: axisOrder_)
 	{
 		if(ca == "x")
 		{
@@ -82,15 +80,16 @@ bool pFlow::positionOrdered::positionPointsOrdered()
 	position_.clear();
 
 	realx3 dl(diameter_);
-	auto minP =  region_->minPoint();
-	auto maxP =  region_->maxPoint();
+	const auto& region = pRegion();
+	auto minP =  region.minPoint();
+	auto maxP =  region.maxPoint();
 
 	auto cntr = minP;
 
 	size_t n = 0;
 	while( n < numPoints_ )
 	{
-		if(region_->isInside(cntr))
+		if(region.isInside(cntr))
 		{
 			position_.push_back(cntr);
 			n++;
@@ -123,13 +122,14 @@ bool pFlow::positionOrdered::positionPointsOrdered()
 
 pFlow::positionOrdered::positionOrdered
 (
+	systemControl& control,
 	const dictionary& dict
 )
 :
-	positionParticles(dict),
+	positionParticles(control, dict),
 	poDict_
 	(  
-		dict.subDict("positionOrderedInfo")
+		dict.subDict("orderedInfo")
 	),
 	diameter_
 	(
@@ -137,7 +137,7 @@ pFlow::positionOrdered::positionOrdered
 	),
 	numPoints_
 	(
-		poDict_.getVal<size_t>("numPoints")
+		poDict_.getVal<uint64>("numPoints")
 	),
 	axisOrder_
 	(
@@ -145,19 +145,15 @@ pFlow::positionOrdered::positionOrdered
 	),
 	position_
 	(
-		maxNumberOfParticles_, RESERVE()
+		"positionOrdered", 
+		max(maxNumberOfParticles(), numPoints_), 
+		numPoints_ ,
+		RESERVE()
 	)
 {
 	
 	if( !findAxisIndex() )
 	{
-		fatalExit;
-	}
-
-	if(!region_)
-	{
-		fatalErrorInFunction<<"You must provided a region (box, cylinder, ...) for positioning particles in dictionary "<<
-		dict.globalName()<<endl;
 		fatalExit;
 	}
 

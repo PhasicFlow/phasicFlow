@@ -85,7 +85,7 @@ pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create(
 		auto objPtr = 
 			dictionaryvCtorSelector_[method]
 			(dict, opType, timeFolder);
-		REPORT(2)<< dict.name()<< " with model "<<greenText(method)<<" is processed."<<endREPORT;
+		REPORT(2)<< dict.name()<< " with model "<<Green_Text(method)<<" is processed."<<END_REPORT;
 		return objPtr;
 	}
 	else

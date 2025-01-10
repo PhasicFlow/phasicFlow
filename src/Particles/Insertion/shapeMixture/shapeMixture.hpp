@@ -21,78 +21,98 @@ Licence:
 #ifndef __shapeMixture_hpp__
 #define __shapeMixture_hpp__
 
-
 #include "Vectors.hpp"
+#include "Lists.hpp"
 
 namespace pFlow
 {
 
 class dictionary;
 
+/**
+ * Defines a mixture of particles for particle insertion.
+ *
+ * The mixture composition is defined based on the integer numbers.
+ * For example, if there are 3 shape names in the simulaiotn
+ * (shape1, shape2, and shape3), the mixture composition can be defined as:
+ * \verbatim
+ {
+	shape1 4;
+	shape2 2;
+	shape3 6;
+ }
+ \endverbatim
+ * 
+ */
 class shapeMixture
 {
+private:
 
-protected:
-	// - list of shape names 
-	wordVector 		names_;
+	/// List of shape names 
+	wordVector 		names_{"shapeNames"};
 
-	// - number composition 
-	uint32Vector   	number_;
+	/// Number composition 
+	uint32Vector   	number_{"number"};
 
-	// - number inserted of each shape 
-	uint32Vector   	numberInserted_;
+	/// Number of inserted particles of each shape 
+	uint32Vector   	numberInserted_{"numberInserted"};
 
-	uint32Vector      current_;
+	/// Current number of inserted
+	uint32Vector    current_{"currentInserted"};
+
+	uint32 			lastPeaked_ = 0;
 
 public:
 
-	//- type Info
+	/// Type info
 	TypeInfoNV("shapeMixture");
 
-	//// - constrcutores 
+	// - Constrcutors 
 		
-		//
-		shapeMixture(const dictionary & dict);
+		/// Construct from dictionary
+		shapeMixture(const dictionary & dict, const wordList& validNames);
 
+		/// Copy
 		shapeMixture(const shapeMixture&) = default;
 
+		/// Move
 		shapeMixture(shapeMixture&&) = default;
 
+		/// Copy assignment 
 		shapeMixture& operator=(const shapeMixture&) = default;
 
+		/// Move assignment
 		shapeMixture& operator=(shapeMixture&&) = default;
 
-
+		/// Polymorphic copy
 		uniquePtr<shapeMixture> clone()const
 		{
 			return makeUnique<shapeMixture>(*this);
 		}
 
-		shapeMixture* clonePtr()const
-		{
-			return new shapeMixture(*this);
-		}
-
-
-		//
+		/// Destructor 
 		~shapeMixture() = default;
 
-	//// - Methods 
+	// - Methods 
+
+		/// The name of the next shape that should be inserted
 		word getNextShapeName();
 
-
+		/// The name of the n next shapes that should be inserted
 		void getNextShapeNameN(size_t n, wordVector& names);
 
-
+		/// Size of mixture (names)
 		auto size()const {
 			return names_.size();
 		}
 
+		/// Total number inserted particles
 		auto totalInserted()const {
 			return sum(numberInserted_);
 		}
 
-	//// - IO operatoins 
+	// - IO operatoins 
+	
 		bool read(const dictionary& dict);
 
 		bool write(dictionary& dict) const;

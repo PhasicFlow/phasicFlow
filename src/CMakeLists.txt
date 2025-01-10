@@ -7,9 +7,9 @@ add_subdirectory(Property)
 
 add_subdirectory(Particles)
 
+add_subdirectory(Geometry)
+
 add_subdirectory(Interaction)
 
 add_subdirectory(MotionModel)
-
-add_subdirectory(Geometry)
 

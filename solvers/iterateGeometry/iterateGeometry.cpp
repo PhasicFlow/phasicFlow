@@ -28,18 +28,17 @@ Licence:
  * (https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/iterateGeometry)
  * folder.
  */
- 
-#include "systemControl.hpp"
-#include "geometryMotion.hpp"
-#include "commandLine.hpp"
-#include "readControlDict.hpp"
 
-using pFlow::commandLine;
+#include "vocabs.hpp"
+#include "systemControl.hpp"
+#include "geometry.hpp"
+#include "commandLine.hpp"
+//#include "readControlDict.hpp"
 
 int main( int argc, char* argv[] )
 {
 
-commandLine cmds(
+pFlow::commandLine cmds(
     "iterateGeometry",
     "Performs simulation without particles, only geometry is solved");
 
@@ -54,6 +53,8 @@ commandLine cmds(
    
 
 // this should be palced in each main 
+pFlow::processors::initProcessors(argc, argv);
+pFlow::initialize_pFlowProcessors();
 #include "initialize_Control.hpp"
 	
 	#include "setProperty.hpp"
@@ -68,6 +69,7 @@ commandLine cmds(
 
 // this should be palced in each main 
 #include "finalize.hpp"
+pFlow::processors::finalizeProcessors();
 
 }
 

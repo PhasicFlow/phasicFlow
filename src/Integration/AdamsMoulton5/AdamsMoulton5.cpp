@@ -145,14 +145,14 @@ bool pFlow::AdamsMoulton5::predictAll(
 	range activeRng)
 {
 
-	auto d_dy  = dy.deviceVectorAll();
-	auto d_y   = y.deviceVectorAll();
+	auto d_dy  = dy.deviceViewAll();
+	auto d_y   = y.deviceViewAll();
 
-	auto d_y0  = y0_.deviceVectorAll();
-	auto d_dy0 = dy0_.deviceVectorAll();
-	auto d_dy1 = dy1_.deviceVectorAll();
-	auto d_dy2 = dy2_.deviceVectorAll();
-	auto d_dy3 = dy3_.deviceVectorAll();
+	auto d_y0  = y0_.deviceViewAll();
+	auto d_dy0 = dy0_.deviceViewAll();
+	auto d_dy1 = dy1_.deviceViewAll();
+	auto d_dy2 = dy2_.deviceViewAll();
+	auto d_dy3 = dy3_.deviceViewAll();
 
 	Kokkos::parallel_for(
 		"AdamsMoulton5::predict",
@@ -178,14 +178,14 @@ bool pFlow::AdamsMoulton5::intAll(
 	range activeRng)
 {
 
-	auto d_dy = dy.deviceVectorAll();
-	auto d_y  = y.deviceVectorAll();
+	auto d_dy = dy.deviceViewAll();
+	auto d_y  = y.deviceViewAll();
 
-	auto d_dy0 = dy0_.deviceVectorAll();
-	auto d_y0  = y0_.deviceVectorAll();
-	auto d_dy1 = dy1_.deviceVectorAll();
-	auto d_dy2 = dy2_.deviceVectorAll();
-	auto d_dy3 = dy3_.deviceVectorAll();
+	auto d_dy0 = dy0_.deviceViewAll();
+	auto d_y0  = y0_.deviceViewAll();
+	auto d_dy1 = dy1_.deviceViewAll();
+	auto d_dy2 = dy2_.deviceViewAll();
+	auto d_dy3 = dy3_.deviceViewAll();
 
 	Kokkos::parallel_for(
 		"AdamsMoulton5::correct",

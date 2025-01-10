@@ -30,10 +30,10 @@ Licence:
 
 #include "types.hpp"
 #include "Time.hpp"
-#include "dictionary.hpp"
-#include "box.hpp"
+#include "fileDictionary.hpp"
 #include "Timers.hpp"
 #include "dynamicLinkLibs.hpp"
+#include "Set.hpp"
 
 namespace pFlow
 {
@@ -50,35 +50,27 @@ protected:
 	// - path to top-level folder 
 	const fileSystem 	topLevelFolder_;
 
+    /// settingsDict fileDictionary
+	uniquePtr<fileDictionary> 	settingsDict_;
 
+    /// time repository
+    Time 			            Time_;
 
-	// - settings folder repository
-	repository 			settings_;
+	/// settings folder repository
+	uniquePtr<repository> 		settings_;
 
-	// - caseSetup folder repository
-	repository 			caseSetup_;
+	/// caseSetup folder repository
+	uniquePtr<repository>       caseSetup_;
 
-	// - settingsDict fileDictionary
-	dictionary& 		settingsDict_;
-
-	// - extra libs to be loaded
-	dynamicLinkLibs 	libs_;
+	/// extra libs to be loaded
+	dynamicLinkLibs 	        libs_;
 	
-	// - precision for writing to file 
+	/// precision for writing to file 
 	size_t 			outFilePrecision_ = 6;
 
-	// - time repository
-	Time 			Time_;
 
-	// - if time control is managed externaly
-
-	bool 				externalTimeControl_ = false;
-
-	// - acceleration 
-	realx3 			g_;
-
-	// - domain for dem world
-	box  			domain_;
+	/// if time control is managed externaly
+	bool 			externalTimeControl_ = false;
 
 	// all timers
 	Timers 			timers_;
@@ -86,6 +78,13 @@ protected:
 	Logical			timersReport_;
 
 	Timer 			writeToFileTimer_;
+
+	wordSet 		includeList_;
+
+	wordSet 		excludeList_;
+    
+	
+	bool readIncludeExclue(const dictionary& dict);
 
 	static word getRunName( const fileSystem& path);
 	
@@ -104,25 +103,25 @@ public:
 		const fileSystem path = CWD() );
 
 	const repository& settings() const{
-		return settings_;
+		return settings_();
 	}
 
 	repository& settings(){
-		return settings_;
+		return settings_();
 	}
 
 	const repository& caseSetup()const{
-		return caseSetup_;
+		return caseSetup_();
 	}
 
 	repository& caseSetup(){
-		return caseSetup_;
+		return caseSetup_();
 	}
 
 	
 	const Time& time() const
 	{
-		return const_cast<Time&>(Time_);
+		return Time_;
 	}
 
 	Time& time()
@@ -155,27 +154,25 @@ public:
 		return timersReport_();
 	}
 
-	const dictionary& settingsDict()const{
-		return settingsDict_;
+	const fileDictionary& settingsDict()const{
+		return settingsDict_();
 	}
 
-	dictionary& settingsDict(){
-		return settingsDict_;
+	fileDictionary& settingsDict(){
+		return settingsDict_();
 	}
+
+	//fileDictionary& domainDict();
+	
 
 	virtual word runName() const
 	{
 		return runName_;
 	}
 
-	inline const realx3& g()const
+	inline const realx3 g()const
 	{
-		return g_;
-	}
-
-	inline const box& domain()const
-	{
-		return domain_;
+		return settingsDict_().getVal<realx3>("g");
 	}
 
 	bool operator ++(int);
@@ -190,6 +187,36 @@ public:
 	size_t outFilePrecision() const override
 	{
 		return outFilePrecision_;
+	}
+
+	
+	bool isIncluded(const word& objName)const final
+	{
+		return includeList_.count(objName) == static_cast<size_t>(1);
+	}
+
+	
+	bool isExcluded(const word& objName)const final
+	{
+		return excludeList_.count(objName) == static_cast<size_t>(1);
+	}
+
+	void clearIncludeExclude()
+	{
+		includeList_.clear();
+		excludeList_.clear();
+	}
+
+	bool addInclude(const word& objName)
+	{
+		auto [iter, success] = includeList_.insert(objName);
+		return success;
+	}
+
+	bool addExclude(const word& objName)
+	{
+		auto [ite, success] = excludeList_.insert(objName);
+		return success;
 	}
 
 };

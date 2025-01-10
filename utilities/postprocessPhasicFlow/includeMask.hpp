@@ -85,6 +85,8 @@ public:
 
 	virtual bool isIncluded(int32 n) const = 0;
 
+	virtual uint32 size()const = 0;
+
 	bool operator()(int32 n) const 
 	{
 		return isIncluded(n);

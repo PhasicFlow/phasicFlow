@@ -21,14 +21,5 @@ Licence:
 #include "triSurfaceFields.hpp"
 
 
-template class pFlow::triSurfaceField<pFlow::VectorSingle, pFlow::real>;
+template class pFlow::triSurfaceField<pFlow::realx3>;
 
-template class pFlow::triSurfaceField<pFlow::VectorSingle, pFlow::real, pFlow::HostSpace>;
-
-template class pFlow::triSurfaceField<pFlow::VectorSingle, pFlow::realx3>;
-
-template class pFlow::triSurfaceField<pFlow::VectorSingle, pFlow::realx3, pFlow::HostSpace>;
-
-template class pFlow::triSurfaceField<pFlow::VectorDual, pFlow::real>;
-
-template class pFlow::triSurfaceField<pFlow::VectorDual, pFlow::realx3>;

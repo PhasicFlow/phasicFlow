@@ -259,8 +259,8 @@ public:
 				dualView_.clear_sync_state();
 			}
 
-			Kokkos::deep_copy(hostVector(), src.hostVector());
-			Kokkos::deep_copy(deviceVector(), src.deviceVector());
+			Kokkos::deep_copy(hostView(), src.hostView());
+			Kokkos::deep_copy(deviceView(), src.deviceView());
 		}
 
 		// copy construct with new name 
@@ -280,8 +280,8 @@ public:
 				dualView_.clear_sync_state();
 			}
 
-			Kokkos::deep_copy(hostVector(), src.hostVector());
-			Kokkos::deep_copy(deviceVector(), src.deviceVector());
+			Kokkos::deep_copy(hostView(), src.hostView());
+			Kokkos::deep_copy(deviceView(), src.deviceView());
 		}
 
 		// - copy assignment 
@@ -332,53 +332,53 @@ public:
 		}
 
 		// - Device vector
-		INLINE_FUNCTION_H deviceViewType& deviceVectorAll(){
+		INLINE_FUNCTION_H deviceViewType& deviceViewAll(){
 			return dualView_.d_view;
 		}
 
 		// - Device vector 
-		INLINE_FUNCTION_H const deviceViewType& deviceVectorAll() const {
+		INLINE_FUNCTION_H const deviceViewType& deviceViewAll() const {
 			return dualView_.d_view;
 		}
 
 		// - Host vector
-		INLINE_FUNCTION_H hostViewType& hostVectorAll(){
+		INLINE_FUNCTION_H hostViewType& hostViewAll(){
 			return dualView_.h_view;
 		}
 
 		// - Host Vector
-		INLINE_FUNCTION_H const hostViewType& hostVectorAll() const {
+		INLINE_FUNCTION_H const hostViewType& hostViewAll() const {
 			return dualView_.h_view;
 		}
 
-		INLINE_FUNCTION_H deviceViewType& deviceVector(){
+		INLINE_FUNCTION_H deviceViewType& deviceView(){
 			updateSubViews();
 			return deviceSubView_;
 		}
 
-		INLINE_FUNCTION_H const deviceViewType& deviceVector() const{
+		INLINE_FUNCTION_H const deviceViewType& deviceView() const{
 			updateSubViews();
 			return deviceSubView_;
 		}
 
-		INLINE_FUNCTION_H hostViewType& hostVector(){
+		INLINE_FUNCTION_H hostViewType& hostView(){
 			updateSubViews();
 			return hostSubView_;
 		}
 
-		INLINE_FUNCTION_H const hostViewType& hostVector()const{
+		INLINE_FUNCTION_H const hostViewType& hostView()const{
 			updateSubViews();
 			return hostSubView_;
 		}
 
 		INLINE_FUNCTION_H
-		hostViewType hostVector(int32 start, int32 end)const
+		hostViewType hostView(int32 start, int32 end)const
 		{
 			return Kokkos::subview(dualView_.h_view, Kokkos::make_pair(start,end));
 		}
 
 		INLINE_FUNCTION_H
-		deviceViewType deviceVector(int32 start, int32 end)const
+		deviceViewType deviceView(int32 start, int32 end)const
 		{
 			return Kokkos::subview(dualView_.d_view, Kokkos::make_pair(start,end));
 		}
@@ -455,22 +455,22 @@ public:
 		INLINE_FUNCTION_H void fill(const T& val)
 		{
 			if(empty())return;
-			Kokkos::deep_copy(deviceVector(),val);
-			Kokkos::deep_copy(hostVector(),val);
+			Kokkos::deep_copy(deviceView(),val);
+			Kokkos::deep_copy(hostView(),val);
 			dualView_.clear_sync_state();
 		}
 
 		INLINE_FUNCTION_H void fillHost(const T& val)
 		{
 			if(empty())return;
-			Kokkos::deep_copy(hostVector(),val);
+			Kokkos::deep_copy(hostView(),val);
 			modifyOnHost();
 		}
 
 		INLINE_FUNCTION_H void fillDevice(const T& val)
 		{
 			if(empty())return;
-			Kokkos::deep_copy(deviceVector(),val);
+			Kokkos::deep_copy(deviceView(),val);
 			modifyOnDevice();
 		}
 
@@ -556,7 +556,7 @@ public:
 			size_t newSize = indices.size();
 
 			deviceViewType 	sortedView("sortedView", newSize);
-			auto dVec = deviceVectorAll();
+			auto dVec = deviceViewAll();
 
 			auto d_indices = indices.deviceView();
 			
@@ -570,7 +570,7 @@ public:
 			
 			Kokkos::fence();
 			setSize(newSize);
-			copy(deviceVector(), sortedView);
+			copy(deviceView(), sortedView);
 			modifyOnDevice();
 			syncViews();
 		}
@@ -586,10 +586,10 @@ public:
 			{
 				resize(maxInd+1);
 			} 
-			fillSelected(hostVectorAll(), indices.hostView(), indices.size(), val);
+			fillSelected(hostViewAll(), indices.hostView(), indices.size(), val);
 			
 			auto dIndices = indices.deviceView();
-			auto dVals = deviceVectorAll();
+			auto dVals = deviceViewAll();
 
 			Kokkos::parallel_for(
 				"fillSelected",
@@ -627,10 +627,10 @@ public:
 			{
 
 				hostViewType1D<T> hVecVals( const_cast<T*>(vals.data()), vals.size());
-				//fillSelected(hostVector(), indices.hostView(), hVecVals, indices.size());
+				//fillSelected(hostView(), indices.hostView(), hVecVals, indices.size());
 
 				pFlow::algorithms::KOKKOS::fillSelected<T, int32, DefaultHostExecutionSpace>(
-					hostVectorAll().data(),
+					hostViewAll().data(),
 					indices.hostView().data(),
 					hVecVals.data(),
 					indices.size());
@@ -648,9 +648,9 @@ public:
 				Kokkos::deep_copy(dVecVals, hVecVals);
 				
 
-				//fillSelected(deviceVector(), indices.deviceView(), dVecVals, indices.size());
+				//fillSelected(deviceView(), indices.deviceView(), dVecVals, indices.size());
 				pFlow::algorithms::KOKKOS::fillSelected<T, int32, execution_space>(
-					deviceVectorAll().data(),
+					deviceViewAll().data(),
 					indices.deviceView().data(),
 					dVecVals.data(),
 					indices.size());
@@ -683,7 +683,7 @@ public:
 			if constexpr (std::is_same<side,HostSide>::value )
 			{
 				hostViewType1D<int32> hVecInd( const_cast<int32*>(indices.data()), indices.size());
-				fillSelected( hostVectorAll(), hVecInd, indices.size(), val);
+				fillSelected( hostViewAll(), hVecInd, indices.size(), val);
 
 				modifyOnHost();
 				syncViews(minInd, maxInd+1);
@@ -696,7 +696,7 @@ public:
 				hostViewType1D<int32> hVecInd( const_cast<int32*>(indices.data()), indices.size());
 				deviceViewType1D<int32> dVecInd("dVecInd", indices.size());
 				Kokkos::deep_copy(dVecInd, hVecInd);
-				fillSelected(deviceVectorAll(), dVecInd, indices.size(), val);
+				fillSelected(deviceViewAll(), dVecInd, indices.size(), val);
 				
 				modifyOnDevice();
 
@@ -734,7 +734,7 @@ public:
 				hostViewType1D<int32> hVecInd( const_cast<int32*>(indices.data()), indices.size());
 				hostViewType1D<T> hVecVals( const_cast<T*>(vals.data()), vals.size());
 
-				fillSelected(hostVectorAll(), hVecInd, hVecVals, indices.size());
+				fillSelected(hostViewAll(), hVecInd, hVecVals, indices.size());
 
 				modifyOnHost();
 			
@@ -752,7 +752,7 @@ public:
 				Kokkos::deep_copy(dVecVals, hVecVals);
 				Kokkos::deep_copy(dVecInd, hVecInd);
 
-				fillSelected(deviceVectorAll(), dVecInd, dVecVals, indices.size());
+				fillSelected(deviceViewAll(), dVecInd, dVecVals, indices.size());
 
 				modifyOnDevice();
 				
@@ -858,7 +858,7 @@ public:
 		{
 			if(empty())return;
 			
-			Kokkos::deep_copy(deviceVector(), hostVector());
+			Kokkos::deep_copy(deviceView(), hostView());
 			dualView_.clear_sync_state();
 		}
 
@@ -866,7 +866,7 @@ public:
 		void copyHostToDevice(int32 start, int32 end, bool setUpdated = true)
 		{
 			if(empty())return;
-			Kokkos::deep_copy(deviceVector(start, end), hostVector(start, end));
+			Kokkos::deep_copy(deviceView(start, end), hostView(start, end));
 			if(setUpdated)
 				dualView_.clear_sync_state();
 		}
@@ -876,7 +876,7 @@ public:
 		INLINE_FUNCTION_H void copyDeviceToHost()
 		{
 			if(empty())return;
-			Kokkos::deep_copy(hostVector(), deviceVector());
+			Kokkos::deep_copy(hostView(), deviceView());
 			dualView_.clear_sync_state();
 		}
 
@@ -884,7 +884,7 @@ public:
 		void copyDeviceToHost(int32 start, int32 end, bool setUpdated = true)
 		{
 			if(empty())return;
-			Kokkos::deep_copy(hostVector(start, end), deviceVector(start, end));
+			Kokkos::deep_copy(hostView(start, end), deviceView(start, end));
 			if(setUpdated)
 				dualView_.clear_sync_state();
 		}
@@ -962,12 +962,12 @@ public:
 			if(hostRequiresSync()) // device is updated
 			{
 				//const auto dVec = Kokkos::subview(dualView_.d_view, Kokkos::make_pair(0,int(size_)));
-				Kokkos::deep_copy(mirror,deviceVector());
+				Kokkos::deep_copy(mirror,deviceView());
 			}
 			else // either host is updated or both sides are syncronized
 			{
 				//const auto hVec = Kokkos::subview(dualView_.h_view, Kokkos::make_pair(0,int(size_)));
-				Kokkos::deep_copy(mirror,hostVector());
+				Kokkos::deep_copy(mirror,hostView());
 			}				
 			return vecToFile.write(os);
 		}

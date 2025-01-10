@@ -18,12 +18,11 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-
 #ifndef __setProperty_hpp__
 #define __setProperty_hpp__
 
-REPORT(0)<<"\nReading proprties . . . "<<endREPORT;
+REPORT(0)<<"\nReading proprties . . . "<<END_REPORT;
 
-auto proprties = pFlow::property(Control.caseSetup().path()+pFlow::propertyFile__);
+auto proprties = pFlow::property(pFlow::propertyFile__, Control.caseSetup().path());
 
-#endif
+#endif // __setProperty_hpp__

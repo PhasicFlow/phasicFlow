@@ -21,226 +21,199 @@ Licence:
 #ifndef __Field_hpp__
 #define __Field_hpp__
 
+
+#include "types.hpp"
 #include "VectorSingle.hpp"
-#include "vocabs.hpp"
+#include "wordVectorHost.hpp"
+#include "Vector.hpp"
+#include "streams.hpp"
 
 namespace pFlow
 {
 
 
-
-template<template<class, class> class VectorField, class T, class PropType=void>
+template<class T, class MemorySpace = void>
 class Field
 :
-	public VectorField<T, PropType>
+	public VectorSingle<T, MemorySpace>
 {
 public:
-	
 
-	using VectorType  		= VectorField<T,PropType>;
+	using VectorType  		= VectorSingle<T,MemorySpace>;
 
-	using FieldType         = Field<VectorField, T, PropType>;
+	using FieldType         = Field<T, MemorySpace>;
 
-	using iterator        = typename VectorType::iterator;
+	using FieldTypeHost 	= Field<T, HostSpace>;
 
-  	using constIterator   = typename VectorType::constIterator;
+	using memory_space 		= typename VectorType::memory_space;
 
-	using reference       = typename VectorType::reference;
+	using execution_space 	= typename VectorType::execution_space;
+
+	using iterator        	= typename VectorType::iterator;
+
+	using const_iterator   	= typename VectorType::const_iterator;
+
+	using reference       	= typename VectorType::reference;
   	
-  	using constReference  = typename VectorType::constReference;
+	using const_reference  	= typename VectorType::const_reference;
 
-	using valueType       = typename VectorType::valueType;
+	using value_type       	= typename VectorType::value_type;
   	
-  	using pointer         = typename VectorType::pointer;
+	using pointer         	= typename VectorType::pointer;
   	
-  	using constPointer    = typename VectorType::constPointer;
+	using const_pointer    	= typename VectorType::const_pointer;
   	
 
-protected:
+private:
 	
 	static const inline word FKey = "value";
 
 	const word fieldKey_ = FKey;
 
-	bool readUniform( iIstream& is, size_t len, bool readLength = true);
-
-	bool readNonUniform( iIstream& is, size_t len);
-
 public:
 
-	// - type info
-	TypeInfoTemplateNV2("Field", T, VectorType::memoerySpaceName());
+	/// type info
+	TypeInfoTemplateNV111("Field", T, VectorType::memoerySpaceName());
 
 	//// - Constructors
 
-		// construct an empty Filed with default fieldKey
+		/// construct an empty Filed with default fieldKey
 		Field()
 		:
 			VectorType()
 		{}
 
-		// construct an empty Field with fieldKey
-		Field(const word& fieldKey)
+		Field(const word& name)
 		:
-			VectorType(),
-			fieldKey_(fieldKey)
+			VectorType(name)
 		{}
 
-		// construct an empty field with name and fieldKey 
+		/// Construct an empty field with name and fieldKey 
 		Field(const word& name, const word& fieldKey)
 		:
 			VectorType(name),
 			fieldKey_(fieldKey)
 		{}
-
-		// construct an empty Filed with default fieldKey
-		Field(size_t len)
-		:
-			VectorType(len)
-		{}
-
-		// construct an empty Field with fieldKey
-		Field(const word& fieldKey, size_t len)
-		:
-			VectorType(len),
-			fieldKey_(fieldKey)
-		{}
-
-		// construct an empty field with name and fieldKey 
+		
+		/// Construct a field with name and fieldKey and specified len
 		Field(const word& name, const word& fieldKey, size_t len)
 		:
 			VectorType(name, len),
 			fieldKey_(fieldKey)
 		{}
 
-		// construct an empty Filed with default fieldKey and set vector to val
-		Field(size_t len, const T& val)
-		:
-			VectorType(len, val)
-		{}
-
-		// construct an empty Field with fieldKey and set vector to val
-		Field(const word& fieldKey, size_t len, const T& val)
-		:
-			VectorType(len, val),
-			fieldKey_(fieldKey)
-		{}
-
-		// construct an empty field with name and fieldKey and set vector to val
+		
+		/// Construct a field with name, fieldKey and 
+		/// set length to len and value to val
 		Field(const word& name, const word& fieldKey, size_t len, const T& val)
 		:
 			VectorType(name, len, val),
 			fieldKey_(fieldKey)
 		{}
 
-		// construct a field with capacity and len and default fieldKey
-		Field(size_t capacity, size_t len, RESERVE)
+		Field(const word& name, const word& fieldKey, size_t capacity, size_t len, const T& val)
 		:
-			VectorType(capacity, len, RESERVE())
-		{}
-
-		// construct an empty Field with fieldKey
-		Field(const word& fieldKey, size_t capacity, size_t len, RESERVE)
-		:
-			VectorType(capacity, len, RESERVE()),
+			VectorType(name, len, len, RESERVE()),
 			fieldKey_(fieldKey)
-		{}
+		{
+			VectorType::fill(val);
+		}
 
-		// construct an empty field with name and fieldKey 
+		/// Construct a field with name, fieldKey, capacity and len
 		Field(const word& name, const word& fieldKey, size_t capacity, size_t len, RESERVE)
 		:
 			VectorType(name, capacity, len, RESERVE()),
 			fieldKey_(fieldKey)
 		{}
 
-		// construct with vec and default fieldKey
-		Field(const Vector<T>& vec)
-		:
-			VectorType(vec)
-		{}
-
-		// construct an empty Field with fieldKey
+		/// Construct a field with fieldKey and Vector vec
 		Field(const word& fieldKey, const Vector<T>& vec)
 		:
-			VectorType(vec),
+			VectorType(vec.name(), vec.vectorField()),
 			fieldKey_(fieldKey)
 		{}
 
-		// construct an empty field with name and fieldKey 
+		/// Construct a field with name, fieldKey and Vector vec
 		Field(const word& name, const word& fieldKey, const Vector<T>& vec)
+		:
+			VectorType(name, vec.vectorField()),
+			fieldKey_(fieldKey)
+		{}
+
+		/// Construct a field with name and fieldKey and std::vector 
+		Field(const word& name, const word& fieldKey, const std::vector<T>& vec)
 		:
 			VectorType(name, vec),
 			fieldKey_(fieldKey)
 		{}
 
-
-		// - copy construct with new name and fieldkey
+		/// Copy construct with new name and fieldkey
 		Field(const word& name, const word& fieldKey, const FieldType& src):
 			VectorType(name, src),
 			fieldKey_(fieldKey)
 		{}
 
-		// - default copy constructor
+		/// Default copy constructor
 		Field(const FieldType&) = default;
 
-		// - default copy assignment 
-		FieldType& operator = (const FieldType&) = default;
-
-		// - no move constructor 
-		Field(FieldType&&) = delete;
-
-		// - no move assignment 
-		FieldType& operator = (FieldType&&) = delete;
-
-		// - clone as a uniquePtr
-		INLINE_FUNCTION_H
-		uniquePtr<FieldType> clone() const
+		/// Copy assignment, name and fieldKey
+		/// on the left hand side are preserved
+		FieldType& operator = (const FieldType& rhs)
 		{
-			return makeUnique<FieldType>(*this);
+			if(&rhs == this) return *this;
+			VectorType::operator=(rhs);
+			return *this;
 		}
 
-		// - clone as a raw pointer 
-		INLINE_FUNCTION_H
-		FieldType* clonePtr()const
-		{
-			return new FieldType(*this);
-		}
+		/// Move constructor 
+		Field(FieldType&&) = default;
+
+		/// Move assignment 
+		FieldType& operator = (FieldType&&) = default;
 
 	//// - Methods
 
-		const word& fieldKey()const
+		/// return field key
+		word fieldKey()const
 		{
 			return fieldKey_;
 		}
-	
+
+		word name()const
+		{
+			return VectorType::name();
+		}
+
+
+		void fillField(rangeU32 span, const T& val)
+		{
+			this->fill(span, val);
+		}
+
+		void fillField(const T& val)
+		{
+			this->fill(val);
+		}
+		
 	//// - IO operations 
-		bool readField(iIstream& is, const size_t len, bool resume, bool readLength = true);
 		
+		bool read(iIstream& is);
 		
-		bool readField(iIstream& is, bool resume );
+		bool write(iOstream& os)const;			
 
-		
-		bool writeField(iOstream& os)const;
 
+		bool read(iIstream& is, const IOPattern& iop, bool resume = false);
 		
-		bool read(iIstream& is, bool resume = false)
-		{
-			return readField(is, resume);
-		}
 
-		bool write(iOstream& os)const
-		{
-			return writeField(os);
-		}
-	
+		bool write(iOstream& os, const IOPattern& iop )const;			
 
 };
 
 
-template<template<class, class> class VectorField, class T, class PropType>
-inline iIstream& operator >> (iIstream & is, Field<VectorField, T, PropType> & ifld )
+template<class T, class MemorySpace>
+inline iIstream& operator >> (iIstream & is, Field<T, MemorySpace> & ifld )
 {
-	if( !ifld.readField(is, false) )
+	if( !ifld.read(is, IOPattern::MasterProcessorOnly) )
 	{
 		ioErrorInFile (is.name(), is.lineNumber());
 		fatalExit;
@@ -248,11 +221,11 @@ inline iIstream& operator >> (iIstream & is, Field<VectorField, T, PropType> & i
 	return is;
 }
 
-template<template<class, class> class VectorField, class T, class PropType>
-inline iOstream& operator << (iOstream& os, const Field<VectorField, T, PropType>& ofld )
+template<typename T, typename MemorySpace>
+inline iOstream& operator << (iOstream& os, const Field<T, MemorySpace>& ofld )
 {
 	
-	if( !ofld.writeField(os) )
+	if( !ofld.write(os, IOPattern::AllProcessorsDifferent) )
 	{
 		ioErrorInFile(os.name(), os.lineNumber());
 		fatalExit;

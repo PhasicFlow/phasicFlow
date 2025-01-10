@@ -40,9 +40,7 @@ protected:
 	
 
 	//// - data members 
-		// owner repository
-		const repository* 	owner_ = nullptr;
-		
+
 		// object name read from file 
 		word objectName_;
 
@@ -60,10 +58,12 @@ protected:
 		// - ouput file stream
 		uniquePtr<oFstream> outStream()const;
 
+        uniquePtr<oFstream> dummyOutStream()const;
+
 public:
 
 	// with owner 
-	IOfileHeader(const objectFile& objf, const repository* owner = nullptr);
+	IOfileHeader(const objectFile& objf);
 
 	// - object name
 	const word& objectName()const
@@ -78,11 +78,24 @@ public:
 	}
 
 	// - pointer to owner repository 
-	const repository* owner()const 
+	virtual 
+    const repository* owner()const
+    {
+        return nullptr;
+    }
+
+	virtual
+	bool isIncluded(const word& objName)const
 	{
-		return owner_;
+		return false;
 	}
 
+	virtual
+	bool isExcluded(const word& objName)const
+	{
+		return false;
+	}
+	
 	// - path to file name 
 	fileSystem path() const;
 
@@ -95,31 +108,41 @@ public:
 	//   read the header of the file to check if it is ok
 	bool headerOk(bool silent = false);
 	
-	// - imply read 
+	/// Imply read 
 	bool implyRead() const;
 
-	// - imply write 
+	/// Imply write 
 	bool implyWrite() const;
 	
-	// - check if file exists
+	/// Check if file exists
 	bool fileExist() const;
 	
-	// - check read if present 
+	/// Check read if present 
 	bool readIfPresent()const;
 
-	// - write the header in the  file , typeName comes from caller
-	bool writeHeader(iOstream& os, const word& typeName) const;
+	/// Check if the header should be written to file
+	/// True: on master + implyWrite + readWriteHeader = true
+	/// False: otherwise
+	bool writeHeader()const;
 
-	// - write the header in the  file, typeName comes from the one read from file 
-	bool writeHeader(iOstream& os) const;
-	
-	// - read the header in the file 
+	/// Write the header to the file , typeName comes from caller
+	bool writeHeader(iOstream& os, const word& typeName, bool forceWrite = false ) const;
+
+	/// Write the header to the file, typeName comes from the one read from file 
+	bool writeHeader(iOstream& os, bool forceWrite = false) const;
+
+	/// Check if header should be read from file
+	bool readHeader()const;
+
+	/// Read the header in the file
 	bool readHeader(iIstream& is, bool silent=false);
+
 	
-	// - write the banner 
+	
+	/// write the banner 
 	bool writeBanner(iOstream& os)const;
 
-	// - wirte a separator line 
+	/// wirte a separator line 
 	bool writeSeparator(iOstream& os)const;
 
 };

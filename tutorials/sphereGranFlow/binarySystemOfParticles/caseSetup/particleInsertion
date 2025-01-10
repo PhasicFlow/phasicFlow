@@ -6,10 +6,6 @@ objectName 	particleInsertion;
 objectType 	dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+collisionCheck     No;                           // is checked          -> yes or no
 
-
-active  no;          // is insertion active?
-
-collisionCheck No;   // not implemented for yes
-
-
+active             No;                           // is insertion active -> yes or no

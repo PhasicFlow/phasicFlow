@@ -24,11 +24,15 @@ Licence:
 
 #include "Insertion.hpp"
 #include "sphereShape.hpp"
+#include "grainShape.hpp"
+
 
 namespace pFlow
 {
 
 using sphereInsertion = Insertion<sphereShape> ;
+using grainInsertion = Insertion<grainShape> ;
+
 
 }
 

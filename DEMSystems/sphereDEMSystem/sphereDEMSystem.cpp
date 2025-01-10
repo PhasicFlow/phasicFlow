@@ -19,6 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "sphereDEMSystem.hpp"
+#include "vocabs.hpp"
 
 bool pFlow::sphereDEMSystem::loop()
 {
@@ -26,16 +27,15 @@ bool pFlow::sphereDEMSystem::loop()
 	do 
 	{
 		//
-		
 		if(! insertion_().insertParticles( 
+			Control().time().currentIter(),
 			Control().time().currentTime(),
 			Control().time().dt()	) )
 		{
 			fatalError<<
-			"particle insertion failed in sphereDFlow solver.\n";
+			"particle insertion failed in sphereDEMSystem.\n";
 			return false;
-		}
-		
+		}	
 
 		geometry_->beforeIteration();
 		
@@ -63,29 +63,31 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 		word  demSystemName,
 		const std::vector<box>& domains,
 		int argc, 
-		char* argv[])
+		char* argv[],
+		bool requireRVel)
 :
-	DEMSystem(demSystemName, domains, argc, argv)
+	DEMSystem(demSystemName, domains, argc, argv),
+	requireRVel_(requireRVel)
 { 
 	
-	REPORT(0)<<"\nReading proprties . . . "<<endREPORT;
+	REPORT(0)<<"\nReading proprties . . . "<<END_REPORT;
 	property_ = makeUnique<property>(
-    	Control().caseSetup().path()+propertyFile__);
+		propertyFile__,
+    	Control().caseSetup().path());
 
-	REPORT(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<endREPORT;
+	REPORT(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<END_REPORT;
 	geometry_ = geometry::create(Control(), Property());
 
 
-	REPORT(0)<<"\nReading sphere particles . . ."<<endREPORT;
+	REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
 	particles_ = makeUnique<sphereFluidParticles>(Control(), Property());
 
 
-	insertion_ = makeUnique<sphereInsertion>(
-		Control().caseSetup().path()+insertionFile__, 
+	insertion_ = makeUnique<sphereInsertion>( 
 		particles_(), 
-		particles_().shapes());
+		particles_().spheres());
 	
-	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<endREPORT;
+	REPORT(0)<<"\nCreating interaction model for sphere-sphere contact and sphere-wall contact . . ."<<END_REPORT;
 	interaction_ = interaction::create(
 		Control(),
 		Particles(),
@@ -97,6 +99,7 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 	particleDistribution_ = makeUnique<domainDistribute>(domains, maxD);
 
 }
+
 
 pFlow::sphereDEMSystem::~sphereDEMSystem()
 {
@@ -119,8 +122,8 @@ bool pFlow::sphereDEMSystem::updateParticleDistribution(
 	}
 
 	if(!particleDistribution_->locateParticles(
-			parPosition_, 
-			particles_->pStruct().activePointsMaskH()))
+			positionHost_, 
+			particles_->pStruct().activePointsMaskHost()))
 	{
 		fatalErrorInFunction<<
 		"error in locating particles among sub-domains"<<endl;
@@ -137,7 +140,7 @@ pFlow::int32
 }
 
 std::vector<pFlow::int32> 
-	pFlow::sphereDEMSystem::numParInDomain()const
+	pFlow::sphereDEMSystem::numParInDomains()const
 {
 	const auto& distribute = particleDistribution_();
 	int32 numDomains = distribute.numDomains();
@@ -156,31 +159,56 @@ pFlow::sphereDEMSystem::parIndexInDomain(int32 di)const
 	return particleDistribution_->particlesInDomain(di);
 }
 
-pFlow::span<pFlow::real> pFlow::sphereDEMSystem::parDiameter() 
+pFlow::span<pFlow::real> pFlow::sphereDEMSystem::diameter() 
 {	
-	return span<real>(parDiameter_.data(), parDiameter_.size());
+	return span<real>(diameterHost_.data(), diameterHost_.size());
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parVelocity()  
+pFlow::span<pFlow::real> pFlow::sphereDEMSystem::courseGrainFactor()
 {
-	return span<realx3>(parVelocity_.data(), parVelocity_.size());
+    return span<real>(nullptr, 0);
 }
 
-pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parPosition()  
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::acceleration()
 {
-	return span<realx3>(parPosition_.data(), parPosition_.size());
+    return span<realx3>(nullptr, 0);
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::velocity()  
+{
+	return span<realx3>(velocityHost_.data(), velocityHost_.size());
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::position()  
+{
+	return span<realx3>(positionHost_.data(), positionHost_.size());
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::rAcceleration()
+{
+    return span<realx3>(nullptr, 0);
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::rVelocity()
+{
+    return span<realx3>(rVelocityHost_.data(), rVelocityHost_.size());
+}
+
+pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::rPosition()
+{
+    return span<realx3>(nullptr, 0);
 }
 
 pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidForce() 
 {
-	auto& hVec =  particles_->fluidForceHostAll();
+	auto& hVec =  particles_->fluidForceHost();
 	
 	return span<realx3>(hVec.data(), hVec.size());
 }
 
 pFlow::span<pFlow::realx3> pFlow::sphereDEMSystem::parFluidTorque() 
 {
-	auto& hVec =  particles_->fluidTorqueHostAll();
+	auto& hVec =  particles_->fluidTorqueHost();
 	return span<realx3>(hVec.data(), hVec.size());
 }
 
@@ -198,9 +226,14 @@ bool pFlow::sphereDEMSystem::sendFluidTorqueToDEM()
 
 bool pFlow::sphereDEMSystem::beforeIteration()
 {
-	parVelocity_ = particles_->dynPointStruct().velocityHostAll();
-	parPosition_ = particles_->dynPointStruct().pointPositionHostAll();
-	parDiameter_ = particles_->diameter().hostVectorAll();
+	velocityHost_ = std::as_const(particles_()).velocity().hostView();
+	positionHost_ = std::as_const(particles_()).pointPosition().hostView();
+	diameterHost_ = particles_->diameter().hostView();
+
+	if(requireRVel_)
+		rVelocityHost_ = std::as_const(particles_()).rVelocity().hostView();
+	
+
 	return true;
 }
 

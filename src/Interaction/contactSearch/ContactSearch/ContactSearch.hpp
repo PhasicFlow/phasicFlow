@@ -22,16 +22,18 @@ Licence:
 #ifndef __ContactSearch_hpp__
 #define __ContactSearch_hpp__
 
-
+#include "contactSearchGlobals.hpp"
 #include "contactSearch.hpp"
 #include "box.hpp"
+#include "particles.hpp"
+#include "geometry.hpp"
+#include "boundaryContactSearchList.hpp"
 
 namespace pFlow
 {
 
 template<
-	template<class> class BaseMethod,
-	template<class> class WallMapping	
+	class searchMethod
 >
 class ContactSearch
 :
@@ -39,206 +41,133 @@ class ContactSearch
 {
 public:
 	
-	using IdType 			= typename contactSearch::IdType;
+	using IdType 			= uint32;
 
-	using IndexType 		= typename contactSearch::IndexType;
+	using ExecutionSpace 	= DefaultExecutionSpace;
 
-	using ExecutionSpace 	= typename contactSearch::ExecutionSpace;
+	using SearchMethodType = searchMethod;
 
-	using PairContainerType = typename contactSearch::PairContainerType;
-
-	using ParticleContactSearchType = 
-		BaseMethod<
-			ExecutionSpace>;
-
-	using WallMappingType =
-		WallMapping<
-			ExecutionSpace>;
-
-protected:
+private:
 	
+	uniquePtr<SearchMethodType> 	ppwContactSearch_ = nullptr;
 
-	uniquePtr<ParticleContactSearchType> particleContactSearch_ = nullptr;
+	boundaryContactSearchList 		csBoundaries_;
 
-	uniquePtr<WallMappingType> 			 wallMapping_ = nullptr;
+	bool BroadSearch(
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false) override
+	{
+		
+		const auto& position = Particles().pointPosition().deviceViewAll();
+		const auto& flags = Particles().dynPointStruct().activePointsMaskDevice();
+		const auto& diam = Particles().boundingSphere().deviceViewAll();
+
+		return ppwContactSearch_().broadSearch(
+			ti.iter(),
+			ti.t(),
+			ti.dt(),
+			ppPairs, 
+			pwPairs,
+			position, 
+			flags, 
+			diam,
+			force
+		);
+	}
+
+	bool BoundaryBroadSearch(
+		uint32 bndryIndex,
+		const timeInfo& ti,
+		csPairContainerType& ppPairs,
+		csPairContainerType& pwPairs,
+		bool force = false)override
+	{		
+		return csBoundaries_[bndryIndex].broadSearch(
+			ti.iter(), 
+			ti.t(), 
+			ti.dt(), 
+			ppPairs, 
+			pwPairs, 
+			force
+		);
+	}
 
 public:
 
-	TypeInfoTemplate2("ContactSearch", ParticleContactSearchType, WallMappingType);
+	TypeInfoTemplate11("ContactSearch", SearchMethodType);
 
 	ContactSearch(
 		const dictionary& csDict,
-		const box& domain,
+		const box& extDomain,
 	 	const particles& prtcl,
 	 	const geometry& geom,
 	 	Timers& timers)
 	:
-		contactSearch(csDict, domain, prtcl, geom, timers)
-		
+		contactSearch(
+			csDict, 
+			extDomain, 
+			prtcl, 
+			geom, 
+			timers),
+		csBoundaries_(
+			csDict, 
+			Particles().pStruct().boundaries(),
+			*this)
 	{
 
-		auto method = dict().getVal<word>("method");
-		auto wmMethod = dict().getVal<word>("wallMapping");
-		
-		auto nbDict = dict().subDict(method+"Info");
-
-		real minD, maxD;
+		real minD;
+		real maxD;
 		this->Particles().boundingSphereMinMax(minD, maxD);
 		
-		const auto& position = this->Particles().pointPosition().deviceVectorAll();
-		const auto& diam = this->Particles().boundingSphere().deviceVectorAll();
+		const auto& position = this->Particles().pointPosition().deviceViewAll();
+		const auto& flags = this->Particles().dynPointStruct().activePointsMaskDevice();
+		const auto& diam = this->Particles().boundingSphere().deviceViewAll();
 
-		particleContactSearch_ = 
-			makeUnique<ParticleContactSearchType>
+		uint32 wnPoints = this->Geometry().numPoints();
+		uint32 wnTri    = this->Geometry().size();
+		const auto& wPoints = this->Geometry().points().deviceViewAll();
+		const auto& wVertices = this->Geometry().vertices().deviceViewAll();
+		const auto& wNormals = this->Geometry().normals().deviceViewAll();
+
+		ppwContactSearch_ = 
+			makeUnique<SearchMethodType>
 			(
-				nbDict,
-				this->domain(),
+				dict(),
+				this->extendedDomainBox(),
 				minD,
 				maxD,
 				position,
-				diam
-			);
-		REPORT(2)<<"Contact search algorithm for particle-particle is "<<
-				 greenText(particleContactSearch_().typeName())<<endREPORT;
-
-
-		auto wmDict = dict().subDict(wmMethod+"Info");
-
-		int32 wnPoints = this->Geometry().numPoints();
-		int32 wnTri    = this->Geometry().size();
-
-		const auto& wPoints = this->Geometry().points().deviceVectorAll();
-		const auto& wVertices = this->Geometry().vertices().deviceVectorAll();
-
-		wallMapping_ = 
-			makeUnique<WallMappingType>(
-				wmDict,
-				particleContactSearch_().numLevels(),
-				particleContactSearch_().getCellsLevels(),
+				flags,
+				diam,
 				wnPoints,
-				wnTri, 
+				wnTri,
 				wPoints,
-				wVertices
-				);
-		REPORT(2)<<"Wall mapping algorithm for particle-wall is "<<
-				 greenText(wallMapping_().typeName())<< endREPORT;
-
+				wVertices,
+				wNormals
+			);
 	}
-
 
 	add_vCtor(
 		contactSearch,
 		ContactSearch,
 		dictionary);
-	
-	bool broadSearch(
-		PairContainerType& ppPairs,
-		PairContainerType& pwPairs,
-		bool force = false) override
+
+	bool enterBroadSearchBoundary(const timeInfo& ti, bool force=false)const override
 	{
-
-		
-		if(particleContactSearch_)
-		{
-			auto activeRange = this->Particles().activeRange();
-
-			sphereSphereTimer_.start();
-
-			if(this->Particles().allActive())
-			{		
-				particleContactSearch_().broadSearch(ppPairs, activeRange, force);
-			}
-			else
-			{		
-				particleContactSearch_().broadSearch(ppPairs, activeRange, this->Particles().activePointsMaskD(), force);
-			}
-
-			sphereSphereTimer_.end();
-
-		}
-		else
-			return false;
-		
-		if(wallMapping_)
-		{
-			sphereWallTimer_.start();
-			wallMapping_().broadSearch(pwPairs, particleContactSearch_(), force);
-			sphereWallTimer_.end();
-		}
-		else
-			return false;
-
-		
-		
-		return true;
+		return enterBroadSearch(ti, force) || csBoundaries_.boundariesUpdated();
 	}
 
-
-	bool ppEnterBroadSearch()const override
+	real sizeRatio()const override
 	{
-		if(particleContactSearch_)
-		{
-			return particleContactSearch_().enterBoadSearch(); 
-		}
-		return false;
+		return ppwContactSearch_().sizeRatio();
 	}
 
-	bool pwEnterBroadSearch()const override
+	real cellExtent()const override
 	{
-		if(wallMapping_)
-		{
-			return wallMapping_().enterBoadSearch();
-		}
-		return false;
+		return ppwContactSearch_().cellExtent();
 	}
-	
-
-	bool ppPerformedBroadSearch()const override
-	{
-		if(particleContactSearch_)
-		{
-			return particleContactSearch_().performedSearch();
-		}
-		return false;
-	}
-
-	
-	bool pwPerformedBroadSearch()const override
-	{
-		if(wallMapping_)
-		{
-			return wallMapping_().performedSearch();
-		}
-		return false;
-	}
-
-	/*bool update(const eventMessage& msg) 
-	{
-		if(msg.isSizeChanged() ) 
-		{
-			auto newSize = this->prtcl().size();
-			if(!particleContactSearch_().objectSizeChanged(newSize))
-			{
-				fatalErrorInFunction<<
-				"erro in changing the size for particleContactSearch_ \n";
-				return false;
-			}
-		}
-
-		if(msg.isCapacityChanged() ) 
-		{
-			auto newSize = this->prtcl().capacity();
-			if(!particleContactSearch_().objectSizeChanged(newSize))
-			{
-				fatalErrorInFunction<<
-				"erro in changing the capacity for particleContactSearch_ \n";
-				return false;
-			}
-		}	
-		
-		return true;
-	}*/
-	
 	
 };
 

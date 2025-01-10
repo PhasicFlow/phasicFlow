@@ -6,35 +6,37 @@ objectName 	settingsDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+run   layerdSiloFilling;
 
-run 			layerdSiloFilling;
+dt 				0.00001; 	                     // time step for integration (s)
 
-dt 				0.00001; 	// time step for integration (s)
+startTime 		    0.0; 		                 // start time for simulation 
 
-startTime 		0; 			// start time for simulation 
+endTime 		    5.0;	                     // end time for simulation 
 
-endTime 		5;	 		// end time for simulation 
+saveInterval 	   0.05; 		                 // time interval for saving the simulation
 
-saveInterval 	0.05; 		// time interval for saving the simulation
+timePrecision         6;	                     // maximum number of digits for time folder 
 
-timePrecision   6;			// maximum number of digits for time folder 
+g 			 (0 0 -9.8);                         // gravity vector (m/s2) 
 
-g 				(0 0 -9.8); // gravity vector (m/s2) 
+// save data objects that are not automatically saved on disk.
 
-/*
-	Simulation domain 
-	every particles that goes outside this domain is deleted.
-*/
-domain 
-{
-	min (-0.1 -0.1 -0.1);
-	max ( 0.1  0.1  0.40);
-}
+// overrides the default behavior 
 
-integrationMethod 		AdamsBashforth3; 	// integration method 
+includeObjects (diameter);    
 
-writeFormat				ascii;
+// exclude unnecessary data from saving on disk
 
-timersReport 			Yes;  	// report timers?
+excludeObjects (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
 
-timersReportInterval   	0.01;	// time interval for reporting timers
+integrationMethod 		AdamsBashforth2; 	      // integration method 
+
+writeFormat				          ascii;          // data writting format (ascii or binary)
+
+timersReport 			            Yes;  	      // report timers
+
+timersReportInterval   	           0.01;	      // time interval for reporting timers
+
+
+

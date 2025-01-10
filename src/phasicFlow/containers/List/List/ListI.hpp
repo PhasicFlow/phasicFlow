@@ -21,14 +21,22 @@ Licence:
 template<typename T>
 auto pFlow::List<T>::pos
 (
-	size_t i
+	size_t i,
+	bool noError
 )
 {
 	if( i >= size() )
 	{
-		fatalErrorInFunction<<
-		"our of range access to list element. \n";
-		fatalExit;
+		if(noError)
+		{
+			return std::end(*this);
+		}
+		else
+		{
+			fatalErrorInFunction<<
+			"out of range access to list element. \n";
+			fatalExit;
+		}
 	}
 	auto iter = listType::begin();
 	std::advance(iter, i);
@@ -38,14 +46,22 @@ auto pFlow::List<T>::pos
 template<typename T>
 const auto pFlow::List<T>::pos
 (
-	size_t i
+	size_t i,
+	bool noError
 )const 
 {
 	if( i >= size() )
 	{
-		fatalErrorInFunction<<
-		"our of range access to list element. \n";
-		fatalExit;
+		if(noError)
+		{
+			return std::end(*this);
+		}
+		else
+		{
+			fatalErrorInFunction<<
+			"out of range access to list element. \n";
+			fatalExit;
+		}
 	}
 	auto iter = listType::cbegin();
 	std::advance(iter, i);
@@ -88,7 +104,7 @@ inline const T& pFlow::List<T>::operator[]
 }
 
 template<typename T>
-inline typename  pFlow::List<T>::constIterator pFlow::List<T>::find
+inline typename  pFlow::List<T>::const_iterator pFlow::List<T>::find
 (
 	const T& val
 ) const

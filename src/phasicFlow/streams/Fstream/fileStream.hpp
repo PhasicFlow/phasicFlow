@@ -33,49 +33,63 @@ Licence:
 namespace pFlow
 {
 
+/**
+ * Creates and manages an input/output file stream 
+ * with specified format. 
+ * 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs.
+ */
 class fileStream
 {
 protected:
 
-	// - in file stream 
+	/// in file stream 
 	uniquePtr<std::ifstream> inStream_;
 	
-	// - out file stream
+	/// out file stream
 	uniquePtr<std::ofstream> outStream_;
 
 	bool binary_ = false;
 	
-	// - open input file
+	bool append_ = false;
+
+	/// open input file
 	void openInFile(const fileSystem& path);
 	
-	// - open output file
+	/// open output file
 	void openOutFile(const fileSystem& path);
 	
-	// - close streams 
+	/// close streams 
 	void close();
 
 public:
 
-	// - Constructors
+	//// - Constructors
 
-	fileStream( const fileSystem& path, bool outStream = false, bool binary = false);
+		/// From file path and input type and format. 
+		fileStream( const fileSystem& path, bool outStream = false, bool binary = false, bool append = false);
+		
+		/// No copy
+		fileStream(const fileStream&)= delete;
+
+		/// No assignment
+		fileStream& operator=(const fileStream&)=delete;
+
+		/// Destructor
+		virtual ~fileStream() 
+		{
+			close();
+		}
 	
-	fileStream(const fileStream&)= delete;
-
-	fileStream& operator=(const fileStream&)=delete;
-
-	virtual ~fileStream() 
-	{
-		close();
-	}
 	
+	//// - Access 
 	
-	// - access 
-
-	std::ifstream& inStream();
-	
-	std::ofstream& outStream();
-
+		/// Access input file stream 
+		std::ifstream& inStream();
+		
+		/// Access output file stream 
+		std::ofstream& outStream();
 };
 
 }

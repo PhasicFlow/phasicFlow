@@ -18,31 +18,7 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-template<typename ShapeType>
-bool pFlow::Insertion<ShapeType>::readInsertionDict
-(
-	const dictionary& dict
-)
-{
-	if(!insertion::readInsertionDict(dict)) return false;
-	
-	regions_.clear();
-	
-	if( !this->isActive() )
-	{
-		return true;
-	}
 
-	wordList regionDicNames = dict.dictionaryKeywords();
-
-	for(auto& name:regionDicNames)
-	{
-		REPORT(2)<<"reading insertion region "<< greenText(name)<<endREPORT;
-		regions_.push_backSafe(dict.subDict(name), shapes_);
-	}
-
-	return true;
-}
 
 template<typename ShapeType>
 bool pFlow::Insertion<ShapeType>::writeInsertionDict
@@ -50,7 +26,8 @@ bool pFlow::Insertion<ShapeType>::writeInsertionDict
 	dictionary& dict
 )const
 {
-	if( !insertion::writeInsertionDict(dict) ) return false;
+	
+	if(!insertion::writeInsertionDict(dict))return false;
 
 	if( !this->isActive() ) return true;
 
@@ -60,11 +37,40 @@ bool pFlow::Insertion<ShapeType>::writeInsertionDict
 
 		if( !regions_[i].write(rgnDict) )
 		{
+			fatalErrorInFunction<<
+			"Error in writing to dictionary "<<rgnDict.globalName()<<endl;
 			return false;
 		}
 	}
 
 	return true;
+}
+
+template<typename ShapeType>
+bool
+pFlow::Insertion<ShapeType>::readInsertionDict()
+{
+	regions_.clear();
+	
+	if( !this->isActive() )
+	{
+		return true;
+	}
+
+	wordList regionDicNames = this->dictionaryKeywords();
+
+	for(const auto& name:regionDicNames)
+	{
+		REPORT(2)<<"reading insertion region "<< Green_Text(name)<<END_REPORT;
+		
+		regions_.push_back(makeUnique<InsertionRegion<ShapeType>>(
+			name,
+			*this, 
+			shapes_));
+	}
+
+	return true;
+
 }
 
 template<typename ShapeType>
@@ -75,11 +81,14 @@ pFlow::Insertion<ShapeType>::Insertion(
 	insertion(prtcl),
 	shapes_(shapes)
 {
-
-	
+	if(!readInsertionDict())
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}	
 }
 
-template<typename ShapeType>
+/*template<typename ShapeType>
 pFlow::Insertion<ShapeType>::Insertion(
 	fileSystem file, 
 	particles& prtcl, 
@@ -95,13 +104,14 @@ pFlow::Insertion<ShapeType>::Insertion(
 		file<<endl;
 		fatalExit;
 	}
-}
+}*/
 
 
 template<typename ShapeType>
 bool pFlow::Insertion<ShapeType>::insertParticles
 (
-	real currentTime,
+	uint32 iter, 
+	real t,
 	real dt
 )
 {
@@ -112,21 +122,21 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 	{
 		bool insertionOccured = false;
 		auto& rgn = regions_[i];
-		if( rgn.insertionTime(currentTime, dt) )
+		if( rgn.insertionTime(iter, t, dt) )
 		{
 			
 			realx3Vector pos;
 			wordVector shapes;
-			if( rgn.insertParticles(currentTime, dt, shapes, pos, insertionOccured) )
+			if( rgn.insertParticles(iter, t, dt, shapes, pos, insertionOccured) )
 			{
 
 				if(insertionOccured)
 				{
-					REPORT(0)<<"\nParticle insertion from "<< greenText(rgn.name())<<endREPORT;
-					REPORT(1)<< cyanText(pos.size()) << " new particles is being inserted at Time: "<<
-						cyanText(currentTime) <<" s."<<endREPORT;
+					REPORT(0)<<"\nParticle insertion from "<< Green_Text(rgn.name())<<END_REPORT;
+					REPORT(1)<< Cyan_Text(pos.size()) << " new particles is being inserted at Time: "<<
+						Cyan_Text(t) <<" s."<<END_REPORT;
 						
-					if(!particles_.insertParticles(pos, shapes, rgn.setFields()))
+					if(!Particles().insertParticles(pos, shapes, rgn.setFieldList()))
 					{
 						fatalErrorInFunction<<
 						" Cannot add "<< pos.size() << " particles from region "<< rgn.name() << 
@@ -134,7 +144,7 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 						return false;
 					}
 					REPORT(1)<<"Total number of particles inserted from this region is "<<
-						cyanText(rgn.totalInserted())<<'\n'<<endREPORT;
+						Cyan_Text(rgn.totalInserted())<<'\n'<<END_REPORT;
 				}
 				else
 				{
@@ -146,9 +156,15 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 			{
 				if(insertionOccured)
 				{
-					yWARNING<< "\n fewer number of particles are inserted from region "<< rgn.name() <<
-					" than expected. You may stop the simulation to change settings."<<endyWARNING;
-					continue;
+					WARNING<< "\n fewer number of particles are inserted from region "<< rgn.name() <<
+					" than expected. You may stop the simulation to change settings."<<END_WARNING;
+					if(!Particles().insertParticles(pos, shapes, rgn.setFieldList()))
+					{
+						fatalErrorInFunction<<
+						" Cannot add "<< pos.size() << " particles from region "<< rgn.name() << 
+						" to particles. \n";
+						return false;
+					}
 				}
 				else
 				{
@@ -166,7 +182,7 @@ bool pFlow::Insertion<ShapeType>::insertParticles
 }
 
 
-template<typename ShapeType>
+/*template<typename ShapeType>
 bool pFlow::Insertion<ShapeType>::read
 (
 	iIstream& is
@@ -217,4 +233,4 @@ bool pFlow::Insertion<ShapeType>::write
 	}	
 
 	return true;
-}
+}*/

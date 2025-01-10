@@ -299,6 +299,13 @@ pFlow::dictionary::dictionary
 
 }
 
+pFlow::dictionary::dictionary(const dictionary &src, bool global)
+:
+	dictionary(src)
+{
+	isGlobal_ = global;
+}
+
 pFlow::dictionary& pFlow::dictionary::operator=
 (
 	const dictionary& rhs
@@ -378,7 +385,8 @@ bool pFlow::dictionary::isFileDict()const
 bool  pFlow::dictionary::addPtr
 (
 	const word& keyword,
-	uniquePtr<iEntry>& entry
+	uniquePtr<iEntry>& entry,
+	bool warning
 )
 {
 
@@ -390,9 +398,13 @@ bool  pFlow::dictionary::addPtr
 	// search all entries for repeated keyword
 	if(auto [ptr, exist] = entries_.find(keyword); exist )
 	{
-		warningInFunction <<
-		"keyword " << keyword << " already exists in the dicrionary " <<
-		this->globalName() << ". The old entry will be replaced by the new one. \n";
+		if(warning)
+		{
+			warningInFunction <<
+			"keyword " << keyword << " already exists in the dicrionary " <<
+			this->globalName() << ". The old entry will be replaced by the new one. \n";
+		}
+		
 		// store the old pointer to entry
 		oldEntryPtr = ptr;
 	}
@@ -400,6 +412,7 @@ bool  pFlow::dictionary::addPtr
 	
 	if( entries_.insertReplace(keyword, entry) )
 	{
+	
 		if(oldEntryPtr)
 		{
 			// this should be replaced 
@@ -468,15 +481,6 @@ bool pFlow::dictionary::add
 	return addPtr(keyword, ptr);
 }
 
-bool pFlow::dictionary::add
-(
-	const word& keyword,
-	const int16& v
-)
-{
-	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this, token(v));
-	return addPtr(keyword, ptr);
-}
 
 bool pFlow::dictionary::add
 (
@@ -491,7 +495,7 @@ bool pFlow::dictionary::add
 bool pFlow::dictionary::add
 (
 	const word& keyword,
-	const label& v
+	const uint64& v
 )
 {
 	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this, token(v));
@@ -508,6 +512,15 @@ bool pFlow::dictionary::add
 	return addPtr(keyword, ptr);
 }
 
+bool pFlow::dictionary::add
+(
+	const word& keyword,
+	const uint8& v
+)
+{
+	uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this, token(v));
+	return addPtr(keyword, ptr);
+}
 
 bool pFlow::dictionary::addDict
 (

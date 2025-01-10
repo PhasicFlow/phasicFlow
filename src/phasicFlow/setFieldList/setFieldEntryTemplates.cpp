@@ -23,7 +23,7 @@ template <typename Type>
 bool pFlow::setFieldEntry::checkForType()const
 {
 	word typeName( entry_.firstPart() );
-	return basicTypeName<Type>() == typeName;
+	return getTypeName<Type>() == typeName;
 };
 
 template <typename Type>
@@ -37,9 +37,9 @@ bool pFlow::setFieldEntry::checkForTypeAndValue()const
 }
 
 template <typename Type>
-void* pFlow::setFieldEntry::setPointFieldDefaultValueNew
+pFlow::uniquePtr<pFlow::pointField_H<Type>>
+	 pFlow::setFieldEntry::setPointFieldDefaultValueNew
 (
-	repository& owner,
 	pointStructure& pStruct,
 	bool verbose
 )
@@ -50,13 +50,10 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueNew
 	Type defValue = entry_.secondPartVal<Type>();
 	
 	if(verbose)
-		REPORT(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<endREPORT;
-
+		REPORT(2)<<"Creating pointField " << Green_Text(fieldName())<< " with default value " << Cyan_Text(defValue)<<
+	             " in repository "<< pStruct.owner()->name() <<END_REPORT;
 	
-	auto& field = 
-	owner.emplaceObject<pointField<VectorSingle,Type>>
-	(
+	auto Ptr = makeUnique<pointField_H<Type>>(
 		objectFile
 		(
 			fieldName(),
@@ -65,56 +62,24 @@ void* pFlow::setFieldEntry::setPointFieldDefaultValueNew
 			objectFile::WRITE_ALWAYS
 		),
 		pStruct,
-		defValue
+		defValue,
+		defValue	
 	);
-
-	return &field;
+	
+	return Ptr;
 }
 
+
+
 template <typename Type>
-void* pFlow::setFieldEntry::setPointFieldDefaultValueStdNew
+bool pFlow::setFieldEntry::setPointFieldSelected
 (
 	repository& owner,
-	pointStructure& pStruct,
+	uint32IndexContainer& selected,
 	bool verbose
 )
 {
-
-	if( !checkForType<Type>() ) return nullptr;
-	
-	Type defValue = entry_.secondPartVal<Type>();
-	
-	if(verbose)
-		REPORT(2)<<"Creating pointField " << greenText(fieldName())<< " with default value " << cyanText(defValue)<<
-	             " in repository "<< owner.name() <<endREPORT;
-
-	// by default we perform operations on host
-	auto& field = 
-	owner.emplaceObject<pointField<Vector,Type, vecAllocator<Type>>>
-	(
-		objectFile
-		(
-			fieldName(),
-			"",
-			objectFile::READ_NEVER,
-			objectFile::WRITE_ALWAYS
-		),
-		pStruct,
-		defValue
-	);
-
-	return &field;
-}
-
-template <typename Type>
-void* pFlow::setFieldEntry::setPointFieldSelected
-(
-	repository& owner,
-	int32IndexContainer& selected,
-	bool verbose
-)
-{
-	if( !checkForType<Type>() ) return nullptr;
+	if( !checkForType<Type>() ) return false;
 
 	
 	auto fName = fieldName();
@@ -123,93 +88,30 @@ void* pFlow::setFieldEntry::setPointFieldSelected
 	{
 		fatalErrorInFunction<<
 		"Cannot find "<< fName << " in repository " << owner.name() << ". \n";
-		return nullptr;
+		return false;
 	}
 
 	Type value = entry_.secondPartVal<Type>();
 
 	if(verbose)
-		REPORT(2)<< "Setting selected points of " << greenText(fName)
-		 		 << " to value " << cyanText(value) <<endREPORT;
+		REPORT(2)<< "Setting selected points of " << Green_Text(fName)
+		 		 << " to value " << Cyan_Text(value) <<END_REPORT;
 	
 	
 	auto fieldTypeName = owner.lookupObjectTypeName(fName);
 
-	if( pointField<VectorSingle,Type>::TYPENAME() == fieldTypeName )
+	if( getTypeName<pointField_H<Type>>() == fieldTypeName )
 	{
 		
-		auto& field = owner.lookupObject<pointField<VectorSingle,Type>>(fName);
+		auto& field = owner.lookupObject<pointField_H<Type>>(fName);
 		if(field.insertSetElement(selected, value))
-			return &field;
+			return true;
 		else
-			return nullptr;
-	}
-
-	if( pointField<VectorSingle,Type, HostSpace>::TYPENAME() == fieldTypeName )
-	{
-		
-		auto& field = owner.lookupObject<pointField<VectorSingle,Type,HostSpace>>(fName);
-		if(field.insertSetElement(selected, value))
-			return &field;
-		else
-			return nullptr;
-	}
-
-	if( pointField<VectorDual,Type>::TYPENAME() == fieldTypeName )
-	{
-		
-		auto& field = owner.lookupObject<pointField<VectorDual,Type>>(fName);
-		if(field.insertSetElement(selected, value))
-			return &field;
-		else
-			return nullptr;
+			return false;
 	}
 
 	fatalErrorInFunction<<
 	fieldTypeName<< " is not a supported field type for setFieldEntry.\n";
-	return nullptr;
-	
+	return false;
 }
 
-template <typename Type>
-void* pFlow::setFieldEntry::setPointFieldSelectedStd
-(
-	repository& owner,
-	int32IndexContainer& selected,
-	bool verbose
-)
-{
-	
-	if( !checkForType<Type>() ) return nullptr;
-
-	
-	auto fName = fieldName();
-
-	if( !owner.lookupObjectName(fName) )
-	{
-		fatalErrorInFunction<<
-		"  Cannot find "<< fName << " in repository " << owner.name() << ". \n";
-		return nullptr;
-	}
-
-	
-	Type value = entry_.secondPartVal<Type>();
-
-	if(verbose)
-		REPORT(2)<< "Setting selected points of " << greenText(fName)
-		 		 << " to value " << cyanText(value) <<endREPORT;
-	
-	
-	auto fieldTypeName = owner.lookupObjectTypeName(fName);
-
-	if( pointField<Vector, Type, vecAllocator<Type>>::TYPENAME() == fieldTypeName )
-	{
-		auto& field = owner.lookupObject<pointField<Vector,Type, vecAllocator<Type>>>(fName);
-		if(field.insertSetElement(selected, value))
-			return &field;
-		else
-			return nullptr;
-	}
-
-	return nullptr;
-}

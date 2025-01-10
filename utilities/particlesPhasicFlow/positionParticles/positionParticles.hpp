@@ -23,118 +23,75 @@ Licence:
 
 #include "virtualConstructor.hpp"
 #include "Vectors.hpp"
-#include "dictionary.hpp"
+#include "peakableRegion.hpp"
 
 namespace pFlow
 {
 
-class regionBase
-{
-public:
-	
-	regionBase() = default;
-	
-	regionBase(const regionBase&) = default;
+class dictionary;
+class systemControl;
 
-	regionBase& operator =(const regionBase&) = default;
-	
-	virtual ~regionBase() = default;
-
-	virtual bool isInside(const realx3 point)const = 0;
-
-	virtual realx3 minPoint()const =0;
-
-	virtual realx3 maxPoint()const =0;
-
-	virtual word name()const =0;
-
-};
-
-template<typename T>
-class region
-:
-	public regionBase
-{
-	protected:
-
-		T 		region_;
-
-	public:
-		
-		region(const T& rgn)
-		:
-			region_(rgn)
-		{}
-
-		region(const dictionary& dict)
-		:
-			region_(dict)
-		{}
-
-		region(const region&) = default;
-		
-		region& operator =(const region&) = default;
-
-		virtual ~region()=default;
-
-		bool isInside(const realx3 point) const override
-		{
-			return region_.isInside(point);
-		}
-
-		realx3 minPoint()const override
-		{
-			return region_.minPoint();
-		}
-
-		realx3 maxPoint()const override
-		{
-			return region_.maxPoint();
-		}
-
-		word name()const override
-		{
-			return region_.typeName();
-		}
-
-};
 
 class positionParticles
 {
-protected:
+private:
 
-	uniquePtr<regionBase> 		region_ = nullptr;
+	uniquePtr<peakableRegion> 		pRegion_ = nullptr;
 
-	size_t  		maxNumberOfParticles_ = 10000;
+	word 			regionType_;
+
+	uint32  		maxNumberOfParticles_ = 10000;
 
 	Logical 		mortonSorting_;
 
-	static const size_t numReports_ = 40;
+	
 
-	realx3Vector sortByMortonCode(realx3Vector& position)const;
+	realx3Vector sortByMortonCode(const realx3Vector& position)const;
+
+protected:
+
+	static const uint32 numReports_ = 40;
+
+	const auto& pRegion()const
+	{
+		return pRegion_();
+	}
 	
 public:
 
 	// - type Info
 	TypeInfo("positionParticles");
 
-	positionParticles(const dictionary& dict);
+	positionParticles(
+		systemControl& control, 
+		const dictionary& dict);
 
 	create_vCtor
 	(
 		positionParticles,
 		dictionary,
-		(const dictionary& dict),
-		(dict)
+		(systemControl& control, const dictionary& dict),
+		(control, dict)
 	);
 
 	virtual ~positionParticles() = default;
 
-	//// - Methods 
+	//// - Methods
 
-	virtual label numPoints()const = 0;
+	bool mortonSorting()const
+	{
+		return mortonSorting_();
+	} 
 
-	virtual label size()const = 0;
+	inline
+	auto maxNumberOfParticles()const
+	{
+		return maxNumberOfParticles_;
+	}
+
+	virtual uint32 numPoints()const = 0;
+
+	virtual uint32 size()const = 0;
 
 	virtual real maxDiameter() const = 0;
 
@@ -148,7 +105,8 @@ public:
 	virtual realx3Vector getFinalPosition();
 
 	static
-	uniquePtr<positionParticles> create(const dictionary & dict);
+	uniquePtr<positionParticles> 
+		create(systemControl& control, const dictionary & dict);
 	
 };	
 

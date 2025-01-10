@@ -41,7 +41,7 @@ public:
 
 	using memory_space 		= typename ExecutionSpace::memory_space;
 
-	using PairType 			= kPair<idType,idType>;
+	using PairType 			= Pair<idType,idType>;
 
 	using ContainerType 	= unorderedSet<PairType, ExecutionSpace>;
 
@@ -52,19 +52,19 @@ public:
 		ContainerType 		Container_;
 
 		INLINE_FUNCTION_HD
-		int32 size()const { return Container_.size(); }
+		uint32 size()const { return Container_.size(); }
 
 		INLINE_FUNCTION_HD
-		int32 loopCount()const { return Container_.capacity(); }
+		uint32 loopCount()const { return Container_.capacity(); }
 
 		INLINE_FUNCTION_HD
-		bool isValid(int32 idx)const { return Container_.valid_at(idx); }
+		bool isValid(uint32 idx)const { return Container_.valid_at(idx); }
 
 		INLINE_FUNCTION_HD
-		PairType getPair(int idx)const {	return Container_.key_at(idx); }
+		PairType getPair(uint32 idx)const {	return Container_.key_at(idx); }
 
 		INLINE_FUNCTION_HD
-		bool getPair(int32 idx, PairType& pair)const {
+		bool getPair(uint32 idx, PairType& pair)const {
 			if(Container_.valid_at(idx))	{
 				pair = Container_.key_at(idx);
 				return true;
@@ -84,7 +84,7 @@ public:
 	TypeInfoNV("unsorderedPairs");
 
 	// constructor
-	unsortedPairs(int32 capacity=1)
+	explicit unsortedPairs(uint32 capacity=1)
 	:
 		container_(capacity) // the minimum capacity would be 128 
 	{}
@@ -102,20 +102,20 @@ public:
 	
 	// - Device call
 	INLINE_FUNCTION_HD
-	int32 insert(idType i, idType j)const
+	uint32 insert(idType i, idType j)const
 	{
 		if(auto insertResult = container_.insert(PairType(i,j)); insertResult.failed())
-			return -1;
+			return static_cast<uint32>(-1);
 		else
 			return insertResult.index();
 			
 	}
 
 	INLINE_FUNCTION_HD
-	int32 insert(const PairType& p)const
+	uint32 insert(const PairType& p)const
 	{
 		if(auto insertResult = container_.insert(p); insertResult.failed())
-			return -1;
+			return static_cast<uint32>(-1);
 		else
 			return insertResult.index();
 
@@ -125,7 +125,7 @@ public:
 	//   return the pair at index idx
 	//   perform no check for size and existance
 	INLINE_FUNCTION_HD
-	PairType getPair(int32 idx)const
+	PairType getPair(uint32 idx)const
 	{
 		return container_.key_at(idx);
 	}
@@ -133,7 +133,7 @@ public:
 	// - Device call
 	//   return the pair at index idx
 	INLINE_FUNCTION_HD
-	bool getPair(int32 idx, PairType& p)const
+	bool getPair(uint32 idx, PairType& p)const
 	{
 		if(container_.valid_at(idx))
 		{
@@ -148,36 +148,36 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	int32 find(const PairType & p)const
+	uint32 find(const PairType & p)const
 	{
 		if( auto idx = container_.find(p); 
 			idx != Kokkos::UnorderedMapInvalidIndex )
 			return idx;
 		else
-			return -1;
+			return static_cast<uint32>(-1);
 	}
 
 	INLINE_FUNCTION_HD
-	bool isValid(int32 idx)const
+	bool isValid(uint32 idx)const
 	{
 		return container_.valid_at(idx);	
 	}
 
 
 	INLINE_FUNCTION_HD
-	int32 capacity() const
+	uint32 capacity() const
 	{
 		return container_.capacity();
 	}
 
-	int32 loopCount()const
+	uint32 loopCount()const
 	{
 		return container_.capacity();
 	}
 	
 	//use this when the value of size_ is updated
 	INLINE_FUNCTION_H
-	int32 size()const
+	uint32 size()const
 	{
 		return container_.size();
 	}
@@ -190,7 +190,7 @@ public:
 	/// increase the capacity of the container by at-least len 
 	/// the content will be erased. 
 	INLINE_FUNCTION_H
-	void increaseCapacityBy(int32 len)
+	void increaseCapacityBy(uint32 len)
 	{
 		uint newCap = container_.capacity()+len;
 		this->clear();

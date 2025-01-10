@@ -21,7 +21,7 @@ Licence:
 
 #include "fileSystem.hpp"
 #include "error.hpp"
-#include "iOstream.hpp"
+#include "streams.hpp"
 
 
 bool pFlow::fileSystem::checkFileName(const word& name)
@@ -33,7 +33,6 @@ bool pFlow::fileSystem::checkFileName(const word& name)
 		"Invalid file name supplied " << name <<
 		"the following characters are not allowd: " <<
 		notPermittedCharsFile << endl;
-		fatalExit;
 		return false;
 	}
 
@@ -41,14 +40,25 @@ bool pFlow::fileSystem::checkFileName(const word& name)
 }
 
 
+/// From full path 
+pFlow::fileSystem::fileSystem(const word & wPath)
+:
+	path_(wPath),
+	isDir_(std::filesystem::is_directory(path_))
+{
+	if( !isDir_ && !checkFileName(fileName()))
+	{
+		fatalExit;
+	}
+}
 
 pFlow::fileSystem::fileSystem( const word& dir, const word& file)
 {
 	isDir_ = file.empty();
 
-	if( !isDir_) 
+	if( !isDir_ && !checkFileName(file)) 
 	{
-		checkFileName(file);
+		fatalExit;
 	}
 
 	try
@@ -74,10 +84,9 @@ pFlow::fileSystem::fileSystem( const char* dir, const char* file)
 
 pFlow::fileSystem::fileSystem( const pathType& path )
 :
-	path_(path)
-{
-	isDir_ = isDirectory(*this);
-}
+	path_(path),
+	isDir_(std::filesystem::is_directory(path_))
+{}
 
 pFlow::fileSystem pFlow::fileSystem::dirPath() const
 {
@@ -158,6 +167,11 @@ pFlow::fileSystem pFlow::fileSystem::canonical
 	return res;
 }
 
+pFlow::fileSystem pFlow::fileSystem::relative(const fileSystem &base)const
+{
+    return fileSystem( std::filesystem::relative(path_, base.path_));
+}
+
 bool pFlow::fileSystem::dirExist
 (
 ) const
@@ -175,9 +189,7 @@ bool pFlow::fileSystem::dirExist
 	
 }
 
-bool pFlow::fileSystem::exist
-(
-)const
+bool pFlow::fileSystem::exist()const
 {
 	try
 	{
@@ -232,7 +244,10 @@ pFlow::fileSystem pFlow::fileSystem::operator()
 
 void pFlow::fileSystem::operator += (const word& fileName)
 {
-	checkFileName(fileName);
+	if(!checkFileName(fileName))
+	{
+		fatalExit;
+	}
 
 	if( isDir())
 	{
@@ -267,10 +282,19 @@ pFlow::fileSystem pFlow::operator /
 	const fileSystem& fs2 
 )
 {
-	fileSystem::pathType cmbPath(fs1.dirPath().path_ / fs2.dirPath().path_);
+	fileSystem::pathType cmbPath(fs1.dirPath().path_ / fs2.path_);
 
 	return fileSystem( cmbPath.c_str() );
 
+}
+
+pFlow::fileSystem pFlow::operator /
+(
+	const fileSystem& fs1,
+	const word& dir2 
+)
+{
+	return fs1/fileSystem(dir2, "");
 }
 
 pFlow::fileSystem pFlow::operator +
@@ -284,13 +308,13 @@ pFlow::fileSystem pFlow::operator +
 	return path;
 }
 
-pFlow::iOstream& pFlow::operator << (iOstream& os, fileSystem fs)
+pFlow::iOstream& pFlow::operator << (iOstream& os, const fileSystem& fs)
 {
 	os << fs.path_.c_str();
 	return os;
 }
 
-std::ostream& pFlow::operator << (std::ostream& os, fileSystem fs)
+std::ostream& pFlow::operator << (std::ostream& os, const fileSystem& fs)
 {
 	os << fs.path_.c_str();
 	return os;
@@ -321,7 +345,7 @@ pFlow::fileSystemList pFlow::subDirectories
 		auto dOps = std::filesystem::directory_options::skip_permission_denied;
 		for( auto& subPath: std::filesystem::directory_iterator(path.path(), dOps) )
 		{
-			if(isDirectory( subPath.path() ) )
+			if(isDirectory( fileSystem(subPath.path()) ) )
 			{
 				dirs.emplace_back(subPath.path());
 			}

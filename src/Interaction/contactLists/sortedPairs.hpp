@@ -52,24 +52,24 @@ public:
 	{
 		using PairType = typename sortedPairs::PairType;
 
-		int32 size_;
+		uint32 size_;
 
 		ViewType1D<PairType,ExecutionSpace> sortedParis_;
 
 		INLINE_FUNCTION_HD
-		int32 size()const { return size_; }
+		uint32 size()const { return size_; }
 
 		INLINE_FUNCTION_HD
-		int32 loopCount()const { return size_; }
+		uint32 loopCount()const { return size_; }
 
 		INLINE_FUNCTION_HD
-		bool isValid(int32 i)const { return i<size_; }
+		bool isValid(uint32 i)const { return i<size_; }
 
 		INLINE_FUNCTION_HD
-		PairType getPair(int i)const {	return sortedParis_[i];	}
+		PairType getPair(uint32 i)const {	return sortedParis_[i];	}
 
 		INLINE_FUNCTION_HD
-		bool getPair(int32 i, PairType& pair)const {
+		bool getPair(uint32 i, PairType& pair)const {
 			if(i<size_)	{
 				pair = sortedParis_[i];
 				return true;
@@ -85,22 +85,22 @@ public:
 protected:
 
 	/// size of pair list
-	int32 			size_ = 0;
+	uint32 			size_ = 0;
 
-	ViewType1D<int32,ExecutionSpace>		flags_;
+	ViewType1D<uint32,ExecutionSpace>		flags_;
 
 	ViewType1D<PairType,ExecutionSpace> 	sortedPairs_;
 
 	using rpFillFlag = Kokkos::RangePolicy<
 		ExecutionSpace,
 		Kokkos::Schedule<Kokkos::Static>,
-		Kokkos::IndexType<int32>,
+		Kokkos::IndexType<uint32>,
 		TagFillFlag	>;
 
 	using rpFillPairs = Kokkos::RangePolicy<
 		ExecutionSpace,
 		Kokkos::Schedule<Kokkos::Static>,
-		Kokkos::IndexType<int32>,
+		Kokkos::IndexType<uint32>,
 		TagFillPairs>;
 	
 public:
@@ -110,7 +110,7 @@ public:
 
 
 	// constructors
-	sortedPairs(int32 initialSize =1)
+	explicit sortedPairs(uint32 initialSize =1)
 	:
 		UnsortedPairs(initialSize),
 		flags_("flags_",UnsortedPairs::capacity()+1),
@@ -134,7 +134,7 @@ public:
 	//   return the pair at index idx
 	//   perform no check for size and existance
 	INLINE_FUNCTION_HD
-	PairType getPair(int32 idx)const
+	PairType getPair(uint32 idx)const
 	{
 		return sortedPairs_[idx];
 	}
@@ -142,7 +142,7 @@ public:
 	// - Device/host call
 	//   return the pair at index idx
 	INLINE_FUNCTION_HD
-	bool getPair(int32 idx, PairType& p)const
+	bool getPair(uint32 idx, PairType& p)const
 	{
 		if(isValid(idx))
 		{
@@ -156,7 +156,7 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	bool isValid(int32 idx)const
+	bool isValid(uint32 idx)const
 	{
 		return idx < size_;	
 	}
@@ -164,12 +164,12 @@ public:
 
 	//use this when the value of size_ is updated
 	INLINE_FUNCTION_H
-	int32 size()const
+	uint32 size()const
 	{
 		return size_;
 	}
 
-	int32 loopCount()const
+	uint32 loopCount()const
 	{
 		return size_;
 	}
@@ -189,7 +189,7 @@ public:
 	void prepareSorted()
 	{
 		// first check the size of flags_ 
-		int32 capacity = UnsortedPairs::capacity();
+		uint32 capacity = UnsortedPairs::capacity();
 
 		if( capacity+1 > flags_.size() )
 		{
@@ -218,7 +218,7 @@ public:
 		if( size_>sortedPairs_.size() )
 		{
 			// get more space to prevent reallocations in next iterations
-			int32 len = size_*1.1+1; 
+			uint32 len = size_*1.1+1; 
 			reallocNoInit(sortedPairs_, len);
 		}
 		
@@ -235,7 +235,7 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	void operator()(TagFillFlag, int32 i)const
+	void operator()(TagFillFlag, uint32 i)const
 	{
 		if(this->container_.valid_at(i) )
 			flags_[i] = 1;
@@ -244,7 +244,7 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	void operator()(TagFillPairs, int32 i)const
+	void operator()(TagFillPairs, uint32 i)const
 	{
 		auto fi = flags_[i];
 		if(fi!=flags_[i+1])

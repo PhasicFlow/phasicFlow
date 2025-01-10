@@ -21,7 +21,7 @@ Licence:
 #ifndef __pointRectCell_hpp__
 #define __pointRectCell_hpp__
 
-#include "mapperNBS.hpp"
+#include "cellMapper.hpp"
 #include "rectMeshFields.hpp"
 #include "pointStructure.hpp"
 
@@ -33,20 +33,19 @@ class pointRectCell
 {
 public:
 
-	using mapType = mapperNBS<DefaultHostExecutionSpace>;
+	using mapType = cellMapper;
 
-	using memory_space = typename mapType::memory_space;
+	//using memory_space = typename mapType::memory_space;
 
 protected:
 
 	repository&				processedRepository_;
 
-	rectangleMesh& 			mesh_;
-
+	rectangleMesh 			mesh_;
 
 	const pointStructure& 	pStruct_;
 
-	ViewType1D<realx3, memory_space> 		pointPosition_;
+	hostViewType1D<realx3> 	pointPosition_;
 
 	mapType 				map_;
 
@@ -61,31 +60,27 @@ public:
 	:
 		processedRepository_(rep),
 		mesh_
-		( 
-			processedRepository_.emplaceObject<rectangleMesh>
-			(
-				objectFile
-				(
-					"rectMesh",
-					"",
-					objectFile::READ_NEVER,
-					objectFile::WRITE_NEVER
-				),
-				dictMesh
-			)
+		(
+			dictMesh,
+			&rep
 		),
 		pStruct_(pStruct),
-		pointPosition_(pStruct_.pointPosition().hostVectorAll()),
-		map_( 
-			mesh_.domain(), 
-			mesh_.nx(),
-			mesh_.ny(),
-			mesh_.nz(),
-			pointPosition_),
-		nPointInCell_(mesh_, 0)
+		pointPosition_(pStruct_.pointPosition().hostViewAll()),
+		map_
+		( 
+			mesh_,
+			pointPosition_,
+			pStruct_.activePointsMaskHost()
+		),
+		nPointInCell_(mesh_,"nPointInCell", 0)
 	{
 
 		mapPOints();
+	}
+
+	auto& mesh()
+	{
+		return mesh_;
 	}
 
 	const auto& mesh()const
@@ -100,25 +95,23 @@ public:
 
 	void mapPOints()
 	{
-		range activeRange = pStruct_.activeRange();
-		auto activeMask  = pStruct_.activePointsMaskH();
+		auto points = pStruct_.pointPositionHost();
+		auto activeMask  = pStruct_.activePointsMaskHost();
 
-		
-		map_.buildCheckInDomain(activeRange, activeMask);
+		map_.build(points, activeMask);
 		
 		auto iterator = map_.getCellIterator();
-		
 	
-		for(int32 i=0; i<map_.nx(); i++)
+		for(int32 i=0; i<mesh_.nx(); i++)
 		{
-			for(int32 j=0; j<map_.ny(); j++)
+			for(int32 j=0; j<mesh_.ny(); j++)
 			{
-				for(int32 k=0; k<map_.nz(); k++)
+				for(int32 k=0; k<mesh_.nz(); k++)
 				{
 
 					int32 res = 0;
-					int32 n = iterator.start(i,j,k);
-					while( n>-1)
+					uint32 n = iterator.start(i,j,k);
+					while( n!= cellMapper::NoPos)
 					{
 						res+=1;
 						n = iterator.getNext(n);

@@ -17,16 +17,14 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
 
 #include "oFstream.hpp"
 
 
-pFlow::oFstream::oFstream (const fileSystem& path, bool binary)
+pFlow::oFstream::oFstream (const fileSystem& path, bool binary, bool append)
 :
-	fileStream(path, true, binary),
+	fileStream(path, true, binary, append),
 	Ostream
   ( 
     fileStream::outStream(), 

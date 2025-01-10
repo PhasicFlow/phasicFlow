@@ -31,13 +31,13 @@ class positionOrdered
 :
 	public positionParticles
 {
-protected:
+private:
 
 	dictionary 	poDict_;
 
 	real 		diameter_;
 
-	size_t 		numPoints_;
+	uint32 		numPoints_;
 	
 	wordList 	axisOrder_;
 
@@ -60,9 +60,11 @@ protected:
 public:
 
 	// - type Info
-	TypeInfo("positionOrdered");
+	TypeInfo("ordered");
 
-	positionOrdered(const dictionary& dict);
+	positionOrdered(
+		systemControl& control,
+		const dictionary& dict);
 
 	// - add this class to vCtor selection table 
 	add_vCtor(
@@ -70,33 +72,33 @@ public:
 		positionOrdered,
 		dictionary);
 
-	virtual ~positionOrdered() = default;
+	~positionOrdered() final = default;
 
 	//// - Methods 
 
-	virtual label numPoints()const
+	uint32 numPoints()const final
 	{
-		return position_.size();
+		return static_cast<uint32>(position_.size());
 	}
 
-	virtual label size()const
+	uint32 size()const final
 	{
-		return position_.size();
+		return static_cast<uint32>(position_.size());
 	}
 
-	real maxDiameter() const override
+	real maxDiameter() const final
 	{
 		return diameter_;
 	}
 	
 	// - const access to position
-	virtual const realx3Vector& position()const 
+	const realx3Vector& position()const final 
 	{
 		return position_;
 	}
 
 	// - access to position 
-	virtual realx3Vector& position()
+	realx3Vector& position() final
 	{
 		return position_;
 	}

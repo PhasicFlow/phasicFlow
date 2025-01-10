@@ -18,12 +18,14 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+namespace pFlow
+{
 
 #define VecFunc(fnName) 									\
 template<typename T, typename Allocator>										\
-inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T,Allocator>& v)	\
+inline Vector<T, Allocator> fnName(const Vector<T,Allocator>& v)	\
 {															\
-	Vector<T, Allocator> res(v.capacity(), Logical());		\
+	Vector<T, Allocator> res(v.name(), v.capacity(), 0 ,RESERVE());		\
 	for(auto& e:v)											\
 	{														\
 		res.push_back( fnName(e) );							\
@@ -31,10 +33,10 @@ inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T,Allocator>& v)	\
 	return std::move(res);									\
 }															\
 template<typename T, typename Allocator, typename indexFunc>					\
-inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T, Allocator>& v, indexFunc iFn) 	\
+inline Vector<T, Allocator> fnName(const Vector<T, Allocator>& v, indexFunc iFn) 	\
 {																		\
-	Vector<T, Allocator> res(v.capacity(), Logical());								\
-	for(label i=0; i<v.size(); i++)										\
+	Vector<T, Allocator> res(v.name(), v.capacity(), 0, RESERVE());								\
+	for(size_t i=0; i<v.size(); i++)										\
 	{																	\
 		if( iFn(i) )													\
 			res.push_back(fnName(v[i]));								\
@@ -46,20 +48,20 @@ inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T, Allocator>& v, 
 
 #define VecFunc2(fnName) 									\
 template<typename T, typename Allocator>										\
-inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T, Allocator>& v1, const Vector<T, Allocator>& v2)	\
+inline Vector<T, Allocator> fnName(const Vector<T, Allocator>& v1, const Vector<T, Allocator>& v2)	\
 {															\
-	Vector<T, Allocator> res(v1.capacity(), Logical());					\
-	for(label i=0; i<v1.size(); i++)							\
+	Vector<T, Allocator> res(v1.name(), v1.capacity(), 0 ,RESERVE());					\
+	for(size_t i=0; i<v1.size(); i++)							\
 	{														\
 		res.push_back( fnName(v1[i], v2[i]));				\
 	}														\
 	return std::move(res);									\
 }															\
 template<typename T, typename Allocator, typename indexFunc>					\
-inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T, Allocator>& v1, const Vector<T, Allocator>& v2, indexFunc iFn) 	\
+inline Vector<T, Allocator> fnName(const Vector<T, Allocator>& v1, const Vector<T, Allocator>& v2, indexFunc iFn) 	\
 {																		\
-	Vector<T, Allocator> res(v1.capacity(), Logical());							\
-	for(label i=0; i<v1.size(); i++)									\
+	Vector<T, Allocator> res(v1.name(), v1.capacity(), 0 ,RESERVE());							\
+	for(size_t i=0; i<v1.size(); i++)									\
 	{																	\
 		if( iFn(i) )													\
 			res.push_back(fnName(v1[i], v2[i]));						\
@@ -76,6 +78,8 @@ inline pFlow::Vector<T, Allocator> pFlow::fnName(const Vector<T, Allocator>& v1,
 // sinh, cosh, tanh, asinh, acosh, atanh 
 // min, max
 //* * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
 
 VecFunc(abs);
 VecFunc2(mod);
@@ -100,6 +104,9 @@ VecFunc(acosh);
 VecFunc(atanh);
 
 #undef VecFunc
+}
+
+
 
 //// special implementation of math functions 
 namespace pFlow
@@ -108,7 +115,7 @@ namespace pFlow
 template<typename T, typename Allocator>
 inline Vector<T, Allocator> pow(const Vector<T, Allocator>& v, T e)
 {
-	Vector<T, Allocator> res(v.capacity(), Logical());
+	Vector<T, Allocator> res(v.name(), v.capacity(), 0 ,RESERVE());
 	for(auto& elm:v)
 	{
 		res.push_back(pow(elm,e));
@@ -119,8 +126,8 @@ inline Vector<T, Allocator> pow(const Vector<T, Allocator>& v, T e)
 template<typename T, typename Allocator, typename indexFunc>
 inline Vector<T,Allocator> pow(const Vector<T,Allocator>& v, T e, indexFunc iFn)
 {
-	Vector<T, Allocator> res(v.capacity(), Logical());
-	for(label i=0; i<v.size(); i++)
+	Vector<T, Allocator> res(v.name(), v.capacity(), 0 ,RESERVE());
+	for(size_t i=0; i<v.size(); i++)
 	{
 		if(iFn(i))
 		{
@@ -149,7 +156,7 @@ template<typename T, typename Allocator, typename indexFunc>
 inline T min(const Vector<T, Allocator>& v, indexFunc iFn)
 {
 	T minVal(largestPositive<T>());
-	for(label i=0; i<v.size(); i++)
+	for(size_t i=0; i<v.size(); i++)
 	{
 		if(iFn(i))
 		{
@@ -175,7 +182,7 @@ template<typename T, typename Allocator ,typename indexFunc>
 inline T max(const Vector<T, Allocator>& v, indexFunc iFn)
 {
 	T maxVal(largestNegative<T>());
-	for(label i=0; i<v.size(); i++)
+	for(size_t i=0; i<v.size(); i++)
 	{
 		if(iFn(i))
 		{
@@ -201,7 +208,7 @@ template<typename T, typename Allocator, typename indexFunc>
 inline T sum(const Vector<T, Allocator>& v, indexFunc iFn)
 {
 	T s = static_cast<T>(0);
-	for(label i=0; i<v.size(); ++i)
+	for(size_t i=0; i<v.size(); ++i)
 	{
 		if(iFn(i))
 			s += v[i];

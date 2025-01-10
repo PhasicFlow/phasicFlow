@@ -19,57 +19,41 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "dynamicPointStructure.hpp"
-
+#include "systemControl.hpp"
 
 pFlow::dynamicPointStructure::dynamicPointStructure
 (
-	Time& time,
-	const word& integrationMethod
+	systemControl& control
 )
 :
-	time_(time),
-	integrationMethod_(integrationMethod),
-	pStruct_(
-		time_.emplaceObject<pointStructure>(
-			objectFile(
-				pointStructureFile__,
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS			
-				)
-			)
-		),
-	velocity_(
-		time_.emplaceObject<realx3PointField_D>(
-			objectFile(
-				"velocity",
-				"",
-				objectFile::READ_ALWAYS,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		)
-
+	pointStructure(control),
+	velocity_
+	(
+		objectFile(
+			"velocity",
+			"",
+			objectFile::READ_ALWAYS,
+			objectFile::WRITE_ALWAYS
+			),
+		*this,
+		zero3
+	),
+	velocityUpdateTimer_("velocity boundary update", &timers()),
+	integrationMethod_
+	(
+		control.settingsDict().getVal<word>("integrationMethod")
+	)
 {
-
-	this->subscribe(pStruct());
-
 	REPORT(1)<< "Creating integration method "<<
-		greenText(integrationMethod_)<<" for dynamicPointStructure."<<endREPORT;
+		Green_Text(integrationMethod_)<<" for dynamicPointStructure."<<END_REPORT;
 
-	integrationPos_ = integration::create(
+	integrationPos_ = integration::create
+	(
 		"pStructPosition",
-		time_.integration(),
-		pStruct(),
-		integrationMethod_);
-	
-	integrationVel_ = integration::create(
-		"pStructVelocity",
-		time_.integration(),
-		pStruct(),
-		integrationMethod_);
+		*this,
+		integrationMethod_,
+		pointPosition()
+	);
 
 	if( !integrationPos_ )
 	{
@@ -77,6 +61,14 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		"  error in creating integration object for dynamicPointStructure (position). \n";
 		fatalExit;
 	}
+	
+	integrationVel_ = integration::create
+	(
+		"pStructVelocity",
+		*this,
+		integrationMethod_,
+		velocity_.field()
+	);
 
 	if( !integrationVel_ )
 	{
@@ -85,48 +77,37 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		fatalExit;
 	}
 
-	
-	if(!integrationPos_->needSetInitialVals()) return;
-
-	
-		
-	auto [minInd, maxInd] = pStruct().activeRange();
-	int32IndexContainer indexHD(minInd, maxInd);
-	
-	auto n = indexHD.size();
-	auto index = indexHD.indicesHost();
-
-	realx3Vector pos(n,RESERVE());
-	realx3Vector vel(n,RESERVE());
-	const auto hVel = velocity().hostVector();
-	const auto hPos = pStruct().pointPosition().hostVector();
-
-	for(auto i=0; i<n; i++)
-	{
-		pos.push_back( hPos[index(i)]);
-		vel.push_back( hVel[index(i)]);
-	}
-
-	//output<< "pos "<< pos<<endl;
-	//output<< "vel "<< vel<<endl;
-
-	REPORT(2)<< "Initializing the required vectors for position integratoin "<<endREPORT;
-	integrationPos_->setInitialVals(indexHD, pos);
-
-	REPORT(2)<< "Initializing the required vectors for velocity integratoin\n "<<endREPORT;
-	integrationVel_->setInitialVals(indexHD, vel);
 }
 
-bool pFlow::dynamicPointStructure::predict
-(
-	real dt,
-	realx3PointField_D& acceleration
-)
-{
-	auto& pos = pStruct().pointPosition();
 
-	if(!integrationPos_().predict(dt, pos.VectorField(), velocity_.VectorField() ))return false;
-	if(!integrationVel_().predict(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
+bool pFlow::dynamicPointStructure::beforeIteration()
+{
+	if(!pointStructure::beforeIteration())return false;
+	velocityUpdateTimer_.start();
+	velocity_.updateBoundariesSlaveToMasterIfRequested();
+	integrationPos_->updateBoundariesSlaveToMasterIfRequested();
+	integrationVel_->updateBoundariesSlaveToMasterIfRequested();
+	velocityUpdateTimer_.end();
+	return true;
+}
+
+bool pFlow::dynamicPointStructure::iterate()
+{
+	return pointStructure::iterate();
+	
+	/*real dt = this->dt();
+
+    auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
+    return correct(dt, acc);*/
+}
+
+bool pFlow::dynamicPointStructure::predict(
+    real dt,
+    realx3PointField_D &acceleration)
+{
+	
+	if(!integrationPos_().predict(dt, pointPosition(), velocity_ ))return false;
+	if(!integrationVel_().predict(dt, velocity_, acceleration))return false;
 
 	return true;
 }
@@ -137,82 +118,11 @@ bool pFlow::dynamicPointStructure::correct
 	realx3PointField_D& acceleration
 )
 {
-	auto& pos = pStruct().pointPosition();
+	//auto& pos = pStruct().pointPosition();
 	
-	if(!integrationPos_().correct(dt, pos.VectorField(), velocity_.VectorField() ))return false;
+	if(!integrationPos_().correctPStruct(dt, *this, velocity_) )return false;
 	
-	if(!integrationVel_().correct(dt, velocity_.VectorField(), acceleration.VectorField()))return false;
+	if(!integrationVel_().correct(dt, velocity_, acceleration))return false;
 
 	return true;	
-}
-
-/*FUNCTION_H
-pFlow::uniquePtr<pFlow::int32IndexContainer> pFlow::dynamicPointStructure::insertPoints
-(
-	const realx3Vector& pos,
-	const List<eventObserver*>& exclusionList
-)
-{
-	auto newIndicesPtr = pointStructure::insertPoints(pos, exclusionList);
-
-	// no new point is inserted
-	if( !newIndicesPtr ) return newIndicesPtr;
-
-	if(!integrationPos_().needSetInitialVals()) return newIndicesPtr;
-
-	auto hVel = velocity_.hostVector();
-	auto n = newIndicesPtr().size();
-	auto index = newIndicesPtr().indicesHost();
-
-	realx3Vector velVec(n, RESERVE());
-	for(auto i=0; i<n; i++)
-	{
-		velVec.push_back( hVel[ index(i) ]);
-	}
-
-	integrationPos_->setInitialVals(newIndicesPtr(), pos );
-	integrationVel_->setInitialVals(newIndicesPtr(), velVec );
-	
-	return newIndicesPtr;
-
-}*/
-
-
-bool pFlow::dynamicPointStructure::update(
-	const eventMessage& msg) 
-{
-	if( msg.isInsert())
-	{
-		
-		if(!integrationPos_->needSetInitialVals())return true;
-
-		const auto indexHD = pStruct().insertedPointIndex();
-
-	
-		auto n = indexHD.size();
-
-		if(n==0) return true;
-
-		auto index = indexHD.indicesHost();
-
-		realx3Vector pos(n,RESERVE());
-		realx3Vector vel(n,RESERVE());
-		const auto hVel = velocity().hostVector();
-		const auto hPos = pStruct().pointPosition().hostVector();
-
-		for(auto i=0; i<n; i++)
-		{
-			pos.push_back( hPos[index(i)]);
-			vel.push_back( hVel[index(i)]);
-		}
-
-
-		
-		integrationPos_->setInitialVals(indexHD, pos);
-
-		integrationVel_->setInitialVals(indexHD, vel);		
-
-	}
-
-	return true;
 }

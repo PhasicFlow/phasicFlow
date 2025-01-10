@@ -29,9 +29,11 @@ Licence:
 #include "error.hpp"
 #include "uniquePtr.hpp"
 #include "stdAlgorithms.hpp"
-#include "indexContainer.hpp"
+#include "span.hpp"
 #include "iOstream.hpp"
 #include "iIstream.hpp"
+
+#include "stdVectorHelper.hpp"
 
 #ifndef __RESERVE__
 #define __RESERVE__
@@ -40,7 +42,7 @@ Licence:
 
 namespace pFlow
 {
-
+ 
 
 template<typename T, typename Allocator>
 class Vector;
@@ -48,18 +50,7 @@ class Vector;
 #include "VectorFwd.hpp"
 
 
-template <class T>
-class noConstructAllocator
-    : public std::allocator<T>
-{
-public:
-    using std::allocator<T>::allocator;
 
-    template <class U, class... Args> void construct(U*, Args&&...) {}
-};
-
-template<typename T>
-using vecAllocator = std::allocator<T>;
 
 template<typename T, typename Allocator = vecAllocator<T> >
 class Vector
@@ -68,109 +59,77 @@ class Vector
 {
 public:
 	
-	typedef Vector<T, Allocator>					VectorType;
+	using VectorType 		= Vector<T, Allocator>;
 
-	typedef typename std::vector<T, Allocator>		vectorType;
+	using vectorType 		= typename std::vector<T, Allocator>;
 
-	typedef typename vectorType::iterator 			iterator;
+	using iterator 			= typename vectorType::iterator;
 	
-	typedef typename vectorType::const_iterator 	constIterator;
+	using const_iterator 	= typename vectorType::const_iterator;
 	
-	typedef typename vectorType::reference 			reference;
+	using reference 		= typename vectorType::reference;
 	
-	typedef typename vectorType::const_reference 	constReference;
+	using const_reference 	= typename vectorType::const_reference;
 	
-	typedef  T 										valueType; 		
+	using value_type 		= T; 		
 
-	typedef  T* 									pointer;
+	using pointer 			= T *;
 
-	typedef const T*  								constPointer;
+	using const_pointer 	= const T *;
 
-	typedef typename std::initializer_list<T> 		initList;
+	using init_list 		= typename std::initializer_list<T>;
 
-protected:
+private:
 
 	// - name of the vector  
 	word name_;
 
-	static inline size_t getVectorStride(const size_t& len)
-	{
-		size_t stride = 1;
-		if( len < 6 ) 		stride = len;
-		else if( len <16 )  stride = 3;
-		else if( len < 31)  stride = 2;
-		else				stride = 1;
-
-		return stride;
-	}
 
 	static constexpr bool  isHostAccessible_ = true;
 
-	constexpr static inline const char* memoerySpaceName()
-  	{
-  		return "std";
-  	}
+	
   	
 
 public:
 
 	// - Type info
-	TypeInfoTemplateNV2("Vector", T, memoerySpaceName());
+	TypeInfoTemplateNV111("Vector", T, memoerySpaceName());
 
 	//// - Constructors
 
-		// - empty Vector
+		/// Empty Vector
 		inline Vector()
 		:
 			Vector("Vector")
 		{}
 
-		inline Vector(const word& name)
+
+		/// Empty Vector with a name 
+		inline 
+		explicit Vector(const word& name)
 		:
 			name_(name)
 		{}
-		// - with sepcified length
-		inline Vector(const size_t len)
-		:
-			Vector("Vector",len)
-		{}
 
-		// - with specified length and name
-		inline Vector(const word& name, size_t len)
+		
+		/// Vector with specified length and name
+		inline 
+		Vector(const word& name, size_t len)
 		:
 			vectorType(len),
 			name_(name)
-		{
-			
-		}
-
-		// - with length and value
-		inline Vector(size_t len, const T& val)
-		:
-			Vector("Vector", len, val)
 		{}
 
-		inline Vector(const word& name, size_t len, const T& val)
+		/// Vector with name, length and value
+		inline 
+		Vector(const word& name, size_t len, const T& val)
 		:
 			Vector(name, len)
 		{
 			this->assign(len, val);
 		}
 
-		// - zero length with specified capacity, use Logical
-		//   to make it different from previous constructor.
-		inline Vector(const size_t cap, RESERVE ):
-			Vector("Vector", cap, 0, RESERVE())
-		{
-		}
-
-		inline Vector(const size_t cap, const size_t len, RESERVE )
-		:
-			Vector("Vector", cap, len, RESERVE())
-		{
-			
-		}
-
+		/// Vector with name, size and reserved capacity 
 		Vector(const word& name, size_t cap, size_t len, RESERVE ):
 			name_(name)
 		{
@@ -178,142 +137,253 @@ public:
 			this->resize(len);
 		}
 
-		inline Vector(const size_t cap, const size_t len, const T& val, RESERVE )
-		{
-			name_ = "Vector";
-			reserve(cap);
-			this->assign(len, val);
-		}
 
-
-		// from initializer list 
-		inline Vector(const initList &l)
+		/// Vector from name and initializer list 
+		inline 
+		Vector(const word& name, const init_list &l)
 		:
-			vectorType(l)
+			vectorType(l),
+			name_(name)
 		{}
 
-		// - from src and a new name
-		inline Vector(const word name, const Vector<T>& src):
+		/// Construct with a name and form std::vector (host memory)
+		inline Vector(const word& name, const vectorType& src)
+		:
 			vectorType(src),
 			name_(name)
 		{}
 
-		// copy construct 
-		inline Vector(const VectorType& src) = default;
-		
-		// move construct 
-		inline Vector( VectorType && mv) = default;
-
-		inline Vector(const vectorType& src)
+		/// Construct with a name and form std::vector (host memory)
+		/// and with a desired capacity. 
+		inline Vector(const word& name, const vectorType& src, size_t cap)
 		:
-			vectorType(src),
-			name_("Vector")
+			Vector(name, cap, src.size(), RESERVE())
 		{
-			
+			this->assign(src.begin(), src.end());
 		}
-		
-		// copy assignment
+
+		/// Copy construct 
+		inline Vector(const VectorType& src) = default;
+
+		/// Copy from src with a new name 
+		inline Vector(const word& name, const Vector<T>& src):
+			vectorType(src),
+			name_(name)
+		{}
+
+		/// Copy assignment
 		inline VectorType& operator=( const VectorType& rhs ) = default;
 
+		/// Copy assignment from std::vector 
 		inline VectorType& operator=(const vectorType& rhs)
 		{
 			Vector::assign(rhs.begin(), rhs.end());
 			return *this;
 		}
-		
-		// move assignment 
-		inline VectorType& operator=( VectorType && mv) = default;
+
+		/// Move construct 
+		Vector( VectorType && mv) noexcept= default;
 	
-		// scalar assignment 
+		/// Move assignment 
+		VectorType& operator=( VectorType && mv)noexcept = default;
+	
+		/// Scalar assignment 
 		inline void operator=(const T& val)
 		{
 			fill(val);
 		}
 
-		inline ~Vector()
-		{
-			vectorType::clear();
-		}
+		/// Destructor 
+		~Vector() = default;
+		
 
+		/// Clone as a uniquePtr
 		inline uniquePtr<VectorType> clone() const
 		{
 			return makeUnique<VectorType>(*this);
 		}
 
+		/// Clone as a pointer 
 		inline VectorType* clonePtr()const
 		{
-			return new VectorType(*this);
+			uniquePtr<VectorType> Ptr = makeUnique<VectorType>(*this);
+			return Ptr.release();
 		}
 
-	inline auto clear()
+	
+	//// - Methods 
+
+		/// Access to this, mostly used by derived classes 
+		const VectorType& VectorField() const
+		{
+			return *this;
+		}
+	 
+		VectorType& VectorField()
+		{
+			return *this;
+		}
+
+		const vectorType& vectorField()const
+		{
+			return *this;
+		}
+
+		vectorType& vectorField()
+		{
+			return *this;
+		}
+
+		auto& deviceVectorAll()
+		{
+			return *this;
+		}
+
+		const auto& deviceVectorAll()const
+		{
+			return *this;
+		}
+
+		auto& deviceVector()
+		{
+			return *this;
+		}
+
+		const auto& deviceVector()const
+		{
+			return *this;
+		}
+
+
+		/// Name of the vector 
+		const word& name()const
+		{
+			return name_;
+		}
+
+		/// Size of the vector 
+		inline auto size()const
+		{
+			return vectorType::size();
+		}
+
+		/// Capacity of the vector 
+		inline auto capacity()const
+		{
+			return vectorType::capacity();
+		}
+
+		/// If vector is empty 
+		inline bool empty()const
+		{
+			return vectorType::empty();
+		}
+
+		/// Reserve capacity for vector 
+		/// Preserve the content.
+		inline void reserve(size_t cap)
+		{
+			vectorType::reserve(cap);
+		}
+
+		// - fill the whole content of vector, [begin, end), with val 
+		void fill( const T& val);
+
+		/// fill the content in range [start, end)
+		void fill( uint32 start, uint32 end, const T& val);
+
+		inline
+		auto getSpan()
+		{
+			return span<T>(this->data(), this->size());
+		}
+		
+		inline 
+		auto getSpan()const
+		{
+			return span<T>(const_cast<T*>(this->data()), this->size());
+		}
+
+		static constexpr bool isHostAccessible()
+		{
+			return isHostAccessible_;
+		}
+
+	void operator +=( const T& val);
+	void operator -=( const T& val);
+	void operator *=( const T& val);
+	void operator /=( const T& val);
+
+	void operator +=( const VectorType& v );
+	void operator -=( const VectorType& v );
+	void operator /=( const VectorType& v );
+	void operator *=( const VectorType& v );
+
+	VectorType operator -()const;
+
+	bool read(iIstream& is)
 	{
-		return vectorType::clear();
+		return readStdVector(is, vectorField());
+	}
+	bool write(iOstream& os)const
+	{
+		return writeStdVector(os, vectorField());
 	}
 
-	// access to this, mostly used by derived classes 
-	const VectorType& VectorField() const
+	bool read(iIstream& is, const IOPattern& iop)
 	{
-		return *this;
-	}
- 
-	VectorType& VectorField()
-	{
-		return *this;
+		return readStdVector(is, vectorField(), iop);
 	}
 
-	const vectorType& vectorField()const
+	bool write(iOstream& os, const IOPattern& iop)const
 	{
-		return *this;
+		return writeStdVector(os, vectorField(), iop);
 	}
 
-	vectorType& vectorField()
+	static
+	constexpr const char* memoerySpaceName()
+  	{
+  		return "std";
+  	}
+};
+
+
+template<typename T, typename Allocator>
+inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
+{
+	if( !ivec.read(is) )
 	{
-		return *this;
+		ioErrorInFile (is.name(), is.lineNumber());
+		fatalExit;
 	}
+	return is;
+}
 
-	auto& deviceVectorAll()
+template<typename T, typename Allocator> 
+inline iOstream& operator << (iOstream& os, const Vector<T, Allocator>& ovec )
+{	
+	if( !ovec.write(os) )
 	{
-		return *this;
+		ioErrorInFile(os.name(), os.lineNumber());
+		fatalExit;
 	}
+	return os; 
+}
 
-	const auto& deviceVectorAll()const
-	{
-		return *this;
-	}
 
-	auto& deviceVector()
-	{
-		return *this;
-	}
+} // pFlow
 
-	const auto& deviceVector()const
-	{
-		return *this;
-	}
+
+#include "VectorI.hpp"
+#include "Vector.cpp"
+#include "VectorMath.hpp"
+#include "VectorAlgorithm.hpp"
+
+#endif
 
 
 
-	const word& name()const
-	{
-		return name_;
-	}
-
-	inline auto size()const
-	{
-		return vectorType::size();
-	}
-
-	inline auto capacity()const
-	{
-		return vectorType::capacity();
-	}
-
-	inline auto reserve(label len)
-	{
-		return vectorType::reserve(len);
-	}
-
-	// - delete elemens of vector based on sorted indices 
+	/*// - delete elemens of vector based on sorted indices 
 	//   return false if out of range
 	bool deleteElement_sorted(const Vector<label>& indices );
 
@@ -346,83 +416,4 @@ public:
 
 	// - set or insert a new element into the vecor 
 	//   return false if it fails 
-	inline bool insertSetElement(int32 idx, const T& val);
-
-	// - fill the whole content of vector, [begin, end), with val 
-	inline void fill( const T& val);
-
-	static constexpr bool isHostAccessible()
-	{
-		return isHostAccessible_;
-	}
-
-	inline void operator +=( const T& val);
-	inline void operator -=( const T& val);
-	inline void operator *=( const T& val);
-	inline void operator /=( const T& val);
-
-	inline void operator +=( const VectorType& v );
-	inline void operator -=( const VectorType& v );
-	inline void operator /=( const VectorType& v );
-	inline void operator *=( const VectorType& v );
-
-	inline VectorType operator -()const;
-
-	// from iIstream and specified size 
-	//Vector(iIstream & is, size_t len);
-
-	// from iIstream and free size
-	Vector(iIstream& is);
-
-	bool readVector(iIstream& is, size_t len=0);
-
-	bool writeVector(iOstream& os) const;
-
-	bool read(iIstream& is)
-	{
-		return readVector(is);
-	}
-
-	bool write(iOstream& os)const
-	{
-		return writeVector(os);
-	}
-
-};
-
-
-template<typename T, typename Allocator>
-inline iIstream& operator >> (iIstream & is, Vector<T, Allocator> & ivec )
-{
-	if( !ivec.readVector(is) )
-	{
-		ioErrorInFile (is.name(), is.lineNumber());
-		fatalExit;
-	}
-	return is;
-}
-
-template<typename T, typename Allocator> 
-inline iOstream& operator << (iOstream& os, const Vector<T, Allocator>& ovec )
-{
-	
-	if( !ovec.writeVector(os) )
-	{
-		ioErrorInFile(os.name(), os.lineNumber());
-		fatalExit;
-	}
-
-	return os; 
-}
-
-
-
-} // pFlow
-
-
-#include "VectorI.hpp"
-#include "Vector.cpp"
-#include "VectorMath.hpp"
-#include "VectorAlgorithm.hpp"
-
-#endif
+	inline bool insertSetElement(int32 idx, const T& val);*/

@@ -222,16 +222,6 @@ pFlow::iIstream& pFlow::iTstream::read
     return *this;
 }
 
-pFlow::iIstream& pFlow::iTstream::read
-(
-    int16& val
-)
-{
-    notImplementedFunction;
-    fatalExit;
-    CONSUME_PARAM(val);
-    return *this;
-}
  
 pFlow::iIstream& pFlow::iTstream::read
 (
@@ -246,7 +236,7 @@ pFlow::iIstream& pFlow::iTstream::read
 
 pFlow::iIstream& pFlow::iTstream::read
 (
-    label& val
+    uint64& val
 )
 {
     notImplementedFunction;
@@ -268,7 +258,7 @@ pFlow::iIstream& pFlow::iTstream::read
 
 pFlow::iIstream& pFlow::iTstream::read
 (
-    uint16& val
+    uint8& val
 )
 {
     notImplementedFunction;
@@ -319,6 +309,10 @@ void pFlow::iTstream::rewind()
     setGood();
 }
 
+void pFlow::iTstream::seek(size_t pos) 
+{
+    notImplementedFunction;
+}
 
 void pFlow::iTstream::reset()
 {
@@ -326,6 +320,12 @@ void pFlow::iTstream::reset()
     tokenList_.clear();
     setFirstToken();
     setGood();
+}
+
+size_t pFlow::iTstream::tell() 
+{
+    notImplementedFunction;
+    return static_cast<size_t>(-1);
 }
 
 const pFlow::tokenList& pFlow::iTstream::tokens()const

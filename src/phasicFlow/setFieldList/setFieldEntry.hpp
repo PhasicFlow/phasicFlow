@@ -65,48 +65,34 @@ public:
 		bool checkForTypeAndValueAll()const;
 		
 		template <typename Type>
-		void* setPointFieldDefaultValueNew
+		uniquePtr<pointField_H<Type>> 
+			setPointFieldDefaultValueNew
 		(
-			repository& owner,
 			pointStructure& pStruct,
 			bool verbose = false
 		);
 
-		template<typename Type>
-		void* setPointFieldDefaultValueStdNew
+		uniquePtr<IOobject>
+			 setPointFieldDefaultValueNewAll
 		(
-			repository& owner,
-			pointStructure& pStruct,
-			bool verbose = false
-		);
-
-		void* setPointFieldDefaultValueNewAll
-		(
-			repository& owner,
 			pointStructure& pStruct,
 			bool verbose = false
 		);
 
 		template <typename Type>
-		void* setPointFieldSelected
+		bool setPointFieldSelected
 		(
 			repository& owner,
-			int32IndexContainer& selected,
+			uint32IndexContainer& selected,
 			bool verbose = false
 		);
 
-		template <typename Type>
-		void* setPointFieldSelectedStd
-		(
-			repository& owner,
-			int32IndexContainer& selected,
-			bool verbose = false
-		);
+		
 
-		void* setPointFieldSelectedAll
+		bool setPointFieldSelectedAll
 		(
 			repository& owner,
-			int32IndexContainer& selected,
+			uint32IndexContainer& selected,
 			bool verbose = false
 		);
 

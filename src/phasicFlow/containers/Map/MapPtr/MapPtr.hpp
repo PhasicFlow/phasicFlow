@@ -84,7 +84,7 @@ protected:
 public:
 
 	// - type info
-	TypeInfoTemplateNV("MapPtr", Key);
+	TypeInfoTemplateNV11("MapPtr", Key);
 
 	//// Contructors 
 	

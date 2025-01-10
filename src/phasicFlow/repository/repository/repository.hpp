@@ -33,7 +33,7 @@ namespace pFlow
 
 class repository
 {
-protected:
+private:
 	
 	// - repository name
 	word 		name_;
@@ -45,7 +45,7 @@ protected:
 	repository* 	 owner_;
 
 	// - sorted names of objects with object index in vector of objects
-	wordMap<IOobject>  	objects_;
+	wordMap<IOobject*>  	objects_;
 
 	// - list of repositories that this repository owns
 	// - it is not a managed list of pointers!
@@ -53,10 +53,11 @@ protected:
 
 
 	template <typename Type1>
-		word reportTypeError (IOobject& object);
+	word reportTypeError (IOobject& object)const;
 
 	template <typename Type>
-		bool checkForObjectType(IOobject& object);
+	static
+	bool checkForObjectType(IOobject& object);
 
 public:
 
@@ -100,60 +101,36 @@ public:
 		// - ref to this repository 
 		repository& thisRepository();
 		
-		// - add rep to this repository 
-		//   return false if the name already exists 
+		/// @brief add repository to this repository 
+		///   return false if the name already exists 
 		bool addToRepository(repository* rep);
 		
-		// - remove rep from the list of repositories 
-		bool removeRepository(repository* rep);
-	
+		/// @brief remove rep from the list of repositories 
+		bool removeFromRepository(repository* rep);
 
-	//// - Add/remove objects 
+        /// @brief add IOobject to this repository
+        bool addToRepository(IOobject* io);
 
-		// - insert the object into repository if it does not exist
-		//   return a refernce to underlying data object, this reference never invalidated 
-		//   until it is deleted from repository.
-		//   issue a fatal error if it is already exists
-		//   ** one time construction and no move/copy of object ** 
-		template<typename T, typename... Args>
-		T& emplaceObject(const objectFile& objf, Args&&... args);
-		
-		// - insert the object into repository if it does not exist
-		//   return a refernce to underlying data object, this reference never invalidated 
-		//   until it is deleted from repository.
-		// - if the object already exist, after type check(if consistent), return the 
-		//   reference of the existing object and create no new object. 
-		//   ** one time construction and no move/copy of object ** 
-		template<typename T, typename... Args>
-		T& emplaceObjectOrGet(const objectFile& objf, Args&&... args);
+    /// @brief remove rep from the list of repositories 
+		bool removeFromRepository(IOobject* io);
 
-		// - insert the object into repository and replace if it already exists (old object is destroyed) 
-		//   return a refernce to underlying data object, this reference never invalidated 
-		//   until it is deleted from repository.
-		//   ** one time construction and no move/copy of object ** 
-		template<typename T, typename... Args>
-		T& emplaceReplaceObject(const objectFile& objf, Args&&... args);
-		
+        repository* releaseOwner(bool fromOwner = false);
 
-		// - Insert_or_replace the IOobejct into repository and change its ownership  
-		//   to this repository, take effect only if the object does not belong to 
-		//   any other repository
-		template<typename T>
-		T& insertReplaceObject(uniquePtr<IOobject>&& ptr );
-		
+		virtual
+		bool isIncluded(const word& objName)const
+        {
+            if(owner_)
+                return owner_->isIncluded(objName);
+            return false;
+        }
 
-		// - Insert_or_replace the IOobejct into repository with new objectFile and   
-		//   change the ownership to this repository, take effect only if the object
-		//   does not belong to any other repository
-		template<typename T>
-		T& insertReplaceObject(const objectFile& objf, uniquePtr<IOobject>&& ptr );
-		
-		// - rease an object from this repository
-		bool eraseObject(const word& name)
-		{
-			return objects_.erase(name) == 1;
-		}
-
+        virtual
+        bool isExcluded(const word& objName)const 
+        {
+            if(owner_)
+                return owner_->isExcluded(objName);
+            return false;
+        }
 
 	//// - lookups and queries
 	
@@ -191,9 +168,13 @@ public:
 			}
 		}
 		
-		// - return a ref to the underlaying data in the object 
+		/// return a ref to the underlaying data in the object 
 		template<typename T>
 		T& lookupObject(const word& name);
+
+		/// return a const ref to the underlaying data in the object 
+		template<typename T>
+		const T& lookupObject(const word& name)const;
 		
 		// - search the name and return a ref to repository
 		repository& lookupRepository(const word& name);

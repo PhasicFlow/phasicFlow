@@ -36,7 +36,15 @@ namespace pFlow
 
 class dictionary;
 
-
+/**
+ * Data entry to be used in dictionries. Its format is:
+ * 
+ * ```
+ * entryName   value;
+ * 
+ * entryName2  (list of values);
+ * ```
+ */
 class dataEntry
 :
 	public iEntry
@@ -46,19 +54,19 @@ protected:
 
 	//// - data memebers
 
-		// - ref to parrent dictionary
+		/// ref to parrent dictionary
 		const dictionary& parDict_;
 
-		// - list the tokens as input token stream
+		/// list the tokens as input token stream
 		iTstream tokenStream_;
 
 
 	//// - protected member functions
 
-		// - read dataEntry from stream
+		/// read dataEntry from stream
 		bool readDataEntry(iIstream& is);
 
-		// - write dataEntry to stream
+		/// write dataEntry to stream
 		bool writeDataEntry(iOstream& os) const;
 
 public:
@@ -67,57 +75,57 @@ public:
 
 	//// - constructors
 
-		// - construct null dataEntry
+		/// construct null dataEntry
 		dataEntry();
 
-		// - construct from keyword and parDict, empty dataEntry
+		/// construct from keyword and parDict, empty dataEntry
 		dataEntry(const word& keyword, const dictionary& parDict);
 
-		// - construct from keyword, parDict and input token stream
+		/// construct from keyword, parDict and input token stream
 		dataEntry(const word& keyWord, const dictionary& parDict, const iTstream& is);
 
 		//- construct from keyword, parDict and input stream
 		dataEntry(const word& keyWord, const dictionary& parDict, iIstream& is);
 		
-		// - construct from keyword, parDict and a single token
+		/// construct from keyword, parDict and a single token
 		dataEntry(const word& keyword, const dictionary& parDict, const token& tok);
 
-		// - construct from keyword, parDict, and data of type T
+		/// construct from keyword, parDict, and data of type T
 		template<typename T>
 		dataEntry(const word& keyword, const dictionary& parDict, const T& v);
 
-		// - copy construct with new keyword and parDict
+		/// copy construct with new keyword and parDict
 		dataEntry(const word& keyword, const dictionary& parDict, const dataEntry& entry );
 		
-		// - copy construct
+		/// copy construct
 		dataEntry(const dataEntry& src )= default;
 
 
 	//// - Methods
 	
-		// - global name of entry, separated with dots
+		/// global name of entry, separated with dots
 		virtual word globalName()const;
 
 		
-		// - access to token stream
+		/// access to token stream
 		virtual iTstream& stream();
 
-		// - not permited to be called
+		/// not permited to be called
 		virtual dictionary* dictPtr();
 		
-		// - not permited to be called
+		/// not permited to be called
 		virtual const dictionary* dictPtr() const;
 		
-		// - should returen false;
+		/// should returen false;
 		virtual bool isDictionary()const;
 		
-		// - const ref to parrent dictionary 
+		/// const ref to parrent dictionary 
 		virtual const dictionary& parrentDict() const;
 
-		// - not permited to be called
+		/// not permited to be called
 		virtual dictionary& dict();
 
-		// - not permited to be called
+		/// not permited to be called
 		virtual const dictionary& dict() const;
 
 		// clone the object
@@ -132,10 +140,10 @@ public:
 
 	//// - IO operations 
 
-		// - read from stream
+		/// read from stream
 		virtual bool read(iIstream& is);
 
-		// - write to stream
+		/// write to stream
 		virtual bool write(iOstream& os) const;
 
 };

@@ -17,10 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
-
-
 #include "Istream.hpp"
 #include "token.hpp"
 #include "error.hpp"
@@ -797,12 +793,6 @@ pFlow::iIstream& pFlow::Istream::read(int32& val)
     return *this;
 }
 
-pFlow::iIstream& pFlow::Istream::read(int16& val)
-{
-    is_ >> val;
-    setState(is_.rdstate());
-    return *this;
-}
 
 pFlow::iIstream& pFlow::Istream::read(int8& val)
 {
@@ -811,7 +801,7 @@ pFlow::iIstream& pFlow::Istream::read(int8& val)
     return *this;
 }
 
-pFlow::iIstream& pFlow::Istream::read(label& val)
+pFlow::iIstream& pFlow::Istream::read(uint64& val)
 {
     is_ >> val;
     setState(is_.rdstate());
@@ -825,7 +815,7 @@ pFlow::iIstream& pFlow::Istream::read(uint32& val)
     return *this;
 }
 
-pFlow::iIstream& pFlow::Istream::read(uint16& val)
+pFlow::iIstream& pFlow::Istream::read(uint8& val)
 {
     is_ >> val;
     setState(is_.rdstate());
@@ -868,6 +858,36 @@ pFlow::iIstream& pFlow::Istream::read
     return *this;
 }
 
+size_t pFlow::Istream::findBinaryBlockStart()
+{
+    size_t pos = 0;
+    char getChar = 'a';
+    unsigned char bFlag = 255;
+    int numFound = 0;
+
+    while( is_.good() && !is_.eof() )
+    {
+        getChar = is_.get();
+        pos++;
+
+        if( numFound <3 &&
+         static_cast<unsigned char>(getChar) == bFlag ) 
+        {
+            numFound++;
+        }
+        else if(numFound == 3 && static_cast<unsigned char>(getChar) == 0 )
+        {
+            return pos;
+        }
+        else
+        {
+            numFound = 0;
+        }
+    }
+
+    return static_cast<size_t>(-1);
+}
+
 void pFlow::Istream::rewind()
 {
     lineNumber_ = 1;      // Reset line number
@@ -879,6 +899,28 @@ void pFlow::Istream::rewind()
     stdStream().rdbuf()->pubseekpos(0, std::ios_base::in);
 }
 
+void pFlow::Istream::seek(size_t pos)
+{
+    stdStream().clear();  // Clear the iostate error state flags
+    setGood();            // Sync local copy of iostate
+    resetPutBack();
+    // pubseekpos() rather than seekg() so that it works with gzstream
+    stdStream().rdbuf()->pubseekpos(pos, std::ios_base::in);
+}
+
+size_t pFlow::Istream::tell() 
+{
+
+    auto pos = static_cast<size_t>(stdStream().tellg());
+    if(stdStream().fail())
+    {
+        fatalErrorInFunction<<
+        "Error in getting current position from stream "<<
+        this->name()<<endl;
+        fatalExit;
+    }
+    return pos;
+}
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

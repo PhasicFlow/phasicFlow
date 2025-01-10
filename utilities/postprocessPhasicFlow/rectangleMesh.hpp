@@ -21,100 +21,112 @@ Licence:
 #ifndef __rectangleMesh_hpp__
 #define __rectangleMesh_hpp__
 
-#include "cells.hpp"
+#include "types.hpp"
+#include "error.hpp"
+#include "box.hpp"
+#include "IOobject.hpp"
+
+class repository;
 
 namespace pFlow
 {
 
-
-
 class rectangleMesh
 :
-	public cells<int32>
+	public IOobject
 {
-	
+private:
+
+	box 		meshBox_;
+
+	int32x3 	numCells_;
+
+	realx3 		dx_;
+
 public:
 
-	TypeInfoNV("rectangleMesh");
-	
+	TypeInfo("rectangleMesh");
 
-	INLINE_FUNCTION_HD
-	rectangleMesh(){};
-
-	INLINE_FUNCTION_HD
 	rectangleMesh(
-		const realx3& minP,
-		const realx3& maxP,
+		const box& mshBox,
 		int32 nx,
 		int32 ny,
-		int32 nz)
-	:
-	cells(
-		box(minP, maxP),
-		nx, ny, nz)
-	{}
+		int32 nz,
+		repository* rep);
+	
+	rectangleMesh(const dictionary & dict, repository* rep);
 
-	INLINE_FUNCTION_H
-	rectangleMesh(const dictionary & dict)
-	:
-	cells(
-		box(
-			dict.getVal<realx3>("min"),
-			dict.getVal<realx3>("max")),
-		dict.getVal<int32>("nx"),
-		dict.getVal<int32>("ny"),
-		dict.getVal<int32>("nz")
-		)
-	{}
-
-	INLINE_FUNCTION_HD
+	
 	rectangleMesh(const rectangleMesh&) = default;
 
-	INLINE_FUNCTION_HD
+	
 	rectangleMesh& operator = (const rectangleMesh&) = default;
 
-	INLINE_FUNCTION_HD
 	rectangleMesh(rectangleMesh&&) = default;
 
-	INLINE_FUNCTION_HD
+	
 	rectangleMesh& operator = (rectangleMesh&&) = default;
 
-	INLINE_FUNCTION_HD
-	~rectangleMesh() = default;
+	~rectangleMesh() override = default;
 
-
-	INLINE_FUNCTION_HD
 	int64 size()const
 	{
-		return this->totalCells();
+		return numCells_.x_*numCells_.y_*numCells_.z_;
 	}
 
-	INLINE_FUNCTION_HD
+	int32 nx()const
+	{
+		return numCells_.x();
+	}
+
+	int32 ny()const
+	{
+		return numCells_.y();
+	}
+
+	int32 nz()const
+	{
+		return numCells_.z();
+	}
+
 	real cellVol()const
 	{
-		auto [dx,dy,dz] = this->cellSize();
-		return dx*dy*dz;
+		return dx_.x_*dx_.y_*dx_.z_;
+	}
+	
+	realx3 minPoint()const
+	{
+		return meshBox_.minPoint();
+	}
+	
+	realx3 maxPoint()const
+	{
+		return meshBox_.maxPoint();
 	}
 
-	INLINE_FUNCTION_H
-	auto minPoint()const
+	inline
+	bool isInsideIndex(const realx3 p, int32x3 & ind )const
 	{
-		return domain().minPoint();
+		if(meshBox_.isInside(p))
+		{
+			ind = (p - meshBox_.minPoint())/dx_ ;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-	INLINE_FUNCTION_H
-	auto maxPoint()const
+	bool write(iOstream& is, const IOPattern& iop)const override
 	{
-		return domain().maxPoint();
-	}
-
-	bool read(iIstream& is)
-	{
+		notImplementedFunction;
 		return true;
 	}
 
-	bool write(iOstream& os)const
+	bool read(iIstream& is, const IOPattern& iop) override
 	{
+		notImplementedFunction;
 		return true;
 	}
 
@@ -124,7 +136,7 @@ public:
 		os<<"DIMENSIONS "<<nx()+1<<" "<< ny()+1 << " "<< nz()+1 <<endl;
 		
 		auto [x, y , z] = this->minPoint();
-		auto [dx, dy, dz] = this->cellSize();
+		auto [dx, dy, dz] = dx_;
 
 		os<<"X_COORDINATES "<< nx()+1 <<" float\n";
 		for(int32 i=0; i<nx()+1; i++)

@@ -12,7 +12,7 @@ Licence:
   granular and multiphase flows. You can redistribute it and/or modify it under
   the terms of GNU General Public License v3 or any other later versions. 
  
-  phasicFlow is distributed to help others in their research in the field of 
+  phasicFlow is distribute+d to help others in their research in the field of 
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -31,49 +31,55 @@ pFlow::uniquePtr<pFlow::iFstream> pFlow::IOfileHeader::inStream()const
 
 pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::outStream()const
 {
-
-	
 	auto osPtr = makeUnique<oFstream>(path(), outFileBinary());
 	
-	if(osPtr && owner_)
+	if(osPtr && owner())
 	{
-	 	auto outPrecision = owner_->outFilePrecision();
-	 	osPtr->precision(outPrecision);
+	 	auto outPrecision = owner()->outFilePrecision();
+	 	osPtr->precision(static_cast<int>(outPrecision));
 	}
 
 	return osPtr;
 }
 
-pFlow::IOfileHeader::IOfileHeader
-(
-	const objectFile& objf,
-	const repository* owner
-)
-:
-	objectFile(objf),
-	owner_(owner)
+pFlow::uniquePtr<pFlow::oFstream> pFlow::IOfileHeader::dummyOutStream() const
+{
+    auto osPtr = makeUnique<oFstream>( CWD()+word("dummyFile") , outFileBinary());
+    
+    if(osPtr && owner())
+	{
+	 	auto outPrecision = owner()->outFilePrecision();
+	 	osPtr->precision(static_cast<int>(outPrecision));
+	}
+
+	return osPtr;
+}
+
+pFlow::IOfileHeader::IOfileHeader(
+    const objectFile &objf)
+    : objectFile(objf)
 {}
 
 pFlow::fileSystem pFlow::IOfileHeader::path() const
 {
 	fileSystem f;
 
-	if( owner_ )
+	if( owner() )
 	{
-		f = owner_->path()/localPath();	
+		f = owner()->path()/localPath();	
 
 	}else
 	{
 		f = localPath();
 	}
-	f += name_;
+	f += name();
 	return f;
 }
 
 bool pFlow::IOfileHeader::outFileBinary()const
 {
-	if(owner_)
-		return owner_->outFileBinary();
+	if(owner())
+		return owner()->outFileBinary();
 	else
 		return false;
 }
@@ -120,6 +126,8 @@ bool pFlow::IOfileHeader::implyRead() const
 
 bool pFlow::IOfileHeader::implyWrite() const
 {
+	if( isExcluded( name() ) ) return false;
+	if( isIncluded( name() ) ) return true;
 	return isWriteAlways();
 }
 
@@ -133,10 +141,25 @@ bool pFlow::IOfileHeader::readIfPresent()const
 	return fileExist() && isReadIfPresent();
 }
 
-
-bool pFlow::IOfileHeader::writeHeader(iOstream& os, const word& typeName) const
+bool pFlow::IOfileHeader::writeHeader()const
 {
 
+	if( !this->readWriteHeader() ) return false;
+	if( !implyWrite() ) return false;
+
+	return true;
+}
+
+bool pFlow::IOfileHeader::writeHeader
+(
+	iOstream& os, 
+	const word& typeName, 
+	bool forceWrite
+) const
+{
+
+	if(!forceWrite && !writeHeader()) return true;
+	
 	writeBanner(os);
 
 	os.writeWordEntry("objectType", typeName );
@@ -158,14 +181,23 @@ bool pFlow::IOfileHeader::writeHeader(iOstream& os, const word& typeName) const
 	return true;
 }
 
-bool pFlow::IOfileHeader::writeHeader(iOstream& os) const
+bool pFlow::IOfileHeader::writeHeader(iOstream& os, bool forceWrite) const
 {
-	return writeHeader(os, objectType_);
+	return writeHeader(os, objectType_, forceWrite);
+}
+
+bool pFlow::IOfileHeader::readHeader()const
+{
+	if( !implyRead())return false;
+	if( !this->readWriteHeader() ) return false;
+    return true;
 }
 
 bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 {
-	
+
+	if(!readHeader()) return true;
+    
 	if( !is.findTokenAndNextSilent("objectName", objectName_) )
 	{
 		if(!silent)
@@ -201,7 +233,7 @@ bool pFlow::IOfileHeader::readHeader(iIstream& is, bool silent)
 	}
 
 	return true;
-}
+} 
 
 bool pFlow::IOfileHeader::writeBanner(iOstream& os)const
 {

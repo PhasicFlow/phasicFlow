@@ -33,14 +33,14 @@ pFlow::DEMSystem::DEMSystem(
 	ControlDict_()
 {
   
-  REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-	REPORT(1)<<"Host execution space is "<< greenText(DefaultHostExecutionSpace::name())<<endREPORT;
-	REPORT(1)<<"Device execution space is "<<greenText(DefaultExecutionSpace::name())<<endREPORT;
+	REPORT(0)<<"Initializing host/device execution spaces . . . \n";
+	REPORT(1)<<"Host execution space is "<< Green_Text(DefaultHostExecutionSpace::name())<<END_REPORT;
+	REPORT(1)<<"Device execution space is "<<Green_Text(DefaultExecutionSpace::name())<<END_REPORT;
 
  	// initialize Kokkos
 	Kokkos::initialize( argc, argv ); 
 
-	REPORT(0)<<"\nCreating Control repository . . ."<<endREPORT;
+	REPORT(0)<<"\nCreating Control repository . . ."<<END_REPORT;
 	Control_ = makeUnique<systemControl>(
 		ControlDict_.startTime(),
 		ControlDict_.endTime(),
@@ -87,4 +87,3 @@ pFlow::uniquePtr<pFlow::DEMSystem>
 
 	return nullptr;
 }
-

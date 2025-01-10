@@ -19,33 +19,35 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "integration.hpp"
+#include "pointStructure.hpp"
+#include "repository.hpp"
 
 pFlow::integration::integration
 (
 	const word& baseName,
-	repository& owner,
-	const pointStructure& pStruct,
-	const word& method
+	pointStructure& pStruct,
+	const word&,
+	const realx3Field_D&
 )
 :
-	owner_(owner),
-	baseName_(baseName),
-	pStruct_(pStruct)
-{
-	CONSUME_PARAM(method);
-}
+	owner_(*pStruct.owner()),
+	pStruct_(pStruct),
+	baseName_(baseName)	
+{}
 
 
 pFlow::uniquePtr<pFlow::integration> 
-	pFlow::integration::create(
+	pFlow::integration::create
+(
 		const word& baseName,
-		repository& owner,
-		const pointStructure& pStruct,
-		const word& method)
+		pointStructure& pStruct,
+		const word& method,
+		const realx3Field_D& initialValField
+)
 {
 	if( wordvCtorSelector_.search(method) )
 	{
-		return wordvCtorSelector_[method] (baseName, owner, pStruct, method);
+		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField);
 	}
 	else
 	{

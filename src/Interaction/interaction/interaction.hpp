@@ -21,9 +21,10 @@ Licence:
 #ifndef __interaction_hpp__
 #define __interaction_hpp__
 
-#include "demInteraction.hpp"
-#include "eventObserver.hpp"
-#include "interactionBase.hpp"
+#include "demComponent.hpp"
+#include "property.hpp"
+#include "observer.hpp"
+#include "systemControl.hpp"
 #include "contactSearch.hpp"
 
 
@@ -31,27 +32,26 @@ Licence:
 namespace pFlow
 {
 
+class particles;
+class geometry;
+
 class interaction
 :
-	public demInteraction,
-	public eventObserver,
-	public interactionBase
-{
-public:
+	public property,
+	public observer,
+	public demComponent
 	
-	using IdType 				= typename interactionBase::IdType;
+{
+private:
 
-	using IndexType    			= typename interactionBase::IndexType;
+	/// reference to particles object 
+	const particles& 	particles_;
 
-	using ExecutionSpace 	 	= typename interactionBase::ExecutionSpace;
+	/// reference to geometry object 
+	const geometry& 	geometry_;
 
-protected:
-
-	/// interaction file dictionary 
-	dictionary& 				fileDict_;
-
-	/// contact search object for pp and pw interactions 
-	uniquePtr<contactSearch> 	contactSearch_ = nullptr;
+	static inline
+	const message msg_ = message::ITEM_REARRANGE;
 
 public:
 
@@ -65,11 +65,10 @@ public:
 			const particles& prtcl,
 			const geometry& geom );
 		
+		~interaction() override = default;
 
-	
-		virtual ~interaction() = default;
-
-		create_vCtor(
+		create_vCtor
+		(
 			interaction,
 			systemControl,
 			(
@@ -78,21 +77,18 @@ public:
 				const geometry& geom
 			),
 			(control, prtcl, geom)
-			);
+		);
 	
-	auto& contactSearchPtr()
+	inline
+	const auto& Particles()const
 	{
-		return contactSearch_;
+		return particles_;
 	}
 
-	auto& contactSearchRef()
+	inline
+	const auto& Geometry()const
 	{
-		return contactSearch_();
-	}
-
-	const auto& fileDict()const
-	{
-		return fileDict_;
+		return geometry_;
 	}
 
 	static 

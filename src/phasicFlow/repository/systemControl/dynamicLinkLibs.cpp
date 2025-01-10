@@ -37,7 +37,7 @@ pFlow::dynamicLinkLibs::dynamicLinkLibs(
 	}
 	
 
-	REPORT(1)<< "libs are "<< greenText(libNames)<<endREPORT;
+	REPORT(1)<< "libs are "<< Green_Text(libNames)<<END_REPORT;
 
 	for(auto libName:libNames)
 	{
@@ -68,7 +68,7 @@ pFlow::dynamicLinkLibs::~dynamicLinkLibs()
 
 void* pFlow::dynamicLinkLibs::open(word libName)
 {
-	REPORT(2)<<"Loading "<< greenText(libName)<<endREPORT;
+	REPORT(2)<<"Loading "<< Green_Text(libName)<<END_REPORT;
 
 	void* handle = dlopen(libName.c_str(), RTLD_LAZY|RTLD_GLOBAL);
 	

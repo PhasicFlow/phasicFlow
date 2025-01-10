@@ -6,43 +6,74 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  	ASCII;
 /*---------------------------------------------------------------------------*/
-
 setFields
 {
-	/*
-	Default value for fields defined for particles
-	These fields should always be defined for simulations with 
-	spherical particles.
-	*/
+    /*
+		Default value for fields defined for particles
 
-	defaultValue 
-	{
-		// linear velocity (m/s)
-		velocity 	realx3 	(0 0 0);
-		
-		// linear acceleration (m/s2)
-		acceleration 	realx3 	(0 0 0);
-		
-		// rotational velocity (rad/s)
-		rotVelocity 	realx3 	(0 0 0);
-		
-		// name of the particle shape
-		shapeName 	word	smallSphere;
-	}
+		These fields should always be defined for simulations with 
 
-	selectors
-	{}
+		spherical particles.
+    */
+
+    defaultValue 
+    {
+		velocity 	    realx3    (0 0 0);       // linear velocity (m/s)
+		
+        acceleration 	realx3    (0 0 0);       // linear acceleration (m/s2)
+		
+        rVelocity	    realx3    (0 0 0);       // rotational velocity (rad/s)
+		
+	    shapeName 	    word  smallSphere;       // name of the particle shape
+    }
+
+    selectors
+    {
+	    shapeAssigne
+	    {
+	    	selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
+ 
+	    	stridedRangeInfo
+	    	{
+				begin 	    0;			         // begin index of points
+
+				end 	24000;                   // end index of points 
+
+				stride      3;	                 // stride for selector 
+	    	}
+
+	    	fieldValue                           // fields that the selector is applied to 
+	    	{
+				shapeName   word    sphere1;     // sets shapeName of the selected points to largeSphere
+	   		}
+		}
+    }
 }
 
-// positions particles 
-positionParticles
+positionParticles                                // positions particles 
 {
-        // no particle is initially in the simulation
-	method empty;
-
-        // maximum number of particles in the simulation
-	maxNumberOfParticles 25000;
 	
-	// perform initial sorting based on morton code?
-	mortonSorting Yes;
+	method 	      ordered;                       // ordered positioning
+
+	mortonSorting     Yes;                       // perform initial sorting based on morton code?  
+
+	orderedInfo
+	{
+		diameter   0.0101;                       // minimum space between centers of particles
+			 	
+		numPoints   25000;                       // number of particles in the simulation 
+		 	
+		axisOrder (x y z);                       // axis order for filling the space with particles	
+	}  
+
+	regionType cylinder;                         // other options: cylinder and sphere               
+	
+	cylinderInfo                                 // cylinder for positioning particles 
+	{
+		p1 (0.0 0.0 0.09);                       // Coordinates of bottom cylinderRegion (m,m,m)
+		
+		p2 (0.0 0.0 0.21);                       // Coordinates of top cylinderRegion (m,m,m)
+		
+		radius       0.09;                       // radius of cylinder
+	}
 }

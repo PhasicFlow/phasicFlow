@@ -25,6 +25,7 @@ Licence:
 
 #include "types.hpp"
 #include "span.hpp"
+#include "box.hpp"
 #include "virtualConstructor.hpp"
 #include "uniquePtr.hpp"
 #include "systemControl.hpp"
@@ -60,6 +61,7 @@ public:
 
 	DEMSystem(const DEMSystem&)=delete;
 
+	/// @brief no assignment 
 	DEMSystem& operator = (const DEMSystem&)=delete;
 
 	create_vCtor(
@@ -111,19 +113,34 @@ public:
 	int32 numParInDomain(int32 di)const = 0;
 	
 	virtual
-	std::vector<int32> numParInDomain()const = 0;
+	std::vector<int32> numParInDomains()const = 0;
 
 	virtual 
-	span<const int32> parIndexInDomain(int32 di)const = 0;
+	span<const int32> parIndexInDomain(int32 domIndx)const = 0;
 
 	virtual
-	span<real> parDiameter() = 0; 
+	span<real> diameter() = 0; 
+
+	virtual 
+	span<real> courseGrainFactor() = 0;
 
 	virtual
-	span<realx3> parVelocity() = 0;
+	span<realx3> acceleration()=0;
 
 	virtual
-	span<realx3> parPosition() = 0;
+	span<realx3> velocity() = 0;
+
+	virtual
+	span<realx3> position() = 0;
+
+	virtual
+	span<realx3> rAcceleration()=0;
+
+	virtual
+	span<realx3> rVelocity() = 0;
+
+	virtual
+	span<realx3> rPosition() = 0;
 
 	virtual
 	span<realx3> parFluidForce() = 0;
@@ -153,7 +170,6 @@ public:
 	bool iterate(real upToTime) = 0;
 	
 	
-
 	static 
 	uniquePtr<DEMSystem>
 		create(
@@ -161,8 +177,6 @@ public:
 			const std::vector<box>& domains, 
 			int argc, 
 			char* argv[]);
-
-
 
 };
 

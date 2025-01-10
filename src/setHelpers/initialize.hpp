@@ -23,8 +23,8 @@ Licence:
 
 // initilized and finalize should be placed in onc scope 
 REPORT(0)<<"Initializing host/device execution spaces . . . \n";
-REPORT(1)<<"Host execution space is "<< greenText(pFlow::DefaultHostExecutionSpace::name())<<endREPORT;
-REPORT(1)<<"Device execution space is "<<greenText(pFlow::DefaultExecutionSpace::name())<<endREPORT;
+REPORT(1)<<"Host execution space is "<< Green_Text(pFlow::DefaultHostExecutionSpace::name())<<END_REPORT;
+REPORT(1)<<"Device execution space is "<<Green_Text(pFlow::DefaultExecutionSpace::name())<<END_REPORT;
 
 Kokkos::initialize( argc, argv );
 {

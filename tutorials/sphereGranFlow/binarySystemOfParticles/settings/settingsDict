@@ -6,36 +6,33 @@ objectName 	settingsDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+run 	binarySystemofParticles;
 
+dt       0.00001; 	                             // time step for integration (seconds)
 
-run 			binarySystemofParticles;
+startTime    0.0; 		                         // start time for simulation 
 
-dt 				0.00001; 	// time step for integration (s)
+endTime     10.0; 		                         // end time for simulation 
 
-startTime 		0; 			// start time for simulation 
+saveInterval 0.1; 		                         // time interval for saving the simulation
 
-endTime 		10; 		// end time for simulation 
+timePrecision  6;		                         // maximum number of digits for time folder 
 
-saveInterval 	0.1; 		// time interval for saving the simulation
+g 	  (0 -9.8 0);                                // gravity vector (m/s2) 
 
-timePrecision   6;			// maximum number of digits for time folder 
+// save necessary (i.e., required) data on disk
 
-g 				(0 -9.8 0); // gravity vector (m/s2) 
+includeObjects (diameter);  
 
-/*
-	Simulation domain 
-	every particles that goes outside this domain is deleted.
-*/
-domain 
-{
-	min (-0.12 -0.12 0);
-	max (0.12   0.12 0.1);
-}
+// exclude unnecessary data from saving on disk
 
-integrationMethod 		AdamsBashforth2; 	// integration method 
+excludeObjects (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
 
-writeFormat 			ascii;
+integrationMethod 		AdamsBashforth2; 	     // integration method 
 
-timersReport 			Yes;  	// report timers?
+writeFormat 			          ascii;         // data writting format (ascii or binary)
 
-timersReportInterval   	0.01;	// time interval for reporting timers
+timersReport 			            Yes;  	     // report timers
+
+timersReportInterval   	           0.01;	     // time interval for reporting timers
+ 

@@ -42,7 +42,7 @@ bool pFlow::stlWall::readSTLWall
 		return false;
 	}
 
-	for(label i=0; i<stl.size(); i++)
+	for(uint64 i=0; i<stl.size(); i++)
 	{
 		auto it = triangles_.end();
 		triangles_.insert(it, stl.solid(i).begin(), stl.solid(i).end());

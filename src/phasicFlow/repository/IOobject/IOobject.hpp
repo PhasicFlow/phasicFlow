@@ -25,7 +25,7 @@ Licence:
 
 
 #include "IOfileHeader.hpp"
-
+#include "IOPattern.hpp"
 
 namespace pFlow
 {
@@ -36,144 +36,80 @@ class IOobject
 :
 	public	IOfileHeader
 {
-
 private:
 
-	class iObject
-	{
-	public:
+    IOPattern       ioPattern_;
 
-		virtual ~iObject()=default;
-
-		// - clone 
-		virtual uniquePtr<iObject> clone() const = 0;
-
-		virtual word typeName()const = 0;
-
-		virtual bool read_object_t(iIstream& is) = 0;
-
-		virtual bool write_object_t(iOstream& os)const = 0;
-
-	};
-
-	template<typename dataType>
-	class object_t
-	:
-		public iObject
-	{
-	public:
-		dataType 	data_;
-
-	public:
-
-		template<typename... Args,
-          		typename = std::enable_if_t<!std::is_constructible<object_t, Args&&...>::value>>
-		object_t(Args&&... args)
-		:
-			data_(std::forward<Args>(args)...)
-		{}
-
-		// cunstruct by copying data
-		object_t(const dataType& data): data_(data){}
-
-		// construct by moving data
-		//object_t(dataType&& data): data_(std::move(data)){}
-
-		
-		virtual uniquePtr<iObject> clone() const
-		{
-			return makeUnique<object_t>(*this);
-		}
-
-		virtual word typeName()const
-		{
-			return data_.typeName();
-		}
-
-		virtual bool read_object_t(iIstream& is)
-		{
-			return data_.read(is);
-		}
-
-		virtual bool write_object_t(iOstream& os)const
-		{
-			return data_.write(os);
-		}
-
-	};
-
-protected:
-
-	//// - data members
-
-		// underlaying data object 
-		uniquePtr<iObject> object_;
-
+    mutable repository* owner_;	
 
 public:
 
 	// - typeinfo
-	word typeName()const
-	{
-		return object_->typeName();
-	}
+	virtual 
+    word typeName() const = 0;
 
 	//// - Constructors
 
 		// - construct from components, transfer the ownership of iObject (object_t) to the 
 		//   onwner and read the object from file 
-		IOobject(const objectFile& objf, const repository* owner, uniquePtr<iObject>&& obj );
+		IOobject(
+            const objectFile&   objf, 
+            const IOPattern&    iop, 
+            repository*   owner);
+        
+        ~IOobject() override;
 
-		// - construct from components, transfer the ownership of IOobject to the owner (no read happens)
-		IOobject(const objectFile& objf, const repository* owner, uniquePtr<IOobject>&& obj);
-		
 		// - copy construct 
 		IOobject(const IOobject& src)=delete;	
 
 		// - move construct
-		IOobject(IOobject&& src) = default;
-
-		
-		// - make object from components, considering no owner for this object, and 
-		//   read from file 
-		//   Args are the arguments of object constructor 
-		template<typename T, typename... Args>
-		static auto make(const objectFile& objf, Args&&... args);
-		
-		// - construct object_t with the Args as the arguments of object constructor 
-		template<typename T, typename... Args>
-		static auto make_object_t(Args&&... args);
+		IOobject(IOobject&& src) = delete;
 		
 
-	//// - Access to data object 
+        inline
+        const IOPattern& ioPattern()const
+        {
+            return ioPattern_;
+        }
 
-		// - is object valid 
-		bool isObjectValid()const;
+        // - pointer to owner repository 
+        const repository* owner()const override
+        {
+            return owner_;
+        }
 
-		// - ref to data object
-		template<typename T>
-		auto& getObject();
+        repository* owner()
+        {
+            return owner_;
+        }
 
-		// - const ref to data object 
-		template<typename T>
-		const auto& getObject()const;
-	
-		
+        repository* releaseOwner(bool fromOwner = false);
+
+        
+        bool isIncluded(const word& objName)const override;
+        
+        bool isExcluded(const word& objName)const override;
+        
 
 	//// - IO operations 
 
 		// - read from file 
-		bool read(bool rdHdr = true);
+		bool readObject(bool rdHdr = true);
 
 		// - write to file 
-		bool write() const;
+		bool writeObject() const;
 
 		// - read from istream 
-		bool read(iIstream& is, bool rdHdr = true);
+		bool readObject(iIstream& is, bool rdHdr = true);
 
 		// - write to istream 
-		bool write(iOstream& os) const;
-		
+		bool writeObject(iOstream& os) const;
+
+        virtual 
+        bool write(iOstream& is, const IOPattern& iop)const = 0;
+
+        virtual 
+        bool read(iIstream& is, const IOPattern& iop) = 0;
 
 };
 

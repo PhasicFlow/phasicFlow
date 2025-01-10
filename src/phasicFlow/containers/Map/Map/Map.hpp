@@ -60,7 +60,7 @@ public:
 	using valueType 	= typename mapType::value_type;
 
 	// - type info 
-	TypeInfoTemplateNV("Map", Key);
+	TypeInfoTemplateNV11("Map", Key);
 
 	//// - Constructors
 
@@ -138,7 +138,7 @@ template<typename T>
 using wordMap = Map<word,T>;
 
 template<typename T>
-using labelMap = Map<label,T>;
+using uint64Map = Map<uint64,T>;
 
 template<typename T>
 using uint32Map = Map<uint32,T>;
@@ -155,7 +155,7 @@ template<typename T>
 inline iOstream& printKeys(iOstream& os, const wordMap<T> & m);
 
 template<typename T>
-inline iOstream& printKeys(iOstream& os, const labelMap<T> & m);
+inline iOstream& printKeys(iOstream& os, const uint64Map<T> & m);
 
 template<typename T>
 inline iOstream& printKeys(iOstream& os, const uint32Map<T> & m);

@@ -21,42 +21,44 @@ Licence:
 #include "sphereFluidParticles.hpp"
 #include "sphereFluidParticlesKernels.hpp"
 
+void pFlow::sphereFluidParticles::checkHostMemory()
+{
+	if(fluidForce_.size()!=fluidForceHost_.size())
+	{
+		resizeNoInit(fluidForceHost_, fluidForce_.size());
+		resizeNoInit(fluidTorqueHost_, fluidTorque_.size());
+	}
+}
 
 pFlow::sphereFluidParticles::sphereFluidParticles(
-	systemControl &control,
-	const property& prop
-)
-:
-	sphereParticles(control, prop),
-	fluidForce_(
-		this->time().emplaceObject<realx3PointField_HD>(
-			objectFile(
-				"fluidForce",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		),
-	fluidTorque_(
-		this->time().emplaceObject<realx3PointField_HD>(
-			objectFile(
-				"fluidTorque",
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS
-				),
-			pStruct(),
-			zero3
-			)
-		)
-{} 
+    systemControl &control,
+    const property &prop)
+    : sphereParticles(control, prop),
+      fluidForce_(
+          objectFile(
+              "fluidForce",
+              "",
+              objectFile::READ_IF_PRESENT,
+              objectFile::WRITE_ALWAYS),
+          dynPointStruct(),
+          zero3),
+      fluidTorque_(
+          objectFile(
+              "fluidTorque",
+              "",
+              objectFile::READ_IF_PRESENT,
+              objectFile::WRITE_NEVER),
+          dynPointStruct(),
+          zero3)
+{
+	checkHostMemory();
+} 
 
 bool pFlow::sphereFluidParticles::beforeIteration()
 {
 	sphereParticles::beforeIteration();
+	checkHostMemory();
+
 	return true;
 }
 
@@ -64,42 +66,40 @@ bool pFlow::sphereFluidParticles::beforeIteration()
 bool pFlow::sphereFluidParticles::iterate() 
 {
 
-	accelerationTimer_.start();
+	accelerationTimer().start();
 		pFlow::sphereFluidParticlesKernels::acceleration(
 			control().g(),
-			mass().deviceVectorAll(),
-			contactForce().deviceVectorAll(),
-			fluidForce().deviceVectorAll(),
-			I().deviceVectorAll(),
-			contactTorque().deviceVectorAll(),
-			fluidTorque().deviceVectorAll(),
-			pStruct().activePointsMaskD(),
-			accelertion().deviceVectorAll(),
-			rAcceleration().deviceVectorAll()
+			mass().deviceViewAll(),
+			contactForce().deviceViewAll(),
+			fluidForce_.deviceViewAll(),
+			I().deviceViewAll(),
+			contactTorque().deviceViewAll(),
+			fluidTorque_.deviceViewAll(),
+			pStruct().activePointsMaskDevice(),
+			accelertion().deviceViewAll(),
+			rAcceleration().deviceViewAll()
 			);
-	accelerationTimer_.end();
+	accelerationTimer().end();
 	
-	intCorrectTimer_.start();
+	intCorrectTimer().start();
 	
-		dynPointStruct_.correct(this->dt(), accelertion_);
+		dynPointStruct().correct(this->dt(), accelertion());
 	
-		rVelIntegration_().correct(this->dt(), rVelocity_, rAcceleration_);
+		rVelIntegration().correct(this->dt(), rVelocity(), rAcceleration());
 	
-	intCorrectTimer_.end();
+	intCorrectTimer().end();
 	
 	return true;
 }
 
 void pFlow::sphereFluidParticles::fluidForceHostUpdatedSync()
 {
-	fluidForce_.modifyOnHost();
-	fluidForce_.syncViews();
+	copy(fluidForce_.deviceView(), fluidForceHost_);
 	return;
 }
 
 void pFlow::sphereFluidParticles::fluidTorqueHostUpdatedSync()
 {
-	fluidTorque_.modifyOnHost();
-	fluidTorque_.syncViews();
+	copy(fluidTorque_.deviceView(), fluidTorqueHost_);
 	return;
 }

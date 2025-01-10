@@ -23,12 +23,17 @@ Licence:
 
 #include <set>
 
+#include "types.hpp"
+
 namespace pFlow
 {
 
 
 template<typename Key>
 using Set = std::set<Key,std::less<Key>,std::allocator<Key>>;
+
+using wordSet = Set<word>;
+
 
 }
 

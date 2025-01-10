@@ -17,17 +17,13 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
-
 #ifndef __iOstream_hpp__
 #define __iOstream_hpp__
-
-// based on OpenFOAM stream, with some modifications/simplifications
-// to be tailored to our needs
 
 
 #include "IOstream.hpp"
 
+/// char constants to alter output format and color 
 const inline char* defaultColor = "\033[0m";
 const inline char* blackColor   = "\033[30m";
 const inline char* redColor     = "\033[31m";
@@ -40,7 +36,13 @@ const inline char* whiteColor   = "\033[37m";
 
 const inline char* boldChar     = "\033[1m";
 
-
+#define Red_Text(text)      redColor<<text<<defaultColor
+#define Yellow_Text(text)   yellowColor<<text<<defaultColor
+#define Blue_Text(text)     blueColor<<text<<defaultColor
+#define Green_Text(text)    greenColor<<text<<defaultColor
+#define Magenta_Text(text)  magentaColor<<text<<defaultColor
+#define Cyan_Text(text)         cyanColor<<text<<defaultColor
+#define Bold_Text(text)         boldChar<<text<<defaultColor
 
 namespace pFlow
 {
@@ -48,15 +50,19 @@ namespace pFlow
 // Forward Declarations
 class token;
 
-
-
+/**
+ * Interface class for any output stream. 
+ * It is based on OpenFOAM stream, with some modifications/simplifications
+ * to be tailored to our needs
+ * 
+ */
 class iOstream
 :
     public IOstream
 {
 protected:
 
-    // Protected Data
+    //- Protected Data
 
         /// Indentation of the entry from the start of the keyword
         static constexpr const unsigned short entryIndentation_ = 16;
@@ -71,7 +77,7 @@ protected:
 public:
     
 
-    // Constructors
+    ////- Constructors
 
         /// Default
         explicit iOstream()
@@ -89,7 +95,7 @@ public:
         virtual ~iOstream() = default;
 
 
-    /// Write Functions
+    ////- Write Functions
 
         /// Write token to stream or otherwise handle it.
         /// return false if the token type was not handled by this method
@@ -118,14 +124,17 @@ public:
         /// Write int32
         virtual iOstream& write(const int32 val) = 0;
 
-        /// Write label
-        virtual iOstream& write(const label val) = 0;
+        /// Write int8
+        virtual iOstream& write(const int8 val) = 0;
+
+        /// Write uint64
+        virtual iOstream& write(const uint64 val) = 0;
 
         /// Write uint32
         virtual iOstream& write(const uint32 val) = 0;
 
-        /// Write uint16
-        virtual iOstream& write(const uint16 val) = 0;
+        /// Write uint8
+        virtual iOstream& write(const uint8 val) = 0;
 
         /// Write float
         virtual iOstream& write(const float val) = 0;
@@ -133,11 +142,17 @@ public:
         /// Write double
         virtual iOstream& write(const double val) = 0;
        
+        /// Write size_t
+        virtual iOstream& write(const size_t val) = 0;
+         
         /// Write a block of binray data 
         virtual iOstream& write(const char* binaryData, std::streamsize count) = 0;
+
+        /// Write the flag to indicate the start of a binary block
+        virtual iOstream& writeBinaryBlockFlag();
         
-    
-    // - Indent 
+        virtual void seek(size_t pos) = 0;
+    //// - Indent 
 
         /// Add indentation characters
         virtual void indent() = 0;
@@ -175,7 +190,7 @@ public:
         /// Decrement the indent level
         void decrIndent();
 
-    //- Punctuations
+    ////- Punctuations
     
         /// Write begin block group with a name
         ///  Increments indentation, adds newline.
@@ -228,7 +243,13 @@ public:
         }
 
 
-    //- Stream state functions
+    ////- Stream state functions
+
+        /// Add a new line and flush stream 
+        virtual void startOfBinaryStreaming() =0;
+
+        /// Reach end of file add a new line and flush stream 
+        virtual void endOfBinaryStreaming() = 0 ;
 
         /// Flush stream
         virtual void flush() = 0;
@@ -255,7 +276,7 @@ public:
         virtual int precision(const int p) = 0;
 
 
-    //- Member Operators
+    ////- Member Operators
 
         /// Return a non-const reference to const iOstream
         /// Needed for write functions where the stream argument is temporary:
@@ -377,17 +398,13 @@ inline iOstream& operator<<( iOstream& os, const int32& val)
     return os.write(val);
 }
 
-inline iOstream& operator<<( iOstream& os, const int16& val)
-{
-    return os.write(val);
-}
 
 inline iOstream& operator<<( iOstream& os, const int8& val)
 {
     return os.write(val);
 }
 
-inline iOstream& operator<<( iOstream& os, const label& val)
+inline iOstream& operator<<( iOstream& os, const uint64& val)
 {
     return os.write(val);
 }
@@ -397,7 +414,7 @@ inline iOstream& operator<<( iOstream& os, const uint32& val)
     return os.write(val);
 }
 
-inline iOstream& operator<<( iOstream& os, const uint16& val)
+inline iOstream& operator<<( iOstream& os, const uint8& val)
 {
     return os.write(val);
 }
@@ -412,11 +429,15 @@ inline iOstream& operator<<( iOstream& os, const double& val)
 {
     return os.write(val);
 }
+
+inline iOstream& operator<<( iOstream& os, const size_t& val)
+{
+    return os.write(val);
+}
+
 // Useful aliases for tab and newline characters
 constexpr char tab = '\t';
 constexpr char nl = '\n';
-
-
 
 
 } //  pFlow
@@ -424,4 +445,3 @@ constexpr char nl = '\n';
 
 #endif
 
-// ************************************************************************* //

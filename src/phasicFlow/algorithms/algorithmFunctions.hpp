@@ -60,37 +60,6 @@ struct minimum
       return lhs < rhs ? lhs : rhs; }
 };
 
-
-template<typename T>
-INLINE_FUNCTION_HD
-int binarySearch(const T* array, int length, const T& val)
-{
-    
-    int low = 0;            
-    int high = length - 1;  
-
-    while (low <= high) 
-    {
-        int mid = low + (high - low)/2;
-        
-        if ( array[mid] > val)
-        { 
-            high = mid - 1;  
-        }
-        else if ( array[mid] < val)
-        { 
-            low = mid + 1;        
-        }
-        else 
-        {           
-            return mid; 
-        }
-    }
-
-    return -1; // val not found in array[0, length)
-}
-
-
 } 
 
 #endif // __algorithmFunctions_hpp__

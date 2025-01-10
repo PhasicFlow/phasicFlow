@@ -37,6 +37,10 @@ Licence:
 
 #define CONSUME_PARAM(x) (void)(x);
 
+/*#if defined(pFlow_Build_Cuda) && !defined(__CUDACC__)
+#define __CUDACC__
+#endif*/
+
 #ifdef __CUDACC__
     #define INLINE_FUNCTION_HD inline __host__ __device__
     #define INLINE_FUNCTION_D  inline __device__
@@ -70,7 +74,7 @@ Licence:
 
 #define ForAll(i, container) for(auto i=0; i < container.size(); ++i)
 
-#ifdef USE_STD_PARALLEL_ALG
+#ifdef pFlow_STD_Parallel_Alg
 static inline const bool useStdParallel__ = true;
 #else
 static inline const bool useStdParallel__ = false;

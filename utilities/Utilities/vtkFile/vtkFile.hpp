@@ -34,21 +34,30 @@ class vtkFile
 {
 protected:
 
-	fileSystem dirPath_;
-
-	word       baseName_;
-
-	real  	   time_ = 0.0;
-
 	uniquePtr<oFstream>  oStream_= nullptr;
 
-	bool openStream();
+	bool 		binary_ = false;
+
+	bool		append_=false;
+
+	real		time_ = 0.0;
+
+	fileSystem dirPath_;
+
+	word		baseName_;	
+
+	bool openStream(bool wHeader);
 
 	virtual bool writeHeader();
 
 public:
 
-	vtkFile(const fileSystem dir, const word& bName, real time);
+	vtkFile(
+		const fileSystem dir, 
+		const word& bName, 
+		real time,
+		bool bnry,
+		bool append = false);
 
 	virtual ~vtkFile() = default;
 
@@ -56,7 +65,7 @@ public:
 	{
 		if(!oStream_)
 		{
-			if(!openStream())
+			if(!openStream(!append_))
 			{
 				fatalErrorInFunction<<
 				"  error in opening vtkFile "<< fileName() <<endl;
@@ -79,6 +88,12 @@ public:
 		if( oStream_().fail() )return true;
 		
 		return false;
+	}
+
+	inline 
+	bool binary()const
+	{
+		return binary_;
 	}
 
 	virtual fileSystem fileName()const;	

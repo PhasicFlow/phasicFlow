@@ -22,22 +22,26 @@ Licence:
 #define __geometryMotions_hpp__
 
 #include "geometryMotion.hpp"
-#include "fixedWall.hpp"
+#include "stationaryWall.hpp"
 #include "rotatingAxisMotion.hpp"
-#include "multiRotatingAxisMotion.hpp"
+#include "conveyorBeltMotion.hpp"
+//#include "multiRotatingAxisMotion.hpp"
 #include "vibratingMotion.hpp"
 
 
 namespace pFlow
 {
 
-typedef geometryMotion<vibratingMotion> vibratingMotionGeometry;
+using vibratingMotionGeometry = geometryMotion<vibratingMotion>;
 
-typedef geometryMotion<rotatingAxisMotion> rotationAxisMotionGeometry;
+using rotationAxisMotionGeometry = geometryMotion<rotatingAxisMotion>;
 
-typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
+using stationaryGeometry = geometryMotion<stationaryWall>;
 
-typedef geometryMotion<fixedWall> fixedGeometry;
+using conveyorBeltMotionGeometry = geometryMotion<conveyorBeltMotion>;
+
+//typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
+
 
 
 

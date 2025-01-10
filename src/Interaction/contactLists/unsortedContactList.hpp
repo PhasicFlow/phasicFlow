@@ -17,9 +17,10 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __unsortedContactList_hpp__
 #define __unsortedContactList_hpp__ 
+
+#include "unsortedPairs.hpp"
 
 namespace pFlow
 {
@@ -72,7 +73,7 @@ protected:
 	using rpFillPairs = Kokkos::RangePolicy<
 		ExecutionSpace,
 		Kokkos::Schedule<Kokkos::Static>,
-		Kokkos::IndexType<int32>,
+		Kokkos::IndexType<uint32>,
 		TagReFillPairs>;
 
 
@@ -80,7 +81,7 @@ public:
 
 	TypeInfoNV("unsortedContactList");
 
-	unsortedContactList(int32 capacity=1)
+	explicit unsortedContactList(uint32 capacity=1)
 	:
 		UnsortedPairs(capacity),
 		values_("values", UnsortedPairs::capacity()),
@@ -94,7 +95,8 @@ public:
 		// swap conainer and values 
 		swapViews(values0_, values_);
 		swapViews(container0_, this->container_);
-		return UnsortedPairs::beforeBroadSearch();
+		UnsortedPairs::beforeBroadSearch();
+		return true;
 	}
 
 	bool afterBroadSearch()
@@ -109,7 +111,7 @@ public:
 			rpFillPairs(0,this->capacity()),
 			*this);
 		Kokkos::fence();
-
+		
 		return true; 
 	}
 
@@ -122,7 +124,7 @@ public:
 	INLINE_FUNCTION_HD
 	bool getValue(const PairType& p, ValueType& val)const
 	{
-		if(auto idx = this->find(p); idx>=0)
+		if(auto idx = this->find(p); idx!=static_cast<uint32>(-1))
 		{
 			val = getValue(idx); 
 			return true;
@@ -131,7 +133,7 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	void setValue(int32 idx, const ValueType& val)const
+	void setValue(uint32 idx, const ValueType& val)const
 	{
 		values_[idx] = val;
 	}
@@ -139,7 +141,7 @@ public:
 	INLINE_FUNCTION_HD
 	bool setValue(const PairType& p, const ValueType& val)const
 	{
-		if(auto idx = this->find(p); idx>=0)
+		if(uint32 idx = this->find(p); idx!=static_cast<uint32>(-1))
 		{
 			setValue(idx, val);
 			return true;;
@@ -148,13 +150,13 @@ public:
 	}
 
 	INLINE_FUNCTION_HD
-	void operator()(TagReFillPairs, int32 idx)const
+	void operator()(TagReFillPairs, uint32 idx)const
 	{
 		if( this->isValid(idx) )
 		{
-			if( int32 idx0 = 
+			if( uint32 idx0 = 
 					container0_.find(this->getPair(idx));
-					idx0>=0 )
+					idx0!= static_cast<uint32>(-1) )
 			{
 				values_[idx] = values0_[idx0];
 			}

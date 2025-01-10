@@ -39,77 +39,211 @@ bool pFlow::InsertionRegion<ShapeType>::checkForContact
 template<typename ShapeType>
 pFlow::InsertionRegion<ShapeType>::InsertionRegion
 (
-	const dictionary& dict,
+	const word& name,
+	const insertion& instn, 
 	const ShapeType& shapes
 )
 :
-	insertionRegion(dict),
+	insertionRegion(name, instn),
 	shapes_(shapes)
-{
-
-}
+{}
 
 
 template<typename ShapeType>
 bool pFlow::InsertionRegion<ShapeType>::insertParticles
 (
-	real currentTime,
+	uint32 iter, 
+	real t,
 	real dt,
-	wordVector& names,
-	realx3Vector& pos,
+	wordVector& 	names,
+	realx3Vector& 	positions,
 	bool& insertionOccured
 )
 {
 	insertionOccured = false;
 
-	if(!insertionTime( currentTime, dt)) return true;
+	if(!insertionTime(iter, t, dt)) return true;
 
-	size_t newNum = numberToBeInserted(currentTime);
-	
+	uint32 newNum = numberToBeInserted(iter, t, dt);
 	if(newNum == 0) return true;
 
-	names.reserve(max(newNum,names.capacity()));
-	pos.reserve(max(newNum,pos.capacity()));
-	names.clear();
-	pos.clear();
-
-	realVector diams(newNum, RESERVE());
-
-	mixture_->getNextShapeNameN(newNum, names);
-
-	if(!shapes_.shapeToDiameter(names,diams))
+	// get the internal box 
+	auto internalBox =  pStruct().internalDomainBox();
+	if( !(internalBox.minPoint() < internalBox.maxPoint()))
 	{
-		fatalErrorInFunction<<
-		"  error occured in insertion region "<< name() << 
-		" while converting shapes to diameter. \n";
+		WARNING<<"Minimum point of internal point is not lower than "<<
+		"the maximum point \n"<<
+		"minimum point: "<< internalBox.minPoint()<<
+		"\nmaximum point:"<<internalBox.maxPoint()<<END_WARNING;
+
 		return false;
 	}
 
-	size_t n = 0;
+	
 
-	for(label iter=0; iter< 10*newNum ; ++iter)
+	/// reserve enough space 
+	names.reserve(max(newNum,names.capacity()));
+	names.clear();
+	
+	positions.reserve(max(newNum,positions.capacity()));
+	positions.clear();
+
+	auto allPositions = realx3Vector("allPositions");
+	auto allDiameters = realVector("allDiameters");
+
+	auto& mix = mixture();
+	auto& pReg = pRegion();
+
+	real maxDiam = shapes_.maxBoundingSphere();
+	auto minP = pReg.minPoint() - maxDiam;
+	auto maxP = pReg.maxPoint() + maxDiam;
+	
+	if(Insertion().checkForCollision())
 	{
-		if( !(n < newNum) ) 
-		{
-			addToNumInserted(newNum);
-			insertionOccured = true;
-			return true;
-		}
-		realx3 p = pRegion_().peek();
-		real d = diams[pos.size()];
-		if( !checkForContact(pos, diams, p, d) )
-		{
-			pos.push_back(p);
-			n++;
-		}
-
+		// check for collision with already inserted particles 	
+		// so, use selector to select particles in the simulation 
+		auto bDict = dictionary("boxInfo");
+		bDict.add("min", minP);
+		bDict.add("max", maxP);
+		
+		auto selector = pStructSelector::create(
+			"box", 
+			pStruct(), 
+			bDict);
+		
+		allPositions = selector().selectedPointPositions();
+		allDiameters = selectedFieldVals<real>
+		(
+			selector(), 
+			Insertion().diameterName()
+		);
 	}
+	
+	auto collCheck = collisionCheck( 
+		{minP, maxP}, 
+		maxDiam,
+		allPositions,
+		allDiameters);
 
-	fatalErrorInFunction<<
-	"  Cannot insert "<< newNum << " new particles from region "<< name()<<". \n"
-	"  pFlow could position only "<< n<< " particles in this region. \n";
-	addToNumInserted(n);
-	insertionOccured = false;
-	return false;
+	uint32 numInserted = 0;
 
+	uint32 idx;
+	word name = mix.getNextShapeName();
+	shapes_.shapeNameToIndex(name, idx);
+	real d = shapes_.boundingDiameter(idx);
+
+	for(uint32 i=0; i< 100*newNum ; ++i)
+	{
+		realx3 p = pReg.peek();
+		// check if point is inside internal box 
+		if(!internalBox.isInside(p))continue;
+
+		if( collCheck.checkPoint( p, d) )
+		{
+			names.push_back(name);
+			positions.push_back(p);
+			numInserted++;
+			if( numInserted == newNum ) break;
+			
+			// add this new particle to collision check set 
+			allDiameters.push_back(d);
+			allPositions.push_back(p);
+			collCheck.mapLastAddedParticle();
+							
+			// obtain next shape name and diameter 
+			name = mix.getNextShapeName();
+			shapes_.shapeNameToIndex(name, idx);
+			d = shapes_.boundingDiameter(idx);
+		}
+		
+	}
+	
+	insertionOccured = true;
+	addToNumInserted(numInserted);
+	return numInserted == newNum;
 }
+
+
+
+/*if(!checkForCollision)
+	{
+		realVector diams("diams", newNum, 0, RESERVE());
+		
+		uint32 idx;
+		word name = mix.getNextShapeName();
+		shapes_.shapeNameToIndex(name, idx);
+		real d = shapes_.boundingDiameter(idx);	
+
+		for(uint32 i=0; i< 100*newNum ; ++i)
+		{
+			realx3 p = pReg.peek();
+			// check if point is inside internal box 
+			if(!internalBox.isInside(p))continue;
+
+			if( !checkForContact(positions, diams, p, d) )
+			{
+				names.push_back(name);
+				positions.push_back(p);
+				diams.push_back(d);
+				numInserted++;
+
+				if( numInserted == newNum ) break;
+				
+				name = mix.getNextShapeName();
+				shapes_.shapeNameToIndex(name, idx);
+				d = shapes_.boundingDiameter(idx);
+			}
+		}
+	}
+	else
+	{
+		real maxDiam = shapes_.maxBoundingSphere();
+		auto minP = pReg.minPoint() - maxDiam;
+		auto maxP = pReg.maxPoint() + maxDiam;
+		auto bDict = dictionary("boxInfo");
+		bDict.add("min", minP);
+		bDict.add("max", maxP);
+		auto selector = pStructSelector::create(
+			"box", 
+			pStruct(), 
+			bDict);
+			
+		auto allPositions = selector().selectedPointPositions();
+		auto allDiameters = selectedFieldVals<real>(selector(), "diameter");
+		auto collCheck = collisionCheck(
+			{minP, maxP},
+			maxDiam,
+			allPositions,
+			allDiameters);
+		
+		uint32 idx;
+		word name = mix.getNextShapeName();
+		shapes_.shapeNameToIndex(name, idx);
+		real d = shapes_.boundingDiameter(idx);
+
+		for(uint32 i=0; i< 100*newNum ; ++i)
+		{
+			realx3 p = pReg.peek();
+			// check if point is inside internal box 
+			if(!internalBox.isInside(p))continue;
+
+			if( collCheck.checkPoint( p, d) )
+			{
+				names.push_back(name);
+				positions.push_back(p);
+				numInserted++;
+				if( numInserted == newNum ) break;
+				
+				// add this new particle to collision check set 
+				allDiameters.push_back(d);
+				allPositions.push_back(p);
+				collCheck.mapLastAddedParticle();
+								
+				// obtain next shape name and diameter 
+				name = mix.getNextShapeName();
+				shapes_.shapeNameToIndex(name, idx);
+				d = shapes_.boundingDiameter(idx);
+			}
+			
+		}
+	}*/

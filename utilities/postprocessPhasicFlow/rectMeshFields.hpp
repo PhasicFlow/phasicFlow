@@ -27,17 +27,17 @@ namespace pFlow
 {
 
 template<typename T>
-using rectMeshField_H 		= rectMeshField<T,HostSpace>;
+using rectMeshField_H 		= rectMeshField<T>;
 
-using int8RectMeshField_H  = rectMeshField<int8, HostSpace>;
+using int8RectMeshField_H  = rectMeshField<int8>;
 
-using int32RectMeshField_H 	= rectMeshField<int32, HostSpace>;
+using int32RectMeshField_H 	= rectMeshField<int32>;
 
-using int64RectMeshField_H  = rectMeshField<int64, HostSpace>;
+using int64RectMeshField_H  = rectMeshField<int64>;
 
-using realRectMeshField_H	= rectMeshField<real, HostSpace>;
+using realRectMeshField_H	= rectMeshField<real>;
 
-using realx3RectMeshField_H	= rectMeshField<realx3, HostSpace>;
+using realx3RectMeshField_H	= rectMeshField<realx3>;
 
 }
 
