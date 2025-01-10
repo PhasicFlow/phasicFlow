@@ -1,5 +1,0 @@
-<map id="flags" name="flags">
-<area shape="rect" id="node1" title="Return flags of stream." alt="" coords="116,31,171,57"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1IOstream.html#a7496d7abe05bdd8cffe2be14798ac34f" title="Set flags of stream." alt="" coords="13,5,60,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1IOstream.html#a6215a425470b1a58a0f3e0407f8683ca" title="Unset flags of stream." alt="" coords="5,56,68,83"/>
-</map>

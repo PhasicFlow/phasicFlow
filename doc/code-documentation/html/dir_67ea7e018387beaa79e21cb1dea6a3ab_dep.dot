@@ -1,0 +1,20 @@
+digraph "src/phasicFlow/algorithms" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_cd7a5046d028e114fc17b2ebc2bd02d2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="phasicFlow" fontname="Helvetica", fontsize="10", URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"]
+  dir_67ea7e018387beaa79e21cb1dea6a3ab [shape=box, label="algorithms", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_67ea7e018387beaa79e21cb1dea6a3ab.html"];
+  }
+  dir_e8baec020e471dff3bc06b812491e6c5 [shape=box label="types" fillcolor="white" style="filled" color="red" URL="dir_e8baec020e471dff3bc06b812491e6c5.html"];
+  dir_5f6559faa080c0b07ec2a71fd7e912fc [shape=box label="globals" URL="dir_5f6559faa080c0b07ec2a71fd7e912fc.html"];
+  dir_9522ed5fbd948bd0f422a9c3c511773e [shape=box label="Kokkos" URL="dir_9522ed5fbd948bd0f422a9c3c511773e.html"];
+  dir_67ea7e018387beaa79e21cb1dea6a3ab->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="1", labeldistance=1.5 headhref="dir_000082_000175.html"];
+  dir_67ea7e018387beaa79e21cb1dea6a3ab->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="2", labeldistance=1.5 headhref="dir_000082_000117.html"];
+  dir_67ea7e018387beaa79e21cb1dea6a3ab->dir_9522ed5fbd948bd0f422a9c3c511773e [headlabel="1", labeldistance=1.5 headhref="dir_000082_000118.html"];
+  dir_e8baec020e471dff3bc06b812491e6c5->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="6", labeldistance=1.5 headhref="dir_000175_000117.html"];
+  dir_5f6559faa080c0b07ec2a71fd7e912fc->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="1", labeldistance=1.5 headhref="dir_000117_000175.html"];
+  dir_9522ed5fbd948bd0f422a9c3c511773e->dir_67ea7e018387beaa79e21cb1dea6a3ab [headlabel="3", labeldistance=1.5 headhref="dir_000118_000082.html"];
+  dir_9522ed5fbd948bd0f422a9c3c511773e->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="5", labeldistance=1.5 headhref="dir_000118_000175.html"];
+  dir_9522ed5fbd948bd0f422a9c3c511773e->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="2", labeldistance=1.5 headhref="dir_000118_000117.html"];
+}

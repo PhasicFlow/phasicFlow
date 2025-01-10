@@ -1,5 +1,5 @@
 var sphereParticlesKernels_8hpp =
 [
-    [ "rpAcceleration", "sphereParticlesKernels_8hpp.html#a9fa48474270a6882fba4b6f8e003aecb", null ],
-    [ "acceleration", "sphereParticlesKernels_8hpp.html#aea4493f25ef82d9338f4b7dd1059f675", null ]
+    [ "addMassDiamInertiaProp", "sphereParticlesKernels_8hpp.html#a534012364bda4035bf408aa4fbeb1f4f", null ],
+    [ "acceleration", "sphereParticlesKernels_8hpp.html#aecccfbc0885366153df27f43fc32793c", null ]
 ];

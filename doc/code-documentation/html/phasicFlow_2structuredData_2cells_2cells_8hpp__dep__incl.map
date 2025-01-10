@@ -1,9 +1,0 @@
-<map id="src/phasicFlow/structuredData/cells/cells.hpp" name="src/phasicFlow/structuredData/cells/cells.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="645,5,833,47"/>
-<area shape="rect" id="node2" href="$mapperNBS_8hpp.html" title=" " alt="" coords="5,102,216,143"/>
-<area shape="rect" id="node3" href="$cellsWallLevel0_8hpp.html" title=" " alt="" coords="240,102,491,143"/>
-<area shape="rect" id="node4" href="$cells_8cpp.html" title=" " alt="" coords="515,102,703,143"/>
-<area shape="rect" id="node5" href="$mortonIndexing_8cpp.html" title=" " alt="" coords="728,102,1011,143"/>
-<area shape="rect" id="node6" href="$positionParticles_8cpp.html" title=" " alt="" coords="1035,95,1208,151"/>
-<area shape="rect" id="node7" href="$rectangleMesh_8hpp.html" title=" " alt="" coords="1232,102,1427,143"/>
-</map>

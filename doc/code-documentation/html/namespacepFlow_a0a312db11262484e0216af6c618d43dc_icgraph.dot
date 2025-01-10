@@ -1,0 +1,16 @@
+digraph "validTokenForStream"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="validTokenForStream",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Is tok a valid token for this stream?"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::oTstream::append",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1oTstream.html#a3ebe3cf983e1255171dc04ea202c2e87",tooltip="append token to the stream"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::iTstream::appendToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iTstream.html#a901e0a864d35fee71e969f18b6a3f701",tooltip="append token to the end of token and rewind the stream"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::iTstream::appendTokens",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iTstream.html#ab8e6218a25dd17573b727e6e3225d6af",tooltip="append a list of tokens to the end of tokens"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::iTstream::validate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iTstream.html#a41d45236c37b75848f4b1667a11fb50e",tooltip="check for valid tokens in the tokenList"];
+}

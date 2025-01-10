@@ -1,0 +1,18 @@
+digraph "deviceView"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="deviceView",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::grainParticles\l::initializeParticles",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1grainParticles.html#a84343969d723c548f0f20fcd9294d351",tooltip="Insert new particles in position with specified shapes."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::sphereParticles\l::initializeParticles",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1sphereParticles.html#a84343969d723c548f0f20fcd9294d351",tooltip="Insert new particles in position with specified shapes."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::intAllActive",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#ad07d1cb3572f2d482cdf0e9f2868071b",tooltip=" "];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::intScattered",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a19c4c4ae40e7e332c50f85bcf8fb93d9",tooltip=" "];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+}

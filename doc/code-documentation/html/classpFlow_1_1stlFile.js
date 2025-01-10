@@ -17,8 +17,8 @@ var classpFlow_1_1stlFile =
     [ "setFile", "classpFlow_1_1stlFile.html#a9e282f2dc7219517b46fcac34eb94bb0", null ],
     [ "names", "classpFlow_1_1stlFile.html#ad6fbb0e2d41355648b9e68b636d59525", null ],
     [ "size", "classpFlow_1_1stlFile.html#a259cb5a711406a8c3e5d937eb9350cca", null ],
-    [ "solid", "classpFlow_1_1stlFile.html#aa2b23badf752551610f08e92808e5a30", null ],
-    [ "name", "classpFlow_1_1stlFile.html#ab0c815f83910ba70516feb9113e40f5b", null ],
+    [ "solid", "classpFlow_1_1stlFile.html#afe7e5db1762c28ea644e582affb7f5e2", null ],
+    [ "name", "classpFlow_1_1stlFile.html#aba04bb9fabdd25458c99306115c2c7a2", null ],
     [ "solids_", "classpFlow_1_1stlFile.html#a19583183274b3fa30db483a53ee64c14", null ],
     [ "solidNames_", "classpFlow_1_1stlFile.html#af284f423e5b4a31826089732094f04f7", null ],
     [ "file_", "classpFlow_1_1stlFile.html#a5488b2a6e6a540fa00beb7e8c5a0c64e", null ]

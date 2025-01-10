@@ -110,17 +110,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1Istream.html',''); initR
 <div class="title">Istream Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Standard input stream for binary and ascii data.  
+ <a href="classpFlow_1_1Istream.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Istream:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream__inherit__graph.png" border="0" usemap="#Istream_inherit__map" alt="Inheritance graph"/></div>
-<map name="Istream_inherit__map" id="Istream_inherit__map">
-<area shape="rect" title=" " alt="" coords="9,80,81,107"/>
-<area shape="rect" href="classpFlow_1_1iFstream.html" title=" " alt="" coords="5,155,85,181"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html" title=" " alt="" coords="7,5,83,32"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Istream:</div>
@@ -128,17 +126,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1Istream.html',''); initR
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream__coll__graph.png" border="0" usemap="#Istream_coll__map" alt="Collaboration graph"/></div>
-<map name="Istream_coll__map" id="Istream_coll__map">
-<area shape="rect" title=" " alt="" coords="7,80,79,107"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html" title=" " alt="" coords="5,5,81,32"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad48b8b290ed666fa5a63bc93b3a6d042"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ad48b8b290ed666fa5a63bc93b3a6d042">Istream</a> (std::istream &amp;is, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;streamName, <a class="el" href="classpFlow_1_1IOstream.html#ab76e0cc92bb140c07e198662e39d5268">writeFormat</a> wf=<a class="el" href="classpFlow_1_1IOstream.html#ab76e0cc92bb140c07e198662e39d5268af9c208c7d7a0f102f2683165540c882d">ASCII</a>)</td></tr>
+<tr class="memdesc:ad48b8b290ed666fa5a63bc93b3a6d042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct wrapper around std::istream, set stream status.  <a href="classpFlow_1_1Istream.html#ad48b8b290ed666fa5a63bc93b3a6d042">More...</a><br /></td></tr>
 <tr class="separator:ad48b8b290ed666fa5a63bc93b3a6d042"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa87acab95f6b508c203a4509ca726bcf"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#aa87acab95f6b508c203a4509ca726bcf">~Istream</a> ()=default</td></tr>
+<tr class="memdesc:aa87acab95f6b508c203a4509ca726bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1Istream.html#aa87acab95f6b508c203a4509ca726bcf">More...</a><br /></td></tr>
 <tr class="separator:aa87acab95f6b508c203a4509ca726bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a754ce9966caae1ee331378bf4a87269b"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b">name</a> () const</td></tr>
 <tr class="memdesc:a754ce9966caae1ee331378bf4a87269b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the name of the stream.  <a href="classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b">More...</a><br /></td></tr>
@@ -147,111 +143,161 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a093459b3399aba6fe0f57bbbc2925bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return non-const access to the name of the stream.  <a href="classpFlow_1_1Istream.html#a093459b3399aba6fe0f57bbbc2925bc2">More...</a><br /></td></tr>
 <tr class="separator:a093459b3399aba6fe0f57bbbc2925bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada47b7405e5eaa26f35e795f291164bf"><td class="memItemLeft" align="right" valign="top">virtual ios_base::fmtflags&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ada47b7405e5eaa26f35e795f291164bf">flags</a> () const</td></tr>
-<tr class="memdesc:ada47b7405e5eaa26f35e795f291164bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return flags of stream.  <a href="classpFlow_1_1Istream.html#ada47b7405e5eaa26f35e795f291164bf">More...</a><br /></td></tr>
+<tr class="memdesc:ada47b7405e5eaa26f35e795f291164bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return flags of output stream.  <a href="classpFlow_1_1Istream.html#ada47b7405e5eaa26f35e795f291164bf">More...</a><br /></td></tr>
 <tr class="separator:ada47b7405e5eaa26f35e795f291164bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b24d3a74d38ac71f0c83493e2e96ef8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Istream.html">Istream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a4b24d3a74d38ac71f0c83493e2e96ef8">get</a> (char &amp;c)</td></tr>
+<tr class="memdesc:a4b24d3a74d38ac71f0c83493e2e96ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw, low-level get character function.  <a href="classpFlow_1_1Istream.html#a4b24d3a74d38ac71f0c83493e2e96ef8">More...</a><br /></td></tr>
 <tr class="separator:a4b24d3a74d38ac71f0c83493e2e96ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9040fa1d479d71edf3a826f4691c35c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a9040fa1d479d71edf3a826f4691c35c4">peek</a> ()</td></tr>
+<tr class="memdesc:a9040fa1d479d71edf3a826f4691c35c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw, low-level peek function.  <a href="classpFlow_1_1Istream.html#a9040fa1d479d71edf3a826f4691c35c4">More...</a><br /></td></tr>
 <tr class="separator:a9040fa1d479d71edf3a826f4691c35c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1795762addc0a9a1c0d105e81b1a47c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Istream.html">Istream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a1795762addc0a9a1c0d105e81b1a47c2">getLine</a> (<a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;str, char delim='\<a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>')</td></tr>
+<tr class="memitem:a1795762addc0a9a1c0d105e81b1a47c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Istream.html">Istream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a1795762addc0a9a1c0d105e81b1a47c2">getLine</a> (<a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;str, char delim='\<a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>')</td></tr>
+<tr class="memdesc:a1795762addc0a9a1c0d105e81b1a47c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw, low-level getline (until delimiter) into a string.  <a href="classpFlow_1_1Istream.html#a1795762addc0a9a1c0d105e81b1a47c2">More...</a><br /></td></tr>
 <tr class="separator:a1795762addc0a9a1c0d105e81b1a47c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a626d6266a668fbe5629562598a1d1334"><td class="memItemLeft" align="right" valign="top">std::streamsize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a626d6266a668fbe5629562598a1d1334">getLine</a> (std::nullptr_t, char delim='\<a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>')</td></tr>
+<tr class="memitem:a626d6266a668fbe5629562598a1d1334"><td class="memItemLeft" align="right" valign="top">std::streamsize&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a626d6266a668fbe5629562598a1d1334">getLine</a> (std::nullptr_t, char delim='\<a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>')</td></tr>
+<tr class="memdesc:a626d6266a668fbe5629562598a1d1334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-level discard until delimiter return the number of characters extracted.  <a href="classpFlow_1_1Istream.html#a626d6266a668fbe5629562598a1d1334">More...</a><br /></td></tr>
 <tr class="separator:a626d6266a668fbe5629562598a1d1334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a469a625701584441d1d62023823cd452"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Istream.html">Istream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a469a625701584441d1d62023823cd452">putback</a> (const char c)</td></tr>
+<tr class="memdesc:a469a625701584441d1d62023823cd452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw, low-level putback character function.  <a href="classpFlow_1_1Istream.html#a469a625701584441d1d62023823cd452">More...</a><br /></td></tr>
 <tr class="separator:a469a625701584441d1d62023823cd452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2927b1d2adfb79cfbe30374f02109ac5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a2927b1d2adfb79cfbe30374f02109ac5">read</a> (<a class="el" href="classpFlow_1_1token.html">token</a> &amp;t) override</td></tr>
+<tr class="memdesc:a2927b1d2adfb79cfbe30374f02109ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return next token from stream.  <a href="classpFlow_1_1Istream.html#a2927b1d2adfb79cfbe30374f02109ac5">More...</a><br /></td></tr>
 <tr class="separator:a2927b1d2adfb79cfbe30374f02109ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77264e9a2caa740b635d89e3211070ba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a77264e9a2caa740b635d89e3211070ba">read</a> (char &amp;c) override</td></tr>
+<tr class="memdesc:a77264e9a2caa740b635d89e3211070ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a character.  <a href="classpFlow_1_1Istream.html#a77264e9a2caa740b635d89e3211070ba">More...</a><br /></td></tr>
 <tr class="separator:a77264e9a2caa740b635d89e3211070ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dfcec5380e096e5117d9861c6b42776"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a8dfcec5380e096e5117d9861c6b42776">read</a> (<a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;str) override</td></tr>
+<tr class="memdesc:a8dfcec5380e096e5117d9861c6b42776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a word.  <a href="classpFlow_1_1Istream.html#a8dfcec5380e096e5117d9861c6b42776">More...</a><br /></td></tr>
 <tr class="separator:a8dfcec5380e096e5117d9861c6b42776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab57115c7d3b788246557d319c80f9e8a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ab57115c7d3b788246557d319c80f9e8a">readString</a> (<a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;str) override</td></tr>
+<tr class="memdesc:ab57115c7d3b788246557d319c80f9e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a string.  <a href="classpFlow_1_1Istream.html#ab57115c7d3b788246557d319c80f9e8a">More...</a><br /></td></tr>
 <tr class="separator:ab57115c7d3b788246557d319c80f9e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8af18055c3d12dd98a5922ebab68ff2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ad8af18055c3d12dd98a5922ebab68ff2">read</a> (<a class="el" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a> &amp;) override</td></tr>
+<tr class="memdesc:ad8af18055c3d12dd98a5922ebab68ff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a int64.  <a href="classpFlow_1_1Istream.html#ad8af18055c3d12dd98a5922ebab68ff2">More...</a><br /></td></tr>
 <tr class="separator:ad8af18055c3d12dd98a5922ebab68ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5f7ae0c8060492806d8672d31c8cc05"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ae5f7ae0c8060492806d8672d31c8cc05">read</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &amp;) override</td></tr>
+<tr class="memdesc:ae5f7ae0c8060492806d8672d31c8cc05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a int32.  <a href="classpFlow_1_1Istream.html#ae5f7ae0c8060492806d8672d31c8cc05">More...</a><br /></td></tr>
 <tr class="separator:ae5f7ae0c8060492806d8672d31c8cc05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0183d3e97114fe4de16da21da393928"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ad0183d3e97114fe4de16da21da393928">read</a> (<a class="el" href="namespacepFlow.html#a209decd2d9a8cd5f1697cdb6e00f1cd7">int16</a> &amp;) override</td></tr>
-<tr class="separator:ad0183d3e97114fe4de16da21da393928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af52c7067aa8120a14f652b2b13c01f2d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#af52c7067aa8120a14f652b2b13c01f2d">read</a> (<a class="el" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a> &amp;) override</td></tr>
+<tr class="memdesc:af52c7067aa8120a14f652b2b13c01f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a int8.  <a href="classpFlow_1_1Istream.html#af52c7067aa8120a14f652b2b13c01f2d">More...</a><br /></td></tr>
 <tr class="separator:af52c7067aa8120a14f652b2b13c01f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbafe0c7f090d5141ca0b1833511793e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#abbafe0c7f090d5141ca0b1833511793e">read</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> &amp;) override</td></tr>
-<tr class="separator:abbafe0c7f090d5141ca0b1833511793e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8be1f7fcce1a2d2b407ff381cc2fd219"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a8be1f7fcce1a2d2b407ff381cc2fd219">read</a> (<a class="el" href="namespacepFlow.html#aeefdb2888fa3c58f2454ef004419e6a5">uint64</a> &amp;) override</td></tr>
+<tr class="memdesc:a8be1f7fcce1a2d2b407ff381cc2fd219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a uint64.  <a href="classpFlow_1_1Istream.html#a8be1f7fcce1a2d2b407ff381cc2fd219">More...</a><br /></td></tr>
+<tr class="separator:a8be1f7fcce1a2d2b407ff381cc2fd219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ec1d7ce98abf12034f5c799f3857f6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ae1ec1d7ce98abf12034f5c799f3857f6">read</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &amp;) override</td></tr>
+<tr class="memdesc:ae1ec1d7ce98abf12034f5c799f3857f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a uint32.  <a href="classpFlow_1_1Istream.html#ae1ec1d7ce98abf12034f5c799f3857f6">More...</a><br /></td></tr>
 <tr class="separator:ae1ec1d7ce98abf12034f5c799f3857f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9883b86c3cc0efadac9c2c3b089483a4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a9883b86c3cc0efadac9c2c3b089483a4">read</a> (<a class="el" href="namespacepFlow.html#ab7078bf13036f3e78534da3ad4149dc2">uint16</a> &amp;) override</td></tr>
-<tr class="separator:a9883b86c3cc0efadac9c2c3b089483a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a478ee8172951faea8a74bdeacc7043c1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a478ee8172951faea8a74bdeacc7043c1">read</a> (<a class="el" href="namespacepFlow.html#a34ecedcf03a70dc91e4616212d79267d">uint8</a> &amp;) override</td></tr>
+<tr class="memdesc:a478ee8172951faea8a74bdeacc7043c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a uint8.  <a href="classpFlow_1_1Istream.html#a478ee8172951faea8a74bdeacc7043c1">More...</a><br /></td></tr>
+<tr class="separator:a478ee8172951faea8a74bdeacc7043c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37687181bbda5c256b8f5031030a7496"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a37687181bbda5c256b8f5031030a7496">read</a> (float &amp;val) override</td></tr>
+<tr class="memdesc:a37687181bbda5c256b8f5031030a7496"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a float.  <a href="classpFlow_1_1Istream.html#a37687181bbda5c256b8f5031030a7496">More...</a><br /></td></tr>
 <tr class="separator:a37687181bbda5c256b8f5031030a7496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74a51f110ee3859191ffd704c2b4f141"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a74a51f110ee3859191ffd704c2b4f141">read</a> (double &amp;val) override</td></tr>
+<tr class="memdesc:a74a51f110ee3859191ffd704c2b4f141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double.  <a href="classpFlow_1_1Istream.html#a74a51f110ee3859191ffd704c2b4f141">More...</a><br /></td></tr>
 <tr class="separator:a74a51f110ee3859191ffd704c2b4f141"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae726f8108a5359ed31e60e44457a8c9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ae726f8108a5359ed31e60e44457a8c9a">read</a> (char *buffer, std::streamsize <a class="el" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a>) override</td></tr>
+<tr class="memdesc:ae726f8108a5359ed31e60e44457a8c9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a block of binray data.  <a href="classpFlow_1_1Istream.html#ae726f8108a5359ed31e60e44457a8c9a">More...</a><br /></td></tr>
 <tr class="separator:ae726f8108a5359ed31e60e44457a8c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8734e666421c9fe3b6380a818c6c727"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ab8734e666421c9fe3b6380a818c6c727">rewind</a> ()</td></tr>
-<tr class="separator:ab8734e666421c9fe3b6380a818c6c727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bdbb2555e86aa90ede87dcc48e33f65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a2bdbb2555e86aa90ede87dcc48e33f65">findBinaryBlockStart</a> () override</td></tr>
+<tr class="memdesc:a2bdbb2555e86aa90ede87dcc48e33f65"><td class="mdescLeft">&#160;</td><td class="mdescRight">It seek for a character sequence that indicates the start of a binary block char sequence is 255 255 255 0 <br  />
+  <a href="classpFlow_1_1Istream.html#a2bdbb2555e86aa90ede87dcc48e33f65">More...</a><br /></td></tr>
+<tr class="separator:a2bdbb2555e86aa90ede87dcc48e33f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b5576a276bb013a4bfc1dccacf3671"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a16b5576a276bb013a4bfc1dccacf3671">rewind</a> () override</td></tr>
+<tr class="memdesc:a16b5576a276bb013a4bfc1dccacf3671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rewind the stream so that it may be read again.  <a href="classpFlow_1_1Istream.html#a16b5576a276bb013a4bfc1dccacf3671">More...</a><br /></td></tr>
+<tr class="separator:a16b5576a276bb013a4bfc1dccacf3671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a641ff388ef41042b3a08ffe0cb7188f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a641ff388ef41042b3a08ffe0cb7188f4">seek</a> (<a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> pos) override</td></tr>
+<tr class="separator:a641ff388ef41042b3a08ffe0cb7188f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae44e318a6d58d774d4eddf726dd543f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ae44e318a6d58d774d4eddf726dd543f4">tell</a> () override</td></tr>
+<tr class="memdesc:ae44e318a6d58d774d4eddf726dd543f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current position indicator.  <a href="classpFlow_1_1Istream.html#ae44e318a6d58d774d4eddf726dd543f4">More...</a><br /></td></tr>
+<tr class="separator:ae44e318a6d58d774d4eddf726dd543f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f4e9197238714c0ef19b6a9e9b9ad57"><td class="memItemLeft" align="right" valign="top">virtual ios_base::fmtflags&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a5f4e9197238714c0ef19b6a9e9b9ad57">flags</a> (const ios_base::fmtflags flags)</td></tr>
-<tr class="memdesc:a5f4e9197238714c0ef19b6a9e9b9ad57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set flags of stream.  <a href="classpFlow_1_1Istream.html#a5f4e9197238714c0ef19b6a9e9b9ad57">More...</a><br /></td></tr>
+<tr class="memdesc:a5f4e9197238714c0ef19b6a9e9b9ad57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set stream flags.  <a href="classpFlow_1_1Istream.html#a5f4e9197238714c0ef19b6a9e9b9ad57">More...</a><br /></td></tr>
 <tr class="separator:a5f4e9197238714c0ef19b6a9e9b9ad57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a513d1fa6b29fa93acb75f0afe0a58dd5"><td class="memItemLeft" align="right" valign="top">virtual std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a513d1fa6b29fa93acb75f0afe0a58dd5">stdStream</a> ()</td></tr>
+<tr class="memdesc:a513d1fa6b29fa93acb75f0afe0a58dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to underlying std::istream.  <a href="classpFlow_1_1Istream.html#a513d1fa6b29fa93acb75f0afe0a58dd5">More...</a><br /></td></tr>
 <tr class="separator:a513d1fa6b29fa93acb75f0afe0a58dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a17167d833673fb25c95ae879d14b18"><td class="memItemLeft" align="right" valign="top">virtual const std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a7a17167d833673fb25c95ae879d14b18">stdStream</a> () const</td></tr>
+<tr class="memdesc:a7a17167d833673fb25c95ae879d14b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const access to underlying std::istream.  <a href="classpFlow_1_1Istream.html#a7a17167d833673fb25c95ae879d14b18">More...</a><br /></td></tr>
 <tr class="separator:a7a17167d833673fb25c95ae879d14b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpFlow_1_1iIstream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1iIstream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a></td></tr>
 <tr class="memitem:a491a667af35a18f38b195789371e340b inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a491a667af35a18f38b195789371e340b">iIstream</a> ()</td></tr>
+<tr class="memdesc:a491a667af35a18f38b195789371e340b inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">default  <a href="classpFlow_1_1iIstream.html#a491a667af35a18f38b195789371e340b">More...</a><br /></td></tr>
 <tr class="separator:a491a667af35a18f38b195789371e340b inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb88b494b79ef3b9b544ce4039b6aac4 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#afb88b494b79ef3b9b544ce4039b6aac4">iIstream</a> (<a class="el" href="classpFlow_1_1IOstream.html#ab76e0cc92bb140c07e198662e39d5268">writeFormat</a> wf)</td></tr>
 <tr class="separator:afb88b494b79ef3b9b544ce4039b6aac4 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb259a4f962ddef4d3f0ee6291c011d2 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#aeb259a4f962ddef4d3f0ee6291c011d2">iIstream</a> (const <a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;)=default</td></tr>
+<tr class="memdesc:aeb259a4f962ddef4d3f0ee6291c011d2 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct.  <a href="classpFlow_1_1iIstream.html#aeb259a4f962ddef4d3f0ee6291c011d2">More...</a><br /></td></tr>
 <tr class="separator:aeb259a4f962ddef4d3f0ee6291c011d2 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d655d719335af32c3bfd785add8fef5 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a7d655d719335af32c3bfd785add8fef5">~iIstream</a> ()=default</td></tr>
+<tr class="memdesc:a7d655d719335af32c3bfd785add8fef5 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1iIstream.html#a7d655d719335af32c3bfd785add8fef5">More...</a><br /></td></tr>
 <tr class="separator:a7d655d719335af32c3bfd785add8fef5 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeecefbf648ad32c20134e67c4fa35597 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597">putBack</a> (const <a class="el" href="classpFlow_1_1token.html">token</a> &amp;tok)</td></tr>
+<tr class="memdesc:aeecefbf648ad32c20134e67c4fa35597 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put back token Only a single put back is permitted.  <a href="classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597">More...</a><br /></td></tr>
 <tr class="separator:aeecefbf648ad32c20134e67c4fa35597 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fa0de349bf86cba54424c4a512e1e49 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a2fa0de349bf86cba54424c4a512e1e49">getBack</a> (<a class="el" href="classpFlow_1_1token.html">token</a> &amp;tok)</td></tr>
+<tr class="memdesc:a2fa0de349bf86cba54424c4a512e1e49 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the put back token if there is one and return true.  <a href="classpFlow_1_1iIstream.html#a2fa0de349bf86cba54424c4a512e1e49">More...</a><br /></td></tr>
 <tr class="separator:a2fa0de349bf86cba54424c4a512e1e49 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b2651d76dbb5d411250017f8fbe1649 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a0b2651d76dbb5d411250017f8fbe1649">peekBack</a> (<a class="el" href="classpFlow_1_1token.html">token</a> &amp;tok)</td></tr>
+<tr class="memdesc:a0b2651d76dbb5d411250017f8fbe1649 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peek at the put back token without removing it.  <a href="classpFlow_1_1iIstream.html#a0b2651d76dbb5d411250017f8fbe1649">More...</a><br /></td></tr>
 <tr class="separator:a0b2651d76dbb5d411250017f8fbe1649 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13fa5dc14b25a1e1414e26d4d6473c7f inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">resetPutBack</a> ()</td></tr>
+<tr class="memdesc:a13fa5dc14b25a1e1414e26d4d6473c7f inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset the put back token;  <a href="classpFlow_1_1iIstream.html#a13fa5dc14b25a1e1414e26d4d6473c7f">More...</a><br /></td></tr>
 <tr class="separator:a13fa5dc14b25a1e1414e26d4d6473c7f inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f238bd4e73ce3b43b8a737a8f30ab78 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a5f238bd4e73ce3b43b8a737a8f30ab78">findToken</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;w)</td></tr>
+<tr class="memdesc:a5f238bd4e73ce3b43b8a737a8f30ab78 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">search for all tokesn and find the first word token tbat matchs w  <a href="classpFlow_1_1iIstream.html#a5f238bd4e73ce3b43b8a737a8f30ab78">More...</a><br /></td></tr>
 <tr class="separator:a5f238bd4e73ce3b43b8a737a8f30ab78 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afde1855233ba897f4bb342285f94fc87 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#afde1855233ba897f4bb342285f94fc87">findTokenResume</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;w)</td></tr>
 <tr class="memdesc:afde1855233ba897f4bb342285f94fc87 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">search for all tokesn after the current file position and find the first word token tbat matchs w  <a href="classpFlow_1_1iIstream.html#afde1855233ba897f4bb342285f94fc87">More...</a><br /></td></tr>
 <tr class="separator:afde1855233ba897f4bb342285f94fc87 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6492693f26c93565e98d42c8eae7b902 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a6492693f26c93565e98d42c8eae7b902">findTokenSilent</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;w, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> limitLine=100)</td></tr>
+<tr class="memdesc:a6492693f26c93565e98d42c8eae7b902 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">search for all tokesn and find the first word token that matchs  <a href="classpFlow_1_1iIstream.html#a6492693f26c93565e98d42c8eae7b902">More...</a><br /></td></tr>
 <tr class="separator:a6492693f26c93565e98d42c8eae7b902 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20e125024de459038323293b8529a99e inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a20e125024de459038323293b8529a99e">findTokenResumeSilent</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;w, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> limitLine=100)</td></tr>
 <tr class="memdesc:a20e125024de459038323293b8529a99e inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">search for all tokesn after the current file position and find the first word token tbat matchs w  <a href="classpFlow_1_1iIstream.html#a20e125024de459038323293b8529a99e">More...</a><br /></td></tr>
 <tr class="separator:a20e125024de459038323293b8529a99e inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a734799e36d009aecd57d246eb3aeb421 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a734799e36d009aecd57d246eb3aeb421">findTokenAndNext</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;w, <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;nextW, bool checkEndStatement=true)</td></tr>
+<tr class="memdesc:a734799e36d009aecd57d246eb3aeb421 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">search for all tokens and find the first word token and also next word token chekck if it is eneded with end statement ;  <a href="classpFlow_1_1iIstream.html#a734799e36d009aecd57d246eb3aeb421">More...</a><br /></td></tr>
 <tr class="separator:a734799e36d009aecd57d246eb3aeb421 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae74a624bbb0665ed381b67cbda681031 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#ae74a624bbb0665ed381b67cbda681031">findTokenAndNextSilent</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;w, <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;nextW, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> limitLine=100)</td></tr>
 <tr class="separator:ae74a624bbb0665ed381b67cbda681031 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1243cec5833e96e8446abed4e3656c inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:afb1243cec5833e96e8446abed4e3656c inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#afb1243cec5833e96e8446abed4e3656c">findKeywordAndVal</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;keyword, T &amp;val, bool checkEndStatement=true)</td></tr>
+<tr class="memdesc:afb1243cec5833e96e8446abed4e3656c inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">find a pair of keyword and data terminated by ; keyword data; return false if keyword does not exist or reading fails.  <a href="classpFlow_1_1iIstream.html#afb1243cec5833e96e8446abed4e3656c">More...</a><br /></td></tr>
 <tr class="separator:afb1243cec5833e96e8446abed4e3656c inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a214b65eedf74268aed639e4d9b36fe08 inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a214b65eedf74268aed639e4d9b36fe08 inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a214b65eedf74268aed639e4d9b36fe08">lookupData</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;keyword)</td></tr>
+<tr class="memdesc:a214b65eedf74268aed639e4d9b36fe08 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">lookup for keyword and data; fatalExit if fails  <a href="classpFlow_1_1iIstream.html#a214b65eedf74268aed639e4d9b36fe08">More...</a><br /></td></tr>
 <tr class="separator:a214b65eedf74268aed639e4d9b36fe08 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b741dd8443f554f5de5b98897f2eb77 inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a6b741dd8443f554f5de5b98897f2eb77 inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a6b741dd8443f554f5de5b98897f2eb77">lookupDataOrSet</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;keyword, const T &amp;setVal)</td></tr>
+<tr class="memdesc:a6b741dd8443f554f5de5b98897f2eb77 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">lookup for keyword and data; set to setVal if lookup fails.  <a href="classpFlow_1_1iIstream.html#a6b741dd8443f554f5de5b98897f2eb77">More...</a><br /></td></tr>
 <tr class="separator:a6b741dd8443f554f5de5b98897f2eb77 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2240995351ba90efed8943099847069e inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a2240995351ba90efed8943099847069e inherit pub_methods_classpFlow_1_1iIstream"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a2240995351ba90efed8943099847069e">nextData</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;keyword, T &amp;data)</td></tr>
+<tr class="memdesc:a2240995351ba90efed8943099847069e inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the data next to keword keyword data; check the keyword is correct or not <br  />
+  <a href="classpFlow_1_1iIstream.html#a2240995351ba90efed8943099847069e">More...</a><br /></td></tr>
 <tr class="separator:a2240995351ba90efed8943099847069e inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecfc9cc0a499c7d44de6a7562bcfea3f inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#aecfc9cc0a499c7d44de6a7562bcfea3f">readBegin</a> (const char *funcName)</td></tr>
+<tr class="memdesc:aecfc9cc0a499c7d44de6a7562bcfea3f inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin read of data chunk, starts with '('.  <a href="classpFlow_1_1iIstream.html#aecfc9cc0a499c7d44de6a7562bcfea3f">More...</a><br /></td></tr>
 <tr class="separator:aecfc9cc0a499c7d44de6a7562bcfea3f inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d82c951160ac1444ee2a2d9ae1ecb11 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a8d82c951160ac1444ee2a2d9ae1ecb11">readEnd</a> (const char *funcName)</td></tr>
+<tr class="memdesc:a8d82c951160ac1444ee2a2d9ae1ecb11 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">End read of data chunk, ends with ')' return true or FatalIOError.  <a href="classpFlow_1_1iIstream.html#a8d82c951160ac1444ee2a2d9ae1ecb11">More...</a><br /></td></tr>
 <tr class="separator:a8d82c951160ac1444ee2a2d9ae1ecb11 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82106c627eb5a496726f0829a62e38bb inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a82106c627eb5a496726f0829a62e38bb">readBeginSquare</a> (const char *funcName)</td></tr>
+<tr class="memdesc:a82106c627eb5a496726f0829a62e38bb inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin read of data chunk, starts with '('.  <a href="classpFlow_1_1iIstream.html#a82106c627eb5a496726f0829a62e38bb">More...</a><br /></td></tr>
 <tr class="separator:a82106c627eb5a496726f0829a62e38bb inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17598aa2666f2552b651085a5c6dfb23 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a17598aa2666f2552b651085a5c6dfb23">readEndSquare</a> (const char *funcName)</td></tr>
+<tr class="memdesc:a17598aa2666f2552b651085a5c6dfb23 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin read of data chunk, starts with '('.  <a href="classpFlow_1_1iIstream.html#a17598aa2666f2552b651085a5c6dfb23">More...</a><br /></td></tr>
 <tr class="separator:a17598aa2666f2552b651085a5c6dfb23 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb9b1a5ac1aacc94b9998439303acfa7 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#adb9b1a5ac1aacc94b9998439303acfa7">readBeginList</a> (const char *funcName)</td></tr>
+<tr class="memdesc:adb9b1a5ac1aacc94b9998439303acfa7 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin read of list data, starts with '(' or '{' return starting delimiter or FatalIOError.  <a href="classpFlow_1_1iIstream.html#adb9b1a5ac1aacc94b9998439303acfa7">More...</a><br /></td></tr>
 <tr class="separator:adb9b1a5ac1aacc94b9998439303acfa7 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fbb1d26a1c975ed5be8df0056c863dd inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#a3fbb1d26a1c975ed5be8df0056c863dd">readEndList</a> (const char *funcName)</td></tr>
+<tr class="memdesc:a3fbb1d26a1c975ed5be8df0056c863dd inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">End read of list data, ends with ')' or '}' return closing delimiter or FatalIOError.  <a href="classpFlow_1_1iIstream.html#a3fbb1d26a1c975ed5be8df0056c863dd">More...</a><br /></td></tr>
 <tr class="separator:a3fbb1d26a1c975ed5be8df0056c863dd inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca8c209dd4920ea633336742d8a874e0 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#aca8c209dd4920ea633336742d8a874e0">readEndStatement</a> (const char *funcName)</td></tr>
+<tr class="memdesc:aca8c209dd4920ea633336742d8a874e0 inherit pub_methods_classpFlow_1_1iIstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">End statement character ;.  <a href="classpFlow_1_1iIstream.html#aca8c209dd4920ea633336742d8a874e0">More...</a><br /></td></tr>
 <tr class="separator:aca8c209dd4920ea633336742d8a874e0 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac40c323341736604b5bf6a67f39bce85 inherit pub_methods_classpFlow_1_1iIstream"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iIstream.html#ac40c323341736604b5bf6a67f39bce85">operator()</a> () const</td></tr>
 <tr class="separator:ac40c323341736604b5bf6a67f39bce85 inherit pub_methods_classpFlow_1_1iIstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -269,10 +315,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a216ce04def77e62d9132be3ce232afcc inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1IOstream.html#a216ce04def77e62d9132be3ce232afcc">More...</a><br /></td></tr>
 <tr class="separator:a216ce04def77e62d9132be3ce232afcc inherit pub_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a> (const char *operation) const</td></tr>
-<tr class="memdesc:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">More...</a><br /></td></tr>
+<tr class="memdesc:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">More...</a><br /></td></tr>
 <tr class="separator:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">fatalCheck</a> (const char *operation) const</td></tr>
-<tr class="memdesc:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">More...</a><br /></td></tr>
+<tr class="memdesc:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">More...</a><br /></td></tr>
 <tr class="separator:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a298583c3d514f1169bfc43169ba78c38 inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">opened</a> () const</td></tr>
 <tr class="memdesc:a298583c3d514f1169bfc43169ba78c38 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if stream has been opened.  <a href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">More...</a><br /></td></tr>
@@ -332,19 +378,25 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a3d5ae683596fda5b3cb7e1e22750ced3"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3">nextValid</a> ()</td></tr>
+<tr class="memdesc:a3d5ae683596fda5b3cb7e1e22750ced3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next valid character.  <a href="classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3">More...</a><br /></td></tr>
 <tr class="separator:a3d5ae683596fda5b3cb7e1e22750ced3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e71f99e176c31f799cb199c7ff6d5b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a7e71f99e176c31f799cb199c7ff6d5b8">readWordToken</a> (<a class="el" href="classpFlow_1_1token.html">token</a> &amp;t)</td></tr>
+<tr class="memdesc:a7e71f99e176c31f799cb199c7ff6d5b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a word token.  <a href="classpFlow_1_1Istream.html#a7e71f99e176c31f799cb199c7ff6d5b8">More...</a><br /></td></tr>
 <tr class="separator:a7e71f99e176c31f799cb199c7ff6d5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba7335ea9b5adb9f02359e7ee2556431"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Istream.html">Istream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#aba7335ea9b5adb9f02359e7ee2556431">readVariable</a> (<a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;str)</td></tr>
+<tr class="memdesc:aba7335ea9b5adb9f02359e7ee2556431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a variable name starting with '$'.  <a href="classpFlow_1_1Istream.html#aba7335ea9b5adb9f02359e7ee2556431">More...</a><br /></td></tr>
 <tr class="separator:aba7335ea9b5adb9f02359e7ee2556431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32b77186746c413f9a774962268d9f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a32b77186746c413f9a774962268d9f67">operator=</a> (const <a class="el" href="classpFlow_1_1Istream.html">Istream</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a32b77186746c413f9a774962268d9f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">No copy assignment.  <a href="classpFlow_1_1Istream.html#a32b77186746c413f9a774962268d9f67">More...</a><br /></td></tr>
 <tr class="separator:a32b77186746c413f9a774962268d9f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a50fd7d13a0f7a6007ca5027b3bb8765a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#a50fd7d13a0f7a6007ca5027b3bb8765a">name_</a></td></tr>
+<tr class="memdesc:a50fd7d13a0f7a6007ca5027b3bb8765a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream name.  <a href="classpFlow_1_1Istream.html#a50fd7d13a0f7a6007ca5027b3bb8765a">More...</a><br /></td></tr>
 <tr class="separator:a50fd7d13a0f7a6007ca5027b3bb8765a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae07f290f478c5378efde3613f1396f95"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Istream.html#ae07f290f478c5378efde3613f1396f95">is_</a></td></tr>
+<tr class="memdesc:ae07f290f478c5378efde3613f1396f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input stream.  <a href="classpFlow_1_1Istream.html#ae07f290f478c5378efde3613f1396f95">More...</a><br /></td></tr>
 <tr class="separator:ae07f290f478c5378efde3613f1396f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -403,8 +455,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a384ff8be80c5e301c5ce6838a1f18033 inherit pro_static_attribs_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00038">38</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<div class="textblock"><p>Standard input stream for binary and ascii data. </p>
+<p>It is based on OpenFOAM stream, with some modifications/simplifications to be tailored to our needs. </p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00039">39</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad48b8b290ed666fa5a63bc93b3a6d042"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad48b8b290ed666fa5a63bc93b3a6d042">&#9670;&nbsp;</a></span>Istream()</h2>
@@ -438,7 +492,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00308">308</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Construct wrapper around std::istream, set stream status. </p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00304">304</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,6 +520,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -491,22 +549,17 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00053">53</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Get the next valid character. </p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00202">IOstream::bad()</a>, <a class="el" href="Istream_8cpp_source.html#l00329">Istream::get()</a>, <a class="el" href="IOstream_8hpp_source.html#l00184">IOstream::good()</a>, and <a class="el" href="Istream_8cpp_source.html#l00379">Istream::putback()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00049">49</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00204">IOstream::bad()</a>, <a class="el" href="Istream_8cpp_source.html#l00325">Istream::get()</a>, <a class="el" href="IOstream_8hpp_source.html#l00186">IOstream::good()</a>, and <a class="el" href="Istream_8cpp_source.html#l00375">Istream::putback()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a3d5ae683596fda5b3cb7e1e22750ced3_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_a3d5ae683596fda5b3cb7e1e22750ced3_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a3d5ae683596fda5b3cb7e1e22750ced3_cgraph" id="classpFlow_1_1Istream_a3d5ae683596fda5b3cb7e1e22750ced3_cgraph">
-<area shape="rect" title=" " alt="" coords="5,105,89,132"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a9f7290a5d70f30e1b1b42c8ac4a6082d" title="Return true if stream is corrupted." alt="" coords="141,5,303,32"/>
-<area shape="rect" href="classpFlow_1_1Istream.html#a4b24d3a74d38ac71f0c83493e2e96ef8" title=" " alt="" coords="201,80,243,107"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#abdcc7f96f487faadc7769afcf58fe992" title="Return true if next operation might succeed." alt="" coords="137,131,307,157"/>
-<area shape="rect" href="classpFlow_1_1Istream.html#a469a625701584441d1d62023823cd452" title=" " alt="" coords="185,181,259,208"/>
-</map>
 </div>
 
 </div>
@@ -535,19 +588,17 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00131">131</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Read a word token. </p>
 
-<p class="reference">References <a class="el" href="tokenI_8hpp_source.html#l00658">token::setBad()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00127">127</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="tokenI_8hpp_source.html#l00676">token::setBad()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a7e71f99e176c31f799cb199c7ff6d5b8_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_a7e71f99e176c31f799cb199c7ff6d5b8_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a7e71f99e176c31f799cb199c7ff6d5b8_cgraph" id="classpFlow_1_1Istream_a7e71f99e176c31f799cb199c7ff6d5b8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,127,32"/>
-<area shape="rect" href="classpFlow_1_1token.html#a638b33dd25b3cd8ea7e846f04fd6a6a3" title=" " alt="" coords="175,5,332,32"/>
-</map>
 </div>
 
 </div>
@@ -576,19 +627,17 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00145">145</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Read a variable name starting with '$'. </p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00093">token::BEGIN_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00089">token::BEGIN_LIST</a>, <a class="el" href="token_8hpp_source.html#l00097">token::DOLLAR</a>, <a class="el" href="token_8hpp_source.html#l00094">token::END_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00090">token::END_LIST</a>, <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="Istream_8cpp_source.html#l00032">errLen</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="iOstream_8hpp_source.html#l00417">pFlow::nl</a>, and <a class="el" href="error_8hpp_source.html#l00055">warningInFunction</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00141">141</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00095">token::BEGIN_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00091">token::BEGIN_LIST</a>, <a class="el" href="token_8hpp_source.html#l00099">token::DOLLAR</a>, <a class="el" href="token_8hpp_source.html#l00096">token::END_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00092">token::END_LIST</a>, <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="Istream_8cpp_source.html#l00028">errLen</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="error_8hpp_source.html#l00087">ioErrorInFile</a>, <a class="el" href="iOstream_8hpp_source.html#l00440">pFlow::nl</a>, and <a class="el" href="error_8hpp_source.html#l00095">warningInFunction</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_aba7335ea9b5adb9f02359e7ee2556431_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_aba7335ea9b5adb9f02359e7ee2556431_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_aba7335ea9b5adb9f02359e7ee2556431_cgraph" id="classpFlow_1_1Istream_aba7335ea9b5adb9f02359e7ee2556431_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,111,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="159,5,256,32"/>
-</map>
 </div>
 
 </div>
@@ -616,6 +665,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>No copy assignment. </p>
 
 </div>
 </div>
@@ -646,23 +697,17 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">IOstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00077">77</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00081">81</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00044">Istream::name_</a>.</p>
+<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00046">Istream::name_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dictionary_8cpp_source.html#l00175">dictionary::dictionary()</a>, <a class="el" href="property_8cpp_source.html#l00114">property::property()</a>, and <a class="el" href="stlFile_8cpp_source.html#l00292">stlFile::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dictionary_8cpp_source.html#l00175">dictionary::dictionary()</a>, and <a class="el" href="stlFile_8cpp_source.html#l00292">stlFile::read()</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a754ce9966caae1ee331378bf4a87269b_icgraph.png" border="0" usemap="#classpFlow_1_1Istream_a754ce9966caae1ee331378bf4a87269b_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a754ce9966caae1ee331378bf4a87269b_icgraph" id="classpFlow_1_1Istream_a754ce9966caae1ee331378bf4a87269b_icgraph">
-<area shape="rect" title="Return the name of the stream." alt="" coords="240,71,299,98"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a5de3e57e04d59bc11f6c540fa5e84ea2" title=" " alt="" coords="28,5,169,47"/>
-<area shape="rect" href="classpFlow_1_1property.html#a150a368cceebc51b7262c035c9d22ca7" title="Construct from file." alt="" coords="5,71,192,98"/>
-<area shape="rect" href="classpFlow_1_1stlFile.html#af816873151ddb0126e98bb2f914d8ed5" title=" " alt="" coords="27,122,171,149"/>
-</map>
 </div>
 
 </div>
@@ -694,9 +739,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classpFlow_1_1IOstream.html#a093459b3399aba6fe0f57bbbc2925bc2">IOstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00083">83</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00087">87</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00044">Istream::name_</a>.</p>
+<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00046">Istream::name_</a>.</p>
 
 </div>
 </div>
@@ -723,11 +768,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return flags of stream. </p>
+<p>Return flags of output stream. </p>
 
 <p>Implements <a class="el" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563">IOstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00885">885</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00927">927</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
@@ -747,20 +792,19 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00329">329</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Raw, low-level get character function. </p>
 
-<p class="reference">References <a class="el" href="Istream_8cpp_source.html#l00329">Istream::get()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00325">325</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Istream_8cpp_source.html#l00329">Istream::get()</a>, and <a class="el" href="Istream_8cpp_source.html#l00053">Istream::nextValid()</a>.</p>
+<p class="reference">References <a class="el" href="Istream_8cpp_source.html#l00325">Istream::get()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Istream_8cpp_source.html#l00325">Istream::get()</a>, and <a class="el" href="Istream_8cpp_source.html#l00049">Istream::nextValid()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_cgraph" id="classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,29,48,56"/>
-</map>
 </div>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -768,10 +812,6 @@ Additional Inherited Members</h2></td></tr>
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_icgraph.png" border="0" usemap="#classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_icgraph" id="classpFlow_1_1Istream_a4b24d3a74d38ac71f0c83493e2e96ef8_icgraph">
-<area shape="rect" title=" " alt="" coords="136,29,179,56"/>
-<area shape="rect" href="classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3" title=" " alt="" coords="5,29,88,56"/>
-</map>
 </div>
 
 </div>
@@ -791,7 +831,10 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00343">343</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Raw, low-level peek function. </p>
+<p>Does not remove the character from the stream. Returns the next character in the stream or EOF if the end of file is read. </p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00339">339</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
@@ -811,7 +854,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>delim</em> = <code>'\<a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>'</code>&#160;</td>
+          <td class="paramname"><em>delim</em> = <code>'\<a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>'</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -821,7 +864,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00349">349</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Raw, low-level getline (until delimiter) into a string. </p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00345">345</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
@@ -841,7 +886,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>delim</em> = <code>'\<a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>'</code>&#160;</td>
+          <td class="paramname"><em>delim</em> = <code>'\<a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>'</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -851,7 +896,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00363">363</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Low-level discard until delimiter return the number of characters extracted. </p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00359">359</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="VectorAlgorithm_8hpp_source.html#l00026">pFlow::count()</a>, and <a class="el" href="kokkosAlgorithms_8hpp_source.html#l00104">pFlow::algorithms::KOKKOS::max()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -860,11 +907,6 @@ Additional Inherited Members</h2></td></tr>
 </div>
 <div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a626d6266a668fbe5629562598a1d1334_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_a626d6266a668fbe5629562598a1d1334_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a626d6266a668fbe5629562598a1d1334_cgraph" id="classpFlow_1_1Istream_a626d6266a668fbe5629562598a1d1334_cgraph">
-<area shape="rect" title=" " alt="" coords="5,35,76,61"/>
-<area shape="rect" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af" title=" " alt="" coords="145,5,249,32"/>
-<area shape="rect" href="namespacepFlow_1_1algorithms_1_1KOKKOS.html#a6256cdfd2ba7f02ac8db8f55d05b3ef9" title=" " alt="" coords="124,57,271,98"/>
-</map>
 </div>
 
 </div>
@@ -885,25 +927,23 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00379">379</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Raw, low-level putback character function. </p>
 
-<p class="reference">Referenced by <a class="el" href="Istream_8cpp_source.html#l00053">Istream::nextValid()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00375">375</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Istream_8cpp_source.html#l00049">Istream::nextValid()</a>.</p>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a469a625701584441d1d62023823cd452_icgraph.png" border="0" usemap="#classpFlow_1_1Istream_a469a625701584441d1d62023823cd452_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a469a625701584441d1d62023823cd452_icgraph" id="classpFlow_1_1Istream_a469a625701584441d1d62023823cd452_icgraph">
-<area shape="rect" title=" " alt="" coords="136,5,211,32"/>
-<area shape="rect" href="classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3" title=" " alt="" coords="5,5,88,32"/>
-</map>
 </div>
 
 </div>
 </div>
 <a id="a2927b1d2adfb79cfbe30374f02109ac5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2927b1d2adfb79cfbe30374f02109ac5">&#9670;&nbsp;</a></span>read() <span class="overload">[1/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2927b1d2adfb79cfbe30374f02109ac5">&#9670;&nbsp;</a></span>read() <span class="overload">[1/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -926,32 +966,25 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Return next token from stream. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#ac35c0ab7b3a6a0cdcf8c2bd2bf24de11">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00396">396</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00392">392</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00093">token::BEGIN_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00089">token::BEGIN_LIST</a>, <a class="el" href="token_8hpp_source.html#l00091">token::BEGIN_SQR</a>, <a class="el" href="token_8hpp_source.html#l00104">token::BEGIN_STRING</a>, <a class="el" href="token_8hpp_source.html#l00095">token::COLON</a>, <a class="el" href="token_8hpp_source.html#l00096">token::COMMA</a>, <a class="el" href="token_8hpp_source.html#l00102">token::DIVIDE</a>, <a class="el" href="token_8hpp_source.html#l00097">token::DOLLAR</a>, <a class="el" href="token_8hpp_source.html#l00094">token::END_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00090">token::END_LIST</a>, <a class="el" href="token_8hpp_source.html#l00092">token::END_SQR</a>, <a class="el" href="token_8hpp_source.html#l00088">token::END_STATEMENT</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="iIstream_8cpp_source.html#l00027">iIstream::getBack()</a>, <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="tokenI_8hpp_source.html#l00360">token::lineNumber()</a>, <a class="el" href="bTypesFunctions_8cpp_source.html#l00262">pFlow::readInt64()</a>, <a class="el" href="bTypesFunctions_8cpp_source.html#l00335">pFlow::readReal()</a>, <a class="el" href="tokenI_8hpp_source.html#l00658">token::setBad()</a>, <a class="el" href="tokenI_8hpp_source.html#l00290">token::setType()</a>, and <a class="el" href="token_8hpp_source.html#l00101">token::SUBTRACT</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00095">token::BEGIN_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00091">token::BEGIN_LIST</a>, <a class="el" href="token_8hpp_source.html#l00093">token::BEGIN_SQR</a>, <a class="el" href="token_8hpp_source.html#l00106">token::BEGIN_STRING</a>, <a class="el" href="token_8hpp_source.html#l00097">token::COLON</a>, <a class="el" href="token_8hpp_source.html#l00098">token::COMMA</a>, <a class="el" href="token_8hpp_source.html#l00104">token::DIVIDE</a>, <a class="el" href="token_8hpp_source.html#l00099">token::DOLLAR</a>, <a class="el" href="token_8hpp_source.html#l00096">token::END_BLOCK</a>, <a class="el" href="token_8hpp_source.html#l00092">token::END_LIST</a>, <a class="el" href="token_8hpp_source.html#l00094">token::END_SQR</a>, <a class="el" href="token_8hpp_source.html#l00090">token::END_STATEMENT</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="iIstream_8cpp_source.html#l00045">iIstream::getBack()</a>, <a class="el" href="error_8hpp_source.html#l00087">ioErrorInFile</a>, <a class="el" href="tokenI_8hpp_source.html#l00378">token::lineNumber()</a>, <a class="el" href="bTypesFunctions_8cpp_source.html#l00279">pFlow::readInt64()</a>, <a class="el" href="bTypesFunctions_8cpp_source.html#l00343">pFlow::readReal()</a>, <a class="el" href="tokenI_8hpp_source.html#l00676">token::setBad()</a>, <a class="el" href="tokenI_8hpp_source.html#l00308">token::setType()</a>, and <a class="el" href="token_8hpp_source.html#l00103">token::SUBTRACT</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a2927b1d2adfb79cfbe30374f02109ac5_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_a2927b1d2adfb79cfbe30374f02109ac5_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a2927b1d2adfb79cfbe30374f02109ac5_cgraph" id="classpFlow_1_1Istream_a2927b1d2adfb79cfbe30374f02109ac5_cgraph">
-<area shape="rect" title=" " alt="" coords="5,132,56,159"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html#a2fa0de349bf86cba54424c4a512e1e49" title=" " alt="" coords="107,5,289,32"/>
-<area shape="rect" href="classpFlow_1_1token.html#a1c8abe34223b7d5e9341eac78c9907b5" title=" " alt="" coords="104,56,292,83"/>
-<area shape="rect" href="namespacepFlow.html#ac9acdc80931dc1f33a613fc4bb301cc7" title=" " alt="" coords="133,107,263,133"/>
-<area shape="rect" href="namespacepFlow.html#a8acdba4ad9d3d292222d853598e90b5b" title=" " alt="" coords="135,157,261,184"/>
-<area shape="rect" href="classpFlow_1_1token.html#a638b33dd25b3cd8ea7e846f04fd6a6a3" title=" " alt="" coords="119,208,277,235"/>
-<area shape="rect" href="classpFlow_1_1token.html#af925056e34d86707d6db8a3dcdbef25d" title=" " alt="" coords="117,259,279,285"/>
-</map>
 </div>
 
 </div>
 </div>
 <a id="a77264e9a2caa740b635d89e3211070ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77264e9a2caa740b635d89e3211070ba">&#9670;&nbsp;</a></span>read() <span class="overload">[2/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a77264e9a2caa740b635d89e3211070ba">&#9670;&nbsp;</a></span>read() <span class="overload">[2/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -974,14 +1007,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a character. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a1ddb57fc08b4dc5dd9b914edf89f27ea">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00595">595</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00591">591</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a8dfcec5380e096e5117d9861c6b42776"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8dfcec5380e096e5117d9861c6b42776">&#9670;&nbsp;</a></span>read() <span class="overload">[3/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dfcec5380e096e5117d9861c6b42776">&#9670;&nbsp;</a></span>read() <span class="overload">[3/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1004,22 +1039,19 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a word. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a5b8674a7c159d3f986ec3e0b05931a61">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00602">602</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00598">598</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00089">token::BEGIN_LIST</a>, <a class="el" href="token_8hpp_source.html#l00090">token::END_LIST</a>, <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="Istream_8cpp_source.html#l00032">errLen</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, <a class="el" href="iOstream_8hpp_source.html#l00417">pFlow::nl</a>, <a class="el" href="bTypesFunctions_8cpp_source.html#l00180">pFlow::validWord()</a>, and <a class="el" href="error_8hpp_source.html#l00055">warningInFunction</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00091">token::BEGIN_LIST</a>, <a class="el" href="token_8hpp_source.html#l00092">token::END_LIST</a>, <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="Istream_8cpp_source.html#l00028">errLen</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="error_8hpp_source.html#l00087">ioErrorInFile</a>, <a class="el" href="iOstream_8hpp_source.html#l00440">pFlow::nl</a>, <a class="el" href="bTypesFunctions_8cpp_source.html#l00211">pFlow::validWord()</a>, and <a class="el" href="error_8hpp_source.html#l00095">warningInFunction</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_a8dfcec5380e096e5117d9861c6b42776_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_a8dfcec5380e096e5117d9861c6b42776_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_a8dfcec5380e096e5117d9861c6b42776_cgraph" id="classpFlow_1_1Istream_a8dfcec5380e096e5117d9861c6b42776_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,56,57"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="123,5,220,32"/>
-<area shape="rect" href="namespacepFlow.html#a36795508123244e02c49855cd7d5dcd6" title=" " alt="" coords="104,56,239,83"/>
-</map>
 </div>
 
 </div>
@@ -1048,16 +1080,18 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a string. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#ac221d9c727af08306836b43e9f250d1d">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00684">684</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00680">680</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00104">token::BEGIN_STRING</a>, <a class="el" href="token_8hpp_source.html#l00105">token::END_STRING</a>, <a class="el" href="Istream_8cpp_source.html#l00032">errLen</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="error_8hpp_source.html#l00049">ioErrorInFile</a>, and <a class="el" href="token_8hpp_source.html#l00086">token::NL</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00106">token::BEGIN_STRING</a>, <a class="el" href="token_8hpp_source.html#l00107">token::END_STRING</a>, <a class="el" href="Istream_8cpp_source.html#l00028">errLen</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="error_8hpp_source.html#l00087">ioErrorInFile</a>, and <a class="el" href="token_8hpp_source.html#l00088">token::NL</a>.</p>
 
 </div>
 </div>
 <a id="ad8af18055c3d12dd98a5922ebab68ff2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8af18055c3d12dd98a5922ebab68ff2">&#9670;&nbsp;</a></span>read() <span class="overload">[4/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8af18055c3d12dd98a5922ebab68ff2">&#9670;&nbsp;</a></span>read() <span class="overload">[4/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1080,14 +1114,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a int64. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#ae729f55227c00335b16217afd7f52817">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00786">786</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00782">782</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="ae5f7ae0c8060492806d8672d31c8cc05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5f7ae0c8060492806d8672d31c8cc05">&#9670;&nbsp;</a></span>read() <span class="overload">[5/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5f7ae0c8060492806d8672d31c8cc05">&#9670;&nbsp;</a></span>read() <span class="overload">[5/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1110,44 +1146,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a int32. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a2b4335195a68749c14f395a20922791d">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00793">793</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad0183d3e97114fe4de16da21da393928"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0183d3e97114fe4de16da21da393928">&#9670;&nbsp;</a></span>read() <span class="overload">[6/13]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a> &amp; read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a209decd2d9a8cd5f1697cdb6e00f1cd7">int16</a> &amp;&#160;</td>
-          <td class="paramname"><em>val</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#adc5452dc52a5654c203adeaddc05a31a">iIstream</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00800">800</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00789">789</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="af52c7067aa8120a14f652b2b13c01f2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af52c7067aa8120a14f652b2b13c01f2d">&#9670;&nbsp;</a></span>read() <span class="overload">[7/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af52c7067aa8120a14f652b2b13c01f2d">&#9670;&nbsp;</a></span>read() <span class="overload">[6/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1170,14 +1178,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a int8. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#af49b8dadaad7fa4adeec527dae9bf928">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00807">807</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00797">797</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
-<a id="abbafe0c7f090d5141ca0b1833511793e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbafe0c7f090d5141ca0b1833511793e">&#9670;&nbsp;</a></span>read() <span class="overload">[8/13]</span></h2>
+<a id="a8be1f7fcce1a2d2b407ff381cc2fd219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8be1f7fcce1a2d2b407ff381cc2fd219">&#9670;&nbsp;</a></span>read() <span class="overload">[7/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1188,7 +1198,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a> &amp; read </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aeefdb2888fa3c58f2454ef004419e6a5">uint64</a> &amp;&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1200,14 +1210,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a92d7b34f8cdd7956fd66700abbe74288">iIstream</a>.</p>
+<p>Read a uint64. </p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00814">814</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a4f012b245d076ee64228bdda7826c516">iIstream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00804">804</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="ae1ec1d7ce98abf12034f5c799f3857f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1ec1d7ce98abf12034f5c799f3857f6">&#9670;&nbsp;</a></span>read() <span class="overload">[9/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ec1d7ce98abf12034f5c799f3857f6">&#9670;&nbsp;</a></span>read() <span class="overload">[8/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1230,14 +1242,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a uint32. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a20937ecf3d7e8f40f6d59085a039e871">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00821">821</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00811">811</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a9883b86c3cc0efadac9c2c3b089483a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9883b86c3cc0efadac9c2c3b089483a4">&#9670;&nbsp;</a></span>read() <span class="overload">[10/13]</span></h2>
+<a id="a478ee8172951faea8a74bdeacc7043c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a478ee8172951faea8a74bdeacc7043c1">&#9670;&nbsp;</a></span>read() <span class="overload">[9/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1248,7 +1262,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a> &amp; read </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#ab7078bf13036f3e78534da3ad4149dc2">uint16</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a34ecedcf03a70dc91e4616212d79267d">uint8</a> &amp;&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1260,14 +1274,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a267687d1ff0fc07baa1964559ff5d034">iIstream</a>.</p>
+<p>Read a uint8. </p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00828">828</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a3d4e7f31917b6ff31930cb23a1686193">iIstream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00818">818</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a37687181bbda5c256b8f5031030a7496"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37687181bbda5c256b8f5031030a7496">&#9670;&nbsp;</a></span>read() <span class="overload">[11/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a37687181bbda5c256b8f5031030a7496">&#9670;&nbsp;</a></span>read() <span class="overload">[10/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1290,14 +1306,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a float. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#ae3e958fe42c8f3341d7eb507ae72fd24">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00835">835</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00825">825</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a74a51f110ee3859191ffd704c2b4f141"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74a51f110ee3859191ffd704c2b4f141">&#9670;&nbsp;</a></span>read() <span class="overload">[12/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a74a51f110ee3859191ffd704c2b4f141">&#9670;&nbsp;</a></span>read() <span class="overload">[11/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1320,14 +1338,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read a double. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a07336185047bbed0698f7b2a9cbdac2f">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00843">843</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00833">833</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
 <a id="ae726f8108a5359ed31e60e44457a8c9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae726f8108a5359ed31e60e44457a8c9a">&#9670;&nbsp;</a></span>read() <span class="overload">[13/13]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae726f8108a5359ed31e60e44457a8c9a">&#9670;&nbsp;</a></span>read() <span class="overload">[12/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1360,27 +1380,57 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Write a block of binray data. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a9daa3ef23c10da1b778db0b236713aa0">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00851">851</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00841">841</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="VectorAlgorithm_8hpp_source.html#l00026">pFlow::count()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
+<p class="reference">References <a class="el" href="VectorAlgorithm_8hpp_source.html#l00026">pFlow::count()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
 <div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Istream_ae726f8108a5359ed31e60e44457a8c9a_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_ae726f8108a5359ed31e60e44457a8c9a_cgraph" alt=""/></div>
-<map name="classpFlow_1_1Istream_ae726f8108a5359ed31e60e44457a8c9a_cgraph" id="classpFlow_1_1Istream_ae726f8108a5359ed31e60e44457a8c9a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,56,32"/>
-<area shape="rect" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af" title=" " alt="" coords="104,5,209,32"/>
-</map>
 </div>
 
 </div>
 </div>
-<a id="ab8734e666421c9fe3b6380a818c6c727"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8734e666421c9fe3b6380a818c6c727">&#9670;&nbsp;</a></span>rewind()</h2>
+<a id="a2bdbb2555e86aa90ede87dcc48e33f65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bdbb2555e86aa90ede87dcc48e33f65">&#9670;&nbsp;</a></span>findBinaryBlockStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> findBinaryBlockStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>It seek for a character sequence that indicates the start of a binary block char sequence is 255 255 255 0 <br  />
+ </p>
+
+<p>Reimplemented from <a class="el" href="classpFlow_1_1iIstream.html#a3eed5b1b1ab31fd1da5cfd752ca09ad9">iIstream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00861">861</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a16b5576a276bb013a4bfc1dccacf3671"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16b5576a276bb013a4bfc1dccacf3671">&#9670;&nbsp;</a></span>rewind()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1397,14 +1447,86 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Rewind the stream so that it may be read again. </p>
+
 <p>Implements <a class="el" href="classpFlow_1_1iIstream.html#acbf88ac063eb4598338671e603f36332">iIstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00871">871</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00891">891</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a641ff388ef41042b3a08ffe0cb7188f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a641ff388ef41042b3a08ffe0cb7188f4">&#9670;&nbsp;</a></span>seek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void seek </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#a91b2463ca484cf634c73eba7573e8419">iIstream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00902">902</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae44e318a6d58d774d4eddf726dd543f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae44e318a6d58d774d4eddf726dd543f4">&#9670;&nbsp;</a></span>tell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> tell </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return current position indicator. </p>
+
+<p>Implements <a class="el" href="classpFlow_1_1iIstream.html#ad850abaf1a42310d4b3cc931863ca92f">iIstream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00911">911</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Istream_ae44e318a6d58d774d4eddf726dd543f4_cgraph.png" border="0" usemap="#classpFlow_1_1Istream_ae44e318a6d58d774d4eddf726dd543f4_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1421,7 +1543,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">std::ios_base::fmtflags flags </td>
           <td>(</td>
           <td class="paramtype">const ios_base::fmtflags&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
+          <td class="paramname"><em>flags</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1432,11 +1554,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set flags of stream. </p>
+<p>Set stream flags. </p>
 
 <p>Implements <a class="el" href="classpFlow_1_1IOstream.html#ad624f59ea96278722591e5c257ab181b">IOstream</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00891">891</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8cpp_source.html#l00933">933</a> of file <a class="el" href="Istream_8cpp_source.html">Istream.cpp</a>.</p>
 
 </div>
 </div>
@@ -1463,9 +1585,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00165">165</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<p>Access to underlying std::istream. </p>
 
-<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00046">Istream::is_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00173">173</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00049">Istream::is_</a>.</p>
 
 </div>
 </div>
@@ -1492,9 +1616,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00171">171</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<p>Const access to underlying std::istream. </p>
 
-<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00046">Istream::is_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00179">179</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="Istream_8hpp_source.html#l00049">Istream::is_</a>.</p>
 
 </div>
 </div>
@@ -1519,9 +1645,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00044">44</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<p>Stream name. </p>
 
-<p class="reference">Referenced by <a class="el" href="Istream_8hpp_source.html#l00077">Istream::name()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00046">46</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Istream_8hpp_source.html#l00081">Istream::name()</a>.</p>
 
 </div>
 </div>
@@ -1545,9 +1673,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00046">46</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+<p>Input stream. </p>
 
-<p class="reference">Referenced by <a class="el" href="Istream_8hpp_source.html#l00165">Istream::stdStream()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Istream_8hpp_source.html#l00049">49</a> of file <a class="el" href="Istream_8hpp_source.html">Istream.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Istream_8hpp_source.html#l00173">Istream::stdStream()</a>.</p>
 
 </div>
 </div>

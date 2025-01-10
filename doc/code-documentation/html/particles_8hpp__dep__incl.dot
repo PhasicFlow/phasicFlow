@@ -1,0 +1,27 @@
+digraph "src/Particles/particles/particles.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/Particles/particles\l/particles.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/Interaction/contactSearch\l/boundaries/periodicBoundaryContact\lSearch/periodicBoundaryContactSearch.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$periodicBoundaryContactSearch_8cpp.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/Interaction/contactSearch\l/ContactSearch/ContactSearch.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$ContactSearch_8hpp.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="src/Interaction/contactSearch\l/contactSearch/contactSearch.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$contactSearch_8cpp.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="src/Interaction/interaction\l/interaction.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interaction_8cpp.html",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="src/Particles/GrainParticles\l/grainParticles/grainParticles.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$grainParticles_8hpp.html",tooltip=" "];
+  Node1 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="src/Particles/Insertion\l/insertion/insertion.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$insertion_8cpp.html",tooltip=" "];
+  Node1 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="src/Particles/Insertion\l/Insertion/Insertion.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$Insertion_8hpp.html",tooltip=" "];
+  Node1 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="src/Particles/Insertion\l/insertionRegion/insertionRegion.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$insertionRegion_8cpp.html",tooltip=" "];
+  Node1 -> Node25 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="src/Particles/particles\l/particles.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$particles_8cpp.html",tooltip=" "];
+  Node1 -> Node26 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="src/Particles/SphereParticles\l/sphereParticles/sphereParticles.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$sphereParticles_8hpp.html",tooltip=" "];
+}

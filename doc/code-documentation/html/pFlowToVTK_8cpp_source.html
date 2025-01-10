@@ -125,199 +125,234 @@ $(document).ready(function(){initNavTree('pFlowToVTK_8cpp_source.html',''); init
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vocabs_8hpp.html">vocabs.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointFieldToVTK_8hpp.html">pointFieldToVTK.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="triSurfaceFieldToVTK_8hpp.html">triSurfaceFieldToVTK.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="timeFolder_8hpp.html">timeFolder.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ranges_8hpp.html">ranges.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">pFlow::wordVector</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#abb4cc5ad7c1a551313299d97e316f5fd">pFlow::geometryFolder__</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1timeFolder.html">pFlow::timeFolder</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#ac2c8831a940f11de069cd73eb255b3ae">pFlow::wordList</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1IOfileHeader.html">pFlow::IOfileHeader</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1objectFile.html">pFlow::objectFile</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1multiTriSurface.html">pFlow::multiTriSurface</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#af7145c0814183a2c991634e8128b9d97">pFlow::realCombinedRange</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="pFlowToVTK_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">   45</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="pFlowToVTK_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv )</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> outFolder = (<a class="code" href="namespacepFlow.html#a869d7b21ba981c374dcf8542f4ce2144">pFlow::CWD</a>()/<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(<span class="stringliteral">&quot;VTK&quot;</span>)).wordPath();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classpFlow_1_1commandLine.html">commandLine</a> cmds(</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="stringliteral">&quot;pFlowToVTK&quot;</span>,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="stringliteral">&quot;Convrtes the saved pointField and geometry&quot;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="stringliteral">&quot; date in time folders into vtk file format.&quot;</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> times;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> noGoem = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    cmds.add_flag(</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;--no-geometry&quot;</span>,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        noGoem,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;Do not convert geometry to VTK file&quot;</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span> noParticle = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    cmds.add_flag(<span class="stringliteral">&quot;--no-particles&quot;</span>,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        noParticle,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="stringliteral">&quot;Do not convert particle fields to VTK file&quot;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    cmds.<a class="code" href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">addOption</a>(<span class="stringliteral">&quot;-o,--out-folder&quot;</span>,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        outFolder,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="stringliteral">&quot;path to output folder of VTK&quot;</span>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="stringliteral">&quot;path&quot;</span>);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> fields;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span>             allFields = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    cmds.<a class="code" href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">addOption</a>(<span class="stringliteral">&quot;-f,--fields&quot;</span>,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        fields.vectorField(),</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="stringliteral">&quot;a space-separated list of fields names to be converted to VTK&quot;</span>,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="stringliteral">&quot;word&quot;</span>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    cmds.<a class="code" href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">addOption</a>(</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="stringliteral">&quot;-t,--time&quot;</span>,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        times.vectorField(),</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="stringliteral">&quot;a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end&quot;</span>,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="stringliteral">&quot; &quot;</span>);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> isCoupling = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="timeFolder_8hpp.html">timeFolder.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ranges_8hpp.html">ranges.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Vectors_8hpp.html">Vectors.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="phasicFlowKokkos_8hpp.html">phasicFlowKokkos.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointFieldToVTK_8hpp.html">pointFieldToVTK.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="triSurfaceFieldToVTK_8hpp.html">triSurfaceFieldToVTK.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fileSeries_8hpp.html">fileSeries.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//#include &quot;readControlDict.hpp&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="pointFieldToVTK_8hpp.html#a1c9680e4de75db1127a1cec7964445de">   33</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pFlowToVTK_8cpp.html#a1c9680e4de75db1127a1cec7964445de">bindaryOutput__</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="pFlowToVTK_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">   35</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="pFlowToVTK_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv )</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a> outFolder = (<a class="code" href="namespacepFlow.html#a869d7b21ba981c374dcf8542f4ce2144">pFlow::CWD</a>()/<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a>(<span class="stringliteral">&quot;VTK&quot;</span>)).wordPath();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a> cmds(</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="stringliteral">&quot;pFlowToVTK&quot;</span>,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="stringliteral">&quot;Convrtes the saved pointField and geometry&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="stringliteral">&quot; date in time folders into vtk file format.&quot;</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">pFlow::wordVector</a> times;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;         </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">bool</span> noGoem = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    cmds.add_flag(</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="stringliteral">&quot;--no-geometry&quot;</span>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        noGoem,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="stringliteral">&quot;Do not convert geometry to VTK file&quot;</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">bool</span> noParticle = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    cmds.add_flag(<span class="stringliteral">&quot;--no-particles&quot;</span>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        noParticle,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="stringliteral">&quot;Do not convert particle fields to VTK file&quot;</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="pFlowToVTK_8cpp.html#a1c9680e4de75db1127a1cec7964445de">bindaryOutput__</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    cmds.add_flag(<span class="stringliteral">&quot;-b, --binary&quot;</span>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="pFlowToVTK_8cpp.html#a1c9680e4de75db1127a1cec7964445de">bindaryOutput__</a>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;Wrtie vtk file (for particles only) in binary format. Default is ASCII&quot;</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    cmds.<a class="code" href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">addOption</a>(<span class="stringliteral">&quot;-o,--out-folder&quot;</span>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        outFolder,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="stringliteral">&quot;path to output folder of VTK&quot;</span>,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="stringliteral">&quot;path&quot;</span>); </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">bool</span> separateSurfaces = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    cmds.add_flag(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="stringliteral">&quot;-s,--separate-surfaces&quot;</span>,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        separateSurfaces,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="stringliteral">&quot;use this when you want to have sub-surfaces in separate files&quot;</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">pFlow::wordVector</a> fields;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span>             allFields = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    cmds.<a class="code" href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">addOption</a>(<span class="stringliteral">&quot;-f,--fields&quot;</span>,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        fields.<a class="code" href="classpFlow_1_1Vector.html#a7bf66e1fb0c930579f03e69eb94376c5">vectorField</a>(),</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="stringliteral">&quot;a space-separated list of fields names to be converted to VTK&quot;</span>,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="stringliteral">&quot;word&quot;</span>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    cmds.<a class="code" href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">addOption</a>(</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="stringliteral">&quot;-t,--time&quot;</span>,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        times.<a class="code" href="classpFlow_1_1Vector.html#a7bf66e1fb0c930579f03e69eb94376c5">vectorField</a>(),</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="stringliteral">&quot;a space separated lists of time folders, or a strided range begin:stride:end, or an interval begin:end&quot;</span>,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">//bool isCoupling = false;</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">// this should be palced in each main </span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// this should be palced in each main </span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classpFlow_1_1timeFolder.html">timeFolder</a> folders(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> destFolder = <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>(outFolder)/<a class="code" href="namespacepFlow.html#abb4cc5ad7c1a551313299d97e316f5fd">geometryFolder__</a>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> destFolderField = <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>(outFolder);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="namespacepFlow.html#ac2c8831a940f11de069cd73eb255b3ae">wordList</a> geomfiles{<span class="stringliteral">&quot;triSurface&quot;</span>};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span>(cmds.count(<span class="stringliteral">&quot;--fields&quot;</span>))</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        allFields = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="namespacepFlow.html#af7145c0814183a2c991634e8128b9d97">realCombinedRange</a> validRange;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span>( cmds.count(<span class="stringliteral">&quot;--time&quot;</span>) )</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">if</span>(!validRange.addRanges(times))</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        validRange.addIntervalRange(folders.<a class="code" href="classpFlow_1_1timeFolder.html#aaff3f438097803be5fef5cd29cd8985d">startTime</a>(), folders.<a class="code" href="classpFlow_1_1timeFolder.html#a2aafefc5248e595246d11de0587524f3">endTime</a>());</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">do</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordflow">if</span>( !validRange.isMember( folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>() ) )<span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt; <span class="stringliteral">&quot;time: &quot;</span> &lt;&lt; <a class="code" href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a>( folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>() )&lt;&lt;<span class="stringliteral">&quot; s&quot;</span> &lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">if</span>(!noGoem)</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        {   </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> geomFolder = folders.<a class="code" href="classpFlow_1_1timeFolder.html#a4e8f348d5741229dc3661d90703080ed">folder</a>()/<a class="code" href="namespacepFlow.html#abb4cc5ad7c1a551313299d97e316f5fd">geometryFolder__</a>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">if</span>(!<a class="code" href="namespacepFlow_1_1TSFtoVTK.html#a361422b3b3f4f4c5048f8c61e2c3927c">pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields</a>(geomFolder, folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(), destFolder, <span class="stringliteral">&quot;surface&quot;</span>))</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            }   </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">if</span>(!noParticle)</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">if</span>(allFields)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                <span class="keywordflow">if</span>( !<a class="code" href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">pFlow::PFtoVTK::convertTimeFolderPointFields</a>(</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                    folders.<a class="code" href="classpFlow_1_1timeFolder.html#a4e8f348d5741229dc3661d90703080ed">folder</a>(),</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                    folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(),</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                    destFolderField,</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                    <span class="stringliteral">&quot;sphereFields&quot;</span> )</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                )</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            }<span class="keywordflow">else</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="keywordflow">if</span>(!<a class="code" href="namespacepFlow_1_1PFtoVTK.html#afed74f3e8fdc5e63c61b210f8fa1044c">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected</a>(</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    folders.<a class="code" href="classpFlow_1_1timeFolder.html#a4e8f348d5741229dc3661d90703080ed">folder</a>(),</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                    folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(),</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                    destFolderField,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                    <span class="stringliteral">&quot;sphereFields&quot;</span>,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                    fields,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                    !<a class="code" href="namespacepFlow.html#aaf1dcea055a0402beff3cec1b0849d74">pFlow::equal</a>(folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(),<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a><span class="keyword">&gt;</span>(0.0)) )</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                )</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            }   </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    }</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">while</span>( folders++ );</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt; <span class="stringliteral">&quot;\nFinished successfully.\n&quot;</span>;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">// this should be palced in each main </span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="finalize_8hpp.html">finalize.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="pFlowToVTK_8cpp.html#a1c9680e4de75db1127a1cec7964445de">bindaryOutput__</a>)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="streams_8hpp.html#a41fa3612202db2d335c330fb061e0054">INFORMATION</a>&lt;&lt;<span class="stringliteral">&quot;Writing vtk file in binray format will accelerate the conversion (5~10x)&quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="stringliteral">&quot; and visualization in paraview.&quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="stringliteral">&quot; Consider addig flag -b or --binary in the command line.&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a4101c99c5eb65c687037cb839295ae25">END_INFO</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a> formatName = <a class="code" href="pFlowToVTK_8cpp.html#a1c9680e4de75db1127a1cec7964445de">bindaryOutput__</a>?<span class="stringliteral">&quot;binary&quot;</span>:<span class="stringliteral">&quot;ascii&quot;</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="classpFlow_1_1timeFolder.html">pFlow::timeFolder</a> folders(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">auto</span> destFolderGeometry = <a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a>(outFolder)/<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a>(<a class="code" href="namespacepFlow.html#ae6cebdf3473a26ac7ed43efeb0442305">pFlow::geometryFolder__</a>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">auto</span> destFolderField = <a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a>(outFolder)/<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a>(<span class="stringliteral">&quot;particles&quot;</span>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="classpFlow_1_1List.html">pFlow::wordList</a> geomfiles{<span class="stringliteral">&quot;triSurface&quot;</span>};</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span>(cmds.count(<span class="stringliteral">&quot;--fields&quot;</span>))</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        allFields = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="classpFlow_1_1combinedRange.html">pFlow::realCombinedRange</a> validRange;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">if</span>( cmds.count(<span class="stringliteral">&quot;--time&quot;</span>) )</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">if</span>(!validRange.<a class="code" href="classpFlow_1_1combinedRange.html#adbbd1401a0edfb24f13accc47e8c85b9">addRanges</a>(times))</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        validRange.<a class="code" href="classpFlow_1_1combinedRange.html#a59ec953d3d9b171d79c9f11b16f9c26d">addIntervalRange</a>(folders.<a class="code" href="classpFlow_1_1timeFolder.html#aaff3f438097803be5fef5cd29cd8985d">startTime</a>(), folders.<a class="code" href="classpFlow_1_1timeFolder.html#a2aafefc5248e595246d11de0587524f3">endTime</a>());</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="classpFlow_1_1PFtoVTK_1_1fileSeries.html">pFlow::PFtoVTK::fileSeries</a> timeSeries{<a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a>(outFolder)};</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a> fileName;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <a class="code" href="classpFlow_1_1List.html">pFlow::wordList</a> geomFileNames;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <a class="code" href="classpFlow_1_1List.html">pFlow::wordList</a> surfNames;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().setTime(folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>());</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">if</span>( !validRange.<a class="code" href="classpFlow_1_1combinedRange.html#a5a3c06690014c015f02ad827514b8954">isMember</a>( folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>() ) )<span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>&lt;&lt; <span class="stringliteral">&quot;time: &quot;</span> &lt;&lt; <a class="code" href="iOstream_8hpp.html#afef572c05fbfb9e4597ddf354e79b3a6">Cyan_Text</a>( folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>() )&lt;&lt;<span class="stringliteral">&quot; s&quot;</span> &lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordflow">if</span>(!noGoem)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        {   </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">if</span>(!<a class="code" href="namespacepFlow_1_1TSFtoVTK.html#aec047e6957f6cccc4def46ee9812cc42">pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields</a>(</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>, destFolderGeometry, <span class="stringliteral">&quot;surface&quot;</span>, separateSurfaces, surfNames, geomFileNames))</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            timeSeries.addTimeFile(surfNames, folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(), geomFileNames);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">if</span>(!noParticle)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Converting pointFields to vtk file in &quot;</span>&lt;&lt; formatName&lt;&lt; <span class="stringliteral">&quot; format ...&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">if</span>(allFields)</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="keywordflow">if</span>( !<a class="code" href="namespacepFlow_1_1PFtoVTK.html#ae2070895c92a60735eedfd09e0275678">pFlow::PFtoVTK::convertTimeFolderPointFields</a>(</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                    destFolderField,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    <span class="stringliteral">&quot;particles&quot;</span>,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                    fileName </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    )</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                )</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            }<span class="keywordflow">else</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                <span class="keywordflow">if</span>(!<a class="code" href="namespacepFlow_1_1PFtoVTK.html#a9c61ea6aa5f8ad3c240cc00666ce9d58">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected</a>(</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                    destFolderField,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    <span class="stringliteral">&quot;particles&quot;</span>,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    fields,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    !<a class="code" href="namespacepFlow.html#ac51b1f978c0296b63a19e0033906c25c">pFlow::equal</a>(folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(),<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a><span class="keyword">&gt;</span>(0.0)),</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    fileName </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    )</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                )</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                {</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                    <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            timeSeries.addTimeFile(<span class="stringliteral">&quot;particles&quot;</span>, folders.<a class="code" href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">time</a>(), fileName);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">while</span>( folders++ );</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>&lt;&lt; <span class="stringliteral">&quot;\nFinished successfully.\n&quot;</span>;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">// this should be palced in each main </span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="finalize_8hpp.html">finalize.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ainitialize__Control_8hpp_html"><div class="ttname"><a href="initialize__Control_8hpp.html">initialize_Control.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_afed74f3e8fdc5e63c61b210f8fa1044c"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#afed74f3e8fdc5e63c61b210f8fa1044c">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected</a></div><div class="ttdeci">bool convertTimeFolderPointFieldsSelected(fileSystem timeFolder, real time, fileSystem destPath, word bName, wordVector fieldsName, bool mustExist)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00360">pointFieldToVTK.hpp:360</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1timeFolder_html_a6fc92e0e88a1173babd33b596d8708b3"><div class="ttname"><a href="classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3">pFlow::timeFolder::time</a></div><div class="ttdeci">real time() const</div><div class="ttdef"><b>Definition:</b> <a href="timeFolder_8hpp_source.html#l00057">timeFolder.hpp:57</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_a213e43875efd5fefe28d0da89432ff7a"><div class="ttname"><a href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">cyanText</a></div><div class="ttdeci">#define cyanText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00034">streams.hpp:34</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1List_html"><div class="ttname"><a href="classpFlow_1_1List.html">pFlow::List&lt; word &gt;</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_a7bf66e1fb0c930579f03e69eb94376c5"><div class="ttname"><a href="classpFlow_1_1Vector.html#a7bf66e1fb0c930579f03e69eb94376c5">pFlow::Vector::vectorField</a></div><div class="ttdeci">const vectorType &amp; vectorField() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00227">Vector.hpp:227</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdoc">Fatal exit.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00098">error.hpp:98</a></div></div>
+<div class="ttc" id="aiOstream_8hpp_html_afef572c05fbfb9e4597ddf354e79b3a6"><div class="ttname"><a href="iOstream_8hpp.html#afef572c05fbfb9e4597ddf354e79b3a6">Cyan_Text</a></div><div class="ttdeci">#define Cyan_Text(text)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00044">iOstream.hpp:44</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00039">streams.hpp:39</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_ae2070895c92a60735eedfd09e0275678"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#ae2070895c92a60735eedfd09e0275678">pFlow::PFtoVTK::convertTimeFolderPointFields</a></div><div class="ttdeci">bool convertTimeFolderPointFields(systemControl &amp;control, const fileSystem &amp;destPath, const word &amp;bName, word &amp;filename)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8cpp_source.html#l00008">pointFieldToVTK.cpp:8</a></div></div>
 <div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1commandLine_html_ae309d1cad7a1c3502e8d112f76373816"><div class="ttname"><a href="classpFlow_1_1commandLine.html#ae309d1cad7a1c3502e8d112f76373816">pFlow::commandLine::addOption</a></div><div class="ttdeci">Option * addOption(word optionName, word description, word opText=&quot;&quot;)</div></div>
-<div class="ttc" id="anamespacepFlow_1_1TSFtoVTK_html_a361422b3b3f4f4c5048f8c61e2c3927c"><div class="ttname"><a href="namespacepFlow_1_1TSFtoVTK.html#a361422b3b3f4f4c5048f8c61e2c3927c">pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields</a></div><div class="ttdeci">bool convertTimeFolderTriSurfaceFields(fileSystem timeFolder, real time, fileSystem destPath, word bName)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceFieldToVTK_8hpp_source.html#l00180">triSurfaceFieldToVTK.hpp:180</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_af7145c0814183a2c991634e8128b9d97"><div class="ttname"><a href="namespacepFlow.html#af7145c0814183a2c991634e8128b9d97">pFlow::realCombinedRange</a></div><div class="ttdeci">combinedRange&lt; real &gt; realCombinedRange</div><div class="ttdef"><b>Definition:</b> <a href="ranges_8hpp_source.html#l00041">ranges.hpp:41</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_ac51b1f978c0296b63a19e0033906c25c"><div class="ttname"><a href="namespacepFlow.html#ac51b1f978c0296b63a19e0033906c25c">pFlow::equal</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool equal(const box &amp;b1, const box &amp;b2, real tol=smallValue)</div><div class="ttdef"><b>Definition:</b> <a href="box_8hpp_source.html#l00135">box.hpp:135</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1PFtoVTK_1_1fileSeries_html"><div class="ttname"><a href="classpFlow_1_1PFtoVTK_1_1fileSeries.html">pFlow::PFtoVTK::fileSeries</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSeries_8hpp_source.html#l00014">fileSeries.hpp:14</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1commandLine_html"><div class="ttname"><a href="classpFlow_1_1commandLine.html">pFlow::commandLine</a></div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8hpp_source.html#l00036">commandLine.hpp:36</a></div></div>
+<div class="ttc" id="aVectors_8hpp_html"><div class="ttname"><a href="Vectors_8hpp.html">Vectors.hpp</a></div></div>
 <div class="ttc" id="apointFieldToVTK_8hpp_html"><div class="ttname"><a href="pointFieldToVTK_8hpp.html">pointFieldToVTK.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
-<div class="ttc" id="apFlowToVTK_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="pFlowToVTK_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="pFlowToVTK_8cpp_source.html#l00045">pFlowToVTK.cpp:45</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1multiTriSurface_html"><div class="ttname"><a href="classpFlow_1_1multiTriSurface.html">pFlow::multiTriSurface</a></div><div class="ttdef"><b>Definition:</b> <a href="multiTriSurface_8hpp_source.html#l00033">multiTriSurface.hpp:33</a></div></div>
+<div class="ttc" id="afileSeries_8hpp_html"><div class="ttname"><a href="fileSeries_8hpp.html">fileSeries.hpp</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00341">iOstream.hpp:341</a></div></div>
+<div class="ttc" id="apFlowToVTK_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="pFlowToVTK_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="pFlowToVTK_8cpp_source.html#l00035">pFlowToVTK.cpp:35</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1timeFolder_html_aaff3f438097803be5fef5cd29cd8985d"><div class="ttname"><a href="classpFlow_1_1timeFolder.html#aaff3f438097803be5fef5cd29cd8985d">pFlow::timeFolder::startTime</a></div><div class="ttdeci">real startTime() const</div><div class="ttdef"><b>Definition:</b> <a href="timeFolder_8hpp_source.html#l00105">timeFolder.hpp:105</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1combinedRange_html"><div class="ttname"><a href="classpFlow_1_1combinedRange.html">pFlow::combinedRange</a></div><div class="ttdef"><b>Definition:</b> <a href="combinedRange_8hpp_source.html#l00036">combinedRange.hpp:36</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdoc">Manages file pathes, manupulate and combines them.</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00071">fileSystem.hpp:71</a></div></div>
 <div class="ttc" id="atriSurfaceFieldToVTK_8hpp_html"><div class="ttname"><a href="triSurfaceFieldToVTK_8hpp.html">triSurfaceFieldToVTK.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_abb4cc5ad7c1a551313299d97e316f5fd"><div class="ttname"><a href="namespacepFlow.html#abb4cc5ad7c1a551313299d97e316f5fd">pFlow::geometryFolder__</a></div><div class="ttdeci">const char * geometryFolder__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00033">vocabs.hpp:33</a></div></div>
+<div class="ttc" id="aphasicFlowKokkos_8hpp_html"><div class="ttname"><a href="phasicFlowKokkos_8hpp.html">phasicFlowKokkos.hpp</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1combinedRange_html_a59ec953d3d9b171d79c9f11b16f9c26d"><div class="ttname"><a href="classpFlow_1_1combinedRange.html#a59ec953d3d9b171d79c9f11b16f9c26d">pFlow::combinedRange::addIntervalRange</a></div><div class="ttdeci">bool addIntervalRange(const word &amp;strRange)</div><div class="ttdef"><b>Definition:</b> <a href="combinedRange_8hpp_source.html#l00097">combinedRange.hpp:97</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_ae6cebdf3473a26ac7ed43efeb0442305"><div class="ttname"><a href="namespacepFlow.html#ae6cebdf3473a26ac7ed43efeb0442305">pFlow::geometryFolder__</a></div><div class="ttdeci">const char *const geometryFolder__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00032">vocabs.hpp:32</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1commandLine_html_af199716992f3f8bb51c89ddcca847062"><div class="ttname"><a href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">pFlow::commandLine::parse</a></div><div class="ttdeci">bool parse(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8cpp_source.html#l00050">commandLine.cpp:50</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1TSFtoVTK_html_aec047e6957f6cccc4def46ee9812cc42"><div class="ttname"><a href="namespacepFlow_1_1TSFtoVTK.html#aec047e6957f6cccc4def46ee9812cc42">pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields</a></div><div class="ttdeci">bool convertTimeFolderTriSurfaceFields(systemControl &amp;control, const fileSystem &amp;destPath, const word &amp;bName, bool separate, wordList &amp;surfNames, wordList &amp;fileNames)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceFieldToVTK_8cpp_source.html#l00005">triSurfaceFieldToVTK.cpp:5</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a86ae30c22a4ef4bc487b40ed52f4d2f9"><div class="ttname"><a href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a></div><div class="ttdeci">Ostream output</div></div>
+<div class="ttc" id="aclasspFlow_1_1combinedRange_html_adbbd1401a0edfb24f13accc47e8c85b9"><div class="ttname"><a href="classpFlow_1_1combinedRange.html#adbbd1401a0edfb24f13accc47e8c85b9">pFlow::combinedRange::addRanges</a></div><div class="ttdeci">bool addRanges(const std::vector&lt; word &gt; &amp;strRanges)</div><div class="ttdef"><b>Definition:</b> <a href="combinedRange_8hpp_source.html#l00064">combinedRange.hpp:64</a></div></div>
+<div class="ttc" id="apFlowToVTK_8cpp_html_a1c9680e4de75db1127a1cec7964445de"><div class="ttname"><a href="pFlowToVTK_8cpp.html#a1c9680e4de75db1127a1cec7964445de">bindaryOutput__</a></div><div class="ttdeci">bool bindaryOutput__</div><div class="ttdef"><b>Definition:</b> <a href="pFlowToVTK_8cpp_source.html#l00033">pFlowToVTK.cpp:33</a></div></div>
 <div class="ttc" id="aranges_8hpp_html"><div class="ttname"><a href="ranges_8hpp.html">ranges.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00033">objectFile.hpp:33</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a6e76b0fc4f41684b7dd691cb6552384d"><div class="ttname"><a href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">pFlow::wordVector</a></div><div class="ttdeci">Vector&lt; word &gt; wordVector</div><div class="ttdef"><b>Definition:</b> <a href="Vectors_8hpp_source.html#l00064">Vectors.hpp:64</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOfileHeader_html"><div class="ttname"><a href="classpFlow_1_1IOfileHeader.html">pFlow::IOfileHeader</a></div><div class="ttdef"><b>Definition:</b> <a href="IOfileHeader_8hpp_source.html#l00035">IOfileHeader.hpp:35</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a869d7b21ba981c374dcf8542f4ce2144"><div class="ttname"><a href="namespacepFlow.html#a869d7b21ba981c374dcf8542f4ce2144">pFlow::CWD</a></div><div class="ttdeci">fileSystem CWD()</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00186">fileSystem.hpp:186</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a43810217a8e7b2859a59b0ea17b02728"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a43810217a8e7b2859a59b0ea17b02728">pFlow::PFtoVTK::convertTimeFolderPointFields</a></div><div class="ttdeci">bool convertTimeFolderPointFields(fileSystem timeFolder, real time, fileSystem destPath, word bName)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8hpp_source.html#l00289">pointFieldToVTK.hpp:289</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1combinedRange_html_a5a3c06690014c015f02ad827514b8954"><div class="ttname"><a href="classpFlow_1_1combinedRange.html#a5a3c06690014c015f02ad827514b8954">pFlow::combinedRange::isMember</a></div><div class="ttdeci">bool isMember(T val) const</div><div class="ttdef"><b>Definition:</b> <a href="combinedRange_8hpp_source.html#l00131">combinedRange.hpp:131</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a1861619f2a6e102d0043a98577c8c9e8"><div class="ttname"><a href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a></div><div class="ttdeci">#define END_REPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a869d7b21ba981c374dcf8542f4ce2144"><div class="ttname"><a href="namespacepFlow.html#a869d7b21ba981c374dcf8542f4ce2144">pFlow::CWD</a></div><div class="ttdeci">fileSystem CWD()</div><div class="ttdoc">Free function to reture current working directory.</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00221">fileSystem.hpp:221</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1PFtoVTK_html_a9c61ea6aa5f8ad3c240cc00666ce9d58"><div class="ttname"><a href="namespacepFlow_1_1PFtoVTK.html#a9c61ea6aa5f8ad3c240cc00666ce9d58">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected</a></div><div class="ttdeci">bool convertTimeFolderPointFieldsSelected(systemControl &amp;control, const fileSystem &amp;destPath, const word &amp;bName, const wordVector &amp;fieldsName, bool mustExist, word &amp;filename)</div><div class="ttdef"><b>Definition:</b> <a href="pointFieldToVTK_8cpp_source.html#l00095">pointFieldToVTK.cpp:95</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1timeFolder_html_a2aafefc5248e595246d11de0587524f3"><div class="ttname"><a href="classpFlow_1_1timeFolder.html#a2aafefc5248e595246d11de0587524f3">pFlow::timeFolder::endTime</a></div><div class="ttdeci">real endTime() const</div><div class="ttdef"><b>Definition:</b> <a href="timeFolder_8hpp_source.html#l00111">timeFolder.hpp:111</a></div></div>
-<div class="ttc" id="areadControlDict_8hpp_html"><div class="ttname"><a href="readControlDict_8hpp.html">readControlDict.hpp</a></div></div>
+<div class="ttc" id="avocabs_8hpp_html"><div class="ttname"><a href="vocabs_8hpp.html">vocabs.hpp</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html"><div class="ttname"><a href="classpFlow_1_1Vector.html">pFlow::Vector&lt; word &gt;</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a4101c99c5eb65c687037cb839295ae25"><div class="ttname"><a href="streams_8hpp.html#a4101c99c5eb65c687037cb839295ae25">END_INFO</a></div><div class="ttdeci">#define END_INFO</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00037">streams.hpp:37</a></div></div>
 <div class="ttc" id="acommandLine_8hpp_html"><div class="ttname"><a href="commandLine_8hpp.html">commandLine.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aaf1dcea055a0402beff3cec1b0849d74"><div class="ttname"><a href="namespacepFlow.html#aaf1dcea055a0402beff3cec1b0849d74">pFlow::equal</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool equal(const real &amp;s1, const real &amp;s2)</div><div class="ttdef"><b>Definition:</b> <a href="bTypesFunctions_8hpp_source.html#l00188">bTypesFunctions.hpp:188</a></div></div>
 <div class="ttc" id="ainitialize__Control_8hpp_html_a4f5e4e852648762473ecd75a907417ca"><div class="ttname"><a href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a></div><div class="ttdeci">auto &amp; Control</div><div class="ttdef"><b>Definition:</b> <a href="initialize__Control_8hpp_source.html#l00047">initialize_Control.hpp:47</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_ac2c8831a940f11de069cd73eb255b3ae"><div class="ttname"><a href="namespacepFlow.html#ac2c8831a940f11de069cd73eb255b3ae">pFlow::wordList</a></div><div class="ttdeci">List&lt; word &gt; wordList</div><div class="ttdef"><b>Definition:</b> <a href="List_8hpp_source.html#l00241">List.hpp:241</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1timeFolder_html_a4e8f348d5741229dc3661d90703080ed"><div class="ttname"><a href="classpFlow_1_1timeFolder.html#a4e8f348d5741229dc3661d90703080ed">pFlow::timeFolder::folder</a></div><div class="ttdeci">fileSystem folder() const</div><div class="ttdef"><b>Definition:</b> <a href="timeFolder_8hpp_source.html#l00062">timeFolder.hpp:62</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a41fa3612202db2d335c330fb061e0054"><div class="ttname"><a href="streams_8hpp.html#a41fa3612202db2d335c330fb061e0054">INFORMATION</a></div><div class="ttdeci">#define INFORMATION</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00036">streams.hpp:36</a></div></div>
 <div class="ttc" id="atimeFolder_8hpp_html"><div class="ttname"><a href="timeFolder_8hpp.html">timeFolder.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1timeFolder_html"><div class="ttname"><a href="classpFlow_1_1timeFolder.html">pFlow::timeFolder</a></div><div class="ttdef"><b>Definition:</b> <a href="timeFolder_8hpp_source.html#l00032">timeFolder.hpp:32</a></div></div>
 <div class="ttc" id="afinalize_8hpp_html"><div class="ttname"><a href="finalize_8hpp.html">finalize.hpp</a></div></div>

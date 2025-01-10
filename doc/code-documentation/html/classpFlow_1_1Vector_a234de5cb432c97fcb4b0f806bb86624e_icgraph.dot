@@ -1,0 +1,18 @@
+digraph "capacity"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="capacity",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Capacity of the vector."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::VectorSingle\l\< word, HostSpace \>\l::capacity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorSingle_3_01word_00_01HostSpace_01_4.html#a12051b064459308ff4294c26e9c3690a",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::VectorSingle\l\< word, HostSpace \>\l::deviceViewAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorSingle_3_01word_00_01HostSpace_01_4.html#a2b61f293ce350189b17831038d3d1553",tooltip="Device view range [0,capcity)"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::VectorSingle\l\< word, HostSpace \>\l::hostViewAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorSingle_3_01word_00_01HostSpace_01_4.html#a31c0326d34cea4caaa16c31f9223f3db",tooltip="Return a view accessible on Host in range [0,capacity)"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::InsertionRegion\l::insertParticles",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1InsertionRegion.html#a15158008d33c145a2a4f346c797684ed",tooltip="Insert particles at current time t Check if currentTime is the right moment for particle insertion."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::pow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ae8c7f45b1b39def821f63012151da10c",tooltip=" "];
+}

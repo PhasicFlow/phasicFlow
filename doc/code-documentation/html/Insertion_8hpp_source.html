@@ -109,100 +109,92 @@ $(document).ready(function(){initNavTree('Insertion_8hpp_source.html',''); initR
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">      O        C enter of</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">     O O       E ngineering and</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    O   O      M ultiscale modeling of</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow       </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  Copyright (C): www.cemf.ir</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  email: hamid.r.norouzi AT gmail.com</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------  </span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">Licence:</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  granular and multiphase flows. You can redistribute it and/or modify it under</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions. </span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef __Insertion_hpp__</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define __Insertion_hpp__</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef __Insertion_hpp__</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define __Insertion_hpp__</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="InsertionRegion_8hpp.html">InsertionRegion.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ListPtr_8hpp.html">ListPtr.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="insertion_8hpp.html">insertion.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ListPtr_8hpp.html">ListPtr.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="InsertionRegion_8hpp.html">InsertionRegion.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="particles_8hpp.html">particles.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> ShapeType&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpFlow_1_1Insertion.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpFlow_1_1Insertion.html">Insertion</a></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">public</span> <a class="code" href="classpFlow_1_1insertion.html">insertion</a></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classpFlow_1_1Insertion.html#a2930483c30fb6c335a8a9a70b485f0fc">   41</a></span>&#160;    <span class="keyword">const</span> ShapeType&amp; <a class="code" href="classpFlow_1_1Insertion.html#a2930483c30fb6c335a8a9a70b485f0fc">shapes_</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// - insertion regions </span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classpFlow_1_1Insertion.html#ace531f6d9ebaa933bd37f79f89ec76c2">   44</a></span>&#160;    <a class="code" href="classpFlow_1_1ListPtr.html">ListPtr&lt;InsertionRegion&lt;ShapeType&gt;</a>&gt;  <a class="code" href="classpFlow_1_1Insertion.html#ace531f6d9ebaa933bd37f79f89ec76c2">regions_</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#a43b207ca2a0b2f0b1aedd32b0888b512">readInsertionDict</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1dictionary.html">dictionary</a>&amp; dict);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#a0a48f031a06d7bb9bbf6db921501e4b3">writeInsertionDict</a>(<a class="code" href="classpFlow_1_1dictionary.html">dictionary</a>&amp; dict)<span class="keyword">const</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="classpFlow_1_1Insertion.html#ad6c9b30b9f4da31b01f881f58d9e0f8d">TypeInfoTemplateNV</a>(<span class="stringliteral">&quot;Insertion&quot;</span>,ShapeType);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classpFlow_1_1Insertion.html#a512dad8922caa0f17a2d075fe433e158">Insertion</a>(<a class="code" href="classpFlow_1_1particles.html">particles</a>&amp; prtcl, <span class="keyword">const</span> ShapeType&amp; shapes);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classpFlow_1_1Insertion.html#a512dad8922caa0f17a2d075fe433e158">Insertion</a>(<a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> file, <a class="code" href="classpFlow_1_1particles.html">particles</a>&amp; prtcl, <span class="keyword">const</span> ShapeType&amp; shapes);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="particles_8hpp.html">particles.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> ShapeType&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classpFlow_1_1Insertion.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpFlow_1_1Insertion.html">Insertion</a> : <span class="keyword">public</span> <a class="code" href="classpFlow_1_1insertion.html">insertion</a></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#ade7faca5a778c285e00c20175e9c3815">insertParticles</a>(<a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> currentTime, <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt);</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classpFlow_1_1Insertion.html#a2930483c30fb6c335a8a9a70b485f0fc">   60</a></span>&#160;    <span class="keyword">const</span> ShapeType&amp;                    <a class="code" href="classpFlow_1_1Insertion.html#a2930483c30fb6c335a8a9a70b485f0fc">shapes_</a>;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#a8148f2b6c694e069c67183105cf17ce4">read</a>(<a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#aac753ee6ead0ddcdfb9e74f169c6bcec">write</a>(<a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os)<span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Insertion_8cpp.html">Insertion.cpp</a>&quot;</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// - insertion regions</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classpFlow_1_1Insertion.html#ace531f6d9ebaa933bd37f79f89ec76c2">   63</a></span>&#160;    <a class="code" href="classpFlow_1_1ListPtr.html">ListPtr&lt;InsertionRegion&lt;ShapeType&gt;</a>&gt; <a class="code" href="classpFlow_1_1Insertion.html#ace531f6d9ebaa933bd37f79f89ec76c2">regions_</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#ab57273124a2ab991a9d66707d92ed5fe">readInsertionDict</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#a6a6025278f5abb03540cd63b4b32f574">writeInsertionDict</a>(<a class="code" href="classpFlow_1_1dictionary.html">dictionary</a>&amp; <a class="code" href="classpFlow_1_1dictionary.html#a3c48fdd67832443dbef24c124f7512d2">dict</a>)<span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classpFlow_1_1Insertion.html#acc4fbcc0cb2f4a02cdbb0746dab9bc1d">TypeInfoTemplateNV11</a>(<span class="stringliteral">&quot;Insertion&quot;</span>, ShapeType);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classpFlow_1_1Insertion.html#a512dad8922caa0f17a2d075fe433e158">Insertion</a>(<a class="code" href="classpFlow_1_1particles.html">particles</a>&amp; prtcl, <span class="keyword">const</span> ShapeType&amp; shapes);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// Insertion(fileSystem file, particles&amp; prtcl, const ShapeType&amp; shapes);</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Insertion.html#a1278502f1da57fc8866d02a972a4bcc0">insertParticles</a>(<a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> iter, <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t, <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">/*virtual bool read(iIstream&amp; is) override;</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    virtual bool write(iOstream&amp; os)const override;*/</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Insertion_8cpp.html">Insertion.cpp</a>&quot;</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_ad6c9b30b9f4da31b01f881f58d9e0f8d"><div class="ttname"><a href="classpFlow_1_1Insertion.html#ad6c9b30b9f4da31b01f881f58d9e0f8d">pFlow::Insertion::TypeInfoTemplateNV</a></div><div class="ttdeci">TypeInfoTemplateNV(&quot;Insertion&quot;, ShapeType)</div></div>
-<div class="ttc" id="aclasspFlow_1_1ListPtr_html"><div class="ttname"><a href="classpFlow_1_1ListPtr.html">pFlow::ListPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="ListPtr_8hpp_source.html#l00038">ListPtr.hpp:38</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1ListPtr_html"><div class="ttname"><a href="classpFlow_1_1ListPtr.html">pFlow::ListPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="ListPtr_8hpp_source.html#l00037">ListPtr.hpp:37</a></div></div>
 <div class="ttc" id="aListPtr_8hpp_html"><div class="ttname"><a href="ListPtr_8hpp.html">ListPtr.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_ade7faca5a778c285e00c20175e9c3815"><div class="ttname"><a href="classpFlow_1_1Insertion.html#ade7faca5a778c285e00c20175e9c3815">pFlow::Insertion::insertParticles</a></div><div class="ttdeci">bool insertParticles(real currentTime, real dt)</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00103">Insertion.cpp:103</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_a8148f2b6c694e069c67183105cf17ce4"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a8148f2b6c694e069c67183105cf17ce4">pFlow::Insertion::read</a></div><div class="ttdeci">virtual bool read(iIstream &amp;is) override</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00171">Insertion.cpp:171</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
 <div class="ttc" id="aInsertion_8cpp_html"><div class="ttname"><a href="Insertion_8cpp.html">Insertion.cpp</a></div></div>
 <div class="ttc" id="ainsertion_8hpp_html"><div class="ttname"><a href="insertion_8hpp.html">insertion.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_a512dad8922caa0f17a2d075fe433e158"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a512dad8922caa0f17a2d075fe433e158">pFlow::Insertion::Insertion</a></div><div class="ttdeci">Insertion(particles &amp;prtcl, const ShapeType &amp;shapes)</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00071">Insertion.cpp:71</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_a512dad8922caa0f17a2d075fe433e158"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a512dad8922caa0f17a2d075fe433e158">pFlow::Insertion::Insertion</a></div><div class="ttdeci">Insertion(particles &amp;prtcl, const ShapeType &amp;shapes)</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00077">Insertion.cpp:77</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_acc4fbcc0cb2f4a02cdbb0746dab9bc1d"><div class="ttname"><a href="classpFlow_1_1Insertion.html#acc4fbcc0cb2f4a02cdbb0746dab9bc1d">pFlow::Insertion::TypeInfoTemplateNV11</a></div><div class="ttdeci">TypeInfoTemplateNV11(&quot;Insertion&quot;, ShapeType)</div></div>
 <div class="ttc" id="aparticles_8hpp_html"><div class="ttname"><a href="particles_8hpp.html">particles.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demComponent_8hpp_source.html#l00028">demComponent.hpp:28</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_ace531f6d9ebaa933bd37f79f89ec76c2"><div class="ttname"><a href="classpFlow_1_1Insertion.html#ace531f6d9ebaa933bd37f79f89ec76c2">pFlow::Insertion::regions_</a></div><div class="ttdeci">ListPtr&lt; InsertionRegion&lt; ShapeType &gt; &gt; regions_</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8hpp_source.html#l00044">Insertion.hpp:44</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_a2930483c30fb6c335a8a9a70b485f0fc"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a2930483c30fb6c335a8a9a70b485f0fc">pFlow::Insertion::shapes_</a></div><div class="ttdeci">const ShapeType &amp; shapes_</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8hpp_source.html#l00041">Insertion.hpp:41</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_aac753ee6ead0ddcdfb9e74f169c6bcec"><div class="ttname"><a href="classpFlow_1_1Insertion.html#aac753ee6ead0ddcdfb9e74f169c6bcec">pFlow::Insertion::write</a></div><div class="ttdeci">virtual bool write(iOstream &amp;os) const override</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00198">Insertion.cpp:198</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00033">iIstream.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_a6a6025278f5abb03540cd63b4b32f574"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a6a6025278f5abb03540cd63b4b32f574">pFlow::Insertion::writeInsertionDict</a></div><div class="ttdeci">bool writeInsertionDict(dictionary &amp;dict) const override</div><div class="ttdoc">Write to dictionary.</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00025">Insertion.cpp:25</a></div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_ace531f6d9ebaa933bd37f79f89ec76c2"><div class="ttname"><a href="classpFlow_1_1Insertion.html#ace531f6d9ebaa933bd37f79f89ec76c2">pFlow::Insertion::regions_</a></div><div class="ttdeci">ListPtr&lt; InsertionRegion&lt; ShapeType &gt; &gt; regions_</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8hpp_source.html#l00063">Insertion.hpp:63</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_a2930483c30fb6c335a8a9a70b485f0fc"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a2930483c30fb6c335a8a9a70b485f0fc">pFlow::Insertion::shapes_</a></div><div class="ttdeci">const ShapeType &amp; shapes_</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8hpp_source.html#l00060">Insertion.hpp:60</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1particles_html"><div class="ttname"><a href="classpFlow_1_1particles.html">pFlow::particles</a></div><div class="ttdef"><b>Definition:</b> <a href="particles_8hpp_source.html#l00033">particles.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dictionary_html_a3c48fdd67832443dbef24c124f7512d2"><div class="ttname"><a href="classpFlow_1_1dictionary.html#a3c48fdd67832443dbef24c124f7512d2">pFlow::dictionary::dict</a></div><div class="ttdeci">virtual dictionary &amp; dict()</div><div class="ttdoc">ref to this dictionary, if it is a dictionary</div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8cpp_source.html#l00369">dictionary.cpp:369</a></div></div>
 <div class="ttc" id="aInsertionRegion_8hpp_html"><div class="ttname"><a href="InsertionRegion_8hpp.html">InsertionRegion.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_a0a48f031a06d7bb9bbf6db921501e4b3"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a0a48f031a06d7bb9bbf6db921501e4b3">pFlow::Insertion::writeInsertionDict</a></div><div class="ttdeci">bool writeInsertionDict(dictionary &amp;dict) const</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00049">Insertion.cpp:49</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html_a43b207ca2a0b2f0b1aedd32b0888b512"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a43b207ca2a0b2f0b1aedd32b0888b512">pFlow::Insertion::readInsertionDict</a></div><div class="ttdeci">bool readInsertionDict(const dictionary &amp;dict)</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00023">Insertion.cpp:23</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Insertion_html"><div class="ttname"><a href="classpFlow_1_1Insertion.html">pFlow::Insertion</a></div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8hpp_source.html#l00035">Insertion.hpp:35</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dictionary_html"><div class="ttname"><a href="classpFlow_1_1dictionary.html">pFlow::dictionary</a></div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8hpp_source.html#l00038">dictionary.hpp:38</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1insertion_html"><div class="ttname"><a href="classpFlow_1_1insertion.html">pFlow::insertion</a></div><div class="ttdef"><b>Definition:</b> <a href="insertion_8hpp_source.html#l00033">insertion.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_ab57273124a2ab991a9d66707d92ed5fe"><div class="ttname"><a href="classpFlow_1_1Insertion.html#ab57273124a2ab991a9d66707d92ed5fe">pFlow::Insertion::readInsertionDict</a></div><div class="ttdeci">bool readInsertionDict()</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00051">Insertion.cpp:51</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html"><div class="ttname"><a href="classpFlow_1_1Insertion.html">pFlow::Insertion</a></div><div class="ttdoc">This class manages all the insertion regions for particles insertion in the simulation.</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8hpp_source.html#l00056">Insertion.hpp:56</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dictionary_html"><div class="ttname"><a href="classpFlow_1_1dictionary.html">pFlow::dictionary</a></div><div class="ttdoc">Dictionary holds a set of data entries or sub-dictionaries that are enclosed in a curely braces or ar...</div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8hpp_source.html#l00067">dictionary.hpp:67</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Insertion_html_a1278502f1da57fc8866d02a972a4bcc0"><div class="ttname"><a href="classpFlow_1_1Insertion.html#a1278502f1da57fc8866d02a972a4bcc0">pFlow::Insertion::insertParticles</a></div><div class="ttdeci">bool insertParticles(uint32 iter, real t, real dt)</div><div class="ttdef"><b>Definition:</b> <a href="Insertion_8cpp_source.html#l00112">Insertion.cpp:112</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1insertion_html"><div class="ttname"><a href="classpFlow_1_1insertion.html">pFlow::insertion</a></div><div class="ttdoc">Base class for particle insertion.</div><div class="ttdef"><b>Definition:</b> <a href="insertion_8hpp_source.html#l00035">insertion.hpp:35</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9e72493e858003bd3d74a55a2aedd075.html">Particles</a></li><li class="navelem"><a class="el" href="dir_48274e6f13aca5dc2f0e74080ca458f7.html">Insertion</a></li><li class="navelem"><a class="el" href="dir_3fcfff79f2a1ca7227410f16758b323f.html">Insertion</a></li><li class="navelem"><a class="el" href="Insertion_8hpp.html">Insertion.hpp</a></li>

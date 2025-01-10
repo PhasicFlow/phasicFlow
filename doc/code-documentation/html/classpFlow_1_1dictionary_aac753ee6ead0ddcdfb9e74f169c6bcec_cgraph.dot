@@ -1,0 +1,12 @@
+digraph "write"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="write",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="write to stream"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::IOstream::lineNumber",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3",tooltip="Const access to the current stream line number."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::IOstream::name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335",tooltip="Return the name of the stream."];
+}

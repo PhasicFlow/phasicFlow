@@ -1,0 +1,17 @@
+digraph "write"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="write",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Write token to stream or otherwise handle it."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::processorOstream\l::checkForPrefix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processorOstream.html#aecfb8db1466d1635025b137cd991da9c",tooltip="Output the prefix if required."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::processorOstream\l::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processorOstream.html#a10c5d22891f2677067c2fec2d3c366c8",tooltip="Write character."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::processorOstream\l::setColor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processorOstream.html#ad38a06c06f32a4ebae5b2065749e4089",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::masterOstream\l::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1masterOstream.html#a10c5d22891f2677067c2fec2d3c366c8",tooltip="Write character."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

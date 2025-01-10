@@ -1,0 +1,54 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node57 [label="unique_ptr",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node57 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="uniquePtr\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node59 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node59 [label="uniquePtr\< ContactForceModel \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node60 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node60 [label="uniquePtr\< ContactListType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node61 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node61 [label="uniquePtr\< pFlow::contact\lSearch \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node62 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node62 [label="uniquePtr\< pFlow::dictionary \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node63 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node63 [label="uniquePtr\< pFlow::fileDictionary \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node64 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node64 [label="uniquePtr\< pFlow::include\lMask \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node65 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node65 [label="uniquePtr\< pFlow::integration \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node66 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node66 [label="uniquePtr\< pFlow::oFstream \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node67 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node67 [label="uniquePtr\< pFlow::particle\lIdHandler \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node68 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node68 [label="uniquePtr\< pFlow::peakable\lRegion \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node69 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node69 [label="uniquePtr\< pFlow::pointField\l\< T \> \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node70 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node70 [label="uniquePtr\< pFlow::pointRect\lCell \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node71 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node71 [label="uniquePtr\< pFlow::pointSorting \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node72 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node72 [label="uniquePtr\< pFlow::ppwBndry\lContactSearch \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node73 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node73 [label="uniquePtr\< pFlow::repository \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node74 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node74 [label="uniquePtr\< pFlow::shapeMixture \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node75 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node75 [label="uniquePtr\< pFlow::simulation\lDomain \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node76 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node76 [label="uniquePtr\< pFlow::sorted\lContactList \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node77 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node77 [label="uniquePtr\< pFlow::wallBoundary\lContactSearch \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node78 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node78 [label="uniquePtr\< SearchMethodType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node79 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node79 [label="uniquePtr\< std::ifstream \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node57 -> Node80 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node80 [label="uniquePtr\< std::ofstream \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+}

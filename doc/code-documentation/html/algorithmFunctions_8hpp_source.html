@@ -167,52 +167,19 @@ $(document).ready(function(){initNavTree('algorithmFunctions_8hpp_source.html','
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">return</span> lhs &lt; rhs ? lhs : rhs; }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1algorithms.html#aac8c2b3b7bb9575b6f566e414e61b58d">   66</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="namespacepFlow_1_1algorithms.html#aac8c2b3b7bb9575b6f566e414e61b58d">binarySearch</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">int</span> <a class="code" href="tripleFwd_8hpp.html#ae1449f1d56abab2ec4d0f00b685fc478">length</a>, <span class="keyword">const</span> T&amp; val)</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span> low = 0;            </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> high = <a class="code" href="tripleFwd_8hpp.html#ae1449f1d56abab2ec4d0f00b685fc478">length</a> - 1;  </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">while</span> (low &lt;= high) </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">int</span> mid = low + (high - low)/2;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span> ( array[mid] &gt; val)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        { </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            high = mid - 1;  </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( array[mid] &lt; val)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        { </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            low = mid + 1;        </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">else</span> </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        {           </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">return</span> mid; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> -1; <span class="comment">// val not found in array[0, length)</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;} </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif // __algorithmFunctions_hpp__</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif // __algorithmFunctions_hpp__</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1minimum_html_afca043ab59c8cecec0be5b0c5837cf46"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1minimum.html#afca043ab59c8cecec0be5b0c5837cf46">pFlow::algorithms::minimum::operator()</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool operator()(const T &amp;lhs, const T &amp;rhs) const</div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00059">algorithmFunctions.hpp:59</a></div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1maximum_html"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1maximum.html">pFlow::algorithms::maximum</a></div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00048">algorithmFunctions.hpp:48</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1algorithms_html_aac8c2b3b7bb9575b6f566e414e61b58d"><div class="ttname"><a href="namespacepFlow_1_1algorithms.html#aac8c2b3b7bb9575b6f566e414e61b58d">pFlow::algorithms::binarySearch</a></div><div class="ttdeci">INLINE_FUNCTION_HD int binarySearch(const T *array, int length, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00066">algorithmFunctions.hpp:66</a></div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1maximum_html_afca043ab59c8cecec0be5b0c5837cf46"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1maximum.html#afca043ab59c8cecec0be5b0c5837cf46">pFlow::algorithms::maximum::operator()</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool operator()(const T &amp;lhs, const T &amp;rhs) const</div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00051">algorithmFunctions.hpp:51</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1algorithms_html"><div class="ttname"><a href="namespacepFlow_1_1algorithms.html">pFlow::algorithms</a></div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00027">algorithmFunctions.hpp:27</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html"><div class="ttname"><a href="pFlowMacros_8hpp.html">pFlowMacros.hpp</a></div></div>
-<div class="ttc" id="atripleFwd_8hpp_html_ae1449f1d56abab2ec4d0f00b685fc478"><div class="ttname"><a href="tripleFwd_8hpp.html#ae1449f1d56abab2ec4d0f00b685fc478">length</a></div><div class="ttdeci">INLINE_FUNCTION_HD T length(const triple&lt; T &gt; &amp;v1)</div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1minimum_html"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1minimum.html">pFlow::algorithms::minimum</a></div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00056">algorithmFunctions.hpp:56</a></div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1greater_html"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1greater.html">pFlow::algorithms::greater</a></div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00031">algorithmFunctions.hpp:31</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_a8e2f73fa5c113f21c9c9edb67a974f5e"><div class="ttname"><a href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a></div><div class="ttdeci">#define INLINE_FUNCTION_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00051">pFlowMacros.hpp:51</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_a8e2f73fa5c113f21c9c9edb67a974f5e"><div class="ttname"><a href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a></div><div class="ttdeci">#define INLINE_FUNCTION_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00055">pFlowMacros.hpp:55</a></div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1less_html"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1less.html">pFlow::algorithms::less</a></div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00039">algorithmFunctions.hpp:39</a></div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1less_html_afca043ab59c8cecec0be5b0c5837cf46"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1less.html#afca043ab59c8cecec0be5b0c5837cf46">pFlow::algorithms::less::operator()</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool operator()(const T &amp;lhs, const T &amp;rhs) const</div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00042">algorithmFunctions.hpp:42</a></div></div>
 <div class="ttc" id="astructpFlow_1_1algorithms_1_1greater_html_afca043ab59c8cecec0be5b0c5837cf46"><div class="ttname"><a href="structpFlow_1_1algorithms_1_1greater.html#afca043ab59c8cecec0be5b0c5837cf46">pFlow::algorithms::greater::operator()</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool operator()(const T &amp;lhs, const T &amp;rhs) const</div><div class="ttdef"><b>Definition:</b> <a href="algorithmFunctions_8hpp_source.html#l00034">algorithmFunctions.hpp:34</a></div></div>

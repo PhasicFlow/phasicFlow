@@ -1,5 +1,31 @@
 var tripleMath_8hpp =
 [
     [ "T3Func", "tripleMath_8hpp.html#a100b50a458ede943b573178d00ca43be", null ],
-    [ "T3Func2", "tripleMath_8hpp.html#a063a658b212daa7375e77de516af1087", null ]
+    [ "T3Func2", "tripleMath_8hpp.html#a063a658b212daa7375e77de516af1087", null ],
+    [ "abs", "tripleMath_8hpp.html#a5894dd516f775f6d59ec039ac3f72520", null ],
+    [ "mod", "tripleMath_8hpp.html#adc52ebc344800b06234295527541990a", null ],
+    [ "exp", "tripleMath_8hpp.html#a9314c5590465031147eedc0b2bd6e5a3", null ],
+    [ "log", "tripleMath_8hpp.html#a0e5d0a9f4f0f4dbd6242e5cef35763aa", null ],
+    [ "log10", "tripleMath_8hpp.html#ae21257cf86638951fd576f88f079aaeb", null ],
+    [ "pow", "tripleMath_8hpp.html#a46a2d9e05f26f4cf363742d36a690b8c", null ],
+    [ "sqrt", "tripleMath_8hpp.html#a59ca8f5c6f576ea8ba6e99210c45a8af", null ],
+    [ "cbrt", "tripleMath_8hpp.html#ae936f4d2d64d555ec5a52c4dea05e40c", null ],
+    [ "sin", "tripleMath_8hpp.html#a1988927bde60dd3ead6dc162befb4f2a", null ],
+    [ "cos", "tripleMath_8hpp.html#af864f63106083ec185574c7304479c24", null ],
+    [ "tan", "tripleMath_8hpp.html#a11cd3aaa6ff3b0eec3c3fe32ffb9c830", null ],
+    [ "asin", "tripleMath_8hpp.html#a56decff959b30c50124d754b64bce6de", null ],
+    [ "acos", "tripleMath_8hpp.html#a5c1632e47aa8c63b0fd23829b647f43c", null ],
+    [ "atan", "tripleMath_8hpp.html#a3631ae4dc27b39b0c5bc7c0329d20d82", null ],
+    [ "atan2", "tripleMath_8hpp.html#a104427f6c42523b07e78b8ac4a31967e", null ],
+    [ "sinh", "tripleMath_8hpp.html#a71871bafa77925b41508b95c0dee745c", null ],
+    [ "cosh", "tripleMath_8hpp.html#a42300b89c9e0144ca50e529820ef8ac3", null ],
+    [ "tanh", "tripleMath_8hpp.html#a3013a52753f30fa7150eac2ea1f335d4", null ],
+    [ "asinh", "tripleMath_8hpp.html#a1593898c633bb3c7ed65b144aefc0934", null ],
+    [ "acosh", "tripleMath_8hpp.html#a97f51c223d377da889a25eb258475509", null ],
+    [ "atanh", "tripleMath_8hpp.html#a1179a2905c0e3322900b691864336415", null ],
+    [ "min", "tripleMath_8hpp.html#aeb0e3eb783cc13cd03ffba6b5d5b9189", null ],
+    [ "max", "tripleMath_8hpp.html#ae27f0b2e9b78642d271960d77aeaceda", null ],
+    [ "pow", "tripleMath_8hpp.html#ad2c85c773f62c4f5d382f13e5d7f6904", null ],
+    [ "min", "tripleMath_8hpp.html#a53c2abba7b053ed6c2220c8441fd3a9d", null ],
+    [ "max", "tripleMath_8hpp.html#acf547738994d2c3fb14823334901dcec", null ]
 ];

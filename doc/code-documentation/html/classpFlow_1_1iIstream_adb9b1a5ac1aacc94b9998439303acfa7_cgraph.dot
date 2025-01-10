@@ -1,0 +1,12 @@
+digraph "readBeginList"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="readBeginList",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Begin read of list data, starts with '(' or '{' return starting delimiter or FatalIOError."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::token::pToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#aaa8bf55f686d97ee30090681fd0bfc04",tooltip="Return punctuation character."];
+}

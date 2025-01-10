@@ -1,0 +1,11 @@
+digraph "src/Interaction/contactSearch/methods/cellBased/NBS" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_71b688b0472b6f39e1e6e29aa55b2531 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="cellBased" fontname="Helvetica", fontsize="10", URL="dir_71b688b0472b6f39e1e6e29aa55b2531.html"]
+  dir_86f5f8039e2e2132ddf3856862e431bf [shape=box, label="NBS", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_86f5f8039e2e2132ddf3856862e431bf.html"];
+  }
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_86f5f8039e2e2132ddf3856862e431bf->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="10", labeldistance=1.5 headhref="dir_000034_000031.html"];
+}

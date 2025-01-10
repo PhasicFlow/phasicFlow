@@ -1,0 +1,22 @@
+digraph "src/Interaction/grainInteraction/grainInteraction" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_df5f4053b4d1b4521befd225c0b9e8d5 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="grainInteraction" fontname="Helvetica", fontsize="10", URL="dir_df5f4053b4d1b4521befd225c0b9e8d5.html"]
+  dir_57c19e6e27e5d61194f8edd0d6775727 [shape=box, label="grainInteraction", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_57c19e6e27e5d61194f8edd0d6775727.html"];
+  }
+  dir_861fd9684e4ba65de04f79c947f36cae [shape=box label="interaction" URL="dir_861fd9684e4ba65de04f79c947f36cae.html"];
+  dir_0c9c27ba3440783510b698affb2e2d63 [shape=box label="boundaries" fillcolor="white" style="filled" color="red" URL="dir_0c9c27ba3440783510b698affb2e2d63.html"];
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_9e72493e858003bd3d74a55a2aedd075 [shape=box label="Particles" fillcolor="white" style="filled" color="red" URL="dir_9e72493e858003bd3d74a55a2aedd075.html"];
+  dir_861fd9684e4ba65de04f79c947f36cae->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="4", labeldistance=1.5 headhref="dir_000044_000031.html"];
+  dir_861fd9684e4ba65de04f79c947f36cae->dir_9e72493e858003bd3d74a55a2aedd075 [headlabel="1", labeldistance=1.5 headhref="dir_000044_000063.html"];
+  dir_0c9c27ba3440783510b698affb2e2d63->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="4", labeldistance=1.5 headhref="dir_000036_000031.html"];
+  dir_0c9c27ba3440783510b698affb2e2d63->dir_9e72493e858003bd3d74a55a2aedd075 [headlabel="1", labeldistance=1.5 headhref="dir_000036_000063.html"];
+  dir_9e72493e858003bd3d74a55a2aedd075->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="54", labeldistance=1.5 headhref="dir_000063_000031.html"];
+  dir_57c19e6e27e5d61194f8edd0d6775727->dir_861fd9684e4ba65de04f79c947f36cae [headlabel="1", labeldistance=1.5 headhref="dir_000042_000044.html"];
+  dir_57c19e6e27e5d61194f8edd0d6775727->dir_0c9c27ba3440783510b698affb2e2d63 [headlabel="1", labeldistance=1.5 headhref="dir_000042_000036.html"];
+  dir_57c19e6e27e5d61194f8edd0d6775727->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="4", labeldistance=1.5 headhref="dir_000042_000031.html"];
+  dir_57c19e6e27e5d61194f8edd0d6775727->dir_9e72493e858003bd3d74a55a2aedd075 [headlabel="1", labeldistance=1.5 headhref="dir_000042_000063.html"];
+}

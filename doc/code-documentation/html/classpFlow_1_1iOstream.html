@@ -110,18 +110,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1iOstream.html',''); init
 <div class="title">iOstream Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface class for any output stream.  
+ <a href="classpFlow_1_1iOstream.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for iOstream:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream__inherit__graph.png" border="0" usemap="#iOstream_inherit__map" alt="Inheritance graph"/></div>
-<map name="iOstream_inherit__map" id="iOstream_inherit__map">
-<area shape="rect" title=" " alt="" coords="55,80,138,107"/>
-<area shape="rect" href="classpFlow_1_1Ostream.html" title=" " alt="" coords="5,155,84,181"/>
-<area shape="rect" href="classpFlow_1_1oTstream.html" title=" " alt="" coords="109,155,191,181"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html" title=" " alt="" coords="55,5,138,32"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for iOstream:</div>
@@ -129,10 +126,6 @@ $(document).ready(function(){initNavTree('classpFlow_1_1iOstream.html',''); init
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream__coll__graph.png" border="0" usemap="#iOstream_coll__map" alt="Collaboration graph"/></div>
-<map name="iOstream_coll__map" id="iOstream_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,88,107"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html" title=" " alt="" coords="5,5,88,32"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -150,7 +143,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab55acff18b8c2779c835f2b6205742c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1iOstream.html#ab55acff18b8c2779c835f2b6205742c1">More...</a><br /></td></tr>
 <tr class="separator:ab55acff18b8c2779c835f2b6205742c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8da7514808d6493ccfd30582fc945aa1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a8da7514808d6493ccfd30582fc945aa1">write</a> (const <a class="el" href="classpFlow_1_1token.html">token</a> &amp;tok)=0</td></tr>
-<tr class="memdesc:a8da7514808d6493ccfd30582fc945aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write Functions.  <a href="classpFlow_1_1iOstream.html#a8da7514808d6493ccfd30582fc945aa1">More...</a><br /></td></tr>
+<tr class="memdesc:a8da7514808d6493ccfd30582fc945aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write token to stream or otherwise handle it.  <a href="classpFlow_1_1iOstream.html#a8da7514808d6493ccfd30582fc945aa1">More...</a><br /></td></tr>
 <tr class="separator:a8da7514808d6493ccfd30582fc945aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf65170aebfd3e73c32baa5e252c673c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#acf65170aebfd3e73c32baa5e252c673c">write</a> (const char c)=0</td></tr>
 <tr class="memdesc:acf65170aebfd3e73c32baa5e252c673c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write character.  <a href="classpFlow_1_1iOstream.html#acf65170aebfd3e73c32baa5e252c673c">More...</a><br /></td></tr>
@@ -170,24 +163,35 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad51d78dad7e75463d30fe1f429dd5775"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#ad51d78dad7e75463d30fe1f429dd5775">write</a> (const <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> val)=0</td></tr>
 <tr class="memdesc:ad51d78dad7e75463d30fe1f429dd5775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write int32.  <a href="classpFlow_1_1iOstream.html#ad51d78dad7e75463d30fe1f429dd5775">More...</a><br /></td></tr>
 <tr class="separator:ad51d78dad7e75463d30fe1f429dd5775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac73c148ce72686c2a27ee388f2664ab3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#ac73c148ce72686c2a27ee388f2664ab3">write</a> (const <a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> val)=0</td></tr>
-<tr class="memdesc:ac73c148ce72686c2a27ee388f2664ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write label.  <a href="classpFlow_1_1iOstream.html#ac73c148ce72686c2a27ee388f2664ab3">More...</a><br /></td></tr>
-<tr class="separator:ac73c148ce72686c2a27ee388f2664ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc5b75191d4b3a8b68ddfa17c5a82b5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#abfc5b75191d4b3a8b68ddfa17c5a82b5">write</a> (const <a class="el" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a> val)=0</td></tr>
+<tr class="memdesc:abfc5b75191d4b3a8b68ddfa17c5a82b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write int8.  <a href="classpFlow_1_1iOstream.html#abfc5b75191d4b3a8b68ddfa17c5a82b5">More...</a><br /></td></tr>
+<tr class="separator:abfc5b75191d4b3a8b68ddfa17c5a82b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73dc5c502aa53276d11ab6a290ddc06d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a73dc5c502aa53276d11ab6a290ddc06d">write</a> (const <a class="el" href="namespacepFlow.html#aeefdb2888fa3c58f2454ef004419e6a5">uint64</a> val)=0</td></tr>
+<tr class="memdesc:a73dc5c502aa53276d11ab6a290ddc06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write uint64.  <a href="classpFlow_1_1iOstream.html#a73dc5c502aa53276d11ab6a290ddc06d">More...</a><br /></td></tr>
+<tr class="separator:a73dc5c502aa53276d11ab6a290ddc06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a081c0399c336c4eb1621c19b2ea153ce"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a081c0399c336c4eb1621c19b2ea153ce">write</a> (const <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> val)=0</td></tr>
 <tr class="memdesc:a081c0399c336c4eb1621c19b2ea153ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write uint32.  <a href="classpFlow_1_1iOstream.html#a081c0399c336c4eb1621c19b2ea153ce">More...</a><br /></td></tr>
 <tr class="separator:a081c0399c336c4eb1621c19b2ea153ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21a6d1fdb487282b0c77e472165a1241"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a21a6d1fdb487282b0c77e472165a1241">write</a> (const <a class="el" href="namespacepFlow.html#ab7078bf13036f3e78534da3ad4149dc2">uint16</a> val)=0</td></tr>
-<tr class="memdesc:a21a6d1fdb487282b0c77e472165a1241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write uint16.  <a href="classpFlow_1_1iOstream.html#a21a6d1fdb487282b0c77e472165a1241">More...</a><br /></td></tr>
-<tr class="separator:a21a6d1fdb487282b0c77e472165a1241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6421e78f943e9579f3c5d632a2595d23"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a6421e78f943e9579f3c5d632a2595d23">write</a> (const <a class="el" href="namespacepFlow.html#a34ecedcf03a70dc91e4616212d79267d">uint8</a> val)=0</td></tr>
+<tr class="memdesc:a6421e78f943e9579f3c5d632a2595d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write uint8.  <a href="classpFlow_1_1iOstream.html#a6421e78f943e9579f3c5d632a2595d23">More...</a><br /></td></tr>
+<tr class="separator:a6421e78f943e9579f3c5d632a2595d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81f4ff39d4e5b2a102c38ab5edea0405"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a81f4ff39d4e5b2a102c38ab5edea0405">write</a> (const float val)=0</td></tr>
 <tr class="memdesc:a81f4ff39d4e5b2a102c38ab5edea0405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write float.  <a href="classpFlow_1_1iOstream.html#a81f4ff39d4e5b2a102c38ab5edea0405">More...</a><br /></td></tr>
 <tr class="separator:a81f4ff39d4e5b2a102c38ab5edea0405"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe32853bb554bc8c86197960948106a7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#afe32853bb554bc8c86197960948106a7">write</a> (const double val)=0</td></tr>
 <tr class="memdesc:afe32853bb554bc8c86197960948106a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write double.  <a href="classpFlow_1_1iOstream.html#afe32853bb554bc8c86197960948106a7">More...</a><br /></td></tr>
 <tr class="separator:afe32853bb554bc8c86197960948106a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa201eba0105238d7ea54a71d154fec39"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#aa201eba0105238d7ea54a71d154fec39">write</a> (const <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> val)=0</td></tr>
+<tr class="memdesc:aa201eba0105238d7ea54a71d154fec39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write size_t.  <a href="classpFlow_1_1iOstream.html#aa201eba0105238d7ea54a71d154fec39">More...</a><br /></td></tr>
+<tr class="separator:aa201eba0105238d7ea54a71d154fec39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a7bd509fa8e7fe077bff6c4b36b31c4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a1a7bd509fa8e7fe077bff6c4b36b31c4">write</a> (const char *binaryData, std::streamsize <a class="el" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a>)=0</td></tr>
 <tr class="memdesc:a1a7bd509fa8e7fe077bff6c4b36b31c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a block of binray data.  <a href="classpFlow_1_1iOstream.html#a1a7bd509fa8e7fe077bff6c4b36b31c4">More...</a><br /></td></tr>
 <tr class="separator:a1a7bd509fa8e7fe077bff6c4b36b31c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a183156ea21e90ebf2c97cd46eb367148"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a183156ea21e90ebf2c97cd46eb367148">writeBinaryBlockFlag</a> ()</td></tr>
+<tr class="memdesc:a183156ea21e90ebf2c97cd46eb367148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the flag to indicate the start of a binary block.  <a href="classpFlow_1_1iOstream.html#a183156ea21e90ebf2c97cd46eb367148">More...</a><br /></td></tr>
+<tr class="separator:a183156ea21e90ebf2c97cd46eb367148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b2463ca484cf634c73eba7573e8419"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a91b2463ca484cf634c73eba7573e8419">seek</a> (<a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> pos)=0</td></tr>
+<tr class="separator:a91b2463ca484cf634c73eba7573e8419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f9f89f73f75f7dec4546766148b60d7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a6f9f89f73f75f7dec4546766148b60d7">indent</a> ()=0</td></tr>
 <tr class="memdesc:a6f9f89f73f75f7dec4546766148b60d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add indentation characters.  <a href="classpFlow_1_1iOstream.html#a6f9f89f73f75f7dec4546766148b60d7">More...</a><br /></td></tr>
 <tr class="separator:a6f9f89f73f75f7dec4546766148b60d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,7 +246,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a577f32ec301e562d6a205c6bd15fc005"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">newLine</a> ()</td></tr>
 <tr class="memdesc:a577f32ec301e562d6a205c6bd15fc005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a newLine to stream.  <a href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">More...</a><br /></td></tr>
 <tr class="separator:a577f32ec301e562d6a205c6bd15fc005"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adab69c3b447db5491b3b7e2a6e1c39a7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">space</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="NBSLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>=1)</td></tr>
+<tr class="memitem:adab69c3b447db5491b3b7e2a6e1c39a7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">space</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>=1)</td></tr>
 <tr class="memdesc:adab69c3b447db5491b3b7e2a6e1c39a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write space to stream.  <a href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">More...</a><br /></td></tr>
 <tr class="separator:adab69c3b447db5491b3b7e2a6e1c39a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af746580dedb817d31f5060ee684b9543"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">writeWordKeyword</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;kw)</td></tr>
@@ -252,6 +256,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a21c60a5f3cd7a26eb97fa28923cbaec6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6">writeWordEntry</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;key, const T &amp;value)</td></tr>
 <tr class="memdesc:a21c60a5f3cd7a26eb97fa28923cbaec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a keyword/value entry.  <a href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6">More...</a><br /></td></tr>
 <tr class="separator:a21c60a5f3cd7a26eb97fa28923cbaec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ac4e711fc2bb61f8ad532e5bf687c7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a76ac4e711fc2bb61f8ad532e5bf687c7">startOfBinaryStreaming</a> ()=0</td></tr>
+<tr class="memdesc:a76ac4e711fc2bb61f8ad532e5bf687c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new line and flush stream.  <a href="classpFlow_1_1iOstream.html#a76ac4e711fc2bb61f8ad532e5bf687c7">More...</a><br /></td></tr>
+<tr class="separator:a76ac4e711fc2bb61f8ad532e5bf687c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e991811d9d680487c9a75363d5c332"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a38e991811d9d680487c9a75363d5c332">endOfBinaryStreaming</a> ()=0</td></tr>
+<tr class="memdesc:a38e991811d9d680487c9a75363d5c332"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reach end of file add a new line and flush stream.  <a href="classpFlow_1_1iOstream.html#a38e991811d9d680487c9a75363d5c332">More...</a><br /></td></tr>
+<tr class="separator:a38e991811d9d680487c9a75363d5c332"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ab71f4bc571f6e246b20db4b3dd131"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a50ab71f4bc571f6e246b20db4b3dd131">flush</a> ()=0</td></tr>
 <tr class="memdesc:a50ab71f4bc571f6e246b20db4b3dd131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush stream.  <a href="classpFlow_1_1iOstream.html#a50ab71f4bc571f6e246b20db4b3dd131">More...</a><br /></td></tr>
 <tr class="separator:a50ab71f4bc571f6e246b20db4b3dd131"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,7 +287,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae25bb32775145887697b544876ba63cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set precision of output field (and return old precision)  <a href="classpFlow_1_1iOstream.html#ae25bb32775145887697b544876ba63cc">More...</a><br /></td></tr>
 <tr class="separator:ae25bb32775145887697b544876ba63cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fe16408cba993c758c545470584bdb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1iOstream.html#a6fe16408cba993c758c545470584bdb6">operator()</a> () const</td></tr>
-<tr class="memdesc:a6fe16408cba993c758c545470584bdb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a non-const reference to const <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> Needed for write functions where the stream argument is temporary: e.g.  <a href="classpFlow_1_1iOstream.html#a6fe16408cba993c758c545470584bdb6">More...</a><br /></td></tr>
+<tr class="memdesc:a6fe16408cba993c758c545470584bdb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a non-const reference to const <a class="el" href="classpFlow_1_1iOstream.html" title="Interface class for any output stream.">iOstream</a> Needed for write functions where the stream argument is temporary: e.g.  <a href="classpFlow_1_1iOstream.html#a6fe16408cba993c758c545470584bdb6">More...</a><br /></td></tr>
 <tr class="separator:a6fe16408cba993c758c545470584bdb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpFlow_1_1IOstream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1IOstream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a></td></tr>
 <tr class="memitem:a685ead9e00563a9b3d0c4753eac347a2 inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a685ead9e00563a9b3d0c4753eac347a2">IOstream</a> ()</td></tr>
@@ -299,10 +309,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a093459b3399aba6fe0f57bbbc2925bc2 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return non-const access to the name of the stream.  <a href="classpFlow_1_1IOstream.html#a093459b3399aba6fe0f57bbbc2925bc2">More...</a><br /></td></tr>
 <tr class="separator:a093459b3399aba6fe0f57bbbc2925bc2 inherit pub_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a> (const char *operation) const</td></tr>
-<tr class="memdesc:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">More...</a><br /></td></tr>
+<tr class="memdesc:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">More...</a><br /></td></tr>
 <tr class="separator:a367eb3425fc4e8270e2aa961df8ac8a5 inherit pub_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">fatalCheck</a> (const char *operation) const</td></tr>
-<tr class="memdesc:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">More...</a><br /></td></tr>
+<tr class="memdesc:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">More...</a><br /></td></tr>
 <tr class="separator:a281bbfd1fe6ab10377d7cb1f5111044d inherit pub_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a298583c3d514f1169bfc43169ba78c38 inherit pub_methods_classpFlow_1_1IOstream"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">opened</a> () const</td></tr>
 <tr class="memdesc:a298583c3d514f1169bfc43169ba78c38 inherit pub_methods_classpFlow_1_1IOstream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if stream has been opened.  <a href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">More...</a><br /></td></tr>
@@ -436,8 +446,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a473118515da3a7497d0673dd24674c70 inherit pro_methods_classpFlow_1_1IOstream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00053">53</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<div class="textblock"><p>Interface class for any output stream. </p>
+<p>It is based on OpenFOAM stream, with some modifications/simplifications to be tailored to our needs </p>
+
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00059">59</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a23526bd51aa20b0822272995e8db1cbe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23526bd51aa20b0822272995e8db1cbe">&#9670;&nbsp;</a></span>iOstream() <span class="overload">[1/3]</span></h2>
@@ -464,7 +476,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Default. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00077">77</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00083">83</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +506,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Construct from writeFormat. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00081">81</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00087">87</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
 </div>
 </div>
@@ -555,7 +567,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8da7514808d6493ccfd30582fc945aa1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8da7514808d6493ccfd30582fc945aa1">&#9670;&nbsp;</a></span>write() <span class="overload">[1/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8da7514808d6493ccfd30582fc945aa1">&#9670;&nbsp;</a></span>write() <span class="overload">[1/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -578,30 +590,24 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write Functions. </p>
-<p>Write token to stream or otherwise handle it. return false if the token type was not handled by this method </p>
+<p>Write token to stream or otherwise handle it. </p>
+<p>return false if the token type was not handled by this method </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#af0296de2f120be163c138350c0c26507">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#aa3b476f06fa0df546adf5f376083ec2b">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#af0296de2f120be163c138350c0c26507">Ostream</a>, <a class="el" href="classpFlow_1_1oTstream.html#aa3b476f06fa0df546adf5f376083ec2b">oTstream</a>, <a class="el" href="classpFlow_1_1processorOstream.html#aa3b476f06fa0df546adf5f376083ec2b">processorOstream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#aa3b476f06fa0df546adf5f376083ec2b">masterOstream</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00354">pFlow::operator&lt;&lt;()</a>, <a class="el" href="dictionary_8cpp_source.html#l00087">dictionary::writeDictionary()</a>, and <a class="el" href="Vector_8cpp_source.html#l00101">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::writeVector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00375">pFlow::operator&lt;&lt;()</a>, <a class="el" href="dataIO_8cpp_source.html#l00022">pFlow::writeDataAsciiBinary()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00087">dictionary::writeDictionary()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a8da7514808d6493ccfd30582fc945aa1_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a8da7514808d6493ccfd30582fc945aa1_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a8da7514808d6493ccfd30582fc945aa1_icgraph" id="classpFlow_1_1iOstream_a8da7514808d6493ccfd30582fc945aa1_icgraph">
-<area shape="rect" title="Write Functions." alt="" coords="216,64,271,91"/>
-<area shape="rect" href="namespacepFlow.html#a6a8b72f54a3806e72915bf11cee65e6f" title=" " alt="" coords="13,5,160,32"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a177356b3dd247e48fdc2c715a68dce21" title=" " alt="" coords="16,57,157,98"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a127385e6395d9d457aee6fcb1c1807b7" title=" " alt="" coords="5,123,168,179"/>
-</map>
 </div>
 
 </div>
 </div>
 <a id="acf65170aebfd3e73c32baa5e252c673c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf65170aebfd3e73c32baa5e252c673c">&#9670;&nbsp;</a></span>write() <span class="overload">[2/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acf65170aebfd3e73c32baa5e252c673c">&#9670;&nbsp;</a></span>write() <span class="overload">[2/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -626,12 +632,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write character. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a10c5d22891f2677067c2fec2d3c366c8">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#af93f721e529951d7770ee01fcd30fecf">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a10c5d22891f2677067c2fec2d3c366c8">processorOstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a10c5d22891f2677067c2fec2d3c366c8">Ostream</a>, <a class="el" href="classpFlow_1_1masterOstream.html#a10c5d22891f2677067c2fec2d3c366c8">masterOstream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#af93f721e529951d7770ee01fcd30fecf">oTstream</a>.</p>
 
 </div>
 </div>
 <a id="a39550531f2bbcbf045f38923b37b5cb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39550531f2bbcbf045f38923b37b5cb5">&#9670;&nbsp;</a></span>write() <span class="overload">[3/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a39550531f2bbcbf045f38923b37b5cb5">&#9670;&nbsp;</a></span>write() <span class="overload">[3/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,12 +662,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write character string. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a092e63db7d7406b2999bb7203d8eb91b">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a26b5f60ec0f8d45f3e61562ff788ff38">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a092e63db7d7406b2999bb7203d8eb91b">processorOstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a092e63db7d7406b2999bb7203d8eb91b">Ostream</a>, <a class="el" href="classpFlow_1_1masterOstream.html#a092e63db7d7406b2999bb7203d8eb91b">masterOstream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a26b5f60ec0f8d45f3e61562ff788ff38">oTstream</a>.</p>
 
 </div>
 </div>
 <a id="a1c8d9b598002b80d43961c0a39669bc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c8d9b598002b80d43961c0a39669bc2">&#9670;&nbsp;</a></span>write() <span class="overload">[4/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8d9b598002b80d43961c0a39669bc2">&#9670;&nbsp;</a></span>write() <span class="overload">[4/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -686,7 +692,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write word. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a2935f4818bb182d88333d2b6be2c9c47">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a379353cb86c3a083fae92681013a6051">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a2935f4818bb182d88333d2b6be2c9c47">processorOstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a2935f4818bb182d88333d2b6be2c9c47">Ostream</a>, <a class="el" href="classpFlow_1_1masterOstream.html#a2935f4818bb182d88333d2b6be2c9c47">masterOstream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a379353cb86c3a083fae92681013a6051">oTstream</a>.</p>
 
 </div>
 </div>
@@ -727,12 +733,12 @@ Additional Inherited Members</h2></td></tr>
 <p>Write std::string surrounded by quotes. </p>
 <p>Optional write without quotes. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#ad49e7395bb1832b095b5567656beae88">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a72ba64fb076bc369d68140a6ab8deb8a">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#ad49e7395bb1832b095b5567656beae88">processorOstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#ad49e7395bb1832b095b5567656beae88">Ostream</a>, <a class="el" href="classpFlow_1_1masterOstream.html#ad49e7395bb1832b095b5567656beae88">masterOstream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a72ba64fb076bc369d68140a6ab8deb8a">oTstream</a>.</p>
 
 </div>
 </div>
 <a id="ae4062a9049d12a4b01428f5d98f08860"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4062a9049d12a4b01428f5d98f08860">&#9670;&nbsp;</a></span>write() <span class="overload">[5/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4062a9049d12a4b01428f5d98f08860">&#9670;&nbsp;</a></span>write() <span class="overload">[5/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -757,12 +763,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write int64. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a8f4206992ef2fb33e42bb9e6a4bf11cb">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a8f4206992ef2fb33e42bb9e6a4bf11cb">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a8f4206992ef2fb33e42bb9e6a4bf11cb">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#a8f4206992ef2fb33e42bb9e6a4bf11cb">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a8f4206992ef2fb33e42bb9e6a4bf11cb">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#a8f4206992ef2fb33e42bb9e6a4bf11cb">masterOstream</a>.</p>
 
 </div>
 </div>
 <a id="ad51d78dad7e75463d30fe1f429dd5775"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad51d78dad7e75463d30fe1f429dd5775">&#9670;&nbsp;</a></span>write() <span class="overload">[6/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad51d78dad7e75463d30fe1f429dd5775">&#9670;&nbsp;</a></span>write() <span class="overload">[6/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -787,12 +793,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write int32. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#ad421a57af704a01fded92733aaa5c7cf">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#ad421a57af704a01fded92733aaa5c7cf">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#ad421a57af704a01fded92733aaa5c7cf">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#ad421a57af704a01fded92733aaa5c7cf">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#ad421a57af704a01fded92733aaa5c7cf">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#ad421a57af704a01fded92733aaa5c7cf">masterOstream</a>.</p>
 
 </div>
 </div>
-<a id="ac73c148ce72686c2a27ee388f2664ab3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac73c148ce72686c2a27ee388f2664ab3">&#9670;&nbsp;</a></span>write() <span class="overload">[7/12]</span></h2>
+<a id="abfc5b75191d4b3a8b68ddfa17c5a82b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfc5b75191d4b3a8b68ddfa17c5a82b5">&#9670;&nbsp;</a></span>write() <span class="overload">[7/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -803,7 +809,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; write </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a07fb256c1077eea7a7726e948cc8ff0e">int8</a>&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>
@@ -815,14 +821,44 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write label. </p>
+<p>Write int8. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#ada4a9df866ae09af27c6df9a1a59469d">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#ada4a9df866ae09af27c6df9a1a59469d">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#aa4b3fdf33f0da87d93b6c99d65f91c1a">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#aa4b3fdf33f0da87d93b6c99d65f91c1a">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#aa4b3fdf33f0da87d93b6c99d65f91c1a">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#aa4b3fdf33f0da87d93b6c99d65f91c1a">masterOstream</a>.</p>
+
+</div>
+</div>
+<a id="a73dc5c502aa53276d11ab6a290ddc06d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73dc5c502aa53276d11ab6a290ddc06d">&#9670;&nbsp;</a></span>write() <span class="overload">[8/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; write </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeefdb2888fa3c58f2454ef004419e6a5">uint64</a>&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write uint64. </p>
+
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#addcf6d0d10437281fcf579cdadcea3d1">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#addcf6d0d10437281fcf579cdadcea3d1">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#addcf6d0d10437281fcf579cdadcea3d1">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#addcf6d0d10437281fcf579cdadcea3d1">masterOstream</a>.</p>
 
 </div>
 </div>
 <a id="a081c0399c336c4eb1621c19b2ea153ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a081c0399c336c4eb1621c19b2ea153ce">&#9670;&nbsp;</a></span>write() <span class="overload">[8/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a081c0399c336c4eb1621c19b2ea153ce">&#9670;&nbsp;</a></span>write() <span class="overload">[9/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -847,12 +883,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write uint32. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a00226ab20a3e220dc468ac2ec7deba8e">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a00226ab20a3e220dc468ac2ec7deba8e">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a00226ab20a3e220dc468ac2ec7deba8e">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#a00226ab20a3e220dc468ac2ec7deba8e">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a00226ab20a3e220dc468ac2ec7deba8e">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#a00226ab20a3e220dc468ac2ec7deba8e">masterOstream</a>.</p>
 
 </div>
 </div>
-<a id="a21a6d1fdb487282b0c77e472165a1241"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21a6d1fdb487282b0c77e472165a1241">&#9670;&nbsp;</a></span>write() <span class="overload">[9/12]</span></h2>
+<a id="a6421e78f943e9579f3c5d632a2595d23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6421e78f943e9579f3c5d632a2595d23">&#9670;&nbsp;</a></span>write() <span class="overload">[10/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -863,7 +899,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; write </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#ab7078bf13036f3e78534da3ad4149dc2">uint16</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a34ecedcf03a70dc91e4616212d79267d">uint8</a>&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>
@@ -875,14 +911,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write uint16. </p>
+<p>Write uint8. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a7e6df205da82ec7230d7678620483fe0">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a7e6df205da82ec7230d7678620483fe0">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#ae6625d51f430cec87f360fafb18902dc">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#ae6625d51f430cec87f360fafb18902dc">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#ae6625d51f430cec87f360fafb18902dc">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#ae6625d51f430cec87f360fafb18902dc">masterOstream</a>.</p>
 
 </div>
 </div>
 <a id="a81f4ff39d4e5b2a102c38ab5edea0405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81f4ff39d4e5b2a102c38ab5edea0405">&#9670;&nbsp;</a></span>write() <span class="overload">[10/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f4ff39d4e5b2a102c38ab5edea0405">&#9670;&nbsp;</a></span>write() <span class="overload">[11/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -907,12 +943,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write float. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a9f4f8b12e074652510a84c0ba51111ad">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a9f4f8b12e074652510a84c0ba51111ad">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a9f4f8b12e074652510a84c0ba51111ad">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#a9f4f8b12e074652510a84c0ba51111ad">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a9f4f8b12e074652510a84c0ba51111ad">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#a9f4f8b12e074652510a84c0ba51111ad">masterOstream</a>.</p>
 
 </div>
 </div>
 <a id="afe32853bb554bc8c86197960948106a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe32853bb554bc8c86197960948106a7">&#9670;&nbsp;</a></span>write() <span class="overload">[11/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afe32853bb554bc8c86197960948106a7">&#9670;&nbsp;</a></span>write() <span class="overload">[12/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -937,12 +973,42 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write double. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a44e32a52d8dec9b952a6a018d02ef805">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a44e32a52d8dec9b952a6a018d02ef805">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a44e32a52d8dec9b952a6a018d02ef805">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#a44e32a52d8dec9b952a6a018d02ef805">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a44e32a52d8dec9b952a6a018d02ef805">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#a44e32a52d8dec9b952a6a018d02ef805">masterOstream</a>.</p>
+
+</div>
+</div>
+<a id="aa201eba0105238d7ea54a71d154fec39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa201eba0105238d7ea54a71d154fec39">&#9670;&nbsp;</a></span>write() <span class="overload">[13/14]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; write </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write size_t. </p>
+
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a001027096a2d61d8cefd115a3938aaac">processorOstream</a>, <a class="el" href="classpFlow_1_1oTstream.html#a001027096a2d61d8cefd115a3938aaac">oTstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a001027096a2d61d8cefd115a3938aaac">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#a001027096a2d61d8cefd115a3938aaac">masterOstream</a>.</p>
 
 </div>
 </div>
 <a id="a1a7bd509fa8e7fe077bff6c4b36b31c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a7bd509fa8e7fe077bff6c4b36b31c4">&#9670;&nbsp;</a></span>write() <span class="overload">[12/12]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7bd509fa8e7fe077bff6c4b36b31c4">&#9670;&nbsp;</a></span>write() <span class="overload">[14/14]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -977,7 +1043,68 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write a block of binray data. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a30c2f2e600a35dcaebb70b2ad42b623b">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a30c2f2e600a35dcaebb70b2ad42b623b">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1oTstream.html#a30c2f2e600a35dcaebb70b2ad42b623b">oTstream</a>, <a class="el" href="classpFlow_1_1processorOstream.html#a30c2f2e600a35dcaebb70b2ad42b623b">processorOstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a30c2f2e600a35dcaebb70b2ad42b623b">Ostream</a>, and <a class="el" href="classpFlow_1_1masterOstream.html#a30c2f2e600a35dcaebb70b2ad42b623b">masterOstream</a>.</p>
+
+</div>
+</div>
+<a id="a183156ea21e90ebf2c97cd46eb367148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a183156ea21e90ebf2c97cd46eb367148">&#9670;&nbsp;</a></span>writeBinaryBlockFlag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a> &amp; writeBinaryBlockFlag </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the flag to indicate the start of a binary block. </p>
+
+<p>Reimplemented in <a class="el" href="classpFlow_1_1Ostream.html#a3b953d926859ea70e86d084d118064c1">Ostream</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00028">28</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00084">notImplementedFunction</a>.</p>
+
+</div>
+</div>
+<a id="a91b2463ca484cf634c73eba7573e8419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91b2463ca484cf634c73eba7573e8419">&#9670;&nbsp;</a></span>seek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void seek </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a641ff388ef41042b3a08ffe0cb7188f4">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a641ff388ef41042b3a08ffe0cb7188f4">oTstream</a>.</p>
 
 </div>
 </div>
@@ -1006,19 +1133,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Add indentation characters. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a49332d3f92c30d4c9429214dbac586e3">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a25eb5023b0abf0d0331bbf22ce47eaad">oTstream</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1processorOstream.html#a49332d3f92c30d4c9429214dbac586e3">processorOstream</a>, <a class="el" href="classpFlow_1_1Ostream.html#a49332d3f92c30d4c9429214dbac586e3">Ostream</a>, <a class="el" href="classpFlow_1_1masterOstream.html#a49332d3f92c30d4c9429214dbac586e3">masterOstream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a25eb5023b0abf0d0331bbf22ce47eaad">oTstream</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00290">pFlow::indent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00311">pFlow::indent()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a6f9f89f73f75f7dec4546766148b60d7_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a6f9f89f73f75f7dec4546766148b60d7_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a6f9f89f73f75f7dec4546766148b60d7_icgraph" id="classpFlow_1_1iOstream_a6f9f89f73f75f7dec4546766148b60d7_icgraph">
-<area shape="rect" title="Add indentation characters." alt="" coords="164,5,227,32"/>
-<area shape="rect" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="5,5,116,32"/>
-</map>
 </div>
 
 </div>
@@ -1048,9 +1171,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00146">146</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00161">161</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00065">iOstream::indentSize_</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00071">iOstream::indentSize_</a>.</p>
 
 </div>
 </div>
@@ -1079,9 +1202,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to indent size. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00152">152</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00167">167</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00065">iOstream::indentSize_</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00071">iOstream::indentSize_</a>.</p>
 
 </div>
 </div>
@@ -1110,9 +1233,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00158">158</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00173">173</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00068">iOstream::indentLevel_</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00074">iOstream::indentLevel_</a>.</p>
 
 </div>
 </div>
@@ -1141,9 +1264,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00164">164</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00179">179</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00068">iOstream::indentLevel_</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00074">iOstream::indentLevel_</a>.</p>
 
 </div>
 </div>
@@ -1172,22 +1295,17 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Increment the indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00170">170</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00185">185</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00068">iOstream::indentLevel_</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00074">iOstream::indentLevel_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00297">pFlow::incrIndent()</a>, and <a class="el" href="stlFile_8cpp_source.html#l00178">stlFile::writeFacet()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00318">pFlow::incrIndent()</a>, and <a class="el" href="stlFile_8cpp_source.html#l00178">stlFile::writeFacet()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a79a5f541a96c769ad3b3bf66aff49115_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a79a5f541a96c769ad3b3bf66aff49115_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a79a5f541a96c769ad3b3bf66aff49115_icgraph" id="classpFlow_1_1iOstream_a79a5f541a96c769ad3b3bf66aff49115_icgraph">
-<area shape="rect" title="Increment the indent level." alt="" coords="236,31,323,57"/>
-<area shape="rect" href="namespacepFlow.html#a3b0915b78e06661e3a45337e1eb687ed" title="Increment the indent level." alt="" coords="29,5,164,32"/>
-<area shape="rect" href="classpFlow_1_1stlFile.html#a31d2dfd4d5c60b132fbd118af72afceb" title=" " alt="" coords="5,56,188,83"/>
-</map>
 </div>
 
 </div>
@@ -1209,22 +1327,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Decrement the indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00027">27</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00034">34</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00068">iOstream::indentLevel_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00304">pFlow::decrIndent()</a>, and <a class="el" href="stlFile_8cpp_source.html#l00178">stlFile::writeFacet()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00325">pFlow::decrIndent()</a>, and <a class="el" href="stlFile_8cpp_source.html#l00178">stlFile::writeFacet()</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_ae18e78f7ce58c60f648722fd7f8bdcbd_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_ae18e78f7ce58c60f648722fd7f8bdcbd_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_ae18e78f7ce58c60f648722fd7f8bdcbd_icgraph" id="classpFlow_1_1iOstream_ae18e78f7ce58c60f648722fd7f8bdcbd_icgraph">
-<area shape="rect" title="Decrement the indent level." alt="" coords="236,31,327,57"/>
-<area shape="rect" href="namespacepFlow.html#a7d87392ade029114acbbf97fba2aa10d" title="Decrement the indent level." alt="" coords="27,5,166,32"/>
-<area shape="rect" href="classpFlow_1_1stlFile.html#a31d2dfd4d5c60b132fbd118af72afceb" title=" " alt="" coords="5,56,188,83"/>
-</map>
 </div>
 
 </div>
@@ -1255,22 +1366,17 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write begin block group with a name Increments indentation, adds newline. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00070">70</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00077">77</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00329">pFlow::beginBlock()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00290">pFlow::indent()</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00350">pFlow::beginBlock()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00311">pFlow::indent()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00329">pFlow::beginBlock()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00087">dictionary::writeDictionary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00350">pFlow::beginBlock()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00087">dictionary::writeDictionary()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_cgraph.png" border="0" usemap="#classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_cgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_cgraph" id="classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_cgraph">
-<area shape="rect" title="Write begin block group with a name Increments indentation, adds newline." alt="" coords="5,5,100,32"/>
-<area shape="rect" href="namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b" title="Write begin block group without a name." alt="" coords="148,5,289,32"/>
-<area shape="rect" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="163,56,274,83"/>
-</map>
 </div>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -1278,11 +1384,6 @@ Additional Inherited Members</h2></td></tr>
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_icgraph" id="classpFlow_1_1iOstream_ab440fa44645864fa1f9595b19d77bed0_icgraph">
-<area shape="rect" title="Write begin block group with a name Increments indentation, adds newline." alt="" coords="195,5,289,32"/>
-<area shape="rect" href="namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b" title="Write begin block group without a name." alt="" coords="5,5,147,32"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a177356b3dd247e48fdc2c715a68dce21" title=" " alt="" coords="5,57,147,98"/>
-</map>
 </div>
 
 </div>
@@ -1312,20 +1413,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write begin block group without a name Increments indentation, adds newline. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00079">79</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00086">86</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00093">token::BEGIN_BLOCK</a>, <a class="el" href="iOstream_8hpp_source.html#l00297">pFlow::incrIndent()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00290">pFlow::indent()</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00095">token::BEGIN_BLOCK</a>, <a class="el" href="iOstream_8hpp_source.html#l00318">pFlow::incrIndent()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00311">pFlow::indent()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_aeb38275dc0471cbc5f14ba380df1e0ce_cgraph.png" border="0" usemap="#classpFlow_1_1iOstream_aeb38275dc0471cbc5f14ba380df1e0ce_cgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_aeb38275dc0471cbc5f14ba380df1e0ce_cgraph" id="classpFlow_1_1iOstream_aeb38275dc0471cbc5f14ba380df1e0ce_cgraph">
-<area shape="rect" title="Write begin block group without a name Increments indentation, adds newline." alt="" coords="5,31,100,57"/>
-<area shape="rect" href="namespacepFlow.html#a3b0915b78e06661e3a45337e1eb687ed" title="Increment the indent level." alt="" coords="148,5,283,32"/>
-<area shape="rect" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="160,56,271,83"/>
-</map>
 </div>
 
 </div>
@@ -1355,22 +1451,17 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write end block group Decrements indentation, adds newline. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00088">88</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00095">95</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00304">pFlow::decrIndent()</a>, <a class="el" href="token_8hpp_source.html#l00094">token::END_BLOCK</a>, and <a class="el" href="iOstream_8hpp_source.html#l00290">pFlow::indent()</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00325">pFlow::decrIndent()</a>, <a class="el" href="token_8hpp_source.html#l00096">token::END_BLOCK</a>, and <a class="el" href="iOstream_8hpp_source.html#l00311">pFlow::indent()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00338">pFlow::endBlock()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00087">dictionary::writeDictionary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00359">pFlow::endBlock()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00087">dictionary::writeDictionary()</a>.</p>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_cgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_cgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_cgraph" id="classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_cgraph">
-<area shape="rect" title="Write end block group Decrements indentation, adds newline." alt="" coords="5,31,88,57"/>
-<area shape="rect" href="namespacepFlow.html#a7d87392ade029114acbbf97fba2aa10d" title="Decrement the indent level." alt="" coords="136,5,275,32"/>
-<area shape="rect" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="150,56,261,83"/>
-</map>
 </div>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -1378,11 +1469,6 @@ Additional Inherited Members</h2></td></tr>
 </div>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_icgraph" id="classpFlow_1_1iOstream_a1850a128366512b2539de09dc0622358_icgraph">
-<area shape="rect" title="Write end block group Decrements indentation, adds newline." alt="" coords="195,35,277,61"/>
-<area shape="rect" href="namespacepFlow.html#ab5839850dd8d483a66ef865b60b8cdd5" title="Write end block group." alt="" coords="11,5,141,32"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a177356b3dd247e48fdc2c715a68dce21" title=" " alt="" coords="5,57,147,98"/>
-</map>
 </div>
 
 </div>
@@ -1412,9 +1498,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write begin list "(". </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00125">125</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00132">132</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00089">token::BEGIN_LIST</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00091">token::BEGIN_LIST</a>.</p>
 
 </div>
 </div>
@@ -1444,7 +1530,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write begin list with keyword "kw (". </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00134">134</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00141">141</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
 </div>
 </div>
@@ -1473,9 +1559,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write end list ")". </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00144">144</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00151">151</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00090">token::END_LIST</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00092">token::END_LIST</a>.</p>
 
 </div>
 </div>
@@ -1504,9 +1590,18 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write begin list "[". </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00153">153</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00160">160</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00091">token::BEGIN_SQR</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00093">token::BEGIN_SQR</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="subSurface_8cpp_source.html#l00003">pFlow::operator&lt;&lt;()</a>.</p>
+<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1iOstream_a05e38ce82900bb8c51d86ae214898e2d_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a05e38ce82900bb8c51d86ae214898e2d_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1536,7 +1631,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write begin list with keyword "kw [". </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00162">162</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00169">169</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
 </div>
 </div>
@@ -1565,9 +1660,18 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write end list "]". </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00172">172</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00179">179</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00092">token::END_SQR</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00094">token::END_SQR</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="subSurface_8cpp_source.html#l00003">pFlow::operator&lt;&lt;()</a>.</p>
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1iOstream_a63bdc1079581492459ced30d6e523d17_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a63bdc1079581492459ced30d6e523d17_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1596,24 +1700,17 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write end entry (';') followed by newline. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00097">97</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00104">104</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00088">token::END_STATEMENT</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00090">token::END_STATEMENT</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00346">pFlow::endEntry()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00098">dataEntry::writeDataEntry()</a>, <a class="el" href="Field_8cpp_source.html#l00170">Field&lt; VectorDual, int8 &gt;::writeField()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00224">iOstream::writeWordEntry()</a>.</p>
-<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00367">pFlow::endEntry()</a>, <a class="el" href="Field_8cpp_source.html#l00095">Field&lt; uint32x3 &gt;::write()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00098">dataEntry::writeDataEntry()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00239">iOstream::writeWordEntry()</a>.</p>
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a2ddd99bc2797e644b86f74dd1c176f4a_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a2ddd99bc2797e644b86f74dd1c176f4a_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a2ddd99bc2797e644b86f74dd1c176f4a_icgraph" id="classpFlow_1_1iOstream_a2ddd99bc2797e644b86f74dd1c176f4a_icgraph">
-<area shape="rect" title="Write end entry (&#39;;&#39;) followed by newline." alt="" coords="256,97,336,124"/>
-<area shape="rect" href="namespacepFlow.html#a85978c41efacc0d60ae3da45fb266d49" title="Write end entry (&#39;;&#39;) followed by newline." alt="" coords="43,5,170,32"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#aad22b29fba434ea640dcf3dcf1beb293" title=" " alt="" coords="5,57,208,98"/>
-<area shape="rect" href="classpFlow_1_1Field.html#ac550f175fb70daa183a4008bfd790f5f" title=" " alt="" coords="11,122,202,163"/>
-<area shape="rect" href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6" title="Write a keyword/value entry." alt="" coords="45,188,168,215"/>
-</map>
 </div>
 
 </div>
@@ -1643,9 +1740,18 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write a newLine to stream. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00105">105</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00112">112</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="token_8hpp_source.html#l00086">token::NL</a>.</p>
+<p class="reference">References <a class="el" href="token_8hpp_source.html#l00088">token::NL</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Field_8cpp_source.html#l00116">Field&lt; uint32x3 &gt;::write()</a>.</p>
+<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1iOstream_a577f32ec301e562d6a205c6bd15fc005_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a577f32ec301e562d6a205c6bd15fc005_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1675,9 +1781,18 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write space to stream. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00112">112</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00119">119</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="token_8hpp_source.html#l00084">token::SPACE</a>.</p>
+<p class="reference">References <a class="el" href="NBSLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="token_8hpp_source.html#l00086">token::SPACE</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boundaryGrainParticles_8cpp_source.html#l00027">boundaryGrainParticles::create()</a>, <a class="el" href="boundarySphereParticles_8cpp_source.html#l00027">boundarySphereParticles::create()</a>, <a class="el" href="boundaryIntegration_8cpp_source.html#l00016">boundaryIntegration::create()</a>, <a class="el" href="interaction_8cpp_source.html#l00048">interaction::create()</a>, <a class="el" href="boundaryContactSearch_8cpp_source.html#l00039">boundaryContactSearch::create()</a>, <a class="el" href="boundaryGrainInteraction_8cpp_source.html#l00050">boundaryGrainInteraction&lt; contactForceModel, geometryMotionModel &gt;::create()</a>, <a class="el" href="boundarySphereInteraction_8cpp_source.html#l00050">boundarySphereInteraction&lt; contactForceModel, geometryMotionModel &gt;::create()</a>, and <a class="el" href="contactSearch_8cpp_source.html#l00118">contactSearch::create()</a>.</p>
+<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1iOstream_adab69c3b447db5491b3b7e2a6e1c39a7_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_adab69c3b447db5491b3b7e2a6e1c39a7_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1707,34 +1822,24 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write the keyword followed by an appropriate indentation. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00041">41</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8cpp_source.html#l00048">48</a> of file <a class="el" href="iOstream_8cpp_source.html">iOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00290">pFlow::indent()</a>, and <a class="el" href="token_8hpp_source.html#l00084">token::SPACE</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00311">pFlow::indent()</a>, and <a class="el" href="token_8hpp_source.html#l00086">token::SPACE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Field_8cpp_source.html#l00170">Field&lt; VectorDual, int8 &gt;::writeField()</a>, <a class="el" href="iEntry_8cpp_source.html#l00154">iEntry&lt; Key, T * &gt;::writeKeyword()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00224">iOstream::writeWordEntry()</a>.</p>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Field_8cpp_source.html#l00095">Field&lt; uint32x3 &gt;::write()</a>, <a class="el" href="iEntry_8cpp_source.html#l00154">iEntry&lt; Key, T * &gt;::writeKeyword()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00239">iOstream::writeWordEntry()</a>.</p>
+<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_cgraph.png" border="0" usemap="#classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_cgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_cgraph" id="classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_cgraph">
-<area shape="rect" title="Write the keyword followed by an appropriate indentation." alt="" coords="5,5,151,32"/>
-<area shape="rect" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11" title="Indent stream." alt="" coords="199,5,309,32"/>
-</map>
 </div>
-<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_icgraph" id="classpFlow_1_1iOstream_af746580dedb817d31f5060ee684b9543_icgraph">
-<area shape="rect" title="Write the keyword followed by an appropriate indentation." alt="" coords="244,78,389,105"/>
-<area shape="rect" href="classpFlow_1_1Field.html#ac550f175fb70daa183a4008bfd790f5f" title=" " alt="" coords="5,5,196,47"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a41b87eb2ffa631b3685fed7694f2c7ed" title=" " alt="" coords="22,71,179,112"/>
-<area shape="rect" href="classpFlow_1_1iOstream.html#a21c60a5f3cd7a26eb97fa28923cbaec6" title="Write a keyword/value entry." alt="" coords="39,137,162,163"/>
-</map>
 </div>
 
 </div>
@@ -1775,43 +1880,83 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Write a keyword/value entry. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00224">224</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00239">239</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8cpp_source.html#l00097">iOstream::endEntry()</a>, and <a class="el" href="iOstream_8cpp_source.html#l00041">iOstream::writeWordKeyword()</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8cpp_source.html#l00104">iOstream::endEntry()</a>, and <a class="el" href="iOstream_8cpp_source.html#l00048">iOstream::writeWordKeyword()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="timeInterval_8cpp_source.html#l00079">timeInterval::write()</a>, <a class="el" href="iBox_8cpp_source.html#l00094">iBox&lt; intType &gt;::write()</a>, <a class="el" href="box_8cpp_source.html#l00065">box::write()</a>, <a class="el" href="sphere_8cpp_source.html#l00077">sphere::write()</a>, <a class="el" href="line_8cpp_source.html#l00124">line::write()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00133">rotatingAxis::write()</a>, <a class="el" href="vibrating_8cpp_source.html#l00094">vibrating::write()</a>, <a class="el" href="cylinder_8cpp_source.html#l00124">cylinder::write()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00137">IOfileHeader::writeHeader()</a>, and <a class="el" href="pointStructure_8cpp_source.html#l00465">pointStructure::writePointStructure()</a>.</p>
-<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="conveyorBelt_8cpp_source.html#l00066">conveyorBelt::write()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00079">timeInterval::write()</a>, <a class="el" href="iBox_8cpp_source.html#l00094">iBox&lt; intType &gt;::write()</a>, <a class="el" href="sphere_8cpp_source.html#l00077">sphere::write()</a>, <a class="el" href="box_8cpp_source.html#l00065">box::write()</a>, <a class="el" href="line_8cpp_source.html#l00124">line::write()</a>, <a class="el" href="vibrating_8cpp_source.html#l00094">vibrating::write()</a>, <a class="el" href="cylinder_8cpp_source.html#l00128">cylinder::write()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00132">rotatingAxis::write()</a>, <a class="el" href="multiTriSurface_8cpp_source.html#l00091">multiTriSurface::write()</a>, <a class="el" href="infinitePlane_8cpp_source.html#l00042">infinitePlane::write()</a>, and <a class="el" href="IOfileHeader_8cpp_source.html#l00154">IOfileHeader::writeHeader()</a>.</p>
+<div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div id="dynsection-18-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_cgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_cgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_cgraph" id="classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_cgraph">
-<area shape="rect" title="Write a keyword/value entry." alt="" coords="5,31,128,57"/>
-<area shape="rect" href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a" title="Write end entry (&#39;;&#39;) followed by newline." alt="" coords="209,5,289,32"/>
-<area shape="rect" href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543" title="Write the keyword followed by an appropriate indentation." alt="" coords="176,56,321,83"/>
-</map>
 </div>
-<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div id="dynsection-19-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_icgraph" id="classpFlow_1_1iOstream_a21c60a5f3cd7a26eb97fa28923cbaec6_icgraph">
-<area shape="rect" title="Write a keyword/value entry." alt="" coords="221,253,344,279"/>
-<area shape="rect" href="classpFlow_1_1timeInterval.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="15,5,164,47"/>
-<area shape="rect" href="classpFlow_1_1iBox.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="20,71,159,98"/>
-<area shape="rect" href="classpFlow_1_1box.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="22,122,157,149"/>
-<area shape="rect" href="classpFlow_1_1sphere.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="12,173,167,199"/>
-<area shape="rect" href="classpFlow_1_1line.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="22,223,157,250"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxis.html#aa7d820a4dd0777a9a82aee242b83a167" title="Write to output stream os." alt="" coords="15,275,163,316"/>
-<area shape="rect" href="classpFlow_1_1vibrating.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="5,341,173,367"/>
-<area shape="rect" href="classpFlow_1_1cylinder.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="8,391,171,418"/>
-<area shape="rect" href="classpFlow_1_1IOfileHeader.html#aa4249f7a47b0674a7697f67fff575591" title=" " alt="" coords="14,443,165,484"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa" title=" " alt="" coords="9,508,170,549"/>
-</map>
 </div>
+
+</div>
+</div>
+<a id="a76ac4e711fc2bb61f8ad532e5bf687c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ac4e711fc2bb61f8ad532e5bf687c7">&#9670;&nbsp;</a></span>startOfBinaryStreaming()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void startOfBinaryStreaming </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a new line and flush stream. </p>
+
+<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#aac74c7c64e14f3c4e96908948ff6f53d">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#aa2f0c1104823e9e80d82c8fcd8fb2bbd">oTstream</a>.</p>
+
+</div>
+</div>
+<a id="a38e991811d9d680487c9a75363d5c332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e991811d9d680487c9a75363d5c332">&#9670;&nbsp;</a></span>endOfBinaryStreaming()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void endOfBinaryStreaming </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reach end of file add a new line and flush stream. </p>
+
+<p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a18da76f3c773f1784901873f098b896e">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a9be08f9454433ea80ed0e49d33b7a2d0">oTstream</a>.</p>
 
 </div>
 </div>
@@ -1842,17 +1987,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#a04f2540d940cc37b5c2538ed8e5b54be">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#ad3aed50bc3b4459454ccb8c64f5ced5a">oTstream</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00312">pFlow::flush()</a>.</p>
-<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00333">pFlow::flush()</a>.</p>
+<div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div id="dynsection-20-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a50ab71f4bc571f6e246b20db4b3dd131_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a50ab71f4bc571f6e246b20db4b3dd131_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a50ab71f4bc571f6e246b20db4b3dd131_icgraph" id="classpFlow_1_1iOstream_a50ab71f4bc571f6e246b20db4b3dd131_icgraph">
-<area shape="rect" title="Flush stream." alt="" coords="155,5,209,32"/>
-<area shape="rect" href="namespacepFlow.html#ad58799777b4299119b501a456038b21d" title="Flush stream." alt="" coords="5,5,107,32"/>
-</map>
 </div>
 
 </div>
@@ -1884,17 +2025,13 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implemented in <a class="el" href="classpFlow_1_1Ostream.html#acf38748c4b2c640351e6f5bfde221904">Ostream</a>, and <a class="el" href="classpFlow_1_1oTstream.html#a319600217c15807f91fe82558a670290">oTstream</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>.</p>
-<div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>.</p>
+<div id="dynsection-21" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-21-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-17-content" class="dyncontent" style="display:none;">
+<div id="dynsection-21-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1iOstream_a83faa3c12024b2e49e8c7c712d7c96f7_icgraph.png" border="0" usemap="#classpFlow_1_1iOstream_a83faa3c12024b2e49e8c7c712d7c96f7_icgraph" alt=""/></div>
-<map name="classpFlow_1_1iOstream_a83faa3c12024b2e49e8c7c712d7c96f7_icgraph" id="classpFlow_1_1iOstream_a83faa3c12024b2e49e8c7c712d7c96f7_icgraph">
-<area shape="rect" title="Add newline and flush stream." alt="" coords="151,5,201,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="5,5,103,32"/>
-</map>
 </div>
 
 </div>
@@ -2099,10 +2236,10 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return a non-const reference to const <a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> Needed for write functions where the stream argument is temporary: e.g. </p>
+<p>Return a non-const reference to const <a class="el" href="classpFlow_1_1iOstream.html" title="Interface class for any output stream.">iOstream</a> Needed for write functions where the stream argument is temporary: e.g. </p>
 <p>thing thisThing(OFstream("thingFileName")()); </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00263">263</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00284">284</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
 </div>
 </div>
@@ -2129,7 +2266,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Indentation of the entry from the start of the keyword. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00062">62</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00068">68</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
 </div>
 </div>
@@ -2155,9 +2292,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Number of spaces per indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00065">65</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00071">71</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00146">iOstream::indentSize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00161">iOstream::indentSize()</a>.</p>
 
 </div>
 </div>
@@ -2183,9 +2320,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Current indent level. </p>
 
-<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00068">68</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iOstream_8hpp_source.html#l00074">74</a> of file <a class="el" href="iOstream_8hpp_source.html">iOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iOstream_8cpp_source.html#l00027">iOstream::decrIndent()</a>, <a class="el" href="iOstream_8hpp_source.html#l00170">iOstream::incrIndent()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00158">iOstream::indentLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iOstream_8hpp_source.html#l00185">iOstream::incrIndent()</a>, and <a class="el" href="iOstream_8hpp_source.html#l00173">iOstream::indentLevel()</a>.</p>
 
 </div>
 </div>

@@ -114,115 +114,158 @@ $(document).ready(function(){initNavTree('classpFlow_1_1fileSystem.html',''); in
 <div class="title">fileSystem Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages file pathes, manupulate and combines them.  
+ <a href="classpFlow_1_1fileSystem.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a8b70327415b7e2434c6f1ff520c37f03"><td class="memItemLeft" align="right" valign="top">typedef std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03">pathType</a></td></tr>
-<tr class="separator:a8b70327415b7e2434c6f1ff520c37f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1893316b264fba94c7cb9bbcfbedf424"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a> = std::filesystem::path</td></tr>
+<tr class="separator:a1893316b264fba94c7cb9bbcfbedf424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adbf52d64f89e6579932a2d97a410865f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#adbf52d64f89e6579932a2d97a410865f">fileSystem</a> ()</td></tr>
+<tr class="memdesc:adbf52d64f89e6579932a2d97a410865f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default.  <a href="classpFlow_1_1fileSystem.html#adbf52d64f89e6579932a2d97a410865f">More...</a><br /></td></tr>
 <tr class="separator:adbf52d64f89e6579932a2d97a410865f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8df3461916f4b035188fbd0aec0ed12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#aa8df3461916f4b035188fbd0aec0ed12">fileSystem</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;dir, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;file=&quot;&quot;)</td></tr>
-<tr class="separator:aa8df3461916f4b035188fbd0aec0ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f11e2e2ee9e22476b5a2f6696bd3dae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a9f11e2e2ee9e22476b5a2f6696bd3dae">fileSystem</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;wPath)</td></tr>
+<tr class="memdesc:a9f11e2e2ee9e22476b5a2f6696bd3dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">From full path.  <a href="classpFlow_1_1fileSystem.html#a9f11e2e2ee9e22476b5a2f6696bd3dae">More...</a><br /></td></tr>
+<tr class="separator:a9f11e2e2ee9e22476b5a2f6696bd3dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83da5de5d375895fc2b1021f12202c22"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a83da5de5d375895fc2b1021f12202c22">fileSystem</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;dir, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;file)</td></tr>
+<tr class="memdesc:a83da5de5d375895fc2b1021f12202c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">From dir and file name.  <a href="classpFlow_1_1fileSystem.html#a83da5de5d375895fc2b1021f12202c22">More...</a><br /></td></tr>
+<tr class="separator:a83da5de5d375895fc2b1021f12202c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44c26d5923333c4aa46f52ad0ba2cc57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a44c26d5923333c4aa46f52ad0ba2cc57">fileSystem</a> (const char *dir, const char *file=&quot;&quot;)</td></tr>
+<tr class="memdesc:a44c26d5923333c4aa46f52ad0ba2cc57"><td class="mdescLeft">&#160;</td><td class="mdescRight">From dir and file name.  <a href="classpFlow_1_1fileSystem.html#a44c26d5923333c4aa46f52ad0ba2cc57">More...</a><br /></td></tr>
 <tr class="separator:a44c26d5923333c4aa46f52ad0ba2cc57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af76d52f75b39a3dd3d7b2556e3bae2db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#af76d52f75b39a3dd3d7b2556e3bae2db">fileSystem</a> (const <a class="el" href="classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03">pathType</a> &amp;<a class="el" href="classpFlow_1_1fileSystem.html#a30e927ab97f8b741ec1b4ed94d111115">path</a>)</td></tr>
+<tr class="memitem:af76d52f75b39a3dd3d7b2556e3bae2db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#af76d52f75b39a3dd3d7b2556e3bae2db">fileSystem</a> (const <a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a> &amp;<a class="el" href="classpFlow_1_1fileSystem.html#a30e927ab97f8b741ec1b4ed94d111115">path</a>)</td></tr>
+<tr class="memdesc:af76d52f75b39a3dd3d7b2556e3bae2db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy.  <a href="classpFlow_1_1fileSystem.html#af76d52f75b39a3dd3d7b2556e3bae2db">More...</a><br /></td></tr>
 <tr class="separator:af76d52f75b39a3dd3d7b2556e3bae2db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05d40e2dd9525a695fc871f9138b3667"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a05d40e2dd9525a695fc871f9138b3667">fileSystem</a> (const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;)=default</td></tr>
+<tr class="memdesc:a05d40e2dd9525a695fc871f9138b3667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy.  <a href="classpFlow_1_1fileSystem.html#a05d40e2dd9525a695fc871f9138b3667">More...</a><br /></td></tr>
 <tr class="separator:a05d40e2dd9525a695fc871f9138b3667"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cfff670375a98435e86ae538868a74a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a5cfff670375a98435e86ae538868a74a">fileSystem</a> (<a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a5cfff670375a98435e86ae538868a74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move.  <a href="classpFlow_1_1fileSystem.html#a5cfff670375a98435e86ae538868a74a">More...</a><br /></td></tr>
 <tr class="separator:a5cfff670375a98435e86ae538868a74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac70cdfb2ab420c22c655079fd17407b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ac70cdfb2ab420c22c655079fd17407b3">operator=</a> (const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;)=default</td></tr>
+<tr class="memdesc:ac70cdfb2ab420c22c655079fd17407b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1fileSystem.html#ac70cdfb2ab420c22c655079fd17407b3">More...</a><br /></td></tr>
 <tr class="separator:ac70cdfb2ab420c22c655079fd17407b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d060619fb7c701b50bd425e54d55529"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a3d060619fb7c701b50bd425e54d55529">operator=</a> (<a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a3d060619fb7c701b50bd425e54d55529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classpFlow_1_1fileSystem.html#a3d060619fb7c701b50bd425e54d55529">More...</a><br /></td></tr>
 <tr class="separator:a3d060619fb7c701b50bd425e54d55529"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac357149baa7c7a8cde1b30005f1ef89c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ac357149baa7c7a8cde1b30005f1ef89c">~fileSystem</a> ()=default</td></tr>
+<tr class="memdesc:ac357149baa7c7a8cde1b30005f1ef89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1fileSystem.html#ac357149baa7c7a8cde1b30005f1ef89c">More...</a><br /></td></tr>
 <tr class="separator:ac357149baa7c7a8cde1b30005f1ef89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7c1954c9ef4e06b185ea9971217068c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ac7c1954c9ef4e06b185ea9971217068c">isDir</a> () const</td></tr>
+<tr class="memdesc:ac7c1954c9ef4e06b185ea9971217068c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is directory?  <a href="classpFlow_1_1fileSystem.html#ac7c1954c9ef4e06b185ea9971217068c">More...</a><br /></td></tr>
 <tr class="separator:ac7c1954c9ef4e06b185ea9971217068c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e927ab97f8b741ec1b4ed94d111115"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03">pathType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a30e927ab97f8b741ec1b4ed94d111115">path</a> () const</td></tr>
+<tr class="memitem:a30e927ab97f8b741ec1b4ed94d111115"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a30e927ab97f8b741ec1b4ed94d111115">path</a> () const</td></tr>
+<tr class="memdesc:a30e927ab97f8b741ec1b4ed94d111115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const access to path.  <a href="classpFlow_1_1fileSystem.html#a30e927ab97f8b741ec1b4ed94d111115">More...</a><br /></td></tr>
 <tr class="separator:a30e927ab97f8b741ec1b4ed94d111115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7cad1b82e1afeea66c2f0649de5d93f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ad7cad1b82e1afeea66c2f0649de5d93f">wordPath</a> () const</td></tr>
+<tr class="memdesc:ad7cad1b82e1afeea66c2f0649de5d93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path in word type.  <a href="classpFlow_1_1fileSystem.html#ad7cad1b82e1afeea66c2f0649de5d93f">More...</a><br /></td></tr>
 <tr class="separator:ad7cad1b82e1afeea66c2f0649de5d93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa38071b32f7e36ac484ba59b2c0b0eec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#aa38071b32f7e36ac484ba59b2c0b0eec">dirPath</a> () const</td></tr>
+<tr class="memdesc:aa38071b32f7e36ac484ba59b2c0b0eec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dir part of the path.  <a href="classpFlow_1_1fileSystem.html#aa38071b32f7e36ac484ba59b2c0b0eec">More...</a><br /></td></tr>
 <tr class="separator:aa38071b32f7e36ac484ba59b2c0b0eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06b8851f8e2610ba100d6dbe7c28e42a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a06b8851f8e2610ba100d6dbe7c28e42a">fileName</a> () const</td></tr>
+<tr class="memdesc:a06b8851f8e2610ba100d6dbe7c28e42a"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name part of the path (if any)  <a href="classpFlow_1_1fileSystem.html#a06b8851f8e2610ba100d6dbe7c28e42a">More...</a><br /></td></tr>
 <tr class="separator:a06b8851f8e2610ba100d6dbe7c28e42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af60e3745d0ba90eaec6169d2fedf3672"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#af60e3745d0ba90eaec6169d2fedf3672">absolute</a> () const</td></tr>
+<tr class="memdesc:af60e3745d0ba90eaec6169d2fedf3672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute path of this.  <a href="classpFlow_1_1fileSystem.html#af60e3745d0ba90eaec6169d2fedf3672">More...</a><br /></td></tr>
 <tr class="separator:af60e3745d0ba90eaec6169d2fedf3672"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae314be4455ae76c73ce660e840d0e5cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ae314be4455ae76c73ce660e840d0e5cb">canonical</a> () const</td></tr>
+<tr class="memdesc:ae314be4455ae76c73ce660e840d0e5cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canonical path of this (it should exist)  <a href="classpFlow_1_1fileSystem.html#ae314be4455ae76c73ce660e840d0e5cb">More...</a><br /></td></tr>
 <tr class="separator:ae314be4455ae76c73ce660e840d0e5cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1757a6d2024caf9854f3bce10f713c5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a1757a6d2024caf9854f3bce10f713c5c">relative</a> (const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;base) const</td></tr>
+<tr class="memdesc:a1757a6d2024caf9854f3bce10f713c5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative path of this this with respect to base  <a href="classpFlow_1_1fileSystem.html#a1757a6d2024caf9854f3bce10f713c5c">More...</a><br /></td></tr>
+<tr class="separator:a1757a6d2024caf9854f3bce10f713c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50adcf11cea516a2e8756eadafab8da3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a50adcf11cea516a2e8756eadafab8da3">dirExist</a> () const</td></tr>
+<tr class="memdesc:a50adcf11cea516a2e8756eadafab8da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Only operate on dir path Check if the dir path exists.  <a href="classpFlow_1_1fileSystem.html#a50adcf11cea516a2e8756eadafab8da3">More...</a><br /></td></tr>
 <tr class="separator:a50adcf11cea516a2e8756eadafab8da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a549f0056414942b1ff25b23cdeac92ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a549f0056414942b1ff25b23cdeac92ea">exist</a> () const</td></tr>
+<tr class="memdesc:a549f0056414942b1ff25b23cdeac92ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the path exists.  <a href="classpFlow_1_1fileSystem.html#a549f0056414942b1ff25b23cdeac92ea">More...</a><br /></td></tr>
 <tr class="separator:a549f0056414942b1ff25b23cdeac92ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f33187e671f9c2fc6f189bf7005e067"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a7f33187e671f9c2fc6f189bf7005e067">createDirs</a> () const</td></tr>
+<tr class="memdesc:a7f33187e671f9c2fc6f189bf7005e067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operate on dir path only Create dir based on the path and returns the canonical path.  <a href="classpFlow_1_1fileSystem.html#a7f33187e671f9c2fc6f189bf7005e067">More...</a><br /></td></tr>
 <tr class="separator:a7f33187e671f9c2fc6f189bf7005e067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5a6ed25a46487bf8b9c148769ad9ead"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ad5a6ed25a46487bf8b9c148769ad9ead">operator+=</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1fileSystem.html#a06b8851f8e2610ba100d6dbe7c28e42a">fileName</a>)</td></tr>
+<tr class="memdesc:ad5a6ed25a46487bf8b9c148769ad9ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">If this is dir path, add the filename to dir path if it is file path, replace the file name <br  />
+  <a href="classpFlow_1_1fileSystem.html#ad5a6ed25a46487bf8b9c148769ad9ead">More...</a><br /></td></tr>
 <tr class="separator:ad5a6ed25a46487bf8b9c148769ad9ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68e72d3af85bf1d216834e8e5c616072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a68e72d3af85bf1d216834e8e5c616072">operator/=</a> (const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;fs)</td></tr>
+<tr class="memdesc:a68e72d3af85bf1d216834e8e5c616072"><td class="mdescLeft">&#160;</td><td class="mdescRight">It operates on dir path only Add the dir path of fs to this <br  />
+  <a href="classpFlow_1_1fileSystem.html#a68e72d3af85bf1d216834e8e5c616072">More...</a><br /></td></tr>
 <tr class="separator:a68e72d3af85bf1d216834e8e5c616072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a867f8148e9b99b53b87b79fe200acff4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a867f8148e9b99b53b87b79fe200acff4">operator()</a> (bool retDir=true) const</td></tr>
+<tr class="memdesc:a867f8148e9b99b53b87b79fe200acff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the dir path of this.  <a href="classpFlow_1_1fileSystem.html#a867f8148e9b99b53b87b79fe200acff4">More...</a><br /></td></tr>
 <tr class="separator:a867f8148e9b99b53b87b79fe200acff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae786060b60772fb23941d9f391bf6835"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ae786060b60772fb23941d9f391bf6835">CWD</a> ()</td></tr>
+<tr class="memdesc:ae786060b60772fb23941d9f391bf6835"><td class="mdescLeft">&#160;</td><td class="mdescRight">return current working directory  <a href="classpFlow_1_1fileSystem.html#ae786060b60772fb23941d9f391bf6835">More...</a><br /></td></tr>
 <tr class="separator:ae786060b60772fb23941d9f391bf6835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a42d00f7345430ad04ae025feab49bc18"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a42d00f7345430ad04ae025feab49bc18">validFileName</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name)</td></tr>
+<tr class="memdesc:a42d00f7345430ad04ae025feab49bc18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is name is valid for a file?  <a href="classpFlow_1_1fileSystem.html#a42d00f7345430ad04ae025feab49bc18">More...</a><br /></td></tr>
 <tr class="separator:a42d00f7345430ad04ae025feab49bc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeb262ada284c78abee69fd64c1700f6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#abeb262ada284c78abee69fd64c1700f6">checkFileName</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name)</td></tr>
+<tr class="memdesc:abeb262ada284c78abee69fd64c1700f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is a valid file name?  <a href="classpFlow_1_1fileSystem.html#abeb262ada284c78abee69fd64c1700f6">More...</a><br /></td></tr>
 <tr class="separator:abeb262ada284c78abee69fd64c1700f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae085158a530fc969b1c42c36f43c08d5"><td class="memItemLeft" align="right" valign="top">std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#ae085158a530fc969b1c42c36f43c08d5">path_</a></td></tr>
-<tr class="separator:ae085158a530fc969b1c42c36f43c08d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a794878ad4ca51ec4285992cacb67968d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a794878ad4ca51ec4285992cacb67968d">path_</a></td></tr>
+<tr class="memdesc:a794878ad4ca51ec4285992cacb67968d"><td class="mdescLeft">&#160;</td><td class="mdescRight">File path.  <a href="classpFlow_1_1fileSystem.html#a794878ad4ca51ec4285992cacb67968d">More...</a><br /></td></tr>
+<tr class="separator:a794878ad4ca51ec4285992cacb67968d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a665273dc06598e5f2a675e4ea9464770"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a665273dc06598e5f2a675e4ea9464770">isDir_</a></td></tr>
+<tr class="memdesc:a665273dc06598e5f2a675e4ea9464770"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is this a directory path?  <a href="classpFlow_1_1fileSystem.html#a665273dc06598e5f2a675e4ea9464770">More...</a><br /></td></tr>
 <tr class="separator:a665273dc06598e5f2a675e4ea9464770"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:adc6d0ca8012efebb617c63f6b406324a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#adc6d0ca8012efebb617c63f6b406324a">notPermittedCharsFile</a> = <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot; &quot;) + <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot;\t\n\0;:?*/&lt;&gt;\&quot;?\'&quot;)</td></tr>
+<tr class="memitem:adc6d0ca8012efebb617c63f6b406324a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#adc6d0ca8012efebb617c63f6b406324a">notPermittedCharsFile</a> = <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot; &quot;) + <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot;&amp;\t\n;:?*/&lt;&gt;\&quot;?\'&quot;)</td></tr>
+<tr class="memdesc:adc6d0ca8012efebb617c63f6b406324a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not premitted chars in file name <br  />
+  <a href="classpFlow_1_1fileSystem.html#adc6d0ca8012efebb617c63f6b406324a">More...</a><br /></td></tr>
 <tr class="separator:adc6d0ca8012efebb617c63f6b406324a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a39940fd65d47ee21b31888a9ae6597ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a39940fd65d47ee21b31888a9ae6597ac">operator/</a> (const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;fs1, const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;fs2)</td></tr>
+<tr class="memdesc:a39940fd65d47ee21b31888a9ae6597ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a dir path from dir path of fs1 and fas2 in the form of fs1/fs2 <br  />
+  <a href="classpFlow_1_1fileSystem.html#a39940fd65d47ee21b31888a9ae6597ac">More...</a><br /></td></tr>
 <tr class="separator:a39940fd65d47ee21b31888a9ae6597ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae9040631642e1f508bbe693250ed163"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#aae9040631642e1f508bbe693250ed163">operator&lt;&lt;</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> fs)</td></tr>
-<tr class="separator:aae9040631642e1f508bbe693250ed163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12829c19a00d5cbcc9a76970304872f2"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#a12829c19a00d5cbcc9a76970304872f2">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> fs)</td></tr>
-<tr class="separator:a12829c19a00d5cbcc9a76970304872f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9e274fd12c0a39372fda20495055141"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#aa9e274fd12c0a39372fda20495055141">operator&lt;&lt;</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;fs)</td></tr>
+<tr class="separator:aa9e274fd12c0a39372fda20495055141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecdfb8dc8facc302b767ff8d13abe3da"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1fileSystem.html#aecdfb8dc8facc302b767ff8d13abe3da">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;fs)</td></tr>
+<tr class="separator:aecdfb8dc8facc302b767ff8d13abe3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00063">63</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<div class="textblock"><p>Manages file pathes, manupulate and combines them. </p>
+
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00071">71</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a8b70327415b7e2434c6f1ff520c37f03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b70327415b7e2434c6f1ff520c37f03">&#9670;&nbsp;</a></span>pathType</h2>
+<a id="a1893316b264fba94c7cb9bbcfbedf424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1893316b264fba94c7cb9bbcfbedf424">&#9670;&nbsp;</a></span>pathType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::filesystem::path <a class="el" href="classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03">pathType</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a> =  std::filesystem::path</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00093">93</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00075">75</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adbf52d64f89e6579932a2d97a410865f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbf52d64f89e6579932a2d97a410865f">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf52d64f89e6579932a2d97a410865f">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,68 +287,103 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00096">96</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Default. </p>
 
-<p class="reference">Referenced by <a class="el" href="fileSystem_8hpp_source.html#l00085">fileSystem::CWD()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00111">111</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8hpp_source.html#l00101">fileSystem::CWD()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_adbf52d64f89e6579932a2d97a410865f_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_adbf52d64f89e6579932a2d97a410865f_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_adbf52d64f89e6579932a2d97a410865f_icgraph" id="classpFlow_1_1fileSystem_adbf52d64f89e6579932a2d97a410865f_icgraph">
-<area shape="rect" title=" " alt="" coords="108,5,199,32"/>
-<area shape="rect" href="classpFlow_1_1fileSystem.html#ae786060b60772fb23941d9f391bf6835" title=" " alt="" coords="5,5,60,32"/>
-</map>
 </div>
 
 </div>
 </div>
-<a id="aa8df3461916f4b035188fbd0aec0ed12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8df3461916f4b035188fbd0aec0ed12">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[2/6]</span></h2>
+<a id="a9f11e2e2ee9e22476b5a2f6696bd3dae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f11e2e2ee9e22476b5a2f6696bd3dae">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>dir</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>wPath</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>file</em> = <code>&quot;&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00045">45</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>From full path. </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00044">44</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="fileSystem_8cpp_source.html#l00027">fileSystem::checkFileName()</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="fileSystem_8cpp_source.html#l00105">fileSystem::fileName()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00083">fileSystem::isDir_</a>.</p>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1fileSystem_aa8df3461916f4b035188fbd0aec0ed12_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_aa8df3461916f4b035188fbd0aec0ed12_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_aa8df3461916f4b035188fbd0aec0ed12_cgraph" id="classpFlow_1_1fileSystem_aa8df3461916f4b035188fbd0aec0ed12_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,97,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="145,5,243,32"/>
-</map>
+<div class="center"><img src="classpFlow_1_1fileSystem_a9f11e2e2ee9e22476b5a2f6696bd3dae_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a9f11e2e2ee9e22476b5a2f6696bd3dae_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a83da5de5d375895fc2b1021f12202c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83da5de5d375895fc2b1021f12202c22">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>From dir and file name. </p>
+
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00055">55</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1fileSystem_a83da5de5d375895fc2b1021f12202c22_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a83da5de5d375895fc2b1021f12202c22_cgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
 <a id="a44c26d5923333c4aa46f52ad0ba2cc57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44c26d5923333c4aa46f52ad0ba2cc57">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a44c26d5923333c4aa46f52ad0ba2cc57">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -330,45 +408,44 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00068">68</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>From dir and file name. </p>
+
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00078">78</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
 </div>
 </div>
 <a id="af76d52f75b39a3dd3d7b2556e3bae2db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af76d52f75b39a3dd3d7b2556e3bae2db">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af76d52f75b39a3dd3d7b2556e3bae2db">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03">pathType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00075">75</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Copy. </p>
 
-<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00068">fileSystem::isDir_</a>, and <a class="el" href="fileSystem_8cpp_source.html#l00300">pFlow::isDirectory()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1fileSystem_af76d52f75b39a3dd3d7b2556e3bae2db_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_af76d52f75b39a3dd3d7b2556e3bae2db_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_af76d52f75b39a3dd3d7b2556e3bae2db_cgraph" id="classpFlow_1_1fileSystem_af76d52f75b39a3dd3d7b2556e3bae2db_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,96,32"/>
-<area shape="rect" href="namespacepFlow.html#a646799ea535c7800d608f750bed76a1e" title=" " alt="" coords="144,5,283,32"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00085">85</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a05d40e2dd9525a695fc871f9138b3667"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05d40e2dd9525a695fc871f9138b3667">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d40e2dd9525a695fc871f9138b3667">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -391,10 +468,12 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Copy. </p>
+
 </div>
 </div>
 <a id="a5cfff670375a98435e86ae538868a74a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cfff670375a98435e86ae538868a74a">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cfff670375a98435e86ae538868a74a">&#9670;&nbsp;</a></span>fileSystem() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -416,6 +495,8 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move. </p>
 
 </div>
 </div>
@@ -441,6 +522,8 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -469,9 +552,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00076">76</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Is name is valid for a file? </p>
 
-<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00072">fileSystem::notPermittedCharsFile</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00090">90</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00087">fileSystem::notPermittedCharsFile</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00027">fileSystem::checkFileName()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -480,10 +565,6 @@ Friends</h2></td></tr>
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a42d00f7345430ad04ae025feab49bc18_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a42d00f7345430ad04ae025feab49bc18_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a42d00f7345430ad04ae025feab49bc18_icgraph" id="classpFlow_1_1fileSystem_a42d00f7345430ad04ae025feab49bc18_icgraph">
-<area shape="rect" title=" " alt="" coords="176,5,292,32"/>
-<area shape="rect" href="classpFlow_1_1fileSystem.html#abeb262ada284c78abee69fd64c1700f6" title=" " alt="" coords="5,5,128,32"/>
-</map>
 </div>
 
 </div>
@@ -512,20 +593,26 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Is a valid file name? </p>
+
 <p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00027">27</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="fileSystem_8hpp_source.html#l00072">fileSystem::notPermittedCharsFile</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00076">fileSystem::validFileName()</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, <a class="el" href="fileSystem_8hpp_source.html#l00087">fileSystem::notPermittedCharsFile</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00090">fileSystem::validFileName()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00044">fileSystem::fileSystem()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_abeb262ada284c78abee69fd64c1700f6_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_abeb262ada284c78abee69fd64c1700f6_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_abeb262ada284c78abee69fd64c1700f6_cgraph" id="classpFlow_1_1fileSystem_abeb262ada284c78abee69fd64c1700f6_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,127,57"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="183,5,281,32"/>
-<area shape="rect" href="classpFlow_1_1fileSystem.html#a42d00f7345430ad04ae025feab49bc18" title=" " alt="" coords="175,56,289,83"/>
-</map>
+</div>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1fileSystem_abeb262ada284c78abee69fd64c1700f6_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_abeb262ada284c78abee69fd64c1700f6_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -553,32 +640,26 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00085">85</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>return current working directory </p>
 
-<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00096">fileSystem::fileSystem()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00101">101</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="fileSystem_8hpp_source.html#l00186">pFlow::CWD()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_cgraph" id="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" href="classpFlow_1_1fileSystem.html#adbf52d64f89e6579932a2d97a410865f" title=" " alt="" coords="108,5,199,32"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00111">fileSystem::fileSystem()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8hpp_source.html#l00221">pFlow::CWD()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_icgraph" id="classpFlow_1_1fileSystem_ae786060b60772fb23941d9f391bf6835_icgraph">
-<area shape="rect" title=" " alt="" coords="153,5,208,32"/>
-<area shape="rect" href="namespacepFlow.html#a869d7b21ba981c374dcf8542f4ce2144" title=" " alt="" coords="5,5,105,32"/>
-</map>
 </div>
 
 </div>
@@ -607,6 +688,8 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Copy assignment. </p>
+
 </div>
 </div>
 <a id="a3d060619fb7c701b50bd425e54d55529"></a>
@@ -633,6 +716,8 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Move assignment. </p>
+
 </div>
 </div>
 <a id="ac7c1954c9ef4e06b185ea9971217068c"></a>
@@ -658,9 +743,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00116">116</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Is directory? </p>
 
-<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00068">fileSystem::isDir_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00148">148</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00083">fileSystem::isDir_</a>.</p>
 
 </div>
 </div>
@@ -674,7 +761,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03">pathType</a>&amp; path </td>
+          <td class="memname">const <a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a>&amp; path </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -687,26 +774,19 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00121">121</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Const access to path. </p>
 
-<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00067">fileSystem::path_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00154">154</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00335">pFlow::containingFiles()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00300">pFlow::isDirectory()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00307">pFlow::isRegularFile()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00057">IOfileHeader::path()</a>, <a class="el" href="repository_8cpp_source.html#l00061">repository::path()</a>, and <a class="el" href="fileSystem_8cpp_source.html#l00313">pFlow::subDirectories()</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00080">fileSystem::path_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00359">pFlow::containingFiles()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00324">pFlow::isDirectory()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00331">pFlow::isRegularFile()</a>, <a class="el" href="repository_8cpp_source.html#l00070">repository::path()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00063">IOfileHeader::path()</a>, and <a class="el" href="fileSystem_8cpp_source.html#l00337">pFlow::subDirectories()</a>.</p>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a30e927ab97f8b741ec1b4ed94d111115_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a30e927ab97f8b741ec1b4ed94d111115_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a30e927ab97f8b741ec1b4ed94d111115_icgraph" id="classpFlow_1_1fileSystem_a30e927ab97f8b741ec1b4ed94d111115_icgraph">
-<area shape="rect" title=" " alt="" coords="439,126,489,152"/>
-<area shape="rect" href="namespacepFlow.html#a79c4a81c7fb0a27aabdb1b4a73c750d8" title=" " alt="" coords="5,12,172,39"/>
-<area shape="rect" href="namespacepFlow.html#a646799ea535c7800d608f750bed76a1e" title=" " alt="" coords="236,50,375,76"/>
-<area shape="rect" href="namespacepFlow.html#ae21b012a6bc672b99ddbb629f4ecce09" title=" " alt="" coords="7,75,170,102"/>
-<area shape="rect" href="namespacepFlow.html#ac8a2c4dd123ea5ac20d0a98d5076e510" title=" " alt="" coords="229,151,381,178"/>
-<area shape="rect" href="classpFlow_1_1IOfileHeader.html#ae1921a7f20c43d1438221946e607c488" title=" " alt="" coords="231,202,380,244"/>
-<area shape="rect" href="classpFlow_1_1repository.html#ae1921a7f20c43d1438221946e607c488" title=" " alt="" coords="220,268,391,295"/>
-</map>
 </div>
 
 </div>
@@ -734,25 +814,19 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00126">126</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Path in word type. </p>
 
-<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00067">fileSystem::path_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00160">160</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointFieldToVTK_8hpp_source.html#l00360">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected()</a>, <a class="el" href="systemControl_8cpp_source.html#l00030">systemControl::getRunName()</a>, <a class="el" href="systemControl_8cpp_source.html#l00061">systemControl::getTopFolder()</a>, <a class="el" href="fileStream_8cpp_source.html#l00030">fileStream::openInFile()</a>, and <a class="el" href="fileStream_8cpp_source.html#l00061">fileStream::openOutFile()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00080">fileSystem::path_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSeries_8cpp_source.html#l00049">fileSeries::addTimeFile()</a>, <a class="el" href="pointFieldToVTK_8cpp_source.html#l00008">pFlow::PFtoVTK::convertTimeFolderPointFields()</a>, <a class="el" href="pointFieldToVTK_8cpp_source.html#l00095">pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected()</a>, <a class="el" href="triSurfaceFieldToVTK_8cpp_source.html#l00211">pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSeparate()</a>, <a class="el" href="triSurfaceFieldToVTK_8cpp_source.html#l00151">pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSingle()</a>, <a class="el" href="fileDictionary_8cpp_source.html#l00047">fileDictionary::fileDictionary()</a>, <a class="el" href="systemControl_8cpp_source.html#l00050">systemControl::getRunName()</a>, <a class="el" href="systemControl_8cpp_source.html#l00075">systemControl::getTopFolder()</a>, <a class="el" href="fileStream_8cpp_source.html#l00027">fileStream::openInFile()</a>, and <a class="el" href="fileStream_8cpp_source.html#l00058">fileStream::openOutFile()</a>.</p>
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_ad7cad1b82e1afeea66c2f0649de5d93f_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ad7cad1b82e1afeea66c2f0649de5d93f_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_ad7cad1b82e1afeea66c2f0649de5d93f_icgraph" id="classpFlow_1_1fileSystem_ad7cad1b82e1afeea66c2f0649de5d93f_icgraph">
-<area shape="rect" title=" " alt="" coords="267,143,349,170"/>
-<area shape="rect" href="namespacepFlow_1_1PFtoVTK.html#afed74f3e8fdc5e63c61b210f8fa1044c" title=" " alt="" coords="5,5,219,47"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html#abdb9f71335d973537b7571418077a502" title=" " alt="" coords="31,71,193,112"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html#a7074205a94f43aa32719ccd2e290b470" title=" " alt="" coords="31,136,193,177"/>
-<area shape="rect" href="classpFlow_1_1fileStream.html#a2202773d095b6ad3bd8186c6b4ef1458" title=" " alt="" coords="41,201,183,243"/>
-<area shape="rect" href="classpFlow_1_1fileStream.html#a8d6b427b76776c3ef060ad31d8ea44fd" title=" " alt="" coords="41,267,183,308"/>
-</map>
 </div>
 
 </div>
@@ -772,20 +846,17 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00082">82</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Dir part of the path. </p>
 
-<p class="reference">Referenced by <a class="el" href="fileStream_8cpp_source.html#l00061">fileStream::openOutFile()</a>, and <a class="el" href="fileSystem_8cpp_source.html#l00265">pFlow::operator/()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00091">91</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileStream_8cpp_source.html#l00058">fileStream::openOutFile()</a>, and <a class="el" href="fileSystem_8cpp_source.html#l00280">pFlow::operator/()</a>.</p>
+<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_aa38071b32f7e36ac484ba59b2c0b0eec_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_aa38071b32f7e36ac484ba59b2c0b0eec_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_aa38071b32f7e36ac484ba59b2c0b0eec_icgraph" id="classpFlow_1_1fileSystem_aa38071b32f7e36ac484ba59b2c0b0eec_icgraph">
-<area shape="rect" title=" " alt="" coords="196,42,263,69"/>
-<area shape="rect" href="classpFlow_1_1fileStream.html#a8d6b427b76776c3ef060ad31d8ea44fd" title=" " alt="" coords="5,5,148,47"/>
-<area shape="rect" href="namespacepFlow.html#a876ef3ad73dadbed86887793dd7d40d5" title=" " alt="" coords="13,71,140,98"/>
-</map>
 </div>
 
 </div>
@@ -805,32 +876,26 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00096">96</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>File name part of the path (if any) </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00105">105</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Insertion_8cpp_source.html#l00083">Insertion&lt; ShapeType &gt;::Insertion()</a>.</p>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_cgraph" id="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,88,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="136,5,233,32"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00044">fileSystem::fileSystem()</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_icgraph" id="classpFlow_1_1fileSystem_a06b8851f8e2610ba100d6dbe7c28e42a_icgraph">
-<area shape="rect" title=" " alt="" coords="244,5,325,32"/>
-<area shape="rect" href="classpFlow_1_1Insertion.html#a3f9338a5d0ba121e46363bdeccbc3904" title=" " alt="" coords="5,5,196,32"/>
-</map>
 </div>
 
 </div>
@@ -850,19 +915,17 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00116">116</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Absolute path of this. </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="fileSystem_8hpp_source.html#l00068">fileSystem::isDir_</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00067">fileSystem::path_</a>.</p>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00125">125</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="fileSystem_8hpp_source.html#l00083">fileSystem::isDir_</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00080">fileSystem::path_</a>.</p>
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_af60e3745d0ba90eaec6169d2fedf3672_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_af60e3745d0ba90eaec6169d2fedf3672_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_af60e3745d0ba90eaec6169d2fedf3672_cgraph" id="classpFlow_1_1fileSystem_af60e3745d0ba90eaec6169d2fedf3672_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,84,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="132,5,229,32"/>
-</map>
 </div>
 
 </div>
@@ -882,33 +945,59 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00140">140</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Canonical path of this (it should exist) </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>, <a class="el" href="fileSystem_8hpp_source.html#l00068">fileSystem::isDir_</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00067">fileSystem::path_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00149">149</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="systemControl_8cpp_source.html#l00030">systemControl::getRunName()</a>, and <a class="el" href="systemControl_8cpp_source.html#l00061">systemControl::getTopFolder()</a>.</p>
-<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_cgraph" id="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,89,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="137,5,235,32"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>, <a class="el" href="fileSystem_8hpp_source.html#l00083">fileSystem::isDir_</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00080">fileSystem::path_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="systemControl_8cpp_source.html#l00050">systemControl::getRunName()</a>, and <a class="el" href="systemControl_8cpp_source.html#l00075">systemControl::getTopFolder()</a>.</p>
 <div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_icgraph" id="classpFlow_1_1fileSystem_ae314be4455ae76c73ce660e840d0e5cb_icgraph">
-<area shape="rect" title=" " alt="" coords="216,46,300,73"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html#abdb9f71335d973537b7571418077a502" title=" " alt="" coords="5,5,168,47"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html#a7074205a94f43aa32719ccd2e290b470" title=" " alt="" coords="5,71,168,112"/>
-</map>
+</div>
+
+</div>
+</div>
+<a id="a1757a6d2024caf9854f3bce10f713c5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1757a6d2024caf9854f3bce10f713c5c">&#9670;&nbsp;</a></span>relative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a> relative </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&#160;</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>relative path of this this with respect to base </p>
+
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00170">170</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="fileSystem_8hpp_source.html#l00080">fileSystem::path_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSeries_8cpp_source.html#l00049">fileSeries::addTimeFile()</a>.</p>
+<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1fileSystem_a1757a6d2024caf9854f3bce10f713c5c_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a1757a6d2024caf9854f3bce10f713c5c_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -928,19 +1017,17 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00162">162</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Only operate on dir path Check if the dir path exists. </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
-<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00176">176</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+<div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a50adcf11cea516a2e8756eadafab8da3_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a50adcf11cea516a2e8756eadafab8da3_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a50adcf11cea516a2e8756eadafab8da3_cgraph" id="classpFlow_1_1fileSystem_a50adcf11cea516a2e8756eadafab8da3_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,76,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="124,5,221,32"/>
-</map>
 </div>
 
 </div>
@@ -960,32 +1047,26 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00179">179</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Check if the path exists. </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00192">192</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="fileStream_8cpp_source.html#l00030">fileStream::openInFile()</a>.</p>
-<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileStream_8cpp_source.html#l00027">fileStream::openInFile()</a>.</p>
+<div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div id="dynsection-18-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_cgraph" id="classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="108,5,205,32"/>
-</map>
 </div>
-<div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-17-content" class="dyncontent" style="display:none;">
+<div id="dynsection-19-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_icgraph" id="classpFlow_1_1fileSystem_a549f0056414942b1ff25b23cdeac92ea_icgraph">
-<area shape="rect" title=" " alt="" coords="196,13,251,39"/>
-<area shape="rect" href="classpFlow_1_1fileStream.html#a2202773d095b6ad3bd8186c6b4ef1458" title=" " alt="" coords="5,5,148,47"/>
-</map>
 </div>
 
 </div>
@@ -1005,32 +1086,26 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00196">196</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Operate on dir path only Create dir based on the path and returns the canonical path. </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00208">208</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="fileStream_8cpp_source.html#l00061">fileStream::openOutFile()</a>.</p>
-<div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileStream_8cpp_source.html#l00058">fileStream::openOutFile()</a>.</p>
+<div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-18-content" class="dyncontent" style="display:none;">
+<div id="dynsection-20-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_cgraph" id="classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,95,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="143,5,240,32"/>
-</map>
 </div>
-<div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-21" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-21-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-19-content" class="dyncontent" style="display:none;">
+<div id="dynsection-21-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_icgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_icgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_icgraph" id="classpFlow_1_1fileSystem_a7f33187e671f9c2fc6f189bf7005e067_icgraph">
-<area shape="rect" title=" " alt="" coords="196,13,285,39"/>
-<area shape="rect" href="classpFlow_1_1fileStream.html#a8d6b427b76776c3ef060ad31d8ea44fd" title=" " alt="" coords="5,5,148,47"/>
-</map>
 </div>
 
 </div>
@@ -1051,7 +1126,12 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00233">233</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>If this is dir path, add the filename to dir path if it is file path, replace the file name <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00245">245</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
 
 </div>
 </div>
@@ -1071,19 +1151,18 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00250">250</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>It operates on dir path only Add the dir path of fs to this <br  />
+ </p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
-<div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00265">265</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
+<div id="dynsection-22" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-22-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-22-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-20-content" class="dyncontent" style="display:none;">
+<div id="dynsection-22-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1fileSystem_a68e72d3af85bf1d216834e8e5c616072_cgraph.png" border="0" usemap="#classpFlow_1_1fileSystem_a68e72d3af85bf1d216834e8e5c616072_cgraph" alt=""/></div>
-<map name="classpFlow_1_1fileSystem_a68e72d3af85bf1d216834e8e5c616072_cgraph" id="classpFlow_1_1fileSystem_a68e72d3af85bf1d216834e8e5c616072_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,97,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="145,5,243,32"/>
-</map>
 </div>
 
 </div>
@@ -1104,7 +1183,9 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00223">223</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
+<p>Return the dir path of this. </p>
+
+<p class="definition">Definition at line <a class="el" href="fileSystem_8cpp_source.html#l00235">235</a> of file <a class="el" href="fileSystem_8cpp_source.html">fileSystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -1143,10 +1224,13 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Create a dir path from dir path of fs1 and fas2 in the form of fs1/fs2 <br  />
+ </p>
+
 </div>
 </div>
-<a id="aae9040631642e1f508bbe693250ed163"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae9040631642e1f508bbe693250ed163">&#9670;&nbsp;</a></span>operator&lt;&lt; <span class="overload">[1/2]</span></h2>
+<a id="aa9e274fd12c0a39372fda20495055141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e274fd12c0a39372fda20495055141">&#9670;&nbsp;</a></span>operator&lt;&lt; <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1163,7 +1247,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&#160;</td>
           <td class="paramname"><em>fs</em>&#160;</td>
         </tr>
         <tr>
@@ -1181,8 +1265,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a12829c19a00d5cbcc9a76970304872f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12829c19a00d5cbcc9a76970304872f2">&#9670;&nbsp;</a></span>operator&lt;&lt; <span class="overload">[2/2]</span></h2>
+<a id="aecdfb8dc8facc302b767ff8d13abe3da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecdfb8dc8facc302b767ff8d13abe3da">&#9670;&nbsp;</a></span>operator&lt;&lt; <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1199,7 +1283,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&#160;</td>
           <td class="paramname"><em>fs</em>&#160;</td>
         </tr>
         <tr>
@@ -1218,8 +1302,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae085158a530fc969b1c42c36f43c08d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae085158a530fc969b1c42c36f43c08d5">&#9670;&nbsp;</a></span>path_</h2>
+<a id="a794878ad4ca51ec4285992cacb67968d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a794878ad4ca51ec4285992cacb67968d">&#9670;&nbsp;</a></span>path_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1228,7 +1312,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::filesystem::path path_</td>
+          <td class="memname"><a class="el" href="classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424">pathType</a> path_</td>
         </tr>
       </table>
   </td>
@@ -1238,9 +1322,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00067">67</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>File path. </p>
 
-<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00116">fileSystem::absolute()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00140">fileSystem::canonical()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00265">pFlow::operator/()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00287">pFlow::operator&lt;&lt;()</a>, <a class="el" href="fileSystem_8hpp_source.html#l00121">fileSystem::path()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00126">fileSystem::wordPath()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00080">80</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00125">fileSystem::absolute()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00149">fileSystem::canonical()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00280">pFlow::operator/()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00311">pFlow::operator&lt;&lt;()</a>, <a class="el" href="fileSystem_8hpp_source.html#l00154">fileSystem::path()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00170">fileSystem::relative()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00160">fileSystem::wordPath()</a>.</p>
 
 </div>
 </div>
@@ -1264,9 +1350,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00068">68</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Is this a directory path? </p>
 
-<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00116">fileSystem::absolute()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00140">fileSystem::canonical()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00075">fileSystem::fileSystem()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00116">fileSystem::isDir()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00083">83</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00125">fileSystem::absolute()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00149">fileSystem::canonical()</a>, <a class="el" href="fileSystem_8cpp_source.html#l00044">fileSystem::fileSystem()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00148">fileSystem::isDir()</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1368,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> notPermittedCharsFile = <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot; &quot;) + <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot;\t\n\0;:?*/&lt;&gt;\&quot;?\'&quot;)</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> notPermittedCharsFile = <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot; &quot;) + <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(&quot;&amp;\t\n;:?*/&lt;&gt;\&quot;?\'&quot;)</td>
         </tr>
       </table>
   </td>
@@ -1290,9 +1378,12 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00072">72</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+<p>Not premitted chars in file name <br  />
+ </p>
 
-<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00027">fileSystem::checkFileName()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00076">fileSystem::validFileName()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fileSystem_8hpp_source.html#l00087">87</a> of file <a class="el" href="fileSystem_8hpp_source.html">fileSystem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fileSystem_8cpp_source.html#l00027">fileSystem::checkFileName()</a>, and <a class="el" href="fileSystem_8hpp_source.html#l00090">fileSystem::validFileName()</a>.</p>
 
 </div>
 </div>

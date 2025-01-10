@@ -138,98 +138,104 @@ $(document).ready(function(){initNavTree('fieldOperations_8hpp_source.html','');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a11d64955a325360de5939ba5a60b862d">   34</a></span>&#160;<a class="code" href="classpFlow_1_1rectMeshField.html">rectMeshField_H&lt;T&gt;</a> <a class="code" href="namespacepFlow.html#a11d64955a325360de5939ba5a60b862d">sumOp</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointField.html">pointField_H&lt;T&gt;</a> field, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointRectCell.html">pointRectCell</a>&amp; pointToCell)</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a51552aa243821d9ff9de481506a0ca4c">   34</a></span>&#160;<a class="code" href="classpFlow_1_1uniquePtr.html">uniquePtr&lt;rectMeshField_H&lt;T&gt;</a>&gt; <a class="code" href="namespacepFlow.html#a51552aa243821d9ff9de481506a0ca4c">sumOp</a>( <a class="code" href="classpFlow_1_1pointField.html">pointField_H&lt;T&gt;</a>&amp; field, <a class="code" href="classpFlow_1_1pointRectCell.html">pointRectCell</a>&amp; pointToCell)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// create field</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; mesh = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#a502b077b7f1e29810f60f0340429d677">mesh</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">auto</span>&amp; mesh = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#ae933fe4b7def5b25687754b17467b22d">mesh</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">auto</span> iterator = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#a639ca8a7754aa6a5ede02cb5346b8fa3">getCellIterator</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classpFlow_1_1rectMeshField.html">rectMeshField_H&lt;T&gt;</a> results(mesh, T(0));</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;mesh.nx(); i++)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j=0; j&lt;mesh.ny(); j++)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k=0; k&lt;mesh.nz(); k++)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = iterator.start(i,j,k); </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                T res (0);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordflow">while</span>(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>&gt;-1)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    res += field[<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>];</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = iterator.getNext(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                results(i,j,k) = res;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> results;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> incMask&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a49c49011d39f3056c050c9e449f82509">   65</a></span>&#160;<a class="code" href="classpFlow_1_1rectMeshField.html">rectMeshField_H&lt;T&gt;</a> <a class="code" href="namespacepFlow.html#a49c49011d39f3056c050c9e449f82509">sumMaksOp</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointField.html">pointField_H&lt;T&gt;</a> field, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointRectCell.html">pointRectCell</a>&amp; pointToCell, <span class="keyword">const</span> incMask&amp; mask)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// create field</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; mesh = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#a502b077b7f1e29810f60f0340429d677">mesh</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">auto</span> iterator = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#a639ca8a7754aa6a5ede02cb5346b8fa3">getCellIterator</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classpFlow_1_1rectMeshField.html">rectMeshField_H&lt;T&gt;</a> results(mesh, T(0));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">auto</span> f = field.<a class="code" href="classpFlow_1_1internalField.html#a65a1eeccd800386379e7db5dd61ea9aa">deviceView</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">auto</span> resultsPtr = makeUnique&lt;rectMeshField_H&lt;T&gt;&gt;(mesh, T(0));</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">auto</span>&amp; results = resultsPtr();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;mesh.nx(); i++)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j=0; j&lt;mesh.ny(); j++)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k=0; k&lt;mesh.nz(); k++)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a> = iterator.start(i,j,k);   </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                T res (0);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">while</span>(<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a> != <a class="code" href="classpFlow_1_1cellMapper.html#a40983a388b53d013256aeb8bde6b384b">cellMapper::NoPos</a>)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    res += f[<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a> = iterator.getNext(<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                results(i,j,k) = res;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> resultsPtr;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> incMask&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a218b96f13e7f121c16342bc1901dd655">   66</a></span>&#160;<a class="code" href="classpFlow_1_1uniquePtr.html">uniquePtr&lt;rectMeshField_H&lt;T&gt;</a>&gt; <a class="code" href="namespacepFlow.html#a218b96f13e7f121c16342bc1901dd655">sumMaksOp</a>( <a class="code" href="classpFlow_1_1pointField.html">pointField_H&lt;T&gt;</a>&amp; field, <a class="code" href="classpFlow_1_1pointRectCell.html">pointRectCell</a>&amp; pointToCell, <span class="keyword">const</span> incMask&amp; mask)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// create field</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">auto</span>&amp; mesh = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#ae933fe4b7def5b25687754b17467b22d">mesh</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">auto</span> iterator = pointToCell.<a class="code" href="classpFlow_1_1pointRectCell.html#a639ca8a7754aa6a5ede02cb5346b8fa3">getCellIterator</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">auto</span> f = field.<a class="code" href="classpFlow_1_1internalField.html#a65a1eeccd800386379e7db5dd61ea9aa">deviceView</a>();</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;mesh.nx(); i++)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j=0; j&lt;mesh.ny(); j++)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k=0; k&lt;mesh.nz(); k++)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="comment">//auto [loop, n] = pointToCell.startLoop(i,j,k);</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = iterator.start(i,j,k); </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                T res (0);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keywordflow">while</span>(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>&gt;-1)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="keywordflow">if</span>(mask(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>))</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        res += field[<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>];</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = iterator.getNext(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                results(i,j,k) = res;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> results;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">auto</span> resultsPtr = makeUnique&lt;rectMeshField_H&lt;T&gt;&gt;(mesh, T(0));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">auto</span>&amp; results = resultsPtr();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;mesh.nx(); i++)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j=0; j&lt;mesh.ny(); j++)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k=0; k&lt;mesh.nz(); k++)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="comment">//auto [loop, n] = pointToCell.startLoop(i,j,k);</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a> = iterator.start(i,j,k);   </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                T res (0);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordflow">while</span>(<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>!= <a class="code" href="classpFlow_1_1cellMapper.html#a40983a388b53d013256aeb8bde6b384b">cellMapper::NoPos</a>)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    <span class="keywordflow">if</span>(mask(<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>))</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        res += f[<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>];</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    <a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a> = iterator.getNext(<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                results(i,j,k) = res;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> resultsPtr;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif //__fieldOperations_hpp__</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#endif //__fieldOperations_hpp__</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclasspFlow_1_1pointRectCell_html_ae933fe4b7def5b25687754b17467b22d"><div class="ttname"><a href="classpFlow_1_1pointRectCell.html#ae933fe4b7def5b25687754b17467b22d">pFlow::pointRectCell::mesh</a></div><div class="ttdeci">auto &amp; mesh()</div><div class="ttdef"><b>Definition:</b> <a href="pointRectCell_8hpp_source.html#l00081">pointRectCell.hpp:81</a></div></div>
 <div class="ttc" id="aincludeMask_8hpp_html"><div class="ttname"><a href="includeMask_8hpp.html">includeMask.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1rectMeshField_html"><div class="ttname"><a href="classpFlow_1_1rectMeshField.html">pFlow::rectMeshField</a></div><div class="ttdef"><b>Definition:</b> <a href="rectMeshField_8hpp_source.html#l00031">rectMeshField.hpp:31</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a218b96f13e7f121c16342bc1901dd655"><div class="ttname"><a href="namespacepFlow.html#a218b96f13e7f121c16342bc1901dd655">pFlow::sumMaksOp</a></div><div class="ttdeci">uniquePtr&lt; rectMeshField_H&lt; T &gt; &gt; sumMaksOp(pointField_H&lt; T &gt; &amp;field, pointRectCell &amp;pointToCell, const incMask &amp;mask)</div><div class="ttdef"><b>Definition:</b> <a href="fieldOperations_8hpp_source.html#l00066">fieldOperations.hpp:66</a></div></div>
 <div class="ttc" id="apointFields_8hpp_html"><div class="ttname"><a href="pointFields_8hpp.html">pointFields.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointRectCell_html_a639ca8a7754aa6a5ede02cb5346b8fa3"><div class="ttname"><a href="classpFlow_1_1pointRectCell.html#a639ca8a7754aa6a5ede02cb5346b8fa3">pFlow::pointRectCell::getCellIterator</a></div><div class="ttdeci">auto getCellIterator() const</div><div class="ttdef"><b>Definition:</b> <a href="pointRectCell_8hpp_source.html#l00134">pointRectCell.hpp:134</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointRectCell_html_a639ca8a7754aa6a5ede02cb5346b8fa3"><div class="ttname"><a href="classpFlow_1_1pointRectCell.html#a639ca8a7754aa6a5ede02cb5346b8fa3">pFlow::pointRectCell::getCellIterator</a></div><div class="ttdeci">auto getCellIterator() const</div><div class="ttdef"><b>Definition:</b> <a href="pointRectCell_8hpp_source.html#l00127">pointRectCell.hpp:127</a></div></div>
 <div class="ttc" id="apointRectCell_8hpp_html"><div class="ttname"><a href="pointRectCell_8hpp.html">pointRectCell.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demComponent_8hpp_source.html#l00028">demComponent.hpp:28</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00035">pointField.hpp:35</a></div></div>
-<div class="ttc" id="aNBSCrossLoop_8hpp_html_aad8b608072a1b6dcd9e91de38ee2925f"><div class="ttname"><a href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a></div><div class="ttdeci">int32 n</div><div class="ttdef"><b>Definition:</b> <a href="NBSCrossLoop_8hpp_source.html#l00024">NBSCrossLoop.hpp:24</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a11d64955a325360de5939ba5a60b862d"><div class="ttname"><a href="namespacepFlow.html#a11d64955a325360de5939ba5a60b862d">pFlow::sumOp</a></div><div class="ttdeci">rectMeshField_H&lt; T &gt; sumOp(const pointField_H&lt; T &gt; field, const pointRectCell &amp;pointToCell)</div><div class="ttdef"><b>Definition:</b> <a href="fieldOperations_8hpp_source.html#l00034">fieldOperations.hpp:34</a></div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00033">pointField.hpp:33</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00050">builtinTypes.hpp:50</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1pointRectCell_html"><div class="ttname"><a href="classpFlow_1_1pointRectCell.html">pFlow::pointRectCell</a></div><div class="ttdef"><b>Definition:</b> <a href="pointRectCell_8hpp_source.html#l00032">pointRectCell.hpp:32</a></div></div>
 <div class="ttc" id="arectMeshFields_8hpp_html"><div class="ttname"><a href="rectMeshFields_8hpp.html">rectMeshFields.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointRectCell_html_a502b077b7f1e29810f60f0340429d677"><div class="ttname"><a href="classpFlow_1_1pointRectCell.html#a502b077b7f1e29810f60f0340429d677">pFlow::pointRectCell::mesh</a></div><div class="ttdeci">const auto &amp; mesh() const</div><div class="ttdef"><b>Definition:</b> <a href="pointRectCell_8hpp_source.html#l00091">pointRectCell.hpp:91</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a49c49011d39f3056c050c9e449f82509"><div class="ttname"><a href="namespacepFlow.html#a49c49011d39f3056c050c9e449f82509">pFlow::sumMaksOp</a></div><div class="ttdeci">rectMeshField_H&lt; T &gt; sumMaksOp(const pointField_H&lt; T &gt; field, const pointRectCell &amp;pointToCell, const incMask &amp;mask)</div><div class="ttdef"><b>Definition:</b> <a href="fieldOperations_8hpp_source.html#l00065">fieldOperations.hpp:65</a></div></div>
+<div class="ttc" id="aNBSLoop_8hpp_html_a58f1256fe216b2e84819aa621b683de1"><div class="ttname"><a href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a></div><div class="ttdeci">uint32 n</div><div class="ttdef"><b>Definition:</b> <a href="NBSLoop_8hpp_source.html#l00024">NBSLoop.hpp:24</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1cellMapper_html_a40983a388b53d013256aeb8bde6b384b"><div class="ttname"><a href="classpFlow_1_1cellMapper.html#a40983a388b53d013256aeb8bde6b384b">pFlow::cellMapper::NoPos</a></div><div class="ttdeci">static constexpr uint32 NoPos</div><div class="ttdef"><b>Definition:</b> <a href="cellMapper_8hpp_source.html#l00042">cellMapper.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1uniquePtr_html"><div class="ttname"><a href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr</a></div><div class="ttdef"><b>Definition:</b> <a href="uniquePtr_8hpp_source.html#l00042">uniquePtr.hpp:42</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a51552aa243821d9ff9de481506a0ca4c"><div class="ttname"><a href="namespacepFlow.html#a51552aa243821d9ff9de481506a0ca4c">pFlow::sumOp</a></div><div class="ttdeci">uniquePtr&lt; rectMeshField_H&lt; T &gt; &gt; sumOp(pointField_H&lt; T &gt; &amp;field, pointRectCell &amp;pointToCell)</div><div class="ttdef"><b>Definition:</b> <a href="fieldOperations_8hpp_source.html#l00034">fieldOperations.hpp:34</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1internalField_html_a65a1eeccd800386379e7db5dd61ea9aa"><div class="ttname"><a href="classpFlow_1_1internalField.html#a65a1eeccd800386379e7db5dd61ea9aa">pFlow::internalField&lt; T, void &gt;::deviceView</a></div><div class="ttdeci">auto deviceView() const</div><div class="ttdef"><b>Definition:</b> <a href="internalField_8hpp_source.html#l00097">internalField.hpp:97</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_df38b2a5d584e0f6066b4518b95c638b.html">utilities</a></li><li class="navelem"><a class="el" href="dir_3104238dba096c99a27b6bccac80df1f.html">postprocessPhasicFlow</a></li><li class="navelem"><a class="el" href="fieldOperations_8hpp.html">fieldOperations.hpp</a></li>

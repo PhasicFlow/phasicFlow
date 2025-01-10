@@ -1,0 +1,14 @@
+digraph "read"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="read",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::operator\>\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#a6afb377b6e01773903cd7a2e0c18f3c9",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::symArray\< nonLinear\lProperties \>::read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1symArray.html#ae1d42751915e8566dac19658cc498ffa",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::VectorSingle\l\< word, HostSpace \>::read",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorSingle_3_01word_00_01HostSpace_01_4.html#ae1d42751915e8566dac19658cc498ffa",tooltip="Read vector from stream."];
+}

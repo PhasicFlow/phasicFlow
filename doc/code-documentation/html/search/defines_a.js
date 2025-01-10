@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['magentatext_5493',['magentaText',['../streams_8hpp.html#a8dc03cadd682b6a068c116f139fd45cb',1,'streams.hpp']]]
+  ['magenta_5ftext_7244',['Magenta_Text',['../iOstream_8hpp.html#af1513fe3823ed634b2bbfeb1563a3609',1,'iOstream.hpp']]]
 ];

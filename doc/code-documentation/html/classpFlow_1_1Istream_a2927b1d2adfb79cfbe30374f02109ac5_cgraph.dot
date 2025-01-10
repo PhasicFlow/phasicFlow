@@ -1,0 +1,20 @@
+digraph "read"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="read",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Return next token from stream."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::iIstream::getBack",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iIstream.html#a2fa0de349bf86cba54424c4a512e1e49",tooltip="Get the put back token if there is one and return true."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::token::lineNumber",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a1c8abe34223b7d5e9341eac78c9907b5",tooltip="The line number for the token."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::readInt64",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ac9acdc80931dc1f33a613fc4bb301cc7",tooltip="Convert word to int64."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::readReal",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#a8acdba4ad9d3d292222d853598e90b5b",tooltip="Convert word to real."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::token::setBad",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a638b33dd25b3cd8ea7e846f04fd6a6a3",tooltip="Clear token and set to be ERROR."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::token::setType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#af925056e34d86707d6db8a3dcdbef25d",tooltip="Change the token type, for similar types."];
+}

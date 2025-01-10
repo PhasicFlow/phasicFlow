@@ -1,0 +1,18 @@
+digraph "changeSize"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="changeSize",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::push_back",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#aa212f884f1d546a284420c4b752933a7",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::reserve",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a78a56054440adf67ed635117187de2c8",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::resize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#aae7b42bf35ba19761dfa7af9cfa353ef",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::resizeSync",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a1441c238f4bf66d0b989d6929667dea8",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::VectorDual",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#abe0f40b1e7fb40439167d8279159a953",tooltip=" "];
+}

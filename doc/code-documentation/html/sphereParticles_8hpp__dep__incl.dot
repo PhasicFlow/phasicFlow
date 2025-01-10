@@ -1,0 +1,19 @@
+digraph "src/Particles/SphereParticles/sphereParticles/sphereParticles.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/Particles/SphereParticles\l/sphereParticles/sphereParticles.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/Interaction/sphereInteraction\l/boundaries/boundarySphereInteraction\l/boundarySphereInteraction.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundarySphereInteraction_8hpp.html",tooltip=" "];
+  Node1 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="src/Interaction/sphereInteraction\l/sphereInteraction/sphereInteraction.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$sphereInteraction_8hpp.html",tooltip=" "];
+  Node1 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="src/Particles/SphereParticles\l/boundarySphereParticles.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$boundarySphereParticles_8cpp.html",tooltip=" "];
+  Node1 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="src/Particles/SphereParticles\l/sphereParticles/sphereParticles.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$sphereParticles_8cpp.html",tooltip=" "];
+  Node1 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="solvers/iterateSphereParticles\l/iterateSphereParticles.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iterateSphereParticles_8cpp.html",tooltip=" "];
+  Node1 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="solvers/sphereGranFlow\l/sphereGranFlow.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$sphereGranFlow_8cpp.html",tooltip="sphereGranFlow solver"];
+}

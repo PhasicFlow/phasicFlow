@@ -8,6 +8,8 @@ var classpFlow_1_1peakableRegion =
     [ "clonePtr", "classpFlow_1_1peakableRegion.html#af9c4a9d23ff76f301b0ba34ef8070c3e", null ],
     [ "isInside", "classpFlow_1_1peakableRegion.html#adcb491106ace62f312e9ed9931c72b12", null ],
     [ "peek", "classpFlow_1_1peakableRegion.html#a4934f4544d2ebe36ad5ee2a1a53529ab", null ],
+    [ "minPoint", "classpFlow_1_1peakableRegion.html#adb36f5cd7901e4cc0a7d6c4aab29a5f4", null ],
+    [ "maxPoint", "classpFlow_1_1peakableRegion.html#a6bfab59d0e8a27bacfb9cd85dd1cc184", null ],
     [ "read", "classpFlow_1_1peakableRegion.html#af5f2d605171cd6bcbf8c0d59d1aa3832", null ],
     [ "write", "classpFlow_1_1peakableRegion.html#aa713a4038669cc59eadaab3279aaac00", null ],
     [ "create", "classpFlow_1_1peakableRegion.html#a7c89091eec63fb3273bfeac98f38343f", null ]

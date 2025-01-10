@@ -1,0 +1,12 @@
+digraph "checkMPI"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="checkMPI",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="fatalErrorInMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$error_8cpp.html#a653033f027c35c016ad647d303a53846",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="reportAndExit",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8cpp.html#a14c0ff4f968a9653a96589a8e4cca097",tooltip=" "];
+}

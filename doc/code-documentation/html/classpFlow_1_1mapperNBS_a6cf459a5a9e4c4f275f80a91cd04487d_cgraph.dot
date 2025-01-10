@@ -1,0 +1,20 @@
+digraph "setSearchBox"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="setSearchBox",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::mapperNBSKernels\l::findPointExtends",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow_1_1mapperNBSKernels.html#a8979597ddbbff9e3bcfbcde9ae238e40",tooltip=" "];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::algorithms::\lKOKKOS::max",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow_1_1algorithms_1_1KOKKOS.html#a9d98facac68152ec12bf1483da55c939",tooltip=" "];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::algorithms::\lKOKKOS::min",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow_1_1algorithms_1_1KOKKOS.html#a889052ad665d517d05832303a9bbc972",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::box::maxPoint",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1box.html#a0200f1e557cc2585190d623c0a370108",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::box::minPoint",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1box.html#a7a3e5e5740e519e910633f5d72bb043b",tooltip=" "];
+}

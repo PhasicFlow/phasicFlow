@@ -5,5 +5,9 @@ var dir_1220c712ed5f98fd84ba71b4848374db =
     [ "dictionary.cpp", "dictionary_8cpp.html", null ],
     [ "dictionary.hpp", "dictionary_8hpp.html", [
       [ "dictionary", "classpFlow_1_1dictionary.html", "classpFlow_1_1dictionary" ]
+    ] ],
+    [ "fileDictionary.cpp", "fileDictionary_8cpp.html", null ],
+    [ "fileDictionary.hpp", "fileDictionary_8hpp.html", [
+      [ "fileDictionary", "classpFlow_1_1fileDictionary.html", "classpFlow_1_1fileDictionary" ]
     ] ]
 ];

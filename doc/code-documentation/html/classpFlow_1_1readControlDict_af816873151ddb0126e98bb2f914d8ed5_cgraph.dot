@@ -1,0 +1,20 @@
+digraph "read"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="read",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::timeFolder::\lendTime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1timeFolder.html#a2aafefc5248e595246d11de0587524f3",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::iIstream::findKeyword\lAndVal",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iIstream.html#afb1243cec5833e96e8446abed4e3656c",tooltip="find a pair of keyword and data terminated by ; keyword data; return false if keyword does not exist ..."];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::iIstream::findToken\lAndNextSilent",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iIstream.html#ae74a624bbb0665ed381b67cbda681031",tooltip=" "];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="pFlow::iIstream::lookupData\lOrSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iIstream.html#a6b741dd8443f554f5de5b98897f2eb77",tooltip="lookup for keyword and data; set to setVal if lookup fails."];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="pFlow::timeFolder::\lstartTime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1timeFolder.html#aaff3f438097803be5fef5cd29cd8985d",tooltip=" "];
+}

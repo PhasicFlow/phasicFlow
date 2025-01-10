@@ -125,61 +125,53 @@ $(document).ready(function(){initNavTree('IOobjectTemplates_8cpp_source.html',''
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">auto</span> <a class="code" href="classpFlow_1_1IOobject.html#a551af023d7a59f86fffbc8e11f6d6951">pFlow::IOobject::make</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classpFlow_1_1IOobject.html#a551af023d7a59f86fffbc8e11f6d6951">   23</a></span>&#160;(</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>&amp; objf,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    Args&amp;&amp;... args</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> makeUnique&lt;IOobject&gt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        (</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            objf, <span class="keyword">nullptr</span> , make_object_t&lt;T&gt;(std::forward&lt;Args&gt;(args)...)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        );</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpFlow_1_1IOobject.html#a867630ace346abb1f23b7be70690b435">   35</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="classpFlow_1_1IOobject.html#a867630ace346abb1f23b7be70690b435">pFlow::IOobject::make_object_t</a>(Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">auto</span> ptr = makeUnique&lt;object_t&lt;T&gt;&gt;(std::forward&lt;Args&gt;(args)...);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> ptr;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classpFlow_1_1IOobject.html#a4cb27dedd5c3df0ca20847c584620480">   42</a></span>&#160;<span class="keyword">auto</span>&amp; <a class="code" href="classpFlow_1_1IOobject.html#a4cb27dedd5c3df0ca20847c584620480">pFlow::IOobject::getObject</a>()</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span>( !isObjectValid() )</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="stringliteral">&quot;accessing an invalid objecct &quot;</span>&lt;&lt; name() &lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span>  <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classpFlow_1_1IOobject_1_1object__t.html">object_t&lt;T&gt;</a>&amp;<span class="keyword">&gt;</span>(*object_).<a class="code" href="classpFlow_1_1IOobject_1_1object__t.html#ab875ff0d9fe05289966cf4a20f477bc3">data_</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classpFlow_1_1IOobject.html#a0d8c1b9b6f6dd3ab7b3160e95bea32af">   55</a></span>&#160;<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code" href="classpFlow_1_1IOobject.html#a4cb27dedd5c3df0ca20847c584620480">pFlow::IOobject::getObject</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span>( !isObjectValid() )</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;accessing an invalid objecct &quot;</span>&lt;&lt; name() &lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span>  <span class="keyword">dynamic_cast&lt;</span><span class="keyword">const </span><a class="code" href="classpFlow_1_1IOobject_1_1object__t.html">object_t&lt;T&gt;</a>&amp;<span class="keyword">&gt;</span>(*object_).<a class="code" href="classpFlow_1_1IOobject_1_1object__t.html#ab875ff0d9fe05289966cf4a20f477bc3">data_</a>;   </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*template&lt;typename T, typename... Args&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">auto pFlow::IOobject::make</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">(</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    const objectFile&amp; objf,</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    Args&amp;&amp;... args</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">)</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">{</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    return makeUnique&lt;IOobject&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">        (</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">            objf, nullptr , make_object_t&lt;T&gt;(std::forward&lt;Args&gt;(args)...)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">        );</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">}</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">template&lt;typename T, typename... Args&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">pFlow::uniquePtr&lt;pFlow::IOobject::iObject&gt; pFlow::IOobject::make_object_t(Args&amp;&amp;... args)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">{</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    auto ptr = makeUnique&lt;object_t&lt;T&gt;&gt;(std::forward&lt;Args&gt;(args)...);</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    return ptr;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">}</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">template&lt;typename T&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">auto&amp; pFlow::IOobject::getObject()</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">{</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    if( !isObjectValid() )</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        fatalErrorInFunction&lt;&lt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        &quot;accessing an invalid objecct &quot;&lt;&lt; name() &lt;&lt;endl;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        fatalExit;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    return  static_cast&lt;object_t&lt;T&gt;&amp;&gt;(*object_).data();</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">}</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">template&lt;typename T&gt;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">const auto&amp; pFlow::IOobject::getObject()const</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">{</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    if( !isObjectValid() )</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        fatalErrorInFunction&lt;&lt;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        &quot;accessing an invalid objecct &quot;&lt;&lt; name() &lt;&lt;endl;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        fatalExit;</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    return  static_cast&lt;const object_t&lt;T&gt;&amp;&gt;(*object_).data();   </span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">}*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOobject_1_1object__t_html"><div class="ttname"><a href="classpFlow_1_1IOobject_1_1object__t.html">pFlow::IOobject::object_t</a></div><div class="ttdef"><b>Definition:</b> <a href="IOobject_8hpp_source.html#l00060">IOobject.hpp:60</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOobject_html_a4cb27dedd5c3df0ca20847c584620480"><div class="ttname"><a href="classpFlow_1_1IOobject.html#a4cb27dedd5c3df0ca20847c584620480">pFlow::IOobject::getObject</a></div><div class="ttdeci">auto &amp; getObject()</div><div class="ttdef"><b>Definition:</b> <a href="IOobjectTemplates_8cpp_source.html#l00042">IOobjectTemplates.cpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOobject_html_a867630ace346abb1f23b7be70690b435"><div class="ttname"><a href="classpFlow_1_1IOobject.html#a867630ace346abb1f23b7be70690b435">pFlow::IOobject::make_object_t</a></div><div class="ttdeci">static auto make_object_t(Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition:</b> <a href="IOobjectTemplates_8cpp_source.html#l00035">IOobjectTemplates.cpp:35</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00033">objectFile.hpp:33</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOobject_1_1object__t_html_ab875ff0d9fe05289966cf4a20f477bc3"><div class="ttname"><a href="classpFlow_1_1IOobject_1_1object__t.html#ab875ff0d9fe05289966cf4a20f477bc3">pFlow::IOobject::object_t::data_</a></div><div class="ttdeci">dataType data_</div><div class="ttdef"><b>Definition:</b> <a href="IOobject_8hpp_source.html#l00065">IOobject.hpp:65</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOobject_html_a551af023d7a59f86fffbc8e11f6d6951"><div class="ttname"><a href="classpFlow_1_1IOobject.html#a551af023d7a59f86fffbc8e11f6d6951">pFlow::IOobject::make</a></div><div class="ttdeci">static auto make(const objectFile &amp;objf, Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition:</b> <a href="IOobjectTemplates_8cpp_source.html#l00023">IOobjectTemplates.cpp:23</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_8a09dd5b7fce343a5c545316ddba4e1b.html">repository</a></li><li class="navelem"><a class="el" href="dir_557182f9d267f2db2f460147f8d9cd32.html">IOobject</a></li><li class="navelem"><a class="el" href="IOobjectTemplates_8cpp.html">IOobjectTemplates.cpp</a></li>

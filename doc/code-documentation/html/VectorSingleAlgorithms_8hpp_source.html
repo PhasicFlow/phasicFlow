@@ -124,58 +124,52 @@ $(document).ready(function(){initNavTree('VectorSingleAlgorithms_8hpp_source.htm
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef __VectorSingleMath_hpp__</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define __VectorSingleMath_hpp__</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef __VectorSingleMath_hpp__</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define __VectorSingleMath_hpp__</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> MemorySpace&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a6bc2e10d08bf6161491eef514340d975">   33</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt;T,MemorySpace&gt;</a>&amp; vec, <span class="keyword">const</span> T&amp; val)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a>( vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>(), 0, vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>(), val);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a95198ff63420ffeb9f636040773d9026">   39</a></span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> T <a class="code" href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">min</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt;T,MemorySpace&gt;</a>&amp; vec) </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">min</a>(</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>(),</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        0, vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>()</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        );  </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> MemorySpace&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a5d0d67069496bd1e04a4d739485b868e">   48</a></span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> T <a class="code" href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">max</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt;T, MemorySpace&gt;</a>&amp; vec) </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">min</a>(</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>(),</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        0, vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>()</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        );      </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // __VectorSingleMath_hpp__</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> MemorySpace&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a6bc2e10d08bf6161491eef514340d975">   29</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt;T,MemorySpace&gt;</a>&amp; vec, <span class="keyword">const</span> T&amp; val)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">count</a>( vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>(), 0, vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">size</a>(), val);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a95198ff63420ffeb9f636040773d9026">   35</a></span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> T <a class="code" href="namespacepFlow.html#a8714e8dd092c46b15a6e804b6c90db47">min</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt;T,MemorySpace&gt;</a>&amp; vec) </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#a8714e8dd092c46b15a6e804b6c90db47">min</a>(</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>(),</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        0, vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">size</a>()</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        );  </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">class</span> MemorySpace&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a5d0d67069496bd1e04a4d739485b868e">   44</a></span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> T <a class="code" href="namespacepFlow.html#a92e15c22d8a3e36e134f9bcc66bd8652">max</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt;T, MemorySpace&gt;</a>&amp; vec) </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#a8714e8dd092c46b15a6e804b6c90db47">min</a>(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>(),</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        0, vec.<a class="code" href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">size</a>()</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        );      </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif // __VectorSingleMath_hpp__</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demComponent_8hpp_source.html#l00028">demComponent.hpp:28</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_a542d326bc30e30d52e9deb402759b872"><div class="ttname"><a href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div><div class="ttdeci">#define INLINE_FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00053">pFlowMacros.hpp:53</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a92e15c22d8a3e36e134f9bcc66bd8652"><div class="ttname"><a href="namespacepFlow.html#a92e15c22d8a3e36e134f9bcc66bd8652">pFlow::max</a></div><div class="ttdeci">T max(const internalField&lt; T, MemorySpace &gt; &amp;iField)</div><div class="ttdef"><b>Definition:</b> <a href="internalFieldAlgorithms_8hpp_source.html#l00079">internalFieldAlgorithms.hpp:79</a></div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_a542d326bc30e30d52e9deb402759b872"><div class="ttname"><a href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div><div class="ttdeci">#define INLINE_FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00057">pFlowMacros.hpp:57</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_ab484dde689e0549b38dbaf95068150af"><div class="ttname"><a href="namespacepFlow.html#ab484dde689e0549b38dbaf95068150af">pFlow::count</a></div><div class="ttdeci">auto count(const Vector&lt; T, Allocator &gt; &amp;vec, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> <a href="VectorAlgorithm_8hpp_source.html#l00026">VectorAlgorithm.hpp:26</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html">pFlow::VectorSingle</a></div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00047">VectorSingle.hpp:47</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_ae14bf16748b3144baa1112f08c2a83b1"><div class="ttname"><a href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">pFlow::max</a></div><div class="ttdeci">T max(const Vector&lt; T, Allocator &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00164">VectorMath.hpp:164</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a334c2560412a3bc4fc1c215a77a48337"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00362">VectorSingle.hpp:362</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a18052bc1ad8ea07ea5b6205321cba10e"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">pFlow::VectorSingle::deviceVectorAll</a></div><div class="ttdeci">INLINE_FUNCTION_H viewType &amp; deviceVectorAll()</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00297">VectorSingle.hpp:297</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba2f2ccdd3d4a6b403a2c2d379198396"><div class="ttname"><a href="namespacepFlow.html#aba2f2ccdd3d4a6b403a2c2d379198396">pFlow::min</a></div><div class="ttdeci">T min(const Vector&lt; T, Allocator &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00138">VectorMath.hpp:138</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a8714e8dd092c46b15a6e804b6c90db47"><div class="ttname"><a href="namespacepFlow.html#a8714e8dd092c46b15a6e804b6c90db47">pFlow::min</a></div><div class="ttdeci">T min(const internalField&lt; T, MemorySpace &gt; &amp;iField)</div><div class="ttdef"><b>Definition:</b> <a href="internalFieldAlgorithms_8hpp_source.html#l00028">internalFieldAlgorithms.hpp:28</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html">pFlow::VectorSingle</a></div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00044">VectorSingle.hpp:44</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a51122b76468e0c5f19ea69c5c0ca6cf4"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">pFlow::VectorSingle::deviceViewAll</a></div><div class="ttdeci">INLINE_FUNCTION_H auto &amp; deviceViewAll()</div><div class="ttdoc">Device view range [0,capcity)</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8cpp_source.html#l00249">VectorSingle.cpp:249</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a235f4855cec31187d575a459abb3eed2"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H uint32 size() const</div><div class="ttdoc">Size of the vector.</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8cpp_source.html#l00297">VectorSingle.cpp:297</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_74a3bd5d559eb2469f344a26dc365ad0.html">containers</a></li><li class="navelem"><a class="el" href="dir_6e5937d7e5e1e467a126da306e3d0a5a.html">VectorHD</a></li><li class="navelem"><a class="el" href="VectorSingleAlgorithms_8hpp.html">VectorSingleAlgorithms.hpp</a></li>

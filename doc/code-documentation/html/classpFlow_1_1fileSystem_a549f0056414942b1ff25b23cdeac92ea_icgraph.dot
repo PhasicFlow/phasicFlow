@@ -1,0 +1,10 @@
+digraph "exist"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="exist",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Check if the path exists."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::fileStream::\lopenInFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1fileStream.html#a2202773d095b6ad3bd8186c6b4ef1458",tooltip="open input file"];
+}

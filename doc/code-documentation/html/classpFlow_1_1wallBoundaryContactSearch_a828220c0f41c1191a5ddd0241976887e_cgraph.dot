@@ -1,0 +1,14 @@
+digraph "broadSearch"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="broadSearch",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::unsortedPairs\l::capacity",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1unsortedPairs.html#a2c568367e3aaa446720ee21283a0ca34",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::unsortedPairs\l::increaseCapacityBy",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1unsortedPairs.html#a7eef148cd93f8f556fb095c4f0c50a6c",tooltip="increase the capacity of the container by at-least len the content will be erased."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::max",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a92e15c22d8a3e36e134f9bcc66bd8652",tooltip=" "];
+}

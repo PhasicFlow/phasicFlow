@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('classpFlow_1_1demComponent.html',''); 
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classpFlow_1_1demComponent-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">demComponent Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -118,12 +118,6 @@ $(document).ready(function(){initNavTree('classpFlow_1_1demComponent.html',''); 
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1demComponent__inherit__graph.png" border="0" usemap="#demComponent_inherit__map" alt="Inheritance graph"/></div>
-<map name="demComponent_inherit__map" id="demComponent_inherit__map">
-<area shape="rect" title="A base class for every main component of DEM system." alt="" coords="143,5,269,32"/>
-<area shape="rect" href="classpFlow_1_1demGeometry.html" title="base for geometry that manages control" alt="" coords="5,80,121,107"/>
-<area shape="rect" href="classpFlow_1_1demInteraction.html" title=" " alt="" coords="145,80,267,107"/>
-<area shape="rect" href="classpFlow_1_1demParticles.html" title=" " alt="" coords="291,80,398,107"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for demComponent:</div>
@@ -131,11 +125,6 @@ $(document).ready(function(){initNavTree('classpFlow_1_1demComponent.html',''); 
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1demComponent__coll__graph.png" border="0" usemap="#demComponent_coll__map" alt="Collaboration graph"/></div>
-<map name="demComponent_coll__map" id="demComponent_coll__map">
-<area shape="rect" title="A base class for every main component of DEM system." alt="" coords="5,184,132,211"/>
-<area shape="rect" href="classpFlow_1_1Timers.html" title=" " alt="" coords="35,5,102,32"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html" title=" " alt="" coords="125,95,242,121"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -167,12 +156,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae1afde9cfe19a586522259a33a4931e3"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#ae1afde9cfe19a586522259a33a4931e3">control</a> ()</td></tr>
 <tr class="memdesc:ae1afde9cfe19a586522259a33a4931e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ref to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>.  <a href="classpFlow_1_1demComponent.html#ae1afde9cfe19a586522259a33a4931e3">More...</a><br /></td></tr>
 <tr class="separator:ae1afde9cfe19a586522259a33a4931e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fc823022c8f0175108f10a42e7b858f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a4fc823022c8f0175108f10a42e7b858f">dt</a> () const</td></tr>
-<tr class="memdesc:a4fc823022c8f0175108f10a42e7b858f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Time.html">Time</a> step of integration.  <a href="classpFlow_1_1demComponent.html#a4fc823022c8f0175108f10a42e7b858f">More...</a><br /></td></tr>
-<tr class="separator:a4fc823022c8f0175108f10a42e7b858f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a476763249b99b131d7116430896cd44e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a476763249b99b131d7116430896cd44e">currentTime</a> () const</td></tr>
-<tr class="memdesc:a476763249b99b131d7116430896cd44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current simulation time.  <a href="classpFlow_1_1demComponent.html#a476763249b99b131d7116430896cd44e">More...</a><br /></td></tr>
-<tr class="separator:a476763249b99b131d7116430896cd44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a987c4fc5fe3a75305eede553d3efc279"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a987c4fc5fe3a75305eede553d3efc279">dt</a> () const</td></tr>
+<tr class="memdesc:a987c4fc5fe3a75305eede553d3efc279"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Time.html">Time</a> step of integration.  <a href="classpFlow_1_1demComponent.html#a987c4fc5fe3a75305eede553d3efc279">More...</a><br /></td></tr>
+<tr class="separator:a987c4fc5fe3a75305eede553d3efc279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78dd57bd659107f17021b099cb853a0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a78dd57bd659107f17021b099cb853a0e">currentTime</a> () const</td></tr>
+<tr class="memdesc:a78dd57bd659107f17021b099cb853a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current simulation time.  <a href="classpFlow_1_1demComponent.html#a78dd57bd659107f17021b099cb853a0e">More...</a><br /></td></tr>
+<tr class="separator:a78dd57bd659107f17021b099cb853a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fe92d89e0339f3b0ccb505a1aac2182"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a3fe92d89e0339f3b0ccb505a1aac2182">currentIter</a> () const</td></tr>
+<tr class="memdesc:a3fe92d89e0339f3b0ccb505a1aac2182"><td class="mdescLeft">&#160;</td><td class="mdescRight">return current iteration number  <a href="classpFlow_1_1demComponent.html#a3fe92d89e0339f3b0ccb505a1aac2182">More...</a><br /></td></tr>
+<tr class="separator:a3fe92d89e0339f3b0ccb505a1aac2182"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b953704058a7ca76b3056ae9215a64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1timeInfo.html">timeInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a71b953704058a7ca76b3056ae9215a64">TimeInfo</a> () const</td></tr>
+<tr class="memdesc:a71b953704058a7ca76b3056ae9215a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">return time info of the simulaiton  <a href="classpFlow_1_1demComponent.html#a71b953704058a7ca76b3056ae9215a64">More...</a><br /></td></tr>
+<tr class="separator:a71b953704058a7ca76b3056ae9215a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f341a9cb1091ba9e3670f98cd002c3"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a40f341a9cb1091ba9e3670f98cd002c3">time</a> () const</td></tr>
+<tr class="separator:a40f341a9cb1091ba9e3670f98cd002c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40e6d687c4d54c66dfe5b1bc5a0d28ce"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a40e6d687c4d54c66dfe5b1bc5a0d28ce">time</a> ()</td></tr>
+<tr class="separator:a40e6d687c4d54c66dfe5b1bc5a0d28ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae69e59e991f33e7d278ff6ad19d2e87d"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#ae69e59e991f33e7d278ff6ad19d2e87d">timers</a> () const</td></tr>
 <tr class="memdesc:ae69e59e991f33e7d278ff6ad19d2e87d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const ref to timers.  <a href="classpFlow_1_1demComponent.html#ae69e59e991f33e7d278ff6ad19d2e87d">More...</a><br /></td></tr>
 <tr class="separator:ae69e59e991f33e7d278ff6ad19d2e87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,32 +194,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0b82b161f3fd39ee9f534cc2508d97f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is called after the time loop.  <a href="classpFlow_1_1demComponent.html#a0b82b161f3fd39ee9f534cc2508d97f8">More...</a><br /></td></tr>
 <tr class="separator:a0b82b161f3fd39ee9f534cc2508d97f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a3ce96806ed72189c4d9a24e9429d0420"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a3ce96806ed72189c4d9a24e9429d0420">componentName_</a></td></tr>
-<tr class="memdesc:a3ce96806ed72189c4d9a24e9429d0420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the DEM component.  <a href="classpFlow_1_1demComponent.html#a3ce96806ed72189c4d9a24e9429d0420">More...</a><br /></td></tr>
-<tr class="separator:a3ce96806ed72189c4d9a24e9429d0420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:abfbc3debb472c661c30cf9fe782bb076"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#abfbc3debb472c661c30cf9fe782bb076">control_</a></td></tr>
 <tr class="memdesc:abfbc3debb472c661c30cf9fe782bb076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>.  <a href="classpFlow_1_1demComponent.html#abfbc3debb472c661c30cf9fe782bb076">More...</a><br /></td></tr>
 <tr class="separator:abfbc3debb472c661c30cf9fe782bb076"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d6a106e35c444e647a69f8a8ba7f9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Time.html">Time</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a97d6a106e35c444e647a69f8a8ba7f9b">time_</a></td></tr>
+<tr class="separator:a97d6a106e35c444e647a69f8a8ba7f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c29ef9514a77bce5b8f4ece533bcf8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Timers.html">Timers</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a0c29ef9514a77bce5b8f4ece533bcf8c">timers_</a></td></tr>
 <tr class="memdesc:a0c29ef9514a77bce5b8f4ece533bcf8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">All timers (if any) of this component.  <a href="classpFlow_1_1demComponent.html#a0c29ef9514a77bce5b8f4ece533bcf8c">More...</a><br /></td></tr>
 <tr class="separator:a0c29ef9514a77bce5b8f4ece533bcf8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ce96806ed72189c4d9a24e9429d0420"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a3ce96806ed72189c4d9a24e9429d0420">componentName_</a></td></tr>
+<tr class="memdesc:a3ce96806ed72189c4d9a24e9429d0420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the DEM component.  <a href="classpFlow_1_1demComponent.html#a3ce96806ed72189c4d9a24e9429d0420">More...</a><br /></td></tr>
+<tr class="separator:a3ce96806ed72189c4d9a24e9429d0420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A base class for every main component of DEM system. </p>
 <p>This class provides abstraction at a very high level for any solver/utility that forces the derived component (i.e. particles, geometry, and etc) to advance over time when iterate is called in time a loop. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00039">39</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00042">42</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a73e3f3cd6a8eca86e6862f02e416dba2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a73e3f3cd6a8eca86e6862f02e416dba2">&#9670;&nbsp;</a></span>demComponent() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1demComponent.html">demComponent</a> </td>
@@ -240,16 +238,11 @@ Protected Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>construct from components </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00062">62</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8cpp_source.html#l00025">25</a> of file <a class="el" href="demComponent_8cpp_source.html">demComponent.cpp</a>.</p>
 
 </div>
 </div>
@@ -438,21 +431,17 @@ Protected Attributes</h2></td></tr>
 
 <p>Const ref to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00089">89</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00088">88</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00049">demComponent::control_</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00048">demComponent::control_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="particles_8cpp_source.html#l00153">particles::beforeIteration()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="grainParticles_8cpp_source.html#l00143">grainParticles::grainParticles()</a>, <a class="el" href="insertion_8cpp_source.html#l00027">insertion::insertion()</a>, and <a class="el" href="sphereParticles_8cpp_source.html#l00308">sphereParticles::sphereParticles()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1demComponent_a647786897b3da03fcd415b2ebcf541c0_icgraph.png" border="0" usemap="#classpFlow_1_1demComponent_a647786897b3da03fcd415b2ebcf541c0_icgraph" alt=""/></div>
-<map name="classpFlow_1_1demComponent_a647786897b3da03fcd415b2ebcf541c0_icgraph" id="classpFlow_1_1demComponent_a647786897b3da03fcd415b2ebcf541c0_icgraph">
-<area shape="rect" title="Const ref to systemControl." alt="" coords="228,13,295,39"/>
-<area shape="rect" href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32" title="This is called in time loop, before iterate." alt="" coords="5,5,180,47"/>
-</map>
 </div>
 
 </div>
@@ -482,57 +471,107 @@ Protected Attributes</h2></td></tr>
 
 <p>Ref to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00096">96</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00095">95</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00049">demComponent::control_</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00048">demComponent::control_</a>.</p>
 
 </div>
 </div>
-<a id="a4fc823022c8f0175108f10a42e7b858f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fc823022c8f0175108f10a42e7b858f">&#9670;&nbsp;</a></span>dt()</h2>
+<a id="a987c4fc5fe3a75305eede553d3efc279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a987c4fc5fe3a75305eede553d3efc279">&#9670;&nbsp;</a></span>dt()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt </td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a> dt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p><a class="el" href="classpFlow_1_1Time.html">Time</a> step of integration. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00103">103</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8cpp_source.html#l00033">33</a> of file <a class="el" href="demComponent_8cpp_source.html">demComponent.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00049">demComponent::control_</a>, <a class="el" href="timeControl_8hpp_source.html#l00106">timeControl::dt()</a>, and <a class="el" href="systemControl_8hpp_source.html#l00123">systemControl::time()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00104">geometryMotion&lt; MotionModelType &gt;::getModel()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1demComponent_a4fc823022c8f0175108f10a42e7b858f_cgraph.png" border="0" usemap="#classpFlow_1_1demComponent_a4fc823022c8f0175108f10a42e7b858f_cgraph" alt=""/></div>
-<map name="classpFlow_1_1demComponent_a4fc823022c8f0175108f10a42e7b858f_cgraph" id="classpFlow_1_1demComponent_a4fc823022c8f0175108f10a42e7b858f_cgraph">
-<area shape="rect" title="Time step of integration." alt="" coords="5,35,44,61"/>
-<area shape="rect" href="classpFlow_1_1timeControl.html#a4fc823022c8f0175108f10a42e7b858f" title=" " alt="" coords="92,5,259,32"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html#a0d94096809fe3376b29a2a29ca11bb18" title=" " alt="" coords="93,57,257,98"/>
-</map>
+<div class="center"><img src="classpFlow_1_1demComponent_a987c4fc5fe3a75305eede553d3efc279_icgraph.png" border="0" usemap="#classpFlow_1_1demComponent_a987c4fc5fe3a75305eede553d3efc279_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a476763249b99b131d7116430896cd44e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a476763249b99b131d7116430896cd44e">&#9670;&nbsp;</a></span>currentTime()</h2>
+<a id="a78dd57bd659107f17021b099cb853a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78dd57bd659107f17021b099cb853a0e">&#9670;&nbsp;</a></span>currentTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a> currentTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Current simulation time. </p>
+
+<p class="definition">Definition at line <a class="el" href="demComponent_8cpp_source.html#l00038">38</a> of file <a class="el" href="demComponent_8cpp_source.html">demComponent.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3fe92d89e0339f3b0ccb505a1aac2182"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fe92d89e0339f3b0ccb505a1aac2182">&#9670;&nbsp;</a></span>currentIter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a> currentIter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return current iteration number </p>
+
+<p class="definition">Definition at line <a class="el" href="demComponent_8cpp_source.html#l00043">43</a> of file <a class="el" href="demComponent_8cpp_source.html">demComponent.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a71b953704058a7ca76b3056ae9215a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71b953704058a7ca76b3056ae9215a64">&#9670;&nbsp;</a></span>TimeInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1timeInfo.html">pFlow::timeInfo</a> TimeInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return time info of the simulaiton </p>
+
+<p class="definition">Definition at line <a class="el" href="demComponent_8cpp_source.html#l00048">48</a> of file <a class="el" href="demComponent_8cpp_source.html">demComponent.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a40f341a9cb1091ba9e3670f98cd002c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40f341a9cb1091ba9e3670f98cd002c3">&#9670;&nbsp;</a></span>time() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +580,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> currentTime </td>
+          <td class="memname">const auto&amp; time </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -554,23 +593,47 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Current simulation time. </p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00113">113</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00110">110</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00050">demComponent::time_</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00049">demComponent::control_</a>, <a class="el" href="timeControl_8hpp_source.html#l00135">timeControl::currentTime()</a>, and <a class="el" href="systemControl_8hpp_source.html#l00123">systemControl::time()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointStructure_8hpp_source.html#l00128">pointStructure::time()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1demComponent_a476763249b99b131d7116430896cd44e_cgraph.png" border="0" usemap="#classpFlow_1_1demComponent_a476763249b99b131d7116430896cd44e_cgraph" alt=""/></div>
-<map name="classpFlow_1_1demComponent_a476763249b99b131d7116430896cd44e_cgraph" id="classpFlow_1_1demComponent_a476763249b99b131d7116430896cd44e_cgraph">
-<area shape="rect" title="Current simulation time." alt="" coords="5,46,105,73"/>
-<area shape="rect" href="classpFlow_1_1timeControl.html#a476763249b99b131d7116430896cd44e" title=" " alt="" coords="162,5,309,47"/>
-<area shape="rect" href="classpFlow_1_1systemControl.html#a0d94096809fe3376b29a2a29ca11bb18" title=" " alt="" coords="153,71,317,112"/>
-</map>
+<div class="center"><img src="classpFlow_1_1demComponent_a40f341a9cb1091ba9e3670f98cd002c3_icgraph.png" border="0" usemap="#classpFlow_1_1demComponent_a40f341a9cb1091ba9e3670f98cd002c3_icgraph" alt=""/></div>
 </div>
+
+</div>
+</div>
+<a id="a40e6d687c4d54c66dfe5b1bc5a0d28ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40e6d687c4d54c66dfe5b1bc5a0d28ce">&#9670;&nbsp;</a></span>time() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto&amp; time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00119">119</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00050">demComponent::time_</a>.</p>
 
 </div>
 </div>
@@ -599,9 +662,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Const ref to timers. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00117">117</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00127">127</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00052">demComponent::timers_</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00053">demComponent::timers_</a>.</p>
 
 </div>
 </div>
@@ -630,9 +693,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Ref to timers. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00124">124</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00134">134</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00052">demComponent::timers_</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8hpp_source.html#l00053">demComponent::timers_</a>.</p>
 
 </div>
 </div>
@@ -661,9 +724,9 @@ Protected Attributes</h2></td></tr>
 
 <p>This is called before the start of time loop. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00131">131</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00141">141</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8hpp_source.html#l00047">notImplementedFunction</a>.</p>
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00084">notImplementedFunction</a>.</p>
 
 </div>
 </div>
@@ -692,7 +755,7 @@ Protected Attributes</h2></td></tr>
 
 <p>This is called in time loop, before iterate. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">geometry</a>, <a class="el" href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32">particles</a>, <a class="el" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32">sphereParticles</a>, <a class="el" href="classpFlow_1_1geometryMotion.html#ada71b97666fe3f66b31690bf12633c32">geometryMotion&lt; MotionModelType &gt;</a>, and <a class="el" href="classpFlow_1_1sphereInteraction.html#ada71b97666fe3f66b31690bf12633c32">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1grainParticles.html#ada71b97666fe3f66b31690bf12633c32">grainParticles</a>, <a class="el" href="classpFlow_1_1sphereParticles.html#ada71b97666fe3f66b31690bf12633c32">sphereParticles</a>, <a class="el" href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">geometry</a>, <a class="el" href="classpFlow_1_1particles.html#ada71b97666fe3f66b31690bf12633c32">particles</a>, <a class="el" href="classpFlow_1_1grainInteraction.html#ada71b97666fe3f66b31690bf12633c32">grainInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, <a class="el" href="classpFlow_1_1sphereInteraction.html#ada71b97666fe3f66b31690bf12633c32">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, <a class="el" href="classpFlow_1_1pointStructure.html#ada71b97666fe3f66b31690bf12633c32">pointStructure</a>, and <a class="el" href="classpFlow_1_1dynamicPointStructure.html#ada71b97666fe3f66b31690bf12633c32">dynamicPointStructure</a>.</p>
 
 </div>
 </div>
@@ -722,7 +785,7 @@ Protected Attributes</h2></td></tr>
 <p>This is called in time loop. </p>
 <p>Perform the main calculations when the component should evolve along time. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">sphereParticles</a>, <a class="el" href="classpFlow_1_1geometryMotion.html#afa767bddda52eb71cea18f755e17d559">geometryMotion&lt; MotionModelType &gt;</a>, and <a class="el" href="classpFlow_1_1sphereInteraction.html#afa767bddda52eb71cea18f755e17d559">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1grainParticles.html#afa767bddda52eb71cea18f755e17d559">grainParticles</a>, <a class="el" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559">sphereParticles</a>, <a class="el" href="classpFlow_1_1geometry.html#afa767bddda52eb71cea18f755e17d559">geometry</a>, <a class="el" href="classpFlow_1_1particles.html#afa767bddda52eb71cea18f755e17d559">particles</a>, <a class="el" href="classpFlow_1_1grainInteraction.html#afa767bddda52eb71cea18f755e17d559">grainInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, <a class="el" href="classpFlow_1_1sphereInteraction.html#afa767bddda52eb71cea18f755e17d559">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, <a class="el" href="classpFlow_1_1geometryMotion.html#afa767bddda52eb71cea18f755e17d559">geometryMotion&lt; MotionModelType &gt;</a>, <a class="el" href="classpFlow_1_1pointStructure.html#afa767bddda52eb71cea18f755e17d559">pointStructure</a>, and <a class="el" href="classpFlow_1_1dynamicPointStructure.html#afa767bddda52eb71cea18f755e17d559">dynamicPointStructure</a>.</p>
 
 </div>
 </div>
@@ -751,7 +814,7 @@ Protected Attributes</h2></td></tr>
 
 <p>This is called in time loop, after iterate. </p>
 
-<p>Implemented in <a class="el" href="classpFlow_1_1geometry.html#a5ab4b6c611c3256e54f51bbfc484d58e">geometry</a>, <a class="el" href="classpFlow_1_1sphereInteraction.html#a5ab4b6c611c3256e54f51bbfc484d58e">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, <a class="el" href="classpFlow_1_1sphereParticles.html#a5ab4b6c611c3256e54f51bbfc484d58e">sphereParticles</a>, and <a class="el" href="classpFlow_1_1geometryMotion.html#a5ab4b6c611c3256e54f51bbfc484d58e">geometryMotion&lt; MotionModelType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classpFlow_1_1geometry.html#a5ab4b6c611c3256e54f51bbfc484d58e">geometry</a>, <a class="el" href="classpFlow_1_1particles.html#a5ab4b6c611c3256e54f51bbfc484d58e">particles</a>, <a class="el" href="classpFlow_1_1grainInteraction.html#a5ab4b6c611c3256e54f51bbfc484d58e">grainInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, <a class="el" href="classpFlow_1_1sphereInteraction.html#a5ab4b6c611c3256e54f51bbfc484d58e">sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;</a>, and <a class="el" href="classpFlow_1_1pointStructure.html#a5ab4b6c611c3256e54f51bbfc484d58e">pointStructure</a>.</p>
 
 </div>
 </div>
@@ -780,39 +843,13 @@ Protected Attributes</h2></td></tr>
 
 <p>This is called after the time loop. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00152">152</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00162">162</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8hpp_source.html#l00047">notImplementedFunction</a>.</p>
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00084">notImplementedFunction</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a3ce96806ed72189c4d9a24e9429d0420"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ce96806ed72189c4d9a24e9429d0420">&#9670;&nbsp;</a></span>componentName_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> componentName_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Name of the DEM component. </p>
-
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00046">46</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
-
-</div>
-</div>
 <a id="abfbc3debb472c661c30cf9fe782bb076"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abfbc3debb472c661c30cf9fe782bb076">&#9670;&nbsp;</a></span>control_</h2>
 
@@ -828,16 +865,42 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reference to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00049">49</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00048">48</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="demComponent_8hpp_source.html#l00089">demComponent::control()</a>, <a class="el" href="demComponent_8hpp_source.html#l00110">demComponent::currentTime()</a>, and <a class="el" href="demComponent_8hpp_source.html#l00103">demComponent::dt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="demComponent_8hpp_source.html#l00088">demComponent::control()</a>.</p>
+
+</div>
+</div>
+<a id="a97d6a106e35c444e647a69f8a8ba7f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d6a106e35c444e647a69f8a8ba7f9b">&#9670;&nbsp;</a></span>time_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1Time.html">Time</a>&amp; time_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00050">50</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="demComponent_8hpp_source.html#l00113">demComponent::time()</a>.</p>
 
 </div>
 </div>
@@ -856,21 +919,48 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>All timers (if any) of this component. </p>
 
-<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00052">52</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00053">53</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="demComponent_8hpp_source.html#l00117">demComponent::timers()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="demComponent_8hpp_source.html#l00127">demComponent::timers()</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/demComponent/<a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a></li>
+<a id="a3ce96806ed72189c4d9a24e9429d0420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ce96806ed72189c4d9a24e9429d0420">&#9670;&nbsp;</a></span>componentName_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> componentName_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Name of the DEM component. </p>
+
+<p class="definition">Definition at line <a class="el" href="demComponent_8hpp_source.html#l00056">56</a> of file <a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/phasicFlow/demComponent/<a class="el" href="demComponent_8hpp_source.html">demComponent.hpp</a></li>
+<li>src/phasicFlow/demComponent/<a class="el" href="demComponent_8cpp_source.html">demComponent.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

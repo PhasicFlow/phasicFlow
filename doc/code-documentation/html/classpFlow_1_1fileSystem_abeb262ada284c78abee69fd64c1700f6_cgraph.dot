@@ -1,0 +1,12 @@
+digraph "checkFileName"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="checkFileName",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Is a valid file name?"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="validFileName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1fileSystem.html#a42d00f7345430ad04ae025feab49bc18",tooltip="Is name is valid for a file?"];
+}

@@ -7,6 +7,7 @@ var classpFlow_1_1quadruple =
     [ "quadruple", "classpFlow_1_1quadruple.html#a5a0673d18c64a063ea8439b0dc057d03", null ],
     [ "quadruple", "classpFlow_1_1quadruple.html#a369d3a85e221f20e29a5920a50317e32", null ],
     [ "quadruple", "classpFlow_1_1quadruple.html#a94caf1da73374a155001db00493ecf49", null ],
+    [ "QuadrupleTypeInfoNV", "classpFlow_1_1quadruple.html#a214c89d3dd7231694315817c6a299726", null ],
     [ "operator=", "classpFlow_1_1quadruple.html#a0cb86149c9d625fefd25ce1af1137434", null ],
     [ "operator=", "classpFlow_1_1quadruple.html#aee57ccdbbb3b896c8fddb669282ca48c", null ],
     [ "operator=", "classpFlow_1_1quadruple.html#a797693f51fafcb31f637c4a41e698675", null ],

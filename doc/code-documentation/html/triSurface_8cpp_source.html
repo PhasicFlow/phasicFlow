@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: src/phasicFlow/structuredData/trisurfaceStructure/triSurface.cpp Source File</title>
+<title>PhasicFlow: src/phasicFlow/triSurface/triSurface.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -129,258 +129,343 @@ $(document).ready(function(){initNavTree('triSurface_8cpp_source.html',''); init
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="triSurface_8hpp.html">triSurface.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="error_8hpp.html">error.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iOstream_8hpp.html">iOstream.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="triSurfaceKernels_8hpp.html">triSurfaceKernels.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Vectors_8hpp.html">Vectors.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="triSurfaceKernels_8hpp.html">triSurfaceKernels.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a>  <a class="code" href="classpFlow_1_1triSurface.html#a86cff523f4f289aeec0a4a82ab0bcc09">pFlow::triSurface::addTriangle</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a86cff523f4f289aeec0a4a82ab0bcc09">   29</a></span>&#160;(</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1triple.html">realx3x3</a> &amp; tri,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; points,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">int32x3Vector</a>&amp; vertices</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classpFlow_1_1triple.html">int32x3</a> newTri;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// first point</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> ( <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i = <a class="code" href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">find</a>(points, tri.<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>()) ; i &gt; -1)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    { </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        newTri.<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>() = i; <span class="comment">// existing point </span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    { </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        points.push_back(tri.<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>());  <span class="comment">// new point</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        newTri.<a class="code" href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">x</a>() = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(points.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()) - 1;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// second point</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> ( <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j = <a class="code" href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">find</a>(points, tri.<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>()) ; j &gt; -1)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    { </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        newTri.<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>() = j; <span class="comment">// existing point </span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    { </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        points.push_back(tri.<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>());  <span class="comment">// new point</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        newTri.<a class="code" href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">y</a>() = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(points.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()) - 1;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// third point </span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> ( <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k = <a class="code" href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">find</a>(points, tri.<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>()) ; k &gt; -1)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    { </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        newTri.<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>() = k; <span class="comment">// existing point </span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    { </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        points.push_back(tri.<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>());  <span class="comment">// new point</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        newTri.<a class="code" href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">z</a>() = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(points.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()) - 1;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// adds the new tirple vertices to the list</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    vertices.push_back( newTri );</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">//output&lt;&lt; &quot; points &quot; &lt;&lt;points &lt;&lt; endl;</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//output&lt;&lt; &quot; vertices &quot;&lt;&lt;vertices &lt;&lt;endl;</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(vertices.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>()) -1;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#af01ae6e5e5f1b190954e7487152e9b79">   81</a></span>&#160;<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a> <a class="code" href="classpFlow_1_1triSurface.html#af01ae6e5e5f1b190954e7487152e9b79">pFlow::triSurface::calcMaxIndex</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> maxIdx = -1;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classpFlow_1_1triSurface.html#aa55c392e8b0854c0bbf7a12d5fa9dcd1">vertices_</a>.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>()&gt;0)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">auto</span> verDeviceVec = <a class="code" href="classpFlow_1_1triSurface.html#aa55c392e8b0854c0bbf7a12d5fa9dcd1">vertices_</a>.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        Kokkos::parallel_reduce(</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="stringliteral">&quot;triSurface::calcMaxIndex&quot;</span>,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <a class="code" href="classpFlow_1_1triSurface.html#aa55c392e8b0854c0bbf7a12d5fa9dcd1">vertices_</a>.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>(),</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <a class="code" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i, <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&amp; valueToUpdate){</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                valueToUpdate = <a class="code" href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">max</a>(valueToUpdate, <a class="code" href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">max</a>(verDeviceVec[i]));</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            },</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            Kokkos::Max&lt;int32&gt;( maxIdx )</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            );</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> maxIdx;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#ae1ee541bb22588b6a71650c807efca90">  103</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#ae1ee541bb22588b6a71650c807efca90">pFlow::triSurface::check</a>()</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">auto</span> maxIdx = calcMaxIndex();</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    maxIndex_ = maxIdx;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span>( maxIdx &gt;= <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a><span class="keyword">&gt;</span>(points_.size())) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *//</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a23b307d20d3b88983e62e1cb7292346a">  114</a></span>&#160;<a class="code" href="classpFlow_1_1triSurface.html#a23b307d20d3b88983e62e1cb7292346a">pFlow::triSurface::triSurface</a>()</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;:</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    points_(<span class="stringliteral">&quot;points&quot;</span>),</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    vertices_(<span class="stringliteral">&quot;vertices&quot;</span>),</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    area_(<span class="stringliteral">&quot;area&quot;</span>),</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    maxIndex_(-1)</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{}</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<a class="code" href="classpFlow_1_1triSurface.html#a23b307d20d3b88983e62e1cb7292346a">pFlow::triSurface::triSurface</a></div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a81b8a340e36296e5d3613bd745a4ec66">  123</a></span>&#160;(</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; points,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">int32x3Vector</a>&amp; vertices</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow.html#afac8884995f33a14312960a0de0be66c">convertToTriSurfaceComponents</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacepFlow.html#afac8884995f33a14312960a0de0be66c">   33</a></span>&#160;(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> basePointIndex,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classpFlow_1_1span.html">span&lt;realx3x3&gt;</a> tris, </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; points,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">uint32x3Vector</a>&amp; vertices,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a>&amp; area,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a>&amp; <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">auto</span> nt = tris.<a class="code" href="classpFlow_1_1span.html#a29908231382cfa67191aec2c9f8bca23">size</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    points.clear();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    points.<a class="code" href="classpFlow_1_1Vector.html#a172a7c88be982061ecefadd95725c1a1">reserve</a>(nt);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    vertices.clear();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    vertices.resize(nt);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    area.clear();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    area.resize(nt);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>.clear();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>.resize(nt);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;nt; i++)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="classpFlow_1_1triple.html">uint32x3</a> newTri;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; tri = tris[i];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span>(!<a class="code" href="namespacepFlow_1_1triangle.html#a7ae9a0ef61cdf98506699cb7abcd84b8">pFlow::triangle::valid</a>(tri.comp1(),tri.comp2(), tri.comp3()))</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="stringliteral">&quot;Invalid triangle &quot;</span>&lt;&lt; tri &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> np = <a class="code" href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">find</a>(points, tri.comp1()); np&lt;0 )</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            points.push_back(tri.comp1());  <span class="comment">// new point</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            newTri.<a class="code" href="classpFlow_1_1triple.html#aa120a1a57b7afa6b7f218d41278f8a53">comp1</a>() = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a><span class="keyword">&gt;</span>( basePointIndex + points.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() - 1);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            newTri.<a class="code" href="classpFlow_1_1triple.html#aa120a1a57b7afa6b7f218d41278f8a53">comp1</a>() = basePointIndex+<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a><span class="keyword">&gt;</span>(np);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> np = <a class="code" href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">find</a>(points, tri.comp2()); np&lt;0 )</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            points.push_back(tri.comp2());  <span class="comment">// new point</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            newTri.<a class="code" href="classpFlow_1_1triple.html#a696753289a66507eb9b442e962d8c0b1">comp2</a>() = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a><span class="keyword">&gt;</span>( basePointIndex + points.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() - 1);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            newTri.<a class="code" href="classpFlow_1_1triple.html#a696753289a66507eb9b442e962d8c0b1">comp2</a>() = basePointIndex+<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a><span class="keyword">&gt;</span>(np);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> np = <a class="code" href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">find</a>(points, tri.comp3()); np&lt;0 )</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            points.push_back(tri.comp3());  <span class="comment">// new point</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            newTri.<a class="code" href="classpFlow_1_1triple.html#af7a0633688604f8f9d0ce01404842f47">comp3</a>() = <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a><span class="keyword">&gt;</span>( basePointIndex + points.<a class="code" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a>() - 1);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            newTri.<a class="code" href="classpFlow_1_1triple.html#af7a0633688604f8f9d0ce01404842f47">comp3</a>() = basePointIndex+<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a><span class="keyword">&gt;</span>(np);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        vertices[i] = newTri;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>[i] = <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">triangle::normal</a>(tri.comp1(), tri.comp2(), tri.comp3());</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        area[i] = <a class="code" href="namespacepFlow_1_1triangle.html#a76e5558852ea08d3bd5ccdd6f8a52151">triangle::surface</a>(tri.comp1(), tri.comp2(), tri.comp3());</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a944f9c09c49f52ea0553d991dc816a08">  107</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#a944f9c09c49f52ea0553d991dc816a08">pFlow::triSurface::calculateNormals</a>()</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#aa3910ffec09789599f4e15d186a944cb">pFlow::triSurfaceKernels::calculateNormals</a>(</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="classpFlow_1_1triSurface.html#acb8e080702927e798327564bc64ead68">points_</a>, </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <a class="code" href="classpFlow_1_1triSurface.html#a49fb67d0eb861840ce3f529d0c4e8818">vertices_</a>, </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <a class="code" href="classpFlow_1_1triSurface.html#a2e9e489e9724661a9db122f2657df32f">normals_</a>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#aec6b6ce76392484f62026912c6552b58">  115</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#aec6b6ce76392484f62026912c6552b58">pFlow::triSurface::calculateArea</a>()</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a595d3fa281acdc5f6a352b43cc732716">pFlow::triSurfaceKernels::calculateArea</a>(</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        points_,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        vertices_,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        area_);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#a32c459eb3a3a2a8d121e2e0fd7d18170">pFlow::triSurface::append</a></div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a32c459eb3a3a2a8d121e2e0fd7d18170">  124</a></span>&#160;(</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">realx3x3Field_H</a> &amp;triangles</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;)</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;:</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    points_(<span class="stringliteral">&quot;points&quot;</span>, <span class="stringliteral">&quot;points&quot;</span>, points),</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    vertices_(<span class="stringliteral">&quot;vertices&quot;</span>, <span class="stringliteral">&quot;vertices&quot;</span>, vertices),</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    area_(<span class="stringliteral">&quot;area&quot;</span>, <span class="stringliteral">&quot;area&quot;</span>),</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    maxIndex_(-1)</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span>( check() )</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="stringliteral">&quot;the indices and number of points do not match. \n&quot;</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    area_.reallocate(vertices_.capacity(), vertices_.size());</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">pFlow::triSurfaceKernels::calculateArea</a>(points_, vertices_, area_);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<a class="code" href="classpFlow_1_1triSurface.html#a23b307d20d3b88983e62e1cb7292346a">pFlow::triSurface::triSurface</a></div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a79fb8c4cf5f0734451c59a44c2a153d0">  148</a></span>&#160;(</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3x3Vector</a>&amp; triangles</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;)</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;:</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    points_(<span class="stringliteral">&quot;points&quot;</span>),</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    vertices_(<span class="stringliteral">&quot;vertices&quot;</span>),</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    area_(<span class="stringliteral">&quot;area&quot;</span>)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">Vector&lt;realx3&gt;</a> points;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">Vector&lt;int32x3&gt;</a> vertices;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    points.<a class="code" href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">clear</a>();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    vertices.<a class="code" href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">clear</a>();</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">for</span>( <span class="keyword">const</span> <span class="keyword">auto</span>&amp; tr: triangles)</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    {</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">auto</span> i= addTriangle(tr, points, vertices); i &lt; 0 )</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a> &lt;&lt;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="stringliteral">&quot;failed to insert a triangle into triSurface. \n&quot;</span>;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        }</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    }</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    points_.assign(points);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    vertices_.assign(vertices);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    area_.reallocate(vertices_.capacity(), vertices_.size());</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">pFlow::triSurfaceKernels::calculateArea</a>(points_, vertices_, area_);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordflow">if</span>( !check() )</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    {</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="stringliteral">&quot;the indices and number of points do not match. \n&quot;</span>;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> basePointIndex = numPoints();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">auto</span> triData = triangles.<a class="code" href="classpFlow_1_1VectorSingle.html#aeb92f4ec32451de9f2f887d9117fd88f">getSpan</a>();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> points(<span class="stringliteral">&quot;points&quot;</span>);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">uint32x3Vector</a> vertices(<span class="stringliteral">&quot;vertices&quot;</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a> area(<span class="stringliteral">&quot;area&quot;</span>);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>(<span class="stringliteral">&quot;normal&quot;</span>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="namespacepFlow.html#afac8884995f33a14312960a0de0be66c">convertToTriSurfaceComponents</a>(</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        basePointIndex, </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        triData,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        points,</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        vertices,</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        area,</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>))</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="stringliteral">&quot;Error in constructing triSuface from raw data &quot;</span>&lt;&lt;triangles.<a class="code" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    points_.append(points);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    vertices_.append(vertices);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    area_.append(area);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    normals_.append(<a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a41da40d7dcef4e4eaa1c4a2e4b749a70">  158</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#a32c459eb3a3a2a8d121e2e0fd7d18170">pFlow::triSurface::append</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1Vector.html">realx3x3Vector</a> &amp;triangles)</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;{</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> basePointIndex = numPoints();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">auto</span> triData = triangles.<a class="code" href="classpFlow_1_1Vector.html#af7fbe27588401af02ce8d7c83032f42d">getSpan</a>();</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> points(<span class="stringliteral">&quot;points&quot;</span>);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">uint32x3Vector</a> vertices(<span class="stringliteral">&quot;vertices&quot;</span>);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realVector</a> area(<span class="stringliteral">&quot;area&quot;</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>(<span class="stringliteral">&quot;normal&quot;</span>);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="namespacepFlow.html#afac8884995f33a14312960a0de0be66c">convertToTriSurfaceComponents</a>(</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        basePointIndex, </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        triData,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        points,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        vertices,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        area,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>))</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="stringliteral">&quot;Error in constructing triSuface from raw data &quot;</span>&lt;&lt;triangles.<a class="code" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    points_.append(points);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    vertices_.append(vertices);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    area_.append(area);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    normals_.append(<a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a>);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d">pFlow::triSurface::readTriSurface</a></div>
-<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d">  191</a></span>&#160;(</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;)</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;{</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    std::cout&lt;&lt;<span class="stringliteral">&quot;triSurface file is binary &quot;</span>&lt;&lt; is.<a class="code" href="classpFlow_1_1IOstream.html#aee3ba44cd3f14501633ae2e8ea04b4d0">isBinary</a>()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">std::endl</a>;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    is.<a class="code" href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">fatalCheck</a>(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">// from start of file</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">if</span>(!points_.read(is)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="comment">// from the current position</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">if</span>(!vertices_.read(is, <span class="keyword">true</span>)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">if</span>( !check() )</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    {</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>( is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>() ) &lt;&lt;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="stringliteral">&quot;the indices and number of points do not match. \n&quot;</span>;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    }</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    area_.reallocate(vertices_.capacity(), vertices_.size());</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">pFlow::triSurfaceKernels::calculateArea</a>(points_, vertices_, area_);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#ae4e3a0ce5f1ac644fc112ed7d5311a3c">pFlow::triSurface::writeTriSurface</a></div>
-<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#ae4e3a0ce5f1ac644fc112ed7d5311a3c">  221</a></span>&#160;(</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;)<span class="keyword">const</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;{</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    os &lt;&lt; points_;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    os &lt;&lt; vertices_;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">return</span> os.<a class="code" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a>(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<a class="code" href="classpFlow_1_1triSurface.html#af0db2068e90bf70c68aa96b94f3bc099">pFlow::triSurface::triSurface</a></div>
+<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#af0db2068e90bf70c68aa96b94f3bc099">  191</a></span>&#160;(</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;obj,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="classpFlow_1_1repository.html">repository</a> *owner</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;)</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;: </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="classpFlow_1_1IOobject.html">IOobject</a></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    (</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        obj,</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <a class="code" href="classpFlow_1_1IOPattern.html#ac1233559c41d42640fa7882a83951aecac91f26e81450da3a70ca6b559e009feb">IOPattern::AllProcessorsSimilar</a>,</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        owner</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    ) </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="comment">// this constructor is used by multiTrisurface and read operation is </span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="comment">// done in that class </span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<a class="code" href="classpFlow_1_1triSurface.html#af0db2068e90bf70c68aa96b94f3bc099">pFlow::triSurface::triSurface</a></div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#ac48bbf7afba19a24c34ed961928ba8c6">  208</a></span>&#160;(</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;objf,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <a class="code" href="classpFlow_1_1repository.html">repository</a>* owner, </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1triSurface.html">triSurface</a> &amp;surf</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;:</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <a class="code" href="classpFlow_1_1IOobject.html">IOobject</a></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    (</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        (</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            objf.<a class="code" href="classpFlow_1_1objectFile.html#a754ce9966caae1ee331378bf4a87269b">name</a>(),</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            objf.<a class="code" href="classpFlow_1_1objectFile.html#a55c0ceffcfed66ff50377088cbac2d8d">localPath</a>(),</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">objectFile::READ_NEVER</a>,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            objf.<a class="code" href="classpFlow_1_1objectFile.html#af42da690717c749e1ee5108dcee62e7d">wFlag</a>()</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        ),</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <a class="code" href="classpFlow_1_1IOPattern.html#ac1233559c41d42640fa7882a83951aecac91f26e81450da3a70ca6b559e009feb">IOPattern::AllProcessorsSimilar</a>,</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        owner</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    ),</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    points_(surf.<a class="code" href="classpFlow_1_1triSurface.html#acb8e080702927e798327564bc64ead68">points_</a>),</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    vertices_(surf.<a class="code" href="classpFlow_1_1triSurface.html#a49fb67d0eb861840ce3f529d0c4e8818">vertices_</a>),</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    area_(surf.<a class="code" href="classpFlow_1_1triSurface.html#a39d684f10dc57c49b15fba0a594e5515">area_</a>),</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    normals_(surf.<a class="code" href="classpFlow_1_1triSurface.html#a2e9e489e9724661a9db122f2657df32f">normals_</a>)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;{}</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<a class="code" href="classpFlow_1_1triSurface.html#af0db2068e90bf70c68aa96b94f3bc099">pFlow::triSurface::triSurface</a></div>
+<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#ac16916827095daee757e8615391d51a4">  233</a></span>&#160;(</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">realx3x3Field_H</a> &amp;triangles,</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <a class="code" href="classpFlow_1_1repository.html">repository</a> *owner</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;: </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <a class="code" href="classpFlow_1_1IOobject.html">IOobject</a></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    (</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            triangles.<a class="code" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>(),</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">IOobject::READ_NEVER</a>,</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">IOobject::WRITE_ALWAYS</a>),</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <a class="code" href="classpFlow_1_1IOPattern.html#ac1233559c41d42640fa7882a83951aecac91f26e81450da3a70ca6b559e009feb">IOPattern::AllProcessorsSimilar</a>,</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        owner</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    )</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;{</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">if</span>( !append(triangles) )</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#a1c713f45ca620694735a6a21959cc408">  257</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#a1c713f45ca620694735a6a21959cc408">pFlow::triSurface::read</a>(<a class="code" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop)</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;{</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    points_.clear();</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordflow">if</span>(!points_.read(is, iop, <span class="keyword">true</span>))</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="stringliteral">&quot; when reading field &quot;</span>&lt;&lt; points_.name()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    }</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    vertices_.clear();</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span>(!vertices_.read(is, iop, <span class="keyword">true</span>))</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="stringliteral">&quot; when reading field &quot;</span>&lt;&lt; vertices_.name()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    normals_.reallocate(vertices_.capacity(), vertices_.size());</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    area_.reallocate(vertices_.capacity(), vertices_.size());</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a595d3fa281acdc5f6a352b43cc732716">calculateArea</a>();</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#aa3910ffec09789599f4e15d186a944cb">calculateNormals</a>();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="classpFlow_1_1triSurface.html#ab3738b20dfa25d66228f6a7571d97aa0">  282</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1triSurface.html#ab3738b20dfa25d66228f6a7571d97aa0">pFlow::triSurface::write</a>(<a class="code" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span>( !points_.write(os, iop))</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    {</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(os.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), os.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="stringliteral">&quot;when writing field &quot;</span>&lt;&lt;points_.name()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordflow">if</span>( !vertices_.write(os,iop) )</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(os.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), os.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())&lt;&lt;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="stringliteral">&quot;when writing field &quot;</span>&lt;&lt;vertices_.name()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1span_html"><div class="ttname"><a href="classpFlow_1_1span.html">pFlow::span</a></div><div class="ttdef"><b>Definition:</b> <a href="span_8hpp_source.html#l00031">span.hpp:31</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html_aa3910ffec09789599f4e15d186a944cb"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html#aa3910ffec09789599f4e15d186a944cb">pFlow::triSurfaceKernels::calculateNormals</a></div><div class="ttdeci">INLINE_FUNCTION_H bool calculateNormals(const realx3Field_D &amp;points, const uint32x3Field_D &amp;vertices, realx3Field_D &amp;normals)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00057">triSurfaceKernels.hpp:57</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdoc">Fatal exit.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00098">error.hpp:98</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_a2e9e489e9724661a9db122f2657df32f"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a2e9e489e9724661a9db122f2657df32f">pFlow::triSurface::normals_</a></div><div class="ttdeci">realx3Field_D normals_</div><div class="ttdoc">normal vector of triangles</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8hpp_source.html#l00119">triSurface.hpp:119</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triangle_html_a7ae9a0ef61cdf98506699cb7abcd84b8"><div class="ttname"><a href="namespacepFlow_1_1triangle.html#a7ae9a0ef61cdf98506699cb7abcd84b8">pFlow::triangle::valid</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool valid(const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</div><div class="ttdef"><b>Definition:</b> <a href="triangleFunctions_8hpp_source.html#l00049">triangleFunctions.hpp:49</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a0ccc1b0be06895d058cf4ca22dfe56ce"><div class="ttname"><a href="namespacepFlow.html#a0ccc1b0be06895d058cf4ca22dfe56ce">pFlow::find</a></div><div class="ttdeci">int64 find(Vector&lt; T, Allocator &gt; &amp;vec, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> <a href="VectorAlgorithm_8hpp_source.html#l00069">VectorAlgorithm.hpp:69</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_af01ae6e5e5f1b190954e7487152e9b79"><div class="ttname"><a href="classpFlow_1_1triSurface.html#af01ae6e5e5f1b190954e7487152e9b79">pFlow::triSurface::calcMaxIndex</a></div><div class="ttdeci">int32 calcMaxIndex() const</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00081">triSurface.cpp:81</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_a922d2784284e8f6ee4009c3d92ba48b6"><div class="ttname"><a href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a></div><div class="ttdeci">#define FUNCTION_NAME</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00029">pFlowMacros.hpp:29</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Vector_html_a10efdf47ffedbdc720f71c2f72b98d98"><div class="ttname"><a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">pFlow::Vector::size</a></div><div class="ttdeci">auto size() const</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00301">Vector.hpp:301</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_ae4e3a0ce5f1ac644fc112ed7d5311a3c"><div class="ttname"><a href="classpFlow_1_1triSurface.html#ae4e3a0ce5f1ac644fc112ed7d5311a3c">pFlow::triSurface::writeTriSurface</a></div><div class="ttdeci">bool writeTriSurface(iOstream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00221">triSurface.cpp:221</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triple_html_a28d901cc27d3756a830e4de5a484b967"><div class="ttname"><a href="classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967">pFlow::triple::y</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; y()</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00141">triple.hpp:141</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_a367eb3425fc4e8270e2aa961df8ac8a5"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">pFlow::IOstream::check</a></div><div class="ttdeci">virtual bool check(const char *operation) const</div><div class="ttdoc">Check IOstream status for given operation.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00042">IOstream.cpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_aa55c392e8b0854c0bbf7a12d5fa9dcd1"><div class="ttname"><a href="classpFlow_1_1triSurface.html#aa55c392e8b0854c0bbf7a12d5fa9dcd1">pFlow::triSurface::vertices_</a></div><div class="ttdeci">int32x3Field_D vertices_</div><div class="ttdoc">vectices indices of triangles</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8hpp_source.html#l00114">triSurface.hpp:114</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_ae1ee541bb22588b6a71650c807efca90"><div class="ttname"><a href="classpFlow_1_1triSurface.html#ae1ee541bb22588b6a71650c807efca90">pFlow::triSurface::check</a></div><div class="ttdeci">bool check()</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00103">triSurface.cpp:103</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00033">iIstream.hpp:33</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triple_html_af7a0633688604f8f9d0ce01404842f47"><div class="ttname"><a href="classpFlow_1_1triple.html#af7a0633688604f8f9d0ce01404842f47">pFlow::triple::comp3</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; comp3()</div><div class="ttdoc">access component</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00192">triple.hpp:192</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_a172a7c88be982061ecefadd95725c1a1"><div class="ttname"><a href="classpFlow_1_1Vector.html#a172a7c88be982061ecefadd95725c1a1">pFlow::Vector::reserve</a></div><div class="ttdeci">void reserve(size_t cap)</div><div class="ttdoc">Reserve capacity for vector Preserve the content.</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00284">Vector.hpp:284</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1span_html_a29908231382cfa67191aec2c9f8bca23"><div class="ttname"><a href="classpFlow_1_1span.html#a29908231382cfa67191aec2c9f8bca23">pFlow::span::size</a></div><div class="ttdeci">INLINE_FUNCTION_HD uint32 size() const</div><div class="ttdoc">Returns the number of elements in the span.</div><div class="ttdef"><b>Definition:</b> <a href="span_8hpp_source.html#l00101">span.hpp:101</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_af7fbe27588401af02ce8d7c83032f42d"><div class="ttname"><a href="classpFlow_1_1Vector.html#af7fbe27588401af02ce8d7c83032f42d">pFlow::Vector::getSpan</a></div><div class="ttdeci">auto getSpan()</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00296">Vector.hpp:296</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_a944f9c09c49f52ea0553d991dc816a08"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a944f9c09c49f52ea0553d991dc816a08">pFlow::triSurface::calculateNormals</a></div><div class="ttdeci">bool calculateNormals()</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00107">triSurface.cpp:107</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triangle_html_ac08cdb1c0031ef0cc9161c6e72174b34"><div class="ttname"><a href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">pFlow::triangle::normal</a></div><div class="ttdeci">INLINE_FUNCTION_HD realx3 normal(const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</div><div class="ttdef"><b>Definition:</b> <a href="triangleFunctions_8hpp_source.html#l00038">triangleFunctions.hpp:38</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_a10efdf47ffedbdc720f71c2f72b98d98"><div class="ttname"><a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">pFlow::Vector::size</a></div><div class="ttdeci">auto size() const</div><div class="ttdoc">Size of the vector.</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00265">Vector.hpp:265</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">pFlow::objectFile::WRITE_ALWAYS</a></div><div class="ttdeci">@ WRITE_ALWAYS</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00043">objectFile.hpp:43</a></div></div>
+<div class="ttc" id="aVectors_8hpp_html"><div class="ttname"><a href="Vectors_8hpp.html">Vectors.hpp</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_ab3738b20dfa25d66228f6a7571d97aa0"><div class="ttname"><a href="classpFlow_1_1triSurface.html#ab3738b20dfa25d66228f6a7571d97aa0">pFlow::triSurface::write</a></div><div class="ttdeci">bool write(iOstream &amp;os, const IOPattern &amp;iop) const override</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00282">triSurface.cpp:282</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00341">iOstream.hpp:341</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Field_html"><div class="ttname"><a href="classpFlow_1_1Field.html">pFlow::Field</a></div><div class="ttdef"><b>Definition:</b> <a href="Field_8hpp_source.html#l00036">Field.hpp:36</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Field_html_a83f9a8e30fb37f90e9a6436f4470aaa2"><div class="ttname"><a href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">pFlow::Field::name</a></div><div class="ttdeci">word name() const</div><div class="ttdef"><b>Definition:</b> <a href="Field_8hpp_source.html#l00182">Field.hpp:182</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_acb8e080702927e798327564bc64ead68"><div class="ttname"><a href="classpFlow_1_1triSurface.html#acb8e080702927e798327564bc64ead68">pFlow::triSurface::points_</a></div><div class="ttdeci">realx3Field_D points_</div><div class="ttdoc">points of triangles</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8hpp_source.html#l00110">triSurface.hpp:110</a></div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOobject_html"><div class="ttname"><a href="classpFlow_1_1IOobject.html">pFlow::IOobject</a></div><div class="ttdef"><b>Definition:</b> <a href="IOobject_8hpp_source.html#l00035">IOobject.hpp:35</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdoc">Interface class for any input stream</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00037">iIstream.hpp:37</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdoc">Report a fatal error and function name and exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00077">error.hpp:77</a></div></div>
 <div class="ttc" id="atriSurfaceKernels_8hpp_html"><div class="ttname"><a href="triSurfaceKernels_8hpp.html">triSurfaceKernels.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_a281bbfd1fe6ab10377d7cb1f5111044d"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">pFlow::IOstream::fatalCheck</a></div><div class="ttdeci">bool fatalCheck(const char *operation) const</div><div class="ttdoc">Check IOstream status for given operation.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00048">IOstream.cpp:48</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html_a6d317544a368345e8af9269185795797"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">pFlow::triSurfaceKernels::calculateArea</a></div><div class="ttdeci">INLINE_FUNCTION_H bool calculateArea(const realx3Field_D &amp;points, const int32x3Field_D &amp;vertices, realField_D &amp;area)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00032">triSurfaceKernels.hpp:32</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_aeb92f4ec32451de9f2f887d9117fd88f"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#aeb92f4ec32451de9f2f887d9117fd88f">pFlow::VectorSingle::getSpan</a></div><div class="ttdeci">INLINE_FUNCTION_H auto getSpan()</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8cpp_source.html#l00569">VectorSingle.cpp:569</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_a49fb67d0eb861840ce3f529d0c4e8818"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a49fb67d0eb861840ce3f529d0c4e8818">pFlow::triSurface::vertices_</a></div><div class="ttdeci">uint32x3Field_D vertices_</div><div class="ttdoc">vectices indices of triangles</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8hpp_source.html#l00113">triSurface.hpp:113</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a754ce9966caae1ee331378bf4a87269b"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a754ce9966caae1ee331378bf4a87269b">pFlow::objectFile::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00101">objectFile.hpp:101</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOPattern_html"><div class="ttname"><a href="classpFlow_1_1IOPattern.html">pFlow::IOPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="IOPattern_8hpp_source.html#l00032">IOPattern.hpp:32</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triple_html_aa120a1a57b7afa6b7f218d41278f8a53"><div class="ttname"><a href="classpFlow_1_1triple.html#aa120a1a57b7afa6b7f218d41278f8a53">pFlow::triple::comp1</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; comp1()</div><div class="ttdoc">access component</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00168">triple.hpp:168</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00030">objectFile.hpp:30</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1IOstream_html_ac9b54653d0ec63ee05f64a185437b335"><div class="ttname"><a href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">pFlow::IOstream::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdoc">Return the name of the stream.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00031">IOstream.cpp:31</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triple_html_a5c836d3919741edf1ba805c98dbd21b7"><div class="ttname"><a href="classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7">pFlow::triple::z</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; z()</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00144">triple.hpp:144</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_ae14bf16748b3144baa1112f08c2a83b1"><div class="ttname"><a href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1">pFlow::max</a></div><div class="ttdeci">T max(const Vector&lt; T, Allocator &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00164">VectorMath.hpp:164</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Vector_html_a3e122a9f9c04a4e2dffdfabde2f1de50"><div class="ttname"><a href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">pFlow::Vector::clear</a></div><div class="ttdeci">auto clear()</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00248">Vector.hpp:248</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_a23b307d20d3b88983e62e1cb7292346a"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a23b307d20d3b88983e62e1cb7292346a">pFlow::triSurface::triSurface</a></div><div class="ttdeci">triSurface()</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00114">triSurface.cpp:114</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_aee3ba44cd3f14501633ae2e8ea04b4d0"><div class="ttname"><a href="classpFlow_1_1IOstream.html#aee3ba44cd3f14501633ae2e8ea04b4d0">pFlow::IOstream::isBinary</a></div><div class="ttdeci">bool isBinary() const</div><div class="ttdoc">Return true if stream format is binray.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00178">IOstream.hpp:178</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_aa7d4742cdf24a3792276e669531d145c"><div class="ttname"><a href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a></div><div class="ttdeci">#define LAMBDA_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00054">pFlowMacros.hpp:54</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_a83efa053dfcfcef04cc0e721c0314ff3"><div class="ttname"><a href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a></div><div class="ttdeci">#define ioErrorInFile(fileName, lineNumber)</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00049">error.hpp:49</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_a607efe5fb94edbe4cfa890c4907e76c3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">pFlow::IOstream::lineNumber</a></div><div class="ttdeci">int32 lineNumber() const</div><div class="ttdoc">Const access to the current stream line number.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00221">IOstream.hpp:221</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">pFlow::objectFile::READ_NEVER</a></div><div class="ttdeci">@ READ_NEVER</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00037">objectFile.hpp:37</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html_a595d3fa281acdc5f6a352b43cc732716"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html#a595d3fa281acdc5f6a352b43cc732716">pFlow::triSurfaceKernels::calculateArea</a></div><div class="ttdeci">INLINE_FUNCTION_H bool calculateArea(const realx3Field_D &amp;points, const uint32x3Field_D &amp;vertices, realField_D &amp;area)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00032">triSurfaceKernels.hpp:32</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_a1c713f45ca620694735a6a21959cc408"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a1c713f45ca620694735a6a21959cc408">pFlow::triSurface::read</a></div><div class="ttdeci">bool read(iIstream &amp;is, const IOPattern &amp;iop) override</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00257">triSurface.cpp:257</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Vector_html_acc80e00a8ac919288fb55bd14cc88bf6"><div class="ttname"><a href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">pFlow::Vector::name</a></div><div class="ttdeci">const word &amp; name() const</div><div class="ttdoc">Name of the vector.</div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00259">Vector.hpp:259</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_a83efa053dfcfcef04cc0e721c0314ff3"><div class="ttname"><a href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a></div><div class="ttdeci">#define ioErrorInFile(fileName, lineNumber)</div><div class="ttdoc">Report an error in file operation with supplied fileName and lineNumber.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00087">error.hpp:87</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOPattern_html_ac1233559c41d42640fa7882a83951aecac91f26e81450da3a70ca6b559e009feb"><div class="ttname"><a href="classpFlow_1_1IOPattern.html#ac1233559c41d42640fa7882a83951aecac91f26e81450da3a70ca6b559e009feb">pFlow::IOPattern::AllProcessorsSimilar</a></div><div class="ttdeci">@ AllProcessorsSimilar</div><div class="ttdef"><b>Definition:</b> <a href="IOPattern_8hpp_source.html#l00055">IOPattern.hpp:55</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a55c0ceffcfed66ff50377088cbac2d8d"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a55c0ceffcfed66ff50377088cbac2d8d">pFlow::objectFile::localPath</a></div><div class="ttdeci">virtual const fileSystem &amp; localPath() const</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00107">objectFile.hpp:107</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1repository_html"><div class="ttname"><a href="classpFlow_1_1repository.html">pFlow::repository</a></div><div class="ttdef"><b>Definition:</b> <a href="repository_8hpp_source.html#l00034">repository.hpp:34</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOstream_html_a607efe5fb94edbe4cfa890c4907e76c3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">pFlow::IOstream::lineNumber</a></div><div class="ttdeci">int32 lineNumber() const</div><div class="ttdoc">Const access to the current stream line number.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00223">IOstream.hpp:223</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_a39d684f10dc57c49b15fba0a594e5515"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a39d684f10dc57c49b15fba0a594e5515">pFlow::triSurface::area_</a></div><div class="ttdeci">realField_D area_</div><div class="ttdoc">area of each triangle</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8hpp_source.html#l00116">triSurface.hpp:116</a></div></div>
 <div class="ttc" id="aiOstream_8hpp_html"><div class="ttname"><a href="iOstream_8hpp.html">iOstream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triple_html_a2f365146ce767d3de7ae125abd193b33"><div class="ttname"><a href="classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33">pFlow::triple::x</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; x()</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00138">triple.hpp:138</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a334c2560412a3bc4fc1c215a77a48337"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00362">VectorSingle.hpp:362</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a18052bc1ad8ea07ea5b6205321cba10e"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">pFlow::VectorSingle::deviceVectorAll</a></div><div class="ttdeci">INLINE_FUNCTION_H viewType &amp; deviceVectorAll()</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00297">VectorSingle.hpp:297</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triple_html"><div class="ttname"><a href="classpFlow_1_1triple.html">pFlow::triple</a></div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00037">triple.hpp:37</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_af0db2068e90bf70c68aa96b94f3bc099"><div class="ttname"><a href="classpFlow_1_1triSurface.html#af0db2068e90bf70c68aa96b94f3bc099">pFlow::triSurface::triSurface</a></div><div class="ttdeci">triSurface(const objectFile &amp;obj, repository *owner)</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00191">triSurface.cpp:191</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html"><div class="ttname"><a href="classpFlow_1_1triSurface.html">pFlow::triSurface</a></div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8hpp_source.html#l00103">triSurface.hpp:103</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triple_html"><div class="ttname"><a href="classpFlow_1_1triple.html">pFlow::triple</a></div><div class="ttdoc">A set of 3 variables that can be used for vector variables.</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00036">triple.hpp:36</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_aec6b6ce76392484f62026912c6552b58"><div class="ttname"><a href="classpFlow_1_1triSurface.html#aec6b6ce76392484f62026912c6552b58">pFlow::triSurface::calculateArea</a></div><div class="ttdeci">bool calculateArea()</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00115">triSurface.cpp:115</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Vector_html"><div class="ttname"><a href="classpFlow_1_1Vector.html">pFlow::Vector&lt; realx3 &gt;</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_a2109c84ebb41bc6ed8945221e833c40d"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d">pFlow::triSurface::readTriSurface</a></div><div class="ttdeci">bool readTriSurface(iIstream &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00191">triSurface.cpp:191</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_afac8884995f33a14312960a0de0be66c"><div class="ttname"><a href="namespacepFlow.html#afac8884995f33a14312960a0de0be66c">pFlow::convertToTriSurfaceComponents</a></div><div class="ttdeci">bool convertToTriSurfaceComponents(uint32 basePointIndex, span&lt; realx3x3 &gt; tris, realx3Vector &amp;points, uint32x3Vector &amp;vertices, realVector &amp;area, realx3Vector &amp;normal)</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00033">triSurface.cpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdoc">Interface class for any output stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00059">iOstream.hpp:59</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_af42da690717c749e1ee5108dcee62e7d"><div class="ttname"><a href="classpFlow_1_1objectFile.html#af42da690717c749e1ee5108dcee62e7d">pFlow::objectFile::wFlag</a></div><div class="ttdeci">writeFlag wFlag() const</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00119">objectFile.hpp:119</a></div></div>
 <div class="ttc" id="atriSurface_8hpp_html"><div class="ttname"><a href="triSurface_8hpp.html">triSurface.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1triSurface_html_a86cff523f4f289aeec0a4a82ab0bcc09"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a86cff523f4f289aeec0a4a82ab0bcc09">pFlow::triSurface::addTriangle</a></div><div class="ttdeci">int32 addTriangle(const realx3x3 &amp;tri, realx3Vector &amp;points, int32x3Vector &amp;vertices)</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00029">triSurface.cpp:29</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triSurface_html_a32c459eb3a3a2a8d121e2e0fd7d18170"><div class="ttname"><a href="classpFlow_1_1triSurface.html#a32c459eb3a3a2a8d121e2e0fd7d18170">pFlow::triSurface::append</a></div><div class="ttdeci">bool append(const realx3x3Field_H &amp;triangles)</div><div class="ttdef"><b>Definition:</b> <a href="triSurface_8cpp_source.html#l00124">triSurface.cpp:124</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triangle_html_a76e5558852ea08d3bd5ccdd6f8a52151"><div class="ttname"><a href="namespacepFlow_1_1triangle.html#a76e5558852ea08d3bd5ccdd6f8a52151">pFlow::triangle::surface</a></div><div class="ttdeci">INLINE_FUNCTION_HD real surface(const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</div><div class="ttdef"><b>Definition:</b> <a href="triangleFunctions_8hpp_source.html#l00030">triangleFunctions.hpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triple_html_a696753289a66507eb9b442e962d8c0b1"><div class="ttname"><a href="classpFlow_1_1triple.html#a696753289a66507eb9b442e962d8c0b1">pFlow::triple::comp2</a></div><div class="ttdeci">INLINE_FUNCTION_HD T &amp; comp2()</div><div class="ttdoc">access component</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00180">triple.hpp:180</a></div></div>
 <div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html">structuredData</a></li><li class="navelem"><a class="el" href="dir_cb566f9a80a0a346c3a6366e4b888b7d.html">trisurfaceStructure</a></li><li class="navelem"><a class="el" href="triSurface_8cpp.html">triSurface.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_38cf8104b99597e1233d708542fdeb18.html">triSurface</a></li><li class="navelem"><a class="el" href="triSurface_8cpp.html">triSurface.cpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

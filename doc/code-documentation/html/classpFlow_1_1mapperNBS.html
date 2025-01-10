@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: mapperNBS&lt; executionSpace &gt; Class Template Reference</title>
+<title>PhasicFlow: mapperNBS Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,278 +105,143 @@ $(document).ready(function(){initNavTree('classpFlow_1_1mapperNBS.html',''); ini
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classpFlow_1_1mapperNBS-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">mapperNBS&lt; executionSpace &gt; Class Template Reference</div>  </div>
+<div class="title">mapperNBS Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for mapperNBS&lt; executionSpace &gt;:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for mapperNBS:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS__inherit__graph.png" border="0" usemap="#mapperNBS_3_01executionSpace_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="mapperNBS_3_01executionSpace_01_4_inherit__map" id="mapperNBS_3_01executionSpace_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="134,81,365,108"/>
-<area shape="rect" href="classpFlow_1_1NBSLevel0.html" title=" " alt="" coords="5,178,229,205"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html" title=" " alt="" coords="254,171,509,212"/>
-<area shape="rect" href="classpFlow_1_1cells.html" title=" " alt="" coords="192,5,307,32"/>
-</map>
+<div class="center"><img src="classpFlow_1_1mapperNBS__inherit__graph.png" border="0" usemap="#mapperNBS_inherit__map" alt="Inheritance graph"/></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for mapperNBS&lt; executionSpace &gt;:</div>
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for mapperNBS:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS__coll__graph.png" border="0" usemap="#mapperNBS_3_01executionSpace_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="mapperNBS_3_01executionSpace_01_4_coll__map" id="mapperNBS_3_01executionSpace_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,236,107"/>
-<area shape="rect" href="classpFlow_1_1cells.html" title=" " alt="" coords="63,5,178,32"/>
-</map>
+<div class="center"><img src="classpFlow_1_1mapperNBS__coll__graph.png" border="0" usemap="#mapperNBS_coll__map" alt="Collaboration graph"/></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS_1_1cellIterator.html">cellIterator</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">CellIterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a200e2b36a2cd413a512279c0089c6b50"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a200e2b36a2cd413a512279c0089c6b50">IdType</a> = <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td></tr>
-<tr class="separator:a200e2b36a2cd413a512279c0089c6b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae73570f5a8fa6f2a0123b6a44eadca22"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> = <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td></tr>
-<tr class="separator:ae73570f5a8fa6f2a0123b6a44eadca22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeddf2432738cfab3cda287d6fb96e048"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aeddf2432738cfab3cda287d6fb96e048">Cells</a> = <a class="el" href="classpFlow_1_1cells.html">cells</a>&lt; <a class="el" href="classpFlow_1_1mapperNBS.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> &gt;</td></tr>
-<tr class="separator:aeddf2432738cfab3cda287d6fb96e048"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3810d08b3beabddce512c36e16a23cd7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a3810d08b3beabddce512c36e16a23cd7">CellType</a> = typename <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">Cells::CellType</a></td></tr>
-<tr class="separator:a3810d08b3beabddce512c36e16a23cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a268a0b77c6f89665e5ef14307a3f1731"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a> = executionSpace</td></tr>
-<tr class="separator:a268a0b77c6f89665e5ef14307a3f1731"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5b08fe17cf30c7c64a5ee12370133e9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> = typename execution_space::memory_space</td></tr>
-<tr class="separator:ac5b08fe17cf30c7c64a5ee12370133e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbd6c3ada7ac256c9703465b1f009810"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#acbd6c3ada7ac256c9703465b1f009810">HeadType</a> = <a class="el" href="namespacepFlow.html#ae6a68b2bd4d845883b5c67189d67d816">ViewType3D</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;</td></tr>
-<tr class="separator:acbd6c3ada7ac256c9703465b1f009810"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94771782ff2841007e80ca3839276da7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a94771782ff2841007e80ca3839276da7">NextType</a> = <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;</td></tr>
-<tr class="separator:a94771782ff2841007e80ca3839276da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> = <a class="el" href="classpFlow_1_1triple.html">triple</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt;</td></tr>
-<tr class="separator:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> = <a class="el" href="classpFlow_1_1triple.html">triple</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt;</td></tr>
-<tr class="separator:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab19a814a38b96775c94f43a419c40d22"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ab19a814a38b96775c94f43a419c40d22">HeadType</a> = <a class="el" href="namespacepFlow.html#aeb0cbff8d6be1ec031ea498a603ac222">deviceViewType3D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt;</td></tr>
+<tr class="separator:ab19a814a38b96775c94f43a419c40d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded2f9ec2384f7ba06f4cfbc2afbaa8f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aded2f9ec2384f7ba06f4cfbc2afbaa8f">NextType</a> = <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt;</td></tr>
+<tr class="separator:aded2f9ec2384f7ba06f4cfbc2afbaa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a425a2c93cccdb60baa66f676f2e4fcf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a425a2c93cccdb60baa66f676f2e4fcf8">TypeInfoNV</a> (&quot;mapperNBS&quot;)</td></tr>
 <tr class="separator:a425a2c93cccdb60baa66f676f2e4fcf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabb78939edc11d328987ccfe6cff9f2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aabb78939edc11d328987ccfe6cff9f2a">mapperNBS</a> ()</td></tr>
-<tr class="separator:aabb78939edc11d328987ccfe6cff9f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff165a8eab5bc9439dff09cdebdd8f34"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aff165a8eab5bc9439dff09cdebdd8f34">mapperNBS</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>, const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;position, bool nextOwner=true)</td></tr>
-<tr class="separator:aff165a8eab5bc9439dff09cdebdd8f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25152f26d847dae6782533f4485fefff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a25152f26d847dae6782533f4485fefff">mapperNBS</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a>, const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;position, bool nextOwner=true)</td></tr>
-<tr class="separator:a25152f26d847dae6782533f4485fefff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a428d15598cf7ed504c1993edac83a33d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a428d15598cf7ed504c1993edac83a33d">mapperNBS</a> ()=default</td></tr>
+<tr class="separator:a428d15598cf7ed504c1993edac83a33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a080018267fa3a8b284eb85a8a25694d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a080018267fa3a8b284eb85a8a25694d3">mapperNBS</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1domain.html">domain</a>, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> cellSize, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;pointPos, const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;flags, bool adjustableBox, bool nextOwner=true)</td></tr>
+<tr class="separator:a080018267fa3a8b284eb85a8a25694d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af52aee9b89ace9cd183601ccc3d505ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#af52aee9b89ace9cd183601ccc3d505ec">mapperNBS</a> (const <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;)=default</td></tr>
 <tr class="separator:af52aee9b89ace9cd183601ccc3d505ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7200fb18d9b4afa7f52e96c9e4ba2795"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a7200fb18d9b4afa7f52e96c9e4ba2795">mapperNBS</a> (<a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a7200fb18d9b4afa7f52e96c9e4ba2795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77e648ddd6318349e834b18e9b0aa229"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a77e648ddd6318349e834b18e9b0aa229">operator=</a> (const <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;)=default</td></tr>
 <tr class="separator:a77e648ddd6318349e834b18e9b0aa229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc7fe2b88a16ffe79f50c442411daec3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#afc7fe2b88a16ffe79f50c442411daec3">operator=</a> (<a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:afc7fe2b88a16ffe79f50c442411daec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae7702272d8c4be0e0c27835444a291a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aae7702272d8c4be0e0c27835444a291a">~mapperNBS</a> ()=default</td></tr>
 <tr class="separator:aae7702272d8c4be0e0c27835444a291a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1beee6aa2384d093165782ce8e176c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ac1beee6aa2384d093165782ce8e176c8">capacity</a> () const</td></tr>
-<tr class="separator:ac1beee6aa2384d093165782ce8e176c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ca5fc49c272458f76da73906c9e534b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1mapperNBS_1_1cellIterator.html">cellIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a5ca5fc49c272458f76da73906c9e534b">getCellIterator</a> () const</td></tr>
-<tr class="separator:a5ca5fc49c272458f76da73906c9e534b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e3805072fdaa03e819082d00b482616"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a9e3805072fdaa03e819082d00b482616">particlesCapcityChanged</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> newCap)</td></tr>
-<tr class="separator:a9e3805072fdaa03e819082d00b482616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef627ff36bd5f5194201206c7a41eaa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aef627ff36bd5f5194201206c7a41eaa1">head</a> ()</td></tr>
-<tr class="separator:aef627ff36bd5f5194201206c7a41eaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31933b87666c5f903b5a7fb5887bde6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a31933b87666c5f903b5a7fb5887bde6a">next</a> ()</td></tr>
-<tr class="separator:a31933b87666c5f903b5a7fb5887bde6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad68b590e88bddfe3b444730716355d44"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ad68b590e88bddfe3b444730716355d44">head</a> () const</td></tr>
-<tr class="separator:ad68b590e88bddfe3b444730716355d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5ed71d121d430966f15c97806937fd5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aa5ed71d121d430966f15c97806937fd5">next</a> () const</td></tr>
-<tr class="separator:aa5ed71d121d430966f15c97806937fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94666ffc05d9ef8b9e710023171d3e4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a94666ffc05d9ef8b9e710023171d3e4c">pointPosition</a> ()</td></tr>
-<tr class="separator:a94666ffc05d9ef8b9e710023171d3e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfc73562130fa76004062f1f8344f7ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#acfc73562130fa76004062f1f8344f7ce">setNext</a> (<a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;<a class="el" href="classpFlow_1_1mapperNBS.html#a31933b87666c5f903b5a7fb5887bde6a">next</a>)</td></tr>
-<tr class="separator:acfc73562130fa76004062f1f8344f7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4d9b554d7571777600bb20765ffe5bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ac4d9b554d7571777600bb20765ffe5bb">build</a> (<a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> activeRange)</td></tr>
-<tr class="separator:ac4d9b554d7571777600bb20765ffe5bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ab886e7dd6b9d59e9c2f4544e4c98da"><td class="memTemplParams" colspan="2">template&lt;typename IncludeFunction &gt; </td></tr>
-<tr class="memitem:a6ab886e7dd6b9d59e9c2f4544e4c98da"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a6ab886e7dd6b9d59e9c2f4544e4c98da">build</a> (<a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> activeRange, IncludeFunction incld)</td></tr>
-<tr class="separator:a6ab886e7dd6b9d59e9c2f4544e4c98da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4afb3a96a27bdfb352881bc97640669"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aa4afb3a96a27bdfb352881bc97640669">buildCheckInDomain</a> (<a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> activeRange)</td></tr>
-<tr class="separator:aa4afb3a96a27bdfb352881bc97640669"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28cfc3d026365753bd3c02777c104dc0"><td class="memTemplParams" colspan="2">template&lt;typename IncludeFunction &gt; </td></tr>
-<tr class="memitem:a28cfc3d026365753bd3c02777c104dc0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a28cfc3d026365753bd3c02777c104dc0">buildCheckInDomain</a> (<a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> activeRange, IncludeFunction incld)</td></tr>
-<tr class="separator:a28cfc3d026365753bd3c02777c104dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ad3d63298d5caff2151c5f668739dded6">cells</a> ()</td></tr>
-<tr class="separator:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a616df0d63575c19a901ea6923147cd33">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6fb05e2360d79abab0ac460ca04ad50e">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a>)</td></tr>
-<tr class="separator:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab044ceeb1abca27318a836d4f15cb567">cells</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1e417a2f66123d555e24c4e241641472">cells</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ad3d63298d5caff2151c5f668739dded6">cells</a> ()</td></tr>
-<tr class="separator:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a616df0d63575c19a901ea6923147cd33">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6fb05e2360d79abab0ac460ca04ad50e">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a>)</td></tr>
-<tr class="separator:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab044ceeb1abca27318a836d4f15cb567">cells</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1e417a2f66123d555e24c4e241641472">cells</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a28766f2d75868928c721fcf917e10ca2">operator=</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa7695ab501078c987ef5090ee8f81ff9">operator=</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a28766f2d75868928c721fcf917e10ca2">operator=</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa7695ab501078c987ef5090ee8f81ff9">operator=</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html">cells</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aab4957227ae46b934b9f779363e6c83c">getCells</a> () const</td></tr>
-<tr class="separator:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html">cells</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aab4957227ae46b934b9f779363e6c83c">getCells</a> () const</td></tr>
-<tr class="separator:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ac85134d434244d9392bf9e85409e0dbc">setCellSize</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#adf72965b7f6214b7401db0a0171db764">setCellSize</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ac85134d434244d9392bf9e85409e0dbc">setCellSize</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#adf72965b7f6214b7401db0a0171db764">setCellSize</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a> () const</td></tr>
-<tr class="separator:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a> () const</td></tr>
-<tr class="separator:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a88bb499251f955a6f7fdc9cde78270ed">numCells</a> () const</td></tr>
-<tr class="separator:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a88bb499251f955a6f7fdc9cde78270ed">numCells</a> () const</td></tr>
-<tr class="separator:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a> () const</td></tr>
-<tr class="separator:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a> () const</td></tr>
-<tr class="separator:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a> () const</td></tr>
-<tr class="separator:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a> () const</td></tr>
-<tr class="separator:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a> () const</td></tr>
-<tr class="separator:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a> () const</td></tr>
-<tr class="separator:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a30407b0f1d3278ff34800ef45997cb84">totalCells</a> () const</td></tr>
-<tr class="separator:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a30407b0f1d3278ff34800ef45997cb84">totalCells</a> () const</td></tr>
-<tr class="separator:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a> () const</td></tr>
-<tr class="separator:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a> () const</td></tr>
-<tr class="separator:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6a5c6423585a7ad6ad55f6df56c459bd">pointIndex</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6a5c6423585a7ad6ad55f6df56c459bd">pointIndex</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ae16870dd025bb71d3dafdc755cedd946">pointIndexInDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;index) const</td></tr>
-<tr class="separator:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ae16870dd025bb71d3dafdc755cedd946">pointIndexInDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;index) const</td></tr>
-<tr class="separator:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#afddde66f6a63e9dc2b78c740cc4c0949">inDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#afddde66f6a63e9dc2b78c740cc4c0949">inDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a35eb36ff8390e5ad23a70f2a304a326d">isInRange</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;cell) const</td></tr>
-<tr class="separator:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1755e19f5555acc13bed60cbe4952283">isInRange</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k) const</td></tr>
-<tr class="separator:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a35eb36ff8390e5ad23a70f2a304a326d">isInRange</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;cell) const</td></tr>
-<tr class="separator:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1755e19f5555acc13bed60cbe4952283">isInRange</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k) const</td></tr>
-<tr class="separator:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a4bb4067c00c519c5a613dbc1c076dd0f">extendBox</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p1, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p2, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p3, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> extent, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;minP, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;maxP) const</td></tr>
-<tr class="separator:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a989eee28d3bba158140e994c9cf6ccf7">extendBox</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p1, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p2, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p3, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> extent, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;minP, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;maxP) const</td></tr>
-<tr class="separator:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a4bb4067c00c519c5a613dbc1c076dd0f">extendBox</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p1, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p2, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p3, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> extent, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;minP, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;maxP) const</td></tr>
-<tr class="separator:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a989eee28d3bba158140e994c9cf6ccf7">extendBox</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p1, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p2, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p3, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> extent, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;minP, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;maxP) const</td></tr>
-<tr class="separator:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a109e8d4c8c126b11cc22366416628515">bound</a> (<a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> p) const</td></tr>
-<tr class="separator:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab10317c14e2180777a6d745a2427a2bc">bound</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p) const</td></tr>
-<tr class="separator:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a109e8d4c8c126b11cc22366416628515">bound</a> (<a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> p) const</td></tr>
-<tr class="separator:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab10317c14e2180777a6d745a2427a2bc">bound</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p) const</td></tr>
-<tr class="separator:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639ca8a7754aa6a5ede02cb5346b8fa3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a639ca8a7754aa6a5ede02cb5346b8fa3">getCellIterator</a> () const</td></tr>
+<tr class="separator:a639ca8a7754aa6a5ede02cb5346b8fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b65a8c2f6f5bccb97df02e1d8ba765"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ae5b65a8c2f6f5bccb97df02e1d8ba765">getDomainCells</a> () const</td></tr>
+<tr class="separator:ae5b65a8c2f6f5bccb97df02e1d8ba765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a14ed8df68bbf6af75f0616620dd7f"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a22a14ed8df68bbf6af75f0616620dd7f">getSearchCells</a> () const</td></tr>
+<tr class="separator:a22a14ed8df68bbf6af75f0616620dd7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa211b81029e158653fac6e77af83e3ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aa211b81029e158653fac6e77af83e3ac">build</a> (const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;pointPos, const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;flags, bool &amp;searchBoxChanged)</td></tr>
+<tr class="separator:aa211b81029e158653fac6e77af83e3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:a1eda470dc3fe355cb038b0a37a296a12"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a1eda470dc3fe355cb038b0a37a296a12">rangePolicyType</a> = Kokkos::RangePolicy&lt; Kokkos::IndexType&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt;, Kokkos::Schedule&lt; Kokkos::Static &gt;, <a class="el" href="classpFlow_1_1mapperNBS.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a> &gt;</td></tr>
-<tr class="separator:a1eda470dc3fe355cb038b0a37a296a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a40983a388b53d013256aeb8bde6b384b"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a40983a388b53d013256aeb8bde6b384b">NoPos</a> = 0xFFFFFFFF</td></tr>
+<tr class="separator:a40983a388b53d013256aeb8bde6b384b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ad1e66f338b0cc8d9ba8098c7f0156f7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ad1e66f338b0cc8d9ba8098c7f0156f7a">nullifyHead</a> ()</td></tr>
-<tr class="separator:ad1e66f338b0cc8d9ba8098c7f0156f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a275473a4efdb1e6a14fc9814f03d11c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a275473a4efdb1e6a14fc9814f03d11c3">nullifyNext</a> (<a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> nextRng)</td></tr>
-<tr class="separator:a275473a4efdb1e6a14fc9814f03d11c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b53f360232042bc4ea4bafe235589cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a5b53f360232042bc4ea4bafe235589cb">nullify</a> ()</td></tr>
-<tr class="separator:a5b53f360232042bc4ea4bafe235589cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6f7ecbbe933dcfb6b5fc8eea5ca4ee8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ad6f7ecbbe933dcfb6b5fc8eea5ca4ee8">nullify</a> (<a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a> nextRng)</td></tr>
-<tr class="separator:ad6f7ecbbe933dcfb6b5fc8eea5ca4ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21704ef027384718544f6198846b871b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a21704ef027384718544f6198846b871b">checkAllocateNext</a> (int newCap)</td></tr>
-<tr class="separator:a21704ef027384718544f6198846b871b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad596b4fc4929c14b27753c5e17f5ab59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ad596b4fc4929c14b27753c5e17f5ab59">allocateHead</a> ()</td></tr>
-<tr class="separator:ad596b4fc4929c14b27753c5e17f5ab59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a192000f430504a4772f7bbc5895ae850">calculate</a> ()</td></tr>
-<tr class="separator:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a192000f430504a4772f7bbc5895ae850">calculate</a> ()</td></tr>
-<tr class="separator:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a6cf459a5a9e4c4f275f80a91cd04487d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a6cf459a5a9e4c4f275f80a91cd04487d">setSearchBox</a> (const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;pointPos, const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;flags, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> cellSize)</td></tr>
+<tr class="separator:a6cf459a5a9e4c4f275f80a91cd04487d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a178bd39dbf9cf7db2a4355d9d2038a6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a178bd39dbf9cf7db2a4355d9d2038a6a">allocateArrays</a> (<a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a> nextRng)</td></tr>
+<tr class="separator:a178bd39dbf9cf7db2a4355d9d2038a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b82d2826f594b9cc8048d7cbb404fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a02b82d2826f594b9cc8048d7cbb404fe">checkAllocateNext</a> (<a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a> nextRng)</td></tr>
+<tr class="separator:a02b82d2826f594b9cc8048d7cbb404fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9796e6cc392b31e33a3404917aa8e897"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a9796e6cc392b31e33a3404917aa8e897">nullifyHead</a> ()</td></tr>
+<tr class="separator:a9796e6cc392b31e33a3404917aa8e897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f8e13b070c799d50e1b18620c848bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ae6f8e13b070c799d50e1b18620c848bb">nullifyNext</a> (<a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a> nextRng)</td></tr>
+<tr class="separator:ae6f8e13b070c799d50e1b18620c848bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a30209db0f680c0566f6a945e036e9da3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a30209db0f680c0566f6a945e036e9da3">capacity_</a> = 1</td></tr>
-<tr class="separator:a30209db0f680c0566f6a945e036e9da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af480fbb9c7ab1452f3416bd0a5446f2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ae6a68b2bd4d845883b5c67189d67d816">ViewType3D</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#af480fbb9c7ab1452f3416bd0a5446f2f">head_</a></td></tr>
-<tr class="separator:af480fbb9c7ab1452f3416bd0a5446f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea09d42d20d5235a3c688c143b6d0a6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aea09d42d20d5235a3c688c143b6d0a6f">next_</a></td></tr>
-<tr class="separator:aea09d42d20d5235a3c688c143b6d0a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aeb6e97193592d200d3e619b073d19333"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html">cells</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aeb6e97193592d200d3e619b073d19333">domainCells_</a></td></tr>
+<tr class="separator:aeb6e97193592d200d3e619b073d19333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a53a188b64fe18e79e597fc0986dd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html">cells</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a55a53a188b64fe18e79e597fc0986dd9">searchCells_</a></td></tr>
+<tr class="separator:a55a53a188b64fe18e79e597fc0986dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a236c86d026feedc50038ea68070ee5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1mapperNBS.html#ab19a814a38b96775c94f43a419c40d22">HeadType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a1a236c86d026feedc50038ea68070ee5">head_</a> {&quot;NBS::head&quot;,1,1,1}</td></tr>
+<tr class="separator:a1a236c86d026feedc50038ea68070ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a228408038960e3e74a4dc525ca643e9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1mapperNBS.html#aded2f9ec2384f7ba06f4cfbc2afbaa8f">NextType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a228408038960e3e74a4dc525ca643e9e">next_</a> {&quot;NBS::next&quot;, 1}</td></tr>
+<tr class="separator:a228408038960e3e74a4dc525ca643e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11501a9b4425b9eaed1f5f6fbf6a87a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a11501a9b4425b9eaed1f5f6fbf6a87a4">nextCapacity_</a> = 0</td></tr>
+<tr class="separator:a11501a9b4425b9eaed1f5f6fbf6a87a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d5bbf62c8297d4b5c6e7ffde3e0036"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#ab3d5bbf62c8297d4b5c6e7ffde3e0036">lastCheckForBox_</a> = 0</td></tr>
+<tr class="separator:ab3d5bbf62c8297d4b5c6e7ffde3e0036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed3240e17a562b93981734303325b43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a9ed3240e17a562b93981734303325b43">buildCount_</a> = 0</td></tr>
+<tr class="separator:a9ed3240e17a562b93981734303325b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c4a15dc21c88343006edd4ce8d89ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#aa7c4a15dc21c88343006edd4ce8d89ec">adjustableBox_</a> = false</td></tr>
+<tr class="separator:aa7c4a15dc21c88343006edd4ce8d89ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a574e0a4fe53583228a398a16b5c2b27e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a574e0a4fe53583228a398a16b5c2b27e">nextOwner_</a> = true</td></tr>
 <tr class="separator:a574e0a4fe53583228a398a16b5c2b27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ec329c37c34493564c088f010bde5c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a7ec329c37c34493564c088f010bde5c0">pointPosition_</a></td></tr>
-<tr class="separator:a7ec329c37c34493564c088f010bde5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:aab1dcc2ee3915125ba5aa7e66678d2b8 inherit pro_attribs_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1box.html">box</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aab1dcc2ee3915125ba5aa7e66678d2b8">domain_</a></td></tr>
-<tr class="separator:aab1dcc2ee3915125ba5aa7e66678d2b8 inherit pro_attribs_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b9d14b08f72f5e11d83d1c065e23bac inherit pro_attribs_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a0b9d14b08f72f5e11d83d1c065e23bac">cellSize_</a></td></tr>
-<tr class="separator:a0b9d14b08f72f5e11d83d1c065e23bac inherit pro_attribs_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53f28b84a7bbd7b06110e9f35df5119a inherit pro_attribs_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a53f28b84a7bbd7b06110e9f35df5119a">numCells_</a></td></tr>
-<tr class="separator:a53f28b84a7bbd7b06110e9f35df5119a inherit pro_attribs_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a7d764ec30335c9a8389f40cfa38e4130"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a7d764ec30335c9a8389f40cfa38e4130">checkInterval_</a> = 1000</td></tr>
+<tr class="separator:a7d764ec30335c9a8389f40cfa38e4130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a275ba007d0587a7ddce19fb97a7147f7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1mapperNBS.html#a275ba007d0587a7ddce19fb97a7147f7">enlargementFactor_</a> = 1.1</td></tr>
+<tr class="separator:a275ba007d0587a7ddce19fb97a7147f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename executionSpace&gt;<br />
-class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
-
-
+<div class="textblock">
 <p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00034">34</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a200e2b36a2cd413a512279c0089c6b50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a200e2b36a2cd413a512279c0089c6b50">&#9670;&nbsp;</a></span>IdType</h2>
+<a id="ab19a814a38b96775c94f43a419c40d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19a814a38b96775c94f43a419c40d22">&#9670;&nbsp;</a></span>HeadType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#a200e2b36a2cd413a512279c0089c6b50">IdType</a> =  <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#ab19a814a38b96775c94f43a419c40d22">HeadType</a> =  <a class="el" href="namespacepFlow.html#aeb0cbff8d6be1ec031ea498a603ac222">deviceViewType3D</a>&lt;<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00038">38</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aded2f9ec2384f7ba06f4cfbc2afbaa8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aded2f9ec2384f7ba06f4cfbc2afbaa8f">&#9670;&nbsp;</a></span>NextType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#aded2f9ec2384f7ba06f4cfbc2afbaa8f">NextType</a> =  <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -385,145 +250,9 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 
 </div>
 </div>
-<a id="ae73570f5a8fa6f2a0123b6a44eadca22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae73570f5a8fa6f2a0123b6a44eadca22">&#9670;&nbsp;</a></span>IndexType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> =  <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00042">42</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aeddf2432738cfab3cda287d6fb96e048"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeddf2432738cfab3cda287d6fb96e048">&#9670;&nbsp;</a></span>Cells</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#aeddf2432738cfab3cda287d6fb96e048">Cells</a> =  <a class="el" href="classpFlow_1_1cells.html">cells</a>&lt;<a class="el" href="classpFlow_1_1mapperNBS.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00044">44</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3810d08b3beabddce512c36e16a23cd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3810d08b3beabddce512c36e16a23cd7">&#9670;&nbsp;</a></span>CellType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#a3810d08b3beabddce512c36e16a23cd7">CellType</a> =  typename <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">Cells::CellType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00046">46</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a268a0b77c6f89665e5ef14307a3f1731"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a268a0b77c6f89665e5ef14307a3f1731">&#9670;&nbsp;</a></span>execution_space</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a> =  executionSpace</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00048">48</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac5b08fe17cf30c7c64a5ee12370133e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5b08fe17cf30c7c64a5ee12370133e9">&#9670;&nbsp;</a></span>memory_space</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> =  typename execution_space::memory_space</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00050">50</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="acbd6c3ada7ac256c9703465b1f009810"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbd6c3ada7ac256c9703465b1f009810">&#9670;&nbsp;</a></span>HeadType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#acbd6c3ada7ac256c9703465b1f009810">HeadType</a> =  <a class="el" href="namespacepFlow.html#ae6a68b2bd4d845883b5c67189d67d816">ViewType3D</a>&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00052">52</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a94771782ff2841007e80ca3839276da7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94771782ff2841007e80ca3839276da7">&#9670;&nbsp;</a></span>NextType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#a94771782ff2841007e80ca3839276da7">NextType</a> =  <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00054">54</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1eda470dc3fe355cb038b0a37a296a12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1eda470dc3fe355cb038b0a37a296a12">&#9670;&nbsp;</a></span>rangePolicyType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1mapperNBS.html#a1eda470dc3fe355cb038b0a37a296a12">rangePolicyType</a> =  Kokkos::RangePolicy&lt; Kokkos::IndexType&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&gt;, Kokkos::Schedule&lt;Kokkos::Static&gt;, <a class="el" href="classpFlow_1_1mapperNBS.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a>&gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00102">102</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aabb78939edc11d328987ccfe6cff9f2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabb78939edc11d328987ccfe6cff9f2a">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[1/4]</span></h2>
+<a id="a428d15598cf7ed504c1993edac83a33d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a428d15598cf7ed504c1993edac83a33d">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,23 +269,18 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00163">163</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
 </div>
 </div>
-<a id="aff165a8eab5bc9439dff09cdebdd8f34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff165a8eab5bc9439dff09cdebdd8f34">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[2/4]</span></h2>
+<a id="a080018267fa3a8b284eb85a8a25694d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a080018267fa3a8b284eb85a8a25694d3">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> </td>
@@ -573,8 +297,20 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>position</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pointPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>adjustableBox</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -588,81 +324,23 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00165">165</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00105">105</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
 
+<p class="reference">References <a class="el" href="pointFlag_8hpp_source.html#l00179">pointFlag&lt; ExecutionSpace &gt;::activeRange()</a>, <a class="el" href="mapperNBS_8cpp_source.html#l00074">mapperNBS::allocateArrays()</a>, and <a class="el" href="mapperNBS_8cpp_source.html#l00029">mapperNBS::setSearchBox()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a080018267fa3a8b284eb85a8a25694d3_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a080018267fa3a8b284eb85a8a25694d3_cgraph" alt=""/></div>
 </div>
-<a id="a25152f26d847dae6782533f4485fefff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25152f26d847dae6782533f4485fefff">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;&#160;</td>
-          <td class="paramname"><em>domain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>nx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>ny</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>nz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>position</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>nextOwner</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00185">185</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
 </div>
 </div>
 <a id="af52aee9b89ace9cd183601ccc3d505ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af52aee9b89ace9cd183601ccc3d505ec">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af52aee9b89ace9cd183601ccc3d505ec">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -673,7 +351,33 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a>&lt; executionSpace &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7200fb18d9b4afa7f52e96c9e4ba2795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7200fb18d9b4afa7f52e96c9e4ba2795">&#9670;&nbsp;</a></span>mapperNBS() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -713,8 +417,8 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad1e66f338b0cc8d9ba8098c7f0156f7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1e66f338b0cc8d9ba8098c7f0156f7a">&#9670;&nbsp;</a></span>nullifyHead()</h2>
+<a id="a6cf459a5a9e4c4f275f80a91cd04487d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cf459a5a9e4c4f275f80a91cd04487d">&#9670;&nbsp;</a></span>setSearchBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -723,120 +427,60 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void nullifyHead </td>
+          <td class="memname">bool setSearchBox </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pointPos</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00105">105</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00126">mapperNBS&lt; DefaultHostExecutionSpace &gt;::nullify()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_ad1e66f338b0cc8d9ba8098c7f0156f7a_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_ad1e66f338b0cc8d9ba8098c7f0156f7a_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_ad1e66f338b0cc8d9ba8098c7f0156f7a_icgraph" id="classpFlow_1_1mapperNBS_ad1e66f338b0cc8d9ba8098c7f0156f7a_icgraph">
-<area shape="rect" title=" " alt="" coords="271,13,367,39"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#a5b53f360232042bc4ea4bafe235589cb" title=" " alt="" coords="5,5,223,47"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a275473a4efdb1e6a14fc9814f03d11c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a275473a4efdb1e6a14fc9814f03d11c3">&#9670;&nbsp;</a></span>nullifyNext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">void nullifyNext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a>&#160;</td>
-          <td class="paramname"><em>nextRng</em></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
+          <td class="paramname"><em>cellSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00116">116</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00029">29</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00126">mapperNBS&lt; DefaultHostExecutionSpace &gt;::nullify()</a>.</p>
+<p class="reference">References <a class="el" href="streams_8hpp_source.html#l00037">END_INFO</a>, <a class="el" href="mapperNBSKernels_8cpp_source.html#l00027">pFlow::mapperNBSKernels::findPointExtends()</a>, <a class="el" href="streams_8hpp_source.html#l00036">INFORMATION</a>, <a class="el" href="kokkosAlgorithms_8hpp_source.html#l00104">pFlow::algorithms::KOKKOS::max()</a>, <a class="el" href="box_8hpp_source.html#l00097">box::maxPoint()</a>, <a class="el" href="kokkosAlgorithms_8hpp_source.html#l00124">pFlow::algorithms::KOKKOS::min()</a>, and <a class="el" href="box_8hpp_source.html#l00091">box::minPoint()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00105">mapperNBS::mapperNBS()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_a275473a4efdb1e6a14fc9814f03d11c3_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a275473a4efdb1e6a14fc9814f03d11c3_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_a275473a4efdb1e6a14fc9814f03d11c3_icgraph" id="classpFlow_1_1mapperNBS_a275473a4efdb1e6a14fc9814f03d11c3_icgraph">
-<area shape="rect" title=" " alt="" coords="271,13,364,39"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#a5b53f360232042bc4ea4bafe235589cb" title=" " alt="" coords="5,5,223,47"/>
-</map>
+<div class="center"><img src="classpFlow_1_1mapperNBS_a6cf459a5a9e4c4f275f80a91cd04487d_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a6cf459a5a9e4c4f275f80a91cd04487d_cgraph" alt=""/></div>
 </div>
-
-</div>
-</div>
-<a id="a5b53f360232042bc4ea4bafe235589cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b53f360232042bc4ea4bafe235589cb">&#9670;&nbsp;</a></span>nullify() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void nullify </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00126">126</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_a5b53f360232042bc4ea4bafe235589cb_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a5b53f360232042bc4ea4bafe235589cb_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_a5b53f360232042bc4ea4bafe235589cb_icgraph" id="classpFlow_1_1mapperNBS_a5b53f360232042bc4ea4bafe235589cb_icgraph">
-<area shape="rect" title=" " alt="" coords="303,50,365,77"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#ac4d9b554d7571777600bb20765ffe5bb" title=" " alt="" coords="25,5,235,47"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#aa4afb3a96a27bdfb352881bc97640669" title=" " alt="" coords="5,71,255,127"/>
-</map>
+<div class="center"><img src="classpFlow_1_1mapperNBS_a6cf459a5a9e4c4f275f80a91cd04487d_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a6cf459a5a9e4c4f275f80a91cd04487d_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="ad6f7ecbbe933dcfb6b5fc8eea5ca4ee8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6f7ecbbe933dcfb6b5fc8eea5ca4ee8">&#9670;&nbsp;</a></span>nullify() <span class="overload">[2/2]</span></h2>
+<a id="a178bd39dbf9cf7db2a4355d9d2038a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178bd39dbf9cf7db2a4355d9d2038a6a">&#9670;&nbsp;</a></span>allocateArrays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -845,26 +489,44 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void nullify </td>
+          <td class="memname">void allocateArrays </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a>&#160;</td>
           <td class="paramname"><em>nextRng</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00133">133</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00074">74</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="mapperNBS_8cpp_source.html#l00081">mapperNBS::checkAllocateNext()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00086">mapperNBS::head_</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00043">mapperNBS::NoPos</a>, <a class="el" href="mapperNBS_8cpp_source.html#l00099">mapperNBS::nullifyNext()</a>, <a class="el" href="Interaction_2contactSearch_2methods_2cellBased_2cells_8hpp_source.html#l00102">cells::nx()</a>, <a class="el" href="Interaction_2contactSearch_2methods_2cellBased_2cells_8hpp_source.html#l00108">cells::ny()</a>, <a class="el" href="Interaction_2contactSearch_2methods_2cellBased_2cells_8hpp_source.html#l00114">cells::nz()</a>, <a class="el" href="KokkosUtilities_8hpp_source.html#l00071">pFlow::reallocFill()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00084">mapperNBS::searchCells_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00105">mapperNBS::mapperNBS()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a178bd39dbf9cf7db2a4355d9d2038a6a_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a178bd39dbf9cf7db2a4355d9d2038a6a_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a178bd39dbf9cf7db2a4355d9d2038a6a_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a178bd39dbf9cf7db2a4355d9d2038a6a_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
-<a id="a21704ef027384718544f6198846b871b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21704ef027384718544f6198846b871b">&#9670;&nbsp;</a></span>checkAllocateNext()</h2>
+<a id="a02b82d2826f594b9cc8048d7cbb404fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b82d2826f594b9cc8048d7cbb404fe">&#9670;&nbsp;</a></span>checkAllocateNext()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -875,41 +537,42 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
         <tr>
           <td class="memname">void checkAllocateNext </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>newCap</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a>&#160;</td>
+          <td class="paramname"><em>nextRng</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00141">141</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00081">81</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00165">mapperNBS&lt; DefaultHostExecutionSpace &gt;::mapperNBS()</a>, <a class="el" href="NBS_8hpp_source.html#l00157">NBS&lt; executionSpace &gt;::objectSizeChanged()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00224">mapperNBS&lt; DefaultHostExecutionSpace &gt;::particlesCapcityChanged()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="Range_8hpp_source.html#l00101">Range&lt; T &gt;::end()</a>, and <a class="el" href="KokkosUtilities_8hpp_source.html#l00064">pFlow::reallocNoInit()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00074">mapperNBS::allocateArrays()</a>.</p>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_a21704ef027384718544f6198846b871b_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a21704ef027384718544f6198846b871b_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_a21704ef027384718544f6198846b871b_icgraph" id="classpFlow_1_1mapperNBS_a21704ef027384718544f6198846b871b_icgraph">
-<area shape="rect" title=" " alt="" coords="308,159,452,186"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#ac4d9b554d7571777600bb20765ffe5bb" title=" " alt="" coords="28,5,237,47"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#aa4afb3a96a27bdfb352881bc97640669" title=" " alt="" coords="8,71,257,127"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#aff165a8eab5bc9439dff09cdebdd8f34" title=" " alt="" coords="5,152,260,193"/>
-<area shape="rect" href="classpFlow_1_1NBS.html#a74280fc4f4e399c204b2186f7648f6a3" title=" " alt="" coords="19,218,246,245"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#a9e3805072fdaa03e819082d00b482616" title=" " alt="" coords="16,269,249,325"/>
-</map>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a02b82d2826f594b9cc8048d7cbb404fe_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a02b82d2826f594b9cc8048d7cbb404fe_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a02b82d2826f594b9cc8048d7cbb404fe_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a02b82d2826f594b9cc8048d7cbb404fe_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="ad596b4fc4929c14b27753c5e17f5ab59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad596b4fc4929c14b27753c5e17f5ab59">&#9670;&nbsp;</a></span>allocateHead()</h2>
+<a id="a9796e6cc392b31e33a3404917aa8e897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9796e6cc392b31e33a3404917aa8e897">&#9670;&nbsp;</a></span>nullifyHead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -918,7 +581,7 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void allocateHead </td>
+          <td class="memname">void nullifyHead </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -926,12 +589,67 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00151">151</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00094">94</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="VectorAlgorithm_8hpp_source.html#l00044">pFlow::fill()</a>.</p>
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a9796e6cc392b31e33a3404917aa8e897_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a9796e6cc392b31e33a3404917aa8e897_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="ae6f8e13b070c799d50e1b18620c848bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f8e13b070c799d50e1b18620c848bb">&#9670;&nbsp;</a></span>nullifyNext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nullifyNext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a>&#160;</td>
+          <td class="paramname"><em>nextRng</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00099">99</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="VectorAlgorithm_8hpp_source.html#l00044">pFlow::fill()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00074">mapperNBS::allocateArrays()</a>.</p>
+<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_ae6f8e13b070c799d50e1b18620c848bb_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_ae6f8e13b070c799d50e1b18620c848bb_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_ae6f8e13b070c799d50e1b18620c848bb_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_ae6f8e13b070c799d50e1b18620c848bb_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -944,7 +662,7 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
         <tr>
           <td class="memname">TypeInfoNV </td>
           <td>(</td>
-          <td class="paramtype">&quot;mapperNBS&lt; executionSpace &gt;&quot;&#160;</td>
+          <td class="paramtype">&quot;mapperNBS&quot;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -954,7 +672,7 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 </div>
 </div>
 <a id="a77e648ddd6318349e834b18e9b0aa229"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77e648ddd6318349e834b18e9b0aa229">&#9670;&nbsp;</a></span>operator=()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a77e648ddd6318349e834b18e9b0aa229">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -965,7 +683,7 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a>&amp; operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a>&lt; executionSpace &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -979,8 +697,8 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 
 </div>
 </div>
-<a id="ac1beee6aa2384d093165782ce8e176c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1beee6aa2384d093165782ce8e176c8">&#9670;&nbsp;</a></span>capacity()</h2>
+<a id="afc7fe2b88a16ffe79f50c442411daec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc7fe2b88a16ffe79f50c442411daec3">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -989,7 +707,33 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto capacity </td>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a>&amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a639ca8a7754aa6a5ede02cb5346b8fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639ca8a7754aa6a5ede02cb5346b8fa3">&#9670;&nbsp;</a></span>getCellIterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto getCellIterator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1002,12 +746,23 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00214">214</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00150">150</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="mapperNBS_8hpp_source.html#l00086">mapperNBS::head_</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00088">mapperNBS::next_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="NBS_8hpp_source.html#l00148">NBS::getCellIterator()</a>, and <a class="el" href="NBS_8hpp_source.html#l00059">NBS::impl_broadSearch()</a>.</p>
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a639ca8a7754aa6a5ede02cb5346b8fa3_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a639ca8a7754aa6a5ede02cb5346b8fa3_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
-<a id="a5ca5fc49c272458f76da73906c9e534b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ca5fc49c272458f76da73906c9e534b">&#9670;&nbsp;</a></span>getCellIterator()</h2>
+<a id="ae5b65a8c2f6f5bccb97df02e1d8ba765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b65a8c2f6f5bccb97df02e1d8ba765">&#9670;&nbsp;</a></span>getDomainCells()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1016,7 +771,7 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1mapperNBS_1_1cellIterator.html">cellIterator</a> getCellIterator </td>
+          <td class="memname">const auto&amp; getDomainCells </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1029,28 +784,23 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00219">219</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00155">155</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00134">pointRectCell::getCellIterator()</a>, <a class="el" href="NBS_8hpp_source.html#l00137">NBS&lt; executionSpace &gt;::getCellIterator()</a>, <a class="el" href="NBS_8hpp_source.html#l00132">NBS&lt; executionSpace &gt;::getCellIteratorLevels()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00101">pointRectCell::mapPOints()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="mapperNBS_8hpp_source.html#l00082">mapperNBS::domainCells_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="NBS_8hpp_source.html#l00153">NBS::getDomainCellsLevels()</a>.</p>
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_a5ca5fc49c272458f76da73906c9e534b_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a5ca5fc49c272458f76da73906c9e534b_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_a5ca5fc49c272458f76da73906c9e534b_icgraph" id="classpFlow_1_1mapperNBS_a5ca5fc49c272458f76da73906c9e534b_icgraph">
-<area shape="rect" title=" " alt="" coords="251,101,367,127"/>
-<area shape="rect" href="classpFlow_1_1pointRectCell.html#a639ca8a7754aa6a5ede02cb5346b8fa3" title=" " alt="" coords="27,5,181,47"/>
-<area shape="rect" href="classpFlow_1_1NBS.html#a188d6accc40606c9e68b384a6b9c66f7" title=" " alt="" coords="5,71,203,98"/>
-<area shape="rect" href="classpFlow_1_1NBS.html#a90c49472a54b9c4e27b35422af7bf148" title=" " alt="" coords="5,123,203,164"/>
-<area shape="rect" href="classpFlow_1_1pointRectCell.html#ab1b3e7c22e40d6e7a13bf59b378a8bd9" title=" " alt="" coords="27,188,181,229"/>
-</map>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_ae5b65a8c2f6f5bccb97df02e1d8ba765_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_ae5b65a8c2f6f5bccb97df02e1d8ba765_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a9e3805072fdaa03e819082d00b482616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e3805072fdaa03e819082d00b482616">&#9670;&nbsp;</a></span>particlesCapcityChanged()</h2>
+<a id="a22a14ed8df68bbf6af75f0616620dd7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a14ed8df68bbf6af75f0616620dd7f">&#9670;&nbsp;</a></span>getSearchCells()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1059,118 +809,7 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool particlesCapcityChanged </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>newCap</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00224">224</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aef627ff36bd5f5194201206c7a41eaa1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef627ff36bd5f5194201206c7a41eaa1">&#9670;&nbsp;</a></span>head() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&amp; head </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00231">231</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_aef627ff36bd5f5194201206c7a41eaa1_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_aef627ff36bd5f5194201206c7a41eaa1_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_aef627ff36bd5f5194201206c7a41eaa1_icgraph" id="classpFlow_1_1mapperNBS_aef627ff36bd5f5194201206c7a41eaa1_icgraph">
-<area shape="rect" title=" " alt="" coords="303,50,357,77"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#ac4d9b554d7571777600bb20765ffe5bb" title=" " alt="" coords="25,5,235,47"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#aa4afb3a96a27bdfb352881bc97640669" title=" " alt="" coords="5,71,255,127"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a31933b87666c5f903b5a7fb5887bde6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31933b87666c5f903b5a7fb5887bde6a">&#9670;&nbsp;</a></span>next() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&amp; next </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00237">237</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00261">mapperNBS&lt; DefaultHostExecutionSpace &gt;::setNext()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_a31933b87666c5f903b5a7fb5887bde6a_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a31933b87666c5f903b5a7fb5887bde6a_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_a31933b87666c5f903b5a7fb5887bde6a_icgraph" id="classpFlow_1_1mapperNBS_a31933b87666c5f903b5a7fb5887bde6a_icgraph">
-<area shape="rect" title=" " alt="" coords="303,86,353,113"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#ac4d9b554d7571777600bb20765ffe5bb" title=" " alt="" coords="25,5,235,47"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#aa4afb3a96a27bdfb352881bc97640669" title=" " alt="" coords="5,71,255,127"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#acfc73562130fa76004062f1f8344f7ce" title=" " alt="" coords="16,152,244,193"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="ad68b590e88bddfe3b444730716355d44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad68b590e88bddfe3b444730716355d44">&#9670;&nbsp;</a></span>head() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&amp; head </td>
+          <td class="memname">const auto&amp; getSearchCells </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1183,154 +822,44 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00243">243</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00160">160</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="mapperNBS_8hpp_source.html#l00084">mapperNBS::searchCells_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="NBS_8hpp_source.html#l00059">NBS::impl_broadSearch()</a>.</p>
+<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_a22a14ed8df68bbf6af75f0616620dd7f_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_a22a14ed8df68bbf6af75f0616620dd7f_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
-<a id="aa5ed71d121d430966f15c97806937fd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5ed71d121d430966f15c97806937fd5">&#9670;&nbsp;</a></span>next() <span class="overload">[2/2]</span></h2>
+<a id="aa211b81029e158653fac6e77af83e3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa211b81029e158653fac6e77af83e3ac">&#9670;&nbsp;</a></span>build()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&amp; next </td>
+          <td class="memname">bool build </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00249">249</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a94666ffc05d9ef8b9e710023171d3e4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94666ffc05d9ef8b9e710023171d3e4c">&#9670;&nbsp;</a></span>pointPosition()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&amp; pointPosition </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00255">255</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="acfc73562130fa76004062f1f8344f7ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfc73562130fa76004062f1f8344f7ce">&#9670;&nbsp;</a></span>setNext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void setNext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>next</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00261">261</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac4d9b554d7571777600bb20765ffe5bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac4d9b554d7571777600bb20765ffe5bb">&#9670;&nbsp;</a></span>build() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void build </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a>&#160;</td>
-          <td class="paramname"><em>activeRange</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00274">274</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="NBSLevel0_8hpp_source.html#l00152">NBSLevel0&lt; executionSpace &gt;::broadSearch()</a>, and <a class="el" href="NBS_8hpp_source.html#l00168">NBS&lt; executionSpace &gt;::broadSearch()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_ac4d9b554d7571777600bb20765ffe5bb_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_ac4d9b554d7571777600bb20765ffe5bb_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_ac4d9b554d7571777600bb20765ffe5bb_icgraph" id="classpFlow_1_1mapperNBS_ac4d9b554d7571777600bb20765ffe5bb_icgraph">
-<area shape="rect" title=" " alt="" coords="280,31,335,57"/>
-<area shape="rect" href="classpFlow_1_1NBSLevel0.html#a3d0828431ab6a95cdb8dd00c010ac14e" title=" " alt="" coords="5,5,232,32"/>
-<area shape="rect" href="classpFlow_1_1NBS.html#adb99f8dfb353cba7aca9b1bb8566163d" title=" " alt="" coords="27,56,211,83"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a6ab886e7dd6b9d59e9c2f4544e4c98da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ab886e7dd6b9d59e9c2f4544e4c98da">&#9670;&nbsp;</a></span>build() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void build </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a>&#160;</td>
-          <td class="paramname"><em>activeRange</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pointPos</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IncludeFunction&#160;</td>
-          <td class="paramname"><em>incld</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>searchBoxChanged</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1338,99 +867,24 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00300">300</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8cpp_source.html#l00125">125</a> of file <a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a>.</p>
 
+<p class="reference">References <a class="el" href="pointFlag_8hpp_source.html#l00179">pointFlag&lt; ExecutionSpace &gt;::activeRange()</a>, <a class="el" href="mapperNBSKernels_8cpp_source.html#l00148">pFlow::mapperNBSKernels::buildLists()</a>, <a class="el" href="mapperNBSKernels_8cpp_source.html#l00085">pFlow::mapperNBSKernels::buildListsReduce()</a>, <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, and <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>.</p>
+<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1mapperNBS_aa211b81029e158653fac6e77af83e3ac_cgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_aa211b81029e158653fac6e77af83e3ac_cgraph" alt=""/></div>
 </div>
-<a id="aa4afb3a96a27bdfb352881bc97640669"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4afb3a96a27bdfb352881bc97640669">&#9670;&nbsp;</a></span>buildCheckInDomain() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void buildCheckInDomain </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a>&#160;</td>
-          <td class="paramname"><em>activeRange</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00329">329</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00101">pointRectCell::mapPOints()</a>.</p>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1mapperNBS_aa4afb3a96a27bdfb352881bc97640669_icgraph.png" border="0" usemap="#classpFlow_1_1mapperNBS_aa4afb3a96a27bdfb352881bc97640669_icgraph" alt=""/></div>
-<map name="classpFlow_1_1mapperNBS_aa4afb3a96a27bdfb352881bc97640669_icgraph" id="classpFlow_1_1mapperNBS_aa4afb3a96a27bdfb352881bc97640669_icgraph">
-<area shape="rect" title=" " alt="" coords="208,13,365,39"/>
-<area shape="rect" href="classpFlow_1_1pointRectCell.html#ab1b3e7c22e40d6e7a13bf59b378a8bd9" title=" " alt="" coords="5,5,160,47"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a28cfc3d026365753bd3c02777c104dc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28cfc3d026365753bd3c02777c104dc0">&#9670;&nbsp;</a></span>buildCheckInDomain() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void buildCheckInDomain </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a304d8581876270871949bf5d4755036a">range</a>&#160;</td>
-          <td class="paramname"><em>activeRange</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">IncludeFunction&#160;</td>
-          <td class="paramname"><em>incld</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00359">359</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a30209db0f680c0566f6a945e036e9da3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30209db0f680c0566f6a945e036e9da3">&#9670;&nbsp;</a></span>capacity_</h2>
+<a id="a40983a388b53d013256aeb8bde6b384b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40983a388b53d013256aeb8bde6b384b">&#9670;&nbsp;</a></span>NoPos</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1439,24 +893,24 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> capacity_ = 1</td>
+          <td class="memname">constexpr <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> NoPos = 0xFFFFFFFF</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00087">87</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00043">43</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00214">mapperNBS&lt; DefaultHostExecutionSpace &gt;::capacity()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00141">mapperNBS&lt; DefaultHostExecutionSpace &gt;::checkAllocateNext()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00126">mapperNBS&lt; DefaultHostExecutionSpace &gt;::nullify()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00261">mapperNBS&lt; DefaultHostExecutionSpace &gt;::setNext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00074">mapperNBS::allocateArrays()</a>.</p>
 
 </div>
 </div>
-<a id="af480fbb9c7ab1452f3416bd0a5446f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af480fbb9c7ab1452f3416bd0a5446f2f">&#9670;&nbsp;</a></span>head_</h2>
+<a id="aeb6e97193592d200d3e619b073d19333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb6e97193592d200d3e619b073d19333">&#9670;&nbsp;</a></span>domainCells_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1465,24 +919,24 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#ae6a68b2bd4d845883b5c67189d67d816">ViewType3D</a>&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; head_</td>
+          <td class="memname"><a class="el" href="classpFlow_1_1cells.html">cells</a> domainCells_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00089">89</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00082">82</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00151">mapperNBS&lt; DefaultHostExecutionSpace &gt;::allocateHead()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00219">mapperNBS&lt; DefaultHostExecutionSpace &gt;::getCellIterator()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00231">mapperNBS&lt; DefaultHostExecutionSpace &gt;::head()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00105">mapperNBS&lt; DefaultHostExecutionSpace &gt;::nullifyHead()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00155">mapperNBS::getDomainCells()</a>.</p>
 
 </div>
 </div>
-<a id="aea09d42d20d5235a3c688c143b6d0a6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea09d42d20d5235a3c688c143b6d0a6f">&#9670;&nbsp;</a></span>next_</h2>
+<a id="a55a53a188b64fe18e79e597fc0986dd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a53a188b64fe18e79e597fc0986dd9">&#9670;&nbsp;</a></span>searchCells_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1491,19 +945,167 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; next_</td>
+          <td class="memname"><a class="el" href="classpFlow_1_1cells.html">cells</a> searchCells_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00091">91</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00084">84</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00141">mapperNBS&lt; DefaultHostExecutionSpace &gt;::checkAllocateNext()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00219">mapperNBS&lt; DefaultHostExecutionSpace &gt;::getCellIterator()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00237">mapperNBS&lt; DefaultHostExecutionSpace &gt;::next()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00116">mapperNBS&lt; DefaultHostExecutionSpace &gt;::nullifyNext()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00261">mapperNBS&lt; DefaultHostExecutionSpace &gt;::setNext()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00074">mapperNBS::allocateArrays()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00160">mapperNBS::getSearchCells()</a>.</p>
+
+</div>
+</div>
+<a id="a1a236c86d026feedc50038ea68070ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a236c86d026feedc50038ea68070ee5">&#9670;&nbsp;</a></span>head_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1mapperNBS.html#ab19a814a38b96775c94f43a419c40d22">HeadType</a> head_ {&quot;NBS::head&quot;,1,1,1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00086">86</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8cpp_source.html#l00074">mapperNBS::allocateArrays()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00150">mapperNBS::getCellIterator()</a>.</p>
+
+</div>
+</div>
+<a id="a228408038960e3e74a4dc525ca643e9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a228408038960e3e74a4dc525ca643e9e">&#9670;&nbsp;</a></span>next_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1mapperNBS.html#aded2f9ec2384f7ba06f4cfbc2afbaa8f">NextType</a> next_ {&quot;NBS::next&quot;, 1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00088">88</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00150">mapperNBS::getCellIterator()</a>.</p>
+
+</div>
+</div>
+<a id="a11501a9b4425b9eaed1f5f6fbf6a87a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11501a9b4425b9eaed1f5f6fbf6a87a4">&#9670;&nbsp;</a></span>nextCapacity_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nextCapacity_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00090">90</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab3d5bbf62c8297d4b5c6e7ffde3e0036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d5bbf62c8297d4b5c6e7ffde3e0036">&#9670;&nbsp;</a></span>lastCheckForBox_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> lastCheckForBox_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00092">92</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9ed3240e17a562b93981734303325b43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed3240e17a562b93981734303325b43">&#9670;&nbsp;</a></span>buildCount_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> buildCount_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00094">94</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa7c4a15dc21c88343006edd4ce8d89ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7c4a15dc21c88343006edd4ce8d89ec">&#9670;&nbsp;</a></span>adjustableBox_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool adjustableBox_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00096">96</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
 </div>
 </div>
@@ -1522,19 +1124,17 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00093">93</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00141">mapperNBS&lt; DefaultHostExecutionSpace &gt;::checkAllocateNext()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00116">mapperNBS&lt; DefaultHostExecutionSpace &gt;::nullifyNext()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00261">mapperNBS&lt; DefaultHostExecutionSpace &gt;::setNext()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00098">98</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7ec329c37c34493564c088f010bde5c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ec329c37c34493564c088f010bde5c0">&#9670;&nbsp;</a></span>pointPosition_</h2>
+<a id="a7d764ec30335c9a8389f40cfa38e4130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d764ec30335c9a8389f40cfa38e4130">&#9670;&nbsp;</a></span>checkInterval_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1543,24 +1143,47 @@ class pFlow::mapperNBS&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; pointPosition_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a> checkInterval_ = 1000</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00096">96</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="mapperNBS_8hpp_source.html#l00274">mapperNBS&lt; DefaultHostExecutionSpace &gt;::build()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; DefaultHostExecutionSpace &gt;::buildCheckInDomain()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00165">mapperNBS&lt; DefaultHostExecutionSpace &gt;::mapperNBS()</a>, and <a class="el" href="mapperNBS_8hpp_source.html#l00255">mapperNBS&lt; DefaultHostExecutionSpace &gt;::pointPosition()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00100">100</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/Interaction/contactSearch/methods/<a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a></li>
+<a id="a275ba007d0587a7ddce19fb97a7147f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a275ba007d0587a7ddce19fb97a7147f7">&#9670;&nbsp;</a></span>enlargementFactor_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a> enlargementFactor_ = 1.1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mapperNBS_8hpp_source.html#l00102">102</a> of file <a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/Interaction/contactSearch/methods/cellBased/NBS/<a class="el" href="mapperNBS_8hpp_source.html">mapperNBS.hpp</a></li>
+<li>src/Interaction/contactSearch/methods/cellBased/NBS/<a class="el" href="mapperNBS_8cpp_source.html">mapperNBS.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

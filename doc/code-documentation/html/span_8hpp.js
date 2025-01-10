@@ -1,5 +1,6 @@
 var span_8hpp =
 [
     [ "span", "classpFlow_1_1span.html", "classpFlow_1_1span" ],
-    [ "operator<<", "span_8hpp.html#a8dc96bbd2fd3e801ed80736c708aa831", null ]
+    [ "charSpan", "span_8hpp.html#a7e4d5909a08c3de9750f00fcb744fb0d", null ],
+    [ "charSpan", "span_8hpp.html#aa85b05028d6990b176c03a1f984a3891", null ]
 ];

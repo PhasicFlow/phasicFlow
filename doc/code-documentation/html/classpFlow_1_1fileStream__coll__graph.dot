@@ -1,0 +1,11 @@
+digraph "fileStream"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="fileStream",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Creates and manages an input/output file stream with specified format."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" inStream_" ,fontname="Helvetica"];
+  Node2 [label="uniquePtr\< std::ifstream \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" outStream_" ,fontname="Helvetica"];
+  Node6 [label="uniquePtr\< std::ofstream \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+}

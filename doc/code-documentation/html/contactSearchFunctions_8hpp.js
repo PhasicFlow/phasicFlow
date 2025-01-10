@@ -6,6 +6,5 @@ var contactSearchFunctions_8hpp =
     [ "mortonCode64Toxyz", "contactSearchFunctions_8hpp.html#a48c34bfcf0b43fb8bd3a0ffc596b751d", null ],
     [ "indexToCell", "contactSearchFunctions_8hpp.html#aede61a7f9c2792269f212fe8d5582173", null ],
     [ "boxExtent", "contactSearchFunctions_8hpp.html#af89e6417fc20ba48fec7c2ea002f2983", null ],
-    [ "indexToCell", "contactSearchFunctions_8hpp.html#a62c02f7fe0f69a4c0978a3e62f3d38cd", null ],
-    [ "sphereSphereCheck", "contactSearchFunctions_8hpp.html#abd79acdf069b1eb57cd79c26a7716bd3", null ]
+    [ "indexToCell", "contactSearchFunctions_8hpp.html#a62c02f7fe0f69a4c0978a3e62f3d38cd", null ]
 ];

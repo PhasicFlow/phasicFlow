@@ -1,6 +1,0 @@
-<map id="rotatingAxis" name="rotatingAxis">
-<area shape="rect" id="node1" title="An axis which rotates around itself at specified speed." alt="" coords="55,80,157,107"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1multiRotatingAxis.html" title="Defines an axis of rotation that rotates around itself and rotates around another axis." alt="" coords="37,155,175,181"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1timeInterval.html" title=" " alt="" coords="5,5,108,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1line.html" title=" " alt="" coords="132,5,179,32"/>
-</map>

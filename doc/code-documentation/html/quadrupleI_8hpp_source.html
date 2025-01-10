@@ -109,374 +109,271 @@ $(document).ready(function(){initNavTree('quadrupleI_8hpp_source.html',''); init
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">      O        C enter of</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">     O O       E ngineering and</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    O   O      M ultiscale modeling of</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow       </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  Copyright (C): www.cemf.ir</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  email: hamid.r.norouzi AT gmail.com</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------  </span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">Licence:</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  granular and multiphase flows. You can redistribute it and/or modify it under</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions. </span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>  T <a class="code" href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">pFlow::dot</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;(</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span>  oprnd1.s_ * oprnd2.s_ + </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">dot</a>(oprnd1.v(), oprnd2.v()) ;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> T <a class="code" href="classpFlow_1_1quadruple.html#a386dd44caa78e5884651bd4891674555">pFlow::quadruple&lt;T&gt;::length</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a386dd44caa78e5884651bd4891674555">   34</a></span>&#160;(</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;)<span class="keyword">const</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#aedf0e44e92e0f7a18c7c724daf0f52fa">sqrt</a>(<a class="code" href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">dot</a>(*<span class="keyword">this</span>,*<span class="keyword">this</span>));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1quadruple.html#a2030cdd583d3a6e60753a16dab2a0ae4">pFlow::quadruple&lt;T&gt;::normalize</a></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a2030cdd583d3a6e60753a16dab2a0ae4">   42</a></span>&#160;(</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    T l = <a class="code" href="tripleFwd_8hpp.html#ae1449f1d56abab2ec4d0f00b685fc478">length</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span>( <span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a><span class="keyword">&gt;</span>(l) &gt; <a class="code" href="namespacepFlow.html#abfbb7af55004f8113864a4da90c43545">smallValue</a> ) </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        *<span class="keyword">this</span> /= l;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator+ </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;(</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp; oprnd1,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp; oprnd2</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>(</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        oprnd1.s_ + oprnd2.s_,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        oprnd1.v_ + oprnd2.v_</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        );</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator+</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;(</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> T &amp; oprnd2</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        oprnd1.s_ + oprnd2,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        oprnd1.v_ + oprnd2</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        );</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator+</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;(</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">const</span> T &amp; oprnd1,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        oprnd1 + oprnd2.s_,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        oprnd1 + oprnd2.v_</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        );</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator- </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;(</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;)</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        oprnd1.s_ - oprnd2.s_,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        oprnd1.v_ - oprnd2.v_</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        );</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator-</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;(</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">const</span> T &amp; oprnd2</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;)</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        oprnd1.s_ - oprnd2,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        oprnd1.v_ - oprnd2</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        );</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator-</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;(</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">const</span> T &amp; oprnd1,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> T</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<a class="code" href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">pFlow::dot</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">return</span> oprnd1.s_ * oprnd2.s_ + <a class="code" href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">dot</a>(oprnd1.v(), oprnd2.v());</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> T</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a386dd44caa78e5884651bd4891674555">   30</a></span>&#160;<a class="code" href="classpFlow_1_1quadruple.html#a386dd44caa78e5884651bd4891674555">pFlow::quadruple&lt;T&gt;::length</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#a496bce895c9a3f6202f9272233be5cb3">sqrt</a>(<a class="code" href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">dot</a>(*<span class="keyword">this</span>, *<span class="keyword">this</span>));</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a2030cdd583d3a6e60753a16dab2a0ae4">   37</a></span>&#160;<a class="code" href="classpFlow_1_1quadruple.html#a2030cdd583d3a6e60753a16dab2a0ae4">pFlow::quadruple&lt;T&gt;::normalize</a>()</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    T l = <a class="code" href="tripleFwd_8hpp.html#ae1449f1d56abab2ec4d0f00b685fc478">length</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a><span class="keyword">&gt;</span>(l) &gt; <a class="code" href="namespacepFlow.html#abfbb7af55004f8113864a4da90c43545">smallValue</a>)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        *<span class="keyword">this</span> /= l;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="namespacepFlow.html#aaac6731013431213271642a4f634b9b9">pFlow::operator+</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; oprnd1, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; oprnd2)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>(oprnd1.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a> + oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>, oprnd1.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a> + oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                   <a class="code" href="namespacepFlow.html#aaac6731013431213271642a4f634b9b9">pFlow::operator+</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> T&amp; oprnd2)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ + oprnd2, oprnd1.v_ + oprnd2);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                   <a class="code" href="namespacepFlow.html#aaac6731013431213271642a4f634b9b9">pFlow::operator+</a>(<span class="keyword">const</span> T&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1 + oprnd2.s_, oprnd1 + oprnd2.v_);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<a class="code" href="namespacepFlow.html#a4681896306a76b19ede2b76a491eb858">pFlow::operator-</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ - oprnd2.s_, oprnd1.v_ - oprnd2.v_);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                   <a class="code" href="namespacepFlow.html#a4681896306a76b19ede2b76a491eb858">pFlow::operator-</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> T&amp; oprnd2)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ - oprnd2, oprnd1.v_ - oprnd2);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                   <a class="code" href="namespacepFlow.html#a4681896306a76b19ede2b76a491eb858">pFlow::operator-</a>(<span class="keyword">const</span> T&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1 - oprnd2.s_, oprnd1 - oprnd2.v_);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<a class="code" href="namespacepFlow.html#ab9c8214083f1a18660af96fbcd3304b7">pFlow::operator*</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ * oprnd2.s_, oprnd1.v_ * oprnd2.v_);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                   <a class="code" href="namespacepFlow.html#ab9c8214083f1a18660af96fbcd3304b7">pFlow::operator*</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> T&amp; oprnd2)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ * oprnd2, oprnd1.v_ * oprnd2);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                   <a class="code" href="namespacepFlow.html#ab9c8214083f1a18660af96fbcd3304b7">pFlow::operator*</a>(<span class="keyword">const</span> T&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1 * oprnd2.s_, oprnd1 * oprnd2.v_);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<a class="code" href="namespacepFlow.html#a876ef3ad73dadbed86887793dd7d40d5">pFlow::operator/</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ / oprnd2.s_, oprnd1.v_ / oprnd2.v_);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                   <a class="code" href="namespacepFlow.html#a876ef3ad73dadbed86887793dd7d40d5">pFlow::operator/</a>(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd1, <span class="keyword">const</span> T&amp; oprnd2)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;{</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1.s_ / oprnd2, oprnd1.v_ / oprnd2);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                   <a class="code" href="namespacepFlow.html#a876ef3ad73dadbed86887793dd7d40d5">pFlow::operator/</a>(<span class="keyword">const</span> T&amp; oprnd1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; oprnd2)</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        oprnd1 - oprnd2.s_,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        oprnd1 - oprnd2.v_</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        );</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator*</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;(</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;)</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;{</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        oprnd1.s_ * oprnd2.s_,</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        oprnd1.v_ * oprnd2.v_</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        );</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator*</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;(</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keyword">const</span> T &amp; oprnd2</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;)</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;{</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        oprnd1.s_ * oprnd2,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        oprnd1.v_ * oprnd2</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        );</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;}</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator*</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;(</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keyword">const</span> T &amp; oprnd1,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;)</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;{</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        oprnd1 * oprnd2.s_,</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        oprnd1 * oprnd2.v_</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        );</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;}</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator/</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;(</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;)</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;{</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        oprnd1.s_ / oprnd2.s_,</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        oprnd1.v_ / oprnd2.v_</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        );</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator/</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;(</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd1,</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keyword">const</span> T &amp; oprnd2</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;)</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;{</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        oprnd1.s_ / oprnd2,</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        oprnd1.v_ / oprnd2</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        );</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::operator/</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;(</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">const</span> T &amp; oprnd1,</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; oprnd2</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;)</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;{</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        oprnd1 / oprnd2.s_,</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        oprnd1 / oprnd2.v_</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        );</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;::operator</a>+=</div>
-<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#ad3882a45adcc3941a4c44a1d230ff70f">  217</a></span>&#160;(</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp; oprnd2</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;)</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;{   </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    this-&gt;s_ += oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    this-&gt;v_ += oprnd2.v_;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;}</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;::operator</a>-=</div>
-<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#ad27ac99e5c01417e1f5f9454dc3ec760">  227</a></span>&#160;(</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp; oprnd2</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;)</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;{   </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    this-&gt;s_ -= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    this-&gt;v_ -= oprnd2.v_;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;}</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;::operator</a>*=</div>
-<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a292b10239a582bd29065e86a1f26b8a5">  238</a></span>&#160;(</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp; oprnd2</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;)</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;{   </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    this-&gt;s_ *= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    this-&gt;v_ *= oprnd2.v_;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;::operator</a>/=</div>
-<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a2a132dfa15822f8349a9c5cc779bf421">  248</a></span>&#160;(</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp; oprnd2</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;)</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;{   </div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    this-&gt;s_ /= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    this-&gt;v_ /= oprnd2.v_;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;}</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;::operator</a>-</div>
-<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a97eca8e2bf90f9c5e3c7dafc05c6da82">  259</a></span>&#160;(</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;) <span class="keyword">const</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>(-this-&gt;s_, -this-&gt;v_);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;}</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;::operator</a>+</div>
-<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a083ac3ede868169de0251499c51fe01c">  267</a></span>&#160;(</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;) <span class="keyword">const</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;{</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">bool</span> pFlow::operator == </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;(</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp;opr1,</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a> &amp;opr2</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;){</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#aaf1dcea055a0402beff3cec1b0849d74">equal</a>(opr1.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>, opr2.s_) &amp;&amp; <a class="code" href="namespacepFlow.html#aaf1dcea055a0402beff3cec1b0849d74">equal</a>(opr1.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>, opr2.v_);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;};</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; pFlow::operator &lt;&lt;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;(</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    iOstream &amp; str,</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keyword">const</span> quadruple&lt;T&gt; &amp; ov</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;)</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;{</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    str &lt;&lt; token::BEGIN_LIST &lt;&lt; ov.w()</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        &lt;&lt; token::SPACE &lt;&lt; ov.x()</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        &lt;&lt; token::SPACE &lt;&lt; ov.y()</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        &lt;&lt; token::SPACE &lt;&lt; ov.z()</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        &lt;&lt; token::END_LIST;     </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    str.<a class="code" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a>(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;}</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="code" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a>&amp; pFlow::operator &gt;&gt;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;(</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    iIstream &amp; str,</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    quadruple&lt;T&gt; &amp; iv</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;)</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;{</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    str.<a class="code" href="classpFlow_1_1iIstream.html#aecfc9cc0a499c7d44de6a7562bcfea3f">readBegin</a>(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    str &gt;&gt; iv.w();</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    str &gt;&gt; iv.x();</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    str &gt;&gt; iv.y();</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    str &gt;&gt; iv.z();</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    str.readEnd(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    str.check(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordflow">return</span> str;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;}</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <span class="keywordtype">void</span> <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">pFlow::readIstream</a></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;(</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    iIstream &amp; str,</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    quadruple&lt;T&gt; &amp; iv</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;)</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;{</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    str.readBegin(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    T val;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    iv.w() = val;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    iv.x() = val;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    iv.y() = val;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    iv.z() = val;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    </div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    str.readEnd(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    str.check(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;}</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> quadruple&lt;T&gt;(oprnd1 / oprnd2.s_, oprnd1 / oprnd2.v_);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#ad3882a45adcc3941a4c44a1d230ff70f">  132</a></span>&#160;<a class="code" href="classpFlow_1_1quadruple.html#ad3882a45adcc3941a4c44a1d230ff70f">pFlow::quadruple&lt;T&gt;::operator+=</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; oprnd2)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    this-&gt;s_ += oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    this-&gt;v_ += oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#ad27ac99e5c01417e1f5f9454dc3ec760">  140</a></span>&#160;<a class="code" href="classpFlow_1_1quadruple.html#ad27ac99e5c01417e1f5f9454dc3ec760">pFlow::quadruple&lt;T&gt;::operator-=</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; oprnd2)</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;{</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    this-&gt;s_ -= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    this-&gt;v_ -= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a292b10239a582bd29065e86a1f26b8a5">  148</a></span>&#160;<a class="code" href="classpFlow_1_1quadruple.html#a292b10239a582bd29065e86a1f26b8a5">pFlow::quadruple&lt;T&gt;::operator*=</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; oprnd2)</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;{</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    this-&gt;s_ *= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    this-&gt;v_ *= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a2a132dfa15822f8349a9c5cc779bf421">  156</a></span>&#160;<a class="code" href="classpFlow_1_1quadruple.html#a2a132dfa15822f8349a9c5cc779bf421">pFlow::quadruple&lt;T&gt;::operator/=</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; oprnd2)</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    this-&gt;s_ /= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    this-&gt;v_ /= oprnd2.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a97eca8e2bf90f9c5e3c7dafc05c6da82">  164</a></span>&#160;                   <a class="code" href="classpFlow_1_1quadruple.html#a97eca8e2bf90f9c5e3c7dafc05c6da82">pFlow::quadruple&lt;T&gt;::operator-</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>(-this-&gt;s_, -this-&gt;v_);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;}</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a></div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="classpFlow_1_1quadruple.html#a083ac3ede868169de0251499c51fe01c">  171</a></span>&#160;                   <a class="code" href="classpFlow_1_1quadruple.html#a083ac3ede868169de0251499c51fe01c">pFlow::quadruple&lt;T&gt;::operator+</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<a class="code" href="namespacepFlow.html#a2aa8476957cbaf222153a74b2a6590dc">pFlow::operator==</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; opr1, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1quadruple.html">quadruple&lt;T&gt;</a>&amp; opr2)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacepFlow.html#ac51b1f978c0296b63a19e0033906c25c">equal</a>(opr1.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>, opr2.<a class="code" href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">s_</a>) &amp;&amp; <a class="code" href="namespacepFlow.html#ac51b1f978c0296b63a19e0033906c25c">equal</a>(opr1.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>, opr2.<a class="code" href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">v_</a>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;};</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                  <a class="code" href="namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619">pFlow::operator&lt;&lt;</a>(iOstream&amp; str, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; ov)</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;{</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    str &lt;&lt; token::BEGIN_LIST &lt;&lt; ov.w() &lt;&lt; token::SPACE &lt;&lt; ov.x() &lt;&lt; token::SPACE</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        &lt;&lt; ov.y() &lt;&lt; token::SPACE &lt;&lt; ov.z() &lt;&lt; token::END_LIST;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    str.<a class="code" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a>(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="code" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a>&amp;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                  <a class="code" href="namespacepFlow.html#a85ed561d066dae339196cd058783674f">pFlow::operator&gt;&gt;</a>(iIstream&amp; str, quadruple&lt;T&gt;&amp; iv)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;{</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    str.<a class="code" href="classpFlow_1_1iIstream.html#aecfc9cc0a499c7d44de6a7562bcfea3f">readBegin</a>(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    str &gt;&gt; iv.w();</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    str &gt;&gt; iv.x();</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    str &gt;&gt; iv.y();</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    str &gt;&gt; iv.z();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    str.readEnd(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    str.check(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">pFlow::readIstream</a>(iIstream&amp; str, quadruple&lt;T&gt;&amp; iv)</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;{</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    str.readBegin(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    T val;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    iv.w() = val;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    iv.x() = val;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    iv.y() = val;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <a class="code" href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a>(str, val);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    iv.z() = val;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    str.readEnd(<span class="stringliteral">&quot;quadruple&lt;T&gt;&quot;</span>);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    str.check(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1iIstream_html_aecfc9cc0a499c7d44de6a7562bcfea3f"><div class="ttname"><a href="classpFlow_1_1iIstream.html#aecfc9cc0a499c7d44de6a7562bcfea3f">pFlow::iIstream::readBegin</a></div><div class="ttdeci">bool readBegin(const char *funcName)</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8cpp_source.html#l00211">iIstream.cpp:211</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_abfbb7af55004f8113864a4da90c43545"><div class="ttname"><a href="namespacepFlow.html#abfbb7af55004f8113864a4da90c43545">pFlow::smallValue</a></div><div class="ttdeci">const real smallValue</div><div class="ttdef"><b>Definition:</b> <a href="numericConstants_8hpp_source.html#l00033">numericConstants.hpp:33</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1quadruple_html_a386dd44caa78e5884651bd4891674555"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a386dd44caa78e5884651bd4891674555">pFlow::quadruple::length</a></div><div class="ttdeci">INLINE_FUNCTION_HD T length() const</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00034">quadrupleI.hpp:34</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1quadruple_html_a9c8eeef96b9216076734ba2fc5a2a834"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">pFlow::quadruple::v_</a></div><div class="ttdeci">triple&lt; T &gt; v_</div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00049">quadruple.hpp:49</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1quadruple_html_a2030cdd583d3a6e60753a16dab2a0ae4"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a2030cdd583d3a6e60753a16dab2a0ae4">pFlow::quadruple::normalize</a></div><div class="ttdeci">INLINE_FUNCTION_HD void normalize()</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00042">quadrupleI.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iIstream_html_aecfc9cc0a499c7d44de6a7562bcfea3f"><div class="ttname"><a href="classpFlow_1_1iIstream.html#aecfc9cc0a499c7d44de6a7562bcfea3f">pFlow::iIstream::readBegin</a></div><div class="ttdeci">bool readBegin(const char *funcName)</div><div class="ttdoc">Begin read of data chunk, starts with '('.</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8cpp_source.html#l00238">iIstream.cpp:238</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a97eca8e2bf90f9c5e3c7dafc05c6da82"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a97eca8e2bf90f9c5e3c7dafc05c6da82">pFlow::quadruple::operator-</a></div><div class="ttdeci">INLINE_FUNCTION_HD quadruple operator-() const</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00164">quadrupleI.hpp:164</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abfbb7af55004f8113864a4da90c43545"><div class="ttname"><a href="namespacepFlow.html#abfbb7af55004f8113864a4da90c43545">pFlow::smallValue</a></div><div class="ttdeci">const real smallValue</div><div class="ttdef"><b>Definition:</b> <a href="numericConstants_8hpp_source.html#l00031">numericConstants.hpp:31</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a386dd44caa78e5884651bd4891674555"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a386dd44caa78e5884651bd4891674555">pFlow::quadruple::length</a></div><div class="ttdeci">INLINE_FUNCTION_HD T length() const</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00030">quadrupleI.hpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a9c8eeef96b9216076734ba2fc5a2a834"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a9c8eeef96b9216076734ba2fc5a2a834">pFlow::quadruple::v_</a></div><div class="ttdeci">triple&lt; T &gt; v_</div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00047">quadruple.hpp:47</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a496bce895c9a3f6202f9272233be5cb3"><div class="ttname"><a href="namespacepFlow.html#a496bce895c9a3f6202f9272233be5cb3">pFlow::sqrt</a></div><div class="ttdeci">Vector&lt; T, Allocator &gt; sqrt(const Vector&lt; T, Allocator &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="VectorMath_8hpp_source.html#l00090">VectorMath.hpp:90</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a2030cdd583d3a6e60753a16dab2a0ae4"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a2030cdd583d3a6e60753a16dab2a0ae4">pFlow::quadruple::normalize</a></div><div class="ttdeci">INLINE_FUNCTION_HD void normalize()</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00037">quadrupleI.hpp:37</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_ac51b1f978c0296b63a19e0033906c25c"><div class="ttname"><a href="namespacepFlow.html#ac51b1f978c0296b63a19e0033906c25c">pFlow::equal</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool equal(const box &amp;b1, const box &amp;b2, real tol=smallValue)</div><div class="ttdef"><b>Definition:</b> <a href="box_8hpp_source.html#l00135">box.hpp:135</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a2aa8476957cbaf222153a74b2a6590dc"><div class="ttname"><a href="namespacepFlow.html#a2aa8476957cbaf222153a74b2a6590dc">pFlow::operator==</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool operator==(const box &amp;b1, const box &amp;b2)</div><div class="ttdef"><b>Definition:</b> <a href="box_8hpp_source.html#l00142">box.hpp:142</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a876ef3ad73dadbed86887793dd7d40d5"><div class="ttname"><a href="namespacepFlow.html#a876ef3ad73dadbed86887793dd7d40d5">pFlow::operator/</a></div><div class="ttdeci">fileSystem operator/(const fileSystem &amp;fs1, const fileSystem &amp;fs2)</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8cpp_source.html#l00280">fileSystem.cpp:280</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html_a922d2784284e8f6ee4009c3d92ba48b6"><div class="ttname"><a href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a></div><div class="ttdeci">#define FUNCTION_NAME</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00029">pFlowMacros.hpp:29</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1quadruple_html_a7a3b23d09bb683faabd9acf10fd6e245"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">pFlow::quadruple::s_</a></div><div class="ttdeci">T s_</div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00048">quadruple.hpp:48</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a4681896306a76b19ede2b76a491eb858"><div class="ttname"><a href="namespacepFlow.html#a4681896306a76b19ede2b76a491eb858">pFlow::operator-</a></div><div class="ttdeci">array2D&lt; T, nRow, nCol &gt; operator-(const array2D&lt; T, nRow, nCol &gt; &amp;arr1, const array2D&lt; T, nRow, nCol &gt; &amp;arr2)</div><div class="ttdef"><b>Definition:</b> <a href="array2D_8hpp_source.html#l00060">array2D.hpp:60</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a292b10239a582bd29065e86a1f26b8a5"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a292b10239a582bd29065e86a1f26b8a5">pFlow::quadruple::operator*=</a></div><div class="ttdeci">INLINE_FUNCTION_HD void operator*=(const quadruple &amp;oprnd2)</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00148">quadrupleI.hpp:148</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a7a3b23d09bb683faabd9acf10fd6e245"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a7a3b23d09bb683faabd9acf10fd6e245">pFlow::quadruple::s_</a></div><div class="ttdeci">T s_</div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00046">quadruple.hpp:46</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_ad3882a45adcc3941a4c44a1d230ff70f"><div class="ttname"><a href="classpFlow_1_1quadruple.html#ad3882a45adcc3941a4c44a1d230ff70f">pFlow::quadruple::operator+=</a></div><div class="ttdeci">INLINE_FUNCTION_HD void operator+=(const quadruple &amp;oprnd2)</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00132">quadrupleI.hpp:132</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1IOstream_html_a367eb3425fc4e8270e2aa961df8ac8a5"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">pFlow::IOstream::check</a></div><div class="ttdeci">virtual bool check(const char *operation) const</div><div class="ttdoc">Check IOstream status for given operation.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00042">IOstream.cpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a083ac3ede868169de0251499c51fe01c"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a083ac3ede868169de0251499c51fe01c">pFlow::quadruple::operator+</a></div><div class="ttdeci">INLINE_FUNCTION_HD quadruple operator+() const</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00171">quadrupleI.hpp:171</a></div></div>
 <div class="ttc" id="aquadrupleFwd_8hpp_html_a6b8bdd44e6ac0d39b65ebd0eef5d4600"><div class="ttname"><a href="quadrupleFwd_8hpp.html#a6b8bdd44e6ac0d39b65ebd0eef5d4600">dot</a></div><div class="ttdeci">INLINE_FUNCTION_HD T dot(const quadruple&lt; T &gt; &amp;oprnd1, const quadruple&lt; T &gt; &amp;oprnd2)</div></div>
-<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00033">iIstream.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdoc">Interface class for any input stream</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00037">iIstream.hpp:37</a></div></div>
 <div class="ttc" id="atripleFwd_8hpp_html_ae1449f1d56abab2ec4d0f00b685fc478"><div class="ttname"><a href="tripleFwd_8hpp.html#ae1449f1d56abab2ec4d0f00b685fc478">length</a></div><div class="ttdeci">INLINE_FUNCTION_HD T length(const triple&lt; T &gt; &amp;v1)</div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_a542d326bc30e30d52e9deb402759b872"><div class="ttname"><a href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div><div class="ttdeci">#define INLINE_FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00053">pFlowMacros.hpp:53</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_ad27ac99e5c01417e1f5f9454dc3ec760"><div class="ttname"><a href="classpFlow_1_1quadruple.html#ad27ac99e5c01417e1f5f9454dc3ec760">pFlow::quadruple::operator-=</a></div><div class="ttdeci">INLINE_FUNCTION_HD void operator-=(const quadruple &amp;oprnd2)</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00140">quadrupleI.hpp:140</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a85ed561d066dae339196cd058783674f"><div class="ttname"><a href="namespacepFlow.html#a85ed561d066dae339196cd058783674f">pFlow::operator&gt;&gt;</a></div><div class="ttdeci">INLINE_FUNCTION iIstream &amp; operator&gt;&gt;(iIstream &amp;str, AB3History &amp;ab3)</div><div class="ttdef"><b>Definition:</b> <a href="AdamsBashforth3_8hpp_source.html#l00041">AdamsBashforth3.hpp:41</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_a542d326bc30e30d52e9deb402759b872"><div class="ttname"><a href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div><div class="ttdeci">#define INLINE_FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00057">pFlowMacros.hpp:57</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a148d74ad0977268be8ea8b26a147f619"><div class="ttname"><a href="namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619">pFlow::operator&lt;&lt;</a></div><div class="ttdeci">INLINE_FUNCTION iOstream &amp; operator&lt;&lt;(iOstream &amp;str, const AB3History &amp;ab3)</div><div class="ttdef"><b>Definition:</b> <a href="AdamsBashforth3_8hpp_source.html#l00057">AdamsBashforth3.hpp:57</a></div></div>
 <div class="ttc" id="aquadrupleFwd_8hpp_html_a7e11ea9cc5bee9e4bf7026b05639c3ac"><div class="ttname"><a href="quadrupleFwd_8hpp.html#a7e11ea9cc5bee9e4bf7026b05639c3ac">readIstream</a></div><div class="ttdeci">INLINE_FUNCTION_H void readIstream(iIstream &amp;str, quadruple&lt; T &gt; &amp;iv)</div></div>
-<div class="ttc" id="aclasspFlow_1_1quadruple_html"><div class="ttname"><a href="classpFlow_1_1quadruple.html">pFlow::quadruple</a></div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00037">quadruple.hpp:37</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aedf0e44e92e0f7a18c7c724daf0f52fa"><div class="ttname"><a href="namespacepFlow.html#aedf0e44e92e0f7a18c7c724daf0f52fa">pFlow::sqrt</a></div><div class="ttdeci">INLINE_FUNCTION_HD real sqrt(real x)</div><div class="ttdef"><b>Definition:</b> <a href="math_8hpp_source.html#l00148">math.hpp:148</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_a8e2f73fa5c113f21c9c9edb67a974f5e"><div class="ttname"><a href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a></div><div class="ttdeci">#define INLINE_FUNCTION_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00051">pFlowMacros.hpp:51</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aaf1dcea055a0402beff3cec1b0849d74"><div class="ttname"><a href="namespacepFlow.html#aaf1dcea055a0402beff3cec1b0849d74">pFlow::equal</a></div><div class="ttdeci">INLINE_FUNCTION_HD bool equal(const real &amp;s1, const real &amp;s2)</div><div class="ttdef"><b>Definition:</b> <a href="bTypesFunctions_8hpp_source.html#l00188">bTypesFunctions.hpp:188</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html_a2a132dfa15822f8349a9c5cc779bf421"><div class="ttname"><a href="classpFlow_1_1quadruple.html#a2a132dfa15822f8349a9c5cc779bf421">pFlow::quadruple::operator/=</a></div><div class="ttdeci">INLINE_FUNCTION_HD void operator/=(const quadruple &amp;oprnd2)</div><div class="ttdef"><b>Definition:</b> <a href="quadrupleI_8hpp_source.html#l00156">quadrupleI.hpp:156</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_ab9c8214083f1a18660af96fbcd3304b7"><div class="ttname"><a href="namespacepFlow.html#ab9c8214083f1a18660af96fbcd3304b7">pFlow::operator*</a></div><div class="ttdeci">array2D&lt; T, nRow, nCol &gt; operator*(const array2D&lt; T, nRow, nCol &gt; &amp;arr1, const array2D&lt; T, nRow, nCol &gt; &amp;arr2)</div><div class="ttdef"><b>Definition:</b> <a href="array2D_8hpp_source.html#l00073">array2D.hpp:73</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html"><div class="ttname"><a href="classpFlow_1_1quadruple.html">pFlow::quadruple</a></div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00036">quadruple.hpp:36</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_a8e2f73fa5c113f21c9c9edb67a974f5e"><div class="ttname"><a href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a></div><div class="ttdeci">#define INLINE_FUNCTION_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00055">pFlowMacros.hpp:55</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdoc">Interface class for any output stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00059">iOstream.hpp:59</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aaac6731013431213271642a4f634b9b9"><div class="ttname"><a href="namespacepFlow.html#aaac6731013431213271642a4f634b9b9">pFlow::operator+</a></div><div class="ttdeci">message operator+(message::EVENT evnt1, message::EVENT evnt2)</div><div class="ttdef"><b>Definition:</b> <a href="message_8hpp_source.html#l00216">message.hpp:216</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_e8baec020e471dff3bc06b812491e6c5.html">types</a></li><li class="navelem"><a class="el" href="dir_2eb06cd66568dce23de9f512d86706ca.html">quadruple</a></li><li class="navelem"><a class="el" href="quadrupleI_8hpp.html">quadrupleI.hpp</a></li>

@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="checkStatic\< T \>::has\l_static_member_TYPENAME\l\< testType, Ret(Args...)\l\>::Check\< U, U \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structpFlow_1_1checkStatic_1_1has__static__member__TYPENAME_3_01testType_00_01Ret_07Args_8_8_8_08_4_1_1Check.html",tooltip=" "];
+}

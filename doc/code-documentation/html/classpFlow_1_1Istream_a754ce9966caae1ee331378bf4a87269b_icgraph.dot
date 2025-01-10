@@ -1,0 +1,12 @@
+digraph "name"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="name",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Return the name of the stream."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::dictionary::\ldictionary",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a5de3e57e04d59bc11f6c540fa5e84ea2",tooltip="construct a dictionary with name and read it from file"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::stlFile::read",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1stlFile.html#af816873151ddb0126e98bb2f914d8ed5",tooltip=" "];
+}

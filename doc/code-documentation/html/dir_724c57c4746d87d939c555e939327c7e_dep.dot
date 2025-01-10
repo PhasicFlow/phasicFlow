@@ -1,0 +1,19 @@
+digraph "src/phasicFlow/structuredData/line" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_0b265ec0eb5bc5fbad75b6fd7b5b024b {
+    graph [ bgcolor="#ddddee", pencolor="black", label="structuredData" fontname="Helvetica", fontsize="10", URL="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html"]
+  dir_724c57c4746d87d939c555e939327c7e [shape=box, label="line", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_724c57c4746d87d939c555e939327c7e.html"];
+  }
+  dir_e8baec020e471dff3bc06b812491e6c5 [shape=box label="types" fillcolor="white" style="filled" color="red" URL="dir_e8baec020e471dff3bc06b812491e6c5.html"];
+  dir_4419dd78bee2bde1362d842a02bd0463 [shape=box label="typeSelection" URL="dir_4419dd78bee2bde1362d842a02bd0463.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db [shape=box label="dictionary" fillcolor="white" style="filled" color="red" URL="dir_1220c712ed5f98fd84ba71b4848374db.html"];
+  dir_e8baec020e471dff3bc06b812491e6c5->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="3", labeldistance=1.5 headhref="dir_000175_000179.html"];
+  dir_4419dd78bee2bde1362d842a02bd0463->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="2", labeldistance=1.5 headhref="dir_000179_000175.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="2", labeldistance=1.5 headhref="dir_000112_000175.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="1", labeldistance=1.5 headhref="dir_000112_000179.html"];
+  dir_724c57c4746d87d939c555e939327c7e->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="1", labeldistance=1.5 headhref="dir_000151_000175.html"];
+  dir_724c57c4746d87d939c555e939327c7e->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="1", labeldistance=1.5 headhref="dir_000151_000179.html"];
+  dir_724c57c4746d87d939c555e939327c7e->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000151_000112.html"];
+}

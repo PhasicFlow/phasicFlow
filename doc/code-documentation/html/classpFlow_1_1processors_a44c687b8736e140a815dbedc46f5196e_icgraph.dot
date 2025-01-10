@@ -1,0 +1,14 @@
+digraph "globalRank"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="globalRank",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Rank of the processor in the global MPI."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::regularSimulation\lDomain::createBoundaryDicts",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1regularSimulationDomain.html#aa5ffcd53200f744cf111c760815cdf70",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="globalMaster",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#a9b35ef739b3be47c11669f263e5186ff",tooltip="Is this processor the master processor?"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::localProcessors\l::localProcessors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1localProcessors.html#ac737410453668a4e9ee240f4da0263e3",tooltip="Construct a local processor communication from global communicator using a name and ranks."];
+}

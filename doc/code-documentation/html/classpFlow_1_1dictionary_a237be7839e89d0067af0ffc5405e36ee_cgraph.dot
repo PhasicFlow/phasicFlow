@@ -1,0 +1,14 @@
+digraph "addOrKeep"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="addOrKeep",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="addPtr",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a520c6483b3b2e0fa7d3997be204f3893",tooltip="add a pointer entry (dictionary/dataEntry) replaces this entry with existing one and issue a warning"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="containsDataEntry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a7ca8222c7de98177fe1e8e9d2615f77d",tooltip="check if a data entry exist"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::iEntry::keyword",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iEntry.html#a7c88d41e6cee4f2ba2bfa06e3078373a",tooltip="return keyword"];
+}

@@ -1,0 +1,10 @@
+digraph "mass"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="mass",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="initializeParticles",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1grainParticles.html#a84343969d723c548f0f20fcd9294d351",tooltip="Insert new particles in position with specified shapes."];
+}

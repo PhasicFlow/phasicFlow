@@ -1,0 +1,17 @@
+digraph "src/phasicFlow/structuredData/pointStructure/selectors/selectBox" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_5063638124a544f0632771a0f8d28fb6 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="selectors" fontname="Helvetica", fontsize="10", URL="dir_5063638124a544f0632771a0f8d28fb6.html"]
+  dir_e3417ffcd22fc3b4916e8ce91ea2a6c8 [shape=box, label="selectBox", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_e3417ffcd22fc3b4916e8ce91ea2a6c8.html"];
+  }
+  dir_ab1bedec1dabb2ed23fd7ef97be7faaf [shape=box label="pointStructure" fillcolor="white" style="filled" color="red" URL="dir_ab1bedec1dabb2ed23fd7ef97be7faaf.html"];
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [shape=box label="box" URL="dir_e8a9bd8d4c80a50a4f7c200c882d5c23.html"];
+  dir_76dfacc83ecf8edeedc0782b54ac44a8 [shape=box label="pStructSelector" URL="dir_76dfacc83ecf8edeedc0782b54ac44a8.html"];
+  dir_ab1bedec1dabb2ed23fd7ef97be7faaf->dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [headlabel="2", labeldistance=1.5 headhref="dir_000163_000146.html"];
+  dir_76dfacc83ecf8edeedc0782b54ac44a8->dir_ab1bedec1dabb2ed23fd7ef97be7faaf [headlabel="1", labeldistance=1.5 headhref="dir_000166_000163.html"];
+  dir_e3417ffcd22fc3b4916e8ce91ea2a6c8->dir_ab1bedec1dabb2ed23fd7ef97be7faaf [headlabel="1", labeldistance=1.5 headhref="dir_000167_000163.html"];
+  dir_e3417ffcd22fc3b4916e8ce91ea2a6c8->dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [headlabel="1", labeldistance=1.5 headhref="dir_000167_000146.html"];
+  dir_e3417ffcd22fc3b4916e8ce91ea2a6c8->dir_76dfacc83ecf8edeedc0782b54ac44a8 [headlabel="1", labeldistance=1.5 headhref="dir_000167_000166.html"];
+}

@@ -1,0 +1,11 @@
+digraph "solvers/sphereGranFlow" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_65b24c28d0f232e494405d4f9f0c5236 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="solvers" fontname="Helvetica", fontsize="10", URL="dir_65b24c28d0f232e494405d4f9f0c5236.html"]
+  dir_ac9f1d02bd348986b458efcb0494a045 [shape=box, label="sphereGranFlow", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_ac9f1d02bd348986b458efcb0494a045.html"];
+  }
+  dir_68267d1309a1af8e8297ef4c3efbcdba [shape=box label="src" fillcolor="white" style="filled" color="red" URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"];
+  dir_ac9f1d02bd348986b458efcb0494a045->dir_68267d1309a1af8e8297ef4c3efbcdba [headlabel="13", labeldistance=1.5 headhref="dir_000005_000007.html"];
+}

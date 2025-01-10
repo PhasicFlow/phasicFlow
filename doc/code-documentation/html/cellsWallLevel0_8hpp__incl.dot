@@ -1,0 +1,16 @@
+digraph "src/Interaction/contactSearch/methods/cellBased/NBS/cellsWallLevel0.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/Interaction/contactSearch\l/methods/cellBased/NBS/cellsWall\lLevel0.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="contactSearchGlobals.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$contactSearchGlobals_8hpp.html",tooltip=" "];
+  Node1 -> Node41 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node41 [label="contactSearchFunctions.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$contactSearchFunctions_8hpp.html",tooltip=" "];
+  Node41 -> Node42 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node42 [label="iBox.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iBox_8hpp.html",tooltip=" "];
+  Node1 -> Node60 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node60 [label="mapperNBS.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$mapperNBS_8hpp.html",tooltip=" "];
+  Node1 -> Node42 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

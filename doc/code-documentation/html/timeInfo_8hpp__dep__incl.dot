@@ -1,0 +1,25 @@
+digraph "src/phasicFlow/repository/Time/timeInfo.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/repository\l/Time/timeInfo.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/Interaction/contactSearch\l/contactSearch/contactSearch.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$contactSearch_8hpp.html",tooltip=" "];
+  Node1 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="src/Particles/GrainParticles\l/boundaryGrainParticles.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundaryGrainParticles_8hpp.html",tooltip=" "];
+  Node1 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="src/Particles/SphereParticles\l/boundarySphereParticles.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundarySphereParticles_8hpp.html",tooltip=" "];
+  Node1 -> Node43 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node43 [label="src/phasicFlow/demComponent\l/demComponent.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$demComponent_8hpp.html",tooltip=" "];
+  Node1 -> Node139 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node139 [label="src/phasicFlow/eventManagement\l/subscriber.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$subscriber_8hpp.html",tooltip=" "];
+  Node139 -> Node143 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node143 [label="src/phasicFlow/structured\lData/boundaries/boundaryBase\l/boundaryBase.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundaryBase_8hpp.html",tooltip=" "];
+  Node143 -> Node156 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node156 [label="src/phasicFlow/structured\lData/boundaries/boundaryList.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundaryList_8hpp.html",tooltip=" "];
+  Node1 -> Node171 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node171 [label="src/phasicFlow/repository\l/Time/timeControl.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$timeControl_8hpp.html",tooltip=" "];
+  Node1 -> Node143 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node156 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

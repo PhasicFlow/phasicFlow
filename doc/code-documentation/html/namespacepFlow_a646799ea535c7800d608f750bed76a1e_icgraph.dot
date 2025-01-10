@@ -1,0 +1,12 @@
+digraph "isDirectory"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="isDirectory",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Free function to check if the path is dir path."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="containingFiles",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a79c4a81c7fb0a27aabdb1b4a73c750d8",tooltip="A list of file paths that exist in the path."];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="subDirectories",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#ae21b012a6bc672b99ddbb629f4ecce09",tooltip="A list of sub-directories that exist in path."];
+}

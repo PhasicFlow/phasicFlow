@@ -1,0 +1,19 @@
+digraph "src/phasicFlow/structuredData/box" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_0b265ec0eb5bc5fbad75b6fd7b5b024b {
+    graph [ bgcolor="#ddddee", pencolor="black", label="structuredData" fontname="Helvetica", fontsize="10", URL="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html"]
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [shape=box, label="box", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_e8a9bd8d4c80a50a4f7c200c882d5c23.html"];
+  }
+  dir_e8baec020e471dff3bc06b812491e6c5 [shape=box label="types" fillcolor="white" style="filled" color="red" URL="dir_e8baec020e471dff3bc06b812491e6c5.html"];
+  dir_b13948a90891cb8a59f39ab8c50a8102 [shape=box label="streams" fillcolor="white" style="filled" color="red" URL="dir_b13948a90891cb8a59f39ab8c50a8102.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db [shape=box label="dictionary" fillcolor="white" style="filled" color="red" URL="dir_1220c712ed5f98fd84ba71b4848374db.html"];
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="1", labeldistance=1.5 headhref="dir_000146_000175.html"];
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="2", labeldistance=1.5 headhref="dir_000146_000131.html"];
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000146_000112.html"];
+  dir_e8baec020e471dff3bc06b812491e6c5->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="7", labeldistance=1.5 headhref="dir_000175_000131.html"];
+  dir_b13948a90891cb8a59f39ab8c50a8102->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="3", labeldistance=1.5 headhref="dir_000131_000175.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="2", labeldistance=1.5 headhref="dir_000112_000175.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="9", labeldistance=1.5 headhref="dir_000112_000131.html"];
+}

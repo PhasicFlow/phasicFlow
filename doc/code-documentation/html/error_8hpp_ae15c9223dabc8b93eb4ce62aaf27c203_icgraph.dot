@@ -1,0 +1,10 @@
+digraph "fatalExitPhasicFlow"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="fatalExitPhasicFlow",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Take actions to fatal exit phasicFlow."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="reportAndExit",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html#a10962b7eb0b0232a01564fd7b6024745",tooltip=" "];
+}

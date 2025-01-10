@@ -1,0 +1,24 @@
+digraph "src/Particles/Insertion/InsertionRegion/InsertionRegion.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/Particles/Insertion\l/InsertionRegion/InsertionRegion.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="insertionRegion.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$insertionRegion_8hpp.html",tooltip=" "];
+  Node1 -> Node42 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node42 [label="dictionary.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dictionary_8hpp.html",tooltip=" "];
+  Node1 -> Node98 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node98 [label="pointStructure.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$pointStructure_8hpp.html",tooltip=" "];
+  Node1 -> Node147 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node147 [label="insertion.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$insertion_8hpp.html",tooltip=" "];
+  Node1 -> Node148 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node148 [label="collisionCheck.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$collisionCheck_8hpp.html",tooltip=" "];
+  Node1 -> Node149 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node149 [label="pStructSelector.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$pStructSelector_8hpp.html",tooltip=" "];
+  Node1 -> Node150 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node150 [label="fieldSelector.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$fieldSelector_8hpp.html",tooltip=" "];
+  Node150 -> Node149 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node169 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node169 [label="InsertionRegion.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$InsertionRegion_8cpp.html",tooltip=" "];
+}

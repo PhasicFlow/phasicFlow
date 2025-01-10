@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: Field&lt; VectorField, T, PropType &gt; Class Template Reference</title>
+<title>PhasicFlow: Field&lt; T, MemorySpace &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,183 +104,426 @@ $(document).ready(function(){initNavTree('classpFlow_1_1Field.html',''); initRes
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classpFlow_1_1Field-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Field&lt; VectorField, T, PropType &gt; Class Template Reference</div>  </div>
+<div class="title">Field&lt; T, MemorySpace &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Field&lt; VectorField, T, PropType &gt;:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Field&lt; T, MemorySpace &gt;:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Field__inherit__graph.png" border="0" usemap="#Field_3_01VectorField_00_01T_00_01PropType_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="Field_3_01VectorField_00_01T_00_01PropType_01_4_inherit__map" id="Field_3_01VectorField_00_01T_00_01PropType_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="223,347,365,389"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="604,33,804,74"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="627,98,781,139"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="604,163,804,205"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="633,229,775,270"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="633,295,775,321"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="604,346,804,387"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="612,411,796,453"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="627,477,781,518"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="627,542,781,583"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="633,607,775,649"/>
-<area shape="rect" href="classpFlow_1_1Field.html" title=" " alt="" coords="633,673,775,714"/>
-<area shape="rect" title=" " alt="" coords="5,355,173,381"/>
-</map>
+<div class="center"><img src="classpFlow_1_1Field__inherit__graph.png" border="0" usemap="#Field_3_01T_00_01MemorySpace_01_4_inherit__map" alt="Inheritance graph"/></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Field&lt; VectorField, T, PropType &gt;:</div>
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Field&lt; T, MemorySpace &gt;:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Field__coll__graph.png" border="0" usemap="#Field_3_01VectorField_00_01T_00_01PropType_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="Field_3_01VectorField_00_01T_00_01PropType_01_4_coll__map" id="Field_3_01VectorField_00_01T_00_01PropType_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="17,80,161,121"/>
-<area shape="rect" title=" " alt="" coords="5,5,173,32"/>
-</map>
+<div class="center"><img src="classpFlow_1_1Field__coll__graph.png" border="0" usemap="#Field_3_01T_00_01MemorySpace_01_4_coll__map" alt="Collaboration graph"/></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a17f93ef6c6f1b09493247dc4bfc8034e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a17f93ef6c6f1b09493247dc4bfc8034e">VectorType</a> = VectorField&lt; T, PropType &gt;</td></tr>
-<tr class="separator:a17f93ef6c6f1b09493247dc4bfc8034e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c21898f701f587608a900ee4a709097"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> = <a class="el" href="classpFlow_1_1Field.html">Field</a>&lt; VectorField, T, PropType &gt;</td></tr>
-<tr class="separator:a9c21898f701f587608a900ee4a709097"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b8f0ba308c4037e39ec503b9a1e4d0b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a2b8f0ba308c4037e39ec503b9a1e4d0b">iterator</a> = typename VectorType::iterator</td></tr>
+<tr class="memitem:a90ee4a972a5e87720ef1e4b067a884ac"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a90ee4a972a5e87720ef1e4b067a884ac">VectorType</a> = <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a>&lt; T, MemorySpace &gt;</td></tr>
+<tr class="separator:a90ee4a972a5e87720ef1e4b067a884ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40dbbac51cc766420c6da450d95c1edc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> = <a class="el" href="classpFlow_1_1Field.html">Field</a>&lt; T, MemorySpace &gt;</td></tr>
+<tr class="separator:a40dbbac51cc766420c6da450d95c1edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a956cfd99b2704fca5961350f47963e88"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a956cfd99b2704fca5961350f47963e88">FieldTypeHost</a> = <a class="el" href="classpFlow_1_1Field.html">Field</a>&lt; T, <a class="el" href="namespacepFlow.html#a49dd1192cf116583abf7c726c7146851">HostSpace</a> &gt;</td></tr>
+<tr class="separator:a956cfd99b2704fca5961350f47963e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb38920d985a52377685fd852f62f4c2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#abb38920d985a52377685fd852f62f4c2">memory_space</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#a2e01852751e144707eefc63300bcce22">VectorType::memory_space</a></td></tr>
+<tr class="separator:abb38920d985a52377685fd852f62f4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b138cbd599d4fc0e95738e75f1e7445"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a0b138cbd599d4fc0e95738e75f1e7445">execution_space</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#a6dc9533c29ac1a7bda75f3f175df75fb">VectorType::execution_space</a></td></tr>
+<tr class="separator:a0b138cbd599d4fc0e95738e75f1e7445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b8f0ba308c4037e39ec503b9a1e4d0b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a2b8f0ba308c4037e39ec503b9a1e4d0b">iterator</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#a4d1ca55c8c62d4fbf3ea42d9919125a0">VectorType::iterator</a></td></tr>
 <tr class="separator:a2b8f0ba308c4037e39ec503b9a1e4d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e58d55cd5bd8a9c53545f1ae89ca05a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a0e58d55cd5bd8a9c53545f1ae89ca05a">constIterator</a> = typename VectorType::constIterator</td></tr>
-<tr class="separator:a0e58d55cd5bd8a9c53545f1ae89ca05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24e1cc28757f0776d455faa2a92cc094"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a24e1cc28757f0776d455faa2a92cc094">reference</a> = typename VectorType::reference</td></tr>
+<tr class="memitem:a0b878024ac2eb388b20acaf63eb29780"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a0b878024ac2eb388b20acaf63eb29780">const_iterator</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#a2601f8255f8a42148603816eb649c961">VectorType::const_iterator</a></td></tr>
+<tr class="separator:a0b878024ac2eb388b20acaf63eb29780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24e1cc28757f0776d455faa2a92cc094"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a24e1cc28757f0776d455faa2a92cc094">reference</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#a0c5a1541ecf7ad17925583cf6abd2c65">VectorType::reference</a></td></tr>
 <tr class="separator:a24e1cc28757f0776d455faa2a92cc094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cce8c465d5f59897e0e94fa3d29f816"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a8cce8c465d5f59897e0e94fa3d29f816">constReference</a> = typename VectorType::constReference</td></tr>
-<tr class="separator:a8cce8c465d5f59897e0e94fa3d29f816"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74686019fa98a3db8312edc2c71076ea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a74686019fa98a3db8312edc2c71076ea">valueType</a> = typename VectorType::valueType</td></tr>
-<tr class="separator:a74686019fa98a3db8312edc2c71076ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15206b415c09500493d38c91b970e958"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a15206b415c09500493d38c91b970e958">pointer</a> = typename VectorType::pointer</td></tr>
+<tr class="memitem:a26f1ec9da8d343811868fe6cd475976d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a26f1ec9da8d343811868fe6cd475976d">const_reference</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#ac98a2432df95afe641c3847268f579e8">VectorType::const_reference</a></td></tr>
+<tr class="separator:a26f1ec9da8d343811868fe6cd475976d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c9fa6c4f9077b7dd44bd96007ef416a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a3c9fa6c4f9077b7dd44bd96007ef416a">value_type</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#afb9ded5f49336ae503bb9f2035ea902b">VectorType::value_type</a></td></tr>
+<tr class="separator:a3c9fa6c4f9077b7dd44bd96007ef416a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15206b415c09500493d38c91b970e958"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a15206b415c09500493d38c91b970e958">pointer</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#ab088798d28525c0befe3c707b95c5bc2">VectorType::pointer</a></td></tr>
 <tr class="separator:a15206b415c09500493d38c91b970e958"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31d8ae42c5b5086aac03094022636a7e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a31d8ae42c5b5086aac03094022636a7e">constPointer</a> = typename VectorType::constPointer</td></tr>
-<tr class="separator:a31d8ae42c5b5086aac03094022636a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0adaff4989b6c9d6ddd4b9ba43f9d95e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a0adaff4989b6c9d6ddd4b9ba43f9d95e">const_pointer</a> = typename <a class="el" href="classpFlow_1_1VectorSingle.html#aeb8303778a4db95b65080fb533378d32">VectorType::const_pointer</a></td></tr>
+<tr class="separator:a0adaff4989b6c9d6ddd4b9ba43f9d95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classpFlow_1_1VectorSingle"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpFlow_1_1VectorSingle')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt; T, void &gt;</a></td></tr>
+<tr class="memitem:a74a37ab2977208763c7d3431ae5b985c inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a74a37ab2977208763c7d3431ae5b985c">VectorType</a> = <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a>&lt; T, void &gt;</td></tr>
+<tr class="separator:a74a37ab2977208763c7d3431ae5b985c inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3935e36bde1675859d11bee5e65864e4 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a3935e36bde1675859d11bee5e65864e4">VectorTypeHost</a> = <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a>&lt; T, <a class="el" href="namespacepFlow.html#a49dd1192cf116583abf7c726c7146851">HostSpace</a> &gt;</td></tr>
+<tr class="separator:a3935e36bde1675859d11bee5e65864e4 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d1ca55c8c62d4fbf3ea42d9919125a0 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a4d1ca55c8c62d4fbf3ea42d9919125a0">iterator</a> = T *</td></tr>
+<tr class="separator:a4d1ca55c8c62d4fbf3ea42d9919125a0 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2601f8255f8a42148603816eb649c961 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a2601f8255f8a42148603816eb649c961">const_iterator</a> = const T *</td></tr>
+<tr class="separator:a2601f8255f8a42148603816eb649c961 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c5a1541ecf7ad17925583cf6abd2c65 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a0c5a1541ecf7ad17925583cf6abd2c65">reference</a> = T &amp;</td></tr>
+<tr class="separator:a0c5a1541ecf7ad17925583cf6abd2c65 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98a2432df95afe641c3847268f579e8 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ac98a2432df95afe641c3847268f579e8">const_reference</a> = const T &amp;</td></tr>
+<tr class="separator:ac98a2432df95afe641c3847268f579e8 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9ded5f49336ae503bb9f2035ea902b inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#afb9ded5f49336ae503bb9f2035ea902b">value_type</a> = T</td></tr>
+<tr class="separator:afb9ded5f49336ae503bb9f2035ea902b inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab088798d28525c0befe3c707b95c5bc2 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ab088798d28525c0befe3c707b95c5bc2">pointer</a> = T *</td></tr>
+<tr class="separator:ab088798d28525c0befe3c707b95c5bc2 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb8303778a4db95b65080fb533378d32 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#aeb8303778a4db95b65080fb533378d32">const_pointer</a> = const T *</td></tr>
+<tr class="separator:aeb8303778a4db95b65080fb533378d32 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af98cf9297694f25215962f6a2bf773e4 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#af98cf9297694f25215962f6a2bf773e4">viewType</a> = <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; T, void &gt;</td></tr>
+<tr class="separator:af98cf9297694f25215962f6a2bf773e4 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4430adf7e2f1710d3da2b59bdec7ba1c inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a4430adf7e2f1710d3da2b59bdec7ba1c">device_type</a> = typename viewType::device_type</td></tr>
+<tr class="separator:a4430adf7e2f1710d3da2b59bdec7ba1c inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e01852751e144707eefc63300bcce22 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a2e01852751e144707eefc63300bcce22">memory_space</a> = typename viewType::memory_space</td></tr>
+<tr class="separator:a2e01852751e144707eefc63300bcce22 inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc9533c29ac1a7bda75f3f175df75fb inherit pub_types_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a6dc9533c29ac1a7bda75f3f175df75fb">execution_space</a> = typename viewType::execution_space</td></tr>
+<tr class="separator:a6dc9533c29ac1a7bda75f3f175df75fb inherit pub_types_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a85d26f06e18178fb3664d54f7ae9d660"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a85d26f06e18178fb3664d54f7ae9d660">TypeInfoTemplateNV2</a> (&quot;Field&quot;, T, VectorType::memoerySpaceName())</td></tr>
-<tr class="separator:a85d26f06e18178fb3664d54f7ae9d660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a870370c1af5b7530e534354e45451745"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a870370c1af5b7530e534354e45451745">TypeInfoTemplateNV111</a> (&quot;Field&quot;, T, <a class="el" href="classpFlow_1_1VectorSingle.html#a4afaef92d6e6a55303575f96107d40ec">VectorType::memoerySpaceName</a>())</td></tr>
+<tr class="memdesc:a870370c1af5b7530e534354e45451745"><td class="mdescLeft">&#160;</td><td class="mdescRight">type info  <a href="classpFlow_1_1Field.html#a870370c1af5b7530e534354e45451745">More...</a><br /></td></tr>
+<tr class="separator:a870370c1af5b7530e534354e45451745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d975a33e390747a97a453bc0455107"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a37d975a33e390747a97a453bc0455107">Field</a> ()</td></tr>
+<tr class="memdesc:a37d975a33e390747a97a453bc0455107"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct an empty Filed with default fieldKey  <a href="classpFlow_1_1Field.html#a37d975a33e390747a97a453bc0455107">More...</a><br /></td></tr>
 <tr class="separator:a37d975a33e390747a97a453bc0455107"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305695108ec00bbd1b32e77fe4b808cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a305695108ec00bbd1b32e77fe4b808cc">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>)</td></tr>
-<tr class="separator:a305695108ec00bbd1b32e77fe4b808cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a677b63b1fe9e5d48118598ccf4ed313d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a677b63b1fe9e5d48118598ccf4ed313d">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>)</td></tr>
+<tr class="memitem:aa59f88e2c795d2440197ac2b54a21770"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aa59f88e2c795d2440197ac2b54a21770">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>)</td></tr>
+<tr class="separator:aa59f88e2c795d2440197ac2b54a21770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a677b63b1fe9e5d48118598ccf4ed313d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a677b63b1fe9e5d48118598ccf4ed313d">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>)</td></tr>
+<tr class="memdesc:a677b63b1fe9e5d48118598ccf4ed313d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an empty field with name and fieldKey.  <a href="classpFlow_1_1Field.html#a677b63b1fe9e5d48118598ccf4ed313d">More...</a><br /></td></tr>
 <tr class="separator:a677b63b1fe9e5d48118598ccf4ed313d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa645eb887857ae3a79f3fd1fd7e2efe7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aa645eb887857ae3a79f3fd1fd7e2efe7">Field</a> (size_t len)</td></tr>
-<tr class="separator:aa645eb887857ae3a79f3fd1fd7e2efe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44a34b82821cdf41eedf6210c043f669"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a44a34b82821cdf41eedf6210c043f669">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, size_t len)</td></tr>
-<tr class="separator:a44a34b82821cdf41eedf6210c043f669"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaf4226f4c67b47e1299c55a54f21733"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#afaf4226f4c67b47e1299c55a54f21733">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, size_t len)</td></tr>
+<tr class="memitem:afaf4226f4c67b47e1299c55a54f21733"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#afaf4226f4c67b47e1299c55a54f21733">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len)</td></tr>
+<tr class="memdesc:afaf4226f4c67b47e1299c55a54f21733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a field with name and fieldKey and specified len.  <a href="classpFlow_1_1Field.html#afaf4226f4c67b47e1299c55a54f21733">More...</a><br /></td></tr>
 <tr class="separator:afaf4226f4c67b47e1299c55a54f21733"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad89c215f894a90053549b10f99a31cd2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ad89c215f894a90053549b10f99a31cd2">Field</a> (size_t len, const T &amp;val)</td></tr>
-<tr class="separator:ad89c215f894a90053549b10f99a31cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67a8ed8e45a1e7647c25fcbd44ecd96d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a67a8ed8e45a1e7647c25fcbd44ecd96d">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, size_t len, const T &amp;val)</td></tr>
-<tr class="separator:a67a8ed8e45a1e7647c25fcbd44ecd96d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a677755da27b97125abd8690520e469b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a677755da27b97125abd8690520e469b3">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, size_t len, const T &amp;val)</td></tr>
+<tr class="memitem:a677755da27b97125abd8690520e469b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a677755da27b97125abd8690520e469b3">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len, const T &amp;val)</td></tr>
+<tr class="memdesc:a677755da27b97125abd8690520e469b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a field with name, fieldKey and set length to len and value to val.  <a href="classpFlow_1_1Field.html#a677755da27b97125abd8690520e469b3">More...</a><br /></td></tr>
 <tr class="separator:a677755da27b97125abd8690520e469b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55fe65e3cb043fb055af84968c1d3d58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a55fe65e3cb043fb055af84968c1d3d58">Field</a> (size_t capacity, size_t len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
-<tr class="separator:a55fe65e3cb043fb055af84968c1d3d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8f4042ece998abbe22fd5bec836d6e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aa8f4042ece998abbe22fd5bec836d6e1">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, size_t capacity, size_t len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
-<tr class="separator:aa8f4042ece998abbe22fd5bec836d6e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accde17c10fc753920eb4601eb787791f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#accde17c10fc753920eb4601eb787791f">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, size_t capacity, size_t len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
+<tr class="memitem:aef7f58ed165364ea9424e726a12a5d0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aef7f58ed165364ea9424e726a12a5d0c">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> <a class="el" href="classpFlow_1_1VectorSingle.html#aef2405d22737e2c47dfe9994f27a028f">capacity</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len, const T &amp;val)</td></tr>
+<tr class="separator:aef7f58ed165364ea9424e726a12a5d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accde17c10fc753920eb4601eb787791f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#accde17c10fc753920eb4601eb787791f">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> <a class="el" href="classpFlow_1_1VectorSingle.html#aef2405d22737e2c47dfe9994f27a028f">capacity</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
+<tr class="memdesc:accde17c10fc753920eb4601eb787791f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a field with name, fieldKey, capacity and len.  <a href="classpFlow_1_1Field.html#accde17c10fc753920eb4601eb787791f">More...</a><br /></td></tr>
 <tr class="separator:accde17c10fc753920eb4601eb787791f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6db158c4fed7b49e831d5e21b6501512"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a6db158c4fed7b49e831d5e21b6501512">Field</a> (const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vec)</td></tr>
-<tr class="separator:a6db158c4fed7b49e831d5e21b6501512"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a083ef991abc37177cf71c0ed6dcc19fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a083ef991abc37177cf71c0ed6dcc19fd">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vec)</td></tr>
+<tr class="memitem:a083ef991abc37177cf71c0ed6dcc19fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a083ef991abc37177cf71c0ed6dcc19fd">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vec)</td></tr>
+<tr class="memdesc:a083ef991abc37177cf71c0ed6dcc19fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a field with fieldKey and <a class="el" href="classpFlow_1_1Vector.html">Vector</a> vec.  <a href="classpFlow_1_1Field.html#a083ef991abc37177cf71c0ed6dcc19fd">More...</a><br /></td></tr>
 <tr class="separator:a083ef991abc37177cf71c0ed6dcc19fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a141267793b0eff81395ebff2d5e4bcce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a141267793b0eff81395ebff2d5e4bcce">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vec)</td></tr>
+<tr class="memitem:a141267793b0eff81395ebff2d5e4bcce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a141267793b0eff81395ebff2d5e4bcce">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vec)</td></tr>
+<tr class="memdesc:a141267793b0eff81395ebff2d5e4bcce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a field with name, fieldKey and <a class="el" href="classpFlow_1_1Vector.html">Vector</a> vec.  <a href="classpFlow_1_1Field.html#a141267793b0eff81395ebff2d5e4bcce">More...</a><br /></td></tr>
 <tr class="separator:a141267793b0eff81395ebff2d5e4bcce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e59e2d8ecd94bfcd311d55efe74db71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a6e59e2d8ecd94bfcd311d55efe74db71">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a>, const <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;src)</td></tr>
+<tr class="memitem:a1a2e7d088787cfa568762c3aedf5b2d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a1a2e7d088787cfa568762c3aedf5b2d5">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, const std::vector&lt; T &gt; &amp;vec)</td></tr>
+<tr class="memdesc:a1a2e7d088787cfa568762c3aedf5b2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a field with name and fieldKey and std::vector.  <a href="classpFlow_1_1Field.html#a1a2e7d088787cfa568762c3aedf5b2d5">More...</a><br /></td></tr>
+<tr class="separator:a1a2e7d088787cfa568762c3aedf5b2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e59e2d8ecd94bfcd311d55efe74db71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a6e59e2d8ecd94bfcd311d55efe74db71">Field</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a>, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a>, const <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;src)</td></tr>
+<tr class="memdesc:a6e59e2d8ecd94bfcd311d55efe74db71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct with new name and fieldkey.  <a href="classpFlow_1_1Field.html#a6e59e2d8ecd94bfcd311d55efe74db71">More...</a><br /></td></tr>
 <tr class="separator:a6e59e2d8ecd94bfcd311d55efe74db71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2079b8d03d8059fed1f207669d9da4a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a2079b8d03d8059fed1f207669d9da4a3">Field</a> (const <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;)=default</td></tr>
+<tr class="memitem:a2079b8d03d8059fed1f207669d9da4a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a2079b8d03d8059fed1f207669d9da4a3">Field</a> (const <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;)=default</td></tr>
+<tr class="memdesc:a2079b8d03d8059fed1f207669d9da4a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default copy constructor.  <a href="classpFlow_1_1Field.html#a2079b8d03d8059fed1f207669d9da4a3">More...</a><br /></td></tr>
 <tr class="separator:a2079b8d03d8059fed1f207669d9da4a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1323a235cdda69110dd6b61c0e0fa65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ae1323a235cdda69110dd6b61c0e0fa65">operator=</a> (const <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;)=default</td></tr>
-<tr class="separator:ae1323a235cdda69110dd6b61c0e0fa65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35fed9a3fc29c6bb8dd03c74d219ebaa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a35fed9a3fc29c6bb8dd03c74d219ebaa">Field</a> (<a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&amp;)=delete</td></tr>
-<tr class="separator:a35fed9a3fc29c6bb8dd03c74d219ebaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a211731cabc0827adaf7b50e54dbd49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a1a211731cabc0827adaf7b50e54dbd49">operator=</a> (<a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&amp;)=delete</td></tr>
-<tr class="separator:a1a211731cabc0827adaf7b50e54dbd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4209498350a024abd5cddf463cc6151b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a4209498350a024abd5cddf463cc6151b">clone</a> () const</td></tr>
-<tr class="separator:a4209498350a024abd5cddf463cc6151b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06d22196b29698681102c8b374c29143"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a06d22196b29698681102c8b374c29143">clonePtr</a> () const</td></tr>
-<tr class="separator:a06d22196b29698681102c8b374c29143"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae03507823e79fef9640057b290e69c67"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ae03507823e79fef9640057b290e69c67">fieldKey</a> () const</td></tr>
-<tr class="separator:ae03507823e79fef9640057b290e69c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7b53a83f079c1c270e62b192d09068f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ab7b53a83f079c1c270e62b192d09068f">readField</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const size_t len, bool resume, bool readLength=true)</td></tr>
-<tr class="separator:ab7b53a83f079c1c270e62b192d09068f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a526f8a7b256bf1641fa30e476334996b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a526f8a7b256bf1641fa30e476334996b">readField</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, bool resume)</td></tr>
-<tr class="separator:a526f8a7b256bf1641fa30e476334996b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac550f175fb70daa183a4008bfd790f5f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#ac550f175fb70daa183a4008bfd790f5f">writeField</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
-<tr class="separator:ac550f175fb70daa183a4008bfd790f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1647e0ed184c652964aaccd3e15b3c04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a1647e0ed184c652964aaccd3e15b3c04">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, bool resume=false)</td></tr>
-<tr class="separator:a1647e0ed184c652964aaccd3e15b3c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a670c26ed7cebf24facd8a6ccbc45c21e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a670c26ed7cebf24facd8a6ccbc45c21e">operator=</a> (const <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a670c26ed7cebf24facd8a6ccbc45c21e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment, name and fieldKey on the left hand side are preserved.  <a href="classpFlow_1_1Field.html#a670c26ed7cebf24facd8a6ccbc45c21e">More...</a><br /></td></tr>
+<tr class="separator:a670c26ed7cebf24facd8a6ccbc45c21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b50c1e7083e17d9a858046241ee866b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a0b50c1e7083e17d9a858046241ee866b">Field</a> (<a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a0b50c1e7083e17d9a858046241ee866b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="classpFlow_1_1Field.html#a0b50c1e7083e17d9a858046241ee866b">More...</a><br /></td></tr>
+<tr class="separator:a0b50c1e7083e17d9a858046241ee866b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1692b26bb4a57f3f3eb5ee568ef6f455"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a1692b26bb4a57f3f3eb5ee568ef6f455">operator=</a> (<a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a1692b26bb4a57f3f3eb5ee568ef6f455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classpFlow_1_1Field.html#a1692b26bb4a57f3f3eb5ee568ef6f455">More...</a><br /></td></tr>
+<tr class="separator:a1692b26bb4a57f3f3eb5ee568ef6f455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13fac74a6ba182fd009dbb14818b0d01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">fieldKey</a> () const</td></tr>
+<tr class="memdesc:a13fac74a6ba182fd009dbb14818b0d01"><td class="mdescLeft">&#160;</td><td class="mdescRight">return field key  <a href="classpFlow_1_1Field.html#a13fac74a6ba182fd009dbb14818b0d01">More...</a><br /></td></tr>
+<tr class="separator:a13fac74a6ba182fd009dbb14818b0d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83f9a8e30fb37f90e9a6436f4470aaa2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a83f9a8e30fb37f90e9a6436f4470aaa2">name</a> () const</td></tr>
+<tr class="separator:a83f9a8e30fb37f90e9a6436f4470aaa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abddf9e42b6a8c5f965f2b23f30a4d960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#abddf9e42b6a8c5f965f2b23f30a4d960">fillField</a> (<a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a> <a class="el" href="classpFlow_1_1span.html">span</a>, const T &amp;val)</td></tr>
+<tr class="separator:abddf9e42b6a8c5f965f2b23f30a4d960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0e1b45e5bcaaaf0a95e59aad8e8ba3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aaf0e1b45e5bcaaaf0a95e59aad8e8ba3">fillField</a> (const T &amp;val)</td></tr>
+<tr class="separator:aaf0e1b45e5bcaaaf0a95e59aad8e8ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff8e92ab47032ae811d1271161cb9b22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#aff8e92ab47032ae811d1271161cb9b22">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
+<tr class="separator:aff8e92ab47032ae811d1271161cb9b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
 <tr class="separator:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e94ee49f203eb9d2ab071846af9fb5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a08e94ee49f203eb9d2ab071846af9fb5">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop, bool resume=false)</td></tr>
+<tr class="separator:a08e94ee49f203eb9d2ab071846af9fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c955e17bd99dcab8fa9cf8c96ba6dd0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a8c955e17bd99dcab8fa9cf8c96ba6dd0">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) const</td></tr>
+<tr class="separator:a8c955e17bd99dcab8fa9cf8c96ba6dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1VectorSingle"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1VectorSingle')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt; T, void &gt;</a></td></tr>
+<tr class="memitem:a8e418e013591ec0a088565b55eb08c60 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a8e418e013591ec0a088565b55eb08c60">TypeInfoTemplateNV111</a> (&quot;VectorSingle&quot;, T, <a class="el" href="classpFlow_1_1VectorSingle.html#a4afaef92d6e6a55303575f96107d40ec">memoerySpaceName</a>())</td></tr>
+<tr class="memdesc:a8e418e013591ec0a088565b55eb08c60 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1VectorSingle.html#a8e418e013591ec0a088565b55eb08c60">More...</a><br /></td></tr>
+<tr class="separator:a8e418e013591ec0a088565b55eb08c60 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ca6b593cf9b2abbba354ea2413c142 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ae8ca6b593cf9b2abbba354ea2413c142">VectorSingle</a> ()</td></tr>
+<tr class="memdesc:ae8ca6b593cf9b2abbba354ea2413c142 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty vector.  <a href="classpFlow_1_1VectorSingle.html#ae8ca6b593cf9b2abbba354ea2413c142">More...</a><br /></td></tr>
+<tr class="separator:ae8ca6b593cf9b2abbba354ea2413c142 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd098cb6bdb47c0c0329749d986edfb0 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#acd098cb6bdb47c0c0329749d986edfb0">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>)</td></tr>
+<tr class="memdesc:acd098cb6bdb47c0c0329749d986edfb0 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty vector with a name (capacity = 2)  <a href="classpFlow_1_1VectorSingle.html#acd098cb6bdb47c0c0329749d986edfb0">More...</a><br /></td></tr>
+<tr class="separator:acd098cb6bdb47c0c0329749d986edfb0 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd45809f8ed21a797581bfe70287c6d5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#acd45809f8ed21a797581bfe70287c6d5">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>)</td></tr>
+<tr class="memdesc:acd45809f8ed21a797581bfe70287c6d5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector with name and size n.  <a href="classpFlow_1_1VectorSingle.html#acd45809f8ed21a797581bfe70287c6d5">More...</a><br /></td></tr>
+<tr class="separator:acd45809f8ed21a797581bfe70287c6d5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64a2bbab25b34d3d81573eb54ba8d480 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a64a2bbab25b34d3d81573eb54ba8d480">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>, const T &amp;val)</td></tr>
+<tr class="memdesc:a64a2bbab25b34d3d81573eb54ba8d480 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector with name, size and value.  <a href="classpFlow_1_1VectorSingle.html#a64a2bbab25b34d3d81573eb54ba8d480">More...</a><br /></td></tr>
+<tr class="separator:a64a2bbab25b34d3d81573eb54ba8d480 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc2eacf38ae1935022c69253cbc0144 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a4fc2eacf38ae1935022c69253cbc0144">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> cap, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
+<tr class="memdesc:a4fc2eacf38ae1935022c69253cbc0144 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector with name, size (n) and reserved capacity.  <a href="classpFlow_1_1VectorSingle.html#a4fc2eacf38ae1935022c69253cbc0144">More...</a><br /></td></tr>
+<tr class="separator:a4fc2eacf38ae1935022c69253cbc0144 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b1cb8f1ec1df7a27061c2103491460 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a65b1cb8f1ec1df7a27061c2103491460">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, const std::vector&lt; T &gt; &amp;src)</td></tr>
+<tr class="memdesc:a65b1cb8f1ec1df7a27061c2103491460 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct with a name and form std::vector (host memory)  <a href="classpFlow_1_1VectorSingle.html#a65b1cb8f1ec1df7a27061c2103491460">More...</a><br /></td></tr>
+<tr class="separator:a65b1cb8f1ec1df7a27061c2103491460 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb64e1064c790998d42fb265463f5dc7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#adb64e1064c790998d42fb265463f5dc7">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, const std::vector&lt; T &gt; &amp;src, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> cap)</td></tr>
+<tr class="memdesc:adb64e1064c790998d42fb265463f5dc7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct with a name and form std::vector (host memory) and with a desired capacity.  <a href="classpFlow_1_1VectorSingle.html#adb64e1064c790998d42fb265463f5dc7">More...</a><br /></td></tr>
+<tr class="separator:adb64e1064c790998d42fb265463f5dc7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a122937fed9b88e192d0286e0d5b604 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a6a122937fed9b88e192d0286e0d5b604">VectorSingle</a> (const <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;src)</td></tr>
+<tr class="memdesc:a6a122937fed9b88e192d0286e0d5b604 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct (performs deep copy)  <a href="classpFlow_1_1VectorSingle.html#a6a122937fed9b88e192d0286e0d5b604">More...</a><br /></td></tr>
+<tr class="separator:a6a122937fed9b88e192d0286e0d5b604 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eb9c2dd8933804e31c3f32db032ca8a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a9eb9c2dd8933804e31c3f32db032ca8a">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, const <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;src)</td></tr>
+<tr class="memdesc:a9eb9c2dd8933804e31c3f32db032ca8a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct with a new name (perform deep copy)  <a href="classpFlow_1_1VectorSingle.html#a9eb9c2dd8933804e31c3f32db032ca8a">More...</a><br /></td></tr>
+<tr class="separator:a9eb9c2dd8933804e31c3f32db032ca8a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9504e4501e8a7b16456a7fdcb9d22b7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ac9504e4501e8a7b16456a7fdcb9d22b7">VectorSingle</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a>, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; T, void &gt; &amp;src)</td></tr>
+<tr class="memdesc:ac9504e4501e8a7b16456a7fdcb9d22b7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct with a new name (perform deep copy)  <a href="classpFlow_1_1VectorSingle.html#ac9504e4501e8a7b16456a7fdcb9d22b7">More...</a><br /></td></tr>
+<tr class="separator:ac9504e4501e8a7b16456a7fdcb9d22b7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5822d77c2c9584b926a1d7e32845463d inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a5822d77c2c9584b926a1d7e32845463d">VectorSingle</a> (<a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a5822d77c2c9584b926a1d7e32845463d inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move construct.  <a href="classpFlow_1_1VectorSingle.html#a5822d77c2c9584b926a1d7e32845463d">More...</a><br /></td></tr>
+<tr class="separator:a5822d77c2c9584b926a1d7e32845463d inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aaa7e113fd743fb56d22a1e2d34a30f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a7aaa7e113fd743fb56d22a1e2d34a30f">operator=</a> (const <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a7aaa7e113fd743fb56d22a1e2d34a30f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment (perform deep copy from rhs to *this)  <a href="classpFlow_1_1VectorSingle.html#a7aaa7e113fd743fb56d22a1e2d34a30f">More...</a><br /></td></tr>
+<tr class="separator:a7aaa7e113fd743fb56d22a1e2d34a30f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a921aa27a75ee3e3156c4033981534dde inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a921aa27a75ee3e3156c4033981534dde">operator=</a> (<a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a921aa27a75ee3e3156c4033981534dde inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classpFlow_1_1VectorSingle.html#a921aa27a75ee3e3156c4033981534dde">More...</a><br /></td></tr>
+<tr class="separator:a921aa27a75ee3e3156c4033981534dde inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad4848e9557f3ad11953347959d739ae inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#aad4848e9557f3ad11953347959d739ae">~VectorSingle</a> ()</td></tr>
+<tr class="memdesc:aad4848e9557f3ad11953347959d739ae inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Descructor This may not destroy the underlying memory, sice view is shared_ptr and maybe referenced by another object too <br  />
+  <a href="classpFlow_1_1VectorSingle.html#aad4848e9557f3ad11953347959d739ae">More...</a><br /></td></tr>
+<tr class="separator:aad4848e9557f3ad11953347959d739ae inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8499a8c8afb7a141b66ce9e3b828e1d inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ac8499a8c8afb7a141b66ce9e3b828e1d">clone</a> () const</td></tr>
+<tr class="memdesc:ac8499a8c8afb7a141b66ce9e3b828e1d inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone as a uniquePtr (perform deep copy)  <a href="classpFlow_1_1VectorSingle.html#ac8499a8c8afb7a141b66ce9e3b828e1d">More...</a><br /></td></tr>
+<tr class="separator:ac8499a8c8afb7a141b66ce9e3b828e1d inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a528cccc8652475ce6f01373d0ae32db5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1VectorSingle.html#a74a37ab2977208763c7d3431ae5b985c">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a528cccc8652475ce6f01373d0ae32db5">VectorField</a> ()</td></tr>
+<tr class="memdesc:a528cccc8652475ce6f01373d0ae32db5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return *this.  <a href="classpFlow_1_1VectorSingle.html#a528cccc8652475ce6f01373d0ae32db5">More...</a><br /></td></tr>
+<tr class="separator:a528cccc8652475ce6f01373d0ae32db5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a045ce53021565a6c44ea6c4c7ca7b inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1VectorSingle.html#a74a37ab2977208763c7d3431ae5b985c">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a20a045ce53021565a6c44ea6c4c7ca7b">VectorField</a> () const</td></tr>
+<tr class="memdesc:a20a045ce53021565a6c44ea6c4c7ca7b inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return *this.  <a href="classpFlow_1_1VectorSingle.html#a20a045ce53021565a6c44ea6c4c7ca7b">More...</a><br /></td></tr>
+<tr class="separator:a20a045ce53021565a6c44ea6c4c7ca7b inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51122b76468e0c5f19ea69c5c0ca6cf4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a> ()</td></tr>
+<tr class="memdesc:a51122b76468e0c5f19ea69c5c0ca6cf4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device view range [0,capcity)  <a href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">More...</a><br /></td></tr>
+<tr class="separator:a51122b76468e0c5f19ea69c5c0ca6cf4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7f550cc30fd1bf94843b447acfd1bd inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a1c7f550cc30fd1bf94843b447acfd1bd">deviceViewAll</a> () const</td></tr>
+<tr class="memdesc:a1c7f550cc30fd1bf94843b447acfd1bd inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device view range [0,capcity)  <a href="classpFlow_1_1VectorSingle.html#a1c7f550cc30fd1bf94843b447acfd1bd">More...</a><br /></td></tr>
+<tr class="separator:a1c7f550cc30fd1bf94843b447acfd1bd inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fabd2a58aae204d5639f041216f54da inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a1fabd2a58aae204d5639f041216f54da">deviceView</a> () const</td></tr>
+<tr class="memdesc:a1fabd2a58aae204d5639f041216f54da inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device view range [0, size)  <a href="classpFlow_1_1VectorSingle.html#a1fabd2a58aae204d5639f041216f54da">More...</a><br /></td></tr>
+<tr class="separator:a1fabd2a58aae204d5639f041216f54da inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31c0326d34cea4caaa16c31f9223f3db inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a31c0326d34cea4caaa16c31f9223f3db">hostViewAll</a> () const</td></tr>
+<tr class="memdesc:a31c0326d34cea4caaa16c31f9223f3db inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a view accessible on Host in range [0,capacity)  <a href="classpFlow_1_1VectorSingle.html#a31c0326d34cea4caaa16c31f9223f3db">More...</a><br /></td></tr>
+<tr class="separator:a31c0326d34cea4caaa16c31f9223f3db inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a379256561291ab5049373408178fe6fe inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a379256561291ab5049373408178fe6fe">hostView</a> () const</td></tr>
+<tr class="memdesc:a379256561291ab5049373408178fe6fe inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a view accessible on Host in range [0,size)  <a href="classpFlow_1_1VectorSingle.html#a379256561291ab5049373408178fe6fe">More...</a><br /></td></tr>
+<tr class="separator:a379256561291ab5049373408178fe6fe inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b75d70f7af50128d4392123fec643f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">name</a> () const</td></tr>
+<tr class="memdesc:a42b75d70f7af50128d4392123fec643f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the vector.  <a href="classpFlow_1_1VectorSingle.html#a42b75d70f7af50128d4392123fec643f">More...</a><br /></td></tr>
+<tr class="separator:a42b75d70f7af50128d4392123fec643f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a235f4855cec31187d575a459abb3eed2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">size</a> () const</td></tr>
+<tr class="memdesc:a235f4855cec31187d575a459abb3eed2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the vector.  <a href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">More...</a><br /></td></tr>
+<tr class="separator:a235f4855cec31187d575a459abb3eed2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2405d22737e2c47dfe9994f27a028f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#aef2405d22737e2c47dfe9994f27a028f">capacity</a> () const</td></tr>
+<tr class="separator:aef2405d22737e2c47dfe9994f27a028f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a26016033b73de243ec891f2a9cdeff inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a8a26016033b73de243ec891f2a9cdeff">empty</a> () const</td></tr>
+<tr class="memdesc:a8a26016033b73de243ec891f2a9cdeff inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">If vector is empty.  <a href="classpFlow_1_1VectorSingle.html#a8a26016033b73de243ec891f2a9cdeff">More...</a><br /></td></tr>
+<tr class="separator:a8a26016033b73de243ec891f2a9cdeff inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa44126642a4679b014647ba2405864e5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#aa44126642a4679b014647ba2405864e5">reserve</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> cap)</td></tr>
+<tr class="memdesc:aa44126642a4679b014647ba2405864e5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserve capacity for vector Preserve the content.  <a href="classpFlow_1_1VectorSingle.html#aa44126642a4679b014647ba2405864e5">More...</a><br /></td></tr>
+<tr class="separator:aa44126642a4679b014647ba2405864e5 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607693313d6278c7060e898ad6adad43 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a607693313d6278c7060e898ad6adad43">reallocate</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> cap)</td></tr>
+<tr class="memdesc:a607693313d6278c7060e898ad6adad43 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocate memory to new cap and set size to 0.  <a href="classpFlow_1_1VectorSingle.html#a607693313d6278c7060e898ad6adad43">More...</a><br /></td></tr>
+<tr class="separator:a607693313d6278c7060e898ad6adad43 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a060f3a10d89519547472668664210af1 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a060f3a10d89519547472668664210af1">reallocate</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> cap, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> newSize)</td></tr>
+<tr class="memdesc:a060f3a10d89519547472668664210af1 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocate memory to new cap and set size to newSize.  <a href="classpFlow_1_1VectorSingle.html#a060f3a10d89519547472668664210af1">More...</a><br /></td></tr>
+<tr class="separator:a060f3a10d89519547472668664210af1 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee24ec9e66908db01ef12a8079cf533 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a2ee24ec9e66908db01ef12a8079cf533">resize</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>)</td></tr>
+<tr class="memdesc:a2ee24ec9e66908db01ef12a8079cf533 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the vector and preserve the content.  <a href="classpFlow_1_1VectorSingle.html#a2ee24ec9e66908db01ef12a8079cf533">More...</a><br /></td></tr>
+<tr class="separator:a2ee24ec9e66908db01ef12a8079cf533 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a915f725f2b32bb8f2654a1035077f6a7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a915f725f2b32bb8f2654a1035077f6a7">resize</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>, const T &amp;val)</td></tr>
+<tr class="memdesc:a915f725f2b32bb8f2654a1035077f6a7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the vector and assign the value to it.  <a href="classpFlow_1_1VectorSingle.html#a915f725f2b32bb8f2654a1035077f6a7">More...</a><br /></td></tr>
+<tr class="separator:a915f725f2b32bb8f2654a1035077f6a7 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd32d1c4cda15e685fd3008f4ded29f2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#afd32d1c4cda15e685fd3008f4ded29f2">clear</a> ()</td></tr>
+<tr class="memdesc:afd32d1c4cda15e685fd3008f4ded29f2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the vector, but keep the allocated memory unchanged.  <a href="classpFlow_1_1VectorSingle.html#afd32d1c4cda15e685fd3008f4ded29f2">More...</a><br /></td></tr>
+<tr class="separator:afd32d1c4cda15e685fd3008f4ded29f2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab1c6d91f769bc9bc0a58cf9f1333d6 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a6ab1c6d91f769bc9bc0a58cf9f1333d6">fill</a> (const T &amp;val)</td></tr>
+<tr class="memdesc:a6ab1c6d91f769bc9bc0a58cf9f1333d6 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the range [0,size) with val.  <a href="classpFlow_1_1VectorSingle.html#a6ab1c6d91f769bc9bc0a58cf9f1333d6">More...</a><br /></td></tr>
+<tr class="separator:a6ab1c6d91f769bc9bc0a58cf9f1333d6 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f8cecd149645d770834833c7e099a69 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a1f8cecd149645d770834833c7e099a69">fill</a> (<a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a> r, const T &amp;val)</td></tr>
+<tr class="separator:a1f8cecd149645d770834833c7e099a69 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39102b6908f04f813ccd119193c56fc3 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a39102b6908f04f813ccd119193c56fc3">assign</a> (<a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> <a class="el" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>, const T &amp;val)</td></tr>
+<tr class="memdesc:a39102b6908f04f813ccd119193c56fc3 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change size of the vector and assign val to vector and.  <a href="classpFlow_1_1VectorSingle.html#a39102b6908f04f813ccd119193c56fc3">More...</a><br /></td></tr>
+<tr class="separator:a39102b6908f04f813ccd119193c56fc3 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73d78fa1952742b9b94901665e8c589 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ae73d78fa1952742b9b94901665e8c589">assign</a> (const std::vector&lt; T &gt; &amp;src, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> cap)</td></tr>
+<tr class="memdesc:ae73d78fa1952742b9b94901665e8c589 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign source vector with specified capacity.  <a href="classpFlow_1_1VectorSingle.html#ae73d78fa1952742b9b94901665e8c589">More...</a><br /></td></tr>
+<tr class="separator:ae73d78fa1952742b9b94901665e8c589 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396f90ac7452ed2a80db37255536299c inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a396f90ac7452ed2a80db37255536299c">assign</a> (const std::vector&lt; T &gt; &amp;src)</td></tr>
+<tr class="memdesc:a396f90ac7452ed2a80db37255536299c inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign source vector.  <a href="classpFlow_1_1VectorSingle.html#a396f90ac7452ed2a80db37255536299c">More...</a><br /></td></tr>
+<tr class="separator:a396f90ac7452ed2a80db37255536299c inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a206bfeee8184e9158513c1473ad1ad95 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a206bfeee8184e9158513c1473ad1ad95">assign</a> (const <a class="el" href="classpFlow_1_1VectorSingle.html#a74a37ab2977208763c7d3431ae5b985c">VectorType</a> &amp;src, bool srcCapacity=true)</td></tr>
+<tr class="separator:a206bfeee8184e9158513c1473ad1ad95 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6255c8aec839b50209f4e3908c710ba2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a6255c8aec839b50209f4e3908c710ba2">assignFromHost</a> (const <a class="el" href="classpFlow_1_1VectorSingle.html#a3935e36bde1675859d11bee5e65864e4">VectorTypeHost</a> &amp;src)</td></tr>
+<tr class="memdesc:a6255c8aec839b50209f4e3908c710ba2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign source vector from host side.  <a href="classpFlow_1_1VectorSingle.html#a6255c8aec839b50209f4e3908c710ba2">More...</a><br /></td></tr>
+<tr class="separator:a6255c8aec839b50209f4e3908c710ba2 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc2408a087b76a59e81f83f22367b04e inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#afc2408a087b76a59e81f83f22367b04e">assignFromDevice</a> (const <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a>&lt; T, MSpace &gt; &amp;src, bool srcCapacity=true)</td></tr>
+<tr class="separator:afc2408a087b76a59e81f83f22367b04e inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026dd37e0a41dba412c9edd8d009a471 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a026dd37e0a41dba412c9edd8d009a471">append</a> (const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; T, void &gt; &amp;appVec)</td></tr>
+<tr class="separator:a026dd37e0a41dba412c9edd8d009a471 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4daee7504dfa383126ab2867d1fced4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ad4daee7504dfa383126ab2867d1fced4">append</a> (const std::vector&lt; T &gt; &amp;appVec)</td></tr>
+<tr class="separator:ad4daee7504dfa383126ab2867d1fced4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace983bea51718713360fa35a31a4affc inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ace983bea51718713360fa35a31a4affc">append</a> (const <a class="el" href="classpFlow_1_1VectorSingle.html#a74a37ab2977208763c7d3431ae5b985c">VectorType</a> &amp;appVec)</td></tr>
+<tr class="separator:ace983bea51718713360fa35a31a4affc inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb92f4ec32451de9f2f887d9117fd88f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#aeb92f4ec32451de9f2f887d9117fd88f">getSpan</a> ()</td></tr>
+<tr class="separator:aeb92f4ec32451de9f2f887d9117fd88f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd9d4cfc6d137b54f783c12e87687d8 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#abdd9d4cfc6d137b54f783c12e87687d8">getSpan</a> () const</td></tr>
+<tr class="separator:abdd9d4cfc6d137b54f783c12e87687d8 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfafd86c74ac8d2c0f0864cb84e92eaa inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#adfafd86c74ac8d2c0f0864cb84e92eaa">insertSetElement</a> (const <a class="el" href="namespacepFlow.html#ace91b5b09f95f3d8409247898e688e9b">uint32IndexContainer</a> &amp;indices, const T &amp;val)</td></tr>
+<tr class="separator:adfafd86c74ac8d2c0f0864cb84e92eaa inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82d0d922d030808e47e997c698fdb750 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a82d0d922d030808e47e997c698fdb750">insertSetElement</a> (const <a class="el" href="namespacepFlow.html#ace91b5b09f95f3d8409247898e688e9b">uint32IndexContainer</a> &amp;indices, const std::vector&lt; T &gt; &amp;vals)</td></tr>
+<tr class="separator:a82d0d922d030808e47e997c698fdb750 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2117b628549b5594a191065270c8cd9f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a2117b628549b5594a191065270c8cd9f">insertSetElement</a> (const <a class="el" href="namespacepFlow.html#ace91b5b09f95f3d8409247898e688e9b">uint32IndexContainer</a> &amp;indices, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; T, <a class="el" href="classpFlow_1_1VectorSingle.html#a2e01852751e144707eefc63300bcce22">memory_space</a> &gt; vals)</td></tr>
+<tr class="separator:a2117b628549b5594a191065270c8cd9f inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4e3ea7e9d5cbc697964d32a9e4424b inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#afa4e3ea7e9d5cbc697964d32a9e4424b">reorderItems</a> (const <a class="el" href="namespacepFlow.html#ace91b5b09f95f3d8409247898e688e9b">uint32IndexContainer</a> &amp;indices)</td></tr>
+<tr class="separator:afa4e3ea7e9d5cbc697964d32a9e4424b inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0d79d360a405dae59d3972a9ad61d6 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a5a0d79d360a405dae59d3972a9ad61d6">push_back</a> (const T &amp;val)</td></tr>
+<tr class="memdesc:a5a0d79d360a405dae59d3972a9ad61d6 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">push a new element at the end (host call only) resize if necessary and works on host accessible vector.  <a href="classpFlow_1_1VectorSingle.html#a5a0d79d360a405dae59d3972a9ad61d6">More...</a><br /></td></tr>
+<tr class="separator:a5a0d79d360a405dae59d3972a9ad61d6 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2292bdd68ebde041be930230a52151 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1VectorSingle.html#ab088798d28525c0befe3c707b95c5bc2">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a4b2292bdd68ebde041be930230a52151">data</a> ()</td></tr>
+<tr class="separator:a4b2292bdd68ebde041be930230a52151 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53fca8add741874302a95467519251e4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1VectorSingle.html#aeb8303778a4db95b65080fb533378d32">const_pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a53fca8add741874302a95467519251e4">data</a> () const</td></tr>
+<tr class="separator:a53fca8add741874302a95467519251e4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d8202abe615516f83cb5ea83caf236 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, <a class="el" href="classpFlow_1_1VectorSingle.html#a4d1ca55c8c62d4fbf3ea42d9919125a0">iterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ae3d8202abe615516f83cb5ea83caf236">begin</a> ()</td></tr>
+<tr class="memdesc:ae3d8202abe615516f83cb5ea83caf236 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return begin iterator. It works when devices is host accessible.  <a href="classpFlow_1_1VectorSingle.html#ae3d8202abe615516f83cb5ea83caf236">More...</a><br /></td></tr>
+<tr class="separator:ae3d8202abe615516f83cb5ea83caf236 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e27acbc6bdc73ab27d3242af619059a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, <a class="el" href="classpFlow_1_1VectorSingle.html#a2601f8255f8a42148603816eb649c961">const_iterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a0e27acbc6bdc73ab27d3242af619059a">begin</a> () const</td></tr>
+<tr class="memdesc:a0e27acbc6bdc73ab27d3242af619059a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return begin iterator. it works when host is accessible.  <a href="classpFlow_1_1VectorSingle.html#a0e27acbc6bdc73ab27d3242af619059a">More...</a><br /></td></tr>
+<tr class="separator:a0e27acbc6bdc73ab27d3242af619059a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a881a076efc5bc7d6ea82520cbe99ce02 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, <a class="el" href="classpFlow_1_1VectorSingle.html#a4d1ca55c8c62d4fbf3ea42d9919125a0">iterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a881a076efc5bc7d6ea82520cbe99ce02">end</a> ()</td></tr>
+<tr class="memdesc:a881a076efc5bc7d6ea82520cbe99ce02 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return end iterator. it works when host is accessible.  <a href="classpFlow_1_1VectorSingle.html#a881a076efc5bc7d6ea82520cbe99ce02">More...</a><br /></td></tr>
+<tr class="separator:a881a076efc5bc7d6ea82520cbe99ce02 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0397c0dad614c9c3477372d9e291a3fd inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, <a class="el" href="classpFlow_1_1VectorSingle.html#a2601f8255f8a42148603816eb649c961">const_iterator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a0397c0dad614c9c3477372d9e291a3fd">end</a> () const</td></tr>
+<tr class="memdesc:a0397c0dad614c9c3477372d9e291a3fd inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return end iterator. it works when host is accessible.  <a href="classpFlow_1_1VectorSingle.html#a0397c0dad614c9c3477372d9e291a3fd">More...</a><br /></td></tr>
+<tr class="separator:a0397c0dad614c9c3477372d9e291a3fd inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2df051f05106dbdfda17c4564e34006e inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, <a class="el" href="classpFlow_1_1VectorSingle.html#a0c5a1541ecf7ad17925583cf6abd2c65">reference</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a2df051f05106dbdfda17c4564e34006e">operator[]</a> (<a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> i)</td></tr>
+<tr class="memdesc:a2df051f05106dbdfda17c4564e34006e inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reference to element i. it works when host is accessible.  <a href="classpFlow_1_1VectorSingle.html#a2df051f05106dbdfda17c4564e34006e">More...</a><br /></td></tr>
+<tr class="separator:a2df051f05106dbdfda17c4564e34006e inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a43aede6b99ef34daf50e04a6b09b5a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> std::enable_if_t&lt; <a class="el" href="classpFlow_1_1VectorSingle.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> &amp;&amp;Enable, <a class="el" href="classpFlow_1_1VectorSingle.html#ac98a2432df95afe641c3847268f579e8">const_reference</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a5a43aede6b99ef34daf50e04a6b09b5a">operator[]</a> (<a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> i) const</td></tr>
+<tr class="memdesc:a5a43aede6b99ef34daf50e04a6b09b5a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return reference to element i. it works when host is accessible.  <a href="classpFlow_1_1VectorSingle.html#a5a43aede6b99ef34daf50e04a6b09b5a">More...</a><br /></td></tr>
+<tr class="separator:a5a43aede6b99ef34daf50e04a6b09b5a inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1d42751915e8566dac19658cc498ffa inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#ae1d42751915e8566dac19658cc498ffa">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
+<tr class="memdesc:ae1d42751915e8566dac19658cc498ffa inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read vector from stream.  <a href="classpFlow_1_1VectorSingle.html#ae1d42751915e8566dac19658cc498ffa">More...</a><br /></td></tr>
+<tr class="separator:ae1d42751915e8566dac19658cc498ffa inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b569141588fd6bcd89aad06d8af2be4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a0b569141588fd6bcd89aad06d8af2be4">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop)</td></tr>
+<tr class="memdesc:a0b569141588fd6bcd89aad06d8af2be4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read vector from stream.  <a href="classpFlow_1_1VectorSingle.html#a0b569141588fd6bcd89aad06d8af2be4">More...</a><br /></td></tr>
+<tr class="separator:a0b569141588fd6bcd89aad06d8af2be4 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822fe0cdae82912d7c35e008c6158a61 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a822fe0cdae82912d7c35e008c6158a61">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) const</td></tr>
+<tr class="memdesc:a822fe0cdae82912d7c35e008c6158a61 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the vector to os.  <a href="classpFlow_1_1VectorSingle.html#a822fe0cdae82912d7c35e008c6158a61">More...</a><br /></td></tr>
+<tr class="separator:a822fe0cdae82912d7c35e008c6158a61 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d820a4dd0777a9a82aee242b83a167 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#aa7d820a4dd0777a9a82aee242b83a167">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
+<tr class="separator:aa7d820a4dd0777a9a82aee242b83a167 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50cdc866d41b3117fa7a567cae1eab29 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a50cdc866d41b3117fa7a567cae1eab29">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop, const HostMask &amp;mask) const</td></tr>
+<tr class="separator:a50cdc866d41b3117fa7a567cae1eab29 inherit pub_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a4a088d05c6030840715e4590719ea2f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a4a088d05c6030840715e4590719ea2f2">readUniform</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, size_t len, bool readLength=true)</td></tr>
-<tr class="separator:a4a088d05c6030840715e4590719ea2f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65fb54f18c87499159f30c6d4514c674"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a65fb54f18c87499159f30c6d4514c674">readNonUniform</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, size_t len)</td></tr>
-<tr class="separator:a65fb54f18c87499159f30c6d4514c674"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:a2b353c24fbd6c2b144cab85ee50b8dd6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a2b353c24fbd6c2b144cab85ee50b8dd6">fieldKey_</a> = <a class="el" href="classpFlow_1_1Field.html#a7c3f2d5a74856425892835688d908f72">FKey</a></td></tr>
 <tr class="separator:a2b353c24fbd6c2b144cab85ee50b8dd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
 <tr class="memitem:a7c3f2d5a74856425892835688d908f72"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Field.html#a7c3f2d5a74856425892835688d908f72">FKey</a> = &quot;value&quot;</td></tr>
 <tr class="separator:a7c3f2d5a74856425892835688d908f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_classpFlow_1_1VectorSingle"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classpFlow_1_1VectorSingle')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle&lt; T, void &gt;</a></td></tr>
+<tr class="memitem:a4afaef92d6e6a55303575f96107d40ec inherit pub_static_methods_classpFlow_1_1VectorSingle"><td class="memItemLeft" align="right" valign="top">static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1VectorSingle.html#a4afaef92d6e6a55303575f96107d40ec">memoerySpaceName</a> ()</td></tr>
+<tr class="memdesc:a4afaef92d6e6a55303575f96107d40ec inherit pub_static_methods_classpFlow_1_1VectorSingle"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the memory space.  <a href="classpFlow_1_1VectorSingle.html#a4afaef92d6e6a55303575f96107d40ec">More...</a><br /></td></tr>
+<tr class="separator:a4afaef92d6e6a55303575f96107d40ec inherit pub_static_methods_classpFlow_1_1VectorSingle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;template&lt; class, class &gt; class VectorField, class T, class PropType = void&gt;<br />
-class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
+<div class="textblock"><h3>template&lt;class T, class MemorySpace = void&gt;<br />
+class pFlow::Field&lt; T, MemorySpace &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00033">33</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00036">36</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a17f93ef6c6f1b09493247dc4bfc8034e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17f93ef6c6f1b09493247dc4bfc8034e">&#9670;&nbsp;</a></span>VectorType</h2>
+<a id="a90ee4a972a5e87720ef1e4b067a884ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ee4a972a5e87720ef1e4b067a884ac">&#9670;&nbsp;</a></span>VectorType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a17f93ef6c6f1b09493247dc4bfc8034e">VectorType</a> =  VectorField&lt;T,PropType&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00040">40</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9c21898f701f587608a900ee4a709097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c21898f701f587608a900ee4a709097">&#9670;&nbsp;</a></span>FieldType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> =  <a class="el" href="classpFlow_1_1Field.html">Field</a>&lt;VectorField, T, PropType&gt;</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a90ee4a972a5e87720ef1e4b067a884ac">VectorType</a> =  <a class="el" href="classpFlow_1_1VectorSingle.html">VectorSingle</a>&lt;T,MemorySpace&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00042">42</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a40dbbac51cc766420c6da450d95c1edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40dbbac51cc766420c6da450d95c1edc">&#9670;&nbsp;</a></span>FieldType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> =  <a class="el" href="classpFlow_1_1Field.html">Field</a>&lt;T, MemorySpace&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00044">44</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a956cfd99b2704fca5961350f47963e88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956cfd99b2704fca5961350f47963e88">&#9670;&nbsp;</a></span>FieldTypeHost</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a956cfd99b2704fca5961350f47963e88">FieldTypeHost</a> =  <a class="el" href="classpFlow_1_1Field.html">Field</a>&lt;T, <a class="el" href="namespacepFlow.html#a49dd1192cf116583abf7c726c7146851">HostSpace</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00046">46</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abb38920d985a52377685fd852f62f4c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb38920d985a52377685fd852f62f4c2">&#9670;&nbsp;</a></span>memory_space</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#abb38920d985a52377685fd852f62f4c2">memory_space</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#a2e01852751e144707eefc63300bcce22">VectorType::memory_space</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00048">48</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b138cbd599d4fc0e95738e75f1e7445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b138cbd599d4fc0e95738e75f1e7445">&#9670;&nbsp;</a></span>execution_space</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a0b138cbd599d4fc0e95738e75f1e7445">execution_space</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#a6dc9533c29ac1a7bda75f3f175df75fb">VectorType::execution_space</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00050">50</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -291,28 +534,28 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a2b8f0ba308c4037e39ec503b9a1e4d0b">iterator</a> =  typename VectorType::iterator</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a2b8f0ba308c4037e39ec503b9a1e4d0b">iterator</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#a4d1ca55c8c62d4fbf3ea42d9919125a0">VectorType::iterator</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00044">44</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00052">52</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a0e58d55cd5bd8a9c53545f1ae89ca05a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e58d55cd5bd8a9c53545f1ae89ca05a">&#9670;&nbsp;</a></span>constIterator</h2>
+<a id="a0b878024ac2eb388b20acaf63eb29780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b878024ac2eb388b20acaf63eb29780">&#9670;&nbsp;</a></span>const_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a0e58d55cd5bd8a9c53545f1ae89ca05a">constIterator</a> =  typename VectorType::constIterator</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a0b878024ac2eb388b20acaf63eb29780">const_iterator</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#a2601f8255f8a42148603816eb649c961">VectorType::const_iterator</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00046">46</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00054">54</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -323,44 +566,44 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a24e1cc28757f0776d455faa2a92cc094">reference</a> =  typename VectorType::reference</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a24e1cc28757f0776d455faa2a92cc094">reference</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#a0c5a1541ecf7ad17925583cf6abd2c65">VectorType::reference</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00048">48</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00056">56</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8cce8c465d5f59897e0e94fa3d29f816"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cce8c465d5f59897e0e94fa3d29f816">&#9670;&nbsp;</a></span>constReference</h2>
+<a id="a26f1ec9da8d343811868fe6cd475976d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f1ec9da8d343811868fe6cd475976d">&#9670;&nbsp;</a></span>const_reference</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a8cce8c465d5f59897e0e94fa3d29f816">constReference</a> =  typename VectorType::constReference</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a26f1ec9da8d343811868fe6cd475976d">const_reference</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#ac98a2432df95afe641c3847268f579e8">VectorType::const_reference</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00050">50</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00058">58</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a74686019fa98a3db8312edc2c71076ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74686019fa98a3db8312edc2c71076ea">&#9670;&nbsp;</a></span>valueType</h2>
+<a id="a3c9fa6c4f9077b7dd44bd96007ef416a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c9fa6c4f9077b7dd44bd96007ef416a">&#9670;&nbsp;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a74686019fa98a3db8312edc2c71076ea">valueType</a> =  typename VectorType::valueType</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a3c9fa6c4f9077b7dd44bd96007ef416a">value_type</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#afb9ded5f49336ae503bb9f2035ea902b">VectorType::value_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00052">52</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00060">60</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -371,34 +614,34 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a15206b415c09500493d38c91b970e958">pointer</a> =  typename VectorType::pointer</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a15206b415c09500493d38c91b970e958">pointer</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#ab088798d28525c0befe3c707b95c5bc2">VectorType::pointer</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00054">54</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00062">62</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a31d8ae42c5b5086aac03094022636a7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31d8ae42c5b5086aac03094022636a7e">&#9670;&nbsp;</a></span>constPointer</h2>
+<a id="a0adaff4989b6c9d6ddd4b9ba43f9d95e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0adaff4989b6c9d6ddd4b9ba43f9d95e">&#9670;&nbsp;</a></span>const_pointer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a31d8ae42c5b5086aac03094022636a7e">constPointer</a> =  typename VectorType::constPointer</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Field.html#a0adaff4989b6c9d6ddd4b9ba43f9d95e">const_pointer</a> =  typename <a class="el" href="classpFlow_1_1VectorSingle.html#aeb8303778a4db95b65080fb533378d32">VectorType::const_pointer</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00056">56</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00064">64</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a37d975a33e390747a97a453bc0455107"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37d975a33e390747a97a453bc0455107">&#9670;&nbsp;</a></span>Field() <span class="overload">[1/18]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a37d975a33e390747a97a453bc0455107">&#9670;&nbsp;</a></span>Field() <span class="overload">[1/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -420,12 +663,14 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00077">77</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p>construct an empty Filed with default fieldKey </p>
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00081">81</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a305695108ec00bbd1b32e77fe4b808cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a305695108ec00bbd1b32e77fe4b808cc">&#9670;&nbsp;</a></span>Field() <span class="overload">[2/18]</span></h2>
+<a id="aa59f88e2c795d2440197ac2b54a21770"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa59f88e2c795d2440197ac2b54a21770">&#9670;&nbsp;</a></span>Field() <span class="overload">[2/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,7 +682,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldKey</em></td><td>)</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -448,12 +693,12 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00083">83</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00086">86</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a677b63b1fe9e5d48118598ccf4ed313d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a677b63b1fe9e5d48118598ccf4ed313d">&#9670;&nbsp;</a></span>Field() <span class="overload">[3/18]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a677b63b1fe9e5d48118598ccf4ed313d">&#9670;&nbsp;</a></span>Field() <span class="overload">[3/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -486,78 +731,14 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00090">90</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p>Construct an empty field with name and fieldKey. </p>
 
-</div>
-</div>
-<a id="aa645eb887857ae3a79f3fd1fd7e2efe7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa645eb887857ae3a79f3fd1fd7e2efe7">&#9670;&nbsp;</a></span>Field() <span class="overload">[4/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00097">97</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a44a34b82821cdf41eedf6210c043f669"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44a34b82821cdf41eedf6210c043f669">&#9670;&nbsp;</a></span>Field() <span class="overload">[5/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldKey</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00103">103</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00092">92</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
 <a id="afaf4226f4c67b47e1299c55a54f21733"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afaf4226f4c67b47e1299c55a54f21733">&#9670;&nbsp;</a></span>Field() <span class="overload">[6/18]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afaf4226f4c67b47e1299c55a54f21733">&#9670;&nbsp;</a></span>Field() <span class="overload">[4/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -580,7 +761,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
@@ -596,50 +777,14 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00110">110</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p>Construct a field with name and fieldKey and specified len. </p>
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00099">99</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad89c215f894a90053549b10f99a31cd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad89c215f894a90053549b10f99a31cd2">&#9670;&nbsp;</a></span>Field() <span class="overload">[7/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00117">117</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a67a8ed8e45a1e7647c25fcbd44ecd96d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67a8ed8e45a1e7647c25fcbd44ecd96d">&#9670;&nbsp;</a></span>Field() <span class="overload">[8/18]</span></h2>
+<a id="a677755da27b97125abd8690520e469b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a677755da27b97125abd8690520e469b3">&#9670;&nbsp;</a></span>Field() <span class="overload">[5/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -651,12 +796,18 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
           <td class="paramname"><em>fieldKey</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
@@ -677,13 +828,129 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a field with name, fieldKey and set length to len and value to val. </p>
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00108">108</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aef7f58ed165364ea9424e726a12a5d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef7f58ed165364ea9424e726a12a5d0c">&#9670;&nbsp;</a></span>Field() <span class="overload">[6/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>capacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00114">114</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="accde17c10fc753920eb4601eb787791f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accde17c10fc753920eb4601eb787791f">&#9670;&nbsp;</a></span>Field() <span class="overload">[7/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>capacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a field with name, fieldKey, capacity and len. </p>
 
 <p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00123">123</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a677755da27b97125abd8690520e469b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a677755da27b97125abd8690520e469b3">&#9670;&nbsp;</a></span>Field() <span class="overload">[9/18]</span></h2>
+<a id="a083ef991abc37177cf71c0ed6dcc19fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a083ef991abc37177cf71c0ed6dcc19fd">&#9670;&nbsp;</a></span>Field() <span class="overload">[8/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -695,25 +962,13 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
           <td class="paramname"><em>fieldKey</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vec</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -727,13 +982,15 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a field with fieldKey and <a class="el" href="classpFlow_1_1Vector.html">Vector</a> vec. </p>
 
 <p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00130">130</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a55fe65e3cb043fb055af84968c1d3d58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55fe65e3cb043fb055af84968c1d3d58">&#9670;&nbsp;</a></span>Field() <span class="overload">[10/18]</span></h2>
+<a id="a141267793b0eff81395ebff2d5e4bcce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141267793b0eff81395ebff2d5e4bcce">&#9670;&nbsp;</a></span>Field() <span class="overload">[9/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,20 +1001,20 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>capacity</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldKey</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vec</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -771,63 +1028,15 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a field with name, fieldKey and <a class="el" href="classpFlow_1_1Vector.html">Vector</a> vec. </p>
 
 <p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00137">137</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa8f4042ece998abbe22fd5bec836d6e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8f4042ece998abbe22fd5bec836d6e1">&#9670;&nbsp;</a></span>Field() <span class="overload">[11/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldKey</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>capacity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00143">143</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="accde17c10fc753920eb4601eb787791f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accde17c10fc753920eb4601eb787791f">&#9670;&nbsp;</a></span>Field() <span class="overload">[12/18]</span></h2>
+<a id="a1a2e7d088787cfa568762c3aedf5b2d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a2e7d088787cfa568762c3aedf5b2d5">&#9670;&nbsp;</a></span>Field() <span class="overload">[10/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -850,85 +1059,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>capacity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00150">150</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6db158c4fed7b49e831d5e21b6501512"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6db158c4fed7b49e831d5e21b6501512">&#9670;&nbsp;</a></span>Field() <span class="overload">[13/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vec</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00157">157</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a083ef991abc37177cf71c0ed6dcc19fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a083ef991abc37177cf71c0ed6dcc19fd">&#9670;&nbsp;</a></span>Field() <span class="overload">[14/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldKey</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>vec</em>&#160;</td>
         </tr>
         <tr>
@@ -944,56 +1075,14 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00163">163</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p>Construct a field with name and fieldKey and std::vector. </p>
 
-</div>
-</div>
-<a id="a141267793b0eff81395ebff2d5e4bcce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a141267793b0eff81395ebff2d5e4bcce">&#9670;&nbsp;</a></span>Field() <span class="overload">[15/18]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldKey</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vec</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00170">170</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00144">144</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a6e59e2d8ecd94bfcd311d55efe74db71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e59e2d8ecd94bfcd311d55efe74db71">&#9670;&nbsp;</a></span>Field() <span class="overload">[16/18]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e59e2d8ecd94bfcd311d55efe74db71">&#9670;&nbsp;</a></span>Field() <span class="overload">[11/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1016,7 +1105,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&#160;</td>
           <td class="paramname"><em>src</em>&#160;</td>
         </tr>
         <tr>
@@ -1032,12 +1121,14 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00178">178</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p>Copy construct with new name and fieldkey. </p>
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00151">151</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a2079b8d03d8059fed1f207669d9da4a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2079b8d03d8059fed1f207669d9da4a3">&#9670;&nbsp;</a></span>Field() <span class="overload">[17/18]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2079b8d03d8059fed1f207669d9da4a3">&#9670;&nbsp;</a></span>Field() <span class="overload">[12/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1048,7 +1139,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -1060,10 +1151,12 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
+<p>Default copy constructor. </p>
+
 </div>
 </div>
-<a id="a35fed9a3fc29c6bb8dd03c74d219ebaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35fed9a3fc29c6bb8dd03c74d219ebaa">&#9670;&nbsp;</a></span>Field() <span class="overload">[18/18]</span></h2>
+<a id="a0b50c1e7083e17d9a858046241ee866b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b50c1e7083e17d9a858046241ee866b">&#9670;&nbsp;</a></span>Field() <span class="overload">[13/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1074,113 +1167,33 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Field.html">Field</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move constructor. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4a088d05c6030840715e4590719ea2f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a088d05c6030840715e4590719ea2f2">&#9670;&nbsp;</a></span>readUniform()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool readUniform </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>readLength</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00023">23</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a65fb54f18c87499159f30c6d4514c674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65fb54f18c87499159f30c6d4514c674">&#9670;&nbsp;</a></span>readNonUniform()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool readNonUniform </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00062">62</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a85d26f06e18178fb3664d54f7ae9d660"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85d26f06e18178fb3664d54f7ae9d660">&#9670;&nbsp;</a></span>TypeInfoTemplateNV2()</h2>
+<a id="a870370c1af5b7530e534354e45451745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a870370c1af5b7530e534354e45451745">&#9670;&nbsp;</a></span>TypeInfoTemplateNV111()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">TypeInfoTemplateNV2 </td>
+          <td class="memname">TypeInfoTemplateNV111 </td>
           <td>(</td>
-          <td class="paramtype">&quot;Field&lt; VectorField, T, PropType &gt;&quot;&#160;</td>
+          <td class="paramtype">&quot;Field&lt; T, MemorySpace &gt;&quot;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -1192,7 +1205,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">VectorType::memoerySpaceName()&#160;</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1VectorSingle.html#a4afaef92d6e6a55303575f96107d40ec">VectorType::memoerySpaceName</a>()&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -1203,10 +1216,12 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
+<p>type info </p>
+
 </div>
 </div>
-<a id="ae1323a235cdda69110dd6b61c0e0fa65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1323a235cdda69110dd6b61c0e0fa65">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a670c26ed7cebf24facd8a6ccbc45c21e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a670c26ed7cebf24facd8a6ccbc45c21e">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1215,9 +1230,39 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a>&amp; operator= </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a>&amp; operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment, name and fieldKey on the left hand side are preserved. </p>
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00161">161</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1692b26bb4a57f3f3eb5ee568ef6f455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1692b26bb4a57f3f3eb5ee568ef6f455">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a>&amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1Field.html#a40dbbac51cc766420c6da450d95c1edc">FieldType</a> &amp;&amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -1229,10 +1274,12 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
+<p>Move assignment. </p>
+
 </div>
 </div>
-<a id="a1a211731cabc0827adaf7b50e54dbd49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a211731cabc0827adaf7b50e54dbd49">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a13fac74a6ba182fd009dbb14818b0d01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13fac74a6ba182fd009dbb14818b0d01">&#9670;&nbsp;</a></span>fieldKey()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1241,33 +1288,7 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a>&amp; operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a> &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4209498350a024abd5cddf463cc6151b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4209498350a024abd5cddf463cc6151b">&#9670;&nbsp;</a></span>clone()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt;<a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a>&gt; clone </td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> fieldKey </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1280,137 +1301,77 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00197">197</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p>return field key </p>
 
-</div>
-</div>
-<a id="a06d22196b29698681102c8b374c29143"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06d22196b29698681102c8b374c29143">&#9670;&nbsp;</a></span>clonePtr()</h2>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00177">177</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> <a class="el" href="classpFlow_1_1Field.html#a9c21898f701f587608a900ee4a709097">FieldType</a>* clonePtr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00204">204</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ae03507823e79fef9640057b290e69c67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae03507823e79fef9640057b290e69c67">&#9670;&nbsp;</a></span>fieldKey()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; fieldKey </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00211">211</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab7b53a83f079c1c270e62b192d09068f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7b53a83f079c1c270e62b192d09068f">&#9670;&nbsp;</a></span>readField() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool readField </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>resume</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>readLength</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00102">102</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00241">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="Field_8hpp_source.html#l00226">Field&lt; VectorDual, int8 &gt;::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="internalField_8hpp_source.html#l00151">internalField&lt; realx3, void &gt;::fieldKey()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph.png" border="0" usemap="#classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph" id="classpFlow_1_1Field_ab7b53a83f079c1c270e62b192d09068f_icgraph">
-<area shape="rect" title=" " alt="" coords="244,35,325,61"/>
-<area shape="rect" href="namespacepFlow.html#a66efa897c8bfc622e127b85c5394e58f" title=" " alt="" coords="27,5,174,32"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a1647e0ed184c652964aaccd3e15b3c04" title=" " alt="" coords="5,57,196,98"/>
-</map>
+<div class="center"><img src="classpFlow_1_1Field_a13fac74a6ba182fd009dbb14818b0d01_icgraph.png" border="0" usemap="#classpFlow_1_1Field_a13fac74a6ba182fd009dbb14818b0d01_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a526f8a7b256bf1641fa30e476334996b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a526f8a7b256bf1641fa30e476334996b">&#9670;&nbsp;</a></span>readField() <span class="overload">[2/2]</span></h2>
+<a id="a83f9a8e30fb37f90e9a6436f4470aaa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83f9a8e30fb37f90e9a6436f4470aaa2">&#9670;&nbsp;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool readField </td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> name </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em>, </td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00182">182</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triSurface_8cpp_source.html#l00124">triSurface::append()</a>, and <a class="el" href="internalField_8hpp_source.html#l00145">internalField&lt; realx3, void &gt;::name()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Field_a83f9a8e30fb37f90e9a6436f4470aaa2_icgraph.png" border="0" usemap="#classpFlow_1_1Field_a83f9a8e30fb37f90e9a6436f4470aaa2_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="abddf9e42b6a8c5f965f2b23f30a4d960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abddf9e42b6a8c5f965f2b23f30a4d960">&#9670;&nbsp;</a></span>fillField() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fillField </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a>&#160;</td>
+          <td class="paramname"><em>span</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>resume</em>&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1418,20 +1379,91 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00160">160</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00188">188</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triSurfaceField_8hpp_source.html#l00163">triSurfaceField&lt; uint32 &gt;::fill()</a>, and <a class="el" href="internalField_8hpp_source.html#l00175">internalField&lt; realx3, void &gt;::fillInternal()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Field_abddf9e42b6a8c5f965f2b23f30a4d960_icgraph.png" border="0" usemap="#classpFlow_1_1Field_abddf9e42b6a8c5f965f2b23f30a4d960_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
-<a id="ac550f175fb70daa183a4008bfd790f5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac550f175fb70daa183a4008bfd790f5f">&#9670;&nbsp;</a></span>writeField()</h2>
+<a id="aaf0e1b45e5bcaaaf0a95e59aad8e8ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf0e1b45e5bcaaaf0a95e59aad8e8ba3">&#9670;&nbsp;</a></span>fillField() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fillField </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00193">193</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aff8e92ab47032ae811d1271161cb9b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff8e92ab47032ae811d1271161cb9b22">&#9670;&nbsp;</a></span>read() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool writeField </td>
+          <td class="memname">bool read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
+          <td class="paramname"><em>is</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00023">23</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00214">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="pointField_8cpp_source.html#l00236">pointField&lt; pFlow::VectorSingle, pFlow::AB3History &gt;::readPointField()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Field_aff8e92ab47032ae811d1271161cb9b22_icgraph.png" border="0" usemap="#classpFlow_1_1Field_aff8e92ab47032ae811d1271161cb9b22_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a6a40de4ceed55b2f78cf3027739dfd91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a40de4ceed55b2f78cf3027739dfd91">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool write </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td>
           <td class="paramname"><em>os</em></td><td>)</td>
@@ -1440,38 +1472,36 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00170">170</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00095">95</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00252">pFlow::operator&lt;&lt;()</a>, and <a class="el" href="Field_8hpp_source.html#l00231">Field&lt; VectorDual, int8 &gt;::write()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00225">pFlow::operator&lt;&lt;()</a>.</p>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Field_ac550f175fb70daa183a4008bfd790f5f_icgraph.png" border="0" usemap="#classpFlow_1_1Field_ac550f175fb70daa183a4008bfd790f5f_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Field_ac550f175fb70daa183a4008bfd790f5f_icgraph" id="classpFlow_1_1Field_ac550f175fb70daa183a4008bfd790f5f_icgraph">
-<area shape="rect" title=" " alt="" coords="243,35,329,61"/>
-<area shape="rect" href="namespacepFlow.html#ad77460a4d54e75754c7119d0af751cc7" title=" " alt="" coords="27,5,173,32"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="5,57,195,98"/>
-</map>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Field_a6a40de4ceed55b2f78cf3027739dfd91_icgraph.png" border="0" usemap="#classpFlow_1_1Field_a6a40de4ceed55b2f78cf3027739dfd91_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a1647e0ed184c652964aaccd3e15b3c04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1647e0ed184c652964aaccd3e15b3c04">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a08e94ee49f203eb9d2ab071846af9fb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e94ee49f203eb9d2ab071846af9fb5">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool read </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
           <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;&#160;</td>
+          <td class="paramname"><em>iop</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1485,42 +1515,39 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00226">226</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00054">54</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6a40de4ceed55b2f78cf3027739dfd91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a40de4ceed55b2f78cf3027739dfd91">&#9670;&nbsp;</a></span>write()</h2>
+<a id="a8c955e17bd99dcab8fa9cf8c96ba6dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c955e17bd99dcab8fa9cf8c96ba6dd0">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool write </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>os</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;&#160;</td>
+          <td class="paramname"><em>iop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00231">231</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8cpp_source.html#l00116">116</a> of file <a class="el" href="Field_8cpp_source.html">Field.cpp</a>.</p>
 
 </div>
 </div>
@@ -1540,12 +1567,12 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00061">61</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00069">69</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
 </div>
 </div>
@@ -1564,14 +1591,14 @@ class pFlow::Field&lt; VectorField, T, PropType &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00063">63</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Field_8hpp_source.html#l00071">71</a> of file <a class="el" href="Field_8hpp_source.html">Field.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00211">Field&lt; VectorDual, int8 &gt;::fieldKey()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Field_8hpp_source.html#l00177">Field&lt; uint32x3 &gt;::fieldKey()</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,28 @@
+digraph "src/phasicFlow/containers/VectorHD/VectorSingle.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/containers\l/VectorHD/VectorSingle.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="vector",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="globalSettings.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$globalSettings_8hpp.html",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="phasicFlowKokkos.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$phasicFlowKokkos_8hpp.html",tooltip=" "];
+  Node1 -> Node62 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node62 [label="stdVectorHelper.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$stdVectorHelper_8hpp.html",tooltip=" "];
+  Node62 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node30 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node1 -> Node63 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node63 [label="indexContainer.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$indexContainer_8hpp.html",tooltip=" "];
+  Node63 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node63 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node64 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node64 [label="streams.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$streams_8hpp.html",tooltip=" "];
+  Node1 -> Node82 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node82 [label="VectorSingleAlgorithms.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$VectorSingleAlgorithms_8hpp.html",tooltip=" "];
+  Node1 -> Node83 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node83 [label="VectorSingle.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$VectorSingle_8cpp.html",tooltip=" "];
+}

@@ -1,0 +1,11 @@
+digraph "VectorDual&lt; T, MemorySpace &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="VectorDual\< T, MemorySpace \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="orange",fontsize="10",style="dashed",label=" \< int32 \>" ,fontname="Helvetica"];
+  Node2 [label="VectorDual\< int32 \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="orange",fontsize="10",style="dashed",label=" \< multiRotatingAxis \>" ,fontname="Helvetica"];
+  Node3 [label="VectorDual\< multiRotating\lAxis \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html",tooltip=" "];
+}

@@ -1,0 +1,18 @@
+digraph "src/phasicFlow/structuredData/pointStructure/internalPoints/pointFlag.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/structured\lData/pointStructure/internalPoints\l/pointFlag.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="phasicFlowKokkos.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$phasicFlowKokkos_8hpp.html",tooltip=" "];
+  Node1 -> Node61 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node61 [label="domain.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$domain_8hpp.html",tooltip=" "];
+  Node1 -> Node81 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node81 [label="scatteredFieldAccess.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$scatteredFieldAccess_8hpp.html",tooltip=" "];
+  Node81 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node82 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node82 [label="globalSettings.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$globalSettings_8hpp.html",tooltip=" "];
+  Node1 -> Node83 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node83 [label="pointFlagKernels.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pointFlagKernels_8hpp.html",tooltip=" "];
+}

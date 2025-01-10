@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: cellsWallLevel0&lt; executionSpace &gt; Class Template Reference</title>
+<title>PhasicFlow: cellsWallLevel0 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,36 +105,14 @@ $(document).ready(function(){initNavTree('classpFlow_1_1cellsWallLevel0.html',''
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classpFlow_1_1cellsWallLevel0-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cellsWallLevel0&lt; executionSpace &gt; Class Template Reference</div>  </div>
+<div class="title">cellsWallLevel0 Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for cellsWallLevel0&lt; executionSpace &gt;:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0__inherit__graph.png" border="0" usemap="#cellsWallLevel0_3_01executionSpace_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="cellsWallLevel0_3_01executionSpace_01_4_inherit__map" id="cellsWallLevel0_3_01executionSpace_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,207,121"/>
-<area shape="rect" href="classpFlow_1_1cells.html" title=" " alt="" coords="49,5,163,32"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for cellsWallLevel0&lt; executionSpace &gt;:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0__coll__graph.png" border="0" usemap="#cellsWallLevel0_3_01executionSpace_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="cellsWallLevel0_3_01executionSpace_01_4_coll__map" id="cellsWallLevel0_3_01executionSpace_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,207,121"/>
-<area shape="rect" href="classpFlow_1_1cells.html" title=" " alt="" coords="49,5,163,32"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -143,25 +121,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a200e2b36a2cd413a512279c0089c6b50"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a200e2b36a2cd413a512279c0089c6b50">IdType</a> = <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td></tr>
-<tr class="separator:a200e2b36a2cd413a512279c0089c6b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae73570f5a8fa6f2a0123b6a44eadca22"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> = <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td></tr>
-<tr class="separator:ae73570f5a8fa6f2a0123b6a44eadca22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeddf2432738cfab3cda287d6fb96e048"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#aeddf2432738cfab3cda287d6fb96e048">Cells</a> = <a class="el" href="classpFlow_1_1cells.html">cells</a>&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> &gt;</td></tr>
-<tr class="separator:aeddf2432738cfab3cda287d6fb96e048"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3810d08b3beabddce512c36e16a23cd7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a3810d08b3beabddce512c36e16a23cd7">CellType</a> = typename <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">Cells::CellType</a></td></tr>
-<tr class="separator:a3810d08b3beabddce512c36e16a23cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a268a0b77c6f89665e5ef14307a3f1731"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a> = executionSpace</td></tr>
-<tr class="separator:a268a0b77c6f89665e5ef14307a3f1731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae961a6bda7030f1e988b142ff9d83815"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae961a6bda7030f1e988b142ff9d83815">execution_space</a> = <a class="el" href="namespacepFlow.html#a441c5e39ccd3b1a0224e4437eaf42bfc">csExecutionSpace</a></td></tr>
+<tr class="separator:ae961a6bda7030f1e988b142ff9d83815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5b08fe17cf30c7c64a5ee12370133e9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> = typename execution_space::memory_space</td></tr>
 <tr class="separator:ac5b08fe17cf30c7c64a5ee12370133e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e63edb05d6b5a08f98f8c077c391b4c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e63edb05d6b5a08f98f8c077c391b4c">iBoxType</a> = <a class="el" href="classpFlow_1_1iBox.html">iBox</a>&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> &gt;</td></tr>
-<tr class="separator:a5e63edb05d6b5a08f98f8c077c391b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> = <a class="el" href="classpFlow_1_1triple.html">triple</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt;</td></tr>
-<tr class="separator:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> = <a class="el" href="classpFlow_1_1triple.html">triple</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt;</td></tr>
-<tr class="separator:aa9e4fb31c9788931c99bc7251b5dd86e inherit pub_types_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af40cc1e2d3435a98396343c41571a8fa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#af40cc1e2d3435a98396343c41571a8fa">iBoxType</a> = <a class="el" href="classpFlow_1_1iBox.html">iBox</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt;</td></tr>
+<tr class="separator:af40cc1e2d3435a98396343c41571a8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -169,256 +134,67 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a71190a5b10fc975584fe951c981795c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb081ee364207ac9b1b6831329a4366f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#afb081ee364207ac9b1b6831329a4366f">cellsWallLevel0</a> ()</td></tr>
 <tr class="separator:afb081ee364207ac9b1b6831329a4366f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcaf45c5f96cd518bab40edc7e975a5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#adcaf45c5f96cd518bab40edc7e975a5f">cellsWallLevel0</a> (const <a class="el" href="classpFlow_1_1cellsWallLevel0.html#aeddf2432738cfab3cda287d6fb96e048">Cells</a> &amp;ppCells, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> cellExtent, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numPoints, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a6a45631adf2182157aba9efdde94058e">numElements</a>, const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;points, const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a51afbafe3e3517b4e7755c14959053df">int32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;vertices)</td></tr>
-<tr class="separator:adcaf45c5f96cd518bab40edc7e975a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15363cafe68ebc68b0b50110e3492433"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a15363cafe68ebc68b0b50110e3492433">resetElements</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a6a45631adf2182157aba9efdde94058e">numElements</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numPoints, <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;points, <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a51afbafe3e3517b4e7755c14959053df">int32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;vertices)</td></tr>
-<tr class="separator:a15363cafe68ebc68b0b50110e3492433"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dbdc2c647dbecb842e2ac7063da6ee6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e63edb05d6b5a08f98f8c077c391b4c">iBoxType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a0dbdc2c647dbecb842e2ac7063da6ee6">elementBox</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i) const</td></tr>
-<tr class="separator:a0dbdc2c647dbecb842e2ac7063da6ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a45631adf2182157aba9efdde94058e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a6a45631adf2182157aba9efdde94058e">numElements</a> () const</td></tr>
-<tr class="separator:a6a45631adf2182157aba9efdde94058e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cbdc8f9467a44e7ca4cd7f7a443c7c6"><td class="memTemplParams" colspan="2">template&lt;typename PairsContainer , typename particleMapType &gt; </td></tr>
-<tr class="memitem:a5cbdc8f9467a44e7ca4cd7f7a443c7c6"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5cbdc8f9467a44e7ca4cd7f7a443c7c6">broadSearch</a> (PairsContainer &amp;pairs, particleMapType &amp;particleMap)</td></tr>
-<tr class="separator:a5cbdc8f9467a44e7ca4cd7f7a443c7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6e5792787e3b52834c24fc84a1e7bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5c6e5792787e3b52834c24fc84a1e7bd">build</a> ()</td></tr>
-<tr class="separator:a5c6e5792787e3b52834c24fc84a1e7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bd39ea5c4205c7c8471c5a3dd772c2d"><td class="memTemplParams" colspan="2">template&lt;typename PairsContainer , typename particleMapType &gt; </td></tr>
-<tr class="memitem:a0bd39ea5c4205c7c8471c5a3dd772c2d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a0bd39ea5c4205c7c8471c5a3dd772c2d">particleWallFindPairs</a> (PairsContainer &amp;pairs, particleMapType &amp;particleMap)</td></tr>
-<tr class="separator:a0bd39ea5c4205c7c8471c5a3dd772c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e6b458dfceee06a7fcaab14b3f1222a"><td class="memTemplParams" colspan="2">template&lt;typename PairsContainer , typename CellIteratorType &gt; </td></tr>
-<tr class="memitem:a5e6b458dfceee06a7fcaab14b3f1222a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e6b458dfceee06a7fcaab14b3f1222a">findPairsElementRangeCount</a> (PairsContainer &amp;pairs, CellIteratorType cellIter)</td></tr>
-<tr class="separator:a5e6b458dfceee06a7fcaab14b3f1222a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fe71c59eec21bd5c30fd45ba5f1d545"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a9fe71c59eec21bd5c30fd45ba5f1d545">operator()</a> (<a class="el" href="classpFlow_1_1cellsWallLevel0_1_1TagFindCellRange2.html">TagFindCellRange2</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i) const</td></tr>
-<tr class="separator:a9fe71c59eec21bd5c30fd45ba5f1d545"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ad3d63298d5caff2151c5f668739dded6">cells</a> ()</td></tr>
-<tr class="separator:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a616df0d63575c19a901ea6923147cd33">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6fb05e2360d79abab0ac460ca04ad50e">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a>)</td></tr>
-<tr class="separator:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab044ceeb1abca27318a836d4f15cb567">cells</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1e417a2f66123d555e24c4e241641472">cells</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ad3d63298d5caff2151c5f668739dded6">cells</a> ()</td></tr>
-<tr class="separator:ad3d63298d5caff2151c5f668739dded6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a616df0d63575c19a901ea6923147cd33">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:a616df0d63575c19a901ea6923147cd33 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6fb05e2360d79abab0ac460ca04ad50e">cells</a> (const <a class="el" href="classpFlow_1_1box.html">box</a> &amp;<a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a>, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a>)</td></tr>
-<tr class="separator:a6fb05e2360d79abab0ac460ca04ad50e inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab044ceeb1abca27318a836d4f15cb567">cells</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:ab044ceeb1abca27318a836d4f15cb567 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1e417a2f66123d555e24c4e241641472">cells</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:a1e417a2f66123d555e24c4e241641472 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a28766f2d75868928c721fcf917e10ca2">operator=</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa7695ab501078c987ef5090ee8f81ff9">operator=</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a28766f2d75868928c721fcf917e10ca2">operator=</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;)=default</td></tr>
-<tr class="separator:a28766f2d75868928c721fcf917e10ca2 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa7695ab501078c987ef5090ee8f81ff9">operator=</a> (<a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:aa7695ab501078c987ef5090ee8f81ff9 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html">cells</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aab4957227ae46b934b9f779363e6c83c">getCells</a> () const</td></tr>
-<tr class="separator:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html">cells</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aab4957227ae46b934b9f779363e6c83c">getCells</a> () const</td></tr>
-<tr class="separator:aab4957227ae46b934b9f779363e6c83c inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ac85134d434244d9392bf9e85409e0dbc">setCellSize</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#adf72965b7f6214b7401db0a0171db764">setCellSize</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ac85134d434244d9392bf9e85409e0dbc">setCellSize</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:ac85134d434244d9392bf9e85409e0dbc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#adf72965b7f6214b7401db0a0171db764">setCellSize</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> <a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a>)</td></tr>
-<tr class="separator:adf72965b7f6214b7401db0a0171db764 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a> () const</td></tr>
-<tr class="separator:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6507d41c8151540f5972661c7a3f8d30">cellSize</a> () const</td></tr>
-<tr class="separator:a6507d41c8151540f5972661c7a3f8d30 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a88bb499251f955a6f7fdc9cde78270ed">numCells</a> () const</td></tr>
-<tr class="separator:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a88bb499251f955a6f7fdc9cde78270ed">numCells</a> () const</td></tr>
-<tr class="separator:a88bb499251f955a6f7fdc9cde78270ed inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a> () const</td></tr>
-<tr class="separator:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f">nx</a> () const</td></tr>
-<tr class="separator:a103c0d44baf9aa23e9f2fc151678905f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a> () const</td></tr>
-<tr class="separator:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6">ny</a> () const</td></tr>
-<tr class="separator:aa70433dff70a92ca9c74616c1e3b48e6 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a> () const</td></tr>
-<tr class="separator:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8">nz</a> () const</td></tr>
-<tr class="separator:a5e549f8b31612df62519b37e65954fc8 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a30407b0f1d3278ff34800ef45997cb84">totalCells</a> () const</td></tr>
-<tr class="separator:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a94809bdb48183ff3ef62935d56f5c1e0">int64</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a30407b0f1d3278ff34800ef45997cb84">totalCells</a> () const</td></tr>
-<tr class="separator:a30407b0f1d3278ff34800ef45997cb84 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a> () const</td></tr>
-<tr class="separator:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a3f60000177e9be96d15a5cb63bdd4c17">domain</a> () const</td></tr>
-<tr class="separator:a3f60000177e9be96d15a5cb63bdd4c17 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6a5c6423585a7ad6ad55f6df56c459bd">pointIndex</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a6a5c6423585a7ad6ad55f6df56c459bd">pointIndex</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:a6a5c6423585a7ad6ad55f6df56c459bd inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ae16870dd025bb71d3dafdc755cedd946">pointIndexInDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;index) const</td></tr>
-<tr class="separator:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ae16870dd025bb71d3dafdc755cedd946">pointIndexInDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;index) const</td></tr>
-<tr class="separator:ae16870dd025bb71d3dafdc755cedd946 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#afddde66f6a63e9dc2b78c740cc4c0949">inDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#afddde66f6a63e9dc2b78c740cc4c0949">inDomain</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p) const</td></tr>
-<tr class="separator:afddde66f6a63e9dc2b78c740cc4c0949 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a35eb36ff8390e5ad23a70f2a304a326d">isInRange</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;cell) const</td></tr>
-<tr class="separator:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1755e19f5555acc13bed60cbe4952283">isInRange</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k) const</td></tr>
-<tr class="separator:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a35eb36ff8390e5ad23a70f2a304a326d">isInRange</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;cell) const</td></tr>
-<tr class="separator:a35eb36ff8390e5ad23a70f2a304a326d inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a1755e19f5555acc13bed60cbe4952283">isInRange</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> j, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> k) const</td></tr>
-<tr class="separator:a1755e19f5555acc13bed60cbe4952283 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a4bb4067c00c519c5a613dbc1c076dd0f">extendBox</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p1, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p2, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p3, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> extent, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;minP, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;maxP) const</td></tr>
-<tr class="separator:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a989eee28d3bba158140e994c9cf6ccf7">extendBox</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p1, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p2, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p3, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> extent, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;minP, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;maxP) const</td></tr>
-<tr class="separator:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a4bb4067c00c519c5a613dbc1c076dd0f">extendBox</a> (const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p1, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p2, const <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;p3, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> extent, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;minP, <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> &amp;maxP) const</td></tr>
-<tr class="separator:a4bb4067c00c519c5a613dbc1c076dd0f inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a989eee28d3bba158140e994c9cf6ccf7">extendBox</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p1, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p2, const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;p3, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> extent, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;minP, <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;maxP) const</td></tr>
-<tr class="separator:a989eee28d3bba158140e994c9cf6ccf7 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a109e8d4c8c126b11cc22366416628515">bound</a> (<a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> p) const</td></tr>
-<tr class="separator:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab10317c14e2180777a6d745a2427a2bc">bound</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p) const</td></tr>
-<tr class="separator:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a109e8d4c8c126b11cc22366416628515">bound</a> (<a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a> p) const</td></tr>
-<tr class="separator:a109e8d4c8c126b11cc22366416628515 inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#ab10317c14e2180777a6d745a2427a2bc">bound</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> p) const</td></tr>
-<tr class="separator:ab10317c14e2180777a6d745a2427a2bc inherit pub_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb7af116aa428721e26daee35d692cfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#acb7af116aa428721e26daee35d692cfc">cellsWallLevel0</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> cellExtent, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> numPoints, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#afd768f1f6986f6ac4dba6b584fec2f65">numElements</a>, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;points, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#ac855895a97b710fcd720a106454d0f4b">uint32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;vertices, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;normals)</td></tr>
+<tr class="separator:acb7af116aa428721e26daee35d692cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ea8ae4948a8ad75498bbf03121ae1a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a67ea8ae4948a8ad75498bbf03121ae1a">resetElements</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#afd768f1f6986f6ac4dba6b584fec2f65">numElements</a>, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> numPoints, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;points, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#ac855895a97b710fcd720a106454d0f4b">uint32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;vertices, const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;normals)</td></tr>
+<tr class="separator:a67ea8ae4948a8ad75498bbf03121ae1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4142ce89793ecf724fec66c71929548"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#af40cc1e2d3435a98396343c41571a8fa">iBoxType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac4142ce89793ecf724fec66c71929548">elementBox</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> i) const</td></tr>
+<tr class="separator:ac4142ce89793ecf724fec66c71929548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd768f1f6986f6ac4dba6b584fec2f65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#afd768f1f6986f6ac4dba6b584fec2f65">numElements</a> () const</td></tr>
+<tr class="separator:afd768f1f6986f6ac4dba6b584fec2f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e78d84db7d080d4b9e2a0acb3fe6da6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a4e78d84db7d080d4b9e2a0acb3fe6da6">broadSearch</a> (<a class="el" href="namespacepFlow.html#a506789c74aeb557f060a3c896bbaeb8b">csPairContainerType</a> &amp;pairs, const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;searchBox, const <a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">mapperNBS::CellIterator</a> &amp;particleMap, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;pPoints, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;pDiams, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> sizeRatio)</td></tr>
+<tr class="separator:a4e78d84db7d080d4b9e2a0acb3fe6da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa07357b2729b2bca9a0e0ee6b7c0536d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#aa07357b2729b2bca9a0e0ee6b7c0536d">build</a> (const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;searchBox)</td></tr>
+<tr class="separator:aa07357b2729b2bca9a0e0ee6b7c0536d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56aca7b20039ba847192786e9ea17679"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a56aca7b20039ba847192786e9ea17679">particleWallFindPairs</a> (<a class="el" href="namespacepFlow.html#a506789c74aeb557f060a3c896bbaeb8b">csPairContainerType</a> &amp;pairs, const <a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">mapperNBS::CellIterator</a> &amp;particleMap, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;pPoints, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;pDiams, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> sizeRatio)</td></tr>
+<tr class="separator:a56aca7b20039ba847192786e9ea17679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a497e88d0ec1ac01d06cb8e10103bf643"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a497e88d0ec1ac01d06cb8e10103bf643">findPairsElementRangeCount</a> (<a class="el" href="namespacepFlow.html#a506789c74aeb557f060a3c896bbaeb8b">csPairContainerType</a> &amp;pairs, const <a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">mapperNBS::CellIterator</a> &amp;particleMap, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;pPoints, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;pDiams, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> sizeRatio)</td></tr>
+<tr class="separator:a497e88d0ec1ac01d06cb8e10103bf643"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:a72915a4a6f954d43cf6e71a323679363"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a72915a4a6f954d43cf6e71a323679363">tpPWContactSearch</a> = Kokkos::TeamPolicy&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a>, Kokkos::Schedule&lt; Kokkos::Dynamic &gt;, Kokkos::IndexType&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &gt;</td></tr>
-<tr class="separator:a72915a4a6f954d43cf6e71a323679363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a394952448a965e98eddf3b183a7a60e4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a394952448a965e98eddf3b183a7a60e4">rpFindCellRange2Type</a> = Kokkos::RangePolicy&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0_1_1TagFindCellRange2.html">TagFindCellRange2</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a>, Kokkos::IndexType&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &gt;</td></tr>
-<tr class="separator:a394952448a965e98eddf3b183a7a60e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a5215cab483d38e325199c45ca3afba4d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5215cab483d38e325199c45ca3afba4d">tpPWContactSearch</a> = Kokkos::TeamPolicy&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae961a6bda7030f1e988b142ff9d83815">execution_space</a>, Kokkos::Schedule&lt; Kokkos::Dynamic &gt;, Kokkos::IndexType&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt; &gt;</td></tr>
+<tr class="separator:a5215cab483d38e325199c45ca3afba4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
 <tr class="memitem:a328744b8a25238f746b939e7be7b6703"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a328744b8a25238f746b939e7be7b6703">allocateArrays</a> ()</td></tr>
 <tr class="separator:a328744b8a25238f746b939e7be7b6703"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a192000f430504a4772f7bbc5895ae850">calculate</a> ()</td></tr>
-<tr class="separator:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a192000f430504a4772f7bbc5895ae850">calculate</a> ()</td></tr>
-<tr class="separator:a192000f430504a4772f7bbc5895ae850 inherit pro_methods_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:ae37c17021aa06dd9bcf5e7a187d6babf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae37c17021aa06dd9bcf5e7a187d6babf">cellExtent_</a> = 0.5</td></tr>
 <tr class="separator:ae37c17021aa06dd9bcf5e7a187d6babf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48ae0ae4c180d88b2d9bc0ad3daf6ba6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a48ae0ae4c180d88b2d9bc0ad3daf6ba6">numElements_</a> = 0</td></tr>
-<tr class="separator:a48ae0ae4c180d88b2d9bc0ad3daf6ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61a0f26a4b3be1a60036235413c1520a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a61a0f26a4b3be1a60036235413c1520a">numPoints_</a> = 0</td></tr>
-<tr class="separator:a61a0f26a4b3be1a60036235413c1520a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1a4b87eac80fb8b5d90c50c75987f25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a51afbafe3e3517b4e7755c14959053df">int32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#aa1a4b87eac80fb8b5d90c50c75987f25">vertices_</a></td></tr>
-<tr class="separator:aa1a4b87eac80fb8b5d90c50c75987f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88ca4b3e1f86cb55b9758cd2c504a867"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a88ca4b3e1f86cb55b9758cd2c504a867">points_</a></td></tr>
+<tr class="memitem:a408e27c1658806793197fe63839b8d3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a408e27c1658806793197fe63839b8d3a">numElements_</a> = 0</td></tr>
+<tr class="separator:a408e27c1658806793197fe63839b8d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b01e70009846816b3405287de5e5193"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a7b01e70009846816b3405287de5e5193">numPoints_</a> = 0</td></tr>
+<tr class="separator:a7b01e70009846816b3405287de5e5193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3195e728b589ac64dbef02a7618d0db6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#ac855895a97b710fcd720a106454d0f4b">uint32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a3195e728b589ac64dbef02a7618d0db6">vertices_</a></td></tr>
+<tr class="separator:a3195e728b589ac64dbef02a7618d0db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ca4b3e1f86cb55b9758cd2c504a867"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a88ca4b3e1f86cb55b9758cd2c504a867">points_</a></td></tr>
 <tr class="separator:a88ca4b3e1f86cb55b9758cd2c504a867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0f6ffd4d8ca569e301a71927d024c78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e63edb05d6b5a08f98f8c077c391b4c">iBoxType</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#aa0f6ffd4d8ca569e301a71927d024c78">elementBox_</a></td></tr>
+<tr class="memitem:a91c97e68b4aa00a5df588c759b8480bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#a91c97e68b4aa00a5df588c759b8480bc">normals_</a></td></tr>
+<tr class="separator:a91c97e68b4aa00a5df588c759b8480bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f6ffd4d8ca569e301a71927d024c78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#af40cc1e2d3435a98396343c41571a8fa">iBoxType</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cellsWallLevel0.html#aa0f6ffd4d8ca569e301a71927d024c78">elementBox_</a></td></tr>
 <tr class="separator:aa0f6ffd4d8ca569e301a71927d024c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classpFlow_1_1cells"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1cells')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1cells.html">cells&lt; int32 &gt;</a></td></tr>
-<tr class="memitem:aab1dcc2ee3915125ba5aa7e66678d2b8 inherit pro_attribs_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1box.html">box</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#aab1dcc2ee3915125ba5aa7e66678d2b8">domain_</a></td></tr>
-<tr class="separator:aab1dcc2ee3915125ba5aa7e66678d2b8 inherit pro_attribs_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b9d14b08f72f5e11d83d1c065e23bac inherit pro_attribs_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a0b9d14b08f72f5e11d83d1c065e23bac">cellSize_</a></td></tr>
-<tr class="separator:a0b9d14b08f72f5e11d83d1c065e23bac inherit pro_attribs_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53f28b84a7bbd7b06110e9f35df5119a inherit pro_attribs_classpFlow_1_1cells"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">CellType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1cells.html#a53f28b84a7bbd7b06110e9f35df5119a">numCells_</a></td></tr>
-<tr class="separator:a53f28b84a7bbd7b06110e9f35df5119a inherit pro_attribs_classpFlow_1_1cells"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename executionSpace&gt;<br />
-class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
-
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00037">37</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00034">34</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a200e2b36a2cd413a512279c0089c6b50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a200e2b36a2cd413a512279c0089c6b50">&#9670;&nbsp;</a></span>IdType</h2>
+<a id="ae961a6bda7030f1e988b142ff9d83815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae961a6bda7030f1e988b142ff9d83815">&#9670;&nbsp;</a></span>execution_space</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a200e2b36a2cd413a512279c0089c6b50">IdType</a> =  <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae961a6bda7030f1e988b142ff9d83815">execution_space</a> =  <a class="el" href="namespacepFlow.html#a441c5e39ccd3b1a0224e4437eaf42bfc">csExecutionSpace</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00043">43</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ae73570f5a8fa6f2a0123b6a44eadca22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae73570f5a8fa6f2a0123b6a44eadca22">&#9670;&nbsp;</a></span>IndexType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a> =  <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00045">45</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aeddf2432738cfab3cda287d6fb96e048"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeddf2432738cfab3cda287d6fb96e048">&#9670;&nbsp;</a></span>Cells</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#aeddf2432738cfab3cda287d6fb96e048">Cells</a> =  <a class="el" href="classpFlow_1_1cells.html">cells</a>&lt;<a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00047">47</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3810d08b3beabddce512c36e16a23cd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3810d08b3beabddce512c36e16a23cd7">&#9670;&nbsp;</a></span>CellType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a3810d08b3beabddce512c36e16a23cd7">CellType</a> =  typename <a class="el" href="classpFlow_1_1cells.html#aa9e4fb31c9788931c99bc7251b5dd86e">Cells::CellType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00049">49</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a268a0b77c6f89665e5ef14307a3f1731"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a268a0b77c6f89665e5ef14307a3f1731">&#9670;&nbsp;</a></span>execution_space</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a> =  executionSpace</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00051">51</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00038">38</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
@@ -434,52 +210,28 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00053">53</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00040">40</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5e63edb05d6b5a08f98f8c077c391b4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e63edb05d6b5a08f98f8c077c391b4c">&#9670;&nbsp;</a></span>iBoxType</h2>
+<a id="af40cc1e2d3435a98396343c41571a8fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af40cc1e2d3435a98396343c41571a8fa">&#9670;&nbsp;</a></span>iBoxType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e63edb05d6b5a08f98f8c077c391b4c">iBoxType</a> =  <a class="el" href="classpFlow_1_1iBox.html">iBox</a>&lt;<a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae73570f5a8fa6f2a0123b6a44eadca22">IndexType</a>&gt;</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#af40cc1e2d3435a98396343c41571a8fa">iBoxType</a> =  <a class="el" href="classpFlow_1_1iBox.html">iBox</a>&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00055">55</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00042">42</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a72915a4a6f954d43cf6e71a323679363"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72915a4a6f954d43cf6e71a323679363">&#9670;&nbsp;</a></span>tpPWContactSearch</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a72915a4a6f954d43cf6e71a323679363">tpPWContactSearch</a> =  Kokkos::TeamPolicy&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a>, Kokkos::Schedule&lt;Kokkos::Dynamic&gt;, Kokkos::IndexType&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&gt; &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00084">84</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a394952448a965e98eddf3b183a7a60e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a394952448a965e98eddf3b183a7a60e4">&#9670;&nbsp;</a></span>rpFindCellRange2Type</h2>
+<a id="a5215cab483d38e325199c45ca3afba4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5215cab483d38e325199c45ca3afba4d">&#9670;&nbsp;</a></span>tpPWContactSearch</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -488,17 +240,17 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a394952448a965e98eddf3b183a7a60e4">rpFindCellRange2Type</a> =  Kokkos::RangePolicy&lt;<a class="el" href="classpFlow_1_1cellsWallLevel0_1_1TagFindCellRange2.html">TagFindCellRange2</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a268a0b77c6f89665e5ef14307a3f1731">execution_space</a>, Kokkos::IndexType&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5215cab483d38e325199c45ca3afba4d">tpPWContactSearch</a> =  Kokkos::TeamPolicy&lt; <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ae961a6bda7030f1e988b142ff9d83815">execution_space</a>, Kokkos::Schedule&lt;Kokkos::Dynamic&gt;, Kokkos::IndexType&lt;<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&gt; &gt;</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00087">87</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00073">73</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
@@ -526,54 +278,51 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00101">101</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00086">86</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
-<a id="adcaf45c5f96cd518bab40edc7e975a5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adcaf45c5f96cd518bab40edc7e975a5f">&#9670;&nbsp;</a></span>cellsWallLevel0() <span class="overload">[2/2]</span></h2>
+<a id="acb7af116aa428721e26daee35d692cfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb7af116aa428721e26daee35d692cfc">&#9670;&nbsp;</a></span>cellsWallLevel0() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">FUNCTION_H</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html">cellsWallLevel0</a> </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1cellsWallLevel0.html">cellsWallLevel0</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1cellsWallLevel0.html#aeddf2432738cfab3cda287d6fb96e048">Cells</a> &amp;&#160;</td>
-          <td class="paramname"><em>ppCells</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
           <td class="paramname"><em>cellExtent</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
           <td class="paramname"><em>numPoints</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
           <td class="paramname"><em>numElements</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>points</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a51afbafe3e3517b4e7755c14959053df">int32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vertices</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#ac855895a97b710fcd720a106454d0f4b">uint32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>normals</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -581,27 +330,9 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00104">104</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00091">cellsWallLevel0&lt; executionSpace &gt;::allocateArrays()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_adcaf45c5f96cd518bab40edc7e975a5f_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_adcaf45c5f96cd518bab40edc7e975a5f_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_adcaf45c5f96cd518bab40edc7e975a5f_cgraph" id="classpFlow_1_1cellsWallLevel0_adcaf45c5f96cd518bab40edc7e975a5f_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,128,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a328744b8a25238f746b939e7be7b6703" title=" " alt="" coords="176,5,292,32"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8cpp_source.html#l00025">25</a> of file <a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a>.</p>
 
 </div>
 </div>
@@ -624,38 +355,20 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00091">91</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00076">76</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00077">cellsWallLevel0&lt; executionSpace &gt;::elementBox_</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00065">cellsWallLevel0&lt; executionSpace &gt;::numElements_</a>, and <a class="el" href="KokkosUtilities_8hpp_source.html#l00060">pFlow::reallocNoInit()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00104">cellsWallLevel0&lt; executionSpace &gt;::cellsWallLevel0()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">cellsWallLevel0&lt; executionSpace &gt;::resetElements()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00067">cellsWallLevel0::elementBox_</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00052">cellsWallLevel0::numElements_</a>, and <a class="el" href="KokkosUtilities_8hpp_source.html#l00064">pFlow::reallocNoInit()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_cgraph" id="classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,121,32"/>
-<area shape="rect" href="namespacepFlow.html#ab330850a647d2dcdcfc9a2210958de54" title=" " alt="" coords="169,5,320,32"/>
-</map>
-</div>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_icgraph" id="classpFlow_1_1cellsWallLevel0_a328744b8a25238f746b939e7be7b6703_icgraph">
-<area shape="rect" title=" " alt="" coords="176,31,292,57"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#adcaf45c5f96cd518bab40edc7e975a5f" title=" " alt="" coords="5,5,128,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a15363cafe68ebc68b0b50110e3492433" title=" " alt="" coords="9,56,125,83"/>
-</map>
 </div>
 
 </div>
@@ -669,7 +382,7 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
         <tr>
           <td class="memname">TypeInfoNV </td>
           <td>(</td>
-          <td class="paramtype">&quot;cellsWallLevel0&lt; executionSpace &gt;&quot;&#160;</td>
+          <td class="paramtype">&quot;cellsWallLevel0&quot;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -678,38 +391,41 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
 
 </div>
 </div>
-<a id="a15363cafe68ebc68b0b50110e3492433"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15363cafe68ebc68b0b50110e3492433">&#9670;&nbsp;</a></span>resetElements()</h2>
+<a id="a67ea8ae4948a8ad75498bbf03121ae1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ea8ae4948a8ad75498bbf03121ae1a">&#9670;&nbsp;</a></span>resetElements()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool resetElements </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
           <td class="paramname"><em>numElements</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
           <td class="paramname"><em>numPoints</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>points</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a51afbafe3e3517b4e7755c14959053df">int32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vertices</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#ac855895a97b710fcd720a106454d0f4b">uint32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>normals</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -717,33 +433,14 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">127</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00091">cellsWallLevel0&lt; executionSpace &gt;::allocateArrays()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00151">cellsWallLevel0&lt; executionSpace &gt;::numElements()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00065">cellsWallLevel0&lt; executionSpace &gt;::numElements_</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00068">cellsWallLevel0&lt; executionSpace &gt;::numPoints_</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00074">cellsWallLevel0&lt; executionSpace &gt;::points_</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00071">cellsWallLevel0&lt; executionSpace &gt;::vertices_</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a15363cafe68ebc68b0b50110e3492433_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a15363cafe68ebc68b0b50110e3492433_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a15363cafe68ebc68b0b50110e3492433_cgraph" id="classpFlow_1_1cellsWallLevel0_a15363cafe68ebc68b0b50110e3492433_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,121,57"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a328744b8a25238f746b939e7be7b6703" title=" " alt="" coords="169,5,285,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a6a45631adf2182157aba9efdde94058e" title=" " alt="" coords="171,56,283,83"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8cpp_source.html#l00045">45</a> of file <a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a0dbdc2c647dbecb842e2ac7063da6ee6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dbdc2c647dbecb842e2ac7063da6ee6">&#9670;&nbsp;</a></span>elementBox()</h2>
+<a id="ac4142ce89793ecf724fec66c71929548"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4142ce89793ecf724fec66c71929548">&#9670;&nbsp;</a></span>elementBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -752,9 +449,9 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e63edb05d6b5a08f98f8c077c391b4c">iBoxType</a> elementBox </td>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="classpFlow_1_1cellsWallLevel0.html#af40cc1e2d3435a98396343c41571a8fa">iBoxType</a> elementBox </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -766,27 +463,23 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00145">145</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00110">110</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00077">cellsWallLevel0&lt; executionSpace &gt;::elementBox_</a>.</p>
+<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00067">cellsWallLevel0::elementBox_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00212">cellsWallLevel0&lt; executionSpace &gt;::findPairsElementRangeCount()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">cellsWallLevel0::build()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a0dbdc2c647dbecb842e2ac7063da6ee6_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a0dbdc2c647dbecb842e2ac7063da6ee6_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a0dbdc2c647dbecb842e2ac7063da6ee6_icgraph" id="classpFlow_1_1cellsWallLevel0_a0dbdc2c647dbecb842e2ac7063da6ee6_icgraph">
-<area shape="rect" title=" " alt="" coords="264,5,365,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a5e6b458dfceee06a7fcaab14b3f1222a" title=" " alt="" coords="5,5,216,32"/>
-</map>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1cellsWallLevel0_ac4142ce89793ecf724fec66c71929548_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_ac4142ce89793ecf724fec66c71929548_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a6a45631adf2182157aba9efdde94058e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a45631adf2182157aba9efdde94058e">&#9670;&nbsp;</a></span>numElements()</h2>
+<a id="afd768f1f6986f6ac4dba6b584fec2f65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd768f1f6986f6ac4dba6b584fec2f65">&#9670;&nbsp;</a></span>numElements()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -795,7 +488,7 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numElements </td>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> numElements </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -808,45 +501,53 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00151">151</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00116">116</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00065">cellsWallLevel0&lt; executionSpace &gt;::numElements_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">cellsWallLevel0&lt; executionSpace &gt;::resetElements()</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a6a45631adf2182157aba9efdde94058e_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a6a45631adf2182157aba9efdde94058e_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a6a45631adf2182157aba9efdde94058e_icgraph" id="classpFlow_1_1cellsWallLevel0_a6a45631adf2182157aba9efdde94058e_icgraph">
-<area shape="rect" title=" " alt="" coords="169,5,281,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a15363cafe68ebc68b0b50110e3492433" title=" " alt="" coords="5,5,121,32"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00052">cellsWallLevel0::numElements_</a>.</p>
 
 </div>
 </div>
-<a id="a5cbdc8f9467a44e7ca4cd7f7a443c7c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cbdc8f9467a44e7ca4cd7f7a443c7c6">&#9670;&nbsp;</a></span>broadSearch()</h2>
+<a id="a4e78d84db7d080d4b9e2a0acb3fe6da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e78d84db7d080d4b9e2a0acb3fe6da6">&#9670;&nbsp;</a></span>broadSearch()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool broadSearch </td>
           <td>(</td>
-          <td class="paramtype">PairsContainer &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a506789c74aeb557f060a3c896bbaeb8b">csPairContainerType</a> &amp;&#160;</td>
           <td class="paramname"><em>pairs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">particleMapType &amp;&#160;</td>
-          <td class="paramname"><em>particleMap</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td>
+          <td class="paramname"><em>searchBox</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">mapperNBS::CellIterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>particleMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pDiams</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
+          <td class="paramname"><em>sizeRatio</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -854,106 +555,85 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00159">159</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8cpp_source.html#l00066">66</a> of file <a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00170">cellsWallLevel0&lt; executionSpace &gt;::build()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00181">cellsWallLevel0&lt; executionSpace &gt;::particleWallFindPairs()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellMapping_8hpp_source.html#l00133">cellMapping&lt; executionSpace &gt;::broadSearch()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="NBS_8hpp_source.html#l00059">NBS::impl_broadSearch()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_cgraph" id="classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,108,57"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a5c6e5792787e3b52834c24fc84a1e7bd" title=" " alt="" coords="207,5,262,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a0bd39ea5c4205c7c8471c5a3dd772c2d" title=" " alt="" coords="156,56,313,83"/>
-</map>
-</div>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_icgraph" id="classpFlow_1_1cellsWallLevel0_a5cbdc8f9467a44e7ca4cd7f7a443c7c6_icgraph">
-<area shape="rect" title=" " alt="" coords="200,13,303,39"/>
-<area shape="rect" href="classpFlow_1_1cellMapping.html#abba428befc17327c2b4398dd3792cfe5" title=" " alt="" coords="5,5,152,47"/>
-</map>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a4e78d84db7d080d4b9e2a0acb3fe6da6_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a4e78d84db7d080d4b9e2a0acb3fe6da6_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a5c6e5792787e3b52834c24fc84a1e7bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c6e5792787e3b52834c24fc84a1e7bd">&#9670;&nbsp;</a></span>build()</h2>
+<a id="aa07357b2729b2bca9a0e0ee6b7c0536d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa07357b2729b2bca9a0e0ee6b7c0536d">&#9670;&nbsp;</a></span>build()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool build </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1cells.html">cells</a> &amp;&#160;</td>
+          <td class="paramname"><em>searchBox</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00170">170</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">85</a> of file <a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00065">cellsWallLevel0&lt; executionSpace &gt;::numElements_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00159">cellsWallLevel0&lt; executionSpace &gt;::broadSearch()</a>.</p>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00049">cellsWallLevel0::cellExtent_</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00110">cellsWallLevel0::elementBox()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00067">cellsWallLevel0::elementBox_</a>, <a class="el" href="Interaction_2contactSearch_2methods_2cellBased_2cells_8hpp_source.html#l00178">cells::extendBox()</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00058">LAMBDA_HD</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00052">cellsWallLevel0::numElements_</a>, <a class="el" href="Interaction_2contactSearch_2methods_2cellBased_2cells_8hpp_source.html#l00133">cells::pointIndex()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00061">cellsWallLevel0::points_</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00058">cellsWallLevel0::vertices_</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a5c6e5792787e3b52834c24fc84a1e7bd_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a5c6e5792787e3b52834c24fc84a1e7bd_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a5c6e5792787e3b52834c24fc84a1e7bd_icgraph" id="classpFlow_1_1cellsWallLevel0_a5c6e5792787e3b52834c24fc84a1e7bd_icgraph">
-<area shape="rect" title=" " alt="" coords="156,5,211,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a5cbdc8f9467a44e7ca4cd7f7a443c7c6" title=" " alt="" coords="5,5,108,32"/>
-</map>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1cellsWallLevel0_aa07357b2729b2bca9a0e0ee6b7c0536d_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_aa07357b2729b2bca9a0e0ee6b7c0536d_cgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a0bd39ea5c4205c7c8471c5a3dd772c2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bd39ea5c4205c7c8471c5a3dd772c2d">&#9670;&nbsp;</a></span>particleWallFindPairs()</h2>
+<a id="a56aca7b20039ba847192786e9ea17679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56aca7b20039ba847192786e9ea17679">&#9670;&nbsp;</a></span>particleWallFindPairs()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool particleWallFindPairs </td>
           <td>(</td>
-          <td class="paramtype">PairsContainer &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a506789c74aeb557f060a3c896bbaeb8b">csPairContainerType</a> &amp;&#160;</td>
           <td class="paramname"><em>pairs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">particleMapType &amp;&#160;</td>
-          <td class="paramname"><em>particleMap</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">mapperNBS::CellIterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>particleMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pDiams</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
+          <td class="paramname"><em>sizeRatio</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -961,64 +641,56 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00181">181</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8cpp_source.html#l00115">115</a> of file <a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="streams_8hpp_source.html#l00038">endINFO</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00212">cellsWallLevel0&lt; executionSpace &gt;::findPairsElementRangeCount()</a>, <a class="el" href="streams_8hpp_source.html#l00037">INFORMATION</a>, and <a class="el" href="VectorMath_8hpp_source.html#l00164">pFlow::max()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00159">cellsWallLevel0&lt; executionSpace &gt;::broadSearch()</a>.</p>
-<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="unsortedPairs_8hpp_source.html#l00168">unsortedPairs&lt; executionSpace, idType &gt;::capacity()</a>, <a class="el" href="streams_8hpp_source.html#l00037">END_INFO</a>, <a class="el" href="unsortedPairs_8hpp_source.html#l00193">unsortedPairs&lt; executionSpace, idType &gt;::increaseCapacityBy()</a>, <a class="el" href="streams_8hpp_source.html#l00036">INFORMATION</a>, and <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00079">pFlow::max()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_cgraph" id="classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,163,57"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a5e6b458dfceee06a7fcaab14b3f1222a" title=" " alt="" coords="211,5,421,32"/>
-<area shape="rect" href="namespacepFlow.html#ae14bf16748b3144baa1112f08c2a83b1" title=" " alt="" coords="267,56,365,83"/>
-</map>
-</div>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_icgraph" id="classpFlow_1_1cellsWallLevel0_a0bd39ea5c4205c7c8471c5a3dd772c2d_icgraph">
-<area shape="rect" title=" " alt="" coords="156,5,313,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a5cbdc8f9467a44e7ca4cd7f7a443c7c6" title=" " alt="" coords="5,5,108,32"/>
-</map>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a56aca7b20039ba847192786e9ea17679_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a56aca7b20039ba847192786e9ea17679_cgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a5e6b458dfceee06a7fcaab14b3f1222a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e6b458dfceee06a7fcaab14b3f1222a">&#9670;&nbsp;</a></span>findPairsElementRangeCount()</h2>
+<a id="a497e88d0ec1ac01d06cb8e10103bf643"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a497e88d0ec1ac01d06cb8e10103bf643">&#9670;&nbsp;</a></span>findPairsElementRangeCount()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> findPairsElementRangeCount </td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a> findPairsElementRangeCount </td>
           <td>(</td>
-          <td class="paramtype">PairsContainer &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a506789c74aeb557f060a3c896bbaeb8b">csPairContainerType</a> &amp;&#160;</td>
           <td class="paramname"><em>pairs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CellIteratorType&#160;</td>
-          <td class="paramname"><em>cellIter</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1mapperNBS_1_1CellIterator.html">mapperNBS::CellIterator</a> &amp;&#160;</td>
+          <td class="paramname"><em>particleMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pDiams</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
+          <td class="paramname"><em>sizeRatio</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1026,93 +698,17 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00212">212</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8cpp_source.html#l00151">151</a> of file <a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="contactSearchFunctions_8hpp_source.html#l00082">pFlow::boxExtent()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00145">cellsWallLevel0&lt; executionSpace &gt;::elementBox()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00077">cellsWallLevel0&lt; executionSpace &gt;::elementBox_</a>, <a class="el" href="contactSearchFunctions_8hpp_source.html#l00071">pFlow::indexToCell()</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>, <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00065">cellsWallLevel0&lt; executionSpace &gt;::numElements_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00181">cellsWallLevel0&lt; executionSpace &gt;::particleWallFindPairs()</a>.</p>
-<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="VectorMath_8hpp_source.html#l00084">pFlow::abs()</a>, <a class="el" href="contactSearchFunctions_8hpp_source.html#l00082">pFlow::boxExtent()</a>, <a class="el" href="contactSearchFunctions_8hpp_source.html#l00071">pFlow::indexToCell()</a>, <a class="el" href="unsortedPairs_8hpp_source.html#l00105">unsortedPairs&lt; executionSpace, idType &gt;::insert()</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00058">LAMBDA_HD</a>, <a class="el" href="NBSLoop_8hpp_source.html#l00024">n</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00076">mapperNBS::CellIterator::next()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00060">mapperNBS::CellIterator::NoPos</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00067">mapperNBS::CellIterator::start()</a>, <a class="el" href="triple_8hpp_source.html#l00132">triple&lt; T &gt;::x()</a>, <a class="el" href="triple_8hpp_source.html#l00144">triple&lt; T &gt;::y()</a>, and <a class="el" href="triple_8hpp_source.html#l00156">triple&lt; T &gt;::z()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_cgraph" id="classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,56,216,83"/>
-<area shape="rect" href="namespacepFlow.html#af89e6417fc20ba48fec7c2ea002f2983" title=" " alt="" coords="268,5,403,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a0dbdc2c647dbecb842e2ac7063da6ee6" title=" " alt="" coords="285,56,386,83"/>
-<area shape="rect" href="namespacepFlow.html#aede61a7f9c2792269f212fe8d5582173" title=" " alt="" coords="264,107,407,133"/>
-</map>
-</div>
-<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_icgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_icgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_icgraph" id="classpFlow_1_1cellsWallLevel0_a5e6b458dfceee06a7fcaab14b3f1222a_icgraph">
-<area shape="rect" title=" " alt="" coords="211,5,421,32"/>
-<area shape="rect" href="classpFlow_1_1cellsWallLevel0.html#a0bd39ea5c4205c7c8471c5a3dd772c2d" title=" " alt="" coords="5,5,163,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a9fe71c59eec21bd5c30fd45ba5f1d545"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fe71c59eec21bd5c30fd45ba5f1d545">&#9670;&nbsp;</a></span>operator()()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> void operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1cellsWallLevel0_1_1TagFindCellRange2.html">TagFindCellRange2</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>i</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00266">266</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="cellsWallLevel0_8hpp_source.html#l00062">cellsWallLevel0&lt; executionSpace &gt;::cellExtent_</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00077">cellsWallLevel0&lt; executionSpace &gt;::elementBox_</a>, <a class="el" href="Interaction_2contactSearch_2cells_8hpp_source.html#l00203">cells&lt; int32 &gt;::extendBox()</a>, <a class="el" href="Interaction_2contactSearch_2cells_8hpp_source.html#l00158">cells&lt; int32 &gt;::pointIndex()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00074">cellsWallLevel0&lt; executionSpace &gt;::points_</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00071">cellsWallLevel0&lt; executionSpace &gt;::vertices_</a>.</p>
-<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a9fe71c59eec21bd5c30fd45ba5f1d545_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a9fe71c59eec21bd5c30fd45ba5f1d545_cgraph" alt=""/></div>
-<map name="classpFlow_1_1cellsWallLevel0_a9fe71c59eec21bd5c30fd45ba5f1d545_cgraph" id="classpFlow_1_1cellsWallLevel0_a9fe71c59eec21bd5c30fd45ba5f1d545_cgraph">
-<area shape="rect" title=" " alt="" coords="5,46,92,73"/>
-<area shape="rect" href="classpFlow_1_1cells.html#a4bb4067c00c519c5a613dbc1c076dd0f" title=" " alt="" coords="140,5,287,47"/>
-<area shape="rect" href="classpFlow_1_1cells.html#a6a5c6423585a7ad6ad55f6df56c459bd" title=" " alt="" coords="140,71,287,112"/>
-</map>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1cellsWallLevel0_a497e88d0ec1ac01d06cb8e10103bf643_cgraph.png" border="0" usemap="#classpFlow_1_1cellsWallLevel0_a497e88d0ec1ac01d06cb8e10103bf643_cgraph" alt=""/></div>
 </div>
 
 </div>
@@ -1133,19 +729,19 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00062">62</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00049">49</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00266">cellsWallLevel0&lt; executionSpace &gt;::operator()()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">cellsWallLevel0::build()</a>.</p>
 
 </div>
 </div>
-<a id="a48ae0ae4c180d88b2d9bc0ad3daf6ba6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48ae0ae4c180d88b2d9bc0ad3daf6ba6">&#9670;&nbsp;</a></span>numElements_</h2>
+<a id="a408e27c1658806793197fe63839b8d3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408e27c1658806793197fe63839b8d3a">&#9670;&nbsp;</a></span>numElements_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1154,24 +750,24 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numElements_ = 0</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> numElements_ = 0</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00065">65</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00052">52</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00091">cellsWallLevel0&lt; executionSpace &gt;::allocateArrays()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00170">cellsWallLevel0&lt; executionSpace &gt;::build()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00212">cellsWallLevel0&lt; executionSpace &gt;::findPairsElementRangeCount()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00151">cellsWallLevel0&lt; executionSpace &gt;::numElements()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">cellsWallLevel0&lt; executionSpace &gt;::resetElements()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00076">cellsWallLevel0::allocateArrays()</a>, <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">cellsWallLevel0::build()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00116">cellsWallLevel0::numElements()</a>.</p>
 
 </div>
 </div>
-<a id="a61a0f26a4b3be1a60036235413c1520a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61a0f26a4b3be1a60036235413c1520a">&#9670;&nbsp;</a></span>numPoints_</h2>
+<a id="a7b01e70009846816b3405287de5e5193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b01e70009846816b3405287de5e5193">&#9670;&nbsp;</a></span>numPoints_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1180,24 +776,22 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numPoints_ = 0</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> numPoints_ = 0</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00068">68</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">cellsWallLevel0&lt; executionSpace &gt;::resetElements()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00055">55</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aa1a4b87eac80fb8b5d90c50c75987f25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1a4b87eac80fb8b5d90c50c75987f25">&#9670;&nbsp;</a></span>vertices_</h2>
+<a id="a3195e728b589ac64dbef02a7618d0db6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3195e728b589ac64dbef02a7618d0db6">&#9670;&nbsp;</a></span>vertices_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1206,19 +800,19 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a51afbafe3e3517b4e7755c14959053df">int32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; vertices_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#ac855895a97b710fcd720a106454d0f4b">uint32x3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; vertices_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00071">71</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00058">58</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00266">cellsWallLevel0&lt; executionSpace &gt;::operator()()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">cellsWallLevel0&lt; executionSpace &gt;::resetElements()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">cellsWallLevel0::build()</a>.</p>
 
 </div>
 </div>
@@ -1232,19 +826,43 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; points_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; points_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00074">74</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00061">61</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00266">cellsWallLevel0&lt; executionSpace &gt;::operator()()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00127">cellsWallLevel0&lt; executionSpace &gt;::resetElements()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">cellsWallLevel0::build()</a>.</p>
+
+</div>
+</div>
+<a id="a91c97e68b4aa00a5df588c759b8480bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c97e68b4aa00a5df588c759b8480bc">&#9670;&nbsp;</a></span>normals_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; normals_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00064">64</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
 </div>
 </div>
@@ -1258,24 +876,25 @@ class pFlow::cellsWallLevel0&lt; executionSpace &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="classpFlow_1_1cellsWallLevel0.html#a5e63edb05d6b5a08f98f8c077c391b4c">iBoxType</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; elementBox_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#aeac3efd0f623f0010ce6daa6499d8ebe">ViewType1D</a>&lt;<a class="el" href="classpFlow_1_1cellsWallLevel0.html#af40cc1e2d3435a98396343c41571a8fa">iBoxType</a>, <a class="el" href="classpFlow_1_1cellsWallLevel0.html#ac5b08fe17cf30c7c64a5ee12370133e9">memory_space</a>&gt; elementBox_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00077">77</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cellsWallLevel0_8hpp_source.html#l00067">67</a> of file <a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00091">cellsWallLevel0&lt; executionSpace &gt;::allocateArrays()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00145">cellsWallLevel0&lt; executionSpace &gt;::elementBox()</a>, <a class="el" href="cellsWallLevel0_8hpp_source.html#l00212">cellsWallLevel0&lt; executionSpace &gt;::findPairsElementRangeCount()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00266">cellsWallLevel0&lt; executionSpace &gt;::operator()()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="cellsWallLevel0_8hpp_source.html#l00076">cellsWallLevel0::allocateArrays()</a>, <a class="el" href="cellsWallLevel0_8cpp_source.html#l00085">cellsWallLevel0::build()</a>, and <a class="el" href="cellsWallLevel0_8hpp_source.html#l00110">cellsWallLevel0::elementBox()</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/Interaction/contactSearch/wallMappings/<a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/Interaction/contactSearch/methods/cellBased/NBS/<a class="el" href="cellsWallLevel0_8hpp_source.html">cellsWallLevel0.hpp</a></li>
+<li>src/Interaction/contactSearch/methods/cellBased/NBS/<a class="el" href="cellsWallLevel0_8cpp_source.html">cellsWallLevel0.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

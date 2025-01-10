@@ -1,5 +1,0 @@
-<map id="writeWordEntry" name="writeWordEntry">
-<area shape="rect" id="node1" title="Write a keyword/value entry." alt="" coords="5,31,128,57"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a" title="Write end entry (&#39;;&#39;) followed by newline." alt="" coords="209,5,289,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543" title="Write the keyword followed by an appropriate indentation." alt="" coords="176,56,321,83"/>
-</map>

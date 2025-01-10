@@ -1,8 +1,9 @@
 var classpFlow_1_1fileSystem =
 [
-    [ "pathType", "classpFlow_1_1fileSystem.html#a8b70327415b7e2434c6f1ff520c37f03", null ],
+    [ "pathType", "classpFlow_1_1fileSystem.html#a1893316b264fba94c7cb9bbcfbedf424", null ],
     [ "fileSystem", "classpFlow_1_1fileSystem.html#adbf52d64f89e6579932a2d97a410865f", null ],
-    [ "fileSystem", "classpFlow_1_1fileSystem.html#aa8df3461916f4b035188fbd0aec0ed12", null ],
+    [ "fileSystem", "classpFlow_1_1fileSystem.html#a9f11e2e2ee9e22476b5a2f6696bd3dae", null ],
+    [ "fileSystem", "classpFlow_1_1fileSystem.html#a83da5de5d375895fc2b1021f12202c22", null ],
     [ "fileSystem", "classpFlow_1_1fileSystem.html#a44c26d5923333c4aa46f52ad0ba2cc57", null ],
     [ "fileSystem", "classpFlow_1_1fileSystem.html#af76d52f75b39a3dd3d7b2556e3bae2db", null ],
     [ "fileSystem", "classpFlow_1_1fileSystem.html#a05d40e2dd9525a695fc871f9138b3667", null ],
@@ -20,6 +21,7 @@ var classpFlow_1_1fileSystem =
     [ "fileName", "classpFlow_1_1fileSystem.html#a06b8851f8e2610ba100d6dbe7c28e42a", null ],
     [ "absolute", "classpFlow_1_1fileSystem.html#af60e3745d0ba90eaec6169d2fedf3672", null ],
     [ "canonical", "classpFlow_1_1fileSystem.html#ae314be4455ae76c73ce660e840d0e5cb", null ],
+    [ "relative", "classpFlow_1_1fileSystem.html#a1757a6d2024caf9854f3bce10f713c5c", null ],
     [ "dirExist", "classpFlow_1_1fileSystem.html#a50adcf11cea516a2e8756eadafab8da3", null ],
     [ "exist", "classpFlow_1_1fileSystem.html#a549f0056414942b1ff25b23cdeac92ea", null ],
     [ "createDirs", "classpFlow_1_1fileSystem.html#a7f33187e671f9c2fc6f189bf7005e067", null ],
@@ -27,9 +29,9 @@ var classpFlow_1_1fileSystem =
     [ "operator/=", "classpFlow_1_1fileSystem.html#a68e72d3af85bf1d216834e8e5c616072", null ],
     [ "operator()", "classpFlow_1_1fileSystem.html#a867f8148e9b99b53b87b79fe200acff4", null ],
     [ "operator/", "classpFlow_1_1fileSystem.html#a39940fd65d47ee21b31888a9ae6597ac", null ],
-    [ "operator<<", "classpFlow_1_1fileSystem.html#aae9040631642e1f508bbe693250ed163", null ],
-    [ "operator<<", "classpFlow_1_1fileSystem.html#a12829c19a00d5cbcc9a76970304872f2", null ],
-    [ "path_", "classpFlow_1_1fileSystem.html#ae085158a530fc969b1c42c36f43c08d5", null ],
+    [ "operator<<", "classpFlow_1_1fileSystem.html#aa9e274fd12c0a39372fda20495055141", null ],
+    [ "operator<<", "classpFlow_1_1fileSystem.html#aecdfb8dc8facc302b767ff8d13abe3da", null ],
+    [ "path_", "classpFlow_1_1fileSystem.html#a794878ad4ca51ec4285992cacb67968d", null ],
     [ "isDir_", "classpFlow_1_1fileSystem.html#a665273dc06598e5f2a675e4ea9464770", null ],
     [ "notPermittedCharsFile", "classpFlow_1_1fileSystem.html#adc6d0ca8012efebb617c63f6b406324a", null ]
 ];

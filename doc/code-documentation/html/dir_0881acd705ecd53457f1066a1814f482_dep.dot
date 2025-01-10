@@ -1,0 +1,14 @@
+digraph "src/phasicFlow/streams/masterOstream" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_b13948a90891cb8a59f39ab8c50a8102 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="streams" fontname="Helvetica", fontsize="10", URL="dir_b13948a90891cb8a59f39ab8c50a8102.html"]
+  dir_0881acd705ecd53457f1066a1814f482 [shape=box, label="masterOstream", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_0881acd705ecd53457f1066a1814f482.html"];
+  }
+  dir_0be52b0d2f0bba84a72d3e4c1b25399f [shape=box label="token" URL="dir_0be52b0d2f0bba84a72d3e4c1b25399f.html"];
+  dir_7b330c61a9c831e500520a1387f6b9d0 [shape=box label="Stream" URL="dir_7b330c61a9c831e500520a1387f6b9d0.html"];
+  dir_7b330c61a9c831e500520a1387f6b9d0->dir_0be52b0d2f0bba84a72d3e4c1b25399f [headlabel="2", labeldistance=1.5 headhref="dir_000137_000138.html"];
+  dir_0881acd705ecd53457f1066a1814f482->dir_0be52b0d2f0bba84a72d3e4c1b25399f [headlabel="1", labeldistance=1.5 headhref="dir_000135_000138.html"];
+  dir_0881acd705ecd53457f1066a1814f482->dir_7b330c61a9c831e500520a1387f6b9d0 [headlabel="1", labeldistance=1.5 headhref="dir_000135_000137.html"];
+}

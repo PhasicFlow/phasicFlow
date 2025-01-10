@@ -1,0 +1,10 @@
+digraph "readBoolian_Str"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="readBoolian_Str",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Convert char string to bool."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="readBoolian_Str",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#ad14acab072635ba3fa539283f602b1a5",tooltip="Convert word to bool."];
+}

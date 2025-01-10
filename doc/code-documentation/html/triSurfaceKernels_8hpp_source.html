@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: src/phasicFlow/structuredData/trisurfaceStructure/triSurfaceKernels.hpp Source File</title>
+<title>PhasicFlow: src/phasicFlow/triSurface/triSurfaceKernels.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -136,47 +136,77 @@ $(document).ready(function(){initNavTree('triSurfaceKernels_8hpp_source.html',''
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">   32</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">calculateArea</a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">realx3Field_D</a>&amp; points, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">int32x3Field_D</a>&amp; vertices, <a class="code" href="classpFlow_1_1Field.html">realField_D</a>&amp; area)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">auto</span> numTri = vertices.<a class="code" href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">size</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">auto</span> areaD = area.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">auto</span> pointsD = points.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">auto</span> verticesD = vertices.<a class="code" href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">deviceVectorAll</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    Kokkos::parallel_for(</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="stringliteral">&quot;pFlow::triSurfaceKernels::calculateArea&quot;</span>,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        numTri,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i){</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">auto</span> v = verticesD[i];</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            areaD[i] = <a class="code" href="namespacepFlow_1_1triangleFunctions.html#a2074ab5b90f47b0ec593414c80923362">pFlow::triangleFunctions::triangleSurface</a>(</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                pointsD[v.x()],</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                pointsD[v.y()],</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                pointsD[v.z()]);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        });</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1triSurfaceKernels.html#a595d3fa281acdc5f6a352b43cc732716">   32</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#a595d3fa281acdc5f6a352b43cc732716">calculateArea</a>(</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">realx3Field_D</a>&amp; points, </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">uint32x3Field_D</a>&amp; vertices, </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classpFlow_1_1Field.html">realField_D</a>&amp; area)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">auto</span> numTri = vertices.<a class="code" href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">size</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">auto</span>&amp; areaD = area.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">auto</span>&amp; pointsD = points.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">auto</span>&amp; verticesD = vertices.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    Kokkos::parallel_for(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="stringliteral">&quot;pFlow::triSurfaceKernels::calculateArea&quot;</span>,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        numTri,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a>(<a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> i){</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keyword">auto</span> v = verticesD[i];</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            areaD[i] = <a class="code" href="namespacepFlow_1_1triangle.html#a76e5558852ea08d3bd5ccdd6f8a52151">pFlow::triangle::surface</a>(</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                pointsD[v.x()],</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                pointsD[v.y()],</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                pointsD[v.z()]);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        });</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1triSurfaceKernels.html#aa3910ffec09789599f4e15d186a944cb">   57</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacepFlow_1_1triSurfaceKernels.html#aa3910ffec09789599f4e15d186a944cb">calculateNormals</a>(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">realx3Field_D</a>&amp; points, </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Field.html">uint32x3Field_D</a>&amp; vertices, </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classpFlow_1_1Field.html">realx3Field_D</a>&amp; normals)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">auto</span> numTri = vertices.<a class="code" href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">size</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">auto</span>&amp; normalsD = normals.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">auto</span>&amp; pointsD = points.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">auto</span>&amp; verticesD = vertices.<a class="code" href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">deviceViewAll</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    Kokkos::parallel_for(</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="stringliteral">&quot;pFlow::triSurfaceKernels::calculateNormals&quot;</span>,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        numTri,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a>(<a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> i){</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">auto</span> v = verticesD[i];</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            normalsD[i] = <a class="code" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">pFlow::triangle::normal</a>(</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                pointsD[v.x()],</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                pointsD[v.y()],</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                pointsD[v.z()]);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        });</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html_aa3910ffec09789599f4e15d186a944cb"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html#aa3910ffec09789599f4e15d186a944cb">pFlow::triSurfaceKernels::calculateNormals</a></div><div class="ttdeci">INLINE_FUNCTION_H bool calculateNormals(const realx3Field_D &amp;points, const uint32x3Field_D &amp;vertices, realx3Field_D &amp;normals)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00057">triSurfaceKernels.hpp:57</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
 <div class="ttc" id="atriangleFunctions_8hpp_html"><div class="ttname"><a href="triangleFunctions_8hpp.html">triangleFunctions.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1triangleFunctions_html_a2074ab5b90f47b0ec593414c80923362"><div class="ttname"><a href="namespacepFlow_1_1triangleFunctions.html#a2074ab5b90f47b0ec593414c80923362">pFlow::triangleFunctions::triangleSurface</a></div><div class="ttdeci">INLINE_FUNCTION_HD real triangleSurface(const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</div><div class="ttdef"><b>Definition:</b> <a href="triangleFunctions_8hpp_source.html#l00030">triangleFunctions.hpp:30</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Field_html"><div class="ttname"><a href="classpFlow_1_1Field.html">pFlow::Field&lt; VectorSingle, realx3 &gt;</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triangle_html_ac08cdb1c0031ef0cc9161c6e72174b34"><div class="ttname"><a href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">pFlow::triangle::normal</a></div><div class="ttdeci">INLINE_FUNCTION_HD realx3 normal(const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</div><div class="ttdef"><b>Definition:</b> <a href="triangleFunctions_8hpp_source.html#l00038">triangleFunctions.hpp:38</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Field_html"><div class="ttname"><a href="classpFlow_1_1Field.html">pFlow::Field&lt; realx3 &gt;</a></div></div>
 <div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html">pFlow::triSurfaceKernels</a></div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00028">triSurfaceKernels.hpp:28</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
 <div class="ttc" id="aFields_8hpp_html"><div class="ttname"><a href="Fields_8hpp.html">Fields.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html_a6d317544a368345e8af9269185795797"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html#a6d317544a368345e8af9269185795797">pFlow::triSurfaceKernels::calculateArea</a></div><div class="ttdeci">INLINE_FUNCTION_H bool calculateArea(const realx3Field_D &amp;points, const int32x3Field_D &amp;vertices, realField_D &amp;area)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00032">triSurfaceKernels.hpp:32</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_a542d326bc30e30d52e9deb402759b872"><div class="ttname"><a href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div><div class="ttdeci">#define INLINE_FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00053">pFlowMacros.hpp:53</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_aa7d4742cdf24a3792276e669531d145c"><div class="ttname"><a href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a></div><div class="ttdeci">#define LAMBDA_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00054">pFlowMacros.hpp:54</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a334c2560412a3bc4fc1c215a77a48337"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a334c2560412a3bc4fc1c215a77a48337">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00362">VectorSingle.hpp:362</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a18052bc1ad8ea07ea5b6205321cba10e"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a18052bc1ad8ea07ea5b6205321cba10e">pFlow::VectorSingle::deviceVectorAll</a></div><div class="ttdeci">INLINE_FUNCTION_H viewType &amp; deviceVectorAll()</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00297">VectorSingle.hpp:297</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_a542d326bc30e30d52e9deb402759b872"><div class="ttname"><a href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">INLINE_FUNCTION_H</a></div><div class="ttdeci">#define INLINE_FUNCTION_H</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00057">pFlowMacros.hpp:57</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a51122b76468e0c5f19ea69c5c0ca6cf4"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a51122b76468e0c5f19ea69c5c0ca6cf4">pFlow::VectorSingle::deviceViewAll</a></div><div class="ttdeci">INLINE_FUNCTION_H auto &amp; deviceViewAll()</div><div class="ttdoc">Device view range [0,capcity)</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8cpp_source.html#l00249">VectorSingle.cpp:249</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triSurfaceKernels_html_a595d3fa281acdc5f6a352b43cc732716"><div class="ttname"><a href="namespacepFlow_1_1triSurfaceKernels.html#a595d3fa281acdc5f6a352b43cc732716">pFlow::triSurfaceKernels::calculateArea</a></div><div class="ttdeci">INLINE_FUNCTION_H bool calculateArea(const realx3Field_D &amp;points, const uint32x3Field_D &amp;vertices, realField_D &amp;area)</div><div class="ttdef"><b>Definition:</b> <a href="triSurfaceKernels_8hpp_source.html#l00032">triSurfaceKernels.hpp:32</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_aa7d4742cdf24a3792276e669531d145c"><div class="ttname"><a href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a></div><div class="ttdeci">#define LAMBDA_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00058">pFlowMacros.hpp:58</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1triangle_html_a76e5558852ea08d3bd5ccdd6f8a52151"><div class="ttname"><a href="namespacepFlow_1_1triangle.html#a76e5558852ea08d3bd5ccdd6f8a52151">pFlow::triangle::surface</a></div><div class="ttdeci">INLINE_FUNCTION_HD real surface(const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</div><div class="ttdef"><b>Definition:</b> <a href="triangleFunctions_8hpp_source.html#l00030">triangleFunctions.hpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a235f4855cec31187d575a459abb3eed2"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a235f4855cec31187d575a459abb3eed2">pFlow::VectorSingle::size</a></div><div class="ttdeci">INLINE_FUNCTION_H uint32 size() const</div><div class="ttdoc">Size of the vector.</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8cpp_source.html#l00297">VectorSingle.cpp:297</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html">structuredData</a></li><li class="navelem"><a class="el" href="dir_cb566f9a80a0a346c3a6366e4b888b7d.html">trisurfaceStructure</a></li><li class="navelem"><a class="el" href="triSurfaceKernels_8hpp.html">triSurfaceKernels.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_38cf8104b99597e1233d708542fdeb18.html">triSurface</a></li><li class="navelem"><a class="el" href="triSurfaceKernels_8hpp.html">triSurfaceKernels.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -1,8 +1,0 @@
-<map id="src/Geometry/geometryMotion/geometryMotions.hpp" name="src/Geometry/geometryMotion/geometryMotions.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="299,5,521,47"/>
-<area shape="rect" id="node2" href="$geometryMotion_8hpp.html" title=" " alt="" coords="5,95,164,121"/>
-<area shape="rect" id="node3" href="$fixedWall_8hpp.html" title=" " alt="" coords="189,95,298,121"/>
-<area shape="rect" id="node4" href="$rotatingAxisMotion_8hpp.html" title=" " alt="" coords="323,95,497,121"/>
-<area shape="rect" id="node5" href="$multiRotatingAxisMotion_8hpp.html" title=" " alt="" coords="521,95,733,121"/>
-<area shape="rect" id="node6" href="$vibratingMotion_8hpp.html" title=" " alt="" coords="757,95,911,121"/>
-</map>

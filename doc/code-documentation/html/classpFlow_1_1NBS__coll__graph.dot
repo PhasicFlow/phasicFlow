@@ -1,0 +1,15 @@
+digraph "NBS"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="NBS",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="particleWallContactSearchs\l\< NBS \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1particleWallContactSearchs.html",tooltip=" "];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" cellsWallLevel0_" ,fontname="Helvetica"];
+  Node7 [label="cellsWallLevel0",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1cellsWallLevel0.html",tooltip=" "];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" NBSLevel0_" ,fontname="Helvetica"];
+  Node8 [label="NBSLevel0",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1NBSLevel0.html",tooltip=" "];
+  Node12 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" adjustableBox_" ,fontname="Helvetica"];
+  Node12 [label="Logical",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Logical.html",tooltip="Holds a bool value and converts strings to bool."];
+}

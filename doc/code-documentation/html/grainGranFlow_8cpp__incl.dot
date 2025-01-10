@@ -1,0 +1,40 @@
+digraph "solvers/grainGranFlow/grainGranFlow.cpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="solvers/grainGranFlow\l/grainGranFlow.cpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="vocabs.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$vocabs_8hpp.html",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="phasicFlowKokkos.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$phasicFlowKokkos_8hpp.html",tooltip=" "];
+  Node1 -> Node62 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node62 [label="systemControl.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$systemControl_8hpp.html",tooltip=" "];
+  Node1 -> Node113 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node113 [label="commandLine.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$commandLine_8hpp.html",tooltip=" "];
+  Node1 -> Node116 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node116 [label="property.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$property_8hpp.html",tooltip=" "];
+  Node1 -> Node125 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node125 [label="geometry.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$geometry_8hpp.html",tooltip=" "];
+  Node125 -> Node116 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node147 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node147 [label="grainParticles.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$grainParticles_8hpp.html",tooltip=" "];
+  Node147 -> Node116 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node147 -> Node62 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node185 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node185 [label="interaction.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$interaction_8hpp.html",tooltip=" "];
+  Node185 -> Node116 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node185 -> Node62 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node189 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node189 [label="Insertions.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$Insertions_8hpp.html",tooltip=" "];
+  Node1 -> Node202 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node202 [label="initialize_Control.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$initialize__Control_8hpp.html",tooltip=" "];
+  Node1 -> Node204 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node204 [label="setProperty.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$setProperty_8hpp.html",tooltip=" "];
+  Node1 -> Node205 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node205 [label="setSurfaceGeometry.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$setSurfaceGeometry_8hpp.html",tooltip=" "];
+  Node1 -> Node206 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node206 [label="createDEMComponents.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$grainGranFlow_2createDEMComponents_8hpp.html",tooltip=" "];
+  Node1 -> Node207 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node207 [label="finalize.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$finalize_8hpp.html",tooltip=" "];
+}

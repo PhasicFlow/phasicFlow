@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: src/phasicFlow/containers/pointField/pointFields.cpp Source File</title>
+<title>PhasicFlow: src/phasicFlow/containers/pointField/pointField/pointFields.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,51 +125,52 @@ $(document).ready(function(){initNavTree('pointFields_8cpp_source.html',''); ini
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointFields_8hpp.html">pointFields.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointFields_8hpp.html">pointFields.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="createBoundaryFields_8hpp.html">createBoundaryFields.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int8&gt;</a>; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int8, pFlow::HostSpace&gt;</a>; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int16&gt;</a>; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int16, pFlow::HostSpace&gt;</a>; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int32&gt;</a>; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">   25</a></span>&#160;<span class="preprocessor">#define createPointFields(DataType)                             \</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">  template class pFlow::pointField&lt;DataType, pFlow::HostSpace&gt;; \</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">  createBoundaryFields(DataType, pFlow::HostSpace);             \</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">                                                                \</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">  template class pFlow::pointField&lt;DataType&gt;;                   \</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">  createBoundaryFields(DataType, void);</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// uint8</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a>(<a class="code" href="namespacepFlow.html#a34ecedcf03a70dc91e4616212d79267d">pFlow::uint8</a>);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int32, pFlow::HostSpace&gt;</a>; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int64&gt;</a>; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::int64, pFlow::HostSpace&gt;</a>; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a>(<a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a>(<a class="code" href="namespacepFlow.html#aeefdb2888fa3c58f2454ef004419e6a5">pFlow::uint64</a>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::uint32&gt;</a>; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::uint32, pFlow::HostSpace&gt;</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::label&gt;</a>; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a>(<a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a>(<a class="code" href="classpFlow_1_1triple.html">pFlow::realx3</a>);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::label, pFlow::HostSpace&gt;</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::real&gt;</a>; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a>(<a class="code" href="classpFlow_1_1quadruple.html">pFlow::realx4</a>);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::real, pFlow::HostSpace&gt;</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::realx3&gt;</a>; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::VectorSingle, pFlow::realx3, pFlow::HostSpace&gt;</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classpFlow_1_1pointField.html">pFlow::pointField&lt;pFlow::word, pFlow::HostSpace&gt;</a>; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="pointFields_8cpp.html#a3c3ffa48a0caa7c03ad3bd017810e5e7">createBoundaryFields</a>(<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a>, <a class="code" href="namespacepFlow.html#a49dd1192cf116583abf7c726c7146851">pFlow::HostSpace</a>);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
 <div class="ttc" id="apointFields_8hpp_html"><div class="ttname"><a href="pointFields_8hpp.html">pointFields.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00035">pointField.hpp:35</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a49dd1192cf116583abf7c726c7146851"><div class="ttname"><a href="namespacepFlow.html#a49dd1192cf116583abf7c726c7146851">pFlow::HostSpace</a></div><div class="ttdeci">Kokkos::HostSpace HostSpace</div><div class="ttdoc">Host memory space.</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00041">KokkosTypes.hpp:41</a></div></div>
+<div class="ttc" id="apointFields_8cpp_html_a3c3ffa48a0caa7c03ad3bd017810e5e7"><div class="ttname"><a href="pointFields_8cpp.html#a3c3ffa48a0caa7c03ad3bd017810e5e7">createBoundaryFields</a></div><div class="ttdeci">createBoundaryFields(pFlow::uint8, pFlow::HostSpace)</div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00033">pointField.hpp:33</a></div></div>
+<div class="ttc" id="acreateBoundaryFields_8hpp_html"><div class="ttname"><a href="createBoundaryFields_8hpp.html">createBoundaryFields.hpp</a></div></div>
+<div class="ttc" id="apointFields_8cpp_html_acd12c26687046da5d8e9a843f2e1cfbe"><div class="ttname"><a href="pointFields_8cpp.html#acd12c26687046da5d8e9a843f2e1cfbe">createPointFields</a></div><div class="ttdeci">#define createPointFields(DataType)</div><div class="ttdef"><b>Definition:</b> <a href="pointFields_8cpp_source.html#l00025">pointFields.cpp:25</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aeefdb2888fa3c58f2454ef004419e6a5"><div class="ttname"><a href="namespacepFlow.html#aeefdb2888fa3c58f2454ef004419e6a5">pFlow::uint64</a></div><div class="ttdeci">unsigned long long int uint64</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00058">builtinTypes.hpp:58</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html"><div class="ttname"><a href="classpFlow_1_1quadruple.html">pFlow::quadruple</a></div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00036">quadruple.hpp:36</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1triple_html"><div class="ttname"><a href="classpFlow_1_1triple.html">pFlow::triple</a></div><div class="ttdoc">A set of 3 variables that can be used for vector variables.</div><div class="ttdef"><b>Definition:</b> <a href="triple_8hpp_source.html#l00036">triple.hpp:36</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a34ecedcf03a70dc91e4616212d79267d"><div class="ttname"><a href="namespacepFlow.html#a34ecedcf03a70dc91e4616212d79267d">pFlow::uint8</a></div><div class="ttdeci">unsigned char uint8</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00054">builtinTypes.hpp:54</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_74a3bd5d559eb2469f344a26dc365ad0.html">containers</a></li><li class="navelem"><a class="el" href="dir_e9e787f783a8c65da3b050132fffe244.html">pointField</a></li><li class="navelem"><a class="el" href="pointFields_8cpp.html">pointFields.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_74a3bd5d559eb2469f344a26dc365ad0.html">containers</a></li><li class="navelem"><a class="el" href="dir_e9e787f783a8c65da3b050132fffe244.html">pointField</a></li><li class="navelem"><a class="el" href="dir_5d8425190fd88646f06580e82eb988ab.html">pointField</a></li><li class="navelem"><a class="el" href="pointFields_8cpp.html">pointFields.cpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

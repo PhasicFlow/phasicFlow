@@ -1,0 +1,16 @@
+digraph "dataEntry"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="dataEntry",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Data entry to be used in dictionries."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="iEntry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iEntry.html",tooltip="Interface calss for data entry and dictionary"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" tokenStream_" ,fontname="Helvetica"];
+  Node3 [label="iTstream",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iTstream.html",tooltip="Input token stream."];
+  Node12 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" parDict_" ,fontname="Helvetica"];
+  Node12 [label="dictionary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html",tooltip="Dictionary holds a set of data entries or sub-dictionaries that are enclosed in a curely braces or ar..."];
+  Node2 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 -> Node12 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" parDict_\nnullDict" ,fontname="Helvetica"];
+  Node1 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" nullDataEntry" ,fontname="Helvetica"];
+}

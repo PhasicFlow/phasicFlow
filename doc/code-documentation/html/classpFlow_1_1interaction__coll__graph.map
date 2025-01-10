@@ -1,8 +1,0 @@
-<map id="interaction" name="interaction">
-<area shape="rect" id="node1" title=" " alt="" coords="352,107,444,133"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1demInteraction.html" title=" " alt="" coords="42,5,163,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1eventObserver.html" title=" " alt="" coords="43,56,162,83"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1interactionBase.html" title=" " alt="" coords="41,107,165,133"/>
-<area shape="rect" id="node5" href="$classpFlow_1_1dictionary.html" title=" " alt="" coords="59,211,146,237"/>
-<area shape="rect" id="node6" href="$classpFlow_1_1uniquePtr.html" title=" " alt="" coords="5,262,200,303"/>
-</map>

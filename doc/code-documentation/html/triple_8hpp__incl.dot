@@ -1,0 +1,31 @@
+digraph "src/phasicFlow/types/triple/triple.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/types\l/triple/triple.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlowMacros.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$pFlowMacros_8hpp.html",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="numericConstants.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$numericConstants_8hpp.html",tooltip=" "];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="typeInfo.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$typeInfo_8hpp.html",tooltip=" "];
+  Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="uniquePtr.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$uniquePtr_8hpp.html",tooltip=" "];
+  Node16 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="iOstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iOstream_8hpp.html",tooltip=" "];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="iIstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iIstream_8hpp.html",tooltip=" "];
+  Node22 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node27 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node27 [label="tripleFwd.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tripleFwd_8hpp.html",tooltip=" "];
+  Node1 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node28 [label="tripleI.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tripleI_8hpp.html",tooltip=" "];
+  Node1 -> Node29 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 [label="tripleMath.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tripleMath_8hpp.html",tooltip=" "];
+}

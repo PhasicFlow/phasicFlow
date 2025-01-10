@@ -1,0 +1,47 @@
+digraph "src/phasicFlow/streams/iStream/iIstream.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/streams\l/iStream/iIstream.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/phasicFlow/containers\l/List/List/List.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$List_8hpp.html",tooltip=" "];
+  Node1 -> Node370 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node370 [label="src/phasicFlow/containers\l/Vector/stdVectorHelper.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$stdVectorHelper_8hpp.html",tooltip=" "];
+  Node370 -> Node371 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node371 [label="src/phasicFlow/containers\l/Vector/Vector.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$Vector_8hpp.html",tooltip=" "];
+  Node1 -> Node371 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node189 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node189 [label="src/phasicFlow/dictionary\l/entry/dataEntry.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dataEntry_8cpp.html",tooltip=" "];
+  Node1 -> Node190 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node190 [label="src/phasicFlow/dictionary\l/entry/iEntry.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iEntry_8cpp.html",tooltip=" "];
+  Node1 -> Node388 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node388 [label="src/phasicFlow/streams\l/dataIO/dataIO.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dataIO_8hpp.html",tooltip=" "];
+  Node388 -> Node370 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node403 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node403 [label="src/phasicFlow/streams\l/iStream/iIstream.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iIstream_8cpp.html",tooltip=" "];
+  Node1 -> Node404 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node404 [label="src/phasicFlow/streams\l/Stream/Istream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$Istream_8hpp.html",tooltip=" "];
+  Node1 -> Node406 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node406 [label="src/phasicFlow/streams\l/token/tokenIO.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$tokenIO_8cpp.html",tooltip=" "];
+  Node1 -> Node357 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node357 [label="src/phasicFlow/streams\l/TStream/iTstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iTstream_8hpp.html",tooltip=" "];
+  Node357 -> Node189 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node214 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node214 [label="src/phasicFlow/structured\lData/box/box.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$box_8hpp.html",tooltip=" "];
+  Node1 -> Node268 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node268 [label="src/phasicFlow/structured\lData/cylinder/cylinder.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$cylinder_8hpp.html",tooltip=" "];
+  Node1 -> Node272 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node272 [label="src/phasicFlow/structured\lData/iBox/iBox.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iBox_8hpp.html",tooltip=" "];
+  Node1 -> Node407 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node407 [label="src/phasicFlow/structured\lData/infinitePlane/infinitePlane.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$infinitePlane_8hpp.html",tooltip=" "];
+  Node1 -> Node280 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node280 [label="src/phasicFlow/structured\lData/sphere/sphere.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$sphere_8hpp.html",tooltip=" "];
+  Node1 -> Node411 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node411 [label="src/phasicFlow/types\l/basicTypes/Logical.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Logical_8cpp.html",tooltip=" "];
+  Node1 -> Node412 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node412 [label="src/phasicFlow/types\l/quadruple/quadruple.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$quadruple_8hpp.html",tooltip=" "];
+  Node1 -> Node471 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node471 [label="src/phasicFlow/types\l/triple/triple.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$triple_8hpp.html",tooltip=" "];
+  Node471 -> Node412 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

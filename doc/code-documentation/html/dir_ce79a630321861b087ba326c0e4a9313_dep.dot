@@ -1,0 +1,14 @@
+digraph "src/MotionModel/entities/vibrating" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_dfffb364e858dce2ad53d04d398ac8d4 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="entities" fontname="Helvetica", fontsize="10", URL="dir_dfffb364e858dce2ad53d04d398ac8d4.html"]
+  dir_ce79a630321861b087ba326c0e4a9313 [shape=box, label="vibrating", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_ce79a630321861b087ba326c0e4a9313.html"];
+  }
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_25b55a3febb5145dc2832cb286ad31c1 [shape=box label="timeInterval" URL="dir_25b55a3febb5145dc2832cb286ad31c1.html"];
+  dir_ce79a630321861b087ba326c0e4a9313->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="2", labeldistance=1.5 headhref="dir_000057_000031.html"];
+  dir_ce79a630321861b087ba326c0e4a9313->dir_25b55a3febb5145dc2832cb286ad31c1 [headlabel="1", labeldistance=1.5 headhref="dir_000057_000056.html"];
+  dir_25b55a3febb5145dc2832cb286ad31c1->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="3", labeldistance=1.5 headhref="dir_000056_000031.html"];
+}

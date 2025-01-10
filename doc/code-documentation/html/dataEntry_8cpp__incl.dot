@@ -1,0 +1,28 @@
+digraph "src/phasicFlow/dictionary/entry/dataEntry.cpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/dictionary\l/entry/dataEntry.cpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="dataEntry.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dataEntry_8hpp.html",tooltip=" "];
+  Node2 -> Node37 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node37 [label="iTstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iTstream_8hpp.html",tooltip=" "];
+  Node37 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="iIstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iIstream_8hpp.html",tooltip=" "];
+  Node26 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node26 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="iOstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iOstream_8hpp.html",tooltip=" "];
+  Node2 -> Node43 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node43 [label="oTstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$oTstream_8hpp.html",tooltip=" "];
+  Node43 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node44 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node44 [label="dictionary.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dictionary_8hpp.html",tooltip=" "];
+  Node44 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node37 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node43 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

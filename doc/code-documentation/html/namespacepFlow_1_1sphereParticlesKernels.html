@@ -102,53 +102,31 @@ $(document).ready(function(){initNavTree('namespacepFlow_1_1sphereParticlesKerne
 
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">pFlow::sphereParticlesKernels Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a9fa48474270a6882fba4b6f8e003aecb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">rpAcceleration</a> = Kokkos::RangePolicy&lt; <a class="el" href="namespacepFlow.html#aa3a14d3c76643399fc4edd8eca14944a">DefaultExecutionSpace</a>, Kokkos::Schedule&lt; Kokkos::Static &gt;, Kokkos::IndexType&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &gt;</td></tr>
-<tr class="separator:a9fa48474270a6882fba4b6f8e003aecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aea4493f25ef82d9338f4b7dd1059f675"><td class="memTemplParams" colspan="2">template&lt;typename IncludeFunctionType &gt; </td></tr>
-<tr class="memitem:aea4493f25ef82d9338f4b7dd1059f675"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">acceleration</a> (<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> g, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; mass, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; force, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; I, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; torque, IncludeFunctionType incld, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; lAcc, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; rAcc)</td></tr>
-<tr class="separator:aea4493f25ef82d9338f4b7dd1059f675"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534012364bda4035bf408aa4fbeb1f4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1sphereParticlesKernels.html#a534012364bda4035bf408aa4fbeb1f4f">addMassDiamInertiaProp</a> (<a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt; shapeIndex, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; mass, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; diameter, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; I, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt; propertyId, <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> incld, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; src_mass, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; src_diameter, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; src_I, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt; src_propertyId)</td></tr>
+<tr class="separator:a534012364bda4035bf408aa4fbeb1f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecccfbc0885366153df27f43fc32793c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1sphereParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">acceleration</a> (const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;g, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;mass, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;force, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;I, const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;torque, const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;incld, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; lAcc, <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; rAcc)</td></tr>
+<tr class="separator:aecccfbc0885366153df27f43fc32793c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a9fa48474270a6882fba4b6f8e003aecb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fa48474270a6882fba4b6f8e003aecb">&#9670;&nbsp;</a></span>rpAcceleration</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">rpAcceleration</a> =  Kokkos::RangePolicy&lt; <a class="el" href="namespacepFlow.html#aa3a14d3c76643399fc4edd8eca14944a">DefaultExecutionSpace</a>, Kokkos::Schedule&lt;Kokkos::Static&gt;, Kokkos::IndexType&lt;<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&gt; &gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="sphereParticlesKernels_8hpp_source.html#l00031">31</a> of file <a class="el" href="sphereParticlesKernels_8hpp_source.html">sphereParticlesKernels.hpp</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aea4493f25ef82d9338f4b7dd1059f675"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea4493f25ef82d9338f4b7dd1059f675">&#9670;&nbsp;</a></span>acceleration()</h2>
+<a id="a534012364bda4035bf408aa4fbeb1f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a534012364bda4035bf408aa4fbeb1f4f">&#9670;&nbsp;</a></span>addMassDiamInertiaProp()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void pFlow::sphereParticlesKernels::acceleration </td>
+          <td class="memname">void addMassDiamInertiaProp </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&#160;</td>
-          <td class="paramname"><em>g</em>, </td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt;&#160;</td>
+          <td class="paramname"><em>shapeIndex</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -159,8 +137,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt;&#160;</td>
-          <td class="paramname"><em>force</em>, </td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt;&#160;</td>
+          <td class="paramname"><em>diameter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -171,13 +149,100 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt;&#160;</td>
+          <td class="paramname"><em>propertyId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a>&#160;</td>
+          <td class="paramname"><em>incld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt;&#160;</td>
+          <td class="paramname"><em>src_mass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt;&#160;</td>
+          <td class="paramname"><em>src_diameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt;&#160;</td>
+          <td class="paramname"><em>src_I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> &gt;&#160;</td>
+          <td class="paramname"><em>src_propertyId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sphereParticlesKernels_8cpp_source.html#l00028">28</a> of file <a class="el" href="sphereParticlesKernels_8cpp_source.html">sphereParticlesKernels.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="pointFlag_8hpp_source.html#l00179">pointFlag&lt; ExecutionSpace &gt;::activeRange()</a>, and <a class="el" href="pFlowMacros_8hpp_source.html#l00058">LAMBDA_HD</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="namespacepFlow_1_1sphereParticlesKernels_a534012364bda4035bf408aa4fbeb1f4f_cgraph.png" border="0" usemap="#namespacepFlow_1_1sphereParticlesKernels_a534012364bda4035bf408aa4fbeb1f4f_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="aecccfbc0885366153df27f43fc32793c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecccfbc0885366153df27f43fc32793c">&#9670;&nbsp;</a></span>acceleration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void acceleration </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>force</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>torque</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IncludeFunctionType&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a9a87272f235780fa7725c23a9da79011">pFlagTypeDevice</a> &amp;&#160;</td>
           <td class="paramname"><em>incld</em>, </td>
         </tr>
         <tr>
@@ -200,23 +265,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sphereParticlesKernels_8hpp_source.html#l00034">34</a> of file <a class="el" href="sphereParticlesKernels_8hpp_source.html">sphereParticlesKernels.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sphereParticlesKernels_8cpp_source.html#l00061">61</a> of file <a class="el" href="sphereParticlesKernels_8cpp_source.html">sphereParticlesKernels.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>.</p>
+<p class="reference">References <a class="el" href="pointFlag_8hpp_source.html#l00179">pointFlag&lt; ExecutionSpace &gt;::activeRange()</a>, <a class="el" href="pointFlag_8hpp_source.html#l00173">pointFlag&lt; ExecutionSpace &gt;::isAllActive()</a>, and <a class="el" href="pFlowMacros_8hpp_source.html#l00058">LAMBDA_HD</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dynamicPointStructure_8cpp_source.html#l00135">dynamicPointStructure::correct()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00104">sphereParticles::iterate()</a>, and <a class="el" href="dynamicPointStructure_8cpp_source.html#l00121">dynamicPointStructure::predict()</a>.</p>
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="sphereParticles_8cpp_source.html#l00537">sphereParticles::iterate()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="namespacepFlow_1_1sphereParticlesKernels_aea4493f25ef82d9338f4b7dd1059f675_icgraph.png" border="0" usemap="#namespacepFlow_1_1sphereParticlesKernels_aea4493f25ef82d9338f4b7dd1059f675_icgraph" alt=""/></div>
-<map name="namespacepFlow_1_1sphereParticlesKernels_aea4493f25ef82d9338f4b7dd1059f675_icgraph" id="namespacepFlow_1_1sphereParticlesKernels_aea4493f25ef82d9338f4b7dd1059f675_icgraph">
-<area shape="rect" title=" " alt="" coords="269,78,372,105"/>
-<area shape="rect" href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023" title=" " alt="" coords="5,5,221,47"/>
-<area shape="rect" href="classpFlow_1_1sphereParticles.html#afa767bddda52eb71cea18f755e17d559" title="iterate particles" alt="" coords="30,71,197,112"/>
-<area shape="rect" href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189" title=" " alt="" coords="5,136,221,177"/>
-</map>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="namespacepFlow_1_1sphereParticlesKernels_aecccfbc0885366153df27f43fc32793c_cgraph.png" border="0" usemap="#namespacepFlow_1_1sphereParticlesKernels_aecccfbc0885366153df27f43fc32793c_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="namespacepFlow_1_1sphereParticlesKernels_aecccfbc0885366153df27f43fc32793c_icgraph.png" border="0" usemap="#namespacepFlow_1_1sphereParticlesKernels_aecccfbc0885366153df27f43fc32793c_icgraph" alt=""/></div>
 </div>
 
 </div>

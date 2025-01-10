@@ -1,0 +1,11 @@
+digraph "src/Particles/SphereParticles/sphereShape" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_ae10a04c09150cad5fefedcb2d995fdc {
+    graph [ bgcolor="#ddddee", pencolor="black", label="SphereParticles" fontname="Helvetica", fontsize="10", URL="dir_ae10a04c09150cad5fefedcb2d995fdc.html"]
+  dir_38b62c5fd09db3ff1ef8a0e7759c197b [shape=box, label="sphereShape", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_38b62c5fd09db3ff1ef8a0e7759c197b.html"];
+  }
+  dir_b351bcc3c60d144476bd2e30437abfde [shape=box label="particles" fillcolor="white" style="filled" color="red" URL="dir_b351bcc3c60d144476bd2e30437abfde.html"];
+  dir_38b62c5fd09db3ff1ef8a0e7759c197b->dir_b351bcc3c60d144476bd2e30437abfde [headlabel="1", labeldistance=1.5 headhref="dir_000081_000075.html"];
+}

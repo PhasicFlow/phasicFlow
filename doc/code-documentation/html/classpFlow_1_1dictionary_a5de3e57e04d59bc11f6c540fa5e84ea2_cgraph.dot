@@ -1,0 +1,14 @@
+digraph "dictionary"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="dictionary",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="construct a dictionary with name and read it from file"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::IOstream::lineNumber",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3",tooltip="Const access to the current stream line number."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::Istream::name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b",tooltip="Return the name of the stream."];
+}

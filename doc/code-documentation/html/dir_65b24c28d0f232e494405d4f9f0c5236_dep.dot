@@ -1,0 +1,18 @@
+digraph "solvers" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_65b24c28d0f232e494405d4f9f0c5236 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_65b24c28d0f232e494405d4f9f0c5236.html"];
+    dir_65b24c28d0f232e494405d4f9f0c5236 [shape=plaintext label="solvers"];
+    dir_f878b601cb94070fd337cd7cf0df761f [shape=box label="grainGranFlow" color="black" fillcolor="white" style="filled" URL="dir_f878b601cb94070fd337cd7cf0df761f.html"];
+    dir_54b68711bb62f5b9faf16dd43574c744 [shape=box label="iterateGeometry" color="black" fillcolor="white" style="filled" URL="dir_54b68711bb62f5b9faf16dd43574c744.html"];
+    dir_c21375f59269b1de435a94d745eee523 [shape=box label="iterateSphereParticles" color="black" fillcolor="white" style="filled" URL="dir_c21375f59269b1de435a94d745eee523.html"];
+    dir_ac9f1d02bd348986b458efcb0494a045 [shape=box label="sphereGranFlow" color="black" fillcolor="white" style="filled" URL="dir_ac9f1d02bd348986b458efcb0494a045.html"];
+  }
+  dir_68267d1309a1af8e8297ef4c3efbcdba [shape=box label="src" fillcolor="white" style="filled" color="red" URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"];
+  dir_ac9f1d02bd348986b458efcb0494a045->dir_68267d1309a1af8e8297ef4c3efbcdba [headlabel="13", labeldistance=1.5 headhref="dir_000005_000007.html"];
+  dir_54b68711bb62f5b9faf16dd43574c744->dir_68267d1309a1af8e8297ef4c3efbcdba [headlabel="8", labeldistance=1.5 headhref="dir_000006_000007.html"];
+  dir_f878b601cb94070fd337cd7cf0df761f->dir_68267d1309a1af8e8297ef4c3efbcdba [headlabel="13", labeldistance=1.5 headhref="dir_000003_000007.html"];
+  dir_c21375f59269b1de435a94d745eee523->dir_68267d1309a1af8e8297ef4c3efbcdba [headlabel="8", labeldistance=1.5 headhref="dir_000004_000007.html"];
+}

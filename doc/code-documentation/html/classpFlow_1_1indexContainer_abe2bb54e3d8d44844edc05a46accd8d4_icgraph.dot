@@ -1,0 +1,18 @@
+digraph "deviceView"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="deviceView",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Return Device view."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::getSortedIndices",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a0326b52c0c892dc9732af2580c7bfe6d",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::VectorSingle\l\< uint32, HostSpace\l \>::insertSetElement",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorSingle.html#adfafd86c74ac8d2c0f0864cb84e92eaa",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::insertSetElement",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a7931a57163eb363a3ca7db6ffa438479",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::VectorSingle\l\< uint32, HostSpace\l \>::reorderItems",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorSingle.html#afa4e3ea7e9d5cbc697964d32a9e4424b",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::sortItems",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a9b59e3e31ed18fe659636b63987c2930",tooltip=" "];
+}

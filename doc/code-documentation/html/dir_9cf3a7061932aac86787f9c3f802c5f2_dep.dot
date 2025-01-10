@@ -1,0 +1,17 @@
+digraph "src/phasicFlow/structuredData/peakableRegion/PeakableRegion" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_4f9e597021b90228ccac48345da86dec {
+    graph [ bgcolor="#ddddee", pencolor="black", label="peakableRegion" fontname="Helvetica", fontsize="10", URL="dir_4f9e597021b90228ccac48345da86dec.html"]
+  dir_9cf3a7061932aac86787f9c3f802c5f2 [shape=box, label="PeakableRegion", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_9cf3a7061932aac86787f9c3f802c5f2.html"];
+  }
+  dir_93977471f265239c2a33a55f893094fa [shape=box label="geometricRegion" URL="dir_93977471f265239c2a33a55f893094fa.html"];
+  dir_fcee4eefc34728867d2bd32b142ae11c [shape=box label="peakableRegion" URL="dir_fcee4eefc34728867d2bd32b142ae11c.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db [shape=box label="dictionary" fillcolor="white" style="filled" color="red" URL="dir_1220c712ed5f98fd84ba71b4848374db.html"];
+  dir_93977471f265239c2a33a55f893094fa->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000153_000112.html"];
+  dir_fcee4eefc34728867d2bd32b142ae11c->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000159_000112.html"];
+  dir_9cf3a7061932aac86787f9c3f802c5f2->dir_93977471f265239c2a33a55f893094fa [headlabel="2", labeldistance=1.5 headhref="dir_000158_000153.html"];
+  dir_9cf3a7061932aac86787f9c3f802c5f2->dir_fcee4eefc34728867d2bd32b142ae11c [headlabel="1", labeldistance=1.5 headhref="dir_000158_000159.html"];
+  dir_9cf3a7061932aac86787f9c3f802c5f2->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000158_000112.html"];
+}

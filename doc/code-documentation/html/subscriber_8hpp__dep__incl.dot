@@ -1,0 +1,19 @@
+digraph "src/phasicFlow/eventManagement/subscriber.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/eventManagement\l/subscriber.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/phasicFlow/eventManagement\l/eventManagement.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$eventManagement_8hpp.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/phasicFlow/eventManagement\l/observer.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$observer_8cpp.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="src/phasicFlow/eventManagement\l/subscriber.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$subscriber_8cpp.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="src/phasicFlow/structured\lData/boundaries/boundaryBase\l/boundaryBase.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundaryBase_8hpp.html",tooltip=" "];
+  Node1 -> Node149 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node149 [label="src/phasicFlow/structured\lData/pointStructure/internalPoints\l/internalPoints.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$internalPoints_8hpp.html",tooltip=" "];
+  Node1 -> Node152 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node152 [label="src/phasicFlow/triSurface\l/multiTriSurface.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$multiTriSurface_8hpp.html",tooltip=" "];
+}

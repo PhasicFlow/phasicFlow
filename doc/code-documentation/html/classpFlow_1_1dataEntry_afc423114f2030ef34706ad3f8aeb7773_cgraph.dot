@@ -1,0 +1,14 @@
+digraph "dataEntry"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="dataEntry",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="construct from keyword, parDict, and data of type T"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endStatementToken",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a8c6bd0c60160c712f4f4a4b00e48183f",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="globalName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dataEntry.html#a85c3c1fce0c14d36030092df2f27b632",tooltip="global name of entry, separated with dots"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::oTstream::tokens",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1oTstream.html#afc3e5f6037eecf144698420e4d94a70a",tooltip=" "];
+}

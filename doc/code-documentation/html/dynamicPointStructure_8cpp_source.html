@@ -126,240 +126,146 @@ $(document).ready(function(){initNavTree('dynamicPointStructure_8cpp_source.html
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="dynamicPointStructure_8hpp.html">dynamicPointStructure.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="classpFlow_1_1dynamicPointStructure.html#a10d4d223c37affe812c8910ca9851c3f">pFlow::dynamicPointStructure::dynamicPointStructure</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#a10d4d223c37affe812c8910ca9851c3f">   25</a></span>&#160;(</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classpFlow_1_1Time.html">Time</a>&amp; time,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; integrationMethod</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    time_(time),</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    integrationMethod_(integrationMethod),</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    pStruct_(</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        time_.emplaceObject&lt;<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&gt;(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                objectFile::READ_ALWAYS,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                objectFile::WRITE_ALWAYS            </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                )</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            )</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        ),</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    velocity_(</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        time_.emplaceObject&lt;<a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&gt;(</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="stringliteral">&quot;velocity&quot;</span>,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                objectFile::READ_ALWAYS,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                objectFile::WRITE_ALWAYS</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                ),</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">zero3</a></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            )</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        )</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    this-&gt;subscribe(<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>());</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Creating integration method &quot;</span>&lt;&lt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a>(integrationMethod_)&lt;&lt;<span class="stringliteral">&quot; for dynamicPointStructure.&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    integrationPos_ = integration::create(</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="stringliteral">&quot;pStructPosition&quot;</span>,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        time_.integration(),</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        integrationMethod_);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    integrationVel_ = integration::create(</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="stringliteral">&quot;pStructVelocity&quot;</span>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        time_.integration(),</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>(),</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        integrationMethod_);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span>( !integrationPos_ )</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="stringliteral">&quot;  error in creating integration object for dynamicPointStructure (position). \n&quot;</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span>( !integrationVel_ )</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="stringliteral">&quot;  error in creating integration object for dynamicPointStructure (velocity). \n&quot;</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span>(!integrationPos_-&gt;needSetInitialVals()) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">auto</span> [minInd, maxInd] = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().activeRange();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classpFlow_1_1indexContainer.html">int32IndexContainer</a> indexHD(minInd, maxInd);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = indexHD.<a class="code" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a>();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span> index = indexHD.<a class="code" href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">indicesHost</a>();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> pos(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> vel(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> hVel = velocity().hostVector();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> hPos = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().pointPosition().hostVector();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="classpFlow_1_1dynamicPointStructure.html#acf827d6097ae844f7323650275acb62d">pFlow::dynamicPointStructure::dynamicPointStructure</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#acf827d6097ae844f7323650275acb62d">   25</a></span>&#160;(</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classpFlow_1_1systemControl.html">systemControl</a>&amp; control</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>(control),</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    velocity_</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    (</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a>(</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="stringliteral">&quot;velocity&quot;</span>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            objectFile::READ_ALWAYS,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            objectFile::WRITE_ALWAYS</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            ),</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        *<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">zero3</a></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ),</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    velocityUpdateTimer_(<span class="stringliteral">&quot;velocity boundary update&quot;</span>, &amp;timers()),</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    integrationMethod_</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    (</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        control.<a class="code" href="classpFlow_1_1systemControl.html#a42885c92fdb0e893f879c1fc9d4d8830">settingsDict</a>().<a class="code" href="classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47">getVal</a>&lt;<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&gt;(<span class="stringliteral">&quot;integrationMethod&quot;</span>)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    )</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Creating integration method &quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2">Green_Text</a>(integrationMethod_)&lt;&lt;<span class="stringliteral">&quot; for dynamicPointStructure.&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    integrationPos_ = integration::create</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    (</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="stringliteral">&quot;pStructPosition&quot;</span>,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        *<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        integrationMethod_,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        pointPosition()</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    );</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span>( !integrationPos_ )</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="stringliteral">&quot;  error in creating integration object for dynamicPointStructure (position). \n&quot;</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    integrationVel_ = integration::create</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    (</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="stringliteral">&quot;pStructVelocity&quot;</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        *<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        integrationMethod_,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        velocity_.field()</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    );</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span>( !integrationVel_ )</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="stringliteral">&quot;  error in creating integration object for dynamicPointStructure (velocity). \n&quot;</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#ada71b97666fe3f66b31690bf12633c32">   83</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#ada71b97666fe3f66b31690bf12633c32">pFlow::dynamicPointStructure::beforeIteration</a>()</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="classpFlow_1_1pointStructure.html#ada71b97666fe3f66b31690bf12633c32">pointStructure::beforeIteration</a>())<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a58a134440f0c22f604ac2c5a1ea4614a">velocityUpdateTimer_</a>.<a class="code" href="classpFlow_1_1Timer.html#a60de64d75454385b23995437f1d72669">start</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a4be32716dbb677d7c6931b3118c946cc">velocity_</a>.<a class="code" href="classpFlow_1_1pointField.html#a4df96ffd1fa1b1fad9fc5dbd8bf03431">updateBoundariesSlaveToMasterIfRequested</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a6a8d13534e5f09a9c8d6f194d7bda6d4">integrationPos_</a>-&gt;updateBoundariesSlaveToMasterIfRequested();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="classpFlow_1_1dynamicPointStructure.html#abdf3b7db5e8d8b96f6d58cab4d715858">integrationVel_</a>-&gt;updateBoundariesSlaveToMasterIfRequested();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a58a134440f0c22f604ac2c5a1ea4614a">velocityUpdateTimer_</a>.<a class="code" href="classpFlow_1_1Timer.html#aaf81d3fdaf258088d7692fa70cece087">end</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#afa767bddda52eb71cea18f755e17d559">   94</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#afa767bddda52eb71cea18f755e17d559">pFlow::dynamicPointStructure::iterate</a>()</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1pointStructure.html#afa767bddda52eb71cea18f755e17d559">pointStructure::iterate</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">/*real dt = this-&gt;dt();</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    auto&amp; acc = time().lookupObject&lt;realx3PointField_D&gt;(&quot;acceleration&quot;);</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    return correct(dt, acc);*/</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        pos.push_back( hPos[index(i)]);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        vel.push_back( hVel[index(i)]);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="comment">//output&lt;&lt; &quot;pos &quot;&lt;&lt; pos&lt;&lt;endl;</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="comment">//output&lt;&lt; &quot;vel &quot;&lt;&lt; vel&lt;&lt;endl;</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(2)&lt;&lt; <span class="stringliteral">&quot;Initializing the required vectors for position integratoin &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    integrationPos_-&gt;setInitialVals(indexHD, pos);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(2)&lt;&lt; <span class="stringliteral">&quot;Initializing the required vectors for velocity integratoin\n &quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    integrationVel_-&gt;setInitialVals(indexHD, vel);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189">pFlow::dynamicPointStructure::predict</a></div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189">  121</a></span>&#160;(</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&amp; <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">acceleration</a></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;)</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;{</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">auto</span>&amp; pos = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().pointPosition();</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">if</span>(!integrationPos_().predict(dt, pos.VectorField(), velocity_.VectorField() ))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">if</span>(!integrationVel_().predict(dt, velocity_.VectorField(), <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">acceleration</a>.VectorField()))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023">pFlow::dynamicPointStructure::correct</a></div>
-<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023">  135</a></span>&#160;(</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt,</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&amp; <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">acceleration</a></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;)</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;{</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keyword">auto</span>&amp; pos = <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>().pointPosition();</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">if</span>(!integrationPos_().correct(dt, pos.VectorField(), velocity_.VectorField() ))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordflow">if</span>(!integrationVel_().correct(dt, velocity_.VectorField(), <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">acceleration</a>.VectorField()))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;    </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">/*FUNCTION_H</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">pFlow::uniquePtr&lt;pFlow::int32IndexContainer&gt; pFlow::dynamicPointStructure::insertPoints</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">(</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">    const realx3Vector&amp; pos,</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">    const List&lt;eventObserver*&gt;&amp; exclusionList</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">)</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">{</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">    auto newIndicesPtr = pointStructure::insertPoints(pos, exclusionList);</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">    // no new point is inserted</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">    if( !newIndicesPtr ) return newIndicesPtr;</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    if(!integrationPos_().needSetInitialVals()) return newIndicesPtr;</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">    auto hVel = velocity_.hostVector();</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">    auto n = newIndicesPtr().size();</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">    auto index = newIndicesPtr().indicesHost();</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    realx3Vector velVec(n, RESERVE());</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">    for(auto i=0; i&lt;n; i++)</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">        velVec.push_back( hVel[ index(i) ]);</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">    integrationPos_-&gt;setInitialVals(newIndicesPtr(), pos );</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">    integrationVel_-&gt;setInitialVals(newIndicesPtr(), velVec );</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">    return newIndicesPtr;</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">}*/</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#a98372d2b87e1c67d4b2eb0517336abf7">  181</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a98372d2b87e1c67d4b2eb0517336abf7">pFlow::dynamicPointStructure::update</a>(</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1eventMessage.html">eventMessage</a>&amp; msg) </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;{</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">if</span>( msg.<a class="code" href="classpFlow_1_1eventMessage.html#a4571ff36616c9989d4ef0a771e8acef1">isInsert</a>())</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">if</span>(!<a class="code" href="classpFlow_1_1dynamicPointStructure.html#a6a8d13534e5f09a9c8d6f194d7bda6d4">integrationPos_</a>-&gt;needSetInitialVals())<span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> indexHD = <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a8c1e2c48f18f58f11c504050577f89f0">pStruct</a>().<a class="code" href="classpFlow_1_1pointStructure.html#a12826e5d1ae021ea1945fa6969d16086">insertedPointIndex</a>();</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keyword">auto</span> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a> = indexHD.size();</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>==0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keyword">auto</span> index = indexHD.indicesHost();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> pos(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <a class="code" href="classpFlow_1_1Vector.html">realx3Vector</a> vel(<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>,<a class="code" href="structRESERVE.html">RESERVE</a>());</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> hVel = <a class="code" href="classpFlow_1_1dynamicPointStructure.html#aa32434985dce3f633834201f9b6a76bf">velocity</a>().hostVector();</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> hPos = <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a8c1e2c48f18f58f11c504050577f89f0">pStruct</a>().<a class="code" href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pointPosition</a>().<a class="code" href="classpFlow_1_1VectorSingle.html#a69bfde2f5814f3152a51fea88018e4c1">hostVector</a>();</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            pos.push_back( hPos[index(i)]);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            vel.push_back( hVel[index(i)]);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a6a8d13534e5f09a9c8d6f194d7bda6d4">integrationPos_</a>-&gt;setInitialVals(indexHD, pos);</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <a class="code" href="classpFlow_1_1dynamicPointStructure.html#abdf3b7db5e8d8b96f6d58cab4d715858">integrationVel_</a>-&gt;setInitialVals(indexHD, vel);      </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189">  104</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189">pFlow::dynamicPointStructure::predict</a>(</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a> &amp;<a class="code" href="namespacepFlow_1_1grainParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">acceleration</a>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">if</span>(!integrationPos_().predict(dt, pointPosition(), velocity_ ))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span>(!integrationVel_().predict(dt, velocity_, <a class="code" href="namespacepFlow_1_1grainParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">acceleration</a>))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023">pFlow::dynamicPointStructure::correct</a></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023">  116</a></span>&#160;(</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="classpFlow_1_1pointField.html">realx3PointField_D</a>&amp; <a class="code" href="namespacepFlow_1_1grainParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">acceleration</a></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">//auto&amp; pos = pStruct().pointPosition();</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span>(!integrationPos_().correctPStruct(dt, *<span class="keyword">this</span>, velocity_) )<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">if</span>(!integrationVel_().correct(dt, velocity_, <a class="code" href="namespacepFlow_1_1grainParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">acceleration</a>))<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;    </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1VectorSingle_html_a69bfde2f5814f3152a51fea88018e4c1"><div class="ttname"><a href="classpFlow_1_1VectorSingle.html#a69bfde2f5814f3152a51fea88018e4c1">pFlow::VectorSingle::hostVector</a></div><div class="ttdeci">const INLINE_FUNCTION_H auto hostVector() const</div><div class="ttdef"><b>Definition:</b> <a href="VectorSingle_8hpp_source.html#l00338">VectorSingle.hpp:338</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a7ce9af76cf5b5484f34c8e341dfe6416"><div class="ttname"><a href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pFlow::pointStructureFile__</a></div><div class="ttdeci">const char * pointStructureFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00042">vocabs.hpp:42</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_a04db65a6cb5a45695ea75cce1b5d7a10"><div class="ttname"><a href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a></div><div class="ttdeci">#define endREPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00041">streams.hpp:41</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_aa32434985dce3f633834201f9b6a76bf"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#aa32434985dce3f633834201f9b6a76bf">pFlow::dynamicPointStructure::velocity</a></div><div class="ttdeci">const realx3PointField_D &amp; velocity() const</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00087">dynamicPointStructure.hpp:87</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1eventMessage_html"><div class="ttname"><a href="classpFlow_1_1eventMessage.html">pFlow::eventMessage</a></div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00029">eventMessage.hpp:29</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a10d4d223c37affe812c8910ca9851c3f"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a10d4d223c37affe812c8910ca9851c3f">pFlow::dynamicPointStructure::dynamicPointStructure</a></div><div class="ttdeci">dynamicPointStructure(Time &amp;time, const word &amp;integrationMethod)</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00025">dynamicPointStructure.cpp:25</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1indexContainer_html_a7bb1be8d14aca7330e90c5b60493061b"><div class="ttname"><a href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">pFlow::indexContainer::size</a></div><div class="ttdeci">INLINE_FUNCTION_HD size_t size() const</div><div class="ttdef"><b>Definition:</b> <a href="indexContainer_8hpp_source.html#l00115">indexContainer.hpp:115</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a477d522d35403bd985ae105bd759e9d1"><div class="ttname"><a href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">pFlow::zero3</a></div><div class="ttdeci">const realx3 zero3(0.0)</div><div class="ttdef"><b>Definition:</b> <a href="types_8hpp_source.html#l00097">types.hpp:97</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html_aea4493f25ef82d9338f4b7dd1059f675"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">pFlow::sphereParticlesKernels::acceleration</a></div><div class="ttdeci">void acceleration(realx3 g, deviceViewType1D&lt; real &gt; mass, deviceViewType1D&lt; realx3 &gt; force, deviceViewType1D&lt; real &gt; I, deviceViewType1D&lt; realx3 &gt; torque, IncludeFunctionType incld, deviceViewType1D&lt; realx3 &gt; lAcc, deviceViewType1D&lt; realx3 &gt; rAcc)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8hpp_source.html#l00034">sphereParticlesKernels.hpp:34</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a21a26eb192452a95406ac398ab2ed189"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189">pFlow::dynamicPointStructure::predict</a></div><div class="ttdeci">bool predict(real dt, realx3PointField_D &amp;acceleration)</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00121">dynamicPointStructure.cpp:121</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_a12826e5d1ae021ea1945fa6969d16086"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#a12826e5d1ae021ea1945fa6969d16086">pFlow::pointStructure::insertedPointIndex</a></div><div class="ttdeci">FUNCTION_H auto insertedPointIndex() const</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00312">pointStructure.hpp:312</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_a37a406f400cfe49d19e51bfcc34cd2d3"><div class="ttname"><a href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a></div><div class="ttdeci">#define greenText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00032">streams.hpp:32</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html_ab9d8d4992e2a55273f2a74397321ad81"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ab9d8d4992e2a55273f2a74397321ad81">pFlow::pointStructure::pointPosition</a></div><div class="ttdeci">FUNCTION_H realx3Field_D &amp; pointPosition()</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00065">pointStructure.cpp:65</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1eventMessage_html_a4571ff36616c9989d4ef0a771e8acef1"><div class="ttname"><a href="classpFlow_1_1eventMessage.html#a4571ff36616c9989d4ef0a771e8acef1">pFlow::eventMessage::isInsert</a></div><div class="ttdeci">bool isInsert() const</div><div class="ttdef"><b>Definition:</b> <a href="eventMessage_8hpp_source.html#l00087">eventMessage.hpp:87</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a98372d2b87e1c67d4b2eb0517336abf7"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a98372d2b87e1c67d4b2eb0517336abf7">pFlow::dynamicPointStructure::update</a></div><div class="ttdeci">bool update(const eventMessage &amp;msg) override</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00181">dynamicPointStructure.cpp:181</a></div></div>
-<div class="ttc" id="astructRESERVE_html"><div class="ttname"><a href="structRESERVE.html">RESERVE</a></div><div class="ttdef"><b>Definition:</b> <a href="Vector_8hpp_source.html#l00038">Vector.hpp:38</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00035">pointField.hpp:35</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html"><div class="ttname"><a href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a></div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00044">pointStructure.hpp:44</a></div></div>
-<div class="ttc" id="aNBSCrossLoop_8hpp_html_aad8b608072a1b6dcd9e91de38ee2925f"><div class="ttname"><a href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a></div><div class="ttdeci">int32 n</div><div class="ttdef"><b>Definition:</b> <a href="NBSCrossLoop_8hpp_source.html#l00024">NBSCrossLoop.hpp:24</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a6d5c3945958cbde4e61f1cec4f374023"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023">pFlow::dynamicPointStructure::correct</a></div><div class="ttdeci">bool correct(real dt, realx3PointField_D &amp;acceleration)</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00135">dynamicPointStructure.cpp:135</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a8c1e2c48f18f58f11c504050577f89f0"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a8c1e2c48f18f58f11c504050577f89f0">pFlow::dynamicPointStructure::pStruct</a></div><div class="ttdeci">pointStructure &amp; pStruct()</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00077">dynamicPointStructure.hpp:77</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1indexContainer_html_afc2c6b6e3530d1a891d4b2e94b94ff0b"><div class="ttname"><a href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">pFlow::indexContainer::indicesHost</a></div><div class="ttdeci">auto indicesHost() const</div><div class="ttdef"><b>Definition:</b> <a href="indexContainer_8hpp_source.html#l00171">indexContainer.hpp:171</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_abdf3b7db5e8d8b96f6d58cab4d715858"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#abdf3b7db5e8d8b96f6d58cab4d715858">pFlow::dynamicPointStructure::integrationVel_</a></div><div class="ttdeci">uniquePtr&lt; integration &gt; integrationVel_</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00050">dynamicPointStructure.hpp:50</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00033">objectFile.hpp:33</a></div></div>
-<div class="ttc" id="asetPointStructure_8hpp_html_a385e32971df44b131e4498181a949a91"><div class="ttname"><a href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a></div><div class="ttdeci">auto &amp; pStruct</div><div class="ttdef"><b>Definition:</b> <a href="setPointStructure_8hpp_source.html#l00024">setPointStructure.hpp:24</a></div></div>
+<div class="ttc" id="aiOstream_8hpp_html_ac569b1e93bab8b809907065244b11fd2"><div class="ttname"><a href="iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2">Green_Text</a></div><div class="ttdeci">#define Green_Text(text)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00042">iOstream.hpp:42</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1grainParticlesKernels_html_aecccfbc0885366153df27f43fc32793c"><div class="ttname"><a href="namespacepFlow_1_1grainParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">pFlow::grainParticlesKernels::acceleration</a></div><div class="ttdeci">void acceleration(const realx3 &amp;g, const deviceViewType1D&lt; real &gt; &amp;mass, const deviceViewType1D&lt; realx3 &gt; &amp;force, const deviceViewType1D&lt; real &gt; &amp;I, const deviceViewType1D&lt; realx3 &gt; &amp;torque, const pFlagTypeDevice &amp;incld, deviceViewType1D&lt; realx3 &gt; lAcc, deviceViewType1D&lt; realx3 &gt; rAcc)</div><div class="ttdef"><b>Definition:</b> <a href="grainParticlesKernels_8cpp_source.html#l00062">grainParticlesKernels.cpp:62</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdoc">Fatal exit.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00098">error.hpp:98</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00039">streams.hpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Timer_html_a60de64d75454385b23995437f1d72669"><div class="ttname"><a href="classpFlow_1_1Timer.html#a60de64d75454385b23995437f1d72669">pFlow::Timer::start</a></div><div class="ttdeci">void start()</div><div class="ttdef"><b>Definition:</b> <a href="Timer_8hpp_source.html#l00105">Timer.hpp:105</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_ada71b97666fe3f66b31690bf12633c32"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#ada71b97666fe3f66b31690bf12633c32">pFlow::pointStructure::beforeIteration</a></div><div class="ttdeci">bool beforeIteration() override</div><div class="ttdoc">In the time loop before iterate.</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00175">pointStructure.cpp:175</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a4be32716dbb677d7c6931b3118c946cc"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a4be32716dbb677d7c6931b3118c946cc">pFlow::dynamicPointStructure::velocity_</a></div><div class="ttdeci">realx3PointField_D velocity_</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00041">dynamicPointStructure.hpp:41</a></div></div>
+<div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1systemControl_html"><div class="ttname"><a href="classpFlow_1_1systemControl.html">pFlow::systemControl</a></div><div class="ttdef"><b>Definition:</b> <a href="systemControl_8hpp_source.html#l00041">systemControl.hpp:41</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_afa767bddda52eb71cea18f755e17d559"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#afa767bddda52eb71cea18f755e17d559">pFlow::dynamicPointStructure::iterate</a></div><div class="ttdeci">bool iterate() override</div><div class="ttdoc">This is called in time loop.</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00094">dynamicPointStructure.cpp:94</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_acf827d6097ae844f7323650275acb62d"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#acf827d6097ae844f7323650275acb62d">pFlow::dynamicPointStructure::dynamicPointStructure</a></div><div class="ttdeci">dynamicPointStructure(systemControl &amp;control)</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00025">dynamicPointStructure.cpp:25</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a477d522d35403bd985ae105bd759e9d1"><div class="ttname"><a href="namespacepFlow.html#a477d522d35403bd985ae105bd759e9d1">pFlow::zero3</a></div><div class="ttdeci">const realx3 zero3(0.0)</div><div class="ttdef"><b>Definition:</b> <a href="types_8hpp_source.html#l00137">types.hpp:137</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_ada71b97666fe3f66b31690bf12633c32"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#ada71b97666fe3f66b31690bf12633c32">pFlow::dynamicPointStructure::beforeIteration</a></div><div class="ttdeci">bool beforeIteration() override</div><div class="ttdoc">In the time loop before iterate.</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00083">dynamicPointStructure.cpp:83</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a21a26eb192452a95406ac398ab2ed189"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a21a26eb192452a95406ac398ab2ed189">pFlow::dynamicPointStructure::predict</a></div><div class="ttdeci">bool predict(real dt, realx3PointField_D &amp;acceleration)</div><div class="ttdoc">prediction step (if any), is called in beforeIteration</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00104">dynamicPointStructure.cpp:104</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Timer_html_aaf81d3fdaf258088d7692fa70cece087"><div class="ttname"><a href="classpFlow_1_1Timer.html#aaf81d3fdaf258088d7692fa70cece087">pFlow::Timer::end</a></div><div class="ttdeci">void end()</div><div class="ttdef"><b>Definition:</b> <a href="Timer_8hpp_source.html#l00129">Timer.hpp:129</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00033">pointField.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html"><div class="ttname"><a href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a></div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00034">pointStructure.hpp:34</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdoc">Report a fatal error and function name and exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00077">error.hpp:77</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a6d5c3945958cbde4e61f1cec4f374023"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a6d5c3945958cbde4e61f1cec4f374023">pFlow::dynamicPointStructure::correct</a></div><div class="ttdeci">bool correct(real dt, realx3PointField_D &amp;acceleration)</div><div class="ttdoc">correction step, is called in iterate</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8cpp_source.html#l00116">dynamicPointStructure.cpp:116</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1systemControl_html_a42885c92fdb0e893f879c1fc9d4d8830"><div class="ttname"><a href="classpFlow_1_1systemControl.html#a42885c92fdb0e893f879c1fc9d4d8830">pFlow::systemControl::settingsDict</a></div><div class="ttdeci">const fileDictionary &amp; settingsDict() const</div><div class="ttdef"><b>Definition:</b> <a href="systemControl_8hpp_source.html#l00157">systemControl.hpp:157</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_abdf3b7db5e8d8b96f6d58cab4d715858"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#abdf3b7db5e8d8b96f6d58cab4d715858">pFlow::dynamicPointStructure::integrationVel_</a></div><div class="ttdeci">uniquePtr&lt; integration &gt; integrationVel_</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00045">dynamicPointStructure.hpp:45</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a1861619f2a6e102d0043a98577c8c9e8"><div class="ttname"><a href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a></div><div class="ttdeci">#define END_REPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00030">objectFile.hpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a58a134440f0c22f604ac2c5a1ea4614a"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a58a134440f0c22f604ac2c5a1ea4614a">pFlow::dynamicPointStructure::velocityUpdateTimer_</a></div><div class="ttdeci">Timer velocityUpdateTimer_</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00047">dynamicPointStructure.hpp:47</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dictionary_html_a523bcff98ab38f3c5961e56eeb0b1d47"><div class="ttname"><a href="classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47">pFlow::dictionary::getVal</a></div><div class="ttdeci">T getVal(const word &amp;keyword) const</div><div class="ttdoc">get the value of data entry</div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8hpp_source.html#l00379">dictionary.hpp:379</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html_afa767bddda52eb71cea18f755e17d559"><div class="ttname"><a href="classpFlow_1_1pointStructure.html#afa767bddda52eb71cea18f755e17d559">pFlow::pointStructure::iterate</a></div><div class="ttdeci">bool iterate() override</div><div class="ttdoc">This is called in time loop.</div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8cpp_source.html#l00232">pointStructure.cpp:232</a></div></div>
 <div class="ttc" id="adynamicPointStructure_8hpp_html"><div class="ttname"><a href="dynamicPointStructure_8hpp.html">dynamicPointStructure.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a6a8d13534e5f09a9c8d6f194d7bda6d4"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a6a8d13534e5f09a9c8d6f194d7bda6d4">pFlow::dynamicPointStructure::integrationPos_</a></div><div class="ttdeci">uniquePtr&lt; integration &gt; integrationPos_</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00048">dynamicPointStructure.hpp:48</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Vector_html"><div class="ttname"><a href="classpFlow_1_1Vector.html">pFlow::Vector&lt; realx3 &gt;</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1indexContainer_html"><div class="ttname"><a href="classpFlow_1_1indexContainer.html">pFlow::indexContainer&lt; int32 &gt;</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Time_html"><div class="ttname"><a href="classpFlow_1_1Time.html">pFlow::Time</a></div><div class="ttdef"><b>Definition:</b> <a href="Time_8hpp_source.html#l00039">Time.hpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html_a4df96ffd1fa1b1fad9fc5dbd8bf03431"><div class="ttname"><a href="classpFlow_1_1pointField.html#a4df96ffd1fa1b1fad9fc5dbd8bf03431">pFlow::pointField::updateBoundariesSlaveToMasterIfRequested</a></div><div class="ttdeci">void updateBoundariesSlaveToMasterIfRequested()</div><div class="ttdoc">update boundaries if it is requested previousely (slave to master).</div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00115">pointField.hpp:115</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dynamicPointStructure_html_a6a8d13534e5f09a9c8d6f194d7bda6d4"><div class="ttname"><a href="classpFlow_1_1dynamicPointStructure.html#a6a8d13534e5f09a9c8d6f194d7bda6d4">pFlow::dynamicPointStructure::integrationPos_</a></div><div class="ttdeci">uniquePtr&lt; integration &gt; integrationPos_</div><div class="ttdef"><b>Definition:</b> <a href="dynamicPointStructure_8hpp_source.html#l00043">dynamicPointStructure.hpp:43</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9e72493e858003bd3d74a55a2aedd075.html">Particles</a></li><li class="navelem"><a class="el" href="dir_dd417861a435f21cd045c71c8b48ce19.html">dynamicPointStructure</a></li><li class="navelem"><a class="el" href="dynamicPointStructure_8cpp.html">dynamicPointStructure.cpp</a></li>

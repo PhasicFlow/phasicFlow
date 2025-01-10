@@ -1,0 +1,24 @@
+digraph "src/phasicFlow/dictionary/entry/iEntry.cpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/dictionary\l/entry/iEntry.cpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="iEntry.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iEntry_8hpp.html",tooltip=" "];
+  Node1 -> Node36 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node36 [label="dictionary.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dictionary_8hpp.html",tooltip=" "];
+  Node36 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node36 -> Node37 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node37 [label="dataEntry.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dataEntry_8hpp.html",tooltip=" "];
+  Node37 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node37 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="iOstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iOstream_8hpp.html",tooltip=" "];
+  Node1 -> Node25 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="iIstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iIstream_8hpp.html",tooltip=" "];
+  Node25 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

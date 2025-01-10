@@ -1,0 +1,28 @@
+digraph "src/phasicFlow/Kokkos/KokkosTypes.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/Kokkos\l/KokkosTypes.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/Integration/AdamsBashforth2\l/AB2Kernels.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$AB2Kernels_8hpp.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/Interaction/contactLists\l/unsortedPairs.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$unsortedPairs_8hpp.html",tooltip=" "];
+  Node1 -> Node54 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node54 [label="src/MotionModel/entities\l/multiRotatingAxis/multiRotating\lAxis.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$multiRotatingAxis_8hpp.html",tooltip=" "];
+  Node1 -> Node58 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node58 [label="src/phasicFlow/algorithms\l/kokkosAlgorithms.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$kokkosAlgorithms_8hpp.html",tooltip=" "];
+  Node1 -> Node244 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node244 [label="src/phasicFlow/containers\l/bitsetHD/bitsetHD.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$bitsetHD_8hpp.html",tooltip=" "];
+  Node1 -> Node246 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node246 [label="src/phasicFlow/containers\l/symArrayHD/symArrayHD.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$symArrayHD_8hpp.html",tooltip=" "];
+  Node1 -> Node60 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node60 [label="src/phasicFlow/containers\l/VectorHD/VectorDual.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$VectorDual_8hpp.html",tooltip=" "];
+  Node1 -> Node254 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node254 [label="src/phasicFlow/Kokkos\l/KokkosUtilities.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$KokkosUtilities_8hpp.html",tooltip=" "];
+  Node254 -> Node62 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node62 [label="src/phasicFlow/Kokkos\l/phasicFlowKokkos.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$phasicFlowKokkos_8hpp.html",tooltip=" "];
+  Node1 -> Node62 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node256 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node256 [label="utilities/checkPhasicFlow\l/checkPhasicFlow.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$checkPhasicFlow_8cpp.html",tooltip=" "];
+}

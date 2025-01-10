@@ -1,0 +1,28 @@
+digraph "fileDictionary"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="fileDictionary",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="IOobject",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1IOobject.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="dictionary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html",tooltip="Dictionary holds a set of data entries or sub-dictionaries that are enclosed in a curely braces or ar..."];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="baseShapeNames",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1baseShapeNames.html",tooltip=" "];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="conveyorBeltMotion",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1conveyorBeltMotion.html",tooltip="conveyor belt model for walls"];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="insertion",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1insertion.html",tooltip="Base class for particle insertion."];
+  Node1 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="property",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1property.html",tooltip="property holds the pure properties of materials."];
+  Node1 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="rotatingAxisMotion",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1rotatingAxisMotion.html",tooltip="Rotating axis motion model for walls."];
+  Node1 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="simulationDomain",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html",tooltip=" "];
+  Node1 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="stationaryWall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1stationaryWall.html",tooltip="stationary model for walls"];
+  Node1 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="vibratingMotion",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1vibratingMotion.html",tooltip="Vibrating motion model for walls."];
+}

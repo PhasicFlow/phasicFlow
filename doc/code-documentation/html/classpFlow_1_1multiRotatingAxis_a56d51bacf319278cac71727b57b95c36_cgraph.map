@@ -1,5 +1,0 @@
-<map id="transferPoint" name="transferPoint">
-<area shape="rect" id="node1" title="Translate point p for dt seconds based on the axis information." alt="" coords="5,42,112,69"/>
-<area shape="rect" id="node2" href="$classpFlow_1_1rotatingAxis.html#a1cb78036cf201d23953494381997418a" title="Is rotating." alt="" coords="160,5,307,47"/>
-<area shape="rect" id="node3" href="$rotatingAxisFwd_8hpp.html#a2a2904c6b466578f9847a75205e7c648" title=" " alt="" coords="203,71,264,98"/>
-</map>

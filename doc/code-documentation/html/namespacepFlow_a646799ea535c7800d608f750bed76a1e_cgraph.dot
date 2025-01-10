@@ -1,0 +1,10 @@
+digraph "isDirectory"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="isDirectory",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Free function to check if the path is dir path."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::fileSystem::path",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1fileSystem.html#a30e927ab97f8b741ec1b4ed94d111115",tooltip="Const access to path."];
+}

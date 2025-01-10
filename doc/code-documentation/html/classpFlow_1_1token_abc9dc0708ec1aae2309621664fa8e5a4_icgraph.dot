@@ -1,0 +1,14 @@
+digraph "isString"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="isString",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Token is STRING, VARIABLE or VERBATIM string."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::operator\>\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ac08e23027fc74d4f881e8ad3e4d9db21",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::Logical::read",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="token",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a49280cb1d882b43a9ede4a6291728a01",tooltip="Copy construct word & string token."];
+}

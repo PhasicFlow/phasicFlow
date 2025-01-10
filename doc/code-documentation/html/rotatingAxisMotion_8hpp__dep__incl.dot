@@ -1,0 +1,11 @@
+digraph "src/MotionModel/rotatingAxisMotion/rotatingAxisMotion.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/MotionModel/rotating\lAxisMotion/rotatingAxisMotion.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/Geometry/geometryMotion\l/geometryMotions.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$geometryMotions_8hpp.html",tooltip=" "];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="src/MotionModel/rotating\lAxisMotion/rotatingAxisMotion.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rotatingAxisMotion_8cpp.html",tooltip=" "];
+}

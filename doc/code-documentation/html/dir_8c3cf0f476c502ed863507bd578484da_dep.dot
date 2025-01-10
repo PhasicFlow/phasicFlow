@@ -1,0 +1,11 @@
+digraph "src/MotionModel/entities/conveyorBelt" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_dfffb364e858dce2ad53d04d398ac8d4 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="entities" fontname="Helvetica", fontsize="10", URL="dir_dfffb364e858dce2ad53d04d398ac8d4.html"]
+  dir_8c3cf0f476c502ed863507bd578484da [shape=box, label="conveyorBelt", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_8c3cf0f476c502ed863507bd578484da.html"];
+  }
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_8c3cf0f476c502ed863507bd578484da->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="4", labeldistance=1.5 headhref="dir_000052_000031.html"];
+}

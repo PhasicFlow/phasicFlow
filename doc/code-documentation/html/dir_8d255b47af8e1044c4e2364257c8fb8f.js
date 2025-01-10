@@ -1,6 +1,6 @@
 var dir_8d255b47af8e1044c4e2364257c8fb8f =
 [
-    [ "finalize.hpp", "finalize_8hpp.html", null ],
+    [ "finalize.hpp", "finalize_8hpp.html", "finalize_8hpp" ],
     [ "initialize.hpp", "initialize_8hpp.html", "initialize_8hpp" ],
     [ "initialize_Control.hpp", "initialize__Control_8hpp.html", "initialize__Control_8hpp" ],
     [ "setPointStructure.hpp", "setPointStructure_8hpp.html", "setPointStructure_8hpp" ],

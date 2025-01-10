@@ -1,0 +1,20 @@
+digraph "src/phasicFlow/containers/List/ListPtr/ListPtr.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/containers\l/List/ListPtr/ListPtr.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="list",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="types.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$types_8hpp.html",tooltip=" "];
+  Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="uniquePtr.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$uniquePtr_8hpp.html",tooltip=" "];
+  Node19 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node1 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="iOstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iOstream_8hpp.html",tooltip=" "];
+  Node1 -> Node36 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node36 [label="ListPtrI.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ListPtrI_8hpp.html",tooltip=" "];
+}

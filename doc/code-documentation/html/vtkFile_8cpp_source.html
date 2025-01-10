@@ -128,72 +128,83 @@ $(document).ready(function(){initNavTree('vtkFile_8cpp_source.html',''); initRes
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vtkFile_8hpp.html">vtkFile.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classpFlow_1_1vtkFile.html#a48848d5794b90271ec8ccacd3f14a134">   24</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1vtkFile.html#a48848d5794b90271ec8ccacd3f14a134">pFlow::vtkFile::openStream</a>()</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classpFlow_1_1vtkFile.html#a6b1c664a44d1d5913a0fd139c1bd5f5c">   24</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1vtkFile.html#a6b1c664a44d1d5913a0fd139c1bd5f5c">pFlow::vtkFile::openStream</a>(<span class="keywordtype">bool</span> wHeader)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classpFlow_1_1vtkFile.html#a6027cf7f2b1878c20729940b2f2f0437">oStream_</a> = makeUnique&lt;oFstream&gt;( <a class="code" href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">fileName</a>() );</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classpFlow_1_1vtkFile.html#a6027cf7f2b1878c20729940b2f2f0437">oStream_</a> = makeUnique&lt;oFstream&gt;( <a class="code" href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">fileName</a>(), <a class="code" href="classpFlow_1_1vtkFile.html#ad139edcd5a95667fd99c314eccefa0a4">binary_</a>, <a class="code" href="classpFlow_1_1vtkFile.html#a0c6d9e064a918fa590951f9236a3bce4">append_</a> );</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="classpFlow_1_1vtkFile.html#a6027cf7f2b1878c20729940b2f2f0437">oStream_</a> )<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1vtkFile.html#a50e2a02b29448f61d0e5a071b72ba138">writeHeader</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">bool</span> pFlow::vtkFile::vtkFile::writeHeader()</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span>(wHeader)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1vtkFile.html#a50e2a02b29448f61d0e5a071b72ba138">writeHeader</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span>(!oStream_) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    oStream_() &lt;&lt; <span class="stringliteral">&quot;# vtk DataFile Version 2.0&quot;</span> &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    oStream_() &lt;&lt; <span class="stringliteral">&quot;vtk file for time : &quot;</span> &lt;&lt; time_ &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    oStream_() &lt;&lt; <span class="stringliteral">&quot;ASCII&quot;</span> &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span>( oStream_().fail() ) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="classpFlow_1_1vtkFile.html#add448bf63ea20db92c0d7ae977014a96">pFlow::vtkFile::vtkFile</a></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classpFlow_1_1vtkFile.html#add448bf63ea20db92c0d7ae977014a96">   49</a></span>&#160;(</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> dir,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; bName,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> time</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    dirPath_(dir),</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    baseName_(bName),</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    time_(time)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span>(!openStream())</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a> &lt;&lt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="stringliteral">&quot;  error in creating vtkFile &quot;</span>&lt;&lt;fileName()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">bool</span> pFlow::vtkFile::vtkFile::writeHeader()</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span>(!oStream_) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    oStream_() &lt;&lt; <span class="stringliteral">&quot;# vtk DataFile Version 3.0&quot;</span> &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    oStream_() &lt;&lt; <span class="stringliteral">&quot;vtk file for time : &quot;</span> &lt;&lt; time_ &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span>(binary_)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        oStream_() &lt;&lt; <span class="stringliteral">&quot;BINARY&quot;</span> &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        oStream_() &lt;&lt; <span class="stringliteral">&quot;ASCII&quot;</span> &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span>( oStream_().fail() ) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="classpFlow_1_1vtkFile.html#ae7e9ee91acdcb49400a8e53299fac2a2">pFlow::vtkFile::vtkFile</a></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classpFlow_1_1vtkFile.html#ae7e9ee91acdcb49400a8e53299fac2a2">   54</a></span>&#160;(</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> dir,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; bName,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> time,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> bnry,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">bool</span> append</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    binary_(bnry),</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    append_(append),</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    time_(time),</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    dirPath_(dir),</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    baseName_(bName)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">   70</a></span>&#160;<a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a> <a class="code" href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">pFlow::vtkFile::fileName</a>()<span class="keyword">const</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> fName = baseName_ +<span class="stringliteral">&quot;-&quot;</span> + <a class="code" href="namespacepFlow.html#a321d0334d760ce5f842a6269a00c2aa5">int322Word</a>(10000*time_) + <span class="stringliteral">&quot;.vtk&quot;</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> dirPath_ +fName;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span>(!openStream(!append))</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a> &lt;&lt;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="stringliteral">&quot;  error in creating vtkFile &quot;</span>&lt;&lt;fileName()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">   79</a></span>&#160;<a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a> <a class="code" href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">pFlow::vtkFile::fileName</a>()<span class="keyword">const</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> fName = baseName_ +<span class="stringliteral">&quot;-&quot;</span> + <a class="code" href="namespacepFlow.html#a321d0334d760ce5f842a6269a00c2aa5">int322Word</a>(10000*time_) + <span class="stringliteral">&quot;.vtk&quot;</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> dirPath_ +fName;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00046">builtinTypes.hpp:46</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1vtkFile_html_aae8a01aeff2b37c5242e6cdc45a8852d"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">pFlow::vtkFile::fileName</a></div><div class="ttdeci">virtual fileSystem fileName() const</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8cpp_source.html#l00070">vtkFile.cpp:70</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1vtkFile_html_a48848d5794b90271ec8ccacd3f14a134"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#a48848d5794b90271ec8ccacd3f14a134">pFlow::vtkFile::openStream</a></div><div class="ttdeci">bool openStream()</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8cpp_source.html#l00024">vtkFile.cpp:24</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdoc">Fatal exit.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00098">error.hpp:98</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1vtkFile_html_aae8a01aeff2b37c5242e6cdc45a8852d"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#aae8a01aeff2b37c5242e6cdc45a8852d">pFlow::vtkFile::fileName</a></div><div class="ttdeci">virtual fileSystem fileName() const</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8cpp_source.html#l00079">vtkFile.cpp:79</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1vtkFile_html_ad139edcd5a95667fd99c314eccefa0a4"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#ad139edcd5a95667fd99c314eccefa0a4">pFlow::vtkFile::binary_</a></div><div class="ttdeci">bool binary_</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8hpp_source.html#l00039">vtkFile.hpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1vtkFile_html_ae7e9ee91acdcb49400a8e53299fac2a2"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#ae7e9ee91acdcb49400a8e53299fac2a2">pFlow::vtkFile::vtkFile</a></div><div class="ttdeci">vtkFile(const fileSystem dir, const word &amp;bName, real time, bool bnry, bool append=false)</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8cpp_source.html#l00054">vtkFile.cpp:54</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1vtkFile_html_a50e2a02b29448f61d0e5a071b72ba138"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#a50e2a02b29448f61d0e5a071b72ba138">pFlow::vtkFile::writeHeader</a></div><div class="ttdeci">virtual bool writeHeader()</div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1vtkFile_html_add448bf63ea20db92c0d7ae977014a96"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#add448bf63ea20db92c0d7ae977014a96">pFlow::vtkFile::vtkFile</a></div><div class="ttdeci">vtkFile(const fileSystem dir, const word &amp;bName, real time)</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8cpp_source.html#l00049">vtkFile.cpp:49</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a321d0334d760ce5f842a6269a00c2aa5"><div class="ttname"><a href="namespacepFlow.html#a321d0334d760ce5f842a6269a00c2aa5">pFlow::int322Word</a></div><div class="ttdeci">word int322Word(const int32 &amp;v)</div><div class="ttdef"><b>Definition:</b> <a href="bTypesFunctions_8cpp_source.html#l00067">bTypesFunctions.cpp:67</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1vtkFile_html_a6027cf7f2b1878c20729940b2f2f0437"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#a6027cf7f2b1878c20729940b2f2f0437">pFlow::vtkFile::oStream_</a></div><div class="ttdeci">uniquePtr&lt; oFstream &gt; oStream_</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8hpp_source.html#l00043">vtkFile.hpp:43</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00341">iOstream.hpp:341</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdoc">Manages file pathes, manupulate and combines them.</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00071">fileSystem.hpp:71</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdoc">Report a fatal error and function name and exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00077">error.hpp:77</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1vtkFile_html_a6b1c664a44d1d5913a0fd139c1bd5f5c"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#a6b1c664a44d1d5913a0fd139c1bd5f5c">pFlow::vtkFile::openStream</a></div><div class="ttdeci">bool openStream(bool wHeader)</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8cpp_source.html#l00024">vtkFile.cpp:24</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1vtkFile_html_a0c6d9e064a918fa590951f9236a3bce4"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#a0c6d9e064a918fa590951f9236a3bce4">pFlow::vtkFile::append_</a></div><div class="ttdeci">bool append_</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8hpp_source.html#l00041">vtkFile.hpp:41</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a321d0334d760ce5f842a6269a00c2aa5"><div class="ttname"><a href="namespacepFlow.html#a321d0334d760ce5f842a6269a00c2aa5">pFlow::int322Word</a></div><div class="ttdeci">word int322Word(const int32 &amp;v)</div><div class="ttdoc">Convert int32 to word.</div><div class="ttdef"><b>Definition:</b> <a href="bTypesFunctions_8cpp_source.html#l00110">bTypesFunctions.cpp:110</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1vtkFile_html_a6027cf7f2b1878c20729940b2f2f0437"><div class="ttname"><a href="classpFlow_1_1vtkFile.html#a6027cf7f2b1878c20729940b2f2f0437">pFlow::vtkFile::oStream_</a></div><div class="ttdeci">uniquePtr&lt; oFstream &gt; oStream_</div><div class="ttdef"><b>Definition:</b> <a href="vtkFile_8hpp_source.html#l00037">vtkFile.hpp:37</a></div></div>
 <div class="ttc" id="avtkFile_8hpp_html"><div class="ttname"><a href="vtkFile_8hpp.html">vtkFile.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

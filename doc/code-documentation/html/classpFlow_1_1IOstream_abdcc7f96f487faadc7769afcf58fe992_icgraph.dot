@@ -1,0 +1,12 @@
+digraph "good"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="good",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Return true if next operation might succeed."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::Istream::nextValid",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3",tooltip="Get the next valid character."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::dictionary::\lreadDictionary",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a8943dec8dd658ffb5d0c1da773f37d9d",tooltip="read dictionary from stream - without keyword"];
+}

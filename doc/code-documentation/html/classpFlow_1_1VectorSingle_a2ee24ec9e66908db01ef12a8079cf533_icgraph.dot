@@ -1,0 +1,12 @@
+digraph "resize"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="resize",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Resize the vector and preserve the content."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::boundaryBaseKernels\l::createRemoveKeepIndices",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow_1_1boundaryBaseKernels.html#a38b0cabe5884a9ca33d98dc088b64dc5",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::boundaryBase\l::setSize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1boundaryBase.html#ae391486a0d64b828f329881307b7c4c9",tooltip="Set the size of indexList."];
+}

@@ -1,0 +1,12 @@
+digraph "thisCallWrite"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="thisCallWrite",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="isMaster",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOPattern.html#a6dfd2bbd6bdf03bbc060502834e3fac0",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="isMasterProcessorOnly",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOPattern.html#a67b19b575c43eef107b89e96aa51db2e",tooltip=" "];
+}

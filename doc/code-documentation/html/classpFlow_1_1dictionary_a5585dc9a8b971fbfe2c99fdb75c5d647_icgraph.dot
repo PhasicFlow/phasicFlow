@@ -1,0 +1,40 @@
+digraph "getValOrSet"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="getValOrSet",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="get the value of data entry or if not found, set the value to setVal"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::baseTimeControl\l::baseTimeControl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1baseTimeControl.html#a53cc197f194121f3c080460e684d11f6",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::boundaryExit\l::boundaryExit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1boundaryExit.html#a7ba946abd1ea56a68a60487702ea7de7",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::boundaryReflective\l::boundaryReflective",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1boundaryReflective.html#af40852552e1c95d4f73ff792cbad7681",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::includeMask\l::getFieldType",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1includeMask.html#ac79c0ce5bab11b4b49996bc8f642d295",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="getValOrSetMax",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#aca2f2df45158b023ca13bb04943acfca",tooltip="get the value of data entry anf return max(setMaxVal, value) if not found, set the value to setMaxVal"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="getValOrSetMin",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#aef87c2ede8a688aa4158465d8f3646c9",tooltip="get the value of data entry anf return max(setMinVal, value) if not found, set the value to setMinVal"];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="pFlow::timeInterval\l::read",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1timeInterval.html#ab25b05023549e7fec0ee1d0f6ce239dd",tooltip=" "];
+  Node11 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="pFlow::vibrating::read",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1vibrating.html#ab25b05023549e7fec0ee1d0f6ce239dd",tooltip=" "];
+  Node11 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="pFlow::rotatingAxis\l::read",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1rotatingAxis.html#ab25b05023549e7fec0ee1d0f6ce239dd",tooltip="Read from dictionary."];
+  Node1 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="pFlow::multiRotatingAxis\l::read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1multiRotatingAxis.html#ac70963b5d795997b3d042e73606604d4",tooltip="Read from dictionary."];
+  Node1 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="pFlow::Wall::readCommon",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Wall.html#ac339bf3cb14b75918394f93ca65ec6bf",tooltip=" "];
+  Node1 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="pFlow::cuboidWall::\lreadcuboidWall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1cuboidWall.html#a55e30af1f42fec1e6e19ff11aae7821b",tooltip=" "];
+  Node1 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="pFlow::cylinderWall\l::readCylinderWall",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1cylinderWall.html#a563569591f8b215615788f0f7547c515",tooltip=" "];
+  Node1 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="pFlow::Time::readDictionary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1Time.html#a3ee94dd32f4df1490653290d2919dc52",tooltip=" "];
+  Node1 -> Node26 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node26 [label="pFlow::planeWall::readPlaneWall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1planeWall.html#a549697ff2b459d3f6f0d888e6ab32e30",tooltip=" "];
+}

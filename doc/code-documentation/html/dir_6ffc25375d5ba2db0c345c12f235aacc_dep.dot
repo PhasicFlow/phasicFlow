@@ -1,0 +1,11 @@
+digraph "src/phasicFlow/dictionary/twoPartEntry" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_1220c712ed5f98fd84ba71b4848374db {
+    graph [ bgcolor="#ddddee", pencolor="black", label="dictionary" fontname="Helvetica", fontsize="10", URL="dir_1220c712ed5f98fd84ba71b4848374db.html"]
+  dir_6ffc25375d5ba2db0c345c12f235aacc [shape=box, label="twoPartEntry", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_6ffc25375d5ba2db0c345c12f235aacc.html"];
+  }
+  dir_12939209666026aa3d509ab05383a6fb [shape=box label="entry" URL="dir_12939209666026aa3d509ab05383a6fb.html"];
+  dir_6ffc25375d5ba2db0c345c12f235aacc->dir_12939209666026aa3d509ab05383a6fb [headlabel="1", labeldistance=1.5 headhref="dir_000114_000113.html"];
+}

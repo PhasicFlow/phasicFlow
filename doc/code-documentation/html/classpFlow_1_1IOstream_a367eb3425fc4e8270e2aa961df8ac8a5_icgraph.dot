@@ -1,0 +1,49 @@
+digraph "check"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="check",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Check IOstream status for given operation."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::operator\<\<",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::operator\>\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#a85ed561d066dae339196cd058783674f",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::line::read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1line.html#ae1d42751915e8566dac19658cc498ffa",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::rotatingAxis\l::read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1rotatingAxis.html#ae1d42751915e8566dac19658cc498ffa",tooltip="Read from input stream is."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::readDataAsciiBinary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a537dd03cb0d2bdf73f468941a73e6bf3",tooltip=" "];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="pFlow::timeInterval\l::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1timeInterval.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="pFlow::iBox::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iBox.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="pFlow::sphere::write",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1sphere.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="pFlow::box::write",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1box.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="pFlow::Logical::write",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91",tooltip=" "];
+  Node1 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="pFlow::line::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1line.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="pFlow::vibrating::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1vibrating.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="pFlow::cylinder::write",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1cylinder.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+  Node1 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="pFlow::rotatingAxis\l::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1rotatingAxis.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip="Write to output stream os."];
+  Node1 -> Node25 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node25 [label="pFlow::multiTriSurface\l::write",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1multiTriSurface.html#ab3738b20dfa25d66228f6a7571d97aa0",tooltip=" "];
+  Node1 -> Node28 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node28 [label="pFlow::infinitePlane\l::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1infinitePlane.html#a6a40de4ceed55b2f78cf3027739dfd91",tooltip=" "];
+  Node1 -> Node29 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 [label="pFlow::Field\< uint32x3\l \>::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Field.html#a6a40de4ceed55b2f78cf3027739dfd91",tooltip=" "];
+  Node1 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="pFlow::writeDataASCII",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#adc05d84cc2a6e479e3098a1cb386a46d",tooltip=" "];
+  Node30 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node32 [label="pFlow::writeDataAsciiBinary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#afb14a6f418c0d61dd8f11d0d75435db1",tooltip=" "];
+  Node1 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node40 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node40 [label="pFlow::List\< std::any\l \>::writeList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1List.html#a452cc3dc2647928573a55c8a5b41a5ea",tooltip=" "];
+}

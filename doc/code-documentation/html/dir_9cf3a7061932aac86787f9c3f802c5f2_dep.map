@@ -1,9 +1,0 @@
-<map id="src/phasicFlow/structuredData/peakableRegion/PeakableRegion" name="src/phasicFlow/structuredData/peakableRegion/PeakableRegion">
-<area shape="rect" id="node1" href="dir_9cf3a7061932aac86787f9c3f802c5f2.html" title="PeakableRegion" alt="" coords="56,52,183,100"/>
-<area shape="rect" id="node2" href="dir_fcee4eefc34728867d2bd32b142ae11c.html" title="peakableRegion" alt="" coords="5,148,132,196"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000108_000107.html" title="1" alt="" coords="92,129,102,143"/>
-<area shape="rect" id="node3" href="dir_1220c712ed5f98fd84ba71b4848374db.html" title="dictionary" alt="" coords="76,244,163,292"/>
-<area shape="rect" id="edge3-headlabel" href="dir_000108_000076.html" title="1" alt="" coords="140,223,149,237"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000107_000076.html" title="1" alt="" coords="101,217,110,231"/>
-<area shape="rect" id="clust1" href="dir_4f9e597021b90228ccac48345da86dec.html" title="peakableRegion" alt="" coords="45,16,194,111"/>
-</map>

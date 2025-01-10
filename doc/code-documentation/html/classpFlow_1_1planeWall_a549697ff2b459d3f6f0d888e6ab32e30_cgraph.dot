@@ -1,0 +1,19 @@
+digraph "readPlaneWall"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="readPlaneWall",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::dictionary::\lgetVal",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47",tooltip="get the value of data entry"];
+  Node4 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::dictionary::\lgetValOrSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a5585dc9a8b971fbfe2c99fdb75c5d647",tooltip="get the value of data entry or if not found, set the value to setVal"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::dictionary::\lglobalName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632",tooltip="global name of entry, separated with dots"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::algorithms::\lKOKKOS::max",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow_1_1algorithms_1_1KOKKOS.html#a9d98facac68152ec12bf1483da55c939",tooltip=" "];
+}

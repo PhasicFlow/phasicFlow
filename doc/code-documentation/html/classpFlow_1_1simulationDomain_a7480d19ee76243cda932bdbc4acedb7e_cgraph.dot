@@ -1,0 +1,34 @@
+digraph "prepareBoundaryDicts"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="prepareBoundaryDicts",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::dictionary::\laddDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a884a981ad2a220efcd7f6e8bf6cd94e2",tooltip="add a dictionary with the specifiedd keyword, if it exists, replace it."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::dictionary::\laddOrReplace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a9f2e3b3f95165c31cf05a58663778900",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="bundaryName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html#a988fd70916fbbe3d02c97794152ab482",tooltip="Boundary name based on boundary index."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::dictionary::\lcontainsDictionay",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#ac17b017ed4e1be84fa2e9144946603e0",tooltip="check if a sub-dictionary exists"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::dictionary::\lgetVal",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47",tooltip="get the value of data entry"];
+  Node8 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::dictionary::\lgetValMax",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#ac2b3c7c47189ea97d962234a53f600d2",tooltip="get the value of data entry and return max(value, maxVal)"];
+  Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="pFlow::dictionary::\lgetValOrSetMax",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#aca2f2df45158b023ca13bb04943acfca",tooltip="get the value of data entry anf return max(setMaxVal, value) if not found, set the value to setMaxVal"];
+  Node1 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="pFlow::dictionary::\lglobalName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632",tooltip="global name of entry, separated with dots"];
+  Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="sizeOfBoundaries",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html#acb7d733125924beb01fb8e20ebc755f8",tooltip=" "];
+  Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="pFlow::dictionary::\lsubDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a630c840647a3ebefe33336cc25a8b15d",tooltip="ref to a subdictioanry fatalExit if not found"];
+  Node20 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="thisBoundariesDictName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html#a3fc1520fd94ed72709f36b5f8fedcf43",tooltip=" "];
+}

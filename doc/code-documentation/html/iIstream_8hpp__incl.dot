@@ -1,0 +1,18 @@
+digraph "src/phasicFlow/streams/iStream/iIstream.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/streams\l/iStream/iIstream.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="IOstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$IOstream_8hpp.html",tooltip=" "];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="token.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$token_8hpp.html",tooltip=" "];
+  Node1 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="iOstream.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iOstream_8hpp.html",tooltip=" "];
+  Node19 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="iIstreamI.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iIstreamI_8hpp.html",tooltip=" "];
+}

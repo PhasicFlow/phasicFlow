@@ -6,8 +6,8 @@ var math_8hpp =
     [ "mod", "math_8hpp.html#a733d0766b5a543b796883d6551e33347", null ],
     [ "mod", "math_8hpp.html#ae6b61126951d2cce9cfb5213ac4cc2a4", null ],
     [ "mod", "math_8hpp.html#a73fe9b62d0d27ce78384ccfcf54d8d97", null ],
-    [ "mod", "math_8hpp.html#a64df2e287b5e83b739048ad91a5ced6f", null ],
-    [ "mod", "math_8hpp.html#a174ed6e59721fded5d3f895019fc5eca", null ],
+    [ "mod", "math_8hpp.html#a5e95911bf969c4793ce304878d1e5b6d", null ],
+    [ "mod", "math_8hpp.html#abd1dae32b4c25bc92b945c5e309434ce", null ],
     [ "remainder", "math_8hpp.html#a11f5f4f046dbeafbb80b548c247541e8", null ],
     [ "exp", "math_8hpp.html#a04309949af74c41abe6a8fb8cd47c179", null ],
     [ "log", "math_8hpp.html#ab5c52c3f812c9d7bd8623a7c72eb9ce5", null ],
@@ -31,13 +31,11 @@ var math_8hpp =
     [ "min", "math_8hpp.html#a891ac03a1091d61cfd2950af05683fd7", null ],
     [ "min", "math_8hpp.html#a408b4062d67be46927ddb02d27341dd6", null ],
     [ "min", "math_8hpp.html#ad693b5318f03ed8a268aa9594d1a26c8", null ],
-    [ "min", "math_8hpp.html#abd16bf59d5e604e87f3a80481c9e96be", null ],
+    [ "min", "math_8hpp.html#a7790bc15d1703aac150e7a2a313c937f", null ],
     [ "min", "math_8hpp.html#a0e169b4673dd22facaf0847f6ce45519", null ],
-    [ "min", "math_8hpp.html#afe300bdca680a514c27f39cb9a81977f", null ],
     [ "max", "math_8hpp.html#ab98ad9821e972b789352611d99da2c7a", null ],
     [ "max", "math_8hpp.html#aacd4a4d815c754238ac969f7218d6cd6", null ],
     [ "max", "math_8hpp.html#a4dfb1ca787261729ce03f1ab5532716f", null ],
-    [ "max", "math_8hpp.html#ac7f145365f7b556404d5fdb2324fc2ca", null ],
-    [ "max", "math_8hpp.html#aa24f96f5fbbc9cc25a2efc476db2fb38", null ],
-    [ "max", "math_8hpp.html#ac57ac36cbc3c9a93f485cb8fa1ca6126", null ]
+    [ "max", "math_8hpp.html#ab299513f5aa929c330199bfe78967316", null ],
+    [ "max", "math_8hpp.html#aa24f96f5fbbc9cc25a2efc476db2fb38", null ]
 ];

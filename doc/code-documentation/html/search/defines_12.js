@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['yellowtext_5516',['yellowText',['../streams_8hpp.html#a71e567553baf2a24a11e442683cde599',1,'streams.hpp']]],
-  ['ywarning_5517',['yWARNING',['../streams_8hpp.html#a66e13d5310adaba0b5ac66764bcbed28',1,'streams.hpp']]]
+  ['yellow_5ftext_7273',['Yellow_Text',['../iOstream_8hpp.html#a06734f691d48f8796526b96cd58b982c',1,'iOstream.hpp']]]
 ];

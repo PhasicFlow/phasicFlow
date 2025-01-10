@@ -1,0 +1,14 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node138 [label="repository",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1repository.html",tooltip=" "];
+  Node138 -> Node139 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node139 [label="systemControl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1systemControl.html",tooltip=" "];
+  Node138 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="Time",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Time.html",tooltip=" "];
+  Node0 [label="timeControl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1timeControl.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

@@ -1,0 +1,12 @@
+digraph "updateSubViews"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="updateSubViews",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::deviceView",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a2ea57920578a663d375f7567be3076c4",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::hostView",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a0c262c82eec3cf1ef7ae40ec3267ef13",tooltip=" "];
+}

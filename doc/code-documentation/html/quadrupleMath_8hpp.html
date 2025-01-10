@@ -133,11 +133,11 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                    \</div>
-<div class="line">inline <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::fnName(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; q)             \</div>
-<div class="line">{                                                               \</div>
-<div class="line">    return quadruple&lt;T&gt;(fnName(q.s_), fnName(q.v_));    \</div>
-<div class="line">}</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                                       \</div>
+<div class="line">    inline <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::fnName(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; q)            \</div>
+<div class="line">    {                                                                          \</div>
+<div class="line">        return quadruple&lt;T&gt;(fnName(q.s_), fnName(q.v_));                       \</div>
+<div class="line">    }</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="quadrupleMath_8hpp_source.html#l00021">21</a> of file <a class="el" href="quadrupleMath_8hpp_source.html">quadrupleMath.hpp</a>.</p>
 
@@ -158,11 +158,15 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                                                \</div>
-<div class="line">inline <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::fnName(<span class="keyword">const</span> quadruple&lt;T&gt;&amp; arg1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; arg2)    \</div>
-<div class="line">{                                                                                   \</div>
-<div class="line">    return quadruple&lt;T&gt;(fnName(arg1.s_, arg2.s_), fnName(arg1.v_,arg2.v_)); \</div>
-<div class="line">}</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;                                                       \</div>
+<div class="line">    inline <a class="code" href="classpFlow_1_1quadruple.html">pFlow::quadruple&lt;T&gt;</a> pFlow::fnName(                                  \</div>
+<div class="line">      <span class="keyword">const</span> quadruple&lt;T&gt;&amp; arg1, <span class="keyword">const</span> quadruple&lt;T&gt;&amp; arg2                       \</div>
+<div class="line">    )                                                                          \</div>
+<div class="line">    {                                                                          \</div>
+<div class="line">        return quadruple&lt;T&gt;(                                                   \</div>
+<div class="line">          fnName(arg1.s_, arg2.s_), fnName(arg1.v_, arg2.v_)                   \</div>
+<div class="line">        );                                                                     \</div>
+<div class="line">    }</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="quadrupleMath_8hpp_source.html#l00028">28</a> of file <a class="el" href="quadrupleMath_8hpp_source.html">quadrupleMath.hpp</a>.</p>
 
@@ -170,7 +174,7 @@ Macros</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1quadruple_html"><div class="ttname"><a href="classpFlow_1_1quadruple.html">pFlow::quadruple</a></div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00037">quadruple.hpp:37</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1quadruple_html"><div class="ttname"><a href="classpFlow_1_1quadruple.html">pFlow::quadruple</a></div><div class="ttdef"><b>Definition:</b> <a href="quadruple_8hpp_source.html#l00036">quadruple.hpp:36</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_e8baec020e471dff3bc06b812491e6c5.html">types</a></li><li class="navelem"><a class="el" href="dir_2eb06cd66568dce23de9f512d86706ca.html">quadruple</a></li><li class="navelem"><a class="el" href="quadrupleMath_8hpp.html">quadrupleMath.hpp</a></li>

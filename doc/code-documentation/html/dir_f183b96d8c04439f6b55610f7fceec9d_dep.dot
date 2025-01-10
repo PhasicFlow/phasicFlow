@@ -1,0 +1,17 @@
+digraph "src/Interaction/sphereInteraction/boundaries/boundarySphereInteraction" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_69e926e29d3967585e97de6013991fb8 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="boundaries" fontname="Helvetica", fontsize="10", URL="dir_69e926e29d3967585e97de6013991fb8.html"]
+  dir_f183b96d8c04439f6b55610f7fceec9d [shape=box, label="boundarySphereInteraction", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_f183b96d8c04439f6b55610f7fceec9d.html"];
+  }
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_9e72493e858003bd3d74a55a2aedd075 [shape=box label="Particles" fillcolor="white" style="filled" color="red" URL="dir_9e72493e858003bd3d74a55a2aedd075.html"];
+  dir_cfeb40d2a5ed0376bc9d9d3119f08c90 [shape=box label="contactLists" URL="dir_cfeb40d2a5ed0376bc9d9d3119f08c90.html"];
+  dir_9e72493e858003bd3d74a55a2aedd075->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="54", labeldistance=1.5 headhref="dir_000063_000031.html"];
+  dir_f183b96d8c04439f6b55610f7fceec9d->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="2", labeldistance=1.5 headhref="dir_000048_000031.html"];
+  dir_f183b96d8c04439f6b55610f7fceec9d->dir_9e72493e858003bd3d74a55a2aedd075 [headlabel="1", labeldistance=1.5 headhref="dir_000048_000063.html"];
+  dir_f183b96d8c04439f6b55610f7fceec9d->dir_cfeb40d2a5ed0376bc9d9d3119f08c90 [headlabel="1", labeldistance=1.5 headhref="dir_000048_000022.html"];
+  dir_cfeb40d2a5ed0376bc9d9d3119f08c90->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="3", labeldistance=1.5 headhref="dir_000022_000031.html"];
+}

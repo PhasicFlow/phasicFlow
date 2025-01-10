@@ -1,0 +1,25 @@
+digraph "sphereInteraction&lt; contactForceModel, geometryMotionModel, contactListType &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="sphereInteraction\<\l contactForceModel,\l geometryMotionModel,\l contactListType \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="interaction",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1interaction.html",tooltip=" "];
+  Node122 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" activeBoundaries_" ,fontname="Helvetica"];
+  Node122 [label="boundariesMask\< 6 \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1boundariesMask.html",tooltip=" "];
+  Node125 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" ppContactList_\npwContactList_" ,fontname="Helvetica"];
+  Node125 [label="uniquePtr\< ContactListType \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node44 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" contactListMangementBoundary\lTimer_\nboundaryInteractionTimer\l_\npwInteractionTimer\l_\ncontactListMangement\lTimer_\nppInteractionTimer_" ,fontname="Helvetica"];
+  Node44 [label="Timer",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1Timer.html",tooltip=" "];
+  Node127 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" boundaryInteraction_" ,fontname="Helvetica"];
+  Node127 [label="boundarySphereInteraction\lList\< ContactForceModel,\l GeometryMotionModel \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1boundarySphereInteractionList.html",tooltip=" "];
+  Node131 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" contactSearch_" ,fontname="Helvetica"];
+  Node131 [label="uniquePtr\< pFlow::contact\lSearch \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node133 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" forceModel_" ,fontname="Helvetica"];
+  Node133 [label="uniquePtr\< ContactForceModel \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node135 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" sphParticles_" ,fontname="Helvetica"];
+  Node135 [label="sphereParticles",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1sphereParticles.html",tooltip="Class for managing spherical particles."];
+  Node44 -> Node135 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" intPredictTimer_\naccelerationTimer\l_\nfieldUpdateTimer\l_\nintCorrectTimer_" ,fontname="Helvetica"];
+}

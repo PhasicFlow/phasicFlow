@@ -1,0 +1,14 @@
+digraph "pStruct"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="pStruct",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::selectBox::select\lAllPointsInBox",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1selectBox.html#a1374032c453ef21c7e97c572fb962a50",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::selectedFieldVals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ab992eb0568686e6f77238116f22983a8",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::selectorStridedRange\l::selectorStridedRange",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1selectorStridedRange.html#ad3d032cfda0b34075c7dc0f58319a4e2",tooltip=" "];
+}

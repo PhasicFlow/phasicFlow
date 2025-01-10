@@ -1,0 +1,14 @@
+digraph "src/Particles/Insertion/insertion" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_48274e6f13aca5dc2f0e74080ca458f7 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Insertion" fontname="Helvetica", fontsize="10", URL="dir_48274e6f13aca5dc2f0e74080ca458f7.html"]
+  dir_2f34ec84ea7e71d459352cea428a0eb0 [shape=box, label="insertion", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_2f34ec84ea7e71d459352cea428a0eb0.html"];
+  }
+  dir_b351bcc3c60d144476bd2e30437abfde [shape=box label="particles" fillcolor="white" style="filled" color="red" URL="dir_b351bcc3c60d144476bd2e30437abfde.html"];
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_b351bcc3c60d144476bd2e30437abfde->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="5", labeldistance=1.5 headhref="dir_000075_000031.html"];
+  dir_2f34ec84ea7e71d459352cea428a0eb0->dir_b351bcc3c60d144476bd2e30437abfde [headlabel="1", labeldistance=1.5 headhref="dir_000070_000075.html"];
+  dir_2f34ec84ea7e71d459352cea428a0eb0->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="4", labeldistance=1.5 headhref="dir_000070_000031.html"];
+}

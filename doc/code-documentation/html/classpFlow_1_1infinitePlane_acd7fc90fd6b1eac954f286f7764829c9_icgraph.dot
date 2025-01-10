@@ -1,0 +1,10 @@
+digraph "infinitePlane"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="infinitePlane",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Default."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::plane::infPlane",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1plane.html#a6bf2477a54590412f4e528c81549535c",tooltip=" "];
+}

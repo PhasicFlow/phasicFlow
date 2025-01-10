@@ -1,0 +1,19 @@
+digraph "src/phasicFlow/repository/Time/Time.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/repository\l/Time/Time.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="error.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$error_8hpp.html",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="types.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$types_8hpp.html",tooltip=" "];
+  Node1 -> Node35 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node35 [label="fileSystem.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$fileSystem_8hpp.html",tooltip=" "];
+  Node1 -> Node40 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node40 [label="repository.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$repository_8hpp.html",tooltip=" "];
+  Node40 -> Node35 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node72 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node72 [label="timeControl.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$timeControl_8hpp.html",tooltip=" "];
+  Node72 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

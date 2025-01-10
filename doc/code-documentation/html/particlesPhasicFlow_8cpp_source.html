@@ -126,322 +126,256 @@ $(document).ready(function(){initNavTree('particlesPhasicFlow_8cpp_source.html',
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="positionParticles_8hpp.html">positionParticles.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointStructure_8hpp.html">pointStructure.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="setFields_8hpp.html">setFields.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="readControlDict_8hpp.html">readControlDict.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1dictionary.html">pFlow::dictionary</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1IOobject.html">pFlow::IOobject</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1objectFile.html">pFlow::objectFile</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pFlow::pointStructureFile__</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1positionParticles.html">pFlow::positionParticles</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using</span> <a class="code" href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vocabs_8hpp.html">vocabs.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="commandLine_8hpp.html">commandLine.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="positionParticles_8hpp.html">positionParticles.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointStructure_8hpp.html">pointStructure.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="setFields_8hpp.html">setFields.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemControl_8hpp.html">systemControl.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="baseShapeNames_8hpp.html">baseShapeNames.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//#include &quot;readControlDict.hpp&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   32</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[] )</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classpFlow_1_1commandLine.html">pFlow::commandLine</a> cmds(</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="stringliteral">&quot;createParticles&quot;</span>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="stringliteral">&quot;Read the dictionary createParticles and create particles&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="stringliteral">&quot; based on the two sub-dictionaries positionParticles and setFields.\n&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="stringliteral">&quot;First executes positionParticles and then setFields, except &quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="stringliteral">&quot;otherwise selected in the command line.&quot;</span>);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   42</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>( <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[] )</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classpFlow_1_1commandLine.html">commandLine</a> cmds(</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="stringliteral">&quot;createParticles&quot;</span>,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="stringliteral">&quot;Read the dictionary createParticles and create particles&quot;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="stringliteral">&quot; based on the two sub-dictionaries positionParticles and setFields.\n&quot;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="stringliteral">&quot;First executes positionParticles and then setFields, except &quot;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="stringliteral">&quot;otherwise selected in the command line.&quot;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">bool</span> positionOnly = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    cmds.add_flag(</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="stringliteral">&quot;--positionParticles-only&quot;</span>,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        positionOnly,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="stringliteral">&quot;Exectue the positionParticles part only and store the created &quot;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;pointStructure in the time folder.&quot;</span>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span> setOnly = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    cmds.add_flag(<span class="stringliteral">&quot;--setFields-only&quot;</span>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        setOnly,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="stringliteral">&quot;Exectue the setFields part only. Read the pointStructure from &quot;</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="stringliteral">&quot;time folder and setFields and save the result in the same time folder.&quot;</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">bool</span> isCoupling = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    cmds.add_flag(</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="stringliteral">&quot;-c,--coupling&quot;</span>,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        isCoupling,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="stringliteral">&quot;Is this a fluid-particle coupling simulation&quot;</span>);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span>(setOnly &amp;&amp; positionOnly)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>&lt;&lt;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="stringliteral">&quot;Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a2374d8fc661bc100e80c0f7c3ac0d418">endERR</a>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }   </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">// this should be palced in each main </span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">auto</span> objCPDict = IOobject::make&lt;dictionary&gt;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    (</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        (</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="stringliteral">&quot;particlesDict&quot;</span>,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.settings().path(),</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            objectFile::READ_ALWAYS,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            objectFile::WRITE_ALWAYS</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        ),</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="stringliteral">&quot;particlesDict&quot;</span>,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">true</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    );</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> positionOnly = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    cmds.add_flag(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="stringliteral">&quot;--positionParticles-only&quot;</span>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        positionOnly,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="stringliteral">&quot;Exectue the positionParticles part only and store the created &quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="stringliteral">&quot;pointStructure in the time folder.&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">bool</span> setOnly = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    cmds.add_flag(<span class="stringliteral">&quot;--setFields-only&quot;</span>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        setOnly,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="stringliteral">&quot;Exectue the setFields part only. Read the pointStructure from &quot;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="stringliteral">&quot;time folder and setFields and save the result in the same time folder.&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> isCoupling = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    cmds.add_flag(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;-c,--coupling&quot;</span>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        isCoupling,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;Is this a fluid-particle coupling simulation&quot;</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span>(!cmds.<a class="code" href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">parse</a>(argc, argv)) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span>(setOnly &amp;&amp; positionOnly)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>&lt;&lt;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="stringliteral">&quot;Options --positionParticles-only and --setFields-only cannot be used simeltanuously. \n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a4fe145765559e6dc61e1bcc2a5194331">END_ERR</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }   </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// this should be palced in each main </span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="initialize__Control_8hpp.html">initialize_Control.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classpFlow_1_1fileDictionary.html">pFlow::fileDictionary</a> cpDict(<span class="stringliteral">&quot;particlesDict&quot;</span>, <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.settings().path());</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr&lt;pFlow::pointStructure&gt;</a> pStructPtr = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span>(!setOnly)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="comment">// position particles based on the dict content </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt; <span class="stringliteral">&quot;Positioning points . . . \n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">auto</span> pointPosition = <a class="code" href="classpFlow_1_1positionParticles.html#a0d95474ff75022a4da26bee4db2583e9">pFlow::positionParticles::create</a>(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>, cpDict.<a class="code" href="classpFlow_1_1dictionary.html#a630c840647a3ebefe33336cc25a8b15d">subDict</a>(<span class="stringliteral">&quot;positionParticles&quot;</span>));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a> pStructPath = <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().path()+<a class="code" href="namespacepFlow.html#af56ee6298c404b89326eb17f960359d1">pFlow::pointStructureFile__</a>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">auto</span> finalPos = pointPosition().getFinalPosition();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        pStructPtr = pFlow::makeUnique&lt;pFlow::pointStructure&gt;(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>, finalPos);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Created pStruct with &quot;</span>&lt;&lt; pStructPtr().size() &lt;&lt; <span class="stringliteral">&quot; points and capacity &quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        pStructPtr().capacity()&lt;&lt;<span class="stringliteral">&quot; . . .&quot;</span>&lt;&lt; <a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">auto</span>&amp; cpDict = objCPDict().getObject&lt;<a class="code" href="classpFlow_1_1dictionary.html">dictionary</a>&gt;();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>* pStructPtr = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span>(!setOnly)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="comment">// read the content of pStruct from 0/pStructure</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        pStructPtr = pFlow::makeUnique&lt;pFlow::pointStructure&gt;(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="comment">// position particles based on the dict content </span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt; <span class="stringliteral">&quot;Positioning points . . . \n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keyword">auto</span> pointPosition = positionParticles::create(cpDict.subDict(<span class="stringliteral">&quot;positionParticles&quot;</span>));</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a> pStructPath = <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().path()+<a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">auto</span> finalPos = pointPosition().getFinalPosition();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">auto</span>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> = <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&gt;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        (</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            (</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().path(),</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                objectFile::READ_NEVER,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                objectFile::WRITE_ALWAYS            </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            ),</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            finalPos</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        );</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        pStructPtr = &amp;<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Created pStruct with &quot;</span>&lt;&lt; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.size() &lt;&lt; <span class="stringliteral">&quot; points and capacity &quot;</span>&lt;&lt;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>.capacity()&lt;&lt;<span class="stringliteral">&quot; . . .&quot;</span>&lt;&lt; <a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Writing pStruct to &quot;</span> &lt;&lt; <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().path()+ <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>&lt;&lt; <a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">if</span>( !<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().write())</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="stringliteral">&quot;ERRor in writing to file. \n &quot;</span>;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">return</span> 1; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }<span class="keywordflow">else</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keyword">auto</span>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> = <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().emplaceObject&lt;<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&gt;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        (</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html">objectFile</a></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            (</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <a class="code" href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pointStructureFile__</a>,</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().path(),</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                objectFile::READ_NEVER,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                objectFile::WRITE_ALWAYS            </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            )</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        );</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        pStructPtr = &amp;<a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">if</span>(!positionOnly)</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    {</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keyword">auto</span>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> = *pStructPtr;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keyword">auto</span>&amp; sfDict = cpDict.subDict(<span class="stringliteral">&quot;setFields&quot;</span>);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="classpFlow_1_1setFieldList.html">setFieldList</a> defValueList(sfDict.subDict(<span class="stringliteral">&quot;defaultValue&quot;</span>));</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; sfEntry: defValueList)</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keywordflow">if</span>( !sfEntry.setPointFieldDefaultValueNewAll(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time(), <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>, <span class="keyword">true</span>))</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                <a class="code" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>&lt;&lt; <span class="stringliteral">&quot;\n error occured in setting default value fields.\n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a2374d8fc661bc100e80c0f7c3ac0d418">endERR</a>;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keyword">auto</span>&amp; selectorsDict = sfDict.subDict(<span class="stringliteral">&quot;selectors&quot;</span>);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keyword">auto</span> selNames = selectorsDict.dictionaryKeywords();</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> name: selNames)</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Applying selector &quot;</span> &lt;&lt; <a class="code" href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a>(name) &lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keywordflow">if</span>(</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                !<a class="code" href="namespacepFlow.html#ae5dc60e5c12dc11dab2f816efcd59246">applySelector</a>(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>, selectorsDict.subDict(name))</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;             )</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <a class="code" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>&lt;&lt;<span class="stringliteral">&quot;\n error occured in setting selector. \n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a2374d8fc661bc100e80c0f7c3ac0d418">endERR</a>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        }</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().write(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt; <a class="code" href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a>(<span class="stringliteral">&quot;\nFinished successfully.\n&quot;</span>)&lt;&lt;<a class="code" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a>;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">// this should be palced in each main </span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="finalize_8hpp.html">finalize.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;} </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="classpFlow_1_1List.html">pFlow::List&lt;pFlow::uniquePtr&lt;pFlow::IOobject&gt;</a>&gt; allObjects;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span>(!positionOnly)</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keyword">auto</span>&amp; <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a> = pStructPtr();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keyword">auto</span>&amp; sfDict = cpDict.<a class="code" href="classpFlow_1_1dictionary.html#a630c840647a3ebefe33336cc25a8b15d">subDict</a>(<span class="stringliteral">&quot;setFields&quot;</span>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a> defValueList(sfDict.subDict(<span class="stringliteral">&quot;defaultValue&quot;</span>));</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; sfEntry: defValueList)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">if</span>( <span class="keyword">auto</span> Ptr = sfEntry.setPointFieldDefaultValueNewAll( <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>, <span class="keyword">true</span>); Ptr)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                allObjects.push_back(std::move(Ptr));</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <a class="code" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>&lt;&lt; <span class="stringliteral">&quot;\n error occured in setting default value fields.\n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a4fe145765559e6dc61e1bcc2a5194331">END_ERR</a>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">auto</span>&amp; selectorsDict = sfDict.subDict(<span class="stringliteral">&quot;selectors&quot;</span>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keyword">auto</span> selNames = selectorsDict.dictionaryKeywords();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span> name: selNames)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt; <span class="stringliteral">&quot;Applying selector &quot;</span> &lt;&lt; <a class="code" href="iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2">Green_Text</a>(name) &lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">if</span>(</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                !<a class="code" href="namespacepFlow.html#ae5dc60e5c12dc11dab2f816efcd59246">applySelector</a>(<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>, <a class="code" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>, selectorsDict.subDict(name))</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;             )</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <a class="code" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>&lt;&lt;<span class="stringliteral">&quot;\n error occured in setting selector. \n&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a4fe145765559e6dc61e1bcc2a5194331">END_ERR</a>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a>&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.clearIncludeExclude();</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.addExclude(<span class="stringliteral">&quot;shapeName&quot;</span>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <a class="code" href="classpFlow_1_1pointField.html">pFlow::uint64PointField_H</a> shapeHash</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    (</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        (</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="stringliteral">&quot;shapeHash&quot;</span>,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">pFlow::objectFile::READ_NEVER</a>,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">pFlow::objectFile::WRITE_ALWAYS</a></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        ),</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        pStructPtr(),</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        0u</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    );</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="classpFlow_1_1pointField.html">pFlow::uint32PointField_H</a> shapeIndex</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    (</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <a class="code" href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        (</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="stringliteral">&quot;shapeIndex&quot;</span>,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">pFlow::objectFile::READ_NEVER</a>,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">pFlow::objectFile::WRITE_ALWAYS</a></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        ),</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        pStructPtr(),</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        0u</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    );</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="classpFlow_1_1baseShapeNames.html">pFlow::baseShapeNames</a> shapes(</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <a class="code" href="namespacepFlow.html#af699bd582eb6d479a482626b8fa44a6a">pFlow::shapeFile__</a>,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        &amp;<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.caseSetup()</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    );</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">auto</span>&amp; shapeName = <a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().template lookupObject&lt;pFlow::wordPointField_H&gt;(<span class="stringliteral">&quot;shapeName&quot;</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt; <span class="stringliteral">&quot;Converting shapeName field to shapeIndex field&quot;</span>&lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keyword">auto</span> shapeName_D = shapeName.deviceView();</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keyword">auto</span> shapeHash_D = shapeHash.<a class="code" href="classpFlow_1_1internalField.html#a65a1eeccd800386379e7db5dd61ea9aa">deviceView</a>();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">auto</span> shapeIndex_D = shapeIndex.<a class="code" href="classpFlow_1_1internalField.html#a65a1eeccd800386379e7db5dd61ea9aa">deviceView</a>();</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(1)&lt;&lt;<span class="stringliteral">&quot;List of shape names in &quot;</span>&lt;&lt;shapes.<a class="code" href="classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632">globalName</a>()&lt;&lt;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="stringliteral">&quot; is: &quot;</span>&lt;&lt;<a class="code" href="iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2">Green_Text</a>(shapes.<a class="code" href="classpFlow_1_1baseShapeNames.html#afcbf0d25e208f6328c15ef3185d33c4c">shapeNameList</a>())&lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a>(i, shapeHash)</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a> index; shapes.<a class="code" href="classpFlow_1_1baseShapeNames.html#a8219dc28eff3bd3deedfe241bf25cd5c">shapeNameToIndex</a>(shapeName_D[i], index))</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            shapeHash_D[i] = shapes.<a class="code" href="classpFlow_1_1baseShapeNames.html#a0dfde83392a24fdc2ed1945b1ab8da24">hashes</a>()[index];</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            shapeIndex_D[i] = index;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        }</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;<span class="stringliteral">&quot;Found shape name &quot;</span>&lt;&lt; <a class="code" href="iOstream_8hpp.html#a06734f691d48f8796526b96cd58b982c">Yellow_Text</a>(shapeName_D[i])&lt;&lt;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="stringliteral">&quot;in shapeName field. But the list of shape names in file &quot;</span>&lt;&lt; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            shapes.<a class="code" href="classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632">globalName</a>()&lt;&lt;<span class="stringliteral">&quot; is : \n&quot;</span>&lt;&lt;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            shapes.<a class="code" href="classpFlow_1_1baseShapeNames.html#aaf818bf16bcb2a88c7ded6efb6e41d72">shapeNames</a>()&lt;&lt;<a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">uniquePtr&lt;IOobject&gt; pStructObj{nullptr};</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    if(!setOnly)</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">        // position particles based on the dict content </span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">        REPORT(0)&lt;&lt; &quot;Positioning points . . . \n&quot;&lt;&lt;endREPORT;</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">        auto pointPosition = positionParticles::create(cpDict.subDict(&quot;positionParticles&quot;));</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">        fileSystem pStructPath = Control.time().path()+pointStructureFile__;</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">        auto finalPos = pointPosition().getFinalPosition();</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">        </span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">        pStructObj = IOobject::make&lt;pointStructure&gt;</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">        (</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">            objectFile</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">            (</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">                pointStructureFile__,</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">                Control.time().path(),</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">                objectFile::READ_NEVER,</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">                objectFile::WRITE_ALWAYS            </span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">            ),</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">            finalPos</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">        );</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">        auto&amp; pSruct = pStructObj().getObject&lt;pointStructure&gt;();</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">        REPORT(1)&lt;&lt; &quot;Created pStruct with &quot;&lt;&lt; pSruct.size() &lt;&lt; &quot; points and capacity &quot;&lt;&lt;</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">        pSruct.capacity()&lt;&lt;&quot; . . .&quot;&lt;&lt; endREPORT;</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">        REPORT(1)&lt;&lt; &quot;Writing pStruct to &quot; &lt;&lt; pStructObj().path() &lt;&lt; endREPORT&lt;&lt;endl&lt;&lt;endl;</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">        if( !pStructObj().write())</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">            fatalErrorInFunction&lt;&lt;</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">            &quot;ERRor in writing to file. \n &quot;;</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">            return 1; </span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">    }else</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">        pStructObj = IOobject::make&lt;pointStructure&gt;</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">        (</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">            objectFile</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">            (</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">                pointStructureFile__,</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">                Control.time().path(),</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">                objectFile::READ_ALWAYS,</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">                objectFile::WRITE_NEVER         </span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">            )</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">        );</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">    </span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">    if(!positionOnly)</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">    {</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">        auto&amp; pStruct = pStructObj().getObject&lt;pointStructure&gt;();</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">        auto&amp; sfDict = cpDict.subDict(&quot;setFields&quot;);</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">        setFieldList defValueList(sfDict.subDict(&quot;defaultValue&quot;));</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">        for(auto&amp; sfEntry: defValueList)</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">            if( !sfEntry.setPointFieldDefaultValueNewAll(Control.time(), pStruct, true))</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">            {</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">                ERR&lt;&lt; &quot;\n error occured in setting default value fields.\n&quot;&lt;&lt;endERR;</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">                return 1;</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">            }</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment">        </span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">        output&lt;&lt;endl;</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">        auto&amp; selectorsDict = sfDict.subDict(&quot;selectors&quot;);</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">        auto selNames = selectorsDict.dictionaryKeywords();</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">        for(auto name: selNames)</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">        {</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">            REPORT(1)&lt;&lt; &quot;Applying selector &quot; &lt;&lt; greenText(name) &lt;&lt;endREPORT;</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">            </span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">            if(</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">                !applySelector(Control, pStruct, selectorsDict.subDict(name))</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">             )</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">            {</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">                ERR&lt;&lt;&quot;\n error occured in setting selector. \n&quot;&lt;&lt;endERR;</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="comment">                return 1;</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">            }</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">            output&lt;&lt;endl;</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">        }</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a>.time().write(<span class="keyword">true</span>))</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="stringliteral">&quot;ERRor in writing to file. \n &quot;</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">return</span> 1; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <a class="code" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a>(0)&lt;&lt; <a class="code" href="iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2">Green_Text</a>(<span class="stringliteral">&quot;\nFinished successfully.\n&quot;</span>)&lt;&lt;<a class="code" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a>;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">// this should be palced in each main </span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="finalize_8hpp.html">finalize.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;} </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ainitialize__Control_8hpp_html"><div class="ttname"><a href="initialize__Control_8hpp.html">initialize_Control.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a7ce9af76cf5b5484f34c8e341dfe6416"><div class="ttname"><a href="namespacepFlow.html#a7ce9af76cf5b5484f34c8e341dfe6416">pFlow::pointStructureFile__</a></div><div class="ttdeci">const char * pointStructureFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00042">vocabs.hpp:42</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_a04db65a6cb5a45695ea75cce1b5d7a10"><div class="ttname"><a href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">endREPORT</a></div><div class="ttdeci">#define endREPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00041">streams.hpp:41</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_a735563036dced0b7d6cc98f97ea4978b"><div class="ttname"><a href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a></div><div class="ttdeci">#define ERR</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00047">streams.hpp:47</a></div></div>
+<div class="ttc" id="aiOstream_8hpp_html_ac569b1e93bab8b809907065244b11fd2"><div class="ttname"><a href="iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2">Green_Text</a></div><div class="ttdeci">#define Green_Text(text)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00042">iOstream.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1List_html"><div class="ttname"><a href="classpFlow_1_1List.html">pFlow::List</a></div><div class="ttdef"><b>Definition:</b> <a href="List_8hpp_source.html#l00039">List.hpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1baseShapeNames_html_a0dfde83392a24fdc2ed1945b1ab8da24"><div class="ttname"><a href="classpFlow_1_1baseShapeNames.html#a0dfde83392a24fdc2ed1945b1ab8da24">pFlow::baseShapeNames::hashes</a></div><div class="ttdeci">const auto &amp; hashes() const</div><div class="ttdef"><b>Definition:</b> <a href="baseShapeNames_8hpp_source.html#l00087">baseShapeNames.hpp:87</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a4fe145765559e6dc61e1bcc2a5194331"><div class="ttname"><a href="streams_8hpp.html#a4fe145765559e6dc61e1bcc2a5194331">END_ERR</a></div><div class="ttdeci">#define END_ERR</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00047">streams.hpp:47</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_aeb765df06121339620670437d217fec8"><div class="ttname"><a href="streams_8hpp.html#aeb765df06121339620670437d217fec8">REPORT</a></div><div class="ttdeci">#define REPORT(n)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00039">streams.hpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1baseShapeNames_html_aaf818bf16bcb2a88c7ded6efb6e41d72"><div class="ttname"><a href="classpFlow_1_1baseShapeNames.html#aaf818bf16bcb2a88c7ded6efb6e41d72">pFlow::baseShapeNames::shapeNames</a></div><div class="ttdeci">const wordVector &amp; shapeNames() const</div><div class="ttdef"><b>Definition:</b> <a href="baseShapeNames_8hpp_source.html#l00073">baseShapeNames.hpp:73</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a735563036dced0b7d6cc98f97ea4978b"><div class="ttname"><a href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a></div><div class="ttdeci">#define ERR</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00046">streams.hpp:46</a></div></div>
 <div class="ttc" id="asystemControl_8hpp_html"><div class="ttname"><a href="systemControl_8hpp.html">systemControl.hpp</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1baseShapeNames_html"><div class="ttname"><a href="classpFlow_1_1baseShapeNames.html">pFlow::baseShapeNames</a></div><div class="ttdef"><b>Definition:</b> <a href="baseShapeNames_8hpp_source.html#l00033">baseShapeNames.hpp:33</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1baseShapeNames_html_afcbf0d25e208f6328c15ef3185d33c4c"><div class="ttname"><a href="classpFlow_1_1baseShapeNames.html#afcbf0d25e208f6328c15ef3185d33c4c">pFlow::baseShapeNames::shapeNameList</a></div><div class="ttdeci">wordList shapeNameList() const</div><div class="ttdef"><b>Definition:</b> <a href="baseShapeNames_8hpp_source.html#l00079">baseShapeNames.hpp:79</a></div></div>
+<div class="ttc" id="abaseShapeNames_8hpp_html"><div class="ttname"><a href="baseShapeNames_8hpp.html">baseShapeNames.hpp</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1commandLine_html"><div class="ttname"><a href="classpFlow_1_1commandLine.html">pFlow::commandLine</a></div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8hpp_source.html#l00036">commandLine.hpp:36</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
-<div class="ttc" id="astreams_8hpp_html_a37a406f400cfe49d19e51bfcc34cd2d3"><div class="ttname"><a href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">greenText</a></div><div class="ttdeci">#define greenText(text)</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00032">streams.hpp:32</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOobject_html"><div class="ttname"><a href="classpFlow_1_1IOobject.html">pFlow::IOobject</a></div><div class="ttdef"><b>Definition:</b> <a href="IOobject_8hpp_source.html#l00035">IOobject.hpp:35</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointStructure_html"><div class="ttname"><a href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a></div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00044">pointStructure.hpp:44</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dictionary_html_a85c3c1fce0c14d36030092df2f27b632"><div class="ttname"><a href="classpFlow_1_1dictionary.html#a85c3c1fce0c14d36030092df2f27b632">pFlow::dictionary::globalName</a></div><div class="ttdeci">virtual word globalName() const</div><div class="ttdoc">global name of entry, separated with dots</div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8cpp_source.html#l00356">dictionary.cpp:356</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">pFlow::objectFile::WRITE_ALWAYS</a></div><div class="ttdeci">@ WRITE_ALWAYS</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00043">objectFile.hpp:43</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00341">iOstream.hpp:341</a></div></div>
+<div class="ttc" id="aiOstream_8hpp_html_a06734f691d48f8796526b96cd58b982c"><div class="ttname"><a href="iOstream_8hpp.html#a06734f691d48f8796526b96cd58b982c">Yellow_Text</a></div><div class="ttdeci">#define Yellow_Text(text)</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00040">iOstream.hpp:40</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdoc">Manages file pathes, manupulate and combines them.</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00071">fileSystem.hpp:71</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00033">pointField.hpp:33</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_af56ee6298c404b89326eb17f960359d1"><div class="ttname"><a href="namespacepFlow.html#af56ee6298c404b89326eb17f960359d1">pFlow::pointStructureFile__</a></div><div class="ttdeci">const char *const pointStructureFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00042">vocabs.hpp:42</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1commandLine_html_af199716992f3f8bb51c89ddcca847062"><div class="ttname"><a href="classpFlow_1_1commandLine.html#af199716992f3f8bb51c89ddcca847062">pFlow::commandLine::parse</a></div><div class="ttdeci">bool parse(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="commandLine_8cpp_source.html#l00050">commandLine.cpp:50</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdoc">Report a fatal error and function name and exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00077">error.hpp:77</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1setFieldList_html"><div class="ttname"><a href="classpFlow_1_1setFieldList.html">pFlow::setFieldList</a></div><div class="ttdef"><b>Definition:</b> <a href="setFieldList_8hpp_source.html#l00032">setFieldList.hpp:32</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a86ae30c22a4ef4bc487b40ed52f4d2f9"><div class="ttname"><a href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a></div><div class="ttdeci">Ostream output</div></div>
-<div class="ttc" id="astreams_8hpp_html_a2374d8fc661bc100e80c0f7c3ac0d418"><div class="ttname"><a href="streams_8hpp.html#a2374d8fc661bc100e80c0f7c3ac0d418">endERR</a></div><div class="ttdeci">#define endERR</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00048">streams.hpp:48</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00033">objectFile.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1baseShapeNames_html_a8219dc28eff3bd3deedfe241bf25cd5c"><div class="ttname"><a href="classpFlow_1_1baseShapeNames.html#a8219dc28eff3bd3deedfe241bf25cd5c">pFlow::baseShapeNames::shapeNameToIndex</a></div><div class="ttdeci">bool shapeNameToIndex(const word &amp;name, uint32 &amp;index) const</div><div class="ttdef"><b>Definition:</b> <a href="baseShapeNames_8hpp_source.html#l00100">baseShapeNames.hpp:100</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_ac6c2cd1218587d4992ab1344890520d6"><div class="ttname"><a href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">ForAll</a></div><div class="ttdeci">#define ForAll(i, container)</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00075">pFlowMacros.hpp:75</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_af699bd582eb6d479a482626b8fa44a6a"><div class="ttname"><a href="namespacepFlow.html#af699bd582eb6d479a482626b8fa44a6a">pFlow::shapeFile__</a></div><div class="ttdeci">const char *const shapeFile__</div><div class="ttdef"><b>Definition:</b> <a href="vocabs_8hpp_source.html#l00041">vocabs.hpp:41</a></div></div>
+<div class="ttc" id="astreams_8hpp_html_a1861619f2a6e102d0043a98577c8c9e8"><div class="ttname"><a href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">END_REPORT</a></div><div class="ttdeci">#define END_REPORT</div><div class="ttdef"><b>Definition:</b> <a href="streams_8hpp_source.html#l00040">streams.hpp:40</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html"><div class="ttname"><a href="classpFlow_1_1objectFile.html">pFlow::objectFile</a></div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00030">objectFile.hpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1dictionary_html_a630c840647a3ebefe33336cc25a8b15d"><div class="ttname"><a href="classpFlow_1_1dictionary.html#a630c840647a3ebefe33336cc25a8b15d">pFlow::dictionary::subDict</a></div><div class="ttdeci">dictionary &amp; subDict(const word &amp;keyword)</div><div class="ttdoc">ref to a subdictioanry fatalExit if not found</div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8cpp_source.html#l00560">dictionary.cpp:560</a></div></div>
 <div class="ttc" id="asetPointStructure_8hpp_html_a385e32971df44b131e4498181a949a91"><div class="ttname"><a href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a></div><div class="ttdeci">auto &amp; pStruct</div><div class="ttdef"><b>Definition:</b> <a href="setPointStructure_8hpp_source.html#l00024">setPointStructure.hpp:24</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1uniquePtr_html"><div class="ttname"><a href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr</a></div><div class="ttdef"><b>Definition:</b> <a href="uniquePtr_8hpp_source.html#l00044">uniquePtr.hpp:44</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1positionParticles_html"><div class="ttname"><a href="classpFlow_1_1positionParticles.html">pFlow::positionParticles</a></div><div class="ttdef"><b>Definition:</b> <a href="positionParticles_8hpp_source.html#l00102">positionParticles.hpp:102</a></div></div>
-<div class="ttc" id="aparticlesPhasicFlow_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="particlesPhasicFlow_8cpp_source.html#l00042">particlesPhasicFlow.cpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1positionParticles_html_a0d95474ff75022a4da26bee4db2583e9"><div class="ttname"><a href="classpFlow_1_1positionParticles.html#a0d95474ff75022a4da26bee4db2583e9">pFlow::positionParticles::create</a></div><div class="ttdeci">static uniquePtr&lt; positionParticles &gt; create(systemControl &amp;control, const dictionary &amp;dict)</div><div class="ttdef"><b>Definition:</b> <a href="positionParticles_8cpp_source.html#l00128">positionParticles.cpp:128</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">pFlow::objectFile::READ_NEVER</a></div><div class="ttdeci">@ READ_NEVER</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00037">objectFile.hpp:37</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileDictionary_html"><div class="ttname"><a href="classpFlow_1_1fileDictionary.html">pFlow::fileDictionary</a></div><div class="ttdef"><b>Definition:</b> <a href="fileDictionary_8hpp_source.html#l00029">fileDictionary.hpp:29</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1uniquePtr_html"><div class="ttname"><a href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr</a></div><div class="ttdef"><b>Definition:</b> <a href="uniquePtr_8hpp_source.html#l00042">uniquePtr.hpp:42</a></div></div>
+<div class="ttc" id="aparticlesPhasicFlow_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="particlesPhasicFlow_8cpp_source.html#l00032">particlesPhasicFlow.cpp:32</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_ae5dc60e5c12dc11dab2f816efcd59246"><div class="ttname"><a href="namespacepFlow.html#ae5dc60e5c12dc11dab2f816efcd59246">pFlow::applySelector</a></div><div class="ttdeci">bool applySelector(systemControl &amp;control, const pointStructure &amp;pStruct, const dictionary &amp;selDict)</div><div class="ttdef"><b>Definition:</b> <a href="setFields_8hpp_source.html#l00034">setFields.hpp:34</a></div></div>
-<div class="ttc" id="areadControlDict_8hpp_html"><div class="ttname"><a href="readControlDict_8hpp.html">readControlDict.hpp</a></div></div>
+<div class="ttc" id="avocabs_8hpp_html"><div class="ttname"><a href="vocabs_8hpp.html">vocabs.hpp</a></div></div>
 <div class="ttc" id="asetFields_8hpp_html"><div class="ttname"><a href="setFields_8hpp.html">setFields.hpp</a></div></div>
 <div class="ttc" id="apositionParticles_8hpp_html"><div class="ttname"><a href="positionParticles_8hpp.html">positionParticles.hpp</a></div></div>
 <div class="ttc" id="acommandLine_8hpp_html"><div class="ttname"><a href="commandLine_8hpp.html">commandLine.hpp</a></div></div>
 <div class="ttc" id="apointStructure_8hpp_html"><div class="ttname"><a href="pointStructure_8hpp.html">pointStructure.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1dictionary_html"><div class="ttname"><a href="classpFlow_1_1dictionary.html">pFlow::dictionary</a></div><div class="ttdef"><b>Definition:</b> <a href="dictionary_8hpp_source.html#l00038">dictionary.hpp:38</a></div></div>
 <div class="ttc" id="ainitialize__Control_8hpp_html_a4f5e4e852648762473ecd75a907417ca"><div class="ttname"><a href="initialize__Control_8hpp.html#a4f5e4e852648762473ecd75a907417ca">Control</a></div><div class="ttdeci">auto &amp; Control</div><div class="ttdef"><b>Definition:</b> <a href="initialize__Control_8hpp_source.html#l00047">initialize_Control.hpp:47</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1internalField_html_a65a1eeccd800386379e7db5dd61ea9aa"><div class="ttname"><a href="classpFlow_1_1internalField.html#a65a1eeccd800386379e7db5dd61ea9aa">pFlow::internalField::deviceView</a></div><div class="ttdeci">auto deviceView() const</div><div class="ttdef"><b>Definition:</b> <a href="internalField_8hpp_source.html#l00097">internalField.hpp:97</a></div></div>
 <div class="ttc" id="afinalize_8hpp_html"><div class="ttname"><a href="finalize_8hpp.html">finalize.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

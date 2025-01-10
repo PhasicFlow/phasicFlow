@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: src/phasicFlow/structuredData/trisurfaceStructure/triangleFunctions.hpp File Reference</title>
+<title>PhasicFlow: src/phasicFlow/triSurface/triangleFunctions.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -113,22 +113,14 @@ $(document).ready(function(){initNavTree('triangleFunctions_8hpp.html',''); init
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="triangleFunctions_8hpp__incl.png" border="0" usemap="#src_2phasicFlow_2structuredData_2trisurfaceStructure_2triangleFunctions_8hpp" alt=""/></div>
-<map name="src_2phasicFlow_2structuredData_2trisurfaceStructure_2triangleFunctions_8hpp" id="src_2phasicFlow_2structuredData_2trisurfaceStructure_2triangleFunctions_8hpp">
-<area shape="rect" title=" " alt="" coords="5,5,193,61"/>
-<area shape="rect" href="types_8hpp.html" title=" " alt="" coords="56,109,143,136"/>
-</map>
+<div class="center"><img src="triangleFunctions_8hpp__incl.png" border="0" usemap="#src_2phasicFlow_2triSurface_2triangleFunctions_8hpp" alt=""/></div>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="triangleFunctions_8hpp__dep__incl.png" border="0" usemap="#src_2phasicFlow_2structuredData_2trisurfaceStructure_2triangleFunctions_8hppdep" alt=""/></div>
-<map name="src_2phasicFlow_2structuredData_2trisurfaceStructure_2triangleFunctions_8hppdep" id="src_2phasicFlow_2structuredData_2trisurfaceStructure_2triangleFunctions_8hppdep">
-<area shape="rect" title=" " alt="" coords="5,5,193,61"/>
-<area shape="rect" href="triSurfaceKernels_8hpp.html" title=" " alt="" coords="5,109,193,165"/>
-</map>
+<div class="center"><img src="triangleFunctions_8hpp__dep__incl.png" border="0" usemap="#src_2phasicFlow_2triSurface_2triangleFunctions_8hppdep" alt=""/></div>
 </div>
 </div>
 <p><a href="triangleFunctions_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -137,19 +129,23 @@ $(document).ready(function(){initNavTree('triangleFunctions_8hpp.html',''); init
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacepFlow"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html">pFlow</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacepFlow_1_1triangleFunctions"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1triangleFunctions.html">pFlow::triangleFunctions</a></td></tr>
+<tr class="memitem:namespacepFlow_1_1triangle"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1triangle.html">pFlow::triangle</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2074ab5b90f47b0ec593414c80923362"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1triangleFunctions.html#a2074ab5b90f47b0ec593414c80923362">triangleSurface</a> (const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</td></tr>
-<tr class="separator:a2074ab5b90f47b0ec593414c80923362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e5558852ea08d3bd5ccdd6f8a52151"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1triangle.html#a76e5558852ea08d3bd5ccdd6f8a52151">surface</a> (const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</td></tr>
+<tr class="separator:a76e5558852ea08d3bd5ccdd6f8a52151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08cdb1c0031ef0cc9161c6e72174b34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> realx3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1triangle.html#ac08cdb1c0031ef0cc9161c6e72174b34">normal</a> (const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</td></tr>
+<tr class="separator:ac08cdb1c0031ef0cc9161c6e72174b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ae9a0ef61cdf98506699cb7abcd84b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow_1_1triangle.html#a7ae9a0ef61cdf98506699cb7abcd84b8">valid</a> (const realx3 &amp;p1, const realx3 &amp;p2, const realx3 &amp;p3)</td></tr>
+<tr class="separator:a7ae9a0ef61cdf98506699cb7abcd84b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html">structuredData</a></li><li class="navelem"><a class="el" href="dir_cb566f9a80a0a346c3a6366e4b888b7d.html">trisurfaceStructure</a></li><li class="navelem"><a class="el" href="triangleFunctions_8hpp.html">triangleFunctions.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_38cf8104b99597e1233d708542fdeb18.html">triSurface</a></li><li class="navelem"><a class="el" href="triangleFunctions_8hpp.html">triangleFunctions.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

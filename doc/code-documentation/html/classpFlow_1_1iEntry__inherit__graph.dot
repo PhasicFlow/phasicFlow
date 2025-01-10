@@ -1,0 +1,13 @@
+digraph "iEntry"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="iEntry",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Interface calss for data entry and dictionary"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="dataEntry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dataEntry.html",tooltip="Data entry to be used in dictionries."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="dictionary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html",tooltip="Dictionary holds a set of data entries or sub-dictionaries that are enclosed in a curely braces or ar..."];
+  Node1 -> Node21 [dir="back",color="orange",fontsize="10",style="dashed",label=" \< Key, T * \>" ,fontname="Helvetica"];
+  Node21 [label="iEntry\< Key, T * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iEntry.html",tooltip=" "];
+}

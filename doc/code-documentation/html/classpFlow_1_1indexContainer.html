@@ -111,149 +111,184 @@ $(document).ready(function(){initNavTree('classpFlow_1_1indexContainer.html','')
 <div class="title">indexContainer&lt; IndexType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for indexContainer&lt; IndexType &gt;:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1indexContainer__inherit__graph.png" border="0" usemap="#indexContainer_3_01IndexType_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="indexContainer_3_01IndexType_01_4_inherit__map" id="indexContainer_3_01IndexType_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,5,223,32"/>
-<area shape="rect" href="classpFlow_1_1indexContainer.html" title=" " alt="" coords="22,95,206,121"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>It holds two vectors of indecis on Host and Device.  
+ <a href="classpFlow_1_1indexContainer.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer_1_1IndexAccessor.html">IndexAccessor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper class for accessing index on host or device.  <a href="classpFlow_1_1indexContainer_1_1IndexAccessor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac16302a81f0d7c1ce7e41edd798fc9d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#ac16302a81f0d7c1ce7e41edd798fc9d1">DualViewType</a> = Kokkos::DualView&lt; IndexType * &gt;</td></tr>
-<tr class="separator:ac16302a81f0d7c1ce7e41edd798fc9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e8c0e0e7c8466a94fcc66eef8c12b24"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a5e8c0e0e7c8466a94fcc66eef8c12b24">DeviceViewType</a> = typename DualViewType::t_dev</td></tr>
-<tr class="separator:a5e8c0e0e7c8466a94fcc66eef8c12b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56dacd6fb9a2da1919e8dc155a5e2b0e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a56dacd6fb9a2da1919e8dc155a5e2b0e">HostViewType</a> = typename DualViewType::t_host</td></tr>
-<tr class="separator:a56dacd6fb9a2da1919e8dc155a5e2b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aba63156da33c19ee7030fb14799c88"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a6aba63156da33c19ee7030fb14799c88">DVType</a> = <a class="el" href="namespacepFlow.html#ad657f6b08dffcfe19dd4a7146e6da2f8">DualViewType1D</a>&lt; IndexType &gt;</td></tr>
+<tr class="separator:a6aba63156da33c19ee7030fb14799c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b3ee1dd158322f128e70e31756de03"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a> = typename DVType::t_dev</td></tr>
+<tr class="memdesc:a53b3ee1dd158322f128e70e31756de03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device type on device.  <a href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">More...</a><br /></td></tr>
+<tr class="separator:a53b3ee1dd158322f128e70e31756de03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac71c3750bfc37c754c1f965da2e1e25"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">HostViewType</a> = typename DVType::t_host</td></tr>
+<tr class="memdesc:aac71c3750bfc37c754c1f965da2e1e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Host type on device.  <a href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">More...</a><br /></td></tr>
+<tr class="separator:aac71c3750bfc37c754c1f965da2e1e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc03d1afa384d6d8e9067e8eed50fb80"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#acc03d1afa384d6d8e9067e8eed50fb80">HostType</a> = typename HostViewType::device_type</td></tr>
+<tr class="memdesc:acc03d1afa384d6d8e9067e8eed50fb80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Host memory type.  <a href="classpFlow_1_1indexContainer.html#acc03d1afa384d6d8e9067e8eed50fb80">More...</a><br /></td></tr>
 <tr class="separator:acc03d1afa384d6d8e9067e8eed50fb80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab78ed307c34e5d5ffa760ccfe06ce733"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#ab78ed307c34e5d5ffa760ccfe06ce733">DeviceType</a> = typename DeviceViewType::device_type</td></tr>
+<tr class="memdesc:ab78ed307c34e5d5ffa760ccfe06ce733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device memory ype.  <a href="classpFlow_1_1indexContainer.html#ab78ed307c34e5d5ffa760ccfe06ce733">More...</a><br /></td></tr>
 <tr class="separator:ab78ed307c34e5d5ffa760ccfe06ce733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a88804711c50d36bb445dd618ce805768"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a88804711c50d36bb445dd618ce805768">TypeInfoTemplateNV11</a> (&quot;indexContainer&quot;, IndexType)</td></tr>
+<tr class="separator:a88804711c50d36bb445dd618ce805768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7c043057ecdd004f61d780acebcc58e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#ae7c043057ecdd004f61d780acebcc58e">indexContainer</a> ()</td></tr>
+<tr class="memdesc:ae7c043057ecdd004f61d780acebcc58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default.  <a href="classpFlow_1_1indexContainer.html#ae7c043057ecdd004f61d780acebcc58e">More...</a><br /></td></tr>
 <tr class="separator:ae7c043057ecdd004f61d780acebcc58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8683e0e2255f1cc41f1c7b430106045d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8683e0e2255f1cc41f1c7b430106045d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a8683e0e2255f1cc41f1c7b430106045d">indexContainer</a> (const <a class="el" href="structpFlow_1_1Range.html">Range</a>&lt; T &gt; &amp;rng)</td></tr>
+<tr class="memdesc:a8683e0e2255f1cc41f1c7b430106045d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from a <a class="el" href="structpFlow_1_1Range.html" title="Range for elements in an vector [start,end)">Range</a> (half open)  <a href="classpFlow_1_1indexContainer.html#a8683e0e2255f1cc41f1c7b430106045d">More...</a><br /></td></tr>
+<tr class="separator:a8683e0e2255f1cc41f1c7b430106045d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1adfb266809541cd795990a522817429"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a1adfb266809541cd795990a522817429">indexContainer</a> (IndexType begin, IndexType end)</td></tr>
+<tr class="memdesc:a1adfb266809541cd795990a522817429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct half open [begin,end)  <a href="classpFlow_1_1indexContainer.html#a1adfb266809541cd795990a522817429">More...</a><br /></td></tr>
 <tr class="separator:a1adfb266809541cd795990a522817429"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15e46ceffd1d4f18c390a090e6000971"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a15e46ceffd1d4f18c390a090e6000971">indexContainer</a> (IndexType *data, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> numElems)</td></tr>
+<tr class="memdesc:a15e46ceffd1d4f18c390a090e6000971"><td class="mdescLeft">&#160;</td><td class="mdescRight">From data and number of elements in data.  <a href="classpFlow_1_1indexContainer.html#a15e46ceffd1d4f18c390a090e6000971">More...</a><br /></td></tr>
 <tr class="separator:a15e46ceffd1d4f18c390a090e6000971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc42a10e8de4113d8215a0fe43020087"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#acc42a10e8de4113d8215a0fe43020087">indexContainer</a> (std::vector&lt; IndexType &gt; &amp;ind)</td></tr>
+<tr class="separator:acc42a10e8de4113d8215a0fe43020087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5132d8d4ba77a25ebbb9d929ea9745"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#aeb5132d8d4ba77a25ebbb9d929ea9745">indexContainer</a> (const <a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a> &amp;ind)</td></tr>
+<tr class="separator:aeb5132d8d4ba77a25ebbb9d929ea9745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addeb28c36f98f790c129cb67a66ae2e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#addeb28c36f98f790c129cb67a66ae2e1">indexContainer</a> (const <a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> &amp;)=default</td></tr>
+<tr class="memdesc:addeb28c36f98f790c129cb67a66ae2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy.  <a href="classpFlow_1_1indexContainer.html#addeb28c36f98f790c129cb67a66ae2e1">More...</a><br /></td></tr>
 <tr class="separator:addeb28c36f98f790c129cb67a66ae2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e4ec7d2dc8bab5cc9aa766132060980"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a6e4ec7d2dc8bab5cc9aa766132060980">operator=</a> (const <a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> &amp;)=default</td></tr>
+<tr class="memdesc:a6e4ec7d2dc8bab5cc9aa766132060980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1indexContainer.html#a6e4ec7d2dc8bab5cc9aa766132060980">More...</a><br /></td></tr>
 <tr class="separator:a6e4ec7d2dc8bab5cc9aa766132060980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65d712b82e422745a8c183b16ccdf38b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a65d712b82e422745a8c183b16ccdf38b">indexContainer</a> (<a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a65d712b82e422745a8c183b16ccdf38b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move.  <a href="classpFlow_1_1indexContainer.html#a65d712b82e422745a8c183b16ccdf38b">More...</a><br /></td></tr>
 <tr class="separator:a65d712b82e422745a8c183b16ccdf38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8187c532998ac6b83c88a347ee121606"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a8187c532998ac6b83c88a347ee121606">operator=</a> (<a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> &amp;&amp;)=default</td></tr>
+<tr class="memdesc:a8187c532998ac6b83c88a347ee121606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mover assignement.  <a href="classpFlow_1_1indexContainer.html#a8187c532998ac6b83c88a347ee121606">More...</a><br /></td></tr>
 <tr class="separator:a8187c532998ac6b83c88a347ee121606"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02d71b92d2c27de91b53d7877b704127"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a02d71b92d2c27de91b53d7877b704127">~indexContainer</a> ()=default</td></tr>
+<tr class="memdesc:a02d71b92d2c27de91b53d7877b704127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1indexContainer.html#a02d71b92d2c27de91b53d7877b704127">More...</a><br /></td></tr>
 <tr class="separator:a02d71b92d2c27de91b53d7877b704127"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bb1be8d14aca7330e90c5b60493061b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a7bb1be8d14aca7330e90c5b60493061b">size</a> () const</td></tr>
-<tr class="separator:a7bb1be8d14aca7330e90c5b60493061b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a357c86d427ba736b27fbfab57197ed64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a357c86d427ba736b27fbfab57197ed64">empty</a> () const</td></tr>
-<tr class="separator:a357c86d427ba736b27fbfab57197ed64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c1a64be64b5bab9c8143a8d1c02029"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a81c1a64be64b5bab9c8143a8d1c02029">size</a> () const</td></tr>
+<tr class="memdesc:a81c1a64be64b5bab9c8143a8d1c02029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size.  <a href="classpFlow_1_1indexContainer.html#a81c1a64be64b5bab9c8143a8d1c02029">More...</a><br /></td></tr>
+<tr class="separator:a81c1a64be64b5bab9c8143a8d1c02029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43be5325ac00e9fa5e1157ad97bfcf7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a43be5325ac00e9fa5e1157ad97bfcf7c">empty</a> () const</td></tr>
+<tr class="memdesc:a43be5325ac00e9fa5e1157ad97bfcf7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the container empty.  <a href="classpFlow_1_1indexContainer.html#a43be5325ac00e9fa5e1157ad97bfcf7c">More...</a><br /></td></tr>
+<tr class="separator:a43be5325ac00e9fa5e1157ad97bfcf7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc62db27358117c2848f2a40034d9c76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#afc62db27358117c2848f2a40034d9c76">min</a> () const</td></tr>
+<tr class="memdesc:afc62db27358117c2848f2a40034d9c76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min value of indices.  <a href="classpFlow_1_1indexContainer.html#afc62db27358117c2848f2a40034d9c76">More...</a><br /></td></tr>
 <tr class="separator:afc62db27358117c2848f2a40034d9c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21012fa7fe940b14c018bbd241eda750"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a21012fa7fe940b14c018bbd241eda750">max</a> () const</td></tr>
+<tr class="memdesc:a21012fa7fe940b14c018bbd241eda750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max value of indices.  <a href="classpFlow_1_1indexContainer.html#a21012fa7fe940b14c018bbd241eda750">More...</a><br /></td></tr>
 <tr class="separator:a21012fa7fe940b14c018bbd241eda750"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a880710c6f5ffae88c7e0baf24d7929c9"><td class="memTemplParams" colspan="2">template&lt;typename executionSpace &gt; </td></tr>
-<tr class="memitem:a880710c6f5ffae88c7e0baf24d7929c9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> IndexType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a880710c6f5ffae88c7e0baf24d7929c9">operator()</a> (<a class="el" href="structpFlow_1_1selectSide.html">selectSide</a>&lt; executionSpace &gt;, <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i) const</td></tr>
-<tr class="separator:a880710c6f5ffae88c7e0baf24d7929c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b8b45947cc69fbfb94a443cd6dc41f6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1indexContainer.html#a56dacd6fb9a2da1919e8dc155a5e2b0e">HostViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a5b8b45947cc69fbfb94a443cd6dc41f6">hostView</a> () const</td></tr>
+<tr class="memitem:a5b8b45947cc69fbfb94a443cd6dc41f6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">HostViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a5b8b45947cc69fbfb94a443cd6dc41f6">hostView</a> () const</td></tr>
+<tr class="memdesc:a5b8b45947cc69fbfb94a443cd6dc41f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Host veiw.  <a href="classpFlow_1_1indexContainer.html#a5b8b45947cc69fbfb94a443cd6dc41f6">More...</a><br /></td></tr>
 <tr class="separator:a5b8b45947cc69fbfb94a443cd6dc41f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2bb54e3d8d44844edc05a46accd8d4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1indexContainer.html#a5e8c0e0e7c8466a94fcc66eef8c12b24">DeviceViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#abe2bb54e3d8d44844edc05a46accd8d4">deviceView</a> () const</td></tr>
+<tr class="memitem:abe2bb54e3d8d44844edc05a46accd8d4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#abe2bb54e3d8d44844edc05a46accd8d4">deviceView</a> () const</td></tr>
+<tr class="memdesc:abe2bb54e3d8d44844edc05a46accd8d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Device view.  <a href="classpFlow_1_1indexContainer.html#abe2bb54e3d8d44844edc05a46accd8d4">More...</a><br /></td></tr>
 <tr class="separator:abe2bb54e3d8d44844edc05a46accd8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a079f7cee979e9bacd82f58857a4d67fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html#a56dacd6fb9a2da1919e8dc155a5e2b0e">HostViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a079f7cee979e9bacd82f58857a4d67fa">hostView</a> ()</td></tr>
+<tr class="memitem:a079f7cee979e9bacd82f58857a4d67fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">HostViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a079f7cee979e9bacd82f58857a4d67fa">hostView</a> ()</td></tr>
+<tr class="memdesc:a079f7cee979e9bacd82f58857a4d67fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Host veiw.  <a href="classpFlow_1_1indexContainer.html#a079f7cee979e9bacd82f58857a4d67fa">More...</a><br /></td></tr>
 <tr class="separator:a079f7cee979e9bacd82f58857a4d67fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25a6aa2616541077764e6b5671b3cdba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html#a5e8c0e0e7c8466a94fcc66eef8c12b24">DeviceViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a25a6aa2616541077764e6b5671b3cdba">deviceView</a> ()</td></tr>
+<tr class="memitem:a25a6aa2616541077764e6b5671b3cdba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a25a6aa2616541077764e6b5671b3cdba">deviceView</a> ()</td></tr>
+<tr class="memdesc:a25a6aa2616541077764e6b5671b3cdba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Device veiw.  <a href="classpFlow_1_1indexContainer.html#a25a6aa2616541077764e6b5671b3cdba">More...</a><br /></td></tr>
 <tr class="separator:a25a6aa2616541077764e6b5671b3cdba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc2c6b6e3530d1a891d4b2e94b94ff0b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">indicesHost</a> () const</td></tr>
+<tr class="memdesc:afc2c6b6e3530d1a891d4b2e94b94ff0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return index accessor that works on Host.  <a href="classpFlow_1_1indexContainer.html#afc2c6b6e3530d1a891d4b2e94b94ff0b">More...</a><br /></td></tr>
 <tr class="separator:afc2c6b6e3530d1a891d4b2e94b94ff0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a841cfe71aab271b7dcaf54f932f25178"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a841cfe71aab271b7dcaf54f932f25178">indicesDevice</a> () const</td></tr>
+<tr class="memdesc:a841cfe71aab271b7dcaf54f932f25178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return index accessor that works on Device.  <a href="classpFlow_1_1indexContainer.html#a841cfe71aab271b7dcaf54f932f25178">More...</a><br /></td></tr>
 <tr class="separator:a841cfe71aab271b7dcaf54f932f25178"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f07dcf255cc5edecc3f32f069c2f8ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a3f07dcf255cc5edecc3f32f069c2f8ab">modifyOnHost</a> ()</td></tr>
+<tr class="memdesc:a3f07dcf255cc5edecc3f32f069c2f8ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark host is modified.  <a href="classpFlow_1_1indexContainer.html#a3f07dcf255cc5edecc3f32f069c2f8ab">More...</a><br /></td></tr>
 <tr class="separator:a3f07dcf255cc5edecc3f32f069c2f8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62f30f38f9c1db8aa064dbe0db5c4728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a62f30f38f9c1db8aa064dbe0db5c4728">modifyOnDevice</a> ()</td></tr>
+<tr class="memdesc:a62f30f38f9c1db8aa064dbe0db5c4728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark device is modified.  <a href="classpFlow_1_1indexContainer.html#a62f30f38f9c1db8aa064dbe0db5c4728">More...</a><br /></td></tr>
 <tr class="separator:a62f30f38f9c1db8aa064dbe0db5c4728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a795138dcd25e874d4ab7ed03ce7603b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a795138dcd25e874d4ab7ed03ce7603b6">syncViews</a> ()</td></tr>
+<tr class="memdesc:a795138dcd25e874d4ab7ed03ce7603b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">synchronize views  <a href="classpFlow_1_1indexContainer.html#a795138dcd25e874d4ab7ed03ce7603b6">More...</a><br /></td></tr>
 <tr class="separator:a795138dcd25e874d4ab7ed03ce7603b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9884549c8be9897d5550d31bc0bcf7f2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a9884549c8be9897d5550d31bc0bcf7f2">setSize</a> (size_t ns)</td></tr>
-<tr class="separator:a9884549c8be9897d5550d31bc0bcf7f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e997fe61eb370f30de37cf831cc07e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#ab7e997fe61eb370f30de37cf831cc07e">syncViews</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> newSize)</td></tr>
+<tr class="separator:ab7e997fe61eb370f30de37cf831cc07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a92e0ba7ef23e87944d17c213fa2dbc0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a92e0ba7ef23e87944d17c213fa2dbc0c">min_</a> = 0</td></tr>
-<tr class="separator:a92e0ba7ef23e87944d17c213fa2dbc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a138d93a14ab42323cc70f74a817f5993"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a138d93a14ab42323cc70f74a817f5993">max_</a> = 0</td></tr>
-<tr class="separator:a138d93a14ab42323cc70f74a817f5993"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f31775800bbb46b35b5791def1f3acc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a5f31775800bbb46b35b5791def1f3acc">size_</a> = 0</td></tr>
-<tr class="separator:a5f31775800bbb46b35b5791def1f3acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3740b5bc130288c0eaa990e972b4080d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html#ac16302a81f0d7c1ce7e41edd798fc9d1">DualViewType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a3740b5bc130288c0eaa990e972b4080d">views_</a></td></tr>
-<tr class="separator:a3740b5bc130288c0eaa990e972b4080d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22472b8a480c073b90f774f55695241a"><td class="memItemLeft" align="right" valign="top">IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a22472b8a480c073b90f774f55695241a">min_</a> = 0</td></tr>
+<tr class="memdesc:a22472b8a480c073b90f774f55695241a"><td class="mdescLeft">&#160;</td><td class="mdescRight">min value in indices  <a href="classpFlow_1_1indexContainer.html#a22472b8a480c073b90f774f55695241a">More...</a><br /></td></tr>
+<tr class="separator:a22472b8a480c073b90f774f55695241a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe13bf217883cb4b137feb2442e10fcd"><td class="memItemLeft" align="right" valign="top">IndexType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#abe13bf217883cb4b137feb2442e10fcd">max_</a> = 0</td></tr>
+<tr class="memdesc:abe13bf217883cb4b137feb2442e10fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">max value in the indices  <a href="classpFlow_1_1indexContainer.html#abe13bf217883cb4b137feb2442e10fcd">More...</a><br /></td></tr>
+<tr class="separator:abe13bf217883cb4b137feb2442e10fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a429ca9be380631b55c9a31f39b2e2b18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a429ca9be380631b55c9a31f39b2e2b18">size_</a> = 0</td></tr>
+<tr class="memdesc:a429ca9be380631b55c9a31f39b2e2b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">number/size of index vector  <a href="classpFlow_1_1indexContainer.html#a429ca9be380631b55c9a31f39b2e2b18">More...</a><br /></td></tr>
+<tr class="separator:a429ca9be380631b55c9a31f39b2e2b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a20638900191f63f4f6fec918e4985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1indexContainer.html#a6aba63156da33c19ee7030fb14799c88">DVType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1indexContainer.html#a77a20638900191f63f4f6fec918e4985">views_</a></td></tr>
+<tr class="memdesc:a77a20638900191f63f4f6fec918e4985"><td class="mdescLeft">&#160;</td><td class="mdescRight">views to hold indices on Host and Device  <a href="classpFlow_1_1indexContainer.html#a77a20638900191f63f4f6fec918e4985">More...</a><br /></td></tr>
+<tr class="separator:a77a20638900191f63f4f6fec918e4985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename IndexType&gt;<br />
 class pFlow::indexContainer&lt; IndexType &gt;</h3>
 
+<p>It holds two vectors of indecis on Host and Device. </p>
+<p>Host vector should be used for threads running on Host and Device vector should be used for threads running on Device. </p>
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00034">34</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00039">39</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ac16302a81f0d7c1ce7e41edd798fc9d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac16302a81f0d7c1ce7e41edd798fc9d1">&#9670;&nbsp;</a></span>DualViewType</h2>
+<a id="a6aba63156da33c19ee7030fb14799c88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aba63156da33c19ee7030fb14799c88">&#9670;&nbsp;</a></span>DVType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1indexContainer.html#ac16302a81f0d7c1ce7e41edd798fc9d1">DualViewType</a> =  Kokkos::DualView&lt;IndexType*&gt;</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1indexContainer.html#a6aba63156da33c19ee7030fb14799c88">DVType</a> =  <a class="el" href="namespacepFlow.html#ad657f6b08dffcfe19dd4a7146e6da2f8">DualViewType1D</a>&lt;IndexType&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00038">38</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00043">43</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a5e8c0e0e7c8466a94fcc66eef8c12b24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e8c0e0e7c8466a94fcc66eef8c12b24">&#9670;&nbsp;</a></span>DeviceViewType</h2>
+<a id="a53b3ee1dd158322f128e70e31756de03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b3ee1dd158322f128e70e31756de03">&#9670;&nbsp;</a></span>DeviceViewType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1indexContainer.html#a5e8c0e0e7c8466a94fcc66eef8c12b24">DeviceViewType</a> =  typename DualViewType::t_dev</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a> =  typename DVType::t_dev</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00041">41</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Device type on device. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00045">45</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a56dacd6fb9a2da1919e8dc155a5e2b0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56dacd6fb9a2da1919e8dc155a5e2b0e">&#9670;&nbsp;</a></span>HostViewType</h2>
+<a id="aac71c3750bfc37c754c1f965da2e1e25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac71c3750bfc37c754c1f965da2e1e25">&#9670;&nbsp;</a></span>HostViewType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1indexContainer.html#a56dacd6fb9a2da1919e8dc155a5e2b0e">HostViewType</a> =  typename DualViewType::t_host</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">HostViewType</a> =  typename DVType::t_host</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00044">44</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Host type on device. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00048">48</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
@@ -269,7 +304,9 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00046">46</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Host memory type. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00051">51</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
@@ -285,13 +322,15 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00048">48</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Device memory ype. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00054">54</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae7c043057ecdd004f61d780acebcc58e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c043057ecdd004f61d780acebcc58e">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[1/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c043057ecdd004f61d780acebcc58e">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,12 +352,44 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00077">77</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Default. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00102">102</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8683e0e2255f1cc41f1c7b430106045d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8683e0e2255f1cc41f1c7b430106045d">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structpFlow_1_1Range.html">Range</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rng</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct from a <a class="el" href="structpFlow_1_1Range.html" title="Range for elements in an vector [start,end)">Range</a> (half open) </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00106">106</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a1adfb266809541cd795990a522817429"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1adfb266809541cd795990a522817429">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[2/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1adfb266809541cd795990a522817429">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -351,12 +422,23 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00080">80</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Construct half open [begin,end) </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00116">116</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="ViewAlgorithms_8hpp_source.html#l00234">pFlow::copy()</a>, <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00198">pFlow::fillSequence()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00084">indexContainer&lt; IndexType &gt;::min_</a>, <a class="el" href="indexContainer_8hpp_source.html#l00090">indexContainer&lt; IndexType &gt;::size_</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_a1adfb266809541cd795990a522817429_cgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a1adfb266809541cd795990a522817429_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
 <a id="a15e46ceffd1d4f18c390a090e6000971"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15e46ceffd1d4f18c390a090e6000971">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[3/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e46ceffd1d4f18c390a090e6000971">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -389,12 +471,90 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00092">92</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>From data and number of elements in data. </p>
+<p>data is a pointer in the Host memory <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00129">129</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="ViewAlgorithms_8hpp_source.html#l00234">pFlow::copy()</a>, <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00079">pFlow::max()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00087">indexContainer&lt; IndexType &gt;::max_</a>, <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00028">pFlow::min()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00084">indexContainer&lt; IndexType &gt;::min_</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_a15e46ceffd1d4f18c390a090e6000971_cgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a15e46ceffd1d4f18c390a090e6000971_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="acc42a10e8de4113d8215a0fe43020087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc42a10e8de4113d8215a0fe43020087">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; IndexType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ind</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00141">141</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb5132d8d4ba77a25ebbb9d929ea9745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5132d8d4ba77a25ebbb9d929ea9745">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html">indexContainer</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a> &amp;&#160;</td>
+          <td class="paramname"><em>ind</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00146">146</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="ViewAlgorithms_8hpp_source.html#l00234">pFlow::copy()</a>, <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00079">pFlow::max()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00087">indexContainer&lt; IndexType &gt;::max_</a>, <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00028">pFlow::min()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00084">indexContainer&lt; IndexType &gt;::min_</a>, <a class="el" href="indexContainer_8hpp_source.html#l00090">indexContainer&lt; IndexType &gt;::size_</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_aeb5132d8d4ba77a25ebbb9d929ea9745_cgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_aeb5132d8d4ba77a25ebbb9d929ea9745_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
 <a id="addeb28c36f98f790c129cb67a66ae2e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addeb28c36f98f790c129cb67a66ae2e1">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[4/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#addeb28c36f98f790c129cb67a66ae2e1">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -417,10 +577,12 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
+<p>Copy. </p>
+
 </div>
 </div>
 <a id="a65d712b82e422745a8c183b16ccdf38b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65d712b82e422745a8c183b16ccdf38b">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[5/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65d712b82e422745a8c183b16ccdf38b">&#9670;&nbsp;</a></span>indexContainer() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,6 +604,8 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move. </p>
 
 </div>
 </div>
@@ -468,9 +632,39 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
+<p>Destructor. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a88804711c50d36bb445dd618ce805768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88804711c50d36bb445dd618ce805768">&#9670;&nbsp;</a></span>TypeInfoTemplateNV11()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TypeInfoTemplateNV11 </td>
+          <td>(</td>
+          <td class="paramtype">&quot;indexContainer&lt; IndexType &gt;&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IndexType&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6e4ec7d2dc8bab5cc9aa766132060980"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6e4ec7d2dc8bab5cc9aa766132060980">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
@@ -494,6 +688,8 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Copy assignment. </p>
 
 </div>
 </div>
@@ -521,10 +717,12 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
+<p>Mover assignement. </p>
+
 </div>
 </div>
-<a id="a7bb1be8d14aca7330e90c5b60493061b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bb1be8d14aca7330e90c5b60493061b">&#9670;&nbsp;</a></span>size()</h2>
+<a id="a81c1a64be64b5bab9c8143a8d1c02029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c1a64be64b5bab9c8143a8d1c02029">&#9670;&nbsp;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -533,7 +731,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> size_t size </td>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> auto size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -546,33 +744,25 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00115">115</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Size. </p>
 
-<p class="reference">Referenced by <a class="el" href="dynamicPointStructure_8cpp_source.html#l00025">dynamicPointStructure::dynamicPointStructure()</a>, <a class="el" href="Vector_8cpp_source.html#l00237">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::insertSetElement()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00537">VectorSingle&lt; pFlow::AB5History, void &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; int8 &gt;::insertSetElement()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00139">sphereParticles::insertSphereParticles()</a>, <a class="el" href="Vector_8cpp_source.html#l00217">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::sortItems()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00549">VectorDual&lt; int8 &gt;::sortItems()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00562">VectorSingle&lt; pFlow::AB5History, void &gt;::sortItems()</a>, and <a class="el" href="sphereParticles_8cpp_source.html#l00225">sphereParticles::sphereParticles()</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00175">175</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00090">indexContainer&lt; IndexType &gt;::size_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="particleIdHandler_8cpp_source.html#l00043">particleIdHandler::hearChanges()</a>, <a class="el" href="VectorSingle_8cpp_source.html#l00583">VectorSingle&lt; uint32, HostSpace &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; multiRotatingAxis &gt;::insertSetElement()</a>, <a class="el" href="VectorSingle_8cpp_source.html#l00738">VectorSingle&lt; uint32, HostSpace &gt;::reorderItems()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00549">VectorDual&lt; multiRotatingAxis &gt;::sortItems()</a>, and <a class="el" href="internalPoints_8cpp_source.html#l00145">internalPoints::sortPoints()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1indexContainer_a7bb1be8d14aca7330e90c5b60493061b_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a7bb1be8d14aca7330e90c5b60493061b_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a7bb1be8d14aca7330e90c5b60493061b_icgraph" id="classpFlow_1_1indexContainer_a7bb1be8d14aca7330e90c5b60493061b_icgraph">
-<area shape="rect" title=" " alt="" coords="271,305,319,331"/>
-<area shape="rect" href="classpFlow_1_1dynamicPointStructure.html#a10d4d223c37affe812c8910ca9851c3f" title=" " alt="" coords="5,5,223,47"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a30b7f34210d48986237bf8f1c7794493" title=" " alt="" coords="28,71,200,127"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="19,151,209,207"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="21,232,207,273"/>
-<area shape="rect" href="classpFlow_1_1sphereParticles.html#a95650ae58375201510b9d36fa846ed07" title=" " alt="" coords="29,297,199,339"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a64e7d0642915db6cb9395e3250360c04" title="Sort elements based on the indices." alt="" coords="33,363,195,419"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a9b59e3e31ed18fe659636b63987c2930" title=" " alt="" coords="38,444,190,485"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a9b59e3e31ed18fe659636b63987c2930" title=" " alt="" coords="33,510,195,566"/>
-<area shape="rect" href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880" title="construct from systemControl and property" alt="" coords="29,591,199,632"/>
-</map>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_a81c1a64be64b5bab9c8143a8d1c02029_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a81c1a64be64b5bab9c8143a8d1c02029_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="a357c86d427ba736b27fbfab57197ed64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a357c86d427ba736b27fbfab57197ed64">&#9670;&nbsp;</a></span>empty()</h2>
+<a id="a43be5325ac00e9fa5e1157ad97bfcf7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43be5325ac00e9fa5e1157ad97bfcf7c">&#9670;&nbsp;</a></span>empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,7 +771,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> size_t <a class="el" href="classpFlow_1_1empty.html">empty</a> </td>
+          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> bool <a class="el" href="classpFlow_1_1empty.html">empty</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -594,19 +784,19 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00121">121</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>If the container empty. </p>
 
-<p class="reference">Referenced by <a class="el" href="VectorSingle_8hpp_source.html#l00537">VectorSingle&lt; pFlow::AB5History, void &gt;::insertSetElement()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00182">182</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00090">indexContainer&lt; IndexType &gt;::size_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="VectorSingle_8cpp_source.html#l00583">VectorSingle&lt; uint32, HostSpace &gt;::insertSetElement()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1indexContainer_a357c86d427ba736b27fbfab57197ed64_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a357c86d427ba736b27fbfab57197ed64_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a357c86d427ba736b27fbfab57197ed64_icgraph" id="classpFlow_1_1indexContainer_a357c86d427ba736b27fbfab57197ed64_icgraph">
-<area shape="rect" title=" " alt="" coords="243,20,307,47"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="5,5,195,61"/>
-</map>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_a43be5325ac00e9fa5e1157ad97bfcf7c_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a43be5325ac00e9fa5e1157ad97bfcf7c_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -634,19 +824,19 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00127">127</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Min value of indices. </p>
 
-<p class="reference">Referenced by <a class="el" href="VectorDual_8hpp_source.html#l00610">VectorDual&lt; int8 &gt;::insertSetElement()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00189">189</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00084">indexContainer&lt; IndexType &gt;::min_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="VectorDual_8hpp_source.html#l00610">VectorDual&lt; multiRotatingAxis &gt;::insertSetElement()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1indexContainer_afc62db27358117c2848f2a40034d9c76_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_afc62db27358117c2848f2a40034d9c76_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_afc62db27358117c2848f2a40034d9c76_icgraph" id="classpFlow_1_1indexContainer_afc62db27358117c2848f2a40034d9c76_icgraph">
-<area shape="rect" title=" " alt="" coords="240,13,287,39"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a34bb429dcb71153499f3ef45195b2071" title=" " alt="" coords="5,5,192,47"/>
-</map>
 </div>
 
 </div>
@@ -674,59 +864,20 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00133">133</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Max value of indices. </p>
 
-<p class="reference">Referenced by <a class="el" href="VectorSingle_8hpp_source.html#l00537">VectorSingle&lt; pFlow::AB5History, void &gt;::insertSetElement()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; int8 &gt;::insertSetElement()</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00196">196</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00087">indexContainer&lt; IndexType &gt;::max_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="VectorSingle_8cpp_source.html#l00583">VectorSingle&lt; uint32, HostSpace &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; multiRotatingAxis &gt;::insertSetElement()</a>, and <a class="el" href="VectorSingle_8cpp_source.html#l00738">VectorSingle&lt; uint32, HostSpace &gt;::reorderItems()</a>.</p>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1indexContainer_a21012fa7fe940b14c018bbd241eda750_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a21012fa7fe940b14c018bbd241eda750_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a21012fa7fe940b14c018bbd241eda750_icgraph" id="classpFlow_1_1indexContainer_a21012fa7fe940b14c018bbd241eda750_icgraph">
-<area shape="rect" title=" " alt="" coords="243,57,293,84"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="5,5,195,61"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="7,86,193,127"/>
-</map>
 </div>
-
-</div>
-</div>
-<a id="a880710c6f5ffae88c7e0baf24d7929c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a880710c6f5ffae88c7e0baf24d7929c9">&#9670;&nbsp;</a></span>operator()()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> IndexType operator() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structpFlow_1_1selectSide.html">selectSide</a>&lt; executionSpace &gt;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>i</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00140">140</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
 </div>
 </div>
@@ -740,7 +891,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classpFlow_1_1indexContainer.html#a56dacd6fb9a2da1919e8dc155a5e2b0e">HostViewType</a>&amp; hostView </td>
+          <td class="memname">const <a class="el" href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">HostViewType</a>&amp; hostView </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -753,23 +904,19 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00151">151</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Return Host veiw. </p>
 
-<p class="reference">Referenced by <a class="el" href="pointStructure_8hpp_source.html#l00318">pointStructure::insertedPointIndexH()</a>, <a class="el" href="Vector_8cpp_source.html#l00237">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::insertSetElement()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00537">VectorSingle&lt; pFlow::AB5History, void &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; int8 &gt;::insertSetElement()</a>, and <a class="el" href="Vector_8cpp_source.html#l00217">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::sortItems()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00202">202</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="VectorSingle_8cpp_source.html#l00583">VectorSingle&lt; uint32, HostSpace &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; multiRotatingAxis &gt;::insertSetElement()</a>, and <a class="el" href="VectorSingle_8cpp_source.html#l00738">VectorSingle&lt; uint32, HostSpace &gt;::reorderItems()</a>.</p>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1indexContainer_a5b8b45947cc69fbfb94a443cd6dc41f6_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a5b8b45947cc69fbfb94a443cd6dc41f6_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a5b8b45947cc69fbfb94a443cd6dc41f6_icgraph" id="classpFlow_1_1indexContainer_a5b8b45947cc69fbfb94a443cd6dc41f6_icgraph">
-<area shape="rect" title=" " alt="" coords="243,166,325,193"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#ad4d8846f33f2c2d33873fc529b35f0b4" title=" " alt="" coords="19,5,181,47"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a30b7f34210d48986237bf8f1c7794493" title=" " alt="" coords="14,71,186,127"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="5,151,195,207"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="7,232,193,273"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a64e7d0642915db6cb9395e3250360c04" title="Sort elements based on the indices." alt="" coords="19,298,181,354"/>
-</map>
 </div>
 
 </div>
@@ -784,7 +931,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classpFlow_1_1indexContainer.html#a5e8c0e0e7c8466a94fcc66eef8c12b24">DeviceViewType</a>&amp; deviceView </td>
+          <td class="memname">const <a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a>&amp; deviceView </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -797,24 +944,19 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00156">156</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Return Device view. </p>
 
-<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00026">pFlow::getSortedIndex()</a>, <a class="el" href="pointStructure_8hpp_source.html#l00324">pointStructure::insertedPointIndexD()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00537">VectorSingle&lt; pFlow::AB5History, void &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; int8 &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00549">VectorDual&lt; int8 &gt;::sortItems()</a>, and <a class="el" href="VectorSingle_8hpp_source.html#l00562">VectorSingle&lt; pFlow::AB5History, void &gt;::sortItems()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00208">208</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00024">pFlow::getSortedIndices()</a>, <a class="el" href="VectorSingle_8cpp_source.html#l00583">VectorSingle&lt; uint32, HostSpace &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00579">VectorDual&lt; multiRotatingAxis &gt;::insertSetElement()</a>, <a class="el" href="VectorSingle_8cpp_source.html#l00738">VectorSingle&lt; uint32, HostSpace &gt;::reorderItems()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00549">VectorDual&lt; multiRotatingAxis &gt;::sortItems()</a>.</p>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1indexContainer_abe2bb54e3d8d44844edc05a46accd8d4_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_abe2bb54e3d8d44844edc05a46accd8d4_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_abe2bb54e3d8d44844edc05a46accd8d4_icgraph" id="classpFlow_1_1indexContainer_abe2bb54e3d8d44844edc05a46accd8d4_icgraph">
-<area shape="rect" title=" " alt="" coords="243,175,340,201"/>
-<area shape="rect" href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f" title=" " alt="" coords="16,5,184,32"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a01e096ba69cc9cf35320e827465f7337" title=" " alt="" coords="19,57,181,98"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="5,123,195,179"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a7931a57163eb363a3ca7db6ffa438479" title=" " alt="" coords="7,203,193,245"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a9b59e3e31ed18fe659636b63987c2930" title=" " alt="" coords="24,269,176,310"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a9b59e3e31ed18fe659636b63987c2930" title=" " alt="" coords="19,335,181,391"/>
-</map>
 </div>
 
 </div>
@@ -829,7 +971,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html#a56dacd6fb9a2da1919e8dc155a5e2b0e">HostViewType</a>&amp; hostView </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html#aac71c3750bfc37c754c1f965da2e1e25">HostViewType</a>&amp; hostView </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -842,7 +984,11 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00161">161</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Return Host veiw. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00214">214</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
 
 </div>
 </div>
@@ -856,7 +1002,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html#a5e8c0e0e7c8466a94fcc66eef8c12b24">DeviceViewType</a>&amp; deviceView </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html#a53b3ee1dd158322f128e70e31756de03">DeviceViewType</a>&amp; deviceView </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -869,7 +1015,11 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00166">166</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Return Device veiw. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00220">220</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
 
 </div>
 </div>
@@ -896,21 +1046,11 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00171">171</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Return index accessor that works on Host. </p>
 
-<p class="reference">Referenced by <a class="el" href="dynamicPointStructure_8cpp_source.html#l00025">dynamicPointStructure::dynamicPointStructure()</a>, and <a class="el" href="sphereParticles_8cpp_source.html#l00225">sphereParticles::sphereParticles()</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1indexContainer_afc2c6b6e3530d1a891d4b2e94b94ff0b_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_afc2c6b6e3530d1a891d4b2e94b94ff0b_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_afc2c6b6e3530d1a891d4b2e94b94ff0b_icgraph" id="classpFlow_1_1indexContainer_afc2c6b6e3530d1a891d4b2e94b94ff0b_icgraph">
-<area shape="rect" title=" " alt="" coords="269,46,368,73"/>
-<area shape="rect" href="classpFlow_1_1dynamicPointStructure.html#a10d4d223c37affe812c8910ca9851c3f" title=" " alt="" coords="5,5,221,47"/>
-<area shape="rect" href="classpFlow_1_1sphereParticles.html#af3a0e20c9660776af6f0b8118e89e880" title="construct from systemControl and property" alt="" coords="30,71,197,112"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00226">226</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
 
 </div>
 </div>
@@ -937,7 +1077,11 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00176">176</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Return index accessor that works on Device. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00232">232</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
 
 </div>
 </div>
@@ -964,7 +1108,11 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00181">181</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Mark host is modified. </p>
+
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00238">238</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
 
 </div>
 </div>
@@ -991,25 +1139,25 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00186">186</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>Mark device is modified. </p>
 
-<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00026">pFlow::getSortedIndex()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00244">244</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00024">pFlow::getSortedIndices()</a>.</p>
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1indexContainer_a62f30f38f9c1db8aa064dbe0db5c4728_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a62f30f38f9c1db8aa064dbe0db5c4728_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a62f30f38f9c1db8aa064dbe0db5c4728_icgraph" id="classpFlow_1_1indexContainer_a62f30f38f9c1db8aa064dbe0db5c4728_icgraph">
-<area shape="rect" title=" " alt="" coords="221,5,352,32"/>
-<area shape="rect" href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f" title=" " alt="" coords="5,5,173,32"/>
-</map>
 </div>
 
 </div>
 </div>
 <a id="a795138dcd25e874d4ab7ed03ce7603b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a795138dcd25e874d4ab7ed03ce7603b6">&#9670;&nbsp;</a></span>syncViews()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a795138dcd25e874d4ab7ed03ce7603b6">&#9670;&nbsp;</a></span>syncViews() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1031,25 +1179,32 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00191">191</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>synchronize views </p>
 
-<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00026">pFlow::getSortedIndex()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00250">250</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00079">pFlow::max()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00087">indexContainer&lt; IndexType &gt;::max_</a>, <a class="el" href="internalFieldAlgorithms_8hpp_source.html#l00028">pFlow::min()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00084">indexContainer&lt; IndexType &gt;::min_</a>, <a class="el" href="indexContainer_8hpp_source.html#l00090">indexContainer&lt; IndexType &gt;::size_</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00093">indexContainer&lt; IndexType &gt;::views_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00024">pFlow::getSortedIndices()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00273">indexContainer&lt; IndexType &gt;::syncViews()</a>.</p>
+<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_a795138dcd25e874d4ab7ed03ce7603b6_cgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a795138dcd25e874d4ab7ed03ce7603b6_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1indexContainer_a795138dcd25e874d4ab7ed03ce7603b6_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a795138dcd25e874d4ab7ed03ce7603b6_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a795138dcd25e874d4ab7ed03ce7603b6_icgraph" id="classpFlow_1_1indexContainer_a795138dcd25e874d4ab7ed03ce7603b6_icgraph">
-<area shape="rect" title=" " alt="" coords="221,5,312,32"/>
-<area shape="rect" href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f" title=" " alt="" coords="5,5,173,32"/>
-</map>
 </div>
 
 </div>
 </div>
-<a id="a9884549c8be9897d5550d31bc0bcf7f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9884549c8be9897d5550d31bc0bcf7f2">&#9670;&nbsp;</a></span>setSize()</h2>
+<a id="ab7e997fe61eb370f30de37cf831cc07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e997fe61eb370f30de37cf831cc07e">&#9670;&nbsp;</a></span>syncViews() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1058,10 +1213,10 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t setSize </td>
+          <td class="memname">void syncViews </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>ns</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
+          <td class="paramname"><em>newSize</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1072,26 +1227,22 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00212">212</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00273">273</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="mortonIndexing_8cpp_source.html#l00026">pFlow::getSortedIndex()</a>.</p>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="indexContainer_8hpp_source.html#l00090">indexContainer&lt; IndexType &gt;::size_</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00250">indexContainer&lt; IndexType &gt;::syncViews()</a>.</p>
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1indexContainer_a9884549c8be9897d5550d31bc0bcf7f2_icgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_a9884549c8be9897d5550d31bc0bcf7f2_icgraph" alt=""/></div>
-<map name="classpFlow_1_1indexContainer_a9884549c8be9897d5550d31bc0bcf7f2_icgraph" id="classpFlow_1_1indexContainer_a9884549c8be9897d5550d31bc0bcf7f2_icgraph">
-<area shape="rect" title=" " alt="" coords="221,5,291,32"/>
-<area shape="rect" href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f" title=" " alt="" coords="5,5,173,32"/>
-</map>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1indexContainer_ab7e997fe61eb370f30de37cf831cc07e_cgraph.png" border="0" usemap="#classpFlow_1_1indexContainer_ab7e997fe61eb370f30de37cf831cc07e_cgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a92e0ba7ef23e87944d17c213fa2dbc0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92e0ba7ef23e87944d17c213fa2dbc0c">&#9670;&nbsp;</a></span>min_</h2>
+<a id="a22472b8a480c073b90f774f55695241a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22472b8a480c073b90f774f55695241a">&#9670;&nbsp;</a></span>min_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1100,7 +1251,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> min_ = 0</td>
+          <td class="memname">IndexType min_ = 0</td>
         </tr>
       </table>
   </td>
@@ -1110,14 +1261,16 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00069">69</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>min value in indices </p>
 
-<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00080">indexContainer&lt; int32 &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00127">indexContainer&lt; int32 &gt;::min()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00191">indexContainer&lt; int32 &gt;::syncViews()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00084">84</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00116">indexContainer&lt; IndexType &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00189">indexContainer&lt; IndexType &gt;::min()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00250">indexContainer&lt; IndexType &gt;::syncViews()</a>.</p>
 
 </div>
 </div>
-<a id="a138d93a14ab42323cc70f74a817f5993"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a138d93a14ab42323cc70f74a817f5993">&#9670;&nbsp;</a></span>max_</h2>
+<a id="abe13bf217883cb4b137feb2442e10fcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe13bf217883cb4b137feb2442e10fcd">&#9670;&nbsp;</a></span>max_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1126,7 +1279,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> max_ = 0</td>
+          <td class="memname">IndexType max_ = 0</td>
         </tr>
       </table>
   </td>
@@ -1136,14 +1289,16 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00070">70</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>max value in the indices </p>
 
-<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00092">indexContainer&lt; int32 &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00133">indexContainer&lt; int32 &gt;::max()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00191">indexContainer&lt; int32 &gt;::syncViews()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00087">87</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00129">indexContainer&lt; IndexType &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00196">indexContainer&lt; IndexType &gt;::max()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00250">indexContainer&lt; IndexType &gt;::syncViews()</a>.</p>
 
 </div>
 </div>
-<a id="a5f31775800bbb46b35b5791def1f3acc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f31775800bbb46b35b5791def1f3acc">&#9670;&nbsp;</a></span>size_</h2>
+<a id="a429ca9be380631b55c9a31f39b2e2b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a429ca9be380631b55c9a31f39b2e2b18">&#9670;&nbsp;</a></span>size_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1152,7 +1307,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size_ = 0</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> size_ = 0</td>
         </tr>
       </table>
   </td>
@@ -1162,14 +1317,16 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00071">71</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>number/size of index vector </p>
 
-<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00121">indexContainer&lt; int32 &gt;::empty()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00080">indexContainer&lt; int32 &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00212">indexContainer&lt; int32 &gt;::setSize()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00115">indexContainer&lt; int32 &gt;::size()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00191">indexContainer&lt; int32 &gt;::syncViews()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00090">90</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00182">indexContainer&lt; IndexType &gt;::empty()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00116">indexContainer&lt; IndexType &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00175">indexContainer&lt; IndexType &gt;::size()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00250">indexContainer&lt; IndexType &gt;::syncViews()</a>.</p>
 
 </div>
 </div>
-<a id="a3740b5bc130288c0eaa990e972b4080d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3740b5bc130288c0eaa990e972b4080d">&#9670;&nbsp;</a></span>views_</h2>
+<a id="a77a20638900191f63f4f6fec918e4985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77a20638900191f63f4f6fec918e4985">&#9670;&nbsp;</a></span>views_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1178,7 +1335,7 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html#ac16302a81f0d7c1ce7e41edd798fc9d1">DualViewType</a> views_</td>
+          <td class="memname"><a class="el" href="classpFlow_1_1indexContainer.html#a6aba63156da33c19ee7030fb14799c88">DVType</a> views_</td>
         </tr>
       </table>
   </td>
@@ -1188,9 +1345,11 @@ class pFlow::indexContainer&lt; IndexType &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00073">73</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+<p>views to hold indices on Host and Device </p>
 
-<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00156">indexContainer&lt; int32 &gt;::deviceView()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00151">indexContainer&lt; int32 &gt;::hostView()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00080">indexContainer&lt; int32 &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00176">indexContainer&lt; int32 &gt;::indicesDevice()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00171">indexContainer&lt; int32 &gt;::indicesHost()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00186">indexContainer&lt; int32 &gt;::modifyOnDevice()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00181">indexContainer&lt; int32 &gt;::modifyOnHost()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00140">indexContainer&lt; int32 &gt;::operator()()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00191">indexContainer&lt; int32 &gt;::syncViews()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="indexContainer_8hpp_source.html#l00093">93</a> of file <a class="el" href="indexContainer_8hpp_source.html">indexContainer.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="indexContainer_8hpp_source.html#l00208">indexContainer&lt; IndexType &gt;::deviceView()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00202">indexContainer&lt; IndexType &gt;::hostView()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00116">indexContainer&lt; IndexType &gt;::indexContainer()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00232">indexContainer&lt; IndexType &gt;::indicesDevice()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00226">indexContainer&lt; IndexType &gt;::indicesHost()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00244">indexContainer&lt; IndexType &gt;::modifyOnDevice()</a>, <a class="el" href="indexContainer_8hpp_source.html#l00238">indexContainer&lt; IndexType &gt;::modifyOnHost()</a>, and <a class="el" href="indexContainer_8hpp_source.html#l00250">indexContainer&lt; IndexType &gt;::syncViews()</a>.</p>
 
 </div>
 </div>

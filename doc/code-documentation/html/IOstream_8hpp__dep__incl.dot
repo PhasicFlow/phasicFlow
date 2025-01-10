@@ -1,0 +1,15 @@
+digraph "src/phasicFlow/streams/iStream/IOstream.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/streams\l/iStream/IOstream.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/phasicFlow/streams\l/iStream/iIstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iIstream_8hpp.html",tooltip=" "];
+  Node1 -> Node473 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node473 [label="src/phasicFlow/streams\l/iStream/iOstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iOstream_8hpp.html",tooltip=" "];
+  Node473 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node473 -> Node475 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node475 [label="src/phasicFlow/streams\l/iStream/IOstream.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$IOstream_8cpp.html",tooltip=" "];
+  Node1 -> Node475 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

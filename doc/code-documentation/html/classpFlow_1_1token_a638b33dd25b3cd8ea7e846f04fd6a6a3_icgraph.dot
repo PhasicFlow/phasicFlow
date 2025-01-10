@@ -1,0 +1,12 @@
+digraph "setBad"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="setBad",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Clear token and set to be ERROR."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::Istream::read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Istream.html#a2927b1d2adfb79cfbe30374f02109ac5",tooltip="Return next token from stream."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::Istream::readWord\lToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Istream.html#a7e71f99e176c31f799cb199c7ff6d5b8",tooltip="Read a word token."];
+}

@@ -124,60 +124,52 @@ $(document).ready(function(){initNavTree('oFstream_8hpp_source.html',''); initRe
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// based on OpenFOAM stream, with some modifications/simplifications</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// to be tailored to our needs</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef __oFstream_hpp__</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define __oFstream_hpp__</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef __oFstream_hpp__</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define __oFstream_hpp__</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fileSystem_8hpp.html">fileSystem.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fileStream_8hpp.html">fileStream.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Ostream_8hpp.html">Ostream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fileSystem_8hpp.html">fileSystem.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fileStream_8hpp.html">fileStream.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Ostream_8hpp.html">Ostream.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classpFlow_1_1oFstream.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpFlow_1_1oFstream.html">oFstream</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span> <a class="code" href="classpFlow_1_1fileStream.html">fileStream</a>,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">public</span> <a class="code" href="classpFlow_1_1Ostream.html">Ostream</a></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// Constructor</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classpFlow_1_1oFstream.html#a8683f2a809f71defb705b8d2aeb31488">oFstream</a> (<span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>&amp; path, <span class="keywordtype">bool</span> binary = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// no copy constructor</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classpFlow_1_1oFstream.html#a8683f2a809f71defb705b8d2aeb31488">oFstream</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1oFstream.html">oFstream</a>&amp; src) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// no assignment</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classpFlow_1_1oFstream.html">oFstream</a>&amp; <a class="code" href="classpFlow_1_1oFstream.html#a3ef92d3cc6d42bf8dceb6ff4d84acea4">operator = </a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1oFstream.html">oFstream</a>&amp; rhs) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Destructor</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classpFlow_1_1oFstream.html#a67bdc0a2fb112736e6959c7cd3e29195">~oFstream</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classpFlow_1_1oFstream.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpFlow_1_1oFstream.html">oFstream</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">public</span> <a class="code" href="classpFlow_1_1fileStream.html">fileStream</a>,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">public</span> <a class="code" href="classpFlow_1_1Ostream.html">Ostream</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classpFlow_1_1oFstream.html#af8dcf52fc2e91ee82f43cb42648a04ba">oFstream</a> (<span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>&amp; path, <span class="keywordtype">bool</span> binary = <span class="keyword">false</span>, <span class="keywordtype">bool</span> append = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classpFlow_1_1oFstream.html#af8dcf52fc2e91ee82f43cb42648a04ba">oFstream</a>( <span class="keyword">const</span> <a class="code" href="classpFlow_1_1oFstream.html">oFstream</a>&amp; src) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classpFlow_1_1oFstream.html">oFstream</a>&amp; <a class="code" href="classpFlow_1_1oFstream.html#a3ef92d3cc6d42bf8dceb6ff4d84acea4">operator = </a>(<span class="keyword">const</span> <a class="code" href="classpFlow_1_1oFstream.html">oFstream</a>&amp; rhs) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classpFlow_1_1oFstream.html#a67bdc0a2fb112736e6959c7cd3e29195">~oFstream</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aOstream_8hpp_html"><div class="ttname"><a href="Ostream_8hpp.html">Ostream.hpp</a></div></div>
 <div class="ttc" id="afileSystem_8hpp_html"><div class="ttname"><a href="fileSystem_8hpp.html">fileSystem.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demComponent_8hpp_source.html#l00028">demComponent.hpp:28</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileStream_html"><div class="ttname"><a href="classpFlow_1_1fileStream.html">pFlow::fileStream</a></div><div class="ttdef"><b>Definition:</b> <a href="fileStream_8hpp_source.html#l00036">fileStream.hpp:36</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1oFstream_html"><div class="ttname"><a href="classpFlow_1_1oFstream.html">pFlow::oFstream</a></div><div class="ttdef"><b>Definition:</b> <a href="oFstream_8hpp_source.html#l00036">oFstream.hpp:36</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1oFstream_html_a67bdc0a2fb112736e6959c7cd3e29195"><div class="ttname"><a href="classpFlow_1_1oFstream.html#a67bdc0a2fb112736e6959c7cd3e29195">pFlow::oFstream::~oFstream</a></div><div class="ttdeci">virtual ~oFstream()=default</div></div>
-<div class="ttc" id="aclasspFlow_1_1oFstream_html_a3ef92d3cc6d42bf8dceb6ff4d84acea4"><div class="ttname"><a href="classpFlow_1_1oFstream.html#a3ef92d3cc6d42bf8dceb6ff4d84acea4">pFlow::oFstream::operator=</a></div><div class="ttdeci">oFstream &amp; operator=(const oFstream &amp;rhs)=delete</div></div>
-<div class="ttc" id="aclasspFlow_1_1Ostream_html"><div class="ttname"><a href="classpFlow_1_1Ostream.html">pFlow::Ostream</a></div><div class="ttdef"><b>Definition:</b> <a href="Ostream_8hpp_source.html#l00035">Ostream.hpp:35</a></div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdoc">Manages file pathes, manupulate and combines them.</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00071">fileSystem.hpp:71</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1oFstream_html_af8dcf52fc2e91ee82f43cb42648a04ba"><div class="ttname"><a href="classpFlow_1_1oFstream.html#af8dcf52fc2e91ee82f43cb42648a04ba">pFlow::oFstream::oFstream</a></div><div class="ttdeci">oFstream(const fileSystem &amp;path, bool binary=false, bool append=false)</div><div class="ttdoc">From file path and format.</div><div class="ttdef"><b>Definition:</b> <a href="oFstream_8cpp_source.html#l00025">oFstream.cpp:25</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileStream_html"><div class="ttname"><a href="classpFlow_1_1fileStream.html">pFlow::fileStream</a></div><div class="ttdoc">Creates and manages an input/output file stream with specified format.</div><div class="ttdef"><b>Definition:</b> <a href="fileStream_8hpp_source.html#l00043">fileStream.hpp:43</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1oFstream_html"><div class="ttname"><a href="classpFlow_1_1oFstream.html">pFlow::oFstream</a></div><div class="ttdoc">Output file stream to send binary or ascii data to a file.</div><div class="ttdef"><b>Definition:</b> <a href="oFstream_8hpp_source.html#l00038">oFstream.hpp:38</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1oFstream_html_a67bdc0a2fb112736e6959c7cd3e29195"><div class="ttname"><a href="classpFlow_1_1oFstream.html#a67bdc0a2fb112736e6959c7cd3e29195">pFlow::oFstream::~oFstream</a></div><div class="ttdeci">virtual ~oFstream()=default</div><div class="ttdoc">Destructor.</div></div>
+<div class="ttc" id="aclasspFlow_1_1oFstream_html_a3ef92d3cc6d42bf8dceb6ff4d84acea4"><div class="ttname"><a href="classpFlow_1_1oFstream.html#a3ef92d3cc6d42bf8dceb6ff4d84acea4">pFlow::oFstream::operator=</a></div><div class="ttdeci">oFstream &amp; operator=(const oFstream &amp;rhs)=delete</div><div class="ttdoc">No assignment.</div></div>
+<div class="ttc" id="aclasspFlow_1_1Ostream_html"><div class="ttname"><a href="classpFlow_1_1Ostream.html">pFlow::Ostream</a></div><div class="ttdoc">Standard output stream for BINARY and ASCII formats.</div><div class="ttdef"><b>Definition:</b> <a href="Ostream_8hpp_source.html#l00039">Ostream.hpp:39</a></div></div>
 <div class="ttc" id="afileStream_8hpp_html"><div class="ttname"><a href="fileStream_8hpp.html">fileStream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1oFstream_html_a8683f2a809f71defb705b8d2aeb31488"><div class="ttname"><a href="classpFlow_1_1oFstream.html#a8683f2a809f71defb705b8d2aeb31488">pFlow::oFstream::oFstream</a></div><div class="ttdeci">oFstream(const fileSystem &amp;path, bool binary=false)</div><div class="ttdef"><b>Definition:</b> <a href="oFstream_8cpp_source.html#l00027">oFstream.cpp:27</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_b13948a90891cb8a59f39ab8c50a8102.html">streams</a></li><li class="navelem"><a class="el" href="dir_1cabe3740960a39038ba2cb1fab9ec4c.html">Fstream</a></li><li class="navelem"><a class="el" href="oFstream_8hpp.html">oFstream.hpp</a></li>

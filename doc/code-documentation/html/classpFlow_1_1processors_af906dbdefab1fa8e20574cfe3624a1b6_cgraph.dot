@@ -1,0 +1,24 @@
+digraph "initProcessors"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="initProcessors",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Initialize MPI processors."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::processorOstream\l::activatePrefix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processorOstream.html#aa2768213b957ef38e93c7ed8885a19c9",tooltip="Activate prefix for this stream."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="argc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#a6b5d14f6477c2a2ffc4a584fccd4a270",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="argv",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#a7a337e96a9bbe5764e39bf211806f5f3",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="globalMaster",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#a9b35ef739b3be47c11669f263e5186ff",tooltip="Is this processor the master processor?"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="globalParallel",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#af72411c365e83148a65659b34060ef8e",tooltip="Is this a parallel MPI run."];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="isInitialized",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#a04321e4762171080622518d52bc4624a",tooltip="Is MPI initialized?"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="pFlow::masterOstream\l::setMasterSlave",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1masterOstream.html#a9d31a58823cc12753b382e1ced231b0f",tooltip="Set if this processor is slave or master."];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="pFlow::processorOstream\l::setPrefixNum",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1processorOstream.html#a42b4a0b0ca2aa86b5af71a2c90138f10",tooltip="Set processor number to be used in the prefix."];
+}

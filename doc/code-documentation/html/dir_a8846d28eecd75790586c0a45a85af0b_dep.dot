@@ -1,0 +1,11 @@
+digraph "src/Particles/GrainParticles/grainShape" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_235fea78dcb80d617f7ea9245e30dcf9 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="GrainParticles" fontname="Helvetica", fontsize="10", URL="dir_235fea78dcb80d617f7ea9245e30dcf9.html"]
+  dir_a8846d28eecd75790586c0a45a85af0b [shape=box, label="grainShape", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_a8846d28eecd75790586c0a45a85af0b.html"];
+  }
+  dir_b351bcc3c60d144476bd2e30437abfde [shape=box label="particles" fillcolor="white" style="filled" color="red" URL="dir_b351bcc3c60d144476bd2e30437abfde.html"];
+  dir_a8846d28eecd75790586c0a45a85af0b->dir_b351bcc3c60d144476bd2e30437abfde [headlabel="1", labeldistance=1.5 headhref="dir_000067_000075.html"];
+}

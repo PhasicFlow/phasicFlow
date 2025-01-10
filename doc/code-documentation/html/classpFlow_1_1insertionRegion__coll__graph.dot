@@ -1,0 +1,23 @@
+digraph "insertionRegion"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="insertionRegion",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class defines all the necessary enteties for defining an insertion region."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" tControl_" ,fontname="Helvetica"];
+  Node2 [label="baseTimeControl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1baseTimeControl.html",tooltip=" "];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" dict_" ,fontname="Helvetica"];
+  Node6 [label="dictionary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html",tooltip="Dictionary holds a set of data entries or sub-dictionaries that are enclosed in a curely braces or ar..."];
+  Node6 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" parDict_\nnullDict" ,fontname="Helvetica"];
+  Node15 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mixture_" ,fontname="Helvetica"];
+  Node15 [label="uniquePtr\< pFlow::shapeMixture \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node19 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" insertion_" ,fontname="Helvetica"];
+  Node19 [label="insertion",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1insertion.html",tooltip="Base class for particle insertion."];
+  Node104 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" setFieldList_" ,fontname="Helvetica"];
+  Node104 [label="anyList",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1anyList.html",tooltip=" "];
+  Node109 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" setFieldDict_" ,fontname="Helvetica"];
+  Node109 [label="uniquePtr\< pFlow::dictionary \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+  Node111 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pRegion_" ,fontname="Helvetica"];
+  Node111 [label="uniquePtr\< pFlow::peakable\lRegion \>",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1uniquePtr.html",tooltip=" "];
+}

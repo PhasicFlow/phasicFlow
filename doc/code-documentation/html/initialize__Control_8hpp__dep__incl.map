@@ -1,9 +1,0 @@
-<map id="src/setHelpers/initialize_Control.hpp" name="src/setHelpers/initialize_Control.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="583,5,758,47"/>
-<area shape="rect" id="node2" href="$geometryPhasicFlow_8cpp.html" title=" " alt="" coords="5,95,224,136"/>
-<area shape="rect" id="node3" href="$particlesPhasicFlow_8cpp.html" title=" " alt="" coords="249,95,461,136"/>
-<area shape="rect" id="node4" href="$pFlowToVTK_8cpp.html" title=" " alt="" coords="484,95,639,136"/>
-<area shape="rect" id="node5" href="$postprocessPhasicFlow_8cpp.html" title=" " alt="" coords="663,95,897,136"/>
-<area shape="rect" id="node6" href="$iterateGeometry_8cpp.html" title="iterateGeometry solver" alt="" coords="921,95,1103,136"/>
-<area shape="rect" id="node7" href="$sphereGranFlow_8cpp.html" title="sphereGranFlow solver" alt="" coords="1127,95,1305,136"/>
-</map>

@@ -1,0 +1,22 @@
+digraph "readcuboidWall"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="readcuboidWall",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::dictionary::\lgetVal",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a523bcff98ab38f3c5961e56eeb0b1d47",tooltip="get the value of data entry"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::dictionary::\lgetValOrSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a5585dc9a8b971fbfe2c99fdb75c5d647",tooltip="get the value of data entry or if not found, set the value to setVal"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::algorithms::\lKOKKOS::max",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow_1_1algorithms_1_1KOKKOS.html#a9d98facac68152ec12bf1483da55c939",tooltip=" "];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::Wall::triangles",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Wall.html#a4d7458cc2712b4dd7126fbc5970009af",tooltip=" "];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::triple::x",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1triple.html#a2f365146ce767d3de7ae125abd193b33",tooltip="access component"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::triple::y",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1triple.html#a28d901cc27d3756a830e4de5a484b967",tooltip="access component"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="pFlow::triple::z",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1triple.html#a5c836d3919741edf1ba805c98dbd21b7",tooltip="access component"];
+}

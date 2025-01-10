@@ -114,17 +114,15 @@ $(document).ready(function(){initNavTree('classpFlow_1_1IOstream.html',''); init
 <div class="title">IOstream Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A base calss for input/output streams.  
+ <a href="classpFlow_1_1IOstream.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for IOstream:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream__inherit__graph.png" border="0" usemap="#IOstream_inherit__map" alt="Inheritance graph"/></div>
-<map name="IOstream_inherit__map" id="IOstream_inherit__map">
-<area shape="rect" title=" " alt="" coords="54,5,137,32"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html" title=" " alt="" coords="5,80,81,107"/>
-<area shape="rect" href="classpFlow_1_1iOstream.html" title=" " alt="" coords="106,80,189,107"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -159,10 +157,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a093459b3399aba6fe0f57bbbc2925bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return non-const access to the name of the stream.  <a href="classpFlow_1_1IOstream.html#a093459b3399aba6fe0f57bbbc2925bc2">More...</a><br /></td></tr>
 <tr class="separator:a093459b3399aba6fe0f57bbbc2925bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367eb3425fc4e8270e2aa961df8ac8a5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a> (const char *operation) const</td></tr>
-<tr class="memdesc:a367eb3425fc4e8270e2aa961df8ac8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">More...</a><br /></td></tr>
+<tr class="memdesc:a367eb3425fc4e8270e2aa961df8ac8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">More...</a><br /></td></tr>
 <tr class="separator:a367eb3425fc4e8270e2aa961df8ac8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a281bbfd1fe6ab10377d7cb1f5111044d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">fatalCheck</a> (const char *operation) const</td></tr>
-<tr class="memdesc:a281bbfd1fe6ab10377d7cb1f5111044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">More...</a><br /></td></tr>
+<tr class="memdesc:a281bbfd1fe6ab10377d7cb1f5111044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation.  <a href="classpFlow_1_1IOstream.html#a281bbfd1fe6ab10377d7cb1f5111044d">More...</a><br /></td></tr>
 <tr class="separator:a281bbfd1fe6ab10377d7cb1f5111044d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a298583c3d514f1169bfc43169ba78c38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">opened</a> () const</td></tr>
 <tr class="memdesc:a298583c3d514f1169bfc43169ba78c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if stream has been opened.  <a href="classpFlow_1_1IOstream.html#a298583c3d514f1169bfc43169ba78c38">More...</a><br /></td></tr>
@@ -279,8 +277,10 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:a384ff8be80c5e301c5ce6838a1f18033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00045">45</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<div class="textblock"><p>A base calss for input/output streams. </p>
+<p>It is based on OpenFOAM stream, with some modifications/simplifications to be tailored to our needs </p>
+
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00047">47</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="aacc935fd960fc1d7efe7f3820bb1db35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aacc935fd960fc1d7efe7f3820bb1db35">&#9670;&nbsp;</a></span>streamAccess</h2>
@@ -300,7 +300,7 @@ Static Protected Attributes</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00051">51</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00053">53</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +320,7 @@ Static Protected Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="ab76e0cc92bb140c07e198662e39d5268aecafbc1299672a8c1521cc0d5f1ae986"></a>BINARY&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00057">57</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00059">59</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
 </div>
 </div>
@@ -350,19 +350,15 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Default. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00121">121</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00123">123</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00272">IOstream::setBad()</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00274">IOstream::setBad()</a>.</p>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a685ead9e00563a9b3d0c4753eac347a2_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a685ead9e00563a9b3d0c4753eac347a2_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a685ead9e00563a9b3d0c4753eac347a2_cgraph" id="classpFlow_1_1IOstream_a685ead9e00563a9b3d0c4753eac347a2_cgraph">
-<area shape="rect" title="Default." alt="" coords="5,5,88,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3" title="Set stream to be bad." alt="" coords="136,5,203,32"/>
-</map>
 </div>
 
 </div>
@@ -393,19 +389,15 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Construct and set write format. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00131">131</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00133">133</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00272">IOstream::setBad()</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00274">IOstream::setBad()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a26824d6240feaec7589240d8c974ee05_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a26824d6240feaec7589240d8c974ee05_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a26824d6240feaec7589240d8c974ee05_cgraph" id="classpFlow_1_1IOstream_a26824d6240feaec7589240d8c974ee05_cgraph">
-<area shape="rect" title="Construct and set write format." alt="" coords="5,5,88,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3" title="Set stream to be bad." alt="" coords="136,5,203,32"/>
-</map>
 </div>
 
 </div>
@@ -491,9 +483,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream opened. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00088">88</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00090">90</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00072">IOstream::openClosed_</a>, and <a class="el" href="IOstream_8hpp_source.html#l00054">IOstream::OPENED</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00074">IOstream::openClosed_</a>, and <a class="el" href="IOstream_8hpp_source.html#l00056">IOstream::OPENED</a>.</p>
 
 </div>
 </div>
@@ -522,9 +514,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream closed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00094">94</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00096">96</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00053">IOstream::CLOSED</a>, and <a class="el" href="IOstream_8hpp_source.html#l00072">IOstream::openClosed_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00055">IOstream::CLOSED</a>, and <a class="el" href="IOstream_8hpp_source.html#l00074">IOstream::openClosed_</a>.</p>
 
 </div>
 </div>
@@ -554,9 +546,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream state. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00100">100</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00102">102</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
 </div>
 </div>
@@ -584,9 +576,9 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00105">105</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00107">107</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00075">IOstream::writeFormat_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00077">IOstream::writeFormat_</a>.</p>
 
 </div>
 </div>
@@ -615,9 +607,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream to be good. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00111">111</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00113">113</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
 </div>
 </div>
@@ -650,58 +642,15 @@ Static Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="IOstream_8cpp_source.html#l00031">31</a> of file <a class="el" href="IOstream_8cpp_source.html">IOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00069">IOstream::staticName_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00071">IOstream::staticName_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="box_8cpp_source.html#l00043">box::box()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="cylinder_8cpp_source.html#l00099">cylinder::cylinder()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00203">dataEntry::dataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00215">dictionary::dictionary()</a>, <a class="el" href="iBox_8cpp_source.html#l00061">iBox&lt; intType &gt;::iBox()</a>, <a class="el" href="Field_8hpp_source.html#l00252">pFlow::operator&lt;&lt;()</a>, <a class="el" href="Field_8hpp_source.html#l00241">pFlow::operator&gt;&gt;()</a>, <a class="el" href="iIstream_8cpp_source.html#l00005">iIstream::putBack()</a>, <a class="el" href="Insertion_8cpp_source.html#l00171">Insertion&lt; ShapeType &gt;::read()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00046">timeInterval::read()</a>, <a class="el" href="Logical_8cpp_source.html#l00065">Logical::read()</a>, <a class="el" href="line_8cpp_source.html#l00082">line::read()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00102">rotatingAxis::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00345">dataEntry::read()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00166">sphereShape::read()</a>, <a class="el" href="fixedWall_8cpp_source.html#l00070">fixedWall::read()</a>, <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00130">rotatingAxisMotion::read()</a>, <a class="el" href="vibratingMotion_8cpp_source.html#l00127">vibratingMotion::read()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00198">multiRotatingAxisMotion::read()</a>, <a class="el" href="dictionary_8cpp_source.html#l00759">dictionary::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>, <a class="el" href="Field_8cpp_source.html#l00102">Field&lt; VectorDual, int8 &gt;::readField()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00166">IOfileHeader::readHeader()</a>, <a class="el" href="ListI_8hpp_source.html#l00178">List&lt; word &gt;::readList()</a>, <a class="el" href="Field_8cpp_source.html#l00062">Field&lt; VectorDual, int8 &gt;::readNonUniform()</a>, <a class="el" href="pointStructure_8cpp_source.html#l00437">pointStructure::readPointStructure()</a>, <a class="el" href="triSurface_8cpp_source.html#l00191">triSurface::readTriSurface()</a>, <a class="el" href="Field_8cpp_source.html#l00023">Field&lt; VectorDual, int8 &gt;::readUniform()</a>, <a class="el" href="sphere_8cpp_source.html#l00053">sphere::sphere()</a>, <a class="el" href="Insertion_8cpp_source.html#l00198">Insertion&lt; ShapeType &gt;::write()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00366">dataEntry::write()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00186">sphereShape::write()</a>, <a class="el" href="fixedWall_8cpp_source.html#l00091">fixedWall::write()</a>, <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00151">rotatingAxisMotion::write()</a>, <a class="el" href="vibratingMotion_8cpp_source.html#l00148">vibratingMotion::write()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00219">multiRotatingAxisMotion::write()</a>, <a class="el" href="dictionary_8cpp_source.html#l00780">dictionary::write()</a>, and <a class="el" href="pointStructure_8cpp_source.html#l00465">pointStructure::writePointStructure()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="box_8cpp_source.html#l00043">box::box()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="cylinder_8cpp_source.html#l00103">cylinder::cylinder()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00207">dataEntry::dataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00215">dictionary::dictionary()</a>, <a class="el" href="iBox_8cpp_source.html#l00061">iBox&lt; intType &gt;::iBox()</a>, <a class="el" href="Field_8hpp_source.html#l00225">pFlow::operator&lt;&lt;()</a>, <a class="el" href="Field_8hpp_source.html#l00214">pFlow::operator&gt;&gt;()</a>, <a class="el" href="iIstream_8cpp_source.html#l00023">iIstream::putBack()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00046">timeInterval::read()</a>, <a class="el" href="Logical_8cpp_source.html#l00065">Logical::read()</a>, <a class="el" href="line_8cpp_source.html#l00082">line::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00349">dataEntry::read()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00101">rotatingAxis::read()</a>, <a class="el" href="multiTriSurface_8cpp_source.html#l00076">multiTriSurface::read()</a>, <a class="el" href="pointStructure_8cpp_source.html#l00257">pointStructure::read()</a>, <a class="el" href="Field_8cpp_source.html#l00023">Field&lt; uint32x3 &gt;::read()</a>, <a class="el" href="triSurface_8cpp_source.html#l00257">triSurface::read()</a>, <a class="el" href="internalPoints_8cpp_source.html#l00530">internalPoints::read()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00198">multiRotatingAxisMotion::read()</a>, <a class="el" href="dictionary_8cpp_source.html#l00772">dictionary::read()</a>, <a class="el" href="dataIO_8cpp_source.html#l00080">pFlow::readDataAsciiBinary()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00196">IOfileHeader::readHeader()</a>, <a class="el" href="ListI_8hpp_source.html#l00194">List&lt; std::any &gt;::readList()</a>, <a class="el" href="pointField_8cpp_source.html#l00236">pointField&lt; pFlow::VectorSingle, pFlow::AB3History &gt;::readPointField()</a>, <a class="el" href="sphere_8cpp_source.html#l00053">sphere::sphere()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00370">dataEntry::write()</a>, <a class="el" href="baseShapeNames_8cpp_source.html#l00105">baseShapeNames::write()</a>, <a class="el" href="triSurface_8cpp_source.html#l00282">triSurface::write()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00219">multiRotatingAxisMotion::write()</a>, <a class="el" href="dictionary_8cpp_source.html#l00793">dictionary::write()</a>, <a class="el" href="dataIO_8cpp_source.html#l00193">dataIO&lt; T &gt;::writeData()</a>, and <a class="el" href="dataIO_8cpp_source.html#l00022">pFlow::writeDataAsciiBinary()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_ac9b54653d0ec63ee05f64a185437b335_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_ac9b54653d0ec63ee05f64a185437b335_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_ac9b54653d0ec63ee05f64a185437b335_icgraph" id="classpFlow_1_1IOstream_ac9b54653d0ec63ee05f64a185437b335_icgraph">
-<area shape="rect" title="Return the name of the stream." alt="" coords="497,1025,556,1052"/>
-<area shape="rect" href="classpFlow_1_1box.html#afbef9cd91fe90a1d98d27735f6045769" title=" " alt="" coords="285,5,411,32"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a133f34e170bc1f28e7439fe87043ce2f" title=" " alt="" coords="27,51,177,93"/>
-<area shape="rect" href="classpFlow_1_1cylinder.html#a6f4f6dc4ed761ed37b22c8c7cd549a96" title=" " alt="" coords="257,259,439,285"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a9ab8c2767c7e28e08d2cfa1dd6320794" title=" " alt="" coords="247,309,449,336"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#ab68249035485cfb12593cf0038debe1a" title=" " alt="" coords="277,361,419,402"/>
-<area shape="rect" href="classpFlow_1_1iBox.html#aa7fff19cac1a58f5846ababa9b4f6eb9" title=" " alt="" coords="281,427,415,453"/>
-<area shape="rect" href="namespacepFlow.html#ad77460a4d54e75754c7119d0af751cc7" title=" " alt="" coords="275,477,421,504"/>
-<area shape="rect" href="namespacepFlow.html#a66efa897c8bfc622e127b85c5394e58f" title=" " alt="" coords="275,528,421,555"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597" title=" " alt="" coords="256,107,440,133"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a8943dec8dd658ffb5d0c1da773f37d9d" title=" " alt="" coords="31,122,173,163"/>
-<area shape="rect" href="classpFlow_1_1List.html#a18b6e40e2e0511b836d16ae0e7ecf061" title=" " alt="" coords="25,198,179,239"/>
-<area shape="rect" href="classpFlow_1_1Insertion.html#a8148f2b6c694e069c67183105cf17ce4" title=" " alt="" coords="21,577,183,604"/>
-<area shape="rect" href="classpFlow_1_1timeInterval.html#ae1d42751915e8566dac19658cc498ffa" title=" " alt="" coords="273,934,423,975"/>
-<area shape="rect" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="272,1000,424,1027"/>
-<area shape="rect" href="classpFlow_1_1line.html#ae1d42751915e8566dac19658cc498ffa" title=" " alt="" coords="283,1051,413,1077"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxis.html#ae1d42751915e8566dac19658cc498ffa" title="Read from input stream is." alt="" coords="274,1102,422,1143"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="264,1168,432,1195"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="25,629,179,670"/>
-<area shape="rect" href="classpFlow_1_1fixedWall.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="18,695,186,721"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxisMotion.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="5,746,199,787"/>
-<area shape="rect" href="classpFlow_1_1vibratingMotion.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="16,811,188,853"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxisMotion.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="9,877,195,918"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="263,731,433,757"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a12a2f078710c7419e84afd6cdd58ac70" title=" " alt="" coords="249,1219,447,1261"/>
-<area shape="rect" href="classpFlow_1_1Field.html#ab7b53a83f079c1c270e62b192d09068f" title=" " alt="" coords="253,1285,443,1326"/>
-<area shape="rect" href="classpFlow_1_1IOfileHeader.html#ad3e735fcc23f3717d149728c03f5074a" title=" " alt="" coords="273,1350,423,1391"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a65fb54f18c87499159f30c6d4514c674" title=" " alt="" coords="253,1415,443,1457"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba" title=" " alt="" coords="267,1481,429,1522"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d" title=" " alt="" coords="278,1546,418,1587"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a4a088d05c6030840715e4590719ea2f2" title=" " alt="" coords="253,1611,443,1653"/>
-<area shape="rect" href="classpFlow_1_1sphere.html#a95b6dbeccc5693a32177ec7976e31838" title=" " alt="" coords="265,1677,431,1704"/>
-<area shape="rect" href="classpFlow_1_1Insertion.html#aac753ee6ead0ddcdfb9e74f169c6bcec" title=" " alt="" coords="19,1735,185,1761"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="262,2099,434,2125"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="25,1786,179,1827"/>
-<area shape="rect" href="classpFlow_1_1fixedWall.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="16,1852,188,1879"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="5,1905,199,1946"/>
-<area shape="rect" href="classpFlow_1_1vibratingMotion.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="16,1971,188,2013"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="9,2039,195,2081"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="277,1881,419,1922"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa" title=" " alt="" coords="267,2150,429,2191"/>
-</map>
 </div>
 
 </div>
@@ -759,38 +708,18 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation. </p>
-<p>Print <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> state or generate a FatalIOError when an error has occurred. The base implementation is a fatalCheck </p>
+<p>Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation. </p>
+<p>Print <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> state or generate a FatalIOError when an error has occurred. The base implementation is a fatalCheck </p>
 
 <p class="definition">Definition at line <a class="el" href="IOstream_8cpp_source.html#l00042">42</a> of file <a class="el" href="IOstream_8cpp_source.html">IOstream.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="AdamsBashforth3_8hpp_source.html#l00057">pFlow::operator&lt;&lt;()</a>, <a class="el" href="AdamsBashforth3_8hpp_source.html#l00041">pFlow::operator&gt;&gt;()</a>, <a class="el" href="line_8cpp_source.html#l00082">line::read()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00102">rotatingAxis::read()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00079">timeInterval::write()</a>, <a class="el" href="iBox_8cpp_source.html#l00094">iBox&lt; intType &gt;::write()</a>, <a class="el" href="Logical_8cpp_source.html#l00098">Logical::write()</a>, <a class="el" href="box_8cpp_source.html#l00065">box::write()</a>, <a class="el" href="sphere_8cpp_source.html#l00077">sphere::write()</a>, <a class="el" href="line_8cpp_source.html#l00124">line::write()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00133">rotatingAxis::write()</a>, <a class="el" href="vibrating_8cpp_source.html#l00094">vibrating::write()</a>, <a class="el" href="cylinder_8cpp_source.html#l00124">cylinder::write()</a>, <a class="el" href="ListI_8hpp_source.html#l00144">List&lt; word &gt;::writeList()</a>, <a class="el" href="multiTriSurface_8cpp_source.html#l00230">multiTriSurface::writeMultiTriSurface()</a>, <a class="el" href="triSurface_8cpp_source.html#l00221">triSurface::writeTriSurface()</a>, and <a class="el" href="Vector_8cpp_source.html#l00101">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::writeVector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="AdamsBashforth3_8hpp_source.html#l00057">pFlow::operator&lt;&lt;()</a>, <a class="el" href="AdamsBashforth3_8hpp_source.html#l00041">pFlow::operator&gt;&gt;()</a>, <a class="el" href="line_8cpp_source.html#l00082">line::read()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00101">rotatingAxis::read()</a>, <a class="el" href="dataIO_8cpp_source.html#l00080">pFlow::readDataAsciiBinary()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00079">timeInterval::write()</a>, <a class="el" href="iBox_8cpp_source.html#l00094">iBox&lt; intType &gt;::write()</a>, <a class="el" href="sphere_8cpp_source.html#l00077">sphere::write()</a>, <a class="el" href="box_8cpp_source.html#l00065">box::write()</a>, <a class="el" href="Logical_8cpp_source.html#l00097">Logical::write()</a>, <a class="el" href="line_8cpp_source.html#l00124">line::write()</a>, <a class="el" href="vibrating_8cpp_source.html#l00094">vibrating::write()</a>, <a class="el" href="cylinder_8cpp_source.html#l00128">cylinder::write()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00132">rotatingAxis::write()</a>, <a class="el" href="multiTriSurface_8cpp_source.html#l00091">multiTriSurface::write()</a>, <a class="el" href="infinitePlane_8cpp_source.html#l00042">infinitePlane::write()</a>, <a class="el" href="Field_8cpp_source.html#l00095">Field&lt; uint32x3 &gt;::write()</a>, <a class="el" href="dataIO_8cpp_source.html#l00057">pFlow::writeDataASCII()</a>, <a class="el" href="dataIO_8cpp_source.html#l00022">pFlow::writeDataAsciiBinary()</a>, and <a class="el" href="ListI_8hpp_source.html#l00160">List&lt; std::any &gt;::writeList()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a367eb3425fc4e8270e2aa961df8ac8a5_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a367eb3425fc4e8270e2aa961df8ac8a5_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a367eb3425fc4e8270e2aa961df8ac8a5_icgraph" id="classpFlow_1_1IOstream_a367eb3425fc4e8270e2aa961df8ac8a5_icgraph">
-<area shape="rect" title="Check IOstream status for given operation." alt="" coords="221,441,281,468"/>
-<area shape="rect" href="namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619" title=" " alt="" coords="16,5,163,32"/>
-<area shape="rect" href="namespacepFlow.html#a85ed561d066dae339196cd058783674f" title=" " alt="" coords="16,56,163,83"/>
-<area shape="rect" href="classpFlow_1_1line.html#ae1d42751915e8566dac19658cc498ffa" title=" " alt="" coords="24,107,155,133"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxis.html#ae1d42751915e8566dac19658cc498ffa" title="Read from input stream is." alt="" coords="15,158,163,199"/>
-<area shape="rect" href="classpFlow_1_1timeInterval.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="15,223,164,265"/>
-<area shape="rect" href="classpFlow_1_1iBox.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="20,289,159,316"/>
-<area shape="rect" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="11,340,167,367"/>
-<area shape="rect" href="classpFlow_1_1box.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="22,391,157,417"/>
-<area shape="rect" href="classpFlow_1_1sphere.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="12,441,167,468"/>
-<area shape="rect" href="classpFlow_1_1line.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="22,492,157,519"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxis.html#aa7d820a4dd0777a9a82aee242b83a167" title="Write to output stream os." alt="" coords="15,543,163,585"/>
-<area shape="rect" href="classpFlow_1_1vibrating.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="5,609,173,636"/>
-<area shape="rect" href="classpFlow_1_1cylinder.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="8,660,171,687"/>
-<area shape="rect" href="classpFlow_1_1List.html#a452cc3dc2647928573a55c8a5b41a5ea" title=" " alt="" coords="12,711,167,753"/>
-<area shape="rect" href="classpFlow_1_1multiTriSurface.html#a3834440c3a872a6db7418736db8c63ad" title=" " alt="" coords="5,777,173,818"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#ae4e3a0ce5f1ac644fc112ed7d5311a3c" title=" " alt="" coords="19,842,159,883"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a127385e6395d9d457aee6fcb1c1807b7" title=" " alt="" coords="8,908,171,964"/>
-</map>
 </div>
 
 </div>
@@ -811,30 +740,20 @@ Static Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Check <a class="el" href="classpFlow_1_1IOstream.html">IOstream</a> status for given operation. </p>
+<p>Check <a class="el" href="classpFlow_1_1IOstream.html" title="A base calss for input/output streams.">IOstream</a> status for given operation. </p>
 <p>Generate a FatalIOError when an error has occurred. </p>
 
 <p class="definition">Definition at line <a class="el" href="IOstream_8cpp_source.html#l00048">48</a> of file <a class="el" href="IOstream_8cpp_source.html">IOstream.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8hpp_source.html#l00042">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00057">fatalExit</a>.</p>
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, and <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="ListI_8hpp_source.html#l00178">List&lt; word &gt;::readList()</a>, <a class="el" href="triSurface_8cpp_source.html#l00191">triSurface::readTriSurface()</a>, <a class="el" href="Vector_8cpp_source.html#l00030">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::readVector()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00137">IOfileHeader::writeHeader()</a>, and <a class="el" href="iEntry_8cpp_source.html#l00154">iEntry&lt; Key, T * &gt;::writeKeyword()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="dataIO_8cpp_source.html#l00120">pFlow::readDataAscii()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="ListI_8hpp_source.html#l00194">List&lt; std::any &gt;::readList()</a>, <a class="el" href="IOfileHeader_8cpp_source.html#l00154">IOfileHeader::writeHeader()</a>, and <a class="el" href="iEntry_8cpp_source.html#l00154">iEntry&lt; Key, T * &gt;::writeKeyword()</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a281bbfd1fe6ab10377d7cb1f5111044d_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a281bbfd1fe6ab10377d7cb1f5111044d_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a281bbfd1fe6ab10377d7cb1f5111044d_icgraph" id="classpFlow_1_1IOstream_a281bbfd1fe6ab10377d7cb1f5111044d_icgraph">
-<area shape="rect" title="Check IOstream status for given operation." alt="" coords="252,209,344,235"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a133f34e170bc1f28e7439fe87043ce2f" title=" " alt="" coords="29,5,180,47"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a12a2f078710c7419e84afd6cdd58ac70" title=" " alt="" coords="5,71,204,112"/>
-<area shape="rect" href="classpFlow_1_1List.html#a18b6e40e2e0511b836d16ae0e7ecf061" title=" " alt="" coords="27,136,182,177"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d" title=" " alt="" coords="35,201,175,243"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a61b6e21215a4976ac3317cea96b56eaa" title=" " alt="" coords="23,267,186,323"/>
-<area shape="rect" href="classpFlow_1_1IOfileHeader.html#aa4249f7a47b0674a7697f67fff575591" title=" " alt="" coords="29,348,180,389"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a41b87eb2ffa631b3685fed7694f2c7ed" title=" " alt="" coords="26,413,183,455"/>
-</map>
 </div>
 
 </div>
@@ -864,9 +783,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if stream has been opened. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00166">166</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00168">168</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00072">IOstream::openClosed_</a>, and <a class="el" href="IOstream_8hpp_source.html#l00054">IOstream::OPENED</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00074">IOstream::openClosed_</a>, and <a class="el" href="IOstream_8hpp_source.html#l00056">IOstream::OPENED</a>.</p>
 
 </div>
 </div>
@@ -895,9 +814,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if stream is closed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00172">172</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00174">174</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00053">IOstream::CLOSED</a>, and <a class="el" href="IOstream_8hpp_source.html#l00072">IOstream::openClosed_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00055">IOstream::CLOSED</a>, and <a class="el" href="IOstream_8hpp_source.html#l00074">IOstream::openClosed_</a>.</p>
 
 </div>
 </div>
@@ -926,23 +845,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if stream format is binray. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00178">178</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00180">180</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00060">IOstream::BINARY</a>, and <a class="el" href="IOstream_8hpp_source.html#l00075">IOstream::writeFormat_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00062">IOstream::BINARY</a>, and <a class="el" href="IOstream_8hpp_source.html#l00077">IOstream::writeFormat_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="triSurface_8cpp_source.html#l00191">triSurface::readTriSurface()</a>, <a class="el" href="Vector_8cpp_source.html#l00030">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::readVector()</a>, and <a class="el" href="Vector_8cpp_source.html#l00101">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::writeVector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dataIO_8cpp_source.html#l00080">pFlow::readDataAsciiBinary()</a>, and <a class="el" href="dataIO_8cpp_source.html#l00022">pFlow::writeDataAsciiBinary()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_aee3ba44cd3f14501633ae2e8ea04b4d0_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_aee3ba44cd3f14501633ae2e8ea04b4d0_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_aee3ba44cd3f14501633ae2e8ea04b4d0_icgraph" id="classpFlow_1_1IOstream_aee3ba44cd3f14501633ae2e8ea04b4d0_icgraph">
-<area shape="rect" title="Return true if stream format is binray." alt="" coords="216,86,291,113"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d" title=" " alt="" coords="17,5,157,47"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a61b6e21215a4976ac3317cea96b56eaa" title=" " alt="" coords="5,71,168,127"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a127385e6395d9d457aee6fcb1c1807b7" title=" " alt="" coords="5,151,168,207"/>
-</map>
 </div>
 
 </div>
@@ -972,22 +885,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if next operation might succeed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00184">184</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00186">186</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Istream_8cpp_source.html#l00053">Istream::nextValid()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Istream_8cpp_source.html#l00049">Istream::nextValid()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>.</p>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_abdcc7f96f487faadc7769afcf58fe992_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_abdcc7f96f487faadc7769afcf58fe992_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_abdcc7f96f487faadc7769afcf58fe992_icgraph" id="classpFlow_1_1IOstream_abdcc7f96f487faadc7769afcf58fe992_icgraph">
-<area shape="rect" title="Return true if next operation might succeed." alt="" coords="243,35,297,61"/>
-<area shape="rect" href="classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3" title=" " alt="" coords="5,5,195,32"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a8943dec8dd658ffb5d0c1da773f37d9d" title=" " alt="" coords="29,57,171,98"/>
-</map>
 </div>
 
 </div>
@@ -1017,30 +925,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if end of input seen. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00190">190</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00192">192</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stlFile_8cpp_source.html#l00042">pFlow::checkNumberToken()</a>, <a class="el" href="stlFile_8cpp_source.html#l00034">pFlow::checkWordToken()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="stlFile_8cpp_source.html#l00292">stlFile::read()</a>, <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>, <a class="el" href="Field_8cpp_source.html#l00102">Field&lt; VectorDual, int8 &gt;::readField()</a>, <a class="el" href="iEntry_8cpp_source.html#l00032">iEntry&lt; Key, T * &gt;::readKeyword()</a>, <a class="el" href="Field_8cpp_source.html#l00062">Field&lt; VectorDual, int8 &gt;::readNonUniform()</a>, <a class="el" href="Field_8cpp_source.html#l00023">Field&lt; VectorDual, int8 &gt;::readUniform()</a>, and <a class="el" href="twoPartEntry_8cpp_source.html#l00028">twoPartEntry::twoPartEntry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stlFile_8cpp_source.html#l00042">pFlow::checkNumberToken()</a>, <a class="el" href="stlFile_8cpp_source.html#l00034">pFlow::checkWordToken()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="stlFile_8cpp_source.html#l00292">stlFile::read()</a>, <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>, <a class="el" href="iEntry_8cpp_source.html#l00032">iEntry&lt; Key, T * &gt;::readKeyword()</a>, and <a class="el" href="twoPartEntry_8cpp_source.html#l00028">twoPartEntry::twoPartEntry()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_af3418ac60d0d7a303478f29a387feb3c_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_af3418ac60d0d7a303478f29a387feb3c_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_af3418ac60d0d7a303478f29a387feb3c_icgraph" id="classpFlow_1_1IOstream_af3418ac60d0d7a303478f29a387feb3c_icgraph">
-<area shape="rect" title="Return true if end of input seen." alt="" coords="249,265,292,292"/>
-<area shape="rect" href="namespacepFlow.html#a7eb5ba27ff2b049a15f9d4ca1a216398" title=" " alt="" coords="5,5,201,32"/>
-<area shape="rect" href="namespacepFlow.html#a742913ced514ca5a1fa1cfb6fb79e550" title=" " alt="" coords="14,56,193,83"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a133f34e170bc1f28e7439fe87043ce2f" title=" " alt="" coords="28,107,179,149"/>
-<area shape="rect" href="classpFlow_1_1stlFile.html#af816873151ddb0126e98bb2f914d8ed5" title=" " alt="" coords="31,173,175,200"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a8943dec8dd658ffb5d0c1da773f37d9d" title=" " alt="" coords="33,225,174,266"/>
-<area shape="rect" href="classpFlow_1_1Field.html#ab7b53a83f079c1c270e62b192d09068f" title=" " alt="" coords="8,290,199,331"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#adaf3255a26893f538d0e891e77d0d6c7" title=" " alt="" coords="27,355,180,397"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a65fb54f18c87499159f30c6d4514c674" title=" " alt="" coords="8,421,199,462"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a4a088d05c6030840715e4590719ea2f2" title=" " alt="" coords="8,486,199,527"/>
-<area shape="rect" href="classpFlow_1_1twoPartEntry.html#a7ce6240a421692d112846f31793bcd85" title=" " alt="" coords="27,551,180,593"/>
-</map>
 </div>
 
 </div>
@@ -1070,22 +965,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if next operation will fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00196">196</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00198">198</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00208">IOstream::operator bool()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00214">IOstream::operator!()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00210">IOstream::operator bool()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00216">IOstream::operator!()</a>.</p>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a48de1a2345c4519dd5d19c67dcce62ed_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a48de1a2345c4519dd5d19c67dcce62ed_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a48de1a2345c4519dd5d19c67dcce62ed_icgraph" id="classpFlow_1_1IOstream_a48de1a2345c4519dd5d19c67dcce62ed_icgraph">
-<area shape="rect" title="Return true if next operation will fail." alt="" coords="163,31,205,57"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a67b76affb3b5d35fa419ac234144038b" title="Return true if the stream has not failed." alt="" coords="5,5,115,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a61efd4196a96540ee018fee8791f3f10" title="Return true if the stream has failed." alt="" coords="19,56,101,83"/>
-</map>
 </div>
 
 </div>
@@ -1115,29 +1005,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if stream is corrupted. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00202">202</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00204">204</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stlFile_8cpp_source.html#l00029">pFlow::badInput()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="Istream_8cpp_source.html#l00053">Istream::nextValid()</a>, <a class="el" href="iIstream_8cpp_source.html#l00005">iIstream::putBack()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="Field_8cpp_source.html#l00102">Field&lt; VectorDual, int8 &gt;::readField()</a>, <a class="el" href="iEntry_8cpp_source.html#l00032">iEntry&lt; Key, T * &gt;::readKeyword()</a>, <a class="el" href="Field_8cpp_source.html#l00062">Field&lt; VectorDual, int8 &gt;::readNonUniform()</a>, and <a class="el" href="Field_8cpp_source.html#l00023">Field&lt; VectorDual, int8 &gt;::readUniform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stlFile_8cpp_source.html#l00029">pFlow::badInput()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="Istream_8cpp_source.html#l00049">Istream::nextValid()</a>, <a class="el" href="iIstream_8cpp_source.html#l00023">iIstream::putBack()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, and <a class="el" href="iEntry_8cpp_source.html#l00032">iEntry&lt; Key, T * &gt;::readKeyword()</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a9f7290a5d70f30e1b1b42c8ac4a6082d_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a9f7290a5d70f30e1b1b42c8ac4a6082d_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a9f7290a5d70f30e1b1b42c8ac4a6082d_icgraph" id="classpFlow_1_1IOstream_a9f7290a5d70f30e1b1b42c8ac4a6082d_icgraph">
-<area shape="rect" title="Return true if stream is corrupted." alt="" coords="451,216,497,243"/>
-<area shape="rect" href="namespacepFlow.html#a1da2c77e895df3330a9b2a421486be06" title=" " alt="" coords="240,5,367,32"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a133f34e170bc1f28e7439fe87043ce2f" title=" " alt="" coords="5,99,156,141"/>
-<area shape="rect" href="classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3" title=" " alt="" coords="209,107,398,133"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597" title=" " alt="" coords="211,157,395,184"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a12a2f078710c7419e84afd6cdd58ac70" title=" " alt="" coords="204,209,403,250"/>
-<area shape="rect" href="classpFlow_1_1Field.html#ab7b53a83f079c1c270e62b192d09068f" title=" " alt="" coords="208,274,399,315"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#adaf3255a26893f538d0e891e77d0d6c7" title=" " alt="" coords="227,339,380,381"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a65fb54f18c87499159f30c6d4514c674" title=" " alt="" coords="208,405,399,446"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a4a088d05c6030840715e4590719ea2f2" title=" " alt="" coords="208,470,399,511"/>
-</map>
 </div>
 
 </div>
@@ -1167,19 +1045,15 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if the stream has not failed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00208">208</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00210">210</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00196">IOstream::fail()</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00198">IOstream::fail()</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a67b76affb3b5d35fa419ac234144038b_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a67b76affb3b5d35fa419ac234144038b_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a67b76affb3b5d35fa419ac234144038b_cgraph" id="classpFlow_1_1IOstream_a67b76affb3b5d35fa419ac234144038b_cgraph">
-<area shape="rect" title="Return true if the stream has not failed." alt="" coords="5,5,115,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a48de1a2345c4519dd5d19c67dcce62ed" title="Return true if next operation will fail." alt="" coords="163,5,205,32"/>
-</map>
 </div>
 
 </div>
@@ -1209,19 +1083,15 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return true if the stream has failed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00214">214</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00216">216</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00196">IOstream::fail()</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00198">IOstream::fail()</a>.</p>
 <div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a61efd4196a96540ee018fee8791f3f10_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a61efd4196a96540ee018fee8791f3f10_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a61efd4196a96540ee018fee8791f3f10_cgraph" id="classpFlow_1_1IOstream_a61efd4196a96540ee018fee8791f3f10_cgraph">
-<area shape="rect" title="Return true if the stream has failed." alt="" coords="5,5,88,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a48de1a2345c4519dd5d19c67dcce62ed" title="Return true if next operation will fail." alt="" coords="136,5,179,32"/>
-</map>
 </div>
 
 </div>
@@ -1251,61 +1121,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Const access to the current stream line number. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00221">221</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00223">223</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00082">IOstream::lineNumber_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00084">IOstream::lineNumber_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="box_8cpp_source.html#l00043">box::box()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="cylinder_8cpp_source.html#l00099">cylinder::cylinder()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00203">dataEntry::dataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00175">dictionary::dictionary()</a>, <a class="el" href="iBox_8cpp_source.html#l00061">iBox&lt; intType &gt;::iBox()</a>, <a class="el" href="Field_8hpp_source.html#l00252">pFlow::operator&lt;&lt;()</a>, <a class="el" href="Field_8hpp_source.html#l00241">pFlow::operator&gt;&gt;()</a>, <a class="el" href="property_8cpp_source.html#l00114">property::property()</a>, <a class="el" href="iIstream_8cpp_source.html#l00005">iIstream::putBack()</a>, <a class="el" href="Insertion_8cpp_source.html#l00171">Insertion&lt; ShapeType &gt;::read()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00046">timeInterval::read()</a>, <a class="el" href="stlFile_8cpp_source.html#l00292">stlFile::read()</a>, <a class="el" href="Logical_8cpp_source.html#l00065">Logical::read()</a>, <a class="el" href="line_8cpp_source.html#l00082">line::read()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00102">rotatingAxis::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00345">dataEntry::read()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00166">sphereShape::read()</a>, <a class="el" href="fixedWall_8cpp_source.html#l00070">fixedWall::read()</a>, <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00130">rotatingAxisMotion::read()</a>, <a class="el" href="vibratingMotion_8cpp_source.html#l00127">vibratingMotion::read()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00198">multiRotatingAxisMotion::read()</a>, <a class="el" href="dictionary_8cpp_source.html#l00759">dictionary::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>, <a class="el" href="Field_8cpp_source.html#l00102">Field&lt; VectorDual, int8 &gt;::readField()</a>, <a class="el" href="ListI_8hpp_source.html#l00178">List&lt; word &gt;::readList()</a>, <a class="el" href="Field_8cpp_source.html#l00062">Field&lt; VectorDual, int8 &gt;::readNonUniform()</a>, <a class="el" href="pointStructure_8cpp_source.html#l00437">pointStructure::readPointStructure()</a>, <a class="el" href="triSurface_8cpp_source.html#l00191">triSurface::readTriSurface()</a>, <a class="el" href="Field_8cpp_source.html#l00023">Field&lt; VectorDual, int8 &gt;::readUniform()</a>, <a class="el" href="sphere_8cpp_source.html#l00053">sphere::sphere()</a>, <a class="el" href="Insertion_8cpp_source.html#l00198">Insertion&lt; ShapeType &gt;::write()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00366">dataEntry::write()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00186">sphereShape::write()</a>, <a class="el" href="fixedWall_8cpp_source.html#l00091">fixedWall::write()</a>, <a class="el" href="rotatingAxisMotion_8cpp_source.html#l00151">rotatingAxisMotion::write()</a>, <a class="el" href="vibratingMotion_8cpp_source.html#l00148">vibratingMotion::write()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00219">multiRotatingAxisMotion::write()</a>, <a class="el" href="dictionary_8cpp_source.html#l00780">dictionary::write()</a>, and <a class="el" href="pointStructure_8cpp_source.html#l00465">pointStructure::writePointStructure()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="box_8cpp_source.html#l00043">box::box()</a>, <a class="el" href="iEntry_8cpp_source.html#l00064">iEntry&lt; Key, T * &gt;::createEntry()</a>, <a class="el" href="cylinder_8cpp_source.html#l00103">cylinder::cylinder()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00207">dataEntry::dataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00175">dictionary::dictionary()</a>, <a class="el" href="iBox_8cpp_source.html#l00061">iBox&lt; intType &gt;::iBox()</a>, <a class="el" href="Field_8hpp_source.html#l00225">pFlow::operator&lt;&lt;()</a>, <a class="el" href="Field_8hpp_source.html#l00214">pFlow::operator&gt;&gt;()</a>, <a class="el" href="iIstream_8cpp_source.html#l00023">iIstream::putBack()</a>, <a class="el" href="timeInterval_8cpp_source.html#l00046">timeInterval::read()</a>, <a class="el" href="stlFile_8cpp_source.html#l00292">stlFile::read()</a>, <a class="el" href="Logical_8cpp_source.html#l00065">Logical::read()</a>, <a class="el" href="line_8cpp_source.html#l00082">line::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00349">dataEntry::read()</a>, <a class="el" href="rotatingAxis_8cpp_source.html#l00101">rotatingAxis::read()</a>, <a class="el" href="Field_8cpp_source.html#l00023">Field&lt; uint32x3 &gt;::read()</a>, <a class="el" href="triSurface_8cpp_source.html#l00257">triSurface::read()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00198">multiRotatingAxisMotion::read()</a>, <a class="el" href="dictionary_8cpp_source.html#l00772">dictionary::read()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00035">dataEntry::readDataEntry()</a>, <a class="el" href="dictionary_8cpp_source.html#l00037">dictionary::readDictionary()</a>, <a class="el" href="ListI_8hpp_source.html#l00194">List&lt; std::any &gt;::readList()</a>, <a class="el" href="sphere_8cpp_source.html#l00053">sphere::sphere()</a>, <a class="el" href="dataEntry_8cpp_source.html#l00370">dataEntry::write()</a>, <a class="el" href="triSurface_8cpp_source.html#l00282">triSurface::write()</a>, <a class="el" href="multiRotatingAxisMotion_8cpp_source.html#l00219">multiRotatingAxisMotion::write()</a>, and <a class="el" href="dictionary_8cpp_source.html#l00793">dictionary::write()</a>.</p>
 <div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a607efe5fb94edbe4cfa890c4907e76c3_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a607efe5fb94edbe4cfa890c4907e76c3_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a607efe5fb94edbe4cfa890c4907e76c3_icgraph" id="classpFlow_1_1IOstream_a607efe5fb94edbe4cfa890c4907e76c3_icgraph">
-<area shape="rect" title="Const access to the current stream line number." alt="" coords="497,1043,596,1069"/>
-<area shape="rect" href="classpFlow_1_1box.html#afbef9cd91fe90a1d98d27735f6045769" title=" " alt="" coords="285,5,411,32"/>
-<area shape="rect" href="classpFlow_1_1iEntry.html#a133f34e170bc1f28e7439fe87043ce2f" title=" " alt="" coords="27,50,177,91"/>
-<area shape="rect" href="classpFlow_1_1cylinder.html#a6f4f6dc4ed761ed37b22c8c7cd549a96" title=" " alt="" coords="257,309,439,336"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a9ab8c2767c7e28e08d2cfa1dd6320794" title=" " alt="" coords="247,360,449,387"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a5de3e57e04d59bc11f6c540fa5e84ea2" title=" " alt="" coords="277,411,419,453"/>
-<area shape="rect" href="classpFlow_1_1iBox.html#aa7fff19cac1a58f5846ababa9b4f6eb9" title=" " alt="" coords="281,477,415,504"/>
-<area shape="rect" href="namespacepFlow.html#ad77460a4d54e75754c7119d0af751cc7" title=" " alt="" coords="275,528,421,555"/>
-<area shape="rect" href="namespacepFlow.html#a66efa897c8bfc622e127b85c5394e58f" title=" " alt="" coords="275,579,421,605"/>
-<area shape="rect" href="classpFlow_1_1property.html#a150a368cceebc51b7262c035c9d22ca7" title="Construct from file." alt="" coords="255,629,441,656"/>
-<area shape="rect" href="classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597" title=" " alt="" coords="256,157,440,184"/>
-<area shape="rect" href="classpFlow_1_1stlFile.html#af816873151ddb0126e98bb2f914d8ed5" title=" " alt="" coords="30,119,174,145"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a8943dec8dd658ffb5d0c1da773f37d9d" title=" " alt="" coords="31,175,173,217"/>
-<area shape="rect" href="classpFlow_1_1List.html#a18b6e40e2e0511b836d16ae0e7ecf061" title=" " alt="" coords="25,250,179,291"/>
-<area shape="rect" href="classpFlow_1_1Insertion.html#a8148f2b6c694e069c67183105cf17ce4" title=" " alt="" coords="21,679,183,705"/>
-<area shape="rect" href="classpFlow_1_1timeInterval.html#ae1d42751915e8566dac19658cc498ffa" title=" " alt="" coords="273,1035,423,1077"/>
-<area shape="rect" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="272,1101,424,1128"/>
-<area shape="rect" href="classpFlow_1_1line.html#ae1d42751915e8566dac19658cc498ffa" title=" " alt="" coords="283,1152,413,1179"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxis.html#ae1d42751915e8566dac19658cc498ffa" title="Read from input stream is." alt="" coords="274,1203,422,1245"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="264,1269,432,1296"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="25,730,179,771"/>
-<area shape="rect" href="classpFlow_1_1fixedWall.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="18,796,186,823"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxisMotion.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="5,847,199,889"/>
-<area shape="rect" href="classpFlow_1_1vibratingMotion.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="16,913,188,954"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxisMotion.html#aff8e92ab47032ae811d1271161cb9b22" title="Read from input stream is." alt="" coords="9,978,195,1019"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="263,832,433,859"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a12a2f078710c7419e84afd6cdd58ac70" title=" " alt="" coords="249,1321,447,1362"/>
-<area shape="rect" href="classpFlow_1_1Field.html#ab7b53a83f079c1c270e62b192d09068f" title=" " alt="" coords="253,1386,443,1427"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a65fb54f18c87499159f30c6d4514c674" title=" " alt="" coords="253,1451,443,1493"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#addd0db43c233e851c7ef9b357a5fdeba" title=" " alt="" coords="267,1517,429,1558"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#a2109c84ebb41bc6ed8945221e833c40d" title=" " alt="" coords="278,1582,418,1623"/>
-<area shape="rect" href="classpFlow_1_1Field.html#a4a088d05c6030840715e4590719ea2f2" title=" " alt="" coords="253,1647,443,1689"/>
-<area shape="rect" href="classpFlow_1_1sphere.html#a95b6dbeccc5693a32177ec7976e31838" title=" " alt="" coords="265,1713,431,1740"/>
-<area shape="rect" href="classpFlow_1_1Insertion.html#aac753ee6ead0ddcdfb9e74f169c6bcec" title=" " alt="" coords="19,1771,185,1797"/>
-<area shape="rect" href="classpFlow_1_1dataEntry.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="262,2135,434,2161"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="25,1822,179,1863"/>
-<area shape="rect" href="classpFlow_1_1fixedWall.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="16,1888,188,1915"/>
-<area shape="rect" href="classpFlow_1_1rotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="5,1941,199,1982"/>
-<area shape="rect" href="classpFlow_1_1vibratingMotion.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="16,2007,188,2049"/>
-<area shape="rect" href="classpFlow_1_1multiRotatingAxisMotion.html#a6a40de4ceed55b2f78cf3027739dfd91" title="Write to output stream os." alt="" coords="9,2075,195,2117"/>
-<area shape="rect" href="classpFlow_1_1dictionary.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="277,1917,419,1958"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a329d7fb71b168b07c6536afeb97880fa" title=" " alt="" coords="267,2186,429,2227"/>
-</map>
 </div>
 
 </div>
@@ -1335,9 +1161,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Non-const access to the current stream line number. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00227">227</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00229">229</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00082">IOstream::lineNumber_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00084">IOstream::lineNumber_</a>.</p>
 
 </div>
 </div>
@@ -1367,9 +1193,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set the stream line number return the previous value. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00234">234</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00236">236</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00082">IOstream::lineNumber_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00084">IOstream::lineNumber_</a>.</p>
 
 </div>
 </div>
@@ -1400,18 +1226,13 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implemented in <a class="el" href="classpFlow_1_1oTstream.html#ae1cdc69a3d1b9a79aa72ee54c1ea3e44">oTstream</a>, <a class="el" href="classpFlow_1_1iTstream.html#a03ad359247e17b29c93563d7bf4e33c9">iTstream</a>, <a class="el" href="classpFlow_1_1Istream.html#ada47b7405e5eaa26f35e795f291164bf">Istream</a>, and <a class="el" href="classpFlow_1_1Ostream.html#ada47b7405e5eaa26f35e795f291164bf">Ostream</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00281">IOstream::setf()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00297">IOstream::unsetf()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00283">IOstream::setf()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00299">IOstream::unsetf()</a>.</p>
 <div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-14-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_ab6784b88289e1403b616f8ba4d742563_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_ab6784b88289e1403b616f8ba4d742563_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_ab6784b88289e1403b616f8ba4d742563_icgraph" id="classpFlow_1_1IOstream_ab6784b88289e1403b616f8ba4d742563_icgraph">
-<area shape="rect" title="Return flags of stream." alt="" coords="116,31,171,57"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a7496d7abe05bdd8cffe2be14798ac34f" title="Set flags of stream." alt="" coords="13,5,60,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a6215a425470b1a58a0f3e0407f8683ca" title="Unset flags of stream." alt="" coords="5,56,68,83"/>
-</map>
 </div>
 
 </div>
@@ -1441,9 +1262,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Return the default precision. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00245">245</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00247">247</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00064">IOstream::precision_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00066">IOstream::precision_</a>.</p>
 
 </div>
 </div>
@@ -1473,9 +1294,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Reset the default precision return the previous value. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00252">252</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00254">254</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00064">IOstream::precision_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00066">IOstream::precision_</a>.</p>
 
 </div>
 </div>
@@ -1504,9 +1325,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream to have reached eof. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00260">260</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00262">262</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
 </div>
 </div>
@@ -1535,9 +1356,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream to have failed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00266">266</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00268">268</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
 </div>
 </div>
@@ -1566,23 +1387,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set stream to be bad. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00272">272</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00274">274</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00078">IOstream::ioState_</a>.</p>
+<p class="reference">References <a class="el" href="IOstream_8hpp_source.html#l00080">IOstream::ioState_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00121">IOstream::IOstream()</a>, <a class="el" href="iIstreamI_8hpp_source.html#l00129">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="Logical_8cpp_source.html#l00065">Logical::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00123">IOstream::IOstream()</a>, <a class="el" href="iIstreamI_8hpp_source.html#l00129">pFlow::operator&gt;&gt;()</a>, and <a class="el" href="Logical_8cpp_source.html#l00065">Logical::read()</a>.</p>
 <div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-15-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a638b33dd25b3cd8ea7e846f04fd6a6a3_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a638b33dd25b3cd8ea7e846f04fd6a6a3_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a638b33dd25b3cd8ea7e846f04fd6a6a3_icgraph" id="classpFlow_1_1IOstream_a638b33dd25b3cd8ea7e846f04fd6a6a3_icgraph">
-<area shape="rect" title="Set stream to be bad." alt="" coords="205,56,272,83"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#a685ead9e00563a9b3d0c4753eac347a2" title="Default." alt="" coords="40,5,123,32"/>
-<area shape="rect" href="namespacepFlow.html#ac08e23027fc74d4f881e8ad3e4d9db21" title=" " alt="" coords="8,56,155,83"/>
-<area shape="rect" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="5,107,157,133"/>
-</map>
 </div>
 
 </div>
@@ -1643,21 +1458,17 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set flags of stream. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00281">281</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00283">283</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563">IOstream::flags()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00309">pFlow::dec()</a>, <a class="el" href="IOstream_8hpp_source.html#l00327">pFlow::fixed()</a>, <a class="el" href="IOstream_8hpp_source.html#l00315">pFlow::hex()</a>, <a class="el" href="IOstream_8hpp_source.html#l00321">pFlow::oct()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00333">pFlow::scientific()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00311">pFlow::dec()</a>, <a class="el" href="IOstream_8hpp_source.html#l00329">pFlow::fixed()</a>, <a class="el" href="IOstream_8hpp_source.html#l00317">pFlow::hex()</a>, <a class="el" href="IOstream_8hpp_source.html#l00323">pFlow::oct()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00335">pFlow::scientific()</a>.</p>
 <div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-16-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-16-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_cgraph" id="classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_cgraph">
-<area shape="rect" title="Set flags of stream." alt="" coords="5,5,52,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563" title="Return flags of stream." alt="" coords="100,5,155,32"/>
-</map>
 </div>
 <div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -1665,14 +1476,6 @@ Static Protected Attributes</h2></td></tr>
 </div>
 <div id="dynsection-17-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_icgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_icgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_icgraph" id="classpFlow_1_1IOstream_a7496d7abe05bdd8cffe2be14798ac34f_icgraph">
-<area shape="rect" title="Set flags of stream." alt="" coords="460,131,507,157"/>
-<area shape="rect" href="namespacepFlow.html#a7a2a778dad6a63e04760015ff551008f" title=" " alt="" coords="302,68,394,95"/>
-<area shape="rect" href="namespacepFlow.html#a171c38e0982827d99f83781c96c7adcf" title=" " alt="" coords="143,5,236,32"/>
-<area shape="rect" href="namespacepFlow.html#aaa50ebe62a1c05eadd31cf981231a6d2" title=" " alt="" coords="5,68,95,95"/>
-<area shape="rect" href="namespacepFlow.html#a010be5a80d29fca6b0ac9a68d9c94d32" title=" " alt="" coords="297,181,399,208"/>
-<area shape="rect" href="namespacepFlow.html#a4333d7bd717697fd94a3425351e1e4f2" title=" " alt="" coords="284,232,412,259"/>
-</map>
 </div>
 
 </div>
@@ -1713,7 +1516,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Set flags of given field of stream. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00288">288</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00290">290</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563">IOstream::flags()</a>.</p>
 <div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -1722,10 +1525,6 @@ Static Protected Attributes</h2></td></tr>
 </div>
 <div id="dynsection-18-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a7c8972f80cfc853d1b78253abee55f04_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a7c8972f80cfc853d1b78253abee55f04_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a7c8972f80cfc853d1b78253abee55f04_cgraph" id="classpFlow_1_1IOstream_a7c8972f80cfc853d1b78253abee55f04_cgraph">
-<area shape="rect" title="Set flags of given field of stream." alt="" coords="5,5,52,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563" title="Return flags of stream." alt="" coords="100,5,155,32"/>
-</map>
 </div>
 
 </div>
@@ -1756,7 +1555,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Unset flags of stream. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00297">297</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00299">299</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563">IOstream::flags()</a>.</p>
 <div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -1765,10 +1564,6 @@ Static Protected Attributes</h2></td></tr>
 </div>
 <div id="dynsection-19-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1IOstream_a6215a425470b1a58a0f3e0407f8683ca_cgraph.png" border="0" usemap="#classpFlow_1_1IOstream_a6215a425470b1a58a0f3e0407f8683ca_cgraph" alt=""/></div>
-<map name="classpFlow_1_1IOstream_a6215a425470b1a58a0f3e0407f8683ca_cgraph" id="classpFlow_1_1IOstream_a6215a425470b1a58a0f3e0407f8683ca_cgraph">
-<area shape="rect" title="Unset flags of stream." alt="" coords="5,5,68,32"/>
-<area shape="rect" href="classpFlow_1_1IOstream.html#ab6784b88289e1403b616f8ba4d742563" title="Return flags of stream." alt="" coords="116,5,171,32"/>
-</map>
 </div>
 
 </div>
@@ -1796,9 +1591,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Default precision, only works for ASCII. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00064">64</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00066">66</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00245">IOstream::defaultPrecision()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00247">IOstream::defaultPrecision()</a>.</p>
 
 </div>
 </div>
@@ -1824,7 +1619,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Name for any generic stream - normally treat as readonly. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00069">69</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00071">71</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="IOstream_8cpp_source.html#l00031">IOstream::name()</a>.</p>
 
@@ -1852,9 +1647,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Is stream open or closed. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00072">72</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00074">74</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00172">IOstream::closed()</a>, <a class="el" href="IOstream_8hpp_source.html#l00166">IOstream::opened()</a>, <a class="el" href="IOstream_8hpp_source.html#l00094">IOstream::setClosed()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00088">IOstream::setOpened()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00174">IOstream::closed()</a>, <a class="el" href="IOstream_8hpp_source.html#l00168">IOstream::opened()</a>, <a class="el" href="IOstream_8hpp_source.html#l00096">IOstream::setClosed()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00090">IOstream::setOpened()</a>.</p>
 
 </div>
 </div>
@@ -1880,9 +1675,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>write format </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00075">75</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00077">77</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00178">IOstream::isBinary()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00105">IOstream::setWriteFormat()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00180">IOstream::isBinary()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00107">IOstream::setWriteFormat()</a>.</p>
 
 </div>
 </div>
@@ -1908,9 +1703,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>state </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00078">78</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00080">80</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00202">IOstream::bad()</a>, <a class="el" href="IOstream_8hpp_source.html#l00190">IOstream::eof()</a>, <a class="el" href="IOstream_8hpp_source.html#l00196">IOstream::fail()</a>, <a class="el" href="IOstream_8hpp_source.html#l00184">IOstream::good()</a>, <a class="el" href="IOstream_8hpp_source.html#l00272">IOstream::setBad()</a>, <a class="el" href="IOstream_8hpp_source.html#l00260">IOstream::setEof()</a>, <a class="el" href="IOstream_8hpp_source.html#l00266">IOstream::setFail()</a>, <a class="el" href="IOstream_8hpp_source.html#l00111">IOstream::setGood()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00100">IOstream::setState()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00204">IOstream::bad()</a>, <a class="el" href="IOstream_8hpp_source.html#l00192">IOstream::eof()</a>, <a class="el" href="IOstream_8hpp_source.html#l00198">IOstream::fail()</a>, <a class="el" href="IOstream_8hpp_source.html#l00186">IOstream::good()</a>, <a class="el" href="IOstream_8hpp_source.html#l00274">IOstream::setBad()</a>, <a class="el" href="IOstream_8hpp_source.html#l00262">IOstream::setEof()</a>, <a class="el" href="IOstream_8hpp_source.html#l00268">IOstream::setFail()</a>, <a class="el" href="IOstream_8hpp_source.html#l00113">IOstream::setGood()</a>, and <a class="el" href="IOstream_8hpp_source.html#l00102">IOstream::setState()</a>.</p>
 
 </div>
 </div>
@@ -1936,9 +1731,9 @@ Static Protected Attributes</h2></td></tr>
 
 <p>The file line. </p>
 
-<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00082">82</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IOstream_8hpp_source.html#l00084">84</a> of file <a class="el" href="IOstream_8hpp_source.html">IOstream.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00221">IOstream::lineNumber()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="IOstream_8hpp_source.html#l00223">IOstream::lineNumber()</a>.</p>
 
 </div>
 </div>

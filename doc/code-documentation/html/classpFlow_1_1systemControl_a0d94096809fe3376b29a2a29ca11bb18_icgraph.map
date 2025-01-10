@@ -1,6 +1,0 @@
-<map id="time" name="time">
-<area shape="rect" id="node1" title=" " alt="" coords="248,64,300,91"/>
-<area shape="rect" id="node2" href="$namespacepFlow.html#ae5dc60e5c12dc11dab2f816efcd59246" title=" " alt="" coords="23,5,182,32"/>
-<area shape="rect" id="node3" href="$classpFlow_1_1demComponent.html#a476763249b99b131d7116430896cd44e" title="Current simulation time." alt="" coords="16,57,189,98"/>
-<area shape="rect" id="node4" href="$classpFlow_1_1demComponent.html#a4fc823022c8f0175108f10a42e7b858f" title="Time step of integration." alt="" coords="5,123,200,149"/>
-</map>

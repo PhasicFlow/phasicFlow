@@ -1,0 +1,15 @@
+digraph "src/phasicFlow/streams/Fstream/fileStream.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/streams\l/Fstream/fileStream.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/phasicFlow/streams\l/Fstream/fileStream.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$fileStream_8cpp.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/phasicFlow/streams\l/Fstream/iFstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iFstream_8hpp.html",tooltip=" "];
+  Node1 -> Node275 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node275 [label="src/phasicFlow/streams\l/Fstream/oFstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$oFstream_8hpp.html",tooltip=" "];
+  Node1 -> Node277 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node277 [label="utilities/pFlowToVTK\l/fileSeries.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$fileSeries_8hpp.html",tooltip=" "];
+}

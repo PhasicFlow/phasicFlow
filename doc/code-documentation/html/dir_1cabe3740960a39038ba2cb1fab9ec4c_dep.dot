@@ -1,0 +1,20 @@
+digraph "src/phasicFlow/streams/Fstream" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_b13948a90891cb8a59f39ab8c50a8102 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="streams" fontname="Helvetica", fontsize="10", URL="dir_b13948a90891cb8a59f39ab8c50a8102.html"]
+  dir_1cabe3740960a39038ba2cb1fab9ec4c [shape=box, label="Fstream", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_1cabe3740960a39038ba2cb1fab9ec4c.html"];
+  }
+  dir_f0792bbf1949bfb891fb576079464319 [shape=box label="fileSystem" URL="dir_f0792bbf1949bfb891fb576079464319.html"];
+  dir_5f6559faa080c0b07ec2a71fd7e912fc [shape=box label="globals" URL="dir_5f6559faa080c0b07ec2a71fd7e912fc.html"];
+  dir_40d84a547212027edc83c31468d15508 [shape=box label="smartPointers" URL="dir_40d84a547212027edc83c31468d15508.html"];
+  dir_7b330c61a9c831e500520a1387f6b9d0 [shape=box label="Stream" URL="dir_7b330c61a9c831e500520a1387f6b9d0.html"];
+  dir_1cabe3740960a39038ba2cb1fab9ec4c->dir_f0792bbf1949bfb891fb576079464319 [headlabel="3", labeldistance=1.5 headhref="dir_000133_000116.html"];
+  dir_1cabe3740960a39038ba2cb1fab9ec4c->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="1", labeldistance=1.5 headhref="dir_000133_000117.html"];
+  dir_1cabe3740960a39038ba2cb1fab9ec4c->dir_40d84a547212027edc83c31468d15508 [headlabel="1", labeldistance=1.5 headhref="dir_000133_000130.html"];
+  dir_1cabe3740960a39038ba2cb1fab9ec4c->dir_7b330c61a9c831e500520a1387f6b9d0 [headlabel="2", labeldistance=1.5 headhref="dir_000133_000137.html"];
+  dir_f0792bbf1949bfb891fb576079464319->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="1", labeldistance=1.5 headhref="dir_000116_000117.html"];
+  dir_40d84a547212027edc83c31468d15508->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="2", labeldistance=1.5 headhref="dir_000130_000117.html"];
+  dir_7b330c61a9c831e500520a1387f6b9d0->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="2", labeldistance=1.5 headhref="dir_000137_000117.html"];
+}

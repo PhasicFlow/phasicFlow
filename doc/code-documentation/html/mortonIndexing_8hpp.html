@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: src/phasicFlow/structuredData/pointStructure/mortonIndexing.hpp File Reference</title>
+<title>PhasicFlow: src/phasicFlow/structuredData/pointStructure/pointStructure/pointSorting/mortonIndexing.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -114,25 +114,14 @@ $(document).ready(function(){initNavTree('mortonIndexing_8hpp.html',''); initRes
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="mortonIndexing_8hpp__incl.png" border="0" usemap="#src_2phasicFlow_2structuredData_2pointStructure_2mortonIndexing_8hpp" alt=""/></div>
-<map name="src_2phasicFlow_2structuredData_2pointStructure_2mortonIndexing_8hpp" id="src_2phasicFlow_2structuredData_2pointStructure_2mortonIndexing_8hpp">
-<area shape="rect" title=" " alt="" coords="5,5,289,47"/>
-<area shape="rect" href="types_8hpp.html" title=" " alt="" coords="67,169,153,196"/>
-<area shape="rect" href="box_8hpp.html" title=" " alt="" coords="110,95,185,121"/>
-<area shape="rect" href="indexContainer_8hpp.html" title=" " alt="" coords="209,95,358,121"/>
-</map>
+<div class="center"><img src="mortonIndexing_8hpp__incl.png" border="0" usemap="#src_2phasicFlow_2structuredData_2pointStructure_2pointStructure_2pointSorting_2mortonIndexing_8hpp" alt=""/></div>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="mortonIndexing_8hpp__dep__incl.png" border="0" usemap="#src_2phasicFlow_2structuredData_2pointStructure_2mortonIndexing_8hppdep" alt=""/></div>
-<map name="src_2phasicFlow_2structuredData_2pointStructure_2mortonIndexing_8hppdep" id="src_2phasicFlow_2structuredData_2pointStructure_2mortonIndexing_8hppdep">
-<area shape="rect" title=" " alt="" coords="155,5,439,47"/>
-<area shape="rect" href="mortonIndexing_8cpp.html" title=" " alt="" coords="5,95,288,136"/>
-<area shape="rect" href="pointStructure_8cpp.html" title=" " alt="" coords="312,95,584,136"/>
-</map>
+<div class="center"><img src="mortonIndexing_8hpp__dep__incl.png" border="0" usemap="#src_2phasicFlow_2structuredData_2pointStructure_2pointStructure_2pointSorting_2mortonIndexing_8hppdep" alt=""/></div>
 </div>
 </div>
 <p><a href="mortonIndexing_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -149,8 +138,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a493862193d78c409ce4ddb2b4d49c17f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a493862193d78c409ce4ddb2b4d49c17f">getSortedIndex</a> (box boundingBox, real dx, range activeRange, ViewType1D&lt; realx3 &gt; pos, ViewType1D&lt; int8 &gt; flag, int32IndexContainer &amp;sortedIndex)</td></tr>
-<tr class="separator:a493862193d78c409ce4ddb2b4d49c17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0326b52c0c892dc9732af2580c7bfe6d"><td class="memItemLeft" align="right" valign="top">uint32IndexContainer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a0326b52c0c892dc9732af2580c7bfe6d">getSortedIndices</a> (box boundingBox, real dx, const ViewType1D&lt; realx3 &gt; &amp;pos, const pFlagTypeDevice &amp;flag)</td></tr>
+<tr class="separator:a0326b52c0c892dc9732af2580c7bfe6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09e092ab61b90f5515d60a7eb0d7e524"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#a09e092ab61b90f5515d60a7eb0d7e524">splitBy3</a> (const uint64_t val)</td></tr>
 <tr class="separator:a09e092ab61b90f5515d60a7eb0d7e524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9e399d88da408c52c6c167b651766e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">INLINE_FUNCTION_HD</a> uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepFlow.html#af9e399d88da408c52c6c167b651766e5">xyzToMortonCode64</a> (uint64_t x, uint64_t y, uint64_t z)</td></tr>
@@ -164,7 +153,7 @@ Functions</h2></td></tr>
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html">structuredData</a></li><li class="navelem"><a class="el" href="dir_40d089f5b6543888409b0c9c3858ee92.html">pointStructure</a></li><li class="navelem"><a class="el" href="mortonIndexing_8hpp.html">mortonIndexing.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_0b265ec0eb5bc5fbad75b6fd7b5b024b.html">structuredData</a></li><li class="navelem"><a class="el" href="dir_40d089f5b6543888409b0c9c3858ee92.html">pointStructure</a></li><li class="navelem"><a class="el" href="dir_ab1bedec1dabb2ed23fd7ef97be7faaf.html">pointStructure</a></li><li class="navelem"><a class="el" href="dir_ac99ced07b260fc3f919077327d70a7b.html">pointSorting</a></li><li class="navelem"><a class="el" href="mortonIndexing_8hpp.html">mortonIndexing.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -132,35 +132,32 @@ $(document).ready(function(){initNavTree('objectFile_8cpp_source.html',''); init
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; name</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    name_(name),</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    rFlag_(READ_NEVER),</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    wFlag_(WRITE_NEVER),</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    localPath_(<span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="classpFlow_1_1objectFile.html#a03145445e47fe40d36071d3207e4eaae">pFlow::objectFile::objectFile</a></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpFlow_1_1objectFile.html#a9ee713efe0634b6da3063aa707ecdeff">   35</a></span>&#160;(</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp;             name,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>&amp;       localPath,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">readFlag</a>&amp;         rf, </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">writeFlag</a>&amp;        wf,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">bool</span>  rwHeader</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    name_(name),</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    rFlag_(rf),</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    wFlag_(wf),</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    localPath_(localPath),</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    readWriteHeader_(rwHeader)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    name_(name)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="classpFlow_1_1objectFile.html#a03145445e47fe40d36071d3207e4eaae">pFlow::objectFile::objectFile</a></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classpFlow_1_1objectFile.html#a697165e3ce0c66f2e8b3cd10ceabbc1f">   32</a></span>&#160;(</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp;         name,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1fileSystem.html">fileSystem</a>&amp;   localPath,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">readFlag</a>&amp;     rf, </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">writeFlag</a>&amp;    wf,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span>  rwHeader</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    name_(name),</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    rFlag_(rf),</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    wFlag_(wf),</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    localPath_(localPath),</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    readWriteHeader_(rwHeader)  </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasspFlow_1_1objectFile_html_a03145445e47fe40d36071d3207e4eaae"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a03145445e47fe40d36071d3207e4eaae">pFlow::objectFile::objectFile</a></div><div class="ttdeci">objectFile(const word &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8cpp_source.html#l00024">objectFile.cpp:24</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1objectFile_html_a314ebf993d731f5b477f5b2670de2135"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">pFlow::objectFile::readFlag</a></div><div class="ttdeci">readFlag</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00037">objectFile.hpp:37</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1objectFile_html_a167fce7aaf9bbff61e0e5ad4815d09fb"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">pFlow::objectFile::writeFlag</a></div><div class="ttdeci">writeFlag</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00044">objectFile.hpp:44</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00063">fileSystem.hpp:63</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a314ebf993d731f5b477f5b2670de2135"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">pFlow::objectFile::readFlag</a></div><div class="ttdeci">readFlag</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00034">objectFile.hpp:34</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1objectFile_html_a167fce7aaf9bbff61e0e5ad4815d09fb"><div class="ttname"><a href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">pFlow::objectFile::writeFlag</a></div><div class="ttdeci">writeFlag</div><div class="ttdef"><b>Definition:</b> <a href="objectFile_8hpp_source.html#l00041">objectFile.hpp:41</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1fileSystem_html"><div class="ttname"><a href="classpFlow_1_1fileSystem.html">pFlow::fileSystem</a></div><div class="ttdoc">Manages file pathes, manupulate and combines them.</div><div class="ttdef"><b>Definition:</b> <a href="fileSystem_8hpp_source.html#l00071">fileSystem.hpp:71</a></div></div>
 <div class="ttc" id="aobjectFile_8hpp_html"><div class="ttname"><a href="objectFile_8hpp.html">objectFile.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

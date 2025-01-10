@@ -104,8 +104,8 @@ $(document).ready(function(){initNavTree('classpFlow_1_1geometryMotion.html','')
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classpFlow_1_1geometryMotion-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">geometryMotion&lt; MotionModelType &gt; Class Template Reference</div>  </div>
@@ -117,10 +117,6 @@ $(document).ready(function(){initNavTree('classpFlow_1_1geometryMotion.html','')
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1geometryMotion__inherit__graph.png" border="0" usemap="#geometryMotion_3_01MotionModelType_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="geometryMotion_3_01MotionModelType_01_4_inherit__map" id="geometryMotion_3_01MotionModelType_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,236,121"/>
-<area shape="rect" href="classpFlow_1_1geometry.html" title="Base class for geometry for managing tri&#45;surfaces, geometry motion, and surface physical properties." alt="" coords="78,5,163,32"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for geometryMotion&lt; MotionModelType &gt;:</div>
@@ -128,63 +124,56 @@ $(document).ready(function(){initNavTree('classpFlow_1_1geometryMotion.html','')
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1geometryMotion__coll__graph.png" border="0" usemap="#geometryMotion_3_01MotionModelType_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="geometryMotion_3_01MotionModelType_01_4_coll__map" id="geometryMotion_3_01MotionModelType_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="151,109,382,151"/>
-<area shape="rect" href="classpFlow_1_1geometry.html" title="Base class for geometry for managing tri&#45;surfaces, geometry motion, and surface physical properties." alt="" coords="5,5,91,32"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html" title=" " alt="" coords="115,5,264,32"/>
-<area shape="rect" href="classpFlow_1_1Timer.html" title=" " alt="" coords="316,5,375,32"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html" title=" " alt="" coords="423,5,580,32"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:aa9e07d97b52977c430296b2c3388a3ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#aa9e07d97b52977c430296b2c3388a3ba">MotionModel</a> = MotionModelType</td></tr>
 <tr class="separator:aa9e07d97b52977c430296b2c3388a3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ea8848f2646407a27a71f6d8c454fbc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a3ea8848f2646407a27a71f6d8c454fbc">ModelComponent</a> = typename MotionModelType::ModelComponent</td></tr>
+<tr class="separator:a3ea8848f2646407a27a71f6d8c454fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classpFlow_1_1objectFile"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classpFlow_1_1objectFile')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a></td></tr>
+<tr class="memitem:a314ebf993d731f5b477f5b2670de2135 inherit pub_types_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">readFlag</a> { <a class="el" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135ae52db7f5bc766c98892c85b3da80035d">READ_ALWAYS</a>, 
+<a class="el" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a5d213848a5257045c66f1131ba592588">READ_NEVER</a>, 
+<a class="el" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135a93b5e7478325255e6d8414b6b2ccc6f0">READ_IF_PRESENT</a>
+ }</td></tr>
+<tr class="separator:a314ebf993d731f5b477f5b2670de2135 inherit pub_types_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a167fce7aaf9bbff61e0e5ad4815d09fb inherit pub_types_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">writeFlag</a> { <a class="el" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fba37ad78d623d69d7a70f565528efc0f59">WRITE_ALWAYS</a>, 
+<a class="el" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fbad27c52a51ad59856941a9597905f9130">WRITE_NEVER</a>
+ }</td></tr>
+<tr class="separator:a167fce7aaf9bbff61e0e5ad4815d09fb inherit pub_types_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af734451fe09f29bc73f088a1165cd9c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#af734451fe09f29bc73f088a1165cd9c8">TypeInfoTemplate</a> (&quot;geometry&quot;, MotionModel)</td></tr>
-<tr class="memdesc:af734451fe09f29bc73f088a1165cd9c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1geometryMotion.html#af734451fe09f29bc73f088a1165cd9c8">More...</a><br /></td></tr>
-<tr class="separator:af734451fe09f29bc73f088a1165cd9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b7c3011f25758e9b1c38be09cbec019"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a0b7c3011f25758e9b1c38be09cbec019">TypeInfoTemplate11</a> (&quot;geometry&quot;, ModelComponent)</td></tr>
+<tr class="memdesc:a0b7c3011f25758e9b1c38be09cbec019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1geometryMotion.html#a0b7c3011f25758e9b1c38be09cbec019">More...</a><br /></td></tr>
+<tr class="separator:a0b7c3011f25758e9b1c38be09cbec019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadd6768683cbd8b10f793e2af30a2d11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#aadd6768683cbd8b10f793e2af30a2d11">geometryMotion</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop)</td></tr>
 <tr class="separator:aadd6768683cbd8b10f793e2af30a2d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d627b8ad6221788d08e9f36864e69dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a1d627b8ad6221788d08e9f36864e69dc">geometryMotion</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;propName, const <a class="el" href="classpFlow_1_1geometryMotion.html#aa9e07d97b52977c430296b2c3388a3ba">MotionModel</a> &amp;motionModel)</td></tr>
-<tr class="separator:a1d627b8ad6221788d08e9f36864e69dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af26a65d569c0bec37e2d7c508446c186"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#af26a65d569c0bec37e2d7c508446c186">geometryMotion</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;propName)</td></tr>
-<tr class="memdesc:af26a65d569c0bec37e2d7c508446c186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from components and dictionary that contains motionModel.  <a href="classpFlow_1_1geometryMotion.html#af26a65d569c0bec37e2d7c508446c186">More...</a><br /></td></tr>
-<tr class="separator:af26a65d569c0bec37e2d7c508446c186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff925c617119bb9b3eb8ce1f76d75baf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#aff925c617119bb9b3eb8ce1f76d75baf">geometryMotion</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;surf, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;materialName, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;motionDict)</td></tr>
+<tr class="separator:aff925c617119bb9b3eb8ce1f76d75baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba2169cbf27fa162285c89ae00effd86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#aba2169cbf27fa162285c89ae00effd86">add_vCtor</a> (<a class="el" href="classpFlow_1_1geometry.html">geometry</a>, <a class="el" href="classpFlow_1_1geometryMotion.html">geometryMotion</a>, <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>)</td></tr>
 <tr class="memdesc:aba2169cbf27fa162285c89ae00effd86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add virtual constructor.  <a href="classpFlow_1_1geometryMotion.html#aba2169cbf27fa162285c89ae00effd86">More...</a><br /></td></tr>
 <tr class="separator:aba2169cbf27fa162285c89ae00effd86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab29742cc7fc1c712e53db02bebb202db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#ab29742cc7fc1c712e53db02bebb202db">add_vCtor</a> (<a class="el" href="classpFlow_1_1geometry.html">geometry</a>, <a class="el" href="classpFlow_1_1geometryMotion.html">geometryMotion</a>, <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a>)</td></tr>
 <tr class="memdesc:ab29742cc7fc1c712e53db02bebb202db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add virtual constructor.  <a href="classpFlow_1_1geometryMotion.html#ab29742cc7fc1c712e53db02bebb202db">More...</a><br /></td></tr>
 <tr class="separator:ab29742cc7fc1c712e53db02bebb202db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a732cf929502a91dd8ec6d2bf7b457ed1"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a732cf929502a91dd8ec6d2bf7b457ed1">getModel</a> (<a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t) const</td></tr>
-<tr class="memdesc:a732cf929502a91dd8ec6d2bf7b457ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain motion model at time t.  <a href="classpFlow_1_1geometryMotion.html#a732cf929502a91dd8ec6d2bf7b457ed1">More...</a><br /></td></tr>
-<tr class="separator:a732cf929502a91dd8ec6d2bf7b457ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b3b896e6acc398480105c62c41ea132"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a5b3b896e6acc398480105c62c41ea132">getModel</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> iter, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> <a class="el" href="classpFlow_1_1demComponent.html#a987c4fc5fe3a75305eede553d3efc279">dt</a>) const</td></tr>
+<tr class="memdesc:a5b3b896e6acc398480105c62c41ea132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain motion model at time t.  <a href="classpFlow_1_1geometryMotion.html#a5b3b896e6acc398480105c62c41ea132">More...</a><br /></td></tr>
+<tr class="separator:a5b3b896e6acc398480105c62c41ea132"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a873dc8b9ece45d64a0643cc1cdc23f9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a873dc8b9ece45d64a0643cc1cdc23f9d">motionModelTypeName</a> () const override</td></tr>
 <tr class="memdesc:a873dc8b9ece45d64a0643cc1cdc23f9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TypeName / TypeInfo of motion model.  <a href="classpFlow_1_1geometryMotion.html#a873dc8b9ece45d64a0643cc1cdc23f9d">More...</a><br /></td></tr>
 <tr class="separator:a873dc8b9ece45d64a0643cc1cdc23f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a129b21a2dfc68f334219911d986e2f6a"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a129b21a2dfc68f334219911d986e2f6a">triMotionIndex</a> () const override</td></tr>
-<tr class="memdesc:a129b21a2dfc68f334219911d986e2f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to motion model index of triangles.  <a href="classpFlow_1_1geometryMotion.html#a129b21a2dfc68f334219911d986e2f6a">More...</a><br /></td></tr>
-<tr class="separator:a129b21a2dfc68f334219911d986e2f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd88b3cff5454fa5b3f6cf13090ec244"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#abd88b3cff5454fa5b3f6cf13090ec244">pointMotionIndex</a> () const override</td></tr>
-<tr class="memdesc:abd88b3cff5454fa5b3f6cf13090ec244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to motion model index of points.  <a href="classpFlow_1_1geometryMotion.html#abd88b3cff5454fa5b3f6cf13090ec244">More...</a><br /></td></tr>
-<tr class="separator:abd88b3cff5454fa5b3f6cf13090ec244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada71b97666fe3f66b31690bf12633c32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#ada71b97666fe3f66b31690bf12633c32">beforeIteration</a> () override</td></tr>
-<tr class="memdesc:ada71b97666fe3f66b31690bf12633c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operations before each iteration.  <a href="classpFlow_1_1geometryMotion.html#ada71b97666fe3f66b31690bf12633c32">More...</a><br /></td></tr>
-<tr class="separator:ada71b97666fe3f66b31690bf12633c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb310baae93b05bda714a91ba6a4e1e"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a1eb310baae93b05bda714a91ba6a4e1e">triMotionIndex</a> () const override</td></tr>
+<tr class="memdesc:a1eb310baae93b05bda714a91ba6a4e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to motion model index of triangles.  <a href="classpFlow_1_1geometryMotion.html#a1eb310baae93b05bda714a91ba6a4e1e">More...</a><br /></td></tr>
+<tr class="separator:a1eb310baae93b05bda714a91ba6a4e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6558ab2c9b909af46b2a1de1654ba2"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#add6558ab2c9b909af46b2a1de1654ba2">pointMotionIndex</a> () const override</td></tr>
+<tr class="memdesc:add6558ab2c9b909af46b2a1de1654ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to motion model index of points.  <a href="classpFlow_1_1geometryMotion.html#add6558ab2c9b909af46b2a1de1654ba2">More...</a><br /></td></tr>
+<tr class="separator:add6558ab2c9b909af46b2a1de1654ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa767bddda52eb71cea18f755e17d559"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#afa767bddda52eb71cea18f755e17d559">iterate</a> () override</td></tr>
 <tr class="memdesc:afa767bddda52eb71cea18f755e17d559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate geometry one time step <br  />
   <a href="classpFlow_1_1geometryMotion.html#afa767bddda52eb71cea18f755e17d559">More...</a><br /></td></tr>
 <tr class="separator:afa767bddda52eb71cea18f755e17d559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ab4b6c611c3256e54f51bbfc484d58e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a5ab4b6c611c3256e54f51bbfc484d58e">afterIteration</a> () override</td></tr>
-<tr class="memdesc:a5ab4b6c611c3256e54f51bbfc484d58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operations after each iteration.  <a href="classpFlow_1_1geometryMotion.html#a5ab4b6c611c3256e54f51bbfc484d58e">More...</a><br /></td></tr>
-<tr class="separator:a5ab4b6c611c3256e54f51bbfc484d58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a724ed55f42bb7cbfa076aaa5a4afe9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a2a724ed55f42bb7cbfa076aaa5a4afe9">moveGeometry</a> ()</td></tr>
-<tr class="memdesc:a2a724ed55f42bb7cbfa076aaa5a4afe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move geometry.  <a href="classpFlow_1_1geometryMotion.html#a2a724ed55f42bb7cbfa076aaa5a4afe9">More...</a><br /></td></tr>
-<tr class="separator:a2a724ed55f42bb7cbfa076aaa5a4afe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpFlow_1_1geometry"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1geometry')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1geometry.html">geometry</a></td></tr>
 <tr class="memitem:ab011cb0b8d92100d9e30bf9b043e22ec inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ab011cb0b8d92100d9e30bf9b043e22ec">TypeInfo</a> (&quot;geometry&quot;)</td></tr>
 <tr class="memdesc:ab011cb0b8d92100d9e30bf9b043e22ec inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1geometry.html#ab011cb0b8d92100d9e30bf9b043e22ec">More...</a><br /></td></tr>
@@ -192,72 +181,272 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac25e8dbd64a3856d6689171eff4efa66 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ac25e8dbd64a3856d6689171eff4efa66">geometry</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop)</td></tr>
 <tr class="memdesc:ac25e8dbd64a3856d6689171eff4efa66 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from controlSystem and property, for reading from file.  <a href="classpFlow_1_1geometry.html#ac25e8dbd64a3856d6689171eff4efa66">More...</a><br /></td></tr>
 <tr class="separator:ac25e8dbd64a3856d6689171eff4efa66 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45821ed469c5b0e50991c961cfa5c7a1 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a45821ed469c5b0e50991c961cfa5c7a1">geometry</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;propName)</td></tr>
-<tr class="memdesc:a45821ed469c5b0e50991c961cfa5c7a1 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from components.  <a href="classpFlow_1_1geometry.html#a45821ed469c5b0e50991c961cfa5c7a1">More...</a><br /></td></tr>
-<tr class="separator:a45821ed469c5b0e50991c961cfa5c7a1 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a546dab9ad55ee8ff19f014fd4bcd51d8 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a546dab9ad55ee8ff19f014fd4bcd51d8">geometry</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;propName)</td></tr>
-<tr class="memdesc:a546dab9ad55ee8ff19f014fd4bcd51d8 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from components and dictionary that contains motionModel.  <a href="classpFlow_1_1geometry.html#a546dab9ad55ee8ff19f014fd4bcd51d8">More...</a><br /></td></tr>
-<tr class="separator:a546dab9ad55ee8ff19f014fd4bcd51d8 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1501b61d9cbfeb44a1a8b4296d9d2efe inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a1501b61d9cbfeb44a1a8b4296d9d2efe">~geometry</a> ()=default</td></tr>
-<tr class="memdesc:a1501b61d9cbfeb44a1a8b4296d9d2efe inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1geometry.html#a1501b61d9cbfeb44a1a8b4296d9d2efe">More...</a><br /></td></tr>
-<tr class="separator:a1501b61d9cbfeb44a1a8b4296d9d2efe inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1fc96217aa34712c6c1c5bdf6b63f85 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ac1fc96217aa34712c6c1c5bdf6b63f85">geometry</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;surf, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;materialName, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;motionDict)</td></tr>
+<tr class="separator:ac1fc96217aa34712c6c1c5bdf6b63f85 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d59f88e1c9540487c113a12269191a inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a64d59f88e1c9540487c113a12269191a">~geometry</a> () override=default</td></tr>
+<tr class="memdesc:a64d59f88e1c9540487c113a12269191a inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from components.  <a href="classpFlow_1_1geometry.html#a64d59f88e1c9540487c113a12269191a">More...</a><br /></td></tr>
+<tr class="separator:a64d59f88e1c9540487c113a12269191a inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61626d28ba7a75a00e366996bc67a9bb inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a61626d28ba7a75a00e366996bc67a9bb">create_vCtor</a> (<a class="el" href="classpFlow_1_1geometry.html">geometry</a>, <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>,(<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop),(<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, prop))</td></tr>
 <tr class="memdesc:a61626d28ba7a75a00e366996bc67a9bb inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual constructor.  <a href="classpFlow_1_1geometry.html#a61626d28ba7a75a00e366996bc67a9bb">More...</a><br /></td></tr>
 <tr class="separator:a61626d28ba7a75a00e366996bc67a9bb inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbb907dea32f7c223cac730a70b1235c inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#adbb907dea32f7c223cac730a70b1235c">create_vCtor</a> (<a class="el" href="classpFlow_1_1geometry.html">geometry</a>, <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a>,(<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;propName),(<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, prop, dict, <a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, motionCompName, propName))</td></tr>
-<tr class="memdesc:adbb907dea32f7c223cac730a70b1235c inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual constructor.  <a href="classpFlow_1_1geometry.html#adbb907dea32f7c223cac730a70b1235c">More...</a><br /></td></tr>
-<tr class="separator:adbb907dea32f7c223cac730a70b1235c inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10efdf47ffedbdc720f71c2f72b98d98 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a> () const</td></tr>
-<tr class="memdesc:a10efdf47ffedbdc720f71c2f72b98d98 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of tri-surface.  <a href="classpFlow_1_1geometry.html#a10efdf47ffedbdc720f71c2f72b98d98">More...</a><br /></td></tr>
-<tr class="separator:a10efdf47ffedbdc720f71c2f72b98d98 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb74207a2d63f7250901157fdb8a7e91 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#abb74207a2d63f7250901157fdb8a7e91">numPoints</a> () const</td></tr>
-<tr class="memdesc:abb74207a2d63f7250901157fdb8a7e91 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of points in the set of surface walls.  <a href="classpFlow_1_1geometry.html#abb74207a2d63f7250901157fdb8a7e91">More...</a><br /></td></tr>
-<tr class="separator:abb74207a2d63f7250901157fdb8a7e91 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8b4cc518ac3e2a143decb528f10a89c inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#af8b4cc518ac3e2a143decb528f10a89c">numTriangles</a> () const</td></tr>
-<tr class="memdesc:af8b4cc518ac3e2a143decb528f10a89c inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of triangles in the set of surface walls.  <a href="classpFlow_1_1geometry.html#af8b4cc518ac3e2a143decb528f10a89c">More...</a><br /></td></tr>
-<tr class="separator:af8b4cc518ac3e2a143decb528f10a89c inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1aa7da69f2e95c6b2eb63738fc7e993d inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a1aa7da69f2e95c6b2eb63738fc7e993d">points</a> () const</td></tr>
-<tr class="memdesc:a1aa7da69f2e95c6b2eb63738fc7e993d inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the points.  <a href="classpFlow_1_1geometry.html#a1aa7da69f2e95c6b2eb63738fc7e993d">More...</a><br /></td></tr>
-<tr class="separator:a1aa7da69f2e95c6b2eb63738fc7e993d inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03f51fad63ba4ca00e8838615503b30b inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a03f51fad63ba4ca00e8838615503b30b">vertices</a> () const</td></tr>
-<tr class="memdesc:a03f51fad63ba4ca00e8838615503b30b inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the vertices.  <a href="classpFlow_1_1geometry.html#a03f51fad63ba4ca00e8838615503b30b">More...</a><br /></td></tr>
-<tr class="separator:a03f51fad63ba4ca00e8838615503b30b inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87ba6f8c358a11dfd2b456d8e488f69a inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a87ba6f8c358a11dfd2b456d8e488f69a">getTriangleAccessor</a> () const</td></tr>
-<tr class="memdesc:a87ba6f8c358a11dfd2b456d8e488f69a inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain an object for accessing triangles.  <a href="classpFlow_1_1geometry.html#a87ba6f8c358a11dfd2b456d8e488f69a">More...</a><br /></td></tr>
-<tr class="separator:a87ba6f8c358a11dfd2b456d8e488f69a inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a147c23de2c3862a69d6e0ef3db11c63a inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a147c23de2c3862a69d6e0ef3db11c63a">surface</a> ()</td></tr>
-<tr class="memdesc:a147c23de2c3862a69d6e0ef3db11c63a inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surface.  <a href="classpFlow_1_1geometry.html#a147c23de2c3862a69d6e0ef3db11c63a">More...</a><br /></td></tr>
-<tr class="separator:a147c23de2c3862a69d6e0ef3db11c63a inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac68c3b2e395ce30e055cf899325eac25 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ac68c3b2e395ce30e055cf899325eac25">surface</a> () const</td></tr>
-<tr class="memdesc:ac68c3b2e395ce30e055cf899325eac25 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surface.  <a href="classpFlow_1_1geometry.html#ac68c3b2e395ce30e055cf899325eac25">More...</a><br /></td></tr>
-<tr class="separator:ac68c3b2e395ce30e055cf899325eac25 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef06e1b48a01ef1e9f00f5d7f4940718 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#afd682516555bc9f529677a279d60eba6">realx3TriSurfaceField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#aef06e1b48a01ef1e9f00f5d7f4940718">contactForceWall</a> ()</td></tr>
-<tr class="memdesc:aef06e1b48a01ef1e9f00f5d7f4940718 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to contact force.  <a href="classpFlow_1_1geometry.html#aef06e1b48a01ef1e9f00f5d7f4940718">More...</a><br /></td></tr>
-<tr class="separator:aef06e1b48a01ef1e9f00f5d7f4940718 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51b8aac096884d0ec9d40e1384a09ecb inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#afd682516555bc9f529677a279d60eba6">realx3TriSurfaceField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a51b8aac096884d0ec9d40e1384a09ecb">contactForceWall</a> () const</td></tr>
-<tr class="memdesc:a51b8aac096884d0ec9d40e1384a09ecb inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to contact force.  <a href="classpFlow_1_1geometry.html#a51b8aac096884d0ec9d40e1384a09ecb">More...</a><br /></td></tr>
-<tr class="separator:a51b8aac096884d0ec9d40e1384a09ecb inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83099f2340981c3bde470003475a4287 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a83099f2340981c3bde470003475a4287">create_vCtor</a> (<a class="el" href="classpFlow_1_1geometry.html">geometry</a>, <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a>,(<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;surf, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;materialName, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;motionDic),(<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, prop, surf, motionCompName, materialName, motionDic))</td></tr>
+<tr class="memdesc:a83099f2340981c3bde470003475a4287 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual constructor.  <a href="classpFlow_1_1geometry.html#a83099f2340981c3bde470003475a4287">More...</a><br /></td></tr>
+<tr class="separator:a83099f2340981c3bde470003475a4287 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b71016133cac5d9b19995fab0cb4958 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a1b71016133cac5d9b19995fab0cb4958">motionComponentName</a> () const</td></tr>
+<tr class="separator:a1b71016133cac5d9b19995fab0cb4958 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f8723fdc6d8f60469782c1b5ba7864c inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a7f8723fdc6d8f60469782c1b5ba7864c">contactForceWall</a> ()</td></tr>
+<tr class="memdesc:a7f8723fdc6d8f60469782c1b5ba7864c inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to contact force.  <a href="classpFlow_1_1geometry.html#a7f8723fdc6d8f60469782c1b5ba7864c">More...</a><br /></td></tr>
+<tr class="separator:a7f8723fdc6d8f60469782c1b5ba7864c inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cbbc4e89028e9ef3b708b21dadb2ec0 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a9cbbc4e89028e9ef3b708b21dadb2ec0">contactForceWall</a> () const</td></tr>
+<tr class="memdesc:a9cbbc4e89028e9ef3b708b21dadb2ec0 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to contact force.  <a href="classpFlow_1_1geometry.html#a9cbbc4e89028e9ef3b708b21dadb2ec0">More...</a><br /></td></tr>
+<tr class="separator:a9cbbc4e89028e9ef3b708b21dadb2ec0 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a3baa8b7c6c6e9f3fda2e1e0db44282 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a5a3baa8b7c6c6e9f3fda2e1e0db44282">propertyId</a> () const</td></tr>
+<tr class="memdesc:a5a3baa8b7c6c6e9f3fda2e1e0db44282 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Property ide of triangles.  <a href="classpFlow_1_1geometry.html#a5a3baa8b7c6c6e9f3fda2e1e0db44282">More...</a><br /></td></tr>
+<tr class="separator:a5a3baa8b7c6c6e9f3fda2e1e0db44282 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae92e6c96932a7b87524f81f88752d520 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ae92e6c96932a7b87524f81f88752d520">wallProperty</a> () const</td></tr>
 <tr class="memdesc:ae92e6c96932a7b87524f81f88752d520 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to property.  <a href="classpFlow_1_1geometry.html#ae92e6c96932a7b87524f81f88752d520">More...</a><br /></td></tr>
 <tr class="separator:ae92e6c96932a7b87524f81f88752d520 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b462832bd3e3f7ac5ef5e6ba90d1bcd inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a1b462832bd3e3f7ac5ef5e6ba90d1bcd">owner</a> () const</td></tr>
-<tr class="memdesc:a1b462832bd3e3f7ac5ef5e6ba90d1bcd inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owner repository.  <a href="classpFlow_1_1geometry.html#a1b462832bd3e3f7ac5ef5e6ba90d1bcd">More...</a><br /></td></tr>
-<tr class="separator:a1b462832bd3e3f7ac5ef5e6ba90d1bcd inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10329e18307a60d3fdb203bcbed2b295 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a10329e18307a60d3fdb203bcbed2b295">owner</a> ()</td></tr>
-<tr class="memdesc:a10329e18307a60d3fdb203bcbed2b295 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owner repository.  <a href="classpFlow_1_1geometry.html#a10329e18307a60d3fdb203bcbed2b295">More...</a><br /></td></tr>
-<tr class="separator:a10329e18307a60d3fdb203bcbed2b295 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af00b73c2f24f880c8f6c46918702401f inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#af00b73c2f24f880c8f6c46918702401f">path</a> ()</td></tr>
-<tr class="memdesc:af00b73c2f24f880c8f6c46918702401f inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to the repository folder.  <a href="classpFlow_1_1geometry.html#af00b73c2f24f880c8f6c46918702401f">More...</a><br /></td></tr>
-<tr class="separator:af00b73c2f24f880c8f6c46918702401f inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ff69894cedcece18fd9f81446dc8ce1 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#aaa830358734c88d24e4006884d78810f">int8TriSurfaceField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a4ff69894cedcece18fd9f81446dc8ce1">propertyId</a> () const</td></tr>
-<tr class="memdesc:a4ff69894cedcece18fd9f81446dc8ce1 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Property ide of triangles.  <a href="classpFlow_1_1geometry.html#a4ff69894cedcece18fd9f81446dc8ce1">More...</a><br /></td></tr>
-<tr class="separator:a4ff69894cedcece18fd9f81446dc8ce1 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad48b7b943e88478c15879659cce7aebc inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ad48b7b943e88478c15879659cce7aebc">write</a> () const</td></tr>
-<tr class="memdesc:ad48b7b943e88478c15879659cce7aebc inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">write  <a href="classpFlow_1_1geometry.html#ad48b7b943e88478c15879659cce7aebc">More...</a><br /></td></tr>
-<tr class="separator:ad48b7b943e88478c15879659cce7aebc inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classpFlow_1_1demGeometry"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1demGeometry')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1demGeometry.html">demGeometry</a></td></tr>
-<tr class="memitem:a807e1de7e5eeef57df20a3d5bd1a09a3 inherit pub_methods_classpFlow_1_1demGeometry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demGeometry.html#a807e1de7e5eeef57df20a3d5bd1a09a3">demGeometry</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>)</td></tr>
-<tr class="separator:a807e1de7e5eeef57df20a3d5bd1a09a3 inherit pub_methods_classpFlow_1_1demGeometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada71b97666fe3f66b31690bf12633c32 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">beforeIteration</a> () override</td></tr>
+<tr class="memdesc:ada71b97666fe3f66b31690bf12633c32 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is called in time loop, before iterate.  <a href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">More...</a><br /></td></tr>
+<tr class="separator:ada71b97666fe3f66b31690bf12633c32 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab4b6c611c3256e54f51bbfc484d58e inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a5ab4b6c611c3256e54f51bbfc484d58e">afterIteration</a> () override</td></tr>
+<tr class="memdesc:a5ab4b6c611c3256e54f51bbfc484d58e inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is called in time loop, after iterate.  <a href="classpFlow_1_1geometry.html#a5ab4b6c611c3256e54f51bbfc484d58e">More...</a><br /></td></tr>
+<tr class="separator:a5ab4b6c611c3256e54f51bbfc484d58e inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c713f45ca620694735a6a21959cc408 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a1c713f45ca620694735a6a21959cc408">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) override</td></tr>
+<tr class="separator:a1c713f45ca620694735a6a21959cc408 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ab3738b20dfa25d66228f6a7571d97aa0">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) const override</td></tr>
+<tr class="memdesc:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">write  <a href="classpFlow_1_1geometry.html#ab3738b20dfa25d66228f6a7571d97aa0">More...</a><br /></td></tr>
+<tr class="separator:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1multiTriSurface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1multiTriSurface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a></td></tr>
+<tr class="memitem:a6254675ec612217092719bf2ba9ce6f2 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a6254675ec612217092719bf2ba9ce6f2">TypeInfo</a> (&quot;multiTriSurface&quot;)</td></tr>
+<tr class="separator:a6254675ec612217092719bf2ba9ce6f2 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2795b6be1e8b58960b4baa500db6ab7e inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a2795b6be1e8b58960b4baa500db6ab7e">multiTriSurface</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;obj, <a class="el" href="classpFlow_1_1repository.html">repository</a> *<a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a>)</td></tr>
+<tr class="memdesc:a2795b6be1e8b58960b4baa500db6ab7e inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> and owner repository.  <a href="classpFlow_1_1multiTriSurface.html#a2795b6be1e8b58960b4baa500db6ab7e">More...</a><br /></td></tr>
+<tr class="separator:a2795b6be1e8b58960b4baa500db6ab7e inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af06ee0a4f3118662837556415255637f inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#af06ee0a4f3118662837556415255637f">multiTriSurface</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;objf, <a class="el" href="classpFlow_1_1repository.html">repository</a> *<a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a>, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;surf)</td></tr>
+<tr class="memdesc:af06ee0a4f3118662837556415255637f inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from another <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a>.  <a href="classpFlow_1_1multiTriSurface.html#af06ee0a4f3118662837556415255637f">More...</a><br /></td></tr>
+<tr class="separator:af06ee0a4f3118662837556415255637f inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e02a25372bfd44be162b8332cac9cd9 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a3e02a25372bfd44be162b8332cac9cd9">multiTriSurface</a> (const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;)=default</td></tr>
+<tr class="memdesc:a3e02a25372bfd44be162b8332cac9cd9 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct (default)  <a href="classpFlow_1_1multiTriSurface.html#a3e02a25372bfd44be162b8332cac9cd9">More...</a><br /></td></tr>
+<tr class="separator:a3e02a25372bfd44be162b8332cac9cd9 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a366ec707816559dd0a70e66bc0183 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#ad8a366ec707816559dd0a70e66bc0183">operator=</a> (const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;)=default</td></tr>
+<tr class="memdesc:ad8a366ec707816559dd0a70e66bc0183 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment (default)  <a href="classpFlow_1_1multiTriSurface.html#ad8a366ec707816559dd0a70e66bc0183">More...</a><br /></td></tr>
+<tr class="separator:ad8a366ec707816559dd0a70e66bc0183 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88aebd29f35640424aa961a504756b58 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a88aebd29f35640424aa961a504756b58">multiTriSurface</a> (<a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a88aebd29f35640424aa961a504756b58 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">No move construct.  <a href="classpFlow_1_1multiTriSurface.html#a88aebd29f35640424aa961a504756b58">More...</a><br /></td></tr>
+<tr class="separator:a88aebd29f35640424aa961a504756b58 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66a4e50b6cb6d5163d9f9afeaef74693 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a66a4e50b6cb6d5163d9f9afeaef74693">operator=</a> (<a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a66a4e50b6cb6d5163d9f9afeaef74693 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">No move assignment.  <a href="classpFlow_1_1multiTriSurface.html#a66a4e50b6cb6d5163d9f9afeaef74693">More...</a><br /></td></tr>
+<tr class="separator:a66a4e50b6cb6d5163d9f9afeaef74693 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda0c25a74cf8f615e34372e95c5ce25 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#abda0c25a74cf8f615e34372e95c5ce25">~multiTriSurface</a> () override=default</td></tr>
+<tr class="memdesc:abda0c25a74cf8f615e34372e95c5ce25 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">default destructor  <a href="classpFlow_1_1multiTriSurface.html#abda0c25a74cf8f615e34372e95c5ce25">More...</a><br /></td></tr>
+<tr class="separator:abda0c25a74cf8f615e34372e95c5ce25 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c0f35da3aced7be8e751e3ec1a7337 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a43c0f35da3aced7be8e751e3ec1a7337">appendSurface</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1objectFile.html#a754ce9966caae1ee331378bf4a87269b">name</a>, const <a class="el" href="namespacepFlow.html#ab067da62570f5563dbc4fc15ba2cc8ab">realx3x3Vector</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html#ae5203c129e0f459defc582e0595e407a">vertices</a>)</td></tr>
+<tr class="separator:a43c0f35da3aced7be8e751e3ec1a7337 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bdb2609596e5b00a56640bf61bd2a59 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a0bdb2609596e5b00a56640bf61bd2a59">numSurfaces</a> () const</td></tr>
+<tr class="separator:a0bdb2609596e5b00a56640bf61bd2a59 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a825f903f417bd82d10264efd38f3d53b inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#aebf860550ca3ae7e7911647b9c221c0b">subSurfaceList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a825f903f417bd82d10264efd38f3d53b">subSurfaces</a> () const</td></tr>
+<tr class="separator:a825f903f417bd82d10264efd38f3d53b inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5728335dac4aa3f2a755de597964adf inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#aa5728335dac4aa3f2a755de597964adf">subSurfaceRange</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nSub) const</td></tr>
+<tr class="separator:aa5728335dac4aa3f2a755de597964adf inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13fbe58adb9edd4f5bcf05b9d6f714e5 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ae06b07ed1267c5e7bec6d1da50acf5d1">rangeU32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a13fbe58adb9edd4f5bcf05b9d6f714e5">subSurfacePointRange</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nSub) const</td></tr>
+<tr class="separator:a13fbe58adb9edd4f5bcf05b9d6f714e5 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
+<tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the content of object.  <a href="classpFlow_1_1multiTriSurface.html#ac8bb3912a3ce86b15842e79d0b421204">More...</a><br /></td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56df4ef4aacf473f27c0c5b94881706 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#ac56df4ef4aacf473f27c0c5b94881706">subSurfaceSize</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nSub) const</td></tr>
+<tr class="separator:ac56df4ef4aacf473f27c0c5b94881706 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa3445bc3074d09aa0d64c77cd673acb inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#aaa3445bc3074d09aa0d64c77cd673acb">subSurfaceNumPoints</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nSub) const</td></tr>
+<tr class="separator:aaa3445bc3074d09aa0d64c77cd673acb inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af47715e15fcc83926a276efc0c971623 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#af47715e15fcc83926a276efc0c971623">subSurfaceName</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nSub) const</td></tr>
+<tr class="separator:af47715e15fcc83926a276efc0c971623 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c713f45ca620694735a6a21959cc408 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#a1c713f45ca620694735a6a21959cc408">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) override</td></tr>
+<tr class="separator:a1c713f45ca620694735a6a21959cc408 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1multiTriSurface.html#ab3738b20dfa25d66228f6a7571d97aa0">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) const override</td></tr>
+<tr class="separator:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1multiTriSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1triSurface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1triSurface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1triSurface.html">triSurface</a></td></tr>
+<tr class="memitem:a99980e4ee89d8f7cec12455bf4cdbcf2 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a99980e4ee89d8f7cec12455bf4cdbcf2">TypeInfo</a> (&quot;triSurface&quot;)</td></tr>
+<tr class="separator:a99980e4ee89d8f7cec12455bf4cdbcf2 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48bbf7afba19a24c34ed961928ba8c6 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#ac48bbf7afba19a24c34ed961928ba8c6">triSurface</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;objf, <a class="el" href="classpFlow_1_1repository.html">repository</a> *<a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a>, const <a class="el" href="classpFlow_1_1triSurface.html">triSurface</a> &amp;surf)</td></tr>
+<tr class="separator:ac48bbf7afba19a24c34ed961928ba8c6 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16916827095daee757e8615391d51a4 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#ac16916827095daee757e8615391d51a4">triSurface</a> (const <a class="el" href="namespacepFlow.html#a1272208e2f294633a96349ec264939e6">realx3x3Field_H</a> &amp;triangles, <a class="el" href="classpFlow_1_1repository.html">repository</a> *<a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a>=nullptr)</td></tr>
+<tr class="separator:ac16916827095daee757e8615391d51a4 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7bf1aa45f2a68550b87f7ab5c84086 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#aad7bf1aa45f2a68550b87f7ab5c84086">~triSurface</a> () override=default</td></tr>
+<tr class="separator:aad7bf1aa45f2a68550b87f7ab5c84086 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2af1db184af973a2c0c3333581a57f58 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a2af1db184af973a2c0c3333581a57f58">numPoints</a> () const</td></tr>
+<tr class="separator:a2af1db184af973a2c0c3333581a57f58 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29636b87d7c459031e2410e5d7623b0f inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a29636b87d7c459031e2410e5d7623b0f">size</a> () const</td></tr>
+<tr class="separator:a29636b87d7c459031e2410e5d7623b0f inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0bead6b4b4f0990ec3e4837bd1e1ea3 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#af0bead6b4b4f0990ec3e4837bd1e1ea3">capacity</a> () const</td></tr>
+<tr class="separator:af0bead6b4b4f0990ec3e4837bd1e1ea3 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf65f5945c49ee75276463ee66ce4107 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a7c910c47fac98a967d343e8994298262">realx3Field_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#acf65f5945c49ee75276463ee66ce4107">points</a> () const</td></tr>
+<tr class="separator:acf65f5945c49ee75276463ee66ce4107 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1ffe1dda789cfc08b43319fd764aa0 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a7c910c47fac98a967d343e8994298262">realx3Field_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a3c1ffe1dda789cfc08b43319fd764aa0">points</a> ()</td></tr>
+<tr class="separator:a3c1ffe1dda789cfc08b43319fd764aa0 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ba414eb6fed644f2dfb795c27b3a7e inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a46ba414eb6fed644f2dfb795c27b3a7e">area</a> () const</td></tr>
+<tr class="separator:a46ba414eb6fed644f2dfb795c27b3a7e inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acac34590cce352af85f6b782cbad6543 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#acac34590cce352af85f6b782cbad6543">area</a> ()</td></tr>
+<tr class="separator:acac34590cce352af85f6b782cbad6543 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5203c129e0f459defc582e0595e407a inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#ab5362914a273aa8ff03f209288b636ba">uint32x3Field_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#ae5203c129e0f459defc582e0595e407a">vertices</a> () const</td></tr>
+<tr class="separator:ae5203c129e0f459defc582e0595e407a inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091e2d179e9ea0bb3c7266d380cc97b9 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ab5362914a273aa8ff03f209288b636ba">uint32x3Field_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a091e2d179e9ea0bb3c7266d380cc97b9">vertices</a> ()</td></tr>
+<tr class="separator:a091e2d179e9ea0bb3c7266d380cc97b9 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6668a8a544618783fd4955d2e9bebb7f inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a6668a8a544618783fd4955d2e9bebb7f">normals</a> ()</td></tr>
+<tr class="separator:a6668a8a544618783fd4955d2e9bebb7f inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28a3ded422d5de00cd245036d0499cd0 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a28a3ded422d5de00cd245036d0499cd0">normals</a> () const</td></tr>
+<tr class="separator:a28a3ded422d5de00cd245036d0499cd0 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87ba6f8c358a11dfd2b456d8e488f69a inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a87ba6f8c358a11dfd2b456d8e488f69a">getTriangleAccessor</a> () const</td></tr>
+<tr class="memdesc:a87ba6f8c358a11dfd2b456d8e488f69a inherit pub_methods_classpFlow_1_1triSurface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain an object for accessing triangles.  <a href="classpFlow_1_1triSurface.html#a87ba6f8c358a11dfd2b456d8e488f69a">More...</a><br /></td></tr>
+<tr class="separator:a87ba6f8c358a11dfd2b456d8e488f69a inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c713f45ca620694735a6a21959cc408 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a1c713f45ca620694735a6a21959cc408">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) override</td></tr>
+<tr class="separator:a1c713f45ca620694735a6a21959cc408 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#ab3738b20dfa25d66228f6a7571d97aa0">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) const override</td></tr>
+<tr class="separator:ab3738b20dfa25d66228f6a7571d97aa0 inherit pub_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1IOobject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1IOobject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1IOobject.html">IOobject</a></td></tr>
+<tr class="memitem:a9521838a2604fc381c2b4d8227615246 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a9521838a2604fc381c2b4d8227615246">typeName</a> () const =0</td></tr>
+<tr class="separator:a9521838a2604fc381c2b4d8227615246 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad269ef21d55c3c31022045b90075823 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#aad269ef21d55c3c31022045b90075823">IOobject</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;objf, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop, <a class="el" href="classpFlow_1_1repository.html">repository</a> *<a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a>)</td></tr>
+<tr class="separator:aad269ef21d55c3c31022045b90075823 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a343821968cc70abd87c9e3c9706b2e08 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a343821968cc70abd87c9e3c9706b2e08">~IOobject</a> () override</td></tr>
+<tr class="separator:a343821968cc70abd87c9e3c9706b2e08 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a387f9719028f6a7a4b72dbeccdae8e48 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a387f9719028f6a7a4b72dbeccdae8e48">IOobject</a> (const <a class="el" href="classpFlow_1_1IOobject.html">IOobject</a> &amp;src)=delete</td></tr>
+<tr class="separator:a387f9719028f6a7a4b72dbeccdae8e48 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada2832137ec41bfb31a433af7d833d22 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#ada2832137ec41bfb31a433af7d833d22">IOobject</a> (<a class="el" href="classpFlow_1_1IOobject.html">IOobject</a> &amp;&amp;src)=delete</td></tr>
+<tr class="separator:ada2832137ec41bfb31a433af7d833d22 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0970fc1f3e24ea17048045400fe34f5 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#ab0970fc1f3e24ea17048045400fe34f5">ioPattern</a> () const</td></tr>
+<tr class="separator:ab0970fc1f3e24ea17048045400fe34f5 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a559f42cef65f7e9b3ce24cfb42905 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1repository.html">repository</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a> () const override</td></tr>
+<tr class="separator:a09a559f42cef65f7e9b3ce24cfb42905 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00619b1fd305614c16a7097445d9f0c3 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a00619b1fd305614c16a7097445d9f0c3">owner</a> ()</td></tr>
+<tr class="separator:a00619b1fd305614c16a7097445d9f0c3 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a489ff7b751b95e03bb3d16839208b74d inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a489ff7b751b95e03bb3d16839208b74d">releaseOwner</a> (bool fromOwner=false)</td></tr>
+<tr class="separator:a489ff7b751b95e03bb3d16839208b74d inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae86a22cbcc2022c0f2d7c1bd188889d6 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#ae86a22cbcc2022c0f2d7c1bd188889d6">isIncluded</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;objName) const override</td></tr>
+<tr class="separator:ae86a22cbcc2022c0f2d7c1bd188889d6 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6e9860479ec6d8584a6c1bfa456dea inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a5f6e9860479ec6d8584a6c1bfa456dea">isExcluded</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;objName) const override</td></tr>
+<tr class="separator:a5f6e9860479ec6d8584a6c1bfa456dea inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a17cd8322aee7227a30824c5f5107b inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a56a17cd8322aee7227a30824c5f5107b">readObject</a> (bool rdHdr=true)</td></tr>
+<tr class="separator:a56a17cd8322aee7227a30824c5f5107b inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb0d210a86dfa7ee073b16be32be2198 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#afb0d210a86dfa7ee073b16be32be2198">writeObject</a> () const</td></tr>
+<tr class="separator:afb0d210a86dfa7ee073b16be32be2198 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55db1ce145befa1e4a8535806169c2c3 inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a55db1ce145befa1e4a8535806169c2c3">readObject</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, bool rdHdr=true)</td></tr>
+<tr class="separator:a55db1ce145befa1e4a8535806169c2c3 inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6979f73f254fb1a89ba95f46ac79278c inherit pub_methods_classpFlow_1_1IOobject"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOobject.html#a6979f73f254fb1a89ba95f46ac79278c">writeObject</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
+<tr class="separator:a6979f73f254fb1a89ba95f46ac79278c inherit pub_methods_classpFlow_1_1IOobject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1IOfileHeader"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1IOfileHeader')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a></td></tr>
+<tr class="memitem:a27694b34ae10a55819c0647e27e52424 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a27694b34ae10a55819c0647e27e52424">IOfileHeader</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;objf)</td></tr>
+<tr class="separator:a27694b34ae10a55819c0647e27e52424 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae6d6ea877ec8652d86076eaf333c12 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a4ae6d6ea877ec8652d86076eaf333c12">objectName</a> () const</td></tr>
+<tr class="separator:a4ae6d6ea877ec8652d86076eaf333c12 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67068cb6552c42a5ddb1c66bf6bbf6b3 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a67068cb6552c42a5ddb1c66bf6bbf6b3">objectType</a> () const</td></tr>
+<tr class="separator:a67068cb6552c42a5ddb1c66bf6bbf6b3 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1921a7f20c43d1438221946e607c488 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#ae1921a7f20c43d1438221946e607c488">path</a> () const</td></tr>
+<tr class="separator:ae1921a7f20c43d1438221946e607c488 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefb380f32e3c6839d26dbc93ff4eb00a inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#aefb380f32e3c6839d26dbc93ff4eb00a">outFileBinary</a> () const</td></tr>
+<tr class="separator:aefb380f32e3c6839d26dbc93ff4eb00a inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e04bca1658d3c571a38d8ac1d62462e inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a6e04bca1658d3c571a38d8ac1d62462e">inFileBinary</a> () const</td></tr>
+<tr class="separator:a6e04bca1658d3c571a38d8ac1d62462e inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a248aa0488b774d5160449992ad31e5 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a1a248aa0488b774d5160449992ad31e5">headerOk</a> (bool silent=false)</td></tr>
+<tr class="separator:a1a248aa0488b774d5160449992ad31e5 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac13e923e67df5e79d9a75f592b97da3 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#aac13e923e67df5e79d9a75f592b97da3">implyRead</a> () const</td></tr>
+<tr class="memdesc:aac13e923e67df5e79d9a75f592b97da3 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imply read.  <a href="classpFlow_1_1IOfileHeader.html#aac13e923e67df5e79d9a75f592b97da3">More...</a><br /></td></tr>
+<tr class="separator:aac13e923e67df5e79d9a75f592b97da3 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfb03998f9b3b981631dc794cffd05a1 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#adfb03998f9b3b981631dc794cffd05a1">implyWrite</a> () const</td></tr>
+<tr class="memdesc:adfb03998f9b3b981631dc794cffd05a1 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imply write.  <a href="classpFlow_1_1IOfileHeader.html#adfb03998f9b3b981631dc794cffd05a1">More...</a><br /></td></tr>
+<tr class="separator:adfb03998f9b3b981631dc794cffd05a1 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38363de350016ce974d10db7d4d0753 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#ac38363de350016ce974d10db7d4d0753">fileExist</a> () const</td></tr>
+<tr class="memdesc:ac38363de350016ce974d10db7d4d0753 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if file exists.  <a href="classpFlow_1_1IOfileHeader.html#ac38363de350016ce974d10db7d4d0753">More...</a><br /></td></tr>
+<tr class="separator:ac38363de350016ce974d10db7d4d0753 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1bd18bfebe1913d2b10785c0aff822 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#aad1bd18bfebe1913d2b10785c0aff822">readIfPresent</a> () const</td></tr>
+<tr class="memdesc:aad1bd18bfebe1913d2b10785c0aff822 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check read if present.  <a href="classpFlow_1_1IOfileHeader.html#aad1bd18bfebe1913d2b10785c0aff822">More...</a><br /></td></tr>
+<tr class="separator:aad1bd18bfebe1913d2b10785c0aff822 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68bff73fd26a260a1d26e7890897d4e4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a68bff73fd26a260a1d26e7890897d4e4">writeHeader</a> () const</td></tr>
+<tr class="memdesc:a68bff73fd26a260a1d26e7890897d4e4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the header should be written to file True: on master + implyWrite + readWriteHeader = true False: otherwise.  <a href="classpFlow_1_1IOfileHeader.html#a68bff73fd26a260a1d26e7890897d4e4">More...</a><br /></td></tr>
+<tr class="separator:a68bff73fd26a260a1d26e7890897d4e4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab83d4ca3dd2d2995f15ffe5e2693f316 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#ab83d4ca3dd2d2995f15ffe5e2693f316">writeHeader</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;typeName, bool forceWrite=false) const</td></tr>
+<tr class="memdesc:ab83d4ca3dd2d2995f15ffe5e2693f316 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the header to the file , typeName comes from caller.  <a href="classpFlow_1_1IOfileHeader.html#ab83d4ca3dd2d2995f15ffe5e2693f316">More...</a><br /></td></tr>
+<tr class="separator:ab83d4ca3dd2d2995f15ffe5e2693f316 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d569ab3079ca594877dfbdf4d45cae4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a5d569ab3079ca594877dfbdf4d45cae4">writeHeader</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, bool forceWrite=false) const</td></tr>
+<tr class="memdesc:a5d569ab3079ca594877dfbdf4d45cae4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the header to the file, typeName comes from the one read from file.  <a href="classpFlow_1_1IOfileHeader.html#a5d569ab3079ca594877dfbdf4d45cae4">More...</a><br /></td></tr>
+<tr class="separator:a5d569ab3079ca594877dfbdf4d45cae4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf27120b2528b8d3d77903c4f4481127 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#aaf27120b2528b8d3d77903c4f4481127">readHeader</a> () const</td></tr>
+<tr class="memdesc:aaf27120b2528b8d3d77903c4f4481127 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if header should be read from file.  <a href="classpFlow_1_1IOfileHeader.html#aaf27120b2528b8d3d77903c4f4481127">More...</a><br /></td></tr>
+<tr class="separator:aaf27120b2528b8d3d77903c4f4481127 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e735fcc23f3717d149728c03f5074a inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#ad3e735fcc23f3717d149728c03f5074a">readHeader</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, bool silent=false)</td></tr>
+<tr class="memdesc:ad3e735fcc23f3717d149728c03f5074a inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the header in the file.  <a href="classpFlow_1_1IOfileHeader.html#ad3e735fcc23f3717d149728c03f5074a">More...</a><br /></td></tr>
+<tr class="separator:ad3e735fcc23f3717d149728c03f5074a inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935aedcbc2d9fc4e32646d718eaec1f4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a935aedcbc2d9fc4e32646d718eaec1f4">writeBanner</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
+<tr class="memdesc:a935aedcbc2d9fc4e32646d718eaec1f4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">write the banner  <a href="classpFlow_1_1IOfileHeader.html#a935aedcbc2d9fc4e32646d718eaec1f4">More...</a><br /></td></tr>
+<tr class="separator:a935aedcbc2d9fc4e32646d718eaec1f4 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7724614a5d68ca0d55beead4b79f6051 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a7724614a5d68ca0d55beead4b79f6051">writeSeparator</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
+<tr class="memdesc:a7724614a5d68ca0d55beead4b79f6051 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">wirte a separator line  <a href="classpFlow_1_1IOfileHeader.html#a7724614a5d68ca0d55beead4b79f6051">More...</a><br /></td></tr>
+<tr class="separator:a7724614a5d68ca0d55beead4b79f6051 inherit pub_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1objectFile"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1objectFile')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a></td></tr>
+<tr class="memitem:a03145445e47fe40d36071d3207e4eaae inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a03145445e47fe40d36071d3207e4eaae">objectFile</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1objectFile.html#a754ce9966caae1ee331378bf4a87269b">name</a>)</td></tr>
+<tr class="separator:a03145445e47fe40d36071d3207e4eaae inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a697165e3ce0c66f2e8b3cd10ceabbc1f inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a697165e3ce0c66f2e8b3cd10ceabbc1f">objectFile</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1objectFile.html#a754ce9966caae1ee331378bf4a87269b">name</a>, const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;<a class="el" href="classpFlow_1_1objectFile.html#a55c0ceffcfed66ff50377088cbac2d8d">localPath</a>, const <a class="el" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">readFlag</a> &amp;rf=readFlag::READ_NEVER, const <a class="el" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">writeFlag</a> &amp;wf=writeFlag::WRITE_NEVER, bool rwHeader=true)</td></tr>
+<tr class="separator:a697165e3ce0c66f2e8b3cd10ceabbc1f inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc22694eec3cb20477252e35e8d38c4 inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#acfc22694eec3cb20477252e35e8d38c4">objectFile</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;src)=default</td></tr>
+<tr class="separator:acfc22694eec3cb20477252e35e8d38c4 inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d9f2616944d55462ad8c9665b27086c inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a0d9f2616944d55462ad8c9665b27086c">objectFile</a> (<a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;&amp;src)=default</td></tr>
+<tr class="separator:a0d9f2616944d55462ad8c9665b27086c inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48d19db468e7a67e0ace83c38905e32 inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#ad48d19db468e7a67e0ace83c38905e32">operator=</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;rhs)=default</td></tr>
+<tr class="separator:ad48d19db468e7a67e0ace83c38905e32 inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a724fdc744ee41f5b154c325701f14c2d inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a724fdc744ee41f5b154c325701f14c2d">operator=</a> (<a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;&amp;rhs)=default</td></tr>
+<tr class="separator:a724fdc744ee41f5b154c325701f14c2d inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb42fccb46707b1c231389b56ec574b inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a5eb42fccb46707b1c231389b56ec574b">~objectFile</a> ()=default</td></tr>
+<tr class="separator:a5eb42fccb46707b1c231389b56ec574b inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a754ce9966caae1ee331378bf4a87269b inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a754ce9966caae1ee331378bf4a87269b">name</a> () const</td></tr>
+<tr class="separator:a754ce9966caae1ee331378bf4a87269b inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55c0ceffcfed66ff50377088cbac2d8d inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classpFlow_1_1fileSystem.html">fileSystem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a55c0ceffcfed66ff50377088cbac2d8d">localPath</a> () const</td></tr>
+<tr class="separator:a55c0ceffcfed66ff50377088cbac2d8d inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a349924059ebb9ce3b154dbd6850c601d inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1objectFile.html#a314ebf993d731f5b477f5b2670de2135">readFlag</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a349924059ebb9ce3b154dbd6850c601d">rFlag</a> () const</td></tr>
+<tr class="separator:a349924059ebb9ce3b154dbd6850c601d inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af42da690717c749e1ee5108dcee62e7d inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1objectFile.html#a167fce7aaf9bbff61e0e5ad4815d09fb">writeFlag</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#af42da690717c749e1ee5108dcee62e7d">wFlag</a> () const</td></tr>
+<tr class="separator:af42da690717c749e1ee5108dcee62e7d inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7097fa42f98e5a95fd95ec46bdf6cd60 inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a7097fa42f98e5a95fd95ec46bdf6cd60">isReadAlways</a> () const</td></tr>
+<tr class="separator:a7097fa42f98e5a95fd95ec46bdf6cd60 inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c27a5cdee1d686f94bea4254bdbe650 inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a0c27a5cdee1d686f94bea4254bdbe650">isReadNever</a> () const</td></tr>
+<tr class="separator:a0c27a5cdee1d686f94bea4254bdbe650 inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d01f4526e21bccb1392a344d3e6cbfd inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a2d01f4526e21bccb1392a344d3e6cbfd">isReadIfPresent</a> () const</td></tr>
+<tr class="separator:a2d01f4526e21bccb1392a344d3e6cbfd inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd01f9965d77d91b82df73d1fc67438 inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#acbd01f9965d77d91b82df73d1fc67438">isWriteAlways</a> () const</td></tr>
+<tr class="separator:acbd01f9965d77d91b82df73d1fc67438 inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91e42168656b6587284c9167ef8b678e inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#a91e42168656b6587284c9167ef8b678e">isWriteNever</a> () const</td></tr>
+<tr class="separator:a91e42168656b6587284c9167ef8b678e inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae10b53b60cb4631fdeb46271ccab67aa inherit pub_methods_classpFlow_1_1objectFile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1objectFile.html#ae10b53b60cb4631fdeb46271ccab67aa">readWriteHeader</a> () const</td></tr>
+<tr class="separator:ae10b53b60cb4631fdeb46271ccab67aa inherit pub_methods_classpFlow_1_1objectFile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classpFlow_1_1subscriber"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1subscriber')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1subscriber.html">subscriber</a></td></tr>
+<tr class="memitem:a1f20f4595baadb071798f756aab3bf94 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a1f20f4595baadb071798f756aab3bf94">subscriber</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;name)</td></tr>
+<tr class="separator:a1f20f4595baadb071798f756aab3bf94 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551f77eaff24f886191351ca660b2172 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a551f77eaff24f886191351ca660b2172">subscriber</a> (const <a class="el" href="classpFlow_1_1subscriber.html">subscriber</a> &amp;)</td></tr>
+<tr class="memdesc:a551f77eaff24f886191351ca660b2172 inherit pub_methods_classpFlow_1_1subscriber"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor, only copies the name, not the list.  <a href="classpFlow_1_1subscriber.html#a551f77eaff24f886191351ca660b2172">More...</a><br /></td></tr>
+<tr class="separator:a551f77eaff24f886191351ca660b2172 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa94906bf0321a2bba3ffa0105b664c2b inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#aa94906bf0321a2bba3ffa0105b664c2b">subscriber</a> (<a class="el" href="classpFlow_1_1subscriber.html">subscriber</a> &amp;&amp;)</td></tr>
+<tr class="memdesc:aa94906bf0321a2bba3ffa0105b664c2b inherit pub_methods_classpFlow_1_1subscriber"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor, moves the name and the list, also change the subriber of the object in the list <br  />
+  <a href="classpFlow_1_1subscriber.html#aa94906bf0321a2bba3ffa0105b664c2b">More...</a><br /></td></tr>
+<tr class="separator:aa94906bf0321a2bba3ffa0105b664c2b inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1a040e0031a74f87fd714280fcf5d40 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1subscriber.html">subscriber</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#ac1a040e0031a74f87fd714280fcf5d40">operator=</a> (const <a class="el" href="classpFlow_1_1subscriber.html">subscriber</a> &amp;)</td></tr>
+<tr class="memdesc:ac1a040e0031a74f87fd714280fcf5d40 inherit pub_methods_classpFlow_1_1subscriber"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignemnt, only assign the name, do not assign the list.  <a href="classpFlow_1_1subscriber.html#ac1a040e0031a74f87fd714280fcf5d40">More...</a><br /></td></tr>
+<tr class="separator:ac1a040e0031a74f87fd714280fcf5d40 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d15bac710b33205a44587947398bf1 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1subscriber.html">subscriber</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a98d15bac710b33205a44587947398bf1">operator=</a> (<a class="el" href="classpFlow_1_1subscriber.html">subscriber</a> &amp;&amp;)</td></tr>
+<tr class="memdesc:a98d15bac710b33205a44587947398bf1 inherit pub_methods_classpFlow_1_1subscriber"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment, move assign name and list, also change the subcriber of the object in the list <br  />
+  <a href="classpFlow_1_1subscriber.html#a98d15bac710b33205a44587947398bf1">More...</a><br /></td></tr>
+<tr class="separator:a98d15bac710b33205a44587947398bf1 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c57ce45181e65bbc1f457ee096730d inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a19c57ce45181e65bbc1f457ee096730d">~subscriber</a> ()</td></tr>
+<tr class="separator:a19c57ce45181e65bbc1f457ee096730d inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b573a33b5e6dde274238872f36e0729 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a2b573a33b5e6dde274238872f36e0729">subscribe</a> (<a class="el" href="classpFlow_1_1message.html">message</a> msg, <a class="el" href="classpFlow_1_1observer.html">observer</a> *obsevr) const</td></tr>
+<tr class="separator:a2b573a33b5e6dde274238872f36e0729 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fe50c2b13b7149fef156a90be43479c inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a0fe50c2b13b7149fef156a90be43479c">unsubscribe</a> (<a class="el" href="classpFlow_1_1observer.html">observer</a> *obsevr) const</td></tr>
+<tr class="separator:a0fe50c2b13b7149fef156a90be43479c inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e1a43b0cf38a13088d24845aa75c386 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a4e1a43b0cf38a13088d24845aa75c386">notify</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> iter, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t, <a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt, const <a class="el" href="classpFlow_1_1message.html">message</a> msg, const <a class="el" href="classpFlow_1_1anyList.html">anyList</a> &amp;varList)</td></tr>
+<tr class="separator:a4e1a43b0cf38a13088d24845aa75c386 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98ff069756cfb787343d514964116024 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#a98ff069756cfb787343d514964116024">notify</a> (const <a class="el" href="classpFlow_1_1timeInfo.html">timeInfo</a> &amp;ti, const <a class="el" href="classpFlow_1_1message.html">message</a> msg, const <a class="el" href="classpFlow_1_1anyList.html">anyList</a> &amp;varList)</td></tr>
+<tr class="separator:a98ff069756cfb787343d514964116024 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96a11f01b3b87593496cd57981d9146 inherit pub_methods_classpFlow_1_1subscriber"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1subscriber.html#af96a11f01b3b87593496cd57981d9146">subscriberName</a> () const</td></tr>
+<tr class="separator:af96a11f01b3b87593496cd57981d9146 inherit pub_methods_classpFlow_1_1subscriber"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpFlow_1_1demComponent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpFlow_1_1demComponent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classpFlow_1_1demComponent.html">demComponent</a></td></tr>
 <tr class="memitem:a3145c3f3cba34861e279260ada91e0de inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a3145c3f3cba34861e279260ada91e0de">TypeInfo</a> (&quot;demComponent&quot;)</td></tr>
 <tr class="memdesc:a3145c3f3cba34861e279260ada91e0de inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type info.  <a href="classpFlow_1_1demComponent.html#a3145c3f3cba34861e279260ada91e0de">More...</a><br /></td></tr>
@@ -286,12 +475,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae1afde9cfe19a586522259a33a4931e3 inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#ae1afde9cfe19a586522259a33a4931e3">control</a> ()</td></tr>
 <tr class="memdesc:ae1afde9cfe19a586522259a33a4931e3 inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ref to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>.  <a href="classpFlow_1_1demComponent.html#ae1afde9cfe19a586522259a33a4931e3">More...</a><br /></td></tr>
 <tr class="separator:ae1afde9cfe19a586522259a33a4931e3 inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fc823022c8f0175108f10a42e7b858f inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a4fc823022c8f0175108f10a42e7b858f">dt</a> () const</td></tr>
-<tr class="memdesc:a4fc823022c8f0175108f10a42e7b858f inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Time.html">Time</a> step of integration.  <a href="classpFlow_1_1demComponent.html#a4fc823022c8f0175108f10a42e7b858f">More...</a><br /></td></tr>
-<tr class="separator:a4fc823022c8f0175108f10a42e7b858f inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a476763249b99b131d7116430896cd44e inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a476763249b99b131d7116430896cd44e">currentTime</a> () const</td></tr>
-<tr class="memdesc:a476763249b99b131d7116430896cd44e inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current simulation time.  <a href="classpFlow_1_1demComponent.html#a476763249b99b131d7116430896cd44e">More...</a><br /></td></tr>
-<tr class="separator:a476763249b99b131d7116430896cd44e inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a987c4fc5fe3a75305eede553d3efc279 inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a987c4fc5fe3a75305eede553d3efc279">dt</a> () const</td></tr>
+<tr class="memdesc:a987c4fc5fe3a75305eede553d3efc279 inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Time.html">Time</a> step of integration.  <a href="classpFlow_1_1demComponent.html#a987c4fc5fe3a75305eede553d3efc279">More...</a><br /></td></tr>
+<tr class="separator:a987c4fc5fe3a75305eede553d3efc279 inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78dd57bd659107f17021b099cb853a0e inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a78dd57bd659107f17021b099cb853a0e">currentTime</a> () const</td></tr>
+<tr class="memdesc:a78dd57bd659107f17021b099cb853a0e inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current simulation time.  <a href="classpFlow_1_1demComponent.html#a78dd57bd659107f17021b099cb853a0e">More...</a><br /></td></tr>
+<tr class="separator:a78dd57bd659107f17021b099cb853a0e inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fe92d89e0339f3b0ccb505a1aac2182 inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a3fe92d89e0339f3b0ccb505a1aac2182">currentIter</a> () const</td></tr>
+<tr class="memdesc:a3fe92d89e0339f3b0ccb505a1aac2182 inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">return current iteration number  <a href="classpFlow_1_1demComponent.html#a3fe92d89e0339f3b0ccb505a1aac2182">More...</a><br /></td></tr>
+<tr class="separator:a3fe92d89e0339f3b0ccb505a1aac2182 inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b953704058a7ca76b3056ae9215a64 inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1timeInfo.html">timeInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a71b953704058a7ca76b3056ae9215a64">TimeInfo</a> () const</td></tr>
+<tr class="memdesc:a71b953704058a7ca76b3056ae9215a64 inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">return time info of the simulaiton  <a href="classpFlow_1_1demComponent.html#a71b953704058a7ca76b3056ae9215a64">More...</a><br /></td></tr>
+<tr class="separator:a71b953704058a7ca76b3056ae9215a64 inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f341a9cb1091ba9e3670f98cd002c3 inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a40f341a9cb1091ba9e3670f98cd002c3">time</a> () const</td></tr>
+<tr class="separator:a40f341a9cb1091ba9e3670f98cd002c3 inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40e6d687c4d54c66dfe5b1bc5a0d28ce inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a40e6d687c4d54c66dfe5b1bc5a0d28ce">time</a> ()</td></tr>
+<tr class="separator:a40e6d687c4d54c66dfe5b1bc5a0d28ce inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae69e59e991f33e7d278ff6ad19d2e87d inherit pub_methods_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#ae69e59e991f33e7d278ff6ad19d2e87d">timers</a> () const</td></tr>
 <tr class="memdesc:ae69e59e991f33e7d278ff6ad19d2e87d inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const ref to timers.  <a href="classpFlow_1_1demComponent.html#ae69e59e991f33e7d278ff6ad19d2e87d">More...</a><br /></td></tr>
 <tr class="separator:ae69e59e991f33e7d278ff6ad19d2e87d inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -305,80 +504,66 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0b82b161f3fd39ee9f534cc2508d97f8 inherit pub_methods_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is called after the time loop.  <a href="classpFlow_1_1demComponent.html#a0b82b161f3fd39ee9f534cc2508d97f8">More...</a><br /></td></tr>
 <tr class="separator:a0b82b161f3fd39ee9f534cc2508d97f8 inherit pub_methods_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
 <tr class="memitem:a22d1078b36a1ec1706a4a4837496889b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a22d1078b36a1ec1706a4a4837496889b">findMotionIndex</a> ()</td></tr>
 <tr class="memdesc:a22d1078b36a1ec1706a4a4837496889b"><td class="mdescLeft">&#160;</td><td class="mdescRight">determine the motion index of each triangle  <a href="classpFlow_1_1geometryMotion.html#a22d1078b36a1ec1706a4a4837496889b">More...</a><br /></td></tr>
 <tr class="separator:a22d1078b36a1ec1706a4a4837496889b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classpFlow_1_1geometry"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpFlow_1_1geometry')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpFlow_1_1geometry.html">geometry</a></td></tr>
-<tr class="memitem:ac1e82192333bcb3aeac1641a41a002f8 inherit pro_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ac1e82192333bcb3aeac1641a41a002f8">findPropertyId</a> ()</td></tr>
-<tr class="memdesc:ac1e82192333bcb3aeac1641a41a002f8 inherit pro_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find property id of each triangle based on the supplied material name and the surface wall that the triangle belongs to.  <a href="classpFlow_1_1geometry.html#ac1e82192333bcb3aeac1641a41a002f8">More...</a><br /></td></tr>
-<tr class="separator:ac1e82192333bcb3aeac1641a41a002f8 inherit pro_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee1fb957af9d737605b6e8701e6d14f5 inherit pro_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#aee1fb957af9d737605b6e8701e6d14f5">zeroForce</a> ()</td></tr>
-<tr class="memdesc:aee1fb957af9d737605b6e8701e6d14f5 inherit pro_methods_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize contact force to zero.  <a href="classpFlow_1_1geometry.html#aee1fb957af9d737605b6e8701e6d14f5">More...</a><br /></td></tr>
-<tr class="separator:aee1fb957af9d737605b6e8701e6d14f5 inherit pro_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a724ed55f42bb7cbfa076aaa5a4afe9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a2a724ed55f42bb7cbfa076aaa5a4afe9">moveGeometry</a> ()</td></tr>
+<tr class="memdesc:a2a724ed55f42bb7cbfa076aaa5a4afe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move geometry.  <a href="classpFlow_1_1geometryMotion.html#a2a724ed55f42bb7cbfa076aaa5a4afe9">More...</a><br /></td></tr>
+<tr class="separator:a2a724ed55f42bb7cbfa076aaa5a4afe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ae26eb9566376b8f8f2ff892fa5b9cf38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1geometryMotion.html#aa9e07d97b52977c430296b2c3388a3ba">MotionModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#ae26eb9566376b8f8f2ff892fa5b9cf38">motionModel_</a></td></tr>
-<tr class="memdesc:ae26eb9566376b8f8f2ff892fa5b9cf38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ref to motion model.  <a href="classpFlow_1_1geometryMotion.html#ae26eb9566376b8f8f2ff892fa5b9cf38">More...</a><br /></td></tr>
-<tr class="separator:ae26eb9566376b8f8f2ff892fa5b9cf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad84c1814d97b2fa65caf25f1583836ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ab0cbdf73136c790bc69f33564d337408">int32Vector_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#ad84c1814d97b2fa65caf25f1583836ad">motionIndex_</a></td></tr>
-<tr class="memdesc:ad84c1814d97b2fa65caf25f1583836ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">motion indext mapped on each surface  <a href="classpFlow_1_1geometryMotion.html#ad84c1814d97b2fa65caf25f1583836ad">More...</a><br /></td></tr>
-<tr class="separator:ad84c1814d97b2fa65caf25f1583836ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616962d07668bb8841579132c4192d27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a616962d07668bb8841579132c4192d27">triMotionIndex_</a></td></tr>
-<tr class="memdesc:a616962d07668bb8841579132c4192d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">motion index mapped on each triangle  <a href="classpFlow_1_1geometryMotion.html#a616962d07668bb8841579132c4192d27">More...</a><br /></td></tr>
-<tr class="separator:a616962d07668bb8841579132c4192d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad334d2260702d0fc65031ab7349e7ce4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#ad334d2260702d0fc65031ab7349e7ce4">pointMotionIndex_</a></td></tr>
-<tr class="memdesc:ad334d2260702d0fc65031ab7349e7ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">motion index mapped on each point  <a href="classpFlow_1_1geometryMotion.html#ad334d2260702d0fc65031ab7349e7ce4">More...</a><br /></td></tr>
-<tr class="separator:ad334d2260702d0fc65031ab7349e7ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3032341cdebe169f66b6eedaeb0fb95d"><td class="memItemLeft" align="right" valign="top">MotionModelType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a3032341cdebe169f66b6eedaeb0fb95d">motionModel_</a></td></tr>
+<tr class="memdesc:a3032341cdebe169f66b6eedaeb0fb95d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ref to motion model.  <a href="classpFlow_1_1geometryMotion.html#a3032341cdebe169f66b6eedaeb0fb95d">More...</a><br /></td></tr>
+<tr class="separator:a3032341cdebe169f66b6eedaeb0fb95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a260c3c60c1a3ed7dc73cac497b3f1e5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a260c3c60c1a3ed7dc73cac497b3f1e5a">surfMotionIndex_</a> {&quot;triMotionIndex&quot;}</td></tr>
+<tr class="memdesc:a260c3c60c1a3ed7dc73cac497b3f1e5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">motion indext mapped on each surface  <a href="classpFlow_1_1geometryMotion.html#a260c3c60c1a3ed7dc73cac497b3f1e5a">More...</a><br /></td></tr>
+<tr class="separator:a260c3c60c1a3ed7dc73cac497b3f1e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931abed0eeedeef26913d9e340ce9ab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a931abed0eeedeef26913d9e340ce9ab9">triMotionIndex_</a> {&quot;surfMotionIndex&quot;}</td></tr>
+<tr class="memdesc:a931abed0eeedeef26913d9e340ce9ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">motion index mapped on each triangle  <a href="classpFlow_1_1geometryMotion.html#a931abed0eeedeef26913d9e340ce9ab9">More...</a><br /></td></tr>
+<tr class="separator:a931abed0eeedeef26913d9e340ce9ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24b2ac0ad31f0dafa14b6b70dd612cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#ad24b2ac0ad31f0dafa14b6b70dd612cd">pointMotionIndex_</a> {&quot;pointMotionIndex&quot;}</td></tr>
+<tr class="memdesc:ad24b2ac0ad31f0dafa14b6b70dd612cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">motion index mapped on each point  <a href="classpFlow_1_1geometryMotion.html#ad24b2ac0ad31f0dafa14b6b70dd612cd">More...</a><br /></td></tr>
+<tr class="separator:ad24b2ac0ad31f0dafa14b6b70dd612cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b3558548f98d360765a7583a59a7cfb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Timer.html">Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometryMotion.html#a8b3558548f98d360765a7583a59a7cfb">moveGeomTimer_</a></td></tr>
 <tr class="memdesc:a8b3558548f98d360765a7583a59a7cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">timer for moveGeometry  <a href="classpFlow_1_1geometryMotion.html#a8b3558548f98d360765a7583a59a7cfb">More...</a><br /></td></tr>
 <tr class="separator:a8b3558548f98d360765a7583a59a7cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classpFlow_1_1geometry"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1geometry')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1geometry.html">geometry</a></td></tr>
-<tr class="memitem:a7aafd9ebf592394a9fab0ff0d8b9517e inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a7aafd9ebf592394a9fab0ff0d8b9517e">wallProperty_</a></td></tr>
-<tr class="memdesc:a7aafd9ebf592394a9fab0ff0d8b9517e inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const reference to physical property of materials.  <a href="classpFlow_1_1geometry.html#a7aafd9ebf592394a9fab0ff0d8b9517e">More...</a><br /></td></tr>
-<tr class="separator:a7aafd9ebf592394a9fab0ff0d8b9517e inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2d3f68ad5a1b979ef26a689ec69e032 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#ad2d3f68ad5a1b979ef26a689ec69e032">geometryRepository_</a></td></tr>
-<tr class="memdesc:ad2d3f68ad5a1b979ef26a689ec69e032 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repository to store geometry data at each simulation moment.  <a href="classpFlow_1_1geometry.html#ad2d3f68ad5a1b979ef26a689ec69e032">More...</a><br /></td></tr>
-<tr class="separator:ad2d3f68ad5a1b979ef26a689ec69e032 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35bbaade8b00b35f758262aea8b816a8 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a35bbaade8b00b35f758262aea8b816a8">triSurface_</a></td></tr>
-<tr class="memdesc:a35bbaade8b00b35f758262aea8b816a8 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">All triangles in the set of wall surfaces.  <a href="classpFlow_1_1geometry.html#a35bbaade8b00b35f758262aea8b816a8">More...</a><br /></td></tr>
-<tr class="separator:a35bbaade8b00b35f758262aea8b816a8 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a215e85dcdcab552f632067ab3f1cb829 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a61e5aece937951a8c48ca31c49e399fc">wordField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a215e85dcdcab552f632067ab3f1cb829">motionComponentName_</a></td></tr>
-<tr class="memdesc:a215e85dcdcab552f632067ab3f1cb829 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of motion component of each wall surface.  <a href="classpFlow_1_1geometry.html#a215e85dcdcab552f632067ab3f1cb829">More...</a><br /></td></tr>
-<tr class="separator:a215e85dcdcab552f632067ab3f1cb829 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28073d92f57130dd0934216923d03556 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a61e5aece937951a8c48ca31c49e399fc">wordField</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a28073d92f57130dd0934216923d03556">materialName_</a></td></tr>
-<tr class="memdesc:a28073d92f57130dd0934216923d03556 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Material name of each wall surface <br  />
-  <a href="classpFlow_1_1geometry.html#a28073d92f57130dd0934216923d03556">More...</a><br /></td></tr>
-<tr class="separator:a28073d92f57130dd0934216923d03556 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a184b6b49eae94722a5e34f195ac0df77 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aaa830358734c88d24e4006884d78810f">int8TriSurfaceField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a184b6b49eae94722a5e34f195ac0df77">propertyId_</a></td></tr>
-<tr class="memdesc:a184b6b49eae94722a5e34f195ac0df77 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Property id of each triangle in the set of wall surfaces.  <a href="classpFlow_1_1geometry.html#a184b6b49eae94722a5e34f195ac0df77">More...</a><br /></td></tr>
-<tr class="separator:a184b6b49eae94722a5e34f195ac0df77 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeea83dc1105f12f46323b6d1657ed991 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#afd682516555bc9f529677a279d60eba6">realx3TriSurfaceField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#aeea83dc1105f12f46323b6d1657ed991">contactForceWall_</a></td></tr>
-<tr class="memdesc:aeea83dc1105f12f46323b6d1657ed991 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contact force on each triangle in the set of wall surfaces.  <a href="classpFlow_1_1geometry.html#aeea83dc1105f12f46323b6d1657ed991">More...</a><br /></td></tr>
-<tr class="separator:aeea83dc1105f12f46323b6d1657ed991 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a781b9ac9e5dda4e44e4d37dc6c6d6d73 inherit pro_attribs_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#afd682516555bc9f529677a279d60eba6">realx3TriSurfaceField_D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a781b9ac9e5dda4e44e4d37dc6c6d6d73">stressWall_</a></td></tr>
-<tr class="memdesc:a781b9ac9e5dda4e44e4d37dc6c6d6d73 inherit pro_attribs_classpFlow_1_1geometry"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stress on ech triangle in the set of wall surfaces.  <a href="classpFlow_1_1geometry.html#a781b9ac9e5dda4e44e4d37dc6c6d6d73">More...</a><br /></td></tr>
-<tr class="separator:a781b9ac9e5dda4e44e4d37dc6c6d6d73 inherit pro_attribs_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classpFlow_1_1demComponent"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1demComponent')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1demComponent.html">demComponent</a></td></tr>
-<tr class="memitem:a3ce96806ed72189c4d9a24e9429d0420 inherit pro_attribs_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a3ce96806ed72189c4d9a24e9429d0420">componentName_</a></td></tr>
-<tr class="memdesc:a3ce96806ed72189c4d9a24e9429d0420 inherit pro_attribs_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the DEM component.  <a href="classpFlow_1_1demComponent.html#a3ce96806ed72189c4d9a24e9429d0420">More...</a><br /></td></tr>
-<tr class="separator:a3ce96806ed72189c4d9a24e9429d0420 inherit pro_attribs_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfbc3debb472c661c30cf9fe782bb076 inherit pro_attribs_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#abfbc3debb472c661c30cf9fe782bb076">control_</a></td></tr>
-<tr class="memdesc:abfbc3debb472c661c30cf9fe782bb076 inherit pro_attribs_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to <a class="el" href="classpFlow_1_1systemControl.html">systemControl</a>.  <a href="classpFlow_1_1demComponent.html#abfbc3debb472c661c30cf9fe782bb076">More...</a><br /></td></tr>
-<tr class="separator:abfbc3debb472c661c30cf9fe782bb076 inherit pro_attribs_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c29ef9514a77bce5b8f4ece533bcf8c inherit pro_attribs_classpFlow_1_1demComponent"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Timers.html">Timers</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1demComponent.html#a0c29ef9514a77bce5b8f4ece533bcf8c">timers_</a></td></tr>
-<tr class="memdesc:a0c29ef9514a77bce5b8f4ece533bcf8c inherit pro_attribs_classpFlow_1_1demComponent"><td class="mdescLeft">&#160;</td><td class="mdescRight">All timers (if any) of this component.  <a href="classpFlow_1_1demComponent.html#a0c29ef9514a77bce5b8f4ece533bcf8c">More...</a><br /></td></tr>
-<tr class="separator:a0c29ef9514a77bce5b8f4ece533bcf8c inherit pro_attribs_classpFlow_1_1demComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classpFlow_1_1geometry"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classpFlow_1_1geometry')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classpFlow_1_1geometry.html">geometry</a></td></tr>
 <tr class="memitem:aa51dfdf2226a32f80d368186cae16e2b inherit pub_static_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1geometry.html">geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#aa51dfdf2226a32f80d368186cae16e2b">create</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop)</td></tr>
 <tr class="separator:aa51dfdf2226a32f80d368186cae16e2b inherit pub_static_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5d20d2e719097eb65b54156f2708097 inherit pub_static_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1geometry.html">geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#af5d20d2e719097eb65b54156f2708097">create</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dict, const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;<a class="el" href="classpFlow_1_1triSurface.html">triSurface</a>, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;propName)</td></tr>
-<tr class="separator:af5d20d2e719097eb65b54156f2708097 inherit pub_static_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9322c5b4225ceb3e3ff046e097958495 inherit pub_static_methods_classpFlow_1_1geometry"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1geometry.html">geometry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1geometry.html#a9322c5b4225ceb3e3ff046e097958495">create</a> (<a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;<a class="el" href="classpFlow_1_1demComponent.html#a647786897b3da03fcd415b2ebcf541c0">control</a>, const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;prop, <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;surf, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;motionCompName, const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;materialName, const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;motionDic)</td></tr>
+<tr class="separator:a9322c5b4225ceb3e3ff046e097958495 inherit pub_static_methods_classpFlow_1_1geometry"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classpFlow_1_1triSurface"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpFlow_1_1triSurface')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpFlow_1_1triSurface.html">triSurface</a></td></tr>
+<tr class="memitem:a944f9c09c49f52ea0553d991dc816a08 inherit pro_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a944f9c09c49f52ea0553d991dc816a08">calculateNormals</a> ()</td></tr>
+<tr class="separator:a944f9c09c49f52ea0553d991dc816a08 inherit pro_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec6b6ce76392484f62026912c6552b58 inherit pro_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#aec6b6ce76392484f62026912c6552b58">calculateArea</a> ()</td></tr>
+<tr class="separator:aec6b6ce76392484f62026912c6552b58 inherit pro_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32c459eb3a3a2a8d121e2e0fd7d18170 inherit pro_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a32c459eb3a3a2a8d121e2e0fd7d18170">append</a> (const <a class="el" href="namespacepFlow.html#a1272208e2f294633a96349ec264939e6">realx3x3Field_H</a> &amp;triangles)</td></tr>
+<tr class="separator:a32c459eb3a3a2a8d121e2e0fd7d18170 inherit pro_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41da40d7dcef4e4eaa1c4a2e4b749a70 inherit pro_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#a41da40d7dcef4e4eaa1c4a2e4b749a70">append</a> (const <a class="el" href="namespacepFlow.html#ab067da62570f5563dbc4fc15ba2cc8ab">realx3x3Vector</a> &amp;triangles)</td></tr>
+<tr class="separator:a41da40d7dcef4e4eaa1c4a2e4b749a70 inherit pro_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0db2068e90bf70c68aa96b94f3bc099 inherit pro_methods_classpFlow_1_1triSurface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1triSurface.html#af0db2068e90bf70c68aa96b94f3bc099">triSurface</a> (const <a class="el" href="classpFlow_1_1objectFile.html">objectFile</a> &amp;obj, <a class="el" href="classpFlow_1_1repository.html">repository</a> *<a class="el" href="classpFlow_1_1IOobject.html#a09a559f42cef65f7e9b3ce24cfb42905">owner</a>)</td></tr>
+<tr class="separator:af0db2068e90bf70c68aa96b94f3bc099 inherit pro_methods_classpFlow_1_1triSurface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classpFlow_1_1IOfileHeader"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classpFlow_1_1IOfileHeader')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a></td></tr>
+<tr class="memitem:a770eebd1866493c91efe18ab806d9568 inherit pro_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1iFstream.html">iFstream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a770eebd1866493c91efe18ab806d9568">inStream</a> () const</td></tr>
+<tr class="separator:a770eebd1866493c91efe18ab806d9568 inherit pro_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf02aad5ab9dd4c10306e74510f4dd0 inherit pro_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1oFstream.html">oFstream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#aadf02aad5ab9dd4c10306e74510f4dd0">outStream</a> () const</td></tr>
+<tr class="separator:aadf02aad5ab9dd4c10306e74510f4dd0 inherit pro_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f592c06afad8142b602fa255a5dc20 inherit pro_methods_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1oFstream.html">oFstream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a40f592c06afad8142b602fa255a5dc20">dummyOutStream</a> () const</td></tr>
+<tr class="separator:a40f592c06afad8142b602fa255a5dc20 inherit pro_methods_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classpFlow_1_1IOfileHeader"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpFlow_1_1IOfileHeader')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classpFlow_1_1IOfileHeader.html">IOfileHeader</a></td></tr>
+<tr class="memitem:a0fc09585fc6fa997b81807dff8b8236d inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a0fc09585fc6fa997b81807dff8b8236d">objectName_</a></td></tr>
+<tr class="separator:a0fc09585fc6fa997b81807dff8b8236d inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf7afc3ea2cc179930f4e4f4ca48797c inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#adf7afc3ea2cc179930f4e4f4ca48797c">objectType_</a></td></tr>
+<tr class="separator:adf7afc3ea2cc179930f4e4f4ca48797c inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df46db2aad0395fac9c0522d8c409a9 inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1IOfileHeader.html#a4df46db2aad0395fac9c0522d8c409a9">fileFormat_</a> = &quot;ASCII&quot;</td></tr>
+<tr class="memdesc:a4df46db2aad0395fac9c0522d8c409a9 inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="mdescLeft">&#160;</td><td class="mdescRight">file format read from file  <a href="classpFlow_1_1IOfileHeader.html#a4df46db2aad0395fac9c0522d8c409a9">More...</a><br /></td></tr>
+<tr class="separator:a4df46db2aad0395fac9c0522d8c409a9 inherit pro_attribs_classpFlow_1_1IOfileHeader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename MotionModelType&gt;<br />
@@ -387,7 +572,7 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 <pre class="fragment">A class that represent surfaces in the simulation and moves surfaces 
 </pre><p> based on the MotionModelType. MotionModelType can be any motion model. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00036">36</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00035">35</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aa9e07d97b52977c430296b2c3388a3ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9e07d97b52977c430296b2c3388a3ba">&#9670;&nbsp;</a></span>MotionModel</h2>
@@ -401,13 +586,29 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00042">42</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00041">41</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3ea8848f2646407a27a71f6d8c454fbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea8848f2646407a27a71f6d8c454fbc">&#9670;&nbsp;</a></span>ModelComponent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1geometryMotion.html#a3ea8848f2646407a27a71f6d8c454fbc">ModelComponent</a> =  typename MotionModelType::ModelComponent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00043">43</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aadd6768683cbd8b10f793e2af30a2d11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadd6768683cbd8b10f793e2af30a2d11">&#9670;&nbsp;</a></span>geometryMotion() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd6768683cbd8b10f793e2af30a2d11">&#9670;&nbsp;</a></span>geometryMotion() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -432,12 +633,14 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00062">62</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00137">137</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
 
 </div>
 </div>
-<a id="a1d627b8ad6221788d08e9f36864e69dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d627b8ad6221788d08e9f36864e69dc">&#9670;&nbsp;</a></span>geometryMotion() <span class="overload">[2/3]</span></h2>
+<a id="aff925c617119bb9b3eb8ce1f76d75baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff925c617119bb9b3eb8ce1f76d75baf">&#9670;&nbsp;</a></span>geometryMotion() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -457,8 +660,8 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&#160;</td>
-          <td class="paramname"><em>triSurface</em>, </td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&#160;</td>
+          <td class="paramname"><em>surf</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -470,67 +673,13 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;&#160;</td>
-          <td class="paramname"><em>propName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1geometryMotion.html#aa9e07d97b52977c430296b2c3388a3ba">MotionModel</a> &amp;&#160;</td>
-          <td class="paramname"><em>motionModel</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00085">85</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
-
-</div>
-</div>
-<a id="af26a65d569c0bec37e2d7c508446c186"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af26a65d569c0bec37e2d7c508446c186">&#9670;&nbsp;</a></span>geometryMotion() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1geometryMotion.html">geometryMotion</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1systemControl.html">systemControl</a> &amp;&#160;</td>
-          <td class="paramname"><em>control</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1property.html">property</a> &amp;&#160;</td>
-          <td class="paramname"><em>prop</em>, </td>
+          <td class="paramname"><em>materialName</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;&#160;</td>
-          <td class="paramname"><em>dict</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1multiTriSurface.html">multiTriSurface</a> &amp;&#160;</td>
-          <td class="paramname"><em>triSurface</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;&#160;</td>
-          <td class="paramname"><em>motionCompName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a6e76b0fc4f41684b7dd691cb6552384d">wordVector</a> &amp;&#160;</td>
-          <td class="paramname"><em>propName</em>&#160;</td>
+          <td class="paramname"><em>motionDict</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -540,9 +689,9 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
       </table>
 </div><div class="memdoc">
 
-<p>Construct from components and dictionary that contains motionModel. </p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00164">164</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00119">119</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
+<p class="reference">References <a class="el" href="error_8hpp_source.html#l00098">fatalExit</a>.</p>
 
 </div>
 </div>
@@ -562,7 +711,7 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -571,18 +720,60 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 
 <p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00022">22</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="pFlowMacros_8hpp_source.html#l00071">ForAll</a>.</p>
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8hpp_source.html#l00077">fatalErrorInFunction</a>, <a class="el" href="pFlowMacros_8hpp_source.html#l00075">ForAll</a>, and <a class="el" href="NBSLoop_8hpp_source.html#l00024">n</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1geometryMotion_a22d1078b36a1ec1706a4a4837496889b_cgraph.png" border="0" usemap="#classpFlow_1_1geometryMotion_a22d1078b36a1ec1706a4a4837496889b_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
-<a id="af734451fe09f29bc73f088a1165cd9c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af734451fe09f29bc73f088a1165cd9c8">&#9670;&nbsp;</a></span>TypeInfoTemplate()</h2>
+<a id="a2a724ed55f42bb7cbfa076aaa5a4afe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a724ed55f42bb7cbfa076aaa5a4afe9">&#9670;&nbsp;</a></span>moveGeometry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool moveGeometry</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move geometry. </p>
+
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00096">96</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="geometryMotion_8cpp_source.html#l00075">pFlow::GMotion::moveGeometry()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1geometryMotion_a2a724ed55f42bb7cbfa076aaa5a4afe9_cgraph.png" border="0" usemap="#classpFlow_1_1geometryMotion_a2a724ed55f42bb7cbfa076aaa5a4afe9_cgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a0b7c3011f25758e9b1c38be09cbec019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b7c3011f25758e9b1c38be09cbec019">&#9670;&nbsp;</a></span>TypeInfoTemplate11()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">TypeInfoTemplate </td>
+          <td class="memname">TypeInfoTemplate11 </td>
           <td>(</td>
           <td class="paramtype">&quot;geometry&quot;&#160;</td>
           <td class="paramname">, </td>
@@ -590,7 +781,7 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1geometryMotion.html#aa9e07d97b52977c430296b2c3388a3ba">MotionModel</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1geometryMotion.html#a3ea8848f2646407a27a71f6d8c454fbc">ModelComponent</a>&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -677,8 +868,8 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 
 </div>
 </div>
-<a id="a732cf929502a91dd8ec6d2bf7b457ed1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a732cf929502a91dd8ec6d2bf7b457ed1">&#9670;&nbsp;</a></span>getModel()</h2>
+<a id="a5b3b896e6acc398480105c62c41ea132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b3b896e6acc398480105c62c41ea132">&#9670;&nbsp;</a></span>getModel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -689,9 +880,25 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
         <tr>
           <td class="memname">auto getModel </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a>&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -703,9 +910,16 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 
 <p>Obtain motion model at time t. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00110">110</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00104">104</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00047">geometryMotion&lt; MotionModelType &gt;::motionModel_</a>.</p>
+<p class="reference">References <a class="el" href="demComponent_8cpp_source.html#l00033">demComponent::dt()</a>, and <a class="el" href="geometryMotion_8hpp_source.html#l00048">geometryMotion&lt; MotionModelType &gt;::motionModel_</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1geometryMotion_a5b3b896e6acc398480105c62c41ea132_cgraph.png" border="0" usemap="#classpFlow_1_1geometryMotion_a5b3b896e6acc398480105c62c41ea132_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -736,14 +950,14 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 
 <p>Implements <a class="el" href="classpFlow_1_1geometry.html#aca4d470de05b9b43b7a27da45c6d7ec0">geometry</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00116">116</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00110">110</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00047">geometryMotion&lt; MotionModelType &gt;::motionModel_</a>.</p>
+<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00048">geometryMotion&lt; MotionModelType &gt;::motionModel_</a>.</p>
 
 </div>
 </div>
-<a id="a129b21a2dfc68f334219911d986e2f6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a129b21a2dfc68f334219911d986e2f6a">&#9670;&nbsp;</a></span>triMotionIndex()</h2>
+<a id="a1eb310baae93b05bda714a91ba6a4e1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb310baae93b05bda714a91ba6a4e1e">&#9670;&nbsp;</a></span>triMotionIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -752,7 +966,7 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a>&amp; triMotionIndex </td>
+          <td class="memname">const <a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a>&amp; triMotionIndex </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -767,16 +981,16 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 
 <p>Access to motion model index of triangles. </p>
 
-<p>Implements <a class="el" href="classpFlow_1_1geometry.html#ac2a97de39de2a40cb10d0fbc3bb7b795">geometry</a>.</p>
+<p>Implements <a class="el" href="classpFlow_1_1geometry.html#a07b3eecfb3e827ca7ee184d9a5cd9664">geometry</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00122">122</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00116">116</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00053">geometryMotion&lt; MotionModelType &gt;::triMotionIndex_</a>.</p>
+<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00054">geometryMotion&lt; MotionModelType &gt;::triMotionIndex_</a>.</p>
 
 </div>
 </div>
-<a id="abd88b3cff5454fa5b3f6cf13090ec244"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd88b3cff5454fa5b3f6cf13090ec244">&#9670;&nbsp;</a></span>pointMotionIndex()</h2>
+<a id="add6558ab2c9b909af46b2a1de1654ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6558ab2c9b909af46b2a1de1654ba2">&#9670;&nbsp;</a></span>pointMotionIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -785,7 +999,7 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a>&amp; pointMotionIndex </td>
+          <td class="memname">const <a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a>&amp; pointMotionIndex </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -800,39 +1014,11 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 
 <p>Access to motion model index of points. </p>
 
-<p>Implements <a class="el" href="classpFlow_1_1geometry.html#a107d0d825e0a9d58130547830cafa3c8">geometry</a>.</p>
+<p>Implements <a class="el" href="classpFlow_1_1geometry.html#ae079cb60208852a430a2103f65c42ffd">geometry</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00128">128</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00122">122</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00056">geometryMotion&lt; MotionModelType &gt;::pointMotionIndex_</a>.</p>
-
-</div>
-</div>
-<a id="ada71b97666fe3f66b31690bf12633c32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada71b97666fe3f66b31690bf12633c32">&#9670;&nbsp;</a></span>beforeIteration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool beforeIteration</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Operations before each iteration. </p>
-
-<p>Reimplemented from <a class="el" href="classpFlow_1_1geometry.html#ada71b97666fe3f66b31690bf12633c32">geometry</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00153">153</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
+<p class="reference">References <a class="el" href="geometryMotion_8hpp_source.html#l00057">geometryMotion&lt; MotionModelType &gt;::pointMotionIndex_</a>.</p>
 
 </div>
 </div>
@@ -859,63 +1045,24 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
 <p>Iterate geometry one time step <br  />
  </p>
 
-<p>Implements <a class="el" href="classpFlow_1_1demComponent.html#ad9e44c3349e7a9a5b6ba72c9db344b96">demComponent</a>.</p>
+<p>Reimplemented from <a class="el" href="classpFlow_1_1geometry.html#afa767bddda52eb71cea18f755e17d559">geometry</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00160">160</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00204">204</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
 
+<p class="reference">References <a class="el" href="triSurfaceKernels_8hpp_source.html#l00057">pFlow::triSurfaceKernels::calculateNormals()</a>, and <a class="el" href="geometryMotion_8cpp_source.html#l00075">pFlow::GMotion::moveGeometry()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1geometryMotion_afa767bddda52eb71cea18f755e17d559_cgraph.png" border="0" usemap="#classpFlow_1_1geometryMotion_afa767bddda52eb71cea18f755e17d559_cgraph" alt=""/></div>
 </div>
-<a id="a5ab4b6c611c3256e54f51bbfc484d58e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ab4b6c611c3256e54f51bbfc484d58e">&#9670;&nbsp;</a></span>afterIteration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool afterIteration</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Operations after each iteration. </p>
-
-<p>Reimplemented from <a class="el" href="classpFlow_1_1geometry.html#a5ab4b6c611c3256e54f51bbfc484d58e">geometry</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00172">172</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a2a724ed55f42bb7cbfa076aaa5a4afe9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a724ed55f42bb7cbfa076aaa5a4afe9">&#9670;&nbsp;</a></span>moveGeometry()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool moveGeometry</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Move geometry. </p>
-
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8cpp_source.html#l00179">179</a> of file <a class="el" href="geometryMotion_8cpp_source.html">geometryMotion.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="pFlowMacros_8hpp_source.html#l00054">LAMBDA_HD</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae26eb9566376b8f8f2ff892fa5b9cf38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae26eb9566376b8f8f2ff892fa5b9cf38">&#9670;&nbsp;</a></span>motionModel_</h2>
+<a id="a3032341cdebe169f66b6eedaeb0fb95d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3032341cdebe169f66b6eedaeb0fb95d">&#9670;&nbsp;</a></span>motionModel_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -924,26 +1071,26 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1geometryMotion.html#aa9e07d97b52977c430296b2c3388a3ba">MotionModel</a>&amp; motionModel_</td>
+          <td class="memname">MotionModelType motionModel_</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Ref to motion model. </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00047">47</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00048">48</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00110">geometryMotion&lt; MotionModelType &gt;::getModel()</a>, and <a class="el" href="geometryMotion_8hpp_source.html#l00116">geometryMotion&lt; MotionModelType &gt;::motionModelTypeName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00104">geometryMotion&lt; MotionModelType &gt;::getModel()</a>, and <a class="el" href="geometryMotion_8hpp_source.html#l00110">geometryMotion&lt; MotionModelType &gt;::motionModelTypeName()</a>.</p>
 
 </div>
 </div>
-<a id="ad84c1814d97b2fa65caf25f1583836ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad84c1814d97b2fa65caf25f1583836ad">&#9670;&nbsp;</a></span>motionIndex_</h2>
+<a id="a260c3c60c1a3ed7dc73cac497b3f1e5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a260c3c60c1a3ed7dc73cac497b3f1e5a">&#9670;&nbsp;</a></span>surfMotionIndex_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -952,24 +1099,24 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#ab0cbdf73136c790bc69f33564d337408">int32Vector_HD</a> motionIndex_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a> surfMotionIndex_ {&quot;triMotionIndex&quot;}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>motion indext mapped on each surface </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00050">50</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00051">51</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a616962d07668bb8841579132c4192d27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a616962d07668bb8841579132c4192d27">&#9670;&nbsp;</a></span>triMotionIndex_</h2>
+<a id="a931abed0eeedeef26913d9e340ce9ab9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a931abed0eeedeef26913d9e340ce9ab9">&#9670;&nbsp;</a></span>triMotionIndex_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -978,26 +1125,26 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a> triMotionIndex_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a> triMotionIndex_ {&quot;surfMotionIndex&quot;}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>motion index mapped on each triangle </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00053">53</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00054">54</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00122">geometryMotion&lt; MotionModelType &gt;::triMotionIndex()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00116">geometryMotion&lt; MotionModelType &gt;::triMotionIndex()</a>.</p>
 
 </div>
 </div>
-<a id="ad334d2260702d0fc65031ab7349e7ce4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad334d2260702d0fc65031ab7349e7ce4">&#9670;&nbsp;</a></span>pointMotionIndex_</h2>
+<a id="ad24b2ac0ad31f0dafa14b6b70dd612cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad24b2ac0ad31f0dafa14b6b70dd612cd">&#9670;&nbsp;</a></span>pointMotionIndex_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1006,21 +1153,21 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#ab794e608e49115b9cf5c0e5e19dbaa8f">int8Vector_HD</a> pointMotionIndex_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a5ca1be96b6212ee93e1c42c690c0aa40">uint32Field_D</a> pointMotionIndex_ {&quot;pointMotionIndex&quot;}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>motion index mapped on each point </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00056">56</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00057">57</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00128">geometryMotion&lt; MotionModelType &gt;::pointMotionIndex()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="geometryMotion_8hpp_source.html#l00122">geometryMotion&lt; MotionModelType &gt;::pointMotionIndex()</a>.</p>
 
 </div>
 </div>
@@ -1039,14 +1186,14 @@ class pFlow::geometryMotion&lt; MotionModelType &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>timer for moveGeometry </p>
 
-<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00059">59</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="geometryMotion_8hpp_source.html#l00060">60</a> of file <a class="el" href="geometryMotion_8hpp_source.html">geometryMotion.hpp</a>.</p>
 
 </div>
 </div>

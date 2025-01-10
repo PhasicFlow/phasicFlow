@@ -1,5 +1,5 @@
 var fieldOperations_8hpp =
 [
-    [ "sumOp", "fieldOperations_8hpp.html#a11d64955a325360de5939ba5a60b862d", null ],
-    [ "sumMaksOp", "fieldOperations_8hpp.html#a49c49011d39f3056c050c9e449f82509", null ]
+    [ "sumOp", "fieldOperations_8hpp.html#a51552aa243821d9ff9de481506a0ca4c", null ],
+    [ "sumMaksOp", "fieldOperations_8hpp.html#a218b96f13e7f121c16342bc1901dd655", null ]
 ];

@@ -1,0 +1,22 @@
+digraph "src/Interaction/grainInteraction/boundaries/boundaryGrainInteraction" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_0c9c27ba3440783510b698affb2e2d63 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="boundaries" fontname="Helvetica", fontsize="10", URL="dir_0c9c27ba3440783510b698affb2e2d63.html"]
+  dir_a3eb68e8bd5473f8307c1b49c9ab400f [shape=box, label="boundaryGrainInteraction", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_a3eb68e8bd5473f8307c1b49c9ab400f.html"];
+  }
+  dir_7845a75b893e9912b1a2d3b9d9476e0b [shape=box label="sphereInteraction" fillcolor="white" style="filled" color="red" URL="dir_7845a75b893e9912b1a2d3b9d9476e0b.html"];
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_9e72493e858003bd3d74a55a2aedd075 [shape=box label="Particles" fillcolor="white" style="filled" color="red" URL="dir_9e72493e858003bd3d74a55a2aedd075.html"];
+  dir_cfeb40d2a5ed0376bc9d9d3119f08c90 [shape=box label="contactLists" URL="dir_cfeb40d2a5ed0376bc9d9d3119f08c90.html"];
+  dir_7845a75b893e9912b1a2d3b9d9476e0b->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="8", labeldistance=1.5 headhref="dir_000039_000031.html"];
+  dir_7845a75b893e9912b1a2d3b9d9476e0b->dir_9e72493e858003bd3d74a55a2aedd075 [headlabel="2", labeldistance=1.5 headhref="dir_000039_000063.html"];
+  dir_7845a75b893e9912b1a2d3b9d9476e0b->dir_cfeb40d2a5ed0376bc9d9d3119f08c90 [headlabel="7", labeldistance=1.5 headhref="dir_000039_000022.html"];
+  dir_9e72493e858003bd3d74a55a2aedd075->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="54", labeldistance=1.5 headhref="dir_000063_000031.html"];
+  dir_cfeb40d2a5ed0376bc9d9d3119f08c90->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="3", labeldistance=1.5 headhref="dir_000022_000031.html"];
+  dir_a3eb68e8bd5473f8307c1b49c9ab400f->dir_7845a75b893e9912b1a2d3b9d9476e0b [headlabel="1", labeldistance=1.5 headhref="dir_000037_000039.html"];
+  dir_a3eb68e8bd5473f8307c1b49c9ab400f->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="2", labeldistance=1.5 headhref="dir_000037_000031.html"];
+  dir_a3eb68e8bd5473f8307c1b49c9ab400f->dir_9e72493e858003bd3d74a55a2aedd075 [headlabel="1", labeldistance=1.5 headhref="dir_000037_000063.html"];
+  dir_a3eb68e8bd5473f8307c1b49c9ab400f->dir_cfeb40d2a5ed0376bc9d9d3119f08c90 [headlabel="1", labeldistance=1.5 headhref="dir_000037_000022.html"];
+}

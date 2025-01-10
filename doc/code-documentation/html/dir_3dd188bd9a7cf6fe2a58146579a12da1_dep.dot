@@ -1,0 +1,33 @@
+digraph "src/phasicFlow/structuredData/pointStructure/selectors/selectorGeometric" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_5063638124a544f0632771a0f8d28fb6 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="selectors" fontname="Helvetica", fontsize="10", URL="dir_5063638124a544f0632771a0f8d28fb6.html"]
+  dir_3dd188bd9a7cf6fe2a58146579a12da1 [shape=box, label="selectorGeometric", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_3dd188bd9a7cf6fe2a58146579a12da1.html"];
+  }
+  dir_ab1bedec1dabb2ed23fd7ef97be7faaf [shape=box label="pointStructure" fillcolor="white" style="filled" color="red" URL="dir_ab1bedec1dabb2ed23fd7ef97be7faaf.html"];
+  dir_3c122f757ce481da214d5e212823922a [shape=box label="sphere" URL="dir_3c122f757ce481da214d5e212823922a.html"];
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [shape=box label="box" URL="dir_e8a9bd8d4c80a50a4f7c200c882d5c23.html"];
+  dir_4f9e597021b90228ccac48345da86dec [shape=box label="peakableRegion" fillcolor="white" style="filled" color="red" URL="dir_4f9e597021b90228ccac48345da86dec.html"];
+  dir_76dfacc83ecf8edeedc0782b54ac44a8 [shape=box label="pStructSelector" URL="dir_76dfacc83ecf8edeedc0782b54ac44a8.html"];
+  dir_2239fa6412e9b0224779ec16b2644e86 [shape=box label="cylinder" URL="dir_2239fa6412e9b0224779ec16b2644e86.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db [shape=box label="dictionary" fillcolor="white" style="filled" color="red" URL="dir_1220c712ed5f98fd84ba71b4848374db.html"];
+  dir_ab1bedec1dabb2ed23fd7ef97be7faaf->dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [headlabel="2", labeldistance=1.5 headhref="dir_000163_000146.html"];
+  dir_3c122f757ce481da214d5e212823922a->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000171_000112.html"];
+  dir_e8a9bd8d4c80a50a4f7c200c882d5c23->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000146_000112.html"];
+  dir_4f9e597021b90228ccac48345da86dec->dir_3c122f757ce481da214d5e212823922a [headlabel="2", labeldistance=1.5 headhref="dir_000152_000171.html"];
+  dir_4f9e597021b90228ccac48345da86dec->dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [headlabel="2", labeldistance=1.5 headhref="dir_000152_000146.html"];
+  dir_4f9e597021b90228ccac48345da86dec->dir_2239fa6412e9b0224779ec16b2644e86 [headlabel="2", labeldistance=1.5 headhref="dir_000152_000147.html"];
+  dir_4f9e597021b90228ccac48345da86dec->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="4", labeldistance=1.5 headhref="dir_000152_000112.html"];
+  dir_76dfacc83ecf8edeedc0782b54ac44a8->dir_ab1bedec1dabb2ed23fd7ef97be7faaf [headlabel="1", labeldistance=1.5 headhref="dir_000166_000163.html"];
+  dir_76dfacc83ecf8edeedc0782b54ac44a8->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000166_000112.html"];
+  dir_2239fa6412e9b0224779ec16b2644e86->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000147_000112.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_ab1bedec1dabb2ed23fd7ef97be7faaf [headlabel="1", labeldistance=1.5 headhref="dir_000168_000163.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_3c122f757ce481da214d5e212823922a [headlabel="1", labeldistance=1.5 headhref="dir_000168_000171.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_e8a9bd8d4c80a50a4f7c200c882d5c23 [headlabel="1", labeldistance=1.5 headhref="dir_000168_000146.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_4f9e597021b90228ccac48345da86dec [headlabel="1", labeldistance=1.5 headhref="dir_000168_000152.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_76dfacc83ecf8edeedc0782b54ac44a8 [headlabel="1", labeldistance=1.5 headhref="dir_000168_000166.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_2239fa6412e9b0224779ec16b2644e86 [headlabel="1", labeldistance=1.5 headhref="dir_000168_000147.html"];
+  dir_3dd188bd9a7cf6fe2a58146579a12da1->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000168_000112.html"];
+}

@@ -105,10 +105,8 @@ $(document).ready(function(){initNavTree('classpFlow_1_1Vector.html',''); initRe
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classpFlow_1_1Vector-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Vector&lt; T, Allocator &gt; Class Template Reference</div>  </div>
@@ -120,97 +118,97 @@ $(document).ready(function(){initNavTree('classpFlow_1_1Vector.html',''); initRe
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Vector__inherit__graph.png" border="0" usemap="#Vector_3_01T_00_01Allocator_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="Vector_3_01T_00_01Allocator_01_4_inherit__map" id="Vector_3_01T_00_01Allocator_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,204,172,231"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="443,15,561,41"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="439,65,565,92"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="435,116,569,143"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="411,167,593,209"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="435,233,569,260"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="401,284,603,311"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="439,335,565,361"/>
-<area shape="rect" href="classpFlow_1_1Vector.html" title=" " alt="" coords="403,386,601,427"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a27481ca5351b1589f138dfddabc6fef3"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T, Allocator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a></td></tr>
-<tr class="separator:a27481ca5351b1589f138dfddabc6fef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18df834101d1f5b0e840b89d1b309bf9"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; T, Allocator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a></td></tr>
-<tr class="separator:a18df834101d1f5b0e840b89d1b309bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb167adee600fd1cba5ec4c2cb93ede7"><td class="memItemLeft" align="right" valign="top">typedef vectorType::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#afb167adee600fd1cba5ec4c2cb93ede7">iterator</a></td></tr>
-<tr class="separator:afb167adee600fd1cba5ec4c2cb93ede7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6210a29ab6dfeef54e2e0f6099a4776a"><td class="memItemLeft" align="right" valign="top">typedef vectorType::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a6210a29ab6dfeef54e2e0f6099a4776a">constIterator</a></td></tr>
-<tr class="separator:a6210a29ab6dfeef54e2e0f6099a4776a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae984783e3c3d2c1a4072c16651b3f520"><td class="memItemLeft" align="right" valign="top">typedef vectorType::reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae984783e3c3d2c1a4072c16651b3f520">reference</a></td></tr>
-<tr class="separator:ae984783e3c3d2c1a4072c16651b3f520"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a239855f76ceec1e94ba94748fbe7f1b6"><td class="memItemLeft" align="right" valign="top">typedef vectorType::const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a239855f76ceec1e94ba94748fbe7f1b6">constReference</a></td></tr>
-<tr class="separator:a239855f76ceec1e94ba94748fbe7f1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f3b992f61b158f2f9bf3a9a75e22998"><td class="memItemLeft" align="right" valign="top">typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a8f3b992f61b158f2f9bf3a9a75e22998">valueType</a></td></tr>
-<tr class="separator:a8f3b992f61b158f2f9bf3a9a75e22998"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a680c78d51cff3fd301666dd75bdbe49d"><td class="memItemLeft" align="right" valign="top">typedef T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a680c78d51cff3fd301666dd75bdbe49d">pointer</a></td></tr>
-<tr class="separator:a680c78d51cff3fd301666dd75bdbe49d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9aeb5819cb45b3dd4b595ad05b9f08ab"><td class="memItemLeft" align="right" valign="top">typedef std::initializer_list&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a9aeb5819cb45b3dd4b595ad05b9f08ab">initList</a></td></tr>
-<tr class="separator:a9aeb5819cb45b3dd4b595ad05b9f08ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3cf712c21986427e001e341c37f9f4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> = <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T, Allocator &gt;</td></tr>
+<tr class="separator:a2b3cf712c21986427e001e341c37f9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ad7745c82b21b12ef70ea003b6f58d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> = typename std::vector&lt; T, Allocator &gt;</td></tr>
+<tr class="separator:ac2ad7745c82b21b12ef70ea003b6f58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae171688cb6e87d159546d03f92dd3e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a0ae171688cb6e87d159546d03f92dd3e">iterator</a> = typename vectorType::iterator</td></tr>
+<tr class="separator:a0ae171688cb6e87d159546d03f92dd3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2d897846f86bdfd4d827f9086df367"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#acc2d897846f86bdfd4d827f9086df367">const_iterator</a> = typename vectorType::const_iterator</td></tr>
+<tr class="separator:acc2d897846f86bdfd4d827f9086df367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86f1755032782d36d0dffc31e269a9e8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a86f1755032782d36d0dffc31e269a9e8">reference</a> = typename vectorType::reference</td></tr>
+<tr class="separator:a86f1755032782d36d0dffc31e269a9e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6571cd15320c555006ded13d50aed5d2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a6571cd15320c555006ded13d50aed5d2">const_reference</a> = typename vectorType::const_reference</td></tr>
+<tr class="separator:a6571cd15320c555006ded13d50aed5d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9ded5f49336ae503bb9f2035ea902b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#afb9ded5f49336ae503bb9f2035ea902b">value_type</a> = T</td></tr>
+<tr class="separator:afb9ded5f49336ae503bb9f2035ea902b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c94ab69cec3a561ed81e0caae46a6c3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a9c94ab69cec3a561ed81e0caae46a6c3">pointer</a> = T *</td></tr>
+<tr class="separator:a9c94ab69cec3a561ed81e0caae46a6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30df3f029cc4d6cbc45d658a83860ff8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a30df3f029cc4d6cbc45d658a83860ff8">const_pointer</a> = const T *</td></tr>
+<tr class="separator:a30df3f029cc4d6cbc45d658a83860ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a502081ddf6a2e0daf706cd593f93a782"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a502081ddf6a2e0daf706cd593f93a782">init_list</a> = typename std::initializer_list&lt; T &gt;</td></tr>
+<tr class="separator:a502081ddf6a2e0daf706cd593f93a782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3841c7e37a0f2578ceb15f94fa91e5a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3841c7e37a0f2578ceb15f94fa91e5a8">TypeInfoTemplateNV2</a> (&quot;Vector&quot;, T, <a class="el" href="classpFlow_1_1Vector.html#aa7f6b7d756ffe3ce0b1d71c0cb57fd90">memoerySpaceName</a>())</td></tr>
-<tr class="separator:a3841c7e37a0f2578ceb15f94fa91e5a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97ea1c80cb6a0cfd277436c16db6aea5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a97ea1c80cb6a0cfd277436c16db6aea5">TypeInfoTemplateNV111</a> (&quot;Vector&quot;, T, <a class="el" href="classpFlow_1_1Vector.html#a4afaef92d6e6a55303575f96107d40ec">memoerySpaceName</a>())</td></tr>
+<tr class="separator:a97ea1c80cb6a0cfd277436c16db6aea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4df026156780bc0ca651c342b7d6daa4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a4df026156780bc0ca651c342b7d6daa4">Vector</a> ()</td></tr>
+<tr class="memdesc:a4df026156780bc0ca651c342b7d6daa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classpFlow_1_1Vector.html">Vector</a>.  <a href="classpFlow_1_1Vector.html#a4df026156780bc0ca651c342b7d6daa4">More...</a><br /></td></tr>
 <tr class="separator:a4df026156780bc0ca651c342b7d6daa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae21d5a2abb12737575e9b707b7236d39"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae21d5a2abb12737575e9b707b7236d39">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>)</td></tr>
+<tr class="memdesc:ae21d5a2abb12737575e9b707b7236d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty <a class="el" href="classpFlow_1_1Vector.html">Vector</a> with a name.  <a href="classpFlow_1_1Vector.html#ae21d5a2abb12737575e9b707b7236d39">More...</a><br /></td></tr>
 <tr class="separator:ae21d5a2abb12737575e9b707b7236d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a196090ca4b2516d23dde664574d73668"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a196090ca4b2516d23dde664574d73668">Vector</a> (const size_t len)</td></tr>
-<tr class="separator:a196090ca4b2516d23dde664574d73668"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0bcdf6feae0cc16664469b3800a90ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae0bcdf6feae0cc16664469b3800a90ef">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, size_t len)</td></tr>
+<tr class="memitem:ae0bcdf6feae0cc16664469b3800a90ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae0bcdf6feae0cc16664469b3800a90ef">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len)</td></tr>
+<tr class="memdesc:ae0bcdf6feae0cc16664469b3800a90ef"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> with specified length and name.  <a href="classpFlow_1_1Vector.html#ae0bcdf6feae0cc16664469b3800a90ef">More...</a><br /></td></tr>
 <tr class="separator:ae0bcdf6feae0cc16664469b3800a90ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd11eececf67738fa93b37649a2f4dff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#afd11eececf67738fa93b37649a2f4dff">Vector</a> (size_t len, const T &amp;val)</td></tr>
-<tr class="separator:afd11eececf67738fa93b37649a2f4dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a987180fdd6def0f00c3386a41d7b8342"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a987180fdd6def0f00c3386a41d7b8342">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, size_t len, const T &amp;val)</td></tr>
+<tr class="memitem:a987180fdd6def0f00c3386a41d7b8342"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a987180fdd6def0f00c3386a41d7b8342">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len, const T &amp;val)</td></tr>
+<tr class="memdesc:a987180fdd6def0f00c3386a41d7b8342"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> with name, length and value.  <a href="classpFlow_1_1Vector.html#a987180fdd6def0f00c3386a41d7b8342">More...</a><br /></td></tr>
 <tr class="separator:a987180fdd6def0f00c3386a41d7b8342"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd2b21b4c87a57bdc9629ccbc43b17ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#acd2b21b4c87a57bdc9629ccbc43b17ee">Vector</a> (const size_t cap, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
-<tr class="separator:acd2b21b4c87a57bdc9629ccbc43b17ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef422de28b6d11a750d698b0dcbd88c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aef422de28b6d11a750d698b0dcbd88c6">Vector</a> (const size_t cap, const size_t len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
-<tr class="separator:aef422de28b6d11a750d698b0dcbd88c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72db2141036e73e01e0720b4502eaff7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a72db2141036e73e01e0720b4502eaff7">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, size_t cap, size_t len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
+<tr class="memitem:a72db2141036e73e01e0720b4502eaff7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a72db2141036e73e01e0720b4502eaff7">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> cap, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> len, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
+<tr class="memdesc:a72db2141036e73e01e0720b4502eaff7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> with name, size and reserved capacity.  <a href="classpFlow_1_1Vector.html#a72db2141036e73e01e0720b4502eaff7">More...</a><br /></td></tr>
 <tr class="separator:a72db2141036e73e01e0720b4502eaff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad53e388e74b5ae30f1b1d2903dca3bb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ad53e388e74b5ae30f1b1d2903dca3bb0">Vector</a> (const size_t cap, const size_t len, const T &amp;val, <a class="el" href="structRESERVE.html">RESERVE</a>)</td></tr>
-<tr class="separator:ad53e388e74b5ae30f1b1d2903dca3bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49f7561e1a7048389e478ede68a33c9c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a49f7561e1a7048389e478ede68a33c9c">Vector</a> (const <a class="el" href="classpFlow_1_1Vector.html#a9aeb5819cb45b3dd4b595ad05b9f08ab">initList</a> &amp;l)</td></tr>
-<tr class="separator:a49f7561e1a7048389e478ede68a33c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26478df90f9283ff242d6379ef6f5909"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a26478df90f9283ff242d6379ef6f5909">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> <a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;src)</td></tr>
-<tr class="separator:a26478df90f9283ff242d6379ef6f5909"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a665a83a6705813bf6064942b1e689130"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a665a83a6705813bf6064942b1e689130">Vector</a> (const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;src)=default</td></tr>
+<tr class="memitem:a3cc3254c977061b8c72a9a59743364c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3cc3254c977061b8c72a9a59743364c1">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, const <a class="el" href="classpFlow_1_1Vector.html#a502081ddf6a2e0daf706cd593f93a782">init_list</a> &amp;l)</td></tr>
+<tr class="memdesc:a3cc3254c977061b8c72a9a59743364c1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> from name and initializer list.  <a href="classpFlow_1_1Vector.html#a3cc3254c977061b8c72a9a59743364c1">More...</a><br /></td></tr>
+<tr class="separator:a3cc3254c977061b8c72a9a59743364c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5421530b54cc194b42f093e0dfaf1e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ad5421530b54cc194b42f093e0dfaf1e0">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;src)</td></tr>
+<tr class="memdesc:ad5421530b54cc194b42f093e0dfaf1e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct with a name and form std::vector (host memory)  <a href="classpFlow_1_1Vector.html#ad5421530b54cc194b42f093e0dfaf1e0">More...</a><br /></td></tr>
+<tr class="separator:ad5421530b54cc194b42f093e0dfaf1e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09b047eea8a8aea1507ee450c617dde6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a09b047eea8a8aea1507ee450c617dde6">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;src, <a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> cap)</td></tr>
+<tr class="memdesc:a09b047eea8a8aea1507ee450c617dde6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct with a name and form std::vector (host memory) and with a desired capacity.  <a href="classpFlow_1_1Vector.html#a09b047eea8a8aea1507ee450c617dde6">More...</a><br /></td></tr>
+<tr class="separator:a09b047eea8a8aea1507ee450c617dde6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a665a83a6705813bf6064942b1e689130"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a665a83a6705813bf6064942b1e689130">Vector</a> (const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;src)=default</td></tr>
+<tr class="memdesc:a665a83a6705813bf6064942b1e689130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy construct.  <a href="classpFlow_1_1Vector.html#a665a83a6705813bf6064942b1e689130">More...</a><br /></td></tr>
 <tr class="separator:a665a83a6705813bf6064942b1e689130"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca0580f9b4943bd27daae19dcdb66093"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aca0580f9b4943bd27daae19dcdb66093">Vector</a> (<a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&amp;mv)=default</td></tr>
-<tr class="separator:aca0580f9b4943bd27daae19dcdb66093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5621d86af3f4478fb78efcbe58f0a5a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a5621d86af3f4478fb78efcbe58f0a5a2">Vector</a> (const <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a> &amp;src)</td></tr>
-<tr class="separator:a5621d86af3f4478fb78efcbe58f0a5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93deae7c93320429258128246527c668"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a93deae7c93320429258128246527c668">operator=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;rhs)=default</td></tr>
+<tr class="memitem:ac958ba4a38aa5a27fe01066846722cee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ac958ba4a38aa5a27fe01066846722cee">Vector</a> (const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;<a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a>, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;src)</td></tr>
+<tr class="memdesc:ac958ba4a38aa5a27fe01066846722cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from src with a new name.  <a href="classpFlow_1_1Vector.html#ac958ba4a38aa5a27fe01066846722cee">More...</a><br /></td></tr>
+<tr class="separator:ac958ba4a38aa5a27fe01066846722cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93deae7c93320429258128246527c668"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a93deae7c93320429258128246527c668">operator=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;rhs)=default</td></tr>
+<tr class="memdesc:a93deae7c93320429258128246527c668"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <a href="classpFlow_1_1Vector.html#a93deae7c93320429258128246527c668">More...</a><br /></td></tr>
 <tr class="separator:a93deae7c93320429258128246527c668"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89437b47fb66364e7b126d12f67e4f0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a89437b47fb66364e7b126d12f67e4f0f">operator=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a> &amp;rhs)</td></tr>
+<tr class="memitem:a89437b47fb66364e7b126d12f67e4f0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a89437b47fb66364e7b126d12f67e4f0f">operator=</a> (const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a89437b47fb66364e7b126d12f67e4f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment from std::vector.  <a href="classpFlow_1_1Vector.html#a89437b47fb66364e7b126d12f67e4f0f">More...</a><br /></td></tr>
 <tr class="separator:a89437b47fb66364e7b126d12f67e4f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac28cf72b4838481c38332e72ab112853"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ac28cf72b4838481c38332e72ab112853">operator=</a> (<a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&amp;mv)=default</td></tr>
-<tr class="separator:ac28cf72b4838481c38332e72ab112853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14030e26af2643d7c89c2ef47f85b0bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a14030e26af2643d7c89c2ef47f85b0bc">Vector</a> (<a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&amp;mv) noexcept=default</td></tr>
+<tr class="memdesc:a14030e26af2643d7c89c2ef47f85b0bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move construct.  <a href="classpFlow_1_1Vector.html#a14030e26af2643d7c89c2ef47f85b0bc">More...</a><br /></td></tr>
+<tr class="separator:a14030e26af2643d7c89c2ef47f85b0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92577148a8e353cbbfec18511d4e9966"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a92577148a8e353cbbfec18511d4e9966">operator=</a> (<a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&amp;mv) noexcept=default</td></tr>
+<tr class="memdesc:a92577148a8e353cbbfec18511d4e9966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classpFlow_1_1Vector.html#a92577148a8e353cbbfec18511d4e9966">More...</a><br /></td></tr>
+<tr class="separator:a92577148a8e353cbbfec18511d4e9966"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e18e86753248052cab589c7f2cbab68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3e18e86753248052cab589c7f2cbab68">operator=</a> (const T &amp;val)</td></tr>
+<tr class="memdesc:a3e18e86753248052cab589c7f2cbab68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scalar assignment.  <a href="classpFlow_1_1Vector.html#a3e18e86753248052cab589c7f2cbab68">More...</a><br /></td></tr>
 <tr class="separator:a3e18e86753248052cab589c7f2cbab68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa9fccd0cb7734271f7a15e5d9dc0d27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aaa9fccd0cb7734271f7a15e5d9dc0d27">~Vector</a> ()</td></tr>
-<tr class="separator:aaa9fccd0cb7734271f7a15e5d9dc0d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bd4e7daf26f3446f7273e608aa20a6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a0bd4e7daf26f3446f7273e608aa20a6d">clone</a> () const</td></tr>
+<tr class="memitem:a194f94f9096436a06c31df048a9fd35f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a194f94f9096436a06c31df048a9fd35f">~Vector</a> ()=default</td></tr>
+<tr class="memdesc:a194f94f9096436a06c31df048a9fd35f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classpFlow_1_1Vector.html#a194f94f9096436a06c31df048a9fd35f">More...</a><br /></td></tr>
+<tr class="separator:a194f94f9096436a06c31df048a9fd35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd4e7daf26f3446f7273e608aa20a6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt; <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a0bd4e7daf26f3446f7273e608aa20a6d">clone</a> () const</td></tr>
+<tr class="memdesc:a0bd4e7daf26f3446f7273e608aa20a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone as a <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>.  <a href="classpFlow_1_1Vector.html#a0bd4e7daf26f3446f7273e608aa20a6d">More...</a><br /></td></tr>
 <tr class="separator:a0bd4e7daf26f3446f7273e608aa20a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a482888162c626099730c0e619a9c2ce7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a482888162c626099730c0e619a9c2ce7">clonePtr</a> () const</td></tr>
+<tr class="memitem:a482888162c626099730c0e619a9c2ce7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a482888162c626099730c0e619a9c2ce7">clonePtr</a> () const</td></tr>
+<tr class="memdesc:a482888162c626099730c0e619a9c2ce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone as a pointer.  <a href="classpFlow_1_1Vector.html#a482888162c626099730c0e619a9c2ce7">More...</a><br /></td></tr>
 <tr class="separator:a482888162c626099730c0e619a9c2ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e122a9f9c04a4e2dffdfabde2f1de50"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3e122a9f9c04a4e2dffdfabde2f1de50">clear</a> ()</td></tr>
-<tr class="separator:a3e122a9f9c04a4e2dffdfabde2f1de50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bf395066434c8b49368b60d6dcaa3c2"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3bf395066434c8b49368b60d6dcaa3c2">VectorField</a> () const</td></tr>
+<tr class="memitem:a3bf395066434c8b49368b60d6dcaa3c2"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3bf395066434c8b49368b60d6dcaa3c2">VectorField</a> () const</td></tr>
+<tr class="memdesc:a3bf395066434c8b49368b60d6dcaa3c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to this, mostly used by derived classes.  <a href="classpFlow_1_1Vector.html#a3bf395066434c8b49368b60d6dcaa3c2">More...</a><br /></td></tr>
 <tr class="separator:a3bf395066434c8b49368b60d6dcaa3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39c4696490d1dc0845b36826dd0554d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a39c4696490d1dc0845b36826dd0554d2">VectorField</a> ()</td></tr>
+<tr class="memitem:a39c4696490d1dc0845b36826dd0554d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a39c4696490d1dc0845b36826dd0554d2">VectorField</a> ()</td></tr>
 <tr class="separator:a39c4696490d1dc0845b36826dd0554d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bf66e1fb0c930579f03e69eb94376c5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a7bf66e1fb0c930579f03e69eb94376c5">vectorField</a> () const</td></tr>
+<tr class="memitem:a7bf66e1fb0c930579f03e69eb94376c5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a7bf66e1fb0c930579f03e69eb94376c5">vectorField</a> () const</td></tr>
 <tr class="separator:a7bf66e1fb0c930579f03e69eb94376c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6c65c8c12a7159773d7cbac9b170778"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aa6c65c8c12a7159773d7cbac9b170778">vectorField</a> ()</td></tr>
+<tr class="memitem:aa6c65c8c12a7159773d7cbac9b170778"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aa6c65c8c12a7159773d7cbac9b170778">vectorField</a> ()</td></tr>
 <tr class="separator:aa6c65c8c12a7159773d7cbac9b170778"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c6a7f38ddd92a5d3a3ab63112465bad"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a6c6a7f38ddd92a5d3a3ab63112465bad">deviceVectorAll</a> ()</td></tr>
 <tr class="separator:a6c6a7f38ddd92a5d3a3ab63112465bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,34 +219,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a88040121f32e5cadab180dadd31c9495"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a88040121f32e5cadab180dadd31c9495">deviceVector</a> () const</td></tr>
 <tr class="separator:a88040121f32e5cadab180dadd31c9495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc80e00a8ac919288fb55bd14cc88bf6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">name</a> () const</td></tr>
+<tr class="memdesc:acc80e00a8ac919288fb55bd14cc88bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the vector.  <a href="classpFlow_1_1Vector.html#acc80e00a8ac919288fb55bd14cc88bf6">More...</a><br /></td></tr>
 <tr class="separator:acc80e00a8ac919288fb55bd14cc88bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10efdf47ffedbdc720f71c2f72b98d98"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">size</a> () const</td></tr>
+<tr class="memdesc:a10efdf47ffedbdc720f71c2f72b98d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the vector.  <a href="classpFlow_1_1Vector.html#a10efdf47ffedbdc720f71c2f72b98d98">More...</a><br /></td></tr>
 <tr class="separator:a10efdf47ffedbdc720f71c2f72b98d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a234de5cb432c97fcb4b0f806bb86624e"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">capacity</a> () const</td></tr>
+<tr class="memdesc:a234de5cb432c97fcb4b0f806bb86624e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capacity of the vector.  <a href="classpFlow_1_1Vector.html#a234de5cb432c97fcb4b0f806bb86624e">More...</a><br /></td></tr>
 <tr class="separator:a234de5cb432c97fcb4b0f806bb86624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dbf7d015e95cf17d59eafb6828e9cac"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a3dbf7d015e95cf17d59eafb6828e9cac">reserve</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> len)</td></tr>
-<tr class="separator:a3dbf7d015e95cf17d59eafb6828e9cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4434e6dde369bc0432ab2068bdcebf6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aa4434e6dde369bc0432ab2068bdcebf6">deleteElement_sorted</a> (const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> &gt; &amp;indices)</td></tr>
-<tr class="separator:aa4434e6dde369bc0432ab2068bdcebf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f21fcefd35e2538e7da6e933c8baeb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae3f21fcefd35e2538e7da6e933c8baeb">deleteElement</a> (const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> &gt; &amp;indices)</td></tr>
-<tr class="separator:ae3f21fcefd35e2538e7da6e933c8baeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a216beb08e71c4da16ab1aa538ff9757a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a216beb08e71c4da16ab1aa538ff9757a">deleteElement</a> (<a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> index)</td></tr>
-<tr class="separator:a216beb08e71c4da16ab1aa538ff9757a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e7d0642915db6cb9395e3250360c04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a64e7d0642915db6cb9395e3250360c04">sortItems</a> (const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;indices)</td></tr>
-<tr class="memdesc:a64e7d0642915db6cb9395e3250360c04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort elements based on the indices.  <a href="classpFlow_1_1Vector.html#a64e7d0642915db6cb9395e3250360c04">More...</a><br /></td></tr>
-<tr class="separator:a64e7d0642915db6cb9395e3250360c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30b7f34210d48986237bf8f1c7794493"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a30b7f34210d48986237bf8f1c7794493">insertSetElement</a> (const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;indices, const T &amp;val)</td></tr>
-<tr class="separator:a30b7f34210d48986237bf8f1c7794493"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a36bee20562c05a4cc9ee14ea560727"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a5a36bee20562c05a4cc9ee14ea560727">insertSetElement</a> (const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;indices, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vals)</td></tr>
-<tr class="separator:a5a36bee20562c05a4cc9ee14ea560727"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91c25cb240f7cb7be088f7da9e073791"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a91c25cb240f7cb7be088f7da9e073791">insertSetElement</a> (const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &amp;indices, const T &amp;val)</td></tr>
-<tr class="separator:a91c25cb240f7cb7be088f7da9e073791"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff5470629107827f20f27e4fe51f3d85"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aff5470629107827f20f27e4fe51f3d85">insertSetElement</a> (const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &amp;indices, const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;vals)</td></tr>
-<tr class="separator:aff5470629107827f20f27e4fe51f3d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae71b0968705366d585f7852cc242f69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aae71b0968705366d585f7852cc242f69">insertSetElement</a> (<a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> idx, const T &amp;val)</td></tr>
-<tr class="separator:aae71b0968705366d585f7852cc242f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a644718bb2fb240de962dc3c9a1fdf0dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a644718bb2fb240de962dc3c9a1fdf0dc">empty</a> () const</td></tr>
+<tr class="memdesc:a644718bb2fb240de962dc3c9a1fdf0dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">If vector is empty.  <a href="classpFlow_1_1Vector.html#a644718bb2fb240de962dc3c9a1fdf0dc">More...</a><br /></td></tr>
+<tr class="separator:a644718bb2fb240de962dc3c9a1fdf0dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172a7c88be982061ecefadd95725c1a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a172a7c88be982061ecefadd95725c1a1">reserve</a> (<a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> cap)</td></tr>
+<tr class="memdesc:a172a7c88be982061ecefadd95725c1a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserve capacity for vector Preserve the content.  <a href="classpFlow_1_1Vector.html#a172a7c88be982061ecefadd95725c1a1">More...</a><br /></td></tr>
+<tr class="separator:a172a7c88be982061ecefadd95725c1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34b3e020ef4d15f9b2442bfff37f19b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a34b3e020ef4d15f9b2442bfff37f19b8">fill</a> (const T &amp;val)</td></tr>
 <tr class="separator:a34b3e020ef4d15f9b2442bfff37f19b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943630f66f515106f774845121668af0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a943630f66f515106f774845121668af0">fill</a> (<a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> start, <a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> end, const T &amp;val)</td></tr>
+<tr class="memdesc:a943630f66f515106f774845121668af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">fill the content in range [start, end)  <a href="classpFlow_1_1Vector.html#a943630f66f515106f774845121668af0">More...</a><br /></td></tr>
+<tr class="separator:a943630f66f515106f774845121668af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7fbe27588401af02ce8d7c83032f42d"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#af7fbe27588401af02ce8d7c83032f42d">getSpan</a> ()</td></tr>
+<tr class="separator:af7fbe27588401af02ce8d7c83032f42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3136bd3fcd8f09b314bdd97f6872690"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ab3136bd3fcd8f09b314bdd97f6872690">getSpan</a> () const</td></tr>
+<tr class="separator:ab3136bd3fcd8f09b314bdd97f6872690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0df644664622b4bdfe9ba3e95f0347e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae0df644664622b4bdfe9ba3e95f0347e">operator+=</a> (const T &amp;val)</td></tr>
 <tr class="separator:ae0df644664622b4bdfe9ba3e95f0347e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d3bacae1bb0a817e566bab15c2e4be4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a2d3bacae1bb0a817e566bab15c2e4be4">operator-=</a> (const T &amp;val)</td></tr>
@@ -257,51 +250,39 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afec93ae36ff0423832d6a5863f19bd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7106c94d412c940f3be125e178d2e0b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a7106c94d412c940f3be125e178d2e0b5">operator/=</a> (const T &amp;val)</td></tr>
 <tr class="separator:a7106c94d412c940f3be125e178d2e0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ece13f41f55786179efd567c34019a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a8ece13f41f55786179efd567c34019a4">operator+=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;v)</td></tr>
+<tr class="memitem:a8ece13f41f55786179efd567c34019a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a8ece13f41f55786179efd567c34019a4">operator+=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;v)</td></tr>
 <tr class="separator:a8ece13f41f55786179efd567c34019a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac95c6d98945ecda8a27987fc68961a20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ac95c6d98945ecda8a27987fc68961a20">operator-=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;v)</td></tr>
+<tr class="memitem:ac95c6d98945ecda8a27987fc68961a20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ac95c6d98945ecda8a27987fc68961a20">operator-=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;v)</td></tr>
 <tr class="separator:ac95c6d98945ecda8a27987fc68961a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad01909dad5b3ce7b47b4fb0301582d8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ad01909dad5b3ce7b47b4fb0301582d8a">operator/=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;v)</td></tr>
+<tr class="memitem:ad01909dad5b3ce7b47b4fb0301582d8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ad01909dad5b3ce7b47b4fb0301582d8a">operator/=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;v)</td></tr>
 <tr class="separator:ad01909dad5b3ce7b47b4fb0301582d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45d541c4fb7d734547c5181a64db90ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a45d541c4fb7d734547c5181a64db90ae">operator*=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;v)</td></tr>
+<tr class="memitem:a45d541c4fb7d734547c5181a64db90ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a45d541c4fb7d734547c5181a64db90ae">operator*=</a> (const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;v)</td></tr>
 <tr class="separator:a45d541c4fb7d734547c5181a64db90ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e46fc0ae1229ee313bf26fb6cfa0b5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a2e46fc0ae1229ee313bf26fb6cfa0b5a">operator-</a> () const</td></tr>
+<tr class="memitem:a2e46fc0ae1229ee313bf26fb6cfa0b5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a2e46fc0ae1229ee313bf26fb6cfa0b5a">operator-</a> () const</td></tr>
 <tr class="separator:a2e46fc0ae1229ee313bf26fb6cfa0b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a786e355e86545cf95626b86e08a1b32f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a786e355e86545cf95626b86e08a1b32f">Vector</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
-<tr class="separator:a786e355e86545cf95626b86e08a1b32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61b6e21215a4976ac3317cea96b56eaa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a61b6e21215a4976ac3317cea96b56eaa">readVector</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, size_t len=0)</td></tr>
-<tr class="separator:a61b6e21215a4976ac3317cea96b56eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a127385e6395d9d457aee6fcb1c1807b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a127385e6395d9d457aee6fcb1c1807b7">writeVector</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
-<tr class="separator:a127385e6395d9d457aee6fcb1c1807b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8e92ab47032ae811d1271161cb9b22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aff8e92ab47032ae811d1271161cb9b22">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is)</td></tr>
 <tr class="separator:aff8e92ab47032ae811d1271161cb9b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os) const</td></tr>
 <tr class="separator:a6a40de4ceed55b2f78cf3027739dfd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18b302149a795955a7b70b411e877975"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a18b302149a795955a7b70b411e877975">read</a> (<a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;is, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop)</td></tr>
+<tr class="separator:a18b302149a795955a7b70b411e877975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c955e17bd99dcab8fa9cf8c96ba6dd0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a8c955e17bd99dcab8fa9cf8c96ba6dd0">write</a> (<a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;os, const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;iop) const</td></tr>
+<tr class="separator:a8c955e17bd99dcab8fa9cf8c96ba6dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a651d8c3ded550b3444d63db673d76af1"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a651d8c3ded550b3444d63db673d76af1">isHostAccessible</a> ()</td></tr>
 <tr class="separator:a651d8c3ded550b3444d63db673d76af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afaef92d6e6a55303575f96107d40ec"><td class="memItemLeft" align="right" valign="top">static constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a4afaef92d6e6a55303575f96107d40ec">memoerySpaceName</a> ()</td></tr>
+<tr class="separator:a4afaef92d6e6a55303575f96107d40ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a174eb448c502cd3745ca4d4e5103fc56"><td class="memItemLeft" align="right" valign="top">const typedef T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a174eb448c502cd3745ca4d4e5103fc56">constPointer</a></td></tr>
-<tr class="separator:a174eb448c502cd3745ca4d4e5103fc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
-Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a06bb59597b52844c4b5ccca2c6a1122b"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a06bb59597b52844c4b5ccca2c6a1122b">getVectorStride</a> (const size_t &amp;len)</td></tr>
-<tr class="separator:a06bb59597b52844c4b5ccca2c6a1122b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7f6b7d756ffe3ce0b1d71c0cb57fd90"><td class="memItemLeft" align="right" valign="top">constexpr static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#aa7f6b7d756ffe3ce0b1d71c0cb57fd90">memoerySpaceName</a> ()</td></tr>
-<tr class="separator:aa7f6b7d756ffe3ce0b1d71c0cb57fd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:a50fd7d13a0f7a6007ca5027b3bb8765a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#a50fd7d13a0f7a6007ca5027b3bb8765a">name_</a></td></tr>
 <tr class="separator:a50fd7d13a0f7a6007ca5027b3bb8765a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
 <tr class="memitem:ae6637e7df6fa318c820511b10e2cc170"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1Vector.html#ae6637e7df6fa318c820511b10e2cc170">isHostAccessible_</a> = true</td></tr>
 <tr class="separator:ae6637e7df6fa318c820511b10e2cc170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -310,155 +291,171 @@ Static Protected Attributes</h2></td></tr>
 class pFlow::Vector&lt; T, Allocator &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00046">46</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00048">48</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a27481ca5351b1589f138dfddabc6fef3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27481ca5351b1589f138dfddabc6fef3">&#9670;&nbsp;</a></span>VectorType</h2>
+<a id="a2b3cf712c21986427e001e341c37f9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3cf712c21986427e001e341c37f9f4">&#9670;&nbsp;</a></span>VectorType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt;T, Allocator&gt; <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> =  <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt;T, Allocator&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00071">71</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00062">62</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a18df834101d1f5b0e840b89d1b309bf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18df834101d1f5b0e840b89d1b309bf9">&#9670;&nbsp;</a></span>vectorType</h2>
+<a id="ac2ad7745c82b21b12ef70ea003b6f58d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ad7745c82b21b12ef70ea003b6f58d">&#9670;&nbsp;</a></span>vectorType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;T, Allocator&gt; <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> =  typename std::vector&lt;T, Allocator&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00073">73</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00064">64</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afb167adee600fd1cba5ec4c2cb93ede7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb167adee600fd1cba5ec4c2cb93ede7">&#9670;&nbsp;</a></span>iterator</h2>
+<a id="a0ae171688cb6e87d159546d03f92dd3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ae171688cb6e87d159546d03f92dd3e">&#9670;&nbsp;</a></span>iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef vectorType::iterator <a class="el" href="classpFlow_1_1Vector.html#afb167adee600fd1cba5ec4c2cb93ede7">iterator</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a0ae171688cb6e87d159546d03f92dd3e">iterator</a> =  typename vectorType::iterator</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00075">75</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00066">66</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6210a29ab6dfeef54e2e0f6099a4776a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6210a29ab6dfeef54e2e0f6099a4776a">&#9670;&nbsp;</a></span>constIterator</h2>
+<a id="acc2d897846f86bdfd4d827f9086df367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc2d897846f86bdfd4d827f9086df367">&#9670;&nbsp;</a></span>const_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef vectorType::const_iterator <a class="el" href="classpFlow_1_1Vector.html#a6210a29ab6dfeef54e2e0f6099a4776a">constIterator</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#acc2d897846f86bdfd4d827f9086df367">const_iterator</a> =  typename vectorType::const_iterator</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00077">77</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00068">68</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae984783e3c3d2c1a4072c16651b3f520"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae984783e3c3d2c1a4072c16651b3f520">&#9670;&nbsp;</a></span>reference</h2>
+<a id="a86f1755032782d36d0dffc31e269a9e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86f1755032782d36d0dffc31e269a9e8">&#9670;&nbsp;</a></span>reference</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef vectorType::reference <a class="el" href="classpFlow_1_1Vector.html#ae984783e3c3d2c1a4072c16651b3f520">reference</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a86f1755032782d36d0dffc31e269a9e8">reference</a> =  typename vectorType::reference</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00079">79</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00070">70</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a239855f76ceec1e94ba94748fbe7f1b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a239855f76ceec1e94ba94748fbe7f1b6">&#9670;&nbsp;</a></span>constReference</h2>
+<a id="a6571cd15320c555006ded13d50aed5d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6571cd15320c555006ded13d50aed5d2">&#9670;&nbsp;</a></span>const_reference</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef vectorType::const_reference <a class="el" href="classpFlow_1_1Vector.html#a239855f76ceec1e94ba94748fbe7f1b6">constReference</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a6571cd15320c555006ded13d50aed5d2">const_reference</a> =  typename vectorType::const_reference</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00081">81</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00072">72</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8f3b992f61b158f2f9bf3a9a75e22998"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f3b992f61b158f2f9bf3a9a75e22998">&#9670;&nbsp;</a></span>valueType</h2>
+<a id="afb9ded5f49336ae503bb9f2035ea902b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb9ded5f49336ae503bb9f2035ea902b">&#9670;&nbsp;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef T <a class="el" href="classpFlow_1_1Vector.html#a8f3b992f61b158f2f9bf3a9a75e22998">valueType</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#afb9ded5f49336ae503bb9f2035ea902b">value_type</a> =  T</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00083">83</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00074">74</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a680c78d51cff3fd301666dd75bdbe49d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a680c78d51cff3fd301666dd75bdbe49d">&#9670;&nbsp;</a></span>pointer</h2>
+<a id="a9c94ab69cec3a561ed81e0caae46a6c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c94ab69cec3a561ed81e0caae46a6c3">&#9670;&nbsp;</a></span>pointer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef T* <a class="el" href="classpFlow_1_1Vector.html#a680c78d51cff3fd301666dd75bdbe49d">pointer</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a9c94ab69cec3a561ed81e0caae46a6c3">pointer</a> =  T *</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00085">85</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00076">76</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a9aeb5819cb45b3dd4b595ad05b9f08ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9aeb5819cb45b3dd4b595ad05b9f08ab">&#9670;&nbsp;</a></span>initList</h2>
+<a id="a30df3f029cc4d6cbc45d658a83860ff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30df3f029cc4d6cbc45d658a83860ff8">&#9670;&nbsp;</a></span>const_pointer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::initializer_list&lt;T&gt; <a class="el" href="classpFlow_1_1Vector.html#a9aeb5819cb45b3dd4b595ad05b9f08ab">initList</a></td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a30df3f029cc4d6cbc45d658a83860ff8">const_pointer</a> =  const T *</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00089">89</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00078">78</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a502081ddf6a2e0daf706cd593f93a782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a502081ddf6a2e0daf706cd593f93a782">&#9670;&nbsp;</a></span>init_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classpFlow_1_1Vector.html#a502081ddf6a2e0daf706cd593f93a782">init_list</a> =  typename std::initializer_list&lt;T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00080">80</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4df026156780bc0ca651c342b7d6daa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4df026156780bc0ca651c342b7d6daa4">&#9670;&nbsp;</a></span>Vector() <span class="overload">[1/16]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df026156780bc0ca651c342b7d6daa4">&#9670;&nbsp;</a></span>Vector() <span class="overload">[1/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -480,12 +477,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00123">123</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Empty <a class="el" href="classpFlow_1_1Vector.html">Vector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00101">101</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
 <a id="ae21d5a2abb12737575e9b707b7236d39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae21d5a2abb12737575e9b707b7236d39">&#9670;&nbsp;</a></span>Vector() <span class="overload">[2/16]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae21d5a2abb12737575e9b707b7236d39">&#9670;&nbsp;</a></span>Vector() <span class="overload">[2/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -503,45 +502,19 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00128">128</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Empty <a class="el" href="classpFlow_1_1Vector.html">Vector</a> with a name. </p>
 
-</div>
-</div>
-<a id="a196090ca4b2516d23dde664574d73668"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a196090ca4b2516d23dde664574d73668">&#9670;&nbsp;</a></span>Vector() <span class="overload">[3/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>len</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00133">133</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00109">109</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
 <a id="ae0bcdf6feae0cc16664469b3800a90ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0bcdf6feae0cc16664469b3800a90ef">&#9670;&nbsp;</a></span>Vector() <span class="overload">[4/16]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0bcdf6feae0cc16664469b3800a90ef">&#9670;&nbsp;</a></span>Vector() <span class="overload">[3/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,7 +531,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
@@ -574,50 +547,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00139">139</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p><a class="el" href="classpFlow_1_1Vector.html">Vector</a> with specified length and name. </p>
 
-</div>
-</div>
-<a id="afd11eececf67738fa93b37649a2f4dff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd11eececf67738fa93b37649a2f4dff">&#9670;&nbsp;</a></span>Vector() <span class="overload">[5/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00148">148</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00117">117</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a987180fdd6def0f00c3386a41d7b8342"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a987180fdd6def0f00c3386a41d7b8342">&#9670;&nbsp;</a></span>Vector() <span class="overload">[6/16]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a987180fdd6def0f00c3386a41d7b8342">&#9670;&nbsp;</a></span>Vector() <span class="overload">[4/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -634,7 +571,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
@@ -656,94 +593,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00153">153</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p><a class="el" href="classpFlow_1_1Vector.html">Vector</a> with name, length and value. </p>
 
-</div>
-</div>
-<a id="acd2b21b4c87a57bdc9629ccbc43b17ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd2b21b4c87a57bdc9629ccbc43b17ee">&#9670;&nbsp;</a></span>Vector() <span class="overload">[7/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>cap</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00162">162</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aef422de28b6d11a750d698b0dcbd88c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef422de28b6d11a750d698b0dcbd88c6">&#9670;&nbsp;</a></span>Vector() <span class="overload">[8/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>cap</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00167">167</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00125">125</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a72db2141036e73e01e0720b4502eaff7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72db2141036e73e01e0720b4502eaff7">&#9670;&nbsp;</a></span>Vector() <span class="overload">[9/16]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a72db2141036e73e01e0720b4502eaff7">&#9670;&nbsp;</a></span>Vector() <span class="overload">[5/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -760,13 +617,13 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
           <td class="paramname"><em>cap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
           <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
@@ -788,12 +645,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00174">174</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p><a class="el" href="classpFlow_1_1Vector.html">Vector</a> with name, size and reserved capacity. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00133">133</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad53e388e74b5ae30f1b1d2903dca3bb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad53e388e74b5ae30f1b1d2903dca3bb0">&#9670;&nbsp;</a></span>Vector() <span class="overload">[10/16]</span></h2>
+<a id="a3cc3254c977061b8c72a9a59743364c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc3254c977061b8c72a9a59743364c1">&#9670;&nbsp;</a></span>Vector() <span class="overload">[6/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -804,26 +663,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
           <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>cap</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structRESERVE.html">RESERVE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a502081ddf6a2e0daf706cd593f93a782">init_list</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -838,12 +685,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00181">181</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p><a class="el" href="classpFlow_1_1Vector.html">Vector</a> from name and initializer list. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00143">143</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a49f7561e1a7048389e478ede68a33c9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49f7561e1a7048389e478ede68a33c9c">&#9670;&nbsp;</a></span>Vector() <span class="overload">[11/16]</span></h2>
+<a id="ad5421530b54cc194b42f093e0dfaf1e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5421530b54cc194b42f093e0dfaf1e0">&#9670;&nbsp;</a></span>Vector() <span class="overload">[7/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -854,9 +703,19 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a9aeb5819cb45b3dd4b595ad05b9f08ab">initList</a> &amp;&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -866,12 +725,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00190">190</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Construct with a name and form std::vector (host memory) </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00150">150</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a26478df90f9283ff242d6379ef6f5909"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26478df90f9283ff242d6379ef6f5909">&#9670;&nbsp;</a></span>Vector() <span class="overload">[12/16]</span></h2>
+<a id="a09b047eea8a8aea1507ee450c617dde6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09b047eea8a8aea1507ee450c617dde6">&#9670;&nbsp;</a></span>Vector() <span class="overload">[8/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -882,7 +743,83 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>cap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct with a name and form std::vector (host memory) and with a desired capacity. </p>
+<p><br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00158">158</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a665a83a6705813bf6064942b1e689130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a665a83a6705813bf6064942b1e689130">&#9670;&nbsp;</a></span>Vector() <span class="overload">[9/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy construct. </p>
+
+</div>
+</div>
+<a id="ac958ba4a38aa5a27fe01066846722cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac958ba4a38aa5a27fe01066846722cee">&#9670;&nbsp;</a></span>Vector() <span class="overload">[10/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
@@ -904,38 +841,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00196">196</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Copy from src with a new name. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00169">169</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a665a83a6705813bf6064942b1e689130"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a665a83a6705813bf6064942b1e689130">&#9670;&nbsp;</a></span>Vector() <span class="overload">[13/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aca0580f9b4943bd27daae19dcdb66093"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca0580f9b4943bd27daae19dcdb66093">&#9670;&nbsp;</a></span>Vector() <span class="overload">[14/16]</span></h2>
+<a id="a14030e26af2643d7c89c2ef47f85b0bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14030e26af2643d7c89c2ef47f85b0bc">&#9670;&nbsp;</a></span>Vector() <span class="overload">[11/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -946,50 +859,24 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>mv</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a5621d86af3f4478fb78efcbe58f0a5a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5621d86af3f4478fb78efcbe58f0a5a2">&#9670;&nbsp;</a></span>Vector() <span class="overload">[15/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a> &amp;&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00207">207</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Move construct. </p>
 
 </div>
 </div>
-<a id="aaa9fccd0cb7734271f7a15e5d9dc0d27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa9fccd0cb7734271f7a15e5d9dc0d27">&#9670;&nbsp;</a></span>~Vector()</h2>
+<a id="a194f94f9096436a06c31df048a9fd35f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a194f94f9096436a06c31df048a9fd35f">&#9670;&nbsp;</a></span>~Vector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1006,99 +893,24 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00233">233</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a786e355e86545cf95626b86e08a1b32f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a786e355e86545cf95626b86e08a1b32f">&#9670;&nbsp;</a></span>Vector() <span class="overload">[16/16]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html">Vector</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00023">23</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
+<p>Destructor. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a06bb59597b52844c4b5ccca2c6a1122b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06bb59597b52844c4b5ccca2c6a1122b">&#9670;&nbsp;</a></span>getVectorStride()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static size_t getVectorStride </td>
-          <td>(</td>
-          <td class="paramtype">const size_t &amp;&#160;</td>
-          <td class="paramname"><em>len</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00096">96</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa7f6b7d756ffe3ce0b1d71c0cb57fd90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7f6b7d756ffe3ce0b1d71c0cb57fd90">&#9670;&nbsp;</a></span>memoerySpaceName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr static const char* memoerySpaceName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00109">109</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3841c7e37a0f2578ceb15f94fa91e5a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3841c7e37a0f2578ceb15f94fa91e5a8">&#9670;&nbsp;</a></span>TypeInfoTemplateNV2()</h2>
+<a id="a97ea1c80cb6a0cfd277436c16db6aea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97ea1c80cb6a0cfd277436c16db6aea5">&#9670;&nbsp;</a></span>TypeInfoTemplateNV111()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">TypeInfoTemplateNV2 </td>
+          <td class="memname">TypeInfoTemplateNV111 </td>
           <td>(</td>
           <td class="paramtype">&quot;Vector&lt; T, Allocator &gt;&quot;&#160;</td>
           <td class="paramname">, </td>
@@ -1112,7 +924,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1Vector.html#aa7f6b7d756ffe3ce0b1d71c0cb57fd90">memoerySpaceName</a>()&#160;</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1Vector.html#a4afaef92d6e6a55303575f96107d40ec">memoerySpaceName</a>()&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -1135,9 +947,9 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&amp; operator= </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&amp; operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1148,6 +960,8 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Copy assignment. </p>
 
 </div>
 </div>
@@ -1161,9 +975,9 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&amp; operator= </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&amp; operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>rhs</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1175,12 +989,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00218">218</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Copy assignment from std::vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00178">178</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ac28cf72b4838481c38332e72ab112853"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac28cf72b4838481c38332e72ab112853">&#9670;&nbsp;</a></span>operator=() <span class="overload">[3/4]</span></h2>
+<a id="a92577148a8e353cbbfec18511d4e9966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92577148a8e353cbbfec18511d4e9966">&#9670;&nbsp;</a></span>operator=() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1189,19 +1005,21 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&amp; operator= </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&amp; operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>mv</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move assignment. </p>
 
 </div>
 </div>
@@ -1229,7 +1047,9 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00228">228</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Scalar assignment. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00191">191</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1243,7 +1063,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt;<a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&gt; clone </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>&lt;<a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&gt; clone </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1256,7 +1076,9 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00238">238</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Clone as a <a class="el" href="classpFlow_1_1uniquePtr.html">uniquePtr</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00201">201</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1270,7 +1092,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>* clonePtr </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>* clonePtr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1283,61 +1105,9 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00243">243</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Clone as a pointer. </p>
 
-</div>
-</div>
-<a id="a3e122a9f9c04a4e2dffdfabde2f1de50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e122a9f9c04a4e2dffdfabde2f1de50">&#9670;&nbsp;</a></span>clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto clear </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00248">248</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="multiTriSurface_8hpp_source.html#l00091">multiTriSurface::clear()</a>, <a class="el" href="Vector_8cpp_source.html#l00140">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::deleteElement_sorted()</a>, <a class="el" href="geometry_8cpp_source.html#l00025">geometry::findPropertyId()</a>, <a class="el" href="pointStructure_8cpp_source.html#l00077">pointStructure::getNewPointsIndices()</a>, <a class="el" href="shapeMixture_8cpp_source.html#l00055">shapeMixture::getNextShapeNameN()</a>, <a class="el" href="InsertionRegion_8cpp_source.html#l00055">InsertionRegion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="positionRandom_8cpp_source.html#l00059">positionRandom::positionOnePass()</a>, <a class="el" href="stlFile_8cpp_source.html#l00052">stlFile::readSolid()</a>, <a class="el" href="selectBox_8cpp_source.html#l00025">selectBox::selectAllPointsInBox()</a>, <a class="el" href="selectRandom_8cpp_source.html#l00028">selectRandom::selectAllPointsInRange()</a>, <a class="el" href="selectRange_8cpp_source.html#l00025">selectRange::selectAllPointsInRange()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00144">sphereShape::shapeToDiameter()</a>, <a class="el" href="positionParticles_8cpp_source.html#l00031">positionParticles::sortByMortonCode()</a>, <a class="el" href="triSurface_8cpp_source.html#l00148">triSurface::triSurface()</a>, and <a class="el" href="sphereShape_8cpp_source.html#l00085">sphereShape::writeDictionary()</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Vector_a3e122a9f9c04a4e2dffdfabde2f1de50_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a3e122a9f9c04a4e2dffdfabde2f1de50_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a3e122a9f9c04a4e2dffdfabde2f1de50_icgraph" id="classpFlow_1_1Vector_a3e122a9f9c04a4e2dffdfabde2f1de50_icgraph">
-<area shape="rect" title=" " alt="" coords="284,465,339,491"/>
-<area shape="rect" href="classpFlow_1_1multiTriSurface.html#ac8bb3912a3ce86b15842e79d0b421204" title=" " alt="" coords="37,5,205,47"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#aa4434e6dde369bc0432ab2068bdcebf6" title=" " alt="" coords="19,71,222,127"/>
-<area shape="rect" href="classpFlow_1_1geometry.html#ac1e82192333bcb3aeac1641a41a002f8" title="Find property id of each triangle based on the supplied material name and the surface wall that the t..." alt="" coords="5,151,236,178"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a3d039dd7281b12efe26e02f64c5a4a43" title=" " alt="" coords="37,203,204,244"/>
-<area shape="rect" href="classpFlow_1_1shapeMixture.html#abe6a32d589238a46ff8bd34e0f7ad07f" title=" " alt="" coords="35,268,206,309"/>
-<area shape="rect" href="classpFlow_1_1InsertionRegion.html#a7aca664f39c4a6e73d6666a36ad687ce" title=" " alt="" coords="35,333,206,375"/>
-<area shape="rect" href="classpFlow_1_1positionRandom.html#a0bb3861a7abae95231a9e78e59e24de0" title=" " alt="" coords="33,399,208,440"/>
-<area shape="rect" href="classpFlow_1_1stlFile.html#a1d3b1b4ac56b0cec4337f6d7e9c6ce6c" title=" " alt="" coords="33,465,209,491"/>
-<area shape="rect" href="classpFlow_1_1selectBox.html#a1374032c453ef21c7e97c572fb962a50" title=" " alt="" coords="31,516,211,557"/>
-<area shape="rect" href="classpFlow_1_1selectRandom.html#af9905b10620776e3b5a42f779a83d503" title=" " alt="" coords="31,581,210,623"/>
-<area shape="rect" href="classpFlow_1_1selectRange.html#af83be5446d3f11367ab805db50c41d92" title=" " alt="" coords="31,647,210,688"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#ae330b6820e487264676fdbed7250c95e" title=" " alt="" coords="44,712,197,753"/>
-<area shape="rect" href="classpFlow_1_1positionParticles.html#acaa0dff282b290a55e1ce664eefb0bbd" title=" " alt="" coords="32,777,209,819"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#a79fb8c4cf5f0734451c59a44c2a153d0" title=" " alt="" coords="51,843,191,884"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#ad55987c0647186d3e7acad9cc4166034" title=" " alt="" coords="44,908,197,949"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00207">207</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1351,7 +1121,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&amp; VectorField </td>
+          <td class="memname">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&amp; VectorField </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1364,7 +1134,9 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00254">254</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Access to this, mostly used by derived classes. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00217">217</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1378,7 +1150,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a>&amp; VectorField </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a>&amp; VectorField </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1391,7 +1163,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00259">259</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00222">222</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1405,7 +1177,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a>&amp; vectorField </td>
+          <td class="memname">const <a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a>&amp; vectorField </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1418,7 +1190,16 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00264">264</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00227">227</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pFlowToVTK_8cpp_source.html#l00035">main()</a>, <a class="el" href="Vector_8hpp_source.html#l00324">Vector&lt; word &gt;::read()</a>, and <a class="el" href="Vector_8hpp_source.html#l00328">Vector&lt; word &gt;::write()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Vector_a7bf66e1fb0c930579f03e69eb94376c5_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a7bf66e1fb0c930579f03e69eb94376c5_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1432,7 +1213,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#a18df834101d1f5b0e840b89d1b309bf9">vectorType</a>&amp; vectorField </td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Vector.html#ac2ad7745c82b21b12ef70ea003b6f58d">vectorType</a>&amp; vectorField </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1445,7 +1226,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00269">269</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00232">232</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1472,7 +1253,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00274">274</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00237">237</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1499,7 +1280,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00279">279</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00242">242</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1526,7 +1307,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00284">284</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00247">247</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1553,7 +1334,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00289">289</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00252">252</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -1580,7 +1361,18 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00296">296</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Name of the vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00259">259</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triSurface_8cpp_source.html#l00158">triSurface::append()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00223">VectorSingle&lt; word, HostSpace &gt;::name()</a>, and <a class="el" href="VectorMath_8hpp_source.html#l00116">pFlow::pow()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Vector_acc80e00a8ac919288fb55bd14cc88bf6_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_acc80e00a8ac919288fb55bd14cc88bf6_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -1607,58 +1399,17 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00301">301</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Size of the vector. </p>
 
-<p class="reference">Referenced by <a class="el" href="triSurface_8cpp_source.html#l00029">triSurface::addTriangle()</a>, <a class="el" href="symArrayHD_8hpp_source.html#l00177">symArray&lt; nonLinearProperties &gt;::assign()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00453">VectorSingle&lt; pFlow::AB5History, void &gt;::assign()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00496">VectorDual&lt; int8 &gt;::assign()</a>, <a class="el" href="multiTriSurface_8cpp_source.html#l00024">multiTriSurface::calculateVars()</a>, <a class="el" href="Vector_8cpp_source.html#l00182">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::deleteElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00515">VectorDual&lt; int8 &gt;::deleteElement()</a>, <a class="el" href="Vector_8cpp_source.html#l00140">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::deleteElement_sorted()</a>, <a class="el" href="VectorAlgorithm_8hpp_source.html#l00056">pFlow::fillSequence()</a>, <a class="el" href="Insertion_8cpp_source.html#l00103">Insertion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="InsertionRegion_8cpp_source.html#l00055">InsertionRegion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00368">sphereParticles::insertParticles()</a>, <a class="el" href="pointStructure_8cpp_source.html#l00351">pointStructure::insertPoints()</a>, <a class="el" href="Vector_8cpp_source.html#l00269">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::insertSetElement()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00597">VectorSingle&lt; pFlow::AB5History, void &gt;::insertSetElement()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00610">VectorDual&lt; int8 &gt;::insertSetElement()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00139">sphereParticles::insertSphereParticles()</a>, <a class="el" href="property_8cpp_source.html#l00076">property::makeNameIndex()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00175">pFlow::max()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00149">pFlow::min()</a>, <a class="el" href="positionOrdered_8hpp_source.html#l00077">positionOrdered::numPoints()</a>, <a class="el" href="positionRandom_8hpp_source.html#l00081">positionRandom::numPoints()</a>, <a class="el" href="VectorI_8hpp_source.html#l00107">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::operator*=()</a>, <a class="el" href="VectorI_8hpp_source.html#l00069">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::operator+=()</a>, <a class="el" href="VectorI_8hpp_source.html#l00088">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::operator-=()</a>, <a class="el" href="VectorI_8hpp_source.html#l00126">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::operator/=()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00120">pFlow::pow()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00053">sphereShape::readDictionary()</a>, <a class="el" href="property_8cpp_source.html#l00026">property::readDictionary()</a>, <a class="el" href="linearCF_8hpp_source.html#l00078">linear&lt; limited &gt;::readLinearDictionary()</a>, <a class="el" href="nonLinearCF_8hpp_source.html#l00074">nonLinear&lt; limited &gt;::readNonLinearDictionary()</a>, <a class="el" href="nonLinearMod_8hpp_source.html#l00074">nonLinearMod&lt; limited &gt;::readNonLinearDictionary()</a>, <a class="el" href="positionOrdered_8hpp_source.html#l00082">positionOrdered::size()</a>, <a class="el" href="positionRandom_8hpp_source.html#l00086">positionRandom::size()</a>, <a class="el" href="shapeMixture_8hpp_source.html#l00087">shapeMixture::size()</a>, <a class="el" href="positionParticles_8cpp_source.html#l00031">positionParticles::sortByMortonCode()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00201">pFlow::sum()</a>, <a class="el" href="symArrayHD_8hpp_source.html#l00219">symArray&lt; nonLinearProperties &gt;::write()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00852">VectorSingle&lt; pFlow::AB5History, void &gt;::write()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00954">VectorDual&lt; int8 &gt;::write()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00265">265</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="symArrayHD_8hpp_source.html#l00175">symArray&lt; nonLinearProperties &gt;::assign()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00496">VectorDual&lt; multiRotatingAxis &gt;::assign()</a>, <a class="el" href="collisionCheck_8cpp_source.html#l00004">collisionCheck::build()</a>, <a class="el" href="triSurface_8cpp_source.html#l00033">pFlow::convertToTriSurfaceComponents()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00515">VectorDual&lt; multiRotatingAxis &gt;::deleteElement()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00201">VectorSingle&lt; word, HostSpace &gt;::deviceView()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00246">VectorSingle&lt; word, HostSpace &gt;::empty()</a>, <a class="el" href="VectorAlgorithm_8hpp_source.html#l00056">pFlow::fillSequence()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00259">sphereParticles::getParticlesInfoFromShape()</a>, <a class="el" href="grainParticles_8cpp_source.html#l00088">grainParticles::getParticlesInfoFromShape()</a>, <a class="el" href="Vector_8hpp_source.html#l00296">Vector&lt; word &gt;::getSpan()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00364">VectorSingle&lt; word, HostSpace &gt;::getSpan()</a>, <a class="el" href="baseShapeNames_8hpp_source.html#l00125">baseShapeNames::hashToIndex()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00216">VectorSingle&lt; word, HostSpace &gt;::hostView()</a>, <a class="el" href="MotionModel_8cpp_source.html#l00056">MotionModel&lt; rotatingAxisMotion, rotatingAxis &gt;::impl_readDictionary()</a>, <a class="el" href="Insertion_8cpp_source.html#l00112">Insertion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="internalPoints_8cpp_source.html#l00311">internalPoints::insertPoints()</a>, <a class="el" href="VectorDual_8hpp_source.html#l00610">VectorDual&lt; multiRotatingAxis &gt;::insertSetElement()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00182">pFlow::max()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00156">pFlow::min()</a>, <a class="el" href="positionRandom_8hpp_source.html#l00072">positionRandom::numPoints()</a>, <a class="el" href="positionOrdered_8hpp_source.html#l00079">positionOrdered::numPoints()</a>, <a class="el" href="VectorI_8hpp_source.html#l00116">Vector&lt; word &gt;::operator*=()</a>, <a class="el" href="VectorI_8hpp_source.html#l00078">Vector&lt; word &gt;::operator+=()</a>, <a class="el" href="VectorI_8hpp_source.html#l00097">Vector&lt; word &gt;::operator-=()</a>, <a class="el" href="VectorI_8hpp_source.html#l00135">Vector&lt; word &gt;::operator/=()</a>, <a class="el" href="positionRandom_8cpp_source.html#l00027">positionRandom::positionOnePass()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00127">pFlow::pow()</a>, <a class="el" href="property_8cpp_source.html#l00024">property::readDictionary()</a>, <a class="el" href="sphereShape_8cpp_source.html#l00024">sphereShape::readFromDictionary3()</a>, <a class="el" href="grainShape_8cpp_source.html#l00024">grainShape::readFromDictionary3()</a>, <a class="el" href="linearCF_8hpp_source.html#l00078">linear&lt; limited &gt;::readLinearDictionary()</a>, <a class="el" href="cGRelativeLinearCF_8hpp_source.html#l00089">cGRelativeLinear&lt; limited &gt;::readLinearDictionary()</a>, <a class="el" href="cGAbsoluteLinearCF_8hpp_source.html#l00089">cGAbsoluteLinear&lt; limited &gt;::readLinearDictionary()</a>, <a class="el" href="nonLinearCF_8hpp_source.html#l00074">nonLinear&lt; limited &gt;::readNonLinearDictionary()</a>, <a class="el" href="nonLinearMod_8hpp_source.html#l00074">nonLinearMod&lt; limited &gt;::readNonLinearDictionary()</a>, <a class="el" href="positionRandom_8hpp_source.html#l00077">positionRandom::size()</a>, <a class="el" href="positionOrdered_8hpp_source.html#l00084">positionOrdered::size()</a>, <a class="el" href="shapeMixture_8hpp_source.html#l00105">shapeMixture::size()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00231">VectorSingle&lt; word, HostSpace &gt;::size()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00208">pFlow::sum()</a>, <a class="el" href="symArrayHD_8hpp_source.html#l00217">symArray&lt; nonLinearProperties &gt;::write()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00954">VectorDual&lt; multiRotatingAxis &gt;::write()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Vector_a10efdf47ffedbdc720f71c2f72b98d98_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a10efdf47ffedbdc720f71c2f72b98d98_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a10efdf47ffedbdc720f71c2f72b98d98_icgraph" id="classpFlow_1_1Vector_a10efdf47ffedbdc720f71c2f72b98d98_icgraph">
-<area shape="rect" title=" " alt="" coords="280,1326,328,1353"/>
-<area shape="rect" href="classpFlow_1_1triSurface.html#a86cff523f4f289aeec0a4a82ab0bcc09" title=" " alt="" coords="49,5,189,47"/>
-<area shape="rect" href="classpFlow_1_1symArray.html#ac49828e84b4c929c15c813500e280005" title=" " alt="" coords="13,71,224,112"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a9fae584c5ab16d31491be8f8123de47f" title=" " alt="" coords="38,137,199,193"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#aff81578dea4c1c19fc5f9ba871ddc3d4" title=" " alt="" coords="43,217,195,259"/>
-<area shape="rect" href="classpFlow_1_1multiTriSurface.html#a37215fff362d82077ec78ffe0cb211d2" title=" " alt="" coords="35,283,203,324"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#ae3f21fcefd35e2538e7da6e933c8baeb" title=" " alt="" coords="37,349,200,405"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#ae3f21fcefd35e2538e7da6e933c8baeb" title=" " alt="" coords="34,429,203,471"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#aa4434e6dde369bc0432ab2068bdcebf6" title=" " alt="" coords="17,495,220,551"/>
-<area shape="rect" href="namespacepFlow.html#a96af769b45a4f8ca3974aaf7ce3a258b" title=" " alt="" coords="44,575,193,602"/>
-<area shape="rect" href="classpFlow_1_1Insertion.html#ade7faca5a778c285e00c20175e9c3815" title=" " alt="" coords="33,627,204,668"/>
-<area shape="rect" href="classpFlow_1_1InsertionRegion.html#a7aca664f39c4a6e73d6666a36ad687ce" title=" " alt="" coords="33,692,204,733"/>
-<area shape="rect" href="classpFlow_1_1sphereParticles.html#a99cba4c27cdaa229242ccd3b22b04fba" title="Insert new particles in position with specified shapes." alt="" coords="34,757,203,799"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a9d20becf23a4c5cb98ff7b4e05717190" title=" " alt="" coords="38,823,199,864"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a5a36bee20562c05a4cc9ee14ea560727" title=" " alt="" coords="33,889,205,945"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#acb8d546498dc0126c5be6ad6f2767cb6" title=" " alt="" coords="24,969,213,1025"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a34bb429dcb71153499f3ef45195b2071" title=" " alt="" coords="25,1049,212,1091"/>
-<area shape="rect" href="classpFlow_1_1sphereParticles.html#a95650ae58375201510b9d36fa846ed07" title=" " alt="" coords="34,1115,203,1156"/>
-<area shape="rect" href="classpFlow_1_1property.html#a81429b86cbb3fb83ee6752cc2308c094" title="creates a mapp" alt="" coords="15,1180,222,1221"/>
-<area shape="rect" href="namespacepFlow.html#a610b1e24f9967bd8baa14c6fbcb91d57" title=" " alt="" coords="69,1246,168,1273"/>
-<area shape="rect" href="namespacepFlow.html#ac4a4c4d693223d90154f1c7e68e0dae4" title=" " alt="" coords="71,1297,166,1323"/>
-<area shape="rect" href="classpFlow_1_1positionOrdered.html#af53fd6d18bcf7c98c7ff8c3ec8bfdfbd" title=" " alt="" coords="32,1348,205,1389"/>
-<area shape="rect" href="classpFlow_1_1positionRandom.html#af53fd6d18bcf7c98c7ff8c3ec8bfdfbd" title=" " alt="" coords="31,1413,206,1455"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a45d541c4fb7d734547c5181a64db90ae" title=" " alt="" coords="37,1479,200,1535"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a8ece13f41f55786179efd567c34019a4" title=" " alt="" coords="37,1559,200,1615"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#ac95c6d98945ecda8a27987fc68961a20" title=" " alt="" coords="37,1639,200,1695"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#ad01909dad5b3ce7b47b4fb0301582d8a" title=" " alt="" coords="37,1719,200,1775"/>
-<area shape="rect" href="namespacepFlow.html#a9144ff9208c7188e115afed6b3fa0f0a" title=" " alt="" coords="71,1799,167,1826"/>
-<area shape="rect" href="classpFlow_1_1sphereShape.html#a3ee94dd32f4df1490653290d2919dc52" title=" " alt="" coords="42,1851,195,1892"/>
-<area shape="rect" href="classpFlow_1_1property.html#a3ee94dd32f4df1490653290d2919dc52" title="read from dict" alt="" coords="5,1917,232,1943"/>
-<area shape="rect" href="classpFlow_1_1cfModels_1_1linear.html#a36dd9da7f6e5afc522963e96004b3f98" title=" " alt="" coords="32,1968,205,2009"/>
-<area shape="rect" href="classpFlow_1_1cfModels_1_1nonLinear.html#a8b733efddd531d2ddf9c2765805f081c" title=" " alt="" coords="19,2033,219,2075"/>
-<area shape="rect" href="classpFlow_1_1cfModels_1_1nonLinearMod.html#a8b733efddd531d2ddf9c2765805f081c" title=" " alt="" coords="9,2099,229,2140"/>
-<area shape="rect" href="classpFlow_1_1positionOrdered.html#a03bc1200aac252c4d3e18657d700b71c" title=" " alt="" coords="32,2164,205,2205"/>
-<area shape="rect" href="classpFlow_1_1positionRandom.html#a03bc1200aac252c4d3e18657d700b71c" title=" " alt="" coords="31,2229,206,2271"/>
-<area shape="rect" href="classpFlow_1_1shapeMixture.html#a10efdf47ffedbdc720f71c2f72b98d98" title=" " alt="" coords="39,2295,198,2336"/>
-<area shape="rect" href="classpFlow_1_1positionParticles.html#acaa0dff282b290a55e1ce664eefb0bbd" title=" " alt="" coords="30,2360,207,2401"/>
-<area shape="rect" href="namespacepFlow.html#a9dcdbd0c4d6db890c1eff7b637e844c2" title=" " alt="" coords="70,2426,167,2453"/>
-<area shape="rect" href="classpFlow_1_1symArray.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="13,2477,224,2519"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="38,2543,199,2599"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="43,2624,195,2665"/>
-</map>
 </div>
 
 </div>
@@ -1686,275 +1437,23 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00306">306</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p>Capacity of the vector. </p>
 
-<p class="reference">Referenced by <a class="el" href="VectorSingle_8hpp_source.html#l00453">VectorSingle&lt; pFlow::AB5History, void &gt;::assign()</a>, <a class="el" href="InsertionRegion_8cpp_source.html#l00055">InsertionRegion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="VectorMath_8hpp_source.html#l00109">pFlow::pow()</a>, and <a class="el" href="positionParticles_8cpp_source.html#l00031">positionParticles::sortByMortonCode()</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Vector_a234de5cb432c97fcb4b0f806bb86624e_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a234de5cb432c97fcb4b0f806bb86624e_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a234de5cb432c97fcb4b0f806bb86624e_icgraph" id="classpFlow_1_1Vector_a234de5cb432c97fcb4b0f806bb86624e_icgraph">
-<area shape="rect" title=" " alt="" coords="231,123,308,149"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a9fae584c5ab16d31491be8f8123de47f" title=" " alt="" coords="13,5,175,61"/>
-<area shape="rect" href="classpFlow_1_1InsertionRegion.html#a7aca664f39c4a6e73d6666a36ad687ce" title=" " alt="" coords="9,86,179,127"/>
-<area shape="rect" href="namespacepFlow.html#ae8c7f45b1b39def821f63012151da10c" title=" " alt="" coords="46,152,142,179"/>
-<area shape="rect" href="classpFlow_1_1positionParticles.html#acaa0dff282b290a55e1ce664eefb0bbd" title=" " alt="" coords="5,203,183,245"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00271">271</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
-</div>
-</div>
-<a id="a3dbf7d015e95cf17d59eafb6828e9cac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dbf7d015e95cf17d59eafb6828e9cac">&#9670;&nbsp;</a></span>reserve()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto reserve </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a>&#160;</td>
-          <td class="paramname"><em>len</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00311">311</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="InsertionRegion_8cpp_source.html#l00055">InsertionRegion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="selectBox_8cpp_source.html#l00025">selectBox::selectAllPointsInBox()</a>, <a class="el" href="selectRandom_8cpp_source.html#l00028">selectRandom::selectAllPointsInRange()</a>, <a class="el" href="selectRange_8cpp_source.html#l00025">selectRange::selectAllPointsInRange()</a>, and <a class="el" href="Vector_8hpp_source.html#l00174">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::Vector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="wordVectorHost_8hpp_source.html#l00239">VectorSingle&lt; word, HostSpace &gt;::capacity()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00183">VectorSingle&lt; word, HostSpace &gt;::deviceViewAll()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00208">VectorSingle&lt; word, HostSpace &gt;::hostViewAll()</a>, <a class="el" href="InsertionRegion_8cpp_source.html#l00054">InsertionRegion&lt; ShapeType &gt;::insertParticles()</a>, and <a class="el" href="VectorMath_8hpp_source.html#l00116">pFlow::pow()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Vector_a3dbf7d015e95cf17d59eafb6828e9cac_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a3dbf7d015e95cf17d59eafb6828e9cac_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a3dbf7d015e95cf17d59eafb6828e9cac_icgraph" id="classpFlow_1_1Vector_a3dbf7d015e95cf17d59eafb6828e9cac_icgraph">
-<area shape="rect" title=" " alt="" coords="232,143,303,170"/>
-<area shape="rect" href="classpFlow_1_1InsertionRegion.html#a7aca664f39c4a6e73d6666a36ad687ce" title=" " alt="" coords="9,5,180,47"/>
-<area shape="rect" href="classpFlow_1_1selectBox.html#a1374032c453ef21c7e97c572fb962a50" title=" " alt="" coords="5,71,184,112"/>
-<area shape="rect" href="classpFlow_1_1selectRange.html#af83be5446d3f11367ab805db50c41d92" title=" " alt="" coords="5,136,184,177"/>
-<area shape="rect" href="classpFlow_1_1selectRandom.html#af9905b10620776e3b5a42f779a83d503" title=" " alt="" coords="5,201,184,243"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a72db2141036e73e01e0720b4502eaff7" title=" " alt="" coords="15,267,175,323"/>
-</map>
+<div class="center"><img src="classpFlow_1_1Vector_a234de5cb432c97fcb4b0f806bb86624e_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a234de5cb432c97fcb4b0f806bb86624e_icgraph" alt=""/></div>
 </div>
 
 </div>
 </div>
-<a id="aa4434e6dde369bc0432ab2068bdcebf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4434e6dde369bc0432ab2068bdcebf6">&#9670;&nbsp;</a></span>deleteElement_sorted()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool deleteElement_sorted </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>indices</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00140">140</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ae3f21fcefd35e2538e7da6e933c8baeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3f21fcefd35e2538e7da6e933c8baeb">&#9670;&nbsp;</a></span>deleteElement() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool deleteElement </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>indices</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00182">182</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a216beb08e71c4da16ab1aa538ff9757a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a216beb08e71c4da16ab1aa538ff9757a">&#9670;&nbsp;</a></span>deleteElement() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool deleteElement </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#a39f5f71474553bc78726494fa09dd0fb">label</a>&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00201">201</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a64e7d0642915db6cb9395e3250360c04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64e7d0642915db6cb9395e3250360c04">&#9670;&nbsp;</a></span>sortItems()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void sortItems </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;&#160;</td>
-          <td class="paramname"><em>indices</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sort elements based on the indices. </p>
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00217">217</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a30b7f34210d48986237bf8f1c7794493"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30b7f34210d48986237bf8f1c7794493">&#9670;&nbsp;</a></span>insertSetElement() <span class="overload">[1/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool insertSetElement </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;&#160;</td>
-          <td class="paramname"><em>indices</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00237">237</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a5a36bee20562c05a4cc9ee14ea560727"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a36bee20562c05a4cc9ee14ea560727">&#9670;&nbsp;</a></span>insertSetElement() <span class="overload">[2/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool insertSetElement </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacepFlow.html#a27c4d9af27a6e7595097b77d05874147">int32IndexContainer</a> &amp;&#160;</td>
-          <td class="paramname"><em>indices</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vals</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00269">269</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a91c25cb240f7cb7be088f7da9e073791"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91c25cb240f7cb7be088f7da9e073791">&#9670;&nbsp;</a></span>insertSetElement() <span class="overload">[3/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool insertSetElement </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>indices</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00302">302</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aff5470629107827f20f27e4fe51f3d85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff5470629107827f20f27e4fe51f3d85">&#9670;&nbsp;</a></span>insertSetElement() <span class="overload">[4/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool insertSetElement </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; <a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>indices</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vals</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00333">333</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aae71b0968705366d585f7852cc242f69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae71b0968705366d585f7852cc242f69">&#9670;&nbsp;</a></span>insertSetElement() <span class="overload">[5/5]</span></h2>
+<a id="a644718bb2fb240de962dc3c9a1fdf0dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644718bb2fb240de962dc3c9a1fdf0dc">&#9670;&nbsp;</a></span>empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1963,21 +1462,10 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool insertSetElement </td>
+          <td class="memname">bool <a class="el" href="classpFlow_1_1empty.html">empty</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>&#160;</td>
-          <td class="paramname"><em>idx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -1987,12 +1475,62 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00364">364</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
+<p>If vector is empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00277">277</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fieldSelector_8hpp_source.html#l00014">pFlow::selectedFieldVals()</a>.</p>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Vector_a644718bb2fb240de962dc3c9a1fdf0dc_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a644718bb2fb240de962dc3c9a1fdf0dc_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a172a7c88be982061ecefadd95725c1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172a7c88be982061ecefadd95725c1a1">&#9670;&nbsp;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>cap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserve capacity for vector Preserve the content. </p>
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00284">284</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="wordVectorHost_8hpp_source.html#l00313">VectorSingle&lt; word, HostSpace &gt;::assign()</a>, <a class="el" href="triSurface_8cpp_source.html#l00033">pFlow::convertToTriSurfaceComponents()</a>, <a class="el" href="sphereParticles_8cpp_source.html#l00259">sphereParticles::getParticlesInfoFromShape()</a>, <a class="el" href="grainParticles_8cpp_source.html#l00088">grainParticles::getParticlesInfoFromShape()</a>, <a class="el" href="InsertionRegion_8cpp_source.html#l00054">InsertionRegion&lt; ShapeType &gt;::insertParticles()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00255">VectorSingle&lt; word, HostSpace &gt;::reserve()</a>, <a class="el" href="selectBox_8cpp_source.html#l00025">selectBox::selectAllPointsInBox()</a>, <a class="el" href="selectorRandomPoints_8cpp_source.html#l00027">selectorRandomPoints::selectAllPointsInRange()</a>, <a class="el" href="selectorStridedRange_8cpp_source.html#l00025">selectorStridedRange::selectAllPointsInRange()</a>, and <a class="el" href="Vector_8hpp_source.html#l00133">Vector&lt; word &gt;::Vector()</a>.</p>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Vector_a172a7c88be982061ecefadd95725c1a1_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a172a7c88be982061ecefadd95725c1a1_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
 <a id="a34b3e020ef4d15f9b2442bfff37f19b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34b3e020ef4d15f9b2442bfff37f19b8">&#9670;&nbsp;</a></span>fill()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a34b3e020ef4d15f9b2442bfff37f19b8">&#9670;&nbsp;</a></span>fill() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2015,20 +1553,125 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00022">22</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00023">23</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00228">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::operator=()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="geometry_8cpp_source.html#l00026">geometry::createPropertyId()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00292">VectorSingle&lt; word, HostSpace &gt;::fill()</a>, and <a class="el" href="Vector_8hpp_source.html#l00191">Vector&lt; word &gt;::operator=()</a>.</p>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Vector_a34b3e020ef4d15f9b2442bfff37f19b8_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a34b3e020ef4d15f9b2442bfff37f19b8_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a34b3e020ef4d15f9b2442bfff37f19b8_icgraph" id="classpFlow_1_1Vector_a34b3e020ef4d15f9b2442bfff37f19b8_icgraph">
-<area shape="rect" title=" " alt="" coords="213,20,252,47"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a3e18e86753248052cab589c7f2cbab68" title=" " alt="" coords="5,5,165,61"/>
-</map>
 </div>
+
+</div>
+</div>
+<a id="a943630f66f515106f774845121668af0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943630f66f515106f774845121668af0">&#9670;&nbsp;</a></span>fill() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a>&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>fill the content in range [start, end) </p>
+
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00029">29</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af7fbe27588401af02ce8d7c83032f42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7fbe27588401af02ce8d7c83032f42d">&#9670;&nbsp;</a></span>getSpan() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto getSpan </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00296">296</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="triSurface_8cpp_source.html#l00158">triSurface::append()</a>.</p>
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1Vector_af7fbe27588401af02ce8d7c83032f42d_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_af7fbe27588401af02ce8d7c83032f42d_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="ab3136bd3fcd8f09b314bdd97f6872690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3136bd3fcd8f09b314bdd97f6872690">&#9670;&nbsp;</a></span>getSpan() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto getSpan </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00302">302</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -2055,7 +1698,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00354">354</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00307">307</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
@@ -2083,7 +1726,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00029">29</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00038">38</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2111,7 +1754,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00039">39</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00048">48</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2139,7 +1782,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00049">49</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00058">58</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2167,7 +1810,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00059">59</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00068">68</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2183,7 +1826,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname">void operator+= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2195,7 +1838,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00069">69</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00078">78</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2211,7 +1854,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname">void operator-= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2223,7 +1866,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00088">88</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00097">97</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2239,7 +1882,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname">void operator/= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2251,7 +1894,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00126">126</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00135">135</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2267,7 +1910,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
         <tr>
           <td class="memname">void operator*= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a27481ca5351b1589f138dfddabc6fef3">VectorType</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1Vector.html#a2b3cf712c21986427e001e341c37f9f4">VectorType</a> &amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2279,7 +1922,7 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00107">107</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00116">116</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
@@ -2303,92 +1946,12 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00146">146</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a61b6e21215a4976ac3317cea96b56eaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61b6e21215a4976ac3317cea96b56eaa">&#9670;&nbsp;</a></span>readVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool readVector </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>is</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00030">30</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00395">pFlow::operator&gt;&gt;()</a>, <a class="el" href="Vector_8hpp_source.html#l00381">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::read()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00833">VectorSingle&lt; pFlow::AB5History, void &gt;::readVector()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00935">VectorDual&lt; int8 &gt;::readVector()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Vector_a61b6e21215a4976ac3317cea96b56eaa_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a61b6e21215a4976ac3317cea96b56eaa_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a61b6e21215a4976ac3317cea96b56eaa_icgraph" id="classpFlow_1_1Vector_a61b6e21215a4976ac3317cea96b56eaa_icgraph">
-<area shape="rect" title=" " alt="" coords="216,111,309,137"/>
-<area shape="rect" href="namespacepFlow.html#a6afb377b6e01773903cd7a2e0c18f3c9" title=" " alt="" coords="13,5,160,32"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#aff8e92ab47032ae811d1271161cb9b22" title=" " alt="" coords="5,56,168,112"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#a8a687372a4b3350a0720302da4c770a4" title=" " alt="" coords="6,136,167,192"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#a8a687372a4b3350a0720302da4c770a4" title=" " alt="" coords="11,217,163,258"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a127385e6395d9d457aee6fcb1c1807b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a127385e6395d9d457aee6fcb1c1807b7">&#9670;&nbsp;</a></span>writeVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool writeVector </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td>
-          <td class="paramname"><em>os</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8cpp_source.html#l00101">101</a> of file <a class="el" href="Vector_8cpp_source.html">Vector.cpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00406">pFlow::operator&lt;&lt;()</a>, and <a class="el" href="Vector_8hpp_source.html#l00386">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::write()</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1Vector_a127385e6395d9d457aee6fcb1c1807b7_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a127385e6395d9d457aee6fcb1c1807b7_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a127385e6395d9d457aee6fcb1c1807b7_icgraph" id="classpFlow_1_1Vector_a127385e6395d9d457aee6fcb1c1807b7_icgraph">
-<area shape="rect" title=" " alt="" coords="213,39,309,65"/>
-<area shape="rect" href="namespacepFlow.html#ad49266c77096c69d62134d3875259627" title=" " alt="" coords="13,5,158,32"/>
-<area shape="rect" href="classpFlow_1_1Vector.html#a6a40de4ceed55b2f78cf3027739dfd91" title=" " alt="" coords="5,56,165,112"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="VectorI_8hpp_source.html#l00155">155</a> of file <a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a>.</p>
 
 </div>
 </div>
 <a id="aff8e92ab47032ae811d1271161cb9b22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff8e92ab47032ae811d1271161cb9b22">&#9670;&nbsp;</a></span>read()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aff8e92ab47032ae811d1271161cb9b22">&#9670;&nbsp;</a></span>read() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2411,25 +1974,21 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00381">381</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00324">324</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="symArrayHD_8hpp_source.html#l00208">symArray&lt; nonLinearProperties &gt;::read()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00352">pFlow::operator&gt;&gt;()</a>, <a class="el" href="symArrayHD_8hpp_source.html#l00206">symArray&lt; nonLinearProperties &gt;::read()</a>, and <a class="el" href="wordVectorHost_8hpp_source.html#l00449">VectorSingle&lt; word, HostSpace &gt;::read()</a>.</p>
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Vector_aff8e92ab47032ae811d1271161cb9b22_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_aff8e92ab47032ae811d1271161cb9b22_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_aff8e92ab47032ae811d1271161cb9b22_icgraph" id="classpFlow_1_1Vector_aff8e92ab47032ae811d1271161cb9b22_icgraph">
-<area shape="rect" title=" " alt="" coords="264,13,315,39"/>
-<area shape="rect" href="classpFlow_1_1symArray.html#ae1d42751915e8566dac19658cc498ffa" title=" " alt="" coords="5,5,216,47"/>
-</map>
 </div>
 
 </div>
 </div>
 <a id="a6a40de4ceed55b2f78cf3027739dfd91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a40de4ceed55b2f78cf3027739dfd91">&#9670;&nbsp;</a></span>write()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a40de4ceed55b2f78cf3027739dfd91">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2452,42 +2011,123 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00386">386</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00328">328</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="symArrayHD_8hpp_source.html#l00219">symArray&lt; nonLinearProperties &gt;::write()</a>, <a class="el" href="VectorSingle_8hpp_source.html#l00852">VectorSingle&lt; pFlow::AB5History, void &gt;::write()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00954">VectorDual&lt; int8 &gt;::write()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00363">pFlow::operator&lt;&lt;()</a>, <a class="el" href="symArrayHD_8hpp_source.html#l00217">symArray&lt; nonLinearProperties &gt;::write()</a>, <a class="el" href="wordVectorHost_8hpp_source.html#l00463">VectorSingle&lt; word, HostSpace &gt;::write()</a>, and <a class="el" href="VectorDual_8hpp_source.html#l00954">VectorDual&lt; multiRotatingAxis &gt;::write()</a>.</p>
+<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1Vector_a6a40de4ceed55b2f78cf3027739dfd91_icgraph.png" border="0" usemap="#classpFlow_1_1Vector_a6a40de4ceed55b2f78cf3027739dfd91_icgraph" alt=""/></div>
-<map name="classpFlow_1_1Vector_a6a40de4ceed55b2f78cf3027739dfd91_icgraph" id="classpFlow_1_1Vector_a6a40de4ceed55b2f78cf3027739dfd91_icgraph">
-<area shape="rect" title=" " alt="" coords="264,86,319,113"/>
-<area shape="rect" href="classpFlow_1_1symArray.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="5,5,216,47"/>
-<area shape="rect" href="classpFlow_1_1VectorSingle.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="30,71,191,127"/>
-<area shape="rect" href="classpFlow_1_1VectorDual.html#aa7d820a4dd0777a9a82aee242b83a167" title=" " alt="" coords="35,152,187,193"/>
-</map>
 </div>
+
+</div>
+</div>
+<a id="a18b302149a795955a7b70b411e877975"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18b302149a795955a7b70b411e877975">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1iIstream.html">iIstream</a> &amp;&#160;</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;&#160;</td>
+          <td class="paramname"><em>iop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00333">333</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8c955e17bd99dcab8fa9cf8c96ba6dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c955e17bd99dcab8fa9cf8c96ba6dd0">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpFlow_1_1iOstream.html">iOstream</a> &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classpFlow_1_1IOPattern.html">IOPattern</a> &amp;&#160;</td>
+          <td class="paramname"><em>iop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00338">338</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4afaef92d6e6a55303575f96107d40ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4afaef92d6e6a55303575f96107d40ec">&#9670;&nbsp;</a></span>memoerySpaceName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr const char* memoerySpaceName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00344">344</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a174eb448c502cd3745ca4d4e5103fc56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a174eb448c502cd3745ca4d4e5103fc56">&#9670;&nbsp;</a></span>constPointer</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const typedef T* constPointer</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00087">87</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a50fd7d13a0f7a6007ca5027b3bb8765a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50fd7d13a0f7a6007ca5027b3bb8765a">&#9670;&nbsp;</a></span>name_</h2>
 
@@ -2503,14 +2143,14 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00094">94</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00085">85</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00296">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::name()</a>, and <a class="el" href="Vector_8hpp_source.html#l00181">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::Vector()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00259">Vector&lt; word &gt;::name()</a>.</p>
 
 </div>
 </div>
@@ -2529,20 +2169,19 @@ class pFlow::Vector&lt; T, Allocator &gt;</h3>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00107">107</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Vector_8hpp_source.html#l00088">88</a> of file <a class="el" href="Vector_8hpp_source.html">Vector.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00354">Vector&lt; word, vecAllocator&lt; word &gt; &gt;::isHostAccessible()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Vector_8hpp_source.html#l00307">Vector&lt; word &gt;::isHostAccessible()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/phasicFlow/containers/Vector/<a class="el" href="Vector_8hpp_source.html">Vector.hpp</a></li>
-<li>src/phasicFlow/containers/Vector/<a class="el" href="Vector_8cpp_source.html">Vector.cpp</a></li>
 <li>src/phasicFlow/containers/Vector/<a class="el" href="VectorI_8hpp_source.html">VectorI.hpp</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,11 +1,11 @@
 var kokkosAlgorithms_8hpp =
 [
-    [ "count", "kokkosAlgorithms_8hpp.html#ad6c27ed1c7864c76a498094c92f746e7", null ],
-    [ "fillSequence", "kokkosAlgorithms_8hpp.html#a355bb2c965a49f028db020dc37a9b859", null ],
-    [ "fillSelected", "kokkosAlgorithms_8hpp.html#a946750f54636bc205395b89c1cfa3a69", null ],
-    [ "fillSelected", "kokkosAlgorithms_8hpp.html#a1245a1460c837108a32fb23feeb3529d", null ],
-    [ "max", "kokkosAlgorithms_8hpp.html#a6256cdfd2ba7f02ac8db8f55d05b3ef9", null ],
+    [ "count", "kokkosAlgorithms_8hpp.html#ae9cfef1faaf88feacaa5988ae1a956d8", null ],
+    [ "fillSequence", "kokkosAlgorithms_8hpp.html#a85f5483810440a68c5d72b2acc806d9c", null ],
+    [ "fillSelected", "kokkosAlgorithms_8hpp.html#a423f6916333ae492be3c574e7a3ce3e8", null ],
+    [ "fillSelected", "kokkosAlgorithms_8hpp.html#a80c412bcd2540e149883724cbe867c5f", null ],
+    [ "max", "kokkosAlgorithms_8hpp.html#a9d98facac68152ec12bf1483da55c939", null ],
     [ "min", "kokkosAlgorithms_8hpp.html#a889052ad665d517d05832303a9bbc972", null ],
-    [ "exclusiveScan", "kokkosAlgorithms_8hpp.html#a6199a0826926a1e03c8b81b423615165", null ],
-    [ "inclusiveScan", "kokkosAlgorithms_8hpp.html#a1718a3f32c976f338584cb3b89bafe63", null ]
+    [ "exclusiveScan", "kokkosAlgorithms_8hpp.html#aae0922261eb9c497220bda3759d1aba9", null ],
+    [ "inclusiveScan", "kokkosAlgorithms_8hpp.html#a75f7f490488b142dba5b6257c59d988f", null ]
 ];

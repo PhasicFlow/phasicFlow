@@ -1,0 +1,24 @@
+digraph "src/phasicFlow/dictionary/dictionary.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/dictionary\l/dictionary.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="types.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$types_8hpp.html",tooltip=" "];
+  Node1 -> Node35 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node35 [label="iEntry.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iEntry_8hpp.html",tooltip=" "];
+  Node35 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node36 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node36 [label="dataEntry.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$dataEntry_8hpp.html",tooltip=" "];
+  Node36 -> Node35 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node44 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node44 [label="MapPtr.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$MapPtr_8hpp.html",tooltip=" "];
+  Node44 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node39 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node39 [label="List.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$List_8hpp.html",tooltip=" "];
+  Node39 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node48 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node48 [label="fileSystem.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$fileSystem_8hpp.html",tooltip=" "];
+  Node48 -> Node39 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

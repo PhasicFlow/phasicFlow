@@ -1,0 +1,17 @@
+digraph "read"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="read",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::IOstream::eof",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#af3418ac60d0d7a303478f29a387feb3c",tooltip="Return true if end of input seen."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::IOstream::lineNumber",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3",tooltip="Const access to the current stream line number."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::Istream::name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Istream.html#a754ce9966caae1ee331378bf4a87269b",tooltip="Return the name of the stream."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::iIstream::putBack",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597",tooltip="Put back token Only a single put back is permitted."];
+  Node5 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

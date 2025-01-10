@@ -1,0 +1,18 @@
+digraph "pointFromPlane"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="pointFromPlane",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="inNegativeDistance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1infinitePlane.html#abae50ef05666692bd4f267096d8d08f6",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="inPositiveDistance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1infinitePlane.html#a780948667645ab2a736504a3529d3747",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pointInNegativeSide",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1infinitePlane.html#ab33fc571366321d14725661a55100e33",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pointInPositiveSide",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1infinitePlane.html#a011f57f785cc7537354e994c49089b3b",tooltip=" "];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pointOnPlane",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1infinitePlane.html#aba1fe4850c68b4db01a2a22c581534ae",tooltip=" "];
+}

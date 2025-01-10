@@ -1,0 +1,12 @@
+digraph "endBlock"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="endBlock",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Write end block group Decrements indentation, adds newline."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::endBlock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ab5839850dd8d483a66ef865b60b8cdd5",tooltip="Write end block group."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::dictionary::\lwriteDictionary",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dictionary.html#a177356b3dd247e48fdc2c715a68dce21",tooltip="write dictionary to stream - with keyword"];
+}

@@ -1,0 +1,11 @@
+digraph "src/Particles/Insertion/collisionCheck" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_48274e6f13aca5dc2f0e74080ca458f7 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Insertion" fontname="Helvetica", fontsize="10", URL="dir_48274e6f13aca5dc2f0e74080ca458f7.html"]
+  dir_60ca7a35b7966cfa4cc9947031517c4c [shape=box, label="collisionCheck", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_60ca7a35b7966cfa4cc9947031517c4c.html"];
+  }
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_60ca7a35b7966cfa4cc9947031517c4c->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="3", labeldistance=1.5 headhref="dir_000069_000031.html"];
+}

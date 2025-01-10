@@ -1,0 +1,33 @@
+digraph "src/phasicFlow/ranges" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_cd7a5046d028e114fc17b2ebc2bd02d2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="phasicFlow" fontname="Helvetica", fontsize="10", URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"]
+  dir_ec044aca4011302dcfd8183b03594e30 [shape=box, label="ranges", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_ec044aca4011302dcfd8183b03594e30.html"];
+  }
+  dir_e8baec020e471dff3bc06b812491e6c5 [shape=box label="types" fillcolor="white" style="filled" color="red" URL="dir_e8baec020e471dff3bc06b812491e6c5.html"];
+  dir_b13948a90891cb8a59f39ab8c50a8102 [shape=box label="streams" fillcolor="white" style="filled" color="red" URL="dir_b13948a90891cb8a59f39ab8c50a8102.html"];
+  dir_4419dd78bee2bde1362d842a02bd0463 [shape=box label="typeSelection" URL="dir_4419dd78bee2bde1362d842a02bd0463.html"];
+  dir_74a3bd5d559eb2469f344a26dc365ad0 [shape=box label="containers" fillcolor="white" style="filled" color="red" URL="dir_74a3bd5d559eb2469f344a26dc365ad0.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db [shape=box label="dictionary" fillcolor="white" style="filled" color="red" URL="dir_1220c712ed5f98fd84ba71b4848374db.html"];
+  dir_e8baec020e471dff3bc06b812491e6c5->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="7", labeldistance=1.5 headhref="dir_000175_000131.html"];
+  dir_e8baec020e471dff3bc06b812491e6c5->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="3", labeldistance=1.5 headhref="dir_000175_000179.html"];
+  dir_ec044aca4011302dcfd8183b03594e30->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="2", labeldistance=1.5 headhref="dir_000123_000175.html"];
+  dir_ec044aca4011302dcfd8183b03594e30->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="1", labeldistance=1.5 headhref="dir_000123_000131.html"];
+  dir_ec044aca4011302dcfd8183b03594e30->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="2", labeldistance=1.5 headhref="dir_000123_000179.html"];
+  dir_ec044aca4011302dcfd8183b03594e30->dir_74a3bd5d559eb2469f344a26dc365ad0 [headlabel="2", labeldistance=1.5 headhref="dir_000123_000084.html"];
+  dir_ec044aca4011302dcfd8183b03594e30->dir_1220c712ed5f98fd84ba71b4848374db [headlabel="1", labeldistance=1.5 headhref="dir_000123_000112.html"];
+  dir_b13948a90891cb8a59f39ab8c50a8102->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="3", labeldistance=1.5 headhref="dir_000131_000175.html"];
+  dir_b13948a90891cb8a59f39ab8c50a8102->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="1", labeldistance=1.5 headhref="dir_000131_000179.html"];
+  dir_b13948a90891cb8a59f39ab8c50a8102->dir_74a3bd5d559eb2469f344a26dc365ad0 [headlabel="2", labeldistance=1.5 headhref="dir_000131_000084.html"];
+  dir_4419dd78bee2bde1362d842a02bd0463->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="2", labeldistance=1.5 headhref="dir_000179_000175.html"];
+  dir_4419dd78bee2bde1362d842a02bd0463->dir_74a3bd5d559eb2469f344a26dc365ad0 [headlabel="1", labeldistance=1.5 headhref="dir_000179_000084.html"];
+  dir_74a3bd5d559eb2469f344a26dc365ad0->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="19", labeldistance=1.5 headhref="dir_000084_000175.html"];
+  dir_74a3bd5d559eb2469f344a26dc365ad0->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="16", labeldistance=1.5 headhref="dir_000084_000131.html"];
+  dir_74a3bd5d559eb2469f344a26dc365ad0->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="7", labeldistance=1.5 headhref="dir_000084_000179.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_e8baec020e471dff3bc06b812491e6c5 [headlabel="2", labeldistance=1.5 headhref="dir_000112_000175.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_b13948a90891cb8a59f39ab8c50a8102 [headlabel="9", labeldistance=1.5 headhref="dir_000112_000131.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_4419dd78bee2bde1362d842a02bd0463 [headlabel="1", labeldistance=1.5 headhref="dir_000112_000179.html"];
+  dir_1220c712ed5f98fd84ba71b4848374db->dir_74a3bd5d559eb2469f344a26dc365ad0 [headlabel="2", labeldistance=1.5 headhref="dir_000112_000084.html"];
+}

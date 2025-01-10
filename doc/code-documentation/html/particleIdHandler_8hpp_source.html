@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="description" content="PhasicFlow is an open-source parallel DEM (discrete element method) package for simulating granular flow. It is developed in C++ and can be exectued on both GPU (like CUDA) and CPU.">
-<title>PhasicFlow: src/Particles/particles/particleIdHandler.hpp Source File</title>
+<title>PhasicFlow: src/Particles/particles/particleIdHandler/particleIdHandler.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -135,40 +135,85 @@ $(document).ready(function(){initNavTree('particleIdHandler_8hpp_source.html',''
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classpFlow_1_1particleIdHandler.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpFlow_1_1particleIdHandler.html">particleIdHandler</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classpFlow_1_1particleIdHandler.html#aef6608c59885d9c2ca9703cdf2067a8c">   33</a></span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="code" href="classpFlow_1_1particleIdHandler.html#aef6608c59885d9c2ca9703cdf2067a8c">nextId_</a>=0;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classpFlow_1_1particleIdHandler.html#ac3593ef0f65358a88a49bd94305bbcdc">particleIdHandler</a>(<a class="code" href="classpFlow_1_1pointField.html">int32PointField_HD</a> &amp; <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classpFlow_1_1particleIdHandler.html#aab9e56419af88aa23546fc6ac70c8caa">   37</a></span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="code" href="classpFlow_1_1particleIdHandler.html#aab9e56419af88aa23546fc6ac70c8caa">getNextId</a>()</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1particleIdHandler.html#aef6608c59885d9c2ca9703cdf2067a8c">nextId_</a>++;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classpFlow_1_1particleIdHandler.html#a7130e3d94dc53173b7ccc6a6ebcf3195">   42</a></span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="code" href="classpFlow_1_1particleIdHandler.html#a7130e3d94dc53173b7ccc6a6ebcf3195">nextId</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classpFlow_1_1particleIdHandler.html#aef6608c59885d9c2ca9703cdf2067a8c">nextId_</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">public</span> <a class="code" href="classpFlow_1_1pointField.html">uint32PointField_D</a></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">virtual</span> </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1particleIdHandler.html#a6f6b7323868950669dda0fe17c1fae0e">initialIdCheck</a>()=0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classpFlow_1_1particleIdHandler.html#a6aeac8b874457c8e7718cd470d4ec91d">ClassInfo</a>(<span class="stringliteral">&quot;particleIdHandler&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classpFlow_1_1particleIdHandler.html#a593696bb4b911919fd747f7c4105bc1f">particleIdHandler</a>(<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&amp; <a class="code" href="classpFlow_1_1pointField.html#af594ba73474d415474d32afc783799b1">pStruct</a>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classpFlow_1_1particleIdHandler.html#a5b9c53ed85c1fa3b6c68c76564f6bcc3">create_vCtor</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    (</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classpFlow_1_1particleIdHandler.html">particleIdHandler</a>,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        (<a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&amp; <a class="code" href="classpFlow_1_1pointField.html#af594ba73474d415474d32afc783799b1">pStruct</a>),</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        (<a class="code" href="classpFlow_1_1pointField.html#af594ba73474d415474d32afc783799b1">pStruct</a>)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    );</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="classpFlow_1_1particleIdHandler.html#a0c3a22266baabd1a61acb2f785c2fd5a">~particleIdHandler</a>()<span class="keyword">override</span>=<span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">virtual</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="namespacepFlow.html#a5b353480033e53f7e1fd71c6328b7fc5">Pair&lt;uint32, uint32&gt;</a> <a class="code" href="classpFlow_1_1particleIdHandler.html#a7614bfcdd64a2385cfd765917b6c16c2">getIdRange</a>(<a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> nNewParticles)=0;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> <a class="code" href="classpFlow_1_1particleIdHandler.html#aef274faa162bac6a9c1cadf2b69e432e">maxId</a>()<span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">// heat change for possible insertion of particles</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// overrdie from internalField</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1particleIdHandler.html#a0f63a62676bba1a8a5cf891337d1d201">hearChanges</a></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    (</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> t,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">real</a> dt,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">uint32</a> iter,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">const</span> <a class="code" href="classpFlow_1_1message.html">message</a>&amp; msg, </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">const</span> <a class="code" href="classpFlow_1_1anyList.html">anyList</a>&amp; varList</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">static</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classpFlow_1_1uniquePtr.html">uniquePtr&lt;particleIdHandler&gt;</a> <a class="code" href="classpFlow_1_1particleIdHandler.html#a916064ccf229e3608f27fef9d03d81c5">create</a>(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classpFlow_1_1pointStructure.html">pointStructure</a>&amp; <a class="code" href="classpFlow_1_1pointField.html#af594ba73474d415474d32afc783799b1">pStruct</a>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_ac3593ef0f65358a88a49bd94305bbcdc"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#ac3593ef0f65358a88a49bd94305bbcdc">pFlow::particleIdHandler::particleIdHandler</a></div><div class="ttdeci">particleIdHandler(int32PointField_HD &amp;id)</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8cpp_source.html#l00025">particleIdHandler.cpp:25</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_aab9e56419af88aa23546fc6ac70c8caa"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#aab9e56419af88aa23546fc6ac70c8caa">pFlow::particleIdHandler::getNextId</a></div><div class="ttdeci">int32 getNextId()</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8hpp_source.html#l00037">particleIdHandler.hpp:37</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1message_html"><div class="ttname"><a href="classpFlow_1_1message.html">pFlow::message</a></div><div class="ttdef"><b>Definition:</b> <a href="message_8hpp_source.html#l00033">message.hpp:33</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6192191c0e9c178a44ee1ac350fde476"><div class="ttname"><a href="namespacepFlow.html#a6192191c0e9c178a44ee1ac350fde476">pFlow::real</a></div><div class="ttdeci">float real</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00045">builtinTypes.hpp:45</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a5b9c53ed85c1fa3b6c68c76564f6bcc3"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a5b9c53ed85c1fa3b6c68c76564f6bcc3">pFlow::particleIdHandler::create_vCtor</a></div><div class="ttdeci">create_vCtor(particleIdHandler, pointStructure,(pointStructure &amp;pStruct),(pStruct))</div></div>
+<div class="ttc" id="anamespacepFlow_html_a5b353480033e53f7e1fd71c6328b7fc5"><div class="ttname"><a href="namespacepFlow.html#a5b353480033e53f7e1fd71c6328b7fc5">pFlow::Pair</a></div><div class="ttdeci">Kokkos::pair&lt; T1, T2 &gt; Pair</div><div class="ttdoc">Pair of two variables.</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00085">KokkosTypes.hpp:85</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html_af594ba73474d415474d32afc783799b1"><div class="ttname"><a href="classpFlow_1_1pointField.html#af594ba73474d415474d32afc783799b1">pFlow::pointField::pStruct</a></div><div class="ttdeci">const pointStructure &amp; pStruct() const</div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00134">pointField.hpp:134</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a6aeac8b874457c8e7718cd470d4ec91d"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a6aeac8b874457c8e7718cd470d4ec91d">pFlow::particleIdHandler::ClassInfo</a></div><div class="ttdeci">ClassInfo(&quot;particleIdHandler&quot;)</div><div class="ttdoc">class info</div></div>
+<div class="ttc" id="anamespacepFlow_html_abd01e8e67e3d94cab04ecaaf4f85ac1b"><div class="ttname"><a href="namespacepFlow.html#abd01e8e67e3d94cab04ecaaf4f85ac1b">pFlow::uint32</a></div><div class="ttdeci">unsigned int uint32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00056">builtinTypes.hpp:56</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1particleIdHandler_html"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html">pFlow::particleIdHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8hpp_source.html#l00030">particleIdHandler.hpp:30</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a7614bfcdd64a2385cfd765917b6c16c2"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a7614bfcdd64a2385cfd765917b6c16c2">pFlow::particleIdHandler::getIdRange</a></div><div class="ttdeci">virtual Pair&lt; uint32, uint32 &gt; getIdRange(uint32 nNewParticles)=0</div></div>
 <div class="ttc" id="apointFields_8hpp_html"><div class="ttname"><a href="pointFields_8hpp.html">pointFields.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demComponent_8hpp_source.html#l00028">demComponent.hpp:28</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00035">pointField.hpp:35</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_aef6608c59885d9c2ca9703cdf2067a8c"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#aef6608c59885d9c2ca9703cdf2067a8c">pFlow::particleIdHandler::nextId_</a></div><div class="ttdeci">int32 nextId_</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8hpp_source.html#l00033">particleIdHandler.hpp:33</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a7130e3d94dc53173b7ccc6a6ebcf3195"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a7130e3d94dc53173b7ccc6a6ebcf3195">pFlow::particleIdHandler::nextId</a></div><div class="ttdeci">int32 nextId() const</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8hpp_source.html#l00042">particleIdHandler.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a0c3a22266baabd1a61acb2f785c2fd5a"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a0c3a22266baabd1a61acb2f785c2fd5a">pFlow::particleIdHandler::~particleIdHandler</a></div><div class="ttdeci">~particleIdHandler() override=default</div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointField_html"><div class="ttname"><a href="classpFlow_1_1pointField.html">pFlow::pointField</a></div><div class="ttdef"><b>Definition:</b> <a href="pointField_8hpp_source.html#l00033">pointField.hpp:33</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointStructure_html"><div class="ttname"><a href="classpFlow_1_1pointStructure.html">pFlow::pointStructure</a></div><div class="ttdef"><b>Definition:</b> <a href="pointStructure_8hpp_source.html#l00034">pointStructure.hpp:34</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1anyList_html"><div class="ttname"><a href="classpFlow_1_1anyList.html">pFlow::anyList</a></div><div class="ttdef"><b>Definition:</b> <a href="anyList_8hpp_source.html#l00035">anyList.hpp:35</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a593696bb4b911919fd747f7c4105bc1f"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a593696bb4b911919fd747f7c4105bc1f">pFlow::particleIdHandler::particleIdHandler</a></div><div class="ttdeci">particleIdHandler(pointStructure &amp;pStruct)</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8cpp_source.html#l00023">particleIdHandler.cpp:23</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_aef274faa162bac6a9c1cadf2b69e432e"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#aef274faa162bac6a9c1cadf2b69e432e">pFlow::particleIdHandler::maxId</a></div><div class="ttdeci">virtual uint32 maxId() const =0</div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a6f6b7323868950669dda0fe17c1fae0e"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a6f6b7323868950669dda0fe17c1fae0e">pFlow::particleIdHandler::initialIdCheck</a></div><div class="ttdeci">virtual bool initialIdCheck()=0</div></div>
+<div class="ttc" id="aclasspFlow_1_1uniquePtr_html"><div class="ttname"><a href="classpFlow_1_1uniquePtr.html">pFlow::uniquePtr</a></div><div class="ttdef"><b>Definition:</b> <a href="uniquePtr_8hpp_source.html#l00042">uniquePtr.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a0f63a62676bba1a8a5cf891337d1d201"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a0f63a62676bba1a8a5cf891337d1d201">pFlow::particleIdHandler::hearChanges</a></div><div class="ttdeci">bool hearChanges(real t, real dt, uint32 iter, const message &amp;msg, const anyList &amp;varList) override</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8cpp_source.html#l00043">particleIdHandler.cpp:43</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1particleIdHandler_html_a916064ccf229e3608f27fef9d03d81c5"><div class="ttname"><a href="classpFlow_1_1particleIdHandler.html#a916064ccf229e3608f27fef9d03d81c5">pFlow::particleIdHandler::create</a></div><div class="ttdeci">static uniquePtr&lt; particleIdHandler &gt; create(pointStructure &amp;pStruct)</div><div class="ttdef"><b>Definition:</b> <a href="particleIdHandler_8cpp_source.html#l00074">particleIdHandler.cpp:74</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9e72493e858003bd3d74a55a2aedd075.html">Particles</a></li><li class="navelem"><a class="el" href="dir_b351bcc3c60d144476bd2e30437abfde.html">particles</a></li><li class="navelem"><a class="el" href="particleIdHandler_8hpp.html">particleIdHandler.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9e72493e858003bd3d74a55a2aedd075.html">Particles</a></li><li class="navelem"><a class="el" href="dir_b351bcc3c60d144476bd2e30437abfde.html">particles</a></li><li class="navelem"><a class="el" href="dir_8bc24349fa0634bc52689ddce350f25a.html">particleIdHandler</a></li><li class="navelem"><a class="el" href="particleIdHandler_8hpp.html">particleIdHandler.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

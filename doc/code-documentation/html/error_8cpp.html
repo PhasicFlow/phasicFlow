@@ -114,13 +114,6 @@ $(document).ready(function(){initNavTree('error_8cpp.html',''); initResizable();
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="error_8cpp__incl.png" border="0" usemap="#src_2phasicFlow_2globals_2error_8cpp" alt=""/></div>
-<map name="src_2phasicFlow_2globals_2error_8cpp" id="src_2phasicFlow_2globals_2error_8cpp">
-<area shape="rect" title=" " alt="" coords="110,5,279,47"/>
-<area shape="rect" title=" " alt="" coords="5,95,85,121"/>
-<area shape="rect" title=" " alt="" coords="110,95,181,121"/>
-<area shape="rect" href="error_8hpp.html" title=" " alt="" coords="205,95,285,121"/>
-<area shape="rect" href="streams_8hpp.html" title=" " alt="" coords="310,95,413,121"/>
-</map>
 </div>
 </div>
 <p><a href="error_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -139,12 +132,15 @@ Functions</h2></td></tr>
 <tr class="separator:a1512f8ce86f161bd65dead74084e075e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76fb1cfa092a4635166f1a5b72b3b1e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8cpp.html#a76fb1cfa092a4635166f1a5b72b3b1e4">warningMessage</a> (const char *fnName, const char *fileName, int linNumber)</td></tr>
 <tr class="separator:a76fb1cfa092a4635166f1a5b72b3b1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f5cd92e12e534ad9015645f37f0fdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8cpp.html#ac2f5cd92e12e534ad9015645f37f0fdf">reportAndExit</a> ()</td></tr>
-<tr class="separator:ac2f5cd92e12e534ad9015645f37f0fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14c0ff4f968a9653a96589a8e4cca097"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8cpp.html#a14c0ff4f968a9653a96589a8e4cca097">reportAndExit</a> (int errorCode)</td></tr>
+<tr class="separator:a14c0ff4f968a9653a96589a8e4cca097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4d8e0a1565756ea3e85650c5909c3b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8cpp.html#ad4d8e0a1565756ea3e85650c5909c3b4">fatalExitPhasicFlow</a> (int errorCode)</td></tr>
+<tr class="memdesc:ad4d8e0a1565756ea3e85650c5909c3b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take actions to fatal exit phasicFlow.  <a href="error_8cpp.html#ad4d8e0a1565756ea3e85650c5909c3b4">More...</a><br /></td></tr>
+<tr class="separator:ad4d8e0a1565756ea3e85650c5909c3b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a5eb018080f1db7b439575b673d5d5bf2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1Ostream.html">pFlow::Ostream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8cpp.html#a5eb018080f1db7b439575b673d5d5bf2">errorStream</a> = <a class="el" href="namespacepFlow.html#a7e835264dcf9974fe0c8a94bec3c7ab0">pFlow::errReport</a></td></tr>
+<tr class="memitem:a5eb018080f1db7b439575b673d5d5bf2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classpFlow_1_1Ostream.html">pFlow::Ostream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8cpp.html#a5eb018080f1db7b439575b673d5d5bf2">errorStream</a> = <a class="el" href="namespacepFlow.html#a5461d284d871cfccadeb3dea5a44a03f">pFlow::pOutput</a></td></tr>
 <tr class="separator:a5eb018080f1db7b439575b673d5d5bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -174,9 +170,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00031">31</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00035">35</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8cpp_source.html#l00028">errorStream</a>, and <a class="el" href="streams_8hpp_source.html#l00029">redText</a>.</p>
+<p class="reference">References <a class="el" href="error_8cpp_source.html#l00032">errorStream</a>, and <a class="el" href="iOstream_8hpp_source.html#l00039">Red_Text</a>.</p>
 
 </div>
 </div>
@@ -212,9 +208,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00041">41</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00044">44</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8cpp_source.html#l00028">errorStream</a>, and <a class="el" href="streams_8hpp_source.html#l00029">redText</a>.</p>
+<p class="reference">References <a class="el" href="error_8cpp_source.html#l00032">errorStream</a>, and <a class="el" href="iOstream_8hpp_source.html#l00039">Red_Text</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="processors_8cpp_source.html#l00165">pFlow::checkMPI()</a>.</p>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="error_8cpp_a653033f027c35c016ad647d303a53846_icgraph.png" border="0" usemap="#error_8cpp_a653033f027c35c016ad647d303a53846_icgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -250,9 +255,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00051">51</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00054">54</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8cpp_source.html#l00028">errorStream</a>, and <a class="el" href="streams_8hpp_source.html#l00029">redText</a>.</p>
+<p class="reference">References <a class="el" href="error_8cpp_source.html#l00032">errorStream</a>, <a class="el" href="iOstream_8hpp_source.html#l00039">Red_Text</a>, and <a class="el" href="iOstream_8hpp_source.html#l00040">Yellow_Text</a>.</p>
 
 </div>
 </div>
@@ -300,21 +305,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00062">62</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00069">69</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8cpp_source.html#l00028">errorStream</a>, and <a class="el" href="streams_8hpp_source.html#l00029">redText</a>.</p>
+<p class="reference">References <a class="el" href="error_8cpp_source.html#l00032">errorStream</a>, and <a class="el" href="iOstream_8hpp_source.html#l00039">Red_Text</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error_8cpp_source.html#l00073">ioErrorMessage()</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="error_8cpp_source.html#l00087">ioErrorMessage()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="error_8cpp_a1eea9cba7dd30e9c608ddf28b295810f_icgraph.png" border="0" usemap="#error_8cpp_a1eea9cba7dd30e9c608ddf28b295810f_icgraph" alt=""/></div>
-<map name="error_8cpp_a1eea9cba7dd30e9c608ddf28b295810f_icgraph" id="error_8cpp_a1eea9cba7dd30e9c608ddf28b295810f_icgraph">
-<area shape="rect" title=" " alt="" coords="176,5,299,32"/>
-<area shape="rect" href="error_8hpp.html#a1512f8ce86f161bd65dead74084e075e" title=" " alt="" coords="5,5,128,32"/>
-</map>
 </div>
 
 </div>
@@ -363,19 +364,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00073">73</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00087">87</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8cpp_source.html#l00062">ioErrorMessage()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="error_8cpp_source.html#l00069">ioErrorMessage()</a>.</p>
+<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="error_8cpp_a1512f8ce86f161bd65dead74084e075e_cgraph.png" border="0" usemap="#error_8cpp_a1512f8ce86f161bd65dead74084e075e_cgraph" alt=""/></div>
-<map name="error_8cpp_a1512f8ce86f161bd65dead74084e075e_cgraph" id="error_8cpp_a1512f8ce86f161bd65dead74084e075e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,128,32"/>
-<area shape="rect" href="error_8cpp.html#a1eea9cba7dd30e9c608ddf28b295810f" title=" " alt="" coords="176,5,299,32"/>
-</map>
 </div>
 
 </div>
@@ -412,14 +409,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00079">79</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00101">101</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="error_8cpp_source.html#l00028">errorStream</a>, and <a class="el" href="streams_8hpp_source.html#l00030">yellowText</a>.</p>
+<p class="reference">References <a class="el" href="error_8cpp_source.html#l00032">errorStream</a>, and <a class="el" href="iOstream_8hpp_source.html#l00040">Yellow_Text</a>.</p>
 
 </div>
 </div>
-<a id="ac2f5cd92e12e534ad9015645f37f0fdf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2f5cd92e12e534ad9015645f37f0fdf">&#9670;&nbsp;</a></span>reportAndExit()</h2>
+<a id="a14c0ff4f968a9653a96589a8e4cca097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14c0ff4f968a9653a96589a8e4cca097">&#9670;&nbsp;</a></span>reportAndExit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -427,25 +424,71 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; reportAndExit </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>errorCode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00089">89</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00111">111</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00320">pFlow::endl()</a>, and <a class="el" href="error_8cpp_source.html#l00028">errorStream</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="iOstream_8hpp_source.html#l00341">pFlow::endl()</a>, <a class="el" href="error_8cpp_source.html#l00032">errorStream</a>, and <a class="el" href="error_8cpp_source.html#l00119">fatalExitPhasicFlow()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="processors_8cpp_source.html#l00165">pFlow::checkMPI()</a>.</p>
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="error_8cpp_ac2f5cd92e12e534ad9015645f37f0fdf_cgraph.png" border="0" usemap="#error_8cpp_ac2f5cd92e12e534ad9015645f37f0fdf_cgraph" alt=""/></div>
-<map name="error_8cpp_ac2f5cd92e12e534ad9015645f37f0fdf_cgraph" id="error_8cpp_ac2f5cd92e12e534ad9015645f37f0fdf_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,116,32"/>
-<area shape="rect" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189" title="Add newline and flush stream." alt="" coords="164,5,261,32"/>
-</map>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="error_8cpp_a14c0ff4f968a9653a96589a8e4cca097_cgraph.png" border="0" usemap="#error_8cpp_a14c0ff4f968a9653a96589a8e4cca097_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="error_8cpp_a14c0ff4f968a9653a96589a8e4cca097_icgraph.png" border="0" usemap="#error_8cpp_a14c0ff4f968a9653a96589a8e4cca097_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="ad4d8e0a1565756ea3e85650c5909c3b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4d8e0a1565756ea3e85650c5909c3b4">&#9670;&nbsp;</a></span>fatalExitPhasicFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fatalExitPhasicFlow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>errorCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Take actions to fatal exit phasicFlow. </p>
+
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00119">119</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="processors_8cpp_source.html#l00147">processors::abort()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="error_8cpp_source.html#l00111">reportAndExit()</a>.</p>
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="error_8cpp_ad4d8e0a1565756ea3e85650c5909c3b4_cgraph.png" border="0" usemap="#error_8cpp_ad4d8e0a1565756ea3e85650c5909c3b4_cgraph" alt=""/></div>
+</div>
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="error_8cpp_ad4d8e0a1565756ea3e85650c5909c3b4_icgraph.png" border="0" usemap="#error_8cpp_ad4d8e0a1565756ea3e85650c5909c3b4_icgraph" alt=""/></div>
 </div>
 
 </div>
@@ -461,7 +504,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1Ostream.html">pFlow::Ostream</a>&amp; errorStream = <a class="el" href="namespacepFlow.html#a7e835264dcf9974fe0c8a94bec3c7ab0">pFlow::errReport</a></td>
+          <td class="memname"><a class="el" href="classpFlow_1_1Ostream.html">pFlow::Ostream</a>&amp; errorStream = <a class="el" href="namespacepFlow.html#a5461d284d871cfccadeb3dea5a44a03f">pFlow::pOutput</a></td>
         </tr>
       </table>
   </td>
@@ -471,9 +514,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00028">28</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error_8cpp_source.html#l00032">32</a> of file <a class="el" href="error_8cpp_source.html">error.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error_8cpp_source.html#l00041">fatalErrorInMessage()</a>, <a class="el" href="error_8cpp_source.html#l00031">fatalErrorMessage()</a>, <a class="el" href="error_8cpp_source.html#l00062">ioErrorMessage()</a>, <a class="el" href="error_8cpp_source.html#l00051">notImplementedErrorMessage()</a>, <a class="el" href="error_8cpp_source.html#l00089">reportAndExit()</a>, and <a class="el" href="error_8cpp_source.html#l00079">warningMessage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error_8cpp_source.html#l00044">fatalErrorInMessage()</a>, <a class="el" href="error_8cpp_source.html#l00035">fatalErrorMessage()</a>, <a class="el" href="error_8cpp_source.html#l00069">ioErrorMessage()</a>, <a class="el" href="error_8cpp_source.html#l00054">notImplementedErrorMessage()</a>, <a class="el" href="error_8cpp_source.html#l00111">reportAndExit()</a>, and <a class="el" href="error_8cpp_source.html#l00101">warningMessage()</a>.</p>
 
 </div>
 </div>

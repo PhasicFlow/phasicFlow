@@ -1,0 +1,12 @@
+digraph "globalSize"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="globalSize",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Global size of processors."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="globalParallel",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1processors.html#af72411c365e83148a65659b34060ef8e",tooltip="Is this a parallel MPI run."];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::localProcessors\l::localProcessors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1localProcessors.html#ac737410453668a4e9ee240f4da0263e3",tooltip="Construct a local processor communication from global communicator using a name and ranks."];
+}

@@ -120,53 +120,56 @@ $(document).ready(function(){initNavTree('streams_8hpp_source.html',''); initRes
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iTstream_8hpp.html">iTstream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="processorOstream_8hpp.html">processorOstream.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="masterOstream_8hpp.html">masterOstream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">extern</span> Ostream <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">extern</span> Istream <a class="code" href="namespacepFlow.html#a01c5a99f17466741d1fcfbc8144fad91">input</a>; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">extern</span> Ostream <a class="code" href="namespacepFlow.html#a7e835264dcf9974fe0c8a94bec3c7ab0">errReport</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow.html">pFlow</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">extern</span> Ostream <a class="code" href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">output</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">extern</span> masterOstream <a class="code" href="namespacepFlow.html#a3b4a2b317fde2e633c19612003db8859">mOutput</a>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">extern</span> processorOstream <a class="code" href="namespacepFlow.html#a5461d284d871cfccadeb3dea5a44a03f">pOutput</a>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a6536dc902ef8c5e4e8eead6f3c5dc237">   29</a></span>&#160;<span class="preprocessor">#define redText(text)       redColor&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a71e567553baf2a24a11e442683cde599">   30</a></span>&#160;<span class="preprocessor">#define yellowText(text)    yellowColor&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a25b359f24d903d339250a7b4c2d0e742">   31</a></span>&#160;<span class="preprocessor">#define blueText(text)      blueColor&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3">   32</a></span>&#160;<span class="preprocessor">#define greenText(text)     greenColor&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a8dc03cadd682b6a068c116f139fd45cb">   33</a></span>&#160;<span class="preprocessor">#define magentaText(text)   magentaColor&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a213e43875efd5fefe28d0da89432ff7a">   34</a></span>&#160;<span class="preprocessor">#define cyanText(text)      cyanColor&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="streams_8hpp.html#ada7e7f1dc8af64d36d9b34fce99da38e">   35</a></span>&#160;<span class="preprocessor">#define boldText(text)      boldChar&lt;&lt;text&lt;&lt;defaultColor</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a41fa3612202db2d335c330fb061e0054">   37</a></span>&#160;<span class="preprocessor">#define INFORMATION pFlow::output&lt;&lt;boldChar&lt;&lt;magentaColor&lt;&lt;&quot;&gt; INFO: &quot;&lt;&lt;defaultColor&lt;&lt;magentaColor</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a18f2ecec3edb6662b3a89a41d3787584">   38</a></span>&#160;<span class="preprocessor">#define endINFO defaultColor&lt;&lt;pFlow::nl</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">   40</a></span>&#160;<span class="preprocessor">#define REPORT(n) pFlow::output.space(2*n)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10">   41</a></span>&#160;<span class="preprocessor">#define endREPORT pFlow::nl</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">extern</span> Istream <a class="code" href="namespacepFlow.html#a01c5a99f17466741d1fcfbc8144fad91">input</a>; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">extern</span> processorOstream <a class="code" href="namespacepFlow.html#a6de878dda06ec10d828c865cdb474968">errReport</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a41fa3612202db2d335c330fb061e0054">   36</a></span>&#160;<span class="preprocessor">#define INFORMATION pFlow::pOutput.setColor(boldChar).setColor(magentaColor)&lt;&lt;&quot;&gt; INFO: &quot;&lt;&lt;defaultColor&lt;&lt;magentaColor</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a4101c99c5eb65c687037cb839295ae25">   37</a></span>&#160;<span class="preprocessor">#define END_INFO defaultColor&lt;&lt;pFlow::endl</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="streams_8hpp.html#aeb765df06121339620670437d217fec8">   39</a></span>&#160;<span class="preprocessor">#define REPORT(n) pFlow::mOutput.space(2*n)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8">   40</a></span>&#160;<span class="preprocessor">#define END_REPORT pFlow::endl</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a66e13d5310adaba0b5ac66764bcbed28">   44</a></span>&#160;<span class="preprocessor">#define yWARNING pFlow::output&lt;&lt;boldChar&lt;&lt;yellowColor&lt;&lt;&quot;&gt; WARNING\n&quot;&lt;&lt;defaultColor&lt;&lt;yellowColor&lt;&lt;&quot;  &quot; </span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="streams_8hpp.html#af5b7516e324a78e5b4c8e61106be0cfc">   45</a></span>&#160;<span class="preprocessor">#define endyWARNING defaultColor&lt;&lt;pFlow::nl</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">   47</a></span>&#160;<span class="preprocessor">#define ERR pFlow::output&lt;&lt;boldChar&lt;&lt;redColor&lt;&lt;&quot;&gt; ERROR\n&quot;&lt;&lt;defaultColor&lt;&lt;redColor&lt;&lt;&quot;  &quot; </span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a2374d8fc661bc100e80c0f7c3ac0d418">   48</a></span>&#160;<span class="preprocessor">#define endERR defaultColor&lt;&lt;pFlow::nl</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a5cb439d9f933fde4cf23caa370c030e7">   43</a></span>&#160;<span class="preprocessor">#define WARNING pFlow::errReport&lt;&lt;boldChar&lt;&lt;yellowColor&lt;&lt;&quot;&gt; WARNING\n&quot;&lt;&lt;defaultColor&lt;&lt;yellowColor&lt;&lt;&quot;  &quot; </span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="streams_8hpp.html#afc5e857376931bb65dafc9963042ea74">   44</a></span>&#160;<span class="preprocessor">#define END_WARNING defaultColor&lt;&lt;pFlow::endl</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b">   46</a></span>&#160;<span class="preprocessor">#define ERR pFlow::errReport&lt;&lt;boldChar&lt;&lt;redColor&lt;&lt;&quot;&gt; ERROR\n&quot;&lt;&lt;defaultColor&lt;&lt;redColor&lt;&lt;&quot;  &quot; </span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="streams_8hpp.html#a4fe145765559e6dc61e1bcc2a5194331">   47</a></span>&#160;<span class="preprocessor">#define END_ERR defaultColor&lt;&lt;pFlow::endl</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aOstream_8hpp_html"><div class="ttname"><a href="Ostream_8hpp.html">Ostream.hpp</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a5461d284d871cfccadeb3dea5a44a03f"><div class="ttname"><a href="namespacepFlow.html#a5461d284d871cfccadeb3dea5a44a03f">pFlow::pOutput</a></div><div class="ttdeci">processorOstream pOutput</div></div>
 <div class="ttc" id="aiTstream_8hpp_html"><div class="ttname"><a href="iTstream_8hpp.html">iTstream.hpp</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a3b4a2b317fde2e633c19612003db8859"><div class="ttname"><a href="namespacepFlow.html#a3b4a2b317fde2e633c19612003db8859">pFlow::mOutput</a></div><div class="ttdeci">masterOstream mOutput</div></div>
 <div class="ttc" id="aoTstream_8hpp_html"><div class="ttname"><a href="oTstream_8hpp.html">oTstream.hpp</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a01c5a99f17466741d1fcfbc8144fad91"><div class="ttname"><a href="namespacepFlow.html#a01c5a99f17466741d1fcfbc8144fad91">pFlow::input</a></div><div class="ttdeci">Istream input</div></div>
 <div class="ttc" id="aIstream_8hpp_html"><div class="ttname"><a href="Istream_8hpp.html">Istream.hpp</a></div></div>
 <div class="ttc" id="aoFstream_8hpp_html"><div class="ttname"><a href="oFstream_8hpp.html">oFstream.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demComponent_8hpp_source.html#l00028">demComponent.hpp:28</a></div></div>
+<div class="ttc" id="anamespacepFlow_html"><div class="ttname"><a href="namespacepFlow.html">pFlow</a></div><div class="ttdef"><b>Definition:</b> <a href="demGeometry_8hpp_source.html#l00027">demGeometry.hpp:27</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a6de878dda06ec10d828c865cdb474968"><div class="ttname"><a href="namespacepFlow.html#a6de878dda06ec10d828c865cdb474968">pFlow::errReport</a></div><div class="ttdeci">processorOstream errReport</div></div>
 <div class="ttc" id="anamespacepFlow_html_a86ae30c22a4ef4bc487b40ed52f4d2f9"><div class="ttname"><a href="namespacepFlow.html#a86ae30c22a4ef4bc487b40ed52f4d2f9">pFlow::output</a></div><div class="ttdeci">Ostream output</div></div>
-<div class="ttc" id="anamespacepFlow_html_a7e835264dcf9974fe0c8a94bec3c7ab0"><div class="ttname"><a href="namespacepFlow.html#a7e835264dcf9974fe0c8a94bec3c7ab0">pFlow::errReport</a></div><div class="ttdeci">Ostream errReport</div></div>
 <div class="ttc" id="aiFstream_8hpp_html"><div class="ttname"><a href="iFstream_8hpp.html">iFstream.hpp</a></div></div>
+<div class="ttc" id="amasterOstream_8hpp_html"><div class="ttname"><a href="masterOstream_8hpp.html">masterOstream.hpp</a></div></div>
+<div class="ttc" id="aprocessorOstream_8hpp_html"><div class="ttname"><a href="processorOstream_8hpp.html">processorOstream.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_b13948a90891cb8a59f39ab8c50a8102.html">streams</a></li><li class="navelem"><a class="el" href="streams_8hpp.html">streams.hpp</a></li>

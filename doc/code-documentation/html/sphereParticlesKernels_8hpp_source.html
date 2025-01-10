@@ -128,70 +128,50 @@ $(document).ready(function(){initNavTree('sphereParticlesKernels_8hpp_source.htm
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef __sphereParticlesKernels_hpp__</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define __sphereParticlesKernels_hpp__</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1sphereParticlesKernels.html">   24</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html">pFlow::sphereParticlesKernels</a></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8hpp.html">types.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pointFlag_8hpp.html">pointFlag.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">using</span> <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">rpAcceleration</a> = Kokkos::RangePolicy&lt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <a class="code" href="namespacepFlow.html#aa3a14d3c76643399fc4edd8eca14944a">DefaultExecutionSpace</a>,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            Kokkos::Schedule&lt;Kokkos::Static&gt;,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            Kokkos::IndexType&lt;int32&gt;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">   31</a></span>&#160;            &gt;;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> IncludeFunctionType&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">acceleration</a>( </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classpFlow_1_1triple.html">realx3</a>      g,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      mass,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>    force,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      I,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>    torque,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    IncludeFunctionType         incld,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>    lAcc,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>    rAcc</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    )</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">auto</span> activeRange = incld.activeRange();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span>(incld.allActive())</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        Kokkos::parallel_for(</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="stringliteral">&quot;pFlow::sphereParticlesKernels::acceleration&quot;</span>,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">rpAcceleration</a>(activeRange.first, activeRange.second),</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i){</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                lAcc[i] = force[i]/mass[i] + g;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                rAcc[i] = torque[i]/I[i];</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        });</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        Kokkos::parallel_for(</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;pFlow::sphereParticlesKernels::acceleration&quot;</span>,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">rpAcceleration</a>(activeRange.first, activeRange.second),</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i){</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">if</span>(incld(i))</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                lAcc[i] = force[i]/mass[i] + g;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                rAcc[i] = torque[i]/I[i];</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        });</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    Kokkos::fence();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespacepFlow_1_1sphereParticlesKernels.html">   27</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html">pFlow::sphereParticlesKernels</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#a534012364bda4035bf408aa4fbeb1f4f">addMassDiamInertiaProp</a>(</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;uint32&gt;</a>    shapeIndex,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      mass,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      diameter,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      I,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;uint32&gt;</a>    propertyId,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classpFlow_1_1pointFlag.html">pFlagTypeDevice</a>             incld,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      src_mass,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      src_diameter,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>      src_I,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;uint32&gt;</a>    src_propertyId</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacepFlow_1_1sphereParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">acceleration</a>( </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1triple.html">realx3</a>&amp;                   g,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>&amp;   mass,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>&amp; force,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;real&gt;</a>&amp;   I,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>&amp; torque,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">const</span> <a class="code" href="classpFlow_1_1pointFlag.html">pFlagTypeDevice</a>&amp;          incld,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>        lAcc,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">deviceViewType1D&lt;realx3&gt;</a>        rAcc</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html_a9fa48474270a6882fba4b6f8e003aecb"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html#a9fa48474270a6882fba4b6f8e003aecb">pFlow::sphereParticlesKernels::rpAcceleration</a></div><div class="ttdeci">Kokkos::RangePolicy&lt; DefaultExecutionSpace, Kokkos::Schedule&lt; Kokkos::Static &gt;, Kokkos::IndexType&lt; int32 &gt; &gt; rpAcceleration</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8hpp_source.html#l00031">sphereParticlesKernels.hpp:31</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aa3a14d3c76643399fc4edd8eca14944a"><div class="ttname"><a href="namespacepFlow.html#aa3a14d3c76643399fc4edd8eca14944a">pFlow::DefaultExecutionSpace</a></div><div class="ttdeci">Kokkos::DefaultExecutionSpace DefaultExecutionSpace</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00049">KokkosTypes.hpp:49</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html_aea4493f25ef82d9338f4b7dd1059f675"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html#aea4493f25ef82d9338f4b7dd1059f675">pFlow::sphereParticlesKernels::acceleration</a></div><div class="ttdeci">void acceleration(realx3 g, deviceViewType1D&lt; real &gt; mass, deviceViewType1D&lt; realx3 &gt; force, deviceViewType1D&lt; real &gt; I, deviceViewType1D&lt; realx3 &gt; torque, IncludeFunctionType incld, deviceViewType1D&lt; realx3 &gt; lAcc, deviceViewType1D&lt; realx3 &gt; rAcc)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8hpp_source.html#l00034">sphereParticlesKernels.hpp:34</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aa5276597d4016d6696f1f265a13d2164"><div class="ttname"><a href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">pFlow::deviceViewType1D</a></div><div class="ttdeci">Kokkos::View&lt; T * &gt; deviceViewType1D</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00098">KokkosTypes.hpp:98</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
-<div class="ttc" id="apFlowMacros_8hpp_html_aa7d4742cdf24a3792276e669531d145c"><div class="ttname"><a href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">LAMBDA_HD</a></div><div class="ttdeci">#define LAMBDA_HD</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00054">pFlowMacros.hpp:54</a></div></div>
-<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html">pFlow::sphereParticlesKernels</a></div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8hpp_source.html#l00024">sphereParticlesKernels.hpp:24</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html_aecccfbc0885366153df27f43fc32793c"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html#aecccfbc0885366153df27f43fc32793c">pFlow::sphereParticlesKernels::acceleration</a></div><div class="ttdeci">void acceleration(const realx3 &amp;g, const deviceViewType1D&lt; real &gt; &amp;mass, const deviceViewType1D&lt; realx3 &gt; &amp;force, const deviceViewType1D&lt; real &gt; &amp;I, const deviceViewType1D&lt; realx3 &gt; &amp;torque, const pFlagTypeDevice &amp;incld, deviceViewType1D&lt; realx3 &gt; lAcc, deviceViewType1D&lt; realx3 &gt; rAcc)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8cpp_source.html#l00061">sphereParticlesKernels.cpp:61</a></div></div>
+<div class="ttc" id="atypes_8hpp_html"><div class="ttname"><a href="types_8hpp.html">types.hpp</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aa5276597d4016d6696f1f265a13d2164"><div class="ttname"><a href="namespacepFlow.html#aa5276597d4016d6696f1f265a13d2164">pFlow::deviceViewType1D</a></div><div class="ttdeci">Kokkos::View&lt; T * &gt; deviceViewType1D</div><div class="ttdoc">1D array (vector) with default device (memory space and execution space)</div><div class="ttdef"><b>Definition:</b> <a href="KokkosTypes_8hpp_source.html#l00121">KokkosTypes.hpp:121</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html">pFlow::sphereParticlesKernels</a></div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8hpp_source.html#l00027">sphereParticlesKernels.hpp:27</a></div></div>
+<div class="ttc" id="anamespacepFlow_1_1sphereParticlesKernels_html_a534012364bda4035bf408aa4fbeb1f4f"><div class="ttname"><a href="namespacepFlow_1_1sphereParticlesKernels.html#a534012364bda4035bf408aa4fbeb1f4f">pFlow::sphereParticlesKernels::addMassDiamInertiaProp</a></div><div class="ttdeci">void addMassDiamInertiaProp(deviceViewType1D&lt; uint32 &gt; shapeIndex, deviceViewType1D&lt; real &gt; mass, deviceViewType1D&lt; real &gt; diameter, deviceViewType1D&lt; real &gt; I, deviceViewType1D&lt; uint32 &gt; propertyId, pFlagTypeDevice incld, deviceViewType1D&lt; real &gt; src_mass, deviceViewType1D&lt; real &gt; src_diameter, deviceViewType1D&lt; real &gt; src_I, deviceViewType1D&lt; uint32 &gt; src_propertyId)</div><div class="ttdef"><b>Definition:</b> <a href="sphereParticlesKernels_8cpp_source.html#l00028">sphereParticlesKernels.cpp:28</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1triple_html"><div class="ttname"><a href="classpFlow_1_1triple.html">pFlow::triple&lt; real &gt;</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1pointFlag_html"><div class="ttname"><a href="classpFlow_1_1pointFlag.html">pFlow::pointFlag&lt; DefaultExecutionSpace &gt;</a></div></div>
+<div class="ttc" id="apointFlag_8hpp_html"><div class="ttname"><a href="pointFlag_8hpp.html">pointFlag.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9e72493e858003bd3d74a55a2aedd075.html">Particles</a></li><li class="navelem"><a class="el" href="dir_ae10a04c09150cad5fefedcb2d995fdc.html">SphereParticles</a></li><li class="navelem"><a class="el" href="dir_d29baab380f019e44de3923e8a891c5f.html">sphereParticles</a></li><li class="navelem"><a class="el" href="sphereParticlesKernels_8hpp.html">sphereParticlesKernels.hpp</a></li>

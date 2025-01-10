@@ -1,0 +1,11 @@
+digraph "beginBlock"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="beginBlock",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Write begin block group without a name."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::iOstream::beginBlock",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iOstream.html#ab440fa44645864fa1f9595b19d77bed0",tooltip="Write begin block group with a name Increments indentation, adds newline."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

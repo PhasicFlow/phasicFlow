@@ -1,0 +1,12 @@
+digraph "mirrorBoundary"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="mirrorBoundary",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::generalBoundary\l::mirrorBoundary",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1generalBoundary.html#a074ec71c57438ce804028031fa4b5bb4",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::periodicBoundaryContact\lSearch::setSearchBox",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1periodicBoundaryContactSearch.html#a22520a8bdc9c917da2d44eff2eb4648d",tooltip=" "];
+}

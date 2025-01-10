@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['enderr_5469',['endERR',['../streams_8hpp.html#a2374d8fc661bc100e80c0f7c3ac0d418',1,'streams.hpp']]],
-  ['endinfo_5470',['endINFO',['../streams_8hpp.html#a18f2ecec3edb6662b3a89a41d3787584',1,'streams.hpp']]],
-  ['endreport_5471',['endREPORT',['../streams_8hpp.html#a04db65a6cb5a45695ea75cce1b5d7a10',1,'streams.hpp']]],
-  ['endywarning_5472',['endyWARNING',['../streams_8hpp.html#af5b7516e324a78e5b4c8e61106be0cfc',1,'streams.hpp']]],
-  ['err_5473',['ERR',['../streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b',1,'streams.hpp']]]
+  ['end_5ferr_7220',['END_ERR',['../streams_8hpp.html#a4fe145765559e6dc61e1bcc2a5194331',1,'streams.hpp']]],
+  ['end_5finfo_7221',['END_INFO',['../streams_8hpp.html#a4101c99c5eb65c687037cb839295ae25',1,'streams.hpp']]],
+  ['end_5freport_7222',['END_REPORT',['../streams_8hpp.html#a1861619f2a6e102d0043a98577c8c9e8',1,'streams.hpp']]],
+  ['end_5fwarning_7223',['END_WARNING',['../streams_8hpp.html#afc5e857376931bb65dafc9963042ea74',1,'streams.hpp']]],
+  ['err_7224',['ERR',['../streams_8hpp.html#a735563036dced0b7d6cc98f97ea4978b',1,'streams.hpp']]]
 ];

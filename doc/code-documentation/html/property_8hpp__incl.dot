@@ -1,0 +1,15 @@
+digraph "src/Property/property.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/Property/property.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Vectors.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$Vectors_8hpp.html",tooltip=" "];
+  Node1 -> Node59 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node59 [label="hashMap.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$hashMap_8hpp.html",tooltip=" "];
+  Node1 -> Node62 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node62 [label="fileDictionary.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$fileDictionary_8hpp.html",tooltip=" "];
+  Node1 -> Node83 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node83 [label="iFstream.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$iFstream_8hpp.html",tooltip=" "];
+}

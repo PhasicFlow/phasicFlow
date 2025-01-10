@@ -1,0 +1,21 @@
+digraph "bad"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="bad",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Return true if stream is corrupted."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::badInput",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a1da2c77e895df3330a9b2a421486be06",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::iEntry\< Key,\l T * \>::createEntry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iEntry.html#a133f34e170bc1f28e7439fe87043ce2f",tooltip="create an entry (dataEntry or dictionary) from stream"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::Istream::nextValid",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Istream.html#a3d5ae683596fda5b3cb7e1e22750ced3",tooltip="Get the next valid character."];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::iIstream::putBack",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iIstream.html#aeecefbf648ad32c20134e67c4fa35597",tooltip="Put back token Only a single put back is permitted."];
+  Node9 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="pFlow::dataEntry::readData\lEntry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dataEntry.html#a12a2f078710c7419e84afd6cdd58ac70",tooltip="read dataEntry from stream"];
+  Node1 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="pFlow::iEntry\< Key,\l T * \>::readKeyword",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iEntry.html#adaf3255a26893f538d0e891e77d0d6c7",tooltip="read a keyword from stream"];
+}

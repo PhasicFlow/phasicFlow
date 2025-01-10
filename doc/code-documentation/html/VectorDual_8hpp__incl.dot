@@ -1,0 +1,25 @@
+digraph "src/phasicFlow/containers/VectorHD/VectorDual.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/containers\l/VectorHD/VectorDual.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="globalSettings.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$globalSettings_8hpp.html",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="types.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$types_8hpp.html",tooltip=" "];
+  Node3 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="typeInfo.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$typeInfo_8hpp.html",tooltip=" "];
+  Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node36 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node36 [label="Vector.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$Vector_8hpp.html",tooltip=" "];
+  Node36 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node59 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node59 [label="streams.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$streams_8hpp.html",tooltip=" "];
+  Node1 -> Node77 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node77 [label="KokkosTypes.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$KokkosTypes_8hpp.html",tooltip=" "];
+  Node1 -> Node81 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node81 [label="ViewAlgorithms.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$ViewAlgorithms_8hpp.html",tooltip=" "];
+  Node1 -> Node86 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node86 [label="VectorDualAlgorithms.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$VectorDualAlgorithms_8hpp.html",tooltip=" "];
+}

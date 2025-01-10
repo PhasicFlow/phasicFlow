@@ -1,0 +1,47 @@
+digraph "subDict"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="subDict",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="ref to a subdictioanry fatalExit if not found"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::applySelector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ae5dc60e5c12dc11dab2f816efcd59246",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$particlesPhasicFlow_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::subDomain::bottomDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1subDomain.html#a1d7c98f39124353530db1fe299d19338",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::simulationDomain\l::boundaryDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html#afbaf3b01628021859690cc366c4b7397",tooltip="return a const ref to dicrionary of boundary i of this processor"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::interaction\l::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1interaction.html#a4719440c5da75bf4bc6776501d106bf9",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::regularSimulation\lDomain::createBoundaryDicts",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1regularSimulationDomain.html#aa5ffcd53200f744cf111c760815cdf70",tooltip=" "];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::subDomain::frontDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1subDomain.html#af072d9d05a547e819fc70b57ac4facb7",tooltip=" "];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::impl\l_readDictionary",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#a66839ac0467b7a5370be2aea901c4be0",tooltip="Read from dictionary."];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="pFlow::subDomain::leftDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1subDomain.html#a86f1f0d0c7b7e1d3ca25fd334bd3c2de",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="pFlow::positionParticles\l::positionParticles",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1positionParticles.html#a4a89d916707f0aa0fee7f576c093b762",tooltip=" "];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="pFlow::simulationDomain\l::prepareBoundaryDicts",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html#a7480d19ee76243cda932bdbc4acedb7e",tooltip=" "];
+  Node1 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="pFlow::countFields\l::process",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1countFields.html#a48710dfacae22a8ec82d43d63e97f7b7",tooltip=" "];
+  Node14 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="pFlow::postprocess\l::processTimeFolder",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1postprocess.html#a6c48ff6de30d5c44952ff4c593bb7815",tooltip=" "];
+  Node1 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="pFlow::multiRotatingAxis\lMotion::readDictionary",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1multiRotatingAxisMotion.html#a3ee94dd32f4df1490653290d2919dc52",tooltip="Read from a dictionary."];
+  Node1 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="pFlow::subDomain::rearDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1subDomain.html#a420e6f2cfd347941cefb82f3f24a9e2b",tooltip=" "];
+  Node1 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="pFlow::subDomain::rightDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1subDomain.html#ad90c6dd043a33ec746206c2234b80573",tooltip=" "];
+  Node1 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="pFlow::simulationDomain\l::thisBoundariesDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1simulationDomain.html#a48e6f4d7467d0e3224280fcb3674e0de",tooltip="The generated dictionary generated by code which is used."];
+  Node20 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="pFlow::subDomain::topDict",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1subDomain.html#ab0c075fe56440689b6c01340e8947504",tooltip=" "];
+}

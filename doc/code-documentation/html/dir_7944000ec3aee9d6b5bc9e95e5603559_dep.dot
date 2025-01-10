@@ -1,0 +1,18 @@
+digraph "src/MotionModel/entities/multiRotatingAxis" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_dfffb364e858dce2ad53d04d398ac8d4 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="entities" fontname="Helvetica", fontsize="10", URL="dir_dfffb364e858dce2ad53d04d398ac8d4.html"]
+  dir_7944000ec3aee9d6b5bc9e95e5603559 [shape=box, label="multiRotatingAxis", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_7944000ec3aee9d6b5bc9e95e5603559.html"];
+  }
+  dir_cd7a5046d028e114fc17b2ebc2bd02d2 [shape=box label="phasicFlow" fillcolor="white" style="filled" color="red" URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"];
+  dir_fda176289ce41868031c9232b51f0444 [shape=box label="rotatingAxis" URL="dir_fda176289ce41868031c9232b51f0444.html"];
+  dir_8e8c2a5f4ee72bf74c7e222eb5b66550 [shape=box label="multiRotatingAxisMotion" URL="dir_8e8c2a5f4ee72bf74c7e222eb5b66550.html"];
+  dir_7944000ec3aee9d6b5bc9e95e5603559->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="2", labeldistance=1.5 headhref="dir_000053_000031.html"];
+  dir_7944000ec3aee9d6b5bc9e95e5603559->dir_fda176289ce41868031c9232b51f0444 [headlabel="1", labeldistance=1.5 headhref="dir_000053_000054.html"];
+  dir_7944000ec3aee9d6b5bc9e95e5603559->dir_8e8c2a5f4ee72bf74c7e222eb5b66550 [headlabel="1", labeldistance=1.5 headhref="dir_000053_000059.html"];
+  dir_fda176289ce41868031c9232b51f0444->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="2", labeldistance=1.5 headhref="dir_000054_000031.html"];
+  dir_8e8c2a5f4ee72bf74c7e222eb5b66550->dir_7944000ec3aee9d6b5bc9e95e5603559 [headlabel="1", labeldistance=1.5 headhref="dir_000059_000053.html"];
+  dir_8e8c2a5f4ee72bf74c7e222eb5b66550->dir_cd7a5046d028e114fc17b2ebc2bd02d2 [headlabel="6", labeldistance=1.5 headhref="dir_000059_000031.html"];
+}

@@ -1,0 +1,15 @@
+digraph "Ostream"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Ostream",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Standard output stream for BINARY and ASCII formats."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="iOstream",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1iOstream.html",tooltip="Interface class for any output stream."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="masterOstream",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1masterOstream.html",tooltip="Output stream for MPI parallel run, when we need to know which the processor number in the output lin..."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="oFstream",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1oFstream.html",tooltip="Output file stream to send binary or ascii data to a file."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="processorOstream",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1processorOstream.html",tooltip="Output stream for MPI parallel run, when we need to know which the processor number in the output lin..."];
+}

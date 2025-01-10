@@ -1,0 +1,22 @@
+digraph "getModel"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="getModel",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="obtain a reference to the actual motion model"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::componentNames",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#aea7d96cc7aa82e5e2d4b80ff57b37b69",tooltip="Return a const reference to the list of compoenent names."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::getModelInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#a77ef3efbb4ac9f93f4f6063812a4cf30",tooltip="Obtain an object to model interface."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::impl\l_getModelInterface",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#a998faecafdccd838188ea35ea299324d",tooltip="Return model interface."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::indexToName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#a40f0e874e3736fbb6da78706d67ab467",tooltip="Component index to motion component name."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::isMoving",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#ac72196533a2e7eac4bdda2c9dd930438",tooltip="Is the wall assocciated to this motion component moving?"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::move",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#a05ca8c1ce1dbdc5d9fb4b5d505206281",tooltip="Move the component itself."];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::MotionModel\l\< rotatingAxisMotion,\l rotatingAxis \>::nameToIndex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1MotionModel.html#ad53527edc63114fb6bebe409db8dedbf",tooltip="name of the compoenent to index of the component"];
+}

@@ -1,0 +1,11 @@
+digraph "src/phasicFlow/streams/masterOstream/masterOstream.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/phasicFlow/streams\l/masterOstream/masterOstream.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="src/phasicFlow/streams\l/masterOstream/masterOstream.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$masterOstream_8cpp.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/phasicFlow/streams\l/streams.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$streams_8hpp.html",tooltip=" "];
+}

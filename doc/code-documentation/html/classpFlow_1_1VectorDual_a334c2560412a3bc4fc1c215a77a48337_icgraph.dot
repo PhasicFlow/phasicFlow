@@ -1,0 +1,22 @@
+digraph "size"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="size",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::count",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#af313ace4eacf7e6b3e490506e044c88a",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::deleteElement",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#ae3f21fcefd35e2538e7da6e933c8baeb",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::insertSetElement",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#a7931a57163eb363a3ca7db6ffa438479",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::max",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#af2581f0ae5bffa45b7be655a257d5571",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::min",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#a77e73a978f0952dfb49e30c735a467fa",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::operator=",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#aff0436c27e332929ffb54d281990f964",tooltip=" "];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::VectorDual\<\l multiRotatingAxis \>\l::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1VectorDual.html#aa7d820a4dd0777a9a82aee242b83a167",tooltip=" "];
+}

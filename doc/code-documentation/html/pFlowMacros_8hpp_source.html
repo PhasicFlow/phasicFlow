@@ -144,50 +144,54 @@ $(document).ready(function(){initNavTree('pFlowMacros_8hpp_source.html',''); ini
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#aee00d54cd02615bc094de03967dde20d">   38</a></span>&#160;<span class="preprocessor">#define CONSUME_PARAM(x) (void)(x);</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifdef __CUDACC__</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_HD inline __host__ __device__</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_D  inline __device__</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_H  inline __host__ </span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">    #define LAMBDA_HD       [=]   __host__ __device__</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">    #define LAMBDA_D        [=]   __device__</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">    #define CLASS_LAMBDA_HD [=,*this] __host__ __device__</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">    #define FUNCTION_HD     __host__ __device__</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">    #define FUNCTION_H      __host__</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    #define FUNCTION_D      __device__</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">   51</a></span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_HD inline </span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a6177c0222917536554cd98581ed0206e">   52</a></span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_D  inline </span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">   53</a></span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_H  inline </span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">   54</a></span>&#160;<span class="preprocessor">    #define LAMBDA_HD [=]</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#ad08d330e4976327555a114b3ba2be4f8">   55</a></span>&#160;<span class="preprocessor">    #define LAMBDA_D        [=] </span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#ab36ec3552aba732234f4d4cb5fa37d3a">   56</a></span>&#160;<span class="preprocessor">    #define CLASS_LAMBDA_HD [=,*this]</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a33a666cbe329b9d3d1d607ac93fc12b7">   57</a></span>&#160;<span class="preprocessor">    #define FUNCTION_HD</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">   58</a></span>&#160;<span class="preprocessor">    #define FUNCTION_H      </span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#aa92a2a20741b8df6f64ad87e0deb5c2e">   59</a></span>&#160;<span class="preprocessor">    #define FUNCTION_D      </span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#afc491fbd69e70abdcb02a8cd3ce2939e">   62</a></span>&#160;<span class="preprocessor">#define INLINE_FUNCTION inline</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#ifdef BUILD_SHARED_LIBS</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">    #define USE_INSTANTIATION 1</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#adfc0fa47b4655f9648999ae16c2e31f6">   67</a></span>&#160;<span class="preprocessor">    #define USE_INSTANTIATION 0</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">   71</a></span>&#160;<span class="preprocessor">#define ForAll(i, container) for(auto i=0; i &lt; container.size(); ++i)</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#ifdef USE_STD_PARALLEL_ALG</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">useStdParallel__</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">   76</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">useStdParallel__</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif //__pFlowMacros_hpp__</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/*#if defined(pFlow_Build_Cuda) &amp;&amp; !defined(__CUDACC__)</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">#define __CUDACC__</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">#endif*/</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#ifdef __CUDACC__</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_HD inline __host__ __device__</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_D  inline __device__</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_H  inline __host__ </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">    #define LAMBDA_HD       [=]   __host__ __device__</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    #define LAMBDA_D        [=]   __device__</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    #define CLASS_LAMBDA_HD [=,*this] __host__ __device__</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">    #define FUNCTION_HD     __host__ __device__</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">    #define FUNCTION_H      __host__</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">    #define FUNCTION_D      __device__</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a8e2f73fa5c113f21c9c9edb67a974f5e">   55</a></span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_HD inline </span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a6177c0222917536554cd98581ed0206e">   56</a></span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_D  inline </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a542d326bc30e30d52e9deb402759b872">   57</a></span>&#160;<span class="preprocessor">    #define INLINE_FUNCTION_H  inline </span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#aa7d4742cdf24a3792276e669531d145c">   58</a></span>&#160;<span class="preprocessor">    #define LAMBDA_HD [=]</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#ad08d330e4976327555a114b3ba2be4f8">   59</a></span>&#160;<span class="preprocessor">    #define LAMBDA_D        [=] </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#ab36ec3552aba732234f4d4cb5fa37d3a">   60</a></span>&#160;<span class="preprocessor">    #define CLASS_LAMBDA_HD [=,*this]</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a33a666cbe329b9d3d1d607ac93fc12b7">   61</a></span>&#160;<span class="preprocessor">    #define FUNCTION_HD</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a4a0e2a760ea30cb5fe3d40c0cb3fe4a9">   62</a></span>&#160;<span class="preprocessor">    #define FUNCTION_H      </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#aa92a2a20741b8df6f64ad87e0deb5c2e">   63</a></span>&#160;<span class="preprocessor">    #define FUNCTION_D      </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#afc491fbd69e70abdcb02a8cd3ce2939e">   66</a></span>&#160;<span class="preprocessor">#define INLINE_FUNCTION inline</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#ifdef BUILD_SHARED_LIBS</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">    #define USE_INSTANTIATION 1</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#adfc0fa47b4655f9648999ae16c2e31f6">   71</a></span>&#160;<span class="preprocessor">    #define USE_INSTANTIATION 0</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#ac6c2cd1218587d4992ab1344890520d6">   75</a></span>&#160;<span class="preprocessor">#define ForAll(i, container) for(auto i=0; i &lt; container.size(); ++i)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#ifdef pFlow_STD_Parallel_Alg</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">useStdParallel__</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">   80</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">useStdParallel__</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif //__pFlowMacros_hpp__</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="apFlowMacros_8hpp_html_a03feb55a2d35bbb9ed560f6e5c24d671"><div class="ttname"><a href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">useStdParallel__</a></div><div class="ttdeci">static const bool useStdParallel__</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00076">pFlowMacros.hpp:76</a></div></div>
+<div class="ttc" id="apFlowMacros_8hpp_html_a03feb55a2d35bbb9ed560f6e5c24d671"><div class="ttname"><a href="pFlowMacros_8hpp.html#a03feb55a2d35bbb9ed560f6e5c24d671">useStdParallel__</a></div><div class="ttdeci">static const bool useStdParallel__</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00080">pFlowMacros.hpp:80</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_5f6559faa080c0b07ec2a71fd7e912fc.html">globals</a></li><li class="navelem"><a class="el" href="pFlowMacros_8hpp.html">pFlowMacros.hpp</a></li>

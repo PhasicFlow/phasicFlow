@@ -1,0 +1,22 @@
+digraph "path"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="path",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Const access to path."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::containingFiles",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a79c4a81c7fb0a27aabdb1b4a73c750d8",tooltip="A list of file paths that exist in the path."];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::isDirectory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#a646799ea535c7800d608f750bed76a1e",tooltip="Free function to check if the path is dir path."];
+  Node9 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="pFlow::subDirectories",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#ae21b012a6bc672b99ddbb629f4ecce09",tooltip="A list of sub-directories that exist in path."];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="pFlow::isRegularFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacepFlow.html#ac8a2c4dd123ea5ac20d0a98d5076e510",tooltip="free function to check if the path is regular file"];
+  Node1 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="pFlow::repository::path",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1repository.html#ae1921a7f20c43d1438221946e607c488",tooltip=" "];
+  Node1 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="pFlow::IOfileHeader\l::path",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1IOfileHeader.html#ae1921a7f20c43d1438221946e607c488",tooltip=" "];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

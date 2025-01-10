@@ -1,0 +1,12 @@
+digraph "countChar"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="countChar",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Count numer of chars c in a word."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::Ostream::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1Ostream.html#a092e63db7d7406b2999bb7203d8eb91b",tooltip="Write character string."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::Ostream::writeQuoted",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1Ostream.html#ad49e7395bb1832b095b5567656beae88",tooltip="Write std::string surrounded by quotes."];
+}

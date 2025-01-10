@@ -1,0 +1,21 @@
+digraph "src/Interaction/sphereInteraction/sphereInteraction/sphereInteraction.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/Interaction/sphereInteraction\l/sphereInteraction/sphereInteraction.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="interaction.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$interaction_8hpp.html",tooltip=" "];
+  Node1 -> Node124 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node124 [label="sphereParticles.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$sphereParticles_8hpp.html",tooltip=" "];
+  Node1 -> Node179 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node179 [label="boundarySphereInteraction\lList.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundarySphereInteractionList_8hpp.html",tooltip=" "];
+  Node1 -> Node185 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node185 [label="sphereInteractionKernels.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$sphereInteractionKernels_8hpp.html",tooltip=" "];
+  Node1 -> Node161 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node161 [label="boundariesMask.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$boundariesMask_8hpp.html",tooltip=" "];
+  Node1 -> Node189 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node189 [label="MPITimer.hpp",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$MPITimer_8hpp.html",tooltip=" "];
+  Node1 -> Node190 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node190 [label="sphereInteraction.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$sphereInteraction_8cpp.html",tooltip=" "];
+}

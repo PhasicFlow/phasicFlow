@@ -5,8 +5,8 @@ var classpFlow_1_1selectBox =
     [ "selectAllPointsInBox", "classpFlow_1_1selectBox.html#a1374032c453ef21c7e97c572fb962a50", null ],
     [ "TypeInfo", "classpFlow_1_1selectBox.html#a02a5fea6a1d99bfc958c171a8b489358", null ],
     [ "add_vCtor", "classpFlow_1_1selectBox.html#acf7348b9066206db96bfdf85bdd0284c", null ],
-    [ "selectedPoinsts", "classpFlow_1_1selectBox.html#a7026229f304f0cc2a04a362e1aad3ec8", null ],
-    [ "selectedPoinsts", "classpFlow_1_1selectBox.html#a929feee9f992f710ecb9e98c3eadbeda", null ],
-    [ "selectedPoints_", "classpFlow_1_1selectBox.html#a31c3f4eceb5e97a34ff6c2ab35a5b306", null ],
+    [ "selectedPoints", "classpFlow_1_1selectBox.html#ab51bd70cd59d967b18cc7e839f342602", null ],
+    [ "selectedPoints", "classpFlow_1_1selectBox.html#ac273aa8137c1383930143e394c6daf99", null ],
+    [ "selectedPoints_", "classpFlow_1_1selectBox.html#ac08d05e6d7541bdb2e7860e43fa058a0", null ],
     [ "box_", "classpFlow_1_1selectBox.html#aefb81f563e3df7617831459d0ab0b5ee", null ]
 ];

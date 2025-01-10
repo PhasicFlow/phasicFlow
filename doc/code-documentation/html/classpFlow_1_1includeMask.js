@@ -10,6 +10,7 @@ var classpFlow_1_1includeMask =
     [ "operatorType", "classpFlow_1_1includeMask.html#a360295877cf6a9d51a73406b897fa64d", null ],
     [ "timeFolder", "classpFlow_1_1includeMask.html#a42adc93db9ba55e4379221279ee3fd9b", null ],
     [ "isIncluded", "classpFlow_1_1includeMask.html#a5a10e8220d7eafbc617b1b1614cc4994", null ],
+    [ "size", "classpFlow_1_1includeMask.html#a186b30b9dfd8acd23958c14faaf92101", null ],
     [ "operator()", "classpFlow_1_1includeMask.html#a84a44bb3dbfa00e7c5ae635b1eb1bd9e", null ],
     [ "create", "classpFlow_1_1includeMask.html#a2d6fa293e543267f3139df717b643ca9", null ],
     [ "fieldName_", "classpFlow_1_1includeMask.html#a84505e826985ad10d53f4063d43128ea", null ],

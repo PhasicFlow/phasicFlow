@@ -1,0 +1,16 @@
+digraph "checkNumberToken"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="checkNumberToken",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="badInput",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#a1da2c77e895df3330a9b2a421486be06",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="pFlow::IOstream::eof",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#af3418ac60d0d7a303478f29a387feb3c",tooltip="Return true if end of input seen."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::token::isNumber",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a1680baf2428512b1a45060f52f3ade28",tooltip="Token is int, float or duble."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::token::number",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a66fa403264f7b94494f15dfd39ef8c3c",tooltip="Return int64, float or double value."];
+}

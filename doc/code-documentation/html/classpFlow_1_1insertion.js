@@ -1,14 +1,25 @@
 var classpFlow_1_1insertion =
 [
     [ "insertion", "classpFlow_1_1insertion.html#a16ace43248b6bd6c1ba20e56f8e785e8", null ],
-    [ "~insertion", "classpFlow_1_1insertion.html#ad7eb8b19eee60b58b8438701e71c4cfc", null ],
-    [ "readInsertionDict", "classpFlow_1_1insertion.html#a43b207ca2a0b2f0b1aedd32b0888b512", null ],
+    [ "~insertion", "classpFlow_1_1insertion.html#a8d31dd4ec87c4ca1b9c808d17dc621cb", null ],
+    [ "readInsertionDict", "classpFlow_1_1insertion.html#ab57273124a2ab991a9d66707d92ed5fe", null ],
     [ "writeInsertionDict", "classpFlow_1_1insertion.html#a0a48f031a06d7bb9bbf6db921501e4b3", null ],
     [ "TypeInfo", "classpFlow_1_1insertion.html#aea02534373c01c4a30b461eca70bb011", null ],
     [ "isActive", "classpFlow_1_1insertion.html#a354c7d206ec624b9bdbb81f3b788f826", null ],
-    [ "read", "classpFlow_1_1insertion.html#a70add3b10fc1217ec5b9f30d261bda27", null ],
-    [ "write", "classpFlow_1_1insertion.html#afa17f5989b1af05e5ed08234f217a59c", null ],
+    [ "checkForCollision", "classpFlow_1_1insertion.html#a3e7179132cc9bf4242fddca01db8fda7", null ],
+    [ "Particles", "classpFlow_1_1insertion.html#a79f71c440e1abdc21e5b187198924c80", null ],
+    [ "Particles", "classpFlow_1_1insertion.html#a4cc3ca367ecc826265fde31912f28d99", null ],
+    [ "pStruct", "classpFlow_1_1insertion.html#ae355b601249331cd5c4facb48df43223", null ],
+    [ "readFromFile", "classpFlow_1_1insertion.html#a8fccd5d39af9243d57208643f821938a", null ],
+    [ "diameterName", "classpFlow_1_1insertion.html#a95525fdaba1713be406dc3d566add483", null ],
+    [ "velocityName", "classpFlow_1_1insertion.html#ac149438787d433fd656e11147cb9c8fe", null ],
+    [ "write", "classpFlow_1_1insertion.html#ab3738b20dfa25d66228f6a7571d97aa0", null ],
+    [ "write", "classpFlow_1_1insertion.html#ab3738b20dfa25d66228f6a7571d97aa0", null ],
     [ "active_", "classpFlow_1_1insertion.html#ab4b9b810dce908775f2dcb12e77ff4ce", null ],
     [ "checkForCollision_", "classpFlow_1_1insertion.html#a57b82829710afa1fd6045b8e16f646bc", null ],
-    [ "particles_", "classpFlow_1_1insertion.html#ad8ad379b9c7750208abd8b9aa6f54ad0", null ]
+    [ "increaseVelocity_", "classpFlow_1_1insertion.html#a5a88f4b03f15681211ee55e31582df35", null ],
+    [ "diameterName_", "classpFlow_1_1insertion.html#a487625bca00af212e6e803a488b92b2e", null ],
+    [ "velocityName_", "classpFlow_1_1insertion.html#aef19f6bff1f1f83d535c4124f9598b73", null ],
+    [ "particles_", "classpFlow_1_1insertion.html#ad8ad379b9c7750208abd8b9aa6f54ad0", null ],
+    [ "readFromFile_", "classpFlow_1_1insertion.html#a70d3b71a6f32839f6c92aa0998199f60", null ]
 ];

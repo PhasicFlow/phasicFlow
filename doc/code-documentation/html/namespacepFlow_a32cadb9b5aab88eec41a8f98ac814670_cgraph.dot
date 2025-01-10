@@ -1,0 +1,26 @@
+digraph "operator&lt;&lt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="operator\<\<",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::IOstream::check",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5",tooltip="Check IOstream status for given operation."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::token::doubleToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a9de6957d916b0d8a10cab9c0e2688fe6",tooltip="Return double value."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="endl",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189",tooltip="Add newline and flush stream."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::token::floatToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a4c72fd962e5ec6cf9143fb6a78ddb2ab",tooltip="Return float value."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="pFlow::token::int64Token",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a527884d8106fbcdc51fb1d8b937b9f71",tooltip="Return int64 value."];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="pFlow::token::pToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#aaa8bf55f686d97ee30090681fd0bfc04",tooltip="Return punctuation character."];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="pFlow::token::stringToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#aa81aefc6aea3503b1eb4aefbafc8d0bc",tooltip="Return const reference to the string contents."];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="pFlow::token::wordToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1",tooltip="Return const reference to the word contents."];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="pFlow::iOstream::write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1iOstream.html#a8da7514808d6493ccfd30582fc945aa1",tooltip="Write token to stream or otherwise handle it."];
+}

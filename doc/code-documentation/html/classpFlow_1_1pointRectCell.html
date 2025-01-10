@@ -116,27 +116,19 @@ $(document).ready(function(){initNavTree('classpFlow_1_1pointRectCell.html','');
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell__coll__graph.png" border="0" usemap="#pointRectCell_coll__map" alt="Collaboration graph"/></div>
-<map name="pointRectCell_coll__map" id="pointRectCell_coll__map">
-<area shape="rect" title=" " alt="" coords="671,117,780,144"/>
-<area shape="rect" href="classpFlow_1_1rectMeshField.html" title=" " alt="" coords="265,51,430,93"/>
-<area shape="rect" href="classpFlow_1_1rectangleMesh.html" title=" " alt="" coords="5,24,124,51"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html" title=" " alt="" coords="290,117,405,144"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html" title=" " alt="" coords="220,169,475,210"/>
-<area shape="rect" href="classpFlow_1_1repository.html" title=" " alt="" coords="303,273,391,300"/>
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac353c5b34a0eb4c8cbdf8a59e22f5b56"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#ac353c5b34a0eb4c8cbdf8a59e22f5b56">mapType</a> = <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a>&lt; <a class="el" href="namespacepFlow.html#a5cb29e471abf6b6665e7802212b56c37">DefaultHostExecutionSpace</a> &gt;</td></tr>
-<tr class="separator:ac353c5b34a0eb4c8cbdf8a59e22f5b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bdbc2f94e8d70ef3e12dd62be506904"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a2bdbc2f94e8d70ef3e12dd62be506904">memory_space</a> = typename <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">mapType::memory_space</a></td></tr>
-<tr class="separator:a2bdbc2f94e8d70ef3e12dd62be506904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19869bbba0b74f17f33ff38e86232233"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a19869bbba0b74f17f33ff38e86232233">mapType</a> = <a class="el" href="classpFlow_1_1cellMapper.html">cellMapper</a></td></tr>
+<tr class="separator:a19869bbba0b74f17f33ff38e86232233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a587a174e1f96e4bc49ada8bcd6343490"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a587a174e1f96e4bc49ada8bcd6343490">pointRectCell</a> (const <a class="el" href="classpFlow_1_1dictionary.html">dictionary</a> &amp;dictMesh, const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;<a class="el" href="setPointStructure_8hpp.html#a385e32971df44b131e4498181a949a91">pStruct</a>, <a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;rep)</td></tr>
 <tr class="separator:a587a174e1f96e4bc49ada8bcd6343490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae933fe4b7def5b25687754b17467b22d"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#ae933fe4b7def5b25687754b17467b22d">mesh</a> ()</td></tr>
+<tr class="separator:ae933fe4b7def5b25687754b17467b22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a502b077b7f1e29810f60f0340429d677"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a502b077b7f1e29810f60f0340429d677">mesh</a> () const</td></tr>
 <tr class="separator:a502b077b7f1e29810f60f0340429d677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a774cc7dd952b548bf3c8e82d2e177fc9"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a774cc7dd952b548bf3c8e82d2e177fc9">processedRepository</a> ()</td></tr>
@@ -152,50 +144,34 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a19ac6c317c17bc33e508b2a4a4907cd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1repository.html">repository</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a19ac6c317c17bc33e508b2a4a4907cd6">processedRepository_</a></td></tr>
 <tr class="separator:a19ac6c317c17bc33e508b2a4a4907cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a353acd72ef8fd89b848a152333d49691"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1rectangleMesh.html">rectangleMesh</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a353acd72ef8fd89b848a152333d49691">mesh_</a></td></tr>
-<tr class="separator:a353acd72ef8fd89b848a152333d49691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a536f91ab05001640414befe1d05c6f54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1rectangleMesh.html">rectangleMesh</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a536f91ab05001640414befe1d05c6f54">mesh_</a></td></tr>
+<tr class="separator:a536f91ab05001640414befe1d05c6f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c62d7bde0e3c333317fabe4b8806bef"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classpFlow_1_1pointStructure.html">pointStructure</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a5c62d7bde0e3c333317fabe4b8806bef">pStruct_</a></td></tr>
 <tr class="separator:a5c62d7bde0e3c333317fabe4b8806bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ec329c37c34493564c088f010bde5c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1pointRectCell.html#a2bdbc2f94e8d70ef3e12dd62be506904">memory_space</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a7ec329c37c34493564c088f010bde5c0">pointPosition_</a></td></tr>
-<tr class="separator:a7ec329c37c34493564c088f010bde5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d5486db7da6fc8fcf1495b5607ca6d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1pointRectCell.html#ac353c5b34a0eb4c8cbdf8a59e22f5b56">mapType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a3d5486db7da6fc8fcf1495b5607ca6d5">map_</a></td></tr>
+<tr class="memitem:aed29cbedefdb6a7d049a0f3b395cf7f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#ad53198ba4452d5fdc966d861583fc70f">hostViewType1D</a>&lt; <a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#aed29cbedefdb6a7d049a0f3b395cf7f9">pointPosition_</a></td></tr>
+<tr class="separator:aed29cbedefdb6a7d049a0f3b395cf7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d5486db7da6fc8fcf1495b5607ca6d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpFlow_1_1pointRectCell.html#a19869bbba0b74f17f33ff38e86232233">mapType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a3d5486db7da6fc8fcf1495b5607ca6d5">map_</a></td></tr>
 <tr class="separator:a3d5486db7da6fc8fcf1495b5607ca6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73f3d1b3ff34ba10725fb65f41f58cb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a795d0af2419bf2de1f52f16090eff73f">int32RectMeshField_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a73f3d1b3ff34ba10725fb65f41f58cb0">nPointInCell_</a></td></tr>
+<tr class="memitem:a73f3d1b3ff34ba10725fb65f41f58cb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepFlow.html#a87324ef8cacf8469484fb4aa4f7b7be3">int32RectMeshField_H</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpFlow_1_1pointRectCell.html#a73f3d1b3ff34ba10725fb65f41f58cb0">nPointInCell_</a></td></tr>
 <tr class="separator:a73f3d1b3ff34ba10725fb65f41f58cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00032">32</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ac353c5b34a0eb4c8cbdf8a59e22f5b56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac353c5b34a0eb4c8cbdf8a59e22f5b56">&#9670;&nbsp;</a></span>mapType</h2>
+<a id="a19869bbba0b74f17f33ff38e86232233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19869bbba0b74f17f33ff38e86232233">&#9670;&nbsp;</a></span>mapType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1pointRectCell.html#ac353c5b34a0eb4c8cbdf8a59e22f5b56">mapType</a> =  <a class="el" href="classpFlow_1_1mapperNBS.html">mapperNBS</a>&lt;<a class="el" href="namespacepFlow.html#a5cb29e471abf6b6665e7802212b56c37">DefaultHostExecutionSpace</a>&gt;</td>
+          <td class="memname">using <a class="el" href="classpFlow_1_1pointRectCell.html#a19869bbba0b74f17f33ff38e86232233">mapType</a> =  <a class="el" href="classpFlow_1_1cellMapper.html">cellMapper</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00036">36</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a2bdbc2f94e8d70ef3e12dd62be506904"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bdbc2f94e8d70ef3e12dd62be506904">&#9670;&nbsp;</a></span>memory_space</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classpFlow_1_1pointRectCell.html#a2bdbc2f94e8d70ef3e12dd62be506904">memory_space</a> =  typename <a class="el" href="classpFlow_1_1mapperNBS.html#ac5b08fe17cf30c7c64a5ee12370133e9">mapType::memory_space</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00038">38</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
 </div>
 </div>
@@ -240,26 +216,60 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00057">57</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00056">56</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00101">pointRectCell::mapPOints()</a>.</p>
+<p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00096">pointRectCell::mapPOints()</a>.</p>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell_a587a174e1f96e4bc49ada8bcd6343490_cgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_a587a174e1f96e4bc49ada8bcd6343490_cgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_a587a174e1f96e4bc49ada8bcd6343490_cgraph" id="classpFlow_1_1pointRectCell_a587a174e1f96e4bc49ada8bcd6343490_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,115,32"/>
-<area shape="rect" href="classpFlow_1_1pointRectCell.html#ab1b3e7c22e40d6e7a13bf59b378a8bd9" title=" " alt="" coords="163,5,256,32"/>
-</map>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae933fe4b7def5b25687754b17467b22d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae933fe4b7def5b25687754b17467b22d">&#9670;&nbsp;</a></span>mesh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto&amp; mesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00081">81</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+
+<p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00044">pointRectCell::mesh_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="processField_8hpp_source.html#l00084">processField::mesh()</a>, <a class="el" href="fieldOperations_8hpp_source.html#l00066">pFlow::sumMaksOp()</a>, and <a class="el" href="fieldOperations_8hpp_source.html#l00034">pFlow::sumOp()</a>.</p>
+<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classpFlow_1_1pointRectCell_ae933fe4b7def5b25687754b17467b22d_icgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_ae933fe4b7def5b25687754b17467b22d_icgraph" alt=""/></div>
+</div>
+
+</div>
+</div>
 <a id="a502b077b7f1e29810f60f0340429d677"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a502b077b7f1e29810f60f0340429d677">&#9670;&nbsp;</a></span>mesh()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a502b077b7f1e29810f60f0340429d677">&#9670;&nbsp;</a></span>mesh() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,24 +291,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00091">91</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00086">86</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00044">pointRectCell::mesh_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="processField_8hpp_source.html#l00083">processField::mesh()</a>, <a class="el" href="fieldOperations_8hpp_source.html#l00065">pFlow::sumMaksOp()</a>, and <a class="el" href="fieldOperations_8hpp_source.html#l00034">pFlow::sumOp()</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classpFlow_1_1pointRectCell_a502b077b7f1e29810f60f0340429d677_icgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_a502b077b7f1e29810f60f0340429d677_icgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_a502b077b7f1e29810f60f0340429d677_icgraph" id="classpFlow_1_1pointRectCell_a502b077b7f1e29810f60f0340429d677_icgraph">
-<area shape="rect" title=" " alt="" coords="203,71,261,98"/>
-<area shape="rect" href="classpFlow_1_1processField.html#a502b077b7f1e29810f60f0340429d677" title=" " alt="" coords="5,5,155,47"/>
-<area shape="rect" href="namespacepFlow.html#a49c49011d39f3056c050c9e449f82509" title=" " alt="" coords="5,71,155,98"/>
-<area shape="rect" href="namespacepFlow.html#a11d64955a325360de5939ba5a60b862d" title=" " alt="" coords="23,122,137,149"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -325,21 +320,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00096">96</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00091">91</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
 <p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00042">pointRectCell::processedRepository_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="processField_8hpp_source.html#l00108">processField::processedRepository()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="processField_8hpp_source.html#l00119">processField::processedRepository()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell_a774cc7dd952b548bf3c8e82d2e177fc9_icgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_a774cc7dd952b548bf3c8e82d2e177fc9_icgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_a774cc7dd952b548bf3c8e82d2e177fc9_icgraph" id="classpFlow_1_1pointRectCell_a774cc7dd952b548bf3c8e82d2e177fc9_icgraph">
-<area shape="rect" title=" " alt="" coords="220,13,379,39"/>
-<area shape="rect" href="classpFlow_1_1processField.html#a774cc7dd952b548bf3c8e82d2e177fc9" title=" " alt="" coords="5,5,172,47"/>
-</map>
 </div>
 
 </div>
@@ -367,27 +358,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00101">101</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00096">96</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="pointStructure_8hpp_source.html#l00244">pointStructure::activePointsMaskH()</a>, <a class="el" href="pointStructure_8hpp_source.html#l00284">pointStructure::activeRange()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00329">mapperNBS&lt; executionSpace &gt;::buildCheckInDomain()</a>, <a class="el" href="mapperNBS_8hpp_source.html#l00219">mapperNBS&lt; executionSpace &gt;::getCellIterator()</a>, <a class="el" href="pointRectCell_8hpp_source.html#l00051">pointRectCell::map_</a>, <a class="el" href="NBSCrossLoop_8hpp_source.html#l00024">n</a>, <a class="el" href="pointRectCell_8hpp_source.html#l00053">pointRectCell::nPointInCell_</a>, <a class="el" href="Interaction_2contactSearch_2cells_8hpp_source.html#l00127">cells&lt; indexType &gt;::nx()</a>, <a class="el" href="Interaction_2contactSearch_2cells_8hpp_source.html#l00133">cells&lt; indexType &gt;::ny()</a>, <a class="el" href="Interaction_2contactSearch_2cells_8hpp_source.html#l00139">cells&lt; indexType &gt;::nz()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00047">pointRectCell::pStruct_</a>.</p>
+<p class="reference">References <a class="el" href="internalPoints_8cpp_source.html#l00201">internalPoints::activePointsMaskHost()</a>, <a class="el" href="cellMapper_8cpp_source.html#l00068">cellMapper::build()</a>, <a class="el" href="cellMapper_8hpp_source.html#l00124">cellMapper::getCellIterator()</a>, <a class="el" href="pointRectCell_8hpp_source.html#l00050">pointRectCell::map_</a>, <a class="el" href="pointRectCell_8hpp_source.html#l00044">pointRectCell::mesh_</a>, <a class="el" href="NBSLoop_8hpp_source.html#l00024">n</a>, <a class="el" href="cellMapper_8hpp_source.html#l00042">cellMapper::NoPos</a>, <a class="el" href="pointRectCell_8hpp_source.html#l00052">pointRectCell::nPointInCell_</a>, <a class="el" href="rectangleMesh_8hpp_source.html#l00077">rectangleMesh::nx()</a>, <a class="el" href="rectangleMesh_8hpp_source.html#l00082">rectangleMesh::ny()</a>, <a class="el" href="rectangleMesh_8hpp_source.html#l00087">rectangleMesh::nz()</a>, <a class="el" href="internalPoints_8hpp_source.html#l00153">internalPoints::pointPositionHost()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00046">pointRectCell::pStruct_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00057">pointRectCell::pointRectCell()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00056">pointRectCell::pointRectCell()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_cgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_cgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_cgraph" id="classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_cgraph">
-<area shape="rect" title=" " alt="" coords="5,195,99,222"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#abca48c448a52376f2fdaf77e7481b72f" title=" " alt="" coords="179,5,339,47"/>
-<area shape="rect" href="classpFlow_1_1pointStructure.html#a7d8fce812101d1c38607cac47a618b8f" title=" " alt="" coords="420,35,580,76"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#aa4afb3a96a27bdfb352881bc97640669" title=" " alt="" coords="147,123,372,164"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#a5ca5fc49c272458f76da73906c9e534b" title=" " alt="" coords="160,188,359,229"/>
-<area shape="rect" href="classpFlow_1_1cells.html#a103c0d44baf9aa23e9f2fc151678905f" title=" " alt="" coords="198,254,321,281"/>
-<area shape="rect" href="classpFlow_1_1cells.html#aa70433dff70a92ca9c74616c1e3b48e6" title=" " alt="" coords="198,305,321,331"/>
-<area shape="rect" href="classpFlow_1_1cells.html#a5e549f8b31612df62519b37e65954fc8" title=" " alt="" coords="199,355,320,382"/>
-</map>
 </div>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -395,10 +376,6 @@ Protected Attributes</h2></td></tr>
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_icgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_icgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_icgraph" id="classpFlow_1_1pointRectCell_ab1b3e7c22e40d6e7a13bf59b378a8bd9_icgraph">
-<area shape="rect" title=" " alt="" coords="163,5,256,32"/>
-<area shape="rect" href="classpFlow_1_1pointRectCell.html#a587a174e1f96e4bc49ada8bcd6343490" title=" " alt="" coords="5,5,115,32"/>
-</map>
 </div>
 
 </div>
@@ -426,21 +403,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00134">134</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00127">127</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="mapperNBS_8hpp_source.html#l00219">mapperNBS&lt; executionSpace &gt;::getCellIterator()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00051">pointRectCell::map_</a>.</p>
+<p class="reference">References <a class="el" href="cellMapper_8hpp_source.html#l00124">cellMapper::getCellIterator()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00050">pointRectCell::map_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="fieldOperations_8hpp_source.html#l00065">pFlow::sumMaksOp()</a>, and <a class="el" href="fieldOperations_8hpp_source.html#l00034">pFlow::sumOp()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="fieldOperations_8hpp_source.html#l00066">pFlow::sumMaksOp()</a>, and <a class="el" href="fieldOperations_8hpp_source.html#l00034">pFlow::sumOp()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_cgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_cgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_cgraph" id="classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_cgraph">
-<area shape="rect" title=" " alt="" coords="5,13,121,39"/>
-<area shape="rect" href="classpFlow_1_1mapperNBS.html#a5ca5fc49c272458f76da73906c9e534b" title=" " alt="" coords="169,5,368,47"/>
-</map>
 </div>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
@@ -448,11 +421,6 @@ Protected Attributes</h2></td></tr>
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_icgraph.png" border="0" usemap="#classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_icgraph" alt=""/></div>
-<map name="classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_icgraph" id="classpFlow_1_1pointRectCell_a639ca8a7754aa6a5ede02cb5346b8fa3_icgraph">
-<area shape="rect" title=" " alt="" coords="203,31,319,57"/>
-<area shape="rect" href="namespacepFlow.html#a49c49011d39f3056c050c9e449f82509" title=" " alt="" coords="5,5,155,32"/>
-<area shape="rect" href="namespacepFlow.html#a11d64955a325360de5939ba5a60b862d" title=" " alt="" coords="23,56,137,83"/>
-</map>
 </div>
 
 </div>
@@ -497,9 +465,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00139">139</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00132">132</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00053">pointRectCell::nPointInCell_</a>.</p>
+<p class="reference">References <a class="el" href="pointRectCell_8hpp_source.html#l00052">pointRectCell::nPointInCell_</a>.</p>
 
 </div>
 </div>
@@ -526,12 +494,12 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00042">42</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00096">pointRectCell::processedRepository()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00091">pointRectCell::processedRepository()</a>.</p>
 
 </div>
 </div>
-<a id="a353acd72ef8fd89b848a152333d49691"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a353acd72ef8fd89b848a152333d49691">&#9670;&nbsp;</a></span>mesh_</h2>
+<a id="a536f91ab05001640414befe1d05c6f54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a536f91ab05001640414befe1d05c6f54">&#9670;&nbsp;</a></span>mesh_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,7 +508,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1rectangleMesh.html">rectangleMesh</a>&amp; mesh_</td>
+          <td class="memname"><a class="el" href="classpFlow_1_1rectangleMesh.html">rectangleMesh</a> mesh_</td>
         </tr>
       </table>
   </td>
@@ -552,7 +520,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00044">44</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00091">pointRectCell::mesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00096">pointRectCell::mapPOints()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00081">pointRectCell::mesh()</a>.</p>
 
 </div>
 </div>
@@ -576,14 +544,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00047">47</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00046">46</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00101">pointRectCell::mapPOints()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00096">pointRectCell::mapPOints()</a>.</p>
 
 </div>
 </div>
-<a id="a7ec329c37c34493564c088f010bde5c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ec329c37c34493564c088f010bde5c0">&#9670;&nbsp;</a></span>pointPosition_</h2>
+<a id="aed29cbedefdb6a7d049a0f3b395cf7f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed29cbedefdb6a7d049a0f3b395cf7f9">&#9670;&nbsp;</a></span>pointPosition_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -592,7 +560,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#aca2b381231776d26ea7431837f78aa24">ViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>, <a class="el" href="classpFlow_1_1pointRectCell.html#a2bdbc2f94e8d70ef3e12dd62be506904">memory_space</a>&gt; pointPosition_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#ad53198ba4452d5fdc966d861583fc70f">hostViewType1D</a>&lt;<a class="el" href="namespacepFlow.html#a5164661f6974ad24fa90bf19433e6116">realx3</a>&gt; pointPosition_</td>
         </tr>
       </table>
   </td>
@@ -602,7 +570,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00049">49</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00048">48</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
 </div>
 </div>
@@ -616,7 +584,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpFlow_1_1pointRectCell.html#ac353c5b34a0eb4c8cbdf8a59e22f5b56">mapType</a> map_</td>
+          <td class="memname"><a class="el" href="classpFlow_1_1pointRectCell.html#a19869bbba0b74f17f33ff38e86232233">mapType</a> map_</td>
         </tr>
       </table>
   </td>
@@ -626,9 +594,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00051">51</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00050">50</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00134">pointRectCell::getCellIterator()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00101">pointRectCell::mapPOints()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00127">pointRectCell::getCellIterator()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00096">pointRectCell::mapPOints()</a>.</p>
 
 </div>
 </div>
@@ -642,7 +610,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacepFlow.html#a795d0af2419bf2de1f52f16090eff73f">int32RectMeshField_H</a> nPointInCell_</td>
+          <td class="memname"><a class="el" href="namespacepFlow.html#a87324ef8cacf8469484fb4aa4f7b7be3">int32RectMeshField_H</a> nPointInCell_</td>
         </tr>
       </table>
   </td>
@@ -652,9 +620,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00053">53</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pointRectCell_8hpp_source.html#l00052">52</a> of file <a class="el" href="pointRectCell_8hpp_source.html">pointRectCell.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00101">pointRectCell::mapPOints()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00139">pointRectCell::nPointInCell()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="pointRectCell_8hpp_source.html#l00096">pointRectCell::mapPOints()</a>, and <a class="el" href="pointRectCell_8hpp_source.html#l00132">pointRectCell::nPointInCell()</a>.</p>
 
 </div>
 </div>

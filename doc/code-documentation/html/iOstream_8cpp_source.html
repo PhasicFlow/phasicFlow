@@ -128,196 +128,205 @@ $(document).ready(function(){initNavTree('iOstream_8cpp_source.html',''); initRe
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iOstream_8hpp.html">iOstream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="token_8hpp.html">token.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd">   27</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd">pFlow::iOstream::decrIndent</a>()</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classpFlow_1_1iOstream.html#af356a109968899936cd3b326801d4d81">indentLevel_</a>)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        std::cerr</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;iOstream::decrIndent() : attempt to decrement 0 indent level\n&quot;</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        --<a class="code" href="classpFlow_1_1iOstream.html#af356a109968899936cd3b326801d4d81">indentLevel_</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">   41</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">pFlow::iOstream::writeWordKeyword</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    writeQuoted(kw, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (indentSize_ &lt;= 1)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">token::SPACE</a>));</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> nSpaces = entryIndentation_ - <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>(kw.size());   </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// Could also increment by indentSize_ ...</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (nSpaces &lt; 1)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        nSpaces = 1;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">while</span> (nSpaces--)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">token::SPACE</a>));</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#ab440fa44645864fa1f9595b19d77bed0">   70</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">pFlow::iOstream::beginBlock</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>(); write(kw); newLine();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b">beginBlock</a>();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">   79</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">pFlow::iOstream::beginBlock</a>()</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>(); write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a1a359ac3023cdc0a2d09f3c5124e09d1">token::BEGIN_BLOCK</a>)); newLine();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="namespacepFlow.html#a3b0915b78e06661e3a45337e1eb687ed">incrIndent</a>();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a1850a128366512b2539de09dc0622358">   88</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a1850a128366512b2539de09dc0622358">pFlow::iOstream::endBlock</a>()</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="namespacepFlow.html#a7d87392ade029114acbbf97fba2aa10d">decrIndent</a>();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>(); write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a3019a113fdbe1f6734054dee2d5f692e">token::END_BLOCK</a>)); newLine();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a">   97</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a">pFlow::iOstream::endEntry</a>()</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a60d8bd9afe6091a5c3904605dd0e0c38">token::END_STATEMENT</a>)); newLine();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="error_8hpp.html">error.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a183156ea21e90ebf2c97cd46eb367148">   28</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a183156ea21e90ebf2c97cd46eb367148">pFlow::iOstream::writeBinaryBlockFlag</a>()</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd">pFlow::iOstream::decrIndent</a>()</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> (!indentLevel_)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        std::cerr</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;iOstream::decrIndent() : attempt to decrement 0 indent level\n&quot;</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        --indentLevel_;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">   48</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">pFlow::iOstream::writeWordKeyword</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    writeQuoted(kw, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> (indentSize_ &lt;= 1)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">token::SPACE</a>));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> nSpaces = entryIndentation_ - <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a>(kw.size());   </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// Could also increment by indentSize_ ...</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (nSpaces &lt; 1)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        nSpaces = 1;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">while</span> (nSpaces--)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">token::SPACE</a>));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#ab440fa44645864fa1f9595b19d77bed0">   77</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">pFlow::iOstream::beginBlock</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>(); write(kw); newLine();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b">beginBlock</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">   86</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">pFlow::iOstream::beginBlock</a>()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>(); write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a1a359ac3023cdc0a2d09f3c5124e09d1">token::BEGIN_BLOCK</a>)); newLine();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="namespacepFlow.html#a3b0915b78e06661e3a45337e1eb687ed">incrIndent</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a1850a128366512b2539de09dc0622358">   95</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a1850a128366512b2539de09dc0622358">pFlow::iOstream::endBlock</a>()</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="namespacepFlow.html#a7d87392ade029114acbbf97fba2aa10d">decrIndent</a>();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">indent</a>(); write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a3019a113fdbe1f6734054dee2d5f692e">token::END_BLOCK</a>)); newLine();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">//- Write a newLine to stream</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">  105</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">pFlow::iOstream::newLine</a>()</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31aeba10cd0b438b1f9094fa3d1fc88193e">token::NL</a>));</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a">  104</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a">pFlow::iOstream::endEntry</a>()</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a60d8bd9afe6091a5c3904605dd0e0c38">token::END_STATEMENT</a>)); newLine();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">pFlow::iOstream::space</a></div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">  112</a></span>&#160;(</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;)</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;<a class="code" href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a>; i++)</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">token::SPACE</a>));        </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">pFlow::iOstream::beginList</a></div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">  125</a></span>&#160;(</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;)</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a8042f41e6dc49acd5cf4e86844f79acb">token::BEGIN_LIST</a>));</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">pFlow::iOstream::beginList</a></div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a2129fe0304cab5987f6a4db12dcfaa2c">  134</a></span>&#160;(</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;)</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    writeWordKeyword(kw); beginList();</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a7b8a8d645b92f6f46a2a4319de8cd6a1">pFlow::iOstream::endList</a></div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a7b8a8d645b92f6f46a2a4319de8cd6a1">  144</a></span>&#160;(</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;)</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ab0421ccee09cdeadea4bc12e7f38be24">token::END_LIST</a>));</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">pFlow::iOstream::beginSquare</a></div>
-<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">  153</a></span>&#160;(</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a205c3715f7e514a181174f5a8e35e5e5">token::BEGIN_SQR</a>));</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">pFlow::iOstream::beginSquare</a></div>
-<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#ab7fde8e534b51edb398e180ea97215c3">  162</a></span>&#160;(</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;)</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;{</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    writeWordKeyword(kw); beginSquare();</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a63bdc1079581492459ced30d6e523d17">pFlow::iOstream::endSquare</a></div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a63bdc1079581492459ced30d6e523d17">  172</a></span>&#160;(</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;)</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;{</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ad243a7953a49a90c6f7230e40a522a9f">token::END_SQR</a>));</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">// ************************************************************************* //</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">//- Write a newLine to stream</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">  112</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">pFlow::iOstream::newLine</a>()</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31aeba10cd0b438b1f9094fa3d1fc88193e">token::NL</a>));</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">pFlow::iOstream::space</a></div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">  119</a></span>&#160;(</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> <a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">for</span>(<a class="code" href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">int32</a> i=0; i&lt;<a class="code" href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a>; i++)</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">token::SPACE</a>));        </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">pFlow::iOstream::beginList</a></div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">  132</a></span>&#160;(</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;{</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a8042f41e6dc49acd5cf4e86844f79acb">token::BEGIN_LIST</a>));</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;}</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">pFlow::iOstream::beginList</a></div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a2129fe0304cab5987f6a4db12dcfaa2c">  141</a></span>&#160;(</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    writeWordKeyword(kw); beginList();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a7b8a8d645b92f6f46a2a4319de8cd6a1">pFlow::iOstream::endList</a></div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a7b8a8d645b92f6f46a2a4319de8cd6a1">  151</a></span>&#160;(</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;{</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ab0421ccee09cdeadea4bc12e7f38be24">token::END_LIST</a>));</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">pFlow::iOstream::beginSquare</a></div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">  160</a></span>&#160;(</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;)</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;{</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a205c3715f7e514a181174f5a8e35e5e5">token::BEGIN_SQR</a>));</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">pFlow::iOstream::beginSquare</a></div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#ab7fde8e534b51edb398e180ea97215c3">  169</a></span>&#160;(</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; kw</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;)</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;{</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    writeWordKeyword(kw); beginSquare();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;}</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="classpFlow_1_1iOstream.html#a63bdc1079581492459ced30d6e523d17">pFlow::iOstream::endSquare</a></div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classpFlow_1_1iOstream.html#a63bdc1079581492459ced30d6e523d17">  179</a></span>&#160;(</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;)</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;{</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    write(<span class="keywordtype">char</span>(<a class="code" href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ad243a7953a49a90c6f7230e40a522a9f">token::END_SQR</a>));</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">// ************************************************************************* //</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a1850a128366512b2539de09dc0622358"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a1850a128366512b2539de09dc0622358">pFlow::iOstream::endBlock</a></div><div class="ttdeci">virtual iOstream &amp; endBlock()</div><div class="ttdoc">Write end block group Decrements indentation, adds newline.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00088">iOstream.cpp:88</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a577f32ec301e562d6a205c6bd15fc005"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">pFlow::iOstream::newLine</a></div><div class="ttdeci">virtual iOstream &amp; newLine()</div><div class="ttdoc">Write a newLine to stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00105">iOstream.cpp:105</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a3019a113fdbe1f6734054dee2d5f692e"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a3019a113fdbe1f6734054dee2d5f692e">pFlow::token::END_BLOCK</a></div><div class="ttdeci">@ END_BLOCK</div><div class="ttdoc">End block [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00094">token.hpp:94</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_a6d29ef74f19f6d5a225841705985eb8b"><div class="ttname"><a href="error_8hpp.html#a6d29ef74f19f6d5a225841705985eb8b">notImplementedFunction</a></div><div class="ttdeci">#define notImplementedFunction</div><div class="ttdoc">Report that a function is yet not implemented.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00084">error.hpp:84</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a1850a128366512b2539de09dc0622358"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a1850a128366512b2539de09dc0622358">pFlow::iOstream::endBlock</a></div><div class="ttdeci">virtual iOstream &amp; endBlock()</div><div class="ttdoc">Write end block group Decrements indentation, adds newline.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00095">iOstream.cpp:95</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a577f32ec301e562d6a205c6bd15fc005"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a577f32ec301e562d6a205c6bd15fc005">pFlow::iOstream::newLine</a></div><div class="ttdeci">virtual iOstream &amp; newLine()</div><div class="ttdoc">Write a newLine to stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00112">iOstream.cpp:112</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a3019a113fdbe1f6734054dee2d5f692e"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a3019a113fdbe1f6734054dee2d5f692e">pFlow::token::END_BLOCK</a></div><div class="ttdeci">@ END_BLOCK</div><div class="ttdoc">Begin block [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00096">token.hpp:96</a></div></div>
 <div class="ttc" id="atoken_8hpp_html"><div class="ttname"><a href="token_8hpp.html">token.hpp</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31aeba10cd0b438b1f9094fa3d1fc88193e"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31aeba10cd0b438b1f9094fa3d1fc88193e">pFlow::token::NL</a></div><div class="ttdeci">@ NL</div><div class="ttdoc">Newline [isspace].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00086">token.hpp:86</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a7d87392ade029114acbbf97fba2aa10d"><div class="ttname"><a href="namespacepFlow.html#a7d87392ade029114acbbf97fba2aa10d">pFlow::decrIndent</a></div><div class="ttdeci">iOstream &amp; decrIndent(iOstream &amp;os)</div><div class="ttdoc">Decrement the indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00304">iOstream.hpp:304</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a1a359ac3023cdc0a2d09f3c5124e09d1"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a1a359ac3023cdc0a2d09f3c5124e09d1">pFlow::token::BEGIN_BLOCK</a></div><div class="ttdeci">@ BEGIN_BLOCK</div><div class="ttdoc">Begin block [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00093">token.hpp:93</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">pFlow::token::SPACE</a></div><div class="ttdeci">@ SPACE</div><div class="ttdoc">Space [isspace].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00084">token.hpp:84</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a34575f136660c0751d5496604fcf2a11"><div class="ttname"><a href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">pFlow::indent</a></div><div class="ttdeci">iOstream &amp; indent(iOstream &amp;os)</div><div class="ttdoc">Indent stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00290">iOstream.hpp:290</a></div></div>
-<div class="ttc" id="aNBSCrossLoop_8hpp_html_aad8b608072a1b6dcd9e91de38ee2925f"><div class="ttname"><a href="NBSCrossLoop_8hpp.html#aad8b608072a1b6dcd9e91de38ee2925f">n</a></div><div class="ttdeci">int32 n</div><div class="ttdef"><b>Definition:</b> <a href="NBSCrossLoop_8hpp_source.html#l00024">NBSCrossLoop.hpp:24</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_ae18e78f7ce58c60f648722fd7f8bdcbd"><div class="ttname"><a href="classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd">pFlow::iOstream::decrIndent</a></div><div class="ttdeci">void decrIndent()</div><div class="ttdoc">Decrement the indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00027">iOstream.cpp:27</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a3b0915b78e06661e3a45337e1eb687ed"><div class="ttname"><a href="namespacepFlow.html#a3b0915b78e06661e3a45337e1eb687ed">pFlow::incrIndent</a></div><div class="ttdeci">iOstream &amp; incrIndent(iOstream &amp;os)</div><div class="ttdoc">Increment the indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00297">iOstream.hpp:297</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00053">builtinTypes.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a05e38ce82900bb8c51d86ae214898e2d"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">pFlow::iOstream::beginSquare</a></div><div class="ttdeci">virtual iOstream &amp; beginSquare()</div><div class="ttdoc">Write begin list &quot;[&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00153">iOstream.cpp:153</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a2ddd99bc2797e644b86f74dd1c176f4a"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a">pFlow::iOstream::endEntry</a></div><div class="ttdeci">virtual iOstream &amp; endEntry()</div><div class="ttdoc">Write end entry (';') followed by newline.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00097">iOstream.cpp:97</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31ab0421ccee09cdeadea4bc12e7f38be24"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ab0421ccee09cdeadea4bc12e7f38be24">pFlow::token::END_LIST</a></div><div class="ttdeci">@ END_LIST</div><div class="ttdoc">End list [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00090">token.hpp:90</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a60d8bd9afe6091a5c3904605dd0e0c38"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a60d8bd9afe6091a5c3904605dd0e0c38">pFlow::token::END_STATEMENT</a></div><div class="ttdeci">@ END_STATEMENT</div><div class="ttdoc">End entry [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00088">token.hpp:88</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a8042f41e6dc49acd5cf4e86844f79acb"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a8042f41e6dc49acd5cf4e86844f79acb">pFlow::token::BEGIN_LIST</a></div><div class="ttdeci">@ BEGIN_LIST</div><div class="ttdoc">Begin list [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00089">token.hpp:89</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a63bdc1079581492459ced30d6e523d17"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a63bdc1079581492459ced30d6e523d17">pFlow::iOstream::endSquare</a></div><div class="ttdeci">virtual iOstream &amp; endSquare()</div><div class="ttdoc">Write end list &quot;]&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00172">iOstream.cpp:172</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a205c3715f7e514a181174f5a8e35e5e5"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a205c3715f7e514a181174f5a8e35e5e5">pFlow::token::BEGIN_SQR</a></div><div class="ttdeci">@ BEGIN_SQR</div><div class="ttdoc">Begin dimensions [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00091">token.hpp:91</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a7b8a8d645b92f6f46a2a4319de8cd6a1"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a7b8a8d645b92f6f46a2a4319de8cd6a1">pFlow::iOstream::endList</a></div><div class="ttdeci">virtual iOstream &amp; endList()</div><div class="ttdoc">Write end list &quot;)&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00144">iOstream.cpp:144</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a3d59c0224e53bbebd7fcc2642c85cd6b"><div class="ttname"><a href="namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b">pFlow::beginBlock</a></div><div class="ttdeci">iOstream &amp; beginBlock(iOstream &amp;os)</div><div class="ttdoc">Write begin block group without a name.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00329">iOstream.hpp:329</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_a1c568592efaca699bbebbf34960a5b76"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">pFlow::iOstream::beginList</a></div><div class="ttdeci">virtual iOstream &amp; beginList()</div><div class="ttdoc">Write begin list &quot;(&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00125">iOstream.cpp:125</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31aeba10cd0b438b1f9094fa3d1fc88193e"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31aeba10cd0b438b1f9094fa3d1fc88193e">pFlow::token::NL</a></div><div class="ttdeci">@ NL</div><div class="ttdoc">Tab [isspace].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00088">token.hpp:88</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a7d87392ade029114acbbf97fba2aa10d"><div class="ttname"><a href="namespacepFlow.html#a7d87392ade029114acbbf97fba2aa10d">pFlow::decrIndent</a></div><div class="ttdeci">iOstream &amp; decrIndent(iOstream &amp;os)</div><div class="ttdoc">Decrement the indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00325">iOstream.hpp:325</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a1a359ac3023cdc0a2d09f3c5124e09d1"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a1a359ac3023cdc0a2d09f3c5124e09d1">pFlow::token::BEGIN_BLOCK</a></div><div class="ttdeci">@ BEGIN_BLOCK</div><div class="ttdoc">End dimensions [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00095">token.hpp:95</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ac08dae7edcb5c5bb959fee5971fbad95">pFlow::token::SPACE</a></div><div class="ttdeci">@ SPACE</div><div class="ttdoc">Nul character.</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00086">token.hpp:86</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a34575f136660c0751d5496604fcf2a11"><div class="ttname"><a href="namespacepFlow.html#a34575f136660c0751d5496604fcf2a11">pFlow::indent</a></div><div class="ttdeci">iOstream &amp; indent(iOstream &amp;os)</div><div class="ttdoc">Indent stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00311">iOstream.hpp:311</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_ae18e78f7ce58c60f648722fd7f8bdcbd"><div class="ttname"><a href="classpFlow_1_1iOstream.html#ae18e78f7ce58c60f648722fd7f8bdcbd">pFlow::iOstream::decrIndent</a></div><div class="ttdeci">void decrIndent()</div><div class="ttdoc">Decrement the indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00034">iOstream.cpp:34</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a3b0915b78e06661e3a45337e1eb687ed"><div class="ttname"><a href="namespacepFlow.html#a3b0915b78e06661e3a45337e1eb687ed">pFlow::incrIndent</a></div><div class="ttdeci">iOstream &amp; incrIndent(iOstream &amp;os)</div><div class="ttdoc">Increment the indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00318">iOstream.hpp:318</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aae6ad039f09c0676db11bd114136a3fa"><div class="ttname"><a href="namespacepFlow.html#aae6ad039f09c0676db11bd114136a3fa">pFlow::int32</a></div><div class="ttdeci">int int32</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00050">builtinTypes.hpp:50</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a05e38ce82900bb8c51d86ae214898e2d"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a05e38ce82900bb8c51d86ae214898e2d">pFlow::iOstream::beginSquare</a></div><div class="ttdeci">virtual iOstream &amp; beginSquare()</div><div class="ttdoc">Write begin list &quot;[&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00160">iOstream.cpp:160</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a2ddd99bc2797e644b86f74dd1c176f4a"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a2ddd99bc2797e644b86f74dd1c176f4a">pFlow::iOstream::endEntry</a></div><div class="ttdeci">virtual iOstream &amp; endEntry()</div><div class="ttdoc">Write end entry (';') followed by newline.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00104">iOstream.cpp:104</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31ab0421ccee09cdeadea4bc12e7f38be24"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ab0421ccee09cdeadea4bc12e7f38be24">pFlow::token::END_LIST</a></div><div class="ttdeci">@ END_LIST</div><div class="ttdoc">Begin list [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00092">token.hpp:92</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a60d8bd9afe6091a5c3904605dd0e0c38"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a60d8bd9afe6091a5c3904605dd0e0c38">pFlow::token::END_STATEMENT</a></div><div class="ttdeci">@ END_STATEMENT</div><div class="ttdoc">Newline [isspace].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00090">token.hpp:90</a></div></div>
+<div class="ttc" id="aNBSLoop_8hpp_html_a58f1256fe216b2e84819aa621b683de1"><div class="ttname"><a href="NBSLoop_8hpp.html#a58f1256fe216b2e84819aa621b683de1">n</a></div><div class="ttdeci">uint32 n</div><div class="ttdef"><b>Definition:</b> <a href="NBSLoop_8hpp_source.html#l00024">NBSLoop.hpp:24</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a8042f41e6dc49acd5cf4e86844f79acb"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a8042f41e6dc49acd5cf4e86844f79acb">pFlow::token::BEGIN_LIST</a></div><div class="ttdeci">@ BEGIN_LIST</div><div class="ttdoc">End entry [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00091">token.hpp:91</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a63bdc1079581492459ced30d6e523d17"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a63bdc1079581492459ced30d6e523d17">pFlow::iOstream::endSquare</a></div><div class="ttdeci">virtual iOstream &amp; endSquare()</div><div class="ttdoc">Write end list &quot;]&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00179">iOstream.cpp:179</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31a205c3715f7e514a181174f5a8e35e5e5"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31a205c3715f7e514a181174f5a8e35e5e5">pFlow::token::BEGIN_SQR</a></div><div class="ttdeci">@ BEGIN_SQR</div><div class="ttdoc">End list [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00093">token.hpp:93</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a7b8a8d645b92f6f46a2a4319de8cd6a1"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a7b8a8d645b92f6f46a2a4319de8cd6a1">pFlow::iOstream::endList</a></div><div class="ttdeci">virtual iOstream &amp; endList()</div><div class="ttdoc">Write end list &quot;)&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00151">iOstream.cpp:151</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a3d59c0224e53bbebd7fcc2642c85cd6b"><div class="ttname"><a href="namespacepFlow.html#a3d59c0224e53bbebd7fcc2642c85cd6b">pFlow::beginBlock</a></div><div class="ttdeci">iOstream &amp; beginBlock(iOstream &amp;os)</div><div class="ttdoc">Write begin block group without a name.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00350">iOstream.hpp:350</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a1c568592efaca699bbebbf34960a5b76"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a1c568592efaca699bbebbf34960a5b76">pFlow::iOstream::beginList</a></div><div class="ttdeci">virtual iOstream &amp; beginList()</div><div class="ttdoc">Write begin list &quot;(&quot;.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00132">iOstream.cpp:132</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_a183156ea21e90ebf2c97cd46eb367148"><div class="ttname"><a href="classpFlow_1_1iOstream.html#a183156ea21e90ebf2c97cd46eb367148">pFlow::iOstream::writeBinaryBlockFlag</a></div><div class="ttdeci">virtual iOstream &amp; writeBinaryBlockFlag()</div><div class="ttdoc">Write the flag to indicate the start of a binary block.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00028">iOstream.cpp:28</a></div></div>
 <div class="ttc" id="aiOstream_8hpp_html"><div class="ttname"><a href="iOstream_8hpp.html">iOstream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_adab69c3b447db5491b3b7e2a6e1c39a7"><div class="ttname"><a href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">pFlow::iOstream::space</a></div><div class="ttdeci">virtual iOstream &amp; space(int32 n=1)</div><div class="ttdoc">Write space to stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00112">iOstream.cpp:112</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31ad243a7953a49a90c6f7230e40a522a9f"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ad243a7953a49a90c6f7230e40a522a9f">pFlow::token::END_SQR</a></div><div class="ttdeci">@ END_SQR</div><div class="ttdoc">End dimensions [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00092">token.hpp:92</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_af746580dedb817d31f5060ee684b9543"><div class="ttname"><a href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">pFlow::iOstream::writeWordKeyword</a></div><div class="ttdeci">virtual iOstream &amp; writeWordKeyword(const word &amp;kw)</div><div class="ttdoc">Write the keyword followed by an appropriate indentation.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00041">iOstream.cpp:41</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_aeb38275dc0471cbc5f14ba380df1e0ce"><div class="ttname"><a href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">pFlow::iOstream::beginBlock</a></div><div class="ttdeci">virtual iOstream &amp; beginBlock()</div><div class="ttdoc">Write begin block group without a name Increments indentation, adds newline.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00079">iOstream.cpp:79</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html_af356a109968899936cd3b326801d4d81"><div class="ttname"><a href="classpFlow_1_1iOstream.html#af356a109968899936cd3b326801d4d81">pFlow::iOstream::indentLevel_</a></div><div class="ttdeci">unsigned short indentLevel_</div><div class="ttdoc">Current indent level.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00068">iOstream.hpp:68</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_adab69c3b447db5491b3b7e2a6e1c39a7"><div class="ttname"><a href="classpFlow_1_1iOstream.html#adab69c3b447db5491b3b7e2a6e1c39a7">pFlow::iOstream::space</a></div><div class="ttdeci">virtual iOstream &amp; space(int32 n=1)</div><div class="ttdoc">Write space to stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00119">iOstream.cpp:119</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdoc">Interface class for any output stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00059">iOstream.hpp:59</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a4aba281d025f1d580c3835d67656fd31ad243a7953a49a90c6f7230e40a522a9f"><div class="ttname"><a href="classpFlow_1_1token.html#a4aba281d025f1d580c3835d67656fd31ad243a7953a49a90c6f7230e40a522a9f">pFlow::token::END_SQR</a></div><div class="ttdeci">@ END_SQR</div><div class="ttdoc">Begin dimensions [isseparator].</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00094">token.hpp:94</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_af746580dedb817d31f5060ee684b9543"><div class="ttname"><a href="classpFlow_1_1iOstream.html#af746580dedb817d31f5060ee684b9543">pFlow::iOstream::writeWordKeyword</a></div><div class="ttdeci">virtual iOstream &amp; writeWordKeyword(const word &amp;kw)</div><div class="ttdoc">Write the keyword followed by an appropriate indentation.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00048">iOstream.cpp:48</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html_aeb38275dc0471cbc5f14ba380df1e0ce"><div class="ttname"><a href="classpFlow_1_1iOstream.html#aeb38275dc0471cbc5f14ba380df1e0ce">pFlow::iOstream::beginBlock</a></div><div class="ttdeci">virtual iOstream &amp; beginBlock()</div><div class="ttdoc">Write begin block group without a name Increments indentation, adds newline.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8cpp_source.html#l00086">iOstream.cpp:86</a></div></div>
+<div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html">phasicFlow</a></li><li class="navelem"><a class="el" href="dir_b13948a90891cb8a59f39ab8c50a8102.html">streams</a></li><li class="navelem"><a class="el" href="dir_db26f2bafe059aba76429081e630a92d.html">iStream</a></li><li class="navelem"><a class="el" href="iOstream_8cpp.html">iOstream.cpp</a></li>

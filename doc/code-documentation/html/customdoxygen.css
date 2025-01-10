@@ -58,6 +58,6 @@
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
-    content: "C++ Source Code Documentation";
+    content: "C++ Source Code Documentation for version 1.0";
     font-size: 180%;
 }

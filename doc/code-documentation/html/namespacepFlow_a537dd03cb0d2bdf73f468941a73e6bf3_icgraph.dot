@@ -1,0 +1,12 @@
+digraph "readDataAsciiBinary"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="readDataAsciiBinary",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::dataIO::readData",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1dataIO.html#acad0f18b83f5ea2313fc6a3fd03783bb",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="readStdVector",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$namespacepFlow.html#ad5834b0a14fbb24e748307cbe07107fe",tooltip=" "];
+}

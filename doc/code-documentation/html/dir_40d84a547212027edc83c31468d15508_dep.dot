@@ -1,0 +1,11 @@
+digraph "src/phasicFlow/smartPointers" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_cd7a5046d028e114fc17b2ebc2bd02d2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="phasicFlow" fontname="Helvetica", fontsize="10", URL="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html"]
+  dir_40d84a547212027edc83c31468d15508 [shape=box, label="smartPointers", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_40d84a547212027edc83c31468d15508.html"];
+  }
+  dir_5f6559faa080c0b07ec2a71fd7e912fc [shape=box label="globals" URL="dir_5f6559faa080c0b07ec2a71fd7e912fc.html"];
+  dir_40d84a547212027edc83c31468d15508->dir_5f6559faa080c0b07ec2a71fd7e912fc [headlabel="2", labeldistance=1.5 headhref="dir_000130_000117.html"];
+}

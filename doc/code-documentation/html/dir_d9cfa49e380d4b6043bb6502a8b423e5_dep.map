@@ -1,6 +1,0 @@
-<map id="src/MotionModel/fixedWall" name="src/MotionModel/fixedWall">
-<area shape="rect" id="node1" href="dir_d9cfa49e380d4b6043bb6502a8b423e5.html" title="fixedWall" alt="" coords="27,52,111,100"/>
-<area shape="rect" id="node2" href="dir_cd7a5046d028e114fc17b2ebc2bd02d2.html" title="phasicFlow" alt="" coords="22,148,117,196"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000040_000022.html" title="6" alt="" coords="73,122,82,137"/>
-<area shape="rect" id="clust1" href="dir_47ec108d6cccce3c0382fd3240a6cec7.html" title="MotionModel" alt="" coords="16,16,123,111"/>
-</map>

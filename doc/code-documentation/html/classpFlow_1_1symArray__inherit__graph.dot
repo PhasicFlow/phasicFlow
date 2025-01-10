@@ -1,0 +1,13 @@
+digraph "symArray&lt; T, MemorySpace &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="symArray\< T, MemorySpace \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="orange",fontsize="10",style="dashed",label=" \< real \>" ,fontname="Helvetica"];
+  Node2 [label="symArray\< real \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1symArray.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="orange",fontsize="10",style="dashed",label=" \< linearProperties \>" ,fontname="Helvetica"];
+  Node3 [label="symArray\< linearProperties \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1symArray.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="orange",fontsize="10",style="dashed",label=" \< nonLinearProperties \>" ,fontname="Helvetica"];
+  Node4 [label="symArray\< nonLinearProperties \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1symArray.html",tooltip=" "];
+}

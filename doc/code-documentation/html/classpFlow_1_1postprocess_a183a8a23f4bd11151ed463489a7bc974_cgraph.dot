@@ -1,0 +1,15 @@
+digraph "processTimeFolder"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="processTimeFolder",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="pFlow::timeFolder::\llocalFolder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1timeFolder.html#a8084e953ac3d48aa06fbd3bfe263c570",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="pFlow::timeFolder::\ltimeName",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$classpFlow_1_1timeFolder.html#a56cdb164080a077145119f7a5d9e3783",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="pFlow::timeFolder::time",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpFlow_1_1timeFolder.html#a6fc92e0e88a1173babd33b596d8708b3",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

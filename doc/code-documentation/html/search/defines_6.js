@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['greentext_5483',['greenText',['../streams_8hpp.html#a37a406f400cfe49d19e51bfcc34cd2d3',1,'streams.hpp']]]
+  ['green_5ftext_7234',['Green_Text',['../iOstream_8hpp.html#ac569b1e93bab8b809907065244b11fd2',1,'iOstream.hpp']]]
 ];

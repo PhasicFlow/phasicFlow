@@ -109,17 +109,17 @@ $(document).ready(function(){initNavTree('Logical_8cpp_source.html',''); initRes
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">      O        C enter of</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">     O O       E ngineering and</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    O   O      M ultiscale modeling of</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow       </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   OOOOOOO     F luid flow</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  Copyright (C): www.cemf.ir</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  email: hamid.r.norouzi AT gmail.com</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------  </span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">Licence:</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  This file is part of phasicFlow code. It is a free software for simulating</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  granular and multiphase flows. You can redistribute it and/or modify it under</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions. </span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  the terms of GNU General Public License v3 or any other later versions.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  phasicFlow is distributed to help others in their research in the field of</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
@@ -130,143 +130,142 @@ $(document).ready(function(){initNavTree('Logical_8cpp_source.html',''); initRes
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iIstream_8hpp.html">iIstream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iOstream_8hpp.html">iOstream.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#afc72ef98326dbd079d2f8630ccf24c74">   27</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#ab8be5403eabcca1b79611fe69f54add1">pFlow::Logical::Logical</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; l)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">evaluteWord</a>(l, <a class="code" href="classpFlow_1_1Logical.html#ab26d4eeeee6530495955214023e65cc0">s_</a>, <a class="code" href="classpFlow_1_1Logical.html#a557853380b14ede18eb1782e21047c73">yesNoSet_</a> ))</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a>&lt;&lt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="stringliteral">&quot;  invalid input for Logical: &quot;</span>&lt;&lt; l &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#a2e553369989cc0b5b119f4585f263e52">   37</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#ab8be5403eabcca1b79611fe69f54add1">pFlow::Logical::Logical</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ch)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classpFlow_1_1Logical.html">Logical</a>(<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(ch))</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">   42</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">pFlow::Logical::evaluteWord</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; l, <span class="keywordtype">bool</span>&amp; b, <span class="keywordtype">int</span>&amp; yesNoSet )</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">auto</span> Ul = <a class="code" href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">toUpper</a>(l);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;4; ++i)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">toUpper</a>(YesNo__[i][0]) == Ul)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            b = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            yesNoSet = i;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>( <a class="code" href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">toUpper</a>(YesNo__[i][1]) == Ul )</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            b = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            yesNoSet = i;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    yesNoSet = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">   65</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">pFlow::Logical::read</a>(<a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is)</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#afc72ef98326dbd079d2f8630ccf24c74">   26</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#a02c41eeca4f3bbe398444ac3559328e0">pFlow::Logical::Logical</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; l)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">evaluteWord</a>(l, <a class="code" href="classpFlow_1_1Logical.html#ab26d4eeeee6530495955214023e65cc0">s_</a>, <a class="code" href="classpFlow_1_1Logical.html#a557853380b14ede18eb1782e21047c73">yesNoSet_</a>))</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a> &lt;&lt; <span class="stringliteral">&quot;  invalid input for Logical: &quot;</span> &lt;&lt; l &lt;&lt; <a class="code" href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">endl</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#a2e553369989cc0b5b119f4585f263e52">   35</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#a02c41eeca4f3bbe398444ac3559328e0">pFlow::Logical::Logical</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ch)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  : <a class="code" href="classpFlow_1_1Logical.html">Logical</a>(<a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>(ch))</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">   41</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">pFlow::Logical::evaluteWord</a>(<span class="keyword">const</span> <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>&amp; l, <span class="keywordtype">bool</span>&amp; b, <span class="keywordtype">int</span>&amp; yesNoSet)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">auto</span> Ul = <a class="code" href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">toUpper</a>(l);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">toUpper</a>(YesNo__[i][0]) == Ul)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            b        = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            yesNoSet = i;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">toUpper</a>(YesNo__[i][1]) == Ul)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            b        = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            yesNoSet = i;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    yesNoSet = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">   65</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">pFlow::Logical::read</a>(<a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classpFlow_1_1token.html">token</a> t(is);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a> w;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">word</a>  w;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (!t.<a class="code" href="classpFlow_1_1token.html#abdcc7f96f487faadc7769afcf58fe992">good</a>())</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Bad token - could not get Logical value&quot;</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;          &lt;&lt; <span class="stringliteral">&quot;Bad token - could not get Logical value&quot;</span>;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        is.<a class="code" href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3">setBad</a>();</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (t.<a class="code" href="classpFlow_1_1token.html#abc9dc0708ec1aae2309621664fa8e5a4">isString</a>())</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        w = t.<a class="code" href="classpFlow_1_1token.html#aa81aefc6aea3503b1eb4aefbafc8d0bc">stringToken</a>(); </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        w = t.<a class="code" href="classpFlow_1_1token.html#aa81aefc6aea3503b1eb4aefbafc8d0bc">stringToken</a>();</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(t.<a class="code" href="classpFlow_1_1token.html#ace6d5ecd2736d19990a7c12e0fe5a745">isWord</a>() )</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t.<a class="code" href="classpFlow_1_1token.html#ace6d5ecd2736d19990a7c12e0fe5a745">isWord</a>())</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        w = t.<a class="code" href="classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1">wordToken</a>();</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    {</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a>(is.<a class="code" href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">name</a>(), is.<a class="code" href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">lineNumber</a>())</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Wrong token type - expected Logical value, found &quot;</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            &lt;&lt; t;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        is.<a class="code" href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3">setBad</a>();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> evaluteWord(w, s_, yesNoSet_);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">pFlow::Logical::write</a></div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">   98</a></span>&#160;(</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;)<span class="keyword">const</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span>(s_)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        os&lt;&lt; YesNo__[yesNoSet_][0];</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        os&lt;&lt; YesNo__[yesNoSet_][1];</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> os.<a class="code" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a>(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a3317c6444777cc7927e1fab71586c38c">  113</a></span>&#160;<a class="code" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a>&amp; <a class="code" href="namespacepFlow.html#a85ed561d066dae339196cd058783674f">pFlow::operator&gt;&gt;</a>( <a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is, <a class="code" href="classpFlow_1_1Logical.html">Logical</a>&amp; L)</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span>(!L.<a class="code" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">read</a>(is))</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> is;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="namespacepFlow.html#aa4c729882ee9c05e504021ba6c0ed08f">  122</a></span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp; <a class="code" href="namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619">pFlow::operator&lt;&lt; </a>( <a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Logical.html">Logical</a>&amp; L)</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">if</span>(!L.<a class="code" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a>(os))</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">return</span> os;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;          &lt;&lt; <span class="stringliteral">&quot;Wrong token type - expected Logical value, found &quot;</span> &lt;&lt; t;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        is.<a class="code" href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3">setBad</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> evaluteWord(w, s_, yesNoSet_);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">   97</a></span>&#160;<a class="code" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">pFlow::Logical::write</a>(<a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> (s_)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        os &lt;&lt; YesNo__[yesNoSet_][0];</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        os &lt;&lt; YesNo__[yesNoSet_][1];</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">return</span> os.<a class="code" href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">check</a>(<a class="code" href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<a class="code" href="classpFlow_1_1iIstream.html">pFlow::iIstream</a>&amp;</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="namespacepFlow.html#a3317c6444777cc7927e1fab71586c38c">  111</a></span>&#160;<a class="code" href="namespacepFlow.html#a85ed561d066dae339196cd058783674f">pFlow::operator&gt;&gt;</a>(<a class="code" href="classpFlow_1_1iIstream.html">iIstream</a>&amp; is, <a class="code" href="classpFlow_1_1Logical.html">Logical</a>&amp; L)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">if</span> (!L.<a class="code" href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">read</a>(is))</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">return</span> is;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<a class="code" href="classpFlow_1_1iOstream.html">pFlow::iOstream</a>&amp;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="namespacepFlow.html#aa4c729882ee9c05e504021ba6c0ed08f">  121</a></span>&#160;<a class="code" href="namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619">pFlow::operator&lt;&lt;</a>(<a class="code" href="classpFlow_1_1iOstream.html">iOstream</a>&amp; os, <span class="keyword">const</span> <a class="code" href="classpFlow_1_1Logical.html">Logical</a>&amp; L)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span> (!L.<a class="code" href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">write</a>(os))</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasspFlow_1_1Logical_html_a511f818d2eebfd7be4cac008de48bc8c"><div class="ttname"><a href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">pFlow::Logical::evaluteWord</a></div><div class="ttdeci">static bool evaluteWord(const word &amp;l, bool &amp;b, int &amp;yesNoSet)</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8cpp_source.html#l00042">Logical.cpp:42</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00057">error.hpp:57</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html"><div class="ttname"><a href="classpFlow_1_1token.html">pFlow::token</a></div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00042">token.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Logical_html_a511f818d2eebfd7be4cac008de48bc8c"><div class="ttname"><a href="classpFlow_1_1Logical.html#a511f818d2eebfd7be4cac008de48bc8c">pFlow::Logical::evaluteWord</a></div><div class="ttdeci">static bool evaluteWord(const word &amp;l, bool &amp;b, int &amp;yesNoSet)</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8cpp_source.html#l00041">Logical.cpp:41</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aad22a1cd3b45a97ac8cd195f06fe61fe"><div class="ttname"><a href="error_8hpp.html#aad22a1cd3b45a97ac8cd195f06fe61fe">fatalExit</a></div><div class="ttdeci">#define fatalExit</div><div class="ttdoc">Fatal exit.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00098">error.hpp:98</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html"><div class="ttname"><a href="classpFlow_1_1token.html">pFlow::token</a></div><div class="ttdoc">Token class based on OpenFOAM stream, with some modifications/simplifications to be tailored to our n...</div><div class="ttdef"><b>Definition:</b> <a href="token_8hpp_source.html#l00044">token.hpp:44</a></div></div>
 <div class="ttc" id="aiIstream_8hpp_html"><div class="ttname"><a href="iIstream_8hpp.html">iIstream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_aa81aefc6aea3503b1eb4aefbafc8d0bc"><div class="ttname"><a href="classpFlow_1_1token.html#aa81aefc6aea3503b1eb4aefbafc8d0bc">pFlow::token::stringToken</a></div><div class="ttdeci">const word &amp; stringToken() const</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00624">tokenI.hpp:624</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_abdcc7f96f487faadc7769afcf58fe992"><div class="ttname"><a href="classpFlow_1_1token.html#abdcc7f96f487faadc7769afcf58fe992">pFlow::token::good</a></div><div class="ttdeci">bool good() const</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00372">tokenI.hpp:372</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Logical_html_ab8be5403eabcca1b79611fe69f54add1"><div class="ttname"><a href="classpFlow_1_1Logical.html#ab8be5403eabcca1b79611fe69f54add1">pFlow::Logical::Logical</a></div><div class="ttdeci">Logical()</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00055">Logical.hpp:55</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a85d082a1fd1aa0dd5be3e779502475a7"><div class="ttname"><a href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">pFlow::toUpper</a></div><div class="ttdeci">word toUpper(const word &amp;inStr)</div><div class="ttdef"><b>Definition:</b> <a href="bTypesFunctions_8cpp_source.html#l00107">bTypesFunctions.cpp:107</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00063">builtinTypes.hpp:63</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_aa81aefc6aea3503b1eb4aefbafc8d0bc"><div class="ttname"><a href="classpFlow_1_1token.html#aa81aefc6aea3503b1eb4aefbafc8d0bc">pFlow::token::stringToken</a></div><div class="ttdeci">const word &amp; stringToken() const</div><div class="ttdoc">Return const reference to the string contents.</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00642">tokenI.hpp:642</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_abdcc7f96f487faadc7769afcf58fe992"><div class="ttname"><a href="classpFlow_1_1token.html#abdcc7f96f487faadc7769afcf58fe992">pFlow::token::good</a></div><div class="ttdeci">bool good() const</div><div class="ttdoc">True if token is not UNDEFINED or ERROR.</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00390">tokenI.hpp:390</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a85d082a1fd1aa0dd5be3e779502475a7"><div class="ttname"><a href="namespacepFlow.html#a85d082a1fd1aa0dd5be3e779502475a7">pFlow::toUpper</a></div><div class="ttdeci">word toUpper(const word &amp;inStr)</div><div class="ttdoc">convert a word to all caps</div><div class="ttdef"><b>Definition:</b> <a href="bTypesFunctions_8cpp_source.html#l00043">bTypesFunctions.cpp:43</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_a0ebe792a293e8c717bddf60070c0fe99"><div class="ttname"><a href="namespacepFlow.html#a0ebe792a293e8c717bddf60070c0fe99">pFlow::word</a></div><div class="ttdeci">std::string word</div><div class="ttdef"><b>Definition:</b> <a href="builtinTypes_8hpp_source.html#l00064">builtinTypes.hpp:64</a></div></div>
 <div class="ttc" id="apFlowMacros_8hpp_html_a922d2784284e8f6ee4009c3d92ba48b6"><div class="ttname"><a href="pFlowMacros_8hpp.html#a922d2784284e8f6ee4009c3d92ba48b6">FUNCTION_NAME</a></div><div class="ttdeci">#define FUNCTION_NAME</div><div class="ttdef"><b>Definition:</b> <a href="pFlowMacros_8hpp_source.html#l00029">pFlowMacros.hpp:29</a></div></div>
-<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00320">iOstream.hpp:320</a></div></div>
+<div class="ttc" id="anamespacepFlow_html_aba8f0c455a3fdb4b05ad33a25b13b189"><div class="ttname"><a href="namespacepFlow.html#aba8f0c455a3fdb4b05ad33a25b13b189">pFlow::endl</a></div><div class="ttdeci">iOstream &amp; endl(iOstream &amp;os)</div><div class="ttdoc">Add newline and flush stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00341">iOstream.hpp:341</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1IOstream_html_a367eb3425fc4e8270e2aa961df8ac8a5"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a367eb3425fc4e8270e2aa961df8ac8a5">pFlow::IOstream::check</a></div><div class="ttdeci">virtual bool check(const char *operation) const</div><div class="ttdoc">Check IOstream status for given operation.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00042">IOstream.cpp:42</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Logical_html_a6a40de4ceed55b2f78cf3027739dfd91"><div class="ttname"><a href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">pFlow::Logical::write</a></div><div class="ttdeci">bool write(iOstream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8cpp_source.html#l00098">Logical.cpp:98</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Logical_html_a6a40de4ceed55b2f78cf3027739dfd91"><div class="ttname"><a href="classpFlow_1_1Logical.html#a6a40de4ceed55b2f78cf3027739dfd91">pFlow::Logical::write</a></div><div class="ttdeci">bool write(iOstream &amp;os) const</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8cpp_source.html#l00097">Logical.cpp:97</a></div></div>
 <div class="ttc" id="aLogical_8hpp_html"><div class="ttname"><a href="Logical_8hpp.html">Logical.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00033">iIstream.hpp:33</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00042">error.hpp:42</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iIstream_html"><div class="ttname"><a href="classpFlow_1_1iIstream.html">pFlow::iIstream</a></div><div class="ttdoc">Interface class for any input stream</div><div class="ttdef"><b>Definition:</b> <a href="iIstream_8hpp_source.html#l00037">iIstream.hpp:37</a></div></div>
+<div class="ttc" id="aerror_8hpp_html_aca9aa547c8441e4410a65a2ce7c21554"><div class="ttname"><a href="error_8hpp.html#aca9aa547c8441e4410a65a2ce7c21554">fatalErrorInFunction</a></div><div class="ttdeci">#define fatalErrorInFunction</div><div class="ttdoc">Report a fatal error and function name and exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00077">error.hpp:77</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1Logical_html_aff8e92ab47032ae811d1271161cb9b22"><div class="ttname"><a href="classpFlow_1_1Logical.html#aff8e92ab47032ae811d1271161cb9b22">pFlow::Logical::read</a></div><div class="ttdeci">bool read(iIstream &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8cpp_source.html#l00065">Logical.cpp:65</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Logical_html_ab26d4eeeee6530495955214023e65cc0"><div class="ttname"><a href="classpFlow_1_1Logical.html#ab26d4eeeee6530495955214023e65cc0">pFlow::Logical::s_</a></div><div class="ttdeci">bool s_</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00038">Logical.hpp:38</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_a638b33dd25b3cd8ea7e846f04fd6a6a3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3">pFlow::IOstream::setBad</a></div><div class="ttdeci">void setBad()</div><div class="ttdoc">Set stream to be bad.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00272">IOstream.hpp:272</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Logical_html_ab26d4eeeee6530495955214023e65cc0"><div class="ttname"><a href="classpFlow_1_1Logical.html#ab26d4eeeee6530495955214023e65cc0">pFlow::Logical::s_</a></div><div class="ttdeci">bool s_</div><div class="ttdoc">bool value</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00044">Logical.hpp:44</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOstream_html_a638b33dd25b3cd8ea7e846f04fd6a6a3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a638b33dd25b3cd8ea7e846f04fd6a6a3">pFlow::IOstream::setBad</a></div><div class="ttdeci">void setBad()</div><div class="ttdoc">Set stream to be bad.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00274">IOstream.hpp:274</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a85ed561d066dae339196cd058783674f"><div class="ttname"><a href="namespacepFlow.html#a85ed561d066dae339196cd058783674f">pFlow::operator&gt;&gt;</a></div><div class="ttdeci">INLINE_FUNCTION iIstream &amp; operator&gt;&gt;(iIstream &amp;str, AB3History &amp;ab3)</div><div class="ttdef"><b>Definition:</b> <a href="AdamsBashforth3_8hpp_source.html#l00041">AdamsBashforth3.hpp:41</a></div></div>
 <div class="ttc" id="anamespacepFlow_html_a148d74ad0977268be8ea8b26a147f619"><div class="ttname"><a href="namespacepFlow.html#a148d74ad0977268be8ea8b26a147f619">pFlow::operator&lt;&lt;</a></div><div class="ttdeci">INLINE_FUNCTION iOstream &amp; operator&lt;&lt;(iOstream &amp;str, const AB3History &amp;ab3)</div><div class="ttdef"><b>Definition:</b> <a href="AdamsBashforth3_8hpp_source.html#l00057">AdamsBashforth3.hpp:57</a></div></div>
 <div class="ttc" id="aclasspFlow_1_1IOstream_html_ac9b54653d0ec63ee05f64a185437b335"><div class="ttname"><a href="classpFlow_1_1IOstream.html#ac9b54653d0ec63ee05f64a185437b335">pFlow::IOstream::name</a></div><div class="ttdeci">virtual const word &amp; name() const</div><div class="ttdoc">Return the name of the stream.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8cpp_source.html#l00031">IOstream.cpp:31</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Logical_html"><div class="ttname"><a href="classpFlow_1_1Logical.html">pFlow::Logical</a></div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00035">Logical.hpp:35</a></div></div>
-<div class="ttc" id="aerror_8hpp_html_a83efa053dfcfcef04cc0e721c0314ff3"><div class="ttname"><a href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a></div><div class="ttdeci">#define ioErrorInFile(fileName, lineNumber)</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00049">error.hpp:49</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1IOstream_html_a607efe5fb94edbe4cfa890c4907e76c3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">pFlow::IOstream::lineNumber</a></div><div class="ttdeci">int32 lineNumber() const</div><div class="ttdoc">Const access to the current stream line number.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00221">IOstream.hpp:221</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Logical_html"><div class="ttname"><a href="classpFlow_1_1Logical.html">pFlow::Logical</a></div><div class="ttdoc">Holds a bool value and converts strings to bool.</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00039">Logical.hpp:39</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Logical_html_a02c41eeca4f3bbe398444ac3559328e0"><div class="ttname"><a href="classpFlow_1_1Logical.html#a02c41eeca4f3bbe398444ac3559328e0">pFlow::Logical::Logical</a></div><div class="ttdeci">Logical()=default</div><div class="ttdoc">Default constructor.</div></div>
+<div class="ttc" id="aerror_8hpp_html_a83efa053dfcfcef04cc0e721c0314ff3"><div class="ttname"><a href="error_8hpp.html#a83efa053dfcfcef04cc0e721c0314ff3">ioErrorInFile</a></div><div class="ttdeci">#define ioErrorInFile(fileName, lineNumber)</div><div class="ttdoc">Report an error in file operation with supplied fileName and lineNumber.</div><div class="ttdef"><b>Definition:</b> <a href="error_8hpp_source.html#l00087">error.hpp:87</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1IOstream_html_a607efe5fb94edbe4cfa890c4907e76c3"><div class="ttname"><a href="classpFlow_1_1IOstream.html#a607efe5fb94edbe4cfa890c4907e76c3">pFlow::IOstream::lineNumber</a></div><div class="ttdeci">int32 lineNumber() const</div><div class="ttdoc">Const access to the current stream line number.</div><div class="ttdef"><b>Definition:</b> <a href="IOstream_8hpp_source.html#l00223">IOstream.hpp:223</a></div></div>
 <div class="ttc" id="aiOstream_8hpp_html"><div class="ttname"><a href="iOstream_8hpp.html">iOstream.hpp</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1Logical_html_a557853380b14ede18eb1782e21047c73"><div class="ttname"><a href="classpFlow_1_1Logical.html#a557853380b14ede18eb1782e21047c73">pFlow::Logical::yesNoSet_</a></div><div class="ttdeci">int yesNoSet_</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00040">Logical.hpp:40</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00053">iOstream.hpp:53</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_a8658f0b0a04ffdb6e74c5af4ca27edf1"><div class="ttname"><a href="classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1">pFlow::token::wordToken</a></div><div class="ttdeci">const word &amp; wordToken() const</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00600">tokenI.hpp:600</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_abc9dc0708ec1aae2309621664fa8e5a4"><div class="ttname"><a href="classpFlow_1_1token.html#abc9dc0708ec1aae2309621664fa8e5a4">pFlow::token::isString</a></div><div class="ttdeci">bool isString() const</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00615">tokenI.hpp:615</a></div></div>
-<div class="ttc" id="aclasspFlow_1_1token_html_ace6d5ecd2736d19990a7c12e0fe5a745"><div class="ttname"><a href="classpFlow_1_1token.html#ace6d5ecd2736d19990a7c12e0fe5a745">pFlow::token::isWord</a></div><div class="ttdeci">bool isWord() const</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00584">tokenI.hpp:584</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1Logical_html_a557853380b14ede18eb1782e21047c73"><div class="ttname"><a href="classpFlow_1_1Logical.html#a557853380b14ede18eb1782e21047c73">pFlow::Logical::yesNoSet_</a></div><div class="ttdeci">int yesNoSet_</div><div class="ttdoc">Set numbe of of Yes or No.</div><div class="ttdef"><b>Definition:</b> <a href="Logical_8hpp_source.html#l00047">Logical.hpp:47</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1iOstream_html"><div class="ttname"><a href="classpFlow_1_1iOstream.html">pFlow::iOstream</a></div><div class="ttdoc">Interface class for any output stream.</div><div class="ttdef"><b>Definition:</b> <a href="iOstream_8hpp_source.html#l00059">iOstream.hpp:59</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_a8658f0b0a04ffdb6e74c5af4ca27edf1"><div class="ttname"><a href="classpFlow_1_1token.html#a8658f0b0a04ffdb6e74c5af4ca27edf1">pFlow::token::wordToken</a></div><div class="ttdeci">const word &amp; wordToken() const</div><div class="ttdoc">Return const reference to the word contents.</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00618">tokenI.hpp:618</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_abc9dc0708ec1aae2309621664fa8e5a4"><div class="ttname"><a href="classpFlow_1_1token.html#abc9dc0708ec1aae2309621664fa8e5a4">pFlow::token::isString</a></div><div class="ttdeci">bool isString() const</div><div class="ttdoc">Token is STRING, VARIABLE or VERBATIM string.</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00633">tokenI.hpp:633</a></div></div>
+<div class="ttc" id="aclasspFlow_1_1token_html_ace6d5ecd2736d19990a7c12e0fe5a745"><div class="ttname"><a href="classpFlow_1_1token.html#ace6d5ecd2736d19990a7c12e0fe5a745">pFlow::token::isWord</a></div><div class="ttdeci">bool isWord() const</div><div class="ttdoc">Token is word or DIRECTIVE word.</div><div class="ttdef"><b>Definition:</b> <a href="tokenI_8hpp_source.html#l00602">tokenI.hpp:602</a></div></div>
 <div class="ttc" id="aerror_8hpp_html"><div class="ttname"><a href="error_8hpp.html">error.hpp</a></div></div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
