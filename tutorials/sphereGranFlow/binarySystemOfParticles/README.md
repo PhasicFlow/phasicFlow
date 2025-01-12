@@ -14,13 +14,10 @@ a view of the rotating drum with small and large particles after 7 seconds of ro
 ***
 
 # Case setup
-
-In the file `caseSetup/sphereShape` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
-
 [Simulation case setup files can be found in tutorials/sphereGranFlow folder.](https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/binarySystemOfParticles)
 ### Shape definition 
 
-In the file `caseSetup/sphereShape` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
+In the file `caseSetup/shapes` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
 
 <div align="center"> 
 in <b>caseSetup/sphereShape</b> file
@@ -41,8 +38,8 @@ in <b>settings/particlesDict</b> file
 
 
 ```C++
-// positions particles 
-positionParticles
+
+positionParticles       // positions particles 
 {
     method ordered;     // other options: random or empty
 
@@ -55,7 +52,7 @@ positionParticles
 
     regionType cylinder;                                   // other options: box and sphere 
 
-    cylinder  // cylinder region for positioning particles 
+    cylinder                    // cylinder region for positioning particles 
     {
         p1 (0.0 0.0 0.003);     // begin point of cylinder axis (m m m)
         p2 (0.0 0.0 0.097);     // end point of cylinder axis (m m m)
@@ -92,7 +89,7 @@ setFields
     {
         shapeAssigne
         {
-            selector     stridedRange; 				       // other options: box, cylinder, sphere, randomPoints
+            selector     stridedRange;                     // other options: box, cylinder, sphere, randomPoints
 
             stridedRangeInfo
             {
