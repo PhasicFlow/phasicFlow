@@ -28,7 +28,7 @@ pFlow::infinitePlane::infinitePlane
 )
 {
 	auto ln = cross(p2-p1, p3-p1);
-
+	
 	if( equal(ln.length(),0.0) )
 	{
 		fatalErrorInFunction<<

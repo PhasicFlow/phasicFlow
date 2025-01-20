@@ -26,7 +26,7 @@ Licence:
 #define __bTypesFunctions_hpp__
 
 #include "builtinTypes.hpp"
-//#include "math.hpp"
+#include "math.hpp"
 #include "numericConstants.hpp"
 #include "pFlowMacros.hpp"
 
