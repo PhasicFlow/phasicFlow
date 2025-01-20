@@ -26,11 +26,13 @@ Licence:
 #include "pointFields.hpp"
 #include "integration.hpp"
 #include "uniquePtr.hpp"
+#include "globalDamping.hpp"
 
 namespace pFlow
 {
 
 class systemControl;
+//class globalDamping;
 
 class dynamicPointStructure
 :
@@ -43,6 +45,8 @@ private:
 	uniquePtr<integration>  integrationPos_ = nullptr;
 
 	uniquePtr<integration>  integrationVel_ = nullptr;
+
+	uniquePtr<globalDamping> velDamping_ = nullptr;
 
 	Timer 					velocityUpdateTimer_;
 
@@ -88,6 +92,8 @@ public:
 	/// @brief This is called in time loop. Perform the main calculations 
 	/// when the component should evolve along time.
 	bool iterate() override;
+
+	bool afterIteration()override;
 	
 	/// prediction step (if any), is called in beforeIteration	
 	bool predict(real dt, realx3PointField_D& acceleration);

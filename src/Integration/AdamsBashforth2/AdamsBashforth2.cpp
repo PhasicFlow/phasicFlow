@@ -37,7 +37,8 @@ bool intAllActive(
 	real dt, 
 	realx3Field_D& y, 
 	realx3PointField_D& dy,
-	realx3PointField_D& dy1)
+	realx3PointField_D& dy1,
+	real damping = 1.0)
 {
 
 	auto d_dy = dy.deviceView();
@@ -49,7 +50,7 @@ bool intAllActive(
 		"AdamsBashforth2::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
 		LAMBDA_HD(uint32 i){
-			d_y[i] +=  dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
+			d_y[i] = damping*(d_dy[i] + dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]));
 			d_dy1[i] = d_dy[i];
 		});
 	Kokkos::fence();
@@ -62,7 +63,8 @@ bool intScattered
 	real dt, 
 	realx3Field_D& y,
 	realx3PointField_D& dy,
-	realx3PointField_D& dy1
+	realx3PointField_D& dy1,
+	real damping = 1.0
 )
 {
 
@@ -78,7 +80,7 @@ bool intScattered
 		LAMBDA_HD(uint32 i){
 			if( activeP(i))
 			{
-				d_y[i] +=  dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
+				d_y[i] =  damping*(d_y[i] + dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]));
 				d_dy1[i] = d_dy[i];
 			}
 		});
@@ -142,18 +144,19 @@ bool pFlow::AdamsBashforth2::correct
 (
 	real dt,
 	realx3PointField_D& y,
-	realx3PointField_D& dy
+	realx3PointField_D& dy,
+	real damping
 )
 {
 	auto& dy1l = dy1();
 	bool success = false;
 	if(dy1l.isAllActive())
 	{
-		success = intAllActive(dt, y.field(), dy, dy1l);
+		success = intAllActive(dt, y.field(), dy, dy1l, damping);
 	}
 	else
 	{
-		success = intScattered(dt, y.field(), dy, dy1l);
+		success = intScattered(dt, y.field(), dy, dy1l, damping);
 	}
 
 	success = success && boundaryList_.correct(dt, y, dy);

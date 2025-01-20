@@ -6,6 +6,9 @@ particles/shape/shape.cpp
 particles/particles.cpp
 particles/particleIdHandler/particleIdHandler.cpp
 particles/regularParticleIdHandler/regularParticleIdHandler.cpp
+
+globalDamping/globalDamping.cpp
+
 SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 SphereParticles/sphereParticles/sphereParticlesKernels.cpp

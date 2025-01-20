@@ -109,7 +109,8 @@ public:
 		bool correct(
 			real dt, 
 			realx3PointField_D& y, 
-			realx3PointField_D& dy) override;
+			realx3PointField_D& dy,
+			real damping = 1.0) override;
 
 		bool correctPStruct(
 			real dt, 
