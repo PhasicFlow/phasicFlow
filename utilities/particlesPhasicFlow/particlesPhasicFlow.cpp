@@ -181,32 +181,36 @@ int main( int argc, char* argv[] )
 		&Control.caseSetup()
 	);
 	
-	auto& shapeName = Control.time().template lookupObject<pFlow::wordPointField_H>("shapeName");
-
-	REPORT(0)<< "Converting shapeName field to shapeIndex field"<<END_REPORT;
-
-	auto shapeName_D = shapeName.deviceView();
-	auto shapeHash_D = shapeHash.deviceView();
-	auto shapeIndex_D = shapeIndex.deviceView();
-	
-	REPORT(1)<<"List of shape names in "<<shapes.globalName()<<
-	" is: "<<Green_Text(shapes.shapeNameList())<<END_REPORT;
-
-	ForAll(i, shapeHash)
+	if(Control.time().lookupObjectName("shapeName"))
 	{
-		if(pFlow::uint32 index; shapes.shapeNameToIndex(shapeName_D[i], index))
+		auto& shapeName = Control.time().template lookupObject<pFlow::wordPointField_H>("shapeName");
+
+		REPORT(0)<< "Converting shapeName field to shapeIndex field"<<END_REPORT;
+
+		auto shapeName_D = shapeName.deviceView();
+		auto shapeHash_D = shapeHash.deviceView();
+		auto shapeIndex_D = shapeIndex.deviceView();
+		
+		REPORT(1)<<"List of shape names in "<<shapes.globalName()<<
+		" is: "<<Green_Text(shapes.shapeNameList())<<END_REPORT;
+
+		ForAll(i, shapeHash)
 		{
-			shapeHash_D[i] = shapes.hashes()[index];
-			shapeIndex_D[i] = index;
-		}
-		else
-		{
-			fatalErrorInFunction<<"Found shape name "<< Yellow_Text(shapeName_D[i])<<
-			"in shapeName field. But the list of shape names in file "<< 
-			shapes.globalName()<<" is : \n"<<
-			shapes.shapeNames()<<pFlow::endl;
-		}
+			if(pFlow::uint32 index; shapes.shapeNameToIndex(shapeName_D[i], index))
+			{
+				shapeHash_D[i] = shapes.hashes()[index];
+				shapeIndex_D[i] = index;
+			}
+			else
+			{
+				fatalErrorInFunction<<"Found shape name "<< Yellow_Text(shapeName_D[i])<<
+				"in shapeName field. But the list of shape names in file "<< 
+				shapes.globalName()<<" is : \n"<<
+				shapes.shapeNames()<<pFlow::endl;
+			}
+		}	
 	}
+	
 
     if( !Control.time().write(true))
     {

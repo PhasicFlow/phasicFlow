@@ -20,61 +20,170 @@ Licence:
 
 #include "AdamsBashforth3.hpp"
 
+namespace pFlow
+{
+
+/// Range policy for integration kernel (alias)
+using rpIntegration = Kokkos::RangePolicy<
+		DefaultExecutionSpace,
+		Kokkos::Schedule<Kokkos::Static>,
+		Kokkos::IndexType<uint32>
+		>;
+
+bool intAllActive(
+	real dt, 
+	realx3Field_D& y, 
+	realx3PointField_D& dy,
+	realx3PointField_D& dy1,
+	realx3PointField_D& dy2,
+	real damping = 1.0)
+{
+
+	auto d_dy = dy.deviceView();
+	auto d_y  = y.deviceView();
+	auto d_dy1= dy1.deviceView();
+	auto d_dy2= dy2.deviceView();
+	auto activeRng = dy1.activeRange();
+
+	Kokkos::parallel_for(
+		"AdamsBashforth3::correct",
+		rpIntegration (activeRng.start(), activeRng.end()),
+		LAMBDA_HD(uint32 i){
+			d_y[i] = damping*( d_y[i]+ dt*( static_cast<real>(23.0 / 12.0) * d_dy[i] 
+						- static_cast<real>(16.0 / 12.0) * d_dy1[i] 
+						+ static_cast<real>(5.0 / 12.0) * d_dy2[i]) );
+			
+			d_dy2[i] = d_dy1[i];
+			d_dy1[i] = d_dy[i];
+
+		});
+	Kokkos::fence();
+
+	return true;	
+}
+
+bool intScattered
+(
+	real dt, 
+	realx3Field_D& y,
+	realx3PointField_D& dy,
+	realx3PointField_D& dy1,
+	realx3PointField_D& dy2,
+	real damping = 1.0
+)
+{
+
+	auto d_dy 		= dy.deviceView();
+	auto d_y  		= y.deviceView();
+	auto d_dy1		= dy1.deviceView();
+	auto d_dy2		= dy2.deviceView();
+	auto activeRng 	= dy1.activeRange();
+	const auto& activeP = dy1.activePointsMaskDevice();
+
+	Kokkos::parallel_for(
+		"AdamsBashforth2::correct",
+		rpIntegration (activeRng.start(), activeRng.end()),
+		LAMBDA_HD(uint32 i){
+			if( activeP(i))
+			{
+				d_y[i] = damping * (d_y[i] + dt*( static_cast<real>(23.0 / 12.0) * d_dy[i] 
+						- static_cast<real>(16.0 / 12.0) * d_dy1[i] 
+						+ static_cast<real>(5.0 / 12.0) * d_dy2[i]));
+			
+				d_dy2[i] = d_dy1[i];
+				d_dy1[i] = d_dy[i];
+			}
+		});
+	Kokkos::fence();
+
+
+	return true;
+}
+
+}
+
 //const real AB3_coef[] = { 23.0 / 12.0, 16.0 / 12.0, 5.0 / 12.0 };
 
 pFlow::AdamsBashforth3::AdamsBashforth3
 (
 	const word& baseName,
-	repository& owner,
-	const pointStructure& pStruct,
-	const word& method
+	pointStructure& pStruct,
+	const word& method,
+	const realx3Field_D& initialValField
 )
 :
-	integration(baseName, owner, pStruct, method),
-	history_(
-		owner.emplaceObject<pointField<VectorSingle,AB3History>>(
-			objectFile(
-				groupNames(baseName,"AB3History"),
-				"",
-				objectFile::READ_IF_PRESENT,
-				objectFile::WRITE_ALWAYS),
-			pStruct,
-			AB3History({zero3,zero3})))
+	AdamsBashforth2(baseName, pStruct, method, initialValField),
+	dy2_
+	(
+		objectFile
+		(
+			groupNames(baseName,"dy2"),
+			pStruct.time().integrationFolder(),
+			objectFile::READ_IF_PRESENT,
+			objectFile::WRITE_ALWAYS
+		),
+		pStruct,
+		zero3,
+		zero3
+	)
 
 {
 	
 }
 
-bool pFlow::AdamsBashforth3::predict
-(
-	real UNUSED(dt),
-	realx3Vector_D& UNUSED(y),
-	realx3Vector_D& UNUSED(dy)
-)
+void pFlow::AdamsBashforth3::updateBoundariesSlaveToMasterIfRequested()
 {
-
-	return true;
+	AdamsBashforth2::updateBoundariesSlaveToMasterIfRequested();
+	dy2_.updateBoundariesSlaveToMasterIfRequested();
 }
+
+
 
 bool pFlow::AdamsBashforth3::correct
 (
-	real dt,
-	realx3Vector_D& y,
-	realx3Vector_D& dy
+	real dt, 
+	realx3PointField_D& y, 
+	realx3PointField_D& dy,
+	real damping
 )
 {
 	
-	if(this->pStruct().allActive())
+	bool success = false;
+	if(y.isAllActive())
 	{
-		return intAll(dt, y, dy, this->pStruct().activeRange());
+		success = intAllActive(dt, y.field(), dy, dy1(), dy2(), damping);
 	}
 	else
 	{
-		return intRange(dt, y, dy, this->pStruct().activePointsMaskD());
+		success = intScattered(dt, y.field(), dy, dy1(), dy2(), damping);
 	}
 
-	return true;
+	success = success && boundaryList().correct(dt, y, dy);
+
+	return success;
 }
+
+bool pFlow::AdamsBashforth3::correctPStruct(
+	real dt, 
+	pointStructure &pStruct, 
+	realx3PointField_D &vel)
+{
+	
+	bool success = false;
+	if(dy2().isAllActive())
+	{
+		success = intAllActive(dt, pStruct.pointPosition(), vel, dy1(), dy2());
+	}
+	else
+	{
+		success = intScattered(dt, pStruct.pointPosition(), vel, dy1(), dy2());
+	}
+
+	success = success && boundaryList().correctPStruct(dt, pStruct, vel);
+
+	return success;
+}
+
 
 bool pFlow::AdamsBashforth3::setInitialVals(
 	const int32IndexContainer& newIndices,
@@ -83,7 +192,7 @@ bool pFlow::AdamsBashforth3::setInitialVals(
 	return true;
 }
 
-bool pFlow::AdamsBashforth3::intAll(
+/*bool pFlow::AdamsBashforth3::intAll(
 	real dt, 
 	realx3Vector_D& y, 
 	realx3Vector_D& dy, 
@@ -106,4 +215,4 @@ bool pFlow::AdamsBashforth3::intAll(
 	Kokkos::fence();
 
 	return true;	
-}
+}*/

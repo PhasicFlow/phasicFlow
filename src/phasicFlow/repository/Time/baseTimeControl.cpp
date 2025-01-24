@@ -65,6 +65,50 @@ pFlow::baseTimeControl::baseTimeControl
     
 }
 
+pFlow::baseTimeControl::baseTimeControl
+(
+	const dictionary& dict,
+	const real 	defInterval,
+	const word& intervalPrefix,
+	const real 	defStartTime
+)
+:
+	intervalPrefix_(intervalPrefix)
+{
+	auto tControl = dict.getVal<word>("timeControl");
+	if(tControl == "timeStep")
+		isTimeStep_ = true;
+	else if( tControl == "runTime" || 
+			 tControl == "simulationTime")
+		isTimeStep_ = false;
+	else
+	{
+		fatalErrorInFunction<<
+		"bad input for intervalControl in dictionary "<< dict.globalName()<<endl<<
+		"valid inputs are "<< 
+		wordList({"timeStep", "runTime", "simulationTime"})<<endl;
+		fatalExit;
+	}
+
+	word intervalWord = intervalPrefix.size()==0? word("interval"): intervalPrefix+"Interval";
+
+	if(!isTimeStep_)
+	{
+		auto startTime = (dict.getValOrSet<real>("startTime", defStartTime));
+    	auto endTime = (dict.getValOrSet<real>("endTime", largeValue));
+		auto interval = dict.getValOrSet<real>(intervalWord, defInterval);
+		rRange_ = realStridedRange(startTime, endTime, interval);
+
+	}
+	else
+	{
+		auto startTime = (dict.getValOrSet<int32>("startTime", 0));
+    	auto endTime = (dict.getValOrSet<int32>("endTime", largestPosInt32));
+		auto interval = dict.getValOrSet<int32>(intervalWord, 1);
+		iRange_ = int32StridedRagne(startTime, endTime, interval);
+	}
+}
+
 pFlow::baseTimeControl::baseTimeControl(int32 start, int32 end, int32 stride, const word &intervalPrefix)
 :
 	isTimeStep_(true),

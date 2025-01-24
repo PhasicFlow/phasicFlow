@@ -18,19 +18,16 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __cGRelativeLinearCF_hpp__
-#define __cGRelativeLinearCF_hpp__
+#ifndef __cGNonLinearCF_hpp__
+#define __cGNonLinearCF_hpp__
 
 #include "types.hpp"
-#include "symArrays.hpp"
-
-
 
 namespace pFlow::cfModels
 {
 
 template<bool limited=true>
-class cGRelativeLinear
+class cGNonLinear
 {
 public:
 
@@ -38,72 +35,65 @@ public:
 	{
 		realx3 overlap_t_ = 0.0;
 	};
-	
-	
-	struct linearProperties
+
+	struct cGNonLinearProperties
 	{		
-		real 	kn_ 	= 1000.0;
-		real 	kt_	= 800.0;
+		real 	Yeff_	= 1000000.0;
+		real 	Geff_	= 8000000.0;
 		real 	en_ 	= 1.0;
-		real  mu_ 	= 0.00001;
+		real  	mu_ 	= 0.00001;
 
 		INLINE_FUNCTION_HD
-		linearProperties(){}
+		cGNonLinearProperties(){}
 
 		INLINE_FUNCTION_HD
-		linearProperties(real kn, real kt, real en, real mu  ):
-			kn_(kn), kt_(kt), en_(en), mu_(mu)
+		cGNonLinearProperties(real Yeff, real Geff, real en, real mu ):
+			Yeff_(Yeff), Geff_(Geff), en_(en), mu_(mu)
 		{}		
 
 		INLINE_FUNCTION_HD
-		linearProperties(const linearProperties&)=default;
+		cGNonLinearProperties(const cGNonLinearProperties&)=default;
 
 		INLINE_FUNCTION_HD
-		linearProperties& operator=(const linearProperties&)=default;
+		cGNonLinearProperties& operator=(const cGNonLinearProperties&)=default;
 
 		INLINE_FUNCTION_HD
-		~linearProperties() = default;
+		~cGNonLinearProperties() = default;
 	};
-	
-	
 
 protected:
 
-	using LinearArrayType = symArray<linearProperties>;
-	
-	int32 					numMaterial_ = 0;
+	using cGNonLinearArrayType = 	symArray<cGNonLinearProperties>;
 
-	ViewType1D<real>  		 rho_;
+	int32 						numMaterial_ = 0;
 
-	LinearArrayType  	linearProperties_;
-	
-	int32 		addDissipationModel_;	
-	
+	ViewType1D<real>  		 	rho_;
 
-	bool readLinearDictionary(const dictionary& dict)
+	int32 						addDissipationModel_;
+
+	cGNonLinearArrayType  		nonlinearProperties_;
+
+	bool readNonLinearDictionary(const dictionary& dict)
 	{
-	
-		
-		auto kn = dict.getVal<realVector>("kn");
-		auto kt = dict.getVal<realVector>("kt");
+		auto Yeff = dict.getVal<realVector>("Yeff");
+		auto Geff = dict.getVal<realVector>("Geff");
+		auto nu = dict.getVal<realVector>("nu");
 		auto en = dict.getVal<realVector>("en");
 		auto mu = dict.getVal<realVector>("mu");
-		
 
-		auto nElem = kn.size();
+		auto nElem = Yeff.size();
 
-
-		if(nElem != kt.size())
+		if(nElem != nu.size())
 		{
 			fatalErrorInFunction<<
-			"sizes of kn("<<nElem<<") and kt("<<kt.size()<<") do not match.\n";
+			"sizes of Yeff("<<nElem<<") and nu("<<nu.size()<<") do not match.\n";
 			return false;
 		}
 
 		if(nElem != en.size())
 		{
 			fatalErrorInFunction<<
-			"sizes of kn("<<nElem<<") and en("<<en.size()<<") do not match.\n";
+			"sizes of Yeff("<<nElem<<") and en("<<en.size()<<") do not match.\n";
 			return false;
 		}
 
@@ -111,14 +101,14 @@ protected:
 		if(nElem != mu.size())
 		{
 			fatalErrorInFunction<<
-			"sizes of kn("<<nElem<<") and mu("<<mu.size()<<") do not match.\n";
+			"sizes of Yeff("<<nElem<<") and mu("<<mu.size()<<") do not match.\n";
 			return false;
 		}
 
 		
 		// check if size of vector matchs a symetric array
 		uint32 nMat;
-		if( !LinearArrayType::getN(nElem, nMat) )
+		if( !cGNonLinearArrayType::getN(nElem, nMat) )
 		{
 			fatalErrorInFunction<<
 			"sizes of properties do not match a symetric array with size ("<<
@@ -128,21 +118,17 @@ protected:
 		else if( numMaterial_ != nMat)
 		{
 			fatalErrorInFunction<<
-			"size mismatch for porperties. \n"<<
-			"you supplied "<< numMaterial_<<" items in materials list and "<<
-			nMat << " for other properties.\n";
+			"size mismatch for porperties. \n";
 			return false;
 		}
 
-
-		Vector<linearProperties> prop("prop", nElem);
-		ForAll(i,kn)
+		Vector<cGNonLinearProperties> prop("prop",nElem);
+		ForAll(i,Yeff)
 		{
-			prop[i] = {kn[i], kt[i], en[i], mu[i]  };
+			prop[i] = {Yeff[i], Geff[i], en[i], mu[i]};
 		}
 
-		linearProperties_.assign(prop);
-		
+		nonlinearProperties_.assign(prop);
 
 		auto adm = dict.getVal<word>("additionalDissipationModel");
 		if(adm == "none")
@@ -170,52 +156,54 @@ protected:
 	{
 		if constexpr (limited)
 		{
-			return "cGRelativeLinearLimited";
+			return "cGNonLinearLimited";
 		}
 		else
 		{
-			return "cGRelativeLinearNonLimited";
+			return "cGNonLinearNonLimited";
 		}
 		return "";
 	}
 
 public:
 
-
 	TypeInfoNV(modelName());
 
 	INLINE_FUNCTION_HD
-	cGRelativeLinear(){}
+	cGNonLinear(){}
 
-	cGRelativeLinear(int32 nMaterial, const ViewType1D<real>& rho, const dictionary& dict)
+	cGNonLinear(
+		int32 nMaterial,
+		const ViewType1D<real>& rho,
+		const dictionary& dict)
 	:
 		numMaterial_(nMaterial),
 		rho_("rho",nMaterial),
-		linearProperties_("linearProperties",nMaterial)
+		nonlinearProperties_("cGNonLinearProperties",nMaterial)
 	{
 
 		Kokkos::deep_copy(rho_,rho);
-		if(!readLinearDictionary(dict))
+		if(!readNonLinearDictionary(dict))
 		{
 			fatalExit;
 		}
 	}
 	
 	INLINE_FUNCTION_HD
-	cGRelativeLinear(const cGRelativeLinear&) = default;
+	cGNonLinear(const cGNonLinear&) = default;
 
 	INLINE_FUNCTION_HD
-	cGRelativeLinear(cGRelativeLinear&&) = default;
+	cGNonLinear(cGNonLinear&&) = default;
 
 	INLINE_FUNCTION_HD
-	cGRelativeLinear& operator=(const cGRelativeLinear&) = default;
+	cGNonLinear& operator=(const cGNonLinear&) = default;
 
 	INLINE_FUNCTION_HD
-	cGRelativeLinear& operator=(cGRelativeLinear&&) = default;
+	cGNonLinear& operator=(cGNonLinear&&) = default;
 
 
 	INLINE_FUNCTION_HD
-	~cGRelativeLinear()=default;
+	~cGNonLinear()=default;
 
 	INLINE_FUNCTION_HD
 	int32 numMaterial()const
@@ -224,6 +212,7 @@ public:
 	}
 
 	//// - Methods
+
 	INLINE_FUNCTION_HD
 	void contactForce
 	(
@@ -244,59 +233,62 @@ public:
 		realx3& FCt
 	)const
 	{
-		
-		auto prop = linearProperties_(propId_i,propId_j);		
 
-		real f_ = ( cGFi + cGFj )/2 ;
+		const auto prop = nonlinearProperties_(propId_i,propId_j);
 
+		const real f = 2.0/( 1.0/cGFi + 1.0/cGFj );
 
 		real vrn = dot(Vr, Nij);	
 		realx3 Vt = Vr - vrn*Nij;
 
 		history.overlap_t_ += Vt*dt;
 
-		real mi = 3*Pi/4*pow(Ri,3.0)*rho_[propId_i];
-		real mj = 3*Pi/4*pow(Rj,3.0)*rho_[propId_j];
+		real mi = 3*Pi/4*pow(Ri,static_cast<real>(3))*rho_[propId_i];
+		real mj = 3*Pi/4*pow(Rj,static_cast<real>(3))*rho_[propId_j];
+		real Reff = 1.0/(1/Ri + 1/Rj);
 
-		real sqrt_meff = sqrt((mi*mj)/(mi+mj));
-		
+		real K_hertz = 4.0/3.0*prop.Yeff_*sqrt(Reff);
+		real sqrt_meff_K_hertz = sqrt((mi*mj)/(mi+mj) * K_hertz);
+
 		real en = prop.en_;
 		if (addDissipationModel_==2)
 		{
-			en = sqrt(1+((pow(prop.en_,2)-1)*f_));
+			en = sqrt(1+((pow(prop.en_,2)-1)*f));
 		}
 		else if (addDissipationModel_==3)
 		{
 			
-			en = exp((pow(f_,1.5)*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2))))/(1-(pow(f_,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2)))) ) ));
+			en = exp((pow(f,1.5)*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2))))/(1-(pow(f,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2)))) ) ));
 		}
+		
+		real Kn = static_cast<real>(4.0/3.0) * prop.Yeff_ * sqrt(Reff*ovrlp_n);
 
-		real ethan_  = -2.0*log(en)*sqrt(prop.kn_)/
+		real ethan_  = -2.0*log(en)*sqrt(Kn)/
 			sqrt(pow(log(en),2.0)+ pow(Pi,2.0));
-		
 
-		FCn = ( -f_*prop.kn_ * ovrlp_n - sqrt_meff * pow(f_,0.5) * ethan_ * vrn)*Nij;
-		FCt = ( -f_*prop.kt_ * history.overlap_t_);
-		
+		FCn = ( - Kn*ovrlp_n - 
+			   sqrt_meff_K_hertz*ethan_*pow(ovrlp_n,static_cast<real>(0.25))*vrn)*Nij;
 
-		
+		FCt = (f*f)*(- static_cast<real>(8.0) * prop.Geff_ * sqrt(Reff*ovrlp_n) ) * history.overlap_t_;
+
 		real ft = length(FCt);
 		real ft_fric = prop.mu_ * length(FCn);
-		
+
+		// apply friction 
 		if(ft > ft_fric)
 		{
-			if( length(history.overlap_t_) >static_cast<real>(0.0))
+			if( length(history.overlap_t_) >0.0)
 			{
 				if constexpr (limited)
 				{
+					real kt = static_cast<real>(8.0) * prop.Geff_ * sqrt(Reff*ovrlp_n);
 					FCt *= (ft_fric/ft);
-                	history.overlap_t_ = - (FCt/prop.kt_);
+                	history.overlap_t_ = - FCt/(f*f*kt);
 				}
 				else
 				{
 					FCt = (FCt/ft)*ft_fric;	
 				}
-				//cout<<"friction is applied here \n";
 				
 			}
 			else
@@ -306,9 +298,10 @@ public:
 		}
 
 	}
-	
+   
+
 };
 
-} //pFlow::cfModels
+} //pFlow::CFModels
 
 #endif

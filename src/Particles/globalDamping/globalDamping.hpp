@@ -18,32 +18,48 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __grainContactForceModels_hpp__
-#define __grainContactForceModels_hpp__
+#ifndef __globalDamping_hpp__
+#define __globalDamping_hpp__
 
-#include "cGAbsoluteLinearCF.hpp"
-#include "cGRelativeLinearCF.hpp"
-#include "cGNonLinearCF.hpp"
+#include "systemControl.hpp"
+#include "pointFields.hpp"
+#include "baseTimeControl.hpp"
 
-#include "grainRolling.hpp"
-
-
-
-namespace pFlow::cfModels 
+namespace pFlow
 {
 
 
-using limitedCGAbsoluteLinearGrainRolling 	= grainRolling<cGAbsoluteLinear<true>>;
-using nonLimitedCGAbsoluteLinearGrainRolling = grainRolling<cGAbsoluteLinear<false>>;
+class globalDamping
+{
+private:
 
-using limitedCGRelativeLinearGrainRolling   = grainRolling<cGRelativeLinear<true>>;
-using nonLimitedCGRelativeLinearGrainRolling = grainRolling<cGRelativeLinear<false>>;
+    bool            performDamping_ = false;
 
-using limitedCGNonLinearGrainRolling   = grainRolling<cGNonLinear<true>>;
-using nonLimitedCGNonLinearGrainRolling = grainRolling<cGNonLinear<false>>;
+    real            dampingFactor_;
+
+    baseTimeControl timeControl_;
+
+
+public:
+
+
+    globalDamping(const systemControl& control);
+
+    ~globalDamping()=default;
+
+    //void applyDamping( const timeInfo& ti, realx3PointField_D& velocity);
+
+    bool performDamping()const
+    {
+        return performDamping_;
+    }
+
+    real dampingFactor(const timeInfo& ti)const;
+    
+};
+
 
 }
 
 
-
-#endif //__grainContactForceModels_hpp__
+#endif 
