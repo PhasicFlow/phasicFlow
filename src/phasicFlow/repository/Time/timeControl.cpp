@@ -33,10 +33,7 @@ pFlow::timeControl::timeControl
 	const dictionary& dict
 )
 :
-	dt_
-	(
-		dict.getVal<real>("dt")
-	),
+	ti_(dict),
 	startTime_
 	(
 		dict.getVal<real>("startTime")
@@ -46,32 +43,23 @@ pFlow::timeControl::timeControl
 		dict.getVal<real>("endTime")
 	),
 	stopAt_(endTime_),
-	currentTime_(startTime_),
 	saveInterval_
 	(
 		dict.getVal<real>("saveInterval")
 	),
 	lastSaved_(startTime_),
-	currentIter_(0),
-	timePrecision_
-	(
-		dict.getValOrSet("timePrecision", 4)
-	),
-	timersReportInterval_
-	(
-		startTime_,
-		dict.getValOrSet("timersReportInterval", 0.04)
-	),
 	performSorting_
 	(
 		dict.getValOrSet("performSorting", Logical("No"))
-	),
-	sortingInterval_
-	(
-		startTime_,
-		dict.getValOrSet("sortingInterval", static_cast<real>(1.0))
 	)
 {
+	timersReportInterval_ = timeStridedRange(
+		startTime_, 
+		dict.getValOrSet("timersReportInterval", 0.04));
+
+	sortingInterval_ = timeStridedRange(
+		startTime_, 
+		dict.getValOrSet("sortingInterval", 1.0));
 	checkForOutputToFile();
 }
 
