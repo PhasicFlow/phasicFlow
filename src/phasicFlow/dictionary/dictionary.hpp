@@ -431,7 +431,7 @@ T dictionary::getValOrSet
 template<typename T>
 T dictionary::getValOrSetMax(const word& keyword, const T& setMaxVal)const
 {
-	return max(getValOrSet(keyword, setMaxVal), setMaxVal);
+	return max(getValOrSet(keyword, setMaxVal), static_cast<T>(setMaxVal));
 }
 
 template<typename T>

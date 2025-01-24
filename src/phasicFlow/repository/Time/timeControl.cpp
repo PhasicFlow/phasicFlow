@@ -155,7 +155,7 @@ void pFlow::timeControl::checkForOutputToFile()
 			lastSaved_ = currentTime_;
 			save = true;
 		}
-		else if( std::abs(currentTime_ - lastSaved_) < std::min( pow(10.0,-1.0*timePrecision_), 0.5 *dt_) )
+		else if( std::abs(currentTime_ - lastSaved_) < std::min( pow(10.0,-1.0*timePrecision_), static_cast<real>(0.5 *dt_)) )
 		{
 			lastSaved_ = currentTime_;
 			save = true;

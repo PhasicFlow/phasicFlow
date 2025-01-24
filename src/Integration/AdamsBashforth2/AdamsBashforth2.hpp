@@ -45,6 +45,8 @@ private:
 
 	friend class processorAB2BoundaryIntegration;
 
+protected:
+	
 	const auto& dy1()const
 	{
 		return static_cast<const realx3PointField_D&>(*this);
@@ -53,6 +55,11 @@ private:
 	auto& dy1()
 	{
 		return static_cast<realx3PointField_D&>(*this);
+	}
+
+	boundaryIntegrationList& boundaryList()
+	{
+		return boundaryList_;
 	}
 	
 public:
@@ -70,7 +77,7 @@ public:
 			const realx3Field_D& initialValField);
 
 		/// Destructor 
-		~AdamsBashforth2()final = default;
+		~AdamsBashforth2()override = default;
 
 		/// Add this to the virtual constructor table 
 		add_vCtor(
@@ -102,12 +109,13 @@ public:
 		bool correct(
 			real dt, 
 			realx3PointField_D& y, 
-			realx3PointField_D& dy) final;
+			realx3PointField_D& dy,
+			real damping = 1.0) override;
 
 		bool correctPStruct(
 			real dt, 
 			pointStructure& pStruct, 
-			realx3PointField_D& vel) final;
+			realx3PointField_D& vel) override;
 			
 		
 		/*bool hearChanges
@@ -121,9 +129,9 @@ public:
 
 		bool setInitialVals(
 			const int32IndexContainer& newIndices,
-			const realx3Vector& y) final;
+			const realx3Vector& y) override;
 
-		bool needSetInitialVals()const final
+		bool needSetInitialVals()const override
 		{
 			return false;
 		}

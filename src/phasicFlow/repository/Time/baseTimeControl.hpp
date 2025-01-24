@@ -47,6 +47,12 @@ public:
 	);
 
 	baseTimeControl(
+		const dictionary& dict,
+		const real 	defInterval,
+		const word& intervalPrefix="",
+		const real 	defStartTime=0.0);
+
+	baseTimeControl(
 		int32 start,
 		int32 end,
 		int32 stride,

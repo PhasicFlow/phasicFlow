@@ -31,7 +31,7 @@ bool pFlow::simulationDomain::prepareBoundaryDicts()
     real neighborLength = boundaries.getVal<real>("neighborLength");
 
 	real boundaryExtntionLengthRatio = 
-        boundaries.getValOrSetMax("boundaryExtntionLengthRatio", 0.1);
+        boundaries.getValOrSetMax("boundaryExtntionLengthRatio", static_cast<real>(0.1));
 	
     uint32 updateInterval = 
         boundaries.getValOrSetMax<uint32>("updateInterval", 1u);

@@ -146,7 +146,7 @@ public:
 
 		/// Correction/main integration step
 		virtual 
-		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
+		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy, real damping = 1.0) = 0;
 
 		virtual 
 		bool correctPStruct(real dt, pointStructure& pStruct, realx3PointField_D& vel) = 0;

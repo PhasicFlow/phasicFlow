@@ -41,3 +41,9 @@ Licence:
 	createBoundaryGrainInteraction(ForceModel, GeomModel)
 
 
+createInteraction(pFlow::cfModels::limitedCGNonLinearGrainRolling, pFlow::rotationAxisMotionGeometry);
+
+createInteraction(pFlow::cfModels::nonLimitedCGNonLinearGrainRolling, pFlow::rotationAxisMotionGeometry);
+
+createInteraction(pFlow::cfModels::limitedCGNonLinearGrainRolling, pFlow::stationaryGeometry);
+createInteraction(pFlow::cfModels::nonLimitedCGNonLinearGrainRolling, pFlow::stationaryGeometry);

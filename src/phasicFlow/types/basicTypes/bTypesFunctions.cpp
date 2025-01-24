@@ -21,7 +21,6 @@ Licence:
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
-
 #include "bTypesFunctions.hpp"
 
 pFlow::int32

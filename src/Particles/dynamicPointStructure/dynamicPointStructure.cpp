@@ -21,6 +21,7 @@ Licence:
 #include "dynamicPointStructure.hpp"
 #include "systemControl.hpp"
 
+
 pFlow::dynamicPointStructure::dynamicPointStructure
 (
 	systemControl& control
@@ -77,6 +78,9 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		fatalExit;
 	}
 
+	REPORT(1)<<"Reading globalDamping dictionary ..."<<END_REPORT;
+	velDamping_ = makeUnique<globalDamping>(control);
+
 }
 
 
@@ -101,6 +105,16 @@ bool pFlow::dynamicPointStructure::iterate()
     return correct(dt, acc);*/
 }
 
+bool pFlow::dynamicPointStructure::afterIteration()
+{
+		//const auto ti = TimeInfo();
+		
+		auto succs = pointStructure::afterIteration();
+		//velDamping_().applyDamping(ti, velocity_);
+
+		return succs;
+}
+
 bool pFlow::dynamicPointStructure::predict(
     real dt,
     realx3PointField_D &acceleration)
@@ -119,10 +133,11 @@ bool pFlow::dynamicPointStructure::correct
 )
 {
 	//auto& pos = pStruct().pointPosition();
+	const auto ti = TimeInfo();
 	
 	if(!integrationPos_().correctPStruct(dt, *this, velocity_) )return false;
 	
-	if(!integrationVel_().correct(dt, velocity_, acceleration))return false;
+	if(!integrationVel_().correct(dt, velocity_, acceleration, velDamping_().dampingFactor(ti)))return false;
 
 	return true;	
 }
