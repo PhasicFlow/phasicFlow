@@ -103,7 +103,7 @@ int main(int argc, char** argv )
 			continue;
 		}
 				
-		if( !withZeroFolder && pFlow::equal(folders.time() , 0.0))continue;
+		if( !withZeroFolder && pFlow::equal(folders.time() , pFlow::zero))continue;
 
 		post.processTimeFolder(folders);
 

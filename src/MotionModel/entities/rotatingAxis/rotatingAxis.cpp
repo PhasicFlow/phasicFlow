@@ -47,7 +47,7 @@ pFlow::rotatingAxis::rotatingAxis
 	timeInterval(),
 	line(p1, p2),
 	omega_(omega),
-	rotating_(!equal(omega,0.0))
+	rotating_(!equal(omega,zero))
 {
 
 }
@@ -58,7 +58,7 @@ pFlow::real pFlow::rotatingAxis::setOmega(real omega)
 {
 	auto tmp = omega_;
 	omega_ = omega;
-	rotating_ = !equal(omega, 0.0);
+	rotating_ = !equal(omega, zero);
 	return tmp;
 }
 
@@ -72,7 +72,7 @@ bool pFlow::rotatingAxis::read
 	if(!timeInterval::read(dict))return false;
 	if(!line::read(dict)) return false;
 		
-	real omega = dict.getValOrSet("omega", 0.0);
+	real omega = dict.getValOrSet("omega", zero);
 	
 	setOmega(omega);
 	return true;

@@ -236,7 +236,7 @@ public:
 
 		const auto prop = nonlinearProperties_(propId_i,propId_j);
 
-		const real f = 2.0/( 1.0/cGFi + 1.0/cGFj );
+		const real f = 2/( 1/cGFi + 1/cGFj );
 
 		real vrn = dot(Vr, Nij);	
 		realx3 Vt = Vr - vrn*Nij;
@@ -245,7 +245,7 @@ public:
 
 		real mi = 3*Pi/4*pow(Ri,static_cast<real>(3))*rho_[propId_i];
 		real mj = 3*Pi/4*pow(Rj,static_cast<real>(3))*rho_[propId_j];
-		real Reff = 1.0/(1/Ri + 1/Rj);
+		real Reff = 1/(1/Ri + 1/Rj);
 
 		real K_hertz = 4.0/3.0*prop.Yeff_*sqrt(Reff);
 		real sqrt_meff_K_hertz = sqrt((mi*mj)/(mi+mj) * K_hertz);
@@ -258,13 +258,13 @@ public:
 		else if (addDissipationModel_==3)
 		{
 			
-			en = exp((pow(f,1.5)*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2))))/(1-(pow(f,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2)))) ) ));
+			en = exp((pow(f,static_cast<real>(1.5))*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2))))/(1-(pow(f,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2)))) ) ));
 		}
 		
 		real Kn = static_cast<real>(4.0/3.0) * prop.Yeff_ * sqrt(Reff*ovrlp_n);
 
 		real ethan_  = -2.0*log(en)*sqrt(Kn)/
-			sqrt(pow(log(en),2.0)+ pow(Pi,2.0));
+			sqrt(pow(log(en),2)+ pow(Pi,2));
 
 		FCn = ( - Kn*ovrlp_n - 
 			   sqrt_meff_K_hertz*ethan_*pow(ovrlp_n,static_cast<real>(0.25))*vrn)*Nij;

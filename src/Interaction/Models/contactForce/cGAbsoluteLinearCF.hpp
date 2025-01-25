@@ -25,12 +25,6 @@ Licence:
 #include "symArrays.hpp"
 
 
-
-
-
-
-
-
 namespace pFlow::cfModels
 {
 
@@ -159,7 +153,7 @@ protected:
 		{
 
 			etha_t[i] = -2.0*log( et[i])*sqrt(kt[i]*2/7) /
-					sqrt(log(pow(et[i],2.0))+ pow(Pi,2.0));
+					sqrt(log(pow(et[i],2))+ pow(Pi,2));
 		}
 
 		Vector<linearProperties> prop("prop", nElem);
@@ -285,8 +279,8 @@ public:
 
 		history.overlap_t_ += Vt*dt;
 
-		real mi = 3*Pi/4*pow(Ri,3.0)*rho_[propId_i];
-		real mj = 3*Pi/4*pow(Rj,3.0)*rho_[propId_j];
+		real mi = 3*Pi/4*pow(Ri,3)*rho_[propId_i];
+		real mj = 3*Pi/4*pow(Rj,3)*rho_[propId_j];
 
 		real sqrt_meff = sqrt((mi*mj)/(mi+mj));
 
@@ -299,29 +293,24 @@ public:
 		else if (addDissipationModel_==3)
 		{
 			auto pie =3.14;
-			prop.en_ = exp((pow(f_,1.5)*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(pie,2))))/(1-(pow(f_,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(pie,2)))) ) ));
+			prop.en_ = exp((pow(f_,static_cast<real>(1.5))*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(pie,2))))/(1-(pow(f_,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(pie,2)))) ) ));
 		}
 
-
-
-
 		real ethan_  = -2.0*log(prop.en_)*sqrt(prop.kn_)/
-					sqrt(pow(log(prop.en_),2.0)+ pow(Pi,2.0));
+					sqrt(pow(log(prop.en_),2)+ pow(Pi,2));
 
 			//REPORT(0)<<"\n en n is  :  "<<END_REPORT;
 			//REPORT(0)<< prop.en_ <<END_REPORT;
 
-		FCn = (  -pow(f_,3.0)*prop.kn_ * ovrlp_n - sqrt_meff * pow(f_,1.5) * ethan_ * vrn)*Nij;
-		FCt = ( -pow(f_,3.0)*prop.kt_ * history.overlap_t_ - sqrt_meff * pow(f_,1.5) *  prop.ethat_*Vt);
-		
-
-		
+		FCn = (  -pow(f_,3)*prop.kn_ * ovrlp_n - sqrt_meff * pow(f_,static_cast<real>(1.5)) * ethan_ * vrn)*Nij;
+		FCt = ( -pow(f_,3)*prop.kt_ * history.overlap_t_ - sqrt_meff * pow(f_,static_cast<real>(1.5)) *  prop.ethat_*Vt);
+				
 		real ft = length(FCt);
 		real ft_fric = prop.mu_ * length(FCn);
 		
 		if(ft > ft_fric)
 		{
-			if( length(history.overlap_t_) >static_cast<real>(0.0))
+			if( length(history.overlap_t_) >zero)
 			{
 				if constexpr (limited)
 				{

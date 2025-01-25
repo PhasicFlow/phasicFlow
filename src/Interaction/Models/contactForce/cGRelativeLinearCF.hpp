@@ -255,8 +255,8 @@ public:
 
 		history.overlap_t_ += Vt*dt;
 
-		real mi = 3*Pi/4*pow(Ri,3.0)*rho_[propId_i];
-		real mj = 3*Pi/4*pow(Rj,3.0)*rho_[propId_j];
+		real mi = 3*Pi/4*pow(Ri,3)*rho_[propId_i];
+		real mj = 3*Pi/4*pow(Rj,3)*rho_[propId_j];
 
 		real sqrt_meff = sqrt((mi*mj)/(mi+mj));
 		
@@ -268,14 +268,26 @@ public:
 		else if (addDissipationModel_==3)
 		{
 			
-			en = exp((pow(f_,1.5)*log(prop.en_)*sqrt( (1-((pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2))))/(1-(pow(f_,3)*(pow(log(prop.en_),2))/(pow(log(prop.en_),2)+pow(Pi,2)))) ) ));
+			en = exp(
+				(
+					pow(f_,static_cast<real>(1.5))*
+					log(prop.en_)*
+					sqrt( 
+						(1-((pow(log(prop.en_),static_cast<real>(2.0))
+						)/
+						(
+							pow(log(prop.en_),static_cast<real>(2.0))+
+							pow(Pi,static_cast<real>(2.0)))))/
+							(1-(pow(f_,3)*(pow(log(prop.en_),2))/
+							(pow(log(prop.en_),static_cast<real>(2.0))+
+							pow(Pi,static_cast<real>(2.0))))) ) ));
 		}
 
 		real ethan_  = -2.0*log(en)*sqrt(prop.kn_)/
-			sqrt(pow(log(en),2.0)+ pow(Pi,2.0));
+			sqrt(pow(log(en),2)+ pow(Pi,2));
 		
 
-		FCn = ( -f_*prop.kn_ * ovrlp_n - sqrt_meff * pow(f_,0.5) * ethan_ * vrn)*Nij;
+		FCn = ( -f_*prop.kn_ * ovrlp_n - sqrt_meff * pow(f_,half) * ethan_ * vrn)*Nij;
 		FCt = ( -f_*prop.kt_ * history.overlap_t_);
 		
 

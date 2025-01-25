@@ -31,6 +31,7 @@ pFlow::contactSearch::contactSearch(
  	Timers& timers)
 :
 	extendedDomainBox_(extDomain),
+	updateInterval_(dict.getValMax<uint32>("updateInterval", 1u)),
 	particles_(prtcl),
 	geometry_(geom),
 	bTimer_("Boundary particles contact search", &timers),

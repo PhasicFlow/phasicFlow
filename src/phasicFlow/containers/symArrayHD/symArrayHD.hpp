@@ -239,7 +239,7 @@ public:
 		{
 			real nr = 0.5*(sqrt(8.0*nElem+1)-1);
 			n = static_cast<uint32>(nr);
-			if( equal(nr-static_cast<real>(n) , 0.0) ) return true;
+			if( equal(nr-static_cast<real>(n) , zero) ) return true;
 
 			return false;
 		}

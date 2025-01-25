@@ -21,6 +21,7 @@ Licence:
 #define __timeInfo__hpp_
 
 #include "types.hpp"
+#include "dictionary.hpp"
 
 namespace pFlow
 {
@@ -28,33 +29,87 @@ namespace pFlow
 class timeInfo
 {
 private:
+	
+	friend class timeControl;
 
-	uint32 currentIter_;
+	// - current iteration number (for this execution)
+	int32 		currentIter_;
 
-	real   currentTime_;
+	// - current time of simulation
+	timeValue   currentTime_;
 
-	real   dt_;
+	// - integration time step
+	timeValue   dt_;
+
+	inline static int32 presicion_ = 5;
 
 public:
 
-	timeInfo(uint32 cIter, real cTime, real dt)
+	timeInfo(int32 cIter, timeValue cTime, timeValue dt)
 	  : currentIter_(cIter),
 	    currentTime_(cTime),
 	    dt_(dt)
 	{
 	}
 
-	inline const real& t() const
+	timeInfo(const dictionary& dict)
+	:
+		currentIter_(0),
+		currentTime_(dict.getVal<timeValue>("startTime")),
+		dt_( dict.getVal<timeValue>("dt"))
+	{
+		presicion_ = dict.getValOrSet<int32>("timePrecision",5);
+	}
+
+	timeInfo(timeValue currentTime, const dictionary& dict)
+	:
+		currentIter_(0),
+		currentTime_(currentTime),
+		dt_( dict.getVal<timeValue>("dt"))
+	{
+		presicion_ = dict.getValOrSet<int32>("timePrecision",5);
+	}
+
+	inline const timeValue& currentTime()const
 	{
 		return currentTime_;
 	}
-	inline const real& dt() const
+
+	inline const timeValue& t() const
+	{
+		return currentTime_;
+	}
+	inline const timeValue& dt() const
 	{
 		return dt_;
 	}
-	inline const uint32& iter() const
+	inline const int32& iter() const
 	{
 		return currentIter_;
+	}
+
+	inline const int32& currentIter() const
+	{
+		return currentIter_;
+	}
+
+	inline
+	void martchDT()
+	{
+		currentIter_++;
+		currentTime_ += dt_;
+	}
+	
+	inline
+	word timeName()const
+	{
+		return real2FixedStripZeros(currentTime_, presicion_);
+	}
+
+	static
+	int32 precision()
+	{
+		return presicion_;
 	}
 };
 

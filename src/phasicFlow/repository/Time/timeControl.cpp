@@ -25,7 +25,7 @@ Licence:
 
 bool pFlow::timeControl::screenReport()const
 {
-	return screenReportInterval_.isMember(currentIter_);
+	return screenReportInterval_.isMember(ti_.currentIter());
 }
 
 pFlow::timeControl::timeControl
@@ -36,16 +36,16 @@ pFlow::timeControl::timeControl
 	ti_(dict),
 	startTime_
 	(
-		dict.getVal<real>("startTime")
+		dict.getVal<timeValue>("startTime")
 	),
 	endTime_
 	(
-		dict.getVal<real>("endTime")
+		dict.getVal<timeValue>("endTime")
 	),
 	stopAt_(endTime_),
 	saveInterval_
 	(
-		dict.getVal<real>("saveInterval")
+		dict.getVal<timeValue>("saveInterval")
 	),
 	lastSaved_(startTime_),
 	performSorting_
@@ -65,50 +65,40 @@ pFlow::timeControl::timeControl
 
 pFlow::timeControl::timeControl(
 		dictionary& dict,
-		real startTime,
-		real endTime,
-		real saveInterval,
+		timeValue startTime,
+		timeValue endTime,
+		timeValue saveInterval,
 		word startTimeName)
 :
-	dt_
-	(
-		dict.getVal<real>("dt")
-	),
+	ti_(startTime, dict),
 	startTime_(startTime),
 	endTime_(endTime),
 	stopAt_(endTime_),
-	currentTime_(startTime_),
 	saveInterval_(saveInterval),
-	lastSaved_(startTime_),
-	currentIter_(0),
-	timePrecision_
-	(
-		dict.getValOrSet("timePrecision", 4)
-	),
+	lastSaved_(startTime_),	
 	managedExternaly_(true),
-	timeName_(startTimeName),
-	timersReportInterval_
-	(
-		startTime_,
-		dict.getValOrSet("timersReportInterval", 0.04)
-	),
 	performSorting_
 	(
 		dict.getValOrSet("performSorting", Logical("No"))
-	),
-	sortingInterval_
-	(
-		startTime_,
-		dict.getValOrSet("sortingInterval", static_cast<real>(1.0))
 	)	
 {
+	timeName_ = startTimeName;
+
+	timersReportInterval_ = timeStridedRange(
+		startTime_, 
+		dict.getValOrSet("timersReportInterval", 0.04));
+
+	sortingInterval_ = timeStridedRange(
+		startTime_, 
+		dict.getValOrSet("sortingInterval", 1.0));
+
 	checkForOutputToFile();
 }
 
-pFlow::real pFlow::timeControl::setTime(real t)
+pFlow::timeValue pFlow::timeControl::setTime(timeValue t)
 {
-	real tmp = currentTime_;
-	currentTime_ = t;
+	timeValue tmp = ti_.currentTime();
+	ti_.currentTime_ = t;
 	lastSaved_ = t;
 	checkForOutputToFile();
 	return tmp;
@@ -124,15 +114,15 @@ pFlow::word pFlow::timeControl::timeName()const
 
 bool pFlow::timeControl::finalTime()const
 {
-	if( currentTime_ >= endTime_ ) return true;
-	if( std::abs(currentTime_-endTime_) < 0.5*dt_ )return true;
+	if( ti_.currentTime_ >= endTime_ ) return true;
+	if( std::abs(ti_.currentTime_-endTime_) < 0.5*ti_.dt_ )return true;
 	return false;	
 }
 
 bool pFlow::timeControl::reachedStopAt()const
 {
-	if( currentTime_ >= stopAt_ ) return true;
-	if( std::abs(currentTime_-stopAt_) < 0.5*dt_ )return true;
+	if( ti_.currentTime_ >= stopAt_ ) return true;
+	if( std::abs(ti_.currentTime_-stopAt_) < 0.5*ti_.dt_ )return true;
 	return false;
 }
 
@@ -142,22 +132,22 @@ void pFlow::timeControl::checkForOutputToFile()
 	bool save = false;
 	if(managedExternaly_)
 	{
-		if( std::abs(currentTime_-writeTime_) < 0.5*dt_)
+		if( std::abs(ti_.currentTime_-writeTime_) < 0.5*ti_.dt_)
 		{
 			save = true;
-			lastSaved_ = currentTime_;
+			lastSaved_ = ti_.currentTime_;
 		}
 	}
 	else
 	{
-		if ( std::abs(currentTime_ - lastSaved_ - saveInterval_) < 0.5 * dt_ )
+		if ( std::abs(ti_.currentTime_ - lastSaved_ - saveInterval_) < 0.5 * ti_.dt_ )
 		{	
-			lastSaved_ = currentTime_;
+			lastSaved_ = ti_.currentTime_;
 			save = true;
 		}
-		else if( std::abs(currentTime_ - lastSaved_) < std::min( pow(10.0,-1.0*timePrecision_), static_cast<real>(0.5 *dt_)) )
+		else if( std::abs(ti_.currentTime_ - lastSaved_) < std::min( std::pow(10.0,-1.0*ti_.precision()), 0.5 *ti_.dt_) )
 		{
-			lastSaved_ = currentTime_;
+			lastSaved_ = ti_.currentTime_;
 			save = true;
 		}
 		
@@ -168,13 +158,13 @@ void pFlow::timeControl::checkForOutputToFile()
 
 bool pFlow::timeControl::timersReportTime()const
 {
-	if(currentIter_<=1)return false;
-	return timersReportInterval_.isMember(currentTime_, 0.55*dt_);
+	if(ti_.currentIter_<=1)return false;
+	return timersReportInterval_.isMember(ti_.currentTime_, 0.55*ti_.dt_);
 }
 
 bool pFlow::timeControl::sortTime()const
 {
-	return performSorting_()&&sortingInterval_.isMember(currentTime_,dt_);
+	return performSorting_()&&sortingInterval_.isMember(ti_.currentTime_,ti_.dt_);
 }
 
 void pFlow::timeControl::setSaveTimeFolder(
@@ -192,10 +182,10 @@ bool pFlow::timeControl::operator ++(int)
 {
 
 	if( reachedStopAt() ) return false;
+	
 	// increament iteration number 
-	currentIter_++;
+	ti_.martchDT();
 
-	currentTime_ += dt_;
 	if(screenReport() && !managedExternaly_)
 	{
 		REPORT(0)<<"Time (s): "<<Cyan_Text( currentTimeWord() )<<END_REPORT;

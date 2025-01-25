@@ -39,6 +39,8 @@ inline const real  zero = 0.0;
 /// one real variable
 inline const real  one = 1.0;
 
+inline const real half = 0.5;
+
 /// zero int32 variable
 inline const int32 zero32 = 0;
 
@@ -76,11 +78,17 @@ isNo(const word& str);
 
 /// Convert floating point variable to string with fixed number of precisions
 word
-real2Fixed(const real& v, int32 numPrecision = 6);
+real2Fixed(const float& v, int32 numPrecision = 6);
+
+word
+real2Fixed(const double& v, int32 numPrecision = 6);
 
 /// Convert floating point variable to string with general format
 word
-real2Word(const real& v, int32 numPrecision = 6);
+real2Word(const float& v, int32 numPrecision = 6);
+
+word
+real2Word(const double& v, int32 numPrecision = 6);
 
 /// Convert int32 to word
 word
@@ -92,7 +100,10 @@ removeDecimalZeros(const word& str);
 
 /// Convert to fixed point variable and remove zeros
 word
-real2FixedStripZeros(const real& v, int32 numPrecision = 6);
+real2FixedStripZeros(const float& v, int32 numPrecision = 6);
+
+word
+real2FixedStripZeros(const double& v, int32 numPrecision = 6);
 
 /// Output <w1,w2>
 word
@@ -225,7 +236,14 @@ readValue(const word& w, bool& val)
 
 INLINE_FUNCTION_HD
 bool
-equal(const real& s1, const real& s2, real tol = smallValue)
+equal(const float& s1, const float& s2, float tol = smallValue)
+{
+	return abs(s1 - s2) <= tol;
+}
+
+INLINE_FUNCTION_HD
+bool
+equal(const double& s1, const double& s2, double tol = smallValue)
 {
 	return abs(s1 - s2) <= tol;
 }
