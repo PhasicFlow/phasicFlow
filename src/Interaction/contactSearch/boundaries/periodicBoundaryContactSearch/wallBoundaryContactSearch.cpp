@@ -11,7 +11,7 @@ pFlow::wallBoundaryContactSearch::wallBoundaryContactSearch
     const ViewType1D<realx3, memory_space> &normals
 )
 :
-    cellExtent_( max(cellExtent, 0.5 ) ),
+    cellExtent_( max(cellExtent, half ) ),
     numElements_(numElements),
     numPoints_(numPoints),
     vertices_(vertices),

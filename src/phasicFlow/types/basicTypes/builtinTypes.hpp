@@ -63,6 +63,8 @@ using size_t = std::size_t;
 
 using word = std::string;
 
+using timeValue = double;
+
 inline const int numBytesForReal__ = sizeof(real);
 
 inline word

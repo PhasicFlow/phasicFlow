@@ -50,7 +50,7 @@ bool intAllActive(
 		"AdamsBashforth2::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
 		LAMBDA_HD(uint32 i){
-			d_y[i] = damping*(d_dy[i] + dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]));
+			d_y[i] = damping*(d_y[i] + dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]));
 			d_dy1[i] = d_dy[i];
 		});
 	Kokkos::fence();

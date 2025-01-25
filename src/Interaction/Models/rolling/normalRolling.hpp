@@ -94,10 +94,10 @@ public:
 		realx3 w_hat = wi-wj;
 		real w_hat_mag = length(w_hat);
 
-		if( !equal(w_hat_mag,0.0) )
+		if( !equal(w_hat_mag,zero) )
 			w_hat /= w_hat_mag;
 		else
-			w_hat = 0.0;
+			w_hat = zero;
 
 		auto Reff = (Ri*Rj)/(Ri+Rj);
 

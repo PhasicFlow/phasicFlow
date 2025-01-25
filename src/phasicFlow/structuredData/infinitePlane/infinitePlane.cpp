@@ -29,7 +29,7 @@ pFlow::infinitePlane::infinitePlane
 {
 	auto ln = cross(p2-p1, p3-p1);
 	
-	if( equal(ln.length(),0.0) )
+	if( equal(ln.length(),zero) )
 	{
 		fatalErrorInFunction<<
 		"invalid input to form a infinte wall "<< realx3x3(p1,p2,p3)<<endl;
@@ -60,5 +60,5 @@ bool pFlow::infinitePlane::validPlane3
   const realx3& p3
 )
 {
-  return !equal(cross(p2-p1, p3-p1).length(), 0.0);
+  return !equal(cross(p2-p1, p3-p1).length(), zero);
 }

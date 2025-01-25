@@ -42,8 +42,19 @@ namespace pFlow
 {
 
 INLINE_FUNCTION_HD
-real
-abs(real x)
+double
+abs(double x)
+{
+#ifdef __CUDACC__
+	return ::fabs(x);
+#else
+	return std::fabs(x);
+#endif
+}
+
+INLINE_FUNCTION_HD
+float
+abs(float x)
 {
 #ifdef __CUDACC__
 	return ::fabs(x);
@@ -73,8 +84,18 @@ abs(int32 x)
 #endif
 }
 
-INLINE_FUNCTION_HD real
-mod(real x, real y)
+INLINE_FUNCTION_HD float
+mod(float x, float y)
+{
+#ifdef __CUDACC__
+	return ::fmod(x, y);
+#else
+	return std::fmod(x, y);
+#endif
+}
+
+INLINE_FUNCTION_HD double
+mod(double x, double y)
 {
 #ifdef __CUDACC__
 	return ::fmod(x, y);
@@ -108,8 +129,18 @@ mod(uint32 x, uint32 y)
 	return x % y;
 }
 
-INLINE_FUNCTION_HD real
-remainder(real x, real y)
+INLINE_FUNCTION_HD float
+remainder(float x, float y)
+{
+#ifdef __CUDACC__
+    return ::remainder(x,y);
+#else
+	return std::remainder(x, y);
+#endif
+}
+
+INLINE_FUNCTION_HD double
+remainder(double x, double y)
 {
 #ifdef __CUDACC__
     return ::remainder(x,y);
@@ -120,8 +151,19 @@ remainder(real x, real y)
 
 
 INLINE_FUNCTION_HD
-real
-exp(real x)
+float
+exp(float x)
+{
+#ifdef __CUDACC__
+    return ::exp(x);
+#else
+	return std::exp(x);
+#endif
+}
+
+INLINE_FUNCTION_HD
+double
+exp(double x)
 {
 #ifdef __CUDACC__
     return ::exp(x);
@@ -132,8 +174,17 @@ exp(real x)
 
 
 INLINE_FUNCTION_HD
-real
-log(real x)
+float log(float x)
+{
+#ifdef __CUDACC__
+    return ::log(x);
+#else
+	return std::log(x);
+#endif
+}
+
+INLINE_FUNCTION_HD
+double log(double x)
 {
 #ifdef __CUDACC__
     return ::log(x);
@@ -144,8 +195,7 @@ log(real x)
 
 
 INLINE_FUNCTION_HD
-real
-log10(real x)
+float log10(float x)
 {
 #ifdef __CUDACC__
     return ::log10(x);
@@ -155,8 +205,27 @@ log10(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-pow(real x, real y)
+double log10(double x)
+{
+#ifdef __CUDACC__
+    return ::log10(x);
+#else
+	return std::log10(x);
+#endif
+}
+
+INLINE_FUNCTION_HD
+float pow(float x, float y)
+{
+#ifdef __CUDACC__
+	return ::pow(x,y);
+#else
+	return std::pow(x, y);
+#endif
+}
+
+INLINE_FUNCTION_HD
+double pow(double x, double y)
 {
 #ifdef __CUDACC__
 	return ::pow(x,y);
@@ -167,8 +236,17 @@ pow(real x, real y)
 
 
 INLINE_FUNCTION_HD
-real
-sqrt(real x)
+float sqrt(float x)
+{
+#ifdef __CUDACC__
+    return ::sqrt(x);
+#else
+	return std::sqrt(x);
+#endif
+}
+
+INLINE_FUNCTION_HD
+double sqrt(double x)
 {
 #ifdef __CUDACC__
     return ::sqrt(x);
@@ -180,8 +258,7 @@ sqrt(real x)
 
 
 INLINE_FUNCTION_HD
-real
-cbrt(real x)
+float cbrt(float x)
 {
 #ifdef __CUDACC__
     return ::cbrt(x);
@@ -191,8 +268,17 @@ cbrt(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-sin(real x)
+double cbrt(double x)
+{
+#ifdef __CUDACC__
+    return ::cbrt(x);
+#else
+	return std::cbrt(x);
+#endif 
+}
+
+INLINE_FUNCTION_HD
+float sin(float x)
 {
 #ifdef __CUDACC__
     return ::sin(x);
@@ -202,8 +288,17 @@ sin(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-cos(real x)
+double sin(double x)
+{
+#ifdef __CUDACC__
+    return ::sin(x);
+#else
+	return std::sin(x);
+#endif
+}
+
+INLINE_FUNCTION_HD
+real cos(real x)
 {
 #ifdef __CUDACC__
     return ::cos(x);
@@ -215,8 +310,7 @@ cos(real x)
 
 
 INLINE_FUNCTION_HD
-real
-tan(real x)
+real tan(real x)
 {
 #ifdef __CUDACC__
     return ::tan(x);
@@ -226,8 +320,7 @@ tan(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-asin(real x)
+real asin(real x)
 {
 #ifdef __CUDACC__
     return ::asin(x);
@@ -237,8 +330,7 @@ asin(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-acos(real x)
+real acos(real x)
 {
 #ifdef __CUDACC__
     return ::acos(x);
@@ -248,8 +340,7 @@ acos(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-atan(real x)
+real atan(real x)
 {
 #ifdef __CUDACC__
     return ::atan(x);
@@ -269,8 +360,7 @@ atan2(real y, real x)
 }
 
 INLINE_FUNCTION_HD
-real
-sinh(real x)
+real sinh(real x)
 {
 #ifdef __CUDACC__
     return ::sinh(x);
@@ -280,8 +370,7 @@ sinh(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-cosh(real x)
+real cosh(real x)
 {
 #ifdef __CUDACC__
     return ::cosh(x);
@@ -322,8 +411,7 @@ acosh(real x)
 }
 
 INLINE_FUNCTION_HD
-real
-atanh(real x)
+real atanh(real x)
 {
 #ifdef __CUDACC__
     return ::atanh(x);
@@ -333,8 +421,18 @@ atanh(real x)
 }
 
 
-INLINE_FUNCTION_HD real
-min(real x, real y)
+INLINE_FUNCTION_HD 
+float min(float x, float y)
+{
+#ifdef __CUDACC__
+	return ::fmin(x, y);
+#else
+	return std::fmin(x, y);
+#endif
+}
+
+INLINE_FUNCTION_HD 
+double min(double x, double y)
 {
 #ifdef __CUDACC__
 	return ::fmin(x, y);
@@ -344,8 +442,7 @@ min(real x, real y)
 }
 
 INLINE_FUNCTION_HD
-int64
-min(int32 x, int32 y)
+int64 min(int32 x, int32 y)
 {
 #ifdef __CUDACC__
     return ::min(x,y);
@@ -356,8 +453,7 @@ min(int32 x, int32 y)
 
 
 INLINE_FUNCTION_HD
-int64
-min(int64 x, int64 y)
+int64 min(int64 x, int64 y)
 {
 #ifdef __CUDACC__
     return ::min(x,y);
@@ -369,8 +465,17 @@ min(int64 x, int64 y)
 
 
 INLINE_FUNCTION_HD
-uint64
-min(uint64 x, uint64 y)
+uint64 min(uint64 x, uint64 y)
+{
+#ifdef __CUDACC__
+    return ::min(x,y);
+#else
+	return std::min(x, y);
+#endif
+}
+
+INLINE_FUNCTION_HD 
+uint32 min(uint32 x, uint32 y)
 {
 #ifdef __CUDACC__
     return ::min(x,y);
@@ -380,20 +485,18 @@ min(uint64 x, uint64 y)
 }
 
 
-
-INLINE_FUNCTION_HD uint32
-min(uint32 x, uint32 y)
+INLINE_FUNCTION_HD 
+float max(float x, float y)
 {
 #ifdef __CUDACC__
-    return ::min(x,y);
+	return ::fmax(x, y);
 #else
-	return std::min(x, y);
+	return std::fmax(x, y);
 #endif
 }
 
-
-INLINE_FUNCTION_HD real
-max(real x, real y)
+INLINE_FUNCTION_HD 
+double max(double x, double y)
 {
 #ifdef __CUDACC__
 	return ::fmax(x, y);

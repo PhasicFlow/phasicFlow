@@ -37,7 +37,7 @@ private:
 
     real            dampingFactor_;
 
-    baseTimeControl timeControl_;
+  //  baseTimeControl timeControl_;
 
 
 public:

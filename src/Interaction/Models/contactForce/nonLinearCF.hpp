@@ -131,7 +131,7 @@ protected:
 			// we take out sqrt(meff*K_hertz) here and then consider this term 
 			// when calculating damping part. 
 			etha_n[i] = -2.2664*log(en[i])/
-					sqrt(pow(log(en[i]),2.0)+ pow(Pi,2.0));
+					sqrt(pow(log(en[i]),static_cast<real>(2.0))+ pow(Pi,static_cast<real>(2.0)));
 
 			// no damping for tangential part 
 
@@ -255,7 +255,7 @@ public:
 		// apply friction 
 		if(ft > ft_fric)
 		{
-			if( length(history.overlap_t_) >0.0)
+			if( length(history.overlap_t_) >zero)
 			{
 				if constexpr (limited)
 				{

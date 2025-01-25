@@ -31,6 +31,7 @@ pFlow::contactSearch::contactSearch(
  	Timers& timers)
 :
 	extendedDomainBox_(extDomain),
+	updateInterval_(dict.getValMax<uint32>("updateInterval", 1u)),
 	particles_(prtcl),
 	geometry_(geom),
 	bTimer_("Boundary particles contact search", &timers),
@@ -92,6 +93,7 @@ bool pFlow::contactSearch::boundaryBroadSearch
 		bTimer_.start();
 		for(uint32 i=0u; i<6u; i++)
 		{
+			output<<" boundarySearch "<< i <<" for iter "<< ti.iter()<<endl;
 			if(!BoundaryBroadSearch(
 				i,
 				ti,
