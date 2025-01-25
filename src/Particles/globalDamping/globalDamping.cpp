@@ -23,7 +23,8 @@ Licence:
 
 
 pFlow::globalDamping::globalDamping(const systemControl& control)
-:
+{}
+/*:
     timeControl_(control.settingsDict().subDict("globalDamping"), control.time().dt(), "damping")
 {
     const dictionary& dict = control.settingsDict().subDict("globalDamping");
@@ -40,7 +41,7 @@ pFlow::globalDamping::globalDamping(const systemControl& control)
 	else
 		REPORT(2)<<"Global damping "<<Yellow_Text("is not active")<<"."<<END_REPORT;
 
-}
+}*/
 
 
 /*void pFlow::globalDamping::applyDamping
@@ -68,7 +69,8 @@ pFlow::globalDamping::globalDamping(const systemControl& control)
 
 pFlow::real pFlow::globalDamping::dampingFactor(const timeInfo& ti)const
 {
-	if(!performDamping_) return 1.0;
+  return 1;
+	/*if(!performDamping_) return 1.0;
 	if(!timeControl_.timeEvent(ti.iter(), ti.t(), ti.dt()) )return 1.0;
-	return dampingFactor_;
+	return dampingFactor_;*/
 }
