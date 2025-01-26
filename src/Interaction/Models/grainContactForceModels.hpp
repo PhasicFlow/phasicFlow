@@ -24,6 +24,7 @@ Licence:
 #include "cGAbsoluteLinearCF.hpp"
 #include "cGRelativeLinearCF.hpp"
 #include "cGNonLinearCF.hpp"
+#include "cGNonLinearCF2.hpp"
 
 #include "grainRolling.hpp"
 
@@ -41,6 +42,9 @@ using nonLimitedCGRelativeLinearGrainRolling = grainRolling<cGRelativeLinear<fal
 
 using limitedCGNonLinearGrainRolling   = grainRolling<cGNonLinear<true>>;
 using nonLimitedCGNonLinearGrainRolling = grainRolling<cGNonLinear<false>>;
+
+using limitedCGNonLinear2GrainRolling   = grainRolling<cGNonLinear2<true>>;
+using nonLimitedCGNonLinear2GrainRolling = grainRolling<cGNonLinear2<false>>;
 
 }
 
