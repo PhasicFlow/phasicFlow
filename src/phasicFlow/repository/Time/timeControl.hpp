@@ -133,7 +133,7 @@ public:
 		
 	}
 
-	int32 currentIter()const
+	uint32 currentIter()const
 	{
 		return ti_.currentIter();
 	}
@@ -174,7 +174,7 @@ public:
 	}
 
 	static
-	int32 timePrecision()
+	uint32 timePrecision()
 	{
 		return timeInfo::precision();
 	}

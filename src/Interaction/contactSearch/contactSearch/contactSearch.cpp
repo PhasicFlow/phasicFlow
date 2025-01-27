@@ -35,8 +35,7 @@ pFlow::contactSearch::contactSearch(
 	particles_(prtcl),
 	geometry_(geom),
 	bTimer_("Boundary particles contact search", &timers),
-	ppTimer_("Internal particles contact search", &timers),
-	dict_(dict)
+	ppTimer_("Internal particles contact search", &timers)
 {
 
 }
@@ -70,6 +69,7 @@ bool pFlow::contactSearch::broadSearch
 		}
 		ppTimer_.end();
 		performedSearch_ = true;
+		lastUpdated_ = ti.currentIter();
 	}
 	else
 	{

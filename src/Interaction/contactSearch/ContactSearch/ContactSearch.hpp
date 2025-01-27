@@ -134,7 +134,7 @@ public:
 		ppwContactSearch_ = 
 			makeUnique<SearchMethodType>
 			(
-				dict(),
+				csDict,
 				this->extendedDomainBox(),
 				minD,
 				maxD,
@@ -154,10 +154,8 @@ public:
 		ContactSearch,
 		dictionary);
 
-	bool enterBroadSearchBoundary(const timeInfo& ti, bool force=false)const override
-	{
-		return enterBroadSearch(ti, force) || csBoundaries_.boundariesUpdated();
-	}
+	bool enterBroadSearchBoundary(const timeInfo& ti, bool force=false)const override;
+	
 
 	real sizeRatio()const override
 	{
@@ -171,7 +169,12 @@ public:
 	
 };
 
+template <class searchMethod>
+inline bool ContactSearch<searchMethod>::enterBroadSearchBoundary(const timeInfo &ti, bool force) const
+{
+	return performSearch(ti.iter(),force) || csBoundaries_.boundariesUpdated();
 }
 
+}
 
 #endif //__ContactSearch_hpp__
