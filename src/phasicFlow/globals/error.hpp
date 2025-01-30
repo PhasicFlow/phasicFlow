@@ -27,7 +27,7 @@ Licence:
 namespace pFlow
 {
 class iOstream;
-}
+
 
 //- Decleartions
 
@@ -66,35 +66,37 @@ warningMessage(const char* fnName, const char* fileName, int linNumber);
 pFlow::iOstream&
 reportAndExit(int errorCode = EXIT_FAILURE);
 
+}
+
 /// Report a fatal error and exit the applicaiton
-#define fatalError fatalErrorMessage(__FILE__, __LINE__)
+#define fatalError pFlow::fatalErrorMessage(__FILE__, __LINE__)
 
 /// Report a fatal error and supplied function name and exit the application
 #define fatalErrorIn(functionName)                                             \
-	fatalErrorInMessage((functionName), __FILE__, __LINE__)
+	pFlow::fatalErrorInMessage((functionName), __FILE__, __LINE__)
 
 /// Report a fatal error and function name and exit the application
 #define fatalErrorInFunction fatalErrorIn(FUNCTION_NAME)
 
 /// Report that a function is yet not implemented with supplied function name.
 #define Not_Implemented(functionName)                                          \
-	notImplementedErrorMessage((functionName), __FILE__, __LINE__)
+	pFlow::notImplementedErrorMessage((functionName), __FILE__, __LINE__)
 
 /// Report that a function is yet not implemented.
 #define notImplementedFunction Not_Implemented(FUNCTION_NAME)
 
 /// Report an error in file operation with supplied fileName and lineNumber.
 #define ioErrorInFile(fileName, lineNumber)                                    \
-	ioErrorMessage(fileName, lineNumber, FUNCTION_NAME, __FILE__, __LINE__)
+	pFlow::ioErrorMessage(fileName, lineNumber, FUNCTION_NAME, __FILE__, __LINE__)
 
 /// Report a warning with supplied function name
 #define warningIn(functionName)                                                \
-	warningMessage((functionName), __FILE__, __LINE__)
+	pFlow::warningMessage((functionName), __FILE__, __LINE__)
 
 /// Report a warning
 #define warningInFunction warningIn(FUNCTION_NAME)
 
 /// Fatal exit
-#define fatalExit reportAndExit()
+#define fatalExit pFlow::reportAndExit()
 
 #endif

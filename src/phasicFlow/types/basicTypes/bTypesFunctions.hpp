@@ -277,7 +277,7 @@ equal(const uint32& s1, const uint32& s2)
 }
 
 /// Are two words equal (host only)?
-INLINE_FUNCTION
+inline
 bool
 equal(const word& s1, const word& s2)
 {

@@ -114,13 +114,13 @@ struct triple
 	triple<T>& operator=(triple<T>&& src) = default;
 
 	/// clone
-	INLINE_FUNCTION
+	inline
 	uniquePtr<triple<T>> clone() const
 	{
 		return makeUnique<triple<T>>(*this);
 	}
 
-	INLINE_FUNCTION
+	inline
 	triple<T>* clonePtr() const
 	{
 		return new triple<T>(*this);
