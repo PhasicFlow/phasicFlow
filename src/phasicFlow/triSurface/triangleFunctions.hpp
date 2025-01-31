@@ -38,8 +38,8 @@ INLINE_FUNCTION_HD
 realx3 normal(const realx3& p1, const realx3& p2, const realx3& p3)
 {
 	auto n = cross(p2-p1, p3-p1);
-	if( equal(n.length(), zero) )
-    	return zero3;
+	if( equal(n.length(), static_cast<real>(0.0)) )
+    	return realx3(0);
 	else
 		return normalize(n);
 }
@@ -52,7 +52,7 @@ bool valid
 	const realx3& p3
 )
 {
-  	return !equal(cross(p2-p1, p3-p1).length(), zero);
+  	return !equal(cross(p2-p1, p3-p1).length(), static_cast<real>(0.0));
 }
 
 }

@@ -112,20 +112,20 @@ public:
 		bool inPositiveDistance(const realx3& p, real dist)const
 		{	
 			real d = pointFromPlane(p);
-			return d >= zero && d <= dist;
+			return d >= static_cast<real>(0.0) && d <= dist;
 		}
 
 		INLINE_FUNCTION_HD
 		bool inNegativeDistance(const realx3& p, real dist)const
 		{	
 			real d = pointFromPlane(p);
-			return d < zero && d >= -dist;
+			return d < static_cast<real>(0.0) && d >= -dist;
 		}
 
 		INLINE_FUNCTION_HD
 		bool pointOnPlane(const realx3& p)const
 		{
-			return equal(pointFromPlane(p),zero);
+			return equal(pointFromPlane(p),static_cast<real>(0.0));
 		}
 
 		INLINE_FUNCTION_HD
