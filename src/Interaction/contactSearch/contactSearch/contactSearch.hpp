@@ -67,8 +67,6 @@ private:
 
 	Timer 		ppTimer_;
 
-	dictionary 	dict_;
-
 	virtual
 	bool BroadSearch(
 		const timeInfo& ti,
@@ -148,12 +146,6 @@ public:
 	uint32 updateInterval()const
 	{
 		return updateInterval_;
-	}
-
-	inline
-	const dictionary& dict()const
-	{
-		return dict_;
 	}
 
 	inline

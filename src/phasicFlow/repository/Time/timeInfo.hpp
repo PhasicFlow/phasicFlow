@@ -33,7 +33,7 @@ private:
 	friend class timeControl;
 
 	// - current iteration number (for this execution)
-	int32 		currentIter_;
+	uint32 		currentIter_;
 
 	// - current time of simulation
 	timeValue   currentTime_;
@@ -41,11 +41,11 @@ private:
 	// - integration time step
 	timeValue   dt_;
 
-	inline static int32 presicion_ = 5;
+	inline static uint32 presicion_ = 5;
 
 public:
 
-	timeInfo(int32 cIter, timeValue cTime, timeValue dt)
+	timeInfo(uint32 cIter, timeValue cTime, timeValue dt)
 	  : currentIter_(cIter),
 	    currentTime_(cTime),
 	    dt_(dt)
@@ -58,7 +58,7 @@ public:
 		currentTime_(dict.getVal<timeValue>("startTime")),
 		dt_( dict.getVal<timeValue>("dt"))
 	{
-		presicion_ = dict.getValOrSet<int32>("timePrecision",5);
+		presicion_ = dict.getValOrSet<uint32>("timePrecision",5);
 	}
 
 	timeInfo(timeValue currentTime, const dictionary& dict)
@@ -83,12 +83,12 @@ public:
 	{
 		return dt_;
 	}
-	inline const int32& iter() const
+	inline const uint32& iter() const
 	{
 		return currentIter_;
 	}
 
-	inline const int32& currentIter() const
+	inline const uint32& currentIter() const
 	{
 		return currentIter_;
 	}
@@ -107,7 +107,7 @@ public:
 	}
 
 	static
-	int32 precision()
+	uint32 precision()
 	{
 		return presicion_;
 	}
