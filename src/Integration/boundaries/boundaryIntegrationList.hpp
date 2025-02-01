@@ -4,7 +4,7 @@
 
 
 #include "boundaryList.hpp"
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
 #include "boundaryIntegration.hpp"
 
 
@@ -15,7 +15,7 @@ class integration;
 
 class boundaryIntegrationList
 :
-    public ListPtr<boundaryIntegration>
+    public boundaryListPtr<boundaryIntegration>
 {
 private:
 

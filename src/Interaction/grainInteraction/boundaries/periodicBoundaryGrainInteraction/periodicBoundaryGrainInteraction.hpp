@@ -78,13 +78,15 @@ public:
     
     ~periodicBoundaryGrainInteraction()override = default;
 
-
-    
-
     bool grainGrainInteraction(
         real dt,
 		const ContactForceModel& cfModel,
         uint32 step)override;
+    
+    bool isActive()const override
+	{
+		return true;
+	}
 	
 };
 

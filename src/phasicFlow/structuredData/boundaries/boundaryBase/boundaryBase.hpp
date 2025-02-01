@@ -31,6 +31,14 @@ Licence:
 namespace pFlow
 {
 
+static 
+inline const std::array<word,6>  boundaryNames_ = 
+{
+	"left", "right", 
+	"bottom", "top",
+	"rear", "front"
+};
+
 // forward 
 
 class internalPoints;
@@ -61,15 +69,17 @@ private:
 	/// list of particles indieces on host
 	mutable uint32Vector_H indexListHost_;
 
-	/// device and host list are sync
-	mutable bool           listsSync_ = false;
-
 	/// The length defined for creating neighbor list
 	real                   neighborLength_;
+
+	/// device and host list are sync
+	mutable bool           listsSync_ = false;
 
 	bool 				   updateTime_ = false;
 
 	bool 				   iterBeforeUpdate_ = false;
+
+	bool                   isBoundaryMaster_;
 
 	/// the extra boundary extension beyound actual limits of boundary 
 	real 				   boundaryExtntionLengthRatio_;
@@ -85,11 +95,7 @@ private:
 
 	int                    neighborProcessorNo_;
 
-	bool                   isBoundaryMaster_;
-
-	word                   name_;
-
-	word                   type_;
+	uniquePtr<word>        type_;
 
 protected:
 	
@@ -251,13 +257,13 @@ public:
 	inline
 	const word& type()const
 	{
-		return type_;
+		return type_();
 	}
 
 	inline
 	const word& name()const
 	{
-		return name_;
+		return boundaryNames_[thisBoundaryIndex_];
 	}
 
 	inline
@@ -405,6 +411,12 @@ public:
 	{
 		return 0u;
 	}
+
+	inline
+	bool isActive()const
+	{
+		return true;
+	} 
 
 	/// - static create 
 	static

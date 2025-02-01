@@ -5,10 +5,10 @@ pFlow::boundarySphereParticlesList::boundarySphereParticlesList(
     sphereParticles &prtcls
 )
 :
-    ListPtr(bndrs.size()), 
+    boundaryListPtr(), 
     boundaries_(bndrs)
 {
-    for(auto i=0; i<boundaries_.size(); i++)
+    ForAllBoundariesPtr(i, this)
     {
         this->set
         (

@@ -26,60 +26,65 @@ Licence:
 
 namespace pFlow {
 
-
+/// 
+/// @class span
+/// @brief Represents a view into a contiguous sequence of elements.
+/// 
+/// `span` provides a lightweight way to work with arrays and other contiguous 
+/// sequences without the overhead of copying. This will word on both GPU and CPU
 template<typename T>
 class span
 {
-
 public:
-	
-	using iterator        = T*;
+    
+    using iterator        = T*;
 
-  	using constIterator   = const T*;
-  	
-	using reference       = T&;
-  	
-  	using constReference  = const T&;
+    using constIterator   = const T*;
+    
+    using reference       = T&;
+    
+    using constReference  = const T&;
 
-	using valueType       = T;
-  	
-  	using pointer         = T*;
-  	
-  	using constPointer    = const T*;
+    using valueType       = T;
+    
+    using pointer         = T*;
+    
+    using constPointer    = const T*;
 
-protected:
+private:
 
-    T* data_ 		= nullptr;
-
-    uint32 	size_ 	= 0;
+    mutable T*     data_ = nullptr;
+ 
+    index          size_ = 0;
 
 public:
     
     TypeInfoTemplateNV11("span", T);
 
-    /// Constructor
+    /// Constructor with no arguments
     INLINE_FUNCTION_HD
     span() = default;
 
 
+    /// Constructor that takes a pointer to the beginning of the data and the size of the span
     INLINE_FUNCTION_HD
     span(T* data, uint32 size)
         : data_(data), size_(size)
     {}
 
-    /// copy
+    /// copy constructor
     INLINE_FUNCTION_HD
     span(const span&) = default;
 
-    /// assignment
+    /// copy assignment operator
     INLINE_FUNCTION_HD
     span& operator=(const span&) = default;
 
-    /// move
+    /// move constructor
     INLINE_FUNCTION_HD
     span(span&&) = default;
 
-    /// assignment
+    /// move assignment operator
     INLINE_FUNCTION_HD
     span& operator=(span&) = default;
 
@@ -90,6 +95,7 @@ public:
         return size_ == 0;
     }
 
+    /// Returns a pointer to the beginning of the data
     INLINE_FUNCTION_HD
     T* data() const
     {
@@ -98,7 +104,7 @@ public:
 
     /// Returns the number of elements in the span
     INLINE_FUNCTION_HD
-    uint32 size() const
+    index size() const
     {
         return size_;
     }
@@ -110,7 +116,7 @@ public:
         return data_;
     }
 
-    /// Returns an iterator to the beginning of the span
+    /// Returns an iterator to the beginning of the span (const version)
     INLINE_FUNCTION_HD
     constIterator cbegin() const
     {
@@ -124,91 +130,57 @@ public:
         return data_ + size_;
     }
 
-    /// Returns an iterator to one past the end of the span
+    /// Returns an iterator to one past the end of the span (const version)
     INLINE_FUNCTION_HD
     constIterator cend() const
     {
         return data_ + size_;
     }
 
+    /// Returns a reference to the element at the specified index
     INLINE_FUNCTION_HD
-    T& operator[](uint32 i)
+    T& operator[](index i)
     {
-    	return data_[i];
+        return data_[i];
     }
 
+    /// Returns a const reference to the element at the specified index
     INLINE_FUNCTION_HD
-    const T& operator[](uint32 i)const
+    T& operator[](index i)const
     {
-    	return data_[i];
-    }
-
-    INLINE_FUNCTION_HD
-    T& operator[](int32 i)
-    {
-    	return data_[i];
-    }
-
-    INLINE_FUNCTION_HD
-    const T& operator[](int32 i)const
-    {
-    	return data_[i];
+        return data_[i];
     }
 
 };
 
-/*template<typename T, typename... properties, template<class, class...> class Container>
-size_t makeSpan(Container<T, properties...>& container)
-{
-    return span<T>(container.data(), container.size());
-}
 
-template<typename T, typename... properties, template<class, class...> class Container>
-size_t makeSpan(const Container<T, properties...>& container)
-{
-    return span<T>(
-        const_cast<T*>(container.data()), 
-        container.size());
-}*/
-
-
+/// Creates a span of char from a span of any type.
+/// 
+/// This helper function reinterprets the underlying memory of the given span 
+/// as a span of char.
 template<typename T>
 inline
 span<char> charSpan(span<T> s)
 {
-    auto el = sizeof(T);
-    return span<char>(
-        reinterpret_cast<char*>(s.data()),
-        s.size()*el);
+	auto el = sizeof(T);
+	return span<char>(
+		reinterpret_cast<char*>(s.data()),
+		s.size()*el);
 }
 
+/// Creates a span of const char from a span of const any type.
+/// 
+/// This helper function reinterprets the underlying memory of the given span 
+/// as a span of const char.
 template<typename T>
 inline
 span<const char> charSpan(span<const T> s)
 {
-    auto el = sizeof(T);
-    return span<const char>(
-        reinterpret_cast<const char*>(s.data()),
-        s.size()*el);
+	auto el = sizeof(T);
+	return span<const char>(
+		reinterpret_cast<const char*>(s.data()),
+		s.size()*el);
 }
-
-/*template<typename T, template<class> class Container>
-span<T> makeSpan(Container<T>& container)
-{
-    return span<T>(container.data(), container.size());
-}
-
-template<typename T, template<class> class Container>
-span<T> makeSpan(const Container<T>& container)
-{
-    return span<T>(
-        const_cast<T*>(container.data()), 
-        container.size());
-}*/
-
-
-
-
 
 
 } // pFlow

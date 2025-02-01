@@ -184,6 +184,12 @@ public:
 		return;
 	}
 
+
+	bool isActive()const override
+	{
+		return false;
+	}
+
 	static
 	uniquePtr<boundaryField> create(
 		const boundaryBase& boundary, 

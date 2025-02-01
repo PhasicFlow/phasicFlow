@@ -7,11 +7,11 @@ pFlow::boundaryGrainInteractionList<CFModel, gMModel>::boundaryGrainInteractionL
     const gMModel &geomMotion
 )
 :
-	ListPtr<boundaryGrainInteraction<CFModel,gMModel>>(6),
+	boundaryListPtr<boundaryGrainInteraction<CFModel,gMModel>>(),
 	boundaries_(grnPrtcls.pStruct().boundaries())
 {
 	//gSettings::sleepMiliSeconds(1000*pFlowProcessors().localRank());
-	for(uint32 i=0; i<6; i++)
+	ForAllBoundariesPtr(i, this)
 	{
 		this->set(
 			i,

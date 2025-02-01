@@ -552,10 +552,11 @@ bool pFlow::sphereParticles::iterate()
 			accelertion().deviceViewAll(),
 			rAcceleration().deviceViewAll()
 			);
-		for(auto& bndry:boundarySphereParticles_)
+		ForAllActiveBoundaries(i,boundarySphereParticles_)
 		{
-			bndry->acceleration(ti, g);
+			boundarySphereParticles_[i].acceleration(ti, g);
 		}
+
 	accelerationTimer_.end();
 	
 	intCorrectTimer_.start();

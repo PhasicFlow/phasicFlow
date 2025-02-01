@@ -152,8 +152,6 @@ public:
 		return false;
 	}
 
-
-
 	bool hearChanges
 	(
 		real t,
@@ -168,6 +166,11 @@ public:
 		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;;
 		//notImplementedFunction;
 		return true;
+	}
+
+	bool isActive()const override
+	{
+		return false;
 	}
 
 	static

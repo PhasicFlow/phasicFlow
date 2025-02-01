@@ -22,7 +22,7 @@ Licence:
 
 #include "boundaryField.hpp"
 #include "boundaryList.hpp"
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
 
 
 namespace pFlow
@@ -31,7 +31,7 @@ namespace pFlow
 template< class T, class MemorySpace = void >
 class boundaryFieldList
 :
-    public ListPtr< boundaryField<T, MemorySpace> >
+    public boundaryListPtr< boundaryField<T, MemorySpace> >
 {
 public:
 
@@ -50,10 +50,10 @@ public:
 
     boundaryFieldList(const boundaryList& boundaries, InternalFieldType& internal)
     :
-        ListPtr<BoundaryFieldType>(boundaries.size()),
+        boundaryListPtr<BoundaryFieldType>(),
         boundaries_(boundaries)
     {
-        for(auto i=0; i<boundaries.size(); i++)
+        ForAllBoundaries(i, *this)
         {
             this->set
             (
@@ -68,26 +68,18 @@ public:
         if( direction == DataDirection::SlaveToMaster 
             && slaveToMasterUpdateIter_ == iter) return;
         
-        
-        
         // first step
-        uint32 i=0;
-        for(auto b:*this)
+        ForAllBoundaries(i,*this)
         {
-            if(i==0 ) 
-            {
-                //pOutput<<"request for update boundaries for field "<< b->name()<<endl;
-                i++;
-            }
-            b->updateBoundary(1, direction);
+            this->boundaryPtr(i)->updateBoundary(1, direction);        
         }
 
         // second step
-        for(auto b:*this)
+        ForAllBoundaries(i,*this)
         {
-            b->updateBoundary(2, direction);
+            this->boundaryPtr(i)->updateBoundary(1, direction);
         }
-
+        
         if(direction == DataDirection::SlaveToMaster)
         {
             slaveToMasterUpdateIter_ = iter;
@@ -96,9 +88,9 @@ public:
 
     void fill(const T& val)
     {
-        for(auto& bf: *this)
+        ForAllBoundaries(i, *this)
         {
-            bf->fill(val);
+            this->boundaryPtr(i)->fill(val);
         }
     }
 

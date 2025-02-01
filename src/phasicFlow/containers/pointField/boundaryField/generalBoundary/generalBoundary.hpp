@@ -147,6 +147,9 @@ public:
     }
 
     const Time& time()const;
+
+    virtual
+    bool isActive()const = 0;
 	
 };
 

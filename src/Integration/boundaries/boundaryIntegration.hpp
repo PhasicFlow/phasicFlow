@@ -77,6 +77,11 @@ public:
         return true;
     }
 
+    bool isActive()const override
+    {
+        return false;
+    }
+    
     static
     uniquePtr<boundaryIntegration> create(
         const boundaryBase& boundary,

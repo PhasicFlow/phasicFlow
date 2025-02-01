@@ -74,6 +74,11 @@ public:
 		csPairContainerType &ppPairs,
 		csPairContainerType &pwPairs,
 		bool force = false) override;
+	
+	bool isActive()const override
+	{
+		return true;
+	}
 };
 
 }

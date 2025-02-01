@@ -103,13 +103,13 @@ INLINE_FUNCTION_HD bool
 operator>=(const triple<T>& opr1, const triple<T>& opr2);
 
 template<typename T>
-INLINE_FUNCTION iOstream&
+inline iOstream&
 operator<<(iOstream& str, const triple<T>& ov);
 
 template<typename T>
-INLINE_FUNCTION iIstream&
+inline iIstream&
 operator>>(iIstream& str, triple<T>& iv);
 
 template<typename T>
-INLINE_FUNCTION void
+inline void
 readIstream(iIstream& str, triple<T>& iv);
