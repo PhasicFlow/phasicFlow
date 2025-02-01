@@ -33,22 +33,10 @@ pFlow::boundaryPeriodic::boundaryPeriodic
 )
 :
 	boundaryBase(dict, bplane, internal, bndrs, thisIndex),
-	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex")),
-	extensionLength_(dict.getVal<real>("boundaryExtntionLengthRatio"))
+	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
 {
-	extensionLength_ = max(extensionLength_, static_cast<real>(0.1));
+	
 }
-
-pFlow::real pFlow::boundaryPeriodic::neighborLength() const
-{
-    return (1+extensionLength_)*neighborLengthIntoInternal();
-}
-
-pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
-{
-    return -extensionLength_*neighborLengthIntoInternal()*boundaryBase::boundaryPlane().normal();
-}
-
 
 bool pFlow::boundaryPeriodic::beforeIteration(
 	uint32 step, 

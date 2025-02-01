@@ -27,6 +27,10 @@ Licence:
 #include "pointStructure.hpp"
 #include "boundaryBaseKernels.hpp"
 
+std::array<pFlow::word,6> pFlow::boundaryBase::types_={"none","none","none","none","none","none"};
+std::array<pFlow::real, 6> pFlow::boundaryBase::neighborLengths_={0.01,0.01,0.01,0.01,0.01,0.01};
+std::array<pFlow::real, 6> pFlow::boundaryBase::boundaryExtntionLengthRatios_ = {0.1,0.1,0.1,0.1,0.1,0.1};
+
 void pFlow::boundaryBase::setSize(uint32 newSize)
 {
 	indexList_.resize(newSize);
@@ -232,14 +236,16 @@ pFlow::boundaryBase::boundaryBase(
       boundaryPlane_(bplane),
       indexList_(groupNames("indexList", dict.name())),
       indexListHost_(groupNames("hostIndexList", dict.name())),
-      neighborLength_(dict.getVal<real>("neighborLength")),
-      boundaryExtntionLengthRatio_(dict.getVal<real>("boundaryExtntionLengthRatio")),
       internal_(internal),
       boundaries_(bndrs),
       thisBoundaryIndex_(thisIndex),
-      neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo")),
-      type_(makeUnique<word>(dict.getVal<word>("type")))
+      neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo"))
 {
+	types_[thisBoundaryIndex_] = dict.getVal<word>("type");
+	
+	neighborLengths_[thisBoundaryIndex_] = dict.getValMax<real>("neighborLength",0.0);
+	
+	boundaryExtntionLengthRatios_[thisBoundaryIndex_] = dict.getValMax<real>("boundaryExtntionLengthRatio",0.1);
 
     isBoundaryMaster_ = thisProcessorNo() >= neighborProcessorNo();
 

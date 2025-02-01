@@ -32,11 +32,11 @@ class boundaryReflective
 {
 private:
 
-	real        restitution_ = 0.95;
+	real                      restitution_ = 0.95;
 
-    word        velocityName_{"velocity"};
+    inline static word        velocityName_{"velocity"};
 	
-    word        diameterName_{"diameter"};
+    inline static word        diameterName_{"diameter"};
 
 public:
 
