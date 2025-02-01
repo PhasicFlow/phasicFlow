@@ -98,6 +98,11 @@ public:
         return true;
     }
 
+    bool isActive()const override
+    {
+        return false;
+    }
+
     static uniquePtr<boundaryContactSearch> create(
         const dictionary &dict,
         const boundaryBase &boundary,

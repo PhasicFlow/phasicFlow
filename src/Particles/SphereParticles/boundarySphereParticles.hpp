@@ -65,6 +65,11 @@ public:
         return true;
     }
 
+    bool isActive()const override
+    {
+        return false;
+    }
+
     static
     uniquePtr<boundarySphereParticles> create(
         const boundaryBase &boundary,

@@ -39,7 +39,8 @@ pFlow::boundaryList::setExtendedDomain()
 	                  boundary(3).boundaryExtensionLength() +
 	                  boundary(5).boundaryExtensionLength();
 
-	extendedDomain_ = pStruct_.simDomain().extendThisDomain(lowerExt, upperExt);
+	extendedDomain_ = makeUnique<domain>(
+		pStruct_.simDomain().extendThisDomain(lowerExt, upperExt));
 }
 
 bool
@@ -66,7 +67,7 @@ pFlow::boundaryList::updateNeighborLists()
 	dist[4] = boundary(4).neighborLength();
 	dist[5] = boundary(5).neighborLength();
 
-	pStruct_.updateFlag(extendedDomain_, dist);
+	pStruct_.updateFlag(extendedDomain_(), dist);
 
 	const auto& maskD = pStruct_.activePointsMaskDevice();
 	boundary(0).setSize(maskD.leftSize());
@@ -88,8 +89,8 @@ pFlow::boundaryList::updateNeighborLists()
 	return true;
 }
 
-pFlow::boundaryList::boundaryList(pointStructure& pStruct)
-  : ListPtr<boundaryBase>(pStruct.simDomain().sizeOfBoundaries()),
+pFlow::boundaryList::boundaryList(pointStructure& pStruct): 
+	boundaryListPtr<boundaryBase>(),
     pStruct_(pStruct)
 {
 	const dictionary& dict= pStruct_.simDomain().thisBoundariesDict();
@@ -143,7 +144,7 @@ pFlow::boundaryList::createBoundaries()
 	if (listSet_)
 		return true;
 
-	for (auto i = 0; i < pStruct_.simDomain().sizeOfBoundaries(); i++)
+	ForAllBoundaries(i, *this)
 	{
 		this->set(
 		  i,
@@ -155,7 +156,9 @@ pFlow::boundaryList::createBoundaries()
 		    i
 		  )
 		);
+
 	}
+	
 	listSet_ = true;
 	setExtendedDomain();
 	return true;
@@ -197,7 +200,24 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 
 	while(callAgain.anyElement(true) && step <= 10u)
 	{
-		for(size_t i=0; i<6ul; i++)
+		ForAllBoundaries(i,*this)
+		{
+			if(callAgain[i])
+			{
+				if(! boundary(i).beforeIteration(
+					step, 
+					ti,
+					boundaryUpdate_,
+					iterBeforeBoundaryUpdate_,
+					callAgain[i]))
+				{
+					fatalErrorInFunction<<"error in performing beforeIteration for boundary"<<
+					boundary(i).name()<<" at step "<< step<<endl;
+					return false;
+				}
+			}
+		}
+		/*for(size_t i=0; i<6ul; i++)
 		{
 
 			if(callAgain[i])
@@ -214,21 +234,28 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 					return false;
 				}
 			}			
-		}
+		}*/
 
 		step++;
 	}
 	
-
-	for (auto bdry : *this)
+	ForAllBoundaries(i,*this)
+	{
+		boundary(i).updataBoundaryData(1);
+	}
+	/*for (auto bdry : *this)
 	{
 		bdry->updataBoundaryData(1);
-	}
+	}*/
 
-	for (auto bdry : *this)
+	ForAllBoundaries(i,*this)
+	{
+		boundary(i).updataBoundaryData(2);
+	}
+	/*for (auto bdry : *this)
 	{
 		bdry->updataBoundaryData(2);
-	}
+	}*/
 
 	return true;
 }
@@ -236,7 +263,16 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 bool
 pFlow::boundaryList::iterate(const timeInfo& ti, bool force)
 {
-	for (auto& bdry : *this)
+	ForAllBoundaries(i, *this)
+	{
+		if (!boundary(i).iterate(ti))
+		{
+			fatalErrorInFunction << "Error in iterate in boundary "
+			                     << boundary(i).name() << endl;
+			return false;
+		}
+	}
+	/*for (auto& bdry : *this)
 	{
 		if (!bdry->iterate(ti))
 		{
@@ -244,7 +280,7 @@ pFlow::boundaryList::iterate(const timeInfo& ti, bool force)
 			                     << bdry->name() << endl;
 			return false;
 		}
-	}
+	}*/
 	return true;
 }
 
@@ -257,7 +293,7 @@ pFlow::boundaryList::afterIteration(const timeInfo& ti, bool force)
 	int step = 1;
 	while(callAgain.anyElement(true)&& step <=10)
 	{
-		for(size_t i=0; i<6; i++)
+		ForAllBoundaries(i,*this)
 		{
 			if(callAgain[i])
 			{

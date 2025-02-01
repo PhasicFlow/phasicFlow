@@ -119,7 +119,7 @@ bool pFlow::boundaryBase::removeIndices
 	if( !this->notify(iter, t, dt, msgBndry, aList) )
 	{
 		fatalErrorInFunction<<"Error in notify operation in boundary "<< 
-		name_ <<endl;
+		name() <<endl;
 		return false;
 	}
 	
@@ -233,16 +233,16 @@ pFlow::boundaryBase::boundaryBase(
       indexList_(groupNames("indexList", dict.name())),
       indexListHost_(groupNames("hostIndexList", dict.name())),
       neighborLength_(dict.getVal<real>("neighborLength")),
-      // updateInetrval_(dict.getVal<uint32>("updateInterval")),
       boundaryExtntionLengthRatio_(dict.getVal<real>("boundaryExtntionLengthRatio")),
       internal_(internal),
       boundaries_(bndrs),
       thisBoundaryIndex_(thisIndex),
       neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo")),
-      isBoundaryMaster_(thisProcessorNo() >= neighborProcessorNo()),
-      name_(dict.name()),
-      type_(dict.getVal<word>("type"))
+      type_(makeUnique<word>(dict.getVal<word>("type")))
 {
+
+    isBoundaryMaster_ = thisProcessorNo() >= neighborProcessorNo();
+
 	unSyncLists();
 }
 

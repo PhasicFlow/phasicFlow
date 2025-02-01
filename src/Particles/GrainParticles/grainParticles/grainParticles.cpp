@@ -316,9 +316,10 @@ bool pFlow::grainParticles::iterate()
 			accelertion().deviceViewAll(),
 			rAcceleration().deviceViewAll()
 			);
-		for(auto& bndry:boundaryGrainParticles_)
+		
+		ForAllActiveBoundaries(i,boundaryGrainParticles_)
 		{
-			bndry->acceleration(ti, g);
+			boundaryGrainParticles_[i].acceleration(ti, g);
 		}
 	accelerationTimer_.end();
 	

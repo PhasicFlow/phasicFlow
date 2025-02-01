@@ -22,7 +22,7 @@ Licence:
 
 #include "domain.hpp"
 #include "boundaryBase.hpp"
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
 #include "timeInfo.hpp"
 #include "boundariesMask.hpp"
 
@@ -34,13 +34,11 @@ class pointStructure;
 
 class boundaryList
 :
-    public ListPtr<boundaryBase>
+    public boundaryListPtr<boundaryBase>
 {
 private:
 
 	//// - data members
-	pointStructure& pStruct_;
-
 	uint32 			neighborListUpdateInterval_;
 
 	uint32 			updateInterval_;
@@ -53,11 +51,13 @@ private:
 
 	bool 			iterBeforeBoundaryUpdate_;
 
-	domain 			extendedDomain_;
-
-	box				internalDomainBox_;
-
 	bool			listSet_ = false;
+
+	pointStructure&   pStruct_;
+
+	uniquePtr<domain> extendedDomain_;
+
+	box				  internalDomainBox_;
 
 	void setExtendedDomain();
 
@@ -94,13 +94,13 @@ public:
 	inline
 	auto& boundary(size_t i)
 	{
-		return ListPtr<boundaryBase>::operator[](i);
+		return boundaryListPtr<boundaryBase>::operator[](i);
 	}
 
 	inline
 	const auto& boundary(size_t i)const
 	{
-		return ListPtr<boundaryBase>::operator[](i);
+		return boundaryListPtr<boundaryBase>::operator[](i);
 	}
 
 	inline 
@@ -112,13 +112,13 @@ public:
 	inline
 	const auto& extendedDomain()const
 	{
-		return extendedDomain_;
+		return extendedDomain_();
 	}
 
 	inline
 	const auto& extendedDomainBox()const
 	{
-		return extendedDomain_.domainBox();
+		return extendedDomain_->domainBox();
 	}
 
 	box internalDomainBox()const;

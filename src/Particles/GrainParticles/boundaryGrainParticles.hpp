@@ -65,6 +65,11 @@ public:
         return true;
     }
 
+    bool isActive()const override
+    {
+        return false;
+    }
+    
     static
     uniquePtr<boundaryGrainParticles> create(
         const boundaryBase &boundary,

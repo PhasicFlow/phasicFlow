@@ -110,7 +110,7 @@ public:
 		return geometryMotion_;
 	}
 
-	ContactListType& ppPairs()
+	ContactListType& ppPairs() 
 	{
 		return ppPairs_();
 	}
@@ -168,6 +168,11 @@ public:
 		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;;
 		//notImplementedFunction;
 		return true;
+	}
+
+	bool isActive()const override
+	{
+		return false;
 	}
 
 	static

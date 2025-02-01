@@ -25,15 +25,12 @@ Licence:
 #include "message.hpp"
 
 pFlow::subscriber::subscriber(const subscriber & src)
-:
-	subName_(src.subName_)
 {
 }
 
 pFlow::subscriber::subscriber(subscriber && src)
 :
-	observerList_(std::move(src.observerList_)),
-	subName_(std::move(src.subName_))
+	observerList_(std::move(src.observerList_))
 {
 	
 	for(size_t i=0; i<observerList_.size(); i++)
@@ -47,13 +44,13 @@ pFlow::subscriber::subscriber(subscriber && src)
 
 pFlow::subscriber &pFlow::subscriber::operator=(const subscriber & rhs)
 {
-    this->subName_ = rhs.subName_;
+    //this->subName_ = rhs.subName_;
 	return *this;
 }
 
 pFlow::subscriber &pFlow::subscriber::operator=(subscriber && rhs)
 {
-    this->subName_ = std::move(rhs.subName_);
+    //this->subName_ = std::move(rhs.subName_);
 	this->observerList_ = std::move(rhs.observerList_);
 
 	for(size_t i=0; i<observerList_.size(); i++)

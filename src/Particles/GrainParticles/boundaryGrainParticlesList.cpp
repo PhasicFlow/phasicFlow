@@ -5,10 +5,10 @@ pFlow::boundaryGrainParticlesList::boundaryGrainParticlesList(
     grainParticles &prtcls
 )
 :
-    ListPtr(bndrs.size()), 
+    boundaryListPtr(), 
     boundaries_(bndrs)
 {
-    for(auto i=0; i<boundaries_.size(); i++)
+    ForAllBoundariesPtr(i, this)
     {
         this->set
         (
@@ -16,4 +16,5 @@ pFlow::boundaryGrainParticlesList::boundaryGrainParticlesList(
             boundaryGrainParticles::create(boundaries_[i], prtcls)
         );
     }
+    
 }

@@ -3,7 +3,7 @@
 #ifndef __boundaryGrainParticlesList_hpp__
 #define __boundaryGrainParticlesList_hpp__
 
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
 #include "boundaryList.hpp"
 #include "boundaryGrainParticles.hpp"
 
@@ -12,7 +12,7 @@ namespace pFlow
 
 class boundaryGrainParticlesList
 :
-    public ListPtr<boundaryGrainParticles>
+    public boundaryListPtr<boundaryGrainParticles>
 {
 private:
 
