@@ -34,35 +34,19 @@ template<typename BoundaryType>
 class boundaryListPtr 
 {
 private:
-	std::array<BoundaryType*,6> 		boundaries_;
+	std::array<BoundaryType*,6> 		baseBoundaries_;
 
 	std::bitset<6>						activeBoundaries_=0B000000;
 
 public:
 
 	boundaryListPtr():
-		boundaries_({nullptr, nullptr, nullptr, nullptr, nullptr, nullptr})
+		baseBoundaries_({nullptr, nullptr, nullptr, nullptr, nullptr, nullptr})
 	{}
 
-	void set(size_t i, uniquePtr<BoundaryType>&& ptr )
-	{
-		if( i > boundaries_.size() )
-		{
-			fatalErrorInFunction<<
-			"Out of range access of boundaryListPtr members. List size is "<<
-			size() << "and you are accessing "<< i << "\n";
-			fatalExit;
-		}
+	boundaryListPtr(const boundaryListPtr&)=delete;
 
-		if(boundaries_[i]) delete boundaries_[i];
-		boundaries_[i] = ptr.release();
-
-		if(boundaries_[i])
-		{
-			// query if this boundary active or not
-			activeBoundaries_.set(i,boundaries_[i]->isActive());	
-		}
-	}
+	boundaryListPtr(boundaryListPtr&&)=default;
 
 	~boundaryListPtr()
 	{
@@ -71,7 +55,7 @@ public:
 
 	void clear()
 	{
-		for(auto& bndry:boundaries_)
+		for(auto& bndry:baseBoundaries_)
 		{
 			if(bndry != nullptr)
 			{
@@ -82,16 +66,36 @@ public:
 		activeBoundaries_.reset();
 	}
 
+	void set(size_t i, uniquePtr<BoundaryType>&& ptr )
+	{
+		if( i > baseBoundaries_.size() )
+		{
+			fatalErrorInFunction<<
+			"Out of range access of boundaryListPtr members. List size is "<<
+			size() << "and you are accessing "<< i << "\n";
+			fatalExit;
+		}
+
+		if(baseBoundaries_[i]) delete baseBoundaries_[i];
+		baseBoundaries_[i] = ptr.release();
+
+		if(baseBoundaries_[i])
+		{
+			// query if this boundary active or not
+			activeBoundaries_.set(i,baseBoundaries_[i]->isActive());	
+		}
+	}
+
 	// - access to ith element
 	inline    
 	BoundaryType& operator[](size_t i)
 	{
-		if(boundaries_[i]== nullptr)
+		if(baseBoundaries_[i]== nullptr)
 		{
 			fatalErrorInFunction<<"Accessing nullptr element"<<endl;
 			fatalExit;
 		}
-		return *boundaries_[i];
+		return *(baseBoundaries_[i]);
 	}
 	
 	// - const access to ith element
@@ -99,34 +103,34 @@ public:
 	inline  
 	const BoundaryType& operator[](size_t i) const
 	{
-		if(boundaries_[i]== nullptr)
+		if(baseBoundaries_[i]== nullptr)
 		{
 			fatalErrorInFunction<<"Accessing nullptr element"<<endl;
 			fatalExit;
 		}
-		return *boundaries_[i];
+		return *(baseBoundaries_[i]);
 	}
 
 	inline
 	BoundaryType* boundaryPtr(size_t i)
 	{
-		if(boundaries_[i]== nullptr)
+		if(baseBoundaries_[i]== nullptr)
 		{
 			fatalErrorInFunction<<"Accessing nullptr element"<<endl;
 			fatalExit;
 		}
-		return boundaries_[i];
+		return baseBoundaries_[i];
 	}
 
 	inline
 	const BoundaryType* boundaryPtr(size_t i)const 
 	{
-		if(boundaries_[i]== nullptr)
+		if(baseBoundaries_[i]== nullptr)
 		{
 			fatalErrorInFunction<<"Accessing nullptr element"<<endl;
 			fatalExit;
 		}
-		return boundaries_[i];
+		return baseBoundaries_[i];
 	}
 
 	inline constexpr
@@ -178,7 +182,7 @@ public:
 
 }
 
-#define ForAllBoundaries(i,bndryList) for(size_t i = 0ul; i<(bndryList).size(); i++)
+#define ForAllBoundaries(i,bndryList) for(size_t i = 0ul; i<bndryList.size(); i++)
 #define ForAllBoundariesPtr(i,bndryList) for(size_t i = 0ul; i<bndryList->size(); i++)
 #define ForAllActiveBoundaries(i,bndryList) for(size_t i = bndryList.firstActive(); i<bndryList.size(); i=bndryList.nextActive(i))
 #define ForAllActiveBoundariesPtr(i,bndryList) for(size_t i = bndryList->firstActive(); i<bndryList->size(); i=bndryList->nextActive(i))

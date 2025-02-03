@@ -24,6 +24,11 @@ Licence:
 #include "observer.hpp"
 #include "message.hpp"
 
+pFlow::subscriber::subscriber(const word& name)
+:
+	observerList_(message::numEvents())
+{}
+
 pFlow::subscriber::subscriber(const subscriber & src)
 {
 }

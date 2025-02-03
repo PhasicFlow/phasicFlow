@@ -10,8 +10,8 @@ pFlow::boundarySphereInteractionList<CFModel, gMModel>::boundarySphereInteractio
 	boundaryListPtr<boundarySphereInteraction<CFModel,gMModel>>(),
 	boundaries_(sphPrtcls.pStruct().boundaries())
 {
-	
-	ForAllActiveBoundariesPtr(i, this)
+	output<<boundaries_.size()<<endl;
+	ForAllBoundariesPtr(i, this)
 	{
 		this->set(
 			i,
