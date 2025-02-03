@@ -88,7 +88,7 @@ int main( int argc, char* argv[] )
 
 		auto finalPos = pointPosition().getFinalPosition();
 
-		pStructPtr = pFlow::makeUnique<pFlow::pointStructure>(Control, finalPos);
+		pStructPtr = pFlow::makeUnique<pFlow::pointStructure>(Control, 0.0005, finalPos);
 
 
 		REPORT(1)<< "Created pStruct with "<< pStructPtr().size() << " points and capacity "<<
@@ -98,7 +98,7 @@ int main( int argc, char* argv[] )
     else
 	{
 		// read the content of pStruct from 0/pStructure
-		pStructPtr = pFlow::makeUnique<pFlow::pointStructure>(Control);
+		pStructPtr = pFlow::makeUnique<pFlow::pointStructure>(Control, 0.0005);
 
 	}
 

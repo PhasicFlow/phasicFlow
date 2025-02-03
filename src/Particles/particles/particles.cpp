@@ -18,22 +18,12 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "particles.hpp"
+#include "shape.hpp"
 
-pFlow::particles::particles(systemControl& control)
+pFlow::particles::particles(systemControl& control, const shape& shapes)
   : observer(defaultMessage_),
     demComponent("particles", control),
-    dynPointStruct_(control),
-    /*id_(
-      objectFile(
-        "id",
-        "",
-        objectFile::READ_IF_PRESENT,
-        objectFile::WRITE_ALWAYS
-      ),
-      dynPointStruct_,
-      static_cast<uint32>(-1),
-      static_cast<uint32>(-1)
-    ),*/
+    dynPointStruct_(control, shapes.maxBoundingSphere()),
     shapeIndex_(
       objectFile(
         "shapeIndex",

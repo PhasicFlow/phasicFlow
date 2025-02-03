@@ -57,7 +57,7 @@ bool pFlow::PFtoVTK::convertTimeFolderPointFields(
     filename = vtk.fileName().wordPath();
 
     REPORT(1);
-    auto pStruct = pointStructure(control);
+    auto pStruct = pointStructure(control, 0.0005);
 
     // get a list of files in this timeFolder;
 
@@ -146,7 +146,7 @@ bool pFlow::PFtoVTK::convertTimeFolderPointFieldsSelected(
     filename = vtk.fileName().wordPath();
 
     REPORT(1);
-    auto pStruct = pointStructure(control);
+    auto pStruct = pointStructure(control, 0.0005);
 
     // get a list of files in this timeFolder;
 

@@ -28,12 +28,14 @@ bool pFlow::simulationDomain::prepareBoundaryDicts()
 	
     dictionary& boundaries = this->subDict("boundaries");
 
-    real neighborLength = boundaries.getVal<real>("neighborLength");
-
 	real boundaryExtntionLengthRatio = 
         boundaries.getValOrSetMax("boundaryExtntionLengthRatio", static_cast<real>(0.1));
 	
-    uint32 updateInterval = 
+    real neighborLength = boundaries.getValOrSetMax<real>(
+		"neighborLength", 
+		(1+boundaryExtntionLengthRatio)*maxBoundingSphere_);
+
+	uint32 updateInterval = 
         boundaries.getValOrSetMax<uint32>("updateInterval", 1u);
 
     uint32 neighborListUpdateInterval = 
@@ -82,7 +84,7 @@ bool pFlow::simulationDomain::prepareBoundaryDicts()
     return true;
 }
 
-pFlow::simulationDomain::simulationDomain(systemControl &control)
+pFlow::simulationDomain::simulationDomain(systemControl &control, real maxBSphere)
     : fileDictionary(
           objectFile(
               domainFile__,
@@ -90,9 +92,10 @@ pFlow::simulationDomain::simulationDomain(systemControl &control)
               objectFile::READ_ALWAYS,
               objectFile::WRITE_NEVER),
           &control.settings()),
-      globalBox_(subDict("globalBox"))
+      globalBox_(subDict("globalBox")),
+	  maxBoundingSphere_(maxBSphere)
 {
-    if( !prepareBoundaryDicts() )
+	if( !prepareBoundaryDicts() )
     {
         fatalErrorInFunction<<
             "Error in preparing dictionaries for boundaries"<<endl;
@@ -118,16 +121,15 @@ pFlow::simulationDomain::boundaryPlane(uint32 i) const
 }
 
 pFlow::uniquePtr<pFlow::simulationDomain>
-pFlow::simulationDomain::create(systemControl& control)
+pFlow::simulationDomain::create(systemControl& control, real maxBSphere)
 {
 	word sType = angleBracketsNames(
         "simulationDomain", 
         pFlowProcessors().localRunTypeName());
 
-
 	if( systemControlvCtorSelector_.search(sType) )
 	{
-		return systemControlvCtorSelector_[sType] (control);
+		return systemControlvCtorSelector_[sType] (control, maxBSphere);
 	}
 	else
 	{

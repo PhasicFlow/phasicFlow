@@ -142,16 +142,11 @@ pFlow::grainParticles::getParticlesInfoFromShape(
 
 pFlow::grainParticles::grainParticles(
 	systemControl &control,
-	const property& prop
+	const grainShape& gShape
 )
 :
-	particles(control),
-	grains_
-	(
-		shapeFile__,
-		&control.caseSetup(),
-		prop
-	),
+	particles(control, gShape),
+	grains_(gShape),
 	propertyId_
 	(
 		objectFile

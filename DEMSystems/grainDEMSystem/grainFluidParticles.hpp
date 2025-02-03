@@ -59,7 +59,7 @@ protected:
 public:
 
 	/// construct from systemControl and property 
-	grainFluidParticles(systemControl &control, const property& prop);
+	grainFluidParticles(systemControl &control, const grainShape& grains);
 
 	~grainFluidParticles() override = default;
 	

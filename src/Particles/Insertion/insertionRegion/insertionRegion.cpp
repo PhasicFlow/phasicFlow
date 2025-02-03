@@ -24,6 +24,7 @@ Licence:
 #include "particles.hpp"
 #include "twoPartEntry.hpp"
 #include "types.hpp"
+#include "shape.hpp"
 
 namespace pFlow
 {

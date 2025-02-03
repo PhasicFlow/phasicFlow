@@ -57,7 +57,7 @@ public:
 
 	TypeInfo("dynamicPointStructure");
 
-	explicit dynamicPointStructure(systemControl& control);
+	explicit dynamicPointStructure(systemControl& control, real maxBSphere);
 
 	dynamicPointStructure(const dynamicPointStructure& ps) = delete;
 		

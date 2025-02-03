@@ -44,7 +44,7 @@ public:
 
 	TypeInfo("simulationDomain<regular>");
 
-	explicit regularSimulationDomain(systemControl& control);
+	explicit regularSimulationDomain(systemControl& control, real maxBsphere);
 
 	~regularSimulationDomain() final = default;
 

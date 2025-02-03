@@ -80,11 +80,12 @@ public:
 	//// - Constructors 
 
 		/// an empty pointStructure, good for reading from file 
-		explicit pointStructure(systemControl& control);
+		explicit pointStructure(systemControl& control, real maxBSphere);
 
 		/// construct from point positions, assume all points are active
 		pointStructure(
             systemControl& control,
+			real maxBSphere,
 			const realx3Vector& posVec);
 
 		pointStructure(const pointStructure&) = delete;

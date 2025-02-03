@@ -32,8 +32,8 @@ void pFlow::sphereFluidParticles::checkHostMemory()
 
 pFlow::sphereFluidParticles::sphereFluidParticles(
     systemControl &control,
-    const property &prop)
-    : sphereParticles(control, prop),
+    const sphereShape& shpShape)
+    : sphereParticles(control, shpShape),
       fluidForce_(
           objectFile(
               "fluidForce",

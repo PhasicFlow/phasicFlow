@@ -48,7 +48,7 @@ public:
 private:
 
 	/// reference to shapes
-	ShapeType              spheres_;
+	const ShapeType&              spheres_;
 
 	/// property id on device
 	uint32PointField_D     propertyId_;
@@ -124,7 +124,7 @@ protected:
 public:
 
 	/// construct from systemControl and property
-	sphereParticles(systemControl& control, const property& prop);
+	sphereParticles(systemControl& control, const sphereShape& shpShape);
 
 	~sphereParticles() override = default;
 

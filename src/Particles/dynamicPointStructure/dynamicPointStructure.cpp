@@ -24,10 +24,11 @@ Licence:
 
 pFlow::dynamicPointStructure::dynamicPointStructure
 (
-	systemControl& control
+	systemControl& control,
+	real maxBSphere
 )
 :
-	pointStructure(control),
+	pointStructure(control, maxBSphere),
 	velocity_
 	(
 		objectFile(

@@ -72,10 +72,11 @@ bool pFlow::regularSimulationDomain::setThisDomain()
 
 pFlow::regularSimulationDomain::regularSimulationDomain
 (
-    systemControl& control
+    systemControl& control,
+    real maxBsphere
 )
 :
-    simulationDomain(control)
+    simulationDomain(control, maxBsphere)
 {}
 
 bool pFlow::regularSimulationDomain::initialUpdateDomains(span<realx3> pointPos)

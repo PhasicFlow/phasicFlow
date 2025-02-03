@@ -35,8 +35,8 @@ void pFlow::grainFluidParticles::checkHostMemory()
 
 pFlow::grainFluidParticles::grainFluidParticles(
     systemControl &control,
-    const property &prop)
-    : grainParticles(control, prop),
+    const grainShape& grains)
+    : grainParticles(control, grains),
       fluidForce_(
           objectFile(
               "fluidForce",
