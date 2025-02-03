@@ -39,14 +39,14 @@ class subscriber
 private:
 
 	// - list of subsribed objectd that recieve updage messages 
-	mutable std::vector<List<observer*>> observerList_{message::numEvents()};
+	mutable std::vector<List<observer*>> observerList_;
 
 	//word subName_;
 
 public:
 
-	subscriber(const word& name)
-	{}
+	subscriber(const word& name);
+	
 
 	/// Copy constructor, only copies the name, not the list 
 	subscriber(const subscriber&);

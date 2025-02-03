@@ -1,17 +1,55 @@
 PF_cFlags="--description --help --version"
+AllTimeFolders=
+__getAllTime(){
+	files=( $(ls) )
+	deleteFiles=(settings caseSetup cleanThisCase VTK runThisCase stl postprocess postProcess) 
+	declare -A delk
+	for del in "${deleteFiles[@]}" ; do delk[$del]=1 ; done
+		# Tag items to remove, based on
+	for k in "${!files[@]}" ; do
+		[ "${delk[${files[$k]}]-}" ] && unset 'files[k]'
+	done
+		# Compaction
+	COMPREPLY=("${files[@]}")
+	AllTimeFolders="${files[@]}"
+}
+
+__getFields(){
+	__getAllTime
+	local -A unique_files=()
+
+	for dir in $AllTimeFolders; do
+	  # Check if the directory exists
+	  if [ ! -d "$dir" ]; then
+		continue  # Skip to the next directory
+	  fi
+		  
+	  files_in_dir=$(find "$dir" -maxdepth 1 -type f -printf '%f\n' | sort -u)
+	  
+	# Add filenames to the associative array (duplicates will be overwritten)
+	  while IFS= read -r filename; do
+		unique_files["$filename"]=1 # Just the key is important, value can be anything
+	  done <<< "$files_in_dir"
+	  
+	done
+	COMPREPLY=("${!unique_files[@]}")
+	AllTimeFolders=
+}
 
 _pFlowToVTK(){
-    if [ "$3" == "--time" ]; then
-      COMPREPLY=( $(ls) )
+    if [ "$3" == "--time" ]  ; then
+        __getAllTime
+    elif [ "$3" == "--fields" ]; then 
+    	__getFields
     else
-      COMPREPLY=( $(compgen -W "$PF_cFlags --binary --no-geometry --no-particles --out-folder --time --separate-surfaces --fields" -- "$2") )
+        COMPREPLY=( $(compgen -W "$PF_cFlags --binary --no-geometry --no-particles --out-folder --time --separate-surfaces --fields" -- "$2") )
     fi
 }
 complete -F _pFlowToVTK pFlowToVTK
 
 _postprocessPhasicFlow(){
     if [ "$3" == "--time" ]; then
-      COMPREPLY=( $(ls) )
+      __getAllTime
     else
       COMPREPLY=( $(compgen -W "$PF_cFlags --out-folder --time --zeroFolder" -- "$2") )
     fi

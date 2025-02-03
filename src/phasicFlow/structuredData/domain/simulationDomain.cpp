@@ -75,7 +75,7 @@ bool pFlow::simulationDomain::prepareBoundaryDicts()
             return false;
 		}
 
-		bDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+		bDict.addOrKeep("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
 
 	}
 

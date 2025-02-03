@@ -69,9 +69,6 @@ private:
 	/// list of particles indieces on host
 	mutable uint32Vector_H indexListHost_;
 
-	/// The length defined for creating neighbor list
-	real                   neighborLength_;
-
 	/// device and host list are sync
 	mutable bool           listsSync_ = false;
 
@@ -80,9 +77,6 @@ private:
 	bool 				   iterBeforeUpdate_ = false;
 
 	bool                   isBoundaryMaster_;
-
-	/// the extra boundary extension beyound actual limits of boundary 
-	real 				   boundaryExtntionLengthRatio_;
 
 	/// a reference to internal points
 	internalPoints&        internal_;
@@ -95,10 +89,21 @@ private:
 
 	int                    neighborProcessorNo_;
 
-	uniquePtr<word>        type_;
+	/// The length defined for creating neighbor list
+	static std::array<real, 6> neighborLengths_;
+
+	static std::array<word, 6> types_;
 
 protected:
 	
+	/// the extra boundary extension beyound actual limits of the physical domain 
+	static std::array<real, 6> boundaryExtntionLengthRatios_;
+
+	real boundaryExtntionLengthRatio()const
+	{
+		return boundaryExtntionLengthRatios_[thisBoundaryIndex_];
+	}
+
 	/// @brief Set the size of indexList. 
 	/// It is virtual to let derived classed to be aware of 
 	/// the fact that the size of boundary points has been changed.
@@ -212,33 +217,31 @@ public:
 
 	/// The length from boundary plane into the domain 
 	/// where beyond that distance internal points exist.
-	/// By conventions is it always equal to neighborLength_  
+	/// By conventions is it always equal to neighborLengths_[i]  
 	inline
 	real neighborLengthIntoInternal()const
 	{
-		return neighborLength_;
+		return neighborLengths_[thisBoundaryIndex_];
 	}
 
 	/// The distance length from boundary plane 
 	/// where neighbor particles still exist in that distance. 
 	/// This length may be modified in each boundary type 
 	/// as required. In this case the boundaryExtensionLength
-	/// method should also be modified accordingly. 
-	virtual 
+	/// method should also be modified accordingly.  
 	real neighborLength()const
 	{
-		return (1+boundaryExtntionLengthRatio_)*neighborLength_;
+		return (1+boundaryExtntionLengthRatio())*neighborLengthIntoInternal();
 	}
 
 	/// The extention length (in vector form) for the boundary
 	/// as required by  each boundary type. It is allowed for 
 	/// each boundary type to be extended outward to allow 
 	/// particles to stay more in its list before being removed 
-	/// from its list. 
-	virtual 
+	/// from its list.  
 	realx3 boundaryExtensionLength()const
 	{
-		return -boundaryExtntionLengthRatio_*neighborLength_ * boundaryPlane_.normal();
+		return -boundaryExtntionLengthRatio()*neighborLengthIntoInternal() * boundaryPlane_.normal();
 	}
 
 	/// Is this iter the right time for updating bounday list
@@ -257,7 +260,7 @@ public:
 	inline
 	const word& type()const
 	{
-		return type_();
+		return types_[thisBoundaryIndex_];
 	}
 
 	inline

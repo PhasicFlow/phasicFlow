@@ -144,7 +144,7 @@ pFlow::boundaryList::createBoundaries()
 	if (listSet_)
 		return true;
 
-	ForAllBoundaries(i, *this)
+	ForAllBoundariesPtr(i, this)
 	{
 		this->set(
 		  i,
@@ -200,7 +200,7 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 
 	while(callAgain.anyElement(true) && step <= 10u)
 	{
-		ForAllBoundaries(i,*this)
+		ForAllBoundariesPtr(i,this)
 		{
 			if(callAgain[i])
 			{
@@ -239,7 +239,7 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 		step++;
 	}
 	
-	ForAllBoundaries(i,*this)
+	ForAllBoundariesPtr(i,this)
 	{
 		boundary(i).updataBoundaryData(1);
 	}
@@ -248,7 +248,7 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 		bdry->updataBoundaryData(1);
 	}*/
 
-	ForAllBoundaries(i,*this)
+	ForAllBoundariesPtr(i,this)
 	{
 		boundary(i).updataBoundaryData(2);
 	}
@@ -263,7 +263,7 @@ pFlow::boundaryList::beforeIteration(const timeInfo& ti, bool force)
 bool
 pFlow::boundaryList::iterate(const timeInfo& ti, bool force)
 {
-	ForAllBoundaries(i, *this)
+	ForAllBoundariesPtr(i, this)
 	{
 		if (!boundary(i).iterate(ti))
 		{
@@ -293,7 +293,7 @@ pFlow::boundaryList::afterIteration(const timeInfo& ti, bool force)
 	int step = 1;
 	while(callAgain.anyElement(true)&& step <=10)
 	{
-		ForAllBoundaries(i,*this)
+		ForAllBoundariesPtr(i,this)
 		{
 			if(callAgain[i])
 			{

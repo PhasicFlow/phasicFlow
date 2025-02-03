@@ -93,7 +93,7 @@ bool pFlow::contactSearch::boundaryBroadSearch
 		bTimer_.start();
 		for(uint32 i=0u; i<6u; i++)
 		{
-			output<<" boundarySearch "<< i <<" for iter "<< ti.iter()<<endl;
+			//output<<" boundarySearch "<< i <<" for iter "<< ti.iter()<<endl;
 			if(!BoundaryBroadSearch(
 				i,
 				ti,

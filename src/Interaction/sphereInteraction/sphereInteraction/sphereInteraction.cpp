@@ -145,6 +145,11 @@ pFlow::sphereInteraction<cFM,gMM, cLT>::sphereInteraction
 	{
 		fatalExit;
 	}
+
+	for(uint32 i=0; i<6; i++)
+	{
+		activeBoundaries_[i] = boundaryInteraction_[i].ppPairsAllocated();
+	}
 }
 
 template<typename cFM,typename gMM,template <class, class, class> class cLT>
@@ -190,10 +195,14 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 		ComputationTimer().start();
 
 		ForAllActiveBoundaries(i, boundaryInteraction_)
+		//for(size_t i=0; i<6; i++)
 		{
-			auto& BI = boundaryInteraction_[i];
-			BI.ppPairs().beforeBroadSearch();
-			BI.pwPairs().beforeBroadSearch();
+			if(activeBoundaries_[i])
+			{
+				auto& BI = boundaryInteraction_[i];
+				BI.ppPairs().beforeBroadSearch();
+				BI.pwPairs().beforeBroadSearch();
+			}
 		}
 
 		ComputationTimer().end();
@@ -214,18 +223,22 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 	}
 	
 	ForAllActiveBoundaries(i, boundaryInteraction_)
+	//for(size_t i=0; i<6; i++)
 	{
-		auto& BI = boundaryInteraction_[i];
-		if(!contactSearchRef.boundaryBroadSearch(
-			i,
-			ti,
-			BI.ppPairs(),
-			BI.pwPairs())
-		)
+		if(activeBoundaries_[i])
 		{
-			fatalErrorInFunction<<
-			"failed to perform broadSearch for boundary index "<<i<<endl;
-			return false;
+			auto& BI = boundaryInteraction_[i];
+			if(!contactSearchRef.boundaryBroadSearch(
+				i,
+				ti,
+				BI.ppPairs(),
+				BI.pwPairs())
+			)
+			{
+				fatalErrorInFunction<<
+				"failed to perform broadSearch for boundary index "<<i<<endl;
+				return false;
+			}
 		}
 	}
 	ComputationTimer().end();
@@ -245,11 +258,15 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 		contactListMangementBoundaryTimer_.resume();
 		ComputationTimer().start();
 		
-		ForAllActiveBoundaries(i, boundaryInteraction_ )
+		ForAllActiveBoundaries(i, boundaryInteraction_)
+		//for(size_t i=0; i<6; i++)
 		{
-			auto& BI = boundaryInteraction_[i];
-			BI.ppPairs().afterBroadSearch();
-			BI.pwPairs().afterBroadSearch();
+			if(activeBoundaries_[i])
+			{
+				auto& BI = boundaryInteraction_[i];
+				BI.ppPairs().afterBroadSearch();
+				BI.pwPairs().afterBroadSearch();
+			}
 		}
 
 		ComputationTimer().end();
@@ -265,6 +282,7 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 	while(requireStep.anyElement(true) && step <= 10)
 	{
 		ForAllBoundaries(i, boundaryInteraction_)
+		//for(size_t i=0; i<6; i++)
 		{
 			if(requireStep[i] )
 			{
@@ -304,6 +322,7 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::iterate()
 	while( requireStep.anyElement(true) && step < 20 )
 	{
 		ForAllBoundaries(i, boundaryInteraction_)
+		//for(size_t i=0; i<6; i++)
 		{
 			if(requireStep[i])
 			{

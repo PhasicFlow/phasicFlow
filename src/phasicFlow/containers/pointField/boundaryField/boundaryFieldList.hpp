@@ -53,7 +53,7 @@ public:
         boundaryListPtr<BoundaryFieldType>(),
         boundaries_(boundaries)
     {
-        ForAllBoundaries(i, *this)
+        ForAllBoundariesPtr(i, this)
         {
             this->set
             (
@@ -69,13 +69,13 @@ public:
             && slaveToMasterUpdateIter_ == iter) return;
         
         // first step
-        ForAllBoundaries(i,*this)
+        ForAllBoundariesPtr(i,this)
         {
             this->boundaryPtr(i)->updateBoundary(1, direction);        
         }
 
         // second step
-        ForAllBoundaries(i,*this)
+        ForAllBoundariesPtr(i,this)
         {
             this->boundaryPtr(i)->updateBoundary(1, direction);
         }
@@ -88,7 +88,7 @@ public:
 
     void fill(const T& val)
     {
-        ForAllBoundaries(i, *this)
+        ForAllBoundariesPtr(i, this)
         {
             this->boundaryPtr(i)->fill(val);
         }

@@ -33,22 +33,10 @@ pFlow::boundaryPeriodic::boundaryPeriodic
 )
 :
 	boundaryBase(dict, bplane, internal, bndrs, thisIndex),
-	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex")),
-	extensionLength_(dict.getVal<real>("boundaryExtntionLengthRatio"))
+	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
 {
-	extensionLength_ = max(extensionLength_, static_cast<real>(0.1));
+	
 }
-
-pFlow::real pFlow::boundaryPeriodic::neighborLength() const
-{
-    return (1+extensionLength_)*neighborLengthIntoInternal();
-}
-
-pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
-{
-    return -extensionLength_*neighborLengthIntoInternal()*boundaryBase::boundaryPlane().normal();
-}
-
 
 bool pFlow::boundaryPeriodic::beforeIteration(
 	uint32 step, 
@@ -59,66 +47,69 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 {
 	if(step==1)
 	{
+		boundaryBase::beforeIteration(step, ti, updateIter, iterBeforeUpdate, callAgain);
 		callAgain = true;
+		return true;
 	}
-	else
+
+	
+	callAgain = false;
+	// nothing have to be done
+	if(empty())
 	{
-		callAgain = false;
-		// nothing have to be done
-		if(empty())
+		return true;
+	}
+	//output<<this->thisBoundaryIndex()<<"  ->"<<ti.iter()<<" update called\n";
+	if(!performBoundarytUpdate())
+	{
+		return true;
+	}
+
+	//output<<this->thisBoundaryIndex()<<"  ->"<< ti.iter()<<" update is being performed \n";
+	uint32 s = size();
+	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
+	transferFlags.fill(0u);
+	
+	auto points = thisPoints();
+	auto p = boundaryPlane().infPlane();
+	const auto & transferD = transferFlags.deviceViewAll();
+	
+	uint32 numTransfered = 0;
+
+	Kokkos::parallel_reduce
+	(
+		"boundaryPeriodic::beforeIteration",
+		deviceRPolicyStatic(0u,s),
+		LAMBDA_HD(uint32 i, uint32& trnasToUpdate)
 		{
-			return true;
-		}
-
-		if(!performBoundarytUpdate())
-		{
-			return true;
-		}
-
-		uint32 s = size();
-		uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
-		transferFlags.fill(0u);
-		
-		auto points = thisPoints();
-		auto p = boundaryPlane().infPlane();
-		const auto & transferD = transferFlags.deviceViewAll();
-		
-		uint32 numTransfered = 0;
-
-		Kokkos::parallel_reduce
-		(
-			"boundaryPeriodic::beforeIteration",
-			deviceRPolicyStatic(0u,s),
-			LAMBDA_HD(uint32 i, uint32& trnasToUpdate)
+			if(p.pointInNegativeSide(points(i)))
 			{
-				if(p.pointInNegativeSide(points(i)))
-				{
-					transferD(i)=1;
-					trnasToUpdate++;
-				}
-			}, 
-			numTransfered
-		);
+				transferD(i)=1;
+				trnasToUpdate++;
+			}
+		}, 
+		numTransfered
+	);
 
-		// no point to be transfered 
-		if(numTransfered == 0 )
-		{
-			return true;
-		}
-		
-		// to obtain the transfer vector 
-		realx3 transferVec = displacementVectroToMirror();
-		
-		return transferPointsToMirror
-		(
-			numTransfered,
-			transferFlags, 
-			mirrorBoundaryIndex(), 
-			transferVec
-		);
+	// no point to be transfered 
+	if(numTransfered == 0 )
+	{
+		return true;
 	}
 	
+	// to obtain the transfer vector 
+	realx3 transferVec = displacementVectroToMirror();
+	
+	return transferPointsToMirror
+	(
+		numTransfered,
+		transferFlags, 
+		mirrorBoundaryIndex(), 
+		transferVec
+	);
+	
 	return true;
+	
 	
 }
 
