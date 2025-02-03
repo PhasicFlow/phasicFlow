@@ -307,16 +307,11 @@ pFlow::sphereParticles::getParticlesInfoFromShape(
 
 pFlow::sphereParticles::sphereParticles(
 	systemControl &control,
-	const property& prop
+	const sphereShape& shpShape
 )
 :
-	particles(control),
-	spheres_
-	(
-		shapeFile__,
-		&control.caseSetup(),
-		prop
-	),
+	particles(control, shpShape),
+	spheres_(shpShape),
 	propertyId_
 	(
 		objectFile

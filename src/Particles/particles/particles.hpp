@@ -25,10 +25,13 @@ PARTICULAR PURPOSE.
 #include "demComponent.hpp"
 #include "dynamicPointStructure.hpp"
 #include "particleIdHandler.hpp"
-#include "shape.hpp"
+//#include "shape.hpp"
 
 namespace pFlow
 {
+
+
+class shape;
 
 class particles
   : public observer
@@ -96,7 +99,7 @@ public:
 	// type info
 	TypeInfo("particles");
 
-	explicit particles(systemControl& control);
+	explicit particles(systemControl& control, const shape& shapes);
 
 	inline const auto& dynPointStruct() const
 	{

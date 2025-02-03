@@ -37,7 +37,7 @@ private:
   	const property& 	property_; 
 
 	/// list of property ids of shapes (index)
-	uint32Vector			shapePropertyIds_;
+	uint32Vector		shapePropertyIds_;
 
 	/// list of material names 
 	wordVector 			materialNames_;

@@ -66,7 +66,7 @@ protected:
 public:
 
 	/// construct from systemControl and property 
-	sphereFluidParticles(systemControl &control, const property& prop);
+	sphereFluidParticles(systemControl &control, const sphereShape& shpShape);
 	
 	/// before iteration step 
 	bool beforeIteration() override;

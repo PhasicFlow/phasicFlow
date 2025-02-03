@@ -74,13 +74,19 @@ pFlow::sphereDEMSystem::sphereDEMSystem(
 	property_ = makeUnique<property>(
 		propertyFile__,
     	Control().caseSetup().path());
+		
 
 	REPORT(0)<< "\nCreating surface geometry for sphereDEMSystem . . . "<<END_REPORT;
 	geometry_ = geometry::create(Control(), Property());
 
+	REPORT(0)<<"Reading shapes dictionary..."<<END_REPORT;
+	spheres_ = makeUnique<sphereShape>(
+		pFlow::shapeFile__, 
+		&Control().caseSetup(), 
+		Property());
 
 	REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
-	particles_ = makeUnique<sphereFluidParticles>(Control(), Property());
+	particles_ = makeUnique<sphereFluidParticles>(Control(), spheres_());
 
 
 	insertion_ = makeUnique<sphereInsertion>( 

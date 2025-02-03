@@ -92,7 +92,8 @@ bool pFlow::pointStructure::initializePoints(const PointsTypeHost &points)
 
 pFlow::pointStructure::pointStructure
 (
-    systemControl& control
+    systemControl& control, 
+    real maxBSphere
 )
 :
     IOobject
@@ -111,7 +112,7 @@ pFlow::pointStructure::pointStructure
   	internalPoints(),
 	simulationDomain_
 	(
-		simulationDomain::create(control)
+		simulationDomain::create(control, maxBSphere)
 	),
     //pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
@@ -137,6 +138,7 @@ pFlow::pointStructure::pointStructure
 
 pFlow::pointStructure::pointStructure(
     systemControl& control,
+    real maxBSphere, 
     const realx3Vector &posVec)
 :
 	IOobject
@@ -155,7 +157,7 @@ pFlow::pointStructure::pointStructure(
   	internalPoints(),
 	simulationDomain_
 	(
-		simulationDomain::create(control)
+		simulationDomain::create(control, maxBSphere)
 	),
     //pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_

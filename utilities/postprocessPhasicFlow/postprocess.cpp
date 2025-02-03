@@ -65,7 +65,7 @@ bool pFlow::postprocess::processTimeFolder(real time, const word& tName, const f
 	control_.time().setTime(time);
 
 	REPORT(1)<<"Reading pointStructure"<<END_REPORT;
-	pointStructure pStruct(control_);
+	pointStructure pStruct(control_, 0.0005);
 
 	// first delete the object to remove fields from repository 
 	pointToCell_.reset(nullptr);

@@ -78,9 +78,14 @@ pFlow::grainDEMSystem::grainDEMSystem(
 	REPORT(0)<< "\nCreating surface geometry for grainDEMSystem . . . "<<END_REPORT;
 	geometry_ = geometry::create(Control(), Property());
 
+	REPORT(0)<<"Reading shape dictionary ..."<<END_REPORT;
+	grains_ = makeUnique<grainShape>(
+		pFlow::shapeFile__,
+		&Control().caseSetup(),
+		Property() );	
 
 	REPORT(0)<<"\nReading grain particles . . ."<<END_REPORT;
-	particles_ = makeUnique<grainFluidParticles>(Control(), Property());
+	particles_ = makeUnique<grainFluidParticles>(Control(), grains_());
 
 
 	insertion_ = makeUnique<grainInsertion>( 

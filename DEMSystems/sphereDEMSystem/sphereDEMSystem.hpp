@@ -46,6 +46,8 @@ protected:
 
 	uniquePtr<geometry> 			geometry_ = nullptr;
 
+	uniquePtr<sphereShape> 			spheres_  = nullptr;
+
 	uniquePtr<sphereFluidParticles> particles_ = nullptr;
 
 	uniquePtr<sphereInsertion> 		insertion_ = nullptr;

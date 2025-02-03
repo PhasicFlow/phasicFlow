@@ -44,6 +44,7 @@ private:
 	/// @brief acutal limits of the global box of  simulation
 	box 			globalBox_;
 
+	real 			maxBoundingSphere_;
 	static constexpr uint32 sizeOfBoundaries_ = 6;
 
 	static 
@@ -70,7 +71,7 @@ public:
 	TypeInfo("simulationDomain");
 
 	/// Constrcut from components 
-	explicit simulationDomain(systemControl& control);
+	explicit simulationDomain(systemControl& control, real maxBSphere);
 	
 	/// Destructor 
 	~simulationDomain() override = default;
@@ -80,8 +81,8 @@ public:
 	(
 		simulationDomain,
 		systemControl,
-		(systemControl& control),
-		(control)	
+		(systemControl& control, real maxBSphere),
+		(control, maxBSphere)	
 	);
 
 	const auto& globalBox()const
@@ -189,7 +190,7 @@ public:
 	const plane& boundaryPlane(uint32 i)const;
 	
 	static
-	uniquePtr<simulationDomain> create(systemControl& control);
+	uniquePtr<simulationDomain> create(systemControl& control, real maxBSphere);
 
 	/// @brief  Boundary name based on boundary index 
 	/// @param i boundary index (range from 0 to 5) 

@@ -46,6 +46,8 @@ protected:
 
 	uniquePtr<geometry> 			geometry_ = nullptr;
 
+	uniquePtr<grainShape> 			grains_   = nullptr;
+
 	uniquePtr<grainFluidParticles>  particles_ = nullptr;
 
 	uniquePtr<grainInsertion> 		insertion_ = nullptr;

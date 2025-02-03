@@ -48,7 +48,7 @@ public:
 private:
 
 	/// reference to shapes
-	ShapeType              grains_;
+	const ShapeType&       grains_;
 
 	/// property id on device
 	uint32PointField_D     propertyId_;
@@ -121,7 +121,7 @@ protected:
 public:
 
 	/// construct from systemControl and property
-	grainParticles(systemControl& control, const property& prop);
+	grainParticles(systemControl& control, const grainShape& gShape);
 
 	~grainParticles() override = default;
 
