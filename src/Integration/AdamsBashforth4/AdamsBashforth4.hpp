@@ -103,17 +103,13 @@ public:
 			real dt, 
 			pointStructure& pStruct, 
 			realx3PointField_D& vel) override;
-
-		bool setInitialVals(
-			const int32IndexContainer& newIndices,
-			const realx3Vector& y) override;
-
-		bool needSetInitialVals()const override
-		{
-			return false;
-		}
-
 		
+		bool hearChanges
+		(
+			const timeInfo& ti,
+			const message& msg, 
+			const anyList& varList
+		) override;
 
 };
 

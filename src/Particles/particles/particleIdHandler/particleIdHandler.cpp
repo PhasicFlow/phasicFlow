@@ -41,16 +41,14 @@ pFlow::particleIdHandler::particleIdHandler(pointStructure& pStruct)
 
 bool
 pFlow::particleIdHandler::hearChanges(
-  real           t,
-  real           dt,
-  uint32         iter,
+  const timeInfo& ti,
   const message& msg,
   const anyList& varList
 )
 {
-	if(msg.equivalentTo(message::ITEM_INSERT))
+	if(msg.equivalentTo(message::ITEMS_INSERT))
 	{
-		const word eventName = message::eventName(message::ITEM_INSERT);
+		const word eventName = message::eventName(message::ITEMS_INSERT);
 
 		const auto& indices = varList.getObject<uint32IndexContainer>(
 			eventName);
@@ -66,7 +64,7 @@ pFlow::particleIdHandler::hearChanges(
 	}
 	else
 	{
-		return uint32PointField_D::hearChanges(t,dt,iter, msg,varList);
+		return uint32PointField_D::hearChanges(ti, msg, varList);
 	}
 }
 

@@ -248,7 +248,7 @@ pFlow::grainParticles::grainParticles(
 			"rVelocity",
 			dynPointStruct(),
 			intMethod,
-			rVelocity_.field()
+			rAcceleration_.field()
 		);
 
 	if( !rVelIntegration_ )
@@ -275,7 +275,7 @@ bool pFlow::grainParticles::beforeIteration()
 	particles::beforeIteration();
 	intPredictTimer_.start();
 		auto dt = this->dt();
-		dynPointStruct().predict(dt, accelertion());
+		dynPointStruct().predict(dt);
 		rVelIntegration_().predict(dt,rVelocity_, rAcceleration_);
 	intPredictTimer_.end();
 
@@ -296,8 +296,8 @@ bool pFlow::grainParticles::beforeIteration()
 bool pFlow::grainParticles::iterate() 
 {
 
-	timeInfo ti = TimeInfo();
-	realx3 g = control().g();
+	const timeInfo ti = TimeInfo();
+	const realx3 g = control().g();
 
 	particles::iterate();
 	accelerationTimer_.start();
@@ -308,7 +308,7 @@ bool pFlow::grainParticles::iterate()
 			I().deviceViewAll(),
 			contactTorque().deviceViewAll(),
 			dynPointStruct().activePointsMaskDevice(),
-			accelertion().deviceViewAll(),
+			acceleration().deviceViewAll(),
 			rAcceleration().deviceViewAll()
 			);
 		
@@ -320,12 +320,12 @@ bool pFlow::grainParticles::iterate()
 	
 	intCorrectTimer_.start();
 	
-		if(!dynPointStruct().correct(dt(), accelertion()))
+		if(!dynPointStruct().correct(ti.dt()))
 		{
 			return false;
 		}
 		if(!rVelIntegration_().correct(
-			dt(), 
+			ti.dt(), 
 			rVelocity_, 
 			rAcceleration_))
 		{

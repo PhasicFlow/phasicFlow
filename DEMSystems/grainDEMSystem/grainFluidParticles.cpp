@@ -67,7 +67,7 @@ bool pFlow::grainFluidParticles::beforeIteration()
 
 bool pFlow::grainFluidParticles::iterate() 
 {
-
+	const auto ti = this->TimeInfo();
 	accelerationTimer().start();
 		pFlow::grainFluidParticlesKernels::acceleration(
 			control().g(),
@@ -78,16 +78,16 @@ bool pFlow::grainFluidParticles::iterate()
 			contactTorque().deviceViewAll(),
 			fluidTorque_.deviceViewAll(),
 			pStruct().activePointsMaskDevice(),
-			accelertion().deviceViewAll(),
+			acceleration().deviceViewAll(),
 			rAcceleration().deviceViewAll()
 			);
 	accelerationTimer().end();
 	
 	intCorrectTimer().start();
 	
-		dynPointStruct().correct(this->dt(), accelertion());
+		dynPointStruct().correct(ti.dt());
 	
-		rVelIntegration().correct(this->dt(), rVelocity(), rAcceleration());
+		rVelIntegration().correct(ti.dt(), rVelocity(), rAcceleration());
 	
 	intCorrectTimer().end();
 	

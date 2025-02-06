@@ -42,6 +42,9 @@ private:
 
 	realx3PointField_D  	velocity_;
 
+	/// acceleration on device
+	realx3PointField_D      acceleration_;
+
 	uniquePtr<integration>  integrationPos_ = nullptr;
 
 	uniquePtr<integration>  integrationVel_ = nullptr;
@@ -86,6 +89,18 @@ public:
 		return velocity_;
 	}
 
+	inline 
+	const realx3PointField_D& acceleration()const
+	{
+		return acceleration_;
+	}
+
+	inline 
+	realx3PointField_D& acceleration()
+	{
+		return acceleration_;
+	}
+
 	/// In the time loop before iterate
 	bool beforeIteration() override;
 
@@ -96,10 +111,10 @@ public:
 	bool afterIteration()override;
 	
 	/// prediction step (if any), is called in beforeIteration	
-	bool predict(real dt, realx3PointField_D& acceleration);
+	bool predict(real dt);
 
 	/// correction step, is called in iterate 
-	bool correct(real dt, realx3PointField_D& acceleration);
+	bool correct(real dt);
 
 };
 

@@ -154,18 +154,17 @@ public:
 
 	bool hearChanges
 	(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
     	const anyList& varList
 	) override
     {
-		
-		pOutput<<"Function (hearChanges in boundarySphereInteractions)is not implmented Message "<<
-		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;;
-		//notImplementedFunction;
-		return true;
+		if(msg.equivalentTo(message::BNDR_RESET))
+		{
+			return true;
+		}
+		fatalErrorInFunction<<"Event "<< msg.eventNames() << " is not handled !"<<endl;
+		return false;
 	}
 
 	bool isActive()const override

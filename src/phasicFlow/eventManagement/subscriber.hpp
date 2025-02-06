@@ -68,6 +68,7 @@ public:
 
 	virtual bool unsubscribe(observer* obsevr)const;
 
+	/// TODO: remove this API from thie class 
 	bool notify(
 		uint32 iter,
 		real t,

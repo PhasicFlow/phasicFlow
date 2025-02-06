@@ -45,9 +45,6 @@ private:
 	/// shape index of each particle 
 	uint32PointField_D           shapeIndex_;
 
-	/// acceleration on device
-	realx3PointField_D           accelertion_;
-
 	/// contact force field
 	realx3PointField_D           contactForce_;
 
@@ -60,7 +57,7 @@ private:
 	Timer 						 baseFieldBoundaryUpdateTimer_;
 
 	/// messages for this objects
-	static inline const message  defaultMessage_{ message::DEFAULT };
+	static inline const message  defaultMessage_= message::Empty();
 
 protected:
 
@@ -156,14 +153,14 @@ public:
 		return dynPointStruct_.velocity();
 	}
 
-	inline const auto& accelertion() const
+	inline const auto& acceleration() const
 	{
-		return accelertion_;
+		return dynPointStruct_.acceleration();
 	}
 
-	inline auto& accelertion()
+	inline auto& acceleration()
 	{
-		return accelertion_;
+		return dynPointStruct_.acceleration();
 	}
 
 	inline auto& contactForce()

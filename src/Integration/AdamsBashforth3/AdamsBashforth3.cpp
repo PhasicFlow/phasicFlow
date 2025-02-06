@@ -184,35 +184,20 @@ bool pFlow::AdamsBashforth3::correctPStruct(
 	return success;
 }
 
-
-bool pFlow::AdamsBashforth3::setInitialVals(
-	const int32IndexContainer& newIndices,
-	const realx3Vector& y)
+bool pFlow::AdamsBashforth3::hearChanges
+(
+	const timeInfo &ti, 
+	const message &msg, 
+	const anyList &varList
+)
 {
-	return true;
+	if(msg.equivalentTo(message::ITEMS_INSERT))
+	{
+		return insertValues(varList, initialValField().deviceViewAll(), dy1()) &&
+		insertValues(varList, initialValField().deviceViewAll(), dy2());
+	}
+	else
+	{
+		return realx3PointField_D::hearChanges(ti, msg, varList);
+	}
 }
-
-/*bool pFlow::AdamsBashforth3::intAll(
-	real dt, 
-	realx3Vector_D& y, 
-	realx3Vector_D& dy, 
-	range activeRng)
-{
-	auto d_dy = dy.deviceViewAll();
-	auto d_y  = y.deviceViewAll();
-	auto d_history = history_.deviceViewAll();
-
-	Kokkos::parallel_for(
-		"AdamsBashforth3::correct",
-		rpIntegration (activeRng.first, activeRng.second),
-		LAMBDA_HD(int32 i){
-			auto ldy = d_dy[i];
-			d_y[i] += dt*( static_cast<real>(23.0 / 12.0) * ldy 
-				- static_cast<real>(16.0 / 12.0) * d_history[i].dy1_ 
-				+ static_cast<real>(5.0 / 12.0) * d_history[i].dy2_);
-			d_history[i] = {ldy ,d_history[i].dy1_};
-		});
-	Kokkos::fence();
-
-	return true;	
-}*/

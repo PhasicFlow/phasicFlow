@@ -344,16 +344,12 @@ bool pFlow::grainInteraction<cFM,gMM, cLT>::afterIteration()
 template<typename cFM,typename gMM,template <class, class, class> class cLT>
 bool pFlow::grainInteraction<cFM,gMM, cLT>::hearChanges
 (
-	real t,
-	real dt,
-	uint32 iter,
+	const timeInfo& ti,
 	const message& msg, 
 	const anyList& varList
 )
 {
-	if(msg.equivalentTo(message::ITEM_REARRANGE))
-	{
-		notImplementedFunction;
-	}
-	return true;
+	fatalErrorInFunction<<"Event "<< msg.eventNames()<<
+	" is not handled in grainInteraction"<<endl;
+	return false;
 }
