@@ -17,6 +17,7 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
+#include <csignal>
 
 #include "vocabs.hpp"
 #include "systemControl.hpp"
@@ -31,9 +32,23 @@ Licence:
 //#include "readControlDict.hpp"
 
 bool bindaryOutput__;
+static pFlow::uniquePtr<pFlow::PFtoVTK::fileSeries> timeSeriesPtr=nullptr;
+
+void signal_handler(int signal)
+{
+	if(signal == SIGINT)
+	{
+		pFlow::output<<"\nPressing Ctrl+C ....\n";
+		timeSeriesPtr.reset(nullptr);
+		fatalExit;
+	}
+}
 
 int main(int argc, char** argv )
 {
+	
+	std::signal(SIGINT, signal_handler);
+
 	pFlow::word outFolder = (pFlow::CWD()/pFlow::word("VTK")).wordPath();
 
 	pFlow::commandLine cmds(
@@ -126,8 +141,9 @@ int main(int argc, char** argv )
 	}
 
 	{
-
-	pFlow::PFtoVTK::fileSeries timeSeries{pFlow::fileSystem(outFolder)};
+	
+	timeSeriesPtr = pFlow::makeUnique<pFlow::PFtoVTK::fileSeries>(pFlow::fileSystem(outFolder));
+	auto& timeSeries = timeSeriesPtr(); 
 	pFlow::word fileName;
 	pFlow::wordList geomFileNames;
 	pFlow::wordList surfNames;
