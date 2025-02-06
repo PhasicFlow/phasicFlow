@@ -51,7 +51,7 @@ private:
 	const geometry& 	geometry_;
 
 	static inline
-	const message msg_ = message::ITEM_REARRANGE;
+	const message msg_ = message::ITEMS_REARRANGE;
 
 public:
 

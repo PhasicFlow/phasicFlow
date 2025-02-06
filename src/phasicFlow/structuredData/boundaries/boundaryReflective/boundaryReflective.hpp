@@ -71,6 +71,20 @@ public:
 	 
 	bool afterIteration(const timeInfo& ti)final;
 
+	const real restitution()const
+	{
+		return restitution_;
+	}
+
+	const word& velocityName()const
+	{
+		return velocityName_;
+	}
+
+	const word& diameterName()const
+	{
+		return diameterName_;
+	}
 
 };
 

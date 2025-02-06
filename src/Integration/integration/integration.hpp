@@ -63,6 +63,13 @@ private:
 		/// The base name for integration 
 		const word baseName_;
 
+protected:
+
+	bool insertValues(
+		const anyList& varList, 
+		const deviceViewType1D<realx3>& srcVals,
+		realx3PointField_D& dstFeild);
+
 public:
 
 	/// Type info
@@ -150,17 +157,6 @@ public:
 
 		virtual 
 		bool correctPStruct(real dt, pointStructure& pStruct, realx3PointField_D& vel) = 0;
-
-		/// Set the initial values for new indices 
-		virtual 
-		bool setInitialVals(
-				const int32IndexContainer& newIndices,
-				const realx3Vector& y) = 0;
-
-		/// Check if the method requires any set initial vals
-		virtual 
-		bool needSetInitialVals()const = 0;
-
 
 	/// Create the polymorphic object based on inputs
 	static

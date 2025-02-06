@@ -40,6 +40,16 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		*this,
 		zero3
 	),
+	acceleration_(
+      objectFile(
+        "acceleration",
+        "",
+        objectFile::READ_IF_PRESENT,
+        objectFile::WRITE_ALWAYS
+      ),
+      *this,
+      zero3
+    ),
 	velocityUpdateTimer_("velocity boundary update", &timers()),
 	integrationMethod_
 	(
@@ -54,7 +64,7 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		"pStructPosition",
 		*this,
 		integrationMethod_,
-		pointPosition()
+		velocity_.field()
 	);
 
 	if( !integrationPos_ )
@@ -69,7 +79,7 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		"pStructVelocity",
 		*this,
 		integrationMethod_,
-		velocity_.field()
+		acceleration_.field()
 	);
 
 	if( !integrationVel_ )
@@ -90,6 +100,7 @@ bool pFlow::dynamicPointStructure::beforeIteration()
 	if(!pointStructure::beforeIteration())return false;
 	velocityUpdateTimer_.start();
 	velocity_.updateBoundariesSlaveToMasterIfRequested();
+	acceleration_.updateBoundariesSlaveToMasterIfRequested();
 	integrationPos_->updateBoundariesSlaveToMasterIfRequested();
 	integrationVel_->updateBoundariesSlaveToMasterIfRequested();
 	velocityUpdateTimer_.end();
@@ -116,29 +127,21 @@ bool pFlow::dynamicPointStructure::afterIteration()
 		return succs;
 }
 
-bool pFlow::dynamicPointStructure::predict(
-    real dt,
-    realx3PointField_D &acceleration)
+bool pFlow::dynamicPointStructure::predict(real dt)
 {
 	
 	if(!integrationPos_().predict(dt, pointPosition(), velocity_ ))return false;
-	if(!integrationVel_().predict(dt, velocity_, acceleration))return false;
+	if(!integrationVel_().predict(dt, velocity_, acceleration_))return false;
 
 	return true;
 }
 
-bool pFlow::dynamicPointStructure::correct
-(
-	real dt,
-	realx3PointField_D& acceleration
-)
+bool pFlow::dynamicPointStructure::correct(real dt)
 {
-	//auto& pos = pStruct().pointPosition();
-	const auto ti = TimeInfo();
+	const auto& ti = TimeInfo();
 	
 	if(!integrationPos_().correctPStruct(dt, *this, velocity_) )return false;
-	
-	if(!integrationVel_().correct(dt, velocity_, acceleration, velDamping_().dampingFactor(ti)))return false;
+	if(!integrationVel_().correct(dt, velocity_, acceleration_, velDamping_().dampingFactor(ti)))return false;
 
 	return true;	
 }

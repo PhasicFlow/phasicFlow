@@ -34,16 +34,6 @@ pFlow::particles::particles(systemControl& control, const shape& shapes)
       dynPointStruct_,
       0
     ),
-    accelertion_(
-      objectFile(
-        "accelertion",
-        "",
-        objectFile::READ_IF_PRESENT,
-        objectFile::WRITE_ALWAYS
-      ),
-      dynPointStruct_,
-      zero3
-    ),
     contactForce_(
       objectFile(
         "contactForce",
@@ -84,7 +74,6 @@ pFlow::particles::beforeIteration()
 	zeroTorque();
   baseFieldBoundaryUpdateTimer_.start();
   shapeIndex_.updateBoundariesSlaveToMasterIfRequested();
-  accelertion_.updateBoundariesSlaveToMasterIfRequested();
   idHandler_().updateBoundariesSlaveToMasterIfRequested();
   baseFieldBoundaryUpdateTimer_.end();
   return true;

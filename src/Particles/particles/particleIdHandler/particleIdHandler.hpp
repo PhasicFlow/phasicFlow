@@ -60,15 +60,11 @@ public:
 	virtual 
 	uint32 maxId()const = 0;
 
-	
-
 	// heat change for possible insertion of particles
 	// overrdie from internalField
 	bool hearChanges
 	(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
 		const anyList& varList
 	) override;

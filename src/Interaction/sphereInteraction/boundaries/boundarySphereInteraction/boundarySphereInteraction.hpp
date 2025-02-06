@@ -148,7 +148,7 @@ public:
 		const ContactForceModel& cfModel,
 		uint32 step)
 	{
-		// for default boundary, no thing to be done 
+		// for default boundary, nothing to be done 
 		return false;
 	}
 
@@ -156,16 +156,14 @@ public:
 
 	bool hearChanges
 	(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
     	const anyList& varList
 	) override
     {
 		
 		pOutput<<"Function (hearChanges in boundarySphereInteractions)is not implmented Message "<<
-		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;;
+		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;
 		//notImplementedFunction;
 		return true;
 	}

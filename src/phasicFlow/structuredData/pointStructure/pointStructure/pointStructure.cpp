@@ -204,7 +204,7 @@ bool pFlow::pointStructure::beforeIteration()
         anyList varList;
 
         varList.emplaceBack(
-            msg.addAndName(message::ITEM_REARRANGE),
+            msg.addAndName(message::ITEMS_REARRANGE),
             sortedIndices);
 
         if(!notify(ti, msg, varList))

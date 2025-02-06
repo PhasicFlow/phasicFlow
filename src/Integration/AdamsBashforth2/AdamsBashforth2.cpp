@@ -114,8 +114,11 @@ pFlow::AdamsBashforth2::AdamsBashforth2
 		zero3,
 		zero3
 	),
+	initialValField_(initialValField),
 	boundaryList_(pStruct, method, *this)
-{}
+{
+	realx3PointField_D::addEvent(message::ITEMS_INSERT);
+}
 
 void pFlow::AdamsBashforth2::updateBoundariesSlaveToMasterIfRequested()
 {
@@ -186,11 +189,21 @@ bool pFlow::AdamsBashforth2::correctPStruct(
 	return success;
 }
 
-
-bool pFlow::AdamsBashforth2::setInitialVals(
-	const int32IndexContainer& newIndices,
-	const realx3Vector& y)
+bool pFlow::AdamsBashforth2::hearChanges
+(
+	const timeInfo &ti, 
+	const message &msg, 
+	const anyList &varList
+)
 {
-	return true;
+	if(msg.equivalentTo(message::ITEMS_INSERT))
+	{
+		
+		return insertValues(varList, initialValField_.deviceViewAll(), dy1());
+	}
+	else
+	{
+		return realx3PointField_D::hearChanges(ti, msg, varList);
+	}
+    
 }
-

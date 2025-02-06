@@ -29,6 +29,7 @@ namespace pFlow
 
 class subscriber;
 class anyList;
+class timeInfo;
 
 class observer
 {
@@ -87,10 +88,20 @@ public:
 		return message::numEvents();
 	} 
 
+	/// TODO: remove this API from this class 
 	virtual bool hearChanges(
 		real t,
 		real dt,
 		uint32 iter,
+		const message& msg, 
+		const anyList& varList)
+		{ 
+			notImplementedFunction;
+			return false;
+		};
+
+	virtual bool hearChanges(
+		const timeInfo& ti,
 		const message& msg, 
 		const anyList& varList)=0;
 };

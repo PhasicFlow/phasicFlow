@@ -53,7 +53,7 @@ private:
 	/// List of variable names in anyList_ 
 	wordList 		names_;
 
-	wordList 		types_;	
+	wordList 		types_;
 
 public:
 
@@ -162,10 +162,24 @@ public:
 			{
 				fatalErrorInFunction<<
 				"variable name "<< name << " does not exist in the anyList."<<endl<<
-				"list of variables is "<<names_<<endl;
+				"list of variables is \n"<<names_<<endl;
 				fatalExit;
 			}
 			return getObject<T>(static_cast<size_t>(i));
+		}
+
+		template<typename T>
+		bool checkObjectType(const word& name)const
+		{
+			int32 i = names_.findi(name);
+			if(i == -1 )
+			{
+				fatalErrorInFunction<<
+				"variable name "<< name << " does not exist in the anyList."<<endl<<
+				"list of variables is \n"<<names_<<endl;
+				return false;
+			}
+			return getTypeName<T>() != types_[i];
 		}
 
 		/// Get the const reference to variable by name 

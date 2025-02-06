@@ -145,7 +145,5 @@ bool pFlow::boundaryReflective::afterIteration
     );
     Kokkos::fence();
     
-    // TODO: notify integration for changes in the velocity 
-
     return true;
 }

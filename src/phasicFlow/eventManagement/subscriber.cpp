@@ -133,7 +133,6 @@ bool pFlow::subscriber::notify
 	const anyList& varList
 )
 {
-	
 	for(size_t i=0; i<msg.size(); i++)
 	{
 		if(msg.equivalentTo(i))
@@ -150,12 +149,26 @@ bool pFlow::subscriber::notify
 				);
 			}
 		}
-	}
-
+	} 
 	return true;
 }
 
 bool pFlow::subscriber::notify(const timeInfo &ti, const message msg, const anyList &varList)
 {
-    return notify(ti.iter(), ti.t(), ti.dt(), msg, varList);
+	for(size_t i=0; i<msg.size(); i++)
+	{
+		if(msg.equivalentTo(i))
+		{
+			for( auto obsvr: observerList_[i] )
+			{
+				obsvr->hearChanges
+				(
+					ti,
+					message(i),
+					varList
+				);
+			}
+		}
+	}
+	return true;
 }

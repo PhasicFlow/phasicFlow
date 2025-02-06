@@ -36,12 +36,19 @@ bool pFlow::simulationDomain::prepareBoundaryDicts()
 		(1+boundaryExtntionLengthRatio)*maxBoundingSphere_);
 
 	uint32 updateInterval = 
-        boundaries.getValOrSetMax<uint32>("updateInterval", 1u);
+        boundaries.getValOrSet<uint32>("updateInterval", 5u);
+
+	updateInterval = max(updateInterval, 1u);
 
     uint32 neighborListUpdateInterval = 
-        boundaries.getValMax("neighborListUpdateInterval", updateInterval);
-
-    boundaries.addOrReplace("neighborListUpdateInterval", neighborListUpdateInterval);
+        boundaries.getValOrSet("neighborListUpdateInterval", 50u);
+	
+	neighborListUpdateInterval = max(neighborListUpdateInterval, updateInterval);
+    
+	boundaries.addOrReplace("neighborListUpdateInterval", neighborListUpdateInterval);
+	boundaries.addOrReplace("updateInterval", updateInterval);
+	boundaries.addOrReplace("neighborLength", neighborLength);
+	boundaries.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
 
 	// create this boundaries dictionary 
 	this->addDict(thisBoundariesDictName(), boundaries);

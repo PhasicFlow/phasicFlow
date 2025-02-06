@@ -22,17 +22,39 @@ Licence:
 #include "pointStructure.hpp"
 #include "repository.hpp"
 
-pFlow::integration::integration
+bool pFlow::integration::insertValues
 (
-	const word& baseName,
-	pointStructure& pStruct,
-	const word&,
-	const realx3Field_D&
+	const anyList& varList, 
+	const deviceViewType1D<realx3>& srcVals,
+	realx3PointField_D& dstFeild
 )
-:
-	owner_(*pStruct.owner()),
-	pStruct_(pStruct),
-	baseName_(baseName)	
+{
+	const word eventName = message::eventName(message::ITEMS_INSERT);
+
+	if(!varList.checkObjectType<uint32IndexContainer>(eventName))
+	{
+		fatalErrorInFunction<<"Insertion failed in integration for "<< baseName_<<
+		", variable "<< eventName <<
+		" does not exist or the type is incorrect"<<endl;
+		return false;
+	}
+
+	const auto& indices = varList.getObject<uint32IndexContainer>(
+		eventName);
+	
+	dstFeild.field().insertSetElement(indices, srcVals);
+
+    return true;
+}
+
+pFlow::integration::integration(
+    const word &baseName,
+    pointStructure &pStruct,
+    const word &,
+    const realx3Field_D &)
+    : owner_(*pStruct.owner()),
+      pStruct_(pStruct),
+      baseName_(baseName)
 {}
 
 

@@ -41,6 +41,8 @@ class AdamsBashforth2
 {
 private:
 
+	const realx3Field_D& initialValField_;
+
 	boundaryIntegrationList boundaryList_;
 
 	friend class processorAB2BoundaryIntegration;
@@ -55,6 +57,11 @@ protected:
 	auto& dy1()
 	{
 		return static_cast<realx3PointField_D&>(*this);
+	}
+
+	auto& initialValField()
+	{
+		return initialValField_;
 	}
 
 	boundaryIntegrationList& boundaryList()
@@ -116,25 +123,13 @@ public:
 			real dt, 
 			pointStructure& pStruct, 
 			realx3PointField_D& vel) override;
-			
 		
-		/*bool hearChanges
+		bool hearChanges
 		(
-			real t,
-			real dt,
-			uint32 iter,
+			const timeInfo& ti,
 			const message& msg, 
 			const anyList& varList
-		) override;*/
-
-		bool setInitialVals(
-			const int32IndexContainer& newIndices,
-			const realx3Vector& y) override;
-
-		bool needSetInitialVals()const override
-		{
-			return false;
-		}
+		) override;
 
 };
 

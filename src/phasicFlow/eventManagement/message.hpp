@@ -25,6 +25,7 @@ Licence:
 
 #include "types.hpp"
 #include "iOstream.hpp"
+#include "List.hpp"
 
 
 namespace pFlow
@@ -35,52 +36,42 @@ class message
 public:
 	enum EVENT : size_t
 	{
-		DEFAULT 		= 0,
-		CAP_CHANGED 	= 1,  // internal points capacity changed 
-		SIZE_CHANGED 	= 2,  // internal points size changed
-		ITEM_DELETE	 	= 3,  // internal points item deleted 
-		ITEM_INSERT  	= 4,  // internal points item inserted 
-		RANGE_CHANGED   = 5,  // internal points range changed 
-		ITEM_REARRANGE  = 6,  // internal points item rearrange
-		ITEM_FLAGCHANGED= 7,  // internal points item flag changed, this occurs when transfer occurs
-		BNDR_REARRANGE 	= 8,  // boundary indices rearrange 
-		BNDR_TRANSFER   = 9,  // boundary indices transfered
-		BNDR_RESET		= 10,  // boundary indices reset entirely  
-		BNDR_DELETE 	= 11,  // boundary indices deleted
-		BNDR_APPEND		= 12,  // 
-		BNDR_PROCTRANSFER_SEND = 13,    // transfer of data between processors step 1 
-		BNDR_PROCTRANSFER_RECIEVE = 14,  // transfer of data between processors step 2
-		BNDR_PROCTRANSFER_WAITFILL = 15,  // wait for data and fill the field 
-		BNDR_PROC_SIZE_CHANGED = 16
+		RANGE_CHANGED	  = 0,  // internal points active range has been changed
+		ITEMS_INSERT  	  = 1,  // internal points are being inserted 
+		ITEMS_DELETE	  = 2,  // internal points are being deleted
+		ITEMS_REARRANGE   = 3,  // internal points are being rearrange
+		ITEMS_FLAGCHANGED = 4,  // internal points flag changed, this occurs when transfer occurs
+		BNDR_APPEND		  = 5,  // boundary: new indices are appended  
+		BNDR_RESET		  = 6,  // boundary: indices are reset entirely  
+		BNDR_DELETE 	  = 7,  // boundary: indices are deleted
+		BNDR_PROC_SIZE_CHANGED = 8,      // processor boundary: size has been changed
+		BNDR_PROCTRANSFER_SEND = 9,      // processor boundary: transfer of data between processors step 1 (send) 
+		BNDR_PROCTRANSFER_RECIEVE = 10,  // processor boundary: transfer of data between processors step 2 (recieve)
+		BNDR_PROCTRANSFER_WAITFILL = 11  // processor boundary: wait for data and fill the field 
 	};
 
 	
 private:
 
-	static constexpr size_t numberOfEvents_ = 17;
+	static constexpr size_t numberOfEvents_ = 12;
 
 	std::bitset<numberOfEvents_> events_{0x0000};
 	
 	static
 	inline const std::array<word,numberOfEvents_> eventNames_
 	{
-		"",
-		"capacity",
-		"size",
-		"deletedIndices",
+		"activeRange",
 		"insertedIndices",
-		"range",
-		"rearrangedIndices",
-		"transferredIndices",
-		"rearrangedIndices",
-		"transferredIndices",
-		"",
 		"deletedIndices",
-		"appendedIndices",
-		"transferredIndices",
-		"numToRecieve",
-		"insertedIndices",
-		"size"
+		"rearrangedIndices",
+		"flagChange",
+		"bndryAppendedIndices",
+		"bndryReset",
+		"bndryDeletedIndices",
+		"bndrySize",
+		"bndryTransferIndices",
+		"bndryNumToRecieve",
+		"bndryWait"
 	};
 
 public:
@@ -173,18 +164,23 @@ public:
 		return *this;
 	}
 	
+	wordList eventNames()const
+	{
+		wordList lst;
+		for(size_t i=0; i<events_.size(); i++)
+		{
+			if(events_[i])
+				lst.push_back(eventNames_[i]);
+		}
+		return lst;
+	}
+
 	static
 	auto constexpr numEvents()
 	{
 		return numberOfEvents_;
 	}
-	static 
-	message Default()
-	{
-		message msg;
-		return msg+DEFAULT;
-	}
-
+	
 	static 
 	message Empty()	
 	{

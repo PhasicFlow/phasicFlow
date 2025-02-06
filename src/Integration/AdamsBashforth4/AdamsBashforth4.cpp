@@ -190,40 +190,21 @@ bool pFlow::AdamsBashforth4::correctPStruct(
 	return success;
 }
 
-bool pFlow::AdamsBashforth4::setInitialVals(
-	const int32IndexContainer& newIndices,
-	const realx3Vector& y)
+bool pFlow::AdamsBashforth4::hearChanges
+(
+	const timeInfo &ti, 
+	const message &msg, 
+	const anyList &varList
+)
 {
-	return true;
+	if(msg.equivalentTo(message::ITEMS_INSERT))
+	{
+		return insertValues(varList, initialValField().deviceViewAll(), dy1()) &&
+		insertValues(varList, initialValField().deviceViewAll(), dy2()) && 
+		insertValues(varList, initialValField().deviceViewAll(), dy3());
+	}
+	else
+	{
+		return realx3PointField_D::hearChanges(ti, msg, varList);
+	}
 }
-
-/*bool pFlow::AdamsBashforth4::intAll(
-	real dt, 
-	realx3Vector_D& y, 
-	realx3Vector_D& dy, 
-	range activeRng)
-{
-	auto d_dy = dy.deviceViewAll();
-	auto d_y  = y.deviceViewAll();
-	auto d_history = history_.deviceViewAll();
-
-	Kokkos::parallel_for(
-		"AdamsBashforth4::correct",
-		rpIntegration (activeRng.first, activeRng.second),
-		LAMBDA_HD(int32 i){				
-			d_y[i] += dt*( 
-						static_cast<real>(55.0 / 24.0) * d_dy[i]
-					- static_cast<real>(59.0 / 24.0) * d_history[i].dy1_ 
-					+ static_cast<real>(37.0 / 24.0) * d_history[i].dy2_
-					- static_cast<real>( 9.0 / 24.0) * d_history[i].dy3_
-					);
-			d_history[i].dy3_ = d_history[i].dy2_;
-			d_history[i].dy2_ = d_history[i].dy1_;
-			d_history[i].dy1_ = d_dy[i];
-			
-
-		});
-	Kokkos::fence();
-
-	return true;	
-}*/

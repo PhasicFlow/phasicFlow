@@ -56,7 +56,7 @@ pFlow::triSurfaceField<T,MemorySpace>::triSurfaceField
 	observer
 	(
 		&surface,
-		message::Default()
+		message::Empty()
 	),
 	field_
 	(
@@ -130,7 +130,7 @@ pFlow::triSurfaceField<T, MemorySpace>::triSurfaceField
 	observer
 	(
 		&surface,
-		message::Default()
+		message::Empty()
 	),
 	field_
 	(
