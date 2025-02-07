@@ -65,9 +65,7 @@ bool pFlow::boundaryBase::appendNewIndices
 		newIndices);
 
 	if(!notify(
-		internal_.time().currentIter(),
-		internal_.time().currentTime(),
-		internal_.time().dt(),
+		internal_.time().TimeInfo(),
 		msg,
 		varList))
 	{
@@ -109,18 +107,13 @@ bool pFlow::boundaryBase::removeIndices
 	}
 
 	anyList aList;
-	
+	message msgBndry;
+
 	aList.emplaceBack(
-		message::eventName(message::BNDR_RESET), 
+		msgBndry.addAndName(message::BNDR_RESET), 
 		std::move(keepIndices));
-	
-	message msgBndry 	= message::BNDR_RESET;
 
-	uint32 iter = time().currentIter();
-	real t = time().currentTime();
-	real dt = time().dt();
-
-	if( !this->notify(iter, t, dt, msgBndry, aList) )
+	if( !this->notify(time().TimeInfo(), msgBndry, aList) )
 	{
 		fatalErrorInFunction<<"Error in notify operation in boundary "<< 
 		name() <<endl;

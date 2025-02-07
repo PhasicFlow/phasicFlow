@@ -42,7 +42,7 @@ private:
 	Logical    active_ = "No";
 
 	/// Check for collision? It is not active now
-	Logical    checkForCollision_ = "No";
+	Logical    checkForCollision_ = "Yes";
 
 	/// if increase velocity in case particles are failed
 	/// to be inserted due to collision

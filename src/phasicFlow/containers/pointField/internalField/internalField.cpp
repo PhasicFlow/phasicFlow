@@ -194,7 +194,9 @@ bool pFlow::internalField<T, MemorySpace>:: hearChanges
 		auto varName = message::eventName(message::RANGE_CHANGED);
 		if( !varList.checkObjectType<rangeU32>(varName) )
 		{
-			fatalErrorInFunction<<"Wrong type for variable "<< varName<<endl;
+			fatalErrorInFunction<<"Wrong type for variable "<< varName<<endl<<
+			"You requested "<< getTypeName<rangeU32>()<<" but the type is"<<
+			varList.getObjectTypeName(varName)<<endl;
 			return false;
 		}
 

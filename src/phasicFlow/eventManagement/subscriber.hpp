@@ -69,12 +69,12 @@ public:
 	virtual bool unsubscribe(observer* obsevr)const;
 
 	/// TODO: remove this API from thie class 
-	bool notify(
+	/*bool notify(
 		uint32 iter,
 		real t,
 		real dt,
 		const message msg, 
-		const anyList& varList);
+		const anyList& varList);*/
 	
 	bool notify(
 		const timeInfo& ti,

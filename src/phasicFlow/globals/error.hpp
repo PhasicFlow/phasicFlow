@@ -66,6 +66,8 @@ warningMessage(const char* fnName, const char* fileName, int linNumber);
 pFlow::iOstream&
 reportAndExit(int errorCode = EXIT_FAILURE);
 
+pFlow::iOstream& reportPing(const char* fileName, int fileLineNumber);
+
 }
 
 /// Report a fatal error and exit the applicaiton
@@ -98,5 +100,7 @@ reportAndExit(int errorCode = EXIT_FAILURE);
 
 /// Fatal exit
 #define fatalExit pFlow::reportAndExit()
+
+#define Ping pFlow::reportPing(__FILE__, __LINE__)
 
 #endif
