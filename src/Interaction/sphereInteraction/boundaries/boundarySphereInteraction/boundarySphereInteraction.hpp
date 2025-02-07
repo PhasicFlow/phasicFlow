@@ -161,10 +161,13 @@ public:
     	const anyList& varList
 	) override
     {
-		
+		if(msg.equivalentTo(message::BNDR_RESET))
+		{
+			// do nothing 
+			return true;
+		}
 		pOutput<<"Function (hearChanges in boundarySphereInteractions)is not implmented Message "<<
 		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;
-		//notImplementedFunction;
 		return true;
 	}
 

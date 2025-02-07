@@ -124,7 +124,7 @@ bool pFlow::subscriber::unsubscribe
 	return true;
 }
 
-bool pFlow::subscriber::notify
+/*bool pFlow::subscriber::notify
 (
 	uint32 iter,
 	real t,
@@ -151,7 +151,7 @@ bool pFlow::subscriber::notify
 		}
 	} 
 	return true;
-}
+}*/
 
 bool pFlow::subscriber::notify(const timeInfo &ti, const message msg, const anyList &varList)
 {

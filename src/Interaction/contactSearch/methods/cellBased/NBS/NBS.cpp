@@ -46,7 +46,7 @@ pFlow::NBS::NBS
         diam),
     sizeRatio_(max(dict.getVal<real>("sizeRatio"), one)),
     cellExtent_(max(dict.getVal<real>("cellExtent"), half)),
-    adjustableBox_(dict.getVal<Logical>("adjustableBox")),
+    adjustableBox_(false),//adjustableBox_(dict.getVal<Logical>("adjustableBox")),
     NBSLevel0_
 	(
         this->domainBox_,

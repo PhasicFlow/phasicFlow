@@ -81,7 +81,7 @@ pFlow::insertion::readInsertionDict()
 
 	if (active_)
 	{
-    	checkForCollision_ = getVal<Logical>("checkForCollision");
+    	//checkForCollision_ = getVal<Logical>("checkForCollision");
 
 		REPORT(1) << "Particle insertion mechanism is " << Yellow_Text("active")
 		          << " in the simulation." << END_REPORT;

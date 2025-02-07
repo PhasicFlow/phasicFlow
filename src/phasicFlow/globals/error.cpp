@@ -118,3 +118,10 @@ pFlow::fatalExitPhasicFlow(int errorCode)
 	pFlow::processors::abort(errorCode);
 	return errorCode;
 }
+
+pFlow::iOstream&
+pFlow::reportPing(const char* fileName, int fileLineNumber)
+{
+	errorStream<<"Ping! ("<<fileLineNumber<<"):"<<fileName<<endl;
+	return errorStream;
+}

@@ -179,7 +179,17 @@ public:
 				"list of variables is \n"<<names_<<endl;
 				return false;
 			}
-			return getTypeName<T>() != types_[i];
+			return getTypeName<T>() == types_[i];
+		}
+
+		word getObjectTypeName(const word& name)const
+		{
+			int32 i = names_.findi(name);
+			if(i == -1 )
+			{
+				return "NAME_NOT_FOUND";
+			}
+			return types_[i];
 		}
 
 		/// Get the const reference to variable by name 
