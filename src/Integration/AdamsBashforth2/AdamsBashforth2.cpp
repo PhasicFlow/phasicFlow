@@ -50,7 +50,7 @@ bool intAllActive(
 		"AdamsBashforth2::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
 		LAMBDA_HD(uint32 i){
-			d_y[i] = damping*(d_y[i] + dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]));
+			d_y[i] +=  damping * dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
 			d_dy1[i] = d_dy[i];
 		});
 	Kokkos::fence();
@@ -80,7 +80,7 @@ bool intScattered
 		LAMBDA_HD(uint32 i){
 			if( activeP(i))
 			{
-				d_y[i] =  damping*(d_y[i] + dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]));
+				d_y[i] +=  damping * dt*(static_cast<real>(1.5) * d_dy[i] - static_cast<real>(0.5) * d_dy1[i]);
 				d_dy1[i] = d_dy[i];
 			}
 		});
@@ -155,11 +155,11 @@ bool pFlow::AdamsBashforth2::correct
 	bool success = false;
 	if(dy1l.isAllActive())
 	{
-		success = intAllActive(dt, y.field(), dy, dy1l, damping);
+		success = intAllActive(dt, y.field(), dy, dy1(), damping);
 	}
 	else
 	{
-		success = intScattered(dt, y.field(), dy, dy1l, damping);
+		success = intScattered(dt, y.field(), dy, dy1(), damping);
 	}
 
 	success = success && boundaryList_.correct(dt, y, dy);
@@ -177,11 +177,11 @@ bool pFlow::AdamsBashforth2::correctPStruct(
 	bool success = false;
 	if(dy1l.isAllActive())
 	{
-		success = intAllActive(dt, pStruct.pointPosition(), vel, dy1l);
+		success = intAllActive(dt, pStruct.pointPosition(), vel,  dy1());
 	}
 	else
 	{
-		success = intScattered(dt, pStruct.pointPosition(), vel, dy1l);
+		success = intScattered(dt, pStruct.pointPosition(), vel,  dy1());
 	}
 
 	success = success && boundaryList_.correctPStruct(dt, pStruct, vel);
@@ -189,7 +189,7 @@ bool pFlow::AdamsBashforth2::correctPStruct(
 	return success;
 }
 
-bool pFlow::AdamsBashforth2::hearChanges
+/*bool pFlow::AdamsBashforth2::hearChanges
 (
 	const timeInfo &ti, 
 	const message &msg, 
@@ -206,4 +206,4 @@ bool pFlow::AdamsBashforth2::hearChanges
 		return realx3PointField_D::hearChanges(ti, msg, varList);
 	}
     
-}
+}*/

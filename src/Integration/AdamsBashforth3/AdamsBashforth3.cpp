@@ -49,9 +49,9 @@ bool intAllActive(
 		"AdamsBashforth3::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
 		LAMBDA_HD(uint32 i){
-			d_y[i] = damping*( d_y[i]+ dt*( static_cast<real>(23.0 / 12.0) * d_dy[i] 
+			d_y[i] += damping* dt*( static_cast<real>(23.0 / 12.0) * d_dy[i] 
 						- static_cast<real>(16.0 / 12.0) * d_dy1[i] 
-						+ static_cast<real>(5.0 / 12.0) * d_dy2[i]) );
+						+ static_cast<real>(5.0 / 12.0) * d_dy2[i]) ;
 			
 			d_dy2[i] = d_dy1[i];
 			d_dy1[i] = d_dy[i];
@@ -81,14 +81,14 @@ bool intScattered
 	const auto& activeP = dy1.activePointsMaskDevice();
 
 	Kokkos::parallel_for(
-		"AdamsBashforth2::correct",
+		"AdamsBashforth3::correct",
 		rpIntegration (activeRng.start(), activeRng.end()),
 		LAMBDA_HD(uint32 i){
 			if( activeP(i))
 			{
-				d_y[i] = damping * (d_y[i] + dt*( static_cast<real>(23.0 / 12.0) * d_dy[i] 
+				d_y[i] += damping * dt*( static_cast<real>(23.0 / 12.0) * d_dy[i] 
 						- static_cast<real>(16.0 / 12.0) * d_dy1[i] 
-						+ static_cast<real>(5.0 / 12.0) * d_dy2[i]));
+						+ static_cast<real>(5.0 / 12.0) * d_dy2[i]);
 			
 				d_dy2[i] = d_dy1[i];
 				d_dy1[i] = d_dy[i];
@@ -184,7 +184,7 @@ bool pFlow::AdamsBashforth3::correctPStruct(
 	return success;
 }
 
-bool pFlow::AdamsBashforth3::hearChanges
+/*bool pFlow::AdamsBashforth3::hearChanges
 (
 	const timeInfo &ti, 
 	const message &msg, 
@@ -200,4 +200,4 @@ bool pFlow::AdamsBashforth3::hearChanges
 	{
 		return realx3PointField_D::hearChanges(ti, msg, varList);
 	}
-}
+}*/

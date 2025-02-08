@@ -21,6 +21,7 @@ Licence:
 template<class T, class MemorySpace>
 bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
 {
+	
 	const word eventName = message::eventName(message::ITEMS_INSERT);
 
 	if(!varList.checkObjectType<uint32IndexContainer>(eventName))

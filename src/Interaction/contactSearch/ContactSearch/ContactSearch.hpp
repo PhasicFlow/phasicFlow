@@ -60,9 +60,9 @@ private:
 		bool force = false) override
 	{
 		
-		const auto& position = Particles().pointPosition().deviceViewAll();
-		const auto& flags = Particles().dynPointStruct().activePointsMaskDevice();
-		const auto& diam = Particles().boundingSphere().deviceViewAll();
+		auto position = Particles().pointPosition().deviceViewAll();
+		auto flags = Particles().dynPointStruct().activePointsMaskDevice();
+		auto diam = Particles().boundingSphere().deviceViewAll();
 
 		return ppwContactSearch_().broadSearch(
 			ti.iter(),

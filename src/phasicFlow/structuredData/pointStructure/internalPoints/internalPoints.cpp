@@ -304,7 +304,8 @@ pFlow::internalPoints::insertPoints(
 	{
 		return false;
 	}
-		
+	//output<<" points \n"<<points<<endl;
+	//output<<pointPosition_<<endl;
 	if(!notify(
 		time().TimeInfo(),
 		msg, 
