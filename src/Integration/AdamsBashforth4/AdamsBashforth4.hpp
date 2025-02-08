@@ -104,50 +104,17 @@ public:
 			pointStructure& pStruct, 
 			realx3PointField_D& vel) override;
 		
-		bool hearChanges
+		/*bool hearChanges
 		(
 			const timeInfo& ti,
 			const message& msg, 
 			const anyList& varList
-		) override;
+		) override;*/
 
 };
 
 
-/*template<typename activeFunctor>
-bool pFlow::AdamsBashforth4::intRange(
-	real dt, 
-	realx3Vector_D& y,
-	realx3Vector_D& dy,
-	activeFunctor activeP )
-{
-	auto d_dy = dy.deviceViewAll();
-	auto d_y  = y.deviceViewAll();
-	auto d_history = history_.deviceViewAll();
-	auto activeRng = activeP.activeRange();
 
-	Kokkos::parallel_for(
-		"AdamsBashforth4::correct",
-		rpIntegration (activeRng.first, activeRng.second),
-		LAMBDA_HD(int32 i){
-			if( activeP(i))
-			{
-				
-				d_y[i] += dt*( 
-							static_cast<real>(55.0 / 24.0) * d_dy[i]
-						- static_cast<real>(59.0 / 24.0) * d_history[i].dy1_ 
-						+ static_cast<real>(37.0 / 24.0) * d_history[i].dy2_
-						- static_cast<real>( 9.0 / 24.0) * d_history[i].dy3_
-						);
-				d_history[i].dy3_ = d_history[i].dy2_;
-				d_history[i].dy2_ = d_history[i].dy1_;
-				d_history[i].dy1_ = d_dy[i];
-			}
-		});
-	Kokkos::fence();
-
-	return true;
-}*/
 
 } // pFlow
 

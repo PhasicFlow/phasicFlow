@@ -108,12 +108,12 @@ public:
 			realx3PointField_D& vel) override;
 			
 		
-		bool hearChanges
+		/*bool hearChanges
 		(
 			const timeInfo& ti,
 			const message& msg, 
 			const anyList& varList
-		) override;
+		) override;*/
 
 };
 
