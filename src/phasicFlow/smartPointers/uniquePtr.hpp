@@ -27,6 +27,7 @@ Licence:
 
 #include "pFlowMacros.hpp"
 #include "error.hpp"
+#include "iOstream.hpp"
 
 // just for preventing the use of std namespace and adding some minor functionalities
 
