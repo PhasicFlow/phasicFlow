@@ -52,7 +52,7 @@ public:
 
 	bool sortTime(uint32 iter, real t, real dt)const
 	{
-		return performSorting_() && timeControl_.timeEvent(iter, t, dt);
+		return performSorting_() && timeControl_.eventTime(iter, t, dt);
 	}
 
 	uint32IndexContainer getSortedIndices(

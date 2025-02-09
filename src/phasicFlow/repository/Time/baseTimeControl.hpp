@@ -26,6 +26,8 @@ under the terms of GNU General Public License v3 or any other later versions.
 namespace pFlow
 {
 
+class timeInfo;
+
 class baseTimeControl
 {
 private:
@@ -34,7 +36,7 @@ private:
 
 	int32StridedRagne iRange_;
 
-	realStridedRange  rRange_;
+	stridedRange<timeValue>  rRange_;
 
 	const word        intervalPrefix_;
 
@@ -43,14 +45,14 @@ public:
 	baseTimeControl(
 	  const dictionary& dict,
 	  const word&       intervalPrefix = "",
-	  real              defStartTime   = 0.0
+	  timeValue         defStartTime   = 0.0
 	);
 
 	baseTimeControl(
-		const dictionary& dict,
-		const real 	defInterval,
-		const word& intervalPrefix="",
-		const real 	defStartTime=0.0);
+		const dictionary&  dict,
+		const timeValue	   defInterval,
+		const word&        intervalPrefix="",
+		const timeValue    defStartTime=0.0);
 
 	baseTimeControl(
 		int32 start,
@@ -64,15 +66,17 @@ public:
 		return isTimeStep_;
 	}
 
-	bool  timeEvent(uint32 iter, real t, real dt) const;
+	bool eventTime(uint32 iter, timeValue t, timeValue dt) const;
 
-	bool  isInRange(uint32 iter, real t, real dt) const;
+	bool eventTime(const timeInfo& ti)const;
 
-	real  startTime() const;
+	bool  isInRange(uint32 iter, timeValue t, timeValue dt) const;
 
-	real  endTime() const;
+	timeValue  startTime() const;
 
-	real  rInterval() const;
+	timeValue  endTime() const;
+
+	timeValue  rInterval() const;
 
 	int32 startIter() const;
 

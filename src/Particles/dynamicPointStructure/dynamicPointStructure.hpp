@@ -101,6 +101,16 @@ public:
 		return acceleration_;
 	}
 
+	inline
+	real dampingFactor(const timeInfo& ti)const
+	{
+		if(velDamping_)
+		{
+			return velDamping_().dampingFactor(ti);
+		}
+		return 1.0;
+	}
+
 	/// In the time loop before iterate
 	bool beforeIteration() override;
 

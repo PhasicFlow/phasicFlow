@@ -89,9 +89,11 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		fatalExit;
 	}
 
-	REPORT(1)<<"Reading globalDamping dictionary ..."<<END_REPORT;
-	velDamping_ = makeUnique<globalDamping>(control);
-
+	if(control.settingsDict().containsDictionay("globalDamping"))
+	{
+		REPORT(1)<<"Reading globalDamping dictionary ..."<<END_REPORT;
+		velDamping_ = makeUnique<globalDamping>(control);
+	}
 }
 
 
@@ -111,10 +113,6 @@ bool pFlow::dynamicPointStructure::iterate()
 {
 	return pointStructure::iterate();
 	
-	/*real dt = this->dt();
-
-    auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
-    return correct(dt, acc);*/
 }
 
 bool pFlow::dynamicPointStructure::afterIteration()
@@ -122,14 +120,13 @@ bool pFlow::dynamicPointStructure::afterIteration()
 		//const auto ti = TimeInfo();
 		
 		auto succs = pointStructure::afterIteration();
-		//velDamping_().applyDamping(ti, velocity_);
 
 		return succs;
 }
 
 bool pFlow::dynamicPointStructure::predict(real dt)
 {
-	
+
 	if(!integrationPos_().predict(dt, pointPosition(), velocity_ ))return false;
 	if(!integrationVel_().predict(dt, velocity_, acceleration_))return false;
 
@@ -141,7 +138,7 @@ bool pFlow::dynamicPointStructure::correct(real dt)
 	const auto& ti = TimeInfo();
 	
 	if(!integrationPos_().correctPStruct(dt, *this, velocity_) )return false;
-	if(!integrationVel_().correct(dt, velocity_, acceleration_, velDamping_().dampingFactor(ti)))return false;
+	if(!integrationVel_().correct(dt, velocity_, acceleration_, dampingFactor(ti)))return false;
 
 	return true;	
 }
