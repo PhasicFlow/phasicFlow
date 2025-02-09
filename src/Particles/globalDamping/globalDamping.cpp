@@ -23,13 +23,12 @@ Licence:
 
 
 pFlow::globalDamping::globalDamping(const systemControl& control)
-{}
-/*:
+:
     timeControl_(control.settingsDict().subDict("globalDamping"), control.time().dt(), "damping")
 {
     const dictionary& dict = control.settingsDict().subDict("globalDamping");
 
-    dampingFactor_ = dict.getValOrSetMin<real>("dampingFactor", static_cast<real>(1.0));
+    dampingFactor_ = dict.getValMin<real>("dampingFactor", static_cast<real>(1.0));
 
     dampingFactor_ = max( dampingFactor_ , static_cast<real>(0.01));
 
@@ -41,36 +40,11 @@ pFlow::globalDamping::globalDamping(const systemControl& control)
 	else
 		REPORT(2)<<"Global damping "<<Yellow_Text("is not active")<<"."<<END_REPORT;
 
-}*/
-
-
-/*void pFlow::globalDamping::applyDamping
-(
-    const timeInfo& ti, 
-    realx3PointField_D& velocity
-)
-{
-	if(!performDamping_) return;
-	if(!timeControl_.timeEvent(ti.iter(), ti.t(), ti.dt()) )return;
-
-	auto d_v = velocity.deviceView();
-	auto activeRng = velocity.activeRange();
-	auto dmpng = dampingFactor_;
-
-	Kokkos::parallel_for(
-		"globalDamping::applyDamping",
-		deviceRPolicyStatic(activeRng.start(), activeRng.end()),
-		LAMBDA_HD(uint32 i){
-			d_v[i] *= dmpng;
-		});
-	Kokkos::fence();
-	//REPORT(1)<<"Applied global damping "<<END_REPORT;
-}*/
+}
 
 pFlow::real pFlow::globalDamping::dampingFactor(const timeInfo& ti)const
 {
-  return 1;
-	/*if(!performDamping_) return 1.0;
-	if(!timeControl_.timeEvent(ti.iter(), ti.t(), ti.dt()) )return 1.0;
-	return dampingFactor_;*/
+	if(!performDamping_) return 1.0;
+	if(!timeControl_.eventTime(ti ))return 1.0;
+	return dampingFactor_;
 }

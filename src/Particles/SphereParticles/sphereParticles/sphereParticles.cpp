@@ -300,10 +300,12 @@ bool pFlow::sphereParticles::iterate()
 		{
 			return false;
 		}
+		real damping = dynPointStruct().dampingFactor(ti);
 		if(!rVelIntegration_().correct(
-			dt(), 
+			ti.dt(), 
 			rVelocity_, 
-			rAcceleration_))
+			rAcceleration_,
+			damping))
 		{
 			return false;
 		}

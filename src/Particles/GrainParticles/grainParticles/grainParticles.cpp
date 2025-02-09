@@ -324,10 +324,12 @@ bool pFlow::grainParticles::iterate()
 		{
 			return false;
 		}
+		real damping = dynPointStruct().dampingFactor(ti);
 		if(!rVelIntegration_().correct(
 			ti.dt(), 
 			rVelocity_, 
-			rAcceleration_))
+			rAcceleration_,
+			damping))
 		{
 			return false;
 		}

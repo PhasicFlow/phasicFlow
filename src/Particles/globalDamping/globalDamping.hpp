@@ -37,8 +37,7 @@ private:
 
     real            dampingFactor_;
 
-  //  baseTimeControl timeControl_;
-
+    baseTimeControl timeControl_;
 
 public:
 
@@ -47,9 +46,7 @@ public:
 
     ~globalDamping()=default;
 
-    //void applyDamping( const timeInfo& ti, realx3PointField_D& velocity);
-
-    bool performDamping()const
+    bool dampingActive()const
     {
         return performDamping_;
     }
