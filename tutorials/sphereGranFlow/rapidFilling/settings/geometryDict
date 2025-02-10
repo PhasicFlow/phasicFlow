@@ -1,0 +1,75 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	geometryDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+motionModel            conveyorBelt;               // motion model can be rotatingAxis or stationary or vibrating
+
+conveyorBeltInfo
+{
+    conveyorBelt1
+    {
+        tangentVelocity (0.5 0 0);
+    }
+}
+
+surfaces
+{
+	cylinderShell
+	{
+		type 		 cylinderWall;  	         // other options: cuboidWall and planeWall
+
+		p1 			(0.0 0.0 0.0);               // begin point of cylinder axis
+
+		p2 			(0.0 0.0 0.4);               // end point of cylinder axis
+
+		radius1 	          0.1;		         // radius at p1
+ 
+		radius2 	          0.1;		         // radius at p2
+
+		resolution 	           36;      	     // number of divisions
+
+		material 	      wallMat;   	         // material name of this wall
+	}
+
+	coneShell
+	{
+		type 		 cylinderWall;  	         // other options: cuboidWall and planeWall
+
+		p1 		   (0.0 0.0 -0.1);               // begin point of cylinder axis
+
+		p2 			(0.0 0.0 0.0);               // end point of cylinder axis
+
+		radius1 	         0.02;		         // radius at p1
+
+		radius2 	          0.1;		         // radius at p2
+  
+		resolution 	           36;      	     // number of divisions
+
+		material 	      wallMat;   	         // material name of this wall
+	}
+
+	belt
+	{
+		type 	 stlWall;  	// type of the wall
+		file 	 belt.stl;	// file name in stl folder		
+		material wallMat;   // material name of this wall
+		motion 	 conveyorBelt1;		// motion component name 
+	}
+
+	box
+	{
+		type 	 stlWall;  	// type of the wall
+		file 	 box.stl;	// file name in stl folder		
+		material wallMat;   // material name of this wall
+	}
+}
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	particlesDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+setFields
+{
+	/*
+	    Default value for fields defined for particles
+
+		These fields should always be defined for simulations with 
+
+		spherical particles.
+	*/
+
+	defaultValue 
+	{
+		velocity 		realx3 	    (0 0 0);     // linear velocity (m/s)
+
+		acceleration 	realx3 	    (0 0 0);     // linear acceleration (m/s2)
+
+		rVelocity 		realx3 	    (0 0 0);  	 // rotational velocity (rad/s)
+
+		shapeName 		word	lightSphere; 	 // name of the particle shape 
+	}
+
+	selectors
+	{}
+}
+
+positionParticles                                // positions particles 
+{
+	method                file;                 // other options: empty, ordered and random
+	
+	fileInfo
+        {
+              name   dataFile; // the name of the file that contains position and particle data, the data format is ASCII. The file is located at the root case folder
+              
+              numPoints 10000;   
+
+              fields ( (velocity realx3) (shapeName word) ); // (optional, it could be an empty list or omitted) list of other fields/data that should be read from the file
+		
+              commaSeparated    No; // optional (default is No). if Yes, then fields are separated by a comma
+       }
+	
+	regionType              box;                 // other options: cylinder and sphere
+	
+	boxInfo                                      // box region for positioning particles 
+	{
+		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
+
+		max ( 0.08  0.08 0.098);	             // upper corner point of the box 
+	}    
+}
+
