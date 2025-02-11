@@ -6,7 +6,7 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-motionModel            conveyorBelt;               // motion model can be rotatingAxis or stationary or vibrating
+motionModel          conveyorBelt;               // motion model can be rotatingAxis or stationary or vibrating
 
 conveyorBeltInfo
 {
@@ -54,17 +54,22 @@ surfaces
 
 	belt
 	{
-		type 	 stlWall;  	// type of the wall
-		file 	 belt.stl;	// file name in stl folder		
-		material wallMat;   // material name of this wall
-		motion 	 conveyorBelt1;		// motion component name 
+		type 	          stlWall;  	         // type of the wall
+
+		file 	         belt.stl;	             // file name in stl folder	
+
+		material          wallMat;               // material name of this wall
+
+		motion 	    conveyorBelt1;		         // motion component name 
 	}
 
 	box
 	{
-		type 	 stlWall;  	// type of the wall
-		file 	 box.stl;	// file name in stl folder		
-		material wallMat;   // material name of this wall
+		type 	         stlWall;  	             // type of the wall
+
+		file 	         box.stl;	             // file name in stl folder
+
+		material         wallMat;                // material name of this wall
 	}
 }
 

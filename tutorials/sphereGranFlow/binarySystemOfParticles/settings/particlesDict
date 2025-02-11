@@ -29,20 +29,20 @@ setFields
 	{
 		shapeAssigne
 		{
-			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
+			selector 	       stridedRange; 	 // other options: box, cylinder, sphere, randomPoints 
  
 			stridedRangeInfo
 			{
-				begin 	    0;			         // begin index of points
+				begin 	                   0;    // begin index of points
 
-				end 	30000;		 			 // end index of points 
+				end 	               30000;    // end index of points 
 
-				stride      3;			 		 // stride for selector 
+				stride                     3;	 // stride for selector 
 			}
 
 			fieldValue  					     // fields that the selector is applied to 
 			{
-				shapeName 	word    largeSphere; // sets shapeName of the selected points to largeSphere
+				shapeName 	word largeSphere;    // sets shapeName of the selected points to largeSphere
 			}
 		}
 	}
@@ -50,13 +50,13 @@ setFields
 
 positionParticles 				                 // positions particles 
 {
-	method ordered;                              // other options: random and empty
+	method        ordered;                       // other options: random and empty
 
 	orderedInfo
 	{		
-		diameter  0.005; 	                     // diameter of particles
+		diameter    0.005; 	                     // diameter of particles
 
-		numPoints 30000; 	                     // number of particles in the simulation
+		numPoints   30000; 	                     // number of particles in the simulation
 
 		axisOrder (z x y);                       // axis order for filling the space with particles
 	}
@@ -69,6 +69,6 @@ positionParticles 				                 // positions particles
 
 		p2 (0.0 0.0 0.097);		                 // end point of cylinder axis
 
-		radius 		0.117;		                 // radius of cylinder 
+		radius 		 0.117;		                 // radius of cylinder 
 	}
 }
