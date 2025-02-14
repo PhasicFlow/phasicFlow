@@ -28,8 +28,8 @@ in <b>caseSetup/sphereShape</b> file
 
 ```C++
 names        (smallSphere largeSphere); // names of shapes 
-diameters    (0.003     0.005);    // diameter of shapes (m)
-materials    (prop1  prop1);       // material names for shapes 
+diameters                (0.003 0.005); // diameter of shapes (m)
+materials               (prop1  prop1); // material names for shapes 
 ```
 ### Positioning and initial mixture 
 
@@ -44,18 +44,17 @@ in <b>settings/particlesDict</b> file
 // positions particles 
 positionParticles
 {
-    method ordered;     // other options: random or empty
-
+    method ordered;         // other options: random or empty
     orderedInfo
     {        
-        diameter 0.005;     // minimum space between centers of particles
-        numPoints 30000;    // number of particles in the simulation 
+           diameter 0.005;     // minimum space between centers of particles
+          numPoints 30000;    // number of particles in the simulation 
         axisOrder (z x y);  // axis order for filling the space with particles
     }
 
     regionType cylinder;                                   // other options: box and sphere 
 
-    cylinder  // cylinder region for positioning particles 
+    cylinder                    // cylinder region for positioning particles 
     {
         p1 (0.0 0.0 0.003);     // begin point of cylinder axis (m m m)
         p2 (0.0 0.0 0.097);     // end point of cylinder axis (m m m)
@@ -76,9 +75,9 @@ setFields
 {
     /*
         Default value for fields defined for particles
-    These fields should always be defined for simulations with 
-    spherical particles.
-*/
+        These fields should always be defined for simulations with 
+        spherical particles.
+    */
 
     defaultValue 
     {
@@ -87,20 +86,21 @@ setFields
         rotVelocity     realx3     (0 0 0); // rotational velocity (rad/s)
         shapeName       word   smallSphere; // name of the particle shape 
     }
-
+    
     selectors
     {
         shapeAssigne
         {
-            selector     stridedRange; 				       // other options: box, cylinder, sphere, randomPoints
-
+            selector     stridedRange;                     // other options: box, cylinder, sphere, randomPoints
+            
             stridedRangeInfo
             {
-                begin   0;            // begin index of points
+                begin       0;        // begin index of points
                 end     30000;        // end index of points 
-                stride  3;            // stride for selector 
+                stride      3;        // stride for selector 
             }
-            fieldValue  // fields that the selector is applied to 
+            
+            fieldValue                // fields that the selector is applied to 
             {
                 /*
                     sets shapeName of the selected points to largeSphere
