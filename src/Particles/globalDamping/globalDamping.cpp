@@ -35,10 +35,14 @@ pFlow::globalDamping::globalDamping(const systemControl& control)
     performDamping_ = !equal(dampingFactor_, static_cast<real>(1.0));
 
     if( performDamping_ )
-		REPORT(2)<<"Global damping "<<Yellow_Text("is active")<<
-		" and damping factor is "<<dampingFactor_<<END_REPORT;
-	else
-		REPORT(2)<<"Global damping "<<Yellow_Text("is not active")<<"."<<END_REPORT;
+    {
+      REPORT(2)<<"Global damping "<<Yellow_Text("is active")<<
+		  " and damping factor is "<<dampingFactor_<<END_REPORT;
+    }
+		else
+		{
+      REPORT(2)<<"Global damping "<<Yellow_Text("is not active")<<"."<<END_REPORT;
+    }
 
 }
 
