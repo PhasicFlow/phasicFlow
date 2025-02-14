@@ -32,44 +32,9 @@ pFlow::realx3Vector pFlow::positionParticles::sortByMortonCode(
 		uint64 index;
 	};
 
-	/*realx3 minP = min(position);
-	realx3 maxP = max(position);
-	real cellsize = maxDiameter();
-	cells<uint64> allCells( box(minP, maxP), cellsize);
-
-	Vector<indexMorton> indMor(position.size(),RESERVE());
-
-	indMor.clear();
-
-	uint64 ind=0;
-	for(const auto& p:position)
-	{
-		auto cellInd = allCells.pointIndex(p);
-		indMor.push_back( 
-			{ xyzToMortonCode64(cellInd.x(), cellInd.y(), cellInd.z()),
-			ind++});
-	}
-
-	INFORMATION<<"Performing morton sorting."<<END_INFO;
-	std::sort(
-		indMor.begin(),
-		indMor.end(),
-		[]( const indexMorton &lhs, const indexMorton &rhs){
-			return lhs.morton < rhs.morton; } );
-
-	realx3Vector sortedPos(position.capacity(), RESERVE());
-	sortedPos.clear();
-
-
-	for(auto& ind:indMor)
-	{
-		sortedPos.push_back( position[ind.index] );
-	}*/
-
     WARNING<<"Morton sorting is inactive!"<<END_WARNING;
 	return position;
 }
-
 
 pFlow::positionParticles::positionParticles
 (
@@ -78,12 +43,8 @@ pFlow::positionParticles::positionParticles
 )
 :
 	regionType_(dict.getValOrSet<word>("regionType", "domain")),
-	maxNumberOfParticles_(dict.getValOrSet(
-		"maxNumberOfParticles", 
-		static_cast<uint32>(10000))),
 	mortonSorting_(dict.getValOrSet("mortonSorting", Logical("Yes")))
 {
-
 	if( regionType_ != "domain" )	
 	{
 		pRegion_ = peakableRegion::create(
@@ -92,7 +53,7 @@ pFlow::positionParticles::positionParticles
 	}	
 	else
 	{
-		fileDictionary domainDict
+		fileDictionary domainDictionary
 		(
 			objectFile
 			{
@@ -103,11 +64,9 @@ pFlow::positionParticles::positionParticles
 			},
 			&control.settings()
 		);
-		pRegion_ = peakableRegion::create(regionType_,domainDict.subDict("globalBox"));
+		pRegion_ = peakableRegion::create("box", domainDictionary.subDict("globalBox"));
 	}
-	
 }
-
 
 pFlow::realx3Vector pFlow::positionParticles::getFinalPosition()
 {
@@ -130,9 +89,7 @@ pFlow::uniquePtr<pFlow::positionParticles>
     const dictionary & dict
 )
 {
-
 	word method = dict.getVal<word>("method");
-
 
 	if( dictionaryvCtorSelector_.search(method) )
 	{
