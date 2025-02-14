@@ -40,11 +40,7 @@ private:
 
 	word 			regionType_;
 
-	uint32  		maxNumberOfParticles_ = 10000;
-
 	Logical 		mortonSorting_;
-
-	
 
 	realx3Vector sortByMortonCode(const realx3Vector& position)const;
 
@@ -82,12 +78,6 @@ public:
 	{
 		return mortonSorting_();
 	} 
-
-	inline
-	auto maxNumberOfParticles()const
-	{
-		return maxNumberOfParticles_;
-	}
 
 	virtual uint32 numPoints()const = 0;
 

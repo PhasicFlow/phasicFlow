@@ -122,14 +122,14 @@ pFlow::positionRandom::positionRandom
 	position_
 	(
 		"position",
-		maxNumberOfParticles(),
+		1,
 		0,
 		RESERVE()
 	),
 	diameters_
 	(
 		"diameters",
-		maxNumberOfParticles(),
+		1,
 		0,
 		RESERVE()
 	)
