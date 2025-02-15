@@ -35,6 +35,8 @@ bool pFlow::systemControl::readIncludeExclue(const dictionary& dict)
 			includeList_.insert(nm);
 		}
 	}
+    
+    REPORT(1)<<"IncludeObject list is: "<<Green_Text(includeList_)<<END_REPORT;
 
 	if (dict.containsDataEntry("excludeObjects"))
 	{
@@ -44,6 +46,8 @@ bool pFlow::systemControl::readIncludeExclue(const dictionary& dict)
 			excludeList_.insert(nm);
 		}
 	}
+
+    REPORT(1)<<"excludeObject list is: "<<Green_Text(excludeList_)<<END_REPORT;
 	return true;
 }
 
