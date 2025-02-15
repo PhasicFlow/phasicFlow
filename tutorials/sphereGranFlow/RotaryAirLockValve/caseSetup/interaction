@@ -43,19 +43,19 @@ model
     Geff  (0.8e6 0.8e6                           // Shear modulus [Pa]
                  0.8e6);
 
-    nu    (0.25   0.25                           // Poisson's ratio [-]
+    nu      (0.25 0.25                           // Poisson's ratio [-]
                   0.25);
 
-    en    (0.7     0.8                           // coefficient of normal restitution
+    en      (0.70 0.80                           // coefficient of normal restitution
                    1.0);
 
-    et    (1.0     1.0                           // coefficient of tangential restitution
+    et        (1.0 1.0                           // coefficient of tangential restitution
                    1.0);
 
-    mu    (0.3    0.35                           // dynamic friction
+    mu       (0.3 0.35                           // dynamic friction
                   0.35);
 
-    mur   (0.1     0.1                           // rolling friction
+    mur       (0.1 0.1                           // rolling friction
                    0.1);     
 }
 

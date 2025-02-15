@@ -6,10 +6,10 @@ objectName 	sphereDict;
 objectType 	sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-names 		 (lightSphere heavySphere); 	     // names of shapes 
+names 		  (lightSphere heavySphere); 	     // names of shapes 
 
-diameters 	             (0.007 0.007);		     // diameter of shapes 
+diameters 	              (0.007 0.007);		 // diameter of shapes 
 
-materials	       (lightMat heavyMat);		     // material names for shapes 
+materials	        (lightMat heavyMat);		 // material names for shapes 
 
 
