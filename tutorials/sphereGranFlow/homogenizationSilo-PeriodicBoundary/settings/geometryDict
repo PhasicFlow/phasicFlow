@@ -6,14 +6,20 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-motionModel          conveyorBelt;               // motion model can be rotatingAxis or stationary or vibrating
 
-conveyorBeltInfo
+motionModel            rotatingAxis;   
+
+rotatingAxisInfo
 {
-    conveyorBelt1
-    {
-        tangentVelocity (0.5 0 0);
-    }
+	// for opening the gate of silo between time 4.1 and 5.1 s
+	gateMotion
+	{
+		p1        (-0.04 -0.04 -0.1);
+		p2        (-0.04 -0.04  0.0);
+		omega     3.14;
+		startTime 4.1;
+		endTime   5.1;
+	}
 }
 
 surfaces
@@ -43,7 +49,7 @@ surfaces
 
 		p2 			(0.0 0.0 0.0);               // end point of cylinder axis
 
-		radius1 	         0.02;		         // radius at p1
+		radius1 	         0.04;		         // radius at p1
 
 		radius2 	          0.1;		         // radius at p2
   
@@ -52,24 +58,25 @@ surfaces
 		material 	      wallMat;   	         // material name of this wall
 	}
 
-	belt
+	/*
+		This is a plane wall at the exit of silo
+	*/
+
+	exitGate
 	{
-		type 	          stlWall;  	         // type of the wall
+		type        planeWall;                   // other options: cuboidWall and cylinderWall
 
-		file 	         belt.stl;	             // file name in stl folder	
+		p1 (-0.04 -0.04 -0.1);                   // first point of the wall
 
-		material          wallMat;               // material name of this wall
+		p2 ( 0.04 -0.04 -0.1);                   // second point of the wall
 
-		motion 	    conveyorBelt1;		         // motion component name 
-	}
+		p3 ( 0.04  0.04 -0.1);                   // third point of the wall
 
-	box
-	{
-		type 	         stlWall;  	             // type of the wall
+		p4 (-0.04  0.04 -0.1);                   // fourth point of the wall
+		 
+		material      wallMat;                   // material name of the wall
 
-		file 	         box.stl;	             // file name in stl folder
-
-		material         wallMat;                // material name of this wall
+		motion 		gateMotion; 
 	}
 }
 

@@ -16,13 +16,13 @@ contactSearch
 {
    method         NBS;                           // method for broad search particle-particle
    
-   updateInterval  10;
+   updateInterval 10;
 
    sizeRatio      1.1;
 
-   cellExtent    0.55;
+   cellExtent     0.55;
 
-   adjustableBox  Yes;
+   adjustableBox  No;
 } 
 
 model
@@ -46,19 +46,22 @@ model
                0.8e6 0.8e6
                      0.8e6);
 
-   nu      (0.25 0.25 0.25                       // Poisson's ratio [-]
-                 0.25 0.25
-                      0.25);
+   nu    (0.25 0.25  0.25                        // Poisson's ratio [-]
+               0.25  0.25
+                     0.25);
 
-   en      (0.97 0.97 0.85                       // coefficient of normal restitution
-                 0.97 0.85
-                      1.00);
+   en (0.97  0.97    0.85                        // coefficient of normal restitution
+             0.97    0.85
+                     1.00);
 
-   mu      (0.65 0.65 0.35                       // dynamic friction 
-                 0.65 0.35
-                      0.35);
+   mu (0.65   0.65 0.35                          // dynamic friction 
+              0.65 0.35
+                   0.35);
 
-   mur        (0.1 0.1 0.1                       // rolling friction 
-                   0.1 0.1
-                       0.1);       
+   mur (0.1  0.1 0.1                             // rolling friction 
+             0.1 0.1
+                 0.1);       
 }
+
+
+

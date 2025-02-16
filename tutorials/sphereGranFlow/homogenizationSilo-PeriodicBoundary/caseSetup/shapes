@@ -2,18 +2,14 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-objectName particleInsertion;
-objectType dicrionary;
-fileFormat  ASCII;
-/*---------------------------------------------------------------------------*/
 objectName 	sphereDict;
 objectType 	sphereShape;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+names 		 (parType1 parType2); 	     // names of shapes 
 
-// names of shapes
-names 		(sphere);
+diameters 	 (0.00885 0.0089);		     // diameter of shapes 
 
-// diameter of shapes 
-diameters 	(0.005);
+materials	 (lightMat heavyMat);		     // material names for shapes 
 
-// material names for shapes 
-materials	(sphereMat);
+

@@ -146,8 +146,8 @@ pFlow::positionOrdered::positionOrdered
 	position_
 	(
 		"positionOrdered", 
-		max(maxNumberOfParticles(), numPoints_), 
-		numPoints_ ,
+		numPoints_, 
+		numPoints_,
 		RESERVE()
 	)
 {

@@ -1,7 +1,7 @@
 # Problem Definition
 The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rotor is about 21 cm. There is one type of particle in this simulation. Particles are inserted into the inlet of the valve from t=**0** s.
 * **28000** particles with **5 mm** diameter are inserted into the valve with the rate of **4000 particles/s**. 
-* The rotor starts its ortation at t = 1.25 s at the rate of 2.1 rad/s. 
+* The rotor starts its rotation at t = 1.25 s at the rate of 2.1 rad/s. 
 
 
 <html>

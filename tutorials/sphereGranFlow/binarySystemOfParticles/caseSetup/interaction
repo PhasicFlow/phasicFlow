@@ -6,9 +6,9 @@ objectName  interaction;
 objectType  dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials                     (prop1);           // properties of material
+materials                     (prop1);            // properties of material
 
-densities                    (1000.0);           // density of materials [kg/m3]
+densities                    (1000.0);            // density of materials [kg/m3]
 
 contactListType     sortedContactList;
 
@@ -38,14 +38,14 @@ model
 
    Geff     (0.8e6);                             // Shear modulus [Pa]
 
-   nu       (0.25);                              // Poisson's ratio [-]
+   nu        (0.25);                             // Poisson's ratio [-]
 
-   en       (0.7);                               // coefficient of normal restitution
+   en         (0.7);                             // coefficient of normal restitution
 
-   et       (1.0);                               // coefficient of tangential restitution 
+   et         (1.0);                             // coefficient of tangential restitution 
 
-   mu       (0.3);                               // dynamic friction 
+   mu         (0.3);                             // dynamic friction 
 
-   mur      (0.1);                               // rolling friction     
+   mur        (0.1);                             // rolling friction     
 }
 
