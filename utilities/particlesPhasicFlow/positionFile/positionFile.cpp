@@ -21,29 +21,63 @@ Licence:
 #include "error.hpp"
 #include "dictionary.hpp"
 #include "positionFile.hpp"
+
+
+#include "streams.hpp"
+// #include "token.hpp"
+#include "fileSystem.hpp"
 #include "iFstream.hpp"
+#include "oFstream.hpp"
 
 bool pFlow::positionFile::positionPointsFile()
 {
-	std::cout << "Reading user defined position file....";
+	REPORT(0) << "Reading user defined position file....";
 
 	position_.clear();
 
-	// ToDo: read position data from file.
-
-	std::ifstream inFile(fileName_);
-
-	inFile >> numPoints_;
+	// Read position data from file.
+	iFstream is(fileName_);
 
 	realx3 tempPoint;
 
-	for(int i = 0; i < numPoints_; i++)
-	{
-		inFile >> tempPoint.x_ >> tempPoint.y_ >> tempPoint.z_;
+	token tok;
+
+	while (!is.eof() || !is.bad())
+	{	
+		// read position x
+		is >> tempPoint.x_;
+
+		if(commaSeparated_)
+		{
+			is >> tok;
+			if(tok.type() != token::COMMA)
+			{
+				fatalErrorInFunction << "Error datafile format, the data not comma separated!";
+				return false;
+			}
+		}
+
+		// read position y
+		is >> tempPoint.y_;
+
+		if(commaSeparated_)
+		{
+			is >> tok;
+			if(tok.type() != token::COMMA)
+			{
+				fatalErrorInFunction << "Error datafile format, the data not comma separated!";
+				return false;
+			}
+		}
+		
+		// read position z
+		is >> tempPoint.z_;
+
+		// insert position data to vector
 		position_.push_back(tempPoint);
 	}
 
-	std::cout << "Done!" << std::endl;
+	REPORT(0) << "Done!" << END_REPORT;
 
 	return true;
 }
@@ -63,15 +97,15 @@ pFlow::positionFile::positionFile
 	(
 		poDict_.getVal<word>("name")
 	),
-	numPoints_
+	commaSeparated_
 	(
-		poDict_.getVal<uint64>("numPoints")
+		poDict_.getValOrSet("commaSeparated", Logical("Yes"))
 	),
 	position_
 	(
 		"position", 
-		max(maxNumberOfParticles(), numPoints_), 
-		numPoints_ ,
+		max(maxNumberOfParticles(), position_.size()), 
+		0,
 		RESERVE()
 	)
 {

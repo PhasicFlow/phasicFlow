@@ -38,12 +38,8 @@ positionParticles                                // positions particles
 	fileInfo
         {
               name   dataFile; // the name of the file that contains position and particle data, the data format is ASCII. The file is located at the root case folder
-              
-              numPoints 10000;   
-
-              fields ( (velocity realx3) (shapeName word) ); // (optional, it could be an empty list or omitted) list of other fields/data that should be read from the file
 		
-              commaSeparated    No; // optional (default is No). if Yes, then fields are separated by a comma
+              commaSeparated    No;                          // optional (default is No). if Yes, then fields are separated by a comma
        }
 	
 	regionType              box;                 // other options: cylinder and sphere

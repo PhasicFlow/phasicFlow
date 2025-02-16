@@ -35,11 +35,13 @@ private:
 
 	dictionary 	poDict_;
 
-	word 		fileName_;
+	// word 		fileName_;
 
-	uint32 		numPoints_;
+	fileSystem fileName_;
 	
 	realx3Vector 	position_;
+
+	Logical commaSeparated_;
 
 	bool positionPointsFile();
 
@@ -76,6 +78,11 @@ public:
 	{
 		return 0;
 	}
+
+	// bool commaSeparated()const
+	// {
+	// 	return commaSeparated_();
+	// } 
 	
 	// - const access to position
 	const realx3Vector& position()const final 
@@ -88,8 +95,6 @@ public:
 	{
 		return position_;
 	}
-
-	
 };	
 
 
