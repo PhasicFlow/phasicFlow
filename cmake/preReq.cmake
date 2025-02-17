@@ -23,19 +23,25 @@ endif()
 
 cmake_policy(SET CMP0169 OLD)
 
-include(FetchContent)
+# Kokkos folder creation 
+set(Kokkos_Source_DIR $ENV{HOME}/Kokkos/kokkos)
 
-FetchContent_Declare(
-    kokkos
-    GIT_REPOSITORY https://github.com/kokkos/kokkos.git
-    GIT_TAG 4.3.01
-)
+if(NOT EXISTS "${Kokkos_Source_DIR}/CMakeLists.txt")
 
-FetchContent_GetProperties(kokkos)
-if(NOT kokkos_POPULATED)
-    message(STATUS "Kokkos source directory not found. Downloading Kokkos version 4.3.01 ...")
-    FetchContent_Populate(kokkos)
-    set(Kokkos_Source_DIR ${kokkos_SOURCE_DIR})
+    include(FetchContent)
+    FetchContent_Declare(
+        kokkos
+        GIT_REPOSITORY https://github.com/kokkos/kokkos.git
+        GIT_TAG 4.3.01
+    )
+    
+    FetchContent_GetProperties(kokkos)
+    if(NOT kokkos_POPULATED)
+        message(STATUS "Kokkos source directory not found. Downloading Kokkos version 4.3.01 ...")
+        FetchContent_Populate(kokkos)
+        set(Kokkos_Source_DIR ${kokkos_SOURCE_DIR})
+    endif()
+
 endif()
 
 message(STATUS "Kokkos source directory is ${Kokkos_Source_DIR}")
