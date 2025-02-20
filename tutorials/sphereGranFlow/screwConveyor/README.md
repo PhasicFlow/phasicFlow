@@ -4,10 +4,13 @@
 
 The problem is to simulate a screw conveyor with a diameter of 0.2 m and a length of 1 m with a variable pitch. It is filled with 10 mm and 9 mm spherical particles. The timestep for integration is 0.00002 s. Particles are inserted from the top of the feeder at a rate of 2800 particles/s. The number composition of large and small particles is 2:1.
 
-<div align="center"><b>
+<div align="center">
+
+<img src="./screw.jpeg" style="width: 400px;">
+<b>
+
 A view of the screw conveyor simulation
 </b>
-<img src="./screw.jpeg" style="width: 400px;">
 </div>
 
 ***
@@ -48,18 +51,16 @@ in <b>settings/geometryDict</b> file
 
 ```C++
 motionModel rotatingAxisMotion; 
-.
-.
-.
+
 rotatingAxisMotionInfo
 {
 	rotAxis 
 	{
-		p1 (0 0 0.0);	// first point for the axis of rotation 
-		p2 (0 0 1.0);	// second point for the axis of rotation
-		omega 3.14; 	// rotation speed (rad/s)
-		startTime 1;    // when t>1 s, rotation starts 
-		endTime 30;     // when t>30 s, rotation stops
+		p1        (0 0 0.0); // first point for the axis of rotation 
+		p2        (0 0 1.0); // second point for the axis of rotation
+		omega     3.14; 	 // rotation speed (rad/s)
+		startTime 1;         // when t>1 s, rotation starts 
+		endTime   30;        // when t>30 s, rotation stops
 	}
 }
 ```

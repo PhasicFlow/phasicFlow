@@ -14,11 +14,11 @@ rotatingAxisInfo
 {
 	rotAxis 
 	{
-		p1 (0 0 0.0);	// first point for the axis of rotation 
-		p2 (0 0 1.0);	// second point for the axis of rotation
-		omega 3.14; 	// rotation speed (rad/s)
-		startTime 1;
-		endTime 30;
+		p1        (0 0 0.0); // first point for the axis of rotation 
+		p2        (0 0 1.0); // second point for the axis of rotation
+		omega     3.14; 	 // rotation speed (rad/s)
+		startTime 1;         // when t>1 s, rotation starts 
+		endTime   30;        // when t>30 s, rotation stops
 	}
 }
 
