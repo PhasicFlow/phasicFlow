@@ -1,4 +1,5 @@
 
+
 # Problem definition
 
 A rotating drum is randomly filled with two particle sizes and rotated to observe particle segregation. The focus of this tutorial is to show how to use the preprocessing tool `particlesPhasicFlow` to create the initial mixture of small and large particles. 
@@ -133,7 +134,7 @@ Each executable in PhasicFlow comes with some command line options that you can 
 Usage: particlesPhasicFlow [OPTIONS]
 
 Options:
-  -h,--help                   Help for using createParticles of phasicFlow v-0.1
+  -h,--help                   Help for using createParticles of phasicFlow v-1.0
   -v,--version                Program version information
   --discription               What does this app do?
   --positionParticles-only    Exectue the positionParticles part only and store the created pointStructure in the time folder.

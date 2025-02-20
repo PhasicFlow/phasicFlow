@@ -42,8 +42,6 @@ model
 
    en       (0.7);                               // coefficient of normal restitution
 
-   et       (1.0);                               // coefficient of tangential restitution 
-
    mu       (0.3);                               // dynamic friction 
 
    mur      (0.1);                               // rolling friction     

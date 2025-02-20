@@ -29,8 +29,6 @@ model
 {
    contactForceModel        nonLinearLimited;
 
-   rollingFrictionModel     normal;
-
    /*
 
    Property (lightMat-lightMat   lightMat-heavyMat    lightMat-wallMat
