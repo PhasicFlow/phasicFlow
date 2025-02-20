@@ -35,7 +35,7 @@ positionParticles                                // positions particles
 {
 	method                empty;                 // other options: ordered and random 
 
-	regionType              box;                 // other options: cylinder and sphere  
+	regionType            box;                   // other options: cylinder and sphere  
 
 	boxInfo                                      // box region for positioning particles 
 	{
