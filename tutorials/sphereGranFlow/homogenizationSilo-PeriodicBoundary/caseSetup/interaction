@@ -6,30 +6,30 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials   (lightMat heavyMat wallMat);         // a list of materials names
+materials           (lightMat heavyMat wallMat); // a list of materials names
 
-densities            (1000 1500.0 2500);         // density of materials [kg/m3]
+densities           (1000 1500.0 2500);          // density of materials [kg/m3]
 
-contactListType       sortedContactList;
+contactListType     sortedContactList;
 
 contactSearch
 {
-   method         NBS;                           // method for broad search particle-particle
+   method             NBS;                       // method for broad search particle-particle
    
-   updateInterval 10;
+   updateInterval     10;
 
-   sizeRatio      1.1;
+   sizeRatio          1.1;
 
-   cellExtent     0.55;
+   cellExtent         0.55;
 
-   adjustableBox  No;
+   adjustableBox      No;
 } 
 
 model
 {
-   contactForceModel nonLinearLimited;
+   contactForceModel        nonLinearLimited;
 
-   rollingFrictionModel        normal;
+   rollingFrictionModel     normal;
 
    /*
 
