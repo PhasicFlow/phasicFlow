@@ -10,7 +10,7 @@ fileFormat  ASCII;
 active           Yes;   // is insertion active -> yes or no
 
 /*
-   one layers of particles are packed 
+   six layers of particles are packed 
 */
 layer0
 {  
@@ -108,7 +108,7 @@ layer2
    
    mixture
    {
-      lightSphere 1; // only lightSphere
+      parType1 1; // only parType1
       
    }
 }
@@ -142,7 +142,7 @@ layer3
    
    mixture
    {
-      heavySphere 1;
+      parType2 1;
       
    }
 }
@@ -175,7 +175,7 @@ layer4
    
    mixture
    {
-      lightSphere 1;
+      parType1 1;
       
    }
 }
@@ -208,7 +208,7 @@ layer5
    
    mixture
    {
-      heavySphere 1;
+      parType2 1;
       
    }
 }

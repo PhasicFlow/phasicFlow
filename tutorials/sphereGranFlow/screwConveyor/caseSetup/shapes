@@ -3,11 +3,10 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
 objectName 	sphereDict;
-objectType 	sphereShape;
+objectType 	shapes;
 fileFormat 	ASCII;
 /*---------------------------------------------------------------------------*/
-names 		(sphere1); 	                         // names of shapes 
 
-diameters 	  (0.01);	                         // diameter of shapes 
-
-materials	 (prop1);	                         // material names for shapes 
+names 		(sphere1 sphere2); 	// names of shapes 
+diameters 	(0.01  	 0.009);	// diameter of shapes 
+materials	(prop1   prop1);	// material names for shapes 

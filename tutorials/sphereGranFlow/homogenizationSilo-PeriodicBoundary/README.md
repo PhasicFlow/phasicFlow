@@ -1,14 +1,18 @@
-# Simulating a simple homogenization silo using periodic boundary 
+# Simulating a Simple Homogenization Silo Using Periodic Boundary 
 
 ## Problem
-A homogenization silo is used to mix particles inside a silo using the circulation of particles. A pneumatic conveying system is used to carry particles at the exit and re-enter them from the top. Here, we use a `periodic` boundary to simulate the action of the pneumatic conveyor system for circulating particles. Particles that are exiting from the bottom are re-entered from top using this boundary (`periodic`).
+A homogenization silo is used to mix particles inside a silo using the circulation of particles. A pneumatic conveying system carries particles from the exit and re-enters them from the top. Here, we use a `periodic` boundary to simulate the action of the pneumatic conveyor system for circulating particles. Particles exiting from the bottom are re-entered from the top using this boundary (`periodic`).
+
+The simulation case setup is essentially similar to the [`layeredSiloFilling`](https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/layeredSiloFilling) tutorial. There is also another change with regard to `layeredSiloFilling`. The exit gate is opened after the filling phase of the silo (see `settings/geometryDict` for more details).
 
 <div align ="center">
-<b>
-A view of homogenization silo
-
-</b>
 <img src="./homoSilo.jpeg" style="width: 400px;">
+
+<b>
+
+A view of the homogenization silo
+</b>
+
 </div>
 
 ***
