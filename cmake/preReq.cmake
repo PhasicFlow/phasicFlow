@@ -21,12 +21,16 @@ if(pFlow_STD_Parallel_Alg)
     endif()
 endif()
 
-cmake_policy(SET CMP0169 OLD)
 
 # Kokkos folder creation 
 set(Kokkos_Source_DIR $ENV{HOME}/Kokkos/kokkos)
 
 if(NOT EXISTS "${Kokkos_Source_DIR}/CMakeLists.txt")
+
+    # Check CMake version and set policy CMP0169 if CMake version is 3.30 or higher
+    if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.30")
+        cmake_policy(SET CMP0169 OLD)
+    endif()
 
     include(FetchContent)
     FetchContent_Declare(
