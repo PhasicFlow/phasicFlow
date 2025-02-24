@@ -36,7 +36,15 @@ pFlow::box::box
 	(
 		dict.getVal<realx3>("max")
 	)
-{}
+{
+	if( !(min_ < max_))
+	{
+		fatalErrorInFunction<<
+		"the corenter points of box are not set correctly"<<
+		" (min point is greater than max point). In dictionary "<< dict.globalName()<<endl;
+		fatalExit;
+	}
+}
 
 FUNCTION_H
 pFlow::box::box
@@ -58,6 +66,13 @@ bool pFlow::box::read(iIstream & is)
 {
 	if(!is.nextData<realx3>("min", min_)) return false;
 	if(!is.nextData<realx3>("max", max_)) return false;
+	if(!(min_ < max_))
+	{
+		ioErrorInFile(is.name(), is.lineNumber())<<
+		"the corenter points of box are not set correctly"<<
+		" (min point is greater than max point). In dictionary "<<endl;
+		return false;
+	}
 	return true;
 }
 
