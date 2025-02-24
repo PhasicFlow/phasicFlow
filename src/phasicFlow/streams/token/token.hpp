@@ -356,7 +356,7 @@ public:
         /// Token is WORD, DIRECTIVE, STRING, VARIABLE or VERBATIM
         inline bool isStringType() const;
 
-
+        inline bool isComma()const;
     //- Access
 
         /// Return boolean token value.

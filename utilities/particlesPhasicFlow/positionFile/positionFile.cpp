@@ -42,39 +42,72 @@ bool pFlow::positionFile::positionPointsFile()
 
 	token tok;
 
-	while (!is.eof() || !is.bad())
+	while (!is.bad())
 	{	
 		// read position x
-		is >> tempPoint.x_;
+
+		is >> tok;
+		if(tok.good()&& tok.isNumber()&& !is.eof())
+		{
+			tempPoint.x() = tok.realToken();
+		}
+		else
+		{
+			ioErrorInFile(is.name(), is.lineNumber())<< "Bad char or end of file in reading position x!\n";
+			return false;
+		}
 
 		if(commaSeparated_)
 		{
 			is >> tok;
-			if(tok.type() != token::COMMA)
+			if( !tok.isComma() || is.eof())
 			{
-				fatalErrorInFunction << "Error datafile format, the data not comma separated!";
+				ioErrorInFile(is.name(), is.lineNumber())<< "Bad char or end of file in reading comma!\n";
 				return false;
 			}
 		}
 
 		// read position y
-		is >> tempPoint.y_;
+		is >> tok;
+		if(tok.good()&& tok.isNumber()&& !is.eof())
+		{
+			tempPoint.y() = tok.realToken();
+		}
+		else
+		{
+			ioErrorInFile(is.name(), is.lineNumber())<< "Bad char or end of file in reading position y!\n";
+			return false;
+		}
 
 		if(commaSeparated_)
 		{
 			is >> tok;
-			if(tok.type() != token::COMMA)
+			if(!tok.isComma() || is.eof())
 			{
-				fatalErrorInFunction << "Error datafile format, the data not comma separated!";
+				ioErrorInFile(is.name(), is.lineNumber())<< "Bad char or end of file in reading comma!\n";
 				return false;
 			}
 		}
 		
 		// read position z
-		is >> tempPoint.z_;
+		is >> tok;
+		if(tok.good()&& tok.isNumber()&& !is.eof())
+		{
+			tempPoint.z() = tok.realToken();
+		}
+		else
+		{
+			ioErrorInFile(is.name(), is.lineNumber())<< "Bad char or end of file in reading position z!\n";
+			return false;
+		}
 
 		// insert position data to vector
 		position_.push_back(tempPoint);
+
+		is>>tok;
+		if(is.eof()) break;
+
+		is.putBack(tok);
 	}
 
 	REPORT(0) << "Done!" << END_REPORT;
@@ -104,7 +137,7 @@ pFlow::positionFile::positionFile
 	position_
 	(
 		"position", 
-		max(maxNumberOfParticles(), position_.size()), 
+		1, 
 		0,
 		RESERVE()
 	)
