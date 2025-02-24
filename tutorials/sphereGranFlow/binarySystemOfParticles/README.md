@@ -1,6 +1,6 @@
 
 
-# Problem definition
+# Problem definition (v-1.0)
 
 A rotating drum is randomly filled with two particle sizes and rotated to observe particle segregation. The focus of this tutorial is to show how to use the preprocessing tool `particlesPhasicFlow` to create the initial mixture of small and large particles. 
 
@@ -17,9 +17,7 @@ a view of the rotating drum with small and large particles after 7 seconds of ro
 
 # Case setup
 
-In the file `caseSetup/shapes` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
-
-[Simulation case setup files can be found in tutorials/sphereGranFlow folder.](https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/binarySystemOfParticles)
+Simulation case setup files can be found in [tutorials/sphereGranFlow folder.](https://github.com/PhasicFlow/phasicFlow/tree/main/tutorials/sphereGranFlow/binarySystemOfParticles)
 ### Shape definition 
 
 In the file `caseSetup/shapes` two particle types with the names `smallSphere` and `largeSphere` and the diameters 3 and 5 mm are defined. 
@@ -64,7 +62,7 @@ positionParticles
     }
 }
 ```
-In the `setFields` dictionary, located in the `settings/particlesDict` file, you define the initial `velocity`, `acceleration`, `rotVelocity` and `shapeName` fields for all 30000 particles in the simulation. In the `selectors' dictionary, you can select subsets of particles and set the field value for those subsets. The `selectRange` selector is defined in the `shapeAssigne` subdictionary. It defines a range with `begin`, `end` and `stride` to select particles. And in the `fieldValue` subdictionary the field values for selected particles are set (any number of field values can be set here).
+In the `setFields` dictionary, located in the `settings/particlesDict` file, you define the initial `velocity`, `acceleration`, `rotVelocity` and `shapeName` fields for all 30000 particles in the simulation. In the `selectors` dictionary, you can select subsets of particles and set the field value for those subsets. The `selectRange` selector is defined in the `shapeAssigne` subdictionary. It defines a range with `begin`, `end` and `stride` to select particles. And in the `fieldValue` subdictionary the field values for selected particles are set (any number of field values can be set here).
 
 **Note:** Other selectors are: `selectBox` that selects particles inside a box and `randomSelect` that selects particles randomly from a given index range. 
 
@@ -93,7 +91,7 @@ setFields
     {
         shapeAssigne
         {
-            selector     stridedRange;                     // other options: box, cylinder, sphere, randomPoints
+            selector     stridedRange;  // other options: box, cylinder, sphere, randomPoints
             
             stridedRangeInfo
             {

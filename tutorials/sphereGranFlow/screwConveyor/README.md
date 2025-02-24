@@ -1,4 +1,4 @@
-# Simulating a Screw Conveyor
+# Simulating a Screw Conveyor (v-1.0)
 
 ## Problem Definition
 

@@ -83,6 +83,7 @@ surfaces
 
 		// motion component name 
 		motion 	 none;
+	}
 }
 ```
 ## Defining particles 
