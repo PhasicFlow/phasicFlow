@@ -1,0 +1,50 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	domainDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+// Simulation domain: every particles that goes outside this domain will be deleted
+globalBox                                        
+{
+    min (-0.12 -0.12 0.0);  // lower corner point of the box 
+
+    max (0.12   0.12 0.1);  // upper corner point of the box 
+}
+
+boundaries
+{
+
+	left // x-
+	{
+		type     exit;     
+	}
+
+	right // x+
+	{
+		type     exit;    
+	}
+
+	bottom // y-
+	{
+		type     exit;   
+	}
+
+	top // y+
+	{
+		type     exit;    
+	}
+
+	rear // z-
+	{
+		type     periodic;   // this boundary type should be defined in both z+ and z- sides
+	}
+
+	front // z+
+	{
+		type     periodic;   // this boundary type should be defined in both z+ and z- sides
+	}
+}
