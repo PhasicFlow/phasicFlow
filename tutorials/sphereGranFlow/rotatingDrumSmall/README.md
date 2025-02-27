@@ -1,4 +1,4 @@
-# Problem definition (v-1.0)
+## Problem definition (v-1.0)
 The problem is to simulate a rotating drum with the diameter 0.24 m and the length 0.1 m rotating at 11.6 rpm. It is filled with 30,000 4-mm spherical particles. The timestep for integration is 0.00001 s.
 <div align="center"><b>
 a view of rotating drum
@@ -54,6 +54,8 @@ in <b>settings/particlesDict</b> file
 </div>
 
 ```C++
+setFields
+{
     defaultValue 
     {
         velocity        realx3  (0 0 0);         // linear velocity (m/s)
@@ -67,25 +69,9 @@ in <b>settings/particlesDict</b> file
 
     selectors
     {
-        shapeAssigne
-        {
-            selector  stridedRange;             // other options: box, cylinder, sphere, randomPoints 
- 
-            stridedRangeInfo
-            {
-                begin        0;                 // begin index of points
 
-                end         ;                   // end index of points 
-
-                stride      3;                  // stride for selector 
-            }
-
-            fieldValue                          // fields that the selector is applied to 
-            {
-                shapeName  word  sphere1;       // sets shapeName of the selected points to largeSphere
-            }
-        }
     }
+}
 ```
 
 Enter the following command in the terminal to create the particles and store them in `0` folder.
@@ -215,7 +201,6 @@ model
     Geff  (0.8e6);       // Shear modulus [Pa]
     nu    (0.25);        // Poisson's ratio [-]
     en    (0.7);         // coefficient of normal restitution
-    et    (1.0);         // coefficient of tangential restitution 
     mu    (0.3);         // dynamic friction 
     mur   (0.1);         // rolling friction 
 }
@@ -246,10 +231,10 @@ contactSearch
 
 ```
 
-In the file `caseSetup/sphereShape`, you can define a list of `names` for shapes (`shapeName` in particle field), a list of diameters for shapes and their `properties` names. 
+In the file `caseSetup/shape`, you can define a list of `names` for shapes (`shapeName` in particle field), a list of diameters for shapes and their `properties` names. 
 
 <div align="center"> 
-in <b>caseSetup/sphereShape</b> file
+in <b>caseSetup/shape</b> file
 </div>
 
 ```C++
@@ -302,14 +287,9 @@ in <b>settings/domainDict</b> file
 ```C++
 globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
 {
-    min (-0.12 -0.12 0.00);                  // lower corner point of the box 
+    min (-0.12 -0.12 0.00);                      // lower corner point of the box 
 
-    max (0.12   0.12 0.11);                  // upper corner point of the box 
-}
-
-decomposition
-{
-    direction z;
+    max (0.12   0.12 0.11);                      // upper corner point of the box 
 }
 
 boundaries

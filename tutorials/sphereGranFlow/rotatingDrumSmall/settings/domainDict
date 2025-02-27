@@ -13,11 +13,6 @@ globalBox                                        // Simulation domain: every par
         max (0.12   0.12 0.11);                  // upper corner point of the box 
 }
 
-decomposition
-{
-	direction z;
-}
-
 boundaries
 {
 	left
