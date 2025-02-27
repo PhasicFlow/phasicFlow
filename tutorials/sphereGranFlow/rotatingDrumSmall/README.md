@@ -1,8 +1,15 @@
-## Problem definition (v-1.0)
+# Simularing a rotating drum (v-1.0) 
+## Problem definition 
 The problem is to simulate a rotating drum with the diameter 0.24 m and the length 0.1 m rotating at 11.6 rpm. It is filled with 30,000 4-mm spherical particles. The timestep for integration is 0.00001 s.
-<div align="center"><b>
-a view of rotating drum
+<div align="center">
+<b>
+    
+A view of rotating drum
+</b>
+<b>
+
 ![](https://github.com/PhasicFlow/phasicFlow/blob/media/media/rotating-drum-s.png)
+
 </b></div>
 
 ***
@@ -206,7 +213,7 @@ model
 }
 ```
 
-Dictionary `contactSearch` sets the methods for particle-particle and particle-wall contact search. `method` specifies the algorithm for finding neighbor list for particle-particle contacts and `wallMapping` shows how particles are mapped onto walls for finding neighbor list for particle-wall contacts. `updateFrequency` sets the frequency for updating neighbor list and `sizeRatio` sets the size of enlarged cells (with respect to particle diameter) for finding neighbor list. Larger `sizeRatio` include more particles in the neighbor list and you require to update it less frequent. 
+Dictionary `contactSearch` sets the methods for particle-particle and particle-wall contact search. `method` specifies the algorithm for finding neighbor list for particle-particle contacts. `updateInterval` sets the number of iterations between each occurance of  updating neighbor list and `sizeRatio` sets the size of enlarged cells (with respect to particle diameter) for finding neighbor list. Larger `sizeRatio` include more particles in the neighbor list and you require to update it less frequent. 
 
 <div align="center"> 
 in <b>caseSetup/interaction</b> file
@@ -278,14 +285,15 @@ timersReport                        Yes;         // report timers (Yes or No)
 timersReportInterval               0.01;         // time interval for reporting timers
 ```
 
-The dictionary `domain` defines the a rectangular bounding box with two corner points for the simulation. Each particle that gets out of this box, will be deleted automatically. 
+The dictionary `settings/domainDict` defines the a rectangular bounding box with two corner points for the simulation. Each particle that gets out of this box, will be deleted automatically. 
 
 <div align="center"> 
 in <b>settings/domainDict</b> file
 </div>
 
 ```C++
-globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
+// Simulation domain: every particles that goes outside this domain will be deleted
+globalBox                                        
 {
     min (-0.12 -0.12 0.00);                      // lower corner point of the box 
 
