@@ -1,5 +1,4 @@
-# Simulating a small rotating drum {#rotatingDrumSmall}
-## Problem definition (v-1.0)
+# Problem definition (v-1.0)
 The problem is to simulate a rotating drum with the diameter 0.24 m and the length 0.1 m rotating at 11.6 rpm. It is filled with 30,000 4-mm spherical particles. The timestep for integration is 0.00001 s.
 <div align="center"><b>
 a view of rotating drum
@@ -25,27 +24,27 @@ in <b>settings/particlesDict</b> file
 ```C++
 positionParticles                                // positions particles 
 {
-	method ordered;     		                 // other options: random and empty
+    method ordered;                              // other options: random and empty
 
-	mortonSorting 			   Yes;              // perform initial sorting based on morton code?   
+    mortonSorting              Yes;              // perform initial sorting based on morton code?   
 
-	orderedInfo
-	{
-		diameter  0.004; 						 // minimum space between centers of particles
+    orderedInfo
+    {
+        diameter  0.004;                         // minimum space between centers of particles
 
-		numPoints 30000; 	                     // number of particles in the simulation 
+        numPoints 30000;                         // number of particles in the simulation 
 
-		axisOrder (z y x);                       // axis order for filling the space with particles
-	}
+        axisOrder (z y x);                       // axis order for filling the space with particles
+    }
 
-	regionType box;                              // other options: cylinder and sphere  
+    regionType box;                              // other options: cylinder and sphere  
 
-	boxInfo  				                     // box information for positioning particles 
-	{
-		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
+    boxInfo                                      // box information for positioning particles 
+    {
+        min (-0.08 -0.08 0.015);                 // lower corner point of the box 
 
-		max ( 0.08  0.08 0.098);	             // upper corner point of the box 
-	}
+        max ( 0.08  0.08 0.098);                 // upper corner point of the box 
+    }
 }
 ```
 In dictionary `setFields`, dictionary `defaultValue` defines the initial value for particle fields (here, `velocity`, `acceleration`, `rotVelocity`, and `shapeName`). Note that `shapeName` field should be consistent with the name of shape that you later set for shapes (here one shape with name `sphere1`).
@@ -55,38 +54,38 @@ in <b>settings/particlesDict</b> file
 </div>
 
 ```C++
-	defaultValue 
-	{
-		velocity 		realx3 	(0 0 0);         // linear velocity (m/s)
+    defaultValue 
+    {
+        velocity        realx3  (0 0 0);         // linear velocity (m/s)
 
-		acceleration 	realx3 	(0 0 0);         // linear acceleration (m/s2)
+        acceleration    realx3  (0 0 0);         // linear acceleration (m/s2)
 
-		rVelocity 		realx3 	(0 0 0);         // rotational velocity (rad/s)
+        rVelocity       realx3  (0 0 0);         // rotational velocity (rad/s)
 
-		shapeName 		word	sphere1;         // name of the particle shape 
-	}
+        shapeName       word    sphere1;         // name of the particle shape 
+    }
 
-	selectors
-	{
-		shapeAssigne
-		{
-			selector 	stridedRange;            // other options: box, cylinder, sphere, randomPoints 
+    selectors
+    {
+        shapeAssigne
+        {
+            selector  stridedRange;             // other options: box, cylinder, sphere, randomPoints 
  
-			stridedRangeInfo
-			{
-				begin 	    0;			         // begin index of points
+            stridedRangeInfo
+            {
+                begin        0;                 // begin index of points
 
-				end 	;		 			     // end index of points 
+                end         ;                   // end index of points 
 
-				stride      3;			 		 // stride for selector 
-			}
+                stride      3;                  // stride for selector 
+            }
 
-			fieldValue  					     // fields that the selector is applied to 
-			{
-				shapeName 	word    sphere1;     // sets shapeName of the selected points to largeSphere
-			}
-		}
-	}
+            fieldValue                          // fields that the selector is applied to 
+            {
+                shapeName  word  sphere1;       // sets shapeName of the selected points to largeSphere
+            }
+        }
+    }
 ```
 
 Enter the following command in the terminal to create the particles and store them in `0` folder.
@@ -105,14 +104,14 @@ motionModel rotatingAxis;
 
 rotatingAxisInfo                                 // information for rotatingAxisMotion motion model 
 {
-	rotAxis 
-	{
-		p1 (0.0 0.0 0.0);	                     // first point for the axis of rotation 
+    rotAxis 
+    {
+        p1 (0.0 0.0 0.0);                        // first point for the axis of rotation 
 
-		p2 (0.0 0.0 1.0);	                     // second point for the axis of rotation
+        p2 (0.0 0.0 1.0);                        // second point for the axis of rotation
 
-		omega      1.214; 		                 // rotation speed (rad/s)
-	}
+        omega      1.214;                        // rotation speed (rad/s)
+    }
 }
 ```
 In the dictionary `surfaces` you can define all the surfaces (walls) in the simulation. Two main options are available: built-in geometries in PhasicFlow, and providing surfaces with stl file. Here we use built-in geometries. In `cylinder` dictionary, a cylindrical shell with end radii, `radius1` and `radius2`, axis end points `p1` and `p2`, `material` name `prop1`, `motion` component `rotAxis` is defined. `resolution` sets number of division for the cylinder shell. `wall1` and `wall2` define two plane walls at two ends of cylindrical shell with coplanar corner points `p1`, `p2`, `p3`, and `p4`, `material` name `prop1` and `motion` component `rotAxis`.  
@@ -124,70 +123,70 @@ in <b>settings/geometryDict</b> file
 ```C++
 surfaces
 {
-	/*
-	    A cylinder with begin and end radii 0.12 m and axis points at (0 0 0) and (0 0 0.1)
-	*/
+    /*
+        A cylinder with begin and end radii 0.12 m and axis points at (0 0 0) and (0 0 0.1)
+    */
 
-	cylinder
-	{
-		type cylinderWall;                       // type of the wall
+    cylinder
+    {
+        type cylinderWall;                       // type of the wall
 
-		p1  (0.0 0.0 0.0);                       // begin point of cylinder axis
+        p1  (0.0 0.0 0.0);                       // begin point of cylinder axis
 
-		p2  (0.0 0.0 0.1);                       // end point of cylinder axis
+        p2  (0.0 0.0 0.1);                       // end point of cylinder axis
 
-		radius1      0.12;		                 // radius at p1
+        radius1      0.12;                       // radius at p1
 
-		radius2      0.12;		                 // radius at p2
+        radius2      0.12;                       // radius at p2
 
-		resolution     24;                       // number of divisions
+        resolution     24;                       // number of divisions
 
-		material    prop1;                       // material name of this wall
+        material    prop1;                       // material name of this wall
 
-		motion    rotAxis;		                 // motion component name 
-	}
+        motion    rotAxis;                       // motion component name 
+    }
 
-	/*
-		This is a plane wall at the rear end of cylinder
-	*/
+    /*
+        This is a plane wall at the rear end of cylinder
+    */
 
-	wall1
-	{
-		type       planeWall;			         // type of the wall
+    wall1
+    {
+        type       planeWall;                    // type of the wall
 
-		p1 (-0.12 -0.12 0.0);	                 // first point of the wall
+        p1 (-0.12 -0.12 0.0);	                 // first point of the wall
 
-		p2 ( 0.12 -0.12 0.0);                    // second point
+        p2 ( 0.12 -0.12 0.0);                    // second point
 
-		p3 ( 0.12  0.12 0.0);                    // third point
+        p3 ( 0.12  0.12 0.0);                    // third point
 
-		p4 (-0.12  0.12 0.0);                    // fourth point 
+        p4 (-0.12  0.12 0.0);                    // fourth point 
 
-		material       prop1;                    // material name of the wall
+        material       prop1;                    // material name of the wall
 
-		motion       rotAxis;			         // motion component name 
-	}
+        motion       rotAxis;                    // motion component name 
+    }
 
-	/*
-		This is a plane wall at the front end of cylinder
-	*/
+    /*
+        This is a plane wall at the front end of cylinder
+    */
 
-	wall2
-	{
-		type       planeWall;                    // type of the wall
+    wall2
+    {
+        type       planeWall;                    // type of the wall
 
-		p1 (-0.12 -0.12 0.1);                    // first point of the wall
+        p1 (-0.12 -0.12 0.1);                    // first point of the wall
 
-		p2 ( 0.12 -0.12 0.1);                    // second point
+        p2 ( 0.12 -0.12 0.1);                    // second point
 
-		p3 ( 0.12  0.12 0.1);                    // third point
+        p3 ( 0.12  0.12 0.1);                    // third point
 
-		p4 (-0.12  0.12 0.1);                    // fourth point 
+        p4 (-0.12  0.12 0.1);                    // fourth point 
 
-		material       prop1;                    // material name of the wall
+        material       prop1;                    // material name of the wall
 
-		motion       rotAxis;                    // motion component name 
-	}
+        motion       rotAxis;                    // motion component name 
+    }
 }
 ```
 Enter the following command in the terminal to create the geometry and store it in `0/geometry` folder.
@@ -209,16 +208,16 @@ densities      (1000.0);   // density of materials [kg/m3]
 .
 model
 {
-   contactForceModel nonLinearNonLimited;
-   rollingFrictionModel normal;
+    contactForceModel     nonLinearNonLimited;
+    rollingFrictionModel  normal;
 
-   Yeff  (1.0e6);       // Young modulus [Pa]
-   Geff  (0.8e6);       // Shear modulus [Pa]
-   nu    (0.25);        // Poisson's ratio [-]
-   en    (0.7);         // coefficient of normal restitution
-   et    (1.0);         // coefficient of tangential restitution 
-   mu    (0.3);         // dynamic friction 
-   mur   (0.1);         // rolling friction 
+    Yeff  (1.0e6);       // Young modulus [Pa]
+    Geff  (0.8e6);       // Shear modulus [Pa]
+    nu    (0.25);        // Poisson's ratio [-]
+    en    (0.7);         // coefficient of normal restitution
+    et    (1.0);         // coefficient of tangential restitution 
+    mu    (0.3);         // dynamic friction 
+    mur   (0.1);         // rolling friction 
 }
 ```
 
@@ -234,15 +233,15 @@ contactListType   sortedContactList;
 contactSearch
 {
   
-   method          NBS;                          // method for broad search 
+    method          NBS;                          // method for broad search 
     
-   updateInterval   10;
+    updateInterval   10;
 
-   sizeRatio       1.1;
+    sizeRatio       1.1;
 
-   cellExtent     0.55;
+    cellExtent     0.55;
 
-   adjustableBox   Yes;
+    adjustableBox   Yes;
 } 
 
 ```
@@ -254,9 +253,9 @@ in <b>caseSetup/sphereShape</b> file
 </div>
 
 ```C++
-names 		(sphere1); 	// names of shapes 
-diameters 	(0.004);	// diameter of shapes 
-materials	(prop1);	// material names for shapes 
+names       (sphere1);   // names of shapes 
+diameters   (0.004);     // diameter of shapes 
+materials   (prop1);     // material names for shapes 
 ```
 
 Other settings for the simulation can be set in file `settings/settingsDict`. 
@@ -268,30 +267,30 @@ in <b>settings/settingsDict</b> file
 ```C++
 run   rotatingDrumSmall;
 
-dt 				0.00001; 	                     // time step for integration (s)
+dt              0.00001;                         // time step for integration (s)
 
-startTime 		      0; 			             // start time for simulation 
+startTime             0;                         // start time for simulation 
 
-endTime 		     10; 		                 // end time for simulation 
+endTime              10;                         // end time for simulation 
 
-saveInterval 	    0.1; 		                 // time interval for saving the simulation
+saveInterval        0.1;                         // time interval for saving the simulation
 
-timePrecision         6;			             // maximum number of digits for time folder 
+timePrecision         6;                         // maximum number of digits for time folder 
 
-g 			 (0 -9.8 0);                         // gravity vector (m/s2) 
+g            (0 -9.8 0);                         // gravity vector (m/s2) 
 
 includeObjects (diameter);                       // save necessary (i.e., required) data on disk
 
 // exclude unnecessary data from saving on disk
 excludeObjects (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
 
-integrationMethod 		AdamsBashforth2; 	     // integration method 
+integrationMethod       AdamsBashforth2;         // integration method 
 
-writeFormat				          ascii;         // data writting format (ascii or binary)
+writeFormat                       ascii;         // data writting format (ascii or binary)
 
-timersReport 			            Yes;  	     // report timers (Yes or No)
+timersReport                        Yes;         // report timers (Yes or No)
 
-timersReportInterval   	           0.01;	     // time interval for reporting timers
+timersReportInterval               0.01;         // time interval for reporting timers
 ```
 
 The dictionary `domain` defines the a rectangular bounding box with two corner points for the simulation. Each particle that gets out of this box, will be deleted automatically. 
@@ -303,59 +302,47 @@ in <b>settings/domainDict</b> file
 ```C++
 globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
 {
-		min (-0.12 -0.12 0.00);                  // lower corner point of the box 
+    min (-0.12 -0.12 0.00);                  // lower corner point of the box 
 
-	    max (0.12   0.12 0.11);                  // upper corner point of the box 
+    max (0.12   0.12 0.11);                  // upper corner point of the box 
 }
 
 decomposition
 {
-	direction z;
+    direction z;
 }
 
 boundaries
 {
-	
+    left
+    {
+        type     exit;                           // other options: periodic, reflective 
+    }
 
-	neighborListUpdateInterval     50;           /* Determines how often (how many iterations) do you want to 
+    right
+    {
+        type     exit;                           // other options: periodic, reflective 
+    }
 
-	                                                rebuild the list of particles in the neighbor list 
+    bottom
+    {
+        type     exit;                           // other options: periodic, reflective 
+    }
 
-	                                                of all boundaries in the simulation domain        */
+    top
+    {
+        type     exit;                           // other options: periodic, reflective 
+    }
 
-	updateInterval                 10;           // Determines how often do you want to update the new changes in the boundary
+    rear
+    {
+        type     exit;                           // other options: periodic, reflective 
+    }
 
-	neighborLength              0.004;           // The distance from the boundary plane within which particles are marked to be in the boundary list
-
-	left
-	{
-		type     exit;	                         // other options: periodict, reflective 
-	}
-
-	right
-	{
-		type     exit;                           // other options: periodict, reflective 
-	}
-
-	bottom
-	{
-		type     exit;                           // other options: periodict, reflective 
-	}
-
-	top
-	{
-		type     exit;                           // other options: periodict, reflective 
-	}
-
-	rear
-	{
-		type     exit;                           // other options: periodict, reflective 
-	}
-
-	front
-	{
-		type     exit;                           // other options: periodict, reflective 
-	}
+    front
+    {
+        type     exit;                           // other options: periodic, reflective 
+    }
 }
 ```
 
@@ -368,4 +355,4 @@ The solver for this simulation is `sphereGranFlow`. Enter the following command 
 ## Post processing 
 After finishing the simulation, you can render the results in Paraview. To convert the results to VTK format, just enter the following command in the terminal. This will converts all the results (particles and geometry) to VTK format and store them in folder `VTK/`. 
 
-`> pFlowToVTK`
+`> pFlowToVTK --binary`
