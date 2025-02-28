@@ -29,7 +29,7 @@ pFlow::stationaryWall::stationaryWall
 :
 	fileDictionary(objf, owner)
 {
-
+	const auto& dummy = this->subDictOrCreate("stationaryInfo");
 	if(!impl_readDictionary(*this) )
 	{
 		fatalErrorInFunction;
@@ -46,6 +46,8 @@ pFlow::stationaryWall::stationaryWall
 :
 	fileDictionary(objf, dict, owner)
 {
+	const auto& dummy = this->subDictOrCreate("stationaryInfo");
+
 	if(!impl_readDictionary(*this) )
 	{
 		fatalErrorInFunction;
