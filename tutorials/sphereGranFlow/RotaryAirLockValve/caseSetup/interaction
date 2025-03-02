@@ -33,7 +33,6 @@ model
    
     /*
         Property (sphereMat-sphereMat  sphereMat-wallMat
-                                       
                                        wallMat-wallMat);
     */
    
@@ -48,9 +47,6 @@ model
 
     en    (0.70 0.80                             // coefficient of normal restitution
                 1.0);
-
-    et    (1.0 1.0                               // coefficient of tangential restitution
-               1.0);
 
     mu    (0.3 0.35                              // dynamic friction
                0.35);
