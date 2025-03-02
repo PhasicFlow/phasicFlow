@@ -6,7 +6,7 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials           (sphereMat  wallMat);        // a list of materials names
+materials           (sphereMat wallMat);         // a list of materials names
 
 densities           (1000 2500);                 // density of materials [kg/m3]
 

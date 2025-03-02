@@ -8,8 +8,6 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 active                yes;                       // is insertion active -> yes or no
 
-checkForCollision     No;                        // is checked          -> yes or no
-
 /*
 	one region is considered for inserting particles. 
 */
@@ -42,6 +40,6 @@ topRegion
 
 	mixture
 	{
-		sphere 1;  
+		sphere     1;  
 	}
 }

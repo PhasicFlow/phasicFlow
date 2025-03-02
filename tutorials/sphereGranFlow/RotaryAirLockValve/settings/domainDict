@@ -8,9 +8,9 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
 {
-	min     (0.397538  0.178212 0.00);
+	min     (0.397538 0.178212 0.00);
 	
-	max     (0.725537  0.600214 0.06);
+	max     (0.725537 0.600214 0.06);
 }
 
 boundaries

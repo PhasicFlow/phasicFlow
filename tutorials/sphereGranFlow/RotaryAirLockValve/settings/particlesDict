@@ -50,25 +50,5 @@ setFields
 
 positionParticles 				                 // positions particles 
 {
-	method     ordered;                          // other options: random and empty
-
-	orderedInfo
-	{		
-		diameter      0.005; 	                 // diameter of particles
-
-		numPoints     50000; 	                 // number of particles in the simulation
-
-		axisOrder     (z x y);                   // axis order for filling the space with particles
-	}
-	
-	regionType     cylinder;                     // other options: box and sphere  
-
-	cylinderInfo  				                 // cylinder information for positioning particles 
-	{
-		p1         (0.0 0.0 0.003); 	         // begin point of cylinder axis
-
-		p2         (0.0 0.0 0.22);		         // end point of cylinder axis
-
-		radius     0.117;		                 // radius of cylinder 
-	}
+	method     empty;                            // other options: random and ordered
 }
