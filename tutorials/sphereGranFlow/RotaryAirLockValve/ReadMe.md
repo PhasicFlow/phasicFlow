@@ -88,10 +88,10 @@ surfaces
 ```
 ## Defining particles 
 ### Diameter and material of spheres 
-In the `caseSetup/sphereShape` the diameter and the material name of the particles are defined.
+In the `caseSetup/shapes` the diameter and the material name of the particles are defined.
 
 <div align="center"> 
-in <b>caseSetup/sphereShape</b> file
+in <b>caseSetup/shapes</b> file
 </div>
 
 ```C++

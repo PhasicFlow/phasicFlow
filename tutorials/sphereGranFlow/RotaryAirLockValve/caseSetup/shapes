@@ -6,8 +6,8 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-names 		   (sphere);                         // names of shapes
+names 		  (sphere);                          // names of shapes
 
-diameters 	    (0.005);                         // diameter of shapes 
+diameters 	  (0.005);                           // diameter of shapes 
 
-materials	(sphereMat);                         // material names for shapes 
+materials     (sphereMat);                       // material names for shapes 

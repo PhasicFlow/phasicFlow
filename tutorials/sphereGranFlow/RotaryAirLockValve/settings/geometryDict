@@ -6,21 +6,21 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-motionModel rotatingAxis;                         // motion model: rotating object around an axis
+motionModel     rotatingAxis;                    // motion model: rotating object around an axis
 
-rotatingAxisInfo                                  // information for rotatingAxisMotion motion model 
+rotatingAxisInfo                                 // information for rotatingAxisMotion motion model 
 {
 	rotAxis 
 	{
-		p1 (0.561547 0.372714 0.000);            // first point for the axis of rotation
+		p1            (0.561547 0.372714 0.000); // first point for the axis of rotation
 		
-		p2 (0.561547 0.372714 0.010);            // second point for the axis of rotation
+		p2            (0.561547 0.372714 0.010); // second point for the axis of rotation
 
-		omega                    2.1;            // rotation speed (rad/s)
+		omega         2.1;                       // rotation speed (rad/s)
 
-		startTime               1.25;            // Start time of Geometry Rotating (s)
+		startTime     1.25;                      // Start time of Geometry Rotating (s)
 		
-		endTime                    7;            // End time of Geometry Rotating (s)
+		endTime       7;                         // End time of Geometry Rotating (s)
 	}
 }
 
@@ -28,24 +28,24 @@ surfaces
 {
 	gear
 	{
-		type 	  stlWall;                       // type of the wall
+		type 	     stlWall;                    // type of the wall
 
-		file 	 gear.stl;                       // file name in stl folder
+		file 	     gear.stl;                   // file name in stl folder
 
-		material  wallMat;                       // material name of this wall
+		material     wallMat;                    // material name of this wall
 
-		motion 	  rotAxis;                       // motion component name 
+		motion 	     rotAxis;                    // motion component name 
 	}
 
     surfaces
 	{
-		type 	      stlWall;                   // type of the wall
+		type 	     stlWall;                    // type of the wall
 
-		file 	 surfaces.stl;                   // file name in stl folder
+		file 	     surfaces.stl;               // file name in stl folder
 
-		material      wallMat;                   // material name of this wall
+		material     wallMat;                    // material name of this wall
 
-		motion 	         none;                   // motion component name
+		motion 	     none;                       // motion component name
 	} 
 }
 
