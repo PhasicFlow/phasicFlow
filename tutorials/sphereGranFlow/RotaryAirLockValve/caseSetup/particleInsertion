@@ -6,40 +6,36 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-active                yes;                       // is insertion active -> yes or no
 
-/*
-	one region is considered for inserting particles. 
-*/
+active              yes;                        // is insertion active -> yes or no
 
 topRegion
 {
-	regionType            box;                   // type of insertion region
+    regionType          box;                        // type of insertion region
 
-	timeControl           simulationTime;
-	
-	rate 	              4000;                  // insertion rate (particles/s)
-	
-    startTime 	          0;                     // Start time of Particles insertion (s)
-	
-    endTime   	          7;                     // End time of Particles insertion (s)	
-	                                             
-    insertionInterval     0.025;                 // Time Interval between each insertion (s)
-	                                  
-	boxInfo                                      // Coordinates of BoxRegion (m,m,m)
-	{
-		min     ( 0.48 0.58 0.01 );              // (m,m,m)
+    timeControl         simulationTime;
+    
+    rate                4000;                       // insertion rate (particles/s)
+    
+    startTime           0;                          // Start time of Particles insertion (s)
+    
+    endTime             7;                          // End time of Particles insertion (s)
+                                                    
+    insertionInterval   0.025;                     // Time Interval between each insertion (s)
+                                                    
+    boxInfo                                       
+    {
+        min     ( 0.48 0.58 0.01 );                // (m,m,m)
+        max     ( 0.64 0.59 0.05 );                // (m,m,m)
+    }
 
-		max     ( 0.64 0.59 0.05 );              // (m,m,m)
-	}
+    setFields
+    {
+        velocity        realx3 (0.0 -0.6 0.0);     // initial velocity of inserted particles
+    }
 
-	setFields
-	{
-		velocity     realx3 (0.0 -0.6 0.0);      // initial velocity of inserted particles
-	}
-
-	mixture
-	{
-		sphere     1;  
-	}
+    mixture
+    {
+        sphere          1;
+    }
 }
