@@ -27,7 +27,7 @@ setFields
 
 	selectors
 	{
-		shapeAssigne
+/*		shapeAssigne
 		{
 			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
  
@@ -44,7 +44,7 @@ setFields
 			{
 				shapeName 	word    glassBead; // sets shapeName of the selected points to largeSphere
 			}
-		}
+		}*/
 	}
 }
 
@@ -69,9 +69,9 @@ positionParticles                                // positions particles
 
 	cylinderInfo  				                 // cylinder information for positioning particles 
 	{
-		p1 (0.0 0.003 0.0); 	                 // begin point of cylinder axis
+		p1 (0.0 0.0 0.003); 	                 // begin point of cylinder axis
 
-		p2 (0.0 0.22 0.0);		                 // end point of cylinder axis
+		p2 (0.0 0.0 0.357);		                 // end point of cylinder axis
 
 		radius 		0.117;		                 // radius of cylinder 
 	}
