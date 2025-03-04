@@ -1,5 +1,5 @@
-# Problem Definition 
-The problem is to simulate a rotating drum with the diameter **0.24 m**, the length **0.1 m** and **6** Baffles, rotating at **15 rpm**. This drum is filled with **20000** Particles.The timestep for integration is **0.00001 s**. There are 2 types of Particles in this drum each are being inserted during simulation to fill the drum.
+# Problem Definition (v-1.0)
+The problem is to simulate a rotating drum with a diameter of 0.24 m, a length of 0.1 m and 6 baffles rotating at 15 rpm. This drum is filled with 20000 particles, the integration time step is 0.00001 s. There are 2 types of particles in this drum, each of which is inserted during the simulation to fill the drum.
 * **12500** Particles with **4 mm** diameter, at the rate of 12500 particles/s for 1 sec. 
 * **7500** Particles with **5mm** diameter, at the rate of 7500 particles/s for 1 sec.   
 
@@ -15,10 +15,10 @@ The problem is to simulate a rotating drum with the diameter **0.24 m**, the len
 </html>
 
 # Setting up the Case
-As it has been explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup are sotred in three folders: `caseSetup`, `setting` and `stl` (see the above folders). 
+As it has been explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup are sorted in three folders: `caseSetup`, `setting` and `stl` (see the above folders). 
 
 ## Defining small and large particles 
-Then in the `caseSetup/sphereShape` the diameter and the material name of the particles are defined.  Two sizes are defined: 4 and 5 mm. 
+Then in the `caseSetup/shapes` the diameter and the material name of the particles are defined.  Two sizes are defined: 4 and 5 mm. 
 ```C++
 // names of shapes 
 names 		(smallSphere largeSphere);
@@ -30,7 +30,7 @@ materials	(lightMat heavyMat);
 
 
 ## Particle Insertion
-In this case we have two region for inserting our particles. In the both region we define rate of insertion, start and end time of insertion, information for the volume of the space throught which particles are being inserted. The insertion phase in the simulation is performed between times 0 and 1 seconds.   
+In this case we have two regions for inserting our particles. In both regions we define the insertion rate, the start and end time of the insertion, information about the volume of space through which the particles are inserted. The insertion phase in the simulation is performed between times 0 and 1 second.   
 For example, for the insertion region for inserting light particles is shown below.
 
 <div align="center"> 
@@ -64,7 +64,7 @@ layerrightregion
 }
 ```
 ## Interaction between particles and walls
-In `caseSetup/interaction` file, material names and properties and interaction parameters are defined: interaction between the particles and the shell of rotating drum. Since we are defining 3 materials for simulation, the interaction matrix is 3x3, while we are only required to enter upper-triangle elements (interactions are symetric). 
+The `caseSetup/interaction` file defines the material names and properties as well as the interaction parameters: the interaction between the particles and the shell of the rotating drum. Since we define 3 materials for simulation, the interaction matrix is 3x3, while we only need to enter upper triangle elements (interactions are symmetric). 
 
 ```C++
 // a list of materials names
@@ -166,7 +166,7 @@ surfaces
 In this part of `geometryDict` the information of rotating axis and speed of rotation are defined. The start of rotation is at 2 s. The first 2 seconds of simulation is for allowing particles to settle donw in the drum. 
 
 ```C++
-rotatingAxisMotionInfo
+rotatingAxisInfo
 {
     rotAxis 
     {
@@ -184,9 +184,9 @@ rotatingAxisMotionInfo
 }
 ```
 ## Performing Simulation
-To perform simulations, enter the following commands one after another in the terminal. 
+To run simulations, type the following commands in the terminal one at a time.
 
 Enter `$ particlesPhasicFlow` command to create the initial fields for particles.  
 Enter `$ geometryPhasicFlow` command to create the Geometry.  
 At last, enter `$ sphereGranFlow` command to start the simulation.  
-After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format storred in ./VTK folder. 
+After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder. 

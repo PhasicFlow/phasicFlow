@@ -6,9 +6,7 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-active           Yes;                            // is insertion active -> Yes or No
-
-checkForCollision No;                            // is checked          -> Yes or No
+active     Yes;                                  // is insertion active -> Yes or No
 
 /*
       Two layers of particles are packed one-by-one using 1 insertion steps 
@@ -17,26 +15,26 @@ checkForCollision No;                            // is checked          -> Yes o
 
 layerrightregion                                 // Right Layer Region
 {
-   timeControl     simulationTime;
+   timeControl           simulationTime;
 
-   regionType	    cylinder;               // type of insertion region
+   regionType	          cylinder;               // type of insertion region
  
-   rate 	                   12500;               // Right Region Particles Insertion Rate (particles/s)
+   rate 	                12500;                  // Right Region Particles Insertion Rate (particles/s)
 
-   startTime 	                 0;               // Start time of LightParticles insertion (s)
+   startTime 	          0;                      // Start time of LightParticles insertion (s)
     
-   endTime   	                 1;               // End time of LightParticles insertion (s) 
+   endTime   	          1;                      // End time of LightParticles insertion (s) 
 
-   insertionInterval        0.025;               // Time Interval of LightParticles insertion (s)
+   insertionInterval     0.025;                  // Time Interval of LightParticles insertion (s)
 
    cylinderInfo 
    {
 
-   	p2 (-0.15 0.25 0.05);                      // 
+   	p2         (-0.15 0.25 0.05);              // Top of cylinderRegion (m,m,m)
 
-   	p1 (-0.15 0.24	0.05);                      // Bottom of cylinderRegion (m,m,m)
+   	p1         (-0.15 0.24 0.05);              // Bottom of cylinderRegion (m,m,m)
 
-   	radius         0.035;                      // radius of cylinder (m)
+   	radius     0.035;                          // radius of cylinder (m)
    }
    
    setFields
@@ -46,31 +44,31 @@ layerrightregion                                 // Right Layer Region
    
    mixture
    {
-      smallSphere 1;                             // mixture composition of inserted particles
+      smallSphere     1;                         // mixture composition of inserted particles
    }
 }
 
 layerleftregion                                  // Left Layer Region
 {
-   timeControl     simulationTime;
+   timeControl           simulationTime;
 
-   regionType      cylinder;               // type of insertion region
+   regionType            cylinder;               // type of insertion region
 
-   rate                      7500;               // Left Region Particles Insertion Rate (particles/s)
+   rate                  7500;                   // Left Region Particles Insertion Rate (particles/s)
 
-   startTime                    0;               // Start time of LightParticles insertion (s)
+   startTime             0;                      // Start time of LightParticles insertion (s)
   
-   endTime                      1;               // End time of LightParticles insertion (s)
+   endTime               1;                      // End time of LightParticles insertion (s)
 
-   insertionInterval        0.025;               // Time Interval of LightParticles insertion (s)
+   insertionInterval     0.025;                  // Time Interval of LightParticles insertion (s)
 
    cylinderInfo 
    {
-      p2 (-0.23 0.25	0.05);                      // Top of cylinderRegion (m,m,m)
+      p2         (-0.23 0.25 0.05);              // Top of cylinderRegion (m,m,m)
 
-      p1 (-0.23 0.24	0.05);                      // Bottom of cylinderRegion (m,m,m)
+      p1         (-0.23 0.24 0.05);              // Bottom of cylinderRegion (m,m,m)
    
-      radius         0.035;                      // radius of cylinder (m)   
+      radius     0.035;                          // radius of cylinder (m)   
    }
    
    setFields
@@ -80,7 +78,7 @@ layerleftregion                                  // Left Layer Region
    
    mixture
    {
-      largeSphere 1;                             // only heavySphere
+      largeSphere     1;                         // only heavySphere
    }
 }
 
