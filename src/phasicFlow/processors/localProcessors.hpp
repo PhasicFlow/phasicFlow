@@ -20,6 +20,7 @@ Licence:
 #ifndef __pFlowProcessors_hpp__
 #define __pFlowProcessors_hpp__
 
+#include <vector>
 
 #include "processors.hpp"
 #include "types.hpp"
