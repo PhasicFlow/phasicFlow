@@ -30,7 +30,7 @@ materials	(lightMat heavyMat);
 
 
 ## Particle Insertion
-In this case we have two regions for inserting our particles. In both regions we define the insertion rate, the start and end time of the insertion, information about the volume of space through which the particles are inserted. The insertion phase in the simulation is performed between times 0 and 1 second.   
+In this case we have two regions for inserting the particles. In both regions we define the insertion rate, the start and end time of the insertion, information about the volume of space through which the particles are inserted. The insertion phase in the simulation is performed between times 0 and 1 second.   
 For example, for the insertion region for inserting light particles is shown below.
 
 <div align="center"> 
@@ -52,7 +52,7 @@ layerrightregion
 // End time of LightParticles insertion (s)      
    endTime   	  1;
 // Time Interval of LightParticles insertion (s)
-   interval       0.025; 
+   insertionInterval       0.025; 
 
    cylinderInfo 
    {
