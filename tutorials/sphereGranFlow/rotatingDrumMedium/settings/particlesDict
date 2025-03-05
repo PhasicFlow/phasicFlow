@@ -2,79 +2,55 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	particlesDict;
-objectType 	dictionary;
-fileFormat  ASCII;
+objectName     particlesDict;
+objectType     dictionary;
+fileFormat     ASCII;
 /*---------------------------------------------------------------------------*/
 setFields
 {
-	/*
-	    Default value for fields defined for particles
-		These fields should always be defined for simulations with 
-		spherical particles
-	*/
+    /*
+        Default value for fields defined for particles
+        These fields should always be defined for simulations with 
+        spherical particles
+    */
 
-	defaultValue 
-	{
-		velocity 		realx3 	  (0 0 0);       // linear velocity (m/s)
+    defaultValue 
+    {
+        velocity          realx3       (0 0 0);      // linear velocity (m/s)
 
-		acceleration 	realx3 	  (0 0 0);       // linear acceleration (m/s2)
+        acceleration      realx3       (0 0 0);      // linear acceleration (m/s2)
 
-		rVelocity 		realx3 	  (0 0 0);       // rotational velocity (rad/s)
+        rVelocity         realx3       (0 0 0);      // rotational velocity (rad/s)
 
-		shapeName 		word	glassBead;       // name of the particle shape 
-	}
+        shapeName         word         glassBead;    // name of the particle shape 
+    }
 
-	selectors
-	{
-		shapeAssigne
-		{
-			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
- 
-			stridedRangeInfo
-			{
-				begin 	    0;			         // begin index of points
-
-				end 	250000;		 			 // end index of points 
-
-				stride      3;			 		 // stride for selector 
-			}
-
-			fieldValue  					     // fields that the selector is applied to 
-			{
-				shapeName 	word    glassBead; // sets shapeName of the selected points to largeSphere
-			}
-		}
-	}
+    selectors
+    {
+    }
 }
 
-positionParticles                                // positions particles 
+positionParticles                                    // positions particles 
 {
-	method ordered;     		                 // other options: random and empty
+    method ordered;                                  // other options: random and empty
 
-	//maxNumberOfParticles 	250001;              // maximum number of particles in the simulation
+    orderedInfo
+    {
+        diameter   0.003;                            // minimum space between centers of particles
 
-	//mortonSorting 			   Yes;              // perform initial sorting based on morton code?   
+        numPoints  250000;                           // number of particles in the simulation 
 
-	orderedInfo
-	{
-		diameter 0.003; 						 // minimum space between centers of particles
+        axisOrder  (z y x);                          // axis order for filling the space with particles
+    }
 
-		numPoints 250000; 	                     // number of particles in the simulation 
+    regionType cylinder;                             // other options: box and sphere  
 
-		axisOrder (z y x);                       // axis order for filling the space with particles
-	}
+    cylinderInfo                                     // cylinder information for positioning particles 
+    {
+        p1 (0.0 0.0 0.003);                          // begin point of cylinder axis
 
-	regionType cylinder;                         // other options: box and sphere  
+        p2 (0.0 0.0 0.357);                          // end point of cylinder axis
 
-	cylinderInfo  				                 // cylinder information for positioning particles 
-	{
-		p1 (0.0 0.003 0.0); 	                 // begin point of cylinder axis
-
-		p2 (0.0 0.22 0.0);		                 // end point of cylinder axis
-
-		radius 		0.117;		                 // radius of cylinder 
-	}
-
-
+        radius     0.117;                            // radius of cylinder 
+    }
 }
