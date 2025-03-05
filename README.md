@@ -1,48 +1,66 @@
-<div align ="center">
-<img src="doc/phasicFlow_logo_github.png" style="width: 400px;">
+<div align="center">
+  <img src="doc/phasicFlow_logo_github.png" style="width: 400px;" alt="PhasicFlow Logo">
 </div>
 
+## **PhasicFlow: High-Performance Discrete Element Method Simulations**
 
-**PhasicFlow** is a parallel C++ code for performing DEM simulations. It can run on shared-memory multi-core computational units such as multi-core CPUs or GPUs (for now it works on CUDA-enabled GPUs). The parallelization method mainly relies on loop-level parallelization on a shared-memory computational unit. You can build and run PhasicFlow in serial mode on regular PCs, in parallel mode for multi-core CPUs, or build it for a GPU device to off-load computations to a GPU. In its current statues you can simulate millions of particles (up to 80M particles tested) on a single desktop computer. You can see the [performance tests of PhasicFlow](https://github.com/PhasicFlow/phasicFlow/wiki/Performance-of-phasicFlow) in the wiki page.
+PhasicFlow is a robust, open-source C++ framework designed for the efficient simulation of granular materials using the Discrete Element Method (DEM). Leveraging parallel computing paradigms, PhasicFlow is capable of executing simulations on shared-memory multi-core architectures, including CPUs and NVIDIA GPUs (CUDA-enabled). The core parallelization strategy focuses on loop-level parallelism, enabling significant performance gains on modern hardware. Users can seamlessly transition between serial execution on standard PCs, parallel execution on multi-core CPUs (OpenMP), and accelerated simulations on GPUs. Currently, PhasicFlow supports simulations involving up to 80 million particles on a single desktop workstation. Detailed performance benchmarks are available on the [PhasicFlow Wiki](https://github.com/PhasicFlow/phasicFlow/wiki/Performance-of-phasicFlow).
 
-**MPI** parallelization with dynamic load balancing is under development. With this level of parallelization, PhasicFlow can leverage the computational power of **multi-gpu** workstations or clusters with distributed memory CPUs. 
-In summary PhasicFlow can have 6 execution modes:
-1. Serial on a single CPU core,
-2. Parallel on a multi-core computer/node (using OpenMP),
-3. Parallel on an nvidia-GPU (using Cuda),
-4. Parallel on distributed memory workstation (Using MPI)
-5. Parallel on distributed memory workstations with multi-core nodes (using MPI+OpenMP)
-6. Parallel on workstations with multiple GPUs (using MPI+Cuda).
-## How to build?
-You can build PhasicFlow for CPU and GPU executions. The latest release of PhasicFlow is v-0.1. [Here is a complete step-by-step procedure for building phasicFlow-v-0.1.](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
+**Scalable Parallelism: MPI Integration**
 
-## Online code documentation
-You can find a full documentation of the code, its features, and other related materials on [online documentation of the code](https://phasicflow.github.io/phasicFlow/)
+Ongoing development includes the integration of MPI-based parallelization with dynamic load balancing. This enhancement will extend PhasicFlow's capabilities to distributed memory environments, such as multi-GPU workstations and high-performance computing clusters. Upon completion, PhasicFlow will offer six distinct execution modes:
 
-## How to use PhasicFlow?
-You can navigate into [tutorials folder](./tutorials) in the phasicFlow folder to see some simulation case setups. If you need more detailed discription, visit our [wiki page tutorials](https://github.com/PhasicFlow/phasicFlow/wiki/Tutorials).  
+1.  **Serial Execution:** Single-core CPU.
+2.  **Shared-Memory Parallelism:** Multi-core CPU (OpenMP).
+3.  **GPU Acceleration:** NVIDIA GPU (CUDA).
+4.  **Distributed-Memory Parallelism:** MPI.
+5.  **Hybrid Parallelism:** MPI + OpenMP.
+6.  **Multi-GPU Parallelism:** MPI + CUDA.
 
-## [PhasicFlowPlus](https://github.com/PhasicFlow/PhasicFlowPlus)
-PhasicFlowPlus is and extension to PhasicFlow for simulating particle-fluid systems using resolved and unresolved CFD-DEM. [See the repository of this package.](https://github.com/PhasicFlow/PhasicFlowPlus)
+# **Build and Installation**
+
+PhasicFlow can be compiled for both CPU and GPU execution.
+
+* **Current Development (v-1.0):** Comprehensive build instructions are available [here](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-build-PhasicFlow%E2%80%90v%E2%80%901.0).
+* **Latest Release (v-0.1):** Detailed build instructions are available [here](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-Build-PhasicFlow).
+
+# **Comprehensive Documentation**
+
+In-depth documentation, including code structure, features, and usage guidelines, is accessible via the [online documentation portal](https://phasicflow.github.io/phasicFlow/).
+
+## **Tutorials and Examples**
+
+Practical examples and simulation setups are provided in the [tutorials directory](./tutorials). For detailed explanations and step-by-step guides, please refer to the [tutorial section on the PhasicFlow Wiki](https://github.com/PhasicFlow/phasicFlow/wiki/Tutorials).
+
+# **PhasicFlowPlus: Coupled CFD-DEM Simulations**
+
+PhasicFlowPlus is an extension of PhasicFlow that facilitates the simulation of particle-fluid systems using resolved and unresolved CFD-DEM methods. The repository for PhasicFlowPlus can be found [here](https://github.com/PhasicFlow/PhasicFlowPlus).
 
 
-## Supporting packages
-* [Kokkos](https://github.com/kokkos/kokkos) from National Technology & Engineering Solutions of Sandia, LLC (NTESS)
-* [CLI11 1.8](https://github.com/CLIUtils/CLI11) from University of Cincinnati.
+# How to cite PhasicFlow?
 
-## How to cite PhasicFlow
 If you are using PhasicFlow in your research or industrial work, cite the following [article](https://www.sciencedirect.com/science/article/pii/S0010465523001662):
+
 ```
-@article{NOROUZI2023108821,
-title = {PhasicFlow: A parallel, multi-architecture open-source code for DEM simulations},
-journal = {Computer Physics Communications},
-volume = {291},
-pages = {108821},
-year = {2023},
-issn = {0010-4655},
-doi = {https://doi.org/10.1016/j.cpc.2023.108821},
-url = {https://www.sciencedirect.com/science/article/pii/S0010465523001662},
-author = {H.R. Norouzi},
-keywords = {Discrete element method, Parallel computing, CUDA, GPU, OpenMP, Granular flow}
+@article
+{
+  NOROUZI2023108821,
+  title = {PhasicFlow: A parallel, multi-architecture open-source code for DEM simulations},
+  journal = {Computer Physics Communications},
+  volume = {291},
+  pages = {108821},
+  year = {2023},
+  issn = {0010-4655},
+  doi = {https://doi.org/10.1016/j.cpc.2023.108821},
+  url = {https://www.sciencedirect.com/science/article/pii/S0010465523001662},
+  author = {H.R. Norouzi},
+  keywords = {Discrete element method, Parallel computing, CUDA, GPU, OpenMP, Granular flow}
 }
 ```
+
+# **Dependencies**
+
+PhasicFlow relies on the following external libraries:
+
+* **Kokkos:** A performance portability ecosystem developed by National Technology & Engineering Solutions of Sandia, LLC (NTESS). ([https://github.com/kokkos/kokkos](https://github.com/kokkos/kokkos))
+* **CLI11 1.8:** A command-line interface parser developed by the University of Cincinnati. ([https://github.com/CLIUtils/CLI11](https://github.com/CLIUtils/CLI11))
