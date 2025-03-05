@@ -2,8 +2,8 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-objectName  sphereDict;
-objectType  phereShape;
+objectName  shapes;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 names       (glassBead);                                   // names of shapes 
