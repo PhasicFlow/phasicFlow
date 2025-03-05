@@ -8,5 +8,3 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 active         No;                                      // is checked          -> Yes or No
 
-collisionCheck No;                                      // is insertion active -> Yes or No
-

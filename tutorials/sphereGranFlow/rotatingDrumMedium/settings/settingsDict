@@ -2,27 +2,27 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	settingsDict;
-objectType 	dictionary;;
+objectName  settingsDict;
+objectType  dictionary;;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-run 			rotatingDrumMedium;
+run             rotatingDrumMedium;
 
-dt 				           0.00001; 	         // time step for integration (s)
+dt                         0.00001;              // time step for integration (s)
 
-startTime 		                 0; 			 // start time for simulation 
+startTime                        0;              // start time for simulation 
 
-endTime 		                10; 		     // end time for simulation 
+endTime                         10;              // end time for simulation 
 
-saveInterval 	               0.1; 		     // time interval for saving the simulation
+saveInterval                   0.1;              // time interval for saving the simulation
 
-timePrecision                    6;			     // maximum number of digits for time folder 
+timePrecision                    6;              // maximum number of digits for time folder 
 
-g 				        (0 -9.8 0);              // gravity vector (m/s2) 
+g                       (0 -9.8 0);              // gravity vector (m/s2) 
 
 /*
-	Simulation domain 
-	every particles that goes outside this domain is deleted.
+    Simulation domain 
+    every particles that goes outside this domain is deleted.
 */
 
 includeObjects (diameter);                       // save necessary (i.e., required) data on disk
@@ -30,10 +30,10 @@ includeObjects (diameter);                       // save necessary (i.e., requir
 // exclude unnecessary data from saving on disk
 excludeObjects (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
 
-integrationMethod 		AdamsBashforth2; 	     // integration method 
+integrationMethod       AdamsBashforth2;         // integration method 
 
-writeFormat				binary;                  // data writting format (ascii or binary)
+writeFormat             binary;                  // data writting format (ascii or binary)
 
-timersReport 			Yes;  	                 // report timers?
+timersReport            Yes;                     // report timers?
 
-timersReportInterval   	0.01;	                 // time interval for reporting timers
+timersReportInterval    0.01;                    // time interval for reporting timers
