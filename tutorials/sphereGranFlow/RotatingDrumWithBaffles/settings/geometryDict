@@ -10,7 +10,7 @@ motionModel rotatingAxis;
 
 rotatingAxisInfo
 {
-	rotAxis 
+    rotAxis 
 	{
 		p1            (-0.1974 0.2269 0);        // first point for the axis of rotation
 			 

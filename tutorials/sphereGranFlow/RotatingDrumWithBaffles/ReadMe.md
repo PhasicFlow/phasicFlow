@@ -15,7 +15,7 @@ The problem is to simulate a rotating drum with a diameter of 0.24 m, a length o
 </html>
 
 # Setting up the Case
-As it has been explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup are sorted in three folders: `caseSetup`, `setting` and `stl` (see the above folders). 
+As it has been explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup are sorted in three folders: `caseSetup`, `setting` and `stl`. 
 
 ## Defining small and large particles 
 Then in the `caseSetup/shapes` the diameter and the material name of the particles are defined.  Two sizes are defined: 4 and 5 mm. 
@@ -43,7 +43,8 @@ in <b>caseSetup/particleInsertion</b> file
 layerrightregion 
 {
 // type of insertion region
-   type	          cylinderRegion;
+   timeControl           simulationTime;
+   regionType	           cylinder;
 // insertion rate (particles/s)    
    rate 	  12500;
 // Start time of LightParticles insertion (s)
@@ -53,7 +54,7 @@ layerrightregion
 // Time Interval of LightParticles insertion (s)
    interval       0.025; 
 
-   cylinderRegionInfo 
+   cylinderInfo 
    {
 // Coordinates of cylinderRegion (m,m,m)
    	p2 (-0.15 0.25 0.05);
@@ -93,10 +94,6 @@ densities   (1000 1500 2500);
    en (0.97  0.97    0.85   
              0.97    0.85
                      1.00);
-// coefficient of tangential restitution
-   et (1.0   1.0  1.0    
-             1.0  1.0
-                  1.0);
 // dynamic friction 
    mu (0.65   0.65 0.35   
               0.65 0.35
@@ -166,6 +163,7 @@ surfaces
 In this part of `geometryDict` the information of rotating axis and speed of rotation are defined. The start of rotation is at 2 s. The first 2 seconds of simulation is for allowing particles to settle donw in the drum. 
 
 ```C++
+motionModel rotatingAxis;   
 rotatingAxisInfo
 {
     rotAxis 
@@ -186,7 +184,7 @@ rotatingAxisInfo
 ## Performing Simulation
 To run simulations, type the following commands in the terminal one at a time.
 
-Enter `$ particlesPhasicFlow` command to create the initial fields for particles.  
-Enter `$ geometryPhasicFlow` command to create the Geometry.  
-At last, enter `$ sphereGranFlow` command to start the simulation.  
-After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder. 
+Enter `particlesPhasicFlow` command to create the initial fields for particles.  
+Enter `geometryPhasicFlow` command to create the Geometry.  
+At last, enter `sphereGranFlow` command to start the simulation.  
+After finishing the simulation, you can use  `pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder. 

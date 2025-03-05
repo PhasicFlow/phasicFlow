@@ -8,16 +8,16 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
 {
-		min (-0.328 0.095 -0.025);               // lower corner point of the box 
+    min (-0.328 0.095 -0.025);                   // lower corner point of the box 
 
-	    max (-0.068  0.355 0.125);               // upper corner point of the box 
+	max (-0.068  0.355 0.125);                   // upper corner point of the box 
 }
 
 boundaries
 {
-	left
+    left
 	{
-		type     exit;	                         // other options: periodic, reflective 
+	    type     exit;	                         // other options: periodic, reflective 
 	}
 
 	right

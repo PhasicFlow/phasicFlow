@@ -16,7 +16,7 @@ setFields
 		spherical particles.
 	*/
 
-	defaultValue 
+    defaultValue 
 	{
 		velocity 	     realx3 	(0 0 0);     // linear velocity (m/s)
 			
