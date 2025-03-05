@@ -3,61 +3,88 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
 
-objectName 	geometryDict;
-objectType 	dictionary;
+objectName     geometryDict;
+objectType     dictionary;
+fileFormat     ASCII;
 
-motionModel rotatingAxisMotion; 
+motionModel rotatingAxis;         // motion model: rotating object around an axis
+
+rotatingAxisInfo                  // information for rotatingAxisMotion motion model 
+{
+    rotAxis 
+    {
+        p1    (0.0 0.0 0.0);      // first point for the axis of rotation    
+        
+        p2    (0.0 0.0 1.0);      // second point for the axis of rotation    
+        
+        omega 1.256;              // rotation speed (rad/s) => 12 rpm
+    }
+}
 
 surfaces
 {
-	
-	cylinder
-	{
-		type cylinderWall;  
-		p1 (0.0 0.0 0.0);   
-		p2 (0.0 0.0 1.6);  
-		radius1 0.2;		
-		radius2 0.2;		
-		resolution 24;      
-		material wallMat;   
-		motion rotAxis;
-	}
+    /*
+        A cylinder with begin and end radii 0.12 m and axis points at (0 0 0) and (0 0 0.36)
+    */
+    
+    cylinder
+    {
+        type        cylinderWall;          // type of the wall
+        
+        p1          (0.0 0.0 0.0);         // begin point of cylinder axis
+           
+        p2          (0.0 0.0 1.6);         // end point of cylinder axis
+        
+        radius1     0.2;                   // radius at p1
+        
+        radius2     0.2;                   // radius at p2
+        
+        resolution  24;                    // number of divisions
+        
+        material    wallMat;               // material name of this wall
+        
+        motion      rotAxis;               // motion component name 
+    }
 
-	
-	wall1
-	{
-		type planeWall;			
-		p1 (-0.2 -0.2 0.0);	
-		p2 ( 0.2 -0.2 0.0);   
-		p3 ( 0.2  0.2 0.0);   
-		p4 (-0.2  0.2 0.0);   
-		material wallMat;     
-		motion rotAxis;		
-	}
+    /*
+        This is a plane wall at the rear end of cylinder
+    */
+    
+    wall1
+    {
+        type      planeWall;               // type of the wall  
+        
+        p1        (-0.2 -0.2 0.0);         // first point of the wall
+        
+        p2        ( 0.2 -0.2 0.0);         // second point
+        
+        p3        ( 0.2  0.2 0.0);         // third point
+        
+        p4        (-0.2  0.2 0.0);         // fourth point 
+        
+        material  wallMat;                 // material name of the wall  
+        
+        motion    rotAxis;                 // motion component name 
+    }
 
-	/*
-	This is a plane wall at the front end of cylinder
-	*/
-	wall2
-	{
-		type planeWall;
-		p1 (-0.2 -0.2 1.6);
-		p2 ( 0.2 -0.2 1.6);
-		p3 ( 0.2  0.2 1.6);
-		p4 (-0.2  0.2 1.6);
-		material wallMat;
-		motion rotAxis;
-	}
-		
-}
-
-// information for rotatingAxisMotion motion model 
-rotatingAxisMotionInfo
-{
-	rotAxis 
-	{
-		p1 (0.0 0.0 0.0);	
-		p2 (0.0 0.0 1.0);	
-		omega 1.256; 		// rotation speed (rad/s) => 12 rpm
-	}
+    /*
+        This is a plane wall at the front end of cylinder
+    */
+    
+    wall2
+    {
+        type      planeWall;               // type of the wall
+        
+        p1        (-0.2 -0.2 1.6);         // first point of the wall
+        
+        p2        ( 0.2 -0.2 1.6);         // second point
+        
+        p3        ( 0.2  0.2 1.6);         // third point
+        
+        p4        (-0.2  0.2 1.6);         // fourth point 
+        
+        material  wallMat;                 // material name of the wall  
+        
+        motion    rotAxis;                 // motion component name 
+    }
 }
