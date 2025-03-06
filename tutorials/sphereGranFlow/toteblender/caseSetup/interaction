@@ -6,30 +6,30 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials    (solidProperty);                    // a list of materials names
+materials           (solidProperty);             // a list of materials names
 
 densities           (1000.0);                    // density of materials [kg/m3]
 
-contactListType   sortedContactList; 
+contactListType     sortedContactList; 
 
 contactSearch
 {
-    method         NBS;                          // method for broad search 
+    method             NBS;                      // method for broad search 
     
-   updateInterval   10;
+    updateInterval     10;
 
-   sizeRatio       1.1;
+    sizeRatio          1.1;
 
-   cellExtent     0.55;
+    cellExtent         0.55;
 
-   adjustableBox   Yes;     
+    adjustableBox      Yes;     
 }
 
 model
 {
-   contactForceModel     nonLinearNonLimited;
+   contactForceModel        nonLinearNonLimited;
     
-   rollingFrictionModel               normal;
+   rollingFrictionModel     normal;
    
    /*
       Property (solidProperty-solidProperty)
@@ -39,14 +39,12 @@ model
 
    Geff  (0.8e6);                                // Shear modulus [Pa]    
     
-   nu     (0.25);                                // Poisson's ratio [-]      
+   nu    (0.25);                                 // Poisson's ratio [-]      
     
-   en      (0.7);                                // coefficient of normal restitution       
+   en    (0.7);                                  // coefficient of normal restitution            
 
-   et      (1.0);                                // coefficient of tangential restitution      
+   mu    (0.3);                                  // dynamic friction    
 
-   mu      (0.3);                                // dynamic friction    
-
-   mur     (0.1);                                // rolling friction               
+   mur   (0.1);                                  // rolling friction               
 }
 

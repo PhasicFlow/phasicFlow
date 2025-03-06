@@ -1,5 +1,5 @@
-# Problem Definition
-The problem is to simulate a double pedestal tote blender (mixer) with the diameter **0.03 m** and **0.1 m** respectively, the length **0.3 m**, rotating at **28 rpm**. This blender is filled with **24000** particles. The timestep for integration is **0.00001 s**. There is one type of particle in this blender. Particles are positioned before start of simulation to fill the blender.
+# Problem Definition (v-1.0)
+The problem is to simulate a double pedestal blender (mixer) with diameters of 0.03 m and 0.1 m, length of 0.3 m, rotating at 28 rpm. This mixer is filled with 24000 particles. The integration time step is 0.00001 s. There is one type of particle in this mixer. Particles are positioned to fill the mixer before the simulation starts.
 * **24000** particles with **5 mm** diameter are positioned, in order, and let to be settled under gravity. After settling particles, this blender starts to rotate at t=**1s**. 
 
 <html>
@@ -17,7 +17,7 @@ The problem is to simulate a double pedestal tote blender (mixer) with the diame
 </html>
 
 # Setting up the Case
-As it has been explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup files are stored into two folders: `caseSetup`, `setting` (see the above folders). Unlike the previous cases, this case does not have the `stl` file and the surfaces are defined based on the built-in utilities in phasicFlow. See next the section for more information on how we can setup the geometry and its rotation. 
+As explained in the previous cases, the simulation case setup is based on text-based scripts. Here, the simulation case setup files are stored in two folders: `caseSetup`, `setting` (see the folders above). Unlike the previous cases, this case does not have a `stl` file and the surfaces are defined based on the built-in utilities in phasicFlow. See the next section for more information on how to set up the geometry and its rotation.
 
 ## Geometry 
 
@@ -26,7 +26,7 @@ In file `settings/geometryDict` the information of rotating axis and speed of ro
 
 ```C++
 // information for rotatingAxisMotion motion model 
-rotatingAxisMotionInfo
+rotatingAxisInfo
 {
 	axisOfRotation 
 	{
@@ -245,10 +245,10 @@ surfaces
 
 ## Defining particles 
 ### Diameter and material of spheres 
-In the `caseSetup/sphereShape` the diameter and the material name of the particles are defined.
+In the `caseSetup/shapes` the diameter and the material name of the particles are defined.
 
 <div align="center"> 
-in <b>caseSetup/sphereShape</b> file
+in <b>caseSetup/shapes</b> file
 </div>
 
 ```C++
@@ -273,24 +273,11 @@ in <b>settings/particlesDict</b> file
 positionParticles
 {
 	// ordered positioning
-	method 	positionOrdered;     
-
-	// maximum number of particles in the simulation
-	maxNumberOfParticles 25001;
-	
-	// perform initial sorting based on morton code? 
-	mortonSorting 	Yes;             
-	
-	// cylinderical region for positioning particles 
-	cylinder
-	{
-		p1 (0.0 0.0 0.09);	
-		p2 (0.0 0.0 0.21);
-		radius 0.09;
-	}
-
-	positionOrderedInfo
-	{
+	method 	ordered;     
+	// perform initial sorting based on morton code 
+	mortonSorting 	Yes;  
+  orderedInfo
+  {
 		// minimum space between centers of particles
 		diameter 0.005;
 		
@@ -299,6 +286,17 @@ positionParticles
 	
 		// axis order for filling the space with particles		 	
 		axisOrder (x y z);  
+	}           
+	
+regionType     cylinder;                     // other options: box and sphere               
+	
+cylinderInfo                                 // cylinder for positioning particles 
+	{
+		p1         (0.0 0.0 0.09);               // Coordinates of bottom cylinderRegion (m,m,m)
+		
+		p2         (0.0 0.0 0.21);               // Coordinates of top cylinderRegion (m,m,m)
+		
+		radius     0.09;                         // radius of cylinder
 	}
 }
 ```
@@ -334,10 +332,7 @@ model
    nu    (0.25);        
     
    // coefficient of normal restitution
-   en    (0.7);         
-
-   // coefficient of tangential restitution
-   et    (1.0);          
+   en    (0.7);                  
 
    // dynamic friction
    mu    (0.3);          
@@ -350,7 +345,7 @@ model
 # Performing Simulation and previewing the results 
 To perform simulations, enter the following commands one after another in the terminal. 
 
-Enter `$ particlesPhasicFlow` command to create the initial fields for particles.  
-Enter `$ geometryPhasicFlow` command to create the geometry.  
-At last, enter `$ sphereGranFlow` command to start the simulation.  
-After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder.
+Enter `particlesPhasicFlow` command to create the initial fields for particles.  
+Enter `geometryPhasicFlow` command to create the geometry.  
+At last, enter `sphereGranFlow` command to start the simulation.  
+After finishing the simulation, you can use  `pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder.

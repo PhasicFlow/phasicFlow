@@ -12,15 +12,15 @@ rotatingAxisInfo                                 // information for rotatingAxis
 {
 	axisOfRotation 
 	{
-		p1 (-0.1 0.0 0.15);	                     // first point for the axis of rotation 
+	    p1            (-0.1 0.0 0.15);	         // first point for the axis of rotation 
 
-		p2 ( 0.1 0.0 0.15);	                     // second point for the axis of rotation
+		p2            (0.1 0.0 0.15);	         // second point for the axis of rotation
 		
-		omega       1.5708; 		             // rotation speed ==> 15 rad/s
+		omega         1.5708; 		             // rotation speed ==> 15 rad/s
 			
-		startTime      0.5;                      // Start time of Geometry Rotating (s) 
+		startTime     0.5;                       // Start time of Geometry Rotating (s) 
 		
-		endTime        9.5;                      // End time of Geometry Rotating (s)
+		endTime       9.5;                       // End time of Geometry Rotating (s)
 	}
 }
 
@@ -28,132 +28,132 @@ surfaces
 {
 	topGate
 	{
-		type      cylinderWall;                  // type of wall
+		type         cylinderWall;               // type of wall
 		
-		p1       (0.0 0.0 0.3);                  // begin point of cylinder axis 
+		p1           (0.0 0.0 0.3);              // begin point of cylinder axis 
 		
-		p2     (0.0 0.0 0.301);                  // end point of cylinder axis
+		p2           (0.0 0.0 0.301);            // end point of cylinder axis
 		
-		radius1           0.03;                  // radius at p1  
+		radius1      0.03;                       // radius at p1  
 		
-		radius2	        0.0001;                  // radius at p2	
+		radius2	     0.0001;                     // radius at p2	
 		
-		material solidProperty;                  // material of wall
+		material     solidProperty;              // material of wall
 		
-		motion  axisOfRotation;	                 // motion component name
+		motion       axisOfRotation;	         // motion component name
 	}
 
     topCylinder
 	{
-		type 	  cylinderWall;                  // type of the wall
+		type 	       cylinderWall;             // type of the wall
 			
-		p1 	    (0.0 0.0 0.28);                  // begin point of cylinder axis 
+		p1 	           (0.0 0.0 0.28);           // begin point of cylinder axis 
 		
-		p2 		 (0.0 0.0 0.3);                  // end point of cylinder axis 
+		p2 		       (0.0 0.0 0.3);            // end point of cylinder axis 
 		  
-		radius1 	      0.03;                  // radius at p1 
+		radius1 	   0.03;                     // radius at p1 
 			
-		radius2 	      0.03;                  // radius at p2	
+		radius2 	   0.03;                     // radius at p2	
 				
-		resolution 	        36;                  // number of divisions
+		resolution     36;                       // number of divisions
 		
-		material solidProperty;                  // material name of this wall
+		material       solidProperty;            // material name of this wall
 		
-		motion  axisOfRotation;                  // motion component name 		
+		motion         axisOfRotation;           // motion component name 		
 	}
 
 	coneShelltop
 	{	
-		type 	  cylinderWall;                  // type of the wall	
+		type 	       cylinderWall;             // type of the wall	
 		
-		p1 		 (0.0 0.0 0.2);                  // begin point of cylinder axis  
+		p1 		       (0.0 0.0 0.2);            // begin point of cylinder axis  
 		
-		p2 		(0.0 0.0 0.28);                  // end point of cylinder axis 
+		p2 		       (0.0 0.0 0.28);           // end point of cylinder axis 
 		
-		radius1 	       0.1;	                 // radius at p1  
+		radius1 	   0.1;	                     // radius at p1  
 			
-		radius2 	      0.03;                  // radius at p2	
+		radius2 	   0.03;                     // radius at p2	
 			
-		resolution 	        36;                  // number of divisions	
+		resolution     36;                       // number of divisions	
 			
-		material solidProperty;                  // material name of this wall    
+		material       solidProperty;            // material name of this wall    
 		 	
-		motion  axisOfRotation;	                 // motion component name 	
+		motion         axisOfRotation;	         // motion component name 	
 	}
 
 	cylinderShell
 	{
-		type 	  cylinderWall;                  // type of the wall
+		type 	       cylinderWall;             // type of the wall
 			
-		p1 		 (0.0 0.0 0.1);                  // begin point of cylinder axis 
+		p1 		       (0.0 0.0 0.1);            // begin point of cylinder axis 
 		
-		p2 		 (0.0 0.0 0.2);                  // end point of cylinder axis
+		p2 		       (0.0 0.0 0.2);            // end point of cylinder axis
 		 
-		radius1 	       0.1;                  // radius at p1	
+		radius1 	   0.1;                      // radius at p1	
 			
-		radius2 	       0.1;	                 // radius at p2	
+		radius2 	   0.1;	                     // radius at p2	
 			
-		resolution 	        36;                  // number of divisions	
+		resolution     36;                       // number of divisions	
 			      	
-		material solidProperty;                  // material name of this wall
+		material       solidProperty;            // material name of this wall
 			
-		motion  axisOfRotation;                  // motion component name 		
+		motion         axisOfRotation;           // motion component name 		
 	}
 
 	coneShelldown
 	{
-		type 	  cylinderWall;                  // type of the wall
+		type 	       cylinderWall;             // type of the wall
 		
-		p1 		(0.0 0.0 0.02);                  // begin point of cylinder axis
+		p1 		       (0.0 0.0 0.02);           // begin point of cylinder axis
 		 
-		p2 		 (0.0 0.0 0.1);                  // end point of cylinder axis 
+		p2 		       (0.0 0.0 0.1);            // end point of cylinder axis 
 		
-		radius1 	      0.03;                  // radius at p1 
+		radius1 	   0.03;                     // radius at p1 
 		
-		radius2 	       0.1;                  // radius at p2	
+		radius2 	   0.1;                      // radius at p2	
 			
-		resolution 	        36;                  // number of divisions	
+		resolution     36;                       // number of divisions	
 		     	
-		material solidProperty;                  // material name of this wall	
+		material       solidProperty;            // material name of this wall	
 			
-		motion  axisOfRotation;	                 // motion component name  	
+		motion         axisOfRotation;	         // motion component name  	
 	}
 
 	bottomCylinder
 	{
-		type 	  cylinderWall;  	             // type of the wall
+		type 	       cylinderWall;  	         // type of the wall
 		
-		p1 		 (0.0 0.0 0.0);                  // begin point of cylinder axis	
+		p1 		       (0.0 0.0 0.0);            // begin point of cylinder axis	
 		  
-		p2 		(0.0 0.0 0.02);                  // end point of cylinder axis	
+		p2 		       (0.0 0.0 0.02);           // end point of cylinder axis	
 		
-		radius1 	      0.03;		             // radius at p1  
+		radius1 	   0.03;		             // radius at p1  
 			
-		radius2 	      0.03;	                 // radius at p2	
+		radius2 	   0.03;	                 // radius at p2	
 				
-		resolution 	        36;                  // number of divisions	
+		resolution     36;                       // number of divisions	
 			      	
-		material solidProperty;                  // material name of this wall
+		material       solidProperty;            // material name of this wall
 			   	
-		motion  axisOfRotation;	                 // motion component name	
+		motion         axisOfRotation;	         // motion component name	
 	}
 
 	exitGate
 	{
-		type 	  cylinderWall;  	             // type of the wall	
+		type 	       cylinderWall;  	         // type of the wall	
 		
-		p1 	  (0.0 0.0 -0.001);                  // begin point of cylinder axis	
+		p1 	           (0.0 0.0 -0.001);         // begin point of cylinder axis	
 		  
-		p2 		 (0.0 0.0 0.0);                  // end point of cylinder axis
+		p2 		       (0.0 0.0 0.0);            // end point of cylinder axis
 		
-		radius1 	      0.03;                  // radius at p1 
+		radius1 	   0.03;                     // radius at p1 
 				
-		radius2 	    0.0001;                  // radius at p2	
+		radius2 	   0.0001;                   // radius at p2	
 			
-		resolution 	        36;	                 // number of divisions	
+		resolution     36;	                     // number of divisions	
 			      	
-		material solidProperty;                  // material name of this wall
+		material       solidProperty;            // material name of this wall
 		
-		motion  axisOfRotation;		             // motion component name			
+		motion         axisOfRotation;		     // motion component name			
 	}	
 }

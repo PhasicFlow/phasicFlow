@@ -31,15 +31,15 @@ setFields
 	{
 		shapeAssigne
 		{
-			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
+			selector     stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
  
 			stridedRangeInfo
 			{
-				begin 	    0;			         // begin index of points
+				begin 	   0;			         // begin index of points
 
-				end 	24000;		 			 // end index of points 
+				end 	   24000;		 	     // end index of points 
 
-				stride      3;			 		 // stride for selector 
+				stride     3;			 		 // stride for selector 
 			}
 
 			fieldValue  					     // fields that the selector is applied to 
@@ -53,27 +53,27 @@ setFields
 positionParticles                                // positions particles 
 {
 	
-	method 	      ordered;                       // ordered positioning
+	method 	          ordered;                   // other options: random and empty
 
 	mortonSorting     Yes;                       // perform initial sorting based on morton code?  
 
 	orderedInfo
 	{
-		diameter    0.005;                       // minimum space between centers of particles
+		diameter      0.005;                     // minimum space between centers of particles
 			 	
-		numPoints   24000;                       // number of particles in the simulation 
+		numPoints     24000;                     // number of particles in the simulation 
 		 	
-		axisOrder (x y z);                       // axis order for filling the space with particles	
+		axisOrder     (x y z);                   // axis order for filling the space with particles	
 	}  
 
-	regionType cylinder;                         // other options: cylinder and sphere               
+	regionType     cylinder;                     // other options: box and sphere               
 	
 	cylinderInfo                                 // cylinder for positioning particles 
 	{
-		p1 (0.0 0.0 0.09);                       // Coordinates of bottom cylinderRegion (m,m,m)
+		p1         (0.0 0.0 0.09);               // Coordinates of bottom cylinderRegion (m,m,m)
 		
-		p2 (0.0 0.0 0.21);                       // Coordinates of top cylinderRegion (m,m,m)
+		p2         (0.0 0.0 0.21);               // Coordinates of top cylinderRegion (m,m,m)
 		
-		radius       0.09;                       // radius of cylinder
+		radius     0.09;                         // radius of cylinder
 	}
 }
