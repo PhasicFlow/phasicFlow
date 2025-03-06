@@ -9,11 +9,6 @@ fileFormat     ASCII;
 
 setFields
 {
-    /*
-        Default value for fields defined for particles
-        These fields should always be defined for simulations with 
-        spherical particles
-    */
     defaultValue 
     {
         velocity         realx3     (0 0 0);     // linear velocity (m/s)
