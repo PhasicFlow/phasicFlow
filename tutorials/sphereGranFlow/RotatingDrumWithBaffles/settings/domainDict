@@ -8,33 +8,16 @@ fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
 {
-		min (-0.328 0.095 -0.025);               // lower corner point of the box 
+    min (-0.328 0.095 -0.025);                   // lower corner point of the box 
 
-	    max (-0.068  0.355 0.125);               // upper corner point of the box 
-}
-
-decomposition
-{
-	direction z;
+	max (-0.068  0.355 0.125);                   // upper corner point of the box 
 }
 
 boundaries
 {
-	
-
-	neighborListUpdateInterval     50;           /* Determines how often (how many iterations) do you want to 
-
-	                                                rebuild the list of particles in the neighbor list 
-
-	                                                of all boundaries in the simulation domain        */
-
-	updateInterval                 10;           // Determines how often do you want to update the new changes in the boundary
-
-	neighborLength              0.004;           // The distance from the boundary plane within which particles are marked to be in the boundary list
-
-	left
+    left
 	{
-		type     exit;	                         // other options: periodic, reflective 
+	    type     exit;	                         // other options: periodic, reflective 
 	}
 
 	right
