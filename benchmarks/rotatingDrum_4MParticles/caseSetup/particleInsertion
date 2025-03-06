@@ -3,12 +3,10 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
 
-objectName particleInsertion;
-objectType dicrionary;
+objectName     particleInsertion;
+objectType     dicrionary;
+fileFormat     ASCII;
 
-
-active  no;          // is insertion active?
-
-collisionCheck No;   // not implemented for yes
+active  No;          // is insertion active?
 
 
