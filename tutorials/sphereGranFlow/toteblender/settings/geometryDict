@@ -10,7 +10,7 @@ motionModel rotatingAxis;                        // motion model: rotating objec
 
 rotatingAxisInfo                                 // information for rotatingAxisMotion motion model 
 {
-	axisOfRotation 
+    axisOfRotation 
 	{
 	    p1            (-0.1 0.0 0.15);	         // first point for the axis of rotation 
 

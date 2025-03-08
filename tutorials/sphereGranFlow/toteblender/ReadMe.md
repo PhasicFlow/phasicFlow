@@ -28,19 +28,19 @@ In file `settings/geometryDict` the information of rotating axis and speed of ro
 // information for rotatingAxisMotion motion model 
 rotatingAxisInfo
 {
-	axisOfRotation 
-	{
-		p1 (-0.1 0.0 0.15);	// first point for the axis of rotation 
-		p2 ( 0.1 0.0 0.15);	// second point for the axis of rotation
+    axisOfRotation 
+    {
+		    p1 (-0.1 0.0 0.15);	// first point for the axis of rotation 
+		    p2 ( 0.1 0.0 0.15);	// second point for the axis of rotation
 		
-		omega 1.5708; 		// rotation speed ==> 15 rad/s
+		    omega 1.5708; 		// rotation speed ==> 15 rad/s
 		
 		// Start time of Geometry Rotating (s) 		
-		startTime 0.5;
+		    startTime 0.5;
 		
 		// End time of Geometry Rotating (s)
-		endTime 9.5;
-	}
+		    endTime 9.5;
+    }
 }
 ```
 
@@ -51,195 +51,191 @@ In `settings/geometryDict` file, the surfaces and motion component of each surfa
 ```C++
 surfaces
 {
-	
-	topGate
-	{
-		// type of wall
-		type cylinderWall;
+      topGate
+	  {
+		    // type of wall
+		    type cylinderWall;
 		
-		// begin point of cylinder axis 
-		p1 (0.0    0.0   0.3);
+		    // begin point of cylinder axis 
+		    p1 (0.0    0.0   0.3);
 		
-		// end point of cylinder axis 
-		p2 (0.0    0.0   0.301);
+		    // end point of cylinder axis 
+		    p2 (0.0    0.0   0.301);
 		
-		// radius at p1  
-		radius1  0.03;
+		    // radius at p1  
+		    radius1  0.03;
 		
-		// radius at p2		
-		radius2	 0.0001;
+		    // radius at p2		
+		    radius2	 0.0001;
 		
-		// material of wall
-		material solidProperty;
+		    // material of wall
+		    material solidProperty;
 		
-		// motion component name
-		motion axisOfRotation;	
-	}
+		    // motion component name
+		    motion axisOfRotation;	
+      }
 
-    topCylinder
-	{
-		// type of the wall
-		type 		cylinderWall;
+      topCylinder
+	  {
+		    // type of the wall
+		    type 		cylinderWall;
 		
-		// begin point of cylinder axis 	
-		p1 			(0.0 0.0 0.28);
+		    // begin point of cylinder axis 	
+		    p1 			(0.0 0.0 0.28);
 		
-		// end point of cylinder axis  
-		p2 			(0.0 0.0 0.3);
+		    // end point of cylinder axis  
+		    p2 			(0.0 0.0 0.3);
 		
-		// radius at p1  
-		radius1 	0.03;
+		    // radius at p1  
+		    radius1 	0.03;
 		
-		// radius at p2		
-		radius2 	0.03;
+		    // radius at p2		
+		    radius2 	0.03;
 		
-		// number of divisions		
-		resolution 	36;
+		    // number of divisions		
+		    resolution 	36;
 		
-		// material name of this wall
-		material 	solidProperty;
+		    // material name of this wall
+		    material 	solidProperty;
 		
-		// motion component name   	
-		motion axisOfRotation;		
-	}
+		    // motion component name   	
+		    motion axisOfRotation;		
+	  }
 
-	coneShelltop
-	{	
-		// type of the wall	
-		type 		cylinderWall;
+	  coneShelltop
+	  {	
+		    // type of the wall	
+		    type 		cylinderWall;
 		
-		// begin point of cylinder axis  	
-		p1 			(0.0 0.0 0.2);
+		    // begin point of cylinder axis  	
+		    p1 			(0.0 0.0 0.2);
 		
-		// end point of cylinder axis  
-		p2 			(0.0 0.0 0.28);
+		    // end point of cylinder axis  
+		    p2 			(0.0 0.0 0.28);
 		
-		// radius at p1  
-		radius1 	0.1;
+		    // radius at p1  
+		    radius1 	0.1;
 		
-		// radius at p2		
-		radius2 	0.03;
+		    // radius at p2		
+		    radius2 	0.03;
 		
-		// number of divisions		
-		resolution 	36;
+		    // number of divisions		
+		    resolution 	36;
 		
-		// material name of this wall      	
-		material 	solidProperty;
+		    // material name of this wall      	
+		    material 	solidProperty;
 		
-		// motion component name   	
-		motion axisOfRotation;		
-	}
+		    // motion component name   	
+		    motion axisOfRotation;		
+	  }
 
-	cylinderShell
-	{
-		// type of the wall
-		type 		cylinderWall;
+      cylinderShell
+      {
+		    // type of the wall
+		    type 		cylinderWall;
 		
-		// begin point of cylinder axis  	
-		p1 			(0.0 0.0 0.1);
+		    // begin point of cylinder axis  	
+		    p1 			(0.0 0.0 0.1);
 		
-		// end point of cylinder axis
-		p2 			(0.0 0.0 0.2);
+		    // end point of cylinder axis
+		    p2 			(0.0 0.0 0.2);
 		
-		// radius at p1	  
-		radius1 	0.1;
+		    // radius at p1	  
+		    radius1 	0.1;
 		
-		// radius at p2			
-		radius2 	0.1;
+		    // radius at p2			
+		    radius2 	0.1;
 		
-		// number of divisions		
-		resolution 	36;
+		    // number of divisions		
+		    resolution 	36;
 		
-		// material name of this wall	      	
-		material 	solidProperty; 
+		    // material name of this wall	      	
+		    material 	solidProperty; 
 		
-		// motion component name  	
-		motion axisOfRotation;		
-	}
+		    // motion component name  	
+		    motion axisOfRotation;		
+      }
 
-	coneShelldown
-	{
+	  coneShelldown
+	  {
+		    // type of the wall
+		    type 		cylinderWall;
 		
-		// type of the wall
-		type 		cylinderWall;
+		    // begin point of cylinder axis  	
+		    p1 			(0.0 0.0 0.02);
 		
-		// begin point of cylinder axis  	
-		p1 			(0.0 0.0 0.02);
+		    // end point of cylinder axis  
+		    p2 			(0.0 0.0 0.1);
 		
-		// end point of cylinder axis  
-		p2 			(0.0 0.0 0.1);
+		    // radius at p1  
+		    radius1 	0.03;
 		
-		// radius at p1  
-		radius1 	0.03;
+		    // radius at p2		
+		    radius2 	0.1;
 		
-		// radius at p2		
-		radius2 	0.1;
+		    // number of divisions		
+		    resolution 	36;
 		
-		// number of divisions		
-		resolution 	36;
+		    // material name of this wall	      	
+		    material 	solidProperty;
 		
-		// material name of this wall	      	
-		material 	solidProperty;
-		
-		// motion component name   	
-		motion axisOfRotation;		
-	}
+		    // motion component name   	
+		    motion axisOfRotation;		
+      }
 
-	bottomCylinder
-	{
-		// type of the wall
-		type 		cylinderWall;  	
+	  bottomCylinder
+	  {
+		    // type of the wall
+		    type 		cylinderWall;  	
 		
-		// begin point of cylinder axis	
-		p1 			(0.0 0.0 0.0);
+		    // begin point of cylinder axis	
+		    p1 			(0.0 0.0 0.0);
 		
-		// end point of cylinder axis	  
-		p2 			(0.0 0.0 0.02);
+		    // end point of cylinder axis	  
+		    p2 			(0.0 0.0 0.02);
 		
-		// radius at p1  
-		radius1 	0.03;
+		    // radius at p1  
+		    radius1 	0.03;
 		
-		// radius at p2			
-		radius2 	0.03;
+		    // radius at p2			
+		    radius2 	0.03;
 		
-		// number of divisions			
-		resolution 	36;
+		    // number of divisions			
+		    resolution 	36;
 		
-		// material name of this wall	      	
-		material 	solidProperty;
+		    // material name of this wall	      	
+		    material 	solidProperty;
 		
-		// motion component name	   	
-		motion axisOfRotation;		
-	}
+		    // motion component name	   	
+		    motion axisOfRotation;		
+      }
 
-	exitGate
-	{
+	  exitGate
+	  {
+		    // type of the wall
+		    type 		cylinderWall;  	
 		
-		// type of the wall
-		type 		cylinderWall;  	
+		    // begin point of cylinder axis	
+		    p1 			(0.0 0.0 -0.001);
 		
-		// begin point of cylinder axis	
-		p1 			(0.0 0.0 -0.001);
+		    // end point of cylinder axis	  
+		    p2 			(0.0 0.0 0.0);
 		
-		// end point of cylinder axis	  
-		p2 			(0.0 0.0 0.0);
+		    // radius at p1  
+		    radius1 	0.03;
 		
-		// radius at p1  
-		radius1 	0.03;
+		    // radius at p2			
+		    radius2 	0.0001;
 		
-		// radius at p2			
-		radius2 	0.0001;
+		    // number of divisions			
+		    resolution 	36;
 		
-		// number of divisions			
-		resolution 	36;
+		    // material name of this wall	      	
+		    material 	solidProperty;
 		
-		// material name of this wall	      	
-		material 	solidProperty;
-		
-		// motion component name	   	
-		motion axisOfRotation;			
-	}
-		
+		    // motion component name	   	
+		    motion axisOfRotation;			
+    }
 }
 ```
 
@@ -272,31 +268,33 @@ in <b>settings/particlesDict</b> file
 // positions particles 
 positionParticles
 {
-	// ordered positioning
-	method 	ordered;     
-	// perform initial sorting based on morton code 
-	mortonSorting 	Yes;  
-  orderedInfo
-  {
-		// minimum space between centers of particles
-		diameter 0.005;
+    // ordered positioning
+	  method 	ordered;
+	       
+	  // perform initial sorting based on morton code 
+	  mortonSorting 	Yes;  
+	  
+    orderedInfo
+    {
+		    // minimum space between centers of particles
+		    diameter 0.005;
 		
-		// number of particles in the simulation 	 	
-		numPoints 24000;
+		    // number of particles in the simulation 	 	
+		    numPoints 24000;
 	
-		// axis order for filling the space with particles		 	
-		axisOrder (x y z);  
-	}           
+		    // axis order for filling the space with particles		 	
+		    axisOrder (x y z);  
+	  }           
 	
 regionType     cylinder;                     // other options: box and sphere               
 	
 cylinderInfo                                 // cylinder for positioning particles 
-	{
-		p1         (0.0 0.0 0.09);               // Coordinates of bottom cylinderRegion (m,m,m)
+{
+    p1         (0.0 0.0 0.09);               // Coordinates of bottom cylinderRegion (m,m,m)
 		
-		p2         (0.0 0.0 0.21);               // Coordinates of top cylinderRegion (m,m,m)
+    p2         (0.0 0.0 0.21);               // Coordinates of top cylinderRegion (m,m,m)
 		
-		radius     0.09;                         // radius of cylinder
+    radius     0.09;                         // radius of cylinder
 	}
 }
 ```
@@ -314,31 +312,31 @@ contactListType   sortedContactList;
 
 model
 {
-   contactForceModel       nonLinearNonLimited;
+    contactForceModel       nonLinearNonLimited;
     
-   rollingFrictionModel    normal;
+    rollingFrictionModel    normal;
    
-   /*
-   Property (solidProperty-solidProperty);
-   */
+    /*
+       Property (solidProperty-solidProperty);
+    */
     
-   // Young modulus [Pa]
-   Yeff  (1.0e6);       
+    // Young modulus [Pa]
+    Yeff  (1.0e6);       
 
-   // Shear modulus [Pa]
-   Geff  (0.8e6);       
+    // Shear modulus [Pa]
+    Geff  (0.8e6);       
     
-   // Poisson's ratio [-]
-   nu    (0.25);        
+    // Poisson's ratio [-]
+    nu    (0.25);        
     
-   // coefficient of normal restitution
-   en    (0.7);                  
+    // coefficient of normal restitution
+    en    (0.7);                  
 
-   // dynamic friction
-   mu    (0.3);          
+    // dynamic friction
+    mu    (0.3);          
 
-   // rolling friction
-   mur   (0.1);                  
+    // rolling friction
+    mur   (0.1);                  
 }
 ```
 

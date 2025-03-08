@@ -27,24 +27,24 @@ contactSearch
 
 model
 {
-   contactForceModel        nonLinearNonLimited;
+    contactForceModel        nonLinearNonLimited;
     
-   rollingFrictionModel     normal;
+    rollingFrictionModel     normal;
    
-   /*
-      Property (solidProperty-solidProperty)
-   */
+    /*
+       Property (solidProperty-solidProperty)
+    */
     
-   Yeff  (1.0e6);                                // Young modulus [Pa]    
+    Yeff  (1.0e6);                               // Young modulus [Pa]    
 
-   Geff  (0.8e6);                                // Shear modulus [Pa]    
+    Geff  (0.8e6);                               // Shear modulus [Pa]    
     
-   nu    (0.25);                                 // Poisson's ratio [-]      
+    nu    (0.25);                                // Poisson's ratio [-]      
     
-   en    (0.7);                                  // coefficient of normal restitution            
+    en    (0.7);                                 // coefficient of normal restitution            
 
-   mu    (0.3);                                  // dynamic friction    
+    mu    (0.3);                                 // dynamic friction    
 
-   mur   (0.1);                                  // rolling friction               
+    mur   (0.1);                                 // rolling friction               
 }
 

@@ -16,9 +16,9 @@ setFields
 		spherical particles.
 	*/
 
-	defaultValue 
+    defaultValue 
 	{	
-		velocity 		realx3 	(0 0 0);         // linear velocity (m/s) 
+	    velocity 		realx3 	(0 0 0);         // linear velocity (m/s) 
 			
 		acceleration 	realx3 	(0 0 0);         // linear acceleration (m/s2)
 		 
@@ -28,26 +28,7 @@ setFields
 	}
 
 	selectors
-	{
-		shapeAssigne
-		{
-			selector     stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
- 
-			stridedRangeInfo
-			{
-				begin 	   0;			         // begin index of points
-
-				end 	   24000;		 	     // end index of points 
-
-				stride     3;			 		 // stride for selector 
-			}
-
-			fieldValue  					     // fields that the selector is applied to 
-			{
-				shapeName 	word    sphere1;     // sets shapeName of the selected points to largeSphere
-			}
-		}
-	}
+	{}
 }
 
 positionParticles                                // positions particles 
