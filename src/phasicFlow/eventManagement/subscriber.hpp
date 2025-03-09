@@ -20,8 +20,7 @@ Licence:
 #ifndef __subscriber_hpp__
 #define __subscriber_hpp__
 
-
-
+// from std
 #include <vector>
 
 #include "List.hpp"
