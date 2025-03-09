@@ -6,62 +6,58 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials   (lightMat heavyMat wallMat);         // a list of materials names
+materials           (lightMat heavyMat wallMat); // a list of materials names
 
-densities              (1000 1500 2500);         // density of materials [kg/m3]  
+densities           (1000 1500 2500);            // density of materials [kg/m3]  
 
-contactListType       sortedContactList;
+contactListType     sortedContactList;
 
 contactSearch
 {
-    method         NBS;                          // method for broad search 
+    method             NBS;                       // method for broad search 
     
-   updateInterval   10;
+    updateInterval     10;
 
-   sizeRatio       1.1;
+    sizeRatio          1.1;
 
-   cellExtent     0.55;
+    cellExtent         0.55;
 
-   adjustableBox   Yes;     
+    adjustableBox      Yes;     
 }
 
 model
 {
-   contactForceModel  nonLinearLimited;
+    contactForceModel        nonLinearLimited;
 
-   rollingFrictionModel         normal;
+    rollingFrictionModel     normal;
 
-   /*
-      Property (lightMat-lightMat   lightMat-heavyMat    lightMat-wallMat
-                                    heavyMat-heavyMat    heavyMat-wallMat
-                                                         wallMat-wallMat);
-   */
+    /*
+       Property (lightMat-lightMat   lightMat-heavyMat    lightMat-wallMat
+                                     heavyMat-heavyMat    heavyMat-wallMat
+                                                          wallMat-wallMat);
+    */
 
-   Yeff (1.0e6 1.0e6 1.0e6  
-               1.0e6 1.0e6
-                     1.0e6);                     // Young modulus [Pa]
+    Yeff (1.0e6 1.0e6 1.0e6  
+                1.0e6 1.0e6
+                      1.0e6);                    // Young modulus [Pa]
 
-   Geff (0.8e6 0.8e6 0.8e6  
-               0.8e6 0.8e6
-                     0.8e6);                     // Shear modulus [Pa]   
+    Geff (0.8e6 0.8e6 0.8e6  
+                0.8e6 0.8e6
+                      0.8e6);                    // Shear modulus [Pa]   
 
-   nu      (0.25 0.25 0.25  
-                 0.25 0.25
-                      0.25);                     // Poisson's ratio [-]
+    nu (0.25 0.25 0.25  
+             0.25 0.25
+                  0.25);                         // Poisson's ratio [-]
 
-   en (0.97   0.97    0.85   
-              0.97    0.85
-                      1.00);                     // coefficient of normal restitution
-
-   et         (1.0 1.0 1.0    
-                   1.0 1.0
-                       1.0);                     // coefficient of tangential restitution
+    en (0.97 0.97 0.85   
+             0.97 0.85
+                  1.00);                         // coefficient of normal restitution
  
-   mu      (0.65 0.65 0.35   
-                 0.65 0.35
-                      0.35);                     // dynamic friction
+    mu (0.65 0.65 0.35   
+             0.65 0.35
+                  0.35);                         // dynamic friction
 
-   mur        (0.1 0.1 0.1    
-                   0.1 0.1
-                       0.1);                     // rolling friction     
+    mur (0.1 0.1 0.1    
+             0.1 0.1
+                 0.1);                           // rolling friction     
 }

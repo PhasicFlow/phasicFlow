@@ -16,13 +16,13 @@ setFields
 		spherical particles.
 	*/
 
-	defaultValue 
+    defaultValue 
 	{
-		velocity 	      realx3 	(0 0 0);     // linear velocity (m/s)
+		velocity 	     realx3 	(0 0 0);     // linear velocity (m/s)
 			
-		acceleration 	  realx3 	(0 0 0);	 // linear acceleration (m/s2) 
+		acceleration     realx3 	(0 0 0);	 // linear acceleration (m/s2) 
 			
-		rVelocity 		  realx3 	(0 0 0);     // rotational velocity (rad/s) 	
+		rVelocity 		 realx3 	(0 0 0);     // rotational velocity (rad/s) 	
 		 		
 		shapeName 		word	smallSphere; 	 // name of the particle shape  
 	}
@@ -31,15 +31,15 @@ setFields
 	{
 		shapeAssigne
 		{
-			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
+			selector     stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
  
 			stridedRangeInfo
 			{
-				begin 	    0;			         // begin index of points
+				begin 	   0;			         // begin index of points
 
-				end 	20000;		 			 // end index of points 
+				end 	   20000;		 		 // end index of points 
 
-				stride      3;			 		 // stride for selector 
+				stride     3;			 		 // stride for selector 
 			}
 
 			fieldValue  					     // fields that the selector is applied to 
@@ -52,27 +52,7 @@ setFields
 
 positionParticles                                // positions particles 
 {
-	method ordered;     		                 // other options: random and empty
-
-	mortonSorting 			   Yes;              // perform initial sorting based on morton code?   
-
-	orderedInfo
-	{
-		diameter  0.005; 						 // minimum space between centers of particles
-
-		numPoints 20000; 	                     // number of particles in the simulation 
-
-		axisOrder (z y x);                       // axis order for filling the space with particles
-	}
-
-	regionType box;                              // other options: cylinder and sphere  
-
-	boxInfo  				                     // box information for positioning particles 
-	{
-		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
-
-		max ( 0.08  0.08 0.2);	                 // upper corner point of the box 
-	}
+	method empty;     		                     // other options: random and ordered
 }
 
 

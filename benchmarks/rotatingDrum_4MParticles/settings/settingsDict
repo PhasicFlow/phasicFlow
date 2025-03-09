@@ -2,31 +2,33 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	settingsDict;
-objectType 	dictionary;;
+objectName    settingsDict;
+objectType    dictionary;
+fileFormat    ASCII;
+/*---------------------------------------------------------------------------*/
+run             rotatingDrum_4MParticles;
 
-run 			rotatingDrum_1;
+dt              0.00001;      // time step for integration (s)
 
-dt 				0.00001; 	// time step for integration (s)
+startTime       0;            // start time for simulation 
 
-startTime 		0; 			// start time for simulation 
+endTime         10;           // end time for simulation 
 
-endTime 		10; 		// end time for simulation 
+saveInterval    0.2;          // time interval for saving the simulation
 
-saveInterval 	0.2; 		// time interval for saving the simulation
+timePrecision   5;            // maximum number of digits for time folder 
 
-timePrecision   5;			// maximum number of digits for time folder 
+g               (0 -9.8 0);   // gravity vector (m/s2) 
 
-g 				(0 -9.8 0); // gravity vector (m/s2) 
+includeObjects (diameter);                     // save necessary (i.e., required) data on disk
 
-domain 
-{
-	min (-0.2 -0.2 -0.0);
-	max ( 0.2  0.2  1.6);
-}
+// exclude unnecessary data from saving on disk
+excludeObjects (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
 
-integrationMethod 		AdamsBashforth3; 	// integration method 
+integrationMethod         AdamsBashforth2;     // integration method 
 
-timersReport 			Yes;  	
+writeFormat               binary;              // data writting format (ascii or binary)
 
-timersReportInterval   	0.01;	
+timersReport              Yes;      
+
+timersReportInterval      0.05;    

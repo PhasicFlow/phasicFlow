@@ -2,14 +2,14 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-objectName 	sphereDict;
-objectType 	sphereShape;
-fileFormat  ASCII;
+
+objectName     shapes;
+objectType     dictionary;
+fileFormat     ASCII;
 /*---------------------------------------------------------------------------*/
 
-// names of shapes 
-names 		(smallSphere largeSphere);
-// diameter of shapes (m) 	
-diameters 	(0.004 0.005);
-// material names for shapes 			
-materials	(lightMat heavyMat);		
+names          (glassBead);    // names of shapes 
+
+diameters      (0.003);        // diameter of shapes 
+
+materials      (glassMat);     // material names for shapes 
