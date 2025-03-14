@@ -36,12 +36,12 @@ if(NOT EXISTS "${Kokkos_Source_DIR}/CMakeLists.txt")
     FetchContent_Declare(
         kokkos
         GIT_REPOSITORY https://github.com/kokkos/kokkos.git
-        GIT_TAG 4.3.01
+        GIT_TAG 4.4.01
     )
     
     FetchContent_GetProperties(kokkos)
     if(NOT kokkos_POPULATED)
-        message(STATUS "Kokkos source directory not found. Downloading Kokkos version 4.3.01 ...")
+        message(STATUS "Kokkos source directory not found. Downloading Kokkos version 4.4.1 ...")
         FetchContent_Populate(kokkos)
         set(Kokkos_Source_DIR ${kokkos_SOURCE_DIR})
     endif()
