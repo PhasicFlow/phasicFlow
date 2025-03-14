@@ -110,11 +110,11 @@ public:
 
 
 	// constructors
-	explicit sortedPairs(uint32 initialSize =1)
+	explicit sortedPairs(const word& name, uint32 initialSize =1)
 	:
 		UnsortedPairs(initialSize),
-		flags_("flags_",UnsortedPairs::capacity()+1),
-		sortedPairs_("sortedPairs_",UnsortedPairs::capacity())
+		flags_( groupNames(name, "flags_"), UnsortedPairs::capacity()+1),
+		sortedPairs_(groupNames(name, "sortedPairs_"), UnsortedPairs::capacity())
 	{}
 
 	

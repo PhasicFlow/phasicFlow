@@ -98,6 +98,8 @@ public:
 
 	explicit particles(systemControl& control, const shape& shapes);
 
+	~particles() override; 
+
 	inline const auto& dynPointStruct() const
 	{
 		return dynPointStruct_;

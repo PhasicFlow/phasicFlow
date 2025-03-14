@@ -80,13 +80,17 @@ public:
 
 	TypeInfoNV("sortedContactList");
 
-
-	explicit sortedContactList(uint32 initialSize =1)
+	sortedContactList(uint32 initialSize =1)
 	:
-		SortedPairs(initialSize),
-		values_("values", SortedPairs::capacity()),
-		sortedPairs0_("sortedPairs0", SortedPairs::capacity()),
-		values0_("values0", SortedPairs::capacity())
+		sortedContactList("sortedContactList", initialSize)
+	{}
+	
+	sortedContactList(const word& name, uint32 initialSize =1)
+	:
+		SortedPairs(name, initialSize),
+		values_(groupNames(name, "values"), SortedPairs::capacity()),
+		sortedPairs0_(groupNames(name, "sortedPairs0"), SortedPairs::capacity()),
+		values0_(groupNames(name, "values0"), SortedPairs::capacity())
 	{}
 
 	bool beforeBroadSearch()

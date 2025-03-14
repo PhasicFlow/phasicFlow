@@ -269,11 +269,19 @@ template<typename Type, typename... sProperties>
 INLINE_FUNCTION_H void
 getNth(Type& dst, const ViewType1D<Type, sProperties...>& src, const uint32 n)
 {
-	auto subV = Kokkos::subview(src, Kokkos::make_pair(n, n + 1));
-	hostViewType1D<Type> dstView("getNth", 1);
-	// hostViewTypeScalar
-	Kokkos::deep_copy(dstView, subV);
-	dst = *dstView.data();
+	using exeSpace = ViewType1D<Type, sProperties...>::execution_space;
+	if constexpr(isHostAccessible<exeSpace>())
+	{
+		dst = src[n];
+	}
+	else
+	{
+		auto subV = Kokkos::subview(src, Kokkos::make_pair(n, n + 1));
+		hostViewType1D<Type> dstView("getNth", 1);
+		// hostViewTypeScalar
+		Kokkos::deep_copy(dstView, subV);
+		dst = *dstView.data();
+	}
 }
 
 template<typename T, typename... properties>

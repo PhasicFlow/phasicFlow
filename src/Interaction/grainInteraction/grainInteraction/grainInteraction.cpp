@@ -41,9 +41,9 @@ bool pFlow::grainInteraction<cFM,gMM, cLT>::createGrainInteraction()
 	geometryMotion_,
 	timers());
 
-	ppContactList_ = makeUnique<ContactListType>(nPrtcl+1);
+	ppContactList_ = makeUnique<ContactListType>("Grain-Grain",nPrtcl+1);
 	
-	pwContactList_ = makeUnique<ContactListType>(nPrtcl/5+1);
+	pwContactList_ = makeUnique<ContactListType>("Grain-wall",nPrtcl/5+1);
 
 	return true;
 }

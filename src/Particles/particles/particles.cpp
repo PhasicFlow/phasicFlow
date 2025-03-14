@@ -62,6 +62,12 @@ pFlow::particles::particles(systemControl& control, const shape& shapes)
 	//idHandler_().initialIdCheck();
 }
 
+pFlow::particles::~particles()
+{
+  // invalidates / unsobscribe from subscriber before its actual destruction
+  addToSubscriber(nullptr, message::Empty());
+}
+
 bool
 pFlow::particles::beforeIteration()
 {

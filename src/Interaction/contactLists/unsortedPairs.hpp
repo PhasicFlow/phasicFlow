@@ -194,7 +194,9 @@ public:
 	{
 		uint newCap = container_.capacity()+len;
 		this->clear();
+		//output<<"----------------before "<<capacity()<< " " << size()<<endl;
 		container_.rehash(newCap);
+		//output<<"----------------after "<<capacity()<< " " << size()<<endl;
 	}
 
 	INLINE_FUNCTION_H

@@ -41,9 +41,9 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::createSphereInteraction()
 	geometryMotion_,
 	timers());
 
-	ppContactList_ = makeUnique<ContactListType>(nPrtcl+1);
+	ppContactList_ = makeUnique<ContactListType>("sphere-sphere",nPrtcl+1);
 	
-	pwContactList_ = makeUnique<ContactListType>(nPrtcl/5+1);
+	pwContactList_ = makeUnique<ContactListType>("sphere-wall",nPrtcl/5+1);
 
 	return true;
 }
