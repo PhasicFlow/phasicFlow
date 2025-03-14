@@ -14,8 +14,8 @@ entities/stationary/stationary.cpp
 conveyorBeltMotion/conveyorBeltMotion.cpp
 entities/conveyorBelt/conveyorBelt.cpp
 
-entities/multiRotatingAxis/multiRotatingAxis.cpp
-multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
+#entities/multiRotatingAxis/multiRotatingAxis.cpp
+#multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
 
 )
 

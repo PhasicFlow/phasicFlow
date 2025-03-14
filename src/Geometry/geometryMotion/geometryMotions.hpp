@@ -25,7 +25,7 @@ Licence:
 #include "stationaryWall.hpp"
 #include "rotatingAxisMotion.hpp"
 #include "conveyorBeltMotion.hpp"
-#include "multiRotatingAxisMotion.hpp"
+//#include "multiRotatingAxisMotion.hpp"
 #include "vibratingMotion.hpp"
 
 
@@ -40,7 +40,10 @@ using stationaryGeometry = geometryMotion<stationaryWall>;
 
 using conveyorBeltMotionGeometry = geometryMotion<conveyorBeltMotion>;
 
-using multiRotationAxisMotionGeometry = geometryMotion<multiRotatingAxisMotion>;
+//typedef geometryMotion<multiRotatingAxisMotion> multiRotationAxisMotionGeometry;
+
+
+
 
 }
 

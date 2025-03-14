@@ -28,4 +28,4 @@ template class pFlow::geometryMotion<pFlow::stationaryWall>;
 
 template class pFlow::geometryMotion<pFlow::conveyorBeltMotion>;
 
-template class pFlow::geometryMotion<pFlow::multiRotatingAxisMotion>;
+//template class pFlow::geometryMotion<pFlow::multiRotatingAxisMotion>;
