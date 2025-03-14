@@ -1,0 +1,47 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+
+objectName     particlesDict;
+objectType     dictionary;
+fileFormat     ASCII;
+
+setFields
+{
+    defaultValue 
+    {
+        velocity         realx3     (0 0 0);     // linear velocity (m/s)
+        acceleration     realx3     (0 0 0);     // linear acceleration (m/s2)
+        rotVelocity      realx3     (0 0 0);     // rotational velocity (rad/s)
+        shapeName        word       glassBead;   // name of the particle shape 
+    }
+
+    selectors
+    {}
+}
+
+positionParticles
+{
+    method ordered;
+
+    orderedInfo
+    {
+        diameter   0.003;           // minimum space between centers of particles
+        
+        numPoints  250000;          // number of particles in the simulation 
+        
+        axisOrder  (z x y);         // axis order for filling the space with particles
+    }
+
+    regionType cylinder;            // other options: box and sphere    
+
+    cylinderInfo                    // cylinder for positioning particles 
+    {
+        p1     (0.0  0.0  0.01);    // lower corner point of the box 
+        
+        p2     (0.0  0.0  0.09);    // upper corner point of the box 
+        
+        radius 0.195;               // radius of cylinder 
+    }
+}

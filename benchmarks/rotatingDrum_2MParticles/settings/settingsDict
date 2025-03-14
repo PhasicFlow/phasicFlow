@@ -6,7 +6,7 @@ objectName    settingsDict;
 objectType    dictionary;
 fileFormat    ASCII;
 /*---------------------------------------------------------------------------*/
-run             rotatingDrum_4MParticles;
+run             rotatingDrum_2MParticles;
 
 dt              0.00001;      // time step for integration (s)
 
