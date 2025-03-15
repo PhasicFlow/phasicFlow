@@ -28,6 +28,8 @@ Licence:
 #include "cudaAlgorithms.hpp"
 #include "kokkosAlgorithms.hpp"
 #include "stdAlgorithms.hpp"
+#include "Kokkos_Sort.hpp"
+
 
 namespace pFlow
 {
@@ -295,7 +297,9 @@ sort(ViewType1D<T, properties...>& view, uint32 start, uint32 end)
 
 	if constexpr (isHostAccessible<ExecutionSpace>())
 	{
-		pFlow::algorithms::STD::sort<T, true>(view.data() + start, numElems);
+		//auto sView = Kokkos::subview(view, Kokkos::make_pair<uint32,uint32>(start,end));
+		//Kokkos::sort(sView);
+		pFlow::algorithms::STD::sort<T, false>(view.data() + start, numElems);
 		return;
 	}
 
@@ -316,7 +320,7 @@ sort(
   ViewType1D<T, properties...>& view,
   uint32                        start,
   uint32                        end,
-  CompareFunc                   compare
+  const CompareFunc&            compare
 )
 {
 	using ExecutionSpace =
@@ -326,9 +330,12 @@ sort(
 
 	if constexpr (isHostAccessible<ExecutionSpace>())
 	{
-		pFlow::algorithms::STD::sort<T, CompareFunc, true>(
+		// sort without parallelization 
+		pFlow::algorithms::STD::sort<T, CompareFunc,false>(
 		  view.data() + start, numElems, compare
 		);
+		//auto sView = Kokkos::subview(view, Kokkos::make_pair<uint32,uint32>(start,end));
+		//Kokkos::sort(sView, compare);
 		return;
 	}
 
@@ -344,6 +351,7 @@ sort(
 
 	return;
 }
+
 
 template<
   typename Type,

@@ -56,7 +56,7 @@ template<typename Type, typename... Properties>
 INLINE_FUNCTION_H void
 reallocInit(ViewType1D<Type, Properties...>& view, uint32 len)
 {
-	Kokkos::realloc(Kokkos::WithoutInitializing, view, len);
+	Kokkos::realloc(view, len);
 }
 
 template<typename Type, typename... Properties>

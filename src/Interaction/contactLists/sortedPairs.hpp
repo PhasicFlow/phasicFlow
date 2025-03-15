@@ -193,7 +193,7 @@ public:
 
 		if( capacity+1 > flags_.size() )
 		{
-			reallocNoInit(flags_, capacity+1);
+			reallocInit(flags_, capacity+1);
 		}
 
 		// fill the flags
@@ -219,7 +219,7 @@ public:
 		{
 			// get more space to prevent reallocations in next iterations
 			uint32 len = size_*1.1+1; 
-			reallocNoInit(sortedPairs_, len);
+			reallocInit(sortedPairs_, len);
 		}
 		
 		Kokkos::parallel_for(
@@ -230,6 +230,7 @@ public:
 
 		// - sort paris based on the first and second
 		sort(sortedPairs_, 0, size_ );
+		
 		
 
 	}
