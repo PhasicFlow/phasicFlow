@@ -22,18 +22,22 @@ Licence:
 #define __multiRotatingAxisMotion_hpp__
 
 
-#include "types.hpp"
-#include "typeInfo.hpp"
-#include "VectorDual.hpp"
-#include "List.hpp"
+// #include "types.hpp"
+// #include "typeInfo.hpp"
+// #include "VectorSingle.hpp"
+// #include "List.hpp"
+// #include "multiRotatingAxis.hpp"
+
+#include "MotionModel.hpp"
 #include "multiRotatingAxis.hpp"
+#include "fileDictionary.hpp"
 
 
 namespace pFlow
 {
 
 // forward
-class dictionary;
+// class dictionary;
 
 /**
  * Rotating axis motion model for walls
@@ -63,200 +67,49 @@ multiRotatingAxisMotionInfo
  *
  */
 class multiRotatingAxisMotion
+:
+    public fileDictionary,
+    public MotionModel<multiRotatingAxisMotion, multiRotatingAxis>
 {
-public:
-	
-	/** Motion model class to be passed to computational units/kernels for
-	 *  transfing points and returning velocities at various positions
-	 */
-	class Model
-	{
-	protected:
-		
-		deviceViewType1D<multiRotatingAxis> 	axis_;
-		int32 									numAxis_=0;
-
-	public:
-
-		INLINE_FUNCTION_HD
-		Model(deviceViewType1D<multiRotatingAxis> axis, int32 numAxis):
-			axis_(axis),
-			numAxis_(numAxis)
-		{}
-
-		INLINE_FUNCTION_HD
-		Model(const Model&) = default;
-		
-		
-		INLINE_FUNCTION_HD
-		Model& operator=(const Model&) = default;
-
-
-		INLINE_FUNCTION_HD
-		realx3 pointVelocity(int32 n, const realx3& p)const
-		{
-			return axis_[n].pointTangentialVel(p);
-		}
-
-		INLINE_FUNCTION_HD
-		realx3 operator()(int32 n, const realx3& p)const
-		{
-			return pointVelocity(n,p);
-		}
-
-		INLINE_FUNCTION_HD
-		realx3 transferPoint(int32 n, const realx3 p, real dt)const
-		{
-			return axis_[n].transferPoint(p, dt);	
-		}
-
-		INLINE_FUNCTION_HD int32 numComponents()const
-		{
-			return numAxis_;
-		}
-	};
-
 protected:
 
-	using axisVector_HD = VectorDual<multiRotatingAxis>;
+	friend MotionModel<multiRotatingAxisMotion, multiRotatingAxis>;
 
-	/// Vector of multiRotaingAxis axes
-	axisVector_HD 		axis_;
-	
-	/// Sorted index based on number of parrents each axis ha
-	VectorDual<int32> 	sortedIndex_;
+	/// is the geometry attached to this component moving
+	bool impl_isMoving()const
+	{
+		return true;
+	}
 
-	/// List of axes names
-	wordList  			axisName_;
-
-	/// Number of axes
-	label  				numAxis_= 0;
-
-	/// Read from a dictionary
-	bool readDictionary(const dictionary& dict);
-
-	/// Write to a dictionary 
-	bool writeDictionary(dictionary& dict)const;
+	/// move the component itself
+	bool impl_move(uint32, real, real)const
+	{
+		return true;
+	}
 
 public:
 	
-	/// Type info
-	TypeInfoNV("multiRotatingAxisMotion");
+    TypeInfo("multiRotatingAxisMotion");
 
-	// - Constructor 
+	multiRotatingAxisMotion(const objectFile& objf, repository* owner);
 
-		/// Empty constructor 
-		FUNCTION_H
-		multiRotatingAxisMotion();
+	multiRotatingAxisMotion(
+		const objectFile& objf, 
+		const dictionary& dict, 
+		repository* owner);
 
-		/// Construct with dictionary 
-		FUNCTION_H
-		multiRotatingAxisMotion(const dictionary& dict);
+    using fileDictionary::write;
 
-		/// Copy constructor 
-		FUNCTION_H
-		multiRotatingAxisMotion(const multiRotatingAxisMotion&) = default;
+	bool write(iOstream& os, const IOPattern& iop)const override;
 
-		/// No Move 
-		multiRotatingAxisMotion(multiRotatingAxisMotion&&) = delete;
+	static
+    auto noneComponent()
+    {
+        return multiRotatingAxis{};
+    }
 
-		/// Copy assignment 
-		FUNCTION_H
-		multiRotatingAxisMotion& operator=(const multiRotatingAxisMotion&) = default;
-
-		/// No move assignment 
-		multiRotatingAxisMotion& operator=(multiRotatingAxisMotion&&) = delete;
-
-		/// Destructor 
-		FUNCTION_H
-		~multiRotatingAxisMotion() = default;
-
-	// - Methods 
-
-		/// Retrun motion model at time t 
-		Model getModel(real t)
-		{
-			for(int32 i= 0; i<numAxis_; i++ )
-			{
-				axis_[i].setTime(t);
-				axis_[i].setAxisList(getAxisListPtrDevice());
-			}
-			axis_.modifyOnHost();
-			axis_.syncViews();
-
-			return Model(axis_.deviceVector(), numAxis_);
-		}
-
-		/// Pointer to axis list on host side 
-		INLINE_FUNCTION_H
-		multiRotatingAxis* getAxisListPtrHost()
-		{
-			return axis_.hostVectorAll().data();
-		}
-
-		/// Pointer to axis list on device 
-		INLINE_FUNCTION_H
-		multiRotatingAxis* getAxisListPtrDevice()
-		{
-			return axis_.deviceVectorAll().data();
-		}
-
-		/// Name of motion component to index 
-		INLINE_FUNCTION_H
-		int32 nameToIndex(const word& name)const
-		{
-			if( auto i = axisName_.findi(name); i == -1)
-			{
-				fatalErrorInFunction<<
-				"axis name " << name << " does not exist. \n";
-				fatalExit;
-				return i;
-			}
-			else
-			{
-				return i;
-			}
-			
-		}
-
-		/// Index of motion component to component name 
-		INLINE_FUNCTION_H
-		word indexToName(label i)const
-		{
-			if(i < numAxis_ )
-				return axisName_[i];
-			else
-			{
-				fatalErrorInFunction<<
-				"out of range access to the list of axes " << i <<endl<<
-				" size of axes_ is "<<numAxis_<<endl;
-				fatalExit;
-				return "";
-			}
-		}
-
-		/// Is moving 
-		INLINE_FUNCTION_HD
-		bool isMoving()const
-		{
-			return true;
-		}
-
-		/// Move points 
-		FUNCTION_H
-		bool move(real t, real dt);
-		
-	// - IO operation 
-
-		/// Read from input stream is 
-		FUNCTION_H
-		bool read(iIstream& is);
-
-		/// Write to output stream os 
-		FUNCTION_H
-		bool write(iOstream& os)const;
-
-	
+    // TODO: make this method protected
+    void impl_setTime(uint32 iter, real t, real dt)const;
 };
 
 } // pFlow

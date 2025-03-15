@@ -22,6 +22,18 @@ Licence:
 #include "multiRotatingAxisMotion.hpp"
 #include "dictionary.hpp"
 
+/// Construct from dictionary
+FUNCTION_H
+pFlow::multiRotatingAxis::multiRotatingAxis(const dictionary& dict)
+{
+	if(!read(nullptr, dict))
+	{
+		fatalErrorInFunction<<
+		"  error in reading multiRotatingAxis from dictionary "<< dict.globalName()<<endl;
+		fatalExit;
+	}
+}
+
 FUNCTION_H
 pFlow::multiRotatingAxis::multiRotatingAxis
 (
@@ -69,7 +81,7 @@ bool pFlow::multiRotatingAxis::read
 	}
 	else
 	{
-		parentAxisIndex_ = axisMotion-> nameToIndex(rotAxis);
+		bool result = axisMotion-> nameToIndex(rotAxis, parentAxisIndex_);
 	}
 
 	return true;
@@ -90,10 +102,33 @@ bool pFlow::multiRotatingAxis::write
 	}
 	else
 	{
-		auto rotAxis  = axisMotion->indexToName(parentAxisIndex_);
+		word rotAxis;
+		bool result  = axisMotion->indexToName(parentAxisIndex_, rotAxis);
 		dict.add("rotationAxis", rotAxis);	
 	}
 	
 	return true;
 }
 
+
+FUNCTION_H
+bool pFlow::multiRotatingAxis::write
+(
+	dictionary& dict
+) const
+{
+	if( !rotatingAxis::write(dict) ) return false;
+	
+	if(parentAxisIndex_ == 0)
+	{
+		dict.add("rotationAxis", "none");
+	}
+	// else
+	// {
+	// 	word rotAxis;
+	// 	bool result  = axisMotion->indexToName(parentAxisIndex_, rotAxis);
+	// 	dict.add("rotationAxis", rotAxis);	
+	// }
+	
+	return true;
+}

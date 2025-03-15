@@ -82,15 +82,21 @@ protected:
 	multiRotatingAxis*		axisList_;
 
 	/// Index of parent axis
-	int32 					parentAxisIndex_ = -1;
+	uint32 					parentAxisIndex_ = static_cast<uint32>(-1);
 
 public:
+
+	TypeInfoNV("multiRotatingAxis");
 
 	// - Constructors
 
 		/// Empty Constructor
 		INLINE_FUNCTION_HD
 		multiRotatingAxis(){}
+
+		/// Construct from dictionary
+		FUNCTION_H
+		explicit multiRotatingAxis(const dictionary& dict);
 
 		/// Empty with list of axes
 		FUNCTION_H
@@ -123,11 +129,11 @@ public:
 			while(parIndex != -1)
 			{
 				auto& ax = axisList_[parIndex];
-				parentVel += ax.linTangentialVelocityPoint(p);
+				parentVel += ax.linVelocityPoint(p);
 				parIndex = ax.parentAxisIndex();
 			}
 
-			return parentVel + rotatingAxis::linTangentialVelocityPoint(p);
+			return parentVel + rotatingAxis::linVelocityPoint(p);
 		}
 
 		/// Translate point p for dt seconds based on the axis information
@@ -206,6 +212,10 @@ public:
 		/// Write to dictionary
 		FUNCTION_H
 		bool write(const multiRotatingAxisMotion* axisMotion, dictionary& dict) const;
+
+		/// Write to dictionary 
+		FUNCTION_H
+		bool write(dictionary& dict) const;
 
 };
 
