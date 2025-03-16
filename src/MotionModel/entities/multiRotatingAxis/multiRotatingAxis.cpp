@@ -117,12 +117,12 @@ bool pFlow::multiRotatingAxis::write
 	dictionary& dict
 ) const
 {
-	if( !rotatingAxis::write(dict) ) return false;
+	// if( !rotatingAxis::write(dict) ) return false;
 	
-	if(parentAxisIndex_ == 0)
-	{
-		dict.add("rotationAxis", "none");
-	}
+	// if(parentAxisIndex_ == -1)
+	// {
+	// 	dict.add("rotationAxis", "none");
+	// }
 	// else
 	// {
 	// 	word rotAxis;

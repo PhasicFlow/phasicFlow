@@ -43,11 +43,11 @@ pFlow::multiRotatingAxisMotion::multiRotatingAxisMotion(
     : fileDictionary(objf, owner)
 {
 
-	// if(! impl_readDictionary(*this) )
-	// {
-	// 	fatalErrorInFunction;
-	// 	fatalExit;
-	// }
+	if(! impl_readDictionary(*this) )
+	{
+		fatalErrorInFunction;
+		fatalExit;
+	}
 }
 
 pFlow::multiRotatingAxisMotion::multiRotatingAxisMotion

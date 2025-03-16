@@ -105,7 +105,7 @@ public:
 	static
     auto noneComponent()
     {
-        return multiRotatingAxis{};
+        return multiRotatingAxis();
     }
 
     // TODO: make this method protected
