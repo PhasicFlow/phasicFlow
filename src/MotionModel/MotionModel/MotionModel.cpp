@@ -32,7 +32,6 @@ bool pFlow::MotionModel<Model, Component>::impl_nameToIndex(const word& name, ui
 		indx = static_cast<uint32>(i);
 		return true;
 	}
-	
 }
 
 template<typename Model, typename Component>

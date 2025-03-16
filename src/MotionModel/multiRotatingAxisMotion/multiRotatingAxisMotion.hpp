@@ -22,12 +22,6 @@ Licence:
 #define __multiRotatingAxisMotion_hpp__
 
 
-// #include "types.hpp"
-// #include "typeInfo.hpp"
-// #include "VectorSingle.hpp"
-// #include "List.hpp"
-// #include "multiRotatingAxis.hpp"
-
 #include "MotionModel.hpp"
 #include "multiRotatingAxis.hpp"
 #include "fileDictionary.hpp"

@@ -91,8 +91,8 @@ public:
 	// - Constructors
 
 		/// Empty Constructor
-		INLINE_FUNCTION_HD
-		multiRotatingAxis(){}
+		FUNCTION_HD
+		multiRotatingAxis() = default;
 
 		/// Construct from dictionary
 		FUNCTION_H
