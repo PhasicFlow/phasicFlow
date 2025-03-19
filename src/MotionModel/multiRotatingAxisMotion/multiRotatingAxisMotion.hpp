@@ -67,6 +67,8 @@ class multiRotatingAxisMotion
 {
 protected:
 
+	VectorSingle<int32> 	sortedIndex_;
+
 	friend MotionModel<multiRotatingAxisMotion, multiRotatingAxis>;
 
 	/// is the geometry attached to this component moving
@@ -76,10 +78,12 @@ protected:
 	}
 
 	/// move the component itself
-	bool impl_move(uint32, real, real)const
-	{
-		return true;
-	}
+	bool impl_move(uint32 iter, real t, real dt)const;
+
+	/// Read from dictionary 
+	bool impl_readDictionary(const dictionary& dict);
+
+	bool impl_writeDictionary(dictionary& dict)const;
 
 public:
 	
@@ -97,7 +101,7 @@ public:
 	bool write(iOstream& os, const IOPattern& iop)const override;
 
 	static
-    auto noneComponent()
+    multiRotatingAxis noneComponent()
     {
         return multiRotatingAxis();
     }

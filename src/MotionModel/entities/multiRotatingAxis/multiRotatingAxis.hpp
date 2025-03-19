@@ -24,7 +24,7 @@ Licence:
 
 #include "rotatingAxis.hpp"
 #include "KokkosTypes.hpp"
-
+#include "List.hpp"
 
 namespace pFlow
 {
@@ -79,7 +79,7 @@ class multiRotatingAxis
 protected:
 
 	/// This is device pointer to all axes
-	multiRotatingAxis*		axisList_;
+	multiRotatingAxis*		axisList_ = nullptr;
 
 	/// Index of parent axis
 	uint32 					parentAxisIndex_ = static_cast<uint32>(-1);
@@ -98,13 +98,12 @@ public:
 		FUNCTION_H
 		explicit multiRotatingAxis(const dictionary& dict);
 
-		/// Empty with list of axes
-		FUNCTION_H
-		multiRotatingAxis(multiRotatingAxisMotion* axisMotion);
-
 		/// Construct from dictionary and list of axes
 		FUNCTION_H
-		multiRotatingAxis(multiRotatingAxisMotion* axisMotion, const dictionary& dict);
+		multiRotatingAxis(
+			multiRotatingAxis* axisListPtr, 
+			const wordList& componentsNames,
+			const dictionary& dict);
 		
 		/// Copy constructor 
 		FUNCTION_HD
@@ -149,7 +148,7 @@ public:
 			}
 
 			auto parIndex = parentAxisIndex_;
-			while(parIndex != -1)
+			while(parIndex != static_cast<uint32>(-1))
 			{
 				auto& ax = axisList_[parIndex];
 				newP = pFlow::rotate(newP, ax, dt);
@@ -163,12 +162,12 @@ public:
 		INLINE_FUNCTION_HD
 		bool hasParent()const
 		{
-			return parentAxisIndex_ > -1;
+			return parentAxisIndex_ != static_cast<uint32>(-1);
 		}
 
 		/// Return the index of parent axis
 		INLINE_FUNCTION_HD
-		int32 parentAxisIndex()const
+		uint32 parentAxisIndex()const
 		{
 			return parentAxisIndex_;
 		}
@@ -207,15 +206,12 @@ public:
 
 		/// Read from dictionary
 		FUNCTION_H 
-		bool read(multiRotatingAxisMotion* axisMotion, const dictionary& dict);
+		bool read(const dictionary& dict, const wordList& componentNames);
 
 		/// Write to dictionary
 		FUNCTION_H
-		bool write(const multiRotatingAxisMotion* axisMotion, dictionary& dict) const;
+		bool write(dictionary& dict, const wordList& componentNames) const;
 
-		/// Write to dictionary 
-		FUNCTION_H
-		bool write(dictionary& dict) const;
 
 };
 
