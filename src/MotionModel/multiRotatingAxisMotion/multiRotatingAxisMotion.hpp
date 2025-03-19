@@ -77,8 +77,7 @@ protected:
 		return true;
 	}
 
-	/// move the component itself
-	bool impl_move(uint32 iter, real t, real dt)const;
+
 
 	/// Read from dictionary 
 	bool impl_readDictionary(const dictionary& dict);
@@ -108,6 +107,9 @@ public:
 
     // TODO: make this method protected
     void impl_setTime(uint32 iter, real t, real dt)const;
+
+	/// move the component itself
+	bool impl_move(uint32 iter, real t, real dt)const;
 };
 
 } // pFlow

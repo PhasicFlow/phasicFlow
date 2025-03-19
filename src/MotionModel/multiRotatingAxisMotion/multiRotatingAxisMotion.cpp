@@ -39,7 +39,6 @@ void pFlow::multiRotatingAxisMotion::impl_setTime
 
 bool pFlow::multiRotatingAxisMotion::impl_move(uint32 iter, real t , real dt ) const
 {
-	
 	auto motion = motionComponents_.deviceViewAll();
 	Kokkos::parallel_for(
 		"multiRotatingAxisMotion::impl_move",
