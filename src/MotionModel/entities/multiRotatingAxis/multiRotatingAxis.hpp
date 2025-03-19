@@ -187,6 +187,7 @@ public:
 		 * It is assumed that the axis with deepest level (with more parrents) is
 		 * moved first and then the axis with lower levels.
 		 */
+		INLINE_FUNCTION_HD
 		void move(real dt)
 		{
 			
