@@ -22,31 +22,32 @@ Licence:
 #include "multiRotatingAxisMotion.hpp"
 #include "dictionary.hpp"
 
+/// Construct from dictionary
 FUNCTION_H
-pFlow::multiRotatingAxis::multiRotatingAxis
-(
-	multiRotatingAxisMotion* axisMotion
-)
-{
-	//axisList_ = axisMotion->getAxisListPtr();	
-}
+pFlow::multiRotatingAxis::multiRotatingAxis(const dictionary& dict)
+:
+	rotatingAxis(dict)
+{}
+
 
 FUNCTION_H
 pFlow::multiRotatingAxis::multiRotatingAxis
 (
-	multiRotatingAxisMotion* axisMotion,
+	multiRotatingAxis* axisListPtr,
+	const wordList& componentsNames,
 	const dictionary& dict
 )
+:
+	rotatingAxis(dict),
+	axisList_(axisListPtr)
 {
 
-	if(!read(axisMotion, dict))
+	if(!read(dict, componentsNames))
 	{
 		fatalErrorInFunction<<
 		"  error in reading rotatingAxis from dictionary "<< dict.globalName()<<endl;
 		fatalExit;
 	}
-
-	//axisList_ = axisMotion->getAxisListPtr();
 }
 
 
@@ -54,22 +55,29 @@ pFlow::multiRotatingAxis::multiRotatingAxis
 FUNCTION_H
 bool pFlow::multiRotatingAxis::read
 (
-	multiRotatingAxisMotion* axisMotion,
-	const dictionary& dict
+	const dictionary& dict,
+	const wordList& componentNames
 )
 {
-
-	if(!rotatingAxis::read(dict))return false;
 			
 	word rotAxis = dict.getValOrSet<word>("rotationAxis", "none");
 
 	if(rotAxis == "none")
 	{
-		parentAxisIndex_ = -1;
+		parentAxisIndex_ = static_cast<uint32>(-1);
 	}
 	else
 	{
-		parentAxisIndex_ = axisMotion-> nameToIndex(rotAxis);
+		if( auto i = componentNames.findi(rotAxis); i != -1 )
+		{
+			parentAxisIndex_ = i;
+		}
+		else
+		{
+			fatalErrorInFunction<<"crotationAxis "<< rotAxis<<" in dictionary "<<
+			dict.globalName()<<" is not found in list of axis names "<< componentNames<<endl;
+			return false;
+		}
 	}
 
 	return true;
@@ -78,8 +86,8 @@ bool pFlow::multiRotatingAxis::read
 FUNCTION_H
 bool pFlow::multiRotatingAxis::write
 (
-	const multiRotatingAxisMotion* axisMotion,
-	dictionary& dict
+	dictionary& dict, 
+	const wordList& componentNames
 ) const
 {
 	if( !rotatingAxis::write(dict) ) return false;
@@ -90,10 +98,8 @@ bool pFlow::multiRotatingAxis::write
 	}
 	else
 	{
-		auto rotAxis  = axisMotion->indexToName(parentAxisIndex_);
-		dict.add("rotationAxis", rotAxis);	
+		dict.add("rotationAxis", componentNames[parentAxisIndex_]);	
 	}
 	
 	return true;
 }
-
