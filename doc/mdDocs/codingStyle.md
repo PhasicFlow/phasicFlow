@@ -109,3 +109,123 @@ public:
 
 } // namespace pFlow
 ``` 
+
+## 6. Doxygen Documentation
+
+### 6.1. Ruls
+provide the documentations in the header files only. In rare cases where you are generating documentations for executables, the doxygen documentation can be supplied in the .cpp file.  
+
+* **General Doxygen Style:**
+
+    * Use `///` for short documentations for methods and members.
+
+    * Use `/** */` for classes and main methods which play a significant role in the class or code.
+
+    * Place Doxygen comments *before* the declaration of the entity being documented (e.g., class, function, variable).
+
+    * Use `@param` to document function parameters, `@return` for return values, `@brief` for a short description, and `@details` for a more in-depth explanation.
+
+    * Use Markdown syntax within Doxygen comments for formatting.
+
+* **File Headers:** Each file should contain a Doxygen comment at the top, including:
+
+    * `@file` : The name of the file.
+
+    * `@brief`: A brief description of the file's purpose.
+
+    * `@author`: The author(s) of the file.
+
+    * `@date` : The date of creation or last modification.
+
+* **Class Documentation:**
+
+    * Use `/** */` for class documentation.
+
+    * Provide a `@brief` description of the class.
+
+    * Use `@tparam` to document template parameters.
+
+    * Document the purpose of the class, its invariants, and how it should be used.
+
+* **Function/Method Documentation:**
+
+    * Use `///` for short documentations.
+
+    * Use `/** */` for main methods which play a significant role.
+
+    * Provide a `@brief` description of the function.
+
+    * Use `@param` to describe each parameter, including its purpose and whether it is an input, output, or input/output parameter.
+
+    * Use `@return` to describe the return value, including its meaning and possible values.
+
+    * Use `@pre` to document any preconditions that must be met before calling the function.
+
+    * Use `@post` to document any postconditions that will be true after the function returns.
+
+    * Use `@throws` to document any exceptions that the function may throw.
+
+    * Use `@details` for a more detailed explanation of the function's behavior, algorithms, or any other relevant information.
+
+* **Variable Documentation:**
+
+    * Use `///<` for single-line documentation of variables.
+
+### 6.2. Doxygen Documentation Examples
+
+* **Class example**
+
+```cpp
+/**
+ * @brief Represents a particle in the simulation.
+ * @details This class stores the position, velocity, and other physical
+ * properties of a particle.
+ */
+class Particle
+{
+private:
+
+    Point     position_;   ///< The current position of the particle.
+
+    Vector    velocity_;   ///< The current velocity of the particle.
+
+    double     mass_;      ///< The mass of the particle.
+
+public:
+
+    /// Constructs a particle with default values.
+    Particle();
+
+    /**
+     * @brief Updates the position of the particle based on its velocity
+     * and the given time step.
+     * @param deltaTime The time elapsed since the last update, in seconds.
+     */
+    void updatePosition(const timeInfo& ti );
+
+    /// Gets the current position of the particle.
+    Point getPosition() const;
+};
+```
+
+* **Function Example**
+
+```cpp
+/**
+ * @brief Calculates the distance between two points.
+ * @param p1 The first point.
+ * @param p2 The second point.
+ * @return The distance between the two points.
+ */
+double calculateDistance(const Point& p1, const Point& p2)
+{
+    // Implementation
+    return 0.0;
+}
+
+/// Returns the velocity of the particle.
+Vector getVelocity() const
+{
+    return velocity_;
+}
+``` 
