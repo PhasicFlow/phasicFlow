@@ -36,6 +36,15 @@ Practical examples and simulation setups are provided in the [tutorials director
 
 PhasicFlowPlus is an extension of PhasicFlow that facilitates the simulation of particle-fluid systems using resolved and unresolved CFD-DEM methods. The repository for PhasicFlowPlus can be found [here](https://github.com/PhasicFlow/PhasicFlowPlus).
 
+# Contributing to PhasicFlow
+We welcome contributions to PhasicFlow! Whether you're a developer or a new user, there are many ways to get involved. Here's how you can help:
+1. Bug Reports
+2. Suggestions for better user experience
+3. Feature request and algorithm improvements
+4. Tutorials, Simulation Case Setups and documentation
+5. Direct Code Contributions
+
+For more details on how you can contribute to PhasicFlow see [this page](https://github.com/PhasicFlow/phasicFlow/wiki/How-to-contribute-to-PhasicFlow). 
 
 # How to cite PhasicFlow?
 
