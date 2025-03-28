@@ -72,5 +72,5 @@ If you are using PhasicFlow in your research or industrial work, cite the follow
 
 PhasicFlow relies on the following external libraries:
 
-* **Kokkos:** A performance portability ecosystem developed by National Technology & Engineering Solutions of Sandia, LLC (NTESS). ([https://github.com/kokkos/kokkos](https://github.com/kokkos/kokkos))
+* **Kokkos:** A community-led performance portability ecosystem within the Linux Foundation's High-Performance Software Foundation (HPSF). ([https://github.com/kokkos/kokkos](https://github.com/kokkos/kokkos))
 * **CLI11 1.8:** A command-line interface parser developed by the University of Cincinnati. ([https://github.com/CLIUtils/CLI11](https://github.com/CLIUtils/CLI11))
