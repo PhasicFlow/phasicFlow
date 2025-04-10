@@ -1,0 +1,108 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	processDataDict;
+objectType 	dictionary;;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+runTimeActive 		yes;
+
+defaultTimeControl
+{
+	timeControl;
+	startTime;
+	endTime;
+	actionInterval  0.05; 
+}
+
+components
+(
+    velocityProb
+    {
+        method 	particleProbe;
+        region  idSelecttion;
+        field   velocity;
+        ids (0 10 100);
+        timeControl 	timeStep;
+        startTime 		0;
+        endTime 		infinity;
+        probInterval 	1;
+    }
+
+    comp2
+    {
+        method    uniformDistribution;
+        region spehre;
+        
+        sphereInfo
+        {
+            radius 0.01;
+            center ();
+        }
+        timeControl default; //default;        
+        operations
+        (
+            numParticle
+            {
+                function		sum;
+                field           compoenent(velocity,x);
+                phi             square(mass);
+                divideByVol 	no;  //default 
+                threshold 		1;   //default;
+                defaultVal      NaN;
+                //includeMask 	all; //default;
+                includeMask     lessThan;
+                lessThanInfo
+                {
+                    field      diameter;
+                    value      0.003;
+                }
+            }
+        );
+    }
+
+    comp3
+    {
+        
+        region  line;
+        lineInfo
+        {
+            p1 ();
+            p2 ();
+            numPoints 10;
+            radius 0.01;
+        }
+        timeControl settingsDict; //default; 
+        type    numberBased;
+        operations();
+    }
+
+    comp4
+    {
+        type    GaussianDistribution;
+        region 	hexMesh; // unstructuredMehs; 
+        hexMeshInfo
+        {
+            min (-0.3 -1.4 -0.01);
+            max ( 0.3  2  0.48  );
+            nx 30; 		// number of divisions in x direction
+            ny 160; 	// number of divisions in y direction
+            nz 24; 		// number of divisions in z direction
+        }
+        timeControl settingsDict; // read from settingsDict
+        operations
+        (
+            avVelocity
+            {
+                type 		average;
+                field  		realx3 velocity; // default to real 1.0 
+                divideByVol no; // default
+                threshold   1;  //default;
+                includeMask all; //default;
+                
+            }
+        );
+    }
+);
