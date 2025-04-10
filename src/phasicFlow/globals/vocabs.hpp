@@ -47,6 +47,7 @@ const inline char* const contactSearchFile__  = "contactSearch";
 const inline char* const propertyFile__       = "interaction";
 const inline char* const interactionFile__    = "interaction";
 const inline char* const postprocessFile__    = "postprocessDict";
+const inline char* const postprocessDataFiel__ = "postprocessDataDict"; 
 
 const inline char* const uniform__    = "uniform";
 const inline char* const nonUniform__ = "nonUniform";

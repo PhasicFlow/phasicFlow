@@ -25,6 +25,8 @@ Licence:
 #include "types.hpp"
 #include "vocabs.hpp"
 
+inline static bool axuFunctionsInitialized__ = false;
+
 bool pFlow::systemControl::readIncludeExclue(const dictionary& dict)
 {
 	if (dict.containsDataEntry("includeObjects"))
@@ -187,6 +189,18 @@ bool pFlow::systemControl::operator++(int)
 {
 	auto toContinue = time()++;
 
+    if(!axuFunctionsInitialized__)
+    {
+        auxFunctions_ = auxFunctions::create(*this);
+        axuFunctionsInitialized__ = true;
+    }
+    
+    if(auxFunctions_)
+    {
+        auxFunctions_().execute();
+        auxFunctions_().write();
+    }
+
 	if (toContinue)
 	{
 		writeToFileTimer_.start();
@@ -221,3 +235,5 @@ bool pFlow::systemControl::operator++(int)
 
 	return toContinue;
 }
+
+

@@ -21,14 +21,24 @@ Licence:
 #include "baseTimeControl.hpp"
 #include "timeInfo.hpp"
 
-pFlow::baseTimeControl::baseTimeControl
+void pFlow::baseTimeControl::setTimeControl
 (
-    const dictionary &dict,
-    const word& intervalPrefix,
-	timeValue defStartTime
+	timeValue startTime, 
+	timeValue endTime, 
+	timeValue interval, 
+	const word &intervalPrefix
 )
-:
-	intervalPrefix_(intervalPrefix)
+{
+	isTimeStep_ = false;
+	intervalPrefix_ = intervalPrefix;
+	rRange_ = stridedRange<timeValue>(startTime, endTime, interval);
+}
+
+pFlow::baseTimeControl::baseTimeControl(
+    const dictionary &dict,
+    const word &intervalPrefix,
+    timeValue defStartTime)
+    : intervalPrefix_(intervalPrefix)
 {
 	auto tControl = dict.getVal<word>("timeControl");
 	if(tControl == "timeStep")
@@ -117,6 +127,24 @@ pFlow::baseTimeControl::baseTimeControl(int32 start, int32 end, int32 stride, co
 		intervalPrefix.size()==0uL? word("interval"): intervalPrefix+"Interval"
 	)
 {
+}
+
+pFlow::baseTimeControl::baseTimeControl
+(
+	timeValue start, 
+	timeValue end, 
+	timeValue stride, 
+	const word &intervalPrefix
+)
+:
+	isTimeStep_(false),
+	rRange_(
+		start, end, stride
+	),
+	intervalPrefix_(
+		intervalPrefix.size()==0uL? word("interval"): intervalPrefix+"Interval"
+	)
+{ 
 }
 
 bool pFlow::baseTimeControl::eventTime(uint32 iter, timeValue t, timeValue dt) const
