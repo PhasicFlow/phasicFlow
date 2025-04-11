@@ -1,0 +1,193 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
+
+#include "Time.hpp"
+#include "postprocessOperation.hpp"
+#include "regionPoints.hpp"
+#include "fieldsDataBase.hpp"
+
+namespace pFlow
+{
+
+template<typename T>
+inline
+bool writeField
+(
+    iOstream&             os,
+    timeValue             t,
+    const regionField<T>  field,
+    uint32                threshold,
+    const T&              defValue=T{}    
+)
+{
+    const auto& regPoints = field.regPoints();
+    const uint32 n = field.size();
+    os<<t<<tab;
+    for(uint32 i=0; i<n; i++)
+    {
+        auto numPar = regPoints.indices(i).size();
+        if(numPar >= threshold)
+        {
+            if constexpr(std::is_same_v<T,realx3>)
+            {
+                os<<field[i].x()<<' '<<field[i].y()<<' '<<field[i].z()<<tab;
+            }
+            else if constexpr( std::is_same_v<T,realx4>)
+            {
+                os << field[i].x() << ' ' << field[i].y() << ' ' << field[i].z() << ' ' << field[i].w() << tab;
+            }
+            else
+            {
+                os<<field[i]<<tab;
+            }
+            
+        }
+        else
+        {
+            if constexpr(std::is_same_v<T,realx3>)
+            {
+                os<<defValue.x()<<' '<<defValue.y()<<' '<<defValue.z()<<tab;
+            }
+            else if constexpr( std::is_same_v<T,realx4>)
+            {
+                os << defValue.x() << ' ' << defValue.y() << ' ' << defValue.z() << ' ' << defValue.w() << tab;
+            }
+            else
+            {
+                os<<defValue<<tab;
+            }
+        }
+
+    }
+    os<<endl;
+    return true;
+}
+
+}
+
+
+
+pFlow::postprocessOperation::postprocessOperation
+(
+    const dictionary &opDict, 
+    const regionPoints& regPoints,
+    fieldsDataBase &fieldsDB
+)
+:
+    operationDict_(opDict),
+    threshold_
+    (
+        opDict.getValOrSet<int>("threshold", 1)
+    ),
+    divideByVolume_
+    (
+        opDict.getValOrSet<Logical>("dividedByVolume", Logical(false))
+    ),
+    regionPoints_
+    (
+        regPoints
+    ),
+    database_
+    (
+        fieldsDB
+    ),
+    fieldName_
+    (
+        opDict.getValOrSet<word>("field", "one")
+    ),
+    phiFieldName_
+    (
+        opDict.getValOrSet<word>("phi", "one")
+    ),
+    includeMask_
+    (
+        includeMask::create(opDict, fieldsDB)
+    )
+{
+
+    if(!fieldsDB.getPointFieldType(fieldName_, fieldType_))
+    {
+        fatalErrorInFunction;
+        fatalExit;
+    }
+}
+
+const pFlow::Time& pFlow::postprocessOperation::time() const
+{
+    return database_.time();
+}
+
+bool pFlow::postprocessOperation::write(const fileSystem &parDir) const
+{   
+    auto ti = time().TimeInfo();
+
+    if(!osPtr_)
+    {
+        fileSystem path = parDir+(
+            processedFieldName() + ".Start_" + ti.prevTimeName());
+        osPtr_ = makeUnique<oFstream>(path);
+        
+        regPoints().write(osPtr_());
+    }
+
+    const auto& field = processedField();
+
+    std::visit
+    (
+        [&](auto&& arg)->bool
+        {
+            return writeField(osPtr_(), ti.t(), arg, threshold_);
+        },
+        field
+    );
+
+    return true;
+}
+
+pFlow::uniquePtr<pFlow::postprocessOperation>
+pFlow::postprocessOperation::create(
+    const dictionary &opDict,
+    const regionPoints &regPoints,
+    fieldsDataBase &fieldsDB)
+{
+    word func = opDict.getVal<word>("function");
+    word method = angleBracketsNames("PostprocessOperation", func);
+    if( dictionaryvCtorSelector_.search(method) )
+    {
+        REPORT(3)<<"Operation "<< Green_Text(opDict.name())<<" with function "<< Green_Text(func)<<endl;
+        auto objPtr = 
+            dictionaryvCtorSelector_[method]
+            (opDict, regPoints, fieldsDB);
+        return objPtr;
+    }
+    else
+    {
+        printKeys
+        ( 
+            fatalError << "Ctor Selector "<< 
+            method << " dose not exist. \n"
+            <<"Avaiable ones are: \n\n"
+            ,
+            dictionaryvCtorSelector_
+        );
+        fatalExit;
+        return nullptr;
+    }
+}
