@@ -30,7 +30,8 @@ pFlow::lineRegionPoints::lineRegionPoints
     if(raddi.size() != nPoints)
     {
         fatalErrorInFunction
-            << "The number elements in of radii list should be equal to the number of points"<<endl;
+            << "The number elements in of radii list should be equal to the "
+            << "number of points"<<endl;
             fatalExit;
     }
     
@@ -50,7 +51,7 @@ pFlow::lineRegionPoints::lineRegionPoints
 
 pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) const
 {
-    if(elem>=size())
+    if(elem >= size())
     {
         fatalErrorInFunction
             << "The element index is out of range. elem: " << elem
@@ -58,13 +59,15 @@ pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) c
         fatalExit;
     }
     
-    return span<const uint32>(selectedPoints_[elem].data(), selectedPoints_[elem].size());
+    return span<const uint32>(
+        selectedPoints_[elem].data(), 
+        selectedPoints_[elem].size());
 }
 
 bool pFlow::lineRegionPoints::update()
 {
     const auto points = database().updatePoints();
-    for(auto& elem:selectedPoints_)
+    for(auto& elem : selectedPoints_)
     {
         elem.clear();
     }
@@ -84,17 +87,18 @@ bool pFlow::lineRegionPoints::update()
 
 bool pFlow::lineRegionPoints::write(iOstream &os) const
 {
-    os <<"# Spheres along a straight line \n";
-    os <<"#  No."<<tab <<"centerPoint" << tab <<"diameter"<<endl;
-    for(uint32 i=0; i< sphereRegions_.size(); ++i)
+    os << "# Spheres along a straight line \n";
+    os << "#  No." << tab << "centerPoint" << tab << "diameter" << endl;
+    for(uint32 i=0; i < sphereRegions_.size(); ++i)
     {
-        os <<"# "<<i<<tab<<sphereRegions_[i].center() << tab <<diameters_[i] << '\n';
+        os << "# " << i << tab << sphereRegions_[i].center() 
+           << tab << diameters_[i] << '\n';
     }
-    os<<"time/No. ";
-    for(uint32 i=0; i< sphereRegions_.size(); ++i)
+    os << "time/No. ";
+    for(uint32 i=0; i < sphereRegions_.size(); ++i)
     {
-        os <<i<<tab;
+        os << i << tab;
     }
-    os <<endl;
+    os << endl;
     return true;
 }

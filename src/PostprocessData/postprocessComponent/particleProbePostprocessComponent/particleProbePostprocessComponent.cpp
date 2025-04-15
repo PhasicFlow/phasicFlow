@@ -92,7 +92,12 @@ bool pFlow::particleProbePostprocessComponent::execute
         executed_ = false;
         return true;
     }
-    
+
+    REPORT(1)<<"Executing postprocess component ("
+        <<Blue_Text(ti.timeName())<<" s) : "
+        << name()
+        <<END_REPORT;
+
     if(!regionPointsPtr_().update())
     {
         fatalErrorInFunction

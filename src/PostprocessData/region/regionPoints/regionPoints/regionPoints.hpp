@@ -32,27 +32,43 @@ namespace pFlow
 class fieldsDataBase;
 class Time;
 
+/**
+ * @class regionPoints
+ * @brief Abstract base class for managing and processing volumetric regions 
+ * in the simulation. Particles are selected based on their positions within
+ * these defined regions.
+ * 
+ * This class provides an interface for accessing and manipulating data 
+ * related to regions of points (particles), including their volumes, equivalent 
+ * diameters, center points, and particle indices that they contain. It interacts with the 
+ * fieldsDataBase and Time classes to retrieve simulation data. 
+ */
 class regionPoints
 {
-    using PointsTypeHost = typename pointStructure::PointsTypeHost;
+        using PointsTypeHost = typename pointStructure::PointsTypeHost;
 
+    /// Reference to the fields database containing simulation data
     fieldsDataBase& fieldsDataBase_;
 
 public:
 
     TypeInfo("regionPoints");
 
-
+    /// Constructor with dictionary and fields database reference
     regionPoints(
         const dictionary& dict,
         fieldsDataBase& fieldsDataBase);
     
+    /// Default virtual destructor
     virtual ~regionPoints() = default;
 
+    /// Returns reference to the time object from the database
     const Time& time()const;
 
+    /// Returns const reference to the fields database
     const fieldsDataBase& database()const;
 
+    /// Returns non-const reference to the fields database
     fieldsDataBase& database();
     
     /// @brief size of elements 
@@ -61,11 +77,7 @@ public:
     
     /// @brief  check if the region is empty
     virtual 
-    bool empty()const = 0;
-
-    /*/// @brief return the type of the region
-    virtual const word& type()const = 0;*/
-    
+    bool empty()const = 0;  
     
     /// @brief  volume of elements
     /// @return sapn for accessing the volume of elements 
@@ -75,30 +87,29 @@ public:
     virtual
     span<const real> eqDiameters()const = 0; 
 
-    /// center points of elements 
+    /// center points of elements
     virtual
     span<const realx3> centers()const = 0;
 
-    /// indices of particles inside the element @var elem
+    /// Returns const span of particle indices inside the specified element region
     virtual 
     span<const uint32> indices(uint32 elem)const = 0;
 
+    /// Returns non-const span of particle indices inside the specified element region
     virtual
     span<uint32> indices(uint32 elem) = 0;
 
+    /// Updates the points (particles) inside regions based on current particle positions
     virtual 
     bool update() = 0;
     
+    /// Returns true if the region should be written to the same time file
     virtual
     bool writeToSameTimeFile()const = 0;
 
+    /// Writes region data to the output stream
     virtual 
     bool write(iOstream& os)const=0;
-
-    /*static
-    uniquePtr<regionPoints> create(
-        const dictionary& dict,
-        fieldsDataBase& fieldsDataBase);*/
     
 };
 

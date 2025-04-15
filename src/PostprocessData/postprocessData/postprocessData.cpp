@@ -40,14 +40,16 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
             objectFile::READ_IF_PRESENT,
             objectFile::WRITE_NEVER
         )
-    ),
-    componentsDicts_(readDictList("components", dict_))
+    )
 {
     postProcessGlobals::defaultDir__ = CWD()/pFlow::postProcessGlobals::defaultRelDir__;
     
     // if dictionary is not provided, no extra action is required. 
-    if( !dict_.fileExist() )
+    if( !dict_.fileExist() || !dict_.headerOk() )
     {
+        WARNING<<"You requested postprocessData function while,"
+            <<" the dictionary system/postprocessDataDict does not exist."
+            <<" This feature is disabled in the current run."<<END_WARNING;
         return;
     }
 
@@ -72,7 +74,9 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
             "execution");
     }
     
-    for(auto& compDict:componentsDicts_)
+    componentsDictsPtr_ = makeUnique<dictionaryList>(readDictList("components", dict_));
+
+    for(auto& compDict:*componentsDictsPtr_)
     {
         postprocesses_.push_back( postprocessComponent::create(
             compDict, 
