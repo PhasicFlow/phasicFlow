@@ -33,7 +33,7 @@ bool pFlow::fieldsDataBase::checkForUpdate(const word &name, bool forceUpdate)
     
     if(auto [iter, found]= captureTime_.findIf(name); found)
     {
-        shouldUpdate = iter->second < t;
+        shouldUpdate = iter->second < t || forceUpdate;
         iter->second = t;
     }
     else

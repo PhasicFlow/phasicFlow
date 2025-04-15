@@ -82,12 +82,31 @@ bool writeField
 
 }
 
-
-
 pFlow::postprocessOperation::postprocessOperation
 (
     const dictionary &opDict, 
     const regionPoints& regPoints,
+    fieldsDataBase &fieldsDB
+)
+:
+    postprocessOperation
+    (
+        opDict,
+        opDict.getVal<word>("field"),
+        opDict.getValOrSet<word>("phi", "one"),
+        opDict.getValOrSet<word>("includeMask", "all"),
+        regPoints,
+        fieldsDB
+    )
+{}
+
+pFlow::postprocessOperation::postprocessOperation
+(
+    const dictionary &opDict, 
+    const word &fieldName, 
+    const word &phiName,
+    const word& includeName,  
+    const regionPoints &regPoints, 
     fieldsDataBase &fieldsDB
 )
 :
@@ -110,15 +129,15 @@ pFlow::postprocessOperation::postprocessOperation
     ),
     fieldName_
     (
-        opDict.getValOrSet<word>("field", "one")
+        fieldName
     ),
     phiFieldName_
     (
-        opDict.getValOrSet<word>("phi", "one")
+        phiName
     ),
     includeMask_
     (
-        includeMask::create(opDict, fieldsDB)
+        includeMask::create(includeName, opDict, fieldsDB)
     )
 {
 
@@ -128,7 +147,6 @@ pFlow::postprocessOperation::postprocessOperation
         fatalExit;
     }
 }
-
 const pFlow::Time& pFlow::postprocessOperation::time() const
 {
     return database_.time();

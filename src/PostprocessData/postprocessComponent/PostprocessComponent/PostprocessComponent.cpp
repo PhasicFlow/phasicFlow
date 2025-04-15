@@ -67,6 +67,10 @@ bool pFlow::PostprocessComponent<RegionType, ProcessMethodType>::execute
         return true;
     }
 
+    REPORT(1)<<"Executing postprocess component ("
+        <<Blue_Text(ti.timeName())<<" s) : "
+        << name()
+        <<END_REPORT;
     // update processing methods
     auto& regPoints = this->regPoints();
     
