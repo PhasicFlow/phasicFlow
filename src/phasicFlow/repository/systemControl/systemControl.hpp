@@ -193,6 +193,7 @@ public:
 		return outFilePrecision_;
 	}
 
+	bool keepIntegrationHistory()const;
 	
 	bool isIncluded(const word& objName)const final
 	{

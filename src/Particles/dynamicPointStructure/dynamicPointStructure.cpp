@@ -58,13 +58,14 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 {
 	REPORT(1)<< "Creating integration method "<<
 		Green_Text(integrationMethod_)<<" for dynamicPointStructure."<<END_REPORT;
-
+	
 	integrationPos_ = integration::create
 	(
 		"pStructPosition",
 		*this,
 		integrationMethod_,
-		velocity_.field()
+		velocity_.field(),
+		control.keepIntegrationHistory()
 	);
 
 	if( !integrationPos_ )
@@ -79,7 +80,8 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		"pStructVelocity",
 		*this,
 		integrationMethod_,
-		acceleration_.field()
+		acceleration_.field(),
+		control.keepIntegrationHistory()
 	);
 
 	if( !integrationVel_ )

@@ -97,10 +97,11 @@ pFlow::AdamsBashforth2::AdamsBashforth2
 	const word& baseName,
 	pointStructure& pStruct,
 	const word& method,
-	const realx3Field_D& initialValField
+	const realx3Field_D& initialValField,
+	bool  keepHistory
 )
 :
-	integration(baseName, pStruct, method, initialValField),
+	integration(baseName, pStruct, method, initialValField, keepHistory),
 	realx3PointField_D
 	(
 		objectFile
@@ -108,7 +109,7 @@ pFlow::AdamsBashforth2::AdamsBashforth2
 			groupNames(baseName,"dy1"),
 			pStruct.time().integrationFolder(),
 			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_ALWAYS
+			keepHistory?objectFile::WRITE_ALWAYS:objectFile::WRITE_NEVER
 		),
 		pStruct,
 		zero3,

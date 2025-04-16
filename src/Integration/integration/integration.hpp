@@ -24,6 +24,7 @@ Licence:
 
 #include "virtualConstructor.hpp"
 #include "pointFields.hpp"
+#include "Logical.hpp"
 
 
 namespace pFlow
@@ -63,6 +64,8 @@ private:
 		/// The base name for integration 
 		const word baseName_;
 
+		bool 	keepHistory_;
+
 protected:
 
 	bool insertValues(
@@ -83,7 +86,8 @@ public:
 			const word& baseName,
 			pointStructure& pStruct,
 			const word& method,
-			const realx3Field_D& initialValField);
+			const realx3Field_D& initialValField,
+			bool  keepHistory);
 
 		/// Copy constructor 
 		integration(const integration&) = default;
@@ -109,9 +113,10 @@ public:
 				const word& baseName,
 				pointStructure& pStruct,
 				const word& method,
-				const realx3Field_D& initialValField
+				const realx3Field_D& initialValField,
+				bool keepHistory
 			),
-			(baseName, pStruct, method, initialValField)
+			(baseName, pStruct, method, initialValField, keepHistory)
 		);
 
 
@@ -136,6 +141,11 @@ public:
 		repository& owner()
 		{
 			return owner_;
+		}
+
+		bool keepHistory()const
+		{
+			return keepHistory_;
 		}
 
 		virtual 
@@ -164,7 +174,8 @@ public:
 			const word& baseName,
 			pointStructure& pStruct,
 			const word& method,
-			const realx3Field_D& initialValField);
+			const realx3Field_D& initialValField,
+			bool  keepHistory);
 
 }; // integration
 
