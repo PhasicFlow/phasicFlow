@@ -74,6 +74,8 @@ public:
 
 	includeMask(const dictionary& opDict, fieldsDataBase& feildsDB);
 
+    includeMask(const word& type, const dictionary& opDict, fieldsDataBase& feildsDB);
+
 	virtual ~includeMask() = default;
 
     create_vCtor
@@ -84,6 +86,18 @@ public:
             const dictionary& opDict, fieldsDataBase& feildsDB
         ),
         (opDict, feildsDB)		
+    );
+
+    create_vCtor
+    (
+        includeMask, 
+        word,
+        (
+            const word& type, 
+            const dictionary& opDict, 
+            fieldsDataBase& feildsDB
+        ),
+        (type, opDict, feildsDB)
     );
 	 
 	const fieldsDataBase& database()const
@@ -101,6 +115,12 @@ public:
 
 	static 
 	uniquePtr<includeMask> create(
+        const dictionary& opDict, 
+        fieldsDataBase& feildsDB);
+    
+    static
+    uniquePtr<includeMask> create(
+        const word& type,
         const dictionary& opDict, 
         fieldsDataBase& feildsDB);
 	

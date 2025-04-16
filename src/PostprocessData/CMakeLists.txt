@@ -10,6 +10,7 @@ set(SourceFiles
     region/regionPoints/sphereRegionPoints/sphereRegionPoints.cpp
     region/regionPoints/lineRegionPoints/lineRegionPoints.cpp
     region/regionPoints/centerPointsRegionPoints/centerPointsRegionPoints.cpp
+    region/regionPoints/multipleSpheresRegionPoints/multipleSpheresRegionPoints.cpp
 
     # Postprocess components
     postprocessComponent/postprocessComponent/postprocessComponent.cpp
@@ -19,6 +20,7 @@ set(SourceFiles
     # Operations
     operation/postprocessOperation/postprocessOperation.cpp
     operation/PostprocessOperation/PostprocessOperationSum.cpp
+    operation/PostprocessOperation/PostprocessOperationAverage.cpp
     operation/includeMask/includeMask.cpp
     operation/includeMask/IncludeMasks.cpp
 

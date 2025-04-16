@@ -31,7 +31,6 @@ Licence:
 namespace pFlow
 {
 
-
 template<typename T>
 regionField<T> executeSumOperation
 (
@@ -45,13 +44,14 @@ regionField<T> executeSumOperation
 )
 {
     regionField<T> processedField(regFieldName, regPoints, T{});
+    auto vols = regPoints.volumes();
 
     for(uint32 reg =0; reg<regPoints.size(); reg++)
     {
         auto partIndices = regPoints.indices(reg);
-        auto vols = regPoints.volumes();
+        
         auto w = weights[reg];
-        T sum{};
+        T sum = T{};
         uint n = 0;
         for(auto index:partIndices)
         {
@@ -80,33 +80,106 @@ regionField<T> executeAverageOperation
 (
     const word&                    regFieldName,
     const span<T>&                 field, 
-    const regionPoints&            regPoints, 
+    const regionPoints&            regPoints,
+    const bool                     devideByVol, 
     const std::vector<span<real>>& weights,
     const span<real>&              phi,
     const includeMask::Mask&       mask
 )
 {
     regionField<T> processedField(regFieldName, regPoints, T{});
+    auto vols = regPoints.volumes();
 
     for(uint32 reg =0; reg<regPoints.size(); reg++)
     {
         auto partIndices = regPoints.indices(reg);
         auto w = weights[reg];
-        T sumNum{};
-        real sumDen{};
+        T sumNum = T{};
+        real sumDen = 0;
         uint n = 0;
         for(auto index:partIndices)
         {
-            if( index!= -1 && mask( index ))
+            if( index!= -1)
             {
-                sumNum += w[n] * field[index]* phi[index];
+                if( mask(index))
+                {
+                    sumNum += w[n] * field[index]* phi[index];
+                }
+                sumDen += w[n] * phi[index];
             }
-            sumDen += w[n] * phi[index];
+            
             n++;
         }
+        
+        if(devideByVol)
+        {
+            processedField[reg] = sumNum / max(sumDen, smallValue) / vols[reg];
+        }
+        else
+        {
+            processedField[reg] = sumNum / max(sumDen, smallValue);
+        }
+        
+    }
 
-        sumDen = max(sumDen, smallValue);
-        processedField[reg] = sumNum/sumDen;
+    return processedField;
+}
+
+
+template<typename T>
+regionField<T> executeFluctuation2Operation
+(
+    const word&                    regFieldName,
+    const span<T>&                 field,
+    const regionField<T>&          fieldAvg, 
+    const bool                     devideByVol, 
+    const std::vector<span<real>>& weights,
+    const includeMask::Mask&       mask
+)
+{
+    const auto& regPoints = fieldAvg.regPoints();
+    regionField<T> processedField(regFieldName, regPoints, T{});
+    auto vols = regPoints.volumes();
+
+    for(uint32 reg =0; reg<regPoints.size(); reg++)
+    {
+        auto partIndices = regPoints.indices(reg);
+        auto w = weights[reg];
+        auto vol = vols[reg];
+        T avField{};
+        if(devideByVol)
+        {
+            avField = vol * fieldAvg[reg];
+        }
+        else
+        {
+            avField = fieldAvg[reg];
+        }
+        
+        T sumNum = T{};
+        real sumDen = 0;
+        uint n = 0;
+        for(auto index:partIndices)
+        {
+            if( index!= -1)
+            {
+                if( mask(index))
+                {
+                    sumNum += w[n] * pow( avField- field[index],static_cast<real>(2));
+                }
+                sumDen += w[n];
+            }
+            n++;
+        }
+        
+        if(devideByVol)
+        {
+            processedField[reg] = sumNum / max(sumDen, smallValue) / vol;
+        }
+        else
+        {
+            processedField[reg] = sumNum / max(sumDen, smallValue);
+        }
         
     }
 

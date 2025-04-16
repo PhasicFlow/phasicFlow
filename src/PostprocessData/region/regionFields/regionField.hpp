@@ -31,6 +31,22 @@ namespace pFlow
 template<typename T> 
 class regionField
 {
+public:
+    using FieldType         = Field<T, HostSpace>;
+
+    using iterator        	= typename FieldType::iterator;
+
+    using const_iterator   	= typename FieldType::const_iterator;
+
+    using reference       	= typename FieldType::reference;
+    
+    using const_reference  	= typename FieldType::const_reference;
+
+    using value_type       	= typename FieldType::value_type;
+    
+    using pointer         	= typename FieldType::pointer;
+    
+    using const_pointer    	= typename FieldType::const_pointer;
 private:
            
     /// the field value

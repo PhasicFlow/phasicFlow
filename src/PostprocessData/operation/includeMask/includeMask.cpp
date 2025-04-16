@@ -33,11 +33,21 @@ pFlow::includeMask::includeMask
 	database_(fieldDB)
 {}
 
+pFlow::includeMask::includeMask
+(
+	const word &type, 
+	const dictionary &opDict, 
+	fieldsDataBase &fieldsDB
+)
+:
+	database_(fieldsDB)
+{
+}
 
 pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
 (
     const dictionary& opDict, 
-    fieldsDataBase& feildsDB
+    fieldsDataBase& fieldsDB
 )
 {
 	word mask = opDict.getValOrSet<word>("includeMask", "all");
@@ -47,7 +57,7 @@ pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
 		auto& maskDict = opDict.subDict(mask+"Info");
 		word maskField = maskDict.getVal<word>("field");
 		
-		if( !feildsDB.getPointFieldType(maskField, fieldType) )
+		if( !fieldsDB.getPointFieldType(maskField, fieldType) )
 		{
 			fatalErrorInFunction<<"Error in retriving the type of field"
 				<< maskField <<" from dictionary "
@@ -68,7 +78,7 @@ pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
 	{
 		auto objPtr = 
 			dictionaryvCtorSelector_[method]
-			(opDict, feildsDB);
+			(opDict, fieldsDB);
 		return objPtr;
 	}
 	else
@@ -87,5 +97,56 @@ pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
 	return nullptr;
 }
 
-
+pFlow::uniquePtr<pFlow::includeMask> 
+	pFlow::includeMask::create
+(
+	const word &type, 
+	const dictionary &opDict, 
+	fieldsDataBase &fieldsDB
+)
+{
+	word fieldType;
+	if( type != "all")
+	{
+		auto& maskDict = opDict.subDict(type+"Info");
+		word maskField = maskDict.getVal<word>("field");
+		
+		if( !fieldsDB.getPointFieldType(maskField, fieldType) )
+		{
+			fatalErrorInFunction<<"Error in retriving the type of field"
+				<< maskField <<" from dictionary "
+				<< maskDict.globalName()
+				<< endl;
+			fatalExit;
+			return nullptr;
+		}
+	}
+	else
+	{
+		fieldType = getTypeName<real>();
+	}
 	
+	word method = angleBracketsNames2("IncludeMask", fieldType, type);
+	
+	if( wordvCtorSelector_.search(method) )
+	{
+		auto objPtr = 
+			wordvCtorSelector_[method]
+			(type, opDict, fieldsDB);
+		return objPtr;
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< 
+			method << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			dictionaryvCtorSelector_
+		);
+		fatalExit;
+		return nullptr;
+	}
+	return nullptr;
+}

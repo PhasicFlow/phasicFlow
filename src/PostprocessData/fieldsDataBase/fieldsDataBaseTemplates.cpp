@@ -50,7 +50,7 @@ pFlow::span<T> pFlow::fieldsDataBase::updateField(const word& name, bool forceUp
         {
             if constexpr( std::same_as<T, realx3>)
             {
-                return updatePoints(forceUpdate);            
+                return updatePoints(true);            
             }
             else
             {

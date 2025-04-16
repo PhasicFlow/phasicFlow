@@ -63,7 +63,7 @@ class postprocessData
     fileDictionary        dict_;
 
     /// list of dictionaries for postprocess components 
-    dictionaryList        componentsDicts_;
+    uniquePtr<dictionaryList>        componentsDictsPtr_ = nullptr;
 
     /// @brief  default time control that can be used for all post-process components
     uniquePtr<baseTimeControl> defaultTimeControlPtr_= nullptr;

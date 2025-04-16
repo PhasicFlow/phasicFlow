@@ -2,107 +2,128 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	processDataDict;
-objectType 	dictionary;;
-fileFormat  ASCII;
+objectName   postprocessDataDict;
+objectType   dictionary;;
+fileFormat   ASCII;
 /*---------------------------------------------------------------------------*/
 
-runTimeActive 		yes;
+runTimeActive yes;
 
 defaultTimeControl
 {
-	timeControl;
-	startTime;
-	endTime;
-	actionInterval  0.05; 
+	timeControl         timeStep;
+	startTime           0;
+	endTime             1000;
+	executionInterval   150; 
 }
 
 components
 (
-    velocityProb
-    {
-        method 	particleProbe;
-        region  idSelecttion;
-        field   velocity;
-        ids (0 10 100);
-        timeControl 	timeStep;
-        startTime 		0;
-        endTime 		infinity;
-        probInterval 	1;
-    }
+      velocityProb
+      {
+          processMethod    particleProbe;
+          processRegion    centerPoints;
+          selector        id;
+          field   component(position,y);
+          ids (0 10 100);
+      }
+    
+      onSingleSphere
+      {
+          // method of performing the sum (arithmetic, uniformDistribution, GaussianDistribution)
+          processMethod    arithmetic; 
+          processRegion    sphere; // type of region on which processing is performed 
+          
+          sphereInfo
+          {
+              radius 0.01;
+              center (-0.08 -0.08 0.015);
+          }
+          
+          timeControl default; // settings, timeStep, simulationTime 
+          
+          /// all the post process operations to be done 
+          operations
+          (
+              // computes the arithmetic mean of particle velocity 
+              averageVel
+              {
+                  function	  average;
+                  field           velocity;
+                  dividedByVolume 	  no;  //default 
+                  threshold 	  3;   //default is 1;
+                  includeMask     all;
+              }
+              
+              // computes the fraction of par1 in the region 
+              par1Fraction
+              {
+                  function        average;
+                  field           one;
+                  phi             one; // default
+                  dividedByVolume no;
+                  includeMask     lessThan;
+                  
+                  // diameter of par1 is 0.003, so these settings 
+                  // will select only particles of type par1
+                  lessThanInfo
+                  {
+                      field      diameter;
+                      
+                      value      0.0031;  
+                  }
+              }
 
-    comp2
-    {
-        method    uniformDistribution;
-        region spehre;
-        
-        sphereInfo
-        {
-            radius 0.01;
-            center ();
-        }
-        timeControl default; //default;        
-        operations
-        (
-            numParticle
-            {
-                function		sum;
-                field           compoenent(velocity,x);
-                phi             square(mass);
-                divideByVol 	no;  //default 
-                threshold 		1;   //default;
-                defaultVal      NaN;
-                //includeMask 	all; //default;
-                includeMask     lessThan;
-                lessThanInfo
-                {
-                    field      diameter;
-                    value      0.003;
-                }
-            }
-        );
+              numberDensity
+              {
+                  function        sum;
+                  field           one;
+                  phi             one; // default
+                  dividedByVolume yes;
+                  
+              }
+          );
     }
-
-    comp3
+    
+    alongALine
     {
-        
-        region  line;
-        lineInfo
-        {
-            p1 ();
-            p2 ();
+          processMethod    arithmetic; 
+          processRegion    line;
+          
+          // the time interval for executing the post-processing 
+          // other options: timeStep, default, and settings
+          timeControl simulationTime; 
+          startTime   1.0;
+          endTime     3.0;
+          executionInterval 0.1;
+           
+          
+          // 10 spheres with radius 0.01 along the straight line defined by p1 and  p2 
+          lineInfo
+          {
+            p1 (0 0 0);
+            p2 (0 0.15 0.15);
             numPoints 10;
-            radius 0.01;
-        }
-        timeControl settingsDict; //default; 
-        type    numberBased;
-        operations();
+            radius    0.01;
+          }
+          
+          operations
+          (
+              // computes the arithmetic mean of particle velocity 
+              numberDensity
+              {
+                  function	   sum;
+                  field            one;
+                  dividedByVolume  yes;  //default is no 
+              }
+              
+              volumeDensity
+              {
+                function         sum;
+                field            cube(diameter); // d^3, although it differs by pi/6
+                dividedByVolume  yes;  //default is no 
+              }
+         );
     }
-
-    comp4
-    {
-        type    GaussianDistribution;
-        region 	hexMesh; // unstructuredMehs; 
-        hexMeshInfo
-        {
-            min (-0.3 -1.4 -0.01);
-            max ( 0.3  2  0.48  );
-            nx 30; 		// number of divisions in x direction
-            ny 160; 	// number of divisions in y direction
-            nz 24; 		// number of divisions in z direction
-        }
-        timeControl settingsDict; // read from settingsDict
-        operations
-        (
-            avVelocity
-            {
-                type 		average;
-                field  		realx3 velocity; // default to real 1.0 
-                divideByVol no; // default
-                threshold   1;  //default;
-                includeMask all; //default;
-                
-            }
-        );
-    }
+    
 );
