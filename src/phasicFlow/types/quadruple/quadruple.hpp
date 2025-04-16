@@ -278,6 +278,6 @@ struct quadruple
 } // pFlow
 
 #include "quadrupleI.hpp"
-// #include "quadrupleMath.hpp"
+#include "quadrupleMath.hpp"
 
 #endif

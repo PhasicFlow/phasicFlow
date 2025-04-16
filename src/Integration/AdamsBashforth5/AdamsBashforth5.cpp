@@ -123,10 +123,11 @@ pFlow::AdamsBashforth5::AdamsBashforth5
 	const word &baseName, 
 	pointStructure &pStruct, 
 	const word &method, 
-	const realx3Field_D &initialValField
+	const realx3Field_D &initialValField,
+	bool  keepHistory
 )
 :
-	AdamsBashforth4(baseName, pStruct, method, initialValField),
+	AdamsBashforth4(baseName, pStruct, method, initialValField, keepHistory),
 	dy4_
 	(
 		objectFile
@@ -134,7 +135,7 @@ pFlow::AdamsBashforth5::AdamsBashforth5
 			groupNames(baseName,"dy4"),
 			pStruct.time().integrationFolder(),
 			objectFile::READ_IF_PRESENT,
-			objectFile::WRITE_ALWAYS
+			keepHistory?objectFile::WRITE_ALWAYS:objectFile::WRITE_NEVER
 		),
 		pStruct,
 		zero3,

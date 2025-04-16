@@ -24,6 +24,8 @@ Licence:
 #include "iOstream.hpp"
 #include "types.hpp"
 #include "vocabs.hpp"
+#include "Logical.hpp"
+
 
 inline static bool axuFunctionsInitialized__ = false;
 
@@ -187,8 +189,7 @@ pFlow::systemControl::systemControl(
 
 bool pFlow::systemControl::operator++(int)
 {
-	auto toContinue = time()++;
-
+	
     if(!axuFunctionsInitialized__)
     {
         auxFunctions_ = auxFunctions::create(*this);
@@ -200,6 +201,8 @@ bool pFlow::systemControl::operator++(int)
         auxFunctions_().execute();
         auxFunctions_().write();
     }
+
+    auto toContinue = time()++;
 
 	if (toContinue)
 	{
@@ -236,4 +239,10 @@ bool pFlow::systemControl::operator++(int)
 	return toContinue;
 }
 
-
+bool pFlow::systemControl::keepIntegrationHistory()const
+{
+    auto keepHistory = settingsDict_().getValOrSet(
+        "integrationHistory",
+        Logical{false});
+    return keepHistory();
+}

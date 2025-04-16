@@ -248,7 +248,8 @@ pFlow::grainParticles::grainParticles(
 			"rVelocity",
 			dynPointStruct(),
 			intMethod,
-			rAcceleration_.field()
+			rAcceleration_.field(),
+			control.keepIntegrationHistory()
 		);
 
 	if( !rVelIntegration_ )
