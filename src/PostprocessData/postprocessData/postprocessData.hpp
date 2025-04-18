@@ -57,10 +57,13 @@ class postprocessData
     const Time&           time_;
 
     /// Database for all the points fields on the host 
-    fieldsDataBase        fieldsDataBase_;
+    uniquePtr<fieldsDataBase>        fieldsDataBasePtr_;
 
     /// file dictionary that is constructed from the file (postProcessDataDict)
     fileDictionary        dict_;
+
+    /// name of the shape for use in the time of postprocess after simulation 
+    word                  shapeType_;
 
     /// list of dictionaries for postprocess components 
     uniquePtr<dictionaryList>        componentsDictsPtr_ = nullptr;

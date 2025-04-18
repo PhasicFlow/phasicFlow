@@ -246,7 +246,10 @@ public:
 
     /// execute the operation
     /// @param weights Vector of weights for the operation.
-    virtual bool execute(const std::vector<span<real>>& weights) = 0;
+    /// @param volFactor a factor to be multiplied by the volume of the region
+    virtual bool execute(
+        const std::vector<span<real>>& weights, 
+        const regionField<real>& volFactor) = 0;
 
     /// write the result to a file 
     /// @param parDir Parent directory for the output file.

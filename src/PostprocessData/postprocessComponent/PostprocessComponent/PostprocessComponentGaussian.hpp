@@ -23,6 +23,7 @@ Licence:
 
 #include "PostprocessComponent.hpp"
 #include "GaussianDistribution.hpp"
+#include "numericConstants.hpp"
 
 namespace pFlow
 {
@@ -51,15 +52,20 @@ public:
         auto d = this->regPoints().eqDiameters();
         auto c = this->regPoints().centers();
         auto& regs = this->regionProecessMethod();
+        auto& volFactor = this->volumeFactor();
+
         const uint32 n = d.size();
         for(uint32 i=0; i<n; i++)
         {
-            regs[i] = GaussianDistribution(c[i], pow(d[i],2));
+            auto r = d[i]/2;
+            regs[i] = GaussianDistribution(c[i], pow(r/3.0,2));
+            volFactor[i] = 0.677683 / (4.0/3.0*Pi*r);
         }
     }
 
     // add the virtual constructor
-    add_vCtor(
+    add_vCtor
+    (
         postprocessComponent,
         PostprocessComponentGaussian,
         dictionary

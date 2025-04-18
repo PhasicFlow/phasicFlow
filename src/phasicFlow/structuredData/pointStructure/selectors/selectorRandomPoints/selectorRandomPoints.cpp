@@ -93,9 +93,18 @@ pFlow::selectorRandomPoints::selectorRandomPoints(
   const dictionary&     dict
 )
   : pStructSelector(type, pStruct, dict),
-    begin_(dict.getVal<uint32>("begin")),
-    end_(dict.getValOrSet("end", pStruct.size())),
-    number_(dict.getValOrSet("number", 1))
+    begin_
+	(
+		dict.getValOrSet("begin",0u)
+	),
+    end_
+	(
+		dict.getValOrSetMax<uint32>("end", pStruct.size())
+	),
+    number_
+	(
+		dict.getValOrSetMax<uint32>("number", 0u)
+	)
 {
 	begin_  = max(begin_, 1u);
 	end_    = min(end_, static_cast<uint32>(pStruct.size()));

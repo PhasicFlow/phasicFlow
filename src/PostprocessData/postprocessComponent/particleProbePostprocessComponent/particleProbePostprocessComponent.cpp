@@ -135,7 +135,7 @@ bool pFlow::particleProbePostprocessComponent::write(const fileSystem& parDir)co
     if( !osPtr_)
     {
         // file is not open yet
-        fileSystem path = parDir + (name_+".Start_"+ti.prevTimeName());
+        fileSystem path = parDir + (name_+".Start_"+ti.timeName());
         osPtr_ = makeUnique<oFstream>(path);
         regionPointsPtr_().write(osPtr_());
     }

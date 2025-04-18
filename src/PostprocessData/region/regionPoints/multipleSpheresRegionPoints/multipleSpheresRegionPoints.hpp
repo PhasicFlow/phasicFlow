@@ -138,6 +138,11 @@ public:
     /// @return Span containing indices of particles within the specified region
     span<const uint32> indices(uint32 elem)const override;
 
+    /// Returns the indices of particles contained in a specific spherical region
+    /// @param elem Index of the spherical region to query
+    /// @return Span containing indices of particles within the specified region
+    span<uint32> indices(uint32 elem) override;
+
     /// Updates the selection of particles within each spherical region
     /// @return True if update was successful, false otherwise
     bool update() override;

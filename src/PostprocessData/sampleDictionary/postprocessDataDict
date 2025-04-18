@@ -50,7 +50,7 @@ components
               {
                   function	  average;
                   field           velocity;
-                  dividedByVolume 	  no;  //default 
+                  divideByVolume 	  no;  //default 
                   threshold 	  3;   //default is 1;
                   includeMask     all;
               }
@@ -61,7 +61,7 @@ components
                   function        average;
                   field           one;
                   phi             one; // default
-                  dividedByVolume no;
+                  divideByVolume  no;
                   includeMask     lessThan;
                   
                   // diameter of par1 is 0.003, so these settings 
@@ -79,7 +79,7 @@ components
                   function        sum;
                   field           one;
                   phi             one; // default
-                  dividedByVolume yes;
+                  divideByVolume  yes;
                   
               }
           );
@@ -114,14 +114,14 @@ components
               {
                   function	   sum;
                   field            one;
-                  dividedByVolume  yes;  //default is no 
+                  divideByVolume  yes;  //default is no 
               }
               
               volumeDensity
               {
                 function         sum;
                 field            cube(diameter); // d^3, although it differs by pi/6
-                dividedByVolume  yes;  //default is no 
+                divideByVolume   yes;  //default is no 
               }
          );
     }

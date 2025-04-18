@@ -18,8 +18,8 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __fieldFunctions_hpp__
-#define __fieldFunctions_hpp__
+#ifndef __operationFunctions_hpp__
+#define __operationFunctions_hpp__
 
 #include <vector>
 
@@ -36,13 +36,14 @@ regionField<T> executeSumOperation
 (
     const word&                     regFieldName,
     const span<T>&                  field, 
-    const regionPoints&             regPoints,
+    const regionField<real>&        volFactor,
     const bool                      devideByVol,
     const std::vector<span<real>>&  weights,
     const span<real>&               phi,
     const includeMask::Mask&        mask
 )
 {
+    const auto& regPoints = volFactor.regPoints(); 
     regionField<T> processedField(regFieldName, regPoints, T{});
     auto vols = regPoints.volumes();
 
@@ -63,7 +64,7 @@ regionField<T> executeSumOperation
         }
         if(devideByVol)
         {
-            processedField[reg] = sum/vols[reg];
+            processedField[reg] = sum/(volFactor[reg] * vols[reg]);
         }
         else
         {
@@ -80,13 +81,15 @@ regionField<T> executeAverageOperation
 (
     const word&                    regFieldName,
     const span<T>&                 field, 
-    const regionPoints&            regPoints,
-    const bool                     devideByVol, 
+    const regionField<real>&       volFactor,
+    const bool                     devideByVol,
     const std::vector<span<real>>& weights,
     const span<real>&              phi,
     const includeMask::Mask&       mask
 )
 {
+    
+    const auto& regPoints = volFactor.regPoints(); 
     regionField<T> processedField(regFieldName, regPoints, T{});
     auto vols = regPoints.volumes();
 
@@ -113,7 +116,7 @@ regionField<T> executeAverageOperation
         
         if(devideByVol)
         {
-            processedField[reg] = sumNum / max(sumDen, smallValue) / vols[reg];
+            processedField[reg] = sumNum / max(sumDen, smallValue) / (volFactor[reg] * vols[reg]);
         }
         else
         {
@@ -131,7 +134,8 @@ regionField<T> executeFluctuation2Operation
 (
     const word&                    regFieldName,
     const span<T>&                 field,
-    const regionField<T>&          fieldAvg, 
+    const regionField<T>&          fieldAvg,
+    const regionField<real>&       volFactor, 
     const bool                     devideByVol, 
     const std::vector<span<real>>& weights,
     const includeMask::Mask&       mask
@@ -145,7 +149,7 @@ regionField<T> executeFluctuation2Operation
     {
         auto partIndices = regPoints.indices(reg);
         auto w = weights[reg];
-        auto vol = vols[reg];
+        auto vol = volFactor[reg] * vols[reg];
         T avField{};
         if(devideByVol)
         {
@@ -188,4 +192,4 @@ regionField<T> executeFluctuation2Operation
 
 } // namespace pFlow
 
-#endif //__fieldFunctions_hpp__
+#endif //__operationFunctions_hpp__

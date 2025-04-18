@@ -32,40 +32,25 @@ pFlow::span<T> pFlow::fieldsDataBase::updateField(const word& name, bool forceUp
         
     if(shouldUpdate)
     {
-        if(name == "one")
-        {   
-            allFields_.emplaceBackOrReplace<FieldTypeHost<T>>
-            (
-                "one",
-                FieldTypeHost<T>
-                (
-                    "one", 
-                    "value",
-                    pointFieldSize(),
-                    T{1}
-                )
-            );
-        }
-        else if( name == "position")
+        if(reservedFieldNames_.contains(name))
         {
-            if constexpr( std::same_as<T, realx3>)
+            return updateReservedField<T>(name, true);
+        }   
+        else
+        {
+            if( loadPointFieldToTime(name) )
             {
-                return updatePoints(true);            
+                const auto& pField = time_.lookupObject<pointField_D<T>>(name);
+                allFields_.emplaceBackOrReplace<FieldTypeHost<T>>(
+                name, 
+                pField.activeValuesHost());
             }
             else
             {
-                fatalErrorInFunction<< "Error in getting the type name of field: "<<
-                    name<<", with type name: "<< getTypeName<T>() <<endl;
+                fatalErrorInFunction<<"Error in loading the pointField "<<name<<endl;
                 fatalExit;
-                return span<T>(nullptr, 0);
             }
-        }
-        else
-        {
-            const auto& pField = time_.lookupObject<pointField_D<T>>(name);
-            allFields_.emplaceBackOrReplace<FieldTypeHost<T>>(
-            name, 
-            pField.activeValuesHost());
+            
         }
     }
 
@@ -75,6 +60,82 @@ pFlow::span<T> pFlow::fieldsDataBase::updateField(const word& name, bool forceUp
         field.data(), 
         field.size());
     
+}
+
+
+template<pFlow::ValidFieldType T>
+inline
+pFlow::span<T> pFlow::fieldsDataBase::updateReservedField
+(
+    const word& name, 
+    bool forceUpdate
+)
+{
+    if(name == "one")
+    {   
+        if constexpr( std::same_as<T,real>)
+        {
+            return createOrGetOne(forceUpdate);
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "This type: "
+                << getTypeName<T>()
+                <<" is not supported for field one."<<endl;
+            fatalExit;
+        }
+    }
+    else if(name == "volume")
+    {
+        if constexpr( std::same_as<T,real>)
+        {
+            return createOrGetVolume(forceUpdate);
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "This type: "
+                << getTypeName<T>()
+                <<" is not supported for field volume."<<endl;
+            fatalExit;
+        }
+    }
+    else if( name == "density")
+    {
+        if constexpr( std::same_as<T,real>)
+        {
+            return createOrGetDensity(forceUpdate);
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "This type: "
+                << getTypeName<T>()
+                <<" is not supported for field density."<<endl;
+            fatalExit;
+        }
+    }
+    else if( name == "position")
+    {
+        if constexpr( std::same_as<T, realx3>)
+        {
+            return updatePoints(forceUpdate);            
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "This type: "
+                << getTypeName<T>()
+                <<" is not supported for field position."<<endl;
+            fatalExit;
+        }
+    }
+    
+    fatalErrorInFunction<<"Not supported field name "<<endl;
+    fatalExit;
+    return span<T>(nullptr, 0);
+
 }
 
 #endif //__fieldsDataBaseTemplates_hpp__

@@ -4,6 +4,7 @@ set(SourceFiles
 
     # Fields database
     fieldsDataBase/fieldsDataBase.cpp
+    fieldsDataBase/simulationFieldsDataBase.cpp
   
     # Regions
     region/regionPoints/regionPoints/regionPoints.cpp
@@ -21,6 +22,8 @@ set(SourceFiles
     operation/postprocessOperation/postprocessOperation.cpp
     operation/PostprocessOperation/PostprocessOperationSum.cpp
     operation/PostprocessOperation/PostprocessOperationAverage.cpp
+    operation/PostprocessOperation/PostprocessOperationAvMassVelocity.cpp
+    
     operation/includeMask/includeMask.cpp
     operation/includeMask/IncludeMasks.cpp
 

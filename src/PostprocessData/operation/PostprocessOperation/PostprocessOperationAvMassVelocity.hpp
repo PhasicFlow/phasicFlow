@@ -128,7 +128,7 @@ Licence:
 #include <variant>
 #include <vector>
 
-#include "postprocessOperation.hpp"
+#include "PostprocessOperationAverage.hpp"
 #include "regionField.hpp"
 #include "includeMask.hpp"
 
@@ -138,7 +138,7 @@ namespace pFlow
 
 class PostprocessOperationAvMassVelocity
 :
-    public postprocessOperation
+    public PostprocessOperationAverage
 {
    
 public:

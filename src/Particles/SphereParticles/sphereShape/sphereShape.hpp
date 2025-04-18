@@ -51,8 +51,21 @@ public:
 		repository* owner,
 		const property& prop);
 
+	sphereShape(
+		const word& shapeType,
+		const word& fileName,
+		repository* owner,
+		const property& prop);
+
 	
 	~sphereShape() override = default;
+
+	add_vCtor
+	(
+		shape,
+		sphereShape,
+		word
+	);
 
 	//// - Methods
 
@@ -65,6 +78,8 @@ public:
 	real boundingDiameter(uint32 index)const override;
 
 	realVector boundingDiameter()const override;
+
+	realVector volume()const override;
 
 	bool mass(uint32 index, real& m)const override;
 

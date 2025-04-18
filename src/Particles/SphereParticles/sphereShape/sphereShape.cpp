@@ -68,6 +68,18 @@ pFlow::sphereShape::sphereShape
 	}
 }
 
+pFlow::sphereShape::sphereShape
+(
+	const word &shapeType, 
+	const word &fileName, 
+	repository *owner, 
+	const property &prop
+)
+:
+	sphereShape(fileName, owner, prop)
+{
+}
+
 pFlow::real pFlow::sphereShape::maxBoundingSphere() const
 {
     return max(diameters_);
@@ -103,6 +115,11 @@ pFlow::real pFlow::sphereShape::boundingDiameter(uint32 index) const
 pFlow::realVector pFlow::sphereShape::boundingDiameter() const
 {
     return diameters_;
+}
+
+pFlow::realVector pFlow::sphereShape::volume() const
+{
+    return realVector("volume", Pi/6*pow(diameters_,(real)3.0));
 }
 
 bool pFlow::sphereShape::mass(uint32 index, real &m) const

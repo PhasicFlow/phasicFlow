@@ -1,7 +1,7 @@
 #include "PostprocessOperationAverage.hpp"
 #include "dictionary.hpp"
 #include "fieldsDataBase.hpp"
-#include "fieldFunctions.hpp"
+#include "operationFunctions.hpp"
 
 /// Constructs average processor and initializes result field based on input field type
 pFlow::PostprocessOperationAverage::PostprocessOperationAverage
@@ -80,7 +80,8 @@ pFlow::PostprocessOperationAverage::PostprocessOperationAverage
 /// Performs weighted average of field values within each region
 bool pFlow::PostprocessOperationAverage::execute
 (
-    const std::vector<span<real>>& weights
+    const std::vector<span<real>>& weights,
+    const regionField<real>& volFactor
 )
 {
     auto allField = database().updateFieldAll(fieldName());
@@ -99,7 +100,7 @@ bool pFlow::PostprocessOperationAverage::execute
                 return executeAverageOperation(
                 procName,
                 field,
-                regP,
+                volFactor,
                 dbVol,
                 weights,
                 phi,
@@ -124,6 +125,7 @@ bool pFlow::PostprocessOperationAverage::execute
                         procName,
                         field,
                         std::get<regionField<T>>(processedRegField),
+                        volFactor,
                         dbVol,
                         weights,
                         mask);

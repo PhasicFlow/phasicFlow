@@ -59,6 +59,20 @@ pFlow::span<const pFlow::uint32> pFlow::multipleSpheresRegionPoints::indices(uin
     return span<const uint32>(selectedPoints_[elem].data(), selectedPoints_[elem].size());
 }
 
+pFlow::span<pFlow::uint32> pFlow::multipleSpheresRegionPoints::indices(uint32 elem)
+{
+    if (elem >= size())
+    {
+        fatalErrorInFunction
+            << "The element index is out of range. elem: " << elem
+            << " size: " << size() << endl;
+        fatalExit;
+    }
+
+    return span<uint32>(selectedPoints_[elem].data(), selectedPoints_[elem].size());
+}
+
+
 bool pFlow::multipleSpheresRegionPoints::update()
 {
     const auto points = database().updatePoints();

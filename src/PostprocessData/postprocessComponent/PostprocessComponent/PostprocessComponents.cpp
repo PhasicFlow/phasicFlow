@@ -24,10 +24,19 @@ Licence:
 
 // region types 
 #include "sphereRegionPoints.hpp"
-
+#include "lineRegionPoints.hpp"
+#include "multipleSpheresRegionPoints.hpp"
 
 
 template class pFlow::PostprocessComponentGaussian<pFlow::sphereRegionPoints>;
 template class pFlow::PostprocessComponentUniform<pFlow::sphereRegionPoints>;
 template class pFlow::PostprocessComponentArithmetic<pFlow::sphereRegionPoints>;
+
+template class pFlow::PostprocessComponentGaussian<pFlow::multipleSpheresRegionPoints>;
+template class pFlow::PostprocessComponentUniform<pFlow::multipleSpheresRegionPoints>;
+template class pFlow::PostprocessComponentArithmetic<pFlow::multipleSpheresRegionPoints>;
+
+template class pFlow::PostprocessComponentGaussian<pFlow::lineRegionPoints>;
+template class pFlow::PostprocessComponentUniform<pFlow::lineRegionPoints>;
+template class pFlow::PostprocessComponentArithmetic<pFlow::lineRegionPoints>;
 

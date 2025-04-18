@@ -23,11 +23,13 @@ bool pFlow::centerPointsRegionPoints::selectIds()
         }
     }
     else
+    // TODO: this should be corrected to select ids of particles
+    // that are selected based on the selector (this is visa versa)
     {
         auto selectorPtr = pStructSelector::create(
             selector, 
             database().pStruct(), 
-            probDict_);
+            probDict_.subDict(selector+"Info"));
         auto selectedPoints = selectorPtr->selectedPoints();
         ids_.resize(selectedPoints.size());
         ids_.assign(selectedPoints.begin(), selectedPoints.end());

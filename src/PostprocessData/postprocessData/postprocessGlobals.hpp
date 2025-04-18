@@ -27,7 +27,7 @@ namespace pFlow::postProcessGlobals
 {
 
 static fileSystem defaultDir__;
-inline const word defaultRelDir__ = "VTK/postprocessData";
+inline const word defaultRelDir__ = "postprocessData";
 
 }
 
