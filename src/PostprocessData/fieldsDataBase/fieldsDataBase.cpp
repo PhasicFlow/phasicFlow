@@ -21,17 +21,43 @@ Licence:
 #include <regex>
 
 #include "vocabs.hpp"
-#include "Time.hpp"
+#include "systemControl.hpp"
 #include "fieldsDataBase.hpp"
 #include "fieldFunctions.hpp"
-#include "dynamicPointStructure.hpp"
 
-bool pFlow::fieldsDataBase::checkForUpdate(const word &name, bool forceUpdate)
+
+namespace pFlow
+{
+
+bool pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace);
+
+}
+
+bool pFlow::fieldsDataBase::loadPointStructureToTime()
+{
+    return false;
+}
+
+pFlow::word pFlow::fieldsDataBase::getPointFieldType(const word &name) const
+{
+    word pfType =  time_.lookupObjectTypeName(name);
+    word type, space;
+    if(!pointFieldGetType(pfType, type, space))
+    {
+        fatalErrorInFunction
+            <<"Error in retriving the type of pointField "
+            << pfType<<endl;
+        fatalExit;
+    }
+    return type;
+}
+
+bool pFlow::fieldsDataBase::checkForUpdate(const word &compoundName, bool forceUpdate)
 {
     auto t = currentTime();
     bool shouldUpdate = false;
     
-    if(auto [iter, found]= captureTime_.findIf(name); found)
+    if(auto [iter, found]= captureTime_.findIf(compoundName); found)
     {
         shouldUpdate = iter->second < t || forceUpdate;
         iter->second = t;
@@ -39,7 +65,7 @@ bool pFlow::fieldsDataBase::checkForUpdate(const word &name, bool forceUpdate)
     else
     {
         shouldUpdate = true;
-        captureTime_.insertIf(name, t);
+        captureTime_.insertIf(compoundName, t);
     }
 
     return shouldUpdate;
@@ -65,6 +91,105 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetRealField(const word 
     }
 
     auto& field = allFields_.getObject<FieldTypeHost<real>>(name);
+    return span<real>(
+        field.data(), 
+        field.size());
+}
+
+pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetVolume(bool forceUpdate)
+{
+    const word fName = "volume";
+    bool shouldUpdate = checkForUpdate(fName, forceUpdate);
+        
+    if(shouldUpdate)
+    {
+        const auto index = updateFieldUint32("shapeIndex", true);
+        auto vols = getShape().volume();
+        
+        FieldTypeHost<real> volField
+        (
+            fName, 
+            "value",
+            pointFieldSize()
+        );
+
+        for(uint32 i=0; i< volField.size(); i++)
+        {
+            volField[i] = vols[index[i]];
+        }
+
+        allFields_.emplaceBackOrReplace<FieldTypeHost<real>>
+        (
+            fName,
+            std::move(volField)  
+        );
+    }
+
+    auto& field = allFields_.getObject<FieldTypeHost<real>>(fName);
+    return span<real>(
+        field.data(), 
+        field.size());
+
+}
+
+pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetDensity(bool forceUpdate)
+{
+    const word fName = "density";
+    
+    bool shouldUpdate = checkForUpdate(fName, forceUpdate);
+
+    if(shouldUpdate)
+    {
+        const auto index = updateFieldUint32("shapeIndex", true);
+        const auto dens = getShape().density();
+
+        FieldTypeHost<real> denFeild
+        (
+            fName, 
+            "value",
+            pointFieldSize()
+        );
+
+        for(uint32 i=0; i< denFeild.size(); i++)
+        {
+            denFeild[i] = dens[index[i]];
+        }
+
+        allFields_.emplaceBackOrReplace<FieldTypeHost<real>>
+        (
+            fName,
+            std::move(denFeild)  
+        );
+    }
+
+    auto& field = allFields_.getObject<FieldTypeHost<real>>(fName);
+    return span<real>(
+        field.data(), 
+        field.size());
+}
+
+pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetOne(bool forceUpdate)
+{
+    const word fName = "one";
+    
+    bool shouldUpdate = checkForUpdate(fName, forceUpdate);
+
+    if(shouldUpdate)
+    {
+        allFields_.emplaceBackOrReplace<FieldTypeHost<real>>
+        (
+            fName,
+            FieldTypeHost<real> 
+            (
+                fName, 
+                "value",
+                pointFieldSize(),
+                1.0
+            )  
+        );
+    }
+
+    auto& field = allFields_.getObject<FieldTypeHost<real>>(fName);
     return span<real>(
         field.data(), 
         field.size());
@@ -274,9 +399,9 @@ bool pFlow::fieldsDataBase::inputOutputType
     return false;
 }
 
-pFlow::fieldsDataBase::fieldsDataBase(const Time &time, bool inSimulation)
-: 
-    time_(time), 
+pFlow::fieldsDataBase::fieldsDataBase(systemControl& control, bool inSimulation)
+:
+    time_(control.time()),
     inSimulation_(inSimulation)
 {}
 
@@ -285,84 +410,110 @@ pFlow::timeValue pFlow::fieldsDataBase::currentTime() const
     return time_.currentTime();
 }
 
-bool pFlow::fieldsDataBase::getPointFieldType
+bool pFlow::fieldsDataBase::getFieldTypeNameFunction
 (
-    const word& compoundName, 
-    word& fieldName,
+    const word& compoundName,
+    word& pointFieldName, 
     word& originalType, 
     word& typeAfterFunction,
     Functions& func
-)
+)const
 {
-    if( !findFunction(compoundName, fieldName, func))
+    if( !findFunction(compoundName, pointFieldName, func))
     {
-        fatalErrorInFunction;
+        fatalErrorInFunction
+            <<"Error in processing function for field: "
+            <<compoundName<<endl;;
         return false;
     }
 
-    if(reservedFieldNames_.contains(fieldName))
+    if( reservedFieldNames_.contains(pointFieldName))
     {
-        originalType = reservedFieldNames_.find(fieldName)->second;
+        // The name is in the reserved fields 
+        originalType = reservedFieldNames_.find(pointFieldName)->second;
     }
     else
     {
-        word fieldTypeName =  time_.lookupObjectTypeName(fieldName);
-        word space;
-        if(!pointFieldGetType(fieldTypeName, originalType, space))
+        // the name is in the Time object 
+        if(pointFieldNameExists(pointFieldName))
         {
-            fatalErrorInFunction<<"Cannot extract type name from "<< fieldTypeName<<endl;
+            originalType = getPointFieldType(pointFieldName);
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "The field name: "<< pointFieldName
+                << " is not in the Time object.\n"
+                <<" Avaiable ones are: \n"<< time().objectNames()<<endl;
             return false;
         }
     }
-    
-    word outputType;
-    if(!inputOutputType(func, originalType, outputType))
+
+    if(!inputOutputType(func, originalType, typeAfterFunction))
     {
-        fatalErrorInFunction<<"Cannnot determine the input and output types for: "<< compoundName<<endl;
+        fatalErrorInFunction
+            <<"Cannnot determine the input and output types for: "
+            << compoundName<<endl;
         return false;
     }
-    typeAfterFunction = outputType;
+
     return true;
 }
 
-bool pFlow::fieldsDataBase::getPointFieldType
+bool pFlow::fieldsDataBase::getFieldType
 (
-    const word &compoundName, 
-    word &originalType, 
-    word &typeAfterFunction
-)
+    const word& compoundName,
+    word& originalType, 
+    word& typeAfterFunction
+) const
 {
     Functions func;
     word fieldName;
-    return getPointFieldType(compoundName, fieldName, originalType, typeAfterFunction, func);
+    if( !getFieldTypeNameFunction(compoundName, fieldName, originalType, typeAfterFunction, func))
+    {
+        return false;
+    }    
+    return true;
 }
 
-bool pFlow::fieldsDataBase::getPointFieldType
+bool pFlow::fieldsDataBase::getFieldType
 (
     const word &compoundName, 
     word &typeAfterFunction
-)
+) const
 {
     Functions func;
     word originalType;
     word fieldName;
-    return getPointFieldType(compoundName, fieldName, originalType, typeAfterFunction, func);
+    if( !getFieldTypeNameFunction(compoundName, fieldName, originalType, typeAfterFunction, func))
+    {
+        return false;
+    }    
+    return true;
 }
 
 pFlow::span<pFlow::realx3> pFlow::fieldsDataBase::updatePoints(bool forceUpdate)
 {
-    
-    bool shouldUpdate = checkForUpdate("position", forceUpdate);
+    const word fName = "position";
+    bool shouldUpdate = checkForUpdate(fName, forceUpdate);
         
     if(shouldUpdate)
     {
+        // load pointStructure 
+        if(!loadPointStructureToTime())
+        {
+            fatalErrorInFunction<< "Error in loading pointStructure to Time object."<<endl;
+            fatalExit;
+        }
         const auto& pstruct = pStruct(); 
-        allFields_.emplaceBackOrReplace<PointsTypeHost>(
-            "position", 
-            pstruct.activePointsHost());
+        allFields_.emplaceBackOrReplace<PointsTypeHost>
+        (
+            fName, 
+            pstruct.activePointsHost()
+        );
     }
    
-    auto& points = allFields_.getObject<PointsTypeHost>("position");
+    auto& points = allFields_.getObject<PointsTypeHost>(fName);
     
     return span<realx3>(
         points.data(), 
@@ -379,7 +530,12 @@ pFlow::span<pFlow::realx3> pFlow::fieldsDataBase::updateFieldRealx3
     word originalType, typeAfterFunction, fieldName;
     Functions func;
     
-    if( !getPointFieldType(compoundName, fieldName, originalType, typeAfterFunction, func))
+    if( !getFieldTypeNameFunction(
+        compoundName, 
+        fieldName, 
+        originalType, 
+        typeAfterFunction, 
+        func) )
     {
         fatalErrorInFunction<< "Error in getting the type name of field: "<<
             compoundName<<", with type name: "<< originalType <<endl;
@@ -410,7 +566,12 @@ pFlow::span<pFlow::realx4> pFlow::fieldsDataBase::updateFieldRealx4
     word originalType, typeAfterFunction, fieldName;
     Functions func;
     
-    if( !getPointFieldType(compoundName, fieldName, originalType, typeAfterFunction, func))
+    if( !getFieldTypeNameFunction(
+        compoundName, 
+        fieldName, 
+        originalType, 
+        typeAfterFunction, 
+        func))
     {
         fatalErrorInFunction<< "Error in getting the type name of field: "<<
             compoundName<<", with type name: "<< originalType <<endl;
@@ -441,7 +602,12 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::updateFieldReal
     word originalType, typeAfterFunction, fieldName;
     Functions func;
     
-    if( !getPointFieldType(compoundName, fieldName, originalType, typeAfterFunction, func))
+    if( !getFieldTypeNameFunction(
+        compoundName, 
+        fieldName, 
+        originalType, 
+        typeAfterFunction, 
+        func) )
     {
         fatalErrorInFunction<< "Error in getting the type name of field: "<<
             compoundName<<", with type name: "<< originalType <<endl;
@@ -609,11 +775,9 @@ pFlow::allPointFieldTypes pFlow::fieldsDataBase::updateFieldAll
     bool forceUpdate
 )
 {
-
-    word originalType, typeAfterFunction, fieldName;
-    Functions func;
+    word typeAfterFunction, originalType;
     
-    if( !getPointFieldType(compoundName, fieldName, originalType, typeAfterFunction, func))
+    if( !getFieldType(compoundName, originalType, typeAfterFunction))
     {
         fatalErrorInFunction<< "Error in getting the type name of field: "<<
             compoundName<<", with type name: "<< originalType <<endl;
@@ -621,8 +785,7 @@ pFlow::allPointFieldTypes pFlow::fieldsDataBase::updateFieldAll
         return span<real>(nullptr, 0);
     }
 
-
-    if(  typeAfterFunction== getTypeName<realx3>()  )
+    if(  typeAfterFunction == getTypeName<realx3>()  )
     {
         return updateFieldRealx3(compoundName, forceUpdate);
     }
@@ -642,19 +805,41 @@ pFlow::allPointFieldTypes pFlow::fieldsDataBase::updateFieldAll
     }
 }
 
-const pFlow::pointStructure &pFlow::fieldsDataBase::pStruct() const
+
+
+pFlow::uniquePtr<pFlow::fieldsDataBase> 
+    pFlow::fieldsDataBase::create(systemControl& control, bool inSimulation)
 {
-    if(inSimulation_)
+    word dbType;
+    if(inSimulation)
     {
-        return 
-            static_cast<const pointStructure&>(
-                time_.lookupObject<dynamicPointStructure>(pointStructureFile__)
-            );
+        dbType = "fieldsDataBase<simulation>";
     }
     else
     {
-        return time_.lookupObject<pointStructure>(pointStructureFile__);
+        dbType = "fieldsDataBase<postSimulation>";
     }
+    
+    if( boolvCtorSelector_.search(dbType) )
+    {
+        auto objPtr = 
+            boolvCtorSelector_[dbType](control, inSimulation);
+        return objPtr;
+    }
+    else
+    {
+        printKeys
+        ( 
+            fatalError << "Ctor Selector "<< 
+            dbType << " does not exist. \n"
+            <<"Available ones are: \n\n"
+            ,
+            boolvCtorSelector_
+        );
+        fatalExit;
+    }
+    
+    return nullptr;
 }
 
 bool pFlow::pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace)

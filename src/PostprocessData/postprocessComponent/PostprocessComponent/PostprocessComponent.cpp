@@ -36,6 +36,12 @@ pFlow::PostprocessComponent<RegionType,ProcessMethodType>::PostprocessComponent
     (
         regionPointsPtr_().size()
     ),
+    volumeFactor_
+    (
+        "volumeFactor",
+        regionPointsPtr_(),
+        1.0
+    ),
     operationDicts_(readDictList("operations", dict))
 {
 
@@ -106,7 +112,7 @@ bool pFlow::PostprocessComponent<RegionType, ProcessMethodType>::execute
     
     for(auto& op:operatios_)
     {
-        if( !op->execute(weights) )
+        if( !op->execute(weights, volumeFactor_) )
         {
             fatalErrorInFunction
                 <<"error occured in executing operatoin defined in dict "

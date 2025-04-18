@@ -51,6 +51,8 @@ private:
     /// Method for processing the selected particles data 
     std::vector<ProcessMethodType>  regionsProcessMethod_;
 
+    regionField<real>               volumeFactor_;
+
     bool    executed_{false};
 
     dictionaryList                  operationDicts_;
@@ -60,6 +62,16 @@ protected:
     std::vector<ProcessMethodType>& regionProecessMethod()
     {
         return regionsProcessMethod_;
+    }
+
+    regionField<real>& volumeFactor()
+    {
+        return volumeFactor_;
+    }
+    
+    const regionField<real>& volumeFactor()const
+    {
+        return volumeFactor_;
     }
 
 public:

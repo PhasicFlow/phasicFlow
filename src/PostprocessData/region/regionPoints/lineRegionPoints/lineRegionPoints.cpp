@@ -38,6 +38,7 @@ pFlow::lineRegionPoints::lineRegionPoints
     sphereRegions_.resize(nPoints, sphere(realx3(0,0,0),1));
     centerPoints_.resize(nPoints);
     volumes_.resize(nPoints);
+    diameters_.resize(nPoints);
     selectedPoints_.resize(nPoints);
     real dt = 1.0/(nPoints-1);
     for(uint32 i = 0; i < nPoints; ++i)
@@ -60,6 +61,21 @@ pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) c
     }
     
     return span<const uint32>(
+        selectedPoints_[elem].data(), 
+        selectedPoints_[elem].size());
+}
+
+pFlow::span<pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem)
+{
+    if(elem >= size())
+    {
+        fatalErrorInFunction
+            << "The element index is out of range. elem: " << elem
+            << " size: " << size() << endl;
+        fatalExit;
+    }
+    
+    return span<uint32>(
         selectedPoints_[elem].data(), 
         selectedPoints_[elem].size());
 }

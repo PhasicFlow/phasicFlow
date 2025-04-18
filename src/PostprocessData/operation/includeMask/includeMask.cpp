@@ -57,7 +57,7 @@ pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
 		auto& maskDict = opDict.subDict(mask+"Info");
 		word maskField = maskDict.getVal<word>("field");
 		
-		if( !fieldsDB.getPointFieldType(maskField, fieldType) )
+		if( !fieldsDB.getFieldType(maskField, fieldType) )
 		{
 			fatalErrorInFunction<<"Error in retriving the type of field"
 				<< maskField <<" from dictionary "
@@ -111,7 +111,7 @@ pFlow::uniquePtr<pFlow::includeMask>
 		auto& maskDict = opDict.subDict(type+"Info");
 		word maskField = maskDict.getVal<word>("field");
 		
-		if( !fieldsDB.getPointFieldType(maskField, fieldType) )
+		if( !fieldsDB.getFieldType(maskField, fieldType) )
 		{
 			fatalErrorInFunction<<"Error in retriving the type of field"
 				<< maskField <<" from dictionary "
@@ -143,7 +143,7 @@ pFlow::uniquePtr<pFlow::includeMask>
 			method << " dose not exist. \n"
 			<<"Avaiable ones are: \n\n"
 			,
-			dictionaryvCtorSelector_
+			wordvCtorSelector_
 		);
 		fatalExit;
 		return nullptr;

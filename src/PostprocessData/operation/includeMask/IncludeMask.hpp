@@ -154,11 +154,34 @@ public:
             ).getVal<word>("field"))
 	{}
     
+    IncludeMask(
+        const word& type,
+		const dictionary& dict, 
+        fieldsDataBase& feildsDB)
+	:
+		includeMask(type, dict, feildsDB),
+		operator_(dict.subDict(operatorName()+"Info")),
+        fieldName_(
+            dict.subDict
+            (
+                operatorName()+"Info"
+            ).getVal<word>("field"))
+	{}
+
     /// Add virtual constructor pattern for creating instances
-	add_vCtor(
+	add_vCtor
+    (
 		includeMask,
 		IncludeMask,
-		dictionary);
+		dictionary
+    );
+
+    add_vCtor
+    (
+		includeMask,
+		IncludeMask,
+		word
+    );
 
     /// Returns the mask for filtering elements (updates the mask if necessary)
     Mask getMask() override
@@ -203,20 +226,40 @@ public:
 
 	TypeInfoTemplate12("IncludeMask", T, allOp<int8>);
 
-	IncludeMask(
-		const dictionary& opDict, 
+    IncludeMask(
+        const dictionary& opDict, 
         fieldsDataBase& feildsDB)
-	:
-		includeMask(opDict, feildsDB)
-	{
+    :
+        includeMask(opDict, feildsDB)
+    {
         span<realx3>  s = database().updatePoints();        
         mask_.resize(s.size(), true);
-	}
+    }
 
-	add_vCtor(
-		includeMask,
-		IncludeMask,
-		dictionary);
+    IncludeMask(
+        const word& type,
+        const dictionary& opDict, 
+        fieldsDataBase& feildsDB)
+    :
+        includeMask(type, opDict, feildsDB)
+    {
+        span<realx3>  s = database().updatePoints();        
+        mask_.resize(s.size(), true);
+    }
+
+    add_vCtor
+    (
+        includeMask,
+        IncludeMask,
+        dictionary
+    );
+
+    add_vCtor
+    (
+        includeMask,
+        IncludeMask,
+        word
+    );
 
     Mask getMask()override
     {

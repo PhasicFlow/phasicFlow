@@ -193,7 +193,9 @@ public:
     /// @brief Execute average operation on field values
     /// @param weights Weight factors for particles
     /// @return True if successful
-    bool execute(const std::vector<span<real>>& weights) override;
+    bool execute(
+        const std::vector<span<real>>& weights,
+        const regionField<real>& volFactor) override;
 
 }; 
 

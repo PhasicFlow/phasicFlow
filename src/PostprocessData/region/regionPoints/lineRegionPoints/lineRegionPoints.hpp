@@ -126,6 +126,8 @@ public:
 
     /// Return indices of points in the specified element/region
     span<const uint32> indices(uint32 elem)const override;
+
+    span<uint32> indices(uint32 elem) override;
     
     /// Update regions based on current particle positions
     bool update() override;

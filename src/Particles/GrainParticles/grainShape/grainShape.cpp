@@ -73,6 +73,18 @@ pFlow::grainShape::grainShape
 	}
 }
 
+pFlow::grainShape::grainShape
+(
+	const word &shapeType, 
+	const word &fileName, 
+	repository *owner, 
+	const property &prop
+)
+:
+	grainShape(fileName, owner, prop)
+{
+}
+
 pFlow::real pFlow::grainShape::maxBoundingSphere() const
 {
     return max(grainDiameters_);
@@ -99,9 +111,12 @@ pFlow::real pFlow::grainShape::boundingDiameter(uint32 index) const
 	{
 		return grainDiameters_[index];
 	}
-	fatalErrorInFunction<<"Invalid index for diameter "<<
-	index<<endl;
+
+	fatalErrorInFunction
+		<<"Invalid index for diameter "
+		<<index<<endl;
 	fatalExit;
+	
 	return 0.0;
 }
 
@@ -122,13 +137,17 @@ pFlow::real pFlow::grainShape::coarseGrainFactor(uint32 index) const
 	return 0.0;
 }
 
+pFlow::realVector pFlow::grainShape::volume() const
+{
+    return realVector("volume", Pi/6*pow(grainDiameters_,(real)3.0));
+}
 
 pFlow::realVector pFlow::grainShape::coarseGrainFactor() const
 {
     return coarseGrainFactor_;
 }
 
-pFlow::real pFlow::grainShape::orginalDiameter(uint32 index) const
+pFlow::real pFlow::grainShape::originalDiameter(uint32 index) const
 {
 	if(indexValid(index))
 	{
@@ -142,7 +161,7 @@ pFlow::real pFlow::grainShape::orginalDiameter(uint32 index) const
 
 
 
-pFlow::realVector pFlow::grainShape::orginalDiameter() const
+pFlow::realVector pFlow::grainShape::originalDiameter() const
 {
     return sphereDiameters_;
 }

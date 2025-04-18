@@ -30,7 +30,14 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
 :
     auxFunctions(control),
     time_(control.time()),
-    fieldsDataBase_(control.time(), true),
+    fieldsDataBasePtr_
+    ( 
+        fieldsDataBase::create
+        (
+            const_cast<systemControl&>(control),
+            true
+        )
+    ),
     dict_
     (
         objectFile
@@ -73,6 +80,12 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
             control.time().saveInterval(),
             "execution");
     }
+
+    shapeType_ = dict_.getValOrSet<word>
+    (
+        "shapeType", 
+        word("sphere")
+    );
     
     componentsDictsPtr_ = makeUnique<dictionaryList>(readDictList("components", dict_));
 
@@ -80,7 +93,7 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
     {
         postprocesses_.push_back( postprocessComponent::create(
             compDict, 
-            fieldsDataBase_, 
+            fieldsDataBasePtr_(), 
             defaultTimeControlPtr_() ));
     }
 

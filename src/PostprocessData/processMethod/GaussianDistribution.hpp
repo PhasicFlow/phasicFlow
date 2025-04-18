@@ -26,7 +26,7 @@ Licence:
 #include "typeInfo.hpp"
 #include "types.hpp"
 #include "span.hpp"
-
+#include "numericConstants.hpp"
 
 namespace pFlow
 {
@@ -74,15 +74,15 @@ public:
         for(uint32 i=0; i<indices.size(); i++)
         {
             auto x = points[indices[i]]-center;
-            auto f = exp(- dot(x,x)/(2*variance_));
+            auto f = exp(- dot(x,x)/(2*variance_))/sqrt(2.0*Pi*variance_);
             weight_[i] = f;
             sum += f;
         }
 
-        for(auto& w: weight_)
+        /*for(auto& w: weight_)
         {
             w /= sum;
-        }   
+        } */  
         return true;
     }
 

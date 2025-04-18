@@ -21,52 +21,23 @@ Licence:
 #ifndef __fieldsDataBase_hpp__
 #define __fieldsDataBase_hpp__
 
-#include <variant>
-#include <concepts>
-
+#include "fieldsDataBaseDclr.hpp"
 
 #include "pointStructure.hpp"
 #include "pointFields.hpp"
 #include "anyList.hpp"
 #include "Map.hpp"
-#include "span.hpp"
+#include "shape.hpp"
+
 
 namespace pFlow
 {
 
+class systemControl;
 class Time;
-
-bool pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace);
-
-template<typename T>
-concept ValidFieldType = 
-    std::same_as<T, real> || 
-    std::same_as<T, realx3> || 
-    std::same_as<T, realx4> || 
-    std::same_as<T, uint32>;
-
-template<typename T> 
-concept VectorType = 
-    std::same_as<T, realx3> || 
-    std::same_as<T, realx4>;
-
-template<typename T>
-concept ScalarType = 
-    std::same_as<T, real>;
-
-
-template<typename T>
-concept ValidRegionFieldType = 
-    std::same_as<T, real> || 
-    std::same_as<T, realx3> || 
-    std::same_as<T, realx4> ;
-
-
-using allPointFieldTypes = std::variant<span<real>, span<realx3>, span<realx4>>; 
 
 
 class fieldsDataBase
-
 {
 private:
 
@@ -99,9 +70,6 @@ private:
 
 
     // - Member variables
-    
-        /// const reference to the Time object
-        const Time&         time_;
 
         /// List to store all the point fields 
         anyList             allFields_;
@@ -109,114 +77,95 @@ private:
         /// Map to store the last capture time of each field
         wordMap<timeValue>  captureTime_;
 
-        /// 
+        /// Reference to the Time object
+        Time&               time_; 
+
+        /// Flag indicating if we're in simulation mode
         bool                inSimulation_ = false;
-        
+
+protected:
+
+        /// Map of reserved field names with their corresponding types
         static const inline std::map<word, word> reservedFieldNames_
         {
             {"position", "realx3"},
-            {"one", "real"}
+            {"one", "real"},
+            {"volume", "real"},
+            {"density", "real"}
         };
-        
-    // - Private member functions
 
-        uint32 pointFieldSize()
-        {
-            auto s = updatePoints();
-            return s.size();
-        }
+        /// check if pointField name exists in Time or time folder 
+        virtual 
+        bool pointFieldNameExists(const word& name)const = 0;
         
-        /// @brief Checks if a field needs to be updated.
-        /// @param name The name of the field to check.
-        /// @param forceUpdate Forces an update if true. Defaults to `false`.
-        /// @return `true` if the field needs updating or `forceUpdate` is true, `false` otherwise.
-        bool checkForUpdate(const word& name, bool forceUpdate = false);
+        /// Loads a pointField with a given name to the Time object 
+        virtual 
+        bool loadPointFieldToTime(const word& name)= 0;
 
-        /**
-         * @brief Updates and retrieves a point field of a specified type from the database.
-         * 
-         * This is a template function that updates and retrieves a point field of type `T`
-         * from the database. It checks if the field needs to be updated based on the last
-         * capture time or if a forced update is requested. If an update is necessary, it
-         * retrieves the latest data for the field.
-         * 
-         * @tparam T The type of the point field to update and retrieve. Must be a ValidFieldType.
-         * @param name The name of the field to update.
-         * @param forceUpdate A boolean flag indicating whether to force an update of the field
-         *                    regardless of its current state. Defaults to `false`.
-         * 
-         * @return A span of `T` representing the updated field data.
-         * 
-         * @throws message If the field cannot be found in the database or if there is a type mismatch.
-         */
+        virtual 
+        bool loadPointStructureToTime()=0;
+
+        /// get the type name of the pointField in the Time object 
+        word getPointFieldType(const word& name)const;
+
+        /// Checks if a field needs to be updated based on capture time
+        bool checkForUpdate(const word& compoundName, bool forceUpdate = false);
+
         template<ValidFieldType T>
         span<T> updateField(const word& name, bool forceUpdate = false);
+
+        template<ValidFieldType T>
+        span<T> updateReservedField(const word& name, bool forceUpdate = false);
         
-        /// @brief Creates a new real field or retrieves an existing one.
-        /// 
-        /// If a field with the given name already exists, it returns a span to that field.
-        /// If the field does not exist, it creates a new real field with the given name
-        /// and returns a span to the newly created field.
-        /// 
-        /// @param name The name of the field to create or retrieve.
-        /// @return span<real> of the field 
         span<real> createOrGetRealField(const word& name);
 
-        /**
-         * @brief Parses a compound field name to extract the base field name and function.
-         * 
-         * This function takes a compound field name, which may include a function applied
-         * to a base field (e.g., "mag(velocity)"), and parses it to extract the base field
-         * name (e.g., "velocity") and the function to be applied (e.g., `Functions::Magnitude`).
-         * 
-         * The function supports the following syntax for compound field names:
-         * - `fieldName` (no function applied)
-         * - `functionName(fieldName)`
-         * 
-         * Supported function names are defined in the `Functions` enum.
-         * 
-         * @param compoundFieldName The compound field name to parse.
-         * @param fieldName A reference to a `word` where the extracted base field name
-         *                  will be stored.
-         * @param func A reference to a `Functions` enum where the identified function
-         *             will be stored. If no function is applied, this will be set to
-         *             `Functions::None`.
-         * 
-         * @return `true` if the compound field name was successfully parsed and the base
-         *         field name and function were extracted, `false` otherwise.
-         * 
-         * @note The function modifies the `fieldName` and `func` parameters to return the
-         *       extracted information.
-         */
+        span<real> createOrGetVolume(bool forceUpdate=false);
+
+        span<real> createOrGetDensity(bool forceUpdate=false);
+
+        span<real> createOrGetOne(bool forceUpdate=false);
+
         static 
         bool findFunction(
             const word& compoundFieldName, 
             word& fieldName, 
             fieldsDataBase::Functions& func );
         
-        /**
-         * @brief Determines the input and output types for a given function.
-         * 
-         * This function takes a `Functions` enum value and an input type as a string
-         * and determines the corresponding output type based on the function being applied.
-         * 
-         * @param func The function for which to determine the input and output types.
-         * @param inputType The input type as a string.
-         * @param outputType A reference to a string where the determined output type will be stored.
-         * 
-         * @return `true` if the input and output types were successfully determined, `false` otherwise.
-         */
         static
         bool inputOutputType(
             fieldsDataBase::Functions func, 
             const word& inputType, 
             word& outputType);
 
+
+protected:
+    
+    // - protected member functions
+    
+
+    virtual 
+    bool checkTimeFolder(const word& fieldName) const = 0;
+    
+    virtual 
+    const shape& getShape() const= 0;
+
+
+    /// @brief return the size of pointStructure 
+    uint32 pointFieldSize()
+    {
+        auto s = updatePoints();
+        return s.size();
+    }
+
 public:
     
+    // - Type info
+            
+        TypeInfo("fieldsDataBase");
+
     // - constructors 
 
-        fieldsDataBase(const Time& time, bool inSimulation);
+        fieldsDataBase(systemControl& control, bool inSimulation);
 
         /// no copy constructor
         fieldsDataBase(const fieldsDataBase&) = delete;
@@ -231,140 +180,70 @@ public:
         fieldsDataBase& operator=(fieldsDataBase&&) = delete;
         
         /// destructor
-        ~fieldsDataBase() = default;
+        virtual ~fieldsDataBase() = default;
+
+        create_vCtor
+        (
+            fieldsDataBase,
+            bool,
+            (systemControl& control, bool inSimulation),
+            (control, inSimulation)
+        );
+  
     
     // - Public Access Functions
         /// returns the current time
         timeValue currentTime()const;
 
-        /// const ref to object Time
-        const Time& time()const
+        /// const ref to object Time 
+        const Time& time()const 
         {
             return time_;
         }
-    
+        
+        Time& time()
+        {
+            return time_;
+        }
+
     // - Public Member Functions
 
-        /**
-         * @brief Retrieves the type of a point field based on its compound name.
-         * 
-         * This function attempts to extract the type of a point field from its compound name.
-         * The compound name may include additional information such as a function or operation
-         * applied to the field, ie. mag(velcoty). If the type is successfully determined, it  
-         * is stored in the provided `typeName` parameter.
-         * 
-         * @param compoundName The compound name of the field, which may include additional
-         *                     information about operations or functions applied to the field.
-         * @param originalType A reference to a `word` where the original type name is obtained.
-         *                     This will be set to the type of the field before any function is applied.
-         * @param typeAfterFunction A reference to a `word` where the type name after applying                   
-         *                          the function is obtained.
-         * @param func the applied function to the field.
-         *  
-         * @return `true` if the type was successfully determined and stored in `typeName`,
-         *         `false` otherwise.
-         */
-        bool getPointFieldType(
+        bool getFieldTypeNameFunction
+        (
             const word& compoundName,
-            word& fieldName, 
+            word& pointFieldName, 
             word& originalType, 
             word& typeAfterFunction,
-            Functions& func);   
-        
-        /// overload for the function getPointFieldType without `func` argument
-        bool getPointFieldType(
-            const word& compoundName, 
-            word& originalType, 
-            word& typeAfterFunction);
-        
-        /// overload for function getPointFieldType without `originalType` argument
-        bool getPointFieldType(
-            const word& compoundName, 
-            word& typeAfterFunction);
+            Functions& func
+        )const;
 
-        /**
-         * @brief Updates the points data and returns a span to the updated points.
-         * 
-         * This function ensures that the points data is up-to-date by checking if an update
-         * is necessary. If the data is outdated or if a forced update is requested, it retrieves
-         * the latest points data and stores it in the internal fields database. The function
-         * then returns a span to the updated points data for further use.
-         * 
-         * @param forceUpdate A boolean flag indicating whether to force an update of the points
-         *                    data regardless of its current state. Defaults to `false`.
-         * 
-         * @return A span of `realx3` representing the updated points data.
-         */
+        
+        bool getFieldType
+        (
+            const word& compoundName,
+            word& originalType, 
+            word& typeAfterFunction
+        ) const;
+
+        bool getFieldType
+        (
+            const word& compoundName,
+            word& typeAfterFunction
+        ) const;
+
+        
+        /// update pointStructure if necessary 
         span<realx3> updatePoints(bool forceUpdate = false);
         
-        /**
-         * @brief Updates and retrieves a realx3 point field from the database.
-         * 
-         * This function retrieves or updates a realx3 field based on its compound name.
-         * The compound name cannot include any function operation.
-         * If the field needs to be updated or if forceUpdate is true, the method will
-         * fetch the latest data from the database.
-         * 
-         * @param compoundName The name of the field, possibly including a function operation
-         * @param forceUpdate If true, forces an update of the field regardless of its current state.
-         *                    Defaults to false.
-         * 
-         * @return A span containing the updated realx3 field data
-         * 
-         * @throws message If the field type is not compatible with realx3 or if the field
-         *                 cannot be found in the database
-         */
+        /// update a field with realx3 type 
         span<realx3> updateFieldRealx3(
             const word& compoundName, 
             bool forceUpdate = false);
         
-        /**
-         * @brief Updates and retrieves a realx4 point field from the database.
-         * 
-         * This function retrieves or updates a realx4 field based on its compound name.
-         * The compound name cannot include any function operation.
-         * If the field needs to be updated or if forceUpdate is true, the method will
-         * fetch the latest data from the database.
-         * 
-         * @param compoundName The name of the field, possibly including a function operation
-         * @param forceUpdate If true, forces an update of the field regardless of its current state.
-         *                    Defaults to false.
-         * 
-         * @return A span containing the updated realx3 field data
-         * 
-         * @throws message If the field type is not compatible with realx4 or if the field
-         *                 cannot be found in the database
-         */
         span<realx4> updateFieldRealx4(
             const word& compoundName, 
             bool forceUpdate = false);
         
-        /**
-         * @brief Updates and retrieves a real point field from the database.
-         * 
-         * This function retrieves or updates a real field based on its compound name.
-         * The compound name may include a function operation (e.g., abs, square, etc.).
-         * If the field needs to be updated or if forceUpdate is true, the method will
-         * fetch the latest data from the database and apply the specified function.
-         * 
-         * Supported functions include:
-         * - None: Retrieves the field as is.
-         * - abs: Computes the absolute value of the field.
-         * - square: Computes the square of the field.
-         * - cube: Computes the cube of the field.
-         * - sqrt: Computes the square root of the field.
-         * - mag, magSquare, magCube, magSqrt: Compute magnitude-related operations for vector fields.
-         * - component(x, y, z): Extracts a specific component from a vector field.
-         * 
-         * @param compoundName The name of the field, possibly including a function operation.
-         * @param forceUpdate If true, forces an update of the field regardless of its current state.
-         *                    Defaults to false.
-         * 
-         * @return A span containing the updated real field data.
-         * 
-         * @throws message If the field type is not compatible with real or if the field
-         *                 cannot be found in the database.
-         */
         span<real> updateFieldReal(
             const word& compoundName, 
             bool forceUpdate = false);
@@ -378,11 +257,20 @@ public:
         allPointFieldTypes updateFieldAll(
             const word& compoundName, 
             bool forceUpdate = false);
+        
+        virtual 
+        const pointStructure& pStruct()const = 0;
 
-        const pointStructure& pStruct()const;
+        virtual 
+        void resetTimeFolder() = 0;
+    
+    static
+    uniquePtr<fieldsDataBase> create(
+        systemControl& control, 
+        bool inSimulation);
 };
 
-} // nampespace pFlow
+} // namespace pFlow
 
 #include "fieldsDataBaseTemplates.cpp"
 

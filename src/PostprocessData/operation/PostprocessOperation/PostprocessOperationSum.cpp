@@ -1,7 +1,7 @@
 #include "PostprocessOperationSum.hpp"
 #include "dictionary.hpp"
 #include "fieldsDataBase.hpp"
-#include "fieldFunctions.hpp"
+#include "operationFunctions.hpp"
 
 /// Constructs sum processor and initializes result field based on input field type
 pFlow::PostprocessOperationSum::PostprocessOperationSum
@@ -41,7 +41,8 @@ pFlow::PostprocessOperationSum::PostprocessOperationSum
 /// Performs weighted sum of field values within each region
 bool pFlow::PostprocessOperationSum::execute
 (
-    const std::vector<span<real>>& weights
+    const std::vector<span<real>>& weights,
+    const regionField<real>& volFactor
 )
 {
     auto allField = database().updateFieldAll(fieldName());
@@ -60,7 +61,7 @@ bool pFlow::PostprocessOperationSum::execute
                 return executeSumOperation(
                 procName,
                 field,
-                regP,
+                volFactor,
                 dbVol,
                 weights,
                 phi,

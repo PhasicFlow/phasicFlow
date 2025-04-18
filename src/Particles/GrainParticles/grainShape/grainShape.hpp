@@ -32,9 +32,13 @@ class grainShape
 {
 private:
 	
-	// - diameter of spheres
+	/// diameter of grains
 	realVector 			grainDiameters_;
+
+	/// diameter of spheres
 	realVector 			sphereDiameters_;
+	
+	/// course-grain factor 
 	realVector 			coarseGrainFactor_;
 
 	
@@ -54,9 +58,21 @@ public:
 		repository* owner,
 		const property& prop);
 
+	grainShape(
+		const word& shapeType,
+		const word& fileName,
+		repository* owner,
+		const property& prop);
+
 	
 	~grainShape() override = default;
 
+	add_vCtor
+	(
+		shape, 
+		grainShape,
+		word
+	);
 	//// - Methods
 
 	real maxBoundingSphere()const override;
@@ -68,14 +84,16 @@ public:
 	real boundingDiameter(uint32 index)const override;
 
 	realVector boundingDiameter()const override;
+	
+	realVector volume()const override;
 
-		real coarseGrainFactor(uint32 index)const ;
+	real coarseGrainFactor(uint32 index)const ;
 
 	realVector coarseGrainFactor()const ;
 
-	real orginalDiameter(uint32 index)const ;
+	real originalDiameter(uint32 index)const ;
 
-	realVector orginalDiameter()const ;
+	realVector originalDiameter()const ;
 
 	bool mass(uint32 index, real& m)const override;
 

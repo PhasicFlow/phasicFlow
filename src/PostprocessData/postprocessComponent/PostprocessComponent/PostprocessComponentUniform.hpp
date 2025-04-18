@@ -51,10 +51,12 @@ public:
         auto d = this->regPoints().eqDiameters();
         auto c = this->regPoints().centers();
         auto& regs = this->regionProecessMethod();
+        auto& volFactor = this->volumeFactor();
         const uint32 n = d.size();
         for(uint32 i=0; i<n; i++)
         {
             regs[i] = uniformDistribution();
+            volFactor[i] = 1.0;
         }
     }
 

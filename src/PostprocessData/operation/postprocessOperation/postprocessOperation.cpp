@@ -117,7 +117,7 @@ pFlow::postprocessOperation::postprocessOperation
     ),
     divideByVolume_
     (
-        opDict.getValOrSet<Logical>("dividedByVolume", Logical(false))
+        opDict.getValOrSet<Logical>("divideByVolume", Logical(false))
     ),
     regionPoints_
     (
@@ -141,7 +141,7 @@ pFlow::postprocessOperation::postprocessOperation
     )
 {
 
-    if(!fieldsDB.getPointFieldType(fieldName_, fieldType_))
+    if(!fieldsDB.getFieldType(fieldName_, fieldType_))
     {
         fatalErrorInFunction;
         fatalExit;
@@ -159,7 +159,7 @@ bool pFlow::postprocessOperation::write(const fileSystem &parDir) const
     if(!osPtr_)
     {
         fileSystem path = parDir+(
-            processedFieldName() + ".Start_" + ti.prevTimeName());
+            processedFieldName() + ".Start_" + ti.timeName());
         osPtr_ = makeUnique<oFstream>(path);
         
         regPoints().write(osPtr_());

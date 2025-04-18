@@ -1,5 +1,24 @@
-#include "shape.hpp"
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+-----------------------------------------------------------------------------*/
+
+#include "shape.hpp"
 
 bool pFlow::shape::findPropertyIds()
 {	
@@ -62,6 +81,18 @@ pFlow::shape::shape
 
 }
 
+pFlow::shape::shape
+(
+	const word &shapeType, 
+	const word &fileName, 
+	repository *owner, 
+	const property &prop
+)
+:
+	shape(fileName, owner, prop)
+{
+}
+
 bool pFlow::shape::writeToDict(dictionary &dict)const
 {
 	if(!baseShapeNames::writeToDict(dict))return false;
@@ -74,4 +105,37 @@ bool pFlow::shape::writeToDict(dictionary &dict)const
 	}
 
 	return true;
+}
+
+pFlow::uniquePtr<pFlow::shape> pFlow::shape::create
+(
+	const word &shapeType, 
+	const word &fileName, 
+	repository *owner, 
+	const property &prop
+)
+{
+	word type = angleBracketsNames("shape", shapeType);
+
+	if( wordvCtorSelector_.search(type) )
+	{
+		auto objPtr = 
+		wordvCtorSelector_[type]
+			(shapeType, fileName, owner, prop);
+		return objPtr;
+	}
+	else
+	{
+		printKeys
+		( 
+			fatalError << "Ctor Selector "<< 
+			type << " dose not exist. \n"
+			<<"Avaiable ones are: \n\n"
+			,
+			wordvCtorSelector_
+		);
+		fatalExit;
+		return nullptr;
+	}
+
 }
