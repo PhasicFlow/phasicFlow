@@ -69,7 +69,7 @@ Q4Func2(max);
 
 template<typename T>
 inline pFlow::quadruple<T>
-pFlow::pow(const quadruple<T>& q4, T e)
+pFlow::pow(const pFlow::quadruple<T>& q4, T e)
 {
 	return quadruple<T>(pow(q4.s_, e), pow(q4.v_, e));
 }
