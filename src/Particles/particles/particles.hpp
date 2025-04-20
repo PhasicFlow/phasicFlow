@@ -186,7 +186,7 @@ public:
 	}
 
 	inline 
-	uint maxId()const
+	uint32 maxId()const
 	{
 		return idHandler_().maxId();
 	}

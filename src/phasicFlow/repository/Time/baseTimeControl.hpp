@@ -32,13 +32,21 @@ class baseTimeControl
 {
 private:
 
-	bool              isTimeStep_;
+    bool                     isTimeStep_;
 
-	int32StridedRagne iRange_;
+    int32StridedRagne        iRange_;
 
-	stridedRange<timeValue>  rRange_;
+    stridedRange<timeValue>  rRange_;
 
-	const word        intervalPrefix_;
+    word                      intervalPrefix_;
+
+protected:
+
+	void setTimeControl(
+		timeValue startTime, 
+		timeValue endTime, 
+		timeValue interval, 
+		const word& intervalPrefix);
 
 public:
 
@@ -59,7 +67,32 @@ public:
 		int32 end,
 		int32 stride,
 		const word& intervalPrefix = ""
+	); 
+
+	baseTimeControl(
+		timeValue start,
+		timeValue end,
+		timeValue stride,
+		const word& intervalPrefix = ""
 	);
+
+    baseTimeControl(
+        const baseTimeControl& other
+    ) = default;
+
+    baseTimeControl(
+        baseTimeControl&& other
+    ) = default;
+
+    baseTimeControl& operator=(
+        const baseTimeControl& other
+    ) = default;
+    
+    baseTimeControl& operator=(
+        baseTimeControl&& other
+    ) = default;
+    
+    ~baseTimeControl() = default;
 
 	inline bool isTimeStep() const
 	{

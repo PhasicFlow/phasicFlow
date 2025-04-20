@@ -106,6 +106,12 @@ public:
 		return real2FixedStripZeros(currentTime_, presicion_);
 	}
 
+	inline 
+	word prevTimeName()const
+	{
+		return real2FixedStripZeros( max(currentTime_-dt_, timeValue(0)), presicion_);
+	}
+
 	static
 	uint32 precision()
 	{

@@ -81,7 +81,8 @@ public:
 			const word& baseName,
 			pointStructure& pStruct,
 			const word& method,
-			const realx3Field_D& initialValField);
+			const realx3Field_D& initialValField,
+			bool  keepHistory);
 
 		/// Destructor 
 		~AdamsBashforth2()override = default;

@@ -120,6 +120,16 @@ public:
 		return startTime_;
 	}
 
+	timeValue endTime()const
+	{
+		return endTime_;
+	}
+
+	timeValue saveInterval()const
+	{
+		return saveInterval_;
+	}
+
 	word timeName()const;	
 
 	timeValue currentTime() const 
