@@ -34,7 +34,7 @@ surfaces
 		
 		material  wallMat;                       // material name of this wall
 		
-		motion 	   otAxis;                       // motion component name
+		motion 	   rotAxis;                       // motion component name
 	}
 }
 
