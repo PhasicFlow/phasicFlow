@@ -33,6 +33,7 @@ Licence:
 namespace pFlow
 {
 
+class dictionary;
 class systemControl;
 class Time;
 
@@ -83,16 +84,9 @@ private:
         /// Flag indicating if we're in simulation mode
         bool                inSimulation_ = false;
 
-protected:
+        word                shapeType_;
 
-        /// Map of reserved field names with their corresponding types
-        static const inline std::map<word, word> reservedFieldNames_
-        {
-            {"position", "realx3"},
-            {"one", "real"},
-            {"volume", "real"},
-            {"density", "real"}
-        };
+protected:
 
         /// check if pointField name exists in Time or time folder 
         virtual 
@@ -104,12 +98,28 @@ protected:
 
         virtual 
         bool loadPointStructureToTime()=0;
+        
+        virtual 
+        const shape& getShape() const= 0;
+
+        const word& shapeTypeName()const
+        {
+            return shapeType_;
+        }
 
         /// get the type name of the pointField in the Time object 
-        word getPointFieldType(const word& name)const;
+        virtual 
+        word getPointFieldType(const word& name)const = 0;
 
         /// Checks if a field needs to be updated based on capture time
         bool checkForUpdate(const word& compoundName, bool forceUpdate = false);
+    
+        /// @brief return the size of pointStructure 
+        uint32 pointFieldSize()
+        {
+            auto s = updatePoints();
+            return s.size();
+        }
 
         template<ValidFieldType T>
         span<T> updateField(const word& name, bool forceUpdate = false);
@@ -125,6 +135,21 @@ protected:
 
         span<real> createOrGetOne(bool forceUpdate=false);
 
+        span<real> createOrGetMass(bool forceUpdate=false);
+
+        span<real> createOrGetI(bool forceUpdate=false);
+
+        /// Map of reserved field names with their corresponding types
+        static const inline std::map<word, word> reservedFieldNames_
+        {
+            {"position", "realx3"},
+            {"one", "real"},
+            {"volume", "real"},
+            {"density", "real"},
+            {"mass", "real"},
+            {"I", "real"}
+        };
+        
         static 
         bool findFunction(
             const word& compoundFieldName, 
@@ -137,25 +162,7 @@ protected:
             const word& inputType, 
             word& outputType);
 
-
-protected:
     
-    // - protected member functions
-    
-
-    virtual 
-    bool checkTimeFolder(const word& fieldName) const = 0;
-    
-    virtual 
-    const shape& getShape() const= 0;
-
-
-    /// @brief return the size of pointStructure 
-    uint32 pointFieldSize()
-    {
-        auto s = updatePoints();
-        return s.size();
-    }
 
 public:
     
@@ -165,7 +172,11 @@ public:
 
     // - constructors 
 
-        fieldsDataBase(systemControl& control, bool inSimulation);
+        fieldsDataBase(
+            systemControl& control, 
+            const dictionary& postDict,
+            bool inSimulation,
+            timeValue startTime);
 
         /// no copy constructor
         fieldsDataBase(const fieldsDataBase&) = delete;
@@ -186,8 +197,13 @@ public:
         (
             fieldsDataBase,
             bool,
-            (systemControl& control, bool inSimulation),
-            (control, inSimulation)
+            (
+                systemControl& control, 
+                const dictionary& postDict, 
+                bool inSimulation,
+                timeValue startTime
+            ),
+            (control, postDict, inSimulation, startTime)
         );
   
     
@@ -260,14 +276,39 @@ public:
         
         virtual 
         const pointStructure& pStruct()const = 0;
+        
+        /// Get the next avaiable time folder after the current time folder 
+        /// This is only used for post-simulation processing 
+        virtual
+        timeValue getNextTimeFolder()const
+        {
+            return -1.0;
+        }
 
+        /// Sets the current folder to the next time folder.
+        /// This is used only for post-simulation processing
+        /// @returns the time value of the next folder.
         virtual 
-        void resetTimeFolder() = 0;
-    
+        timeValue setToNextTimeFolder()
+        {
+            return -1.0;
+        }
+        
+        /// Skips the next time folder.
+        /// This is used only for post-simulation processing 
+        /// @returns the time value of the skipped folder 
+        virtual 
+        timeValue skipNextTimeFolder()
+        {
+            return -1.0;
+        }
+
     static
     uniquePtr<fieldsDataBase> create(
         systemControl& control, 
-        bool inSimulation);
+        const dictionary& postDict, 
+        bool inSimulation,
+        timeValue startTime);
 };
 
 } // namespace pFlow

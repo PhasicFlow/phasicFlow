@@ -38,6 +38,7 @@ protected:
     
     /// check if pointField name exists in Time or time folder 
     bool pointFieldNameExists(const word& name)const override;
+ 
 
     /// Loads a pointField with a given name to the Time object. 
     /// For simulation, it just checks if the name exists 
@@ -47,15 +48,19 @@ protected:
     /// For simulation, it just checks if the name exists
     bool loadPointStructureToTime() override;
 
-    bool checkTimeFolder(const word& fieldName) const override;
-
     const shape& getShape() const override;  
+
+    word getPointFieldType(const word& name)const override;
     
 public:
 
     TypeInfo("fieldsDataBase<simulation>");
 
-    simulationFieldsDataBase(systemControl& control, bool inSimulation);
+    simulationFieldsDataBase(
+        systemControl& control, 
+        const dictionary& postDict,
+        bool inSimulation,
+        timeValue startTime);
 
     ~simulationFieldsDataBase() override = default;
 
@@ -67,8 +72,6 @@ public:
     );
 
     const pointStructure& pStruct()const override;
-
-    void resetTimeFolder() override;
 
 };
 

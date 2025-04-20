@@ -22,22 +22,18 @@ Licence:
 #include "List.hpp"
 #include "systemControl.hpp"
 #include "postprocessData.hpp"
-#include "fileDictionary.hpp"
 #include "postprocessGlobals.hpp"
 #include "postprocessComponent.hpp"
 
-pFlow::postprocessData::postprocessData(const systemControl &control)
+pFlow::postprocessData::postprocessData
+(
+    const systemControl &control,
+    timeValue startTime
+)
 :
     auxFunctions(control),
+    inSimulation_(startTime<0.0?true:false),
     time_(control.time()),
-    fieldsDataBasePtr_
-    ( 
-        fieldsDataBase::create
-        (
-            const_cast<systemControl&>(control),
-            true
-        )
-    ),
     dict_
     (
         objectFile
@@ -59,6 +55,15 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
             <<" This feature is disabled in the current run."<<END_WARNING;
         return;
     }
+    
+    fieldsDataBasePtr_= fieldsDataBase::create
+        (
+            const_cast<systemControl&>(control),
+            dict_,
+            inSimulation_,
+            startTime
+        );
+    
 
     activeInSimulation_ = dict_.getValOrSet<Logical>(
         "activeInSimulation", 
@@ -80,12 +85,6 @@ pFlow::postprocessData::postprocessData(const systemControl &control)
             control.time().saveInterval(),
             "execution");
     }
-
-    shapeType_ = dict_.getValOrSet<word>
-    (
-        "shapeType", 
-        word("sphere")
-    );
     
     componentsDictsPtr_ = makeUnique<dictionaryList>(readDictList("components", dict_));
 
@@ -105,10 +104,10 @@ bool pFlow::postprocessData::execute()
 
     for(auto& component:postprocesses_)
     {
-        if(!component->execute(ti))
+        if(!component->execute(ti, !inSimulation_) )
         {
             fatalErrorInFunction
-                <<"Error occured in executing postprocess component: "
+                <<"Error occurred in executing postprocess component: "
                 <<component->name()<<endl;
             return false;
         }
@@ -125,6 +124,7 @@ bool pFlow::postprocessData::write() const
         {
             continue;
         }
+
         if(!component->write(postProcessGlobals::defaultDir__/component->name()))
         {
             fatalErrorInFunction
@@ -134,4 +134,9 @@ bool pFlow::postprocessData::write() const
         }
     }
     return true;
+}
+
+void pFlow::postprocessData::setOutputDirectory(const fileSystem &path) const
+{
+    postProcessGlobals::defaultDir__ = path;
 }

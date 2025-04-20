@@ -31,6 +31,25 @@ namespace pFlow
 {
 
 template<typename T>
+constexpr T getEpsilon()
+{
+	return 0;
+}
+
+template<>
+constexpr float getEpsilon<float>()
+{
+	return 10*std::numeric_limits<float>::epsilon();
+}
+
+template<>
+constexpr double getEpsilon<double>()
+{
+	return 10*std::numeric_limits<double>::epsilon();
+}
+
+
+template<typename T>
 class
 stridedRange
 {
@@ -107,7 +126,7 @@ public:
 	}
 
 	inline
-	bool isMember(T val, T epsilon = 0)const
+	bool isMember(T val, T epsilon = getEpsilon<T>())const
 	{
 		
 		if(!isInRange(val)) return false;
@@ -151,7 +170,7 @@ public:
 
 template<>
 inline
-bool stridedRange<float>::isMember(float val, float epsilon)const
+bool stridedRange<float>::isMember(float val, float epsilon )const
 	{
 
 	if(!isInRange(val)) return false;
@@ -171,7 +190,7 @@ bool stridedRange<float>::isMember(float val, float epsilon)const
 
 template<>
 inline
-bool stridedRange<double>::isMember(double val, double epsilon)const
+bool stridedRange<double>::isMember(double val, double epsilon )const
 {
 	/*if(!isInRange(val)) return false;
 	if(const double dist = val-begin_; abs(remainder(dist,stride_)<= epsilon)) return true;	

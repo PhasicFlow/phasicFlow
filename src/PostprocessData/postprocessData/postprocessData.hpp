@@ -20,14 +20,14 @@ Licence:
 #ifndef __postprocessData_hpp__
 #define __postprocessData_hpp__
 
-#include "auxFunctions.hpp"
 #include "Logical.hpp"
 #include "ListPtr.hpp"
 #include "fileDictionary.hpp"
-#include "baseTimeControl.hpp"
+#include "dictionaryList.hpp"
+#include "auxFunctions.hpp"
 #include "fieldsDataBase.hpp"
 #include "postprocessComponent.hpp"
-#include "dictionaryList.hpp"
+
 
 namespace pFlow 
 {
@@ -35,6 +35,7 @@ namespace pFlow
 class systemControl;
 class Time;
 class timeInfo;
+
 
 /**
  * @class postprocessData
@@ -47,7 +48,11 @@ class postprocessData
 :
   public auxFunctions
 {
-    /// Indicates if a post-processing is active during simulatoin 
+    /// Indicates if this is post-processing during simulation or 
+    /// post-simulation 
+    bool                    inSimulation_;
+
+    /// Indicates if a post-processing is active during simulation 
     Logical                 activeInSimulation_{false};
 
     /// a list of active post-process components 
@@ -61,9 +66,6 @@ class postprocessData
 
     /// file dictionary that is constructed from the file (postProcessDataDict)
     fileDictionary        dict_;
-
-    /// name of the shape for use in the time of postprocess after simulation 
-    word                  shapeType_;
 
     /// list of dictionaries for postprocess components 
     uniquePtr<dictionaryList>        componentsDictsPtr_ = nullptr;
@@ -79,7 +81,7 @@ public:
     ///  this constructor is used when postprocesing is active
     ///  during simulation.
     /// @param control const reference to systemControl 
-    postprocessData(const systemControl& control);
+    postprocessData(const systemControl& control, timeValue startTime = -1.0);
 
     ~postprocessData()override = default;
 
@@ -92,11 +94,19 @@ public:
 
     bool execute() override;
     
-    
-     
     bool write()const override;
     
+    fieldsDataBase& database()
+    {
+        return fieldsDataBasePtr_();
+    }
 
+    const fieldsDataBase& database()const
+    {
+        return fieldsDataBasePtr_();
+    }
+
+    void setOutputDirectory(const fileSystem& path)const;
 };
 
 } // namespace pFlow

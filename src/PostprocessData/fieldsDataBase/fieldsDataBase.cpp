@@ -24,7 +24,7 @@ Licence:
 #include "systemControl.hpp"
 #include "fieldsDataBase.hpp"
 #include "fieldFunctions.hpp"
-
+#include "dictionary.hpp"
 
 namespace pFlow
 {
@@ -38,19 +38,6 @@ bool pFlow::fieldsDataBase::loadPointStructureToTime()
     return false;
 }
 
-pFlow::word pFlow::fieldsDataBase::getPointFieldType(const word &name) const
-{
-    word pfType =  time_.lookupObjectTypeName(name);
-    word type, space;
-    if(!pointFieldGetType(pfType, type, space))
-    {
-        fatalErrorInFunction
-            <<"Error in retriving the type of pointField "
-            << pfType<<endl;
-        fatalExit;
-    }
-    return type;
-}
 
 bool pFlow::fieldsDataBase::checkForUpdate(const word &compoundName, bool forceUpdate)
 {
@@ -186,6 +173,78 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetOne(bool forceUpdate)
                 pointFieldSize(),
                 1.0
             )  
+        );
+    }
+
+    auto& field = allFields_.getObject<FieldTypeHost<real>>(fName);
+    return span<real>(
+        field.data(), 
+        field.size());
+}
+
+pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetMass(bool forceUpdate)
+{
+    const word fName = "mass";
+    
+    bool shouldUpdate = checkForUpdate(fName, forceUpdate);
+
+    if(shouldUpdate)
+    {
+        const auto index = updateFieldUint32("shapeIndex", true);
+        const auto ms = getShape().mass();
+
+        FieldTypeHost<real> massField
+        (
+            fName, 
+            "value",
+            pointFieldSize()
+        );
+
+        for(uint32 i=0; i< massField.size(); i++)
+        {
+            massField[i] = ms[index[i]];
+        }
+
+        allFields_.emplaceBackOrReplace<FieldTypeHost<real>>
+        (
+            fName,
+            std::move(massField)  
+        );
+    }
+
+    auto& field = allFields_.getObject<FieldTypeHost<real>>(fName);
+    return span<real>(
+        field.data(), 
+        field.size());
+}
+
+pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetI(bool forceUpdate)
+{
+    const word fName = "I";
+    
+    bool shouldUpdate = checkForUpdate(fName, forceUpdate);
+
+    if(shouldUpdate)
+    {
+        const auto index = updateFieldUint32("shapeIndex", true);
+        const auto Is = getShape().Inertia();
+
+        FieldTypeHost<real> IField
+        (
+            fName, 
+            "value",
+            pointFieldSize()
+        );
+
+        for(uint32 i=0; i< IField.size(); i++)
+        {
+            IField[i] = Is[index[i]];
+        }
+
+        allFields_.emplaceBackOrReplace<FieldTypeHost<real>>
+        (
+            fName,
+            std::move(IField)  
         );
     }
 
@@ -399,11 +458,35 @@ bool pFlow::fieldsDataBase::inputOutputType
     return false;
 }
 
-pFlow::fieldsDataBase::fieldsDataBase(systemControl& control, bool inSimulation)
+pFlow::fieldsDataBase::fieldsDataBase
+(
+    systemControl& control,
+    const dictionary& postDict,
+    bool inSimulation,
+    timeValue startTime
+)
 :
     time_(control.time()),
     inSimulation_(inSimulation)
-{}
+{
+    if(!inSimulation_)
+    {
+        shapeType_ = postDict.getValOrSet<word>("shapeType", "");
+
+        if(shapeType_.empty())
+        {
+            WARNING
+            << "shapeType is not set in dictionary: "
+            << postDict.globalName()
+            << " and you may need to set for some postprocess operations"<<END_WARNING;
+        }
+    }
+    else
+    {
+        // this is not required for execution during simulation 
+        shapeType_ = "";
+    }
+}
 
 pFlow::timeValue pFlow::fieldsDataBase::currentTime() const
 {
@@ -808,7 +891,13 @@ pFlow::allPointFieldTypes pFlow::fieldsDataBase::updateFieldAll
 
 
 pFlow::uniquePtr<pFlow::fieldsDataBase> 
-    pFlow::fieldsDataBase::create(systemControl& control, bool inSimulation)
+    pFlow::fieldsDataBase::create
+(
+    systemControl& control, 
+    const dictionary& postDict, 
+    bool inSimulation,
+    timeValue startTime
+)
 {
     word dbType;
     if(inSimulation)
@@ -823,7 +912,7 @@ pFlow::uniquePtr<pFlow::fieldsDataBase>
     if( boolvCtorSelector_.search(dbType) )
     {
         auto objPtr = 
-            boolvCtorSelector_[dbType](control, inSimulation);
+            boolvCtorSelector_[dbType](control, postDict, inSimulation, startTime);
         return objPtr;
     }
     else

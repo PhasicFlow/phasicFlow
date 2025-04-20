@@ -27,36 +27,53 @@ Licence:
 namespace pFlow
 {
 
-Map<real, fileSystem> getTimeFolders(const fileSystem& path);
+Map<timeValue, fileSystem> getTimeFolders(const fileSystem& path);
 
 class timeFolder
 {
-	using timeList = Map<real, fileSystem>;
+	using timeList = Map<timeValue, fileSystem>;
+
 protected:
 	
 	timeList 			folders_;
 	
 	timeList::iterator currentFolder_;
 
-	
+	bool validateForPointStructure();
+
+	bool validFieldFile(const fileSystem& filePath)const;
+
+	bool validFieldFile(
+		const fileSystem& filePath, 
+		word& fieldName, 
+		word& objectType)const;
+
 public:
 
-	timeFolder(const systemControl& control )
-	:
-		timeFolder(control.path())
-	{}
-
-	timeFolder(const fileSystem& path)
-	:
-		folders_(getTimeFolders(path)),
-		currentFolder_(folders_.begin())
+	timeFolder(const systemControl& control, bool pointStructureOnly = false );
+	
+	timeFolder(const fileSystem& path, bool pointStructureOnly = false);
+	
+	inline
+	bool empty()const
 	{
-
+		return folders_.empty();
 	}
 
-	real time()const
+	inline
+	timeValue currentTime()const
 	{
+		if(folders_.empty()) return -1;
 		return currentFolder_->first;
+	}
+
+	inline
+	timeValue nextTime()const
+	{
+		auto next = currentFolder_;
+		next++;
+		if(next == folders_.end()) return -1;
+		return next->first;
 	}
 
 	fileSystem folder()const
@@ -81,6 +98,27 @@ public:
 		return !finished();
 	}
 
+	bool setTime(timeValue upto)
+	{
+		timeList::iterator orgFolder = currentFolder_;
+		
+		rewind();
+
+		while(!finished())
+		{
+			auto t = currentTime();
+			if( equal(upto, t) || t>upto)
+			{
+				return true;
+			}
+			(*this)++;
+		}
+		
+		currentFolder_ = orgFolder;
+		
+		return false;
+	}
+
 	explicit operator bool()const
 	{
 		return !finished();
@@ -102,30 +140,38 @@ public:
 		return false;
 	}
 
-	real startTime()const
+	timeValue startTime()const
 	{
+		if(folders_.empty()) return -1;
 		auto [t,f] = *folders_.begin();
 		return t;
 	}
 
-	real endTime()const
+	timeValue endTime()const
 	{
+		if(folders_.empty()) return -1;
 		auto [t,f] = *(--folders_.end());
 		return t;
 	}
+
+	bool containsPointStructure(const fileSystem& dirPath)const;
+
+	/// Get the list of files in the current folder
+	/// the first element is file name and the second is the objectType 
+	Map<word, word> currentFolderFiles()const;
 };
 
 inline
-Map<real, fileSystem> getTimeFolders(const fileSystem& path)
+Map<timeValue, fileSystem> getTimeFolders(const fileSystem& path)
 {
-	Map<real, fileSystem> tFolders;
+	Map<timeValue, fileSystem> tFolders;
 
 	auto subDirs = subDirectories(path);
 
 	for(auto& subD: subDirs)
 	{
 		auto timeName = tailName(subD.wordPath(), '/');
-		real TIME;
+		timeValue TIME;
 		if( auto success = readReal(timeName, TIME); success)
 		{
 			if(!tFolders.insertIf(TIME, subD))
