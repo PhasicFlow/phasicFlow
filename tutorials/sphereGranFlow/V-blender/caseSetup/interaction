@@ -15,39 +15,39 @@ contactListType   sortedContactList;
 contactSearch
 {
     method         NBS;                          // method for broad search 
-    
-   updateInterval   10;
 
-   sizeRatio       1.1;
+    updateInterval   10;
 
-   cellExtent     0.55;
+    sizeRatio       1.1;
 
-   adjustableBox   Yes;     
+    cellExtent     0.55;
+
+    adjustableBox   Yes;     
 }
 
 model
 {
-   contactForceModel    nonLinearNonLimited;
+    contactForceModel    nonLinearNonLimited;
 
-   rollingFrictionModel              normal;
+    rollingFrictionModel              normal;
 
-  
-   Yeff (1.0e6 1.0e6 
+
+    Yeff (1.0e6 1.0e6 
                1.0e6);                           // Young modulus [Pa]
-   
-   Geff (0.8e6 0.8e6
+
+    Geff (0.8e6 0.8e6
                0.8e6);                           // Shear modulus [Pa]
 
-   nu     (0.25 0.25
+    nu     (0.25 0.25
                 0.25);                           // Poisson's ratio [-]
 
-   en     (0.97 0.85
+    en     (0.97 0.85
                 0.97);                           // coefficient of normal restitution
 
-   mu     (0.65 0.35 
+    mu     (0.65 0.35 
                 0.65);                           // dynamic friction
 
-   mur      (0.1 0.1
+    mur      (0.1 0.1
                  0.1);                           // rolling friction
         
 }

@@ -2,12 +2,13 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
-objectName 	sphereDict;
-objectType 	sphereShape;
+objectName  sphereDict;
+objectType  sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-names 		(smallSphere largeSphere);           // names of particles
 
-diameters 	            (0.01 0.0101);           // diameter of particles
+names       (smallSphere largeSphere);           // names of particles
 
-materials	      (lightMat lightMat);           // material names for particles
+diameters               (0.01 0.0101);           // diameter of particles
+
+materials         (lightMat lightMat);           // material names for particles
