@@ -24,23 +24,35 @@ bool pFlow::simulationFieldsDataBase::loadPointStructureToTime()
     return time().lookupObjectName(pointStructureFile__);
 }
 
-bool pFlow::simulationFieldsDataBase::checkTimeFolder(const word &fieldName) const
-{
-    return true;
-}
 
 const pFlow::shape& pFlow::simulationFieldsDataBase::getShape() const
 {
     return shape_;
 }
 
+pFlow::word pFlow::simulationFieldsDataBase::getPointFieldType(const word &name) const
+{
+    word pfType =  time().lookupObjectTypeName(name);
+    word type, space;
+    if(!pointFieldGetType(pfType, type, space))
+    {
+        fatalErrorInFunction
+            <<"Error in retriving the type of pointField "
+            << pfType<<endl;
+        fatalExit;
+    }
+    return type;
+}
+
 pFlow::simulationFieldsDataBase::simulationFieldsDataBase
 (
-    systemControl &control, 
-    bool inSimulation
+    systemControl &control,
+    const dictionary& postDict, 
+    bool inSimulation,
+    timeValue startTime
 )
 :
-    fieldsDataBase(control, inSimulation),
+    fieldsDataBase(control, postDict, inSimulation, startTime),
     shape_
     (
         dynamic_cast<const shape&>(*control.caseSetup().lookupObjectPtr(shapeFile__))
@@ -57,6 +69,3 @@ const pFlow::pointStructure &pFlow::simulationFieldsDataBase::pStruct() const
     );
 }
 
-void pFlow::simulationFieldsDataBase::resetTimeFolder()
-{
-}

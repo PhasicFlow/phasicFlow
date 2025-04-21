@@ -1,16 +1,9 @@
 
-set(source_files 
-cellMapper.cpp
-rectangleMesh.cpp
-countField.cpp
-countFields.cpp
-postprocess.cpp
-processField.cpp
-ProcessFields.cpp
-includeMask.cpp
-IncludeMasks.cpp
-postprocessPhasicFlow.cpp
+set(source_files
+
+    postprocessPhasicFlow.cpp
+    postSimulationFieldsDataBase/postSimulationFieldsDataBase.cpp
 )
-set(link_lib phasicFlow Interaction Kokkos::kokkos Utilities)
+set(link_lib phasicFlow PostprocessData Kokkos::kokkos Utilities)
 
 pFlow_make_executable_install(postprocessPhasicFlow source_files link_lib)

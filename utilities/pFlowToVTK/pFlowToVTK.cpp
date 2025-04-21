@@ -149,10 +149,10 @@ int main(int argc, char** argv )
 	pFlow::wordList surfNames;
 	do
 	{
-		Control.time().setTime(folders.time());
-		if( !validRange.isMember( folders.time() ) )continue;
+		Control.time().setTime(folders.currentTime());
+		if( !validRange.isMember( folders.currentTime() ) )continue;
 		
-		pFlow::output<< "time: " << Cyan_Text( folders.time() )<<" s" <<pFlow::endl;
+		pFlow::output<< "time: " << Cyan_Text( folders.currentTime() )<<" s" <<pFlow::endl;
 		if(!noGoem)
 		{	
 			
@@ -163,7 +163,7 @@ int main(int argc, char** argv )
 				return 1;
 			}
 
-			timeSeries.addTimeFile(surfNames, folders.time(), geomFileNames);
+			timeSeries.addTimeFile(surfNames, folders.currentTime(), geomFileNames);
 		}
 
 		if(!noParticle)
@@ -188,7 +188,7 @@ int main(int argc, char** argv )
 					destFolderField,
 					"particles",
 					fields,
-					!pFlow::equal(folders.time(),static_cast<pFlow::real>(0.0)),
+					!pFlow::equal(folders.currentTime(),static_cast<pFlow::real>(0.0)),
 					fileName 
 					)
 				)
@@ -197,7 +197,7 @@ int main(int argc, char** argv )
 				}
 			}
 
-			timeSeries.addTimeFile("particles", folders.time(), fileName);
+			timeSeries.addTimeFile("particles", folders.currentTime(), fileName);
 				
 		}
 		

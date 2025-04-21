@@ -116,6 +116,36 @@ pFlow::span<T> pFlow::fieldsDataBase::updateReservedField
             fatalExit;
         }
     }
+    else if( name == "mass")
+    {
+        if constexpr( std::same_as<T,real>)
+        {
+            return createOrGetMass(forceUpdate);
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "This type: "
+                << getTypeName<T>()
+                <<" is not supported for field mass."<<endl;
+            fatalExit;
+        }
+    }
+    else if( name == "I")
+    {
+        if constexpr( std::same_as<T,real>)
+        {
+            return createOrGetI(forceUpdate);
+        }
+        else
+        {
+            fatalErrorInFunction
+                << "This type: "
+                << getTypeName<T>()
+                <<" is not supported for field I."<<endl;
+            fatalExit;
+        }
+    }
     else if( name == "position")
     {
         if constexpr( std::same_as<T, realx3>)

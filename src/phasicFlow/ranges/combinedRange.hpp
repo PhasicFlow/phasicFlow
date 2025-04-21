@@ -128,6 +128,42 @@ public:
 		return false;
 	}
 
+	T minVal()const
+	{
+		T m = largestPositive<T>();
+		for(const auto& sr:sRanges_)
+		{
+			m = min(m, sr.begin());
+		}
+		for(const auto& iR:iRanges_)
+		{
+			m = min(m, iR.begin());
+		}
+		for(const auto& i:individuals_)
+		{
+			m = min(m, i);
+		}
+		return m;
+	}
+
+	T maxVal()const
+	{
+		T m = largestNegative<T>();
+		for(const auto& sr:sRanges_)
+		{
+			m = max(m, sr.begin());
+		}
+		for(const auto& iR:iRanges_)
+		{
+			m = max(m, iR.begin());
+		}
+		for(const auto& i:individuals_)
+		{
+			m = max(m, i);
+		}
+		return m;
+	}
+
 	bool isMember(T val)const
 	{
 		for(auto& sR:sRanges_)
