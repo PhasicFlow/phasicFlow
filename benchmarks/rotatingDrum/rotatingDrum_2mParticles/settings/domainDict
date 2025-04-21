@@ -8,12 +8,16 @@ fileFormat     ASCII;
 /*---------------------------------------------------------------------------*/
 globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
 {
-    min (-0.2 -0.2 -0.0);
-    max ( 0.2  0.2  1.6);
+    min (-0.2 -0.2  0.0);
+    max ( 0.2  0.2  1.2);
 }
 
 boundaries
 {
+    neighborListUpdateInterval 200;
+    
+    updateInterval              20;
+    
     left
     {
         type    exit;                            // other options: periodic, reflective 

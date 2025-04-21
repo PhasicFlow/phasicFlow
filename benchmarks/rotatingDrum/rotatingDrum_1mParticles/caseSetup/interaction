@@ -19,7 +19,7 @@ contactSearch
 {
     method         NBS;
 
-    updateInterval   10;
+    updateInterval   20;
 
     sizeRatio       1.1;
 

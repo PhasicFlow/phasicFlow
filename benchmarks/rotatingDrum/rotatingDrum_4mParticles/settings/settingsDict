@@ -6,13 +6,13 @@ objectName    settingsDict;
 objectType    dictionary;
 fileFormat    ASCII;
 /*---------------------------------------------------------------------------*/
-run             rotatingDrum_4MParticles;
+run             rotatingDrum_4mParticles;
 
 dt              0.00001;      // time step for integration (s)
 
 startTime       0;            // start time for simulation 
 
-endTime         10;           // end time for simulation 
+endTime         4;           // end time for simulation 
 
 saveInterval    0.2;          // time interval for saving the simulation
 
@@ -31,4 +31,4 @@ writeFormat               binary;              // data writting format (ascii or
 
 timersReport              Yes;      
 
-timersReportInterval      0.05;    
+timersReportInterval      0.01;    

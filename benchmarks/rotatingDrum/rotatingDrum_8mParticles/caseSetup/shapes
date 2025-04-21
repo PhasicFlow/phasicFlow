@@ -3,10 +3,13 @@
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */ 
 
-objectName     particleInsertion;
-objectType     dicrionary;
+objectName     shapes;
+objectType     dictionary;
 fileFormat     ASCII;
+/*---------------------------------------------------------------------------*/
 
-active  No;          // is insertion active?
+names          (glassBead);    // names of shapes 
 
+diameters      (0.002);        // diameter of shapes 
 
+materials      (glassMat);     // material names for shapes 
