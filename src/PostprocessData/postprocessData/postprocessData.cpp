@@ -100,6 +100,8 @@ pFlow::postprocessData::postprocessData
 
 bool pFlow::postprocessData::execute() 
 {
+    if( inSimulation_ && !activeInSimulation_() ) return true; 
+
     const auto& ti = time_.TimeInfo();
 
     for(auto& component:postprocesses_)
@@ -118,6 +120,8 @@ bool pFlow::postprocessData::execute()
 
 bool pFlow::postprocessData::write() const
 {
+    if( inSimulation_ && !activeInSimulation_() ) return true; 
+    
     for(auto& component:postprocesses_)
     {   
         if(!component->executed())
