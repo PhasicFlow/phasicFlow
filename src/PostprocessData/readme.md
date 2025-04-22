@@ -107,11 +107,11 @@ Within each processing region of type `bulk`, you can define multiple operations
 
 Equation 1:
 
-$\text{result}=\qquad \frac{\sum_{j} w_j \cdot \phi_j \cdot \text{field}_j}{\sum_{j} w_i \cdot \phi_i}$
+$$\text{result} = \frac{\sum_j w_j \cdot \phi_j \cdot \text{field}_j}{\sum_i w_i \cdot \phi_i}$$
 
 Equation 2:
 
-$\text{result} = \sum_{j} w_j \cdot \phi_j \cdot \text{field}_j$
+$$\text{result} = \sum_j w_j \cdot \phi_j \cdot \text{field}_j$$
 
 where:
 
