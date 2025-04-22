@@ -31,9 +31,9 @@ pFlow::selectorStridedRange::selectAllPointsInRange()
 
 	selectedPoints_.clear();
 
-	for (uint32 i = begin_; i < end_; i += stride_)
+	for (uint32 i = begin_; i <= end_; i += stride_)
 	{
-		selectedPoints_.push_back(i);
+		selectedPoints_.push_back(i - 1);
 	}
 }
 
