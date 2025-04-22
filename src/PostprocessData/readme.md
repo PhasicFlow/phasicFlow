@@ -102,8 +102,25 @@ Within each processing region of type `bulk`, you can define multiple operations
 
 | Function | Property type | Description | Formula | Required Parameters |
 |----------|---------------|-------------|---------|---------------------|
-| `average` | bulk | Weighted average of particle field values | $\frac{\sum_{i \in \text{region}} w_i \cdot \phi_i \cdot \text{field}_i}{\sum_{i \in \text{region}} w_i \cdot \phi_i}$ | `field`, `phi` (optional), `threshold` (optional), `includeMask` (optional), `divideByVolume` (optional) |
-| `sum` | bulk | Weighted sum of particle field values | $\sum_{i \in \text{region}} w_i \cdot \phi_i \cdot \text{field}_i$ | `field`, `phi` (optional),`threshold` (optional), `includeMask` (optional), `divideByVolume` (optional) |
+| `average` | bulk | Weighted average of particle field values | see Equation 1 | `field`, `phi` (optional), `threshold` (optional), `includeMask` (optional), `divideByVolume` (optional) |
+| `sum` | bulk | Weighted sum of particle field values | see Equation 2 | `field`, `phi` (optional),`threshold` (optional), `includeMask` (optional), `divideByVolume` (optional) |
+
+Equation 1:
+
+$\text{result}=\qquad \frac{\sum_{j} w_j \cdot \phi_j \cdot \text{field}_j}{\sum_{j} w_i \cdot \phi_i}$
+
+Equation 2:
+
+$\text{result} = \sum_{j} w_j \cdot \phi_j \cdot \text{field}_j$
+
+where:
+
+- $j$ is the index of the particle in the region that also satisfies the `includeMask`
+- $i$ is the index of the particle in the region
+- $w_j$ is the weight of particle $j$ based on the selected processing method
+- $\phi_j$ is the value of the `phi` field for particle $j$ (default is 1)
+- $field_j$ is the value of the specified field for particle $j$
+
 
 ### Derived Functions
 
@@ -334,11 +351,11 @@ Supported masks:
 
 For weighted `bulk` properties calculation:
 
-$$ \text{average} = \frac{\sum_{i \in \text{region \& includeMask}} w_i \cdot \phi_i \cdot \text{field}_i}{\sum_{i \in \text{region}} w_i \cdot \phi_i} $$
+$$ \text{average} = \frac{\sum_{i \in \text{region and includeMask}} w_i \cdot \phi_i \cdot \text{field}_i}{\sum_{i \in \text{region}} w_i \cdot \phi_i} $$
 
 For weighted summing:
 
-$$ \text{sum} = \sum_{i \in \text{region \& includeMask}} w_i \cdot \phi_i \cdot \text{field}_i $$
+$$ \text{sum} = \sum_{i \in \text{region and includeMask}} w_i \cdot \phi_i \cdot \text{field}_i $$
 
 If `divideByVolume` is set to `yes`, the result is divided by the volume of the region:
 
