@@ -52,7 +52,8 @@ bool pFlow::stlFile::readSolid
 (
 	iIstream& is,
 	realx3x3Vector & vertecies,
-	word & name
+	word & name,
+	real scaleFactor
 )
 {
 
@@ -113,7 +114,7 @@ bool pFlow::stlFile::readSolid
 		// read facet 
 		is.putBack(tok);
 		realx3x3 tri;
-		if( !readFacet(is, tri) ) return false;
+		if( !readFacet(is, tri, scaleFactor) ) return false;
 
 		vertecies.push_back(tri);
 		
@@ -126,7 +127,8 @@ bool pFlow::stlFile::readSolid
 bool pFlow::stlFile::readFacet
 (
 	iIstream& is,
-	realx3x3& tri
+	realx3x3& tri,
+	real scaleFactor
 )
 {
 	token tok;
@@ -162,9 +164,9 @@ bool pFlow::stlFile::readFacet
 		if(!checkNumberToken(is, tok, v.y()))return false;
 		is>>tok;
 		if(!checkNumberToken(is, tok, v.z()))return false;
-		if( i==0 ) tri.x() = v;
-		if( i==1 ) tri.y() = v;
-		if( i==2)  tri.z() = v;
+		if( i==0 ) tri.x() = v * scaleFactor;
+		if( i==1 ) tri.y() = v * scaleFactor;
+		if( i==2)  tri.z() = v * scaleFactor;
 	}
 	is>> tok;
 	if(!checkWordToken(is, tok, "endloop")) return false;
@@ -289,7 +291,7 @@ void pFlow::stlFile::addSolid
 
 
 
-bool pFlow::stlFile::read()
+bool pFlow::stlFile::read(real scaleFactor)
 {
 	solids_.clear();
 	solidNames_.clear();
@@ -303,7 +305,7 @@ bool pFlow::stlFile::read()
 		
 		realx3x3Vector vertecies;
 		word name;
-		if(!readSolid(is, vertecies, name))
+		if(!readSolid(is, vertecies, name, scaleFactor))
 		{
 			ioErrorInFile(is.name(), is.lineNumber());
 		 	return false;

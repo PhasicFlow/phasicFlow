@@ -52,9 +52,9 @@ protected:
 
 	// - protected members
 
-		bool readSolid(iIstream& is, realx3x3Vector & vertecies, word & name);
+		bool readSolid(iIstream& is, realx3x3Vector & vertecies, word & name, real scaleFactor);
 
-		bool readFacet(iIstream& is, realx3x3& tri);
+		bool readFacet(iIstream& is, realx3x3& tri, real scaleFactor);
 
 		bool writeSolid(iOstream& os, const realx3x3Vector& vertecies, const word& name)const;
 
@@ -91,7 +91,7 @@ public:
 		void addSolid(const word& name, realx3x3Vector&& vertecies);
 
 		// - clear current content and read from file
-		bool read();
+		bool read(real scaleFactor);
 
 		// - write the current contnet to file
 		bool write()const;

@@ -31,11 +31,13 @@ bool pFlow::stlWall::readSTLWall
 {
 	auto fileName = dict.getVal<word>("file");
 
+	real scale = dict.getValOrSet("scale", static_cast<real>(1.0));
+
 	
 	fileSystem file("./stl",fileName);
 
 	stlFile stl(file);
-	if(!stl.read())
+	if(!stl.read(scale))
 	{
 		fatalErrorInFunction <<
 		"  error in reading stl file "<< file <<endl;
