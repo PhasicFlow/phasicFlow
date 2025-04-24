@@ -3,10 +3,7 @@
 #include "dynamicPointStructure.hpp"
 #include "vocabs.hpp"
 
-namespace pFlow
-{
-    bool pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace);
-}
+
 
 bool pFlow::postprocessData::simulationFieldsDataBase::pointFieldNameExists(const word &name) const
 {
@@ -37,7 +34,7 @@ pFlow::word pFlow::postprocessData::simulationFieldsDataBase::getPointFieldType
 {
     word pfType =  time().lookupObjectTypeName(name);
     word type, space;
-    if(!pointFieldGetType(pfType, type, space))
+    if(!fieldsDataBase::pointFieldGetType(pfType, type, space))
     {
         fatalErrorInFunction
             <<"Error in retriving the type of pointField "

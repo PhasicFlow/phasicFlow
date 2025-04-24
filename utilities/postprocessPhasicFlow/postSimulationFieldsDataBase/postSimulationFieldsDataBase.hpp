@@ -27,12 +27,12 @@ Licence:
 #include "ListPtr.hpp"
 #include "property.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 class postSimulationFieldsDataBase
 :
-    public fieldsDataBase
+    public postprocessData::fieldsDataBase
 {
     
     systemControl&              control_;

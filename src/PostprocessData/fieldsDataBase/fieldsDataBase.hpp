@@ -304,6 +304,12 @@ public:
         {
             return -1.0;
         }
+    
+    static
+    bool pointFieldGetType(
+        const word& TYPENAME, 
+        word& fieldType, 
+        word& fieldSpace);
 
     static
     uniquePtr<fieldsDataBase> create(

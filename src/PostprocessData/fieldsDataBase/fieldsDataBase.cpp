@@ -26,12 +26,6 @@ Licence:
 #include "fieldFunctions.hpp"
 #include "dictionary.hpp"
 
-namespace pFlow::postprocessData
-{
-
-bool pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace);
-
-}
 
 bool pFlow::postprocessData::fieldsDataBase::loadPointStructureToTime()
 {
@@ -898,7 +892,21 @@ pFlow::postprocessData::allPointFieldTypes pFlow::postprocessData::fieldsDataBas
     }
 }
 
-
+bool pFlow::postprocessData::fieldsDataBase::pointFieldGetType
+(
+    const word& TYPENAME, 
+    word& fieldType, 
+    word& fieldSpace
+)
+{
+	std::regex match("pointField\\<([A-Za-z1-9_]*)\\,([A-Za-z1-9_]*)\\>");
+    std::smatch search;
+	if(!std::regex_match(TYPENAME, search, match)) return false;
+    if(search.size()!= 3) return false;
+    fieldType  = search[1];
+    fieldSpace = search[2];
+	return true;
+}
 
 pFlow::uniquePtr<pFlow::postprocessData::fieldsDataBase> 
     pFlow::postprocessData::fieldsDataBase::create
@@ -941,19 +949,5 @@ pFlow::uniquePtr<pFlow::postprocessData::fieldsDataBase>
     return nullptr;
 }
 
-bool pFlow::postprocessData::pointFieldGetType
-(
-    const word& TYPENAME, 
-    word& fieldType, 
-    word& fieldSpace
-)
-{
-	std::regex match("pointField\\<([A-Za-z1-9_]*)\\,([A-Za-z1-9_]*)\\>");
-    std::smatch search;
-	if(!std::regex_match(TYPENAME, search, match)) return false;
-    if(search.size()!= 3) return false;
-    fieldType  = search[1];
-    fieldSpace = search[2];
-	return true;
-}
+
 
