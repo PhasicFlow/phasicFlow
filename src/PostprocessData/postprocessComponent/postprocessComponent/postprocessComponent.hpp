@@ -25,12 +25,17 @@ Licence:
 #include "dictionary.hpp"
 #include "virtualConstructor.hpp"
 
-namespace pFlow
+namespace
+{
+    class dictionary;
+}
+
+namespace pFlow::postprocessData
 {
 
-class fieldsDataBase;
+
 class regionPoints;
-class dictionary;
+class fieldsDataBase;
 
 class postprocessComponent
 {
@@ -112,6 +117,6 @@ public:
 
 };
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #endif // __postprocessComponent_hpp__

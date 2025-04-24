@@ -32,7 +32,7 @@ Licence:
 #include "regionPoints.hpp"
 #include "regionField.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename RegionType, typename ProcessMethodType>

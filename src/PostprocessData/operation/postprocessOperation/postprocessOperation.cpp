@@ -24,7 +24,10 @@ Licence:
 #include "fieldsDataBase.hpp"
 
 
-pFlow::postprocessOperation::postprocessOperation
+namespace pFlow::postprocessData
+{
+
+postprocessOperation::postprocessOperation
 (
     const dictionary &opDict, 
     const regionPoints& regPoints,
@@ -42,7 +45,7 @@ pFlow::postprocessOperation::postprocessOperation
     )
 {}
 
-pFlow::postprocessOperation::postprocessOperation
+postprocessOperation::postprocessOperation
 (
     const dictionary &opDict, 
     const word &fieldName, 
@@ -89,12 +92,12 @@ pFlow::postprocessOperation::postprocessOperation
         fatalExit;
     }
 }
-const pFlow::Time& pFlow::postprocessOperation::time() const
+const Time& postprocessOperation::time() const
 {
     return database_.time();
 }
 
-bool pFlow::postprocessOperation::write(const fileSystem &parDir) const
+bool postprocessOperation::write(const fileSystem &parDir) const
 {   
     auto ti = time().TimeInfo();
 
@@ -121,11 +124,12 @@ bool pFlow::postprocessOperation::write(const fileSystem &parDir) const
     return true;
 }
 
-pFlow::uniquePtr<pFlow::postprocessOperation>
-pFlow::postprocessOperation::create(
+uniquePtr<postprocessOperation> postprocessOperation::create
+(
     const dictionary &opDict,
     const regionPoints &regPoints,
-    fieldsDataBase &fieldsDB)
+    fieldsDataBase &fieldsDB
+)
 {
     word func = opDict.getVal<word>("function");
     word method = angleBracketsNames("PostprocessOperation", func);
@@ -150,4 +154,6 @@ pFlow::postprocessOperation::create(
         fatalExit;
         return nullptr;
     }
+}
+
 }

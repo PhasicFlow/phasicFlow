@@ -80,12 +80,15 @@ Licence:
 
 namespace pFlow
 {
+    class Time;
+} 
 
-
+namespace pFlow::postprocessData
+{
 
 /// - forward declaration
 class fieldsDataBase;
-class Time;
+
 
 class postprocessOperation
 {
@@ -96,7 +99,7 @@ public:
 private:
 
     /// Dictionary containing operation-specific parameters.
-    dictionary              operationDict_;
+    pFlow::dictionary              operationDict_;
 
     /// This Threshold is used to exclude the regions which contain
     /// fewer than this value. 
@@ -266,6 +269,6 @@ public:
     
 };
 
-}
+} // namespace pFlow::postprocessData
 
 #endif //__postprocessOperation_hpp__

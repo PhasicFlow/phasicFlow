@@ -23,7 +23,7 @@ Licence:
 
 #include "regionPoints.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 /**
@@ -163,7 +163,7 @@ public:
 
 }; // class centerPointsRegionPoints
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 
 

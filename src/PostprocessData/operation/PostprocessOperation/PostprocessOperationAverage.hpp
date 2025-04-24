@@ -132,9 +132,8 @@ Licence:
 #include "regionField.hpp"
 #include "includeMask.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
-
 
 class PostprocessOperationAverage
 :
@@ -207,6 +206,6 @@ public:
 }; 
 
 
-}
+} // namespace pFlow::postprocessData
 
 #endif //__PostprocessOperationAverage_hpp__

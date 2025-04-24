@@ -169,7 +169,7 @@ In addition to the above basic functions, some derived functions are available f
 
 | Function | Property type | Description | Formula | Required Parameters |
 |----------|---------------|-------------|---------|---------------------|
-|`avMassVelocity` | bulk | Average velocity weighted by mass | $\frac{\sum_{i \in \text{region}} m_i \cdot v_i}{\sum_{i \in \text{region}} m_i}$ | - |
+|`avMassVelocity` | bulk | Average velocity weighted by mass | $\frac{\sum_{i \in \text{region}} w_i \cdot m_i \cdot v_i}{\sum_{i \in \text{region}} w_i \cdot m_i}$ | - |
 
 ### 6.4. Available Fields
 

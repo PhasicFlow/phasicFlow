@@ -20,7 +20,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 template<typename RegionType, typename ProcessMethodType>
-pFlow::PostprocessComponent<RegionType,ProcessMethodType>::PostprocessComponent
+pFlow::postprocessData::PostprocessComponent<RegionType,ProcessMethodType>::PostprocessComponent
 (
     const dictionary& dict,
     fieldsDataBase& fieldsDB,
@@ -61,7 +61,7 @@ pFlow::PostprocessComponent<RegionType,ProcessMethodType>::PostprocessComponent
 
 
 template <typename RegionType, typename ProcessMethodType>
-bool pFlow::PostprocessComponent<RegionType, ProcessMethodType>::execute
+bool pFlow::postprocessData::PostprocessComponent<RegionType, ProcessMethodType>::execute
 (
     const timeInfo &ti, 
     bool forceUpdate
@@ -129,7 +129,7 @@ bool pFlow::PostprocessComponent<RegionType, ProcessMethodType>::execute
 
 template <typename RegionType, typename ProcessMethodType>
 inline 
-bool pFlow::PostprocessComponent<RegionType, ProcessMethodType>::write
+bool pFlow::postprocessData::PostprocessComponent<RegionType, ProcessMethodType>::write
 (
     const fileSystem &parDir
 ) const

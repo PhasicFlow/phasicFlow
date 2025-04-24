@@ -61,7 +61,7 @@ Licence:
 #include "Time.hpp"
 
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename T, typename Operator>
@@ -270,7 +270,7 @@ public:
 };
 
 
-} // pFlow
+} // pFlow::postprocessData
 
 #endif //__IncludeMask_hpp__
 

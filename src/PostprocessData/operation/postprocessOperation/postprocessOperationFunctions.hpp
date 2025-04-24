@@ -27,7 +27,7 @@ Licence:
 #include "iOstream.hpp"
 #include "regionField.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 /// Type alias for processed region field types.
@@ -95,6 +95,6 @@ bool writeField
     return true;
 }
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #endif //__postprocessOperationFunctions_hpp__

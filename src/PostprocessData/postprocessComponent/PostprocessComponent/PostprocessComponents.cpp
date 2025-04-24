@@ -27,16 +27,18 @@ Licence:
 #include "lineRegionPoints.hpp"
 #include "multipleSpheresRegionPoints.hpp"
 
+namespace pFlow::postprocessData
+{
+template class PostprocessComponentGaussian<sphereRegionPoints>;
+template class PostprocessComponentUniform<sphereRegionPoints>;
+template class PostprocessComponentArithmetic<sphereRegionPoints>;
 
-template class pFlow::PostprocessComponentGaussian<pFlow::sphereRegionPoints>;
-template class pFlow::PostprocessComponentUniform<pFlow::sphereRegionPoints>;
-template class pFlow::PostprocessComponentArithmetic<pFlow::sphereRegionPoints>;
+template class PostprocessComponentGaussian<multipleSpheresRegionPoints>;
+template class PostprocessComponentUniform<multipleSpheresRegionPoints>;
+template class PostprocessComponentArithmetic<multipleSpheresRegionPoints>;
 
-template class pFlow::PostprocessComponentGaussian<pFlow::multipleSpheresRegionPoints>;
-template class pFlow::PostprocessComponentUniform<pFlow::multipleSpheresRegionPoints>;
-template class pFlow::PostprocessComponentArithmetic<pFlow::multipleSpheresRegionPoints>;
+template class PostprocessComponentGaussian<lineRegionPoints>;
+template class PostprocessComponentUniform<lineRegionPoints>;
+template class PostprocessComponentArithmetic<lineRegionPoints>;
 
-template class pFlow::PostprocessComponentGaussian<pFlow::lineRegionPoints>;
-template class pFlow::PostprocessComponentUniform<pFlow::lineRegionPoints>;
-template class pFlow::PostprocessComponentArithmetic<pFlow::lineRegionPoints>;
-
+}

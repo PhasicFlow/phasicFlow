@@ -28,7 +28,7 @@ Licence:
 #include "regionField.hpp"
 #include "includeMask.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename T>
@@ -190,6 +190,6 @@ regionField<T> executeFluctuation2Operation
     return processedField;
 }
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #endif //__operationFunctions_hpp__

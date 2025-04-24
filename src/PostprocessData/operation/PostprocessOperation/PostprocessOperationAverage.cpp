@@ -3,8 +3,11 @@
 #include "fieldsDataBase.hpp"
 #include "operationFunctions.hpp"
 
+namespace pFlow::postprocessData
+{
+
 /// Constructs average processor and initializes result field based on input field type
-pFlow::PostprocessOperationAverage::PostprocessOperationAverage
+PostprocessOperationAverage::PostprocessOperationAverage
 (
     const dictionary &opDict, 
     const regionPoints &regPoints, 
@@ -39,7 +42,7 @@ pFlow::PostprocessOperationAverage::PostprocessOperationAverage
     }
 }
 
-pFlow::PostprocessOperationAverage::PostprocessOperationAverage
+PostprocessOperationAverage::PostprocessOperationAverage
 (
     const dictionary &opDict, 
     const word &fieldName, 
@@ -79,7 +82,7 @@ pFlow::PostprocessOperationAverage::PostprocessOperationAverage
 
 
 /// Performs weighted average of field values within each region
-bool pFlow::PostprocessOperationAverage::execute
+bool PostprocessOperationAverage::execute
 (
     const std::vector<span<real>>& weights,
     const regionField<real>& volFactor
@@ -140,7 +143,7 @@ bool pFlow::PostprocessOperationAverage::execute
     return true;
 }
 
-bool pFlow::PostprocessOperationAverage::write(const fileSystem &parDir) const
+bool PostprocessOperationAverage::write(const fileSystem &parDir) const
 {   
     if(! postprocessOperation::write(parDir))
     {
@@ -174,3 +177,5 @@ bool pFlow::PostprocessOperationAverage::write(const fileSystem &parDir) const
 
     return true;
 }
+
+} // namespace pFlow::postprocessData

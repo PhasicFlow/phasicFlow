@@ -24,7 +24,7 @@ Licence:
 #include "PostprocessComponent.hpp"
 #include "uniformDistribution.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename RegionType>

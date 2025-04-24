@@ -26,20 +26,24 @@ Licence:
 #include "fieldFunctions.hpp"
 #include "dictionary.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 bool pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace);
 
 }
 
-bool pFlow::fieldsDataBase::loadPointStructureToTime()
+bool pFlow::postprocessData::fieldsDataBase::loadPointStructureToTime()
 {
     return false;
 }
 
 
-bool pFlow::fieldsDataBase::checkForUpdate(const word &compoundName, bool forceUpdate)
+bool pFlow::postprocessData::fieldsDataBase::checkForUpdate
+(
+    const word &compoundName, 
+    bool forceUpdate
+)
 {
     auto t = currentTime();
     bool shouldUpdate = false;
@@ -58,7 +62,10 @@ bool pFlow::fieldsDataBase::checkForUpdate(const word &compoundName, bool forceU
     return shouldUpdate;
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetRealField(const word &name)
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::createOrGetRealField
+(
+    const word &name
+)
 {
     
     bool shouldUpdate = checkForUpdate(name);
@@ -83,7 +90,10 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetRealField(const word 
         field.size());
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetVolume(bool forceUpdate)
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::createOrGetVolume
+(
+    bool forceUpdate
+)
 {
     const word fName = "volume";
     bool shouldUpdate = checkForUpdate(fName, forceUpdate);
@@ -119,7 +129,7 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetVolume(bool forceUpda
 
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetDensity(bool forceUpdate)
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::createOrGetDensity(bool forceUpdate)
 {
     const word fName = "density";
     
@@ -155,7 +165,7 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetDensity(bool forceUpd
         field.size());
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetOne(bool forceUpdate)
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::createOrGetOne(bool forceUpdate)
 {
     const word fName = "one";
     
@@ -182,7 +192,7 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetOne(bool forceUpdate)
         field.size());
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetMass(bool forceUpdate)
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::createOrGetMass(bool forceUpdate)
 {
     const word fName = "mass";
     
@@ -218,7 +228,7 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetMass(bool forceUpdate
         field.size());
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetI(bool forceUpdate)
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::createOrGetI(bool forceUpdate)
 {
     const word fName = "I";
     
@@ -254,7 +264,7 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::createOrGetI(bool forceUpdate)
         field.size());
 }
 
-bool pFlow::fieldsDataBase::findFunction(
+bool pFlow::postprocessData::fieldsDataBase::findFunction(
     const word &compoundFieldName,
     word &fieldName,
     fieldsDataBase::Functions &func)
@@ -360,7 +370,7 @@ bool pFlow::fieldsDataBase::findFunction(
     return false; // No match
 }
 
-bool pFlow::fieldsDataBase::inputOutputType
+bool pFlow::postprocessData::fieldsDataBase::inputOutputType
 (
     fieldsDataBase::Functions func, 
     const word &inputType, 
@@ -458,7 +468,7 @@ bool pFlow::fieldsDataBase::inputOutputType
     return false;
 }
 
-pFlow::fieldsDataBase::fieldsDataBase
+pFlow::postprocessData::fieldsDataBase::fieldsDataBase
 (
     systemControl& control,
     const dictionary& postDict,
@@ -488,12 +498,12 @@ pFlow::fieldsDataBase::fieldsDataBase
     }
 }
 
-pFlow::timeValue pFlow::fieldsDataBase::currentTime() const
+pFlow::timeValue pFlow::postprocessData::fieldsDataBase::currentTime() const
 {
     return time_.currentTime();
 }
 
-bool pFlow::fieldsDataBase::getFieldTypeNameFunction
+bool pFlow::postprocessData::fieldsDataBase::getFieldTypeNameFunction
 (
     const word& compoundName,
     word& pointFieldName, 
@@ -543,7 +553,7 @@ bool pFlow::fieldsDataBase::getFieldTypeNameFunction
     return true;
 }
 
-bool pFlow::fieldsDataBase::getFieldType
+bool pFlow::postprocessData::fieldsDataBase::getFieldType
 (
     const word& compoundName,
     word& originalType, 
@@ -559,7 +569,7 @@ bool pFlow::fieldsDataBase::getFieldType
     return true;
 }
 
-bool pFlow::fieldsDataBase::getFieldType
+bool pFlow::postprocessData::fieldsDataBase::getFieldType
 (
     const word &compoundName, 
     word &typeAfterFunction
@@ -575,7 +585,7 @@ bool pFlow::fieldsDataBase::getFieldType
     return true;
 }
 
-pFlow::span<pFlow::realx3> pFlow::fieldsDataBase::updatePoints(bool forceUpdate)
+pFlow::span<pFlow::realx3> pFlow::postprocessData::fieldsDataBase::updatePoints(bool forceUpdate)
 {
     const word fName = "position";
     bool shouldUpdate = checkForUpdate(fName, forceUpdate);
@@ -604,7 +614,7 @@ pFlow::span<pFlow::realx3> pFlow::fieldsDataBase::updatePoints(bool forceUpdate)
 
 }
 
-pFlow::span<pFlow::realx3> pFlow::fieldsDataBase::updateFieldRealx3
+pFlow::span<pFlow::realx3> pFlow::postprocessData::fieldsDataBase::updateFieldRealx3
 (
     const word &compoundName, 
     bool forceUpdate
@@ -640,7 +650,7 @@ pFlow::span<pFlow::realx3> pFlow::fieldsDataBase::updateFieldRealx3
         
 }
 
-pFlow::span<pFlow::realx4> pFlow::fieldsDataBase::updateFieldRealx4
+pFlow::span<pFlow::realx4> pFlow::postprocessData::fieldsDataBase::updateFieldRealx4
 (
     const word &compoundName, 
     bool forceUpdate
@@ -676,7 +686,7 @@ pFlow::span<pFlow::realx4> pFlow::fieldsDataBase::updateFieldRealx4
     
 }
 
-pFlow::span<pFlow::real> pFlow::fieldsDataBase::updateFieldReal
+pFlow::span<pFlow::real> pFlow::postprocessData::fieldsDataBase::updateFieldReal
 (
     const word &compoundName, 
     bool forceUpdate
@@ -843,7 +853,7 @@ pFlow::span<pFlow::real> pFlow::fieldsDataBase::updateFieldReal
     return span<real>(nullptr, 0);
 }
 
-pFlow::span<pFlow::uint32> pFlow::fieldsDataBase::updateFieldUint32
+pFlow::span<pFlow::uint32> pFlow::postprocessData::fieldsDataBase::updateFieldUint32
 (
     const word& name,
     bool forceUpdate
@@ -852,7 +862,7 @@ pFlow::span<pFlow::uint32> pFlow::fieldsDataBase::updateFieldUint32
     return updateField<uint32>(name, forceUpdate);
 }
 
-pFlow::allPointFieldTypes pFlow::fieldsDataBase::updateFieldAll
+pFlow::postprocessData::allPointFieldTypes pFlow::postprocessData::fieldsDataBase::updateFieldAll
 (
     const word &compoundName, 
     bool forceUpdate
@@ -890,8 +900,8 @@ pFlow::allPointFieldTypes pFlow::fieldsDataBase::updateFieldAll
 
 
 
-pFlow::uniquePtr<pFlow::fieldsDataBase> 
-    pFlow::fieldsDataBase::create
+pFlow::uniquePtr<pFlow::postprocessData::fieldsDataBase> 
+    pFlow::postprocessData::fieldsDataBase::create
 (
     systemControl& control, 
     const dictionary& postDict, 
@@ -931,7 +941,12 @@ pFlow::uniquePtr<pFlow::fieldsDataBase>
     return nullptr;
 }
 
-bool pFlow::pointFieldGetType(const word& TYPENAME, word& fieldType, word& fieldSpace)
+bool pFlow::postprocessData::pointFieldGetType
+(
+    const word& TYPENAME, 
+    word& fieldType, 
+    word& fieldSpace
+)
 {
 	std::regex match("pointField\\<([A-Za-z1-9_]*)\\,([A-Za-z1-9_]*)\\>");
     std::smatch search;

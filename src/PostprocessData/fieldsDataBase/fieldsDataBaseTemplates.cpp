@@ -23,9 +23,9 @@ Licence:
 
 #include "fieldsDataBase.hpp"
 
-template<pFlow::ValidFieldType T>
+template<pFlow::postprocessData::ValidFieldType T>
 inline
-pFlow::span<T> pFlow::fieldsDataBase::updateField(const word& name, bool forceUpdate)
+pFlow::span<T> pFlow::postprocessData::fieldsDataBase::updateField(const word& name, bool forceUpdate)
 {
   
     bool shouldUpdate = checkForUpdate(name, forceUpdate);
@@ -40,8 +40,8 @@ pFlow::span<T> pFlow::fieldsDataBase::updateField(const word& name, bool forceUp
         {
             if( loadPointFieldToTime(name) )
             {
-                const auto& pField = time_.lookupObject<pointField_D<T>>(name);
-                allFields_.emplaceBackOrReplace<FieldTypeHost<T>>(
+                const auto& pField = time_.template lookupObject<pointField_D<T>>(name);
+                allFields_.template emplaceBackOrReplace<FieldTypeHost<T>>(
                 name, 
                 pField.activeValuesHost());
             }
@@ -63,9 +63,9 @@ pFlow::span<T> pFlow::fieldsDataBase::updateField(const word& name, bool forceUp
 }
 
 
-template<pFlow::ValidFieldType T>
+template<pFlow::postprocessData::ValidFieldType T>
 inline
-pFlow::span<T> pFlow::fieldsDataBase::updateReservedField
+pFlow::span<T> pFlow::postprocessData::fieldsDataBase::updateReservedField
 (
     const word& name, 
     bool forceUpdate

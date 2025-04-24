@@ -132,7 +132,7 @@ Licence:
 #include "regionField.hpp"
 #include "includeMask.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 

@@ -3,7 +3,10 @@
 #include "Set.hpp"
 #include "pStructSelector.hpp"
 
-bool pFlow::centerPointsRegionPoints::selectIds()
+namespace pFlow::postprocessData
+{
+
+bool centerPointsRegionPoints::selectIds()
 {
     if(!firstTimeUpdate_) return true;
     firstTimeUpdate_ = false;
@@ -42,7 +45,7 @@ bool pFlow::centerPointsRegionPoints::selectIds()
     return true;
 }
 
-pFlow::centerPointsRegionPoints::centerPointsRegionPoints(
+centerPointsRegionPoints::centerPointsRegionPoints(
     const dictionary &dict,
     fieldsDataBase &fieldsDataBase)
     : regionPoints(dict, fieldsDataBase),
@@ -50,7 +53,7 @@ pFlow::centerPointsRegionPoints::centerPointsRegionPoints(
       probDict_(dict)
 {}
 
-bool pFlow::centerPointsRegionPoints::update()
+bool centerPointsRegionPoints::update()
 {
     if(!selectIds()) return false;
     
@@ -74,7 +77,7 @@ bool pFlow::centerPointsRegionPoints::update()
     return true;
 }
 
-bool pFlow::centerPointsRegionPoints::write(iOstream &os) const
+bool centerPointsRegionPoints::write(iOstream &os) const
 {
     if(firstTimeUpdate_)
     {
@@ -95,3 +98,5 @@ bool pFlow::centerPointsRegionPoints::write(iOstream &os) const
 
     return true;
 }
+
+} // End namespace pFlow::postprocessData

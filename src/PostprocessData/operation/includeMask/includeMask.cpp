@@ -24,7 +24,10 @@ Licence:
 #include "fieldsDataBase.hpp"
 
 
-pFlow::includeMask::includeMask
+namespace pFlow::postprocessData
+{
+
+includeMask::includeMask
 (
 	const dictionary& dict, 
 	fieldsDataBase& fieldDB
@@ -33,7 +36,7 @@ pFlow::includeMask::includeMask
 	database_(fieldDB)
 {}
 
-pFlow::includeMask::includeMask
+includeMask::includeMask
 (
 	const word &type, 
 	const dictionary &opDict, 
@@ -44,7 +47,7 @@ pFlow::includeMask::includeMask
 {
 }
 
-pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
+uniquePtr<includeMask> includeMask::create
 (
     const dictionary& opDict, 
     fieldsDataBase& fieldsDB
@@ -97,8 +100,7 @@ pFlow::uniquePtr<pFlow::includeMask> pFlow::includeMask::create
 	return nullptr;
 }
 
-pFlow::uniquePtr<pFlow::includeMask> 
-	pFlow::includeMask::create
+uniquePtr<includeMask> includeMask::create
 (
 	const word &type, 
 	const dictionary &opDict, 
@@ -149,4 +151,6 @@ pFlow::uniquePtr<pFlow::includeMask>
 		return nullptr;
 	}
 	return nullptr;
+}
+
 }
