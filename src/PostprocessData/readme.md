@@ -150,6 +150,7 @@ where:
 
 Fluctuation2 is an optional parameter that can be used to account for fluctuations in the particle field values with respect to mean value of the field.
 It is used in the `average` function to calculate the fluctuation of the field values around the mean. The formula for fluctuation2 is:
+
 $$\text{fluctuation}^2 = \frac{\sum_j w_j \cdot \phi_j \cdot (\text{field}_j - \text{mean})^2}{\sum_i w_i \cdot \phi_i}$$
 
 where:
