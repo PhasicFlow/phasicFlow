@@ -2,8 +2,8 @@
 
 The `PostprocessData` module in phasicFlow provides powerful tools for analyzing particle-based simulations both during runtime (in-simulation) and after simulation completion (post-simulation). This document explains how to configure and use the postprocessing features through the dictionary-based input system.
 
-- in-simulation: this is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See bellow to see how you can activate in-simulation postprocessing.
-- post-simulation: this is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results that are stored in time-folders. If you want to use post-simulation, you need to run utitlity `postprocessPhasicFlow` in terminal (in the simulation case setup folder) to run the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
+- in-simulation: this is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See below to see how you can activate in-simulation postprocessing.
+- post-simulation: this is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results that are stored in time-folders. If you want to use post-simulation, you need to run utility `postprocessPhasicFlow` in terminal (in the simulation case setup folder) to run the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
 
 ## 1. Overview
 
@@ -38,7 +38,7 @@ Postprocessing in phasicFlow allows you to:
   - [8.2. Particle Filtering with includeMask](#82-particle-filtering-with-includemask)
   - [8.3. Implementation Notes](#83-implementation-notes)
 - [9. Mathematical Formulations](#9-mathematical-formulations)
-- [10. A complete dictioanry file (postprocessDataDict)](#10-a-complete-dictioanry-file-postprocessdatadict)
+- [10. A complete dictionary file (postprocessDataDict)](#10-a-complete-dictionary-file-postprocessdatadict)
 
 ## 2. Setting Up Postprocessing
 
@@ -74,7 +74,8 @@ components
 );
 ```
 
-If you want to activate in-simulaiton postprocessing, you need to add these lines to the `settings/settingsDict` file:
+
+If you want to activate in-simulation postprocessing, you need to add these lines to the `settings/settingsDict` file:
 
 ```cpp
 libs   ("libPostprocessData.so");
@@ -159,8 +160,8 @@ $$\text{fluctuation}^2 = \frac{\sum_j w_j \cdot \phi_j \cdot (\text{field}_j - \
 where:
 
 - `mean`: is the average value of the field in the region.
-- `field`: The field to be processed (e.g., `velocity`, `mass`, etc.) 
-- `fluctuation2`: Optional parameter to account for fluctuations in the particle field values. 
+- `field`: The field to be processed (e.g., `velocity`, `mass`, etc.)
+- `fluctuation2`: Optional parameter to account for fluctuations in the particle field values.
 
 ### 6.3. Derived Functions
 
@@ -291,7 +292,7 @@ This example defines a sphere region and performs three operations:
 
 ### 7.3. Example 3: Processing Along a Line
 
-In this example, a line region is defined. The `lineInfo` section specifies the start and end points of the line, the number of spheres to create along the line, and the radius of each point. Bulk properties are calculated in each sphere, based on the properties of particles contained in each sphere. 
+In this example, a line region is defined. The `lineInfo` section specifies the start and end points of the line, the number of spheres to create along the line, and the radius of each point. Bulk properties are calculated in each sphere, based on the properties of particles contained in each sphere.
 
 ```cpp
 along_a_line
@@ -358,7 +359,6 @@ Here is a complete list of these special functions:
 | `magnitude cube` | `realx3` | `magCube(velocity)` |
 | `magnitude square root` | `realx3` | `magSqrt(acceleration)` |
 
-
 ### 8.2. Particle Filtering with includeMask
 
 The `includeMask` parameter allows you to filter particles based on field values:
@@ -393,7 +393,8 @@ Supported masks:
 ## 9. Mathematical Formulations
 
 For weighted `bulk` properties calculation, we have these two general formulations:
- - For weighted averaging:
+
+- For weighted averaging:
 
 $$ \text{average} = \frac{\sum_j w_j \cdot \phi_j \cdot \text{field}_j}{\sum_i w_i \cdot \phi_i} $$
 
@@ -405,7 +406,7 @@ If `divideByVolume` is set to `yes`, the result is divided by the volume of the 
 
 $$ \text{volumetric result} = \frac{\text{result}}{V_{\text{region}}} $$
 
-## 10. A complete dictioanry file (postprocessDataDict)
+## 10. A complete dictionary file (postprocessDataDict)
 
 ```C++
 /* -------------------------------*- C++ -*--------------------------------- *\ 
