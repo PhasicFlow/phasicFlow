@@ -1,7 +1,10 @@
 #include "multipleSpheresRegionPoints.hpp"
 #include "fieldsDataBase.hpp"
 
-pFlow::multipleSpheresRegionPoints::multipleSpheresRegionPoints
+namespace pFlow::postprocessData
+{
+
+multipleSpheresRegionPoints::multipleSpheresRegionPoints
 (
     const dictionary &dict, 
     fieldsDataBase &fieldsDataBase
@@ -46,7 +49,7 @@ pFlow::multipleSpheresRegionPoints::multipleSpheresRegionPoints
     }
 }
 
-pFlow::span<const pFlow::uint32> pFlow::multipleSpheresRegionPoints::indices(uint32 elem) const
+pFlow::span<const pFlow::uint32> multipleSpheresRegionPoints::indices(uint32 elem) const
 {
     if (elem >= size())
     {
@@ -59,7 +62,7 @@ pFlow::span<const pFlow::uint32> pFlow::multipleSpheresRegionPoints::indices(uin
     return span<const uint32>(selectedPoints_[elem].data(), selectedPoints_[elem].size());
 }
 
-pFlow::span<pFlow::uint32> pFlow::multipleSpheresRegionPoints::indices(uint32 elem)
+pFlow::span<pFlow::uint32> multipleSpheresRegionPoints::indices(uint32 elem)
 {
     if (elem >= size())
     {
@@ -73,7 +76,7 @@ pFlow::span<pFlow::uint32> pFlow::multipleSpheresRegionPoints::indices(uint32 el
 }
 
 
-bool pFlow::multipleSpheresRegionPoints::update()
+bool multipleSpheresRegionPoints::update()
 {
     const auto points = database().updatePoints();
     for (auto& elem : selectedPoints_)
@@ -94,7 +97,7 @@ bool pFlow::multipleSpheresRegionPoints::update()
     return true;
 }
 
-bool pFlow::multipleSpheresRegionPoints::write(iOstream &os) const
+bool multipleSpheresRegionPoints::write(iOstream &os) const
 {
     os << "# Multiple spheres region points\n";
     os << "#  No." << tab << "centerPoint" << tab << "diameter" << endl;
@@ -110,3 +113,5 @@ bool pFlow::multipleSpheresRegionPoints::write(iOstream &os) const
     os << endl;
     return true;
 }
+
+} // End namespace pFlow::postprocessData

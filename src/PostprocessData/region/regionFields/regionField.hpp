@@ -25,7 +25,7 @@ Licence:
 #include "regionPoints.hpp"
 #include "Field.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename T> 
@@ -119,7 +119,7 @@ public:
 };
 
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #include "regionFieldTemplate.cpp"
 

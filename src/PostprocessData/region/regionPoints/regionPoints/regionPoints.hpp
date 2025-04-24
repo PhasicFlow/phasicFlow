@@ -25,12 +25,16 @@ Licence:
 #include "dictionary.hpp"
 #include "pointStructure.hpp"
 
-
 namespace pFlow
+{
+    class Time;
+}
+
+namespace pFlow::postprocessData
 {
 
 class fieldsDataBase;
-class Time;
+
 
 /**
  * @class regionPoints

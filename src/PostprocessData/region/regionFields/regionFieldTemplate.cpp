@@ -1,6 +1,8 @@
+namespace pFlow::postprocessData
+{
 
 template<typename T> 
-pFlow::regionField<T>::regionField(
+regionField<T>::regionField(
     const word& name, 
     const regionPoints& rPoints,
     const T defaultVal)
@@ -8,3 +10,5 @@ pFlow::regionField<T>::regionField(
     field_(name, "regionFieldValue", rPoints.size(), rPoints.size(), defaultVal),
     regionPoints_(rPoints)
 {}
+
+} // End namespace pFlow::postprocessData

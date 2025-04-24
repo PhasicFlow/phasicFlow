@@ -132,9 +132,8 @@ Licence:
 #include "regionField.hpp"
 #include "includeMask.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
-
 
 class PostprocessOperationAverage
 :
@@ -149,6 +148,9 @@ private:
     uniquePtr<processedRegFieldType>  processedRegFieldPtr_ = nullptr;
 
     uniquePtr<processedRegFieldType>  fluctuation2FieldPtr_ = nullptr;
+
+    /// Pointer to the output stream for writing fluctuation2 results
+    mutable uniquePtr<oFstream>       os2Ptr_ = nullptr;
 
 public:
 
@@ -190,6 +192,10 @@ public:
         return processedRegFieldPtr_();
     }
 
+    /// write to os stream
+    bool write(const fileSystem &parDir)const override;
+
+
     /// @brief Execute average operation on field values
     /// @param weights Weight factors for particles
     /// @return True if successful
@@ -200,6 +206,6 @@ public:
 }; 
 
 
-}
+} // namespace pFlow::postprocessData
 
 #endif //__PostprocessOperationAverage_hpp__

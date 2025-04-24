@@ -25,7 +25,7 @@ Licence:
 #include "GaussianDistribution.hpp"
 #include "numericConstants.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename RegionType>

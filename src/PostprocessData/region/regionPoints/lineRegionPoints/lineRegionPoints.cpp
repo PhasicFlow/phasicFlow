@@ -1,7 +1,10 @@
 #include "lineRegionPoints.hpp"
 #include "fieldsDataBase.hpp"
 
-pFlow::lineRegionPoints::lineRegionPoints
+namespace pFlow::postprocessData
+{
+
+lineRegionPoints::lineRegionPoints
 (
     const dictionary &dict, 
     fieldsDataBase &fieldsDataBase
@@ -50,7 +53,7 @@ pFlow::lineRegionPoints::lineRegionPoints
     }
 }
 
-pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) const
+pFlow::span<const pFlow::uint32> lineRegionPoints::indices(uint32 elem) const
 {
     if(elem >= size())
     {
@@ -65,7 +68,7 @@ pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) c
         selectedPoints_[elem].size());
 }
 
-pFlow::span<pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem)
+pFlow::span<pFlow::uint32> lineRegionPoints::indices(uint32 elem)
 {
     if(elem >= size())
     {
@@ -80,7 +83,7 @@ pFlow::span<pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem)
         selectedPoints_[elem].size());
 }
 
-bool pFlow::lineRegionPoints::update()
+bool lineRegionPoints::update()
 {
     const auto points = database().updatePoints();
     for(auto& elem : selectedPoints_)
@@ -101,7 +104,7 @@ bool pFlow::lineRegionPoints::update()
     return true;
 }
 
-bool pFlow::lineRegionPoints::write(iOstream &os) const
+bool lineRegionPoints::write(iOstream &os) const
 {
     os << "# Spheres along a straight line \n";
     os << "#  No." << tab << "centerPoint" << tab << "diameter" << endl;
@@ -118,3 +121,5 @@ bool pFlow::lineRegionPoints::write(iOstream &os) const
     os << endl;
     return true;
 }
+
+} // End namespace pFlow::postprocessData

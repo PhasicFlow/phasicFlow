@@ -48,10 +48,14 @@ Licence:
 
 namespace pFlow
 {
+	class dictionary;
+}
+
+namespace pFlow::postprocessData
+{
 
 // forward declaration
 class fieldsDataBase;
-class dictionary;
 
 
 class includeMask
@@ -188,7 +192,7 @@ public:
 
 
 
-} // pFlow
+} // pFlow::postprocessData
 
 #endif //__IncludeMask_hpp__
 

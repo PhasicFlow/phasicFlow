@@ -22,9 +22,11 @@ Licence:
 #define __postprocessTimeControl_hpp__
 
 #include "baseTimeControl.hpp"  
+#include "dictionary.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
+
 class postprocessTimeControl 
 : 
     public baseTimeControl
@@ -60,6 +62,6 @@ postprocessTimeControl(
     // Additional methods and members can be added here
 };
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #endif // __postprocessTimeControl_hpp__

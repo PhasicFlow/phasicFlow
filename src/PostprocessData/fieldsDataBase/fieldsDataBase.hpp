@@ -29,13 +29,15 @@ Licence:
 #include "Map.hpp"
 #include "shape.hpp"
 
-
 namespace pFlow
 {
+    class dictionary;
+    class systemControl;
+    class Time;
+}
 
-class dictionary;
-class systemControl;
-class Time;
+namespace pFlow::postprocessData
+{
 
 
 class fieldsDataBase
@@ -311,7 +313,7 @@ public:
         timeValue startTime);
 };
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #include "fieldsDataBaseTemplates.cpp"
 

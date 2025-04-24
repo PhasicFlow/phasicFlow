@@ -23,7 +23,7 @@ Licence:
 
 #include "fileSystem.hpp"
 
-namespace pFlow::postProcessGlobals
+namespace pFlow::postprocessData
 {
 
 static fileSystem defaultDir__;

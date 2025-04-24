@@ -2,7 +2,10 @@
 #include "fieldsDataBase.hpp"
 #include "Time.hpp"
 
-pFlow::regionPoints::regionPoints
+namespace pFlow::postprocessData
+{
+
+regionPoints::regionPoints
 (
     const dictionary &dict, 
     fieldsDataBase &fieldsDataBase
@@ -11,18 +14,20 @@ pFlow::regionPoints::regionPoints
     fieldsDataBase_(fieldsDataBase)
 {}
 
-const pFlow::Time& pFlow::regionPoints::time() const
+const Time& regionPoints::time() const
 {
     return fieldsDataBase_.time();
 }
 
-const pFlow::fieldsDataBase & pFlow::regionPoints::database() const
+const fieldsDataBase & regionPoints::database() const
 {
     return fieldsDataBase_;
 }
 
-pFlow::fieldsDataBase& pFlow::regionPoints::database()
+fieldsDataBase& regionPoints::database()
 {
     return fieldsDataBase_;
 }
+
+} // namespace pFlow::postprocessData
 
