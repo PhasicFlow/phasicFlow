@@ -28,7 +28,7 @@ Licence:
 #include "span.hpp"
 #include "numericConstants.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 class GaussianDistribution

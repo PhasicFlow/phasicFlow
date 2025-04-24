@@ -32,6 +32,9 @@ namespace pFlow
 
 class dictionary;
 
+namespace postprocessData
+{
+
 class uniformDistribution
 {
 private:
@@ -86,6 +89,8 @@ public:
 
 };
 
-}
+} // namespace postprocessData
+
+} // namespace pFlow
 
 #endif //__uniformDistribution_hpp__
