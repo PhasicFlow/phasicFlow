@@ -2,6 +2,9 @@
 
 The `PostprocessData` module in phasicFlow provides powerful tools for analyzing particle-based simulations both during runtime (in-simulation) and after simulation completion (post-simulation). This document explains how to configure and use the postprocessing features through the dictionary-based input system.
 
+- in-simulation: this is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See bellow to see how you can activate in-simulation postprocessing.
+- post-simulation: this is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results that are stored in time-folders. If you want to use post-simulation, you need to run utitlity `postprocessPhasicFlow` in terminal (in the simulation case setup folder) to run the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
+
 ## 1. Overview
 
 Postprocessing in phasicFlow allows you to:
