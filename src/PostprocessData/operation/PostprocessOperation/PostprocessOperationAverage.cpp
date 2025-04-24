@@ -77,6 +77,7 @@ pFlow::PostprocessOperationAverage::PostprocessOperationAverage
     }
 }
 
+
 /// Performs weighted average of field values within each region
 bool pFlow::PostprocessOperationAverage::execute
 (
@@ -109,7 +110,7 @@ bool pFlow::PostprocessOperationAverage::execute
             allField)
     );
     
-    if(calculateFluctuation2_)
+    if(calculateFluctuation2_())
     {
         auto& processedRegField = processedRegFieldPtr_();
         fluctuation2FieldPtr_ = makeUnique<processedRegFieldType>
@@ -135,6 +136,41 @@ bool pFlow::PostprocessOperationAverage::execute
         );
     }
     
+
+    return true;
+}
+
+bool pFlow::PostprocessOperationAverage::write(const fileSystem &parDir) const
+{   
+    if(! postprocessOperation::write(parDir))
+    {
+        return false;
+    }
+    if(!calculateFluctuation2_())
+    {
+        return true;
+    }
+    
+    auto ti = time().TimeInfo();
+
+    if(!os2Ptr_)
+    {
+        fileSystem path = parDir+(
+            processedFieldName()+"_prime2" + ".Start_" + ti.timeName());
+        os2Ptr_ = makeUnique<oFstream>(path);
+        
+        regPoints().write(os2Ptr_());
+    }
+
+    
+    std::visit
+    (
+        [&](auto&& arg)->bool
+        {
+            return writeField(os2Ptr_(), ti.t(), arg, threshold());
+        },
+        fluctuation2FieldPtr_()
+    );
 
     return true;
 }

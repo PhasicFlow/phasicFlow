@@ -150,6 +150,9 @@ private:
 
     uniquePtr<processedRegFieldType>  fluctuation2FieldPtr_ = nullptr;
 
+    /// Pointer to the output stream for writing fluctuation2 results
+    mutable uniquePtr<oFstream>       os2Ptr_ = nullptr;
+
 public:
 
     TypeInfo("PostprocessOperation<average>");
@@ -189,6 +192,10 @@ public:
     {
         return processedRegFieldPtr_();
     }
+
+    /// write to os stream
+    bool write(const fileSystem &parDir)const override;
+
 
     /// @brief Execute average operation on field values
     /// @param weights Weight factors for particles

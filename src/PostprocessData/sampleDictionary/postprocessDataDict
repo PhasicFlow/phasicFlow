@@ -70,6 +70,7 @@ components
             {
                 function	    average;
                 field           velocity;
+                fluctuation2    yes;
                 divideByVolume 	no;  // default is no
                 threshold 	    3;   // default is 1
                 includeMask     all; // default is all
@@ -113,91 +114,44 @@ components
     
     along_a_line
     {
-          processMethod    arithmetic;
+        processMethod    arithmetic;
 
-          processRegion    line;
-          
-          // the time interval for executing the post-processing 
-          // other options: timeStep, default, and settings
-          timeControl simulationTime; 
-          startTime   1.0;
-          endTime     3.0;
-          executionInterval 0.1;
-           
-          
-          // 10 spheres with radius 0.01 along the straight line defined by p1 and  p2 
-          lineInfo
-          {
+        processRegion    line;
+
+        // the time interval for executing the post-processing 
+        // other options: timeStep, default, and settings
+        timeControl simulationTime; 
+        startTime   1.0;
+        endTime     3.0;
+        executionInterval 0.1;
+
+
+        // 10 spheres with radius 0.01 along the straight line defined by p1 and  p2 
+        lineInfo
+        {
             p1        (0 0 0);
             p2        (0 0.15 0.15);
             nSpheres  10;
             radius    0.01;
-          }
-          
-          operations
-          (
-              // computes the arithmetic mean of particle velocity 
-              numberDensity
-              {
-                  function	      sum;
-                  field           one;
-                  divideByVolume  yes;  //default is no 
-              }
-              
-              volumeDensity
-              {
+        }
+
+        operations
+        (
+            // computes the arithmetic mean of particle velocity 
+            numberDensity
+            {
+                function	    sum;
+                field           one;
+                divideByVolume  yes;  //default is no 
+            }
+            
+            volumeDensity
+            {
                 function         sum;
                 field            volume; // 
                 divideByVolume   yes;    //default is no 
-              }
-         );
+            }
+        );
     }
     
 );
-
-
-/* 
-    About processMethod
-
-    This defines the type of the processing method to be done. 
-    The processing is done either on a collection of selected particles (the first three ones)
-    or individual particles (particleProbe).
-
-    Options are:
-    - arithmetic
-    - uniformDistribution
-    - GaussianDistribution
-    - particleProbe (only used with centerPoints)
-
-    When you use the first three optoins, then you can either perform two types of processing is possible
-    - sum
-
-     \f[
-      \text{result} = \sum_{i \in \text{processRegion and includeMask}} w_i \cdot \phi_i \cdot \text{field}_i
-     \f]
-
-    - average
-
-    \f[
-       \text{result} = \frac{1}{V_{\text{region}}} \frac{\sum_{j \in \text{includeMask}} w_j \cdot \phi_j \cdot \text{field}_j}
-                       {\sum_{i \in \text{processRegion}} w_i \cdot \phi_i}
-    \f]
-
-*/
-
-/*
-    About processRegion
-
-    processRegion, defines processing regions on which postprocess operation are performed. Particles 
-    whose centers are inside the regions are selected for post processing operation. Note that
-    you are allowed to use a correct combination of processRegion and processMethod. 
-    For example centerPoints only works with particleProbe.
-
-    Options are:
-    - sphere 
-    - multipleSpheres 
-    - line 
-    - centerPoints (only works with particleProbe)
-    - rectMesh: Not implemented yet 
-    - generalMesh: not implemented yet 
-*/

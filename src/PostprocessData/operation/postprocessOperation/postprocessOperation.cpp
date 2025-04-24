@@ -23,64 +23,6 @@ Licence:
 #include "regionPoints.hpp"
 #include "fieldsDataBase.hpp"
 
-namespace pFlow
-{
-
-template<typename T>
-inline
-bool writeField
-(
-    iOstream&             os,
-    timeValue             t,
-    const regionField<T>  field,
-    uint32                threshold,
-    const T&              defValue=T{}    
-)
-{
-    const auto& regPoints = field.regPoints();
-    const uint32 n = field.size();
-    os<<t<<tab;
-    for(uint32 i=0; i<n; i++)
-    {
-        auto numPar = regPoints.indices(i).size();
-        if(numPar >= threshold)
-        {
-            if constexpr(std::is_same_v<T,realx3>)
-            {
-                os<<field[i].x()<<' '<<field[i].y()<<' '<<field[i].z()<<tab;
-            }
-            else if constexpr( std::is_same_v<T,realx4>)
-            {
-                os << field[i].x() << ' ' << field[i].y() << ' ' << field[i].z() << ' ' << field[i].w() << tab;
-            }
-            else
-            {
-                os<<field[i]<<tab;
-            }
-            
-        }
-        else
-        {
-            if constexpr(std::is_same_v<T,realx3>)
-            {
-                os<<defValue.x()<<' '<<defValue.y()<<' '<<defValue.z()<<tab;
-            }
-            else if constexpr( std::is_same_v<T,realx4>)
-            {
-                os << defValue.x() << ' ' << defValue.y() << ' ' << defValue.z() << ' ' << defValue.w() << tab;
-            }
-            else
-            {
-                os<<defValue<<tab;
-            }
-        }
-
-    }
-    os<<endl;
-    return true;
-}
-
-}
 
 pFlow::postprocessOperation::postprocessOperation
 (

@@ -76,19 +76,12 @@ Licence:
 #include "oFstream.hpp"
 #include "regionField.hpp"
 #include "includeMask.hpp"
+#include "postprocessOperationFunctions.hpp"
 
 namespace pFlow
 {
 
-/// Type alias for processed region field types.
-/// Only regionField<real>, regionField<realx3>, and regionField<realx4> are supported
-/// in the postprocessOperation class.
-using processedRegFieldType = std::variant
-    <
-        regionField<real>,
-        regionField<realx3>,
-        regionField<realx4>
-    >;
+
 
 /// - forward declaration
 class fieldsDataBase;
