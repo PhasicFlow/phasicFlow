@@ -32,6 +32,9 @@ namespace pFlow
 
 class dictionary;
 
+namespace postprocessData
+{
+
 class arithmetic
 {
 private:
@@ -86,6 +89,8 @@ public:
 
 };
 
-}
+} // namespace postprocessData
+
+} // namespace pFlow
 
 #endif //__arithmetic_hpp__
