@@ -5,7 +5,8 @@ This tutorial demonstrates the simulation of a V-blender, a common mixing device
 
 <div align ="center">
   <img src="./v-blender.png" style="width: 400px;">
-  
+</div>
+<div align ="center">  
   <b>
     V-blender simulation with two layers of particles
   </b>
