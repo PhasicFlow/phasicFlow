@@ -6,6 +6,7 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 motionModel rotatingAxis; 
 
 rotatingAxisInfo                                 // information for rotatingAxisMotion motion model 
@@ -25,7 +26,6 @@ surfaces
 	/*
 	    A cylinder with begin and end radii 0.12 m and axis points at (0 0 0) and (0 0 0.1)
 	*/
-
 	cylinder
 	{
 		type cylinderWall;                       // type of the wall
@@ -48,7 +48,6 @@ surfaces
 	/*
 		This is a plane wall at the rear end of cylinder
 	*/
-
 	wall1
 	{
 		type       planeWall;			         // type of the wall
@@ -69,7 +68,6 @@ surfaces
 	/*
 		This is a plane wall at the front end of cylinder
 	*/
-
 	wall2
 	{
 		type       planeWall;                    // type of the wall

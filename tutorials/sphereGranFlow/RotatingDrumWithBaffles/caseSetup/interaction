@@ -6,6 +6,7 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 materials           (lightMat heavyMat wallMat); // a list of materials names
 
 densities           (1000 1500 2500);            // density of materials [kg/m3]  
@@ -14,7 +15,7 @@ contactListType     sortedContactList;
 
 contactSearch
 {
-    method             NBS;                       // method for broad search 
+    method             NBS;
     
     updateInterval     10;
 

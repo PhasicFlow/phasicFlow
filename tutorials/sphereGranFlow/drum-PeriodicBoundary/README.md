@@ -72,7 +72,7 @@ boundaries
 ## Running the Case 
 The solver for this simulation is `sphereGranFlow`. Enter the following commands in the terminal. Depending on the computational power, it may take a few minutes to a few hours to complete. 
 
-```sh
+```
 geometryPhasicFlow
 particlesPhasicFlow
 sphereGranFlow
@@ -81,6 +81,6 @@ sphereGranFlow
 ## Post Processing 
 After finishing the simulation, you can render the results in ParaView. To convert the results to VTK format, just enter the following command in the terminal. This will convert all the results (particles and geometry) to VTK format and store them in the `VTK/` folder. 
 
-```sh
+```
 pFlowToVTK --binary
 ```

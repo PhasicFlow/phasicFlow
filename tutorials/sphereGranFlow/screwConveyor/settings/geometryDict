@@ -40,7 +40,6 @@ surfaces
 		material prop1;     // material name of this wall
 		motion 	 none;		// this surface is not moving ==> none
 	}
-
 }
 
 
