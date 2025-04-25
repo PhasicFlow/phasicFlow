@@ -31,9 +31,9 @@ pFlow::selectorStridedRange::selectAllPointsInRange()
 
 	selectedPoints_.clear();
 
-	for (uint32 i = begin_; i <= end_; i += stride_)
+	for (uint32 i = begin_; i < end_; i += stride_)
 	{
-		selectedPoints_.push_back(i - 1);
+		selectedPoints_.push_back(i);
 	}
 }
 
@@ -59,7 +59,7 @@ pFlow::selectorStridedRange::selectorStridedRange(
     end_(dict.getValOrSet<uint32>("end", pStruct.size())),
     stride_(dict.getValOrSet<uint32>("stride", 1u))
 {
-	begin_  = max(begin_, 1u);
+	begin_  = max(begin_, 0u);
 	end_    = min(end_, static_cast<uint32>(pStruct.size()));
 	stride_ = max(stride_, 1u);
 
