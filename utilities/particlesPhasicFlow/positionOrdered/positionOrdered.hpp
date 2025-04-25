@@ -35,7 +35,8 @@ private:
 
 	dictionary 	poDict_;
 
-	real 		diameter_;
+	/// Minimum distance between centers of particles
+	real 		distance_;
 
 	uint32 		numPoints_;
 	
@@ -86,9 +87,10 @@ public:
 		return static_cast<uint32>(position_.size());
 	}
 
-	real maxDiameter() const final
+	/// Minimum distance between centers of particles
+	real distance() const final
 	{
-		return diameter_;
+		return distance_;
 	}
 	
 	// - const access to position

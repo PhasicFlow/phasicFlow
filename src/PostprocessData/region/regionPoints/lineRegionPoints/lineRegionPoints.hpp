@@ -54,7 +54,7 @@ Licence:
 #include "Vectors.hpp"
 
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 class lineRegionPoints

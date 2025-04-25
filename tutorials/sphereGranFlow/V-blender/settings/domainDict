@@ -10,9 +10,9 @@ fileFormat  ASCII;
 // Simulation domain: every particles that goes outside this domain will be deleted
 globalBox                                        
 {
-    min  (-0.1 -0.4 0);                          // lower corner point of the box 
+    min  (-0.1 -0.4 0);       // lower corner point of the box 
 
-    max (0.86 0.6 0.6);                          // upper corner point of the box 
+    max (0.86 0.6 0.6);       // upper corner point of the box 
 }
 
 boundaries
@@ -20,31 +20,31 @@ boundaries
     
     left
     {
-        type     exit;                           // other options: periodic, reflective 
+        type     exit;        // other options: periodic, reflective 
     }
 
     right
     {
-        type     exit;                           // other options: periodict, reflective 
+        type     exit;        // other options: periodic, reflective 
     }
 
     bottom
     {
-        type     exit;                           // other options: periodict, reflective 
+        type     exit;        // other options: periodic, reflective 
     }
 
     top
     {
-        type     exit;                           // other options: periodict, reflective 
+        type     exit;        // other options: periodic, reflective 
     }
 
     rear
     {
-        type     exit;                           // other options: periodict, reflective 
+        type     exit;        // other options: periodic, reflective 
     }
 
     front
     {
-        type     exit;                           // other options: periodict, reflective 
+        type     exit;        // other options: periodic, reflective 
     }
 }

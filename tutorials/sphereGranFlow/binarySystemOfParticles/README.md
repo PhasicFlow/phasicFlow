@@ -47,9 +47,9 @@ positionParticles
     method ordered;         // other options: random or empty
     orderedInfo
     {        
-           diameter     0.005;     // minimum space between centers of particles
-          numPoints     30000;     // number of particles in the simulation 
-        axisOrder       (z x y);   // axis order for filling the space with particles
+        distance   0.005;     // minimum space between centers of particles
+        numPoints  30000;     // number of particles in the simulation 
+        axisOrder  (z x y);   // axis order for filling the space with particles
     }
 
     regionType cylinder;                                   // other options: box and sphere 

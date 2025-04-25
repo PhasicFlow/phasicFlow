@@ -1,26 +1,19 @@
 #include "postSimulationFieldsDataBase.hpp"
 #include "vocabs.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
-bool pointFieldGetType
-(
-    const word& objectType, 
-    word& fieldType, 
-    word& fieldSpace
-);
 
-}
 
-bool pFlow::postSimulationFieldsDataBase::pointFieldNameExists(const word& name) const
+bool postSimulationFieldsDataBase::pointFieldNameExists(const word& name) const
 {
     if(currentFileFields_.contains(name)) return true;
     if(time().lookupObjectName(name)) return true;
     return false;
 }
 
-bool pFlow::postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
+bool postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
 {
     if(time().lookupObjectName(name)) return true;
     if(auto [iter, success]=currentFileFields_.findIf(name); success)
@@ -116,7 +109,7 @@ bool pFlow::postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
     return true;
 }
 
-bool pFlow::postSimulationFieldsDataBase::loadPointStructureToTime()
+bool postSimulationFieldsDataBase::loadPointStructureToTime()
 {
     if(!pStructPtr_)
     {
@@ -126,7 +119,7 @@ bool pFlow::postSimulationFieldsDataBase::loadPointStructureToTime()
     return true;
 }
 
-const pFlow::shape &pFlow::postSimulationFieldsDataBase::getShape() const
+const shape &postSimulationFieldsDataBase::getShape() const
 {
     if(!shapePtr_)
     {
@@ -143,7 +136,7 @@ const pFlow::shape &pFlow::postSimulationFieldsDataBase::getShape() const
     return shapePtr_();
 }
 
-pFlow::word pFlow::postSimulationFieldsDataBase::getPointFieldType(const word &name) const
+word postSimulationFieldsDataBase::getPointFieldType(const word &name) const
 {
     if(auto [iter, success]=currentFileFields_.findIf(name); success)
     {
@@ -159,7 +152,7 @@ pFlow::word pFlow::postSimulationFieldsDataBase::getPointFieldType(const word &n
     return "";
 }
 
-bool pFlow::postSimulationFieldsDataBase::setToCurrentFolder()
+bool postSimulationFieldsDataBase::setToCurrentFolder()
 {
     allPointFields_.clear();
     pStructPtr_.reset(nullptr);
@@ -184,7 +177,7 @@ bool pFlow::postSimulationFieldsDataBase::setToCurrentFolder()
     word type, space;
     for(auto& [name, objectType]: files)
     {
-        if(pointFieldGetType(objectType, type, space))
+        if(fieldsDataBase::pointFieldGetType(objectType, type, space))
         {
             if(name == pointStructureFile__) continue;
             currentFileFields_.insertIf(name, type);
@@ -194,7 +187,7 @@ bool pFlow::postSimulationFieldsDataBase::setToCurrentFolder()
     return true;
 }
 
-pFlow::postSimulationFieldsDataBase::postSimulationFieldsDataBase
+postSimulationFieldsDataBase::postSimulationFieldsDataBase
 (
     systemControl &control,
     const dictionary& postDict,
@@ -233,17 +226,17 @@ pFlow::postSimulationFieldsDataBase::postSimulationFieldsDataBase
     }
 }
 
-const pFlow::pointStructure& pFlow::postSimulationFieldsDataBase::pStruct()const
+const pointStructure& postSimulationFieldsDataBase::pStruct()const
 {
     return pStructPtr_();
 }
 
-pFlow::timeValue pFlow::postSimulationFieldsDataBase::getNextTimeFolder() const
+timeValue postSimulationFieldsDataBase::getNextTimeFolder() const
 {
     return allValidFolders_.nextTime();
 }
 
-pFlow::timeValue pFlow::postSimulationFieldsDataBase::setToNextTimeFolder()
+timeValue postSimulationFieldsDataBase::setToNextTimeFolder()
 {
     timeValue nextTime = allValidFolders_.nextTime();
     if(nextTime < 0.0) return nextTime;
@@ -261,7 +254,7 @@ pFlow::timeValue pFlow::postSimulationFieldsDataBase::setToNextTimeFolder()
     return nextTime;
 }
 
-pFlow::timeValue pFlow::postSimulationFieldsDataBase::skipNextTimeFolder()
+timeValue postSimulationFieldsDataBase::skipNextTimeFolder()
 {
     timeValue nextTime = allValidFolders_.nextTime();
     if(nextTime < 0.0) return nextTime;
@@ -269,3 +262,5 @@ pFlow::timeValue pFlow::postSimulationFieldsDataBase::skipNextTimeFolder()
     allValidFolders_++;
     return nextTime;
 }
+
+} // namespace pFlow::postprocessData

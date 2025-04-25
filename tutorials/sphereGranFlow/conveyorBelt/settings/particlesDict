@@ -6,16 +6,14 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 setFields
 {
 	/*
 	    Default value for fields defined for particles
-
 		These fields should always be defined for simulations with 
-
 		spherical particles.
 	*/
-
 	defaultValue 
 	{
 		velocity 		realx3 	    (0 0 0);     // linear velocity (m/s)
@@ -31,17 +29,8 @@ setFields
 	{}
 }
 
-positionParticles                                // positions particles 
+positionParticles  
 {
-	method                empty;                 // other options: ordered and random 
-
-	regionType              box;                 // other options: cylinder and sphere  
-
-	boxInfo                                      // box region for positioning particles 
-	{
-		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
-
-		max ( 0.08  0.08 0.098);	             // upper corner point of the box 
-	} 
+	method                empty;  // other options: file, ordered and random 
 }
 

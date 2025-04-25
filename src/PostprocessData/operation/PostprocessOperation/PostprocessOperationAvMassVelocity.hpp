@@ -132,7 +132,7 @@ Licence:
 #include "regionField.hpp"
 #include "includeMask.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 
@@ -168,6 +168,6 @@ public:
 }; 
 
 
-}
+} // namespace pFlow::postprocessData
 
 #endif //__PostprocessOperationAvMassVelocity_hpp__

@@ -1,7 +1,10 @@
 #include "lineRegionPoints.hpp"
 #include "fieldsDataBase.hpp"
 
-pFlow::lineRegionPoints::lineRegionPoints
+namespace pFlow::postprocessData
+{
+
+lineRegionPoints::lineRegionPoints
 (
     const dictionary &dict, 
     fieldsDataBase &fieldsDataBase
@@ -14,7 +17,7 @@ pFlow::lineRegionPoints::lineRegionPoints
     selectedPoints_("selectedPoints")
 {
     const auto& lDict = dict.subDict("lineInfo");
-    uint32 nPoints = lDict.getValMax<uint32>("numPoints",2);
+    uint32 nSpheres = lDict.getValMax<uint32>("nSpheres",2);
     realList raddi;
 
     if( lDict.containsDataEntry("radii"))
@@ -24,24 +27,24 @@ pFlow::lineRegionPoints::lineRegionPoints
     else
     {
         auto r = lDict.getVal<real>("radius");
-        raddi = realList(nPoints, r);
+        raddi = realList(nSpheres, r);
     }
 
-    if(raddi.size() != nPoints)
+    if(raddi.size() != nSpheres)
     {
         fatalErrorInFunction
-            << "The number elements in of radii list should be equal to the "
-            << "number of points"<<endl;
+            << "The number of elements in the radii list should be equal to the "
+            << "nSpheres"<<endl;
             fatalExit;
     }
     
-    sphereRegions_.resize(nPoints, sphere(realx3(0,0,0),1));
-    centerPoints_.resize(nPoints);
-    volumes_.resize(nPoints);
-    diameters_.resize(nPoints);
-    selectedPoints_.resize(nPoints);
-    real dt = 1.0/(nPoints-1);
-    for(uint32 i = 0; i < nPoints; ++i)
+    sphereRegions_.resize(nSpheres, sphere(realx3(0,0,0),1));
+    centerPoints_.resize(nSpheres);
+    volumes_.resize(nSpheres);
+    diameters_.resize(nSpheres);
+    selectedPoints_.resize(nSpheres);
+    real dt = 1.0/(nSpheres-1);
+    for(uint32 i = 0; i < nSpheres; ++i)
     {
         centerPoints_[i] = line_.point(i*dt);
         sphereRegions_[i] = pFlow::sphere(centerPoints_[i], raddi[i]);
@@ -50,7 +53,7 @@ pFlow::lineRegionPoints::lineRegionPoints
     }
 }
 
-pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) const
+pFlow::span<const pFlow::uint32> lineRegionPoints::indices(uint32 elem) const
 {
     if(elem >= size())
     {
@@ -65,7 +68,7 @@ pFlow::span<const pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem) c
         selectedPoints_[elem].size());
 }
 
-pFlow::span<pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem)
+pFlow::span<pFlow::uint32> lineRegionPoints::indices(uint32 elem)
 {
     if(elem >= size())
     {
@@ -80,7 +83,7 @@ pFlow::span<pFlow::uint32> pFlow::lineRegionPoints::indices(uint32 elem)
         selectedPoints_[elem].size());
 }
 
-bool pFlow::lineRegionPoints::update()
+bool lineRegionPoints::update()
 {
     const auto points = database().updatePoints();
     for(auto& elem : selectedPoints_)
@@ -101,7 +104,7 @@ bool pFlow::lineRegionPoints::update()
     return true;
 }
 
-bool pFlow::lineRegionPoints::write(iOstream &os) const
+bool lineRegionPoints::write(iOstream &os) const
 {
     os << "# Spheres along a straight line \n";
     os << "#  No." << tab << "centerPoint" << tab << "diameter" << endl;
@@ -118,3 +121,5 @@ bool pFlow::lineRegionPoints::write(iOstream &os) const
     os << endl;
     return true;
 }
+
+} // End namespace pFlow::postprocessData

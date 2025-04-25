@@ -51,7 +51,7 @@ Licence:
 #include "sphere.hpp"
 #include "Vectors.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 class multipleSpheresRegionPoints

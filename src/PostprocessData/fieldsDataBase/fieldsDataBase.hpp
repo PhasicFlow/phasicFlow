@@ -29,13 +29,15 @@ Licence:
 #include "Map.hpp"
 #include "shape.hpp"
 
-
 namespace pFlow
 {
+    class dictionary;
+    class systemControl;
+    class Time;
+}
 
-class dictionary;
-class systemControl;
-class Time;
+namespace pFlow::postprocessData
+{
 
 
 class fieldsDataBase
@@ -302,6 +304,12 @@ public:
         {
             return -1.0;
         }
+    
+    static
+    bool pointFieldGetType(
+        const word& TYPENAME, 
+        word& fieldType, 
+        word& fieldSpace);
 
     static
     uniquePtr<fieldsDataBase> create(
@@ -311,7 +319,7 @@ public:
         timeValue startTime);
 };
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #include "fieldsDataBaseTemplates.cpp"
 

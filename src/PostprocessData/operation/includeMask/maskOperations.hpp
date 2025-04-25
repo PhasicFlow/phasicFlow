@@ -24,7 +24,7 @@ Licence:
 #include "types.hpp"
 #include "dictionary.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename T>
@@ -176,6 +176,6 @@ public:
 	}
 };
 
-}
+} // namespace pFlow::postprocessData
 
 #endif //__maskOperation_hpp__
