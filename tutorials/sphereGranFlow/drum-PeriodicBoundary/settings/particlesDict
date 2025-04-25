@@ -2,33 +2,33 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	particlesDict;
-objectType 	dictionary;
+objectName  particlesDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 setFields
 {
-	/*
-	  Default value for fields defined for particles
-	  These fields should always be defined for simulations with 
-	  spherical particles.
-	*/
-	defaultValue 
-	{
-		velocity 		realx3 	(0 0 0);         // linear velocity (m/s)
+    /*
+      Default value for fields defined for particles
+      These fields should always be defined for simulations with 
+      spherical particles.
+    */
+    defaultValue 
+    {
+        velocity        realx3  (0 0 0);         // linear velocity (m/s)
 
-		acceleration 	realx3 	(0 0 0);         // linear acceleration (m/s2)
+        acceleration    realx3  (0 0 0);         // linear acceleration (m/s2)
 
-		rVelocity 		realx3 	(0 0 0);         // rotational velocity (rad/s)
+        rVelocity       realx3  (0 0 0);         // rotational velocity (rad/s)
 
-		shapeName 		word	sphere1;         // name of the particle shape 
-	}
+        shapeName       word    sphere1;         // name of the particle shape 
+    }
 
-	selectors
-	{}
+    selectors
+    {}
 }
 
 positionParticles                              
 {
-	method empty;     // no particle at the start of simulation 
+    method empty;     // no particle at the start of simulation 
 }

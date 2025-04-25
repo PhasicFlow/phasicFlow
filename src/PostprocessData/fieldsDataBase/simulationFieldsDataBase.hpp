@@ -23,7 +23,7 @@ Licence:
 
 #include "fieldsDataBase.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 class simulationFieldsDataBase 

@@ -2,58 +2,55 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	particlesDict;
-objectType 	dictionary;
+objectName  particlesDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 setFields
 {
-	/*
-	    Default value for fields defined for particles
+    /*
+        Default value for fields defined for particles
+        These fields should always be defined for simulations with 
+        spherical particles.
+    */
+    defaultValue 
+    {
+        velocity        realx3  (0 0 0);         // linear velocity (m/s)
 
-		These fields should always be defined for simulations with 
+        acceleration    realx3  (0 0 0);         // linear acceleration (m/s2)
 
-		spherical particles.
-	*/
+        rVelocity       realx3  (0 0 0);         // rotational velocity (rad/s)
 
-	defaultValue 
-	{
-		velocity 		realx3 	(0 0 0);         // linear velocity (m/s)
+        shapeName       word    sphere1;         // name of the particle shape 
+    }
 
-		acceleration 	realx3 	(0 0 0);         // linear acceleration (m/s2)
+    selectors
+    {
 
-		rVelocity 		realx3 	(0 0 0);         // rotational velocity (rad/s)
-
-		shapeName 		word	sphere1;         // name of the particle shape 
-	}
-
-	selectors
-	{
-
-	}
+    }
 }
 
 positionParticles                                // positions particles 
 {
-	method ordered;     		                 // other options: random and empty
+    method         ordered;                      // other options: random and empty
 
-	mortonSorting 			   Yes;              // perform initial sorting based on morton code?   
+    mortonSorting  Yes;                          // perform initial sorting based on morton code?   
 
-	orderedInfo
-	{
-		diameter  0.004; 						 // minimum space between centers of particles
+    orderedInfo
+    {
+        distance  0.004;                         // minimum distance between particles centers
 
-		numPoints 30000; 	                     // number of particles in the simulation 
+        numPoints 30000;                         // number of particles in the simulation 
 
-		axisOrder (z y x);                       // axis order for filling the space with particles
-	}
+        axisOrder (z y x);                       // axis order for filling the space with particles
+    }
 
-	regionType box;                              // other options: cylinder and sphere  
+    regionType      box;                         // other options: cylinder and sphere  
 
-	boxInfo  				                     // box information for positioning particles 
-	{
-		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
+    boxInfo                                      // box information for positioning particles 
+    {
+        min (-0.08 -0.08 0.015);                 // lower corner point of the box 
 
-		max ( 0.08  0.08 0.098);	             // upper corner point of the box 
-	}
+        max ( 0.08  0.08 0.098);                 // upper corner point of the box 
+    }
 }

@@ -1,7 +1,10 @@
 #include "sphereRegionPoints.hpp"
 #include "fieldsDataBase.hpp"
 
-pFlow::sphereRegionPoints::sphereRegionPoints
+namespace pFlow::postprocessData
+{
+
+sphereRegionPoints::sphereRegionPoints
 (
     const dictionary &dict, 
     fieldsDataBase &fieldsDataBase
@@ -15,7 +18,7 @@ pFlow::sphereRegionPoints::sphereRegionPoints
 {
 }
 
-bool pFlow::sphereRegionPoints::update()
+bool sphereRegionPoints::update()
 {
     const auto points = database().updatePoints();
     selectedPoints_.clear();
@@ -30,7 +33,7 @@ bool pFlow::sphereRegionPoints::update()
     return true;
 }
 
-bool pFlow::sphereRegionPoints::write(iOstream &os) const
+bool sphereRegionPoints::write(iOstream &os) const
 {
     os <<"# Single sphere\n";
     os <<"# center point: "<<sphereRegion_.center()<<endl;
@@ -39,3 +42,5 @@ bool pFlow::sphereRegionPoints::write(iOstream &os) const
     
     return true;
 }
+
+} // End namespace pFlow::postprocessData

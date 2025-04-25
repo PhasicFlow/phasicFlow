@@ -1,6 +1,9 @@
 #include "PostprocessOperationAvMassVelocity.hpp"
 
-pFlow::PostprocessOperationAvMassVelocity::PostprocessOperationAvMassVelocity
+namespace pFlow::postprocessData
+{
+
+PostprocessOperationAvMassVelocity::PostprocessOperationAvMassVelocity
 (
     const dictionary &opDict, 
     const regionPoints &regPoints, 
@@ -17,4 +20,6 @@ pFlow::PostprocessOperationAvMassVelocity::PostprocessOperationAvMassVelocity
         fieldsDB
     )
 {
+}
+
 }

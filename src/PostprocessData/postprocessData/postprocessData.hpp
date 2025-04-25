@@ -28,13 +28,17 @@ Licence:
 #include "fieldsDataBase.hpp"
 #include "postprocessComponent.hpp"
 
-
-namespace pFlow 
+namespace pFlow
 {
 
 class systemControl;
 class Time;
 class timeInfo;
+
+}
+
+namespace pFlow::postprocessData 
+{
 
 
 /**
@@ -109,6 +113,6 @@ public:
     void setOutputDirectory(const fileSystem& path)const;
 };
 
-} // namespace pFlow
+} // namespace pFlow::postprocessData
 
 #endif // __postprocessData_hpp__

@@ -24,7 +24,7 @@ Licence:
 #include "PostprocessComponent.hpp"
 #include "arithmetic.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 template<typename RegionType>

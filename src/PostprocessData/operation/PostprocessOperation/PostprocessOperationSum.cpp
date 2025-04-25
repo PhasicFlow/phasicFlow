@@ -3,8 +3,11 @@
 #include "fieldsDataBase.hpp"
 #include "operationFunctions.hpp"
 
+namespace pFlow::postprocessData
+{
+
 /// Constructs sum processor and initializes result field based on input field type
-pFlow::PostprocessOperationSum::PostprocessOperationSum
+PostprocessOperationSum::PostprocessOperationSum
 (
     const dictionary &opDict, 
     const regionPoints &regPoints, 
@@ -39,7 +42,7 @@ pFlow::PostprocessOperationSum::PostprocessOperationSum
 }
 
 /// Performs weighted sum of field values within each region
-bool pFlow::PostprocessOperationSum::execute
+bool PostprocessOperationSum::execute
 (
     const std::vector<span<real>>& weights,
     const regionField<real>& volFactor
@@ -71,4 +74,7 @@ bool pFlow::PostprocessOperationSum::execute
     );
    
     return true;
+}
+
+
 }

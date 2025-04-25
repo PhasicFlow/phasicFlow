@@ -6,15 +6,16 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials        (wallMat lightMat);             // a list of materials names
 
-densities               (1000 1000);             // density of materials [kg/m3]
+materials        (wallMat lightMat);        // a list of materials names
+
+densities               (1000 1000);        // density of materials [kg/m3]
 
 contactListType   sortedContactList; 
 
 contactSearch
 {
-    method         NBS;                          // method for broad search 
+    method         NBS;  
 
     updateInterval   10;
 
@@ -33,22 +34,22 @@ model
 
 
     Yeff (1.0e6 1.0e6 
-               1.0e6);                           // Young modulus [Pa]
+               1.0e6);      // Young modulus [Pa]
 
     Geff (0.8e6 0.8e6
-               0.8e6);                           // Shear modulus [Pa]
+               0.8e6);      // Shear modulus [Pa]
 
     nu     (0.25 0.25
-                0.25);                           // Poisson's ratio [-]
+                0.25);      // Poisson's ratio [-]
 
     en     (0.97 0.85
-                0.97);                           // coefficient of normal restitution
+                0.97);      // coefficient of normal restitution
 
     mu     (0.65 0.35 
-                0.65);                           // dynamic friction
+                0.65);      // dynamic friction
 
     mur      (0.1 0.1
-                 0.1);                           // rolling friction
+                 0.1);      // rolling friction
         
 }
 

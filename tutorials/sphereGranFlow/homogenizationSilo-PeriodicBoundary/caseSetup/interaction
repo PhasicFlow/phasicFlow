@@ -37,7 +37,6 @@ model
                                  heavyMat-heavyMat    heavyMat-wallMat
                                                       wallMat-wallMat  );
    */
-
    Yeff (1.0e6 1.0e6 1.0e6                       // Young modulus [Pa]
                1.0e6 1.0e6
                      1.0e6);

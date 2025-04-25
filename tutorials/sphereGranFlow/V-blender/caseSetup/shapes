@@ -7,8 +7,8 @@ objectType  sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
-names       (smallSphere largeSphere);           // names of particles
+names       (smallSphere largeSphere);     // names of particles
 
-diameters               (0.01 0.0101);           // diameter of particles
+diameters               (0.01 0.0101);     // diameter of particles
 
-materials         (lightMat lightMat);           // material names for particles
+materials         (lightMat lightMat);     // material names for particles

@@ -6,7 +6,9 @@ objectName     domainDict;
 objectType     dictionary;
 fileFormat     ASCII;
 /*---------------------------------------------------------------------------*/
-globalBox                                        // Simulation domain: every particles that goes outside this domain will be deleted
+
+// Simulation domain: every particles that goes outside this domain will be deleted
+globalBox                                        
 {
     min (-0.12 -0.12 0);
 

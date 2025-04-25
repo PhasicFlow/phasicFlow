@@ -20,31 +20,34 @@ Licence:
 
 #include "IncludeMask.hpp"
 
+namespace pFlow::postprocessData
+{
+
 // real
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareOne<pFlow::real, pFlow::lessThanOp> >;
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareOne<pFlow::real, pFlow::lessThanEqOp> >;
+template class IncludeMask<real, compareOne<real, lessThanOp> >;
+template class IncludeMask<real, compareOne<real, lessThanEqOp> >;
 
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareOne<pFlow::real, pFlow::greaterThanOp> >;
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareOne<pFlow::real, pFlow::greaterThanEqOp> >;
+template class IncludeMask<real, compareOne<real, greaterThanOp> >;
+template class IncludeMask<real, compareOne<real, greaterThanEqOp> >;
 
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareOne<pFlow::real, pFlow::equalOp> >;
+template class IncludeMask<real, compareOne<real, equalOp> >;
 
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareTwo<pFlow::real, pFlow::betweenOp> >;
-template class pFlow::IncludeMask<pFlow::real, pFlow::compareTwo<pFlow::real, pFlow::betweenEqOp> >;
+template class IncludeMask<real, compareTwo<real, betweenOp> >;
+template class IncludeMask<real, compareTwo<real, betweenEqOp> >;
 
-template class pFlow::IncludeMask<pFlow::real, pFlow::allOp<pFlow::real>>;
+template class IncludeMask<real, allOp<real>>;
 
 // realx3
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareOne<pFlow::realx3, pFlow::lessThanOp> >;
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareOne<pFlow::realx3, pFlow::lessThanEqOp> >;
+template class IncludeMask<realx3, compareOne<realx3, lessThanOp> >;
+template class IncludeMask<realx3, compareOne<realx3, lessThanEqOp> >;
 
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareOne<pFlow::realx3, pFlow::greaterThanOp> >;
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareOne<pFlow::realx3, pFlow::greaterThanEqOp> >;
+template class IncludeMask<realx3, compareOne<realx3, greaterThanOp> >;
+template class IncludeMask<realx3, compareOne<realx3, greaterThanEqOp> >;
 
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareOne<pFlow::realx3, pFlow::equalOp> >;
+template class IncludeMask<realx3, compareOne<realx3, equalOp> >;
 
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareTwo<pFlow::realx3, pFlow::betweenOp> >;
-template class pFlow::IncludeMask<pFlow::realx3, pFlow::compareTwo<pFlow::realx3, pFlow::betweenEqOp> >;
+template class IncludeMask<realx3, compareTwo<realx3, betweenOp> >;
+template class IncludeMask<realx3, compareTwo<realx3, betweenEqOp> >;
 
 
-// realx4
+} // postprocessData

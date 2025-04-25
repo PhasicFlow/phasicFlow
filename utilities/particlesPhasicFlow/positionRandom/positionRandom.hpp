@@ -32,23 +32,25 @@ class positionRandom : public positionParticles
 {
 private:
 
-	dictionary   prDict_;
+	dictionary 	prDict_;
 
-	real         diameter_;
+	real         distance_;
 
-	uint32       numPoints_;
+	uint32 		numPoints_;
 
-	uint32       maxIterations_;
+	uint32 		maxIterations_;
+
+	uint32 		reportInterval_ = 100;
 
 	realx3Vector position_;
 
+	// still keeping this variable name as diameters_ since it stores
+	// the collection of distance values
 	realVector   diameters_;
 
-	uint32       reportInterval_;
+	bool positionOnePass(collisionCheck& collCheck);
 
-	bool         positionOnePass(collisionCheck& collCheck);
-
-	bool         positionPointsRandom();
+	bool positionPointsRandom();
 
 public:
 
@@ -79,9 +81,9 @@ public:
 		return position_.size();
 	}
 
-	real maxDiameter() const override
+	real distance() const override
 	{
-		return diameter_;
+		return distance_;
 	}
 
 	// - const access to position

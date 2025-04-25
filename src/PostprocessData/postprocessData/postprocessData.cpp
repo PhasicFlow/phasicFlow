@@ -1,4 +1,3 @@
-
 /*------------------------------- phasicFlow ---------------------------------
       O        C enter of
      O O       E ngineering and
@@ -25,7 +24,7 @@ Licence:
 #include "postprocessGlobals.hpp"
 #include "postprocessComponent.hpp"
 
-pFlow::postprocessData::postprocessData
+pFlow::postprocessData::postprocessData::postprocessData
 (
     const systemControl &control,
     timeValue startTime
@@ -45,7 +44,7 @@ pFlow::postprocessData::postprocessData
         )
     )
 {
-    postProcessGlobals::defaultDir__ = CWD()/pFlow::postProcessGlobals::defaultRelDir__;
+    defaultDir__ = CWD()/defaultRelDir__;
     
     // if dictionary is not provided, no extra action is required. 
     if( !dict_.fileExist() || !dict_.headerOk() )
@@ -98,8 +97,10 @@ pFlow::postprocessData::postprocessData
 
 }
 
-bool pFlow::postprocessData::execute() 
+bool pFlow::postprocessData::postprocessData::execute() 
 {
+    if( inSimulation_ && !activeInSimulation_() ) return true; 
+
     const auto& ti = time_.TimeInfo();
 
     for(auto& component:postprocesses_)
@@ -116,8 +117,10 @@ bool pFlow::postprocessData::execute()
     return true;
 }
 
-bool pFlow::postprocessData::write() const
+bool pFlow::postprocessData::postprocessData::write() const
 {
+    if( inSimulation_ && !activeInSimulation_() ) return true; 
+    
     for(auto& component:postprocesses_)
     {   
         if(!component->executed())
@@ -125,7 +128,7 @@ bool pFlow::postprocessData::write() const
             continue;
         }
 
-        if(!component->write(postProcessGlobals::defaultDir__/component->name()))
+        if(!component->write(defaultDir__/component->name()))
         {
             fatalErrorInFunction
                 <<"Error occured in writing postprocess component: "
@@ -136,7 +139,7 @@ bool pFlow::postprocessData::write() const
     return true;
 }
 
-void pFlow::postprocessData::setOutputDirectory(const fileSystem &path) const
+void pFlow::postprocessData::postprocessData::setOutputDirectory(const fileSystem &path) const
 {
-    postProcessGlobals::defaultDir__ = path;
+    defaultDir__ = path;
 }

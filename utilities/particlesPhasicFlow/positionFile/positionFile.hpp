@@ -74,9 +74,9 @@ public:
 		return static_cast<uint32>(position_.size());
 	}
 
-	real maxDiameter() const final
+	real distance() const final
 	{
-		return 0;
+		return 1.0;
 	}
 
 	// bool commaSeparated()const

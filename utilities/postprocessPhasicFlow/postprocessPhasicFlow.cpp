@@ -30,7 +30,7 @@ Licence:
 int main(int argc, char** argv )
 { 
 
-	pFlow::word outFolder = (pFlow::CWD()/pFlow::postProcessGlobals::defaultRelDir__).wordPath();
+	pFlow::word outFolder = (pFlow::CWD()/pFlow::postprocessData::defaultRelDir__).wordPath();
 
 	pFlow::commandLine cmds(
 		"postprocessPhasicFlow",
@@ -40,7 +40,7 @@ int main(int argc, char** argv )
 	pFlow::wordVector times;
 	
 	pFlow::word description = "path to output folder of postprocess data: ./"
-		+ pFlow::postProcessGlobals::defaultRelDir__;
+		+ pFlow::postprocessData::defaultRelDir__;
 
 	cmds.addOption("-o,--out-folder",
 		outFolder,
@@ -50,7 +50,7 @@ int main(int argc, char** argv )
 	cmds.addOption(
 		"-t,--time",
 		times.vectorField(),
-		"a SPACE separated lits of time folders, "
+		"a SPACE separated list of time folders, "
 		"or a strided range <begin>:<stride>:<end>, or an interval <begin>:<end>",
 		" ");
 
@@ -99,7 +99,7 @@ int main(int argc, char** argv )
 		fatalExit;
 	}
 
-	pFlow::postprocessData postprocess(Control, nextTime);
+	pFlow::postprocessData::postprocessData postprocess(Control, nextTime);
 	postprocess.setOutputDirectory(pFlow::fileSystem(outFolder+"/").absolute());
 	
 	bool folderSkipped = false;

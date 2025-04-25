@@ -9,7 +9,7 @@
 #include "types.hpp"
 #include "span.hpp"
 
-namespace pFlow
+namespace pFlow::postprocessData
 {
 
 
