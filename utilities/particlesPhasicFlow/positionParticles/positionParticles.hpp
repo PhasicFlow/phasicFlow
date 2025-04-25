@@ -83,7 +83,8 @@ public:
 
 	virtual uint32 size()const = 0;
 
-	virtual real maxDiameter() const = 0;
+	/// Minimum distance between centers of particles
+	virtual real distance() const = 0;
 
 	// - const access to position
 	virtual const realx3Vector& position()const = 0;
