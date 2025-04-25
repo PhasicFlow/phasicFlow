@@ -64,7 +64,7 @@ public:
 		return 0;
 	}
 
-	real maxDiameter() const final
+	real distance() const final
 	{
 		return 1.0;
 	}
