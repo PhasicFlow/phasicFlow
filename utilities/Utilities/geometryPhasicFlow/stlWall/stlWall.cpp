@@ -31,6 +31,11 @@ bool pFlow::stlWall::readSTLWall
 {
 	auto fileName = dict.getVal<word>("file");
 
+	real scale = dict.getValOrSet("scale", static_cast<real>(1.0));
+
+	realx3 transform = dict.getValOrSet<realx3>("transform", realx3(0));
+
+	auto scaleFirst = dict.getValOrSet("scaleFirst", Logical("Yes"));
 	
 	fileSystem file("./stl",fileName);
 
@@ -42,12 +47,37 @@ bool pFlow::stlWall::readSTLWall
 		return false;
 	}
 
-	for(uint64 i=0; i<stl.size(); i++)
+	// Scale and transform the stl vertex
+	realx3x3Vector newStlVertx;
+	for(uint64 i = 0; i < stl.size(); i++)
 	{
-		auto it = triangles_.end();
-		triangles_.insert(it, stl.solid(i).begin(), stl.solid(i).end());
+		for(uint64 j = 0; j < stl.solid(i).size(); j++)
+		{
+			realx3x3 tri;
+
+			if(scaleFirst)
+			{
+				tri.x() = stl.solid(i)[j].x() * scale + transform.x();
+				tri.y() = stl.solid(i)[j].y() * scale + transform.y();
+				tri.z() = stl.solid(i)[j].z() * scale + transform.z();
+			}
+			else
+			{
+				tri.x() = (stl.solid(i)[j].x() + transform.x()) * scale;
+				tri.y() = (stl.solid(i)[j].y() + transform.y()) * scale;
+				tri.z() = (stl.solid(i)[j].z() + transform.z()) * scale;
+			}
+
+			newStlVertx.push_back(tri);
+		}
 	}
 
+	// Insert the new vertex to the triangles_
+	for(uint64 i = 0; i < stl.size(); i++)
+	{
+		auto it = triangles_.end();
+		triangles_.insert(it, newStlVertx.begin(), newStlVertx.end());
+	}
 	
 
 	return true;
