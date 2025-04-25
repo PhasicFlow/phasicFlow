@@ -24,7 +24,7 @@ positionParticles
 		
 	positionOrderedInfo
 	{		
-		diameter 0.005; 	// minimum space between centers of particles
+		distance 0.005; 	// minimum distance between particles centers
 		numPoints 30000; 	// number of particles in the simulation 
 		axisOrder (z x y);  // axis order for filling the space with particles
 	}
@@ -41,7 +41,7 @@ setFields
 	{
 		velocity 		realx3 	(0 0 0); // linear velocity (m/s)
 		acceleration 	realx3 	(0 0 0); // linear acceleration (m/s2)
-		r	Velocity 	realx3 	(0 0 0); // rotational velocity (rad/s)
+		rVelocity 		realx3 	(0 0 0); // rotational velocity (rad/s)
 		shapeName 		word	smallSphere; // name of the particle shape 
 	}
 
@@ -53,7 +53,8 @@ setFields
 			selectRandomInfo
 			{
 				begin 	0;			// begin index of points
-				end 	29999;		// end index of points 
+				end 	29999;		// end index of points
+				number 	10000;	    // number of points to be selected 
 			}
 			fieldValue  // fields that the selector is applied to 
 			{

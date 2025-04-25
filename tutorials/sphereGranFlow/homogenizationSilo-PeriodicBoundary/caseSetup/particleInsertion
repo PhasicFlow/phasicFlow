@@ -26,189 +26,185 @@ layer0
 
    insertionInterval    0.025;          // s 
 
-   cylinderInfo 
-   {
-   	radius 	  0.09;          // radius of cylinder (m)
+    cylinderInfo 
+    {
+        radius    0.09;          // radius of cylinder (m)
 
-   	p1         (0.0  0.0 0.1);          // (m,m,m)
+        p1         (0.0  0.0 0.1);          // (m,m,m)
 
-   	p2         (0.0  0.0 0.11);          // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity     realx3 (0.0 0.0 -0.6);         // initial velocity of inserted particles 
-   }
-   
-   mixture
-   {
-      parType1    1;          // mixture composition of inserted particles 
-   }
+        p2         (0.0  0.0 0.11);          // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity     realx3 (0.0 0.0 -0.6);         // initial velocity of inserted particles 
+    }
+
+    mixture
+    {
+        parType1    1;          // mixture composition of inserted particles 
+    }
 }
 
 layer1
 {
-   timeControl          simulationTime;
+    timeControl          simulationTime;
 
-   regionType           cylinder;          // type of insertion region
+    regionType           cylinder;          // type of insertion region
 
-   rate                 5100;          // insertion rate (particles/s)
+    rate                 5100;          // insertion rate (particles/s)
 
-   startTime            0.7;          // (s)
+    startTime            0.7;          // (s)
 
-   endTime              1.2;          // (s)
+    endTime              1.2;          // (s)
 
-   insertionInterval    0.025;          // s 
+    insertionInterval    0.025;          // s 
 
-   
-   cylinderInfo 
-   {
-      radius 0.09;
-      p1     (0.0  0.0 0.16 ); // (m,m,m)
-      p2     (0.0  0.0 0.17); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      parType2 1; // only parType2
-      
-   }
+
+    cylinderInfo 
+    {
+        radius 0.09;
+        p1     (0.0  0.0 0.16 ); // (m,m,m)
+        p2     (0.0  0.0 0.17); // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity    realx3 (0.0 0.0 -0.6);
+    }
+
+    mixture
+    {
+        parType2 1; // only parType2
+        
+    }
 }
 
 layer2
 {
-   timeControl          simulationTime;
+    timeControl          simulationTime;
 
-   regionType           cylinder;          // type of insertion region
+    regionType           cylinder;          // type of insertion region
 
-   rate                 5100;          // insertion rate (particles/s)
+    rate                 5100;          // insertion rate (particles/s)
 
-   startTime            1.4;          // (s)
+    startTime            1.4;          // (s)
 
-   endTime              1.9;          // (s)
+    endTime              1.9;          // (s)
 
-   insertionInterval    0.025;          // s 
+    insertionInterval    0.025;          // s 
 
-   cylinderInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.2 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.21); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      parType1 1; // only parType1
-      
-   }
+    cylinderInfo 
+    {
+        radius   0.09;
+        p1 ( 0.0  0.0 0.2 ); // (m,m,m)
+        p2 ( 0.0  0.0 0.21); // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity    realx3 (0.0 0.0 -0.6);
+    }
+
+    mixture
+    {
+        parType1 1; // only parType1
+    }
 }
 
 layer3
 {
-   timeControl          simulationTime;
+    timeControl          simulationTime;
 
-   regionType           cylinder;      // type of insertion region
+    regionType           cylinder;      // type of insertion region
 
-   rate                 5100;          // insertion rate (particles/s)
+    rate                 5100;          // insertion rate (particles/s)
 
-   startTime            2.1;           // (s)
+    startTime            2.1;           // (s)
 
-   endTime              2.6;           // (s)
+    endTime              2.6;           // (s)
 
-   insertionInterval    0.025;         // s 
-   
+    insertionInterval    0.025;         // s 
 
-   cylinderInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.28 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.29); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity   realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      parType2 1;
-      
-   }
+
+    cylinderInfo 
+    {
+        radius   0.09;
+        p1 ( 0.0  0.0 0.28 ); // (m,m,m)
+        p2 ( 0.0  0.0 0.29); // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity   realx3 (0.0 0.0 -0.6);
+    }
+
+    mixture
+    {
+        parType2 1;
+    }
 }
 
 layer4
 {
-   timeControl          simulationTime;
+    timeControl          simulationTime;
 
-   regionType                 cylinder;          // type of insertion region
+    regionType                 cylinder;          // type of insertion region
 
-   rate                          5100;          // insertion rate (particles/s)
+    rate                          5100;          // insertion rate (particles/s)
 
-   startTime                       2.8;          // (s)
+    startTime                       2.8;          // (s)
 
-   endTime                         3.3;          // (s)
+    endTime                         3.3;          // (s)
 
-   insertionInterval             0.025;          // s  
+    insertionInterval             0.025;          // s  
 
-   cylinderInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.37 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.38); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      parType1 1;
-      
-   }
+    cylinderInfo 
+    {
+        radius   0.09;
+        p1 ( 0.0  0.0 0.37 ); // (m,m,m)
+        p2 ( 0.0  0.0 0.38); // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity    realx3 (0.0 0.0 -0.6);
+    }
+
+    mixture
+    {
+        parType1 1;
+    }
 }
 
 layer5
 {
-   timeControl          simulationTime;
+    timeControl          simulationTime;
 
-   regionType                 cylinder;          // type of insertion region
+    regionType                 cylinder;          // type of insertion region
 
-   rate                          5100;          // insertion rate (particles/s)
+    rate                          5100;          // insertion rate (particles/s)
 
-   startTime                       3.4;          // (s)
+    startTime                       3.4;          // (s)
 
-   endTime                         3.9;          // (s)
+    endTime                         3.9;          // (s)
 
-   insertionInterval             0.025;          // s  
+    insertionInterval             0.025;          // s  
 
-   cylinderInfo 
-   {
-      radius   0.09;
-      p1 ( 0.0  0.0 0.38 ); // (m,m,m)
-      p2 ( 0.0  0.0 0.39); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 0.0 -0.6);
-   }
-   
-   mixture
-   {
-      parType2 1;
-      
-   }
+    cylinderInfo 
+    {
+        radius   0.09;
+        p1 ( 0.0  0.0 0.38 ); // (m,m,m)
+        p2 ( 0.0  0.0 0.39); // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity    realx3 (0.0 0.0 -0.6);
+    }
+
+    mixture
+    {
+        parType2 1;
+    }
 }
