@@ -2,23 +2,23 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	settingsDict;
-objectType 	dictionary;
+objectName  settingsDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-run 		rotatingVblender;
+run         rotatingVblender;
 
-dt 			         0.00001;                    // time step for integration (s)
+dt                   0.00001;                    // time step for integration (s)
 
-startTime 		           0;                    // start time for simulation
+startTime                  0;                    // start time for simulation
 
-endTime 		          10;                    // end time for simulation
+endTime                   10;                    // end time for simulation
 
-saveInterval    	    0.05;                    // time interval for saving the simulation
+saveInterval            0.05;                    // time interval for saving the simulation
 
-timePrecision    	       6;                    // maximum number of digits for time folder
+timePrecision              6;                    // maximum number of digits for time folder
 
-g 			      (0 0 -9.8);                    // gravity vector (m/s2)
+g                 (0 0 -9.8);                    // gravity vector (m/s2)
 
 includeObjects (diameter);                       // save necessary (i.e., required) data on disk
 
@@ -28,12 +28,12 @@ excludeObjects ();
 // include the objects to be saved in the time folders 
 includeObject ();
 
-integrationMethod 	AdamsBashforth2;             // integration method
+integrationMethod   AdamsBashforth2;             // integration method
 
-integrationHistory              off; 			 // Do not save integration history on the disk 
+integrationHistory              off;             // Do not save integration history on the disk 
 
-writeFormat			          ascii;             // data writting format (ascii or binary)
+writeFormat                   ascii;             // data writting format (ascii or binary)
 
-timersReport 		            Yes;             // report timers (Yes or No)
+timersReport                    Yes;             // report timers (Yes or No)
 
-timersReportInterval   	       0.05;             // time interval for reporting timers
+timersReportInterval           0.05;             // time interval for reporting timers

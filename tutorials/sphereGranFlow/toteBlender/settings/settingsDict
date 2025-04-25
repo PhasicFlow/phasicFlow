@@ -24,9 +24,11 @@ g               (0 0 -9.8);      // gravity vector (m/s2)
 // include/exclude fields for saving on disk 
 includeObjects  (diameter);                       
 
-excludeObjects  (rVelocity.dy1 pStructPosition.dy1 pStructVelocity.dy1); 
+excludeObjects  (); 
 
 integrationMethod        AdamsBashforth2;
+
+integrationHistory       off;
 
 writeFormat              ascii;
 

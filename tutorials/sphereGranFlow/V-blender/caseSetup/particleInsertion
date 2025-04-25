@@ -6,9 +6,10 @@ objectName particleInsertion;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-active              Yes;           // is insertion active -> Yes or No
 
-checkForCollision   Yes;           // is checked          -> Yes or No
+
+active              Yes;      // is insertion active -> Yes or No
+
 
 /*
    Two layers of particles are packed one-by-one using tho insertion steps
@@ -18,15 +19,15 @@ rightregion
 {
     timeControl    simulationTime;
 
-    regionType             cylinder;         // type of insertion region
+    regionType             cylinder;    // type of insertion region
 
-    rate                       10000;        // Particles Insertion Rate (particles/s)
+    rate                       10000;   // Particles Insertion Rate (particles/s)
 
-    startTime                  0.0;          // start time of small particles insertion (s)
+    startTime                  0.0;     // start time of small particles insertion (s)
 
-    endTime                      1;          // end time of small particles insertion (s)
+    endTime                      1;     // end time of small particles insertion (s)
 
-    insertionInterval       0.025;           // time interval of small particles insertion (s)
+    insertionInterval        0.025;     // time interval of small particles insertion (s)
 
     cylinderInfo 
     {
@@ -37,17 +38,17 @@ rightregion
 
         p2 (0.1150615  0.12 0.4811585);
 
-        radius                     0.1;            // radius of cylinder (m)
+        radius                     0.1;       // radius of cylinder (m)
     }
 
     setFields
     {
-     velocity  realx3 (1.2 0.0 -1.2);            // initial velocity of inserted particles
+     velocity  realx3 (1.2 0.0 -1.2);       // initial velocity of inserted particles
     }
 
     mixture
     {
-     smallSphere                   1;            // first layer of inserted particles 
+     smallSphere                   1;       // first layer of inserted particles 
     }
 }
 
@@ -55,35 +56,34 @@ leftregion
 {
     timeControl    simulationTime;
 
-    regionType           cylinder;                // type of insertion region
+    regionType           cylinder;           // type of insertion region
 
-    rate                    10000;                // Particles Insertion Rate (particles/s)
+    rate                    10000;           // Particles Insertion Rate (particles/s)
 
-    startTime                 1.5;                // start time of large particles insertion (s)
+    startTime                 1.5;           // start time of large particles insertion (s)
 
-    endTime                   2.5;                // end time of large particles insertion (s)
+    endTime                   2.5;           // end time of large particles insertion (s)
 
-    insertionInterval       0.025;                // time interval of large particles insertion (s)
+    insertionInterval       0.025;           // time interval of large particles insertion (s)
 
     cylinderInfo 
     {
         /* coordinates of center of both ends of the insertion 
         cylinder on the left side of the V-blender (m,m,m)  */     
-
         p1 ( 0.7562545 0.12 0.50079);
 
         p2 ( 0.7362545 0.12 0.48079);
 
-        radius   0.1;                             // radius of cylinder (m)
+        radius   0.1;                 
     }
 
     setFields
     {
-        velocity    realx3 (-1.2 0.0 -1.2);       // initial velocity of inserted particles
+        velocity    realx3 (-1.2 0.0 -1.2);  // initial velocity of inserted particles
     }
 
     mixture
     {
-        largeSphere 1;                            // second layer of inserted particles
+        largeSphere 1;                       // second layer of inserted particles
     }
 }

@@ -2,80 +2,81 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	geometryDict;
-objectType 	dictionary;
+objectName  geometryDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 motionModel rotatingAxis;                        
 
 rotatingAxisInfo
 {
     rotAxis 
-	{
-		p1            (-0.1974 0.2269 0);        // first point for the axis of rotation
-			 
-		p2            (-0.1974 0.2269 0.1);      // second point for the axis of rotation
-		
-		omega         2.38733;                   // rotation speed (rad/s) => 15 rpm	
-				
-		startTime     2;                         // Start time of Geometry Rotating 
-		
-		endTime       9.5;                       // End time of Geometry Rotating
-	}
+    {
+        p1            (-0.1974 0.2269 0);        // first point for the axis of rotation
+             
+        p2            (-0.1974 0.2269 0.1);      // second point for the axis of rotation
+        
+        omega         2.38733;                   // rotation speed (rad/s) => 15 rpm    
+                
+        startTime     2;                         // Start time of Geometry Rotating 
+        
+        endTime       9.5;                       // End time of Geometry Rotating
+    }
 }
 
 surfaces
 {
-	body
-	{
-		type 	     stlWall;                    // type of the wall
-			
-		file 	     Body.stl;                   // file name in stl folder  
-			
-		material     wallMat;                    // material name of this wall	
-		 
-		motion 	     rotAxis;	                 // motion component name  	 
-	}
+    body
+    {
+        type         stlWall;                    // type of the wall
+            
+        file         Body.stl;                   // file name in stl folder  
+            
+        material     wallMat;                    // material name of this wall  
+         
+        motion       rotAxis;                    // motion component name    
+    }
 
-	/*	
-		This is a Cylinder Wall at the rear of cylinder
-	*/
+    /*  
+        This is a Cylinder Wall at the rear of cylinder
+    */
 
-	rearEnd
-	{
-		type         cylinderWall;               // type of the wall
-				
-		p1           (-0.1974 0.2269 -0.001);    // first point for the axis of rotation	
-		  
-		p2           (-0.1974 0.2269 0.0);       // second point for the axis of rotation	
-		
-		radius1      0.0001;                     // Radius of p1	
-		
-		radius2      0.12;                       // Radius of p2
-		
-		material     wallMat;                    // material name of the wall
-		         
-		motion       rotAxis;	                 // motion component name 		 
-	}
+    rearEnd
+    {
+        type         cylinderWall;               // type of the wall
+                
+        p1           (-0.1974 0.2269 -0.001);    // first point for the axis of rotation    
+          
+        p2           (-0.1974 0.2269 0.0);       // second point for the axis of rotation   
+        
+        radius1      0.0001;                     // Radius of p1    
+        
+        radius2      0.12;                       // Radius of p2
+        
+        material     wallMat;                    // material name of the wall
+                 
+        motion       rotAxis;                    // motion component name        
+    }
 
-	/*	
-		This a cylinder Wall at the front of Cylinder 
-	*/
+    /*  
+        This a cylinder Wall at the front of Cylinder 
+    */
 
-	frontEnd
-	{
-		type         cylinderWall;               // type of the wall
-				
-		p1           (-0.1974 0.2269 0.0989);    // first point for the axis of rotation	
-			 
-		p2           (-0.1974 0.2269 0.0990);	 // second point for the axis of rotation
-	
-		radius1      0.0001;	                 // Radius of p1
-		
-		radius2      0.12;                       // Radius of p2
-		
-		material     wallMat;                    // material name of the wall
-		      
-		motion       rotAxis;	                 // motion component name    		 
-	}
+    frontEnd
+    {
+        type         cylinderWall;               // type of the wall
+                
+        p1           (-0.1974 0.2269 0.0989);    // first point for the axis of rotation    
+             
+        p2           (-0.1974 0.2269 0.0990);    // second point for the axis of rotation
+    
+        radius1      0.0001;                     // Radius of p1
+        
+        radius2      0.12;                       // Radius of p2
+        
+        material     wallMat;                    // material name of the wall
+              
+        motion       rotAxis;                    // motion component name            
+    }
 }

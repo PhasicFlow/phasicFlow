@@ -13,8 +13,6 @@ positionParticles
 {
 	// A list of options are: ordered, random
 	method empty;     		// creates the required fields with zero particles (empty). 
-
-	mortonSorting 			Yes;    // perform initial sorting based on morton 
 }
 
 setFields
