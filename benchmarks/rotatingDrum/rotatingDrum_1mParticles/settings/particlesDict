@@ -27,7 +27,7 @@ positionParticles
 
     orderedInfo
     {
-        diameter   0.004;           // minimum space between centers of particles
+        distance   0.006;           // minimum space between centers of particles
         
         numPoints  1000000;          // number of particles in the simulation 
         
