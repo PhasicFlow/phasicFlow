@@ -52,7 +52,7 @@
 | phasicFlow-A4000  | 38 min | 73 min  | 146 min | 293 min | 589 min | 1188 min |
 
 <div align="center">
-    <img src="../_static/images/Calculation time under different particle numbers using commerical DEM and phasicFlow.png" alt="description" height="600" />
+    <img src="./images/Calculation time under different particle numbers using commerical DEM and phasicFlow.png" alt="description" height="600" />
 </div>
 
 <div align="center">Figure 3  The calculation time of different software.</div>
@@ -71,6 +71,6 @@
 
 
 
- <img src="../_static/images/Memory usage under different particle numbers using commerical DEM and phasicFlow.png" alt="description" height="600" />
+ <img src="./images/Memory usage under different particle numbers using commerical DEM and phasicFlow.png" alt="description" height="600" />
 
 <div align="center">Figure 4  The memory usage of different software.</div>
