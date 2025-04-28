@@ -57,7 +57,7 @@ bool pFlow::stlFile::readSolid
 {
 
 	token tok;
-	is>> tok;
+	is >> tok;
 	if(!checkWordToken(is, tok, "solid")) return false;
 
 	// check if there is a name associated with solid 
@@ -71,7 +71,6 @@ bool pFlow::stlFile::readSolid
 	while (nWords < 20 )
 	{
 		if( badInput(is, tok) ) return false;
-		//if(!tok.isWord()) return false;
 		nWords++;	
 		if(tok.isWord() && tok.wordToken() != "facet" )	
 		{
@@ -104,10 +103,49 @@ bool pFlow::stlFile::readSolid
 	vertecies.clear();
 	while(true )
 	{
-		is>>tok;
+		is >> tok;
 		if( badInput(is,tok) || !tok.isWord() )return false;
 		word wTok = tok.wordToken();
-		if( wTok == "endsolid" ) return true; // end of solid 
+		if( wTok == "endsolid" )// end of solid
+		{
+			// check if there is a name associated with endsolid
+			is >> tok;
+			if( !badInput(is, tok) && !is.eof())
+			{
+				word endName = "";
+				int32 nWords =0;
+
+				while (nWords < 20 )
+				{
+					if( badInput(is, tok) ) return false;
+					nWords++;	
+					if(tok.isWord())	
+					{
+						endName += tok.wordToken();	
+					}
+					else if( tok.isNumber())
+					{
+						auto val = tok.number();
+						endName += real2Word(val);
+					}
+					else if( tok.isPunctuation())
+					{
+						endName += tok.pToken();
+					}
+					else if (tok.isWord())
+					{
+						is.putBack(tok);
+						break;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+
 		if( wTok != "facet" ) return false;
 		
 		// read facet 
