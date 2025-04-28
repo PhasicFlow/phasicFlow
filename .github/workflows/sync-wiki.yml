@@ -1,0 +1,59 @@
+name: Sync README files to Wiki
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/README.md'
+      - '**/readme.md'
+
+permissions:
+  contents: write
+      
+jobs:
+  sync-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Configure Git for Wiki
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+      
+      - name: Clone Wiki Repository
+        run: git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git ./wiki
+      
+      - name: Copy README files to Wiki
+        run: |
+          # Special mappings - add specific README files to specific wiki pages
+          declare -A special_mappings
+          special_mappings["benchmarks/rotatingDrum/readme.md"]="Performance-of-phasicFlow.md"
+        
+          
+          # Process only the specially mapped files
+          for rel_path in "${!special_mappings[@]}"; do
+            if [ -f "./$rel_path" ]; then
+              wiki_page="${special_mappings[$rel_path]}"
+              echo "Processing special mapping: $rel_path -> $wiki_page"
+              
+              # Get the content of the README file
+              content=$(cat "./$rel_path")
+              
+              # Check if the wiki page already exists
+              if [ -f "./wiki/$wiki_page" ]; then
+                # Append to existing page with a section header
+                echo -e "\n\n## Content from $rel_path\n\n$content" >> "./wiki/$wiki_page"
+              else
+                # Create new page
+                echo "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
+              fi
+            fi
+          done
+      
+      - name: Commit and Push to Wiki
+        working-directory: ./wiki
+        run: |
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Sync README files from main repository"
+          git push
