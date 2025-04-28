@@ -141,6 +141,9 @@ bool pFlow::stlFile::readSolid
 					{
 						return false;
 					}
+					is >> tok;
+
+					if(is.eof())return true;
 				}
 			}
 			return true;
