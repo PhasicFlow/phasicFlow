@@ -47,7 +47,8 @@ jobs:
               
               # Process image references line by line for more reliable detection
               while IFS= read -r line; do
-                if [[ $line =~ !\[([^]]*)\]\(([^)]+)\) ]]; then
+                # Fix the regex syntax for bash
+                if [[ "$line" =~ !\[(.*)\]\((.*)\) ]]; then
                   img_path="${BASH_REMATCH[2]}"
                   
                   # Skip URLs
@@ -71,18 +72,29 @@ jobs:
                   # Copy the image to wiki repository if it exists
                   if [ -f "$abs_img_path" ]; then
                     echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
-                    cp "$abs_img_path" "./wiki/$wiki_img_path"
+                    cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
                     
-                    # Replace the image reference in content using a safer delimiter
-                    content=$(echo "$content" | sed "s|!\\[\(.*\\)\\]($img_path)|![\\1]($wiki_img_path)|g")
+                    # Escape special characters in the path for sed
+                    escaped_img_path=$(echo "$img_path" | sed 's/[\/&]/\\&/g')
+                    
+                    # Replace the image reference in content - simpler approach with sed
+                    content=$(echo "$content" | sed "s|!\\[.*\\]($escaped_img_path)|![\\1]($wiki_img_path)|g")
                     echo "Replaced image reference: $img_path → $wiki_img_path"
                   else
                     echo "Warning: Image file not found: $abs_img_path"
+                    # Add more debug info
+                    echo "Current directory: $(pwd)"
+                    echo "Files in $base_dir:"
+                    ls -la "$base_dir"
                   fi
                 fi
               done < "./$rel_path"
               
+              # Add debug info
+              echo "Wiki page content preview (first 100 chars): ${content:0:100}"
+              
               # Replace the wiki page with the updated content rather than appending
+              mkdir -p "$(dirname "./wiki/$wiki_page")" # Ensure directory exists
               echo -e "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
               echo "Updated wiki page: $wiki_page"
             fi
@@ -91,6 +103,8 @@ jobs:
       - name: Commit and Push to Wiki
         working-directory: ./wiki
         run: |
+          echo "Files changed in wiki repository:"
+          git status
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync README files from main repository"
-          git push
+          git push || { echo "Push failed, retrying with more details..."; git push --verbose; }
