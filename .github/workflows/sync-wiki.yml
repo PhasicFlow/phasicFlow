@@ -45,92 +45,89 @@ jobs:
               # Read content of the README file
               content=$(cat "./$rel_path")
               
-              # Process image references line by line for more reliable detection
-              while IFS= read -r line; do
-                # Check for Markdown style image references
-                if [[ "$line" =~ !\[(.*)\]\((.*)\) ]]; then
-                  img_path="${BASH_REMATCH[2]}"
-                  
-                  # Skip URLs
-                  if [[ $img_path == http* ]]; then
-                    continue
-                  fi
-                  
-                  # Handle Markdown image syntax
-                  if [[ $img_path == /* ]]; then
-                    # Absolute path within repository
-                    abs_img_path="./$img_path"
-                  else
-                    # Relative path to the README
-                    abs_img_path="$base_dir/$img_path"
-                  fi
-                  
-                  # Extract just the filename
-                  img_filename=$(basename "$img_path")
-                  wiki_img_path="images/$img_filename"
-                  
-                  # Copy the image to wiki repository if it exists
-                  if [ -f "$abs_img_path" ]; then
-                    echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
-                    cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
-                    
-                    # Escape special characters in the path for sed
-                    escaped_img_path=$(echo "$img_path" | sed 's/[\/&]/\\&/g')
-                    
-                    # Replace the image reference in content - simpler approach with sed
-                    content=$(echo "$content" | sed "s|!\\[.*\\]($escaped_img_path)|![\\1]($wiki_img_path)|g")
-                    echo "Replaced image reference: $img_path → $wiki_img_path"
-                  else
-                    echo "Warning: Image file not found: $abs_img_path"
-                    # Add more debug info
-                    echo "Current directory: $(pwd)"
-                    echo "Files in $base_dir:"
-                    ls -la "$base_dir"
-                  fi
-                # Check for HTML style image tags - look for <img tags and extract src attribute
-                elif [[ "$line" =~ \<img[[:space:]][^>]*src=\"([^\"]+)\"[^>]*\> ]]; then
-                  img_path="${BASH_REMATCH[1]}"
-                  
-                  # Skip URLs
-                  if [[ $img_path == http* ]]; then
-                    continue
-                  fi
-                  
-                  # Determine the absolute path of the image
-                  if [[ $img_path == /* ]]; then
-                    # Absolute path within repository
-                    abs_img_path="./$img_path"
-                  else
-                    # Relative path to the README
-                    abs_img_path="$base_dir/$img_path"
-                  fi
-                  
-                  # Extract just the filename
-                  img_filename=$(basename "$img_path")
-                  wiki_img_path="images/$img_filename"
-                  
-                  # Copy the image to wiki repository if it exists
-                  if [ -f "$abs_img_path" ]; then
-                    echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
-                    cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
-                    
-                    # Escape special characters in the path for sed
-                    escaped_img_path=$(echo "$img_path" | sed 's/[\/&]/\\&/g')
-                    
-                    # Replace the HTML image reference in content
-                    content=$(echo "$content" | sed "s|src=\"$escaped_img_path\"|src=\"$wiki_img_path\"|g")
-                    echo "Replaced HTML image reference: $img_path → $wiki_img_path"
-                  else
-                    echo "Warning: HTML image file not found: $abs_img_path"
-                    # Add more debug info
-                    echo "Current directory: $(pwd)"
-                    echo "Files in $base_dir:"
-                    ls -la "$base_dir"
-                  fi
+              # Use grep to identify and process image paths instead of regex
+              echo "Processing Markdown image references..."
+              for img_ref in $(grep -o '!\[.*\](.*[^)]*)' "./$rel_path" | sed -E 's/!\[.*\]\((.*)\)/\1/'); do
+                # Skip URLs
+                if [[ $img_ref == http* ]]; then
+                  continue
                 fi
-              done < "./$rel_path"
+                
+                # Process markdown image as before
+                if [[ $img_ref == /* ]]; then
+                  # Absolute path within repository
+                  abs_img_path="./$img_ref"
+                else
+                  # Relative path to the README
+                  abs_img_path="$base_dir/$img_ref"
+                fi
+                
+                # Extract just the filename
+                img_filename=$(basename "$img_ref")
+                wiki_img_path="images/$img_filename"
+                
+                # Copy the image to wiki repository if it exists
+                if [ -f "$abs_img_path" ]; then
+                  echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
+                  cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
+                  
+                  # Escape special characters in the path for sed
+                  escaped_img_path=$(echo "$img_ref" | sed 's/[\/&]/\\&/g')
+                  
+                  # Replace the image reference in content - simpler approach with sed
+                  content=$(echo "$content" | sed "s|!\\[.*\\]($escaped_img_path)|![\\1]($wiki_img_path)|g")
+                  echo "Replaced image reference: $img_ref → $wiki_img_path"
+                else
+                  echo "Warning: Image file not found: $abs_img_path"
+                  # Add more debug info
+                  echo "Current directory: $(pwd)"
+                  echo "Files in $base_dir:"
+                  ls -la "$base_dir"
+                fi
+              done
               
-              # Add debug info
+              # Process HTML img tags separately
+              echo "Processing HTML image references..."
+              # Extract src attributes from img tags using grep and sed
+              for img_src in $(grep -o '<img [^>]*src="[^"]*"' "./$rel_path" | sed -E 's/.*src="([^"]*)".*/\1/'); do
+                # Skip URLs
+                if [[ $img_src == http* ]]; then
+                  continue
+                fi
+                
+                # Determine the absolute path of the image
+                if [[ $img_src == /* ]]; then
+                  # Absolute path within repository
+                  abs_img_path="./$img_src"
+                else
+                  # Relative path to the README
+                  abs_img_path="$base_dir/$img_src"
+                fi
+                
+                # Extract just the filename
+                img_filename=$(basename "$img_src")
+                wiki_img_path="images/$img_filename"
+                
+                # Copy the image to wiki repository if it exists
+                if [ -f "$abs_img_path" ]; then
+                  echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
+                  cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
+                  
+                  # Escape special characters in the path for sed
+                  escaped_img_src=$(echo "$img_src" | sed 's/[\/&]/\\&/g')
+                  
+                  # Replace the HTML image reference in content
+                  content=$(echo "$content" | sed "s|src=\"$escaped_img_src\"|src=\"$wiki_img_path\"|g")
+                  echo "Replaced HTML image reference: $img_src → $wiki_img_path"
+                else
+                  echo "Warning: HTML image file not found: $abs_img_path"
+                  echo "Current directory: $(pwd)"
+                  echo "Files in $base_dir:"
+                  ls -la "$base_dir"
+                fi
+              done
+              
+              # Debug output
               echo "Wiki page content preview (first 100 chars): ${content:0:100}"
               
               # Replace the wiki page with the updated content rather than appending
