@@ -35,7 +35,7 @@ surfaces
         
         radius2     0.2;                   // radius at p2
         
-        resolution  24;                    // number of divisions
+        resolution  60;                    // number of divisions
         
         material    wallMat;               // material name of this wall
         
