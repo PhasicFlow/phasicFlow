@@ -42,56 +42,49 @@ jobs:
               # Get the base directory of the readme file
               base_dir=$(dirname "./$rel_path")
               
-              # Get the content of the README file
+              # Read content of the README file
               content=$(cat "./$rel_path")
               
-              # Find and process image references
-              # Look for markdown image syntax: ![alt text](path/to/image.png)
-              image_refs=$(grep -o '!\[.*\](.*\)' "./$rel_path" | sed -E 's/!\[.*\]\((.*)\)/\1/')
-              
-              # For each image reference
-              for img_path in $image_refs; do
-                # Skip URLs
-                if [[ $img_path == http* ]]; then
-                  continue
-                fi
-                
-                # Determine the absolute path of the image
-                if [[ $img_path == /* ]]; then
-                  # Absolute path within repository
-                  abs_img_path="./$img_path"
-                else
-                  # Relative path to the README
-                  abs_img_path="$base_dir/$img_path"
-                fi
-                
-                # Extract just the filename
-                img_filename=$(basename "$img_path")
-                wiki_img_path="images/$img_filename"
-                
-                # Copy the image to wiki repository if it exists
-                if [ -f "$abs_img_path" ]; then
-                  echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
-                  cp "$abs_img_path" "./wiki/$wiki_img_path"
+              # Process image references line by line for more reliable detection
+              while IFS= read -r line; do
+                if [[ $line =~ !\[([^]]*)\]\(([^)]+)\) ]]; then
+                  img_path="${BASH_REMATCH[2]}"
                   
-                  # Replace the image reference in content
-                  # Escape special characters in the img_path for sed
-                  escaped_img_path=$(echo "$img_path" | sed 's/[\/&]/\\&/g')
-                  escaped_wiki_path=$(echo "$wiki_img_path" | sed 's/[\/&]/\\&/g')
-                  content=$(echo "$content" | sed "s/($escaped_img_path)/($escaped_wiki_path)/g")
-                else
-                  echo "Warning: Image file not found: $abs_img_path"
+                  # Skip URLs
+                  if [[ $img_path == http* ]]; then
+                    continue
+                  fi
+                  
+                  # Determine the absolute path of the image
+                  if [[ $img_path == /* ]]; then
+                    # Absolute path within repository
+                    abs_img_path="./$img_path"
+                  else
+                    # Relative path to the README
+                    abs_img_path="$base_dir/$img_path"
+                  fi
+                  
+                  # Extract just the filename
+                  img_filename=$(basename "$img_path")
+                  wiki_img_path="images/$img_filename"
+                  
+                  # Copy the image to wiki repository if it exists
+                  if [ -f "$abs_img_path" ]; then
+                    echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
+                    cp "$abs_img_path" "./wiki/$wiki_img_path"
+                    
+                    # Replace the image reference in content using a safer delimiter
+                    content=$(echo "$content" | sed "s|!\\[\(.*\\)\\]($img_path)|![\\1]($wiki_img_path)|g")
+                    echo "Replaced image reference: $img_path → $wiki_img_path"
+                  else
+                    echo "Warning: Image file not found: $abs_img_path"
+                  fi
                 fi
-              done
+              done < "./$rel_path"
               
-              # Write the updated content to the wiki page
-              if [ -f "./wiki/$wiki_page" ]; then
-                # Append to existing page with a section header
-                echo -e "\n\n## Content from $rel_path\n\n$content" >> "./wiki/$wiki_page"
-              else
-                # Create new page
-                echo -e "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
-              fi
+              # Replace the wiki page with the updated content rather than appending
+              echo -e "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
+              echo "Updated wiki page: $wiki_page"
             fi
           done
       
