@@ -4,7 +4,6 @@
 
 This benchmark compares the performance of phasicFlow with a well-stablished commercial DEM software for simulating a rotating drum with varying particle counts (250k to 8M particles). The benchmark measures both computational efficiency and memory usage across different hardware configurations.
 
-
 ## Simulation Setup
 
 <div align="center">
