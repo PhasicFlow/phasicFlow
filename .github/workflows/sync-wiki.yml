@@ -29,24 +29,68 @@ jobs:
           # Special mappings - add specific README files to specific wiki pages
           declare -A special_mappings
           special_mappings["benchmarks/rotatingDrum/readme.md"]="Performance-of-phasicFlow.md"
-        
           
-          # Process only the specially mapped files
+          # Create an images directory in the wiki if it doesn't exist
+          mkdir -p ./wiki/images
+          
+          # Process mapped files
           for rel_path in "${!special_mappings[@]}"; do
             if [ -f "./$rel_path" ]; then
               wiki_page="${special_mappings[$rel_path]}"
               echo "Processing special mapping: $rel_path -> $wiki_page"
               
+              # Get the base directory of the readme file
+              base_dir=$(dirname "./$rel_path")
+              
               # Get the content of the README file
               content=$(cat "./$rel_path")
               
-              # Check if the wiki page already exists
+              # Find and process image references
+              # Look for markdown image syntax: ![alt text](path/to/image.png)
+              image_refs=$(grep -o '!\[.*\](.*\)' "./$rel_path" | sed -E 's/!\[.*\]\((.*)\)/\1/')
+              
+              # For each image reference
+              for img_path in $image_refs; do
+                # Skip URLs
+                if [[ $img_path == http* ]]; then
+                  continue
+                fi
+                
+                # Determine the absolute path of the image
+                if [[ $img_path == /* ]]; then
+                  # Absolute path within repository
+                  abs_img_path="./$img_path"
+                else
+                  # Relative path to the README
+                  abs_img_path="$base_dir/$img_path"
+                fi
+                
+                # Extract just the filename
+                img_filename=$(basename "$img_path")
+                wiki_img_path="images/$img_filename"
+                
+                # Copy the image to wiki repository if it exists
+                if [ -f "$abs_img_path" ]; then
+                  echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
+                  cp "$abs_img_path" "./wiki/$wiki_img_path"
+                  
+                  # Replace the image reference in content
+                  # Escape special characters in the img_path for sed
+                  escaped_img_path=$(echo "$img_path" | sed 's/[\/&]/\\&/g')
+                  escaped_wiki_path=$(echo "$wiki_img_path" | sed 's/[\/&]/\\&/g')
+                  content=$(echo "$content" | sed "s/($escaped_img_path)/($escaped_wiki_path)/g")
+                else
+                  echo "Warning: Image file not found: $abs_img_path"
+                fi
+              done
+              
+              # Write the updated content to the wiki page
               if [ -f "./wiki/$wiki_page" ]; then
                 # Append to existing page with a section header
                 echo -e "\n\n## Content from $rel_path\n\n$content" >> "./wiki/$wiki_page"
               else
                 # Create new page
-                echo "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
+                echo -e "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
               fi
             fi
           done
