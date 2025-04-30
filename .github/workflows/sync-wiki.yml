@@ -1,164 +1,47 @@
-name: Sync README files to Wiki
+name: Sync Wiki
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
-      - '**/README.md'
-      - '**/readme.md'
+      - 'benchmarks/*/readme.md'
+      - '.github/workflows/sync-wiki.yml'
+  workflow_dispatch:
 
-permissions:
-  contents: write
-      
 jobs:
   sync-wiki:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Configure Git for Wiki
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-      
-      - name: Clone Wiki Repository
-        run: git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git ./wiki
-      
-      - name: Copy README files to Wiki
-        run: |
-          # Special mappings - add specific README files to specific wiki pages
-          declare -A special_mappings
-          special_mappings["benchmarks/rotatingDrum/readme.md"]="Performance-of-phasicFlow.md"
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          path: repo
           
-          # Create an images directory in the wiki if it doesn't exist
-          mkdir -p ./wiki/images
+      - name: Checkout Wiki
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki
           
-          # Process mapped files
-          for rel_path in "${!special_mappings[@]}"; do
-            if [ -f "./$rel_path" ]; then
-              wiki_page="${special_mappings[$rel_path]}"
-              echo "Processing special mapping: $rel_path -> $wiki_page"
-              
-              # Get the base directory of the readme file
-              base_dir=$(dirname "./$rel_path")
-              
-              # Read content of the README file
-              content=$(cat "./$rel_path")
-              
-              # Use grep to identify and process image paths instead of regex
-              echo "Processing Markdown image references..."
-              for img_ref in $(grep -o '!\[.*\](.*[^)]*)' "./$rel_path" | sed -E 's/!\[.*\]\((.*)\)/\1/'); do
-                # Skip URLs
-                if [[ $img_ref == http* ]]; then
-                  continue
-                fi
-                
-                # Process markdown image as before
-                if [[ $img_ref == /* ]]; then
-                  # Absolute path within repository
-                  abs_img_path="./$img_ref"
-                else
-                  # Relative path to the README
-                  abs_img_path="$base_dir/$img_ref"
-                fi
-                
-                # Extract just the filename
-                img_filename=$(basename "$img_ref")
-                wiki_img_path="images/$img_filename"
-                
-                # Copy the image to wiki repository if it exists
-                if [ -f "$abs_img_path" ]; then
-                  echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
-                  cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
-                  
-                  # Escape special characters in the path for sed
-                  escaped_img_path=$(echo "$img_ref" | sed 's/[\/&]/\\&/g')
-                  
-                  # Replace the image reference in content - simpler approach with sed
-                  content=$(echo "$content" | sed "s|!\\[.*\\]($escaped_img_path)|![\\1]($wiki_img_path)|g")
-                  echo "Replaced image reference: $img_ref → $wiki_img_path"
-                else
-                  echo "Warning: Image file not found: $abs_img_path"
-                  # Add more debug info
-                  echo "Current directory: $(pwd)"
-                  echo "Files in $base_dir:"
-                  ls -la "$base_dir"
-                fi
-              done
-
-              # Process HTML img tags by finding all images and copying them
-              echo "Processing HTML image references..."
-
-              # First, find and copy all images referenced in HTML tags
-              img_tags_file=$(mktemp)
-              # Capture complete HTML img tags with all attributes into a file
-              grep -o '<img[^>]*>' "./$rel_path" > "$img_tags_file" || true
-              
-              # Create a file to store all image source paths
-              img_src_file=$(mktemp)
-              
-              # Extract src attributes from img tags
-              while IFS= read -r img_tag; do
-                img_src=$(echo "$img_tag" | grep -o 'src="[^"]*"' | sed 's/src="//;s/"$//')
-                if [ -n "$img_src" ] && [[ $img_src != http* ]]; then
-                  echo "$img_src" >> "$img_src_file"
-                fi
-              done < "$img_tags_file"
-              
-              # Process each unique image source
-              if [ -s "$img_src_file" ]; then
-                sort -u "$img_src_file" | while read -r img_src; do
-                  # Skip empty lines
-                  if [ -z "$img_src" ]; then
-                    continue
-                  fi
-                  
-                  # Determine image path
-                  if [[ $img_src == /* ]]; then
-                    abs_img_path="./$img_src"
-                  else
-                    abs_img_path="$base_dir/$img_src"
-                  fi
-                  
-                  # Extract filename
-                  img_filename=$(basename "$img_src")
-                  wiki_img_path="images/$img_filename"
-                  
-                  # Copy image to wiki
-                  if [ -f "$abs_img_path" ]; then
-                    echo "Copying HTML image: $abs_img_path -> ./wiki/$wiki_img_path"
-                    cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
-                    
-                    # Prepare for replacement
-                    escaped_img_src=$(echo "$img_src" | sed 's/[\/&]/\\&/g')
-                    escaped_wiki_path=$(echo "$wiki_img_path" | sed 's/[\/&]/\\&/g')
-                    
-                    # Update src path while preserving ALL other attributes
-                    content=$(echo "$content" | sed "s|src=\"$escaped_img_src\"|src=\"$escaped_wiki_path\"|g")
-                  else
-                    echo "Warning: HTML image file not found: $abs_img_path"
-                  fi
-                done
-              fi
-              
-              # Clean up temporary files
-              rm -f "$img_tags_file" "$img_src_file"
-              
-              # Debug output
-              echo "Wiki page content preview (first 100 chars): ${content:0:100}"
-              
-              # Replace the wiki page with the updated content rather than appending
-              mkdir -p "$(dirname "./wiki/$wiki_page")" # Ensure directory exists
-              echo -e "# $(basename "$wiki_page" .md)\n\n$content" > "./wiki/$wiki_page"
-              echo "Updated wiki page: $wiki_page"
-            fi
-          done
-      
-      - name: Commit and Push to Wiki
-        working-directory: ./wiki
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          
+      - name: Install dependencies
+        run: pip install beautifulsoup4
+          
+      - name: Sync specific README files to Wiki
         run: |
-          echo "Files changed in wiki repository:"
-          git status
+          python $GITHUB_WORKSPACE/repo/.github/scripts/sync-wiki.py
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          
+      - name: Push changes to wiki
+        run: |
+          cd wiki
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
           git add .
-          git diff-index --quiet HEAD || git commit -m "Sync README files from main repository"
-          git push || { echo "Push failed, retrying with more details..."; git push --verbose; }
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto sync wiki from main repository" && git push)
