@@ -86,47 +86,48 @@ jobs:
                 fi
               done
               
-              # Process HTML img tags separately - preserving all attributes
+              # Process HTML img tags separately
               echo "Processing HTML image references..."
               
-              # Use a more reliable approach with temporary files and simpler perl commands
+              # Create temporary files
               temp_file=$(mktemp)
               echo "$content" > "$temp_file"
               
-              # Create a simpler perl script file instead of inline perl
+              # Create perl script file
               perl_script=$(mktemp)
-              # Write the perl script with proper escaping for YAML
-              cat > "$perl_script" << 'PERLSCRIPT'
+              
+              # Write perl script content - using proper YAML block scalar syntax
+              cat > "$perl_script" << EOL
 #!/usr/bin/perl
 use strict;
 use warnings;
 
-my $content = do { local $/; <STDIN> };
+my \$content = do { local \$/; <STDIN> };
 
 # Process HTML img tags
-while ($content =~ m|(<img\s+[^>]*?src=")([^"]+)("[^>]*?>)|g) {
-    my $prefix = $1;
-    my $src = $2;
-    my $suffix = $3;
-    my $tag = $prefix . $src . $suffix;
+while (\$content =~ m|(<img\\s+[^>]*?src=")([^"]+)("[^>]*?>)|g) {
+    my \$prefix = \$1;
+    my \$src = \$2;
+    my \$suffix = \$3;
+    my \$tag = \$prefix . \$src . \$suffix;
     
     # Skip URLs
-    next if $src =~ /^http/;
+    next if \$src =~ /^http/;
     
     # Get just the filename
-    my $filename = $src;
-    $filename =~ s/.*\///;
-    my $new_path = "images/" . $filename;
+    my \$filename = \$src;
+    \$filename =~ s/.*\\///;
+    my \$new_path = "images/" . \$filename;
     
     # Replace in content
-    my $new_tag = $prefix . $new_path . $suffix;
-    $content =~ s/\Q$tag\E/$new_tag/g;
+    my \$new_tag = \$prefix . \$new_path . \$suffix;
+    \$content =~ s/\\Q\$tag\\E/\$new_tag/g;
 }
 
-print $content;
-PERLSCRIPT
+print \$content;
+EOL
               
-              # Process content with the perl script
+              # Process content with perl script
               cat "$temp_file" | perl "$perl_script" > "${temp_file}.new"
               content=$(cat "${temp_file}.new")
 
