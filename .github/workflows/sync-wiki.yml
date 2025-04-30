@@ -86,53 +86,68 @@ jobs:
                 fi
               done
               
-              # Process HTML img tags separately
+              # Process HTML img tags separately - preserving all attributes
               echo "Processing HTML image references..."
-              # Extract src attributes from img tags using grep and sed
-              for img_src in $(grep -o '<img [^>]*src="[^"]*"' "./$rel_path" | sed -E 's/.*src="([^"]*)".*/\1/'); do
-                # Skip URLs
-                if [[ $img_src == http* ]]; then
-                  continue
-                fi
-                
-                # Determine the absolute path of the image
-                if [[ $img_src == /* ]]; then
-                  # Absolute path within repository
-                  abs_img_path="./$img_src"
-                else
-                  # Relative path to the README
-                  abs_img_path="$base_dir/$img_src"
-                fi
-                
-                # Extract just the filename
-                img_filename=$(basename "$img_src")
-                wiki_img_path="images/$img_filename"
-                
-                # Copy the image to wiki repository if it exists
-                if [ -f "$abs_img_path" ]; then
-                  echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
-                  cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
+              # Store the file content in a temporary variable to process with awk
+              readme_content=$(cat "./$rel_path")
+              
+              # Use awk to find all img tags and process them
+              img_tags=$(echo "$readme_content" | grep -o '<img[^>]*>' || echo "")
+              if [ -n "$img_tags" ]; then
+                echo "Found HTML img tags to process"
+                echo "$img_tags" | while read -r img_tag; do
+                  # Extract src attribute
+                  img_src=$(echo "$img_tag" | grep -o 'src="[^"]*"' | sed 's/src="\([^"]*\)"/\1/')
                   
-                  # Escape special characters in the path for sed
-                  escaped_img_src=$(echo "$img_src" | sed 's/[\/&]/\\&/g')
+                  # Skip if no src or if it's a URL
+                  if [ -z "$img_src" ] || [[ $img_src == http* ]]; then
+                    continue
+                  fi
                   
-                  # Replace the HTML image reference in content
-                  content=$(echo "$content" | sed "s|src=\"$escaped_img_src\"|src=\"$wiki_img_path\"|g")
-                  echo "Replaced HTML image reference: $img_src → $wiki_img_path"
-                else
-                  echo "Warning: HTML image file not found: $abs_img_path"
-                  echo "Current directory: $(pwd)"
-                  echo "Files in $base_dir:"
-                  ls -la "$base_dir"
-                fi
-              done
+                  # Determine the absolute path of the image
+                  if [[ $img_src == /* ]]; then
+                    # Absolute path within repository
+                    abs_img_path="./$img_src"
+                  else
+                    # Relative path to the README
+                    abs_img_path="$base_dir/$img_src"
+                  fi
+                  
+                  # Extract just the filename
+                  img_filename=$(basename "$img_src")
+                  wiki_img_path="images/$img_filename"
+                  
+                  # Copy the image to wiki repository if it exists
+                  if [ -f "$abs_img_path" ]; then
+                    echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
+                    cp -v "$abs_img_path" "./wiki/$wiki_img_path" || echo "Error copying image"
+                    
+                    # Escape special characters in the path for sed
+                    escaped_img_src=$(echo "$img_src" | sed 's/[\/&]/\\&/g')
+                    escaped_img_tag=$(echo "$img_tag" | sed 's/[\/&]/\\&/g')
+                    
+                    # Create the new tag with the updated src but preserving all other attributes
+                    new_img_tag=$(echo "$img_tag" | sed "s|src=\"$escaped_img_src\"|src=\"$wiki_img_path\"|g")
+                    
+                    # Replace the entire img tag in content
+                    content=$(echo "$content" | sed "s|$escaped_img_tag|$new_img_tag|g")
+                    echo "Replaced HTML image tag while preserving all attributes"
+                  else
+                    echo "Warning: HTML image file not found: $abs_img_path"
+                    # Add more debug info
+                    echo "Current directory: $(pwd)"
+                    echo "Files in $base_dir:"
+                    ls -la "$base_dir"
+                  fi
+                done
+              fi
               
               # Debug output
               echo "Wiki page content preview (first 100 chars): ${content:0:100}"
               
               # Replace the wiki page with the updated content rather than appending
               mkdir -p "$(dirname "./wiki/$wiki_page")" # Ensure directory exists
-              echo -e "# $(basename "$wiki_page" .md)\n\nContent from $rel_path:\n\n$content" > "./wiki/$wiki_page"
+              echo -e "# $(basename "$wiki_page" .md)\n\n$content" > "./wiki/$wiki_page"
               echo "Updated wiki page: $wiki_page"
             fi
           done

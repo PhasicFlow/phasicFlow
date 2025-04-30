@@ -7,7 +7,7 @@ This benchmark compares the performance of phasicFlow with a well-stablished com
 ## Simulation Setup
 
 <div align="center">
-    <img src="./images/commerical DEM snapshot.png" style="width: 400px;" />
+    <img src="./images/commericalDEMsnapshot.png" style="width: 400px;" />
     <div align="center">  
         <p>Figure 1. Commercial DEM simulation snapshot</p>
     </div>
