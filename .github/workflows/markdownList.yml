@@ -6,4 +6,6 @@
 mappings:
   - source: benchmarks/rotatingDrum/readme.md
     target: Performance-of-phasicFlow
+  - source: doc/mdDocs/howToBuild-V1.0.md
+    target: How-to-build-PhasicFlow‐v‐1.0
   # Add more mappings as needed
