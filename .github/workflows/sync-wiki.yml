@@ -89,34 +89,49 @@ jobs:
               # Process HTML img tags separately - preserving all attributes
               echo "Processing HTML image references..."
               
-              # Use a more robust method to process HTML img tags
-              # Create a temporary file for processing
+              # Use a more reliable approach with temporary files and simpler perl commands
               temp_file=$(mktemp)
               echo "$content" > "$temp_file"
               
-              # Process each img tag properly with perl
-              perl -i -0777 -pe '
-                while (s/(<img\s+[^>]*?src=")([^"]+)("[^>]*?>)/) {
-                  my $prefix = $1;
-                  my $src = $2;
-                  my $suffix = $3;
-                  
-                  # Skip URLs
-                  if ($src =~ /^http/) {
-                    # Do nothing, keep as is
-                  } else {
-                    # Path to be replaced
-                    my $filename = $src;
-                    $filename =~ s/.*\///; # Extract filename
-                    my $new_path = "images/" . $filename;
-                    $_ = $` . $prefix . $new_path . $suffix . $`;
-                  }
-                }
-              ' "$temp_file"
+              # Create a simpler perl script file instead of inline perl
+              perl_script=$(mktemp)
+              # Write the perl script with proper escaping for YAML
+              cat > "$perl_script" << 'PERLSCRIPT'
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $content = do { local $/; <STDIN> };
+
+# Process HTML img tags
+while ($content =~ m|(<img\s+[^>]*?src=")([^"]+)("[^>]*?>)|g) {
+    my $prefix = $1;
+    my $src = $2;
+    my $suffix = $3;
+    my $tag = $prefix . $src . $suffix;
+    
+    # Skip URLs
+    next if $src =~ /^http/;
+    
+    # Get just the filename
+    my $filename = $src;
+    $filename =~ s/.*\///;
+    my $new_path = "images/" . $filename;
+    
+    # Replace in content
+    my $new_tag = $prefix . $new_path . $suffix;
+    $content =~ s/\Q$tag\E/$new_tag/g;
+}
+
+print $content;
+PERLSCRIPT
               
-              # Read back the processed content
-              content=$(cat "$temp_file")
-              rm "$temp_file" # Clean up
+              # Process content with the perl script
+              cat "$temp_file" | perl "$perl_script" > "${temp_file}.new"
+              content=$(cat "${temp_file}.new")
+              
+              # Clean up temporary files
+              rm "$temp_file" "${temp_file}.new" "$perl_script"
               
               # Now copy all the images referenced in HTML tags
               for img_src in $(grep -o '<img [^>]*src="[^"]*"' "./$rel_path" | sed -E 's/.*src="([^"]*)".*/\1/'); do
