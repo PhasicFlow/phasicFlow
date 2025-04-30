@@ -5,26 +5,29 @@ You can build PhasicFlow for CPU or GPU. You can have a single build or oven mul
 If you want to install PhasicFlow on **Windows OS**, just see [this page](https://www.cemf.ir/installing-phasicflow-v-1-0-on-ubuntu/) for more information. 
 
 # Required packages
+
 You need a list of packages installed on your computer before building PhasicFlow:
+
 * git, for cloning the code and package management
 * g++, for compiling the code
 * cmake, for generating build system
 * Cuda-12.x or above (if GPU is targeted), for compiling the code for CUDA execution.
  
-
 ### Installing packages 
-Execute the following commands to install the required packages (Except Cuda). tbb is installed automatically. 
+
+Execute the following commands to install the required packages (Except Cuda). tbb is installed automatically.
 
 ```bash
 sudo apt update
 sudo apt install -y git g++ cmake cmake-qt-gui
 ```
- 
 
 ### Installing Cuda for GPU execution 
-If you want to build PhasicFlow to be executed on an nvidia-GPU, you need to install the latest version of Cuda compiler (Version 12.x or above), which is compatible with your hardware and OS, on your computer. 
+
+If you want to build PhasicFlow to be executed on an nvidia-GPU, you need to install the latest version of Cuda compiler (Version 12.x or above), which is compatible with your hardware and OS, on your computer.
 
 # How to build? 
+
 Here you will learn how to build PhasicFlow for single execution mode. Follow the steps below to install it on your computer. 
 Tested operating systems are:
 * Ubuntu-22.04 LTS
@@ -111,6 +114,7 @@ cmake ../ -DpFlow_Build_Cuda=On -DpFlow_Build_Double=Off
 ```
 
 ### Step 5: Testing
+
 In the current terminal or a new terminal enter the following command:
 
 ```bash
@@ -118,6 +122,7 @@ checkPhasicFlow
 ```
 
 This command shows the host and device environments and software version. If PhasicFlow was build correctly, you would get the following output:
+
 ```
 Initializing host/device execution spaces . . . 
   Host execution space is Serial
