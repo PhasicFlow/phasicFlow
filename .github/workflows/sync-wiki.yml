@@ -5,8 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'benchmarks/*/readme.md'
+      - '**/*.md'
       - '.github/workflows/sync-wiki.yml'
+      - '.github/workflows/markdownList.yml'
+      - '.github/scripts/sync-wiki.py'
   workflow_dispatch:
 
 jobs:
@@ -27,12 +29,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.10'
           
       - name: Install dependencies
-        run: pip install beautifulsoup4
+        run: pip install pyyaml
           
-      - name: Sync specific README files to Wiki
+      - name: Sync markdown files to Wiki
         run: |
           python $GITHUB_WORKSPACE/repo/.github/scripts/sync-wiki.py
         env:

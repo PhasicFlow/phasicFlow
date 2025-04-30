@@ -2,106 +2,120 @@
 
 import os
 import re
-from bs4 import BeautifulSoup
-import os.path
+import yaml
+import sys
 
-# Configuration: map of source README files to destination wiki pages
-FILE_MAPPINGS = {
-    'benchmarks/rotatingDrum/readme.md': 'Performance-of-phasicFlow.md',
-    # Add more mappings as needed
-}
+# Constants
+REPO_URL = "https://github.com/PhasicFlow/phasicFlow"
+REPO_PATH = os.path.join(os.environ.get("GITHUB_WORKSPACE", ""), "repo")
+WIKI_PATH = os.path.join(os.environ.get("GITHUB_WORKSPACE", ""), "wiki")
+MAPPING_FILE = os.path.join(REPO_PATH, ".github/workflows/markdownList.yml")
 
-def convert_relative_links(content, source_path, repo_name):
-    """Convert relative links to absolute GitHub links"""
-    repo_base_url = f"https://github.com/{repo_name}/blob/main/"
+def load_mapping():
+    """Load the markdown to wiki page mapping file."""
+    try:
+        with open(MAPPING_FILE, 'r') as f:
+            data = yaml.safe_load(f)
+            return data.get('mappings', [])
+    except Exception as e:
+        print(f"Error loading mapping file: {e}")
+        return []
+
+def convert_relative_links(content, source_path):
+    """Convert relative links in markdown content to absolute URLs."""
+    # Find markdown links with regex pattern [text](url)
+    pattern = r'\[([^\]]+)\]\(([^)]+)\)'
     
-    # Find the directory of the source file to correctly resolve relative paths
-    source_dir = os.path.dirname(source_path)
-    if source_dir:
-        source_dir += '/'
-        
-    # Convert Markdown links: [text](link)
-    def replace_md_link(match):
+    def replace_link(match):
         link_text = match.group(1)
-        link_path = match.group(2)
+        link_url = match.group(2)
         
-        # Skip links that are already absolute
-        if link_path.startswith(('http://', 'https://', '#')):
-            return f"[{link_text}]({link_path})"
+        # Skip if already absolute URL or anchor
+        if link_url.startswith(('http://', 'https://', '#', 'mailto:')):
+            return match.group(0)
         
-        # Convert relative path to absolute
-        if link_path.startswith('./'):
-            link_path = link_path[2:]
-        elif link_path.startswith('../'):
-            # Need to resolve the path based on source_dir
-            path_parts = source_dir.strip('/').split('/')
-            current_path = link_path
-            while current_path.startswith('../'):
-                path_parts.pop()
-                current_path = current_path[3:]
-            new_path = '/'.join(path_parts) + '/' + current_path if path_parts else current_path
-            return f"[{link_text}]({repo_base_url}{new_path})"
-            
-        absolute_path = f"{source_dir}{link_path}" if not link_path.startswith('/') else link_path[1:]
-        return f"[{link_text}]({repo_base_url}{absolute_path})"
+        # Get the directory of the source file
+        source_dir = os.path.dirname(source_path)
         
-    content = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', replace_md_link, content)
+        # Create absolute path from repository root
+        if link_url.startswith('/'):
+            # If link starts with /, it's already relative to repo root
+            abs_path = link_url
+        else:
+            # Otherwise, it's relative to the file location
+            abs_path = os.path.normpath(os.path.join(source_dir, link_url))
+            if not abs_path.startswith('/'):
+                abs_path = '/' + abs_path
+        
+        # Convert to GitHub URL
+        github_url = f"{REPO_URL}/blob/main{abs_path}"
+        return f"[{link_text}]({github_url})"
     
-    # Preserve HTML img tags with their style attributes and fix src paths
-    soup = BeautifulSoup(content, 'html.parser')
-    for img in soup.find_all('img'):
-        if img.get('src') and not img['src'].startswith(('http://', 'https://')):
-            src = img['src']
-            if src.startswith('./'):
-                src = src[2:]
-            if not src.startswith('/'):
-                src = f"{source_dir}{src}"
-            else:
-                src = src[1:]  # Remove leading slash
-            
-            img['src'] = f"{repo_base_url}{src}"
+    # Replace all links
+    return re.sub(pattern, replace_link, content)
+
+def process_file(source_file, target_wiki_page):
+    """Process a markdown file and copy its contents to a wiki page."""
+    source_path = os.path.join(REPO_PATH, source_file)
+    target_path = os.path.join(WIKI_PATH, f"{target_wiki_page}.md")
     
-    # Convert the modified HTML back to string, but only if we found any img tags
-    if soup.find_all('img'):
-        # Extract just the modified HTML parts and reinsert them
-        for img in soup.find_all('img'):
-            img_str = str(img)
-            # Find the original img tag in content and replace it
-            original_img_pattern = re.compile(r'<img[^>]*src=["\']([^"\']*)["\'][^>]*>')
-            for match in original_img_pattern.finditer(content):
-                orig_src = match.group(1)
-                if orig_src in img['src'] or img['src'].endswith(orig_src):
-                    content = content.replace(match.group(0), img_str)
+    print(f"Processing {source_path} -> {target_path}")
     
-    return content
+    try:
+        # Check if source exists
+        if not os.path.exists(source_path):
+            print(f"Source file not found: {source_path}")
+            return False
+        
+        # Read source content
+        with open(source_path, 'r') as f:
+            content = f.read()
+        
+        # Convert relative links
+        content = convert_relative_links(content, source_file)
+        
+        # Write to wiki page
+        with open(target_path, 'w') as f:
+            f.write(content)
+        
+        return True
+    
+    except Exception as e:
+        print(f"Error processing {source_file}: {e}")
+        return False
 
 def main():
-    repo_name = os.environ.get('GITHUB_REPOSITORY', 'PhasicFlow/phasicFlow')
-    repo_path = os.path.join(os.environ.get('GITHUB_WORKSPACE', '.'), 'repo')
-    wiki_path = os.path.join(os.environ.get('GITHUB_WORKSPACE', '.'), 'wiki')
+    # Check if wiki directory exists
+    if not os.path.exists(WIKI_PATH):
+        print(f"Wiki path not found: {WIKI_PATH}")
+        sys.exit(1)
     
-    for source_rel_path, dest_wiki_page in FILE_MAPPINGS.items():
-        source_path = os.path.join(repo_path, source_rel_path)
-        dest_path = os.path.join(wiki_path, dest_wiki_page)
+    # Load mapping
+    mappings = load_mapping()
+    if not mappings:
+        print("No mappings found in the mapping file")
+        sys.exit(1)
+    
+    print(f"Found {len(mappings)} mappings to process")
+    
+    # Process each mapping
+    success_count = 0
+    for mapping in mappings:
+        source = mapping.get('source')
+        target = mapping.get('target')
         
-        print(f"Processing: {source_path} -> {dest_path}")
-        
-        if not os.path.exists(source_path):
-            print(f"Warning: Source file {source_path} does not exist, skipping.")
+        if not source or not target:
+            print(f"Invalid mapping: {mapping}")
             continue
-            
-        # Read the source file
-        with open(source_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            
-        # Convert relative links to absolute
-        content = convert_relative_links(content, source_rel_path, repo_name)
-            
-        # Write the modified content to the destination
-        with open(dest_path, 'w', encoding='utf-8') as f:
-            f.write(content)
-            
-        print(f"Successfully synced {source_path} to {dest_path}")
+        
+        if process_file(source, target):
+            success_count += 1
+    
+    print(f"Successfully processed {success_count} of {len(mappings)} files")
+    
+    # Exit with error if any file failed
+    if success_count < len(mappings):
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

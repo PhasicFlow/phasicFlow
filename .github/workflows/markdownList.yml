@@ -1,0 +1,9 @@
+# This file maps source markdown files to their target wiki pages
+# format:
+# - source: path/to/markdown/file.md
+#   target: Wiki-Page-Name
+
+mappings:
+  - source: benchmarks/rotatingDrum/readme.md
+    target: Performance-of-phasicFlow
+  # Add more mappings as needed
