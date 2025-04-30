@@ -129,28 +129,28 @@ PERLSCRIPT
               # Process content with the perl script
               cat "$temp_file" | perl "$perl_script" > "${temp_file}.new"
               content=$(cat "${temp_file}.new")
-              
+
               # Clean up temporary files
               rm "$temp_file" "${temp_file}.new" "$perl_script"
-              
+
               # Now copy all the images referenced in HTML tags
               for img_src in $(grep -o '<img [^>]*src="[^"]*"' "./$rel_path" | sed -E 's/.*src="([^"]*)".*/\1/'); do
                 # Skip URLs
                 if [[ $img_src == http* ]]; then
                   continue
                 fi
-                
+
                 # Determine the absolute path of the image
                 if [[ $img_src == /* ]]; then
                   abs_img_path="./$img_src"
                 else
                   abs_img_path="$base_dir/$img_src"
                 fi
-                
+
                 # Extract just the filename
                 img_filename=$(basename "$img_src")
                 wiki_img_path="images/$img_filename"
-                
+
                 # Copy the image to wiki repository if it exists
                 if [ -f "$abs_img_path" ]; then
                   echo "Copying image: $abs_img_path -> ./wiki/$wiki_img_path"
