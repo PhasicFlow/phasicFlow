@@ -5,7 +5,7 @@
 mappings:
   - source: benchmarks/readme.md
     target: Performance-of-phasicFlow
-  - source: benchmarks/helicalMider/readme.md
+  - source: benchmarks/helicalMixer/readme.md
     target: Helical-Mixer-Benchmark
   - source: benchmarks/rotatingDrum/readme.md
     target: Rotating-Drum-Benchmark
