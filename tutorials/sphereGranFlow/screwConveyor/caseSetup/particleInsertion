@@ -4,49 +4,44 @@
 \* ------------------------------------------------------------------------- */ 
 objectName particleInsertion;
 objectType dicrionary;
-fileFormat 	ASCII;
+fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-active           Yes;                            // is insertion active -> Yes or No
 
-checkForCollision No;                            // is checked          -> Yes or No
+active          yes;  // is insertion active?
 
-/*
-      five layers of particles are packed one-by-one using 5 insertion steps 
-*/
 
-layer0
+feeder
 {
-   timeControl    simulationTime;
+    rate                   2800;  // insertion rate (particles/s)
 
-   regionType		      cylinder;                // type of insertion region
+    timeControl         simulationTime;
 
-   rate 	                   5000;                // Particles Insertion Rate (particles/s)
+    startTime            0;
 
-   startTime 	                0;                // Start time of LightParticles insertion (s)
+    endTime              100;
 
-   endTime   	              100;                // End time of LightParticles insertion (s) 
+    insertionInterval   0.04;   //s
 
-   insertionInterval        0.03;                // Time Interval of LightParticles insertion (s) 
+    regionType          box;  
 
-   cylinderInfo 
-   {
-   	p1  (0.22 0.730 0.25);                     // Bottom of cylinderRegion(m,m,m)
+    boxInfo 
+    {
+        min ( -0.15 0.34  0.01); // (m,m,m)
+        max (  0.15 0.36 0.15);  // (m,m,m)
+    }
 
-   	p2  (0.22 0.742 0.25);                     // Top of cylinderRegion (m,m,m)
+    // initial velocity of inserted particles
+    setFields
+    {
+        velocity    realx3 (0.0 -0.65 0);  
+    }
 
-      radius           0.09;                     // radius of cylinder (m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 -0.6 -0);           // initial velocity of inserted particles 
-   }
-   
-   mixture
-   {
-      sphere1 1;                                 // mixture composition of inserted particles 
-      
-   }
+    // mixture composition of inserted particles
+    mixture
+    {
+        sphere1 2; 
+        sphere2 1; 
+    }
 }
 
 

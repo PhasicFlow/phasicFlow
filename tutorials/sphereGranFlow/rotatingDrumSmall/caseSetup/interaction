@@ -6,6 +6,7 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+
 materials                   (prop1);             // a list of materials names
 
 densities                  (1000.0);             // density of materials [kg/m3]
@@ -15,35 +16,33 @@ contactListType   sortedContactList;
 contactSearch
 {
   
-   method          NBS;                          // method for broad search 
-    
-   updateInterval   10;
+    method          NBS;                          // method for broad search 
 
-   sizeRatio       1.1;
+    updateInterval   10;
 
-   cellExtent     0.55;
+    sizeRatio       1.1;
 
-   adjustableBox   Yes;
+    cellExtent     0.55;
+
+    adjustableBox   Yes;
 } 
 
 model
 {
-   contactForceModel    nonLinearNonLimited;
+    contactForceModel    nonLinearNonLimited;
 
-   rollingFrictionModel              normal;
+    rollingFrictionModel              normal;
 
-   Yeff  (1.0e6);                                // Young modulus [Pa]
+    Yeff  (1.0e6);                                // Young modulus [Pa]
 
-   Geff  (0.8e6);                                // Shear modulus [Pa]
+    Geff  (0.8e6);                                // Shear modulus [Pa]
 
-   nu    (0.25);                                 // Poisson's ratio [-]
+    nu    (0.25);                                 // Poisson's ratio [-]
 
-   en    (0.7);                                  // coefficient of normal restitution
+    en    (0.7);                                  // coefficient of normal restitution
 
-   et    (1.0);                                  // coefficient of tangential restitution 
+    mu    (0.3);                                  // dynamic friction 
 
-   mu    (0.3);                                  // dynamic friction 
-
-   mur   (0.1);                                  // rolling friction      
+    mur   (0.1);                                  // rolling friction      
 }
 

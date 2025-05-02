@@ -21,7 +21,6 @@ Licence:
 template<typename MotionModel>
 bool pFlow::geometryMotion<MotionModel>::findMotionIndex()
 {
-	
 	if(motionComponentName().size() != numSurfaces() )
 	{
 		fatalErrorInFunction<<

@@ -52,7 +52,7 @@ class Vector;
 
 
 
-template<typename T, typename Allocator = vecAllocator<T> >
+template<typename T, typename Allocator = std::allocator<T> >
 class Vector
 : 
 	public std::vector<T, Allocator>

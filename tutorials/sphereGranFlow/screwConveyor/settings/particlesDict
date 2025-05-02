@@ -6,72 +6,32 @@ objectName 	particlesDict;
 objectType 	dictionary;
 fileFormat 	ASCII;
 /*---------------------------------------------------------------------------*/
+
+
+// positions particles 
+positionParticles
+{
+	// A list of options are: ordered, random
+	method empty;     		// creates the required fields with zero particles (empty). 
+}
+
 setFields
 {
-	/*
-	    Default value for fields defined for particles
-
-		These fields should always be defined for simulations with 
-
-		spherical particles.
-	*/
-
 	defaultValue 
 	{
-		velocity 	    realx3 	(0 0 0);         // linear velocity (m/s)
-		
-		acceleration 	realx3 	(0 0 0);         // linear acceleration (m/s2)
-	
-		rVelocity 	    realx3 	(0 0 0);	     // rotational velocity (rad/s)
-		
-		shapeName 	    word	sphere1;         // name of the particle shape
+		// linear velocity (m/s)
+		velocity 	  realx3 (0 0 0);
+
+		// linear acceleration (m/s2)
+		acceleration  realx3 (0 0 0);
+
+		// rotational velocity (rad/s)
+		rVelocity 	  realx3 (0 0 0);
+
+		// name of the particle shape
+		shapeName 	  word	  sphere1;
 	}
 
 	selectors
-	{
-		shapeAssigne
-		{
-			selector 	stridedRange; 	         // other options: box, cylinder, sphere, randomPoints 
- 
-			stridedRangeInfo
-			{
-				begin 	    0;			         // begin index of points
-
-				end 	5000;		 			 // end index of points 
-
-				stride      3;			 		 // stride for selector 
-			}
-
-			fieldValue  					     // fields that the selector is applied to 
-			{
-				shapeName 	word    sphere1;     // sets shapeName of the selected points to largeSphere
-			}
-		}
-	}
+	{}
 }
-
-positionParticles                                // positions particles 
-{
-	method       ordered;     		             // other options: random and empty
-
-	mortonSorting    Yes;                        // perform initial sorting based on morton code?   
-
-	orderedInfo
-	{
-		diameter     0.01; 						 // minimum space between centers of particles
-
-		numPoints   5000; 	                     // number of particles in the simulation 
-
-		axisOrder (z y x);                       // axis order for filling the space with particles
-	} 
-
-	regionType box;                              // other options: cylinder and sphere  
-
-	boxInfo  				                     // box information for positioning particles 
-	{
-		min (-0.08 -0.08 0.015);                 // lower corner point of the box 
-
-		max     (0.08 0.08 1);	             // upper corner point of the box 
-	}
-}
-

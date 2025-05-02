@@ -20,10 +20,13 @@ Licence:
 #ifndef __pFlowProcessors_hpp__
 #define __pFlowProcessors_hpp__
 
+// from std
+#include <vector>
 
 #include "processors.hpp"
 #include "types.hpp"
 
+// from mpi
 #ifdef pFlow_Build_MPI
     #include "mpi.h"
 #endif

@@ -20,9 +20,8 @@ Licence:
 #ifndef __subscriber_hpp__
 #define __subscriber_hpp__
 
-
-
-#include <array>
+// from std
+#include <vector>
 
 #include "List.hpp"
 #include "message.hpp"

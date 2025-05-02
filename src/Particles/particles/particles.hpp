@@ -98,6 +98,8 @@ public:
 
 	explicit particles(systemControl& control, const shape& shapes);
 
+	~particles() override; 
+
 	inline const auto& dynPointStruct() const
 	{
 		return dynPointStruct_;
@@ -184,7 +186,7 @@ public:
 	}
 
 	inline 
-	uint maxId()const
+	uint32 maxId()const
 	{
 		return idHandler_().maxId();
 	}

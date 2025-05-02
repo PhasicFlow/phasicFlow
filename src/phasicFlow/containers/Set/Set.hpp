@@ -24,6 +24,7 @@ Licence:
 #include <set>
 
 #include "types.hpp"
+#include "iOstream.hpp"
 
 namespace pFlow
 {
@@ -34,6 +35,20 @@ using Set = std::set<Key,std::less<Key>,std::allocator<Key>>;
 
 using wordSet = Set<word>;
 
+template<typename key>
+iOstream& operator<<(iOstream& os, const Set<key>& s)
+{
+	os << beginListToken();
+	for(auto elm = s.begin(); elm!=s.end(); )
+	{
+		os<< *elm++;
+        if( elm!=s.end() )
+			os<<spaceToken();
+	}
+	os<< endListToken();
+    os.check(FUNCTION_NAME);
+    return os;
+}
 
 }
 

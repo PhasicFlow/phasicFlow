@@ -24,6 +24,10 @@ Licence:
 #include "iOstream.hpp"
 #include "types.hpp"
 #include "vocabs.hpp"
+#include "Logical.hpp"
+
+
+inline static bool axuFunctionsInitialized__ = false;
 
 bool pFlow::systemControl::readIncludeExclue(const dictionary& dict)
 {
@@ -35,6 +39,8 @@ bool pFlow::systemControl::readIncludeExclue(const dictionary& dict)
 			includeList_.insert(nm);
 		}
 	}
+    
+    REPORT(1)<<"IncludeObject list is: "<<Green_Text(includeList_)<<END_REPORT;
 
 	if (dict.containsDataEntry("excludeObjects"))
 	{
@@ -44,6 +50,8 @@ bool pFlow::systemControl::readIncludeExclue(const dictionary& dict)
 			excludeList_.insert(nm);
 		}
 	}
+
+    REPORT(1)<<"excludeObject list is: "<<Green_Text(excludeList_)<<END_REPORT;
 	return true;
 }
 
@@ -181,7 +189,20 @@ pFlow::systemControl::systemControl(
 
 bool pFlow::systemControl::operator++(int)
 {
-	auto toContinue = time()++;
+	
+    if(!axuFunctionsInitialized__)
+    {
+        auxFunctions_ = auxFunctions::create(*this);
+        axuFunctionsInitialized__ = true;
+    }
+    
+    if(auxFunctions_)
+    {
+        auxFunctions_().execute();
+        auxFunctions_().write();
+    }
+
+    auto toContinue = time()++;
 
 	if (toContinue)
 	{
@@ -216,4 +237,12 @@ bool pFlow::systemControl::operator++(int)
 	}
 
 	return toContinue;
+}
+
+bool pFlow::systemControl::keepIntegrationHistory()const
+{
+    auto keepHistory = settingsDict_().getValOrSet(
+        "integrationHistory",
+        Logical{false});
+    return keepHistory();
 }

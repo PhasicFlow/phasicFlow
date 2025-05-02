@@ -6,46 +6,39 @@ objectName 	geometryDict;
 objectType 	dictionary;
 fileFormat 	ASCII;
 /*---------------------------------------------------------------------------*/
-motionModel rotatingAxis;                        // motion model: rotating object around an axis
+
+// motion model: rotating object around an axis
+motionModel rotatingAxis; 
 
 rotatingAxisInfo
 {
 	rotAxis 
 	{
-		p1  (1.09635 0.2010556 0.22313511);	     // first point for the axis of rotation 
-
-		p2 (0.0957492 0.201556 0.22313511);	     // second point for the axis of rotation
-
-		omega                            3; 	 // rotation speed (rad/s)
-
-		startTime                        5;      // Start time of Geometry Rotating 
-
-		endTime                         30;      // End time of Geometry Rotating
+		p1        (0 0 0.0); // first point for the axis of rotation 
+		p2        (0 0 1.0); // second point for the axis of rotation
+		omega     3.14; 	 // rotation speed (rad/s)
+		startTime 1;         // when t>1 s, rotation starts 
+		endTime   30;        // when t>30 s, rotation stops
 	}
 }
+
 
 surfaces
 {
 	helix
 	{
-		type 	   stlWall;  	                 // type of the wall
-
-		file 	 helix.stl;	                     // file name in stl folder
-
-		material     prop1;                      // material name of this wall
-
-		motion 	   rotAxis;	                     // motion component name 
+		type 	 stlWall;  	// type of the wall
+		file 	 screw.stl;	// file name in stl folder		
+		material prop1;     // material name of this wall
+		motion 	 rotAxis;	// motion component name 
 	}
 
 	shell
 	{
-		type 	   stlWall;  	                 // type of the wall
-
-		file 	 shell.stl;	                     // file name in stl folder		
-
-		material     prop1;                      // material name of this wall
-
-		motion 	      none;		                 // motion component name 
+		type 	 stlWall;  	// type of the wall
+		file 	 shell.stl;	// file name in stl folder		
+		material prop1;     // material name of this wall
+		motion 	 none;		// this surface is not moving ==> none
 	}
 }
 

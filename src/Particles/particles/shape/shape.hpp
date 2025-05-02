@@ -60,8 +60,27 @@ public:
 		const word& fileName,
 		repository* owner,
 		const property& prop);
+	
+	shape(
+		const word& shapeType,
+		const word& fileName,
+		repository* owner,
+		const property& prop);
 
     ~shape() override=default;
+
+	create_vCtor
+	(
+		shape,
+		word,
+		(
+			const word& shapeType,
+			const word& fileName,
+			repository* owner,
+			const property& prop
+		),
+		(shapeType, fileName, owner, prop)	
+	);
 
 	inline 
 	const auto& properties()const
@@ -148,6 +167,9 @@ public:
 	virtual
 	realVector boundingDiameter()const = 0;
 
+	virtual 
+	realVector volume()const = 0;
+
     virtual 
     bool mass(uint32 index, real& m)const = 0;
 
@@ -186,6 +208,13 @@ public:
 
     virtual 
     real Inertial_zz(uint32 index)const = 0;
+
+	static
+	uniquePtr<shape> create(
+		const word& shapeType,
+		const word& fileName,
+		repository* owner,
+		const property& prop);
 
 };
 

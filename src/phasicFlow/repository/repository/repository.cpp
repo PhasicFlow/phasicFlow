@@ -236,7 +236,42 @@ size_t pFlow::repository::numRepositories()const
 	return repositories_.size();
 }
 
-pFlow::repository& pFlow::repository::lookupRepository(const word& name)
+const pFlow::IOobject *pFlow::repository::lookupObjectPtr
+(
+	const word &name
+) const
+{
+	if( auto [iter, success] = objects_.findIf(name); success )
+	{
+		return iter->second;
+	}
+	else
+	{
+		fatalErrorInFunction << 
+		"Object with name " << name << " is not found in repository " << this->name()<<endl <<
+		"list of avaiable objest is \n" << objectNames();
+		fatalExit;
+	}
+    return nullptr;
+}
+
+pFlow::IOobject *pFlow::repository::lookupObjectPtr(const word &name)
+{
+	if( auto [iter, success] = objects_.findIf(name); success )
+	{
+		return iter->second;
+	}
+	else
+	{
+		fatalErrorInFunction << 
+		"Object with name " << name << " is not found in repository " << this->name()<<endl <<
+		"list of avaiable objest is \n" << objectNames();
+		fatalExit;
+	}
+    return nullptr;
+}
+
+pFlow::repository &pFlow::repository::lookupRepository(const word &name)
 {
 
 	if( auto [iter, success] = repositories_.findIf(name); success )

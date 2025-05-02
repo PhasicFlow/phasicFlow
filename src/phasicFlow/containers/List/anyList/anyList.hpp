@@ -79,6 +79,27 @@ public:
 		/// List of varibales names
 		const wordList& names()const;
 
+		template<typename T, typename... Args>
+		void emplaceBackOrReplace(const word& name, Args&&... args)
+		{
+			if( contains(name))
+			{
+				int32 i = names_.findi(name);
+				types_[i] = getTypeName<T>();
+				anyList_.pos(i)->reset();
+				anyList_.pos(i)-> emplace<T>(std::forward<Args>(args)...);
+			}
+			else
+			{
+				names_.push_back(name);
+				types_.push_back(getTypeName<T>());
+				anyList_.emplace_back( 
+					std::in_place_type<T>, 
+					std::forward<Args>(args)...);
+			}
+			
+		}
+
 		/// Create variable using constructor in-place 
 		template<typename T, typename... Args>
 		reference emplaceBack(const word& name, Args&&... args)

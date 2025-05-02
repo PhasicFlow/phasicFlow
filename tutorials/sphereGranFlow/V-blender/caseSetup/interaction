@@ -6,49 +6,50 @@ objectName interaction;
 objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-materials        (wallMat lightMat);             // a list of materials names
 
-densities               (1000 1000);             // density of materials [kg/m3]
+materials        (wallMat lightMat);        // a list of materials names
+
+densities               (1000 1000);        // density of materials [kg/m3]
 
 contactListType   sortedContactList; 
 
 contactSearch
 {
-    method         NBS;                          // method for broad search 
-    
-   updateInterval   10;
+    method         NBS;  
 
-   sizeRatio       1.1;
+    updateInterval   10;
 
-   cellExtent     0.55;
+    sizeRatio       1.1;
 
-   adjustableBox   Yes;     
+    cellExtent     0.55;
+
+    adjustableBox   Yes;     
 }
 
 model
 {
-   contactForceModel    nonLinearNonLimited;
+    contactForceModel    nonLinearNonLimited;
 
-   rollingFrictionModel              normal;
+    rollingFrictionModel              normal;
 
-  
-   Yeff (1.0e6 1.0e6 
-               1.0e6);                           // Young modulus [Pa]
-   
-   Geff (0.8e6 0.8e6
-               0.8e6);                           // Shear modulus [Pa]
 
-   nu     (0.25 0.25
-                0.25);                           // Poisson's ratio [-]
+    Yeff (1.0e6 1.0e6 
+               1.0e6);      // Young modulus [Pa]
 
-   en     (0.97 0.85
-                0.97);                           // coefficient of normal restitution
+    Geff (0.8e6 0.8e6
+               0.8e6);      // Shear modulus [Pa]
 
-   mu     (0.65 0.35 
-                0.65);                           // dynamic friction
+    nu     (0.25 0.25
+                0.25);      // Poisson's ratio [-]
 
-   mur      (0.1 0.1
-                 0.1);                           // rolling friction
+    en     (0.97 0.85
+                0.97);      // coefficient of normal restitution
+
+    mu     (0.65 0.35 
+                0.65);      // dynamic friction
+
+    mur      (0.1 0.1
+                 0.1);      // rolling friction
         
 }
 

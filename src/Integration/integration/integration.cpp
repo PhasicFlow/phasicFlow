@@ -51,10 +51,12 @@ pFlow::integration::integration(
     const word &baseName,
     pointStructure &pStruct,
     const word &,
-    const realx3Field_D &)
+    const realx3Field_D &,
+	bool keepHistory)
     : owner_(*pStruct.owner()),
       pStruct_(pStruct),
-      baseName_(baseName)
+      baseName_(baseName),
+      keepHistory_(keepHistory)
 {}
 
 
@@ -64,12 +66,13 @@ pFlow::uniquePtr<pFlow::integration>
 		const word& baseName,
 		pointStructure& pStruct,
 		const word& method,
-		const realx3Field_D& initialValField
+		const realx3Field_D& initialValField,
+		bool  keepHistory
 )
 {
 	if( wordvCtorSelector_.search(method) )
 	{
-		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField);
+		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField, keepHistory);
 	}
 	else
 	{

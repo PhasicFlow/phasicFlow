@@ -69,7 +69,7 @@ pFlow::ioErrorMessage(
 )
 {
 	errorStream << "\n>>> Fatal IO file error\n"
-	            << " IO error at number " << Red_Text(fileLineNumber)
+	            << " IO error at number " << Red_Text(fileLineNumber+1)
 	            << " of file " << Red_Text(fileName) << '\n';
 	errorStream << " IO operation is peformed from function "
 	            << Red_Text(fnName) << " in file " << Red_Text(fName)

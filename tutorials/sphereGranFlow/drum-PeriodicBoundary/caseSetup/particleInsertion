@@ -1,0 +1,42 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName particleInsertion;
+objectType dicrionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+active          Yes;            // is insertion active -> yes or no
+
+partInsertion
+{
+    timeControl     simulationTime;     // Time control method
+
+    rate            10000;              // insertion rate (particles/s)
+
+    startTime       0;                  // Start time for insertion (s)
+
+    endTime         2;                  // End time for insertion (s)
+
+    insertionInterval   0.025;          // Time interval between insertions (s)
+
+    regionType      box;                // type of insertion region
+
+    boxInfo
+    {
+        min     (-0.07 0.05 0.05);     // Minimum coordinates of the box (m,m,m)
+        max     ( 0.07 0.06 0.09);     // Maximum coordinates of the box (m,m,m)
+    }
+
+    setFields
+    {
+        velocity realx3 (0.0 -0.4 -0.3); // initial velocity of inserted particles 
+    }
+
+    mixture
+    {
+        sphere1         1;              // mixture composition of inserted particles 
+    }
+}
+

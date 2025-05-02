@@ -18,103 +18,130 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include "KokkosUtilities.hpp"
 #include "systemControl.hpp"
-#include "timeFolder.hpp"
+#include "Vectors.hpp"
 #include "commandLine.hpp"
-#include "ranges.hpp"
 #include "readControlDict.hpp"
 
-#include "postprocess.hpp"
-
-using pFlow::word;
-using pFlow::wordVector;
-using pFlow::wordList;
-using pFlow::commandLine;
-using pFlow::timeFolder;
-using pFlow::output;
-using pFlow::endl;
-
-
+#include "postprocessData.hpp"
+#include "postprocessGlobals.hpp"
 
 
 int main(int argc, char** argv )
 { 
 
-	word outFolder = (pFlow::CWD()/word("VTK/postprocess")).wordPath();
+	pFlow::word outFolder = (pFlow::CWD()/pFlow::postprocessData::defaultRelDir__).wordPath();
 
-	commandLine cmds(
+	pFlow::commandLine cmds(
 		"postprocessPhasicFlow",
 		"post-process fields in time folders based on the input file "
-		"settings/postprocessDict and convetes the results into vtk file format.");
+		"settings/postprocessDataDict.");
 
-	wordVector times;
-		
+	pFlow::wordVector times;
+	
+	pFlow::word description = "path to output folder of postprocess data: ./"
+		+ pFlow::postprocessData::defaultRelDir__;
+
 	cmds.addOption("-o,--out-folder",
 		outFolder,
-		"path to output folder of VTK/postprocess",
+		description,
 		"path");
 
 	cmds.addOption(
 		"-t,--time",
 		times.vectorField(),
-		"a space separated lits of time folders, or a strided range begin:stride:end, or an interval begin:end",
+		"a SPACE separated list of time folders, "
+		"or a strided range <begin>:<stride>:<end>, or an interval <begin>:<end>",
 		" ");
 
 	bool withZeroFolder = false;
-	cmds.addOption(
+	cmds.add_flag(
 		"-z, --zeroFolder",
 		withZeroFolder,
-		"Do NOT exclude zero folder from processing time folders");
+		"include zero folder into processing time folders");
 
 	bool isCoupling = false;
 
 	if(!cmds.parse(argc, argv)) return 0;
 
 	#include "initialize_Control.hpp"
-
-	
-	
 		
-	// time folders in case 
-	timeFolder folders(Control);
-
 	// time in command line 
-	pFlow::realCombinedRange validRange;
+	pFlow::combinedRange<pFlow::timeValue> validRange;
+
 	if( cmds.count("--time") )
 	{
-		if(!validRange.addRanges(times)){
-			fatalExit; }
+		if(!validRange.addRanges(times))
+		{
+			fatalExit; 
+		}
+		if(withZeroFolder)
+			validRange.addIndividual(0.0);
 	}
 	else
 	{
-		validRange.addIntervalRange(folders.startTime(), folders.endTime());
+		if(withZeroFolder)
+			validRange.addIntervalRange(0.0, 1.0e+15);
+		else
+			validRange.addIntervalRange(1.0e-7, 1.0e+15);
 	}
 
-	pFlow::fileSystem destFolder = pFlow::fileSystem(outFolder);
+	pFlow::timeValue nextTime = validRange.minVal();
 
-	pFlow::postprocess post(Control);
+	if(nextTime <0.0)
+	{
+		fatalError
+			<<"Invalid time range in the command line. "
+			<<"your input range is: "
+			<<times
+			<<" which resulted to start time "
+			<< nextTime<<pFlow::endl;
+		fatalExit;
+	}
 
-	do 
+	pFlow::postprocessData::postprocessData postprocess(Control, nextTime);
+	postprocess.setOutputDirectory(pFlow::fileSystem(outFolder+"/").absolute());
+	
+	bool folderSkipped = false;
+	pFlow::output<<"\n"<<pFlow::endl;
+	while(nextTime>=0.0)
 	{
 
-		if( !validRange.isMember( folders.time() ) )
+		if( !folderSkipped )
 		{
-			continue;
+			if(!postprocess.execute())
+			{
+				fatalError
+					<<"Error occured in executing postprocessing...."<<pFlow::endl;
+				fatalExit;
+			}
+
+			if(!postprocess.write())
+			{
+				fatalError
+					<<"Error occured in writing postprocess results..."<<pFlow::endl;
+				fatalExit;
+			}
+
+			pFlow::output<<"\n"<<pFlow::endl;
 		}
-				
-		if( !withZeroFolder && pFlow::equal(folders.time() , pFlow::zero))continue;
 
-		post.processTimeFolder(folders);
+		nextTime = postprocess.database().getNextTimeFolder();
 
-		if(!post.writeToVTK(destFolder, "processed"))
+		if(nextTime <0.0) break;
+
+		if(validRange.isMember(nextTime))
 		{
-			fatalExit;
+			postprocess.database().setToNextTimeFolder();
+			folderSkipped = false;
 		}
-
-		
-			
-	}while (folders++);
+		else
+		{
+			postprocess.database().skipNextTimeFolder();
+			folderSkipped = true;
+		}
+	
+	}
 
 	#include "finalize.hpp"
 

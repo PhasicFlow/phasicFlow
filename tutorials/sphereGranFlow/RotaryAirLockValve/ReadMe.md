@@ -1,7 +1,7 @@
-# Problem Definition
+# Problem Definition (v-1.0)
 The problem is to simulate a Rotary Air-Lock Valve. The external diameter of rotor is about 21 cm. There is one type of particle in this simulation. Particles are inserted into the inlet of the valve from t=**0** s.
 * **28000** particles with **5 mm** diameter are inserted into the valve with the rate of **4000 particles/s**. 
-* The rotor starts its ortation at t = 1.25 s at the rate of 2.1 rad/s. 
+* The rotor starts its rotation at t = 1.25 s at the rate of 2.1 rad/s. 
 
 
 <html>
@@ -83,14 +83,15 @@ surfaces
 
 		// motion component name 
 		motion 	 none;
+	}
 }
 ```
 ## Defining particles 
 ### Diameter and material of spheres 
-In the `caseSetup/sphereShape` the diameter and the material name of the particles are defined.
+In the `caseSetup/shapes` the diameter and the material name of the particles are defined.
 
 <div align="center"> 
-in <b>caseSetup/sphereShape</b> file
+in <b>caseSetup/shapes</b> file
 </div>
 
 ```C++
@@ -182,15 +183,9 @@ model
     // Poisson's ratio [-]
     nu    (0.25 0.25
                 0.25);
-
     // coefficient of normal restitution
     en    (0.7  0.8
                 1.0);
-
-    // coefficient of tangential restitution
-   et    (1.0   1.0
-                1.0);
-
     // dynamic friction
     mu    (0.3  0.35
                 0.35);
@@ -203,7 +198,7 @@ model
 # Performing simulation and seeing the results 
 To perform simulations, enter the following commands one after another in the terminal. 
 
-Enter `$ particlesPhasicFlow` command to create the initial fields for particles (here the simulaiton has no particle at the beginning).  
-Enter `$ geometryPhasicFlow` command to create the geometry.  
-At last, enter `$ sphereGranFlow` command to start the simulation.  
-After finishing the simulation, you can use  `$ pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder.
+Enter `particlesPhasicFlow` command to create the initial fields for particles (here the simulaiton has no particle at the beginning).  
+Enter `geometryPhasicFlow` command to create the geometry.  
+At last, enter `sphereGranFlow` command to start the simulation.  
+After finishing the simulation, you can use  `pFlowtoVTK` to convert the results into vtk format stored in ./VTK folder.

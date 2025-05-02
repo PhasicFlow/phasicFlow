@@ -1,0 +1,86 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  geometryDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+motionModel            rotatingAxis;   
+
+rotatingAxisInfo
+{
+    // for opening the gate of silo between time 4.1 and 5.1 s
+    gateMotion
+    {
+        p1        (-0.04 -0.04 -0.1);
+        p2        (-0.04 -0.04  0.0);
+        omega     3.14;
+        startTime 4.1;
+        endTime   5.1;
+    }
+}
+
+surfaces
+{
+    cylinderShell
+    {
+        type         cylinderWall;               // other options: cuboidWall and planeWall
+
+        p1          (0.0 0.0 0.0);               // begin point of cylinder axis
+
+        p2          (0.0 0.0 0.4);               // end point of cylinder axis
+
+        radius1               0.1;               // radius at p1
+ 
+        radius2               0.1;               // radius at p2
+
+        resolution             36;               // number of divisions
+
+        material          wallMat;               // material name of this wall
+    }
+
+    coneShell
+    {
+        type         cylinderWall;               // other options: cuboidWall and planeWall
+
+        p1         (0.0 0.0 -0.1);               // begin point of cylinder axis
+
+        p2          (0.0 0.0 0.0);               // end point of cylinder axis
+
+        radius1              0.04;               // radius at p1
+
+        radius2               0.1;               // radius at p2
+  
+        resolution             36;               // number of divisions
+
+        material          wallMat;               // material name of this wall
+    }
+
+    /*
+        This is a plane wall at the exit of silo
+    */
+    exitGate
+    {
+        type        planeWall;                   // other options: cuboidWall and cylinderWall
+
+        p1 (-0.04 -0.04 -0.1);                   // first point of the wall
+
+        p2 ( 0.04 -0.04 -0.1);                   // second point of the wall
+
+        p3 ( 0.04  0.04 -0.1);                   // third point of the wall
+
+        p4 (-0.04  0.04 -0.1);                   // fourth point of the wall
+         
+        material      wallMat;                   // material name of the wall
+
+        motion      gateMotion; 
+    }
+}
+
+
+
+
+
+

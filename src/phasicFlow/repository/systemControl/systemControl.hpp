@@ -34,9 +34,12 @@ Licence:
 #include "Timers.hpp"
 #include "dynamicLinkLibs.hpp"
 #include "Set.hpp"
+#include "auxFunctions.hpp"
+
 
 namespace pFlow
 {
+
 
 class systemControl
 :
@@ -83,6 +86,7 @@ protected:
 
 	wordSet 		excludeList_;
     
+	uniquePtr<auxFunctions> 		auxFunctions_ = nullptr;
 	
 	bool readIncludeExclue(const dictionary& dict);
 
@@ -189,6 +193,7 @@ public:
 		return outFilePrecision_;
 	}
 
+	bool keepIntegrationHistory()const;
 	
 	bool isIncluded(const word& objName)const final
 	{

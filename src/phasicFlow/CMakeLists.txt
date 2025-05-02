@@ -47,7 +47,9 @@ repository/Time/Time.cpp
 repository/Time/timeControl.cpp
 repository/Time/baseTimeControl.cpp
 repository/systemControl/systemControl.cpp
+repository/systemControl/auxFunctions/auxFunctions.cpp
 repository/systemControl/dynamicLinkLibs.cpp
+repository/systemControl/timeFolder.cpp
 
 commandLine/commandLine.cpp
 

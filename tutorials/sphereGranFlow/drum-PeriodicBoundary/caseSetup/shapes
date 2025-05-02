@@ -1,0 +1,13 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName  sphereDict;
+objectType  sphereShape;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+names       (sphere1);  // names of shapes 
+
+diameters     (0.004);  // diameter of shapes 
+
+materials     (prop1);  // material names for shapes 
