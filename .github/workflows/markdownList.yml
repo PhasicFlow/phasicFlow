@@ -2,15 +2,17 @@
 # format:
 # - source: path/to/markdown/file.md
 #   target: Wiki-Page-Name
-
 mappings:
-  - source: benchmarks/rotatingDrum/readme.md
+  - source: benchmarks/readme.md
     target: Performance-of-phasicFlow
+  - source: benchmarks/helicalMider/readme.md
+    target: Helical-Mixer-Benchmark
+  - source: benchmarks/rotatingDrum/readme.md
+    target: Rotating-Drum-Benchmark
   - source: doc/mdDocs/howToBuild-V1.0.md
     target: How-to-build-PhasicFlow‐v‐1.0
   - source: tutorials/README.md
     target: Tutorials
   - source: doc/mdDocs/phasicFlowFeatures.md
     target: Features-of-PhasicFlow
-  
   # Add more mappings as needed
