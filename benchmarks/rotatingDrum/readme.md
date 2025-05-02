@@ -7,14 +7,14 @@ This benchmark compares the performance of phasicFlow with a well-stablished com
 ## Simulation Setup
 
 <div align="center">
-    <img src="./images/commericalDEMsnapshot.png" style="width: 400px;" />
+    <img src="./images/commericalDEMsnapshot.png"/>
     <div align="center">  
         <p>Figure 1. Commercial DEM simulation snapshot</p>
     </div>
 </div>
 
 <div align="center">
-    <img src="./images/phasicFlow_snapshot.png" style="width: 400px;" />
+    <img src="./images/phasicFlow_snapshot.png"/>
     <div align="center">  
         <p>Figure 2. phasicFlow simulation snapshot</p>
     </div>
@@ -68,7 +68,7 @@ The execution time scales linearly with particle count. phasicFlow demonstrates 
 - 30% performance improvement when using the NVIDIA RTX A4000 compared to the RTX 4050Ti
 
 <div align="center">
-    <img src="./images/performance1.png" style="width: 500px;" />
+    <img src="./images/performance1.png"/>
     <p>Figure 3. Calculation time comparison between phasicFlow and the well-established commercial DEM software.</p>
 </div>
 
