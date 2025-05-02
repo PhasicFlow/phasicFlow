@@ -1,7 +1,7 @@
 ---
-name: Sync Wiki
+name: Sync-Wiki
 
-true:
+on:
   push:
     branches:
       - main
