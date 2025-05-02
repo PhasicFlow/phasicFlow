@@ -2,13 +2,7 @@ name: Sync-Wiki
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "**/*.md"
-      - ".github/workflows/sync-wiki.yml"
-      - ".github/workflows/markdownList.yml"
-      - ".github/scripts/sync-wiki.py"
+    branches: [main]
   workflow_dispatch:
 
 jobs:
