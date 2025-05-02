@@ -10,4 +10,7 @@ mappings:
     target: How-to-build-PhasicFlow‐v‐1.0
   - source: tutorials/README.md
     target: Tutorials
+  - source: doc/mdDocs/phasicFlowFeatures.md
+    target: Features-of-PhasicFlow
+  
   # Add more mappings as needed
