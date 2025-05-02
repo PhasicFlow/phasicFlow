@@ -16,7 +16,7 @@ This benchmark compares the performance of phasicFlow with a well-stablished com
 <div align="center">
     <img src="./images/phasicFlow_snapshot.png"/>
     <div align="center">  
-        <p>Figure 2. phasicFlow simulation snapshot</p>
+        <p>Figure 2. phasicFlow simulation snapshot and visualized using Paraview</p>
     </div>
 </div>
 

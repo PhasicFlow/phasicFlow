@@ -24,7 +24,10 @@ def load_mapping():
 def convert_relative_links(content, source_path):
     """Convert relative links in markdown content to absolute URLs."""
     # Find markdown links with regex pattern [text](url)
-    pattern = r'\[([^\]]+)\]\(([^)]+)\)'
+    md_pattern = r'\[([^\]]+)\]\(([^)]+)\)'
+    
+    # Find HTML img tags
+    img_pattern = r'<img\s+src=[\'"]([^\'"]+)[\'"]'
     
     def replace_link(match):
         link_text = match.group(1)
@@ -51,8 +54,37 @@ def convert_relative_links(content, source_path):
         github_url = f"{REPO_URL}/blob/main{abs_path}"
         return f"[{link_text}]({github_url})"
     
-    # Replace all links
-    return re.sub(pattern, replace_link, content)
+    def replace_img_src(match):
+        img_src = match.group(1)
+        
+        # Skip if already absolute URL
+        if img_src.startswith(('http://', 'https://')):
+            return match.group(0)
+        
+        # Get the directory of the source file
+        source_dir = os.path.dirname(source_path)
+        
+        # Create absolute path from repository root
+        if img_src.startswith('/'):
+            # If link starts with /, it's already relative to repo root
+            abs_path = img_src
+        else:
+            # Otherwise, it's relative to the file location
+            abs_path = os.path.normpath(os.path.join(source_dir, img_src))
+            if not abs_path.startswith('/'):
+                abs_path = '/' + abs_path
+        
+        # Convert to GitHub URL (use raw URL for images)
+        github_url = f"{REPO_URL}/raw/main{abs_path}"
+        return f'<img src="{github_url}"'
+    
+    # Replace all markdown links
+    content = re.sub(md_pattern, replace_link, content)
+    
+    # Replace all img src tags
+    content = re.sub(img_pattern, replace_img_src, content)
+    
+    return content
 
 def process_file(source_file, target_wiki_page):
     """Process a markdown file and copy its contents to a wiki page."""
