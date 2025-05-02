@@ -8,4 +8,6 @@ mappings:
     target: Performance-of-phasicFlow
   - source: doc/mdDocs/howToBuild-V1.0.md
     target: How-to-build-PhasicFlow‐v‐1.0
+  - source: tutorials/README.md
+    target: Tutorials
   # Add more mappings as needed
