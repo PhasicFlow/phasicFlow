@@ -7,11 +7,11 @@ pFlow::boundarySphereInteractionList<CFModel, gMModel>::boundarySphereInteractio
     const gMModel &geomMotion
 )
 :
-	ListPtr<boundarySphereInteraction<CFModel,gMModel>>(6),
+	boundaryListPtr<boundarySphereInteraction<CFModel,gMModel>>(),
 	boundaries_(sphPrtcls.pStruct().boundaries())
 {
-	//gSettings::sleepMiliSeconds(1000*pFlowProcessors().localRank());
-	for(uint32 i=0; i<6; i++)
+	output<<boundaries_.size()<<endl;
+	ForAllBoundariesPtr(i, this)
 	{
 		this->set(
 			i,

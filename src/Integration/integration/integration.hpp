@@ -24,6 +24,7 @@ Licence:
 
 #include "virtualConstructor.hpp"
 #include "pointFields.hpp"
+#include "Logical.hpp"
 
 
 namespace pFlow
@@ -63,6 +64,15 @@ private:
 		/// The base name for integration 
 		const word baseName_;
 
+		bool 	keepHistory_;
+
+protected:
+
+	bool insertValues(
+		const anyList& varList, 
+		const deviceViewType1D<realx3>& srcVals,
+		realx3PointField_D& dstFeild);
+
 public:
 
 	/// Type info
@@ -76,7 +86,8 @@ public:
 			const word& baseName,
 			pointStructure& pStruct,
 			const word& method,
-			const realx3Field_D& initialValField);
+			const realx3Field_D& initialValField,
+			bool  keepHistory);
 
 		/// Copy constructor 
 		integration(const integration&) = default;
@@ -102,9 +113,10 @@ public:
 				const word& baseName,
 				pointStructure& pStruct,
 				const word& method,
-				const realx3Field_D& initialValField
+				const realx3Field_D& initialValField,
+				bool keepHistory
 			),
-			(baseName, pStruct, method, initialValField)
+			(baseName, pStruct, method, initialValField, keepHistory)
 		);
 
 
@@ -131,6 +143,13 @@ public:
 			return owner_;
 		}
 
+		bool keepHistory()const
+		{
+			return keepHistory_;
+		}
+
+		virtual 
+		void updateBoundariesSlaveToMasterIfRequested() = 0;
 		/// return integration method 
 		virtual 
 		word method()const = 0 ;
@@ -144,21 +163,10 @@ public:
 
 		/// Correction/main integration step
 		virtual 
-		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy) = 0;
+		bool correct(real dt, realx3PointField_D& y, realx3PointField_D& dy, real damping = 1.0) = 0;
 
 		virtual 
-		bool correct(real dt, realx3Field_D& y, realx3PointField_D& dy) = 0;
-
-		/// Set the initial values for new indices 
-		virtual 
-		bool setInitialVals(
-				const int32IndexContainer& newIndices,
-				const realx3Vector& y) = 0;
-
-		/// Check if the method requires any set initial vals
-		virtual 
-		bool needSetInitialVals()const = 0;
-
+		bool correctPStruct(real dt, pointStructure& pStruct, realx3PointField_D& vel) = 0;
 
 	/// Create the polymorphic object based on inputs
 	static
@@ -166,7 +174,8 @@ public:
 			const word& baseName,
 			pointStructure& pStruct,
 			const word& method,
-			const realx3Field_D& initialValField);
+			const realx3Field_D& initialValField,
+			bool  keepHistory);
 
 }; // integration
 

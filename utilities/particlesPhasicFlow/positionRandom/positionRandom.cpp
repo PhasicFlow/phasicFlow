@@ -35,10 +35,10 @@ bool pFlow::positionRandom::positionOnePass(collisionCheck& collCheck)
 	{
 		realx3 p = region.peek();
 
-		if( collCheck.checkPoint(p, diameter_) )
+		if( collCheck.checkPoint(p, distance_) )
 		{
 			position_.push_back(p);
-			diameters_.push_back(diameter_);
+			diameters_.push_back(distance_);
 			
 			if(!collCheck.mapLastAddedParticle())
 			{
@@ -64,7 +64,7 @@ bool pFlow::positionRandom::positionPointsRandom()
 	uint32 pass = 0;
 	collisionCheck collCheck(
 		box(pRegion().minPoint(), pRegion().maxPoint()),
-		diameter_,
+		distance_,
 		position_,
 		diameters_);
 	
@@ -107,9 +107,9 @@ pFlow::positionRandom::positionRandom
 	(  
 		dict.subDict("randomInfo")
 	),
-	diameter_
+	distance_
 	(
-		prDict_.getVal<real>("diameter")
+		prDict_.getVal<real>("distance")
 	),
 	numPoints_
 	(
@@ -122,14 +122,14 @@ pFlow::positionRandom::positionRandom
 	position_
 	(
 		"position",
-		maxNumberOfParticles(),
+		1,
 		0,
 		RESERVE()
 	),
 	diameters_
 	(
 		"diameters",
-		maxNumberOfParticles(),
+		1,
 		0,
 		RESERVE()
 	)

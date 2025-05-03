@@ -27,6 +27,10 @@ Licence:
 #include "pointStructure.hpp"
 #include "boundaryBaseKernels.hpp"
 
+std::array<pFlow::word,6> pFlow::boundaryBase::types_={"none","none","none","none","none","none"};
+std::array<pFlow::real, 6> pFlow::boundaryBase::neighborLengths_={0.01,0.01,0.01,0.01,0.01,0.01};
+std::array<pFlow::real, 6> pFlow::boundaryBase::boundaryExtntionLengthRatios_ = {0.1,0.1,0.1,0.1,0.1,0.1};
+
 void pFlow::boundaryBase::setSize(uint32 newSize)
 {
 	indexList_.resize(newSize);
@@ -61,9 +65,7 @@ bool pFlow::boundaryBase::appendNewIndices
 		newIndices);
 
 	if(!notify(
-		internal_.time().currentIter(),
-		internal_.time().currentTime(),
-		internal_.time().dt(),
+		internal_.time().TimeInfo(),
 		msg,
 		varList))
 	{
@@ -105,21 +107,16 @@ bool pFlow::boundaryBase::removeIndices
 	}
 
 	anyList aList;
-	
+	message msgBndry;
+
 	aList.emplaceBack(
-		message::eventName(message::BNDR_RESET), 
+		msgBndry.addAndName(message::BNDR_RESET), 
 		std::move(keepIndices));
-	
-	message msgBndry 	= message::BNDR_RESET;
 
-	uint32 iter = time().currentIter();
-	real t = time().currentTime();
-	real dt = time().dt();
-
-	if( !this->notify(iter, t, dt, msgBndry, aList) )
+	if( !this->notify(time().TimeInfo(), msgBndry, aList) )
 	{
 		fatalErrorInFunction<<"Error in notify operation in boundary "<< 
-		name_ <<endl;
+		name() <<endl;
 		return false;
 	}
 	
@@ -190,30 +187,61 @@ bool pFlow::boundaryBase::transferPointsToMirror
 	
 }
 
-pFlow::boundaryBase::boundaryBase
-(
-    const dictionary &dict,
-    const plane 	&bplane,
-    internalPoints 	&internal,
-	boundaryList	&bndrs,
-	uint32 			thisIndex
-)
-: 
-	subscriber(dict.name()),
-	boundaryPlane_(bplane),
-	indexList_(groupNames("indexList", dict.name())),
-	indexListHost_(groupNames("hostIndexList",dict.name())),
-	neighborLength_(dict.getVal<real>("neighborLength")),
-	updateInetrval_(dict.getVal<uint32>("updateInterval")),
-	boundaryExtntionLengthRatio_(dict.getVal<real>("boundaryExtntionLengthRatio")),
-	internal_(internal),
-	boundaries_(bndrs),
-	thisBoundaryIndex_(thisIndex),
-	neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo")),
-	isBoundaryMaster_(thisProcessorNo()>=neighborProcessorNo()),
-	name_(dict.name()),
-	type_(dict.getVal<word>("type"))
+pFlow::uint32 pFlow::boundaryBase::markInNegativeSide(const word &name, uint32Vector_D &markedIndices) const
 {
+
+	uint32 s = size();
+
+	markedIndices.reallocate(s+1, s+1);
+	markedIndices.fill(0u);
+
+	const auto& markedIndicesD = markedIndices.deviceViewAll();
+	pointFieldAccessType points = thisPoints();
+	infinitePlane p = boundaryPlane().infPlane();
+
+	uint32 numMark = 0;	
+
+	Kokkos::parallel_reduce
+	(
+		"boundaryProcessor::afterIteration",
+		deviceRPolicyStatic(0,s),
+		LAMBDA_HD(uint32 i, uint32& markToUpdate)
+		{
+			if(p.pointInNegativeSide(points(i)))
+			{
+				markedIndicesD(i)=1;
+				markToUpdate++;
+			}
+		}, 
+		numMark
+	);
+
+    return numMark;
+}
+
+pFlow::boundaryBase::boundaryBase(
+    const dictionary &dict,
+    const plane &bplane,
+    internalPoints &internal,
+    boundaryList &bndrs,
+    uint32 thisIndex)
+    : subscriber(dict.name()),
+      boundaryPlane_(bplane),
+      indexList_(groupNames("indexList", dict.name())),
+      indexListHost_(groupNames("hostIndexList", dict.name())),
+      internal_(internal),
+      boundaries_(bndrs),
+      thisBoundaryIndex_(thisIndex),
+      neighborProcessorNo_(dict.getVal<int32>("neighborProcessorNo"))
+{
+	types_[thisBoundaryIndex_] = dict.getVal<word>("type");
+	
+	neighborLengths_[thisBoundaryIndex_] = dict.getValMax<real>("neighborLength",0.0);
+	
+	boundaryExtntionLengthRatios_[thisBoundaryIndex_] = dict.getValMax<real>("boundaryExtntionLengthRatio",0.1);
+
+    isBoundaryMaster_ = thisProcessorNo() >= neighborProcessorNo();
+
 	unSyncLists();
 }
 

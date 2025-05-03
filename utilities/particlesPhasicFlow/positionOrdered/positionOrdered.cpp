@@ -79,7 +79,7 @@ bool pFlow::positionOrdered::positionPointsOrdered()
 {
 	position_.clear();
 
-	realx3 dl(diameter_);
+	realx3 dl(distance_);
 	const auto& region = pRegion();
 	auto minP =  region.minPoint();
 	auto maxP =  region.maxPoint();
@@ -131,9 +131,9 @@ pFlow::positionOrdered::positionOrdered
 	(  
 		dict.subDict("orderedInfo")
 	),
-	diameter_
+	distance_
 	(
-		poDict_.getVal<real>("diameter")
+		poDict_.getVal<real>("distance")
 	),
 	numPoints_
 	(
@@ -146,8 +146,8 @@ pFlow::positionOrdered::positionOrdered
 	position_
 	(
 		"positionOrdered", 
-		max(maxNumberOfParticles(), numPoints_), 
-		numPoints_ ,
+		numPoints_, 
+		numPoints_,
 		RESERVE()
 	)
 {

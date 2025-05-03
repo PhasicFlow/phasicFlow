@@ -18,22 +18,12 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "particles.hpp"
+#include "shape.hpp"
 
-pFlow::particles::particles(systemControl& control)
+pFlow::particles::particles(systemControl& control, const shape& shapes)
   : observer(defaultMessage_),
     demComponent("particles", control),
-    dynPointStruct_(control),
-    /*id_(
-      objectFile(
-        "id",
-        "",
-        objectFile::READ_IF_PRESENT,
-        objectFile::WRITE_ALWAYS
-      ),
-      dynPointStruct_,
-      static_cast<uint32>(-1),
-      static_cast<uint32>(-1)
-    ),*/
+    dynPointStruct_(control, shapes.maxBoundingSphere()),
     shapeIndex_(
       objectFile(
         "shapeIndex",
@@ -43,16 +33,6 @@ pFlow::particles::particles(systemControl& control)
       ),
       dynPointStruct_,
       0
-    ),
-    accelertion_(
-      objectFile(
-        "accelertion",
-        "",
-        objectFile::READ_IF_PRESENT,
-        objectFile::WRITE_ALWAYS
-      ),
-      dynPointStruct_,
-      zero3
     ),
     contactForce_(
       objectFile(
@@ -82,6 +62,12 @@ pFlow::particles::particles(systemControl& control)
 	//idHandler_().initialIdCheck();
 }
 
+pFlow::particles::~particles()
+{
+  // invalidates / unsobscribe from subscriber before its actual destruction
+  addToSubscriber(nullptr, message::Empty());
+}
+
 bool
 pFlow::particles::beforeIteration()
 {
@@ -94,7 +80,6 @@ pFlow::particles::beforeIteration()
 	zeroTorque();
   baseFieldBoundaryUpdateTimer_.start();
   shapeIndex_.updateBoundariesSlaveToMasterIfRequested();
-  accelertion_.updateBoundariesSlaveToMasterIfRequested();
   idHandler_().updateBoundariesSlaveToMasterIfRequested();
   baseFieldBoundaryUpdateTimer_.end();
   return true;

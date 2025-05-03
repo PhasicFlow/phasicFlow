@@ -110,7 +110,7 @@ public:
 		return geometryMotion_;
 	}
 
-	ContactListType& ppPairs()
+	ContactListType& ppPairs() 
 	{
 		return ppPairs_();
 	}
@@ -148,7 +148,7 @@ public:
 		const ContactForceModel& cfModel,
 		uint32 step)
 	{
-		// for default boundary, no thing to be done 
+		// for default boundary, nothing to be done 
 		return false;
 	}
 
@@ -156,18 +156,24 @@ public:
 
 	bool hearChanges
 	(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
     	const anyList& varList
 	) override
     {
-		
+		if(msg.equivalentTo(message::BNDR_RESET))
+		{
+			// do nothing 
+			return true;
+		}
 		pOutput<<"Function (hearChanges in boundarySphereInteractions)is not implmented Message "<<
-		 msg <<endl<<" name "<< this->name() <<" type "<< this->type()<<endl;;
-		//notImplementedFunction;
+		 msg <<endl<<" name "<< this->boundaryName() <<" type "<< this->type()<<endl;
 		return true;
+	}
+
+	bool isActive()const override
+	{
+		return false;
 	}
 
 	static

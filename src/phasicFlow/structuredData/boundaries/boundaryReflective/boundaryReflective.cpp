@@ -46,19 +46,20 @@ pFlow::boundaryReflective::boundaryReflective
 }
 
 bool pFlow::boundaryReflective::beforeIteration(
-    uint32 step,
-    uint32 iterNum,
-    real t,
-    real dt)
+    uint32 step, 
+	const timeInfo& ti, 
+	bool updateIter, 
+	bool iterBeforeUpdate , 
+	bool& callAgain)
 {
+    boundaryBase::beforeIteration(step, ti, updateIter, iterBeforeUpdate, callAgain);
+    callAgain = false;
     return true;
 }
 
 bool pFlow::boundaryReflective::iterate
 (
-    uint32 iterNum, 
-    real t, 
-    real dt
+    const timeInfo& ti
 )
 {
     return true;
@@ -66,9 +67,7 @@ bool pFlow::boundaryReflective::iterate
 
 bool pFlow::boundaryReflective::afterIteration
 (
-    uint32 iterNum, 
-    real t, 
-    real dt
+    const timeInfo& ti
 )
 {
     if(empty())return true;
@@ -146,7 +145,5 @@ bool pFlow::boundaryReflective::afterIteration
     );
     Kokkos::fence();
     
-    // TODO: notify integration for changes in the velocity 
-
     return true;
 }

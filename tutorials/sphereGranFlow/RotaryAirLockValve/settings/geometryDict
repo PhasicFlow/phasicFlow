@@ -2,65 +2,50 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	geometryDict;
-objectType 	dictionary;
+objectName  geometryDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
+motionModel     rotatingAxis;                    // motion model: rotating object around an axis
 
-// motion model: rotating object around an axis
-motionModel rotatingAxisMotion; 
-
-// information for rotatingAxisMotion motion model 
-rotatingAxisMotionInfo
+rotatingAxisInfo                                 // information for rotatingAxisMotion motion model 
 {
-	rotAxis 
-	{
+    rotAxis 
+    {
+        p1            (0.561547 0.372714 0.000); // first point for the axis of rotation
+        
+        p2            (0.561547 0.372714 0.010); // second point for the axis of rotation
 
-		// first point for the axis of rotation
-		p1 (0.561547 0.372714 0.000);
+        omega         2.1;                       // rotation speed (rad/s)
 
-		// second point for the axis of rotation
-		p2 (0.561547 0.372714 0.010);
-
-		// rotation speed (rad/s)
-		omega 2.1;
-
-		// Start time of Geometry Rotating (s)
-		startTime 1.25;
-		
-		// End time of Geometry Rotating (s)
-		endTime 7;
-	}
+        startTime     1.25;                      // Start time of Geometry Rotating (s)
+        
+        endTime       7;                         // End time of Geometry Rotating (s)
+    }
 }
 
 surfaces
 {
-	gear
-	{
-		// type of the wall
-		type 	 stlWall;
+    gear
+    {
+        type         stlWall;                    // type of the wall
 
-		// file name in stl folder
-		file 	 gear.stl;
+        file         gear.stl;                   // file name in stl folder
 
-		// material name of this wall
-		material wallMat;
+        material     wallMat;                    // material name of this wall
 
-		// motion component name 
-		motion 	 rotAxis;
-	}
-surfaces
-	{
-		// type of the wall
-		type 	 stlWall;
+        motion       rotAxis;                    // motion component name 
+    }
 
-		// file name in stl folder
-		file 	 surfaces.stl;
+    surfaces
+    {
+        type         stlWall;                    // type of the wall
 
-		// material name of this wall
-		material wallMat;
+        file         surfaces.stl;               // file name in stl folder
 
-		// motion component name 
-		motion 	 none;
+        material     wallMat;                    // material name of this wall
+
+        motion       none;                       // motion component name
+    } 
 }
 

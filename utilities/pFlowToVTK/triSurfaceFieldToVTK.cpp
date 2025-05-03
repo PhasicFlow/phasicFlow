@@ -1,3 +1,23 @@
+/*------------------------------- phasicFlow ---------------------------------
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow       
+------------------------------------------------------------------------------
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
+------------------------------------------------------------------------------  
+Licence:
+  This file is part of phasicFlow code. It is a free software for simulating 
+  granular and multiphase flows. You can redistribute it and/or modify it under
+  the terms of GNU General Public License v3 or any other later versions. 
+ 
+  phasicFlow is distributed to help others in their research in the field of 
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-----------------------------------------------------------------------------*/
+
 #include "vocabs.hpp"
 #include "vtkFile.hpp"
 #include "triSurfaceFieldToVTK.hpp"
@@ -6,10 +26,15 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
     systemControl &control,
     const fileSystem &destPath,
     const word &bName,
-    bool separate)
+    bool separate,
+    wordList& surfNames,
+    wordList& fileNames)
 {
 
     auto timeFolder = control.geometry().path();
+    
+    surfNames.clear();
+    fileNames.clear();
 
     // check if pointStructure exist in this folder
     IOfileHeader triSurfaeHeader(
@@ -40,7 +65,9 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
             triSurfaceObj,
             destPath,
             control.time().currentTime(),
-            bName);
+            bName,
+            surfNames,
+            fileNames);
     }
     else
     {
@@ -48,12 +75,14 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFields(
             triSurfaceObj,
             destPath,
             control.time().currentTime(),
-            bName );
+            bName,
+            surfNames,
+            fileNames );
     }
 }
 
 bool pFlow::TSFtoVTK::triSurfaceToVTK(
-    iOstream &os, 
+    Ostream &os, 
     const realx3 *points, 
     const uint32x3 *vertices, 
     const subSurface &subSurf)
@@ -97,7 +126,7 @@ bool pFlow::TSFtoVTK::triSurfaceToVTK(
 }
 
 bool pFlow::TSFtoVTK::triSurfaceToVTK(
-    iOstream &os, 
+    Ostream &os, 
     const realx3 *points, 
     const uint32x3 *vertices, 
     uint32 numPoints, 
@@ -143,10 +172,12 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSingle
     multiTriSurface &surface, 
     const fileSystem &destPath,
     real time, 
-    const word &bName
+    const word &bName,
+    wordList& surfNames,
+	wordList& fileNames
 )
 {
-    vtkFile vtk(destPath, bName, time);
+    vtkFile vtk(destPath, bName, time, false);
 
     if (!vtk)
         return false;
@@ -157,7 +188,7 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSingle
     realx3 const* pData = hPoints.data();
     uint32x3 const* vData = hVertices.data();
 
-    REPORT(1) << "Wrting triSurface geometry to vtk file "<<
+    REPORT(2) << "Wrting surface to "<<
     Green_Text(vtk.fileName()) << END_REPORT;
     
     if (! triSurfaceToVTK(
@@ -189,6 +220,9 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSingle
             convertRealx3TypetriSurfaceField(vtk(), fieldHeader, surface);
         }
     }
+    
+    surfNames.push_back(bName);
+    fileNames.push_back(vtk.fileName().wordPath());
 
     output<<endl;
     return true;
@@ -198,7 +232,9 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSeparate(
     multiTriSurface &surface, 
     const fileSystem &destPath, 
     real time, 
-    const word &bName)
+    const word &bName,
+    wordList& surfNames,
+    wordList& fileNames)
 {
     
     auto hPoints = surface.points().hostView();
@@ -210,16 +246,22 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSeparate(
     REPORT(1) << "Wrting triSurface geometry to vtk file . . ."<<
     END_REPORT;
 
+    wordList sNames, fNames;
+
     auto nSurf = surface.numSurfaces();
     for(auto nS=0; nS<nSurf; nS++)
     {
-        auto sName = surface.subSurfaceName(nS);    
-        vtkFile vtk(destPath, groupNames(bName,sName), time);
+        auto sName = surface.subSurfaceName(nS); 
+        word fName = groupNames(bName,sName,'_');   
+        vtkFile vtk(destPath, fName, time, false);
         REPORT(2) << "Wrting sub-surface to "<<
         Green_Text(vtk.fileName())<<END_REPORT;
 
         if (!vtk)
             return false;
+
+        fNames.push_back(vtk.fileName().wordPath());
+        sNames.push_back(fName);
 
         if (! triSurfaceToVTK(
             vtk(), 
@@ -257,13 +299,15 @@ bool pFlow::TSFtoVTK::convertTimeFolderTriSurfaceFieldsSeparate(
 
     } 
 
+    fileNames = fNames;
+    surfNames = sNames;
     output<<endl;
     return true;
 }
 
 
 bool pFlow::TSFtoVTK::convertRealx3TypetriSurfaceField(
-	iOstream& os,
+	Ostream& os,
 	const IOfileHeader& header,
 	multiTriSurface& tSurface)
 {
@@ -325,7 +369,7 @@ bool pFlow::TSFtoVTK::convertRealx3TypetriSurfaceFieldSeparate
         auto& subSurf = tSurface.subSurfaces()[nS];
 
         auto sName = subSurf.name();    
-        vtkFile vtk(destPath, groupNames(bName,sName), time, true);
+        vtkFile vtk(destPath, groupNames(bName,sName,'_'), time, false, true);
         REPORT(2) << "Wrting sub-surface to "<<
         Green_Text(vtk.fileName())<<END_REPORT;
 

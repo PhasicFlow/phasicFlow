@@ -35,19 +35,6 @@ namespace pFlow
 {
  
 
-template <class T>
-class noConstructAllocator
-    : public std::allocator<T>
-{
-public:
-    using std::allocator<T>::allocator;
-
-    template <class U, class... Args> void construct(U*, Args&&...) {}
-};
-
-template<typename T>
-using vecAllocator = std::allocator<T>;
-
 template<typename T>
 inline
 span<T> makeSpan(std::vector<T>& container)

@@ -287,8 +287,8 @@ pFlow::operator>=(const triple<T>& opr1, const triple<T>& opr2)
 }
 
 template<typename T>
-INLINE_FUNCTION pFlow::iOstream&
-                pFlow::operator<<(iOstream& str, const triple<T>& ov)
+inline pFlow::iOstream&
+    pFlow::operator<<(iOstream& str, const triple<T>& ov)
 {
 	str << token::BEGIN_LIST << ov.x_ << token::SPACE << ov.y_ << token::SPACE
 	    << ov.z_ << token::END_LIST;
@@ -299,8 +299,8 @@ INLINE_FUNCTION pFlow::iOstream&
 }
 
 template<typename T>
-INLINE_FUNCTION pFlow::iIstream&
-                pFlow::operator>>(iIstream& str, triple<T>& iv)
+inline pFlow::iIstream&
+    pFlow::operator>>(iIstream& str, triple<T>& iv)
 {
 	str.readBegin("triple<T>");
 
@@ -316,7 +316,7 @@ INLINE_FUNCTION pFlow::iIstream&
 }
 
 template<typename T>
-INLINE_FUNCTION void
+inline void
 pFlow::readIstream(iIstream& str, triple<T>& iv)
 {
 	str.readBegin("triple<T>");

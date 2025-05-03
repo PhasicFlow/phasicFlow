@@ -50,9 +50,7 @@ public:
     const sphereParticles& Particles()const;
 
     bool hearChanges(
-        real t,
-        real dt,
-        uint32 iter,
+        const timeInfo& ti,
         const message &msg,
         const anyList &varList) override
     {
@@ -63,6 +61,11 @@ public:
     bool acceleration(const timeInfo& ti, const realx3& g)
     {
         return true;
+    }
+
+    bool isActive()const override
+    {
+        return false;
     }
 
     static

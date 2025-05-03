@@ -23,6 +23,7 @@ Licence:
 
 #include "types.hpp"
 #include "typeInfo.hpp"
+#include "timeInfo.hpp"
 #include "Timers.hpp"
 
 namespace pFlow
@@ -102,7 +103,11 @@ public:
 		/// Current simulation time 
 		real currentTime()const;
 
+		/// @brief return current iteration number 
 		uint32 currentIter()const;
+
+		/// return time info of the simulaiton 
+		timeInfo TimeInfo()const;
 		
 		inline
 		const auto& time()const

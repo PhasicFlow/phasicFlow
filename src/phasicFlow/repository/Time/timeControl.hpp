@@ -36,57 +36,55 @@ class dictionary;
 
 class timeControl
 {
+public:
+	using timeStridedRange = stridedRange<timeValue>;
 private:
 
 
 	//// - Data members
 
-	// - integration time step
-	real dt_;
-	
-	// - start time of simulation
-	real startTime_;
+		// - time information 
+		timeInfo 		ti_;
+		
+		// - start time of simulation
+		timeValue startTime_;
 
-	// - end time of simulation 
-	real endTime_;
+		// - end time of simulation 
+		timeValue endTime_;
 
-	// - stopAt
-	real stopAt_;
+		// - stopAt
+		timeValue stopAt_;	
 
-	// - current time of simulation
-	real currentTime_;	
+		// - time interval for time folder output 
+		timeValue saveInterval_;
 
-	// - time interval for time folder output 
-	real saveInterval_;
+		// - the last time folder that was saved
+		timeValue lastSaved_;
 
-	// - the last time folder that was saved
-	real lastSaved_;
+		bool  managedExternaly_ = false;
 
-	// - current iteration number (for this execution)
-	int32 currentIter_;
+		bool outputToFile_ = false;
 
-	// - time precision for output time folders
-	int32 timePrecision_;
+		Logical						performSorting_;
 
-	bool  managedExternaly_ = false;
+		static 
+		inline int32StridedRagne 	screenReportInterval_ ={0,100};
 
-	word  timeName_ = "wrongSettings"; // for managedExternamly
+		static
+		inline timeStridedRange  	timersReportInterval_{0,100};
 
-	real 	writeTime_ = 0; // for managedExternamly
+		static
+		inline timeStridedRange 	sortingInterval_{0,100};
+		
+		static 
+		inline word  timeName_ = "wrongSettings"; // for managedExternamly
 
-	realStridedRange  	timersReportInterval_;
+		static
+		inline timeValue 	writeTime_ = 0; // for managedExternamly
 
-	Logical				performSorting_;
-
-	realStridedRange 	sortingInterval_;
-
-	int32StridedRagne 	screenReportInterval_ ={0,100};
-
-	bool outputToFile_ = false;
-
-	void checkForOutputToFile();
-	
-	bool screenReport()const;
+		void checkForOutputToFile();
+		
+		bool screenReport()const;
 	
 public:
 
@@ -94,22 +92,22 @@ public:
 
 	timeControl(
 		dictionary& dict,
-		real startTime,
-		real endTime,
-		real saveInterval,
+		timeValue startTime,
+		timeValue endTime,
+		timeValue saveInterval,
 		word startTimeName);
 	
 	virtual ~timeControl() = default;
 	
-	real dt()const
+	timeValue dt()const
 	{
-		return dt_;
+		return ti_.dt();
 	}
 
-	real setTime(real t);
+	timeValue setTime(timeValue t);
 	
 
-	void setStopAt(real sT)
+	void setStopAt(timeValue sT)
 	{
 		if(managedExternaly_)
 		{
@@ -117,37 +115,37 @@ public:
 		}
 	}
 
-	real startTime()const
+	timeValue startTime()const
 	{
 		return startTime_;
 	}
 
+	timeValue endTime()const
+	{
+		return endTime_;
+	}
+
+	timeValue saveInterval()const
+	{
+		return saveInterval_;
+	}
+
 	word timeName()const;	
 
-	real currentTime() const 
+	timeValue currentTime() const 
 	{
-		return currentTime_;
+		return ti_.currentTime();
 	}
 
 	word currentTimeWord(bool forSave = true)const
 	{
-		return real2FixedStripZeros( currentTime(), timePrecision());
-		/*if(forSave)
-		{
-			if(!managedExternaly_)
-				
-			else
-				return timeName_;
-		}
-		else
-		{
-			return real2FixedStripZeros( currentTime(), timePrecision());
-		}*/
+		return ti_.timeName();
+		
 	}
 
-	int32 currentIter()const
+	uint32 currentIter()const
 	{
-		return currentIter_;
+		return ti_.currentIter();
 	}
 
 	bool finalTime()const;
@@ -179,17 +177,17 @@ public:
 		bool saveToFile, 
 		const word& timeName = "wrongTimeFolder");
 	
-	int32 timePrecision()const
-	{
-		return timePrecision_;
-	}
-
 	inline
-	timeInfo TimeInfo()const
+	const timeInfo& TimeInfo()const
 	{
-		return {static_cast<uint32>(currentIter_), currentTime_, dt_};
+		return ti_;
 	}
 
+	static
+	uint32 timePrecision()
+	{
+		return timeInfo::precision();
+	}
 
 };
 

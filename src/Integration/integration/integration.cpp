@@ -22,17 +22,41 @@ Licence:
 #include "pointStructure.hpp"
 #include "repository.hpp"
 
-pFlow::integration::integration
+bool pFlow::integration::insertValues
 (
-	const word& baseName,
-	pointStructure& pStruct,
-	const word&,
-	const realx3Field_D&
+	const anyList& varList, 
+	const deviceViewType1D<realx3>& srcVals,
+	realx3PointField_D& dstFeild
 )
-:
-	owner_(*pStruct.owner()),
-	pStruct_(pStruct),
-	baseName_(baseName)	
+{
+	const word eventName = message::eventName(message::ITEMS_INSERT);
+
+	if(!varList.checkObjectType<uint32IndexContainer>(eventName))
+	{
+		fatalErrorInFunction<<"Insertion failed in integration for "<< baseName_<<
+		", variable "<< eventName <<
+		" does not exist or the type is incorrect"<<endl;
+		return false;
+	}
+
+	const auto& indices = varList.getObject<uint32IndexContainer>(
+		eventName);
+	
+	dstFeild.field().insertSetElement(indices, srcVals);
+
+    return true;
+}
+
+pFlow::integration::integration(
+    const word &baseName,
+    pointStructure &pStruct,
+    const word &,
+    const realx3Field_D &,
+	bool keepHistory)
+    : owner_(*pStruct.owner()),
+      pStruct_(pStruct),
+      baseName_(baseName),
+      keepHistory_(keepHistory)
 {}
 
 
@@ -42,12 +66,13 @@ pFlow::uniquePtr<pFlow::integration>
 		const word& baseName,
 		pointStructure& pStruct,
 		const word& method,
-		const realx3Field_D& initialValField
+		const realx3Field_D& initialValField,
+		bool  keepHistory
 )
 {
 	if( wordvCtorSelector_.search(method) )
 	{
-		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField);
+		return wordvCtorSelector_[method] (baseName, pStruct, method, initialValField, keepHistory);
 	}
 	else
 	{

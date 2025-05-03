@@ -61,26 +61,10 @@ public:
 		boundaryBase
 	);
 
-
-	bool hearChanges
-	(
-		real t,
-		real dt,
-		uint32 iter,
-		const message& msg, 
-    	const anyList& varList
-	) override
-    {
-		BoundaryFieldType::hearChanges(t,dt,iter, msg,varList);
-		
-		if(msg.equivalentTo(message::BNDR_DELETE))
-		{
-			// do nothing;
-		}
-		
-		return true;
+	bool isActive()const override
+	{
+		return false;
 	}
-
 };
 
 }

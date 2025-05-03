@@ -4,7 +4,7 @@
 
 
 #include "boundaryList.hpp"
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
 #include "boundaryIntegration.hpp"
 
 
@@ -15,7 +15,7 @@ class integration;
 
 class boundaryIntegrationList
 :
-    public ListPtr<boundaryIntegration>
+    public boundaryListPtr<boundaryIntegration>
 {
 private:
 
@@ -35,6 +35,12 @@ public:
 		real dt, 
 		realx3PointField_D& y, 
 		realx3PointField_D& dy);
+
+    bool correctPStruct(
+        real dt, 
+        pointStructure& pStruct, 
+        const realx3PointField_D& vel);
+
 };
 
 

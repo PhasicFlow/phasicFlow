@@ -31,11 +31,11 @@ pFlow::contactSearch::contactSearch(
  	Timers& timers)
 :
 	extendedDomainBox_(extDomain),
+	updateInterval_(dict.getValMax<uint32>("updateInterval", 1u)),
 	particles_(prtcl),
 	geometry_(geom),
-	ppTimer_("particle-particle contact search", &timers),
-	pwTimer_("particle-wall contact search", &timers),
-	dict_(dict)
+	bTimer_("Boundary particles contact search", &timers),
+	ppTimer_("Internal particles contact search", &timers)
 {
 
 }
@@ -43,6 +43,78 @@ pFlow::contactSearch::contactSearch(
 const pFlow::pointStructure &pFlow::contactSearch::pStruct() const
 {
    return particles_.pStruct();
+}
+
+bool pFlow::contactSearch::broadSearch
+(
+	const timeInfo &ti, 
+	csPairContainerType &ppPairs, 
+	csPairContainerType &pwPairs, 
+	bool force
+)
+{
+
+	if(enterBroadSearch(ti, force))
+	{
+		ppTimer_.start();
+		if( !BroadSearch(
+			ti,
+			ppPairs,
+			pwPairs,
+			force ) )
+		{
+			fatalErrorInFunction;
+			performedSearch_ = false;
+			return false;
+		}
+		ppTimer_.end();
+		performedSearch_ = true;
+		lastUpdated_ = ti.currentIter();
+	}
+	else
+	{
+		performedSearch_ = false;
+	}
+
+	return true;
+}
+
+bool pFlow::contactSearch::boundaryBroadSearch
+(
+	uint32 bndryIndex, 
+	const timeInfo &ti, 
+	csPairContainerType &ppPairs, 
+	csPairContainerType &pwPairs, 
+	bool force
+)
+{
+	if(enterBroadSearchBoundary(ti, force))
+	{
+		bTimer_.start();
+		for(uint32 i=0u; i<6u; i++)
+		{
+			//output<<" boundarySearch "<< i <<" for iter "<< ti.iter()<<endl;
+			if(!BoundaryBroadSearch(
+				i,
+				ti,
+				ppPairs,
+				pwPairs,
+				force))
+			{
+				performedSearchBoundary_ = false;
+				return false;
+			}
+		}
+		bTimer_.end();
+		performedSearchBoundary_ = true;
+	}
+	else
+	{
+
+		performedSearchBoundary_ = false;
+	}
+
+    return true;
 }
 
 pFlow::uniquePtr<pFlow::contactSearch> pFlow::contactSearch::create(

@@ -7,11 +7,11 @@ pFlow::boundaryIntegrationList::boundaryIntegrationList(
     integration &intgrtn
 )
 :
-    ListPtr<boundaryIntegration>(6),
+    boundaryListPtr<boundaryIntegration>(),
 	boundaries_(pStruct.boundaries())
 {
-    
-    for(uint32 i=0; i<6; i++)
+	
+	ForAllBoundariesPtr(i, this)
 	{
 		this->set(
 			i,
@@ -19,23 +19,40 @@ pFlow::boundaryIntegrationList::boundaryIntegrationList(
 				boundaries_[i],
 				pStruct, 
 				method,
-                intgrtn
-            )
-        );
+				intgrtn
+			)
+		);
 	}	
-
 }
 
 bool pFlow::boundaryIntegrationList::correct(real dt, realx3PointField_D &y, realx3PointField_D &dy)
 {
-	for(auto& bndry:*this)
+	ForAllActiveBoundariesPtr(i,this)
 	{
-		if(!bndry->correct(dt, y, dy))
+		if(!boundaryPtr(i)->correct(dt, y, dy))
 		{
-			fatalErrorInFunction;
+			fatalErrorInFunction<<"Error in correcting boundary "<<
+			boundaryPtr(i)->boundaryName()<<endl;
 			return false;
 		}
-		
-    }
+	}
+    return true;
+}
+
+bool pFlow::boundaryIntegrationList::correctPStruct(
+	real dt, 
+	pointStructure &pStruct, 
+	const realx3PointField_D &vel)
+{
+	ForAllActiveBoundariesPtr(i,this)
+	{
+		if(!boundaryPtr(i)->correctPStruct(dt, vel))
+		{
+			fatalErrorInFunction<<"Error in correcting boundary "<<
+			boundaryPtr(i)->boundaryName()<<" in pointStructure."<<endl;
+			return false;
+		}
+	}
+	
     return true;
 }

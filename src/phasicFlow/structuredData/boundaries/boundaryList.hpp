@@ -22,7 +22,9 @@ Licence:
 
 #include "domain.hpp"
 #include "boundaryBase.hpp"
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
+#include "timeInfo.hpp"
+#include "boundariesMask.hpp"
 
 
 namespace pFlow
@@ -32,20 +34,30 @@ class pointStructure;
 
 class boundaryList
 :
-    public ListPtr<boundaryBase>
+    public boundaryListPtr<boundaryBase>
 {
 private:
 
 	//// - data members
-	pointStructure& pStruct_;
-
 	uint32 			neighborListUpdateInterval_;
 
-	domain          extendedDomain_;
+	uint32 			updateInterval_;
 
-	box             internalDomainBox_;
+	uint32 			lastNeighborUpdated_ = 0;
 
-	bool            listSet_ = false;
+	bool 			neighborListUpdate_;
+
+	bool 			boundaryUpdate_;
+
+	bool 			iterBeforeBoundaryUpdate_;
+
+	bool			listSet_ = false;
+
+	pointStructure&   pStruct_;
+
+	uniquePtr<domain> extendedDomain_;
+
+	box				  internalDomainBox_;
 
 	void setExtendedDomain();
 
@@ -82,35 +94,40 @@ public:
 	inline
 	auto& boundary(size_t i)
 	{
-		return ListPtr<boundaryBase>::operator[](i);
+		return boundaryListPtr<boundaryBase>::operator[](i);
 	}
 
 	inline
 	const auto& boundary(size_t i)const
 	{
-		return ListPtr<boundaryBase>::operator[](i);
+		return boundaryListPtr<boundaryBase>::operator[](i);
 	}
 
+	inline 
+	bool boundariesUpdated()const 
+	{
+		return boundaryUpdate_;
+	}
 
 	inline
 	const auto& extendedDomain()const
 	{
-		return extendedDomain_;
+		return extendedDomain_();
 	}
 
 	inline
 	const auto& extendedDomainBox()const
 	{
-		return extendedDomain_.domainBox();
+		return extendedDomain_->domainBox();
 	}
 
 	box internalDomainBox()const;
 	
-	bool beforeIteration(uint32 iter, real t, real dt, bool force = false);
+	bool beforeIteration(const timeInfo& tf, bool force = false);
 
-	bool iterate(uint32 iter, real t, real dt);
+	bool iterate(const timeInfo& tf, bool force = false);
 
-	bool afterIteration(uint32 iter, real t, real dt);
+	bool afterIteration(const timeInfo& tf, bool force = false);
 	
 };
 

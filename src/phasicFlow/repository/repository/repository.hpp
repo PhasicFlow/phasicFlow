@@ -168,6 +168,10 @@ public:
 			}
 		}
 		
+		const IOobject* lookupObjectPtr(const word& name)const;
+
+		IOobject* lookupObjectPtr(const word& name);
+
 		/// return a ref to the underlaying data in the object 
 		template<typename T>
 		T& lookupObject(const word& name);

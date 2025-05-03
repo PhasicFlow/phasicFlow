@@ -7,81 +7,77 @@ objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
-// is insertion active?
-active  yes;          
-// not implemented for yes
-collisionCheck No;
+active     Yes;                         // is insertion active -> Yes or No
 
 /*
-Two layers of particles are packed one-by-one using 1 insertion steps. 
+      Two layers of particles are packed one-by-one using 1 insertion steps 
 */
 
-// Right Layer Region
-   layerrightregion 
+right_region                                 
 {
-// type of insertion region
-   type	          cylinderRegion;
-// insertion rate (particles/s)    
-   rate 	  12500;
-// Start time of LightParticles insertion (s)
-   startTime 	  0; 
-// End time of LightParticles insertion (s)      
-   endTime   	  1;
-// Time Interval of LightParticles insertion (s)
-   interval       0.025; 
+    timeControl           simulationTime;
 
-   cylinderRegionInfo 
-   {
-// Coordinates of cylinderRegion (m,m,m)
-   	p2 (-0.15 0.25 0.05);
-   	p1 (-0.15 0.24	0.05);
-// radius of cylinder (m)
-   	radius 0.035;
-   }
+    regionType            cylinder;     // type of insertion region
+ 
+    rate                  12500;        // Right Region Particles Insertion Rate (particles/s)
+
+    startTime             0;            // Start time of insertion (s)
+    
+    endTime               1;            // End time of insertion (s) 
+
+    insertionInterval     0.025;        // Time Interval of particles insertion (s)
+
+    cylinderInfo 
+    {
+        p2         (-0.15 0.25 0.05);   // Top of cylinderRegion (m,m,m)
+
+        p1         (-0.15 0.24 0.05);   // Bottom of cylinderRegion (m,m,m)
+
+        radius     0.035;               // radius of cylinder (m)
+    }
    
-   setFields
-   {
-// initial velocity of inserted particles
-     velocity    realx3 (0.0 -0.6 0.0);  
-   }
+    setFields
+    {
+        velocity   realx3 (0.0 -0.6 0.0); // initial velocity of inserted particles
+    }
    
-   mixture
-   {
-// mixture composition of inserted particles
-      smallSphere 1;    
-   }
+    mixture
+    {
+        smallSphere     1;              // mixture composition of inserted particles
+    }
 }
-// Left Layer Region
-   layerleftregion
-{
-   type         cylinderRegion;
-//Left Region Particles Insertion Rate (particles/s)
-   rate         7500;
-// Start time of LightParticles insertion (s)
-   startTime    0;
-// End time of LightParticles insertion (s)  
-   endTime      1;
-// Time Interval of LightParticles insertion (s)
-   interval     0.025;
 
-   cylinderRegionInfo 
-   {
-// Coordinates of cylinderRegion (m,m,m)
-      p2 (-0.23	 0.25	0.05); 
-      p1 (-0.23	 0.24	0.05);
-// radius of cylinder (m)      
-      radius 0.035;
-   }
+left_region                                  
+{
+    timeControl           simulationTime;
+
+    regionType            cylinder;      // type of insertion region
+
+    rate                  7500;          // Left Region Particles Insertion Rate (particles/s)
+
+    startTime             0;             // Start time of  insertion (s)
+  
+    endTime               1;             // End time of  insertion (s)
+
+    insertionInterval     0.025;         // Time Interval of  insertion (s)
+
+    cylinderInfo 
+    {
+        p2         (-0.23 0.25 0.05);    // Top of cylinderRegion (m,m,m)
+
+        p1         (-0.23 0.24 0.05);    // Bottom of cylinderRegion (m,m,m)
    
-   setFields
-   {
-     velocity    realx3 (0.0 -0.6 0.0);
-   }
+        radius     0.035;                // radius of cylinder (m)   
+    }
    
-   mixture
-   {
-      largeSphere 1; // only heavySphere
-      
-   }
+    setFields
+    {
+        velocity    realx3 (0.0 -0.6 0.0);  // initial velocity of inserted particles
+    }
+   
+    mixture
+    {
+        largeSphere     1;              // only heavySphere
+    }
 }
 

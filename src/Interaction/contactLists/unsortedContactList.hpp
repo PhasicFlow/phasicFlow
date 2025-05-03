@@ -83,10 +83,15 @@ public:
 
 	explicit unsortedContactList(uint32 capacity=1)
 	:
+	unsortedContactList("unsortedContactList", capacity)
+	{}
+	
+	unsortedContactList(const word& name, uint32 capacity=1)
+	:
 		UnsortedPairs(capacity),
-		values_("values", UnsortedPairs::capacity()),
+		values_(groupNames(name, "values"), UnsortedPairs::capacity()),
 		container0_(capacity),
-		values0_("values0",container0_.capacity())
+		values0_(groupNames(name, "values0"),container0_.capacity())
 	{}
 
 

@@ -102,23 +102,21 @@ public:
 
 	bool hearChanges
 	(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
     	const anyList& varList
 	) override
     {
-		
-		if(msg.equivalentTo(message::BNDR_REARRANGE))
-		{
-			// do nothing
-		}
+
 		if(msg.equivalentTo(message::BNDR_RESET))
 		{
 			//do nothing
+			return true;
 		}
-		return true;
+
+		fatalErrorInFunction<<"Event"<< msg.eventNames()<<"with code "<< msg <<
+		" is not handled in boundaryField."<<endl;
+		return false;
 	}
 
 	inline
@@ -131,6 +129,16 @@ public:
 	const InternalFieldType& internal()const
 	{
 		return internal_;
+	}
+
+	word fieldName()const
+	{
+		return internal_.name(); 
+	}
+
+	word name()const
+	{
+		return groupNames(fieldName(),boundaryName());
 	}
 
 	FieldAccessType thisField()const
@@ -172,6 +180,12 @@ public:
 	void fill(const T& val)
 	{
 		return;
+	}
+
+
+	bool isActive()const override
+	{
+		return false;
 	}
 
 	static

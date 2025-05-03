@@ -73,9 +73,7 @@ public:
     }
 
     bool hearChanges(
-        real t,
-        real dt,
-        uint32 iter,
+        const timeInfo& ti,
         const message &msg,
         const anyList &varList) override
     {
@@ -83,8 +81,10 @@ public:
         if (msg.equivalentTo(message::BNDR_RESET))
         {
             // do nothing
+            return true;
         }
-        return true;
+        fatalErrorInFunction;
+        return false;
     }
 
     virtual bool broadSearch(
@@ -96,6 +96,11 @@ public:
         bool force = false)
     {
         return true;
+    }
+
+    bool isActive()const override
+    {
+        return false;
     }
 
     static uniquePtr<boundaryContactSearch> create(

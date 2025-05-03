@@ -4,43 +4,44 @@
 \* ------------------------------------------------------------------------- */ 
 objectName particleInsertion;
 objectType dicrionary;
-fileFormat 	ASCII;
+fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
+active          yes;  // is insertion active?
 
-active  yes;          // is insertion active?
 
-collisionCheck No;   // not implemented for yes
-
-/*
-five layers of particles are packed one-by-one using 5 insertion steps. 
-*/
-
-layer0
+feeder
 {
-   type		      cylinderRegion; // type of insertion region
-   rate 	      5000;  // insertion rate (particles/s)
-   startTime 	  0;      // (s)
-   endTime   	  100;    // (s)
-   interval       0.03;  //s  
+    rate                   2800;  // insertion rate (particles/s)
 
-   cylinderRegionInfo 
-   {
-   	radius 	0.09;       // radius of cylinder (m)
-   	p1 (0.22 0.73 0.25); // (m,m,m)
-   	p2 (0.22 0.742 0.25); // (m,m,m)
-   }
-   
-   setFields
-   {
-     velocity    realx3 (0.0 -0.6 -0); // initial velocity of inserted particles 
-   }
-   
-   mixture
-   {
-      sphere1 1; // mixture composition of inserted particles 
-      
-   }
+    timeControl         simulationTime;
+
+    startTime            0;
+
+    endTime              100;
+
+    insertionInterval   0.04;   //s
+
+    regionType          box;  
+
+    boxInfo 
+    {
+        min ( -0.15 0.34  0.01); // (m,m,m)
+        max (  0.15 0.36 0.15);  // (m,m,m)
+    }
+
+    // initial velocity of inserted particles
+    setFields
+    {
+        velocity    realx3 (0.0 -0.65 0);  
+    }
+
+    // mixture composition of inserted particles
+    mixture
+    {
+        sphere1 2; 
+        sphere2 1; 
+    }
 }
 
 

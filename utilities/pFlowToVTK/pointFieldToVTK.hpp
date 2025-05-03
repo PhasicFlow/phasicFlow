@@ -24,6 +24,9 @@ Licence:
 #include "systemControl.hpp"
 #include "pointStructure.hpp"
 #include "pointFields.hpp"
+#include "vtkByteSwapper.hpp"
+
+extern bool bindaryOutput__;
 
 namespace pFlow::PFtoVTK
 {
@@ -31,45 +34,47 @@ namespace pFlow::PFtoVTK
 	bool convertTimeFolderPointFields(
 		systemControl &control,
 		const fileSystem &destPath,
-		const word &bName);
+		const word &bName,
+		word& filename);
 
 	bool convertTimeFolderPointFieldsSelected(
 		systemControl &control,
 		const fileSystem &destPath,
 		const word &bName,
 		const wordVector &fieldsName,
-		bool mustExist);
+		bool mustExist,
+		word& filename);
 
 	bool addUndstrcuturedGridField(
-		iOstream &os,
+		Ostream &os,
 		realx3 *position,
 		uint32 numPoints);
 
 	bool convertRealTypePointField(
-		iOstream &os,
+		Ostream &os,
 		const IOfileHeader &header,
 		pointStructure &pStruct);
 
 	bool convertRealx3TypePointField(
-		iOstream &os,
+		Ostream &os,
 		const IOfileHeader &header,
 		pointStructure &pStruct);
 
 	template <typename IntType>
 	bool addIntPointField(
-		iOstream &os,
+		Ostream &os,
 		const word &fieldName,
 		IntType *field,
 		uint32 numData);
 
 	bool addRealPointField(
-		iOstream &os,
+		Ostream &os,
 		const word &fieldName,
 		const real *field,
 		uint32 numData);
 
 	bool addRealx3PointField(
-		iOstream &os,
+		Ostream &os,
 		const word &fieldName,
 		const realx3 *field,
 		uint32 numData);
@@ -87,7 +92,7 @@ namespace pFlow::PFtoVTK
 
 	template <typename IntType>
 	inline bool convertIntPointField(
-		iOstream &os,
+		Ostream &os,
 		const IOfileHeader &header,
 		pointStructure &pStruct)
 	{
@@ -101,6 +106,7 @@ namespace pFlow::PFtoVTK
 			return false;
 		}
 
+		REPORT(1);
 		auto field = PointFieldType(
 			header,
 			pStruct,
@@ -108,7 +114,7 @@ namespace pFlow::PFtoVTK
 
 		const IntType *data = field.deviceViewAll().data();
 
-		REPORT(1) << "writing " << Green_Text(header.objectName()) << " field to vtk.\n";
+		REPORT(2) << ">>> Writing " << Green_Text(header.objectName()) << " field to vtk.\n";
 
 		return addIntPointField(
 			os,
@@ -119,21 +125,49 @@ namespace pFlow::PFtoVTK
 
 	template <typename IntType>
 	inline bool addIntPointField(
-		iOstream &os,
+		Ostream &os,
 		const word &fieldName,
 		IntType *field,
 		uint32 numData)
 	{
+
 		if (numData == 0)
 			return true;
 
-		os << "FIELD FieldData 1\n"
-		   << fieldName << " 1 " << numData << " int\n";
-		for (uint32 i = 0; i < numData; ++i)
+		if(std::is_same_v<IntType, int> || std::is_same_v<IntType, const int> )
 		{
-			os << field[i] << '\n';
+			os << "FIELD FieldData 1\n"
+		   		<< fieldName << " 1 " << numData << " int\n";
+		}
+		else if( std::is_same_v<IntType, unsigned int>|| std::is_same_v<IntType, const unsigned int>)
+		{
+			os << "FIELD FieldData 1\n"
+		   		<< fieldName << " 1 " << numData << " unsigned_int\n";
+		}
+		else
+		{
+			WARNING<<"Field "<< fieldName<< " has invalid data type for conversion. Type is "
+			<<getTypeName<IntType>()<<END_WARNING;
+			return false; 
 		}
 
+		if(bindaryOutput__)
+		{
+			for (uint32 i = 0; i < numData; ++i)
+			{
+				IntType val = byteSwaper(field[i]);
+				os.stdStream().write(reinterpret_cast<const char*>(&val), sizeof(IntType));
+			}
+			os<<'\n';
+		}
+		else
+		{
+			for (uint32 i = 0; i < numData; ++i)
+			{
+				os << field[i] << '\n';
+			}
+		}
+		
 		return true;
 	}
 

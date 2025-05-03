@@ -259,10 +259,28 @@ public:
 		template<typename T>
 		T getVal(const word& keyword) const;
 
+		/// get the value of data entry and return max(value, maxVal)
+		template<typename T>
+		T getValMax(const word& keyword, const T& maxVal)const;
+
+		/// get the value of data entry and return min(value, minVal)
+		template<typename T>
+		T getValMin(const word& keyword, const T& minVal)const;
+
 		/// get the value of data entry or 
 		/// if not found, set the value to setVal
 		template<typename T>
 		T getValOrSet(const word& keyword, const T& setVal)const;
+
+		/// get the value of data entry anf return max(setMaxVal, value)
+		/// if not found, set the value to setMaxVal 
+		template<typename T>
+		T getValOrSetMax(const word& keyword, const T& setMaxVal)const;
+
+		/// get the value of data entry anf return max(setMinVal, value)
+		/// if not found, set the value to setMinVal 
+		template<typename T>
+		T getValOrSetMin(const word& keyword, const T& setMinVal)const;
 
 		/// return number of entris in this dictionary
 		size_t numEntries()const;
@@ -373,6 +391,26 @@ T dictionary::getVal
 }
 
 template<typename T>
+T dictionary::getValMax
+(
+	const word& keyword,
+	const T& maxVal
+)const 
+{
+	return max(getVal<T>(keyword), maxVal);
+}
+
+template<typename T>
+T dictionary::getValMin
+(
+	const word& keyword, 
+	const T& minVal
+)const
+{
+	return min(getVal<T>(keyword), minVal);
+}
+
+template<typename T>
 T dictionary::getValOrSet
 (
 	const word& keyword,
@@ -390,6 +428,18 @@ T dictionary::getValOrSet
 	}
 }
 
+template<typename T>
+T dictionary::getValOrSetMax(const word& keyword, const T& setMaxVal)const
+{
+	return max(getValOrSet(keyword, setMaxVal), static_cast<T>(setMaxVal));
+}
+
+template<typename T>
+T dictionary::getValOrSetMin(const word& keyword, const T& setMinVal)const
+{
+	return min(getValOrSet(keyword, setMinVal), setMinVal);
+}
+
 template <typename T>
 inline bool dictionary::addOrReplace
 (
@@ -400,8 +450,6 @@ inline bool dictionary::addOrReplace
     uniquePtr<iEntry> ptr = makeUnique<dataEntry>(keyword, *this ,v);
     return addPtr(keyword, ptr, false);
 }
-
-
 
 
 } // pFlow

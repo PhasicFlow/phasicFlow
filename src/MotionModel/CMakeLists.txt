@@ -11,8 +11,11 @@ vibratingMotion/vibratingMotion.cpp
 stationaryWall/stationaryWall.cpp
 entities/stationary/stationary.cpp
 
-#entities/multiRotatingAxis/multiRotatingAxis.cpp
-#multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
+conveyorBeltMotion/conveyorBeltMotion.cpp
+entities/conveyorBelt/conveyorBelt.cpp
+
+entities/multiRotatingAxis/multiRotatingAxis.cpp
+multiRotatingAxisMotion/multiRotatingAxisMotion.cpp
 
 )
 

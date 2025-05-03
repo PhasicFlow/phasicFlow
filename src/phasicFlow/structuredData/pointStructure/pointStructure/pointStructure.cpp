@@ -92,7 +92,8 @@ bool pFlow::pointStructure::initializePoints(const PointsTypeHost &points)
 
 pFlow::pointStructure::pointStructure
 (
-    systemControl& control
+    systemControl& control, 
+    real maxBSphere
 )
 :
     IOobject
@@ -111,9 +112,9 @@ pFlow::pointStructure::pointStructure
   	internalPoints(),
 	simulationDomain_
 	(
-		simulationDomain::create(control)
+		simulationDomain::create(control, maxBSphere)
 	),
-    pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
+    //pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
 	(
         *this
@@ -130,11 +131,14 @@ pFlow::pointStructure::pointStructure
         "Error in reading from file "<<IOobject::path()<<endl;
         fatalExit;
     }
+
+    pointSorting_ = makeUnique<pointSorting>(simulationDomain_->subDictOrCreate("pointSorting"));
 }
 
 
 pFlow::pointStructure::pointStructure(
     systemControl& control,
+    real maxBSphere, 
     const realx3Vector &posVec)
 :
 	IOobject
@@ -153,9 +157,9 @@ pFlow::pointStructure::pointStructure(
   	internalPoints(),
 	simulationDomain_
 	(
-		simulationDomain::create(control)
+		simulationDomain::create(control, maxBSphere)
 	),
-    pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
+    //pointSorting_(simulationDomain_->subDictOrCreate("pointSorting")),
 	boundaries_
 	(
 		*this
@@ -167,17 +171,16 @@ pFlow::pointStructure::pointStructure(
         "Error in seting up pointStructure"<<endl;
         fatalExit;
     }
+    pointSorting_ = makeUnique<pointSorting>(simulationDomain_->subDictOrCreate("pointSorting"));
 }
 
 bool pFlow::pointStructure::beforeIteration()
 {
-    uint32 iter = currentIter();
-    real t = currentTime();
-    real deltat = dt();
+    const timeInfo ti = TimeInfo();
 
-    if(pointSorting_.sortTime(iter, t, deltat))
+    if(pointSorting_().sortTime(ti.iter(), ti.t(), ti.dt()))
     {
-        auto sortedIndices = pointSorting_.getSortedIndices(
+        auto sortedIndices = pointSorting_().getSortedIndices(
             simulationDomain_().globalBox(),
             pointPositionDevice(),
             activePointsMaskDevice()
@@ -190,19 +193,21 @@ bool pFlow::pointStructure::beforeIteration()
         }
         
         boundaryUpdateTimer_.start();
-        boundaries_.beforeIteration(iter, t, deltat, true); 
+        boundaries_.beforeIteration(ti, true); 
         boundaryUpdateTimer_.end();
 
         INFORMATION<<"Reordering of particles has been done. New active range for particles is "<<
         activeRange()<<END_INFO; 
+
+
         message msg;
         anyList varList;
 
         varList.emplaceBack(
-            msg.addAndName(message::ITEM_REARRANGE),
+            msg.addAndName(message::ITEMS_REARRANGE),
             sortedIndices);
 
-        if(!notify(iter, t, deltat, msg, varList))
+        if(!notify(ti, msg, varList))
         {
             fatalErrorInFunction<<
             "cannot notify for reordering items."<<endl;
@@ -214,7 +219,7 @@ bool pFlow::pointStructure::beforeIteration()
     else
     {
         boundaryUpdateTimer_.start();
-        if( !boundaries_.beforeIteration(iter, t, deltat) )
+        if( !boundaries_.beforeIteration(ti) )
         {
             fatalErrorInFunction<<
             "Unable to perform beforeIteration for boundaries"<<endl;
@@ -228,7 +233,7 @@ bool pFlow::pointStructure::beforeIteration()
 
 bool pFlow::pointStructure::iterate()
 {
-    if( !boundaries_.iterate(currentIter(), currentTime(), dt()) )
+    if( !boundaries_.iterate(TimeInfo()) )
     {
         fatalErrorInFunction<<
         "Unable to perform iterate for boundaries"<<endl;
@@ -241,7 +246,7 @@ bool pFlow::pointStructure::iterate()
 bool pFlow::pointStructure::afterIteration()
 {
     boundaryDataTransferTimer_.start();
-    if( !boundaries_.afterIteration(currentIter(), currentTime(), dt()) )
+    if( !boundaries_.afterIteration(TimeInfo()) )
     {
         fatalErrorInFunction<<
         "Unable to perform afterIteration for boundaries"<<endl;

@@ -1,0 +1,160 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName     geometryDict;
+objectType     dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+motionModel rotatingAxis;                       
+
+rotatingAxisInfo                                
+{
+    axisOfRotation 
+    {
+        p1 (-0.1 0.0 0.15);
+
+        p2 ( 0.1 0.0 0.15);
+        
+        omega       1.5708;
+            
+        startTime      0.5;
+        
+        endTime        9.5;
+    }
+}
+
+surfaces
+{
+    topGate
+    {
+        type       cylinderWall;     // type of wall
+        
+        p1         (0.0 0.0 0.3);    // begin point of cylinder axis 
+        
+        p2         (0.0 0.0 0.301);  // end point of cylinder axis
+        
+        radius1    0.03;             // radius at p1  
+        
+        radius2    0.0001;           // radius at p2    
+        
+        material   solidProperty;    // material of wall
+        
+        motion     axisOfRotation;                    
+    }
+
+    topCylinder
+    {
+        type       cylinderWall;
+            
+        p1         (0.0 0.0 0.28);
+        
+        p2         (0.0 0.0 0.3);
+          
+        radius1     0.03;
+            
+        radius2     0.03;
+                
+        resolution  36;
+        
+        material    solidProperty;
+        
+        motion      axisOfRotation;                 
+    }
+
+    coneShelltop
+    {    
+        type        cylinderWall;
+        
+        p1          (0.0 0.0 0.2);
+        
+        p2          (0.0 0.0 0.28);
+        
+        radius1      0.1;
+        
+        radius2      0.03;
+            
+        resolution   36;
+            
+        material     solidProperty;
+             
+        motion       axisOfRotation;                    
+    }
+
+    cylinderShell
+    {
+        type        cylinderWall;
+            
+        p1          (0.0 0.0 0.1);
+        
+        p2          (0.0 0.0 0.2);
+         
+        radius1     0.1;
+            
+        radius2     0.1;
+            
+        resolution  36;
+                      
+        material    solidProperty;
+            
+        motion      axisOfRotation;        
+    }
+
+    coneShelldown
+    {
+        type         cylinderWall;
+        
+        p1           (0.0 0.0 0.02);
+         
+        p2           (0.0 0.0 0.1);
+        
+        radius1      0.03;
+        
+        radius2      0.1;
+            
+        resolution   36;
+                 
+        material     solidProperty;
+            
+        motion       axisOfRotation;            
+    }
+
+    bottomCylinder
+    {
+        type        cylinderWall;
+        
+        p1          (0.0 0.0 0.0);
+          
+        p2          (0.0 0.0 0.02);
+        
+        radius1     0.03;
+            
+        radius2     0.03;
+                
+        resolution  36;
+                      
+        material    solidProperty;
+                   
+        motion      axisOfRotation;            
+    }
+
+    exitGate
+    {
+        type       cylinderWall;
+        
+        p1         (0.0 0.0 -0.001);
+          
+        p2         (0.0 0.0 0.0);
+        
+        radius1    0.03;
+                
+        radius2    0.0001;
+            
+        resolution 36;
+                      
+        material   solidProperty;
+        
+        motion     axisOfRotation;                       
+    }    
+}

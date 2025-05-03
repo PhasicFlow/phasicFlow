@@ -18,8 +18,16 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+REPORT(0)<<"Reading shape dictionary ..."<<END_REPORT;
+pFlow::sphereShape spheres
+(
+	pFlow::shapeFile__,
+	&Control.caseSetup(),
+	proprties
+);
+
 //
 REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
-pFlow::sphereParticles sphParticles(Control, proprties);
+pFlow::sphereParticles sphParticles(Control, spheres);
 
 WARNING<<"Particle insertion has not been set yet!"<<END_WARNING;

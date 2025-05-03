@@ -167,6 +167,11 @@ pFlow::fileSystem pFlow::fileSystem::canonical
 	return res;
 }
 
+pFlow::fileSystem pFlow::fileSystem::relative(const fileSystem &base)const
+{
+    return fileSystem( std::filesystem::relative(path_, base.path_));
+}
+
 bool pFlow::fileSystem::dirExist
 (
 ) const

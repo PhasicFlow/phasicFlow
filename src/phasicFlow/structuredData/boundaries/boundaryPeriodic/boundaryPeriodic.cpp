@@ -33,38 +33,39 @@ pFlow::boundaryPeriodic::boundaryPeriodic
 )
 :
 	boundaryBase(dict, bplane, internal, bndrs, thisIndex),
-	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex")),
-	extensionLength_(dict.getVal<real>("boundaryExtntionLengthRatio"))
+	mirrorBoundaryIndex_(dict.getVal<uint32>("mirrorBoundaryIndex"))
 {
-	extensionLength_ = max(extensionLength_, static_cast<real>(0.1));
+	
 }
-
-pFlow::real pFlow::boundaryPeriodic::neighborLength() const
-{
-    return (1+extensionLength_)*neighborLengthIntoInternal();
-}
-
-pFlow::realx3 pFlow::boundaryPeriodic::boundaryExtensionLength() const
-{
-    return -extensionLength_*neighborLengthIntoInternal()*boundaryBase::boundaryPlane().normal();
-}
-
 
 bool pFlow::boundaryPeriodic::beforeIteration(
-	uint32 step,
-    uint32 iterNum,
-    real t,
-    real dt)
+	uint32 step, 
+	const timeInfo& ti, 
+	bool updateIter, 
+	bool iterBeforeUpdate , 
+	bool& callAgain)
 {
-	if(step!=2)return true;
+	if(step==1)
+	{
+		boundaryBase::beforeIteration(step, ti, updateIter, iterBeforeUpdate, callAgain);
+		callAgain = true;
+		return true;
+	}
+
+	
+	callAgain = false;
 	// nothing have to be done
 	if(empty())
 	{
 		return true;
 	}
+	//output<<this->thisBoundaryIndex()<<"  ->"<<ti.iter()<<" update called\n";
+	if(!performBoundarytUpdate())
+	{
+		return true;
+	}
 
-	if( !boundaryListUpdate(iterNum))return true;
-	
+	//output<<this->thisBoundaryIndex()<<"  ->"<< ti.iter()<<" update is being performed \n";
 	uint32 s = size();
 	uint32Vector_D transferFlags("transferFlags",s+1, s+1, RESERVE()); 
 	transferFlags.fill(0u);
@@ -89,7 +90,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 		}, 
 		numTransfered
 	);
-	
+
 	// no point to be transfered 
 	if(numTransfered == 0 )
 	{
@@ -106,24 +107,18 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 		mirrorBoundaryIndex(), 
 		transferVec
 	);
+	
+	return true;
+	
+	
 }
 
-bool pFlow::boundaryPeriodic::iterate
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryPeriodic::iterate(const timeInfo& ti)
 {
 	return true;
 }
 
-bool pFlow::boundaryPeriodic::afterIteration
-(
-	uint32 iterNum, 
-	real t,
-	real dt
-)
+bool pFlow::boundaryPeriodic::afterIteration(const timeInfo& ti)
 {
 	return true;
 }

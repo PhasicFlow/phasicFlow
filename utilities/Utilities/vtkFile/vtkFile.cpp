@@ -23,7 +23,7 @@ Licence:
 
 bool pFlow::vtkFile::openStream(bool wHeader)
 {
-	oStream_ = makeUnique<oFstream>( fileName(), false, append_ );
+	oStream_ = makeUnique<oFstream>( fileName(), binary_, append_ );
 	if( !oStream_ )return false;
 	if(wHeader)
 		return writeHeader();
@@ -36,11 +36,13 @@ bool pFlow::vtkFile::vtkFile::writeHeader()
 
 	if(!oStream_) return false;
 
-	oStream_() << "# vtk DataFile Version 2.0" << endl;
+	oStream_() << "# vtk DataFile Version 3.0" << endl;
 	
 	oStream_() << "vtk file for time : " << time_ << endl;
-
-	oStream_() << "ASCII" << endl;
+	if(binary_)
+		oStream_() << "BINARY" << endl;
+	else
+		oStream_() << "ASCII" << endl;
 
 	if( oStream_().fail() ) return false;
 
@@ -53,13 +55,15 @@ pFlow::vtkFile::vtkFile
 	const fileSystem dir,
 	const word& bName,
 	real time,
+	bool bnry,
 	bool append
 )
 :
-	dirPath_(dir),
-	baseName_(bName),
+	binary_(bnry),
+	append_(append),
 	time_(time),
-	append_(append)
+	dirPath_(dir),
+	baseName_(bName)
 {
 
 	if(!openStream(!append))

@@ -173,7 +173,7 @@ public:
 
 	inline bool insertionTime(uint32 iter, real t, real dt) const
 	{
-		return tControl_.timeEvent(iter, t, dt);
+		return tControl_.eventTime(iter, t, dt);
 	}
 
 	uint32        numberToBeInserted(uint32 iter, real t, real dt);

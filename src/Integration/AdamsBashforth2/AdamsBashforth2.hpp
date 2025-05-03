@@ -17,13 +17,13 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __AdamsBashforth2_hpp__
 #define __AdamsBashforth2_hpp__
 
 
 #include "integration.hpp"
 #include "pointFields.hpp"
+#include "boundaryIntegrationList.hpp"
 
 namespace pFlow
 {
@@ -41,9 +41,32 @@ class AdamsBashforth2
 {
 private:
 
+	const realx3Field_D& initialValField_;
+
+	boundaryIntegrationList boundaryList_;
+
+	friend class processorAB2BoundaryIntegration;
+
+protected:
+	
+	const auto& dy1()const
+	{
+		return static_cast<const realx3PointField_D&>(*this);
+	}
+
 	auto& dy1()
 	{
 		return static_cast<realx3PointField_D&>(*this);
+	}
+
+	auto& initialValField()
+	{
+		return initialValField_;
+	}
+
+	boundaryIntegrationList& boundaryList()
+	{
+		return boundaryList_;
 	}
 	
 public:
@@ -58,10 +81,11 @@ public:
 			const word& baseName,
 			pointStructure& pStruct,
 			const word& method,
-			const realx3Field_D& initialValField);
+			const realx3Field_D& initialValField,
+			bool  keepHistory);
 
 		/// Destructor 
-		~AdamsBashforth2()final = default;
+		~AdamsBashforth2()override = default;
 
 		/// Add this to the virtual constructor table 
 		add_vCtor(
@@ -71,6 +95,9 @@ public:
 
 
 	// - Methods
+
+		void updateBoundariesSlaveToMasterIfRequested()override;
+
 		/// return integration method 
 		word method()const override
 		{
@@ -90,30 +117,20 @@ public:
 		bool correct(
 			real dt, 
 			realx3PointField_D& y, 
-			realx3PointField_D& dy) final;
+			realx3PointField_D& dy,
+			real damping = 1.0) override;
 
-		bool correct(
+		bool correctPStruct(
 			real dt, 
-			realx3Field_D& y, 
-			realx3PointField_D& dy) final;
+			pointStructure& pStruct, 
+			realx3PointField_D& vel) override;
 		
 		/*bool hearChanges
 		(
-			real t,
-			real dt,
-			uint32 iter,
+			const timeInfo& ti,
 			const message& msg, 
 			const anyList& varList
 		) override;*/
-
-		bool setInitialVals(
-			const int32IndexContainer& newIndices,
-			const realx3Vector& y) final;
-
-		bool needSetInitialVals()const final
-		{
-			return false;
-		}
 
 };
 

@@ -26,11 +26,13 @@ Licence:
 #include "pointFields.hpp"
 #include "integration.hpp"
 #include "uniquePtr.hpp"
+#include "globalDamping.hpp"
 
 namespace pFlow
 {
 
 class systemControl;
+//class globalDamping;
 
 class dynamicPointStructure
 :
@@ -40,9 +42,14 @@ private:
 
 	realx3PointField_D  	velocity_;
 
+	/// acceleration on device
+	realx3PointField_D      acceleration_;
+
 	uniquePtr<integration>  integrationPos_ = nullptr;
 
 	uniquePtr<integration>  integrationVel_ = nullptr;
+
+	uniquePtr<globalDamping> velDamping_ = nullptr;
 
 	Timer 					velocityUpdateTimer_;
 
@@ -53,7 +60,7 @@ public:
 
 	TypeInfo("dynamicPointStructure");
 
-	explicit dynamicPointStructure(systemControl& control);
+	explicit dynamicPointStructure(systemControl& control, real maxBSphere);
 
 	dynamicPointStructure(const dynamicPointStructure& ps) = delete;
 		
@@ -82,18 +89,42 @@ public:
 		return velocity_;
 	}
 
+	inline 
+	const realx3PointField_D& acceleration()const
+	{
+		return acceleration_;
+	}
+
+	inline 
+	realx3PointField_D& acceleration()
+	{
+		return acceleration_;
+	}
+
+	inline
+	real dampingFactor(const timeInfo& ti)const
+	{
+		if(velDamping_)
+		{
+			return velDamping_().dampingFactor(ti);
+		}
+		return 1.0;
+	}
+
 	/// In the time loop before iterate
 	bool beforeIteration() override;
 
 	/// @brief This is called in time loop. Perform the main calculations 
 	/// when the component should evolve along time.
 	bool iterate() override;
+
+	bool afterIteration()override;
 	
 	/// prediction step (if any), is called in beforeIteration	
-	bool predict(real dt, realx3PointField_D& acceleration);
+	bool predict(real dt);
 
 	/// correction step, is called in iterate 
-	bool correct(real dt, realx3PointField_D& acceleration);
+	bool correct(real dt);
 
 };
 

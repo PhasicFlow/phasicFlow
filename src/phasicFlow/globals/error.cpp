@@ -32,41 +32,35 @@ Licence:
 static pFlow::Ostream& errorStream = pFlow::pOutput;
 
 pFlow::iOstream&
-fatalErrorMessage(const char* fileName, int linNumber)
+pFlow::fatalErrorMessage(const char* fileName, int lineNumber)
 {
-	errorStream << "\n>>> Fatal error in phasicFlow\n"
-	            << "Error occured in source file " << Red_Text(fileName)
-	            << " at line " << Red_Text(linNumber) << '\n';
+	errorStream << "\nError occured in file ("<<lineNumber<<"):" <<Red_Text(fileName)<<'\n';
 	return errorStream;
 }
 
 pFlow::iOstream&
-fatalErrorInMessage(const char* fnName, const char* fileName, int linNumber)
+pFlow::fatalErrorInMessage(const char* fnName, const char* fileName, int lineNumber)
 {
-	errorStream << "\n>>> Fatal error in phasicFlow\n"
-	            << " Error is issued in function " << Red_Text(fnName)
-	            << ", located in file " << Red_Text(fileName) << " at line "
-	            << Red_Text(linNumber) << '\n';
+	errorStream << "\nError occured in file ("<<lineNumber<<"):" <<Red_Text(fileName)<<'\n'<<
+	"Function: "<<Red_Text(fnName)<<'\n';
 	return errorStream;
 }
 
 pFlow::iOstream&
-notImplementedErrorMessage(
+pFlow::notImplementedErrorMessage(
   const char* fnName,
   const char* fileName,
   int         lineNumber
 )
 {
-	errorStream << "\n>>> Fatal error in phasicFlow\n";
-	errorStream << " Function " << Red_Text(fnName)
+	errorStream << "\n Function " << Yellow_Text(fnName)
 	            << " has not been implemented yet!\n"
-	            << " File " << Yellow_Text(fileName) << " at line "
-	            << Yellow_Text(lineNumber) << '\n';
+	            << " Look into file  ("<<lineNumber<<"):" <<fileName<<'\n';
 	return errorStream;
 }
 
 pFlow::iOstream&
-ioErrorMessage(
+pFlow::ioErrorMessage(
   const char* fileName,
   int         fileLineNumber,
   const char* fnName,
@@ -75,7 +69,7 @@ ioErrorMessage(
 )
 {
 	errorStream << "\n>>> Fatal IO file error\n"
-	            << " IO error at number " << Red_Text(fileLineNumber)
+	            << " IO error at number " << Red_Text(fileLineNumber+1)
 	            << " of file " << Red_Text(fileName) << '\n';
 	errorStream << " IO operation is peformed from function "
 	            << Red_Text(fnName) << " in file " << Red_Text(fName)
@@ -84,7 +78,7 @@ ioErrorMessage(
 }
 
 pFlow::iOstream&
-ioErrorMessage(
+pFlow::ioErrorMessage(
   const pFlow::word& fileName,
   int                fileLineNumber,
   const char*        fnName,
@@ -98,7 +92,7 @@ ioErrorMessage(
 }
 
 pFlow::iOstream&
-warningMessage(const char* fnName, const char* fileName, int linNumber)
+pFlow::warningMessage(const char* fnName, const char* fileName, int linNumber)
 {
 	errorStream << "\n>>> Warning in phasicFlow\n"
 	            << " Warning is issued in function " << Yellow_Text(fnName)
@@ -108,7 +102,7 @@ warningMessage(const char* fnName, const char* fileName, int linNumber)
 }
 
 pFlow::iOstream&
-reportAndExit(int errorCode)
+pFlow::reportAndExit(int errorCode)
 {
 	errorStream << "\n>>> phasicFlow is exiting . . ." << pFlow::endl;
 	fatalExitPhasicFlow(errorCode);
@@ -116,11 +110,18 @@ reportAndExit(int errorCode)
 }
 
 int
-fatalExitPhasicFlow(int errorCode)
+pFlow::fatalExitPhasicFlow(int errorCode)
 {
 	// Kokkos should be finalized first
 	Kokkos::finalize();
 
 	pFlow::processors::abort(errorCode);
 	return errorCode;
+}
+
+pFlow::iOstream&
+pFlow::reportPing(const char* fileName, int fileLineNumber)
+{
+	errorStream<<"Ping! ("<<fileLineNumber<<"):"<<fileName<<endl;
+	return errorStream;
 }

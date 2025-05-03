@@ -21,12 +21,14 @@ Licence:
 #include "dynamicPointStructure.hpp"
 #include "systemControl.hpp"
 
+
 pFlow::dynamicPointStructure::dynamicPointStructure
 (
-	systemControl& control
+	systemControl& control,
+	real maxBSphere
 )
 :
-	pointStructure(control),
+	pointStructure(control, maxBSphere),
 	velocity_
 	(
 		objectFile(
@@ -38,6 +40,16 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		*this,
 		zero3
 	),
+	acceleration_(
+      objectFile(
+        "acceleration",
+        "",
+        objectFile::READ_IF_PRESENT,
+        objectFile::WRITE_ALWAYS
+      ),
+      *this,
+      zero3
+    ),
 	velocityUpdateTimer_("velocity boundary update", &timers()),
 	integrationMethod_
 	(
@@ -46,13 +58,14 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 {
 	REPORT(1)<< "Creating integration method "<<
 		Green_Text(integrationMethod_)<<" for dynamicPointStructure."<<END_REPORT;
-
+	
 	integrationPos_ = integration::create
 	(
 		"pStructPosition",
 		*this,
 		integrationMethod_,
-		pointPosition()
+		velocity_.field(),
+		control.keepIntegrationHistory()
 	);
 
 	if( !integrationPos_ )
@@ -67,7 +80,8 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		"pStructVelocity",
 		*this,
 		integrationMethod_,
-		velocity_.field()
+		acceleration_.field(),
+		control.keepIntegrationHistory()
 	);
 
 	if( !integrationVel_ )
@@ -77,6 +91,11 @@ pFlow::dynamicPointStructure::dynamicPointStructure
 		fatalExit;
 	}
 
+	if(control.settingsDict().containsDictionay("globalDamping"))
+	{
+		REPORT(1)<<"Reading globalDamping dictionary ..."<<END_REPORT;
+		velDamping_ = makeUnique<globalDamping>(control);
+	}
 }
 
 
@@ -85,6 +104,9 @@ bool pFlow::dynamicPointStructure::beforeIteration()
 	if(!pointStructure::beforeIteration())return false;
 	velocityUpdateTimer_.start();
 	velocity_.updateBoundariesSlaveToMasterIfRequested();
+	acceleration_.updateBoundariesSlaveToMasterIfRequested();
+	integrationPos_->updateBoundariesSlaveToMasterIfRequested();
+	integrationVel_->updateBoundariesSlaveToMasterIfRequested();
 	velocityUpdateTimer_.end();
 	return true;
 }
@@ -93,34 +115,32 @@ bool pFlow::dynamicPointStructure::iterate()
 {
 	return pointStructure::iterate();
 	
-	/*real dt = this->dt();
-
-    auto& acc = time().lookupObject<realx3PointField_D>("acceleration");
-    return correct(dt, acc);*/
 }
 
-bool pFlow::dynamicPointStructure::predict(
-    real dt,
-    realx3PointField_D &acceleration)
+bool pFlow::dynamicPointStructure::afterIteration()
 {
-	
+		//const auto ti = TimeInfo();
+		
+		auto succs = pointStructure::afterIteration();
+
+		return succs;
+}
+
+bool pFlow::dynamicPointStructure::predict(real dt)
+{
+
 	if(!integrationPos_().predict(dt, pointPosition(), velocity_ ))return false;
-	if(!integrationVel_().predict(dt, velocity_, acceleration))return false;
+	if(!integrationVel_().predict(dt, velocity_, acceleration_))return false;
 
 	return true;
 }
 
-bool pFlow::dynamicPointStructure::correct
-(
-	real dt,
-	realx3PointField_D& acceleration
-)
+bool pFlow::dynamicPointStructure::correct(real dt)
 {
-	//auto& pos = pStruct().pointPosition();
+	const auto& ti = TimeInfo();
 	
-	if(!integrationPos_().correct(dt, pointPosition(), velocity_) )return false;
-	
-	if(!integrationVel_().correct(dt, velocity_, acceleration))return false;
+	if(!integrationPos_().correctPStruct(dt, *this, velocity_) )return false;
+	if(!integrationVel_().correct(dt, velocity_, acceleration_, dampingFactor(ti)))return false;
 
 	return true;	
 }

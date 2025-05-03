@@ -31,14 +31,14 @@ namespace pFlow
 
 class box
 {
-protected:
+private:
 	
 	// - min point
 	realx3 	min_{0,0,0};
 	
 	// - max point 
 	realx3 	max_{1,1,1};
-
+	
 public:
 
 	// - type info

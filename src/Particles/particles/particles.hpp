@@ -25,10 +25,13 @@ PARTICULAR PURPOSE.
 #include "demComponent.hpp"
 #include "dynamicPointStructure.hpp"
 #include "particleIdHandler.hpp"
-#include "shape.hpp"
+//#include "shape.hpp"
 
 namespace pFlow
 {
+
+
+class shape;
 
 class particles
   : public observer
@@ -42,9 +45,6 @@ private:
 	/// shape index of each particle 
 	uint32PointField_D           shapeIndex_;
 
-	/// acceleration on device
-	realx3PointField_D           accelertion_;
-
 	/// contact force field
 	realx3PointField_D           contactForce_;
 
@@ -57,7 +57,7 @@ private:
 	Timer 						 baseFieldBoundaryUpdateTimer_;
 
 	/// messages for this objects
-	static inline const message  defaultMessage_{ message::DEFAULT };
+	static inline const message  defaultMessage_= message::Empty();
 
 protected:
 
@@ -96,7 +96,9 @@ public:
 	// type info
 	TypeInfo("particles");
 
-	explicit particles(systemControl& control);
+	explicit particles(systemControl& control, const shape& shapes);
+
+	~particles() override; 
 
 	inline const auto& dynPointStruct() const
 	{
@@ -153,14 +155,14 @@ public:
 		return dynPointStruct_.velocity();
 	}
 
-	inline const auto& accelertion() const
+	inline const auto& acceleration() const
 	{
-		return accelertion_;
+		return dynPointStruct_.acceleration();
 	}
 
-	inline auto& accelertion()
+	inline auto& acceleration()
 	{
-		return accelertion_;
+		return dynPointStruct_.acceleration();
 	}
 
 	inline auto& contactForce()
@@ -184,7 +186,7 @@ public:
 	}
 
 	inline 
-	uint maxId()const
+	uint32 maxId()const
 	{
 		return idHandler_().maxId();
 	}

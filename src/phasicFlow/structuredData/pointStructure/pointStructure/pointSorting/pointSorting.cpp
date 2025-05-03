@@ -36,9 +36,9 @@ pFlow::pointSorting::pointSorting(const dictionary & dict)
     )
 {
     if( performSorting_() )
-        REPORT(1)<<"Point sorting is "<<Yellow_Text("active")<<" in simulation"<<END_REPORT;
+        REPORT(2)<<"Point sorting is "<<Yellow_Text("active")<<" in simulation"<<END_REPORT;
     else
-       REPORT(1)<<"Point sorting is "<<Yellow_Text("inactive")<<" in simulation"<<END_REPORT;
+       REPORT(2)<<"Point sorting is "<<Yellow_Text("inactive")<<" in simulation"<<END_REPORT;
 
 }
 pFlow::uint32IndexContainer 

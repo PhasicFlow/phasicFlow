@@ -123,7 +123,7 @@ public:
     }
 
     inline
-    const word& name()const
+    const word& boundaryName()const
     {
         return boundary_.name();
     }
@@ -147,6 +147,9 @@ public:
     }
 
     const Time& time()const;
+
+    virtual
+    bool isActive()const = 0;
 	
 };
 

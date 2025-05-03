@@ -17,7 +17,6 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
 #ifndef __boundaryBase_hpp__
 #define __boundaryBase_hpp__
 
@@ -26,11 +25,19 @@ Licence:
 #include "VectorSingles.hpp"
 #include "plane.hpp"
 #include "scatteredFieldAccess.hpp"
+#include "timeInfo.hpp"
 
-#include "streams.hpp"
 
 namespace pFlow
 {
+
+static 
+inline const std::array<word,6>  boundaryNames_ = 
+{
+	"left", "right", 
+	"bottom", "top",
+	"rear", "front"
+};
 
 // forward 
 
@@ -65,14 +72,11 @@ private:
 	/// device and host list are sync
 	mutable bool           listsSync_ = false;
 
-	/// The length defined for creating neighbor list
-	real                   neighborLength_;
+	bool 				   updateTime_ = false;
 
-	/// time steps between successive update of boundary lists  
-	uint32 				   updateInetrval_;
+	bool 				   iterBeforeUpdate_ = false;
 
-	/// the extra boundary extension beyound actual limits of boundary 
-	real 				   boundaryExtntionLengthRatio_;
+	bool                   isBoundaryMaster_;
 
 	/// a reference to internal points
 	internalPoints&        internal_;
@@ -85,20 +89,33 @@ private:
 
 	int                    neighborProcessorNo_;
 
-	bool                   isBoundaryMaster_;
+	/// The length defined for creating neighbor list
+	static std::array<real, 6> neighborLengths_;
 
-	word                   name_;
-
-	word                   type_;
+	static std::array<word, 6> types_;
 
 protected:
 	
+	/// the extra boundary extension beyound actual limits of the physical domain 
+	static std::array<real, 6> boundaryExtntionLengthRatios_;
+
+	real boundaryExtntionLengthRatio()const
+	{
+		return boundaryExtntionLengthRatios_[thisBoundaryIndex_];
+	}
+
 	/// @brief Set the size of indexList. 
 	/// It is virtual to let derived classed to be aware of 
 	/// the fact that the size of boundary points has been changed.
 	/// So, any drived class that override this method should call 
 	/// boundaryBase::setSize(newSize) too. 
 	virtual void setSize(uint32 newSize);
+
+
+	void setUpdateTime(bool val)
+	{
+		updateTime_ = val;
+	}
 
 	void setNewIndices(const uint32Vector_D& newIndices);
 
@@ -132,12 +149,6 @@ protected:
 		}
 	}
 
-	/// Is this iter the right time for updating bounday list
-	bool boundaryListUpdate(uint32 iter)const
-	{
-		return iter%updateInetrval_ == 0u || iter == 0u;
-	}
-
 	/// Update this boundary data in two steps (1 and 2).
 	/// This is called after calling beforeIteration for 
 	/// all boundaries, so any particle addition, deletion,
@@ -152,19 +163,23 @@ protected:
 
 	/// @brief This method is called when a transfer of data 
 	/// is to be performed between processors (in afterIteration).
-	/// @param step is the step in the transfer of data. 
-	/// @return true: if operation requires at least one additional step 
-	/// to complete. false: if the operation is complete and no need for
-	/// additional step in operation. 
+	/// @param step is the step in the transfer of data.
+	/// @param callAgain if operation requires at least one additional step 
+	/// to complete it should be set to true and if the operation is complete and no need for
+	/// additional step, it should be set to false;  
+	/// @return true: succesful, false: fail
 	virtual 
-	bool transferData(uint32 iter, int step)
+	bool transferData(uint32 iter, int step, bool& callAgain)
 	{
-		return false;
+		callAgain = false;
+		return true;
 	}
 	
-	 
 
 public:
+
+	uint32 markInNegativeSide(const word& name, uint32Vector_D& markedIndices )const;
+
 
 	TypeInfo("boundaryBase");
 	
@@ -202,45 +217,56 @@ public:
 
 	/// The length from boundary plane into the domain 
 	/// where beyond that distance internal points exist.
-	/// By conventions is it always equal to neighborLength_  
+	/// By conventions is it always equal to neighborLengths_[i]  
 	inline
 	real neighborLengthIntoInternal()const
 	{
-		return neighborLength_;
+		return neighborLengths_[thisBoundaryIndex_];
 	}
 
 	/// The distance length from boundary plane 
 	/// where neighbor particles still exist in that distance. 
 	/// This length may be modified in each boundary type 
 	/// as required. In this case the boundaryExtensionLength
-	/// method should also be modified accordingly. 
-	virtual 
+	/// method should also be modified accordingly.  
 	real neighborLength()const
 	{
-		return (1+boundaryExtntionLengthRatio_)*neighborLength_;
+		return (1+boundaryExtntionLengthRatio())*neighborLengthIntoInternal();
 	}
 
 	/// The extention length (in vector form) for the boundary
 	/// as required by  each boundary type. It is allowed for 
 	/// each boundary type to be extended outward to allow 
 	/// particles to stay more in its list before being removed 
-	/// from its list. 
-	virtual 
+	/// from its list.  
 	realx3 boundaryExtensionLength()const
 	{
-		return -boundaryExtntionLengthRatio_*neighborLength_ * boundaryPlane_.normal();
+		return -boundaryExtntionLengthRatio()*neighborLengthIntoInternal() * boundaryPlane_.normal();
+	}
+
+	/// Is this iter the right time for updating bounday list
+	inline
+	bool performBoundarytUpdate()const
+	{
+		return updateTime_;
+	}
+
+	inline
+	bool iterBeforeBoundaryUpdate()const
+	{
+		return iterBeforeUpdate_;
 	}
 
 	inline
 	const word& type()const
 	{
-		return type_;
+		return types_[thisBoundaryIndex_];
 	}
 
 	inline
 	const word& name()const
 	{
-		return name_;
+		return boundaryNames_[thisBoundaryIndex_];
 	}
 
 	inline
@@ -339,13 +365,24 @@ public:
 	
 
 	virtual 
-    bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) = 0 ;
+	bool beforeIteration(
+		uint32 step, 
+		const timeInfo& ti, 
+		bool updateIter, 
+		bool iterBeforeUpdate , 
+		bool& callAgain
+	)
+	{
+		updateTime_ = updateIter;
+		iterBeforeUpdate_ = iterBeforeUpdate;
+		return true;
+	}
 
 	virtual 
-    bool iterate(uint32 iterNum, real t, real dt) = 0;
+	bool iterate(const timeInfo& ti) = 0;
 
 	virtual 
-    bool afterIteration(uint32 iterNum, real t, real dt) = 0;
+	bool afterIteration(const timeInfo& ti) = 0;
 	
     pointFieldAccessType thisPoints()const;
 
@@ -377,6 +414,12 @@ public:
 	{
 		return 0u;
 	}
+
+	inline
+	bool isActive()const
+	{
+		return true;
+	} 
 
 	/// - static create 
 	static

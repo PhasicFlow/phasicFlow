@@ -105,6 +105,12 @@ public:
 			return sqrt(radius2_);
 		}
 
+		INLINE_FUNCTION_HD
+		real volume()const
+		{
+			return 4.0/3.0* Pi * pow(radius(),3.0); 
+		}
+
 	//// - IO operation 
 		FUNCTION_H
 		bool read(iIstream & is);

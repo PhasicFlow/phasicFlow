@@ -64,13 +64,12 @@ protected:
 	static inline
 	const message defaultMessage_ = 
 	(
-		message::CAP_CHANGED+
-		message::SIZE_CHANGED+
-		message::ITEM_INSERT+
-		message::ITEM_REARRANGE+
-		message::ITEM_DELETE
+		message::RANGE_CHANGED   +
+		message::ITEMS_INSERT    +
+		message::ITEMS_REARRANGE +
+		message::ITEMS_DELETE
 	);
-
+	
 	bool insert(const anyList& varList);
 
 	bool rearrange(const anyList& varList);
@@ -160,7 +159,7 @@ public:
 	}
 
 	inline
-	auto activeRange()const
+	rangeU32 activeRange()const
 	{
 		return internalPoints_.activeRange();
 	}
@@ -188,11 +187,15 @@ public:
 		return internalPoints_.time();
 	}
 
+	inline 
+	const internalPoints& InternalPoints()const
+	{
+		return internalPoints_;
+	}
+
 	bool hearChanges
 	(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
 		const anyList& varList
 	) override;

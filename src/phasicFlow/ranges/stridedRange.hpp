@@ -31,6 +31,25 @@ namespace pFlow
 {
 
 template<typename T>
+constexpr T getEpsilon()
+{
+	return 0;
+}
+
+template<>
+constexpr float getEpsilon<float>()
+{
+	return 10*std::numeric_limits<float>::epsilon();
+}
+
+template<>
+constexpr double getEpsilon<double>()
+{
+	return 10*std::numeric_limits<double>::epsilon();
+}
+
+
+template<typename T>
 class
 stridedRange
 {
@@ -107,11 +126,11 @@ public:
 	}
 
 	inline
-	bool isMember(T val, T epsilon = 0)const
+	bool isMember(T val, T epsilon = getEpsilon<T>())const
 	{
 		
 		if(!isInRange(val)) return false;
-		if(T dist = val-begin_; abs(dist%stride_)<= epsilon) return true;
+		if(const T dist = val-begin_; abs(dist%stride_)<=epsilon) return true;
 		if(equal(val,begin_))return true;
 		if(equal(val,end_))return true;
 		return false;
@@ -151,7 +170,7 @@ public:
 
 template<>
 inline
-bool stridedRange<real>::isMember(real val, real epsilon)const
+bool stridedRange<float>::isMember(float val, float epsilon )const
 	{
 
 	if(!isInRange(val)) return false;
@@ -162,8 +181,31 @@ bool stridedRange<real>::isMember(real val, real epsilon)const
 	if(equal(val,begin_))return true;
 	if(equal(val,end_))return true;
 	return false;
+	/*if(!isInRange(val)) return false;
+	if(const float dist = val-begin_; abs(remainder(dist,stride_)<= epsilon)) return true;	
+	if(equal(val,begin_))return true;
+	if(equal(val,end_))return true;
+	return false;*/
 }
 
+template<>
+inline
+bool stridedRange<double>::isMember(double val, double epsilon )const
+{
+	/*if(!isInRange(val)) return false;
+	if(const double dist = val-begin_; abs(remainder(dist,stride_)<= epsilon)) return true;	
+	if(equal(val,begin_))return true;
+	if(equal(val,end_))return true;
+	return false;*/
+	if(!isInRange(val)) return false;
+	real dist = val-begin_;
+	if(abs(
+		(dist-(static_cast<uint64>((dist+0.01*epsilon)/stride_)*stride_))
+		)<= epsilon) return true;
+	if(equal(val,begin_))return true;
+	if(equal(val,end_))return true;
+	return false;
+}
 
 }
 

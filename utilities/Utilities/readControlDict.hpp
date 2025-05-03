@@ -46,8 +46,8 @@ protected:
 
 	int32 precision_;
 
-	inline static fileSystem defaultRootPath = CWD();
-	inline static fileSystem defaultCDPath = CWD()/"system"+"controlDict";
+	inline static fileSystem defaultRootPath = pFlow::CWD();
+	inline static fileSystem defaultCDPath = pFlow::CWD()/word("system")+word("controlDict");
 	
 	word convertTimeToName(const real t, const int32 precision)const;
 

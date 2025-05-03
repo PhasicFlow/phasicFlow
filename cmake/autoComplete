@@ -1,0 +1,112 @@
+PF_cFlags="--description --help --version"
+AllTimeFolders=
+__getAllTime(){
+    # Initialize empty array for time folders
+    local time_folders=()
+    
+    # Loop through all directories in current folder
+    for dir in */; do
+        # Remove trailing slash
+        dir=${dir%/}
+        
+        # Check if directory name is a valid floating point number
+        # This pattern matches integers and floating point numbers
+        if [[ $dir =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+            time_folders+=("$dir")
+        fi
+    done
+    
+    # Set completion reply to the time folders
+    COMPREPLY=("${time_folders[@]}")
+    AllTimeFolders="${time_folders[@]}"
+}
+
+__getFields(){
+    __getAllTime
+    local -A unique_files=()
+    # Files to exclude from suggestions
+    local exclude_files=("shapeHash" "pStructure" "particleInsertion" "p" "alpha" "U" "Sp" "Su" "phi")
+    declare -A exclude_dict
+    
+    # Build exclude dictionary for faster lookups
+    for file in "${exclude_files[@]}"; do
+        exclude_dict["$file"]=1
+    done
+
+    for dir in $AllTimeFolders; do
+        # Skip if not a directory
+        [ ! -d "$dir" ] && continue
+        
+        # Find all files in this time directory
+        while IFS= read -r filename; do
+            # Skip empty lines and excluded files
+            [ -z "$filename" ] || [ "${exclude_dict[$filename]+exists}" ] && continue
+            
+            # Add to unique files
+            unique_files["$filename"]=1
+        done < <(find "$dir" -maxdepth 1 -type f -printf '%f\n')
+    done
+    
+    # Set completion reply to the unique filenames
+    COMPREPLY=(${!unique_files[@]})
+    
+    # Clear global variable
+    AllTimeFolders=
+}
+
+_pFlowToVTK(){
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local prev="${COMP_WORDS[COMP_CWORD-1]}"
+    
+    # Check if we're completing a field
+    local is_field=0
+    for ((i=1; i<COMP_CWORD; i++)); do
+        if [[ "${COMP_WORDS[i]}" == "--fields" ]]; then
+            is_field=1
+            break
+        fi
+    done
+    
+    if [ "$prev" == "--time" ]; then
+        __getAllTime
+    elif [ "$prev" == "--fields" ] || [ $is_field -eq 1 ]; then 
+        # We're completing field names
+        __getFields
+        # Filter the results based on the current word prefix
+        if [ -n "$cur" ]; then
+            local filtered=()
+            for item in "${COMPREPLY[@]}"; do
+                if [[ "$item" == "$cur"* ]]; then
+                    filtered+=("$item")
+                fi
+            done
+            COMPREPLY=("${filtered[@]}")
+        fi
+    else
+        COMPREPLY=( $(compgen -W "$PF_cFlags --binary --no-geometry --no-particles --out-folder --time --separate-surfaces --fields" -- "$cur") )
+    fi
+}
+complete -F _pFlowToVTK pFlowToVTK
+
+_postprocessPhasicFlow(){
+    if [ "$3" == "--time" ]; then
+      __getAllTime
+    else
+      COMPREPLY=( $(compgen -W "$PF_cFlags --out-folder --time --zeroFolder" -- "$2") )
+    fi
+}
+complete -F _postprocessPhasicFlow postprocessPhasicFlow
+
+complete -W "$PF_cFlags --positionParticles-only --setFields-only --coupling" particlesPhasicFlow
+
+complete -W "$PF_cFlags --coupling" geometryPhasicFlow 
+
+complete -W "$PF_cFlags --coupling" iterateGeometry
+
+complete -W "$PF_cFlags" iterateSphereParticles
+
+complete -W "$PF_cFlags" sphereGranFlow
+
+complete -W "$PF_cFlags" grainGranFlow
+
+complete -W "$PF_cFlags" checkPhasicFlow

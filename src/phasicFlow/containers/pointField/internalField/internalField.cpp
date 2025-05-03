@@ -21,7 +21,15 @@ Licence:
 template<class T, class MemorySpace>
 bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
 {
-	const word eventName = message::eventName(message::ITEM_INSERT);
+	
+	const word eventName = message::eventName(message::ITEMS_INSERT);
+
+	if(!varList.checkObjectType<uint32IndexContainer>(eventName))
+	{
+		fatalErrorInFunction<<"Insertion failed in internalField, "<< eventName <<
+		" does not exist or the type is incorrect"<<endl;
+		return false;
+	}
 
 	const auto& indices = varList.getObject<uint32IndexContainer>(
 		eventName);
@@ -30,14 +38,24 @@ bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
 	if(varList.contains(name()))
 	{
 		// a single value is assigned
+		if(!varList.checkObjectType<T>(name()))
+		{
+			fatalErrorInFunction<<"wrong type for variable "<< name()<<endl;
+			return false;
+		}
 		T val = varList.getObject<T>(name());
 		success = field_.insertSetElement(indices, val);
 		
 	}
-	else if(varList.contains(name()+"Vector"))
+	else if(word fn = name()+"Vector"; varList.contains(fn))
 	{
 		// a vector of values is going to be assigned
-		const auto& valVec = varList.getObject<Vector<T>>(name()+"Vector");
+		if(!varList.checkObjectType<Vector<T>>(fn))
+		{
+			fatalErrorInFunction<<"wrong type for variable "<< fn<<endl;
+			return false;
+		}
+		const auto& valVec = varList.getObject<Vector<T>>(fn);
 		success = field_.insertSetElement(indices,valVec);
 	}
 	else
@@ -57,8 +75,13 @@ bool pFlow::internalField<T, MemorySpace>::insert(const anyList& varList)
 template<class T, class MemorySpace>
 bool pFlow::internalField<T, MemorySpace>::rearrange(const anyList& varList)
 {
-	const word eventName = message::eventName(message::ITEM_REARRANGE);
+	const word eventName = message::eventName(message::ITEMS_REARRANGE);
 
+	if(!varList.checkObjectType<uint32IndexContainer>(eventName))
+	{
+		fatalErrorInFunction<<"Wrong type for variable "<< eventName<<endl;
+		return false;
+	}
 	const auto& indices = varList.getObject<uint32IndexContainer>(
 		eventName);
 	
@@ -162,40 +185,49 @@ typename pFlow::internalField<T, MemorySpace>::FieldTypeHost
 template <class T, class MemorySpace>
 bool pFlow::internalField<T, MemorySpace>:: hearChanges
 (
-	real t,
-	real dt,
-	uint32 iter,
+	const timeInfo& ti,
 	const message& msg, 
 	const anyList& varList
 )
 {
-	if(msg.equivalentTo(message::CAP_CHANGED))
+	if(msg.equivalentTo(message::RANGE_CHANGED))
 	{
-		auto newCap = varList.getObject<uint32>(
-			message::eventName(message::CAP_CHANGED));
+		auto varName = message::eventName(message::RANGE_CHANGED);
+		if( !varList.checkObjectType<rangeU32>(varName) )
+		{
+			fatalErrorInFunction<<"Wrong type for variable "<< varName<<endl<<
+			"You requested "<< getTypeName<rangeU32>()<<" but the type is"<<
+			varList.getObjectTypeName(varName)<<endl;
+			return false;
+		}
 
-		field_.reserve(newCap);
+		auto newRange = varList.getObject<rangeU32>(varName);
+
+		if(newRange.end() > size()) 
+			field_.resize(newRange.end());
+		return true;
 	}
-	if(msg.equivalentTo(message::SIZE_CHANGED))
-	{
-		auto newSize = varList.getObject<uint32>(
-			message::eventName(message::SIZE_CHANGED));
-		field_.resize(newSize);
-	}
-	if(msg.equivalentTo(message::ITEM_DELETE))
+	else if(msg.equivalentTo(message::ITEMS_DELETE))
 	{
 		// do nothing
+		return true;
 	}
-	if(msg.equivalentTo(message::ITEM_INSERT))
+	else if(msg.equivalentTo(message::ITEMS_INSERT))
 	{
 		return insert(varList);
 	}
-	if(msg.equivalentTo(message::ITEM_REARRANGE))
+	else if(msg.equivalentTo(message::ITEMS_REARRANGE))
 	{
 		return rearrange(varList);
-
 	}
-	return true;
+	else
+	{
+		fatalErrorInFunction<<"hear changes in internal field is not processing "<< 
+		message::eventName(message::RANGE_CHANGED)<<
+		" event with message code "<< msg<<endl;
+		return false;
+	}
+	
 }
 
 template<class T, class MemorySpace>

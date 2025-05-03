@@ -1,0 +1,37 @@
+/* -------------------------------*- C++ -*--------------------------------- *\
+|  phasicFlow File                                                              |
+|  copyright: www.cemf.ir                                                        |
+\* ------------------------------------------------------------------------- */
+objectName      settingsDict;
+objectType      dictionary;
+fileFormat      ASCII;
+/*---------------------------------------------------------------------------*/
+
+run             drumPeriodic;
+
+dt              0.00001;            // time step for integration (s)
+
+startTime       0;                  // start time for simulation 
+
+endTime         5;                  // end time for simulation 
+
+saveInterval    0.05;               // time interval for saving the simulation
+
+timePrecision   4;                  // maximum number of digits for time folder 
+
+g               (0 -9.8 0);         // gravity vector (m/s2) 
+
+includeObjects  (diameter);         // save necessary (i.e., required) data on disk
+
+// exclude unnecessary data from saving on disk
+excludeObjects  (); 
+
+integrationMethod     AdamsBashforth4;  // integration method
+
+integrationHistory    off;              // to save space on disk  
+
+writeFormat           ascii;            // data writting format (ascii or binary)
+
+timersReport          Yes;              // report timers (Yes or No)
+
+timersReportInterval  0.1;              // time interval for reporting timers

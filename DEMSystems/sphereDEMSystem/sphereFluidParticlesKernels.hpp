@@ -46,7 +46,7 @@ void acceleration(
 {
 
 	auto activeRange = incld.activeRange();
-	if(incld.allActive())
+	if(incld.isAllActive())
 	{
 		Kokkos::parallel_for(
 		"pFlow::sphereParticlesKernels::acceleration",

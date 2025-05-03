@@ -1,0 +1,157 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName   postprocessDataDict;
+objectType   dictionary;;
+fileFormat   ASCII;
+/*---------------------------------------------------------------------------*/
+
+// Yes: postprocessing is active during the simulation
+// No: postprocessing is not active during the simulation
+// and it can be done after simulation
+runTimeActive yes;
+
+// shapeType: defines the type of the shape that is used in the simulation
+// (for example: sphere, grain, etc).
+// shapeType is only used when postprocessing is done after simulation 
+// to initialize the shape object for post processing operatoins 
+shapeType sphere;
+
+// default time control to be used in the postprocessing components
+defaultTimeControl
+{
+	timeControl         timeStep; // timeStep, simulationTime are the options here 
+	startTime           0;
+	endTime             1000;
+	executionInterval   150; 
+}
+
+// list of postprocessing components
+components
+(
+    // probing particles for their state variables, like velocity, position, etc
+    velocityProb
+    {
+        processMethod    particleProbe;
+        processRegion    centerPoints;
+        selector         id;
+        field            component(position,y);
+        ids              (0 10 100);
+        timeControl      default; // other options are settings, timeStep, simulationTime 
+        // settings: uses parameters from settingsDict file
+        // timeStep: uses the time step of the simulation controlling the execution of postprocessing
+        // simulationTime: uses the simulation time of the simulation controlling the execution of postprocessing
+        // default: uses the default time control (defined in defaultTimeControl).
+        // default behavior: if you do not specify it, parameters in defaultTimeControl is used.
+    }
+    
+    on_single_sphere
+    {
+        // method of performing the sum (arithmetic, uniformDistribution, GaussianDistribution)
+        processMethod    arithmetic; 
+
+        // Postprocessing is done on particles whose centers are inside this spehre
+        processRegion    sphere;  
+        
+        sphereInfo
+        {
+            radius  0.01; // radius of sphere
+            center  (-0.08 -0.08 0.015); // center of sphere
+        }
+        
+        timeControl default;
+        
+        /// all the postprocess operations to be done on sphere region
+        operations
+        (
+            // computes the arithmetic mean of particle velocity 
+            averageVel
+            {
+                function	    average;
+                field           velocity;
+                fluctuation2    yes;
+                divideByVolume 	no;  // default is no
+                threshold 	    3;   // default is 1
+                includeMask     all; // default is all
+            }
+            // - function: average, sum, and other derived ones from sum and average 
+            // - field: names of the fields in the simulation. Some special fields 
+            //   are: mass, density, volume, position, one, I. 
+            // - divideByVolume: whether the result is divided by the volume of the region 
+            // - threshold: exclude regions that contains particles less than threshold
+            // - includeMask: all, lessThan, greaterThan, between, lessThanOrEq, greaterThanEq, betweenEq
+            
+            
+            // computes the fraction of par1 in the region 
+            par1Fraction
+            {
+                function        average;
+                field           one; // default 
+                phi             one; // default
+                divideByVolume  no;
+                includeMask     lessThan;
+                
+                // diameter of par1 is 0.003, so these settings 
+                // will select only particles of type par1
+                lessThanInfo
+                {
+                    field      diameter;
+                    value      0.0031;  
+                }
+            }
+
+            numberDensity
+            {
+                function        sum;
+                field           one;
+                phi             one; 
+                divideByVolume  yes;
+                
+            }
+        );
+    }
+    
+    along_a_line
+    {
+        processMethod    arithmetic;
+
+        processRegion    line;
+
+        // the time interval for executing the post-processing 
+        // other options: timeStep, default, and settings
+        timeControl simulationTime; 
+        startTime   1.0;
+        endTime     3.0;
+        executionInterval 0.1;
+
+
+        // 10 spheres with radius 0.01 along the straight line defined by p1 and  p2 
+        lineInfo
+        {
+            p1        (0 0 0);
+            p2        (0 0.15 0.15);
+            nSpheres  10;
+            radius    0.01;
+        }
+
+        operations
+        (
+            // computes the arithmetic mean of particle velocity 
+            numberDensity
+            {
+                function	    sum;
+                field           one;
+                divideByVolume  yes;  //default is no 
+            }
+            
+            volumeDensity
+            {
+                function         sum;
+                field            volume; // 
+                divideByVolume   yes;    //default is no 
+            }
+        );
+    }
+    
+);

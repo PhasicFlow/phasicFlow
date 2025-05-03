@@ -7,48 +7,35 @@ objectType dicrionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
-// is insertion active?
-active  yes;
+active              yes;                        // is insertion active -> yes or no
 
-// not implemented for yes
-collisionCheck No;
-
-/*
-one region is considered for inserting particles. 
-*/
 topRegion
 {
+    regionType          box;                        // type of insertion region
 
-	// type of insertion region
-	type  boxRegion;
+    timeControl         simulationTime;
+    
+    rate                4000;                       // insertion rate (particles/s)
+    
+    startTime           0;                          // Start time of Particles insertion (s)
+    
+    endTime             7;                          // End time of Particles insertion (s)
+                                                    
+    insertionInterval   0.025;                     // Time Interval between each insertion (s)
+                                                    
+    boxInfo                                       
+    {
+        min     ( 0.48 0.58 0.01 );                // (m,m,m)
+        max     ( 0.64 0.59 0.05 );                // (m,m,m)
+    }
 
-	// insertion rate (particles/s)
-	rate 	  4000;
+    setFields
+    {
+        velocity        realx3 (0.0 -0.6 0.0);     // initial velocity of inserted particles
+    }
 
-	// Start time of Particles insertion (s)
-	startTime 	  0;
-
-	// End time of Particles insertion (s)	
-	endTime   	  7;
-
-	// Time Interval between each insertion (s)
-	interval       0.025;
-
-	// Coordinates of BoxRegion (m,m,m)
-	boxRegionInfo 
-	{
-		min ( 0.48 0.58 0.01 ); // (m,m,m)
-		max ( 0.64 0.59 0.05 ); // (m,m,m)
-	}
-
-	setFields
-	{
-		// initial velocity of inserted particles
-		velocity    realx3 (0.0 -0.6 0.0);  
-	}
-
-	mixture
-	{
-		sphere 1;  
-	}
+    mixture
+    {
+        sphere          1;
+    }
 }

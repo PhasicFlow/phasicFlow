@@ -21,17 +21,13 @@ Licence:
 template<class T, class MemorySpace>
 bool pFlow::Field<T, MemorySpace>::read
 (
-	iIstream& is,
-	bool resume
+	iIstream& is
 )
 {
 	
 	bool tokenFound = true;
 	
-	if(resume)
-		tokenFound = is.findTokenResume(fieldKey_);
-	else
-		tokenFound = is.findToken(fieldKey_);
+    tokenFound = is.findToken(fieldKey_);
 
 	if( !tokenFound )
 	{
@@ -63,16 +59,17 @@ bool pFlow::Field<T, MemorySpace>::read
 {
 	
 	bool tokenFound = true;
-	
-    if(iop.thisProcReadData())
+	if(resume)
 	{
-		if(resume)
-			tokenFound = is.findTokenResume(fieldKey_);
-		else
-			tokenFound = is.findToken(fieldKey_);
+		if(iop.thisProcReadData())
+        	tokenFound = is.findTokenResume(fieldKey_);
 	}
-	
-
+	else
+	{
+		if(iop.thisProcReadData())
+        	tokenFound = is.findToken(fieldKey_);
+	}
+    
 	if( !tokenFound )
 	{
 		ioErrorInFile( is.name(), is.lineNumber() ) <<
@@ -86,6 +83,7 @@ bool pFlow::Field<T, MemorySpace>::read
 		"error in reading field data from field "<< this->name()<<endl;
 		return false;
 	}
+	
     if(iop.thisProcReadData())
 	    is.readEndStatement("Field::read");
 

@@ -166,9 +166,7 @@ public:
 		}
 
 		bool hearChanges(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
 		const anyList& varList) override
 		{

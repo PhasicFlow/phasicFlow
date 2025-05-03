@@ -24,16 +24,18 @@ Licence:
 #include "observer.hpp"
 #include "message.hpp"
 
-pFlow::subscriber::subscriber(const subscriber & src)
+pFlow::subscriber::subscriber(const word& name)
 :
-	subName_(src.subName_)
+	observerList_(message::numEvents())
+{}
+
+pFlow::subscriber::subscriber(const subscriber & src)
 {
 }
 
 pFlow::subscriber::subscriber(subscriber && src)
 :
-	observerList_(std::move(src.observerList_)),
-	subName_(std::move(src.subName_))
+	observerList_(std::move(src.observerList_))
 {
 	
 	for(size_t i=0; i<observerList_.size(); i++)
@@ -47,13 +49,13 @@ pFlow::subscriber::subscriber(subscriber && src)
 
 pFlow::subscriber &pFlow::subscriber::operator=(const subscriber & rhs)
 {
-    this->subName_ = rhs.subName_;
+    //this->subName_ = rhs.subName_;
 	return *this;
 }
 
 pFlow::subscriber &pFlow::subscriber::operator=(subscriber && rhs)
 {
-    this->subName_ = std::move(rhs.subName_);
+    //this->subName_ = std::move(rhs.subName_);
 	this->observerList_ = std::move(rhs.observerList_);
 
 	for(size_t i=0; i<observerList_.size(); i++)
@@ -122,7 +124,7 @@ bool pFlow::subscriber::unsubscribe
 	return true;
 }
 
-bool pFlow::subscriber::notify
+/*bool pFlow::subscriber::notify
 (
 	uint32 iter,
 	real t,
@@ -131,7 +133,6 @@ bool pFlow::subscriber::notify
 	const anyList& varList
 )
 {
-	
 	for(size_t i=0; i<msg.size(); i++)
 	{
 		if(msg.equivalentTo(i))
@@ -148,40 +149,26 @@ bool pFlow::subscriber::notify
 				);
 			}
 		}
-	}
-
-	return true;
-}
-
-/*bool pFlow::subscriber::notify
-(
-	const eventMessage &msg
-)
-{
-	for ( auto& observer:observerList_ )
-	{
-		if(observer)
-			if( !observer->update(msg) ) return false;
-	}
-
-	return true;
-}
-
-bool pFlow::eventSubscriber::notify
-(
-	const eventMessage& msg,
-	const List<eventObserver*>& exclutionList
-)
-{
-	Set<eventObserver*> sortedExcList(exclutionList.begin(),exclutionList.end());
-
-	for(auto& observer:observerList_)
-	{
-		if( observer && sortedExcList.count(observer) == 0 )
-		{
-			if(!observer->update(msg)) return false;
-		}
-	}
-
+	} 
 	return true;
 }*/
+
+bool pFlow::subscriber::notify(const timeInfo &ti, const message msg, const anyList &varList)
+{
+	for(size_t i=0; i<msg.size(); i++)
+	{
+		if(msg.equivalentTo(i))
+		{
+			for( auto obsvr: observerList_[i] )
+			{
+				obsvr->hearChanges
+				(
+					ti,
+					message(i),
+					varList
+				);
+			}
+		}
+	}
+	return true;
+}

@@ -21,7 +21,6 @@ Licence:
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
-
 #include "bTypesFunctions.hpp"
 
 pFlow::int32
@@ -82,7 +81,7 @@ pFlow::isNo(const word& str)
 }
 
 pFlow::word
-pFlow::real2Fixed(const real& v, int32 numPrecision)
+pFlow::real2Fixed(const float& v, int32 numPrecision)
 {
 	std::stringstream ss;
 
@@ -91,7 +90,32 @@ pFlow::real2Fixed(const real& v, int32 numPrecision)
 }
 
 pFlow::word
-pFlow::real2Word(const real& v, int32 numPrecision)
+pFlow::real2Fixed(const double& v, int32 numPrecision)
+{
+	std::stringstream ss;
+
+	ss << std::fixed << std::setprecision(numPrecision) << v;
+	return ss.str();
+}
+
+pFlow::word
+pFlow::real2Word(const float& v, int32 numPrecision)
+{
+	std::stringstream ss;
+	if (abs(v) < verySmallValue)
+	{
+		ss << "0";
+	}
+	else
+	{
+		ss << std::setprecision(numPrecision) << v;
+	}
+
+	return ss.str();
+}
+
+pFlow::word
+pFlow::real2Word(const double& v, int32 numPrecision)
 {
 	std::stringstream ss;
 	if (abs(v) < verySmallValue)
@@ -146,7 +170,14 @@ pFlow::removeDecimalZeros(const word& str)
 }
 
 pFlow::word
-pFlow::real2FixedStripZeros(const real& v, int32 numPrecision)
+pFlow::real2FixedStripZeros(const float& v, int32 numPrecision)
+{
+	word strVal = real2Fixed(v, numPrecision);
+	return removeDecimalZeros(strVal);
+}
+
+pFlow::word
+pFlow::real2FixedStripZeros(const double& v, int32 numPrecision)
 {
 	word strVal = real2Fixed(v, numPrecision);
 	return removeDecimalZeros(strVal);

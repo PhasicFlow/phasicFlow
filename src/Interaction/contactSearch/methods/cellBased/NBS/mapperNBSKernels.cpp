@@ -21,7 +21,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "mapperNBSKernels.hpp"
-
+#include "streams.hpp"
 
 void pFlow::mapperNBSKernels::findPointExtends
 (
@@ -153,16 +153,19 @@ bool pFlow::mapperNBSKernels::buildLists
     const pFlagTypeDevice &flags
 )
 {
+    
     auto aRange = flags.activeRange();
+    
+    auto pp = points;
     if(flags.isAllActive() )
-    {
+    { 
         Kokkos::parallel_for
         (
             "pFlow::mapperNBSKernels::buildLists",
             deviceRPolicyStatic(aRange.start(), aRange.end()),
             LAMBDA_HD(uint32 i)
-            {
-                auto ind = searchCell.pointIndex(points[i]);	
+            {               
+                auto ind = searchCell.pointIndex(pp[i]);
                 uint32 old = Kokkos::atomic_exchange(&head(ind.x(), ind.y(), ind.z()), i);
                 next[i] = old;
             }

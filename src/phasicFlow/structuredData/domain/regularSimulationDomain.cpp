@@ -18,61 +18,30 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#include <cstring>
-
 #include "regularSimulationDomain.hpp"
 #include "processors.hpp"
 #include "streams.hpp"
 
 bool pFlow::regularSimulationDomain::createBoundaryDicts()
 {
-    auto& boundaries = this->subDict("boundaries");
-    
-    this->addDict("regularBoundaries", boundaries);
-    auto& rbBoundaries = this->subDict("regularBoundaries");
-    
-	auto neighborLength = boundaries.getVal<real>("neighborLength");
-	auto boundaryExtntionLengthRatio = max(
-		boundaries.getValOrSet<real>("boundaryExtntionLengthRatio", 0.1),
-        0.0);
-	auto updateIntercal = max( 
-        boundaries.getValOrSet<uint32>("updateInterval", 1u),
-        1u); 
+
+	dictionary& thisBoundaries = this->subDict(thisBoundariesDictName());
 
 	for(uint32 i=0; i<sizeOfBoundaries(); i++)
 	{
 		word bName = bundaryName(i);
-		if( !boundaries.containsDictionay(bName) )
-		{
-			fatalErrorInFunction<<"dictionary "<< bName<<
-			"does not exist in "<< boundaries.globalName()<<endl;
-			return false;
-		}
-		auto& bDict = rbBoundaries.subDict(bName);
-
-		if(!bDict.addOrKeep("neighborLength", neighborLength))
-		{
-			fatalErrorInFunction<<"error in adding neighborLength to "<< bName <<
-			"in dictionary "<< boundaries.globalName()<<endl;
-			return false;
-		}
-
-		if(!bDict.addOrReplace("updateInterval", updateIntercal))
-		{
-			fatalErrorInFunction<<"error in adding updateIntercal to "<< bName <<
-			"in dictionary "<< boundaries.globalName()<<endl;
-		}
-
-		bDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+		dictionary& bDict = thisBoundaries.subDict(bName);
 
 		if(!bDict.add("neighborProcessorNo",(uint32) processors::globalRank()))
 		{
 			fatalErrorInFunction<<"error in adding neighborProcessorNo to "<< bName <<
-			" in dictionary "<< boundaries.globalName()<<endl;
+			" in dictionary "<< thisBoundaries.globalName()<<endl;
 			return false;
 		}
+
 		auto bType = bDict.getVal<word>("type");
 		uint32 mirrorIndex = 0;
+
 		if(bType == "periodic")
 		{
 			if(bName == bundaryName(0)) mirrorIndex = 1;
@@ -92,7 +61,6 @@ bool pFlow::regularSimulationDomain::createBoundaryDicts()
 		}
 	}
     
-    
     return true;
 }
 
@@ -104,10 +72,11 @@ bool pFlow::regularSimulationDomain::setThisDomain()
 
 pFlow::regularSimulationDomain::regularSimulationDomain
 (
-    systemControl& control
+    systemControl& control,
+    real maxBsphere
 )
 :
-    simulationDomain(control)
+    simulationDomain(control, maxBsphere)
 {}
 
 bool pFlow::regularSimulationDomain::initialUpdateDomains(span<realx3> pointPos)
@@ -229,9 +198,3 @@ bool pFlow::regularSimulationDomain::initialTransferBlockData
         charSpan(dst), 
         sizeof(int32)); 
 }
-
-const pFlow::dictionary &pFlow::regularSimulationDomain::thisBoundaryDict() const
-{
-    return this->subDict("regularBoundaries");
-}
-

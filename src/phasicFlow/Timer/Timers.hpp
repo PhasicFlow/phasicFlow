@@ -22,7 +22,6 @@ Licence:
 #define __Timerss_hpp__
 
 
-
 #include "List.hpp"
 #include "Timer.hpp"
 
@@ -54,9 +53,9 @@ public:
 	:
 		Timer(name, parrent)
 	{
-		if(parrent_)
+		if(parrent)
 		{
-			level_ = parrent_->level()+1;
+			level_ = parrent->level()+1;
 		}
 	}
 

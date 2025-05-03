@@ -37,9 +37,9 @@ Licence:
 
 #define CONSUME_PARAM(x) (void)(x);
 
-#if defined(pFlow_Build_Cuda) && !defined(__CUDACC__)
+/*#if defined(pFlow_Build_Cuda) && !defined(__CUDACC__)
 #define __CUDACC__
-#endif
+#endif*/
 
 #ifdef __CUDACC__
     #define INLINE_FUNCTION_HD inline __host__ __device__

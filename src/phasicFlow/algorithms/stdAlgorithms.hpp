@@ -148,7 +148,7 @@ void sort(Type* first, int32 numElems)
 	if constexpr(useParallel)
 	{
 		std::sort(
-			std::execution::par,
+			std::execution::par_unseq,
 			first,
 			first+numElems,
 			less<Type>());

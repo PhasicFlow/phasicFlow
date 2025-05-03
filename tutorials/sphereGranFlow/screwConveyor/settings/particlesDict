@@ -11,11 +11,8 @@ fileFormat 	ASCII;
 // positions particles 
 positionParticles
 {
+	// A list of options are: ordered, random
 	method empty;     		// creates the required fields with zero particles (empty). 
-
-	maxNumberOfParticles 	50000; // maximum number of particles in the simulation
-	mortonSorting 			Yes;    // perform initial sorting based on morton 
-
 }
 
 setFields
@@ -23,16 +20,16 @@ setFields
 	defaultValue 
 	{
 		// linear velocity (m/s)
-		velocity 	realx3 	(0 0 0);
+		velocity 	  realx3 (0 0 0);
 
 		// linear acceleration (m/s2)
-		acceleration 	realx3 	(0 0 0);
+		acceleration  realx3 (0 0 0);
 
 		// rotational velocity (rad/s)
-		rVelocity 	realx3 	(0 0 0);
+		rVelocity 	  realx3 (0 0 0);
 
 		// name of the particle shape
-		shapeName 	word	sphere1;
+		shapeName 	  word	  sphere1;
 	}
 
 	selectors

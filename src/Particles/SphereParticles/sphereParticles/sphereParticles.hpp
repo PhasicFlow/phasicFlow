@@ -33,6 +33,7 @@ Licence:
 #include "particles.hpp"
 #include "property.hpp"
 #include "sphereShape.hpp"
+#include "boundarySphereParticlesList.hpp"
 #include "systemControl.hpp"
 
 namespace pFlow
@@ -47,7 +48,7 @@ public:
 private:
 
 	/// reference to shapes
-	ShapeType              spheres_;
+	const ShapeType&              spheres_;
 
 	/// property id on device
 	uint32PointField_D     propertyId_;
@@ -66,6 +67,9 @@ private:
 
 	/// pointField of rotational acceleration of particles on device
 	realx3PointField_D     rAcceleration_;
+
+	/// boundaries 
+	boundarySphereParticlesList boundarySphereParticles_;
 
 	/// rotational velocity integrator
 	uniquePtr<integration> rVelIntegration_ = nullptr;
@@ -101,11 +105,26 @@ private:
 
 	virtual uniquePtr<List<eventObserver*>> getFieldObjectList()const override;
 	*/
+protected:
+	Timer& accelerationTimer()
+	{
+		return accelerationTimer_;
+	}
 
+	Timer& intCorrectTimer()
+	{
+		return intCorrectTimer_;
+	}
+
+	integration& rVelIntegration()
+	{
+		return rVelIntegration_();
+	}
+	
 public:
 
 	/// construct from systemControl and property
-	sphereParticles(systemControl& control, const property& prop);
+	sphereParticles(systemControl& control, const sphereShape& shpShape);
 
 	~sphereParticles() override = default;
 
@@ -156,9 +175,7 @@ public:
 	}
 
 	bool hearChanges(
-	  real           t,
-	  real           dt,
-	  uint32         iter,
+	  const timeInfo& ti,
 	  const message& msg,
 	  const anyList& varList
 	) override

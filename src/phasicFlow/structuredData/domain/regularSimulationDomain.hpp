@@ -44,7 +44,7 @@ public:
 
 	TypeInfo("simulationDomain<regular>");
 
-	explicit regularSimulationDomain(systemControl& control);
+	explicit regularSimulationDomain(systemControl& control, real maxBsphere);
 
 	~regularSimulationDomain() final = default;
 
@@ -87,8 +87,6 @@ public:
 
 	bool initialTransferBlockData(span<int32> src, span<int32> dst)
 	  const final;
-
-	const dictionary& thisBoundaryDict() const final;
 
 };
 

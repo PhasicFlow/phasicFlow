@@ -32,11 +32,11 @@ class boundaryReflective
 {
 private:
 
-	real        restitution_ = 0.95;
+	real                      restitution_ = 0.95;
 
-    word        velocityName_{"velocity"};
+    inline static word        velocityName_{"velocity"};
 	
-    word        diameterName_{"diameter"};
+    inline static word        diameterName_{"diameter"};
 
 public:
 
@@ -59,12 +59,32 @@ public:
 		dictionary
 	);
 
-	bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) override;
+	bool beforeIteration(
+		uint32 step, 
+		const timeInfo& ti, 
+		bool updateIter, 
+		bool iterBeforeUpdate , 
+		bool& callAgain
+	) final ;
 
-	bool iterate(uint32 iterNum, real t, real dt) override;
+	bool iterate(const timeInfo& ti) final;
+	 
+	bool afterIteration(const timeInfo& ti)final;
 
-	bool afterIteration(uint32 iterNum, real t, real dt) override;
+	const real restitution()const
+	{
+		return restitution_;
+	}
 
+	const word& velocityName()const
+	{
+		return velocityName_;
+	}
+
+	const word& diameterName()const
+	{
+		return diameterName_;
+	}
 
 };
 

@@ -17,10 +17,18 @@ Licence:
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 -----------------------------------------------------------------------------*/
-
+REPORT(0)<<"Reading shapes dictionary..."<<END_REPORT;
+pFlow::sphereShape spheres
+(
+	pFlow::shapeFile__,
+	&Control.caseSetup(),
+	proprties
+);
 //
 REPORT(0)<<"\nReading sphere particles . . ."<<END_REPORT;
-pFlow::sphereParticles sphParticles(Control, proprties);
+
+
+pFlow::sphereParticles sphParticles(Control, spheres);
 
 //
 REPORT(0)<<"\nCreating particle insertion object . . ."<<END_REPORT;

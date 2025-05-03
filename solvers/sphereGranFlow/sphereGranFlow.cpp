@@ -74,7 +74,7 @@ pFlow::initialize_pFlowProcessors();
 
 	do 
 	{
-		
+		//Ping;
 		if(! sphInsertion.insertParticles( 
 			Control.time().currentIter(),
 			Control.time().currentTime(),
@@ -84,27 +84,31 @@ pFlow::initialize_pFlowProcessors();
 			"particle insertion failed in sphereDFlow solver.\n";
 			return 1;
 		}
-		 
+		
 		// set force to zero
 		surfGeometry.beforeIteration();
 
 		// set force to zero, predict, particle deletion and etc. 
 		sphParticles.beforeIteration();
-
+		//Ping;
 		sphInteraction.beforeIteration();
 		
-		sphInteraction.iterate();	
-		
+		sphInteraction.iterate();
+			
 		surfGeometry.iterate();
 
+		//Ping;
 		sphParticles.iterate();
-
+		
+		//Ping;
 		sphInteraction.afterIteration();
 
+		//Ping;
 		surfGeometry.afterIteration();
 
+		//Ping;
 		sphParticles.afterIteration();
-				
+		//Ping;	
 
 	}while(Control++);
 

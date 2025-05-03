@@ -10,6 +10,8 @@ globals/globalSettings.cpp
 processors/processors.cpp
 processors/localProcessors.cpp
 processors/pFlowProcessors.cpp
+processors/MPITimer.cpp
+
 
 streams/token/tokenIO.cpp
 streams/token/token.cpp
@@ -45,7 +47,9 @@ repository/Time/Time.cpp
 repository/Time/timeControl.cpp
 repository/Time/baseTimeControl.cpp
 repository/systemControl/systemControl.cpp
+repository/systemControl/auxFunctions/auxFunctions.cpp
 repository/systemControl/dynamicLinkLibs.cpp
+repository/systemControl/timeFolder.cpp
 
 commandLine/commandLine.cpp
 

@@ -60,7 +60,7 @@ private:
 	fileSystem localPath_ = "";
 
 	/// Number of bytes used for writing/reading real variable (used for binray)
-	int 		numBytesForReal_ = numBytesForReal__;
+	int 		numBytesForReal_ = sizeof(real);
 	
 	/// Does the objectFile read & write the header?
 	bool        readWriteHeader_ = true;

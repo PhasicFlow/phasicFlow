@@ -139,10 +139,10 @@ protected:
 		ForAll(i , kn)
 		{
 			etha_n[i] = -2.0*log(en[i])*sqrt(kn[i])/
-					sqrt(pow(log(en[i]),2.0)+ pow(Pi,2.0));
+					sqrt(pow(log(en[i]),static_cast<real>(2.0))+ pow(Pi,static_cast<real>(2.0)));
 
 			etha_t[i] = -2.0*log( et[i]*sqrt(kt[i]) )/
-					sqrt(pow(log(et[i]),2.0)+ pow(Pi,2.0));
+					sqrt(pow(log(et[i]),static_cast<real>(2.0))+ pow(Pi,static_cast<real>(2.0)));
 		}
 
 		Vector<linearProperties> prop("prop", nElem);
@@ -243,8 +243,8 @@ public:
 
 		history.overlap_t_ += Vt*dt;
 
-		real mi = 3*Pi/4*pow(Ri,3.0)*rho_[propId_i];
-		real mj = 3*Pi/4*pow(Rj,3.0)*rho_[propId_j];
+		real mi = 3*Pi/4*pow(Ri,static_cast<real>(3.0))*rho_[propId_i];
+		real mj = 3*Pi/4*pow(Rj,static_cast<real>(3.0))*rho_[propId_j];
 
 		real sqrt_meff = sqrt((mi*mj)/(mi+mj));
 

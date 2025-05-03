@@ -23,22 +23,91 @@ Licence:
 #include "systemControl.hpp"
 #include "vocabs.hpp"
 
-pFlow::simulationDomain::simulationDomain(systemControl& control)
-:
-	fileDictionary
-	(
-		objectFile
-		(
-			domainFile__,
-			"",
-			objectFile::READ_ALWAYS,
-			objectFile::WRITE_NEVER
-		),
-		&control.settings()
-	),
-    globalBox_(subDict("globalBox"))
+bool pFlow::simulationDomain::prepareBoundaryDicts()
 {
+	
+    dictionary& boundaries = this->subDict("boundaries");
+
+	real boundaryExtntionLengthRatio = 
+        boundaries.getValOrSetMax("boundaryExtntionLengthRatio", static_cast<real>(0.1));
+	
+    real neighborLength = boundaries.getValOrSetMax<real>(
+		"neighborLength", 
+		(1+boundaryExtntionLengthRatio)*maxBoundingSphere_);
+
+	uint32 updateInterval = 
+        boundaries.getValOrSet<uint32>("updateInterval", 5u);
+
+	updateInterval = max(updateInterval, 1u);
+
+    uint32 neighborListUpdateInterval = 
+        boundaries.getValOrSet("neighborListUpdateInterval", 50u);
+	
+	neighborListUpdateInterval = max(neighborListUpdateInterval, updateInterval);
     
+	boundaries.addOrReplace("neighborListUpdateInterval", neighborListUpdateInterval);
+	boundaries.addOrReplace("updateInterval", updateInterval);
+	boundaries.addOrReplace("neighborLength", neighborLength);
+	boundaries.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+
+	// create this boundaries dictionary 
+	this->addDict(thisBoundariesDictName(), boundaries);
+    dictionary& thisBDict = this->subDict(thisBoundariesDictName());
+	thisBDict.addOrReplace("neighborLength", neighborLength);
+	thisBDict.addOrReplace("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+	thisBDict.addOrReplace("updateInterval", updateInterval);
+	thisBDict.addOrReplace("neighborListUpdateInterval", neighborListUpdateInterval);
+
+
+    for(uint32 i=0; i<sizeOfBoundaries(); i++)
+	{
+		word bName = bundaryName(i);
+		if( !boundaries.containsDictionay(bName) )
+		{
+			fatalErrorInFunction<<"dictionary "<< bName<<
+			"does not exist in "<< boundaries.globalName()<<endl;
+			return false;
+		}
+		auto& bDict = thisBDict.subDict(bName);
+
+		if(!bDict.addOrKeep("neighborLength", neighborLength))
+		{
+			fatalErrorInFunction<<"error in adding neighborLength to "<< bName <<
+			"in dictionary "<< boundaries.globalName()<<endl;
+			return false;
+		}
+
+		if(!bDict.addOrReplace("updateInterval", updateInterval))
+		{
+			fatalErrorInFunction<<"error in adding updateInterval to "<< bName <<
+			"in dictionary "<< boundaries.globalName()<<endl;
+            return false;
+		}
+
+		bDict.addOrKeep("boundaryExtntionLengthRatio", boundaryExtntionLengthRatio);
+
+	}
+
+    return true;
+}
+
+pFlow::simulationDomain::simulationDomain(systemControl &control, real maxBSphere)
+    : fileDictionary(
+          objectFile(
+              domainFile__,
+              "",
+              objectFile::READ_ALWAYS,
+              objectFile::WRITE_NEVER),
+          &control.settings()),
+      globalBox_(subDict("globalBox")),
+	  maxBoundingSphere_(maxBSphere)
+{
+	if( !prepareBoundaryDicts() )
+    {
+        fatalErrorInFunction<<
+            "Error in preparing dictionaries for boundaries"<<endl;
+        fatalExit;
+    }
 }
 
 pFlow::domain pFlow::simulationDomain::extendThisDomain
@@ -59,16 +128,15 @@ pFlow::simulationDomain::boundaryPlane(uint32 i) const
 }
 
 pFlow::uniquePtr<pFlow::simulationDomain>
-pFlow::simulationDomain::create(systemControl& control)
+pFlow::simulationDomain::create(systemControl& control, real maxBSphere)
 {
 	word sType = angleBracketsNames(
         "simulationDomain", 
         pFlowProcessors().localRunTypeName());
 
-
 	if( systemControlvCtorSelector_.search(sType) )
 	{
-		return systemControlvCtorSelector_[sType] (control);
+		return systemControlvCtorSelector_[sType] (control, maxBSphere);
 	}
 	else
 	{

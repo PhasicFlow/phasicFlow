@@ -3,7 +3,7 @@
 
 
 #include "boundaryList.hpp"
-#include "ListPtr.hpp"
+#include "boundaryListPtr.hpp"
 #include "boundarySphereInteraction.hpp"
 
 
@@ -14,7 +14,7 @@ namespace pFlow
 template<typename contactForceModel,typename geometryMotionModel>
 class boundarySphereInteractionList
 :
-    public ListPtr<boundarySphereInteraction<contactForceModel,geometryMotionModel>>
+    public boundaryListPtr<boundarySphereInteraction<contactForceModel,geometryMotionModel>>
 {
 private:
 

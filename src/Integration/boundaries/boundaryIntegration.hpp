@@ -51,9 +51,7 @@ public:
     );
 
     bool hearChanges(
-        real t,
-        real dt,
-        uint32 iter,
+        const timeInfo& ti,
         const message &msg,
         const anyList &varList) override
     {
@@ -77,6 +75,11 @@ public:
         return true;
     }
 
+    bool isActive()const override
+    {
+        return false;
+    }
+    
     static
     uniquePtr<boundaryIntegration> create(
         const boundaryBase& boundary,

@@ -53,7 +53,7 @@ private:
 	/// List of variable names in anyList_ 
 	wordList 		names_;
 
-	wordList 		types_;	
+	wordList 		types_;
 
 public:
 
@@ -78,6 +78,27 @@ public:
 
 		/// List of varibales names
 		const wordList& names()const;
+
+		template<typename T, typename... Args>
+		void emplaceBackOrReplace(const word& name, Args&&... args)
+		{
+			if( contains(name))
+			{
+				int32 i = names_.findi(name);
+				types_[i] = getTypeName<T>();
+				anyList_.pos(i)->reset();
+				anyList_.pos(i)-> emplace<T>(std::forward<Args>(args)...);
+			}
+			else
+			{
+				names_.push_back(name);
+				types_.push_back(getTypeName<T>());
+				anyList_.emplace_back( 
+					std::in_place_type<T>, 
+					std::forward<Args>(args)...);
+			}
+			
+		}
 
 		/// Create variable using constructor in-place 
 		template<typename T, typename... Args>
@@ -162,10 +183,34 @@ public:
 			{
 				fatalErrorInFunction<<
 				"variable name "<< name << " does not exist in the anyList."<<endl<<
-				"list of variables is "<<names_<<endl;
+				"list of variables is \n"<<names_<<endl;
 				fatalExit;
 			}
 			return getObject<T>(static_cast<size_t>(i));
+		}
+
+		template<typename T>
+		bool checkObjectType(const word& name)const
+		{
+			int32 i = names_.findi(name);
+			if(i == -1 )
+			{
+				fatalErrorInFunction<<
+				"variable name "<< name << " does not exist in the anyList."<<endl<<
+				"list of variables is \n"<<names_<<endl;
+				return false;
+			}
+			return getTypeName<T>() == types_[i];
+		}
+
+		word getObjectTypeName(const word& name)const
+		{
+			int32 i = names_.findi(name);
+			if(i == -1 )
+			{
+				return "NAME_NOT_FOUND";
+			}
+			return types_[i];
 		}
 
 		/// Get the const reference to variable by name 

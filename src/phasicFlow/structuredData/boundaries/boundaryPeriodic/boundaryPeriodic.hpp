@@ -35,8 +35,6 @@ private:
 
 	uint32 mirrorBoundaryIndex_;
 
-	real extensionLength_ = 0.1;
-
 public:
 
 	TypeInfo("boundary<periodic>");
@@ -58,18 +56,18 @@ public:
 		dictionary
 	);
 
-	real neighborLength()const override;
 
-	realx3 boundaryExtensionLength()const override;
+	bool beforeIteration(
+		uint32 step, 
+		const timeInfo& ti, 
+		bool updateIter, 
+		bool iterBeforeUpdate , 
+		bool& callAgain
+	) final ;
 
-	//const plane& boundaryPlane()const override;*/
-
-	bool beforeIteration(uint32 step, uint32 iterNum, real t, real dt) override;
-
-	bool iterate(uint32 iterNum, real t, real dt) override;
-
-	bool afterIteration(uint32 iterNum, real t, real dt) override;
-
+	bool iterate(const timeInfo& ti) final;
+	 
+	bool afterIteration(const timeInfo& ti)final;
 
 };
 

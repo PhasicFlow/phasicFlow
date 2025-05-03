@@ -673,6 +673,13 @@ inline bool pFlow::token::isStringType() const
     return (isWord() || isString());
 }
 
+inline bool pFlow::token::isComma()const
+{
+    if( type_ == tokenType::PUNCTUATION &&
+        pToken() == punctuationToken::COMMA) return true;
+    return false;
+}
+
 inline void pFlow::token::setBad()
 {
     reset();

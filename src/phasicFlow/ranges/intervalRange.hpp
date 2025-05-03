@@ -68,6 +68,15 @@ public:
 		}
 	}
 
+	T begin()const
+	{
+		return begin_;
+	}
+
+	T end()const
+	{
+		return end_;
+	}
 
 	inline
 	bool isMember(T val)const

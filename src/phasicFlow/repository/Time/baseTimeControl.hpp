@@ -26,47 +26,90 @@ under the terms of GNU General Public License v3 or any other later versions.
 namespace pFlow
 {
 
+class timeInfo;
+
 class baseTimeControl
 {
 private:
 
-	bool              isTimeStep_;
+    bool                     isTimeStep_;
 
-	int32StridedRagne iRange_;
+    int32StridedRagne        iRange_;
 
-	realStridedRange  rRange_;
+    stridedRange<timeValue>  rRange_;
 
-	const word        intervalPrefix_;
+    word                      intervalPrefix_;
+
+protected:
+
+	void setTimeControl(
+		timeValue startTime, 
+		timeValue endTime, 
+		timeValue interval, 
+		const word& intervalPrefix);
 
 public:
 
 	baseTimeControl(
 	  const dictionary& dict,
 	  const word&       intervalPrefix = "",
-	  real              defStartTime   = 0.0
+	  timeValue         defStartTime   = 0.0
 	);
+
+	baseTimeControl(
+		const dictionary&  dict,
+		const timeValue	   defInterval,
+		const word&        intervalPrefix="",
+		const timeValue    defStartTime=0.0);
 
 	baseTimeControl(
 		int32 start,
 		int32 end,
 		int32 stride,
 		const word& intervalPrefix = ""
+	); 
+
+	baseTimeControl(
+		timeValue start,
+		timeValue end,
+		timeValue stride,
+		const word& intervalPrefix = ""
 	);
+
+    baseTimeControl(
+        const baseTimeControl& other
+    ) = default;
+
+    baseTimeControl(
+        baseTimeControl&& other
+    ) = default;
+
+    baseTimeControl& operator=(
+        const baseTimeControl& other
+    ) = default;
+    
+    baseTimeControl& operator=(
+        baseTimeControl&& other
+    ) = default;
+    
+    ~baseTimeControl() = default;
 
 	inline bool isTimeStep() const
 	{
 		return isTimeStep_;
 	}
 
-	bool  timeEvent(uint32 iter, real t, real dt) const;
+	bool eventTime(uint32 iter, timeValue t, timeValue dt) const;
 
-	bool  isInRange(uint32 iter, real t, real dt) const;
+	bool eventTime(const timeInfo& ti)const;
 
-	real  startTime() const;
+	bool  isInRange(uint32 iter, timeValue t, timeValue dt) const;
 
-	real  endTime() const;
+	timeValue  startTime() const;
 
-	real  rInterval() const;
+	timeValue  endTime() const;
+
+	timeValue  rInterval() const;
 
 	int32 startIter() const;
 

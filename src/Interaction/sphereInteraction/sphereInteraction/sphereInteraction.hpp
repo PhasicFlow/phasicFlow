@@ -25,6 +25,8 @@ Licence:
 #include "sphereParticles.hpp"
 #include "boundarySphereInteractionList.hpp"
 #include "sphereInteractionKernels.hpp"
+#include "boundariesMask.hpp"
+#include "MPITimer.hpp"
 //#include "unsortedContactList.hpp"
 
 
@@ -74,6 +76,9 @@ private:
 	/// particle-particle and particle-wall interactions at boundaries 
 	BoundaryListType 					boundaryInteraction_;	
 
+	/// a mask for active boundaries (boundaries with intreaction)
+	boundariesMask<6> 					activeBoundaries_;
+
 	/// contact search object for pp and pw interactions 
 	uniquePtr<contactSearch> 			contactSearch_ = nullptr;
 
@@ -93,14 +98,13 @@ private:
 	/// timer for particle-wall interaction computations
 	Timer       pwInteractionTimer_;
 
-	/// timer for managing contact lists (only inernal points)
-	Timer 		contactListMangementTimer_;
-
-	Timer 		boundaryContactSearchTimer_;
 	/// timer for boundary interaction time 
 	Timer 		boundaryInteractionTimer_;
 
-	Timer 		contactListBoundaryTimer_;
+	/// timer for managing contact lists (only inernal points)
+	Timer 		contactListMangementTimer_;	
+
+	Timer 		contactListMangementBoundaryTimer_;
 
 	
 
@@ -109,10 +113,6 @@ private:
 	bool sphereSphereInteraction();
 
 	bool sphereWallInteraction();
-
-	//bool managePPContactLists();
-
-	//bool managePWContactLists();
 
 	/// range policy for p-p interaction execution 
 	using rpPPInteraction = 
@@ -152,9 +152,7 @@ public:
 
 	/// Check for changes in the point structures. (overriden from observer)
 	bool hearChanges(
-		real t,
-		real dt,
-		uint32 iter,
+		const timeInfo& ti,
 		const message& msg, 
 		const anyList& varList)override;
 	

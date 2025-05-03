@@ -20,12 +20,12 @@ Licence:
 #ifndef __subscriber_hpp__
 #define __subscriber_hpp__
 
-
-
-#include <array>
+// from std
+#include <vector>
 
 #include "List.hpp"
 #include "message.hpp"
+#include "timeInfo.hpp"
 
 namespace pFlow
 {
@@ -38,16 +38,14 @@ class subscriber
 private:
 
 	// - list of subsribed objectd that recieve updage messages 
-	mutable std::array<List<observer*>,message::numEvents()> observerList_;
+	mutable std::vector<List<observer*>> observerList_;
 
-	word subName_;
+	//word subName_;
 
 public:
 
-	subscriber(const word& name)
-	:
-		subName_(name)
-	{}
+	subscriber(const word& name);
+	
 
 	/// Copy constructor, only copies the name, not the list 
 	subscriber(const subscriber&);
@@ -69,16 +67,22 @@ public:
 
 	virtual bool unsubscribe(observer* obsevr)const;
 
-	bool notify(
+	/// TODO: remove this API from thie class 
+	/*bool notify(
 		uint32 iter,
 		real t,
 		real dt,
 		const message msg, 
+		const anyList& varList);*/
+	
+	bool notify(
+		const timeInfo& ti,
+		const message msg, 
 		const anyList& varList);
 	
-	const word& subscriberName()const
+	word subscriberName()const
 	{
-		return subName_;
+		return "subscriber"; //subName_;
 	}
 
 };

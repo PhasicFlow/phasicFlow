@@ -2,42 +2,25 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	geometryDict;
-objectType 	dictionary;
+objectName  particlesDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
 setFields
 {
-	defaultValue 
-	{
-		// linear velocity (m/s)
-		velocity 	realx3 	(0 0 0);
-
-		// linear acceleration (m/s2)
-		acceleration 	realx3 	(0 0 0);
-
-		// rotational velocity (rad/s)
-		rVelocity 	realx3 	(0 0 0);
-
-		// name of the particle shape
-		shapeName 	word	sphere;
-	}
-
-	selectors
-	{}
+    defaultValue
+    {
+        velocity         realx3 (0 0 0);         // linear velocity (m/s)
+        acceleration     realx3 (0 0 0);         // linear acceleration (m/s2)
+        rVelocity        realx3 (0 0 0);         // rotational velocity (rad/s)
+        shapeName        word   sphere;          // name of the particle shape
+    }
+    selectors
+    {}
 }
 
-// positions particles 
-positionParticles
+positionParticles                             
 {
-
-	// creates the required fields with zero particles (empty).
-	method empty;
-
-	// maximum number of particles in the simulation
-	maxNumberOfParticles 	50000;
-
-	// perform initial sorting based on morton code?
-	mortonSorting 		Yes;
+        method      empty; 
 }

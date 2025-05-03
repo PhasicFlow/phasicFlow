@@ -19,13 +19,68 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "baseTimeControl.hpp"
+#include "timeInfo.hpp"
 
+void pFlow::baseTimeControl::setTimeControl
+(
+	timeValue startTime, 
+	timeValue endTime, 
+	timeValue interval, 
+	const word &intervalPrefix
+)
+{
+	isTimeStep_ = false;
+	intervalPrefix_ = intervalPrefix;
+	rRange_ = stridedRange<timeValue>(startTime, endTime, interval);
+}
+
+pFlow::baseTimeControl::baseTimeControl(
+    const dictionary &dict,
+    const word &intervalPrefix,
+    timeValue defStartTime)
+    : intervalPrefix_(intervalPrefix)
+{
+	auto tControl = dict.getVal<word>("timeControl");
+	if(tControl == "timeStep")
+		isTimeStep_ = true;
+	else if( tControl == "runTime" || 
+			 tControl == "simulationTime")
+		isTimeStep_ = false;
+	else
+	{
+		fatalErrorInFunction<<
+		"bad input for intervalControl in dictionary "<< dict.globalName()<<endl<<
+		"valid inputs are "<< 
+		wordList({"timeStep", "runTime", "simulationTime"})<<endl;
+		fatalExit;
+	}
+
+	word intervalWord = intervalPrefix.size()==0? word("interval"): intervalPrefix+"Interval";
+
+	if(!isTimeStep_)
+	{
+		auto startTime = (dict.getValOrSet<timeValue>("startTime", defStartTime));
+    	auto endTime = (dict.getValOrSet<timeValue>("endTime", largeValue));
+		auto interval = dict.getVal<timeValue>(intervalWord);
+		rRange_ = stridedRange<timeValue>(startTime, endTime, interval);
+
+	}
+	else
+	{
+		auto startTime = (dict.getValOrSet<int32>("startTime", 0));
+    	auto endTime = (dict.getValOrSet<int32>("endTime", largestPosInt32));
+		auto interval = dict.getVal<int32>(intervalWord);
+		iRange_ = int32StridedRagne(startTime, endTime, interval);
+	}
+    
+}
 
 pFlow::baseTimeControl::baseTimeControl
 (
-    const dictionary &dict,
-    const word& intervalPrefix,
-	real defStartTime
+	const dictionary& dict,
+	const timeValue   defInterval,
+	const word&       intervalPrefix,
+	const timeValue   defStartTime
 )
 :
 	intervalPrefix_(intervalPrefix)
@@ -49,20 +104,19 @@ pFlow::baseTimeControl::baseTimeControl
 
 	if(!isTimeStep_)
 	{
-		auto startTime = (dict.getValOrSet<real>("startTime", defStartTime));
-    	auto endTime = (dict.getValOrSet<real>("endTime", largeValue));
-		auto interval = dict.getVal<real>(intervalWord);
-		rRange_ = realStridedRange(startTime, endTime, interval);
+		auto startTime = (dict.getValOrSet<timeValue>("startTime", defStartTime));
+    	auto endTime = (dict.getValOrSet<timeValue>("endTime", largeValue));
+		auto interval = dict.getValOrSet<timeValue>(intervalWord, defInterval);
+		rRange_ = stridedRange<timeValue>(startTime, endTime, interval);
 
 	}
 	else
 	{
 		auto startTime = (dict.getValOrSet<int32>("startTime", 0));
     	auto endTime = (dict.getValOrSet<int32>("endTime", largestPosInt32));
-		auto interval = dict.getVal<int32>(intervalWord);
+		auto interval = dict.getValOrSet<int32>(intervalWord, 1);
 		iRange_ = int32StridedRagne(startTime, endTime, interval);
 	}
-    
 }
 
 pFlow::baseTimeControl::baseTimeControl(int32 start, int32 end, int32 stride, const word &intervalPrefix)
@@ -75,7 +129,25 @@ pFlow::baseTimeControl::baseTimeControl(int32 start, int32 end, int32 stride, co
 {
 }
 
-bool pFlow::baseTimeControl::timeEvent(uint32 iter, real t, real dt) const
+pFlow::baseTimeControl::baseTimeControl
+(
+	timeValue start, 
+	timeValue end, 
+	timeValue stride, 
+	const word &intervalPrefix
+)
+:
+	isTimeStep_(false),
+	rRange_(
+		start, end, stride
+	),
+	intervalPrefix_(
+		intervalPrefix.size()==0uL? word("interval"): intervalPrefix+"Interval"
+	)
+{ 
+}
+
+bool pFlow::baseTimeControl::eventTime(uint32 iter, timeValue t, timeValue dt) const
 {
 	if(isTimeStep_)
 	{	
@@ -88,8 +160,13 @@ bool pFlow::baseTimeControl::timeEvent(uint32 iter, real t, real dt) const
     return false;
 }
 
+bool pFlow::baseTimeControl::eventTime(const timeInfo &ti) const
+{
+	return eventTime(ti.iter(), ti.t(), ti.dt());
+}
+
 bool
-pFlow::baseTimeControl::isInRange(uint32 iter, real t, real dt) const
+pFlow::baseTimeControl::isInRange(uint32 iter, timeValue t, timeValue dt) const
 {
 	if(isTimeStep_)
 	{
@@ -101,7 +178,7 @@ pFlow::baseTimeControl::isInRange(uint32 iter, real t, real dt) const
 	}
 }
 
-pFlow::real
+pFlow::timeValue
 pFlow::baseTimeControl::startTime() const
 {
 	if(!isTimeStep_)
@@ -114,7 +191,7 @@ pFlow::baseTimeControl::startTime() const
 	return 0;
 }
 
-pFlow::real
+pFlow::timeValue
 pFlow::baseTimeControl::endTime() const
 {
 	if(!isTimeStep_)
@@ -127,7 +204,7 @@ pFlow::baseTimeControl::endTime() const
 	return 0;
 }
 
-pFlow::real
+pFlow::timeValue
 pFlow::baseTimeControl::rInterval() const
 {
 	if(!isTimeStep_)
