@@ -7,7 +7,7 @@ on:
     paths:
       - "**/*.md"
       - ".github/workflows/sync-wiki.yml"
-      - ".github/workflows/markdownList.yml"
+      - "doc/mdDocs/markdownList.yml"
       - ".github/scripts/sync-wiki.py"
   workflow_dispatch:
 

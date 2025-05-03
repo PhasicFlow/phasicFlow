@@ -9,7 +9,7 @@ import sys
 REPO_URL = "https://github.com/PhasicFlow/phasicFlow"
 REPO_PATH = os.path.join(os.environ.get("GITHUB_WORKSPACE", ""), "repo")
 WIKI_PATH = os.path.join(os.environ.get("GITHUB_WORKSPACE", ""), "wiki")
-MAPPING_FILE = os.path.join(REPO_PATH, ".github/workflows/markdownList.yml")
+MAPPING_FILE = os.path.join(REPO_PATH, "doc/mdDocs/markdownList.yml")
 
 def load_mapping():
     """Load the markdown to wiki page mapping file."""
