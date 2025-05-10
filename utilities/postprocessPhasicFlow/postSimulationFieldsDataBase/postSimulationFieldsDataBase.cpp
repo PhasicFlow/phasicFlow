@@ -22,7 +22,7 @@ bool postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
         {
             allPointFields_.push_back
             (
-                makeUnique<pointField_H<real>>
+                makeUnique<pointField_D<real>>
                 (
                     objectFile
                     (
@@ -40,7 +40,7 @@ bool postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
         {
             allPointFields_.push_back
             (
-                makeUnique<pointField_H<realx3>>
+                makeUnique<pointField_D<realx3>>
                 (
                     objectFile
                     (
@@ -58,7 +58,7 @@ bool postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
         {
             allPointFields_.push_back
             (
-                makeUnique<pointField_H<realx4>>
+                makeUnique<pointField_D<realx4>>
                 (
                     objectFile
                     (
@@ -76,7 +76,7 @@ bool postSimulationFieldsDataBase::loadPointFieldToTime(const word &name)
         {
             allPointFields_.push_back
             (
-                makeUnique<pointField_H<uint32>>
+                makeUnique<pointField_D<uint32>>
                 (
                     objectFile
                     (
