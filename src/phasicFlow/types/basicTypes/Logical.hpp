@@ -41,24 +41,30 @@ class Logical
 private:
 
 	/// bool value
-	bool                     s_ = false;
+	/// negative value means false 
+	/// positive value means true
+	/// 0 means not set, but still valid as true
+	int8_t                     s_ = -1;
 
-	/// Set numbe of of Yes or No
-	int                      yesNoSet_ = 0;
-
+	
 	/// Set of Yes or Nos
-	inline static const word YesNo__[4][2] = { { "Yes", "No" },
+	inline static const word YesNo__[5][2] = { { "Y", "Y" },
+											   { "Yes", "No" },
 		                                       { "on", "off" },
 		                                       { "true", "false" },
 		                                       { "Ok", "No" } };
 
 	/// Construct from bool and set number
-	inline explicit Logical(bool s, int yns)
-	  : s_(s),
-	    yesNoSet_(yns)
+	inline Logical(bool s, int yns)
 	{
+		yns = std::max(1, std::min(4, yns));
+		s_ = s ? static_cast<int8_t>(yns) : static_cast<int8_t>(-yns);
 	}
 
+	inline explicit Logical(int8_t s)
+	{
+		s_ = s;
+	}
 public:
 
 	/// Type info
@@ -79,7 +85,8 @@ public:
 
 	/// Construct from bool
 	inline explicit Logical(bool s)
-	  : s_(s)
+	: 
+		Logical(s, 1)
 	{
 	}
 
@@ -104,8 +111,7 @@ public:
 	/// Assignment with bool
 	inline Logical& operator=(const bool& b)
 	{
-		s_        = b;
-		yesNoSet_ = 0;
+		*this = Logical(b);
 		return *this;
 	}
 
@@ -114,19 +120,19 @@ public:
 	/// () operator, return bool value
 	inline bool operator()() const
 	{
-		return s_;
+		return s_ > 0;
 	}
 
 	/// Return bool value
 	inline explicit operator bool() const
 	{
-		return s_;
+		return s_ > 0;
 	}
 
 	/// Not operator
 	inline Logical operator!() const
 	{
-		return Logical(!s_, yesNoSet_);
+		return  Logical(static_cast<int8_t>(-s_));
 	}
 
 	//// IO operations

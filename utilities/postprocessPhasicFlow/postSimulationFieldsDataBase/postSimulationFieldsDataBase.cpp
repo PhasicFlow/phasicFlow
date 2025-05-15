@@ -192,7 +192,7 @@ postSimulationFieldsDataBase::postSimulationFieldsDataBase
     systemControl &control,
     const dictionary& postDict,
     bool inSimulation,
-    timeValue startTime
+    TimeValueType startTime
 )
 : 
     fieldsDataBase(control, postDict, inSimulation, startTime),
@@ -231,14 +231,14 @@ const pointStructure& postSimulationFieldsDataBase::pStruct()const
     return pStructPtr_();
 }
 
-timeValue postSimulationFieldsDataBase::getNextTimeFolder() const
+TimeValueType postSimulationFieldsDataBase::getNextTimeFolder() const
 {
     return allValidFolders_.nextTime();
 }
 
-timeValue postSimulationFieldsDataBase::setToNextTimeFolder()
+TimeValueType postSimulationFieldsDataBase::setToNextTimeFolder()
 {
-    timeValue nextTime = allValidFolders_.nextTime();
+    TimeValueType nextTime = allValidFolders_.nextTime();
     if(nextTime < 0.0) return nextTime;
 
     allValidFolders_++;
@@ -254,9 +254,9 @@ timeValue postSimulationFieldsDataBase::setToNextTimeFolder()
     return nextTime;
 }
 
-timeValue postSimulationFieldsDataBase::skipNextTimeFolder()
+TimeValueType postSimulationFieldsDataBase::skipNextTimeFolder()
 {
-    timeValue nextTime = allValidFolders_.nextTime();
+    TimeValueType nextTime = allValidFolders_.nextTime();
     if(nextTime < 0.0) return nextTime;
 
     allValidFolders_++;

@@ -37,7 +37,7 @@ class dictionary;
 class timeControl
 {
 public:
-	using timeStridedRange = stridedRange<timeValue>;
+	using timeStridedRange = stridedRange<TimeValueType>;
 private:
 
 
@@ -47,19 +47,19 @@ private:
 		timeInfo 		ti_;
 		
 		// - start time of simulation
-		timeValue startTime_;
+		TimeValueType startTime_;
 
 		// - end time of simulation 
-		timeValue endTime_;
+		TimeValueType endTime_;
 
 		// - stopAt
-		timeValue stopAt_;	
+		TimeValueType stopAt_;	
 
 		// - time interval for time folder output 
-		timeValue saveInterval_;
+		TimeValueType saveInterval_;
 
 		// - the last time folder that was saved
-		timeValue lastSaved_;
+		TimeValueType lastSaved_;
 
 		bool  managedExternaly_ = false;
 
@@ -80,7 +80,7 @@ private:
 		inline word  timeName_ = "wrongSettings"; // for managedExternamly
 
 		static
-		inline timeValue 	writeTime_ = 0; // for managedExternamly
+		inline TimeValueType 	writeTime_ = 0; // for managedExternamly
 
 		void checkForOutputToFile();
 		
@@ -92,22 +92,22 @@ public:
 
 	timeControl(
 		dictionary& dict,
-		timeValue startTime,
-		timeValue endTime,
-		timeValue saveInterval,
+		TimeValueType startTime,
+		TimeValueType endTime,
+		TimeValueType saveInterval,
 		word startTimeName);
 	
 	virtual ~timeControl() = default;
 	
-	timeValue dt()const
+	TimeValueType dt()const
 	{
 		return ti_.dt();
 	}
 
-	timeValue setTime(timeValue t);
+	TimeValueType setTime(TimeValueType t);
 	
 
-	void setStopAt(timeValue sT)
+	void setStopAt(TimeValueType sT)
 	{
 		if(managedExternaly_)
 		{
@@ -115,24 +115,24 @@ public:
 		}
 	}
 
-	timeValue startTime()const
+	TimeValueType startTime()const
 	{
 		return startTime_;
 	}
 
-	timeValue endTime()const
+	TimeValueType endTime()const
 	{
 		return endTime_;
 	}
 
-	timeValue saveInterval()const
+	TimeValueType saveInterval()const
 	{
 		return saveInterval_;
 	}
 
 	word timeName()const;	
 
-	timeValue currentTime() const 
+	TimeValueType currentTime() const 
 	{
 		return ti_.currentTime();
 	}

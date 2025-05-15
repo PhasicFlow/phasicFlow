@@ -27,7 +27,7 @@ Licence:
 pFlow::postprocessData::postprocessData::postprocessData
 (
     const systemControl &control,
-    timeValue startTime
+    TimeValueType startTime
 )
 :
     auxFunctions(control),

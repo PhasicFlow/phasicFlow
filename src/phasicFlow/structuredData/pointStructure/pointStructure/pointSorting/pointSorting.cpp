@@ -32,15 +32,23 @@ pFlow::pointSorting::pointSorting(const dictionary & dict)
     dx_(
         performSorting_()?
             dict.getVal<real>("dx"):
-            1.0
+            0.01
     )
 {
     if( performSorting_() )
-        REPORT(2)<<"Point sorting is "<<Yellow_Text("active")<<" in simulation"<<END_REPORT;
-    else
-       REPORT(2)<<"Point sorting is "<<Yellow_Text("inactive")<<" in simulation"<<END_REPORT;
-
+    {
+        REPORT(2)<<"Point sorting is "<<Yellow_Text("active")<<" in the simulation"<<END_REPORT;
+        dictionary dict2("pointSorting");
+        dict2.add("avtive", performSorting_);
+        dict2.add("dx", dx_);
+        timeControl_.write(dict2);
+        output.incrIndent();
+            output<<dict2<<endl;
+        output.decrIndent();
+    }
+        
 }
+
 pFlow::uint32IndexContainer 
 pFlow::pointSorting::getSortedIndices(
     const box& boundingBox, 

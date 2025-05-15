@@ -71,7 +71,7 @@ public:
         systemControl& control,
         const dictionary& postDict,
         bool inSimulation,
-        timeValue startTime);
+        TimeValueType startTime);
 
     ~postSimulationFieldsDataBase() override = default;
 
@@ -84,11 +84,11 @@ public:
 
     const pointStructure& pStruct()const override;
 
-    timeValue getNextTimeFolder()const override;
+    TimeValueType getNextTimeFolder()const override;
 
-    timeValue setToNextTimeFolder() override;
+    TimeValueType setToNextTimeFolder() override;
 
-    timeValue skipNextTimeFolder() override;
+    TimeValueType skipNextTimeFolder() override;
     
 };
 

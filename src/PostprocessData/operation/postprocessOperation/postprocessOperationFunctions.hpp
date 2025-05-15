@@ -46,7 +46,7 @@ inline
 bool writeField
 (
     iOstream&             os,
-    timeValue             t,
+    TimeValueType             t,
     const regionField<T>  field,
     uint32                threshold,
     const T&              defValue=T{}    

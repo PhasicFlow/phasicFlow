@@ -36,16 +36,16 @@ pFlow::timeControl::timeControl
 	ti_(dict),
 	startTime_
 	(
-		dict.getVal<timeValue>("startTime")
+		dict.getVal<TimeValueType>("startTime")
 	),
 	endTime_
 	(
-		dict.getVal<timeValue>("endTime")
+		dict.getVal<TimeValueType>("endTime")
 	),
 	stopAt_(endTime_),
 	saveInterval_
 	(
-		dict.getVal<timeValue>("saveInterval")
+		dict.getVal<TimeValueType>("saveInterval")
 	),
 	lastSaved_(startTime_),
 	performSorting_
@@ -65,9 +65,9 @@ pFlow::timeControl::timeControl
 
 pFlow::timeControl::timeControl(
 		dictionary& dict,
-		timeValue startTime,
-		timeValue endTime,
-		timeValue saveInterval,
+		TimeValueType startTime,
+		TimeValueType endTime,
+		TimeValueType saveInterval,
 		word startTimeName)
 :
 	ti_(startTime, dict),
@@ -95,9 +95,9 @@ pFlow::timeControl::timeControl(
 	checkForOutputToFile();
 }
 
-pFlow::timeValue pFlow::timeControl::setTime(timeValue t)
+pFlow::TimeValueType pFlow::timeControl::setTime(TimeValueType t)
 {
-	timeValue tmp = ti_.currentTime();
+	TimeValueType tmp = ti_.currentTime();
 	ti_.currentTime_ = t;
 	lastSaved_ = t;
 	checkForOutputToFile();

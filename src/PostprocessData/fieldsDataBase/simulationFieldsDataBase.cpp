@@ -49,7 +49,7 @@ pFlow::postprocessData::simulationFieldsDataBase::simulationFieldsDataBase
     systemControl &control,
     const dictionary& postDict, 
     bool inSimulation,
-    timeValue startTime
+    TimeValueType startTime
 )
 :
     fieldsDataBase(control, postDict, inSimulation, startTime),
