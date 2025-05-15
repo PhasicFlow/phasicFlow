@@ -37,11 +37,15 @@
 *.out
 *.app
 
-# directories
+# Exclude specific directories wherever they appear
 build/**
 include/**
 bin/**
 lib/**
+**/build/
+**/include/
+**/bin/
+**/lib/
 test*/**
 **/**notnow
 doc/code-documentation/
@@ -61,3 +65,5 @@ doc/DTAGS
 **/[0-9]*.[0-9][0-9][0-9][0-9][0-9][0-9][0-9]
 **/[0-9]*.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]
 **/VTK
+
+
