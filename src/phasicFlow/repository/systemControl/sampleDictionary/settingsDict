@@ -1,0 +1,55 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName 	settingsDict;
+objectType 	dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+// list of libraries that should be loaded during runtime;
+// for example, "libPostprocessData.so" (optional)
+libs  ();       
+
+// Auxiliary function to be run during simulation (optional) 
+auxFunctions    postprocessData;
+
+// time step for integration in seconds, (mandatory) 
+dt 				  0.00001; 	                     
+
+// start time for simulation, can be any valid value. Simulation starts from 
+// time folder with the same name 
+startTime 		  0; 
+
+// end time for simulation (mandatory)
+endTime 		  10;
+
+// time interval between each data save on disk, (mandatory)
+saveInterval 	  0.01; 
+
+// maximum number of digits for time folder, (opetional, default is 5)
+timePrecision     5; 
+
+// gravitational acceleration vector (m/s2), (mandatory)
+g 			      (0 -9.8 0);                         // gravity vector (m/s2) 
+
+// include a list of objects that are not normally in the save list on disk, (optional) 
+includeObjects (diameter);                       
+
+// exculde a list of objects from saving on the disk, (optional)
+excludeObjects (); 
+
+// integration method for position and velocity, (mandatory)
+integrationMethod 		AdamsBashforth2; 
+
+// if keep the integeration history under timeFolder/integeration or not, (optional, default is no)
+integrationHistory              Yes;
+
+// data writting format (ascii or binary), (mandatory)
+writeFormat				          ascii;         
+
+// report timers (Yes or No)?, (optional, default is Yes)
+timersReport 			            Yes;  	     
+
+// time interval between each timer report, (optional, default is 0.04)
+timersReportInterval   	           0.01;	     // time interval for reporting timers

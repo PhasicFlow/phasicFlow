@@ -27,11 +27,11 @@ Licence:
 namespace pFlow
 {
 
-Map<timeValue, fileSystem> getTimeFolders(const fileSystem& path);
+Map<TimeValueType, fileSystem> getTimeFolders(const fileSystem& path);
 
 class timeFolder
 {
-	using timeList = Map<timeValue, fileSystem>;
+	using timeList = Map<TimeValueType, fileSystem>;
 
 protected:
 	
@@ -61,14 +61,14 @@ public:
 	}
 
 	inline
-	timeValue currentTime()const
+	TimeValueType currentTime()const
 	{
 		if(folders_.empty()) return -1;
 		return currentFolder_->first;
 	}
 
 	inline
-	timeValue nextTime()const
+	TimeValueType nextTime()const
 	{
 		auto next = currentFolder_;
 		next++;
@@ -98,7 +98,7 @@ public:
 		return !finished();
 	}
 
-	bool setTime(timeValue upto)
+	bool setTime(TimeValueType upto)
 	{
 		timeList::iterator orgFolder = currentFolder_;
 		
@@ -140,14 +140,14 @@ public:
 		return false;
 	}
 
-	timeValue startTime()const
+	TimeValueType startTime()const
 	{
 		if(folders_.empty()) return -1;
 		auto [t,f] = *folders_.begin();
 		return t;
 	}
 
-	timeValue endTime()const
+	TimeValueType endTime()const
 	{
 		if(folders_.empty()) return -1;
 		auto [t,f] = *(--folders_.end());
@@ -162,16 +162,16 @@ public:
 };
 
 inline
-Map<timeValue, fileSystem> getTimeFolders(const fileSystem& path)
+Map<TimeValueType, fileSystem> getTimeFolders(const fileSystem& path)
 {
-	Map<timeValue, fileSystem> tFolders;
+	Map<TimeValueType, fileSystem> tFolders;
 
 	auto subDirs = subDirectories(path);
 
 	for(auto& subD: subDirs)
 	{
 		auto timeName = tailName(subD.wordPath(), '/');
-		timeValue TIME;
+		TimeValueType TIME;
 		if( auto success = readReal(timeName, TIME); success)
 		{
 			if(!tFolders.insertIf(TIME, subD))

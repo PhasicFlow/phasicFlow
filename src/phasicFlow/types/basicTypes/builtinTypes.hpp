@@ -61,25 +61,26 @@ using uint64 = unsigned long long int;
 
 using word = std::string;
 
-using timeValue = double;
+/// type for time values
+using TimeValueType = double;
 
+/// type for indexing arrays and vectors 
 #ifdef pFlow_Build_Index64
 	#define Index64 1
-	using index = std::size_t;
+	using IndexType = std::size_t;
 	inline const char* IndexType__ = "std::size_t";
 #else
 	#define Index64 0
-	using index = uint32;
+	using IndexType = uint32;
 	inline const char* IndexType__ = "uint32";
 #endif
-
 
 inline word
 floatingPointDescription()
 {
 	return word("In this build, ") + word(floatingPointType__) +
 	       word(" is used for floating point operations and ") +
-		   IndexType__ + "for indexing.";
+		   IndexType__ + " for indexing.";
 }
 
 } // end of pFlow

@@ -52,7 +52,7 @@ template<typename T>
 inline bool writeField
 (
     iOstream&             os,
-    timeValue             t,
+    TimeValueType             t,
     const regionField<T>& field,
     const regionPoints&   regPoints,
     const T&              invalidVal = T{}

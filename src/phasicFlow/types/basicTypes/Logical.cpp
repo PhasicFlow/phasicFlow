@@ -25,11 +25,14 @@ Licence:
 
 pFlow::Logical::Logical(const word& l)
 {
-	if (!evaluteWord(l, s_, yesNoSet_))
+	bool s;
+	int yesNoSet;
+	if (!evaluteWord(l, s, yesNoSet))
 	{
 		fatalErrorInFunction << "  invalid input for Logical: " << l << endl;
 		fatalExit;
 	}
+	*this = Logical(s, yesNoSet);
 }
 
 pFlow::Logical::Logical(const char* ch)
@@ -42,7 +45,7 @@ pFlow::Logical::evaluteWord(const word& l, bool& b, int& yesNoSet)
 {
 	auto Ul = toUpper(l);
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 1; i < 5; ++i)
 	{
 		if (toUpper(YesNo__[i][0]) == Ul)
 		{
@@ -89,20 +92,26 @@ pFlow::Logical::read(iIstream& is)
 		is.setBad();
 		return false;
 	}
-
-	return evaluteWord(w, s_, yesNoSet_);
+	bool s;
+	int yesNoSet;
+	if( evaluteWord(w, s, yesNoSet) )
+	{
+		*this = Logical(s, yesNoSet);
+		return true;
+	}
+	return false;
 }
 
 bool
 pFlow::Logical::write(iOstream& os) const
 {
-	if (s_)
+	if (s_ > 0)
 	{
-		os << YesNo__[yesNoSet_][0];
+		os << YesNo__[s_][0];
 	}
 	else
 	{
-		os << YesNo__[yesNoSet_][1];
+		os << YesNo__[-s_][1];
 	}
 	return os.check(FUNCTION_NAME);
 }

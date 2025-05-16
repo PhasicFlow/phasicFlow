@@ -359,7 +359,7 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::hearChanges
 	if(msg.equivalentTo(message::ITEMS_REARRANGE))
 	{
 		notImplementedFunction;
-		return false;
+		return true;
 	}
 	
 	fatalErrorInFunction<<"Event "<< msg.eventNames()<<

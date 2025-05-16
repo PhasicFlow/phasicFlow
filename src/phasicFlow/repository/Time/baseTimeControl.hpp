@@ -36,16 +36,16 @@ private:
 
     int32StridedRagne        iRange_;
 
-    stridedRange<timeValue>  rRange_;
+    stridedRange<TimeValueType>  rRange_;
 
     word                      intervalPrefix_;
 
 protected:
 
 	void setTimeControl(
-		timeValue startTime, 
-		timeValue endTime, 
-		timeValue interval, 
+		TimeValueType startTime, 
+		TimeValueType endTime, 
+		TimeValueType interval, 
 		const word& intervalPrefix);
 
 public:
@@ -53,14 +53,14 @@ public:
 	baseTimeControl(
 	  const dictionary& dict,
 	  const word&       intervalPrefix = "",
-	  timeValue         defStartTime   = 0.0
+	  TimeValueType         defStartTime   = 0.0
 	);
 
 	baseTimeControl(
 		const dictionary&  dict,
-		const timeValue	   defInterval,
+		const TimeValueType	   defInterval,
 		const word&        intervalPrefix="",
-		const timeValue    defStartTime=0.0);
+		const TimeValueType    defStartTime=0.0);
 
 	baseTimeControl(
 		int32 start,
@@ -70,9 +70,9 @@ public:
 	); 
 
 	baseTimeControl(
-		timeValue start,
-		timeValue end,
-		timeValue stride,
+		TimeValueType start,
+		TimeValueType end,
+		TimeValueType stride,
 		const word& intervalPrefix = ""
 	);
 
@@ -99,17 +99,17 @@ public:
 		return isTimeStep_;
 	}
 
-	bool eventTime(uint32 iter, timeValue t, timeValue dt) const;
+	bool eventTime(uint32 iter, TimeValueType t, TimeValueType dt) const;
 
 	bool eventTime(const timeInfo& ti)const;
 
-	bool  isInRange(uint32 iter, timeValue t, timeValue dt) const;
+	bool  isInRange(uint32 iter, TimeValueType t, TimeValueType dt) const;
 
-	timeValue  startTime() const;
+	TimeValueType  startTime() const;
 
-	timeValue  endTime() const;
+	TimeValueType  endTime() const;
 
-	timeValue  rInterval() const;
+	TimeValueType  rInterval() const;
 
 	int32 startIter() const;
 

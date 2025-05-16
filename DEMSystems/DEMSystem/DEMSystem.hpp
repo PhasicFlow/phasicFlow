@@ -96,7 +96,7 @@ public:
 		return Control_();
 	}
 
-	auto inline constexpr usingDoulle()const
+	auto inline constexpr usingDouble()const
 	{
 		return pFlow::usingDouble__;
 	}

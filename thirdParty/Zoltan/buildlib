@@ -1,0 +1,18 @@
+#!/bin/bash
+
+rm -rf build/ include/ lib/
+mkdir build
+
+cd build
+
+../configure \
+--prefix=$HOME/PhasicFlow/phasicFlow-v-1.0/thirdParty/Zoltan/ \
+--with-gnumake \
+--with-id-type=uint
+--disable-tests
+--disable-examples
+
+make everything -j4
+make install
+
+cd ../

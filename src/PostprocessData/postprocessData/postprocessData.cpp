@@ -27,7 +27,7 @@ Licence:
 pFlow::postprocessData::postprocessData::postprocessData
 (
     const systemControl &control,
-    timeValue startTime
+    TimeValueType startTime
 )
 :
     auxFunctions(control),
@@ -50,7 +50,7 @@ pFlow::postprocessData::postprocessData::postprocessData
     if( !dict_.fileExist() || !dict_.headerOk() )
     {
         WARNING<<"You requested postprocessData function while,"
-            <<" the dictionary system/postprocessDataDict does not exist."
+            <<" the dictionary settings/postprocessDataDict does not exist."
             <<" This feature is disabled in the current run."<<END_WARNING;
         return;
     }

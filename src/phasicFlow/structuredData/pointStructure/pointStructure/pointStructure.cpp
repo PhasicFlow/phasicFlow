@@ -178,7 +178,7 @@ bool pFlow::pointStructure::beforeIteration()
 {
     const timeInfo ti = TimeInfo();
 
-    if(pointSorting_().sortTime(ti.iter(), ti.t(), ti.dt()))
+    if(pointSorting_().sortTime(ti))
     {
         auto sortedIndices = pointSorting_().getSortedIndices(
             simulationDomain_().globalBox(),

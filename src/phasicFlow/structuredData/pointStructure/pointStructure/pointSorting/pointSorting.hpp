@@ -50,9 +50,9 @@ public:
 		return performSorting_();
 	}
 
-	bool sortTime(uint32 iter, real t, real dt)const
+	bool sortTime(const timeInfo& ti)const
 	{
-		return performSorting_() && timeControl_.eventTime(iter, t, dt);
+		return performSorting_() && timeControl_.eventTime(ti);
 	}
 
 	uint32IndexContainer getSortedIndices(

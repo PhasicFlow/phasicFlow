@@ -21,7 +21,6 @@ Licence:
 
     \brief Helper functions for built-in types.
  */
-
 #ifndef __bTypesFunctions_hpp__
 #define __bTypesFunctions_hpp__
 
