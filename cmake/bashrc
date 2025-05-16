@@ -19,7 +19,7 @@ export pFlow_SRC_DIR="$pFlow_PROJECT_DIR/src"
 
 export Kokkos_DIR="$kokkosDir"
 
-export Zoltan_DIR="$projectDir/Zoltan"
+#export Zoltan_DIR="$projectDir/Zoltan"
 
 # Cleanup variables (done as final statement for a clean exit code)
 unset projectDir
