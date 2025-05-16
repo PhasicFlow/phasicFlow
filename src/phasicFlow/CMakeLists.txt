@@ -1,4 +1,3 @@
-
 list(APPEND SourceFiles 
 types/basicTypes/bTypesFunctions.cpp
 types/basicTypes/Logical.cpp
@@ -119,35 +118,27 @@ set(link_libs)
 set(link_libs Kokkos::kokkos tbb)
 	
 
-
+# for MPI parallelization
 if(pFlow_Build_MPI)
 
-	set(Zoltan_Install_DIR)
-	if(DEFINED ENV{Zoltan_DIR})
-	   set(Zoltan_Install_DIR $ENV{Zoltan_DIR})
-	else()
-	  set(Zoltan_Install_DIR $ENV{HOME}/PhasicFlow/Zoltan)
-	endif()
-	message(STATUS "Zoltan install directory is ${Zoltan_Install_DIR}")
-
-	set(ZOLTAN_PREFIX "${Zoltan_Install_DIR}" CACHE STRING "Zoltan install directory")
-
-	find_path(ZOLTAN_INCLUDE_DIR zoltan.h PATHS "${ZOLTAN_PREFIX}/include")
-
-	message(STATUS "Zoltan include path: ${ZOLTAN_INCLUDE_DIR}")
-
-	find_library(ZOLTAN_LIBRARY zoltan PATHS "${ZOLTAN_PREFIX}/lib")
-	message(STATUS "Zoltan lib path: ${ZOLTAN_LIBRARY}")
+	# Include the Zoltan installation check macro
+	include(${CMAKE_SOURCE_DIR}/cmake/zoltanInstallCheck.cmake)
+	
+	# set the Zoltan Directory and check/build if needed
+	set(Zoltan_Install_DIR ${CMAKE_SOURCE_DIR}/thirdParty/Zoltan)
+	
+	# Call the macro to find or build Zoltan
+	zoltan_find_or_build(${Zoltan_Install_DIR})
 	
 	list(APPEND SourceFiles
-	MPIParallelization/domain/partitioning/partitioning.cpp 
-	MPIParallelization/domain/partitioning/rcb1DPartitioning.cpp
-	MPIParallelization/domain/MPISimulationDomain.cpp
-    MPIParallelization/dataIOMPI/dataIOMPIs.cpp
-    MPIParallelization/MPI/procCommunication.cpp
-    MPIParallelization/MPI/scatteredMasterDistributeChar.cpp
-	MPIParallelization/pointStructure/boundaries/boundaryProcessor.cpp
-	MPIParallelization/pointField/processorBoundaryFields.cpp
+		MPIParallelization/domain/partitioning/partitioning.cpp 
+		MPIParallelization/domain/partitioning/rcb1DPartitioning.cpp
+		MPIParallelization/domain/MPISimulationDomain.cpp
+		MPIParallelization/dataIOMPI/dataIOMPIs.cpp
+		MPIParallelization/MPI/procCommunication.cpp
+		MPIParallelization/MPI/scatteredMasterDistributeChar.cpp
+		MPIParallelization/pointStructure/boundaries/boundaryProcessor.cpp
+		MPIParallelization/pointField/processorBoundaryFields.cpp
 	)
 	
 	list(APPEND link_libs MPI::MPI_CXX ${ZOLTAN_LIBRARY} -lm )
@@ -155,8 +146,10 @@ if(pFlow_Build_MPI)
 	target_include_directories(phasicFlow PUBLIC ./globals ${ZOLTAN_INCLUDE_DIR})
 
 else()
-	pFlow_add_library_install(phasicFlow SourceFiles link_libs)
+	
+pFlow_add_library_install(phasicFlow SourceFiles link_libs)
 	target_include_directories(phasicFlow PUBLIC ./globals)
+
 endif()
 
 
