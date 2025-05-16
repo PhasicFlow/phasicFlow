@@ -60,7 +60,7 @@ public:
         systemControl& control, 
         const dictionary& postDict,
         bool inSimulation,
-        timeValue startTime);
+        TimeValueType startTime);
 
     ~simulationFieldsDataBase() override = default;
 

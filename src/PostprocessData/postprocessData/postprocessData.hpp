@@ -85,7 +85,7 @@ public:
     ///  this constructor is used when postprocesing is active
     ///  during simulation.
     /// @param control const reference to systemControl 
-    postprocessData(const systemControl& control, timeValue startTime = -1.0);
+    postprocessData(const systemControl& control, TimeValueType startTime = -1.0);
 
     ~postprocessData()override = default;
 

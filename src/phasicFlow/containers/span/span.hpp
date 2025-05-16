@@ -55,7 +55,7 @@ private:
 
     mutable T*     data_ = nullptr;
  
-    index          size_ = 0;
+    IndexType      size_ = 0;
 
 public:
     
@@ -104,7 +104,7 @@ public:
 
     /// Returns the number of elements in the span
     INLINE_FUNCTION_HD
-    index size() const
+    IndexType size() const
     {
         return size_;
     }
@@ -139,14 +139,14 @@ public:
 
     /// Returns a reference to the element at the specified index
     INLINE_FUNCTION_HD
-    T& operator[](index i)
+    T& operator[](IndexType i)
     {
         return data_[i];
     }
 
     /// Returns a const reference to the element at the specified index
     INLINE_FUNCTION_HD
-    T& operator[](index i)const
+    T& operator[](IndexType i)const
     {
         return data_[i];
     }

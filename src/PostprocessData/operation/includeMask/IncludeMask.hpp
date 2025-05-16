@@ -86,12 +86,12 @@ private:
     word                    fieldName_;
     
     /// Timestamp when mask was last updated (-1 indicates never updated)
-    timeValue               lastUpdated_ = -1;
+    TimeValueType               lastUpdated_ = -1;
 
     /// Updates the mask based on current field values if needed, returns true if successful
     bool updateMask()
     {
-        timeValue t = database().currentTime();
+        TimeValueType t = database().currentTime();
         
         if( equal( t, lastUpdated_)) return true;
         
@@ -206,11 +206,11 @@ private:
 	
     std::vector<bool>       mask_;
 
-    timeValue               lastUpdated_ = -1;
+    TimeValueType               lastUpdated_ = -1;
 
     bool updateMask()
     {
-        timeValue t = database().currentTime();
+        TimeValueType t = database().currentTime();
         
         if( equal( t, lastUpdated_)) return true;
         

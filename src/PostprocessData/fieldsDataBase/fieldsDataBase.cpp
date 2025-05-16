@@ -467,7 +467,7 @@ pFlow::postprocessData::fieldsDataBase::fieldsDataBase
     systemControl& control,
     const dictionary& postDict,
     bool inSimulation,
-    timeValue startTime
+    TimeValueType startTime
 )
 :
     time_(control.time()),
@@ -492,7 +492,7 @@ pFlow::postprocessData::fieldsDataBase::fieldsDataBase
     }
 }
 
-pFlow::timeValue pFlow::postprocessData::fieldsDataBase::currentTime() const
+pFlow::TimeValueType pFlow::postprocessData::fieldsDataBase::currentTime() const
 {
     return time_.currentTime();
 }
@@ -914,7 +914,7 @@ pFlow::uniquePtr<pFlow::postprocessData::fieldsDataBase>
     systemControl& control, 
     const dictionary& postDict, 
     bool inSimulation,
-    timeValue startTime
+    TimeValueType startTime
 )
 {
     word dbType;

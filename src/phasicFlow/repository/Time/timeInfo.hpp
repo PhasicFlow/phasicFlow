@@ -36,16 +36,16 @@ private:
 	uint32 		currentIter_;
 
 	// - current time of simulation
-	timeValue   currentTime_;
+	TimeValueType   currentTime_;
 
 	// - integration time step
-	timeValue   dt_;
+	TimeValueType   dt_;
 
 	inline static uint32 presicion_ = 5;
 
 public:
 
-	timeInfo(uint32 cIter, timeValue cTime, timeValue dt)
+	timeInfo(uint32 cIter, TimeValueType cTime, TimeValueType dt)
 	  : currentIter_(cIter),
 	    currentTime_(cTime),
 	    dt_(dt)
@@ -55,31 +55,31 @@ public:
 	timeInfo(const dictionary& dict)
 	:
 		currentIter_(0),
-		currentTime_(dict.getVal<timeValue>("startTime")),
-		dt_( dict.getVal<timeValue>("dt"))
+		currentTime_(dict.getVal<TimeValueType>("startTime")),
+		dt_( dict.getVal<TimeValueType>("dt"))
 	{
 		presicion_ = dict.getValOrSet<uint32>("timePrecision",5);
 	}
 
-	timeInfo(timeValue currentTime, const dictionary& dict)
+	timeInfo(TimeValueType currentTime, const dictionary& dict)
 	:
 		currentIter_(0),
 		currentTime_(currentTime),
-		dt_( dict.getVal<timeValue>("dt"))
+		dt_( dict.getVal<TimeValueType>("dt"))
 	{
 		presicion_ = dict.getValOrSet<int32>("timePrecision",5);
 	}
 
-	inline const timeValue& currentTime()const
+	inline const TimeValueType& currentTime()const
 	{
 		return currentTime_;
 	}
 
-	inline const timeValue& t() const
+	inline const TimeValueType& t() const
 	{
 		return currentTime_;
 	}
-	inline const timeValue& dt() const
+	inline const TimeValueType& dt() const
 	{
 		return dt_;
 	}
@@ -109,7 +109,7 @@ public:
 	inline 
 	word prevTimeName()const
 	{
-		return real2FixedStripZeros( max(currentTime_-dt_, timeValue(0)), presicion_);
+		return real2FixedStripZeros( max(currentTime_-dt_, TimeValueType(0)), presicion_);
 	}
 
 	static

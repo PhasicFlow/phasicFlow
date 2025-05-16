@@ -78,7 +78,7 @@ private:
         anyList             allFields_;
 
         /// Map to store the last capture time of each field
-        wordMap<timeValue>  captureTime_;
+        wordMap<TimeValueType>  captureTime_;
 
         /// Reference to the Time object
         Time&               time_; 
@@ -178,7 +178,7 @@ public:
             systemControl& control, 
             const dictionary& postDict,
             bool inSimulation,
-            timeValue startTime);
+            TimeValueType startTime);
 
         /// no copy constructor
         fieldsDataBase(const fieldsDataBase&) = delete;
@@ -203,7 +203,7 @@ public:
                 systemControl& control, 
                 const dictionary& postDict, 
                 bool inSimulation,
-                timeValue startTime
+                TimeValueType startTime
             ),
             (control, postDict, inSimulation, startTime)
         );
@@ -211,7 +211,7 @@ public:
     
     // - Public Access Functions
         /// returns the current time
-        timeValue currentTime()const;
+        TimeValueType currentTime()const;
 
         /// const ref to object Time 
         const Time& time()const 
@@ -282,7 +282,7 @@ public:
         /// Get the next avaiable time folder after the current time folder 
         /// This is only used for post-simulation processing 
         virtual
-        timeValue getNextTimeFolder()const
+        TimeValueType getNextTimeFolder()const
         {
             return -1.0;
         }
@@ -291,7 +291,7 @@ public:
         /// This is used only for post-simulation processing
         /// @returns the time value of the next folder.
         virtual 
-        timeValue setToNextTimeFolder()
+        TimeValueType setToNextTimeFolder()
         {
             return -1.0;
         }
@@ -300,7 +300,7 @@ public:
         /// This is used only for post-simulation processing 
         /// @returns the time value of the skipped folder 
         virtual 
-        timeValue skipNextTimeFolder()
+        TimeValueType skipNextTimeFolder()
         {
             return -1.0;
         }
@@ -316,7 +316,7 @@ public:
         systemControl& control, 
         const dictionary& postDict, 
         bool inSimulation,
-        timeValue startTime);
+        TimeValueType startTime);
 };
 
 } // namespace pFlow::postprocessData

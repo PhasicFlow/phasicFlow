@@ -67,7 +67,7 @@ int main(int argc, char** argv )
 	#include "initialize_Control.hpp"
 		
 	// time in command line 
-	pFlow::combinedRange<pFlow::timeValue> validRange;
+	pFlow::combinedRange<pFlow::TimeValueType> validRange;
 
 	if( cmds.count("--time") )
 	{
@@ -86,7 +86,7 @@ int main(int argc, char** argv )
 			validRange.addIntervalRange(1.0e-7, 1.0e+15);
 	}
 
-	pFlow::timeValue nextTime = validRange.minVal();
+	pFlow::TimeValueType nextTime = validRange.minVal();
 
 	if(nextTime <0.0)
 	{
