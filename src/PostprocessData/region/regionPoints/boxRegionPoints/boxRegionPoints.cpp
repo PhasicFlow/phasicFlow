@@ -13,7 +13,12 @@ boxRegionPoints::boxRegionPoints
 :
     regionPoints(dict, fieldsDataBase),
     boxRegion_(dict.subDict("boxInfo")),
-    volume_((boxRegion_.maxPoint().x() - boxRegion_.minPoint().x()) * (boxRegion_.maxPoint().y() - boxRegion_.minPoint().y()) * (boxRegion_.maxPoint().z() - boxRegion_.minPoint().z())),
+    volume_
+    (
+        (boxRegion_.maxPoint().x() - boxRegion_.minPoint().x()) * 
+        (boxRegion_.maxPoint().y() - boxRegion_.minPoint().y()) * 
+        (boxRegion_.maxPoint().z() - boxRegion_.minPoint().z())
+    ),
     diameter_(pow(3 * volume_ / 4.0 / Pi, 1.0 / 3.0)),
     selectedPoints_("selectedPoints")
 {
