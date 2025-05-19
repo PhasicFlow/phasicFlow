@@ -9,6 +9,7 @@ set(SourceFiles
     # Regions
     region/regionPoints/regionPoints/regionPoints.cpp
     region/regionPoints/sphereRegionPoints/sphereRegionPoints.cpp
+    region/regionPoints/boxRegionPoints/boxRegionPoints.cpp
     region/regionPoints/lineRegionPoints/lineRegionPoints.cpp
     region/regionPoints/centerPointsRegionPoints/centerPointsRegionPoints.cpp
     region/regionPoints/multipleSpheresRegionPoints/multipleSpheresRegionPoints.cpp
