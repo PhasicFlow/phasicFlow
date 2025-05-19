@@ -223,7 +223,7 @@ bool pFlow::internalField<T, MemorySpace>:: hearChanges
 	else
 	{
 		fatalErrorInFunction<<"hear changes in internal field is not processing "<< 
-		message::eventName(message::RANGE_CHANGED)<<
+		msg.eventNames()<<
 		" event with message code "<< msg<<endl;
 		return false;
 	}

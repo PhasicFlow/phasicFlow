@@ -114,8 +114,8 @@ public:
 			return true;
 		}
 
-		fatalErrorInFunction<<"Event"<< msg.eventNames()<<"with code "<< msg <<
-		" is not handled in boundaryField."<<endl;
+		fatalErrorInFunction<<"Event "<< msg.eventNames()<<" with code "<< msg <<
+		" is not handled in boundaryField "<< name()<<endl;
 		return false;
 	}
 

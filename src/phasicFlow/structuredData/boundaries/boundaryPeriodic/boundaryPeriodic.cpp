@@ -60,7 +60,7 @@ bool pFlow::boundaryPeriodic::beforeIteration(
 		return true;
 	}
 	//output<<this->thisBoundaryIndex()<<"  ->"<<ti.iter()<<" update called\n";
-	if(!performBoundarytUpdate())
+	if(!performBoundaryUpdate())
 	{
 		return true;
 	}

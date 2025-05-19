@@ -47,7 +47,7 @@ pFlow::MPI::processorBoundaryField<T, MemorySpace>::updateBoundary(
 )
 {
 #ifndef BoundaryModel1
-	if(!this->boundary().performBoundarytUpdate())
+	if(!this->boundary().performBoundaryUpdate())
 		return true;
 #endif
 
@@ -128,21 +128,19 @@ const typename pFlow::MPI::processorBoundaryField<T, MemorySpace>::
 
 template<class T, class MemorySpace>
 bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
-	real t,
-	real dt,
-	uint32 iter,
+	const timeInfo & ti,
 	const message& msg, 
 	const anyList& varList
 )
 {
-	BoundaryFieldType::hearChanges(t,dt,iter, msg,varList);
+	
 	if(msg.equivalentTo(message::BNDR_PROC_SIZE_CHANGED))
 	{
-		auto newProcSize = varList.getObject<uint32>("size");
+		auto newProcSize = varList.getObject<uint32>(
+			message::eventName(message::BNDR_PROC_SIZE_CHANGED));
 		neighborProcField_.resize(newProcSize);
 	}
-
-	if(msg.equivalentTo(message::BNDR_PROCTRANSFER_SEND))
+	else if(msg.equivalentTo(message::BNDR_PROCTRANSFER_SEND))
 	{
 		const auto& indices = varList.getObject<uint32Vector_D>(
 			message::eventName(message::BNDR_PROCTRANSFER_SEND)
@@ -169,7 +167,6 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 		    thisFieldInNeighbor_.sendData(pFlowProcessors(),transferData);
         }
 
-		
 	}
 	else if(msg.equivalentTo(message::BNDR_PROCTRANSFER_RECIEVE))
 	{
@@ -182,30 +179,38 @@ bool pFlow::MPI::processorBoundaryField<T, MemorySpace>::hearChanges(
 	{
 		
 		uint32 numRecieved = neighborProcField_.waitBufferForUse();
-
-		if(msg.equivalentTo(message::CAP_CHANGED))
+		if(numRecieved == 0u)
 		{
-			auto newCap = varList.getObject<uint32>(
-				message::eventName(message::CAP_CHANGED));
-			this->internal().field().reserve(newCap);
-
+			return true;
 		}
-		if(msg.equivalentTo(message::SIZE_CHANGED))
+
+		if(msg.equivalentTo(message::RANGE_CHANGED))
 		{
-			auto newSize = varList.getObject<uint32>(
-				message::eventName(message::SIZE_CHANGED));
-			this->internal().field().resize(newSize);
+			auto newRange = varList.getObject<rangeU32>(
+				message::eventName(message::RANGE_CHANGED));
+			this->internal().field().resize(newRange.end());
 		}
 		
-		const auto& indices = varList.getObject<uint32IndexContainer>(
-			message::eventName(message::ITEM_INSERT));
-		
-		this->internal().field().insertSetElement(indices, neighborProcField_.buffer().deviceView());
-
-		return true;
+		if(msg.equivalentTo(message::ITEMS_INSERT))
+		{
+			const auto& indices = varList.getObject<uint32IndexContainer>(
+				message::eventName(message::ITEMS_INSERT));	
+			
+			this->internal().field().insertSetElement(
+				indices, 
+				neighborProcField_.buffer().deviceView());
+		}
+	}
+	else
+	{
+		if(!BoundaryFieldType::hearChanges(ti, msg,varList) )
+		{
+			return false;
+		}
 	}
 
 	return true;
+	
 }
 template <class T, class MemorySpace>
 void pFlow::MPI::processorBoundaryField<T, MemorySpace>::sendBackData() const

@@ -61,7 +61,7 @@ public:
 
 	TypeInfo("simulationDomain<MPI>");
 
-	explicit MPISimulationDomain(systemControl& control);
+	explicit MPISimulationDomain(systemControl& control, real maxBSphere);
 
 	~MPISimulationDomain() final = default;
 

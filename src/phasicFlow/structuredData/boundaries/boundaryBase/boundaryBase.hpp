@@ -246,7 +246,7 @@ public:
 
 	/// Is this iter the right time for updating bounday list
 	inline
-	bool performBoundarytUpdate()const
+	bool performBoundaryUpdate()const
 	{
 		return updateTime_;
 	}

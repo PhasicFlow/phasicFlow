@@ -60,7 +60,7 @@ bool pFlow::boundaryExit::beforeIteration
 	{
 		callAgain = false;
 
-		if( !performBoundarytUpdate())
+		if( !performBoundaryUpdate())
 		{
 			return true;
 		}

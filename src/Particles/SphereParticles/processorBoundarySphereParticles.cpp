@@ -26,7 +26,7 @@ bool pFlow::processorBoundarySphereParticles::acceleration(const timeInfo &ti, c
         auto I = Particles().I().BoundaryField(thisIndex).neighborProcField().deviceView();
         auto cf = Particles().contactForce().BoundaryField(thisIndex).neighborProcField().deviceView();
         auto ct = Particles().contactTorque().BoundaryField(thisIndex).neighborProcField().deviceView();
-        auto acc = Particles().accelertion().BoundaryField(thisIndex).neighborProcField().deviceView();
+        auto acc = Particles().acceleration().BoundaryField(thisIndex).neighborProcField().deviceView();
         auto rAcc = Particles().rAcceleration().BoundaryField(thisIndex).neighborProcField().deviceView();
 
         Kokkos::parallel_for(

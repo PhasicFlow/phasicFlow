@@ -1,18 +1,33 @@
 #!/bin/bash
+cd ${0%/*} || exit 1    # Run from this directory
 
-rm -rf build/ include/ lib/
-mkdir build
+# Source the configurations - if there's a ./configurations file
+[ -f ./configurations ] && source ./configurations
 
+# Set environment variables to ensure shared library creation
+export CFLAGS="-fPIC"
+export CXXFLAGS="-fPIC"
+export FCFLAGS="-fPIC"
+
+# Create build directory
+mkdir -p build
 cd build
 
-../configure \
---prefix=$HOME/PhasicFlow/phasicFlow-v-1.0/thirdParty/Zoltan/ \
---with-gnumake \
---with-id-type=uint
---disable-tests
---disable-examples
+# Run configure with shared library options
+echo "Running configure with options to build shared library..."
+../configure --prefix=$PWD/.. --enable-shared --disable-static
 
-make everything -j4
+# Run make and install
+echo "Building and installing Zoltan..."
 make install
 
-cd ../
+# Convert static to shared library if static library exists and shared doesn't
+echo "Checking for static library and converting to shared if needed..."
+if [ -f "$PWD/../lib/libzoltan.a" ] && [ ! -f "$PWD/../lib/libzoltan.so" ]; then
+    echo "Converting static library to shared library..."
+    cd $PWD/../lib
+    gcc -shared -o libzoltan.so -Wl,--whole-archive libzoltan.a -Wl,--no-whole-archive
+    echo "Shared library created as libzoltan.so"
+fi
+
+echo "Build completed"

@@ -83,15 +83,15 @@ pFlow::MPI::boundaryProcessor::beforeIteration(
 	else if(step == 2 )
 	{
 
-#ifdef BoundaryModel1
-	callAgain = true;
-#else
-	if(!performBoundarytUpdate())
-	{
-		callAgain = false;
-		return true;
-	}
-#endif
+    #ifdef BoundaryModel1
+        callAgain = true;
+    #else
+        if(!performBoundaryUpdate())
+        {
+            callAgain = false;
+            return true;
+        }
+    #endif
 
 	thisNumPoints_ = size();
 
@@ -136,7 +136,7 @@ pFlow::MPI::boundaryProcessor::beforeIteration(
 
 		varList.emplaceBack(msg.addAndName(message::BNDR_PROC_SIZE_CHANGED), neighborProcNumPoints_);
 
-		if( !notify(ti.iter(), ti.t(), ti.dt(), msg, varList) )
+		if( !notify(ti, msg, varList) )
 		{
 			fatalErrorInFunction;
 			callAgain = false;
@@ -343,8 +343,9 @@ bool pFlow::MPI::boundaryProcessor::transferData(
 		neighborProcPoints_.waitBufferForUse();
 		internal().insertPointsOnly(neighborProcPoints_.buffer(), msg, varList);
 		
-		const auto& indices = varList.getObject<uint32IndexContainer>(message::eventName(message::ITEM_INSERT));
+		const auto& indices = varList.getObject<uint32IndexContainer>(message::eventName(message::ITEMS_INSERT));
 		
+        // creates a view (does not copy data)
 		auto indView = deviceViewType1D<uint32>(indices.deviceView().data(), indices.deviceView().size());
 		
 		uint32Vector_D newIndices("newIndices", indView);
@@ -356,7 +357,7 @@ bool pFlow::MPI::boundaryProcessor::transferData(
 			return false;
 		}
 
-		const auto ti = internal().time().TimeInfo();
+		const auto& ti = internal().time().TimeInfo();
 		if(!notify(ti, msg, varList))
 		{
 			fatalErrorInFunction;

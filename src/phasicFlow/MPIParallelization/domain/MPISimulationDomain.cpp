@@ -24,9 +24,9 @@ Licence:
 #include "scatteredMasterDistribute.hpp"
 #include "scatteredMasterDistributeChar.hpp"
 
-pFlow::MPI::MPISimulationDomain::MPISimulationDomain(systemControl& control)
+pFlow::MPI::MPISimulationDomain::MPISimulationDomain(systemControl& control, real maxBSphere)
 :
-    simulationDomain(control),
+    simulationDomain(control, maxBSphere),
     communication_(pFlowProcessors()),
     subDomainsAll_(pFlowProcessors()),
     numPointsAll_(pFlowProcessors()),

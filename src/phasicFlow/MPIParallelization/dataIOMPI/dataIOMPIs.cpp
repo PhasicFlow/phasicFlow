@@ -16,7 +16,7 @@ template class pFlow::MPI::dataIOMPI<pFlow::uint32x3>;
 
 template class pFlow::MPI::dataIOMPI<pFlow::uint64>;
 
-template class pFlow::MPI::dataIOMPI<pFlow::size_t>;
+//template class pFlow::MPI::dataIOMPI<pFlow::size_t>;
 
 template class pFlow::MPI::dataIOMPI<pFlow::real>;
 
