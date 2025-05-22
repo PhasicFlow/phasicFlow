@@ -5,23 +5,14 @@ The `PostprocessData` module in phasicFlow provides powerful tools for analyzing
 - in-simulation: this is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See below to see how you can activate in-simulation postprocessing.
 - post-simulation: this is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results that are stored in time-folders. If you want to use post-simulation, you need to run utility `postprocessPhasicFlow` in terminal (in the simulation case setup folder) to run the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
 
-<div style="border: 1px solid black; padding: 10px; margin-bottom: 10px; background-color: gray;">
 
-**IMPORTANT NOTE**
+### Important Notes
 
-in-simulation postprocessing is not implemented for MPI execution. For post-simulation postprocessing, you can use the `postprocessPhasicFlow` utility without MPI, even though the actual simulation has been done using MPI.
+* **NOTE 1:**
+postprocessing for in-simulation, is not implemented for MPI execution. So, do not use it when using MPI execution. For post-simulation postprocessing, you can use the `postprocessPhasicFlow` utility without MPI, even though the actual simulation has been done using MPI.
 
-</div>
-
-## 1. Overview
-
-Postprocessing in phasicFlow allows you to:
-
-- Extract information about particles in specific regions of the domain
-- Calculate statistical properties such as averages and sums of particle attributes
-- Track specific particles throughout the simulation
-- Apply different weighing methods when calculating statistics
-- Perform postprocessing at specific time intervals
+* **NOTE 2:**
+In post-simulation mode, all timeControl settings are ignored. The postprocessing will be done for all the time folders that are available in the case directory or if you specify the time range in the command line, the postprocessing will be done for the time folders that are in the specified range of command line.
 
 ## Table of Contents
 
@@ -47,6 +38,16 @@ Postprocessing in phasicFlow allows you to:
   - [8.3. Implementation Notes](#83-implementation-notes)
 - [9. Mathematical Formulations](#9-mathematical-formulations)
 - [10. A complete dictionary file (postprocessDataDict)](#10-a-complete-dictionary-file-postprocessdatadict)
+
+## 1. Overview
+
+Postprocessing in phasicFlow allows you to:
+
+- Extract information about particles in specific regions of the domain
+- Calculate statistical properties such as averages and sums of particle attributes
+- Track specific particles throughout the simulation
+- Apply different weighing methods when calculating statistics
+- Perform postprocessing at specific time intervals
 
 ## 2. Setting Up Postprocessing
 
@@ -460,7 +461,7 @@ components
         processMethod    particleProbe;
         processRegion    centerPoints;
         selector         id;
-        field            component(position,y);
+        field            component(velocity,y);
         ids              (0 10 100);
         timeControl      default; // other options are settings, timeStep, simulationTime 
         // settings: uses parameters from settingsDict file
@@ -468,6 +469,35 @@ components
         // simulationTime: uses the simulation time of the simulation controlling the execution of postprocessing
         // default: uses the default time control (defined in defaultTimeControl).
         // default behavior: if you do not specify it, parameters in defaultTimeControl is used.
+    }
+
+    particlesTrack
+    {
+        processMethod      particleProbe;
+        
+        processRegion      centerPoints;
+        
+        // all particles whose ceters are located inside this box 
+        // are selected. Selection occurs at startTime: particles 
+        // that are inside the box at t = startTime. 
+        selector           box;
+        boxInfo
+        {
+            min            (0 0 0);
+            max            (0.1 0.05 0.05);
+        }
+        
+        // center position of selected particles are processed 
+        field              position;
+        
+        timeControl        simulationTime;
+        // execution starts at 1.0 s
+        startTime           1.0;
+        // execution ends at 10 s
+        endTime             10;
+        // execution interval of this compoenent 
+        executionInterval   0.02;
+
     }
     
     on_single_sphere

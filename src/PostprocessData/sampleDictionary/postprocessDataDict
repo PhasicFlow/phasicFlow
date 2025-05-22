@@ -36,7 +36,7 @@ components
         processMethod    particleProbe;
         processRegion    centerPoints;
         selector         id;
-        field            component(position,y);
+        field            component(velocity,y);
         ids              (0 10 100);
         timeControl      default; // other options are settings, timeStep, simulationTime 
         // settings: uses parameters from settingsDict file
@@ -44,6 +44,35 @@ components
         // simulationTime: uses the simulation time of the simulation controlling the execution of postprocessing
         // default: uses the default time control (defined in defaultTimeControl).
         // default behavior: if you do not specify it, parameters in defaultTimeControl is used.
+    }
+
+    particlesTrack
+    {
+        processMethod      particleProbe;
+        
+        processRegion      centerPoints;
+        
+        // all particles whose ceters are located inside this box 
+        // are selected. Selection occurs at startTime: particles 
+        // that are inside the box at t = startTime. 
+        selector           box;
+        boxInfo
+        {
+            min            (0 0 0);
+            max            (0.1 0.05 0.05);
+        }
+        
+        // center position of selected particles are processed 
+        field              position;
+        
+        timeControl        simulationTime;
+        // execution starts at 1.0 s
+        startTime           1.0;
+        // execution ends at 10 s
+        endTime             10;
+        // execution interval of this compoenent 
+        executionInterval   0.02;
+
     }
     
     on_single_sphere
