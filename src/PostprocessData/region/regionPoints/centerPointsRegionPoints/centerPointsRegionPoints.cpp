@@ -8,6 +8,8 @@ namespace pFlow::postprocessData
 
 bool centerPointsRegionPoints::selectIds()
 {
+    // check if it is already found the ids of particles
+    // if not, then find the ids of particles
     if(!firstTimeUpdate_) return true;
     firstTimeUpdate_ = false;
     
@@ -26,16 +28,20 @@ bool centerPointsRegionPoints::selectIds()
         }
     }
     else
-    // TODO: this should be corrected to select ids of particles
-    // that are selected based on the selector (this is visa versa)
     {
         auto selectorPtr = pStructSelector::create(
             selector, 
             database().pStruct(), 
             probDict_.subDict(selector+"Info"));
         auto selectedPoints = selectorPtr->selectedPoints();
-        ids_.resize(selectedPoints.size());
-        ids_.assign(selectedPoints.begin(), selectedPoints.end());
+        const auto& idField = database().updateFieldUint32(idName_);
+
+        ids_.clear();
+        ids_.reserve(selectedPoints.size());
+        for( auto& pntIndex: selectedPoints)
+        {
+            ids_.push_back(idField[pntIndex]);
+        }
     }
 
     volume_.resize(ids_.size(),1.0);
@@ -62,11 +68,12 @@ bool centerPointsRegionPoints::update()
     const auto& idField = database().updateFieldUint32(idName_);
     selectedPoints_.fill(-1);
 
-    for(uint32 i = 0; i < idField.size(); ++i)
+    for( uint32 j=0; j< ids_.size(); ++j)
     {
-        for( uint32 j=0; j< ids_.size(); ++j)
+        auto id = ids_[j];
+        for( uint32 i=0; i< idField.size(); i++)   
         {
-            if(idField[i] == ids_[j])
+            if(idField[i] == id)
             {
                 selectedPoints_[j] = i;
                 break;

@@ -63,6 +63,8 @@ protected:
 
 	ViewType1D<real, HostSpace> 	diameterHost_;
 
+	ViewType1D<uint32, HostSpace> 	particleIdHost_;
+
 	bool 							requireRVel_ = false;
 
 	ViewType1D<realx3, HostSpace> 	rVelocityHost_;
@@ -121,6 +123,8 @@ public:
 	std::vector<int32> numParInDomains()const override;
 
 	span<const int32> parIndexInDomain(int32 di)const override;
+
+	span<uint32> particleId() override;
 
 	span<real> diameter() override;
 

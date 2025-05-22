@@ -165,6 +165,11 @@ pFlow::sphereDEMSystem::parIndexInDomain(int32 di)const
 	return particleDistribution_->particlesInDomain(di);
 }
 
+pFlow::span<pFlow::uint32> pFlow::sphereDEMSystem::particleId()
+{
+    return span<uint32>();
+}
+
 pFlow::span<pFlow::real> pFlow::sphereDEMSystem::diameter() 
 {	
 	return span<real>(diameterHost_.data(), diameterHost_.size());
@@ -235,6 +240,7 @@ bool pFlow::sphereDEMSystem::beforeIteration()
 	velocityHost_ = std::as_const(particles_()).velocity().hostView();
 	positionHost_ = std::as_const(particles_()).pointPosition().hostView();
 	diameterHost_ = particles_->diameter().hostView();
+	particleIdHost_ = particles_->particleId().hostView();
 
 	if(requireRVel_)
 		rVelocityHost_ = std::as_const(particles_()).rVelocity().hostView();

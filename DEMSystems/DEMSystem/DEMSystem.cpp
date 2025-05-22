@@ -66,12 +66,13 @@ pFlow::uniquePtr<pFlow::DEMSystem>
 		word  demSystemName,
 		const std::vector<box>& domains, 
 		int argc, 
-		char* argv[]
+		char* argv[],
+		bool requireRVel
 		)
 {
 	if( wordvCtorSelector_.search(demSystemName) )
 	{
-		return wordvCtorSelector_[demSystemName] (demSystemName, domains, argc, argv);
+		return wordvCtorSelector_[demSystemName] (demSystemName, domains, argc, argv, requireRVel);
 	}
 	else
 	{

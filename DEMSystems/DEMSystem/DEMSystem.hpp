@@ -71,13 +71,15 @@ public:
 			word  demSystemName,
 			const std::vector<box>& domains, 
 			int argc, 
-			char* argv[]
+			char* argv[],
+			bool requireRVel
 		),
 		(
 			demSystemName,
 			domains, 
 			argc, 
-			argv
+			argv,
+			requireRVel
 		));
 
 	realx3 g()const
@@ -119,7 +121,10 @@ public:
 	span<const int32> parIndexInDomain(int32 domIndx)const = 0;
 
 	virtual
-	span<real> diameter() = 0; 
+	span<real> diameter() = 0;
+	
+	virtual 
+	span<uint32> particleId() = 0;
 
 	virtual 
 	span<real> courseGrainFactor() = 0;
@@ -176,7 +181,8 @@ public:
 			word  demSystemName,
 			const std::vector<box>& domains, 
 			int argc, 
-			char* argv[]);
+			char* argv[],
+			bool requireRVel=false);
 
 };
 

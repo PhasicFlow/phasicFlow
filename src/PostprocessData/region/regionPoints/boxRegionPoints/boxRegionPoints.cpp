@@ -19,7 +19,7 @@ boxRegionPoints::boxRegionPoints
         (boxRegion_.maxPoint().y() - boxRegion_.minPoint().y()) * 
         (boxRegion_.maxPoint().z() - boxRegion_.minPoint().z())
     ),
-    diameter_(pow(3 * volume_ / 4.0 / Pi, 1.0 / 3.0)),
+    diameter_(2 * pow(3 * volume_ / 4.0 / Pi, 1.0 / 3.0)),
     selectedPoints_("selectedPoints")
 {
 }

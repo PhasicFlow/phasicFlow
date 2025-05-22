@@ -163,6 +163,12 @@ pFlow::grainDEMSystem::parIndexInDomain(int32 di)const
 	return particleDistribution_->particlesInDomain(di);
 }
 
+pFlow::span<pFlow::uint32> pFlow::grainDEMSystem::particleId()
+{
+	return span<uint32>(particleIdHost_.data(), particleIdHost_.size());
+}
+
+
 pFlow::span<pFlow::real> pFlow::grainDEMSystem::diameter() 
 {	
 	return span<real>(diameterHost_.data(), diameterHost_.size());
@@ -233,6 +239,7 @@ bool pFlow::grainDEMSystem::beforeIteration()
 	velocityHost_ = std::as_const(particles_()).velocity().hostView();
 	positionHost_ = std::as_const(particles_()).pointPosition().hostView();
 	diameterHost_ = particles_->diameter().hostView();
+	particleIdHost_ = particles_->particleId().hostView();
 
 	if(requireRVel_)
 		rVelocityHost_ = std::as_const(particles_()).rVelocity().hostView();

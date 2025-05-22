@@ -186,6 +186,18 @@ public:
 	}
 
 	inline 
+	uint32PointField_D& particleId()
+	{
+		return idHandler_();
+	}
+
+	inline
+	const uint32PointField_D& particleId() const
+	{
+		return idHandler_();
+	}
+
+	inline 
 	uint32 maxId()const
 	{
 		return idHandler_().maxId();

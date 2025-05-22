@@ -5,6 +5,14 @@ The `PostprocessData` module in phasicFlow provides powerful tools for analyzing
 - in-simulation: this is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See below to see how you can activate in-simulation postprocessing.
 - post-simulation: this is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results that are stored in time-folders. If you want to use post-simulation, you need to run utility `postprocessPhasicFlow` in terminal (in the simulation case setup folder) to run the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
 
+<div style="border: 1px solid black; padding: 10px; margin-bottom: 10px; background-color: gray;">
+
+**IMPORTANT NOTE**
+
+in-simulation postprocessing is not implemented for MPI execution. For post-simulation postprocessing, you can use the `postprocessPhasicFlow` utility without MPI, even though the actual simulation has been done using MPI.
+
+</div>
+
 ## 1. Overview
 
 Postprocessing in phasicFlow allows you to:
@@ -118,12 +126,17 @@ Regions define where in the domain the postprocessing operations are applied:
 
 | Region Type | Description | Required Parameters | Compatible with |
 |-------------|-------------|---------------------|-----------------|
-| `sphere` | A spherical region | `radius`, `center` | bulk |
-| `multipleSpheres` | Multiple spherical regions | `centers`, `radii` | bulk |
-| `line` | Spheres along a line with specified radius | `p1`, `p2`, `nSpheres`, `radius` | bulk |
-| `centerPoints` | Specific particles selected by ID | `ids` | individual |
+| `sphere` | A spherical region | `radius`, `center` defined in `sphereInfo` dict| bulk |
+| `multipleSpheres` | Multiple spherical regions | `centers`, `radii` defined in `multiplSpheresInfo` dict | bulk |
+| `line` | Spheres along a line with specified radius | `p1`, `p2`, `nSpheres`, `radius` defined in `lineInfo` dict| bulk |
+| `box`| A cuboid region | `min`, `max` defined in `boxInfo` dict | bulk |
+| `centerPoints`* | Specific particles selected by ID | `ids` | individual |
+| `centerPoints`* | Specific particles selected by center points located in a box | `boxInfo` | individual |
+| `centerPoints`* | Specific particles selected by center points located in a sphere | `sphereInfo` | individual |
+| `centerPoints`* | Specific particles selected by center points located in a cylinder | `cylinderInfo` | individual |
+| <td colspan="4">\* Particles selection is done when simulation reaches the time that is specified by `startTime` of the post-process component and this selection remains intact up to the end of simulation. This is very good for particle tracking purposes or when you want to analyze specific particles behavior over time.</td> |
 
-## 6. Processing Operations
+## 6. Processing Operations for Bulk Properties
 
 Within each processing region of type `bulk`, you can define multiple operations to be performed:
 
@@ -565,5 +578,4 @@ components
     }
     
 );
-
 ```
