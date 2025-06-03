@@ -111,6 +111,14 @@ public:
             return max_;
         }
 
+		INLINE_FUNCTION_HD
+		real volume()const
+		{
+			return (max_.x() - min_.x()) * 
+                   (max_.y() - min_.y()) * 
+                   (max_.z() - min_.z()); 
+		}
+
 	//// - IO operation 
 		FUNCTION_H
 		bool read(iIstream & is);
