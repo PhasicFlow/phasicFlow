@@ -2,10 +2,8 @@
 #include "fieldsDataBase.hpp"
 #include "numericConstants.hpp"
 
-namespace pFlow::postprocessData
-{
 
-rectMeshRegionPoints::rectMeshRegionPoints
+pFlow::postprocessData::rectMeshRegionPoints::rectMeshRegionPoints
 (
     const dictionary &dict, 
     fieldsDataBase &fieldsDataBase
@@ -13,16 +11,13 @@ rectMeshRegionPoints::rectMeshRegionPoints
 :
     regionPoints(dict, fieldsDataBase)
 {
-
     const auto& rectMeshInfo = dict.subDict("rectMeshInfo");
-
-    auto minP = rectMeshInfo.getVal<realx3>("min");
-    auto maxP = rectMeshInfo.getVal<realx3>("max");
-    auto nx = rectMeshInfo.getValMax<uint32>("nx", 1);
-    auto ny = rectMeshInfo.getValMax<uint32>("ny", 1);
-    auto nz = rectMeshInfo.getValMax<uint32>("nz", 1);
+    boxRegion_ = box(rectMeshInfo.subDict("boxInfo"));
+    nx = rectMeshInfo.getValMax<uint32>("nx", 1);
+    ny = rectMeshInfo.getValMax<uint32>("ny", 1);
+    nz = rectMeshInfo.getValMax<uint32>("nz", 1);
     
-    boxRegion_ = box(minP, maxP);
+    // boxRegion_ = box(minP, maxP);
     cells_ = uint32x3(nx, ny, nz);
     uint32 nCells = nx * ny * nz;
     
@@ -52,7 +47,7 @@ rectMeshRegionPoints::rectMeshRegionPoints
     }
 }
 
-bool rectMeshRegionPoints::update()
+bool pFlow::postprocessData::rectMeshRegionPoints::update()
 {
     const auto points = database().updatePoints();
     for (auto& elem : selectedPoints_)
@@ -78,21 +73,39 @@ bool rectMeshRegionPoints::update()
     return true;
 }
 
-bool rectMeshRegionPoints::write(iOstream &os) const
+bool pFlow::postprocessData::rectMeshRegionPoints::write(iOstream &os) const
 {
-    os << "# rect mesh region points\n";
-    os <<"# min point: "<< boxRegion_.minPoint() << endl;
-    os <<"# max point: "<< boxRegion_.maxPoint() << endl;
-    os <<"# nx: "<< cells_.x() <<endl;
-    os <<"# ny: "<< cells_.y() <<endl;
-    os <<"# nz: "<< cells_.z() <<endl;
-    os << "time/No. ";
-    for (uint32 i = 0; i < cells_.x() * cells_.y() * cells_.z(); ++i)
+    os << "# vtk DataFile Version 3.0" << endl;
+    os << "postProcessData" << endl;
+    os << "ASCII" << endl;
+    os << "DATASET RECTILINEAR_GRID" << endl;
+	os << "DIMENSIONS " << nx + 1 << " " << ny + 1 << " " << nz + 1 << endl;
+		
+    auto [x, y , z] = boxRegion_.minPoint();
+    auto [dx, dy, dz] = (boxRegion_.maxPoint() - boxRegion_.minPoint()) / realx3(nx, ny,  nz);
+
+    os << "X_COORDINATES " << nx + 1 << " float\n";
+    for(int32 i = 0; i < nx + 1; i++)
     {
-        os << i << "  ";
+        os << x << "\n";
+        x += dx;
     }
-    os << endl;
+
+    os << "Y_COORDINATES " << ny + 1 << " float\n";
+    for(int32 j = 0; j < ny + 1; j++)
+    {
+        os << y << "\n";
+        y += dy;
+    }
+
+    os << "Z_COORDINATES " << nz + 1 << " float\n";
+    for(int32 j = 0; j < nz + 1; j++)
+    {
+        os << z << "\n";
+        z += dz;
+    }
+
+    os << "CELL_DATA " << nx * ny * nz << endl;
+
     return true;
 }
-
-} // End namespace pFlow::postprocessData

@@ -51,6 +51,9 @@ private:
     /// box object defining the region for point selection
     box  boxRegion_;
 
+    /// Number of cells in each direction
+    uint32 nx, ny, nz; 
+
     /// store the cells that are inside the box region
     uint32x3   cells_;
 
