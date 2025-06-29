@@ -26,6 +26,7 @@ Licence:
 #include "sphereRegionPoints.hpp"
 #include "lineRegionPoints.hpp"
 #include "multipleSpheresRegionPoints.hpp"
+#include "rectMeshRegionPoints.hpp"
 
 namespace pFlow::postprocessData
 {
@@ -36,6 +37,10 @@ template class PostprocessComponentArithmetic<sphereRegionPoints>;
 template class PostprocessComponentGaussian<multipleSpheresRegionPoints>;
 template class PostprocessComponentUniform<multipleSpheresRegionPoints>;
 template class PostprocessComponentArithmetic<multipleSpheresRegionPoints>;
+
+template class PostprocessComponentGaussian<rectMeshRegionPoints>;
+template class PostprocessComponentUniform<rectMeshRegionPoints>;
+template class PostprocessComponentArithmetic<rectMeshRegionPoints>;
 
 template class PostprocessComponentGaussian<lineRegionPoints>;
 template class PostprocessComponentUniform<lineRegionPoints>;
