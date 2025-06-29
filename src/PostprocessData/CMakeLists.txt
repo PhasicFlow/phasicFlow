@@ -13,6 +13,7 @@ set(SourceFiles
     region/regionPoints/lineRegionPoints/lineRegionPoints.cpp
     region/regionPoints/centerPointsRegionPoints/centerPointsRegionPoints.cpp
     region/regionPoints/multipleSpheresRegionPoints/multipleSpheresRegionPoints.cpp
+    region/regionPoints/rectMeshRegionPoints/rectMeshRegionPoints.cpp
 
     # Postprocess components
     postprocessComponent/postprocessComponent/postprocessComponent.cpp
