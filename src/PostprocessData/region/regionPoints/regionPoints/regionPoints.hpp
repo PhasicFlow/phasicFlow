@@ -54,6 +54,11 @@ class regionPoints
     /// Reference to the fields database containing simulation data
     fieldsDataBase& fieldsDataBase_;
 
+protected:
+
+    /// extends the search radius to a distance farther than the region
+    real            regionExtension_ = 1.0;
+
 public:
 
     TypeInfo("regionPoints");
@@ -78,11 +83,23 @@ public:
     /// @brief size of elements 
     virtual 
     uint32 size()const = 0;
+
+    virtual 
+    uint32x3 shape()const
+    {
+      return uint32x3(size(), 1u, 1u);
+    }
     
     /// @brief  check if the region is empty
     virtual 
     bool empty()const = 0;  
     
+    /// by default it does nothing
+    /// But, it can be used for the methods that needs to search for 
+    /// particles which are beyound the region 
+    virtual void setRegionExtension(real ext)
+    {}
+
     /// @brief  volume of elements
     /// @return sapn for accessing the volume of elements 
     virtual 

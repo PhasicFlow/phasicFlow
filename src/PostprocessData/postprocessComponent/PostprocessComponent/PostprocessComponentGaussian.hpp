@@ -47,8 +47,8 @@ public:
     :
         PostprocessComponent<RegionType,GaussianDistribution>(dict, fieldsDB, defaultTimeControl)
     {
-        /// initializes the Gaussian distribution for all elements of region
-        //const uint32 n = this->regPoints().size();
+
+        this->regPoints().setRegionExtension(2);
         auto d = this->regPoints().eqDiameters();
         auto c = this->regPoints().centers();
         auto& regs = this->regionProecessMethod();

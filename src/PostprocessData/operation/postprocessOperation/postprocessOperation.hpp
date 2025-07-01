@@ -99,7 +99,7 @@ public:
 private:
 
     /// Dictionary containing operation-specific parameters.
-    pFlow::dictionary              operationDict_;
+    pFlow::dictionary       operationDict_;
 
     /// This Threshold is used to exclude the regions which contain
     /// fewer than this value. 
@@ -255,7 +255,7 @@ public:
     /// write the result to output stream (possibly a file)
     /// @param os Output stream to write the result.
     virtual 
-    bool write(iOstream& os)const {return true;}
+    bool write(iOstream& os)const;
 
     /// Create the polymorphic object using the virtual constructor.
     /// @param opDict Dictionary containing operation-specific parameters.

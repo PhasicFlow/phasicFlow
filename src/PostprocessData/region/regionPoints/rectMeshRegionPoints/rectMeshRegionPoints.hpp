@@ -27,7 +27,6 @@ Licence:
  * It inherits from regionPoints and implements all required virtual methods.
  * 
  * @see regionPoints
- * @see rectMesh
  * @see fieldsDataBase
  */
 
@@ -37,10 +36,12 @@ Licence:
 #include "regionPoints.hpp"
 #include "box.hpp"
 #include "Vectors.hpp"
-#include "cells.hpp"
+#include "cellMapper.hpp"
+
 
 namespace pFlow::postprocessData
 {
+
 
 class rectMeshRegionPoints
 :
@@ -51,11 +52,8 @@ private:
     /// box object defining the region for point selection
     box  boxRegion_;
 
-    /// Number of cells in each direction
-    uint32 nx, ny, nz; 
-
     /// store the cells that are inside the box region
-    uint32x3   cells_;
+    cellMapper      mapper_;
 
     /// Center points of each cell in the rectMesh region
     realx3Vector    centerPoints_;
@@ -66,8 +64,15 @@ private:
     /// Diameter of each cell in the rectMesh region
     realVector    diameter_;
 
+    Vector<uint32Vector>            pointsOnCells_;
+
+    uniquePtr<Vector<uint32Vector>> pointsBeyoundCells_;
+
     /// Indices of points that are selected by this region
-    Vector<uint32Vector>    selectedPoints_;
+    Vector<uint32Vector>&           selectedPoints_;
+
+
+    void findPointsBeyoundCells();
 
 public:
 
@@ -95,13 +100,28 @@ public:
     }
 
     /**
-     * @brief Check if the region is empty
-     * @return Always returns false
+     * return the shape of the field 
+     */
+    uint32x3 shape()const override
+    {
+        return mapper_.cells_;
+    }
+
+    const cellMapper&  mapper()const
+    {
+        return mapper_;
+    }
+
+    /**
+     * @brief Update the points selected by this region
+     * @return True if update was successful
      */
     bool empty()const override
     {
         return volumes_.empty();
     }
+
+    void setRegionExtension(real ext) override;
 
     /**
      * @brief Get the volume of the rectMesh region
@@ -163,7 +183,7 @@ public:
             fatalExit;
         }
 
-    return span<uint32>(selectedPoints_[elem].data(), selectedPoints_[elem].size());
+        return span<uint32>(selectedPoints_[elem].data(), selectedPoints_[elem].size());
     }
 
     /**
@@ -174,11 +194,10 @@ public:
 
     /**
      * @brief Determine if data should be written to the same time file
-     * @return Always returns true
      */
     bool writeToSameTimeFile()const override
     {
-        return true;
+        return false;
     }
 
     /**

@@ -53,7 +53,7 @@ private:
 
     regionField<real>               volumeFactor_;
 
-    bool    executed_{false};
+    bool                            executed_{false};
 
     dictionaryList                  operationDicts_;
 
@@ -121,8 +121,6 @@ public:
     bool write(const fileSystem& parDir)const override;
 
 };
-
-
 
 }
 

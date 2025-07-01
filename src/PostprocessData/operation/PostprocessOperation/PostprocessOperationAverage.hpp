@@ -195,6 +195,8 @@ public:
     /// write to os stream
     bool write(const fileSystem &parDir)const override;
 
+    bool write(iOstream& os)const override;
+
 
     /// @brief Execute average operation on field values
     /// @param weights Weight factors for particles

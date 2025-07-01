@@ -178,4 +178,26 @@ bool PostprocessOperationAverage::write(const fileSystem &parDir) const
     return true;
 }
 
+bool PostprocessOperationAverage::write(iOstream &os) const
+{
+    if(! postprocessOperation::write(os))
+    {
+        return false;
+    }
+    if(!calculateFluctuation2_())
+    {
+        return true;
+    }
+    
+    return 
+        std::visit
+        (
+            [&](auto&& arg)->bool
+            {
+                return arg.writeFieldToVtk(os);
+            },
+            fluctuation2FieldPtr_()
+        );
+}
+
 } // namespace pFlow::postprocessData

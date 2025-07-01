@@ -152,11 +152,25 @@ bool pFlow::postprocessData::PostprocessComponent<RegionType, ProcessMethodType>
     }
     else
     {
-        notImplementedFunction;
-        return false;
-    }
-    
+        word chNum = real2FixedStripZeros(database().time().currentTime() *1000000, 0);
+        fileSystem  file = parDir + (name() +"-"+chNum+".vtk");
 
+        auto osPtr = makeUnique<oFstream>(file);
+
+        regPoints().write(osPtr());
+
+        for(auto& operation:operatios_)
+        {
+            if(!operation->write(osPtr()))
+            {
+                fatalErrorInFunction
+                    <<"Error occurred in writing operation defined in dict "
+                    << operation->operationDict()
+                    <<endl;
+                return false;
+            }
+        }   
+    }
 
     return true;
 }

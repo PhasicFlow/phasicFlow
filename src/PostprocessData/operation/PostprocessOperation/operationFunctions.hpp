@@ -142,7 +142,7 @@ regionField<T> executeFluctuation2Operation
 )
 {
     const auto& regPoints = fieldAvg.regPoints();
-    regionField<T> processedField(regFieldName, regPoints, T{});
+    regionField<T> processedField(regFieldName+"_fluctuation2", regPoints, T{});
     auto vols = regPoints.volumes();
 
     for(uint32 reg =0; reg<regPoints.size(); reg++)

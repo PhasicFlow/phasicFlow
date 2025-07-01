@@ -24,6 +24,7 @@ Licence:
 #include "types.hpp"
 #include "regionPoints.hpp"
 #include "Field.hpp"
+#include "cellMapper.hpp"
 
 namespace pFlow::postprocessData
 {
@@ -99,6 +100,11 @@ public:
     auto size()const
     {
         return field_.size();
+    }
+
+    uint32x3 shape()const
+    {
+        return regionPoints_.shape();
     }
 
     bool empty()const

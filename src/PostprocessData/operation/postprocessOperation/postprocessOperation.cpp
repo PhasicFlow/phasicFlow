@@ -124,6 +124,25 @@ bool postprocessOperation::write(const fileSystem &parDir) const
     return true;
 }
 
+bool postprocessOperation::write(iOstream& os)const
+{
+    if(!regPoints().writeToSameTimeFile())
+    {
+        const auto& field = processedField();
+
+        return 
+        std::visit
+        (
+            [&](auto&& arg)->bool
+            {
+                return arg.writeFieldToVtk(os);
+            },
+            field
+        );
+    }
+    return false;
+}
+
 uniquePtr<postprocessOperation> postprocessOperation::create
 (
     const dictionary &opDict,
