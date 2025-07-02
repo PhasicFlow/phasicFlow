@@ -48,7 +48,7 @@ public:
         PostprocessComponent<RegionType,GaussianDistribution>(dict, fieldsDB, defaultTimeControl)
     {
 
-        this->regPoints().setRegionExtension(2);
+        this->regPoints().applyRegionExtension();
         auto d = this->regPoints().eqDiameters();
         auto c = this->regPoints().centers();
         auto& regs = this->regionProecessMethod();

@@ -85,9 +85,12 @@ pFlow::postprocessData::rectMeshRegionPoints::rectMeshRegionPoints
 :
     regionPoints(dict, fieldsDataBase),
     boxRegion_(dict.subDict("rectMeshInfo")),
+    cellExtension_(dict.subDict("rectMeshInfo").getValOrSet<real>("cellExtension", 2.0)),
     pointsOnCells_("selectedPoints"),
     selectedPoints_(pointsOnCells_)
 {
+    cellExtension_ = max(cellExtension_, one);
+
     const auto& rectMeshInfo = dict.subDict("rectMeshInfo");
     
     auto nx = rectMeshInfo.getValMax<uint32>("nx", 1);
@@ -124,10 +127,12 @@ pFlow::postprocessData::rectMeshRegionPoints::rectMeshRegionPoints
     }
 }
 
-void pFlow::postprocessData::rectMeshRegionPoints::setRegionExtension(real ext)
+void pFlow::postprocessData::rectMeshRegionPoints::applyRegionExtension()
 {
-    regionExtension_ = max(one, ext);
-    real vf = pow(regionExtension_, 3);
+    // it cannot be lower than 1
+    cellExtension_ = max(one, cellExtension_);
+
+    real vf = pow(cellExtension_, 3);
     for(auto& v:volumes_)
     {
         v *= vf;
@@ -135,7 +140,7 @@ void pFlow::postprocessData::rectMeshRegionPoints::setRegionExtension(real ext)
 
     for(auto& d:diameter_)
     {
-        d *= regionExtension_;
+        d *= cellExtension_;
     }
 }
 
@@ -163,7 +168,7 @@ bool pFlow::postprocessData::rectMeshRegionPoints::update()
     }
 
     // search beyound cells is not required
-    if( equal(regionExtension_,one))
+    if( equal(cellExtension_,one))
     {
         selectedPoints_ = pointsOnCells_;
         return true;

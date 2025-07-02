@@ -50,7 +50,7 @@ class rectMeshRegionPoints
 private:
 
     /// box object defining the region for point selection
-    box  boxRegion_;
+    box             boxRegion_;
 
     /// store the cells that are inside the box region
     cellMapper      mapper_;
@@ -59,10 +59,12 @@ private:
     realx3Vector    centerPoints_;
 
     /// Volume of each cell in the rectMesh region
-    realVector    volumes_;
+    realVector      volumes_;
 
     /// Diameter of each cell in the rectMesh region
-    realVector    diameter_;
+    realVector      diameter_;
+
+    real            cellExtension_;
 
     Vector<uint32Vector>            pointsOnCells_;
 
@@ -121,7 +123,13 @@ public:
         return volumes_.empty();
     }
 
-    void setRegionExtension(real ext) override;
+    void applyRegionExtension() override;
+
+     
+    real regionExtensionRatio()const override
+    {
+        return cellExtension_;
+    }
 
     /**
      * @brief Get the volume of the rectMesh region

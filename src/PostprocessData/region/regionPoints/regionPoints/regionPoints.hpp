@@ -49,15 +49,10 @@ class fieldsDataBase;
  */
 class regionPoints
 {
-        using PointsTypeHost = typename pointStructure::PointsTypeHost;
+    using PointsTypeHost = typename pointStructure::PointsTypeHost;
 
     /// Reference to the fields database containing simulation data
-    fieldsDataBase& fieldsDataBase_;
-
-protected:
-
-    /// extends the search radius to a distance farther than the region
-    real            regionExtension_ = 1.0;
+    fieldsDataBase& fieldsDataBase_;  
 
 public:
 
@@ -97,8 +92,14 @@ public:
     /// by default it does nothing
     /// But, it can be used for the methods that needs to search for 
     /// particles which are beyound the region 
-    virtual void setRegionExtension(real ext)
+    virtual void applyRegionExtension()
     {}
+
+    virtual 
+    real regionExtensionRatio()const
+    {
+        return 1.0;
+    }
 
     /// @brief  volume of elements
     /// @return sapn for accessing the volume of elements 

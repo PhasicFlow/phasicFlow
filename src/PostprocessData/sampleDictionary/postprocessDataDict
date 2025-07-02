@@ -39,7 +39,7 @@ components
         field            component(velocity,y);
         ids              (0 10 100);
         timeControl      default; // other options are settings, timeStep, simulationTime 
-        // settings: uses parameters from settingsDict file
+        // settingsDict: uses parameters from settingsDict file
         // timeStep: uses the time step of the simulation controlling the execution of postprocessing
         // simulationTime: uses the simulation time of the simulation controlling the execution of postprocessing
         // default: uses the default time control (defined in defaultTimeControl).
@@ -73,6 +73,49 @@ components
         // execution interval of this compoenent 
         executionInterval   0.02;
 
+    }
+
+    on_a_rectMesh
+    {
+        processMethod   GaussianDistribution;
+        processRegion   rectMesh;
+
+        timeControl     settingsDict; // uses settings from settingsDict file
+
+        rectMeshInfo 
+        {
+            min (-0.12 -0.12 0.00); // lower corner point of the box 
+            max (0.12   0.12 0.11); // upper corner point of the box
+            
+            nx 30; // number of divisions in x direction
+            ny 30; // number of divisions in y direction
+            nz 15; // number of divisions in z direction
+
+            // optional (default is 2.0)
+            // for each cell, a neighbor radius is considered. This neighbor radius is equal to 
+            // cellExtension * equivalent diameter of the cell. 
+            // cell extension is only effective when using GaussianDistribution as processMethod.
+            cellExtension 3; 
+        }
+
+        operations
+        (
+            avVelocity
+            {
+                function     average;
+                field        velocity;
+                fluctuation2 yes;
+                threshold    4;
+                phi          mass;
+            }
+
+            solidVolumeFraction
+            {
+                function sum;
+                field    volume;
+                divideByVolume yes;
+            }
+        );
     }
     
     on_single_sphere
@@ -134,7 +177,7 @@ components
             {
                 function        sum;
                 field           one;
-                phi             one; 
+                phi             one;
                 divideByVolume  yes;
                 
             }
@@ -153,15 +196,14 @@ components
         startTime   1.0;
         endTime     3.0;
         executionInterval 0.1;
-
-
+        
         // 10 spheres with radius 0.01 along the straight line defined by p1 and  p2 
         lineInfo
         {
-            p1        (0 0 0);
-            p2        (0 0.15 0.15);
-            nSpheres  10;
-            radius    0.01;
+          p1        (0 0 0);
+          p2        (0 0.15 0.15);
+          nSpheres  10;
+          radius    0.01;
         }
 
         operations

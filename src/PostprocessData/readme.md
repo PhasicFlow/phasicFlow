@@ -2,17 +2,16 @@
 
 The `PostprocessData` module in phasicFlow provides powerful tools for analyzing particle-based simulations both during runtime (in-simulation) and after simulation completion (post-simulation). This document explains how to configure and use the postprocessing features through the dictionary-based input system.
 
-- in-simulation: this is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See below to see how you can activate in-simulation postprocessing.
-- post-simulation: this is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results that are stored in time-folders. If you want to use post-simulation, you need to run utility `postprocessPhasicFlow` in terminal (in the simulation case setup folder) to run the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
-
+- **In-simulation**: This is postprocessing that is active during simulation. When running a solver, it allows for real-time data analysis and adjustments based on the simulation's current state. See below to learn how you can activate in-simulation postprocessing.
+- **Post-simulation**: This is postprocessing that is done after the simulation is completed. It allows for detailed analysis of the simulation results, including data extraction and visualization based on the results stored in time folders. If you want to use post-simulation, you need to run the utility `postprocessPhasicFlow` in the terminal (in the simulation case setup folder) to execute the postprocessing. This utility reads the `postprocessDataDict` file and performs the specified operations on the simulation data.
 
 ### Important Notes
 
-* **NOTE 1:**
-postprocessing for in-simulation, is not implemented for MPI execution. So, do not use it when using MPI execution. For post-simulation postprocessing, you can use the `postprocessPhasicFlow` utility without MPI, even though the actual simulation has been done using MPI.
+* **NOTE 1:**  
+Postprocessing for in-simulation is not implemented for MPI execution. So, do not use it when using MPI execution. For post-simulation postprocessing, you can use the `postprocessPhasicFlow` utility without MPI, even though the actual simulation has been done using MPI.
 
-* **NOTE 2:**
-In post-simulation mode, all timeControl settings are ignored. The postprocessing will be done for all the time folders that are available in the case directory or if you specify the time range in the command line, the postprocessing will be done for the time folders that are in the specified range of command line.
+* **NOTE 2:**  
+In post-simulation mode, all `timeControl` settings are ignored. The postprocessing will be done for all the time folders that are available in the case directory, or if you specify the time range in the command line, the postprocessing will be done for the time folders within the specified range.
 
 ## Table of Contents
 
@@ -32,12 +31,14 @@ In post-simulation mode, all timeControl settings are ignored. The postprocessin
   - [7.1. Example 1: Probing Individual Particles](#71-example-1-probing-individual-particles)
   - [7.2. Example 2: Processing in a Spherical Region](#72-example-2-processing-in-a-spherical-region)
   - [7.3. Example 3: Processing Along a Line](#73-example-3-processing-along-a-line)
+  - [7.4. Example 4: Processing in a Rectangular Mesh](#74-example-4-processing-in-a-rectangular-mesh)
+  - [7.5. Example 5: Tracking particles](#75-example-5-tracking-particles)
 - [8. Advanced Features](#8-advanced-features)
-  - [8.1. Special functions applied on fields](#81-special-functions-applied-on-fields)
-  - [8.2. Particle Filtering with includeMask](#82-particle-filtering-with-includemask)
+  - [8.1. Special Functions Applied on Fields](#81-special-functions-applied-on-fields)
+  - [8.2. Particle Filtering with IncludeMask](#82-particle-filtering-with-includemask)
   - [8.3. Implementation Notes](#83-implementation-notes)
 - [9. Mathematical Formulations](#9-mathematical-formulations)
-- [10. A complete dictionary file (postprocessDataDict)](#10-a-complete-dictionary-file-postprocessdatadict)
+- [10. A Complete Dictionary File (postprocessDataDict)](#10-a-complete-dictionary-file-postprocessdatadict)
 
 ## 1. Overview
 
@@ -46,12 +47,12 @@ Postprocessing in phasicFlow allows you to:
 - Extract information about particles in specific regions of the domain
 - Calculate statistical properties such as averages and sums of particle attributes
 - Track specific particles throughout the simulation
-- Apply different weighing methods when calculating statistics
+- Apply different weighting methods when calculating statistics
 - Perform postprocessing at specific time intervals
 
 ## 2. Setting Up Postprocessing
 
-Postprocessing is configured through a dictionary file named `postprocessDataDict` which should be placed in the `settings` directory. Below is a detailed explanation of the configuration options.
+Postprocessing is configured through a dictionary file named `postprocessDataDict`, which should be placed in the `settings` directory. Below is a detailed explanation of the configuration options.
 
 ### 2.1. Basic Configuration
 
@@ -59,7 +60,6 @@ The input dictionary, **settings/postprocessDataDict**, may look like this:
 
 ```cpp
 // PostprocessData dictionary
-
 
 // Enable/disable postprocessing during simulation
 runTimeActive yes;  // Options: yes, no
@@ -70,7 +70,7 @@ shapeType sphere;   // Options depend on the simulation type: sphere, grain, etc
 // Default time control for postprocessing components
 defaultTimeControl
 {
-    timeControl         timeStep;  // Options: timeStep, simulationTime, settings
+    timeControl         timeStep;  // Options: timeStep, simulationTime, settingsDict
     startTime           0;         // Start time for postprocessing
     endTime             1000;      // End time for postprocessing
     executionInterval   150;       // How frequently to run postprocessing
@@ -83,7 +83,6 @@ components
 );
 ```
 
-
 If you want to activate in-simulation postprocessing, you need to add these lines to the `settings/settingsDict` file:
 
 ```cpp
@@ -92,7 +91,7 @@ libs   ("libPostprocessData.so");
 auxFunctions    postprocessData;
 ```
 
-This will link the postprocessing library to your simulation, allowing you to use its features. Note that, anytime you want to deactivate the in-simulation postprocessing, you can simply change the `runTimeActive` option to `no` in `postprocessDataDict` file.
+This will link the postprocessing library to your simulation, allowing you to use its features. Note that anytime you want to deactivate the in-simulation postprocessing, you can simply change the `runTimeActive` option to `no` in the `postprocessDataDict` file.
 
 ## 3. Time Control Options
 
@@ -102,8 +101,8 @@ Each postprocessing component can either use the default time control settings o
 |--------|-------------|---------------------|
 | `timeStep` | Controls execution based on simulation time steps | `startTime`, `endTime`, `executionInterval` |
 | `simulationTime` | Controls execution based on simulation time | `startTime`, `endTime`, `executionInterval` |
-| `settings` | Uses parameters from settingsDict file | None (defined elsewhere) |
-| `default` | Uses the default time control settings (uses `defaultTimeControl` settings)| None (uses default) |
+| `settingsDict` | Uses parameters from settingsDict file | None (defined elsewhere) |
+| `default` | Uses the default time control settings (uses `defaultTimeControl` settings) | None (uses default) |
 
 If no time control is specified, the `default` option is used automatically.
 
@@ -111,14 +110,14 @@ If no time control is specified, the `default` option is used automatically.
 
 The postprocessing module provides several methods for processing particle data. They are categorized into two main groups: bulk and individual methods.
 
-- **Bulk Methods**: Operate on all particles that are located in a specified locations/regions (cells, spheres, etc.).
+- **Bulk Methods**: Operate on all particles that are located in specified locations/regions (cells, spheres, etc.).
 - **Individual Methods**: Operate on specific particles, allowing for targeted particle property extraction.
 
-| Method | Property type | Description | Formula |
-|--------|------------------|-------------|---------|
+| Method | Property Type | Description | Formula |
+|--------|---------------|-------------|---------|
 | `arithmetic` | bulk | Simple arithmetic mean/sum with equal weights | Each particle contributes equally |
 | `uniformDistribution` | bulk | Each particle contributes inversely proportional to the total number of particles | $w_i = 1/n$ where $n$ is the number of particles |
-| `GaussianDistribution` | bulk | Weight contribution based on distance from center with Gaussian falloff | $w_i = \exp(-\|x_i - c\|^2/(2\sigma^2))/\sqrt{2\pi\sigma^2}$ |
+| `GaussianDistribution` | bulk | Weight contribution based on distance from the center with Gaussian falloff | $w_i = \exp(-\|x_i - c\|^2/(2\sigma^2))/\sqrt{2\pi\sigma^2}$ |
 | `particleProbe` | individual | Extracts values from specific particles | Direct access to particle properties |
 
 ## 5. Region Types
@@ -131,11 +130,13 @@ Regions define where in the domain the postprocessing operations are applied:
 | `multipleSpheres` | Multiple spherical regions | `centers`, `radii` defined in `multiplSpheresInfo` dict | bulk |
 | `line` | Spheres along a line with specified radius | `p1`, `p2`, `nSpheres`, `radius` defined in `lineInfo` dict| bulk |
 | `box`| A cuboid region | `min`, `max` defined in `boxInfo` dict | bulk |
-| `centerPoints`* | Specific particles selected by ID | `ids` | individual |
-| `centerPoints`* | Specific particles selected by center points located in a box | `boxInfo` | individual |
-| `centerPoints`* | Specific particles selected by center points located in a sphere | `sphereInfo` | individual |
-| `centerPoints`* | Specific particles selected by center points located in a cylinder | `cylinderInfo` | individual |
-| <td colspan="4">\* Particles selection is done when simulation reaches the time that is specified by `startTime` of the post-process component and this selection remains intact up to the end of simulation. This is very good for particle tracking purposes or when you want to analyze specific particles behavior over time.</td> |
+| `rectMesh`** | creates a rectangular mesh and each direction is divided into equal spaces| corner points of mesh, and `nx`, `ny`, `nz`: number of divisions in each direction | bulk |
+| `centerPoints`* | if `selector` is set to `id`, particles selected by ID list | `ids`: a list of particle ids | individual |
+| `centerPoints`* | if `selector` is set to `box`, particles are selected by center points located in a box | corner points of the box are given in `boxInfo` sub-dict | individual |
+| `centerPoints`* | if `selector` is set to `sphere`, particles are selected by center points located in a sphere | center and radius of a sphere given in `sphereInfo` sub-dict | individual |
+| `centerPoints`* | if `selector` is set to `cylinder`, particles are selected by center points located in a cylinder | axis info and radius of cylinder at end points that are given in `cylinderInfo` sub-dict | individual |
+| <td colspan="3">\* Particles selection is done when simulation reaches the time that is specified by `startTime` of the post-process component and this selection remains intact up to the end of simulation. This is very good for particle tracking purposes or when you want to analyze specific particles behavior over time.</td> |
+| <td colspan="3">\** This region creates a rectangular mesh and particles are located into cells according to their center points. When using `GaussianDistribution` as `processMethod`, a larger neighbor radius is considered for each cell and particles inside this neighbor radius are included in the calculations.</td> |
 
 ## 6. Processing Operations for Bulk Properties
 
@@ -166,7 +167,7 @@ where:
 
 ### 6.2. About fluctuation2 in average function
 
-Fluctuation2 is an optional parameter that can be used to account for fluctuations in the particle field values with respect to mean value of the field.
+`fluctuation2` is an optional parameter that can be used to account for fluctuations in the particle field values with respect to mean value of the field.
 It is used in the `average` function to calculate the fluctuation of the field values around the mean. The formula for fluctuation2 is:
 
 $$\text{fluctuation}^2 = \frac{\sum_j w_j \cdot \phi_j \cdot (\text{field}_j - \text{mean})^2}{\sum_i w_i \cdot \phi_i}$$
@@ -349,6 +350,90 @@ along_a_line
 
 This example creates 10 spherical regions along a line from (0,0,0) to (0,0.15,0.15) and calculates the bulk density and volume density in each region.
 
+### 7.4 Example 4: Processing in a Rectangular Mesh
+
+In this example, a rectangular mesh is defined. The `rectMeshInfo` section specifies the minimum and maximum corner points of the box, the number of divisions in each direction, and an optional cell extension factor which is effective for GaussianDistribution only. In the `operations` section, two operations are defined: one for calculating the average velocity and another for calculating the solid volume fraction.
+
+```cpp
+on_a_rectMesh
+{
+    processMethod   GaussianDistribution;
+    processRegion   rectMesh;
+
+    timeControl     settingsDict; // uses settings from settingsDict file
+
+    rectMeshInfo 
+    {
+        min (-0.12 -0.12 0.00); // lower corner point of the box 
+        max (0.12   0.12 0.11); // upper corner point of the box
+        
+        nx 30; // number of divisions in x direction
+        ny 30; // number of divisions in y direction
+        nz 15; // number of divisions in z direction
+
+        // optional (default is 2.0)
+        // for each cell, a neighbor radius is considered. This neighbor radius is equal to 
+        // cellExtension * equivalent diameter of the cell. 
+        // cell extension is only effective when using GaussianDistribution as processMethod.
+        cellExtension 3; 
+    }
+
+    operations
+    (
+        avVelocity
+        {
+            function     average;
+            field        velocity;
+            fluctuation2 yes;
+            threshold    4;
+            phi          mass;
+        }
+
+        solidVolumeFraction
+        {
+            function sum;
+            field    volume;
+            divideByVolume yes;
+        }
+    );
+}
+```
+
+### 7.5 Example 5: Tracking particles
+
+Suppose we want to mark and track the position of particles that are located inside a box region at t = 1 s. All particles that are inside the box at t = 1 s will be marked/selected and then the position of them are recorded along the simulation time. The following example shows how to do this. Note that marking/selecting of particles is done at the instance that is defined by `startTime`.  
+
+```C++
+particlesTrack
+{
+    processMethod      particleProbe;
+    
+    processRegion      centerPoints;
+    
+    // all particles whose ceters are located inside this box 
+    // are selected. Selection occurs at startTime: particles 
+    // that are inside the box at t = startTime. 
+    selector           box;
+    boxInfo
+    {
+        min            (0 0 0);
+        max            (0.1 0.05 0.05);
+    }
+    
+    // center position of selected particles are processed 
+    field              position;
+    
+    timeControl        simulationTime;
+    // execution starts at 1.0 s
+    startTime           1.0;
+    // execution ends at 100 s
+    endTime             100;
+    // execution interval of this compoenent 
+    executionInterval   0.02;
+
+}
+```
+
 ## 8. Advanced Features
 
 ### 8.1. Special functions applied on fields
@@ -464,7 +549,7 @@ components
         field            component(velocity,y);
         ids              (0 10 100);
         timeControl      default; // other options are settings, timeStep, simulationTime 
-        // settings: uses parameters from settingsDict file
+        // settingsDict: uses parameters from settingsDict file
         // timeStep: uses the time step of the simulation controlling the execution of postprocessing
         // simulationTime: uses the simulation time of the simulation controlling the execution of postprocessing
         // default: uses the default time control (defined in defaultTimeControl).
@@ -498,6 +583,49 @@ components
         // execution interval of this compoenent 
         executionInterval   0.02;
 
+    }
+
+    on_a_rectMesh
+    {
+        processMethod   GaussianDistribution;
+        processRegion   rectMesh;
+
+        timeControl     settingsDict; // uses settings from settingsDict file
+
+        rectMeshInfo 
+        {
+            min (-0.12 -0.12 0.00); // lower corner point of the box 
+            max (0.12   0.12 0.11); // upper corner point of the box
+            
+            nx 30; // number of divisions in x direction
+            ny 30; // number of divisions in y direction
+            nz 15; // number of divisions in z direction
+
+            // optional (default is 2.0)
+            // for each cell, a neighbor radius is considered. This neighbor radius is equal to 
+            // cellExtension * equivalent diameter of the cell. 
+            // cell extension is only effective when using GaussianDistribution as processMethod.
+            cellExtension 3; 
+        }
+
+        operations
+        (
+            avVelocity
+            {
+                function     average;
+                field        velocity;
+                fluctuation2 yes;
+                threshold    4;
+                phi          mass;
+            }
+
+            solidVolumeFraction
+            {
+                function sum;
+                field    volume;
+                divideByVolume yes;
+            }
+        );
     }
     
     on_single_sphere
