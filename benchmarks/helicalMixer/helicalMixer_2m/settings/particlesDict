@@ -1,0 +1,27 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName  particlesDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+setFields
+{
+    defaultValue 
+    {
+        velocity        realx3  (0 0 0);        // linear velocity (m/s)
+        acceleration    realx3  (0 0 0);        // linear acceleration (m/s2)
+        rVelocity       realx3  (0 0 0);        // rotational velocity (rad/s)
+        shapeName       word    smallParticle;  // name of the particle shape 
+    }
+
+    selectors
+    {}
+}
+
+positionParticles
+{
+    method empty;     // creates the required fields with zero particles (empty). 
+}
