@@ -1,0 +1,72 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName  particleInsertion;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+active  yes;          // is insertion active?
+
+particleInlet1
+{
+   regionType     box; // type of insertion region
+   
+   rate           125000;  // insertion rate (particles/s)
+   
+   timeControl    simulationTime;
+   
+   startTime      0;      // (s)
+   
+   endTime        2.0;    // (s)
+   
+   insertionInterval    0.05;  //s  
+
+   boxInfo 
+   {
+        min (-0.17 0.23 0.46); // (m,m,m)
+        max ( 0.17 0.24 0.88); // (m,m,m)
+   }
+   
+   setFields
+   {
+        velocity    realx3 (0.0 -0.3 0.0); // initial velocity of inserted particles 
+   }
+   
+   mixture
+   {
+        smallParticle 1; // mixture composition of inserted particles 
+   }
+}
+
+particleInlet2
+{
+    regionType     box; // type of insertion region
+
+    rate           125000;  // insertion rate (particles/s)
+
+    timeControl    simulationTime;
+
+    startTime      0;      // (s)
+
+    endTime        2.0;    // (s)
+
+    insertionInterval    0.05;  //s  
+
+    boxInfo 
+    {
+        min ( -0.17 0.23 0.02); // (m,m,m)
+        max (  0.17 0.24 0.44); // (m,m,m)
+    }
+
+    setFields
+    {
+        velocity    realx3 (0.0 -0.3 0.0); // initial velocity of inserted particles 
+    }
+   
+   mixture
+   {
+        largeParticle 1; // mixture composition of inserted particles 
+   }
+}
