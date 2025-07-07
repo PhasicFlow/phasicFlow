@@ -1,0 +1,82 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  processDataDict;
+objectType  dictionary;;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+runTimeActive       yes;
+
+shapeType           sphere;
+
+components
+(
+    on_rectMesh
+    {
+        processMethod   GaussianDistribution;
+        processRegion   rectMesh;
+
+        timeControl     settingsDict;
+
+        rectMeshInfo 
+        {
+            min (-0.12 -0.12 0.00);       
+            max (0.12   0.12 0.1);
+            nx 36;
+            ny 36;
+            nz 15;
+        }
+
+        operations
+        (
+            avVelocity
+            {
+                function     average;
+                
+                field        velocity;
+                
+                fluctuation2 yes;
+                
+                threshold    4;
+                
+                phi          mass;
+            }
+
+            solidVolFraction
+            {
+                function    sum;
+
+                field       volume;
+                
+                divideByVolume yes;
+                
+                threshold   4;
+            }
+
+            smallSphereVolFraction
+            {
+                function        average;
+                
+                field           one;
+
+                phi             volume;
+                
+                divideByVolume  no;
+
+                threshold       4;
+                
+                includeMask     lessThan;
+                
+                lessThanInfo
+                {
+                    field   diameter;
+                  
+                    value   0.0031;  
+                }
+            }
+        );
+
+    }
+);

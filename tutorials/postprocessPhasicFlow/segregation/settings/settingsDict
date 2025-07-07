@@ -2,39 +2,37 @@
 |  phasicFlow File                                                            | 
 |  copyright: www.cemf.ir                                                     | 
 \* ------------------------------------------------------------------------- */  
-objectName 	settingsDict;
-objectType 	dictionary;;
+objectName  settingsDict;
+objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
-run 			rotatingDrumSmall;
+run   			rotatingDrumSmall;
 
-dt 				0.00001; 	// time step for integration (s)
+libs   	("libPostprocessData.so");
 
-startTime 		0; 			// start time for simulation 
+auxFunctions      postprocessData;
 
-endTime 		10; 		// end time for simulation 
+dt              0.00001;                         // time step for integration (s)
 
-saveInterval 	0.1; 		// time interval for saving the simulation
+startTime             0;                         // start time for simulation 
 
-timePrecision   6;			// maximum number of digits for time folder 
+endTime              10;                         // end time for simulation 
 
-g 				(0 -9.8 0); // gravity vector (m/s2) 
+saveInterval        0.1;                         // time interval for saving the simulation
 
-/*
-	Simulation domain 
-	every particles that goes outside this domain is deleted.
-*/
-domain 
-{
-	min (-0.12 -0.12 0);
-	max (0.12   0.12 0.1);
-}
+timePrecision         6;                         // maximum number of digits for time folder 
 
-integrationMethod 		AdamsBashforth2; 	// integration method 
+g            (0 -9.8 0);                         // gravity vector (m/s2) 
 
-writeFormat 			ascii;
+includeObjects (diameter);                       // save necessary (i.e., required) data on disk
 
-timersReport 			Yes;  	// report timers?
+integrationMethod       AdamsBashforth2;         // integration method
 
-timersReportInterval   	0.01;	// time interval for reporting timers
+integrationHistory                  off; 
+
+writeFormat                       ascii;         // data writting format (ascii or binary)
+
+timersReport                        Yes;         // report timers (Yes or No)
+
+timersReportInterval               0.01;         // time interval for reporting timers
