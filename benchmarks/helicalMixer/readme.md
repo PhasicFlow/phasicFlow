@@ -4,6 +4,12 @@
 
 This benchmark compares the performance of phasicFlow with a well-stablished commercial DEM software for simulating a helical mixer with varying particle counts (250k to 4M particles). The benchmark measures both computational efficiency and memory usage across different hardware configurations.
 
+**Summary of Results:**
+
+- phasicFlow achieves similar performance to the commercial DEM software on the same hardware.
+- phasicFlow shows a 30% performance improvement when using the NVIDIA RTX A4000 compared to the RTX 4050Ti.
+- Memory usage is approximately 50% lower in phasicFlow compared to the commercial software, with phasicFlow using about 0.7 GB of memory per million particles, while the commercial software uses about 1.5 GB per million particles.
+
 ## Simulation Setup
 
 <div align="center">
