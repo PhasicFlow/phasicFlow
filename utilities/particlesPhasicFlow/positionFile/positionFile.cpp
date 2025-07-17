@@ -49,7 +49,14 @@ bool pFlow::positionFile::positionPointsFile()
 		is >> tok;
 		if(tok.good()&& tok.isNumber()&& !is.eof())
 		{
-			tempPoint.x() = tok.realToken();
+			if(tok.isReal())
+			{
+				tempPoint.x() = tok.realToken();
+			}
+			else
+			{
+				tempPoint.x() = static_cast<real>(tok.int64Token());
+			}
 		}
 		else
 		{
@@ -71,7 +78,14 @@ bool pFlow::positionFile::positionPointsFile()
 		is >> tok;
 		if(tok.good()&& tok.isNumber()&& !is.eof())
 		{
-			tempPoint.y() = tok.realToken();
+			if(tok.isReal())
+			{
+				tempPoint.y() = tok.realToken();
+			}
+			else
+			{
+				tempPoint.y() = static_cast<real>(tok.int64Token());
+			}
 		}
 		else
 		{
@@ -93,7 +107,14 @@ bool pFlow::positionFile::positionPointsFile()
 		is >> tok;
 		if(tok.good()&& tok.isNumber()&& !is.eof())
 		{
-			tempPoint.z() = tok.realToken();
+			if(tok.isReal())
+			{
+				tempPoint.z() = tok.realToken();
+			}
+			else
+			{
+				tempPoint.z() = static_cast<real>(tok.int64Token());
+			}
 		}
 		else
 		{
