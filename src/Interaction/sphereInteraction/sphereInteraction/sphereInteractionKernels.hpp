@@ -238,7 +238,9 @@ struct pwInteractionFunctor
 		real Rj = 10000.0;
 		realx3 xi = pos_[i];
 		
-		realx3x3 tri = triangles_(tj); 
+		const realx3x3 tri = triangles_(tj);
+		const realx3& normW = triangles_.normal(tj); 
+
 		real ovrlp;
 		realx3 Nij, cp;
 
@@ -250,7 +252,7 @@ struct pwInteractionFunctor
 
 			int32 mInd	= wTriMotionIndex_[tj];
 			
-			auto Vw = motionModel_(mInd, cp);
+			auto Vw = motionModel_(mInd, cp, normW);
 			
 			//output<< "par-wall index "<< i<<" - "<< tj<<endl;
 			

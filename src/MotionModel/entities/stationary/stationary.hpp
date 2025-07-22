@@ -60,7 +60,7 @@ public:
 	{}
 
 	INLINE_FUNCTION_HD
-	realx3 linVelocityPoint(const realx3 &)const
+	realx3 linVelocityPoint(const realx3 &, const realx3&)const
 	{
 		return realx3(0);
 	}

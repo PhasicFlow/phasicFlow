@@ -85,15 +85,15 @@ public:
 		~ModelInterface()=default;
 
 		INLINE_FUNCTION_HD
-		realx3 pointVelocity(uint32 n, const realx3& p)const
+		realx3 pointVelocity(uint32 n, const realx3& p, const realx3& wallNormal)const
 		{
-			return components_[n].linVelocityPoint(p);
+			return components_[n].linVelocityPoint(p, wallNormal);
 		}
 
 		INLINE_FUNCTION_HD
-		realx3 operator()(uint32 n, const realx3& p)const
+		realx3 operator()(uint32 n, const realx3& p, const realx3& wallNormal)const
 		{
-			return pointVelocity(n,p);
+			return pointVelocity(n, p, wallNormal);
 		}
 
 		INLINE_FUNCTION_HD

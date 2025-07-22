@@ -126,7 +126,7 @@ public:
 
 	/// Linear tangential velocity at point p
 	INLINE_FUNCTION_HD
-	realx3 linVelocityPoint(const realx3 &p)const;
+	realx3 linVelocityPoint(const realx3 &p, const realx3& wallNormal)const;
 
 	INLINE_FUNCTION_HD
 	realx3 transferPoint(const realx3 p, real dt)const;

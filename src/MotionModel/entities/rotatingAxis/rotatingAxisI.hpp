@@ -20,7 +20,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 INLINE_FUNCTION_HD
-pFlow::realx3 pFlow::rotatingAxis::linVelocityPoint(const realx3 &p)const
+pFlow::realx3 pFlow::rotatingAxis::linVelocityPoint(const realx3 &p, const realx3&)const
 {
 	
 	if(!inTimeRange()) return {0,0,0};

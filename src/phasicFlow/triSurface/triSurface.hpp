@@ -46,6 +46,9 @@ private:
 	deviceViewType1D<realx3> dPoints_;
 	
 	deviceViewType1D<uint32x3>  dVectices_;
+
+	deviceViewType1D<realx3> dNormals_;
+
 public:
 
 	INLINE_FUNCTION_H
@@ -53,12 +56,14 @@ public:
 		uint32 	numPoints,
 		deviceViewType1D<realx3> points,
 		uint32 	numTrianlges,
-		deviceViewType1D<uint32x3> vertices )
+		deviceViewType1D<uint32x3> vertices,
+		deviceViewType1D<realx3> normals )
 	:
 		numPoints_(numPoints),
 		numTriangles_(numTrianlges),
 		dPoints_(points),
-		dVectices_(vertices)
+		dVectices_(vertices),
+		dNormals_(normals)
 	{}
 
 	INLINE_FUNCTION_HD
@@ -92,10 +97,16 @@ public:
 	realx3x3 operator[](uint32 i)const { return triangle(i);	}
 
 	INLINE_FUNCTION_HD
+	const realx3& normal(uint32 i)const
+	{
+		return dNormals_[i];
+	}
+
+	INLINE_FUNCTION_HD
 	uint32 numPoints()const { return numPoints_; }
 
 	INLINE_FUNCTION_HD
-	uint32 numTrianlges()const { return numTriangles_;}
+	uint32 numTriangles()const { return numTriangles_;}
 };
 
 
@@ -224,7 +235,8 @@ public:
 				points_.size(),
 				points_.deviceViewAll(),
 				vertices_.size(),
-				vertices_.deviceViewAll());
+				vertices_.deviceViewAll(),
+				normals_.deviceViewAll() );
 		}
 		
 	//// - IO operations 

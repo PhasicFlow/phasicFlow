@@ -38,7 +38,7 @@ surfaces
 		type 	 stlWall;  	// type of the wall
 		file 	 shell.stl;	// file name in stl folder		
 		material prop1;     // material name of this wall
-		motion 	 none;		// this surface is not moving ==> none
+		motion 	 none;		// this surface is not movng ==> none
 	}
 }
 

@@ -41,65 +41,76 @@ class conveyorBelt
 {
 private:
 
-	realx3  tangentVelocity_{0, 0, 0};
+    /// @brief  linear velocity of the conveyor belt
+    real  linearVelocity_{0};
+
+    /// normal vector of the velocity plane.
+    /// The velocity vector is tangent to this plane (velocity plane). 
+    realx3 normal_{1,0,0};
 
 public:
 
-	TypeInfoNV("conveyorBelt");
+    TypeInfoNV("conveyorBelt");
 
-	FUNCTION_HD
-	conveyorBelt()=default;
+    FUNCTION_HD
+    conveyorBelt()=default;
 
-	FUNCTION_H
-	explicit conveyorBelt(const dictionary& dict);
-	
+    FUNCTION_H
+    explicit conveyorBelt(const dictionary& dict);
+    
 
-	FUNCTION_HD
-	conveyorBelt(const conveyorBelt&) = default;
+    FUNCTION_HD
+    conveyorBelt(const conveyorBelt&) = default;
 
-	conveyorBelt& operator=(const conveyorBelt&) = default;
+    conveyorBelt& operator=(const conveyorBelt&) = default;
 
-	INLINE_FUNCTION_HD
-	void setTime(real t)
-	{}
+    INLINE_FUNCTION_HD
+    void setTime(real t)
+    {}
 
-	INLINE_FUNCTION_HD
-	realx3 linVelocityPoint(const realx3 &)const
-	{
-		return tangentVelocity_;
-	}
+    /*INLINE_FUNCTION_HD
+    realx3 linVelocityPoint(const realx3 &)const
+    {
+        return tangentVelocity_;
+    }*/
 
-	INLINE_FUNCTION_HD
-	realx3 transferPoint(const realx3& p, real)const
-	{
-		return p;
-	}
+    INLINE_FUNCTION_HD
+    realx3 linVelocityPoint(const realx3 &, const realx3& wallNormal)const
+    {
+        return linearVelocity_ * cross(wallNormal, normal_);
+    }
 
-	// - IO operation
-	FUNCTION_H 
-	bool read(const dictionary& dict);
+    INLINE_FUNCTION_HD
+    realx3 transferPoint(const realx3& p, real)const
+    {
+        return p;
+    }
 
-	FUNCTION_H
-	bool write(dictionary& dict) const;
+    // - IO operation
+    FUNCTION_H 
+    bool read(const dictionary& dict);
 
-	FUNCTION_H
-	bool read(iIstream& is);
+    FUNCTION_H
+    bool write(dictionary& dict) const;
 
-	FUNCTION_H
-	bool write(iOstream& os)const;
+    FUNCTION_H
+    bool read(iIstream& is);
+
+    FUNCTION_H
+    bool write(iOstream& os)const;
 
 };
 
 inline iOstream& operator <<(iOstream& os, const conveyorBelt& obj)
 {
-	
-	return os;
+    
+    return os;
 }
 
 inline iIstream& operator >>(iIstream& is, conveyorBelt& obj)
 {
-	
-	return is;
+    
+    return is;
 }
 
 }

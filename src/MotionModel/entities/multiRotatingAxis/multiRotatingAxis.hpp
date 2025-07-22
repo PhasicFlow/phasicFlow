@@ -120,7 +120,7 @@ public:
 
 		/// Tangential velocity at point p
 		INLINE_FUNCTION_HD
-		realx3 pointTangentialVel(const realx3& p)const
+		realx3 pointTangentialVel(const realx3& p, const realx3& wallNormal)const
 		{
 			realx3 parentVel(0);
 			auto parIndex = parentAxisIndex();
@@ -128,11 +128,11 @@ public:
 			while(parIndex != -1)
 			{
 				auto& ax = axisList_[parIndex];
-				parentVel += ax.linVelocityPoint(p);
+				parentVel += ax.linVelocityPoint(p, wallNormal);
 				parIndex = ax.parentAxisIndex();
 			}
 
-			return parentVel + rotatingAxis::linVelocityPoint(p);
+			return parentVel + rotatingAxis::linVelocityPoint(p, wallNormal);
 		}
 
 		/// Translate point p for dt seconds based on the axis information

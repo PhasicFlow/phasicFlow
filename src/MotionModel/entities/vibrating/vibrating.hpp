@@ -39,17 +39,17 @@ class dictionary;
  * Creates a sinoidal virating model for a wall. The viration is defined by
  * frequency, amplitude and phase angle. 
  * \f[ 
-	\vec{v}(t) = \vec{A} sin(\vec{\omega}(t-startTime)+\vec{\phi}) 
+    \vec{v}(t) = \vec{A} sin(\vec{\omega}(t-startTime)+\vec{\phi}) 
   \f]
  \verbatim
  // This creates sinoidal vibration on the wall in x-direction. The viration
  // starts at t = 0 s and ends at t = 10 s. 
  {
-  	angularFreq 	(10 0 0);
-  	amplitude 		( 1 0 0);
-  	phaseAngle		( 0 0 0);
-  	startTime 		0;
-  	endTime 		10;
+      angularFreq 	(10 0 0);
+      amplitude 		( 1 0 0);
+      phaseAngle		( 0 0 0);
+      startTime 		0;
+      endTime 		10;
  } \endverbatim
  * 
  * * 
@@ -64,102 +64,102 @@ class dictionary;
  */
 class vibrating
 :
-	public timeInterval
+    public timeInterval
 {
 
 private:
-	
-	// rotation speed 
-	realx3	angularFreq_{0,0,0};
+    
+    // rotation speed 
+    realx3	angularFreq_{0,0,0};
 
-	realx3 	phaseAngle_{0,0,0};
+    realx3 	phaseAngle_{0,0,0};
 
-	realx3  amplitude_{0,0,0};
+    realx3  amplitude_{0,0,0};
 
-	realx3  velocity_{0,0,0};
+    realx3  velocity_{0,0,0};
 
-	realx3  velocity0_{0,0,0};
+    realx3  velocity0_{0,0,0};
 
-	INLINE_FUNCTION_HD
-	void calculateVelocity()
-	{
-		if(inTimeRange())
-		{
-			velocity_ = amplitude_ * sin( angularFreq_*(time()-startTime() ) + phaseAngle_ );
-		}else
-		{
-			velocity_ = {0,0,0};
-		}
-	}
+    INLINE_FUNCTION_HD
+    void calculateVelocity()
+    {
+        if(inTimeRange())
+        {
+            velocity_ = amplitude_ * sin( angularFreq_*(time()-startTime() ) + phaseAngle_ );
+        }else
+        {
+            velocity_ = {0,0,0};
+        }
+    }
 
 public:
 
-	TypeInfoNV("vibrating");
+    TypeInfoNV("vibrating");
 
-	FUNCTION_HD
-	vibrating()=default;
+    FUNCTION_HD
+    vibrating()=default;
 
-	FUNCTION_H
-	explicit vibrating(const dictionary& dict);
-	
+    FUNCTION_H
+    explicit vibrating(const dictionary& dict);
+    
 
-	FUNCTION_HD
-	vibrating(const vibrating&) = default;
+    FUNCTION_HD
+    vibrating(const vibrating&) = default;
 
-	vibrating& operator=(const vibrating&) = default;
+    vibrating& operator=(const vibrating&) = default;
 
-	INLINE_FUNCTION_HD
-	void setTime(real t)
-	{
-		if( !equal(t, time()) ) velocity0_ = velocity_;
-		timeInterval::setTime(t);
-		calculateVelocity();
-	}
+    INLINE_FUNCTION_HD
+    void setTime(real t)
+    {
+        if( !equal(t, time()) ) velocity0_ = velocity_;
+        timeInterval::setTime(t);
+        calculateVelocity();
+    }
 
-	INLINE_FUNCTION_HD
-	realx3 linVelocityPoint(const realx3 &)const
-	{
-		return velocity_;
-	}
+    INLINE_FUNCTION_HD
+    realx3 linVelocityPoint(const realx3 &, const realx3&)const
+    {
+        return velocity_;
+    }
 
-	INLINE_FUNCTION_HD
-	realx3 transferPoint(const realx3& p, real dt)const
-	{
-		if(!inTimeRange()) return p;
-		return p + static_cast<real>(0.5*dt)*(velocity0_+velocity_);
-	}
+    INLINE_FUNCTION_HD
+    realx3 transferPoint(const realx3& p, real dt)const
+    {
+        if(!inTimeRange()) return p;
+        return p + static_cast<real>(0.5*dt)*(velocity0_+velocity_);
+    }
 
-	// - IO operation
-	FUNCTION_H 
-	bool read(const dictionary& dict);
+    // - IO operation
+    FUNCTION_H 
+    bool read(const dictionary& dict);
 
-	FUNCTION_H
-	bool write(dictionary& dict) const;
+    FUNCTION_H
+    bool write(dictionary& dict) const;
 
-	FUNCTION_H
-	bool read(iIstream& is);
+    FUNCTION_H
+    bool read(iIstream& is);
 
-	FUNCTION_H
-	bool write(iOstream& os)const;
+    FUNCTION_H
+    bool write(iOstream& os)const;
 
 };
 
 inline iOstream& operator <<(iOstream& os, const vibrating& obj)
 {
-	if(!obj.write(os))
-	{
-		fatalExit;
-	}
-	return os;
+    if(!obj.write(os))
+    {
+        fatalExit;
+    }
+    return os;
 }
 
 inline iIstream& operator >>(iIstream& is, vibrating& obj)
 {
-	if( !obj.read(is) )
-	{
-		fatalExit;
-	}
-	return is;
+    if( !obj.read(is) )
+    {
+        fatalExit;
+    }
+    return is;
 }
 
 }

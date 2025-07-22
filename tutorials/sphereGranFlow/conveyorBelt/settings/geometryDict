@@ -7,14 +7,18 @@ objectType  dictionary;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
 
-// motion model can be rotatingAxis or stationary or vibrating
 motionModel          conveyorBelt;               
 
 conveyorBeltInfo
 {
     conveyorBelt1
     {
-        tangentVelocity (0.5 0 0);
+        // linear velocity of belt
+        linearVelocity  0.5;
+
+        // normal vector of velocity plate
+        // The velocity vector is tangent to this plane  
+        normal          (0 -1 0);
     }
 }
 

@@ -28,7 +28,7 @@ pFlow::conveyorBelt::conveyorBelt(const dictionary& dict)
   if(!read(dict))
 	{
 		fatalErrorInFunction<<
-		"  error in reading conveyorBelt from dictionary "<< dict.globalName()<<endl;
+		"  error in reading from dictionary "<< dict.globalName()<<endl;
 		fatalExit;
 	}
 }
@@ -37,7 +37,21 @@ FUNCTION_H
 bool pFlow::conveyorBelt::read(const dictionary& dict)
 {	
 
-	tangentVelocity_ 		= dict.getVal<realx3>("tangentVelocity");
+	linearVelocity_ 		= dict.getVal<real>("linearVelocity");
+    normal_             = dict.getVal<realx3>("normal");
+
+    if(normal_.length() > verySmallValue)
+    {
+        normal_.normalize();
+    }
+    else
+    {
+        fatalErrorInFunction<<
+            "  normal vector in "<< 
+            dict.globalName() << 
+            " cannot be zero vector "<<endl;
+        return false;
+    }
 	
 	return true;
 }
@@ -45,12 +59,19 @@ bool pFlow::conveyorBelt::read(const dictionary& dict)
 FUNCTION_H
 bool pFlow::conveyorBelt::write(dictionary& dict) const
 {
-	if( !dict.add("tangentVelocity", tangentVelocity_) )
+	if( !dict.add("linearVelocity", linearVelocity_) )
 	{
 		fatalErrorInFunction<<
 		"  error in writing tangentVelocity to dictionary "<< dict.globalName()<<endl;
 		return false;
 	}
+
+    if(!dict.add("normal", normal_))
+    {
+        fatalErrorInFunction<<
+        "  error in writing normal to dictionary "<< dict.globalName()<<endl;
+        return false;
+    }
 	return true;
 }
 
@@ -65,6 +86,7 @@ bool pFlow::conveyorBelt::read(iIstream& is)
 FUNCTION_H
 bool pFlow::conveyorBelt::write(iOstream& os)const
 {
-  os.writeWordEntry("tangentVelocity", tangentVelocity_);
-  return true;
+    os.writeWordEntry("linearVelocity", linearVelocity_);
+    os.writeWordEntry("normal", normal_);
+    return true;
 }
