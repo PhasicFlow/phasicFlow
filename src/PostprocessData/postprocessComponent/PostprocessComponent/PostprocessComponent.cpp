@@ -157,6 +157,14 @@ bool pFlow::postprocessData::PostprocessComponent<RegionType, ProcessMethodType>
 
         auto osPtr = makeUnique<oFstream>(file);
 
+        // set output format to scientific notation
+        if(regPoints().scientific())
+        {
+            osPtr->stdStream() << std::scientific;
+        }
+    
+        osPtr().precision(regPoints().precision());
+
         regPoints().write(osPtr());
 
         for(auto& operation:operatios_)

@@ -107,6 +107,14 @@ bool postprocessOperation::write(const fileSystem &parDir) const
             processedFieldName() + ".Start_" + ti.timeName());
         osPtr_ = makeUnique<oFstream>(path);
         
+        if(regPoints().scientific())
+        {   
+            // set output format to scientific notation 
+            osPtr_().stdStream()<<std::scientific;
+        }
+
+        osPtr_().precision(regPoints().precision());
+        
         regPoints().write(osPtr_());
     }
 

@@ -52,7 +52,13 @@ class regionPoints
     using PointsTypeHost = typename pointStructure::PointsTypeHost;
 
     /// Reference to the fields database containing simulation data
-    fieldsDataBase& fieldsDataBase_;  
+    fieldsDataBase& fieldsDataBase_;
+
+    /// default precision for output
+    int precision_ = 6;
+
+    /// if scientific notation is used for output
+    Logical scientific_;
 
 public:
 
@@ -74,7 +80,16 @@ public:
 
     /// Returns non-const reference to the fields database
     fieldsDataBase& database();
+
+    int precision() const
+    {
+        return precision_;
+    }
     
+    bool scientific()const
+    {
+        return scientific_(); 
+    }
     /// @brief size of elements 
     virtual 
     uint32 size()const = 0;

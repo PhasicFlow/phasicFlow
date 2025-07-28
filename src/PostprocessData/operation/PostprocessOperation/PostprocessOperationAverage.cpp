@@ -161,7 +161,15 @@ bool PostprocessOperationAverage::write(const fileSystem &parDir) const
         fileSystem path = parDir+(
             processedFieldName()+"_prime2" + ".Start_" + ti.timeName());
         os2Ptr_ = makeUnique<oFstream>(path);
-        
+
+        if(regPoints().scientific())
+        {
+            // set output format to scientific notation
+            os2Ptr_().stdStream()<<std::scientific;
+        }
+    
+        os2Ptr_().precision(regPoints().precision());
+
         regPoints().write(os2Ptr_());
     }
 

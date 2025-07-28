@@ -157,6 +157,12 @@ bool pFlow::postprocessData::particleProbePostprocessComponent::write(const file
         // file is not open yet
         fileSystem path = parDir + (name_+".Start_"+ti.timeName());
         osPtr_ = makeUnique<oFstream>(path);
+        
+        if(regionPointsPtr_().scientific())
+        {
+            osPtr_().stdStream() << std::scientific;
+        }
+        osPtr_().precision(regionPointsPtr_().precision());
         regionPointsPtr_().write(osPtr_());
     }
 

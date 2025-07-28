@@ -12,7 +12,10 @@ regionPoints::regionPoints
 )
 :
     fieldsDataBase_(fieldsDataBase)
-{}
+{
+    precision_ = dict.getValOrSet<int>("precision", 6);
+    scientific_ = dict.getValOrSet<Logical>("scientific", Logical(true));
+}
 
 const Time& regionPoints::time() const
 {
