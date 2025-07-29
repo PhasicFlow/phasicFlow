@@ -18,60 +18,60 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef __PostprocessOperationAvMassVelocity_hpp__
-#define __PostprocessOperationAvMassVelocity_hpp__
+#ifndef __PostprocessOperationBulkDensity_hpp__
+#define __PostprocessOperationBulkDensity_hpp__
 
 /*!
- * @class PostprocessOperationAvMassVelocity
- * @brief Calculates mass-weighted average velocity of particles in the regions
+ * @class PostprocessOperationBulkDensity
+ * @brief Calculates bulk density in the regions
  * 
  *
- * @see PostprocessOperationAverage
+ * @see PostprocessOperationSum
  */
 
-#include <variant>
-#include <vector>
-
-#include "PostprocessOperationAverage.hpp"
-#include "regionField.hpp"
-#include "includeMask.hpp"
+#include "PostprocessOperationSum.hpp"
 
 namespace pFlow::postprocessData
 {
 
-
-class PostprocessOperationAvMassVelocity
+class PostprocessOperationBulkDensity
 :
-    public PostprocessOperationAverage
+    public PostprocessOperationSum
 {
-   
+
 public:
 
-    TypeInfo("PostprocessOperation<avMassVelocity>");
+    TypeInfo("PostprocessOperation<bulkDensity>");
 
     /// @brief Constructs average operation processor
     /// @param opDict Operation parameters dictionary
     /// @param regPoints Region points data
     /// @param fieldsDB Fields database
-    PostprocessOperationAvMassVelocity(
+    PostprocessOperationBulkDensity(
         const dictionary& opDict,
         const regionPoints& regPoints,
         fieldsDataBase& fieldsDB);
     
     /// destructor 
-    ~PostprocessOperationAvMassVelocity() override = default;
+    ~PostprocessOperationBulkDensity() override = default;
 
     /// add this virtual constructor to the base class
     add_vCtor
     (
         postprocessOperation,
-        PostprocessOperationAvMassVelocity,
+        PostprocessOperationBulkDensity,
         dictionary
     );
 
-}; 
+    bool divideByVolume()const override
+    {
+        return true;
+    }
+
+};
+
+} 
+
+#endif //__PostprocessOperationSolidVolFraction_hpp__
 
 
-} // namespace pFlow::postprocessData
-
-#endif //__PostprocessOperationAvMassVelocity_hpp__

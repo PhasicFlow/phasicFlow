@@ -220,6 +220,8 @@ In addition to the above basic functions, some derived functions are available f
 | Function | Property type | Description | Formula | Required Parameters |
 |----------|---------------|-------------|---------|---------------------|
 |`avMassVelocity` | bulk | Average velocity weighted by mass | $\frac{\sum_{i \in \text{region}} w_i \cdot m_i \cdot v_i}{\sum_{i \in \text{region}} w_i \cdot m_i}$ | - |
+|`solidVolFraction`| bulk| Volume fraction of solid| $\phi = \frac{\sum_{i \in \text{region}} w_i \cdot V_i}{V_{\text{region}}}$ | - |
+|`bulkDensity`| bulk| Bulk density of particles in the region | $\rho_{bulk} = \frac{\sum_{i \in \text{region}} w_i \cdot m_i}{V_{\text{region}}}$ | - |
 
 ### 6.4. Available Fields
 

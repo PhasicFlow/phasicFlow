@@ -224,7 +224,8 @@ public:
         return threshold_;
     }
 
-    /// whether the result is divided by volume of the region 
+    /// whether the result is divided by volume of the region
+    virtual  
     bool divideByVolume()const
     {
         return divideByVolume_();

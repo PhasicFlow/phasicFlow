@@ -41,6 +41,49 @@ PostprocessOperationSum::PostprocessOperationSum
     }
 }
 
+PostprocessOperationSum::PostprocessOperationSum
+(
+    const dictionary &opDict, 
+    const word &fieldName, 
+    const word &phiName, 
+    const word &includeName, 
+    const regionPoints &regPoints, 
+    fieldsDataBase &fieldsDB
+)
+:
+    postprocessOperation(
+        opDict, 
+        fieldName, 
+        phiName, 
+        includeName, 
+        regPoints, 
+        fieldsDB)
+{
+    if( fieldType() == getTypeName<real>() )
+    {
+        processedRegField_ = makeUnique<processedRegFieldType>(
+            regionField(processedFieldName(), regPoints, real(0)));
+    }
+    else if( fieldType() == getTypeName<realx3>() )
+    {
+        processedRegField_ = makeUnique<processedRegFieldType>(
+            regionField(processedFieldName(), regPoints, realx3(0)));
+    }
+    else if( fieldType() == getTypeName<realx4>() )
+    {
+        processedRegField_ = makeUnique<processedRegFieldType>(
+            regionField(processedFieldName(), regPoints, realx4(0)));
+    }
+    else
+    {
+        fatalErrorInFunction<<" in dictionary "<< opDict.globalName()
+            << " field type is not supported for sum operation"
+            << " field type is "<< fieldType()
+            << endl;
+        fatalExit;
+    }
+}
+
 /// Performs weighted sum of field values within each region
 bool PostprocessOperationSum::execute
 (

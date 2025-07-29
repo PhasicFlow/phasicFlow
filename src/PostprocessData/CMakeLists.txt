@@ -25,7 +25,9 @@ set(SourceFiles
     operation/PostprocessOperation/PostprocessOperationSum.cpp
     operation/PostprocessOperation/PostprocessOperationAverage.cpp
     operation/PostprocessOperation/PostprocessOperationAvMassVelocity.cpp
-    
+    operation/PostprocessOperation/PostprocessOperationSolidVolFraction.cpp
+    operation/PostprocessOperation/PostprocessOperationBulkDensity.cpp 
+       
     operation/includeMask/includeMask.cpp
     operation/includeMask/IncludeMasks.cpp
 

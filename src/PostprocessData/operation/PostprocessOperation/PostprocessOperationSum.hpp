@@ -154,6 +154,14 @@ public:
         const regionPoints& regPoints,
         fieldsDataBase& fieldsDB);
     
+    PostprocessOperationSum(
+        const dictionary& opDict,
+        const word& fieldName,
+        const word& phiName,
+        const word& includeName,
+        const regionPoints& regPoints,
+        fieldsDataBase& fieldsDB);
+
     /// destructor 
     ~PostprocessOperationSum() override = default;
 
