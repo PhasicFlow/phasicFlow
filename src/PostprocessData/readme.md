@@ -138,6 +138,41 @@ Regions define where in the domain the postprocessing operations are applied:
 | <td colspan="3">\* Particles selection is done when simulation reaches the time that is specified by `startTime` of the post-process component and this selection remains intact up to the end of simulation. This is very good for particle tracking purposes or when you want to analyze specific particles behavior over time.</td> |
 | <td colspan="3">\** This region creates a rectangular mesh and particles are located into cells according to their center points. When using `GaussianDistribution` as `processMethod`, a larger neighbor radius is considered for each cell and particles inside this neighbor radius are included in the calculations.</td> |
 
+### output format
+
+The output format of the postprocessing results can be controlled by the `precision` and `scientific` parameters:
+
+- `precision`: Number of decimal places for the output (defualt is 6).
+- `scientific`: Whether to use scientific notation for large numbers (options: `yes`, `no`, default is `yes`).
+
+for example, if you want to use 5 decimal places and no scientific notation, you can set:
+
+```C++
+on_single_sphere
+{
+    processMethod    arithmetic;
+
+    processRegion    sphere;
+    
+    sphereInfo
+    {
+        radius  0.01;
+        center  (-0.08 -0.08 0.015);
+    }
+    
+    timeControl default;
+    
+    precision    5; // default is 6
+
+    scientific   no; // default is yes
+
+    operations
+    (
+        // a list of operations should be defined here
+    );
+}
+```
+
 ## 6. Processing Operations for Bulk Properties
 
 Within each processing region of type `bulk`, you can define multiple operations to be performed:
@@ -566,6 +601,7 @@ components
         // are selected. Selection occurs at startTime: particles 
         // that are inside the box at t = startTime. 
         selector           box;
+
         boxInfo
         {
             min            (0 0 0);
@@ -574,6 +610,14 @@ components
         
         // center position of selected particles are processed 
         field              position;
+
+        // precision for output to file (optional: default is 6)
+        precision           8;
+
+        // if the output format of numbers in scientific format 
+        // is required, set scientific to yes, otherwise no
+        // (optional: default is yes)
+        scientific          no;
         
         timeControl        simulationTime;
         // execution starts at 1.0 s
@@ -607,6 +651,14 @@ components
             // cell extension is only effective when using GaussianDistribution as processMethod.
             cellExtension 3; 
         }
+
+        // precision for output to file (optional: default is 6)
+        precision   5;
+
+        // if the output format of numbers in scientific format
+        // is required, set scientific to yes, otherwise no
+        // (optional: default is yes)
+        scientific  no; 
 
         operations
         (
