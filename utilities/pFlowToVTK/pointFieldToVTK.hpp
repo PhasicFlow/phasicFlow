@@ -131,8 +131,8 @@ namespace pFlow::PFtoVTK
 		uint32 numData)
 	{
 
-		if (numData == 0)
-			return true;
+		//if (numData == 0)
+		//	return true;
 
 		if(std::is_same_v<IntType, int> || std::is_same_v<IntType, const int> )
 		{

@@ -225,8 +225,9 @@ bool pFlow::PFtoVTK::addUndstrcuturedGridField(
 
     os << "DATASET UNSTRUCTURED_GRID\n";
     
-    if (numPoints == 0)
-        return true;
+    // this is commented to resolve the problem of no particle in paraview
+    //if (numPoints == 0)
+    //    return true;
 
     os << "POINTS " << numPoints << " float"<<'\n';
     if(bindaryOutput__)
@@ -349,8 +350,8 @@ bool pFlow::PFtoVTK::addRealPointField(
     const real *field,
     uint32 numData)
 {
-    if (numData == 0)
-        return true;
+    //if (numData == 0)
+    //    return true;
 
     os << "FIELD FieldData 1\n"
        << fieldName << " 1 " << numData << " float\n";
@@ -380,8 +381,8 @@ bool pFlow::PFtoVTK::addRealx3PointField(
     const realx3 *field,
     uint32 numData)
 {
-    if (numData == 0)
-        return true;
+    //if (numData == 0)
+    //    return true;
 
     os << "FIELD FieldData 1\n"
        << fieldName << " 3 " << numData << " float\n";
