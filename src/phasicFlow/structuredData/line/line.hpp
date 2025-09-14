@@ -121,7 +121,15 @@ public:
 		real projectNormalizedLength(realx3 p) const 
 		{
 			realx3 w = p - p1_;
-			return dot(w,v21_) / dot(v21_,v21_);
+			real denominator = dot(v21_, v21_);
+			if(fabs(denominator) < verySmallValue)
+			{
+				return 0.0;
+			}
+			else
+			{
+				return dot(w, v21_) / denominator;
+			}
 		}
 
 	//// - IO operation 
