@@ -58,5 +58,5 @@ createInteraction(pFlow::cfModels::limitedNonLinearNormalRolling, pFlow::conveyo
 createInteraction(pFlow::cfModels::nonLimitedNonLinearNormalRolling,pFlow::conveyorBeltMotionGeometry);
 
 // multiRotationAxisMotionGeometry
-//createInteraction(pFlow::cfModels::limitedNonLinearNormalRolling, pFlow::multiRotationAxisMotionGeometry);
-//createInteraction(pFlow::cfModels::nonLimitedNonLinearNormalRolling,pFlow::multiRotationAxisMotionGeometry);
+createInteraction(pFlow::cfModels::limitedNonLinearNormalRolling, pFlow::multiRotationAxisMotionGeometry);
+createInteraction(pFlow::cfModels::nonLimitedNonLinearNormalRolling,pFlow::multiRotationAxisMotionGeometry);
