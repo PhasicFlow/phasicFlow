@@ -50,6 +50,7 @@ public:
 	//// - Constructors 
 		FUNCTION_HD
 		line()
+		: v21_(1, 0, 0), p1_(0, 0, 0)
 		{}
 
 		FUNCTION_HD
@@ -86,6 +87,10 @@ public:
 		void set(const realx3 &lp1, const realx3 &lp2)
 		{
 			v21_ = lp2 - lp1;
+			if(v21_.length() < verySmallValue)
+			{
+				v21_ = realx3(1, 0, 0);
+			}
 			p1_ = lp1;
 		}
 
@@ -121,7 +126,7 @@ public:
 		real projectNormalizedLength(realx3 p) const 
 		{
 			realx3 w = p - p1_;
-			return dot(w,v21_) / dot(v21_,v21_);
+			return dot(w, v21_) / dot(v21_, v21_);
 		}
 
 	//// - IO operation 
