@@ -37,8 +37,9 @@ struct ppInteractionFunctor
 	using ValueType = typename ContactListType::ValueType;
 
 	real dt_;
-
-	ContactForceModel forceModel_;
+    const forceChain* forceChainPtr_ = nullptr;
+	
+    ContactForceModel forceModel_;
 	ContactListType   tobeFilled_;
 
 	deviceViewType1D<real>  		diam_;
@@ -60,7 +61,8 @@ struct ppInteractionFunctor
 		deviceViewType1D<realx3>  		lVel,
 		deviceViewType1D<realx3>  		rVel,
 		deviceViewType1D<realx3>		cForce,
-		deviceViewType1D<realx3> 		cTorque )
+		deviceViewType1D<realx3> 		cTorque,
+       forceChain* fChain = nullptr)
 	:
 		dt_(dt),
 		forceModel_(forceModel),
@@ -71,7 +73,8 @@ struct ppInteractionFunctor
 		lVel_(lVel),
 		rVel_(rVel),
 		cForce_(cForce), // this is converted to an atomic vector 
-		cTorque_(cTorque) // this is converted to an atomic vector 
+		cTorque_(cTorque),// this is converted to an atomic vector 
+        forceChainPtr_(fChain)                   
 	{}
 
 	INLINE_FUNCTION_HD
@@ -116,7 +119,12 @@ struct ppInteractionFunctor
 				history,
 				FCn, FCt
 				);
-
+            
+			if (forceChainPtr_)
+       		{
+    			const_cast<forceChain*>(forceChainPtr_)->addInteraction(i, j, FCn, xi, xj);
+        	}
+			
 			forceModel_.rollingFriction(
 				dt_, i, j,
 				propId_i, propId_j,
