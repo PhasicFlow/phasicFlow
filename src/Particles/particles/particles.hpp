@@ -51,6 +51,9 @@ private:
 	/// contact torque field
 	realx3PointField_D           contactTorque_;
 
+    /// forceChain           
+    forceChain                    forceChain_; 
+
 	/// handling new ids for new particles 
 	uniquePtr<particleIdHandler> idHandler_ = nullptr;
 
@@ -99,6 +102,16 @@ public:
 	explicit particles(systemControl& control, const shape& shapes);
 
 	~particles() override; 
+
+    const forceChain& getForceChain() const 
+    {
+        return forceChain_; 
+    }
+    
+    bool isForceChainActive() const 
+    {
+        return forceChain_.isActive(); 
+    }
 
 	inline const auto& dynPointStruct() const
 	{
@@ -202,6 +215,8 @@ public:
 	{
 		return idHandler_().maxId();
 	}
+
+ 	bool initializeForceChain(const dictionary& modelDict);
 
 	bool         beforeIteration() override;
 
