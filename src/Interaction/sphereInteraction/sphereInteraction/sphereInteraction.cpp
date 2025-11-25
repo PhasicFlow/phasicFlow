@@ -31,7 +31,8 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::createSphereInteraction()
 		rhoD.deviceView(),
 		modelDict );
 
-
+	const_cast<sphereParticles&>(sphParticles_).initializeForceChain(modelDict);
+	
 	uint32 nPrtcl = sphParticles_.size();
 
 	contactSearch_ = contactSearch::create(
@@ -54,6 +55,11 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::sphereSphereInteraction()
 {
 	auto lastItem = ppContactList_().loopCount();
 
+	if (sphParticles_.isForceChainActive()) 
+	{
+	   const_cast<forceChain&>(sphParticles_.getForceChain()).resetPairCounter();
+    }
+	
 	// create the kernel functor 
 	pFlow::sphereInteractionKernels::ppInteractionFunctor 
 		ppInteraction(
@@ -66,7 +72,9 @@ bool pFlow::sphereInteraction<cFM,gMM, cLT>::sphereSphereInteraction()
 			sphParticles_.velocity().deviceViewAll(),
 			sphParticles_.rVelocity().deviceViewAll(),
 			sphParticles_.contactForce().deviceViewAll(),
-			sphParticles_.contactTorque().deviceViewAll()
+			sphParticles_.contactTorque().deviceViewAll(),
+	        sphParticles_.isForceChainActive() ? 
+            const_cast<forceChain*>(&sphParticles_.getForceChain()) : nullptr
 			);
 	
 	Kokkos::parallel_for(
