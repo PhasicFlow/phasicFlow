@@ -54,12 +54,22 @@ pFlow::particles::particles(systemControl& control, const shape& shapes)
       dynPointStruct_,
       zero3
     ),
+    forceChain_(control,dynPointStruct_),
     idHandler_(particleIdHandler::create(dynPointStruct_)),
     baseFieldBoundaryUpdateTimer_("baseFieldBoundaryUpdate",&timers())
 {
 	this->addToSubscriber(dynPointStruct_);
 
 	//idHandler_().initialIdCheck();
+}
+
+bool pFlow::particles::initializeForceChain(const dictionary& modelDict) 
+{
+    forceChain_.initializeFromDict(modelDict);
+
+    forceChain_.activateForceChain(control(),dynPointStruct_);
+
+    return true;
 }
 
 pFlow::particles::~particles()
