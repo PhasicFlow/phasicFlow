@@ -1,0 +1,162 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  particlesDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+setFields
+{
+    /*
+        Default value for fields defined for particles:
+
+        These fields should always be defined for simulations with spherical particles
+    */
+
+    defaultValue 
+    {
+        velocity        realx3 (0 0 0);     // linear velocity (m/s)
+
+        acceleration    realx3 (0 0 0);     // linear acceleration (m/s2)
+
+        rVelocity       realx3 (0 0 0);     // rotational velocity (rad/s)
+
+        shapeName       word  red;     // name of the particle shape 
+    }
+
+    selectors
+    {
+        velocityAssigne
+        {
+            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
+ 
+            stridedRangeInfo
+            {
+                begin                      21;    // begin index of points
+
+                end                        22;    // end index of points 
+
+                stride                     1;    // stride for selector 
+            }
+
+            fieldValue                           // fields that the selector is applied to 
+            {
+                shapeName       word  white;     // name of the particle shape --- assigns the shape "red" to the selected particles
+                velocity        realx3 (-4 0.5 0);   // linear velocity (m/s) --- assigns a velocity of -3 m/s in x direction to the selected particles
+                rVelocity       realx3 (-5 0 0);
+            }
+        }
+        
+
+        shapeAssigne1
+        {
+            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
+ 
+            stridedRangeInfo
+            {
+                begin                      20;    // begin index of points
+
+                end                        21;    // end index of points 
+
+                stride                     1;    // stride for selector 
+            }
+
+            fieldValue                           // fields that the selector is applied to 
+            {
+                shapeName       word  blue;     // name of the particle shape --- assigns the shape "blue" to the selected particles
+            }
+        }
+
+        shapeAssigne2
+        {
+            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
+ 
+            stridedRangeInfo
+            {
+                begin                      19;    // begin index of points
+
+                end                        20;    // end index of points 
+
+                stride                     1;    // stride for selector 
+            }
+
+            fieldValue                           // fields that the selector is applied to 
+            {
+                shapeName       word  green;     // name of the particle shape --- assigns the shape "green" to the selected particles
+            }
+        }
+
+        shapeAssigne3
+        {
+            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
+ 
+            stridedRangeInfo
+            {
+                begin                      18;    // begin index of points
+
+                end                        19;    // end index of points 
+
+                stride                     1;    // stride for selector 
+            }
+
+            fieldValue                           // fields that the selector is applied to 
+            {
+                shapeName       word  yellow;     // name of the particle shape --- assigns the shape "yellow" to the selected particles
+            }
+        }
+
+                shapeAssigne4
+        {
+            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
+ 
+            stridedRangeInfo
+            {
+                begin                      17;    // begin index of points
+
+                end                        18;    // end index of points 
+
+                stride                     1;    // stride for selector 
+            }
+
+            fieldValue                           // fields that the selector is applied to 
+            {
+                shapeName       word  brown;     // name of the particle shape --- assigns the shape "brown" to the selected particles
+            }
+        }
+
+        shapeAssigne5
+        {
+            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
+ 
+            stridedRangeInfo
+            {
+                begin                      16;    // begin index of points
+
+                end                        17;    // end index of points 
+
+                stride                     1;    // stride for selector 
+            }
+
+            fieldValue                           // fields that the selector is applied to 
+            {
+                shapeName       word  pink;     // name of the particle shape --- assigns the shape "brown" to the selected particles
+            }
+        }
+    }
+}
+
+positionParticles                                // positions particles 
+{
+    method        file;                       // other options: random and empty
+    
+    fileInfo
+    {       
+        name    position.csv;                     
+
+        commaSeparated Yes;                  
+    }
+
+    regionType    domain;                   
+}
