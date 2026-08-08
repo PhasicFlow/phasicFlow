@@ -1,0 +1,20 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  geometryDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+motionModel     stationary;                    // motion model can be rotatingAxis or stationary or vibrating
+
+
+surfaces
+{
+    snooker
+    {
+        type           stlWall;      
+        file           "snooker.stl";              // STL file name of the wall
+        material       prop1;                      // material name of the wall
+    }
+}
