@@ -25,34 +25,26 @@ namespace pFlow
 namespace thermalSphereParticlesKernels
 {
 
-// ========================================================================= //
-// Section 1: Execution Policy Definition
-// Schedule<Static> is used for optimal load balancing on uniform particle 
+// Schedule<Static> is used for optimal load balancing on uniform particle
 // arrays
-// ========================================================================= //
-
 using policy = Kokkos::RangePolicy<
     pFlow::DefaultExecutionSpace, 
     Kokkos::Schedule<Kokkos::Static>, 
     Kokkos::IndexType<pFlow::uint32>>;
 
-// ========================================================================= //
-// Section 2: Property Initialization Kernel
-// ========================================================================= //
-
 void initThermalProperties(
     const pFlagTypeDevice&          m, 
     const deviceViewType1D<uint32>& idx, 
-    deviceViewType1D<real>          Cp, 
-    deviceViewType1D<real>          K, 
-    deviceViewType1D<real>          emissivity, 
-    deviceViewType1D<real>          E0,
-    deviceViewType1D<real>          nu,
     const deviceViewType1D<real>&   sCp, 
     const deviceViewType1D<real>&   sK, 
     const deviceViewType1D<real>&   sEps,
     const deviceViewType1D<real>&   sE0,
-    const deviceViewType1D<real>&   sNu)
+    const deviceViewType1D<real>&   sNu,
+    deviceViewType1D<real>          Cp, 
+    deviceViewType1D<real>          K, 
+    deviceViewType1D<real>          emissivity, 
+    deviceViewType1D<real>          E0,
+    deviceViewType1D<real>          nu)
 { 
     auto r = m.activeRange(); 
     
@@ -77,10 +69,6 @@ void initThermalProperties(
     
     Kokkos::fence(); 
 }
-
-// ========================================================================= //
-// Section 3: Energy Equation Kernel
-// ========================================================================= //
 
 void calcFluidParticleHeatTransfer(
     const pFlagTypeDevice&          m, 
@@ -110,27 +98,16 @@ void calcFluidParticleHeatTransfer(
                 
                 // Thermal Inertia = Mass [kg] * Specific Heat Capacity 
                 // [J/(kg.K)] = [J/K]
-                real thermalInertia = ms[i] * Cp[i];
-                
                 // Protection against division by zero (Thermal Inertia Guard)
-                if (thermalInertia > 1e-12)
-                {
-                    TR[i] = (Q_conv[i] + Q_rad[i] + Q_pp[i] + Q_pfp[i]) / 
-                        thermalInertia; 
-                }
-                else
-                {
-                    TR[i] = 0.0;
-                }
+                real thermalInertia = max(ms[i] * Cp[i], real(1e-12));
+                
+                TR[i] = (Q_conv[i] + Q_rad[i] + Q_pp[i] + Q_pfp[i]) / 
+                    thermalInertia;
             } 
         }); 
     
     Kokkos::fence(); 
 }
-
-// ========================================================================= //
-// Section 4: Time Integration Kernel
-// ========================================================================= //
 
 void integrateTemperature(
     const pFlagTypeDevice&          m, 
@@ -165,6 +142,3 @@ void integrateTemperature(
 
 } // thermalSphereParticlesKernels
 } // pFlow
-
-
-

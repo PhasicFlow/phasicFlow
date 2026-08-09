@@ -27,10 +27,6 @@ namespace pFlow
 
 //----------------------------- protected methods -----------------------------
 
-// ========================================================================= //
-// Section 1: Memory Management
-// ========================================================================= //
-
 void thermalSphereParticles::checkHostMemory()
 {
     sphereFluidParticles::checkHostMemory();
@@ -67,10 +63,6 @@ void thermalSphereParticles::checkHostMemory()
 
 //----------------------------- constructors ----------------------------------
 
-// ========================================================================= //
-// Section 2: Constructor & Initialization
-// ========================================================================= //
-
 thermalSphereParticles::thermalSphereParticles(
     systemControl&              control,
     const sphereShape&          shpShape,
@@ -106,56 +98,56 @@ thermalSphereParticles::thermalSphereParticles(
         objectFile(
             "heatSourceConv", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     heatSourceRad_(
         objectFile(
             "heatSourceRad", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     heatSourceCondPP_(
         objectFile(
             "heatSourceCondPP", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     heatSourcePFP_(
         objectFile(
             "heatSourcePFP", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     emissivity_(
         objectFile(
             "emissivity", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     radSumTemp_(
         objectFile(
             "radSumTemp", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     radNumPrt_(
         objectFile(
             "radNumPrt", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0u),
     E0_(
@@ -186,16 +178,16 @@ thermalSphereParticles::thermalSphereParticles(
         objectFile(
             "fluidKappa", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     fluidAlpha_(
         objectFile(
             "fluidAlpha", 
             "",
-            objectFile::READ_ALWAYS,
-            objectFile::WRITE_ALWAYS),
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
     heatTransferTimer_("heatTransfer", &this->timers()),
@@ -250,23 +242,19 @@ bool thermalSphereParticles::initializeThermalParticles()
     thermalSphereParticlesKernels::initThermalProperties(
         activeMask,
         shapeIndex().deviceViewAll(),
-        Cp_.deviceViewAll(),
-        conductivity_.deviceViewAll(),
-        emissivity_.deviceViewAll(),
-        E0_.deviceViewAll(),
-        nu_.deviceViewAll(),
         d_Cp,
         d_K,
         d_Eps,
         d_E0,
-        d_Nu);
+        d_Nu,
+        Cp_.deviceViewAll(),
+        conductivity_.deviceViewAll(),
+        emissivity_.deviceViewAll(),
+        E0_.deviceViewAll(),
+        nu_.deviceViewAll());
 
     return true;
 }
-
-// ========================================================================= //
-// Section 3: Core Iteration Logic
-// ========================================================================= //
 
 bool thermalSphereParticles::beforeIteration()
 {
@@ -329,10 +317,6 @@ bool thermalSphereParticles::iterate()
     return true;
 }
 
-// ========================================================================= //
-// Section 4: Particle Insertion
-// ========================================================================= //
-
 bool thermalSphereParticles::insertParticles(
     const realx3Vector&         pos,
     const wordVector&           names,
@@ -382,10 +366,6 @@ bool thermalSphereParticles::insertParticles(
 
     return sphereFluidParticles::insertParticles(pos, names, nv);
 }
-
-// ========================================================================= //
-// Section 5: MPI Synchronisation Routines (Host <-> Device)
-// ========================================================================= //
 
 void thermalSphereParticles::heatSourcesHostUpdatedSync()
 {

@@ -71,23 +71,13 @@ bool thermalSphereShape::readThermalProperties()
     }
 
     // ---------------------------------------------------------------------- //
-    // Initial temperature assigned to newly inserted particles.
-    //
-    // A silently-defaulted value here (e.g. a stale 300 K) would mean any
-    // particle inserted through dynamic insertion (rather than read from
-    // an initial positions file) enters the domain at an unintended
-    // temperature with no warning at all, so this must be supplied
-    // explicitly rather than falling back to a built-in default.
+    // Initial temperature assigned to newly inserted particles. Defaults to
+    // ambient temperature (298 K); the case can override it via the
+    // optional 'insertionTemperature' entry.
     // ---------------------------------------------------------------------- //
-    if (!properties().containsDataEntry("insertionTemperature"))
-    {
-        fatalErrorInFunction
-            << "Missing MANDATORY entry 'insertionTemperature' in the "
-            << "interaction dictionary." << endl;
-        fatalExit;
-    }
-    
-    insertionTemperature_ = properties().getVal<real>("insertionTemperature");
+    insertionTemperature_ = properties().getValOrSet<real>(
+        "insertionTemperature", 
+        real(298));
 
     return true;
 }
@@ -107,10 +97,6 @@ bool thermalSphereShape::writeToDict(dictionary& dict) const
 }
 
 //----------------------------- constructors ----------------------------------
-
-// ========================================================================= //
-// Constructors
-// ========================================================================= //
 
 thermalSphereShape::thermalSphereShape(
     const word&     fileName,
@@ -136,6 +122,3 @@ thermalSphereShape::thermalSphereShape(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-

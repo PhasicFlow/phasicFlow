@@ -47,30 +47,30 @@ namespace thermalSphereParticlesKernels
      * 
      * @param mask       Active particle flag.
      * @param shapeIndex The index linking a particle to its material type.
-     * @param Cp         [OUT] Specific heat capacity array of particles.
-     * @param K          [OUT] Thermal conductivity array of particles.
-     * @param emissivity [OUT] Surface emissivity array of particles.
-     * @param E0         [OUT] Real Young's Modulus array of particles.
-     * @param nu         [OUT] Poisson's Ratio array of particles.
      * @param shapeCp    Dictionary-loaded heat capacities per material type.
      * @param shapeK     Dictionary-loaded conductivities per material type.
      * @param shapeEps   Dictionary-loaded emissivities per material type.
      * @param shapeE0    Dictionary-loaded Real Young's Moduli per material.
      * @param shapeNu    Dictionary-loaded Poisson's Ratios per material type.
+     * @param Cp         [OUT] Specific heat capacity array of particles.
+     * @param K          [OUT] Thermal conductivity array of particles.
+     * @param emissivity [OUT] Surface emissivity array of particles.
+     * @param E0         [OUT] Real Young's Modulus array of particles.
+     * @param nu         [OUT] Poisson's Ratio array of particles.
      */
     void initThermalProperties(
         const pFlagTypeDevice&          mask,
         const deviceViewType1D<uint32>& shapeIndex,
-        deviceViewType1D<real>          Cp,
-        deviceViewType1D<real>          K,
-        deviceViewType1D<real>          emissivity,
-        deviceViewType1D<real>          E0,
-        deviceViewType1D<real>          nu,
         const deviceViewType1D<real>&   shapeCp,
         const deviceViewType1D<real>&   shapeK,
         const deviceViewType1D<real>&   shapeEps,
         const deviceViewType1D<real>&   shapeE0,
-        const deviceViewType1D<real>&   shapeNu);
+        const deviceViewType1D<real>&   shapeNu,
+        deviceViewType1D<real>          Cp,
+        deviceViewType1D<real>          K,
+        deviceViewType1D<real>          emissivity,
+        deviceViewType1D<real>          E0,
+        deviceViewType1D<real>          nu);
     
     /**
      * @brief Evaluates the First Law of Thermodynamics for each particle.
@@ -125,6 +125,3 @@ namespace thermalSphereParticlesKernels
 } // pFlow
 
 #endif // pFlow_thermalSphereParticlesKernels_hpp
-
-
-

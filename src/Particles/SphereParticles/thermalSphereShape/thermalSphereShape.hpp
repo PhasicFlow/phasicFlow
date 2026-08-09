@@ -80,11 +80,10 @@ private:
          * present to sample from, this value is used as the initial 
          * temperature.
          *
-         * Read from the property dictionary key 'insertionTemperature', which
-         * is mandatory: the case file must state this value explicitly rather
-         * than relying on a built-in default.
+         * Defaults to ambient temperature (298 K). The case can override it
+         * via the optional property dictionary key 'insertionTemperature'.
          */
-        real        insertionTemperature_ = real(300);
+        real        insertionTemperature_ = real(298);
 
     //- private methods
 
@@ -128,10 +127,6 @@ public:
 
     //- public methods
 
-        // ================================================================= //
-        // Accessor Methods (Vector Level)
-        // ================================================================= //
-
         inline
         realVector heatCapacities() const
         {
@@ -161,10 +156,6 @@ public:
         {
             return nu_;
         }
-
-        // ================================================================= //
-        // Accessor Methods (Scalar Level for specific shape indices)
-        // ================================================================= //
 
         inline
         real heatCapacity(uint32 i) const
@@ -201,8 +192,8 @@ public:
          *
          * Used by thermalSphereParticles::insertParticles() when the 
          * temperature field is empty (first insertion event) and no existing 
-         * particle can be sampled from. Configured via the mandatory 
-         * 'insertionTemperature' key in the property dictionary.
+         * particle can be sampled from. Defaults to 298 K; configurable via 
+         * the optional 'insertionTemperature' key in the property dictionary.
          */
         inline
         real insertionTemperature() const
@@ -217,6 +208,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalSphereShape_hpp
-
-
-

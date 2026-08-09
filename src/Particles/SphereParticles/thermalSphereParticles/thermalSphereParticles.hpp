@@ -52,54 +52,95 @@ private:
 
     //- private members
 
-        // --- Section 1: Shape Reference ---
-
+        /// Reference to the thermal shape/material database this particle
+        /// set draws its per-material thermal properties from.
         const thermalSphereShape&       thSpheres_;
 
-        // --- Section 2: Device Fields (GPU/Kokkos) ---
-
+        /// Particle temperature [K].
         realPointField_D                temperature_;
+
+        /// Particle specific heat capacity [J/(kg.K)].
         realPointField_D                Cp_;
+
+        /// Particle thermal conductivity [W/(m.K)].
         realPointField_D                conductivity_;
+
+        /// Rate of temperature change dT/dt [K/s], computed each step
+        /// before time integration.
         realPointField_D                temperatureRate_;
 
+        /// Convective heat source from the fluid phase [W].
         realPointField_D                heatSourceConv_;
+
+        /// Radiative heat source from neighbouring particles [W].
         realPointField_D                heatSourceRad_;
+
+        /// Particle-particle contact conduction heat source, Q_pp [W].
         realPointField_D                heatSourceCondPP_;
+
+        /// Particle-fluid-particle sub-grid heat source, Q_pfp [W].
         realPointField_D                heatSourcePFP_;
 
+        /// Particle surface emissivity [-].
         realPointField_D                emissivity_;
+
+        /// Sum of neighbouring particle temperatures used by the
+        /// radiation model [K].
         realPointField_D                radSumTemp_;
+
+        /// Number of radiating neighbours found for each particle [-].
         uint32PointField_D              radNumPrt_;
 
+        /// Real (physical) Young's modulus of the particle material [Pa].
         realPointField_D                E0_;
+
+        /// Poisson's ratio of the particle material [-].
         realPointField_D                nu_;
 
+        /// Local fluid thermal conductivity sampled at the particle's
+        /// cell, used by the PFP model [W/(m.K)].
         realPointField_D                fluidKappa_;
+
+        /// Local fluid volume fraction (porosity) sampled at the
+        /// particle's cell, used by the PFP model [-].
         realPointField_D                fluidAlpha_;
 
-        // --- Section 3: Performance Timers ---
-
+        /// Performance timer for the heat-transfer-rate calculation.
         Timer                           heatTransferTimer_;
+
+        /// Performance timer for the temperature time-integration step.
         Timer                           temperatureIntegrationTimer_;
 
-        // --- Section 4: Host Mirror Fields (CPU RAM) ---
-
+        /// Host mirror of temperature_, used for CPU-side coupling/IO.
         hostViewType1D<real>            temperatureHost_;
+
+        /// Host mirror of heatSourceConv_.
         hostViewType1D<real>            heatSourceConvHost_;
+
+        /// Host mirror of heatSourceRad_.
         hostViewType1D<real>            heatSourceRadHost_;
+
+        /// Host mirror of heatSourceCondPP_.
         hostViewType1D<real>            heatSourceCondPPHost_;
+
+        /// Host mirror of emissivity_.
         hostViewType1D<real>            emissivityHost_;
+
+        /// Host mirror of radSumTemp_.
         hostViewType1D<real>            radSumTempHost_;
+
+        /// Host mirror of radNumPrt_.
         hostViewType1D<uint32>          radNumPrtHost_;
+
+        /// Host mirror of fluidKappa_.
         hostViewType1D<real>            fluidKappaHost_;
+
+        /// Host mirror of fluidAlpha_.
         hostViewType1D<real>            fluidAlphaHost_;
 
 protected:
 
     //- protected methods
-
-        // --- Section 5: Memory Management ---
 
         /**
          * @brief Ensures host arrays are sized to match their corresponding
@@ -110,8 +151,6 @@ protected:
 public:
 
     //- constructors
-
-        // --- Section 6: Constructor and Initialization ---
 
         thermalSphereParticles(
             systemControl&              control,
@@ -129,8 +168,6 @@ public:
          */
         bool initializeThermalParticles();
 
-        // --- Section 7: Core Iteration Hooks ---
-
         bool beforeIteration() override;
         
         bool iterate() override;
@@ -139,8 +176,6 @@ public:
             const realx3Vector&         pos,
             const wordVector&           names,
             const anyList&              vars) override;
-
-        // --- Section 8: Device Accessors ---
 
         inline
         const realPointField_D& temperature() const
@@ -292,8 +327,6 @@ public:
             return fluidAlpha_;
         }
 
-        // --- Section 9: Host Accessors ---
-
         inline
         auto& temperatureHost()
         {
@@ -348,8 +381,6 @@ public:
             return fluidAlphaHost_;
         }
 
-        // --- Section 10: Synchronisation Routines (Host <-> Device) ---
-
         void heatSourcesHostUpdatedSync();
         
         void fluidPropertiesHostUpdatedSync();
@@ -363,5 +394,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalSphereParticles_hpp
-
-
