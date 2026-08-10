@@ -14,7 +14,6 @@ setFields
 
         These fields should always be defined for simulations with spherical particles
     */
-
     defaultValue 
     {
         velocity        realx3 (0 0 0);     // linear velocity (m/s)
@@ -28,128 +27,121 @@ setFields
 
     selectors
     {
+        // white ball
         velocityAssigne
         {
-            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
- 
+            selector           stridedRange;      
             stridedRangeInfo
             {
-                begin                      21;    // begin index of points
-
-                end                        22;    // end index of points 
-
-                stride                     1;    // stride for selector 
+                begin         21; // begin index of points
+                end           22; // end index of points 
+                stride        1;  // stride for selector 
             }
-
-            fieldValue                           // fields that the selector is applied to 
+            fieldValue
             {
-                shapeName       word  white;     // name of the particle shape --- assigns the shape "red" to the selected particles
-                velocity        realx3 (-4 0.5 0);   // linear velocity (m/s) --- assigns a velocity of -3 m/s in x direction to the selected particles
-                rVelocity       realx3 (-5 0 0);
+                shapeName       word  white;     // name of the ball
+                velocity        realx3 (-6 0.5 0);   // linear velocity (m/s)
+                rVelocity       realx3 (-1 0 0); // rotational velocity (rad/s)
             }
         }
         
 
         shapeAssigne1
         {
-            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
- 
+            selector           stridedRange;      
             stridedRangeInfo
             {
-                begin                      20;    // begin index of points
-
-                end                        21;    // end index of points 
-
-                stride                     1;    // stride for selector 
+                begin       20;    // begin index of points
+                end         21;    // end index of points 
+                stride      1;    // stride for selector 
             }
-
-            fieldValue                           // fields that the selector is applied to 
+            fieldValue                            
             {
-                shapeName       word  blue;     // name of the particle shape --- assigns the shape "blue" to the selected particles
+                shapeName       word  blue;
             }
         }
 
         shapeAssigne2
         {
-            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
- 
+            selector           stridedRange;      
             stridedRangeInfo
             {
-                begin                      19;    // begin index of points
-
-                end                        20;    // end index of points 
-
-                stride                     1;    // stride for selector 
+                begin        19;    // begin index of points
+                end          20;    // end index of points 
+                stride       1;    // stride for selector 
             }
 
-            fieldValue                           // fields that the selector is applied to 
+            fieldValue                            
             {
-                shapeName       word  green;     // name of the particle shape --- assigns the shape "green" to the selected particles
+                shapeName word  green;
             }
         }
 
         shapeAssigne3
         {
-            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
- 
+            selector           stridedRange;      
             stridedRangeInfo
             {
-                begin                      18;    // begin index of points
-
-                end                        19;    // end index of points 
-
-                stride                     1;    // stride for selector 
+                begin          18;    // begin index of points
+                end            19;    // end index of points 
+                stride         1;    // stride for selector 
             }
-
-            fieldValue                           // fields that the selector is applied to 
+            fieldValue                            
             {
-                shapeName       word  yellow;     // name of the particle shape --- assigns the shape "yellow" to the selected particles
+                shapeName       word  yellow;     
             }
         }
 
-                shapeAssigne4
+        shapeAssigne4
         {
-            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
- 
+            selector           stridedRange;      
             stridedRangeInfo
             {
-                begin                      17;    // begin index of points
-
-                end                        18;    // end index of points 
-
-                stride                     1;    // stride for selector 
+                begin          17;    // begin index of points
+                end            18;    // end index of points 
+                stride          1;    // stride for selector 
             }
-
-            fieldValue                           // fields that the selector is applied to 
+            fieldValue                            
             {
-                shapeName       word  brown;     // name of the particle shape --- assigns the shape "brown" to the selected particles
+                shapeName       word  brown;
             }
         }
 
         shapeAssigne5
         {
-            selector           stridedRange;     // other options: box, cylinder, sphere, randomPoints 
- 
+            selector           stridedRange;      
             stridedRangeInfo
             {
-                begin                      16;    // begin index of points
-
-                end                        17;    // end index of points 
-
-                stride                     1;    // stride for selector 
+                begin           16;    // begin index of points
+                end             17;    // end index of points 
+                stride          1;    // stride for selector 
             }
-
-            fieldValue                           // fields that the selector is applied to 
+            fieldValue                            
             {
-                shapeName       word  pink;     // name of the particle shape --- assigns the shape "brown" to the selected particles
+                shapeName       word  pink;     
+            }
+        }
+
+        shapeAssigne6
+        {
+            selector           stridedRange;      
+            stridedRangeInfo
+            {
+                begin           15;    // begin index of points
+                end             16;    // end index of points 
+                stride          1;    // stride for selector 
+            }
+            fieldValue                            
+            {
+                shapeName       word  black;
             }
         }
     }
 }
 
-positionParticles                                // positions particles 
+positionParticles 
 {
-    method        file;                       // other options: random and empty
+    method        file;                       
     
     fileInfo
     {       

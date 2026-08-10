@@ -44,6 +44,6 @@ model
 
    mu       (0.3);                               // dynamic friction 
 
-   mur      (0.1);                               // rolling friction     
+   mur      (0.01);                               // rolling friction     
 }
 

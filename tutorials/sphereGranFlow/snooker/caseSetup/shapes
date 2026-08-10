@@ -6,8 +6,8 @@ objectName 	sphereDict;
 objectType 	sphereShape;
 fileFormat  ASCII;
 /*---------------------------------------------------------------------------*/
-names 	      (red black blue brown green pink yellow white); 	     // names of shapes 
+names 	      (red black yellow blue green pink brown white); 	 // names of shapes 
 
-diameters     (0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05);	                 // diameter of shapes 
+diameters     (0.05 0.05001 0.05002 0.05003 0.05004 0.05005 0.05006 0.05007)  // diameter of shapes 
 
-materials     (prop1 prop1 prop1 prop1 prop1 prop1 prop1 prop1);	                 // material names for shapes 
+materials     (prop1 prop1 prop1 prop1 prop1 prop1 prop1 prop1);	          // material names for shapes 
