@@ -21,7 +21,7 @@ Licence:
 #ifndef pFlow_thermalSphereParticles_hpp
 #define pFlow_thermalSphereParticles_hpp
 
-#include "sphereFluidParticles.hpp"
+#include "sphereParticles.hpp"
 #include "thermalSphereShape.hpp"
 
 namespace pFlow
@@ -32,15 +32,22 @@ namespace pFlow
  * spherical particles on the GPU.
  *
  * @details
- * Extends sphereFluidParticles by introducing device (Kokkos) memory for:
+ * Extends sphereParticles (mechanical only, no fluid-momentum coupling)
+ * by introducing device (Kokkos) memory for:
  * - Temperatures and integration rates (Explicit Euler).
  * - Thermodynamic properties (heat capacities, conductivities, emissivities).
  * - Multi-mode heat sources (Convection, Radiation, Conduction, PFP).
- * - Host (CPU) mirror arrays used for MPI and OpenFOAM coupling synchronization.
+ * - Host (CPU) mirror arrays used for MPI and OpenFOAM coupling
+ *   synchronization.
+ *
+ * Used for standalone thermal DEM (no CFD mesh, e.g. heatSphereGranFlow),
+ * where fluid-momentum coupling (drag/lift) is neither needed nor
+ * available. For a CFD-DEM coupled particle set that needs both thermal
+ * state and fluid-momentum coupling, see thermalSphereFluidParticles.
  */
 class thermalSphereParticles
 :
-    public sphereFluidParticles
+    public sphereParticles
 {
 public:
 
@@ -147,6 +154,15 @@ protected:
          * device arrays and initializes newly allocated memory slots.
          */
         void checkHostMemory();
+
+        /**
+         * @brief Dispatches the heat-transfer-rate kernel and the
+         * temperature time-integration kernel. Extracted out of iterate()
+         * so thermalSphereFluidParticles can reuse the identical thermal
+         * dispatch after its own (fluid-force-aware) mechanical step,
+         * without duplicating the kernel calls themselves.
+         */
+        void iterateThermal();
 
 public:
 

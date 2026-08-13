@@ -73,17 +73,14 @@ private:
         /// (dimensionless).
         realVector  nu_;
 
-        /**
-         * @brief Initial temperature [K] assigned to newly inserted particles.
-         *
-         * When a batch of particles is inserted and no existing particles are
-         * present to sample from, this value is used as the initial 
-         * temperature.
-         *
-         * Defaults to ambient temperature (298 K). The case can override it
-         * via the optional property dictionary key 'insertionTemperature'.
-         */
-        real        insertionTemperature_ = real(298);
+        /// @brief Ambient fluid thermal conductivity [W/(m.K)], copied
+        /// from thermalProperty for the standalone (no-CFD-mesh) PFP
+        /// fallback. See thermalProperty::ambientFluidKappa_.
+        real        ambientFluidKappa_ = real(0);
+
+        /// @brief Ambient fluid volume fraction (porosity) [-], same
+        /// purpose as ambientFluidKappa_.
+        real        ambientFluidAlpha_ = real(0);
 
     //- private methods
 
@@ -187,18 +184,20 @@ public:
             return nu_[i];
         }
 
-        /**
-         * @brief Initial temperature for newly inserted particles [K].
-         *
-         * Used by thermalSphereParticles::insertParticles() when the 
-         * temperature field is empty (first insertion event) and no existing 
-         * particle can be sampled from. Defaults to 298 K; configurable via 
-         * the optional 'insertionTemperature' key in the property dictionary.
-         */
+        /// @brief Ambient fluid thermal conductivity [W/(m.K)] for the
+        /// standalone-mode PFP fallback (see thermalProperty).
         inline
-        real insertionTemperature() const
+        real ambientFluidKappa() const
         {
-            return insertionTemperature_;
+            return ambientFluidKappa_;
+        }
+
+        /// @brief Ambient fluid volume fraction [-] for the
+        /// standalone-mode PFP fallback (see thermalProperty).
+        inline
+        real ambientFluidAlpha() const
+        {
+            return ambientFluidAlpha_;
         }
 
         add_vCtor(shape, thermalSphereShape, word);

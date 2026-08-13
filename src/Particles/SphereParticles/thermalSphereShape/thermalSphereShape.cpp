@@ -71,13 +71,12 @@ bool thermalSphereShape::readThermalProperties()
     }
 
     // ---------------------------------------------------------------------- //
-    // Initial temperature assigned to newly inserted particles. Defaults to
-    // ambient temperature (298 K); the case can override it via the
-    // optional 'insertionTemperature' entry.
+    // Ambient fluid properties for the standalone-mode PFP fallback.
+    // Optional at the dictionary level (see thermalProperty); both
+    // default to 0 there when the case does not configure them.
     // ---------------------------------------------------------------------- //
-    insertionTemperature_ = properties().getValOrSet<real>(
-        "insertionTemperature", 
-        real(298));
+    ambientFluidKappa_ = tProps->ambientFluidKappa();
+    ambientFluidAlpha_ = tProps->ambientFluidAlpha();
 
     return true;
 }

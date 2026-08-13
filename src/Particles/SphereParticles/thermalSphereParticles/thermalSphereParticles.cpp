@@ -29,8 +29,6 @@ namespace pFlow
 
 void thermalSphereParticles::checkHostMemory()
 {
-    sphereFluidParticles::checkHostMemory();
-
     if (temperature_.size() != temperatureHost_.size())
     {
         size_t oldSize = temperatureHost_.size();
@@ -68,7 +66,7 @@ thermalSphereParticles::thermalSphereParticles(
     const sphereShape&          shpShape,
     const thermalSphereShape&   thShpShape)
 :
-    sphereFluidParticles(control, shpShape),
+    sphereParticles(control, shpShape),
     thSpheres_(thShpShape),
     temperature_(
         objectFile(
@@ -253,12 +251,20 @@ bool thermalSphereParticles::initializeThermalParticles()
         E0_.deviceViewAll(),
         nu_.deviceViewAll());
 
+    // Ambient fluid properties for the PFP model when no CFD mesh is
+    // present to sample fluidKappa_/fluidAlpha_ from (standalone DEM
+    // solvers). Harmless when CFD coupling is active: the coupled
+    // solver overwrites both fields from the real mesh on its first
+    // data exchange, before any thermal kernel uses them.
+    fluidKappa_.fill(thSpheres_.ambientFluidKappa());
+    fluidAlpha_.fill(thSpheres_.ambientFluidAlpha());
+
     return true;
 }
 
 bool thermalSphereParticles::beforeIteration()
 {
-    sphereFluidParticles::beforeIteration();
+    sphereParticles::beforeIteration();
     checkHostMemory();
 
     if (heatSourceConvHost_.size() == heatSourceConv_.deviceView().size())
@@ -281,11 +287,18 @@ bool thermalSphereParticles::beforeIteration()
 
 bool thermalSphereParticles::iterate()
 {
-    if (!sphereFluidParticles::iterate())
+    if (!sphereParticles::iterate())
     {
         return false;
     }
 
+    iterateThermal();
+
+    return true;
+}
+
+void thermalSphereParticles::iterateThermal()
+{
     auto mask = dynPointStruct().activePointsMaskDevice();
 
     heatTransferTimer_.start();
@@ -313,8 +326,6 @@ bool thermalSphereParticles::iterate()
         temperatureRate_.deviceViewAll());
 
     temperatureIntegrationTimer_.end();
-
-    return true;
 }
 
 bool thermalSphereParticles::insertParticles(
@@ -334,6 +345,15 @@ bool thermalSphereParticles::insertParticles(
     realVector alphaV   ("fluidAlpha");
     realVector pfpV     ("heatSourcePFP");
 
+    // Placeholder ambient temperature for newly inserted particles.
+    // insertionTemperature was removed from thermalSphereShape (it mixed
+    // an insertion-event concern into a per-material properties class).
+    // The proper fix is a per-insertion-event temperature read from the
+    // particle-insertion mechanism itself (sphereInsertion); until that
+    // exists, all dynamically inserted particles start at this fixed
+    // ambient value.
+    constexpr real ambientInsertionTemperature = real(298);
+
     for (const auto& name : names)
     {
         uint32 i;
@@ -345,12 +365,13 @@ bool thermalSphereParticles::insertParticles(
             e0V .push_back(thSpheres_.realYoungsModulus(i));
             nuV .push_back(thSpheres_.poissonRatio(i));
 
-            kappaV.push_back(0.0);
-            alphaV.push_back(0.0);
+            // Same ambient PFP fallback as initializeThermalParticles();
+            // overwritten immediately by the coupled solver if one exists.
+            kappaV.push_back(thSpheres_.ambientFluidKappa());
+            alphaV.push_back(thSpheres_.ambientFluidAlpha());
             pfpV  .push_back(0.0);
 
-            // Fetch insertion temperature directly from properties
-            tV.push_back(thSpheres_.insertionTemperature());
+            tV.push_back(ambientInsertionTemperature);
         }
     }
 
@@ -364,7 +385,7 @@ bool thermalSphereParticles::insertParticles(
     nv.emplaceBack(fluidAlpha_.name()    + "Vector", std::move(alphaV));
     nv.emplaceBack(heatSourcePFP_.name() + "Vector", std::move(pfpV));
 
-    return sphereFluidParticles::insertParticles(pos, names, nv);
+    return sphereParticles::insertParticles(pos, names, nv);
 }
 
 void thermalSphereParticles::heatSourcesHostUpdatedSync()
