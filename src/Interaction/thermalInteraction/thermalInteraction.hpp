@@ -72,7 +72,28 @@ private:
             /// @brief Toggles sub-grid fluid bridge heat transfer (PFP).
             bool                            enablePFP_ = false;
 
-        // --- Section 3: Performance & Tracking ---
+        // --- Section 3: Radiation Neighbourhood Output ---
+        // Plain Kokkos views, not registered PointFields: particles_
+        // is a const reference, so a PointField (needing the
+        // protected, non-const dynPointStruct()) cannot be registered
+        // here. Sized explicitly via ensureRadiationMemory().
+
+            /// Sum of neighbouring particle temperatures per particle,
+            /// used by the linearised radiation model in
+            /// sphereHeatTransfer (CFD side) [K].
+            deviceViewType1D<real>          radSumTemp_;
+
+            /// Number of radiating neighbours found for each particle [-].
+            deviceViewType1D<uint32>        radNumPrt_;
+
+            /// Host mirror of radSumTemp_, used for CPU-side coupling
+            /// with the CFD solver.
+            hostViewType1D<real>            radSumTempHost_;
+
+            /// Host mirror of radNumPrt_.
+            hostViewType1D<uint32>          radNumPrtHost_;
+
+        // --- Section 4: Performance & Tracking ---
 
             uint32                          stepCounter_ = 0;
             
@@ -88,6 +109,14 @@ private:
             /// (thermalInteractionKernels::calcThermalInteractions),
             /// isolated from the neighbor search above it.
             Timer                           thermalKernelTimer_;
+
+    //- private methods
+
+        /**
+         * @brief Sizes radSumTemp_/radNumPrt_ to the current particle
+         * count. See the Section 3 comment above for why.
+         */
+        void ensureRadiationMemory();
 
 public:
 
@@ -105,7 +134,7 @@ public:
 
     //- public methods
 
-        // --- Section 4: Public Interface ---
+        // --- Section 5: Public Interface ---
 
         /**
          * @brief Checks if radiation physics is actively executing.
@@ -121,6 +150,25 @@ public:
          * @brief Executes the neighbor-search and thermodynamic kernels.
          */
         void iterate();
+
+        inline
+        auto& radSumTempHost()
+        {
+            return radSumTempHost_;
+        }
+
+        inline
+        auto& radNumPrtHost()
+        {
+            return radNumPrtHost_;
+        }
+
+        /**
+         * @brief Copies radSumTemp_/radNumPrt_ to their host mirrors.
+         * Called automatically at the end of iterate(); safe to call
+         * again from outside since it is idempotent.
+         */
+        void radiationDataHostUpdatedSync();
 
 }; // thermalInteraction
 

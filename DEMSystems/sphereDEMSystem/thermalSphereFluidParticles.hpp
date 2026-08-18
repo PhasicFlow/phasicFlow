@@ -28,34 +28,12 @@ namespace pFlow
 {
 
 /**
- * @brief Thermal sphere particles that also carry fluid-momentum
- * coupling (drag/lift force and torque from a CFD mesh).
- *
- * @details
- * Inheritance: particles <- sphereParticles <- thermalSphereParticles
- * <- thermalSphereFluidParticles (linear, per confirmed design).
- *
- * This class deliberately does NOT inherit from sphereFluidParticles.
- * sphereFluidParticles : public sphereParticles is a non-virtual,
- * single-inheritance relationship in a file this project does not
- * permit editing, so it cannot be made virtual. Combining it with
- * thermalSphereParticles (which already carries sphereParticles once)
- * via multiple inheritance would create two independent sphereParticles
- * sub-objects -- in particular two independent dynPointStruct_
- * instances that would silently fall out of sync. The only correct,
- * compiling option under that constraint is single inheritance from
- * thermalSphereParticles, with fluidForce_/fluidTorque_ (and their
- * host mirrors, accessors, and sync methods) duplicated directly here
- * rather than inherited. The mechanical acceleration *kernel*
- * (sphereFluidParticlesKernels::acceleration) is a free function and
- * is reused as-is, not duplicated -- only the few lines that dispatch
- * to it are repeated. Likewise, the thermal kernels are reused via the
- * genuinely-inherited thermalSphereParticles::iterateThermal(), not
- * duplicated.
- *
- * Used wherever both thermal state and fluid-momentum coupling are
- * needed: the CFD-DEM coupled thermal solver (via thermalSphereDEMSystem),
- * and, via multiReactiveSphereParticles, the reactive solvers.
+ * @brief Thermal sphere particles with fluid-momentum coupling and
+ * CFD-exchanged data (heat sources, temperature, emissivity, ambient
+ * fluid properties). Does not inherit sphereFluidParticles: that
+ * would create two independent dynPointStruct_ instances (see
+ * thermalSphereParticles for the shared base). The mechanical
+ * acceleration kernel is reused, not duplicated.
  */
 class thermalSphereFluidParticles
 :
@@ -71,6 +49,8 @@ private:
 
     //- private members
 
+        // --- Fluid-momentum coupling (mechanical) ---
+
         /// Force exerted by the fluid phase on each particle [N].
         realx3PointField_D              fluidForce_;
 
@@ -84,19 +64,43 @@ private:
         /// Host mirror of fluidTorque_.
         hostViewType1D<realx3>          fluidTorqueHost_;
 
+        // --- Fluid-momentum coupling (thermal) ---
+        // Neither is written by any DEM-side kernel; both come only
+        // from the CFD push, same as fluidForce_/fluidTorque_.
+
+        /// Convective heat source from the fluid phase [W].
+        realPointField_D                heatSourceConv_;
+
+        /// Radiative heat source from neighbouring particles [W].
+        realPointField_D                heatSourceRad_;
+
+        // --- Host mirrors: CPU-side exchange with the CFD solver ---
+
+        /// Host mirror of temperature() (inherited).
+        hostViewType1D<real>            temperatureHost_;
+
+        /// Host mirror of heatSourceConv_.
+        hostViewType1D<real>            heatSourceConvHost_;
+
+        /// Host mirror of heatSourceRad_.
+        hostViewType1D<real>            heatSourceRadHost_;
+
+        /// Host mirror of emissivity() (inherited).
+        hostViewType1D<real>            emissivityHost_;
+
+        /// Host mirror of fluidKappa() (inherited).
+        hostViewType1D<real>            fluidKappaHost_;
+
+        /// Host mirror of fluidAlpha() (inherited).
+        hostViewType1D<real>            fluidAlphaHost_;
+
 protected:
 
     //- protected methods
 
         /**
-         * @brief Ensures fluidForce_/fluidTorque_ host mirrors are sized
-         * to match their device counterparts. Also invokes the genuinely
-         * inherited thermalSphereParticles::checkHostMemory() (calling
-         * it here, rather than relying on it being called elsewhere, is
-         * necessary because checkHostMemory() is not virtual -- an
-         * unqualified call from thermalSphereParticles::beforeIteration()
-         * always resolves to thermalSphereParticles::checkHostMemory(),
-         * never this override).
+         * @brief Sizes every host mirror to match its device field.
+         * New slots are populated by a full sync call, not here.
          */
         void checkHostMemory();
 
@@ -106,7 +110,6 @@ public:
 
         thermalSphereFluidParticles(
             systemControl&              control,
-            const sphereShape&          shpShape,
             const thermalSphereShape&   thShpShape);
 
         ~thermalSphereFluidParticles() override = default;
@@ -116,6 +119,8 @@ public:
         bool beforeIteration() override;
 
         bool iterate() override;
+
+        // --- Fluid-momentum coupling accessors ---
 
         inline
         const realx3PointField_D& fluidForce() const
@@ -157,8 +162,89 @@ public:
 
         void fluidTorqueHostUpdatedSync();
 
+        // --- Thermal fluid-coupling accessors ---
+
+        inline
+        const realPointField_D& heatSourceConv() const
+        {
+            return heatSourceConv_;
+        }
+
+        inline
+        realPointField_D& heatSourceConv()
+        {
+            return heatSourceConv_;
+        }
+
+        inline
+        const realPointField_D& heatSourceRad() const
+        {
+            return heatSourceRad_;
+        }
+
+        inline
+        realPointField_D& heatSourceRad()
+        {
+            return heatSourceRad_;
+        }
+
+        inline
+        auto& temperatureHost()
+        {
+            return temperatureHost_;
+        }
+
+        inline
+        auto& heatSourceConvHost()
+        {
+            return heatSourceConvHost_;
+        }
+
+        inline
+        auto& heatSourceRadHost()
+        {
+            return heatSourceRadHost_;
+        }
+
+        inline
+        auto& emissivityHost()
+        {
+            return emissivityHost_;
+        }
+
+        inline
+        auto& fluidKappaHost()
+        {
+            return fluidKappaHost_;
+        }
+
+        inline
+        auto& fluidAlphaHost()
+        {
+            return fluidAlphaHost_;
+        }
+
+        /// @brief Pushes heatSourceConvHost_/heatSourceRadHost_ (just
+        /// written by the CFD coupling layer) to their device fields.
+        void heatSourcesHostUpdatedSync();
+
+        /// @brief Pushes fluidKappaHost_/fluidAlphaHost_ (just written
+        /// by the CFD coupling layer) to their device fields.
+        void fluidPropertiesHostUpdatedSync();
+
+        /// @brief Pulls temperature() (just updated by the DEM kernel)
+        /// to temperatureHost_, for the CFD coupling layer to read.
+        void temperatureHostUpdatedSync();
+
+        /// @brief Pulls emissivity() to emissivityHost_ (a material
+        /// constant, so this only ever needs calling once).
+        void emissivityHostUpdatedSync();
+
 }; // thermalSphereFluidParticles
 
 } // pFlow
 
 #endif // pFlow_thermalSphereFluidParticles_hpp
+
+
+

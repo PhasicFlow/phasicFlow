@@ -109,7 +109,6 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
     // initialization call is needed here.
     auto* tp = new thermalSphereFluidParticles(
         Control(),
-        *combinedShape,
         *combinedShape);
     thermalParticles_ = tp; 
 
@@ -178,6 +177,14 @@ bool thermalSphereDEMSystem::beforeIteration()
         rVelocityHost_ =
             std::as_const(*thermalParticles_).rVelocity().hostView();
     }
+
+    // Explicit re-sync so CFD reads the temperature from the last
+    // completed DEM sub-step. The per-substep sync inside the DEM loop
+    // (thermalSphereFluidParticles::beforeIteration(), called every
+    // substep) covers every substep except the very last one -- nothing
+    // runs after it, inside the loop, to sync its result -- so this
+    // call covers exactly that gap.
+    thermalParticles_->temperatureHostUpdatedSync();
 
     return true;
 }
@@ -256,13 +263,16 @@ span<real> thermalSphereDEMSystem::emissivity()
 
 span<real> thermalSphereDEMSystem::radSumTemp()
 {
-    auto& hVec = thermalParticles_->radSumTempHost();
+    // Moved from thermalParticles_ to thermalInteraction_: that is the
+    // class that actually calculates radiation now (see
+    // thermalInteraction.hpp's Section 3 doc comment).
+    auto& hVec = thermalInteraction_->radSumTempHost();
     return span<real>(hVec.data(), hVec.size());
 }
 
 span<uint32> thermalSphereDEMSystem::radNumPrt()
 {
-    auto& hVec = thermalParticles_->radNumPrtHost();
+    auto& hVec = thermalInteraction_->radNumPrtHost();
     return span<uint32>(hVec.data(), hVec.size());
 }
 

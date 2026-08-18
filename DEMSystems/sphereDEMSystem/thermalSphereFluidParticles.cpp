@@ -19,6 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalSphereFluidParticles.hpp"
+#include "thermalSphereParticlesKernels.hpp"
 
 namespace pFlow
 {
@@ -27,28 +28,20 @@ namespace pFlow
 
 void thermalSphereFluidParticles::checkHostMemory()
 {
-    // Genuine base call: thermalSphereParticles::checkHostMemory() is not
-    // virtual, so it will NOT be reached automatically through
-    // thermalSphereParticles::beforeIteration()'s own internal
-    // (statically-bound) call to checkHostMemory() -- it must be invoked
-    // explicitly here too. Calling it twice per iteration (once from the
-    // inherited beforeIteration(), once from this override) is harmless:
-    // it is a guarded size check, a no-op once already sized correctly.
-    thermalSphereParticles::checkHostMemory();
-
     if (fluidForce_.size() != fluidForceHost_.size())
     {
-        size_t oldSize = fluidForceHost_.size();
-        size_t newSize = fluidForce_.size();
+        resizeNoInit(fluidForceHost_,  fluidForce_.size());
+        resizeNoInit(fluidTorqueHost_, fluidTorque_.size());
+    }
 
-        resizeNoInit(fluidForceHost_,  newSize);
-        resizeNoInit(fluidTorqueHost_, newSize);
-
-        for (size_t i = oldSize; i < newSize; ++i)
-        {
-            fluidForceHost_[i]  = fluidForce_.field()[i];
-            fluidTorqueHost_[i] = fluidTorque_.field()[i];
-        }
+    if (temperature().size() != temperatureHost_.size())
+    {
+        resizeNoInit(temperatureHost_,    temperature().size());
+        resizeNoInit(heatSourceConvHost_, heatSourceConv_.size());
+        resizeNoInit(heatSourceRadHost_,  heatSourceRad_.size());
+        resizeNoInit(emissivityHost_,     emissivity().size());
+        resizeNoInit(fluidKappaHost_,     fluidKappa().size());
+        resizeNoInit(fluidAlphaHost_,     fluidAlpha().size());
     }
 }
 
@@ -56,10 +49,9 @@ void thermalSphereFluidParticles::checkHostMemory()
 
 thermalSphereFluidParticles::thermalSphereFluidParticles(
     systemControl&              control,
-    const sphereShape&          shpShape,
     const thermalSphereShape&   thShpShape)
 :
-    thermalSphereParticles(control, shpShape, thShpShape),
+    thermalSphereParticles(control, thShpShape),
     fluidForce_(
         objectFile(
             "fluidForce",
@@ -75,16 +67,40 @@ thermalSphereFluidParticles::thermalSphereFluidParticles(
             objectFile::READ_IF_PRESENT,
             objectFile::WRITE_ALWAYS),
         dynPointStruct(),
-        realx3(0, 0, 0))
+        realx3(0, 0, 0)),
+    heatSourceConv_(
+        objectFile(
+            "heatSourceConv", 
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(), 
+        0.0),
+    heatSourceRad_(
+        objectFile(
+            "heatSourceRad", 
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(), 
+        0.0)
 {
     checkHostMemory();
+
+    // Initial host sync so temperature/emissivity are valid immediately
+    // after construction. temperature is re-synced every CFD exchange
+    // afterwards (see thermalSphereDEMSystem::beforeIteration());
+    // emissivity never changes again after this, so this is its only
+    // sync ever.
+    temperatureHostUpdatedSync();
+    emissivityHostUpdatedSync();
 }
 
 //---------------------------- public methods ---------------------------------
 
 bool thermalSphereFluidParticles::beforeIteration()
 {
-    thermalSphereParticles::beforeIteration();
+    sphereParticles::beforeIteration();
     checkHostMemory();
 
     return true;
@@ -122,8 +138,40 @@ bool thermalSphereFluidParticles::iterate()
 
     intCorrectTimer().end();
 
-    // Thermal: reuse the genuinely-inherited kernel dispatch, unchanged.
-    iterateThermal();
+    // Thermal (fluid-coupled): dispatches the fluid-coupled kernel
+    // overload directly. Only the kernel itself is shared with the
+    // standalone tier (thermalSphereParticles::iterateThermal()); this
+    // dispatch wrapper is specific to the fluid-coupled tier, so it
+    // lives here rather than on the base.
+    auto mask = dynPointStruct().activePointsMaskDevice();
+
+    temperatureRate().field().fill(0.0);
+
+    heatTransferTimer().start();
+
+    thermalSphereParticlesKernels::calcFluidParticleHeatTransfer(
+        mask,
+        diameter().deviceViewAll(),
+        mass().deviceViewAll(),
+        Cp().deviceViewAll(),
+        temperature().deviceViewAll(),
+        heatSourceConv_.deviceViewAll(),
+        heatSourceRad_.deviceViewAll(),
+        heatSourceCondPP().deviceViewAll(),
+        heatSourcePFP().deviceViewAll(),
+        temperatureRate().deviceViewAll());
+
+    heatTransferTimer().end();
+
+    temperatureIntegrationTimer().start();
+
+    thermalSphereParticlesKernels::integrateTemperature(
+        mask,
+        control().time().dt(),
+        temperature().deviceViewAll(),
+        temperatureRate().deviceViewAll());
+
+    temperatureIntegrationTimer().end();
 
     return true;
 }
@@ -148,6 +196,61 @@ void thermalSphereFluidParticles::fluidTorqueHostUpdatedSync()
     }
 }
 
+void thermalSphereFluidParticles::heatSourcesHostUpdatedSync()
+{
+    checkHostMemory();
+
+    bool sizeConv = 
+        (heatSourceConvHost_.size() == heatSourceConv_.deviceView().size());
+    bool sizeRad = 
+        (heatSourceRadHost_.size() == heatSourceRad_.deviceView().size());
+
+    if (sizeConv && sizeRad)
+    {
+        Kokkos::deep_copy(heatSourceConv_.deviceView(), heatSourceConvHost_);
+        Kokkos::deep_copy(heatSourceRad_.deviceView(),  heatSourceRadHost_);
+    }
+}
+
+void thermalSphereFluidParticles::fluidPropertiesHostUpdatedSync()
+{
+    checkHostMemory();
+
+    bool sizeKappa = 
+        (fluidKappaHost_.size() == fluidKappa().deviceView().size());
+    bool sizeAlpha = 
+        (fluidAlphaHost_.size() == fluidAlpha().deviceView().size());
+
+    if (sizeKappa && sizeAlpha)
+    {
+        Kokkos::deep_copy(fluidKappa().deviceView(), fluidKappaHost_);
+        Kokkos::deep_copy(fluidAlpha().deviceView(), fluidAlphaHost_);
+    }
+}
+
+void thermalSphereFluidParticles::temperatureHostUpdatedSync()
+{
+    checkHostMemory();
+
+    if (temperatureHost_.size() == temperature().deviceView().size())
+    {
+        Kokkos::deep_copy(temperatureHost_, temperature().deviceView());
+    }
+}
+
+void thermalSphereFluidParticles::emissivityHostUpdatedSync()
+{
+    checkHostMemory();
+
+    if (emissivityHost_.size() == emissivity().deviceView().size())
+    {
+        Kokkos::deep_copy(emissivityHost_, emissivity().deviceView());
+    }
+}
+
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
+
+
+

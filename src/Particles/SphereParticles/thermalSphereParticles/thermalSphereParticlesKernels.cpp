@@ -76,8 +76,6 @@ void calcFluidParticleHeatTransfer(
     const deviceViewType1D<real>&   ms, 
     const deviceViewType1D<real>&   Cp, 
     const deviceViewType1D<real>&   T, 
-    const deviceViewType1D<real>&   Q_conv, 
-    const deviceViewType1D<real>&   Q_rad,
     const deviceViewType1D<real>&   Q_pp,
     const deviceViewType1D<real>&   Q_pfp,
     deviceViewType1D<real>          TR)
@@ -93,6 +91,46 @@ void calcFluidParticleHeatTransfer(
             { 
                 // --------------------------------------------------------- //
                 // Particle Energy Equation (Lumped Capacitance Model)
+                // Standalone tier: no CFD mesh, so no Q_conv/Q_rad term.
+                // m * Cp * dT/dt = Q_pp + Q_pfp
+                // --------------------------------------------------------- //
+                
+                // Thermal Inertia = Mass [kg] * Specific Heat Capacity 
+                // [J/(kg.K)] = [J/K]
+                // Protection against division by zero (Thermal Inertia Guard)
+                real thermalInertia = max(ms[i] * Cp[i], real(1e-12));
+                
+                TR[i] = (Q_pp[i] + Q_pfp[i]) / thermalInertia;
+            } 
+        }); 
+    
+    Kokkos::fence(); 
+}
+
+void calcFluidParticleHeatTransfer(
+    const pFlagTypeDevice&          m, 
+    const deviceViewType1D<real>&   d, 
+    const deviceViewType1D<real>&   ms, 
+    const deviceViewType1D<real>&   Cp, 
+    const deviceViewType1D<real>&   T, 
+    const deviceViewType1D<real>&   Q_conv, 
+    const deviceViewType1D<real>&   Q_rad,
+    const deviceViewType1D<real>&   Q_pp,
+    const deviceViewType1D<real>&   Q_pfp,
+    deviceViewType1D<real>          TR)
+{ 
+    auto r = m.activeRange(); 
+    
+    Kokkos::parallel_for(
+        "calcHeatTransferRateCoupled", 
+        policy(r.start(), r.end()), 
+        KOKKOS_LAMBDA(uint32 i)
+        { 
+            if (m(i))
+            { 
+                // --------------------------------------------------------- //
+                // Particle Energy Equation (Lumped Capacitance Model)
+                // Fluid-coupled tier.
                 // m * Cp * dT/dt = Q_conv + Q_rad + Q_pp + Q_pfp
                 // --------------------------------------------------------- //
                 

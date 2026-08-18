@@ -26,7 +26,7 @@ namespace pFlow
 
 //----------------------------- private methods -------------------------------
 
-bool thermalSphereShape::readThermalProperties()
+bool thermalSphereShape::readThermalProperties(const thermalProperty& prop)
 {
     // Retrieve the array that links each shape index to a specific material ID
     auto pids = shapePropertyIds();
@@ -38,27 +38,11 @@ bool thermalSphereShape::readThermalProperties()
     E0_         = realVector("realYoungsModuli", numShapes());
     nu_         = realVector("poissonRatios",    numShapes());
 
-    // ---------------------------------------------------------------------- //
-    // Direct access to the already-constructed base property object, which
-    // holds all dictionary values parsed from the case file. No separate
-    // fileDictionary instantiation or hardcoded path is needed here.
-    // ---------------------------------------------------------------------- //
-    const thermalProperty* tProps = 
-        dynamic_cast<const thermalProperty*>(&properties());
-        
-    if (!tProps)
-    {
-        fatalErrorInFunction 
-            << "Provided property object is not a thermalProperty!" 
-            << endl;
-        fatalExit;
-    }
-
-    const realVector& allCp  = tProps->heatCapacities();
-    const realVector& allK   = tProps->heatConductivities();
-    const realVector& allEps = tProps->emissivities();
-    const realVector& allE0  = tProps->realYoungsModuli();
-    const realVector& allNu  = tProps->poissonRatios();
+    const realVector& allCp  = prop.heatCapacities();
+    const realVector& allK   = prop.heatConductivities();
+    const realVector& allEps = prop.emissivities();
+    const realVector& allE0  = prop.realYoungsModuli();
+    const realVector& allNu  = prop.poissonRatios();
 
     // Map the global material properties to the specific local shapes
     for (uint32 i = 0; i < numShapes(); ++i)
@@ -75,43 +59,29 @@ bool thermalSphereShape::readThermalProperties()
     // Optional at the dictionary level (see thermalProperty); both
     // default to 0 there when the case does not configure them.
     // ---------------------------------------------------------------------- //
-    ambientFluidKappa_ = tProps->ambientFluidKappa();
-    ambientFluidAlpha_ = tProps->ambientFluidAlpha();
+    ambientFluidKappa_ = prop.ambientFluidKappa();
+    ambientFluidAlpha_ = prop.ambientFluidAlpha();
 
     return true;
-}
-
-//---------------------------- protected methods ------------------------------
-
-bool thermalSphereShape::writeToDict(dictionary& dict) const
-{
-    bool isWritten = sphereShape::writeToDict(dict)
-        && dict.add("heatCapacities",     cp_)
-        && dict.add("heatConductivities", k_)
-        && dict.add("emissivities",       emissivity_)
-        && dict.add("realYoungsModuli",   E0_)
-        && dict.add("poissonRatios",      nu_);
-
-    return isWritten;
 }
 
 //----------------------------- constructors ----------------------------------
 
 thermalSphereShape::thermalSphereShape(
-    const word&     fileName,
-    repository*     owner,
-    const property& prop)
+    const word&             fileName,
+    repository*             owner,
+    const thermalProperty&  prop)
 :
     sphereShape(fileName, owner, prop)
 {
-    readThermalProperties();
+    readThermalProperties(prop);
 }
 
 thermalSphereShape::thermalSphereShape(
-    const word&     shapeType,
-    const word&     fileName,
-    repository*     owner,
-    const property& prop)
+    const word&             shapeType,
+    const word&             fileName,
+    repository*             owner,
+    const thermalProperty&  prop)
 :
     thermalSphereShape(fileName, owner, prop)
 {
@@ -121,3 +91,6 @@ thermalSphereShape::thermalSphereShape(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
+
+
+

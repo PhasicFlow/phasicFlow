@@ -26,18 +26,11 @@ Licence:
 namespace pFlow
 {
 
+class thermalProperty;
+
 /**
  * @class thermalSphereShape
- * @brief Maps global material thermal properties to specific discrete 
- *        particle shapes.
- *
- * @details
- * While `thermalProperty` acts as a global database of material properties
- * (e.g., "Steel", "Glass"), this class assigns those macroscopic properties
- * to specific geometric entities (e.g., "Small_Steel", "Large_Glass").
- * It inherits from the mechanical `sphereShape` and adds thermodynamic data 
- * arrays (Cp, k, emissivity, E0, nu) tailored to the number of defined shapes 
- * in the simulation.
+ * @brief Binds per-material thermal properties to discrete particle shapes.
  */
 class thermalSphereShape
 :
@@ -86,70 +79,58 @@ private:
 
         /**
          * @brief Populates the shape-specific thermal arrays.
-         * @details Reads the master material properties from the simulation 
-         * dictionary and maps them to the local shape arrays using the 
-         * shape-to-material ID index.
+         * @details Reads the master material properties directly from
+         * the given thermalProperty object and maps them to the local
+         * shape arrays using the shape-to-material ID index.
          * @return True if mapping is successful.
          */
-        bool readThermalProperties();
-
-protected:
-
-    //- protected methods
-
-        /**
-         * @brief Serializes both mechanical and thermal shape data to a 
-         * dictionary.
-         * @param dict The target phasicFlow dictionary object.
-         * @return True if all data is successfully written.
-         */
-        bool writeToDict(dictionary& dict) const override;
+        bool readThermalProperties(const thermalProperty& prop);
 
 public:
 
     //- constructors
 
         thermalSphereShape(
-            const word&     fileName,
-            repository*     owner,
-            const property& prop);
+            const word&             fileName,
+            repository*             owner,
+            const thermalProperty&  prop);
 
         thermalSphereShape(
-            const word&     shapeType,
-            const word&     fileName,
-            repository*     owner,
-            const property& prop);
+            const word&             shapeType,
+            const word&             fileName,
+            repository*             owner,
+            const thermalProperty&  prop);
 
         ~thermalSphereShape() override = default;
 
     //- public methods
 
         inline
-        realVector heatCapacities() const
+        const realVector& heatCapacities() const
         {
             return cp_;
         }
         
         inline
-        realVector heatConductivities() const
+        const realVector& heatConductivities() const
         {
             return k_;
         }
         
         inline
-        realVector emissivities() const
+        const realVector& emissivities() const
         {
             return emissivity_;
         }
         
         inline
-        realVector realYoungsModuli() const
+        const realVector& realYoungsModuli() const
         {
             return E0_;
         }
         
         inline
-        realVector poissonRatios() const
+        const realVector& poissonRatios() const
         {
             return nu_;
         }
@@ -200,10 +181,12 @@ public:
             return ambientFluidAlpha_;
         }
 
-        add_vCtor(shape, thermalSphereShape, word);
-
 }; // thermalSphereShape
 
 } // pFlow
 
 #endif // pFlow_thermalSphereShape_hpp
+
+
+
+

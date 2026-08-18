@@ -24,6 +24,25 @@ Licence:
 namespace pFlow 
 {
 
+//----------------------------- protected methods ------------------------------
+
+void thermalInteraction::ensureRadiationMemory()
+{
+    // Plain views, not a registered PointField (see the class-level
+    // doc comment on Section 3 in the header for why): sizing must be
+    // checked explicitly rather than relying on an automatic
+    // insert/delete hook.
+    size_t newSize = particles_.size();
+
+    if (radSumTemp_.extent(0) != newSize)
+    {
+        Kokkos::resize(radSumTemp_, newSize);
+        Kokkos::resize(radNumPrt_,  newSize);
+        resizeNoInit(radSumTempHost_, newSize);
+        resizeNoInit(radNumPrtHost_,  newSize);
+    }
+}
+
 //----------------------------- constructors ----------------------------------
 
 thermalInteraction::thermalInteraction(
@@ -194,12 +213,23 @@ thermalInteraction::thermalInteraction(
         particles_.dynPointStruct().activePointsMaskDevice(),
         false,  
         true);
+
+    // Size radSumTemp_/radNumPrt_ (device + host) now, so they are
+    // correctly sized as soon as this object exists, rather than
+    // leaving them at their default zero size until the first
+    // iterate() call.
+    ensureRadiationMemory();
 }
 
 //---------------------------- public methods ---------------------------------
 
 void thermalInteraction::iterate()
 {
+    // Checked unconditionally, every call, regardless of the
+    // enable-flags early return below: keeps radSumTemp_/radNumPrt_
+    // correctly sized irrespective of which thermal mechanisms are on.
+    ensureRadiationMemory();
+
     if (!enableRadiation_ && !enableConduction_ && !enablePFP_)
     {
         return;
@@ -281,19 +311,36 @@ void thermalInteraction::iterate()
         calcPFP,
         particles_.heatSourceCondPP().deviceViewAll(),
         particles_.heatSourcePFP().deviceViewAll(),
-        particles_.radSumTemp().deviceViewAll(),
-        particles_.radNumPrt().deviceViewAll());
+        // radSumTemp_/radNumPrt_ are now this class's own members
+        // (moved from thermalSphereParticles -- see the header's
+        // Section 3 doc comment), not particles_'s.
+        radSumTemp_,
+        radNumPrt_);
 
     thermalKernelTimer_.end();
+
+    // Sync radSumTemp_/radNumPrt_ to host right after computing them,
+    // so the host mirror is never stale. Harmless to call again from
+    // outside afterwards (e.g. at a CFD-exchange boundary) -- see the
+    // method's doc comment.
+    radiationDataHostUpdatedSync();
 
     thermalTimer_.end();
     stepCounter_++;
 }
 
+void thermalInteraction::radiationDataHostUpdatedSync()
+{
+    ensureRadiationMemory();
+
+    if (radSumTempHost_.size() == radSumTemp_.size() &&
+        radNumPrtHost_.size()  == radNumPrt_.size())
+    {
+        Kokkos::deep_copy(radSumTempHost_, radSumTemp_);
+        Kokkos::deep_copy(radNumPrtHost_,  radNumPrt_);
+    }
+}
+
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-
-

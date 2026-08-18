@@ -25,48 +25,13 @@ Licence:
 namespace pFlow
 {
 
-//----------------------------- protected methods -----------------------------
-
-void thermalSphereParticles::checkHostMemory()
-{
-    if (temperature_.size() != temperatureHost_.size())
-    {
-        size_t oldSize = temperatureHost_.size();
-        size_t newSize = temperature_.size();
-
-        resizeNoInit(temperatureHost_,      newSize);
-        resizeNoInit(heatSourceConvHost_,   newSize);
-        resizeNoInit(heatSourceRadHost_,    newSize);
-        resizeNoInit(heatSourceCondPPHost_, newSize);
-        resizeNoInit(emissivityHost_,       newSize);
-        resizeNoInit(radSumTempHost_,       newSize);
-        resizeNoInit(radNumPrtHost_,        newSize);
-        resizeNoInit(fluidKappaHost_,       newSize);
-        resizeNoInit(fluidAlphaHost_,       newSize);
-
-        for (size_t i = oldSize; i < newSize; ++i)
-        {
-            temperatureHost_[i]      = temperature_.field()[i];
-            heatSourceConvHost_[i]   = heatSourceConv_.field()[i];
-            heatSourceRadHost_[i]    = heatSourceRad_.field()[i];
-            heatSourceCondPPHost_[i] = heatSourceCondPP_.field()[i];
-            emissivityHost_[i]       = emissivity_.field()[i];
-            radSumTempHost_[i]       = radSumTemp_.field()[i];
-            radNumPrtHost_[i]        = radNumPrt_.field()[i];
-            fluidKappaHost_[i]       = fluidKappa_.field()[i];
-            fluidAlphaHost_[i]       = fluidAlpha_.field()[i];
-        }
-    }
-}
-
 //----------------------------- constructors ----------------------------------
 
 thermalSphereParticles::thermalSphereParticles(
     systemControl&              control,
-    const sphereShape&          shpShape,
     const thermalSphereShape&   thShpShape)
 :
-    sphereParticles(control, shpShape),
+    sphereParticles(control, thShpShape),
     thSpheres_(thShpShape),
     temperature_(
         objectFile(
@@ -75,7 +40,7 @@ thermalSphereParticles::thermalSphereParticles(
             objectFile::READ_ALWAYS,
             objectFile::WRITE_ALWAYS),
         dynPointStruct(), 
-        0.0),
+        300.0),
     Cp_(
         objectFile(
             "Cp", 
@@ -92,22 +57,6 @@ thermalSphereParticles::thermalSphereParticles(
             objectFile::WRITE_NEVER),
         dynPointStruct(), 
         1.0),
-    heatSourceConv_(
-        objectFile(
-            "heatSourceConv", 
-            "",
-            objectFile::READ_NEVER,
-            objectFile::WRITE_NEVER),
-        dynPointStruct(), 
-        0.0),
-    heatSourceRad_(
-        objectFile(
-            "heatSourceRad", 
-            "",
-            objectFile::READ_NEVER,
-            objectFile::WRITE_NEVER),
-        dynPointStruct(), 
-        0.0),
     heatSourceCondPP_(
         objectFile(
             "heatSourceCondPP", 
@@ -131,23 +80,7 @@ thermalSphereParticles::thermalSphereParticles(
             objectFile::READ_NEVER,
             objectFile::WRITE_NEVER),
         dynPointStruct(), 
-        0.0),
-    radSumTemp_(
-        objectFile(
-            "radSumTemp", 
-            "",
-            objectFile::READ_NEVER,
-            objectFile::WRITE_NEVER),
-        dynPointStruct(), 
-        0.0),
-    radNumPrt_(
-        objectFile(
-            "radNumPrt", 
-            "",
-            objectFile::READ_NEVER,
-            objectFile::WRITE_NEVER),
-        dynPointStruct(), 
-        0u),
+        0.85),
     E0_(
         objectFile(
             "E0", 
@@ -192,10 +125,6 @@ thermalSphereParticles::thermalSphereParticles(
     temperatureIntegrationTimer_("tempInt", &this->timers())
 {
     initializeThermalParticles();
-    checkHostMemory();
-
-    temperatureHostUpdatedSync();
-    radiationDataHostUpdatedSync();
 }
 
 //---------------------------- public methods ---------------------------------
@@ -262,29 +191,6 @@ bool thermalSphereParticles::initializeThermalParticles()
     return true;
 }
 
-bool thermalSphereParticles::beforeIteration()
-{
-    sphereParticles::beforeIteration();
-    checkHostMemory();
-
-    if (heatSourceConvHost_.size() == heatSourceConv_.deviceView().size())
-    {
-        Kokkos::deep_copy(heatSourceConv_.deviceView(), heatSourceConvHost_);
-    }
-
-    if (heatSourceRadHost_.size() == heatSourceRad_.deviceView().size())
-    {
-        Kokkos::deep_copy(heatSourceRad_.deviceView(), heatSourceRadHost_);
-    }
-
-    temperatureRate_.field().fill(0.0);
-
-    temperatureHostUpdatedSync();
-    radiationDataHostUpdatedSync();
-
-    return true;
-}
-
 bool thermalSphereParticles::iterate()
 {
     if (!sphereParticles::iterate())
@@ -301,6 +207,11 @@ void thermalSphereParticles::iterateThermal()
 {
     auto mask = dynPointStruct().activePointsMaskDevice();
 
+    // Reset the rate scratch buffer before recomputation. Folded in
+    // here rather than a separate beforeIteration() override -- see
+    // this method's declaration in the header for why.
+    temperatureRate_.field().fill(0.0);
+
     heatTransferTimer_.start();
 
     thermalSphereParticlesKernels::calcFluidParticleHeatTransfer(
@@ -309,8 +220,6 @@ void thermalSphereParticles::iterateThermal()
         mass().deviceViewAll(),
         Cp().deviceViewAll(),
         temperature().deviceViewAll(),
-        heatSourceConv_.deviceViewAll(),
-        heatSourceRad_.deviceViewAll(),
         heatSourceCondPP_.deviceViewAll(),
         heatSourcePFP_.deviceViewAll(),
         temperatureRate_.deviceViewAll());
@@ -340,19 +249,12 @@ bool thermalSphereParticles::insertParticles(
     realVector epsV     ("emissivity");
     realVector e0V      ("E0");
     realVector nuV      ("nu");
-    realVector tV       ("T");
     realVector kappaV   ("fluidKappa");
     realVector alphaV   ("fluidAlpha");
-    realVector pfpV     ("heatSourcePFP");
 
-    // Placeholder ambient temperature for newly inserted particles.
-    // insertionTemperature was removed from thermalSphereShape (it mixed
-    // an insertion-event concern into a per-material properties class).
-    // The proper fix is a per-insertion-event temperature read from the
-    // particle-insertion mechanism itself (sphereInsertion); until that
-    // exists, all dynamically inserted particles start at this fixed
-    // ambient value.
-    constexpr real ambientInsertionTemperature = real(298);
+    // temperature and heatSourcePFP are not seeded here: both default
+    // correctly for newly inserted particles via their own field
+    // default value (temperature_ = 300, heatSourcePFP_ = 0).
 
     for (const auto& name : names)
     {
@@ -369,9 +271,6 @@ bool thermalSphereParticles::insertParticles(
             // overwritten immediately by the coupled solver if one exists.
             kappaV.push_back(thSpheres_.ambientFluidKappa());
             alphaV.push_back(thSpheres_.ambientFluidAlpha());
-            pfpV  .push_back(0.0);
-
-            tV.push_back(ambientInsertionTemperature);
         }
     }
 
@@ -380,86 +279,15 @@ bool thermalSphereParticles::insertParticles(
     nv.emplaceBack(emissivity_.name()    + "Vector", std::move(epsV));
     nv.emplaceBack(E0_.name()            + "Vector", std::move(e0V));
     nv.emplaceBack(nu_.name()            + "Vector", std::move(nuV));
-    nv.emplaceBack(temperature_.name()   + "Vector", std::move(tV));
     nv.emplaceBack(fluidKappa_.name()    + "Vector", std::move(kappaV));
     nv.emplaceBack(fluidAlpha_.name()    + "Vector", std::move(alphaV));
-    nv.emplaceBack(heatSourcePFP_.name() + "Vector", std::move(pfpV));
 
     return sphereParticles::insertParticles(pos, names, nv);
-}
-
-void thermalSphereParticles::heatSourcesHostUpdatedSync()
-{
-    checkHostMemory();
-
-    bool sizeConv = 
-        (heatSourceConvHost_.size() == heatSourceConv_.deviceView().size());
-    bool sizeRad = 
-        (heatSourceRadHost_.size() == heatSourceRad_.deviceView().size());
-    bool sizeCond = 
-        (heatSourceCondPPHost_.size() == heatSourceCondPP_.deviceView().size());
-
-    if (sizeConv && sizeRad && sizeCond)
-    {
-        Kokkos::deep_copy(
-            heatSourceConv_.deviceView(),   
-            heatSourceConvHost_);
-            
-        Kokkos::deep_copy(
-            heatSourceRad_.deviceView(),    
-            heatSourceRadHost_);
-            
-        Kokkos::deep_copy(
-            heatSourceCondPP_.deviceView(), 
-            heatSourceCondPPHost_);
-    }
-}
-
-void thermalSphereParticles::fluidPropertiesHostUpdatedSync()
-{
-    checkHostMemory();
-
-    bool sizeKappa = 
-        (fluidKappaHost_.size() == fluidKappa_.deviceView().size());
-    bool sizeAlpha = 
-        (fluidAlphaHost_.size() == fluidAlpha_.deviceView().size());
-
-    if (sizeKappa && sizeAlpha)
-    {
-        Kokkos::deep_copy(fluidKappa_.deviceView(), fluidKappaHost_);
-        Kokkos::deep_copy(fluidAlpha_.deviceView(), fluidAlphaHost_);
-    }
-}
-
-void thermalSphereParticles::temperatureHostUpdatedSync()
-{
-    checkHostMemory();
-
-    if (temperatureHost_.size() == temperature_.deviceView().size())
-    {
-        Kokkos::deep_copy(temperatureHost_, temperature_.deviceView());
-    }
-}
-
-void thermalSphereParticles::radiationDataHostUpdatedSync()
-{
-    checkHostMemory();
-
-    bool sizeEps = 
-        (emissivityHost_.size() == emissivity_.deviceView().size());
-    bool sizeSum = 
-        (radSumTempHost_.size() == radSumTemp_.deviceView().size());
-    bool sizeNum = 
-        (radNumPrtHost_.size()  == radNumPrt_.deviceView().size());
-
-    if (sizeEps && sizeSum && sizeNum)
-    {
-        Kokkos::deep_copy(emissivityHost_, emissivity_.deviceView());
-        Kokkos::deep_copy(radSumTempHost_, radSumTemp_.deviceView());
-        Kokkos::deep_copy(radNumPrtHost_,  radNumPrt_.deviceView());
-    }
 }
 
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
+
+
+

@@ -73,23 +73,48 @@ namespace thermalSphereParticlesKernels
         deviceViewType1D<real>          nu);
     
     /**
-     * @brief Evaluates the First Law of Thermodynamics for each particle.
+     * @brief Evaluates the First Law of Thermodynamics for each particle,
+     * for the standalone (no CFD mesh) tier: no convective (Q_conv) or
+     * radiative (Q_rad) source, since neither exists without a fluid
+     * mesh to compute them from -- see the fluid-coupled overload below
+     * for the tier that has both.
      * 
      * @details 
      * Uses the Lumped Capacitance Model to calculate the temporal 
      * temperature derivative: 
-     * dT/dt = (Q_conv + Q_rad + Q_pp + Q_pfp) / (m * Cp)
+     * dT/dt = (Q_pp + Q_pfp) / (m * Cp)
      * 
      * @param mask            Active particle flag.
      * @param diameter        Particle diameter array.
      * @param mass            Particle mass array.
      * @param Cp              Particle specific heat capacity array.
      * @param temperature     Current particle temperature array.
-     * @param Q_conv          Convective heat source array [W].
-     * @param Q_rad           Radiative heat source array [W].
      * @param Q_pp            Collisional heat transfer array [W].
      * @param Q_pfp           Particle-Fluid-Particle sub-grid heat [W].
      * @param temperatureRate [OUT] The resulting rate of temperature change.
+     */
+    void calcFluidParticleHeatTransfer(
+        const pFlagTypeDevice&          mask,
+        const deviceViewType1D<real>&   diameter,
+        const deviceViewType1D<real>&   mass,
+        const deviceViewType1D<real>&   Cp,
+        const deviceViewType1D<real>&   temperature,
+        const deviceViewType1D<real>&   Q_pp,
+        const deviceViewType1D<real>&   Q_pfp,
+        deviceViewType1D<real>          temperatureRate);
+
+    /**
+     * @brief Evaluates the First Law of Thermodynamics for each particle,
+     * for the fluid-coupled tier: adds the convective (Q_conv) and
+     * radiative (Q_rad) sources gathered from the CFD mesh to the two
+     * sources also available in the standalone overload above.
+     *
+     * @details
+     * dT/dt = (Q_conv + Q_rad + Q_pp + Q_pfp) / (m * Cp)
+     *
+     * @param Q_conv Convective heat source array [W].
+     * @param Q_rad  Radiative heat source array [W].
+     * (All other parameters as in the standalone overload above.)
      */
     void calcFluidParticleHeatTransfer(
         const pFlagTypeDevice&          mask,
