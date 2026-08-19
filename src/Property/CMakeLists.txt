@@ -1,6 +1,9 @@
 
 set(SourceFiles 
 property.cpp
+thermalProperty/thermalProperty.cpp
+
+
 )
 
 set(link_libs Kokkos::kokkos phasicFlow)

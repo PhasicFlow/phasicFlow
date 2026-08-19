@@ -13,6 +13,12 @@ SphereParticles/sphereShape/sphereShape.cpp
 SphereParticles/sphereParticles/sphereParticles.cpp
 SphereParticles/sphereParticles/sphereParticlesKernels.cpp
 
+
+SphereParticles/thermalSphereShape/thermalSphereShape.cpp
+SphereParticles/thermalSphereParticles/thermalSphereParticles.cpp
+SphereParticles/thermalSphereParticles/thermalSphereParticlesKernels.cpp
+
+
 GrainParticles/grainShape/grainShape.cpp
 GrainParticles/grainParticles/grainParticles.cpp
 GrainParticles/grainParticles/grainParticlesKernels.cpp
