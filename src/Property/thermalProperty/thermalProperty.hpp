@@ -50,8 +50,6 @@ private:
 
     //- private members
 
-        // --- Section 2: Material Property Arrays ---
-
         realVector          heatCapacities_;
         
         realVector          heatConductivities_;
@@ -62,9 +60,21 @@ private:
         
         realVector          poissonRatios_;
 
-    //- private methods
+        /// @brief Ambient fluid thermal conductivity [W/(m.K)], used as a
+        /// uniform PFP input for particles when no CFD mesh exists to
+        /// sample fluidKappa from (standalone DEM-only solvers). Read
+        /// from the optional 'fluidProperties' sub-dictionary in
+        /// thermoPhysicalInteraction; defaults to 0 (matching the
+        /// pre-existing standalone behaviour where PFP contributes
+        /// nothing) when that sub-dictionary is absent.
+        real                 ambientFluidKappa_ = real(0);
 
-        // --- Section 3: File I/O ---
+        /// @brief Ambient fluid volume fraction (porosity) [-], used as
+        /// a uniform PFP input in standalone mode. Same source and
+        /// default rules as ambientFluidKappa_.
+        real                 ambientFluidAlpha_ = real(0);
+
+    //- private methods
 
         bool readDictionary();
         
@@ -74,16 +84,22 @@ protected:
 
     //- protected members
 
-        // --- Section 1: Internal Path Resolution ---
-
-        /// @brief Safely caches the dictionary directory path.
+        /// @brief Non-owning pointer to the case's directory, used by
+        /// readDictionary() to locate thermoPhysicalInteraction.
+        /// Lifetime requirement: the fileSystem the (fileName, dir)
+        /// constructor is given must outlive this thermalProperty
+        /// object. Currently safe because readDictionary() only runs
+        /// once, from that constructor's body, before p_dir_ could
+        /// ever be read after the referenced object's lifetime ends --
+        /// but this becomes a dangling-pointer risk the moment any
+        /// future code (here or in a derived class, since this member
+        /// is protected) calls readDictionary() again, or otherwise
+        /// dereferences p_dir_, after construction.
         const fileSystem*   p_dir_ = nullptr;
 
 public:
 
     //- constructors
-
-        // --- Section 4: Constructors ---
 
         explicit thermalProperty(
             const word&         fileName,
@@ -108,7 +124,7 @@ public:
 
     //- public methods
 
-        // --- Section 5: Vector Accessor Methods ---
+        //- vector accessors
 
         inline
         const auto& heatCapacities() const
@@ -140,7 +156,7 @@ public:
             return poissonRatios_;
         }
         
-        // --- Section 6: Scalar Accessor Methods ---
+        //- scalar accessors
 
         inline
         real heatCapacity(uint32 i) const
@@ -172,12 +188,26 @@ public:
             return poissonRatios_[i];
         }
 
+        /// @brief Ambient fluid thermal conductivity [W/(m.K)] for the
+        /// standalone-mode PFP fallback. See ambientFluidKappa_.
+        inline
+        real ambientFluidKappa() const
+        {
+            return ambientFluidKappa_;
+        }
+
+        /// @brief Ambient fluid volume fraction [-] for the
+        /// standalone-mode PFP fallback. See ambientFluidAlpha_.
+        inline
+        real ambientFluidAlpha() const
+        {
+            return ambientFluidAlpha_;
+        }
+
 }; // thermalProperty
 
 } // pFlow
 
 #endif // pFlow_thermalProperty_hpp
-
-
 
 

@@ -19,37 +19,25 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalProperty.hpp"
-#include "fileDictionary.hpp"
+#include "dictionary.hpp"
 
 namespace pFlow
 {
 
 //----------------------------- private methods -------------------------------
 
-// ========================================================================= //
-// Section 1: Dictionary I/O
-// ========================================================================= //
-
 bool thermalProperty::readDictionary()
 {
-    uniquePtr<fileDictionary> thermoDictPtr = nullptr;
-
-    // Dynamic path resolution
-    if (p_dir_ != nullptr)
-    {
-        thermoDictPtr = makeUnique<fileDictionary>(
-            "thermoPhysicalInteraction", 
-            *p_dir_);
-    }
-    else
-    {
-        // Safe fallback for legacy code calling the default constructor
-        thermoDictPtr = makeUnique<fileDictionary>(
-            "thermoPhysicalInteraction", 
-            fileSystem("caseSetup"));
-    }
-
-    auto& thermoDict = thermoDictPtr();
+    // thermoPhysicalInteraction is read-only here (never written back,
+    // never registered) -- a plain dictionary is enough, matching the
+    // same read-only secondary-file pattern already used in
+    // thermalInteraction.cpp for this exact file. fileDictionary's
+    // extra IOobject/objectFile machinery isn't needed for this.
+    dictionary thermoDict(
+        "thermoPhysicalInteraction",
+        // Fallback when constructed without a directory: the
+        // (fileName, owner) constructor has none to pass here.
+        p_dir_ != nullptr ? *p_dir_ : fileSystem("caseSetup"));
 
     // Read thermal properties
     heatCapacities_ = 
@@ -60,6 +48,37 @@ bool thermalProperty::readDictionary()
         
     emissivities_ = 
         thermoDict.getVal<realVector>("emissivities");
+
+    // ---------------------------------------------------------------------- //
+    // Ambient fluid properties for the PFP model, used only when no CFD
+    // mesh exists to sample fluidKappa_/fluidAlpha_ from (standalone
+    // DEM-only solvers such as heatSphereGranFlow/multiSpeciesGranFlow).
+    // Coupled CFD-DEM solvers always overwrite the per-particle
+    // fluidKappa_/fluidAlpha_ fields from the real mesh on the very
+    // first data exchange, so reading this block is harmless there too.
+    //
+    // The sub-dictionary itself is optional: if it is absent, both
+    // values default to 0, matching the pre-existing standalone
+    // behaviour where PFP silently contributes nothing. If the case
+    // does add the block, both keys inside it are required -- a
+    // partially-specified ambient environment (only kappa or only
+    // alpha) is far more likely to be a mistake than an intentional
+    // setting, so it is caught immediately rather than silently
+    // defaulting the missing half.
+    // ---------------------------------------------------------------------- //
+    if (thermoDict.containsDictionay("fluidProperties"))
+    {
+        const dictionary& fluidPropDict = 
+            thermoDict.subDict("fluidProperties");
+
+        ambientFluidKappa_ = fluidPropDict.getVal<real>("kappa");
+        ambientFluidAlpha_ = fluidPropDict.getVal<real>("alpha");
+    }
+    else
+    {
+        ambientFluidKappa_ = real(0);
+        ambientFluidAlpha_ = real(0);
+    }
     
     // Read mechanical properties from the base interaction dictionary
     realYoungsModuli_ = 
@@ -108,10 +127,6 @@ bool thermalProperty::writeDictionary()
 }
 
 //----------------------------- constructors ----------------------------------
-
-// ========================================================================= //
-// Section 2: Constructors
-// ========================================================================= //
 
 thermalProperty::thermalProperty(
     const word&         fileName, 
@@ -165,7 +180,5 @@ thermalProperty::thermalProperty(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
 
 
