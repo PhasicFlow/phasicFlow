@@ -52,3 +52,10 @@ void accumulateNeighborTemperature(
 } // pFlow
 
 #endif // pFlow_thermalRadiationKernels_hpp
+
+
+
+
+
+
+
