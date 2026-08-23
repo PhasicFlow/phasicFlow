@@ -29,9 +29,9 @@ namespace pFlow
 void thermalInteraction::ensureRadiationMemory()
 {
     // Plain views, not a registered PointField (see the class-level
-    // doc comment on Section 3 in the header for why): sizing must be
-    // checked explicitly rather than relying on an automatic
-    // insert/delete hook.
+    // doc comment on the "Radiation neighbourhood output" members in
+    // the header for why): sizing must be checked explicitly rather
+    // than relying on an automatic insert/delete hook.
     size_t newSize = particles_.size();
 
     if (radSumTemp_.extent(0) != newSize)
@@ -60,9 +60,7 @@ thermalInteraction::thermalInteraction(
         "thermoPhysicalInteraction", 
         control_.caseSetup().path() + "thermoPhysicalInteraction");
     
-    // ---------------------------------------------------------------------- //
-    // Radiation
-    // ---------------------------------------------------------------------- //
+    //--- radiation -------------------------------------------------------
     if (!thermoDict.containsDataEntry("enableRadiation"))
     {
         fatalErrorInFunction 
@@ -112,9 +110,7 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Collisional Heat Conduction (Q_pp)
-    // ---------------------------------------------------------------------- //
+    //--- collisional heat conduction (Q_pp) -------------------------------
     if (!thermoDict.containsDataEntry("enableConduction"))
     {
         fatalErrorInFunction 
@@ -137,9 +133,7 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Particle-Fluid-Particle (PFP) Sub-grid Heat Transfer
-    // ---------------------------------------------------------------------- //
+    //--- particle-fluid-particle (PFP) sub-grid heat transfer -------------
     if (!thermoDict.containsDataEntry("enablePFP"))
     {
         fatalErrorInFunction 
@@ -162,15 +156,12 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Hertzian simulation-scale Young's modulus.
-    //
+    //--- Hertzian simulation-scale Young's modulus -------------------------
     // Used to compute the mechanical contact radius whenever two particles
     // touch. That contact radius feeds both the collisional conduction
     // rate (Q_pp) and the PFP contact-limit radius r_sij, regardless of
     // which of the two mechanisms triggered the calculation, so it must
     // be supplied whenever either is enabled.
-    // ---------------------------------------------------------------------- //
     if (enableConduction_ || enablePFP_)
     {
         if (thermoDict.containsDataEntry("simYoungsModulus"))
@@ -188,15 +179,39 @@ thermalInteraction::thermalInteraction(
         }
     }
 
-    // ---------------------------------------------------------------------- //
-    // Determine the neighbor search cell size.
-    // ---------------------------------------------------------------------- //
-    real pfpCut    = 3.0 * particles_.getShapes().maxBoundingSphere();
-    real searchCut = radCut_;
-    
-    if (enablePFP_ && pfpCut > searchCut) 
+    //--- neighbor search cell size ------------------------------------------
+    // Must be at least as large as whichever enabled mechanism needs the
+    // longest search radius: mapperNBS's 27-cell sweep around a
+    // particle's own cell only finds every neighbour within a radius R
+    // when cellSize >= R (the particle can sit anywhere in its own
+    // cell, and any neighbour within R of it then falls, at most, one
+    // cell away in each direction -- the standard cell-list
+    // neighbour-search guarantee). Each enabled mechanism contributes
+    // its own required radius via max(), one line each, so a future
+    // fourth mechanism follows the same template instead of relying on
+    // remembering to add a separate branch (conduction's radius was
+    // missing here for exactly that reason until this fix).
+    real searchCut = 0.0;
+
+    if (enableRadiation_)
     {
-        searchCut = pfpCut;
+        searchCut = max(searchCut, radCut_);
+    }
+
+    if (enableConduction_)
+    {
+        // Largest possible contact distance R_i+R_j between any two
+        // particles in the case.
+        searchCut = max(
+            searchCut, 
+            2.0 * particles_.getShapes().maxBoundingSphere());
+    }
+
+    if (enablePFP_)
+    {
+        searchCut = max(
+            searchCut, 
+            3.0 * particles_.getShapes().maxBoundingSphere());
     }
     
     real cellSize = (searchCut > 1e-12) 
@@ -312,8 +327,9 @@ void thermalInteraction::iterate()
         particles_.heatSourceCondPP().deviceViewAll(),
         particles_.heatSourcePFP().deviceViewAll(),
         // radSumTemp_/radNumPrt_ are now this class's own members
-        // (moved from thermalSphereParticles -- see the header's
-        // Section 3 doc comment), not particles_'s.
+        // (moved from thermalSphereParticles -- see the "Radiation
+        // neighbourhood output" comment in the header), not
+        // particles_'s.
         radSumTemp_,
         radNumPrt_);
 
