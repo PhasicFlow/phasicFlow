@@ -27,6 +27,11 @@ grainInteraction/grainInteractionsNonLinearModels.cpp
 grainInteraction/grainInteractionsNonLinearModModels.cpp
 
 
+thermalInteraction/thermalInteraction.cpp
+thermalInteraction/thermalInteractionKernels.cpp
+
+
+
 )
 
 if(pFlow_Build_MPI)

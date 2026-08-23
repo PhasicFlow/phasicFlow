@@ -19,25 +19,15 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalInteractionKernels.hpp"
+#include "thermalRadiationKernels.hpp"
+#include "thermalConductionKernels.hpp"
+#include "thermalPFPKernels.hpp"
 #include <Kokkos_Atomic.hpp>
 
 namespace pFlow
 {
 namespace thermalInteractionKernels
 {
-
-// Gauss-Legendre quadrature abscissae/weights for the PFP flux integral.
-// Kept at file scope (rather than re-built per thread) to reduce
-// per-thread register pressure on the GPU.
-KOKKOS_INLINE_FUNCTION 
-constexpr real t_GL[5] = {
-    -0.9061798459, -0.5384693101, 0.0, 0.5384693101, 0.9061798459
-};
-
-KOKKOS_INLINE_FUNCTION 
-constexpr real w_GL[5] = {
-    0.2369268850,  0.4786286705, 0.5688888889, 0.4786286705, 0.2369268850
-};
 
 // Dynamic scheduling: neighbour counts vary strongly between dense and
 // dilute regions of the particle bed, so static chunking would leave some
@@ -88,8 +78,6 @@ void calcThermalInteractions(
                 real R_i   = 0.5 * diameter[i];
                 real T_i   = temperature[i];
                 
-                real pi = Kokkos::numbers::pi_v<real>;
-                
                 real radCutSq = radCut * radCut;
                 real sumT = 0.0;
                 uint32 count = 0;
@@ -124,22 +112,22 @@ void calcThermalInteractions(
                                         
                                         real distSq = dx*dx + dy*dy + dz*dz;
                                         
-                                        // =====================================
-                                        // 1. Radiation Check (Asymmetric 
-                                        //    execution, all i-j pairs)
-                                        // =====================================
+                                        //--- radiation check (asymmetric
+                                        // execution, all i-j pairs) ------
                                         if (calcRad && distSq <= radCutSq) 
                                         {
-                                            sumT += temperature[j];
-                                            count++;
+                                            thermalRadiationKernels::
+                                                accumulateNeighborTemperature(
+                                                    temperature[j],
+                                                    sumT,
+                                                    count);
                                         }
 
-                                        // =====================================
-                                        // 2. Conduction & PFP Checks (Symmetric
-                                        //    execution: i < j only). Computing 
-                                        //    both forces here halves the 
-                                        //    computational load.
-                                        // =====================================
+                                        //--- conduction & PFP checks
+                                        // (symmetric execution: i < j
+                                        // only). Computing both forces
+                                        // here halves the computational
+                                        // load. -------------------------
                                         if ((calcCond || calcPFP) && i < j)
                                         {
                                             real R_j = 0.5 * diameter[j];
@@ -156,80 +144,17 @@ void calcThermalInteractions(
                                             //          (Eq. 6.159) ---
                                             if (isContact && dist > 1e-12)
                                             {
-                                                real R_eff = 
-                                                    (R_i * R_j) / (R_i + R_j);
-
-                                                // Inverse-modulus quantities 
-                                                // for the simulation's Young's 
-                                                // modulus and the material's 
-                                                // real Young's modulus.
-                                                real term_E_sim = 
-                                                    (1.0 - nu[i]*nu[i]) / 
-                                                    simYoungsModulus + 
-                                                    (1.0 - nu[j]*nu[j]) / 
-                                                    simYoungsModulus;
-                                                    
-                                                real term_E_real = 
-                                                    (1.0 - nu[i]*nu[i]) / E0[i]+ 
-                                                    (1.0 - nu[j]*nu[j]) / E0[j];
-
-                                                // Geometric contact radius from
-                                                // the normal overlap of the two
-                                                // spheres: a^2 = R_eff*overlap,
-                                                // the standard Hertzian 
-                                                // relationship between 
-                                                // interpenetration and 
-                                                // contact-patch radius. Purely 
-                                                // geometric - no relative 
-                                                // velocity or contact-time 
-                                                // model involved, matching the 
-                                                // static/sustained contact 
-                                                // regime of Eq. 6.159.
-                                                real overlap = 
-                                                    (R_i + R_j) - dist;
-                                                real rc_geom = 
-                                                    sqrt(R_eff * overlap);
-
-                                                // Contact radius correction 
-                                                // (Eq. 6.166 & 6.167): the 
-                                                // overlap above was produced 
-                                                // using the simulation's 
-                                                // Young's modulus, so rc_geom 
-                                                // overstates the contact radius
-                                                // a real, stiffer material 
-                                                // would give for the same 
-                                                // geometric interpenetration. 
-                                                // c = (E_sim/E_real)^0.2; in 
-                                                // terms of the inverse-modulus 
-                                                // quantities above (term_E=1/E)
-                                                // this is:
-                                                // c=(term_E_real/term_E_sim)^.2
-                                                real c_corr = 
-                                                    pow(term_E_real / 
-                                                        term_E_sim, 
-                                                        0.2);
-                                                        
-                                                rc_real = c_corr * rc_geom;
-
-                                                if (calcCond)
-                                                {
-                                                    real tempDiff = 
-                                                        temperature[j] - T_i;
-                                                    real num = 
-                                                        4.0 * rc_real * 
-                                                        tempDiff;
-                                                    real den = 
-                                                        (1.0 / K[i]) + 
-                                                        (1.0 / K[j]);
-                                                    real Q_rate = num / den;
-
-                                                    // Atomic accumulation for 
-                                                    // thread safety
-                                                    Kokkos::atomic_add(
-                                                        &Q_pp[i], Q_rate);
-                                                    Kokkos::atomic_add(
-                                                        &Q_pp[j], -Q_rate);
-                                                }
+                                                rc_real = 
+                                                    thermalConductionKernels::
+                                                        contactConduction(
+                                                            R_i, R_j, dist,
+                                                            nu[i], nu[j],
+                                                            E0[i], E0[j],
+                                                            simYoungsModulus,
+                                                            K[i], K[j],
+                                                            T_i, temperature[j],
+                                                            calcCond,
+                                                            Q_pp, i, j);
                                             }
 
                                             // --- 2.B: Particle-Fluid-Particle 
@@ -237,144 +162,20 @@ void calcThermalInteractions(
                                             //          (Eq. 6.160) ---
                                             if (calcPFP && dist > 1e-12)
                                             {
-                                                real R_star = 0.5 * (R_i + R_j);
-                                                real H = 0.5 * 
-                                                    (dist - R_i - R_j);
-                                                real k_f = 0.5 * 
-                                                    (fluidKappa[i] + 
-                                                     fluidKappa[j]);
+                                                real r_sij = 
+                                                    isContact ? rc_real : 0.0;
 
-                                                // Cut-off rule: Ignored if 
-                                                // H/R* > 0.5
-                                                if (H / R_star <= 0.5 && 
-                                                    k_f > 1e-12)
-                                                {
-                                                    // Eq. 6.164: r_ij 
-                                                    // evaluation based on 
-                                                    // local porosity
-                                                    real r_sij = 
-                                                        isContact ? 
-                                                        rc_real : 0.0;
-                                                        
-                                                    real eps_avg = 0.5 * 
-                                                        (fluidAlpha[i] + 
-                                                         fluidAlpha[j]);
-                                                         
-                                                    real solid_frac = 
-                                                        1.0 - eps_avg;
-                                                        
-                                                    if (solid_frac < 0.01) 
-                                                    {
-                                                        // Clamp to avoid inf
-                                                        solid_frac = 0.01; 
-                                                    }
-                                                    
-                                                    real r_ij = 0.56 * R_star * 
-                                                        pow(solid_frac, 
-                                                            -1.0/3.0);
-                                                    
-                                                    // Eq. 6.162: r_sf (Upper 
-                                                    // limit of integration)
-                                                    real R_H = R_star + 
-                                                        (H > 0.0 ? H : 0.0);
-                                                        
-                                                    real r_sf = (R_star * r_ij)/ 
-                                                        sqrt(r_ij*r_ij + 
-                                                             R_H*R_H);
-
-                                                    if (r_sf > r_sij)
-                                                    {
-                                                        // Loop-free 5-point 
-                                                        // Gauss-Legendre 
-                                                        // Quadrature
-                                                        real A = r_sij;
-                                                        real B = r_sf;
-                                                        real c1 = 0.5 * (B - A);
-                                                        real c2 = 0.5 * (A + B);
-
-                                                        real integral = 0.0;
-                                                        
-                                                        // Explicit unrolled 
-                                                        // loop for GPU 
-                                                        // registers 
-                                                        // (Thread-safe)
-                                                        for (int k=0; k<5; ++k)
-                                                        {
-                                                            real r_pt = 
-                                                                c1 * t_GL[k] + 
-                                                                c2;
-                                                            real r2 = r_pt*r_pt;
-                                                            
-                                                            real Ri2 = R_i*R_i;
-                                                            real root_i = 0.0;
-                                                            if (Ri2 > r2)
-                                                            {
-                                                                root_i = 
-                                                                    sqrt(Ri2 - 
-                                                                         r2);
-                                                            }
-                                                            
-                                                            real Rj2 = R_j*R_j;
-                                                            real root_j = 0.0;
-                                                            if (Rj2 > r2)
-                                                            {
-                                                                root_j = 
-                                                                    sqrt(Rj2 - 
-                                                                         r2);
-                                                            }
-
-                                                            // Lens gap physical
-                                                            // thickness
-                                                            real gap = dist - 
-                                                                root_i - root_j;
-                                                                
-                                                            if (gap < 0.0) 
-                                                            {
-                                                                gap = 0.0; 
-                                                            }
-
-                                                            real term_i = 
-                                                                (R_i - root_i) / 
-                                                                K[i];
-                                                            real term_j = 
-                                                                (R_j - root_j) / 
-                                                                K[j];
-                                                            real term_f = 
-                                                                gap / k_f;
-
-                                                            real R_th = term_i + 
-                                                                term_j + term_f;
-
-                                                            // Avoid division by
-                                                            // zero at perfect 
-                                                            // rigid contact 
-                                                            // centers
-                                                            if (R_th > 1e-12)
-                                                            {
-                                                                real F = 
-                                                                    (2.0 * pi * 
-                                                                    r_pt)/R_th;
-                                                                integral += 
-                                                                    w_GL[k] * F;
-                                                            }
-                                                        }
-                                                        integral *= c1;
-
-                                                        // Apply integrated PFP 
-                                                        // flux symmetrically
-                                                        real Q_pfp_val = 
-                                                            integral * 
-                                                            (temperature[j] - 
-                                                             T_i);
-                                                             
-                                                        Kokkos::atomic_add(
-                                                            &Q_pfp[i], 
-                                                            Q_pfp_val);
-                                                        Kokkos::atomic_add(
-                                                            &Q_pfp[j], 
-                                                            -Q_pfp_val);
-                                                    }
-                                                }
+                                                thermalPFPKernels::
+                                                    particleFluidParticle(
+                                                        R_i, R_j, dist,
+                                                        fluidKappa[i],
+                                                        fluidKappa[j],
+                                                        fluidAlpha[i],
+                                                        fluidAlpha[j],
+                                                        K[i], K[j],
+                                                        T_i, temperature[j],
+                                                        r_sij,
+                                                        Q_pfp, i, j);
                                             }
                                         }
                                     }
@@ -399,6 +200,3 @@ void calcThermalInteractions(
 
 } // thermalInteractionKernels
 } // pFlow
-
-
-

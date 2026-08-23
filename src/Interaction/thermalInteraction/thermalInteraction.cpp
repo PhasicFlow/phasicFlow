@@ -24,11 +24,26 @@ Licence:
 namespace pFlow 
 {
 
-//----------------------------- constructors ----------------------------------
+//----------------------------- protected methods ------------------------------
 
-// ========================================================================= //
-// Constructor
-// ========================================================================= //
+void thermalInteraction::ensureRadiationMemory()
+{
+    // Plain views, not a registered PointField (see the class-level
+    // doc comment on the "Radiation neighbourhood output" members in
+    // the header for why): sizing must be checked explicitly rather
+    // than relying on an automatic insert/delete hook.
+    size_t newSize = particles_.size();
+
+    if (radSumTemp_.extent(0) != newSize)
+    {
+        Kokkos::resize(radSumTemp_, newSize);
+        Kokkos::resize(radNumPrt_,  newSize);
+        resizeNoInit(radSumTempHost_, newSize);
+        resizeNoInit(radNumPrtHost_,  newSize);
+    }
+}
+
+//----------------------------- constructors ----------------------------------
 
 thermalInteraction::thermalInteraction(
     systemControl&                  control, 
@@ -37,15 +52,15 @@ thermalInteraction::thermalInteraction(
 : 
     control_(control),
     particles_(particles),
-    thermalTimer_("thermalInteraction", &control.timers())
+    thermalTimer_("thermalInteraction", &control.timers()),
+    neighborSearchTimer_("thermalInteractionSearch", &control.timers()),
+    thermalKernelTimer_("thermalInteractionKernel", &control.timers())
 {
     dictionary thermoDict(
         "thermoPhysicalInteraction", 
         control_.caseSetup().path() + "thermoPhysicalInteraction");
     
-    // ---------------------------------------------------------------------- //
-    // Radiation
-    // ---------------------------------------------------------------------- //
+    //--- radiation -------------------------------------------------------
     if (!thermoDict.containsDataEntry("enableRadiation"))
     {
         fatalErrorInFunction 
@@ -95,9 +110,7 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Collisional Heat Conduction (Q_pp)
-    // ---------------------------------------------------------------------- //
+    //--- collisional heat conduction (Q_pp) -------------------------------
     if (!thermoDict.containsDataEntry("enableConduction"))
     {
         fatalErrorInFunction 
@@ -120,9 +133,7 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Particle-Fluid-Particle (PFP) Sub-grid Heat Transfer
-    // ---------------------------------------------------------------------- //
+    //--- particle-fluid-particle (PFP) sub-grid heat transfer -------------
     if (!thermoDict.containsDataEntry("enablePFP"))
     {
         fatalErrorInFunction 
@@ -145,15 +156,12 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Hertzian simulation-scale Young's modulus.
-    //
+    //--- Hertzian simulation-scale Young's modulus -------------------------
     // Used to compute the mechanical contact radius whenever two particles
     // touch. That contact radius feeds both the collisional conduction
     // rate (Q_pp) and the PFP contact-limit radius r_sij, regardless of
     // which of the two mechanisms triggered the calculation, so it must
     // be supplied whenever either is enabled.
-    // ---------------------------------------------------------------------- //
     if (enableConduction_ || enablePFP_)
     {
         if (thermoDict.containsDataEntry("simYoungsModulus"))
@@ -171,15 +179,39 @@ thermalInteraction::thermalInteraction(
         }
     }
 
-    // ---------------------------------------------------------------------- //
-    // Determine the neighbor search cell size.
-    // ---------------------------------------------------------------------- //
-    real pfpCut    = 3.0 * particles_.getShapes().maxBoundingSphere();
-    real searchCut = radCut_;
-    
-    if (enablePFP_ && pfpCut > searchCut) 
+    //--- neighbor search cell size ------------------------------------------
+    // Must be at least as large as whichever enabled mechanism needs the
+    // longest search radius: mapperNBS's 27-cell sweep around a
+    // particle's own cell only finds every neighbour within a radius R
+    // when cellSize >= R (the particle can sit anywhere in its own
+    // cell, and any neighbour within R of it then falls, at most, one
+    // cell away in each direction -- the standard cell-list
+    // neighbour-search guarantee). Each enabled mechanism contributes
+    // its own required radius via max(), one line each, so a future
+    // fourth mechanism follows the same template instead of relying on
+    // remembering to add a separate branch (conduction's radius was
+    // missing here for exactly that reason until this fix).
+    real searchCut = 0.0;
+
+    if (enableRadiation_)
     {
-        searchCut = pfpCut;
+        searchCut = max(searchCut, radCut_);
+    }
+
+    if (enableConduction_)
+    {
+        // Largest possible contact distance R_i+R_j between any two
+        // particles in the case.
+        searchCut = max(
+            searchCut, 
+            2.0 * particles_.getShapes().maxBoundingSphere());
+    }
+
+    if (enablePFP_)
+    {
+        searchCut = max(
+            searchCut, 
+            3.0 * particles_.getShapes().maxBoundingSphere());
     }
     
     real cellSize = (searchCut > 1e-12) 
@@ -196,16 +228,23 @@ thermalInteraction::thermalInteraction(
         particles_.dynPointStruct().activePointsMaskDevice(),
         false,  
         true);
+
+    // Size radSumTemp_/radNumPrt_ (device + host) now, so they are
+    // correctly sized as soon as this object exists, rather than
+    // leaving them at their default zero size until the first
+    // iterate() call.
+    ensureRadiationMemory();
 }
 
 //---------------------------- public methods ---------------------------------
 
-// ========================================================================= //
-// Core Thermal Iteration
-// ========================================================================= //
-
 void thermalInteraction::iterate()
 {
+    // Checked unconditionally, every call, regardless of the
+    // enable-flags early return below: keeps radSumTemp_/radNumPrt_
+    // correctly sized irrespective of which thermal mechanisms are on.
+    ensureRadiationMemory();
+
     if (!enableRadiation_ && !enableConduction_ && !enablePFP_)
     {
         return;
@@ -214,10 +253,12 @@ void thermalInteraction::iterate()
     thermalTimer_.start();
     bool boxChanged = false;
 
+    neighborSearchTimer_.start();
     bool mapperBuiltOk = mapper_->build(
         particles_.pointPosition().deviceViewAll(),
         particles_.dynPointStruct().activePointsMaskDevice(),
         boxChanged);
+    neighborSearchTimer_.end();
 
     if (!mapperBuiltOk)
     {
@@ -243,9 +284,12 @@ void thermalInteraction::iterate()
     auto cellSize  = searchBox.cellSize();
     int32x3 numCells(searchBox.nx(), searchBox.ny(), searchBox.nz());
 
-    bool calcRad  = enableRadiation_ && (stepCounter_ % radUpdateInterval_ == 0);
+    bool calcRad  =
+        enableRadiation_ && (stepCounter_ % radUpdateInterval_ == 0);
     bool calcCond = enableConduction_;
     bool calcPFP  = enablePFP_;
+
+    thermalKernelTimer_.start();
 
     if (calcCond)
     {
@@ -282,17 +326,37 @@ void thermalInteraction::iterate()
         calcPFP,
         particles_.heatSourceCondPP().deviceViewAll(),
         particles_.heatSourcePFP().deviceViewAll(),
-        particles_.radSumTemp().deviceViewAll(),
-        particles_.radNumPrt().deviceViewAll());
+        // radSumTemp_/radNumPrt_ are now this class's own members
+        // (moved from thermalSphereParticles -- see the "Radiation
+        // neighbourhood output" comment in the header), not
+        // particles_'s.
+        radSumTemp_,
+        radNumPrt_);
+
+    thermalKernelTimer_.end();
+
+    // Sync radSumTemp_/radNumPrt_ to host right after computing them,
+    // so the host mirror is never stale. Harmless to call again from
+    // outside afterwards (e.g. at a CFD-exchange boundary) -- see the
+    // method's doc comment.
+    radiationDataHostUpdatedSync();
 
     thermalTimer_.end();
     stepCounter_++;
 }
 
+void thermalInteraction::radiationDataHostUpdatedSync()
+{
+    ensureRadiationMemory();
+
+    if (radSumTempHost_.size() == radSumTemp_.size() &&
+        radNumPrtHost_.size()  == radNumPrt_.size())
+    {
+        Kokkos::deep_copy(radSumTempHost_, radSumTemp_);
+        Kokkos::deep_copy(radNumPrtHost_,  radNumPrt_);
+    }
+}
+
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-
-
