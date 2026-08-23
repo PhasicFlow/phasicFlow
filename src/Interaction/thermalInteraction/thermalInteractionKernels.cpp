@@ -112,10 +112,8 @@ void calcThermalInteractions(
                                         
                                         real distSq = dx*dx + dy*dy + dz*dz;
                                         
-                                        // =====================================
-                                        // 1. Radiation Check (Asymmetric 
-                                        //    execution, all i-j pairs)
-                                        // =====================================
+                                        //--- radiation check (asymmetric
+                                        // execution, all i-j pairs) ------
                                         if (calcRad && distSq <= radCutSq) 
                                         {
                                             thermalRadiationKernels::
@@ -125,12 +123,11 @@ void calcThermalInteractions(
                                                     count);
                                         }
 
-                                        // =====================================
-                                        // 2. Conduction & PFP Checks (Symmetric
-                                        //    execution: i < j only). Computing 
-                                        //    both forces here halves the 
-                                        //    computational load.
-                                        // =====================================
+                                        //--- conduction & PFP checks
+                                        // (symmetric execution: i < j
+                                        // only). Computing both forces
+                                        // here halves the computational
+                                        // load. -------------------------
                                         if ((calcCond || calcPFP) && i < j)
                                         {
                                             real R_j = 0.5 * diameter[j];

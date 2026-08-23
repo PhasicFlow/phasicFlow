@@ -31,7 +31,8 @@ namespace pFlow
 
 /**
  * @brief Dispatcher for intra-phase thermodynamic interactions.
- * * Manages the calculation of particle-particle conduction (Q_pp), 
+ *
+ * Manages the calculation of particle-particle conduction (Q_pp), 
  * sub-grid Particle-Fluid-Particle heat transfer (Q_pfp), and 
  * local radiation neighbourhood sums.
  */
@@ -47,7 +48,7 @@ private:
 
     //- private members
 
-        // --- Section 1: System References ---
+        // --- System references ---
 
             systemControl&                  control_;
             
@@ -55,7 +56,7 @@ private:
             
             uniquePtr<mapperNBS>            mapper_ = nullptr;
 
-        // --- Section 2: Physics Control Flags ---
+        // --- Physics control flags ---
 
             /// @brief Toggles radiation neighbourhood calculations.
             bool                            enableRadiation_ = false;
@@ -72,7 +73,7 @@ private:
             /// @brief Toggles sub-grid fluid bridge heat transfer (PFP).
             bool                            enablePFP_ = false;
 
-        // --- Section 3: Radiation Neighbourhood Output ---
+        // --- Radiation neighbourhood output ---
         // Plain Kokkos views, not registered PointFields: particles_
         // is a const reference, so a PointField (needing the
         // protected, non-const dynPointStruct()) cannot be registered
@@ -93,7 +94,7 @@ private:
             /// Host mirror of radNumPrt_.
             hostViewType1D<uint32>          radNumPrtHost_;
 
-        // --- Section 4: Performance & Tracking ---
+        // --- Performance & tracking ---
 
             uint32                          stepCounter_ = 0;
             
@@ -114,7 +115,8 @@ private:
 
         /**
          * @brief Sizes radSumTemp_/radNumPrt_ to the current particle
-         * count. See the Section 3 comment above for why.
+         * count. See the "Radiation neighbourhood output" comment
+         * above for why.
          */
         void ensureRadiationMemory();
 
@@ -133,8 +135,6 @@ public:
         ~thermalInteraction() = default;
 
     //- public methods
-
-        // --- Section 5: Public Interface ---
 
         /**
          * @brief Checks if radiation physics is actively executing.
