@@ -30,9 +30,13 @@ Licence:
  * reaction capability; for reacting flows, use multiSpeciesGranFlow,
  * which extends this same thermal layer.
  *
- * Note: Q_conv (convection) and Q_pfp (fluid bridge) remain 0.0 since
- * the Eulerian fluid mesh does not exist in standalone mode. This mode
- * is ideal for unit-testing conduction (Q_pp) and radiation.
+ * Note: Q_conv (convection) is always 0.0 in this standalone mode,
+ * since Ranz-Marshall needs a local fluid velocity that only a real
+ * Eulerian mesh can provide. Q_pfp is 0.0 only by default: if
+ * thermoPhysicalInteraction/fluidProperties{kappa, alpha} is set, PFP
+ * uses those as a uniform ambient fluid stand-in and does contribute.
+ * This mode is ideal for unit-testing conduction (Q_pp), radiation,
+ * and PFP against that ambient fallback.
  */
 
 #include "vocabs.hpp"
@@ -57,9 +61,7 @@ Licence:
  */
 int main(int argc, char* argv[])
 {
-    // ===================================================================== //
-    // Section 1: Initialization & CLI Parsing
-    // ===================================================================== //
+    //--- initialization & CLI parsing -------------------------------------
     pFlow::commandLine cmds
     (
         "heatSphereGranFlow",
@@ -67,19 +69,15 @@ int main(int argc, char* argv[])
         "transfer, particle insertion mechanism, and moving geometry."
     );
 
-    bool isCoupling = false;
-
     if (!cmds.parse(argc, argv)) return 0;
 
-    // this should be palced in each main
+    // this should be placed in each main
     pFlow::processors::initProcessors(argc, argv);
     pFlow::initialize_pFlowProcessors();
 
     #include "initialize_Control.hpp"
 
-    // ===================================================================== //
-    // Section 2: Material & Geometry Setup
-    // ===================================================================== //
+    //--- material & geometry setup -----------------------------------------
 
     /// Read global thermal properties from the case directory.
     auto proprties = pFlow::thermalProperty
@@ -92,29 +90,28 @@ int main(int argc, char* argv[])
 
     #include "createDEMComponents.hpp"
 
-    // ===================================================================== //
-    // Section 3: Solver Capabilities Notice
-    // ===================================================================== //
+    //--- solver capabilities notice -----------------------------------------
     REPORT(0)
         << "\n[INFO] Standalone Thermal Mode Active.\n"
-        << "  Q_pp  (contact conduction) : Computed via Kokkos kernel\n"
-        << "  Q_rad (radiation)          : Computed via Kokkos kernel\n"
-        << "  Q_conv / Q_pfp             = 0 (No Eulerian fluid mesh "
-        << "present)\n"
+        << "  Q_pp   (contact conduction) : Computed via Kokkos kernel\n"
+        << "  Q_rad  (radiation)          : Computed via Kokkos kernel\n"
+        << "  Q_pfp  (fluid bridge)       : 0 by default; computed "
+        << "against thermoPhysicalInteraction/fluidProperties (ambient "
+        << "kappa/alpha) if that block is set\n"
+        << "  Q_conv (convection)         = 0 (Ranz-Marshall needs a "
+        << "local fluid velocity; no ambient stand-in exists for it)\n"
         << "  No chemical reaction capability in this solver.\n"
         << "  Use multiSpeciesGranFlow for reacting flows, or\n"
         << "  unresolvedHeatSpherePFPlus for coupled CFD-DEM heat "
         << "transfer.\n"
         << END_REPORT;
 
-    // ===================================================================== //
-    // Section 4: Main Transient Time Loop
-    // ===================================================================== //
+    //--- main transient time loop -------------------------------------------
     REPORT(0) << "\nStart of time loop . . .\n" << END_REPORT;
 
     do
     {
-        // 4.1 Particle insertion phase
+        // Particle insertion phase
         if (!sphInsertion.insertParticles(
                 Control.time().currentIter(),
                 Control.time().currentTime(),
@@ -126,24 +123,27 @@ int main(int argc, char* argv[])
             return 1;
         }
 
-        // 4.2 Pre-processing updates (reset forces, predict, etc.)
+        // Pre-processing updates (reset forces, predict, etc.)
         surfGeometry.beforeIteration();
         sphParticles.beforeIteration();
         sphInteraction.beforeIteration();
 
-        // 4.3 Evaluate contact interactions (particle-particle, wall)
+        // Evaluate contact interactions (particle-particle, wall)
         sphInteraction.iterate();
 
-        // 4.4 Thermal physics (conduction, radiation, PFP)
+        // Thermal physics (conduction, radiation, PFP)
         thermalInt.iterate();
 
-        // 4.5 Update boundary kinematics
-        surfGeometry.iterate();
-
-        // 4.6 Update particle kinematics and integrate temperature
+        // Update particle kinematics and integrate temperature. Comes
+        // before the geometry update below, matching sphereDEMSystem's
+        // own loop() ordering (particles integrate against the current
+        // step's geometry state, not next step's).
         sphParticles.iterate();
 
-        // 4.7 Post-processing cleanups
+        // Update boundary kinematics
+        surfGeometry.iterate();
+
+        // Post-processing cleanups
         sphInteraction.afterIteration();
         surfGeometry.afterIteration();
         sphParticles.afterIteration();
@@ -152,12 +152,9 @@ int main(int argc, char* argv[])
 
     REPORT(0) << "\nEnd of time loop.\n" << END_REPORT;
 
-    // this should be palced in each main
+    // this should be placed in each main
     #include "finalize.hpp"
     pFlow::processors::finalizeProcessors();
 
     return 0;
 }
-
-
-

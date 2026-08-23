@@ -28,9 +28,7 @@ Licence:
  * before the main time loop begins.
  */
 
-// ========================================================================= //
-// Section 1: Shape & Material Initialization
-// ========================================================================= //
+//--- shape & material initialization -------------------------------------
 
 REPORT(0) << "Reading thermal shapes dictionary..." << END_REPORT;
 
@@ -46,25 +44,27 @@ pFlow::thermalSphereShape spheres
     proprties   // thermalProperty instance from the main solver
 );
 
-// ========================================================================= //
-// Section 2: Particle Container Initialization
-// ========================================================================= //
+//--- particle container initialization -----------------------------------
 
 REPORT(0) << "\nReading thermal sphere particles . . ." << END_REPORT;
 
 /**
  * @brief Main GPU-backed thermal particle container.
+ *
+ * thermalSphereParticles (not thermalSphereFluidParticles): this
+ * standalone solver has no CFD mesh, so fluid-momentum coupling
+ * (fluidForce_/fluidTorque_) is neither needed nor available here.
+ *
+ * Takes spheres once: thermalSphereShape already IS a sphereShape, so
+ * a single argument covers both roles.
  */
 pFlow::thermalSphereParticles sphParticles
 (
     Control,
-    spheres,
     spheres
 );
 
-// ========================================================================= //
-// Section 3: Particle Insertion Mechanism
-// ========================================================================= //
+//--- particle insertion mechanism -----------------------------------------
 
 REPORT(0) << "\nCreating particle insertion object . . ." << END_REPORT;
 
@@ -77,9 +77,7 @@ auto sphInsertion = pFlow::sphereInsertion
     sphParticles.spheres()
 );
 
-// ========================================================================= //
-// Section 4: Mechanical Interaction Model
-// ========================================================================= //
+//--- mechanical interaction model ------------------------------------------
 
 REPORT(0) << "\nCreating interaction model for sphere-sphere contact . . ."
           << END_REPORT;
@@ -97,9 +95,7 @@ auto interactionPtr = pFlow::interaction::create
 
 auto& sphInteraction = interactionPtr();
 
-// ========================================================================= //
-// Section 5: Thermal Interaction Model (Fixed for Standalone Mode)
-// ========================================================================= //
+//--- thermal interaction model (fixed for standalone mode) ----------------
 
 REPORT(0) << "\nCreating unified thermal interaction model "
           << "(Conduction, PFP, Radiation) . . ." << END_REPORT;
@@ -107,15 +103,17 @@ REPORT(0) << "\nCreating unified thermal interaction model "
 /**
  * @brief Thermal physics dispatcher.
  * Computes Q_pp (Batchelor-O'Brien) and particle-particle radiation.
+ *
+ * thermalInteraction takes a const thermalSphereParticles& (not a
+ * template) -- sphParticles (a thermalSphereParticles here) binds to
+ * it directly.
  */
-auto thermalIntPtr = pFlow::makeUnique<pFlow::thermalInteraction>
-(
-    Control,
-    sphParticles,
-    pFlow::box()
-);
+auto thermalIntPtr = 
+    pFlow::makeUnique<pFlow::thermalInteraction>
+    (
+        Control,
+        sphParticles,
+        pFlow::box()
+    );
 
 auto& thermalInt = thermalIntPtr();
-
-
-
