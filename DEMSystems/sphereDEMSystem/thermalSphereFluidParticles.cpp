@@ -149,7 +149,8 @@ bool thermalSphereFluidParticles::iterate()
     // Thermal (fluid-coupled): dispatches the fluid-coupled kernel
     // overload directly. Only the kernel itself is shared with the
     // standalone tier (thermalSphereParticles::iterateThermal()); this
-    // dispatch wrapper is specific to the fluid-coupled tier.
+    // dispatch wrapper is specific to the fluid-coupled tier, so it
+    // lives here rather than on the base.
     auto mask = dynPointStruct().activePointsMaskDevice();
 
     temperatureRate().field().fill(0.0);
@@ -258,6 +259,3 @@ void thermalSphereFluidParticles::emissivityHostUpdatedSync()
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-

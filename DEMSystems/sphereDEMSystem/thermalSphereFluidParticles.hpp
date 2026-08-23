@@ -31,7 +31,9 @@ namespace pFlow
  * @brief Thermal sphere particles with fluid-momentum coupling and
  * CFD-exchanged data (heat sources, temperature, emissivity, ambient
  * fluid properties). Does not inherit sphereFluidParticles: that
- * would create two independent dynPointStruct_ instances.
+ * would create two independent dynPointStruct_ instances (see
+ * thermalSphereParticles for the shared base). The mechanical
+ * acceleration kernel is reused, not duplicated.
  */
 class thermalSphereFluidParticles
 :
@@ -61,6 +63,18 @@ private:
 
         /// Host mirror of fluidTorque_.
         hostViewType1D<realx3>          fluidTorqueHost_;
+
+        // --- Fluid-momentum coupling (thermal) ---
+        // Neither is written by any DEM-side kernel; both come only
+        // from the CFD push, same as fluidForce_/fluidTorque_.
+        //
+        // Both are constructed READ_NEVER/WRITE_NEVER (see the .cpp):
+        // they are zeroed and recomputed by the CFD coupling layer on
+        // every exchange, never carried over from one step to the
+        // next, so there is no meaningful "initial value" for
+        // setFields to provide. A value given for heatSourceConv or
+        // heatSourceRad in particlesDict.setFields is silently
+        // ignored -- this is intentional, not a gap to fix.
 
         /// Convective heat source from the fluid phase [W].
         realPointField_D                heatSourceConv_;
@@ -239,5 +253,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalSphereFluidParticles_hpp
-
-

@@ -209,5 +209,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalProperty_hpp
-
-

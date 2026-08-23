@@ -33,11 +33,19 @@ bool thermalProperty::readDictionary()
     // same read-only secondary-file pattern already used in
     // thermalInteraction.cpp for this exact file. fileDictionary's
     // extra IOobject/objectFile machinery isn't needed for this.
+    //
+    // dictionary(keyword, file) opens 'file' directly via iFstream, so
+    // unlike fileDictionary(keyword, file) -- which combined the two
+    // internally through objectFile -- 'file' here must already be the
+    // complete path: the directory and filename are concatenated
+    // explicitly, exactly as thermalInteraction.cpp does for this same
+    // file.
     dictionary thermoDict(
         "thermoPhysicalInteraction",
         // Fallback when constructed without a directory: the
         // (fileName, owner) constructor has none to pass here.
-        p_dir_ != nullptr ? *p_dir_ : fileSystem("caseSetup"));
+        (p_dir_ != nullptr ? *p_dir_ : fileSystem("caseSetup"))
+            + "thermoPhysicalInteraction");
 
     // Read thermal properties
     heatCapacities_ = 
@@ -180,5 +188,3 @@ thermalProperty::thermalProperty(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
