@@ -98,11 +98,23 @@ protected:
 
     //- protected methods
 
-        /**
-         * @brief Dispatches the standalone (no Q_conv/Q_rad) heat-transfer
-         * kernel and the temperature time-integration kernel, after
-         * first resetting temperatureRate_ to zero.
-         */
+        /// Zeroes heatSourceCondPP_. Called from beforeIteration() --
+        /// thermalInteraction only adds into this field, it never
+        /// zeroes it.
+        void zeroHeatSourceCondPP()
+        {
+            heatSourceCondPP_.fill(0.0);
+        }
+
+        /// Zeroes heatSourcePFP_. See zeroHeatSourceCondPP() above.
+        void zeroHeatSourcePFP()
+        {
+            heatSourcePFP_.fill(0.0);
+        }
+
+        /// @brief Dispatches the standalone (no Q_conv/Q_rad)
+        /// heat-transfer kernel and temperature integration, after
+        /// resetting temperatureRate_ to zero.
         void iterateThermal();
 
         /// Rate of temperature change dT/dt [K/s]. Exposed so
@@ -138,12 +150,17 @@ public:
 
     //- public methods
 
-        /**
-         * @brief Scatters per-material thermal properties to individual 
-         * particle slots on the GPU.
-         * @return True upon successful mapping.
-         */
+        /// @brief Scatters per-material thermal properties to
+        /// individual particle slots on the GPU.
         bool initializeThermalParticles();
+
+        /// @brief Zeroes heatSourceCondPP_/heatSourcePFP_, then
+        /// defers to sphereParticles::beforeIteration(). Zeroing
+        /// happens here rather than in iterateThermal(), since
+        /// thermalInteraction accumulates into these fields between
+        /// this call and iterate() -- zeroing any later would erase
+        /// that step's values before they are read.
+        bool beforeIteration() override;
 
         bool iterate() override;
 
@@ -259,6 +276,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalSphereParticles_hpp
-
-
-

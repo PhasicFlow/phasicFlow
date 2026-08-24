@@ -35,20 +35,12 @@ namespace pFlow
  * physics (Conduction, PFP, and Radiation).
  *
  * @details
- * Inherits from sphereDEMSystem to reuse property_/geometry_ construction
- * and the domain-distribution machinery, but its inherited particles_
- * member (declared in sphereDEMSystem as uniquePtr<sphereFluidParticles>)
- * is deliberately left unused (reset to null): thermalSphereFluidParticles
- * does not inherit from sphereFluidParticles (see that class), so it
- * cannot be assigned there. This class instead holds its particles
- * through its own thermalParticles_ member, and overrides every
- * DEMSystem-level virtual method that sphereDEMSystem's inherited
- * implementation would otherwise reach through particles_ directly --
- * verified against sphereDEMSystem.cpp method-by-method, not assumed.
- * Methods that only touch the protected xxxHost_ mirror arrays (already
- * declared in sphereDEMSystem) or spheres_/particleDistribution_ do NOT
- * need overriding: diameter(), velocity(), position(), acceleration(),
- * rVelocity(), shapeDiameters(), numParInDomain(s)(), parIndexInDomain().
+ * Its inherited particles_ member (declared in sphereDEMSystem as
+ * uniquePtr<sphereFluidParticles>) is deliberately left unused (reset
+ * to null): thermalSphereFluidParticles does not inherit from
+ * sphereFluidParticles (see that class), so it cannot be assigned
+ * there. This class instead holds its particles through its own
+ * thermalParticles_ member.
  */
 class thermalSphereDEMSystem
 :
@@ -67,9 +59,24 @@ protected:
         /// radiation.
         uniquePtr<thermalInteraction>   thermalInteraction_ = nullptr;
 
+        /// @brief Host mirror of radiation's device data. Owned here,
+        /// not on thermalInteraction, since this class is the
+        /// CFD-coupling-only layer and host mirrors are only ever
+        /// needed for CFD exchange. The device-side computation stays
+        /// on thermalInteraction, since standalone mode needs it too.
+        hostViewType1D<real>            radSumTempHost_;
+
+        /// @brief Host mirror of radiation's neighbour-count data.
+        /// See radSumTempHost_ above.
+        hostViewType1D<uint32>          radNumPrtHost_;
+
     //- protected methods
 
         bool loop();
+
+        /// @brief Resizes radSumTempHost_/radNumPrtHost_ to the
+        /// current particle count. Safe to call every step.
+        void ensureRadiationHostMemory();
 
 public:
 
@@ -103,11 +110,14 @@ public:
 
         bool iterate(real upToTime) override;
 
-        // ================================================================= //
-        // Overrides required because sphereDEMSystem's inherited implementation
-        // reads particles_ directly (verified line-by-line against
-        // sphereDEMSystem.cpp), and particles_ is unused/null in this class.
-        // ================================================================= //
+        //--- overrides for particles_-facing base methods --------------
+        // sphereDEMSystem's inherited implementation reads particles_
+        // directly, which is unused/null here -- everything below
+        // reads thermalParticles_ instead. Methods touching only the
+        // protected xxxHost_ mirrors or spheres_/particleDistribution_
+        // do not need overriding: diameter(), velocity(), position(),
+        // acceleration(), rVelocity(), shapeDiameters(),
+        // numParInDomain(s)(), parIndexInDomain().
 
         bool beforeIteration() override;
 
@@ -125,9 +135,7 @@ public:
 
         bool sendFluidTorqueToDEM() override;
 
-        // ================================================================= //
-        // Thermal & radiation coupling interfaces
-        // ================================================================= //
+        //--- thermal & radiation coupling interfaces --------------------------
 
         span<real> temperature() override;
         
@@ -149,10 +157,7 @@ public:
         
         bool sendFluidPropertiesToDEM() override;
 
-        /**
-         * @brief Evaluates radiation module availability.
-         * @return True if the module is active and enabled by user dictionary.
-         */
+        /// @brief True if radiation is active and enabled by the user.
         inline
         bool hasRadiation() const override
         {

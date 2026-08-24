@@ -191,6 +191,19 @@ bool thermalSphereParticles::initializeThermalParticles()
     return true;
 }
 
+bool thermalSphereParticles::beforeIteration()
+{
+    if (!sphereParticles::beforeIteration())
+    {
+        return false;
+    }
+
+    zeroHeatSourceCondPP();
+    zeroHeatSourcePFP();
+
+    return true;
+}
+
 bool thermalSphereParticles::iterate()
 {
     if (!sphereParticles::iterate())
@@ -208,8 +221,9 @@ void thermalSphereParticles::iterateThermal()
     auto mask = dynPointStruct().activePointsMaskDevice();
 
     // Reset the rate scratch buffer before recomputation. Folded in
-    // here rather than a separate beforeIteration() override -- see
-    // this method's declaration in the header for why.
+    // here rather than beforeIteration() -- unlike heatSourceCondPP_/
+    // heatSourcePFP_, temperatureRate_ is never written by another
+    // class, so there is no ordering requirement forcing it earlier.
     temperatureRate_.field().fill(0.0);
 
     heatTransferTimer_.start();
@@ -288,6 +302,3 @@ bool thermalSphereParticles::insertParticles(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-

@@ -68,6 +68,9 @@ thermalSphereFluidParticles::thermalSphereFluidParticles(
             objectFile::WRITE_ALWAYS),
         dynPointStruct(),
         realx3(0, 0, 0)),
+    // READ_NEVER/WRITE_NEVER: zeroed and recomputed by the CFD
+    // coupling layer every exchange, so a setFields value is silently
+    // ignored -- intentional.
     heatSourceConv_(
         objectFile(
             "heatSourceConv", 
@@ -87,11 +90,9 @@ thermalSphereFluidParticles::thermalSphereFluidParticles(
 {
     checkHostMemory();
 
-    // Initial host sync so temperature/emissivity are valid immediately
-    // after construction. temperature is re-synced every CFD exchange
-    // afterwards (see thermalSphereDEMSystem::beforeIteration());
-    // emissivity never changes again after this, so this is its only
-    // sync ever.
+    // Initial sync so temperature/emissivity are valid immediately.
+    // temperature re-syncs every CFD exchange afterwards; emissivity
+    // never changes again, so this is its only sync.
     temperatureHostUpdatedSync();
     emissivityHostUpdatedSync();
 }
@@ -100,7 +101,14 @@ thermalSphereFluidParticles::thermalSphereFluidParticles(
 
 bool thermalSphereFluidParticles::beforeIteration()
 {
-    sphereParticles::beforeIteration();
+    // thermalSphereParticles:: (not sphereParticles:: directly): the
+    // former also zeroes heatSourceCondPP_/heatSourcePFP_, which this
+    // class's iterate() below consumes.
+    if (!thermalSphereParticles::beforeIteration())
+    {
+        return false;
+    }
+
     checkHostMemory();
 
     return true;
@@ -108,12 +116,9 @@ bool thermalSphereFluidParticles::beforeIteration()
 
 bool thermalSphereFluidParticles::iterate()
 {
-    // Mechanical: acceleration (WITH fluid force/torque) + correct.
-    // This dispatch is duplicated rather than inherited, since this
-    // class does not derive from sphereFluidParticles (see class-level
-    // doc comment in the header for why). The kernel itself
-    // (sphereFluidParticlesKernels::acceleration) is NOT duplicated --
-    // only these few lines that call it are.
+    // Mechanical: acceleration (with fluid force/torque) + correct.
+    // Duplicated dispatch, not the kernel itself -- this class does
+    // not derive from sphereFluidParticles (see header for why).
     accelerationTimer().start();
 
     sphereFluidParticlesKernels::acceleration(
@@ -138,11 +143,8 @@ bool thermalSphereFluidParticles::iterate()
 
     intCorrectTimer().end();
 
-    // Thermal (fluid-coupled): dispatches the fluid-coupled kernel
-    // overload directly. Only the kernel itself is shared with the
-    // standalone tier (thermalSphereParticles::iterateThermal()); this
-    // dispatch wrapper is specific to the fluid-coupled tier, so it
-    // lives here rather than on the base.
+    // Thermal (fluid-coupled): the kernel is shared with the
+    // standalone tier, this dispatch wrapper is not.
     auto mask = dynPointStruct().activePointsMaskDevice();
 
     temperatureRate().field().fill(0.0);
@@ -251,6 +253,3 @@ void thermalSphereFluidParticles::emissivityHostUpdatedSync()
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-

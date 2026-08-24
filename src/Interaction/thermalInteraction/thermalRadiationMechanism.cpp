@@ -18,35 +18,44 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef pFlow_thermalRadiationKernels_hpp
-#define pFlow_thermalRadiationKernels_hpp
-
-#include "types.hpp"
+#include "thermalRadiationMechanism.hpp"
 
 namespace pFlow
 {
-namespace thermalRadiationKernels
-{
 
-/**
- * @brief Accumulates one neighbour's temperature into the running
- * sum/count used by the linearised radiation model on the CFD side.
- *
- * @param T_j    Temperature of neighbour j [K].
- * @param sumT   [IN/OUT] Running sum of neighbour temperatures for i.
- * @param count  [IN/OUT] Running count of neighbours for i.
- */
-KOKKOS_INLINE_FUNCTION
-void accumulateNeighborTemperature(
-    real     T_j,
-    real&    sumT,
-    uint32&  count)
+thermalRadiationMechanism::thermalRadiationMechanism(
+    const dictionary& thermoDict)
 {
-    sumT += T_j;
-    count++;
+    if (!thermoDict.containsDataEntry("radCut"))
+    {
+        fatalErrorInFunction
+            << "Parameter 'radCut' is mandatory when enableRadiation "
+            << "is true.\nPlease add it to the thermoPhysicalInteraction "
+            << "dictionary." << endl;
+        fatalExit;
+    }
+    radCut_ = thermoDict.getVal<real>("radCut");
+
+    radUpdateInterval_ = thermoDict.getValOrSet<uint32>(
+        "radUpdateInterval",
+        1);
+
+    if (radUpdateInterval_ == 0)
+    {
+        fatalErrorInFunction
+            << "'radUpdateInterval' must be a positive integer, got 0."
+            << endl;
+        fatalExit;
+    }
 }
 
-} // thermalRadiationKernels
-} // pFlow
+void thermalRadiationMechanism::ensureMemory(size_t numParticles)
+{
+    if (radSumTemp_.extent(0) != numParticles)
+    {
+        Kokkos::resize(radSumTemp_, numParticles);
+        Kokkos::resize(radNumPrt_,  numParticles);
+    }
+}
 
-#endif // pFlow_thermalRadiationKernels_hpp
+} // pFlow
