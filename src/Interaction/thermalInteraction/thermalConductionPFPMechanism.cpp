@@ -66,4 +66,62 @@ real thermalConductionPFPMechanism::requiredSearchCut(
     return cut;
 }
 
+void thermalConductionPFPMechanism::iterate(
+    const pFlagTypeDevice&          m,
+    const deviceViewType1D<realx3>& pos,
+    const deviceViewType1D<real>&   diameter,
+    const deviceViewType1D<real>&   temperature,
+    const deviceViewType1D<real>&   K,
+    const deviceViewType1D<real>&   E0,
+    const deviceViewType1D<real>&   nu,
+    const deviceViewType1D<real>&   fluidKappa,
+    const deviceViewType1D<real>&   fluidAlpha,
+    const mapperNBS::CellIterator&  cellIter,
+    const realx3&                   domainMin,
+    const real&                     cellSize,
+    const int32x3&                  numCells,
+    deviceViewType1D<real>          Q_pp,
+    deviceViewType1D<real>          Q_pfp) const
+{
+    using namespace thermalConductionPFPMechanismKernels;
+
+    // Dispatches once per call (never per particle-pair) to one of 4
+    // compiled sweep variants, so the disabled mechanism's branch is
+    // compiled out of the hot loop entirely.
+    if (enableConduction_)
+    {
+        if (enablePFP_)
+        {
+            sweep<true, true>(
+                m, pos, diameter, temperature, K, E0, nu,
+                fluidKappa, fluidAlpha, cellIter, domainMin, cellSize,
+                numCells, simYoungsModulus_, Q_pp, Q_pfp);
+        }
+        else
+        {
+            sweep<true, false>(
+                m, pos, diameter, temperature, K, E0, nu,
+                fluidKappa, fluidAlpha, cellIter, domainMin, cellSize,
+                numCells, simYoungsModulus_, Q_pp, Q_pfp);
+        }
+    }
+    else
+    {
+        if (enablePFP_)
+        {
+            sweep<false, true>(
+                m, pos, diameter, temperature, K, E0, nu,
+                fluidKappa, fluidAlpha, cellIter, domainMin, cellSize,
+                numCells, simYoungsModulus_, Q_pp, Q_pfp);
+        }
+        else
+        {
+            sweep<false, false>(
+                m, pos, diameter, temperature, K, E0, nu,
+                fluidKappa, fluidAlpha, cellIter, domainMin, cellSize,
+                numCells, simYoungsModulus_, Q_pp, Q_pfp);
+        }
+    }
+}
+
 } // pFlow

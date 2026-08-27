@@ -19,7 +19,6 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalInteraction.hpp"
-#include "thermalInteractionKernels.hpp"
 
 namespace pFlow 
 {
@@ -40,6 +39,31 @@ thermalInteraction::thermalInteraction(
     dictionary thermoDict(
         "thermoPhysicalInteraction", 
         control_.caseSetup().path() + "thermoPhysicalInteraction");
+
+    // Mandatory regardless of which mechanisms end up enabled: gates
+    // the shared mapper rebuild below, which conduction/PFP rely on
+    // too, not just radiation. Independent of radiation's own
+    // radUpdateInterval (read separately, inside
+    // thermalRadiationMechanism's own constructor) -- these two
+    // intervals serve different purposes (search-rebuild cost vs.
+    // radiation's own physical update cadence) even though they
+    // sound similar, so they are two separate dictionary entries.
+    if (!thermoDict.containsDataEntry("neighborListUpdateInterval"))
+    {
+        fatalErrorInFunction
+            << "Missing MANDATORY entry 'neighborListUpdateInterval' "
+            << "in thermoPhysicalInteraction dictionary." << endl;
+        fatalExit;
+    }
+    neighborListUpdateInterval_ =
+        thermoDict.getVal<uint32>("neighborListUpdateInterval");
+
+    if (neighborListUpdateInterval_ == 0)
+    {
+        fatalErrorInFunction
+            << "'neighborListUpdateInterval' must be >= 1." << endl;
+        fatalExit;
+    }
     
     //--- radiation -------------------------------------------------------
     if (!thermoDict.containsDataEntry("enableRadiation"))
@@ -147,140 +171,89 @@ thermalInteraction::thermalInteraction(
         particles_.dynPointStruct().activePointsMaskDevice(),
         false,  
         true);
-
-    if (radiationMech_)
-    {
-        radiationMech_->ensureMemory(particles_.size());
-    }
 }
 
 //---------------------------- public methods ---------------------------------
 
 void thermalInteraction::iterate()
 {
-    // Kept correctly sized every call, regardless of update interval.
-    if (radiationMech_)
-    {
-        radiationMech_->ensureMemory(particles_.size());
-    }
-
     if (!radiationMech_ && !condPfpMech_)
     {
         return;
     }
     
     thermalTimer_.start();
-    bool boxChanged = false;
 
-    neighborSearchTimer_.start();
-    bool mapperBuiltOk = mapper_->build(
-        particles_.pointPosition().deviceViewAll(),
-        particles_.dynPointStruct().activePointsMaskDevice(),
-        boxChanged);
-    neighborSearchTimer_.end();
+    bool rebuildThisStep =
+        (stepCounter_ % neighborListUpdateInterval_ == 0);
 
-    if (!mapperBuiltOk)
+    if (rebuildThisStep)
     {
-        output
-            << "\n"
-            << Yellow_Text("[thermalInteraction] WARNING — mapperNBS failed "
-                           "to build")
-            << " at step " << stepCounter_ << ".\n"
-            << "  Likely cause: a burned-out ghost particle has an extreme "
-            << "position\n"
-            << "  that forces the search box beyond allocatable limits.\n"
-            << "  Thermal interactions (Q_pp, Q_pfp, radiation) are SKIPPED "
-            << "this step.\n"
-            << endl;
+        bool boxChanged = false;
 
-        thermalTimer_.end();
-        stepCounter_++;
-        return;
+        neighborSearchTimer_.start();
+        bool mapperBuiltOk = mapper_->build(
+            particles_.pointPosition().deviceViewAll(),
+            particles_.dynPointStruct().activePointsMaskDevice(),
+            boxChanged);
+        neighborSearchTimer_.end();
+
+        if (!mapperBuiltOk)
+        {
+            fatalErrorInFunction
+                << "[thermalInteraction] mapperNBS failed to build "
+                << "at step " << stepCounter_ << ".\n"
+                << "Likely cause: a burned-out ghost particle has an "
+                << "extreme position that forces the search box "
+                << "beyond allocatable limits." << endl;
+            fatalExit;
+        }
     }
 
     auto searchBox = mapper_->getSearchCells();
     auto domainMin = searchBox.domainBox().minPoint();
     auto cellSize  = searchBox.cellSize();
     int32x3 numCells(searchBox.nx(), searchBox.ny(), searchBox.nz());
+    auto cellIter  = mapper_->getCellIterator();
 
-    bool hasRad   = (radiationMech_ != nullptr);
-    bool calcCond = condPfpMech_ && condPfpMech_->conductionEnabled();
-    bool calcPFP  = condPfpMech_ && condPfpMech_->pfpEnabled();
-
-    bool doRadThisStep = hasRad &&
-        (stepCounter_ % radiationMech_->updateInterval() == 0);
-
-    real radCut   = hasRad ? radiationMech_->requiredSearchCut() : 0.0;
-    real radCutSq = radCut * radCut;
-    real simYM    = condPfpMech_ ? condPfpMech_->simYoungsModulus() : 0.0;
-
-    deviceViewType1D<real>   radSumTempView;
-    deviceViewType1D<uint32> radNumPrtView;
-    if (hasRad)
-    {
-        radSumTempView = radiationMech_->radSumTemp();
-        radNumPrtView  = radiationMech_->radNumPrt();
-    }
+    auto mask = particles_.dynPointStruct().activePointsMaskDevice();
+    auto pos  = particles_.pointPosition().deviceViewAll();
 
     thermalKernelTimer_.start();
 
-    // heatSourceCondPP_/heatSourcePFP_ are zeroed by
-    // thermalSphereParticles itself, not here.
-
-    // Dispatches to one of 8 template instantiations so every
-    // disabled mechanism's branches compile out of the per-pair
-    // kernel entirely. Runs once per iterate(), never per particle.
-#define CALL_THERMAL_KERNEL(RAD, COND, PFP)                                 \
-    thermalInteractionKernels::calcThermalInteractions<RAD, COND, PFP>(     \
-        particles_.dynPointStruct().activePointsMaskDevice(),               \
-        particles_.pointPosition().deviceViewAll(),                         \
-        particles_.diameter().deviceViewAll(),                              \
-        particles_.temperature().deviceViewAll(),                           \
-        particles_.conductivity().deviceViewAll(),                          \
-        particles_.E0().deviceViewAll(),                                    \
-        particles_.nu().deviceViewAll(),                                    \
-        particles_.fluidKappa().deviceViewAll(),                            \
-        particles_.fluidAlpha().deviceViewAll(),                            \
-        mapper_->getCellIterator(),                                        \
-        domainMin,                                                         \
-        cellSize,                                                          \
-        numCells,                                                          \
-        doRadThisStep,                                                     \
-        radCutSq,                                                          \
-        radSumTempView,                                                    \
-        radNumPrtView,                                                     \
-        simYM,                                                             \
-        particles_.heatSourceCondPP().deviceViewAll(),                      \
-        particles_.heatSourcePFP().deviceViewAll())
-
-    if (hasRad)
+    if (radiationMech_)
     {
-        if (calcCond)
-        {
-            if (calcPFP) { CALL_THERMAL_KERNEL(true, true, true);  }
-            else         { CALL_THERMAL_KERNEL(true, true, false); }
-        }
-        else
-        {
-            if (calcPFP) { CALL_THERMAL_KERNEL(true, false, true);  }
-            else         { CALL_THERMAL_KERNEL(true, false, false); }
-        }
-    }
-    else
-    {
-        if (calcCond)
-        {
-            if (calcPFP) { CALL_THERMAL_KERNEL(false, true, true);  }
-            else         { CALL_THERMAL_KERNEL(false, true, false); }
-        }
-        else
-        {
-            if (calcPFP) { CALL_THERMAL_KERNEL(false, false, true);  }
-            else         { CALL_THERMAL_KERNEL(false, false, false); }
-        }
+        radiationMech_->iterate(
+            mask,
+            pos,
+            particles_.temperature().deviceViewAll(),
+            cellIter,
+            domainMin,
+            cellSize,
+            numCells,
+            particles_.radSumTemp().deviceViewAll(),
+            particles_.radNumPrt().deviceViewAll());
     }
 
-#undef CALL_THERMAL_KERNEL
+    if (condPfpMech_)
+    {
+        condPfpMech_->iterate(
+            mask,
+            pos,
+            particles_.diameter().deviceViewAll(),
+            particles_.temperature().deviceViewAll(),
+            particles_.conductivity().deviceViewAll(),
+            particles_.E0().deviceViewAll(),
+            particles_.nu().deviceViewAll(),
+            particles_.fluidKappa().deviceViewAll(),
+            particles_.fluidAlpha().deviceViewAll(),
+            cellIter,
+            domainMin,
+            cellSize,
+            numCells,
+            particles_.heatSourceCondPP().deviceViewAll(),
+            particles_.heatSourcePFP().deviceViewAll());
+    }
 
     thermalKernelTimer_.end();
 

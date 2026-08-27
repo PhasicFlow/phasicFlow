@@ -73,6 +73,22 @@ thermalSphereParticles::thermalSphereParticles(
             objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
+    radSumTemp_(
+        objectFile(
+            "radSumTemp", 
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(), 
+        0.0),
+    radNumPrt_(
+        objectFile(
+            "radNumPrt", 
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(), 
+        static_cast<uint32>(0)),
     emissivity_(
         objectFile(
             "emissivity", 
@@ -266,9 +282,9 @@ bool thermalSphereParticles::insertParticles(
     realVector kappaV   ("fluidKappa");
     realVector alphaV   ("fluidAlpha");
 
-    // temperature and heatSourcePFP are not seeded here: both default
-    // correctly for newly inserted particles via their own field
-    // default value (temperature_ = 300, heatSourcePFP_ = 0).
+    // temperature, heatSourcePFP, radSumTemp, radNumPrt are not
+    // seeded here: all default correctly for newly inserted particles
+    // via their own field default value.
 
     for (const auto& name : names)
     {

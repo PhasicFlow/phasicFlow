@@ -29,10 +29,10 @@ namespace pFlow
 
 /**
  * @brief Standalone (no CFD mesh) thermal state and properties for
- * spherical particles: temperature, conduction (Q_pp), and PFP
- * (Q_pfp). For a fluid-coupled particle set that also has
- * convective/radiative sources and fluid-momentum coupling, see
- * thermalSphereFluidParticles.
+ * spherical particles: temperature, conduction (Q_pp), PFP (Q_pfp),
+ * and radiation's neighbourhood sum. For a fluid-coupled particle set
+ * that also has convective/radiative CFD sources and fluid-momentum
+ * coupling, see thermalSphereFluidParticles.
  */
 class thermalSphereParticles
 :
@@ -70,6 +70,18 @@ private:
 
         /// Particle-fluid-particle sub-grid heat source, Q_pfp [W].
         realPointField_D                heatSourcePFP_;
+
+        /// Sum of neighbouring particle temperatures, used by the
+        /// linearised radiation model (CFD side) [K]. Written by
+        /// thermalRadiationMechanism via deviceViewAll(), which does
+        /// not own this field -- same ownership split as
+        /// heatSourceCondPP_ above. Zero-filled (default) when
+        /// radiation is disabled.
+        realPointField_D                radSumTemp_;
+
+        /// Number of radiating neighbours found for each particle [-].
+        /// See radSumTemp_ above.
+        uint32PointField_D              radNumPrt_;
 
         /// Particle surface emissivity [-].
         realPointField_D                emissivity_;
@@ -159,7 +171,11 @@ public:
         /// happens here rather than in iterateThermal(), since
         /// thermalInteraction accumulates into these fields between
         /// this call and iterate() -- zeroing any later would erase
-        /// that step's values before they are read.
+        /// that step's values before they are read. radSumTemp_/
+        /// radNumPrt_ need no such zeroing: thermalRadiationMechanism
+        /// assigns them directly (one thread per particle, not an
+        /// atomic accumulation), so there is no stale value to clear
+        /// first.
         bool beforeIteration() override;
 
         bool iterate() override;
@@ -221,6 +237,30 @@ public:
         realPointField_D& heatSourcePFP()
         {
             return heatSourcePFP_;
+        }
+
+        inline
+        const realPointField_D& radSumTemp() const
+        {
+            return radSumTemp_;
+        }
+
+        inline
+        realPointField_D& radSumTemp()
+        {
+            return radSumTemp_;
+        }
+
+        inline
+        const uint32PointField_D& radNumPrt() const
+        {
+            return radNumPrt_;
+        }
+
+        inline
+        uint32PointField_D& radNumPrt()
+        {
+            return radNumPrt_;
         }
 
         inline

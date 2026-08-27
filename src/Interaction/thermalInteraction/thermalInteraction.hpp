@@ -41,6 +41,19 @@ namespace pFlow
  * independent mechanisms, not alternative ways to compute the same
  * thing. A disabled mechanism's uniquePtr stays null -- no memory
  * allocated, no dictionary read.
+ *
+ * Holds no physics logic of its own: each active mechanism runs its
+ * own complete neighbour sweep, self-contained in its own file. This
+ * class only rebuilds the shared cell-list mapper (gated by
+ * neighborListUpdateInterval, read unconditionally since conduction/
+ * PFP also depend on it) and dispatches to whichever mechanisms
+ * exist. This interval is independent of radiation's own
+ * radUpdateInterval (owned by thermalRadiationMechanism): one gates
+ * the cost of rebuilding the shared search structure, the other
+ * reflects radiation's own, physically slower update cadence -- they
+ * happen to serve similar-sounding purposes but for different
+ * reasons, so they are two separate dictionary entries, not one
+ * shared value.
  */
 class thermalInteraction 
 {
@@ -66,15 +79,21 @@ private:
         /// Null when both conduction and PFP are disabled.
         uniquePtr<thermalConductionPFPMechanism>      condPfpMech_ = nullptr;
 
+        /// Mandatory, read regardless of which mechanisms are
+        /// enabled: gates how often the shared mapper rebuilds.
+        /// Independent of thermalRadiationMechanism's own
+        /// radUpdateInterval -- see class doc comment above.
+        uint32                              neighborListUpdateInterval_ = 1;
+
         uint32                                        stepCounter_ = 0;
         
-        /// Overall time for iterate() -- search + kernel combined.
+        /// Overall time for iterate() -- search + both mechanisms.
         Timer                                         thermalTimer_;
 
         /// Time spent rebuilding the neighbor-search mapper.
         Timer                                         neighborSearchTimer_;
 
-        /// Time spent in the physics kernel itself.
+        /// Time spent across both mechanisms' iterate() calls.
         Timer                                         thermalKernelTimer_;
 
 public:
@@ -98,28 +117,10 @@ public:
             return radiationMech_ != nullptr;
         }
 
-        /// @brief Runs the shared neighbor search and dispatches to
-        /// every active mechanism.
+        /// @brief Rebuilds the shared mapper (gated by
+        /// radUpdateInterval_) and dispatches to every active
+        /// mechanism's own iterate().
         void iterate();
-
-        /// @brief Radiation's device-side sum-of-neighbour-temperatures,
-        /// for thermalSphereDEMSystem to sync to its host mirror.
-        /// Empty when radiation is disabled.
-        inline
-        const deviceViewType1D<real>& radSumTempDevice() const
-        {
-            static deviceViewType1D<real> empty;
-            return radiationMech_ ? radiationMech_->radSumTemp() : empty;
-        }
-
-        /// @brief Radiation's device-side neighbour count. Empty when
-        /// radiation is disabled.
-        inline
-        const deviceViewType1D<uint32>& radNumPrtDevice() const
-        {
-            static deviceViewType1D<uint32> empty;
-            return radiationMech_ ? radiationMech_->radNumPrt() : empty;
-        }
 
 }; // thermalInteraction
 

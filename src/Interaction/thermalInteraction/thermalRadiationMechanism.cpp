@@ -19,43 +19,140 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalRadiationMechanism.hpp"
+#include "thermalRadiationKernels.hpp"
 
 namespace pFlow
 {
 
+using policy = Kokkos::RangePolicy<
+    pFlow::DefaultExecutionSpace,
+    Kokkos::Schedule<Kokkos::Dynamic>,
+    Kokkos::IndexType<pFlow::uint32>>;
+
+//----------------------------- constructors ----------------------------------
+
 thermalRadiationMechanism::thermalRadiationMechanism(
-    const dictionary& thermoDict)
+    const dictionary&   thermoDict)
 {
     if (!thermoDict.containsDataEntry("radCut"))
     {
-        fatalErrorInFunction
-            << "Parameter 'radCut' is mandatory when enableRadiation "
-            << "is true.\nPlease add it to the thermoPhysicalInteraction "
-            << "dictionary." << endl;
+        fatalErrorInFunction 
+            << "Missing MANDATORY entry 'radCut' "
+            << "in thermoPhysicalInteraction dictionary." << endl;
         fatalExit;
     }
+
     radCut_ = thermoDict.getVal<real>("radCut");
 
-    radUpdateInterval_ = thermoDict.getValOrSet<uint32>(
-        "radUpdateInterval",
-        1);
+    if (!thermoDict.containsDataEntry("radUpdateInterval"))
+    {
+        fatalErrorInFunction
+            << "Missing MANDATORY entry 'radUpdateInterval' "
+            << "in thermoPhysicalInteraction dictionary." << endl;
+        fatalExit;
+    }
+
+    radUpdateInterval_ = thermoDict.getVal<uint32>("radUpdateInterval");
 
     if (radUpdateInterval_ == 0)
     {
         fatalErrorInFunction
-            << "'radUpdateInterval' must be a positive integer, got 0."
-            << endl;
+            << "'radUpdateInterval' must be >= 1." << endl;
         fatalExit;
     }
 }
 
-void thermalRadiationMechanism::ensureMemory(size_t numParticles)
+//---------------------------- public methods ---------------------------------
+
+void thermalRadiationMechanism::iterate(
+    const pFlagTypeDevice&          m,
+    const deviceViewType1D<realx3>& pos,
+    const deviceViewType1D<real>&   temperature,
+    const mapperNBS::CellIterator&  cellIter,
+    const realx3&                   domainMin,
+    const real&                     cellSize,
+    const int32x3&                  numCells,
+    deviceViewType1D<real>          radSumTemp,
+    deviceViewType1D<uint32>        radNumPrt)
 {
-    if (radSumTemp_.extent(0) != numParticles)
+    bool updateThisStep = (stepCounter_ % radUpdateInterval_ == 0);
+    stepCounter_++;
+
+    // Not an update step: radSumTemp/radNumPrt simply keep their
+    // last value -- the "history" the interval preserves.
+    if (!updateThisStep)
     {
-        Kokkos::resize(radSumTemp_, numParticles);
-        Kokkos::resize(radNumPrt_,  numParticles);
+        return;
     }
+
+    using namespace thermalRadiationKernels;
+
+    real radCutSq = radCut_ * radCut_;
+
+    auto r = m.activeRange();
+
+    Kokkos::parallel_for(
+        "thermalRadiationMechanism::iterate",
+        policy(r.start(), r.end()),
+        KOKKOS_LAMBDA(uint32 i)
+        {
+            if (m(i))
+            {
+                realx3 p_i = pos[i];
+                real sumT = 0.0;
+                uint32 count = 0;
+
+                int32 c_x = static_cast<int32>(
+                    (p_i.x() - domainMin.x()) / cellSize);
+                int32 c_y = static_cast<int32>(
+                    (p_i.y() - domainMin.y()) / cellSize);
+                int32 c_z = static_cast<int32>(
+                    (p_i.z() - domainMin.z()) / cellSize);
+
+                for (int32 cx = c_x - 1; cx <= c_x + 1; ++cx)
+                {
+                    for (int32 cy = c_y - 1; cy <= c_y + 1; ++cy)
+                    {
+                        for (int32 cz = c_z - 1; cz <= c_z + 1; ++cz)
+                        {
+                            if (cx >= 0 && cx < numCells.x() &&
+                                cy >= 0 && cy < numCells.y() &&
+                                cz >= 0 && cz < numCells.z())
+                            {
+                                uint32 j = cellIter.start(cx, cy, cz);
+
+                                while (j != mapperNBS::CellIterator::NoPos)
+                                {
+                                    if (i != j && m(j))
+                                    {
+                                        real dx = p_i.x() - pos[j].x();
+                                        real dy = p_i.y() - pos[j].y();
+                                        real dz = p_i.z() - pos[j].z();
+
+                                        real distSq =
+                                            dx*dx + dy*dy + dz*dz;
+
+                                        if (distSq <= radCutSq)
+                                        {
+                                            accumulateNeighborTemperature(
+                                                temperature[j],
+                                                sumT,
+                                                count);
+                                        }
+                                    }
+                                    j = cellIter.next(j);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                radSumTemp[i] = sumT;
+                radNumPrt[i]  = count;
+            }
+        });
+
+    Kokkos::fence();
 }
 
 } // pFlow

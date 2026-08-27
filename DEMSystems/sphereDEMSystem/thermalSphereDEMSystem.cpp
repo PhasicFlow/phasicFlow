@@ -70,12 +70,14 @@ bool thermalSphereDEMSystem::loop()
 
 void thermalSphereDEMSystem::ensureRadiationHostMemory()
 {
-    if (!thermalInteraction_ || !thermalInteraction_->isRadiationEnabled())
-    {
-        return;
-    }
-
-    size_t newSize = thermalInteraction_->radSumTempDevice().extent(0);
+    // Sized to the particle count. radSumTemp_/radNumPrt_ now live as
+    // pointFields on thermalSphereParticles (always present, zero
+    // when radiation is disabled), so the device source for the
+    // deep_copy below is always valid -- no explicit zero-fill is
+    // needed here any more: every caller of this method immediately
+    // follows it with a fresh deep_copy from that always-correct
+    // source.
+    size_t newSize = thermalParticles_->temperature().size();
 
     if (radSumTempHost_.extent(0) != newSize)
     {
@@ -265,15 +267,15 @@ span<real> thermalSphereDEMSystem::emissivity()
 
 span<real> thermalSphereDEMSystem::radSumTemp()
 {
-    // Synced directly from the radiation mechanism's device view.
+    // radSumTemp_ now lives as a pointField on thermalParticles_
+    // itself (always present, zero-filled when radiation is
+    // disabled) -- so this deep_copy is unconditional, no
+    // isRadiationEnabled() check needed any more.
     ensureRadiationHostMemory();
 
-    if (thermalInteraction_ && thermalInteraction_->isRadiationEnabled())
-    {
-        Kokkos::deep_copy(
-            radSumTempHost_,
-            thermalInteraction_->radSumTempDevice());
-    }
+    Kokkos::deep_copy(
+        radSumTempHost_,
+        thermalParticles_->radSumTemp().deviceViewAll());
 
     return span<real>(radSumTempHost_.data(), radSumTempHost_.size());
 }
@@ -282,12 +284,9 @@ span<uint32> thermalSphereDEMSystem::radNumPrt()
 {
     ensureRadiationHostMemory();
 
-    if (thermalInteraction_ && thermalInteraction_->isRadiationEnabled())
-    {
-        Kokkos::deep_copy(
-            radNumPrtHost_,
-            thermalInteraction_->radNumPrtDevice());
-    }
+    Kokkos::deep_copy(
+        radNumPrtHost_,
+        thermalParticles_->radNumPrt().deviceViewAll());
 
     return span<uint32>(radNumPrtHost_.data(), radNumPrtHost_.size());
 }
