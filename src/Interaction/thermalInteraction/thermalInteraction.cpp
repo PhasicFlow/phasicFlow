@@ -40,40 +40,12 @@ thermalInteraction::thermalInteraction(
         "thermoPhysicalInteraction", 
         control_.caseSetup().path() + "thermoPhysicalInteraction");
 
-    // Mandatory regardless of which mechanisms end up enabled: gates
-    // the shared mapper rebuild below, which conduction/PFP rely on
-    // too, not just radiation. Independent of radiation's own
-    // radUpdateInterval (read separately, inside
-    // thermalRadiationMechanism's own constructor) -- these two
-    // intervals serve different purposes (search-rebuild cost vs.
-    // radiation's own physical update cadence) even though they
-    // sound similar, so they are two separate dictionary entries.
-    if (!thermoDict.containsDataEntry("neighborListUpdateInterval"))
-    {
-        fatalErrorInFunction
-            << "Missing MANDATORY entry 'neighborListUpdateInterval' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
+    // Independent of radiation's own radUpdateInterval: gates the
+    // shared mapper rebuild, which conduction/PFP rely on too.
     neighborListUpdateInterval_ =
-        thermoDict.getVal<uint32>("neighborListUpdateInterval");
-
-    if (neighborListUpdateInterval_ == 0)
-    {
-        fatalErrorInFunction
-            << "'neighborListUpdateInterval' must be >= 1." << endl;
-        fatalExit;
-    }
+        thermoDict.getValMax<uint32>("neighborListUpdateInterval", 1);
     
     //--- radiation -------------------------------------------------------
-    if (!thermoDict.containsDataEntry("enableRadiation"))
-    {
-        fatalErrorInFunction 
-            << "Missing MANDATORY entry 'enableRadiation' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
-    
     Logical enableRad = thermoDict.getVal<Logical>("enableRadiation");
     
     if (enableRad)
@@ -88,29 +60,10 @@ thermalInteraction::thermalInteraction(
     }
 
     //--- collisional heat conduction (Q_pp) / PFP -------------------------
-    if (!thermoDict.containsDataEntry("enableConduction"))
-    {
-        fatalErrorInFunction 
-            << "Missing MANDATORY entry 'enableConduction' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
+    Logical enablePP  = thermoDict.getVal<Logical>("enablePP");
+    Logical enablePFP = thermoDict.getVal<Logical>("enablePFP");
 
-    Logical enableCond = thermoDict.getVal<Logical>("enableConduction");
-    bool condOn = enableCond ? true : false;
-
-    if (!thermoDict.containsDataEntry("enablePFP"))
-    {
-        fatalErrorInFunction 
-            << "Missing MANDATORY entry 'enablePFP' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
-
-    Logical enablePfpFlag = thermoDict.getVal<Logical>("enablePFP");
-    bool pfpOn = enablePfpFlag ? true : false;
-
-    if (condOn)
+    if (enablePP)
     {
         REPORT(0) << "Creating Collisional Heat Transfer (Q_p-p) model . . ." 
             << END_REPORT;
@@ -121,7 +74,7 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    if (pfpOn)
+    if (enablePFP)
     {
         REPORT(0) << "Creating Particle-Fluid-Particle (PFP) "
                   << "sub-grid Heat Transfer model . . ." << END_REPORT;
@@ -132,16 +85,15 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    if (condOn || pfpOn)
+    if (enablePP || enablePFP)
     {
         condPfpMech_ = makeUnique<thermalConductionPFPMechanism>(
-            thermoDict, condOn, pfpOn);
+            thermoDict,
+            static_cast<bool>(enablePP),
+            static_cast<bool>(enablePFP));
     }
 
-    //--- neighbor search cell size ------------------------------------------
-    // Must cover whichever constructed mechanism needs the longest
-    // search radius, so mapperNBS's 27-cell sweep finds every
-    // neighbour any active mechanism cares about.
+    //--- neighbor search cell size ---------------------------------------
     real searchCut = 0.0;
 
     if (radiationMech_)
@@ -210,27 +162,18 @@ void thermalInteraction::iterate()
         }
     }
 
-    auto searchBox = mapper_->getSearchCells();
-    auto domainMin = searchBox.domainBox().minPoint();
-    auto cellSize  = searchBox.cellSize();
-    int32x3 numCells(searchBox.nx(), searchBox.ny(), searchBox.nz());
-    auto cellIter  = mapper_->getCellIterator();
-
-    auto mask = particles_.dynPointStruct().activePointsMaskDevice();
-    auto pos  = particles_.pointPosition().deviceViewAll();
+    auto flags = particles_.dynPointStruct().activePointsMaskDevice();
+    auto pos   = particles_.pointPosition().deviceViewAll();
 
     thermalKernelTimer_.start();
 
     if (radiationMech_)
     {
         radiationMech_->iterate(
-            mask,
+            flags,
             pos,
             particles_.temperature().deviceViewAll(),
-            cellIter,
-            domainMin,
-            cellSize,
-            numCells,
+            *mapper_,
             particles_.radSumTemp().deviceViewAll(),
             particles_.radNumPrt().deviceViewAll());
     }
@@ -238,7 +181,7 @@ void thermalInteraction::iterate()
     if (condPfpMech_)
     {
         condPfpMech_->iterate(
-            mask,
+            flags,
             pos,
             particles_.diameter().deviceViewAll(),
             particles_.temperature().deviceViewAll(),
@@ -247,10 +190,7 @@ void thermalInteraction::iterate()
             particles_.nu().deviceViewAll(),
             particles_.fluidKappa().deviceViewAll(),
             particles_.fluidAlpha().deviceViewAll(),
-            cellIter,
-            domainMin,
-            cellSize,
-            numCells,
+            *mapper_,
             particles_.heatSourceCondPP().deviceViewAll(),
             particles_.heatSourcePFP().deviceViewAll());
     }
@@ -264,3 +204,6 @@ void thermalInteraction::iterate()
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
+
+
+

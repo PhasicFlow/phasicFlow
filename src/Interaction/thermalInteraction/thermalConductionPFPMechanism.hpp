@@ -11,11 +11,9 @@ Licence:
   This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
   the terms of GNU General Public License v3 or any other later versions.
-
   phasicFlow is distributed to help others in their research in the field of
   granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 -----------------------------------------------------------------------------*/
 
 #ifndef pFlow_thermalConductionPFPMechanism_hpp
@@ -29,11 +27,6 @@ Licence:
 namespace pFlow
 {
 
-// Own full 27-cell traversal, independent of thermalRadiationMechanism's
-// (SOC: no shared per-pair dispatch function between the two mechanisms
-// -- see thermalInteraction.cpp for how the two are coordinated at the
-// dispatcher level instead). Templated on 2 bools, not 3: radiation is
-// not this mechanism's concern.
 namespace thermalConductionPFPMechanismKernels
 {
 
@@ -42,9 +35,9 @@ using policy = Kokkos::RangePolicy<
     Kokkos::Schedule<Kokkos::Dynamic>,
     Kokkos::IndexType<pFlow::uint32>>;
 
-template<bool CalcCond, bool CalcPFP>
+template<bool CalcPP, bool CalcPFP>
 void sweep(
-    const pFlagTypeDevice&          m,
+    const pFlagTypeDevice&          flags,
     const deviceViewType1D<realx3>& pos,
     const deviceViewType1D<real>&   diameter,
     const deviceViewType1D<real>&   temperature,
@@ -53,117 +46,154 @@ void sweep(
     const deviceViewType1D<real>&   nu,
     const deviceViewType1D<real>&   fluidKappa,
     const deviceViewType1D<real>&   fluidAlpha,
-    const mapperNBS::CellIterator&  cellIter,
-    const realx3&                   domainMin,
-    const real&                     cellSize,
-    const int32x3&                  numCells,
+    const mapperNBS&                mapper,
     const real                      simYoungsModulus,
     deviceViewType1D<real>          Q_pp,
     deviceViewType1D<real>          Q_pfp)
 {
     using namespace thermalConductionPFPKernels;
 
-    auto r = m.activeRange();
+    auto r = flags.activeRange();
+
+    auto cellIter    = mapper.getCellIterator();
+    auto searchCells = mapper.getSearchCells();
 
     Kokkos::parallel_for(
         "thermalConductionPFPMechanism::sweep",
         policy(r.start(), r.end()),
-        KOKKOS_LAMBDA(uint32 i)
+        KOKKOS_LAMBDA(uint32 idx_i)
         {
-            if (m(i))
+            if (!flags(idx_i))
             {
-                realx3 p_i = pos[i];
-                real R_i   = 0.5 * diameter[i];
-                real T_i   = temperature[i];
+                return;
+            }
 
-                int32 c_x = static_cast<int32>(
-                    (p_i.x() - domainMin.x()) / cellSize);
-                int32 c_y = static_cast<int32>(
-                    (p_i.y() - domainMin.y()) / cellSize);
-                int32 c_z = static_cast<int32>(
-                    (p_i.z() - domainMin.z()) / cellSize);
+            constexpr int32 ox[13] =
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0};
+            constexpr int32 oy[13] =
+                {-1, -1, -1,  0,  0,  0,  1,  1,  1, -1, -1, -1,  0};
+            constexpr int32 oz[13] =
+                {-1,  0,  1, -1,  0,  1, -1,  0,  1, -1,  0,  1, -1};
 
-                for (int32 cx = c_x - 1; cx <= c_x + 1; ++cx)
+            realx3  p_i = pos[idx_i];
+            real    R_i = 0.5 * diameter[idx_i];
+            real    T_i = temperature[idx_i];
+            int32x3 currentCell = searchCells.pointIndex(p_i);
+
+            // same cell
+            uint32 idx_j = cellIter.start(
+                currentCell.x(), currentCell.y(), currentCell.z());
+
+            while (idx_j != mapperNBS::CellIterator::NoPos)
+            {
+                if (idx_i < idx_j)
                 {
-                    for (int32 cy = c_y - 1; cy <= c_y + 1; ++cy)
+                    real dx = p_i.x() - pos[idx_j].x();
+                    real dy = p_i.y() - pos[idx_j].y();
+                    real dz = p_i.z() - pos[idx_j].z();
+                    real distSq = dx*dx + dy*dy + dz*dz;
+
+                    real R_j = 0.5 * diameter[idx_j];
+                    real sumRadiiSq = (R_i + R_j) * (R_i + R_j);
+
+                    bool isContact = (distSq < sumRadiiSq);
+                    real dist = sqrt(distSq);
+                    real rc_real = 0.0;
+
+                    if (isContact && dist > 1e-12)
                     {
-                        for (int32 cz = c_z - 1; cz <= c_z + 1; ++cz)
+                        rc_real = contactConduction(
+                            R_i, R_j, dist,
+                            nu[idx_i], nu[idx_j],
+                            E0[idx_i], E0[idx_j],
+                            simYoungsModulus,
+                            K[idx_i], K[idx_j],
+                            T_i, temperature[idx_j],
+                            CalcPP,
+                            Q_pp, idx_i, idx_j);
+                    }
+
+                    if constexpr (CalcPFP)
+                    {
+                        if (dist > 1e-12)
                         {
-                            if (cx >= 0 && cx < numCells.x() &&
-                                cy >= 0 && cy < numCells.y() &&
-                                cz >= 0 && cz < numCells.z())
+                            real r_sij = isContact ? rc_real : 0.0;
+
+                            particleFluidParticle(
+                                R_i, R_j, dist,
+                                fluidKappa[idx_i], fluidKappa[idx_j],
+                                fluidAlpha[idx_i], fluidAlpha[idx_j],
+                                K[idx_i], K[idx_j],
+                                T_i, temperature[idx_j],
+                                r_sij,
+                                Q_pfp, idx_i, idx_j);
+                        }
+                    }
+                }
+
+                idx_j = cellIter.next(idx_j);
+            }
+
+            // neighbour cells
+            for (uint32 ni = 0; ni < 13; ++ni)
+            {
+                int32x3 neighborCell(
+                    currentCell.x() + ox[ni],
+                    currentCell.y() + oy[ni],
+                    currentCell.z() + oz[ni]);
+
+                if (searchCells.inCellRange(neighborCell))
+                {
+                    idx_j = cellIter.start(
+                        neighborCell.x(),
+                        neighborCell.y(),
+                        neighborCell.z());
+
+                    while (idx_j != mapperNBS::CellIterator::NoPos)
+                    {
+                        real dx = p_i.x() - pos[idx_j].x();
+                        real dy = p_i.y() - pos[idx_j].y();
+                        real dz = p_i.z() - pos[idx_j].z();
+                        real distSq = dx*dx + dy*dy + dz*dz;
+
+                        real R_j = 0.5 * diameter[idx_j];
+                        real sumRadiiSq = (R_i + R_j) * (R_i + R_j);
+
+                        bool isContact = (distSq < sumRadiiSq);
+                        real dist = sqrt(distSq);
+                        real rc_real = 0.0;
+
+                        if (isContact && dist > 1e-12)
+                        {
+                            rc_real = contactConduction(
+                                R_i, R_j, dist,
+                                nu[idx_i], nu[idx_j],
+                                E0[idx_i], E0[idx_j],
+                                simYoungsModulus,
+                                K[idx_i], K[idx_j],
+                                T_i, temperature[idx_j],
+                                CalcPP,
+                                Q_pp, idx_i, idx_j);
+                        }
+
+                        if constexpr (CalcPFP)
+                        {
+                            if (dist > 1e-12)
                             {
-                                uint32 j = cellIter.start(cx, cy, cz);
+                                real r_sij = isContact ? rc_real : 0.0;
 
-                                while (j != mapperNBS::CellIterator::NoPos)
-                                {
-                                    // i < j implies i != j -- symmetric
-                                    // pair, computed once, applied to
-                                    // both particles atomically inside
-                                    // contactConduction/
-                                    // particleFluidParticle.
-                                    if (m(j) && i < j)
-                                    {
-                                        real dx = p_i.x() - pos[j].x();
-                                        real dy = p_i.y() - pos[j].y();
-                                        real dz = p_i.z() - pos[j].z();
-
-                                        real distSq =
-                                            dx*dx + dy*dy + dz*dz;
-
-                                        real R_j = 0.5*diameter[j];
-                                        real sumRadiiSq =
-                                            (R_i+R_j)*(R_i+R_j);
-
-                                        bool isContact =
-                                            (distSq < sumRadiiSq);
-                                        real dist = sqrt(distSq);
-                                        real rc_real = 0.0;
-
-                                        // Runs whenever in contact
-                                        // even if CalcCond is false --
-                                        // PFP needs rc_real as r_sij;
-                                        // the Q_pp write is gated by
-                                        // CalcCond inside.
-                                        if (isContact &&
-                                            dist > 1e-12)
-                                        {
-                                            rc_real = contactConduction(
-                                                R_i, R_j, dist,
-                                                nu[i], nu[j],
-                                                E0[i], E0[j],
-                                                simYoungsModulus,
-                                                K[i], K[j],
-                                                T_i, temperature[j],
-                                                CalcCond,
-                                                Q_pp, i, j);
-                                        }
-
-                                        if constexpr (CalcPFP)
-                                        {
-                                            if (dist > 1e-12)
-                                            {
-                                                real r_sij = isContact
-                                                    ? rc_real
-                                                    : 0.0;
-
-                                                particleFluidParticle(
-                                                    R_i, R_j, dist,
-                                                    fluidKappa[i],
-                                                    fluidKappa[j],
-                                                    fluidAlpha[i],
-                                                    fluidAlpha[j],
-                                                    K[i], K[j],
-                                                    T_i, temperature[j],
-                                                    r_sij,
-                                                    Q_pfp, i, j);
-                                            }
-                                        }
-                                    }
-                                    j = cellIter.next(j);
-                                }
+                                particleFluidParticle(
+                                    R_i, R_j, dist,
+                                    fluidKappa[idx_i], fluidKappa[idx_j],
+                                    fluidAlpha[idx_i], fluidAlpha[idx_j],
+                                    K[idx_i], K[idx_j],
+                                    T_i, temperature[idx_j],
+                                    r_sij,
+                                    Q_pfp, idx_i, idx_j);
                             }
                         }
+
+                        idx_j = cellIter.next(idx_j);
                     }
                 }
             }
@@ -175,77 +205,44 @@ void sweep(
 } // thermalConductionPFPMechanismKernels
 
 /**
- * @brief Owns the parameters shared by static-contact conduction
- * (Q_pp) and particle-fluid-particle transfer (Q_pfp) -- combined
- * because both need the Hertzian contact radius from
- * thermalConductionPFPKernels::contactConduction(), even when Q_pp
- * itself is disabled.
- *
- * Constructed only when enableConduction or enablePFP is true.
- * Owns no per-particle memory: Q_pp/Q_pfp outputs live on
- * thermalSphereParticles, the class that consumes them.
- *
- * Self-contained: iterate() runs its own full 27-cell sweep,
- * independent of thermalRadiationMechanism's. When both mechanisms
- * are active, the traversal is computed twice (once here, once
- * there) -- an accepted trade-off for keeping each mechanism free
- * of any dependency on the other.
+ * @brief Q_pp (contact conduction) and Q_pfp (particle-fluid-
+ * particle), combined because both need contactConduction()'s
+ * Hertzian contact radius, even when Q_pp itself is disabled.
+ * Constructed only when enablePP or enablePFP is true.
  */
 class thermalConductionPFPMechanism
 {
 private:
-
     //- private members
-
-        bool    enableConduction_ = false;
-
-        bool    enablePFP_        = false;
-
+        bool    enablePP_  = false;
+        bool    enablePFP_ = false;
         real    simYoungsModulus_ = 1e7;
-
 public:
-
     //- constructors
-
-        /// @brief Reads simYoungsModulus from thermoDict -- mandatory
-        /// for the Hertzian contact-radius correction.
         thermalConductionPFPMechanism(
             const dictionary&   thermoDict,
-            bool                enableConduction,
+            bool                enablePP,
             bool                enablePFP);
-
         ~thermalConductionPFPMechanism() = default;
-
     //- public methods
-
         inline
-        bool conductionEnabled() const
+        bool ppEnabled() const
         {
-            return enableConduction_;
+            return enablePP_;
         }
-
         inline
         bool pfpEnabled() const
         {
             return enablePFP_;
         }
-
         inline
         real simYoungsModulus() const
         {
             return simYoungsModulus_;
         }
-
-        /// @brief Search radius needed: 2x the largest contact
-        /// distance for conduction, 3x for PFP's wider reach.
         real requiredSearchCut(real maxBoundingSphere) const;
-
-        /// @brief Dispatches to one of 4 compiled sweep variants
-        /// (conductionEnabled_ x pfpEnabled_), so the disabled
-        /// mechanism's branch is compiled out of the per-pair loop
-        /// entirely.
         void iterate(
-            const pFlagTypeDevice&          m,
+            const pFlagTypeDevice&          flags,
             const deviceViewType1D<realx3>& pos,
             const deviceViewType1D<real>&   diameter,
             const deviceViewType1D<real>&   temperature,
@@ -254,13 +251,9 @@ public:
             const deviceViewType1D<real>&   nu,
             const deviceViewType1D<real>&   fluidKappa,
             const deviceViewType1D<real>&   fluidAlpha,
-            const mapperNBS::CellIterator&  cellIter,
-            const realx3&                   domainMin,
-            const real&                     cellSize,
-            const int32x3&                  numCells,
+            const mapperNBS&                mapper,
             deviceViewType1D<real>          Q_pp,
             deviceViewType1D<real>          Q_pfp) const;
-
 }; // thermalConductionPFPMechanism
 
 } // pFlow

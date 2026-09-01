@@ -26,10 +26,6 @@ namespace pFlow
 
 //----------------------------- constructors ----------------------------------
 
-// ========================================================================= //
-// Section 1: Constructors and Destructors
-// ========================================================================= //
-
 DEMSystem::DEMSystem(
     word                    demSystemName,
     const std::vector<box>& domains,
@@ -82,10 +78,6 @@ DEMSystem::~DEMSystem()
 
 //----------------------------- static methods --------------------------------
 
-// ========================================================================= //
-// Section 2: Factory Pattern Implementation
-// ========================================================================= //
-
 uniquePtr<DEMSystem> DEMSystem::create(
     word                    demSystemName,
     const std::vector<box>& domains,
@@ -123,6 +115,3 @@ uniquePtr<DEMSystem> DEMSystem::create(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-

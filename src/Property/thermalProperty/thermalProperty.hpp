@@ -50,8 +50,6 @@ private:
 
     //- private members
 
-        // --- Section 2: Material Property Arrays ---
-
         realVector          heatCapacities_;
         
         realVector          heatConductivities_;
@@ -78,8 +76,6 @@ private:
 
     //- private methods
 
-        // --- Section 3: File I/O ---
-
         bool readDictionary();
         
         bool writeDictionary();
@@ -88,16 +84,22 @@ protected:
 
     //- protected members
 
-        // --- Section 1: Internal Path Resolution ---
-
-        /// @brief Safely caches the dictionary directory path.
+        /// @brief Non-owning pointer to the case's directory, used by
+        /// readDictionary() to locate thermoPhysicalInteraction.
+        /// Lifetime requirement: the fileSystem the (fileName, dir)
+        /// constructor is given must outlive this thermalProperty
+        /// object. Currently safe because readDictionary() only runs
+        /// once, from that constructor's body, before p_dir_ could
+        /// ever be read after the referenced object's lifetime ends --
+        /// but this becomes a dangling-pointer risk the moment any
+        /// future code (here or in a derived class, since this member
+        /// is protected) calls readDictionary() again, or otherwise
+        /// dereferences p_dir_, after construction.
         const fileSystem*   p_dir_ = nullptr;
 
 public:
 
     //- constructors
-
-        // --- Section 4: Constructors ---
 
         explicit thermalProperty(
             const word&         fileName,
@@ -122,7 +124,7 @@ public:
 
     //- public methods
 
-        // --- Section 5: Vector Accessor Methods ---
+        //- vector accessors
 
         inline
         const auto& heatCapacities() const
@@ -154,7 +156,7 @@ public:
             return poissonRatios_;
         }
         
-        // --- Section 6: Scalar Accessor Methods ---
+        //- scalar accessors
 
         inline
         real heatCapacity(uint32 i) const
