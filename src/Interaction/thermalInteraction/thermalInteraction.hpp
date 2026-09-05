@@ -24,16 +24,36 @@ Licence:
 #include "systemControl.hpp"
 #include "thermalSphereParticles.hpp"
 #include "mapperNBS.hpp"
+#include "thermalRadiationMechanism.hpp"
+#include "thermalConductionPFPMechanism.hpp"
 #include "Timer.hpp"
 
 namespace pFlow 
 {
 
 /**
- * @brief Dispatcher for intra-phase thermodynamic interactions.
- * * Manages the calculation of particle-particle conduction (Q_pp), 
- * sub-grid Particle-Fluid-Particle heat transfer (Q_pfp), and 
- * local radiation neighbourhood sums.
+ * @brief Dispatcher for particle-particle conduction (Q_pp), PFP
+ * sub-grid heat transfer (Q_pfp), and radiation neighbourhood sums.
+ *
+ * Structured like momentumInteraction on the CFD side (independent
+ * uniquePtr sub-mechanisms), not like drag/interaction (one class
+ * templated on a closure): radiation and conduction+PFP are
+ * independent mechanisms, not alternative ways to compute the same
+ * thing. A disabled mechanism's uniquePtr stays null -- no memory
+ * allocated, no dictionary read.
+ *
+ * Holds no physics logic of its own: each active mechanism runs its
+ * own complete neighbour sweep, self-contained in its own file. This
+ * class only rebuilds the shared cell-list mapper (gated by
+ * neighborListUpdateInterval, read unconditionally since conduction/
+ * PFP also depend on it) and dispatches to whichever mechanisms
+ * exist. This interval is independent of radiation's own
+ * radUpdateInterval (owned by thermalRadiationMechanism): one gates
+ * the cost of rebuilding the shared search structure, the other
+ * reflects radiation's own, physically slower update cadence -- they
+ * happen to serve similar-sounding purposes but for different
+ * reasons, so they are two separate dictionary entries, not one
+ * shared value.
  */
 class thermalInteraction 
 {
@@ -47,84 +67,41 @@ private:
 
     //- private members
 
-        // --- Section 1: System References ---
+        systemControl&                              control_;
+        
+        const thermalSphereParticles&                particles_;
+        
+        uniquePtr<mapperNBS>                         mapper_ = nullptr;
 
-            systemControl&                  control_;
-            
-            const thermalSphereParticles&   particles_;
-            
-            uniquePtr<mapperNBS>            mapper_ = nullptr;
+        /// Null when radiation is disabled.
+        uniquePtr<thermalRadiationMechanism>          radiationMech_ = nullptr;
 
-        // --- Section 2: Physics Control Flags ---
+        /// Null when both conduction and PFP are disabled.
+        uniquePtr<thermalConductionPFPMechanism>      condPfpMech_ = nullptr;
 
-            /// @brief Toggles radiation neighbourhood calculations.
-            bool                            enableRadiation_ = false;
-            
-            uint32                          radUpdateInterval_ = 1;
-            
-            real                            radCut_ = 0.0;
+        /// Mandatory, read regardless of which mechanisms are
+        /// enabled: gates how often the shared mapper rebuilds.
+        /// Independent of thermalRadiationMechanism's own
+        /// radUpdateInterval -- see class doc comment above.
+        uint32                              neighborListUpdateInterval_ = 1;
 
-            /// @brief Toggles direct particle-particle contact conduction.
-            bool                            enableConduction_ = false;
-            
-            real                            simYoungsModulus_ = 1e7;
+        uint32                                        stepCounter_ = 0;
+        
+        /// Overall time for iterate() -- search + both mechanisms.
+        Timer                                         thermalTimer_;
 
-            /// @brief Toggles sub-grid fluid bridge heat transfer (PFP).
-            bool                            enablePFP_ = false;
+        /// Time spent rebuilding the neighbor-search mapper.
+        Timer                                         neighborSearchTimer_;
 
-        // --- Section 3: Radiation Neighbourhood Output ---
-        // Plain Kokkos views, not registered PointFields: particles_
-        // is a const reference, so a PointField (needing the
-        // protected, non-const dynPointStruct()) cannot be registered
-        // here. Sized explicitly via ensureRadiationMemory().
-
-            /// Sum of neighbouring particle temperatures per particle,
-            /// used by the linearised radiation model in
-            /// sphereHeatTransfer (CFD side) [K].
-            deviceViewType1D<real>          radSumTemp_;
-
-            /// Number of radiating neighbours found for each particle [-].
-            deviceViewType1D<uint32>        radNumPrt_;
-
-            /// Host mirror of radSumTemp_, used for CPU-side coupling
-            /// with the CFD solver.
-            hostViewType1D<real>            radSumTempHost_;
-
-            /// Host mirror of radNumPrt_.
-            hostViewType1D<uint32>          radNumPrtHost_;
-
-        // --- Section 4: Performance & Tracking ---
-
-            uint32                          stepCounter_ = 0;
-            
-            /// Overall time for iterate() -- search + kernel combined.
-            Timer                           thermalTimer_;
-
-            /// Time spent rebuilding the neighbor-search mapper
-            /// (mapper_->build()) specifically, isolated from the
-            /// physics kernel below it.
-            Timer                           neighborSearchTimer_;
-
-            /// Time spent in the physics kernel itself
-            /// (thermalInteractionKernels::calcThermalInteractions),
-            /// isolated from the neighbor search above it.
-            Timer                           thermalKernelTimer_;
-
-    //- private methods
-
-        /**
-         * @brief Sizes radSumTemp_/radNumPrt_ to the current particle
-         * count. See the Section 3 comment above for why.
-         */
-        void ensureRadiationMemory();
+        /// Time spent across both mechanisms' iterate() calls.
+        Timer                                         thermalKernelTimer_;
 
 public:
 
     //- constructors
 
-        /**
-         * @brief Constructs the thermal interaction manager.
-         */
+        /// @brief Reads which mechanisms are enabled and constructs
+        /// only those.
         thermalInteraction(
             systemControl&                  control, 
             const thermalSphereParticles&   prtcl, 
@@ -134,41 +111,16 @@ public:
 
     //- public methods
 
-        // --- Section 5: Public Interface ---
-
-        /**
-         * @brief Checks if radiation physics is actively executing.
-         * @return True if radiation is globally enabled by the user.
-         */
         inline
         bool isRadiationEnabled() const
         {
-            return enableRadiation_;
+            return radiationMech_ != nullptr;
         }
 
-        /**
-         * @brief Executes the neighbor-search and thermodynamic kernels.
-         */
+        /// @brief Rebuilds the shared mapper (gated by
+        /// radUpdateInterval_) and dispatches to every active
+        /// mechanism's own iterate().
         void iterate();
-
-        inline
-        auto& radSumTempHost()
-        {
-            return radSumTempHost_;
-        }
-
-        inline
-        auto& radNumPrtHost()
-        {
-            return radNumPrtHost_;
-        }
-
-        /**
-         * @brief Copies radSumTemp_/radNumPrt_ to their host mirrors.
-         * Called automatically at the end of iterate(); safe to call
-         * again from outside since it is idempotent.
-         */
-        void radiationDataHostUpdatedSync();
 
 }; // thermalInteraction
 

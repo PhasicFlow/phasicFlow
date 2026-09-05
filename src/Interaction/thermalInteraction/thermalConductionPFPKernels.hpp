@@ -18,20 +18,85 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
-#ifndef pFlow_thermalPFPKernels_hpp
-#define pFlow_thermalPFPKernels_hpp
+#ifndef pFlow_thermalConductionPFPKernels_hpp
+#define pFlow_thermalConductionPFPKernels_hpp
 
 #include "types.hpp"
 #include <Kokkos_Atomic.hpp>
 
 namespace pFlow
 {
-namespace thermalPFPKernels
+namespace thermalConductionPFPKernels
 {
 
-// Gauss-Legendre quadrature abscissae/weights for the PFP flux integral.
-// Kept at file scope (rather than re-built per thread) to reduce
-// per-thread register pressure on the GPU.
+// Conduction (Q_pp) and PFP (Q_pfp) share this file: contactConduction()
+// always computes the Hertzian contact radius, which particleFluidParticle()
+// needs as its lower integration limit even when Q_pp itself is disabled.
+
+/**
+ * @brief Hertzian-corrected contact radius for a contacting pair;
+ * also applies the static-contact conduction rate Q_pp when calcCond
+ * is true.
+ *
+ * @return Corrected contact radius -- always computed and returned,
+ * since PFP needs it even when calcCond is false.
+ */
+KOKKOS_INLINE_FUNCTION
+real contactConduction(
+    real                     R_i,
+    real                     R_j,
+    real                     dist,
+    real                     nu_i,
+    real                     nu_j,
+    real                     E0_i,
+    real                     E0_j,
+    real                     simYoungsModulus,
+    real                     K_i,
+    real                     K_j,
+    real                     T_i,
+    real                     T_j,
+    bool                     calcCond,
+    deviceViewType1D<real>   Q_pp,
+    uint32                   i,
+    uint32                   j)
+{
+    real R_eff = (R_i * R_j) / (R_i + R_j);
+
+    // Inverse-modulus terms for the simulated vs. real Young's modulus.
+    real term_E_sim = 
+        (1.0 - nu_i*nu_i) / simYoungsModulus + 
+        (1.0 - nu_j*nu_j) / simYoungsModulus;
+        
+    real term_E_real = 
+        (1.0 - nu_i*nu_i) / E0_i + 
+        (1.0 - nu_j*nu_j) / E0_j;
+
+    // Geometric contact radius from normal overlap (Hertzian).
+    real overlap = (R_i + R_j) - dist;
+    real rc_geom = sqrt(R_eff * overlap);
+
+    // A softened simulated Young's modulus overstates the real
+    // contact radius; scale back down by (E_sim/E_real)^0.2.
+    real c_corr = pow(term_E_real / term_E_sim, 0.2);
+
+    real rc_real = c_corr * rc_geom;
+
+    if (calcCond)
+    {
+        real tempDiff = T_j - T_i;
+        real num = 4.0 * rc_real * tempDiff;
+        real den = (1.0 / K_i) + (1.0 / K_j);
+        real Q_rate = num / den;
+
+        Kokkos::atomic_add(&Q_pp[i], Q_rate);
+        Kokkos::atomic_add(&Q_pp[j], -Q_rate);
+    }
+
+    return rc_real;
+}
+
+// Gauss-Legendre quadrature points/weights for the PFP flux integral.
+// File scope to avoid rebuilding per thread.
 KOKKOS_INLINE_FUNCTION 
 constexpr real t_GL[5] = {
     -0.9061798459, -0.5384693101, 0.0, 0.5384693101, 0.9061798459
@@ -43,17 +108,12 @@ constexpr real w_GL[5] = {
 };
 
 /**
- * @brief Computes and applies the Particle-Fluid-Particle sub-grid
- * heat transfer rate Q_pfp (Eq. 6.160) for a pair, when the
- * dimensionless gap H/R* <= 0.5, via 5-point Gauss-Legendre
- * quadrature (Rong & Horio, 1999). Applied atomically and
- * symmetrically to both particles.
+ * @brief Particle-Fluid-Particle sub-grid heat transfer Q_pfp, when
+ * the dimensionless gap H/R* <= 0.5, via 5-point Gauss-Legendre
+ * quadrature (Rong & Horio, 1999).
  *
- * @param r_sij Lower integration limit (Eq. 6.164) -- the Hertzian
- * contact radius when the pair is in contact, 0 otherwise. Callers
- * pass thermalConductionKernels::contactConduction()'s return value
- * when isContact is true, and 0.0 otherwise, matching the original
- * ternary this function replaces.
+ * @param r_sij Lower integration limit -- the Hertzian contact
+ * radius when in contact, 0 otherwise.
  */
 KOKKOS_INLINE_FUNCTION
 void particleFluidParticle(
@@ -77,30 +137,25 @@ void particleFluidParticle(
     real H = 0.5 * (dist - R_i - R_j);
     real k_f = 0.5 * (fluidKappa_i + fluidKappa_j);
 
-    // Cut-off rule: Ignored if H/R* > 0.5
     if (H / R_star <= 0.5 && k_f > 1e-12)
     {
-        // Eq. 6.164: r_ij evaluation based on local porosity
+        // Porosity-weighted radial reach of the fluid bridge.
         real eps_avg = 0.5 * (fluidAlpha_i + fluidAlpha_j);
-
         real solid_frac = 1.0 - eps_avg;
 
         if (solid_frac < 0.01) 
         {
-            // Clamp to avoid inf
             solid_frac = 0.01; 
         }
 
         real r_ij = 0.56 * R_star * pow(solid_frac, -1.0/3.0);
 
-        // Eq. 6.162: r_sf (Upper limit of integration)
+        // Upper integration limit.
         real R_H = R_star + (H > 0.0 ? H : 0.0);
-
         real r_sf = (R_star * r_ij) / sqrt(r_ij*r_ij + R_H*R_H);
 
         if (r_sf > r_sij)
         {
-            // Loop-free 5-point Gauss-Legendre Quadrature
             real A = r_sij;
             real B = r_sf;
             real c1 = 0.5 * (B - A);
@@ -109,7 +164,6 @@ void particleFluidParticle(
 
             real integral = 0.0;
 
-            // Explicit unrolled loop for GPU registers (Thread-safe)
             for (int k = 0; k < 5; ++k)
             {
                 real r_pt = c1 * t_GL[k] + c2;
@@ -129,7 +183,6 @@ void particleFluidParticle(
                     root_j = sqrt(Rj2 - r2);
                 }
 
-                // Lens gap physical thickness
                 real gap = dist - root_i - root_j;
 
                 if (gap < 0.0) 
@@ -143,8 +196,7 @@ void particleFluidParticle(
 
                 real R_th = term_i + term_j + term_f;
 
-                // Avoid division by zero at perfect rigid contact
-                // centers
+                // Avoid division by zero at perfect rigid contact.
                 if (R_th > 1e-12)
                 {
                     real F = (2.0 * pi * r_pt) / R_th;
@@ -153,7 +205,6 @@ void particleFluidParticle(
             }
             integral *= c1;
 
-            // Apply integrated PFP flux symmetrically
             real Q_pfp_val = integral * (T_j - T_i);
 
             Kokkos::atomic_add(&Q_pfp[i], Q_pfp_val);
@@ -162,7 +213,7 @@ void particleFluidParticle(
     }
 }
 
-} // thermalPFPKernels
+} // thermalConductionPFPKernels
 } // pFlow
 
-#endif // pFlow_thermalPFPKernels_hpp
+#endif // pFlow_thermalConductionPFPKernels_hpp

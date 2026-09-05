@@ -27,11 +27,9 @@ grainInteraction/grainInteractionsNonLinearModels.cpp
 grainInteraction/grainInteractionsNonLinearModModels.cpp
 
 
-
 thermalInteraction/thermalInteraction.cpp
-thermalInteraction/thermalInteractionKernels.cpp
-
-
+thermalInteraction/thermalConductionPFPMechanism.cpp
+thermalInteraction/thermalRadiationMechanism.cpp
 
 
 )
@@ -51,5 +49,9 @@ pFlow_add_library_install(Interaction SourceFiles link_libs)
 
 #additional locations 
 target_include_directories(Interaction PUBLIC "./contactSearch")
+
+
+
+
 
 

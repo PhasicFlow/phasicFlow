@@ -65,8 +65,9 @@ private:
         hostViewType1D<realx3>          fluidTorqueHost_;
 
         // --- Fluid-momentum coupling (thermal) ---
-        // Neither is written by any DEM-side kernel; both come only
-        // from the CFD push, same as fluidForce_/fluidTorque_.
+        // READ_NEVER/WRITE_NEVER (see the .cpp): zeroed and recomputed
+        // by the CFD coupling layer on every exchange, so a value in
+        // particlesDict.setFields is silently ignored -- intentional.
 
         /// Convective heat source from the fluid phase [W].
         realPointField_D                heatSourceConv_;
@@ -98,10 +99,7 @@ protected:
 
     //- protected methods
 
-        /**
-         * @brief Sizes every host mirror to match its device field.
-         * New slots are populated by a full sync call, not here.
-         */
+        /// @brief Sizes every host mirror to match its device field.
         void checkHostMemory();
 
 public:
@@ -224,20 +222,19 @@ public:
             return fluidAlphaHost_;
         }
 
-        /// @brief Pushes heatSourceConvHost_/heatSourceRadHost_ (just
-        /// written by the CFD coupling layer) to their device fields.
+        /// @brief Pushes heatSourceConvHost_/heatSourceRadHost_ to
+        /// their device fields.
         void heatSourcesHostUpdatedSync();
 
-        /// @brief Pushes fluidKappaHost_/fluidAlphaHost_ (just written
-        /// by the CFD coupling layer) to their device fields.
+        /// @brief Pushes fluidKappaHost_/fluidAlphaHost_ to their
+        /// device fields.
         void fluidPropertiesHostUpdatedSync();
 
-        /// @brief Pulls temperature() (just updated by the DEM kernel)
-        /// to temperatureHost_, for the CFD coupling layer to read.
+        /// @brief Pulls temperature() to temperatureHost_.
         void temperatureHostUpdatedSync();
 
         /// @brief Pulls emissivity() to emissivityHost_ (a material
-        /// constant, so this only ever needs calling once).
+        /// constant -- only ever needs calling once).
         void emissivityHostUpdatedSync();
 
 }; // thermalSphereFluidParticles
@@ -245,6 +242,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalSphereFluidParticles_hpp
-
-
-

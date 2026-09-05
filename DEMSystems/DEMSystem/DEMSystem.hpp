@@ -40,10 +40,16 @@ protected:
 
     //- protected members
 
+        /// Parsed contents of the case's controlDict (start/end time,
+        /// save interval, etc.), read once at construction.
         readControlDict             ControlDict_;
 
+        /// Owns the case's systemControl repository (time, settings,
+        /// case-setup path) for the lifetime of this DEM system.
         uniquePtr<systemControl>    Control_ = nullptr;
 
+        /// Performance-timer registry for this DEM system, rooted under
+        /// Control_'s own timer tree.
         uniquePtr<Timers>           timers_;
 
 public:
@@ -86,9 +92,7 @@ public:
             )
         );
 
-        // ===================================================================== //
-        // Global accessors
-        // ===================================================================== //
+        //--- global accessors ------------------------------------------------
 
         inline
         realx3 g() const
@@ -120,9 +124,7 @@ public:
             return Control_->timers();
         }
 
-        // ===================================================================== //
-        // Pure virtual interfaces — mechanics
-        // ===================================================================== //
+        //--- pure virtual interfaces: mechanics -------------------------------
 
         virtual
         bool updateParticleDistribution(
@@ -161,9 +163,11 @@ public:
 
         virtual bool iterate(real upToTime) = 0;
 
-        // ===================================================================== //
-        // Thermal & radiation coupling interfaces (default: no-op / empty span)
-        // ===================================================================== //
+        //--- thermal & radiation coupling interfaces --------------------------
+        // Default no-op / empty-span implementations: a plain
+        // (non-thermal) DEM system never overrides these, so the CFD
+        // coupling layer can call them unconditionally on any
+        // DEMSystem and safely get "nothing to report" back.
 
         virtual span<real> temperature() { return span<real>(); }
         virtual span<real> emissivity() { return span<real>(); }
@@ -179,9 +183,9 @@ public:
         virtual span<real> parFluidAlpha() { return span<real>(); }
         virtual bool sendFluidPropertiesToDEM() { return false; }
 
-        // ===================================================================== //
-        // Chemical reaction coupling interfaces (default: no-op / empty span)
-        // ===================================================================== //
+        //--- chemical reaction coupling interfaces ----------------------------
+        // Same default-no-op convention as the thermal interfaces above,
+        // for DEM systems that carry no reaction kinetics.
 
         virtual span<real> solidMassFractions() { return span<real>(); }
         virtual span<real> gasMassSource() { return span<real>(); }

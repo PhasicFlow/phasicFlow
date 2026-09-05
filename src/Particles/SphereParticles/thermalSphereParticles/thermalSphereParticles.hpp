@@ -29,10 +29,10 @@ namespace pFlow
 
 /**
  * @brief Standalone (no CFD mesh) thermal state and properties for
- * spherical particles: temperature, conduction (Q_pp), and PFP
- * (Q_pfp). For a fluid-coupled particle set that also has
- * convective/radiative sources and fluid-momentum coupling, see
- * thermalSphereFluidParticles.
+ * spherical particles: temperature, conduction (Q_pp), PFP (Q_pfp),
+ * and radiation's neighbourhood sum. For a fluid-coupled particle set
+ * that also has convective/radiative CFD sources and fluid-momentum
+ * coupling, see thermalSphereFluidParticles.
  */
 class thermalSphereParticles
 :
@@ -71,6 +71,18 @@ private:
         /// Particle-fluid-particle sub-grid heat source, Q_pfp [W].
         realPointField_D                heatSourcePFP_;
 
+        /// Sum of neighbouring particle temperatures, used by the
+        /// linearised radiation model (CFD side) [K]. Written by
+        /// thermalRadiationMechanism via deviceViewAll(), which does
+        /// not own this field -- same ownership split as
+        /// heatSourceCondPP_ above. Zero-filled (default) when
+        /// radiation is disabled.
+        realPointField_D                radSumTemp_;
+
+        /// Number of radiating neighbours found for each particle [-].
+        /// See radSumTemp_ above.
+        uint32PointField_D              radNumPrt_;
+
         /// Particle surface emissivity [-].
         realPointField_D                emissivity_;
 
@@ -98,11 +110,38 @@ protected:
 
     //- protected methods
 
-        /**
-         * @brief Dispatches the standalone (no Q_conv/Q_rad) heat-transfer
-         * kernel and the temperature time-integration kernel, after
-         * first resetting temperatureRate_ to zero.
-         */
+        /// Zeroes heatSourceCondPP_. Called from beforeIteration() --
+        /// thermalInteraction only adds into this field, it never
+        /// zeroes it.
+        void zeroHeatSourceCondPP()
+        {
+            heatSourceCondPP_.fill(0.0);
+        }
+
+        /// Zeroes heatSourcePFP_. See zeroHeatSourceCondPP() above.
+        void zeroHeatSourcePFP()
+        {
+            heatSourcePFP_.fill(0.0);
+        }
+
+        /// Zeroes radSumTemp_. Called from beforeIteration() --
+        /// thermalRadiationMechanism now accumulates into this field
+        /// via atomic_add, so it needs zeroing first, same as
+        /// heatSourceCondPP_ above.
+        void zeroRadSumTemp()
+        {
+            radSumTemp_.fill(0.0);
+        }
+
+        /// Zeroes radNumPrt_. See zeroRadSumTemp() above.
+        void zeroRadNumPrt()
+        {
+            radNumPrt_.fill(0);
+        }
+
+        /// @brief Dispatches the standalone (no Q_conv/Q_rad)
+        /// heat-transfer kernel and temperature integration, after
+        /// resetting temperatureRate_ to zero.
         void iterateThermal();
 
         /// Rate of temperature change dT/dt [K/s]. Exposed so
@@ -138,12 +177,17 @@ public:
 
     //- public methods
 
-        /**
-         * @brief Scatters per-material thermal properties to individual 
-         * particle slots on the GPU.
-         * @return True upon successful mapping.
-         */
+        /// @brief Scatters per-material thermal properties to
+        /// individual particle slots on the GPU.
         bool initializeThermalParticles();
+
+        /// @brief Zeroes heatSourceCondPP_/heatSourcePFP_/radSumTemp_/
+        /// radNumPrt_, then defers to sphereParticles::beforeIteration().
+        /// Zeroing happens here rather than in iterateThermal(), since
+        /// thermalInteraction accumulates into these fields (all via
+        /// atomic_add) between this call and iterate() -- zeroing any
+        /// later would erase that step's values before they are read.
+        bool beforeIteration() override;
 
         bool iterate() override;
 
@@ -207,6 +251,30 @@ public:
         }
 
         inline
+        const realPointField_D& radSumTemp() const
+        {
+            return radSumTemp_;
+        }
+
+        inline
+        realPointField_D& radSumTemp()
+        {
+            return radSumTemp_;
+        }
+
+        inline
+        const uint32PointField_D& radNumPrt() const
+        {
+            return radNumPrt_;
+        }
+
+        inline
+        uint32PointField_D& radNumPrt()
+        {
+            return radNumPrt_;
+        }
+
+        inline
         const realPointField_D& emissivity() const
         {
             return emissivity_;
@@ -259,6 +327,3 @@ public:
 } // pFlow
 
 #endif // pFlow_thermalSphereParticles_hpp
-
-
-

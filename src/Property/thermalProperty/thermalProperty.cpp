@@ -19,7 +19,7 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalProperty.hpp"
-#include "fileDictionary.hpp"
+#include "dictionary.hpp"
 
 namespace pFlow
 {
@@ -28,24 +28,24 @@ namespace pFlow
 
 bool thermalProperty::readDictionary()
 {
-    uniquePtr<fileDictionary> thermoDictPtr = nullptr;
-
-    // Dynamic path resolution
-    if (p_dir_ != nullptr)
-    {
-        thermoDictPtr = makeUnique<fileDictionary>(
-            "thermoPhysicalInteraction", 
-            *p_dir_);
-    }
-    else
-    {
-        // Safe fallback for legacy code calling the default constructor
-        thermoDictPtr = makeUnique<fileDictionary>(
-            "thermoPhysicalInteraction", 
-            fileSystem("caseSetup"));
-    }
-
-    auto& thermoDict = thermoDictPtr();
+    // thermoPhysicalInteraction is read-only here (never written back,
+    // never registered) -- a plain dictionary is enough, matching the
+    // same read-only secondary-file pattern already used in
+    // thermalInteraction.cpp for this exact file. fileDictionary's
+    // extra IOobject/objectFile machinery isn't needed for this.
+    //
+    // dictionary(keyword, file) opens 'file' directly via iFstream, so
+    // unlike fileDictionary(keyword, file) -- which combined the two
+    // internally through objectFile -- 'file' here must already be the
+    // complete path: the directory and filename are concatenated
+    // explicitly, exactly as thermalInteraction.cpp does for this same
+    // file.
+    dictionary thermoDict(
+        "thermoPhysicalInteraction",
+        // Fallback when constructed without a directory: the
+        // (fileName, owner) constructor has none to pass here.
+        (p_dir_ != nullptr ? *p_dir_ : fileSystem("caseSetup"))
+            + "thermoPhysicalInteraction");
 
     // Read thermal properties
     heatCapacities_ = 

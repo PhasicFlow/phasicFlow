@@ -73,6 +73,22 @@ thermalSphereParticles::thermalSphereParticles(
             objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
+    radSumTemp_(
+        objectFile(
+            "radSumTemp", 
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(), 
+        0.0),
+    radNumPrt_(
+        objectFile(
+            "radNumPrt", 
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(), 
+        static_cast<uint32>(0)),
     emissivity_(
         objectFile(
             "emissivity", 
@@ -191,6 +207,21 @@ bool thermalSphereParticles::initializeThermalParticles()
     return true;
 }
 
+bool thermalSphereParticles::beforeIteration()
+{
+    if (!sphereParticles::beforeIteration())
+    {
+        return false;
+    }
+
+    zeroHeatSourceCondPP();
+    zeroHeatSourcePFP();
+    zeroRadSumTemp();
+    zeroRadNumPrt();
+
+    return true;
+}
+
 bool thermalSphereParticles::iterate()
 {
     if (!sphereParticles::iterate())
@@ -208,8 +239,9 @@ void thermalSphereParticles::iterateThermal()
     auto mask = dynPointStruct().activePointsMaskDevice();
 
     // Reset the rate scratch buffer before recomputation. Folded in
-    // here rather than a separate beforeIteration() override -- see
-    // this method's declaration in the header for why.
+    // here rather than beforeIteration() -- unlike heatSourceCondPP_/
+    // heatSourcePFP_, temperatureRate_ is never written by another
+    // class, so there is no ordering requirement forcing it earlier.
     temperatureRate_.field().fill(0.0);
 
     heatTransferTimer_.start();
@@ -252,9 +284,9 @@ bool thermalSphereParticles::insertParticles(
     realVector kappaV   ("fluidKappa");
     realVector alphaV   ("fluidAlpha");
 
-    // temperature and heatSourcePFP are not seeded here: both default
-    // correctly for newly inserted particles via their own field
-    // default value (temperature_ = 300, heatSourcePFP_ = 0).
+    // temperature, heatSourcePFP, radSumTemp, radNumPrt are not
+    // seeded here: all default correctly for newly inserted particles
+    // via their own field default value.
 
     for (const auto& name : names)
     {
@@ -288,6 +320,3 @@ bool thermalSphereParticles::insertParticles(
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
-

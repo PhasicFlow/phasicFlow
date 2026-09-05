@@ -30,7 +30,7 @@ bool thermalSphereDEMSystem::loop()
 {
     do 
     {
-        // 3.1 Handle particle injection triggers
+        // Particle injection
         if (!insertion_().insertParticles(
                 Control().time().currentIter(),
                 Control().time().currentTime(),
@@ -41,24 +41,24 @@ bool thermalSphereDEMSystem::loop()
             return false;
         }
 
-        // 3.2 Initialize physics accumulators
+        // Reset accumulators
         geometry_->beforeIteration();
         interaction_->beforeIteration();
         thermalParticles_->beforeIteration();
         
-        // 3.3 Mechanical collision evaluation
+        // Mechanical collisions
         interaction_->iterate();
 
-        // 3.4 Thermodynamic evaluation (Q_pp, Q_pfp, Q_rad)
+        // Q_pp, Q_pfp, Q_rad
         if (thermalInteraction_) 
         {
             thermalInteraction_->iterate();
         }
 
-        // 3.5 Equations of motion (with fluid force) and energy integration
+        // Motion + energy integration
         thermalParticles_->iterate();
 
-        // 3.6 Clean up and state finalization
+        // Finalize
         geometry_->iterate();
         thermalParticles_->afterIteration();
         geometry_->afterIteration();
@@ -66,6 +66,24 @@ bool thermalSphereDEMSystem::loop()
     } while(Control()++);
 
     return true;
+}
+
+void thermalSphereDEMSystem::ensureRadiationHostMemory()
+{
+    // Sized to the particle count. radSumTemp_/radNumPrt_ now live as
+    // pointFields on thermalSphereParticles (always present, zero
+    // when radiation is disabled), so the device source for the
+    // deep_copy below is always valid -- no explicit zero-fill is
+    // needed here any more: every caller of this method immediately
+    // follows it with a fresh deep_copy from that always-correct
+    // source.
+    size_t newSize = thermalParticles_->temperature().size();
+
+    if (radSumTempHost_.extent(0) != newSize)
+    {
+        resizeNoInit(radSumTempHost_, newSize);
+        resizeNoInit(radNumPrtHost_,  newSize);
+    }
 }
 
 //----------------------------- constructors ----------------------------------
@@ -81,13 +99,9 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
 {
     REPORT(0) << "\nInitializing thermal DEM components..." << END_REPORT;
 
-    // Discard the base class's temporary mechanical-only build.
-    // particles_ (inherited from sphereDEMSystem, typed
-    // uniquePtr<sphereFluidParticles>) is reset to null and deliberately
-    // left unused for the rest of this class's lifetime: thermalParticles_
-    // (below) is the real, correctly-typed particles object from here on.
-    // See the class-level doc comment in the header for why particles_
-    // cannot simply be repointed at it.
+    // Discards the base class's mechanical-only build: particles_
+    // (inherited, typed sphereFluidParticles) cannot hold
+    // thermalParticles_ (see header), so it is reset and left unused.
     interaction_.reset();
     insertion_.reset();
     particles_.reset();
@@ -103,10 +117,8 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
         thermalProps);
     spheres_ = uniquePtr<sphereShape>(combinedShape);
 
-    // thermalSphereFluidParticles' constructor already calls
-    // initializeThermalParticles() internally (via the inherited
-    // thermalSphereParticles constructor body), so no separate
-    // initialization call is needed here.
+    // thermalSphereFluidParticles' constructor already initializes
+    // thermal properties internally.
     auto* tp = new thermalSphereFluidParticles(
         Control(),
         *combinedShape);
@@ -130,6 +142,8 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
         Control(),
         *thermalParticles_,
         localDomain);
+
+    ensureRadiationHostMemory();
 
     real minD, maxD;
     thermalParticles_->boundingSphereMinMax(minD, maxD);
@@ -156,12 +170,8 @@ bool thermalSphereDEMSystem::iterate(real upToTime)
     return loop();
 }
 
-// ========================================================================= //
-// Overrides required because sphereDEMSystem's inherited implementation
-// reads particles_ directly. Bodies below are adapted line-for-line from
-// the verified sphereDEMSystem.cpp, substituting thermalParticles_ for
-// particles_ (a raw pointer here, so no extra dereference).
-// ========================================================================= //
+//--- overrides read thermalParticles_ instead of the inherited,
+// unused particles_ (a raw pointer, so no extra dereference). --------
 
 bool thermalSphereDEMSystem::beforeIteration()
 {
@@ -178,12 +188,8 @@ bool thermalSphereDEMSystem::beforeIteration()
             std::as_const(*thermalParticles_).rVelocity().hostView();
     }
 
-    // Explicit re-sync so CFD reads the temperature from the last
-    // completed DEM sub-step. The per-substep sync inside the DEM loop
-    // (thermalSphereFluidParticles::beforeIteration(), called every
-    // substep) covers every substep except the very last one -- nothing
-    // runs after it, inside the loop, to sync its result -- so this
-    // call covers exactly that gap.
+    // Covers the last DEM sub-step: the per-substep sync inside the
+    // loop reaches every substep except this one.
     thermalParticles_->temperatureHostUpdatedSync();
 
     return true;
@@ -245,9 +251,7 @@ bool thermalSphereDEMSystem::sendFluidTorqueToDEM()
     return true;
 }
 
-// ========================================================================= //
-// Thermal & radiation coupling interfaces
-// ========================================================================= //
+//--- thermal & radiation coupling interfaces --------------------------------
 
 span<real> thermalSphereDEMSystem::temperature()
 {
@@ -263,17 +267,28 @@ span<real> thermalSphereDEMSystem::emissivity()
 
 span<real> thermalSphereDEMSystem::radSumTemp()
 {
-    // Moved from thermalParticles_ to thermalInteraction_: that is the
-    // class that actually calculates radiation now (see
-    // thermalInteraction.hpp's Section 3 doc comment).
-    auto& hVec = thermalInteraction_->radSumTempHost();
-    return span<real>(hVec.data(), hVec.size());
+    // radSumTemp_ now lives as a pointField on thermalParticles_
+    // itself (always present, zero-filled when radiation is
+    // disabled) -- so this deep_copy is unconditional, no
+    // isRadiationEnabled() check needed any more.
+    ensureRadiationHostMemory();
+
+    Kokkos::deep_copy(
+        radSumTempHost_,
+        thermalParticles_->radSumTemp().deviceViewAll());
+
+    return span<real>(radSumTempHost_.data(), radSumTempHost_.size());
 }
 
 span<uint32> thermalSphereDEMSystem::radNumPrt()
 {
-    auto& hVec = thermalInteraction_->radNumPrtHost();
-    return span<uint32>(hVec.data(), hVec.size());
+    ensureRadiationHostMemory();
+
+    Kokkos::deep_copy(
+        radNumPrtHost_,
+        thermalParticles_->radNumPrt().deviceViewAll());
+
+    return span<uint32>(radNumPrtHost_.data(), radNumPrtHost_.size());
 }
 
 span<real> thermalSphereDEMSystem::parFluidHeatSourceConv()

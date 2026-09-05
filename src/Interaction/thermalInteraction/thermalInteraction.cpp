@@ -19,29 +19,9 @@ Licence:
 -----------------------------------------------------------------------------*/
 
 #include "thermalInteraction.hpp"
-#include "thermalInteractionKernels.hpp"
 
 namespace pFlow 
 {
-
-//----------------------------- protected methods ------------------------------
-
-void thermalInteraction::ensureRadiationMemory()
-{
-    // Plain views, not a registered PointField (see the class-level
-    // doc comment on Section 3 in the header for why): sizing must be
-    // checked explicitly rather than relying on an automatic
-    // insert/delete hook.
-    size_t newSize = particles_.size();
-
-    if (radSumTemp_.extent(0) != newSize)
-    {
-        Kokkos::resize(radSumTemp_, newSize);
-        Kokkos::resize(radNumPrt_,  newSize);
-        resizeNoInit(radSumTempHost_, newSize);
-        resizeNoInit(radNumPrtHost_,  newSize);
-    }
-}
 
 //----------------------------- constructors ----------------------------------
 
@@ -59,74 +39,31 @@ thermalInteraction::thermalInteraction(
     dictionary thermoDict(
         "thermoPhysicalInteraction", 
         control_.caseSetup().path() + "thermoPhysicalInteraction");
+
+    // Independent of radiation's own radUpdateInterval: gates the
+    // shared mapper rebuild, which conduction/PFP rely on too.
+    neighborListUpdateInterval_ =
+        thermoDict.getValMax<uint32>("neighborListUpdateInterval", 1);
     
-    // ---------------------------------------------------------------------- //
-    // Radiation
-    // ---------------------------------------------------------------------- //
-    if (!thermoDict.containsDataEntry("enableRadiation"))
-    {
-        fatalErrorInFunction 
-            << "Missing MANDATORY entry 'enableRadiation' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
-    
+    //--- radiation -------------------------------------------------------
     Logical enableRad = thermoDict.getVal<Logical>("enableRadiation");
     
     if (enableRad)
     {
-        enableRadiation_ = true;
-
-        // radCut determines which particles are treated as radiating
-        // neighbours of one another. A silently-defaulted value would
-        // switch radiation off in effect while still reporting it as
-        // enabled, so it must be supplied explicitly.
-        if (!thermoDict.containsDataEntry("radCut"))
-        {
-            fatalErrorInFunction
-                << "Parameter 'radCut' is mandatory when enableRadiation "
-                << "is true.\nPlease add it to the thermoPhysicalInteraction "
-                << "dictionary." << endl;
-            fatalExit;
-        }
-        radCut_ = thermoDict.getVal<real>("radCut");
-
-        radUpdateInterval_ = thermoDict.getValOrSet<uint32>(
-            "radUpdateInterval", 
-            1);
-            
-        if (radUpdateInterval_ == 0)
-        {
-            fatalErrorInFunction
-                << "'radUpdateInterval' must be a positive integer, got 0." 
-                << endl;
-            fatalExit;
-        }
-
         REPORT(0) << "Creating Radiation interaction model . . ." << END_REPORT;
+        radiationMech_ = makeUnique<thermalRadiationMechanism>(thermoDict);
     }
     else
     {
-        enableRadiation_ = false;
         REPORT(0) << Yellow_Text("  -> Radiation is disabled by user.") 
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Collisional Heat Conduction (Q_pp)
-    // ---------------------------------------------------------------------- //
-    if (!thermoDict.containsDataEntry("enableConduction"))
-    {
-        fatalErrorInFunction 
-            << "Missing MANDATORY entry 'enableConduction' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
+    //--- collisional heat conduction (Q_pp) / PFP -------------------------
+    Logical enablePP  = thermoDict.getVal<Logical>("enablePP");
+    Logical enablePFP = thermoDict.getVal<Logical>("enablePFP");
 
-    Logical enableCond = thermoDict.getVal<Logical>("enableConduction");
-    enableConduction_ = enableCond ? true : false;
-
-    if (enableConduction_)
+    if (enablePP)
     {
         REPORT(0) << "Creating Collisional Heat Transfer (Q_p-p) model . . ." 
             << END_REPORT;
@@ -137,21 +74,7 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Particle-Fluid-Particle (PFP) Sub-grid Heat Transfer
-    // ---------------------------------------------------------------------- //
-    if (!thermoDict.containsDataEntry("enablePFP"))
-    {
-        fatalErrorInFunction 
-            << "Missing MANDATORY entry 'enablePFP' "
-            << "in thermoPhysicalInteraction dictionary." << endl;
-        fatalExit;
-    }
-
-    Logical enablePfpFlag = thermoDict.getVal<Logical>("enablePFP");
-    enablePFP_ = enablePfpFlag ? true : false;
-    
-    if (enablePFP_)
+    if (enablePFP)
     {
         REPORT(0) << "Creating Particle-Fluid-Particle (PFP) "
                   << "sub-grid Heat Transfer model . . ." << END_REPORT;
@@ -162,41 +85,28 @@ thermalInteraction::thermalInteraction(
             << END_REPORT;
     }
 
-    // ---------------------------------------------------------------------- //
-    // Hertzian simulation-scale Young's modulus.
-    //
-    // Used to compute the mechanical contact radius whenever two particles
-    // touch. That contact radius feeds both the collisional conduction
-    // rate (Q_pp) and the PFP contact-limit radius r_sij, regardless of
-    // which of the two mechanisms triggered the calculation, so it must
-    // be supplied whenever either is enabled.
-    // ---------------------------------------------------------------------- //
-    if (enableConduction_ || enablePFP_)
+    if (enablePP || enablePFP)
     {
-        if (thermoDict.containsDataEntry("simYoungsModulus"))
-        {
-            simYoungsModulus_ = thermoDict.getVal<real>("simYoungsModulus");
-        }
-        else
-        {
-            fatalErrorInFunction
-                << "Parameter 'simYoungsModulus' is mandatory when "
-                << "enableConduction or enablePFP is true.\n"
-                << "Please add it to the thermoPhysicalInteraction dictionary." 
-                << endl;
-            fatalExit;
-        }
+        condPfpMech_ = makeUnique<thermalConductionPFPMechanism>(
+            thermoDict,
+            static_cast<bool>(enablePP),
+            static_cast<bool>(enablePFP));
     }
 
-    // ---------------------------------------------------------------------- //
-    // Determine the neighbor search cell size.
-    // ---------------------------------------------------------------------- //
-    real pfpCut    = 3.0 * particles_.getShapes().maxBoundingSphere();
-    real searchCut = radCut_;
-    
-    if (enablePFP_ && pfpCut > searchCut) 
+    //--- neighbor search cell size ---------------------------------------
+    real searchCut = 0.0;
+
+    if (radiationMech_)
     {
-        searchCut = pfpCut;
+        searchCut = max(searchCut, radiationMech_->requiredSearchCut());
+    }
+
+    if (condPfpMech_)
+    {
+        searchCut = max(
+            searchCut,
+            condPfpMech_->requiredSearchCut(
+                particles_.getShapes().maxBoundingSphere()));
     }
     
     real cellSize = (searchCut > 1e-12) 
@@ -213,134 +123,87 @@ thermalInteraction::thermalInteraction(
         particles_.dynPointStruct().activePointsMaskDevice(),
         false,  
         true);
-
-    // Size radSumTemp_/radNumPrt_ (device + host) now, so they are
-    // correctly sized as soon as this object exists, rather than
-    // leaving them at their default zero size until the first
-    // iterate() call.
-    ensureRadiationMemory();
 }
 
 //---------------------------- public methods ---------------------------------
 
 void thermalInteraction::iterate()
 {
-    // Checked unconditionally, every call, regardless of the
-    // enable-flags early return below: keeps radSumTemp_/radNumPrt_
-    // correctly sized irrespective of which thermal mechanisms are on.
-    ensureRadiationMemory();
-
-    if (!enableRadiation_ && !enableConduction_ && !enablePFP_)
+    if (!radiationMech_ && !condPfpMech_)
     {
         return;
     }
     
     thermalTimer_.start();
-    bool boxChanged = false;
 
-    neighborSearchTimer_.start();
-    bool mapperBuiltOk = mapper_->build(
-        particles_.pointPosition().deviceViewAll(),
-        particles_.dynPointStruct().activePointsMaskDevice(),
-        boxChanged);
-    neighborSearchTimer_.end();
+    bool rebuildThisStep =
+        (stepCounter_ % neighborListUpdateInterval_ == 0);
 
-    if (!mapperBuiltOk)
+    if (rebuildThisStep)
     {
-        output
-            << "\n"
-            << Yellow_Text("[thermalInteraction] WARNING — mapperNBS failed "
-                           "to build")
-            << " at step " << stepCounter_ << ".\n"
-            << "  Likely cause: a burned-out ghost particle has an extreme "
-            << "position\n"
-            << "  that forces the search box beyond allocatable limits.\n"
-            << "  Thermal interactions (Q_pp, Q_pfp, radiation) are SKIPPED "
-            << "this step.\n"
-            << endl;
+        bool boxChanged = false;
 
-        thermalTimer_.end();
-        stepCounter_++;
-        return;
+        neighborSearchTimer_.start();
+        bool mapperBuiltOk = mapper_->build(
+            particles_.pointPosition().deviceViewAll(),
+            particles_.dynPointStruct().activePointsMaskDevice(),
+            boxChanged);
+        neighborSearchTimer_.end();
+
+        if (!mapperBuiltOk)
+        {
+            fatalErrorInFunction
+                << "[thermalInteraction] mapperNBS failed to build "
+                << "at step " << stepCounter_ << ".\n"
+                << "Likely cause: a burned-out ghost particle has an "
+                << "extreme position that forces the search box "
+                << "beyond allocatable limits." << endl;
+            fatalExit;
+        }
     }
 
-    auto searchBox = mapper_->getSearchCells();
-    auto domainMin = searchBox.domainBox().minPoint();
-    auto cellSize  = searchBox.cellSize();
-    int32x3 numCells(searchBox.nx(), searchBox.ny(), searchBox.nz());
-
-    bool calcRad  =
-        enableRadiation_ && (stepCounter_ % radUpdateInterval_ == 0);
-    bool calcCond = enableConduction_;
-    bool calcPFP  = enablePFP_;
+    auto flags = particles_.dynPointStruct().activePointsMaskDevice();
+    auto pos   = particles_.pointPosition().deviceViewAll();
 
     thermalKernelTimer_.start();
 
-    if (calcCond)
+    if (radiationMech_)
     {
-        Kokkos::deep_copy(particles_.heatSourceCondPP().deviceViewAll(), 0.0);
+        radiationMech_->iterate(
+            flags,
+            pos,
+            particles_.temperature().deviceViewAll(),
+            *mapper_,
+            particles_.radSumTemp().deviceViewAll(),
+            particles_.radNumPrt().deviceViewAll());
     }
 
-    if (calcPFP)
+    if (condPfpMech_)
     {
-        Kokkos::deep_copy(particles_.heatSourcePFP().deviceViewAll(), 0.0);
+        condPfpMech_->iterate(
+            flags,
+            pos,
+            particles_.diameter().deviceViewAll(),
+            particles_.temperature().deviceViewAll(),
+            particles_.conductivity().deviceViewAll(),
+            particles_.E0().deviceViewAll(),
+            particles_.nu().deviceViewAll(),
+            particles_.fluidKappa().deviceViewAll(),
+            particles_.fluidAlpha().deviceViewAll(),
+            *mapper_,
+            particles_.heatSourceCondPP().deviceViewAll(),
+            particles_.heatSourcePFP().deviceViewAll());
     }
-    
-    thermalInteractionKernels::calcThermalInteractions(
-        particles_.dynPointStruct().activePointsMaskDevice(),
-        particles_.pointPosition().deviceViewAll(),
-        particles_.velocity().deviceViewAll(),
-        particles_.rVelocity().deviceViewAll(),
-        particles_.diameter().deviceViewAll(),
-        particles_.mass().deviceViewAll(),
-        particles_.temperature().deviceViewAll(),
-        particles_.Cp().deviceViewAll(),
-        particles_.conductivity().deviceViewAll(),
-        particles_.E0().deviceViewAll(),
-        particles_.nu().deviceViewAll(),
-        particles_.fluidKappa().deviceViewAll(),
-        particles_.fluidAlpha().deviceViewAll(),
-        mapper_->getCellIterator(),
-        domainMin,
-        cellSize,
-        numCells,
-        radCut_,
-        simYoungsModulus_,
-        calcRad,
-        calcCond,
-        calcPFP,
-        particles_.heatSourceCondPP().deviceViewAll(),
-        particles_.heatSourcePFP().deviceViewAll(),
-        // radSumTemp_/radNumPrt_ are now this class's own members
-        // (moved from thermalSphereParticles -- see the header's
-        // Section 3 doc comment), not particles_'s.
-        radSumTemp_,
-        radNumPrt_);
 
     thermalKernelTimer_.end();
-
-    // Sync radSumTemp_/radNumPrt_ to host right after computing them,
-    // so the host mirror is never stale. Harmless to call again from
-    // outside afterwards (e.g. at a CFD-exchange boundary) -- see the
-    // method's doc comment.
-    radiationDataHostUpdatedSync();
 
     thermalTimer_.end();
     stepCounter_++;
 }
 
-void thermalInteraction::radiationDataHostUpdatedSync()
-{
-    ensureRadiationMemory();
-
-    if (radSumTempHost_.size() == radSumTemp_.size() &&
-        radNumPrtHost_.size()  == radNumPrt_.size())
-    {
-        Kokkos::deep_copy(radSumTempHost_, radSumTemp_);
-        Kokkos::deep_copy(radNumPrtHost_,  radNumPrt_);
-    }
-}
-
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
+
+
+
