@@ -26,6 +26,44 @@ namespace pFlow
  * Constructed only when enableRadiation is true. Owns no per-particle
  * storage: radSumTemp_/radNumPrt_ are pointFields on
  * thermalSphereParticles, written via iterate()'s views.
+ *
+ * @details
+ * This class computes only a neighbourhood temperature sum and count
+ * within radCut -- it does not itself evaluate the Stefan-Boltzmann
+ * radiative flux. The actual radiative heat rate is computed on the
+ * CFD side, using this sum as a local "environment temperature":
+ * \f[
+ *   Q_{i,rad} = \sigma \varepsilon_i A_i
+ *   \left( T_{env,i}^4 - T_i^4 \right)
+ * \f]
+ * \f[
+ *   T_{env,i} = \varepsilon_f T_{f,i} +
+ *   (1-\varepsilon_f) \frac{1}{N_i} \sum_{j} T_j
+ * \f]
+ * where the sum over j runs over neighbours within radCut, matching
+ * the sub-domain concept of Musser (2011) and the local-environment-
+ * temperature formulation of Zhou et al. (2003, 2009). The same
+ * formulation is presented in Norouzi et al. (2016), Section 6.3.2.4,
+ * Eqs. 6.178-6.179.
+ *
+ * A direct consequence: in a purely standalone (non-CFD-coupled) run,
+ * this sum is computed if radiation is enabled, but has no effect on
+ * particle temperature at all, since there is no CFD side to consume
+ * it.
+ *
+ * @cite Zhou, H.S., Flamant, G., Gauthier, D., Flitris, Y., 2003.
+ * Simulation of coal combustion in a bubbling fluidized bed by
+ * distinct element method. Chem. Eng. Res. Des. 81(9), 1144-1149.
+ * @cite Zhou, Z.Y., Yu, A.B., Zulli, P., 2009. Particle scale study of
+ * heat transfer in packed and bubbling fluidized beds. AIChE J. 55(4),
+ * 868-884.
+ * @cite Musser, J.M., 2011. Modeling of Heat Transfer and Reactive
+ * Chemistry for Particles in Gas-Solid Flow Utilizing Continuum-
+ * Discrete Methodology (CDM). PhD Dissertation, West Virginia
+ * University.
+ * @cite Norouzi, H.R., Zarghami, R., Sotudeh-Gharebagh, R., Mostoufi,
+ * N., 2016. Coupled CFD-DEM Modeling: Formulation, Implementation and
+ * Application to Multiphase Flows. Wiley, Section 6.3.2.4.
  */
 class thermalRadiationMechanism
 {

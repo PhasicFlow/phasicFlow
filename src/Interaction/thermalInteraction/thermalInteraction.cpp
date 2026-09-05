@@ -116,12 +116,16 @@ thermalInteraction::thermalInteraction(
     REPORT(1) << "  Thermal interaction search cell size: " << cellSize << " m" 
         << END_REPORT;
     
+    // adjustableBox = true: a particle outside domainBox grows/
+    // repositions the search box (or trips the fatalErrorInFunction
+    // in iterate() below if it cannot), instead of indexing outside
+    // the allocated cell arrays.
     mapper_ = makeUnique<mapperNBS>(
         domainBox,
         cellSize,
         particles_.pointPosition().deviceViewAll(),
         particles_.dynPointStruct().activePointsMaskDevice(),
-        false,  
+        true,
         true);
 }
 
@@ -204,6 +208,4 @@ void thermalInteraction::iterate()
 //+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 } // pFlow
-
-
 

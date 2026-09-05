@@ -18,6 +18,9 @@ Licence:
 
 -----------------------------------------------------------------------------*/
 
+#ifndef pFlow_createDEMComponents_hpp
+#define pFlow_createDEMComponents_hpp
+
 /**
  * @file createDEMComponents.hpp
  * @brief Initialization sequence for the thermal DEM simulation objects.
@@ -100,14 +103,19 @@ REPORT(0) << "\nCreating unified thermal interaction model "
 /**
  * @brief Thermal physics dispatcher (conduction, PFP, radiation).
  * Takes a const thermalSphereParticles&, so sphParticles binds
- * directly.
+ * directly. The domain box is sphParticles' own extended
+ * simulation domain -- the same box the mechanical interaction
+ * above is built from -- so both neighbour searches cover exactly
+ * the same physical region.
  */
 auto thermalIntPtr = 
     pFlow::makeUnique<pFlow::thermalInteraction>
     (
         Control,
         sphParticles,
-        pFlow::box()
+        sphParticles.extendedDomain().domainBox()
     );
 
 auto& thermalInt = thermalIntPtr();
+
+#endif // pFlow_createDEMComponents_hpp

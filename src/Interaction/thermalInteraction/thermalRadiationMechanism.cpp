@@ -81,30 +81,38 @@ void thermalRadiationMechanism::iterate(
             constexpr int32 oz[13] =
                 {-1,  0,  1, -1,  0,  1, -1,  0,  1, -1,  0,  1, -1};
 
-            // same cell
-            uint32 idx_j = cellIter.start(
-                currentCell.x(), currentCell.y(), currentCell.z());
+            uint32 idx_j = mapperNBS::CellIterator::NoPos;
 
-            while (idx_j != mapperNBS::CellIterator::NoPos)
+            // same cell -- guarded with inCellRange the same way the
+            // 13 neighbour offsets below are, since a particle's own
+            // cell can fall outside the grid just as easily as a
+            // neighbour offset can.
+            if (searchCells.inCellRange(currentCell))
             {
-                if (idx_i < idx_j)
+                idx_j = cellIter.start(
+                    currentCell.x(), currentCell.y(), currentCell.z());
+
+                while (idx_j != mapperNBS::CellIterator::NoPos)
                 {
-                    real dx = p_i.x() - pos[idx_j].x();
-                    real dy = p_i.y() - pos[idx_j].y();
-                    real dz = p_i.z() - pos[idx_j].z();
-                    real distSq = dx*dx + dy*dy + dz*dz;
-
-                    if (distSq <= radCutSq)
+                    if (idx_i < idx_j)
                     {
-                        Kokkos::atomic_add(
-                            &radSumTemp[idx_i], temperature[idx_j]);
-                        Kokkos::atomic_add(&radNumPrt[idx_i], uint32(1));
-                        Kokkos::atomic_add(&radSumTemp[idx_j], T_i);
-                        Kokkos::atomic_add(&radNumPrt[idx_j], uint32(1));
-                    }
-                }
+                        real dx = p_i.x() - pos[idx_j].x();
+                        real dy = p_i.y() - pos[idx_j].y();
+                        real dz = p_i.z() - pos[idx_j].z();
+                        real distSq = dx*dx + dy*dy + dz*dz;
 
-                idx_j = cellIter.next(idx_j);
+                        if (distSq <= radCutSq)
+                        {
+                            Kokkos::atomic_add(
+                                &radSumTemp[idx_i], temperature[idx_j]);
+                            Kokkos::atomic_add(&radNumPrt[idx_i], uint32(1));
+                            Kokkos::atomic_add(&radSumTemp[idx_j], T_i);
+                            Kokkos::atomic_add(&radNumPrt[idx_j], uint32(1));
+                        }
+                    }
+
+                    idx_j = cellIter.next(idx_j);
+                }
             }
 
             // neighbour cells
