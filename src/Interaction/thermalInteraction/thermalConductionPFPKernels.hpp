@@ -38,6 +38,42 @@ namespace thermalConductionPFPKernels
  * also applies the static-contact conduction rate Q_pp when calcCond
  * is true.
  *
+ * @details
+ * For two particles in mechanical contact, heat flows through the
+ * contact patch at rate
+ * \f[
+ *   Q_{pp} = \frac{4 r_c (T_j - T_i)}{1/k_i + 1/k_j}
+ * \f]
+ * where the contact radius \f$r_c\f$ comes from the Hertzian contact
+ * geometry, corrected for the fact that DEM simulations commonly
+ * soften the Young's modulus (to allow a larger timestep), which
+ * would otherwise overstate the contact radius:
+ * \f[
+ *   r_c = r_{c,geom} \left( \frac{(1-\nu^2)/E_{real}}
+ *   {(1-\nu^2)/E_{sim}} \right)^{1/5}
+ * \f]
+ *
+ * This is the model of Batchelor and O'Brien (1977), as applied to
+ * DEM by Cheng et al. (1999) and Zhou et al. (2009, 2010). The same
+ * formulation is presented in Norouzi et al. (2016), Section 6.3.2.1,
+ * Eqs. 6.159, 6.166-6.167.
+ *
+ * @cite Batchelor, G.K., O'Brien, R.W., 1977. Thermal or electrical
+ * conduction through a granular material. Proc. R. Soc. Lond. A
+ * 355(1682), 313-333.
+ * @cite Cheng, G.J., Yu, A.B., Zulli, P., 1999. Evaluation of
+ * effective thermal conductivity from the structure of a packed bed.
+ * Chem. Eng. Sci. 54, 4199-4209.
+ * @cite Zhou, Z.Y., Yu, A.B., Zulli, P., 2009. Particle scale study of
+ * heat transfer in packed and bubbling fluidized beds. AIChE J. 55(4),
+ * 868-884.
+ * @cite Zhou, Z.Y., Yu, A.B., Zulli, P., 2010. A new computational
+ * method for studying heat transfer in fluid bed reactors. Powder
+ * Technol. 197(1-2), 102-110.
+ * @cite Norouzi, H.R., Zarghami, R., Sotudeh-Gharebagh, R., Mostoufi,
+ * N., 2016. Coupled CFD-DEM Modeling: Formulation, Implementation and
+ * Application to Multiphase Flows. Wiley, Section 6.3.2.1.
+ *
  * @return Corrected contact radius -- always computed and returned,
  * since PFP needs it even when calcCond is false.
  */
@@ -111,6 +147,44 @@ constexpr real w_GL[5] = {
  * @brief Particle-Fluid-Particle sub-grid heat transfer Q_pfp, when
  * the dimensionless gap H/R* <= 0.5, via 5-point Gauss-Legendre
  * quadrature (Rong & Horio, 1999).
+ *
+ * @details
+ * Active whenever the gap between two particles is within the
+ * porosity-weighted reach of the fluid bridge,
+ * \f$r_{ij} = 0.56\, R^* (1-\bar\varepsilon)^{-1/3}\f$ with
+ * \f$R^* = (R_i+R_j)/2\f$. The heat rate is the integral of the
+ * combined solid-plus-gas-layer thermal resistance, taken radially
+ * outward from the contact point (or point of closest approach) to
+ * the edge of the fluid bridge:
+ * \f[
+ *   Q_{pfp} = \int_{r_{sij}}^{r_{sf}} \frac{2\pi r}{R_{th}(r)}\, dr
+ *   \cdot (T_j - T_i)
+ * \f]
+ * This is the sub-grid fluid-bridge model of Rong and Horio (1999),
+ * extended to polydisperse particles following Cheng et al. (1999)
+ * and Zhou et al. (2009); the porosity-weighted reach formula follows
+ * the packing simplification of Yang et al. (2002). The same
+ * formulation is presented in Norouzi et al. (2016), Section 6.3.2.1,
+ * Eqs. 6.160-6.164.
+ *
+ * In a standalone (non-CFD-coupled) run, fluidKappa/fluidAlpha default
+ * to a user-set ambient value; in a coupled run they are the real
+ * per-cell CFD values.
+ *
+ * @cite Rong, D., Horio, M., 1999. DEM simulation of char combustion
+ * in a fluidized bed. In: Proc. 2nd Int. Conf. on CFD in the Minerals
+ * and Process Industries, CSIRO, 65-70.
+ * @cite Cheng, G.J., Yu, A.B., Zulli, P., 1999. Evaluation of
+ * effective thermal conductivity from the structure of a packed bed.
+ * Chem. Eng. Sci. 54, 4199-4209.
+ * @cite Zhou, Z.Y., Yu, A.B., Zulli, P., 2009. Particle scale study of
+ * heat transfer in packed and bubbling fluidized beds. AIChE J. 55(4),
+ * 868-884.
+ * @cite Yang, R.Y., Zou, R.P., Yu, A.B., 2002. Voronoi tessellation of
+ * the packing of fine uniform spheres. Phys. Rev. E 65(4), 041302.
+ * @cite Norouzi, H.R., Zarghami, R., Sotudeh-Gharebagh, R., Mostoufi,
+ * N., 2016. Coupled CFD-DEM Modeling: Formulation, Implementation and
+ * Application to Multiphase Flows. Wiley, Section 6.3.2.1.
  *
  * @param r_sij Lower integration limit -- the Hertzian contact
  * radius when in contact, 0 otherwise.
