@@ -1,0 +1,54 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */ 
+objectName interaction;
+objectType dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+materials                   (prop1);             // a list of materials names
+
+densities                  (1000.0);             // density of materials [kg/m3]
+
+// Real (unsoftened) mechanical properties -- read directly by
+// thermalProperty for the Hertzian contact-radius correction (see
+// simYoungsModulus in caseSetup/thermoPhysicalInteraction). Sample
+// values for a generic plastic-like granular material -- replace
+// with your own material's real values.
+realYoungsModuli            (2.0e9);             // [Pa]
+
+poissonRatios                (0.25);             // [-]
+
+contactListType   sortedContactList; 
+
+contactSearch
+{
+  
+    method          NBS;                          // method for broad search 
+
+    updateInterval   10;
+
+    sizeRatio       1.1;
+
+    cellExtent     0.55;
+} 
+
+model
+{
+    contactForceModel    nonLinearNonLimited;
+
+    rollingFrictionModel              normal;
+
+    Yeff  (1.0e6);                                // Young modulus [Pa]
+
+    Geff  (0.8e6);                                // Shear modulus [Pa]
+
+    nu    (0.25);                                 // Poisson's ratio [-]
+
+    en    (0.7);                                  // coefficient of normal restitution
+
+    mu    (0.3);                                  // dynamic friction 
+
+    mur   (0.1);                                  // rolling friction      
+}

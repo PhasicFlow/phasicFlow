@@ -1,0 +1,39 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow Thermo-Physical Interaction Dictionary                          | 
+|  copyright: www.cemf.ir                                                     | 
+|  Tutorial: heat transfer in a rotating drum (heatSphereGranFlow)            | 
+\* --------------------------------------------------------------------------- */
+
+objectName thermoPhysicalInteraction;
+objectType dictionary;
+fileFormat ASCII;
+/*---------------------------------------------------------------------------*/
+
+// Sample values for a generic plastic-like granular material --
+// replace with your own material's real values.
+heatCapacities      (1800.0);   // [J/(kg.K)]
+heatConductivities  (0.3);      // [W/(m.K)]
+emissivities        (0.9);
+
+enableRadiation      No;
+radUpdateInterval    10;    // unread while enableRadiation is No
+radCut               0.006; // unread while enableRadiation is No
+
+// Independent of radUpdateInterval above: gates how often the shared
+// neighbour-search list is rebuilt.
+neighborListUpdateInterval   10;
+
+enablePP             Yes;
+// Must equal Yeff in caseSetup/interaction exactly (softened there
+// for simulation speed); this is the real (unsoftened) Young's
+// modulus, used to correct the Hertzian contact radius.
+simYoungsModulus     1.0e6;
+
+enablePFP            Yes;
+
+fluidProperties
+{
+    kappa   2.6;
+    alpha   0.9;
+}
+

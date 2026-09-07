@@ -80,58 +80,66 @@ void sweep(
             real    T_i = temperature[idx_i];
             int32x3 currentCell = searchCells.pointIndex(p_i);
 
-            // same cell
-            uint32 idx_j = cellIter.start(
-                currentCell.x(), currentCell.y(), currentCell.z());
+            uint32 idx_j = mapperNBS::CellIterator::NoPos;
 
-            while (idx_j != mapperNBS::CellIterator::NoPos)
+            // same cell -- guarded with inCellRange the same way the
+            // 13 neighbour offsets below are, since a particle's own
+            // cell can fall outside the grid just as easily as a
+            // neighbour offset can.
+            if (searchCells.inCellRange(currentCell))
             {
-                if (idx_i < idx_j)
+                idx_j = cellIter.start(
+                    currentCell.x(), currentCell.y(), currentCell.z());
+
+                while (idx_j != mapperNBS::CellIterator::NoPos)
                 {
-                    real dx = p_i.x() - pos[idx_j].x();
-                    real dy = p_i.y() - pos[idx_j].y();
-                    real dz = p_i.z() - pos[idx_j].z();
-                    real distSq = dx*dx + dy*dy + dz*dz;
-
-                    real R_j = 0.5 * diameter[idx_j];
-                    real sumRadiiSq = (R_i + R_j) * (R_i + R_j);
-
-                    bool isContact = (distSq < sumRadiiSq);
-                    real dist = sqrt(distSq);
-                    real rc_real = 0.0;
-
-                    if (isContact && dist > 1e-12)
+                    if (idx_i < idx_j)
                     {
-                        rc_real = contactConduction(
-                            R_i, R_j, dist,
-                            nu[idx_i], nu[idx_j],
-                            E0[idx_i], E0[idx_j],
-                            simYoungsModulus,
-                            K[idx_i], K[idx_j],
-                            T_i, temperature[idx_j],
-                            CalcPP,
-                            Q_pp, idx_i, idx_j);
-                    }
+                        real dx = p_i.x() - pos[idx_j].x();
+                        real dy = p_i.y() - pos[idx_j].y();
+                        real dz = p_i.z() - pos[idx_j].z();
+                        real distSq = dx*dx + dy*dy + dz*dz;
 
-                    if constexpr (CalcPFP)
-                    {
-                        if (dist > 1e-12)
+                        real R_j = 0.5 * diameter[idx_j];
+                        real sumRadiiSq = (R_i + R_j) * (R_i + R_j);
+
+                        bool isContact = (distSq < sumRadiiSq);
+                        real dist = sqrt(distSq);
+                        real rc_real = 0.0;
+
+                        if (isContact && dist > 1e-12)
                         {
-                            real r_sij = isContact ? rc_real : 0.0;
-
-                            particleFluidParticle(
+                            rc_real = contactConduction(
                                 R_i, R_j, dist,
-                                fluidKappa[idx_i], fluidKappa[idx_j],
-                                fluidAlpha[idx_i], fluidAlpha[idx_j],
+                                nu[idx_i], nu[idx_j],
+                                E0[idx_i], E0[idx_j],
+                                simYoungsModulus,
                                 K[idx_i], K[idx_j],
                                 T_i, temperature[idx_j],
-                                r_sij,
-                                Q_pfp, idx_i, idx_j);
+                                CalcPP,
+                                Q_pp, idx_i, idx_j);
+                        }
+
+                        if constexpr (CalcPFP)
+                        {
+                            if (dist > 1e-12)
+                            {
+                                real r_sij = isContact ? rc_real : 0.0;
+
+                                particleFluidParticle(
+                                    R_i, R_j, dist,
+                                    fluidKappa[idx_i], fluidKappa[idx_j],
+                                    fluidAlpha[idx_i], fluidAlpha[idx_j],
+                                    K[idx_i], K[idx_j],
+                                    T_i, temperature[idx_j],
+                                    r_sij,
+                                    Q_pfp, idx_i, idx_j);
+                            }
                         }
                     }
-                }
 
-                idx_j = cellIter.next(idx_j);
+                    idx_j = cellIter.next(idx_j);
+                }
             }
 
             // neighbour cells

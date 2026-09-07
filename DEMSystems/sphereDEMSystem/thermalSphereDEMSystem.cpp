@@ -135,13 +135,14 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
 
     REPORT(0) << "Creating thermal interactions "
               << "(Conduction, Radiation, PFP)..." << END_REPORT;
-    
-    box localDomain = domains.empty() ? box() : domains[0];
-    
+
+    // Same extended simulation domain the mechanical interaction_
+    // above is built from, so both neighbour searches cover exactly
+    // the same physical region.
     thermalInteraction_ = makeUnique<thermalInteraction>(
         Control(),
         *thermalParticles_,
-        localDomain);
+        thermalParticles_->extendedDomain().domainBox());
 
     ensureRadiationHostMemory();
 

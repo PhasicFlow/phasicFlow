@@ -1,0 +1,89 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  particlesDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+setFields
+{
+    
+    defaultValue 
+    {
+        velocity        realx3  (0 0 0);  // linear velocity (m/s)
+
+        acceleration    realx3  (0 0 0);  // linear acceleration (m/s2)
+
+        rVelocity       realx3  (0 0 0);  // rotational velocity (rad/s)
+
+        shapeName       word    sphere1;  // name of the particle shape 
+
+        // Fallback only: fully overridden by the two selectors below,
+        // which together cover the whole particle-fill box.
+        temperature     real    300.0;    // (K)
+    }
+
+    selectors
+    {
+        coldHalf
+        {
+            selector    box;              // other options: cylinder, sphere, stridedRange, randomPoints
+
+            boxInfo
+            {
+                min (-0.08 -0.08 0.015);   // lower corner point of the box
+
+                max ( 0.08  0.08 0.05 );   // upper corner point of the box -- drum's z-midpoint
+            }
+
+            fieldValue
+            {
+                temperature   real   300.0;   // (K)
+            }
+        }
+
+        hotHalf
+        {
+            selector    box;
+
+            boxInfo
+            {
+                min (-0.08 -0.08 0.05 );   // lower corner point of the box -- drum's z-midpoint
+
+                max ( 0.08  0.08 0.098);   // upper corner point of the box
+            }
+
+            fieldValue
+            {
+                temperature   real   400.0;   // (K)
+            }
+        }
+    }
+}
+
+positionParticles                                 
+{
+    method         ordered;       // other options: random and empty
+
+    mortonSorting  Yes;           // perform initial sorting based on morton code?   
+
+    orderedInfo
+    {
+        distance  0.004;          // minimum distance between particles centers
+
+        numPoints 30000;          // number of particles in the simulation 
+
+        axisOrder (z y x);        // axis order for filling the space with particles
+    }
+
+    regionType      box;          // other options: cylinder and sphere  
+
+    boxInfo                       // box information for positioning particles 
+    {
+        min (-0.08 -0.08 0.015);  // lower corner point of the box 
+
+        max ( 0.08  0.08 0.098);  // upper corner point of the box 
+    }
+}
