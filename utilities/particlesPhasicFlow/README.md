@@ -104,7 +104,7 @@ positionParticles
    ```C++
    fileInfo
    {
-       fileName       <path>;      // Path to file containing positions
+       name       <path>;      // Path to file containing positions
        commaSeparated Yes/No;      // Whether file is comma-separated
    }
    ```
