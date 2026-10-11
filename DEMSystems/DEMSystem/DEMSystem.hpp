@@ -192,7 +192,6 @@ public:
         virtual span<real> gasMassSourceSp() { return span<real>(); }
         virtual span<real> gasConcentrations() { return span<real>(); }
         virtual span<real> reactionHeat() { return span<real>(); }
-        virtual span<real> reactionHeatFluid() { return span<real>(); }
 
         virtual
         std::vector<std::string> gasSpeciesNames() const
@@ -201,7 +200,7 @@ public:
         }
 
         /**
-         * @brief Molar masses [kg/mol] of the gas species known to the DEM
+         * @brief Molar masses [kg/kmol] of the gas species known to the DEM
          *        kinetics, in the same order as gasSpeciesNames().
          *
          *        DEM and CFD each keep an independent copy of gas molar
