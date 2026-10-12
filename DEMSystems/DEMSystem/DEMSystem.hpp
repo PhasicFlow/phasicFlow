@@ -201,7 +201,7 @@ public:
         }
 
         /**
-         * @brief Molar masses [kg/mol] of the gas species known to the DEM
+         * @brief Molar masses [kg/kmol] of the gas species known to the DEM
          *        kinetics, in the same order as gasSpeciesNames().
          *
          *        DEM and CFD each keep an independent copy of gas molar
