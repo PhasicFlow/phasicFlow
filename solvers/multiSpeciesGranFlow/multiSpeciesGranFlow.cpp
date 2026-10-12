@@ -1,14 +1,21 @@
 /*------------------------------- phasicFlow ---------------------------------
-      O        C enter of        O O        E ngineering and
-    O   O      M ultiscale modeling of   OOOOOOO
-     F luid flow
+      O        C enter of
+     O O       E ngineering and
+    O   O      M ultiscale modeling of
+   OOOOOOO     F luid flow
 ------------------------------------------------------------------------------
-  Copyright (C): www.cemf.ir  email: hamid.r.norouzi AT gmail.com
+  Copyright (C): www.cemf.ir
+  email: hamid.r.norouzi AT gmail.com
 ------------------------------------------------------------------------------
 Licence:
   This file is part of phasicFlow code. It is a free software for simulating
   granular and multiphase flows. You can redistribute it and/or modify it under
   the terms of GNU General Public License v3 or any other later versions.
+
+  phasicFlow is distributed to help others in their research in the field of
+  granular and multiphase flows, but WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 -----------------------------------------------------------------------------*/
 
 /**
@@ -56,7 +63,6 @@ int main(int argc, char* argv[])
         "kinetics."
     );
 
-    bool isCoupling = false;
     if (!cmds.parse(argc, argv))
     {
         return 0;
@@ -102,7 +108,7 @@ int main(int argc, char* argv[])
 
     do
     {
-        // 4.1 Particle Injection
+        // Particle insertion phase
         if (!sphInsertion.insertParticles(
                 Control.time().currentIter(),
                 Control.time().currentTime(),
@@ -112,16 +118,16 @@ int main(int argc, char* argv[])
             return 1;
         }
 
-        // 4.2 Pre-Processing (reset forces, zero mass sources)
+        // Pre-processing updates (reset forces, zero mass sources)
         surfGeometry.beforeIteration();
         sphParticles.beforeIteration();
         sphInteraction.beforeIteration();
 
-        // 4.3 Physics Iteration
-        sphInteraction.iterate();     // Mechanical collisions
+        // Evaluate contact interactions (particle-particle, wall)
+        sphInteraction.iterate();
 
         // Thermal physics (Conduction, Radiation, PFP)
-        thermalInt.iterate();         
+        thermalInt.iterate();
 
         // Reaction kinetics: Arrhenius GPU kernel updates solidFracs,
         // gasMassSource, and reactionHeat for all active particles.
@@ -130,15 +136,19 @@ int main(int argc, char* argv[])
             multiShrinkingInt->iterate();
         }
 
-        surfGeometry.iterate();
-        sphParticles.iterate();       // Integrates equations of motion & state
+        // Particles integrate before geometry updates, matching
+        // sphereDEMSystem's own loop() ordering.
+        sphParticles.iterate();
 
-        // 4.4 Post-Processing
+        // Update boundary kinematics
+        surfGeometry.iterate();
+
+        // Post-processing cleanups
         sphInteraction.afterIteration();
         surfGeometry.afterIteration();
         sphParticles.afterIteration();
 
-    } while (Control++);  // Advances time and checks stop criteria
+    } while (Control++);
 
     REPORT(0) << "\nEnd of time loop.\n" << END_REPORT;
 

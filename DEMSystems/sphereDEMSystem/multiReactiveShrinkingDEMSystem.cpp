@@ -29,7 +29,9 @@ namespace pFlow
 
 bool multiReactiveShrinkingDEMSystem::loop()
 {
-    do
+    // Runs the steps from the current time up to, but not including,
+    // the stop time of this call.
+    while (!Control().time().reachedStopAt())
     {
         // Particle injection
         if (!insertion_().insertParticles(
@@ -70,7 +72,8 @@ bool multiReactiveShrinkingDEMSystem::loop()
         multiReactivePrtcl_->afterIteration();
         geometry_->afterIteration();
 
-    } while(Control()++);
+        Control()++;
+    }
 
     return true;
 }

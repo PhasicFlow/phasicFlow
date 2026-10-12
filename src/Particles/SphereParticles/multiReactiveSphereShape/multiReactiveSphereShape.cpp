@@ -25,12 +25,12 @@ namespace pFlow
 
 multiReactiveSphereShape::multiReactiveSphereShape
 (
-    const word&                  name,
+    const word&                  fileName,
     repository*                  owner,
     const multiSpeciesProperty&  prop
 )
 :
-    thermalSphereShape(name, owner, prop),
+    thermalSphereShape(fileName, owner, prop),
     multiProp_(&prop),
     defaultGasConcentrations_(prop.defaultGasConcentrations())
 {
@@ -38,13 +38,13 @@ multiReactiveSphereShape::multiReactiveSphereShape
 
 multiReactiveSphereShape::multiReactiveSphereShape
 (
-    const word&                  name,
-    const word&                  material,
+    const word&                  shapeType,
+    const word&                  fileName,
     repository*                  owner,
     const multiSpeciesProperty&  prop
 )
 :
-    thermalSphereShape(name, material, owner, prop),
+    thermalSphereShape(shapeType, fileName, owner, prop),
     multiProp_(&prop),
     defaultGasConcentrations_(prop.defaultGasConcentrations())
 {

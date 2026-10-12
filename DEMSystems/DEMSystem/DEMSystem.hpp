@@ -192,6 +192,7 @@ public:
         virtual span<real> gasMassSourceSp() { return span<real>(); }
         virtual span<real> gasConcentrations() { return span<real>(); }
         virtual span<real> reactionHeat() { return span<real>(); }
+        virtual span<real> reactionHeatFluid() { return span<real>(); }
 
         virtual
         std::vector<std::string> gasSpeciesNames() const

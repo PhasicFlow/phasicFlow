@@ -73,11 +73,9 @@ private:
     /// Densities of the solid species [kg/m3].
     realVector solidDensities_;
 
-    /**
-     * Gas concentrations [kmol/m3], one per gas species. Used where no CFD
-     * field exists: in the standalone solver and before the first CFD
-     * exchange.
-     */
+    /// Gas concentrations [kmol/m3], one per gas species. Used where no CFD
+    /// field exists: in the standalone solver and before the first CFD
+    /// exchange.
     realVector defaultGasConcentrations_;
 
     /// Solid stoichiometry, row-major [N_rxn x N_solid].

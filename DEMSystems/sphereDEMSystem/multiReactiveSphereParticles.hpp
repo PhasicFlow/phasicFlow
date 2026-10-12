@@ -37,11 +37,6 @@ namespace pFlow
  * particle, the kinetics data uploaded to the GPU, the gas concentration
  * and mass-source buffers exchanged with the CFD side, and the per-particle
  * reaction heat (all of it deposited in the particle).
- *
- * The composition persists in one solidFrac_<species> field per solid
- * species, and the total solid mass in the solidMass field. The reaction
- * kernel works on a flat copy of the fractions that beforeIteration()
- * loads from the fields and afterIteration() stores back.
  * fluidForce_/fluidTorque_ inherited from thermalSphereFluidParticles stay
  * unused in the standalone solver.
  */
@@ -114,11 +109,10 @@ private:
     /// One solidFrac_<species> field per solid species.
     std::vector<uniquePtr<realPointField_D>> solidFracFields_;
 
-    /**
-     * Solid mass fractions, flat [N_p x N_solid]. The kernel needs
-     * contiguous, index-computed access to all species of a particle, which
-     * the per-species fields do not give.
-     */
+    /// Solid mass fractions, flat [N_p x N_solid]: the working copy of the
+    /// solidFrac_<species> fields. The kernel needs contiguous access to
+    /// all species of a particle. Loaded in beforeIteration(), stored back
+    /// in afterIteration().
     deviceViewType1D<real>   solidMassFractions_;
 
     /// Gas mass source [kg/s], flat [N_p x N_gas].

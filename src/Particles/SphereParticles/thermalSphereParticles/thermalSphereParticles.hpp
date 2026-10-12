@@ -72,10 +72,10 @@ private:
         realPointField_D                heatSourcePFP_;
 
         /// Sum of neighbouring particle temperatures, used by the
-        /// linearised radiation model (CFD side) [K]. Written by
-        /// thermalRadiationMechanism via deviceViewAll(), which does
-        /// not own this field -- same ownership split as
-        /// heatSourceCondPP_ above. Zero-filled (default) when
+        /// linearised radiation model (CFD side) [K]. Zeroed and
+        /// rebuilt by thermalRadiationMechanism on its update steps
+        /// via deviceViewAll(), which does not own this field; it
+        /// keeps its value in between. Zero-filled (default) when
         /// radiation is disabled.
         realPointField_D                radSumTemp_;
 
@@ -124,21 +124,6 @@ protected:
             heatSourcePFP_.fill(0.0);
         }
 
-        /// Zeroes radSumTemp_. Called from beforeIteration() --
-        /// thermalRadiationMechanism now accumulates into this field
-        /// via atomic_add, so it needs zeroing first, same as
-        /// heatSourceCondPP_ above.
-        void zeroRadSumTemp()
-        {
-            radSumTemp_.fill(0.0);
-        }
-
-        /// Zeroes radNumPrt_. See zeroRadSumTemp() above.
-        void zeroRadNumPrt()
-        {
-            radNumPrt_.fill(0);
-        }
-
         /// @brief Dispatches the standalone (no Q_conv/Q_rad)
         /// heat-transfer kernel and temperature integration, after
         /// resetting temperatureRate_ to zero.
@@ -181,12 +166,12 @@ public:
         /// individual particle slots on the GPU.
         bool initializeThermalParticles();
 
-        /// @brief Zeroes heatSourceCondPP_/heatSourcePFP_/radSumTemp_/
-        /// radNumPrt_, then defers to sphereParticles::beforeIteration().
-        /// Zeroing happens here rather than in iterateThermal(), since
-        /// thermalInteraction accumulates into these fields (all via
-        /// atomic_add) between this call and iterate() -- zeroing any
-        /// later would erase that step's values before they are read.
+        /// @brief Zeroes heatSourceCondPP_/heatSourcePFP_, then defers
+        /// to sphereParticles::beforeIteration(). Zeroing happens here
+        /// rather than in iterateThermal(), since thermalInteraction
+        /// accumulates into these fields (both via atomic_add) between
+        /// this call and iterate() -- zeroing any later would erase
+        /// that step's values before they are read.
         bool beforeIteration() override;
 
         bool iterate() override;

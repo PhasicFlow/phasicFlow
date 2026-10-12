@@ -49,15 +49,15 @@ public:
 
     multiReactiveSphereShape
     (
-        const word&                  name,
+        const word&                  fileName,
         repository*                  owner,
         const multiSpeciesProperty&  prop
     );
 
     multiReactiveSphereShape
     (
-        const word&                  name,
-        const word&                  material,
+        const word&                  shapeType,
+        const word&                  fileName,
         repository*                  owner,
         const multiSpeciesProperty&  prop
     );
