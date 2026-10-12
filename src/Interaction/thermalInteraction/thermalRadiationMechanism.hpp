@@ -82,8 +82,9 @@ public:
         {
             return radCut_;
         }
-        /// @brief Sweeps the neighbourhood on update steps only;
-        /// otherwise a no-op (keeps the previous value).
+        /// @brief Zeroes radSumTemp/radNumPrt and sweeps the
+        /// neighbourhood on update steps only; otherwise a no-op
+        /// (keeps the previous value).
         void iterate(
             const pFlagTypeDevice&          flags,
             const deviceViewType1D<realx3>& pos,
