@@ -146,7 +146,7 @@ constexpr real w_GL[5] = {
 /**
  * @brief Particle-Fluid-Particle sub-grid heat transfer Q_pfp, when
  * the dimensionless gap H/R* <= 0.5, via 5-point Gauss-Legendre
- * quadrature (Rong & Horio, 1999).
+ * quadrature (Cheng et al., 1999; Zhou et al., 2009).
  *
  * @details
  * Active whenever the gap between two particles is within the
@@ -160,20 +160,47 @@ constexpr real w_GL[5] = {
  *   Q_{pfp} = \int_{r_{sij}}^{r_{sf}} \frac{2\pi r}{R_{th}(r)}\, dr
  *   \cdot (T_j - T_i)
  * \f]
- * This is the sub-grid fluid-bridge model of Rong and Horio (1999),
- * extended to polydisperse particles following Cheng et al. (1999)
- * and Zhou et al. (2009); the porosity-weighted reach formula follows
- * the packing simplification of Yang et al. (2002). The same
- * formulation is presented in Norouzi et al. (2016), Section 6.3.2.1,
- * Eqs. 6.160-6.164.
+ * \f[
+ *   R_{th}(r) = \frac{L_{s,i}}{k_i} + \frac{L_{s,j}}{k_j}
+ *             + \frac{L_f}{k_f}
+ * \f]
+ * The three layers lie in series between the two cones that bound the
+ * Voronoi cell of the pair (apex at each particle centre, base radius
+ * \f$r_{ij}\f$ on the mid-plane; Fig. 6.18a of Norouzi et al., 2016):
+ *   - the gas layer between the particle surfaces,
+ *     \f$L_f = d_{ij} - \sqrt{R_i^2-r^2} - \sqrt{R_j^2-r^2}\f$,
+ *     where \f$d_{ij}\f$ is the centre distance, or \f$R_i+R_j\f$ if
+ *     the simulated pair overlaps (see below);
+ *   - the solid path inside particle i, from the cone to the particle
+ *     surface,
+ *     \f$L_{s,i} = \sqrt{R_i^2-r^2} - r\,(R^*+H)/r_{ij}\f$
+ *     (Eq. 6.160), and the same for particle j. It equals
+ *     \f$R_i\f$ on the axis and vanishes at \f$r_{sf}\f$, where the
+ *     cone meets the particle surface.
+ *
+ * Pairs in mechanical contact. In a soft-sphere DEM run the pairs in
+ * contact overlap, and a softened Young's modulus makes the overlap
+ * large. Read literally (signed H, contact radius as the lower limit),
+ * Eq. 6.160 then gives a non-positive resistance for many of these
+ * pairs. A pair with \f$d_{ij} < R_i+R_j\f$ is therefore treated as two
+ * touching spheres: H is taken as zero in \f$r_{sf}\f$ and in the cone,
+ * and the gas layer is measured from \f$d_{ij} = R_i+R_j\f$. The
+ * contact patch is the lower integration limit and is left to Q_pp.
+ * This is a modelling assumption of this code, not a formula of the
+ * book.
+ *
+ * This is the sub-grid model of Cheng et al. (1999) as modified by
+ * Zhou et al. (2009); the porosity-weighted reach formula follows the
+ * packing simplification of Yang et al. (2002). The same formulation
+ * is presented in Norouzi et al. (2016), Section 6.3.2.1,
+ * Eqs. 6.160-6.164. For particles of different size, the particle
+ * surfaces use the actual radii (the book replaces R by R*,
+ * Eq. 6.165), while the cone and r_sf use R*.
  *
  * In a standalone (non-CFD-coupled) run, fluidKappa/fluidAlpha default
  * to a user-set ambient value; in a coupled run they are the real
  * per-cell CFD values.
  *
- * @cite Rong, D., Horio, M., 1999. DEM simulation of char combustion
- * in a fluidized bed. In: Proc. 2nd Int. Conf. on CFD in the Minerals
- * and Process Industries, CSIRO, 65-70.
  * @cite Cheng, G.J., Yu, A.B., Zulli, P., 1999. Evaluation of
  * effective thermal conductivity from the structure of a packed bed.
  * Chem. Eng. Sci. 54, 4199-4209.
@@ -228,6 +255,16 @@ void particleFluidParticle(
         real R_H = R_star + (H > 0.0 ? H : 0.0);
         real r_sf = (R_star * r_ij) / sqrt(r_ij*r_ij + R_H*R_H);
 
+        // Centre distance for the gas layer. A pair that overlaps in the
+        // soft-sphere DEM is treated as two touching spheres (see the
+        // note on pairs in mechanical contact above); its contact patch
+        // is the lower limit r_sij and is left to Q_pp.
+        real dist_gap = dist;
+        if (dist_gap < R_i + R_j)
+        {
+            dist_gap = R_i + R_j;
+        }
+
         if (r_sf > r_sij)
         {
             real A = r_sij;
@@ -257,15 +294,35 @@ void particleFluidParticle(
                     root_j = sqrt(Rj2 - r2);
                 }
 
-                real gap = dist - root_i - root_j;
+                real gap = dist_gap - root_i - root_j;
 
-                if (gap < 0.0) 
+                // Non-negative by construction (dist_gap >= R_i + R_j);
+                // this only guards against rounding.
+                if (gap < 0.0)
                 {
-                    gap = 0.0; 
+                    gap = 0.0;
                 }
 
-                real term_i = (R_i - root_i) / K_i;
-                real term_j = (R_j - root_j) / K_j;
+                // Solid path inside each particle: from the cone that
+                // bounds the Voronoi cell of the pair to the particle
+                // surface (Fig. 6.18a); it is zero where the cone
+                // leaves the particle.
+                real r_cone = r_pt * R_H / r_ij;
+
+                real Ls_i = root_i - r_cone;
+                if (Ls_i < 0.0)
+                {
+                    Ls_i = 0.0;
+                }
+
+                real Ls_j = root_j - r_cone;
+                if (Ls_j < 0.0)
+                {
+                    Ls_j = 0.0;
+                }
+
+                real term_i = Ls_i / K_i;
+                real term_j = Ls_j / K_j;
                 real term_f = gap / k_f;
 
                 real R_th = term_i + term_j + term_f;

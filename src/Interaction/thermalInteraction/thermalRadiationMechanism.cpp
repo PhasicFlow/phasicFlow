@@ -53,6 +53,10 @@ void thermalRadiationMechanism::iterate(
         return;
     }
 
+    // The sums are rebuilt from zero on update steps only
+    Kokkos::deep_copy(radSumTemp, real(0));
+    Kokkos::deep_copy(radNumPrt, uint32(0));
+
     real radCutSq = radCut_ * radCut_;
 
     auto r = flags.activeRange();

@@ -50,6 +50,11 @@ protected:
 
     //- protected members
 
+        /// @brief Thermal material properties. The shape held in spheres_
+        /// keeps a const reference to this object for the whole run
+        /// (shape::property_), so it must outlive the constructor.
+        uniquePtr<thermalProperty>      thermalProps_ = nullptr;
+
         /// @brief Direct host-view access for thermal (+ fluid-coupled)
         /// particles. Used in place of the inherited particles_, which
         /// is left unused for this class (see class-level doc comment).

@@ -216,8 +216,6 @@ bool thermalSphereParticles::beforeIteration()
 
     zeroHeatSourceCondPP();
     zeroHeatSourcePFP();
-    zeroRadSumTemp();
-    zeroRadNumPrt();
 
     return true;
 }
