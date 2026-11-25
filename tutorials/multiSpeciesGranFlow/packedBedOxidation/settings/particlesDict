@@ -1,0 +1,52 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  particlesDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+setFields
+{
+    defaultValue
+    {
+        velocity        realx3  (0 0 0);        // linear velocity (m/s)
+        acceleration    realx3  (0 0 0);        // linear acceleration (m/s2)
+        rVelocity       realx3  (0 0 0);        // rotational velocity (rad/s)
+        shapeName       word    carrierParticle; // name of the particle shape
+        temperature     real    1173.15;        // [K] bed at 900 C
+
+        // One field per solid species of thermoPhysicalInteraction, mass
+        // fractions that add up to 1. Fully reduced Fe45Al-FG: its 0.45
+        // active Fe2O3 as Fe3O4, with the inert.
+        solidFrac_Fe2O3 real    0.0;
+        solidFrac_Fe3O4 real    0.4416;
+        solidFrac_inert real    0.5584;
+    }
+
+    selectors
+    {}
+}
+
+positionParticles
+{
+    method          random;                     // other options: ordered and empty
+    mortonSorting   Yes;                        // perform initial sorting based on morton code?
+
+    randomInfo
+    {
+        distance      0.002;                    // minimum distance between particles centers
+        numPoints     1000;                     // number of particles in the simulation
+        maxIterations 20;                       // maximum number of iterations
+    }
+
+    regionType      cylinder;                   // other options: box and sphere
+
+    cylinderInfo                                // particles fall from here into the tube
+    {
+        p1     (0.0 0.0 0.0012);                // begin point of cylinder axis
+        p2     (0.0 0.0 0.09);                  // end point of cylinder axis
+        radius 0.0088;                          // radius of cylinder
+    }
+}

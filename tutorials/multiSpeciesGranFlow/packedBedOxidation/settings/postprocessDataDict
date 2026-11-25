@@ -1,0 +1,76 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  postprocessDataDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+activeInSimulation  Yes;                        // run during the simulation
+
+shapeType           sphere;
+
+defaultTimeControl
+{
+    timeControl        simulationTime;
+    startTime          0;
+    executionInterval  0.1;
+}
+
+components
+(
+    // Whole bed: mean temperature and Fe2O3 mass fraction (mass-weighted).
+    // The sphere holds the whole settled bed (about 2.4 cm high).
+    bed
+    {
+        processMethod   arithmetic;
+        processRegion   sphere;
+        sphereInfo
+        {
+            center  (0.0 0.0 0.011);
+            radius  0.03;
+        }
+        timeControl     default;
+        operations
+        (
+            temperature
+            {
+                function    average;
+                field       temperature;
+                phi         one;
+            }
+            Fe2O3
+            {
+                function    average;
+                field       solidFrac_Fe2O3;
+                phi         mass;
+            }
+        );
+    }
+
+    // Radial temperature profile near mid-height of the bed: four spheres
+    // from the axis (r = 0) to 1.5 mm from the tube wall (r = 8.5 mm)
+    radialProfile
+    {
+        processMethod   arithmetic;
+        processRegion   line;
+        lineInfo
+        {
+            p1          (0.0    0.0 0.011);
+            p2          (0.0085 0.0 0.011);
+            nSpheres    4;
+            radius      0.0015;
+        }
+        timeControl     default;
+        operations
+        (
+            temperature
+            {
+                function    average;
+                field       temperature;
+                phi         one;
+            }
+        );
+    }
+);

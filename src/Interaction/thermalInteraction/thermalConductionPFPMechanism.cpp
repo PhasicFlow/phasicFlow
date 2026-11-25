@@ -35,16 +35,20 @@ thermalConductionPFPMechanism::thermalConductionPFPMechanism(
 real thermalConductionPFPMechanism::requiredSearchCut(
     real maxBoundingSphere) const
 {
+    // maxBoundingSphere is the largest particle diameter, d_max
     real cut = 0.0;
 
     if (enablePP_)
     {
-        cut = max(cut, 2.0 * maxBoundingSphere);
+        // Pairs in contact: centre distance below R_i + R_j <= d_max
+        cut = max(cut, maxBoundingSphere);
     }
 
     if (enablePFP_)
     {
-        cut = max(cut, 3.0 * maxBoundingSphere);
+        // Gas bridge while H/R* <= 0.5 (thermalConductionPFPKernels):
+        // centre distance up to R_i + R_j + R* <= 1.5 d_max
+        cut = max(cut, 1.5 * maxBoundingSphere);
     }
 
     return cut;

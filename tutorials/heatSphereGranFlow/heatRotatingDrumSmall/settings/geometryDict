@@ -43,6 +43,12 @@ surfaces
 		material    prop1;                       // material name of this wall
 
 		motion    rotAxis;		                 // motion component name 
+
+		// Wall temperature [K] for the particle-wall heat transfer
+		// (enablePW, enablePFW, enableWallRadiation in
+		// caseSetup/thermoPhysicalInteraction). Without it the surface
+		// is adiabatic, as in this tutorial.
+		// temperature  400;
 	}
 
 	/*
