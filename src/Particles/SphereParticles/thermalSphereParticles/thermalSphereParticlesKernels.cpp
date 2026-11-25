@@ -147,6 +147,34 @@ void calcFluidParticleHeatTransfer(
     Kokkos::fence(); 
 }
 
+void addWallHeatTransfer(
+    const pFlagTypeDevice&          m,
+    const deviceViewType1D<real>&   ms,
+    const deviceViewType1D<real>&   Cp,
+    const deviceViewType1D<real>&   Q_pw,
+    const deviceViewType1D<real>&   Q_pfw,
+    const deviceViewType1D<real>&   Q_rw,
+    deviceViewType1D<real>          TR)
+{
+    auto r = m.activeRange();
+
+    Kokkos::parallel_for(
+        "addWallHeatTransfer",
+        policy(r.start(), r.end()),
+        KOKKOS_LAMBDA(uint32 i)
+        {
+            if (m(i))
+            {
+                // Same thermal inertia guard as the kernels above
+                real thermalInertia = max(ms[i] * Cp[i], real(1e-12));
+
+                TR[i] += (Q_pw[i] + Q_pfw[i] + Q_rw[i]) / thermalInertia;
+            }
+        });
+
+    Kokkos::fence();
+}
+
 void integrateTemperature(
     const pFlagTypeDevice&          m, 
     const real                      dt, 

@@ -71,11 +71,20 @@ private:
         /// Particle-fluid-particle sub-grid heat source, Q_pfp [W].
         realPointField_D                heatSourcePFP_;
 
+        /// Particle-wall contact conduction, Q_pw [W].
+        realPointField_D                heatSourcePW_;
+
+        /// Particle-fluid-wall conduction through the gas lens, Q_pfw [W].
+        realPointField_D                heatSourcePFW_;
+
+        /// Particle-wall radiation, Q_rw [W].
+        realPointField_D                heatSourceRW_;
+
         /// Sum of neighbouring particle temperatures, used by the
-        /// linearised radiation model (CFD side) [K]. Written by
-        /// thermalRadiationMechanism via deviceViewAll(), which does
-        /// not own this field -- same ownership split as
-        /// heatSourceCondPP_ above. Zero-filled (default) when
+        /// linearised radiation model (CFD side) [K]. Zeroed and
+        /// rebuilt by thermalRadiationMechanism on its update steps
+        /// via deviceViewAll(), which does not own this field; it
+        /// keeps its value in between. Zero-filled (default) when
         /// radiation is disabled.
         realPointField_D                radSumTemp_;
 
@@ -124,19 +133,13 @@ protected:
             heatSourcePFP_.fill(0.0);
         }
 
-        /// Zeroes radSumTemp_. Called from beforeIteration() --
-        /// thermalRadiationMechanism now accumulates into this field
-        /// via atomic_add, so it needs zeroing first, same as
-        /// heatSourceCondPP_ above.
-        void zeroRadSumTemp()
+        /// Zeroes the three particle-wall heat sources, which
+        /// thermalWallMechanism adds to.
+        void zeroHeatSourceWall()
         {
-            radSumTemp_.fill(0.0);
-        }
-
-        /// Zeroes radNumPrt_. See zeroRadSumTemp() above.
-        void zeroRadNumPrt()
-        {
-            radNumPrt_.fill(0);
+            heatSourcePW_.fill(0.0);
+            heatSourcePFW_.fill(0.0);
+            heatSourceRW_.fill(0.0);
         }
 
         /// @brief Dispatches the standalone (no Q_conv/Q_rad)
@@ -181,12 +184,12 @@ public:
         /// individual particle slots on the GPU.
         bool initializeThermalParticles();
 
-        /// @brief Zeroes heatSourceCondPP_/heatSourcePFP_/radSumTemp_/
-        /// radNumPrt_, then defers to sphereParticles::beforeIteration().
-        /// Zeroing happens here rather than in iterateThermal(), since
-        /// thermalInteraction accumulates into these fields (all via
-        /// atomic_add) between this call and iterate() -- zeroing any
-        /// later would erase that step's values before they are read.
+        /// @brief Zeroes heatSourceCondPP_/heatSourcePFP_, then defers
+        /// to sphereParticles::beforeIteration(). Zeroing happens here
+        /// rather than in iterateThermal(), since thermalInteraction
+        /// accumulates into these fields (both via atomic_add) between
+        /// this call and iterate() -- zeroing any later would erase
+        /// that step's values before they are read.
         bool beforeIteration() override;
 
         bool iterate() override;
@@ -248,6 +251,42 @@ public:
         realPointField_D& heatSourcePFP()
         {
             return heatSourcePFP_;
+        }
+
+        inline
+        const realPointField_D& heatSourcePW() const
+        {
+            return heatSourcePW_;
+        }
+
+        inline
+        realPointField_D& heatSourcePW()
+        {
+            return heatSourcePW_;
+        }
+
+        inline
+        const realPointField_D& heatSourcePFW() const
+        {
+            return heatSourcePFW_;
+        }
+
+        inline
+        realPointField_D& heatSourcePFW()
+        {
+            return heatSourcePFW_;
+        }
+
+        inline
+        const realPointField_D& heatSourceRW() const
+        {
+            return heatSourceRW_;
+        }
+
+        inline
+        realPointField_D& heatSourceRW()
+        {
+            return heatSourceRW_;
         }
 
         inline

@@ -26,6 +26,7 @@ Licence:
 #include "mapperNBS.hpp"
 #include "thermalRadiationMechanism.hpp"
 #include "thermalConductionPFPMechanism.hpp"
+#include "thermalWallMechanism.hpp"
 #include "Timer.hpp"
 
 namespace pFlow 
@@ -44,16 +45,17 @@ namespace pFlow
  *
  * Holds no physics logic of its own: each active mechanism runs its
  * own complete neighbour sweep, self-contained in its own file. This
- * class only rebuilds the shared cell-list mapper (gated by
- * neighborListUpdateInterval, read unconditionally since conduction/
- * PFP also depend on it) and dispatches to whichever mechanisms
- * exist. This interval is independent of radiation's own
- * radUpdateInterval (owned by thermalRadiationMechanism): one gates
- * the cost of rebuilding the shared search structure, the other
- * reflects radiation's own, physically slower update cadence -- they
- * happen to serve similar-sounding purposes but for different
- * reasons, so they are two separate dictionary entries, not one
- * shared value.
+ * class only rebuilds the shared cell-list mapper and dispatches to
+ * whichever mechanisms exist.
+ *
+ * The mapper is rebuilt on every call and never reused over several
+ * steps. A sweep takes the cell of particle i from its current
+ * position but the members of every cell from the lists, so lists
+ * that are even one step old give pairs that are missed or counted
+ * twice (and, in radiation, a particle paired with itself) as soon as
+ * a particle crosses a cell face. Radiation's own radUpdateInterval
+ * (owned by thermalRadiationMechanism) is a separate matter: it
+ * reflects radiation's physically slower update cadence.
  */
 class thermalInteraction 
 {
@@ -79,11 +81,8 @@ private:
         /// Null when both conduction and PFP are disabled.
         uniquePtr<thermalConductionPFPMechanism>      condPfpMech_ = nullptr;
 
-        /// Mandatory, read regardless of which mechanisms are
-        /// enabled: gates how often the shared mapper rebuilds.
-        /// Independent of thermalRadiationMechanism's own
-        /// radUpdateInterval -- see class doc comment above.
-        uint32                              neighborListUpdateInterval_ = 1;
+        /// Null without walls, or when no wall path is active.
+        uniquePtr<thermalWallMechanism>               wallMech_ = nullptr;
 
         uint32                                        stepCounter_ = 0;
         
@@ -102,10 +101,16 @@ public:
 
         /// @brief Reads which mechanisms are enabled and constructs
         /// only those.
+        /// @param walls Wall geometry for the particle-wall heat
+        /// transfer; nullptr leaves it off.
+        /// @param fluidCoupled True in a CFD-coupled run, where the CFD
+        /// side exchanges the particle radiation with its environment.
         thermalInteraction(
-            systemControl&                  control, 
-            const thermalSphereParticles&   prtcl, 
-            const box&                      domainBox);
+            systemControl&                  control,
+            const thermalSphereParticles&   prtcl,
+            const box&                      domainBox,
+            const geometry*                 walls = nullptr,
+            bool                            fluidCoupled = false);
 
         ~thermalInteraction() = default;
 
@@ -117,9 +122,8 @@ public:
             return radiationMech_ != nullptr;
         }
 
-        /// @brief Rebuilds the shared mapper (gated by
-        /// radUpdateInterval_) and dispatches to every active
-        /// mechanism's own iterate().
+        /// @brief Rebuilds the shared mapper and dispatches to every
+        /// active mechanism's own iterate().
         void iterate();
 
 }; // thermalInteraction

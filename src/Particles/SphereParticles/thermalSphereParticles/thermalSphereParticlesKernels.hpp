@@ -129,6 +129,29 @@ namespace thermalSphereParticlesKernels
         deviceViewType1D<real>          temperatureRate);
     
     /**
+     * @brief Adds the particle-wall heat sources to the rate of
+     * temperature change of each particle.
+     *
+     * @details
+     * dT/dt += (Q_pw + Q_pfw + Q_rw) / (m * Cp)
+     *
+     * Called after calcFluidParticleHeatTransfer, in both tiers.
+     *
+     * @param Q_pw            Particle-wall contact conduction [W].
+     * @param Q_pfw           Particle-fluid-wall conduction [W].
+     * @param Q_rw            Particle-wall radiation [W].
+     * @param temperatureRate [IN/OUT] Rate of temperature change.
+     */
+    void addWallHeatTransfer(
+        const pFlagTypeDevice&          mask,
+        const deviceViewType1D<real>&   mass,
+        const deviceViewType1D<real>&   Cp,
+        const deviceViewType1D<real>&   Q_pw,
+        const deviceViewType1D<real>&   Q_pfw,
+        const deviceViewType1D<real>&   Q_rw,
+        deviceViewType1D<real>          temperatureRate);
+
+    /**
      * @brief Marches the particle temperatures forward in time.
      * 
      * @details 

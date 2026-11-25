@@ -26,9 +26,11 @@ namespace pFlow
 //----------------------------- constructors ----------------------------------
 
 thermalInteraction::thermalInteraction(
-    systemControl&                  control, 
-    const thermalSphereParticles&   particles, 
-    const box&                      domainBox)
+    systemControl&                  control,
+    const thermalSphereParticles&   particles,
+    const box&                      domainBox,
+    const geometry*                 walls,
+    bool                            fluidCoupled)
 : 
     control_(control),
     particles_(particles),
@@ -40,11 +42,6 @@ thermalInteraction::thermalInteraction(
         "thermoPhysicalInteraction", 
         control_.caseSetup().path() + "thermoPhysicalInteraction");
 
-    // Independent of radiation's own radUpdateInterval: gates the
-    // shared mapper rebuild, which conduction/PFP rely on too.
-    neighborListUpdateInterval_ =
-        thermoDict.getValMax<uint32>("neighborListUpdateInterval", 1);
-    
     //--- radiation -------------------------------------------------------
     Logical enableRad = thermoDict.getVal<Logical>("enableRadiation");
     
@@ -94,6 +91,29 @@ thermalInteraction::thermalInteraction(
     }
 
     //--- neighbor search cell size ---------------------------------------
+    if (walls)
+    {
+        auto wallMech = makeUnique<thermalWallMechanism>(
+            thermoDict,
+            control_,
+            *walls,
+            fluidCoupled && radiationMech_ != nullptr);
+
+        if (wallMech->active())
+        {
+            REPORT(0) << "Creating particle-wall heat transfer model . . ."
+                << END_REPORT;
+
+            wallMech_ = std::move(wallMech);
+        }
+        else
+        {
+            REPORT(0) << Yellow_Text("  -> Particle-wall heat transfer is "
+                "off (no path enabled or no wall temperature).")
+                << END_REPORT;
+        }
+    }
+
     real searchCut = 0.0;
 
     if (radiationMech_)
@@ -133,37 +153,33 @@ thermalInteraction::thermalInteraction(
 
 void thermalInteraction::iterate()
 {
-    if (!radiationMech_ && !condPfpMech_)
+    if (!radiationMech_ && !condPfpMech_ && !wallMech_)
     {
         return;
     }
     
     thermalTimer_.start();
 
-    bool rebuildThisStep =
-        (stepCounter_ % neighborListUpdateInterval_ == 0);
+    // Rebuilt on every call: see the class doc comment in
+    // thermalInteraction.hpp for why lists must not be reused.
+    bool boxChanged = false;
 
-    if (rebuildThisStep)
+    neighborSearchTimer_.start();
+    bool mapperBuiltOk = mapper_->build(
+        particles_.pointPosition().deviceViewAll(),
+        particles_.dynPointStruct().activePointsMaskDevice(),
+        boxChanged);
+    neighborSearchTimer_.end();
+
+    if (!mapperBuiltOk)
     {
-        bool boxChanged = false;
-
-        neighborSearchTimer_.start();
-        bool mapperBuiltOk = mapper_->build(
-            particles_.pointPosition().deviceViewAll(),
-            particles_.dynPointStruct().activePointsMaskDevice(),
-            boxChanged);
-        neighborSearchTimer_.end();
-
-        if (!mapperBuiltOk)
-        {
-            fatalErrorInFunction
-                << "[thermalInteraction] mapperNBS failed to build "
-                << "at step " << stepCounter_ << ".\n"
-                << "Likely cause: a burned-out ghost particle has an "
-                << "extreme position that forces the search box "
-                << "beyond allocatable limits." << endl;
-            fatalExit;
-        }
+        fatalErrorInFunction
+            << "[thermalInteraction] mapperNBS failed to build "
+            << "at step " << stepCounter_ << ".\n"
+            << "Likely cause: a burned-out ghost particle has an "
+            << "extreme position that forces the search box "
+            << "beyond allocatable limits." << endl;
+        fatalExit;
     }
 
     auto flags = particles_.dynPointStruct().activePointsMaskDevice();
@@ -197,6 +213,29 @@ void thermalInteraction::iterate()
             *mapper_,
             particles_.heatSourceCondPP().deviceViewAll(),
             particles_.heatSourcePFP().deviceViewAll());
+    }
+
+    // After radiation, which fills the neighbour sums it reads
+    if (wallMech_)
+    {
+        wallMech_->iterate(
+            control_.time().currentTime(),
+            flags,
+            pos,
+            particles_.diameter().deviceViewAll(),
+            particles_.temperature().deviceViewAll(),
+            particles_.conductivity().deviceViewAll(),
+            particles_.E0().deviceViewAll(),
+            particles_.nu().deviceViewAll(),
+            particles_.emissivity().deviceViewAll(),
+            particles_.fluidKappa().deviceViewAll(),
+            particles_.fluidAlpha().deviceViewAll(),
+            particles_.radSumTemp().deviceViewAll(),
+            particles_.radNumPrt().deviceViewAll(),
+            *mapper_,
+            particles_.heatSourcePW().deviceViewAll(),
+            particles_.heatSourcePFW().deviceViewAll(),
+            particles_.heatSourceRW().deviceViewAll());
     }
 
     thermalKernelTimer_.end();

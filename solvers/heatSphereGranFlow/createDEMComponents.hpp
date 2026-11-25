@@ -113,7 +113,9 @@ auto thermalIntPtr =
     (
         Control,
         sphParticles,
-        sphParticles.extendedDomain().domainBox()
+        sphParticles.extendedDomain().domainBox(),
+        &surfGeometry,
+        false
     );
 
 auto& thermalInt = thermalIntPtr();
