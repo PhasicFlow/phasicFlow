@@ -2,6 +2,8 @@
 set(SourceFiles 
 property.cpp
 thermalProperty/thermalProperty.cpp
+multiSpeciesProperty/multiSpeciesProperty.cpp
+multiSpeciesProperty/grainCorrectionTable.cpp
 
 
 )

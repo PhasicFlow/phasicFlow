@@ -39,3 +39,15 @@ Tutorials focused on post-processing and analysis:
 - [Segregation Analysis](./postprocessPhasicFlow/segregation/) - Demonstrates how to analyze particle segregation in simulation results
 - [Lacey Mixing Index Analysis](./postprocessPhasicFlow/LaceyMixingIndex/) - Setup a case and calculates the Lacey Mixing Index (LMI) in a rotating drum filled with two types of particles during the simulaiton.
 
+
+## 5. Heat Transfer (`heatSphereGranFlow`)
+
+Tutorials with particle temperature and heat transfer:
+
+- [Heat Transfer in a Rotating Drum (Small)](./heatSphereGranFlow/heatRotatingDrumSmall/) - The hot and cold halves of a 30,000-particle drum mix and exchange heat by contact conduction and conduction through the gas between particles
+
+## 6. Reacting Particles (`multiSpeciesGranFlow`)
+
+Tutorials with gas-solid reactions in porous particles:
+
+- [Oxidation of a Packed Bed](./multiSpeciesGranFlow/packedBedOxidation/) - 1,000 oxygen-carrier particles are oxidized in air, with the grain model of the porous particle and heat exchange with a furnace tube

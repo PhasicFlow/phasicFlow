@@ -1,0 +1,133 @@
+/* -------------------------------*- C++ -*--------------------------------- *\
+|  phasicFlow Thermo-Physical Interaction Dictionary                          |
+|  copyright: www.cemf.ir                                                     |
+|  Tutorial: oxidation of a packed bed in air (multiSpeciesGranFlow)          |
+\* --------------------------------------------------------------------------- */
+
+objectName thermoPhysicalInteraction;
+objectType dictionary;
+fileFormat ASCII;
+/*---------------------------------------------------------------------------*/
+
+// Oxygen carrier Fe45Al-FG (Abad et al. 2007, Chem. Eng. Sci. 62:533),
+// fully reduced: Fe3O4 on Al2O3, 2 mm spheres. Bed and furnace wall at
+// 1173.15 K, air at 1 atm. 4 Fe3O4 + O2 -> 6 Fe2O3 releases heat.
+
+// ---- Thermal properties, one value per material of caseSetup/interaction:
+//      (carrierMaterial wallMaterial)
+
+// carrier: mass-weighted JANAF heat capacities (Chase 1998) at 1173 K
+// wall: Kanthal APMT (FeCrAl alloy) datasheet, interpolated to 900 C
+heatCapacities        (1027  680);   // [J/(kg.K)]
+// carrier: effective conductivity of the porous particle (Garcia-Labiano
+// et al. 2005, Chem. Eng. Sci. 60:851) at porosity 0.30; wall: datasheet
+heatConductivities    (1.0   25);    // [W/(m.K)]
+// carrier: Garcia-Labiano et al. 2005, Table 1; wall: fully oxidized
+// Kanthal APMT, datasheet
+emissivities          (0.85  0.70);  // [-]
+
+// Particle-particle radiation needs the environment temperature of a
+// CFD-coupled run, so it stays off in this standalone run.
+enableRadiation      No;
+
+enablePP             Yes;   // contact conduction (Q_pp)
+enablePFP            Yes;   // conduction through the gas between particles (Q_pfp)
+
+// Softened Young's modulus of the contact force: must equal Yeff in
+// caseSetup/interaction. With realYoungsModuli of that file it corrects
+// the contact radius, c = (E_sim/E_real)^(1/5) (Norouzi et al. 2016,
+// Eq. 6.166).
+simYoungsModulus     1.0e6;
+
+// Gas between the particles and between particles and walls. This
+// standalone run has no CFD mesh, so the conduction paths take these:
+//   kappa: air at 1173 K, mass-fraction mean of O2 (0.0859) and N2
+//          (0.0742 W/(m.K)), Cengel and Cimbala, Table A-10, interpolated
+//   alpha: gas volume fraction of the bed. Equal spheres poured into a
+//          container pack at a solid fraction of about 0.61 (Scott's
+//          experiments, as summarized by Radin 2007, arXiv:0710.2463)
+fluidProperties
+{
+    kappa   0.077;  // [W/(m.K)]
+    alpha   0.4;    // [-]
+}
+
+// ---- Particle-wall heat transfer: the tube and the floor are at the
+//      temperature given in settings/geometryDict
+enablePW              Yes;   // contact conduction (Q_pw)
+enablePFW             Yes;   // conduction through the gas lens (Q_pfw)
+enableWallRadiation   Yes;   // radiation (Q_rw); eps_w from emissivities
+
+// Interval of wallHeatFlow.dat [s] (default 0.01). The other optional
+// keys keep their defaults: wallLensRatio 1.4, wallMinGap 2.75e-8 m,
+// wallRadiationRange 8 particle radii.
+wallHeatReportInterval 0.1;
+
+// ---- Reactions
+
+enableMultiReaction   Yes;
+
+multiReactiveProperties
+{
+    // "inert" is the Al2O3 (40 wt%) with the inactive Fe2O3 (15 wt%) of
+    // the carrier; it takes part in no reaction.
+    solidSpecies        (Fe2O3   Fe3O4   inert);   // index 0 1 2
+    solidMolarMasses    (159.69  231.53  101.96);  // [kg/kmol]; inert: nominal
+    solidDensities      (5240    5170    4234);    // [kg/m3] true (skeletal) densities
+
+    productGas          (O2      N2);              // index 0 1
+    gasMolarMasses      (31.998  28.013);          // [kg/kmol]
+
+    // A standalone run has no gas phase: every particle sees this gas for
+    // the whole run. Dry air, 20.946 % O2 by volume (IUPAC Gold Book,
+    // "composition of pure air"; argon lumped with N2), at 1173.15 K and
+    // 1 atm: C = y p/(R T).                                       [kmol/m3]
+    defaultGasConcentrations (0.002176  0.008212);
+
+    // Porous carrier: the diameter stays fixed and the mass changes.
+    enableShrinking     No;
+
+    reactions
+    {
+        AR_O2       // 4 Fe3O4 + O2 -> 6 Fe2O3
+        {
+            // Kinetics of Abad et al. 2007, Table 3, per unit grain
+            // surface (rateBasis grain). The code converts them to the
+            // outer surface of the particle.
+            rateBasis             grain;
+            preExpFactor          3.1e-4;    // [m/s] for n = 1
+            activationTemperature 1684;      // [K] E/R, E = 14 kJ/mol
+            onsetTemperature      0;         // [K]
+            dH_rxn                -4.753e8;  // [J/kmol] per kmol O2, JANAF at 1173 K
+            gasOrder              1;         // n
+            solidOrder            0.6667;    // used only with particleModel none
+            gasSpeciesIdx         0;         // O2
+            solidReactantIdx      1;         // Fe3O4
+            stoicSolid            (6  -4  0);
+            stoicGas              (-1  0);
+
+            // Grain model of the porous particle
+            particleModel         grain;     // none | USCM | grain
+            solidProductIdx       0;         // Fe2O3, for the conversion X
+            grainRadius           2.6e-7;    // [m] Abad 2007, Table 3
+            // Effective diffusivity of O2 in the pores, eps^2 D (Garcia-
+            // Labiano et al. 2005, Eq. 15), at the porosity 0.306 of the
+            // reduced particle: molecular part, D(O2-N2) from Fuller-
+            // Schettler-Giddings, and Knudsen part in the 0.15 um pores.
+            // The code combines them as 1/D = 1/D_e + 1/D_eKnudsen.
+            D_e                   2.12e-5;   // [m2/s]
+            D_eKnudsen            4.04e-6;   // [m2/s]
+            D_eTemperature        1173.15;   // [K] of the two values above;
+                                             //   molecular part ~ T^1.75, Knudsen ~ T^0.5
+            // Gas film: no gas flow is solved here, so Gunn (1978) at
+            // Re -> 0 and voidage 0.4: Sh = 7 - 10 e + 5 e^2 = 3.8, and
+            // k_c = Sh D/d_p with D(O2-N2) = 2.267e-4 m2/s at 1173.15 K.
+            k_c                   0.431;     // [m/s]
+            Z                     1.021;     // molar volume ratio product/reactant
+            // c(sigma2, g, X) of the grain model, read from
+            // caseSetup/correctionTables, which correctionTablePhasicFlow
+            // writes (see runThisCase)
+            correctionTable       Yes;
+        }
+    }
+}

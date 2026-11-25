@@ -163,6 +163,15 @@ bool thermalSphereFluidParticles::iterate()
         heatSourcePFP().deviceViewAll(),
         temperatureRate().deviceViewAll());
 
+    thermalSphereParticlesKernels::addWallHeatTransfer(
+        mask,
+        mass().deviceViewAll(),
+        Cp().deviceViewAll(),
+        heatSourcePW().deviceViewAll(),
+        heatSourcePFW().deviceViewAll(),
+        heatSourceRW().deviceViewAll(),
+        temperatureRate().deviceViewAll());
+
     heatTransferTimer().end();
 
     temperatureIntegrationTimer().start();

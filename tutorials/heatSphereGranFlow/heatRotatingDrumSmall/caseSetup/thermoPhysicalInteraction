@@ -19,21 +19,39 @@ enableRadiation      No;
 radUpdateInterval    10;    // unread while enableRadiation is No
 radCut               0.006; // unread while enableRadiation is No
 
-// Independent of radUpdateInterval above: gates how often the shared
-// neighbour-search list is rebuilt.
-neighborListUpdateInterval   10;
-
 enablePP             Yes;
-// Must equal Yeff in caseSetup/interaction exactly (softened there
-// for simulation speed); this is the real (unsoftened) Young's
-// modulus, used to correct the Hertzian contact radius.
+// Softened Young's modulus of the contact force: must equal Yeff in
+// caseSetup/interaction exactly. With realYoungsModuli of that file it
+// corrects the contact radius, c = (E_sim/E_real)^(1/5) (Norouzi et al.
+// 2016, Eq. 6.166).
 simYoungsModulus     1.0e6;
 
 enablePFP            Yes;
 
+// Air between the particles. This standalone run has no CFD mesh, so
+// these two values are used by enablePFP and by the wall paths below.
+//   kappa: air at 350 K, between the two starting temperatures: the mean
+//          of 26.4 mW/(m.K) at 300 K and 33.5 at 400 K (Lemmon and
+//          Jacobsen 2004, Int. J. Thermophys. 25:21, as tabulated by
+//          Huber, NIST, "Thermal conductivity of gases")
+//   alpha: gas volume fraction of the bed. Equal spheres poured into a
+//          container pack at a solid fraction of about 0.61 (Scott's
+//          experiments, as summarized by Radin 2007, arXiv:0710.2463)
 fluidProperties
 {
-    kappa   2.6;
-    alpha   0.9;
+    kappa   0.030;  // [W/(m.K)]
+    alpha   0.4;    // [-]
 }
 
+// Particle-wall heat transfer. All three paths are off, so the drum wall
+// is adiabatic. To heat or cool the bed through the wall, give the
+// surfaces a temperature in settings/geometryDict and turn on the paths:
+enablePW              No;   // contact conduction (Q_pw)
+enablePFW             No;   // conduction through the gas lens (Q_pfw)
+enableWallRadiation   No;   // radiation (Q_rw); eps_w from emissivities
+
+// Optional keys of the wall paths, with their default values:
+// wallLensRatio          1.4;      // [-] outer radius of the gas lens / R_p
+// wallMinGap             2.75e-8;  // [m] smallest conduction distance
+// wallRadiationRange     8;        // [particle radii] at most 10.2
+// wallHeatReportInterval 0.01;     // [s] interval of wallHeatFlow.dat

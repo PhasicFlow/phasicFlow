@@ -9,6 +9,10 @@ grainDEMSystem/grainDEMSystem.cpp
 
 sphereDEMSystem/thermalSphereDEMSystem.cpp
 sphereDEMSystem/thermalSphereFluidParticles.cpp
+sphereDEMSystem/multiReactiveShrinkingDEMSystem.cpp
+sphereDEMSystem/multiReactiveSphereParticles.cpp
+sphereDEMSystem/multiShrinkingInteraction.cpp
+sphereDEMSystem/multiShrinkingInteractionKernels.cpp
 
 )
 

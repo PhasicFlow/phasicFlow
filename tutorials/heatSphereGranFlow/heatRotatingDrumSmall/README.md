@@ -2,7 +2,7 @@
 
 ## Problem Definition
 
-This tutorial extends the existing [rotating drum tutorial](../rotatingDrum) with
+This tutorial extends the [rotating drum tutorial](../../sphereGranFlow/rotatingDrumSmall) with
 particle-scale heat transfer. The geometry, particle count, and mechanical
 contact setup are identical to that tutorial (a drum of diameter 0.24 m and
 length 0.1 m, rotating at 11.6 rpm, filled with 30,000 spherical particles
@@ -15,7 +15,7 @@ particles (`Q_pfp`) as the drum rotates and mixes them.
 
 ## What's Different From the Non-Thermal Tutorial
 
-If you haven't gone through the [non-thermal rotating drum tutorial](../rotatingDrum)
+If you haven't gone through the [non-thermal rotating drum tutorial](../../sphereGranFlow/rotatingDrumSmall)
 yet, do that first -- this tutorial only covers what's added on top of it.
 
 ### Material Properties for Heat Transfer
@@ -61,25 +61,35 @@ enablePFP            Yes;    // particle-fluid-particle sub-grid conduction
 
 simYoungsModulus     1.0e6;  // must equal Yeff in caseSetup/interaction
 
-neighborListUpdateInterval   10;
+fluidProperties
+{
+    kappa   0.030;  // conductivity of the gas [W/(m.K)]
+    alpha   0.4;    // gas volume fraction around the particles [-]
+}
 ```
 
 Radiation is off in this tutorial since there's no surrounding fluid
 temperature field to exchange with in a standalone (non-CFD-coupled) run --
 see the model documentation in `thermalRadiationMechanism.hpp` for why.
 `Q_pp` (direct-contact conduction) and `Q_pfp` (through-the-air-gap
-conduction) are both active, matching the advisor's request for this
-tutorial. See `thermalConductionPFPKernels.hpp` for the full model
-description and references.
+conduction) are both active. See `thermalConductionPFPKernels.hpp` for the
+full model description and references.
+
+`fluidProperties` describes the gas between the particles. In a CFD-DEM run
+`Q_pfp` takes the gas conductivity and volume fraction from the fluid cells;
+a standalone run has no fluid mesh, so it takes them from this block. The
+values are air at 350 K (between the two starting temperatures) and the gas
+fraction of a poured bed of equal spheres. The sources are given next to the
+values in the file.
 
 ### Two Starting Temperatures
 
-`caseSetup/particlesDict` now sets a `temperature` field, and uses two
+`settings/particlesDict` now sets a `temperature` field, and uses two
 `selectors` to split the drum's particles into a cold half and a hot half
 by their axial (z) position:
 
 <div align="center"> 
-in <b>caseSetup/particlesDict</b> file
+in <b>settings/particlesDict</b> file
 </div>
 
 ```C++
@@ -129,9 +139,41 @@ Each selector is applied, in order, after `defaultValue` -- so every
 particle ends up at exactly 300 K or 400 K depending on which half of the
 drum it starts in.
 
+### Heating Through the Drum Wall (Optional)
+
+The drum wall is adiabatic in this tutorial. Three particle-wall heat paths
+can be switched on in `caseSetup/thermoPhysicalInteraction`:
+
+```C++
+enablePW              No;   // contact conduction (Q_pw)
+enablePFW             No;   // conduction through the gas lens (Q_pfw)
+enableWallRadiation   No;   // radiation (Q_rw)
+```
+
+The paths need a wall temperature, given per surface in
+`settings/geometryDict`:
+
+```C++
+cylinder
+{
+    ...
+    temperature  400;   // [K]
+}
+```
+
+A surface without `temperature` stays adiabatic. Each particle exchanges
+heat with each surface through its nearest triangle. A wall takes the
+thermal properties of its material, which is `prop1` (the particle
+material) in this tutorial. With any path on, the solver writes the heat
+that each surface gives to the particles, per path, to `wallHeatFlow.dat`
+in the case folder (one line every `wallHeatReportInterval`, 0.01 s by
+default). The models and their references are described in
+`thermalWallMechanism.hpp` and `thermalWallKernels.hpp`.
+
 ## Running the Case
 
-Same three steps as the non-thermal tutorial, except the last one:
+Run the script `./runThisCase`, or the same three steps as the non-thermal
+tutorial, except the last one:
 
 ```
 particlesPhasicFlow
@@ -140,7 +182,8 @@ heatSphereGranFlow
 ```
 
 (`heatSphereGranFlow` is the standalone thermal DEM solver -- the
-mechanical-only tutorial uses `sphereGranFlow` instead.)
+mechanical-only tutorial uses `sphereGranFlow` instead.) `./cleanThisCase`
+removes the time folders and the VTK files.
 
 ## Post Processing
 
@@ -161,3 +204,9 @@ The primary reference for all three models is:
 - H.R. Norouzi, R. Zarghami, R. Sotudeh-Gharebagh, N. Mostoufi,
   *Coupled CFD-DEM Modeling: Formulation, Implementation and Application
   to Multiphase Flows*, Wiley, 2016, Section 6.3.2.
+
+The particle-wall paths take the wall as a particle of infinite radius
+(Section 6.3.2.2 of the same book), the static gas lens of Rong and Horio
+(1999) in the form of Liu, Deen and Tang (2021, Chem. Eng. Sci. 236,
+116492), and the particle-wall radiation distribution factors of Johnson,
+Tari and Baker (2021, Powder Technol. 380, 164-182).

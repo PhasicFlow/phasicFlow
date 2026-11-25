@@ -73,6 +73,30 @@ thermalSphereParticles::thermalSphereParticles(
             objectFile::WRITE_NEVER),
         dynPointStruct(), 
         0.0),
+    heatSourcePW_(
+        objectFile(
+            "heatSourcePW",
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(),
+        0.0),
+    heatSourcePFW_(
+        objectFile(
+            "heatSourcePFW",
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(),
+        0.0),
+    heatSourceRW_(
+        objectFile(
+            "heatSourceRW",
+            "",
+            objectFile::READ_NEVER,
+            objectFile::WRITE_NEVER),
+        dynPointStruct(),
+        0.0),
     radSumTemp_(
         objectFile(
             "radSumTemp", 
@@ -216,8 +240,7 @@ bool thermalSphereParticles::beforeIteration()
 
     zeroHeatSourceCondPP();
     zeroHeatSourcePFP();
-    zeroRadSumTemp();
-    zeroRadNumPrt();
+    zeroHeatSourceWall();
 
     return true;
 }
@@ -254,6 +277,15 @@ void thermalSphereParticles::iterateThermal()
         temperature().deviceViewAll(),
         heatSourceCondPP_.deviceViewAll(),
         heatSourcePFP_.deviceViewAll(),
+        temperatureRate_.deviceViewAll());
+
+    thermalSphereParticlesKernels::addWallHeatTransfer(
+        mask,
+        mass().deviceViewAll(),
+        Cp().deviceViewAll(),
+        heatSourcePW_.deviceViewAll(),
+        heatSourcePFW_.deviceViewAll(),
+        heatSourceRW_.deviceViewAll(),
         temperatureRate_.deviceViewAll());
 
     heatTransferTimer_.end();

@@ -30,6 +30,7 @@ grainInteraction/grainInteractionsNonLinearModModels.cpp
 thermalInteraction/thermalInteraction.cpp
 thermalInteraction/thermalConductionPFPMechanism.cpp
 thermalInteraction/thermalRadiationMechanism.cpp
+thermalInteraction/thermalWallMechanism.cpp
 
 
 )

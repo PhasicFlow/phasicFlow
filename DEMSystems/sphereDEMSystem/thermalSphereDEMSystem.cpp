@@ -28,7 +28,9 @@ namespace pFlow
 
 bool thermalSphereDEMSystem::loop()
 {
-    do 
+    // Runs the steps from the current time up to, but not including,
+    // the stop time of this call.
+    while (!Control().time().reachedStopAt())
     {
         // Particle injection
         if (!insertion_().insertParticles(
@@ -63,7 +65,8 @@ bool thermalSphereDEMSystem::loop()
         thermalParticles_->afterIteration();
         geometry_->afterIteration();
 
-    } while(Control()++);
+        Control()++;
+    }
 
     return true;
 }
@@ -107,14 +110,16 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
     particles_.reset();
     spheres_.reset();
 
-    auto thermalProps = thermalProperty(
+    // A member, not a local: the shape created below keeps a const
+    // reference to it, which would dangle once this constructor returns.
+    thermalProps_ = makeUnique<thermalProperty>(
         propertyFile__,
         Control().caseSetup().path());
 
     auto* combinedShape = new thermalSphereShape(
         shapeFile__,
         &Control().caseSetup(),
-        thermalProps);
+        *thermalProps_);
     spheres_ = uniquePtr<sphereShape>(combinedShape);
 
     // thermalSphereFluidParticles' constructor already initializes
@@ -142,7 +147,9 @@ thermalSphereDEMSystem::thermalSphereDEMSystem(
     thermalInteraction_ = makeUnique<thermalInteraction>(
         Control(),
         *thermalParticles_,
-        thermalParticles_->extendedDomain().domainBox());
+        thermalParticles_->extendedDomain().domainBox(),
+        &Geometry(),
+        true);
 
     ensureRadiationHostMemory();
 

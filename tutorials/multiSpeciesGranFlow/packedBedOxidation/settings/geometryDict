@@ -1,0 +1,41 @@
+/* -------------------------------*- C++ -*--------------------------------- *\ 
+|  phasicFlow File                                                            | 
+|  copyright: www.cemf.ir                                                     | 
+\* ------------------------------------------------------------------------- */  
+objectName  geometryDict;
+objectType  dictionary;
+fileFormat  ASCII;
+/*---------------------------------------------------------------------------*/
+
+motionModel stationary;                         // all surfaces are fixed
+
+// temperature: wall temperature [K] for the particle-wall heat transfer
+// (enablePW, enablePFW, enableWallRadiation in thermoPhysicalInteraction).
+// A surface without it is adiabatic.
+surfaces
+{
+    // Reactor tube, inner diameter 20 mm, in a furnace at 900 C
+    tube
+    {
+        type        cylinderWall;               // type of the wall
+        p1          (0.0 0.0 0.0);              // begin point of cylinder axis
+        p2          (0.0 0.0 0.1);              // end point of cylinder axis
+        radius1     0.01;                       // radius at p1
+        radius2     0.01;                       // radius at p2
+        resolution  36;                         // number of divisions
+        material    wallMaterial;               // material name of this wall
+        temperature 1173.15;                    // [K]
+    }
+
+    // Floor of the tube
+    floor
+    {
+        type        planeWall;                  // type of the wall
+        p1 (-0.01 -0.01 0.0);                   // first point of the wall
+        p2 ( 0.01 -0.01 0.0);                   // second point
+        p3 ( 0.01  0.01 0.0);                   // third point
+        p4 (-0.01  0.01 0.0);                   // fourth point
+        material    wallMaterial;               // material name of the wall
+        temperature 1173.15;                    // [K]
+    }
+}
